@@ -1,0 +1,10 @@
+{
+  "name": "Crimson Desert — Guide Dashboard",
+  "short_name": "CD Guide",
+  "description": "Interaktives Guide-Dashboard für Crimson Desert",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "icons": []
+}
