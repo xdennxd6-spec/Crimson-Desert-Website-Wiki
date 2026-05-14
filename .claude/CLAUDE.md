@@ -12,6 +12,14 @@
 - Netlify deployt automatisch nach jedem Push (~21 Sekunden Build-Zeit)
 - Free Plan: 300 Build Minutes/Monat — sparsam verwenden
 
+## Token-sparendes Datei-Lesen via GitHub Raw URL
+- GitHub MCP ist NICHT verfügbar — stattdessen Raw-URL nutzen:
+  `https://raw.githubusercontent.com/xdennxd6-spec/Crimson-Desert-Website-Wiki/main/index.html`
+- Für andere Dateien: `https://raw.githubusercontent.com/xdennxd6-spec/Crimson-Desert-Website-Wiki/main/PFAD`
+- Repo ist public → kein Token nötig
+- WebFetch auf Raw-URL ist der bevorzugte Weg um index.html zu lesen (spart Token vs. lokalem Read)
+- Lokales Read-Tool nur nutzen wenn Änderungen noch nicht gepusht sind
+
 ## Workflow
 1. Änderungen lokal in `index.html` vornehmen
 2. User fragen ob gepusht werden soll
