@@ -730,10 +730,7 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
 
   <section class="sec" id="sec-mounts">
     <div class="sec-t">🐴 Mounts</div>
-    <div class="fbar">
-      <select class="fs" id="mf-type" onchange="renderMounts()"><option value="">Alle Typen</option><option value="Pferd">Pferde</option><option value="Drache">Drache</option><option value="Sigil">Sigil Mounts</option></select>
-    </div>
-    <div class="grid" id="mount-grid"></div>
+    <div id="mount-sections"></div>
   </section>
 
   <section class="sec" id="sec-disarm">
@@ -1419,7 +1416,22 @@ const MOUNT_IMGS={
   "White Bear":               "cd_assets/mounts/white-bear.png",
   "Snowwhite Deer":           "cd_assets/mounts/snowwhite-deer.png",
   "Icicle Edge Alpine Ibex":  "cd_assets/mounts/icicle-ibex.png",
-  "Rock Tusk Warthog":        "cd_assets/mounts/rock-tusk-warthog.png"
+  "Rock Tusk Warthog":        "cd_assets/mounts/rock-tusk-warthog.png",
+  "Black Bear":               "cd_assets/mounts/black-bear.png",
+  "Brown Bear":               "cd_assets/mounts/brown-bear.png",
+  "Boar":                     "cd_assets/mounts/boar.png",
+  "Buffalo":                  "cd_assets/mounts/buffalo.png",
+  "Camel":                    "cd_assets/mounts/camel.png",
+  "Cow":                      "cd_assets/mounts/cow.png",
+  "Elephant":                 "cd_assets/mounts/elephant.png",
+  "Greywolf":                 "cd_assets/mounts/greywolf.png",
+  "Giant Iguana":             "cd_assets/mounts/giant-iguana.png",
+  "Kuku Bird Hatchling":      "cd_assets/mounts/kuku-bird-hatchling.png",
+  "Lion":                     "cd_assets/mounts/lion.png",
+  "Raptor":                   "cd_assets/mounts/raptor.png",
+  "Cloudcart":                "cd_assets/mounts/cloudcart.png",
+  "Wagon Horse":              "cd_assets/mounts/wagon-horse.png",
+  "Train":                    "cd_assets/mounts/train.png"
 };
 const ARMOR_IMGS={
   // Torso
@@ -2048,28 +2060,45 @@ function renderArmorSets(){
 }
 
 // ===== MOUNTS =====
+function mountCard(m){
+  const sig=m.type.includes('Sigil');
+  const badge=m.type==='Drache'?'tw':sig?'tg':m.type.startsWith('Fahrzeug')?'tx':'tr';
+  const img=MOUNT_IMGS[m.name];
+  const s=[m.name,m.type,m.unlock,m.stats,m.notes].join(' ').toLowerCase();
+  return `<div class="card" data-s="${s}">
+    ${img
+      ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" loading="lazy" alt="${m.name}" onerror="this.parentElement.style.display='none'" style="object-position:center center"></div>`
+      :`<div class="boss-img-ph" style="background:linear-gradient(135deg,#100c06 0%,#080808 100%);border:1px solid rgba(201,162,39,.18)"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:rgba(201,162,39,.6)">${m.name.charAt(0)}</div><div class="boss-ph-cap" style="color:rgba(201,162,39,.3)">${m.type}</div></div></div>`
+    }
+    <div class="ct">${m.name}</div>
+    <div class="cm"><span class="tag ${badge}">${m.type}</span></div>
+    <div class="crows">
+      <div class="crow"><span class="cl">Freischalten</span><span class="cv">${m.unlock}</span></div>
+      <div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${m.stats}</span></div>
+      ${m.notes?'<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">'+m.notes+'</span></div>':''}
+    </div>
+  </div>`;
+}
 function renderMounts(){
-  const f=document.getElementById('mf-type').value;
-  document.getElementById('mount-grid').innerHTML=MOUNTS.map(m=>{
-    const sig=m.type.includes('Sigil');
-    const show=!f||(f==='Sigil'?sig:m.type.includes(f));
-    const s=[m.name,m.type,m.unlock,m.stats,m.notes].join(' ').toLowerCase();
-    const badge=m.type==='Drache'?'tw':sig?'tg':'tr';
-    const img=MOUNT_IMGS[m.name];
-    return `<div class="card${show?'':' hide'}" data-s="${s}">
-      ${img
-        ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" loading="lazy" alt="${m.name}" onerror="this.parentElement.style.display='none'" style="object-position:center center"></div>`
-        :`<div class="boss-img-ph" style="background:linear-gradient(135deg,#100c06 0%,#080808 100%);border:1px solid rgba(201,162,39,.18)"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:rgba(201,162,39,.6)">${m.name.charAt(0)}</div><div class="boss-ph-cap" style="color:rgba(201,162,39,.3)">${m.type}</div></div></div>`
-      }
-      <div class="ct">${m.name}</div>
-      <div class="cm"><span class="tag ${badge}">${m.type}</span></div>
-      <div class="crows">
-        <div class="crow"><span class="cl">Freischalten</span><span class="cv">${m.unlock}</span></div>
-        <div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${m.stats}</span></div>
-        ${m.notes?'<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">'+m.notes+'</span></div>':''}
-      </div>
-    </div>`;
-  }).join('');
+  const horses=MOUNTS.filter(m=>m.type.includes('Pferd')&&!m.type.includes('Legendary'));
+  const legendary=MOUNTS.filter(m=>m.type.includes('Legendary'));
+  const dragon=MOUNTS.filter(m=>m.type==='Drache');
+  const sigil=MOUNTS.filter(m=>m.type.includes('Sigil'));
+  const temp=MOUNTS.filter(m=>m.type==='Temporaer');
+  const vehicle=MOUNTS.filter(m=>m.type.startsWith('Fahrzeug'));
+  const groups=[
+    {title:'Permanente Pferde',icon:'🐎',items:[...horses,...legendary]},
+    {title:'Drachen-Mount',icon:'🐉',items:dragon},
+    {title:'Sigil Mounts (Boss Kill)',icon:'⚔️',items:sigil},
+    {title:'Temporaere Wildtiere',icon:'🦁',items:temp},
+    {title:'Fahrzeuge',icon:'🚂',items:vehicle}
+  ];
+  document.getElementById('mount-sections').innerHTML=groups.filter(g=>g.items.length).map(g=>
+    `<div style="margin-bottom:28px">
+      <div style="font-size:15px;font-weight:700;color:var(--rhi);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(201,162,39,.15)">${g.icon} ${g.title} <span style="font-weight:400;font-size:12px;color:var(--dim)">(${g.items.length})</span></div>
+      <div class="grid">${g.items.map(mountCard).join('')}</div>
+    </div>`
+  ).join('');
 }
 
 // ===== SKILLS =====
