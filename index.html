@@ -638,6 +638,10 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .witch-svc-ico{opacity:.8;margin-right:4px;font-size:12px}
 
 /* ── Mount In-Game Preview ── */
+#core-vid-float{position:fixed;z-index:551;pointer-events:none;display:none;border:1px solid rgba(201,162,39,.48);border-radius:9px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.9);background:#0a0807}
+#core-vid-float video{display:block;width:280px;height:158px;object-fit:cover}
+.core-vid-btn{cursor:pointer;font-size:10px;color:var(--rhi);padding:1px 5px;border:1px solid rgba(181,45,32,.38);border-radius:3px;line-height:1.5;margin-left:6px;vertical-align:middle;transition:background .15s;user-select:none}
+.core-vid-btn:hover{background:rgba(181,45,32,.18)}
 #mount-float-preview{position:fixed;z-index:550;pointer-events:none;display:none;border:1px solid rgba(201,162,39,.48);border-radius:9px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.9);max-width:320px;background:#0a0807}
 #mfp-img{display:block;max-width:320px;max-height:220px;object-fit:cover;width:320px}
 #mfp-label{background:rgba(0,0,0,.85);color:var(--gold);font-size:10px;padding:5px 9px;text-align:center;font-weight:600;letter-spacing:.04em}
@@ -727,6 +731,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
   </div>
 </div>
 <!-- Mount floating hover preview -->
+<div id="core-vid-float"><video autoplay muted loop playsinline></video></div>
 <div id="mount-float-preview"><img id="mfp-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""><div id="mfp-label"></div></div>
 <!-- Mount in-game screenshot modal -->
 <div id="mount-ingame-modal" onclick="if(event.target===this)closeMountModal()">
@@ -1123,7 +1128,7 @@ const BOSSES=[
   {name:"Priscus the Ancient",chapter:null,region:"Pailune - Spire of Ringing Truth",quest:"Faction",drop_weapon:"Blessing of the Immortal, Ancient Retribution",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Nature's Snare fuer Projektile",strategy:"Bow + Nature's Snare → Projektile zurückwerfen. Reward: Path of Trials (Frost Mantle Skill)."},
   {name:"Antumbra's Sword",chapter:null,region:"Sanctum of Absolution",quest:"Sanctum",drop_weapon:"Vessel of Dark Pursuit",drop_abyss_gear:"Wound of Darkness",weakness:"–",parry_or_dodge:"Dodge Illusionen",strategy:"Enger Raum, Illusionen → Blinding Flash Spam."},
   {name:"One-Armed Ludvig",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Story - Homecoming",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry & Dodge",strategy:"Tritt direkt nach dem Lava-Myurdin-Fight auf. Humanoider Nahkampf-Boss — Combos mit einem Arm. Vorsicht nach dem langen Myurdin-Gauntlet: Ressourcen einteilen!"},
-  {name:"Lucian Bastier",chapter:8,region:"Pailune",quest:"Story - Blood Coronation (Damiane-Solo)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge",strategy:"Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Kap. 8 Blood Coronation."},
+  {name:"Lucian Bastier",chapter:8,region:"Pailune",quest:"Story - Blood Coronation (Damiane-Solo)",drop_weapon:"–",drop_abyss_gear:"Flame of Judgement",weakness:"–",parry_or_dodge:"Dodge",strategy:"Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Kap. 8 Blood Coronation."},
   {name:"Gregor the Halberd of Carnage",chapter:null,region:"Hernand - Fort Ironclad",quest:"Where The Wind Guides You",drop_weapon:"Golden Vanguard",drop_abyss_gear:"Abyss Artifact",weakness:"–",parry_or_dodge:"Dodge (Impaling Spear unblockbar)",strategy:"Vor Kampf: Pfeilfallen in der Halle zerstoeren. Langsame Drehrate ausnutzen — Backstab-Konter. Force Palm maxen → 3er-Combo → Stagger. Defensive Spielweise, Distanz halten."},
   {name:"Walter Lanford",chapter:null,region:"Hernand - Fort Warspike",quest:"Name Written in Blood",drop_weapon:"Dane Shotgun",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (kein Block)",strategy:"Hochmobiler Pistolenschuetze. Run-and-Hit-Ansatz. 'Poof'-Escape: zum Landepunkt dashen → Heavy Attack. Double Barrel Barrage: volle Distanz, sofort dodgen. Drops: Dane Shotgun + Rhonda Leather Boots + Golden Piggy Bank."},
   {name:"Master Du",chapter:null,region:"Crimson Desert - Cloister of Enlightenment",quest:"The Sage of the Desert",drop_weapon:"Master Du's Circlet",drop_abyss_gear:"Karmic Pulse",weakness:"–",parry_or_dodge:"Dodge (Green Ray: bis 3x konsekutiv)",strategy:"2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown fuer Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen)."},
@@ -1687,7 +1692,8 @@ const CORES=[
   {name:"Aptitude I",effect:"+10% Skill XP",source:"Plate Boots of the Shadows",slot:"Armor"},
   {name:"Haste I",effect:"+Movespeed",source:"Blackwing Mask / Plate Gloves of the Shadows",slot:"Armor"},
   {name:"Gourmet III",effect:"+15% Heal-Effizienz auf Food",source:"Animal Meat Life Challenge (Hernand Butcher)",slot:"Both"},
-  {name:"Abyssal Rays",effect:"Abyss-Strahlen-Angriff",source:"Twisted Verdict (Corrupted Caliburn)",slot:"Weapon"}
+  {name:"Abyssal Rays",effect:"Abyss-Strahlen-Angriff",source:"Twisted Verdict (Corrupted Caliburn)",slot:"Weapon"},
+  {name:"Flame of Judgement",effect:"Feuerstrahl-Angriff beim Einsatz",source:"Drop: Lucian Bastier / Awakened Lucian Bastier",slot:"Weapon"}
 ];
 
 const CRAFTING=[
@@ -2605,6 +2611,9 @@ const CORE_IMGS={
   "Abyssal Rays":     "cd_assets/cores/abyssal-rays.png",
   "Gourmet III":      "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_093.webp"
 };
+const CORE_VIDS={
+  "Flame of Judgement":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_bastier.mp4"
+};
 const MOUNT_IMGS={
   "Herspia":                  "cd_assets/mounts/herspia.png",
   "Royler":                   "cd_assets/mounts/royler.png",
@@ -3081,10 +3090,12 @@ function renderCores(){
     const show=!f||c.slot===f;
     const s=[c.name,c.effect,c.source,c.slot].join(' ').toLowerCase();
     const ico=CORE_IMGS[c.name];
+    const vid=CORE_VIDS[c.name];
+    const esc=n=>n.replace(/'/g,"\\'");
     return `<tr class="trow${show?'':' hide'}" data-s="${s}">
       <td><div style="display:flex;align-items:center;gap:8px">
         ${ico?`<img src="${ico}" onerror="this.style.display='none'" style="width:32px;height:32px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:5px;padding:2px;flex-shrink:0">`:'<div style="width:32px;height:32px;border-radius:5px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:11px;color:var(--dim)">◈</div>'}
-        <strong>${c.name}</strong>
+        <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${esc(c.name)}')" onmouseleave="hideCoreVid()">▶</span>`:''}
       </div></td>
       <td>${c.effect}</td>
       <td style="font-size:11.5px;color:var(--dim)">${c.source}</td>
@@ -3801,6 +3812,20 @@ function _moveMFP(e){
   if(y<8)y=8;
   el.style.left=x+'px';el.style.top=y+'px';
 }
+function showCoreVid(e,name){
+  const url=CORE_VIDS[name];if(!url)return;
+  const fp=document.getElementById('core-vid-float');
+  const v=fp.querySelector('video');
+  if(v.src!==url){v.src=url;}
+  v.play();
+  fp.style.display='block';
+  const r=e.target.getBoundingClientRect();
+  let left=r.right+10,top=r.top-40;
+  if(left+290>window.innerWidth)left=r.left-290;
+  if(top+170>window.innerHeight)top=window.innerHeight-175;
+  fp.style.left=left+'px';fp.style.top=Math.max(8,top)+'px';
+}
+function hideCoreVid(){const fp=document.getElementById('core-vid-float');fp.style.display='none';fp.querySelector('video').pause();}
 function hideMountIG(){document.getElementById('mount-float-preview').style.display='none';}
 function openMountIG(name){
   const url=MOUNT_INGAME_IMGS[name];if(!url)return;
