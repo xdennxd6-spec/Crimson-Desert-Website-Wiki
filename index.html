@@ -762,7 +762,10 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.05</div></div>
   <div class="sb-nav">
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
-    <div class="ni" data-sec="weapons" onclick="showSec('weapons')"><span class="nicon">🔮</span><span class="nlabel">Items &amp; Waffen</span></div>
+    <div class="ni" data-sec="items" onclick="showSec('items')"><span class="nicon">🔮</span><span class="nlabel">Items</span></div>
+    <div class="ni" data-sec="weapons" onclick="showSec('weapons')"><span class="nicon">⚔️</span><span class="nlabel">Waffen</span></div>
+    <div class="ni" data-sec="armor" onclick="showSec('armor')"><span class="nicon">🛡️</span><span class="nlabel">Rüstungen</span></div>
+    <div class="ni" data-sec="cores" onclick="showSec('cores')"><span class="nicon">💎</span><span class="nlabel">Abyss Cores</span></div>
     <div class="ni" data-sec="crafting" onclick="showSec('crafting')"><span class="nicon">⚗️</span><span class="nlabel">Crafting &amp; Farming</span></div>
     <div class="ni" data-sec="quests" onclick="showSec('quests')"><span class="nicon">📜</span><span class="nlabel">Quests &amp; Story</span></div>
     <div class="ni" data-sec="map" onclick="showSec('map')"><span class="nicon">🗺️</span><span class="nlabel">Interaktive Karte</span></div>
@@ -831,29 +834,37 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
     <div class="grid" id="boss-grid"></div>
   </section>
 
+  <section class="sec" id="sec-items">
+    <div class="sec-t">🔮 Items</div>
+    <div id="wt-upgrade" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Waffen-Upgrade &amp; Refinement</div>
+    <div style="font-size:11.5px;color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Jede Waffe kann bis <span style="color:var(--gold);font-weight:600">Refine 5</span> gesteigert werden. Ab Refine 3 wird ein zusätzlicher Abyss-Slot freigeschaltet. Element-Infusion ist nur über Hexen-Questlinien möglich.</div>
+    <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
+  </section>
+
   <section class="sec" id="sec-weapons">
-    <div class="sec-t">🔮 Items &amp; Waffen</div>
-    <div id="wt-toc"></div>
-    <div id="wt-weapons" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Waffen</div>
+    <div class="sec-t">⚔️ Waffen</div>
     <div class="fbar">
       <select class="fs" id="wf-type" onchange="renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Typ</th><th>ATK</th><th>Crit</th><th>Slots</th><th>Fundort / Quelle</th><th>Built-in Cores</th><th>Notizen</th></tr></thead><tbody id="weapon-tb"></tbody></table></div>
-    <div id="wt-cores" class="sub-t" style="scroll-margin-top:72px">Abyss Cores</div>
-    <div class="fbar">
-      <select class="fs" id="cf-slot" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Both">Both</option></select>
-    </div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
-    <div id="wt-armor" class="sub-t" style="scroll-margin-top:72px">Rüstung &amp; Ausrüstung</div>
+  </section>
+
+  <section class="sec" id="sec-armor">
+    <div class="sec-t">🛡️ Rüstungen</div>
     <div class="fbar">
       <select class="fs" id="af-type" onchange="renderArmor()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
     </div>
     <div class="grid" id="armor-grid"></div>
     <div id="wt-sets" class="sub-t" style="scroll-margin-top:72px">Rüstungs-Sets</div>
     <div class="grid" id="set-grid"></div>
-    <div id="wt-upgrade" class="sub-t" style="scroll-margin-top:72px">Waffen-Upgrade &amp; Refinement</div>
-    <div style="font-size:11.5px;color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Jede Waffe kann bis <span style="color:var(--gold);font-weight:600">Refine 5</span> gesteigert werden. Ab Refine 3 wird ein zusätzlicher Abyss-Slot freigeschaltet. Element-Infusion ist nur über Hexen-Questlinien möglich.</div>
-    <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
+  </section>
+
+  <section class="sec" id="sec-cores">
+    <div class="sec-t">💎 Abyss Cores</div>
+    <div class="fbar">
+      <select class="fs" id="cf-slot" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Both">Both</option></select>
+    </div>
+    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
   </section>
 
   <section class="sec" id="sec-crafting">
@@ -4095,13 +4106,6 @@ function closeMountModal(){document.getElementById('mount-ingame-modal').classLi
 // ===== STATIC SECTION TOCs =====
 function initStaticTocs(){
   const fill=(id,items)=>{const el=document.getElementById(id);if(el)el.innerHTML=makeToc(items);};
-  fill('wt-toc',[
-    {id:'wt-weapons',label:'⚔️ Waffen'},
-    {id:'wt-cores',label:'💎 Abyss Cores'},
-    {id:'wt-armor',label:'🛡️ Rüstung'},
-    {id:'wt-sets',label:'✦ Rüstungs-Sets'},
-    {id:'wt-upgrade',label:'⬆️ Waffen-Upgrade'}
-  ]);
   fill('da-toc',[
     {id:'da-setup',label:'⚙️ Setup'},
     {id:'da-steps',label:'👣 Schritt-für-Schritt'},
