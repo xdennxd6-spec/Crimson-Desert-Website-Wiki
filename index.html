@@ -1135,19 +1135,19 @@ const MOUNTS=[
   {name:"Snowwhite Deer",type:"Hirsch (Sigil)",unlock:"Snowwhite Deer Kill (Pailune, Valgrand Tomb-Ebene) → Crafting",stats:"300+ Sta — bester Explorations-Stamina-Wert",notes:"Tier flieht — Aerial Force Palm + Sleep/Poison Arrows fuer Taming-Vorbereitung."},
   {name:"Icicle Edge Alpine Ibex",type:"Steinbock (Sigil)",unlock:"Boss Moren the Mistwood Huntmaster (Wayward Woods, 'The Sport Hunter') — Kap. 8+, 15 Pailune Militia-Missionen",stats:"Hoch Sta — Berggelände-Spezialist",notes:"2 Phasen. Phase 2: Feuer bricht Reiter. White Horn Yeti besiegen."},
   {name:"Rock Tusk Warthog",type:"Warzenschwein (Sigil)",unlock:"Boss Ravok of the Savage Fangs (Bordig Ruins, 'Master of the Wetlands') — 'Master of a Forgotten Land'-Mission",stats:"Hoch Atk — bester Offensiv-Sigil-Mount auf dem Boden",notes:"2 Phasen."},
-  // ── Temporaere Mounts (Wildtiere, kein dauerhaftes Taming) ──
-  {name:"Black Bear",type:"Temporaer",unlock:"Wildes Taming — Wald-Gebiete allgemein",stats:"Temporaer",notes:"Kein dauerhaftes Taming moeglich"},
-  {name:"Brown Bear",type:"Temporaer",unlock:"Wildes Taming",stats:"Temporaer",notes:""},
-  {name:"Boar",type:"Temporaer",unlock:"Wildes Taming",stats:"Temporaer",notes:""},
-  {name:"Buffalo",type:"Temporaer",unlock:"Wildes Taming",stats:"Temporaer",notes:""},
-  {name:"Camel",type:"Temporaer",unlock:"Wildes Taming — Crimson Desert Region",stats:"Temporaer",notes:"Trockengelaende"},
-  {name:"Cow",type:"Temporaer",unlock:"Wildes Taming — Farmen / Siedlungen",stats:"Temporaer",notes:""},
-  {name:"Elephant",type:"Temporaer",unlock:"Wildes Taming — Suedliche Regionen",stats:"Temporaer",notes:"Traegt mehr Last"},
-  {name:"Greywolf",type:"Temporaer",unlock:"Wildes Taming — Wald-Gebiete",stats:"Temporaer",notes:""},
-  {name:"Giant Iguana",type:"Temporaer",unlock:"Wildes Taming — Suedliche / Suempfe",stats:"Temporaer",notes:""},
-  {name:"Kuku Bird Hatchling",type:"Temporaer",unlock:"Wildes Taming — Marni-Gebiet",stats:"Temporaer",notes:""},
-  {name:"Lion",type:"Temporaer",unlock:"Wildes Taming — Crimson Desert Savanne",stats:"Temporaer",notes:""},
-  {name:"Raptor",type:"Temporaer",unlock:"Wildes Taming — Delesyia",stats:"Temporaer",notes:""},
+  // ── Zaehmbare Wildtiere (nach erfolgreichem Taming dauerhaft rufbar) ──
+  {name:"Black Bear",type:"Wildtier",unlock:"Wildes Taming — Wald-Gebiete allgemein",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Brown Bear",type:"Wildtier",unlock:"Wildes Taming — Wald-Gebiete",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Boar",type:"Wildtier",unlock:"Wildes Taming — Wald- und Sumpfgebiete",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Buffalo",type:"Wildtier",unlock:"Wildes Taming — Grasland / Ebenen",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Camel",type:"Wildtier",unlock:"Wildes Taming — Crimson Desert Region (Wueste)",stats:"Permanent nach Taming",notes:"Trockengelaende-Spezialist"},
+  {name:"Cow",type:"Wildtier",unlock:"Wildes Taming — Farmen / Siedlungen",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Elephant",type:"Wildtier",unlock:"Wildes Taming — Suedliche Regionen",stats:"Permanent nach Taming",notes:"Traegt mehr Last als andere Mounts"},
+  {name:"Greywolf",type:"Wildtier",unlock:"Wildes Taming — Wald-Gebiete",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Giant Iguana",type:"Wildtier",unlock:"Wildes Taming — Suedliche Regionen / Suempfe",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Kuku Bird Hatchling",type:"Wildtier",unlock:"Wildes Taming — Marni-Gebiet",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Lion",type:"Wildtier",unlock:"Wildes Taming — Crimson Desert Savanne",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Raptor",type:"Wildtier",unlock:"Wildes Taming — Delesyia",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
   // ── Fahrzeug-Mounts ──
   {name:"Cloudcart",type:"Fahrzeug (Heissluftballon)",unlock:"Quest / Gebiet (Delesyia)",stats:"Vertikale Reichweite, langsam",notes:"Lufterkundung"},
   {name:"Wagon Horse",type:"Fahrzeug (Kutsche)",unlock:"Haendler / Quest",stats:"Traegt Waren und Begleiter",notes:""},
@@ -2084,17 +2084,21 @@ function renderMounts(){
   const legendary=MOUNTS.filter(m=>m.type.includes('Legendary'));
   const dragon=MOUNTS.filter(m=>m.type==='Drache');
   const sigil=MOUNTS.filter(m=>m.type.includes('Sigil'));
-  const temp=MOUNTS.filter(m=>m.type==='Temporaer');
+  const wild=MOUNTS.filter(m=>m.type==='Wildtier');
   const vehicle=MOUNTS.filter(m=>m.type.startsWith('Fahrzeug'));
   const groups=[
-    {title:'Permanente Pferde',icon:'🐎',items:[...horses,...legendary]},
-    {title:'Drachen-Mount',icon:'🐉',items:dragon},
-    {title:'Sigil Mounts (Boss Kill)',icon:'⚔️',items:sigil},
-    {title:'Temporaere Wildtiere',icon:'🦁',items:temp},
-    {title:'Fahrzeuge',icon:'🚂',items:vehicle}
-  ];
-  document.getElementById('mount-sections').innerHTML=groups.filter(g=>g.items.length).map(g=>
-    `<div style="margin-bottom:28px">
+    {id:'ms-horses',title:'Permanente Pferde',icon:'🐎',items:[...horses,...legendary]},
+    {id:'ms-dragon',title:'Drachen-Mount',icon:'🐉',items:dragon},
+    {id:'ms-sigil',title:'Sigil Mounts',icon:'⚔️',items:sigil},
+    {id:'ms-wild',title:'Zaehmbare Wildtiere',icon:'🦁',items:wild},
+    {id:'ms-vehicle',title:'Fahrzeuge',icon:'🚂',items:vehicle}
+  ].filter(g=>g.items.length);
+  const toc=`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:22px;padding:12px 16px;background:rgba(201,162,39,.05);border:1px solid rgba(201,162,39,.18);border-radius:8px">
+    <span style="font-size:11px;color:var(--dim);margin-right:4px;white-space:nowrap">Springe zu:</span>
+    ${groups.map(g=>`<button onclick="document.getElementById('${g.id}').scrollIntoView({behavior:'smooth',block:'start'})" style="background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.28);color:var(--gold);padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:background .18s,border-color .18s" onmouseover="this.style.background='rgba(201,162,39,.22)';this.style.borderColor='rgba(201,162,39,.5)'" onmouseout="this.style.background='rgba(201,162,39,.1)';this.style.borderColor='rgba(201,162,39,.28)'">${g.icon} ${g.title} <span style="opacity:.6;font-weight:400;font-size:11px">(${g.items.length})</span></button>`).join('')}
+  </div>`;
+  document.getElementById('mount-sections').innerHTML=toc+groups.map(g=>
+    `<div id="${g.id}" style="margin-bottom:28px;scroll-margin-top:72px">
       <div style="font-size:15px;font-weight:700;color:var(--rhi);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(201,162,39,.15)">${g.icon} ${g.title} <span style="font-weight:400;font-size:12px;color:var(--dim)">(${g.items.length})</span></div>
       <div class="grid">${g.items.map(mountCard).join('')}</div>
     </div>`
