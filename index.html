@@ -1823,6 +1823,7 @@ const MOUNTS=[
   {name:"Giant Iguana",type:"Wildtier",unlock:"Wildes Taming — Suedliche Regionen / Suempfe",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
   {name:"Kuku Bird Hatchling",type:"Wildtier",unlock:"Wildes Taming — Marni-Gebiet",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
   {name:"Lion",type:"Wildtier",unlock:"Wildes Taming — Crimson Desert Savanne",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Tiger",type:"Wildtier",unlock:"Wildes Taming — Peninsula South Crimson Desert, Unnamed Lake nahe Giant's Yard Watchtower (NW Red River / SW Beardtree Gorge). Fleisch füttern → 100% Trust Bar → Take In. [Patch 1.06]",stats:"Permanent nach Taming",notes:"Legendary White Tiger führt Gruppe normaler Tiger. Falls Legendary White Tiger bereits getötet: Gruppe respawnt evtl. nicht mehr."},
   {name:"Raptor",type:"Wildtier",unlock:"Wildes Taming — Delesyia",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
   // ── Fahrzeug-Mounts ──
   {name:"Cloudcart",type:"Fahrzeug (Heissluftballon)",unlock:"Quest / Gebiet (Delesyia)",stats:"Vertikale Reichweite, langsam",notes:"Lufterkundung"},
@@ -1881,7 +1882,12 @@ const LOCATIONS=[
   {name:"Howling Hollow Cave",region:"Hernand",type:"Boss / Mount",desc:"Black Fang Boss (House Celeste Faction) → Silver Fang Mount."},
   {name:"Bordig Ruins",region:"Crimson Desert",type:"Boss / Mount",desc:"Ravok of the Savage Fangs (Master of the Wetlands) → Rock Tusk Warthog Mount."},
   {name:"Ashclaw Keep",region:"Pailune",type:"Boss",desc:"Myurdin + Lava Myurdin Boss-Fight (Kap. 7). Oongka-Scripted-Unlock hier."},
-  {name:"Spire of Ringing Truth",region:"Pailune",type:"Boss / Skill",desc:"Priscus the Ancient. Danach: Path of Trials → Frost Mantle Skill."}
+  {name:"Spire of Ringing Truth",region:"Pailune",type:"Boss / Skill",desc:"Priscus the Ancient. Danach: Path of Trials → Frost Mantle Skill."},
+  {name:"The Laughing Marionette",region:"Delesyia",type:"Minigame [1.06]",desc:"Claw Machine: 1 Silver pro Versuch. Belohnungen: 12 Beleuchtungsitems, 1 Stuhl, 1 Spezial-Kopfbedeckung, Abyss Artifacts, Abyss Gears."},
+  {name:"Smithy (Extraction)",region:"Alle Regionen",type:"Crafting [1.06]",desc:"Neues Extraction-System: Materialien aus verfeinerter Ausrüstung zurückgewinnen. Seltenere Materialien (Artifacts, Aeserion's Scale) zu 100% zurück, Basis-Materialien (Erz, Bloodstones) ~70%. Verfeinerungsstufe wird auf Basis zurückgesetzt, Item bleibt erhalten."},
+  {name:"Oongka — Unbewaffnete Skills",region:"Überall",type:"Feature [1.06]",desc:"Oongka hat neue Faustkampf-Skills. Im Skill-Menü 'Fists' auswählen. Damiane erhält unbewaffnete Skills in einem späteren Patch."},
+  {name:"Weapon Sheaths",region:"Einstellungen",type:"Feature [1.06]",desc:"Schwertscheide am Charakter an/aus schaltbar: Einstellungen → 'Display Sheath' Option."},
+  {name:"Night Tone Mode",region:"Einstellungen",type:"Feature [1.06]",desc:"Neue Grafik-Option: Night Tone Mode dämpft Gesamtfarben und hellt Schattenbereiche auf. Deaktiviert = kräftigere, kontrastreichere Farben."}
 ];
 
 const BELL_TOWERS=[
@@ -1924,7 +1930,7 @@ const KLIFF_STAMINA=[
   {name:"Stab",prereq:"Default",cost:"1 AA/Lv bis Lv 3",effect:"Schneller Stoss, Bleed"},
   {name:"Stab Rend Armor",prereq:"Stab Lv 3",cost:"1 AA",effect:"Ignoriert Super Armor"},
   {name:"Swift Stab",prereq:"Stab Lv 2 oder Watch & Learn (Reed Devil)",cost:"0 oder 1 AA",effect:"Follow-up nach Charged Stab"},
-  {name:"Blinding Flash",prereq:"Prolog Quest Unknown Space (automatisch)",cost:"0",effect:"Blendet Gegner"},
+  {name:"Blinding Flash",prereq:"Prolog Quest Unknown Space (automatisch)",cost:"0",effect:"Blendet Gegner. [Patch 1.06] Jetzt auch ohne Waffe ausführbar."},
   {name:"Blinding Flash Finisher",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"Flurry of Strikes — bester Early-Game DPS-Skill"},
   {name:"Marksmanship",prereq:"Default",cost:"1 AA/Lv bis Lv 5",effect:"Basis-Fernkampf"},
   {name:"Charged Shot",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"Aufgeladener Schuss"},
@@ -1992,36 +1998,36 @@ const WATCH_AND_LEARN=[
 ];
 
 const BOSS_IMGS={
-  "Matthias":"cd_assets/bosses/matthias.png",
-  "Kailok the Hornsplitter":"cd_assets/bosses/kailok.png",
-  "Marni's Excavatron":"cd_assets/bosses/excavatron.png",
-  "Reed Devil":"cd_assets/bosses/reed_devil.png",
-  "Kearush the Slayer":"cd_assets/bosses/kearush.png",
-  "Draven the Crowcaller":"cd_assets/bosses/draven.png",
-  "Myurdin (Phase 1)":"cd_assets/bosses/myurdin.png",
-  "Lava Myurdin (Phase 2)":"cd_assets/bosses/lava_myurdin.png",
-  "Cassius Morten / Tenebrum":"cd_assets/bosses/cassius.png",
-  "Corrupted Caliburn":"cd_assets/bosses/gabriel.png",
-  "One-Armed Ludvig":"cd_assets/bosses/ludvig.png",
-  "Lucian Bastier":"cd_assets/bosses/lucian.png",
-  "Saigord the Staglord":"cd_assets/bosses/saigord.png",
-  "Hexe Marie":"cd_assets/bosses/hexe_marie.png",
-  "Golden Star":"cd_assets/bosses/golden_star.png",
-  "Beloth the Darksworn":"cd_assets/bosses/beloth.png",
-  "White Horn":"cd_assets/bosses/white_horn.png",
-  "Umbra (Final)":"cd_assets/bosses/umbra-final.jpg",
-  "Black Fang":"cd_assets/bosses/black_fang.png",
+  "Matthias":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/bd/Matthias-boss1-crimson-desert-wiki-guide-300px.png",
+  "Kailok the Hornsplitter":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/9c/Kailok-the-hornsplitter-boss-crimson-desert-wiki-guide-300px.png",
+  "Marni's Excavatron":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/36/Marnis-excavatron-boss-crimson-desert-wiki-guide-300px.png",
+  "Reed Devil":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c7/Reed-devil-boss1-crimson-desert-wiki-guide-300px.png",
+  "Kearush the Slayer":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/93/Kearush-the-slayer-boss1-crimson-desert-wiki-guide-300px.png",
+  "Draven the Crowcaller":"https://static0.fextralifeimages.com/file/crimsondesertgame/d/df/Draven-the-crowcaller-boss1-crimson-desert-wiki-guide-300px.png",
+  "Myurdin (Phase 1)":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/21/Myurdin-boss1-crimson-desert-wiki-guide-300px.png",
+  "Lava Myurdin (Phase 2)":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/71/Lava-myurdin-boss1-crimson-desert-wiki-guide-300px.png",
+  "Cassius Morten / Tenebrum":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/f3/Tenebrum-boss1-crimson-desert-wiki-guide-300px.png",
+  "Corrupted Caliburn":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b2/Gabriel-caliburn-image-1-bosses-wiki-guide-300px.png",
+  "One-Armed Ludvig":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/79/One-armed-ludvig-boss1-crimson-desert-wiki-guide-300px.png",
+  "Lucian Bastier":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6e/Lucian-bastier-image-2-bosses-wiki-guide-300px.png",
+  "Saigord the Staglord":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6b/Staglord-image-1-bosses-wiki-guide-300px.png",
+  "Hexe Marie":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b5/Hexe-marie-image-2-bosses-wiki-guide-300px.png",
+  "Golden Star":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c4/Golden-star-image-1-bosses-wiki-guide-300px.png",
+  "Beloth the Darksworn":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/83/Beloth-the-darksworn-image-1-bosses-wiki-guide-300px.png",
+  "White Horn":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8d/White-horn-image-1-bosses-wiki-guide-300px.png",
+  "Umbra (Final)":"https://static0.gamerantimages.com/wordpress/wp-content/uploads/wm/2026/04/how-to-beat-umbra-in-crimson-desert.jpg",
+  "Black Fang":"https://static0.gamerantimages.com/wordpress/wp-content/uploads/wm/2026/03/how-to-beat-black-fang-the-legendary-wolf-in-crimson-desert.jpg",
   "Avatar of Umbra":"cd_assets/bosses/avatar_umbra.png",
-  "Priscus the Ancient":"cd_assets/bosses/priscus.png",
-  "Antumbra's Sword":"cd_assets/bosses/antumbra_sword.png",
-  "Gregor the Halberd of Carnage":"cd_assets/bosses/gregor.png",
-  "Walter Lanford":"cd_assets/bosses/walter_lanford.png",
-  "Master Du":"cd_assets/bosses/master_du.png",
-  "Fortain the Cursed Knight":"cd_assets/bosses/fortain.png",
-  "Awakened Ludvig":"cd_assets/bosses/awakened_ludvig.png",
-  "Awakened Lucian Bastier":"cd_assets/bosses/awakened_lucian.png",
-  "Marni's Clockwork Mantis":"cd_assets/bosses/clockwork_mantis.png",
-  "Turbine":"cd_assets/bosses/turbine.png"
+  "Priscus the Ancient":"https://crimsondesert.app/images/wiki/bosses/priscus-the-ancient.png",
+  "Antumbra's Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/3f/Antumbras-sword-boss1-crimson-desert-wiki-guide-300px.png",
+  "Gregor the Halberd of Carnage":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/71/Gregor-the-halberd-of-carnage-boss1-crimson-desert-wiki-guide-300px.png",
+  "Walter Lanford":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/26/Walter-lanford-image-2-bosses-wiki-guide-300px.png",
+  "Master Du":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/2a/Master-du-image-1-bosses-wiki-guide-300px.png",
+  "Fortain the Cursed Knight":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/60/Fortain-image-3-bosses-wiki-guide-300px.png",
+  "Awakened Ludvig":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/a9/Awakened-ludvig-boss1-crimson-desert-wiki-guide-300px.png",
+  "Awakened Lucian Bastier":"https://static0.fextralifeimages.com/file/crimsondesertgame/0/04/Awakened-lucian-bastier-image-1-bosses-wiki-guide-300px.png",
+  "Marni's Clockwork Mantis":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c2/Marnis-clockwork-mantis-image-1-bosses-wiki-guide-300px.png",
+  "Turbine":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/fb/Turbine-image-1-bosses-wiki-guide-300px.png"
 };
 const SKILL_IMGS={
   "Blinding Flash":              "cd_assets/skills/blinding_flash.png",
@@ -2604,6 +2610,7 @@ const MOUNT_IMGS={
   "Giant Iguana":             "cd_assets/mounts/giant-iguana.png",
   "Kuku Bird Hatchling":      "cd_assets/mounts/kuku-bird-hatchling.png",
   "Lion":                     "cd_assets/mounts/lion.png",
+  "Tiger":                    "cd_assets/mounts/tiger.png",
   "Raptor":                   "cd_assets/mounts/raptor.png",
   "Cloudcart":                "cd_assets/mounts/cloudcart.png",
   "Wagon Horse":              "cd_assets/mounts/wagon-horse.png",
@@ -2636,7 +2643,8 @@ const MOUNT_INGAME_IMGS={
   "Icicle Edge Alpine Ibex": "https://static0.fextralifeimages.com/file/crimsondesertgame/e/e4/Icicle_Edge_Alpine_Ibex_Horns_Crimson_Desert_Wiki.jpg",
   "Rock Tusk Warthog": "https://static0.fextralifeimages.com/file/crimsondesertgame/4/44/Rock_Tusk_Warthog_Showcase_Crimson_Desert_Wiki.jpg",
   "Kuku Bird Hatchling": "https://cdn.mos.cms.futurecdn.net/bUrGHLPs4oj5htpBK7t2f9.jpg",
-  "Lion":           "https://cdn.mos.cms.futurecdn.net/P7dnw6erc7D3Mcgkg6hBz.jpg"
+  "Lion":           "https://cdn.mos.cms.futurecdn.net/P7dnw6erc7D3Mcgkg6hBz.jpg",
+  "Tiger":          "https://static0.gamerantimages.com/wordpress/wp-content/uploads/wm/2026/05/how-to-get-the-tiger-mount-in-crimson-desert.jpg"
 };
 const ARMOR_IMGS={
   // Torso
