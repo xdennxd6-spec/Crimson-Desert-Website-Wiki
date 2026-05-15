@@ -650,24 +650,25 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
 
   <section class="sec" id="sec-weapons">
     <div class="sec-t">🔮 Items &amp; Waffen</div>
-    <div class="sub-t" style="margin-top:0">Waffen</div>
+    <div id="wt-toc"></div>
+    <div id="wt-weapons" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Waffen</div>
     <div class="fbar">
       <select class="fs" id="wf-type" onchange="renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd (2H)</option><option value="Rapier">Rapier</option><option value="Knuckles">Knuckles</option><option value="Shield">Shield</option></select>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Typ</th><th>ATK</th><th>Crit</th><th>Slots</th><th>Fundort / Quelle</th><th>Built-in Cores</th><th>Notizen</th></tr></thead><tbody id="weapon-tb"></tbody></table></div>
-    <div class="sub-t">Abyss Cores</div>
+    <div id="wt-cores" class="sub-t" style="scroll-margin-top:72px">Abyss Cores</div>
     <div class="fbar">
       <select class="fs" id="cf-slot" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Both">Both</option></select>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
-    <div class="sub-t">Rüstung &amp; Ausrüstung</div>
+    <div id="wt-armor" class="sub-t" style="scroll-margin-top:72px">Rüstung &amp; Ausrüstung</div>
     <div class="fbar">
       <select class="fs" id="af-type" onchange="renderArmor()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
     </div>
     <div class="grid" id="armor-grid"></div>
-    <div class="sub-t">Rüstungs-Sets</div>
+    <div id="wt-sets" class="sub-t" style="scroll-margin-top:72px">Rüstungs-Sets</div>
     <div class="grid" id="set-grid"></div>
-    <div class="sub-t">Waffen-Upgrade &amp; Refinement</div>
+    <div id="wt-upgrade" class="sub-t" style="scroll-margin-top:72px">Waffen-Upgrade &amp; Refinement</div>
     <div style="font-size:11.5px;color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Jede Waffe kann bis <span style="color:var(--gold);font-weight:600">Refine 5</span> gesteigert werden. Ab Refine 3 wird ein zusätzlicher Abyss-Slot freigeschaltet. Element-Infusion ist nur über Hexen-Questlinien möglich.</div>
     <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
   </section>
@@ -719,12 +720,13 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
 
   <section class="sec" id="sec-locations">
     <div class="sec-t">📍 Locations</div>
-    <div class="fbar">
+    <div id="lo-toc"></div>
+    <div id="lo-locs" class="fbar" style="scroll-margin-top:72px">
       <select class="fs" id="lf-reg" onchange="renderLocs()"><option value="">Alle Regionen</option><option value="Hernand">Hernand</option><option value="Pailune">Pailune</option><option value="Demeniss">Demeniss</option><option value="Delesyia">Delesyia</option><option value="Crimson Desert">Crimson Desert</option><option value="The Abyss">The Abyss</option></select>
       <select class="fs" id="lf-type" onchange="renderLocs()"><option value="">Alle Typen</option><option value="Alchemy">Alchemy Station</option><option value="Dungeon">Dungeon / Farm</option><option value="Stadt">Stadt</option><option value="Unique Weapon">Unique Weapon</option><option value="Boss">Boss</option><option value="Sanctum">Sanctum</option><option value="Camp">Camp</option><option value="Crafting">Crafting Station</option><option value="Witch">Witch</option><option value="Faction">Faction</option></select>
     </div>
     <div class="grid" id="loc-grid"></div>
-    <div class="sub-t">🔔 Bell Towers</div>
+    <div id="lo-bells" class="sub-t" style="scroll-margin-top:72px">🔔 Bell Towers</div>
     <div class="tw-wrap"><table><thead><tr><th>#</th><th>Name</th><th>Ort</th><th>Mechanik</th><th>Hinweis</th></tr></thead><tbody id="bell-tb"></tbody></table></div>
   </section>
 
@@ -735,10 +737,11 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
 
   <section class="sec" id="sec-disarm">
     <div class="sec-t">🛡️ Entwaffnen</div>
+    <div id="da-toc"></div>
     <div class="disarm-hero">
       <p>Das Entwaffnungs-System in Crimson Desert basiert auf einem <strong>Shield Bash Counter</strong> — kein separater Skill-Tree-Eintrag nötig. Einzige Voraussetzung: <strong>Einhandwaffe + kleine Rundschild</strong>. Turmschilder funktionieren nicht. Entwaffnete Gegner kämpfen auf Fäusten weiter und verlieren jede Block-Option.</p>
     </div>
-    <div class="sub-t" style="margin-top:0">Setup &amp; Voraussetzungen</div>
+    <div id="da-setup" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Setup &amp; Voraussetzungen</div>
     <table class="farm-tbl" style="margin-bottom:20px">
       <thead><tr><th>Anforderung</th><th>Detail</th></tr></thead>
       <tbody>
@@ -749,7 +752,7 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
         <tr><td><strong>Bosse?</strong></td><td>Nein — kein Boss kann entwaffnet werden</td></tr>
       </tbody>
     </table>
-    <div class="sub-t">Schritt-für-Schritt</div>
+    <div id="da-steps" class="sub-t" style="scroll-margin-top:72px">Schritt-für-Schritt</div>
     <div class="card" style="margin-bottom:20px">
       <div class="disarm-step">
         <div class="disarm-num">1</div>
@@ -768,7 +771,7 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
         <div class="disarm-txt"><strong>Waffe aufheben</strong><br>Waffe fällt auf den Boden — normaler Loot-Pickup per Interaktionstaste. Waffe landet dauerhaft im Inventar.</div>
       </div>
     </div>
-    <div class="sub-t">Was mit entwaffneten Waffen machen?</div>
+    <div id="da-use" class="sub-t" style="scroll-margin-top:72px">Was mit entwaffneten Waffen machen?</div>
     <table class="farm-tbl" style="margin-bottom:20px">
       <thead><tr><th>Nutzung</th><th>Detail</th></tr></thead>
       <tbody>
@@ -777,7 +780,7 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
         <tr><td><strong>Refinement-Material</strong></td><td>Zwei gleiche Nicht-Unique-Waffen beim Schmied: eine wird als Craft-Material verbraucht (ersetzt Erz/Holz)</td></tr>
       </tbody>
     </table>
-    <div class="sub-t">Beste Farm-Spots</div>
+    <div id="da-farm" class="sub-t" style="scroll-margin-top:72px">Beste Farm-Spots</div>
     <table class="farm-tbl" style="margin-bottom:20px">
       <thead><tr><th>Location</th><th>Region</th><th>Drop</th><th>Hinweis</th></tr></thead>
       <tbody>
@@ -786,7 +789,7 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
         <tr><td><strong>Südlichstes Lager — Spire of Frost</strong></td><td>Demeniss</td><td>Bogen- und Schild-Gegner</td><td>Kein Freeze-Angriff — sicherer Einstieg in den Farm-Loop.</td></tr>
       </tbody>
     </table>
-    <div class="sub-t">Disarm Abyss Cores (Passive)</div>
+    <div id="da-cores" class="sub-t" style="scroll-margin-top:72px">Disarm Abyss Cores (Passive)</div>
     <div class="card">
       <div class="crows">
         <div class="crow"><span class="cl">Disarm I</span><span class="cv">Passiver Gear-Bonus — verbessert Entwaffnungs-Verhalten (Slot in Waffe/Rüstung)</span></div>
@@ -2079,6 +2082,10 @@ function mountCard(m){
     </div>
   </div>`;
 }
+function makeToc(items){
+  const btn=i=>`<button onclick="document.getElementById('${i.id}').scrollIntoView({behavior:'smooth',block:'start'})" style="background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.28);color:var(--gold);padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:background .18s,border-color .18s" onmouseover="this.style.background='rgba(201,162,39,.22)';this.style.borderColor='rgba(201,162,39,.5)'" onmouseout="this.style.background='rgba(201,162,39,.1)';this.style.borderColor='rgba(201,162,39,.28)'">${i.label}</button>`;
+  return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:22px;padding:12px 16px;background:rgba(201,162,39,.05);border:1px solid rgba(201,162,39,.18);border-radius:8px"><span style="font-size:11px;color:var(--dim);margin-right:4px;white-space:nowrap">Springe zu:</span>${items.map(btn).join('')}</div>`;
+}
 function renderMounts(){
   const horses=MOUNTS.filter(m=>m.type.includes('Pferd')&&!m.type.includes('Legendary'));
   const legendary=MOUNTS.filter(m=>m.type.includes('Legendary'));
@@ -2093,10 +2100,7 @@ function renderMounts(){
     {id:'ms-wild',title:'Zaehmbare Wildtiere',icon:'🦁',items:wild},
     {id:'ms-vehicle',title:'Fahrzeuge',icon:'🚂',items:vehicle}
   ].filter(g=>g.items.length);
-  const toc=`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:22px;padding:12px 16px;background:rgba(201,162,39,.05);border:1px solid rgba(201,162,39,.18);border-radius:8px">
-    <span style="font-size:11px;color:var(--dim);margin-right:4px;white-space:nowrap">Springe zu:</span>
-    ${groups.map(g=>`<button onclick="document.getElementById('${g.id}').scrollIntoView({behavior:'smooth',block:'start'})" style="background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.28);color:var(--gold);padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:background .18s,border-color .18s" onmouseover="this.style.background='rgba(201,162,39,.22)';this.style.borderColor='rgba(201,162,39,.5)'" onmouseout="this.style.background='rgba(201,162,39,.1)';this.style.borderColor='rgba(201,162,39,.28)'">${g.icon} ${g.title} <span style="opacity:.6;font-weight:400;font-size:11px">(${g.items.length})</span></button>`).join('')}
-  </div>`;
+  const toc=makeToc(groups.map(g=>({id:g.id,label:`${g.icon} ${g.title} <span style="opacity:.6;font-weight:400;font-size:11px">(${g.items.length})</span>`})));
   document.getElementById('mount-sections').innerHTML=toc+groups.map(g=>
     `<div id="${g.id}" style="margin-bottom:28px;scroll-margin-top:72px">
       <div style="font-size:15px;font-weight:700;color:var(--rhi);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(201,162,39,.15)">${g.icon} ${g.title} <span style="font-weight:400;font-size:12px;color:var(--dim)">(${g.items.length})</span></div>
@@ -2499,14 +2503,39 @@ function clTab(id){
 // ===== BUILDS =====
 function renderBuilds(){
   const tagBadge=t=>`<span class="tag tx" style="font-size:9.5px">${t}</span>`;
-  document.getElementById('builds-list').innerHTML=BUILDS.map(b=>`
-    <div class="build-card">
+  const bldId=n=>'bld-'+n.toLowerCase().replace(/[\s/()]+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const toc=makeToc(BUILDS.map(b=>({id:bldId(b.name),label:b.name})));
+  document.getElementById('builds-list').innerHTML=toc+BUILDS.map(b=>`
+    <div id="${bldId(b.name)}" class="build-card" style="scroll-margin-top:72px">
       <div class="build-title">${b.name}</div>
       <div class="build-desc">${b.desc}</div>
       <div class="build-tags">${b.tags.map(tagBadge).join('')}</div>
       <div class="build-slots">${b.slots.map(s=>`<div class="build-slot"><span class="bs-label">${s.label}</span><span class="bs-val">${s.val}</span></div>`).join('')}</div>
       <div class="build-tip">${b.tip}</div>
     </div>`).join('');
+}
+
+// ===== STATIC SECTION TOCs =====
+function initStaticTocs(){
+  const fill=(id,items)=>{const el=document.getElementById(id);if(el)el.innerHTML=makeToc(items);};
+  fill('wt-toc',[
+    {id:'wt-weapons',label:'⚔️ Waffen'},
+    {id:'wt-cores',label:'💎 Abyss Cores'},
+    {id:'wt-armor',label:'🛡️ Rüstung'},
+    {id:'wt-sets',label:'✦ Rüstungs-Sets'},
+    {id:'wt-upgrade',label:'⬆️ Waffen-Upgrade'}
+  ]);
+  fill('da-toc',[
+    {id:'da-setup',label:'⚙️ Setup'},
+    {id:'da-steps',label:'👣 Schritt-für-Schritt'},
+    {id:'da-use',label:'💡 Waffen nutzen'},
+    {id:'da-farm',label:'🗺️ Farm-Spots'},
+    {id:'da-cores',label:'💎 Disarm Cores'}
+  ]);
+  fill('lo-toc',[
+    {id:'lo-locs',label:'📍 Locations'},
+    {id:'lo-bells',label:'🔔 Bell Towers'}
+  ]);
 }
 
 // ===== EXPORT / IMPORT =====
@@ -2885,9 +2914,10 @@ const CHAPTERS=[
 
 function renderChapters(){
   const done=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
-  document.getElementById('ch-timeline').innerHTML=CHAPTERS.map(c=>{
+  const toc=makeToc(CHAPTERS.map(c=>({id:`ch-${c.num}`,label:`Kap. ${String(c.num).padStart(2,'0')}`})));
+  document.getElementById('ch-timeline').innerHTML=toc+CHAPTERS.map(c=>{
     const d=done.includes(c.num);
-    return `<div class="ch-card${d?' ch-done':''}">
+    return `<div id="ch-${c.num}" class="ch-card${d?' ch-done':''}" style="scroll-margin-top:72px">
       <div class="ch-num-blk">
         <div class="ch-kap-lbl">KAP.</div>
         <div class="ch-num">${String(c.num).padStart(2,'0')}</div>
@@ -2919,6 +2949,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderLocs();renderBells();renderMounts();renderSkills();
   renderBuilds();
   renderAccessories();
+  initStaticTocs();
   renderWitches();
   renderWeaponUpgrade();
   renderSanctumGuide();
