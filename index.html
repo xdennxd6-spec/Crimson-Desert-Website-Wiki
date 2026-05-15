@@ -642,6 +642,17 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 #core-vid-float video{display:block;width:280px;height:158px;object-fit:cover}
 .core-vid-btn{cursor:pointer;font-size:10px;color:var(--rhi);padding:1px 5px;border:1px solid rgba(181,45,32,.38);border-radius:3px;line-height:1.5;margin-left:6px;vertical-align:middle;transition:background .15s;user-select:none}
 .core-vid-btn:hover{background:rgba(181,45,32,.18)}
+
+/* ── Pets section ── */
+.pet-filter-row{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap}
+.pet-filter-btn{padding:4px 12px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--dim);font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.pet-filter-btn.active,.pet-filter-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,162,39,.06)}
+.pet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px}
+.pet-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:9px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:border-color .15s,background .15s;cursor:default}
+.pet-card:hover{border-color:rgba(201,162,39,.35);background:rgba(201,162,39,.04)}
+.pet-card-img{width:52px;height:52px;object-fit:contain;border-radius:5px;background:rgba(0,0,0,.3)}
+.pet-card-name{font-size:10px;color:var(--text);font-weight:600;text-align:center;line-height:1.3}
+.pet-card-food{font-size:9.5px;color:var(--dim);text-align:center;line-height:1.2}
 #mount-float-preview{position:fixed;z-index:550;pointer-events:none;display:none;border:1px solid rgba(201,162,39,.48);border-radius:9px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.9);max-width:320px;background:#0a0807}
 #mfp-img{display:block;max-width:320px;max-height:220px;object-fit:cover;width:320px}
 #mfp-label{background:rgba(0,0,0,.85);color:var(--gold);font-size:10px;padding:5px 9px;text-align:center;font-weight:600;letter-spacing:.04em}
@@ -764,6 +775,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
     <div class="ni" data-sec="accessories" onclick="showSec('accessories')"><span class="nicon">💎</span><span class="nlabel">Accessoires</span></div>
     <div class="ni" data-sec="witches" onclick="showSec('witches')"><span class="nicon">🧙</span><span class="nlabel">Hexen Guide</span></div>
     <div class="ni" data-sec="chapters" onclick="showSec('chapters')"><span class="nicon">📖</span><span class="nlabel">Kapitel-Guide</span></div>
+    <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
   </div>
   <div id="visitor-bar">
     <div class="vis-row"><span class="vis-lbl"><span class="vis-dot"></span>Online</span><span class="vis-val" id="sv-online">—</span></div>
@@ -1099,6 +1111,12 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
     <div class="witch-grid" id="witch-grid"></div>
   </section>
 
+  <section class="sec" id="sec-pets">
+    <div class="sec-t">🐾 Pets</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle tammbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Portait-Icon.</div>
+    <div class="pet-filter-row" id="pet-filter-row"></div>
+    <div class="pet-grid" id="pet-grid"></div>
+  </section>
   <section class="sec" id="sec-chapters">
     <div class="sec-t">📖 Kapitel-Guide</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Schritt-für-Schritt Übersicht aller 12 Kapitel mit Key-Items, Bossen und missable Content. Markiere Kapitel als abgeschlossen um deinen Fortschritt zu tracken.</div>
@@ -1128,7 +1146,7 @@ const BOSSES=[
   {name:"Priscus the Ancient",chapter:null,region:"Pailune - Spire of Ringing Truth",quest:"Faction",drop_weapon:"Blessing of the Immortal, Ancient Retribution",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Nature's Snare fuer Projektile",strategy:"Bow + Nature's Snare → Projektile zurückwerfen. Reward: Path of Trials (Frost Mantle Skill)."},
   {name:"Antumbra's Sword",chapter:null,region:"Sanctum of Absolution",quest:"Sanctum",drop_weapon:"Vessel of Dark Pursuit",drop_abyss_gear:"Wound of Darkness",weakness:"–",parry_or_dodge:"Dodge Illusionen",strategy:"Enger Raum, Illusionen → Blinding Flash Spam."},
   {name:"One-Armed Ludvig",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Story - Homecoming",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry & Dodge",strategy:"Tritt direkt nach dem Lava-Myurdin-Fight auf. Humanoider Nahkampf-Boss — Combos mit einem Arm. Vorsicht nach dem langen Myurdin-Gauntlet: Ressourcen einteilen!"},
-  {name:"Lucian Bastier",chapter:8,region:"Pailune",quest:"Story - Blood Coronation (Damiane-Solo)",drop_weapon:"–",drop_abyss_gear:"Flame of Judgement",weakness:"–",parry_or_dodge:"Dodge",strategy:"Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Kap. 8 Blood Coronation."},
+  {name:"Lucian Bastier",chapter:8,region:"Pailune",quest:"Story - Blood Coronation (Damiane-Solo)",drop_weapon:"–",drop_abyss_gear:"Flames of Judgment",weakness:"–",parry_or_dodge:"Dodge",strategy:"Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Kap. 8 Blood Coronation."},
   {name:"Gregor the Halberd of Carnage",chapter:null,region:"Hernand - Fort Ironclad",quest:"Where The Wind Guides You",drop_weapon:"Golden Vanguard",drop_abyss_gear:"Abyss Artifact",weakness:"–",parry_or_dodge:"Dodge (Impaling Spear unblockbar)",strategy:"Vor Kampf: Pfeilfallen in der Halle zerstoeren. Langsame Drehrate ausnutzen — Backstab-Konter. Force Palm maxen → 3er-Combo → Stagger. Defensive Spielweise, Distanz halten."},
   {name:"Walter Lanford",chapter:null,region:"Hernand - Fort Warspike",quest:"Name Written in Blood",drop_weapon:"Dane Shotgun",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (kein Block)",strategy:"Hochmobiler Pistolenschuetze. Run-and-Hit-Ansatz. 'Poof'-Escape: zum Landepunkt dashen → Heavy Attack. Double Barrel Barrage: volle Distanz, sofort dodgen. Drops: Dane Shotgun + Rhonda Leather Boots + Golden Piggy Bank."},
   {name:"Master Du",chapter:null,region:"Crimson Desert - Cloister of Enlightenment",quest:"The Sage of the Desert",drop_weapon:"Master Du's Circlet",drop_abyss_gear:"Karmic Pulse",weakness:"–",parry_or_dodge:"Dodge (Green Ray: bis 3x konsekutiv)",strategy:"2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown fuer Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen)."},
@@ -1677,10 +1695,10 @@ const WEAPONS=[
 ];
 
 const CORES=[
-  {name:"Crow's Pursuit",effect:"Heavy Attack feuert homing Krähen",source:"Tauria Curved Sword (Crowcaller)",slot:"Weapon"},
+  {name:"Crow's Pursuit",effect:"Beschwört Krähen-Schwarm — Angriff auf nahe Feinde. 1.593 Silber",source:"Tauria Curved Sword (Crowcaller)",slot:"Weapon"},
   {name:"Ator's Orb",effect:"Forward/Heavy schiesst Tracking-Orbs",source:"Darkbringer oder Ator-Boss",slot:"Weapon"},
-  {name:"Groundsurge",effect:"Boden-Shockwave, Stagger",source:"Melted Ambition (Myurdin)",slot:"Weapon"},
-  {name:"Wind Slash",effect:"Charged Heavy = Projektil",source:"Sword of the Lord (Kailok)",slot:"Weapon"},
+  {name:"Groundsurge",effect:"Frontaler Kegel, Bodenwelle — Schaden + Stagger. 1.573 Silber",source:"Melted Ambition (Myurdin)",slot:"Weapon"},
+  {name:"Wind Slash",effect:"Windklingen-Projektil nach vorne — durchdringt Feinde. 1.367 Silber",source:"Sword of the Lord (Kailok)",slot:"Weapon"},
   {name:"Wound of Darkness",effect:"Wave-Attack",source:"Vessel of Dark Pursuit",slot:"Weapon"},
   {name:"Volcanic Eruption",effect:"Magma-Cone nach Turning Slash",source:"Scorchflame Plate Gloves (Twilight Grotto Cave N Demeniss)",slot:"Armor"},
   {name:"Momentum",effect:"+35% Turning Slash Schaden",source:"Leather Helm of the Fallen Kingdom (Sanctum of Benediction)",slot:"Armor"},
@@ -1693,7 +1711,57 @@ const CORES=[
   {name:"Haste I",effect:"+Movespeed",source:"Blackwing Mask / Plate Gloves of the Shadows",slot:"Armor"},
   {name:"Gourmet III",effect:"+15% Heal-Effizienz auf Food",source:"Animal Meat Life Challenge (Hernand Butcher)",slot:"Both"},
   {name:"Abyssal Rays",effect:"Abyss-Strahlen-Angriff",source:"Twisted Verdict (Corrupted Caliburn)",slot:"Weapon"},
-  {name:"Flame of Judgement",effect:"Feuerstrahl-Angriff beim Einsatz",source:"Drop: Lucian Bastier / Awakened Lucian Bastier",slot:"Weapon"}
+  {name:"Flames of Judgment",effect:"Funken-Angriff — zusätzlicher Feuerschaden. 2.000 Silber",source:"Drop: Lucian Bastier / Awakened Lucian Bastier",slot:"Weapon"},
+  {name:"Lightning God's Affliction",effect:"Blitzschlag auf Feinde — Schaden. 1.627 Silber",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Spirit's Judgment",effect:"Geistiger Ritter schlägt auf Feind ein. 1.353 Silber",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Pillar of Wind",effect:"Windsäule am Ziel — zusätzlicher Schaden. 1.987 Silber",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Slashing Reeds",effect:"Schilfhagel-Angriff — Schaden an getroffenen Feinden. 1.347 Silber",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Warden of Darkness",effect:"Geistliche Ritter vernichten nahe Feinde mit Speeren. 1.987 Silber",source:"Vessel of Dark Pursuit / Antumbra",slot:"Weapon"},
+  {name:"Ancient Reckoning",effect:"Tödlicher Wirbel um den Feind — zusätzlicher Schaden",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Storm Fang",effect:"Kettenblitze — Schaden an mehreren Feinden. 1.993 Silber",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Fullmoon Slash",effect:"Vollmond-Klingenangriff nach bestimmter Aktion",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Half Moon Slash",effect:"Halbmond-Klingenangriff nach bestimmter Aktion",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Crescent Moon Slash",effect:"Sichel-Klingenangriff nach bestimmter Aktion",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Frost Hail",effect:"Eisregen-Angriff (imbue Ice)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Frost Spike",effect:"Eiszapfen-Angriff (Skill 1)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Greysoul Howling",effect:"Greysoul-Heulen (Skill 1)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Tempest of Destruction",effect:"Vernichtungssturm (Skill 17)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Crow Storm",effect:"Krähen-Sturm (Hold Skill 3)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Hound's Claws",effect:"Hundsklauen-Angriff (Skill 7)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Earthrending Strike",effect:"Bodenspalter — Angriff beim Parieren",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Orbs of Lightning",effect:"Blitzkugeln (imbue Lightning)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Shattering Frost",effect:"Frostexplosion (imbue Ice)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Arrow Rain",effect:"Pfeilregen nach Finisher",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Kinetic Burst",effect:"Kinetischer Ausbruch (Skill 12 wiederholt)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Dark Crescent",effect:"Dunkle Sichel (Skill 7)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Order from Above",effect:"Befehl von oben nach Finisher",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Colossal Might",effect:"Kolossale Macht (Skill 17)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Queen's Fangs",effect:"Königinnenzähne (Hold Skill 3)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Parting Gift",effect:"Abschiedsgeschenk — Angriff nach Rolle bei Treffer",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Shadow Claw",effect:"Schattenklaue (Heavy Attack)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Putrid Touch",effect:"Fäulnisberührung (Skill 17)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Ancient Retribution",effect:"Uralte Vergeltung (Skill 7)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"The Showstopper",effect:"Der Showstopper (Skill 12 wiederholt)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Ancient Wrath",effect:"Uralter Zorn (Skill 6)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Judgment of the Soul",effect:"Seelengericht (Skill 6)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Howling of Chaos",effect:"Chaosheulen — Angriff beim Parieren",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Rising Torrent",effect:"Aufsteigender Strom — Angriff nach Rolle bei Treffer",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Piercing Bloom",effect:"Durchbohrende Blüte (Hold Skill 3)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Karmic Pulse",effect:"Karmischer Puls (Skill 12 wiederholt)",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Greater Insight",effect:"+Kritische Trefferrate",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Destruction",effect:"+Angriff",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Swift",effect:"+Angriffsgeschwindigkeit",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Infinite Arrows",effect:"100% keine Pfeile verbraucht",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Greater Beastbane",effect:"+40% Schaden gegen Wildtiere",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Bloodbane",effect:"+40% Schaden gegen Menschen",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Hexebane",effect:"+40% Schaden gegen Erdwesen",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Malicebane",effect:"+40% Schaden gegen mächtige Feinde",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Primalbane",effect:"+40% Schaden gegen Walker",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Abyssbane",effect:"+40% Schaden gegen Abysswesen",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Steelbane",effect:"+40% Schaden gegen Maschinen",source:"Abyss Gear",slot:"Both"},
+  {name:"Greater Flameward",effect:"Feuerresistenz",source:"Abyss Gear",slot:"Armor"},
+  {name:"Greater Frostward",effect:"Eisresistenz",source:"Abyss Gear",slot:"Armor"},
+  {name:"Greater Shockward",effect:"Blitzresistenz",source:"Abyss Gear",slot:"Armor"}
 ];
 
 const CRAFTING=[
@@ -2594,12 +2662,12 @@ const WEAPON_IMGS={
   "Balton Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b9/Balton_shield_shields_crimson_desert_wiki_guide_150px.png"
 };
 const CORE_IMGS={
-  "Crow's Pursuit":   "cd_assets/cores/crows-pursuit.png",
-  "Ator's Orb":       "cd_assets/cores/ators-orb.png",
+  "Crow's Pursuit":   "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_026.webp",
+  "Ator's Orb":       "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_070.webp",
   "Groundsurge":      "cd_assets/cores/groundsurge.png",
-  "Wind Slash":       "cd_assets/cores/wind-slash.png",
-  "Wound of Darkness":"cd_assets/cores/wound-of-darkness.png",
-  "Volcanic Eruption":"cd_assets/cores/volcanic-eruption.png",
+  "Wind Slash":       "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_073.webp",
+  "Wound of Darkness":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_115.webp",
+  "Volcanic Eruption":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_024.webp",
   "Momentum":         "cd_assets/cores/momentum.png",
   "Malicebane":       "cd_assets/cores/malicebane.png",
   "Insight III":      "cd_assets/cores/insight.png",
@@ -2608,12 +2676,187 @@ const CORE_IMGS={
   "Aegis III":        "cd_assets/cores/aegis.png",
   "Aptitude I":       "cd_assets/cores/aptitude.png",
   "Haste I":          "cd_assets/cores/haste.png",
-  "Abyssal Rays":     "cd_assets/cores/abyssal-rays.png",
+  "Abyssal Rays":     "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_036.webp",
+  "Flames of Judgment":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_064.webp",
+  "Lightning God's Affliction":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_155.webp",
+  "Spirit's Judgment":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_118.webp",
+  "Pillar of Wind":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_142.webp",
+  "Slashing Reeds":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_046.webp",
+  "Warden of Darkness":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_130.webp",
+  "Ancient Reckoning":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_144.webp",
+  "Storm Fang":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_083.webp",
+  "Fullmoon Slash":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_112.webp",
+  "Half Moon Slash":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_061.webp",
+  "Crescent Moon Slash":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_111.webp",
+  "Frost Hail":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_062.webp",
+  "Frost Spike":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_020.webp",
+  "Greysoul Howling":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_004.webp",
+  "Tempest of Destruction":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_043.webp",
+  "Crow Storm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_035.webp",
+  "Hound's Claws":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_079.webp",
+  "Earthrending Strike":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_140.webp",
+  "Orbs of Lightning":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_048.webp",
+  "Shattering Frost":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_044.webp",
+  "Arrow Rain":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_049.webp",
+  "Kinetic Burst":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_156.webp",
+  "Dark Crescent":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_139.webp",
+  "Order from Above":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_137.webp",
+  "Colossal Might":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_129.webp",
+  "Queen's Fangs":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_147.webp",
+  "Parting Gift":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_153.webp",
+  "Shadow Claw":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_146.webp",
+  "Putrid Touch":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_150.webp",
+  "Ancient Retribution":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_149.webp",
+  "The Showstopper":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_157.webp",
+  "Ancient Wrath":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_148.webp",
+  "Judgment of the Soul":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_128.webp",
+  "Howling of Chaos":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_158.webp",
+  "Rising Torrent":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_154.webp",
+  "Piercing Bloom":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_007.webp",
+  "Karmic Pulse":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_081.webp",
+  "Greater Insight":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_003.webp",
+  "Greater Destruction":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_001.webp",
+  "Greater Swift":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_082.webp",
+  "Greater Infinite Arrows":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp",
+  "Greater Beastbane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp",
+  "Greater Bloodbane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp",
+  "Greater Hexebane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_077.webp",
+  "Greater Malicebane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp",
+  "Greater Primalbane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp",
+  "Greater Abyssbane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp",
+  "Greater Steelbane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_058.webp",
+  "Greater Flameward":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_095.webp",
+  "Greater Frostward":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_096.webp",
+  "Greater Shockward":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_097.webp",
   "Gourmet III":      "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_093.webp"
 };
 const CORE_VIDS={
-  "Flame of Judgement":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_bastier.mp4"
+  "Flames of Judgment":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_bastier.mp4",
+  "Groundsurge":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_landmash_lv1.mp4",
+  "Crow's Pursuit":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_crowattack_lv1.mp4",
+  "Lightning God's Affliction":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_titan.mp4",
+  "Spirit's Judgment":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_soulstrike_lv1.mp4",
+  "Pillar of Wind":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_karanda.mp4",
+  "Slashing Reeds":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_flashcombo_lv1.mp4",
+  "Warden of Darkness":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_antumbra_spear.mp4",
+  "Ancient Reckoning":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_primus.mp4",
+  "Wind Slash":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_swordaura_lv1.mp4",
+  "Storm Fang":"https://cdn.questlog.gg/crimson-desert/assets/ui/media/advice_item_skill_abyssgear_lightningstab_lv1.mp4"
 };
+const PET_CDN="https://cdn.questlog.gg/crimson-desert/assets/_sprites/";
+const PETS=[
+  {name:"Long-Haired Cat",type:"cat",food:"Dried Fish",icon:"cd_portrait_petimage_animal_white_norwegianforest_domestic.webp"},
+  {name:"Cat",type:"cat",food:"Squid",icon:"cd_portrait_petimage_animal_yellow_cat_domestic.webp"},
+  {name:"Cat",type:"cat",food:"Squid",icon:"cd_portrait_petimage_animal_white_cat_domestic.webp"},
+  {name:"Cat",type:"cat",food:"Salmon",icon:"cd_portrait_petimage_animal_black_cat_domestic.webp"},
+  {name:"Cat",type:"cat",food:"Salmon",icon:"cd_portrait_petimage_animal_bicolor_cat_domestic.webp"},
+  {name:"Cat",type:"cat",food:"Salmon",icon:"cd_portrait_petimage_animal_tricolor_cat_domestic.webp"},
+  {name:"Fat Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_cat_domestic.webp"},
+  {name:"Fat Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_yellow_cat_domestic.webp"},
+  {name:"Fat Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_white_cat_domestic.webp"},
+  {name:"Fat Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_black_cat_domestic.webp"},
+  {name:"Fat Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_bicolor_cat_domestic.webp"},
+  {name:"Fat Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_tricolor_cat_domestic.webp"},
+  {name:"Slim Cat",type:"cat",food:"Pond Loach",icon:"cd_portrait_petimage_animal_skinny_cat_domestic.webp"},
+  {name:"Slim Cat",type:"cat",food:"Pond Loach",icon:"cd_portrait_petimage_animal_skinny_yellow_cat_domestic.webp"},
+  {name:"Slim Cat",type:"cat",food:"Pond Loach",icon:"cd_portrait_petimage_animal_skinny_white_cat_domestic.webp"},
+  {name:"Slim Cat",type:"cat",food:"Ricefish",icon:"cd_portrait_petimage_animal_skinny_black_cat_domestic.webp"},
+  {name:"Slim Cat",type:"cat",food:"Ricefish",icon:"cd_portrait_petimage_animal_skinny_bicolor_cat_domestic.webp"},
+  {name:"Slim Cat",type:"cat",food:"Ricefish",icon:"cd_portrait_petimage_animal_skinny_tricolor_cat_domestic.webp"},
+  {name:"Ashen Cat",type:"cat",food:"Mackerel",icon:"cd_portrait_petimage_animal_cat_hernand_unique_1.webp"},
+  {name:"Black Cat",type:"cat",food:"Red Tonguesole",icon:"cd_portrait_petimage_animal_cat_demeniss_unique_1.webp"},
+  {name:"Fat Cat",type:"cat",food:"Opaleye",icon:"cd_portrait_petimage_animal_cat_delesyian_unique_1.webp"},
+  {name:"Yellow Cat",type:"cat",food:"Trout",icon:"cd_portrait_petimage_animal_cat_pailune_unique_1.webp"},
+  {name:"Kitten",type:"cat",food:"Fish Fillet",icon:"cd_portrait_petimage_animal_yellow_kitten_domestic.webp"},
+  {name:"Kitten",type:"cat",food:"Fish Fillet",icon:"cd_portrait_petimage_animal_white_kitten_domestic.webp"},
+  {name:"Kitten",type:"cat",food:"Milk",icon:"cd_portrait_petimage_animal_black_kitten_domestic.webp"},
+  {name:"Kitten",type:"cat",food:"Milk",icon:"cd_portrait_petimage_animal_bicolor_kitten_domestic.webp"},
+  {name:"Kitten",type:"cat",food:"Milk",icon:"cd_portrait_petimage_animal_tricolor_kitten_domestic.webp"},
+  {name:"Short-Haired Cat",type:"cat",food:"Egg",icon:"cd_portrait_petimage_animal_brown_britishcat_domestic.webp"},
+  {name:"Short-Haired Cat",type:"cat",food:"Egg",icon:"cd_portrait_petimage_animal_white_britishcat_domestic.webp"},
+  {name:"Short-Haired Cat",type:"cat",food:"Red Seabream",icon:"cd_portrait_petimage_animal_bicolor_britishcat_domestic.webp"},
+  {name:"Short-Haired Cat",type:"cat",food:"Red Seabream",icon:"cd_portrait_petimage_animal_striped_britishcat_domestic.webp"},
+  {name:"Short-Haired Kitten",type:"cat",food:"Small Gudgeon",icon:"cd_portrait_petimage_animal_brown_britishkitten_domestic.webp"},
+  {name:"Short-Haired Kitten",type:"cat",food:"Small Gudgeon",icon:"cd_portrait_petimage_animal_white_britishkitten_domestic.webp"},
+  {name:"Short-Haired Kitten",type:"cat",food:"Mackerel",icon:"cd_portrait_petimage_animal_bicolor_britishkitten_domestic.webp"},
+  {name:"Short-Haired Kitten",type:"cat",food:"Mackerel",icon:"cd_portrait_petimage_animal_striped_britishkitten_domestic.webp"},
+  {name:"White Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_cat_pororin_unique_1.webp"},
+  {name:"Tabby Cat",type:"cat",food:"Mackerel",icon:"cd_portrait_petimage_animal_cat_redorc_unique_1.webp"},
+  {name:"Patchy Cat",type:"cat",food:"Red Seabream",icon:"cd_portrait_petimage_animal_cat_tashkalp_unique_1.webp"},
+  {name:"Long-Haired Cat",type:"cat",food:"Mackerel",icon:"cd_portrait_petimage_animal_norwegianforest_domestic_30007.webp"},
+  {name:"Cat",type:"cat",food:"Squid",icon:"cd_portrait_petimage_animal_cat_domestic_30024.webp"},
+  {name:"Short-Haired Cat",type:"cat",food:"Egg",icon:"cd_portrait_petimage_animal_britishcat_domestic_31467.webp"},
+  {name:"Short-Haired Kitten",type:"cat",food:"Small Gudgeon",icon:"cd_portrait_petimage_animal_britishkitten_domestic_31468.webp"},
+  {name:"Kitten",type:"cat",food:"Fish Fillet",icon:"cd_portrait_petimage_animal_kitten_domestic_31511.webp"},
+  {name:"Desert Cat",type:"cat",food:"Egg",icon:"cd_portrait_petimage_animal_desert_cat_domestic_32033.webp"},
+  {name:"Brown Dog",type:"dog",food:"Lean Meat",icon:"cd_portrait_petimage_animal_dog_hernand_unique_1.webp"},
+  {name:"Spotted Dog",type:"dog",food:"Marbled Meat",icon:"cd_portrait_petimage_animal_dog_demeniss_unique_1.webp"},
+  {name:"Spotted Puppy",type:"dog",food:"Tough Meat",icon:"cd_portrait_petimage_animal_dog_delesyian_unique_1.webp"},
+  {name:"Wolfdog",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_dog_pailune_unique_1.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_1.webp"},
+  {name:"Brown Puppy",type:"dog",food:"Lean Meat",icon:"cd_portrait_petimage_animal_dog_jijeongtemple_unique_1.webp"},
+  {name:"Tan Puppy",type:"dog",food:"Marbled Meat",icon:"cd_portrait_petimage_animal_dog_longleaftree_unique_1.webp"},
+  {name:"Shepherd",type:"dog",food:"Bird Meat",icon:"cd_portrait_petimage_animal_shepherd_domestic_1.webp"},
+  {name:"Jindo",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_jindodog_domestic_1.webp"},
+  {name:"White Dog",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_dog_hernand_unique_2.webp"},
+  {name:"Dark Brown Dog",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_dog_tashkalp_unique_1.webp"},
+  {name:"Jindo",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_jindodog_domestic_02.webp"},
+  {name:"Jindo",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_jindodog_domestic_03.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_02.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_03.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_04.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_05.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_06.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_07.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_08.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_01.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_02.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_03.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_04.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_05.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_06.webp"},
+  {name:"Floppy-Eared Bulldog",type:"dog",food:"Cheese",icon:"cd_portrait_petimage_animal_americanbulldog_domestic_07.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_01.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_02.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_03.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_04.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_08.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_09.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_10.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_01.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_02.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_03.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_04.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_08.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_09.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Tender Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_10.webp"},
+  {name:"Saluki",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_saluki_domestic_01.webp"},
+  {name:"Saluki",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_saluki_domestic_02.webp"},
+  {name:"Saluki",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_saluki_domestic_03.webp"},
+  {name:"Saluki",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_saluki_domestic_04.webp"},
+  {name:"Saluki",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_saluki_domestic_05.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_01.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_02.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_03.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_04.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_05.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_06.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_07.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_08.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_09.webp"},
+  {name:"Greyhound",type:"dog",food:"Milk",icon:"cd_portrait_petimage_animal_greyhound_domestic_10.webp"},
+  {name:"Beagle",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_beagle_domestic_01.webp"},
+  {name:"Beagle",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_beagle_domestic_02.webp"},
+  {name:"Beagle",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_beagle_domestic_03.webp"},
+  {name:"Beagle",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_beagle_domestic_04.webp"},
+  {name:"Boarhound",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_greatdane_domestic_30022.webp"},
+  {name:"Husky",type:"dog",food:"Bird Meat",icon:"cd_portrait_petimage_animal_husky_domestic_30070.webp"},
+  {name:"Pointy-Eared Bulldog",type:"dog",food:"Egg",icon:"cd_portrait_petimage_animal_bulldog_domestic_30186.webp"},
+  {name:"Boarhound Puppy",type:"dog",food:"Lean Bird Meat",icon:"cd_portrait_petimage_animal_baby_greatdane_domestic_31336.webp"},
+  {name:"Saluki",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_saluki_domestic_31400.webp"},
+  {name:"Greyhound",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_greyhound_domestic_32181.webp"},
+  {name:"Beagle",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_beagle_domestic_32189.webp"}
+];
 const MOUNT_IMGS={
   "Herspia":                  "cd_assets/mounts/herspia.png",
   "Royler":                   "cd_assets/mounts/royler.png",
@@ -2929,6 +3172,19 @@ function showSec(id){
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('mob-overlay').classList.remove('show');
   document.getElementById('main').scrollTop=0;
+}
+
+// ===== PETS =====
+let _petFilter='all';
+function renderPets(filter){
+  _petFilter=filter||_petFilter;
+  const filterRow=document.getElementById('pet-filter-row');
+  const grid=document.getElementById('pet-grid');
+  if(!filterRow||!grid)return;
+  const filters=[{k:'all',l:'Alle'},{'k':'cat',l:'Katzen'},{'k':'dog',l:'Hunde'}];
+  filterRow.innerHTML=filters.map(f=>`<button class="pet-filter-btn${_petFilter===f.k?' active':''}" onclick="renderPets('${f.k}')">${f.l}</button>`).join('');
+  const list=_petFilter==='all'?PETS:PETS.filter(p=>p.type===_petFilter);
+  grid.innerHTML=list.map(p=>`<div class="pet-card"><img class="pet-card-img" src="${PET_CDN}${p.icon}" alt="${p.name}" onerror="this.style.opacity='.2'"><div class="pet-card-name">${p.name}</div><div class="pet-card-food">${p.food}</div></div>`).join('');
 }
 
 // ===== MOBILE SIDEBAR =====
@@ -4271,6 +4527,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderLocs();renderBells();renderMounts();renderSkills();
   renderBuilds();
   renderAccessories();
+  renderPets();
   initStaticTocs();
   document.addEventListener('mousemove',_moveMFP);
   renderWitches();
