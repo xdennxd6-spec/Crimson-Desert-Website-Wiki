@@ -501,6 +501,21 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
 .witch-icon-title{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--glo);line-height:1.2}
 .witch-icon-sub{font-size:9.5px;color:rgba(255,255,255,.35);letter-spacing:.04em;margin-top:2px}
 .witch-svc-ico{opacity:.8;margin-right:4px;font-size:12px}
+/* ── Mount In-Game Preview ── */
+#mount-float-preview{position:fixed;z-index:550;pointer-events:none;display:none;border:1px solid rgba(201,162,39,.45);border-radius:8px;overflow:hidden;box-shadow:0 10px 36px rgba(0,0,0,.88);max-width:320px;background:#0a0807}
+#mfp-img{display:block;max-width:320px;max-height:220px;object-fit:cover;width:320px}
+#mfp-label{background:rgba(0,0,0,.82);color:var(--gold);font-size:10px;padding:4px 8px;text-align:center;font-weight:600;letter-spacing:.04em}
+#mount-ingame-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.84);z-index:620;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+#mount-ingame-modal.show{display:flex}
+.mim-box{background:#0e0b09;border:1px solid rgba(201,162,39,.3);border-radius:12px;overflow:hidden;max-width:min(620px,90vw);box-shadow:0 0 80px rgba(0,0,0,.9);animation:eeSlide .3s cubic-bezier(.2,0,.1,1)}
+.mim-img{display:block;width:100%;max-height:65vh;object-fit:contain;background:#080808}
+.mim-footer{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.6)}
+.mim-name{color:var(--gold);font-weight:700;font-size:13px;font-family:'Cinzel',serif}
+.mim-src-lbl{font-size:10px;color:var(--dim);margin-right:10px}
+.mim-close{background:none;border:1px solid rgba(201,162,39,.3);color:var(--dim);padding:4px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-family:'Inter',sans-serif;transition:all .15s}
+.mim-close:hover{color:var(--gold);border-color:rgba(201,162,39,.6)}
+.mount-ig-btn{margin-top:8px;width:100%;padding:5px 0;background:rgba(201,162,39,.06);border:1px solid rgba(201,162,39,.18);border-radius:5px;color:var(--gdim);font-size:11px;font-family:'Inter',sans-serif;cursor:pointer;transition:all .15s;letter-spacing:.03em}
+.mount-ig-btn:hover{background:rgba(201,162,39,.14);color:var(--gold);border-color:rgba(201,162,39,.38)}
 </style>
 </head>
 <body>
@@ -573,6 +588,21 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
       <button class="loc-modal-copy" id="lm-copy-btn" onclick="copyLocSearch(false)">Kopieren</button>
     </div>
     <button class="loc-modal-nav" onclick="goToMap()">📍 Zur interaktiven Karte →</button>
+  </div>
+</div>
+<!-- Mount floating hover preview -->
+<div id="mount-float-preview"><img id="mfp-img" src="" alt=""><div id="mfp-label"></div></div>
+<!-- Mount in-game screenshot modal -->
+<div id="mount-ingame-modal" onclick="if(event.target===this)closeMountModal()">
+  <div class="mim-box">
+    <img class="mim-img" id="mim-img" src="" alt="">
+    <div class="mim-footer">
+      <span class="mim-name" id="mim-name"></span>
+      <div style="display:flex;align-items:center">
+        <span class="mim-src-lbl">In-Game Screenshot</span>
+        <button class="mim-close" onclick="closeMountModal()">✕ Schliessen</button>
+      </div>
+    </div>
   </div>
 </div>
 <div id="app">
@@ -1436,6 +1466,28 @@ const MOUNT_IMGS={
   "Wagon Horse":              "cd_assets/mounts/wagon-horse.png",
   "Train":                    "cd_assets/mounts/train.png"
 };
+const MOUNT_INGAME_IMGS={
+  "Herspia":        "https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2026/04/kliff-in-crimson-desert-riding-herspia-the-game-s-first-mount-you-can-get.jpg",
+  "Royler":         "https://static0.fextralifeimages.com/file/crimsondesertgame/3/32/Royler-legendary-horse-mount-crimson-desert-wiki-guide.png",
+  "Rokade":         "https://static0.fextralifeimages.com/file/crimsondesertgame/2/25/Rokade-legendary-horse-mount-crimson-desert-wiki-guide.png",
+  "Camora":         "https://static0.fextralifeimages.com/file/crimsondesertgame/f/f6/Camora-legendary-horse-mount-crimson-desert-wiki-guide.png",
+  "Blackstar":      "https://static0.fextralifeimages.com/file/crimsondesertgame/6/60/Blackstar-dragon-mount-crimson-desert-wiki-guide.png",
+  "Silver Fang":    "https://static0.fextralifeimages.com/file/crimsondesertgame/d/d8/Silverfang-mount-crimson-desert-wiki-guide.png",
+  "White Bear":     "https://static0.fextralifeimages.com/file/crimsondesertgame/1/19/White-bear-mount-crimson-desert-wiki-guide.png",
+  "Snowwhite Deer": "https://static0.fextralifeimages.com/file/crimsondesertgame/3/32/Snowdeer-mount-crimson-desert-wiki-guide.png",
+  "Black Bear":     "https://static0.fextralifeimages.com/file/crimsondesertgame/8/8f/Black-bear-mount-crimson-desert-wiki-guide.png",
+  "Brown Bear":     "https://static0.fextralifeimages.com/file/crimsondesertgame/9/95/Bear-mount-crimson-desert-wiki-guide.png",
+  "Boar":           "https://static0.fextralifeimages.com/file/crimsondesertgame/0/0a/Boar-mount-crimson-desert-wiki-guide.png",
+  "Buffalo":        "https://static0.fextralifeimages.com/file/crimsondesertgame/c/c0/Buffalo-mount-crimson-desert-wiki-guide.png",
+  "Camel":          "https://static0.fextralifeimages.com/file/crimsondesertgame/2/2d/Camel-mount-crimson-desert-wiki-guide.png",
+  "Cow":            "https://static0.fextralifeimages.com/file/crimsondesertgame/5/56/Cow-mount-crimson-desert-wiki-guide.png",
+  "Elephant":       "https://static0.fextralifeimages.com/file/crimsondesertgame/5/5d/Elephant-mount-crimson-desert-wiki-guide.png",
+  "Greywolf":       "https://static0.fextralifeimages.com/file/crimsondesertgame/f/fb/Greywolf-mount-crimson-desert-wiki-guide.png",
+  "Raptor":         "https://static.beebom.com/wp-content/uploads/2026/03/Crimson-Desert-Raptor-mount.jpg",
+  "Cloudcart":      "https://static0.fextralifeimages.com/file/crimsondesertgame/e/ee/Cloudcart-mount-crimson-desert-wiki-guide.png",
+  "Wagon Horse":    "https://static0.fextralifeimages.com/file/crimsondesertgame/2/23/Wagon-horse-mount-crimson-desert-wiki-guide.png",
+  "Train":          "https://static0.fextralifeimages.com/file/crimsondesertgame/5/5c/Train-vehicle-mount-crimson-desert-wiki-guide.png"
+};
 const ARMOR_IMGS={
   // Torso
   "Ashclaw Leather Armor":"cd_assets/armor/ashclaw-leather.png",
@@ -2080,6 +2132,7 @@ function mountCard(m){
       <div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${m.stats}</span></div>
       ${m.notes?'<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">'+m.notes+'</span></div>':''}
     </div>
+    ${MOUNT_INGAME_IMGS[m.name]?`<button class="mount-ig-btn" onmouseenter="showMountIG(event,'${m.name.replace(/'/g,"\\'")}')" onmouseleave="hideMountIG()" onclick="openMountIG('${m.name.replace(/'/g,"\\'")}')">👁 In-Game Ansicht</button>`:''}
   </div>`;
 }
 function makeToc(items){
@@ -2514,6 +2567,34 @@ function renderBuilds(){
       <div class="build-tip">${b.tip}</div>
     </div>`).join('');
 }
+
+// ===== MOUNT IN-GAME PREVIEW =====
+function showMountIG(e,name){
+  const url=MOUNT_INGAME_IMGS[name];if(!url)return;
+  document.getElementById('mfp-img').src=url;
+  document.getElementById('mfp-label').textContent=name+' — In-Game';
+  document.getElementById('mount-float-preview').style.display='block';
+  _moveMFP(e);
+}
+function _moveMFP(e){
+  const el=document.getElementById('mount-float-preview');
+  if(!el||el.style.display==='none')return;
+  const w=334,h=258,vw=window.innerWidth,vh=window.innerHeight;
+  let x=e.clientX+20,y=e.clientY-20;
+  if(x+w>vw-8)x=e.clientX-w-20;
+  if(y+h>vh-8)y=vh-h-8;
+  if(y<8)y=8;
+  el.style.left=x+'px';el.style.top=y+'px';
+}
+function hideMountIG(){document.getElementById('mount-float-preview').style.display='none';}
+function openMountIG(name){
+  const url=MOUNT_INGAME_IMGS[name];if(!url)return;
+  document.getElementById('mim-img').src=url;
+  document.getElementById('mim-name').textContent=name;
+  document.getElementById('mount-ingame-modal').classList.add('show');
+  hideMountIG();
+}
+function closeMountModal(){document.getElementById('mount-ingame-modal').classList.remove('show');}
 
 // ===== STATIC SECTION TOCs =====
 function initStaticTocs(){
@@ -2950,6 +3031,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderBuilds();
   renderAccessories();
   initStaticTocs();
+  document.addEventListener('mousemove',_moveMFP);
   renderWitches();
   renderWeaponUpgrade();
   renderSanctumGuide();
