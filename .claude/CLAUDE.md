@@ -20,6 +20,31 @@
 - WebFetch auf Raw-URL ist der bevorzugte Weg um index.html zu lesen (spart Token vs. lokalem Read)
 - Lokales Read-Tool nur nutzen wenn Änderungen noch nicht gepusht sind
 
+## KI-Auslagerung an Gemini 3 Pro — Token sparen
+**Ziel:** Einfache, gut abgrenzbare Teilaufgaben NICHT selbst erledigen, sondern dem User
+einen fertigen Prompt geben, den er an Google Gemini 3 Pro weitergibt. Spart Claude-Usage.
+
+**Wann auslagern (proaktiv anbieten):**
+- Reine Recherche / Faktensammlung (z.B. "finde Bild-URLs für Liste X")
+- Texte schreiben/umformulieren ohne Code-Kontext (Beschreibungen, Lore, Notizen)
+- Listen/Tabellen/JSON aus bekannten Fakten erzeugen
+- Übersetzungen, Zusammenfassungen, Stichpunkte
+- Wiederholende Fleißarbeit nach klarem Muster
+
+**Niemals auslagern (selbst machen):**
+- Änderungen an `index.html` oder anderem Code (Edit/Integration/Verifikation)
+- Aufgaben die Repo-Kontext, Dateipfade oder bestehende Logik brauchen
+- Architektur-Entscheidungen, Debugging, alles mit Urteilsvermögen
+- Git/Push/Deploy
+
+**Format wenn ich auslagern kann:** Ich sage kurz WAS ausgelagert wird und liefere einen
+abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
+- Auf Deutsch, simpel formuliert (Gemini ist schwächer als Claude — keine verschachtelten Aufgaben)
+- Komplett selbsterklärend (kein Verweis auf "das Projekt" / diese Konversation)
+- Exaktes Output-Format vorgeben (z.B. "antworte nur als JSON: {name: url}")
+- Eine Aufgabe pro Prompt, nicht mehrere mischen
+- Danach: User gibt mir das Ergebnis zurück, ICH baue es ein und verifiziere
+
 ## Workflow
 1. Änderungen lokal in `index.html` vornehmen
 2. User fragen ob gepusht werden soll
