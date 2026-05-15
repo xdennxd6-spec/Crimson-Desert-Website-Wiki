@@ -555,9 +555,9 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .witch-tip{font-size:11px;color:var(--text);background:rgba(201,162,39,.055);border:1px solid rgba(201,162,39,.2);border-radius:7px;padding:9px 11px;margin-top:13px;line-height:1.6}
 
 /* ── Witch portrait image ── */
-.witch-img{width:100%;height:160px;object-fit:cover;object-position:top center;display:block}
+.witch-img{width:100%;height:200px;object-fit:cover;object-position:center 10%;display:block}
 .witch-img-wrap{position:relative;overflow:hidden}
-.witch-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:48px;background:linear-gradient(transparent,var(--card))}
+.witch-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:56px;background:linear-gradient(transparent,var(--card))}
 
 /* ── Global witch-style upgrades ── */
 .card{box-shadow:inset 0 3px 0 rgba(181,45,32,.4)}
@@ -2739,6 +2739,7 @@ const ARMOR_IMGS={
   "Hernand Ceremonial Guard Boots":"cd_assets/armor/hernand-ceremonial-boots.png",
   "Icewing Plate Boots":"cd_assets/armor/icewing-plate-boots.png",
   "Kairos Plate Boots":"cd_assets/armor/kairos-plate-boots.png",
+  "Kuku Ice-Resistant Armor":"https://cdn-hosted.gaming.tools/crimson-desert/images/ui/texture/icon/itemicon_prefab_cd_m0001_00_skullknight_ub_0003_index01.webp?v=1778445421559",
   "Light of the Battlefield Plate Boots":"cd_assets/armor/light-battlefield-boots.png",
   "Lightning Bolt Plate Boots":"cd_assets/armor/lightning-bolt-boots.png",
   "Pailunese Boots":"cd_assets/armor/pailunese-boots.png",
@@ -4028,7 +4029,7 @@ function renderAccessories(){
 // ===== WITCHES =====
 const WITCHES=[
   {
-    name:"Hexe Sylvia",color:"#c9a227",img:null,
+    name:"Hexe Sylvia",color:"#c9a227",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_witch.webp",
     location:"Höhle nördlich von Hernand City",chapter:"Ab Kap. 1 verfügbar",
     services:["Core-Extraktion (kostet Contribution Points)","Core-Fusion Level 1–3","Mount-Reparatur & Upgrade","Spezialtränke Hernand-Region"],
     quests:[],sanctums:[],
@@ -4043,7 +4044,7 @@ const WITCHES=[
     tip:"Elowen-Questlinie zuerst abschließen. Das Sanctum of Exaltation schaltet den Kuku Ice-Resistant Armor Blueprint frei — Pflicht für Pailune und alle späten Bosse."
   },
   {
-    name:"Hexe Bari",color:"#4a8aca",img:"https://www.powerpyx.com/wp-content/uploads/witch-kindness-close-300x169.jpg",
+    name:"Hexe Bari",color:"#4a8aca",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_eloria.webp",
     location:"White Crow Hideout — Pailune",chapter:"Kap. 7 — 4 Crow Tokens benötigt",
     services:["Core-Fusion Level 1–6 (höchstes Level im Spiel)","Pailune-Spezialtränke (Ice Immunity Potion)","Legendary Core Upgrade (Endgame)"],
     quests:["White Crow Token-Jagd: 4 Tokens aus Pailune-Dungeons / Questzielen","Sanctumlinie: Deliverance → Solace","Solace-Reward: Frost Mantle Skill-Upgrade"],
@@ -4051,7 +4052,7 @@ const WITCHES=[
     tip:"Crow Tokens priorisieren direkt nach Kap. 7-Ankunft. Bari bietet als einzige Fusion Level 6 — für BiS Endgame-Cores unverzichtbar."
   },
   {
-    name:"Hexe Lyselia",color:"#9a50d0",img:"https://www.powerpyx.com/wp-content/uploads/witch-humility-close-300x169.jpg",
+    name:"Hexe Lyselia",color:"#9a50d0",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_demeniss_witch.webp",
     location:"Verborgene Höhle, Serpent Marsh (zwischen Demeniss und Delesyia) — Verkleidung: haengt an eingestuertzter Bruecke (N Demeniss)",chapter:"Kap. 9+ verfügbar",
     services:["Core-Fusion Level 1–5","Demeniss-exklusive Crafting-Rezepte","Shadow-Element Infusion (Waffen)"],
     quests:["Sanctumlinie: Devotion → Veneration → Oblation → Faith","Faith-Reward: Endgame Abyss-Core + Shadow Infusion freigeschaltet"],
@@ -4059,7 +4060,7 @@ const WITCHES=[
     tip:"Lyselias Questlinie vor dem Endgame abschließen. Ihr versteckter Höhlen-Eingang ist leicht zu uebersehen — erst die Verkleidung an der Bruecke ansprechen."
   },
   {
-    name:"Hexe Areciel",color:"#c0392b",img:"https://www.powerpyx.com/wp-content/uploads/witch-strength-close-300x169.jpg",
+    name:"Hexe Areciel",color:"#c0392b",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_power_witch.webp",
     location:"Kliffhaus nahe World's Navel, Crimson Desert — sie wartet auf dem Dach; Verkleidung: Kind auf einem Hügel vor Tommaso",chapter:"Freigeschaltet nach: 1x Copper dem Kind bei Tommaso Bounty Board geben",
     services:["Core-Fusion Level 1–5","Crimson-Desert-exklusive Crafting-Rezepte","Stärke-Infusion (Waffen)"],
     quests:["Sanctumlinie: Expiation → Renunciation → Revelation","Revelation-Reward: Endgame Abyss-Core + Shadow Infusion freigeschaltet"],
