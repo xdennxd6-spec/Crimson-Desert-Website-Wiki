@@ -539,6 +539,87 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .qst-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid var(--gold)}
 .qst-legend i.done{background:var(--gold)}
 
+/* Region-Heatmap */
+.region-heatmap{display:flex;gap:2px;padding:9px 12px;background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:8px;margin-bottom:14px;align-items:flex-end;min-height:62px}
+.rh-bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;min-width:50px;position:relative;cursor:default;padding-top:18px}
+.rh-bar-fill{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--rhi) 0%,var(--gold) 100%);transition:height .3s ease;position:relative}
+.rh-bar-fill.dim{background:linear-gradient(180deg,#3a2222 0%,#1e1414 100%);opacity:.5}
+.rh-bar-val{position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--glo);text-shadow:0 0 8px rgba(0,0,0,.8)}
+.rh-bar-lbl{font-size:9px;color:var(--dim);letter-spacing:.04em;text-align:center;text-transform:uppercase;line-height:1.2;height:22px;display:flex;align-items:flex-end}
+.rh-bar:hover .rh-bar-fill{filter:brightness(1.3)}
+.rh-bar:hover .rh-bar-lbl{color:var(--gold)}
+
+/* Skill-Tree Graph */
+.skill-graph-wrap{position:relative;background:linear-gradient(135deg,rgba(180,45,32,.04) 0%,rgba(201,162,39,.03) 100%);border:1px solid var(--bdr);border-radius:12px;padding:18px;margin-bottom:20px;overflow-x:auto}
+.skill-graph-svg{display:block;min-width:880px}
+.skill-graph-node{cursor:pointer;transition:transform .15s}
+.skill-graph-node:hover{transform:translateY(-1px)}
+.skill-graph-node rect{transition:fill .15s,stroke .15s}
+.skill-graph-node:hover rect{fill:rgba(201,162,39,.18);stroke:var(--gold)}
+.skill-graph-node.miss rect{stroke:var(--warn);stroke-dasharray:3,2}
+.skill-graph-node.have rect{fill:rgba(201,162,39,.12);stroke:var(--gold)}
+.skill-graph-node text{fill:var(--text);font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;pointer-events:none;text-anchor:middle}
+.skill-graph-node.have text{fill:var(--glo)}
+.skill-graph-edge{stroke:rgba(201,162,39,.25);stroke-width:1.4;fill:none}
+.skill-graph-tabs{display:flex;gap:6px;margin-bottom:13px}
+.skill-graph-tab{padding:5px 13px;font-size:11px;background:rgba(255,255,255,.025);border:1px solid var(--bdr);border-radius:18px;cursor:pointer;color:var(--dim);font-family:'Inter',sans-serif;transition:all .15s}
+.skill-graph-tab.active{background:rgba(192,57,43,.18);border-color:rgba(192,57,43,.5);color:var(--rhi)}
+.skill-graph-tab:hover{border-color:#333;color:var(--text)}
+.skill-graph-tab.active:hover{color:var(--rhi)}
+.skill-graph-legend{display:flex;gap:14px;font-size:9.5px;color:var(--dim);justify-content:center;margin-top:9px;letter-spacing:.04em;flex-wrap:wrap}
+.skill-graph-legend i{display:inline-block;width:10px;height:10px;border:1px solid var(--gold);background:rgba(201,162,39,.06);border-radius:2px;vertical-align:middle;margin-right:4px}
+.skill-graph-legend i.have{background:rgba(201,162,39,.18)}
+.skill-graph-legend i.miss{border-color:var(--warn);border-style:dashed}
+
+/* Boss-Compare */
+#cmp-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:615;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+#cmp-modal.show{display:flex}
+.cmp-box{background:var(--card);border:1px solid rgba(201,162,39,.32);border-radius:14px;padding:0;width:840px;max-width:calc(100vw - 32px);max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 28px 72px rgba(0,0,0,.85)}
+.cmp-header{padding:18px 22px;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(192,57,43,.08),transparent 70%);display:flex;align-items:center;justify-content:space-between}
+.cmp-title{font-family:'Cinzel',serif;font-size:15px;color:var(--glo);letter-spacing:.06em}
+.cmp-body{padding:20px 22px}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cmp-col{background:rgba(0,0,0,.18);border:1px solid var(--bdr);border-radius:10px;padding:14px 16px}
+.cmp-pick{margin-bottom:13px}
+.cmp-pick select{width:100%;padding:8px 11px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:7px;color:var(--text);font-size:12px;font-family:'Inter',sans-serif;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235c5650'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
+.cmp-img{width:100%;height:128px;object-fit:cover;object-position:center top;border-radius:7px;margin-bottom:11px;background:#111}
+.cmp-name{font-family:'Cinzel',serif;font-size:13.5px;font-weight:700;color:var(--glo);margin-bottom:4px;letter-spacing:.02em}
+.cmp-meta{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.cmp-row{display:flex;gap:8px;font-size:11px;padding:5px 0;border-bottom:1px dashed rgba(201,162,39,.08)}
+.cmp-row:last-child{border-bottom:none}
+.cmp-row-lbl{color:var(--gdim);min-width:78px;flex-shrink:0;font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;padding-top:1px}
+.cmp-row-val{color:var(--text);flex:1;line-height:1.5}
+.cmp-row-diff{color:var(--gold);font-weight:600}
+.cmp-close{padding:5px 11px;border:1px solid var(--bdr);background:rgba(0,0,0,.45);color:var(--dim);font-size:11px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.cmp-close:hover{color:var(--text);border-color:var(--gold)}
+.cmp-trigger{padding:7px 14px;background:rgba(192,57,43,.07);border:1px solid rgba(192,57,43,.32);border-radius:7px;color:var(--rhi);font-size:11.5px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .17s;letter-spacing:.03em;display:inline-flex;align-items:center;gap:6px}
+.cmp-trigger:hover{background:rgba(192,57,43,.14);border-color:rgba(192,57,43,.58)}
+
+/* Achievements */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:11px;margin-top:5px}
+.ach-card{display:flex;gap:12px;align-items:center;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:10px;transition:all .2s;position:relative;overflow:hidden}
+.ach-card.unlocked{background:linear-gradient(135deg,rgba(201,162,39,.08) 0%,rgba(255,255,255,.025) 60%);border-color:rgba(201,162,39,.42);box-shadow:0 0 14px rgba(201,162,39,.07)}
+.ach-card.unlocked .ach-ico{filter:none;opacity:1}
+.ach-ico{font-size:28px;flex-shrink:0;opacity:.25;filter:grayscale(1);transition:all .25s;line-height:1}
+.ach-info{flex:1;min-width:0}
+.ach-name{font-family:'Cinzel',serif;font-size:11.5px;font-weight:700;color:var(--text);letter-spacing:.04em;margin-bottom:2px;line-height:1.2}
+.ach-card.unlocked .ach-name{color:var(--glo)}
+.ach-desc{font-size:10px;color:var(--dim);line-height:1.4}
+.ach-prog{position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--gdim),var(--gold));transition:width .4s ease}
+.ach-card.unlocked .ach-prog{height:3px}
+.ach-overview-bar{display:flex;align-items:center;gap:14px;padding:11px 14px;background:rgba(201,162,39,.05);border:1px solid rgba(201,162,39,.18);border-radius:9px;margin-bottom:14px}
+.ach-ov-icon{font-size:24px}
+.ach-ov-txt{flex:1}
+.ach-ov-pct{font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--glo)}
+.ach-ov-lbl{font-size:10px;color:var(--dim);letter-spacing:.05em;text-transform:uppercase}
+
+/* Smart-Filter Tag (clickable) */
+.tag.tag-clickable{cursor:pointer;transition:all .15s}
+.tag.tag-clickable:hover{transform:translateY(-1px);filter:brightness(1.3);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+
+/* Achievement Toast Animation */
+@keyframes achSlideIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
 /* Boss-Phase-Timeline (in Boss-Cards) */
 .bp-phase{display:flex;gap:8px;margin-top:11px;padding:10px 11px;background:rgba(0,0,0,.25);border:1px solid var(--bdr);border-radius:7px}
 .bp-phase-col{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;padding:0 4px}
@@ -977,6 +1058,28 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
 <!-- Tooltip Floater -->
 <div id="tt-float" role="tooltip" aria-hidden="true"></div>
+
+<!-- Boss Compare Modal -->
+<div id="cmp-modal" onclick="if(event.target===this)closeCompare()" role="dialog" aria-modal="true" aria-labelledby="cmp-title">
+  <div class="cmp-box">
+    <div class="cmp-header">
+      <div class="cmp-title" id="cmp-title">⚔️ Boss-Vergleich</div>
+      <button class="cmp-close" onclick="closeCompare()" aria-label="Schliessen">✕ Schliessen</button>
+    </div>
+    <div class="cmp-body">
+      <div class="cmp-grid">
+        <div class="cmp-col" id="cmp-col-a">
+          <div class="cmp-pick"><select id="cmp-sel-a" onchange="renderCompare()" aria-label="Boss A"></select></div>
+          <div id="cmp-detail-a"></div>
+        </div>
+        <div class="cmp-col" id="cmp-col-b">
+          <div class="cmp-pick"><select id="cmp-sel-b" onchange="renderCompare()" aria-label="Boss B"></select></div>
+          <div id="cmp-detail-b"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="app">
 <nav id="sidebar">
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.07</div></div>
@@ -1000,6 +1103,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="chapters" onclick="showSec('chapters')"><span class="nicon">📖</span><span class="nlabel">Kapitel-Guide</span></div>
     <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
     <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
+    <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
   </div>
   <div id="visitor-bar">
     <div class="vis-row"><span class="vis-lbl"><span class="vis-dot"></span>Online</span><span class="vis-val" id="sv-online">—</span></div>
@@ -1059,11 +1163,13 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <div class="stat-block"><div class="stat-label">Greymane</div><div class="stat-val" id="ss-gm">0</div><div class="stat-sub">von 27</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-gm-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">Sanctums</div><div class="stat-val" id="ss-sanc">0</div><div class="stat-sub">von 15</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-sanc-bar" style="width:0%"></div></div></div>
     </div>
+    <div class="region-heatmap" id="region-heatmap" aria-label="Boss-Verteilung pro Region"></div>
     <div class="fbar">
       <select class="fs" id="bf-reg" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>The Abyss</option><option>Endgame</option></select>
       <select class="fs" id="bf-type" onchange="renderBosses()"><option value="">Story + Side + Faction</option><option value="Story">Story</option><option value="Side">Side</option><option value="Faction">Faction</option><option value="Sanctum">Sanctum</option></select>
       <select class="fs" id="bf-pd" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option><option value="NIE">NIE Parry</option><option value="KEIN">KEIN Parry/Block</option></select>
       <button class="rb-trigger" onclick="randomBoss()" title="Zufälligen Boss anzeigen (R)" aria-label="Random Boss">🎲 Random Boss</button>
+      <button class="cmp-trigger" onclick="openCompare()" title="Zwei Bosse vergleichen" aria-label="Bosse vergleichen">⚔️ Compare</button>
     </div>
     <div class="grid" id="boss-grid"></div>
   </section>
@@ -1236,12 +1342,14 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <div class="tab" id="skt-oongka" onclick="skTab('oongka')">Oongka</div>
       <div class="tab" id="skt-watch" onclick="skTab('watch')">Watch &amp; Learn</div>
       <div class="tab" id="skt-unlock" onclick="skTab('unlock')">Freischalt-Details</div>
+      <div class="tab" id="skt-graph" onclick="skTab('graph')">🌳 Tree-Graph</div>
     </div>
     <div class="pane active" id="skp-kliff"></div>
     <div class="pane" id="skp-damiane"></div>
     <div class="pane" id="skp-oongka"></div>
     <div class="pane" id="skp-watch"></div>
     <div class="pane" id="skp-unlock"></div>
+    <div class="pane" id="skp-graph"><div class="skill-graph-wrap" id="skill-graph-wrap"></div></div>
   </section>
 
   <section class="sec" id="sec-checklists">
@@ -1373,6 +1481,13 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="sec-t">📋 Patch-Notes</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.07.00</span> (15.05.2026).</div>
     <div id="patch-list"></div>
+  </section>
+
+  <section class="sec" id="sec-achievements">
+    <div class="sec-t">🏆 Wiki-Achievements</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Gamification deines Wiki-Fortschritts. Achievements werden automatisch bei Aktionen entsperrt (Boss markieren, Notiz schreiben, Theme wechseln, etc.). Alle Daten bleiben lokal.</div>
+    <div class="ach-overview-bar" id="ach-overview"></div>
+    <div class="ach-grid" id="ach-grid"></div>
   </section>
 </div>
 </div>
@@ -4149,6 +4264,332 @@ function renderQuestTimeline(){
   </div>`;
 }
 
+// ===== SMART FILTER (Tag-Click) =====
+function applyBossFilter(kind,val){
+  const sec=document.getElementById('sec-bosses');
+  if(!sec)return;
+  if(kind==='region'){
+    const s=document.getElementById('bf-reg');
+    if(s){s.value=val;}
+  } else if(kind==='quest'){
+    // Map quest-type to bf-type
+    const t=document.getElementById('bf-type');
+    if(t){
+      if(/Story/.test(val))t.value='Story';
+      else if(/Side/.test(val))t.value='Side';
+      else if(/Faction/.test(val))t.value='Faction';
+      else if(/Sanctum/.test(val))t.value='Sanctum';
+      else t.value='';
+    }
+  } else if(kind==='chapter'){
+    // No direct chapter-filter — use search instead
+    const si=document.getElementById('si');
+    if(si){si.value=val;doSearch(val);}
+    return;
+  }
+  if(typeof renderBosses==='function')renderBosses();
+  if(typeof renderRegionHeatmap==='function')renderRegionHeatmap();
+  if(typeof refreshSectionStats==='function')refreshSectionStats();
+}
+
+// ===== REGION HEATMAP =====
+function renderRegionHeatmap(){
+  const el=document.getElementById('region-heatmap');
+  if(!el||typeof BOSSES==='undefined')return;
+  const REGIONS=['Hernand','Pailune','Demeniss','Delesyia','The Abyss','Endgame'];
+  const REGION_COLORS={
+    'Hernand':'linear-gradient(180deg,#c0311f 0%,#7e1f12 100%)',
+    'Pailune':'linear-gradient(180deg,#3a7ec8 0%,#1c3a64 100%)',
+    'Demeniss':'linear-gradient(180deg,#4ea83a 0%,#28591c 100%)',
+    'Delesyia':'linear-gradient(180deg,#cc9f28 0%,#7e6418 100%)',
+    'The Abyss':'linear-gradient(180deg,#9430c5 0%,#52166f 100%)',
+    'Endgame':'linear-gradient(180deg,#c81842 0%,#700d24 100%)'
+  };
+  const filterReg=document.getElementById('bf-reg')?document.getElementById('bf-reg').value:'';
+  const done=loadBossDone();
+  const counts={};
+  const doneCounts={};
+  REGIONS.forEach(r=>{counts[r]=0;doneCounts[r]=0;});
+  BOSSES.forEach(b=>{
+    const r=REGIONS.find(reg=>b.region.includes(reg));
+    if(r){counts[r]++;if(done.includes(b.name))doneCounts[r]++;}
+  });
+  const max=Math.max(...Object.values(counts),1);
+  el.innerHTML=REGIONS.map(r=>{
+    const cnt=counts[r];
+    const dn=doneCounts[r];
+    const h=Math.round(cnt/max*32)+6;
+    const dim=filterReg&&filterReg!==r?'dim':'';
+    return `<div class="rh-bar" data-tip="${dn} von ${cnt} besiegt" data-tip-title="${r}" onclick="(function(){const s=document.getElementById('bf-reg');s.value='${r}';renderBosses();renderRegionHeatmap();window.scrollTo({top:0,behavior:'smooth'});})()">
+      <div class="rh-bar-fill ${dim}" style="height:${h}px;background:${REGION_COLORS[r]||'inherit'}">
+        <div class="rh-bar-val">${cnt}</div>
+      </div>
+      <div class="rh-bar-lbl">${r}</div>
+    </div>`;
+  }).join('');
+}
+
+// ===== BOSS COMPARE =====
+let _cmpState={a:null,b:null};
+function openCompare(){
+  if(typeof BOSSES==='undefined')return;
+  const sa=document.getElementById('cmp-sel-a');
+  const sb=document.getElementById('cmp-sel-b');
+  const opts=BOSSES.map(b=>`<option value="${b.name.replace(/"/g,'&quot;')}">${b.name}</option>`).join('');
+  sa.innerHTML='<option value="">— Boss A wählen —</option>'+opts;
+  sb.innerHTML='<option value="">— Boss B wählen —</option>'+opts;
+  if(_cmpState.a){sa.value=_cmpState.a;}else{sa.value=BOSSES[0]?.name||'';_cmpState.a=sa.value;}
+  if(_cmpState.b){sb.value=_cmpState.b;}else{sb.value=BOSSES[1]?.name||'';_cmpState.b=sb.value;}
+  renderCompare();
+  document.getElementById('cmp-modal').classList.add('show');
+}
+function closeCompare(){
+  document.getElementById('cmp-modal').classList.remove('show');
+}
+function _cmpDetail(b){
+  if(!b)return '<div style="text-align:center;color:var(--dim);padding:30px 0;font-size:12px">Boss auswählen…</div>';
+  const esc=s=>String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  const img=BOSS_IMGS[b.name];
+  const chap=b.chapter?'Kap. '+b.chapter:'Side/Faction';
+  return `${img?`<img class="cmp-img" src="${img}" alt="${esc(b.name)}" loading="lazy">`:''}
+    <div class="cmp-name">${esc(b.name)}</div>
+    <div class="cmp-meta">
+      <span class="tag tr">${chap}</span>
+      <span class="tag tg">${esc(b.region.split(' ')[0])}</span>
+      <span class="tag tx">${esc(b.quest)}</span>
+    </div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Region</span><span class="cmp-row-val">${esc(b.region)}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Quest</span><span class="cmp-row-val">${esc(b.quest)}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Waffe-Drop</span><span class="cmp-row-val">${b.drop_weapon&&b.drop_weapon!=='–'?esc(b.drop_weapon):'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Abyss Core</span><span class="cmp-row-val">${b.drop_abyss_gear&&b.drop_abyss_gear!=='–'?esc(b.drop_abyss_gear):'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Schwäche</span><span class="cmp-row-val" style="color:var(--warn)">${b.weakness&&b.weakness!=='–'?esc(b.weakness):'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Parry/Dodge</span><span class="cmp-row-val">${esc(b.parry_or_dodge)}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Strategie</span><span class="cmp-row-val" style="font-size:10.5px;line-height:1.45;color:#c4bcb4">${esc(b.strategy)}</span></div>`;
+}
+function renderCompare(){
+  const sa=document.getElementById('cmp-sel-a');
+  const sb=document.getElementById('cmp-sel-b');
+  _cmpState.a=sa.value;
+  _cmpState.b=sb.value;
+  const bA=BOSSES.find(x=>x.name===sa.value);
+  const bB=BOSSES.find(x=>x.name===sb.value);
+  document.getElementById('cmp-detail-a').innerHTML=_cmpDetail(bA);
+  document.getElementById('cmp-detail-b').innerHTML=_cmpDetail(bB);
+}
+
+// ===== ACHIEVEMENTS =====
+const ACHIEVEMENTS=[
+  {id:'first-blood',ico:'🩸',name:'First Blood',desc:'Markiere deinen ersten Boss als besiegt',check:()=>loadBossDone().length>=1},
+  {id:'collector',ico:'📜',name:'Sammler',desc:'5 Bosse besiegt',check:()=>loadBossDone().length>=5,prog:()=>Math.min(loadBossDone().length/5,1)},
+  {id:'half-way',ico:'⚔️',name:'Halbzeit',desc:'Die Hälfte aller Bosse besiegt',check:()=>loadBossDone().length>=Math.ceil(BOSSES.length/2),prog:()=>Math.min(loadBossDone().length/(BOSSES.length/2),1)},
+  {id:'completionist',ico:'👑',name:'Completionist',desc:'Alle Bosse besiegt',check:()=>loadBossDone().length>=BOSSES.length,prog:()=>Math.min(loadBossDone().length/BOSSES.length,1)},
+  {id:'hernand-master',ico:'🏰',name:'Herr von Hernand',desc:'Alle Bosse in Hernand besiegt',check:()=>{const reg=BOSSES.filter(b=>b.region.includes('Hernand'));return reg.length>0&&reg.every(b=>loadBossDone().includes(b.name));}},
+  {id:'pailune-master',ico:'🗻',name:'Pailune Veteran',desc:'Alle Pailune-Bosse besiegt',check:()=>{const reg=BOSSES.filter(b=>b.region.includes('Pailune'));return reg.length>0&&reg.every(b=>loadBossDone().includes(b.name));}},
+  {id:'abyss-walker',ico:'🌑',name:'Abyss-Walker',desc:'Alle Abyss-Bosse besiegt',check:()=>{const reg=BOSSES.filter(b=>b.region.includes('Abyss'));return reg.length>0&&reg.every(b=>loadBossDone().includes(b.name));}},
+  {id:'note-writer',ico:'📝',name:'Strategist',desc:'Schreibe 5 eigene Boss-Notizen',check:()=>Object.keys(loadBossNotes()).length>=5,prog:()=>Math.min(Object.keys(loadBossNotes()).length/5,1)},
+  {id:'note-master',ico:'📚',name:'Bibliothekar',desc:'Schreibe 15 eigene Boss-Notizen',check:()=>Object.keys(loadBossNotes()).length>=15,prog:()=>Math.min(Object.keys(loadBossNotes()).length/15,1)},
+  {id:'greymane-done',ico:'🐺',name:'Grey Wolf',desc:'Alle 27 Greymane-Commissions abgeschlossen',check:()=>{const gm=JSON.parse(localStorage.getItem('cd_gm')||'[]');return gm.length>=27;},prog:()=>{const gm=JSON.parse(localStorage.getItem('cd_gm')||'[]');return Math.min(gm.length/27,1);}},
+  {id:'sanc-master',ico:'🏛️',name:'Sanctum-Pilger',desc:'Alle 15 Sanctums abgeschlossen',check:()=>{if(typeof SANCTUM_IDS==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return SANCTUM_IDS.every(s=>te.includes(s));},prog:()=>{if(typeof SANCTUM_IDS==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(SANCTUM_IDS.filter(s=>te.includes(s)).length/15,1);}},
+  {id:'true-ending',ico:'⭐',name:'True Ending Hunter',desc:'Alle True-Ending-Pflichten abgehakt',check:()=>{if(typeof TRUE_ENDING==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return TRUE_ENDING.length>0&&TRUE_ENDING.every(t=>te.includes(t.id));},prog:()=>{if(typeof TRUE_ENDING==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(te.length/TRUE_ENDING.length,1);}},
+  {id:'chapter-done',ico:'📖',name:'Storyteller',desc:'Alle 12 Kapitel abgeschlossen',check:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return d.length>=12;},prog:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return Math.min(d.length/12,1);}},
+  {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return seen.length>=3;},prog:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return Math.min(seen.length/3,1);}}
+];
+function loadAchUnlocked(){return JSON.parse(localStorage.getItem('cd_ach_unlocked')||'[]');}
+function checkAchievements(silent){
+  const prev=loadAchUnlocked();
+  const next=[...prev];
+  let newly=[];
+  ACHIEVEMENTS.forEach(a=>{
+    try{
+      if(a.check()&&!next.includes(a.id)){next.push(a.id);newly.push(a);}
+    }catch(e){/* skip */}
+  });
+  if(next.length!==prev.length){
+    localStorage.setItem('cd_ach_unlocked',JSON.stringify(next));
+    if(!silent)newly.forEach(showAchToast);
+  }
+  return next;
+}
+function showAchToast(a){
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:900;background:linear-gradient(135deg,rgba(20,15,8,.98) 0%,rgba(36,28,12,.98) 100%);border:1px solid var(--gold);border-radius:10px;padding:13px 18px 13px 14px;display:flex;gap:11px;align-items:center;box-shadow:0 12px 40px rgba(0,0,0,.85),0 0 24px rgba(201,162,39,.22);min-width:260px;animation:achSlideIn .4s cubic-bezier(.2,0,.1,1)';
+  t.innerHTML=`<div style="font-size:26px">${a.ico}</div>
+    <div>
+      <div style="font-family:'Cinzel',serif;font-size:9.5px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase">Achievement entsperrt</div>
+      <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--glo);margin-top:1px">${a.name}</div>
+      <div style="font-size:11px;color:#beb5a8;margin-top:1px">${a.desc}</div>
+    </div>`;
+  document.body.appendChild(t);
+  setTimeout(()=>{
+    t.style.transition='opacity .35s ease, transform .35s ease';
+    t.style.opacity='0';
+    t.style.transform='translateX(-50%) translateY(8px)';
+    setTimeout(()=>t.remove(),400);
+  },4200);
+}
+function renderAchievements(){
+  const el=document.getElementById('ach-grid');
+  if(!el)return;
+  const unlocked=checkAchievements(true);
+  const total=ACHIEVEMENTS.length;
+  const done=unlocked.length;
+  const pct=Math.round(done/total*100);
+  const overview=document.getElementById('ach-overview');
+  if(overview){
+    overview.innerHTML=`
+      <div class="ach-ov-icon">🏆</div>
+      <div class="ach-ov-txt">
+        <div class="ach-ov-pct">${done}/${total} <span style="font-size:12px;color:var(--gold);font-weight:400">(${pct}%)</span></div>
+        <div class="ach-ov-lbl">Wiki-Achievements</div>
+      </div>
+    `;
+  }
+  el.innerHTML=ACHIEVEMENTS.map(a=>{
+    const isUnlocked=unlocked.includes(a.id);
+    let prog=isUnlocked?1:(a.prog?a.prog():0);
+    return `<div class="ach-card${isUnlocked?' unlocked':''}" data-s="${[a.name,a.desc].join(' ').toLowerCase()}">
+      <div class="ach-ico">${a.ico}</div>
+      <div class="ach-info">
+        <div class="ach-name">${a.name}</div>
+        <div class="ach-desc">${a.desc}</div>
+      </div>
+      <div class="ach-prog" style="width:${Math.round(prog*100)}%"></div>
+    </div>`;
+  }).join('');
+}
+
+// Theme-switching auch in cd_themes_seen tracken (für Achievement)
+const _origSetTheme = (typeof setTheme==='function')?setTheme:null;
+if(_origSetTheme){
+  window.setTheme=function(t){
+    _origSetTheme(t);
+    const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');
+    if(!seen.includes(t)){seen.push(t);localStorage.setItem('cd_themes_seen',JSON.stringify(seen));checkAchievements();}
+  };
+}
+
+// ===== SKILL-TREE-GRAPH =====
+let _skGraphActive='stamina';
+function _skGraphTreeData(which){
+  if(which==='stamina')return KLIFF_STAMINA;
+  if(which==='spirit')return KLIFF_SPIRIT;
+  return KLIFF_HEALTH;
+}
+function _skGraphLayout(tree){
+  // Heuristic layout: nodes grouped by "depth" based on prereq dependencies
+  // Layer 0: nodes with no prereq match in tree, or "Default"
+  // Layer N+1: nodes whose prereq mentions a layer-N node's name
+  const names=tree.map(s=>s.name);
+  const depth={};
+  const visited={};
+  function getDepth(node,visiting){
+    if(visited[node.name]!==undefined)return visited[node.name];
+    if(visiting&&visiting[node.name])return 0;
+    visiting=visiting||{};
+    visiting[node.name]=true;
+    if(!node.prereq||/Default|automatisch|Watch & Learn|Story|Geist-NPC|Boss|Trial|NPC|Quest|Kap|Abyss|Path of/i.test(node.prereq)){
+      visited[node.name]=0;
+      return 0;
+    }
+    // find dependencies in tree
+    let maxDep=-1;
+    names.forEach(n=>{
+      if(n===node.name)return;
+      if(node.prereq.includes(n)){
+        const other=tree.find(x=>x.name===n);
+        if(other){
+          const d=getDepth(other,visiting);
+          if(d>maxDep)maxDep=d;
+        }
+      }
+    });
+    const result=maxDep>=0?maxDep+1:0;
+    visited[node.name]=result;
+    return result;
+  }
+  tree.forEach(s=>{depth[s.name]=getDepth(s);});
+  const maxD=Math.max(...Object.values(depth),0);
+  // Group nodes by depth
+  const layers=[];
+  for(let i=0;i<=maxD;i++)layers.push([]);
+  tree.forEach(s=>layers[depth[s.name]].push(s));
+  return {depth,layers,maxDepth:maxD};
+}
+function renderSkillGraph(which){
+  if(which)_skGraphActive=which;
+  const cont=document.getElementById('skill-graph-wrap');
+  if(!cont)return;
+  const tree=_skGraphTreeData(_skGraphActive);
+  const layout=_skGraphLayout(tree);
+  const COL_W=160, ROW_H=58, PAD_X=40, PAD_Y=30, NODE_W=130, NODE_H=34;
+  const maxRows=Math.max(...layout.layers.map(l=>l.length),1);
+  const w=PAD_X*2+(layout.maxDepth+1)*COL_W;
+  const h=PAD_Y*2+maxRows*ROW_H;
+  // Position map
+  const pos={};
+  layout.layers.forEach((arr,layer)=>{
+    const rowOff=(maxRows-arr.length)/2;
+    arr.forEach((s,i)=>{
+      pos[s.name]={
+        x:PAD_X+layer*COL_W,
+        y:PAD_Y+(rowOff+i)*ROW_H,
+        layer,row:i
+      };
+    });
+  });
+  // Edges
+  const edges=[];
+  tree.forEach(s=>{
+    if(!s.prereq)return;
+    tree.forEach(other=>{
+      if(other.name===s.name)return;
+      if(s.prereq.includes(other.name)&&pos[other.name]&&pos[s.name]){
+        edges.push({from:other.name,to:s.name});
+      }
+    });
+  });
+  const have=loadBossDone(); // placeholder — could be skill-progress in future
+  const isMiss=s=>s.prereq&&(s.prereq.includes('MISSABLE')||s.prereq.includes('NICHT erlernbar'));
+
+  const tabs=[
+    {k:'stamina',l:'Stamina',c:'#c0311f'},
+    {k:'spirit',l:'Spirit',c:'#cc9f28'},
+    {k:'health',l:'Health/Elemente',c:'#9430c5'}
+  ];
+  cont.innerHTML=`
+    <div class="skill-graph-tabs">
+      ${tabs.map(t=>`<button class="skill-graph-tab${_skGraphActive===t.k?' active':''}" onclick="renderSkillGraph('${t.k}')">${t.l}</button>`).join('')}
+    </div>
+    <svg class="skill-graph-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Skill-Tree-Graph">
+      ${edges.map(e=>{
+        const a=pos[e.from],b=pos[e.to];
+        const x1=a.x+NODE_W, y1=a.y+NODE_H/2;
+        const x2=b.x, y2=b.y+NODE_H/2;
+        const mx=(x1+x2)/2;
+        return `<path class="skill-graph-edge" d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}"/>`;
+      }).join('')}
+      ${tree.map(s=>{
+        const p=pos[s.name];
+        const miss=isMiss(s);
+        const cls=`skill-graph-node${miss?' miss':''}`;
+        const safe=s.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+        const tipBody=`Voraussetzung: ${(s.prereq||'–').replace(/"/g,'&quot;')}<br>Kosten: ${(s.cost||'–').replace(/"/g,'&quot;')}<br>Effekt: ${(s.effect||'–').replace(/"/g,'&quot;')}`;
+        // Truncate name if too long
+        const label=s.name.length>18?s.name.slice(0,17)+'…':s.name;
+        return `<g class="${cls}" data-tip="${tipBody}" data-tip-title="${safe}" onclick="document.getElementById('si').value='${safe}';doSearch('${safe}')">
+          <rect x="${p.x}" y="${p.y}" width="${NODE_W}" height="${NODE_H}" rx="6" ry="6" fill="rgba(20,16,14,.78)" stroke="${miss?'var(--warn)':'rgba(201,162,39,.4)'}" stroke-width="1.5"/>
+          <text x="${p.x+NODE_W/2}" y="${p.y+NODE_H/2+4}">${label}</text>
+        </g>`;
+      }).join('')}
+    </svg>
+    <div class="skill-graph-legend">
+      <span><i></i> Skill verfügbar</span>
+      <span><i class="miss"></i> Missable / NICHT erlernbar</span>
+      <span>· Klick = Suche · Hover = Details</span>
+    </div>
+  `;
+}
+
 // ===== CUSTOM BOSS NOTES =====
 function loadBossNotes(){return JSON.parse(localStorage.getItem('cd_boss_notes')||'{}');}
 function saveBossNote(name,text){
@@ -4171,6 +4612,8 @@ function persistBossNote(name,el,btn){
   saveBossNote(name,el.value);
   if(btn)btn.classList.toggle('has-note',!!el.value.trim());
   if(typeof refreshSectionStats==='function')refreshSectionStats();
+  if(typeof checkAchievements==='function')checkAchievements();
+  if(typeof renderAchievements==='function')renderAchievements();
 }
 
 // ===== NAVIGATION =====
@@ -4383,6 +4826,9 @@ function toggleBossDone(name){
   renderBosses();
   renderBossChecklist();
   if(typeof refreshSectionStats==='function')refreshSectionStats();
+  if(typeof renderRegionHeatmap==='function')renderRegionHeatmap();
+  if(typeof checkAchievements==='function')checkAchievements();
+  if(typeof renderAchievements==='function')renderAchievements();
 }
 
 const BOSS_PH_PALETTES={
@@ -4426,7 +4872,11 @@ function renderBosses(){
         :bossPlaceholder(b)
       }
       <div class="ct">${b.name}</div>
-      <div class="cm"><span class="tag tr">${chap}</span><span class="tag tg">${b.region.split(' ')[0]}</span><span class="tag tx">${b.quest}</span></div>
+      <div class="cm">
+        <span class="tag tr tag-clickable" onclick="event.stopPropagation();applyBossFilter('chapter','${chap}')" title="Filter: ${chap}" data-tip="Klick filtert nach diesem Kapitel">${chap}</span>
+        <span class="tag tg tag-clickable" onclick="event.stopPropagation();applyBossFilter('region','${b.region.split(' ')[0]}')" title="Filter: ${b.region.split(' ')[0]}" data-tip="Klick filtert nach Region">${b.region.split(' ')[0]}</span>
+        <span class="tag tx tag-clickable" onclick="event.stopPropagation();applyBossFilter('quest','${b.quest.replace(/'/g,"\\'")}')" title="Filter: ${b.quest}" data-tip="Klick filtert nach Quest-Typ">${b.quest}</span>
+      </div>
       <div class="crows">
         ${b.drop_weapon!=='–'?`<div class="crow"><span class="cl">Waffe-Drop</span><span class="cv">${b.drop_weapon}</span></div>`:''}
         ${b.drop_abyss_gear!=='–'?`<div class="crow"><span class="cl">Abyss Core</span><span class="cv">${b.drop_abyss_gear}</span></div>`:''}
@@ -4819,10 +5269,13 @@ function renderUnlockTable(){
 }
 
 function skTab(id){
-  ['kliff','damiane','oongka','watch','unlock'].forEach(t=>{
-    document.getElementById('skt-'+t).classList.toggle('active',t===id);
-    document.getElementById('skp-'+t).classList.toggle('active',t===id);
+  ['kliff','damiane','oongka','watch','unlock','graph'].forEach(t=>{
+    const tab=document.getElementById('skt-'+t);
+    const pane=document.getElementById('skp-'+t);
+    if(tab)tab.classList.toggle('active',t===id);
+    if(pane)pane.classList.toggle('active',t===id);
   });
+  if(id==='graph'&&typeof renderSkillGraph==='function')renderSkillGraph();
 }
 function isMiss(s){return s.prereq&&(s.prereq.includes('MISSABLE')||s.prereq.includes('NICHT erlernbar'));}
 function skCard(s){
@@ -5749,6 +6202,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderChapters();
   renderPatches();
   renderQuestTimeline();
+  renderRegionHeatmap();
+  renderAchievements();
   refreshSectionStats();
   _initTooltips();
   renderBossChecklist();renderGreymane();renderSanctumChecklist();renderWeaponChecklist();
