@@ -4276,7 +4276,7 @@ const MISSABLE_ITEMS=[
   {id:'ms6',cat:'Quest',name:'Hexe Elowen — "The Missing Seal"',when:'Kap. 5 — vor Kap. 6 starten',tip:'Questlinie schaltet Tier-3 Core-Fusion + Kuku-Blueprint frei. Rechtzeitig beginnen.'},
   {id:'ms7',cat:'Quest',name:'Oongka permanent — Arm Wrestling',when:'Kap. 8 — Calphade Castle',tip:'"Strength Held in the Fingertips". Zeitfenster nur Kap. 8 — danach dauerhaft gesperrt.'},
   {id:'ms8',cat:'Quest',name:'Oongka permanent — Riverside',when:'Kap. 8 — S Pailune East Gate',tip:'"Words Left by the Riverside". Beide Oongka-Quests für True Ending Pflicht.'},
-  {id:'ms9',cat:'Quest',name:'Lyselia-Questlinie abschließen',when:'Vor Kap. 11',tip:'Sanctum of Revelation + Shadow-Infusion. Muss vor Ende von Kap. 10 gestartet und abgeschlossen sein.'},
+  {id:'ms9',cat:'Quest',name:'Lyselia-Questlinie abschließen',when:'Vor Kap. 11',tip:'Sanctum of Expiation → Atonement + Shadow-Infusion. Muss vor Ende von Kap. 10 gestartet und abgeschlossen sein.'},
   {id:'ms10',cat:'Mount',name:'Snowwhite Deer fangen',when:'Pailune — Silver Wolf Mountain',tip:'Tier flieht sofort. Aerial Force Palm + Sleep/Poison Arrows. Einziger Spawn — Camp-Rest bei Fehler.'},
   {id:'ms11',cat:'Mount',name:'Icicle Edge Alpine Ibex',when:'Quest "The Sport Hunter" — Wayward Woods',tip:'Boss Moren der Mistwood Huntmaster. 2 Phasen. Feuer bricht Mount-Bindung.'},
   {id:'ms12',cat:'Mount',name:'Rock Tusk Warthog',when:'Quest "Master of the Wetlands" — Bordig Ruins',tip:'Nur über Faction-Quest zugänglich. Ravok of the Savage Fangs, 2 Phasen.'},
@@ -4858,16 +4858,16 @@ const WITCHES=[
     name:"Hexe Lyselia",color:"#9a50d0",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_demeniss_witch.webp",
     location:"Verborgene Höhle, Serpent Marsh (zwischen Demeniss und Delesyia) — Verkleidung: haengt an eingestuertzter Bruecke (N Demeniss)",chapter:"Kap. 9+ verfügbar",
     services:["Core-Fusion Level 1–5","Demeniss-exklusive Crafting-Rezepte","Shadow-Element Infusion (Waffen)"],
-    quests:["Sanctumlinie: Devotion → Veneration → Oblation → Faith","Faith-Reward: Endgame Abyss-Core + Shadow Infusion freigeschaltet"],
-    sanctums:["Sanctum of Devotion","Sanctum of Veneration","Sanctum of Oblation","Sanctum of Faith"],
+    quests:["Sanctumlinie: Expiation → Atonement (Demeniss)","Atonement-Reward: Demeniss-Craft-Rezept + Shadow Infusion freigeschaltet"],
+    sanctums:["Sanctum of Expiation","Sanctum of Atonement"],
     tip:"Lyselias Questlinie vor dem Endgame abschließen. Ihr versteckter Höhlen-Eingang ist leicht zu uebersehen — erst die Verkleidung an der Bruecke ansprechen."
   },
   {
     name:"Hexe Areciel",color:"#c0392b",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_power_witch.webp",
     location:"Kliffhaus nahe World's Navel, Crimson Desert — sie wartet auf dem Dach; Verkleidung: Kind auf einem Hügel vor Tommaso",chapter:"Freigeschaltet nach: 1x Copper dem Kind bei Tommaso Bounty Board geben",
     services:["Core-Fusion Level 1–5","Crimson-Desert-exklusive Crafting-Rezepte","Stärke-Infusion (Waffen)"],
-    quests:["Sanctumlinie: Expiation → Renunciation → Revelation","Revelation-Reward: Endgame Abyss-Core + Shadow Infusion freigeschaltet"],
-    sanctums:["Sanctum of Expiation","Sanctum of Renunciation","Sanctum of Revelation"],
+    quests:["Sanctumlinie: Renunciation → Revelation","Revelation-Reward: Endgame Abyss-Core + Stärke-Infusion freigeschaltet"],
+    sanctums:["Sanctum of Renunciation","Sanctum of Revelation"],
     tip:"Hexe der Stärke. Freischaltung ist simpel — einfach 1 Kupfer an das Kind vor Tommaso geben, dann zum Kliffhaus bei World's Navel. Sie sitzt auf dem Dach, nicht drinnen. Pflicht für Crimson Desert Region Endgame-Content."
   }
 ];
@@ -4931,9 +4931,9 @@ const SANCTUM_GUIDE=[
   {name:"Sanctum of Mortification",region:"Demeniss — Story Kap. 9",req:"Story-Quest: Black Witch",reward:"Kap. 9 Progression + Story-Item",boss:"–",tip:"Story-kritisch. Automatisch abgeschlossen."},
   {name:"Sanctum of Expiation",region:"Demeniss",req:"Hexe Lyselia treffen (Kap. 9+)",reward:"Contribution +80, Lyselia Questlinie #1",boss:"–",tip:"Lyselia-Questlinie erst ab Kap. 9 möglich."},
   {name:"Sanctum of Atonement",region:"Demeniss",req:"Sanctum of Expiation abgeschlossen",reward:"Contribution +90 + Demeniss-Craft-Rezept",boss:"–",tip:"Lyselia-Questlinie #2."},
-  {name:"Sanctum of Renunciation",region:"Demeniss",req:"Sanctum of Atonement + Areciel-Quest",reward:"Contribution +100 + Revelation-Zugang",boss:"–",tip:"Areciel-Questlinie — Lyselia-Verbindung."},
+  {name:"Sanctum of Renunciation",region:"Demeniss",req:"Hexe Areciel freischalten (1 Copper an Kind bei Tommaso)",reward:"Contribution +100 + Revelation-Zugang",boss:"–",tip:"Areciel-Questlinie #1 — erste Sanctum-Stufe ihrer Linie."},
   {name:"Sanctum of Devotion",region:"Delesyia",req:"Delesyia-Zugang + Bari Questlinie",reward:"Blueprint: Kuku Ice-Resistant Armor (FULL Ice Immunity)",boss:"–",tip:"Zweites Kuku-Blueprint-Sanctum — notfalls als Backup wenn Exaltation verpasst."},
-  {name:"Sanctum of Revelation",region:"Delesyia",req:"Sanctum of Renunciation + Lyselia Questlinie #3",reward:"Endgame Abyss-Core + Shadow-Infusion freigeschaltet",boss:"–",tip:"Lohnenswertes Spätspiel-Ziel. Revelation gibt einen der Top-3 Endgame Cores."},
+  {name:"Sanctum of Revelation",region:"Delesyia",req:"Sanctum of Renunciation abgeschlossen",reward:"Endgame Abyss-Core + Stärke-Infusion freigeschaltet",boss:"–",tip:"Lohnenswertes Spätspiel-Ziel. Areciel-Questlinie #2 — gibt einen der Top-3 Endgame Cores."},
   {name:"Sanctum of Liberate",region:"The Abyss",req:"The Abyss betreten (Kap. 10+)",reward:"Endgame-Rüstung Fragment + Contribution +120",boss:"–",tip:"Ab hier nur noch Endgame-Drops."},
   {name:"Sanctum of Mortification 2",region:"The Abyss",req:"Sanctum of Liberate + alle regionalen Sanctums",reward:"True Ending Fortschritt + Max Contribution",boss:"–",tip:"Letztes Sanctum — gibt True-Ending-Punkt."},
 ];
