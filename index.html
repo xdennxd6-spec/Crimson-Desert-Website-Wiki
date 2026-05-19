@@ -760,7 +760,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 </div>
 <div id="app">
 <nav id="sidebar">
-  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.06</div></div>
+  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.07</div></div>
   <div class="sb-nav">
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
     <div class="ni" data-sec="items" onclick="showSec('items')"><span class="nicon">🔮</span><span class="nlabel">Items</span></div>
@@ -822,7 +822,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
   <section class="sec active" id="sec-bosses">
     <div class="sec-t">🗡️ Bosse</div>
     <div class="stats-strip">
-      <div class="stat-block"><div class="stat-label">Bosse Besiegt</div><div class="stat-val" id="ss-bosses">0</div><div class="stat-sub" id="ss-bosses-sub">von 21</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-bosses-bar" style="width:0%"></div></div></div>
+      <div class="stat-block"><div class="stat-label">Bosse Besiegt</div><div class="stat-val" id="ss-bosses">0</div><div class="stat-sub" id="ss-bosses-sub">von 31</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-bosses-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">True Ending</div><div class="stat-val" id="ss-te">0</div><div class="stat-sub">von 28</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-te-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">Greymane</div><div class="stat-val" id="ss-gm">0</div><div class="stat-sub">von 27</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-gm-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">Sanctums</div><div class="stat-val" id="ss-sanc">0</div><div class="stat-sub">von 15</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-sanc-bar" style="width:0%"></div></div></div>
@@ -1166,7 +1166,9 @@ const BOSSES=[
   {name:"Awakened Ludvig",chapter:6,region:"Pailune - Pailune Castle",quest:"Lonely Jackals (Phase 2)",drop_weapon:"Hungering Fang Leather Cloak",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge alles (unblockbar, kein Knockdown)",strategy:"Phase 2 nach dem normalen Ludvig-Kampf. Kann nicht gestaggert/knockt werden, bewegt sich extrem schnell, alle Hits unblockbar. Nur Dodge-Rolls + Recovery Items. Niederlage = gesamter Ludvig-Fight neu. Post-Fight: Ludvig fluechtet einarmig (One Armed Ludvig). Drops: Hungering Fang Leather Cloak + Boots."},
   {name:"Awakened Lucian Bastier",chapter:8,region:"Demeniss - Spire of Clockwork",quest:"A Fleeting Dream (Phase 2)",drop_weapon:"Official Knight's Plate Armor",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (Fiend Dash unblockbar)",strategy:"Phase 2 nach Lucian Bastier. Wechselt Shield+Morgenstern gegen riesige Armklinge. Fiend Dash = unblockbar, sofort kontern. Whirling Slash und Impale ausweichen. Force Palm 3-Combo fuelltStagger-Bar schnell. Feuer-DoT-Schaden ueber Zeit beachten. Drops: Ponytail Ticket + Official Knight Set + Eclipsed Solas Plate Gloves + Spire Key."},
   {name:"Marni's Clockwork Mantis",chapter:null,region:"Delesyia - Regent's Rise",quest:"Frozen Hearted Predator",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (Mantis Ray unblockbar)",strategy:"Mechanische fliegende Mantis. Begleitet von 3 Dragonfly Fighters — erst eliminieren! Block/Parry-Konter fuer normale Angriffe. Force Palm fuer Stagger-Bar. Mantis Ray (Feuer) = ausweichen, kein Block. Folgt nach Turbine-Kampf im Krall Foundry."},
-  {name:"Turbine",chapter:null,region:"Delesyia - Krall Foundry",quest:"Invaders from the East",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Mechanik-Boss (kein klassischer Kampf)",strategy:"180-Sekunden-Verteidigung: Generator schuetzen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen waehrend Flug. Danach: vollgeladene Kanone auf Turbines feuern. Fuehrt direkt zu Marni's Clockwork Mantis."}
+  {name:"Turbine",chapter:null,region:"Delesyia - Krall Foundry",quest:"Invaders from the East",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Mechanik-Boss (kein klassischer Kampf)",strategy:"180-Sekunden-Verteidigung: Generator schuetzen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen waehrend Flug. Danach: vollgeladene Kanone auf Turbines feuern. Fuehrt direkt zu Marni's Clockwork Mantis."},
+  {name:"Cassius Morten / Tenebrum",chapter:6,region:"Hernand",quest:"Story - Cracks in the Shield",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry Sword-Strings; Dodge Shadow-Surge",strategy:"Story-Boss Kap. 6. Zwei-Phasen-Fight: Cassius wechselt in Tenebrum-Form (Schatten-Avatar). Phase 1: humanoider Schwertkampf, Parry-Fenster nach 3er-Combo. Phase 2: Tenebrum spawnt Schatten-Klone, fokus auf Original (klare Outline). Force Palm 3-Chain für Stagger."},
+  {name:"Gabriel Caliburn",chapter:8,region:"Demeniss - Spire of Clockwork",quest:"Story - A Fleeting Dream (scripted Loss)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Scripted — kein klassischer Sieg",strategy:"SCRIPTED LOSS Kap. 8: Kliff verliert garantiert, egal wie gut man spielt. Cutscene-Übergang. Reale Rematch erst in Kap. 12 als Corrupted Caliburn. In 1.07 als Rematch-Boss bei Fort Musket via Laterne verfügbar."}
 ];
 
 const WEAPONS=[
@@ -2210,9 +2212,20 @@ const LOCATIONS=[
   {name:"Spire of Ringing Truth",region:"Pailune",type:"Boss / Skill",desc:"Priscus the Ancient. Danach: Path of Trials → Frost Mantle Skill."},
   {name:"The Laughing Marionette",region:"Delesyia",type:"Minigame [1.06]",desc:"Claw Machine: 1 Silver pro Versuch. Belohnungen: 12 Beleuchtungsitems, 1 Stuhl, 1 Spezial-Kopfbedeckung, Abyss Artifacts, Abyss Gears."},
   {name:"Smithy (Extraction)",region:"Alle Regionen",type:"Crafting [1.06]",desc:"Neues Extraction-System: Materialien aus verfeinerter Ausrüstung zurückgewinnen. Seltenere Materialien (Artifacts, Aeserion's Scale) zu 100% zurück, Basis-Materialien (Erz, Bloodstones) ~70%. Verfeinerungsstufe wird auf Basis zurückgesetzt, Item bleibt erhalten."},
-  {name:"Oongka — Unbewaffnete Skills",region:"Überall",type:"Feature [1.06]",desc:"Oongka hat neue Faustkampf-Skills. Im Skill-Menü 'Fists' auswählen. Damiane erhält unbewaffnete Skills in einem späteren Patch."},
+  {name:"Oongka — Unbewaffnete Skills",region:"Überall",type:"Feature [1.06]",desc:"Oongka hat Faustkampf-Skills. Im Skill-Menü 'Fists' auswählen. Damiane erhielt eigene Fists-Skills in Patch 1.07."},
   {name:"Weapon Sheaths",region:"Einstellungen",type:"Feature [1.06]",desc:"Schwertscheide am Charakter an/aus schaltbar: Einstellungen → 'Display Sheath' Option."},
-  {name:"Night Tone Mode",region:"Einstellungen",type:"Feature [1.06]",desc:"Neue Grafik-Option: Night Tone Mode dämpft Gesamtfarben und hellt Schattenbereiche auf. Deaktiviert = kräftigere, kontrastreichere Farben."}
+  {name:"Night Tone Mode",region:"Einstellungen",type:"Feature [1.06]",desc:"Neue Grafik-Option: Night Tone Mode dämpft Gesamtfarben und hellt Schattenbereiche auf. Deaktiviert = kräftigere, kontrastreichere Farben."},
+  {name:"Damiane — Unbewaffnete Skills",region:"Überall",type:"Feature [1.07]",desc:"Komplettes Fists-Skill-Set für Damiane als eigener Combat-Mode (Skill-Menü → Fists). Verbesserte Bewegungs-Animationen. Schliesst die Unarmed-Lücke nach Kliff (1.06) und Oongka (1.06)."},
+  {name:"Aerial Stab",region:"Skill-Tree",type:"Feature [1.07]",desc:"Neuer Luft-Mobility-Skill für Damiane + Oongka — Stoss-Angriff aus der Luft, vergleichbar mit Kliffs Air-Toolkit. Schliesst Aerial-Combat-Gap der beiden Companions."},
+  {name:"Oongka — Explosive Strike Charge",region:"Skill-Tree",type:"Feature [1.07]",desc:"Explosive Strike hat jetzt eine Charge-Phase (länger halten = mehr Damage + AoE). Dual-Wield Stab-Chain fliesst flüssiger."},
+  {name:"Kliff — Blinding Flash Finisher (unarmed)",region:"Skill-Tree",type:"Feature [1.07]",desc:"Blinding Flash Finisher kann jetzt ohne Waffe ausgeführt werden — vorher nur mit gezogenem Schwert. Setzt 1.06er 'Blinding Flash unarmed' konsequent fort."},
+  {name:"Rematch — Muskan",region:"Bonepit",type:"Boss-Rematch [1.07]",desc:"Abyss-Boss Muskan ist jetzt an der Land-Location Bonepit via Laterne rematchbar. Memory Fragment droppt am Original-Kampfort. Reminisce-/Resonate-Modi gelten."},
+  {name:"Rematch — Corrupted Caliburn",region:"Fort Musket",type:"Boss-Rematch [1.07]",desc:"Corrupted Caliburn (Kap. 12 Endboss-Phase) ist jetzt bei Fort Musket via Laterne rematchbar — kein 2. Spieldurchgang nötig."},
+  {name:"Rematch — Goyen",region:"Spire of the Sun",type:"Boss-Rematch [1.07]",desc:"Goyen-Rematch am Spire of the Sun via Laterne. Vorher nur einmaliger Story-Kill."},
+  {name:"Rematch — Draven the Crowcaller",region:"Church of West Demeniss",type:"Boss-Rematch [1.07]",desc:"Draven-Rematch in der Church of West Demeniss via Laterne. Originaler Drop-Loop wiederholbar (Tauria Curved Sword bleibt aber Unique-Drop)."},
+  {name:"Rematch — Clockwork White Horn",region:"Gate to Advancement",type:"Boss-Rematch [1.07]",desc:"Clockwork-Variante des White Horn am Gate to Advancement via Laterne. Mechanik-Variante des Original-Bosses."},
+  {name:"Mehr Wolf-/Bär-Mounts",region:"Wild",type:"Feature [1.07]",desc:"Zusätzliche Wolf- und Bär-Typen können jetzt als Mounts registriert werden. Auch Zügel-System auf mehr Mount-Typen ausgeweitet."},
+  {name:"AMD GPU Crash-Fix",region:"PC-Performance",type:"Fix [1.07]",desc:"Crash bei AMD-Treiber 26.5.1 behoben. Download: 381 MB (Steam), Console-Build 1.000.283."}
 ];
 
 const BELL_TOWERS=[
@@ -2256,7 +2269,7 @@ const KLIFF_STAMINA=[
   {name:"Stab Rend Armor",prereq:"Stab Lv 3",cost:"1 AA",effect:"Ignoriert Super Armor"},
   {name:"Swift Stab",prereq:"Stab Lv 2 oder Watch & Learn (Reed Devil)",cost:"0 oder 1 AA",effect:"Follow-up nach Charged Stab"},
   {name:"Blinding Flash",prereq:"Prolog Quest Unknown Space (automatisch)",cost:"0",effect:"Blendet Gegner. [Patch 1.06] Jetzt auch ohne Waffe ausführbar."},
-  {name:"Blinding Flash Finisher",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"Flurry of Strikes — bester Early-Game DPS-Skill"},
+  {name:"Blinding Flash Finisher",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"Flurry of Strikes — bester Early-Game DPS-Skill. [Patch 1.07] Auch unbewaffnet ausführbar."},
   {name:"Marksmanship",prereq:"Default",cost:"1 AA/Lv bis Lv 5",effect:"Basis-Fernkampf"},
   {name:"Charged Shot",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"Aufgeladener Schuss"},
   {name:"Multishot",prereq:"Watch & Learn: Fort Warspike Commander",cost:"0 oder 1 AA",effect:"10 Pfeile in Streuung"},
@@ -4207,7 +4220,7 @@ function renderSkills(){
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Rush · Frost Mantle · Lightning Strike · Storm Pillar</span></div>'+
     '</div></div>'+
     '<div class="sub-t">Einzigartige Skills</div><div class="sk-grid">'+
-    ['Shield Toss (bouncet 3-7x)','Shield Sentinel','Blade Sentinel','Flurry of Kicks','Scissor Kick','Tornado Kick','Spinning Scissors Throw','Quick Reload (NUR Watch & Learn)']
+    ['Shield Toss (bouncet 3-7x)','Shield Sentinel','Blade Sentinel','Flurry of Kicks','Scissor Kick','Tornado Kick','Spinning Scissors Throw','Quick Reload (NUR Watch & Learn)','Aerial Stab [1.07]','Fists / Unarmed Combat [1.07]']
     .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>';
 
   document.getElementById('skp-oongka').innerHTML=
@@ -4218,7 +4231,7 @@ function renderSkills(){
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse</span></div>'+
     '</div></div>'+
     '<div class="sub-t">Einzigartige Skills</div><div class="sk-grid">'+
-    ['Dual Wielding Mastery (Zweihänder einhändig)','Leaping Smash','Rampage','Raging Lightning','Quaking Fury','Quick Grab','Explosive Leap','Storm Howl']
+    ['Dual Wielding Mastery (Zweihänder einhändig)','Leaping Smash','Rampage','Raging Lightning','Quaking Fury','Quick Grab','Explosive Leap','Storm Howl','Aerial Stab [1.07]','Explosive Strike — Charge-Phase [1.07]','Dual-Wield Stab-Chain (verbessert) [1.07]']
     .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>'+
     '<div class="sub-t">Standard-Skills</div><div class="sk-grid">'+
     ['Pump Kick','Dropkick','Body Slam','Clothesline','Lariat','Rage (Super Armor State)','Scatter Shot','Blinding Flash','Focused Shot']
