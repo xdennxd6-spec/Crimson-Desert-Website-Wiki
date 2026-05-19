@@ -8,6 +8,12 @@
 <meta property="og:title" content="Crimson Desert — Guide Dashboard">
 <meta property="og:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="cd_assets/bosses/umbra-final.jpg">
+<meta property="og:image:alt" content="Crimson Desert — Umbra Boss">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Crimson Desert — Guide Dashboard">
+<meta name="twitter:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
+<meta name="twitter:image" content="cd_assets/bosses/umbra-final.jpg">
 <meta name="theme-color" content="#080808">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -386,6 +392,13 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 /* ── Keyboard hint ── */
 .kbd-hint{font-size:10px;color:var(--dim);background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:4px;padding:2px 7px;margin-left:6px;font-family:monospace}
 
+/* ── Skip-Link (Accessibility) ── */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:1000;padding:10px 18px;background:var(--gold);color:#000;font-weight:700;font-size:13px;border-radius:0 0 8px 0;text-decoration:none;font-family:'Inter',sans-serif}
+.skip-link:focus{left:0;outline:2px solid var(--rhi);outline-offset:2px}
+
+/* ── Search-Highlight ── */
+mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-radius:2px;font-weight:600}
+
 /* ── Mobile ── */
 #ham{display:none;position:fixed;top:12px;left:12px;z-index:300;width:38px;height:38px;background:rgba(12,10,10,.97);border:1px solid var(--bdr);border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;backdrop-filter:blur(8px)}
 #ham span{width:16px;height:1.5px;background:var(--text);border-radius:2px;transition:all .2s}
@@ -671,6 +684,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
 <button id="ham" onclick="toggleSidebar()" aria-label="Menü"><span></span><span></span><span></span></button>
 <div id="mob-overlay" onclick="toggleSidebar()"></div>
 <div id="toast">Kopiert!</div>
@@ -780,6 +794,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
     <div class="ni" data-sec="witches" onclick="showSec('witches')"><span class="nicon">🧙</span><span class="nlabel">Hexen Guide</span></div>
     <div class="ni" data-sec="chapters" onclick="showSec('chapters')"><span class="nicon">📖</span><span class="nlabel">Kapitel-Guide</span></div>
     <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
+    <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
   </div>
   <div id="visitor-bar">
     <div class="vis-row"><span class="vis-lbl"><span class="vis-dot"></span>Online</span><span class="vis-val" id="sv-online">—</span></div>
@@ -811,7 +826,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
     <button class="lf-submit" id="lf-submit" onclick="submitAuth()">Anmelden</button>
   </div>
 </div>
-<div id="main">
+<div id="main" role="main" tabindex="-1">
   <div id="credit-top">Design and Build by Christian Stein</div>
   <div id="sbar">
     <input id="si" type="text" placeholder="Alles durchsuchen — Bosse, Waffen, Quests, Locations..." oninput="doSearch(this.value)">
@@ -822,7 +837,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
   <section class="sec active" id="sec-bosses">
     <div class="sec-t">🗡️ Bosse</div>
     <div class="stats-strip">
-      <div class="stat-block"><div class="stat-label">Bosse Besiegt</div><div class="stat-val" id="ss-bosses">0</div><div class="stat-sub" id="ss-bosses-sub">von 31</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-bosses-bar" style="width:0%"></div></div></div>
+      <div class="stat-block"><div class="stat-label">Bosse Besiegt</div><div class="stat-val" id="ss-bosses">0</div><div class="stat-sub" id="ss-bosses-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-bosses-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">True Ending</div><div class="stat-val" id="ss-te">0</div><div class="stat-sub">von 28</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-te-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">Greymane</div><div class="stat-val" id="ss-gm">0</div><div class="stat-sub">von 27</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-gm-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">Sanctums</div><div class="stat-val" id="ss-sanc">0</div><div class="stat-sub">von 15</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-sanc-bar" style="width:0%"></div></div></div>
@@ -1133,6 +1148,12 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
     <div class="sec-t">📖 Kapitel-Guide</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Schritt-für-Schritt Übersicht aller 12 Kapitel mit Key-Items, Bossen und missable Content. Markiere Kapitel als abgeschlossen um deinen Fortschritt zu tracken.</div>
     <div style="display:flex;flex-direction:column;gap:12px" id="ch-timeline"></div>
+  </section>
+
+  <section class="sec" id="sec-patches">
+    <div class="sec-t">📋 Patch-Notes</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.07.00</span> (15.05.2026).</div>
+    <div id="patch-list"></div>
   </section>
 </div>
 </div>
@@ -1508,7 +1529,6 @@ const WEAPONS=[
   {name:"Varnian Contribution Banner Pike",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:null,source:""},
   {name:"Ordinary Gloves Fists",type:"Knuckles / Gauntlets",atk:null,crit:null,slots:null,source:""},
   {name:"Ordinary Gloves Fists Damiane",type:"Knuckles / Gauntlets",atk:null,crit:null,slots:null,source:""},
-  {name:"Ordinary Gloves Fists",type:"Knuckles / Gauntlets",atk:null,crit:null,slots:null,source:""},
   {name:"Muskan's Upper Body Clone Fists",type:"Knuckles / Gauntlets",atk:10,crit:null,slots:null,source:""},
   {name:"Muskan's Lower Body Clone Fists",type:"Knuckles / Gauntlets",atk:10,crit:null,slots:null,source:""},
   {name:"Timberham Axe",type:"Blunt/Axe",atk:30,crit:null,slots:null,source:""},
@@ -1579,7 +1599,6 @@ const WEAPONS=[
   {name:"Small Heavy Silence Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:null,source:""},
   {name:"Small Wells Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
   {name:"Small Hellhounds Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:null,source:""},
-  {name:"Small Black Bears Banner Pike",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:null,source:""},
   {name:"Small Staglord Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
   {name:"Small Vellua Pirates Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:null,source:""},
   {name:"Small Musket of Demeniss Banner Pike",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:null,source:""},
@@ -1593,8 +1612,6 @@ const WEAPONS=[
   {name:"Medium Staglord Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
   {name:"Medium Delesyian Banner Pike",type:"Halberd / Spear (2H)",atk:27,crit:null,slots:null,source:""},
   {name:"Medium Demenissian Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
-  {name:"Medium Demenissian Noble's Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
-  {name:"Medium Demenissian Noble's Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
   {name:"Medium Demenissian Noble's Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
   {name:"Medium Dewhaven Banner Pike",type:"Halberd / Spear (2H)",atk:27,crit:null,slots:null,source:""},
   {name:"Medium Dusksongs Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:""},
@@ -2335,37 +2352,39 @@ const WATCH_AND_LEARN=[
   {skill:"Swift Stab",loc:"Reed Devil Boss (Kap. 3)",miss:false}
 ];
 
+// Lokale Boss-Bilder (cd_assets/bosses/) — schneller, kein 404-Risiko bei externen Quellen
 const BOSS_IMGS={
-  "Matthias":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/bd/Matthias-boss1-crimson-desert-wiki-guide-300px.png",
-  "Kailok the Hornsplitter":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/9c/Kailok-the-hornsplitter-boss-crimson-desert-wiki-guide-300px.png",
-  "Marni's Excavatron":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/36/Marnis-excavatron-boss-crimson-desert-wiki-guide-300px.png",
-  "Reed Devil":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c7/Reed-devil-boss1-crimson-desert-wiki-guide-300px.png",
-  "Kearush the Slayer":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/93/Kearush-the-slayer-boss1-crimson-desert-wiki-guide-300px.png",
-  "Draven the Crowcaller":"https://static0.fextralifeimages.com/file/crimsondesertgame/d/df/Draven-the-crowcaller-boss1-crimson-desert-wiki-guide-300px.png",
-  "Myurdin (Phase 1)":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/21/Myurdin-boss1-crimson-desert-wiki-guide-300px.png",
-  "Lava Myurdin (Phase 2)":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/71/Lava-myurdin-boss1-crimson-desert-wiki-guide-300px.png",
-  "Cassius Morten / Tenebrum":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/f3/Tenebrum-boss1-crimson-desert-wiki-guide-300px.png",
-  "Corrupted Caliburn":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b2/Gabriel-caliburn-image-1-bosses-wiki-guide-300px.png",
-  "One-Armed Ludvig":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/79/One-armed-ludvig-boss1-crimson-desert-wiki-guide-300px.png",
-  "Lucian Bastier":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6e/Lucian-bastier-image-2-bosses-wiki-guide-300px.png",
-  "Saigord the Staglord":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6b/Staglord-image-1-bosses-wiki-guide-300px.png",
-  "Hexe Marie":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b5/Hexe-marie-image-2-bosses-wiki-guide-300px.png",
-  "Golden Star":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c4/Golden-star-image-1-bosses-wiki-guide-300px.png",
-  "Beloth the Darksworn":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/83/Beloth-the-darksworn-image-1-bosses-wiki-guide-300px.png",
-  "White Horn":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8d/White-horn-image-1-bosses-wiki-guide-300px.png",
-  "Umbra (Final)":"https://static0.gamerantimages.com/wordpress/wp-content/uploads/wm/2026/04/how-to-beat-umbra-in-crimson-desert.jpg",
-  "Black Fang":"https://static0.gamerantimages.com/wordpress/wp-content/uploads/wm/2026/03/how-to-beat-black-fang-the-legendary-wolf-in-crimson-desert.jpg",
-  "Avatar of Umbra":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_myurdinumbra.webp",
-  "Priscus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp",
-  "Antumbra's Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/3f/Antumbras-sword-boss1-crimson-desert-wiki-guide-300px.png",
-  "Gregor the Halberd of Carnage":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/71/Gregor-the-halberd-of-carnage-boss1-crimson-desert-wiki-guide-300px.png",
-  "Walter Lanford":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/26/Walter-lanford-image-2-bosses-wiki-guide-300px.png",
-  "Master Du":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/2a/Master-du-image-1-bosses-wiki-guide-300px.png",
-  "Fortain the Cursed Knight":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/60/Fortain-image-3-bosses-wiki-guide-300px.png",
-  "Awakened Ludvig":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/a9/Awakened-ludvig-boss1-crimson-desert-wiki-guide-300px.png",
-  "Awakened Lucian Bastier":"https://static0.fextralifeimages.com/file/crimsondesertgame/0/04/Awakened-lucian-bastier-image-1-bosses-wiki-guide-300px.png",
-  "Marni's Clockwork Mantis":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c2/Marnis-clockwork-mantis-image-1-bosses-wiki-guide-300px.png",
-  "Turbine":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/fb/Turbine-image-1-bosses-wiki-guide-300px.png"
+  "Matthias":"cd_assets/bosses/matthias.png",
+  "Kailok the Hornsplitter":"cd_assets/bosses/kailok.png",
+  "Marni's Excavatron":"cd_assets/bosses/excavatron.png",
+  "Reed Devil":"cd_assets/bosses/reed_devil.png",
+  "Kearush the Slayer":"cd_assets/bosses/kearush.png",
+  "Draven the Crowcaller":"cd_assets/bosses/draven.png",
+  "Myurdin (Phase 1)":"cd_assets/bosses/myurdin.png",
+  "Lava Myurdin (Phase 2)":"cd_assets/bosses/lava_myurdin.png",
+  "Cassius Morten / Tenebrum":"cd_assets/bosses/cassius.png",
+  "Corrupted Caliburn":"cd_assets/bosses/gabriel.png",
+  "Gabriel Caliburn":"cd_assets/bosses/gabriel.png",
+  "One-Armed Ludvig":"cd_assets/bosses/ludvig.png",
+  "Lucian Bastier":"cd_assets/bosses/lucian.png",
+  "Saigord the Staglord":"cd_assets/bosses/saigord.png",
+  "Hexe Marie":"cd_assets/bosses/hexe_marie.png",
+  "Golden Star":"cd_assets/bosses/golden_star.png",
+  "Beloth the Darksworn":"cd_assets/bosses/beloth.png",
+  "White Horn":"cd_assets/bosses/white_horn.png",
+  "Umbra (Final)":"cd_assets/bosses/umbra-final.jpg",
+  "Black Fang":"cd_assets/bosses/black_fang.png",
+  "Avatar of Umbra":"cd_assets/bosses/avatar_umbra.png",
+  "Priscus the Ancient":"cd_assets/bosses/priscus.png",
+  "Antumbra's Sword":"cd_assets/bosses/antumbra_sword.png",
+  "Gregor the Halberd of Carnage":"cd_assets/bosses/gregor.png",
+  "Walter Lanford":"cd_assets/bosses/walter_lanford.png",
+  "Master Du":"cd_assets/bosses/master_du.png",
+  "Fortain the Cursed Knight":"cd_assets/bosses/fortain.png",
+  "Awakened Ludvig":"cd_assets/bosses/awakened_ludvig.png",
+  "Awakened Lucian Bastier":"cd_assets/bosses/awakened_lucian.png",
+  "Marni's Clockwork Mantis":"cd_assets/bosses/clockwork_mantis.png",
+  "Turbine":"cd_assets/bosses/turbine.png"
 };
 const SKILL_IMGS={
   "Blinding Flash":              "cd_assets/skills/blinding_flash.png",
@@ -2385,7 +2404,9 @@ const SKILL_IMGS={
   "Nature's Snare":              "cd_assets/skills/natures_snare.png",
   "Nature's Echo":               "cd_assets/skills/natures_echo.png",
   "Diving Force Palm":           "cd_assets/skills/diving_force_palm.png",
-  "Quick Swap":                  "cd_assets/skills/quick_swap.png"
+  "Quick Swap":                  "cd_assets/skills/quick_swap.png",
+  "Aerial Stab":                 "cd_assets/skills/aerial_stab.png",
+  "Aerial Stab [1.07]":          "cd_assets/skills/aerial_stab.png"
 };
 
 const WEAPON_IMGS={
@@ -2697,7 +2718,6 @@ const WEAPON_IMGS={
   "Varnian Contribution Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/51/Varnian_contribution_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Ordinary Gloves Fists":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/1b/Ordinary_gloves_fists_weapons_crimson_desert_wiki_guide_150px.png",
   "Ordinary Gloves Fists Damiane":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/16/Ordinary_gloves_fists_damiane_weapons_crimson_desert_wiki_guide_150px.png",
-  "Ordinary Gloves Fists":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/1b/Ordinary_gloves_fists_weapons_crimson_desert_wiki_guide_150px.png",
   "Muskan's Upper Body Clone Fists":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/62/Muskans_upper_body_clone_fists_weapons_crimson_desert_wiki_guide_150px.png",
   "Muskan's Lower Body Clone Fists":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/cb/Muskans_lower_body_clone_fists_weapons_crimson_desert_wiki_guide_150px.png",
   "Timberham Axe":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8a/Timberham_axe_weapons_crimson_desert_wiki_guide_150px.png",
@@ -2789,8 +2809,6 @@ const WEAPON_IMGS={
   "Medium Delesyian Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/33/Medium_delesyian_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Medium Demenissian Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b2/Medium_demenissian_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Medium Demenissian Noble's Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8d/Medium_demenissian_nobles_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
-  "Medium Demenissian Noble's Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8d/Medium_demenissian_nobles_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
-  "Medium Demenissian Noble's Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8d/Medium_demenissian_nobles_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Medium Dewhaven Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/96/Medium_dewhaven_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Medium Dusksongs Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/a4/Medium_dusksongs_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Medium Faceless Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/67/Medium_faceless_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
@@ -2818,7 +2836,6 @@ const WEAPON_IMGS={
   "Small Delesyian Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/e8/Small_delesyian_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Demenissian Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/ea/Small_demenissian_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Royal Hunting Ground Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/73/Small_royal_hunting_ground_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Black Bears Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/ca/Small_black_bears_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Militia Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/a1/Small_militia_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Caliburn's Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/9b/Small_caliburns_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Wells Brigade Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/f9/Small_wells_brigade_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
@@ -3741,15 +3758,52 @@ function copyStrat(e,text){
 }
 
 // ===== SEARCH =====
+function clearHighlight(el){
+  el.querySelectorAll('mark.hl').forEach(m=>{
+    const t=document.createTextNode(m.textContent);
+    m.parentNode.replaceChild(t,m);
+    t.parentNode.normalize();
+  });
+}
+function highlightInElement(el,q){
+  if(!q)return;
+  const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{
+    acceptNode:n=>{
+      const p=n.parentNode;
+      if(!p||p.closest('script,style,mark.hl,.sk-ico-ph'))return NodeFilter.FILTER_REJECT;
+      if(p.tagName==='OPTION')return NodeFilter.FILTER_REJECT;
+      return n.nodeValue.match(re)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    }
+  });
+  const nodes=[];let n;while(n=walker.nextNode())nodes.push(n);
+  nodes.forEach(node=>{
+    const frag=document.createDocumentFragment();
+    const parts=node.nodeValue.split(re);
+    const matches=node.nodeValue.match(re)||[];
+    parts.forEach((part,i)=>{
+      if(part)frag.appendChild(document.createTextNode(part));
+      if(i<matches.length){
+        const m=document.createElement('mark');
+        m.className='hl';
+        m.textContent=matches[i];
+        frag.appendChild(m);
+      }
+    });
+    node.parentNode.replaceChild(frag,node);
+  });
+}
 function doSearch(q){
-  q=q.trim().toLowerCase();
+  q=q.trim();
+  const qLow=q.toLowerCase();
   const cnt=document.getElementById('scnt');
+  document.querySelectorAll('[data-s]').forEach(el=>clearHighlight(el));
   if(!q){cnt.textContent='';document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));return;}
   let total=0;
   document.querySelectorAll('[data-s]').forEach(el=>{
-    const m=el.dataset.s.includes(q);
+    const m=el.dataset.s.includes(qLow);
     el.classList.toggle('hide',!m);
-    if(m)total++;
+    if(m){total++;highlightInElement(el,q);}
   });
   cnt.textContent=total+' Treffer';
 }
@@ -3977,7 +4031,7 @@ function renderFactions(){
     <div><div class="fac-lb">Areciel</div><span style="color:var(--dim);font-size:12px">3 Sanctums → Token #4, Destruction Blueprint</span></div>
     <div><div class="fac-lb">White Crow (4 Tokens)</div><span style="color:var(--dim);font-size:12px">Oongka Rocket Pack + high-end Crafting</span></div>
   </div></div>
-  <div class="fac-reg"><div class="fac-rh">Liberation — Patch 1.05 Re-Blockade</div><div class="fac-b">
+  <div class="fac-reg"><div class="fac-rh">Liberation — Re-Blockade [1.05]</div><div class="fac-b">
     <span style="color:var(--dim);font-size:12px">23 Forts, 13 Fraktionen</span>
     <div><div class="fac-lb">Notable Forts</div><ul class="fac-ul"><li>Fort Warspike — Multishot-Lehrer!</li><li>Gorthak Ironworks Delesyia — beste Armaments-Quelle</li><li>Karin Quarry — House Roberts</li></ul></div>
   </div></div>`;
@@ -4174,7 +4228,7 @@ function renderUnlockTable(){
     visible.map(s=>{
       const miss=isMiss(s);
       const treeTag=s.tree==='Stamina'?'tr':s.tree==='Geist'?'tg':'tw';
-      const icon=SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" style="vertical-align:middle;margin-right:5px">`:`<span class="sk-ico-ph" style="margin-right:5px">✦</span>`;      const ds=[s.name,s.char,s.tree,s.prereq,s.cost].join(' ').toLowerCase();
+      const icon=SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" alt="${s.name} Icon" style="vertical-align:middle;margin-right:5px">`:`<span class="sk-ico-ph" aria-hidden="true" style="margin-right:5px">✦</span>`;      const ds=[s.name,s.char,s.tree,s.prereq,s.cost].join(' ').toLowerCase();
       return `<tr data-s="${ds}">
         <td><span class="tag tx">${s.char}</span></td>
         <td><span class="tag ${treeTag}">${s.tree}</span></td>
@@ -4198,7 +4252,7 @@ function skCard(s){
   const m=isMiss(s);
   return `<div class="sk-c${m?' miss':''}">
     <div class="sk-n-row">
-      ${SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" loading="lazy" alt="">`:`<span class="sk-ico-ph">✦</span>`}      <div class="sk-n">${s.name}${m?'<span class="sk-mb">MISSABLE</span>':''}</div>
+      ${SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" loading="lazy" alt="${s.name} Skill-Icon">`:`<span class="sk-ico-ph" aria-hidden="true">✦</span>`}      <div class="sk-n">${s.name}${m?'<span class="sk-mb">MISSABLE</span>':''}</div>
     </div>
     <div class="sk-r">Voraussetzung: <span>${s.prereq}</span></div>
     <div class="sk-r">Kosten: <span>${s.cost}</span></div>
@@ -5011,6 +5065,97 @@ function toggleChDone(num){
   renderChapters();
 }
 
+// ===== PATCH NOTES =====
+const PATCHES=[
+  {ver:"1.07.00",date:"15.05.2026",size:"381 MB · Console-Build 1.000.283",features:[
+    {cat:"Bosse",items:[
+      "5 weitere Rematch-Bosse via Laterne: Muskan (Bonepit), Corrupted Caliburn (Fort Musket), Goyen (Spire of the Sun), Draven the Crowcaller (Church of West Demeniss), Clockwork White Horn (Gate to Advancement)",
+      "Abyss-Bosse jetzt an Land-Locations rematched"
+    ]},
+    {cat:"Damiane",items:[
+      "Komplettes Fists-Skill-Set (eigener Combat-Mode im Skill-Menü)",
+      "Bewegungs-Animationen verbessert"
+    ]},
+    {cat:"Skills",items:[
+      "Aerial Stab für Damiane + Oongka (Luft-Mobility wie Kliff)",
+      "Oongka Explosive Strike hat jetzt Charge-Phase",
+      "Oongka Dual-Wield → Stab-Chain flüssiger",
+      "Kliff Blinding Flash Finisher auch unbewaffnet"
+    ]},
+    {cat:"Mounts",items:[
+      "Mehr Wolf- und Bär-Typen als Mounts registrierbar",
+      "Zügel für weitere Mounts"
+    ]},
+    {cat:"Fixes",items:[
+      "AMD GPU-Treiber 26.5.1 Crash behoben (PC-Stabilität)"
+    ]}
+  ]},
+  {ver:"1.06.00",date:"11.05.2026",size:"",features:[
+    {cat:"Mounts",items:[
+      "Tiger Mount — Peninsula South Crimson Desert, Unnamed Lake bei Giant's Yard Watchtower",
+      "Wild taming: Fleisch füttern → 100% Trust → Take In",
+      "Achtung: Legendary White Tiger führt Gruppe — bei dessen Tod ggf. kein Respawn"
+    ]},
+    {cat:"Skills",items:[
+      "Kliff Blinding Flash auch ohne Waffe ausführbar",
+      "Oongka komplettes Unarmed/Fists-Skillset"
+    ]},
+    {cat:"Crafting",items:[
+      "Smithy Extraction: 100% Artifacts/Aeserion's Scale zurück, ~70% Erz/Bloodstones",
+      "Refine-Stufe wird auf Basis zurückgesetzt, Item bleibt erhalten"
+    ]},
+    {cat:"Minigames",items:[
+      "The Laughing Marionette (Claw Machine, 1 Silver/Versuch) — 12 Beleuchtungsitems, Spezial-Kopfbedeckung, Abyss Artifacts, Cores"
+    ]},
+    {cat:"UI",items:[
+      "Display Sheath toggle (Schwertscheide an/aus)",
+      "Night Tone Mode (Grafik-Option, dämpft Farben + hellt Schatten)"
+    ]}
+  ]},
+  {ver:"1.05.00",date:"02.05.2026",size:"",features:[
+    {cat:"Bosse",items:[
+      "Boss-Rematch via Laterne + Memory Fragment am Kampfort",
+      "Reminisce- und Resonate-Modi",
+      "69 Bosse Start-Roster für Rematch"
+    ]},
+    {cat:"Forts",items:[
+      "Re-Blockade für 23 Forts mit 3 Frequenz-Modi (Stable / Conflict / War)"
+    ]}
+  ]},
+  {ver:"1.04 → 1.04.x",date:"April 2026",size:"",features:[
+    {cat:"Early Patches",items:[
+      "Frühe Balance-Patches: Damage-Werte mehrerer Bosse angepasst",
+      "Quest-Trigger-Fixes (Howling Hill, Memory Fragment, Scholastone)",
+      "Performance-Optimierungen Pailune/Demeniss",
+      "Vollständige Patch-Historie siehe Pearl Abyss offizielle Notes"
+    ]}
+  ]}
+];
+function renderPatches(){
+  const el=document.getElementById('patch-list');
+  if(!el)return;
+  el.innerHTML=PATCHES.map(p=>{
+    const s=[p.ver,p.date,p.size,...p.features.flatMap(f=>[f.cat,...f.items])].join(' ').toLowerCase();
+    return `<div class="card" data-s="${s}" style="margin-bottom:14px;padding:18px 20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap">
+        <span style="font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--glo);letter-spacing:.04em">Patch ${p.ver}</span>
+        <span style="font-size:11px;color:var(--gold);font-weight:600">${p.date}</span>
+        ${p.size?`<span style="font-size:10.5px;color:var(--dim)">${p.size}</span>`:''}
+      </div>
+      <div style="border-top:1px solid var(--bdr);margin:10px 0 12px"></div>
+      ${p.features.map(f=>`
+        <div style="margin-bottom:10px">
+          <div style="font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.09em;margin-bottom:5px">${f.cat}</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:4px">
+            ${f.items.map(it=>`<li style="font-size:12px;color:var(--text);padding-left:13px;position:relative;line-height:1.55">
+              <span style="position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:.65"></span>${it}
+            </li>`).join('')}
+          </ul>
+        </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded',()=>{
   renderBosses();renderWeapons();renderCores();renderArmor();renderArmorSets();renderCrafting();
@@ -5025,6 +5170,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderWeaponUpgrade();
   renderSanctumGuide();
   renderChapters();
+  renderPatches();
   renderBossChecklist();renderGreymane();renderSanctumChecklist();renderWeaponChecklist();
   renderMissableChecklist();renderOverview();
   updateStats();
