@@ -504,6 +504,48 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .boss-notes-area.open{display:block}
 .boss-notes-area:focus{border-color:rgba(201,162,39,.55)}
 
+/* ── Tooltip-System ── */
+#tt-float{position:fixed;z-index:800;pointer-events:none;display:none;max-width:280px;padding:9px 12px;background:rgba(8,6,5,.97);border:1px solid rgba(201,162,39,.42);border-radius:8px;color:var(--text);font-size:11.5px;line-height:1.55;box-shadow:0 8px 30px rgba(0,0,0,.7),0 0 0 1px rgba(0,0,0,.4);backdrop-filter:blur(8px);font-family:'Inter',sans-serif}
+#tt-float.show{display:block;animation:ttFadeIn .12s ease-out}
+@keyframes ttFadeIn{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
+#tt-float .tt-title{font-weight:700;color:var(--glo);font-size:11.5px;margin-bottom:3px;letter-spacing:.02em}
+#tt-float .tt-body{color:#beb5a8;font-size:11px}
+[data-tip]{cursor:help;border-bottom:1px dotted rgba(201,162,39,.32);text-decoration:none}
+[data-tip]:hover{border-bottom-color:rgba(201,162,39,.7)}
+
+/* Cross-Reference Links (Skill-Erwähnungen in Boss-Strategien) */
+.xref{color:var(--gold);cursor:pointer;border-bottom:1px dashed rgba(201,162,39,.35);text-decoration:none;transition:all .15s}
+.xref:hover{color:var(--glo);border-bottom-color:var(--gold);background:rgba(201,162,39,.07);padding:0 2px;border-radius:2px}
+
+/* Section-Stats Header (Mini-Dashboard pro Section) */
+.sec-stats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;padding:11px 14px;background:linear-gradient(135deg,rgba(201,162,39,.04) 0%,transparent 70%);border:1px solid rgba(201,162,39,.12);border-radius:9px}
+.sec-stat{display:flex;align-items:baseline;gap:6px;padding:2px 0;font-size:11.5px}
+.sec-stat-val{font-family:'Cinzel',serif;font-weight:700;color:var(--glo);font-size:14px;line-height:1;min-width:24px;text-align:right}
+.sec-stat-lbl{color:var(--dim);font-size:10.5px;letter-spacing:.04em}
+.sec-stat+.sec-stat{padding-left:10px;border-left:1px solid var(--bdr)}
+
+/* Quest-Story-Timeline (Hero-Viz) */
+.qst-hero{margin-bottom:22px;padding:16px 18px;background:linear-gradient(135deg,rgba(192,57,43,.06) 0%,rgba(201,162,39,.04) 50%,transparent 100%);border:1px solid var(--bdr);border-radius:12px;overflow-x:auto}
+.qst-rail{display:flex;gap:0;align-items:stretch;min-width:max-content;position:relative;padding:8px 0 6px}
+.qst-rail::before{content:'';position:absolute;left:14px;right:14px;top:50%;height:2px;background:linear-gradient(90deg,rgba(192,57,43,.4) 0%,rgba(201,162,39,.55) 50%,rgba(140,40,200,.5) 100%);border-radius:2px;z-index:0}
+.qst-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:78px;padding:0 4px;cursor:pointer;transition:transform .15s}
+.qst-node:hover{transform:translateY(-2px)}
+.qst-node-dot{width:18px;height:18px;border-radius:50%;background:#1a1414;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:8.5px;font-weight:700;color:var(--gold);box-shadow:0 0 0 4px rgba(8,6,5,.95),0 0 12px rgba(201,162,39,.3)}
+.qst-node.done .qst-node-dot{background:var(--gold);color:#000;box-shadow:0 0 0 4px rgba(8,6,5,.95),0 0 14px rgba(244,204,82,.5)}
+.qst-node-label{font-family:'Cinzel',serif;font-size:9.5px;font-weight:700;color:var(--text);text-align:center;line-height:1.2;letter-spacing:.04em;max-width:75px}
+.qst-node-boss{font-size:8.5px;color:var(--rhi);text-align:center;line-height:1.15;max-width:75px;opacity:.85}
+.qst-legend{display:flex;gap:14px;margin-top:9px;font-size:9.5px;color:var(--dim);justify-content:center;flex-wrap:wrap;letter-spacing:.04em}
+.qst-legend span{display:inline-flex;align-items:center;gap:4px}
+.qst-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;border:1px solid var(--gold)}
+.qst-legend i.done{background:var(--gold)}
+
+/* Boss-Phase-Timeline (in Boss-Cards) */
+.bp-phase{display:flex;gap:8px;margin-top:11px;padding:10px 11px;background:rgba(0,0,0,.25);border:1px solid var(--bdr);border-radius:7px}
+.bp-phase-col{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;padding:0 4px}
+.bp-phase-col+.bp-phase-col::before{content:'→';position:absolute;left:-9px;top:5px;color:var(--gdim);font-size:10px}
+.bp-phase-num{font-family:'Cinzel',serif;font-size:9px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.bp-phase-txt{font-size:10.5px;color:var(--text);line-height:1.35}
+
 /* ── Empty State ── */
 .empty-state{padding:48px 28px;text-align:center;color:var(--dim)}
 .empty-state-icon{font-size:38px;margin-bottom:12px;opacity:.4;display:block}
@@ -932,6 +974,9 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
 <!-- Random Boss Modal -->
 <div id="rb-modal" onclick="if(event.target===this)this.classList.remove('show')" role="dialog" aria-modal="true" aria-label="Random Boss"></div>
+
+<!-- Tooltip Floater -->
+<div id="tt-float" role="tooltip" aria-hidden="true"></div>
 <div id="app">
 <nav id="sidebar">
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.07</div></div>
@@ -1320,6 +1365,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <section class="sec" id="sec-chapters">
     <div class="sec-t">📖 Kapitel-Guide</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Schritt-für-Schritt Übersicht aller 12 Kapitel mit Key-Items, Bossen und missable Content. Markiere Kapitel als abgeschlossen um deinen Fortschritt zu tracken.</div>
+    <div class="qst-hero" id="qst-hero" aria-label="Story-Timeline 12 Kapitel"></div>
     <div style="display:flex;flex-direction:column;gap:12px" id="ch-timeline"></div>
   </section>
 
@@ -3903,6 +3949,206 @@ function randomBoss(){
   m.classList.add('show');
 }
 
+// ===== TOOLTIP SYSTEM =====
+function _initTooltips(){
+  const float=document.getElementById('tt-float');
+  if(!float)return;
+  let hideT=null;
+  document.addEventListener('mouseover',e=>{
+    const el=e.target.closest('[data-tip]');
+    if(!el)return;
+    clearTimeout(hideT);
+    const tip=el.dataset.tip||'';
+    const title=el.dataset.tipTitle||'';
+    float.innerHTML=(title?`<div class="tt-title">${title}</div>`:'')+`<div class="tt-body">${tip}</div>`;
+    float.classList.add('show');
+    float.setAttribute('aria-hidden','false');
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!float.classList.contains('show'))return;
+    const x=e.clientX+14, y=e.clientY+16;
+    const rect=float.getBoundingClientRect();
+    const maxX=window.innerWidth-rect.width-12;
+    const maxY=window.innerHeight-rect.height-12;
+    float.style.left=Math.min(x,maxX)+'px';
+    float.style.top=Math.min(y,maxY)+'px';
+  });
+  document.addEventListener('mouseout',e=>{
+    if(!e.target.closest('[data-tip]'))return;
+    hideT=setTimeout(()=>{
+      float.classList.remove('show');
+      float.setAttribute('aria-hidden','true');
+    },80);
+  });
+}
+
+// ===== CROSS-REFERENCE: Skills/Bosses in Strategy-Texten linkbar =====
+let _xrefMap=null;
+function _buildXrefMap(){
+  if(_xrefMap)return _xrefMap;
+  _xrefMap={skills:{},bosses:{}};
+  // Skill-Index aus Kliff-Trees
+  [KLIFF_STAMINA,KLIFF_SPIRIT,KLIFF_HEALTH].forEach(tree=>{
+    tree.forEach(s=>{_xrefMap.skills[s.name]=s;});
+  });
+  // Boss-Index
+  BOSSES.forEach(b=>{_xrefMap.bosses[b.name]=b;});
+  // Sortiert nach Laenge desc — laengere Namen zuerst matchen (z.B. "Force Palm Expertise" vor "Force Palm")
+  _xrefMap.skillNames=Object.keys(_xrefMap.skills).sort((a,b)=>b.length-a.length);
+  return _xrefMap;
+}
+function linkifyXrefs(text){
+  if(!text||typeof text!=='string')return text||'';
+  const m=_buildXrefMap();
+  let out=text;
+  // Skills linkbar — Reihenfolge: laengster Name zuerst
+  m.skillNames.forEach(name=>{
+    // escape regex special chars
+    const escName=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    // Match nur ausserhalb existierender Tags
+    const re=new RegExp('(?<![\\w>])('+escName+')(?![\\w<])','g');
+    const sk=m.skills[name];
+    const tipBody=`Voraussetzung: ${sk.prereq||'–'}<br>Effekt: ${sk.effect||'–'}`;
+    out=out.replace(re,`<span class="xref" data-tip="${tipBody.replace(/"/g,'&quot;')}" data-tip-title="${name.replace(/"/g,'&quot;')}" onclick="showSec('skills');document.getElementById('si').value='${name.replace(/'/g,"\\'").replace(/"/g,'&quot;')}';doSearch('${name.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">$1</span>`);
+  });
+  return out;
+}
+
+// ===== BOSS-PHASE-PARSER =====
+function parseBossPhases(b){
+  if(!b||!b.strategy)return null;
+  const s=b.strategy;
+  // Pattern: "P1: ... P2: ... P3: ..." oder "Phase 1: ... Phase 2: ..."
+  const re=/\b(?:P(?:hase\s*)?([123]))\s*:?\s*([^.]+?)(?=\b(?:P(?:hase\s*)?[123])\b|$)/g;
+  const phases=[];
+  let m;
+  while((m=re.exec(s))!==null){
+    const num=parseInt(m[1],10);
+    const txt=m[2].trim().replace(/[.,;]\s*$/,'');
+    if(txt.length>0&&txt.length<140){
+      phases.push({num,txt});
+    }
+  }
+  // Dedupe by num — letzter Treffer gewinnt
+  const seen={};
+  phases.forEach(p=>{seen[p.num]=p;});
+  const arr=Object.values(seen).sort((a,b)=>a.num-b.num);
+  return arr.length>=2?arr:null;
+}
+function renderBossPhases(b){
+  const phases=parseBossPhases(b);
+  if(!phases)return '';
+  return `<div class="bp-phase" aria-label="Phasen">
+    ${phases.map(p=>`<div class="bp-phase-col">
+      <div class="bp-phase-num">Phase ${p.num}</div>
+      <div class="bp-phase-txt">${p.txt}</div>
+    </div>`).join('')}
+  </div>`;
+}
+
+// ===== SECTION-STATS HEADER =====
+function _injectSectionStats(secId,stats){
+  const sec=document.getElementById('sec-'+secId);
+  if(!sec)return;
+  sec.querySelectorAll('.sec-stats-auto').forEach(el=>el.remove());
+  if(!stats||!stats.length)return;
+  const stripHTML='<div class="sec-stats sec-stats-auto">'+stats.map(s=>
+    `<div class="sec-stat"><span class="sec-stat-val">${s.val}</span><span class="sec-stat-lbl">${s.lbl}</span></div>`
+  ).join('')+'</div>';
+  const title=sec.querySelector('.sec-t');
+  if(title)title.insertAdjacentHTML('afterend',stripHTML);
+}
+function refreshSectionStats(){
+  // Bosse
+  const bossDone=loadBossDone().length;
+  const bossNotes=Object.keys(loadBossNotes()).length;
+  _injectSectionStats('bosses',[
+    {lbl:'Bosse gesamt',val:BOSSES.length},
+    {lbl:'Besiegt',val:bossDone},
+    {lbl:'mit Notiz',val:bossNotes},
+    {lbl:'Regionen',val:[...new Set(BOSSES.map(b=>b.region.split(' ')[0]))].length}
+  ]);
+  // Waffen
+  const wTotal=WEAPONS.length;
+  const wKurated=WEAPONS.filter(w=>w.source&&w.source.trim()).length;
+  _injectSectionStats('weapons',[
+    {lbl:'Waffen gesamt',val:wTotal},
+    {lbl:'mit Quelle',val:wKurated},
+    {lbl:'Typen',val:[...new Set(WEAPONS.map(w=>w.type))].length}
+  ]);
+  // Rüstung
+  if(typeof ARMOR!=='undefined'){
+    _injectSectionStats('armor',[
+      {lbl:'Rüstungen',val:ARMOR.length},
+      {lbl:'Sets',val:typeof ARMOR_SETS!=='undefined'?ARMOR_SETS.length:'–'}
+    ]);
+  }
+  // Cores
+  if(typeof CORES!=='undefined'){
+    _injectSectionStats('cores',[
+      {lbl:'Abyss Cores',val:CORES.length},
+      {lbl:'Weapon-Slot',val:CORES.filter(c=>c.slot==='Weapon').length},
+      {lbl:'Armor-Slot',val:CORES.filter(c=>c.slot==='Armor').length}
+    ]);
+  }
+  // Mounts
+  if(typeof MOUNTS!=='undefined'){
+    _injectSectionStats('mounts',[
+      {lbl:'Mounts gesamt',val:MOUNTS.length},
+      {lbl:'Sigil',val:MOUNTS.filter(m=>m.type&&m.type.includes('Sigil')).length},
+      {lbl:'Wildtiere',val:MOUNTS.filter(m=>m.type==='Wildtier').length}
+    ]);
+  }
+  // Skills
+  const skillsTotal=KLIFF_STAMINA.length+KLIFF_SPIRIT.length+KLIFF_HEALTH.length;
+  const watchLearn=WATCH_AND_LEARN.length;
+  _injectSectionStats('skills',[
+    {lbl:'Kliff-Skills',val:skillsTotal},
+    {lbl:'Watch & Learn',val:watchLearn},
+    {lbl:'Missable',val:WATCH_AND_LEARN.filter(w=>w.miss).length}
+  ]);
+  // Quests
+  if(typeof MAIN_QUESTS!=='undefined'){
+    const totalQ=MAIN_QUESTS.reduce((a,c)=>a+(c.quests?c.quests.length:0),0);
+    _injectSectionStats('quests',[
+      {lbl:'Kapitel',val:MAIN_QUESTS.length},
+      {lbl:'Quests gesamt',val:totalQ},
+      {lbl:'Bosse',val:MAIN_QUESTS.filter(c=>c.boss).length}
+    ]);
+  }
+  // Patches
+  if(typeof PATCHES!=='undefined'){
+    _injectSectionStats('patches',[
+      {lbl:'Patches',val:PATCHES.length},
+      {lbl:'Aktuell',val:PATCHES[0]?.ver||'–'}
+    ]);
+  }
+}
+
+// ===== QUEST-STORY-TIMELINE HERO =====
+function renderQuestTimeline(){
+  if(typeof MAIN_QUESTS==='undefined')return;
+  const target=document.getElementById('qst-hero');
+  if(!target)return;
+  const doneRaw=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
+  target.innerHTML=`<div class="qst-rail">${MAIN_QUESTS.map((c,i)=>{
+    const num=c.ch;
+    const isNum=/^\d+$/.test(num);
+    const dotLabel=isNum?num:(num==='Prolog'?'P':num==='Epilog'?'E':'?');
+    const isDone=isNum?doneRaw.includes(parseInt(num,10)):false;
+    return `<div class="qst-node${isDone?' done':''}" onclick="showSec('chapters');document.getElementById('si').value='';doSearch('')" data-tip="${(c.boss||'Kein Boss').replace(/"/g,'&quot;')}${c.warn?'<br>⚠ '+c.warn.replace(/"/g,'&quot;'):''}${c.unlock?'<br>🔓 '+c.unlock.replace(/"/g,'&quot;'):''}" data-tip-title="${num} — ${c.name.replace(/"/g,'&quot;')}">
+      <div class="qst-node-dot">${dotLabel}</div>
+      <div class="qst-node-label">${c.name}</div>
+      ${c.boss?`<div class="qst-node-boss">${(c.boss.length>22?c.boss.slice(0,22)+'…':c.boss)}</div>`:''}
+    </div>`;
+  }).join('')}</div>
+  <div class="qst-legend">
+    <span><i></i> Offen</span>
+    <span><i class="done"></i> Abgeschlossen</span>
+    <span>· Klick = Kapitel-Detail</span>
+  </div>`;
+}
+
 // ===== CUSTOM BOSS NOTES =====
 function loadBossNotes(){return JSON.parse(localStorage.getItem('cd_boss_notes')||'{}');}
 function saveBossNote(name,text){
@@ -3924,6 +4170,7 @@ function toggleBossNote(name,btn){
 function persistBossNote(name,el,btn){
   saveBossNote(name,el.value);
   if(btn)btn.classList.toggle('has-note',!!el.value.trim());
+  if(typeof refreshSectionStats==='function')refreshSectionStats();
 }
 
 // ===== NAVIGATION =====
@@ -4135,6 +4382,7 @@ function toggleBossDone(name){
   saveBossDone(d);
   renderBosses();
   renderBossChecklist();
+  if(typeof refreshSectionStats==='function')refreshSectionStats();
 }
 
 const BOSS_PH_PALETTES={
@@ -4185,7 +4433,8 @@ function renderBosses(){
         ${b.weakness!=='–'?`<div class="crow"><span class="cl">Schwäche</span><span class="cv" style="color:var(--warn)">${b.weakness}</span></div>`:''}
         <div class="crow"><span class="cl">Parry/Dodge</span><span class="cv">${b.parry_or_dodge}</span></div>
       </div>
-      <div class="cs">${b.strategy}</div>
+      <div class="cs">${linkifyXrefs(b.strategy)}</div>
+      ${renderBossPhases(b)}
       <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">Kopieren</button>
       <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${safeName}')">
         ${isDone?'✓ Besiegt':'Als besiegt markieren'}
@@ -5499,6 +5748,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderSanctumGuide();
   renderChapters();
   renderPatches();
+  renderQuestTimeline();
+  refreshSectionStats();
+  _initTooltips();
   renderBossChecklist();renderGreymane();renderSanctumChecklist();renderWeaponChecklist();
   renderMissableChecklist();renderOverview();
   updateStats();
