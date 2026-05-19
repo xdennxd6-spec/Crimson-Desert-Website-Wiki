@@ -1,10 +1,53 @@
 {
   "name": "Crimson Desert — Guide Dashboard",
   "short_name": "CD Guide",
-  "description": "Interaktives Guide-Dashboard für Crimson Desert",
-  "start_url": "/",
+  "description": "Interaktives Guide-Dashboard für Crimson Desert — Bosse, Waffen, Skills, True Ending.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#080808",
+  "orientation": "any",
+  "background_color": "#060606",
   "theme_color": "#080808",
-  "icons": []
+  "lang": "de",
+  "categories": ["games", "entertainment", "utilities"],
+  "icons": [
+    {
+      "src": "cd_assets/bosses/umbra-final.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "cd_assets/bosses/myurdin.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Bosse",
+      "short_name": "Bosse",
+      "url": "./#sec=bosses",
+      "description": "Boss-Liste mit Strategien"
+    },
+    {
+      "name": "True Ending",
+      "short_name": "True Ending",
+      "url": "./#sec=quests",
+      "description": "True-Ending-Checkliste"
+    },
+    {
+      "name": "Interaktive Karte",
+      "short_name": "Karte",
+      "url": "./#sec=map",
+      "description": "Pywel-Karte mit Markern"
+    },
+    {
+      "name": "Patch-Notes",
+      "short_name": "Patches",
+      "url": "./#sec=patches",
+      "description": "Patch-Historie 1.04 - 1.07"
+    }
+  ]
 }

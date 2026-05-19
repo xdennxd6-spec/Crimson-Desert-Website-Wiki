@@ -16,11 +16,46 @@
 <meta name="twitter:image" content="cd_assets/bosses/umbra-final.jpg">
 <meta name="theme-color" content="#080808">
 <link rel="manifest" href="site.webmanifest">
+<link rel="icon" type="image/jpeg" href="cd_assets/bosses/umbra-final.jpg">
+<link rel="apple-touch-icon" href="cd_assets/bosses/umbra-final.jpg">
+<link rel="preload" as="image" href="cd_assets/bosses/matthias.png">
+<link rel="preload" as="image" href="cd_assets/bosses/myurdin.png">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebSite",
+      "name":"Crimson Desert — Guide Dashboard",
+      "description":"Interaktives Guide-Dashboard für Crimson Desert: Bosse, Waffen, Skills, Rüstungen, Crafting, Quests und True-Ending-Checkliste.",
+      "inLanguage":"de-DE",
+      "url":"https://crimson-desert-website-wiki.netlify.app/",
+      "author":{"@type":"Person","name":"Christian Stein"},
+      "potentialAction":{
+        "@type":"SearchAction",
+        "target":"https://crimson-desert-website-wiki.netlify.app/#sec=bosses&q={search_term}",
+        "query-input":"required name=search_term"
+      }
+    },
+    {
+      "@type":"VideoGame",
+      "name":"Crimson Desert",
+      "description":"Open-World Action-Adventure von Pearl Abyss. Singleplayer, kein MMO, kein Pay-to-Win. ~90 km² Welt auf dem Kontinent Pywel.",
+      "datePublished":"2026-03-19",
+      "publisher":{"@type":"Organization","name":"Pearl Abyss"},
+      "developer":{"@type":"Organization","name":"Pearl Abyss"},
+      "genre":["Action-Adventure","Open-World","Singleplayer"],
+      "gamePlatform":["PC","PlayStation 5","Xbox Series X|S"],
+      "playMode":"SinglePlayer"
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap');
-:root{
+:root, [data-theme="dark"]{
   --bg:#060606;--bg2:#0d0c0c;--bg3:#161414;--sb:#080605;
   --red:#c0311f;--rhi:#e84535;--gold:#cc9f28;--gdim:#8f7020;--glo:#f4cc52;
   --text:#ddd5cd;--dim:#5c5650;--bdr:#252222;
@@ -30,6 +65,35 @@
   --shadow-g:0 0 24px rgba(201,162,39,.15);
   --grd-sb:linear-gradient(170deg,#130a07 0%,#0b0807 40%,#060606 100%);
   --grd-hd:linear-gradient(90deg,rgba(201,162,39,.1) 0%,transparent 70%);
+}
+/* AMOLED — pure black für OLED-Displays */
+[data-theme="amoled"]{
+  --bg:#000000;--bg2:#050505;--bg3:#0e0d0d;--sb:#000000;
+  --card:#080808;--cardh:#0e0c0c;--bdr:#1c1a1a;
+  --grd-sb:linear-gradient(170deg,#0c0703 0%,#040201 40%,#000000 100%);
+}
+/* Sepia — warmer Tag-Modus */
+[data-theme="sepia"]{
+  --bg:#1a140d;--bg2:#231c12;--bg3:#2c2316;--sb:#1d1610;
+  --red:#d04428;--rhi:#f05538;--gold:#e0b035;--gdim:#a8851f;--glo:#fcd870;
+  --text:#e8dcc2;--dim:#7a6e5c;--bdr:#3a2e1f;
+  --card:#221a10;--cardh:#2c2316;--warn:#e88934;
+  --grd-sb:linear-gradient(170deg,#2a1c0e 0%,#1f1408 40%,#1a140d 100%);
+  --grd-hd:linear-gradient(90deg,rgba(224,176,53,.13) 0%,transparent 70%);
+}
+/* Smooth transitions zwischen Themes (außer bei prefers-reduced-motion) */
+@media (prefers-reduced-motion: no-preference){
+  html,body,#sidebar,#sbar,.card,.sk-c,.fac-reg,.sec,.tab,.ni,#main,.witch-card,.set-card,.chap,.ch-card,.te-grp,.cmt-item,.build-card,table,thead tr,select.fs,.kbd{
+    transition:background-color .25s ease,border-color .25s ease,color .25s ease;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.01ms!important;
+    scroll-behavior:auto!important;
+  }
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -395,6 +459,78 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 /* ── Skip-Link (Accessibility) ── */
 .skip-link{position:absolute;left:-9999px;top:0;z-index:1000;padding:10px 18px;background:var(--gold);color:#000;font-weight:700;font-size:13px;border-radius:0 0 8px 0;text-decoration:none;font-family:'Inter',sans-serif}
 .skip-link:focus{left:0;outline:2px solid var(--rhi);outline-offset:2px}
+
+/* ── Theme Toggle ── */
+.theme-btn{width:24px;height:24px;border-radius:50%;border:1px solid var(--bdr);background:rgba(255,255,255,.04);color:var(--dim);font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s;font-family:'Inter',sans-serif;padding:0;line-height:1}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.theme-btn.active{border-color:var(--gold);color:var(--glo);background:rgba(201,162,39,.12);box-shadow:0 0 8px rgba(201,162,39,.25)}
+
+/* ── Help-Modal (Keyboard Shortcuts) ── */
+#help-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:700;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+#help-overlay.show{display:flex}
+#help-box{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:26px 28px;width:460px;max-width:calc(100vw - 32px);max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 28px 72px rgba(0,0,0,.8)}
+#help-box h2{font-family:'Cinzel',serif;font-size:15px;color:var(--glo);margin-bottom:6px;letter-spacing:.08em}
+#help-box p{font-size:11px;color:var(--dim);margin-bottom:18px}
+.help-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(201,162,39,.1);font-size:12px}
+.help-row:last-child{border-bottom:none}
+.help-desc{color:var(--text)}
+.help-keys{display:flex;gap:5px}
+.help-close{position:absolute;top:13px;right:15px;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer;padding:4px;line-height:1}
+.help-close:hover{color:var(--text)}
+
+/* ── Random Boss Modal ── */
+#rb-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:610;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+#rb-modal.show{display:flex}
+.rb-box{background:var(--card);border:1px solid rgba(201,162,39,.32);border-radius:14px;padding:0;width:500px;max-width:calc(100vw - 32px);max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 28px 72px rgba(0,0,0,.85)}
+.rb-img{width:100%;height:200px;object-fit:cover;object-position:center top;display:block;background:#111}
+.rb-body{padding:20px 22px}
+.rb-name{font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--glo);margin-bottom:5px}
+.rb-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px}
+.rb-strategy{font-size:12.5px;color:var(--text);line-height:1.65;padding:11px 14px;background:rgba(180,45,32,.08);border-left:2px solid rgba(192,57,43,.55);border-radius:0 7px 7px 0;margin-bottom:12px}
+.rb-rerollbtn{width:100%;padding:10px;background:rgba(180,45,32,.15);border:1px solid rgba(192,57,43,.42);border-radius:8px;color:var(--rhi);font-size:13px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .17s;letter-spacing:.03em}
+.rb-rerollbtn:hover{background:rgba(180,45,32,.28);border-color:rgba(192,57,43,.7)}
+.rb-close{position:absolute;top:11px;right:13px;background:rgba(0,0,0,.65);border:1px solid var(--bdr);color:var(--text);font-size:16px;cursor:pointer;padding:4px 9px;line-height:1;border-radius:6px;backdrop-filter:blur(4px)}
+.rb-close:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── Random Boss Trigger Button ── */
+.rb-trigger{padding:7px 14px;background:rgba(201,162,39,.07);border:1px solid rgba(201,162,39,.32);border-radius:7px;color:var(--gold);font-size:11.5px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .17s;letter-spacing:.03em;display:inline-flex;align-items:center;gap:6px}
+.rb-trigger:hover{background:rgba(201,162,39,.14);border-color:rgba(201,162,39,.58)}
+
+/* ── Custom Notes ── */
+.boss-notes-btn{margin-top:7px;width:100%;padding:6px 10px;background:rgba(255,255,255,.025);border:1px solid var(--bdr);border-radius:6px;color:var(--dim);font-size:10.5px;font-family:'Inter',sans-serif;cursor:pointer;transition:all .17s;display:flex;align-items:center;justify-content:center;gap:5px;letter-spacing:.04em}
+.boss-notes-btn:hover{border-color:rgba(201,162,39,.42);color:var(--gold)}
+.boss-notes-btn.has-note{background:rgba(201,162,39,.07);border-color:rgba(201,162,39,.32);color:var(--gold)}
+.boss-notes-area{margin-top:7px;width:100%;min-height:62px;background:rgba(255,255,255,.03);border:1px solid rgba(201,162,39,.22);border-radius:6px;color:var(--text);font-size:11.5px;font-family:'Inter',sans-serif;padding:8px 10px;resize:vertical;outline:none;line-height:1.5;display:none}
+.boss-notes-area.open{display:block}
+.boss-notes-area:focus{border-color:rgba(201,162,39,.55)}
+
+/* ── Empty State ── */
+.empty-state{padding:48px 28px;text-align:center;color:var(--dim)}
+.empty-state-icon{font-size:38px;margin-bottom:12px;opacity:.4;display:block}
+.empty-state-title{font-family:'Cinzel',serif;font-size:14px;color:var(--text);margin-bottom:5px;letter-spacing:.04em}
+.empty-state-desc{font-size:12px;margin-bottom:14px;line-height:1.55}
+.empty-state-action{padding:7px 16px;background:rgba(201,162,39,.07);border:1px solid rgba(201,162,39,.32);border-radius:7px;color:var(--gold);font-size:11.5px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:all .15s}
+.empty-state-action:hover{background:rgba(201,162,39,.16);border-color:rgba(201,162,39,.58)}
+
+/* ── Print Styles ── */
+@media print{
+  body{background:#fff!important;color:#222!important;font-size:11pt}
+  #sidebar,#sbar,#btt,#ham,#mob-overlay,#credit-top,#credit-bottom,#visitor-bar,#auth-area,#ee-overlay,#help-overlay,#rb-modal,.skip-link,.tabs,.fbar,.boss-notes-btn,.defeat-btn,#mount-float-preview,#mount-ingame-modal,#core-vid-float,.rb-trigger,.cl-reset,.copy-btn{display:none!important}
+  #main,.sec{padding:0!important;margin:0!important;display:block!important}
+  .sec.active~.sec,.sec:not(.active){display:none!important}
+  .card,.sk-c,.witch-card,.set-card,.chap,.fac-reg,.te-grp{background:#fff!important;border:1px solid #ccc!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid;color:#222!important}
+  .ct,.sec-t,.sub-t,.set-name,.witch-name,.chap-title,.rb-name{color:#000!important;text-shadow:none!important}
+  .cs,.build-tip{background:#f3f0ea!important;border-left-color:#c0311f!important;color:#333!important}
+  .cv,.set-piece,.cm .tag{color:#222!important}
+  .cl{color:#555!important}
+  .grid{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  table{border:1px solid #999}
+  th{background:#f5f0e0!important;color:#222!important;border-bottom:1px solid #999}
+  td{color:#222!important;border-bottom:1px solid #ddd}
+  .boss-img,.witch-img,.set-stripe{filter:grayscale(.2)contrast(.95)!important}
+  a{color:#a02818!important;text-decoration:underline}
+  .tag{border:1px solid #999!important;background:#fafafa!important}
+}
 
 /* ── Search-Highlight ── */
 mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-radius:2px;font-weight:600}
@@ -772,6 +908,30 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     </div>
   </div>
 </div>
+
+<!-- Help Modal (Keyboard Shortcuts) -->
+<div id="help-overlay" onclick="if(event.target===this)closeHelp()" role="dialog" aria-modal="true" aria-labelledby="help-title">
+  <div id="help-box">
+    <button class="help-close" onclick="closeHelp()" aria-label="Schliessen">✕</button>
+    <h2 id="help-title">⌨️ Tastatur-Shortcuts</h2>
+    <p>Navigation und Aktionen ohne Maus.</p>
+    <div class="help-row"><span class="help-desc">Suchfeld fokussieren</span><span class="help-keys"><span class="kbd">/</span> oder <span class="kbd">Ctrl K</span></span></div>
+    <div class="help-row"><span class="help-desc">Suche / Sidebar / Modal schließen</span><span class="help-keys"><span class="kbd">Esc</span></span></div>
+    <div class="help-row"><span class="help-desc">Hilfe öffnen</span><span class="help-keys"><span class="kbd">?</span></span></div>
+    <div class="help-row"><span class="help-desc">Random Boss würfeln</span><span class="help-keys"><span class="kbd">R</span></span></div>
+    <div class="help-row"><span class="help-desc">Theme wechseln</span><span class="help-keys"><span class="kbd">T</span></span></div>
+    <div style="font-size:9.5px;font-weight:700;color:var(--gdim);text-transform:uppercase;letter-spacing:.09em;margin:18px 0 6px">Section-Jumps (g + Buchstabe)</div>
+    <div class="help-row"><span class="help-desc">Bosse / Items / Waffen / Rüstung</span><span class="help-keys"><span class="kbd">g b</span> <span class="kbd">g i</span> <span class="kbd">g w</span> <span class="kbd">g a</span></span></div>
+    <div class="help-row"><span class="help-desc">Cores / Crafting / Quests / Map</span><span class="help-keys"><span class="kbd">g c</span> <span class="kbd">g f</span> <span class="kbd">g q</span> <span class="kbd">g m</span></span></div>
+    <div class="help-row"><span class="help-desc">Locations / Mounts / Skills / Disarm</span><span class="help-keys"><span class="kbd">g l</span> <span class="kbd">g o</span> <span class="kbd">g s</span> <span class="kbd">g d</span></span></div>
+    <div class="help-row"><span class="help-desc">Checklisten / Builds / Accessoires</span><span class="help-keys"><span class="kbd">g x</span> <span class="kbd">g u</span> <span class="kbd">g j</span></span></div>
+    <div class="help-row"><span class="help-desc">Hexen / Kapitel / Pets / Patches</span><span class="help-keys"><span class="kbd">g h</span> <span class="kbd">g e</span> <span class="kbd">g t</span> <span class="kbd">g p</span></span></div>
+    <div style="font-size:10.5px;color:var(--dim);margin-top:14px;line-height:1.5;border-top:1px dashed rgba(201,162,39,.12);padding-top:11px">Tipp: URL teilen kopiert auch Section + Suchbegriff — z.B. <code style="color:var(--gold);font-size:10.5px;background:rgba(201,162,39,.08);padding:1px 5px;border-radius:3px">#sec=bosses&amp;q=Myurdin</code></div>
+  </div>
+</div>
+
+<!-- Random Boss Modal -->
+<div id="rb-modal" onclick="if(event.target===this)this.classList.remove('show')" role="dialog" aria-modal="true" aria-label="Random Boss"></div>
 <div id="app">
 <nav id="sidebar">
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.07</div></div>
@@ -801,7 +961,19 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="vis-row"><span class="vis-lbl">Heute</span><span class="vis-val" id="sv-today">—</span></div>
     <div class="vis-row"><span class="vis-lbl">Besucher</span><span class="vis-val" id="sv-total">—</span></div>
   </div>
-  <div class="sb-ft">Pearl Abyss · 2026<span id="ee-hint" title="">🥚</span></div>
+  <div class="sb-ft">
+    <div style="display:flex;gap:5px;margin-bottom:8px" id="theme-row" role="radiogroup" aria-label="Theme">
+      <button class="theme-btn active" data-theme-set="dark" onclick="setTheme('dark')" title="Dark (Standard)" aria-label="Theme: Dark">●</button>
+      <button class="theme-btn" data-theme-set="amoled" onclick="setTheme('amoled')" title="AMOLED (true black)" aria-label="Theme: AMOLED">◐</button>
+      <button class="theme-btn" data-theme-set="sepia" onclick="setTheme('sepia')" title="Sepia (warm)" aria-label="Theme: Sepia">○</button>
+      <button class="theme-btn" onclick="openHelp()" title="Tastatur-Shortcuts (?)" aria-label="Shortcuts-Hilfe" style="margin-left:auto">?</button>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span>Pearl Abyss · 2026</span>
+      <span id="ee-hint" title="">🥚</span>
+    </div>
+    <button id="pwa-install" onclick="_pwaInstall()" style="display:none;width:100%;margin-top:8px;padding:6px;background:rgba(201,162,39,.09);border:1px solid rgba(201,162,39,.32);border-radius:6px;color:var(--gold);font-size:10.5px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;align-items:center;justify-content:center;gap:5px;letter-spacing:.04em">⬇ Als App installieren</button>
+  </div>
   <div id="auth-area">
     <div id="auth-user" style="display:none"></div>
     <button id="auth-btn" onclick="openLoginModal()">🔑 Anmelden</button>
@@ -846,6 +1018,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <select class="fs" id="bf-reg" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>The Abyss</option><option>Endgame</option></select>
       <select class="fs" id="bf-type" onchange="renderBosses()"><option value="">Story + Side + Faction</option><option value="Story">Story</option><option value="Side">Side</option><option value="Faction">Faction</option><option value="Sanctum">Sanctum</option></select>
       <select class="fs" id="bf-pd" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option><option value="NIE">NIE Parry</option><option value="KEIN">KEIN Parry/Block</option></select>
+      <button class="rb-trigger" onclick="randomBoss()" title="Zufälligen Boss anzeigen (R)" aria-label="Random Boss">🎲 Random Boss</button>
     </div>
     <div class="grid" id="boss-grid"></div>
   </section>
@@ -3673,21 +3846,143 @@ const BUILDS=[
   }
 ];
 
+// ===== THEMES =====
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('cd_theme',t);
+  document.querySelectorAll('.theme-btn[data-theme-set]').forEach(b=>{
+    b.classList.toggle('active',b.dataset.themeSet===t);
+  });
+  const themeColors={dark:'#080808',amoled:'#000000',sepia:'#1a140d'};
+  const mt=document.querySelector('meta[name="theme-color"]');
+  if(mt&&themeColors[t])mt.setAttribute('content',themeColors[t]);
+}
+function applyStoredTheme(){
+  const t=localStorage.getItem('cd_theme')||'dark';
+  setTheme(t);
+}
+function cycleTheme(){
+  const order=['dark','amoled','sepia'];
+  const cur=document.documentElement.getAttribute('data-theme')||'dark';
+  const next=order[(order.indexOf(cur)+1)%order.length];
+  setTheme(next);
+}
+
+// ===== HELP MODAL =====
+function openHelp(){
+  document.getElementById('help-overlay').classList.add('show');
+}
+function closeHelp(){
+  document.getElementById('help-overlay').classList.remove('show');
+}
+
+// ===== RANDOM BOSS =====
+function randomBoss(){
+  if(!Array.isArray(BOSSES)||!BOSSES.length)return;
+  const b=BOSSES[Math.floor(Math.random()*BOSSES.length)];
+  const m=document.getElementById('rb-modal');
+  const img=BOSS_IMGS[b.name];
+  const esc=s=>String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  m.innerHTML=`<div class="rb-box">
+    <button class="rb-close" onclick="document.getElementById('rb-modal').classList.remove('show')" aria-label="Schliessen">✕</button>
+    ${img?`<img class="rb-img" src="${img}" alt="${esc(b.name)}" loading="lazy">`:''}
+    <div class="rb-body">
+      <div class="rb-name">${esc(b.name)}</div>
+      <div class="rb-meta">
+        <span class="tag tg">${esc(b.region)||'?'}</span>
+        ${b.chapter?`<span class="tag tx">Kap. ${b.chapter}</span>`:''}
+        ${b.quest?`<span class="tag tr">${esc(b.quest)}</span>`:''}
+      </div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:4px">Parry/Dodge</div>
+      <div style="font-size:12px;color:var(--gold);margin-bottom:11px">${esc(b.parry_or_dodge)||'–'}</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:4px">Strategie</div>
+      <div class="rb-strategy">${esc(b.strategy)||'–'}</div>
+      <button class="rb-rerollbtn" onclick="randomBoss()">🎲 Nochmal würfeln</button>
+    </div>
+  </div>`;
+  m.classList.add('show');
+}
+
+// ===== CUSTOM BOSS NOTES =====
+function loadBossNotes(){return JSON.parse(localStorage.getItem('cd_boss_notes')||'{}');}
+function saveBossNote(name,text){
+  const n=loadBossNotes();
+  if(text&&text.trim())n[name]=text.trim();
+  else delete n[name];
+  localStorage.setItem('cd_boss_notes',JSON.stringify(n));
+}
+function toggleBossNote(name,btn){
+  const card=btn.closest('.card');
+  const area=card.querySelector('.boss-notes-area');
+  if(!area)return;
+  area.classList.toggle('open');
+  if(area.classList.contains('open')){
+    area.value=loadBossNotes()[name]||'';
+    area.focus();
+  }
+}
+function persistBossNote(name,el,btn){
+  saveBossNote(name,el.value);
+  if(btn)btn.classList.toggle('has-note',!!el.value.trim());
+}
+
 // ===== NAVIGATION =====
-function showSec(id){
+function showSec(id, opts){
+  opts=opts||{};
+  const sec=document.getElementById('sec-'+id);
+  const nav=document.querySelector('[data-sec="'+id+'"]');
+  if(!sec||!nav)return;
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
-  document.getElementById('sec-'+id).classList.add('active');
-  document.querySelector('[data-sec="'+id+'"]').classList.add('active');
-  document.getElementById('si').value='';
-  document.getElementById('scnt').textContent='';
-  document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));
+  sec.classList.add('active');
+  nav.classList.add('active');
+  if(!opts.keepSearch){
+    document.getElementById('si').value='';
+    document.getElementById('scnt').textContent='';
+    document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));
+    document.querySelectorAll('[data-s]').forEach(el=>{
+      if(typeof clearHighlight==='function')clearHighlight(el);
+    });
+  }
   localStorage.setItem('cd_sec',id);
+  if(!opts.skipUrl)_writeUrlState();
   // Schliesse Sidebar auf Mobile nach Klick
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('mob-overlay').classList.remove('show');
   document.getElementById('main').scrollTop=0;
 }
+
+// ── URL-State (hash-basiert) ──────────────────────────────────────
+function _readUrlState(){
+  const h=location.hash.replace(/^#/,'');
+  if(!h)return{};
+  const p={};
+  h.split('&').forEach(kv=>{
+    const [k,v]=kv.split('=');
+    if(k)p[decodeURIComponent(k)]=v?decodeURIComponent(v):'';
+  });
+  return p;
+}
+function _writeUrlState(){
+  const sec=localStorage.getItem('cd_sec')||'bosses';
+  const q=document.getElementById('si').value.trim();
+  const parts=['sec='+encodeURIComponent(sec)];
+  if(q)parts.push('q='+encodeURIComponent(q));
+  const newHash='#'+parts.join('&');
+  if(location.hash!==newHash){
+    history.replaceState(null,'',newHash);
+  }
+}
+function _applyUrlState(){
+  const s=_readUrlState();
+  if(s.sec)showSec(s.sec,{skipUrl:true,keepSearch:!!s.q});
+  if(s.q){
+    const si=document.getElementById('si');
+    si.value=s.q;
+    if(typeof doSearch==='function')doSearch(s.q);
+  }
+}
+window.addEventListener('hashchange',_applyUrlState);
 
 // ===== PETS =====
 let _petFilter='all';
@@ -3798,7 +4093,14 @@ function doSearch(q){
   const qLow=q.toLowerCase();
   const cnt=document.getElementById('scnt');
   document.querySelectorAll('[data-s]').forEach(el=>clearHighlight(el));
-  if(!q){cnt.textContent='';document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));return;}
+  // URL-State sync (debounced via assignment)
+  if(typeof _writeUrlState==='function')_writeUrlState();
+  if(!q){
+    cnt.textContent='';
+    document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));
+    document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
+    return;
+  }
   let total=0;
   document.querySelectorAll('[data-s]').forEach(el=>{
     const m=el.dataset.s.includes(qLow);
@@ -3806,6 +4108,22 @@ function doSearch(q){
     if(m){total++;highlightInElement(el,q);}
   });
   cnt.textContent=total+' Treffer';
+  // Empty-State im aktiven Section anzeigen wenn keine Treffer
+  document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
+  if(total===0){
+    const activeSec=document.querySelector('.sec.active');
+    if(activeSec){
+      const es=document.createElement('div');
+      es.className='empty-state empty-state-injected';
+      es.innerHTML=`
+        <span class="empty-state-icon">🔍</span>
+        <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}"</div>
+        <div class="empty-state-desc">Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>
+        <button class="empty-state-action" onclick="document.getElementById('si').value='';doSearch('');document.getElementById('si').focus()">Suche zurücksetzen</button>
+      `;
+      activeSec.appendChild(es);
+    }
+  }
 }
 
 // ===== BOSSES =====
@@ -3845,11 +4163,14 @@ function renderBosses(){
   const type=document.getElementById('bf-type').value;
   const pd=document.getElementById('bf-pd').value;
   const done=loadBossDone();
+  const notes=loadBossNotes();
   document.getElementById('boss-grid').innerHTML=BOSSES.map(b=>{
     const show=(!reg||b.region.includes(reg))&&(!type||b.quest.includes(type))&&(!pd||b.parry_or_dodge.includes(pd));
     const chap=b.chapter?'Kap. '+b.chapter:'Side/Faction';
     const isDone=done.includes(b.name);
-    const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge].join(' ').toLowerCase();
+    const hasNote=!!notes[b.name];
+    const safeName=b.name.replace(/'/g,"\\'");
+    const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge,notes[b.name]||''].join(' ').toLowerCase();
     return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}" data-s="${s}">
       <div class="boss-done-badge">BESIEGT</div>
       ${BOSS_IMGS[b.name]
@@ -3866,9 +4187,13 @@ function renderBosses(){
       </div>
       <div class="cs">${b.strategy}</div>
       <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">Kopieren</button>
-      <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${b.name.replace(/'/g,"\\'")}')">
+      <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${safeName}')">
         ${isDone?'✓ Besiegt':'Als besiegt markieren'}
       </button>
+      <button class="boss-notes-btn${hasNote?' has-note':''}" onclick="toggleBossNote('${safeName}',this)" aria-label="Eigene Notiz">
+        📝 ${hasNote?'Notiz bearbeiten':'Eigene Notiz'}
+      </button>
+      <textarea class="boss-notes-area" placeholder="Eigene Strategie / Build / Erinnerung..." oninput="persistBossNote('${safeName}',this,this.previousElementSibling)">${notes[b.name]||''}</textarea>
     </div>`;
   }).join('');
 }
@@ -3879,13 +4204,15 @@ function renderWeapons(){
   document.getElementById('weapon-tb').innerHTML=WEAPONS.map(w=>{
     const show=!f||w.type.includes(f);
     const s=[w.name,w.type,w.source,w.built_in,w.notes].join(' ').toLowerCase();
+    const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
+    const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
     return `<tr class="trow${show?'':' hide'}" data-s="${s}">
-      <td><div style="display:flex;align-items:center;gap:9px">${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" onerror="this.style.display='none'" style="width:36px;height:36px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:5px;padding:2px;flex-shrink:0">`:wTypeIcon(w.type)}<strong>${w.name}</strong></div></td>
+      <td><div style="display:flex;align-items:center;gap:9px">${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" onerror="this.style.display='none'" loading="lazy" alt="${alt}" style="width:36px;height:36px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:5px;padding:2px;flex-shrink:0">`:wTypeIcon(w.type)}<strong>${w.name}</strong></div></td>
       <td><span class="tag tx">${w.type}</span></td>
       <td>${w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>'}</td>
       <td>${w.crit!=null?'<span class="crt">'+w.crit+'</span>':'<span class="dm">–</span>'}</td>
       <td>${w.slots!=null?w.slots:'<span class="dm">–</span>'}</td>
-      <td style="max-width:210px;font-size:11.5px">${w.source}</td>
+      <td style="max-width:210px;font-size:11.5px">${src}</td>
       <td style="font-size:11.5px">${w.built_in||'–'}</td>
       <td style="font-size:11px;color:var(--dim)">${w.notes||'–'}</td>
     </tr>`;
@@ -4105,13 +4432,14 @@ function renderArmor(){
     const s=[a.name,a.type,a.source,a.effect,a.notes].join(' ').toLowerCase();
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
     const esc=v=>v.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    const srcDisp=a.source&&a.source.trim()?a.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     return `<div class="card${show?'':' hide'}" data-s="${s}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${a.name}</div>
       <div class="cm"><span class="tag ${typeColor}">${a.type}</span></div>
       <div class="crows">
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${a.effect}</span></div>
-        <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:11px">${a.source}</span></div>
+        <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:11px">${srcDisp}</span></div>
         ${a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:11px;color:var(--dim)">${a.notes}</span></div>`:''}
       </div>
       <button class="map-pin-btn" onclick="showMapLoc('${esc(a.name)}','${esc(a.source)}','Rüstung — ${a.type}')">📍 Auf Karte</button>
@@ -5188,30 +5516,120 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Besucher-Counter
   initVisitorCount();
 
-  // Letzte besuchte Section wiederherstellen
-  const lastSec=localStorage.getItem('cd_sec')||'bosses';
-  showSec(lastSec);
+  // URL-State hat Vorrang vor letzter Section
+  const urlState=_readUrlState();
+  if(urlState.sec){
+    _applyUrlState();
+  } else {
+    const lastSec=localStorage.getItem('cd_sec')||'bosses';
+    showSec(lastSec);
+  }
 
-  // Ctrl+K / Cmd+K: Suchfeld fokussieren
+  // Theme aus localStorage anwenden
+  applyStoredTheme();
+
+  // ── Keyboard-Shortcuts ────────────────────────────────────────────
+  // g-prefix für Section-Jumps: gb=bosses, gw=weapons, gs=skills, gm=map, gp=patches etc.
+  const SHORTCUT_SECTIONS={
+    b:'bosses', i:'items', w:'weapons', a:'armor', c:'cores',
+    f:'crafting', q:'quests', m:'map', l:'locations', o:'mounts',
+    s:'skills', d:'disarm', x:'checklists', u:'builds',
+    j:'accessories', h:'witches', e:'chapters', t:'pets', p:'patches'
+  };
+  let _gPrefix=false; let _gTimer=null;
   document.addEventListener('keydown',e=>{
+    const si=document.getElementById('si');
+    const inInput=['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName);
+
+    // Ctrl+K / Cmd+K: Suchfeld fokussieren
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){
       e.preventDefault();
-      const si=document.getElementById('si');
       si.focus(); si.select();
+      return;
     }
-    // ESC: Suchfeld leeren & Sidebar schliessen
+    // ESC: Suchfeld leeren / Modals schliessen / Sidebar schliessen
     if(e.key==='Escape'){
-      const si=document.getElementById('si');
-      if(document.activeElement===si){si.blur();}
+      if(document.activeElement===si){si.blur();return;}
+      const helpO=document.getElementById('help-overlay');
+      if(helpO&&helpO.classList.contains('show')){helpO.classList.remove('show');return;}
+      const rbM=document.getElementById('rb-modal');
+      if(rbM&&rbM.classList.contains('show')){rbM.classList.remove('show');return;}
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('mob-overlay').classList.remove('show');
+      return;
+    }
+    if(inInput)return;
+    // / = Search-Focus (vim-style)
+    if(e.key==='/'){
+      e.preventDefault();
+      si.focus(); si.select();
+      return;
+    }
+    // ? = Help-Modal
+    if(e.key==='?'){
+      e.preventDefault();
+      openHelp();
+      return;
+    }
+    // r = Random Boss
+    if(e.key==='r'){
+      e.preventDefault();
+      randomBoss();
+      return;
+    }
+    // t = Theme zyklisch
+    if(e.key==='t'){
+      e.preventDefault();
+      cycleTheme();
+      return;
+    }
+    // g-prefix: warte auf zweite Taste für Section-Jump
+    if(e.key==='g'){
+      _gPrefix=true;
+      clearTimeout(_gTimer);
+      _gTimer=setTimeout(()=>{_gPrefix=false;},800);
+      return;
+    }
+    if(_gPrefix){
+      _gPrefix=false;
+      clearTimeout(_gTimer);
+      const sec=SHORTCUT_SECTIONS[e.key.toLowerCase()];
+      if(sec){e.preventDefault();showSec(sec);}
+      return;
     }
   });
+
+// (Helper-Funktionen siehe ausserhalb des DOMContentLoaded-Blocks)
 
   // Back-to-Top anzeigen ab 300px Scroll
   const btt=document.getElementById('btt');
   window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>300),{passive:true});
   btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+  // ── Service Worker (PWA) ──────────────────────────────────────────
+  if('serviceWorker' in navigator && location.protocol!=='file:'){
+    window.addEventListener('load',()=>{
+      navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('SW reg failed:',err));
+    });
+  }
+
+  // ── PWA Install Prompt ────────────────────────────────────────────
+  let _deferredInstall=null;
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();
+    _deferredInstall=e;
+    const btn=document.getElementById('pwa-install');
+    if(btn)btn.style.display='flex';
+  });
+  window._pwaInstall=()=>{
+    if(!_deferredInstall)return;
+    _deferredInstall.prompt();
+    _deferredInstall.userChoice.finally(()=>{
+      _deferredInstall=null;
+      const btn=document.getElementById('pwa-install');
+      if(btn)btn.style.display='none';
+    });
+  };
 });
 </script>
 
