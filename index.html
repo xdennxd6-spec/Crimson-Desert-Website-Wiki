@@ -740,6 +740,61 @@ tbody{contain:layout style}
 .bo-saved-btn:hover{border-color:rgba(201,162,39,.42);color:var(--gold)}
 .bo-saved-btn.danger:hover{border-color:rgba(192,57,43,.42);color:var(--rhi)}
 
+/* ── Secrets & Hidden Lore ── */
+.sec-hero{background:linear-gradient(135deg,rgba(140,40,200,.08) 0%,rgba(192,57,43,.06) 50%,rgba(0,0,0,0) 100%);border:1px solid rgba(140,40,200,.22);border-radius:13px;padding:16px 20px;margin-bottom:18px;position:relative;overflow:hidden}
+.sec-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(244,204,82,.06) 0%,transparent 70%);pointer-events:none}
+.sec-hero-title{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--glo);letter-spacing:.06em;margin-bottom:6px;text-transform:uppercase}
+.sec-hero-num{font-family:'Cinzel',serif;font-size:32px;font-weight:900;color:var(--rhi);line-height:1;display:inline-block;margin-right:9px;text-shadow:0 0 18px rgba(232,69,53,.4)}
+.sec-hero-body{font-size:12px;color:#beb5a8;line-height:1.65;position:relative;z-index:1}
+.sec-hero-body em{color:var(--glo);font-style:normal;font-weight:600}
+
+.spoiler-shield{background:rgba(180,45,32,.07);border:1px solid rgba(192,57,43,.32);border-radius:9px;padding:12px 15px;margin-bottom:14px;font-size:11.5px;color:var(--rhi);display:flex;gap:9px;align-items:center}
+.spoiler-shield-ico{font-size:20px;line-height:1;flex-shrink:0}
+.spoiler-shield strong{color:var(--rhi);font-weight:700}
+
+.sec-block{background:var(--card);border:1px solid var(--bdr);border-radius:11px;padding:16px 18px;margin-bottom:13px;transition:border-color .2s}
+.sec-block:hover{border-color:rgba(201,162,39,.32)}
+.sec-block-hd{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--glo);letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-block-hd-ico{font-size:16px;line-height:1}
+.sec-block-body{font-size:11.5px;line-height:1.65;color:var(--text)}
+.sec-block-body p{margin-bottom:8px}
+.sec-block-body p:last-child{margin-bottom:0}
+.sec-block-body ol,.sec-block-body ul{margin:6px 0 8px 18px}
+.sec-block-body li{margin-bottom:3px;color:#c8c0b4}
+.sec-block-body strong{color:var(--glo);font-weight:600}
+.sec-block-body code{background:rgba(201,162,39,.08);color:var(--gold);padding:1px 5px;border-radius:3px;font-size:11px;font-family:monospace}
+.sec-block-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:11px}
+
+.lore-callout{margin-top:11px;padding:10px 13px;background:rgba(140,40,200,.06);border-left:3px solid rgba(140,40,200,.5);border-radius:0 7px 7px 0;font-size:11.5px;line-height:1.6;color:#beb5a8}
+.lore-callout strong{color:#c590ee;font-weight:700}
+
+.cresset-region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:9px}
+.cresset-region{background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:8px;padding:10px 12px}
+.cresset-region-name{font-family:'Cinzel',serif;font-size:11.5px;font-weight:700;color:var(--gold);margin-bottom:3px;letter-spacing:.04em}
+.cresset-region-info{font-size:11px;color:#beb5a8;line-height:1.5}
+
+.easter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:11px;margin-top:6px}
+.easter-card{background:rgba(0,0,0,.15);border:1px solid var(--bdr);border-radius:8px;padding:12px 14px;transition:all .15s}
+.easter-card:hover{border-color:rgba(201,162,39,.32);background:rgba(0,0,0,.22)}
+.easter-card-hd{display:flex;gap:10px;align-items:center;margin-bottom:7px}
+.easter-card-ico{font-size:24px;line-height:1;flex-shrink:0}
+.easter-card-name{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--glo);letter-spacing:.04em;flex:1}
+.easter-card-ref{font-size:9.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+.easter-card-body{font-size:11.5px;line-height:1.55;color:#c8c0b4}
+.easter-card-reward{margin-top:7px;padding-top:7px;border-top:1px dashed rgba(201,162,39,.15);font-size:11px;color:var(--gold)}
+
+.fragment-counter{display:inline-block;font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--glo);background:rgba(201,162,39,.1);padding:1px 9px;border-radius:14px;border:1px solid rgba(201,162,39,.3);letter-spacing:.05em}
+
+.tools-table{width:100%;font-size:11.5px;margin-top:6px}
+.tools-table td{padding:7px 10px;vertical-align:top;border-bottom:1px dashed rgba(201,162,39,.1)}
+.tools-table td:first-child{color:var(--gold);font-weight:600;width:42%;white-space:nowrap;font-family:'Cinzel',serif;letter-spacing:.03em}
+.tools-table tr:last-child td{border-bottom:none}
+
+.priority-list{counter-reset:prio;list-style:none;padding:0;margin:8px 0 0}
+.priority-list li{counter-increment:prio;padding:8px 10px 8px 38px;background:rgba(0,0,0,.18);border:1px solid var(--bdr);border-radius:7px;margin-bottom:6px;position:relative;font-size:11.5px;line-height:1.55;color:var(--text)}
+.priority-list li::before{content:counter(prio);position:absolute;left:9px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--gdim),var(--gold));color:#000;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:11px;font-weight:700}
+.priority-list li strong{color:var(--glo);font-weight:600}
+
 /* Boss-Recommendations */
 .bo-recs{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
 .bo-rec{font-size:10px;padding:3px 9px;background:rgba(201,162,39,.08);border:1px dashed rgba(201,162,39,.32);border-radius:14px;color:var(--gold);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:4px}
@@ -1175,6 +1230,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="help-row"><span class="help-desc">Locations / Mounts / Skills / Disarm</span><span class="help-keys"><span class="kbd">g l</span> <span class="kbd">g o</span> <span class="kbd">g s</span> <span class="kbd">g d</span></span></div>
     <div class="help-row"><span class="help-desc">Checklisten / Builds / Accessoires</span><span class="help-keys"><span class="kbd">g x</span> <span class="kbd">g u</span> <span class="kbd">g j</span></span></div>
     <div class="help-row"><span class="help-desc">Hexen / Kapitel / Pets / Patches</span><span class="help-keys"><span class="kbd">g h</span> <span class="kbd">g e</span> <span class="kbd">g t</span> <span class="kbd">g p</span></span></div>
+    <div class="help-row"><span class="help-desc">Secrets / Achievements / Roadmap / Favoriten</span><span class="help-keys"><span class="kbd">g y</span> <span class="kbd">g z</span> <span class="kbd">g n</span> <span class="kbd">g v</span></span></div>
     <div style="font-size:10.5px;color:var(--dim);margin-top:14px;line-height:1.5;border-top:1px dashed rgba(201,162,39,.12);padding-top:11px">Tipp: URL teilen kopiert auch Section + Suchbegriff — z.B. <code style="color:var(--gold);font-size:10.5px;background:rgba(201,162,39,.08);padding:1px 5px;border-radius:3px">#sec=bosses&amp;q=Myurdin</code></div>
   </div>
 </div>
@@ -1250,6 +1306,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="witches" onclick="showSec('witches')"><span class="nicon">🧙</span><span class="nlabel">Hexen Guide</span></div>
     <div class="ni" data-sec="chapters" onclick="showSec('chapters')"><span class="nicon">📖</span><span class="nlabel">Kapitel-Guide</span></div>
     <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
+    <div class="ni" data-sec="secrets" onclick="showSec('secrets')"><span class="nicon">🕵️</span><span class="nlabel">Secrets &amp; Lore</span></div>
     <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
     <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
     <div class="ni" data-sec="roadmap" onclick="showSec('roadmap')"><span class="nicon">🧭</span><span class="nlabel">Roadmap</span></div>
@@ -1634,6 +1691,34 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div style="display:flex;flex-direction:column;gap:12px" id="ch-timeline"></div>
   </section>
 
+  <section class="sec" id="sec-secrets">
+    <div class="sec-t">🕵️ Secrets &amp; Hidden Lore</div>
+    <div class="spoiler-shield">
+      <span class="spoiler-shield-ico">⚠️</span>
+      <div><strong>SPOILER-WARNUNG:</strong> Diese Section enthält den Hidden Ending Lore (Run 108), Memory-Fragment-Lokationen, Boss-Identitäten und Story-Auflösungen. Wer sich überraschen lassen will: nur die Tabs öffnen, die zu eurem Story-Fortschritt passen.</div>
+    </div>
+    <div class="tabs">
+      <div class="tab active" id="sect-ending" onclick="secretsTab('ending')">🌑 Hidden Ending</div>
+      <div class="tab" id="sect-fragments" onclick="secretsTab('fragments')">📜 Memory Fragments</div>
+      <div class="tab" id="sect-cressets" onclick="secretsTab('cressets')">🔥 Abyss Cressets</div>
+      <div class="tab" id="sect-easter" onclick="secretsTab('easter')">🥚 Easter Eggs</div>
+      <div class="tab" id="sect-locations" onclick="secretsTab('locations')">📍 Hidden Locations</div>
+      <div class="tab" id="sect-weapons" onclick="secretsTab('weapons')">⚔️ Hidden Weapons</div>
+      <div class="tab" id="sect-mechanics" onclick="secretsTab('mechanics')">🔧 Versteckte Mechaniken</div>
+      <div class="tab" id="sect-tools" onclick="secretsTab('tools')">🔎 Such-Tools</div>
+      <div class="tab" id="sect-priority" onclick="secretsTab('priority')">⚡ Priorität</div>
+    </div>
+    <div class="pane active" id="secp-ending"></div>
+    <div class="pane" id="secp-fragments"></div>
+    <div class="pane" id="secp-cressets"></div>
+    <div class="pane" id="secp-easter"></div>
+    <div class="pane" id="secp-locations"></div>
+    <div class="pane" id="secp-weapons"></div>
+    <div class="pane" id="secp-mechanics"></div>
+    <div class="pane" id="secp-tools"></div>
+    <div class="pane" id="secp-priority"></div>
+  </section>
+
   <section class="sec" id="sec-patches">
     <div class="sec-t">📋 Patch-Notes</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.07.00</span> (15.05.2026).</div>
@@ -1671,11 +1756,11 @@ const BOSSES=[
   {name:"Draven the Crowcaller",chapter:5,region:"The Abyss - Crow's Nest",quest:"Toward the Nest",drop_weapon:"Tauria Curved Sword",drop_abyss_gear:"Crow's Pursuit, Gale I, Wind Slash",weakness:"–",parry_or_dodge:"Mix",strategy:"3 HP-Bars. Aerial-Phasen: Glider nutzen. Reward auch: Blackwing Leather Mask + Armor."},
   {name:"Myurdin (Phase 1)",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Decisive Battle",drop_weapon:"Melted Ambition",drop_abyss_gear:"Groundsurge",weakness:"–",parry_or_dodge:"Parry Slow-Sword; Dodge All-Fours-Bait",strategy:"All-Fours Stance = BAIT, nicht angreifen! Loop: Focus → Blinding Flash → Finisher → R2."},
   {name:"Lava Myurdin (Phase 2)",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Decisive Battle",drop_weapon:"(Drop nach Phase 1)",drop_abyss_gear:"Groundsurge",weakness:"–",parry_or_dodge:"Parry Slow-Sword; Dodge Lava Springs",strategy:"Lava-Bear-Charge 3-4x. Lava Springs: 1s Warnung → wegrollen. Jump-Slam: Bildschirm dunkel → Force Palm. MITTE halten!"},
-  {name:"Hexe Marie",chapter:9,region:"Demeniss - Hexe Sanctuary",quest:"Black Witch",drop_weapon:"Crow Whisperer",drop_abyss_gear:"–",weakness:"Feuer (Barrier-Phase)",parry_or_dodge:"Parry Melee; Dodge Crow Barrage",strategy:"Vor-Quest: 4 Totems S→N. Crow Barrage: senkrecht zu ihr rollen. Adds: Urn Swordsman first."},
+  {name:"Hexe Marie",chapter:9,region:"Demeniss - Hexe Sanctuary",quest:"Black Witch",drop_weapon:"Crow Whisperer",drop_abyss_gear:"–",weakness:"Feuer (Barrier-Phase)",parry_or_dodge:"Parry Melee; Dodge Crow Barrage",strategy:"Vor-Quest: 4 Totems S→N. Crow Barrage: senkrecht zu ihr rollen. Adds: Urn Swordsman first. [Hidden Lore: Hexe Marie ist der korrumpierte/fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff. Siehe Secrets-Section.]"},
   {name:"Golden Star",chapter:11,region:"Delesyia - Marni's Masterium",quest:"Master of a Forgotten Land",drop_weapon:"Power Core (Story)",drop_abyss_gear:"–",weakness:"Blitz P2 (3x Schaden)",parry_or_dodge:"Dodge alles",strategy:"P1: Marni-Spear-Pylons → L2+R2 → Stagger-Bar. Golem Adds sofort killen. P2: auf Blackstar, Force Palm aufs Auge."},
   {name:"Black Fang",chapter:null,region:"Hernand - Howling Hollow Cave",quest:"House Celeste Faction",drop_weapon:"Silver Fang Fang",drop_abyss_gear:"–",weakness:"Blitz",parry_or_dodge:"Dodge Lunges",strategy:"Lightning-Stagger. Reward: Silver Fang Mount nach Crafting."},
   {name:"Beloth the Darksworn",chapter:null,region:"Endgame",quest:"Overwhelming Being",drop_weapon:"Plate Armor of the Shadows",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge fast alles",strategy:"~3-Hit-Killer. FROSTCURSED ICE-IMMUNITY-SET PFLICHT. Geduld, kein Tank-and-Spank."},
-  {name:"Corrupted Caliburn",chapter:12,region:"The Abyss",quest:"A Shadow in the Void",drop_weapon:"Twisted Verdict",drop_abyss_gear:"Abyssal Rays",weakness:"–",parry_or_dodge:"Parry Sword-Strings; Dodge Teleport-Smash",strategy:"SAVE VOR DEM GATE! Stillstand → hinter dodgen, 4 Heavy + Light bis Shadow-Wave → durchdodgen."},
+  {name:"Corrupted Caliburn",chapter:12,region:"The Abyss",quest:"A Shadow in the Void",drop_weapon:"Twisted Verdict",drop_abyss_gear:"Abyssal Rays",weakness:"–",parry_or_dodge:"Parry Sword-Strings; Dodge Teleport-Smash",strategy:"SAVE VOR DEM GATE! Stillstand → hinter dodgen, 4 Heavy + Light bis Shadow-Wave → durchdodgen. [Hidden Lore: Caliburn ist eine Inkarnation von Umbra — siehe Run-108-Auflösung in Secrets-Section.]"},
   {name:"Avatar of Umbra",chapter:12,region:"The Abyss",quest:"Blinding Darkness",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge rote Attacks",strategy:"Kombiniert alle Boss-Moves. Fire-Fist DoT + Ancestral Warriors. Maximum aggro + Healing."},
   {name:"Umbra (Final)",chapter:12,region:"The Abyss",quest:"Blinding Darkness",drop_weapon:"Falling Palm Skill + 99.999 ATK Waffe",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge Lasers/Rocks",strategy:"Auf Blackstar. R1 Fireballs aufs Auge → Stagger → Dismount → Glide → Air-Dash → Force Palm aufs Auge (2-3x)."},
   {name:"Kearush the Slayer",chapter:5,region:"Hernand Highlands",quest:"Story",drop_weapon:"Abyss Artefakte",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"KEIN Parry/Block — Dodge alles",strategy:"Gorilla. Forward-right dodge → 3 schnelle Hits → disengage. Min: HP Lv4, Sta Lv4, Refine 4 Plate."},
@@ -4800,6 +4885,426 @@ function renderRoadmap(){
   `).join('');
 }
 
+// ===== SECRETS & HIDDEN LORE =====
+const SECRETS_EASTER_EGGS=[
+  {ico:'🦑',name:'Squid Game — Red Light, Green Light',ref:'Ancient Ruins of Drakesfall Gorge',body:'Zentrale Statue dreht periodisch den Kopf. Vorrücken nur wenn sie wegschaut, sofort stillstehen sobald sie sich dreht. Bewegung beim "Roten Licht" → Fail.',reward:'1 Abyss Artifact (Skill Point)'},
+  {ico:'💰',name:'Diablo — Treasure Goblins',ref:'Random-Encounter auf Pywel-Straßen',body:'Goblin mit Truhe auf dem Rücken läuft weg → in Time-Limit töten. Sehr schnell, sofort attackieren bei Sichtung.',reward:'1 Gold-Ingot → 500 Silver Coins bei jeder Bank'},
+  {ico:'⚔️',name:'Salvatore — Let Me Solo Her / Godfather',ref:'Hernand Town (nach Kap. 1)',body:'Isolierte Laternenpfähle auf Bounty-Poster prüfen (nicht Plakatwände). Salvatore-Optik ist Hommage an "Let Me Solo Her" (Elden Ring), Name verweist auf The Godfather.',reward:'Standard Bounty-Loot + optionaler Hidden-NPC-Fight'}
+];
+
+const SECRETS_LOCATIONS=[
+  {ico:'🏘️',name:'Pororin Hidden Village',ref:'Wald von Pororin · SO von Hernand Castle',body:'Kinder schlagen Kliff dort wiederholt KO — <strong>kein Bug, das ist der Trigger</strong>. Nach 3 KOs erscheint ein Shai-NPC und gibt Quest. Relic vom Giant Ant holen (draufklettern oder Timing). <em>Trap: die meisten Spieler kämpfen — die korrekte Lösung ist KO akzeptieren und warten.</em>',reward:'Zugang zum Hidden Village mit eigenen Quests/Vendoren'},
+  {ico:'🌿',name:'Secret Garden (Sanctorum of Insight)',ref:'Abyss · nach Kap. 4 / "The Spire of Stars"',body:'Laser-Redirection-Puzzle. Blöcke mit Axiom Force verschieben, Spheres mit Force Palm aktivieren, Laser auf farbige (blau/orange) Targets richten. Zusätzliche Hidden-Truhen via Glide nach Süden + nahe Teleporter.',reward:'Abyss Artifact + 2× Epidote + Abyss Gear + Faded Artifact'},
+  {ico:'🕳️',name:'Giant Hole / Sinkhole',ref:'Greymane Camp · neben customizable House',body:'Keine Quest-Markierung, kein Tutorial. Reinspringen → versteckter Bereich mit Loot.',reward:'Hidden Loot'}
+];
+
+const SECRETS_MECHANICS=[
+  {ico:'🧱',name:'Illusory Walls (Souls-style)',body:'Manche Wände lösen sich auf wenn man hineinläuft — kein Tutorial. Erkennung: Laterne (L1/LB) in Höhlen/Ruinen — wenn ein Wand-Marker erscheint aber Interact nichts macht, einfach reinlaufen.',reward:'Hidden Passages, Secret Rooms, Treasure Chests'},
+  {ico:'☀️',name:'Sunlight-Cooking (Light Reflection Skill)',body:'Mit Light Reflection an der Waffe einen Sonnenstrahl auf rohes Essen am Boden konzentrieren → es kocht. Gleiches Prinzip: entzündet Holzkonstruktionen, Büsche, Karren, Gegner (Fire-DoT). Auch: enthüllt Hidden Relics und zeigt was NPCs in Taschen tragen.',reward:'Sehr unterdokumentiert — belohnt experimentation'},
+  {ico:'🧗',name:'Precision Jumping (Climbing ohne Stamina)',body:'Beim Klettern an einer Klippe gezielt auf einen Punkt oberhalb visieren → springt hoch <strong>ohne Stamina-Verbrauch</strong>. Bei Slip: Circle/B drücken zum Greifen. Workaround um Cressets vor dem Freischalten der Traversal-Skills zu erreichen.',reward:'Cresset-Farming ohne Skill-Lock'},
+  {ico:'⚰️',name:'Crossroads Tombs',body:'Jedes Grab an einer Wegkreuzung enthält ein sealed Abyss Artifact mit Challenge. Mit <strong>Guiding Light</strong> (PC L1+R1 / Console LB+RB) als großer leuchtender Kreis schon aus der Ferne sichtbar.',reward:'Garantierter Puzzle-Inhalt'},
+  {ico:'⚡',name:'Auto-Combo & Wind Slash',body:'RB/R2 gedrückt halten → Kliff spielt komplettes Combo automatisch. Nach Hornsplitter-Boss das <strong>Lord\'s Sword</strong> als Secondary equippen → schaltet <strong>Wind Slash</strong> frei (overpowered ranged attack, spam-bar).',reward:'OP Range-Burst'},
+  {ico:'⚒️',name:'Free Grindstones & Anvils',body:'In der gesamten Welt verteilt. Kurze Cutscene → temporärer ATK-Buff (Grindstone) bzw. DEF-Buff (Anvil). <strong>Kostenlos</strong> — vor jedem Boss nutzen!',reward:'Pre-Boss-Buff gratis'}
+];
+
+const SECRETS_HIDDEN_WEAPONS=[
+  {name:'Hollow Visage',atk:17,extra:'Speed Lv.2 · Insight I + Gale I + Destruction I (3 Cores built-in)',loc:'Truhe am Ende der <strong>Dawn Cave</strong> · hinter Wasserfall im Mountain of Lost Souls',difficulty:'Mittel'},
+  {name:'Survivor\'s Solitude',atk:21,extra:'Speed Lv.1',loc:'<strong>Death\'s Grip Cave</strong> · hinter Wasserfall · NW von Lake Kharonso',difficulty:'Lehre: Wasserfälle sind nie nur Deko — immer mit Stab-Attack durchstoßen'},
+  {name:'Vessel of Dark Pursuit',atk:25,extra:'Abyss <strong>Wound of Darkness</strong>',loc:'<strong>Antumbra\'s Sword</strong>-Boss · Sanctum of Absolution',difficulty:'Stärkste Secret-Weapon — Pre-Boss-Buffs (Grindstone, Anvil, Pan-Fried Marinated Meat) empfohlen'}
+];
+
+const SECRETS_CRESSET_REGIONS=[
+  {name:'Hernand',info:'Vertikale Climbs + Underground-Drops · Starter-Region, früh farmbar'},
+  {name:'Demeniss + Delesyia',info:'Mix aus Caves und kollabierten Ruinen'},
+  {name:'Pailune',info:'17 Locations noch unconfirmed (Stand Frühjahr 2026)'},
+  {name:'Crimson Desert (Region)',info:'Treibsand, Megalith-Pillars · schwerste Spots'}
+];
+
+const SECRETS_TOOLS=[
+  {tool:'Laterne',input:'CTRL / L1 / LB (halten, out-of-combat)',effect:'Nearby-Loot, Memory Fragments, destructible Objects, Illusory Walls'},
+  {tool:'Guiding Light',input:'L1+R1 / LB+RB',effect:'Distant Artifacts, Fast-Travel-Spots, Puzzle-Marker auf dem Horizont'},
+  {tool:'Visione (equipped)',input:'Inventar oder Quick Slot',effect:'Memory Fragment Playback (alle 201 Stück)'},
+  {tool:'Blinding Flash',input:'siehe Skills',effect:'Wie Laterne aber stärker — deckt manche Hidden Marks auf (z.B. "107" in Goyen\'s Höhle)'},
+  {tool:'Dark Fog Lantern',input:'Alfonso-House Quest "Transcendent Structure"',effect:'Enhanced Laterne — Memory Fragments + Hidden Clues + Sealed Artifacts + Ghost-Hologramme alle gleichzeitig'}
+];
+
+function secretsTab(id){
+  const ids=['ending','fragments','cressets','easter','locations','weapons','mechanics','tools','priority'];
+  ids.forEach(t=>{
+    const tab=document.getElementById('sect-'+t);
+    const pane=document.getElementById('secp-'+t);
+    if(tab)tab.classList.toggle('active',t===id);
+    if(pane)pane.classList.toggle('active',t===id);
+  });
+}
+
+function renderSecrets(){
+  // Hidden Ending Tab
+  const eEnd=document.getElementById('secp-ending');
+  if(eEnd){
+    eEnd.innerHTML=`
+      <div class="sec-hero">
+        <div class="sec-hero-title">Run 108 — das wahre Ende</div>
+        <div class="sec-hero-body">
+          <span class="sec-hero-num">108</span>Der Spieler-Playthrough ist <em>Versuch Nr. 108</em>. <strong>White Crow + Alustin</strong> sind Time-Traveler-Wächter, die Kliff durch wiederholte Zeitsprünge erschaffen und modifizieren, um Umbra zu besiegen. Sie haben 107 Versuche dokumentiert — jeder fehlgeschlagen. Caliburn ist eine <em>Inkarnation von Umbra</em>. Hexe Marie ist der korrumpierte/fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff.
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🎯</span>Trigger / Voraussetzungen</div>
+        <div class="sec-block-body">
+          <p>Erst freischaltbar <strong>nach vollständigem Story-Abschluss</strong>:</p>
+          <ul>
+            <li>Prolog + alle <strong>12 Kapitel</strong> + Epilog (Kap. XII)</li>
+            <li>Alle <strong>40 Abyss-Challenges</strong> inkl. <em>Dimensional Bonds</em> (Kap. XII)</li>
+            <li>Nicht erforderlich: die 4 Eternal-Corridor-Puzzles — optionales DLC-Setup</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">📖</span>Schritt-für-Schritt</div>
+        <div class="sec-block-body">
+          <ol>
+            <li>Per Nexus-Teleport zum <strong>Axiom Archive</strong> (Path of Providence · unten links auf der Abyss-Karte) — schon aus Kapitel 1 freigeschaltet</li>
+            <li>In die <strong>Library</strong> eintreten — <em>Spirit Skills sind hier blockiert</em> (kein Aerial Force Palm)</li>
+            <li><strong>Axiom Force</strong> nutzen, um den <strong>3. Stock</strong> zu erreichen</li>
+            <li>Auf den Bücherregalen liegen <strong>6 Archive-Records-Bücher</strong> — alle aufnehmen</li>
+            <li><strong>Jede Seite (links + rechts) scannen</strong> — die Bücher enthalten zusammen <strong>42 nummerierte Knowledge Logs</strong></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">📚</span>Die 6 Archive-Records-Bücher</div>
+        <div class="sec-block-body">
+          <div class="sec-block-grid">
+            <div><strong>Vol I:</strong> 8 Logs (Nr. 1, 2, 3, 4, 5, 7, 8, 16)</div>
+            <div><strong>Vol II:</strong> 8 Logs (Nr. 17, 18, 19, 25, 26, 35, 36, 38)</div>
+            <div><strong>Vol III:</strong> 8 Logs (Nr. 39, 45, 46, 47, 48, 53, 54, 59)</div>
+            <div><strong>Vol IV:</strong> 8 Logs (Nr. 60, 61, 62, 66, 67, 71, 72, 77)</div>
+            <div><strong>Vol V:</strong> 7 Logs (Nr. 78, 82, 83, 89, 90, 98, 99)</div>
+            <div><strong>Vol VI:</strong> 3 Logs (Nr. 100, 106, 107)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔍</span>Die "107"-Markierungen (versteckt in der Welt)</div>
+        <div class="sec-block-body">
+          <ol>
+            <li><strong>Axiom Archive:</strong> Rückwand neben dem Teleporter, gegenüber Eingang</li>
+            <li><strong>Goyen's Höhle (Nest of Valor):</strong> rechts der Arena, steinerne Treppe hoch — über dem Bett <strong>mit der Laterne beleuchten</strong>. 107 Striche werden sichtbar. Mit Blinding Flash auch möglich, bei Tageslicht schwerer zu zählen</li>
+          </ol>
+          <div class="lore-callout">
+            <strong>Implikation:</strong> Goyen zählt seit seinem eigenen Tod jede Wiederholung mit. Auch er wurde von White Crow + Alustin erschaffen (Nest of Valor).
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">📰</span>Quelle</div>
+        <div class="sec-block-body">
+          <p>vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert — Stand: 17.05.2026 (RubyRose / Vulkk)</p>
+        </div>
+      </div>
+    `;
+  }
+
+  // Memory Fragments
+  const eFr=document.getElementById('secp-fragments');
+  if(eFr){
+    eFr.innerHTML=`
+      <div class="sec-hero">
+        <div class="sec-hero-title">Memory Fragments &amp; Visione</div>
+        <div class="sec-hero-body">
+          <span class="sec-hero-num">201</span>Memory Fragments insgesamt auf dem Kontinent Pywel. Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🪖</span>Visione freischalten</div>
+        <div class="sec-block-body">
+          <ul>
+            <li><strong>Quest:</strong> ${linkifyXrefs('Where the Light Leads')} / Unexpected Gift — Hauptstory <strong>Kapitel 2</strong></li>
+            <li><strong>Ort:</strong> Spitze des <strong>Lioncrest Watchtower</strong> in Hernand</li>
+            <li>Wird in mehreren späteren Quests verlangt</li>
+            <li>Seit Patch 1.00.03 wird Visione nach Laternen-Lesen <em>automatisch equippt und abgespielt</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔵</span>Memory Fragments entdecken</div>
+        <div class="sec-block-body">
+          <ol>
+            <li>Visione muss im Inventar sein</li>
+            <li>Out-of-Combat <strong>Laterne</strong> raushalten (PC: <code>CTRL</code> · PS: <code>L1</code> · Xbox: <code>LB</code>)</li>
+            <li>In Nähe eines Fragments <strong>pulsiert die Laterne blau</strong> und zeigt Geister-Hologramme</li>
+            <li>Stillhalten bis <strong>"Learning in Progress"</strong>-Leiste oben links voll ist</li>
+            <li>Fragment ist freigeschaltet und ab sofort im Visione-Katalog abspielbar</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">▶️</span>Abspielen (3 Wege)</div>
+        <div class="sec-block-body">
+          <ul>
+            <li><strong>Aus dem Inventar</strong> (empfohlen — am schnellsten): Visione hovern → Use halten → Memory wählen</li>
+            <li><strong>Gear Quick Slot Radial:</strong> <code>F2</code> / D-Pad Left halten → Helmet-Slot → Visione → Play → Memory wählen</li>
+            <li><strong>Contextual Quick-Menu:</strong> Nach Entdeckung eines neuen Fragments ersetzt die Visione-Anzeige kurzzeitig das Quick-Menu</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">📌</span>Wichtige Storyfragmente</div>
+        <div class="sec-block-body">
+          <ul>
+            <li><strong>Hernand-Region:</strong> Lioncrest Watchtower (Quest-Trigger), Grotto of the Penitent, Dragon's Stone Chamber Ruins (Eingang)</li>
+            <li><strong>Great Palace of Demeniss</strong> (Kapitel 8): "Blood Coronation" — Pflicht-Memory der Hauptstory</li>
+          </ul>
+          <p style="margin-top:8px"><strong>Quest-Gating durch Memory Fragments</strong> (Kap. 2 "Hernand in Chaos"):</p>
+          <ul>
+            <li>Trial After Trial</li>
+            <li>The Man Trapped in the Mire</li>
+            <li>Missing Companion</li>
+            <li>Secrets Hidden in the Dark</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🗺️</span>Interaktive Karte</div>
+        <div class="sec-block-body">
+          <p>Vollständige Memory-Fragment-Karte mit allen 201 Positionen: <a href="https://crimsondesert.th.gl/guides/Memory%20Fragment" target="_blank" rel="noopener" style="color:var(--gold)">crimsondesert.th.gl/guides/Memory Fragment</a> (zuletzt aktualisiert 07.04.2026)</p>
+        </div>
+      </div>
+    `;
+  }
+
+  // Cressets
+  const eCr=document.getElementById('secp-cressets');
+  if(eCr){
+    eCr.innerHTML=`
+      <div class="sec-hero">
+        <div class="sec-hero-title">Abyss Cressets — Pilgrim of Wonders</div>
+        <div class="sec-hero-body">
+          <span class="sec-hero-num">60</span>verborgene Abyss-Brazier in Klippen, Höhlen, Felsspitzen, hinter Treibsand-Feldern. Verteilt über alle 5 Regionen. <em>Prestigeträchtigste Collectibles-Endgame.</em>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🎁</span>Reward pro Cresset</div>
+        <div class="sec-block-body">
+          <ul>
+            <li><strong>1 Abyss Artifact</strong> (= 1 Skill Point) pro entdecktem Cresset</li>
+            <li><strong>Fast-Travel-Point</strong> an jeder Location — essentiell für Late-Game-Mobility</li>
+            <li>Achievement / Trophy <strong>"Pilgrim of Wonders"</strong> bei allen 60</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🗺️</span>Regionale Verteilung</div>
+        <div class="sec-block-body">
+          <div class="cresset-region-grid">
+            ${SECRETS_CRESSET_REGIONS.map(r=>`
+              <div class="cresset-region">
+                <div class="cresset-region-name">${r.name}</div>
+                <div class="cresset-region-info">${r.info}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">⚡</span>Pflicht-Traversal-Skills für High-Tier-Cressets</div>
+        <div class="sec-block-body">
+          <ul>
+            <li>${linkifyXrefs('Aerial Force Palm')} — Vertikal-Boost</li>
+            <li><strong>Gliding</strong> (Cape-Glide) — Horizontal-Reach</li>
+            <li><strong>Triple Aerial Focus Palm</strong> — höchste Peaks</li>
+          </ul>
+          <div class="lore-callout">
+            Diese Skills <strong>früh priorisieren</strong>, wenn man Cressets effizient farmen will. Workaround vor Skill-Unlock: <strong>Precision Jumping</strong> via "ohne Stamina-Verbrauch" Klettern (siehe Tab "Versteckte Mechaniken").
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Easter Eggs
+  const eEa=document.getElementById('secp-easter');
+  if(eEa){
+    eEa.innerHTML=`
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🥚</span>Pop-Culture Easter Eggs</div>
+        <div class="sec-block-body">
+          <div class="easter-grid">
+            ${SECRETS_EASTER_EGGS.map(e=>`
+              <div class="easter-card">
+                <div class="easter-card-hd">
+                  <span class="easter-card-ico">${e.ico}</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="easter-card-name">${e.name}</div>
+                    <div class="easter-card-ref">${e.ref}</div>
+                  </div>
+                </div>
+                <div class="easter-card-body">${e.body}</div>
+                <div class="easter-card-reward">🎁 ${e.reward}</div>
+              </div>
+            `).join('')}
+          </div>
+          <p style="font-size:11px;color:var(--dim);margin-top:14px;line-height:1.5">Quelle: dropreference.com/en/blog/guide/crimson-desert-secrets-easter-eggs-2026 · allthings.how</p>
+        </div>
+      </div>
+    `;
+  }
+
+  // Hidden Locations
+  const eLo=document.getElementById('secp-locations');
+  if(eLo){
+    eLo.innerHTML=`
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">📍</span>Hidden Locations</div>
+        <div class="sec-block-body">
+          <div class="easter-grid">
+            ${SECRETS_LOCATIONS.map(l=>`
+              <div class="easter-card">
+                <div class="easter-card-hd">
+                  <span class="easter-card-ico">${l.ico}</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="easter-card-name">${l.name}</div>
+                    <div class="easter-card-ref">${l.ref}</div>
+                  </div>
+                </div>
+                <div class="easter-card-body">${l.body}</div>
+                <div class="easter-card-reward">🎁 ${l.reward}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Hidden Weapons
+  const eWe=document.getElementById('secp-weapons');
+  if(eWe){
+    eWe.innerHTML=`
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">⚔️</span>Hidden Weapons</div>
+        <div class="sec-block-body">
+          <p style="margin-bottom:11px">Drei oft-übersehene Waffen mit teils brutalem Power-Level. Alle erreichbar ohne Story-Gating.</p>
+          <div class="easter-grid">
+            ${SECRETS_HIDDEN_WEAPONS.map(w=>`
+              <div class="easter-card">
+                <div class="easter-card-hd">
+                  <span class="easter-card-ico">⚔️</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="easter-card-name">${w.name}</div>
+                    <div class="easter-card-ref">ATK ${w.atk} · ${w.extra}</div>
+                  </div>
+                </div>
+                <div class="easter-card-body"><strong>Fundort:</strong> ${w.loc}</div>
+                <div class="easter-card-reward">💡 ${w.difficulty}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="lore-callout" style="margin-top:14px">
+            <strong>Wasserfall-Caves allgemein:</strong> 43 Waterside Caves im Spiel, alle hinter Wasserfällen. Eintritt: auf Stein-Plattform stellen, <strong>Stab-Attack</strong> durch den Wasservorhang. Jede enthält Treasure Chest.
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Versteckte Mechaniken
+  const eMe=document.getElementById('secp-mechanics');
+  if(eMe){
+    eMe.innerHTML=`
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔧</span>Versteckte Spielmechaniken</div>
+        <div class="sec-block-body">
+          <div class="easter-grid">
+            ${SECRETS_MECHANICS.map(m=>`
+              <div class="easter-card">
+                <div class="easter-card-hd">
+                  <span class="easter-card-ico">${m.ico}</span>
+                  <div class="easter-card-name" style="flex:1">${m.name}</div>
+                </div>
+                <div class="easter-card-body">${m.body}</div>
+                <div class="easter-card-reward">🎁 ${m.reward}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Such-Tools
+  const eTo=document.getElementById('secp-tools');
+  if(eTo){
+    eTo.innerHTML=`
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔎</span>Wichtige Such-Tools</div>
+        <div class="sec-block-body">
+          <table class="tools-table">
+            <tbody>
+              ${SECRETS_TOOLS.map(t=>`<tr>
+                <td>${t.tool}</td>
+                <td><div style="margin-bottom:3px;color:var(--gold);font-size:10.5px"><code>${t.input}</code></div><div style="color:#beb5a8">${t.effect}</div></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+          <div class="lore-callout" style="margin-top:14px">
+            <strong>Reflex:</strong> An jeder neuen erhöhten Vista <strong>UND</strong> an jedem neuen Zone-Eingang <strong>beide</strong> aktivieren (Laterne + Guiding Light). Spart Stunden.
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Priorität
+  const ePr=document.getElementById('secp-priority');
+  if(ePr){
+    ePr.innerHTML=`
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">⚡</span>Was zuerst freischalten?</div>
+        <div class="sec-block-body">
+          <p>Reihenfolge für effizientes Secret-Hunting:</p>
+          <ol class="priority-list">
+            <li><strong>Visione</strong> (Kap. 2 Hernand) — Pflicht für Memory Fragments</li>
+            <li><strong>Dark Fog Lantern</strong> (Alfonso-Quest, Hernand) — Mehrzweck-Secret-Scanner</li>
+            <li>${linkifyXrefs('Force Palm')} + ${linkifyXrefs('Aerial Force Palm')} — für Abyss Cressets</li>
+            <li><strong>Gliding (Cape)</strong> — Horizontal-Reach Cressets</li>
+            <li><strong>Axiom Force</strong> — Axiom Archive 3. Stock = Hidden Ending Books</li>
+            <li>Alle Main Quests + 40 Abyss Challenges → <strong>Hidden Ending</strong></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="sec-block">
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">📰</span>Quellen (Stand: 2026-05-20)</div>
+        <div class="sec-block-body">
+          <ul style="font-size:11px;color:#beb5a8">
+            <li><a href="https://vulkk.com" target="_blank" rel="noopener" style="color:var(--gold)">vulkk.com</a> — Visione-Guide + Hidden-Ending-Guide (RubyRose, Vulkk)</li>
+            <li><a href="https://dropreference.com" target="_blank" rel="noopener" style="color:var(--gold)">dropreference.com</a> — Easter-Eggs-Guide 2026 (yuux, 28.03.2026)</li>
+            <li><a href="https://crimsondesert.th.gl" target="_blank" rel="noopener" style="color:var(--gold)">crimsondesert.th.gl</a> — interaktive Memory-Fragment-Karte</li>
+            <li><a href="https://mapmaster.io/games/crimson-desert" target="_blank" rel="noopener" style="color:var(--gold)">mapmaster.io</a> — 201 Fragment Locations</li>
+            <li><a href="https://powerpyx.com" target="_blank" rel="noopener" style="color:var(--gold)">powerpyx.com</a> — Memory Fragment Walkthrough</li>
+            <li><a href="https://crimsondesertwiki.net" target="_blank" rel="noopener" style="color:var(--gold)">crimsondesertwiki.net</a> — Hidden Secrets-Guide</li>
+          </ul>
+        </div>
+      </div>
+    `;
+  }
+}
+
 // ===== FAVORITEN-SYSTEM (universal) =====
 const FAV_KINDS={
   boss:{ico:'🗡️',label:'Bosse',pl:'Bosse'},
@@ -5186,7 +5691,8 @@ const ACHIEVEMENTS=[
   {id:'sanc-master',ico:'🏛️',name:'Sanctum-Pilger',desc:'Alle 15 Sanctums abgeschlossen',check:()=>{if(typeof SANCTUM_IDS==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return SANCTUM_IDS.every(s=>te.includes(s));},prog:()=>{if(typeof SANCTUM_IDS==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(SANCTUM_IDS.filter(s=>te.includes(s)).length/15,1);}},
   {id:'true-ending',ico:'⭐',name:'True Ending Hunter',desc:'Alle True-Ending-Pflichten abgehakt',check:()=>{if(typeof TRUE_ENDING==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return TRUE_ENDING.length>0&&TRUE_ENDING.every(t=>te.includes(t.id));},prog:()=>{if(typeof TRUE_ENDING==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(te.length/TRUE_ENDING.length,1);}},
   {id:'chapter-done',ico:'📖',name:'Storyteller',desc:'Alle 12 Kapitel abgeschlossen',check:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return d.length>=12;},prog:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return Math.min(d.length/12,1);}},
-  {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return seen.length>=3;},prog:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return Math.min(seen.length/3,1);}}
+  {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return seen.length>=3;},prog:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return Math.min(seen.length/3,1);}},
+  {id:'secrets-visited',ico:'🕵️',name:'Run 108',desc:'Besuche die Secrets-Section (Hidden-Ending-Lore)',check:()=>!!localStorage.getItem('cd_secrets_visited')}
 ];
 function loadAchUnlocked(){return JSON.parse(localStorage.getItem('cd_ach_unlocked')||'[]');}
 function checkAchievements(silent){
@@ -5430,6 +5936,13 @@ function showSec(id, opts){
   if(id==='favorites'&&typeof renderFavorites==='function')renderFavorites();
   if(id==='roadmap'&&typeof renderRoadmap==='function')renderRoadmap();
   if(id==='achievements'&&typeof renderAchievements==='function')renderAchievements();
+  if(id==='secrets'){
+    if(!localStorage.getItem('cd_secrets_visited')){
+      localStorage.setItem('cd_secrets_visited','1');
+      if(typeof checkAchievements==='function')checkAchievements();
+      if(typeof renderAchievements==='function')renderAchievements();
+    }
+  }
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
   sec.classList.add('active');
@@ -7084,6 +7597,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderSanctumGuide();
   renderChapters();
   renderPatches();
+  renderSecrets();
   renderQuestTimeline();
   renderRegionHeatmap();
   renderAchievements();
@@ -7126,7 +7640,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     b:'bosses', i:'items', w:'weapons', a:'armor', c:'cores',
     f:'crafting', q:'quests', m:'map', l:'locations', o:'mounts',
     s:'skills', d:'disarm', x:'checklists', u:'builds',
-    j:'accessories', h:'witches', e:'chapters', t:'pets', p:'patches'
+    j:'accessories', h:'witches', e:'chapters', t:'pets', p:'patches',
+    y:'secrets', z:'achievements', n:'roadmap', v:'favorites'
   };
   let _gPrefix=false; let _gTimer=null;
   document.addEventListener('keydown',e=>{
