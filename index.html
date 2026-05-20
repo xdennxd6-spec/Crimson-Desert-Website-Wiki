@@ -620,6 +620,62 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 /* Achievement Toast Animation */
 @keyframes achSlideIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
+/* Boss-Difficulty Rating */
+.bd-rating{display:flex;align-items:center;gap:7px;margin-top:9px;padding:7px 11px;background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:7px;justify-content:space-between}
+.bd-rating-lbl{font-size:10px;color:var(--dim);letter-spacing:.04em;text-transform:uppercase}
+.bd-stars{display:flex;gap:2px}
+.bd-star{cursor:pointer;font-size:16px;color:#3a342e;transition:all .12s;line-height:1;user-select:none}
+.bd-star.on{color:var(--gold);text-shadow:0 0 6px rgba(244,204,82,.5)}
+.bd-star:hover,.bd-star.preview{color:var(--glo);transform:scale(1.15)}
+.bd-clear{margin-left:6px;font-size:9px;color:var(--dim);cursor:pointer;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);font-family:'Inter',sans-serif;transition:all .12s}
+.bd-clear:hover{color:var(--rhi);border-color:rgba(192,57,43,.42)}
+
+/* Build-Loadout-Optimizer */
+.bo-wizard{background:linear-gradient(135deg,rgba(192,57,43,.06) 0%,rgba(201,162,39,.04) 100%);border:1px solid var(--bdr);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+.bo-step{margin-bottom:16px}
+.bo-step-lbl{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.bo-pills{display:flex;flex-wrap:wrap;gap:6px}
+.bo-pill{padding:8px 14px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:20px;cursor:pointer;color:var(--text);font-size:11.5px;font-family:'Inter',sans-serif;font-weight:500;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.bo-pill:hover{border-color:#444;background:rgba(255,255,255,.06)}
+.bo-pill.active{background:rgba(192,57,43,.18);border-color:rgba(192,57,43,.55);color:var(--rhi);box-shadow:0 0 0 1px rgba(192,57,43,.12) inset}
+.bo-pill-ico{font-size:14px;line-height:1}
+.bo-result{margin-top:18px;padding:16px 18px;background:rgba(0,0,0,.22);border:1px solid rgba(201,162,39,.22);border-radius:10px}
+.bo-result-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+.bo-result-name{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--glo);letter-spacing:.04em}
+.bo-result-style{font-size:10.5px;color:var(--gold)}
+.bo-result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:11px}
+.bo-slot{background:#151212;border:1px solid var(--bdr);border-radius:7px;padding:9px 12px}
+.bo-slot-lbl{font-size:9px;color:var(--gdim);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:3px;font-weight:700}
+.bo-slot-val{font-size:12px;color:var(--text);font-weight:600;line-height:1.4}
+.bo-result-tip{padding:9px 12px;background:rgba(180,45,32,.08);border-left:2px solid rgba(192,57,43,.55);border-radius:0 6px 6px 0;font-size:11.5px;color:#c4bcb4;line-height:1.65}
+
+/* Roadmap */
+.rm-progress{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;padding:12px 14px;background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:9px}
+.rm-prog-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:18px;font-size:11px}
+.rm-prog-pill-val{font-family:'Cinzel',serif;font-weight:700;color:var(--glo);font-size:12px}
+.rm-prog-pill-lbl{color:var(--dim);font-size:10.5px}
+.rm-task-list{display:flex;flex-direction:column;gap:10px}
+.rm-task{display:flex;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;align-items:flex-start;transition:all .15s;cursor:pointer}
+.rm-task:hover{border-color:rgba(201,162,39,.4);background:var(--cardh);transform:translateX(2px)}
+.rm-task-prio{font-family:'Cinzel',serif;font-size:11px;font-weight:700;padding:4px 9px;border-radius:5px;letter-spacing:.05em;flex-shrink:0;line-height:1.4}
+.rm-task-prio.hi{background:rgba(232,69,53,.16);color:var(--rhi);border:1px solid rgba(232,69,53,.32)}
+.rm-task-prio.md{background:rgba(212,116,42,.13);color:var(--warn);border:1px solid rgba(212,116,42,.32)}
+.rm-task-prio.lo{background:rgba(201,162,39,.1);color:var(--gold);border:1px solid rgba(201,162,39,.32)}
+.rm-task-prio.done{background:rgba(58,200,90,.12);color:#5ac85a;border:1px solid rgba(58,200,90,.32)}
+.rm-task-body{flex:1;min-width:0}
+.rm-task-title{font-family:'Cinzel',serif;font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:3px;letter-spacing:.03em}
+.rm-task-desc{font-size:11.5px;color:#beb5a8;line-height:1.55;margin-bottom:5px}
+.rm-task-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:10.5px;color:var(--dim)}
+.rm-task-meta span:not(:last-child)::after{content:'·';margin-left:6px}
+.rm-empty-celebrate{text-align:center;padding:48px 20px;background:linear-gradient(135deg,rgba(201,162,39,.08) 0%,transparent 100%);border:1px solid rgba(201,162,39,.32);border-radius:12px}
+.rm-empty-celebrate-icon{font-size:48px;margin-bottom:8px}
+
+/* Boss-Recommendations */
+.bo-recs{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
+.bo-rec{font-size:10px;padding:3px 9px;background:rgba(201,162,39,.08);border:1px dashed rgba(201,162,39,.32);border-radius:14px;color:var(--gold);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:4px}
+.bo-rec:hover{background:rgba(201,162,39,.18);border-style:solid;border-color:var(--gold)}
+.bo-rec-ico{font-size:11px;line-height:1}
+
 /* Boss-Phase-Timeline (in Boss-Cards) */
 .bp-phase{display:flex;gap:8px;margin-top:11px;padding:10px 11px;background:rgba(0,0,0,.25);border:1px solid var(--bdr);border-radius:7px}
 .bp-phase-col{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;padding:0 4px}
@@ -1104,6 +1160,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
     <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
     <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
+    <div class="ni" data-sec="roadmap" onclick="showSec('roadmap')"><span class="nicon">🧭</span><span class="nlabel">Roadmap</span></div>
   </div>
   <div id="visitor-bar">
     <div class="vis-row"><span class="vis-lbl"><span class="vis-dot"></span>Online</span><span class="vis-val" id="sv-online">—</span></div>
@@ -1447,6 +1504,8 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <section class="sec" id="sec-builds">
     <div class="sec-t">⚙️ Builds</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Empfohlene Loadouts für verschiedene Spielstile. Alle Builds basieren auf Items, die nach dem angegebenen Kapitel verfügbar sind.</div>
+    <div class="bo-wizard" id="bo-wizard" aria-label="Build-Loadout-Optimizer"></div>
+    <div class="sub-t">Klassische Build-Vorschläge</div>
     <div id="builds-list"></div>
   </section>
 
@@ -1481,6 +1540,13 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="sec-t">📋 Patch-Notes</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.07.00</span> (15.05.2026).</div>
     <div id="patch-list"></div>
+  </section>
+
+  <section class="sec" id="sec-roadmap">
+    <div class="sec-t">🧭 Roadmap — Was als nächstes?</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Personalisierte Aufgaben-Empfehlung basierend auf deinem Fortschritt. Auto-update bei jeder Aktion. Klick auf Task → springt zur passenden Section.</div>
+    <div class="rm-progress" id="rm-progress"></div>
+    <div class="rm-task-list" id="rm-list"></div>
   </section>
 
   <section class="sec" id="sec-achievements">
@@ -4264,6 +4330,312 @@ function renderQuestTimeline(){
   </div>`;
 }
 
+// ===== BOSS DIFFICULTY RATING =====
+function loadBossRatings(){return JSON.parse(localStorage.getItem('cd_boss_ratings')||'{}');}
+function saveBossRating(name,rating){
+  const r=loadBossRatings();
+  if(rating&&rating>0&&rating<=5)r[name]=rating;
+  else delete r[name];
+  localStorage.setItem('cd_boss_ratings',JSON.stringify(r));
+}
+function setBossRating(name,rating){
+  saveBossRating(name,rating);
+  // Update only this boss's stars in-place to avoid full re-render
+  const cards=document.querySelectorAll('#boss-grid .card');
+  cards.forEach(c=>{
+    const stars=c.querySelector('[data-rating-for="'+name.replace(/"/g,'&quot;')+'"]');
+    if(!stars)return;
+    stars.querySelectorAll('.bd-star').forEach((s,i)=>s.classList.toggle('on',i<rating));
+  });
+}
+function clearBossRating(name){
+  setBossRating(name,0);
+}
+function renderBossRating(name){
+  const ratings=loadBossRatings();
+  const cur=ratings[name]||0;
+  const safe=name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  const stars=[1,2,3,4,5].map(i=>`<span class="bd-star${i<=cur?' on':''}" onclick="event.stopPropagation();setBossRating('${safe}',${i})" title="${i} Stern${i>1?'e':''}" role="button" aria-label="${i} Stern${i>1?'e':''}">★</span>`).join('');
+  return `<div class="bd-rating" data-rating-for="${name.replace(/"/g,'&quot;')}">
+    <span class="bd-rating-lbl">Schwierigkeit</span>
+    <div style="display:flex;align-items:center">
+      <div class="bd-stars">${stars}</div>
+      ${cur?`<button class="bd-clear" onclick="event.stopPropagation();clearBossRating('${safe}')" title="Rating löschen">✕</button>`:''}
+    </div>
+  </div>`;
+}
+
+// ===== BOSS-SKILL-RECOMMENDATIONS =====
+function recommendForBoss(b){
+  if(!b)return [];
+  const recs=[];
+  const seen=new Set();
+  // Aus Strategy + Weakness Skill-Namen extrahieren
+  const m=_buildXrefMap();
+  const haystack=(b.strategy||'')+' '+(b.weakness||'')+' '+(b.parry_or_dodge||'');
+  m.skillNames.forEach(name=>{
+    if(seen.has(name))return;
+    if(haystack.includes(name)){
+      const sk=m.skills[name];
+      recs.push({type:'skill',name,info:sk});
+      seen.add(name);
+    }
+  });
+  // Element-Schwaechen → Element-Skills empfehlen
+  const elementMap={
+    'Feuer':['Flame Strike','Imbue Element'],
+    'Eis':['Frost Mantle','Imbue Element'],
+    'Blitz':['Lightning Surge','Imbue Element'],
+    'Wind':['Storm Veil','Imbue Element']
+  };
+  if(b.weakness){
+    Object.entries(elementMap).forEach(([el,skills])=>{
+      if(b.weakness.includes(el)){
+        skills.forEach(sn=>{
+          if(seen.has(sn))return;
+          const sk=m.skills[sn];
+          if(sk){recs.push({type:'element',name:sn,info:sk});seen.add(sn);}
+        });
+      }
+    });
+  }
+  // Force Palm / Counter immer empfehlen wenn Strategy "Force Palm" oder "Counter" erwaehnt
+  return recs.slice(0,6);
+}
+function renderBossRecs(b){
+  const recs=recommendForBoss(b);
+  if(!recs.length)return '';
+  return `<div class="bo-recs" aria-label="Empfohlene Skills">
+    <span style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;align-self:center;margin-right:2px">Empfohlen:</span>
+    ${recs.map(r=>{
+      const safe=r.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+      const tipBody=`${(r.info.effect||'').replace(/"/g,'&quot;')}`;
+      const ico=r.type==='element'?'✨':'⚡';
+      return `<span class="bo-rec" onclick="event.stopPropagation();showSec('skills');document.getElementById('si').value='${safe}';doSearch('${safe}')" data-tip="${tipBody}" data-tip-title="${r.name.replace(/"/g,'&quot;')}">
+        <span class="bo-rec-ico">${ico}</span>${r.name}
+      </span>`;
+    }).join('')}
+  </div>`;
+}
+
+// ===== BUILD-LOADOUT-OPTIMIZER =====
+const BUILD_STYLES=[
+  {k:'tank',ico:'🛡️',name:'Tank',desc:'Hohe Verteidigung, Parry-Counter, Stagger-Fokus'},
+  {k:'dps',ico:'⚔️',name:'DPS',desc:'Maximaler Damage, Boss-Stagger-Burst'},
+  {k:'mobility',ico:'💨',name:'Mobility',desc:'Hit-and-Run, Dodge-Heavy, Glider/Flight'},
+  {k:'caster',ico:'🔥',name:'Caster/Spirit',desc:'Force-Palm-Chains, Elemente, Focus-Spam'},
+  {k:'ranged',ico:'🏹',name:'Ranged',desc:'Bow + Marksmanship, Crowd-Control'},
+  {k:'unarmed',ico:'👊',name:'Unarmed',desc:'Fists/Knuckles, Watch&Learn-Tritte'}
+];
+const BUILD_PHASES=[
+  {k:'early',l:'Early (Kap. 1-3)',ch:3},
+  {k:'mid',l:'Mid (Kap. 4-7)',ch:7},
+  {k:'late',l:'Late (Kap. 8-11)',ch:11},
+  {k:'end',l:'Endgame (Kap. 12+)',ch:99}
+];
+// Empfohlene Loadouts: {style, phase} -> {weapon, armor_set, cores, skills, tip}
+const BUILD_RECIPES={
+  'tank-early':{name:'Stahl-Wall Early',weapon:'Hwando + Rhonid Large Shield',armor:'Bolton Plate Set',cores:'Aegis I (Built-in)',skills:'Parry Lv 3 · Counter · Force Palm Lv 1',tip:'Hwando aus Lioncrest Manor + Rhonid Shield. Counter aus Hernand Castle Guards lernen — der Schluessel zu jedem Frueh-Boss.'},
+  'tank-mid':{name:'Frostcursed Bulwark',weapon:'Sword of the Lord (Refined) + Shield of Conviction',armor:'Frostcursed Plate Set',cores:'Aegis II · Fortitude I · Steelbane',skills:'Parry Lv 3 · Counter · Force Palm Lv 2 · Keen Senses Lv 3',tip:'Frostcursed gibt Ice-Immunity → perfekt fuer Beloth-Prep. Shield of Conviction aus Calphade Church.'},
+  'tank-late':{name:'Cursed Knight',weapon:'Wolf\'s Fang + Staglord\'s Shield',armor:'Plate Armor of the Shadows',cores:'Aegis III · Malicebane · Steelbane',skills:'Counter · Parry Lv 3 · Force Palm Expertise · Frost Mantle',tip:'Saigord-Shield blockt Ice-Breath. Malicebane (+Boss-Damage) aus Wolf\'s Fang.'},
+  'tank-end':{name:'Antumbra-Bastion',weapon:'Twisted Verdict (2H) ODER Vow of the Dead King',armor:'Frostcursed + Plate of Shadows mix',cores:'Aegis III · Abyssal Rays · Malicebane · Greater Hexebane',skills:'Falling Palm · Parry Lv 3 · Counter · Frost Mantle · Nature\'s Echo',tip:'Frostcursed bleibt Pflicht fuer Beloth. Twisted Verdict aus Corrupted Caliburn. Falling Palm = 1-Shot Reserve.'},
+  'dps-early':{name:'Crit-Rush Early',weapon:'Sword of the Lord (post-Kailok) + Kylus Dagger',armor:'Light Battlefield Set',cores:'Wind Slash · Destruction I',skills:'Forward Slash Proficiency · Stab · Quick Swap',tip:'Sword of the Lord ist Meta Kap. 2-5. Quick Swap auf Kylus Dagger fuer Stealth-Open + Bleed.'},
+  'dps-mid':{name:'Glass-Cannon',weapon:'Righteous Verdict (2H)',armor:'Blackwing Leather Set',cores:'Speed Lv.2 · Destruction I x2 · Insight I · Gale II',skills:'Turning Slash Rend Armor · Force Palm Lv 3 · Nature\'s Echo',tip:'Righteous Verdict aus Demeniss Ancestor Ruins. Nature\'s Echo verdoppelt jeden Hit.'},
+  'dps-late':{name:'Tauria-Spike',weapon:'Tauria Curved Sword (Refined)',armor:'Hungering Fang Leather',cores:'Crow\'s Pursuit · Wind Slash · Gale II · Destruction I',skills:'Quick Swap · Forward Slash Proficiency · Force Palm Expertise',tip:'Tauria stagger\'t fast jeden Humanoid. Aerial Roll lernen bei Draven fuer Mobility.'},
+  'dps-end':{name:'Antumbra-Burst',weapon:'Twisted Verdict (2H)',armor:'Combat God\'s Plate Gloves + Dark Marksman',cores:'Abyssal Rays · Destruction III · Greater Destruction · Malicebane · Ator\'s Orb',skills:'Falling Palm · Force Palm Expertise · Nature\'s Echo · Counter',tip:'Falling Palm aus terminaler Fallgeschwindigkeit = hoechster Single-Hit. Echo verdoppelt es. BIS-DPS.'},
+  'mobility-early':{name:'Glider-Scout',weapon:'Sword of the Lord + Noble Man\'s Bow',armor:'Grey Wolf Leather',cores:'Speed Lv.2 · Wind Slash',skills:'Evasive Roll · Flight (Crow\'s Wing) · Dodge',tip:'Noble Man\'s Bow + Flight fuer Aerial-Recon. Evasive Roll automatisch nach Kailok.'},
+  'mobility-mid':{name:'Aerial Hawk',weapon:'Tauria Curved Sword',armor:'Blackwing Leather (post-Draven)',cores:'Speed Lv.2 · Crow\'s Pursuit · Wind Slash',skills:'Aerial Roll · Aerial Force Palm · Dodge · Glide',tip:'Blackwing Set + Aerial Roll = unschlagbar in offenem Terrain. Crow\'s Pursuit-Damage scaled mit Movement.'},
+  'mobility-late':{name:'Wind-Walker',weapon:'Tauria Curved Sword (Refined 5)',armor:'Dark Marksman + Blackwing Mix',cores:'Wind Slash · Crow\'s Pursuit · Gale II · Haste I',skills:'Aerial Roll · Aerial Force Palm · Storm Veil · Diving Force Palm',tip:'Storm Veil ab Kap. 8 via Riddle Square Chain. Diving Force Palm aus Path of Providence Sky-Puzzles.'},
+  'mobility-end':{name:'Blackstar-Hunter',weapon:'Tauria Curved Sword Refine 5',armor:'Blackwing + Combat God Mix',cores:'Wind Slash · Crow\'s Pursuit · Greater Swift · Haste I · Storm Fang',skills:'Aerial Force Palm · Falling Palm · Diving Force Palm · Storm Veil',tip:'Blackstar-Mount fuer Umbra. Falling Palm aus Drache abspringen = 1-Shot.'},
+  'caster-early':{name:'Spirit-Channeler',weapon:'Hwando + Hollow Visage',armor:'Light Battlefield Cloak',cores:'Insight I · Destruction I',skills:'Force Palm Lv 2 · Focus · Nature\'s Grasp',tip:'Hollow Visage aus Dawn Cave hat Insight built-in. Force Palm Lv 2 via Force Palm Pulse-Quest.'},
+  'caster-mid':{name:'Element-Adept',weapon:'Frozen Anguish (2H)',armor:'Frostcursed Set',cores:'Stamina Transference · Destruction I · Insight I',skills:'Flame Strike · Frost Mantle · Lightning Surge · Imbue Element Lv 2 · Focus Lv 2',tip:'Frostcursed Set + Frost Mantle = Ice-immunity-Combo. Path of Trials nach Priscus fuer Frost Mantle.'},
+  'caster-late':{name:'Storm-Sage',weapon:'Crow Whisperer (Hexe Marie Drop)',armor:'Blackwing Leather + Combat God Gloves',cores:'Ator\'s Orb · Lightning God\'s Affliction · Spirit\'s Judgment',skills:'Storm Veil · Imbue Element Lv 4 · Focus Lv 2 · Force Palm Expertise',tip:'Crow Whisperer + alle 4 Elemente. Storm Veil + Focused Repulsion = Boss-Lockdown.'},
+  'caster-end':{name:'Falling-Palm-God',weapon:'Twisted Verdict',armor:'Combat God Gloves + Plate of Shadows',cores:'Abyssal Rays · Ator\'s Orb · Lightning God\'s Affliction · Spirit\'s Judgment',skills:'Falling Palm · Force Palm Expertise · Nature\'s Echo · Imbue Element Lv 4',tip:'Falling Palm aus terminaler Fallgeschwindigkeit + Imbued Element = brutaler Single-Hit. Mystical Storage als Kuku-Toolkit.'},
+  'ranged-early':{name:'Marksman Start',weapon:'Noble Man\'s Bow',armor:'Light Battlefield Set',cores:'Crit Rate Lv.2',skills:'Marksmanship Lv 3 · Charged Shot · Multishot (Watch&Learn Fort Warspike)',tip:'Fort Warspike Commander droppt sowohl Multishot ALS AUCH Explosive Evasive Shot — Pflicht!'},
+  'ranged-mid':{name:'Infinite-Arrow',weapon:'Warspike Bow',armor:'Dark Marksman Boots + Blackwing',cores:'Infinite Arrows III · Crow\'s Pursuit · Crit Rate Lv.2',skills:'Marksmanship Lv 5 · Explosive Evasive Shot · Multishot · Focus',tip:'Crit-Scaling-Build via Warspike. Infinite Arrows = nie nachladen.'},
+  'ranged-late':{name:'Sniper-Storm',weapon:'Divine Echoes Bow + Caliburn\'s Mercy (Quick Swap)',armor:'Dark Marksman Set',cores:'Infinite Arrows III · Crit Damage · Wind Slash',skills:'Multishot · Aerial Roll · Storm Veil · Focus Lv 2',tip:'Quick Swap zwischen Bow + Pistole fuer Burst. Storm Veil hidet vor Adds.'},
+  'ranged-end':{name:'Aeserion-Hunter',weapon:'Aeserion Bow + Divine Echoes Bow',armor:'Combat God Gloves + Dark Marksman',cores:'Greater Infinite Arrows · Greater Destruction · Wind Slash · Storm Fang',skills:'Multishot · Aerial Roll · Falling Palm (Air-Shot) · Imbue Element Lv 4',tip:'Aeserion Bow ab Kap. 12. Imbued Arrows fuer Element-Schwaechen.'},
+  'unarmed-early':{name:'Fist-Bandit',weapon:'(unarmed)',armor:'Light Battlefield Cloak',cores:'(in Armor)',skills:'Unarmed Combat Lv 3 · Pump Kick (Matthias!) · Dropkick (Watch&Learn Axt-Banditen)',tip:'Pump Kick NUR bei Matthias-Boss erlernbar — MISSABLE! Sofort als Watch&Learn-Move einbinden.'},
+  'unarmed-mid':{name:'Wrestler',weapon:'Mining Knuckledrill (auch Pickaxe)',armor:'Combat God\'s Plate Gloves (BIS)',cores:'Move Speed Lv.4 · Lightning Affinity',skills:'Body Slam · Clothesline · Vault · Meteor Kick · Grappling Lv 5',tip:'Mining Knuckledrill + Pickaxe-Funktion. Combat God\'s Plate Gloves frueh sichern.'},
+  'unarmed-late':{name:'Brawler-King',weapon:'Combat God\'s Plate Gloves + Savage Sawblade Quick Swap',armor:'Hungering Fang Leather + Combat God Gloves',cores:'Relentless · Lightning Affinity · Bleed (Savage)',skills:'Meteor Kick · Clothesline · Pump Kick · Body Slam · Blinding Flash Finisher',tip:'Blinding Flash Finisher seit 1.07 auch unbewaffnet ausfuehrbar.'},
+  'unarmed-end':{name:'Pure-Fist',weapon:'Combat God\'s Plate Gloves',armor:'Combat God Gloves + Plate of Shadows',cores:'Abyssal Rays · Greater Steelbane · Lightning Affinity · Malicebane',skills:'Meteor Kick · Falling Palm · Blinding Flash Finisher · Force Palm Expertise · Nature\'s Echo',tip:'Falling Palm auch ohne Waffe brutal. Nature\'s Echo verdoppelt jeden Faustschlag.'}
+};
+let _boState={style:null,phase:null};
+function renderBuildOptimizer(){
+  const cont=document.getElementById('bo-wizard');
+  if(!cont)return;
+  cont.innerHTML=`
+    <div class="bo-step">
+      <div class="bo-step-lbl">1. Spielstil wählen</div>
+      <div class="bo-pills">${BUILD_STYLES.map(s=>`
+        <button class="bo-pill${_boState.style===s.k?' active':''}" onclick="_boSetStyle('${s.k}')" data-tip="${s.desc}" data-tip-title="${s.name}">
+          <span class="bo-pill-ico">${s.ico}</span>${s.name}
+        </button>`).join('')}</div>
+    </div>
+    <div class="bo-step">
+      <div class="bo-step-lbl">2. Spielphase</div>
+      <div class="bo-pills">${BUILD_PHASES.map(p=>`
+        <button class="bo-pill${_boState.phase===p.k?' active':''}" onclick="_boSetPhase('${p.k}')">${p.l}</button>`).join('')}</div>
+    </div>
+    <div id="bo-result"></div>
+  `;
+  _boRenderResult();
+}
+function _boSetStyle(k){_boState.style=k;renderBuildOptimizer();}
+function _boSetPhase(k){_boState.phase=k;renderBuildOptimizer();}
+function _boRenderResult(){
+  const r=document.getElementById('bo-result');
+  if(!r)return;
+  if(!_boState.style||!_boState.phase){
+    r.innerHTML='<div style="text-align:center;color:var(--dim);font-size:11.5px;padding:18px 0">Wähle Stil und Phase um eine Empfehlung zu erhalten…</div>';
+    return;
+  }
+  const key=_boState.style+'-'+_boState.phase;
+  const recipe=BUILD_RECIPES[key];
+  if(!recipe){
+    r.innerHTML='<div style="text-align:center;color:var(--dim);font-size:11.5px;padding:18px 0">Keine Empfehlung für diese Kombination.</div>';
+    return;
+  }
+  const style=BUILD_STYLES.find(s=>s.k===_boState.style);
+  const phase=BUILD_PHASES.find(p=>p.k===_boState.phase);
+  r.innerHTML=`<div class="bo-result">
+    <div class="bo-result-hd">
+      <div class="bo-result-name">${style.ico} ${recipe.name}</div>
+      <div class="bo-result-style">${style.name} · ${phase.l}</div>
+    </div>
+    <div class="bo-result-grid">
+      <div class="bo-slot"><span class="bo-slot-lbl">Waffe</span><span class="bo-slot-val">${linkifyXrefs(recipe.weapon)}</span></div>
+      <div class="bo-slot"><span class="bo-slot-lbl">Rüstung</span><span class="bo-slot-val">${recipe.armor}</span></div>
+      <div class="bo-slot"><span class="bo-slot-lbl">Abyss Cores</span><span class="bo-slot-val">${recipe.cores}</span></div>
+      <div class="bo-slot"><span class="bo-slot-lbl">Skills</span><span class="bo-slot-val">${linkifyXrefs(recipe.skills)}</span></div>
+    </div>
+    <div class="bo-result-tip">💡 ${recipe.tip}</div>
+  </div>`;
+}
+
+// ===== ROADMAP =====
+function renderRoadmap(){
+  const cont=document.getElementById('rm-list');
+  if(!cont)return;
+  const bossDone=loadBossDone();
+  const gmDone=JSON.parse(localStorage.getItem('cd_gm')||'[]');
+  const teDone=JSON.parse(localStorage.getItem('cd_te')||'[]');
+  const chDone=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
+
+  // Progress-Header
+  const progressEl=document.getElementById('rm-progress');
+  if(progressEl){
+    const sancCount=typeof SANCTUM_IDS!=='undefined'?SANCTUM_IDS.filter(s=>teDone.includes(s)).length:0;
+    const sancTotal=typeof SANCTUM_IDS!=='undefined'?SANCTUM_IDS.length:15;
+    progressEl.innerHTML=`
+      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${bossDone.length}/${BOSSES.length}</span><span class="rm-prog-pill-lbl">Bosse</span></div>
+      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${chDone.length}/12</span><span class="rm-prog-pill-lbl">Kapitel</span></div>
+      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${gmDone.length}/27</span><span class="rm-prog-pill-lbl">Greymane</span></div>
+      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${sancCount}/${sancTotal}</span><span class="rm-prog-pill-lbl">Sanctums</span></div>
+    `;
+  }
+
+  // Tasks generieren
+  const tasks=[];
+
+  // 1. Naechster unbesiegter Story-Boss
+  const nextStoryBoss=BOSSES.find(b=>b.chapter&&!bossDone.includes(b.name));
+  if(nextStoryBoss){
+    tasks.push({
+      prio:'hi',
+      title:`Story-Boss: ${nextStoryBoss.name}`,
+      desc:`Kapitel ${nextStoryBoss.chapter} · ${nextStoryBoss.region}. ${nextStoryBoss.parry_or_dodge}.`,
+      meta:[nextStoryBoss.quest,nextStoryBoss.weakness!=='–'?'Schwäche: '+nextStoryBoss.weakness:''].filter(Boolean),
+      action:`showSec('bosses');document.getElementById('si').value='${nextStoryBoss.name.replace(/'/g,"\\'")}';doSearch('${nextStoryBoss.name.replace(/'/g,"\\'")}')`
+    });
+  }
+
+  // 2. Missable warnings basierend auf chDone (welches Kapitel der User schon hat)
+  const lastCh=chDone.length>0?Math.max(...chDone):0;
+  if(lastCh===0||lastCh<1){
+    tasks.push({prio:'hi',title:'Watch & Learn: Pump Kick',desc:'NUR bei Matthias-Boss (Kapitel 1) erlernbar — MISSABLE! Wenn übersprungen für immer weg.',meta:['Kapitel 1','Skill Unarmed Combat'],action:"showSec('skills');skTab('watch')"});
+  }
+  if(lastCh>=3&&lastCh<4){
+    tasks.push({prio:'md',title:'Watch & Learn: Focused Force Palm',desc:'Geist-NPC westlich Fort Perwin — MISSABLE bei falschem Weg in "On the Right Path".',meta:['Kapitel 4','Spirit Tree'],action:"showSec('skills');skTab('watch')"});
+  }
+  if(lastCh===7){
+    tasks.push({prio:'md',title:'Oongka-Unlock permanent machen',desc:'Oongka ist nach Kapitel 7 nur scripted dabei — PERMANENT erst nach 2 Kapitel-8-Quests!',meta:['Kapitel 8','Companion'],action:"showSec('quests');qTab('mq')"});
+  }
+
+  // 3. Greymane fortschreiten
+  if(gmDone.length<27&&lastCh>=2){
+    tasks.push({
+      prio:'md',
+      title:`Greymane Commission ${gmDone.length+1}/27`,
+      desc:`Jede Commission gibt +3 Inventarslots. Alle 27 = Pflicht fuer True Ending.`,
+      meta:['Side-Content',`+${(27-gmDone.length)*3} Inv-Slots offen`],
+      action:"showSec('checklists');clTab('greymane')"
+    });
+  }
+
+  // 4. Sanctum naechster
+  if(typeof SANCTUM_IDS!=='undefined'){
+    const undone=SANCTUM_IDS.filter(s=>!teDone.includes(s));
+    if(undone.length){
+      tasks.push({
+        prio:'lo',
+        title:`Sanctum offen: ${undone.length} von ${SANCTUM_IDS.length}`,
+        desc:'Alle 15 Sanctums für True Ending Pflicht. Jede Hexe schaltet eigene Sanctum-Linie frei.',
+        meta:['True Ending','Witch-Questlines'],
+        action:"showSec('checklists');clTab('sanctums')"
+      });
+    }
+  }
+
+  // 5. Build-Empfehlung fuer aktuelle Phase
+  let buildPhase='early';
+  if(lastCh>=12)buildPhase='end';
+  else if(lastCh>=8)buildPhase='late';
+  else if(lastCh>=4)buildPhase='mid';
+  tasks.push({
+    prio:'lo',
+    title:'Build-Empfehlung für deine Phase',
+    desc:`Phase ${buildPhase==='early'?'Early (Kap. 1-3)':buildPhase==='mid'?'Mid (Kap. 4-7)':buildPhase==='late'?'Late (Kap. 8-11)':'Endgame (Kap. 12+)'} — passende Loadouts pro Spielstil.`,
+    meta:['Builds-Section'],
+    action:`showSec('builds')`
+  });
+
+  // 6. Niedrig-bewerteter Boss erneut versuchen
+  const ratings=loadBossRatings();
+  const hardBosses=BOSSES.filter(b=>ratings[b.name]>=4&&!bossDone.includes(b.name));
+  if(hardBosses.length){
+    const b=hardBosses[0];
+    tasks.push({
+      prio:'md',
+      title:`Schwer-bewerteter Boss offen: ${b.name}`,
+      desc:`Du hast diesen Boss als ${ratings[b.name]}/5 schwer markiert — und noch nicht besiegt. ${b.parry_or_dodge}.`,
+      meta:[b.region,b.quest],
+      action:`showSec('bosses');document.getElementById('si').value='${b.name.replace(/'/g,"\\'")}';doSearch('${b.name.replace(/'/g,"\\'")}')`
+    });
+  }
+
+  // Empty-State: Alles done
+  if(bossDone.length===BOSSES.length&&gmDone.length>=27&&chDone.length>=12){
+    cont.innerHTML=`<div class="rm-empty-celebrate">
+      <div class="rm-empty-celebrate-icon">🏆</div>
+      <div style="font-family:'Cinzel',serif;font-size:14px;color:var(--glo);margin-bottom:4px;letter-spacing:.05em">TRUE ENDING UNLOCKED</div>
+      <div style="font-size:12px;color:#beb5a8;line-height:1.55">Alle Bosse besiegt, alle 27 Commissions abgeschlossen, alle 12 Kapitel durch.<br>Du hast Kliff Macduffs Geschichte komplett gelebt.</div>
+    </div>`;
+    return;
+  }
+
+  cont.innerHTML=tasks.map(t=>`
+    <div class="rm-task" onclick="${t.action}" data-s="${[t.title,t.desc].join(' ').toLowerCase()}">
+      <div class="rm-task-prio ${t.prio}">${t.prio==='hi'?'!!!':t.prio==='md'?'!!':'!'}</div>
+      <div class="rm-task-body">
+        <div class="rm-task-title">${t.title}</div>
+        <div class="rm-task-desc">${t.desc}</div>
+        ${t.meta&&t.meta.length?`<div class="rm-task-meta">${t.meta.map(m=>`<span>${m}</span>`).join('')}</div>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
 // ===== SMART FILTER (Tag-Click) =====
 function applyBossFilter(kind,val){
   const sec=document.getElementById('sec-bosses');
@@ -4614,6 +4986,7 @@ function persistBossNote(name,el,btn){
   if(typeof refreshSectionStats==='function')refreshSectionStats();
   if(typeof checkAchievements==='function')checkAchievements();
   if(typeof renderAchievements==='function')renderAchievements();
+  if(typeof renderRoadmap==='function')renderRoadmap();
 }
 
 // ===== NAVIGATION =====
@@ -4829,6 +5202,7 @@ function toggleBossDone(name){
   if(typeof renderRegionHeatmap==='function')renderRegionHeatmap();
   if(typeof checkAchievements==='function')checkAchievements();
   if(typeof renderAchievements==='function')renderAchievements();
+  if(typeof renderRoadmap==='function')renderRoadmap();
 }
 
 const BOSS_PH_PALETTES={
@@ -4885,6 +5259,8 @@ function renderBosses(){
       </div>
       <div class="cs">${linkifyXrefs(b.strategy)}</div>
       ${renderBossPhases(b)}
+      ${renderBossRecs(b)}
+      ${renderBossRating(b.name)}
       <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">Kopieren</button>
       <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${safeName}')">
         ${isDone?'✓ Besiegt':'Als besiegt markieren'}
@@ -6204,6 +6580,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderQuestTimeline();
   renderRegionHeatmap();
   renderAchievements();
+  renderBuildOptimizer();
+  renderRoadmap();
   refreshSectionStats();
   _initTooltips();
   renderBossChecklist();renderGreymane();renderSanctumChecklist();renderWeaponChecklist();
