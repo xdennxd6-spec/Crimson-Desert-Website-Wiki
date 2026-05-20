@@ -574,6 +574,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 /* Boss-Compare */
 #cmp-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:615;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
 #cmp-modal.show{display:flex}
+#ic-modal.show{display:flex!important}
 .cmp-box{background:var(--card);border:1px solid rgba(201,162,39,.32);border-radius:14px;padding:0;width:840px;max-width:calc(100vw - 32px);max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 28px 72px rgba(0,0,0,.85)}
 .cmp-header{padding:18px 22px;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(192,57,43,.08),transparent 70%);display:flex;align-items:center;justify-content:space-between}
 .cmp-title{font-family:'Cinzel',serif;font-size:15px;color:var(--glo);letter-spacing:.06em}
@@ -669,6 +670,59 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .rm-task-meta span:not(:last-child)::after{content:'·';margin-left:6px}
 .rm-empty-celebrate{text-align:center;padding:48px 20px;background:linear-gradient(135deg,rgba(201,162,39,.08) 0%,transparent 100%);border:1px solid rgba(201,162,39,.32);border-radius:12px}
 .rm-empty-celebrate-icon{font-size:48px;margin-bottom:8px}
+
+/* Favoriten-System */
+.fav-btn{position:absolute;top:9px;right:54px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);border:1px solid var(--bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#3a342e;font-size:13px;transition:all .15s;line-height:1;padding:0;backdrop-filter:blur(4px);z-index:3}
+.fav-btn:hover{color:var(--gold);border-color:rgba(201,162,39,.42);transform:scale(1.08)}
+.fav-btn.on{color:var(--gold);background:rgba(201,162,39,.18);border-color:var(--gold);box-shadow:0 0 10px rgba(201,162,39,.4)}
+.fav-btn.fav-inline{position:static;display:inline-flex;width:22px;height:22px;font-size:12px;background:transparent;border:none}
+.fav-btn.fav-inline:hover{background:rgba(201,162,39,.12)}
+.fav-btn.fav-inline.on{background:transparent;box-shadow:none}
+
+/* Favoriten-Section */
+.fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
+.fav-empty{padding:48px 28px;text-align:center;color:var(--dim);font-size:12px}
+.fav-cat-hd{font-family:'Cinzel',serif;font-size:11.5px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.07em;margin:22px 0 9px;display:flex;align-items:center;gap:9px}
+.fav-cat-hd:first-child{margin-top:0}
+.fav-cat-hd::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,162,39,.2),transparent)}
+.fav-cat-count{font-size:10px;color:var(--dim);font-variant-numeric:tabular-nums;font-family:'Inter',sans-serif;text-transform:none;letter-spacing:0}
+.fav-item{display:flex;gap:12px;align-items:center;padding:10px 13px;background:var(--card);border:1px solid var(--bdr);border-radius:9px;cursor:pointer;transition:all .15s}
+.fav-item:hover{border-color:rgba(201,162,39,.4);background:var(--cardh);transform:translateX(2px)}
+.fav-item-ico{width:46px;height:46px;border-radius:6px;object-fit:cover;background:rgba(255,255,255,.04);flex-shrink:0}
+.fav-item-info{flex:1;min-width:0}
+.fav-item-name{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--text);letter-spacing:.03em;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fav-item-meta{font-size:10.5px;color:var(--dim);line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fav-remove{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:none;border:1px solid var(--bdr);color:var(--dim);cursor:pointer;font-size:12px;line-height:1;transition:all .15s;padding:0}
+.fav-remove:hover{color:var(--rhi);border-color:rgba(192,57,43,.42)}
+
+/* Recently-Viewed in Sidebar */
+#sb-recent{padding:8px 14px 4px;border-top:1px solid var(--bdr);font-size:10.5px}
+#sb-recent-hd{color:var(--gdim);font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;font-size:9px}
+.recent-item{display:flex;align-items:center;gap:6px;padding:3px 6px;margin:0 -6px;cursor:pointer;color:var(--dim);transition:all .12s;border-radius:5px;font-size:10.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.recent-item:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.recent-item-ico{font-size:10px;opacity:.7;flex-shrink:0}
+
+/* Item-Compare */
+.ic-trigger{padding:7px 14px;background:rgba(180,45,32,.07);border:1px solid rgba(192,57,43,.32);border-radius:7px;color:var(--rhi);font-size:11.5px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .17s;letter-spacing:.03em;display:inline-flex;align-items:center;gap:6px}
+.ic-trigger:hover{background:rgba(180,45,32,.14);border-color:rgba(192,57,43,.58)}
+
+/* Eigene Builds — Saver */
+.bo-save-row{display:flex;gap:8px;margin-top:12px;padding-top:13px;border-top:1px dashed rgba(201,162,39,.12);flex-wrap:wrap;align-items:center}
+.bo-save-input{flex:1;min-width:160px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:6px;padding:7px 11px;color:var(--text);font-family:'Inter',sans-serif;font-size:11.5px;outline:none}
+.bo-save-input:focus{border-color:rgba(201,162,39,.5)}
+.bo-save-btn{padding:7px 14px;background:rgba(201,162,39,.09);border:1px solid rgba(201,162,39,.32);border-radius:6px;color:var(--gold);font-size:11.5px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .17s;letter-spacing:.03em}
+.bo-save-btn:hover{background:rgba(201,162,39,.18);border-color:rgba(201,162,39,.6)}
+.bo-saved-hd{font-size:11px;font-weight:700;color:var(--gdim);text-transform:uppercase;letter-spacing:.07em;margin:18px 0 9px;display:flex;justify-content:space-between;align-items:center}
+.bo-saved-list{display:flex;flex-direction:column;gap:8px}
+.bo-saved-card{display:flex;justify-content:space-between;align-items:center;gap:11px;padding:10px 14px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;transition:all .15s}
+.bo-saved-card:hover{border-color:rgba(201,162,39,.4)}
+.bo-saved-info{flex:1;min-width:0}
+.bo-saved-name{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--text);margin-bottom:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bo-saved-meta{font-size:10px;color:var(--dim)}
+.bo-saved-actions{display:flex;gap:5px}
+.bo-saved-btn{padding:5px 10px;border-radius:5px;border:1px solid var(--bdr);background:transparent;color:var(--dim);font-size:10.5px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.bo-saved-btn:hover{border-color:rgba(201,162,39,.42);color:var(--gold)}
+.bo-saved-btn.danger:hover{border-color:rgba(192,57,43,.42);color:var(--rhi)}
 
 /* Boss-Recommendations */
 .bo-recs{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
@@ -1136,6 +1190,28 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     </div>
   </div>
 </div>
+
+<!-- Item Compare Modal -->
+<div id="ic-modal" class="" onclick="if(event.target===this)closeItemCompare()" role="dialog" aria-modal="true" aria-labelledby="ic-title" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:615;align-items:center;justify-content:center;backdrop-filter:blur(8px)">
+  <div class="cmp-box">
+    <div class="cmp-header">
+      <div class="cmp-title" id="ic-title">⚔️ Waffen-Vergleich</div>
+      <button class="cmp-close" onclick="closeItemCompare()" aria-label="Schliessen">✕ Schliessen</button>
+    </div>
+    <div class="cmp-body">
+      <div class="cmp-grid">
+        <div class="cmp-col">
+          <div class="cmp-pick"><select id="ic-sel-a" onchange="renderItemCompare()" aria-label="Waffe A"></select></div>
+          <div id="ic-detail-a"></div>
+        </div>
+        <div class="cmp-col">
+          <div class="cmp-pick"><select id="ic-sel-b" onchange="renderItemCompare()" aria-label="Waffe B"></select></div>
+          <div id="ic-detail-b"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="app">
 <nav id="sidebar">
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.07</div></div>
@@ -1161,6 +1237,11 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
     <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
     <div class="ni" data-sec="roadmap" onclick="showSec('roadmap')"><span class="nicon">🧭</span><span class="nlabel">Roadmap</span></div>
+    <div class="ni" data-sec="favorites" onclick="showSec('favorites')"><span class="nicon">⭐</span><span class="nlabel">Favoriten</span></div>
+  </div>
+  <div id="sb-recent" style="display:none">
+    <div id="sb-recent-hd">Zuletzt</div>
+    <div id="sb-recent-list"></div>
   </div>
   <div id="visitor-bar">
     <div class="vis-row"><span class="vis-lbl"><span class="vis-dot"></span>Online</span><span class="vis-val" id="sv-online">—</span></div>
@@ -1242,6 +1323,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="sec-t">⚔️ Waffen</div>
     <div class="fbar">
       <select class="fs" id="wf-type" onchange="renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
+      <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen-Compare">⚔️ Compare</button>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Typ</th><th>ATK</th><th>Crit</th><th>Slots</th><th>Fundort / Quelle</th><th>Built-in Cores</th><th>Notizen</th></tr></thead><tbody id="weapon-tb"></tbody></table></div>
   </section>
@@ -1540,6 +1622,12 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="sec-t">📋 Patch-Notes</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.07.00</span> (15.05.2026).</div>
     <div id="patch-list"></div>
+  </section>
+
+  <section class="sec" id="sec-favorites">
+    <div class="sec-t">⭐ Favoriten</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Markiere Bosse, Skills, Waffen oder Mounts mit ⭐ um sie hier zu sammeln. Speicherung lokal.</div>
+    <div id="fav-list"></div>
   </section>
 
   <section class="sec" id="sec-roadmap">
@@ -2734,6 +2822,57 @@ const KLIFF_HEALTH=[
   {name:"Imbue Element",prereq:"Eines der 4 Elemente Lv 1",cost:"1 AA/Lv bis Lv 4",effect:"Elementar-Imbue auf alle Skills"},
   {name:"Mystical Storage",prereq:"Kap. 4 Quest Mysterious Iron Pot",cost:"0",effect:"Objekt in Kuku Pot versiegeln"},
   {name:"Falling Palm (Center-Skill)",prereq:"Terminale Fallgeschwindigkeit + Force-Palm-Input ODER eine Stat-Kategorie komplett",cost:"0",effect:"Terminaler Fall → Ground-Slam = höchster Single-Hit-Damage des Spiels"}
+];
+
+// Damiane — strukturierte Skill-Daten (fuer Skill-Tree-Graph)
+const DAMIANE_SKILLS=[
+  {name:"Quick Swap",prereq:"Default",cost:"0",effect:"L1+L2 sofortiger Waffen-Wechsel (DEFAULT - kein Armed Combat Lv 5 noetig)"},
+  {name:"Shield Toss",prereq:"Default",cost:"0",effect:"Schild fliegt geradeaus, bouncet 3-7 Mal zwischen Gegnern"},
+  {name:"Shield Sentinel",prereq:"Shield Toss Lv 2",cost:"1 AA",effect:"Schild rotiert um Damiane, blockt Projektile"},
+  {name:"Blade Sentinel",prereq:"Shield Sentinel Lv 1",cost:"1 AA",effect:"Schild + Klinge rotieren, melee + ranged Schutz"},
+  {name:"Flurry of Kicks",prereq:"Default",cost:"1 AA/Lv bis Lv 3",effect:"Multi-Hit-Kick-Combo"},
+  {name:"Scissor Kick",prereq:"Flurry of Kicks Lv 2",cost:"1 AA",effect:"Sprung-Scherenkick mit Stagger"},
+  {name:"Tornado Kick",prereq:"Scissor Kick Lv 1",cost:"1 AA",effect:"360-Grad-Sweep mit Wirbel"},
+  {name:"Spinning Scissors Throw",prereq:"Tornado Kick Lv 1",cost:"1 AA",effect:"Wirbelt Gegner durch die Luft"},
+  {name:"Quick Reload",prereq:"NUR Watch & Learn — sonst NICHT erlernbar!",cost:"0",effect:"Schnellladung von Schusswaffen — exklusiv"},
+  {name:"Flight (Glider)",prereq:"Default",cost:"0",effect:"Mechanischer Glider statt Magie-Flug"},
+  {name:"Skystep",prereq:"Scholastone Abyss-Fan",cost:"0",effect:"Aufwaerts-Sprung via Abyss-Fan"},
+  {name:"Flame Rush",prereq:"Fire-Quelle in Abyss",cost:"1 AA",effect:"Flammen-Charge nach vorne"},
+  {name:"Frost Mantle",prereq:"Frost-Quelle Abyss",cost:"1 AA",effect:"Frost-Barriere"},
+  {name:"Lightning Strike",prereq:"Lightning-Quelle Abyss",cost:"1 AA",effect:"Blitzeinschlag von oben"},
+  {name:"Storm Pillar",prereq:"Wind-Quelle Abyss",cost:"1 AA",effect:"Tornado-Saeule"},
+  {name:"Aerial Stab",prereq:"Patch 1.07 (Luft-Mobility)",cost:"0",effect:"Stoss-Angriff aus der Luft"},
+  {name:"Fists / Unarmed Combat",prereq:"Patch 1.07 (eigener Combat-Mode)",cost:"0",effect:"Komplettes Fists-Skill-Set + verbesserte Bewegungs-Animationen"}
+];
+
+// Oongka — strukturierte Skill-Daten (fuer Skill-Tree-Graph)
+const OONGKA_SKILLS=[
+  {name:"Quick Swap",prereq:"Default",cost:"0",effect:"L1+L2 sofortiger Waffen-Wechsel (DEFAULT)"},
+  {name:"Dual Wielding Mastery",prereq:"Default",cost:"0",effect:"Zweihaender koennen einhaendig gefuehrt werden — Oongka exklusiv"},
+  {name:"Leaping Smash",prereq:"Default",cost:"1 AA/Lv bis Lv 3",effect:"Sprung + Boden-Smash mit Schockwelle"},
+  {name:"Rampage",prereq:"Leaping Smash Lv 2",cost:"1 AA",effect:"Charge-Buff mit erhoehtem Damage"},
+  {name:"Raging Lightning",prereq:"Rampage Lv 1",cost:"1 AA",effect:"Blitz-Wuerge durchschlaegt Super Armor"},
+  {name:"Quaking Fury",prereq:"Default",cost:"1 AA/Lv bis Lv 3",effect:"Boden-Slam Wirkungsradius"},
+  {name:"Quick Grab",prereq:"Default",cost:"0",effect:"Sofort-Grapple ohne Wind-up"},
+  {name:"Explosive Leap",prereq:"Quaking Fury Lv 2",cost:"1 AA",effect:"Sprung-Smash mit explosivem Boden-Schlag"},
+  {name:"Storm Howl",prereq:"Wind-Quelle Abyss",cost:"1 AA",effect:"Gebruell mit Wind-Shockwave"},
+  {name:"Flame Quake",prereq:"Fire-Quelle Abyss",cost:"1 AA",effect:"Feuer-Boden-Slam"},
+  {name:"Frost Mantle",prereq:"Frost-Quelle Abyss",cost:"1 AA",effect:"Frost-Barriere"},
+  {name:"Lightning Pulse",prereq:"Lightning-Quelle Abyss",cost:"1 AA",effect:"Pulsierende Elektrizitaet um Oongka"},
+  {name:"Flight (Kuku Rocket Pack)",prereq:"White Crow Questline",cost:"0",effect:"Rocket-Pack statt Magie-Flug"},
+  {name:"Vertical Flight",prereq:"Flight Lv 1",cost:"1 AA",effect:"Senkrechter Aufwaerts-Boost"},
+  {name:"Pump Kick",prereq:"NUR Watch & Learn: Matthias-Boss",cost:"0",effect:"Maechtiger Doppelfusstoss — exklusiv"},
+  {name:"Dropkick",prereq:"Watch & Learn: Axt-Banditen Kap. 2",cost:"0 oder 1 AA",effect:"Doppelfuss-Tritt mit Schwung"},
+  {name:"Body Slam",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"In der Luft: volles Gewicht fallen lassen"},
+  {name:"Clothesline",prereq:"Watch & Learn: Black Bears Kap. 6",cost:"0 oder 1 AA",effect:"Sprint → Hook + Boden-Slam"},
+  {name:"Lariat",prereq:"Clothesline Lv 1",cost:"1 AA",effect:"Erweiterte Clothesline mit groesserem Sweep"},
+  {name:"Rage (Super Armor State)",prereq:"Rampage Lv 2",cost:"1 AA",effect:"Temporaerer Super-Armor-State — kein Stagger"},
+  {name:"Scatter Shot",prereq:"Default",cost:"1 AA",effect:"Streuschuss fuer Schusswaffen"},
+  {name:"Blinding Flash",prereq:"Watch & Learn",cost:"0",effect:"Blendet Gegner"},
+  {name:"Focused Shot",prereq:"Scatter Shot Lv 2",cost:"1 AA",effect:"Praezisions-Schuss"},
+  {name:"Aerial Stab",prereq:"Patch 1.07 (Luft-Mobility)",cost:"0",effect:"Stoss-Angriff aus der Luft"},
+  {name:"Explosive Strike — Charge",prereq:"Patch 1.07 (Charge-Phase)",cost:"0",effect:"Explosive Strike mit Charge-Phase — laenger halten = mehr Damage + AoE"},
+  {name:"Dual-Wield Stab-Chain (verbessert)",prereq:"Patch 1.07",cost:"0",effect:"Dual-Wield Stab-Chain fliesst fluessiger"}
 ];
 
 const WATCH_AND_LEARN=[
@@ -4478,8 +4617,14 @@ function renderBuildOptimizer(){
         <button class="bo-pill${_boState.phase===p.k?' active':''}" onclick="_boSetPhase('${p.k}')">${p.l}</button>`).join('')}</div>
     </div>
     <div id="bo-result"></div>
+    <div class="bo-save-row" id="bo-save-row" style="display:${(_boState.style&&_boState.phase)?'flex':'none'}">
+      <input id="bo-save-name" class="bo-save-input" type="text" placeholder="Eigener Build-Name (optional)" maxlength="48">
+      <button class="bo-save-btn" onclick="saveBuildPreset()">⭐ Build speichern</button>
+    </div>
+    <div id="bo-saved"></div>
   `;
   _boRenderResult();
+  renderSavedBuilds();
 }
 function _boSetStyle(k){_boState.style=k;renderBuildOptimizer();}
 function _boSetPhase(k){_boState.phase=k;renderBuildOptimizer();}
@@ -4538,13 +4683,15 @@ function renderRoadmap(){
   // Tasks generieren
   const tasks=[];
 
-  // 1. Naechster unbesiegter Story-Boss
+  // 1. Naechster unbesiegter Story-Boss + Strategie-Preview
   const nextStoryBoss=BOSSES.find(b=>b.chapter&&!bossDone.includes(b.name));
   if(nextStoryBoss){
+    const stratShort=nextStoryBoss.strategy?nextStoryBoss.strategy.slice(0,180)+(nextStoryBoss.strategy.length>180?'…':''):'';
     tasks.push({
       prio:'hi',
       title:`Story-Boss: ${nextStoryBoss.name}`,
       desc:`Kapitel ${nextStoryBoss.chapter} · ${nextStoryBoss.region}. ${nextStoryBoss.parry_or_dodge}.`,
+      preview:stratShort,
       meta:[nextStoryBoss.quest,nextStoryBoss.weakness!=='–'?'Schwäche: '+nextStoryBoss.weakness:''].filter(Boolean),
       action:`showSec('bosses');document.getElementById('si').value='${nextStoryBoss.name.replace(/'/g,"\\'")}';doSearch('${nextStoryBoss.name.replace(/'/g,"\\'")}')`
     });
@@ -4625,15 +4772,274 @@ function renderRoadmap(){
   }
 
   cont.innerHTML=tasks.map(t=>`
-    <div class="rm-task" onclick="${t.action}" data-s="${[t.title,t.desc].join(' ').toLowerCase()}">
+    <div class="rm-task" onclick="${t.action}" data-s="${[t.title,t.desc,t.preview||''].join(' ').toLowerCase()}">
       <div class="rm-task-prio ${t.prio}">${t.prio==='hi'?'!!!':t.prio==='md'?'!!':'!'}</div>
       <div class="rm-task-body">
         <div class="rm-task-title">${t.title}</div>
         <div class="rm-task-desc">${t.desc}</div>
-        ${t.meta&&t.meta.length?`<div class="rm-task-meta">${t.meta.map(m=>`<span>${m}</span>`).join('')}</div>`:''}
+        ${t.preview?`<div style="margin-top:6px;padding:7px 10px;background:rgba(180,45,32,.07);border-left:2px solid rgba(192,57,43,.45);border-radius:0 5px 5px 0;font-size:11px;line-height:1.5;color:#beb5a8">${linkifyXrefs(t.preview)}</div>`:''}
+        ${t.meta&&t.meta.length?`<div class="rm-task-meta" style="margin-top:6px">${t.meta.map(m=>`<span>${m}</span>`).join('')}</div>`:''}
       </div>
     </div>
   `).join('');
+}
+
+// ===== FAVORITEN-SYSTEM (universal) =====
+const FAV_KINDS={
+  boss:{ico:'🗡️',label:'Bosse',pl:'Bosse'},
+  skill:{ico:'⚡',label:'Skills',pl:'Skills'},
+  weapon:{ico:'⚔️',label:'Waffen',pl:'Waffen'},
+  mount:{ico:'🐴',label:'Mounts',pl:'Mounts'},
+  build:{ico:'⚙️',label:'Builds',pl:'Builds'}
+};
+function loadFavs(){return JSON.parse(localStorage.getItem('cd_favs')||'{}');}
+function saveFavs(d){localStorage.setItem('cd_favs',JSON.stringify(d));}
+function isFav(kind,name){
+  const f=loadFavs();
+  return !!(f[kind]&&f[kind].includes(name));
+}
+function toggleFav(kind,name){
+  const f=loadFavs();
+  if(!f[kind])f[kind]=[];
+  if(f[kind].includes(name))f[kind]=f[kind].filter(x=>x!==name);
+  else f[kind].push(name);
+  saveFavs(f);
+  // Update all fav-btns for this kind+name in DOM
+  document.querySelectorAll(`.fav-btn[data-fav-kind="${kind}"][data-fav-name="${name.replace(/"/g,'&quot;')}"]`).forEach(b=>{
+    b.classList.toggle('on',f[kind].includes(name));
+    b.setAttribute('aria-pressed',f[kind].includes(name)?'true':'false');
+  });
+  // Re-render fav section if visible
+  if(typeof renderFavorites==='function')renderFavorites();
+}
+function favBtn(kind,name,inline){
+  const on=isFav(kind,name);
+  const safe=name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  return `<button class="fav-btn${on?' on':''}${inline?' fav-inline':''}" data-fav-kind="${kind}" data-fav-name="${name.replace(/"/g,'&quot;')}" onclick="event.stopPropagation();toggleFav('${kind}','${safe}')" aria-pressed="${on?'true':'false'}" title="${on?'Aus Favoriten entfernen':'Zu Favoriten hinzufügen'}">★</button>`;
+}
+function renderFavorites(){
+  const el=document.getElementById('fav-list');
+  if(!el)return;
+  const f=loadFavs();
+  const totalCount=Object.values(f).reduce((a,c)=>a+(c?c.length:0),0);
+  if(totalCount===0){
+    el.innerHTML=`<div class="fav-empty">
+      <div style="font-size:38px;margin-bottom:9px;opacity:.4">⭐</div>
+      <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--text);margin-bottom:6px;letter-spacing:.04em">Keine Favoriten</div>
+      <div>Klick auf ⭐ bei einem Boss, Skill, Waffe oder Mount um ihn hier zu sammeln.</div>
+    </div>`;
+    return;
+  }
+  let out='';
+  Object.entries(FAV_KINDS).forEach(([k,info])=>{
+    const list=f[k]||[];
+    if(!list.length)return;
+    out+=`<div class="fav-cat-hd">${info.ico} ${info.label}<span class="fav-cat-count">${list.length}</span></div>
+      <div class="fav-grid">`;
+    list.forEach(name=>{
+      out+=_favItemCard(k,name);
+    });
+    out+=`</div>`;
+  });
+  el.innerHTML=out;
+}
+function _favItemCard(kind,name){
+  const safe=name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  let ico='';
+  let meta='';
+  let action='';
+  if(kind==='boss'){
+    const b=BOSSES.find(x=>x.name===name);
+    if(!b)return '';
+    ico=BOSS_IMGS[name]?`<img class="fav-item-ico" src="${BOSS_IMGS[name]}" alt="${name.replace(/"/g,'&quot;')}" loading="lazy">`:'';
+    meta=(b.chapter?'Kap. '+b.chapter+' · ':'')+b.region;
+    action=`showSec('bosses');document.getElementById('si').value='${safe}';doSearch('${safe}')`;
+  } else if(kind==='skill'){
+    const m=_buildXrefMap();
+    const sk=m.skills[name];
+    if(!sk)return '';
+    ico=SKILL_IMGS[name]?`<img class="fav-item-ico" src="${SKILL_IMGS[name]}" alt="${name.replace(/"/g,'&quot;')}" loading="lazy">`:`<div class="fav-item-ico" style="display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(201,162,39,.4)">✦</div>`;
+    meta=sk.effect||sk.prereq||'';
+    action=`showSec('skills');document.getElementById('si').value='${safe}';doSearch('${safe}')`;
+  } else if(kind==='weapon'){
+    const w=WEAPONS.find(x=>x.name===name);
+    if(!w)return '';
+    ico=WEAPON_IMGS[name]?`<img class="fav-item-ico" src="${WEAPON_IMGS[name]}" alt="${name.replace(/"/g,'&quot;')}" loading="lazy">`:'';
+    meta=w.type+(w.atk?' · ATK '+w.atk:'');
+    action=`showSec('weapons');document.getElementById('si').value='${safe}';doSearch('${safe}')`;
+  } else if(kind==='mount'){
+    const mt=MOUNTS.find(x=>x.name===name);
+    if(!mt)return '';
+    ico=MOUNT_IMGS[name]?`<img class="fav-item-ico" src="${MOUNT_IMGS[name]}" alt="${name.replace(/"/g,'&quot;')}" loading="lazy">`:'';
+    meta=mt.type;
+    action=`showSec('mounts');document.getElementById('si').value='${safe}';doSearch('${safe}')`;
+  } else if(kind==='build'){
+    meta='Eigener Build';
+    action=`showSec('builds')`;
+    ico=`<div class="fav-item-ico" style="display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(201,162,39,.6)">⚙️</div>`;
+  }
+  if(!action)return '';
+  return `<div class="fav-item" onclick="${action}">
+    ${ico||'<div class="fav-item-ico"></div>'}
+    <div class="fav-item-info">
+      <div class="fav-item-name">${name}</div>
+      <div class="fav-item-meta">${meta}</div>
+    </div>
+    <button class="fav-remove" onclick="event.stopPropagation();toggleFav('${kind}','${safe}')" title="Aus Favoriten entfernen" aria-label="Entfernen">✕</button>
+  </div>`;
+}
+
+// ===== RECENTLY-VIEWED =====
+function loadRecent(){return JSON.parse(localStorage.getItem('cd_recent')||'[]');}
+function trackRecent(entry){
+  // entry: {kind, name, sec}
+  let r=loadRecent().filter(x=>!(x.kind===entry.kind&&x.name===entry.name));
+  r.unshift(entry);
+  r=r.slice(0,8);
+  localStorage.setItem('cd_recent',JSON.stringify(r));
+  renderRecentSidebar();
+}
+function renderRecentSidebar(){
+  const el=document.getElementById('sb-recent-list');
+  const wrap=document.getElementById('sb-recent');
+  if(!el||!wrap)return;
+  const r=loadRecent();
+  if(!r.length){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  el.innerHTML=r.map(x=>{
+    const info=FAV_KINDS[x.kind]||{ico:'·'};
+    const safe=x.name.replace(/'/g,"\\'");
+    return `<div class="recent-item" onclick="showSec('${x.sec}');document.getElementById('si').value='${safe}';doSearch('${safe}')" title="${x.name.replace(/"/g,'&quot;')}">
+      <span class="recent-item-ico">${info.ico}</span>${x.name}
+    </div>`;
+  }).join('');
+}
+
+// ===== ITEM COMPARE (Weapons) =====
+let _icState={a:null,b:null};
+function openItemCompare(){
+  if(typeof WEAPONS==='undefined')return;
+  const sa=document.getElementById('ic-sel-a');
+  const sb=document.getElementById('ic-sel-b');
+  if(!sa||!sb)return;
+  // Filter zu Waffen mit gesetztem ATK (kuratiert) priorisieren
+  const sorted=[...WEAPONS].sort((a,b)=>(a.source&&!b.source)?-1:(b.source&&!a.source)?1:0);
+  const opts=sorted.map(w=>`<option value="${w.name.replace(/"/g,'&quot;')}">${w.name} (${w.type})</option>`).join('');
+  sa.innerHTML='<option value="">— Waffe A wählen —</option>'+opts;
+  sb.innerHTML='<option value="">— Waffe B wählen —</option>'+opts;
+  if(_icState.a){sa.value=_icState.a;}else{sa.value=sorted[0]?.name||'';_icState.a=sa.value;}
+  if(_icState.b){sb.value=_icState.b;}else{sb.value=sorted[1]?.name||'';_icState.b=sb.value;}
+  renderItemCompare();
+  document.getElementById('ic-modal').classList.add('show');
+}
+function closeItemCompare(){
+  document.getElementById('ic-modal').classList.remove('show');
+}
+function _icDetail(w){
+  if(!w)return '<div style="text-align:center;color:var(--dim);padding:30px 0;font-size:12px">Waffe auswählen…</div>';
+  const esc=s=>String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  const img=WEAPON_IMGS[w.name];
+  return `${img?`<img class="cmp-img" style="height:96px;object-fit:contain;background:rgba(255,255,255,.04);padding:8px" src="${img}" alt="${esc(w.name)}" loading="lazy" onerror="this.style.display='none'">`:''}
+    <div class="cmp-name">${esc(w.name)}</div>
+    <div class="cmp-meta"><span class="tag tx">${esc(w.type)}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">ATK</span><span class="cmp-row-val">${w.atk!=null?w.atk:'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Crit</span><span class="cmp-row-val">${w.crit!=null?w.crit:'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Slots</span><span class="cmp-row-val">${w.slots!=null?w.slots:'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Quelle</span><span class="cmp-row-val">${w.source&&w.source.trim()?esc(w.source):'<span style="color:var(--dim)">Bulk-Import</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Cores</span><span class="cmp-row-val">${esc(w.built_in)||'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Notizen</span><span class="cmp-row-val" style="font-size:10.5px;color:#beb5a8">${esc(w.notes)||'<span style="color:var(--dim)">–</span>'}</span></div>`;
+}
+function renderItemCompare(){
+  const sa=document.getElementById('ic-sel-a');
+  const sb=document.getElementById('ic-sel-b');
+  _icState.a=sa.value;_icState.b=sb.value;
+  const wA=WEAPONS.find(x=>x.name===sa.value);
+  const wB=WEAPONS.find(x=>x.name===sb.value);
+  document.getElementById('ic-detail-a').innerHTML=_icDetail(wA);
+  document.getElementById('ic-detail-b').innerHTML=_icDetail(wB);
+  // Diff-Highlight ATK
+  if(wA&&wB){
+    const aDoc=document.getElementById('ic-detail-a');
+    const bDoc=document.getElementById('ic-detail-b');
+    const fields=['atk','crit','slots'];
+    fields.forEach((f,i)=>{
+      if(wA[f]!=null&&wB[f]!=null&&wA[f]!==wB[f]){
+        const winner=wA[f]>wB[f]?'a':'b';
+        const rowA=aDoc.querySelectorAll('.cmp-row')[i];
+        const rowB=bDoc.querySelectorAll('.cmp-row')[i];
+        if(rowA&&rowB){
+          rowA.querySelector('.cmp-row-val').classList.toggle('cmp-row-diff',winner==='a');
+          rowB.querySelector('.cmp-row-val').classList.toggle('cmp-row-diff',winner==='b');
+        }
+      }
+    });
+  }
+}
+
+// ===== EIGENE BUILDS SPEICHERN =====
+function loadSavedBuilds(){return JSON.parse(localStorage.getItem('cd_saved_builds')||'[]');}
+function saveBuildPreset(){
+  if(!_boState.style||!_boState.phase)return alert('Wähle Stil und Phase, bevor du speicherst.');
+  const key=_boState.style+'-'+_boState.phase;
+  const recipe=BUILD_RECIPES[key];
+  if(!recipe)return alert('Keine Empfehlung für diese Kombination — nicht speicherbar.');
+  const nameInput=document.getElementById('bo-save-name');
+  const customName=(nameInput?.value||'').trim();
+  const style=BUILD_STYLES.find(s=>s.k===_boState.style);
+  const phase=BUILD_PHASES.find(p=>p.k===_boState.phase);
+  const builds=loadSavedBuilds();
+  const newBuild={
+    id:'b'+Date.now(),
+    name:customName||`${style.name} · ${phase.l}`,
+    style:_boState.style,
+    phase:_boState.phase,
+    recipe:{...recipe},
+    saved:Date.now()
+  };
+  builds.unshift(newBuild);
+  localStorage.setItem('cd_saved_builds',JSON.stringify(builds));
+  if(nameInput)nameInput.value='';
+  renderSavedBuilds();
+  // Show micro-toast
+  const toast=document.getElementById('toast');
+  if(toast){toast.textContent='Build gespeichert!';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1500);}
+}
+function deleteSavedBuild(id){
+  if(!confirm('Diesen Build löschen?'))return;
+  const builds=loadSavedBuilds().filter(b=>b.id!==id);
+  localStorage.setItem('cd_saved_builds',JSON.stringify(builds));
+  renderSavedBuilds();
+}
+function loadSavedBuild(id){
+  const b=loadSavedBuilds().find(x=>x.id===id);
+  if(!b)return;
+  _boState.style=b.style;
+  _boState.phase=b.phase;
+  renderBuildOptimizer();
+}
+function renderSavedBuilds(){
+  const cont=document.getElementById('bo-saved');
+  if(!cont)return;
+  const builds=loadSavedBuilds();
+  if(!builds.length){cont.innerHTML='';return;}
+  cont.innerHTML=`<div class="bo-saved-hd"><span>Eigene Builds</span><span style="color:var(--dim);font-size:10px">${builds.length} gespeichert</span></div>
+    <div class="bo-saved-list">
+      ${builds.map(b=>{
+        const style=BUILD_STYLES.find(s=>s.k===b.style);
+        const phase=BUILD_PHASES.find(p=>p.k===b.phase);
+        const dt=new Date(b.saved||Date.now()).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});
+        return `<div class="bo-saved-card">
+          <div class="bo-saved-info">
+            <div class="bo-saved-name">${style?style.ico:''} ${b.name}</div>
+            <div class="bo-saved-meta">${style?style.name:'?'} · ${phase?phase.l:'?'} · ${dt}</div>
+          </div>
+          <div class="bo-saved-actions">
+            <button class="bo-saved-btn" onclick="loadSavedBuild('${b.id}')" title="Build laden">Laden</button>
+            <button class="bo-saved-btn danger" onclick="deleteSavedBuild('${b.id}')" title="Löschen">✕</button>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
 }
 
 // ===== SMART FILTER (Tag-Click) =====
@@ -4841,11 +5247,14 @@ if(_origSetTheme){
 }
 
 // ===== SKILL-TREE-GRAPH =====
-let _skGraphActive='stamina';
+let _skGraphActive='kliff-stamina';
 function _skGraphTreeData(which){
-  if(which==='stamina')return KLIFF_STAMINA;
-  if(which==='spirit')return KLIFF_SPIRIT;
-  return KLIFF_HEALTH;
+  if(which==='kliff-stamina')return KLIFF_STAMINA;
+  if(which==='kliff-spirit')return KLIFF_SPIRIT;
+  if(which==='kliff-health')return KLIFF_HEALTH;
+  if(which==='damiane')return typeof DAMIANE_SKILLS!=='undefined'?DAMIANE_SKILLS:[];
+  if(which==='oongka')return typeof OONGKA_SKILLS!=='undefined'?OONGKA_SKILLS:[];
+  return KLIFF_STAMINA;
 }
 function _skGraphLayout(tree){
   // Heuristic layout: nodes grouped by "depth" based on prereq dependencies
@@ -4924,9 +5333,11 @@ function renderSkillGraph(which){
   const isMiss=s=>s.prereq&&(s.prereq.includes('MISSABLE')||s.prereq.includes('NICHT erlernbar'));
 
   const tabs=[
-    {k:'stamina',l:'Stamina',c:'#c0311f'},
-    {k:'spirit',l:'Spirit',c:'#cc9f28'},
-    {k:'health',l:'Health/Elemente',c:'#9430c5'}
+    {k:'kliff-stamina',l:'Kliff · Stamina',c:'#c0311f'},
+    {k:'kliff-spirit',l:'Kliff · Spirit',c:'#cc9f28'},
+    {k:'kliff-health',l:'Kliff · Health',c:'#9430c5'},
+    {k:'damiane',l:'Damiane',c:'#3a7ec8'},
+    {k:'oongka',l:'Oongka',c:'#4ea83a'}
   ];
   cont.innerHTML=`
     <div class="skill-graph-tabs">
@@ -4995,6 +5406,10 @@ function showSec(id, opts){
   const sec=document.getElementById('sec-'+id);
   const nav=document.querySelector('[data-sec="'+id+'"]');
   if(!sec||!nav)return;
+  // Re-render favorites when entering that section (favs may have changed since init)
+  if(id==='favorites'&&typeof renderFavorites==='function')renderFavorites();
+  if(id==='roadmap'&&typeof renderRoadmap==='function')renderRoadmap();
+  if(id==='achievements'&&typeof renderAchievements==='function')renderAchievements();
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
   sec.classList.add('active');
@@ -5158,6 +5573,16 @@ function doSearch(q){
   document.querySelectorAll('[data-s]').forEach(el=>clearHighlight(el));
   // URL-State sync (debounced via assignment)
   if(typeof _writeUrlState==='function')_writeUrlState();
+  // Track recent: wenn Suche genau einen Boss/Skill/Waffen/Mount-Namen matcht
+  if(q.length>=3&&typeof trackRecent==='function'){
+    const sec=localStorage.getItem('cd_sec')||'';
+    let kind=null;
+    if(sec==='bosses'&&BOSSES.find(b=>b.name===q))kind='boss';
+    else if(sec==='skills'&&_buildXrefMap().skills[q])kind='skill';
+    else if(sec==='weapons'&&WEAPONS.find(w=>w.name===q))kind='weapon';
+    else if(sec==='mounts'&&typeof MOUNTS!=='undefined'&&MOUNTS.find(m=>m.name===q))kind='mount';
+    if(kind)trackRecent({kind,name:q,sec});
+  }
   if(!q){
     cnt.textContent='';
     document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));
@@ -5241,6 +5666,7 @@ function renderBosses(){
     const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge,notes[b.name]||''].join(' ').toLowerCase();
     return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}" data-s="${s}">
       <div class="boss-done-badge">BESIEGT</div>
+      ${favBtn('boss',b.name)}
       ${BOSS_IMGS[b.name]
         ?`<div class="boss-img-wrap"><img class="boss-img" src="${BOSS_IMGS[b.name]}" onerror="this.parentElement.innerHTML=bossPlaceholder({name:'${b.name.replace(/'/g,"\\'")}',region:'${b.region}',chapter:${b.chapter||'null'},quest:'${b.quest.replace(/'/g,"\\'")}'})" loading="lazy" alt="${b.name}"></div>`
         :bossPlaceholder(b)
@@ -5558,6 +5984,7 @@ function mountCard(m){
   const img=MOUNT_IMGS[m.name];
   const s=[m.name,m.type,m.unlock,m.stats,m.notes].join(' ').toLowerCase();
   return `<div class="card" data-s="${s}">
+    ${favBtn('mount',m.name)}
     ${img
       ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" loading="lazy" alt="${m.name}" onerror="this.parentElement.style.display='none'" style="object-position:center center"></div>`
       :`<div class="boss-img-ph" style="background:linear-gradient(135deg,#100c06 0%,#080808 100%);border:1px solid rgba(201,162,39,.18)"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:rgba(201,162,39,.6)">${m.name.charAt(0)}</div><div class="boss-ph-cap" style="color:rgba(201,162,39,.3)">${m.type}</div></div></div>`
