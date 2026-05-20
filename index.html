@@ -832,6 +832,16 @@ tbody{contain:layout style}
 .rt-tracker-reset{font-size:11px;color:var(--dim);background:none;border:1px solid var(--bdr);border-radius:5px;padding:4px 10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;margin-top:10px}
 .rt-tracker-reset:hover{border-color:rgba(192,57,43,.42);color:var(--rhi)}
 
+/* Boss-NPC-Lore */
+.boss-lore{margin-top:9px;padding:10px 12px;background:rgba(140,40,200,.05);border:1px solid rgba(140,40,200,.2);border-left:3px solid rgba(140,40,200,.55);border-radius:0 7px 7px 0;font-size:11px;line-height:1.6;color:#c8c0d8;cursor:pointer;transition:all .15s;position:relative}
+.boss-lore:hover{background:rgba(140,40,200,.08);border-color:rgba(140,40,200,.42)}
+.boss-lore-collapsed{max-height:38px;overflow:hidden;position:relative}
+.boss-lore-collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:18px;background:linear-gradient(transparent,var(--card));pointer-events:none}
+.boss-lore-hd{font-family:'Cinzel',serif;font-size:9.5px;color:#c590ee;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center}
+.boss-lore-faction{font-size:9.5px;color:var(--gold);font-weight:600;letter-spacing:.04em;text-transform:none;font-family:'Inter',sans-serif}
+.boss-lore-ext{display:inline-block;font-size:9px;color:var(--dim);margin-left:6px;text-decoration:none}
+.boss-lore-ext:hover{color:var(--gold)}
+
 /* Boss-Recommendations */
 .bo-recs{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
 .bo-rec{font-size:10px;padding:3px 9px;background:rgba(201,162,39,.08);border:1px dashed rgba(201,162,39,.32);border-radius:14px;color:var(--gold);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:4px}
@@ -4405,7 +4415,11 @@ function randomBoss(){
       <div style="font-size:12px;color:var(--gold);margin-bottom:11px">${esc(b.parry_or_dodge)||'–'}</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:4px">Strategie</div>
       <div class="rb-strategy">${esc(b.strategy)||'–'}</div>
-      <button class="rb-rerollbtn" onclick="randomBoss()">🎲 Nochmal würfeln</button>
+      ${(()=>{const lore=BOSS_LORE[b.name];if(!lore||!lore.desc||!lore.desc.trim())return '';return `<div class="boss-lore" style="margin-top:11px;cursor:default">
+        <div class="boss-lore-hd"><span>📖 NPC-Lore${lore.faction?' · <span class="boss-lore-faction">'+lore.faction.replace(/"/g,'&quot;')+'</span>':''}</span><a href="https://questlog.gg/crimson-desert/en/db/npc/${lore.id}" target="_blank" rel="noopener" class="boss-lore-ext">questlog ↗</a></div>
+        <div style="font-style:italic">${esc(lore.desc)}</div>
+      </div>`;})()}
+      <button class="rb-rerollbtn" style="margin-top:12px" onclick="randomBoss()">🎲 Nochmal würfeln</button>
     </div>
   </div>`;
   m.classList.add('show');
@@ -4718,6 +4732,22 @@ function renderBossRating(name){
   </div>`;
 }
 
+// ===== BOSS NPC-LORE Render =====
+function renderBossLore(b){
+  const lore=BOSS_LORE[b.name];
+  if(!lore||!lore.desc||!lore.desc.trim())return '';
+  const dbUrl=`https://questlog.gg/crimson-desert/en/db/npc/${lore.id}`;
+  const factionLine=lore.faction&&lore.faction.trim()?`<span class="boss-lore-faction">${lore.faction.replace(/"/g,'&quot;')}</span>`:'';
+  const escDesc=lore.desc.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  return `<div class="boss-lore boss-lore-collapsed" onclick="this.classList.toggle('boss-lore-collapsed')" data-tip="Klick zum Aus-/Einklappen" role="button" tabindex="0">
+    <div class="boss-lore-hd">
+      <span>📖 NPC-Lore${factionLine?' · '+factionLine:''}</span>
+      <a href="${dbUrl}" target="_blank" rel="noopener" class="boss-lore-ext" onclick="event.stopPropagation()" title="Auf questlog.gg öffnen">questlog ↗</a>
+    </div>
+    <div style="font-style:italic">${linkifyXrefs(escDesc)}</div>
+  </div>`;
+}
+
 // ===== BOSS-SKILL-RECOMMENDATIONS =====
 function recommendForBoss(b){
   if(!b)return [];
@@ -4997,6 +5027,40 @@ function renderRoadmap(){
     </div>
   `).join('');
 }
+
+// ===== BOSS NPC-LORE (gesammelt aus questlog.gg DB) =====
+const BOSS_LORE={
+  "Antumbra's Sword":{id:"1002657",faction:"Antumbra Order",desc:"One of Antumbra's unholy deacons. Nothing is known of who he once was or where he came from. To prove his unshakable faith, he sacrificed himself to the darkness and gained the power of Umbra. Through his fervent devotion, he was granted a new existence."},
+  "Avatar of Umbra":{id:"1003124",faction:"",desc:"An entity in Myurdin's form. It no longer resembles the feared, power-drunk leader of the Black Bears. It's eerily calm, making it seem even more unsettling. Its body is breaking apart, as though it can't contain the power within."},
+  "Awakened Lucian Bastier":{id:"1000310",faction:"Cassius Morten",desc:"The grand general of Demeniss and Caliburn's loyal confidant. Born into a lowly family with an insatiable ambition, he seized power by murdering his rivals. Rather than punishing him, Caliburn leveraged this knowledge to recruit him. Now serving as grand general, he leads the Righteous Inquisitors, paving Caliburn's path with blood."},
+  "Awakened Ludvig":{id:"1000271",faction:"Lonely Jackals",desc:"Leader of the Lonely Jackals. He already had a bad reputation as an opportunist, but none expected him to change so drastically after Jian fell. Clinging to the strong while harboring ugly ambitions, he dreams of one day trampling over those he stabbed in the back and standing at the top."},
+  "Beloth the Darksworn":{id:"55514",faction:"Beloth, the Darksworn",desc:"The King of the chilling shadows. He was once the ruler of the ancient southern lands. He fled to the north to escape an invading enemy, but froze to death in the unforgiving cold of the snow-covered mountains. Even in death, his obsession with rebuilding his kingdom did not fade. He now wanders the blizzard-swept peaks like a restless wraith, seeking those who would follow him."},
+  "Black Fang":{id:"1002565",faction:"Legendary Wolf",desc:"Felling this beast would make you the greatest hunter in Pywel. A legendary wolf that brings death to those who trespass into the forest. Its body is cloaked in shadow as black as pitch. Those slain by its bite are said to become wolves themselves. Children of Hernand grow up hearing stories of the Black Fang."},
+  "Cassius Morten / Tenebrum":{id:"1000275",faction:"",desc:""},
+  "Corrupted Caliburn":{id:"55529",faction:"",desc:"An entity wearing Caliburn's form. The duke who once swayed Demeniss at will is no more. Now the Abyss's power and his mortal flesh have fused into one. To call it Caliburn, or even human at all, would be wrong."},
+  "Draven the Crowcaller":{id:"1000375",faction:"Crow Brothers",desc:"The son of Hexe Marie the Black Witch. Recognizing his talent, Hexe Marie took him in as her own. He embraced the power of darkness and walked the path of corruption, yet his gaze was always fixed on his mother. The love he never received remained beyond reach, no matter how much power he gathered."},
+  "Fortain the Cursed Knight":{id:"1002625",faction:"Fortain Rebels",desc:"The leader of the rebellion in the Wells Estate. He was swayed by Bastier's ideology and betrayed his lord, Duke Wells. Through the Grand General's introduction, he met the Black Witch and gained the power to split his soul into doubles. This corrupted power carries a curse: if he is defeated in battle, his own double will execute him."},
+  "Gabriel Caliburn":{id:"1000561",faction:"",desc:""},
+  "Golden Star":{id:"60007",faction:"",desc:""},
+  "Gregor the Halberd of Carnage":{id:"1002618",faction:"Gregor's Soldiers",desc:"A loyal aide of Bastier. A warrior who earned Bastier's trust through countless battles, he was dispatched to the Iron Fortress to keep Duke Wells in check. Rumor has it that Bastier also entrusted him with a more secretive mission and ordered him to keep watch over the eastern coast."},
+  "Hexe Marie":{id:"1000809",faction:"Hexe Marie",desc:"A wicked witch who follows Umbra. She turned the lands near Tariv into a realm of nightmares. With twisted affection, she raises her children by infusing them with dark power, only to devour them and claim that strength as her own. Though her power is immense, something about her feels incomplete, an instability lurking beneath her might."},
+  "Kailok the Hornsplitter":{id:"1002620",faction:"Goldleaf Merchant Guild",desc:"Head of the Goldleaf Merchants. Frail and pale since childhood, he was bullied, but gained immense power from an Artifact he discovered by chance. With power strong enough to split ox horns with just the wind from his sword, he exerts his influence over Hernand by colluding not only with corrupt officials but also with bandits."},
+  "Kearush the Slayer":{id:"55512",faction:"",desc:"A monster captured by Demeniss. It lashed out from the pain of its severed horns and the terror of captivity, but all it truly wanted was to live in peace. Now freed from its shackles, it's likely returned to the snowy mountains to enjoy its freedom."},
+  "Lava Myurdin (Phase 2)":{id:"1000457",faction:"Black Bears",desc:"Leader of the Black Bears. There are many rumors about his origins and bloodline, but nothing is known for certain. He holds a single conviction: \"Only the powerful deserve everything.\" Using cowardly tricks, he broke the Greymanes apart, making himself known with fear for his brutality and cruelty."},
+  "Lucian Bastier":{id:"1000903",faction:"Bastier's Inquisitors",desc:"The grand general of Demeniss and Caliburn's loyal confidant. Born into a lowly family with an insatiable ambition, he seized power by murdering his rivals. Rather than punishing him, Caliburn leveraged this knowledge to recruit him. Now serving as grand general, he leads the Righteous Inquisitors, paving Caliburn's path with blood."},
+  "Marni's Clockwork Mantis":{id:"1002642",faction:"H.A.L.L.",desc:"The perfect leader of a perfect city. Delesyia is a perfect city where everything unfolds according to Marni's will, and it promises the most perfect happiness in Pywel. Everything here is perfectly safe, so everyone can feel completely at ease and simply enjoy the dreamlike, perfect life Marni has created."},
+  "Marni's Excavatron":{id:"1002653",faction:"",desc:"A quarrying machine created by Marni, the genius inventor of Delesyia. The Bleed Bandits' delivery of a Delesyian machine to Karin Quarry is the result of a long chain of events. Delesyia sent it to a prestigious family in Demeniss as a gesture of alliance. That family later presented it as a gift to Walter of the Bleed Bandits."},
+  "Master Du":{id:"1000610",faction:"Sage of the Desert",desc:"One of the four beings maintaining the balance of the Abyss. A great teacher in the form of a goblin, he preaches peace and enlightenment. When those with steadfast resolve need the strength to walk the righteous path, he guides them to the Cloister of Enlightenment to help them awaken their inner power."},
+  "Matthias":{id:"50901",faction:"",desc:"Leader of the Order of Light. Once a knight sworn to a noble house, he upheld his honor and courtesy even after his lord's fall. Though now a knight-errant, he's never let his code slip and he gathered like-minded companions to found the Order of Light. He takes great pride in his swordsmanship, and relishes the chance to spar with worthy opponents."},
+  "Myurdin (Phase 1)":{id:"1001117",faction:"Black Bears",desc:"Leader of the Black Bears. There are many rumors about his origins and bloodline, but nothing is known for certain. He holds a single conviction: \"Only the powerful deserve everything.\" Using cowardly tricks, he broke the Greymanes apart, making himself known with fear for his brutality and cruelty."},
+  "One-Armed Ludvig":{id:"1001338",faction:"Lonely Jackals",desc:"Leader of the Lonely Jackals. He already had a bad reputation as an opportunist, but none expected him to change so drastically after Jian fell. Clinging to the strong while harboring ugly ambitions, he dreams of one day trampling over those he stabbed in the back and standing at the top."},
+  "Priscus the Ancient":{id:"1002650",faction:"Ancients",desc:"An ancient being returned to the world through the power of an Artifact. Legends tell that in Five-Finger Mountain dwells an Ancient capable of freely commanding massive stones. When reunited with their comrades, it is said they will conquer the entire continent of Pywel."},
+  "Reed Devil":{id:"55504",faction:"",desc:"The Devil of the Reed Field. Once only a creature of tale born of hatred and rage, until one day it manifested in Hernand. The sinful dismiss it as something beyond their understanding, but it's this corrupt world that bred the hatred that feeds the devil."},
+  "Saigord the Staglord":{id:"55503",faction:"Saigord, the Staglord",desc:"The king of a forgotten realm, erased from history as if he never existed. Though he has lost his people, his riches, and even his sanity, he remains shackled to the crushing weight of a duty he refuses to abandon. He clings to a wretched existence, vowing to repel the scavengers who covet his treasury until the day his subjects finally return."},
+  "Umbra (Final)":{id:"1002889",faction:"",desc:"The purest power, said to have existed since the dawn of time. It once had no will of its own, no sense of good and evil. But when shards of it spread across Pywel as artifacts, the desires of those who touched this power seeped back into the Abyss—leading it to believe them as the truth of the world."},
+  "Walter Lanford":{id:"1002624",faction:"Bleed Bandits",desc:"The leader of the Bleed Bandits and the adopted son of Marquis Lanford. Originally an orphan, he became the adopted son of Stefan Lanford and received unwavering support as his successor, Yet his own deep-seated insecurities regarding his low birth made him unable to accept such kindness. In the end, he ran away from House Lanford and founded his own faction, the Bleed Bandits, that serves only himself."},
+  "White Horn":{id:"1000206",faction:"White Horn, Shepherd of Souls Faction",desc:""}
+};
 
 // ===== SECRETS & HIDDEN LORE =====
 const SECRETS_EASTER_EGGS=[
@@ -6512,6 +6576,7 @@ function renderBosses(){
       <div class="cs">${linkifyXrefs(b.strategy)}</div>
       ${renderBossPhases(b)}
       ${renderBossRecs(b)}
+      ${renderBossLore(b)}
       ${renderBossRating(b.name)}
       <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">Kopieren</button>
       <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${safeName}')">
