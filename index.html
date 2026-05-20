@@ -456,6 +456,22 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 /* ── Keyboard hint ── */
 .kbd-hint{font-size:10px;color:var(--dim);background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:4px;padding:2px 7px;margin-left:6px;font-family:monospace}
 
+/* ── Performance: off-screen rendering deferieren ── */
+/* content-visibility:auto cullt Off-Screen-Elements — riesige Performance-Win bei 500+ items */
+.card,.sk-c,.ach-card,.fav-item,.rm-task,.witch-card,.set-card,.bo-saved-card,.pet-card,.fac-reg,.chap,.te-grp,.ch-card,.sg-card,.build-card,.comm-it,.te-it{
+  content-visibility:auto;
+  contain-intrinsic-size:0 280px;
+}
+/* Tables: applied per-tbody since rows reflow as unit */
+tbody{contain:layout style}
+.grid,.sk-grid,.ach-grid,.fav-grid,.pet-grid,.witch-grid,.bo-result-grid,.qst-rail,.region-heatmap{contain:layout style}
+/* Bei sehr langen Tabellen: jede Zeile als own containment-context */
+.trow{content-visibility:auto;contain-intrinsic-size:0 52px}
+/* Boss-Cards sind größer wegen Image + Phasen + Notes */
+#boss-grid .card{contain-intrinsic-size:0 540px}
+/* Skill-Graph-Tab darf vollständig content sein */
+.skill-graph-wrap{contain:layout style}
+
 /* ── Skip-Link (Accessibility) ── */
 .skip-link{position:absolute;left:-9999px;top:0;z-index:1000;padding:10px 18px;background:var(--gold);color:#000;font-weight:700;font-size:13px;border-radius:0 0 8px 0;text-decoration:none;font-family:'Inter',sans-serif}
 .skip-link:focus{left:0;outline:2px solid var(--rhi);outline-offset:2px}
@@ -5391,13 +5407,17 @@ function toggleBossNote(name,btn){
     area.focus();
   }
 }
-function persistBossNote(name,el,btn){
-  saveBossNote(name,el.value);
-  if(btn)btn.classList.toggle('has-note',!!el.value.trim());
+const _afterNoteAction=_debounce(()=>{
   if(typeof refreshSectionStats==='function')refreshSectionStats();
   if(typeof checkAchievements==='function')checkAchievements();
   if(typeof renderAchievements==='function')renderAchievements();
   if(typeof renderRoadmap==='function')renderRoadmap();
+},400);
+
+function persistBossNote(name,el,btn){
+  saveBossNote(name,el.value);
+  if(btn)btn.classList.toggle('has-note',!!el.value.trim());
+  _afterNoteAction();
 }
 
 // ===== NAVIGATION =====
@@ -5531,7 +5551,40 @@ function copyStrat(e,text){
 }
 
 // ===== SEARCH =====
+// ── Performance: Debounce + Throttle Helpers ───────────────────────
+function _debounce(fn,ms){
+  let t;
+  return function(...args){
+    clearTimeout(t);
+    t=setTimeout(()=>fn.apply(this,args),ms);
+  };
+}
+function _throttle(fn,ms){
+  let last=0, pending=null;
+  return function(...args){
+    const now=Date.now();
+    if(now-last>=ms){
+      last=now;
+      fn.apply(this,args);
+    } else {
+      clearTimeout(pending);
+      pending=setTimeout(()=>{last=Date.now();fn.apply(this,args);},ms-(now-last));
+    }
+  };
+}
+function _rafBatch(fn){
+  let scheduled=false;
+  return function(...args){
+    if(scheduled)return;
+    scheduled=true;
+    requestAnimationFrame(()=>{scheduled=false;fn.apply(this,args);});
+  };
+}
+
 function clearHighlight(el){
+  // Quick path: skip if no marks present (avoids unnecessary querySelectorAll)
+  if(!el._hadHL)return;
+  el._hadHL=false;
   el.querySelectorAll('mark.hl').forEach(m=>{
     const t=document.createTextNode(m.textContent);
     m.parentNode.replaceChild(t,m);
@@ -5550,6 +5603,8 @@ function highlightInElement(el,q){
     }
   });
   const nodes=[];let n;while(n=walker.nextNode())nodes.push(n);
+  if(!nodes.length)return;
+  el._hadHL=true;
   nodes.forEach(node=>{
     const frag=document.createDocumentFragment();
     const parts=node.nodeValue.split(re);
@@ -5566,14 +5621,15 @@ function highlightInElement(el,q){
     node.parentNode.replaceChild(frag,node);
   });
 }
-function doSearch(q){
+function _doSearchImpl(q){
   q=q.trim();
   const qLow=q.toLowerCase();
   const cnt=document.getElementById('scnt');
+  // Clear highlights only on elements that actually had them
   document.querySelectorAll('[data-s]').forEach(el=>clearHighlight(el));
-  // URL-State sync (debounced via assignment)
+  // URL-State sync
   if(typeof _writeUrlState==='function')_writeUrlState();
-  // Track recent: wenn Suche genau einen Boss/Skill/Waffen/Mount-Namen matcht
+  // Track recent: wenn Suche genau einen Item-Namen matcht
   if(q.length>=3&&typeof trackRecent==='function'){
     const sec=localStorage.getItem('cd_sec')||'';
     let kind=null;
@@ -5589,45 +5645,69 @@ function doSearch(q){
     document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
     return;
   }
+  // Only operate within the active section — drastically reduces work
+  const activeSec=document.querySelector('.sec.active');
+  const scope=activeSec||document;
   let total=0;
-  document.querySelectorAll('[data-s]').forEach(el=>{
+  const matchedForHL=[];
+  scope.querySelectorAll('[data-s]').forEach(el=>{
     const m=el.dataset.s.includes(qLow);
     el.classList.toggle('hide',!m);
-    if(m){total++;highlightInElement(el,q);}
+    if(m){total++;if(matchedForHL.length<80)matchedForHL.push(el);}
   });
-  cnt.textContent=total+' Treffer';
-  // Empty-State im aktiven Section anzeigen wenn keine Treffer
+  // Hide elements outside active section (only if any non-active section element has data-s)
+  // — they remain in DOM but won't render due to .sec not having active
+  // Highlight only top 80 matches (perceptual highlight, full-list-highlight would freeze on big lists)
+  matchedForHL.forEach(el=>highlightInElement(el,q));
+  cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
+  // Empty-State
   document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
-  if(total===0){
-    const activeSec=document.querySelector('.sec.active');
-    if(activeSec){
-      const es=document.createElement('div');
-      es.className='empty-state empty-state-injected';
-      es.innerHTML=`
-        <span class="empty-state-icon">🔍</span>
-        <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}"</div>
-        <div class="empty-state-desc">Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>
-        <button class="empty-state-action" onclick="document.getElementById('si').value='';doSearch('');document.getElementById('si').focus()">Suche zurücksetzen</button>
-      `;
-      activeSec.appendChild(es);
-    }
+  if(total===0&&activeSec){
+    const es=document.createElement('div');
+    es.className='empty-state empty-state-injected';
+    es.innerHTML=`
+      <span class="empty-state-icon">🔍</span>
+      <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}"</div>
+      <div class="empty-state-desc">Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>
+      <button class="empty-state-action" onclick="document.getElementById('si').value='';doSearch('');document.getElementById('si').focus()">Suche zurücksetzen</button>
+    `;
+    activeSec.appendChild(es);
   }
 }
+const doSearch=_debounce(_doSearchImpl,120);
 
 // ===== BOSSES =====
 function loadBossDone(){return JSON.parse(localStorage.getItem('cd_bosses')||'[]');}
 function saveBossDone(a){localStorage.setItem('cd_bosses',JSON.stringify(a));updateStats();}
-function toggleBossDone(name){
-  let d=loadBossDone();
-  d=d.includes(name)?d.filter(x=>x!==name):[...d,name];
-  saveBossDone(d);
-  renderBosses();
-  renderBossChecklist();
+// Throttled side-effects nach Boss-Done — verhindert Render-Stuttering bei schnellen Klicks
+const _afterBossAction=_throttle(()=>{
   if(typeof refreshSectionStats==='function')refreshSectionStats();
   if(typeof renderRegionHeatmap==='function')renderRegionHeatmap();
   if(typeof checkAchievements==='function')checkAchievements();
   if(typeof renderAchievements==='function')renderAchievements();
   if(typeof renderRoadmap==='function')renderRoadmap();
+},250);
+
+function toggleBossDone(name){
+  let d=loadBossDone();
+  d=d.includes(name)?d.filter(x=>x!==name):[...d,name];
+  saveBossDone(d);
+  // In-place toggle visual state ohne full re-render
+  const cards=document.querySelectorAll('#boss-grid .card');
+  cards.forEach(c=>{
+    const btn=c.querySelector('.defeat-btn');
+    if(!btn)return;
+    const onclick=btn.getAttribute('onclick')||'';
+    if(onclick.includes(`'${name.replace(/'/g,"\\'")}'`)||onclick.includes(`'${name}'`)){
+      const isDone=d.includes(name);
+      c.classList.toggle('boss-done',isDone);
+      btn.classList.toggle('on',isDone);
+      btn.innerHTML=isDone?'✓ Besiegt':'Als besiegt markieren';
+    }
+  });
+  // Checklist needs full re-render (different structure)
+  if(typeof renderBossChecklist==='function')renderBossChecklist();
+  _afterBossAction();
 }
 
 const BOSS_PH_PALETTES={
@@ -5708,7 +5788,7 @@ function renderWeapons(){
     const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
     return `<tr class="trow${show?'':' hide'}" data-s="${s}">
-      <td><div style="display:flex;align-items:center;gap:9px">${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" onerror="this.style.display='none'" loading="lazy" alt="${alt}" style="width:36px;height:36px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:5px;padding:2px;flex-shrink:0">`:wTypeIcon(w.type)}<strong>${w.name}</strong></div></td>
+      <td><div style="display:flex;align-items:center;gap:9px">${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" onerror="this.style.display='none'" loading="lazy" decoding="async" width="36" height="36" alt="${alt}" style="width:36px;height:36px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:5px;padding:2px;flex-shrink:0">`:wTypeIcon(w.type)}<strong>${w.name}</strong></div></td>
       <td><span class="tag tx">${w.type}</span></td>
       <td>${w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>'}</td>
       <td>${w.crit!=null?'<span class="crt">'+w.crit+'</span>':'<span class="dm">–</span>'}</td>
