@@ -3043,7 +3043,8 @@ const WATCH_AND_LEARN=[
   {skill:"Swift Stab",loc:"Reed Devil Boss (Kap. 3)",miss:false}
 ];
 
-// Lokale Boss-Bilder (cd_assets/bosses/) — schneller, kein 404-Risiko bei externen Quellen
+// Lokale Boss-Bilder (cd_assets/bosses/) als primary, questlog-CDN als Fallback (BOSS_IMGS_CDN)
+// Defekte lokale Bilder (Priscus, Black Fang waren Placeholder) → direkt questlog-CDN als primary
 const BOSS_IMGS={
   "Matthias":"cd_assets/bosses/matthias.png",
   "Kailok the Hornsplitter":"cd_assets/bosses/kailok.png",
@@ -3064,9 +3065,9 @@ const BOSS_IMGS={
   "Beloth the Darksworn":"cd_assets/bosses/beloth.png",
   "White Horn":"cd_assets/bosses/white_horn.png",
   "Umbra (Final)":"cd_assets/bosses/umbra-final.jpg",
-  "Black Fang":"cd_assets/bosses/black_fang.png",
+  "Black Fang":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp",
   "Avatar of Umbra":"cd_assets/bosses/avatar_umbra.png",
-  "Priscus the Ancient":"cd_assets/bosses/priscus.png",
+  "Priscus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp",
   "Antumbra's Sword":"cd_assets/bosses/antumbra_sword.png",
   "Gregor the Halberd of Carnage":"cd_assets/bosses/gregor.png",
   "Walter Lanford":"cd_assets/bosses/walter_lanford.png",
@@ -3076,6 +3077,36 @@ const BOSS_IMGS={
   "Awakened Lucian Bastier":"cd_assets/bosses/awakened_lucian.png",
   "Marni's Clockwork Mantis":"cd_assets/bosses/clockwork_mantis.png",
   "Turbine":"cd_assets/bosses/turbine.png"
+};
+
+// questlog-CDN-Fallback fuer alle Bosse mit gefundener NPC-ID (onerror cascade)
+const BOSS_IMGS_CDN={
+  "Antumbra's Sword":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrassword.webp",
+  "Avatar of Umbra":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_myurdinumbra.webp",
+  "Awakened Lucian Bastier":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp",
+  "Awakened Ludvig":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ludvig.webp",
+  "Beloth the Darksworn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_darkking.webp",
+  "Black Fang":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp",
+  "Corrupted Caliburn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_boss_caliburn_awakening.webp",
+  "Draven the Crowcaller":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_draven.webp",
+  "Fortain the Cursed Knight":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_fortainthehexboundknight.webp",
+  "Gregor the Halberd of Carnage":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_gregorthehalberdofcarnage.webp",
+  "Hexe Marie":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_hexe_marie.webp",
+  "Kailok the Hornsplitter":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_kailokthehornsplitter.webp",
+  "Kearush the Slayer":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_imp_banquet.webp",
+  "Lava Myurdin (Phase 2)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_myordin.webp",
+  "Lucian Bastier":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp",
+  "Marni's Clockwork Mantis":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_marni.webp",
+  "Marni's Excavatron":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marniexcavatron.webp",
+  "Master Du":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_master_doo.webp",
+  "Matthias":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_matthias.webp",
+  "Myurdin (Phase 1)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_myordin.webp",
+  "One-Armed Ludvig":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ludvig.webp",
+  "Priscus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp",
+  "Reed Devil":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_reeddevil.webp",
+  "Saigord the Staglord":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_deerking.webp",
+  "Umbra (Final)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_umbra_boss.webp",
+  "Walter Lanford":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_walter_bliss.webp"
 };
 const SKILL_IMGS={
   "Blinding Flash":              "cd_assets/skills/blinding_flash.png",
@@ -6558,7 +6589,7 @@ function renderBosses(){
       <div class="boss-done-badge">BESIEGT</div>
       ${favBtn('boss',b.name)}
       ${BOSS_IMGS[b.name]
-        ?`<div class="boss-img-wrap"><img class="boss-img" src="${BOSS_IMGS[b.name]}" onerror="this.parentElement.innerHTML=bossPlaceholder({name:'${b.name.replace(/'/g,"\\'")}',region:'${b.region}',chapter:${b.chapter||'null'},quest:'${b.quest.replace(/'/g,"\\'")}'})" loading="lazy" alt="${b.name}"></div>`
+        ?`<div class="boss-img-wrap"><img class="boss-img" src="${BOSS_IMGS[b.name]}" data-cdn-fallback="${BOSS_IMGS_CDN[b.name]||''}" onerror="if(this.dataset.cdnFallback&&this.src!==this.dataset.cdnFallback){this.src=this.dataset.cdnFallback;}else{this.parentElement.innerHTML=bossPlaceholder({name:'${b.name.replace(/'/g,"\\'")}',region:'${b.region}',chapter:${b.chapter||'null'},quest:'${b.quest.replace(/'/g,"\\'")}'});}" loading="lazy" decoding="async" alt="${b.name}"></div>`
         :bossPlaceholder(b)
       }
       <div class="ct">${b.name}</div>
