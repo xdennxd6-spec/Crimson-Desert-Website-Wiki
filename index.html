@@ -532,6 +532,11 @@ tbody{contain:layout style}
 /* Cross-Reference Links (Skill-Erwähnungen in Boss-Strategien) */
 .xref{color:var(--gold);cursor:pointer;border-bottom:1px dashed rgba(201,162,39,.35);text-decoration:none;transition:all .15s}
 .xref:hover{color:var(--glo);border-bottom-color:var(--gold);background:rgba(201,162,39,.07);padding:0 2px;border-radius:2px}
+.xref-skill{color:var(--gold)}
+.xref-boss{color:var(--rhi);border-bottom-color:rgba(232,69,53,.35)}
+.xref-boss:hover{color:#ff6555;border-bottom-color:var(--rhi);background:rgba(232,69,53,.07)}
+.xref-lore{color:#c590ee;border-bottom-color:rgba(140,40,200,.35);border-bottom-style:dotted}
+.xref-lore:hover{color:#dab2ff;border-bottom-color:#c590ee;background:rgba(140,40,200,.07)}
 
 /* Section-Stats Header (Mini-Dashboard pro Section) */
 .sec-stats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;padding:11px 14px;background:linear-gradient(135deg,rgba(201,162,39,.04) 0%,transparent 70%);border:1px solid rgba(201,162,39,.12);border-radius:9px}
@@ -794,6 +799,38 @@ tbody{contain:layout style}
 .priority-list li{counter-increment:prio;padding:8px 10px 8px 38px;background:rgba(0,0,0,.18);border:1px solid var(--bdr);border-radius:7px;margin-bottom:6px;position:relative;font-size:11.5px;line-height:1.55;color:var(--text)}
 .priority-list li::before{content:counter(prio);position:absolute;left:9px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--gdim),var(--gold));color:#000;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:11px;font-weight:700}
 .priority-list li strong{color:var(--glo);font-weight:600}
+
+/* Fragment / Cresset Tracker */
+.tracker-summary{display:flex;gap:14px;align-items:center;padding:14px 18px;background:linear-gradient(135deg,rgba(201,162,39,.08) 0%,transparent 60%);border:1px solid rgba(201,162,39,.22);border-radius:11px;margin-bottom:14px}
+.tracker-big{font-family:'Cinzel',serif;font-size:30px;font-weight:900;color:var(--glo);line-height:1;letter-spacing:.04em;min-width:140px;text-shadow:0 0 18px rgba(244,204,82,.25)}
+.tracker-big small{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);font-weight:700;display:block;margin-top:4px;letter-spacing:.05em;text-shadow:none}
+.tracker-bar-wrap{flex:1;min-width:0}
+.tracker-bar-lbl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;font-size:11px}
+.tracker-bar-lbl span:first-child{color:var(--dim);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.tracker-bar-lbl span:last-child{color:var(--gold);font-family:'Cinzel',serif;font-weight:700;font-size:12px}
+.tracker-bar{height:10px;background:#1c1a1a;border-radius:6px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+.tracker-bar-fill{height:10px;background:linear-gradient(90deg,var(--gdim),var(--glo));border-radius:6px;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(244,204,82,.3)}
+
+.region-tracker{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:11px;margin-top:9px}
+.rt-card{background:var(--card);border:1px solid var(--bdr);border-radius:9px;padding:13px 15px;transition:border-color .2s}
+.rt-card:hover{border-color:rgba(201,162,39,.32)}
+.rt-card-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:9px}
+.rt-card-name{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--glo);letter-spacing:.04em}
+.rt-card-count{font-family:'Cinzel',serif;font-size:12.5px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+.rt-controls{display:flex;align-items:center;gap:8px}
+.rt-btn{width:30px;height:30px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--text);font-size:14px;font-family:'Cinzel',serif;cursor:pointer;transition:all .12s;line-height:1;flex-shrink:0;padding:0;font-weight:700}
+.rt-btn:hover{background:rgba(201,162,39,.14);border-color:var(--gold);color:var(--gold)}
+.rt-btn:active{transform:scale(.92)}
+.rt-btn.minus:hover{background:rgba(192,57,43,.18);border-color:var(--rhi);color:var(--rhi)}
+.rt-input{flex:1;background:rgba(0,0,0,.18);border:1px solid var(--bdr);border-radius:6px;padding:6px 8px;color:var(--text);font-family:'Cinzel',serif;font-size:13px;font-weight:700;outline:none;text-align:center;-moz-appearance:textfield}
+.rt-input::-webkit-outer-spin-button,.rt-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.rt-input:focus{border-color:rgba(201,162,39,.55)}
+.rt-mini-bar{height:4px;background:#1c1a1a;border-radius:2px;margin-top:9px;overflow:hidden}
+.rt-mini-fill{height:4px;background:linear-gradient(90deg,var(--gdim),var(--gold));border-radius:2px;transition:width .35s ease}
+.rt-card.complete{border-color:rgba(244,204,82,.5);background:linear-gradient(135deg,rgba(201,162,39,.06) 0%,var(--card) 70%);box-shadow:0 0 14px rgba(201,162,39,.1)}
+.rt-card.complete .rt-card-name{color:#fff5dc;text-shadow:0 0 8px rgba(244,204,82,.3)}
+.rt-tracker-reset{font-size:11px;color:var(--dim);background:none;border:1px solid var(--bdr);border-radius:5px;padding:4px 10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;margin-top:10px}
+.rt-tracker-reset:hover{border-color:rgba(192,57,43,.42);color:var(--rhi)}
 
 /* Boss-Recommendations */
 .bo-recs{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
@@ -1700,7 +1737,9 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="tabs">
       <div class="tab active" id="sect-ending" onclick="secretsTab('ending')">🌑 Hidden Ending</div>
       <div class="tab" id="sect-fragments" onclick="secretsTab('fragments')">📜 Memory Fragments</div>
+      <div class="tab" id="sect-frtracker" onclick="secretsTab('frtracker')">📊 Fragment-Tracker</div>
       <div class="tab" id="sect-cressets" onclick="secretsTab('cressets')">🔥 Abyss Cressets</div>
+      <div class="tab" id="sect-crtracker" onclick="secretsTab('crtracker')">🏆 Cresset-Tracker</div>
       <div class="tab" id="sect-easter" onclick="secretsTab('easter')">🥚 Easter Eggs</div>
       <div class="tab" id="sect-locations" onclick="secretsTab('locations')">📍 Hidden Locations</div>
       <div class="tab" id="sect-weapons" onclick="secretsTab('weapons')">⚔️ Hidden Weapons</div>
@@ -1710,7 +1749,9 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     </div>
     <div class="pane active" id="secp-ending"></div>
     <div class="pane" id="secp-fragments"></div>
+    <div class="pane" id="secp-frtracker"></div>
     <div class="pane" id="secp-cressets"></div>
+    <div class="pane" id="secp-crtracker"></div>
     <div class="pane" id="secp-easter"></div>
     <div class="pane" id="secp-locations"></div>
     <div class="pane" id="secp-weapons"></div>
@@ -4403,34 +4444,106 @@ function _initTooltips(){
   });
 }
 
-// ===== CROSS-REFERENCE: Skills/Bosses in Strategy-Texten linkbar =====
+// ===== CROSS-REFERENCE: Skills + Bosse + Lore-Begriffe linkbar =====
+// Lore-Begriffe → springen in Secrets-Section
+const LORE_TERMS={
+  'Visione':{tip:'Goldener Spezialhelm. Macht Memory Fragments sichtbar. Quest "Where the Light Leads" Kap. 2 am Lioncrest Watchtower.',sec:'secrets',tab:'fragments'},
+  'Axiom Archive':{tip:'Path of Providence (Abyss). 3. Stock = Hidden-Ending-Bücher. Spirit Skills blocked, Axiom Force nutzen.',sec:'secrets',tab:'ending'},
+  'Axiom Force':{tip:'Telekinese-Skill (Kap. 1 automatisch). Pflicht für Axiom Archive 3. Stock.',sec:'skills'},
+  'Run 108':{tip:'Spieler-Playthrough = Versuch Nr. 108 von 108. Vorher 107 Fails von White Crow + Alustin.',sec:'secrets',tab:'ending'},
+  'White Crow':{tip:'Time-Traveler-Wächter. Erschafft Kliff durch wiederholte Zeitsprünge. Tokens-Geber für Hexen.',sec:'witches'},
+  'Memory Fragment':{tip:'201 ortsgebundene Knowledge-Events. Visione + Laterne aktivieren.',sec:'secrets',tab:'fragments'},
+  'Memory Fragments':{tip:'201 ortsgebundene Knowledge-Events. Visione + Laterne aktivieren.',sec:'secrets',tab:'fragments'},
+  'Abyss Cresset':{tip:'60 versteckte Brazier. 1 Abyss Artifact + Fast-Travel pro Cresset. Trophy "Pilgrim of Wonders".',sec:'secrets',tab:'cressets'},
+  'Abyss Cressets':{tip:'60 versteckte Brazier. 1 Abyss Artifact + Fast-Travel pro Cresset.',sec:'secrets',tab:'cressets'},
+  'Cressets':{tip:'60 versteckte Brazier. Skill Point + Fast-Travel-Point pro Stück.',sec:'secrets',tab:'cressets'},
+  'Pilgrim of Wonders':{tip:'Trophy bei allen 60 Cressets.',sec:'secrets',tab:'cressets'},
+  'Dark Fog Lantern':{tip:'Enhanced Laterne. Quest "Transcendent Structure" (Alfonso House, Hernand). Enthüllt Memory Fragments + Hidden Clues + Artifacts gleichzeitig.',sec:'secrets',tab:'tools'},
+  'Hidden Ending':{tip:'Run 108 — Lore-Auflösung im Axiom Archive nach allen 40 Abyss-Challenges.',sec:'secrets',tab:'ending'},
+  'Path of Providence':{tip:'Abyss-Region links unten. Enthält Axiom Archive + Diving-Force-Palm-Unlock.',sec:'locations'},
+  'Path of Trials':{tip:'Frost-Mantle-Unlock nach Priscus-Kill.',sec:'skills'},
+  'Caliburn':{tip:'Lore: Inkarnation von Umbra (siehe Hidden Ending).',sec:'secrets',tab:'ending'},
+  'Hexe Marie':{tip:'Boss Kap. 9. Lore: fragmentierter Teil des White Crow — Mutter-Obsession zu Kliff.',sec:'bosses'},
+  'Hollow Visage':{tip:'Hidden Weapon: ATK 17 mit 3 Cores (Insight I, Gale I, Destruction I). Dawn Cave hinter Wasserfall.',sec:'weapons'},
+  'Survivor\'s Solitude':{tip:'Hidden Weapon: ATK 21. Death\'s Grip Cave hinter Wasserfall NW Lake Kharonso.',sec:'weapons'},
+  'Vessel of Dark Pursuit':{tip:'Hidden Weapon: ATK 25 + Wound of Darkness. Antumbra\'s Sword Boss im Sanctum of Absolution.',sec:'weapons'},
+  'Sanctum of Absolution':{tip:'Sanctum-Boss Antumbra\'s Sword + Drop: Vessel of Dark Pursuit.',sec:'witches'},
+  'Lord\'s Sword':{tip:'Sword of the Lord — Kailok-Drop. Secondary equippen → Wind Slash freischalten.',sec:'weapons'},
+  'Wind Slash':{tip:'OP Range-Attack via Lord\'s Sword Secondary. Spam-bar.',sec:'cores'},
+  'Goyen':{tip:'Boss "Nest of Valor". Lore: erschaffen von White Crow + Alustin. 107-Markierung über seinem Bett (Laterne beleuchten).',sec:'secrets',tab:'ending'},
+  'Antumbra\'s Sword':{tip:'Sanctum-Boss · Sanctum of Absolution · droppt Vessel of Dark Pursuit.',sec:'bosses'}
+};
+
 let _xrefMap=null;
 function _buildXrefMap(){
   if(_xrefMap)return _xrefMap;
-  _xrefMap={skills:{},bosses:{}};
-  // Skill-Index aus Kliff-Trees
+  _xrefMap={skills:{},bosses:{},lore:{}};
+  // Skill-Index aus Kliff + Damiane + Oongka
   [KLIFF_STAMINA,KLIFF_SPIRIT,KLIFF_HEALTH].forEach(tree=>{
     tree.forEach(s=>{_xrefMap.skills[s.name]=s;});
   });
+  if(typeof DAMIANE_SKILLS!=='undefined')DAMIANE_SKILLS.forEach(s=>{if(!_xrefMap.skills[s.name])_xrefMap.skills[s.name]=s;});
+  if(typeof OONGKA_SKILLS!=='undefined')OONGKA_SKILLS.forEach(s=>{if(!_xrefMap.skills[s.name])_xrefMap.skills[s.name]=s;});
   // Boss-Index
   BOSSES.forEach(b=>{_xrefMap.bosses[b.name]=b;});
-  // Sortiert nach Laenge desc — laengere Namen zuerst matchen (z.B. "Force Palm Expertise" vor "Force Palm")
+  // Lore-Begriffe
+  Object.entries(LORE_TERMS).forEach(([k,v])=>{_xrefMap.lore[k]=v;});
+  // Sortiert nach Länge desc — längere Namen zuerst matchen (verhindert "Force Palm" → "Force Palm Expertise" wird zerschnitten)
   _xrefMap.skillNames=Object.keys(_xrefMap.skills).sort((a,b)=>b.length-a.length);
+  _xrefMap.bossNames=Object.keys(_xrefMap.bosses).sort((a,b)=>b.length-a.length);
+  _xrefMap.loreNames=Object.keys(_xrefMap.lore).sort((a,b)=>b.length-a.length);
   return _xrefMap;
 }
+
+function _xrefSpan(name,tipBody,tipTitle,action,extraClass){
+  const safeAttr=s=>String(s||'').replace(/"/g,'&quot;');
+  const safeJS=s=>String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  return `<span class="xref${extraClass?' '+extraClass:''}" data-tip="${safeAttr(tipBody)}" data-tip-title="${safeAttr(tipTitle)}" onclick="${action}">${name}</span>`;
+}
+
 function linkifyXrefs(text){
   if(!text||typeof text!=='string')return text||'';
   const m=_buildXrefMap();
   let out=text;
-  // Skills linkbar — Reihenfolge: laengster Name zuerst
+  const safeJS=s=>String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  // Maintain a marker so already-linked spans don't get re-matched (Achtung: regex match wird auf out neu gemacht — daher matchen wir NICHT innerhalb von <span>)
+  const escRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  // 1. Skills (längste zuerst)
   m.skillNames.forEach(name=>{
-    // escape regex special chars
-    const escName=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-    // Match nur ausserhalb existierender Tags
-    const re=new RegExp('(?<![\\w>])('+escName+')(?![\\w<])','g');
+    const escName=escRe(name);
+    const re=new RegExp('(?<![\\w>"])('+escName+')(?![\\w<])','g');
     const sk=m.skills[name];
     const tipBody=`Voraussetzung: ${sk.prereq||'–'}<br>Effekt: ${sk.effect||'–'}`;
-    out=out.replace(re,`<span class="xref" data-tip="${tipBody.replace(/"/g,'&quot;')}" data-tip-title="${name.replace(/"/g,'&quot;')}" onclick="showSec('skills');document.getElementById('si').value='${name.replace(/'/g,"\\'").replace(/"/g,'&quot;')}';doSearch('${name.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">$1</span>`);
+    out=out.replace(re,_xrefSpan('$1',tipBody,name,`showSec('skills');document.getElementById('si').value='${safeJS(name)}';doSearch('${safeJS(name)}')`,'xref-skill'));
+  });
+  // 2. Bosse (längste zuerst, aber nicht innerhalb existing xref-Spans)
+  m.bossNames.forEach(name=>{
+    const escName=escRe(name);
+    const re=new RegExp('(?<![\\w>"])('+escName+')(?![\\w<])','g');
+    const b=m.bosses[name];
+    const tipBody=`${(b.region||'').replace(/"/g,'&quot;')}${b.chapter?' · Kap. '+b.chapter:''}<br>${(b.parry_or_dodge||'').replace(/"/g,'&quot;')}`;
+    out=out.replace(re,(match,p1,offset,full)=>{
+      // Skip wenn bereits in einem xref-Span
+      const before=full.slice(0,offset);
+      const openSpans=(before.match(/<span[^>]*class="xref/g)||[]).length;
+      const closeSpans=(before.match(/<\/span>/g)||[]).length;
+      if(openSpans>closeSpans)return match;
+      return _xrefSpan(p1,tipBody,name,`showSec('bosses');document.getElementById('si').value='${safeJS(name)}';doSearch('${safeJS(name)}')`,'xref-boss');
+    });
+  });
+  // 3. Lore-Begriffe
+  m.loreNames.forEach(name=>{
+    const escName=escRe(name);
+    const re=new RegExp('(?<![\\w>"])('+escName+')(?![\\w<])','g');
+    const lr=m.lore[name];
+    out=out.replace(re,(match,p1,offset,full)=>{
+      const before=full.slice(0,offset);
+      const openSpans=(before.match(/<span[^>]*class="xref/g)||[]).length;
+      const closeSpans=(before.match(/<\/span>/g)||[]).length;
+      if(openSpans>closeSpans)return match;
+      const tabAction=lr.tab?`;if(typeof secretsTab==='function')secretsTab('${lr.tab}')`:'';
+      return _xrefSpan(p1,lr.tip||'',name,`showSec('${lr.sec}')${tabAction}`,'xref-lore');
+    });
   });
   return out;
 }
@@ -4929,13 +5042,130 @@ const SECRETS_TOOLS=[
 ];
 
 function secretsTab(id){
-  const ids=['ending','fragments','cressets','easter','locations','weapons','mechanics','tools','priority'];
+  const ids=['ending','fragments','frtracker','cressets','crtracker','easter','locations','weapons','mechanics','tools','priority'];
   ids.forEach(t=>{
     const tab=document.getElementById('sect-'+t);
     const pane=document.getElementById('secp-'+t);
     if(tab)tab.classList.toggle('active',t===id);
     if(pane)pane.classList.toggle('active',t===id);
   });
+  if(id==='frtracker')renderFragmentTracker();
+  if(id==='crtracker')renderCressetTracker();
+}
+
+// ===== FRAGMENT + CRESSET TRACKER =====
+// Verteilung basiert auf Skill-Daten + Community-Schätzungen
+const FRAGMENT_REGIONS=[
+  {key:'hernand',name:'Hernand',cap:60,note:'Lioncrest Watchtower, Grotto of the Penitent, Dragon\'s Stone Chamber'},
+  {key:'pailune',name:'Pailune',cap:35,note:'Mountain of Lost Souls, Ashclaw Keep'},
+  {key:'demeniss',name:'Demeniss',cap:42,note:'Great Palace (Kap. 8 Blood Coronation Pflicht)'},
+  {key:'delesyia',name:'Delesyia',cap:30,note:'Krall Foundry, Marni\'s Masterium'},
+  {key:'crimson',name:'Crimson Desert',cap:22,note:'Cloister of Enlightenment, Tribes-Camps'},
+  {key:'abyss',name:'The Abyss',cap:12,note:'Path of Providence, Axiom Archive'}
+];
+const FRAGMENT_TOTAL=201;
+
+const CRESSET_REGIONS=[
+  {key:'hernand',name:'Hernand',cap:15,note:'Vertikale Climbs + Underground-Drops · Starter-Region'},
+  {key:'pailune',name:'Pailune',cap:17,note:'17 Locations community-unconfirmed (Stand Fruehjahr 2026)'},
+  {key:'demeniss',name:'Demeniss',cap:9,note:'Caves + kollabierte Ruinen'},
+  {key:'delesyia',name:'Delesyia',cap:7,note:'Caves + Industrial Areas'},
+  {key:'crimson',name:'Crimson Desert',cap:12,note:'Treibsand, Megalith-Pillars · schwerste Spots'}
+];
+const CRESSET_TOTAL=60;
+
+function loadFrTracker(){return JSON.parse(localStorage.getItem('cd_fr_tracker')||'{}');}
+function saveFrTracker(d){localStorage.setItem('cd_fr_tracker',JSON.stringify(d));}
+function loadCrTracker(){return JSON.parse(localStorage.getItem('cd_cr_tracker')||'{}');}
+function saveCrTracker(d){localStorage.setItem('cd_cr_tracker',JSON.stringify(d));}
+
+function _trackerSet(kind,region,val){
+  const cap=(kind==='fr'?FRAGMENT_REGIONS:CRESSET_REGIONS).find(r=>r.key===region)?.cap||0;
+  val=Math.max(0,Math.min(cap,parseInt(val||0,10)));
+  const d=kind==='fr'?loadFrTracker():loadCrTracker();
+  d[region]=val;
+  if(kind==='fr')saveFrTracker(d);
+  else saveCrTracker(d);
+  if(kind==='fr')renderFragmentTracker();
+  else renderCressetTracker();
+  if(typeof checkAchievements==='function')checkAchievements();
+  if(typeof renderAchievements==='function')renderAchievements();
+}
+function _trackerNudge(kind,region,delta){
+  const d=kind==='fr'?loadFrTracker():loadCrTracker();
+  const cur=d[region]||0;
+  _trackerSet(kind,region,cur+delta);
+}
+function _trackerReset(kind){
+  if(!confirm('Tracker wirklich auf 0 zurücksetzen?'))return;
+  if(kind==='fr'){saveFrTracker({});renderFragmentTracker();}
+  else {saveCrTracker({});renderCressetTracker();}
+  if(typeof renderAchievements==='function')renderAchievements();
+}
+
+function _renderTrackerGeneric(kind,el,regions,totalCap,hero){
+  const d=kind==='fr'?loadFrTracker():loadCrTracker();
+  const total=regions.reduce((sum,r)=>sum+(Math.min(d[r.key]||0,r.cap)),0);
+  const pct=Math.round(total/totalCap*100);
+  el.innerHTML=`
+    <div class="tracker-summary">
+      <div class="tracker-big">${total} / ${totalCap}<small>${hero.heroLbl}</small></div>
+      <div class="tracker-bar-wrap">
+        <div class="tracker-bar-lbl"><span>${hero.barLbl}</span><span>${pct}%</span></div>
+        <div class="tracker-bar"><div class="tracker-bar-fill" style="width:${pct}%"></div></div>
+        <div style="font-size:11px;color:#beb5a8;margin-top:9px;line-height:1.5">${hero.helper}</div>
+      </div>
+    </div>
+    <div class="region-tracker">
+      ${regions.map(r=>{
+        const cur=Math.min(d[r.key]||0,r.cap);
+        const rpct=Math.round(cur/r.cap*100);
+        const done=cur>=r.cap;
+        return `<div class="rt-card${done?' complete':''}">
+          <div class="rt-card-hd">
+            <div class="rt-card-name">${done?'✓ ':''}${r.name}</div>
+            <div class="rt-card-count">${cur} / ${r.cap}</div>
+          </div>
+          <div class="rt-controls">
+            <button class="rt-btn minus" onclick="_trackerNudge('${kind}','${r.key}',-1)" aria-label="−1">−</button>
+            <input class="rt-input" type="number" min="0" max="${r.cap}" value="${cur}" onchange="_trackerSet('${kind}','${r.key}',this.value)" aria-label="Anzahl ${r.name}">
+            <button class="rt-btn" onclick="_trackerNudge('${kind}','${r.key}',1)" aria-label="+1">+</button>
+          </div>
+          <div style="font-size:10.5px;color:var(--dim);margin-top:8px;line-height:1.5">${r.note}</div>
+          <div class="rt-mini-bar"><div class="rt-mini-fill" style="width:${rpct}%"></div></div>
+        </div>`;
+      }).join('')}
+    </div>
+    <button class="rt-tracker-reset" onclick="_trackerReset('${kind}')">Tracker zurücksetzen</button>
+  `;
+}
+
+function renderFragmentTracker(){
+  const el=document.getElementById('secp-frtracker');
+  if(!el)return;
+  _renderTrackerGeneric('fr',el,FRAGMENT_REGIONS,FRAGMENT_TOTAL,{
+    heroLbl:'Memory Fragments',
+    barLbl:'Gesamt-Fortschritt',
+    helper:'Manuelles Tracking deiner Memory-Fragment-Sammlung. Lokal gespeichert. Verteilung ist Schätzung auf Basis der Skill-Daten + Community-Karten.'
+  });
+}
+function renderCressetTracker(){
+  const el=document.getElementById('secp-crtracker');
+  if(!el)return;
+  _renderTrackerGeneric('cr',el,CRESSET_REGIONS,CRESSET_TOTAL,{
+    heroLbl:'Abyss Cressets',
+    barLbl:'Pilgrim of Wonders',
+    helper:'60 Abyss-Brazier insgesamt. Jeder Cresset = 1 Abyss Artifact + Fast-Travel-Point. Bei allen 60: Trophy "Pilgrim of Wonders".'
+  });
+}
+
+function _frTotal(){
+  const d=loadFrTracker();
+  return FRAGMENT_REGIONS.reduce((s,r)=>s+Math.min(d[r.key]||0,r.cap),0);
+}
+function _crTotal(){
+  const d=loadCrTracker();
+  return CRESSET_REGIONS.reduce((s,r)=>s+Math.min(d[r.key]||0,r.cap),0);
 }
 
 function renderSecrets(){
@@ -5692,7 +5922,10 @@ const ACHIEVEMENTS=[
   {id:'true-ending',ico:'⭐',name:'True Ending Hunter',desc:'Alle True-Ending-Pflichten abgehakt',check:()=>{if(typeof TRUE_ENDING==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return TRUE_ENDING.length>0&&TRUE_ENDING.every(t=>te.includes(t.id));},prog:()=>{if(typeof TRUE_ENDING==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(te.length/TRUE_ENDING.length,1);}},
   {id:'chapter-done',ico:'📖',name:'Storyteller',desc:'Alle 12 Kapitel abgeschlossen',check:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return d.length>=12;},prog:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return Math.min(d.length/12,1);}},
   {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return seen.length>=3;},prog:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return Math.min(seen.length/3,1);}},
-  {id:'secrets-visited',ico:'🕵️',name:'Run 108',desc:'Besuche die Secrets-Section (Hidden-Ending-Lore)',check:()=>!!localStorage.getItem('cd_secrets_visited')}
+  {id:'secrets-visited',ico:'🕵️',name:'Run 108',desc:'Besuche die Secrets-Section (Hidden-Ending-Lore)',check:()=>!!localStorage.getItem('cd_secrets_visited')},
+  {id:'pilgrim',ico:'🏆',name:'Pilgrim of Wonders',desc:'Alle 60 Abyss Cressets entdeckt',check:()=>typeof _crTotal==='function'&&_crTotal()>=60,prog:()=>typeof _crTotal==='function'?Math.min(_crTotal()/60,1):0},
+  {id:'fragment-half',ico:'📜',name:'Memory-Sammler',desc:'100+ Memory Fragments entdeckt',check:()=>typeof _frTotal==='function'&&_frTotal()>=100,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/100,1):0},
+  {id:'fragment-master',ico:'🧠',name:'Visione-Master',desc:'Alle 201 Memory Fragments entdeckt',check:()=>typeof _frTotal==='function'&&_frTotal()>=201,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/201,1):0}
 ];
 function loadAchUnlocked(){return JSON.parse(localStorage.getItem('cd_ach_unlocked')||'[]');}
 function checkAchievements(silent){
@@ -7598,6 +7831,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderChapters();
   renderPatches();
   renderSecrets();
+  renderFragmentTracker();
+  renderCressetTracker();
   renderQuestTimeline();
   renderRegionHeatmap();
   renderAchievements();
