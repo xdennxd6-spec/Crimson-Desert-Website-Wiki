@@ -1333,7 +1333,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </div>
 <div id="app">
 <nav id="sidebar">
-  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.07</div></div>
+  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.08</div></div>
   <div class="sb-nav">
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
     <div class="ni" data-sec="items" onclick="showSec('items')"><span class="nicon">🔮</span><span class="nlabel">Items</span></div>
@@ -1727,7 +1727,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-pets">
     <div class="sec-t">🐾 Pets</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle tammbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Portait-Icon.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant).</div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
   </section>
@@ -1772,7 +1772,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-patches">
     <div class="sec-t">📋 Patch-Notes</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.07.00</span> (15.05.2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.08.00</span> (22.05.2026).</div>
     <div id="patch-list"></div>
   </section>
 
@@ -2789,6 +2789,7 @@ const MOUNTS=[
   {name:"Marni's Mechahorse",type:"Mechanisches Pferd (Tier 2)",unlock:"Marni-Questline",stats:"Tier 2 — keine Tier-4-Skills",notes:"Marni's mechanischer Konstrukt-Mount"},
   // ── Drachen-Mount ──
   {name:"Blackstar",type:"Drache",unlock:"Automatisch Kap. 11 — nach 'Master of a Forgotten Land' (Golden Star besiegt)",stats:"15 min/Session, 50 min Cooldown; Feuerangriffe, kann Festungen niederbrennen",notes:"Aerial Maneuver + Focused Force Palm aufs gruenes Glow. Bestes Anti-Festungs-Tool."},
+  {name:"Wild Wyvern",type:"Drache",unlock:"Wilde Wyvern in der Spielwelt unterwerfen (Subdue) [Patch 1.08]",stats:"Temporär reitbar (Flug)",notes:"Nach dem Unterwerfen zeitlich begrenzt als fliegender Mount nutzbar. Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest) separat als Pet — Mount-Funktion später geplant."},
   // ── Sigil-Mounts (Boss Kill → Crafting) ──
   {name:"Silver Fang",type:"Wolf (Sigil)",unlock:"Black Fang Kill (Howling Hollow Cave, House Celeste Faction) → Crafting bei Hexe",stats:"450 HP / 100 Sta / 100 Atk / 45 Def — kaempft dismounted aktiv weiter",notes:"Einziger Mount der nach Dismount weiterkämpft. Lightning-Stagger. Sigil konsumieren."},
   {name:"White Bear",type:"Bär (Sigil)",unlock:"White Bear Kill (NW Pailune, Silverwolf Mountains Gipfel) → Crafting",stats:"1500 HP / 200 Sta / 180 Atk / 35 Def — hoechster Basis-Schaden aller Mounts",notes:"Feuer-Schwäche. Frostcursed Set empfohlen. Tank-Mount schlechthin."},
@@ -2931,6 +2932,8 @@ const KLIFF_STAMINA=[
   {name:"Charged Shot",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"Aufgeladener Schuss"},
   {name:"Multishot",prereq:"Watch & Learn: Fort Warspike Commander",cost:"0 oder 1 AA",effect:"10 Pfeile in Streuung"},
   {name:"Explosive Evasive Shot",prereq:"Watch & Learn: Fort Warspike Commander",cost:"0 oder 1 AA",effect:"Pfeil in Boden → katapultiert hoch"},
+  {name:"Musket",prereq:"Patch 1.08",cost:"—",effect:"Kliff kann jetzt Musketen als Fernkampfwaffe führen"},
+  {name:"Schrotflinte (Shotgun)",prereq:"Patch 1.08",cost:"—",effect:"Kliff kann jetzt Schrotflinten führen — Nahbereich-Streuschuss"},
   {name:"Grappling",prereq:"Default",cost:"1 AA/Lv bis Lv 5",effect:"Basis-Grapple"},
   {name:"Clothesline",prereq:"Watch & Learn: Black Bears Kap. 6",cost:"0 oder 1 AA",effect:"Sprint → Hook + Boden-Slam"},
   {name:"Body Slam",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"In der Luft: volles Gewicht fallen lassen"},
@@ -2994,7 +2997,8 @@ const DAMIANE_SKILLS=[
   {name:"Lightning Strike",prereq:"Lightning-Quelle Abyss",cost:"1 AA",effect:"Blitzeinschlag von oben"},
   {name:"Storm Pillar",prereq:"Wind-Quelle Abyss",cost:"1 AA",effect:"Tornado-Saeule"},
   {name:"Aerial Stab",prereq:"Patch 1.07 (Luft-Mobility)",cost:"0",effect:"Stoss-Angriff aus der Luft"},
-  {name:"Fists / Unarmed Combat",prereq:"Patch 1.07 (eigener Combat-Mode)",cost:"0",effect:"Komplettes Fists-Skill-Set + verbesserte Bewegungs-Animationen"}
+  {name:"Fists / Unarmed Combat",prereq:"Patch 1.07 (eigener Combat-Mode)",cost:"0",effect:"Komplettes Fists-Skill-Set + verbesserte Bewegungs-Animationen"},
+  {name:"Focused Aerial Roll",prereq:"Patch 1.08",cost:"0",effect:"Luft-Dash äquivalent zu Kliffs Focused Aerial Roll"}
 ];
 
 // Oongka — strukturierte Skill-Daten (fuer Skill-Tree-Graph)
@@ -3024,7 +3028,8 @@ const OONGKA_SKILLS=[
   {name:"Focused Shot",prereq:"Scatter Shot Lv 2",cost:"1 AA",effect:"Praezisions-Schuss"},
   {name:"Aerial Stab",prereq:"Patch 1.07 (Luft-Mobility)",cost:"0",effect:"Stoss-Angriff aus der Luft"},
   {name:"Explosive Strike — Charge",prereq:"Patch 1.07 (Charge-Phase)",cost:"0",effect:"Explosive Strike mit Charge-Phase — laenger halten = mehr Damage + AoE"},
-  {name:"Dual-Wield Stab-Chain (verbessert)",prereq:"Patch 1.07",cost:"0",effect:"Dual-Wield Stab-Chain fliesst fluessiger"}
+  {name:"Dual-Wield Stab-Chain (verbessert)",prereq:"Patch 1.07",cost:"0",effect:"Dual-Wield Stab-Chain fliesst fluessiger"},
+  {name:"Focused Aerial Roll",prereq:"Patch 1.08",cost:"0",effect:"Luft-Dash äquivalent zu Kliffs Focused Aerial Roll"}
 ];
 
 const WATCH_AND_LEARN=[
@@ -7822,6 +7827,51 @@ function toggleChDone(num){
 
 // ===== PATCH NOTES =====
 const PATCHES=[
+  {ver:"1.08.00",date:"22.05.2026",size:"",features:[
+    {cat:"Neuer Content",items:[
+      "Tools-Slot: eigener Ausrüstungs-Slot für Werkzeuge (Holzaxt, Hammer, Schaufel, Besen, Sense, Spitzhacke, Bohrer/Kettensäge, Fächer) — getrennt von Sekundärwaffen. Masken & Circlets in den Rüstungs-Tab verschoben",
+      "Fish Pond: Teich bei Howling Hill + Pailune Camp anlegbar (Completion-Mission, ~2 Ingame-Tage). Fische vermehren sich bei gleicher Art; Legendary-Fische bleiben permanent, nicht verkauf-/wegwerfbar",
+      "20 neue Kleintier-Arten als Pets + Baby Wyvern (Ei in Südwest-Delesyia, schlüpft am nahen Nest)"
+    ]},
+    {cat:"Mounts",items:[
+      "Wilde Wyvern nach Subduing temporär als Mount reitbar",
+      "Baby Wyvern: Mount-Funktion später geplant"
+    ]},
+    {cat:"Charaktere & Skills",items:[
+      "Kliff kann jetzt Musketen und Schrotflinten nutzen",
+      "Damiane & Oongka: neuer Skill äquivalent zum Focused Aerial Roll",
+      "Infinite Arrows Abyss Gear wirkt jetzt auch mit Kugeln und Kanonenkugeln",
+      "Gefesselte Outlaws beim Transport zum Schweigen bringen"
+    ]},
+    {cat:"Crafting",items:[
+      "Instant-Refinement ohne Materialauswahl",
+      "Superior Branches via Spezial-Tree-Branch-Blueprint; Tree Branches → Rough Tree Branches (stackbar)",
+      "Neue Missionen: Mass Craft Paintings / Craft Fine Paintings",
+      "Logging-/Quarry-Missionen belohnen jetzt Timber & Stones; Fischfallen funktional"
+    ]},
+    {cat:"Steuerung",items:[
+      "Sekundär-Keybinds für alle Eingaben (Maus & Tastatur)",
+      "Photo-Mode-Shortcut (Default P)",
+      "Blackstar: Kamera-Verbesserungen + Blinding Flash jetzt beim Reiten nutzbar",
+      "Pet-Interaktion erfordert vorheriges Anvisieren"
+    ]},
+    {cat:"UI",items:[
+      "Getrennte Map-Marker für Land- vs. Abyss-Locations + Minimap-Tracking",
+      "Waffen-Typ-Filter im Skill-Menü (Suche)",
+      "Grüne Häkchen für abgeschlossene Knowledge-Kategorien"
+    ]},
+    {cat:"Grafik & Performance",items:[
+      "Raytraced Sun/Moon Light Shadows (PC, Settings > Grafik)",
+      "Reduzierte GPU-Last in 4K+-Umgebungen",
+      "Fixes für DLSS Frame Generation & Intel XeSS; Metal4 Standard ab macOS 26.5+",
+      "Vegetations-Flackern und Glas-Material-Smearing behoben"
+    ]},
+    {cat:"Fixes",items:[
+      "Wagen-Wechsel beim Wagonmaster repariert",
+      "Türen nach Mission-Reset wieder öffenbar",
+      "Diverse charakterspezifische Animations-, Positions- und Visual-Fixes; NPC-Respawn verbessert"
+    ]}
+  ]},
   {ver:"1.07.00",date:"15.05.2026",size:"381 MB · Console-Build 1.000.283",features:[
     {cat:"Bosse",items:[
       "5 weitere Rematch-Bosse via Laterne: Muskan (Bonepit), Corrupted Caliburn (Fort Musket), Goyen (Spire of the Sun), Draven the Crowcaller (Church of West Demeniss), Clockwork White Horn (Gate to Advancement)",
