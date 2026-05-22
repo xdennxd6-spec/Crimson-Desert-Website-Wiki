@@ -865,6 +865,82 @@ def make_rock_tusk_warthog():
 
 
 # ---------------------------------------------------------------------------
+# 11. wild-wyvern.png — green-bronze wyvern, spread wings, barbed tail
+# ---------------------------------------------------------------------------
+
+def make_wild_wyvern():
+    img = make_base((6, 9, 7))
+    img = add_particles(img, (150, 180, 110), 42, seed=11)
+    img = add_glow(img, 205, 120, 120, (55, 85, 52), strength=80)
+    img = add_glow(img, 130, 74, 60, (170, 140, 40), strength=55)
+
+    BODY = (48, 66, 52)
+    DARK = (28, 38, 30)
+    SCALE = (80, 100, 78)
+    MEMB = (66, 54, 36)
+    MEMB_D = (42, 34, 22)
+    STRUT = (96, 104, 84)
+    BONE = (120, 128, 108)
+    GOLD = (201, 162, 39)
+    AMBER = (255, 205, 95)
+
+    draw = ImageDraw.Draw(img)
+
+    # Wings (behind body) — left then right
+    draw.polygon([(176, 120), (66, 44), (26, 74), (58, 110), (120, 106), (182, 142)], fill=MEMB_D)
+    draw.polygon([(176, 120), (66, 44), (80, 50), (128, 92), (180, 134)], fill=MEMB)
+    draw.polygon([(224, 118), (338, 42), (378, 72), (346, 108), (282, 104), (218, 140)], fill=MEMB_D)
+    draw.polygon([(224, 118), (338, 42), (324, 48), (276, 88), (220, 132)], fill=MEMB)
+    for end in [(66, 44), (92, 62), (120, 80), (150, 96)]:
+        draw.line([(176, 120), end], fill=STRUT, width=2)
+    for end in [(338, 42), (314, 60), (288, 78), (258, 94)]:
+        draw.line([(224, 118), end], fill=STRUT, width=2)
+
+    # Body
+    draw.ellipse([158, 116, 262, 200], fill=BODY)
+    draw.ellipse([170, 152, 250, 204], fill=DARK)
+
+    # Neck + head (left-facing, like blackstar)
+    draw.polygon([(172, 124), (150, 86), (166, 80), (192, 120)], fill=BODY)
+    draw.ellipse([104, 54, 166, 100], fill=DARK)
+    draw.polygon([(108, 70), (66, 80), (70, 94), (110, 90)], fill=DARK)
+    draw.polygon([(110, 86), (74, 95), (78, 103), (112, 97)], fill=(20, 28, 22))
+    # Horns (sweeping back)
+    draw.polygon([(150, 56), (172, 32), (160, 58)], fill=SCALE)
+    draw.polygon([(136, 58), (150, 30), (148, 60)], fill=SCALE)
+
+    # Eye glow + eye
+    img = add_glow(img, 136, 73, 14, GOLD, strength=110)
+    draw = ImageDraw.Draw(img)
+    draw.ellipse([130, 68, 145, 81], fill=GOLD)
+    draw.ellipse([133, 70, 142, 78], fill=AMBER)
+
+    # Spine ridges
+    for sx, sy in [(186, 116), (202, 111), (220, 110), (238, 113), (254, 120)]:
+        draw.polygon([(sx - 5, sy), (sx, sy - 16), (sx + 5, sy)], fill=SCALE)
+
+    # Tail (sweeping right, barbed tip)
+    draw.polygon([(258, 158), (322, 180), (356, 170), (332, 158), (262, 142)], fill=BODY)
+    draw.polygon([(350, 172), (384, 150), (392, 158), (360, 178)], fill=DARK)
+    draw.polygon([(384, 150), (396, 140), (392, 156), (378, 160)], fill=SCALE)
+
+    # Legs (bipedal) + talons
+    for lx in [176, 212]:
+        draw.rectangle([lx, 188, lx + 18, 232], fill=DARK)
+        for c in range(3):
+            cxx = lx + 1 + c * 8
+            draw.polygon([(cxx, 230), (cxx + 2, 244), (cxx + 5, 230)], fill=BONE)
+
+    # Body highlight
+    overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(overlay)
+    d.ellipse([165, 112, 258, 150], fill=(150, 180, 120, 35))
+    img = Image.alpha_composite(img, overlay)
+
+    return finalize(img)
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -879,19 +955,21 @@ MOUNTS = [
     ("snowwhite-deer.png",  make_snowwhite_deer),
     ("icicle-ibex.png",     make_icicle_ibex),
     ("rock-tusk-warthog.png", make_rock_tusk_warthog),
+    ("wild-wyvern.png",     make_wild_wyvern),
 ]
 
 import os
 
-for filename, fn in MOUNTS:
-    path = os.path.join(OUT, filename)
-    img = fn()
-    assert img.size == (W, H), f"{filename}: wrong size {img.size}"
-    img.save(path, "PNG")
-    print(f"  saved: {filename}  ({img.size})")
+if __name__ == "__main__":
+    for filename, fn in MOUNTS:
+        path = os.path.join(OUT, filename)
+        img = fn()
+        assert img.size == (W, H), f"{filename}: wrong size {img.size}"
+        img.save(path, "PNG")
+        print(f"  saved: {filename}  ({img.size})")
 
-print("\nDone. Verifying files:")
-for filename, _ in MOUNTS:
-    path = os.path.join(OUT, filename)
-    size = os.path.getsize(path)
-    print(f"  {filename}: {size} bytes")
+    print("\nDone. Verifying files:")
+    for filename, _ in MOUNTS:
+        path = os.path.join(OUT, filename)
+        size = os.path.getsize(path)
+        print(f"  {filename}: {size} bytes")
