@@ -214,8 +214,7 @@ body{
 #main{flex:1;min-width:0;display:flex;flex-direction:column}
 #sbar{
   position:sticky;top:0;z-index:50;
-  background:rgba(6,6,6,.94);
-  backdrop-filter:blur(14px);
+  background:rgba(6,6,6,.985);
   border-bottom:1px solid var(--bdr);
   padding:11px 26px;
   display:flex;gap:12px;align-items:center;
@@ -297,6 +296,15 @@ select.fs:hover{border-color:#333}
 /* ── Tables ── */
 .tw-wrap{overflow-x:auto;border:1px solid var(--bdr);border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,.35)}
 table{width:100%;border-collapse:collapse;font-size:12px}
+.wpg{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.wpg-btn{background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.32);color:var(--gold);padding:7px 16px;border-radius:8px;cursor:pointer;font-size:12.5px;font-weight:600;transition:background .17s,border-color .17s}
+.wpg-btn:hover:not(:disabled){background:rgba(201,162,39,.2);border-color:rgba(201,162,39,.5)}
+.wpg-btn:disabled{opacity:.35;cursor:default}
+.wpg-info{font-size:12px;color:var(--dim);white-space:nowrap}
+.core-tiers{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:7px}
+.core-tiers .ct-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-right:2px}
+.ct-pill{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;padding:2px 8px;border-radius:11px;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.22);color:var(--text);white-space:nowrap}
+.ct-pill b{color:var(--gold);font-size:9px;font-weight:800}
 thead tr{background:linear-gradient(90deg,#161414,#111)}
 th{padding:10px 14px;text-align:left;font-weight:700;color:var(--gold);white-space:nowrap;font-size:10.5px;border-bottom:1px solid var(--bdr);letter-spacing:.06em;text-transform:uppercase}
 td{padding:9px 14px;border-bottom:1px solid rgba(37,34,34,.9);vertical-align:top;color:var(--text)}
@@ -441,7 +449,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .farm-tbl tr:last-child td{border-bottom:none}
 
 /* ── Back to top ── */
-#btt{position:fixed;bottom:24px;right:20px;width:40px;height:40px;background:rgba(12,10,10,.95);border:1px solid var(--bdr);border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--dim);font-size:16px;line-height:1;transition:all .2s;z-index:100;backdrop-filter:blur(8px)}
+#btt{position:fixed;bottom:24px;right:20px;width:40px;height:40px;background:rgba(12,10,10,.98);border:1px solid var(--bdr);border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;color:var(--dim);font-size:16px;line-height:1;transition:all .2s;z-index:100}
 #btt:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 16px rgba(201,162,39,.25)}
 #btt.show{display:flex}
 
@@ -465,8 +473,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 /* Tables: applied per-tbody since rows reflow as unit */
 tbody{contain:layout style}
 .grid,.sk-grid,.ach-grid,.fav-grid,.pet-grid,.witch-grid,.bo-result-grid,.qst-rail,.region-heatmap{contain:layout style}
-/* Bei sehr langen Tabellen: jede Zeile als own containment-context */
-.trow{content-visibility:auto;contain-intrinsic-size:0 52px}
+/* .trow: KEIN content-visibility — verursachte auf der 520-Zeilen-Waffentabelle Reflow-/Compositor-Thrash (systemweiter Desktop-Freeze beim Scrollen) */
 /* Boss-Cards sind größer wegen Image + Phasen + Notes */
 #boss-grid .card{contain-intrinsic-size:0 540px}
 /* Skill-Graph-Tab darf vollständig content sein */
@@ -1442,10 +1449,11 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <section class="sec" id="sec-weapons">
     <div class="sec-t">⚔️ Waffen</div>
     <div class="fbar">
-      <select class="fs" id="wf-type" onchange="renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
+      <select class="fs" id="wf-type" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen-Compare">⚔️ Compare</button>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Typ</th><th>ATK</th><th>Crit</th><th>Slots</th><th>Fundort / Quelle</th><th>Built-in Cores</th><th>Notizen</th></tr></thead><tbody id="weapon-tb"></tbody></table></div>
+    <div id="weapon-pager" class="wpg"></div>
   </section>
 
   <section class="sec" id="sec-armor">
@@ -6290,6 +6298,7 @@ function showSec(id, opts){
       if(typeof clearHighlight==='function')clearHighlight(el);
     });
   }
+  if(id==='weapons'&&typeof renderWeapons==='function')renderWeapons();
   localStorage.setItem('cd_sec',id);
   if(!opts.skipUrl)_writeUrlState();
   // Schliesse Sidebar auf Mobile nach Klick
@@ -6491,6 +6500,7 @@ function _doSearchImpl(q){
     cnt.textContent='';
     document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));
     document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
+    if(document.getElementById('sec-weapons')&&document.getElementById('sec-weapons').classList.contains('active')&&typeof renderWeapons==='function')renderWeapons();
     return;
   }
   // Only operate within the active section — drastically reduces work
@@ -6508,6 +6518,7 @@ function _doSearchImpl(q){
   // Highlight only top 80 matches (perceptual highlight, full-list-highlight would freeze on big lists)
   matchedForHL.forEach(el=>highlightInElement(el,q));
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
+  {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
   // Empty-State
   document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
   if(total===0&&activeSec){
@@ -6629,11 +6640,28 @@ function renderBosses(){
 }
 
 // ===== WEAPONS =====
+let _wepPage=0; const WEP_PER=40;
+function changeWepPage(d){
+  _wepPage=Math.max(0,_wepPage+d);
+  renderWeapons();
+  const s=document.getElementById('sec-weapons'); if(s)s.scrollIntoView({block:'start'});
+}
 function renderWeapons(){
   const f=document.getElementById('wf-type').value;
+  const si=document.getElementById('si');
+  const q=((si&&si.value)||'').trim().toLowerCase();
+  const searching=!!q;
+  const total=f?WEAPONS.filter(w=>w.type.includes(f)).length:WEAPONS.length;
+  const pages=Math.max(1,Math.ceil(total/WEP_PER));
+  if(_wepPage>=pages)_wepPage=pages-1;
+  if(_wepPage<0)_wepPage=0;
+  const start=_wepPage*WEP_PER, end=start+WEP_PER;
+  let fi=-1;
   document.getElementById('weapon-tb').innerHTML=WEAPONS.map(w=>{
-    const show=!f||w.type.includes(f);
+    const passFilter=!f||w.type.includes(f);
     const s=[w.name,w.type,w.source,w.built_in,w.notes].join(' ').toLowerCase();
+    let show=false;
+    if(passFilter){ if(searching){show=s.includes(q);} else {fi++;show=(fi>=start&&fi<end);} }
     const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
     return `<tr class="trow${show?'':' hide'}" data-s="${s}">
@@ -6647,8 +6675,34 @@ function renderWeapons(){
       <td style="font-size:11px;color:var(--dim)">${w.notes||'–'}</td>
     </tr>`;
   }).join('');
+  const pg=document.getElementById('weapon-pager');
+  if(pg){
+    if(searching||pages<=1){ pg.innerHTML=''; }
+    else {
+      const shownEnd=Math.min(end,total);
+      pg.innerHTML=`<button class="wpg-btn"${_wepPage<=0?' disabled':''} onclick="changeWepPage(-1)">‹ Zurück</button><span class="wpg-info">${start+1}–${shownEnd} von ${total} Waffen · Seite ${_wepPage+1}/${pages}</span><button class="wpg-btn"${_wepPage>=pages-1?' disabled':''} onclick="changeWepPage(1)">Weiter ›</button>`;
+    }
+  }
 }
 
+// Verifizierte Stufen-Werte passiver Stat-Cores (Quelle: questlog.gg-API + Fextralife, 2026-05).
+// In-Game-Anzeige: Flat-Stats als "Attack: N", Lv.-Stats als "Critical Rate: Lv.N" (es gibt KEINE %-Angabe im Spiel).
+const CORE_TIERS={
+  "Destruction III":{stat:"Attack",vals:[1,2,3]},
+  "Insight III":{stat:"Critical Rate",lv:true,vals:[1,2,3]},
+  "Haste I":{stat:"Movement Speed",lv:true,vals:[1,2,3]},
+  "Greater Destruction":{stat:"Attack",single:10},
+  "Greater Insight":{stat:"Critical Rate",lv:true,single:10},
+  "Greater Swift":{stat:"Attack Speed",lv:true,single:10}
+};
+function coreTierStrip(name){
+  const t=CORE_TIERS[name]; if(!t)return '';
+  const fmt=v=>t.lv?'Lv.'+v:''+v;
+  if(t.single!=null) return '<div class="core-tiers"><span class="ct-lbl">Stufe</span><span class="ct-pill">'+t.stat+': '+fmt(t.single)+'</span></div>';
+  const roman=['I','II','III','IV','V'];
+  const pills=t.vals.map((v,i)=>'<span class="ct-pill"><b>'+roman[i]+'</b> '+t.stat+': '+fmt(v)+'</span>').join('');
+  return '<div class="core-tiers"><span class="ct-lbl">Stufen-Werte</span>'+pills+'</div>';
+}
 function renderCores(){
   const f=document.getElementById('cf-slot').value;
   document.getElementById('core-tb').innerHTML=CORES.map(c=>{
@@ -6662,7 +6716,7 @@ function renderCores(){
         ${ico?`<img src="${ico}" onerror="this.style.display='none'" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
         <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${esc(c.name)}')" onmouseleave="hideCoreVid()">▶</span>`:''}
       </div></td>
-      <td>${c.effect}</td>
+      <td>${c.effect}${coreTierStrip(c.name)}</td>
       <td style="font-size:11.5px;color:var(--dim)">${c.source}</td>
       <td><span class="tag ${c.slot==='Weapon'?'tr':c.slot==='Armor'?'tg':'tw'}">${c.slot}</span></td>
     </tr>`;
