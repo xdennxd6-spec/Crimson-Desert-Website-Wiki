@@ -2430,6 +2430,8 @@ const CORES=[
   {name:"Greater Insight",effect:"+Kritische Trefferrate",source:"Abyss Gear",slot:"Both"},
   {name:"Greater Destruction",effect:"+Angriff",source:"Abyss Gear",slot:"Both"},
   {name:"Greater Swift",effect:"+Angriffsgeschwindigkeit",source:"Abyss Gear",slot:"Both"},
+  {name:"Swift III",effect:"+Angriffsgeschwindigkeit",source:"Tier-3 Fusion (Abyss Gear)",slot:"Both"},
+  {name:"Fortification III",effect:"+Verteidigung",source:"Tier-3 Fusion (Abyss Gear)",slot:"Armor"},
   {name:"Greater Infinite Arrows",effect:"100% keine Pfeile verbraucht",source:"Abyss Gear",slot:"Weapon"},
   {name:"Greater Beastbane",effect:"+40% Schaden gegen Wildtiere",source:"Abyss Gear",slot:"Both"},
   {name:"Greater Bloodbane",effect:"+40% Schaden gegen Menschen",source:"Abyss Gear",slot:"Both"},
@@ -3670,6 +3672,8 @@ const CORE_IMGS={
   "Destruction III":  "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_001.webp",
   "Infinite Arrows III":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp",
   "Aegis III":        "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_008.webp",
+  "Swift III":        "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_082.webp",
+  "Fortification III":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_021.webp",
   "Aptitude I":       "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_105.webp",
   "Haste I":          "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_074.webp",
   "Abyssal Rays":     "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_036.webp",
@@ -6693,7 +6697,9 @@ const CORE_TIERS={
   "Haste I":{stat:"Movement Speed",lv:true,vals:[1,2,3]},
   "Greater Destruction":{stat:"Attack",single:10},
   "Greater Insight":{stat:"Critical Rate",lv:true,single:10},
-  "Greater Swift":{stat:"Attack Speed",lv:true,single:10}
+  "Greater Swift":{stat:"Attack Speed",lv:true,single:10},
+  "Swift III":{stat:"Attack Speed",lv:true,vals:[1,2,3]},
+  "Fortification III":{stat:"Defense",vals:[3,6,9]}
 };
 function coreTierStrip(name){
   const t=CORE_TIERS[name]; if(!t)return '';
