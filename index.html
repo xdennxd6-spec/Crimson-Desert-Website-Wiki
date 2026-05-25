@@ -16,8 +16,10 @@
 <meta name="twitter:image" content="cd_assets/bosses/umbra-final.jpg">
 <meta name="theme-color" content="#060606">
 <link rel="manifest" href="site.webmanifest">
-<link rel="icon" type="image/jpeg" href="cd_assets/bosses/umbra-final.jpg">
-<link rel="apple-touch-icon" href="cd_assets/bosses/umbra-final.jpg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="cd_assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="cd_assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" href="cd_assets/icons/apple-touch-icon.png">
 <link rel="preload" as="image" href="cd_assets/bosses/matthias.webp">
 <link rel="preload" as="image" href="cd_assets/bosses/myurdin.webp">
 <script type="application/ld+json">
@@ -459,7 +461,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 #toast.show{opacity:1;transform:translateY(0)}
 
 /* ── Copy button on boss card ── */
-.copy-btn{position:absolute;top:9px;right:9px;padding:3px 9px;background:rgba(0,0,0,.5);border:1px solid var(--bdr);border-radius:5px;font-size:10px;color:var(--dim);cursor:pointer;transition:all .17s;z-index:2;backdrop-filter:blur(4px)}
+.copy-btn{display:block;width:fit-content;margin:7px 0 0 auto;padding:4px 11px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:6px;font-size:10px;color:var(--dim);cursor:pointer;transition:all .17s}
 .copy-btn:hover{border-color:rgba(201,162,39,.38);color:var(--gold)}
 
 /* ── Keyboard hint ── */
@@ -701,7 +703,7 @@ tbody{contain:layout style}
 .rm-empty-celebrate-icon{font-size:48px;margin-bottom:8px}
 
 /* Favoriten-System */
-.fav-btn{position:absolute;top:9px;right:54px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);border:1px solid var(--bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#3a342e;font-size:13px;transition:all .15s;line-height:1;padding:0;backdrop-filter:blur(4px);z-index:3}
+.fav-btn{position:absolute;top:9px;right:9px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);border:1px solid var(--bdr);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#3a342e;font-size:13px;transition:all .15s;line-height:1;padding:0;backdrop-filter:blur(4px);z-index:3}
 .fav-btn:hover{color:var(--gold);border-color:rgba(201,162,39,.42);transform:scale(1.08)}
 .fav-btn.on{color:var(--gold);background:rgba(201,162,39,.18);border-color:var(--gold);box-shadow:0 0 10px rgba(201,162,39,.4)}
 .fav-btn.fav-inline{position:static;display:inline-flex;width:22px;height:22px;font-size:12px;background:transparent;border:none}
@@ -5942,12 +5944,12 @@ function renderRegionHeatmap(){
   if(!el||typeof BOSSES==='undefined')return;
   const REGIONS=['Hernand','Pailune','Demeniss','Delesyia','The Abyss','Endgame'];
   const REGION_COLORS={
-    'Hernand':'linear-gradient(180deg,#c0311f 0%,#7e1f12 100%)',
-    'Pailune':'linear-gradient(180deg,#3a7ec8 0%,#1c3a64 100%)',
-    'Demeniss':'linear-gradient(180deg,#4ea83a 0%,#28591c 100%)',
-    'Delesyia':'linear-gradient(180deg,#cc9f28 0%,#7e6418 100%)',
-    'The Abyss':'linear-gradient(180deg,#9430c5 0%,#52166f 100%)',
-    'Endgame':'linear-gradient(180deg,#c81842 0%,#700d24 100%)'
+    'Hernand':'linear-gradient(180deg,#b8432a 0%,#6e2114 100%)',
+    'Pailune':'linear-gradient(180deg,#4f7088 0%,#273948 100%)',
+    'Demeniss':'linear-gradient(180deg,#717e3e 0%,#39421f 100%)',
+    'Delesyia':'linear-gradient(180deg,#c79a2f 0%,#6e5616 100%)',
+    'The Abyss':'linear-gradient(180deg,#6e3a8a 0%,#341848 100%)',
+    'Endgame':'linear-gradient(180deg,#a83048 0%,#5a1626 100%)'
   };
   const filterReg=document.getElementById('bf-reg')?document.getElementById('bf-reg').value:'';
   const done=loadBossDone();
@@ -6629,11 +6631,11 @@ function renderBosses(){
         <div class="crow"><span class="cl">Parry/Dodge</span><span class="cv">${b.parry_or_dodge}</span></div>
       </div>
       <div class="cs">${linkifyXrefs(b.strategy)}</div>
+      <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">📋 Strategie kopieren</button>
       ${renderBossPhases(b)}
       ${renderBossRecs(b)}
       ${renderBossLore(b)}
       ${renderBossRating(b.name)}
-      <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">Kopieren</button>
       <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${safeName}')">
         ${isDone?'✓ Besiegt':'Als besiegt markieren'}
       </button>
@@ -7005,7 +7007,7 @@ function renderMounts(){
     {id:'ms-horses',title:'Permanente Pferde',icon:'🐎',items:[...horses,...legendary]},
     {id:'ms-dragon',title:'Drachen-Mount',icon:'🐉',items:dragon},
     {id:'ms-sigil',title:'Sigil Mounts',icon:'⚔️',items:sigil},
-    {id:'ms-wild',title:'Zaehmbare Wildtiere',icon:'🦁',items:wild},
+    {id:'ms-wild',title:'Zähmbare Wildtiere',icon:'🦁',items:wild},
     {id:'ms-vehicle',title:'Fahrzeuge',icon:'🚂',items:vehicle}
   ].filter(g=>g.items.length);
   const toc=makeToc(groups.map(g=>({id:g.id,label:`${g.icon} ${g.title} <span style="opacity:.6;font-weight:400;font-size:11px">(${g.items.length})</span>`})));
