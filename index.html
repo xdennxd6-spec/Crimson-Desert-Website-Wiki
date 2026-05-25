@@ -16,6 +16,7 @@
 <meta name="twitter:image" content="cd_assets/bosses/umbra-final.jpg">
 <meta name="theme-color" content="#060606">
 <link rel="manifest" href="site.webmanifest">
+<script src="cd_assets/qrcode.js" defer></script>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="cd_assets/icons/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="cd_assets/icons/favicon-16.png">
@@ -660,6 +661,130 @@ tbody{contain:layout style}
 .bd-star.on{color:var(--gold);text-shadow:0 0 6px rgba(244,204,82,.5)}
 .bd-star:hover,.bd-star.preview{color:var(--glo);transform:scale(1.15)}
 .bd-clear{margin-left:6px;font-size:9px;color:var(--dim);cursor:pointer;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);font-family:'Inter',sans-serif;transition:all .12s}
+.bd-attempts{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:7px;padding:6px 11px;background:rgba(0,0,0,.2);border:1px solid var(--bdr);border-radius:7px}
+.bd-attempts.has-att{border-color:rgba(201,162,39,.28)}
+.bd-att-ctrl{display:flex;align-items:center;gap:8px}
+.bd-att-btn{width:22px;height:22px;border-radius:5px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);color:var(--dim);font-size:14px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s;padding:0}
+.bd-att-btn:hover{border-color:rgba(201,162,39,.4);color:var(--gold)}
+.bd-att-val{min-width:20px;text-align:center;font-weight:700;color:var(--text);font-size:13px;font-variant-numeric:tabular-nums}
+.bd-attempts.has-att .bd-att-val{color:var(--gold)}
+.combo-rot{margin:9px 0 0;padding:9px 11px;background:rgba(201,162,39,.04);border:1px solid rgba(201,162,39,.16);border-radius:8px}
+.combo-lbl{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+.combo-seq{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.combo-chip{padding:3px 9px;background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;font-size:11px;color:var(--text);font-weight:600;line-height:1.5}
+.combo-btn{background:rgba(192,57,43,.16);border-color:rgba(192,57,43,.4);color:var(--rhi);min-width:28px;text-align:center}
+.combo-arr{color:var(--dim);font-size:11px;margin:0 1px}
+#sec-bosses.reg-atm-on{box-shadow:inset 0 90px 110px -88px var(--reg-atm);transition:box-shadow .35s ease;border-radius:10px}
+.sim-grid{display:grid;grid-template-columns:minmax(240px,1fr) minmax(260px,1.15fr);gap:16px;align-items:start}
+@media(max-width:760px){.sim-grid{grid-template-columns:1fr}}
+.sim-editor,.sim-output{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px}
+.sim-lbl{display:block;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);margin:11px 0 5px}
+.sim-lbl:first-child{margin-top:0}
+.sim-sel{width:100%}
+.sim-armor-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sim-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.sim-btn{padding:6px 12px;border-radius:7px;border:1px solid rgba(201,162,39,.35);background:rgba(201,162,39,.08);color:var(--gold);font-size:11px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .15s}
+.sim-btn:hover{background:rgba(201,162,39,.16)}
+.sim-btn-ghost{border-color:var(--bdr);background:transparent;color:var(--dim)}
+.sim-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sim-stat{background:var(--bg3);border:1px solid var(--bdr);border-radius:8px;padding:9px 5px;text-align:center}
+.sim-stat-v{display:block;font-family:'Cinzel',serif;font-size:21px;font-weight:700;color:var(--gold);line-height:1}
+.sim-stat-l{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.03em;color:var(--dim);margin-top:4px}
+.sim-stat-x{display:block;font-size:9px;color:var(--dim);margin-top:2px}
+.sim-slot-use{font-size:11px;color:var(--dim);margin-top:9px}
+.sim-sub{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin:13px 0 6px;border-top:1px solid var(--bdr);padding-top:10px}
+.sim-cores-list{display:flex;flex-direction:column;gap:6px}
+.sim-core{font-size:11px;background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;padding:6px 9px}
+.sim-core-slot{font-size:9px;color:var(--gold);border:1px solid rgba(201,162,39,.3);border-radius:4px;padding:1px 5px;margin-left:5px}
+.sim-core-eff{color:var(--dim);margin-top:3px;line-height:1.4}
+.sim-bonuses{display:flex;flex-wrap:wrap;gap:5px}
+.sim-bonus{font-size:10.5px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:5px;padding:3px 8px;color:var(--text)}
+.sim-cmp-tbl{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:4px}
+.sim-cmp-tbl th,.sim-cmp-tbl td{padding:5px 7px;text-align:left;border-bottom:1px solid var(--bdr)}
+.sim-cmp-tbl th{color:var(--dim);font-weight:600;font-size:10px;text-transform:uppercase}
+.sim-cmp-name td{color:var(--text);font-weight:600}
+.sim-d{margin-left:6px;font-size:10px;font-weight:700}
+.sim-d.up{color:#5cae44}
+.sim-d.down{color:var(--rhi)}
+.rl-tool{margin-bottom:22px}
+.rl-input{width:100%;max-width:520px;padding:10px 14px;background:var(--card);border:1px solid var(--bdr);border-radius:9px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+.rl-input:focus{border-color:rgba(201,162,39,.5)}
+.rl-results{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px;align-items:start}
+.rl-hint{color:var(--dim);font-size:12px;padding:8px 0}
+.rl-group{background:var(--card);border:1px solid var(--bdr);border-radius:9px;padding:11px 13px}
+.rl-group-t{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--gold);margin-bottom:7px;font-weight:600}
+.rl-count{background:rgba(201,162,39,.15);color:var(--gold);border-radius:10px;padding:1px 7px;font-size:10px;margin-left:4px}
+.rl-row{padding:6px 0;border-top:1px solid var(--bdr);font-size:12.5px}
+.rl-row:first-of-type{border-top:none}
+.rl-tag{font-size:9px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:4px;padding:1px 6px;margin-right:6px;color:var(--dim);text-transform:uppercase}
+.rl-src{color:var(--dim);font-size:11px;margin-top:2px;line-height:1.4}
+.card.spoiler-locked,.ch-card.spoiler-locked{position:relative;overflow:hidden}
+.card.spoiler-locked>*:not(.spoiler-cover),.ch-card.spoiler-locked>*:not(.spoiler-cover){filter:blur(8px);pointer-events:none;user-select:none}
+.spoiler-cover{position:absolute;inset:0;z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(8,6,6,.7);text-align:center;padding:20px}
+.spoiler-cover-ico{font-size:30px;opacity:.85}
+.spoiler-cover-tx{font-size:12px;color:var(--rhi);font-weight:600;letter-spacing:.03em}
+.spoiler-reveal-btn{padding:7px 16px;border-radius:8px;border:1px solid rgba(201,162,39,.4);background:rgba(201,162,39,.1);color:var(--gold);font-size:11.5px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .15s}
+.spoiler-reveal-btn:hover{background:rgba(201,162,39,.2)}
+.lt-wrap{position:relative;padding-left:6px;margin-top:8px}
+.lt-wrap::before{content:'';position:absolute;left:21px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--gdim),var(--bdr))}
+.lt-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;position:relative}
+.lt-dot{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--bg3);border:2px solid var(--bdr);color:var(--gold);font-family:'Cinzel',serif;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;z-index:1}
+.lt-special .lt-dot{border-color:var(--red);color:var(--rhi);background:rgba(192,57,43,.12)}
+.lt-final .lt-dot{border-color:var(--gold);color:var(--glo);background:rgba(201,162,39,.16);box-shadow:0 0 14px rgba(201,162,39,.4)}
+.lt-card{flex:1;background:var(--card);border:1px solid var(--bdr);border-radius:9px;padding:10px 13px}
+.lt-special .lt-card{border-color:rgba(192,57,43,.3)}
+.lt-final .lt-card{border-color:rgba(201,162,39,.35)}
+.lt-phase{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:3px}
+.lt-title{font-size:14px;font-weight:700;color:var(--text);font-family:'Cinzel',serif;margin-bottom:4px}
+.lt-special .lt-title{color:var(--rhi)}
+.lt-final .lt-title{color:var(--gold)}
+.lt-desc{font-size:12px;color:var(--dim);line-height:1.5}
+.cs-overlay{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.78);display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
+.cs-overlay.show{display:flex}
+.cs-box{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;width:100%;max-width:760px;padding:18px 20px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.cs-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cs-title{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);font-weight:700}
+.cs-cnt{font-size:11px;color:var(--dim);font-family:'Inter',sans-serif;font-weight:400;margin-left:8px}
+.cs-actions{display:flex;align-items:center;gap:8px}
+.cs-close{width:30px;height:30px;border-radius:7px;border:1px solid var(--bdr);background:transparent;color:var(--dim);font-size:14px;cursor:pointer}
+.cs-close:hover{color:var(--rhi);border-color:var(--rhi)}
+.cs-hint{font-size:11.5px;color:var(--dim);margin:6px 0 12px;line-height:1.5}
+.cs-tbl-wrap{max-height:60vh;overflow-y:auto;border:1px solid var(--bdr);border-radius:8px}
+.cs-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.cs-tbl th,.cs-tbl td{padding:6px 10px;text-align:left;border-bottom:1px solid var(--bdr)}
+.cs-tbl th{position:sticky;top:0;background:var(--bg3);color:var(--gold);font-size:10px;text-transform:uppercase;letter-spacing:.04em}
+.cs-tbl .cs-n{font-weight:700;color:var(--text)}
+.cs-dim{color:var(--dim)}
+.pm-trigger{position:absolute;top:9px;left:9px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.55);border:1px solid var(--bdr);color:var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;z-index:3;backdrop-filter:blur(4px);transition:all .15s;padding:0;padding-left:2px}
+.pm-trigger:hover{border-color:var(--gold);transform:scale(1.08);background:rgba(201,162,39,.18)}
+.pm-overlay{position:fixed;inset:0;z-index:800;background:radial-gradient(ellipse at 50% 28%,#1a0f0a 0%,#060606 72%);display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center}
+.pm-overlay.show{display:flex}
+.pm-close{position:absolute;top:18px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--text);font-size:17px;cursor:pointer;z-index:2}
+.pm-close:hover{border-color:var(--rhi);color:var(--rhi)}
+.pm-nav{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--gold);font-size:30px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.pm-nav:hover{background:rgba(201,162,39,.14);border-color:var(--gold)}
+.pm-prev{left:max(16px,3vw)}
+.pm-next{right:max(16px,3vw)}
+.pm-body{max-width:640px;width:100%}
+.pm-tags{display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.pm-tag{font-size:12px;color:var(--gold);border:1px solid rgba(201,162,39,.3);border-radius:20px;padding:4px 14px;letter-spacing:.03em}
+.pm-name{font-family:'Cinzel',serif;font-size:clamp(30px,6vw,52px);font-weight:900;color:var(--rhi);margin:0 0 18px;line-height:1.05;text-shadow:0 0 30px rgba(192,57,43,.4)}
+.pm-pd{font-size:clamp(18px,3.4vw,26px);color:var(--text);font-weight:600;margin-bottom:18px}
+.pm-weak{font-size:clamp(15px,2.6vw,20px);color:var(--warn);margin-bottom:18px}
+.pm-weak-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-right:8px}
+.pm-combo{display:flex;justify-content:center;margin-bottom:18px}
+.pm-strat{font-size:clamp(13px,2vw,16px);color:var(--dim);line-height:1.6;max-width:560px;margin:0 auto}
+.pm-counter{margin-top:22px;font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums}
+.pm-footer{position:absolute;bottom:22px;left:0;right:0;display:flex;flex-direction:column-reverse;align-items:center;gap:12px}
+.pm-foot-btn{padding:9px 20px;border-radius:9px;border:1px solid rgba(201,162,39,.4);background:rgba(201,162,39,.1);color:var(--gold);font-size:13px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .15s}
+.pm-foot-btn:hover{background:rgba(201,162,39,.2)}
+.pm-qr{display:none}
+.pm-qr.show{display:block}
+.pm-qr-inner{background:#fff;padding:12px;border-radius:10px}
+.pm-qr img{display:block;width:160px;height:160px;image-rendering:pixelated;margin:0 auto}
+.pm-qr-cap{font-size:10px;color:#333;margin-top:6px;max-width:170px;font-family:'Inter',sans-serif;line-height:1.4}
+.pm-qr-fallback{background:#fff;color:#222;padding:12px;border-radius:8px;font-size:11px;max-width:330px;word-break:break-all;font-family:'Inter',sans-serif}
+@media(max-width:600px){.pm-nav{width:44px;height:44px;font-size:24px}.pm-prev{left:6px}.pm-next{right:6px}}
 .bd-clear:hover{color:var(--rhi);border-color:rgba(192,57,43,.42)}
 
 /* Build-Loadout-Optimizer */
@@ -1436,8 +1561,24 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <select class="fs" id="bf-reg" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>The Abyss</option><option>Endgame</option></select>
       <select class="fs" id="bf-type" onchange="renderBosses()"><option value="">Story + Side + Faction</option><option value="Story">Story</option><option value="Side">Side</option><option value="Faction">Faction</option><option value="Sanctum">Sanctum</option></select>
       <select class="fs" id="bf-pd" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option><option value="NIE">NIE Parry</option><option value="KEIN">KEIN Parry/Block</option></select>
+      <select class="fs" id="bf-spoiler" onchange="setSpoilerChapter(this.value)" title="Spoiler-Horizont — blendet Bosse & Kapitel jenseits deines Fortschritts aus" aria-label="Spoiler-Horizont nach Kapitel">
+        <option value="0">🔓 Spoiler: alles zeigen</option>
+        <option value="1">🔒 Ich bin in Kap. 1</option>
+        <option value="2">🔒 Ich bin in Kap. 2</option>
+        <option value="3">🔒 Ich bin in Kap. 3</option>
+        <option value="4">🔒 Ich bin in Kap. 4</option>
+        <option value="5">🔒 Ich bin in Kap. 5</option>
+        <option value="6">🔒 Ich bin in Kap. 6</option>
+        <option value="7">🔒 Ich bin in Kap. 7</option>
+        <option value="8">🔒 Ich bin in Kap. 8</option>
+        <option value="9">🔒 Ich bin in Kap. 9</option>
+        <option value="10">🔒 Ich bin in Kap. 10</option>
+        <option value="11">🔒 Ich bin in Kap. 11</option>
+        <option value="12">🔒 Ich bin in Kap. 12</option>
+      </select>
       <button class="rb-trigger" onclick="randomBoss()" title="Zufälligen Boss anzeigen (R)" aria-label="Random Boss">🎲 Random Boss</button>
       <button class="cmp-trigger" onclick="openCompare()" title="Zwei Bosse vergleichen" aria-label="Bosse vergleichen">⚔️ Compare</button>
+      <button class="cmp-trigger" onclick="openCheatSheet()" title="Druckbares Boss-Cheat-Sheet (folgt den aktiven Filtern)" aria-label="Cheat-Sheet">📋 Cheat-Sheet</button>
     </div>
     <div class="grid" id="boss-grid"></div>
   </section>
@@ -1479,6 +1620,13 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-crafting">
     <div class="sec-t">⚗️ Crafting &amp; Farming</div>
+    <div class="rl-tool">
+      <div class="sub-t" style="margin-top:0">🔎 Wo bekomme ich …?</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Item, Waffe, Rüstung, Core oder Material eingeben → alle Fundorte: direkte Quelle, Boss-Drops, eingebaute Cores und Crafting.</div>
+      <input id="rl-input" class="rl-input" type="search" oninput="renderReverseLookup()" placeholder="z.B. Crow's Pursuit, Wind Slash, Ashclaw …" aria-label="Item-Fundsuche">
+      <div id="rl-results" class="rl-results"></div>
+    </div>
+    <div class="sub-t">⚗️ Crafting-Rezepte</div>
     <div class="fbar">
       <select class="fs" id="kf-cat" onchange="renderCrafting()"><option value="">Alle Kategorien</option><option value="Potion">Potions / Elixiere</option><option value="Food">Food / Buff-Food</option><option value="Gear">Gear / Rüstung</option></select>
     </div>
@@ -1718,6 +1866,9 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="sec-t">⚙️ Builds</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Empfohlene Loadouts für verschiedene Spielstile. Alle Builds basieren auf Items, die nach dem angegebenen Kapitel verfügbar sind.</div>
     <div class="bo-wizard" id="bo-wizard" aria-label="Build-Loadout-Optimizer"></div>
+    <div class="sub-t" style="margin-top:24px">🧮 Build-Stat-Simulator</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Waffe, Rüstung &amp; passive Cores wählen → live aggregierte Werte, zwei Loadouts (A/B) vergleichbar. Hinweis: ATK/DEF werden aus den Rüstungs-Effekttexten summiert; aktive Skill-Cores haben keine öffentlichen Schadenswerte (nur Buff-Effekte) und zählen hier nur Slots.</div>
+    <div id="build-sim"></div>
     <div class="sub-t">Klassische Build-Vorschläge</div>
     <div id="builds-list"></div>
   </section>
@@ -1757,6 +1908,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     </div>
     <div class="tabs">
       <div class="tab active" id="sect-ending" onclick="secretsTab('ending')">🌑 Hidden Ending</div>
+      <div class="tab" id="sect-timeline" onclick="secretsTab('timeline')">🕰️ Story-Timeline</div>
       <div class="tab" id="sect-fragments" onclick="secretsTab('fragments')">📜 Memory Fragments</div>
       <div class="tab" id="sect-frtracker" onclick="secretsTab('frtracker')">📊 Fragment-Tracker</div>
       <div class="tab" id="sect-cressets" onclick="secretsTab('cressets')">🔥 Abyss Cressets</div>
@@ -1769,6 +1921,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <div class="tab" id="sect-priority" onclick="secretsTab('priority')">⚡ Priorität</div>
     </div>
     <div class="pane active" id="secp-ending"></div>
+    <div class="pane" id="secp-timeline"></div>
     <div class="pane" id="secp-fragments"></div>
     <div class="pane" id="secp-frtracker"></div>
     <div class="pane" id="secp-cressets"></div>
@@ -4785,6 +4938,52 @@ function renderBossRating(name){
   </div>`;
 }
 
+// ===== BOSS COMBO / ROTATION =====
+const BOSS_COMBOS={
+  "Matthias":"Block → Pump Kick (Watch & Learn) → Parry-Konter",
+  "Kailok the Hornsplitter":"Shield Up → Force Palm → Heavy-Combo",
+  "Myurdin (Phase 1)":"Focus → Blinding Flash → Finisher → R2",
+  "Marni's Excavatron":"Drill-Glow → Force Palm (cancelt Burrow) → 3-Chain",
+  "Gregor the Halberd of Carnage":"Backstab → Force Palm → 3er-Combo → Stagger",
+  "Walter Lanford":"Poof-Escape → Dash zum Landepunkt → Heavy Attack",
+  "Priscus the Ancient":"Bow → Nature's Snare → Projektil-Reflect",
+  "Reed Devil":"P1 Parry → P2: 5 Totems → Waves dodgen → P3 Nahkampf"
+};
+function comboChips(name){
+  const seq=BOSS_COMBOS[name];
+  if(!seq)return '';
+  const chips=seq.split('→').map(s=>s.trim()).filter(Boolean).map(p=>{
+    const isBtn=/^(R1|R2|R3|L1|L2|L3|△|○|✕|▢|□|RT|LT|RB|LB)$/.test(p);
+    return `<span class="combo-chip${isBtn?' combo-btn':''}">${escHtml(p)}</span>`;
+  }).join('<span class="combo-arr" aria-hidden="true">→</span>');
+  return `<div class="combo-rot"><span class="combo-lbl">⚔️ Rotation</span><div class="combo-seq">${chips}</div></div>`;
+}
+
+// ===== BOSS ATTEMPT LOG =====
+function loadBossAttempts(){return JSON.parse(localStorage.getItem('cd_boss_attempts')||'{}');}
+function bumpBossAttempt(name,delta){
+  const a=loadBossAttempts();
+  const v=Math.max(0,(a[name]||0)+delta);
+  if(v)a[name]=v; else delete a[name];
+  localStorage.setItem('cd_boss_attempts',JSON.stringify(a));
+  document.querySelectorAll('.bd-attempts[data-att-for="'+name.replace(/"/g,'&quot;')+'"]').forEach(el=>{
+    const val=el.querySelector('.bd-att-val'); if(val)val.textContent=v;
+    el.classList.toggle('has-att',v>0);
+  });
+}
+function renderAttemptCounter(name){
+  const cur=loadBossAttempts()[name]||0;
+  const safe=name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  return `<div class="bd-attempts${cur>0?' has-att':''}" data-att-for="${name.replace(/"/g,'&quot;')}">
+    <span class="bd-rating-lbl">Versuche bis Sieg</span>
+    <div class="bd-att-ctrl">
+      <button class="bd-att-btn" onclick="event.stopPropagation();bumpBossAttempt('${safe}',-1)" title="−1" aria-label="Versuch abziehen">−</button>
+      <span class="bd-att-val" aria-live="polite">${cur}</span>
+      <button class="bd-att-btn" onclick="event.stopPropagation();bumpBossAttempt('${safe}',1)" title="+1" aria-label="Versuch hinzufügen">+</button>
+    </div>
+  </div>`;
+}
+
 // ===== BOSS NPC-LORE Render =====
 function renderBossLore(b){
   const lore=BOSS_LORE[b.name];
@@ -5159,13 +5358,14 @@ const SECRETS_TOOLS=[
 ];
 
 function secretsTab(id){
-  const ids=['ending','fragments','frtracker','cressets','crtracker','easter','locations','weapons','mechanics','tools','priority'];
+  const ids=['ending','timeline','fragments','frtracker','cressets','crtracker','easter','locations','weapons','mechanics','tools','priority'];
   ids.forEach(t=>{
     const tab=document.getElementById('sect-'+t);
     const pane=document.getElementById('secp-'+t);
     if(tab)tab.classList.toggle('active',t===id);
     if(pane)pane.classList.toggle('active',t===id);
   });
+  if(id==='timeline')renderLoreTimeline();
   if(id==='frtracker')renderFragmentTracker();
   if(id==='crtracker')renderCressetTracker();
 }
@@ -5285,7 +5485,23 @@ function _crTotal(){
   return CRESSET_REGIONS.reduce((s,r)=>s+Math.min(d[r.key]||0,r.cap),0);
 }
 
+// ===== LORE TIMELINE (Run-108 Story-Graph) =====
+function renderLoreTimeline(){
+  const el=document.getElementById('secp-timeline'); if(!el)return;
+  const frame=[{icon:'∞',phase:'Vor Run 108',title:'107 gescheiterte Zeitschleifen',desc:'White Crow & Alustin sind Time-Traveler-Wächter. Sie erschaffen und modifizieren Kliff über wiederholte Zeitsprünge, um Umbra zu besiegen — 107 dokumentierte Versuche, jeder fehlgeschlagen.',cls:'lt-special'}];
+  const chapters=(typeof CHAPTERS!=='undefined'?CHAPTERS:[]).map(c=>({icon:String(c.num).padStart(2,'0'),phase:'Kapitel '+c.num,title:c.title,desc:'Boss: '+c.boss}));
+  const reveal=[
+    {icon:'🩸',phase:'Wendepunkt',title:'Caliburn = Umbra',desc:'Corrupted Caliburn ist eine Inkarnation von Umbra. Finaler Aufstieg: Corrupted Caliburn → Avatar of Umbra → Umbra (Final).',cls:'lt-special'},
+    {icon:'🕯️',phase:'Wendepunkt',title:'Hexe Marie = White Crow',desc:'Hexe Marie ist der korrumpierte, fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff.',cls:'lt-special'},
+    {icon:'108',phase:'Run 108 — das Ende',title:'Der einzige Run, der zählt',desc:'Dein Playthrough ist Versuch Nr. 108. Sind alle True-Ending-Voraussetzungen erfüllt, durchbricht Kliff die Schleife.',cls:'lt-final'}
+  ];
+  const nodes=[...frame,...chapters,...reveal];
+  el.innerHTML=`<div class="spoiler-shield"><span class="spoiler-shield-ico">⚠️</span><div><strong>Maximale Story-Spoiler:</strong> Diese Timeline zeigt den kompletten Handlungsbogen inkl. Ende. Nur lesen, wenn du durch bist.</div></div>
+    <div class="lt-wrap">${nodes.map(n=>`<div class="lt-item ${n.cls||''}"><div class="lt-dot">${escHtml(n.icon)}</div><div class="lt-card"><div class="lt-phase">${escHtml(n.phase)}</div><div class="lt-title">${escHtml(n.title)}</div><div class="lt-desc">${escHtml(n.desc)}</div></div></div>`).join('')}</div>`;
+}
+
 function renderSecrets(){
+  if(document.getElementById('secp-timeline'))renderLoreTimeline();
   // Hidden Ending Tab
   const eEnd=document.getElementById('secp-ending');
   if(eEnd){
@@ -5939,6 +6155,21 @@ function applyBossFilter(kind,val){
 }
 
 // ===== REGION HEATMAP =====
+const REGION_ACCENT={
+  'Hernand':'rgba(184,67,42,.55)',
+  'Pailune':'rgba(79,112,136,.55)',
+  'Demeniss':'rgba(113,126,62,.55)',
+  'Delesyia':'rgba(199,154,47,.5)',
+  'The Abyss':'rgba(110,58,138,.55)',
+  'Endgame':'rgba(168,48,72,.55)'
+};
+function applyRegionAtmosphere(reg){
+  const sec=document.getElementById('sec-bosses');
+  if(!sec)return;
+  const col=REGION_ACCENT[reg];
+  if(col){sec.style.setProperty('--reg-atm',col);sec.classList.add('reg-atm-on');}
+  else{sec.classList.remove('reg-atm-on');}
+}
 function renderRegionHeatmap(){
   const el=document.getElementById('region-heatmap');
   if(!el||typeof BOSSES==='undefined')return;
@@ -6598,8 +6829,101 @@ function bossPlaceholder(b){
   </div>`;
 }
 
+// ===== PLAY-MODE / SECOND-SCREEN COMPANION =====
+let _pmList=[],_pmIndex=0,_pmTouchX=0;
+function openPlayMode(name){
+  _pmList=(typeof _cheatBosses==='function')?_cheatBosses():BOSSES.slice();
+  if(!_pmList.length)_pmList=BOSSES.slice();
+  const i=_pmList.findIndex(b=>b.name===name);
+  _pmIndex=i>=0?i:0;
+  let ov=document.getElementById('playmode-overlay');
+  if(!ov){
+    ov=document.createElement('div');ov.id='playmode-overlay';ov.className='pm-overlay';
+    ov.innerHTML='<button class="pm-close" onclick="closePlayMode()" aria-label="Schließen">✕</button><button class="pm-nav pm-prev" onclick="pmNav(-1)" aria-label="Vorheriger Boss">‹</button><button class="pm-nav pm-next" onclick="pmNav(1)" aria-label="Nächster Boss">›</button><div class="pm-body"></div><div class="pm-footer"><button class="pm-foot-btn" onclick="pmToggleQR()">📱 Auf Handy öffnen</button><div id="pm-qr" class="pm-qr"></div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('touchstart',e=>{_pmTouchX=e.changedTouches[0].clientX;},{passive:true});
+    ov.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-_pmTouchX;if(Math.abs(dx)>55)pmNav(dx<0?1:-1);},{passive:true});
+  }
+  _pmRender();
+  ov.classList.add('show');document.body.style.overflow='hidden';
+  document.addEventListener('keydown',_pmKey);
+}
+function closePlayMode(){const ov=document.getElementById('playmode-overlay');if(ov)ov.classList.remove('show');document.body.style.overflow='';document.removeEventListener('keydown',_pmKey);}
+function pmNav(d){if(!_pmList.length)return;_pmIndex=(_pmIndex+d+_pmList.length)%_pmList.length;_pmRender();}
+function _pmKey(e){if(e.key==='Escape')closePlayMode();else if(e.key==='ArrowLeft')pmNav(-1);else if(e.key==='ArrowRight')pmNav(1);}
+function _pmRender(){
+  const ov=document.getElementById('playmode-overlay');if(!ov)return;
+  const b=_pmList[_pmIndex];if(!b){closePlayMode();return;}
+  const chap=b.chapter?'Kap. '+b.chapter:'Side/Faction';
+  const combo=(typeof comboChips==='function')?comboChips(b.name):'';
+  const weak=b.weakness&&b.weakness!=='–'?b.weakness:null;
+  ov.querySelector('.pm-body').innerHTML=`
+    <div class="pm-tags"><span class="pm-tag">${escHtml(chap)}</span><span class="pm-tag">${escHtml(b.region)}</span></div>
+    <h2 class="pm-name">${escHtml(b.name)}</h2>
+    <div class="pm-pd">${escHtml(b.parry_or_dodge)}</div>
+    ${weak?`<div class="pm-weak"><span class="pm-weak-lbl">Schwäche</span>${escHtml(weak)}</div>`:''}
+    ${combo?`<div class="pm-combo">${combo}</div>`:''}
+    <div class="pm-strat">${escHtml(b.strategy)}</div>
+    <div class="pm-counter">${_pmIndex+1} / ${_pmList.length}</div>`;
+  const qd=document.getElementById('pm-qr');if(qd){qd.classList.remove('show');qd.innerHTML='';}
+}
+function pmToggleQR(){
+  const qd=document.getElementById('pm-qr');if(!qd)return;
+  if(qd.classList.contains('show')){qd.classList.remove('show');qd.innerHTML='';return;}
+  const b=_pmList[_pmIndex];if(!b)return;
+  const url=location.origin+location.pathname+'#sec=bosses&q='+encodeURIComponent(b.name);
+  if(typeof qrcode==='undefined'){qd.innerHTML='<div class="pm-qr-fallback">QR-Bibliothek noch nicht geladen.<br>Link:<br>'+escHtml(url)+'</div>';qd.classList.add('show');return;}
+  try{
+    const qr=qrcode(0,'M');qr.addData(url);qr.make();
+    qd.innerHTML='<div class="pm-qr-inner">'+qr.createImgTag(5,8)+'<div class="pm-qr-cap">Scannen → öffnet '+escHtml(b.name)+' auf dem Handy</div></div>';
+    qd.classList.add('show');
+  }catch(e){qd.innerHTML='<div class="pm-qr-fallback">'+escHtml(url)+'</div>';qd.classList.add('show');}
+}
+
+// ===== BOSS CHEAT-SHEET GENERATOR =====
+function _cheatBosses(){
+  const reg=document.getElementById('bf-reg').value,type=document.getElementById('bf-type').value,pd=document.getElementById('bf-pd').value;
+  return BOSSES.filter(b=>(!reg||b.region.includes(reg))&&(!type||b.quest.includes(type))&&(!pd||b.parry_or_dodge.includes(pd)));
+}
+function openCheatSheet(){
+  let ov=document.getElementById('cheatsheet-modal');
+  if(!ov){ov=document.createElement('div');ov.id='cheatsheet-modal';ov.className='cs-overlay';ov.onclick=e=>{if(e.target===ov)closeCheatSheet();};document.body.appendChild(ov);}
+  const list=_cheatBosses();
+  const rows=list.map(b=>`<tr><td class="cs-n">${escHtml(b.name)}</td><td>${escHtml(b.region)}</td><td>${escHtml(b.parry_or_dodge)}</td><td>${b.weakness&&b.weakness!=='–'?escHtml(b.weakness):'<span class="cs-dim">–</span>'}</td></tr>`).join('');
+  ov.innerHTML=`<div class="cs-box">
+    <div class="cs-hd"><div class="cs-title">📋 Boss Cheat-Sheet<span class="cs-cnt">${list.length} Bosse</span></div>
+      <div class="cs-actions"><button class="sim-btn" onclick="printCheatSheet()">🖨️ Drucken / PDF</button><button class="cs-close" onclick="closeCheatSheet()" aria-label="Schließen">✕</button></div>
+    </div>
+    <div class="cs-hint">Folgt den aktiven Boss-Filtern (Region / Typ / Parry-Dodge). Kompakt zum Ausdrucken oder als Second-Screen-Spickzettel.</div>
+    <div class="cs-tbl-wrap"><table class="cs-tbl"><thead><tr><th>Boss</th><th>Region</th><th>Parry / Dodge</th><th>Schwäche</th></tr></thead><tbody>${rows||'<tr><td colspan="4" class="cs-dim">Keine Bosse für die aktuelle Filterung.</td></tr>'}</tbody></table></div>
+  </div>`;
+  ov.classList.add('show');document.body.style.overflow='hidden';
+}
+function closeCheatSheet(){const ov=document.getElementById('cheatsheet-modal');if(ov)ov.classList.remove('show');document.body.style.overflow='';}
+function printCheatSheet(){
+  const list=_cheatBosses();
+  const rows=list.map(b=>`<tr><td><b>${escHtml(b.name)}</b></td><td>${escHtml(b.region)}</td><td>${escHtml(b.parry_or_dodge)}</td><td>${b.weakness&&b.weakness!=='–'?escHtml(b.weakness):'–'}</td></tr>`).join('');
+  const w=window.open('','_blank');
+  if(!w){_simToast('Popup blockiert — bitte erlauben');return;}
+  w.document.write('<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Crimson Desert — Boss Cheat-Sheet</title><style>body{font-family:Georgia,serif;color:#111;margin:24px}h1{font-size:18px;margin:0 0 3px}.meta{color:#666;font-size:11px;margin-bottom:14px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ccc;padding:5px 8px;text-align:left}th{background:#eee}tr:nth-child(even) td{background:#f7f7f7}@media print{body{margin:0}}</style></head><body><h1>Crimson Desert — Boss Cheat-Sheet</h1><div class="meta">'+list.length+' Bosse · '+new Date().toLocaleDateString('de-DE')+'</div><table><thead><tr><th>Boss</th><th>Region</th><th>Parry / Dodge</th><th>Schwäche</th></tr></thead><tbody>'+rows+'</tbody></table></body></html>');
+  w.document.close();
+  setTimeout(()=>{try{w.print();}catch(e){}},350);
+}
+
+// ===== SPOILER HORIZON (nach Kapitel) =====
+function loadSpoilerChapter(){return parseInt(localStorage.getItem('cd_spoiler_chapter')||'0',10)||0;}
+function setSpoilerChapter(v){
+  localStorage.setItem('cd_spoiler_chapter',String(parseInt(v,10)||0));
+  renderBosses();
+  if(typeof renderChapters==='function')renderChapters();
+}
+function revealSpoiler(btn){const c=btn.closest('.card,.ch-card');if(c)c.classList.remove('spoiler-locked');}
+
 function renderBosses(){
   const reg=document.getElementById('bf-reg').value;
+  applyRegionAtmosphere(reg);
+  const sp=loadSpoilerChapter();
+  const spSel=document.getElementById('bf-spoiler');if(spSel&&(+spSel.value)!==sp)spSel.value=sp;
   const type=document.getElementById('bf-type').value;
   const pd=document.getElementById('bf-pd').value;
   const done=loadBossDone();
@@ -6611,9 +6935,12 @@ function renderBosses(){
     const hasNote=!!notes[b.name];
     const safeName=b.name.replace(/'/g,"\\'");
     const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge,notes[b.name]||''].join(' ').toLowerCase();
-    return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}" data-s="${s}">
+    const _spLock=sp>0&&b.chapter!=null&&b.chapter>sp;
+    return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-s="${s}">
+      ${_spLock?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${b.chapter} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
       <div class="boss-done-badge">BESIEGT</div>
       ${favBtn('boss',b.name)}
+      <button class="pm-trigger" onclick="event.stopPropagation();openPlayMode('${safeName}')" title="Play-Mode / Fokus-Ansicht" aria-label="Play-Mode für ${escHtml(b.name)}">▶</button>
       ${BOSS_IMGS[b.name]
         ?`<div class="boss-img-wrap"><img class="boss-img" src="${BOSS_IMGS[b.name]}" data-cdn-fallback="${BOSS_IMGS_CDN[b.name]||''}" onerror="if(this.dataset.cdnFallback&&this.src!==this.dataset.cdnFallback){this.src=this.dataset.cdnFallback;}else{this.parentElement.innerHTML=bossPlaceholder({name:'${b.name.replace(/'/g,"\\'")}',region:'${b.region}',chapter:${b.chapter||'null'},quest:'${b.quest.replace(/'/g,"\\'")}'});}" loading="lazy" decoding="async" alt="${b.name}"></div>`
         :bossPlaceholder(b)
@@ -6631,11 +6958,13 @@ function renderBosses(){
         <div class="crow"><span class="cl">Parry/Dodge</span><span class="cv">${b.parry_or_dodge}</span></div>
       </div>
       <div class="cs">${linkifyXrefs(b.strategy)}</div>
+      ${comboChips(b.name)}
       <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">📋 Strategie kopieren</button>
       ${renderBossPhases(b)}
       ${renderBossRecs(b)}
       ${renderBossLore(b)}
       ${renderBossRating(b.name)}
+      ${renderAttemptCounter(b.name)}
       <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${safeName}')">
         ${isDone?'✓ Besiegt':'Als besiegt markieren'}
       </button>
@@ -6734,6 +7063,38 @@ function renderCores(){
 }
 
 // ===== CRAFTING =====
+// ===== REVERSE LOOKUP: WO BEKOMME ICH X? =====
+function renderReverseLookup(){
+  const el=document.getElementById('rl-results'); if(!el)return;
+  const q=(document.getElementById('rl-input').value||'').trim().toLowerCase();
+  if(q.length<2){el.innerHTML='<div class="rl-hint">Mindestens 2 Zeichen eingeben …</div>';return;}
+  const inc=s=>s&&String(s).toLowerCase().includes(q);
+  const groups=[];
+  const direct=[];
+  WEAPONS.forEach(w=>{if(inc(w.name)&&w.source)direct.push({k:'Waffe',n:w.name,s:w.source});});
+  ARMOR.forEach(a=>{if(inc(a.name)&&a.source)direct.push({k:'Rüstung',n:a.name,s:a.source});});
+  CORES.forEach(c=>{if(inc(c.name)&&c.source)direct.push({k:'Core',n:c.name,s:c.source});});
+  if(direct.length)groups.push({t:'🎯 Direkte Quelle',items:direct.slice(0,16).map(d=>`<div class="rl-row"><span class="rl-tag">${d.k}</span><strong>${escHtml(d.n)}</strong><div class="rl-src">${escHtml(d.s)}</div></div>`)});
+  const drops=[];
+  BOSSES.forEach(b=>{
+    if(inc(b.drop_weapon))drops.push({b:b.name,r:b.region,w:b.drop_weapon});
+    if(inc(b.drop_abyss_gear))drops.push({b:b.name,r:b.region,w:b.drop_abyss_gear});
+  });
+  if(drops.length)groups.push({t:'🗡️ Boss-Drop',items:drops.slice(0,16).map(d=>`<div class="rl-row"><strong>${escHtml(d.w)}</strong><div class="rl-src">Drop von ${escHtml(d.b)} · ${escHtml(d.r)}</div></div>`)});
+  const bi=[];
+  WEAPONS.forEach(w=>{if(inc(w.built_in))bi.push({w:w.name,c:w.built_in});});
+  if(bi.length)groups.push({t:'💎 Eingebauter Core',items:bi.slice(0,16).map(d=>`<div class="rl-row"><strong>${escHtml(d.w)}</strong><div class="rl-src">enthält: ${escHtml(d.c)}</div></div>`)});
+  const craftMake=[],craftIngr=[];
+  if(typeof CRAFTING!=='undefined')CRAFTING.forEach(c=>{
+    if(inc(c.name))craftMake.push(c);
+    else if(inc(c.ingr))craftIngr.push(c);
+  });
+  if(craftMake.length)groups.push({t:'⚗️ Craftbar',items:craftMake.slice(0,16).map(c=>`<div class="rl-row"><strong>${escHtml(c.name)}</strong><div class="rl-src">${escHtml(c.station)} · Zutaten: ${escHtml(c.ingr)}</div></div>`)});
+  if(craftIngr.length)groups.push({t:'🧪 Als Zutat verwendet',items:craftIngr.slice(0,16).map(c=>`<div class="rl-row"><strong>${escHtml(c.name)}</strong><div class="rl-src">braucht: ${escHtml(c.ingr)}</div></div>`)});
+  if(!groups.length){el.innerHTML='<div class="rl-hint">Nichts gefunden für „'+escHtml(q)+'". Versuch einen Boss-Drop, eine Waffe, einen Core oder ein Material.</div>';return;}
+  el.innerHTML=groups.map(g=>`<div class="rl-group"><div class="rl-group-t">${g.t} <span class="rl-count">${g.items.length}</span></div>${g.items.join('')}</div>`).join('');
+}
+
 function renderCrafting(){
   const f=document.getElementById('kf-cat').value;
   document.getElementById('craft-grid').innerHTML=CRAFTING.map(c=>{
@@ -6753,6 +7114,7 @@ function renderCrafting(){
       <button class="map-pin-btn" onclick="showMapLoc('${esc(c.name)}','${esc(c.station)}','Crafting Station')">📍 Auf Karte</button>
     </div>`;
   }).join('');
+  renderReverseLookup();
 }
 
 // ===== TRUE ENDING =====
@@ -7414,6 +7776,95 @@ function clTab(id){
 }
 
 // ===== BUILDS =====
+// ===== BUILD STAT SIMULATOR =====
+let _simCurrent=null;
+let _simSlots={A:null,B:null};
+function _armorStats(effect){
+  const o={atk:0,def:0,bonuses:[]};
+  if(!effect)return o;
+  effect.split(/[,;]/).forEach(p=>{
+    const t=p.trim(); if(!t)return; let m;
+    if(m=t.match(/^Atk\s*\+\s*(\d+)$/i))o.atk+=+m[1];
+    else if(m=t.match(/^Def\s*\+\s*(\d+)$/i))o.def+=+m[1];
+    else o.bonuses.push(t);
+  });
+  return o;
+}
+function _calcLoadout(){
+  const w=WEAPONS.find(x=>x.name===document.getElementById('sim-weapon').value);
+  let atkArmor=0,def=0;const bonuses=[],armorNames=[];
+  document.querySelectorAll('#sim-armor-row select').forEach(s=>{
+    if(!s.value)return;const a=ARMOR.find(x=>x.name===s.value);if(!a)return;
+    armorNames.push(a.name);const st=_armorStats(a.effect);atkArmor+=st.atk;def+=st.def;st.bonuses.forEach(b=>bonuses.push(b));
+  });
+  const cores=[...document.getElementById('sim-cores').selectedOptions].map(o=>CORES.find(c=>c.name===o.value)).filter(Boolean);
+  const wSlots=w&&w.slots!=null?w.slots:0;
+  const wCoresUsed=cores.filter(c=>c.slot==='Weapon'||c.slot==='Both').length;
+  const base=w&&w.atk!=null?w.atk:0;
+  return {weaponName:w?w.name:null,atkBase:base,atkArmor,atk:base+atkArmor,def,crit:w&&w.crit!=null?w.crit:null,slots:wSlots,coresUsed:wCoresUsed,armorNames,bonuses,cores:cores.map(c=>({name:c.name,effect:c.effect,slot:c.slot}))};
+}
+function simRecalc(){
+  _simCurrent=_calcLoadout();const r=_simCurrent;const el=document.getElementById('sim-readout');if(!el)return;
+  const stat=(lbl,val,extra)=>`<div class="sim-stat"><span class="sim-stat-v">${val}</span><span class="sim-stat-l">${lbl}</span>${extra?`<span class="sim-stat-x">${extra}</span>`:''}</div>`;
+  const warn=r.coresUsed>r.slots?' style="color:var(--rhi)"':'';
+  el.innerHTML=`<div class="sim-stats">
+      ${stat('ATK',r.atk,r.atkArmor?r.atkBase+'+'+r.atkArmor:'')}
+      ${stat('DEF',r.def||'–')}
+      ${stat('Crit-Lvl',r.crit!=null?r.crit:'–')}
+      ${stat('Slots',r.slots)}
+    </div>
+    <div class="sim-slot-use"${warn}>Weapon-Cores belegt: ${r.coresUsed} / ${r.slots}</div>
+    ${r.cores.length?`<div class="sim-sub">Cores</div><div class="sim-cores-list">${r.cores.map(c=>`<div class="sim-core"><strong>${escHtml(c.name)}</strong><span class="sim-core-slot">${escHtml(c.slot||'?')}</span><div class="sim-core-eff">${escHtml(c.effect||'')}</div></div>`).join('')}</div>`:''}
+    ${r.bonuses.length?`<div class="sim-sub">Rüstungs-Boni &amp; Resistenzen</div><div class="sim-bonuses">${r.bonuses.map(b=>`<span class="sim-bonus">${escHtml(b)}</span>`).join('')}</div>`:''}`;
+}
+function simSnapshot(slot){
+  if(!_simCurrent||!_simCurrent.weaponName){_simToast('Erst eine Waffe wählen');return;}
+  _simSlots[slot]=_simCurrent;simRenderCompare();_simToast('Loadout '+slot+' gespeichert');
+}
+function _simToast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>{t.classList.remove('show');t.textContent='Kopiert!';},1700);}
+function simRenderCompare(){
+  const el=document.getElementById('sim-compare');if(!el)return;const A=_simSlots.A,B=_simSlots.B;
+  if(!A&&!B){el.innerHTML='';return;}
+  const row=(lbl,a,b)=>{let d='';if(A&&B&&typeof a==='number'&&typeof b==='number'&&a!==b){const diff=b-a;d=`<span class="sim-d ${diff>0?'up':'down'}">${diff>0?'+':''}${diff}</span>`;}return `<tr><td>${lbl}</td><td>${a==null?'–':a}</td><td>${b==null?'–':b}${d}</td></tr>`;};
+  el.innerHTML=`<div class="sim-sub">Vergleich A vs B</div>
+    <table class="sim-cmp-tbl"><thead><tr><th></th><th>A</th><th>B</th></tr></thead><tbody>
+    <tr class="sim-cmp-name"><td>Waffe</td><td>${A?escHtml(A.weaponName):'–'}</td><td>${B?escHtml(B.weaponName):'–'}</td></tr>
+    ${row('ATK',A?A.atk:null,B?B.atk:null)}
+    ${row('DEF',A?A.def:null,B?B.def:null)}
+    ${row('Crit-Lvl',A?A.crit:null,B?B.crit:null)}
+    ${row('Slots',A?A.slots:null,B?B.slots:null)}
+    </tbody></table>`;
+}
+function renderBuildSim(){
+  const el=document.getElementById('build-sim');if(!el)return;
+  const escA=s=>escHtml(s).replace(/"/g,'&quot;');
+  const wOpts='<option value="">— Waffe wählen —</option>'+WEAPONS.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(w=>`<option value="${escA(w.name)}">${escHtml(w.name)}${w.atk!=null?' · ATK '+w.atk:''}</option>`).join('');
+  const types=[...new Set(ARMOR.map(a=>a.type))];
+  const armorSelects=types.map(t=>`<select class="fs sim-sel" data-slot="${escA(t)}" onchange="simRecalc()" aria-label="${escA(t)}"><option value="">— ${escHtml(t)} —</option>${ARMOR.filter(a=>a.type===t).sort((a,b)=>a.name.localeCompare(b.name)).map(a=>`<option value="${escA(a.name)}">${escHtml(a.name)}</option>`).join('')}</select>`).join('');
+  const cslots=[...new Set(CORES.map(c=>c.slot))];
+  const coreOpts=cslots.map(sl=>`<optgroup label="${escA(sl||'?')}">${CORES.filter(c=>c.slot===sl).sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${escA(c.name)}">${escHtml(c.name)}</option>`).join('')}</optgroup>`).join('');
+  el.innerHTML=`<div class="sim-grid">
+      <div class="sim-editor">
+        <label class="sim-lbl">Waffe</label>
+        <select class="fs sim-sel" id="sim-weapon" onchange="simRecalc()">${wOpts}</select>
+        <label class="sim-lbl">Rüstung</label>
+        <div id="sim-armor-row" class="sim-armor-row">${armorSelects}</div>
+        <label class="sim-lbl">Cores (Mehrfachauswahl: Strg/Cmd-Klick)</label>
+        <select class="fs sim-sel" id="sim-cores" multiple size="5" onchange="simRecalc()">${coreOpts}</select>
+        <div class="sim-actions">
+          <button class="sim-btn" onclick="simSnapshot('A')">→ In A</button>
+          <button class="sim-btn" onclick="simSnapshot('B')">→ In B</button>
+          <button class="sim-btn sim-btn-ghost" onclick="_simSlots={A:null,B:null};simRenderCompare();_simToast('Vergleich geleert');">Vergleich leeren</button>
+        </div>
+      </div>
+      <div class="sim-output">
+        <div id="sim-readout"></div>
+        <div id="sim-compare"></div>
+      </div>
+    </div>`;
+  simRecalc();simRenderCompare();
+}
+
 function renderBuilds(){
   const tagBadge=t=>`<span class="tag tx" style="font-size:9.5px">${t}</span>`;
   const bldId=n=>'bld-'+n.toLowerCase().replace(/[\s/()]+/g,'-').replace(/[^a-z0-9-]/g,'');
@@ -7426,6 +7877,7 @@ function renderBuilds(){
       <div class="build-slots">${b.slots.map(s=>`<div class="build-slot"><span class="bs-label">${s.label}</span><span class="bs-val">${s.val}</span></div>`).join('')}</div>
       <div class="build-tip">${b.tip}</div>
     </div>`).join('');
+  renderBuildSim();
 }
 
 // ===== MOUNT IN-GAME PREVIEW =====
@@ -7494,7 +7946,8 @@ function exportProgress(){
     bosses:loadBossDone(),
     trueEnding:loadTE(),
     greymane:loadGM(),
-    weapons:loadWepDone()
+    weapons:loadWepDone(),
+    attempts:loadBossAttempts()
   };
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a');
@@ -7515,6 +7968,7 @@ function importProgress(input){
       if(Array.isArray(data.trueEnding)){localStorage.setItem('cd_te',JSON.stringify(data.trueEnding));}
       if(Array.isArray(data.greymane))saveGM(data.greymane);
       if(Array.isArray(data.weapons))saveWepDone(data.weapons);
+      if(data.attempts&&typeof data.attempts==='object')localStorage.setItem('cd_boss_attempts',JSON.stringify(data.attempts));
       renderBosses();renderTE();renderBossChecklist();renderGreymane();renderSanctumChecklist();renderWeaponChecklist();updateStats();
       const t=document.getElementById('toast');
       t.textContent='Fortschritt importiert!';
@@ -7863,10 +8317,13 @@ const CHAPTERS=[
 
 function renderChapters(){
   const done=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
+  const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
   const toc=makeToc(CHAPTERS.map(c=>({id:`ch-${c.num}`,label:`Kap. ${String(c.num).padStart(2,'0')}`})));
   document.getElementById('ch-timeline').innerHTML=toc+CHAPTERS.map(c=>{
     const d=done.includes(c.num);
-    return `<div id="ch-${c.num}" class="ch-card${d?' ch-done':''}" style="scroll-margin-top:72px">
+    const _l=sp>0&&c.num>sp;
+    return `<div id="ch-${c.num}" class="ch-card${d?' ch-done':''}${_l?' spoiler-locked':''}" style="scroll-margin-top:72px">
+      ${_l?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${c.num} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
       <div class="ch-num-blk">
         <div class="ch-kap-lbl">KAP.</div>
         <div class="ch-num">${String(c.num).padStart(2,'0')}</div>
