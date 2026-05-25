@@ -6833,8 +6833,9 @@ function bossPlaceholder(b){
 let _pmList=[],_pmIndex=0,_pmTouchX=0;
 function openPlayMode(name){
   _pmList=(typeof _cheatBosses==='function')?_cheatBosses():BOSSES.slice();
-  if(!_pmList.length)_pmList=BOSSES.slice();
-  const i=_pmList.findIndex(b=>b.name===name);
+  let i=_pmList.findIndex(b=>b.name===name);
+  if(i<0){_pmList=BOSSES.slice();i=_pmList.findIndex(b=>b.name===name);}
+  if(!_pmList.length){_pmList=BOSSES.slice();i=Math.max(0,_pmList.findIndex(b=>b.name===name));}
   _pmIndex=i>=0?i:0;
   let ov=document.getElementById('playmode-overlay');
   if(!ov){
@@ -6883,7 +6884,8 @@ function pmToggleQR(){
 // ===== BOSS CHEAT-SHEET GENERATOR =====
 function _cheatBosses(){
   const reg=document.getElementById('bf-reg').value,type=document.getElementById('bf-type').value,pd=document.getElementById('bf-pd').value;
-  return BOSSES.filter(b=>(!reg||b.region.includes(reg))&&(!type||b.quest.includes(type))&&(!pd||b.parry_or_dodge.includes(pd)));
+  const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
+  return BOSSES.filter(b=>(!reg||b.region.includes(reg))&&(!type||b.quest.includes(type))&&(!pd||b.parry_or_dodge.includes(pd))&&!(sp>0&&b.chapter!=null&&b.chapter>sp));
 }
 function openCheatSheet(){
   let ov=document.getElementById('cheatsheet-modal');
