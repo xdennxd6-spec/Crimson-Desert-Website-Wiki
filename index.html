@@ -14,12 +14,12 @@
 <meta name="twitter:title" content="Crimson Desert — Guide Dashboard">
 <meta name="twitter:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
 <meta name="twitter:image" content="cd_assets/bosses/umbra-final.jpg">
-<meta name="theme-color" content="#080808">
+<meta name="theme-color" content="#060606">
 <link rel="manifest" href="site.webmanifest">
 <link rel="icon" type="image/jpeg" href="cd_assets/bosses/umbra-final.jpg">
 <link rel="apple-touch-icon" href="cd_assets/bosses/umbra-final.jpg">
-<link rel="preload" as="image" href="cd_assets/bosses/matthias.png">
-<link rel="preload" as="image" href="cd_assets/bosses/myurdin.png">
+<link rel="preload" as="image" href="cd_assets/bosses/matthias.webp">
+<link rel="preload" as="image" href="cd_assets/bosses/myurdin.webp">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -53,8 +53,8 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap');
 :root, [data-theme="dark"]{
   --bg:#060606;--bg2:#0d0c0c;--bg3:#161414;--sb:#080605;
   --red:#c0311f;--rhi:#e84535;--gold:#cc9f28;--gdim:#8f7020;--glo:#f4cc52;
@@ -150,6 +150,7 @@ body{
   background:linear-gradient(90deg,rgba(201,162,39,.11) 0%,transparent 85%);
   text-shadow:0 0 16px rgba(244,204,82,.2);
 }
+.ni:focus-visible,.recent-item:focus-visible{outline:2px solid var(--glo);outline-offset:-2px;color:var(--text)}
 .nicon{font-size:14px;width:20px;text-align:center;filter:drop-shadow(0 0 4px currentColor)}
 .sb-ft{padding:12px 18px;border-top:1px solid var(--bdr);font-size:10px;color:var(--dim);letter-spacing:.04em}
 
@@ -1339,7 +1340,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </div>
 </div>
 <div id="app">
-<nav id="sidebar">
+<nav id="sidebar" aria-label="Hauptnavigation">
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.08</div></div>
   <div class="sb-nav">
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
@@ -3061,37 +3062,37 @@ const WATCH_AND_LEARN=[
 // Lokale Boss-Bilder (cd_assets/bosses/) als primary, questlog-CDN als Fallback (BOSS_IMGS_CDN)
 // Defekte lokale Bilder (Priscus, Black Fang waren Placeholder) → direkt questlog-CDN als primary
 const BOSS_IMGS={
-  "Matthias":"cd_assets/bosses/matthias.png",
-  "Kailok the Hornsplitter":"cd_assets/bosses/kailok.png",
-  "Marni's Excavatron":"cd_assets/bosses/excavatron.png",
-  "Reed Devil":"cd_assets/bosses/reed_devil.png",
-  "Kearush the Slayer":"cd_assets/bosses/kearush.png",
-  "Draven the Crowcaller":"cd_assets/bosses/draven.png",
-  "Myurdin (Phase 1)":"cd_assets/bosses/myurdin.png",
-  "Lava Myurdin (Phase 2)":"cd_assets/bosses/lava_myurdin.png",
-  "Cassius Morten / Tenebrum":"cd_assets/bosses/cassius.png",
-  "Corrupted Caliburn":"cd_assets/bosses/gabriel.png",
-  "Gabriel Caliburn":"cd_assets/bosses/gabriel.png",
-  "One-Armed Ludvig":"cd_assets/bosses/ludvig.png",
-  "Lucian Bastier":"cd_assets/bosses/lucian.png",
-  "Saigord the Staglord":"cd_assets/bosses/saigord.png",
-  "Hexe Marie":"cd_assets/bosses/hexe_marie.png",
-  "Golden Star":"cd_assets/bosses/golden_star.png",
-  "Beloth the Darksworn":"cd_assets/bosses/beloth.png",
-  "White Horn":"cd_assets/bosses/white_horn.png",
-  "Umbra (Final)":"cd_assets/bosses/umbra-final.jpg",
+  "Matthias":"cd_assets/bosses/matthias.webp",
+  "Kailok the Hornsplitter":"cd_assets/bosses/kailok.webp",
+  "Marni's Excavatron":"cd_assets/bosses/excavatron.webp",
+  "Reed Devil":"cd_assets/bosses/reed_devil.webp",
+  "Kearush the Slayer":"cd_assets/bosses/kearush.webp",
+  "Draven the Crowcaller":"cd_assets/bosses/draven.webp",
+  "Myurdin (Phase 1)":"cd_assets/bosses/myurdin.webp",
+  "Lava Myurdin (Phase 2)":"cd_assets/bosses/lava_myurdin.webp",
+  "Cassius Morten / Tenebrum":"cd_assets/bosses/cassius.webp",
+  "Corrupted Caliburn":"cd_assets/bosses/gabriel.webp",
+  "Gabriel Caliburn":"cd_assets/bosses/gabriel.webp",
+  "One-Armed Ludvig":"cd_assets/bosses/ludvig.webp",
+  "Lucian Bastier":"cd_assets/bosses/lucian.webp",
+  "Saigord the Staglord":"cd_assets/bosses/saigord.webp",
+  "Hexe Marie":"cd_assets/bosses/hexe_marie.webp",
+  "Golden Star":"cd_assets/bosses/golden_star.webp",
+  "Beloth the Darksworn":"cd_assets/bosses/beloth.webp",
+  "White Horn":"cd_assets/bosses/white_horn.webp",
+  "Umbra (Final)":"cd_assets/bosses/umbra-final.webp",
   "Black Fang":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp",
-  "Avatar of Umbra":"cd_assets/bosses/avatar_umbra.png",
+  "Avatar of Umbra":"cd_assets/bosses/avatar_umbra.webp",
   "Priscus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp",
-  "Antumbra's Sword":"cd_assets/bosses/antumbra_sword.png",
-  "Gregor the Halberd of Carnage":"cd_assets/bosses/gregor.png",
-  "Walter Lanford":"cd_assets/bosses/walter_lanford.png",
-  "Master Du":"cd_assets/bosses/master_du.png",
-  "Fortain the Cursed Knight":"cd_assets/bosses/fortain.png",
-  "Awakened Ludvig":"cd_assets/bosses/awakened_ludvig.png",
-  "Awakened Lucian Bastier":"cd_assets/bosses/awakened_lucian.png",
-  "Marni's Clockwork Mantis":"cd_assets/bosses/clockwork_mantis.png",
-  "Turbine":"cd_assets/bosses/turbine.png"
+  "Antumbra's Sword":"cd_assets/bosses/antumbra_sword.webp",
+  "Gregor the Halberd of Carnage":"cd_assets/bosses/gregor.webp",
+  "Walter Lanford":"cd_assets/bosses/walter_lanford.webp",
+  "Master Du":"cd_assets/bosses/master_du.webp",
+  "Fortain the Cursed Knight":"cd_assets/bosses/fortain.webp",
+  "Awakened Ludvig":"cd_assets/bosses/awakened_ludvig.webp",
+  "Awakened Lucian Bastier":"cd_assets/bosses/awakened_lucian.webp",
+  "Marni's Clockwork Mantis":"cd_assets/bosses/clockwork_mantis.webp",
+  "Turbine":"cd_assets/bosses/turbine.webp"
 };
 
 // questlog-CDN-Fallback fuer alle Bosse mit gefundener NPC-ID (onerror cascade)
@@ -3124,26 +3125,26 @@ const BOSS_IMGS_CDN={
   "Walter Lanford":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_walter_bliss.webp"
 };
 const SKILL_IMGS={
-  "Blinding Flash":              "cd_assets/skills/blinding_flash.png",
-  "Charge":                      "cd_assets/skills/charge.png",
-  "Flame Strike":                "cd_assets/skills/flame_strike.png",
-  "Frost Mantle":                "cd_assets/skills/frost_mantle.png",
-  "Lightning Surge":             "cd_assets/skills/lightning_surge.png",
-  "Flight (Crow's Wing)":        "cd_assets/skills/flight.png",
-  "Parry":                       "cd_assets/skills/parry.png",
-  "Evasive Roll":                "cd_assets/skills/evasive_roll.png",
-  "Counter":                     "cd_assets/skills/counter.png",
-  "Falling Palm (Center-Skill)": "cd_assets/skills/falling_palm.png",
-  "Aerial Force Palm":           "cd_assets/skills/aerial_force_palm.png",
-  "Force Palm":                  "cd_assets/skills/force_palm.png",
-  "Dodge":                       "cd_assets/skills/dodge.png",
-  "Focus":                       "cd_assets/skills/focus.png",
-  "Nature's Snare":              "cd_assets/skills/natures_snare.png",
-  "Nature's Echo":               "cd_assets/skills/natures_echo.png",
-  "Diving Force Palm":           "cd_assets/skills/diving_force_palm.png",
-  "Quick Swap":                  "cd_assets/skills/quick_swap.png",
-  "Aerial Stab":                 "cd_assets/skills/aerial_stab.png",
-  "Aerial Stab [1.07]":          "cd_assets/skills/aerial_stab.png"
+  "Blinding Flash":              "cd_assets/skills/blinding_flash.webp",
+  "Charge":                      "cd_assets/skills/charge.webp",
+  "Flame Strike":                "cd_assets/skills/flame_strike.webp",
+  "Frost Mantle":                "cd_assets/skills/frost_mantle.webp",
+  "Lightning Surge":             "cd_assets/skills/lightning_surge.webp",
+  "Flight (Crow's Wing)":        "cd_assets/skills/flight.webp",
+  "Parry":                       "cd_assets/skills/parry.webp",
+  "Evasive Roll":                "cd_assets/skills/evasive_roll.webp",
+  "Counter":                     "cd_assets/skills/counter.webp",
+  "Falling Palm (Center-Skill)": "cd_assets/skills/falling_palm.webp",
+  "Aerial Force Palm":           "cd_assets/skills/aerial_force_palm.webp",
+  "Force Palm":                  "cd_assets/skills/force_palm.webp",
+  "Dodge":                       "cd_assets/skills/dodge.webp",
+  "Focus":                       "cd_assets/skills/focus.webp",
+  "Nature's Snare":              "cd_assets/skills/natures_snare.webp",
+  "Nature's Echo":               "cd_assets/skills/natures_echo.webp",
+  "Diving Force Palm":           "cd_assets/skills/diving_force_palm.webp",
+  "Quick Swap":                  "cd_assets/skills/quick_swap.webp",
+  "Aerial Stab":                 "cd_assets/skills/aerial_stab.webp",
+  "Aerial Stab [1.07]":          "cd_assets/skills/aerial_stab.webp"
 };
 
 const WEAPON_IMGS={
@@ -3179,7 +3180,7 @@ const WEAPON_IMGS={
   "Aeserion Bow":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/13/Aeserion_bow_weapons_crimson_desert_wiki_guide_150px.png",
   "Demenissian Hero's Musket":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8c/Demenissian_heros_musket_weapons_crimson_desert_wiki_guide_150px.png",
   "Caliburn's Mercy Pistol":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6b/Caliburns_mercy_pistol_weapons_crimson_desert_wiki_guide_150px.png",
-  "Vow of the Dead King":"cd_assets/weapons/vow-of-the-dead-king.png",
+  "Vow of the Dead King":"cd_assets/weapons/vow-of-the-dead-king.webp",
   "Aeserion Halberd":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/fe/Aeserion_halberd_weapons_crimson_desert_wiki_guide_150px.png",
   "Earthsplitter":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8f/Earthsplitter_weapons_crimson_desert_wiki_guide_150px.png",
   "Aeserion Greataxe":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/5f/Aeserion_greataxe_weapons_crimson_desert_wiki_guide_150px.png",
@@ -3191,7 +3192,7 @@ const WEAPON_IMGS={
   "Reckoning":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b2/Reckoning_weapons_crimson_desert_wiki_guide_150px.png",
   "Aeserion Spear":"https://static0.fextralifeimages.com/file/crimsondesertgame/4/47/Aeserion_spear_weapons_crimson_desert_wiki_guide_150px.png",
   "Frozen Anguish":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/65/Frozen_anguish_weapons_crimson_desert_wiki_guide_150px.png",
-  "Twisted Verdict":"cd_assets/weapons/twisted-verdict.png",
+  "Twisted Verdict":"cd_assets/weapons/twisted-verdict.webp",
   "Darkbringer":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/29/Darkbringer_weapons_crimson_desert_wiki_guide_150px.png",
   "Aeserion Longsword":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/67/Aeserion_longsword_weapons_crimson_desert_wiki_guide_150px.png",
   "Kuku Spear":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/29/Kuku_spear_weapons_crimson_desert_wiki_guide_150px.png",
@@ -3219,10 +3220,10 @@ const WEAPON_IMGS={
   "Drakhan Hammer":"https://static0.fextralifeimages.com/file/crimsondesertgame/d/df/Drakhan_hammer_weapons_crimson_desert_wiki_guide_150px.png",
   "Leonne Rapier":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/a8/Leonne_rapier_weapons_crimson_desert_wiki_guide_150px.png",
   "Liberre Rapier":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/2d/Liberre_rapier_weapons_crimson_desert_wiki_guide_150px.png",
-  "Brass Rose Rapier":"cd_assets/weapons/brass-rose-rapier.png",
+  "Brass Rose Rapier":"cd_assets/weapons/brass-rose-rapier.webp",
   "Fallen Noble's Rapier":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/1c/Fallen_nobles_rapier_weapons_crimson_desert_wiki_guide_150px.png",
-  "Survivor's Solitude":"cd_assets/weapons/survivors-solitude.png",
-  "Melted Ambition":"cd_assets/weapons/melted-ambition.png",
+  "Survivor's Solitude":"cd_assets/weapons/survivors-solitude.webp",
+  "Melted Ambition":"cd_assets/weapons/melted-ambition.webp",
   "Sword of Greed":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6d/Sword_of_greed_weapons_crimson_desert_wiki_guide_150px.png",
   "Nazk Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/60/Nazk_sword_weapons_crimson_desert_wiki_guide_150px.png",
   "Peltree Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/70/Peltree_sword_weapons_crimson_desert_wiki_guide_150px.png",
@@ -3249,19 +3250,19 @@ const WEAPON_IMGS={
   "Sanguine Knell":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/67/Sanguine_knell_weapons_crimson_desert_wiki_guide_150px.png",
   "Guidance of Dark Pursuit":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/13/Guidance_of_dark_pursuit_weapons_crimson_desert_wiki_guide_150px.png",
   "Oblivion of the Past":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/78/Oblivion_of_the_past_weapons_crimson_desert_wiki_guide_150px.png",
-  "Crow Whisperer":"cd_assets/weapons/crow-whisperer.png",
+  "Crow Whisperer":"cd_assets/weapons/crow-whisperer.webp",
   "Dark Worshiper's Staff":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c5/Dark_worshipers_staff_weapons_crimson_desert_wiki_guide_150px.png",
   "Thorn of Dark Pursuit":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/87/Thorn_of_dark_pursuit_weapons_crimson_desert_wiki_guide_150px.png",
   "Frostfang":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b2/Frostfang_weapons_crimson_desert_wiki_guide_150px.png",
   "Elite Vanguard":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/3e/Elite_vanguard_weapons_crimson_desert_wiki_guide_150px.png",
   "Sorcerer's Staff":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/66/Sorcerers_staff_weapons_crimson_desert_wiki_guide_150px.png",
   "Traitor's Spear":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/14/Traitors_spear_weapons_crimson_desert_wiki_guide_150px.png",
-  "Vessel of Dark Pursuit":"cd_assets/weapons/vessel-of-dark-pursuit.png",
+  "Vessel of Dark Pursuit":"cd_assets/weapons/vessel-of-dark-pursuit.webp",
   "Bringer of Balance":"https://static0.fextralifeimages.com/file/crimsondesertgame/0/0b/Bringer_of_balance_weapons_crimson_desert_wiki_guide_150px.png",
   "Righteous Verdict":"https://static0.fextralifeimages.com/file/crimsondesertgame/0/0d/Righteous_verdict_weapons_crimson_desert_wiki_guide_150px.png",
   "Savage Longsword":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/e8/Savage_longsword_weapons_crimson_desert_wiki_guide_150px.png",
   "Delesyian Longsword":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/b7/Delesyian_longsword_weapons_crimson_desert_wiki_guide_150px.png",
-  "Hwando":"cd_assets/weapons/hwando.png",
+  "Hwando":"cd_assets/weapons/hwando.webp",
   "Dandelion Longsword":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/5c/Dandelion_longsword_weapons_crimson_desert_wiki_guide_150px.png",
   "Serdin Greatsword Giant":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6d/Serdin_greatsword_giant_weapons_crimson_desert_wiki_guide_150px.png",
   "Verak Greatsword Giant":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/74/Verak_greatsword_giant_weapons_crimson_desert_wiki_guide_150px.png",
@@ -3302,14 +3303,14 @@ const WEAPON_IMGS={
   "Wolf's Fang":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/2a/Wolfs_fang_weapons_crimson_desert_wiki_guide_150px.png",
   "Spada Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6b/Spada_sword_weapons_crimson_desert_wiki_guide_150px.png",
   "Shackle of Might":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c2/Shackle_of_might_weapons_crimson_desert_wiki_guide_150px.png",
-  "Tauria Curved Sword":"cd_assets/weapons/tauria-curved-sword.png",
-  "Hollow Visage":"cd_assets/weapons/hollow-visage.png",
+  "Tauria Curved Sword":"cd_assets/weapons/tauria-curved-sword.webp",
+  "Hollow Visage":"cd_assets/weapons/hollow-visage.webp",
   "Red Rage":"https://static0.fextralifeimages.com/file/crimsondesertgame/d/d7/Red_rage_weapons_crimson_desert_wiki_guide_150px.png",
   "Savage Sawblade":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/79/Savage_sawblade_weapons_crimson_desert_wiki_guide_150px.png",
   "Golden Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/35/Golden_sword_weapons_crimson_desert_wiki_guide_150px.png",
   "Sword of the Fleeting":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/cb/Sword_of_the_fleeting_weapons_crimson_desert_wiki_guide_150px.png",
   "Grey Wolf's Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6c/Grey_wolfs_sword_weapons_crimson_desert_wiki_guide_150px.png",
-  "Alabaster Curved Sword":"cd_assets/weapons/alabaster-curved-sword.png",
+  "Alabaster Curved Sword":"cd_assets/weapons/alabaster-curved-sword.webp",
   "Volono Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/3/3f/Volono_sword_weapons_crimson_desert_wiki_guide_150px.png",
   "Shadowleaf Bow":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/54/Shadowleaf_bow_weapons_crimson_desert_wiki_guide_150px.png",
   "Twilight Messengers' Bow":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/af/Twilight_messengers_bow_weapons_crimson_desert_wiki_guide_150px.png",
@@ -3401,7 +3402,7 @@ const WEAPON_IMGS={
   "Gilliam Rapier":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/5f/Gilliam_rapier_weapons_crimson_desert_wiki_guide_150px.png",
   "Lambert Rapier":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c0/Lambert_rapier_weapons_crimson_desert_wiki_guide_150px.png",
   "White Wind Rapier":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/20/White_wind_rapier_weapons_crimson_desert_wiki_guide_150px.png",
-  "Sword of the Lord":"cd_assets/weapons/sword-of-the-lord.png",
+  "Sword of the Lord":"cd_assets/weapons/sword-of-the-lord.webp",
   "Lightningblade of Greed":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6e/Lightningblade_of_greed_weapons_crimson_desert_wiki_guide_150px.png",
   "Fallen Kingdom's Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/9b/Fallen_kingdoms_sword_weapons_crimson_desert_wiki_guide_150px.png",
   "Sydmon Sword":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/52/Sydmon_sword_weapons_crimson_desert_wiki_guide_150px.png",
@@ -3587,7 +3588,7 @@ const WEAPON_IMGS={
   "Demeniss Royal Guard Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/2/22/Demeniss_royal_guard_shield_shields_crimson_desert_wiki_guide_150px.png",
   "Shield of Radiance":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/64/Shield_of_radiance_shields_crimson_desert_wiki_guide_150px.png",
   "Kutum Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/e9/Kutum_shield_shields_crimson_desert_wiki_guide_150px.png",
-  "Staglord's Shield":"cd_assets/weapons/staglords-shield.png",
+  "Staglord's Shield":"cd_assets/weapons/staglords-shield.webp",
   "Black Sun Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/f7/Black_sun_shield_shields_crimson_desert_wiki_guide_150px.png",
   "Mirror of Night Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/9c/Mirror_of_night_shield_shields_crimson_desert_wiki_guide_150px.png",
   "Frostbone Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/ae/Frostbone_shield_shields_crimson_desert_wiki_guide_150px.png",
@@ -3891,39 +3892,39 @@ const PETS=[
 
 ];
 const MOUNT_IMGS={
-  "Herspia":                  "cd_assets/mounts/herspia.png",
-  "Royler":                   "cd_assets/mounts/royler.png",
-  "Rokade":                   "cd_assets/mounts/rokade.png",
-  "Camora":                   "cd_assets/mounts/camora.png",
-  "Brianto":                  "cd_assets/mounts/brianto.png",
-  "Elantrima":                "cd_assets/mounts/elantrima.png",
-  "Numont":                   "cd_assets/mounts/numont.png",
-  "Priden":                   "cd_assets/mounts/priden.png",
-  "Blackstar":                "cd_assets/mounts/blackstar.png",
-  "Wild Wyvern":              "cd_assets/mounts/wild-wyvern.png",
-  "Silver Fang":              "cd_assets/mounts/silver-fang.png",
-  "White Bear":               "cd_assets/mounts/white-bear.png",
-  "Snowwhite Deer":           "cd_assets/mounts/snowwhite-deer.png",
-  "Icicle Edge Alpine Ibex":  "cd_assets/mounts/icicle-ibex.png",
-  "Rock Tusk Warthog":        "cd_assets/mounts/rock-tusk-warthog.png",
-  "Black Bear":               "cd_assets/mounts/black-bear.png",
-  "Brown Bear":               "cd_assets/mounts/brown-bear.png",
-  "Boar":                     "cd_assets/mounts/boar.png",
-  "Buffalo":                  "cd_assets/mounts/buffalo.png",
-  "Camel":                    "cd_assets/mounts/camel.png",
-  "Cow":                      "cd_assets/mounts/cow.png",
-  "Elephant":                 "cd_assets/mounts/elephant.png",
-  "Greywolf":                 "cd_assets/mounts/greywolf.png",
-  "Giant Iguana":             "cd_assets/mounts/giant-iguana.png",
-  "Kuku Bird Hatchling":      "cd_assets/mounts/kuku-bird-hatchling.png",
-  "Lion":                     "cd_assets/mounts/lion.png",
-  "Tiger":                    "cd_assets/mounts/tiger.png",
-  "Raptor":                   "cd_assets/mounts/raptor.png",
-  "Cloudcart":                "cd_assets/mounts/cloudcart.png",
-  "Wagon Horse":              "cd_assets/mounts/wagon-horse.png",
-  "Train":                    "cd_assets/mounts/train.png",
-  "Herspia Packhorse":        "cd_assets/mounts/herspia-packhorse.png",
-  "Marni's Mechahorse":       "cd_assets/mounts/marnis-mechahorse.png"
+  "Herspia":                  "cd_assets/mounts/herspia.webp",
+  "Royler":                   "cd_assets/mounts/royler.webp",
+  "Rokade":                   "cd_assets/mounts/rokade.webp",
+  "Camora":                   "cd_assets/mounts/camora.webp",
+  "Brianto":                  "cd_assets/mounts/brianto.webp",
+  "Elantrima":                "cd_assets/mounts/elantrima.webp",
+  "Numont":                   "cd_assets/mounts/numont.webp",
+  "Priden":                   "cd_assets/mounts/priden.webp",
+  "Blackstar":                "cd_assets/mounts/blackstar.webp",
+  "Wild Wyvern":              "cd_assets/mounts/wild-wyvern.webp",
+  "Silver Fang":              "cd_assets/mounts/silver-fang.webp",
+  "White Bear":               "cd_assets/mounts/white-bear.webp",
+  "Snowwhite Deer":           "cd_assets/mounts/snowwhite-deer.webp",
+  "Icicle Edge Alpine Ibex":  "cd_assets/mounts/icicle-ibex.webp",
+  "Rock Tusk Warthog":        "cd_assets/mounts/rock-tusk-warthog.webp",
+  "Black Bear":               "cd_assets/mounts/black-bear.webp",
+  "Brown Bear":               "cd_assets/mounts/brown-bear.webp",
+  "Boar":                     "cd_assets/mounts/boar.webp",
+  "Buffalo":                  "cd_assets/mounts/buffalo.webp",
+  "Camel":                    "cd_assets/mounts/camel.webp",
+  "Cow":                      "cd_assets/mounts/cow.webp",
+  "Elephant":                 "cd_assets/mounts/elephant.webp",
+  "Greywolf":                 "cd_assets/mounts/greywolf.webp",
+  "Giant Iguana":             "cd_assets/mounts/giant-iguana.webp",
+  "Kuku Bird Hatchling":      "cd_assets/mounts/kuku-bird-hatchling.webp",
+  "Lion":                     "cd_assets/mounts/lion.webp",
+  "Tiger":                    "cd_assets/mounts/tiger.webp",
+  "Raptor":                   "cd_assets/mounts/raptor.webp",
+  "Cloudcart":                "cd_assets/mounts/cloudcart.webp",
+  "Wagon Horse":              "cd_assets/mounts/wagon-horse.webp",
+  "Train":                    "cd_assets/mounts/train.webp",
+  "Herspia Packhorse":        "cd_assets/mounts/herspia-packhorse.webp",
+  "Marni's Mechahorse":       "cd_assets/mounts/marnis-mechahorse.webp"
 };
 const MOUNT_INGAME_IMGS={
   "Herspia":        "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_animal_lumif_wild_32506.webp",
@@ -3993,98 +3994,98 @@ const MOUNT_INGAME_IMGS={
 };
 const ARMOR_IMGS={
   // Torso
-  "Ashclaw Leather Armor":"cd_assets/armor/ashclaw-leather.png",
-  "Belkandor Plate Armor":"cd_assets/armor/belkandor-plate.png",
-  "Blackwing Leather Armor":"cd_assets/armor/blackwing-leather.png",
-  "Bolton Plate Armor":"cd_assets/armor/bolton-plate.png",
-  "Canta Plate Armor":"cd_assets/armor/canta-plate.png",
-  "Dark Ringleader's Cloth Armor":"cd_assets/armor/dark-ringleader-cloth.png",
-  "Demeniss Elite Uniform":"cd_assets/armor/demeniss-elite-uniform.png",
-  "Duskfang Leather Armor":"cd_assets/armor/duskfang-leather.png",
-  "Elegant Carmine Leather Armor":"cd_assets/armor/elegant-carmine-leather.png",
-  "Frostcursed Plate Armor":"cd_assets/armor/frostcursed-plate.png",
-  "Golden Greed Plate Armor":"cd_assets/armor/golden-greed-plate.png",
-  "Grey Wolf Leather Armor":"cd_assets/armor/grey-wolf-leather.png",
-  "Hernand Ceremonial Guard Armor":"cd_assets/armor/hernand-ceremonial-guard.png",
-  "Jackals' Leather Armor":"cd_assets/armor/jackals-leather.png",
-  "Leather Armor of the Fallen Kingdom":"cd_assets/armor/leather-armor-fallen.png",
-  "Light of the Battlefield Plate Armor":"cd_assets/armor/light-battlefield-plate.png",
-  "Northern Fighter's Chain Mail":"cd_assets/armor/northern-chainmail.png",
-  "Official Knight's Plate Armor":"cd_assets/armor/official-knights-plate.png",
-  "Plate Armor of Cursed Soul":"cd_assets/armor/plate-armor-cursed-soul.png",
-  "Plate Armor of the Shadows":"cd_assets/armor/plate-armor-shadows.png",
-  "Scarlet Blades Cloth Armor":"cd_assets/armor/scarlet-blades-cloth.png",
-  "Scholastone Uniform":"cd_assets/armor/scholastone-uniform.png",
-  "Scorchflame Plate Armor":"cd_assets/armor/scorchflame-plate.png",
-  "Skyblazer Cloth Armor":"cd_assets/armor/skyblazer-cloth.png",
-  "Solas Plate Armor":"cd_assets/armor/solas-plate.png",
-  "Sunset Reed Leather Armor":"cd_assets/armor/sunset-reed-leather.png",
-  "Unyielding Warrior's Plate Armor":"cd_assets/armor/unyielding-warriors-plate.png",
-  "Weasel Leather Armor":"cd_assets/armor/weasel-leather.png",
-  "Ynitium Leather Armor":"cd_assets/armor/ynitium-leather.png",
+  "Ashclaw Leather Armor":"cd_assets/armor/ashclaw-leather.webp",
+  "Belkandor Plate Armor":"cd_assets/armor/belkandor-plate.webp",
+  "Blackwing Leather Armor":"cd_assets/armor/blackwing-leather.webp",
+  "Bolton Plate Armor":"cd_assets/armor/bolton-plate.webp",
+  "Canta Plate Armor":"cd_assets/armor/canta-plate.webp",
+  "Dark Ringleader's Cloth Armor":"cd_assets/armor/dark-ringleader-cloth.webp",
+  "Demeniss Elite Uniform":"cd_assets/armor/demeniss-elite-uniform.webp",
+  "Duskfang Leather Armor":"cd_assets/armor/duskfang-leather.webp",
+  "Elegant Carmine Leather Armor":"cd_assets/armor/elegant-carmine-leather.webp",
+  "Frostcursed Plate Armor":"cd_assets/armor/frostcursed-plate.webp",
+  "Golden Greed Plate Armor":"cd_assets/armor/golden-greed-plate.webp",
+  "Grey Wolf Leather Armor":"cd_assets/armor/grey-wolf-leather.webp",
+  "Hernand Ceremonial Guard Armor":"cd_assets/armor/hernand-ceremonial-guard.webp",
+  "Jackals' Leather Armor":"cd_assets/armor/jackals-leather.webp",
+  "Leather Armor of the Fallen Kingdom":"cd_assets/armor/leather-armor-fallen.webp",
+  "Light of the Battlefield Plate Armor":"cd_assets/armor/light-battlefield-plate.webp",
+  "Northern Fighter's Chain Mail":"cd_assets/armor/northern-chainmail.webp",
+  "Official Knight's Plate Armor":"cd_assets/armor/official-knights-plate.webp",
+  "Plate Armor of Cursed Soul":"cd_assets/armor/plate-armor-cursed-soul.webp",
+  "Plate Armor of the Shadows":"cd_assets/armor/plate-armor-shadows.webp",
+  "Scarlet Blades Cloth Armor":"cd_assets/armor/scarlet-blades-cloth.webp",
+  "Scholastone Uniform":"cd_assets/armor/scholastone-uniform.webp",
+  "Scorchflame Plate Armor":"cd_assets/armor/scorchflame-plate.webp",
+  "Skyblazer Cloth Armor":"cd_assets/armor/skyblazer-cloth.webp",
+  "Solas Plate Armor":"cd_assets/armor/solas-plate.webp",
+  "Sunset Reed Leather Armor":"cd_assets/armor/sunset-reed-leather.webp",
+  "Unyielding Warrior's Plate Armor":"cd_assets/armor/unyielding-warriors-plate.webp",
+  "Weasel Leather Armor":"cd_assets/armor/weasel-leather.webp",
+  "Ynitium Leather Armor":"cd_assets/armor/ynitium-leather.webp",
   // Kopf
-  "Alpha Wolf Helm":"cd_assets/armor/alpha-wolf-helm.png",
-  "Ashad Plate Helm":"cd_assets/armor/ashad-plate-helm.png",
-  "Blackwing Leather Mask":"cd_assets/armor/blackwing-mask.png",
-  "Bolton Plate Helm":"cd_assets/armor/bolton-plate-helm.png",
-  "Canta Plate Helm":"cd_assets/armor/canta-plate-helm.png",
-  "Dark Ringleader's Cloth Helm":"cd_assets/armor/dark-ringleader-helm.png",
-  "Flame Knight's Plate Helm":"cd_assets/armor/flame-knights-helm.png",
-  "Frostcursed Plate Helm":"cd_assets/armor/frostcursed-plate-helm.png",
-  "Golden Greed Plate Helm":"cd_assets/armor/golden-greed-helm.png",
-  "Helm of Ignition":"cd_assets/armor/helm-of-ignition.png",
-  "Helm of Knowledge":"cd_assets/armor/helm-of-knowledge.png",
-  "Hernandian Crown":"cd_assets/armor/hernandian-crown.png",
-  "Jackals' Leather Helm":"cd_assets/armor/jackals-helm.png",
-  "Leather Helm of the Fallen Kingdom":"cd_assets/armor/leather-helm-fallen.png",
-  "Light of the Battlefield Plate Helm":"cd_assets/armor/light-battlefield-helm.png",
-  "Plate Helm of Cursed Soul":"cd_assets/armor/plate-helm-cursed-soul.png",
-  "Scorchflame Plate Helm":"cd_assets/armor/scorchflame-helm.png",
-  "Unyielding Warrior's Plate Helm":"cd_assets/armor/unyielding-warriors-helm.png",
-  "Visione Helm":"cd_assets/armor/visione-helm.png",
+  "Alpha Wolf Helm":"cd_assets/armor/alpha-wolf-helm.webp",
+  "Ashad Plate Helm":"cd_assets/armor/ashad-plate-helm.webp",
+  "Blackwing Leather Mask":"cd_assets/armor/blackwing-mask.webp",
+  "Bolton Plate Helm":"cd_assets/armor/bolton-plate-helm.webp",
+  "Canta Plate Helm":"cd_assets/armor/canta-plate-helm.webp",
+  "Dark Ringleader's Cloth Helm":"cd_assets/armor/dark-ringleader-helm.webp",
+  "Flame Knight's Plate Helm":"cd_assets/armor/flame-knights-helm.webp",
+  "Frostcursed Plate Helm":"cd_assets/armor/frostcursed-plate-helm.webp",
+  "Golden Greed Plate Helm":"cd_assets/armor/golden-greed-helm.webp",
+  "Helm of Ignition":"cd_assets/armor/helm-of-ignition.webp",
+  "Helm of Knowledge":"cd_assets/armor/helm-of-knowledge.webp",
+  "Hernandian Crown":"cd_assets/armor/hernandian-crown.webp",
+  "Jackals' Leather Helm":"cd_assets/armor/jackals-helm.webp",
+  "Leather Helm of the Fallen Kingdom":"cd_assets/armor/leather-helm-fallen.webp",
+  "Light of the Battlefield Plate Helm":"cd_assets/armor/light-battlefield-helm.webp",
+  "Plate Helm of Cursed Soul":"cd_assets/armor/plate-helm-cursed-soul.webp",
+  "Scorchflame Plate Helm":"cd_assets/armor/scorchflame-helm.webp",
+  "Unyielding Warrior's Plate Helm":"cd_assets/armor/unyielding-warriors-helm.webp",
+  "Visione Helm":"cd_assets/armor/visione-helm.webp",
   // Hände
-  "Blackwing Leather Gloves":"cd_assets/armor/blackwing-leather-gloves.png",
-  "Canta Plate Gloves":"cd_assets/armor/canta-plate-gloves.png",
-  "Combat God's Plate Gloves":"cd_assets/armor/combat-gods-gloves.png",
-  "Counterweight Leather Gloves":"cd_assets/armor/counterweight-gloves.png",
-  "Demeniss Elite Gloves":"cd_assets/armor/demeniss-elite-gloves.png",
-  "Duskfang Leather Gloves":"cd_assets/armor/duskfang-gloves.png",
-  "Frostcursed Plate Gloves":"cd_assets/armor/frostcursed-gloves.png",
-  "Golden Greed Plate Gloves":"cd_assets/armor/golden-greed-gloves.png",
-  "Hernand Ceremonial Guard Gloves":"cd_assets/armor/hernand-ceremonial-gloves.png",
-  "Light of the Battlefield Plate Gloves":"cd_assets/armor/light-battlefield-gloves.png",
-  "Plate Gloves of Cursed Soul":"cd_assets/armor/plate-gloves-cursed-soul.png",
-  "Plate Gloves of the Shadows":"cd_assets/armor/plate-gloves-shadows.png",
-  "Scorchflame Plate Gloves":"cd_assets/armor/scorchflame-gloves.png",
-  "Ynitium Leather Gloves":"cd_assets/armor/ynitium-gloves.png",
+  "Blackwing Leather Gloves":"cd_assets/armor/blackwing-leather-gloves.webp",
+  "Canta Plate Gloves":"cd_assets/armor/canta-plate-gloves.webp",
+  "Combat God's Plate Gloves":"cd_assets/armor/combat-gods-gloves.webp",
+  "Counterweight Leather Gloves":"cd_assets/armor/counterweight-gloves.webp",
+  "Demeniss Elite Gloves":"cd_assets/armor/demeniss-elite-gloves.webp",
+  "Duskfang Leather Gloves":"cd_assets/armor/duskfang-gloves.webp",
+  "Frostcursed Plate Gloves":"cd_assets/armor/frostcursed-gloves.webp",
+  "Golden Greed Plate Gloves":"cd_assets/armor/golden-greed-gloves.webp",
+  "Hernand Ceremonial Guard Gloves":"cd_assets/armor/hernand-ceremonial-gloves.webp",
+  "Light of the Battlefield Plate Gloves":"cd_assets/armor/light-battlefield-gloves.webp",
+  "Plate Gloves of Cursed Soul":"cd_assets/armor/plate-gloves-cursed-soul.webp",
+  "Plate Gloves of the Shadows":"cd_assets/armor/plate-gloves-shadows.webp",
+  "Scorchflame Plate Gloves":"cd_assets/armor/scorchflame-gloves.webp",
+  "Ynitium Leather Gloves":"cd_assets/armor/ynitium-gloves.webp",
   // Schuhe
-  "Ashen Wolf's Leather Boots":"cd_assets/armor/ashen-wolf-boots.png",
-  "Autumn Banquet Leather Boots":"cd_assets/armor/autumn-banquet-boots.png",
-  "Belkandor Plate Boots":"cd_assets/armor/belkandor-plate-boots.png",
-  "Blackwing Leather Boots":"cd_assets/armor/blackwing-leather-boots.png",
-  "Bolton Leather Boots":"cd_assets/armor/bolton-leather-boots.png",
-  "Canta Plate Boots":"cd_assets/armor/canta-plate-boots.png",
-  "Dark Marksman's Plate Boots":"cd_assets/armor/dark-marksman-boots.png",
-  "Embersteps Leather Boots":"cd_assets/armor/embersteps-boots.png",
-  "Fire Walk Boots":"cd_assets/armor/fire-walk-boots.png",
-  "Frostcursed Plate Boots":"cd_assets/armor/frostcursed-plate-boots.png",
-  "Golden Greed Plate Boots":"cd_assets/armor/golden-greed-boots.png",
-  "Hernand Ceremonial Guard Boots":"cd_assets/armor/hernand-ceremonial-boots.png",
-  "Icewing Plate Boots":"cd_assets/armor/icewing-plate-boots.png",
-  "Kairos Plate Boots":"cd_assets/armor/kairos-plate-boots.png",
+  "Ashen Wolf's Leather Boots":"cd_assets/armor/ashen-wolf-boots.webp",
+  "Autumn Banquet Leather Boots":"cd_assets/armor/autumn-banquet-boots.webp",
+  "Belkandor Plate Boots":"cd_assets/armor/belkandor-plate-boots.webp",
+  "Blackwing Leather Boots":"cd_assets/armor/blackwing-leather-boots.webp",
+  "Bolton Leather Boots":"cd_assets/armor/bolton-leather-boots.webp",
+  "Canta Plate Boots":"cd_assets/armor/canta-plate-boots.webp",
+  "Dark Marksman's Plate Boots":"cd_assets/armor/dark-marksman-boots.webp",
+  "Embersteps Leather Boots":"cd_assets/armor/embersteps-boots.webp",
+  "Fire Walk Boots":"cd_assets/armor/fire-walk-boots.webp",
+  "Frostcursed Plate Boots":"cd_assets/armor/frostcursed-plate-boots.webp",
+  "Golden Greed Plate Boots":"cd_assets/armor/golden-greed-boots.webp",
+  "Hernand Ceremonial Guard Boots":"cd_assets/armor/hernand-ceremonial-boots.webp",
+  "Icewing Plate Boots":"cd_assets/armor/icewing-plate-boots.webp",
+  "Kairos Plate Boots":"cd_assets/armor/kairos-plate-boots.webp",
   "Kuku Ice-Resistant Armor":"https://cdn-hosted.gaming.tools/crimson-desert/images/ui/texture/icon/itemicon_prefab_cd_m0001_00_skullknight_ub_0003_index01.webp?v=1778445421559",
-  "Light of the Battlefield Plate Boots":"cd_assets/armor/light-battlefield-boots.png",
-  "Lightning Bolt Plate Boots":"cd_assets/armor/lightning-bolt-boots.png",
-  "Pailunese Boots":"cd_assets/armor/pailunese-boots.png",
+  "Light of the Battlefield Plate Boots":"cd_assets/armor/light-battlefield-boots.webp",
+  "Lightning Bolt Plate Boots":"cd_assets/armor/lightning-bolt-boots.webp",
+  "Pailunese Boots":"cd_assets/armor/pailunese-boots.webp",
   // Mantel
-  "Ashad Plate Cloak":"cd_assets/armor/ashad-plate-cloak.png",
-  "Ashen Wolf's Leather Cloak":"cd_assets/armor/ashen-wolf-cloak.png",
-  "Belkandor Plate Cloak":"cd_assets/armor/belkandor-plate-cloak.png",
-  "Black Bears' Cloth Cloak":"cd_assets/armor/black-bears-cloak.png",
-  "Blackwing Leather Cloak":"cd_assets/armor/blackwing-leather-cloak.png",
-  "Bolton Plate Cloak":"cd_assets/armor/bolton-plate-cloak.png",
-  "Dragon Flame Cloak":"cd_assets/armor/dragon-flame-cloak.png",
-  "Hernandian Banquet Cloak":"cd_assets/armor/hernandian-cloak.png"
+  "Ashad Plate Cloak":"cd_assets/armor/ashad-plate-cloak.webp",
+  "Ashen Wolf's Leather Cloak":"cd_assets/armor/ashen-wolf-cloak.webp",
+  "Belkandor Plate Cloak":"cd_assets/armor/belkandor-plate-cloak.webp",
+  "Black Bears' Cloth Cloak":"cd_assets/armor/black-bears-cloak.webp",
+  "Blackwing Leather Cloak":"cd_assets/armor/blackwing-leather-cloak.webp",
+  "Bolton Plate Cloak":"cd_assets/armor/bolton-plate-cloak.webp",
+  "Dragon Flame Cloak":"cd_assets/armor/dragon-flame-cloak.webp",
+  "Hernandian Banquet Cloak":"cd_assets/armor/hernandian-cloak.webp"
 ,
   "Desert Marauder's Plate Helm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_07_hel_00_0319_c.webp",
   "Autumn Banquet Leather Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0161.webp",
@@ -5774,7 +5775,7 @@ function renderRecentSidebar(){
   el.innerHTML=r.map(x=>{
     const info=FAV_KINDS[x.kind]||{ico:'·'};
     const safe=x.name.replace(/'/g,"\\'");
-    return `<div class="recent-item" onclick="showSec('${x.sec}');document.getElementById('si').value='${safe}';doSearch('${safe}')" title="${x.name.replace(/"/g,'&quot;')}">
+    return `<div class="recent-item" role="button" tabindex="0" onclick="showSec('${x.sec}');document.getElementById('si').value='${safe}';doSearch('${safe}')" title="${x.name.replace(/"/g,'&quot;')}">
       <span class="recent-item-ico">${info.ico}</span>${x.name}
     </div>`;
   }).join('');
@@ -6291,9 +6292,10 @@ function showSec(id, opts){
     }
   }
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>{n.classList.remove('active');n.removeAttribute('aria-current');});
   sec.classList.add('active');
   nav.classList.add('active');
+  nav.setAttribute('aria-current','page');
   if(!opts.keepSearch){
     document.getElementById('si').value='';
     document.getElementById('scnt').textContent='';
@@ -8150,6 +8152,18 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
 
 // (Helper-Funktionen siehe ausserhalb des DOMContentLoaded-Blocks)
+
+  // ── Nav-Accessibility: Tastatur-Bedienung der Sidebar ───────────────
+  document.querySelectorAll('#sidebar .ni').forEach(ni=>{
+    ni.setAttribute('role','button');
+    ni.setAttribute('tabindex','0');
+  });
+  document.getElementById('sidebar').addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){
+      const item=e.target.closest('.ni,.recent-item');
+      if(item){e.preventDefault();item.click();}
+    }
+  });
 
   // Back-to-Top anzeigen ab 300px Scroll
   const btt=document.getElementById('btt');

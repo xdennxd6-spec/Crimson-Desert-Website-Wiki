@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://crimson-desert-website-wiki.netlify.app/sitemap.xml

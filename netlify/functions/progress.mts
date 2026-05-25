@@ -12,7 +12,7 @@ export default async (req: Request, context: Context) => {
 
   const headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://crimson-desert-website-wiki.netlify.app",
   };
 
   if (req.method === "GET") {
