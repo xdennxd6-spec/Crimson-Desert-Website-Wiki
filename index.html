@@ -1596,7 +1596,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <select class="fs" id="wf-type" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen-Compare">⚔️ Compare</button>
     </div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Typ</th><th>ATK</th><th>Crit</th><th>Slots</th><th>Fundort / Quelle</th><th>Built-in Cores</th><th>Notizen</th></tr></thead><tbody id="weapon-tb"></tbody></table></div>
+    <div class="grid" id="weapon-tb"></div>
     <div id="weapon-pager" class="wpg"></div>
   </section>
 
@@ -7003,16 +7003,21 @@ function renderWeapons(){
     if(passFilter){ if(searching){show=s.includes(q);} else {fi++;show=(fi>=start&&fi<end);} }
     const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
-    return `<tr class="trow${show?'':' hide'}" data-s="${s}">
-      <td><div style="display:flex;align-items:center;gap:9px">${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" onerror="this.style.display='none'" loading="lazy" decoding="async" width="36" height="36" alt="${alt}" style="width:36px;height:36px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:5px;padding:2px;flex-shrink:0">`:wTypeIcon(w.type)}<strong>${w.name}</strong></div></td>
-      <td><span class="tag tx">${w.type}</span></td>
-      <td>${w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>'}</td>
-      <td>${w.crit!=null?'<span class="crt">'+w.crit+'</span>':'<span class="dm">–</span>'}</td>
-      <td>${w.slots!=null?w.slots:'<span class="dm">–</span>'}</td>
-      <td style="max-width:210px;font-size:11.5px">${src}</td>
-      <td style="font-size:11.5px">${w.built_in||'–'}</td>
-      <td style="font-size:11px;color:var(--dim)">${w.notes||'–'}</td>
-    </tr>`;
+    const esc=v=>(v||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    return `<div class="card${show?'':' hide'}" data-s="${s}">
+      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
+      <div class="ct">${w.name}</div>
+      <div class="cm"><span class="tag tx">${w.type}</span></div>
+      <div class="crows">
+        <div class="crow"><span class="cl">ATK</span><span class="cv">${w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>'}</span></div>
+        <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':'<span class="dm">–</span>'}</span></div>
+        <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm">–</span>'}</span></div>
+        <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:11px">${src}</span></div>
+        ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:11px">${w.built_in}</span></div>`:''}
+        ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:11px;color:var(--dim)">${w.notes}</span></div>`:''}
+      </div>
+      <button class="map-pin-btn" onclick="showMapLoc('${esc(w.name)}','${esc(w.source)}','Waffe — ${w.type}')">📍 Auf Karte</button>
+    </div>`;
   }).join('');
   const pg=document.getElementById('weapon-pager');
   if(pg){
