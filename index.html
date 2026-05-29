@@ -1468,7 +1468,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </div>
 <div id="app">
 <nav id="sidebar" aria-label="Hauptnavigation">
-  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.08</div></div>
+  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.09</div></div>
   <div class="sb-nav">
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
     <div class="ni" data-sec="items" onclick="showSec('items')"><span class="nicon">🔮</span><span class="nlabel">Items</span></div>
@@ -1889,7 +1889,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-pets">
     <div class="sec-t">🐾 Pets</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar.</div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
   </section>
@@ -1936,7 +1936,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-patches">
     <div class="sec-t">📋 Patch-Notes</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.08.00</span> (22.05.2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.09.00</span> (29.05.2026).</div>
     <div id="patch-list"></div>
   </section>
 
@@ -8357,6 +8357,57 @@ function toggleChDone(num){
 
 // ===== PATCH NOTES =====
 const PATCHES=[
+  {ver:"1.09.00",date:"29.05.2026",size:"",features:[
+    {cat:"Neuer Content",items:[
+      "Controller-Remapping: frei belegbare Tastenbelegung für Controller",
+      "~30 weitere Kleintier-Arten als Pets registrierbar (zusätzlich zu Patch 1.08)",
+      "Neue Skills für Oongka und Damiane — Eingabe identisch zu Kliffs 'Blinding Flash Finisher' (schwerer Angriff aus Blinding Flash)",
+      "Neue Animationen für das Aufheben und Absetzen bestimmter Pets"
+    ]},
+    {cat:"Quality of Life",items:[
+      "Farming: Saatgut kann jetzt auf Quickslots gelegt und von dort genutzt werden",
+      "Dispatch-UI: Kameraden mit den für die Mission benötigten Skills werden zuoberst angezeigt",
+      "'Repeating Mission' erscheint im UI bei wiederholtem Ausführen einer Mission",
+      "Tastatur/Maus: Cursor verschwindet jetzt beim Betrachten von Dokumenten",
+      "Bestimmte 2D-Assets ersetzt (bessere Abstimmung auf die Art-Direction)"
+    ]},
+    {cat:"Charaktere & Skills",items:[
+      "Oongka: Stagger-Aufbau von 'Quaking Fury' angepasst (Balance — Patch-Notes nennen keine Schadenswerte)",
+      "Kliff-Fix: 'Evasive Kick' verbrauchte unbewaffnet kein Spirit",
+      "Kliff-Fix: 'Blinding Flash Finisher' war auch bei unzureichendem Spirit nutzbar"
+    ]},
+    {cat:"Fixes — Content",items:[
+      "Farbprüfung beim Färben/Customizing war je nach Lichtquelle erschwert",
+      "Legendäre Fische konnten gespendet werden",
+      "Manche Challenges wurden trotz erhaltenem Wissen nicht abgeschlossen",
+      "'Pond Management' war in bestimmten Situationen nicht betretbar",
+      "Steuerung blockierte beim Tod im Pond-Management-Menü unter Schaden",
+      "Bären versuchten, am Boden liegende Fische zu fressen, scheiterten aber"
+    ]},
+    {cat:"Fixes — Steuerung & UI",items:[
+      "Foto-Modus wurde beim Betrachten von Items ausgelöst",
+      "Werkzeug-Nutzung: 'Magic Scythe' bei vollem Inventar, 'Scythe' in sicheren Zonen, 'Mining Knuckledrill' an der Wand jeweils blockiert — behoben",
+      "Kameradenzahl wurde im Camp-Ressourcen-UI als 0 angezeigt",
+      "QTE-Eingabe-Icon fehlte bei angepassten Eingabeoptionen",
+      "UI-Freeze beim Wiedereinstieg nach fehlerbedingter Rückkehr zum Titelbildschirm",
+      "'Clean' wurde auch für nicht ausnehmbare Fische angezeigt",
+      "Ausrüstung wechselte beim Angriff mit bestimmten ausgerüsteten Werkzeugen ungewollt zu einer anderen Waffe"
+    ]},
+    {cat:"Fixes — Grafik & Performance",items:[
+      "PC: Schatten entfernter Objekte bei 'Raytraced Sun/Moon Light Shadows' falsch gerendert",
+      "Mac: 'Raytraced Sun/Moon Light Shadows' wurde nicht angewendet",
+      "Ausrüstung erschien transparent beim Wechsel des gezogenen Werkzeugs",
+      "Damiane: Effekt-Stacking an Sanctum-Cores (Elementangriffe) → Performance-Einbruch behoben",
+      "Crash beim Wechsel zum 'Tree Branch' Crafting-Reiter behoben",
+      "Diverse Animations-Fixes (Landung, Ausweichen im Sturz, Leiche-Absetzen beim Schwimmen)"
+    ]},
+    {cat:"Sonstiges",items:[
+      "Audio spielte beim Betrachten von Dokumenten (Bücher, Steckbriefe) bei englischer Sprachausgabe",
+      "Soundeffekte fehlten beim Kochen mit Spezial-Kochwerkzeug",
+      "Lokalisierung: Übersetzungskorrekturen und -verbesserungen",
+      "Verfügbar: Steam (PC/Mac), PlayStation, Xbox, Epic Games Store — Mac App Store folgt später"
+    ]}
+  ]},
   {ver:"1.08.00",date:"22.05.2026",size:"",features:[
     {cat:"Neuer Content",items:[
       "Tools-Slot: eigener Ausrüstungs-Slot für Werkzeuge (Holzaxt, Hammer, Schaufel, Besen, Sense, Spitzhacke, Bohrer/Kettensäge, Fächer) — getrennt von Sekundärwaffen. Masken & Circlets in den Rüstungs-Tab verschoben",
