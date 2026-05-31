@@ -1884,7 +1884,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-witches">
     <div class="sec-t">🧙 Hexen Guide</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die wichtigsten NPC-Questgeberinnen und bieten Core-Extraktion, Core-Fusion und exklusive Dienste. Jede Hexe hat eine eigene Questlinie, die bestimmte Sanctums freischaltet.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet nur die Workshop-Basis (keine Synthese/kein Crafting). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; die versteckte <strong>White Crow</strong> ist erst nach 4 Witch Tokens erreichbar.</div>
     <div class="witch-grid" id="witch-grid"></div>
   </section>
 
@@ -2578,9 +2578,9 @@ const CORES=[
   {name:"Volcanic Eruption",effect:"Magma-Cone nach Turning Slash",source:"Scorchflame Plate Gloves (Twilight Grotto Cave N Demeniss)",slot:"Armor"},
   {name:"Momentum",effect:"+35% Turning Slash Schaden",source:"Leather Helm of the Fallen Kingdom (Sanctum of Benediction)",slot:"Armor"},
   {name:"Malicebane",effect:"+Boss-Damage",source:"Wolf's Fang (Kap. 7)",slot:"Weapon"},
-  {name:"Insight III",effect:"+Crit Rate",source:"Elowen Tier-3 Fusion",slot:"Both"},
-  {name:"Destruction III",effect:"+ATK",source:"Elowen Tier-3 Fusion",slot:"Both"},
-  {name:"Infinite Arrows III",effect:"100% No-Arrow-Cost",source:"Elowen Tier-3 Fusion",slot:"Weapon"},
+  {name:"Insight III",effect:"+Crit Rate",source:"Elowen Tier-3 Synthese",slot:"Both"},
+  {name:"Destruction III",effect:"+ATK",source:"Elowen Tier-3 Synthese",slot:"Both"},
+  {name:"Infinite Arrows III",effect:"100% No-Arrow-Cost",source:"Elowen Tier-3 Synthese",slot:"Weapon"},
   {name:"Aegis III",effect:"Damage Reduction",source:"Lyselia Blueprint",slot:"Armor"},
   {name:"Aptitude I",effect:"+10% Skill XP",source:"Plate Boots of the Shadows",slot:"Armor"},
   {name:"Haste I",effect:"+Movespeed",source:"Blackwing Mask / Plate Gloves of the Shadows",slot:"Armor"},
@@ -2626,8 +2626,8 @@ const CORES=[
   {name:"Greater Insight",effect:"+Kritische Trefferrate",source:"Abyss Gear",slot:"Both"},
   {name:"Greater Destruction",effect:"+Angriff",source:"Abyss Gear",slot:"Both"},
   {name:"Greater Swift",effect:"+Angriffsgeschwindigkeit",source:"Abyss Gear",slot:"Both"},
-  {name:"Swift III",effect:"+Angriffsgeschwindigkeit",source:"Tier-3 Fusion (Abyss Gear)",slot:"Both"},
-  {name:"Fortification III",effect:"+Verteidigung",source:"Tier-3 Fusion (Abyss Gear)",slot:"Armor"},
+  {name:"Swift III",effect:"+Angriffsgeschwindigkeit",source:"Tier-3 Synthese (Abyss Gear)",slot:"Both"},
+  {name:"Fortification III",effect:"+Verteidigung",source:"Tier-3 Synthese (Abyss Gear)",slot:"Armor"},
   {name:"Greater Infinite Arrows",effect:"100% keine Pfeile verbraucht",source:"Abyss Gear",slot:"Weapon"},
   {name:"Greater Beastbane",effect:"+40% Schaden gegen Wildtiere",source:"Abyss Gear",slot:"Both"},
   {name:"Greater Bloodbane",effect:"+40% Schaden gegen Menschen",source:"Abyss Gear",slot:"Both"},
@@ -4537,7 +4537,7 @@ const SANCTUM_DATA=[
   {id:"te6",name:"Sanctum of Penitence",region:"Hernand",note:"Elowen-Questline #2"},
   {id:"te7",name:"Sanctum of Benediction",region:"Hernand / Pailune-Grenze",note:"Drop: Leather Helm of Fallen Kingdom (Momentum-Core)"},
   {id:"te8",name:"Sanctum of Absolution",region:"Pailune",note:"Boss: Antumbra's Sword → Vessel of Dark Pursuit"},
-  {id:"te9",name:"Sanctum of Exaltation",region:"Pailune",note:"Schaltet Elowen Tier-3 Fusion frei"},
+  {id:"te9",name:"Sanctum of Exaltation",region:"Pailune",note:"Schaltet Elowen Tier-3 Synthese frei"},
   {id:"te10",name:"Sanctum of Deliverance",region:"Pailune",note:"Bari-Questline #1"},
   {id:"te11",name:"Sanctum of Solace",region:"Pailune",note:"Bari-Questline #2"},
   {id:"te12",name:"Sanctum of Expiation",region:"Demeniss",note:"Lyselia-Questline #1"},
@@ -7575,7 +7575,7 @@ const MISSABLE_ITEMS=[
   {id:'ms3',cat:'Waffe',name:'Brass Rose Rapier',when:'Kap. 8 — Damiane Solo-Fight (Silverbrook Ruins)',tip:'Einmalig und nur mit Damiane erreichbar. Nach Kap. 8 dauerhaft gesperrt.'},
   {id:'ms4',cat:'Rüstung',name:'Hollow Visage (Dawn Cave)',when:'Kap. 3 — nördliche Kammer der Dawn Cave',tip:'Versteckte Truhe ohne Map-Marker. Einmaliger Spawn. Direkt beim ersten Besuch öffnen.'},
   {id:'ms5',cat:'Rüstung',name:'Leather Helm of Fallen Kingdom',when:'Sanctum of Benediction (Hernand/Pailune)',tip:'Niemals für ein anderes Item tauschen. Momentum-Core (+35% Turning Slash) ist fest eingebaut.'},
-  {id:'ms6',cat:'Quest',name:'Hexe Elowen — "The Missing Seal"',when:'Kap. 5 — vor Kap. 6 starten',tip:'Questlinie schaltet Tier-3 Core-Fusion + Kuku-Blueprint frei. Rechtzeitig beginnen.'},
+  {id:'ms6',cat:'Quest',name:'Hexe Elowen — "The Missing Seal"',when:'Kap. 5 — vor Kap. 6 starten',tip:'Questlinie schaltet Tier-3 Core-Synthese + Kuku-Blueprint frei. Rechtzeitig beginnen.'},
   {id:'ms7',cat:'Quest',name:'Oongka permanent — Arm Wrestling',when:'Kap. 8 — Calphade Castle',tip:'"Strength Held in the Fingertips". Zeitfenster nur Kap. 8 — danach dauerhaft gesperrt.'},
   {id:'ms8',cat:'Quest',name:'Oongka permanent — Riverside',when:'Kap. 8 — S Pailune East Gate',tip:'"Words Left by the Riverside". Beide Oongka-Quests für True Ending Pflicht.'},
   {id:'ms9',cat:'Quest',name:'Lyselia-Questlinie abschließen',when:'Vor Kap. 11',tip:'Sanctum of Expiation → Atonement + Shadow-Infusion. Muss vor Ende von Kap. 10 gestartet und abgeschlossen sein.'},
@@ -8114,12 +8114,13 @@ const WITCH_ICON_SVG={
   'Hexe Areciel':`<svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 4L8 13h4v13h6V13h4z" fill="rgba(192,57,43,.18)" stroke="#c0392b" stroke-width="1.5" stroke-linejoin="round"/><circle cx="15" cy="8" r="2.5" fill="rgba(192,57,43,.3)" stroke="#c0392b" stroke-width="1.2"/></svg>`
 };
 function witchSvcIcon(svc){
-  if(/Core-Extraktion/i.test(svc))return'<span class="witch-svc-ico">💎</span>';
-  if(/Core-Fusion|Fusion/i.test(svc))return'<span class="witch-svc-ico">⚗️</span>';
+  if(/Workshop|Socket|Embed|einsetzen/i.test(svc))return'<span class="witch-svc-ico">🔧</span>';
+  if(/Synthese|Fusion/i.test(svc))return'<span class="witch-svc-ico">⚗️</span>';
+  if(/Extrak|extrah|Extract/i.test(svc))return'<span class="witch-svc-ico">💎</span>';
   if(/Mount/i.test(svc))return'<span class="witch-svc-ico">🐎</span>';
   if(/Tränke|Potion/i.test(svc))return'<span class="witch-svc-ico">🧪</span>';
   if(/Brauerei|Brew/i.test(svc))return'<span class="witch-svc-ico">🫕</span>';
-  if(/Blueprint|Rezept|Umbau/i.test(svc))return'<span class="witch-svc-ico">📜</span>';
+  if(/Blueprint|Rezept|Umbau|Umwandlung/i.test(svc))return'<span class="witch-svc-ico">📜</span>';
   if(/Infusion|Element|Shadow/i.test(svc))return'<span class="witch-svc-ico">✨</span>';
   if(/Legendary|Endgame/i.test(svc))return'<span class="witch-svc-ico">⭐</span>';
   return'<span class="witch-svc-ico">◆</span>';
@@ -8199,7 +8200,7 @@ const ACCESSORIES=[
   {name:"Ringing Truth Earrings",type:"Earring",effect:"Parry-Fenster +0.1s, Counter-Dmg +10%",source:"Spire of Ringing Truth (Pailune Dungeon)",notes:"Counter King Build — Parry-Timing erleichtern"},
   {name:"Greymane's Bracer",type:"Bracelet",effect:"Companion ATK +20%, HP +80",source:"Greymane Commission Rank 5 — alle 27 Commissions",notes:"Beste Companion-Item im Spiel"},
   {name:"Demeniss Iron Bracer",type:"Bracelet",effect:"Def +15, Stun Resist",source:"Demeniss Schmied / Hauptstadthändler",notes:"Tank-Build Pflicht-Slot"},
-  {name:"Hexen-Bracer",type:"Bracelet",effect:"Core-Fusion kostet -20% Contribution",source:"Reward: alle 4 Hexen-Questlinien abgeschlossen",notes:"Langzeit-Investment — Core-Fusion massiv billiger"},
+  {name:"Hexen-Bracer",type:"Bracelet",effect:"Core-Synthese kostet -20% Contribution Points",source:"Reward: alle 4 Hexen-Questlinien abgeschlossen",notes:"Langzeit-Investment — Core-Synthese massiv billiger"},
 ];
 
 function renderAccessories(){
@@ -8227,31 +8228,31 @@ function renderAccessories(){
 const WITCHES=[
   {
     name:"Hexe Sylvia",color:"#c9a227",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_witch.webp",
-    location:"Höhle nördlich von Hernand City",chapter:"Ab Kap. 1 verfügbar",
-    services:["Core-Extraktion (kostet Contribution Points)","Core-Fusion Level 1–3","Mount-Reparatur & Upgrade","Spezialtränke Hernand-Region"],
+    location:"Shadow's Whisper Cave, nördlich von Hernand City",chapter:"Kap. 3 — Quest \"The Hermit Witch\"",
+    services:["Socket erstellen (kostet Silber)","Core einsetzen (Embed)","Core extrahieren","Kauf / Verkauf"],
     quests:[],sanctums:[],
-    tip:"Erste und wichtigste Anlaufstelle. Core-Extraktion immer vor dem Wegwerfen von Gear machen — die Cores sind oft wertvoller als die Rüstung selbst."
+    tip:"Novizin (\"Hermit Witch\") — reine Workshop-Hexe: KEINE Synthese und kein Crafting (dafür ab Elowen), und sie schickt dich auch nicht zu Sanctums. Trotzdem nützlich: Cores immer extrahieren, bevor du Gear wegwirfst."
   },
   {
     name:"Hexe Elowen",color:"#20a070",img:"https://crimsondesert.gaming.tools/images/ui/texture/image/knowledgeimage/cd_knowledgeimage_knowledge_blynhilde.webp",
     location:"Witchwoods — Südwest Hernand",chapter:"Kap. 5 nach Quest 'The Missing Seal'",
-    services:["Core-Fusion Level 1–5 (beste Früh-Mid-Fusion)","Hexen-Brauerei: Spezial-Elixiere","Blueprint-Umwandlung (Kuku-Quest)"],
+    services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (2× gleicher Core → nächsthöhere Stufe)","Hexen-Brauerei: Spezial-Elixiere","Blueprint-Umwandlung (Kuku-Quest)"],
     quests:["The Missing Seal (Kap. 5) — Elowen freischalten","Sanctumlinie: Temperance → Penitence → Benediction → Exaltation","Exaltation-Reward: Kuku-Blueprint + Tier-3-Fusion freigeschaltet"],
     sanctums:["Sanctum of Temperance","Sanctum of Penitence","Sanctum of Benediction","Sanctum of Exaltation"],
     tip:"Elowen-Questlinie zuerst abschließen. Das Sanctum of Exaltation schaltet den Kuku Ice-Resistant Armor Blueprint frei — Pflicht für Pailune und alle späten Bosse."
   },
   {
     name:"Hexe Bari",color:"#4a8aca",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_eloria.webp",
-    location:"White Crow Hideout — Pailune",chapter:"Kap. 7 — 4 Crow Tokens benötigt",
-    services:["Core-Fusion Level 1–6 (höchstes Level im Spiel)","Pailune-Spezialtränke (Ice Immunity Potion)","Legendary Core Upgrade (Endgame)"],
-    quests:["White Crow Token-Jagd: 4 Tokens aus Pailune-Dungeons / Questzielen","Sanctumlinie: Deliverance → Solace","Solace-Reward: Frost Mantle Skill-Upgrade"],
+    location:"Hütte in einem Teich nahe Silver Wolf Mountain, Nord-Pailune",chapter:"Pailune — ab Kap. 7",
+    services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Pailune-Spezialtränke (z.B. Ice Immunity Potion)"],
+    quests:["Sanctumlinie: Deliverance → Solace","Solace-Reward: Frost Mantle Skill-Upgrade"],
     sanctums:["Sanctum of Deliverance","Sanctum of Solace"],
-    tip:"Crow Tokens priorisieren direkt nach Kap. 7-Ankunft. Bari bietet als einzige Fusion Level 6 — für BiS Endgame-Cores unverzichtbar."
+    tip:"Witch of Kindness. Die 4 Witch Tokens werden für das Freischalten der versteckten White Crow gesammelt (siehe unten), nicht für Bari selbst."
   },
   {
     name:"Hexe Lyselia",color:"#9a50d0",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_demeniss_witch.webp",
     location:"Verborgene Höhle, Serpent Marsh (zwischen Demeniss und Delesyia) — Verkleidung: haengt an eingestuertzter Bruecke (N Demeniss)",chapter:"Kap. 9+ verfügbar",
-    services:["Core-Fusion Level 1–5","Demeniss-exklusive Crafting-Rezepte","Shadow-Element Infusion (Waffen)"],
+    services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Demeniss-exklusive Crafting-Rezepte","Shadow-Element Infusion (Waffen)"],
     quests:["Sanctumlinie: Expiation → Atonement (Demeniss)","Atonement-Reward: Demeniss-Craft-Rezept + Shadow Infusion freigeschaltet"],
     sanctums:["Sanctum of Expiation","Sanctum of Atonement"],
     tip:"Lyselias Questlinie vor dem Endgame abschließen. Ihr versteckter Höhlen-Eingang ist leicht zu uebersehen — erst die Verkleidung an der Bruecke ansprechen."
@@ -8259,10 +8260,18 @@ const WITCHES=[
   {
     name:"Hexe Areciel",color:"#c0392b",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_power_witch.webp",
     location:"Kliffhaus nahe World's Navel, Crimson Desert — sie wartet auf dem Dach; Verkleidung: Kind auf einem Hügel vor Tommaso",chapter:"Freigeschaltet nach: 1x Copper dem Kind bei Tommaso Bounty Board geben",
-    services:["Core-Fusion Level 1–5","Crimson-Desert-exklusive Crafting-Rezepte","Stärke-Infusion (Waffen)"],
+    services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Crimson-Desert-exklusive Crafting-Rezepte","Stärke-Infusion (Waffen)"],
     quests:["Sanctumlinie: Renunciation → Revelation","Revelation-Reward: Endgame Abyss-Core + Stärke-Infusion freigeschaltet"],
     sanctums:["Sanctum of Renunciation","Sanctum of Revelation"],
     tip:"Hexe der Stärke. Freischaltung ist simpel — einfach 1 Kupfer an das Kind vor Tommaso geben, dann zum Kliffhaus bei World's Navel. Sie sitzt auf dem Dach, nicht drinnen. Pflicht für Crimson Desert Region Endgame-Content."
+  },
+  {
+    name:"White Crow",color:"#cfd2d6",img:"",
+    location:"Versteckt südlich der Wayward Woods, Pailune",chapter:"Erst nach 4 Witch Tokens erreichbar",
+    services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Endgame-Core-Dienste"],
+    quests:["Freischaltung: je 1 Witch Token von Elowen, Bari, Lyselia und Areciel sammeln"],
+    sanctums:[],
+    tip:"Versteckte 6. Hexe. Erst erreichbar, wenn du alle 4 regionalen Hexen-Questlinien abgeschlossen und je 1 Witch Token erhalten hast. Lore: Zeitreise-Wächter — siehe Secrets & Lore."
   }
 ];
 
@@ -8318,7 +8327,7 @@ const SANCTUM_GUIDE=[
   {name:"Sanctum of Temperance",region:"Hernand — Witchwoods",req:"Hexe Elowen freischalten (Kap. 5)",reward:"Contribution +50, Elowen Questlinie startet",boss:"–",tip:"Einfachstes Sanctum — guter Einstieg."},
   {name:"Sanctum of Penitence",region:"Hernand",req:"Sanctum of Temperance abgeschlossen",reward:"Contribution +60, Elixier",boss:"–",tip:"Elowen-Questlinie #2."},
   {name:"Sanctum of Benediction",region:"Hernand / Pailune-Grenze",req:"Pailune-Zugang (Kap. 7)",reward:"Leather Helm of the Fallen Kingdom — Momentum-Core drin",boss:"–",tip:"Diesen Helm NICHT für einen anderen tauschen — der Momentum-Core (+35% Turning Slash) ist zu stark."},
-  {name:"Sanctum of Exaltation",region:"Pailune",req:"Elowen Questlinie #3",reward:"Kuku-Armor Blueprint + Tier-3 Core-Fusion freigeschaltet",boss:"–",tip:"Priorität #1 in Pailune."},
+  {name:"Sanctum of Exaltation",region:"Pailune",req:"Elowen Questlinie #3",reward:"Kuku-Armor Blueprint + Tier-3 Core-Synthese freigeschaltet",boss:"–",tip:"Priorität #1 in Pailune."},
   {name:"Sanctum of Absolution",region:"Pailune",req:"Pailune-Zugang",reward:"Vessel of Dark Pursuit (Greatsword) + Wound of Darkness Core",boss:"Antumbra's Sword",tip:"Enger Raum + Illusionen. Blinding Flash Spam, niemals stillstehen."},
   {name:"Sanctum of Deliverance",region:"Pailune",req:"Hexe Bari freischalten (4 Crow Tokens)",reward:"Contribution +80, Bari Questlinie #1",boss:"–",tip:"Tokens priorisieren direkt nach Ankunft in Pailune."},
   {name:"Sanctum of Solace",region:"Pailune",req:"Sanctum of Deliverance abgeschlossen",reward:"Frost Mantle Skill-Upgrade + Ice Immunity Potion Blueprint",boss:"–",tip:"Frost Mantle ist Pflicht für Phase 3 von Saigord."},
