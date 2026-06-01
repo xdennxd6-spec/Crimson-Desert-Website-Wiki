@@ -1877,7 +1877,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <section class="sec" id="sec-accessories">
     <div class="sec-t">💎 Accessoires &amp; Schmuck</div>
     <div class="fbar">
-      <select class="fs" id="accf-type" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option><option value="Bracelet">Bracelet / Armband</option></select>
+      <select class="fs" id="accf-type" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option></select>
     </div>
     <div class="grid" id="acc-grid"></div>
   </section>
@@ -2003,18 +2003,18 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </div>
 <script>
 const BOSSES=[
-  {name:"Matthias",chapter:1,region:"Hernand",quest:"Story",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry (Flurry-Ende)",strategy:"Watch & Learn: Pump Kick. Standard-Opener."},
+  {name:"Matthias",chapter:2,region:"Hernand",quest:"Story - Hernand in Chaos",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry (Flurry-Ende)",strategy:"Watch & Learn: Pump Kick. Standard-Opener."},
   {name:"Kailok the Hornsplitter",chapter:2,region:"Hernand",quest:"End of Greed",drop_weapon:"Sword of the Lord",drop_abyss_gear:"Wind Slash",weakness:"–",parry_or_dodge:"Parry",strategy:"Shield + Force Palm. Slow but powerful hits."},
   {name:"Reed Devil",chapter:3,region:"Pailune - Mt. of Frozen Souls",quest:"The Face Behind the Mask",drop_weapon:"–",drop_abyss_gear:"–",weakness:"Feuer (chip)",parry_or_dodge:"Phase 1 Parry; Phase 2 Dodge Waves",strategy:"P1: Parry Flurry-Ende. P2: 5 Totems zerstören, Klone ignorieren, rote Waves dodgen. P3: Nahkampf, side-dodge."},
-  {name:"Saigord the Staglord",chapter:null,region:"Hernand",quest:"Side - Hernand Farmhouse",drop_weapon:"Staglord's Shield",drop_abyss_gear:"–",weakness:"Eis (Phase 3 Opener)",parry_or_dodge:"Parry meiste Hits",strategy:"2H-Waffe mit Nature's Echo bricht Schild. Phase 3: Frost Mantle fuer 2-3 s Fenster."},
+  {name:"Saigord the Staglord",chapter:null,region:"Hernand - Icemoor Castle Ruins",quest:"Faction - Lord Amidst the Ruins (King of the Fallen Kingdom)",drop_weapon:"Staglord's Shield",drop_abyss_gear:"–",weakness:"Eis (Phase 3 Opener)",parry_or_dodge:"Parry meiste Hits",strategy:"2H-Waffe mit Nature's Echo bricht Schild. Phase 3: Frost Mantle fuer 2-3 s Fenster."},
   {name:"Marni's Excavatron",chapter:null,region:"Hernand - Karin Quarry",quest:"Faction: Stolen Quarry",drop_weapon:"Mining Knuckledrill",drop_abyss_gear:"Mining Mastery",weakness:"–",parry_or_dodge:"NIE Parry — Dodge alles",strategy:"Sword & Shield. Force Palm Lv3 (3-Chain). Drill glow → Force Palm cancelt Burrow. Final 5%: kein Groggy → nur Sustain."},
   {name:"Draven the Crowcaller",chapter:5,region:"The Abyss - Crow's Nest",quest:"Toward the Nest",drop_weapon:"Tauria Curved Sword",drop_abyss_gear:"Crow's Pursuit, Gale I, Wind Slash",weakness:"–",parry_or_dodge:"Mix",strategy:"3 HP-Bars. Aerial-Phasen: Glider nutzen. Reward auch: Blackwing Leather Mask + Armor."},
-  {name:"Myurdin (Phase 1)",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Decisive Battle",drop_weapon:"Melted Ambition",drop_abyss_gear:"Groundsurge",weakness:"–",parry_or_dodge:"Parry Slow-Sword; Dodge All-Fours-Bait",strategy:"All-Fours Stance = BAIT, nicht angreifen! Loop: Focus → Blinding Flash → Finisher → R2."},
-  {name:"Lava Myurdin (Phase 2)",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Decisive Battle",drop_weapon:"(Drop nach Phase 1)",drop_abyss_gear:"Groundsurge",weakness:"–",parry_or_dodge:"Parry Slow-Sword; Dodge Lava Springs",strategy:"Lava-Bear-Charge 3-4x. Lava Springs: 1s Warnung → wegrollen. Jump-Slam: Bildschirm dunkel → Force Palm. MITTE halten!"},
+  {name:"Myurdin (Phase 1)",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Battle at Silver Wolf Mountain",drop_weapon:"Melted Ambition",drop_abyss_gear:"Groundsurge",weakness:"–",parry_or_dodge:"Parry Slow-Sword; Dodge All-Fours-Bait",strategy:"All-Fours Stance = BAIT, nicht angreifen! Loop: Focus → Blinding Flash → Finisher → R2."},
+  {name:"Lava Myurdin (Phase 2)",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Battle at Silver Wolf Mountain",drop_weapon:"(Drop nach Phase 1)",drop_abyss_gear:"Groundsurge",weakness:"–",parry_or_dodge:"Parry Slow-Sword; Dodge Lava Springs",strategy:"Lava-Bear-Charge 3-4x. Lava Springs: 1s Warnung → wegrollen. Jump-Slam: Bildschirm dunkel → Force Palm. MITTE halten!"},
   {name:"Hexe Marie",chapter:9,region:"Demeniss - Hexe Sanctuary",quest:"Black Witch",drop_weapon:"Crow Whisperer",drop_abyss_gear:"–",weakness:"Feuer (Barrier-Phase)",parry_or_dodge:"Parry Melee; Dodge Crow Barrage",strategy:"Vor-Quest: 4 Totems S→N. Crow Barrage: senkrecht zu ihr rollen. Adds: Urn Swordsman first. [Hidden Lore: Hexe Marie ist der korrumpierte/fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff. Siehe Secrets-Section.]"},
   {name:"Golden Star",chapter:11,region:"Delesyia - Marni's Masterium",quest:"Master of a Forgotten Land",drop_weapon:"Power Core (Story)",drop_abyss_gear:"–",weakness:"Blitz P2 (3x Schaden)",parry_or_dodge:"Dodge alles",strategy:"P1: Marni-Spear-Pylons → L2+R2 → Stagger-Bar. Golem Adds sofort killen. P2: auf Blackstar, Force Palm aufs Auge."},
-  {name:"Black Fang",chapter:null,region:"Hernand - Howling Hollow Cave",quest:"House Celeste Faction",drop_weapon:"Silver Fang Fang",drop_abyss_gear:"–",weakness:"Blitz",parry_or_dodge:"Dodge Lunges",strategy:"Lightning-Stagger. Reward: Silver Fang Mount nach Crafting."},
-  {name:"Beloth the Darksworn",chapter:null,region:"Endgame",quest:"Overwhelming Being",drop_weapon:"Plate Armor of the Shadows",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge fast alles",strategy:"~3-Hit-Killer. FROSTCURSED ICE-IMMUNITY-SET PFLICHT. Geduld, kein Tank-and-Spank."},
+  {name:"Black Fang",chapter:null,region:"Hernand - Forest of Wolves (N The Sage's Peak)",quest:"Legendary Wolf",drop_weapon:"Silver Fang Fang",drop_abyss_gear:"–",weakness:"Blitz",parry_or_dodge:"Dodge Lunges",strategy:"Lightning-Stagger. Reward: Silver Fang Mount nach Crafting."},
+  {name:"Beloth the Darksworn",chapter:null,region:"Hernand - Hoenmark Ruins (Nord)",quest:"Faction - White Blizzard (House Lanford; Cursed Mountain / Wraith in the Frost)",drop_weapon:"Plate Armor of the Shadows",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge fast alles",strategy:"~3-Hit-Killer (Eis-Thema). FROSTCURSED ICE-RESISTENZ-SET stark empfohlen. Geduld, kein Tank-and-Spank."},
   {name:"Corrupted Caliburn",chapter:12,region:"The Abyss",quest:"A Shadow in the Void",drop_weapon:"Twisted Verdict",drop_abyss_gear:"Abyssal Rays",weakness:"–",parry_or_dodge:"Parry Sword-Strings; Dodge Teleport-Smash",strategy:"SAVE VOR DEM GATE! Stillstand → hinter dodgen, 4 Heavy + Light bis Shadow-Wave → durchdodgen. [Hidden Lore: Caliburn ist eine Inkarnation von Umbra — siehe Run-108-Auflösung in Secrets-Section.]"},
   {name:"Avatar of Umbra",chapter:12,region:"The Abyss",quest:"Blinding Darkness",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge rote Attacks",strategy:"Kombiniert alle Boss-Moves. Fire-Fist DoT + Ancestral Warriors. Maximum aggro + Healing."},
   {name:"Umbra (Final)",chapter:12,region:"The Abyss",quest:"Blinding Darkness",drop_weapon:"Falling Palm Skill + 99.999 ATK Waffe",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge Lasers/Rocks",strategy:"Auf Blackstar. R1 Fireballs aufs Auge → Stagger → Dismount → Glide → Air-Dash → Force Palm aufs Auge (2-3x)."},
@@ -2022,8 +2022,8 @@ const BOSSES=[
   {name:"White Horn",chapter:null,region:"Pailune",quest:"Side",drop_weapon:"–",drop_abyss_gear:"–",weakness:"Feuer (Pflicht!)",parry_or_dodge:"Dodge Ice-Breath (horizontal)",strategy:"Brazier in Arena entzünden. Fire-Element zwingend. Phase 2 Ice-Breath horizontal dodgen."},
   {name:"Priscus the Ancient",chapter:null,region:"Pailune - Spire of Ringing Truth",quest:"Faction",drop_weapon:"Blessing of the Immortal, Ancient Retribution",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Nature's Snare fuer Projektile",strategy:"Bow + Nature's Snare → Projektile zurückwerfen. Reward: Path of Trials (Frost Mantle Skill)."},
   {name:"Antumbra's Sword",chapter:null,region:"Sanctum of Absolution",quest:"Sanctum",drop_weapon:"Vessel of Dark Pursuit",drop_abyss_gear:"Wound of Darkness",weakness:"–",parry_or_dodge:"Dodge Illusionen",strategy:"Enger Raum, Illusionen → Blinding Flash Spam."},
-  {name:"One-Armed Ludvig",chapter:7,region:"Pailune - Ashclaw Keep",quest:"Story - Homecoming",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry & Dodge",strategy:"Tritt direkt nach dem Lava-Myurdin-Fight auf. Humanoider Nahkampf-Boss — Combos mit einem Arm. Vorsicht nach dem langen Myurdin-Gauntlet: Ressourcen einteilen!"},
-  {name:"Lucian Bastier",chapter:8,region:"Pailune",quest:"Story - Blood Coronation (Damiane-Solo)",drop_weapon:"–",drop_abyss_gear:"Flames of Judgment",weakness:"–",parry_or_dodge:"Dodge",strategy:"Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Kap. 8 Blood Coronation."},
+  {name:"One-Armed Ludvig",chapter:7,region:"Pailune - Kingshield Mountain",quest:"Story - Time to Face Justice (Twisted Fate, als Oongka)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry & Dodge",strategy:"Tritt direkt nach dem Lava-Myurdin-Fight auf. Humanoider Nahkampf-Boss — Combos mit einem Arm. Vorsicht nach dem langen Myurdin-Gauntlet: Ressourcen einteilen!"},
+  {name:"Lucian Bastier",chapter:8,region:"Demeniss - Spire of Clockwork",quest:"Story - A Fleeting Dream (Damiane-Solo)",drop_weapon:"–",drop_abyss_gear:"Flames of Judgment",weakness:"–",parry_or_dodge:"Dodge",strategy:"Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Demeniss (Quest 'A Fleeting Dream')."},
   {name:"Gregor the Halberd of Carnage",chapter:null,region:"Hernand - Fort Ironclad",quest:"Where The Wind Guides You",drop_weapon:"Golden Vanguard",drop_abyss_gear:"Abyss Artifact",weakness:"–",parry_or_dodge:"Dodge (Impaling Spear unblockbar)",strategy:"Vor Kampf: Pfeilfallen in der Halle zerstoeren. Langsame Drehrate ausnutzen — Backstab-Konter. Force Palm maxen → 3er-Combo → Stagger. Defensive Spielweise, Distanz halten."},
   {name:"Walter Lanford",chapter:null,region:"Hernand - Fort Warspike",quest:"Name Written in Blood",drop_weapon:"Dane Shotgun",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (kein Block)",strategy:"Hochmobiler Pistolenschuetze. Run-and-Hit-Ansatz. 'Poof'-Escape: zum Landepunkt dashen → Heavy Attack. Double Barrel Barrage: volle Distanz, sofort dodgen. Drops: Dane Shotgun + Rhonda Leather Boots + Golden Piggy Bank."},
   {name:"Master Du",chapter:null,region:"Crimson Desert - Cloister of Enlightenment",quest:"The Sage of the Desert",drop_weapon:"Master Du's Circlet",drop_abyss_gear:"Karmic Pulse",weakness:"–",parry_or_dodge:"Dodge (Green Ray: bis 3x konsekutiv)",strategy:"2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown fuer Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen)."},
@@ -2033,7 +2033,7 @@ const BOSSES=[
   {name:"Marni's Clockwork Mantis",chapter:null,region:"Delesyia - Regent's Rise",quest:"Frozen Hearted Predator",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (Mantis Ray unblockbar)",strategy:"Mechanische fliegende Mantis. Begleitet von 3 Dragonfly Fighters — erst eliminieren! Block/Parry-Konter fuer normale Angriffe. Force Palm fuer Stagger-Bar. Mantis Ray (Feuer) = ausweichen, kein Block. Folgt nach Turbine-Kampf im Krall Foundry."},
   {name:"Turbine",chapter:null,region:"Delesyia - Krall Foundry",quest:"Invaders from the East",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Mechanik-Boss (kein klassischer Kampf)",strategy:"180-Sekunden-Verteidigung: Generator schuetzen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen waehrend Flug. Danach: vollgeladene Kanone auf Turbines feuern. Fuehrt direkt zu Marni's Clockwork Mantis."},
   {name:"Cassius Morten / Tenebrum",chapter:6,region:"Hernand",quest:"Story - Cracks in the Shield",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry Sword-Strings; Dodge Shadow-Surge",strategy:"Story-Boss Kap. 6. Zwei-Phasen-Fight: Cassius wechselt in Tenebrum-Form (Schatten-Avatar). Phase 1: humanoider Schwertkampf, Parry-Fenster nach 3er-Combo. Phase 2: Tenebrum spawnt Schatten-Klone, fokus auf Original (klare Outline). Force Palm 3-Chain für Stagger."},
-  {name:"Gabriel Caliburn",chapter:8,region:"Demeniss - Spire of Clockwork",quest:"Story - A Fleeting Dream (scripted Loss)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Scripted — kein klassischer Sieg",strategy:"SCRIPTED LOSS Kap. 8: Kliff verliert garantiert, egal wie gut man spielt. Cutscene-Übergang. Reale Rematch erst in Kap. 12 als Corrupted Caliburn. In 1.07 als Rematch-Boss bei Fort Musket via Laterne verfügbar."}
+  {name:"Gabriel Caliburn",chapter:8,region:"Demeniss - Demeniss Castle",quest:"Story - The Blood Coronation (scripted Loss)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Scripted — kein klassischer Sieg",strategy:"SCRIPTED LOSS Kap. 8: Kliff verliert garantiert, egal wie gut man spielt. Cutscene-Übergang. Reale Rematch erst in Kap. 12 als Corrupted Caliburn. In 1.07 als Rematch-Boss bei Fort Musket via Laterne verfügbar."}
 ];
 
 const WEAPONS=[
@@ -2580,17 +2580,17 @@ const CORES=[
   {name:"Malicebane",effect:"+Boss-Damage",source:"Wolf's Fang (Kap. 7)",slot:"Weapon"},
   {name:"Insight III",effect:"+Crit Rate",source:"Elowen Tier-3 Synthese",slot:"Both"},
   {name:"Destruction III",effect:"+ATK",source:"Elowen Tier-3 Synthese",slot:"Both"},
-  {name:"Infinite Arrows III",effect:"100% No-Arrow-Cost",source:"Elowen Tier-3 Synthese",slot:"Weapon"},
+  {name:"Infinite Arrows III",effect:"60% Chance keine Pfeil-Kosten (100% nur mit Infinite Arrows II+III kombiniert)",source:"Elowen Tier-3 Synthese",slot:"Weapon"},
   {name:"Aegis III",effect:"Damage Reduction",source:"Lyselia Blueprint",slot:"Armor"},
   {name:"Aptitude I",effect:"+10% Skill XP",source:"Plate Boots of the Shadows",slot:"Armor"},
   {name:"Haste I",effect:"+Movespeed",source:"Blackwing Mask / Plate Gloves of the Shadows",slot:"Armor"},
   {name:"Gourmet III",effect:"+15% Heal-Effizienz auf Food",source:"Animal Meat Life Challenge (Hernand Butcher)",slot:"Both"},
-  {name:"Abyssal Rays",effect:"Abyss-Strahlen-Angriff",source:"Twisted Verdict (Corrupted Caliburn)",slot:"Weapon"},
+  {name:"Abyssal Rays",effect:"Abyss-Strahlen-Angriff",source:"Back Alley Shop (Schwarzmarkt außerhalb Demeniss City, ~40 Silber; auch bei Hexe craftbar)",slot:"Weapon"},
   {name:"Flames of Judgment",effect:"Funken-Angriff — zusätzlicher Feuerschaden. 2.000 Silber",source:"Drop: Lucian Bastier / Awakened Lucian Bastier",slot:"Weapon"},
   {name:"Lightning God's Affliction",effect:"Blitzschlag auf Feinde — Schaden. 1.627 Silber",source:"Abyss Gear",slot:"Weapon"},
   {name:"Spirit's Judgment",effect:"Geistiger Ritter schlägt auf Feind ein. 1.353 Silber",source:"Abyss Gear",slot:"Weapon"},
   {name:"Pillar of Wind",effect:"Windsäule am Ziel — zusätzlicher Schaden. 1.987 Silber",source:"Abyss Gear",slot:"Weapon"},
-  {name:"Slashing Reeds",effect:"Schilfhagel-Angriff — Schaden an getroffenen Feinden. 1.347 Silber",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Slashing Reeds",effect:"Schilfhagel-Angriff — Schaden an getroffenen Feinden. 1.347 Silber",source:"Sunset Reed Cloth Gloves (Reward: Reed Devil)",slot:"Armor"},
   {name:"Warden of Darkness",effect:"Geistliche Ritter vernichten nahe Feinde mit Speeren. 1.987 Silber",source:"Vessel of Dark Pursuit / Antumbra",slot:"Weapon"},
   {name:"Ancient Reckoning",effect:"Tödlicher Wirbel um den Feind — zusätzlicher Schaden",source:"Abyss Gear",slot:"Weapon"},
   {name:"Storm Fang",effect:"Kettenblitze — Schaden an mehreren Feinden. 1.993 Silber",source:"Abyss Gear",slot:"Weapon"},
@@ -2660,19 +2660,19 @@ const ARMOR=[
   // ── Torso / Body Armor ──
   {name:"Ashclaw Leather Armor",type:"Torso",source:"Silberbark Forest (Händler / Crafting)",effect:"Atk+8, Def+12, Bleeding Resist",notes:"Gutes Early-Game Leder"},
   {name:"Belkandor Plate Armor",type:"Torso",source:"Belkandor Ruins (Schmied / Drop)",effect:"Def+28, Physical Resist+10%",notes:"Belkandor-Set"},
-  {name:"Blackwing Leather Armor",type:"Torso",source:"Kap. 5 Schwarzflügel-Gebiet",effect:"Speed+5%, Wind Resist",notes:"Leichte Variante zum Blackwing-Set"},
+  {name:"Blackwing Leather Armor",type:"Torso",source:"Kap. 5 Schwarzflügel-Gebiet",effect:"Speed+5%, Lightning Resist",notes:"Leichte Variante zum Blackwing-Set"},
   {name:"Bolton Plate Armor",type:"Torso",source:"Bolton Fortress (Händler / Drop)",effect:"Def+22, Stun Resist",notes:"Bolton-Set"},
-  {name:"Canta Plate Armor",type:"Torso",source:"Canta Region (Quest-Belohnung)",effect:"Def+25, Shield Block+8%",notes:"Canta-Set"},
+  {name:"Canta Plate Armor",type:"Torso",source:"Händler Rhett (Hernand Town, neben der Schmiede)",effect:"Def+25, Shield Block+8%",notes:"Canta-Set"},
   {name:"Dark Ringleader's Cloth Armor",type:"Torso",source:"Dark Ringleader Fraktion",effect:"Agility+15, Crit Rate+5%",notes:"Cloth mit Crit-Ausrichtung"},
   {name:"Demeniss Elite Uniform",type:"Torso",source:"Demeniss-Fraktion (Quest-Belohnung)",effect:"Def+18, Demeniss Rep-Bonus",notes:"Demeniss-Set"},
   {name:"Duskfang Leather Armor",type:"Torso",source:"Duskfang Wolves Gebiet",effect:"Night Dmg+8%, Bleeding Edge",notes:"Offensives Nacht-Set"},
   {name:"Elegant Carmine Leather Armor",type:"Torso",source:"Hernand Händler (hochrangig)",effect:"Atk+12, Def+14, Style-Bonus",notes:"Ästhetisch + offensiv"},
-  {name:"Frostcursed Plate Armor",type:"Torso",source:"Kilnden Workshop (Kuku-Craft)",effect:"Ice-Immunität + Stat-Boost",notes:"Pflicht vs. Pailune-Bosse"},
+  {name:"Frostcursed Plate Armor",type:"Torso",source:"Truhen-Loot (Nord-Demeniss)",effect:"Ice-Resistenz + Stat-Boost",notes:"Pflicht vs. Pailune-Bosse"},
   {name:"Golden Greed Plate Armor",type:"Torso",source:"Legendary Blueprint (Selten)",effect:"Def+35, Gold Drop+5%",notes:"Legendäre Rüstung"},
   {name:"Grey Wolf Leather Armor",type:"Torso",source:"Grey Wolf Territory, Pailune",effect:"Dual Wield+8%, Speed+3%",notes:"Agility-Build"},
   {name:"Hernand Ceremonial Guard Armor",type:"Torso",source:"Hernand Palastwache Questlinie",effect:"Def+20, Ceremony-Set-Bonus",notes:"Hernand-Set"},
   {name:"Jackals' Leather Armor",type:"Torso",source:"Jackals-Fraktion Gebiet",effect:"Atk+10, Evasion+5%",notes:"Offensives Leder"},
-  {name:"Kuku Ice-Resistant Armor",type:"Torso",source:"Kilnden Workshop Blueprint",effect:"Ice-Immunität vollständig",notes:"Bessere Version von Frostcursed"},
+  {name:"Kuku Ice-Resistant Armor",type:"Torso",source:"Kilnden Workshop Blueprint",effect:"hohe Ice-Resistenz (keine volle Immunität)",notes:"Bessere Version von Frostcursed"},
   {name:"Leather Armor of the Fallen Kingdom",type:"Torso",source:"Ruinen des alten Königreichs",effect:"Atk+8, Def+8, Balanced",notes:"Fallen Kingdom Set"},
   {name:"Light of the Battlefield Plate Armor",type:"Torso",source:"Legendary Warrior Drop",effect:"Def+32, HP+200, Morale-Aura",notes:"Bestes Mid-Game Plate"},
   {name:"Northern Fighter's Chain Mail",type:"Torso",source:"Nördliche Händler / Herstellung",effect:"Def+20, Cold Resist+15%",notes:"Balanciert für Pailune"},
@@ -2692,12 +2692,12 @@ const ARMOR=[
   // ── Kopf / Headgear ──
   {name:"Alpha Wolf Helm",type:"Kopf",source:"Alpha Wolf Boss Drop (Howling Hollow)",effect:"HP+120, Intimidation-Aura",notes:"Synergiert mit Silver Fang Mount"},
   {name:"Ashad Plate Helm",type:"Kopf",source:"Ashad Fortress (Drop)",effect:"Def+14, Stun Resist",notes:"Ashad-Set"},
-  {name:"Blackwing Leather Mask",type:"Kopf",source:"Drop: Draven the Crowcaller (Kap. 5)",effect:"Wind-Resistenz, Speed+5%",notes:"Blackwing-Set"},
+  {name:"Blackwing Leather Mask",type:"Kopf",source:"Drop: Draven the Crowcaller (Kap. 5)",effect:"Blitz-Resistenz (Lightning), Speed+5%",notes:"Blackwing-Set"},
   {name:"Bolton Plate Helm",type:"Kopf",source:"Bolton Fortress (Händler)",effect:"Def+12, Bolton-Set",notes:""},
-  {name:"Canta Plate Helm",type:"Kopf",source:"Canta Region",effect:"Def+13, Canta-Set",notes:""},
+  {name:"Canta Plate Helm",type:"Kopf",source:"Händler Rhett (Hernand Town)",effect:"Def+13, Canta-Set",notes:""},
   {name:"Dark Ringleader's Cloth Helm",type:"Kopf",source:"Dark Ringleader Fraktion",effect:"Crit+5%, Dark-Set",notes:""},
   {name:"Flame Knight's Plate Helm",type:"Kopf",source:"Flammen-Ritter Questlinie",effect:"Fire Atk+12%, Heat Resist",notes:"Flammen-Krieger Build"},
-  {name:"Frostcursed Plate Helm",type:"Kopf",source:"Kilnden Workshop (Kuku-Craft)",effect:"Ice-Immunität (Helm-Teil)",notes:"Kuku Ice Set"},
+  {name:"Frostcursed Plate Helm",type:"Kopf",source:"Truhen-Loot (Nord-Demeniss)",effect:"Ice-Resistenz (Helm-Teil)",notes:"Kuku Ice Set"},
   {name:"Golden Greed Plate Helm",type:"Kopf",source:"Legendary Craft",effect:"Gold Find+8%, Def+18",notes:"Legendärer Helm"},
   {name:"Helm of Ignition",type:"Kopf",source:"Feuer-Schrein / Volcanic Boss",effect:"Fire Dmg+15%, Ignite Chance+10%",notes:"Offensiver Fire-Helm"},
   {name:"Helm of Knowledge",type:"Kopf",source:"Scholastone Akademie (Quest)",effect:"Skill XP+15%, Cooldown-10%",notes:"Bester Skill-Farm Helm"},
@@ -2711,13 +2711,13 @@ const ARMOR=[
   {name:"Visione Helm",type:"Kopf",source:"Lioncrest Watchtower (oberstes Stockwerk)",effect:"Memory Fragment + Quest Boost",notes:"Kap. 2 Quest-Item"},
 
   // ── Hände / Gloves ──
-  {name:"Blackwing Leather Gloves",type:"Hände",source:"Draven-Gebiet / Crafting",effect:"Wind Resist, Speed+3%",notes:"Blackwing-Set"},
-  {name:"Canta Plate Gloves",type:"Hände",source:"Canta Region",effect:"Def+10, Guard Proc",notes:"Canta-Set"},
+  {name:"Blackwing Leather Gloves",type:"Hände",source:"Draven-Gebiet / Crafting",effect:"Lightning Resist, Speed+3%",notes:"Blackwing-Set"},
+  {name:"Canta Plate Gloves",type:"Hände",source:"Händler Rhett (Hernand Town)",effect:"Def+10, Guard Proc",notes:"Canta-Set"},
   {name:"Combat God's Plate Gloves",type:"Hände",source:"Endgame Legendary Drop",effect:"Atk+18, Crit Rate+6%",notes:"Bester Angriffs-Handschuh"},
   {name:"Counterweight Leather Gloves",type:"Hände",source:"Quest-Belohnung (Balanceprüfung)",effect:"Counter Dmg+20%",notes:"Counter-Build Pflicht"},
   {name:"Demeniss Elite Gloves",type:"Hände",source:"Demeniss Elite (Quest / Drop)",effect:"Precision+10%, Demeniss-Set",notes:""},
   {name:"Duskfang Leather Gloves",type:"Hände",source:"Duskfang Wolves Gebiet",effect:"Night Atk+8%, Bleeding Edge",notes:"Duskfang-Set"},
-  {name:"Frostcursed Plate Gloves",type:"Hände",source:"Kilnden Workshop (Kuku-Craft)",effect:"Ice-Immunität (Gloves-Teil)",notes:"Kuku Ice Set"},
+  {name:"Frostcursed Plate Gloves",type:"Hände",source:"Truhen-Loot (Nord-Demeniss)",effect:"Ice-Resistenz (Gloves-Teil)",notes:"Kuku Ice Set"},
   {name:"Golden Greed Plate Gloves",type:"Hände",source:"Legendary Craft",effect:"Gold Find+5%, Atk+12",notes:""},
   {name:"Hernand Ceremonial Guard Gloves",type:"Hände",source:"Hernand Palastwache",effect:"Ceremony-Set-Bonus",notes:""},
   {name:"Light of the Battlefield Plate Gloves",type:"Hände",source:"Legendary Warrior Drop",effect:"Def+12, Set-Bonus",notes:""},
@@ -2730,13 +2730,13 @@ const ARMOR=[
   {name:"Ashen Wolf's Leather Boots",type:"Schuhe",source:"Ashen Wolf Boss Drop",effect:"Speed+6%, Ash Resist",notes:""},
   {name:"Autumn Banquet Leather Boots",type:"Schuhe",source:"Hernand Bankett (Quest)",effect:"Food Buff Duration+20%",notes:"Bankett-Set"},
   {name:"Belkandor Plate Boots",type:"Schuhe",source:"Belkandor Ruins",effect:"Def+14, Belkandor-Set",notes:""},
-  {name:"Blackwing Leather Boots",type:"Schuhe",source:"Draven-Gebiet / Crafting",effect:"Speed+5%, Wind Resist",notes:"Blackwing-Set"},
+  {name:"Blackwing Leather Boots",type:"Schuhe",source:"Draven-Gebiet / Crafting",effect:"Speed+5%, Lightning Resist",notes:"Blackwing-Set"},
   {name:"Bolton Leather Boots",type:"Schuhe",source:"Bolton Region",effect:"Def+10, Bolton-Set",notes:""},
-  {name:"Canta Plate Boots",type:"Schuhe",source:"Canta Region",effect:"Def+13, Knockback Resist",notes:""},
+  {name:"Canta Plate Boots",type:"Schuhe",source:"Händler Rhett (Hernand Town)",effect:"Def+13, Knockback Resist",notes:""},
   {name:"Dark Marksman's Plate Boots",type:"Schuhe",source:"Marksman Elite Drop",effect:"Ranged Dmg+8%, Speed+3%",notes:"Ranged Build"},
   {name:"Embersteps Leather Boots",type:"Schuhe",source:"Feuer-Gebiet / Crafting",effect:"Fire Trail bei Bewegung, Fire Res",notes:"Einzigartiger Bewegungseffekt"},
   {name:"Fire Walk Boots",type:"Schuhe",source:"Vulkan-Gebiet / Fire Boss",effect:"Fire Immunity, Magma Walk",notes:"Feuer-Pflicht"},
-  {name:"Frostcursed Plate Boots",type:"Schuhe",source:"Kilnden Workshop (Kuku-Craft)",effect:"Ice-Immunität (Boots-Teil)",notes:"Kuku Ice Set"},
+  {name:"Frostcursed Plate Boots",type:"Schuhe",source:"Truhen-Loot (Nord-Demeniss)",effect:"Ice-Resistenz (Boots-Teil)",notes:"Kuku Ice Set"},
   {name:"Golden Greed Plate Boots",type:"Schuhe",source:"Legendary Craft",effect:"Gold Find+4%, Speed+2%",notes:""},
   {name:"Hernand Ceremonial Guard Boots",type:"Schuhe",source:"Hernand Palastwache",effect:"Ceremony-Set-Bonus",notes:""},
   {name:"Icewing Plate Boots",type:"Schuhe",source:"Pailune / Ice Region",effect:"Ice Resist+20%, Cold Walk",notes:"Pailune-Gebiet"},
@@ -2750,7 +2750,7 @@ const ARMOR=[
   {name:"Ashen Wolf's Leather Cloak",type:"Mantel",source:"Ashen Wolf Drop / Crafting",effect:"Speed+4%, Evasion+5%",notes:""},
   {name:"Belkandor Plate Cloak",type:"Mantel",source:"Belkandor Ruins",effect:"Def+10, Belkandor-Set",notes:""},
   {name:"Black Bears' Cloth Cloak",type:"Mantel",source:"Black Bear Boss Drop / Crafting",effect:"HP+150, Bear-Totem-Aura",notes:"Synergiert mit White Bear Mount"},
-  {name:"Blackwing Leather Cloak",type:"Mantel",source:"Draven-Gebiet",effect:"Wind Resist, Speed+3%",notes:"Blackwing-Set"},
+  {name:"Blackwing Leather Cloak",type:"Mantel",source:"Draven-Gebiet",effect:"Lightning Resist, Speed+3%",notes:"Blackwing-Set"},
   {name:"Bolton Plate Cloak",type:"Mantel",source:"Bolton Fortress",effect:"Def+10, Bolton-Set",notes:""},
   {name:"Dragon Flame Cloak",type:"Mantel",source:"Blackstar / Drachen-Questlinie",effect:"Fire Dmg+15%, Dragon-Aura",notes:"Synergiert mit Blackstar Mount"},
   {name:"Hernandian Banquet Cloak",type:"Mantel",source:"Goldleaf Faction (Extinguishing Last Flames)",effect:"Food-Buff Effizienz+15%",notes:"Gourmet-Fokus"},
@@ -2992,16 +2992,16 @@ const MOUNTS=[
   {name:"Demenissian War Horse",type:"Kriegspferd (Tier 4)",unlock:"Story / NPC-Pferd",stats:"7 Skills: Dash, Drift, Back Kick, Sprint, Swimming III, Quick Start, Double Jump",notes:"Demeniss-Militär-Pferd"},
   {name:"Delesyian Warhorse",type:"Kriegspferd (Tier 4)",unlock:"Story / NPC-Pferd",stats:"7 Skills: Dash, Drift, Back Kick, Sprint, Swimming III, Quick Start, Double Jump",notes:"Delesyia-Militär-Pferd"},
   {name:"Wells's Military Horse",type:"Kriegspferd (Tier 4)",unlock:"Story / NPC-Pferd",stats:"7 Skills: Dash, Drift, Back Kick, Sprint, Swimming III, Quick Start, Double Jump",notes:"Wells-Militär-Pferd"},
-  {name:"Marni's Mechahorse",type:"Mechanisches Pferd (Tier 2)",unlock:"Marni-Questline",stats:"Tier 2 — keine Tier-4-Skills",notes:"Marni's mechanischer Konstrukt-Mount"},
+  {name:"Marni's Mechahorse",type:"Mechanisches Pferd (Tier 2)",unlock:"Stehlen: von den Wachen am Südtor der City of Delesyia (Eastern Hills), mit Maske verkleidet",stats:"Tier 2 — keine Tier-4-Skills",notes:"Mechanischer Konstrukt-Mount (kein Marni-Questline-Unlock)"},
   // ── Drachen-Mount ──
-  {name:"Blackstar",type:"Drache",unlock:"Automatisch Kap. 11 — nach 'Master of a Forgotten Land' (Golden Star besiegt)",stats:"15 min/Session, 50 min Cooldown; Feuerangriffe, kann Festungen niederbrennen",notes:"Aerial Maneuver + Focused Force Palm aufs gruenes Glow. Bestes Anti-Festungs-Tool."},
+  {name:"Blackstar",type:"Drache",unlock:"Automatisch in Kap. 11 (Story-Quest; Golden Star besiegen, Pickup im Nest of Valor)",stats:"15 min/Session, 50 min Cooldown; Feuerangriffe, kann Festungen niederbrennen",notes:"Aerial Maneuver + Focused Force Palm aufs gruenes Glow. Bestes Anti-Festungs-Tool."},
   {name:"Wild Wyvern",type:"Drache",unlock:"Wilde Wyvern in der Spielwelt unterwerfen (Subdue) [Patch 1.08]",stats:"Temporär reitbar (Flug)",notes:"Nach dem Unterwerfen zeitlich begrenzt als fliegender Mount nutzbar. Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest) separat als Pet — Mount-Funktion später geplant."},
   // ── Sigil-Mounts (Boss Kill → Crafting) ──
   {name:"Silver Fang",type:"Wolf (Sigil)",unlock:"Black Fang Kill (Howling Hollow Cave, House Celeste Faction) → Crafting bei Hexe",stats:"450 HP / 100 Sta / 100 Atk / 45 Def — kaempft dismounted aktiv weiter",notes:"Einziger Mount der nach Dismount weiterkämpft. Lightning-Stagger. Sigil konsumieren."},
   {name:"White Bear",type:"Bär (Sigil)",unlock:"White Bear Kill (NW Pailune, Silverwolf Mountains Gipfel) → Crafting",stats:"1500 HP / 200 Sta / 180 Atk / 35 Def — hoechster Basis-Schaden aller Mounts",notes:"Feuer-Schwäche. Frostcursed Set empfohlen. Tank-Mount schlechthin."},
   {name:"Snowwhite Deer",type:"Hirsch (Sigil)",unlock:"Snowwhite Deer Kill (Pailune, Valgrand Tomb-Ebene) → Crafting",stats:"300+ Sta — bester Explorations-Stamina-Wert",notes:"Tier flieht — Aerial Force Palm + Sleep/Poison Arrows fuer Taming-Vorbereitung."},
-  {name:"Icicle Edge Alpine Ibex",type:"Steinbock (Sigil)",unlock:"Boss Moren the Mistwood Huntmaster (Wayward Woods, 'The Sport Hunter') — Kap. 8+, 15 Pailune Militia-Missionen",stats:"Hoch Sta — Berggelände-Spezialist",notes:"2 Phasen. Phase 2: Feuer bricht Reiter. White Horn Yeti besiegen."},
-  {name:"Rock Tusk Warthog",type:"Warzenschwein (Sigil)",unlock:"Boss Ravok of the Savage Fangs (Bordig Ruins, 'Master of the Wetlands') — 'Master of a Forgotten Land'-Mission",stats:"Hoch Atk — bester Offensiv-Sigil-Mount auf dem Boden",notes:"2 Phasen."},
+  {name:"Icicle Edge Alpine Ibex",type:"Steinbock (Sigil)",unlock:"Boss Moren the Mistwood Huntmaster (Wayward Woods, Quest 'The Sport Hunter', Longleaf-Tribe-Fraktion)",stats:"Hoch Sta — Berggelände-Spezialist",notes:"2 Phasen. Phase 2: Feuer bricht Reiter. White Horn Yeti besiegen."},
+  {name:"Rock Tusk Warthog",type:"Warzenschwein (Sigil)",unlock:"Boss Ravok of the Savage Fangs (Bordig Ruins, Quest 'Master of the Wetlands')",stats:"Hoch Atk — bester Offensiv-Sigil-Mount auf dem Boden",notes:"2 Phasen."},
   // ── Zaehmbare Wildtiere (nach erfolgreichem Taming dauerhaft rufbar) ──
   {name:"Black Bear",type:"Wildtier",unlock:"Wildes Taming — Wald-Gebiete allgemein",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
   {name:"Brown Bear",type:"Wildtier",unlock:"Wildes Taming — Wald-Gebiete",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
@@ -3040,8 +3040,9 @@ const TRUE_ENDING=[
   {id:"te15",cat:"Sanctums",task:"Sanctum of Revelation"},
   {id:"te16",cat:"Sanctums",task:"Sanctum of Mortification (Kap. 9, Story)"},
   {id:"te17",cat:"Sanctums",task:"Sanctum of Devotion (Delesyia)"},
-  {id:"te18",cat:"Sanctums",task:"Sanctum of Liberate"},
-  {id:"te19",cat:"Sanctums",task:"Sanctum of Mortification 2 + restliche Sanctums"},
+  {id:"te29",cat:"Sanctums",task:"Sanctum of Veneration (Delesyia)"},
+  {id:"te30",cat:"Sanctums",task:"Sanctum of Oblation (Delesyia)"},
+  {id:"te31",cat:"Sanctums",task:"Sanctum of Faith (Delesyia)"},
   {id:"te20",cat:"Hexen",task:"Sylvia gefunden und gesprochen (Cave N Hernand)"},
   {id:"te21",cat:"Hexen",task:"Elowen freigeschaltet + Token erhalten"},
   {id:"te22",cat:"Hexen",task:"Bari freigeschaltet + Token erhalten"},
@@ -3049,7 +3050,7 @@ const TRUE_ENDING=[
   {id:"te24",cat:"Hexen",task:"Areciel freigeschaltet + Token erhalten"},
   {id:"te25",cat:"Hexen",task:"White Crow Huette geöffnet (alle 4 Tokens)"},
   {id:"te26",cat:"Story",task:"Kapitel 12 abschliessen + Epilog"},
-  {id:"te27",cat:"Story",task:"Axiom Library Logs lesen (Abyss, nach Epilog)"},
+  {id:"te27",cat:"Story",task:"Axiom Archive Records lesen — 6 Bücher, 3. Stock (Abyss, nach Epilog)"},
   {id:"te28",cat:"Misc",task:"Faction Contribution Threshold in jeder Region erreicht"}
 ];
 
@@ -3061,8 +3062,8 @@ const LOCATIONS=[
   {name:"White Wastes Sanctuary",region:"Pailune (NW)",type:"Unique Weapon",desc:"Darkbringer Greatsword: Skelett-Krater, Schwert aus Riesenskeletts Maul ziehen. Kein Boss nötig."},
   {name:"Frostveiled Castle Ruins",region:"Pailune (S)",type:"Unique Weapon",desc:"Vow of the Dead King: Treppe → Keller → Spike-Boden → Feuer-Korridor → Stone-Earth Vein → Kerze → Sarg."},
   {name:"Howling Hill Camp",region:"Pailune",type:"Camp / Hub",desc:"Greymane-Basis. Camp-Alchemy-Lab (Attack Speed Potion), Camp-Smithy, Blackstar-Stable, Dispatch-System."},
-  {name:"Wayward Woods",region:"Pailune (S)",type:"Boss / Witch / Mount",desc:"White Crow Hideout (4 Tokens). Black Fang (Silver Fang Mount). Stone Worm Cave (Gold-Farm)."},
-  {name:"Sanctum of Benediction",region:"Hernand/Pailune-Grenze",type:"Sanctum",desc:"Leather Helm of the Fallen Kingdom (Momentum-Core) als Blueprint."},
+  {name:"Wayward Woods",region:"Pailune (S)",type:"Witch / Mount",desc:"White Crow Hideout (4 Tokens). Stone Worm Cave (Gold-Farm). (Black Fang/Silver Fang ist NICHT hier, sondern im Forest of Wolves, Hernand.)"},
+  {name:"Sanctum of Benediction",region:"Hernand/Pailune-Grenze",type:"Sanctum",desc:"Leather Helm of the Fallen Kingdom (mit Momentum-Core) — fertiges Item aus einer Truhe im versteckten Raum, KEIN Blueprint."},
   {name:"Ascetic's Rest",region:"The Abyss",type:"Alchemy Station",desc:"Refined Palmar Pill Rezept nach Kap. 9 Quest 'Six Statues and the Beast'."},
   {name:"Pororin Village",region:"Hernand (W)",type:"Faction",desc:"Pororin Forest Guardians. Pharmacological Research → Palmar Pill Rezept (via Bell-Tower-Chain)."},
   {name:"Lioncrest Watchtower",region:"Hernand",type:"Quest Item",desc:"Visione-Helm (oberstes Stockwerk) — Quest Memory Fragment, Kap. 2."},
@@ -3074,7 +3075,7 @@ const LOCATIONS=[
   {name:"Bordig Ruins",region:"Crimson Desert",type:"Boss / Mount",desc:"Ravok of the Savage Fangs (Master of the Wetlands) → Rock Tusk Warthog Mount."},
   {name:"Ashclaw Keep",region:"Pailune",type:"Boss",desc:"Myurdin + Lava Myurdin Boss-Fight (Kap. 7). Oongka-Scripted-Unlock hier."},
   {name:"Spire of Ringing Truth",region:"Pailune",type:"Boss / Skill",desc:"Priscus the Ancient. Danach: Path of Trials → Frost Mantle Skill."},
-  {name:"The Laughing Marionette",region:"Delesyia",type:"Minigame [1.06]",desc:"Claw Machine: 1 Silver pro Versuch. Belohnungen: 12 Beleuchtungsitems, 1 Stuhl, 1 Spezial-Kopfbedeckung, Abyss Artifacts, Abyss Gears."},
+  {name:"The Laughing Marionette",region:"Demeniss",type:"Minigame [1.06]",desc:"Claw Machine: 1 Silver pro Versuch. Belohnungen: 12 Beleuchtungsitems, 1 Stuhl, 1 Spezial-Kopfbedeckung, Abyss Artifacts, Abyss Gears."},
   {name:"Smithy (Extraction)",region:"Alle Regionen",type:"Crafting [1.06]",desc:"Neues Extraction-System: Materialien aus verfeinerter Ausrüstung zurückgewinnen. Seltenere Materialien (Artifacts, Aeserion's Scale) zu 100% zurück, Basis-Materialien (Erz, Bloodstones) ~70%. Verfeinerungsstufe wird auf Basis zurückgesetzt, Item bleibt erhalten."},
   {name:"Oongka — Unbewaffnete Skills",region:"Überall",type:"Feature [1.06]",desc:"Oongka hat Faustkampf-Skills. Im Skill-Menü 'Fists' auswählen. Damiane erhielt eigene Fists-Skills in Patch 1.07."},
   {name:"Weapon Sheaths",region:"Einstellungen",type:"Feature [1.06]",desc:"Schwertscheide am Charakter an/aus schaltbar: Einstellungen → 'Display Sheath' Option."},
@@ -3144,7 +3145,7 @@ const KLIFF_STAMINA=[
   {name:"Clothesline",prereq:"Watch & Learn: Black Bears Kap. 6",cost:"0 oder 1 AA",effect:"Sprint → Hook + Boden-Slam"},
   {name:"Body Slam",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"In der Luft: volles Gewicht fallen lassen"},
   {name:"Unarmed Combat",prereq:"Default",cost:"1 AA/Lv bis Lv 5",effect:"Bare-Fist-Schläge"},
-  {name:"Pump Kick",prereq:"NUR Watch & Learn: Matthias-Boss (Kap. 1) — sonst NICHT erlernbar!",cost:"0",effect:"Mächtiger Doppelfusstoss — exklusiv beobachtbar"},
+  {name:"Pump Kick",prereq:"Matthias-Boss (Kap. 2): via Watch & Learn ODER als Skill-Scroll-Drop",cost:"0",effect:"Mächtiger Doppelfusstoss"},
   {name:"Dropkick",prereq:"Watch & Learn: Axtbanditen Kap. 2 oder 1 AA",cost:"0 oder 1 AA",effect:"Doppelfuss-Tritt mit Schwung"},
   {name:"Vault",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"Über Gegnerrücken springen"},
   {name:"Meteor Kick",prereq:"UC Lv 5 oder Watch & Learn",cost:"0 oder 1 AA",effect:"Diving Kick aus grosser Höhe"}
@@ -3156,7 +3157,7 @@ const KLIFF_SPIRIT=[
   {name:"Healing Force Palm",prereq:"FP Lv 1",cost:"1 AA",effect:"Energie heilt Target (auch verwundete Pferde!)"},
   {name:"Force Palm Expertise",prereq:"FP Lv 3",cost:"1 AA",effect:"Bis zu 3 Strikes — fuer Excavatron + Boss-Stagger"},
   {name:"Focused Force Palm",prereq:"Watch & Learn: Geist-NPC westlich Fort Perwin (Kap. 4, MISSABLE!)",cost:"0",effect:"Durchbricht magische Wände/Barrieren"},
-  {name:"Diving Force Palm",prereq:"Abyss-Sky-Puzzles: Path of Providence",cost:"0",effect:"Terminaler Fall → Ground-Slam (höchster Single-Hit)"},
+  {name:"Diving Force Palm",prereq:"Puzzle auf Precipice of Truth (Abyss-Insel; via Ethereal Pathway → Root's End)",cost:"0",effect:"Terminaler Fall → Ground-Slam (höchster Single-Hit)"},
   {name:"Focus",prereq:"Watch & Learn: NPC in Ruinen Kap. 2 (Unexpected Gift)",cost:"0",effect:"Zeitlupen-Modus, regeneriert Spirit"},
   {name:"Focused Repulsion",prereq:"Focus Lv 2 oder Watch & Learn",cost:"0 oder 1 AA",effect:"Beim Treffer im Focus: alles abstossen"},
   {name:"Nature's Grasp",prereq:"Watch & Learn: kleiner Geist-NPC Kap. 2 (Unexpected Gift)",cost:"0",effect:"Schwere Objekte heben/bewegen"},
@@ -3210,7 +3211,7 @@ const DAMIANE_SKILLS=[
 // Oongka — strukturierte Skill-Daten (fuer Skill-Tree-Graph)
 const OONGKA_SKILLS=[
   {name:"Quick Swap",prereq:"Default",cost:"0",effect:"L1+L2 sofortiger Waffen-Wechsel (DEFAULT)"},
-  {name:"Dual Wielding Mastery",prereq:"Default",cost:"0",effect:"Zweihaender koennen einhaendig gefuehrt werden — Oongka exklusiv"},
+  {name:"Dual Wielding Mastery",prereq:"Oongka Skill-Tree: Armed Combat Lv. 4",cost:"0",effect:"Zweihaender koennen einhaendig gefuehrt werden — Oongka exklusiv"},
   {name:"Leaping Smash",prereq:"Default",cost:"1 AA/Lv bis Lv 3",effect:"Sprung + Boden-Smash mit Schockwelle"},
   {name:"Rampage",prereq:"Leaping Smash Lv 2",cost:"1 AA",effect:"Charge-Buff mit erhoehtem Damage"},
   {name:"Raging Lightning",prereq:"Rampage Lv 1",cost:"1 AA",effect:"Blitz-Wuerge durchschlaegt Super Armor"},
@@ -3223,7 +3224,7 @@ const OONGKA_SKILLS=[
   {name:"Lightning Pulse",prereq:"Lightning-Quelle Abyss",cost:"1 AA",effect:"Pulsierende Elektrizitaet um Oongka"},
   {name:"Flight (Kuku Rocket Pack)",prereq:"White Crow Questline",cost:"0",effect:"Rocket-Pack statt Magie-Flug"},
   {name:"Vertical Flight",prereq:"Flight Lv 1",cost:"1 AA",effect:"Senkrechter Aufwaerts-Boost"},
-  {name:"Pump Kick",prereq:"NUR Watch & Learn: Matthias-Boss",cost:"0",effect:"Maechtiger Doppelfusstoss — exklusiv"},
+  {name:"Pump Kick",prereq:"Matthias-Boss (Kap. 2): Watch & Learn oder Skill-Scroll-Drop",cost:"0",effect:"Maechtiger Doppelfusstoss"},
   {name:"Dropkick",prereq:"Watch & Learn: Axt-Banditen Kap. 2",cost:"0 oder 1 AA",effect:"Doppelfuss-Tritt mit Schwung"},
   {name:"Body Slam",prereq:"1 AA oder Watch & Learn",cost:"0 oder 1 AA",effect:"In der Luft: volles Gewicht fallen lassen"},
   {name:"Clothesline",prereq:"Watch & Learn: Black Bears Kap. 6",cost:"0 oder 1 AA",effect:"Sprint → Hook + Boden-Slam"},
@@ -3243,7 +3244,7 @@ const WATCH_AND_LEARN=[
   {skill:"Nature's Grasp",loc:"Kleiner Geist-NPC in Ruinen (Kap. 2, Unexpected Gift)",miss:false},
   {skill:"Focus",loc:"Story-Lernen in denselben Ruinen (Kap. 2)",miss:false},
   {skill:"Focused Force Palm",loc:"Geist-NPC westlich Fort Perwin (Kap. 4, On the Right Path)",miss:true},
-  {skill:"Pump Kick",loc:"Matthias-Boss (Kap. 1) — einzige Möglichkeit!",miss:true},
+  {skill:"Pump Kick",loc:"Matthias-Boss (Kap. 2): Watch & Learn oder Skill-Scroll-Drop",miss:false},
   {skill:"Counter",loc:"Hernand Castle Guards (Kap. 1, Mystical Key) ODER Lioncrest Manor Guard Arena",miss:false},
   {skill:"Dropkick",loc:"Axt-Banditen Kap. 2 (Hernand in Chaos)",miss:false},
   {skill:"Evasive Roll",loc:"Kailok the Hornsplitter Boss (Ende Kap. 2)",miss:false},
@@ -3979,12 +3980,12 @@ const PETS=[
   {name:"Cat",type:"cat",food:"Salmon",icon:"cd_portrait_petimage_animal_black_cat_domestic.webp"},
   {name:"Cat",type:"cat",food:"Salmon",icon:"cd_portrait_petimage_animal_bicolor_cat_domestic.webp"},
   {name:"Cat",type:"cat",food:"Salmon",icon:"cd_portrait_petimage_animal_tricolor_cat_domestic.webp"},
-  {name:"Fat Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_cat_domestic.webp"},
-  {name:"Fat Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_yellow_cat_domestic.webp"},
-  {name:"Fat Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_white_cat_domestic.webp"},
-  {name:"Fat Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_black_cat_domestic.webp"},
-  {name:"Fat Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_bicolor_cat_domestic.webp"},
-  {name:"Fat Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_tricolor_cat_domestic.webp"},
+  {name:"Loafy Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_cat_domestic.webp"},
+  {name:"Loafy Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_yellow_cat_domestic.webp"},
+  {name:"Loafy Cat",type:"cat",food:"Sockeye Salmon",icon:"cd_portrait_petimage_animal_fat_white_cat_domestic.webp"},
+  {name:"Loafy Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_black_cat_domestic.webp"},
+  {name:"Loafy Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_bicolor_cat_domestic.webp"},
+  {name:"Loafy Cat",type:"cat",food:"Crucian Carp",icon:"cd_portrait_petimage_animal_fat_tricolor_cat_domestic.webp"},
   {name:"Slim Cat",type:"cat",food:"Pond Loach",icon:"cd_portrait_petimage_animal_skinny_cat_domestic.webp"},
   {name:"Slim Cat",type:"cat",food:"Pond Loach",icon:"cd_portrait_petimage_animal_skinny_yellow_cat_domestic.webp"},
   {name:"Slim Cat",type:"cat",food:"Pond Loach",icon:"cd_portrait_petimage_animal_skinny_white_cat_domestic.webp"},
@@ -3993,7 +3994,7 @@ const PETS=[
   {name:"Slim Cat",type:"cat",food:"Ricefish",icon:"cd_portrait_petimage_animal_skinny_tricolor_cat_domestic.webp"},
   {name:"Ashen Cat",type:"cat",food:"Mackerel",icon:"cd_portrait_petimage_animal_cat_hernand_unique_1.webp"},
   {name:"Black Cat",type:"cat",food:"Red Tonguesole",icon:"cd_portrait_petimage_animal_cat_demeniss_unique_1.webp"},
-  {name:"Fat Cat",type:"cat",food:"Opaleye",icon:"cd_portrait_petimage_animal_cat_delesyian_unique_1.webp"},
+  {name:"Loafy Cat",type:"cat",food:"Opaleye",icon:"cd_portrait_petimage_animal_cat_delesyian_unique_1.webp"},
   {name:"Yellow Cat",type:"cat",food:"Trout",icon:"cd_portrait_petimage_animal_cat_pailune_unique_1.webp"},
   {name:"Kitten",type:"cat",food:"Fish Fillet",icon:"cd_portrait_petimage_animal_yellow_kitten_domestic.webp"},
   {name:"Kitten",type:"cat",food:"Fish Fillet",icon:"cd_portrait_petimage_animal_white_kitten_domestic.webp"},
@@ -4503,51 +4504,54 @@ const ARMOR_IMGS={
 };
 
 const GREYMANE_COMMISSIONS=[
-  {id:"gm1",n:1,name:"A Fresh Start",region:"Hernand",chapter:"3",reward:"+3 Inventarslots",note:"Howling Hill — erster Camp-Auftrag"},
-  {id:"gm2",n:2,name:"Reward for Their Sweat",region:"Hernand",chapter:"3",reward:"+3 Inventarslots",note:""},
-  {id:"gm3",n:3,name:"Return of the Comrade",region:"Hernand",chapter:"3",reward:"+3 Inventarslots",note:""},
-  {id:"gm4",n:4,name:"Hope After the Draught",region:"Hernand",chapter:"3",reward:"+3 Inventarslots",note:""},
-  {id:"gm5",n:5,name:"Bustling Hill",region:"Hernand",chapter:"3",reward:"+3 Inventarslots",note:""},
-  {id:"gm6",n:6,name:"Lumber for the Camp",region:"Hernand",chapter:"3–4",reward:"+3 Inventarslots",note:"Holz-Sammlung für Camp-Erweiterung"},
-  {id:"gm7",n:7,name:"Iron from the Quarry",region:"Hernand",chapter:"3–4",reward:"+3 Inventarslots",note:"Karin Quarry — Erz-Auftrag"},
-  {id:"gm8",n:8,name:"Medical Supplies",region:"Hernand",chapter:"4",reward:"+3 Inventarslots",note:"Kräuter & Palmar Leaf"},
-  {id:"gm9",n:9,name:"Fortify the Ramparts",region:"Hernand",chapter:"4",reward:"+3 Inventarslots",note:""},
-  {id:"gm10",n:10,name:"Feed the Troops",region:"Hernand",chapter:"4",reward:"+3 Inventarslots",note:"Vorräte-Auftrag"},
-  {id:"gm11",n:11,name:"Intelligence Report",region:"Pailune",chapter:"5",reward:"+3 Inventarslots",note:"Erste Pailune-Commission"},
-  {id:"gm12",n:12,name:"Scouting Mission",region:"Pailune",chapter:"5",reward:"+3 Inventarslots",note:""},
-  {id:"gm13",n:13,name:"Supply Line",region:"Pailune",chapter:"5–6",reward:"+3 Inventarslots",note:""},
-  {id:"gm14",n:14,name:"Troop Morale",region:"Pailune",chapter:"6",reward:"+3 Inventarslots",note:""},
-  {id:"gm15",n:15,name:"Rescue Mission",region:"Pailune",chapter:"6",reward:"+3 Inventarslots",note:""},
-  {id:"gm16",n:16,name:"Reclaim the Pass",region:"Pailune",chapter:"6",reward:"+3 Inventarslots",note:""},
-  {id:"gm17",n:17,name:"Forge the Weapons",region:"Pailune",chapter:"7",reward:"+3 Inventarslots",note:"Schmiede-Auftrag"},
-  {id:"gm18",n:18,name:"Protect the Healer",region:"Pailune",chapter:"7",reward:"+3 Inventarslots",note:""},
-  {id:"gm19",n:19,name:"The Missing Patrol",region:"Demeniss",chapter:"9",reward:"+3 Inventarslots",note:"Erste Demeniss-Commission"},
-  {id:"gm20",n:20,name:"Cold Storage",region:"Demeniss",chapter:"9",reward:"+3 Inventarslots",note:"Vorräte in Eis-Region"},
-  {id:"gm21",n:21,name:"The Spy Among Us",region:"Demeniss",chapter:"9",reward:"+3 Inventarslots",note:""},
-  {id:"gm22",n:22,name:"Elimination Order",region:"Delesyia",chapter:"10–11",reward:"+3 Inventarslots",note:"Erste Delesyia-Commission"},
-  {id:"gm23",n:23,name:"Final Push",region:"Delesyia",chapter:"11",reward:"+3 Inventarslots",note:""},
-  {id:"gm24",n:24,name:"Securing the Arsenal",region:"Delesyia",chapter:"11",reward:"+3 Inventarslots",note:"Gorthak Ironworks"},
-  {id:"gm25",n:25,name:"Contract: The Deserter",region:"Delesyia",chapter:"11",reward:"+3 Inventarslots",note:""},
-  {id:"gm26",n:26,name:"The Last Commission",region:"Endgame",chapter:"12+",reward:"+3 Inventarslots",note:"Erfordert alle 25 vorherigen Commissions"},
-  {id:"gm27",n:27,name:"Greymanes Reunited",region:"Endgame",chapter:"12+",reward:"+3 Inventarslots + Camp Max",note:"Finale Commission — True Ending Gate"}
+  // Neu aufgebaut 2026-06-01 (Recherche Game8 Archiv 586021): echte Bewohner-Anfragen "[NPC]'s Request", ALLE im Greymane Camp (Howling Hill, Hernand) — NICHT über Regionen/Kapitel verteilt. Freischaltung: von geretteten/rekrutierten Kameraden gepostet (Journal → Faction Quests → Greymanes). Belohnung je: Medium Bag (+3 Inventarslots). KEINE finale "True Ending Gate"-Commission. 26 Namen belegt; der 27. ist quellenseitig nicht sicher benannt.
+  {id:"gm1",n:1,name:"Carl's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm2",n:2,name:"Ronnie's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm3",n:3,name:"Ross's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm4",n:4,name:"Tranan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm5",n:5,name:"Brice's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm6",n:6,name:"Wynstan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm7",n:7,name:"Conrad's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm8",n:8,name:"Alec's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm9",n:9,name:"Eric's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm10",n:10,name:"Connor's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm11",n:11,name:"Oliver's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm12",n:12,name:"Ronald's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm13",n:13,name:"Brant's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm14",n:14,name:"Devan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm15",n:15,name:"Evelyn's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm16",n:16,name:"Joan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm17",n:17,name:"Pierce's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm18",n:18,name:"Niall's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm19",n:19,name:"Balder's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm20",n:20,name:"Terry's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm21",n:21,name:"Luther's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm22",n:22,name:"Duncan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm23",n:23,name:"Morrow's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm24",n:24,name:"Lars's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm25",n:25,name:"Gerald's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm26",n:26,name:"Vernon's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
+  {id:"gm27",n:27,name:"27. Commission (Name nicht sicher belegt)",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Guides nennen 27 gesamt; Game8 listet 26 benannte. Genauer Name offen."}
 ];
 
 const SANCTUM_DATA=[
-  {id:"te5",name:"Sanctum of Temperance",region:"Hernand — Witchwoods",note:"Elowen-Questline #1"},
-  {id:"te6",name:"Sanctum of Penitence",region:"Hernand",note:"Elowen-Questline #2"},
-  {id:"te7",name:"Sanctum of Benediction",region:"Hernand / Pailune-Grenze",note:"Drop: Leather Helm of Fallen Kingdom (Momentum-Core)"},
-  {id:"te8",name:"Sanctum of Absolution",region:"Pailune",note:"Boss: Antumbra's Sword → Vessel of Dark Pursuit"},
-  {id:"te9",name:"Sanctum of Exaltation",region:"Pailune",note:"Schaltet Elowen Tier-3 Synthese frei"},
-  {id:"te10",name:"Sanctum of Deliverance",region:"Pailune",note:"Bari-Questline #1"},
-  {id:"te11",name:"Sanctum of Solace",region:"Pailune",note:"Bari-Questline #2"},
-  {id:"te12",name:"Sanctum of Expiation",region:"Demeniss",note:"Lyselia-Questline #1"},
-  {id:"te13",name:"Sanctum of Atonement",region:"Demeniss",note:"Lyselia-Questline #2"},
-  {id:"te14",name:"Sanctum of Renunciation",region:"Demeniss",note:"Areciel-Questline #1"},
-  {id:"te15",name:"Sanctum of Revelation",region:"Delesyia",note:"Areciel-Questline #2"},
-  {id:"te16",name:"Sanctum of Mortification",region:"Demeniss — Kap. 9 Story",note:"Story-kritisch (Black Witch Quest)"},
-  {id:"te17",name:"Sanctum of Devotion",region:"Delesyia",note:"Drop: Blueprint Kuku Ice-Resistant Armor"},
-  {id:"te18",name:"Sanctum of Liberate",region:"The Abyss",note:"Spät-Game"},
-  {id:"te19",name:"Sanctum of Mortification 2",region:"The Abyss",note:"+ restliche Sanctums — Endgame"}
+  // Neu aufgebaut 2026-06-01 (Fakten-Audit + Recherche PowerPyx/Game8): korrekte Hexen-Zuordnung + Regionen; 3 zuvor fehlende Lyselia-Sanctums (Veneration/Oblation/Faith) ergänzt. 16 Sanctums gesamt (15 reinigbar + Story-Mortification).
+  {id:"te8",name:"Sanctum of Absolution",region:"Hernand (Süd/Südwest)",note:"Elowen (Wisdom). Boss Antumbra's Sword → Vessel of Dark Pursuit + Wound of Darkness Core"},
+  {id:"te5",name:"Sanctum of Temperance",region:"Hernand (Pororin Forest / Unicorn Cliff)",note:"Elowen (Wisdom)"},
+  {id:"te6",name:"Sanctum of Penitence",region:"Hernand (Plateau SO der Stadt / The Ironwood)",note:"Elowen (Wisdom)"},
+  {id:"te7",name:"Sanctum of Benediction",region:"Hernand (Everfrost Mountains, West)",note:"Elowen (Wisdom). Leather Helm of the Fallen Kingdom (Momentum-Core) — fertiges Item aus verstecktem Raum, kein Blueprint"},
+  {id:"te9",name:"Sanctum of Exaltation",region:"Pailune (Silver Wolf Mountain)",note:"Bari (Kindness)"},
+  {id:"te11",name:"Sanctum of Solace",region:"Pailune (Silver Wolf Mtn, Südost-Kette)",note:"Bari (Kindness)"},
+  {id:"te10",name:"Sanctum of Deliverance",region:"Hernand (Stormtalon Ridge, SO)",note:"Bari (Kindness)"},
+  {id:"te13",name:"Sanctum of Atonement",region:"Hernand (Haunted Hill, West)",note:"Bari (Kindness)"},
+  {id:"te17",name:"Sanctum of Devotion",region:"Delesyia (Hushwind Hills / Dewhaven)",note:"Lyselia (Humility). Reward: Blueprint Kuku Ice-Resistant Armor"},
+  {id:"te29",name:"Sanctum of Veneration",region:"Delesyia (Mount Benus / Blue Thicket)",note:"Lyselia (Humility)"},
+  {id:"te30",name:"Sanctum of Oblation",region:"Delesyia (Insel bei Blue Thicket)",note:"Lyselia (Humility)"},
+  {id:"te31",name:"Sanctum of Faith",region:"Delesyia (Grey Forest, Ost)",note:"Lyselia (Humility)"},
+  {id:"te12",name:"Sanctum of Expiation",region:"Demeniss (Nord/NW, nördl. Gate of Truth)",note:"Areciel (Strength)"},
+  {id:"te14",name:"Sanctum of Renunciation",region:"Drywind Valley / Red River (Grenze Demeniss/Crimson Desert/Delesyia)",note:"Areciel (Strength). Region quellenübergreifend uneinheitlich (Grenzgebiet)"},
+  {id:"te15",name:"Sanctum of Revelation",region:"Demeniss (Serpent Marsh, NO-Insel)",note:"Areciel (Strength). Reward: Endgame Abyss-Core + Stärke-Infusion"},
+  {id:"te16",name:"Sanctum of Mortification",region:"Demeniss (Denn River, Kap. 9 Story)",note:"White Crow (Story). Quest 'Fragments of Darkness'"},
 ];
 const SANCTUM_IDS=SANCTUM_DATA.map(s=>s.id);
 
@@ -5120,7 +5124,7 @@ const BUILD_RECIPES={
   'dps-end':{name:'Antumbra-Burst',weapon:'Twisted Verdict (2H)',armor:'Combat God\'s Plate Gloves + Dark Marksman',cores:'Abyssal Rays · Destruction III · Greater Destruction · Malicebane · Ator\'s Orb',skills:'Falling Palm · Force Palm Expertise · Nature\'s Echo · Counter',tip:'Falling Palm aus terminaler Fallgeschwindigkeit = hoechster Single-Hit. Echo verdoppelt es. BIS-DPS.'},
   'mobility-early':{name:'Glider-Scout',weapon:'Sword of the Lord + Noble Man\'s Bow',armor:'Grey Wolf Leather',cores:'Speed Lv.2 · Wind Slash',skills:'Evasive Roll · Flight (Crow\'s Wing) · Dodge',tip:'Noble Man\'s Bow + Flight fuer Aerial-Recon. Evasive Roll automatisch nach Kailok.'},
   'mobility-mid':{name:'Aerial Hawk',weapon:'Tauria Curved Sword',armor:'Blackwing Leather (post-Draven)',cores:'Speed Lv.2 · Crow\'s Pursuit · Wind Slash',skills:'Aerial Roll · Aerial Force Palm · Dodge · Glide',tip:'Blackwing Set + Aerial Roll = unschlagbar in offenem Terrain. Crow\'s Pursuit-Damage scaled mit Movement.'},
-  'mobility-late':{name:'Wind-Walker',weapon:'Tauria Curved Sword (Refined 5)',armor:'Dark Marksman + Blackwing Mix',cores:'Wind Slash · Crow\'s Pursuit · Gale II · Haste I',skills:'Aerial Roll · Aerial Force Palm · Storm Veil · Diving Force Palm',tip:'Storm Veil ab Kap. 8 via Riddle Square Chain. Diving Force Palm aus Path of Providence Sky-Puzzles.'},
+  'mobility-late':{name:'Wind-Walker',weapon:'Tauria Curved Sword (Refined 5)',armor:'Dark Marksman + Blackwing Mix',cores:'Wind Slash · Crow\'s Pursuit · Gale II · Haste I',skills:'Aerial Roll · Aerial Force Palm · Storm Veil · Diving Force Palm',tip:'Storm Veil ab Kap. 8 via Riddle Square Chain. Diving Force Palm aus dem Precipice-of-Truth-Puzzle (Abyss).'},
   'mobility-end':{name:'Blackstar-Hunter',weapon:'Tauria Curved Sword Refine 5',armor:'Blackwing + Combat God Mix',cores:'Wind Slash · Crow\'s Pursuit · Greater Swift · Haste I · Storm Fang',skills:'Aerial Force Palm · Falling Palm · Diving Force Palm · Storm Veil',tip:'Blackstar-Mount fuer Umbra. Falling Palm aus Drache abspringen = 1-Shot.'},
   'caster-early':{name:'Spirit-Channeler',weapon:'Hwando + Hollow Visage',armor:'Light Battlefield Cloak',cores:'Insight I · Destruction I',skills:'Force Palm Lv 2 · Focus · Nature\'s Grasp',tip:'Hollow Visage aus Dawn Cave hat Insight built-in. Force Palm Lv 2 via Force Palm Pulse-Quest.'},
   'caster-mid':{name:'Element-Adept',weapon:'Frozen Anguish (2H)',armor:'Frostcursed Set',cores:'Stamina Transference · Destruction I · Insight I',skills:'Flame Strike · Frost Mantle · Lightning Surge · Imbue Element Lv 2 · Focus Lv 2',tip:'Frostcursed Set + Frost Mantle = Ice-immunity-Combo. Path of Trials nach Priscus fuer Frost Mantle.'},
@@ -5130,7 +5134,7 @@ const BUILD_RECIPES={
   'ranged-mid':{name:'Infinite-Arrow',weapon:'Warspike Bow',armor:'Dark Marksman Boots + Blackwing',cores:'Infinite Arrows III · Crow\'s Pursuit · Crit Rate Lv.2',skills:'Marksmanship Lv 5 · Explosive Evasive Shot · Multishot · Focus',tip:'Crit-Scaling-Build via Warspike. Infinite Arrows = nie nachladen.'},
   'ranged-late':{name:'Sniper-Storm',weapon:'Divine Echoes Bow + Caliburn\'s Mercy (Quick Swap)',armor:'Dark Marksman Set',cores:'Infinite Arrows III · Crit Damage · Wind Slash',skills:'Multishot · Aerial Roll · Storm Veil · Focus Lv 2',tip:'Quick Swap zwischen Bow + Pistole fuer Burst. Storm Veil hidet vor Adds.'},
   'ranged-end':{name:'Aeserion-Hunter',weapon:'Aeserion Bow + Divine Echoes Bow',armor:'Combat God Gloves + Dark Marksman',cores:'Greater Infinite Arrows · Greater Destruction · Wind Slash · Storm Fang',skills:'Multishot · Aerial Roll · Falling Palm (Air-Shot) · Imbue Element Lv 4',tip:'Aeserion Bow ab Kap. 12. Imbued Arrows fuer Element-Schwaechen.'},
-  'unarmed-early':{name:'Fist-Bandit',weapon:'(unarmed)',armor:'Light Battlefield Cloak',cores:'(in Armor)',skills:'Unarmed Combat Lv 3 · Pump Kick (Matthias!) · Dropkick (Watch&Learn Axt-Banditen)',tip:'Pump Kick NUR bei Matthias-Boss erlernbar — MISSABLE! Sofort als Watch&Learn-Move einbinden.'},
+  'unarmed-early':{name:'Fist-Bandit',weapon:'(unarmed)',armor:'Light Battlefield Cloak',cores:'(in Armor)',skills:'Unarmed Combat Lv 3 · Pump Kick (Matthias!) · Dropkick (Watch&Learn Axt-Banditen)',tip:'Pump Kick beim Matthias-Boss (Kap. 2): via Watch & Learn oder als Skill-Scroll-Drop. Sofort einbinden.'},
   'unarmed-mid':{name:'Wrestler',weapon:'Mining Knuckledrill (auch Pickaxe)',armor:'Combat God\'s Plate Gloves (BIS)',cores:'Move Speed Lv.4 · Lightning Affinity',skills:'Body Slam · Clothesline · Vault · Meteor Kick · Grappling Lv 5',tip:'Mining Knuckledrill + Pickaxe-Funktion. Combat God\'s Plate Gloves frueh sichern.'},
   'unarmed-late':{name:'Brawler-King',weapon:'Combat God\'s Plate Gloves + Savage Sawblade Quick Swap',armor:'Hungering Fang Leather + Combat God Gloves',cores:'Relentless · Lightning Affinity · Bleed (Savage)',skills:'Meteor Kick · Clothesline · Pump Kick · Body Slam · Blinding Flash Finisher',tip:'Blinding Flash Finisher seit 1.07 auch unbewaffnet ausfuehrbar.'},
   'unarmed-end':{name:'Pure-Fist',weapon:'Combat God\'s Plate Gloves',armor:'Combat God Gloves + Plate of Shadows',cores:'Abyssal Rays · Greater Steelbane · Lightning Affinity · Malicebane',skills:'Meteor Kick · Falling Palm · Blinding Flash Finisher · Force Palm Expertise · Nature\'s Echo',tip:'Falling Palm auch ohne Waffe brutal. Nature\'s Echo verdoppelt jeden Faustschlag.'}
@@ -5377,8 +5381,8 @@ const SECRETS_MECHANICS=[
 ];
 
 const SECRETS_HIDDEN_WEAPONS=[
-  {name:'Hollow Visage',atk:17,extra:'Speed Lv.2 · Insight I + Gale I + Destruction I (3 Cores built-in)',loc:'Truhe am Ende der <strong>Dawn Cave</strong> · hinter Wasserfall im Mountain of Lost Souls',difficulty:'Mittel'},
-  {name:'Survivor\'s Solitude',atk:21,extra:'Speed Lv.1',loc:'<strong>Death\'s Grip Cave</strong> · hinter Wasserfall · NW von Lake Kharonso',difficulty:'Lehre: Wasserfälle sind nie nur Deko — immer mit Stab-Attack durchstoßen'},
+  {name:'Hollow Visage',atk:17,extra:'Speed Lv.2 · Insight I + Gale I + Destruction I (3 Cores built-in)',loc:'Truhe am Ende der <strong>Dawn Cave</strong> · hinter Wasserfall im Mountain of Frozen Souls',difficulty:'Mittel'},
+  {name:'Survivor\'s Solitude',atk:17,extra:'Speed Lv.1',loc:'<strong>Death\'s Grip Cave</strong> · hinter Wasserfall · NW von Lake Kharonso',difficulty:'Lehre: Wasserfälle sind nie nur Deko — immer mit Stab-Attack durchstoßen'},
   {name:'Vessel of Dark Pursuit',atk:25,extra:'Abyss <strong>Wound of Darkness</strong>',loc:'<strong>Antumbra\'s Sword</strong>-Boss · Sanctum of Absolution',difficulty:'Stärkste Secret-Weapon — Pre-Boss-Buffs (Grindstone, Anvil, Pan-Fried Marinated Meat) empfohlen'}
 ];
 
@@ -6306,7 +6310,7 @@ const ACHIEVEMENTS=[
   {id:'note-writer',ico:'📝',name:'Strategist',desc:'Schreibe 5 eigene Boss-Notizen',check:()=>Object.keys(loadBossNotes()).length>=5,prog:()=>Math.min(Object.keys(loadBossNotes()).length/5,1)},
   {id:'note-master',ico:'📚',name:'Bibliothekar',desc:'Schreibe 15 eigene Boss-Notizen',check:()=>Object.keys(loadBossNotes()).length>=15,prog:()=>Math.min(Object.keys(loadBossNotes()).length/15,1)},
   {id:'greymane-done',ico:'🐺',name:'Grey Wolf',desc:'Alle 27 Greymane-Commissions abgeschlossen',check:()=>{const gm=JSON.parse(localStorage.getItem('cd_gm')||'[]');return gm.length>=27;},prog:()=>{const gm=JSON.parse(localStorage.getItem('cd_gm')||'[]');return Math.min(gm.length/27,1);}},
-  {id:'sanc-master',ico:'🏛️',name:'Sanctum-Pilger',desc:'Alle 15 Sanctums abgeschlossen',check:()=>{if(typeof SANCTUM_IDS==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return SANCTUM_IDS.every(s=>te.includes(s));},prog:()=>{if(typeof SANCTUM_IDS==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(SANCTUM_IDS.filter(s=>te.includes(s)).length/15,1);}},
+  {id:'sanc-master',ico:'🏛️',name:'Sanctum-Pilger',desc:'Alle Sanctums abgeschlossen (16 im Spiel; echte Trophy: "Lightbringer")',check:()=>{if(typeof SANCTUM_IDS==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return SANCTUM_IDS.every(s=>te.includes(s));},prog:()=>{if(typeof SANCTUM_IDS==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(SANCTUM_IDS.filter(s=>te.includes(s)).length/Math.max(SANCTUM_IDS.length,1),1);}},
   {id:'true-ending',ico:'⭐',name:'True Ending Hunter',desc:'Alle True-Ending-Pflichten abgehakt',check:()=>{if(typeof TRUE_ENDING==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return TRUE_ENDING.length>0&&TRUE_ENDING.every(t=>te.includes(t.id));},prog:()=>{if(typeof TRUE_ENDING==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(te.length/TRUE_ENDING.length,1);}},
   {id:'chapter-done',ico:'📖',name:'Storyteller',desc:'Alle 12 Kapitel abgeschlossen',check:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return d.length>=12;},prog:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return Math.min(d.length/12,1);}},
   {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return seen.length>=3;},prog:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return Math.min(seen.length/3,1);}},
@@ -7352,18 +7356,19 @@ function renderArmor(){
 
 // ===== ARMOR SETS =====
 const ARMOR_SETS=[
-  {name:"Kuku Ice Set",color:"#1a6a9a",desc:"Vollständige Eis-Immunität. Pflicht für Pailune und alle Eis-Bosse.",bonus:"Full Ice Immunity + Stat-Boost (5 Teile)",pieces:["Frostcursed Plate Armor","Frostcursed Plate Helm","Frostcursed Plate Gloves","Frostcursed Plate Boots","Kuku Ice-Resistant Armor"]},
-  {name:"Blackwing Set",color:"#2a3a7a",desc:"Speed und Wind-Resistenz. Leichtes Leder-Set für mobile Builds.",bonus:"Speed +15%, Wind Immunity (5 Teile)",pieces:["Blackwing Leather Armor","Blackwing Leather Mask","Blackwing Leather Gloves","Blackwing Leather Boots","Blackwing Leather Cloak"]},
-  {name:"Scorchflame Set",color:"#8a2a0a",desc:"Fire-Build. Maximale Feuerresistenz und erhöhter Feuerschaden.",bonus:"Fire Dmg +20%, Fire Resist stacked (3 Teile)",pieces:["Scorchflame Plate Armor","Scorchflame Plate Helm","Scorchflame Plate Gloves"]},
-  {name:"Golden Greed Set",color:"#7a5a00",desc:"Maximales Gold-Farming. Legendäre Teile mit Gold-Find-Bonus.",bonus:"Gold Drop +20%, Def +80 (4 Teile)",pieces:["Golden Greed Plate Armor","Golden Greed Plate Helm","Golden Greed Plate Gloves","Golden Greed Plate Boots"]},
-  {name:"Light of the Battlefield",color:"#3a5a1a",desc:"Bestes Mid-Game Plate-Set mit hohen Defensivwerten und Morale-Aura.",bonus:"Morale-Aura, HP +400, Def +72 (4 Teile)",pieces:["Light of the Battlefield Plate Armor","Light of the Battlefield Plate Helm","Light of the Battlefield Plate Gloves","Light of the Battlefield Plate Boots"]},
-  {name:"Unyielding Warrior Set",color:"#5a3a0a",desc:"Das stärkste Endgame Plate-Set. Taunt und maximale Defensive.",bonus:"Taunt-Effekt, Def +57, HP +450 (2 Teile)",pieces:["Unyielding Warrior's Plate Armor","Unyielding Warrior's Plate Helm"]},
-  {name:"Cursed Soul Set",color:"#5a1a6a",desc:"Dark-Build mit Life Steal und Shadow-Damage-Effekten.",bonus:"Life Steal, Dark Dmg +20% (3 Teile)",pieces:["Plate Armor of Cursed Soul","Plate Helm of Cursed Soul","Plate Gloves of Cursed Soul"]},
-  {name:"Shadows Set",color:"#2a2a3a",desc:"Shadow-Damage und Evasion für Assassin-Builds.",bonus:"Shadow Dmg +22%, Evasion (2 Teile)",pieces:["Plate Armor of the Shadows","Plate Gloves of the Shadows"]},
-  {name:"Hernand Guard Set",color:"#1a4a1a",desc:"Hernand-Fraktion Set mit Ceremony-Bonus. Komplett aus Palast-Questlinie.",bonus:"Ceremony Set-Bonus (3 Teile)",pieces:["Hernand Ceremonial Guard Armor","Hernand Ceremonial Guard Gloves","Hernand Ceremonial Guard Boots"]},
-  {name:"Canta Plate Set",color:"#1a3a5a",desc:"Solid mid-game Plate Set aus der Canta-Region.",bonus:"Canta Set-Bonus, Def stacked (4 Teile)",pieces:["Canta Plate Armor","Canta Plate Helm","Canta Plate Gloves","Canta Plate Boots"]},
-  {name:"Hernandian Banquet Set",color:"#5a4a0a",desc:"Food-Buff-Optimierung. Maximale Effizienz von Buff-Food.",bonus:"Food Buff +35% total, Duration +20% (2 Teile)",pieces:["Hernandian Banquet Cloak","Autumn Banquet Leather Boots"]},
-  {name:"Duskfang Set",color:"#2a3a1a",desc:"Nacht-Kampf und Bleed-Effekte für Duskfang-Builds.",bonus:"Night Atk +16%, Bleeding Edge stacked (2 Teile)",pieces:["Duskfang Leather Armor","Duskfang Leather Gloves"]}
+  // HINWEIS 2026-06-01 (Fakten-Audit): Crimson Desert hat KEINE mechanischen Set-Boni. Wert kommt nur aus den Einzelteil-Stats + den Abyss-Core-Sockets, die man selbst fuellt. Die frueheren "bonus"-Effekte waren erfunden und wurden neutralisiert; Set-Namen + Teile sind real und bleiben als Gruppierung.
+  {name:"Kuku Ice Set",color:"#1a6a9a",desc:"Hohe Eis-Resistenz (KEINE volle Immunität). Sehr nützlich für Pailune und Eis-Bosse.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Frostcursed Plate Armor","Frostcursed Plate Helm","Frostcursed Plate Gloves","Frostcursed Plate Boots","Kuku Ice-Resistant Armor"]},
+  {name:"Blackwing Set",color:"#2a3a7a",desc:"Blitz-Resistenz (Lightning) + Speed. Leichtes Leder-Set für mobile Builds.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Blackwing Leather Armor","Blackwing Leather Mask","Blackwing Leather Gloves","Blackwing Leather Boots","Blackwing Leather Cloak"]},
+  {name:"Scorchflame Set",color:"#8a2a0a",desc:"Fire-Build (7-teiliges Kliff-Set). Feuerresistenz + Feuerschaden-Fokus.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Scorchflame Plate Armor","Scorchflame Plate Helm","Scorchflame Plate Gloves"]},
+  {name:"Golden Greed Set",color:"#7a5a00",desc:"Gold-Optik-Set. Teile aus festen Truhen-Fundorten (nicht Craft).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Golden Greed Plate Armor","Golden Greed Plate Helm","Golden Greed Plate Gloves","Golden Greed Plate Boots"]},
+  {name:"Light of the Battlefield",color:"#3a5a1a",desc:"Mid-Game Plate-Set mit hohen Defensivwerten.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Light of the Battlefield Plate Armor","Light of the Battlefield Plate Helm","Light of the Battlefield Plate Gloves","Light of the Battlefield Plate Boots"]},
+  {name:"Unyielding Warrior Set",color:"#5a3a0a",desc:"Endgame Plate-Set, defensiv ausgerichtet.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Unyielding Warrior's Plate Armor","Unyielding Warrior's Plate Helm"]},
+  {name:"Cursed Soul Set",color:"#5a1a6a",desc:"Dark-Themen-Set.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Armor of Cursed Soul","Plate Helm of Cursed Soul","Plate Gloves of Cursed Soul"]},
+  {name:"Shadows Set",color:"#2a2a3a",desc:"Shadow-Themen-Set für Assassin-Optik.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Armor of the Shadows","Plate Gloves of the Shadows"]},
+  {name:"Hernand Guard Set",color:"#1a4a1a",desc:"Hernand-Fraktions-Set aus der Palast-Questlinie.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Hernand Ceremonial Guard Armor","Hernand Ceremonial Guard Gloves","Hernand Ceremonial Guard Boots"]},
+  {name:"Canta Plate Set",color:"#1a3a5a",desc:"Mid-Game Plate-Set; Teile beim Händler Rhett (Hernand Town, neben der Schmiede).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Canta Plate Armor","Canta Plate Helm","Canta Plate Gloves","Canta Plate Boots"]},
+  {name:"Hernandian Banquet Set",color:"#5a4a0a",desc:"Food-/Bankett-Themen-Set.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Hernandian Banquet Cloak","Autumn Banquet Leather Boots"]},
+  {name:"Duskfang Set",color:"#2a3a1a",desc:"Nacht-/Bleed-Themen-Set.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Duskfang Leather Armor","Duskfang Leather Gloves"]}
 ];
 function renderArmorSets(){
   document.getElementById('set-grid').innerHTML=ARMOR_SETS.map(s=>`
@@ -8185,22 +8190,8 @@ async function initVisitorCount(){
 
 // ===== ACCESSORIES =====
 const ACCESSORIES=[
-  {name:"Ring of Burning Resolve",type:"Ring",effect:"ATK +12, Fire Dmg +8%",source:"Craft: Kilnden Workshop (Scorchflame-Materialien)",notes:"Kern-Ring für den Fire-Build"},
-  {name:"Frostbind Ring",type:"Ring",effect:"Ice Resist +15%, Def +8",source:"Drop: White Horn (Pailune Side-Boss)",notes:"Pflicht für alle Pailune-Bosse"},
-  {name:"Crow Eye Ring",type:"Ring",effect:"Wind Dmg +10%, Speed +3%",source:"Drop: Draven the Crowcaller (Kap. 5)",notes:"Blackwing-Build Synergy"},
-  {name:"Scholar's Seal Ring",type:"Ring",effect:"Spirit +20, Cooldown -5%",source:"Scholastone Akademie Quest-Reward",notes:"Force Palm Loop — hält Spirit oben"},
-  {name:"Shadow Signet",type:"Ring",effect:"Dark Dmg +12%, Evasion +4%",source:"Drop: Beloth the Darksworn (Endgame)",notes:"Shadow/Assassin Endgame-Ring"},
-  {name:"Ring of Greymane",type:"Ring",effect:"Companion Bond +20%, ATK +8",source:"Greymane Commission Rank 3 (18 Commissions)",notes:"Companion-Build + gutes Allround-ATK"},
-  {name:"Necklace of Fallen Kings",type:"Necklace",effect:"HP +150, Def +10",source:"Versteckte Truhe — Ruinen des alten Königreichs",notes:"Solides Defensive-Amulett Mid-Game"},
-  {name:"Blackwing Pendant",type:"Necklace",effect:"Wind Resist, Speed +5%",source:"Schwarzflügel-Gebiet / Drop Draven",notes:"Blackwing-Set Synergy"},
+  // HINWEIS 2026-06-01 (Fakten-Audit): 15 zuvor hier gelistete Accessoires waren erfunden und wurden entfernt. "Bracelet" ist kein echter Slot (echte Slots: 2 Ringe, 2 Ohrringe, 1 Kette, 1 Umhang); echte Ringe geben Attack/ATK-Speed/Crit, keine Elementar-%-Stats. Nur der ungepruefte Eintrag unten blieb stehen. Echte Accessoire-Daten folgen nach Recherche.
   {name:"Golden Greed Amulet",type:"Necklace",effect:"Gold Drop +15%, Def +12",source:"Legendary Blueprint — Selten beim Händler",notes:"Gold-Farm-Loadout mit Golden Greed Set"},
-  {name:"Crow Bone Necklace",type:"Necklace",effect:"Aerial Dmg +15%, Air-Time +0.5s",source:"Schwarzflügel-Fraktion Rank 2",notes:"Für Aerial-Force-Palm-Builds"},
-  {name:"Moonblood Earrings",type:"Earring",effect:"Life Steal +3%, ATK +8",source:"Night Mob Drop (Demeniss ab Kap. 5)",notes:"Bleed & Life-Steal Build"},
-  {name:"Sanctum Seal Earrings",type:"Earring",effect:"Extra Reward-Chance bei Sanctum-Abschluss",source:"Reward: 5 Sanctums abgeschlossen",notes:"Sanctum-Farming maximieren"},
-  {name:"Ringing Truth Earrings",type:"Earring",effect:"Parry-Fenster +0.1s, Counter-Dmg +10%",source:"Spire of Ringing Truth (Pailune Dungeon)",notes:"Counter King Build — Parry-Timing erleichtern"},
-  {name:"Greymane's Bracer",type:"Bracelet",effect:"Companion ATK +20%, HP +80",source:"Greymane Commission Rank 5 — alle 27 Commissions",notes:"Beste Companion-Item im Spiel"},
-  {name:"Demeniss Iron Bracer",type:"Bracelet",effect:"Def +15, Stun Resist",source:"Demeniss Schmied / Hauptstadthändler",notes:"Tank-Build Pflicht-Slot"},
-  {name:"Hexen-Bracer",type:"Bracelet",effect:"Core-Synthese kostet -20% Contribution Points",source:"Reward: alle 4 Hexen-Questlinien abgeschlossen",notes:"Langzeit-Investment — Core-Synthese massiv billiger"},
 ];
 
 function renderAccessories(){
@@ -8237,32 +8228,32 @@ const WITCHES=[
     name:"Hexe Elowen",color:"#20a070",img:"https://crimsondesert.gaming.tools/images/ui/texture/image/knowledgeimage/cd_knowledgeimage_knowledge_blynhilde.webp",
     location:"Witchwoods — Südwest Hernand",chapter:"Kap. 5 nach Quest 'The Missing Seal'",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (2× gleicher Core → nächsthöhere Stufe)","Hexen-Brauerei: Spezial-Elixiere","Blueprint-Umwandlung (Kuku-Quest)"],
-    quests:["The Missing Seal (Kap. 5) — Elowen freischalten","Sanctumlinie: Temperance → Penitence → Benediction → Exaltation","Exaltation-Reward: Kuku-Blueprint + Tier-3-Fusion freigeschaltet"],
-    sanctums:["Sanctum of Temperance","Sanctum of Penitence","Sanctum of Benediction","Sanctum of Exaltation"],
-    tip:"Elowen-Questlinie zuerst abschließen. Das Sanctum of Exaltation schaltet den Kuku Ice-Resistant Armor Blueprint frei — Pflicht für Pailune und alle späten Bosse."
+    quests:["The Missing Seal (Kap. 5) — Elowen freischalten","Sanctumlinie (Hexe der Weisheit): Absolution → Temperance → Penitence → Benediction"],
+    sanctums:["Sanctum of Absolution","Sanctum of Temperance","Sanctum of Penitence","Sanctum of Benediction"],
+    tip:"Hexe der Weisheit (Wisdom). Ihre Questlinie schaltet vollen Workshop + Core-Synthese frei. Der Kuku-Ice-Resistant-Armor-Blueprint kommt aus Lyselias Sanctum of Devotion (nicht von Elowen)."
   },
   {
     name:"Hexe Bari",color:"#4a8aca",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_eloria.webp",
     location:"Hütte in einem Teich nahe Silver Wolf Mountain, Nord-Pailune",chapter:"Pailune — ab Kap. 7",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Pailune-Spezialtränke (z.B. Ice Immunity Potion)"],
-    quests:["Sanctumlinie: Deliverance → Solace","Solace-Reward: Frost Mantle Skill-Upgrade"],
-    sanctums:["Sanctum of Deliverance","Sanctum of Solace"],
+    quests:["Bari freischalten: südwestl. Pailune City finden + Lagerfeuer entzünden","Sanctumlinie (Hexe der Güte): Exaltation → Solace → Deliverance → Atonement","Solace-Reward: Frost Mantle Skill-Upgrade"],
+    sanctums:["Sanctum of Exaltation","Sanctum of Solace","Sanctum of Deliverance","Sanctum of Atonement"],
     tip:"Witch of Kindness. Die 4 Witch Tokens werden für das Freischalten der versteckten White Crow gesammelt (siehe unten), nicht für Bari selbst."
   },
   {
     name:"Hexe Lyselia",color:"#9a50d0",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_demeniss_witch.webp",
     location:"Verborgene Höhle, Serpent Marsh (zwischen Demeniss und Delesyia) — Verkleidung: haengt an eingestuertzter Bruecke (N Demeniss)",chapter:"Kap. 9+ verfügbar",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Demeniss-exklusive Crafting-Rezepte","Shadow-Element Infusion (Waffen)"],
-    quests:["Sanctumlinie: Expiation → Atonement (Demeniss)","Atonement-Reward: Demeniss-Craft-Rezept + Shadow Infusion freigeschaltet"],
-    sanctums:["Sanctum of Expiation","Sanctum of Atonement"],
-    tip:"Lyselias Questlinie vor dem Endgame abschließen. Ihr versteckter Höhlen-Eingang ist leicht zu uebersehen — erst die Verkleidung an der Bruecke ansprechen."
+    quests:["Sanctumlinie (Hexe der Demut): Devotion → Veneration → Oblation → Faith (Delesyia)","Devotion-Reward: Kuku-Ice-Resistant-Armor-Blueprint"],
+    sanctums:["Sanctum of Devotion","Sanctum of Veneration","Sanctum of Oblation","Sanctum of Faith"],
+    tip:"Hexe der Demut (Humility). Ihre 4 Sanctums liegen in Delesyia. Versteckter Eingang — erst die Verkleidung ansprechen."
   },
   {
     name:"Hexe Areciel",color:"#c0392b",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_power_witch.webp",
     location:"Kliffhaus nahe World's Navel, Crimson Desert — sie wartet auf dem Dach; Verkleidung: Kind auf einem Hügel vor Tommaso",chapter:"Freigeschaltet nach: 1x Copper dem Kind bei Tommaso Bounty Board geben",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Crimson-Desert-exklusive Crafting-Rezepte","Stärke-Infusion (Waffen)"],
-    quests:["Sanctumlinie: Renunciation → Revelation","Revelation-Reward: Endgame Abyss-Core + Stärke-Infusion freigeschaltet"],
-    sanctums:["Sanctum of Renunciation","Sanctum of Revelation"],
+    quests:["Sanctumlinie (Hexe der Stärke): Expiation → Renunciation → Revelation","Revelation-Reward: Endgame Abyss-Core + Stärke-Infusion freigeschaltet"],
+    sanctums:["Sanctum of Expiation","Sanctum of Renunciation","Sanctum of Revelation"],
     tip:"Hexe der Stärke. Freischaltung ist simpel — einfach 1 Kupfer an das Kind vor Tommaso geben, dann zum Kliffhaus bei World's Navel. Sie sitzt auf dem Dach, nicht drinnen. Pflicht für Crimson Desert Region Endgame-Content."
   },
   {
@@ -8270,7 +8261,7 @@ const WITCHES=[
     location:"Versteckt südlich der Wayward Woods, Pailune",chapter:"Erst nach 4 Witch Tokens erreichbar",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Endgame-Core-Dienste"],
     quests:["Freischaltung: je 1 Witch Token von Elowen, Bari, Lyselia und Areciel sammeln"],
-    sanctums:[],
+    sanctums:["Sanctum of Mortification (Story, Kap. 9 — White Crows wahre Identität)"],
     tip:"Versteckte 6. Hexe. Erst erreichbar, wenn du alle 4 regionalen Hexen-Questlinien abgeschlossen und je 1 Witch Token erhalten hast. Lore: Zeitreise-Wächter — siehe Secrets & Lore."
   }
 ];
@@ -8324,21 +8315,23 @@ function renderWeaponUpgrade(){
 
 // ===== SANCTUM GUIDE =====
 const SANCTUM_GUIDE=[
-  {name:"Sanctum of Temperance",region:"Hernand — Witchwoods",req:"Hexe Elowen freischalten (Kap. 5)",reward:"Contribution +50, Elowen Questlinie startet",boss:"–",tip:"Einfachstes Sanctum — guter Einstieg."},
-  {name:"Sanctum of Penitence",region:"Hernand",req:"Sanctum of Temperance abgeschlossen",reward:"Contribution +60, Elixier",boss:"–",tip:"Elowen-Questlinie #2."},
-  {name:"Sanctum of Benediction",region:"Hernand / Pailune-Grenze",req:"Pailune-Zugang (Kap. 7)",reward:"Leather Helm of the Fallen Kingdom — Momentum-Core drin",boss:"–",tip:"Diesen Helm NICHT für einen anderen tauschen — der Momentum-Core (+35% Turning Slash) ist zu stark."},
-  {name:"Sanctum of Exaltation",region:"Pailune",req:"Elowen Questlinie #3",reward:"Kuku-Armor Blueprint + Tier-3 Core-Synthese freigeschaltet",boss:"–",tip:"Priorität #1 in Pailune."},
-  {name:"Sanctum of Absolution",region:"Pailune",req:"Pailune-Zugang",reward:"Vessel of Dark Pursuit (Greatsword) + Wound of Darkness Core",boss:"Antumbra's Sword",tip:"Enger Raum + Illusionen. Blinding Flash Spam, niemals stillstehen."},
-  {name:"Sanctum of Deliverance",region:"Pailune",req:"Hexe Bari freischalten (4 Crow Tokens)",reward:"Contribution +80, Bari Questlinie #1",boss:"–",tip:"Tokens priorisieren direkt nach Ankunft in Pailune."},
-  {name:"Sanctum of Solace",region:"Pailune",req:"Sanctum of Deliverance abgeschlossen",reward:"Frost Mantle Skill-Upgrade + Ice Immunity Potion Blueprint",boss:"–",tip:"Frost Mantle ist Pflicht für Phase 3 von Saigord."},
-  {name:"Sanctum of Mortification",region:"Demeniss — Story Kap. 9",req:"Story-Quest: Black Witch",reward:"Kap. 9 Progression + Story-Item",boss:"–",tip:"Story-kritisch. Automatisch abgeschlossen."},
-  {name:"Sanctum of Expiation",region:"Demeniss",req:"Hexe Lyselia treffen (Kap. 9+)",reward:"Contribution +80, Lyselia Questlinie #1",boss:"–",tip:"Lyselia-Questlinie erst ab Kap. 9 möglich."},
-  {name:"Sanctum of Atonement",region:"Demeniss",req:"Sanctum of Expiation abgeschlossen",reward:"Contribution +90 + Demeniss-Craft-Rezept",boss:"–",tip:"Lyselia-Questlinie #2."},
-  {name:"Sanctum of Renunciation",region:"Demeniss",req:"Hexe Areciel freischalten (1 Copper an Kind bei Tommaso)",reward:"Contribution +100 + Revelation-Zugang",boss:"–",tip:"Areciel-Questlinie #1 — erste Sanctum-Stufe ihrer Linie."},
-  {name:"Sanctum of Devotion",region:"Delesyia",req:"Delesyia-Zugang + Bari Questlinie",reward:"Blueprint: Kuku Ice-Resistant Armor (FULL Ice Immunity)",boss:"–",tip:"Zweites Kuku-Blueprint-Sanctum — notfalls als Backup wenn Exaltation verpasst."},
-  {name:"Sanctum of Revelation",region:"Delesyia",req:"Sanctum of Renunciation abgeschlossen",reward:"Endgame Abyss-Core + Stärke-Infusion freigeschaltet",boss:"–",tip:"Lohnenswertes Spätspiel-Ziel. Areciel-Questlinie #2 — gibt einen der Top-3 Endgame Cores."},
-  {name:"Sanctum of Liberate",region:"The Abyss",req:"The Abyss betreten (Kap. 10+)",reward:"Endgame-Rüstung Fragment + Contribution +120",boss:"–",tip:"Ab hier nur noch Endgame-Drops."},
-  {name:"Sanctum of Mortification 2",region:"The Abyss",req:"Sanctum of Liberate + alle regionalen Sanctums",reward:"True Ending Fortschritt + Max Contribution",boss:"–",tip:"Letztes Sanctum — gibt True-Ending-Punkt."},
+  // Neu aufgebaut 2026-06-01 (Recherche PowerPyx/Game8): korrekte Hexe + Region je Sanctum; 3 fehlende Lyselia-Sanctums ergänzt. Contribution-Zahlen waren erfunden → entfernt; Rewards generisch wo offiziell unbelegt.
+  {name:"Sanctum of Absolution",region:"Hernand (Süd/Südwest)",req:"Elowen-Questlinie (Hexe der Weisheit)",reward:"Vessel of Dark Pursuit (Greatsword) + Wound of Darkness Core",boss:"Antumbra's Sword",tip:"Enger Raum + Illusionen. Blinding Flash Spam, niemals stillstehen."},
+  {name:"Sanctum of Temperance",region:"Hernand (Pororin Forest / Unicorn Cliff)",req:"Hexe Elowen freischalten",reward:"Elowen-Questlinie",boss:"–",tip:"Elowen (Weisheit). Guter Einstieg in die Sanctum-Mechanik."},
+  {name:"Sanctum of Penitence",region:"Hernand (Plateau SO der Stadt / The Ironwood)",req:"Elowen-Questlinie",reward:"Elixier",boss:"–",tip:"Elowen (Weisheit)."},
+  {name:"Sanctum of Benediction",region:"Hernand (Everfrost Mountains, West)",req:"Elowen-Questlinie",reward:"Leather Helm of the Fallen Kingdom (Momentum-Core) — fertiges Item aus verstecktem Raum, KEIN Blueprint",boss:"–",tip:"Elowen (Weisheit). Helm behalten — Momentum-Core (+35% Turning Slash) ist stark."},
+  {name:"Sanctum of Exaltation",region:"Pailune (Silver Wolf Mountain)",req:"Hexe Bari (Hexe der Güte)",reward:"Bari-Questlinie",boss:"–",tip:"Bari (Güte). Eines ihrer 4 Sanctums."},
+  {name:"Sanctum of Solace",region:"Pailune (Silver Wolf Mtn, Südost-Kette)",req:"Bari-Questlinie",reward:"Frost Mantle Skill-Upgrade + Ice-Resistance-Potion-Blueprint",boss:"–",tip:"Bari (Güte). Frost Mantle hilft gegen Eis-Bosse."},
+  {name:"Sanctum of Deliverance",region:"Hernand (Stormtalon Ridge, SO)",req:"Hexe Bari freischalten (südwestl. Pailune City finden + Lagerfeuer entzünden — NICHT über Crow Tokens)",reward:"Bari-Questlinie",boss:"–",tip:"Bari (Güte). Die 4 Crow Tokens sind für White Crow, nicht für Bari."},
+  {name:"Sanctum of Atonement",region:"Hernand (Haunted Hill, West)",req:"Bari-Questlinie",reward:"Craft-Rezept",boss:"–",tip:"Bari (Güte)."},
+  {name:"Sanctum of Devotion",region:"Delesyia (Hushwind Hills / Dewhaven)",req:"Lyselia-Questlinie (Hexe der Demut)",reward:"Blueprint: Kuku Ice-Resistant Armor (hohe Eis-Resistenz, KEINE volle Immunität)",boss:"–",tip:"Lyselia (Demut). Quelle des Kuku-Ice-Blueprints."},
+  {name:"Sanctum of Veneration",region:"Delesyia (Mount Benus / Blue Thicket)",req:"Lyselia-Questlinie",reward:"Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
+  {name:"Sanctum of Oblation",region:"Delesyia (Insel bei Blue Thicket)",req:"Lyselia-Questlinie",reward:"Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
+  {name:"Sanctum of Faith",region:"Delesyia (Grey Forest, Ost)",req:"Lyselia-Questlinie",reward:"Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
+  {name:"Sanctum of Expiation",region:"Demeniss (Nord/NW, nördl. Gate of Truth)",req:"Hexe Areciel freischalten (1 Copper an Kind bei Tommaso)",reward:"Areciel-Questlinie",boss:"–",tip:"Areciel (Stärke). Erstes ihrer 3 Sanctums."},
+  {name:"Sanctum of Renunciation",region:"Drywind Valley / Red River (Grenze Demeniss/Crimson Desert/Delesyia)",req:"Areciel-Questlinie",reward:"Revelation-Zugang",boss:"–",tip:"Areciel (Stärke). Genaue Regionsbezeichnung quellenübergreifend uneinheitlich (Grenzgebiet am Red River)."},
+  {name:"Sanctum of Revelation",region:"Demeniss (Serpent Marsh, NO-Insel)",req:"Sanctum of Renunciation abgeschlossen",reward:"Endgame Abyss-Core + Stärke-Infusion",boss:"–",tip:"Areciel (Stärke). Spätspiel-Ziel, einer der Top-Endgame-Cores."},
+  {name:"Sanctum of Mortification",region:"Demeniss (Denn River, Kap. 9 Story)",req:"Story-Quest 'Fragments of Darkness' (Kap. 9)",reward:"Story-Progression",boss:"–",tip:"White Crow (Story). Automatisch im Verlauf abgeschlossen."},
 ];
 
 function renderSanctumGuide(){
@@ -8366,7 +8359,7 @@ const CHAPTERS=[
   {num:7,title:"Die Festung Ashclaw",boss:"Myurdin → Lava Myurdin → One-Armed Ludvig",items:"Kuku Ice-Resistant Armor (Kilnden Workshop), Frostcursed Plate, Melted Ambition",missable:"Sanctum of Exaltation VOR Myurdin — Kuku-Blueprint-Pflicht",tip:"All-Fours Stance = FALLE. Lava Springs: 1 s Warnung → wegrollen. Ressourcen nach Myurdin für Ludvig einteilen."},
   {num:8,title:"Blut und Krone",boss:"Lucian Bastier (Damiane-Solo-Fight)",items:"Brass Rose Rapier (Silverbrook Ruins — nur Damiane), Sanctum of Absolution",missable:"Brass Rose Rapier — nur mit Damiane zugänglich und einmalig",tip:"Damiane kämpft allein. Ihre Skills kennen lernen — andere Combo-Logik als Kliff."},
   {num:9,title:"Die schwarze Hexe",boss:"Hexe Marie",items:"Crow Whisperer Greatsword (Drop), Hexe Lyselia freischalten",missable:"Sanctum of Mortification (Story-automatisch)",tip:"Vor-Quest: 4 Totems S→N zerstören. Crow Barrage: senkrecht zu ihr rollen."},
-  {num:10,title:"Der Abgrund",boss:"Side-Bosse + Dungeon-Clear The Abyss",items:"Icewatch Altar Farm (Mid-Late Abyss Cores), Sanctum of Liberate",missable:"Lyselia-Questlinie abschliessen bevor Kap. 11 startet",tip:"Farming-Kapitel. Waffen auf Refine 4–5 bringen. Alle ausstehenden Sanctums abschliessen."},
+  {num:10,title:"Der Abgrund",boss:"Side-Bosse + Dungeon-Clear The Abyss",items:"Icewatch Altar Farm (Mid-Late Abyss Cores)",missable:"Lyselia-Questlinie abschliessen bevor Kap. 11 startet",tip:"Farming-Kapitel. Waffen auf Refine 4–5 bringen. Alle ausstehenden Sanctums abschliessen."},
   {num:11,title:"Marnios Erbe",boss:"Golden Star",items:"Power Core (Story), Marni's Masterium",missable:"",tip:"P1: Marni-Spear-Pylons → L2+R2 → Stagger. Golem Adds sofort killen. P2: auf Blackstar reiten."},
   {num:12,title:"Das Ende der Dunkelheit",boss:"Corrupted Caliburn → Avatar of Umbra → Umbra (Final)",items:"Twisted Verdict (Drop Caliburn), True Ending wenn alle Voraussetzungen erfüllt",missable:"SAVE VOR DEM GATE — kein Checkpoint danach bis Umbra besiegt",tip:"Caliburn: Stillstand = hinter dodgen. Umbra Final: auf Blackstar. R1 Fireballs aufs Auge (2–3×) → Force Palm Finish."},
 ];
@@ -8540,7 +8533,7 @@ const PATCHES=[
       "Refine-Stufe wird auf Basis zurückgesetzt, Item bleibt erhalten"
     ]},
     {cat:"Minigames",items:[
-      "The Laughing Marionette (Claw Machine, 1 Silver/Versuch) — 12 Beleuchtungsitems, Spezial-Kopfbedeckung, Abyss Artifacts, Cores"
+      "The Laughing Marionette (Claw Machine, 1 Silver/Versuch) — 12 Beleuchtungsitems, Spezial-Kopfbedeckung, Abyss Artifacts, Abyss Gears"
     ]},
     {cat:"UI",items:[
       "Display Sheath toggle (Schwertscheide an/aus)",
