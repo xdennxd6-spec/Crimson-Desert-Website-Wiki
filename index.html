@@ -1977,6 +1977,19 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <section class="sec" id="sec-patches">
     <div class="sec-t">📋 Patch-Notes</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.09.00</span> (29.05.2026).</div>
+    <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
+      <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev Update, 02.06.2026). Schrittweiser Rollout Juni–September 2026 — noch keine versionierten Patch-Notes, Inhalte können sich bis Release ändern.</div>
+      <ul style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.75;color:var(--text)">
+        <li><b>Story-Kohärenz:</b> Schlüsselszenen in Kliffs Handlung werden überarbeitet, um den Erzählfluss runder und nachvollziehbarer zu machen.</li>
+        <li><b>Re-Blockade-Überarbeitung:</b> neue Verteidigungsphasen bei Festungs-Belagerungen + höhere Beute- und Liberation-Belohnungen.</li>
+        <li><b>Neuer Kampf-Content:</b> eigene kampffokussierte Aktivität — „beweise deine wahre Stärke als Greymane".</li>
+        <li><b>Cross-Save:</b> Account-Verknüpfung erlaubt das Teilen von Speicherständen über PC, PlayStation und Xbox.</li>
+        <li><b>Damiane &amp; Oongka:</b> Gameplay-Verbesserungen, damit alle drei spielbaren Charaktere gleichwertig im Rampenlicht stehen.</li>
+        <li><b>Non-Combat QoL:</b> Handel und Landwirtschaft werden komfortabler (träge Abläufe werden entschärft).</li>
+        <li><b>DLC bestätigt:</b> „bedeutsame Ergänzung deiner Reise" in Entwicklung — Details folgen später.</li>
+      </ul>
+    </div>
     <div id="patch-list"></div>
   </section>
 
@@ -2060,7 +2073,7 @@ const WEAPONS=[
   {name:"Acria Sword",type:"Sword (1H)",atk:20,crit:2,slots:null,source:"Stellen Manor (Raetsel loesen)",built_in:"Crit Rate Lv.2",notes:""},
   {name:"Sword of Greed",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Golden Greed-Gebiet / Drop",built_in:"–",notes:""},
   {name:"Frozen Soul",type:"Sword (1H)",atk:11,crit:1,slots:3,source:"Mt. of Frozen Souls Region",built_in:"–",notes:""},
-  {name:"Greedy Lightningblade",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Exploration (Lightning-Thema)",built_in:"Lightning Affinity",notes:""},
+  {name:"Greedy Lightningblade",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Drop: Sizlek the Insatiable / Sisel (Ruined Chapel — Blooded Sanctum, Hernandian Parish of Solumen)",built_in:"Lightning Affinity",notes:"Audit 2026-06-03: Quelle praezisiert (war 'Exploration') — Boss-Drop von Sizlek the Insatiable (Fextralife/game8)."},
   {name:"Royal Oath",type:"Sword (1H)",atk:11,crit:1,slots:3,source:"Hernand Palast-Questlinie",built_in:"–",notes:""},
   // ── Rapiere ──
   {name:"Fallen Kingdom's Rapier",type:"Rapier",atk:18,crit:null,slots:null,source:"Icemoor Castle (Truhe)",built_in:"Speed Lv.2",notes:""},
@@ -2081,10 +2094,10 @@ const WEAPONS=[
   {name:"Propeller Spear",type:"Halberd (2H)",atk:27,crit:null,slots:5,source:"Challenge-Altar NW Oasis Hearth",built_in:"–",notes:"Challenge am Holz-Altar abschliessen."},
   {name:"Lightning Spear",type:"Halberd (2H)",atk:27,crit:null,slots:5,source:"Challenge-Altar N Arcosa",built_in:"Lightning Affinity",notes:"Challenge-Waffe."},
   {name:"Bismuth Spear",type:"Halberd (2H)",atk:27,crit:null,slots:5,source:"Challenge-Altar W Svinholt Ranch",built_in:"–",notes:"Challenge-Waffe."},
-  {name:"Flamespitter",type:"Halberd (2H)",atk:null,crit:null,slots:null,source:"Challenge-Altar S Varnia Saltroad Camp",built_in:"Fire Affinity",notes:"Challenge-Waffe."},
+  {name:"Flamespitter",type:"Firearm (Flamethrower)",atk:null,crit:null,slots:null,source:"Crafting: Gorthak Ironworks (nach Forschung 'Weapon Heat-Treatment' @ Zargan Tankworks, ab Kap. 11). Challenge-Unlock: Sealed Abyss Artifact, Wegkreuzung Desert Ruins S Varnia Saltroad Camp",built_in:"Fire Affinity",notes:"Audit 2026-06-03: Typ korrigiert Halberd(2H) -> Ranged-Flammenwerfer (belegt: Fextralife 'Special Weapon: Flamespitter', PowerPyx, game8). Dauerfeuer bei gehaltener Feuertaste. Nicht mit 'A.T.A.G. Flamespitter' (Mech) verwechseln."},
   // ── Knuckles / Unarmed ──
-  {name:"Combat God's Plate Gloves",type:"Knuckles",atk:11,crit:1,slots:null,source:"Endgame (Unarmed-BIS)",built_in:"Move Speed Lv.4, Lightning Affinity, Relentless",notes:"Best-in-Slot fuer Unarmed-Build."},
-  {name:"Copper Knuckledrill",type:"Knuckles",atk:22,crit:null,slots:5,source:"Bergbau-Gebiet (Drop)",built_in:"Mining Mastery",notes:"Funktioniert als Pickaxe."},
+  {name:"Combat God's Plate Gloves",type:"Knuckles",atk:11,crit:1,slots:null,source:"Drop: Muskan (Bone-Pit-Arena, Tomaso — 3./letzte Runde)",built_in:"Move Speed Lv.4, Lightning Affinity, Relentless",notes:"Best-in-Slot fuer Unarmed-Build. Audit 2026-06-03: Quelle praezisiert (Boss-Drop Muskan); wandelt Aufprall in Blitzladung (Fextralife/TheGamer)."},
+  {name:"Copper Knuckledrill",type:"Knuckles",atk:22,crit:null,slots:5,source:"Kauf bei Haendlern (~196 Bronze; Preis je nach Fraktions-Ruf)",built_in:"Mining Mastery",notes:"Funktioniert als Pickaxe. Audit 2026-06-03: Quelle korrigiert (Haendler-Kauf, kein Drop) — Fextralife."},
   {name:"Savage Sawblade",type:"Knuckles",atk:12,crit:1,slots:3,source:"Savage Fangs-Fraktion",built_in:"Bleed",notes:""},
   // ── Shields ──
   {name:"Shield of Betrayal",type:"Shield",atk:null,crit:null,slots:2,source:"Quest 'The Unyielding Shields' (Kap. 6)",built_in:"Aegis I, Fortitude I",notes:"Schilde nutzen DEF statt ATK/Crit."},
@@ -3338,6 +3351,16 @@ const SKILL_IMGS={
 };
 
 const WEAPON_IMGS={
+  // FIX 2026-06-03 (Bild-Mapping ergaenzt — diese Waffen zeigten online KEIN Bild wegen Namens-Mismatch bzw. fehlendem Mapping; Pfade verifiziert HTTP 200):
+  "Darkbringer Greatsword":"cd_assets/weapons/darkbringer.webp",
+  "Mining Knuckledrill":"cd_assets/weapons/mining-knuckledrill.webp",
+  "Sword of the Lord (Refined)":"cd_assets/weapons/sword-of-the-lord.webp",
+  "Combat God's Plate Gloves":"cd_assets/armor/combat-gods-gloves.webp",
+  "Caliburn's Mercy":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6b/Caliburns_mercy_pistol_weapons_crimson_desert_wiki_guide_150px.png",
+  "Greedy Lightningblade":"https://static0.fextralifeimages.com/file/crimsondesertgame/0/0e/Greedy_lightningblade_weapons_crimson_desert_wiki_guide_150px.png",
+  "Copper Knuckledrill":"https://static0.fextralifeimages.com/file/crimsondesertgame/0/03/Copper_knuckledrill_weapons_crimson_desert_wiki_guide_150px.png",
+  "Rhonid Large Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/be/Rhonid_large_shield_shield_crimson_desert_wiki_guide.png",
+  "Flamespitter":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/fc/Kuku_flamespitter_weapons_crimson_desert_wiki_guide_150px.png",
   "A.T.A.G. Fist":"https://static0.fextralifeimages.com/file/crimsondesertgame/4/46/Atag_fist_weapons_crimson_desert_wiki_guide_150px.png",
   "A.T.A.G. Cannon":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/8e/Atag_cannon_weapons_crimson_desert_wiki_guide_150px.png",
   "A.T.A.G. Laser":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/63/Atag_laser_weapons_crimson_desert_wiki_guide_150px.png",
