@@ -1892,6 +1892,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <section class="sec" id="sec-pets">
     <div class="sec-t">🐾 Pets</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25), Füttern +10 bis +35 je nach Futter — das <strong>Lieblingsessen</strong> gibt +35. Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
   </section>
@@ -4203,7 +4204,7 @@ const PETS=[
   {name:"Baby Wyvern",type:"critter",food:"Tender Meat",icon:"cd_knowledgeimage_knowledge_wyvern.webp",cat:"Reptil/Drache (waechst zum Mount)"},
   {name:"Wombat",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_wombat.webp",cat:"Saeugetier (Beuteltier)"},
   {name:"Desert Rabbit",type:"critter",food:"Carrot",icon:"cd_knowledgeimage_knowledge_desert_rabbit.webp",cat:"Saeugetier (Hasenartige)"},
-  {name:"Forest Rabbit",type:"critter",food:"Carrot",icon:"",cat:"Saeugetier (Hasenartige)"},
+  {name:"Forest Rabbit",type:"critter",food:"Carrot",icon:"cd_assets/pets/cd_pet_forest-rabbit.webp",cat:"Saeugetier (Hasenartige)"},
   {name:"Snowfield Rabbit",type:"critter",food:"Carrot",icon:"cd_knowledgeimage_knowledge_snowrabbit.webp",cat:"Saeugetier (Hasenartige)"},
   {name:"Hedgehog",type:"critter",food:"Insect",icon:"cd_knowledgeimage_knowledge_hedgehog.webp",cat:"Saeugetier (Insektenfresser)"},
   {name:"Feathered Weasel",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_weasel.webp",cat:"Saeugetier (Marder)"},
@@ -4226,35 +4227,35 @@ const PETS=[
   {name:"Desert Wheatear",type:"critter",food:"Barley",icon:"",cat:"Vogel"},
   {name:"Kentish Plover",type:"critter",food:"Beans",icon:"cd_knowledgeimage_knowledge_snowy_plover.webp",cat:"Vogel"},
   {name:"Long-Tailed Tit",type:"critter",food:"Buckwheat",icon:"cd_knowledgeimage_knowledge_longtailedtit.webp",cat:"Vogel"},
-  {name:"Meadow Bunting",type:"critter",food:"Wheat",icon:"",cat:"Vogel"},
+  {name:"Meadow Bunting",type:"critter",food:"Wheat",icon:"cd_assets/pets/cd_pet_meadow-bunting.webp",cat:"Vogel"},
   {name:"Pigeon",type:"critter",food:"Beans",icon:"cd_knowledgeimage_knowledge_pigeon.webp",cat:"Vogel"},
-  {name:"Sand Grouse",type:"critter",food:"Lentils",icon:"",cat:"Vogel"},
+  {name:"Sand Grouse",type:"critter",food:"Lentils",icon:"cd_assets/pets/cd_pet_sand-grouse.webp",cat:"Vogel"},
   {name:"Sparrow",type:"critter",food:"Corn",icon:"cd_knowledgeimage_knowledge_sparrow.webp",cat:"Vogel"},
   {name:"Three-Toed Woodpecker",type:"critter",food:"Lentils",icon:"cd_knowledgeimage_knowledge_woodpecker.webp",cat:"Vogel"},
-  {name:"White-Winged Redstart",type:"critter",food:"Wheat",icon:"",cat:"Vogel"},
+  {name:"White-Winged Redstart",type:"critter",food:"Wheat",icon:"cd_assets/pets/cd_pet_white-winged-redstart.webp",cat:"Vogel"},
   {name:"Yellow-Billed Oxpecker",type:"critter",food:"Peas",icon:"cd_knowledgeimage_knowledge_oxpecker.webp",cat:"Vogel"},
   {name:"Condor",type:"critter",food:"Tough Meat",icon:"cd_knowledgeimage_knowledge_condor.webp",cat:"Vogel (Greifvogel)"},
   {name:"Eagle",type:"critter",food:"Lean Meat",icon:"cd_knowledgeimage_knowledge_eagle.webp",cat:"Vogel (Greifvogel)"},
   {name:"Eastern Sparrowhawk",type:"critter",food:"Tender Meat",icon:"cd_knowledgeimage_knowledge_hawk.webp",cat:"Vogel (Greifvogel)"},
-  {name:"Gyrfalcon",type:"critter",food:"Marbled Meat",icon:"",cat:"Vogel (Greifvogel)"},
+  {name:"Gyrfalcon",type:"critter",food:"Marbled Meat",icon:"cd_assets/pets/cd_pet_gyrfalcon.webp",cat:"Vogel (Greifvogel)"},
   {name:"Hawk",type:"critter",food:"Tough Meat",icon:"cd_knowledgeimage_knowledge_hawk.webp",cat:"Vogel (Greifvogel)"},
-  {name:"Owl",type:"critter",food:"Tough Meat",icon:"",cat:"Vogel (Greifvogel)"},
+  {name:"Owl",type:"critter",food:"Tough Meat",icon:"cd_assets/pets/cd_pet_owl.webp",cat:"Vogel (Greifvogel)"},
   {name:"Red-Footed Falcon",type:"critter",food:"Fine Meat",icon:"cd_knowledgeimage_knowledge_red_footed_falcon.webp",cat:"Vogel (Greifvogel)"},
   {name:"Steppe Eagle",type:"critter",food:"Lean Meat",icon:"cd_knowledgeimage_knowledge_steppe_eagle.webp",cat:"Vogel (Greifvogel)"},
   {name:"Hyacinth Macaw",type:"critter",food:"Desert Melon",icon:"cd_knowledgeimage_knowledge_parrot.webp",cat:"Vogel (Legendary/Papagei)"},
-  {name:"Phoenix",type:"critter",food:"",icon:"",cat:"Vogel (Legendary/Sonder)"},
-  {name:"Iron Eagle",type:"critter",food:"Mercury",icon:"",cat:"Vogel (Legendary/mechanisch)"},
-  {name:"Citron-Crested Cockatoo",type:"critter",food:"Orange",icon:"",cat:"Vogel (Papagei)"},
+  {name:"Phoenix",type:"critter",food:"",icon:"cd_assets/pets/cd_pet_phoenix.webp",cat:"Vogel (Legendary/Sonder)"},
+  {name:"Iron Eagle",type:"critter",food:"Mercury",icon:"cd_assets/pets/cd_pet_iron-eagle.webp",cat:"Vogel (Legendary/mechanisch)"},
+  {name:"Citron-Crested Cockatoo",type:"critter",food:"Orange",icon:"cd_assets/pets/cd_pet_citron-crested-cockatoo.webp",cat:"Vogel (Papagei)"},
   {name:"Eclectus Parrot",type:"critter",food:"Elderberry",icon:"cd_knowledgeimage_knowledge_eclectusparrot.webp",cat:"Vogel (Papagei)"},
   {name:"Grey Parrot",type:"critter",food:"Fig",icon:"cd_knowledgeimage_knowledge_grayparrot.webp",cat:"Vogel (Papagei)"},
-  {name:"Little Blue Macaw",type:"critter",food:"Tomato",icon:"",cat:"Vogel (Papagei)"},
+  {name:"Little Blue Macaw",type:"critter",food:"Tomato",icon:"cd_assets/pets/cd_pet_little-blue-macaw.webp",cat:"Vogel (Papagei)"},
   {name:"Parrot",type:"critter",food:"Raspberry",icon:"cd_knowledgeimage_knowledge_parrot.webp",cat:"Vogel (Papagei)"},
   {name:"Ringneck Parrot",type:"critter",food:"Strawberry",icon:"cd_knowledgeimage_knowledge_parrot.webp",cat:"Vogel (Papagei)"},
   {name:"Sun Conure",type:"critter",food:"Blueberry",icon:"cd_knowledgeimage_knowledge_sunconure.webp",cat:"Vogel (Papagei)"},
   {name:"Common Tern",type:"critter",food:"Crucian Carp",icon:"cd_knowledgeimage_knowledge_sterna.webp",cat:"Vogel (Wasservogel)"},
   {name:"Desert Goose",type:"critter",food:"Mackerel",icon:"cd_knowledgeimage_knowledge_desert_goose.webp",cat:"Vogel (Wasservogel)"},
   {name:"Goose",type:"critter",food:"Red Tonguesole",icon:"cd_knowledgeimage_knowledge_goose.webp",cat:"Vogel (Wasservogel)"},
-  {name:"Loon",type:"critter",food:"Tench",icon:"",cat:"Vogel (Wasservogel)"},
+  {name:"Loon",type:"critter",food:"Tench",icon:"cd_assets/pets/cd_pet_yellow-billed-loon.webp",cat:"Vogel (Wasservogel)"},
   {name:"Mallard",type:"critter",food:"Small Blackbrow Bleak",icon:"cd_knowledgeimage_knowledge_mallardduck.webp",cat:"Vogel (Wasservogel)"},
   {name:"Ruddy Shelduck",type:"critter",food:"Small Spirlin",icon:"cd_knowledgeimage_knowledge_ruddyshelduck.webp",cat:"Vogel (Wasservogel)"},
   {name:"Seagull",type:"critter",food:"Perch",icon:"cd_knowledgeimage_knowledge_seagull.webp",cat:"Vogel (Wasservogel)"},
@@ -4263,14 +4264,14 @@ const PETS=[
   {name:"Spot-Billed Duck",type:"critter",food:"Small Minnow",icon:"cd_knowledgeimage_knowledge_blackduck.webp",cat:"Vogel (Wasservogel)"},
   {name:"Whistling Duck",type:"critter",food:"Small Rasbora",icon:"cd_knowledgeimage_knowledge_whistling_duck.webp",cat:"Vogel (Wasservogel)"},
   {name:"Wild Duck",type:"critter",food:"Ricefish",icon:"cd_knowledgeimage_knowledge_duck.webp",cat:"Vogel (Wasservogel)"},
-  {name:"Yellow-Billed Loon",type:"critter",food:"Threeline Grunt",icon:"",cat:"Vogel (Wasservogel)"},
+  {name:"Yellow-Billed Loon",type:"critter",food:"Threeline Grunt",icon:"cd_assets/pets/cd_pet_yellow-billed-loon.webp",cat:"Vogel (Wasservogel)"},
   {name:"Coot",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_fulica.webp",cat:"Vogel (flugunfaehig)"},
   {name:"Crake",type:"critter",food:"",icon:"",cat:"Vogel (flugunfaehig)"},
   {name:"Grebe",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_little_grebe.webp",cat:"Vogel (flugunfaehig)"},
   {name:"Kakapo",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_kakapo.webp",cat:"Vogel (flugunfaehig)"},
   {name:"Kiwi Bird",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_kiwi_bird.webp",cat:"Vogel (flugunfaehig)"},
   {name:"Mesite",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_mesite.webp",cat:"Vogel (flugunfaehig)"},
-  {name:"Partridge",type:"critter",food:"",icon:"",cat:"Vogel (flugunfaehig)"},
+  {name:"Partridge",type:"critter",food:"",icon:"cd_assets/pets/cd_pet_partridge.webp",cat:"Vogel (flugunfaehig)"},
   {name:"Swamphen",type:"critter",food:"",icon:"",cat:"Vogel (flugunfaehig)"},
   {name:"Kuku Bird Chick",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_kukubird.webp",cat:"Vogel (waechst zum Mount)"},
   {name:"Desert Fox",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_desert_fox.webp",cat:"Wildtier (Fuchs)"},
@@ -6832,7 +6833,7 @@ function _petEmoji(cat){
   return '🐾';
 }
 function _petCardImg(p){
-  const src=p.icon?(/^https?:/.test(p.icon)?p.icon:PET_CDN+p.icon):'';
+  const src=p.icon?(/^(https?:|cd_assets\/)/.test(p.icon)?p.icon:PET_CDN+p.icon):'';
   const emoji=_petEmoji((p.cat||'')+' '+(p.name||p.type||''));
   if(src)return `<img class="pet-card-img" src="${src}" alt="${p.name.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="pet-card-ph" style="display:none">${emoji}</div>`;
   return `<div class="pet-card-ph">${emoji}</div>`;
