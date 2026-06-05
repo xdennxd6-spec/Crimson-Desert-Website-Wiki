@@ -1493,6 +1493,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="ruins" onclick="showSec('ruins')"><span class="nicon">🗿</span><span class="nlabel">Uralte Ruinen</span></div>
     <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
     <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
+    <div class="ni" data-sec="collectibles" onclick="showSec('collectibles')"><span class="nicon">📚</span><span class="nlabel">Collectibles</span></div>
     <div class="ni" data-sec="roadmap" onclick="showSec('roadmap')"><span class="nicon">🧭</span><span class="nlabel">Roadmap</span></div>
     <div class="ni" data-sec="favorites" onclick="showSec('favorites')"><span class="nicon">⭐</span><span class="nlabel">Favoriten</span></div>
   </div>
@@ -1895,6 +1896,23 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25), Füttern +10 bis +35 je nach Futter — das <strong>Lieblingsessen</strong> gibt +35. Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
+  </section>
+  <section class="sec" id="sec-collectibles">
+    <div class="sec-t">📚 Collectibles &amp; Knowledge</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, ~2.921 Einträge — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214, Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:#e84535">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">141</span> Sealed Abyss Artifacts</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">13</span> Constellations</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">22</span> Legendary Animals</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">100/133</span> Caves</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">76</span> Insekten</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30</span> Unique Pets</div>
+    </div>
+    <div class="fbar">
+      <select class="fs" id="cof-miss" onchange="renderCollectibles()"><option value="">Alle Sammelobjekte</option><option value="1">Nur Missable</option><option value="0">Nicht Missable</option></select>
+      <span id="cof-cnt" style="font-size:11px;color:var(--dim);align-self:center"></span>
+    </div>
+    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="col-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-chapters">
     <div class="sec-t">📖 Kapitel-Guide</div>
@@ -3072,7 +3090,7 @@ const MOUNTS=[
   {name:"Marni's Mechahorse",type:"Mechanisches Pferd (Tier 2)",unlock:"Stehlen: von den Wachen am Südtor der City of Delesyia (Eastern Hills), mit Maske verkleidet",stats:"Tier 2 — keine Tier-4-Skills",notes:"Mechanischer Konstrukt-Mount (kein Marni-Questline-Unlock)"},
   // ── Drachen-Mount ──
   {name:"Blackstar",type:"Drache",unlock:"Automatisch in Kap. 11 (Story-Quest; Golden Star besiegen, Pickup im Nest of Valor)",stats:"15 min/Session, 50 min Cooldown; Feuerangriffe, kann Festungen niederbrennen",notes:"Aerial Maneuver + Focused Force Palm aufs gruenes Glow. Bestes Anti-Festungs-Tool."},
-  {name:"Wild Wyvern",type:"Drache",unlock:"Wilde Wyvern in der Spielwelt unterwerfen (Subdue) [Patch 1.08]",stats:"Temporär reitbar (Flug)",notes:"Nach dem Unterwerfen zeitlich begrenzt als fliegender Mount nutzbar. Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest) separat als Pet; seit [Patch 1.10] durch Aufzucht als Spezial-Mount 'Wyvern' registrierbar (siehe unten)."},
+  {name:"Wild Wyvern",type:"Drache",unlock:"Wilde Wyvern unterwerfen (Subdue): adulte Wyvern fliegen rund um Fort Windridge am Südrand von Delesyia. Mit Bogen/Feuerwaffe betäuben, dann aufsteigen — in offenes Feld locken (nicht an Brücke/Klippen, sonst stürzt sie ab), keine tötenden Skills/Imbues [Patch 1.08]",stats:"Temporär reitbar (Flug)",notes:"Nach dem Unterwerfen zeitlich begrenzt als fliegender Mount nutzbar. Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest) separat als Pet; seit [Patch 1.10] durch Aufzucht als Spezial-Mount 'Wyvern' registrierbar (siehe unten)."},
   {name:"Wyvern",type:"Drache",unlock:"[Patch 1.10] Baby Wyvern durch Füttern aufziehen → ab bestimmtem Wachstumsgrad als Spezial-Mount registrierbar; das neue Pet 'Kuku Bird Chick' wird analog aufgezogen",stats:"Flug-Mount (Drache); eigene Mount-Ausrüstung 'Wyvern Saddle' (Patch 1.10)",notes:"Erfüllt die in Patch 1.08 angekündigte Mount-Funktion des Baby Wyverns. 'Sigil of Valor' auf Baby-Wyverns anlegbar."},
   // ── Sigil-Mounts (Boss Kill → Crafting) ──
   {name:"Silver Fang",type:"Wolf (Sigil)",unlock:"Black Fang Kill (Howling Hollow Cave, House Celeste Faction) → Crafting bei Hexe",stats:"430 HP / 100 Sta / 100 Atk / 45 Def — kaempft dismounted aktiv weiter",notes:"Einziger Mount der nach Dismount weiterkämpft. Lightning-Stagger. Sigil konsumieren."},
@@ -3087,17 +3105,40 @@ const MOUNTS=[
   {name:"Buffalo",type:"Wildtier",unlock:"Wildes Taming — Grasland / Ebenen",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
   {name:"Camel",type:"Wildtier",unlock:"Wildes Taming — Crimson Desert Region (Wueste)",stats:"Permanent nach Taming",notes:"Trockengelaende-Spezialist"},
   {name:"Cow",type:"Wildtier",unlock:"Wildes Taming — Farmen / Siedlungen",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
-  {name:"Elephant",type:"Wildtier",unlock:"Wildes Taming — Suedliche Regionen",stats:"Permanent nach Taming",notes:"Traegt mehr Last als andere Mounts"},
-  {name:"Greywolf",type:"Wildtier",unlock:"Wildes Taming — Wald-Gebiete",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Elephant",type:"Wildtier",unlock:"Finden & reiten — Demeniss Wildlife Park (S von Demeniss City); einfach hinlaufen und aufsteigen",stats:"Nur temporär (Fleeting Companion) — nicht registrierbar",notes:"~400 HP / 25 Atk; tanky aber langsam. Korrektur 2026-06: KEIN permanenter Wild-Tame (game8 + 3 weitere Quellen)."},
+  {name:"Greywolf",type:"Wildtier",unlock:"Wildes Taming — Pailune (Wälder/Waldland um Hernand): in der Wildnis per Force Palm betäuben, aufsteigen, mit Rohfleisch auf Trust 100% → 'Take In' [Patch 1.07]",stats:"Permanent nach Taming",notes:"game8 nennt ihn auch 'Large Wolf'. Nicht mit Silver Fang (Sigil/Boss) verwechseln."},
   {name:"Giant Iguana",type:"Wildtier",unlock:"Wildes Taming — Suedliche Regionen / Suempfe",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
   {name:"Kuku Bird Hatchling",type:"Wildtier",unlock:"Wildes Taming — Marni-Gebiet",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
-  {name:"Lion",type:"Wildtier",unlock:"Wildes Taming — Crimson Desert Savanne",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Lion",type:"Wildtier",unlock:"2 Wege, beide → mit Rohfleisch (Tender Meat, +40 Trust) auf 100% → 'Take In': (1) Zirkus-Löwe beim Laughing Marionette nahe City of Demeniss (Maske anlegen, 'Steal', sofort aus rotem Kreis reiten); (2) Wild-Löwe im N von Trader's Expanse / NO nahe Varnia Gate",stats:"Permanent nach Taming",notes:"Special/Unusual-Mount. Der Legendary White Lion am Varnia-Spot ist NICHT zähmbar. Zirkus-Löwe spawnt evtl. unzuverlässig."},
   {name:"Tiger",type:"Wildtier",unlock:"Wildes Taming — Peninsula South Crimson Desert, Unnamed Lake nahe Giant's Yard Watchtower (NW Red River / SW Beardtree Gorge). Fleisch füttern → 100% Trust Bar → Take In. [Patch 1.06]",stats:"Permanent nach Taming",notes:"Legendary White Tiger führt Gruppe normaler Tiger. Audit 2026-06-02: der frühere 'kein Respawn'-Hinweis ist überholt — Patch 1.07 behob das; normale Tiger respawnen jetzt auch nach Kill des White Tiger."},
-  {name:"Raptor",type:"Wildtier",unlock:"Wildes Taming — Delesyia",stats:"Permanent nach Taming",notes:"Nach Taming dauerhaft als Mount rufbar"},
+  {name:"Red-Feathered Raptor",type:"Wildtier",unlock:"Wild-Tame von feindlichem Twilight-Messenger-Reiter an der Crimson Mountains Fortress (SO Tashkalp, Crimson Desert, O von City of Tommaso): Reiter per Force Palm / Heavy Attack abwerfen, fliehenden Raptor verfolgen + aufsteigen, mit Rohfleisch (~5x) auf Trust 100% → 'Take In'",stats:"Permanent nach Taming",notes:"Korrektur 2026-06: Region Crimson Desert (NICHT Delesyia). Reiter spawnen nur solange die Festung feindlich ist — ggf. Re-Blockade-Frequenz auf 'War' stellen."},
+  {name:"Rosehorn Deer",type:"Wildtier",unlock:"Von Mistwood Hunters stehlen (Pailune, Hunter-Camp/Tannery in der Wayward-Woods-Umgebung): berittenen Reiter per Force Palm abwerfen, aufsteigen, aus dem Kampf reiten, dann mit rohem Gemüse (Sweet Potatoes) bis Trust 100% zähmen [Patch 1.06]",stats:"Permanent nach Taming",notes:"Special/Unusual-Mount. NICHT mit dem Snowwhite Deer (Sigil/Boss) verwechseln. Achtung 1.06.1-Bug: Camp vor dem Zähmen komplett räumen kann den Mount sperren. Genauer Tannery-Name quellenabhängig."},
+  {name:"Leaping Kuku Bird",type:"Wildtier",unlock:"Kuku Bird's Egg aus Bloodsteel Camp (North Steel Mountains, SSO von Hernand, Blinding-Arrow-Fraktion): Camp + Boss Bradie Gu räumen, Turm mit rotem Pfeil erklimmen, per Force Palm Geheimwand drehen, Ei (mit Maske) + Research Journal nehmen, dann zu einem Kuku-Nest tragen (nächstes: toter Baum auf der Klippe östlich des Camps) und ausbrüten",stats:"Permanent (Spezial-Mount via Ei-Aufzucht)",notes:"Distinct vom temporären 'Kuku Bird Hatchling'. [Patch 1.06]"},
   // ── Fahrzeug-Mounts ──
   {name:"Cloudcart",type:"Fahrzeug (Heissluftballon)",unlock:"Quest / Gebiet (Delesyia)",stats:"Vertikale Reichweite, langsam",notes:"Lufterkundung"},
   {name:"Wagon Horse",type:"Fahrzeug (Kutsche)",unlock:"Haendler / Quest",stats:"Traegt Waren und Begleiter",notes:""},
   {name:"Train",type:"Fahrzeug (Zug)",unlock:"Delesyia Region — Schienennetz",stats:"Schnell auf Schienen, keine Kontrolle",notes:"Automatische Strecke"}
+];
+
+const COLLECTIBLES=[
+  {name:"Sealed Abyss Artifacts (141)",cat:"Sammelziel / Challenge",miss:false,detail:"141 Artefakte über ganz Pywel; alle = 100% + Platin-Trophäe. Nicht auf der Hauptkarte — erscheinen als lila Minimap-Icons an Straßen/Kreuzungen; mit Guiding Light (L1+R1) leuchtet ein blaues Glimmern nahebei. Jedes schaltet eine Challenge frei — Fortschritt zählt erst NACH dem Finden, also früh sammeln. Geben Abyss-Artefakte (Skillpunkte), Faded Artifacts (Skill-Reset) und Abyss Gears.",loc:"Straßenränder aller Regionen; Hernand ~42 (meiste), Demeniss ~30"},
+  {name:"Memory Fragments",cat:"Knowledge-Kategorie",miss:false,detail:"Lokale 'Knowledge'-Events (Erinnerungen). Keine Items — als blaue Geister mit der Laterne entdecken (still halten bis 'Learning in Progress' voll). Ansehen nur mit dem Visione-Helm (Rüstungsmenü 'Play').",loc:"Welt (Laterne); Ansicht via Visione-Helm"},
+  {name:"Visione (goldener Helm)",cat:"Schlüssel-Collectible",miss:false,detail:"Pflicht, um Memory Fragments anzusehen. Ganz oben im Lioncrest Watchtower (Hernand), Kap.-2-Quest 'Unexpected Gift' / 'Memory Fragment'.",loc:"Lioncrest Watchtower, Hernand (Kap. 2)"},
+  {name:"Constellations (13)",cat:"Exploration (Maps of the Night)",miss:false,detail:"13 Sternbild-Orte. Alle = Trophäe 'Navigator of the Stars' + zählt zu 'Expert Explorer'. Braucht zuerst den Constellation Helm (Hernand-Scholastone-Questreihe 'What the Stars Left Behind').",loc:"13 Weltorte; Helm aus Scholastone-Quest"},
+  {name:"Legendary Animals (22)",cat:"Exploration (Hazy Tales)",miss:false,detail:"22 legendäre Tiere für 'Hazy Tales' + 'Expert Explorer'. 3 Pferde (Royler/Rokade/Camora — beste Mounts), 5 Fische (Golden Tench/Carp, Coelacanth, Golden Coelacanth, Clockwork Fish — teuer verkaufbar / Katze auf 100 Trust), 14 Jagdtiere (Möbel/Equip; 3 davon Silver Fang/White Bear/Snowwhite Deer → bei Hexe zu Mounts). Skevald + Black Fang separat unter 'New Power'.",loc:"22 Weltorte"},
+  {name:"Caves (100 von 133)",cat:"Exploration (Life 12)",miss:false,detail:"133 Höhlen existieren, nur 100 nötig für 'Cave Exploration Log' — 33 überspringbar. Nicht missable.",loc:"Höhlen weltweit"},
+  {name:"Collectible-Deko (Gemälde/Behälter)",cat:"Collectibles (Deko/Geschenk)",miss:false,detail:"Knowledge-Subliste 'Collectibles': Gemälde ('Prelude to War', 'Golden Lands' — beide aus Glenbright Manor stehlen), Behälter ('Liquor Bottle' in der Welt). Nutzen: Heim dekorieren, NPCs schenken (Trust↑) oder verkaufen.",loc:"Glenbright Manor + Welt-Pickups"},
+  {name:"Skull Knight Knowledge — Spire of Frost",cat:"Knowledge (Bosse)",miss:true,detail:"Spire of Frost VOR der Begegnung mit dem Skull Knight zu räumen fügt seine Knowledge NICHT hinzu — Einmal-Boss, also dauerhaft ein Eintrag fehlend. Vorher korrekt antreffen.",loc:"Spire of Frost"},
+  {name:"Hoenbrak Ruins Boss — Quest 3/4",cat:"Knowledge/Quest (Bosse)",miss:true,detail:"Boss in Hoenbrak Ruins: tötest du ihn VOR der zugehörigen Quest (House Lanford), bleibt das Log ewig bei 3/4. Erst Quest holen.",loc:"Hoenbrak Ruins"},
+  {name:"Sweet Deal — Honig-Lieferung",cat:"Side-Quest (einmalig)",miss:true,detail:"Honig-Lieferung zum Royal Trading Post (Hernand). Lieferst du Honig VOR Quest-Aktivierung, ist 'Sweet Deal' dauerhaft gesperrt. Erst Quest aktivieren.",loc:"Royal Trading Post, Hernand"},
+  {name:"Fruit of Life — Abyss-Puzzlebaum",cat:"Quest-Item (einmalig)",miss:true,detail:"Fruit of Life vom Abyss-Puzzlebaum VOR der Tariv-Sorcerer-Quest aufzunehmen schließt den Quest-Schritt nicht ab → Fortschritt gesperrt. Erst Quest holen.",loc:"Abyss-Puzzlebaum (Tariv-Quest)"},
+  {name:"Pailune-Camp-NPCs (Lola/Gunter/Harry)",cat:"Side-Quests (Fraktion)",miss:true,detail:"3 NPC-Questreihen in Pailune verschwinden dauerhaft, wenn du dein Camp verlegst. Auch die Jackals-Fraktion (für 'Operation 7: Disruption') verschwindet, sobald alle Pailune-Camps/Fraktions-Quests geräumt sind. Vorher erledigen.",loc:"Pailune"},
+  {name:"Focused Force Palm (Skill)",cat:"Skill (einmalig, nachholbar)",miss:true,detail:"Früh in einer Geheimhöhle nahe Scholastone Institute. In Kap. 4 durch direktes Fast-Travel überspringbar — aber in Kap. 9 nachlernbar, also nicht endgültig verloren. game8 nennt das praktisch den einzigen echten 'Missable'.",loc:"Geheimhöhle nahe Scholastone (Kap. 4 / Kap. 9)"},
+  {name:"Gatherable-Knowledge (Kräuter/Mineralien/...)",cat:"Knowledge (Gatherables)",miss:false,detail:"Sublisten: 'Between Herbs and Poisons' (3 Pilze, 22 Heilkräuter, 6 Giftkräuter), 'Crystals in the Veins' (18 Mineralien inkl. Diamond/Bismuth/Platinum/Mercury), 'The Fruit of Patience' (17 Getreide, 37 Gemüse/Früchte), 'Bounty of Meadows' (8 seltene). NICHT missable — Boss-Belohnung 'Memory of Ancient Nature' schaltet alle Gatherable-Knowledge retroaktiv frei.",loc:"Welt-Nodes oder Boss-Knowledge-Items"},
+  {name:"Insekten (76)",cat:"Gatherable-Knowledge (Life 4)",miss:false,detail:"76 Insekten/Arthropoden für 'Tiny Citizens of Grasslands'. Unentdeckte = '???'. Eigener Locations-Guide (powerpyx). Nicht missable.",loc:"Weltweit"},
+  {name:"Fische & Unterwasser",cat:"Gatherable-Knowledge (Life 6)",miss:false,detail:"'The Underwater Ecosystem': 25 Süßwasser-, 15 Salzwasserfische, 5 legendäre Fische, 11 Unterwasser-Wildtiere. Nicht missable.",loc:"Gewässer in Pywel"},
+  {name:"Unique Pets (30)",cat:"Collectible (Life 9)",miss:false,detail:"Braucht 30 EINZIGARTIGE Pets (Hunde/Katzen in Städten). Duplikat-Varianten zählen nicht (können freigelassen werden). Nicht missable.",loc:"Städte in Pywel"},
+  {name:"Spezialwaffen-Challenge-Collectibles",cat:"Equipment-Challenge",miss:true,detail:"Einige Unique-Waffen speisen Challenges, haben aber Fallen: Vessel of Dark Pursuit versehentlich verkaufbar; Marni Laser Helm (50/50 Haltbarkeit); Lightning/Bismuth Spear extrem niedrige Haltbarkeit — Umbau zur 'Kuku-Version' disqualifiziert. Effektiv missable bei Verkauf/Zerstörung/Umbau.",loc:"Diverse (powerpyx Challenge-Notes)"}
 ];
 
 const TRUE_ENDING=[
@@ -7649,6 +7690,21 @@ function renderMounts(){
   ).join('');
 }
 
+// ===== COLLECTIBLES =====
+function renderCollectibles(){
+  const tb=document.getElementById('col-tb');
+  if(!tb)return;
+  const f=(document.getElementById('cof-miss')||{}).value||'';
+  const list=COLLECTIBLES.filter(c=>!f||(f==='1'?c.miss:!c.miss));
+  const cnt=document.getElementById('cof-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
+  tb.innerHTML=list.map(c=>`<tr>
+    <td><strong>${esc(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:#e84535;border:1px solid rgba(232,69,53,.5);border-radius:3px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}</td>
+    <td style="color:var(--dim);white-space:nowrap;font-size:11px">${esc(c.cat)}</td>
+    <td style="line-height:1.5">${esc(c.detail)}</td>
+    <td style="color:var(--dim);font-size:11px">${esc(c.loc)}</td>
+  </tr>`).join('');
+}
+
 // ===== SKILLS =====
 function renderUnlockTable(){
   const charF=(document.getElementById('uf-char')||{}).value||'';
@@ -8936,6 +8992,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderBuilds();
   renderAccessories();
   renderPets();
+  renderCollectibles();
   initStaticTocs();
   document.addEventListener('mousemove',_moveMFP);
   renderWitches();
