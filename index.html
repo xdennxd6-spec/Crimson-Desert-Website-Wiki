@@ -1468,7 +1468,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </div>
 <div id="app">
 <nav id="sidebar" aria-label="Hauptnavigation">
-  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.09</div></div>
+  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.10</div></div>
   <div class="sb-nav">
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
     <div class="ni" data-sec="items" onclick="showSec('items')"><span class="nicon">🔮</span><span class="nlabel">Items</span></div>
@@ -1890,7 +1890,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-pets">
     <div class="sec-t">🐾 Pets</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar.</div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
   </section>
@@ -1976,13 +1976,13 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-patches">
     <div class="sec-t">📋 Patch-Notes</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.09.00</span> (29.05.2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.10.00</span> (05.06.2026).</div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev Update, 02.06.2026). Schrittweiser Rollout Juni–September 2026 — noch keine versionierten Patch-Notes, Inhalte können sich bis Release ändern.</div>
       <ul style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.75;color:var(--text)">
         <li><b>Story-Kohärenz:</b> Schlüsselszenen in Kliffs Handlung werden überarbeitet, um den Erzählfluss runder und nachvollziehbarer zu machen.</li>
-        <li><b>Re-Blockade-Überarbeitung:</b> neue Verteidigungsphasen bei Festungs-Belagerungen + höhere Beute- und Liberation-Belohnungen.</li>
+        <li><b>Re-Blockade-Überarbeitung:</b> neue Verteidigungsphasen bei Festungs-Belagerungen + höhere Beute- und Liberation-Belohnungen. <span style="color:var(--gold)">✓ ausgeliefert in Patch 1.10.00 (Phasen 'Battle' &amp; 'Reconstruct', neue Festungs-Befreiungs-Belohnungen).</span></li>
         <li><b>Neuer Kampf-Content:</b> eigene kampffokussierte Aktivität — „beweise deine wahre Stärke als Greymane".</li>
         <li><b>Cross-Save:</b> Account-Verknüpfung erlaubt das Teilen von Speicherständen über PC, PlayStation und Xbox.</li>
         <li><b>Damiane &amp; Oongka:</b> Gameplay-Verbesserungen, damit alle drei spielbaren Charaktere gleichwertig im Rampenlicht stehen.</li>
@@ -3070,7 +3070,8 @@ const MOUNTS=[
   {name:"Marni's Mechahorse",type:"Mechanisches Pferd (Tier 2)",unlock:"Stehlen: von den Wachen am Südtor der City of Delesyia (Eastern Hills), mit Maske verkleidet",stats:"Tier 2 — keine Tier-4-Skills",notes:"Mechanischer Konstrukt-Mount (kein Marni-Questline-Unlock)"},
   // ── Drachen-Mount ──
   {name:"Blackstar",type:"Drache",unlock:"Automatisch in Kap. 11 (Story-Quest; Golden Star besiegen, Pickup im Nest of Valor)",stats:"15 min/Session, 50 min Cooldown; Feuerangriffe, kann Festungen niederbrennen",notes:"Aerial Maneuver + Focused Force Palm aufs gruenes Glow. Bestes Anti-Festungs-Tool."},
-  {name:"Wild Wyvern",type:"Drache",unlock:"Wilde Wyvern in der Spielwelt unterwerfen (Subdue) [Patch 1.08]",stats:"Temporär reitbar (Flug)",notes:"Nach dem Unterwerfen zeitlich begrenzt als fliegender Mount nutzbar. Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest) separat als Pet — Mount-Funktion später geplant."},
+  {name:"Wild Wyvern",type:"Drache",unlock:"Wilde Wyvern in der Spielwelt unterwerfen (Subdue) [Patch 1.08]",stats:"Temporär reitbar (Flug)",notes:"Nach dem Unterwerfen zeitlich begrenzt als fliegender Mount nutzbar. Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest) separat als Pet; seit [Patch 1.10] durch Aufzucht als Spezial-Mount 'Wyvern' registrierbar (siehe unten)."},
+  {name:"Wyvern",type:"Drache",unlock:"[Patch 1.10] Baby Wyvern durch Füttern aufziehen → ab bestimmtem Wachstumsgrad als Spezial-Mount registrierbar; das neue Pet 'Kuku Bird Chick' wird analog aufgezogen",stats:"Flug-Mount (Drache); eigene Mount-Ausrüstung 'Wyvern Saddle' (Patch 1.10)",notes:"Erfüllt die in Patch 1.08 angekündigte Mount-Funktion des Baby Wyverns. 'Sigil of Valor' auf Baby-Wyverns anlegbar."},
   // ── Sigil-Mounts (Boss Kill → Crafting) ──
   {name:"Silver Fang",type:"Wolf (Sigil)",unlock:"Black Fang Kill (Howling Hollow Cave, House Celeste Faction) → Crafting bei Hexe",stats:"430 HP / 100 Sta / 100 Atk / 45 Def — kaempft dismounted aktiv weiter",notes:"Einziger Mount der nach Dismount weiterkämpft. Lightning-Stagger. Sigil konsumieren."},
   {name:"White Bear",type:"Bär (Sigil)",unlock:"White Bear Kill (NW Pailune, Silverwolf Mountains Gipfel) → Crafting",stats:"1500 HP / 200 Sta / 180 Atk / 35 Def — hoechster Basis-Schaden aller Mounts",notes:"Feuer-Schwäche. Frostcursed Set empfohlen. Tank-Mount schlechthin."},
@@ -8522,6 +8523,107 @@ function toggleChDone(num){
 
 // ===== PATCH NOTES =====
 const PATCHES=[
+  {ver:"1.10.00",date:"05.06.2026",size:"Console-Build 1.000.327",features:[
+    {cat:"Neuer Content",items:[
+      "Re-Blockade überarbeitet: neue Phasen 'Battle' und 'Reconstruct' vor und nach Blockaden ergänzt",
+      "Große Festungen: Spieler können über den Contribution Assessor 'Protection' anfordern",
+      "Festungs-Befreiung belohnt jetzt mit Contribution, Proviant, Handelsgütern und weiteren Items",
+      "Neues Minigame 'Pinball' am Inn nahe dem Delesyian Institute",
+      "Neuer 'Marni Token Exchange': am Pinball-Automaten erhaltene Token gegen Items tauschbar (u.a. Material Box of Fortune, Abyss Artifact, 2 Arten Artifact Chests, ein Helm, 13 Arten Möbel, 3 Gear-Crafting-Rezepte)",
+      "Neues Minigame 'Orb Roll' am Great Gate of Urdavah (Items u.a. Material Box of Fortune, Abyss Artifact, 2 Arten Artifact Chests, goldener Apfel, 3 Teppiche, 3 Lichter)",
+      "Neues Reittier 'Wyvern'",
+      "Neues Pet 'Kuku Bird Chick'",
+      "Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und sind ab einem bestimmten Wachstumsgrad als Spezial-Mounts registrierbar",
+      "Neue Mount-Ausrüstung 'Wyvern Saddle'",
+      "Neue Pet-Ausrüstung 'Small Kuku Bird Eggshell' und 'Small Wyvern Aviator Hat'",
+      "Neue Deko-Kategorie 'Carpet' (Teppich) für die Haus-Dekoration",
+      "Teppiche zum Sortiment einiger Färbereien (Dyehouses) hinzugefügt",
+      "Katzenturm zur Furlington Farm im Azerian Estate hinzugefügt"
+    ]},
+    {cat:"Quality of Life",items:[
+      "Gesperrte (locked) Items: Abyss-Ausrüstung kann jetzt daraus entfernt werden",
+      "Große Erntesense (Large Farming Scythe) liefert jetzt auch sammelbare Items",
+      "Element-Slot- bzw. Pfeil-/Kugel-/Kanonenkugel-Slot-Wechsel im Bosskampf bleibt nach Tod und Wiederholung erhalten",
+      "Pfeile: bei aufgebrauchter Auffüllung werden zuerst normale Pfeile genutzt",
+      "Sigil of Valor jetzt auf Hunde und Baby-Wyverns anlegbar (Iron Eagle und Phoenix folgen nach dem nächsten Patch)",
+      "Karte zum Sternbild-Forschungsjournal hinzugefügt — Sternbild-Standorte darüber auffindbar",
+      "Fütter-Animation beim Halten bestimmter Wildtiere verbessert",
+      "Trageposen einiger Pets geändert",
+      "Animationen für das Hinein- und Herauslegen lebender Fische aus dem Inventar",
+      "Freilass-Funktion: auch beschworene Pets können freigelassen werden",
+      "Bewegungs-/Posture-Animationen verbessert (natürlichere Optik von Outfits und Charakteren)"
+    ]},
+    {cat:"Charaktere & Skills",items:[
+      "Neuer Bodenangriff-Skill für Blackstar",
+      "[Damiane] Schaden der unbewaffneten Skills angepasst (Balance — Patch-Notes nennen keine Zahlenwerte)",
+      "[Damiane] Dreh-/Roll-Animation beim Tragen einer Muskete hinzugefügt",
+      "[Oongka] Effekt der Fähigkeit 'Devastation' verbessert"
+    ]},
+    {cat:"Steuerung & UI",items:[
+      "[Controller] Basis-Interaktion (Y/Dreieck) ist im 'Default'-Preset kein langes Drücken mehr",
+      "[Controller] Axiom Force: Buttons jetzt frei anpassbar",
+      "[Tastatur/Maus] Speicherfehler bei Sekundär-Tastenbelegung behoben",
+      "[Tastatur/Maus] Bogenschieß-/Schießwettbewerbe: Charakter geht sofort in den Zielmodus",
+      "Mission-Dispatch-Menü: Kategorie-Tabs von regions- auf missionsbasiert umgestellt",
+      "Journal > Knowledge > Gatherables: Wissen zu 'Dye Colors' und 'Small Tools' ergänzt",
+      "Neue Wachstums-UI im Inventar — Wachstumsstufen von Pets und Pferden prüfbar",
+      "Photo-Mode-UI verbessert",
+      "Name des Contribution-Shops und seines Managers geändert",
+      "Fix: fehlende Tastenleitfaden-Infos unten rechts in bestimmten Situationen",
+      "Fix: überlappende Text-UI beim Kauf des Writ of Absolution auf 5K-Monitoren"
+    ]},
+    {cat:"Grafik & Performance",items:[
+      "Fix: Power Core funktionierte nach Wechsel zur 'Fleet of Archives'-Abyss zeitweise nicht",
+      "Fix: Barriere in der 'Fleet of Archives'-Abyss wurde beim Annähern deaktiviert",
+      "Fix: Regen erschien in Innenräumen",
+      "Fix: instabiles Rendering bei nassem (Regen-)Terrain in bestimmten Gebieten",
+      "Regen-Effekt verbessert — nasser Boden wird klarer dargestellt",
+      "Abgemildert: kurzes Aufblitzen der vorherigen Ausrüstungs-Optik beim Wechsel",
+      "Fix: bestimmte Objekte sanken abnormal ins Terrain ein",
+      "Fix: unnatürliche Effekte bei Kollision mit bestimmten Möbeln",
+      "Fix: bestimmte Tätowierungs-Muster wurden falsch angezeigt",
+      "Optik einiger Outfits und Charaktere natürlicher gestaltet",
+      "Zirkus-Schilder-Lichter leuchten jetzt auch aus der Ferne"
+    ]},
+    {cat:"Fixes",items:[
+      "Rematch: Fortschritt sprang nach Sieg nicht mehr auf einen früheren Stand zurück",
+      "Manche Bosse fügten sich beim Angreifen selbst Schaden zu — behoben",
+      "Abbrechende Angriffs-Animationen bei Axiom Force / Force Palm auf einem Mount — behoben",
+      "Doppelsprung aktivierte trotz nur einmaliger Vault-Eingabe — behoben",
+      "Vault konnte nicht als Konter genutzt werden — behoben",
+      "Falsche Angriffskraft-Berechnung bei Kliffs 'Nature's Echo' und Damianes 'Reckoning' — behoben",
+      "Force Current funktionierte in der Quest 'Jijeong Temple in Chaos' (Mission 'Repair the second pensive statue') nicht korrekt — behoben",
+      "Homing-Skills/-Items visieren keine unbeabsichtigten Objekte mehr an",
+      "Pet ließ aufgesammelte Items bei vollem Inventar verschwinden — behoben",
+      "Doppelte Legendary Fish im Teich nach erneutem Laden — behoben",
+      "Legendary Fish können nicht mehr aus Quick-Slots genutzt werden",
+      "Wissen konnte in bestimmten Situationen nicht erhalten werden — behoben",
+      "Karte ließ sich in bestimmten Situationen nicht schließen — behoben",
+      "Abstürze im Färbe-Menü in bestimmten Situationen — behoben",
+      "Wagen fahren in einigen Regionen reibungsloser (Terrain/Objektplatzierung in Passagen verbessert)",
+      "Berittene Charaktere waren in bestimmten Situationen nicht steuerbar — behoben",
+      "Pferde im Stall ließen sich in manchen Speicherdateien nicht wechseln — behoben",
+      "Contribution-UI erschien beim erneuten Betreten des Spiels — behoben",
+      "Dauerhaft bestehender Effekt von Focused Force Palm — behoben",
+      "Auflösen von Comrades zu Pferd entließ auch das Pferd — behoben",
+      "Kopfgeld-Quests schritten in bestimmten Situationen nicht korrekt fort — behoben",
+      "Überlappende Dialoge im Kampf gegen Sir Catfish — behoben",
+      "Vogel-Pets hoben manchmal Gimmick-Elemente an — behoben",
+      "Ausweichen während 'Examine' in der Fraktions-Quest 'Bandits Riding Wolves' nicht möglich — behoben",
+      "Fehlende NPCs in der Quest 'Swift Delivery, Safe Borders' — behoben",
+      "Quest 'Harvest of Greed': verschwindender Wagen beim Wiederholen — behoben",
+      "Kliff konnte nach Tod als Begleiter nicht erneut beschworen werden — behoben",
+      "Kamera folgte dem fokussierten Ziel im Focus-Modus nicht — behoben",
+      "Abnormale Anzeige von Wissens-Benachrichtigungen — behoben",
+      "Zwei Alchemie-Materialien wurden auf Schwierigkeit Hard gleichzeitig verbraucht — behoben",
+      "[Damiane] Abnormale Greatsword-Optik nach Aufgabe während eines Rematch — behoben",
+      "[Damiane] Abnormal bestehende Schild-Optik nach Shield Toss — behoben",
+      "Diverse Lokalisierungsfehler behoben, Lokalisierungsqualität in allen Sprachen verbessert"
+    ]},
+    {cat:"Sonstiges",items:[
+      "Bekanntes Problem: Phoenix und Iron Eagle können das 'Sigil of Valor' noch nicht anlegen — Fix im nächsten Patch geplant"
+    ]}
+  ]},
   {ver:"1.09.00",date:"29.05.2026",size:"",features:[
     {cat:"Neuer Content",items:[
       "Controller-Remapping: frei belegbare Tastenbelegung für Controller",
