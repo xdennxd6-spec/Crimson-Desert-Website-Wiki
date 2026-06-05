@@ -1286,6 +1286,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 .pet-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:border-color .15s,background .15s;cursor:default}
 .pet-card:hover{border-color:rgba(201,162,39,.35);background:rgba(201,162,39,.04)}
 .pet-card-img{width:80px;height:80px;object-fit:contain;border-radius:7px;background:rgba(0,0,0,.3)}
+.pet-card-ph{width:80px;height:80px;border-radius:7px;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:42px;line-height:1}
 .pet-card-name{font-size:12px;color:var(--text);font-weight:600;text-align:center;line-height:1.3}
 .pet-card-food{font-size:11px;color:var(--gold);text-align:center;line-height:1.3;opacity:.85}
 .pet-card-food-lbl{font-size:9px;color:var(--dim);text-align:center;text-transform:uppercase;letter-spacing:.05em;margin-bottom:-4px}
@@ -4182,6 +4183,97 @@ const PETS=[
   {name:"Greyhound",type:"dog",food:"Fine Meat",icon:"cd_portrait_petimage_animal_greyhound_domestic_32181.webp"},
   {name:"Beagle",type:"dog",food:"Sweet Potato",icon:"cd_portrait_petimage_animal_beagle_domestic_32189.webp"}
 
+,
+  // ── Kleintiere (fuetter- & aufnehmbar, Patch 1.08/1.09/1.10) ──
+  {name:"Chipmunk",type:"critter",food:"Acorn",icon:"cd_knowledgeimage_knowledge_chipmunk.webp",cat:"Nager"},
+  {name:"Flying Squirrel",type:"critter",food:"Acorn",icon:"cd_knowledgeimage_knowledge_flying_squirrel.webp",cat:"Nager"},
+  {name:"Muskrat",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_muskrat.webp",cat:"Nager"},
+  {name:"Rat",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_rat.webp",cat:"Nager"},
+  {name:"Red Squirrel",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_squirrel.webp",cat:"Nager"},
+  {name:"Snowfield Chipmunk",type:"critter",food:"Acorn",icon:"cd_knowledgeimage_knowledge_snow_chipmunk.webp",cat:"Nager"},
+  {name:"Beaver",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_beaver.webp",cat:"Nager (Wildtier)"},
+  {name:"Desert Porcupine",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_porcupine_desert.webp",cat:"Nager (Wildtier)"},
+  {name:"Porcupine",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_porcupine.webp",cat:"Nager (Wildtier)"},
+  {name:"Chameleon",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_chameleon.webp",cat:"Reptil"},
+  {name:"Baby Wyvern",type:"critter",food:"Tender Meat",icon:"cd_knowledgeimage_knowledge_wyvern.webp",cat:"Reptil/Drache (waechst zum Mount)"},
+  {name:"Opossum",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_possum.webp",cat:"Saeugetier (Beuteltier)"},
+  {name:"Wombat",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_wombat.webp",cat:"Saeugetier (Beuteltier)"},
+  {name:"Desert Rabbit",type:"critter",food:"Carrot",icon:"cd_knowledgeimage_knowledge_desert_rabbit.webp",cat:"Saeugetier (Hasenartige)"},
+  {name:"Forest Rabbit",type:"critter",food:"Carrot",icon:"",cat:"Saeugetier (Hasenartige)"},
+  {name:"Snowfield Rabbit",type:"critter",food:"Carrot",icon:"cd_knowledgeimage_knowledge_snowrabbit.webp",cat:"Saeugetier (Hasenartige)"},
+  {name:"Hedgehog",type:"critter",food:"Insect",icon:"cd_knowledgeimage_knowledge_hedgehog.webp",cat:"Saeugetier (Insektenfresser)"},
+  {name:"Feathered Weasel",type:"critter",food:"",icon:"",cat:"Saeugetier (Marder)"},
+  {name:"Snowfield Weasel",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_snow_weasel.webp",cat:"Saeugetier (Marder)"},
+  {name:"Weasel",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_weasel.webp",cat:"Saeugetier (Marder)"},
+  {name:"Platypus",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_platypus.webp",cat:"Saeugetier (Monotrem)"},
+  {name:"Armadillo",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_armadillo.webp",cat:"Saeugetier (Wildtier)"},
+  {name:"Badger",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_badger.webp",cat:"Saeugetier (Wildtier)"},
+  {name:"Meerkat",type:"critter",food:"Insect",icon:"cd_knowledgeimage_knowledge_meerkat.webp",cat:"Saeugetier (Wildtier)"},
+  {name:"Mole",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_mole.webp",cat:"Saeugetier (Wildtier)"},
+  {name:"Raccoon",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_racoon.webp",cat:"Saeugetier (Wildtier)"},
+  {name:"Red Panda",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_redpanda.webp",cat:"Saeugetier (Wildtier)"},
+  {name:"Skunk",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_skunk.webp",cat:"Saeugetier (Wildtier)"},
+  {name:"Choppy",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_choppy.webp",cat:"Saeugetier (Wildtier, benannte Variante)"},
+  {name:"Skunky",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_skunky.webp",cat:"Saeugetier (Wildtier, benannte Variante)"},
+  {name:"Black-Naped Oriole",type:"critter",food:"Oats",icon:"cd_knowledgeimage_knowledge_oriole.webp",cat:"Vogel"},
+  {name:"Blue Jay",type:"critter",food:"Buckwheat",icon:"cd_knowledgeimage_knowledge_bluejay.webp",cat:"Vogel"},
+  {name:"Collared Dove",type:"critter",food:"Peas",icon:"cd_knowledgeimage_knowledge_collared_dove.webp",cat:"Vogel"},
+  {name:"Crow",type:"critter",food:"Oats",icon:"cd_knowledgeimage_knowledge_crow.webp",cat:"Vogel"},
+  {name:"Cuckoo",type:"critter",food:"Corn",icon:"cd_knowledgeimage_knowledge_cuckoo.webp",cat:"Vogel"},
+  {name:"Desert Wheatear",type:"critter",food:"Barley",icon:"",cat:"Vogel"},
+  {name:"Kentish Plover",type:"critter",food:"Beans",icon:"",cat:"Vogel"},
+  {name:"Long-Tailed Tit",type:"critter",food:"Buckwheat",icon:"cd_knowledgeimage_knowledge_longtailedtit.webp",cat:"Vogel"},
+  {name:"Meadow Bunting",type:"critter",food:"Wheat",icon:"",cat:"Vogel"},
+  {name:"Pigeon",type:"critter",food:"Beans",icon:"cd_knowledgeimage_knowledge_pigeon.webp",cat:"Vogel"},
+  {name:"Sand Grouse",type:"critter",food:"Lentils",icon:"",cat:"Vogel"},
+  {name:"Sparrow",type:"critter",food:"Corn",icon:"cd_knowledgeimage_knowledge_sparrow.webp",cat:"Vogel"},
+  {name:"Three-Toed Woodpecker",type:"critter",food:"Lentils",icon:"cd_knowledgeimage_knowledge_woodpecker.webp",cat:"Vogel"},
+  {name:"White-Winged Redstart",type:"critter",food:"Wheat",icon:"",cat:"Vogel"},
+  {name:"Yellow-Billed Oxpecker",type:"critter",food:"Peas",icon:"cd_knowledgeimage_knowledge_oxpecker.webp",cat:"Vogel"},
+  {name:"Condor",type:"critter",food:"Tough Meat",icon:"cd_knowledgeimage_knowledge_condor.webp",cat:"Vogel (Greifvogel)"},
+  {name:"Eagle",type:"critter",food:"Lean Meat",icon:"cd_knowledgeimage_knowledge_eagle.webp",cat:"Vogel (Greifvogel)"},
+  {name:"Eastern Sparrowhawk",type:"critter",food:"Tender Meat",icon:"",cat:"Vogel (Greifvogel)"},
+  {name:"Gyrfalcon",type:"critter",food:"Marbled Meat",icon:"",cat:"Vogel (Greifvogel)"},
+  {name:"Hawk",type:"critter",food:"Tough Meat",icon:"cd_knowledgeimage_knowledge_hawk.webp",cat:"Vogel (Greifvogel)"},
+  {name:"Owl",type:"critter",food:"Tough Meat",icon:"",cat:"Vogel (Greifvogel)"},
+  {name:"Red-Footed Falcon",type:"critter",food:"Fine Meat",icon:"cd_knowledgeimage_knowledge_red_footed_falcon.webp",cat:"Vogel (Greifvogel)"},
+  {name:"Steppe Eagle",type:"critter",food:"Lean Meat",icon:"cd_knowledgeimage_knowledge_steppe_eagle.webp",cat:"Vogel (Greifvogel)"},
+  {name:"Hyacinth Macaw",type:"critter",food:"Desert Melon",icon:"",cat:"Vogel (Legendary/Papagei)"},
+  {name:"Phoenix",type:"critter",food:"",icon:"",cat:"Vogel (Legendary/Sonder)"},
+  {name:"Iron Eagle",type:"critter",food:"Mercury",icon:"",cat:"Vogel (Legendary/mechanisch)"},
+  {name:"Citron-Crested Cockatoo",type:"critter",food:"Orange",icon:"",cat:"Vogel (Papagei)"},
+  {name:"Eclectus Parrot",type:"critter",food:"Elderberry",icon:"cd_knowledgeimage_knowledge_eclectusparrot.webp",cat:"Vogel (Papagei)"},
+  {name:"Grey Parrot",type:"critter",food:"Fig",icon:"cd_knowledgeimage_knowledge_grayparrot.webp",cat:"Vogel (Papagei)"},
+  {name:"Little Blue Macaw",type:"critter",food:"Tomato",icon:"",cat:"Vogel (Papagei)"},
+  {name:"Parrot",type:"critter",food:"Raspberry",icon:"cd_knowledgeimage_knowledge_parrot.webp",cat:"Vogel (Papagei)"},
+  {name:"Ringneck Parrot",type:"critter",food:"Strawberry",icon:"",cat:"Vogel (Papagei)"},
+  {name:"Sun Conure",type:"critter",food:"Blueberry",icon:"cd_knowledgeimage_knowledge_sunconure.webp",cat:"Vogel (Papagei)"},
+  {name:"Common Tern",type:"critter",food:"Crucian Carp",icon:"",cat:"Vogel (Wasservogel)"},
+  {name:"Desert Goose",type:"critter",food:"Mackerel",icon:"cd_knowledgeimage_knowledge_desert_goose.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Goose",type:"critter",food:"Red Tonguesole",icon:"cd_knowledgeimage_knowledge_goose.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Loon",type:"critter",food:"Tench",icon:"",cat:"Vogel (Wasservogel)"},
+  {name:"Mallard",type:"critter",food:"Small Blackbrow Bleak",icon:"cd_knowledgeimage_knowledge_mallardduck.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Ruddy Shelduck",type:"critter",food:"Small Spirlin",icon:"cd_knowledgeimage_knowledge_ruddyshelduck.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Seagull",type:"critter",food:"Perch",icon:"cd_knowledgeimage_knowledge_seagull.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Small Teal",type:"critter",food:"Small Gudgeon",icon:"",cat:"Vogel (Wasservogel)"},
+  {name:"Smew",type:"critter",food:"Pond Loach",icon:"",cat:"Vogel (Wasservogel)"},
+  {name:"Spot-Billed Duck",type:"critter",food:"Small Minnow",icon:"cd_knowledgeimage_knowledge_blackduck.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Whistling Duck",type:"critter",food:"Small Rasbora",icon:"cd_knowledgeimage_knowledge_whistling_duck.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Wild Duck",type:"critter",food:"Ricefish",icon:"cd_knowledgeimage_knowledge_duck.webp",cat:"Vogel (Wasservogel)"},
+  {name:"Yellow-Billed Loon",type:"critter",food:"Threeline Grunt",icon:"",cat:"Vogel (Wasservogel)"},
+  {name:"Coot",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_fulica.webp",cat:"Vogel (flugunfaehig)"},
+  {name:"Crake",type:"critter",food:"",icon:"",cat:"Vogel (flugunfaehig)"},
+  {name:"Grebe",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_little_grebe.webp",cat:"Vogel (flugunfaehig)"},
+  {name:"Kakapo",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_kakapo.webp",cat:"Vogel (flugunfaehig)"},
+  {name:"Kiwi Bird",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_kiwi_bird.webp",cat:"Vogel (flugunfaehig)"},
+  {name:"Mesite",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_mesite.webp",cat:"Vogel (flugunfaehig)"},
+  {name:"Partridge",type:"critter",food:"",icon:"",cat:"Vogel (flugunfaehig)"},
+  {name:"Swamphen",type:"critter",food:"",icon:"",cat:"Vogel (flugunfaehig)"},
+  {name:"Kuku Bird Chick",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_kukubird.webp",cat:"Vogel (waechst zum Mount)"},
+  {name:"Desert Fox",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_desert_fox.webp",cat:"Wildtier (Fuchs)"},
+  {name:"Fox",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_fox.webp",cat:"Wildtier (Fuchs)"},
+  {name:"Snowfield Fox",type:"critter",food:"",icon:"cd_knowledgeimage_knowledge_arctic_fox.webp",cat:"Wildtier (Fuchs)"},
+  {name:"Abyss Heuklang",type:"critter",food:"Any Legendary Fish",icon:"",cat:"sonstiges (Abyss-Kreatur, katzenartig)"},
 ];
 const MOUNT_IMGS={
   "Herspia":                  "cd_assets/mounts/herspia.webp",
@@ -4194,6 +4286,7 @@ const MOUNT_IMGS={
   "Priden":                   "cd_assets/mounts/priden.webp",
   "Blackstar":                "cd_assets/mounts/blackstar.webp",
   "Wild Wyvern":              "cd_assets/mounts/wild-wyvern.webp",
+  "Wyvern":                   "cd_assets/mounts/wyvern.webp",
   "Silver Fang":              "cd_assets/mounts/silver-fang.webp",
   "White Bear":               "cd_assets/mounts/white-bear.webp",
   "Snowwhite Deer":           "cd_assets/mounts/snowwhite-deer.webp",
@@ -4225,6 +4318,7 @@ const MOUNT_INGAME_IMGS={
   "Camora":         "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_02009.webp",
   "Blackstar":      "https://static0.fextralifeimages.com/file/crimsondesertgame/6/60/Blackstar-dragon-mount-crimson-desert-wiki-guide.png",
   "Wild Wyvern":    "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_wyvern.webp",
+  "Wyvern":         "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_wyvern.webp",
   "Silver Fang":    "https://static0.fextralifeimages.com/file/crimsondesertgame/d/d8/Silverfang-mount-crimson-desert-wiki-guide.png",
   "White Bear":     "https://static0.fextralifeimages.com/file/crimsondesertgame/1/19/White-bear-mount-crimson-desert-wiki-guide.png",
   "Snowwhite Deer": "https://static0.fextralifeimages.com/file/crimsondesertgame/3/32/Snowdeer-mount-crimson-desert-wiki-guide.png",
@@ -6721,15 +6815,36 @@ window.addEventListener('hashchange',_applyUrlState);
 
 // ===== PETS =====
 let _petFilter='all';
+function _petEmoji(cat){
+  cat=(cat||'').toLowerCase();
+  if(/rabbit|hase|kaninchen|bunny/.test(cat))return '🐰';
+  if(/vogel|bird|kuku|huhn|hahn|hen|chicken|duck|ente|goose|gans|owl|eule|parrot|papagei|peacock|pfau|crane|kranich|sparrow|swan|schwan|raptor|oriole|jay|dove|crow|cuckoo|plover|tit|bunting|pigeon|grouse|woodpecker|redstart|oxpecker|condor|eagle|hawk|falcon|macaw|phoenix|cockatoo|conure|tern|loon|mallard|shelduck|seagull|teal|smew|coot|crake|grebe|kakapo|kiwi|mesite|partridge|swamphen|wheatear/.test(cat))return '🐦';
+  if(/nager|rabbit|hase|kaninchen|squirrel|eichh|maus|mouse|rat|ratte|hamster|hedgehog|igel/.test(cat))return '🐹';
+  if(/reptil|lizard|echse|iguana|gecko|snake|schlange|turtle|tortoise|schildkr/.test(cat))return '🦎';
+  if(/amphib|frog|frosch|toad|kröte/.test(cat))return '🐸';
+  if(/nutztier|farm|sheep|schaf|lamb|lamm|goat|ziege|pig|schwein|piglet|ferkel|cow|kuh|calf|kalb|chick/.test(cat))return '🐑';
+  if(/wild|fox|fuchs|deer|reh|hirsch|fawn|boar|eber|wolf|bear|bär|raccoon|otter|monkey|affe|weasel|ferret/.test(cat))return '🦊';
+  if(/insekt|insect|crab|krabbe|krebs|butterfly|schmetter|käfer|beetle/.test(cat))return '🦋';
+  if(/fish|fisch/.test(cat))return '🐟';
+  return '🐾';
+}
+function _petCardImg(p){
+  const src=p.icon?(/^https?:/.test(p.icon)?p.icon:PET_CDN+p.icon):'';
+  const emoji=_petEmoji((p.cat||'')+' '+(p.name||p.type||''));
+  if(src)return `<img class="pet-card-img" src="${src}" alt="${p.name.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="pet-card-ph" style="display:none">${emoji}</div>`;
+  return `<div class="pet-card-ph">${emoji}</div>`;
+}
 function renderPets(filter){
   _petFilter=filter||_petFilter;
   const filterRow=document.getElementById('pet-filter-row');
   const grid=document.getElementById('pet-grid');
   if(!filterRow||!grid)return;
-  const filters=[{k:'all',l:'Alle'},{'k':'cat',l:'Katzen'},{'k':'dog',l:'Hunde'}];
+  const counts={}; PETS.forEach(p=>{counts[p.type]=(counts[p.type]||0)+1;});
+  const filters=[{k:'all',l:'Alle'},{k:'cat',l:'Katzen'},{k:'dog',l:'Hunde'}];
+  if(counts.critter)filters.push({k:'critter',l:'Kleintiere'});
   filterRow.innerHTML=filters.map(f=>`<button class="pet-filter-btn${_petFilter===f.k?' active':''}" onclick="renderPets('${f.k}')">${f.l}</button>`).join('');
   const list=_petFilter==='all'?PETS:PETS.filter(p=>p.type===_petFilter);
-  grid.innerHTML=list.map(p=>`<div class="pet-card"><img class="pet-card-img" src="${PET_CDN}${p.icon}" alt="${p.name}" onerror="this.style.opacity='.2'"><div class="pet-card-name">${p.name}</div><div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food}</div></div>`).join('');
+  grid.innerHTML=list.map(p=>`<div class="pet-card">${_petCardImg(p)}<div class="pet-card-name">${p.name}</div><div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food||'—'}</div></div>`).join('');
 }
 
 // ===== MOBILE SIDEBAR =====
