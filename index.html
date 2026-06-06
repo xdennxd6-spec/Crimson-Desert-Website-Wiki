@@ -7846,6 +7846,11 @@ function renderMounts(){
   ).join('');
 }
 
+// Top-level HTML-Escaper (Bugfix 2026-06-06): renderCollectibles/renderCompendium nutzten ein bare esc(),
+// das bislang nur LOKAL in anderen Funktionen existierte -> ReferenceError brach den DOMContentLoaded-Init
+// ab Collectibles ab (alle Tabellen-Sektionen danach leer + Besucherzaehler stuck auf "—"). Globales esc behebt das.
+function esc(s){return String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));}
+
 // ===== COLLECTIBLES =====
 function renderCollectibles(){
   const tb=document.getElementById('col-tb');
