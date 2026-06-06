@@ -8607,33 +8607,90 @@ function postComment(sec){
   document.getElementById('cl-'+sec)?.scrollTo({top:9999,behavior:'smooth'});
 }
 
-// ===== VISITOR COUNTER =====
-async function initVisitorCount(){
-  const today=new Date().toISOString().slice(0,10).replace(/-/g,'');
-  const newSess=!sessionStorage.getItem('cd_vs');
-  if(newSess) sessionStorage.setItem('cd_vs','1');
+// ===== VISITOR COUNTER (self-hosted via /api/visits) =====
+// Ersetzt den toten countapi.xyz. Backend: Netlify Function + Neon Postgres.
+// Robustheits-Vertrag: Die drei Sidebar-Felder (#sv-online/#sv-today/#sv-total)
+// werden SOFORT aus localStorage gefuellt und duerfen NIE "—" zeigen. Server-
+// Werte ueberschreiben den Fallback nur, wenn /api/visits mit ok:true antwortet.
+// Speichert KEINE personenbezogenen Daten.
 
-  // localStorage baseline (always works)
-  const tKey='cd_vt', dKey='cd_vd'+today;
-  if(newSess){
-    localStorage.setItem(tKey, parseInt(localStorage.getItem(tKey)||0)+1);
-    localStorage.setItem(dKey, parseInt(localStorage.getItem(dKey)||0)+1);
+function _vsFmt(n){ return Number(n).toLocaleString("de"); }
+function _vsSet(id,v){ const e=document.getElementById(id); if(e) e.textContent=v; }
+function _vsInt(v){ const n=parseInt(v,10); return Number.isFinite(n)?n:0; }
+
+// Ephemere, anonyme Session-ID (nur sessionStorage) fuer die "Online"-Praesenz.
+// Kein dauerhafter Personen-Tracker: verschwindet beim Schliessen des Tabs.
+function _vsSid(){
+  let s=sessionStorage.getItem("cd_sid");
+  if(!s){
+    s=(crypto?.randomUUID?.()||(Date.now().toString(36)+Math.random().toString(36).slice(2)))
+        .replace(/[^A-Za-z0-9_-]/g,"").slice(0,64);
+    sessionStorage.setItem("cd_sid",s);
   }
-  const setEl=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-  setEl('sv-total', parseInt(localStorage.getItem(tKey)||1).toLocaleString('de'));
-  setEl('sv-today', localStorage.getItem(dKey)||'1');
-  setEl('sv-online','1');
+  return s;
+}
 
-  // Try countapi.xyz for real cross-browser counts
+// Berlin-Tagesschluessel fuer den lokalen Fallback (konsistent zum Server).
+function _vsBerlinDay(){
   try{
-    const ns='cd-guide-x1', hit=newSess?'hit':'get';
-    const [tot,tod]=await Promise.all([
-      fetch(`https://api.countapi.xyz/${hit}/${ns}/total`).then(r=>r.json()),
-      fetch(`https://api.countapi.xyz/${hit}/${ns}/d${today}`).then(r=>r.json())
-    ]);
-    if(tot.value) setEl('sv-total', parseInt(tot.value).toLocaleString('de'));
-    if(tod.value) setEl('sv-today', parseInt(tod.value).toLocaleString('de'));
-  }catch{}
+    // en-CA liefert YYYY-MM-DD; Zeitzone erzwingt den Berliner Kalendertag.
+    return new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",
+      year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+  }catch{ return new Date().toISOString().slice(0,10); }
+}
+
+let _vsPing=null;
+
+async function initVisitorCount(){
+  const sid=_vsSid();
+  const newSess=!sessionStorage.getItem("cd_vs");
+  if(newSess) sessionStorage.setItem("cd_vs","1");
+
+  // --- 1) SOFORTIGER localStorage-Baseline (funktioniert immer, nie "—") ---
+  const day=_vsBerlinDay();
+  const tKey="cd_vt", dKey="cd_vd_"+day;
+  if(newSess){
+    localStorage.setItem(tKey, _vsInt(localStorage.getItem(tKey))+1);
+    localStorage.setItem(dKey, _vsInt(localStorage.getItem(dKey))+1);
+  }
+  _vsSet("sv-total",  _vsFmt(Math.max(1,_vsInt(localStorage.getItem(tKey)))));
+  _vsSet("sv-today",  _vsFmt(Math.max(1,_vsInt(localStorage.getItem(dKey)))));
+  _vsSet("sv-online", "1"); // mindestens man selbst
+
+  // --- 2) Server-Werte holen und ueberschreiben (nur bei ok:true) ---
+  const fetchVisits=async(hit)=>{
+    const qs=new URLSearchParams({sid});
+    if(hit) qs.set("hit","1");
+    const r=await fetch("/api/visits?"+qs.toString(),{
+      method:"GET",
+      headers:{ Accept:"application/json" },
+      cache:"no-store",
+    });
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const d=await r.json();
+    if(!d||d.ok!==true) throw new Error("bad payload");
+    return d;
+  };
+
+  const apply=(d)=>{
+    // Server-Wahrheit anzeigen UND in localStorage spiegeln (besserer Fallback
+    // beim naechsten Mal). Online wird bei min. 1 gehalten.
+    if(Number.isFinite(d.total)) { _vsSet("sv-total", _vsFmt(d.total)); localStorage.setItem(tKey,d.total); }
+    if(Number.isFinite(d.today)) { _vsSet("sv-today", _vsFmt(d.today)); localStorage.setItem(dKey,d.today); }
+    if(Number.isFinite(d.online)){ _vsSet("sv-online", _vsFmt(Math.max(1,d.online))); }
+  };
+
+  // Nur bei NEUER Session inkrementieren (?hit=1), sonst read-only.
+  try{ apply(await fetchVisits(newSess)); }
+  catch{ /* Fehler -> localStorage-Fallback bleibt stehen, Felder sind gefuellt */ }
+
+  // --- 3) Praesenz-Ping ~alle 60s (read-only, kein hit) haelt "Online" aktuell ---
+  if(!_vsPing){
+    _vsPing=setInterval(async()=>{
+      try{ apply(await fetchVisits(false)); }
+      catch{ /* Ping-Fehler ignorieren, alte Werte stehen lassen */ }
+    },60000);
+  }
 }
 
 // ===== ACCESSORIES =====
