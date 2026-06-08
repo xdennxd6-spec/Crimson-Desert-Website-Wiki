@@ -426,6 +426,9 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .fac-qm{display:grid;grid-template-columns:max-content 1fr;gap:2px 9px;font-size:11px;line-height:1.45}
 .fac-qk{color:var(--gdim);font-weight:600;white-space:nowrap}
 .fac-qv{color:var(--dim)}
+.dye-chip{display:inline-block;width:30px;height:30px;border-radius:7px;border:2px solid var(--bdr);background:#17171a;overflow:hidden;vertical-align:middle;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.dye-chip img{width:100%;height:100%;object-fit:cover;display:block}
+.dye-td{width:46px;text-align:center}.dye-th{width:46px}
 .fac-ul li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:.65}
 .no-res{color:var(--dim);text-align:center;padding:48px;font-size:13px}
 
@@ -1978,7 +1981,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <select class="fs" id="dyes-cat" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Special (non-craftable)</option></select>
       <span id="dyes-cnt" style="font-size:11px;color:var(--dim);align-self:center"></span>
     </div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="dyes-tb"></tbody></table></div>
+    <div class="tw-wrap"><table><thead><tr><th class="dye-th"></th><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="dyes-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-food">
     <div class="sec-t">🍲 Food &amp; Elixirs</div>
@@ -3268,25 +3271,25 @@ const PUZZLES=[
 ];
 
 const DYES=[
-  {name:"Dark Red Dye",cat:"Red",detail:"Theoric, Hernand Dyehouse, 1,50 Silver. Craft-Rezept: 10 Medicinal Herb, 3 Rhinoceros, 1 Longhorn, 2 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Red Dye",cat:"Red",detail:"Gestohlen im Keller von Glenbright Manor (Hernand). Craft: 10 Medicinal Herb, 3 Rhinoceros, 1 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Rich Red Dye",cat:"Red",detail:"Gestohlen oben am Torchlight Beacon, Hernand. Craft: 10 Medicinal Herb, 3 Rhinoceros, 2 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Bright Red Dye",cat:"Red",detail:"Kostenlos gecraftet in der Quest A Fresh Color (Naira): 10 Medicinal Herb, 3 Rhinoceros, 3 Longhorn.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Bright Green Dye",cat:"Green",detail:"Lauendell, Calphade Dyehouse, 1,50 Silver. Craft: 5 Medicinal Herb, 5 Beetle, 3 Longhorn.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Yellow Dye",cat:"Yellow",detail:"Devin, Pororin Dyehouse, 1,50 Silver. Craft: 10 Medicinal Herb, 3 Beetle, 1 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Dark Orange Dye",cat:"Orange",detail:"Cormac, Tommaso Dyehouse, 1,50 Silver. Craft: 10 Medicinal Herb, 3 Rhinoceros, 1 Longhorn, 2 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Bright Orange Dye",cat:"Orange",detail:"Nur craftbar, kein bestätigter Händler: 10 Medicinal Herb, 3 Rhinoceros, 3 Longhorn. Der früher vermutete Pickup in den Time War Ruins ist nicht belegt.",loc:"TheGamer; Game8",miss:false,conf:"medium"},
-  {name:"Rich Spring Green Dye",cat:"Spring Green",detail:"Alton, Varnia Dyehouse, 1,50 Silver. Craft: 10 White Lavender, 3 Beetle, 2 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Bright Violet Dye",cat:"Violet",detail:"Monty, Greenfield Farm Dyehouse (Demeniss, nordwestlich oberhalb der Farm), 1,50 Silver; erscheint auf der Karte erst nach Chapter 8. Craft: 10 Medicinal Herb, 10 Lavender, 3 Longhorn. Einige Guides nennen das Sortiment Dark Violet.",loc:"Game8 (586897); PowerPyx",miss:false,conf:"medium"},
-  {name:"Rich Purple Dye",cat:"Purple",detail:"Edmar, Sunset Dyehouse, 1,50 Silver. Craft: 15 Lavender, 5 Blue Lavender, 2 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Bright Blue Dye",cat:"Blue",detail:"Linus, Rustleleaf Farm Dyehouse, 1,50 Silver. Craft: 15 Blue Lavender, 5 Lavender, 3 Longhorn.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Deep Sky Blue Dye",cat:"Blue",detail:"Castiel, Delesyia Dyehouse, 1,50 Silver. Craft: 10 White Lavender, 10 Blue Lavender, 3 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Teal Dye",cat:"Teal",detail:"Laurick, Pailune Dyehouse, 1,50 Silver. Craft: 10 Blue Lavender, 10 Shrubby Sophora, 1 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high"},
-  {name:"Pure White Dye",cat:"Special (non-craftable)",detail:"Wilmer, Provisioner's Shop in Timberton (Delesyia), 15 Silver (NICHT 1,50). Nicht craftbar. Der Laden erscheint erst nach der Bohrturm-Questreihe des Bürgermeisters bzw. der Blackwater-Oil-Merchant-Guild-Kette (Cordelia).",loc:"Game8 (599343); VULKK",miss:true,conf:"high"},
-  {name:"Shadow Grey Dye",cat:"Special (non-craftable)",detail:"Oliver (Camp-Dyer) im Greymane Camp, 15 Silver, nicht craftbar. Setzt den 3. Camp-Ausbau (alle Gathered Will – Grounds of the Sunrise Quests) plus A Rumor at the Inksworth Bindery voraus. VULKK nennt alternativ einen Provisioner in Senia.",loc:"Raider King; VULKK",miss:true,conf:"high"},
-  {name:"Black Dye",cat:"Special (non-craftable)",detail:"Back Alley Shop (Solan) in Muiquun, südöstlich von Tommaso, 37,5 Silver, nicht craftbar. Erst nach Befreiung von Muiquun und der Lawless-Market-Schmuggler-Kette (Muiquun's Black Market).",loc:"Raider King; VULKK",miss:true,conf:"high"},
-  {name:"Grey Dye",cat:"Special (non-craftable)",detail:"Belohnung der Quest Brightening the Spirits (Nairas Scattered Embers, Hernand), nicht craftbar. Eigenständig vom Bright Grey Dye. Hinweis: Quellen verorten die Quest in Hernand, nicht in den Howling Hills.",loc:"VULKK; Raider King",miss:true,conf:"medium"},
-  {name:"Bright Grey Dye",cat:"Special (non-craftable)",detail:"Back Alley Shop (Solan) im Saltroad Camp, 33 Silver, nicht craftbar. Erst nach Räumen des Camps und Principles of the Saltroad Merchants. Getrennt vom regulären Grey Dye.",loc:"Raider King; GAMES.GG",miss:true,conf:"high"}
+  {name:"Dark Red Dye",cat:"Red",detail:"Theoric, Hernand Dyehouse, 1,50 Silver. Craft-Rezept: 10 Medicinal Herb, 3 Rhinoceros, 1 Longhorn, 2 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#9b2a2c",icon:"cd_assets/dyes/dye_dark-red.webp"},
+  {name:"Red Dye",cat:"Red",detail:"Gestohlen im Keller von Glenbright Manor (Hernand). Craft: 10 Medicinal Herb, 3 Rhinoceros, 1 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#a83232",icon:"cd_assets/dyes/dye_red.webp"},
+  {name:"Rich Red Dye",cat:"Red",detail:"Gestohlen oben am Torchlight Beacon, Hernand. Craft: 10 Medicinal Herb, 3 Rhinoceros, 2 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#9E2B2B",icon:"cd_assets/dyes/dye_rich-red.webp"},
+  {name:"Bright Red Dye",cat:"Red",detail:"Kostenlos gecraftet in der Quest A Fresh Color (Naira): 10 Medicinal Herb, 3 Rhinoceros, 3 Longhorn.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#e74b5f",icon:"cd_assets/dyes/dye_bright-red.webp"},
+  {name:"Bright Green Dye",cat:"Green",detail:"Lauendell, Calphade Dyehouse, 1,50 Silver. Craft: 5 Medicinal Herb, 5 Beetle, 3 Longhorn.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#73b884",icon:"cd_assets/dyes/dye_bright-green.webp"},
+  {name:"Yellow Dye",cat:"Yellow",detail:"Devin, Pororin Dyehouse, 1,50 Silver. Craft: 10 Medicinal Herb, 3 Beetle, 1 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#f2c12e"},
+  {name:"Dark Orange Dye",cat:"Orange",detail:"Cormac, Tommaso Dyehouse, 1,50 Silver. Craft: 10 Medicinal Herb, 3 Rhinoceros, 1 Longhorn, 2 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#b34a18",icon:"cd_assets/dyes/dye_dark-orange.webp"},
+  {name:"Bright Orange Dye",cat:"Orange",detail:"Nur craftbar, kein bestätigter Händler: 10 Medicinal Herb, 3 Rhinoceros, 3 Longhorn. Der früher vermutete Pickup in den Time War Ruins ist nicht belegt.",loc:"TheGamer; Game8",miss:false,conf:"medium",color:"#c98f62",icon:"cd_assets/dyes/dye_bright-orange.webp"},
+  {name:"Rich Spring Green Dye",cat:"Spring Green",detail:"Alton, Varnia Dyehouse, 1,50 Silver. Craft: 10 White Lavender, 3 Beetle, 2 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#7e9c3e",icon:"cd_assets/dyes/dye_rich-spring-green.webp"},
+  {name:"Bright Violet Dye",cat:"Violet",detail:"Monty, Greenfield Farm Dyehouse (Demeniss, nordwestlich oberhalb der Farm), 1,50 Silver; erscheint auf der Karte erst nach Chapter 8. Craft: 10 Medicinal Herb, 10 Lavender, 3 Longhorn. Einige Guides nennen das Sortiment Dark Violet.",loc:"Game8 (586897); PowerPyx",miss:false,conf:"medium",color:"#C78EA6",icon:"cd_assets/dyes/dye_bright-violet.webp"},
+  {name:"Rich Purple Dye",cat:"Purple",detail:"Edmar, Sunset Dyehouse, 1,50 Silver. Craft: 15 Lavender, 5 Blue Lavender, 2 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#8b55a7",icon:"cd_assets/dyes/dye_rich-purple.webp"},
+  {name:"Bright Blue Dye",cat:"Blue",detail:"Linus, Rustleleaf Farm Dyehouse, 1,50 Silver. Craft: 15 Blue Lavender, 5 Lavender, 3 Longhorn.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#3b4fda",icon:"cd_assets/dyes/dye_bright-blue.webp"},
+  {name:"Deep Sky Blue Dye",cat:"Blue",detail:"Castiel, Delesyia Dyehouse, 1,50 Silver. Craft: 10 White Lavender, 10 Blue Lavender, 3 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#1E6FE0"},
+  {name:"Teal Dye",cat:"Teal",detail:"Laurick, Pailune Dyehouse, 1,50 Silver. Craft: 10 Blue Lavender, 10 Shrubby Sophora, 1 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#2f8b8e",icon:"cd_assets/dyes/dye_teal.webp"},
+  {name:"Pure White Dye",cat:"Special (non-craftable)",detail:"Wilmer, Provisioner's Shop in Timberton (Delesyia), 15 Silver (NICHT 1,50). Nicht craftbar. Der Laden erscheint erst nach der Bohrturm-Questreihe des Bürgermeisters bzw. der Blackwater-Oil-Merchant-Guild-Kette (Cordelia).",loc:"Game8 (599343); VULKK",miss:true,conf:"high",color:"#FFFFFF",icon:"cd_assets/dyes/dye_pure-white.webp"},
+  {name:"Shadow Grey Dye",cat:"Special (non-craftable)",detail:"Oliver (Camp-Dyer) im Greymane Camp, 15 Silver, nicht craftbar. Setzt den 3. Camp-Ausbau (alle Gathered Will – Grounds of the Sunrise Quests) plus A Rumor at the Inksworth Bindery voraus. VULKK nennt alternativ einen Provisioner in Senia.",loc:"Raider King; VULKK",miss:true,conf:"high",color:"#6c757d",icon:"cd_assets/dyes/dye_shadow-grey.webp"},
+  {name:"Black Dye",cat:"Special (non-craftable)",detail:"Back Alley Shop (Solan) in Muiquun, südöstlich von Tommaso, 37,5 Silver, nicht craftbar. Erst nach Befreiung von Muiquun und der Lawless-Market-Schmuggler-Kette (Muiquun's Black Market).",loc:"Raider King; VULKK",miss:true,conf:"high",color:"#0d0d0d",icon:"cd_assets/dyes/dye_black.webp"},
+  {name:"Grey Dye",cat:"Special (non-craftable)",detail:"Belohnung der Quest Brightening the Spirits (Nairas Scattered Embers, Hernand), nicht craftbar. Eigenständig vom Bright Grey Dye. Hinweis: Quellen verorten die Quest in Hernand, nicht in den Howling Hills.",loc:"VULKK; Raider King",miss:true,conf:"medium",color:"#727b7d",icon:"cd_assets/dyes/dye_grey.webp"},
+  {name:"Bright Grey Dye",cat:"Special (non-craftable)",detail:"Back Alley Shop (Solan) im Saltroad Camp, 33 Silver, nicht craftbar. Erst nach Räumen des Camps und Principles of the Saltroad Merchants. Getrennt vom regulären Grey Dye.",loc:"Raider King; GAMES.GG",miss:true,conf:"high",color:"#aeb4b8",icon:"cd_assets/dyes/dye_bright-grey.webp"}
 ];
 
 const FOOD_ELIXIRS=[
@@ -7875,13 +7878,13 @@ function renderCollectibles(){
 }
 
 // ===== COMPENDIUM-SEKTIONEN (Gatherables / Raetsel / Dyes / Food&Elixirs, seit 2026-06-06) =====
-function renderCompendium(secId,DATA,filterId){
+function renderCompendium(secId,DATA,filterId,iconCell){
   const tb=document.getElementById(secId+'-tb');
   if(!tb)return;
   const f=(document.getElementById(filterId)||{}).value||'';
   const list=DATA.filter(x=>!f||x.cat===f);
   const cnt=document.getElementById(secId+'-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
-  tb.innerHTML=list.map(c=>`<tr>
+  tb.innerHTML=list.map(c=>`<tr>${iconCell?'<td class="dye-td">'+iconCell(c)+'</td>':''}
     <td><strong>${esc(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:#e84535;border:1px solid rgba(232,69,53,.5);border-radius:3px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}${c.conf&&c.conf!=='high'?` <span title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}" style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:3px;padding:1px 4px;vertical-align:middle">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:''}</td>
     <td style="color:var(--dim);white-space:nowrap;font-size:11px">${esc(c.cat)}</td>
     <td style="line-height:1.5">${esc(c.detail)}</td>
@@ -7890,7 +7893,8 @@ function renderCompendium(secId,DATA,filterId){
 }
 function renderGatherables(){renderCompendium('gatherables',GATHERABLES,'gatherables-cat');}
 function renderPuzzles(){renderCompendium('puzzles',PUZZLES,'puzzles-cat');}
-function renderDyes(){renderCompendium('dyes',DYES,'dyes-cat');}
+function dyeChip(c){var col=esc(c.color||'#888');if(c.icon)return '<span class="dye-chip" data-c="'+col+'" style="border-color:'+col+'"><img src="'+esc(c.icon)+'" alt="" loading="lazy" onerror="this.parentNode.style.background=this.parentNode.dataset.c;this.remove()"></span>';return '<span class="dye-chip" style="border-color:'+col+';background:'+col+'"></span>';}
+function renderDyes(){renderCompendium('dyes',DYES,'dyes-cat',dyeChip);}
 function renderFood(){renderCompendium('food',FOOD_ELIXIRS,'food-cat');}
 
 // ===== SKILLS =====
