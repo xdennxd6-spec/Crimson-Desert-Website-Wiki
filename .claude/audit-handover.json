@@ -1,0 +1,133 @@
+{
+  "zweck": "Uebergabe-Briefing fuer Claude auf dem Pi. Offene Aufgaben aus dem Fable-5-Vollaudit vom 2026-06-10 (17-Agenten-Workflow, 80 verifizierte Findings). Die Quick Wins wurden am 2026-06-10 bereits umgesetzt und mit Commit ebcb8f4 gepusht (live verifiziert).",
+  "projekt": {
+    "haupt_datei": "index.html (Single-File-App, ~9700 Zeilen)",
+    "live": "https://crimson-desert-wiki.netlify.app/",
+    "regeln": "VERBINDLICH: .claude/CLAUDE.md in diesem Repo lesen und befolgen. Insbesondere: NIEMALS automatisch pushen (immer erst den User fragen), Aenderungen buendeln, Render-Verifikation mit echtem Browser (Headless-Chrome --dump-dom, danach <tr>-Count pruefen: Soll aktuell 296 Zeilen / 1037 data-s-Karten)."
+  },
+  "wichtiger_hinweis_zeilennummern": "Alle Zeilenangaben in den Aufgaben beziehen sich auf den Stand VOR Commit ebcb8f4 und sind seitdem um einige Zeilen verschoben. Nicht blind springen, sondern per Grep nach den genannten Bezeichnern (z.B. MAIN_QUESTS, FAC_DATA, BOSS_IMGS) suchen.",
+  "erledigt_2026_06_10_commit_ebcb8f4": [
+    "Patches 1.10.01 / 1.06.01 / 1.05.01 + Sammeleintrag 1.00.02-1.03.01 nachgetragen, Sigil-of-Valor-Texte korrigiert",
+    "Sektionsuebergreifende Suche: 0-Treffer-Fallback mit klickbaren Sektions-Chips (_searchOtherSections/_searchJump)",
+    "SEO-Paket: Title/canonical/OG komplett, tote -website-Domain aus sitemap/robots/JSON-LD entfernt",
+    "Scroll-Reset-Fix (window.scrollTo statt main.scrollTop, 3 Stellen)",
+    "lazy loading + alt an 4 Render-Stellen (Initial-Requests ~500 auf ~20)",
+    "JS-Haertung: lsJson()-Helper (33 Stellen), Init-Isolation, globale Error-Handler, 2 Escaping-Fixes",
+    "Service Worker v4 + netlify.toml-Cache-Header (index max-age=0 must-revalidate, cd_assets 86400)",
+    "Daten-Fixes: 5 Waffen-Duplikate raus (WEAPONS jetzt 506), WEAPON_IMGS-Dubletten raus, Raptor-Key, mountCard-Fallback, KuKu-404 raus, Plate Boots of the Shadows ergaenzt, Matthias=Kapitel 2 (game8-verifiziert)",
+    "Sidebar in 5 Gruppen, Browser-Back via pushState, Legacy-Anker #sec-x",
+    "Export v2 (alle cd_*-Keys) + Datenverlust-Hinweis, ESC schliesst alle Modals",
+    "Mobile/Kontrast-Polish: --dim #8a837c, 16px-Inputs (iOS-Zoom), 42px-Hamburger, Tabellen-Overflow",
+    "progress.mts: CORS auf echte Domain, Input-Validierung, try/catch; _syncProgress zeigt Fehler ehrlich"
+  ],
+  "offene_aufgaben_prioritaet_hoch": [
+    {
+      "titel": "Hauptquests vom Namensregister zum Walkthrough ausbauen",
+      "warum": "Die Hauptstory ist die duennste Quest-Ebene der Seite: 142 Questnamen ohne Trigger, Belohnung oder Loesungsweg, waehrend 171 Fraktionsquests bereits voll ausgearbeitet sind (FAC_DATA liefert das Schema als Blaupause).",
+      "umsetzung": "MAIN_QUESTS (Grep: 'const MAIN_QUESTS') auf das FAC_DATA-Schema heben (trigger/prereq/reward/miss/conf je Quest, Vorbild: Grep 'const FAC_DATA'); kapitelweise nachruesten, beginnend mit Prolog bis Kapitel 3 (Einsteiger-Traffic). renderMQ von der nackten li-Liste auf Detail-Karten umstellen. Recherche-Quellen: game8, Fextralife, PowerPyx.",
+      "aufwand": "gross", "wirkung": "hoch"
+    },
+    {
+      "titel": "Echte In-Game-Trophaeen-Liste mit Platin-Guide",
+      "warum": "Die Achievements-Sektion ist reine Wiki-Gamification; die echten PS5/Xbox/Steam-Trophaeen existieren nur als verstreute Nebensaetze. Trophy-Hunter sind eine Kernzielgruppe.",
+      "umsetzung": "Datenstruktur TROPHIES anlegen (Name, Bedingung, missable-Flag, Verweis auf passende Wiki-Sektion) und als Tab in sec-achievements oder sec-checklists rendern. Liste aus PowerPyx/PSNProfiles recherchieren. Startpunkte existieren schon im Code: Grep nach 'Platin', 'Navigator of the Stars', 'Lightbringer', 'Pilgrim of Wonders'.",
+      "aufwand": "mittel", "wirkung": "hoch"
+    },
+    {
+      "titel": "Bilder fuer die 52 Bosse ohne Bild recherchieren",
+      "warum": "52 von 97 Bossen zeigen nur den Buchstaben-Placeholder, darunter prominente wie Giath, Kutum, Titan, Queen Spider und die Walker-Bosse. Bosse sind die Startsektion.",
+      "umsetzung": "questlog-CDN-Sprites nach vorhandenem Muster (https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_...) fuer die fehlenden BOSSES-Namen suchen und in BOSS_IMGS ergaenzen (Grep: 'const BOSS_IMGS'). Fehlende Namen ermitteln: BOSSES-Namen gegen BOSS_IMGS-Keys diffen (PowerShell/Node-Einzeiler). Jede neue URL per HTTP HEAD auf 200 pruefen bevor sie eingetragen wird.",
+      "aufwand": "mittel", "wirkung": "hoch"
+    },
+    {
+      "titel": "Lazy-Rendering pro Sektion",
+      "warum": "Beim Start laufen ~40 Render-Funktionen fuer alle 29 Sektionen synchron und bauen hunderte DOM-Knoten fuer unsichtbare Bereiche; bremst Time-to-Interactive besonders mobil.",
+      "umsetzung": "In showSec() pro Sektion ein rendered-Flag fuehren und die render-Funktion erst beim ersten Oeffnen aufrufen (Muster existiert schon fuer favorites/roadmap/achievements am Funktionsanfang von showSec). Beim Init nur Startsektion + von Checklisten-Statistiken benoetigte Daten rendern. ACHTUNG Abhaengigkeit: die globale Suche (_doSearchImpl und _searchOtherSections) und refreshSectionStats lesen den DOM ALLER Sektionen ueber [data-s]-Attribute. Vor der Umstellung einen leichten Namensindex (Name+Sektion als JS-Datenstruktur) als Suchquelle bauen, sonst bricht die sektionsuebergreifende Suche.",
+      "aufwand": "mittel", "wirkung": "hoch"
+    }
+  ],
+  "offene_aufgaben_prioritaet_mittel": [
+    {
+      "titel": "Patch-Archiv vervollstaendigen",
+      "warum": "Der Sammeleintrag 1.00.02-1.03.01 listet nur Versionen+Daten ohne Inhalte; 1.05.01 ist nur als Stub erfasst.",
+      "umsetzung": "Detail-Notes von pearlabyss.com Notice-Board recherchieren (1.06.01 = boardNo 91, 1.10.00 = 96, 1.10.01 = 97; aeltere Nummern entsprechend frueher) und die PATCHES-Eintraege (Grep: 'const PATCHES') ausbauen. Ausserdem kuenftig nach jedem Spiel-Patch: neuen Eintrag + Header in sec-patches aktualisieren.",
+      "aufwand": "mittel", "wirkung": "mittel"
+    },
+    {
+      "titel": "Side-Quest-Verzeichnis als vierten Quests-Tab",
+      "warum": "Freie Side-Quests ausserhalb der Fraktionen existieren nur als Nebensaetze in Boss- und Collectibles-Eintraegen (mindestens eine davon missable: 'Sweet Deal').",
+      "umsetzung": "Vierten Tab 'Side-Quests' in sec-quests anlegen (aktuell Tabs te/mq/fac) und verstreute Quest-Referenzen im FAC_DATA-Schema konsolidieren, dann per Recherche vervollstaendigen.",
+      "aufwand": "gross", "wirkung": "mittel"
+    },
+    {
+      "titel": "Waffendatenbank vervollstaendigen",
+      "warum": "414 von 506 Waffen haben crit:null, 477 slots:null; genau diese Felder braucht die Build-Planung.",
+      "umsetzung": "Priorisiert die Waffen nachrecherchieren, die in BUILDS und BUILD_RECIPES referenziert werden oder Boss-Drops sind. Sofort machbar: null-Felder im UI als 'nicht erfasst' rendern statt leerem Strich. OFFENER DATENPUNKT: Small Calphadean Banner Pike steht mit atk:24 im Datensatz, ein geloeschtes Duplikat behauptete atk:21 - gegen Fextralife verifizieren.",
+      "aufwand": "gross", "wirkung": "mittel"
+    },
+    {
+      "titel": "Fextralife-Hotlink-Abhaengigkeit reduzieren",
+      "warum": "461 Bilder hotlinken von static0.fextralifeimages.com (Single Point of Failure); ein Hotlink-Schutz dort wuerde sie alle auf einen Schlag brechen, onerror blendet nur stumm aus.",
+      "umsetzung": "Meistgesehene Bilder (Bosse, Top-Waffen, Armor-Sets) als lokale WebPs spiegeln (Workflow siehe .claude/CLAUDE.md bzw. WebP-Regeln: ffmpeg libwebp quality 82), externe URLs nur als Fallback. Zusaetzlich periodischen Linkcheck-Skript ueber alle ~850 externen URLs der IMG-Maps etablieren.",
+      "aufwand": "gross", "wirkung": "mittel"
+    },
+    {
+      "titel": "A11y-Rest: Checklisten und Tabs tastaturbedienbar",
+      "warum": "Vom Audit-ARIA-Paket wurde nur der ESC-Teil umgesetzt. Das Kern-Feature Abhaken ist fuer Tastatur/Screenreader weiter unbedienbar: 0 echte Checkboxen, Tab-Leisten sind nicht fokussierbare Divs.",
+      "umsetzung": "Checklisten-Items (Grep: 'class=\"chk\"' bzw. die Checklisten-Renderfunktionen) role='checkbox', aria-checked und tabindex='0' geben plus delegierten Enter/Space-Handler (Muster: Sidebar-Keydown-Handler am Ende der Datei). Tab-Leisten (Grep: 'class=\"tab\"') zu <button> machen. Lore-Akkordeon aria-expanded ergaenzen. Fokus-Management der Modals (Fokus auf Close-Button beim Oeffnen, zurueck beim Schliessen, Vorbild openLoginModal).",
+      "aufwand": "mittel", "wirkung": "mittel"
+    },
+    {
+      "titel": "Heading-Semantik",
+      "warum": "Die Seite hat kein h1, alle 29 Sektionstitel sind Divs. Kostet On-Page-SEO und Screenreader-Navigation.",
+      "umsetzung": "Visuell versteckten Seitentitel als <h1>, <div class='sec-t'> zu <h2 class='sec-t'>, <div class='sub-t'> zu <h3 class='sub-t'>; im CSS margin/font-reset fuer die neuen Tags ergaenzen, Optik darf sich nicht aendern.",
+      "aufwand": "mittel", "wirkung": "mittel"
+    }
+  ],
+  "offene_aufgaben_optional": [
+    {
+      "titel": "Monolith aufteilen: grosse Datenstrukturen in separate JS-Dateien",
+      "hinweis": "index.html besteht zu ~84% aus JS-Daten (RUINS_DATA ~149KB, FAC_DATA ~56KB, WEAPONS ~65KB, MISSABLE_ITEMS ~38KB). Auslagern in .js-Dateien mit <script defer> + lange Cache-Header entkoppelt Caching und Deploys. Groesserer Umbau, vorher mit User abstimmen."
+    },
+    {
+      "titel": "Crafting ausbauen + Minigames-Abschnitt",
+      "hinweis": "CRAFTING hat nur 12 Rezepte; die 1.10-Minigames (Pinball, Orb Roll, Marni Token Exchange) existieren nur als Patch-Stichpunkte. Minigames-Teil allein ist small effort."
+    },
+    {
+      "titel": "Charaktere/NPC-Verzeichnis mit Trust-System-Guide",
+      "hinweis": "LORE_TERMS (25 Eintraege) liefert die Basis fuer Kurzbios; Haendler stehen bisher nur in Location-Fliesstexten."
+    },
+    {
+      "titel": "Bestiarium fuer normale Gegner",
+      "hinweis": "Datenstruktur ENEMIES (Name, Region, Schwaeche, Drops, Knowledge) plus eigene Sektion; Gegner werden bereits als Drop-Quellen erwaehnt."
+    },
+    {
+      "titel": "Verifikationsrunde Fraktionsquests",
+      "hinweis": "FAC_DATA enthaelt 3 low- und 40 medium-conf-Quests plus TBD-Stellen; gegen game8/Fextralife/PowerPyx pruefen und conf-Flags hochstufen."
+    },
+    {
+      "titel": "Besucherzaehler haerten (visits.mts)",
+      "hinweis": "Ohne Rate-Limit/Server-Dedupe manipulierbar (Neon-Quota-Risiko): Hit serverseitig an sid koppeln (INSERT mit ON CONFLICT, Counter nur bei neuer sid)."
+    },
+    {
+      "titel": "Escape-Helfer konsolidieren",
+      "hinweis": "Drei parallele Escape-Implementierungen plus mehrere lokale esc-Definitionen mit anderer Semantik schatten das globale esc(). Auf zwei globale Helfer konsolidieren: escHtml (Text/Attribute inkl. Quotes) und escJsStr (inline-onclick)."
+    },
+    {
+      "titel": "Onboarding-Panel fuer Erstbesucher",
+      "hinweis": "Einmaliges dismissbares Intro (localStorage cd_intro_seen) mit 3-4 Stichpunkten: Fortschritt abhaken, Favoriten, Suche, Account-Sync."
+    },
+    {
+      "titel": "PWA-Polish",
+      "hinweis": "site.webmanifest um id:'/' und 2 screenshots (form_factor wide/narrow) ergaenzen; iOS-Install-Hinweis (navigator.standalone-Erkennung) am bestehenden #pwa-install-Button."
+    },
+    {
+      "titel": "Asset-Hygiene",
+      "hinweis": "~290KB toter Ballast: generate_mounts.py/generate_missing_mounts.py aus cd_assets/mounts raus (nicht deployen), verwaiste Bilder loeschen (myurdin.png, world.svg, tenebrum.webp, black_fang.webp, priscus.webp - VORSICHT: nur loeschen, myurdin.webp ist im Einsatz). 15 lokale cd_assets/cores/-Bilder als primary in CORE_IMGS eintragen (CDN als Fallback) oder loeschen. qrcode.js (55KB) erst bei erstem QR-Klick dynamisch laden. og-Bild umbra-final.jpg (360KB) auf ~100KB komprimieren."
+    },
+    {
+      "titel": "Statische SEO-Landing-Pages",
+      "hinweis": "Nur falls organischer Traffic ein Ziel ist: 3-5 Top-Themen (Bosse, True Ending, Waffen) als statische, aus den Datenstrukturen generierte HTML-Seiten mit echten URLs + Sitemap-Eintraegen. Vorher mit User klaeren ob SEO ueberhaupt Ziel ist."
+    }
+  ]
+}
