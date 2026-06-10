@@ -20,68 +20,56 @@
     "Mobile/Kontrast-Polish: --dim #8a837c, 16px-Inputs (iOS-Zoom), 42px-Hamburger, Tabellen-Overflow",
     "progress.mts: CORS auf echte Domain, Input-Validierung, try/catch; _syncProgress zeigt Fehler ehrlich"
   ],
-  "offene_aufgaben_prioritaet_hoch": [
-    {
-      "titel": "Hauptquests vom Namensregister zum Walkthrough ausbauen",
-      "warum": "Die Hauptstory ist die duennste Quest-Ebene der Seite: 142 Questnamen ohne Trigger, Belohnung oder Loesungsweg, waehrend 171 Fraktionsquests bereits voll ausgearbeitet sind (FAC_DATA liefert das Schema als Blaupause).",
-      "umsetzung": "MAIN_QUESTS (Grep: 'const MAIN_QUESTS') auf das FAC_DATA-Schema heben (trigger/prereq/reward/miss/conf je Quest, Vorbild: Grep 'const FAC_DATA'); kapitelweise nachruesten, beginnend mit Prolog bis Kapitel 3 (Einsteiger-Traffic). renderMQ von der nackten li-Liste auf Detail-Karten umstellen. Recherche-Quellen: game8, Fextralife, PowerPyx.",
-      "aufwand": "gross", "wirkung": "hoch"
-    },
-    {
-      "titel": "Echte In-Game-Trophaeen-Liste mit Platin-Guide",
-      "warum": "Die Achievements-Sektion ist reine Wiki-Gamification; die echten PS5/Xbox/Steam-Trophaeen existieren nur als verstreute Nebensaetze. Trophy-Hunter sind eine Kernzielgruppe.",
-      "umsetzung": "Datenstruktur TROPHIES anlegen (Name, Bedingung, missable-Flag, Verweis auf passende Wiki-Sektion) und als Tab in sec-achievements oder sec-checklists rendern. Liste aus PowerPyx/PSNProfiles recherchieren. Startpunkte existieren schon im Code: Grep nach 'Platin', 'Navigator of the Stars', 'Lightbringer', 'Pilgrim of Wonders'.",
-      "aufwand": "mittel", "wirkung": "hoch"
-    },
-    {
-      "titel": "Bilder fuer die 52 Bosse ohne Bild recherchieren",
-      "warum": "52 von 97 Bossen zeigen nur den Buchstaben-Placeholder, darunter prominente wie Giath, Kutum, Titan, Queen Spider und die Walker-Bosse. Bosse sind die Startsektion.",
-      "umsetzung": "questlog-CDN-Sprites nach vorhandenem Muster (https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_...) fuer die fehlenden BOSSES-Namen suchen und in BOSS_IMGS ergaenzen (Grep: 'const BOSS_IMGS'). Fehlende Namen ermitteln: BOSSES-Namen gegen BOSS_IMGS-Keys diffen (PowerShell/Node-Einzeiler). Jede neue URL per HTTP HEAD auf 200 pruefen bevor sie eingetragen wird.",
-      "aufwand": "mittel", "wirkung": "hoch"
-    },
-    {
-      "titel": "Lazy-Rendering pro Sektion",
-      "warum": "Beim Start laufen ~40 Render-Funktionen fuer alle 29 Sektionen synchron und bauen hunderte DOM-Knoten fuer unsichtbare Bereiche; bremst Time-to-Interactive besonders mobil.",
-      "umsetzung": "In showSec() pro Sektion ein rendered-Flag fuehren und die render-Funktion erst beim ersten Oeffnen aufrufen (Muster existiert schon fuer favorites/roadmap/achievements am Funktionsanfang von showSec). Beim Init nur Startsektion + von Checklisten-Statistiken benoetigte Daten rendern. ACHTUNG Abhaengigkeit: die globale Suche (_doSearchImpl und _searchOtherSections) und refreshSectionStats lesen den DOM ALLER Sektionen ueber [data-s]-Attribute. Vor der Umstellung einen leichten Namensindex (Name+Sektion als JS-Datenstruktur) als Suchquelle bauen, sonst bricht die sektionsuebergreifende Suche.",
-      "aufwand": "mittel", "wirkung": "hoch"
-    }
-  ],
+  "offene_aufgaben_prioritaet_hoch": [],
   "offene_aufgaben_prioritaet_mittel": [
     {
       "titel": "Patch-Archiv vervollstaendigen",
       "warum": "Der Sammeleintrag 1.00.02-1.03.01 listet nur Versionen+Daten ohne Inhalte; 1.05.01 ist nur als Stub erfasst.",
       "umsetzung": "Detail-Notes von pearlabyss.com Notice-Board recherchieren (1.06.01 = boardNo 91, 1.10.00 = 96, 1.10.01 = 97; aeltere Nummern entsprechend frueher) und die PATCHES-Eintraege (Grep: 'const PATCHES') ausbauen. Ausserdem kuenftig nach jedem Spiel-Patch: neuen Eintrag + Header in sec-patches aktualisieren.",
-      "aufwand": "mittel", "wirkung": "mittel"
+      "aufwand": "mittel",
+      "wirkung": "mittel"
     },
     {
       "titel": "Side-Quest-Verzeichnis als vierten Quests-Tab",
       "warum": "Freie Side-Quests ausserhalb der Fraktionen existieren nur als Nebensaetze in Boss- und Collectibles-Eintraegen (mindestens eine davon missable: 'Sweet Deal').",
       "umsetzung": "Vierten Tab 'Side-Quests' in sec-quests anlegen (aktuell Tabs te/mq/fac) und verstreute Quest-Referenzen im FAC_DATA-Schema konsolidieren, dann per Recherche vervollstaendigen.",
-      "aufwand": "gross", "wirkung": "mittel"
+      "aufwand": "gross",
+      "wirkung": "mittel"
     },
     {
       "titel": "Waffendatenbank vervollstaendigen",
       "warum": "414 von 506 Waffen haben crit:null, 477 slots:null; genau diese Felder braucht die Build-Planung.",
       "umsetzung": "Priorisiert die Waffen nachrecherchieren, die in BUILDS und BUILD_RECIPES referenziert werden oder Boss-Drops sind. Sofort machbar: null-Felder im UI als 'nicht erfasst' rendern statt leerem Strich. OFFENER DATENPUNKT: Small Calphadean Banner Pike steht mit atk:24 im Datensatz, ein geloeschtes Duplikat behauptete atk:21 - gegen Fextralife verifizieren.",
-      "aufwand": "gross", "wirkung": "mittel"
+      "aufwand": "gross",
+      "wirkung": "mittel"
     },
     {
       "titel": "Fextralife-Hotlink-Abhaengigkeit reduzieren",
       "warum": "461 Bilder hotlinken von static0.fextralifeimages.com (Single Point of Failure); ein Hotlink-Schutz dort wuerde sie alle auf einen Schlag brechen, onerror blendet nur stumm aus.",
       "umsetzung": "Meistgesehene Bilder (Bosse, Top-Waffen, Armor-Sets) als lokale WebPs spiegeln (Workflow siehe .claude/CLAUDE.md bzw. WebP-Regeln: ffmpeg libwebp quality 82), externe URLs nur als Fallback. Zusaetzlich periodischen Linkcheck-Skript ueber alle ~850 externen URLs der IMG-Maps etablieren.",
-      "aufwand": "gross", "wirkung": "mittel"
+      "aufwand": "gross",
+      "wirkung": "mittel"
     },
     {
       "titel": "A11y-Rest: Checklisten und Tabs tastaturbedienbar",
       "warum": "Vom Audit-ARIA-Paket wurde nur der ESC-Teil umgesetzt. Das Kern-Feature Abhaken ist fuer Tastatur/Screenreader weiter unbedienbar: 0 echte Checkboxen, Tab-Leisten sind nicht fokussierbare Divs.",
       "umsetzung": "Checklisten-Items (Grep: 'class=\"chk\"' bzw. die Checklisten-Renderfunktionen) role='checkbox', aria-checked und tabindex='0' geben plus delegierten Enter/Space-Handler (Muster: Sidebar-Keydown-Handler am Ende der Datei). Tab-Leisten (Grep: 'class=\"tab\"') zu <button> machen. Lore-Akkordeon aria-expanded ergaenzen. Fokus-Management der Modals (Fokus auf Close-Button beim Oeffnen, zurueck beim Schliessen, Vorbild openLoginModal).",
-      "aufwand": "mittel", "wirkung": "mittel"
+      "aufwand": "mittel",
+      "wirkung": "mittel"
     },
     {
       "titel": "Heading-Semantik",
       "warum": "Die Seite hat kein h1, alle 29 Sektionstitel sind Divs. Kostet On-Page-SEO und Screenreader-Navigation.",
       "umsetzung": "Visuell versteckten Seitentitel als <h1>, <div class='sec-t'> zu <h2 class='sec-t'>, <div class='sub-t'> zu <h3 class='sub-t'>; im CSS margin/font-reset fuer die neuen Tags ergaenzen, Optik darf sich nicht aendern.",
-      "aufwand": "mittel", "wirkung": "mittel"
+      "aufwand": "mittel",
+      "wirkung": "mittel"
+    },
+    {
+      "titel": "Hauptquest-Walkthrough Kapitel 4-12 fortsetzen",
+      "warum": "Prolog-Kap.3 sind seit 2026-06-10 im Detail-Schema; Kap.4-12 sind weiter nur Namensregister. PowerPyx hat Einzel-Walkthroughs je Quest.",
+      "umsetzung": "Gleiches Vorgehen wie Prolog-Kap.3 (Recherche-Agenten je Kapitel, Schema {q,trigger,prereq,reward,miss,tip,conf}); renderMQ unterstuetzt beide Formate bereits. Dabei Kapitel-Questlisten gegen PowerPyx pruefen (in Kap.2/3 fehlten 7 Quests).",
+      "aufwand": "gross",
+      "wirkung": "hoch"
     }
   ],
   "offene_aufgaben_optional": [
@@ -129,5 +117,11 @@
       "titel": "Statische SEO-Landing-Pages",
       "hinweis": "Nur falls organischer Traffic ein Ziel ist: 3-5 Top-Themen (Bosse, True Ending, Waffen) als statische, aus den Datenstrukturen generierte HTML-Seiten mit echten URLs + Sitemap-Eintraegen. Vorher mit User klaeren ob SEO ueberhaupt Ziel ist."
     }
+  ],
+  "erledigt_2026_06_10_pi": [
+    "Boss-Bilder: 49 der 52 fehlenden BOSS_IMGS ergaenzt (questlog database.getKnowledges-API mit searchTerm-Parameter; alle URLs HTTP-200, Stichproben visuell). Jetzt 94/97 Bosse mit Bild. Ohne questlog-Bild bleiben: Black Bear Captain, Mountain God Boar, Crookrock Walker. BEFUND: Wiki-Boss 'Frostwalker Tervis' heisst bei questlog 'Forestwalker Tervis' (Wald-Golem-Bild) -- das Eis-/Frost-Lore im Wiki-Eintrag ist vermutlich erfunden, pruefen.",
+    "Lazy-Rendering pro Sektion: SEC_RENDERERS-Registry + ensureSecRendered() in showSec(), ensureAllRendered()-Hook in _searchOtherSections (Suche braucht [data-s] aller Sektionen). Init rendert nur noch globale Schritte. jsdom-verifiziert: Start 22 tr/97 data-s statt 278/1184; nach ensureAllRendered identisch zur Eager-Baseline; Cross-Sektion-Suche funktioniert.",
+    "Echte Trophaeen-Liste: TROPHIES (35 Eintraege, PowerPyx/PSNProfiles/Fextralife, 2x verifiziert) + renderTrophies mit Grade-/Missable-Filter + Platin-Roadmap als erster Block in sec-achievements (Titel jetzt 'Trophaeen & Achievements', Sidebar-Label 'Trophaeen'). Hinweis: PowerPyx kennt KEINEN Point-of-No-Return bei 'Orbian' (Free-Roam nach Story, kein Quest-Replay) -- Wiki-Warnung in Kap.11 ggf. praezisieren.",
+    "Hauptquests Prolog-Kap.3 zum Walkthrough ausgebaut: 46 Quests im FAC_DATA-Schema (trigger/prereq/reward/miss/tip/conf, PowerPyx-Einzelwalkthroughs + game8 + Fextralife), renderMQ rendert Detail-Karten mit data-s (alte String-Kapitel 4-12 weiter unterstuetzt). KORREKTUREN: 'Heart Beyond Borders' (war 'Hearts...'), 'Rebellion or Revolution' (war '...of...'), Kap.2 hat 16 Quests (+Awestruck, Trial After Trial, The Man Trapped in the Mire, Missing Companion), Kap.3 hat 17 (+Scattered Comrades, Rumors from the Sawmill, A Gentle Touch). Recherche-JSONs auf dem Pi: /mnt/nvme/claude/cd-audit-pi/research/."
   ]
 }

@@ -1534,7 +1534,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="gatherables" onclick="showSec('gatherables')"><span class="nicon">🌿</span><span class="nlabel">Gatherables</span></div>
     <div class="ni" data-sec="puzzles" onclick="showSec('puzzles')"><span class="nicon">🧩</span><span class="nlabel">Rätsel</span></div>
     <div class="ni" data-sec="food" onclick="showSec('food')"><span class="nicon">🍲</span><span class="nlabel">Food &amp; Elixirs</span></div>
-    <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
+    <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Trophäen</span></div>
     <div class="ni" data-sec="favorites" onclick="showSec('favorites')"><span class="nicon">⭐</span><span class="nlabel">Favoriten</span></div>
     <div class="nav-grp">Meta</div>
     <div class="ni" data-sec="secrets" onclick="showSec('secrets')"><span class="nicon">🕵️</span><span class="nlabel">Secrets &amp; Lore</span></div>
@@ -2134,7 +2134,13 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-achievements">
-    <div class="sec-t">🏆 Wiki-Achievements</div>
+    <div class="sec-t">🏆 Trophäen & Achievements</div>
+    <div class="sub-t" style="margin-top:0">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Quellen: PowerPyx, PSNProfiles, Fextralife (Stand 06/2026).</div>
+    <div id="trophy-filter" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0"></div>
+    <div id="trophy-list"></div>
+    <div id="trophy-roadmap" style="margin-top:16px"></div>
+    <div class="sub-t" style="margin-top:26px">🎮 Wiki-Achievements</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Gamification deines Wiki-Fortschritts. Achievements werden automatisch bei Aktionen entsperrt (Boss markieren, Notiz schreiben, Theme wechseln, etc.). Alle Daten bleiben lokal.</div>
     <div class="ach-overview-bar" id="ach-overview"></div>
     <div class="ach-grid" id="ach-grid"></div>
@@ -3444,11 +3450,17 @@ const BELL_TOWERS=[
   {n:8,name:"Toll of Varnia",loc:"Varnia NO-Karte, Dome 'Whitesand Retreat'",mech:"Hebel GEGEN Uhrzeigersinn → Glas-Blume blüht → Glocke",warn:""}
 ];
 
+// Prolog-Kap.3: Walkthrough-Ausbau 2026-06-10 (Quellen: PowerPyx-Einzelquest-Walkthroughs, game8, Fextralife;
+// 2-3 Quellen je Quest). Schema je Quest: {q,trigger,prereq,reward,miss,tip,conf} wie FAC_DATA.
+// Korrekturen ggue. altem Namensregister: 'Heart Beyond Borders' (war 'Hearts...'), 'Rebellion or Revolution'
+// (war '...of...'), Kap.2 +4 Quests (Awestruck, Trial After Trial, The Man Trapped in the Mire, Missing
+// Companion), Kap.3 +3 Quests (Scattered Comrades, Rumors from the Sawmill, A Gentle Touch).
+// Kap.4-12: noch altes String-Format -- renderMQ unterstuetzt beide.
 const MAIN_QUESTS=[
-  {ch:"Prolog",name:"Dead of Night",quests:["Unfamiliar Lands","In Ashes","Realm of Uncertainty","New Journey"],boss:null,warn:null,unlock:null},
-  {ch:"1",name:"The First Encounter",quests:["Where Rumors Gather","Mysterious Man","True Wisdom in Kindness","Actions Speak Louder Than Words","Hearts Beyond Borders","Mystical Key","Polar Opposites","Abyss Without Balance","Woman in White"],boss:null,warn:null,unlock:null},
-  {ch:"2",name:"Golden Greed",quests:["Where the Light Leads","Memory Fragment","Reunion","For Honor","Shadow Cast Over the River","Where Misery Gathers","Secrets Hidden in the Dark","The Dark Veil","The Flames of Greed","Kidnapped Healer","Rebellion of Revolution","Cheers Echoing From the Edge"],boss:"Kailok the Hornsplitter",warn:null,unlock:null},
-  {ch:"3",name:"Howling Hill",quests:["Old Friend","First Step to Rebuilding","A Fresh Start","Reward for Their Sweat","Return of the Comrade","Familiar Curses","Return","Traces in the Manor","Nonhuman","Seed of Unease","Dance with the Devil","Hope After the Draught","Bustling Hill","Greymanes Reunited"],boss:"Reed Devil",warn:null,unlock:"Damiane (First Step to Rebuilding)"},
+  {"ch":"Prolog","name":"Dead of Night","quests":[{"q":"Unfamiliar Lands","trigger":"Automatisch zu Spielbeginn; startet bei der Cabin in den Hills of No Return (Hernand), nachdem die Black Bears das Lager der Greymanes überfallen haben","prereq":"Keine (erste Quest des Spiels)","reward":"—","miss":false,"tip":"Reine Dialog-/Erkundungsquest: Mit Oongka, Marius (bei den Pferden) und Ross (an einem Baum, südlich bei den Gräbern) sprechen, dann die Cabin betreten – dort folgt die Nachricht, dass Anführer Jian gefallen ist. Das Gespräch mit Oongka ist laut PowerPyx optional.","conf":"high"},{"q":"In Ashes","trigger":"Automatisch nach Abschluss von 'Unfamiliar Lands' (Hills of No Return, Hernand)","prereq":"Unfamiliar Lands","reward":"—","miss":false,"tip":"Kampf-Tutorial: Erst 5 Gegner besiegen, dann den drei markierten Verbündeten Naira (Norden, 8 Gegner), Oongka (Osten) und Yann (Westen) helfen; Bogenschützen zuerst ausschalten. Danach Bosskampf gegen Myurdin – der Ausgang ist egal (laut PowerPyx folgt dieselbe Cutscene), Kliff verliert per Story und landet im Fluss.","conf":"high"},{"q":"Realm of Uncertainty","trigger":"Automatisch nach der Niederlage gegen Myurdin; spielt im 'Corridor of the Void' im Abyss","prereq":"In Ashes","reward":"Skill 'Blinding Flash' (laut Fextralife; PowerPyx listet keine Belohnung)","miss":false,"tip":"Lineares Bewegungs-Tutorial (Springen, Klettern, Ducken). Blinding Flash (L1+R1) auf die Lichtkugel über der Tür reflektieren, um sie zu öffnen; danach bewegliche Plattformen und mit der Laterne durch den dunklen Korridor. Am Ende auf das Artefakt im Hof treten – Cutscene beendet die Quest.","conf":"high"},{"q":"New Journey","trigger":"Automatisch nach 'Realm of Uncertainty'; beginnt an den Three Saints' Falls (Hernand), wo Kliff auf Sebastian trifft","prereq":"Realm of Uncertainty","reward":"Standard Inventory Expansion Tool x1, Oats x10, Blackberry x5 (PowerPyx + game8; Fextralife nennt zusätzlich Medium Bag)","miss":false,"tip":"Sebastian folgen, unterwegs zwei Bleed Bandits abwehren (getimte Blocks), dann zu Pferd weiter nach Hernand. Optional: Am Fluss das Angeln lernen; auf dem Weg liegen laut Fextralife zwei Sealed Abyss Artifacts (Vogelhaus hinter der Brücke, kleines Denkmal links der Straße).","conf":"high"}],"boss":null,"warn":null,"unlock":null},
+  {"ch":"1","name":"The First Encounter","quests":[{"q":"Where Rumors Gather","trigger":"Automatisch nach 'New Journey'; Ziel ist die Hernand Tavern in der City of Hernand","prereq":"New Journey","reward":"Münzen (laut PowerPyx 'Coins'; game8 listet für das Sub-Chapter u.a. Silver x1)","miss":false,"tip":"Zur Taverne im Süden und den Soldaten am Tisch zum Armdrücken herausfordern: Button mashen, bis die Leiste rot gefüllt ist, zwischendurch Quick-Time-Fenster treffen.","conf":"high"},{"q":"Mysterious Man","trigger":"Automatisch nach 'Where Rumors Gather': Beim Verlassen der Taverne liegt ein alter Bettler (der verkleidete Alustin) auf dem Abwassergitter im Vorhof","prereq":"Where Rumors Gather","reward":"Shabby Wooden Key (Questgegenstand); Zusatzbelohnung quellenabhängig: Fextralife Medium Bag, PowerPyx Standard Inventory Expansion Tool","miss":false,"tip":"Dem Bettler eine Münze geben – er übergibt den Shabby Wooden Key und verschwindet. Schaltet drei parallel spielbare Folgequests frei (True Wisdom in Kindness, Actions Speak Louder Than Words, Heart Beyond Borders).","conf":"medium"},{"q":"True Wisdom in Kindness","trigger":"Nach 'Mysterious Man': Seltsame Geräusche aus dem Eisengitter untersuchen, auf dem der Bettler lag (Falltür neben der Taverne, Abstieg in die Hernand Sewers)","prereq":"Mysterious Man","reward":"Sealed Letter, Engraved Key (Questgegenstände; laut Fextralife)","miss":false,"tip":"In der Kanalisation vorsichtig über den brüchigen Boden springen (Ziel-Sprung: L1 halten + Sprungtaste). Am Ende die gefesselte Frau (White Crow, als Adlige verkleidet) befreien; danach verwandelt sich der Shabby Wooden Key in den Engraved Key.","conf":"high"},{"q":"Actions Speak Louder Than Words","trigger":"Nach 'Mysterious Man': Südöstlich der Taverne zur Muckroot Ranch gehen und mit den Dorfbewohnern Arlan und Lauren sprechen","prereq":"Mysterious Man","reward":"Lentils x10, Apple x5, Hernandian Attire, Medium Bag, +100 Hernandian Contribution (laut Fextralife; game8 bestätigt Lentils/Apple)","miss":false,"tip":"Schornstein-Reinigung: Besen neben der Haustür nehmen, über die Kisten aufs Dach, auf dem Schornstein mit L1 zielen und reinigen. Nicht verpassen: Hinter dem Haus liegt eine Palmar Pill. Die Hernandian Attire wird später für 'Mystical Key' gebraucht!","conf":"medium"},{"q":"Heart Beyond Borders","trigger":"Nach 'Mysterious Man': Westlich der Taverne das Kind mit grüner Kapuze (Rulupee) in einem Hof ansprechen","prereq":"Mysterious Man","reward":"Shai's Pendant (laut Fextralife; wird nach der Cutscene fallen gelassen und muss aufgehoben werden)","miss":false,"tip":"Per Freerunning aufs Dach klettern und Rulupees Katze Jiji schnappen, dann zurückbringen; den Anhänger aufheben. Nicht verpassen (PowerPyx): Im Turm über dem Katzen-Dach die Glocke läuten – lüftet den Kartennebel in Hernand (eine von 8 Glocken). Hinweis: Quellen schreiben 'Heart Beyond Borders' (Singular).","conf":"medium"},{"q":"Mystical Key","trigger":"Automatisch, sobald die drei Kindness-Quests abgeschlossen sind: Den Engraved Key im Inventar untersuchen – Ziel ist Hernand Castle","prereq":"True Wisdom in Kindness + Actions Speak Louder Than Words + Heart Beyond Borders","reward":"—","miss":false,"tip":"Wichtig: Vor dem Schlosstor die Hernandian Attire (lila Mantel) anlegen, sonst kommt man nicht an den Wachen vorbei. Im Schloss zur Alchemist's Chamber (erste Tür links im großen Korridor), die leuchtende Truhe öffnen (Faded Abyss Artifact) und durch das Abyss Gate treten.","conf":"high"},{"q":"Polar Opposites","trigger":"Automatisch nach 'Mystical Key': Durch das Abyss Gate wird Kliff ins Axiom Archive im Abyss versetzt","prereq":"Mystical Key","reward":"Skill 'Axiom Force' (laut Fextralife)","miss":false,"tip":"Erst den Abyss Nexus aktivieren (Schnellreise), dann das Bodenplatten-Puzzle: Mit der Laterne (L1) die gelben Leitungslinien sichtbar machen, mit Axiom Force zwei Scheiben so drehen, dass Energie durch beide fließt. Tipp: Während Axiom Force sind die Linien unsichtbar – Positionen vorher merken.","conf":"high"},{"q":"Abyss Without Balance","trigger":"Automatisch nach 'Polar Opposites': Alustin führt Kliff zum Skybridge-Gate im Axiom Archive","prereq":"Polar Opposites","reward":"Skill 'Force Palm' + 2 Abyss Artifacts (laut Fextralife; werden im Questverlauf aufgesammelt)","miss":false,"tip":"Längere Abyss-Puzzle-Sequenz: Ausrichtungs-Totems mit Axiom Force drehen (bis zum hohen Ton), über bewegliche Plattformen zum Abyss-Herz, Energiekerne auf Podeste setzen, per 'Watch and Learn' die Force Palm lernen. Das letzte Artefakt liegt oberhalb der runden Wand bei der Stromaktivierung – nicht übersehen.","conf":"high"},{"q":"Woman in White","trigger":"Automatisch nach 'Abyss Without Balance': Am Ethereal Pathway vorwärtsgehen, Cutscene mit der Frau in Weiß (White Crow)","prereq":"Abyss Without Balance","reward":"Faded Abyss Artifact x1, Palmar Pill x1 (PowerPyx + game8); dazu Flugfähigkeit (Schwingen) und laut Fextralife Shining Shai Pendant","miss":false,"tip":"Kurze Story-Quest: White Crow verleiht Kliff die Flugfähigkeit (in der Luft Sprungtaste = Schwingen ausfahren; Fliegen verbraucht Ausdauer). Nach QTE vom Ethereal Pathway abspringen und zurück zur City of Hernand gleiten – Ende von Kapitel 1.","conf":"high"}],"boss":null,"warn":null,"unlock":null},
+  {"ch":"2","name":"Golden Greed","quests":[{"q":"Where the Light Leads","trigger":"Automatisch nach Kapitel 1 ('Woman in White'): Das grüne Pendant leuchtet und weist per Lichtstrahl zum Lioncrest Watchtower südwestlich der City of Hernand","prereq":"Woman in White (Kapitel 1)","reward":"Arrow x10","miss":false,"tip":"Rund 10 Banditen am Lioncrest Watchtower besiegen (Bogenschützen zuerst). Die Ranken am Turmeingang mit einem Feuerpfeil abbrennen, den Turm besteigen; oben im Studierzimmer den goldenen Helm (Visione) untersuchen.","conf":"high"},{"q":"Memory Fragment","trigger":"Automatisch an der Turmspitze des Lioncrest Watchtower nach 'Where the Light Leads'","prereq":"Where the Light Leads","reward":"—","miss":false,"tip":"Den goldenen Visione-Helm aufheben (wird automatisch ausgerüstet) und Delysias Erinnerung 'Visione' über das Menü lesen – so liest man auch künftig am schnellsten Erinnerungsfragmente.","conf":"high"},{"q":"Reunion","trigger":"Rulupee (die Shai mit der Katze) erscheint auf der Mauer über dem Torbogen beim Lioncrest Watchtower und bittet Kliff, ihrer Katze Jiji zu folgen","prereq":"Memory Fragment","reward":"Medium Bag/Standard Inventory Expansion Tool x1 (Quellen abweichend), Palmar Pill x1; Skills: Nature's Grasp, Focus","miss":false,"tip":"Der Katze zu den Klippenruinen folgen; dort Nature's Grasp und Focus lernen. In der Höhle drei Wandplattformen per Force Palm in der Reihenfolge Mitte → links → rechts aktivieren; das Abyss Artifact (Skillpunkt) mitnehmen, bevor man mit dem Kind spricht.","conf":"high"},{"q":"For Honor","trigger":"Hernand Square: Eine Rittergruppe des Order of Light redet über die Greymanes; Kliff stellt Matthias zum Duell","prereq":"Reunion","reward":"—","miss":false,"tip":"Duell gegen Matthias in zwei Phasen (blaue, dann rote HP-Leiste); klar telegrafierte Angriffe. Beim Pump Kick (Arme sinken, dann Sturm) seitlich ausweichen – der Skill 'Pump Kick' ist hier per Watch and Learn lernbar (im Kampf beobachten, sonst verpassbar).","conf":"high"},{"q":"Awestruck","trigger":"Automatisch nach dem Matthias-Duell in Hernand Square","prereq":"For Honor","reward":"—","miss":false,"tip":"Sehr kurze Quest: Barden Middler (Ritterkleidung ohne Helm) in der Menge finden und ansprechen, Cutscene beendet die Quest.","conf":"high"},{"q":"Shadow Cast Over the River","trigger":"Ab Hernand Square dem Questmarker zur Springtide Mill folgen","prereq":"Awestruck","reward":"Standard Inventory Expansion Tool x1, Toasted Grains x10, Grilled Fruit x5","miss":false,"tip":"Alle Bleed Bandits rund um die Brücke bei Springtide Mill besiegen. Vorsicht beim berittenen Banditen: gezielt den Reiter treffen – trifft man das Pferd, gibt es ein Kopfgeld. Falls Gegner fehlen, das nahe Lager prüfen.","conf":"high"},{"q":"Where Misery Gathers","trigger":"Anschlagtafel (Notice Board) bei Springtide Mill untersuchen","prereq":"Shadow Cast Over the River","reward":"—","miss":false,"tip":"Vier Aushänge abnehmen und lesen: 'Missing Cows', 'Horn Thief', 'Missing Wooly', 'Strange Noises from the Cave' – schaltet vier Folgequests frei (beliebige Reihenfolge).","conf":"high"},{"q":"Trial After Trial","trigger":"Aushang 'Missing Cows': den verzweifelten Bauern Bremer auf seinem Hof nahe Springtide Mill ansprechen","prereq":"Where Misery Gathers","reward":"Münzen, Standard Inventory Expansion Tool x1, Thin Hide x5","miss":false,"tip":"Mit Bremer sprechen, die Kräuterkundlerin als Zeugin bezahlen und ihr zu Pferd zum Banditenlager folgen. Lager säubern, per Laterne das Erinnerungsfragment zu den Rindern lesen, zurück zu Bremer. Im Lager: Amboss + Schleifstein für Reparatur/Buff.","conf":"high"},{"q":"The Man Trapped in the Mire","trigger":"Aushang 'Horn Thief': den bestohlenen Rancher Ibano beim Marker nahe Springtide Mill ansprechen","prereq":"Where Misery Gathers","reward":"Münzen, Standard Inventory Expansion Tool x1, Cloth Pieces x5","miss":false,"tip":"Östlich das kleine Banditenlager ausheben, per Laterne das Erinnerungsfragment zur 'Hornless Goat' lesen und das Mysterious Elixir bei den Felsen aufheben, dann zu Ibano zurück.","conf":"high"},{"q":"Missing Companion","trigger":"Aushang 'Missing Wooly': das weinende Kind William bei Bloomwood Ranch ansprechen, das sein Schaf Wooly vermisst","prereq":"Where Misery Gathers","reward":"Standard Inventory Expansion Tool x1, Fleece x5","miss":false,"tip":"Zwei Zeugengruppen südlich der Ranch befragen, das Banditenlager jenseits des Flusses räumen, Wooly aus dem Pferch holen und das Schaf (zu Pferd) zurück zu William bringen.","conf":"high"},{"q":"Secrets Hidden in the Dark","trigger":"Aushang 'Strange Noises from the Cave': bei Bloomwood Ranch wird der Betrunkene Boris von zwei Männern bedrängt – ansprechen und ihm folgen","prereq":"Where Misery Gathers","reward":"Medium Bag/Standard Inventory Expansion Tool x1, Grilled Meat x5, Grilled Fruit x5; laut Fextralife +100 Hernandian Contribution","miss":false,"tip":"Boris zum Specter's Hideout (Nas Riverside) folgen, Banditen am Eingang besiegen. Verpassbar: Skill 'Dropkick' per Watch and Learn von einem Banditen vor der Höhle + Palmar Pill in der Höhle. Hinten per Laterne die Erinnerung 'Lair of the Animal Thieves' lesen, danach die Wachen im Nordosten ansprechen.","conf":"high"},{"q":"The Dark Veil","trigger":"Zum Goldleaf Tradepost / Unicorn Cliff südöstlich der City of Hernand reisen und den Händler Shakatu am Markt ansprechen","prereq":"Alle vier Notice-Board-Quests (Trial After Trial, The Man Trapped in the Mire, Missing Companion, Secrets Hidden in the Dark)","reward":"—","miss":false,"tip":"Sehr kurze reine Dialogquest: Mit Shakatu sprechen, Cutscene über die Goldleaf Merchant Guild ansehen.","conf":"high"},{"q":"The Flames of Greed","trigger":"Eine weinende Nonne ruft beim Goldleaf Tradepost um Hilfe; sie bittet darum, ihren Heiler zu retten","prereq":"The Dark Veil","reward":"Münzen, Abyss Artifact x1","miss":false,"tip":"Zum brennenden Haus des Heilers in Windland Heights reiten. 2-Minuten-Timer: Mit Nature's Grasp den Baumstamm vor der Tür wegräumen, Marten im Haus (hinten rechts oben) aufnehmen und nach draußen tragen.","conf":"high"},{"q":"Kidnapped Healer","trigger":"Dem Questmarker zum Lagerplatz in den Hernand Highlands folgen","prereq":"The Flames of Greed","reward":"Standard Inventory Expansion Tool x1","miss":false,"tip":"Den Entführer am Lager besiegen und den Heiler Hubert losbinden – kurze Quest.","conf":"high"},{"q":"Rebellion or Revolution","trigger":"Automatisch nach 'Kidnapped Healer' in den Hernand Highlands; zum Marker gehen und Shakatu treffen","prereq":"Kidnapped Healer","reward":"—","miss":false,"tip":"Beim Treffen mit Shakatu greifen Gegner an – alle besiegen, dann Shakatu folgen und mit ihm sprechen. Hinweis: korrekter Questname laut allen Quellen 'Rebellion or Revolution' (im Wiki stand vorher 'of').","conf":"high"},{"q":"Cheers Echoing From the Edge","trigger":"Nach 'Rebellion or Revolution' zum Goldleaf Guildhouse in Unicorn Cliff; vor dem Gebäude greifen Wachen an, danach folgt der Kapitel-Boss","prereq":"Rebellion or Revolution","reward":"Sword of the Lord x1, Iron Ore x7, Copper Ore x2; laut Fextralife zusätzlich Seal of Greed - Goldleaf Merchant Guild und +500 Hernandian Contribution","miss":false,"tip":"Kapitel-Boss Kailok the Hornsplitter (sehr schnell): Defensiv spielen, parieren/perfekt kontern, nach der Parade 1–2 Treffer, roten Glint-Angriff mit Force Palm kontern (Stagger). Dem Wind Slash seitlich ausweichen, bei blauem Super-Armor-Glühen nicht angreifen; 'Evasive Roll' per Watch and Learn lernbar. Vorher beim Schmied aufrüsten und ca. 40 Grilled Meat mitnehmen.","conf":"high"}],"boss":"Kailok the Hornsplitter","warn":null,"unlock":null},
+  {"ch":"3","name":"Howling Hill","quests":[{"q":"Old Friend","trigger":"In den Hintergassen der City of Hernand (hinter dem Gasthaus) eine Menschengruppe ansprechen; Cutscene mit Marius","prereq":"Cheers Echoing From the Edge (Ende Kapitel 2)","reward":"—","miss":false,"tip":"Reine Story-Quest: Gasse aufsuchen, Cutscene ansehen (Kliff trifft Marius wieder). Keine Kämpfe.","conf":"high"},{"q":"First Step to Rebuilding","trigger":"Bei Oakenshield Manor (Anwesen des Marquis Serkis) den Riesen vor dem Eingang ansprechen","prereq":"Old Friend","reward":"Camp Howling Hill, Camp-Ressourcen, Damiane (spielbare Gefährtin), Reittier Brianto, Allianzen mit House Serkis + House Celeste","miss":false,"tip":"Nach dem Gespräch mit Marquis Serkis einem Soldaten erst zu Fuß, dann zu Pferd nach Howling Hill folgen. Im Lagerzentrum Marshal Middler treffen; Damiane schließt sich als Comrade an.","conf":"high"},{"q":"A Fresh Start","trigger":"Automatisch im neuen Camp auf Howling Hill","prereq":"First Step to Rebuilding","reward":"Iron Ore x5","miss":false,"tip":"Vier Aufbau-Aufgaben in beliebiger Reihenfolge: drei Säcke tragen, vier Zeltpflöcke einschlagen (je 3 Schläge), drei Felsen mit der Spitzhacke zerschlagen + Wagen ins Zelt schieben, Banner mit Nature's Grasp in die Halterung heben.","conf":"high"},{"q":"Reward for Their Sweat","trigger":"Automatisch im Camp (Missionsmarker am Kochtopf)","prereq":"A Fresh Start","reward":"Clear Soup x10","miss":false,"tip":"Rezept vom Hocker neben dem Kochtopf nehmen und lesen; 'Modest Clear Soup' kochen (je x1 Tough Meat, Barley, Water – Zutaten auf demselben Hocker). Mindestens 2 Portionen und das Festmahl am Tisch servieren (ggf. zu Kliff wechseln).","conf":"high"},{"q":"Return of the Comrade","trigger":"Am Scrapfold (Hernand): Marius zwischen Bettlern aufsuchen","prereq":"Reward for Their Sweat","reward":"—","miss":false,"tip":"Marius ansprechen, aufs Pferd steigen, warten bis er aufsitzt, zurück zum Camp eskortieren. Achtung: Kommen Bettler zu nahe, kann das Münzen kosten.","conf":"high"},{"q":"Familiar Curses","trigger":"Bei St. Halssius's House of Healing (Hernand)","prereq":"Return of the Comrade","reward":"St.-Halssius-Priester-Outfit (Attire, Cloak, Footwear, Hat; an Beschaffung der Verkleidung geknüpft)","miss":false,"tip":"Drei Wege ins Haus: schleichen, Besucherpass der Church of Hernand kaufen oder Halssius-Outfit (10 Silber) beim Händler nahe der Brücke. Im Südflügel des 2. Stocks Yann stellen, über die Dächer bis zum Pywell Wagon jagen, zum Nas River Fishing Dock fahren. Wachen meiden – Zivilisten dürfen einen sehen.","conf":"medium"},{"q":"Return","trigger":"Greymane-Campingplatz am Nas River Fishing Dock; Gespräch mit Marius (dort trifft man Duane)","prereq":"Familiar Curses","reward":"—","miss":false,"tip":"Nur ein Gespräch. WICHTIG (PowerPyx): Vorbereiten – ca. 50 Grilled Meat kochen, Plattenrüstung kaufen und beim Schmied aufwerten: der kommende Kapitel-Boss ist isoliert und sehr schwer.","conf":"high"},{"q":"Traces in the Manor","trigger":"Glenbright Manor (Grace Estate, südlich des Markers); Cutscene bei Ankunft","prereq":"Return","reward":"—","miss":false,"tip":"Bei Ankunft greifen fünf Wachen an. Anwesen durchsuchen, im Obergeschoss im Eckzimmer den verwundeten Diener ansprechen (laut game8 erhält man den Iron Door Key). Folgequest startet im selben Raum.","conf":"high"},{"q":"Nonhuman","trigger":"Automatisch in Glenbright Manor nach 'Traces in the Manor' (nach Diener-Gespräch und Visione-Erinnerung 'Grace Manor')","prereq":"Traces in the Manor","reward":"—","miss":false,"tip":"Tracking-Mechanik: Laterne (L1) auf das offene Fenster richten und der gelben Spur des Reed Devil bis zur Hütte bei Reedfield Graves folgen. Kämpfe unterwegs sind laut game8 vermeidbar.","conf":"high"},{"q":"Seed of Unease","trigger":"Automatisch nach Cutscene in der Hütte bei Reedfield Graves","prereq":"Nonhuman","reward":"—","miss":false,"tip":"Mit der Laterne der gelben Spur durch den Canyon nach Südwesten folgen (Steel Mountains / Mountain of Frozen Souls). Der Reed Devil taucht mehrfach auf und verschwindet wieder – andere Gegner umgehen, zwischendurch heilen. Am Altar die kleine Strohpuppe untersuchen → löst den Bossfight aus.","conf":"high"},{"q":"Dance with the Devil","trigger":"Automatisch nach Untersuchen der Puppe am Altar; Bossfight gegen den Reed Devil","prereq":"Seed of Unease","reward":"Sunset Reed Cloth Gloves x1","miss":false,"tip":"Kapitel-Boss, 3 Phasen: Phase 1 eins-gegen-eins – schnelle Schwerthiebe parieren, Haltung brechen. Phase 2: unverwundbar + Klone – so schnell wie möglich alle Totems/Vogelscheuchen zerstören (Quellen: 4 bzw. 5), nicht die Klone bekämpfen. Phase 3 wie 1, aggressiver mit roten Energiewellen (seitlich wegrollen). Vorher 50–100 Grilled Meat + aufgewertete Plattenrüstung!","conf":"high"},{"q":"Hope After the Draught","trigger":"Automatisch nach dem Sieg über den Reed Devil; zurück zum Camp auf Howling Hill","prereq":"Dance with the Devil","reward":"—","miss":false,"tip":"Zurück ins Camp (Tipp: per Sky Map zur Himmelsinsel nördlich des Camps schnellreisen und hinabspringen), Hauptzelt betreten – Cutscene: Andrew erholt sich, Yann trifft ein.","conf":"high"},{"q":"Scattered Comrades","trigger":"Automatisch im Camp auf Howling Hill","prereq":"Hope After the Draught","reward":"—","miss":false,"tip":"Kurzes Gespräch mit Marius über die verstreuten Gefährten – keine Kämpfe. (Quest fehlte bisher im Wiki.)","conf":"high"},{"q":"Rumors from the Sawmill","trigger":"Nach Marius' Hinweis zum Sägewerk reisen (PowerPyx/Fextralife: Coalvale Workshop nahe Howling Hill; game8 nennt Unicorn Cliff)","prereq":"Scattered Comrades","reward":"Camp Wood x1000, Abyss Artifact x1, Fine Timber x5","miss":false,"tip":"Am Sägewerk den sitzenden Mann Luke finden, anvisieren und ansprechen, um ihn (laut game8 mit Ronald) zu rekrutieren. (Quest fehlte bisher im Wiki.)","conf":"medium"},{"q":"A Gentle Touch","trigger":"Automatisch nach der Rekrutierung; zurück zum Camp auf Howling Hill","prereq":"Rumors from the Sawmill","reward":"Camp Oats x200, Camp Coins x200, Thick Hide x6, Iron Ore x5","miss":false,"tip":"Im Camp den Schrein untersuchen, dann die Dragon-Head-Totem-Statue links davon. Den Brief 'Shakatu's Letter' (lila) aus dem Inventar öffnen und mit L1 vollständig lesen – schaltet die Camp Expansion frei. (Quest fehlte bisher im Wiki.)","conf":"high"},{"q":"Bustling Hill","trigger":"Automatisch nach Lesen des Briefs; Dispatch-Mission über die Karte starten","prereq":"A Gentle Touch","reward":"—","miss":false,"tip":"Auf der Karte (Tab 'ALL') das Howling Hill Camp öffnen, Mission 'Howling Hill Camp Expansion' wählen, Luke und Ronald entsenden. Dauer 18 Ingame-Stunden – mit Nebenquests überbrücken oder am Bett/Lagerfeuer 12 Stunden schlafen.","conf":"high"},{"q":"Greymanes Reunited","trigger":"Automatisch nach Abschluss der Camp-Expansion","prereq":"Bustling Hill","reward":"—","miss":false,"tip":"Zum markierten Bereich des erweiterten Camps zurückkehren – Cutscene mit den versammelten Gefährten. Danach beginnt Kapitel 4.","conf":"high"}],"boss":"Reed Devil","warn":null,"unlock":"Damiane (First Step to Rebuilding)"},
   {ch:"4",name:"The Price of Knowledge",quests:["Kilnden Workshop","The Mysterious Pot","The Iron Pot's Usage","Disturbance at the Arena","The Words of Alustin","Scholastone","On the Right Path","Gate to the Otherworld","Spire of the Stars","Obsession and Madness","Casted Shadow"],boss:"Kearush the Slayer",warn:"On the Right Path: Focused Force Palm verpassen möglich (falscher Weg zu Scholastone). Hologramm bleibt zugänglich — Karte zeigt Ort. Kap. 9 Auto-Unlock falls weiterhin verpasst.",unlock:null},
   {ch:"5",name:"Guest Unbidden",quests:["Double-sided Invitation","Unwelcomed Guests","Demenissian Delegation","Exposed Plot","The Missing Seal","Crowcaller","The Crow's Warning","Bloodwind","Secret at the Church","Toward the Nest"],boss:"Draven the Crowcaller",warn:null,unlock:"Witch Elowen (The Missing Seal)"},
   {ch:"6",name:"Cracks in the Shield",quests:["News","To the Battlefield","Cradle of Defense","The Touch of Deliverance","Fire Support","Hidden Fangs","Reclamation","A Thousand Troops","Traitor","All Quiet on the Front","Return Home"],boss:"Cassius Morten / Tenebrum",warn:"Bell Tower Calphade GESPERRT in Kap. 6!",unlock:null},
@@ -3696,7 +3708,62 @@ const BOSS_IMGS={
   "Awakened Ludvig":"cd_assets/bosses/awakened_ludvig.webp",
   "Awakened Lucian Bastier":"cd_assets/bosses/awakened_lucian.webp",
   "Marni's Clockwork Mantis":"cd_assets/bosses/clockwork_mantis.webp",
-  "Turbine":"cd_assets/bosses/turbine.webp"
+  "Turbine":"cd_assets/bosses/turbine.webp",
+  // Auto-recherchiert 2026-06-10 via questlog database.getKnowledges-API (Namens-Match in der Knowledge-DB,
+  // alle URLs HTTP-200-verifiziert, Stichproben visuell geprueft). Sonderfaelle:
+  // - "Frostwalker Tervis" heisst bei questlog "Forestwalker Tervis" (Wald-Golem) -> Namens-/Lore-Diskrepanz, siehe Audit-Notiz
+  // - Abyss Kutum: 1:1-Zuordnung (genau 2 Kutum-Knowledge-Eintraege fuer genau 2 Kutum-Bosse), nicht einzeln verifiziert
+  // - One-Eyed Jackal Captain: questlog-Faktionsbild der Lonely Jackals (zeigt den Anfuehrer)
+  // - Ohne questlog-Bild (Platzhalter bleibt): Black Bear Captain, Mountain God Boar, Crookrock Walker
+  "Abyss Kutum":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_ancientworm.webp",
+  "Aeserion, the Great Serpent":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_giantsnake.webp",
+  "Antumbra's Spear":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasspear.webp",
+  "Antumbra's Staff":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasstaff.webp",
+  "Balthazar, the Wyvernflame":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_balthazarwyrmspeaker.webp",
+  "Black Bear Siege Engine":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_blackbear_tank.webp",
+  "Bloodwalker Crussis":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_crussistheformshaken.webp",
+  "Bradie Gu":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_bridie_gu.webp",
+  "Clockwork White Horn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_gearhornrenw.webp",
+  "Cloud Fortress Orbian":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_del_marniaircastle.webp",
+  "Cubewalker Lithus":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_lithustheformshaken.webp",
+  "Desert Marauder Rusten":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_desert_tank.webp",
+  "Frostwalker Tervis":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ent_golem.webp",
+  "Giath":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gears.webp",
+  "Gristle, the Sandfang Marauder":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gobline_rider_boss.webp",
+  "Gwen Kraber":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gwen_kraver.webp",
+  "Hemon Beindel":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_hemon_beindel.webp",
+  "Ironwing REN-X":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_airplane.webp",
+  "Keglord Garnier Mk. XXIII":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_circusgarnier.webp",
+  "Kutum":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_kutum.webp",
+  "Marni's Machina Knight":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marni_machineknight.webp",
+  "Mazzul, the Dark Justiciar":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mazzulthedarkjusticiar.webp",
+  "Mechanicus":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mechanicusmk12.webp",
+  "Merrick, the Knight of Fortune":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_goldenarmor.webp",
+  "Moren the Mistwood Huntmaster":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_enthunter.webp",
+  "Mudwalker Lutemir":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mudwalkerlutemir.webp",
+  "Ogre":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_ogre.webp",
+  "One-Eyed Jackal Captain":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_lonelyjackal.webp",
+  "Praevus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_praevus.webp",
+  "Primus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_primus.webp",
+  "Queen Bismuth Oreback Crab":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_bismuthqueenstonebackcrab.webp",
+  "Queen Spider":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_queenspider.webp",
+  "Ravok of the Savage Fangs":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_troll_rider.webp",
+  "Runewalker Vordis":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_lakegolemvordis.webp",
+  "Samara the Sandwatcher":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_samuel.webp",
+  "Sir Catfish":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_catfish.webp",
+  "Sizlek the Insatiable":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_sizlektheinsatiable.webp",
+  "Skevald the Carrion King":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_hyena_boss.webp",
+  "Skull Knight":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_skullknight.webp",
+  "Stonewalker Antiquum":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_drylandsgolem.webp",
+  "Storm Crusher":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_tank_lase.webp",
+  "Tarandus the Ashen":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_tarandustheashen.webp",
+  "The Forgotten General":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_theforgottengeneral.webp",
+  "The Masked Liberator":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_mask_liberator_leader.webp",
+  "The Raging Tempest":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_ragingtempest.webp",
+  "Titan":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_titan.webp",
+  "Tristan the Flame Knight":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_tristan.webp",
+  "White Bear of the High Mountains":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_whitebear.webp",
+  "White Bearclaw":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_northernwarrior.webp",
 };
 
 // questlog-CDN-Fallback fuer alle Bosse mit gefundener NPC-ID (onerror cascade)
@@ -6800,6 +6867,78 @@ function showAchToast(a){
     setTimeout(()=>t.remove(),400);
   },4200);
 }
+// ===== ECHTE TROPHAEEN (PS5/Xbox/Steam) =====
+// Recherchiert 2026-06-10: PowerPyx Trophy Guide, PSNProfiles, Fextralife, TrueAchievements
+// (Grade PowerPyx+Fextralife-bestaetigt, Verteilung 1/4/10/20 gegen PSNProfiles abgeglichen).
+// 'miss'-Flags folgen PowerPyx (begrenzte Challenge-Verfuegbarkeit, KEIN Story-Cutoff; andere
+// Quellen stufen die Liste als komplett nicht-verpassbar ein -> conf medium an diesen Stellen).
+const TROPHY_NOTE="PS5-Liste: 35 Trophäen (1 Platin, 4 Gold, 10 Silber, 20 Bronze); Grade durch PowerPyx + Fextralife bestätigt, Verteilung mit PSNProfiles abgeglichen. Xbox/Steam: identische 34 Achievements (1000 GS) ohne Platin. PowerPyx erwähnt KEINEN Point of No Return bei 'Orbian'/Kap.11 — nach der Story gibt es Free-Roam (aber kein Quest-Replay). Die 'verpassbar'-Markierungen beruhen auf begrenzter Verfügbarkeit einzelner Challenges, nicht auf einem Story-Cutoff; andere Quellen stufen die Liste als komplett nicht-verpassbar ein (daher conf medium).";
+const TROPHY_ROADMAP=["Geschätzt 200–300+ Stunden bei Schwierigkeit 7/10, 1 Playthrough, keine Online- oder Glitch-Trophäen — der Aufwand ist zeit-, nicht skill-getrieben.","Zuerst ca. 25+ Stunden Vorarbeit: die 8 versteckten Glocken aktivieren (entnebelt die Karte; Pailune-Glocke braucht Story-Fortschritt), Schnellreisepunkte freischalten und alle 141 Sealed Abyss Artifacts einsammeln — jedes schaltet eine Challenge frei, Fortschritt zählt nicht rückwirkend.","Story und Challenges parallel spielen; eiserne Regel: feindliche Camps NICHT vorzeitig befreien und die 10 Spezialwaffen niemals verkaufen/wegwerfen/umwandeln, sonst werden einzelne Challenges unerfüllbar.","Nach Kapitel 7 die Questreihen 'Reconstructing Pailune' und 'Scattered Embers' abschließen und per Expeditionen Ressourcen für die sechs Wiederaufbauphasen farmen (für 'Proud Returnee').","Nach dem Story-Ende ist Free-Roam für alle restlichen Challenges möglich (kein Quest-Replay); zeitintensive kumulative Challenges möglichst früh beginnen."];
+const TROPHIES=[
+  {"name":"Pywel Legend","grade":"platinum","desc":"Alle anderen Trophäen in Crimson Desert freischalten.","miss":false,"sec":null,"conf":"high"},
+  {"name":"Novice Adventurer","grade":"bronze","desc":"Kapitel 1 der Hauptquests abschließen.","miss":false,"sec":"chapters","conf":"high"},
+  {"name":"Master Camper","grade":"bronze","desc":"Das Lager am Howling Hill aktivieren (Story, ca. Kapitel 3).","miss":false,"sec":"chapters","conf":"high"},
+  {"name":"Protector of Pailune","grade":"silver","desc":"Pailune befreien: die Black Bears (und Jackals) besiegen (Hauptstory, Kapitel 7).","miss":false,"sec":"chapters","conf":"high"},
+  {"name":"Expert Storyteller","grade":"gold","desc":"Alle Hauptquests (alle Story-Kapitel) abschließen.","miss":false,"sec":"chapters","conf":"high"},
+  {"name":"Proud Returnee","grade":"silver","desc":"Das Lager von Howling Hill nach Pailune verlegen (erfordert Kapitel 7, die Questreihen 'Reconstructing Pailune' und 'Scattered Embers' sowie große Mengen Ressourcen).","miss":false,"tip":"Ressourcen (u.a. ~30K Holz, ~47K Nahrung, ~517K Geld) früh über Expeditionen/Idle-Farming sammeln.","sec":"quests","conf":"high"},
+  {"name":"Maze Pathfinder","grade":"bronze","desc":"Alle Labyrinth-Herausforderungen abschließen (4 Labyrinthe).","miss":false,"sec":"locations","conf":"high"},
+  {"name":"Conqueror of Spires","grade":"bronze","desc":"Alle Turm-Herausforderungen abschließen (8 Spires erklimmen).","miss":false,"sec":"locations","conf":"high"},
+  {"name":"Navigator of the Stars","grade":"bronze","desc":"Alle 13 Konstellations-Herausforderungen abschließen.","miss":false,"sec":"secrets","conf":"high"},
+  {"name":"Master of Swords","grade":"bronze","desc":"Alle 6 Schwert-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Master of Shields","grade":"bronze","desc":"Alle 6 Schild-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Master of Bows","grade":"bronze","desc":"Alle 6 Bogen-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Master of Spears","grade":"bronze","desc":"Alle 5 Speer-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Master of Two-Handed Weapons","grade":"bronze","desc":"Alle 6 Zweihandwaffen-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Master of Artillery","grade":"bronze","desc":"Alle 5 Kanonen-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Master of Rapiers","grade":"bronze","desc":"Alle 5 Rapier-und-Schild-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Master of Firearms","grade":"bronze","desc":"Alle 5 Schusswaffen-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Relentless Warrior","grade":"bronze","desc":"Alle 10 Trainings-Herausforderungen abschließen.","miss":false,"sec":"skills","conf":"high"},
+  {"name":"Battlefield Conqueror","grade":"bronze","desc":"Alle 10 Schlacht-Herausforderungen abschließen.","miss":true,"tip":"'Battle 6: Into the Barrage' (5 Gegner mit einem Kanonenschuss) hat laut PowerPyx nur begrenzte Gelegenheiten — am besten in Kapitel 8 erledigen.","sec":null,"conf":"medium"},
+  {"name":"Brilliant Tactician","grade":"bronze","desc":"Alle 10 Operations-Herausforderungen abschließen.","miss":true,"tip":"'Operation 7: Disruption' braucht Jackals-Gegner in Pailune — feindliche Camps nicht vorzeitig befreien.","sec":null,"conf":"medium"},
+  {"name":"The Golden Merchant","grade":"bronze","desc":"Alle 5 Handels-Herausforderungen abschließen.","miss":false,"sec":null,"conf":"high"},
+  {"name":"Beast Slayer","grade":"bronze","desc":"Alle 7 'New Power'-Herausforderungen abschließen (einzigartige Bosse besiegen).","miss":false,"sec":"bosses","conf":"high"},
+  {"name":"Shadowlord","grade":"bronze","desc":"Alle 10 'Above the Law'-Herausforderungen abschließen.","miss":true,"tip":"'Above the Law 4: Back Alley Cleanup' erfordert offene Kopfgelder — nicht alle Bounties vorher abschließen.","sec":null,"conf":"medium"},
+  {"name":"Lord of Honor","grade":"bronze","desc":"Alle 9 'Challenges and Changes'-Herausforderungen abschließen.","miss":false,"sec":null,"conf":"high"},
+  {"name":"Pilgrim of Wonders","grade":"silver","desc":"Alle 60 Geheimort-Herausforderungen (Secret Places) abschließen.","miss":false,"sec":"secrets","conf":"high"},
+  {"name":"Puzzle Solver","grade":"silver","desc":"Alle 37 Rätsel-Herausforderungen der Antiken Ruinen lösen.","miss":false,"sec":"ruins","conf":"high"},
+  {"name":"Lightbringer","grade":"silver","desc":"Alle 16 Sanktum-Herausforderungen abschließen.","miss":false,"sec":"witches","conf":"high"},
+  {"name":"Grand Collector of Arms","grade":"silver","desc":"Alle 10 Spezialwaffen-Herausforderungen abschließen.","miss":true,"tip":"Spezialwaffe 10 (Vessel of Dark Pursuit) niemals verkaufen/spenden und den Marni Laser Helm nicht in die Kuku-Version umwandeln, sonst zählen sie nicht mehr.","sec":"collectibles","conf":"medium"},
+  {"name":"Tamer of Legends","grade":"silver","desc":"Alle 10 Pferde-Herausforderungen abschließen.","miss":false,"sec":"mounts","conf":"high"},
+  {"name":"True Gamer","grade":"silver","desc":"Alle 5 Minispiel-Kategorien abschließen (Schießen, Krafttest, Duell, Rennen, Denkspiele).","miss":false,"sec":null,"conf":"high"},
+  {"name":"Ultimate Hunter","grade":"silver","desc":"Alle 11 Jagd-Herausforderungen abschließen.","miss":false,"sec":null,"conf":"high"},
+  {"name":"Natural Collector","grade":"silver","desc":"Alle 12 Lebens-Herausforderungen abschließen (Sammeln/Natur).","miss":false,"sec":"collectibles","conf":"high"},
+  {"name":"Conqueror of the Abysses","grade":"gold","desc":"Alle 40 Abyss-Wiederherstellungsrätsel abschließen.","miss":false,"tip":"Für die letzte Challenge 'Dimensional Bonds' müssen alle Abyss-Rätsel und die komplette Hauptstory abgeschlossen sein.","sec":"locations","conf":"high"},
+  {"name":"Expert Explorer","grade":"gold","desc":"Alle Erkundungs-Herausforderungen in 9 Unterkategorien abschließen (ca. 178 Einzel-Challenges, u.a. Glocken, Schnellreisepunkte, Restaurationen).","miss":false,"sec":"locations","conf":"medium"},
+  {"name":"Unvanquished Strategist","grade":"gold","desc":"Alle Meisterschafts-Herausforderungen in 10 Waffen-/Ausrüstungs-Unterkategorien abschließen (ca. 58–64 Einzel-Challenges; gilt als aufwendigste Trophäe).","miss":false,"sec":"skills","conf":"medium"}
+];
+const TROPHY_GRADES={platinum:{ico:'💠',lbl:'Platin',col:'#9ad7f5'},gold:{ico:'🥇',lbl:'Gold',col:'#e7c34b'},silver:{ico:'🥈',lbl:'Silber',col:'#c9cdd4'},bronze:{ico:'🥉',lbl:'Bronze',col:'#c98a52'}};
+let _trFilter='all';
+function trophyFilter(f){_trFilter=f;renderTrophies();}
+function renderTrophies(){
+  const wrap=document.getElementById('trophy-list'); if(!wrap)return;
+  const cnt=g=>TROPHIES.filter(t=>t.grade===g).length;
+  const missCnt=TROPHIES.filter(t=>t.miss).length;
+  const chips=[['all','Alle ('+TROPHIES.length+')'],['platinum',TROPHY_GRADES.platinum.ico+' '+cnt('platinum')],['gold',TROPHY_GRADES.gold.ico+' '+cnt('gold')],['silver',TROPHY_GRADES.silver.ico+' '+cnt('silver')],['bronze',TROPHY_GRADES.bronze.ico+' '+cnt('bronze')],['miss','⚠ Verpassbar ('+missCnt+')']];
+  const fb=document.getElementById('trophy-filter');
+  if(fb)fb.innerHTML=chips.map(c=>'<button class="ruin-fbtn'+(_trFilter===c[0]?' active':'')+'" onclick="trophyFilter(\''+c[0]+'\')">'+c[1]+'</button>').join('');
+  const list=TROPHIES.filter(t=>_trFilter==='all'||(_trFilter==='miss'?t.miss:t.grade===_trFilter));
+  wrap.innerHTML=list.map(t=>{
+    const g=TROPHY_GRADES[t.grade];
+    return '<div class="fac-q" data-s="'+esc((t.name+' '+t.desc+' '+(t.tip||'')+' trophäe trophy').toLowerCase())+'">'
+      +'<div class="fac-qh">'+g.ico+' '+esc(t.name)
+      +'<span class="tag" style="border-color:'+g.col+';color:'+g.col+'">'+g.lbl+'</span>'
+      +facBadges(t)+'</div>'
+      +'<div style="font-size:12px;color:var(--txt);margin:4px 0 0">'+esc(t.desc)+'</div>'
+      +(t.tip?'<div style="font-size:11.5px;color:var(--dim);margin-top:4px">💡 '+esc(t.tip)+'</div>':'')
+      +(t.sec?'<button class="empty-state-action" style="margin-top:6px" onclick="showSec(\''+t.sec+'\')">Passende Wiki-Sektion →</button>':'')
+      +'</div>';
+  }).join('');
+  const rm=document.getElementById('trophy-roadmap');
+  if(rm)rm.innerHTML='<div class="sub-t">🗺️ Platin-Roadmap (PowerPyx)</div><ol style="font-size:12px;line-height:1.65;color:var(--txt);padding-left:18px;margin:6px 0">'
+    +TROPHY_ROADMAP.map(r=>'<li style="margin-bottom:5px">'+esc(r)+'</li>').join('')
+    +'</ol><div style="font-size:11px;color:var(--dim);line-height:1.55;margin-top:6px">'+esc(TROPHY_NOTE)+'</div>';
+}
+
 function renderAchievements(){
   const el=document.getElementById('ach-grid');
   if(!el)return;
@@ -6999,12 +7138,62 @@ function persistBossNote(name,el,btn){
   _afterNoteAction();
 }
 
+// ===== LAZY-RENDERING PRO SEKTION =====
+// Sektionen werden erst beim ersten Oeffnen gerendert (Time-to-Interactive: beim Start
+// liefen vorher ~40 Render-Funktionen fuer alle Sektionen synchron).
+// Funktionsnamen als Strings: renderRuins lebt in einem spaeteren <script>-Block,
+// Aufloesung via window[...] daher erst zur Laufzeit.
+const SEC_RENDERERS={
+  bosses:['renderBosses','renderRegionHeatmap'],
+  weapons:['renderWeapons'],
+  items:['renderWeaponUpgrade'],
+  cores:['renderCores'],
+  armor:['renderArmor','renderArmorSets'],
+  crafting:['renderCrafting'],
+  quests:['renderTE','renderMQ','renderFactions'],
+  locations:['renderLocs','renderBells'],
+  ruins:['renderRuins'],
+  mounts:['renderMounts'],
+  skills:['renderSkills'],
+  builds:['renderBuilds','renderBuildOptimizer'],
+  accessories:['renderAccessories'],
+  pets:['renderPets'],
+  collectibles:['renderCollectibles'],
+  gatherables:['renderGatherables'],
+  puzzles:['renderPuzzles'],
+  dyes:['renderDyes'],
+  food:['renderFood'],
+  witches:['renderWitches'],
+  checklists:['renderSanctumGuide','renderBossChecklist','renderGreymane','renderSanctumChecklist','renderWeaponChecklist','renderMissableChecklist','renderOverview'],
+  chapters:['renderChapters','renderQuestTimeline'],
+  patches:['renderPatches'],
+  secrets:['renderSecrets','renderFragmentTracker','renderCressetTracker'],
+  achievements:['renderTrophies','renderAchievements'],
+  roadmap:['renderRoadmap'],
+  favorites:['renderFavorites']
+};
+const _secRendered={};
+function ensureSecRendered(id){
+  if(_secRendered[id])return;
+  const fns=SEC_RENDERERS[id];
+  if(!fns)return;
+  _secRendered[id]=true;
+  fns.forEach(n=>{
+    const f=window[n];
+    if(typeof f!=='function'){console.error('Lazy-Render: Funktion fehlt:',n);return;}
+    try{f();}catch(e){console.error('Lazy-Render fehlgeschlagen:',id,n,e);}
+  });
+}
+// Fuer DOM-basierte Features ueber alle Sektionen (sektionsuebergreifende Suche)
+function ensureAllRendered(){Object.keys(SEC_RENDERERS).forEach(ensureSecRendered);}
+
 // ===== NAVIGATION =====
 function showSec(id, opts){
   opts=opts||{};
   const sec=document.getElementById('sec-'+id);
   const nav=document.querySelector('[data-sec="'+id+'"]');
   if(!sec||!nav)return;
+  ensureSecRendered(id);
   // Re-render favorites when entering that section (favs may have changed since init)
   if(id==='favorites'&&typeof renderFavorites==='function')renderFavorites();
   if(id==='roadmap'&&typeof renderRoadmap==='function')renderRoadmap();
@@ -7297,6 +7486,8 @@ function _doSearchImpl(q){
 }
 // Zaehlt Treffer in allen nicht-aktiven Sektionen (Top 8, absteigend)
 function _searchOtherSections(qLow,activeSec){
+  // Lazy-Rendering: [data-s]-Attribute existieren erst nach dem Rendern einer Sektion
+  if(typeof ensureAllRendered==='function')ensureAllRendered();
   const out=[];
   document.querySelectorAll('.sec').forEach(sec=>{
     if(sec===activeSec)return;
@@ -7710,17 +7901,30 @@ function qTab(id){
 
 // ===== MAIN QUESTS =====
 function renderMQ(){
-  document.getElementById('mq-list').innerHTML=MAIN_QUESTS.map(ch=>`<div class="chap">
+  // Quests sind entweder Strings (altes Namensregister, Kap.4-12) oder Objekte
+  // {q,trigger,prereq,reward,miss,tip,conf} (Walkthrough-Schema wie FAC_DATA, ab 2026-06-10).
+  const qCard=q=>`<div class="fac-q" data-s="${esc((q.q+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
+      <div class="fac-qh">${esc(q.q)}${facBadges(q)}</div>
+      <div class="fac-qm">
+        <div class="fac-qk">Trigger</div><div class="fac-qv">${esc(q.trigger)}</div>
+        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${esc(q.prereq)}</div>
+        <div class="fac-qk">Belohnung</div><div class="fac-qv">${esc(q.reward)}</div>
+        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+esc(q.tip)+'</div>':''}
+      </div>
+    </div>`;
+  document.getElementById('mq-list').innerHTML=MAIN_QUESTS.map(ch=>{
+    const detailed=ch.quests.length&&typeof ch.quests[0]==='object';
+    return `<div class="chap">
     <div class="chap-hd" onclick="toggleChap(this)">
       <span class="chap-title">Kap. ${ch.ch} — ${ch.name}</span>
-      <div class="chap-r">${ch.boss?'<span class="chap-boss">'+ch.boss+'</span>':''}<span class="chap-arr">▼</span></div>
+      <div class="chap-r"><span style="font-size:11px;color:var(--dim)">${ch.quests.length} Quests${detailed?' · Walkthrough':''}</span>${ch.boss?'<span class="chap-boss">'+ch.boss+'</span>':''}<span class="chap-arr">▼</span></div>
     </div>
     <div class="chap-body">
-      <ul class="ql">${ch.quests.map(q=>'<li>'+q+'</li>').join('')}</ul>
+      ${detailed?ch.quests.map(qCard).join(''):'<ul class="ql">'+ch.quests.map(q=>'<li>'+q+'</li>').join('')+'</ul>'}
       ${ch.unlock?'<div style="font-size:11.5px;color:var(--gold);margin-bottom:4px">Unlock: '+ch.unlock+'</div>':''}
       ${ch.warn?'<div class="warn-b">'+ch.warn+'</div>':''}
     </div>
-  </div>`).join('');
+  </div>`;}).join('');
 }
 function toggleChap(hd){
   hd.nextElementSibling.classList.toggle('open');
@@ -9348,20 +9552,13 @@ function renderPatches(){
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded',()=>{
-  // Jeder Render-Schritt isoliert: ein Fehler in einer Sektion darf die uebrigen nicht blockieren
-  [renderBosses,renderWeapons,renderCores,renderArmor,renderArmorSets,renderCrafting,
-   renderTE,renderMQ,renderFactions,
-   renderLocs,renderBells,renderMounts,renderSkills,
-   renderBuilds,renderAccessories,renderPets,renderCollectibles,renderGatherables,
-   renderPuzzles,renderDyes,renderFood,
-   initStaticTocs,
+  // Lazy-Rendering: beim Start nur globale Schritte — Sektionsinhalte rendert
+  // ensureSecRendered() beim ersten Oeffnen (Startsektion via showSec weiter unten).
+  // refreshSectionStats/updateStats lesen nur JS-Daten + localStorage, keinen Sektions-DOM.
+  // Jeder Schritt isoliert: ein Fehler darf die uebrigen nicht blockieren.
+  [initStaticTocs,
    ()=>document.addEventListener('mousemove',_moveMFP),
-   renderWitches,renderWeaponUpgrade,renderSanctumGuide,renderChapters,renderPatches,
-   renderSecrets,renderFragmentTracker,renderCressetTracker,renderQuestTimeline,
-   renderRegionHeatmap,renderAchievements,renderBuildOptimizer,renderRoadmap,
-   refreshSectionStats,_initTooltips,
-   renderBossChecklist,renderGreymane,renderSanctumChecklist,renderWeaponChecklist,
-   renderMissableChecklist,renderOverview,updateStats
+   refreshSectionStats,_initTooltips,updateStats
   ].forEach(f=>{try{f();}catch(e){console.error('Init-Schritt fehlgeschlagen:',f.name||'(anonym)',e);}});
 
   // Kommentar-Sektionen in alle Seiten einfügen
@@ -9726,7 +9923,9 @@ function openRuinImg(url,cap){
   var n=document.getElementById("mim-name"); if(n)n.textContent=cap||"";
   var m=document.getElementById("mount-ingame-modal"); if(m)m.classList.add("show");
 }
-document.addEventListener("DOMContentLoaded",renderRuins);
+// renderRuins laeuft jetzt lazy ueber SEC_RENDERERS.ruins (ensureSecRendered) statt eager bei DOMContentLoaded.
+// Falls die Ruins-Sektion beim Laden dieses Blocks bereits offen ist (Deep-Link), direkt nachrendern:
+if(document.getElementById("sec-ruins")&&document.getElementById("sec-ruins").classList.contains("active")){try{renderRuins();}catch(e){console.error(e);}}
 </script>
 </body>
 </html>
