@@ -19,10 +19,24 @@ for = "/*"
   Content-Security-Policy     = "frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
   Cache-Control               = "public, max-age=3600"
 
+# index.html immer revalidieren (ETag macht das billig) — sonst sehen
+# Besucher nach einem Deploy bis zu 1h alte Inhalte
+[[headers]]
+for = "/"
+  [headers.values]
+  Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+for = "/index.html"
+  [headers.values]
+  Cache-Control = "public, max-age=0, must-revalidate"
+
+# Assets sind NICHT versioniert/fingerprinted — daher kein 'immutable',
+# 1 Tag Cache + Revalidierung reicht
 [[headers]]
 for = "/cd_assets/*"
   [headers.values]
-  Cache-Control = "public, max-age=604800, immutable"
+  Cache-Control = "public, max-age=86400"
 
 [[headers]]
 for = "/site.webmanifest"

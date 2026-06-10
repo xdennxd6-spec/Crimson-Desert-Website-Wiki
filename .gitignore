@@ -141,3 +141,10 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Backup files
+*.bak
+
+# Claude-Audit-Arbeitsdateien (nicht deployen)
+.claude/audit-findings.md
+.claude/audit-synthese.json

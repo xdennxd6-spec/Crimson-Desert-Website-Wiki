@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
-// Cache-First mit Network-Fallback fuer Assets, Network-First fuer index.html
-const CACHE_VERSION = 'cd-guide-v3';
+// Network-First fuer index.html, Stale-while-Revalidate fuer Assets & CDN-Bilder
+const CACHE_VERSION = 'cd-guide-v4';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -34,37 +34,47 @@ self.addEventListener('fetch', e => {
   if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
     e.respondWith(
       fetch(e.request)
-        .then(r => { caches.open(CORE_CACHE).then(c => c.put(e.request, r.clone())); return r; })
+        .then(r => {
+          // Clone SOFORT ziehen — sonst Race: Body kann schon konsumiert sein
+          const clone = r.clone();
+          caches.open(CORE_CACHE).then(c => c.put(e.request, clone));
+          return r;
+        })
         .catch(() => caches.match(e.request).then(r => r || caches.match('./index.html')))
     );
     return;
   }
 
-  // Cache-First fuer Assets (Bilder, Manifest, etc.)
+  // Lokale Assets: Stale-while-Revalidate (sofort aus Cache, im Hintergrund aktualisieren)
   if (url.pathname.startsWith('/cd_assets/') || url.pathname.endsWith('.webmanifest') || url.pathname.endsWith('.png') || url.pathname.endsWith('.jpg') || url.pathname.endsWith('.webp') || url.pathname.endsWith('.mp4')) {
     e.respondWith(
-      caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
-        if (resp.ok && resp.type === 'basic') {
-          const clone = resp.clone();
-          caches.open(ASSET_CACHE).then(c => c.put(e.request, clone));
-        }
-        return resp;
-      }).catch(() => caches.match('./index.html')))
+      caches.match(e.request).then(cached => {
+        const fetchPromise = fetch(e.request).then(resp => {
+          if (resp.ok && resp.type === 'basic') {
+            const clone = resp.clone();
+            caches.open(ASSET_CACHE).then(c => c.put(e.request, clone));
+          }
+          return resp;
+        }).catch(() => cached || Response.error());
+        // NIE index.html als Bild-Fallback liefern — lieber sauberer Netzwerkfehler
+        return cached || fetchPromise;
+      })
     );
     return;
   }
 
   // CDN-Bilder (questlog/fextralife): Stale-while-Revalidate
+  // Cross-Origin-Antworten ohne CORS sind 'opaque' (ok=false) — trotzdem cachen
   if (url.hostname.includes('questlog.gg') || url.hostname.includes('fextralifeimages.com') || url.hostname.includes('gamerantimages.com')) {
     e.respondWith(
       caches.match(e.request).then(cached => {
         const fetchPromise = fetch(e.request).then(r => {
-          if (r.ok) {
+          if (r.ok || r.type === 'opaque') {
             const clone = r.clone();
             caches.open(ASSET_CACHE).then(c => c.put(e.request, clone));
           }
           return r;
-        }).catch(() => cached);
+        }).catch(() => cached || Response.error());
         return cached || fetchPromise;
       })
     );

@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crimson Desert — Guide Dashboard</title>
-<meta name="description" content="Interaktives Guide-Dashboard für Crimson Desert: Bosse, Waffen, Skills, Rüstungen, Crafting, Quests und True-Ending-Checkliste.">
-<meta property="og:title" content="Crimson Desert — Guide Dashboard">
+<title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending</title>
+<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 97 Bosse, 500+ Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
+<link rel="canonical" href="https://crimson-desert-wiki.netlify.app/">
+<meta property="og:title" content="Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending">
 <meta property="og:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="cd_assets/bosses/umbra-final.jpg">
+<meta property="og:url" content="https://crimson-desert-wiki.netlify.app/">
+<meta property="og:site_name" content="Crimson Desert Wiki">
+<meta property="og:locale" content="de_DE">
+<meta property="og:image" content="https://crimson-desert-wiki.netlify.app/cd_assets/bosses/umbra-final.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
 <meta property="og:image:alt" content="Crimson Desert — Umbra Boss">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Crimson Desert — Guide Dashboard">
+<meta name="twitter:title" content="Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending">
 <meta name="twitter:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
-<meta name="twitter:image" content="cd_assets/bosses/umbra-final.jpg">
+<meta name="twitter:image" content="https://crimson-desert-wiki.netlify.app/cd_assets/bosses/umbra-final.jpg">
 <meta name="theme-color" content="#060606">
 <link rel="manifest" href="site.webmanifest">
 <script src="cd_assets/qrcode.js" defer></script>
@@ -29,16 +35,11 @@
   "@graph":[
     {
       "@type":"WebSite",
-      "name":"Crimson Desert — Guide Dashboard",
-      "description":"Interaktives Guide-Dashboard für Crimson Desert: Bosse, Waffen, Skills, Rüstungen, Crafting, Quests und True-Ending-Checkliste.",
+      "name":"Crimson Desert Wiki & Guide",
+      "description":"Deutsches Crimson Desert Wiki & Guide-Dashboard: Bosse, Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.",
       "inLanguage":"de-DE",
-      "url":"https://crimson-desert-website-wiki.netlify.app/",
-      "author":{"@type":"Person","name":"Christian Stein"},
-      "potentialAction":{
-        "@type":"SearchAction",
-        "target":"https://crimson-desert-website-wiki.netlify.app/#sec=bosses&q={search_term}",
-        "query-input":"required name=search_term"
-      }
+      "url":"https://crimson-desert-wiki.netlify.app/",
+      "author":{"@type":"Person","name":"Christian Stein"}
     },
     {
       "@type":"VideoGame",
@@ -56,12 +57,14 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://static0.fextralifeimages.com">
+<link rel="preconnect" href="https://cdn.questlog.gg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap">
 <style>
 :root, [data-theme="dark"]{
   --bg:#060606;--bg2:#0d0c0c;--bg3:#161414;--sb:#080605;
-  --red:#c0311f;--rhi:#e84535;--gold:#cc9f28;--gdim:#8f7020;--glo:#f4cc52;
-  --text:#ddd5cd;--dim:#5c5650;--bdr:#252222;
+  --red:#c0311f;--rhi:#e84535;--gold:#cc9f28;--gdim:#a07f2a;--glo:#f4cc52;
+  --text:#ddd5cd;--dim:#8a837c;--bdr:#252222;
   --card:#100f0f;--cardh:#181512;
   --warn:#d4742a;
   --shadow-r:0 0 24px rgba(192,57,43,.2);
@@ -78,8 +81,8 @@
 /* Sepia — warmer Tag-Modus */
 [data-theme="sepia"]{
   --bg:#1a140d;--bg2:#231c12;--bg3:#2c2316;--sb:#1d1610;
-  --red:#d04428;--rhi:#f05538;--gold:#e0b035;--gdim:#a8851f;--glo:#fcd870;
-  --text:#e8dcc2;--dim:#7a6e5c;--bdr:#3a2e1f;
+  --red:#d04428;--rhi:#f05538;--gold:#e0b035;--gdim:#b3933a;--glo:#fcd870;
+  --text:#e8dcc2;--dim:#9c8f7a;--bdr:#3a2e1f;
   --card:#221a10;--cardh:#2c2316;--warn:#e88934;
   --grd-sb:linear-gradient(170deg,#2a1c0e 0%,#1f1408 40%,#1a140d 100%);
   --grd-hd:linear-gradient(90deg,rgba(224,176,53,.13) 0%,transparent 70%);
@@ -140,6 +143,12 @@ body{
 }
 .sb-s{font-size:10px;color:var(--dim);margin-top:4px;letter-spacing:.05em}
 .sb-nav{padding:10px 0;flex:1}
+.nav-grp{
+  padding:14px 18px 5px;
+  font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gdim);user-select:none;
+}
+.nav-grp:first-child{padding-top:6px}
 .ni{
   display:flex;align-items:center;gap:11px;
   padding:10px 18px;
@@ -363,7 +372,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .te-it:last-child{border-bottom:none}
 .te-it:hover{background:rgba(255,255,255,.02)}
 .te-it.done .te-tx{text-decoration:line-through;color:var(--dim);opacity:.5}
-.chk{width:17px;height:17px;border:1.5px solid #2e2a2a;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all .15s}
+.chk{width:17px;height:17px;border:1.5px solid #555;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all .15s}
 .chk:hover{border-color:var(--gold)}
 .chk.on{background:linear-gradient(135deg,var(--gdim),var(--gold));border-color:var(--gold);box-shadow:0 0 8px rgba(201,162,39,.4)}
 .chk.on::after{content:'✓';font-size:10px;color:#000;font-weight:900}
@@ -768,7 +777,7 @@ tbody{contain:layout style}
 .cs-close{width:30px;height:30px;border-radius:7px;border:1px solid var(--bdr);background:transparent;color:var(--dim);font-size:14px;cursor:pointer}
 .cs-close:hover{color:var(--rhi);border-color:var(--rhi)}
 .cs-hint{font-size:11.5px;color:var(--dim);margin:6px 0 12px;line-height:1.5}
-.cs-tbl-wrap{max-height:60vh;overflow-y:auto;border:1px solid var(--bdr);border-radius:8px}
+.cs-tbl-wrap{max-height:60vh;overflow-y:auto;overflow-x:auto;border:1px solid var(--bdr);border-radius:8px}
 .cs-tbl{width:100%;border-collapse:collapse;font-size:12px}
 .cs-tbl th,.cs-tbl td{padding:6px 10px;text-align:left;border-bottom:1px solid var(--bdr)}
 .cs-tbl th{position:sticky;top:0;background:var(--bg3);color:var(--gold);font-size:10px;text-transform:uppercase;letter-spacing:.04em}
@@ -1052,10 +1061,17 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   #sidebar.open{transform:translateX(0)}
   .nlabel{display:inline}
   .sb-hd,.sb-ft{display:block}
-  .ni{padding:10px 18px;justify-content:flex-start}
+  .ni{padding:12px 18px;justify-content:flex-start}
   .grid{grid-template-columns:1fr}
   .sec{padding:18px 16px}
   #sbar{padding-left:60px}
+  /* iOS-Auto-Zoom verhindern: Inputs brauchen mind. 16px */
+  #si,#login-box input{font-size:16px}
+  /* Touch-Targets vergroessern */
+  .theme-btn{width:34px;height:34px;font-size:13px}
+  #ham{width:42px;height:42px}
+  /* Breite Tabellen scrollen statt das Layout zu sprengen */
+  .farm-tbl,.tools-table,.sim-cmp-tbl{display:block;overflow-x:auto}
 }
 
 /* ── Boss defeat tracking ── */
@@ -1063,14 +1079,14 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 .defeat-btn:hover{background:rgba(201,162,39,.14);border-color:rgba(201,162,39,.42);color:var(--gold)}
 .defeat-btn.on{background:rgba(201,162,39,.14);border-color:rgba(201,162,39,.6);color:var(--gold);box-shadow:0 0 8px rgba(201,162,39,.15)}
 .card.boss-done .boss-img,.card.boss-done .boss-img-ph{filter:grayscale(.5)brightness(.7)}
-.boss-done-badge{display:none;position:absolute;top:50px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:8.5px;font-weight:700;letter-spacing:.14em;color:var(--gold);background:rgba(0,0,0,.82);border:1px solid rgba(201,162,39,.5);border-radius:4px;padding:2px 9px;pointer-events:none;z-index:5;white-space:nowrap}
+.boss-done-badge{display:none;position:absolute;top:50px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:9.5px;font-weight:700;letter-spacing:.14em;color:var(--gold);background:rgba(0,0,0,.82);border:1px solid rgba(201,162,39,.5);border-radius:4px;padding:2px 9px;pointer-events:none;z-index:5;white-space:nowrap}
 .card.boss-done .boss-done-badge{display:block}
 
 /* ── Stats strip ── */
 .stats-strip{display:flex;flex-wrap:wrap;margin-bottom:18px;background:var(--card);border:1px solid var(--bdr);border-radius:12px;overflow:hidden}
 .stat-block{flex:1;min-width:120px;padding:14px 16px;position:relative}
 .stat-block+.stat-block{border-left:1px solid var(--bdr)}
-.stat-label{font-size:9.5px;color:var(--dim);letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}
+.stat-label{font-size:10px;color:var(--dim);letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px}
 .stat-val{font-size:28px;font-weight:700;color:var(--gold);font-family:'Cinzel',serif;line-height:1.1;text-shadow:0 0 20px rgba(201,162,39,.2)}
 .stat-sub{font-size:10px;color:var(--gdim);margin-top:3px}
 .stat-mini-bar{height:3px;background:#1e1e1e;border-radius:2px;margin-top:9px;overflow:hidden}
@@ -1084,7 +1100,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 .build-desc{font-size:11.5px;color:var(--dim);margin-bottom:13px;line-height:1.55}
 .build-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:7px;margin-bottom:11px}
 .build-slot{background:#151212;border:1px solid var(--bdr);border-radius:7px;padding:8px 11px}
-.bs-label{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px}
+.bs-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px}
 .bs-val{font-size:12px;color:var(--text);font-weight:600;line-height:1.5}
 .build-tip{padding:8px 11px;background:rgba(180,45,32,.08);border-left:2px solid rgba(192,57,43,.55);border-radius:0 6px 6px 0;font-size:11.5px;color:#c4bcb4;line-height:1.65;margin-top:2px}
 .build-tags{display:flex;gap:5px;margin-bottom:11px;flex-wrap:wrap}
@@ -1490,35 +1506,40 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 <nav id="sidebar" aria-label="Hauptnavigation">
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.10</div></div>
   <div class="sb-nav">
+    <div class="nav-grp">Kampf</div>
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
-    <div class="ni" data-sec="items" onclick="showSec('items')"><span class="nicon">🔮</span><span class="nlabel">Items</span></div>
+    <div class="ni" data-sec="skills" onclick="showSec('skills')"><span class="nicon">⚡</span><span class="nlabel">Skills</span></div>
+    <div class="ni" data-sec="disarm" onclick="showSec('disarm')"><span class="nicon">🛡️</span><span class="nlabel">Entwaffnen</span></div>
+    <div class="ni" data-sec="builds" onclick="showSec('builds')"><span class="nicon">⚙️</span><span class="nlabel">Builds</span></div>
+    <div class="ni" data-sec="witches" onclick="showSec('witches')"><span class="nicon">🧙</span><span class="nlabel">Hexen Guide</span></div>
+    <div class="nav-grp">Ausrüstung &amp; Items</div>
     <div class="ni" data-sec="weapons" onclick="showSec('weapons')"><span class="nicon">⚔️</span><span class="nlabel">Waffen</span></div>
     <div class="ni" data-sec="armor" onclick="showSec('armor')"><span class="nicon">🛡️</span><span class="nlabel">Rüstungen</span></div>
     <div class="ni" data-sec="cores" onclick="showSec('cores')"><span class="nicon">💎</span><span class="nlabel">Abyss Cores</span></div>
+    <div class="ni" data-sec="accessories" onclick="showSec('accessories')"><span class="nicon">💎</span><span class="nlabel">Accessoires</span></div>
+    <div class="ni" data-sec="items" onclick="showSec('items')"><span class="nicon">🔮</span><span class="nlabel">Items</span></div>
     <div class="ni" data-sec="crafting" onclick="showSec('crafting')"><span class="nicon">⚗️</span><span class="nlabel">Crafting &amp; Farming</span></div>
-    <div class="ni" data-sec="quests" onclick="showSec('quests')"><span class="nicon">📜</span><span class="nlabel">Quests &amp; Story</span></div>
+    <div class="ni" data-sec="dyes" onclick="showSec('dyes')"><span class="nicon">🎨</span><span class="nlabel">Dyes</span></div>
+    <div class="nav-grp">Welt &amp; Story</div>
     <div class="ni" data-sec="map" onclick="showSec('map')"><span class="nicon">🗺️</span><span class="nlabel">Interaktive Karte</span></div>
     <div class="ni" data-sec="locations" onclick="showSec('locations')"><span class="nicon">📍</span><span class="nlabel">Locations</span></div>
-    <div class="ni" data-sec="mounts" onclick="showSec('mounts')"><span class="nicon">🐴</span><span class="nlabel">Mounts</span></div>
-    <div class="ni" data-sec="skills" onclick="showSec('skills')"><span class="nicon">⚡</span><span class="nlabel">Skills</span></div>
-    <div class="ni" data-sec="disarm" onclick="showSec('disarm')"><span class="nicon">🛡️</span><span class="nlabel">Entwaffnen</span></div>
-    <div class="ni" data-sec="checklists" onclick="showSec('checklists')"><span class="nicon">☑️</span><span class="nlabel">Checklisten</span></div>
-    <div class="ni" data-sec="builds" onclick="showSec('builds')"><span class="nicon">⚙️</span><span class="nlabel">Builds</span></div>
-    <div class="ni" data-sec="accessories" onclick="showSec('accessories')"><span class="nicon">💎</span><span class="nlabel">Accessoires</span></div>
-    <div class="ni" data-sec="witches" onclick="showSec('witches')"><span class="nicon">🧙</span><span class="nlabel">Hexen Guide</span></div>
+    <div class="ni" data-sec="quests" onclick="showSec('quests')"><span class="nicon">📜</span><span class="nlabel">Quests &amp; Story</span></div>
     <div class="ni" data-sec="chapters" onclick="showSec('chapters')"><span class="nicon">📖</span><span class="nlabel">Kapitel-Guide</span></div>
+    <div class="ni" data-sec="mounts" onclick="showSec('mounts')"><span class="nicon">🐴</span><span class="nlabel">Mounts</span></div>
     <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
-    <div class="ni" data-sec="secrets" onclick="showSec('secrets')"><span class="nicon">🕵️</span><span class="nlabel">Secrets &amp; Lore</span></div>
     <div class="ni" data-sec="ruins" onclick="showSec('ruins')"><span class="nicon">🗿</span><span class="nlabel">Uralte Ruinen</span></div>
-    <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
-    <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
+    <div class="nav-grp">Sammeln &amp; Fortschritt</div>
+    <div class="ni" data-sec="checklists" onclick="showSec('checklists')"><span class="nicon">☑️</span><span class="nlabel">Checklisten</span></div>
     <div class="ni" data-sec="collectibles" onclick="showSec('collectibles')"><span class="nicon">📚</span><span class="nlabel">Collectibles</span></div>
     <div class="ni" data-sec="gatherables" onclick="showSec('gatherables')"><span class="nicon">🌿</span><span class="nlabel">Gatherables</span></div>
     <div class="ni" data-sec="puzzles" onclick="showSec('puzzles')"><span class="nicon">🧩</span><span class="nlabel">Rätsel</span></div>
-    <div class="ni" data-sec="dyes" onclick="showSec('dyes')"><span class="nicon">🎨</span><span class="nlabel">Dyes</span></div>
-    <div class="ni" data-sec="food" onclick="showSec('food')"><span class="nicon">🍲</span><span class="nlabel">Food & Elixirs</span></div>
-    <div class="ni" data-sec="roadmap" onclick="showSec('roadmap')"><span class="nicon">🧭</span><span class="nlabel">Roadmap</span></div>
+    <div class="ni" data-sec="food" onclick="showSec('food')"><span class="nicon">🍲</span><span class="nlabel">Food &amp; Elixirs</span></div>
+    <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Achievements</span></div>
     <div class="ni" data-sec="favorites" onclick="showSec('favorites')"><span class="nicon">⭐</span><span class="nlabel">Favoriten</span></div>
+    <div class="nav-grp">Meta</div>
+    <div class="ni" data-sec="secrets" onclick="showSec('secrets')"><span class="nicon">🕵️</span><span class="nlabel">Secrets &amp; Lore</span></div>
+    <div class="ni" data-sec="patches" onclick="showSec('patches')"><span class="nicon">📋</span><span class="nlabel">Patch-Notes</span></div>
+    <div class="ni" data-sec="roadmap" onclick="showSec('roadmap')"><span class="nicon">🧭</span><span class="nlabel">Roadmap</span></div>
   </div>
   <div id="sb-recent" style="display:none">
     <div id="sb-recent-hd">Zuletzt</div>
@@ -1869,7 +1890,8 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     </div>
     <div class="pane" id="clp-export">
       <div class="sub-t" style="margin-top:0">Fortschritt exportieren / importieren</div>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:12px">Exportiere deinen gesamten Fortschritt (Bosse, True Ending, Greymane, Waffen) als JSON. Kann jederzeit wieder importiert werden.</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:12px">Exportiere deinen kompletten Fortschritt (Bosse, True Ending, Greymane, Waffen, Missables, Kapitel, Favoriten, Notizen, Kommentare, eigene Builds) als JSON. Kann jederzeit wieder importiert werden.</div>
+      <div style="font-size:12px;color:var(--warn);margin-bottom:12px;line-height:1.6">⚠ Ohne Konto wird dein Fortschritt nur in diesem Browser gespeichert — Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren oder oben rechts anmelden (Cloud-Sync).</div>
       <div class="xp-row">
         <button class="xp-btn pri" onclick="exportProgress()">Fortschritt exportieren (JSON)</button>
         <button class="xp-btn" onclick="document.getElementById('import-file').click()">Fortschritt importieren</button>
@@ -2081,7 +2103,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-patches">
     <div class="sec-t">📋 Patch-Notes</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.10.00</span> (05.06.2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.10.01</span> (06.06.2026).</div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev Update, 02.06.2026). Schrittweiser Rollout Juni–September 2026 — noch keine versionierten Patch-Notes, Inhalte können sich bis Release ändern.</div>
@@ -2092,7 +2114,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
         <li><b>Cross-Save:</b> Account-Verknüpfung erlaubt das Teilen von Speicherständen über PC, PlayStation und Xbox.</li>
         <li><b>Damiane &amp; Oongka:</b> Gameplay-Verbesserungen, damit alle drei spielbaren Charaktere gleichwertig im Rampenlicht stehen.</li>
         <li><b>Non-Combat QoL:</b> Handel und Landwirtschaft werden komfortabler (träge Abläufe werden entschärft).</li>
-        <li><b>DLC bestätigt:</b> „bedeutsame Ergänzung deiner Reise" in Entwicklung — Details folgen später.</li>
+        <li><b>DLC bestätigt:</b> „bedeutsame Ergänzung deiner Reise" in Entwicklung — Details folgen später. Erstmals erwähnt am 12.05.2026 (Q1-Earnings, als Prüfung verschiedener Optionen inkl. DLC), offiziell bestätigt im Dev-Update vom 02.06.2026.</li>
       </ul>
     </div>
     <div id="patch-list"></div>
@@ -2120,6 +2142,34 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </div>
 </div>
 <script>
+// Robustes localStorage-JSON-Lesen: korrupte Eintraege duerfen die Seite nicht crashen
+function lsJson(key,fallback){
+  try{
+    const raw=localStorage.getItem(key);
+    if(raw==null)return fallback;
+    const v=JSON.parse(raw);
+    return v==null?fallback:v;
+  }catch(e){
+    console.warn('lsJson: korrupter Eintrag fuer',key,'— Fallback genutzt',e);
+    return fallback;
+  }
+}
+// Globale Fehler-Auffangnetze: Seite soll nie kommentarlos kaputt wirken
+function _errToast(msg){
+  const t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer=setTimeout(()=>{t.classList.remove('show');t.textContent='Kopiert!';},4000);
+}
+window.addEventListener('error',e=>{
+  console.error('Unerwarteter Fehler:',e.error||e.message);
+  _errToast('Hoppla — ein Teil der Seite hat einen Fehler. Details in der Konsole (F12).');
+});
+window.addEventListener('unhandledrejection',e=>{
+  console.error('Unbehandelte Promise-Rejection:',e.reason);
+});
 const BOSSES=[
   {name:"Matthias",chapter:2,region:"Hernand",quest:"Story - Hernand in Chaos",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry (Flurry-Ende)",strategy:"Watch & Learn: Pump Kick. Standard-Opener."},
   {name:"Kailok the Hornsplitter",chapter:2,region:"Hernand",quest:"End of Greed",drop_weapon:"Sword of the Lord",drop_abyss_gear:"Wind Slash",weakness:"–",parry_or_dodge:"Parry",strategy:"Shield + Force Palm. Slow but powerful hits."},
@@ -2660,17 +2710,12 @@ const WEAPONS=[
   {name:"Small Banner Pike",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:null,source:"Exploration / Basisbanner"},
   {name:"Damaged Medium Calphadean Banner Pike",type:"Halberd / Spear (2H)",atk:21,crit:null,slots:null,source:"Exploration / Feldbeute (Calphadean, beschädigt)"},
   {name:"Tiny Greymane Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:null,source:"Exploration / Feldbeute (Greymane, klein)"},
-  {name:"Small Delesyian Banner Pike",type:"Halberd / Spear (2H)",atk:27,crit:null,slots:null,source:"Exploration / Feldbeute (Delesyia)"},
-  {name:"Small Demenissian Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:"Exploration / Feldbeute (Demeniss)"},
   {name:"Small Royal Hunting Ground Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:null,source:"Exploration / Feldbeute (Royal Hunting Ground)"},
   {name:"Small Black Bears Banner Pike",type:"Halberd / Spear (2H)",atk:21,crit:null,slots:null,source:"Exploration / Feldbeute (Black Bears)"},
   {name:"Small Militia Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:null,source:"Exploration / Feldbeute (Militia)"},
-  {name:"Small Caliburn's Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:"Exploration / Feldbeute (Caliburn-Fraktion)"},
   {name:"Small Wells Brigade Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:"Exploration / Feldbeute (Wells Brigade)"},
-  {name:"Small Calphadean Banner Pike",type:"Halberd / Spear (2H)",atk:21,crit:null,slots:null,source:"Exploration / Feldbeute (Calphadean)"},
   {name:"Anti-Caliburn Signboard",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:"Antumbra-Gebiet / Exploration"},
   {name:"Antumbra Sign",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:null,source:"Antumbra-Gebiet / Exploration"},
-  {name:"Small Vellua Pirates Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:null,source:"Exploration / Feldbeute (Vellua Pirates)"},
   {name:"Black Bears Banner Pike with Tassel",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:null,source:"Exploration / Feldbeute (Black Bears, mit Quaste)"},
   {name:"Balton Longsword",type:"Greatsword (2H)",atk:43,crit:null,slots:null,source:"Balton-Region / Exploration"},
   {name:"Delesyian Ornamental Shield",type:"Shield",atk:14,crit:25,slots:null,source:"Delesyia / Händler"},
@@ -2903,6 +2948,7 @@ const ARMOR=[
   {name:"Light of the Battlefield Plate Gloves",type:"Hände",source:"Legendary Warrior Drop",effect:"Plate, Def+12",notes:""},
   {name:"Plate Gloves of Cursed Soul",type:"Hände",source:"Cursed Boss Drop",effect:"Plate, keine belegten Combat-Stats (Def-Wert unbestätigt)",notes:"Cursed Soul Set"},
   {name:"Plate Gloves of the Shadows",type:"Hände",source:"Shadow's Whisper Cave",effect:"Plate, keine belegten Combat-Stats (Def-Wert unbestätigt)",notes:"Shadows-Set"},
+  {name:"Plate Boots of the Shadows",type:"Schuhe",source:"Welt-Drop (Fundort unbestätigt)",effect:"Plate, liefert Abyss-Core 'Aptitude I' (+10% Skill XP)",notes:"Shadows-Set"},
   {name:"Scorchflame Plate Gloves",type:"Hände",source:"West-Demeniss (Scorchflame-Set)",effect:"Plate, Fire Resist (Lv), Abyss-Core-Sockel",notes:"Fire-Buff Fokus"},
   {name:"Ynitium Leather Gloves",type:"Hände",source:"Ynitium Mines / Crafting",effect:"Leather, keine belegten Combat-Stats (Def-Wert unbestätigt)",notes:""},
 
@@ -3660,7 +3706,6 @@ const BOSS_IMGS_CDN={
   "Awakened Lucian Bastier":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp",
   "Awakened Ludvig":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ludvig.webp",
   "Beloth the Darksworn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_darkking.webp",
-  "Black Fang":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp",
   "Corrupted Caliburn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_boss_caliburn_awakening.webp",
   "Draven the Crowcaller":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_draven.webp",
   "Fortain the Cursed Knight":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_fortainthehexboundknight.webp",
@@ -3676,7 +3721,6 @@ const BOSS_IMGS_CDN={
   "Matthias":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_matthias.webp",
   "Myurdin (Phase 1)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_myordin.webp",
   "One-Armed Ludvig":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ludvig.webp",
-  "Priscus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp",
   "Reed Devil":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_reeddevil.webp",
   "Saigord the Staglord":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_deerking.webp",
   "Umbra (Final)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_umbra_boss.webp",
@@ -4070,8 +4114,6 @@ const WEAPON_IMGS={
   "Small Greymane Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/ca/Small_greymane_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Caliburn's Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/e1/Small_caliburn_s_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Demenissian Noble's Banner":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/bb/Small_demenissian_noble_s_banner_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Demenissian Noble's Banner":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/bb/Small_demenissian_noble_s_banner_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Demenissian Noble's Banner":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/bb/Small_demenissian_noble_s_banner_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Flame Knights Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/6/66/Small_flame_knights_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Dewhaven Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/12/Small_dewhaven_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Heavy Silence Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/b/ba/Small_heavy_silence_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
@@ -4111,15 +4153,10 @@ const WEAPON_IMGS={
   "Small Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/86/Small_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Damaged Medium Calphadean Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/12/Damaged_medium_calphadean_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Tiny Greymane Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/5f/Tiny_greymane_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Delesyian Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/e8/Small_delesyian_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Demenissian Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/ea/Small_demenissian_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Royal Hunting Ground Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/7/73/Small_royal_hunting_ground_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Militia Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/a1/Small_militia_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Caliburn's Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/e1/Small_caliburn_s_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Small Wells Brigade Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/f/f9/Small_wells_brigade_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Calphadean Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/e/ea/Small_calphadean_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Anti-Caliburn Signboard":"https://static0.fextralifeimages.com/file/crimsondesertgame/a/a1/Anti_caliburn_signboard_weapons_crimson_desert_wiki_guide_150px.png",
-  "Small Vellua Pirates Banner Pike":"https://static0.fextralifeimages.com/file/crimsondesertgame/5/57/Small_vellua_pirates_banner_pike_weapons_crimson_desert_wiki_guide_150px.png",
   "Black Bears Banner Pike with Tassel":"https://static0.fextralifeimages.com/file/crimsondesertgame/8/89/Black_bears_banner_pike_with_tassel_weapons_crimson_desert_wiki_guide_150px.png",
   "Balton Longsword":"https://static0.fextralifeimages.com/file/crimsondesertgame/1/12/Balton_longsword_weapons_crimson_desert_wiki_guide_150px.png",
   "Delesyian Ornamental Shield":"https://static0.fextralifeimages.com/file/crimsondesertgame/9/9e/Delesyian_ornamental_shield_shields_crimson_desert_wiki_guide_150px.png",
@@ -4524,7 +4561,7 @@ const MOUNT_IMGS={
   "Kuku Bird Hatchling":      "cd_assets/mounts/kuku-bird-hatchling.webp",
   "Lion":                     "cd_assets/mounts/lion.webp",
   "Tiger":                    "cd_assets/mounts/tiger.webp",
-  "Raptor":                   "cd_assets/mounts/raptor.webp",
+  "Red-Feathered Raptor":     "cd_assets/mounts/raptor.webp",
   "Cloudcart":                "cd_assets/mounts/cloudcart.webp",
   "Wagon Horse":              "cd_assets/mounts/wagon-horse.webp",
   "Train":                    "cd_assets/mounts/train.webp",
@@ -4550,7 +4587,7 @@ const MOUNT_INGAME_IMGS={
   "Cow":            "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_bull_wild_32217.webp",
   "Elephant":       "https://static0.fextralifeimages.com/file/crimsondesertgame/5/5d/Elephant-mount-crimson-desert-wiki-guide.png",
   "Greywolf":       "https://static0.fextralifeimages.com/file/crimsondesertgame/f/fb/Greywolf-mount-crimson-desert-wiki-guide.png",
-  "Raptor":         "https://static.beebom.com/wp-content/uploads/2026/03/Crimson-Desert-Raptor-mount.jpg",
+  "Red-Feathered Raptor": "https://static.beebom.com/wp-content/uploads/2026/03/Crimson-Desert-Raptor-mount.jpg",
   "Cloudcart":      "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_riding_airballoon.webp",
   "Wagon Horse":    "https://static0.fextralifeimages.com/file/crimsondesertgame/2/23/Wagon-horse-mount-crimson-desert-wiki-guide.png",
   "Train":          "https://static0.fextralifeimages.com/file/crimsondesertgame/5/5c/Train-vehicle-mount-crimson-desert-wiki-guide.png",
@@ -4662,6 +4699,7 @@ const ARMOR_IMGS={
   "Light of the Battlefield Plate Gloves":"cd_assets/armor/light-battlefield-gloves.webp",
   "Plate Gloves of Cursed Soul":"cd_assets/armor/plate-gloves-cursed-soul.webp",
   "Plate Gloves of the Shadows":"cd_assets/armor/plate-gloves-shadows.webp",
+  "Plate Boots of the Shadows":"cd_assets/armor/plate-boots-shadows.webp",
   "Scorchflame Plate Gloves":"cd_assets/armor/scorchflame-gloves.webp",
   "Ynitium Leather Gloves":"cd_assets/armor/ynitium-gloves.webp",
   // Schuhe
@@ -4902,7 +4940,6 @@ const ARMOR_IMGS={
   "Frozen Heart Plate Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_foot_00_0362.webp",
   "Valortread Plate Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0439.webp",
   "Cow Cloak":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_00_0420_v.webp",
-  "KuKu Rocket Helmet - Equipped by Default":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_.webp",
   "Valortread Plate Cloak":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_00_0439_s.webp",
   "Valortread Plate Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_00_0439.webp",
   "Belkandor Plate Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_00_0440.webp",
@@ -5338,7 +5375,7 @@ function renderQuestTimeline(){
   if(typeof MAIN_QUESTS==='undefined')return;
   const target=document.getElementById('qst-hero');
   if(!target)return;
-  const doneRaw=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
+  const doneRaw=lsJson('cd_ch_done',[]);
   target.innerHTML=`<div class="qst-rail">${MAIN_QUESTS.map((c,i)=>{
     const num=c.ch;
     const isNum=/^\d+$/.test(num);
@@ -5358,7 +5395,7 @@ function renderQuestTimeline(){
 }
 
 // ===== BOSS DIFFICULTY RATING =====
-function loadBossRatings(){return JSON.parse(localStorage.getItem('cd_boss_ratings')||'{}');}
+function loadBossRatings(){return lsJson('cd_boss_ratings',{});}
 function saveBossRating(name,rating){
   const r=loadBossRatings();
   if(rating&&rating>0&&rating<=5)r[name]=rating;
@@ -5414,7 +5451,7 @@ function comboChips(name){
 }
 
 // ===== BOSS ATTEMPT LOG =====
-function loadBossAttempts(){return JSON.parse(localStorage.getItem('cd_boss_attempts')||'{}');}
+function loadBossAttempts(){return lsJson('cd_boss_attempts',{});}
 function bumpBossAttempt(name,delta){
   const a=loadBossAttempts();
   const v=Math.max(0,(a[name]||0)+delta);
@@ -5613,9 +5650,9 @@ function renderRoadmap(){
   const cont=document.getElementById('rm-list');
   if(!cont)return;
   const bossDone=loadBossDone();
-  const gmDone=JSON.parse(localStorage.getItem('cd_gm')||'[]');
-  const teDone=JSON.parse(localStorage.getItem('cd_te')||'[]');
-  const chDone=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
+  const gmDone=lsJson('cd_gm',[]);
+  const teDone=lsJson('cd_te',[]);
+  const chDone=lsJson('cd_ch_done',[]);
 
   // Progress-Header
   const progressEl=document.getElementById('rm-progress');
@@ -5650,7 +5687,7 @@ function renderRoadmap(){
   // 2. Missable warnings basierend auf chDone (welches Kapitel der User schon hat)
   const lastCh=chDone.length>0?Math.max(...chDone):0;
   if(lastCh===0||lastCh<1){
-    tasks.push({prio:'hi',title:'Watch & Learn: Pump Kick',desc:'NUR bei Matthias-Boss (Kapitel 1) erlernbar — MISSABLE! Wenn übersprungen für immer weg.',meta:['Kapitel 1','Skill Unarmed Combat'],action:"showSec('skills');skTab('watch')"});
+    tasks.push({prio:'hi',title:'Watch & Learn: Pump Kick',desc:'NUR bei Matthias-Boss (Kapitel 2, Quest Hernand in Chaos) erlernbar — MISSABLE! Wenn übersprungen für immer weg.',meta:['Kapitel 2','Skill Unarmed Combat'],action:"showSec('skills');skTab('watch')"});
   }
   if(lastCh>=3&&lastCh<4){
     tasks.push({prio:'md',title:'Watch & Learn: Focused Force Palm',desc:'Geist-NPC westlich Fort Perwin — MISSABLE bei falschem Weg in "On the Right Path".',meta:['Kapitel 4','Spirit Tree'],action:"showSec('skills');skTab('watch')"});
@@ -5846,9 +5883,9 @@ const CRESSET_REGIONS=[
 ];
 const CRESSET_TOTAL=60;
 
-function loadFrTracker(){return JSON.parse(localStorage.getItem('cd_fr_tracker')||'{}');}
+function loadFrTracker(){return lsJson('cd_fr_tracker',{});}
 function saveFrTracker(d){localStorage.setItem('cd_fr_tracker',JSON.stringify(d));}
-function loadCrTracker(){return JSON.parse(localStorage.getItem('cd_cr_tracker')||'{}');}
+function loadCrTracker(){return lsJson('cd_cr_tracker',{});}
 function saveCrTracker(d){localStorage.setItem('cd_cr_tracker',JSON.stringify(d));}
 
 function _trackerSet(kind,region,val){
@@ -6331,7 +6368,7 @@ const FAV_KINDS={
   mount:{ico:'🐴',label:'Mounts',pl:'Mounts'},
   build:{ico:'⚙️',label:'Builds',pl:'Builds'}
 };
-function loadFavs(){return JSON.parse(localStorage.getItem('cd_favs')||'{}');}
+function loadFavs(){return lsJson('cd_favs',{});}
 function saveFavs(d){localStorage.setItem('cd_favs',JSON.stringify(d));}
 function isFav(kind,name){
   const f=loadFavs();
@@ -6429,7 +6466,7 @@ function _favItemCard(kind,name){
 }
 
 // ===== RECENTLY-VIEWED =====
-function loadRecent(){return JSON.parse(localStorage.getItem('cd_recent')||'[]');}
+function loadRecent(){return lsJson('cd_recent',[]);}
 function trackRecent(entry){
   // entry: {kind, name, sec}
   let r=loadRecent().filter(x=>!(x.kind===entry.kind&&x.name===entry.name));
@@ -6516,7 +6553,7 @@ function renderItemCompare(){
 }
 
 // ===== EIGENE BUILDS SPEICHERN =====
-function loadSavedBuilds(){return JSON.parse(localStorage.getItem('cd_saved_builds')||'[]');}
+function loadSavedBuilds(){return lsJson('cd_saved_builds',[]);}
 function saveBuildPreset(){
   if(!_boState.style||!_boState.phase)return alert('Wähle Stil und Phase, bevor du speicherst.');
   const key=_boState.style+'-'+_boState.phase;
@@ -6569,7 +6606,7 @@ function renderSavedBuilds(){
         const dt=new Date(b.saved||Date.now()).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});
         return `<div class="bo-saved-card">
           <div class="bo-saved-info">
-            <div class="bo-saved-name">${style?style.ico:''} ${b.name}</div>
+            <div class="bo-saved-name">${style?style.ico:''} ${esc(b.name)}</div>
             <div class="bo-saved-meta">${style?style.name:'?'} · ${phase?phase.l:'?'} · ${dt}</div>
           </div>
           <div class="bo-saved-actions">
@@ -6720,17 +6757,17 @@ const ACHIEVEMENTS=[
   {id:'abyss-walker',ico:'🌑',name:'Abyss-Walker',desc:'Alle Abyss-Bosse besiegt',check:()=>{const reg=BOSSES.filter(b=>b.region.includes('Abyss'));return reg.length>0&&reg.every(b=>loadBossDone().includes(b.name));}},
   {id:'note-writer',ico:'📝',name:'Strategist',desc:'Schreibe 5 eigene Boss-Notizen',check:()=>Object.keys(loadBossNotes()).length>=5,prog:()=>Math.min(Object.keys(loadBossNotes()).length/5,1)},
   {id:'note-master',ico:'📚',name:'Bibliothekar',desc:'Schreibe 15 eigene Boss-Notizen',check:()=>Object.keys(loadBossNotes()).length>=15,prog:()=>Math.min(Object.keys(loadBossNotes()).length/15,1)},
-  {id:'greymane-done',ico:'🐺',name:'Grey Wolf',desc:'Alle 27 Greymane-Commissions abgeschlossen',check:()=>{const gm=JSON.parse(localStorage.getItem('cd_gm')||'[]');return gm.length>=27;},prog:()=>{const gm=JSON.parse(localStorage.getItem('cd_gm')||'[]');return Math.min(gm.length/27,1);}},
-  {id:'sanc-master',ico:'🏛️',name:'Sanctum-Pilger',desc:'Alle Sanctums abgeschlossen (16 im Spiel; echte Trophy: "Lightbringer")',check:()=>{if(typeof SANCTUM_IDS==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return SANCTUM_IDS.every(s=>te.includes(s));},prog:()=>{if(typeof SANCTUM_IDS==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(SANCTUM_IDS.filter(s=>te.includes(s)).length/Math.max(SANCTUM_IDS.length,1),1);}},
-  {id:'true-ending',ico:'⭐',name:'True Ending Hunter',desc:'Alle True-Ending-Pflichten abgehakt',check:()=>{if(typeof TRUE_ENDING==='undefined')return false;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return TRUE_ENDING.length>0&&TRUE_ENDING.every(t=>te.includes(t.id));},prog:()=>{if(typeof TRUE_ENDING==='undefined')return 0;const te=JSON.parse(localStorage.getItem('cd_te')||'[]');return Math.min(te.length/TRUE_ENDING.length,1);}},
-  {id:'chapter-done',ico:'📖',name:'Storyteller',desc:'Alle 12 Kapitel abgeschlossen',check:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return d.length>=12;},prog:()=>{const d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');return Math.min(d.length/12,1);}},
-  {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return seen.length>=3;},prog:()=>{const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');return Math.min(seen.length/3,1);}},
+  {id:'greymane-done',ico:'🐺',name:'Grey Wolf',desc:'Alle 27 Greymane-Commissions abgeschlossen',check:()=>{const gm=lsJson('cd_gm',[]);return gm.length>=27;},prog:()=>{const gm=lsJson('cd_gm',[]);return Math.min(gm.length/27,1);}},
+  {id:'sanc-master',ico:'🏛️',name:'Sanctum-Pilger',desc:'Alle Sanctums abgeschlossen (16 im Spiel; echte Trophy: "Lightbringer")',check:()=>{if(typeof SANCTUM_IDS==='undefined')return false;const te=lsJson('cd_te',[]);return SANCTUM_IDS.every(s=>te.includes(s));},prog:()=>{if(typeof SANCTUM_IDS==='undefined')return 0;const te=lsJson('cd_te',[]);return Math.min(SANCTUM_IDS.filter(s=>te.includes(s)).length/Math.max(SANCTUM_IDS.length,1),1);}},
+  {id:'true-ending',ico:'⭐',name:'True Ending Hunter',desc:'Alle True-Ending-Pflichten abgehakt',check:()=>{if(typeof TRUE_ENDING==='undefined')return false;const te=lsJson('cd_te',[]);return TRUE_ENDING.length>0&&TRUE_ENDING.every(t=>te.includes(t.id));},prog:()=>{if(typeof TRUE_ENDING==='undefined')return 0;const te=lsJson('cd_te',[]);return Math.min(te.length/TRUE_ENDING.length,1);}},
+  {id:'chapter-done',ico:'📖',name:'Storyteller',desc:'Alle 12 Kapitel abgeschlossen',check:()=>{const d=lsJson('cd_ch_done',[]);return d.length>=12;},prog:()=>{const d=lsJson('cd_ch_done',[]);return Math.min(d.length/12,1);}},
+  {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=lsJson('cd_themes_seen',[]);return seen.length>=3;},prog:()=>{const seen=lsJson('cd_themes_seen',[]);return Math.min(seen.length/3,1);}},
   {id:'secrets-visited',ico:'🕵️',name:'Run 108',desc:'Besuche die Secrets-Section (Hidden-Ending-Lore)',check:()=>!!localStorage.getItem('cd_secrets_visited')},
   {id:'pilgrim',ico:'🏆',name:'Pilgrim of Wonders',desc:'Alle 60 Abyss Cressets entdeckt',check:()=>typeof _crTotal==='function'&&_crTotal()>=60,prog:()=>typeof _crTotal==='function'?Math.min(_crTotal()/60,1):0},
   {id:'fragment-half',ico:'📜',name:'Memory-Sammler',desc:'100+ Memory Fragments entdeckt',check:()=>typeof _frTotal==='function'&&_frTotal()>=100,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/100,1):0},
   {id:'fragment-master',ico:'🧠',name:'Visione-Master',desc:'Alle 201 Memory Fragments entdeckt',check:()=>typeof _frTotal==='function'&&_frTotal()>=201,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/201,1):0}
 ];
-function loadAchUnlocked(){return JSON.parse(localStorage.getItem('cd_ach_unlocked')||'[]');}
+function loadAchUnlocked(){return lsJson('cd_ach_unlocked',[]);}
 function checkAchievements(silent){
   const prev=loadAchUnlocked();
   const next=[...prev];
@@ -6799,7 +6836,7 @@ const _origSetTheme = (typeof setTheme==='function')?setTheme:null;
 if(_origSetTheme){
   window.setTheme=function(t){
     _origSetTheme(t);
-    const seen=JSON.parse(localStorage.getItem('cd_themes_seen')||'[]');
+    const seen=lsJson('cd_themes_seen',[]);
     if(!seen.includes(t)){seen.push(t);localStorage.setItem('cd_themes_seen',JSON.stringify(seen));checkAchievements();}
   };
 }
@@ -6932,7 +6969,7 @@ function renderSkillGraph(which){
 }
 
 // ===== CUSTOM BOSS NOTES =====
-function loadBossNotes(){return JSON.parse(localStorage.getItem('cd_boss_notes')||'{}');}
+function loadBossNotes(){return lsJson('cd_boss_notes',{});}
 function saveBossNote(name,text){
   const n=loadBossNotes();
   if(text&&text.trim())n[name]=text.trim();
@@ -6994,17 +7031,20 @@ function showSec(id, opts){
   }
   if(id==='weapons'&&typeof renderWeapons==='function')renderWeapons();
   localStorage.setItem('cd_sec',id);
-  if(!opts.skipUrl)_writeUrlState();
+  if(!opts.skipUrl)_writeUrlState(true);
   // Schliesse Sidebar auf Mobile nach Klick
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('mob-overlay').classList.remove('show');
-  document.getElementById('main').scrollTop=0;
+  window.scrollTo({top:0});
 }
 
 // ── URL-State (hash-basiert) ──────────────────────────────────────
 function _readUrlState(){
   const h=location.hash.replace(/^#/,'');
   if(!h)return{};
+  // Klassische Anker-Links wie #sec-bosses weiterhin unterstuetzen
+  const legacy=h.match(/^sec-([a-z0-9-]+)$/);
+  if(legacy)return{sec:legacy[1]};
   const p={};
   h.split('&').forEach(kv=>{
     const [k,v]=kv.split('=');
@@ -7012,14 +7052,17 @@ function _readUrlState(){
   });
   return p;
 }
-function _writeUrlState(){
+function _writeUrlState(pushEntry){
   const sec=localStorage.getItem('cd_sec')||'bosses';
   const q=document.getElementById('si').value.trim();
   const parts=['sec='+encodeURIComponent(sec)];
   if(q)parts.push('q='+encodeURIComponent(q));
   const newHash='#'+parts.join('&');
   if(location.hash!==newHash){
-    history.replaceState(null,'',newHash);
+    // Sektionswechsel = neuer History-Eintrag (Browser-Back springt zur vorherigen Sektion);
+    // reine Suchtext-Updates und der allererste Load ersetzen nur
+    if(pushEntry&&location.hash)history.pushState(null,'',newHash);
+    else history.replaceState(null,'',newHash);
   }
 }
 function _applyUrlState(){
@@ -7234,24 +7277,49 @@ function _doSearchImpl(q){
   matchedForHL.forEach(el=>highlightInElement(el,q));
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
   {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
-  // Empty-State
+  // Empty-State — mit sektionsuebergreifendem Fallback ("Alles durchsuchen" einloesen)
   document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
   if(total===0&&activeSec){
+    const other=_searchOtherSections(qLow,activeSec);
+    const chips=other.map(o=>`<button class="empty-state-action" style="margin:3px 4px" onclick="_searchJump('${o.key}')">${o.label} (${o.count})</button>`).join('');
     const es=document.createElement('div');
     es.className='empty-state empty-state-injected';
     es.innerHTML=`
       <span class="empty-state-icon">🔍</span>
-      <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}"</div>
-      <div class="empty-state-desc">Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>
-      <button class="empty-state-action" onclick="document.getElementById('si').value='';doSearch('');document.getElementById('si').focus()">Suche zurücksetzen</button>
+      <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}" in dieser Sektion</div>
+      ${other.length
+        ?`<div class="empty-state-desc">Aber in anderen Sektionen gefunden — direkt hinspringen:</div><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px;max-width:560px;margin:0 auto">${chips}</div>`
+        :`<div class="empty-state-desc">Auch in den anderen Sektionen nichts gefunden. Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>`}
+      <button class="empty-state-action" style="margin-top:10px;opacity:.75" onclick="document.getElementById('si').value='';doSearch('');document.getElementById('si').focus()">Suche zurücksetzen</button>
     `;
     activeSec.appendChild(es);
   }
 }
+// Zaehlt Treffer in allen nicht-aktiven Sektionen (Top 8, absteigend)
+function _searchOtherSections(qLow,activeSec){
+  const out=[];
+  document.querySelectorAll('.sec').forEach(sec=>{
+    if(sec===activeSec)return;
+    let count=0;
+    sec.querySelectorAll('[data-s]').forEach(el=>{if(el.dataset.s.includes(qLow))count++;});
+    if(!count)return;
+    const key=sec.id.replace(/^sec-/,'');
+    const nav=document.querySelector('[data-sec="'+key+'"]');
+    const label=nav?nav.textContent.trim():key;
+    out.push({key,label,count});
+  });
+  out.sort((a,b)=>b.count-a.count);
+  return out.slice(0,8);
+}
+function _searchJump(secId){
+  showSec(secId,{keepSearch:true});
+  const si=document.getElementById('si');
+  if(si)_doSearchImpl(si.value);
+}
 const doSearch=_debounce(_doSearchImpl,120);
 
 // ===== BOSSES =====
-function loadBossDone(){return JSON.parse(localStorage.getItem('cd_bosses')||'[]');}
+function loadBossDone(){return lsJson('cd_bosses',[]);}
 function saveBossDone(a){localStorage.setItem('cd_bosses',JSON.stringify(a));updateStats();}
 // Throttled side-effects nach Boss-Done — verhindert Render-Stuttering bei schnellen Klicks
 const _afterBossAction=_throttle(()=>{
@@ -7414,7 +7482,7 @@ function renderBosses(){
     const safeName=b.name.replace(/'/g,"\\'");
     const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge,notes[b.name]||''].join(' ').toLowerCase();
     const _spLock=sp>0&&b.chapter!=null&&b.chapter>sp;
-    return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-s="${s}">
+    return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-s="${esc(s)}">
       ${_spLock?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${b.chapter} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
       <div class="boss-done-badge">BESIEGT</div>
       ${favBtn('boss',b.name)}
@@ -7535,7 +7603,7 @@ function renderCores(){
     const esc=n=>n.replace(/'/g,"\\'");
     return `<tr class="trow${show?'':' hide'}" data-s="${s}">
       <td><div style="display:flex;align-items:center;gap:8px">
-        ${ico?`<img src="${ico}" onerror="this.style.display='none'" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
+        ${ico?`<img src="${ico}" loading="lazy" decoding="async" alt="" onerror="this.style.display='none'" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
         <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${esc(c.name)}')" onmouseleave="hideCoreVid()">▶</span>`:''}
       </div></td>
       <td>${c.effect}${coreTierStrip(c.name)}</td>
@@ -7601,7 +7669,7 @@ function renderCrafting(){
 }
 
 // ===== TRUE ENDING =====
-function loadTE(){return JSON.parse(localStorage.getItem('cd_te')||'[]')}
+function loadTE(){return lsJson('cd_te',[])}
 function saveTE(a){
   localStorage.setItem('cd_te',JSON.stringify(a));
   if(window._authUser){
@@ -7765,7 +7833,7 @@ function renderArmor(){
     const esc=v=>v.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     const srcDisp=a.source&&a.source.trim()?a.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     return `<div class="card${show?'':' hide'}" data-s="${s}">
-      ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
+      ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${a.name}</div>
       <div class="cm"><span class="tag ${typeColor}">${a.type}</span></div>
       <div class="crows">
@@ -7788,7 +7856,7 @@ const ARMOR_SETS=[
   {name:"Light of the Battlefield",color:"#3a5a1a",desc:"Mid-Game Plate-Set mit hohen Defensivwerten.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Light of the Battlefield Plate Armor","Light of the Battlefield Plate Helm","Light of the Battlefield Plate Gloves","Light of the Battlefield Plate Boots"]},
   {name:"Unyielding Warrior Set",color:"#5a3a0a",desc:"Endgame Plate-Set, defensiv ausgerichtet.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Unyielding Warrior's Plate Armor","Unyielding Warrior's Plate Helm"]},
   {name:"Cursed Soul Set",color:"#5a1a6a",desc:"Dark-Themen-Set.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Armor of Cursed Soul","Plate Helm of Cursed Soul","Plate Gloves of Cursed Soul"]},
-  {name:"Shadows Set",color:"#2a2a3a",desc:"Shadow-Themen-Set für Assassin-Optik.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Armor of the Shadows","Plate Gloves of the Shadows"]},
+  {name:"Shadows Set",color:"#2a2a3a",desc:"Shadow-Themen-Set für Assassin-Optik.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Armor of the Shadows","Plate Helm of the Shadows","Plate Gloves of the Shadows","Plate Boots of the Shadows","Plate Cloak of the Shadows"]},
   {name:"Hernand Guard Set",color:"#1a4a1a",desc:"Hernand-Fraktions-Set aus der Palast-Questlinie.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Hernand Ceremonial Guard Armor","Hernand Ceremonial Guard Gloves","Hernand Ceremonial Guard Boots"]},
   {name:"Canta Plate Set",color:"#1a3a5a",desc:"Mid-Game Plate-Set; Teile beim Händler Rhett (Hernand Town, neben der Schmiede).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Canta Plate Armor","Canta Plate Helm","Canta Plate Gloves","Canta Plate Boots"]},
   {name:"Hernandian Banquet Set",color:"#5a4a0a",desc:"Food-/Bankett-Themen-Set.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Hernandian Banquet Cloak","Autumn Banquet Leather Boots"]},
@@ -7812,7 +7880,7 @@ function renderArmorSets(){
 function mountCard(m){
   const sig=m.type.includes('Sigil');
   const badge=m.type==='Drache'?'tw':sig?'tg':m.type.startsWith('Fahrzeug')?'tx':'tr';
-  const img=MOUNT_IMGS[m.name];
+  const img=MOUNT_IMGS[m.name]||MOUNT_INGAME_IMGS[m.name];
   const s=[m.name,m.type,m.unlock,m.stats,m.notes].join(' ').toLowerCase();
   return `<div class="card" data-s="${s}">
     ${favBtn('mount',m.name)}
@@ -7929,7 +7997,7 @@ function renderUnlockTable(){
     visible.map(s=>{
       const miss=isMiss(s);
       const treeTag=s.tree==='Stamina'?'tr':s.tree==='Geist'?'tg':'tw';
-      const icon=SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" alt="${s.name} Icon" style="vertical-align:middle;margin-right:5px">`:`<span class="sk-ico-ph" aria-hidden="true" style="margin-right:5px">✦</span>`;      const ds=[s.name,s.char,s.tree,s.prereq,s.cost].join(' ').toLowerCase();
+      const icon=SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" loading="lazy" decoding="async" onerror="this.style.display='none'" alt="${s.name} Icon" style="vertical-align:middle;margin-right:5px">`:`<span class="sk-ico-ph" aria-hidden="true" style="margin-right:5px">✦</span>`;      const ds=[s.name,s.char,s.tree,s.prereq,s.cost].join(' ').toLowerCase();
       return `<tr data-s="${ds}">
         <td><span class="tag tx">${s.char}</span></td>
         <td><span class="tag ${treeTag}">${s.tree}</span></td>
@@ -8056,7 +8124,7 @@ const MISSABLE_ITEMS=[
   {id:'ms14',cat:'True Ending',name:'Axiom Archive Records lesen',when:'Nach Freischalten — The Abyss (3. Stock)',tip:'Audit 2026-06-02: 6 Archive-Record-Bücher im Axiom ARCHIVE (nicht 3, nicht "Library"); werden NACH dem Freischalten gelesen (Lore), sind NICHT das Gate. True-Ending-Gate = alle Hauptquests + alle 40 Abyss-Challenges (vulkk/PowerPyx).'},
   {id:'ms15',cat:'True Ending',name:'SAVE vor Kap. 12 Gate',when:'Kap. 12 — vor The Abyss Gate',tip:'Kein Checkpoint danach bis Umbra besiegt. Tod = kompletter Boss-Gauntlet von vorne.'},
 ];
-function loadMissDone(){return JSON.parse(localStorage.getItem('cd_ms')||'[]');}
+function loadMissDone(){return lsJson('cd_ms',[]);}
 function saveMissDone(a){localStorage.setItem('cd_ms',JSON.stringify(a));}
 function toggleMissable(id){
   let d=loadMissDone();
@@ -8065,7 +8133,7 @@ function toggleMissable(id){
 }
 
 // ===== GREYMANE =====
-function loadGM(){return JSON.parse(localStorage.getItem('cd_gm')||'[]');}
+function loadGM(){return lsJson('cd_gm',[]);}
 function saveGM(a){localStorage.setItem('cd_gm',JSON.stringify(a));updateStats();}
 function toggleGM(id){
   let d=loadGM();
@@ -8175,7 +8243,7 @@ function renderSanctumChecklist(){
 }
 
 // ===== WEAPON CHECKLIST =====
-function loadWepDone(){return JSON.parse(localStorage.getItem('cd_wep')||'[]');}
+function loadWepDone(){return lsJson('cd_wep',[]);}
 function saveWepDone(a){localStorage.setItem('cd_wep',JSON.stringify(a));updateStats();}
 function toggleWep(name){
   let d=loadWepDone();
@@ -8190,7 +8258,7 @@ function renderWeaponChecklist(){
   const types=[...new Set(WEAPONS.map(w=>w.type))];
   const itemHtml=w=>`<div class="comm-it${done.includes(w.name)?' done':''}" onclick="toggleWep('${w.name.replace(/'/g,"\\'")}')">
     <div class="chk${done.includes(w.name)?' on':''}"></div>
-    ${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" style="width:28px;height:28px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:4px;padding:2px;flex-shrink:0;margin-top:1px" onerror="this.style.display='none'">`:''}
+    ${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" loading="lazy" decoding="async" alt="" style="width:28px;height:28px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:4px;padding:2px;flex-shrink:0;margin-top:1px" onerror="this.style.display='none'">`:''}
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${w.name}</div>
       <div class="comm-note">${w.source}</div>
@@ -8457,14 +8525,23 @@ function initStaticTocs(){
 
 // ===== EXPORT / IMPORT =====
 function exportProgress(){
+  // Format v2: ALLE cd_*-Keys generisch sichern (Missables, Kapitel, Kommentare,
+  // Notizen, Favoriten, eigene Builds usw.) — v1 sicherte nur 5 Datenarten
+  const all={};
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.startsWith('cd_'))all[k]=localStorage.getItem(k);
+  }
   const data={
-    version:1,
+    version:2,
     exported:new Date().toISOString(),
+    // v1-Felder bleiben fuer Abwaertskompatibilitaet alter Importer enthalten
     bosses:loadBossDone(),
     trueEnding:loadTE(),
     greymane:loadGM(),
     weapons:loadWepDone(),
-    attempts:loadBossAttempts()
+    attempts:loadBossAttempts(),
+    storage:all
   };
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a');
@@ -8480,20 +8557,26 @@ function importProgress(input){
   reader.onload=e=>{
     try{
       const data=JSON.parse(e.target.result);
-      if(data.version!==1)throw new Error('Unbekanntes Format');
-      if(Array.isArray(data.bosses))saveBossDone(data.bosses);
-      if(Array.isArray(data.trueEnding)){localStorage.setItem('cd_te',JSON.stringify(data.trueEnding));}
-      if(Array.isArray(data.greymane))saveGM(data.greymane);
-      if(Array.isArray(data.weapons))saveWepDone(data.weapons);
-      if(data.attempts&&typeof data.attempts==='object')localStorage.setItem('cd_boss_attempts',JSON.stringify(data.attempts));
-      renderBosses();renderTE();renderBossChecklist();renderGreymane();renderSanctumChecklist();renderWeaponChecklist();updateStats();
+      if(data.version!==1&&data.version!==2)throw new Error('Unbekanntes Format');
+      if(data.version===2&&data.storage&&typeof data.storage==='object'){
+        // v2: alle cd_*-Keys wiederherstellen
+        Object.keys(data.storage).forEach(k=>{
+          if(k.startsWith('cd_')&&typeof data.storage[k]==='string')localStorage.setItem(k,data.storage[k]);
+        });
+      }else{
+        // v1-Fallback: nur die 5 klassischen Datenarten
+        if(Array.isArray(data.bosses))saveBossDone(data.bosses);
+        if(Array.isArray(data.trueEnding)){localStorage.setItem('cd_te',JSON.stringify(data.trueEnding));}
+        if(Array.isArray(data.greymane))saveGM(data.greymane);
+        if(Array.isArray(data.weapons))saveWepDone(data.weapons);
+        if(data.attempts&&typeof data.attempts==='object')localStorage.setItem('cd_boss_attempts',JSON.stringify(data.attempts));
+      }
       const t=document.getElementById('toast');
-      t.textContent='Fortschritt importiert!';
+      t.textContent='Fortschritt importiert! Seite wird neu geladen …';
       t.classList.add('show');
-      clearTimeout(window._toastTimer);
-      window._toastTimer=setTimeout(()=>{t.classList.remove('show');t.textContent='Kopiert!';},2200);
-    }catch(err){alert('Fehler beim Importieren: '+err.message);}
-    input.value='';
+      // Neu laden, damit ALLE Sektionen (auch Kommentare/Favoriten/Builds) den Import anzeigen
+      setTimeout(()=>location.reload(),900);
+    }catch(err){alert('Fehler beim Importieren: '+err.message);input.value='';}
   };
   reader.readAsText(file);
 }
@@ -8522,7 +8605,7 @@ function goToMap(){
   document.getElementById('mlb-term').textContent=_mapLocSearch;
   const b=document.getElementById('map-loc-banner');
   b.style.display='flex';
-  document.getElementById('main').scrollTop=0;
+  window.scrollTo({top:0});
 }
 function copyLocSearch(fromBanner){
   navigator.clipboard.writeText(_mapLocSearch).catch(()=>{
@@ -8599,7 +8682,7 @@ function witchSvcIcon(svc){
 function renderComments(sec){
   const wrap=document.getElementById('sc-'+sec);
   if(!wrap) return;
-  const arr=JSON.parse(localStorage.getItem('cd_cmt_'+sec)||'[]');
+  const arr=lsJson('cd_cmt_'+sec,[]);
   const listHtml=arr.length
     ? arr.map(c=>`<div class="cmt-item"><div><span class="cmt-usr">${escHtml(c.u)}</span><span class="cmt-time">${escHtml(c.t)}</span></div><p class="cmt-txt">${escHtml(c.m)}</p></div>`).join('')
     : '<div class="cmt-empty">Noch keine Kommentare — schreib den ersten!</div>';
@@ -8616,7 +8699,7 @@ function postComment(sec){
   const m=inp.value.trim(); if(!m) return;
   const u=window._authUser?.email||'Anonym';
   const t=new Date().toLocaleString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  const arr=JSON.parse(localStorage.getItem('cd_cmt_'+sec)||'[]');
+  const arr=lsJson('cd_cmt_'+sec,[]);
   arr.push({u,m,t});
   localStorage.setItem('cd_cmt_'+sec,JSON.stringify(arr));
   inp.value='';
@@ -8898,8 +8981,8 @@ function renderSanctumGuide(){
 
 // ===== CHAPTER GUIDE =====
 const CHAPTERS=[
-  {num:1,title:"Das Erwachen",boss:"Matthias",items:"Starter-Ausrüstung, erste Contribution Points",missable:"",tip:"Watch & Learn: Parry lernen. Pump Kick des Tutorials ist obligatorisch."},
-  {num:2,title:"Gier und Stahl",boss:"Kailok the Hornsplitter",items:"Sword of the Lord (Drop), Wind Slash Core",missable:"Sword of the Lord kann auch ohne Kailok-Kill übergangen werden — Holen!",tip:"Shield + Force Palm Chain. Slow hits — viel Parry-Fenster."},
+  {num:1,title:"Das Erwachen",boss:"— (Prolog/Tutorial, kein Boss-Duell)",items:"Starter-Ausrüstung, erste Contribution Points",missable:"",tip:"Watch & Learn: Parry lernen. Grundlagen-Combos üben."},
+  {num:2,title:"Gier und Stahl",boss:"Matthias (Quest 'Hernand in Chaos') → Kailok the Hornsplitter",items:"Sword of the Lord (Drop), Wind Slash Core",missable:"Pump Kick (Watch & Learn) NUR im Matthias-Duell erlernbar! Sword of the Lord kann auch ohne Kailok-Kill übergangen werden — Holen!",tip:"Matthias: Pump Kick per Watch & Learn abschauen. Kailok: Shield + Force Palm Chain. Slow hits — viel Parry-Fenster."},
   {num:3,title:"Die gefrorenen Seelen",boss:"Reed Devil",items:"Hollow Visage (Truhe Dawn Cave), Blackwing Leather Mask (Draven Prep)",missable:"Hollow Visage — einmalige Truhe in Dawn Cave",tip:"P2 Reed Devil: NIE Parry auf Wave-Attacks, nur seitlich dodgen."},
   {num:4,title:"Die Spitze der Sterne",boss:"Kearush the Slayer (Spire of the Stars)",items:"Abyss Artefakte, Refine-Materialien farmen",missable:"",tip:"KEIN Parry / Block — alles dodgen. Forward-right dodge → 3 schnelle Hits."},
   {num:5,title:"Das Nest der Krähen",boss:"Draven the Crowcaller",items:"Tauria Curved Sword + Crow's Pursuit Core (Best-in-Slot bis Endgame), Blackwing Armor",missable:"Hexe Elowen Quest 'The Missing Seal' jetzt starten",tip:"3 HP-Bars. Aerial-Phasen: Glider aktiv halten. Reward: stärkste Kap.-5-Waffe."},
@@ -8913,7 +8996,7 @@ const CHAPTERS=[
 ];
 
 function renderChapters(){
-  const done=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
+  const done=lsJson('cd_ch_done',[]);
   const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
   const toc=makeToc(CHAPTERS.map(c=>({id:`ch-${c.num}`,label:`Kap. ${String(c.num).padStart(2,'0')}`})));
   document.getElementById('ch-timeline').innerHTML=toc+CHAPTERS.map(c=>{
@@ -8939,7 +9022,7 @@ function renderChapters(){
   }).join('');
 }
 function toggleChDone(num){
-  let d=JSON.parse(localStorage.getItem('cd_ch_done')||'[]');
+  let d=lsJson('cd_ch_done',[]);
   d=d.includes(num)?d.filter(n=>n!==num):[...d,num];
   localStorage.setItem('cd_ch_done',JSON.stringify(d));
   renderChapters();
@@ -8947,6 +9030,17 @@ function toggleChDone(num){
 
 // ===== PATCH NOTES =====
 const PATCHES=[
+  {ver:"1.10.01",date:"06.06.2026",size:"Hotfix, alle Plattformen",features:[
+    {cat:"Bugfixes",items:[
+      "Crash beim Teleport zum Abyss Nexus behoben",
+      "Crash beim Schlüpfen eines Eis am Wyvern's Cradle behoben",
+      "Spielerbewegung wurde durch Kleintiere blockiert — behoben",
+      "Bestimmte Tiere spawnten nicht mehr — behoben",
+      "Mission-Dispatch: Filter setzte sich beim Öffnen zurück — behoben",
+      "Koreanische Systemmeldung beim Wyvern-Flug in nicht-koreanischen Sprachversionen korrigiert",
+      "Sigil of Valor: Item-Beschreibung korrigiert — sie behauptete fälschlich, das Sigil sei auch von Iron Eagle und Phoenix tragbar (Anlegen bleibt auf Hunde und Baby-Wyverns beschränkt)"
+    ]}
+  ]},
   {ver:"1.10.00",date:"05.06.2026",size:"Console-Build 1.000.327",features:[
     {cat:"Neuer Content",items:[
       "Re-Blockade überarbeitet: neue Phasen 'Battle' und 'Reconstruct' vor und nach Blockaden ergänzt",
@@ -8969,7 +9063,7 @@ const PATCHES=[
       "Große Erntesense (Large Farming Scythe) liefert jetzt auch sammelbare Items",
       "Element-Slot- bzw. Pfeil-/Kugel-/Kanonenkugel-Slot-Wechsel im Bosskampf bleibt nach Tod und Wiederholung erhalten",
       "Pfeile: bei aufgebrauchter Auffüllung werden zuerst normale Pfeile genutzt",
-      "Sigil of Valor jetzt auf Hunde und Baby-Wyverns anlegbar (Iron Eagle und Phoenix folgen nach dem nächsten Patch)",
+      "Sigil of Valor jetzt auf Hunde und Baby-Wyverns anlegbar (Iron Eagle und Phoenix können es weiterhin nicht tragen — 1.10.01 hat lediglich die irreführende Item-Beschreibung korrigiert)",
       "Karte zum Sternbild-Forschungsjournal hinzugefügt — Sternbild-Standorte darüber auffindbar",
       "Fütter-Animation beim Halten bestimmter Wildtiere verbessert",
       "Trageposen einiger Pets geändert",
@@ -9045,7 +9139,7 @@ const PATCHES=[
       "Diverse Lokalisierungsfehler behoben, Lokalisierungsqualität in allen Sprachen verbessert"
     ]},
     {cat:"Sonstiges",items:[
-      "Bekanntes Problem: Phoenix und Iron Eagle können das 'Sigil of Valor' noch nicht anlegen — Fix im nächsten Patch geplant"
+      "Bekanntes Problem: Phoenix und Iron Eagle können das 'Sigil of Valor' nicht anlegen — Termin für eine Freischaltung offen (1.10.01 hat nur die Item-Beschreibung korrigiert)"
     ]}
   ]},
   {ver:"1.09.00",date:"29.05.2026",size:"",features:[
@@ -9167,6 +9261,12 @@ const PATCHES=[
       "AMD GPU-Treiber 26.5.1 Crash behoben (PC-Stabilität)"
     ]}
   ]},
+  {ver:"1.06.01",date:"12.05.2026",size:"Hotfix",features:[
+    {cat:"Bugfixes",items:[
+      "Progression-Blocker im Vault of Vengeance Abyss behoben (Weiterspielen war dort nicht möglich)",
+      "Bekanntes Problem dokumentiert: Elegant Carmine Leather Armor fehlerhaft (offizieller Hinweis in den Notes)"
+    ]}
+  ]},
   {ver:"1.06.00",date:"11.05.2026",size:"",features:[
     {cat:"Mounts",items:[
       "Tiger Mount — Peninsula South Crimson Desert, Unnamed Lake bei Giant's Yard Watchtower",
@@ -9189,6 +9289,11 @@ const PATCHES=[
       "Night Tone Mode (Grafik-Option, dämpft Farben + hellt Schatten)"
     ]}
   ]},
+  {ver:"1.05.01",date:"03.05.2026",size:"Hotfix",features:[
+    {cat:"Bugfixes",items:[
+      "Stabilitäts-Hotfix einen Tag nach 1.05.00 — vollständige Notes siehe offizielle Pearl-Abyss-Seite"
+    ]}
+  ]},
   {ver:"1.05.00",date:"02.05.2026",size:"",features:[
     {cat:"Bosse",items:[
       "Boss-Rematch via Laterne + Memory Fragment am Kampfort",
@@ -9205,6 +9310,14 @@ const PATCHES=[
       "Quest-Trigger-Fixes (Howling Hill, Memory Fragment, Scholastone)",
       "Performance-Optimierungen Pailune/Demeniss",
       "Vollständige Patch-Historie siehe Pearl Abyss offizielle Notes"
+    ]}
+  ]},
+  {ver:"1.00.02 → 1.03.01",date:"19.03.–12.04.2026",size:"Launch-Phase",features:[
+    {cat:"Frühe Launch-Patches (Sammeleintrag)",items:[
+      "1.00.02 (19.03.), 1.00.03 (23.03., u.a. Visione-Fix), 1.00.04 (24.03.) — Stabilisierung direkt nach Release",
+      "1.01.00 (29.03.), 1.01.01 / 1.01.02 (30.03.), 1.01.03 (31.03.) — erster Content-Patch plus Hotfixes",
+      "1.02.00 (04.04.) und 1.03.00 (11.04.) — weitere Content-Patches, 1.03.01 (12.04.) Hotfix",
+      "Detaillierte Notes zu diesen Versionen sind hier nicht erfasst — siehe offizielle Pearl-Abyss-Patch-Notes"
     ]}
   ]}
 ];
@@ -9235,37 +9348,21 @@ function renderPatches(){
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded',()=>{
-  renderBosses();renderWeapons();renderCores();renderArmor();renderArmorSets();renderCrafting();
-  renderTE();renderMQ();renderFactions();
-  renderLocs();renderBells();renderMounts();renderSkills();
-  renderBuilds();
-  renderAccessories();
-  renderPets();
-  renderCollectibles();
-  renderGatherables();
-  renderPuzzles();
-  renderDyes();
-  renderFood();
-  initStaticTocs();
-  document.addEventListener('mousemove',_moveMFP);
-  renderWitches();
-  renderWeaponUpgrade();
-  renderSanctumGuide();
-  renderChapters();
-  renderPatches();
-  renderSecrets();
-  renderFragmentTracker();
-  renderCressetTracker();
-  renderQuestTimeline();
-  renderRegionHeatmap();
-  renderAchievements();
-  renderBuildOptimizer();
-  renderRoadmap();
-  refreshSectionStats();
-  _initTooltips();
-  renderBossChecklist();renderGreymane();renderSanctumChecklist();renderWeaponChecklist();
-  renderMissableChecklist();renderOverview();
-  updateStats();
+  // Jeder Render-Schritt isoliert: ein Fehler in einer Sektion darf die uebrigen nicht blockieren
+  [renderBosses,renderWeapons,renderCores,renderArmor,renderArmorSets,renderCrafting,
+   renderTE,renderMQ,renderFactions,
+   renderLocs,renderBells,renderMounts,renderSkills,
+   renderBuilds,renderAccessories,renderPets,renderCollectibles,renderGatherables,
+   renderPuzzles,renderDyes,renderFood,
+   initStaticTocs,
+   ()=>document.addEventListener('mousemove',_moveMFP),
+   renderWitches,renderWeaponUpgrade,renderSanctumGuide,renderChapters,renderPatches,
+   renderSecrets,renderFragmentTracker,renderCressetTracker,renderQuestTimeline,
+   renderRegionHeatmap,renderAchievements,renderBuildOptimizer,renderRoadmap,
+   refreshSectionStats,_initTooltips,
+   renderBossChecklist,renderGreymane,renderSanctumChecklist,renderWeaponChecklist,
+   renderMissableChecklist,renderOverview,updateStats
+  ].forEach(f=>{try{f();}catch(e){console.error('Init-Schritt fehlgeschlagen:',f.name||'(anonym)',e);}});
 
   // Kommentar-Sektionen in alle Seiten einfügen
   ['bosses','weapons','crafting','quests','locations','mounts','skills','disarm','checklists','builds','accessories','witches','chapters'].forEach(sec=>{
@@ -9319,6 +9416,12 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(helpO&&helpO.classList.contains('show')){helpO.classList.remove('show');return;}
       const rbM=document.getElementById('rb-modal');
       if(rbM&&rbM.classList.contains('show')){rbM.classList.remove('show');return;}
+      const cmpM=document.getElementById('cmp-modal');
+      if(cmpM&&cmpM.classList.contains('show')){closeCompare();return;}
+      const icM=document.getElementById('ic-modal');
+      if(icM&&icM.style.display!=='none'&&icM.style.display!==''){closeItemCompare();return;}
+      const mim=document.getElementById('mount-ingame-modal');
+      if(mim&&mim.classList.contains('show')){closeMountModal();return;}
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('mob-overlay').classList.remove('show');
       return;
@@ -9423,13 +9526,20 @@ async function _syncProgress(items) {
   const token = user.token?.access_token;
   if (!token) return;
   setSyncStatus('Speichert…');
-  await fetch('/api/progress', {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ checkedItems: items })
-  });
-  setSyncStatus('Gespeichert ✓');
-  setTimeout(() => setSyncStatus(''), 2000);
+  try {
+    const res = await fetch('/api/progress', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ checkedItems: items })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    setSyncStatus('Gespeichert ✓');
+    setTimeout(() => setSyncStatus(''), 2000);
+  } catch (err) {
+    console.warn('Progress-Sync fehlgeschlagen:', err);
+    setSyncStatus('Sync fehlgeschlagen — lokal gespeichert');
+    setTimeout(() => setSyncStatus(''), 4000);
+  }
 }
 window._syncProgress = _syncProgress;
 
@@ -9609,7 +9719,7 @@ function ruinFilter(reg){
   for(var i=0;i<btns.length;i++){btns[i].classList.toggle("active", btns[i].getAttribute("data-reg")===reg);}
   var secs=document.querySelectorAll("#ruins-root .ruin-region");
   for(var j=0;j<secs.length;j++){secs[j].style.display=(reg==="__all__"||secs[j].getAttribute("data-reg")===reg)?"":"none";}
-  var mn=document.getElementById("main"); if(mn)mn.scrollTop=0;
+  window.scrollTo({top:0});
 }
 function openRuinImg(url,cap){
   var im=document.getElementById("mim-img"); if(im)im.src=url;
