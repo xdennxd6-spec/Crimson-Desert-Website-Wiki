@@ -131,26 +131,32 @@ export default async (req: Request, _context: Context) => {
     await ensureSchema();
 
     const url = new URL(req.url);
-    const isHit = url.searchParams.get("hit") === "1"; // nur bei NEUER Session
+    const isHit = url.searchParams.get("hit") === "1"; // Client-Wunsch (untrusted)
     const sid = cleanSid(url.searchParams.get("sid"));
 
-    // 1) Zaehler: total + today sind voneinander unabhaengige Zeilen -> die
-    //    beiden einzelnen, je atomaren Statements laufen parallel (Promise.all).
-    //    Bei Hit inkrementieren, sonst nur lesen.
-    const [total, today] = await Promise.all([
-      isHit ? bumpCounter(totalKeyExpr) : readCounter(totalKeyExpr),
-      isHit ? bumpCounter(dayKeyExpr) : readCounter(dayKeyExpr),
-    ]);
-
-    // 2) Praesenz: eigene Session upserten (muss VOR countOnline laufen, damit
-    //    der/die aktuelle Besucher:in mitzaehlt).
+    // 1) Praesenz ZUERST upserten — und dabei serverseitig feststellen, ob die
+    //    sid NEU ist (xmax = 0 nur bei echtem INSERT, nicht bei UPDATE). Der
+    //    Zaehler wird NUR fuer neue sids erhoeht: ein Client, der ?hit=1 spammt,
+    //    trifft immer dieselbe Praesenz-Zeile und inkrementiert nichts mehr
+    //    (Manipulations-/Neon-Quota-Schutz). Ohne sid wird nie gezaehlt.
+    let isNewSid = false;
     if (sid) {
-      await db.execute(sql`
+      const pres = await db.execute(sql`
         INSERT INTO visit_presence (sid, last_seen)
         VALUES (${sid}, now())
         ON CONFLICT (sid) DO UPDATE SET last_seen = now()
+        RETURNING (xmax = 0) AS is_new
       `);
+      isNewSid = rowsOf(pres)[0]?.is_new === true;
     }
+    const countHit = isHit && isNewSid;
+
+    // 2) Zaehler: total + today sind voneinander unabhaengige Zeilen -> die
+    //    beiden einzelnen, je atomaren Statements laufen parallel (Promise.all).
+    const [total, today] = await Promise.all([
+      countHit ? bumpCounter(totalKeyExpr) : readCounter(totalKeyExpr),
+      countHit ? bumpCounter(dayKeyExpr) : readCounter(dayKeyExpr),
+    ]);
 
     // 3) Pruning (best-effort; Fehler darf die Antwort NICHT kippen).
     try {
