@@ -28,19 +28,12 @@
    "hinweis": "Nach der Prio-Recherche vom 11.06. verbleiben 379x crit:null / 425x slots:null - fast alles Bulk-Import-Waffen ohne BUILDS-/Boss-Bezug; UI rendert die Luecken inzwischen ehrlich als 'nicht erfasst'. Ohne belastbare Quelle blieben: Muskan-Klon-Fists (beide), Mining Knuckledrill Drill (Fextralife-Seite gehoert zum anderen Knuckledrill), Mining-Knuckledrill-Slots (game8 5 vs. Fextralife-Klassentext 3). Recherche-JSONs: /mnt/nvme/claude/cd-audit-pi/research/weapons_crit_slots_part1/2.json."
   },
   {
-   "titel": "Modal-Fokus-Management",
-   "warum": "Rest aus dem A11y-Paket: Fokus beim Oeffnen auf Close-Button, beim Schliessen zurueck (Vorbild openLoginModal). Checklisten/Tabs/Headings sind seit 2026-06-11 erledigt.",
-   "umsetzung": "Zentrale open/close-Helfer der Modals um Fokus-Handling ergaenzen.",
-   "aufwand": "klein",
-   "wirkung": "klein"
-  },
-  {
    "titel": "Monolith aufteilen: grosse Datenstrukturen in separate JS-Dateien",
    "hinweis": "index.html besteht zu ~84% aus JS-Daten (RUINS_DATA ~149KB, FAC_DATA ~56KB, WEAPONS ~65KB, MISSABLE_ITEMS ~38KB). Auslagern in .js-Dateien mit <script defer> + lange Cache-Header entkoppelt Caching und Deploys. Groesserer Umbau, vorher mit User abstimmen."
   },
   {
-   "titel": "Crafting ausbauen + Minigames-Abschnitt",
-   "hinweis": "CRAFTING hat nur 12 Rezepte; die 1.10-Minigames (Pinball, Orb Roll, Marni Token Exchange) existieren nur als Patch-Stichpunkte. Minigames-Teil allein ist small effort."
+   "titel": "Crafting ausbauen",
+   "hinweis": "CRAFTING hat nur 12 Rezepte. (Der Minigames-Teil ist seit 11.06. erledigt: eigene Sektion mit 15 Spielen.)"
   },
   {
    "titel": "Charaktere/NPC-Verzeichnis mit Trust-System-Guide",
@@ -51,28 +44,12 @@
    "hinweis": "Datenstruktur ENEMIES (Name, Region, Schwaeche, Drops, Knowledge) plus eigene Sektion; Gegner werden bereits als Drop-Quellen erwaehnt."
   },
   {
-   "titel": "Verifikationsrunde Fraktionsquests",
-   "hinweis": "FAC_DATA enthaelt 3 low- und 40 medium-conf-Quests plus TBD-Stellen; gegen game8/Fextralife/PowerPyx pruefen und conf-Flags hochstufen."
-  },
-  {
-   "titel": "Besucherzaehler haerten (visits.mts)",
-   "hinweis": "Ohne Rate-Limit/Server-Dedupe manipulierbar (Neon-Quota-Risiko): Hit serverseitig an sid koppeln (INSERT mit ON CONFLICT, Counter nur bei neuer sid)."
-  },
-  {
    "titel": "Escape-Helfer konsolidieren",
    "hinweis": "Drei parallele Escape-Implementierungen plus mehrere lokale esc-Definitionen mit anderer Semantik schatten das globale esc(). Auf zwei globale Helfer konsolidieren: escHtml (Text/Attribute inkl. Quotes) und escJsStr (inline-onclick)."
   },
   {
-   "titel": "Onboarding-Panel fuer Erstbesucher",
-   "hinweis": "Einmaliges dismissbares Intro (localStorage cd_intro_seen) mit 3-4 Stichpunkten: Fortschritt abhaken, Favoriten, Suche, Account-Sync."
-  },
-  {
-   "titel": "PWA-Polish",
-   "hinweis": "site.webmanifest um id:'/' und 2 screenshots (form_factor wide/narrow) ergaenzen; iOS-Install-Hinweis (navigator.standalone-Erkennung) am bestehenden #pwa-install-Button."
-  },
-  {
-   "titel": "Asset-Hygiene",
-   "hinweis": "~290KB toter Ballast: generate_mounts.py/generate_missing_mounts.py aus cd_assets/mounts raus (nicht deployen), verwaiste Bilder loeschen (myurdin.png, world.svg, tenebrum.webp, black_fang.webp, priscus.webp - VORSICHT: nur loeschen, myurdin.webp ist im Einsatz). 15 lokale cd_assets/cores/-Bilder als primary in CORE_IMGS eintragen (CDN als Fallback) oder loeschen. qrcode.js (55KB) erst bei erstem QR-Klick dynamisch laden. og-Bild umbra-final.jpg (360KB) auf ~100KB komprimieren."
+   "titel": "PWA-Polish Rest: Manifest-Screenshots",
+   "hinweis": "id:\"/\" + iOS-Install-Hinweis sind seit 11.06. drin. Offen: 2 echte Screenshots (form_factor wide/narrow) ins Manifest - braucht echte Browser-Screenshots der Live-Site, nicht fabrizieren."
   },
   {
    "titel": "Statische SEO-Landing-Pages",
@@ -96,5 +73,10 @@
   "Patch-Archiv komplett: PATCHES jetzt 15 Eintraege (1.00.02 bis 1.10.01 lueckenlos). Sammeleintrag 1.00.02-1.03.01 und 1.04-Stub durch 6 Detail-Eintraege ersetzt (1.00.02, 1.00.03, 1.01.00, 1.02.00, 1.03.00, 1.04.00; Hotfixes jeweils als Kategorie beim Mutterpatch), 1.05.01-Stub mit echten Notes gefuellt. Quelle: offizielles Notice-Board boardNo 72-89 (vollstaendige Liste der Board-Nummern in den Notes recherchiert).",
   "Waffendatenbank Prio-Teil: 55 Waffen (BUILDS-Referenzen + Boss-Drops) gegen Fextralife/game8 recherchiert -> 30 crit- und 47 slots-Werte gefuellt (nur null-Felder, nie ueberschrieben). crit:null von 409 auf 379, slots:null von 472 auf 425. UI-Fix: null-Felder als (nicht erfasst) statt leerem Strich. OFFENER DATENPUNKT geklaert: Small Calphadean Banner Pike atk:24 von Fextralife bestaetigt. HINWEIS: Fextralife-Wiki ist auf crimsondesertgame.wiki.fextralife.com umgezogen (301).",
   "Fextralife-Hotlinks eliminiert: alle 465 fextralife-Bilder (439 WEAPON_IMGS, 14 BOSS_IMGS, 12 MOUNT_INGAME_IMGS) als lokale WebPs gespiegelt (sharp q82, ~2.8 MB, cd_assets/weapons/fex bzw. bosses/fex bzw. mounts/ig), Maps auf lokale Pfade umgestellt, kompakte FEX_FB-Map + _fexFb()-Helfer rekonstruiert Original-URL als onerror-Fallback (an 8 Render-Stellen verdrahtet). Linkcheck etabliert: node scripts/linkcheck.mjs prueft alle externen *_IMGS-URLs (in CLAUDE.md dokumentiert). jsdom-verifiziert: 278 tr (identisch Baseline), 1433 data-s (+4 = neue Patch-Karten), 0 JS-Fehler, 0 fextralife-Hotlinks im DOM, alle 658 lokalen Pfade existieren, Fallback-Helfer live getestet (HTTP 200)."
+ ],
+ "erledigt_2026_06_11_pi_block3": [
+  "Optional-Block (Commit 56ccda7): Neue Sektion Minispiele (MINIGAMES, 15 Eintraege inkl. 1.10-Content Pinball/Orb Roll/Marni Token Exchange + Claw Machine 1.06 + Launch-Klassiker; lazy via SEC_RENDERERS, suchbar via data-s).",
+  "Fraktionsquest-Verifikation: 43 low/medium-Quests von 3 Agenten gegen PowerPyx/game8/Fextralife u.a. geprueft -> 28 conf-Aenderungen (medium 40->14, high 128->154), 43 Feld-Korrekturen, \"Darkness Over the Sanctum\" auf low (nur Aggregator-DBs). Befunde: research/facq_verify_results.md + apply_facq.mjs.",
+  "Modal-Fokus (A11y, modalFocusOpen/Close an rb/cmp/ic/loc/mount/login + ESC), visits.mts-Haertung (Increment nur bei serverseitig neuer sid via xmax=0), Asset-Hygiene (tote .py/Bilder raus - priscus.webp ist entgegen Audit-Notiz IN BENUTZUNG und blieb; og-Bild 360->146KB; qrcode.js lazy; 15 Core-Icons lokal primaer + CORE_IMGS_CDN-Fallback), PWA (id, iOS-Hinweis), Onboarding-Panel (cd_intro_seen)."
  ]
 }
