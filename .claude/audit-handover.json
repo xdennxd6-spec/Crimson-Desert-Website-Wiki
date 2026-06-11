@@ -3,7 +3,7 @@
   "projekt": {
     "haupt_datei": "index.html (Single-File-App, ~9700 Zeilen)",
     "live": "https://crimson-desert-wiki.netlify.app/",
-    "regeln": "VERBINDLICH: .claude/CLAUDE.md in diesem Repo lesen und befolgen. Insbesondere: NIEMALS automatisch pushen (immer erst den User fragen), Aenderungen buendeln, Render-Verifikation mit echtem Browser (Headless-Chrome --dump-dom, danach <tr>-Count pruefen: Soll aktuell 278 tr / 1387 data-s-Karten, gemessen mit render_check3.mjs nach ensureAllRendered)."
+    "regeln": "VERBINDLICH: .claude/CLAUDE.md in diesem Repo lesen und befolgen. Insbesondere: NIEMALS automatisch pushen (immer erst den User fragen), Aenderungen buendeln, Render-Verifikation mit echtem Browser (Headless-Chrome --dump-dom, danach <tr>-Count pruefen: Soll aktuell 278 tr / 1429 data-s-Karten, gemessen mit render_check3.mjs nach ensureAllRendered)."
   },
   "wichtiger_hinweis_zeilennummern": "Alle Zeilenangaben in den Aufgaben beziehen sich auf den Stand VOR Commit ebcb8f4 und sind seitdem um einige Zeilen verschoben. Nicht blind springen, sondern per Grep nach den genannten Bezeichnern (z.B. MAIN_QUESTS, FAC_DATA, BOSS_IMGS) suchen.",
   "erledigt_2026_06_10_commit_ebcb8f4": [
@@ -27,13 +27,6 @@
       "warum": "Der Sammeleintrag 1.00.02-1.03.01 listet nur Versionen+Daten ohne Inhalte; 1.05.01 ist nur als Stub erfasst.",
       "umsetzung": "Detail-Notes von pearlabyss.com Notice-Board recherchieren (1.06.01 = boardNo 91, 1.10.00 = 96, 1.10.01 = 97; aeltere Nummern entsprechend frueher) und die PATCHES-Eintraege (Grep: 'const PATCHES') ausbauen. Ausserdem kuenftig nach jedem Spiel-Patch: neuen Eintrag + Header in sec-patches aktualisieren.",
       "aufwand": "mittel",
-      "wirkung": "mittel"
-    },
-    {
-      "titel": "Side-Quest-Verzeichnis als vierten Quests-Tab",
-      "warum": "Freie Side-Quests ausserhalb der Fraktionen existieren nur als Nebensaetze in Boss- und Collectibles-Eintraegen (mindestens eine davon missable: 'Sweet Deal').",
-      "umsetzung": "Vierten Tab 'Side-Quests' in sec-quests anlegen (aktuell Tabs te/mq/fac) und verstreute Quest-Referenzen im FAC_DATA-Schema konsolidieren, dann per Recherche vervollstaendigen.",
-      "aufwand": "gross",
       "wirkung": "mittel"
     },
     {
@@ -114,6 +107,7 @@
     "Hauptquest-Walkthrough Kapitel 4-Epilog: alle 10 restlichen Kapitel vom Namensregister ins Detail-Schema {q,trigger,prereq,reward,miss,tip,conf} ueberfuehrt (PowerPyx-Einzelwalkthroughs massgeblich, game8 als Zweitquelle, Fextralife punktuell; Recherche-JSONs: /mnt/nvme/claude/cd-audit-pi/research/mq_ch4..12_epilog.json). MAIN_QUESTS jetzt 14 Kapitel / 168 Quests — deckungsgleich mit PowerPyx' 168 Missionsschritten.",
     "Register-Korrekturen: K4 +2 Quests (Kiln Repair at the Kilnden Workshop, Skilled in Archery), K6 +4 (The Counterattack, Fire on the Frontlines, In Ashes, News of Victory), K7 +6 (Podium of Resolve, Driving out the Shadows, Reclamation, Lonely Jackals, Resolution, Incomplete Victory), K8 +3 (Where the Wind Guides You, Resolve Amidst a Storm, Preparations for Advance), K9 +6 (Shackles of Fate, Unwavering Steps, Path of the Disciple, Face the Inner Self, The Cloister of Enlightenment #134, Lust for Power). K10: 'Clockwork Insect'+'Clash' waren EINE Quest 'Clockwork Insect Clash' (nicht belegbarer Split). K11: 'Cloud Castle'+'Orbian' -> eine Quest 'Cloud Fortress Orbian'. K9: fruehe Quest heisst 'Cloister of Enlightenment' OHNE Artikel; 'The Cloister of Enlightenment' ist die spaete #134. Epilog: alle 8 Namen belegt, Reihenfolge nach PowerPyx korrigiert (Enduring Flame/Evolving City vor Desert's Edge).",
     "Metadaten-Fixes: K4-Boss = Tenebrum (Kearush the Slayer gehoert zu K5 'Demenissian Delegation' -> dort ergaenzt); K6-Boss = Cassius Morten (Tenebrum entfernt, ist K4-Boss); K10-Boss = Marni's Clockwork Mantis (fehlte); K8-MISSABLE-Warnung ersetzt (Words Left by the Riverside + Strength Held in the Fingertips sind Greymanes-Fraktionsquests, laut Quellen nicht verpassbar); K11-Warnung 'Orbian = Point of No Return!' ersetzt (kein PoNR belegt — PowerPyx Trophy Guide: Free-Roam nach Story; nur Checkpoint-Warnung im Orbian-Bosskampf); K12-Warnung praezisiert (manueller Save vor Abyss-Tor, niemals 'Give Up' in Blinding Darkness — sonst Aussperrung vom Bosskampf).",
-    "A11y + Heading-Semantik: versteckter h1, 29x sec-t->h2, 16x sub-t->h3 (CSS-Reset, Optik unveraendert); 29 statische Tab-Divs -> <button type=button> (font-family:inherit); 6 Checklisten-Template-Stellen mit role=checkbox/aria-checked/tabindex=0 + delegierter Enter/Space-Handler. Lore-Akkordeon aus dem Audit-Briefing existiert nicht mehr — Punkt obsolet. Offen nur noch Modal-Fokus (in optionale Aufgaben verschoben). jsdom: 278 tr/1387 data-s/0 JS-Fehler unveraendert."
+    "A11y + Heading-Semantik: versteckter h1, 29x sec-t->h2, 16x sub-t->h3 (CSS-Reset, Optik unveraendert); 29 statische Tab-Divs -> <button type=button> (font-family:inherit); 6 Checklisten-Template-Stellen mit role=checkbox/aria-checked/tabindex=0 + delegierter Enter/Space-Handler. Lore-Akkordeon aus dem Audit-Briefing existiert nicht mehr — Punkt obsolet. Offen nur noch Modal-Fokus (in optionale Aufgaben verschoben). jsdom: 278 tr/1387 data-s/0 JS-Fehler unveraendert.",
+    "Side-Quest-Verzeichnis als vierter Quests-Tab: SIDE_QUESTS (42 freie Requests/Commissions: Hernand 36, Wueste 3, Demeniss 2, Delesyia 1) + renderSideQuests (Regionen-Gruppierung, fac-q-Karten mit data-s, facBadges). Quelle fast nur game8 -> conf durchgehend medium (Badge sichtbar). Die 26 Greymane-Camp-Requests bewusst NICHT aufgenommen (= GREYMANE_COMMISSIONS, eigene Sektion). KORREKTUR zur Aufgabenbeschreibung: 'Sweet Deal' ist Greymanes-Fraktionsquest (Scattered Embers/Favorable Trade) und nirgends als missable belegt (nur Softlock-Bug); game8 sagt explizit: keine technischen Missables im Spiel. Offen: Pailune-Requests-Liste fehlt quellseitig; game8 selbst unvollstaendig (z.B. 'Meat or Nothing'). Render-Soll jetzt 278 tr / 1429 data-s. Recherche: research/side_quests.json"
   ]
 }

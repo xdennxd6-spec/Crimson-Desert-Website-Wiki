@@ -1688,6 +1688,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <button type="button" class="tab active" id="qt-te" onclick="qTab('te')">True Ending Checkliste</button>
       <button type="button" class="tab" id="qt-mq" onclick="qTab('mq')">Hauptquests</button>
       <button type="button" class="tab" id="qt-fac" onclick="qTab('fac')">Fraktionen</button>
+      <button type="button" class="tab" id="qt-sq" onclick="qTab('sq')">Side-Quests</button>
     </div>
     <div class="pane active" id="qp-te">
       <div class="te-pg">
@@ -1701,6 +1702,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <div class="spl-w blur" id="spl-w"><div id="mq-list"></div></div>
     </div>
     <div class="pane" id="qp-fac"><div id="fac-list"></div></div>
+    <div class="pane" id="qp-sq"><div id="sq-list"></div></div>
   </section>
 
   <section class="sec" id="sec-map">
@@ -7156,7 +7158,7 @@ const SEC_RENDERERS={
   cores:['renderCores'],
   armor:['renderArmor','renderArmorSets'],
   crafting:['renderCrafting'],
-  quests:['renderTE','renderMQ','renderFactions'],
+  quests:['renderTE','renderMQ','renderFactions','renderSideQuests'],
   locations:['renderLocs','renderBells'],
   ruins:['renderRuins'],
   mounts:['renderMounts'],
@@ -7899,7 +7901,7 @@ function toggleTE(id){
 
 // ===== QUEST TABS =====
 function qTab(id){
-  ['te','mq','fac'].forEach(t=>{
+  ['te','mq','fac','sq'].forEach(t=>{
     document.getElementById('qt-'+t).classList.toggle('active',t===id);
     document.getElementById('qp-'+t).classList.toggle('active',t===id);
   });
@@ -7935,6 +7937,26 @@ function renderMQ(){
 function toggleChap(hd){
   hd.nextElementSibling.classList.toggle('open');
   hd.querySelector('.chap-arr').classList.toggle('open');
+}
+
+// ===== SIDE QUESTS (frei) =====
+function renderSideQuests(){
+  const el=document.getElementById('sq-list');
+  if(!el||typeof SIDE_QUESTS==='undefined')return;
+  const regions=[...new Set(SIDE_QUESTS.map(q=>q.region))];
+  el.innerHTML='<div style="font-size:12px;color:var(--dim);margin-bottom:14px">'+SIDE_QUESTS.length+' freie Side-Quests ausserhalb von Hauptstory und Fraktionen. Die Bewohner-Requests im Greymane Camp stehen in der Greymane-Sektion.</div>'+
+    regions.map(r=>{
+      const list=SIDE_QUESTS.filter(q=>q.region===r);
+      return '<h3 class="sub-t">'+esc(r)+' ('+list.length+')</h3>'+list.map(q=>`<div class="fac-q" data-s="${esc((q.q+' '+q.region+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
+      <div class="fac-qh">${esc(q.q)}${facBadges(q)}</div>
+      <div class="fac-qm">
+        <div class="fac-qk">Trigger</div><div class="fac-qv">${esc(q.trigger)}</div>
+        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${esc(q.prereq)}</div>
+        <div class="fac-qk">Belohnung</div><div class="fac-qv">${esc(q.reward)}</div>
+        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+esc(q.tip)+'</div>':''}
+      </div>
+    </div>`).join('');
+    }).join('');
 }
 
 // ===== SPOILER =====
@@ -9239,6 +9261,56 @@ function toggleChDone(num){
 }
 
 // ===== PATCH NOTES =====
+// Freie Side-Quests (Requests/Commissions ausserhalb Hauptstory & Fraktionen), Recherche 2026-06-11.
+// Quelle fast ausschliesslich game8 (einzige vollstaendige Liste) -> conf durchgehend medium; PowerPyx hat
+// keine Side-Quest-Uebersicht, Fextralife-Hub leer. Die 26 "[NPC]'s Request" im Greymane Camp sind NICHT
+// hier, sondern in GREYMANE_COMMISSIONS (eigene Sektion). 'Sweet Deal' ist Greymanes-Fraktionsquest
+// (Scattered Embers / Favorable Trade), nicht missable belegt -- nur Softlock-Bug bekannt.
+const SIDE_QUESTS=[
+  {"q":"Invention of the Workshop","region":"Hernand","trigger":"Hernand Request (Startort nicht belegt)","prereq":"—","reward":"Enhanced Kuku Cooler Blueprint x1","miss":false,"tip":"Bewohner-Auftrag in Hernand; Belohnung ist ein Blueprint für den verbesserten Kuku Cooler.","conf":"medium"},
+  {"q":"Savior of the Battlefield","region":"Hernand","trigger":"Hernand Request (Startort nicht belegt)","prereq":"—","reward":"Rising Arrow Shield x1","miss":false,"tip":"Bewohner-Auftrag in Hernand mit Schild als Belohnung.","conf":"medium"},
+  {"q":"The Bandits' Trap","region":"Hernand","trigger":"Hernand Request (Startort nicht belegt)","prereq":"—","reward":"—","miss":false,"tip":"Bewohner-Auftrag in Hernand; laut game8 ohne Item-Belohnung.","conf":"medium"},
+  {"q":"Goddess of Abundance","region":"Hernand","trigger":"Hernand Request (Startort nicht belegt)","prereq":"—","reward":"Yellow Bass x5, Light Silver Pouch x1","miss":false,"tip":"Bewohner-Auftrag in Hernand; belohnt u.a. mit Fischen (Yellow Bass).","conf":"medium"},
+  {"q":"Path that Connects to House of Healing","region":"Hernand","trigger":"Hernand Request (Startort nicht belegt)","prereq":"—","reward":"Wild Ginseng x2, Light Silver Pouch x1","miss":false,"tip":"Bewohner-Auftrag in Hernand rund um das House of Healing.","conf":"medium"},
+  {"q":"Wolf Protecting Hernand","region":"Hernand","trigger":"Hernand Request (Startort nicht belegt)","prereq":"—","reward":"Light Silver Pouch x1","miss":false,"tip":"Bewohner-Auftrag in Hernand.","conf":"medium"},
+  {"q":"Contradiction","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Silver x30","miss":false,"tip":"Hernand-Kommission; kleine Silber-Belohnung.","conf":"medium"},
+  {"q":"Ambition in the Ruins","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"—","miss":false,"tip":"Hernand-Kommission; laut game8 ohne Item-Belohnung.","conf":"medium"},
+  {"q":"Stolen Supplies","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"—","miss":false,"tip":"Hernand-Kommission; laut game8 ohne Item-Belohnung.","conf":"medium"},
+  {"q":"Search for Leads","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"—","miss":false,"tip":"Hernand-Kommission; laut game8 ohne Item-Belohnung.","conf":"medium"},
+  {"q":"Deduction and Revelation of the Culprit","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Kinetic Dolphin x1","miss":false,"tip":"Hernand-Ermittlungskommission; belohnt mit dem Kinetic Dolphin.","conf":"medium"},
+  {"q":"Rhett's Request","region":"Hernand","trigger":"Gespräch mit Rhett in Hernand","prereq":"—","reward":"Pickaxe x1, Medium Bag x1, Stone x1","miss":false,"tip":"Townsfolk-Request; Medium Bag erweitert das Inventar — laut game8 lohnen sich diese Aufträge früh, da es keine Lagertruhen gibt.","conf":"medium"},
+  {"q":"Renee's Request","region":"Hernand","trigger":"Gespräch mit Renee in Hernand","prereq":"—","reward":"Recipe: Fish Porridge x1, Medium Bag x1, Barley x2","miss":false,"tip":"Townsfolk-Request mit Medium Bag (Inventarerweiterung) und Kochrezept.","conf":"medium"},
+  {"q":"Turnali's Request","region":"Hernand","trigger":"Gespräch mit Turnali in Hernand","prereq":"—","reward":"Logging Axe x1, Medium Bag x1, Turnali's Smithy Flyer x1, Bekker Shield x1, Timber x10","miss":false,"tip":"Townsfolk-Request; ungewöhnlich reichhaltige Belohnung inkl. Schild und Holzfälleraxt.","conf":"medium"},
+  {"q":"Annabella's Request","region":"Hernand","trigger":"Gespräch mit Annabella in Hernand","prereq":"—","reward":"Fishing Rod x1, Medium Bag x1, Dried Fish x1","miss":false,"tip":"Townsfolk-Request; belohnt u.a. mit einer Angelrute.","conf":"medium"},
+  {"q":"Tina's Request","region":"Hernand","trigger":"Gespräch mit Tina in Hernand","prereq":"—","reward":"Medium Bag x1, Cloth Piece x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Bran's Request","region":"Hernand","trigger":"Gespräch mit Bran in Hernand","prereq":"—","reward":"Medium Bag x1, Thin Hide x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Alden's Request","region":"Hernand","trigger":"Gespräch mit Alden in Hernand","prereq":"—","reward":"Medium Bag x1, Timber x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Bruna's Request","region":"Hernand","trigger":"Gespräch mit Bruna in Hernand","prereq":"—","reward":"Medium Bag x1, Iron Ores x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Grania's Request","region":"Hernand","trigger":"Gespräch mit Grania in Hernand","prereq":"—","reward":"Medium Bag x1, Stone x5","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Ugmon's Request","region":"Hernand","trigger":"Gespräch mit Ugmon in Hernand","prereq":"—","reward":"Medium Bag x1, Tough Meat x2","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Delkin's Request","region":"Hernand","trigger":"Gespräch mit Delkin in Hernand","prereq":"—","reward":"Medium Bag x1, Tough Meat x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Dahlia's Request","region":"Hernand","trigger":"Gespräch mit Dahlia in Hernand","prereq":"—","reward":"Medium Bag x1, Barley x3","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Nork's Request","region":"Hernand","trigger":"Gespräch mit Nork in Hernand","prereq":"—","reward":"Medium Bag x1, Cloth Piece x2","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Berto's Request","region":"Hernand","trigger":"Gespräch mit Berto in Hernand","prereq":"—","reward":"Medium Bag x1, Threeline Grunt x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Serge's Request","region":"Hernand","trigger":"Gespräch mit Serge in Hernand","prereq":"—","reward":"Medium Bag x1, Wool x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung); eigener game8-Walkthrough vorhanden.","conf":"medium"},
+  {"q":"Prox's Request","region":"Hernand","trigger":"Gespräch mit Prox in Hernand","prereq":"—","reward":"Medium Bag x1, Cloth Piece x1","miss":false,"tip":"Kurzer Townsfolk-Request mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Breaking in the Grindstone","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Medium Bag x1, Iron Ores x1","miss":false,"tip":"Hernand-Kommission mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Sturdy Horse","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Medium Bag x1, Carrot x3","miss":false,"tip":"Hernand-Kommission rund um ein Pferd; Karotten als Teilbelohnung.","conf":"medium"},
+  {"q":"The Hidden Space of the Heart","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Plate Gloves of Cursed Soul x1, Palmar Pill x2, Medium Bag x1","miss":false,"tip":"Hernand-Kommission; belohnt mit den Plate Gloves of Cursed Soul (Rüstungsteil).","conf":"medium"},
+  {"q":"The Cause of the Stench","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Medium Bag x1, Cloth Piece x2","miss":false,"tip":"Hernand-Kommission mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"Lunchbox of Love","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Medium Bag x1, Dried Fish x2","miss":false,"tip":"Hernand-Kommission (Botengang); Details in den Listenquellen nicht belegt.","conf":"medium"},
+  {"q":"Tales of the Calphadean Merchants","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Medium Bag x7, Logging Axe x1, Timber x1, Hernand Refinement Token x1, Barley x4, Copper Ore x1, Thin Hide x2, Clear Soup x1, Potato x1","miss":false,"tip":"Mehrteilige Händler-Kommission; mit 7 Medium Bags die ergiebigste Inventar-Erweiterungsquelle in Hernand.","conf":"medium"},
+  {"q":"Empty Donation Box","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Medium Bag x2, Holy Water x1","miss":false,"tip":"Hernand-Kommission (Kirche/Spendenbox); belohnt mit 2 Medium Bags.","conf":"medium"},
+  {"q":"Material of Light","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Medium Bag x1","miss":false,"tip":"Hernand-Kommission mit Medium Bag (Inventarerweiterung).","conf":"medium"},
+  {"q":"The Weight of Knowledge","region":"Hernand","trigger":"Hernand Commission (Startort nicht belegt)","prereq":"—","reward":"Investigative Log: The Weight of Knowledge x1","miss":false,"tip":"Ermittlungs-Kommission; belohnt mit einem Investigative Log.","conf":"medium"},
+  {"q":"Mushrooms Growing Among Poisons","region":"Demeniss","trigger":"Demeniss Commission (Startort nicht belegt)","prereq":"—","reward":"Pine Mushroom x5, Mystical Pine Mushroom x1","miss":false,"tip":"Sammel-Kommission in Demeniss; belohnt mit Pinienpilzen inkl. der mystischen Variante.","conf":"medium"},
+  {"q":"Buried Treasure","region":"Demeniss","trigger":"Demeniss Commission (Startort nicht belegt)","prereq":"—","reward":"Black Sun x1, Palmar Pill x1","miss":false,"tip":"Schatzsuche-Kommission in Demeniss.","conf":"medium"},
+  {"q":"The Truth on the Sand","region":"Crimson Desert (Wüstenregion)","trigger":"Crimson Desert Commission (Startort nicht belegt)","prereq":"—","reward":"Investigative Log: Truth on the Sands x1, Kinetic Boat x1","miss":false,"tip":"Ermittlungs-Kommission in der Wüstenregion; belohnt mit Investigative Log und Kinetic Boat.","conf":"medium"},
+  {"q":"Harvest of Greed","region":"Crimson Desert (Wüstenregion)","trigger":"Crimson Desert Commission (Startort nicht belegt)","prereq":"—","reward":"Investigative Log: Harvest of Greed x1, Kinetic Knight x1","miss":false,"tip":"Ermittlungs-Kommission in der Wüstenregion.","conf":"medium"},
+  {"q":"Unraveling Clues","region":"Crimson Desert (Wüstenregion)","trigger":"Crimson Desert Commission (Startort nicht belegt)","prereq":"—","reward":"Kinetic Knight x1","miss":false,"tip":"Ermittlungs-Kommission in der Wüstenregion; belohnt mit dem Kinetic Knight.","conf":"medium"},
+  {"q":"Broken Silence","region":"Delesyia","trigger":"Delesyia Commission (Startort nicht belegt)","prereq":"—","reward":"Investigative Log: Broken Silence x1, Kinetic Circle x1","miss":false,"tip":"Einzige von game8 gelistete Delesyia-Kommission; Ermittlungsquest mit Investigative Log als Belohnung.","conf":"medium"},
+];
+
 const PATCHES=[
   {ver:"1.10.01",date:"06.06.2026",size:"Hotfix, alle Plattformen",features:[
     {cat:"Bugfixes",items:[
