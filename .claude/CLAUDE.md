@@ -54,6 +54,10 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 3. Bei Ja: `git add . && git commit -m "..." && git push`
 4. Netlify deployed automatisch
 
+## Linkcheck externe Bilder
+- `node scripts/linkcheck.mjs` prüft alle externen URLs der *_IMGS-Maps (HEAD/GET, Exit 1 bei Brüchen).
+- Periodisch bzw. vor größeren Releases laufen lassen; kaputte questlog-/Fextralife-Links durch lokale Spiegel ersetzen (cd_assets/*/fex/).
+
 ## Tech Stack
 - Static Single-Page HTML/JS/CSS App (kein Build-Step nötig)
 - `npx serve -p 5000 .` zum lokalen Testen

@@ -1,113 +1,100 @@
 {
-  "zweck": "Uebergabe-Briefing fuer Claude auf dem Pi. Offene Aufgaben aus dem Fable-5-Vollaudit vom 2026-06-10 (17-Agenten-Workflow, 80 verifizierte Findings). Die Quick Wins wurden am 2026-06-10 bereits umgesetzt und mit Commit ebcb8f4 gepusht (live verifiziert). Stand 2026-06-11: MQ-Walkthrough Kap. 4-Epilog erledigt (siehe erledigt_2026_06_11_pi).",
-  "projekt": {
-    "haupt_datei": "index.html (Single-File-App, ~9700 Zeilen)",
-    "live": "https://crimson-desert-wiki.netlify.app/",
-    "regeln": "VERBINDLICH: .claude/CLAUDE.md in diesem Repo lesen und befolgen. Insbesondere: NIEMALS automatisch pushen (immer erst den User fragen), Aenderungen buendeln, Render-Verifikation mit echtem Browser (Headless-Chrome --dump-dom, danach <tr>-Count pruefen: Soll aktuell 278 tr / 1429 data-s-Karten, gemessen mit render_check3.mjs nach ensureAllRendered)."
+ "zweck": "Uebergabe-Briefing fuer Claude auf dem Pi. Offene Aufgaben aus dem Fable-5-Vollaudit vom 2026-06-10 (17-Agenten-Workflow, 80 verifizierte Findings). Die Quick Wins wurden am 2026-06-10 bereits umgesetzt und mit Commit ebcb8f4 gepusht (live verifiziert). Stand 2026-06-11 (abends): MQ-Walkthrough Kap. 4-Epilog UND der komplette Mittel-Block erledigt (siehe erledigt_2026_06_11_pi / erledigt_2026_06_11_pi_block2).",
+ "projekt": {
+  "haupt_datei": "index.html (Single-File-App, ~9700 Zeilen)",
+  "live": "https://crimson-desert-wiki.netlify.app/",
+  "regeln": "VERBINDLICH: .claude/CLAUDE.md in diesem Repo lesen und befolgen. Insbesondere: NIEMALS automatisch pushen (immer erst den User fragen), Aenderungen buendeln, Render-Verifikation mit echtem Browser (Headless-Chrome --dump-dom, danach <tr>-Count pruefen: Soll aktuell 278 tr / 1429 data-s-Karten, gemessen mit render_check3.mjs nach ensureAllRendered)."
+ },
+ "wichtiger_hinweis_zeilennummern": "Alle Zeilenangaben in den Aufgaben beziehen sich auf den Stand VOR Commit ebcb8f4 und sind seitdem um einige Zeilen verschoben. Nicht blind springen, sondern per Grep nach den genannten Bezeichnern (z.B. MAIN_QUESTS, FAC_DATA, BOSS_IMGS) suchen.",
+ "erledigt_2026_06_10_commit_ebcb8f4": [
+  "Patches 1.10.01 / 1.06.01 / 1.05.01 + Sammeleintrag 1.00.02-1.03.01 nachgetragen, Sigil-of-Valor-Texte korrigiert",
+  "Sektionsuebergreifende Suche: 0-Treffer-Fallback mit klickbaren Sektions-Chips (_searchOtherSections/_searchJump)",
+  "SEO-Paket: Title/canonical/OG komplett, tote -website-Domain aus sitemap/robots/JSON-LD entfernt",
+  "Scroll-Reset-Fix (window.scrollTo statt main.scrollTop, 3 Stellen)",
+  "lazy loading + alt an 4 Render-Stellen (Initial-Requests ~500 auf ~20)",
+  "JS-Haertung: lsJson()-Helper (33 Stellen), Init-Isolation, globale Error-Handler, 2 Escaping-Fixes",
+  "Service Worker v4 + netlify.toml-Cache-Header (index max-age=0 must-revalidate, cd_assets 86400)",
+  "Daten-Fixes: 5 Waffen-Duplikate raus (WEAPONS jetzt 506), WEAPON_IMGS-Dubletten raus, Raptor-Key, mountCard-Fallback, KuKu-404 raus, Plate Boots of the Shadows ergaenzt, Matthias=Kapitel 2 (game8-verifiziert)",
+  "Sidebar in 5 Gruppen, Browser-Back via pushState, Legacy-Anker #sec-x",
+  "Export v2 (alle cd_*-Keys) + Datenverlust-Hinweis, ESC schliesst alle Modals",
+  "Mobile/Kontrast-Polish: --dim #8a837c, 16px-Inputs (iOS-Zoom), 42px-Hamburger, Tabellen-Overflow",
+  "progress.mts: CORS auf echte Domain, Input-Validierung, try/catch; _syncProgress zeigt Fehler ehrlich"
+ ],
+ "offene_aufgaben_prioritaet_hoch": [],
+ "offene_aufgaben_prioritaet_mittel": [],
+ "offene_aufgaben_optional": [
+  {
+   "titel": "Waffendatenbank: Rest-Luecken (unpriorisiert)",
+   "hinweis": "Nach der Prio-Recherche vom 11.06. verbleiben 379x crit:null / 425x slots:null - fast alles Bulk-Import-Waffen ohne BUILDS-/Boss-Bezug; UI rendert die Luecken inzwischen ehrlich als 'nicht erfasst'. Ohne belastbare Quelle blieben: Muskan-Klon-Fists (beide), Mining Knuckledrill Drill (Fextralife-Seite gehoert zum anderen Knuckledrill), Mining-Knuckledrill-Slots (game8 5 vs. Fextralife-Klassentext 3). Recherche-JSONs: /mnt/nvme/claude/cd-audit-pi/research/weapons_crit_slots_part1/2.json."
   },
-  "wichtiger_hinweis_zeilennummern": "Alle Zeilenangaben in den Aufgaben beziehen sich auf den Stand VOR Commit ebcb8f4 und sind seitdem um einige Zeilen verschoben. Nicht blind springen, sondern per Grep nach den genannten Bezeichnern (z.B. MAIN_QUESTS, FAC_DATA, BOSS_IMGS) suchen.",
-  "erledigt_2026_06_10_commit_ebcb8f4": [
-    "Patches 1.10.01 / 1.06.01 / 1.05.01 + Sammeleintrag 1.00.02-1.03.01 nachgetragen, Sigil-of-Valor-Texte korrigiert",
-    "Sektionsuebergreifende Suche: 0-Treffer-Fallback mit klickbaren Sektions-Chips (_searchOtherSections/_searchJump)",
-    "SEO-Paket: Title/canonical/OG komplett, tote -website-Domain aus sitemap/robots/JSON-LD entfernt",
-    "Scroll-Reset-Fix (window.scrollTo statt main.scrollTop, 3 Stellen)",
-    "lazy loading + alt an 4 Render-Stellen (Initial-Requests ~500 auf ~20)",
-    "JS-Haertung: lsJson()-Helper (33 Stellen), Init-Isolation, globale Error-Handler, 2 Escaping-Fixes",
-    "Service Worker v4 + netlify.toml-Cache-Header (index max-age=0 must-revalidate, cd_assets 86400)",
-    "Daten-Fixes: 5 Waffen-Duplikate raus (WEAPONS jetzt 506), WEAPON_IMGS-Dubletten raus, Raptor-Key, mountCard-Fallback, KuKu-404 raus, Plate Boots of the Shadows ergaenzt, Matthias=Kapitel 2 (game8-verifiziert)",
-    "Sidebar in 5 Gruppen, Browser-Back via pushState, Legacy-Anker #sec-x",
-    "Export v2 (alle cd_*-Keys) + Datenverlust-Hinweis, ESC schliesst alle Modals",
-    "Mobile/Kontrast-Polish: --dim #8a837c, 16px-Inputs (iOS-Zoom), 42px-Hamburger, Tabellen-Overflow",
-    "progress.mts: CORS auf echte Domain, Input-Validierung, try/catch; _syncProgress zeigt Fehler ehrlich"
-  ],
-  "offene_aufgaben_prioritaet_hoch": [],
-  "offene_aufgaben_prioritaet_mittel": [
-    {
-      "titel": "Patch-Archiv vervollstaendigen",
-      "warum": "Der Sammeleintrag 1.00.02-1.03.01 listet nur Versionen+Daten ohne Inhalte; 1.05.01 ist nur als Stub erfasst.",
-      "umsetzung": "Detail-Notes von pearlabyss.com Notice-Board recherchieren (1.06.01 = boardNo 91, 1.10.00 = 96, 1.10.01 = 97; aeltere Nummern entsprechend frueher) und die PATCHES-Eintraege (Grep: 'const PATCHES') ausbauen. Ausserdem kuenftig nach jedem Spiel-Patch: neuen Eintrag + Header in sec-patches aktualisieren.",
-      "aufwand": "mittel",
-      "wirkung": "mittel"
-    },
-    {
-      "titel": "Waffendatenbank vervollstaendigen",
-      "warum": "414 von 506 Waffen haben crit:null, 477 slots:null; genau diese Felder braucht die Build-Planung.",
-      "umsetzung": "Priorisiert die Waffen nachrecherchieren, die in BUILDS und BUILD_RECIPES referenziert werden oder Boss-Drops sind. Sofort machbar: null-Felder im UI als 'nicht erfasst' rendern statt leerem Strich. OFFENER DATENPUNKT: Small Calphadean Banner Pike steht mit atk:24 im Datensatz, ein geloeschtes Duplikat behauptete atk:21 - gegen Fextralife verifizieren.",
-      "aufwand": "gross",
-      "wirkung": "mittel"
-    },
-    {
-      "titel": "Fextralife-Hotlink-Abhaengigkeit reduzieren",
-      "warum": "461 Bilder hotlinken von static0.fextralifeimages.com (Single Point of Failure); ein Hotlink-Schutz dort wuerde sie alle auf einen Schlag brechen, onerror blendet nur stumm aus.",
-      "umsetzung": "Meistgesehene Bilder (Bosse, Top-Waffen, Armor-Sets) als lokale WebPs spiegeln (Workflow siehe .claude/CLAUDE.md bzw. WebP-Regeln: ffmpeg libwebp quality 82), externe URLs nur als Fallback. Zusaetzlich periodischen Linkcheck-Skript ueber alle ~850 externen URLs der IMG-Maps etablieren.",
-      "aufwand": "gross",
-      "wirkung": "mittel"
-    }
-  ],
-  "offene_aufgaben_optional": [
-    {
-      "titel": "Modal-Fokus-Management",
-      "warum": "Rest aus dem A11y-Paket: Fokus beim Oeffnen auf Close-Button, beim Schliessen zurueck (Vorbild openLoginModal). Checklisten/Tabs/Headings sind seit 2026-06-11 erledigt.",
-      "umsetzung": "Zentrale open/close-Helfer der Modals um Fokus-Handling ergaenzen.",
-      "aufwand": "klein",
-      "wirkung": "klein"
-    },
-    {
-      "titel": "Monolith aufteilen: grosse Datenstrukturen in separate JS-Dateien",
-      "hinweis": "index.html besteht zu ~84% aus JS-Daten (RUINS_DATA ~149KB, FAC_DATA ~56KB, WEAPONS ~65KB, MISSABLE_ITEMS ~38KB). Auslagern in .js-Dateien mit <script defer> + lange Cache-Header entkoppelt Caching und Deploys. Groesserer Umbau, vorher mit User abstimmen."
-    },
-    {
-      "titel": "Crafting ausbauen + Minigames-Abschnitt",
-      "hinweis": "CRAFTING hat nur 12 Rezepte; die 1.10-Minigames (Pinball, Orb Roll, Marni Token Exchange) existieren nur als Patch-Stichpunkte. Minigames-Teil allein ist small effort."
-    },
-    {
-      "titel": "Charaktere/NPC-Verzeichnis mit Trust-System-Guide",
-      "hinweis": "LORE_TERMS (25 Eintraege) liefert die Basis fuer Kurzbios; Haendler stehen bisher nur in Location-Fliesstexten."
-    },
-    {
-      "titel": "Bestiarium fuer normale Gegner",
-      "hinweis": "Datenstruktur ENEMIES (Name, Region, Schwaeche, Drops, Knowledge) plus eigene Sektion; Gegner werden bereits als Drop-Quellen erwaehnt."
-    },
-    {
-      "titel": "Verifikationsrunde Fraktionsquests",
-      "hinweis": "FAC_DATA enthaelt 3 low- und 40 medium-conf-Quests plus TBD-Stellen; gegen game8/Fextralife/PowerPyx pruefen und conf-Flags hochstufen."
-    },
-    {
-      "titel": "Besucherzaehler haerten (visits.mts)",
-      "hinweis": "Ohne Rate-Limit/Server-Dedupe manipulierbar (Neon-Quota-Risiko): Hit serverseitig an sid koppeln (INSERT mit ON CONFLICT, Counter nur bei neuer sid)."
-    },
-    {
-      "titel": "Escape-Helfer konsolidieren",
-      "hinweis": "Drei parallele Escape-Implementierungen plus mehrere lokale esc-Definitionen mit anderer Semantik schatten das globale esc(). Auf zwei globale Helfer konsolidieren: escHtml (Text/Attribute inkl. Quotes) und escJsStr (inline-onclick)."
-    },
-    {
-      "titel": "Onboarding-Panel fuer Erstbesucher",
-      "hinweis": "Einmaliges dismissbares Intro (localStorage cd_intro_seen) mit 3-4 Stichpunkten: Fortschritt abhaken, Favoriten, Suche, Account-Sync."
-    },
-    {
-      "titel": "PWA-Polish",
-      "hinweis": "site.webmanifest um id:'/' und 2 screenshots (form_factor wide/narrow) ergaenzen; iOS-Install-Hinweis (navigator.standalone-Erkennung) am bestehenden #pwa-install-Button."
-    },
-    {
-      "titel": "Asset-Hygiene",
-      "hinweis": "~290KB toter Ballast: generate_mounts.py/generate_missing_mounts.py aus cd_assets/mounts raus (nicht deployen), verwaiste Bilder loeschen (myurdin.png, world.svg, tenebrum.webp, black_fang.webp, priscus.webp - VORSICHT: nur loeschen, myurdin.webp ist im Einsatz). 15 lokale cd_assets/cores/-Bilder als primary in CORE_IMGS eintragen (CDN als Fallback) oder loeschen. qrcode.js (55KB) erst bei erstem QR-Klick dynamisch laden. og-Bild umbra-final.jpg (360KB) auf ~100KB komprimieren."
-    },
-    {
-      "titel": "Statische SEO-Landing-Pages",
-      "hinweis": "Nur falls organischer Traffic ein Ziel ist: 3-5 Top-Themen (Bosse, True Ending, Waffen) als statische, aus den Datenstrukturen generierte HTML-Seiten mit echten URLs + Sitemap-Eintraegen. Vorher mit User klaeren ob SEO ueberhaupt Ziel ist."
-    }
-  ],
-  "erledigt_2026_06_10_pi": [
-    "Boss-Bilder: 49 der 52 fehlenden BOSS_IMGS ergaenzt (questlog database.getKnowledges-API mit searchTerm-Parameter; alle URLs HTTP-200, Stichproben visuell). Jetzt 94/97 Bosse mit Bild. Ohne questlog-Bild bleiben: Black Bear Captain, Mountain God Boar, Crookrock Walker. BEFUND: Wiki-Boss 'Frostwalker Tervis' heisst bei questlog 'Forestwalker Tervis' (Wald-Golem-Bild) -- das Eis-/Frost-Lore im Wiki-Eintrag ist vermutlich erfunden, pruefen.",
-    "Lazy-Rendering pro Sektion: SEC_RENDERERS-Registry + ensureSecRendered() in showSec(), ensureAllRendered()-Hook in _searchOtherSections (Suche braucht [data-s] aller Sektionen). Init rendert nur noch globale Schritte. jsdom-verifiziert: Start 22 tr/97 data-s statt 278/1184; nach ensureAllRendered identisch zur Eager-Baseline; Cross-Sektion-Suche funktioniert.",
-    "Echte Trophaeen-Liste: TROPHIES (35 Eintraege, PowerPyx/PSNProfiles/Fextralife, 2x verifiziert) + renderTrophies mit Grade-/Missable-Filter + Platin-Roadmap als erster Block in sec-achievements (Titel jetzt 'Trophaeen & Achievements', Sidebar-Label 'Trophaeen'). Hinweis: PowerPyx kennt KEINEN Point-of-No-Return bei 'Orbian' (Free-Roam nach Story, kein Quest-Replay) -- Wiki-Warnung in Kap.11 ggf. praezisieren.",
-    "Hauptquests Prolog-Kap.3 zum Walkthrough ausgebaut: 46 Quests im FAC_DATA-Schema (trigger/prereq/reward/miss/tip/conf, PowerPyx-Einzelwalkthroughs + game8 + Fextralife), renderMQ rendert Detail-Karten mit data-s (alte String-Kapitel 4-12 weiter unterstuetzt). KORREKTUREN: 'Heart Beyond Borders' (war 'Hearts...'), 'Rebellion or Revolution' (war '...of...'), Kap.2 hat 16 Quests (+Awestruck, Trial After Trial, The Man Trapped in the Mire, Missing Companion), Kap.3 hat 17 (+Scattered Comrades, Rumors from the Sawmill, A Gentle Touch). Recherche-JSONs auf dem Pi: /mnt/nvme/claude/cd-audit-pi/research/."
-  ],
-  "erledigt_2026_06_11_pi": [
-    "Hauptquest-Walkthrough Kapitel 4-Epilog: alle 10 restlichen Kapitel vom Namensregister ins Detail-Schema {q,trigger,prereq,reward,miss,tip,conf} ueberfuehrt (PowerPyx-Einzelwalkthroughs massgeblich, game8 als Zweitquelle, Fextralife punktuell; Recherche-JSONs: /mnt/nvme/claude/cd-audit-pi/research/mq_ch4..12_epilog.json). MAIN_QUESTS jetzt 14 Kapitel / 168 Quests — deckungsgleich mit PowerPyx' 168 Missionsschritten.",
-    "Register-Korrekturen: K4 +2 Quests (Kiln Repair at the Kilnden Workshop, Skilled in Archery), K6 +4 (The Counterattack, Fire on the Frontlines, In Ashes, News of Victory), K7 +6 (Podium of Resolve, Driving out the Shadows, Reclamation, Lonely Jackals, Resolution, Incomplete Victory), K8 +3 (Where the Wind Guides You, Resolve Amidst a Storm, Preparations for Advance), K9 +6 (Shackles of Fate, Unwavering Steps, Path of the Disciple, Face the Inner Self, The Cloister of Enlightenment #134, Lust for Power). K10: 'Clockwork Insect'+'Clash' waren EINE Quest 'Clockwork Insect Clash' (nicht belegbarer Split). K11: 'Cloud Castle'+'Orbian' -> eine Quest 'Cloud Fortress Orbian'. K9: fruehe Quest heisst 'Cloister of Enlightenment' OHNE Artikel; 'The Cloister of Enlightenment' ist die spaete #134. Epilog: alle 8 Namen belegt, Reihenfolge nach PowerPyx korrigiert (Enduring Flame/Evolving City vor Desert's Edge).",
-    "Metadaten-Fixes: K4-Boss = Tenebrum (Kearush the Slayer gehoert zu K5 'Demenissian Delegation' -> dort ergaenzt); K6-Boss = Cassius Morten (Tenebrum entfernt, ist K4-Boss); K10-Boss = Marni's Clockwork Mantis (fehlte); K8-MISSABLE-Warnung ersetzt (Words Left by the Riverside + Strength Held in the Fingertips sind Greymanes-Fraktionsquests, laut Quellen nicht verpassbar); K11-Warnung 'Orbian = Point of No Return!' ersetzt (kein PoNR belegt — PowerPyx Trophy Guide: Free-Roam nach Story; nur Checkpoint-Warnung im Orbian-Bosskampf); K12-Warnung praezisiert (manueller Save vor Abyss-Tor, niemals 'Give Up' in Blinding Darkness — sonst Aussperrung vom Bosskampf).",
-    "A11y + Heading-Semantik: versteckter h1, 29x sec-t->h2, 16x sub-t->h3 (CSS-Reset, Optik unveraendert); 29 statische Tab-Divs -> <button type=button> (font-family:inherit); 6 Checklisten-Template-Stellen mit role=checkbox/aria-checked/tabindex=0 + delegierter Enter/Space-Handler. Lore-Akkordeon aus dem Audit-Briefing existiert nicht mehr — Punkt obsolet. Offen nur noch Modal-Fokus (in optionale Aufgaben verschoben). jsdom: 278 tr/1387 data-s/0 JS-Fehler unveraendert.",
-    "Side-Quest-Verzeichnis als vierter Quests-Tab: SIDE_QUESTS (42 freie Requests/Commissions: Hernand 36, Wueste 3, Demeniss 2, Delesyia 1) + renderSideQuests (Regionen-Gruppierung, fac-q-Karten mit data-s, facBadges). Quelle fast nur game8 -> conf durchgehend medium (Badge sichtbar). Die 26 Greymane-Camp-Requests bewusst NICHT aufgenommen (= GREYMANE_COMMISSIONS, eigene Sektion). KORREKTUR zur Aufgabenbeschreibung: 'Sweet Deal' ist Greymanes-Fraktionsquest (Scattered Embers/Favorable Trade) und nirgends als missable belegt (nur Softlock-Bug); game8 sagt explizit: keine technischen Missables im Spiel. Offen: Pailune-Requests-Liste fehlt quellseitig; game8 selbst unvollstaendig (z.B. 'Meat or Nothing'). Render-Soll jetzt 278 tr / 1429 data-s. Recherche: research/side_quests.json"
-  ]
+  {
+   "titel": "Modal-Fokus-Management",
+   "warum": "Rest aus dem A11y-Paket: Fokus beim Oeffnen auf Close-Button, beim Schliessen zurueck (Vorbild openLoginModal). Checklisten/Tabs/Headings sind seit 2026-06-11 erledigt.",
+   "umsetzung": "Zentrale open/close-Helfer der Modals um Fokus-Handling ergaenzen.",
+   "aufwand": "klein",
+   "wirkung": "klein"
+  },
+  {
+   "titel": "Monolith aufteilen: grosse Datenstrukturen in separate JS-Dateien",
+   "hinweis": "index.html besteht zu ~84% aus JS-Daten (RUINS_DATA ~149KB, FAC_DATA ~56KB, WEAPONS ~65KB, MISSABLE_ITEMS ~38KB). Auslagern in .js-Dateien mit <script defer> + lange Cache-Header entkoppelt Caching und Deploys. Groesserer Umbau, vorher mit User abstimmen."
+  },
+  {
+   "titel": "Crafting ausbauen + Minigames-Abschnitt",
+   "hinweis": "CRAFTING hat nur 12 Rezepte; die 1.10-Minigames (Pinball, Orb Roll, Marni Token Exchange) existieren nur als Patch-Stichpunkte. Minigames-Teil allein ist small effort."
+  },
+  {
+   "titel": "Charaktere/NPC-Verzeichnis mit Trust-System-Guide",
+   "hinweis": "LORE_TERMS (25 Eintraege) liefert die Basis fuer Kurzbios; Haendler stehen bisher nur in Location-Fliesstexten."
+  },
+  {
+   "titel": "Bestiarium fuer normale Gegner",
+   "hinweis": "Datenstruktur ENEMIES (Name, Region, Schwaeche, Drops, Knowledge) plus eigene Sektion; Gegner werden bereits als Drop-Quellen erwaehnt."
+  },
+  {
+   "titel": "Verifikationsrunde Fraktionsquests",
+   "hinweis": "FAC_DATA enthaelt 3 low- und 40 medium-conf-Quests plus TBD-Stellen; gegen game8/Fextralife/PowerPyx pruefen und conf-Flags hochstufen."
+  },
+  {
+   "titel": "Besucherzaehler haerten (visits.mts)",
+   "hinweis": "Ohne Rate-Limit/Server-Dedupe manipulierbar (Neon-Quota-Risiko): Hit serverseitig an sid koppeln (INSERT mit ON CONFLICT, Counter nur bei neuer sid)."
+  },
+  {
+   "titel": "Escape-Helfer konsolidieren",
+   "hinweis": "Drei parallele Escape-Implementierungen plus mehrere lokale esc-Definitionen mit anderer Semantik schatten das globale esc(). Auf zwei globale Helfer konsolidieren: escHtml (Text/Attribute inkl. Quotes) und escJsStr (inline-onclick)."
+  },
+  {
+   "titel": "Onboarding-Panel fuer Erstbesucher",
+   "hinweis": "Einmaliges dismissbares Intro (localStorage cd_intro_seen) mit 3-4 Stichpunkten: Fortschritt abhaken, Favoriten, Suche, Account-Sync."
+  },
+  {
+   "titel": "PWA-Polish",
+   "hinweis": "site.webmanifest um id:'/' und 2 screenshots (form_factor wide/narrow) ergaenzen; iOS-Install-Hinweis (navigator.standalone-Erkennung) am bestehenden #pwa-install-Button."
+  },
+  {
+   "titel": "Asset-Hygiene",
+   "hinweis": "~290KB toter Ballast: generate_mounts.py/generate_missing_mounts.py aus cd_assets/mounts raus (nicht deployen), verwaiste Bilder loeschen (myurdin.png, world.svg, tenebrum.webp, black_fang.webp, priscus.webp - VORSICHT: nur loeschen, myurdin.webp ist im Einsatz). 15 lokale cd_assets/cores/-Bilder als primary in CORE_IMGS eintragen (CDN als Fallback) oder loeschen. qrcode.js (55KB) erst bei erstem QR-Klick dynamisch laden. og-Bild umbra-final.jpg (360KB) auf ~100KB komprimieren."
+  },
+  {
+   "titel": "Statische SEO-Landing-Pages",
+   "hinweis": "Nur falls organischer Traffic ein Ziel ist: 3-5 Top-Themen (Bosse, True Ending, Waffen) als statische, aus den Datenstrukturen generierte HTML-Seiten mit echten URLs + Sitemap-Eintraegen. Vorher mit User klaeren ob SEO ueberhaupt Ziel ist."
+  }
+ ],
+ "erledigt_2026_06_10_pi": [
+  "Boss-Bilder: 49 der 52 fehlenden BOSS_IMGS ergaenzt (questlog database.getKnowledges-API mit searchTerm-Parameter; alle URLs HTTP-200, Stichproben visuell). Jetzt 94/97 Bosse mit Bild. Ohne questlog-Bild bleiben: Black Bear Captain, Mountain God Boar, Crookrock Walker. BEFUND: Wiki-Boss 'Frostwalker Tervis' heisst bei questlog 'Forestwalker Tervis' (Wald-Golem-Bild) -- das Eis-/Frost-Lore im Wiki-Eintrag ist vermutlich erfunden, pruefen.",
+  "Lazy-Rendering pro Sektion: SEC_RENDERERS-Registry + ensureSecRendered() in showSec(), ensureAllRendered()-Hook in _searchOtherSections (Suche braucht [data-s] aller Sektionen). Init rendert nur noch globale Schritte. jsdom-verifiziert: Start 22 tr/97 data-s statt 278/1184; nach ensureAllRendered identisch zur Eager-Baseline; Cross-Sektion-Suche funktioniert.",
+  "Echte Trophaeen-Liste: TROPHIES (35 Eintraege, PowerPyx/PSNProfiles/Fextralife, 2x verifiziert) + renderTrophies mit Grade-/Missable-Filter + Platin-Roadmap als erster Block in sec-achievements (Titel jetzt 'Trophaeen & Achievements', Sidebar-Label 'Trophaeen'). Hinweis: PowerPyx kennt KEINEN Point-of-No-Return bei 'Orbian' (Free-Roam nach Story, kein Quest-Replay) -- Wiki-Warnung in Kap.11 ggf. praezisieren.",
+  "Hauptquests Prolog-Kap.3 zum Walkthrough ausgebaut: 46 Quests im FAC_DATA-Schema (trigger/prereq/reward/miss/tip/conf, PowerPyx-Einzelwalkthroughs + game8 + Fextralife), renderMQ rendert Detail-Karten mit data-s (alte String-Kapitel 4-12 weiter unterstuetzt). KORREKTUREN: 'Heart Beyond Borders' (war 'Hearts...'), 'Rebellion or Revolution' (war '...of...'), Kap.2 hat 16 Quests (+Awestruck, Trial After Trial, The Man Trapped in the Mire, Missing Companion), Kap.3 hat 17 (+Scattered Comrades, Rumors from the Sawmill, A Gentle Touch). Recherche-JSONs auf dem Pi: /mnt/nvme/claude/cd-audit-pi/research/."
+ ],
+ "erledigt_2026_06_11_pi": [
+  "Hauptquest-Walkthrough Kapitel 4-Epilog: alle 10 restlichen Kapitel vom Namensregister ins Detail-Schema {q,trigger,prereq,reward,miss,tip,conf} ueberfuehrt (PowerPyx-Einzelwalkthroughs massgeblich, game8 als Zweitquelle, Fextralife punktuell; Recherche-JSONs: /mnt/nvme/claude/cd-audit-pi/research/mq_ch4..12_epilog.json). MAIN_QUESTS jetzt 14 Kapitel / 168 Quests — deckungsgleich mit PowerPyx' 168 Missionsschritten.",
+  "Register-Korrekturen: K4 +2 Quests (Kiln Repair at the Kilnden Workshop, Skilled in Archery), K6 +4 (The Counterattack, Fire on the Frontlines, In Ashes, News of Victory), K7 +6 (Podium of Resolve, Driving out the Shadows, Reclamation, Lonely Jackals, Resolution, Incomplete Victory), K8 +3 (Where the Wind Guides You, Resolve Amidst a Storm, Preparations for Advance), K9 +6 (Shackles of Fate, Unwavering Steps, Path of the Disciple, Face the Inner Self, The Cloister of Enlightenment #134, Lust for Power). K10: 'Clockwork Insect'+'Clash' waren EINE Quest 'Clockwork Insect Clash' (nicht belegbarer Split). K11: 'Cloud Castle'+'Orbian' -> eine Quest 'Cloud Fortress Orbian'. K9: fruehe Quest heisst 'Cloister of Enlightenment' OHNE Artikel; 'The Cloister of Enlightenment' ist die spaete #134. Epilog: alle 8 Namen belegt, Reihenfolge nach PowerPyx korrigiert (Enduring Flame/Evolving City vor Desert's Edge).",
+  "Metadaten-Fixes: K4-Boss = Tenebrum (Kearush the Slayer gehoert zu K5 'Demenissian Delegation' -> dort ergaenzt); K6-Boss = Cassius Morten (Tenebrum entfernt, ist K4-Boss); K10-Boss = Marni's Clockwork Mantis (fehlte); K8-MISSABLE-Warnung ersetzt (Words Left by the Riverside + Strength Held in the Fingertips sind Greymanes-Fraktionsquests, laut Quellen nicht verpassbar); K11-Warnung 'Orbian = Point of No Return!' ersetzt (kein PoNR belegt — PowerPyx Trophy Guide: Free-Roam nach Story; nur Checkpoint-Warnung im Orbian-Bosskampf); K12-Warnung praezisiert (manueller Save vor Abyss-Tor, niemals 'Give Up' in Blinding Darkness — sonst Aussperrung vom Bosskampf).",
+  "A11y + Heading-Semantik: versteckter h1, 29x sec-t->h2, 16x sub-t->h3 (CSS-Reset, Optik unveraendert); 29 statische Tab-Divs -> <button type=button> (font-family:inherit); 6 Checklisten-Template-Stellen mit role=checkbox/aria-checked/tabindex=0 + delegierter Enter/Space-Handler. Lore-Akkordeon aus dem Audit-Briefing existiert nicht mehr — Punkt obsolet. Offen nur noch Modal-Fokus (in optionale Aufgaben verschoben). jsdom: 278 tr/1387 data-s/0 JS-Fehler unveraendert.",
+  "Side-Quest-Verzeichnis als vierter Quests-Tab: SIDE_QUESTS (42 freie Requests/Commissions: Hernand 36, Wueste 3, Demeniss 2, Delesyia 1) + renderSideQuests (Regionen-Gruppierung, fac-q-Karten mit data-s, facBadges). Quelle fast nur game8 -> conf durchgehend medium (Badge sichtbar). Die 26 Greymane-Camp-Requests bewusst NICHT aufgenommen (= GREYMANE_COMMISSIONS, eigene Sektion). KORREKTUR zur Aufgabenbeschreibung: 'Sweet Deal' ist Greymanes-Fraktionsquest (Scattered Embers/Favorable Trade) und nirgends als missable belegt (nur Softlock-Bug); game8 sagt explizit: keine technischen Missables im Spiel. Offen: Pailune-Requests-Liste fehlt quellseitig; game8 selbst unvollstaendig (z.B. 'Meat or Nothing'). Render-Soll jetzt 278 tr / 1429 data-s. Recherche: research/side_quests.json"
+ ],
+ "erledigt_2026_06_11_pi_block2": [
+  "Patch-Archiv komplett: PATCHES jetzt 15 Eintraege (1.00.02 bis 1.10.01 lueckenlos). Sammeleintrag 1.00.02-1.03.01 und 1.04-Stub durch 6 Detail-Eintraege ersetzt (1.00.02, 1.00.03, 1.01.00, 1.02.00, 1.03.00, 1.04.00; Hotfixes jeweils als Kategorie beim Mutterpatch), 1.05.01-Stub mit echten Notes gefuellt. Quelle: offizielles Notice-Board boardNo 72-89 (vollstaendige Liste der Board-Nummern in den Notes recherchiert).",
+  "Waffendatenbank Prio-Teil: 55 Waffen (BUILDS-Referenzen + Boss-Drops) gegen Fextralife/game8 recherchiert -> 30 crit- und 47 slots-Werte gefuellt (nur null-Felder, nie ueberschrieben). crit:null von 409 auf 379, slots:null von 472 auf 425. UI-Fix: null-Felder als (nicht erfasst) statt leerem Strich. OFFENER DATENPUNKT geklaert: Small Calphadean Banner Pike atk:24 von Fextralife bestaetigt. HINWEIS: Fextralife-Wiki ist auf crimsondesertgame.wiki.fextralife.com umgezogen (301).",
+  "Fextralife-Hotlinks eliminiert: alle 465 fextralife-Bilder (439 WEAPON_IMGS, 14 BOSS_IMGS, 12 MOUNT_INGAME_IMGS) als lokale WebPs gespiegelt (sharp q82, ~2.8 MB, cd_assets/weapons/fex bzw. bosses/fex bzw. mounts/ig), Maps auf lokale Pfade umgestellt, kompakte FEX_FB-Map + _fexFb()-Helfer rekonstruiert Original-URL als onerror-Fallback (an 8 Render-Stellen verdrahtet). Linkcheck etabliert: node scripts/linkcheck.mjs prueft alle externen *_IMGS-URLs (in CLAUDE.md dokumentiert). jsdom-verifiziert: 278 tr (identisch Baseline), 1433 data-s (+4 = neue Patch-Karten), 0 JS-Fehler, 0 fextralife-Hotlinks im DOM, alle 658 lokalen Pfade existieren, Fallback-Helfer live getestet (HTTP 200)."
+ ]
 }
