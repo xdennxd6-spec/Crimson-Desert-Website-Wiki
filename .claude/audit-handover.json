@@ -49,23 +49,16 @@
       "umsetzung": "Meistgesehene Bilder (Bosse, Top-Waffen, Armor-Sets) als lokale WebPs spiegeln (Workflow siehe .claude/CLAUDE.md bzw. WebP-Regeln: ffmpeg libwebp quality 82), externe URLs nur als Fallback. Zusaetzlich periodischen Linkcheck-Skript ueber alle ~850 externen URLs der IMG-Maps etablieren.",
       "aufwand": "gross",
       "wirkung": "mittel"
-    },
-    {
-      "titel": "A11y-Rest: Checklisten und Tabs tastaturbedienbar",
-      "warum": "Vom Audit-ARIA-Paket wurde nur der ESC-Teil umgesetzt. Das Kern-Feature Abhaken ist fuer Tastatur/Screenreader weiter unbedienbar: 0 echte Checkboxen, Tab-Leisten sind nicht fokussierbare Divs.",
-      "umsetzung": "Checklisten-Items (Grep: 'class=\"chk\"' bzw. die Checklisten-Renderfunktionen) role='checkbox', aria-checked und tabindex='0' geben plus delegierten Enter/Space-Handler (Muster: Sidebar-Keydown-Handler am Ende der Datei). Tab-Leisten (Grep: 'class=\"tab\"') zu <button> machen. Lore-Akkordeon aria-expanded ergaenzen. Fokus-Management der Modals (Fokus auf Close-Button beim Oeffnen, zurueck beim Schliessen, Vorbild openLoginModal).",
-      "aufwand": "mittel",
-      "wirkung": "mittel"
-    },
-    {
-      "titel": "Heading-Semantik",
-      "warum": "Die Seite hat kein h1, alle 29 Sektionstitel sind Divs. Kostet On-Page-SEO und Screenreader-Navigation.",
-      "umsetzung": "Visuell versteckten Seitentitel als <h1>, <div class='sec-t'> zu <h2 class='sec-t'>, <div class='sub-t'> zu <h3 class='sub-t'>; im CSS margin/font-reset fuer die neuen Tags ergaenzen, Optik darf sich nicht aendern.",
-      "aufwand": "mittel",
-      "wirkung": "mittel"
     }
   ],
   "offene_aufgaben_optional": [
+    {
+      "titel": "Modal-Fokus-Management",
+      "warum": "Rest aus dem A11y-Paket: Fokus beim Oeffnen auf Close-Button, beim Schliessen zurueck (Vorbild openLoginModal). Checklisten/Tabs/Headings sind seit 2026-06-11 erledigt.",
+      "umsetzung": "Zentrale open/close-Helfer der Modals um Fokus-Handling ergaenzen.",
+      "aufwand": "klein",
+      "wirkung": "klein"
+    },
     {
       "titel": "Monolith aufteilen: grosse Datenstrukturen in separate JS-Dateien",
       "hinweis": "index.html besteht zu ~84% aus JS-Daten (RUINS_DATA ~149KB, FAC_DATA ~56KB, WEAPONS ~65KB, MISSABLE_ITEMS ~38KB). Auslagern in .js-Dateien mit <script defer> + lange Cache-Header entkoppelt Caching und Deploys. Groesserer Umbau, vorher mit User abstimmen."
@@ -120,6 +113,7 @@
   "erledigt_2026_06_11_pi": [
     "Hauptquest-Walkthrough Kapitel 4-Epilog: alle 10 restlichen Kapitel vom Namensregister ins Detail-Schema {q,trigger,prereq,reward,miss,tip,conf} ueberfuehrt (PowerPyx-Einzelwalkthroughs massgeblich, game8 als Zweitquelle, Fextralife punktuell; Recherche-JSONs: /mnt/nvme/claude/cd-audit-pi/research/mq_ch4..12_epilog.json). MAIN_QUESTS jetzt 14 Kapitel / 168 Quests — deckungsgleich mit PowerPyx' 168 Missionsschritten.",
     "Register-Korrekturen: K4 +2 Quests (Kiln Repair at the Kilnden Workshop, Skilled in Archery), K6 +4 (The Counterattack, Fire on the Frontlines, In Ashes, News of Victory), K7 +6 (Podium of Resolve, Driving out the Shadows, Reclamation, Lonely Jackals, Resolution, Incomplete Victory), K8 +3 (Where the Wind Guides You, Resolve Amidst a Storm, Preparations for Advance), K9 +6 (Shackles of Fate, Unwavering Steps, Path of the Disciple, Face the Inner Self, The Cloister of Enlightenment #134, Lust for Power). K10: 'Clockwork Insect'+'Clash' waren EINE Quest 'Clockwork Insect Clash' (nicht belegbarer Split). K11: 'Cloud Castle'+'Orbian' -> eine Quest 'Cloud Fortress Orbian'. K9: fruehe Quest heisst 'Cloister of Enlightenment' OHNE Artikel; 'The Cloister of Enlightenment' ist die spaete #134. Epilog: alle 8 Namen belegt, Reihenfolge nach PowerPyx korrigiert (Enduring Flame/Evolving City vor Desert's Edge).",
-    "Metadaten-Fixes: K4-Boss = Tenebrum (Kearush the Slayer gehoert zu K5 'Demenissian Delegation' -> dort ergaenzt); K6-Boss = Cassius Morten (Tenebrum entfernt, ist K4-Boss); K10-Boss = Marni's Clockwork Mantis (fehlte); K8-MISSABLE-Warnung ersetzt (Words Left by the Riverside + Strength Held in the Fingertips sind Greymanes-Fraktionsquests, laut Quellen nicht verpassbar); K11-Warnung 'Orbian = Point of No Return!' ersetzt (kein PoNR belegt — PowerPyx Trophy Guide: Free-Roam nach Story; nur Checkpoint-Warnung im Orbian-Bosskampf); K12-Warnung praezisiert (manueller Save vor Abyss-Tor, niemals 'Give Up' in Blinding Darkness — sonst Aussperrung vom Bosskampf)."
+    "Metadaten-Fixes: K4-Boss = Tenebrum (Kearush the Slayer gehoert zu K5 'Demenissian Delegation' -> dort ergaenzt); K6-Boss = Cassius Morten (Tenebrum entfernt, ist K4-Boss); K10-Boss = Marni's Clockwork Mantis (fehlte); K8-MISSABLE-Warnung ersetzt (Words Left by the Riverside + Strength Held in the Fingertips sind Greymanes-Fraktionsquests, laut Quellen nicht verpassbar); K11-Warnung 'Orbian = Point of No Return!' ersetzt (kein PoNR belegt — PowerPyx Trophy Guide: Free-Roam nach Story; nur Checkpoint-Warnung im Orbian-Bosskampf); K12-Warnung praezisiert (manueller Save vor Abyss-Tor, niemals 'Give Up' in Blinding Darkness — sonst Aussperrung vom Bosskampf).",
+    "A11y + Heading-Semantik: versteckter h1, 29x sec-t->h2, 16x sub-t->h3 (CSS-Reset, Optik unveraendert); 29 statische Tab-Divs -> <button type=button> (font-family:inherit); 6 Checklisten-Template-Stellen mit role=checkbox/aria-checked/tabindex=0 + delegierter Enter/Space-Handler. Lore-Akkordeon aus dem Audit-Briefing existiert nicht mehr — Punkt obsolet. Offen nur noch Modal-Fokus (in optionale Aufgaben verschoben). jsdom: 278 tr/1387 data-s/0 JS-Fehler unveraendert."
   ]
 }

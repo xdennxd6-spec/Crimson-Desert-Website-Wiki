@@ -249,9 +249,10 @@ body{
 /* ── Sections ── */
 .sec{display:none;padding:28px 26px}
 .sec.active{display:block}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .sec-t{
   font-family:'Cinzel',serif;font-size:17px;font-weight:700;
-  color:var(--glo);margin-bottom:24px;
+  color:var(--glo);margin:0 0 24px;
   display:flex;align-items:center;gap:12px;
   letter-spacing:.05em;
   text-shadow:0 0 40px rgba(244,204,82,.22);
@@ -341,7 +342,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .tab{
   padding:7px 16px;background:rgba(255,255,255,.025);
   border:1px solid var(--bdr);border-radius:20px;
-  cursor:pointer;font-size:12px;font-weight:500;
+  cursor:pointer;font-size:12px;font-weight:500;font-family:inherit;
   color:var(--dim);transition:all .17s;user-select:none;letter-spacing:.02em;
 }
 .tab:hover{border-color:#333;color:var(--text)}
@@ -1342,6 +1343,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </style>
 </head>
 <body>
+<h1 class="vh">Crimson Desert Wiki — Guides, Bosse, Quests &amp; Datenbanken</h1>
 <a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
 <button id="ham" onclick="toggleSidebar()" aria-label="Menü"><span></span><span></span><span></span></button>
 <div id="mob-overlay" onclick="toggleSidebar()"></div>
@@ -1596,7 +1598,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </div>
 
   <section class="sec active" id="sec-bosses">
-    <div class="sec-t">🗡️ Bosse</div>
+    <h2 class="sec-t">🗡️ Bosse</h2>
     <div class="stats-strip">
       <div class="stat-block"><div class="stat-label">Bosse Besiegt</div><div class="stat-val" id="ss-bosses">0</div><div class="stat-sub" id="ss-bosses-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-bosses-bar" style="width:0%"></div></div></div>
       <div class="stat-block"><div class="stat-label">True Ending</div><div class="stat-val" id="ss-te">0</div><div class="stat-sub">von 28</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-te-bar" style="width:0%"></div></div></div>
@@ -1631,14 +1633,14 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-items">
-    <div class="sec-t">🔮 Items</div>
+    <h2 class="sec-t">🔮 Items</h2>
     <div id="wt-upgrade" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Waffen-Upgrade &amp; Refinement</div>
     <div style="font-size:11.5px;color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Jede Waffe kann bis <span style="color:var(--gold);font-weight:600">Refine +10</span> gesteigert werden (Stufen 5-10 erfordern zusätzlich Abyss-Artefakte). Abyss-Slots werden bei einer Hexe gegen Silber erstellt — max. 3 bei Einhand-, bis 5 bei Zweihand-/Fernkampf-Waffen; Boss-Waffen bringen teils vorinstallierte Sockel mit. Elementeffekte (Fire/Lightning/Frost Affinity) laufen über Cores/Abyss Gears. <span style="color:var(--dim);font-size:10px">[Fakten-Audit 2026-06-02]</span></div>
     <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
   </section>
 
   <section class="sec" id="sec-weapons">
-    <div class="sec-t">⚔️ Waffen</div>
+    <h2 class="sec-t">⚔️ Waffen</h2>
     <div class="fbar">
       <select class="fs" id="wf-type" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen-Compare">⚔️ Compare</button>
@@ -1648,7 +1650,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-armor">
-    <div class="sec-t">🛡️ Rüstungen</div>
+    <h2 class="sec-t">🛡️ Rüstungen</h2>
     <div class="fbar">
       <select class="fs" id="af-type" onchange="renderArmor()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
     </div>
@@ -1658,7 +1660,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-cores">
-    <div class="sec-t">💎 Abyss Cores</div>
+    <h2 class="sec-t">💎 Abyss Cores</h2>
     <div class="fbar">
       <select class="fs" id="cf-slot" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Both">Both</option></select>
     </div>
@@ -1666,14 +1668,14 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-crafting">
-    <div class="sec-t">⚗️ Crafting &amp; Farming</div>
+    <h2 class="sec-t">⚗️ Crafting &amp; Farming</h2>
     <div class="rl-tool">
-      <div class="sub-t" style="margin-top:0">🔎 Wo bekomme ich …?</div>
+      <h3 class="sub-t" style="margin-top:0">🔎 Wo bekomme ich …?</h3>
       <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Item, Waffe, Rüstung, Core oder Material eingeben → alle Fundorte: direkte Quelle, Boss-Drops, eingebaute Cores und Crafting.</div>
       <input id="rl-input" class="rl-input" type="search" oninput="renderReverseLookup()" placeholder="z.B. Crow's Pursuit, Wind Slash, Ashclaw …" aria-label="Item-Fundsuche">
       <div id="rl-results" class="rl-results"></div>
     </div>
-    <div class="sub-t">⚗️ Crafting-Rezepte</div>
+    <h3 class="sub-t">⚗️ Crafting-Rezepte</h3>
     <div class="fbar">
       <select class="fs" id="kf-cat" onchange="renderCrafting()"><option value="">Alle Kategorien</option><option value="Potion">Potions / Elixiere</option><option value="Food">Food / Buff-Food</option><option value="Gear">Gear / Rüstung</option></select>
     </div>
@@ -1681,11 +1683,11 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-quests">
-    <div class="sec-t">📜 Quests &amp; Story</div>
+    <h2 class="sec-t">📜 Quests &amp; Story</h2>
     <div class="tabs">
-      <div class="tab active" id="qt-te" onclick="qTab('te')">True Ending Checkliste</div>
-      <div class="tab" id="qt-mq" onclick="qTab('mq')">Hauptquests</div>
-      <div class="tab" id="qt-fac" onclick="qTab('fac')">Fraktionen</div>
+      <button type="button" class="tab active" id="qt-te" onclick="qTab('te')">True Ending Checkliste</button>
+      <button type="button" class="tab" id="qt-mq" onclick="qTab('mq')">Hauptquests</button>
+      <button type="button" class="tab" id="qt-fac" onclick="qTab('fac')">Fraktionen</button>
     </div>
     <div class="pane active" id="qp-te">
       <div class="te-pg">
@@ -1702,7 +1704,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-map">
-    <div class="sec-t">🗺️ Interaktive Karte</div>
+    <h2 class="sec-t">🗺️ Interaktive Karte</h2>
     <div id="map-loc-banner">
       <span class="mlb-lbl">Suche:</span>
       <span class="mlb-term" id="mlb-term"></span>
@@ -1718,7 +1720,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-locations">
-    <div class="sec-t">📍 Locations</div>
+    <h2 class="sec-t">📍 Locations</h2>
     <div id="lo-toc"></div>
     <div id="lo-locs" class="fbar" style="scroll-margin-top:72px">
       <select class="fs" id="lf-reg" onchange="renderLocs()"><option value="">Alle Regionen</option><option value="Hernand">Hernand</option><option value="Pailune">Pailune</option><option value="Demeniss">Demeniss</option><option value="Delesyia">Delesyia</option><option value="Crimson Desert">Crimson Desert</option><option value="The Abyss">The Abyss</option></select>
@@ -1730,12 +1732,12 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-mounts">
-    <div class="sec-t">🐴 Mounts</div>
+    <h2 class="sec-t">🐴 Mounts</h2>
     <div id="mount-sections"></div>
   </section>
 
   <section class="sec" id="sec-disarm">
-    <div class="sec-t">🛡️ Entwaffnen</div>
+    <h2 class="sec-t">🛡️ Entwaffnen</h2>
     <div id="da-toc"></div>
     <div class="disarm-hero">
       <p>Das Entwaffnungs-System in Crimson Desert basiert auf einem <strong>Shield Bash Counter</strong> — kein separater Skill-Tree-Eintrag nötig. Einzige Voraussetzung: <strong>Einhandwaffe + kleine Rundschild</strong>. Turmschilder funktionieren nicht. Entwaffnete Gegner kämpfen auf Fäusten weiter und verlieren jede Block-Option.</p>
@@ -1800,14 +1802,14 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-skills">
-    <div class="sec-t">⚡ Skills</div>
+    <h2 class="sec-t">⚡ Skills</h2>
     <div class="tabs">
-      <div class="tab active" id="skt-kliff" onclick="skTab('kliff')">Kliff</div>
-      <div class="tab" id="skt-damiane" onclick="skTab('damiane')">Damiane</div>
-      <div class="tab" id="skt-oongka" onclick="skTab('oongka')">Oongka</div>
-      <div class="tab" id="skt-watch" onclick="skTab('watch')">Watch &amp; Learn</div>
-      <div class="tab" id="skt-unlock" onclick="skTab('unlock')">Freischalt-Details</div>
-      <div class="tab" id="skt-graph" onclick="skTab('graph')">🌳 Tree-Graph</div>
+      <button type="button" class="tab active" id="skt-kliff" onclick="skTab('kliff')">Kliff</button>
+      <button type="button" class="tab" id="skt-damiane" onclick="skTab('damiane')">Damiane</button>
+      <button type="button" class="tab" id="skt-oongka" onclick="skTab('oongka')">Oongka</button>
+      <button type="button" class="tab" id="skt-watch" onclick="skTab('watch')">Watch &amp; Learn</button>
+      <button type="button" class="tab" id="skt-unlock" onclick="skTab('unlock')">Freischalt-Details</button>
+      <button type="button" class="tab" id="skt-graph" onclick="skTab('graph')">🌳 Tree-Graph</button>
     </div>
     <div class="pane active" id="skp-kliff"></div>
     <div class="pane" id="skp-damiane"></div>
@@ -1818,16 +1820,16 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-checklists">
-    <div class="sec-t">☑️ Checklisten</div>
+    <h2 class="sec-t">☑️ Checklisten</h2>
     <div class="tabs">
-      <div class="tab active" id="clt-overview" onclick="clTab('overview')">Übersicht</div>
-      <div class="tab" id="clt-bosses" onclick="clTab('bosses')">⚔️ Bosse</div>
-      <div class="tab" id="clt-greymane" onclick="clTab('greymane')">🎖️ Greymane</div>
-      <div class="tab" id="clt-sanctums" onclick="clTab('sanctums')">🏛️ Sanctums</div>
-      <div class="tab" id="clt-waffen" onclick="clTab('waffen')">🗡️ Waffen</div>
-      <div class="tab" id="clt-missables" onclick="clTab('missables')">⚠️ Missables</div>
-      <div class="tab" id="clt-sanctum-guide" onclick="clTab('sanctum-guide')">📋 Sanctum-Info</div>
-      <div class="tab" id="clt-export" onclick="clTab('export')">💾 Export</div>
+      <button type="button" class="tab active" id="clt-overview" onclick="clTab('overview')">Übersicht</button>
+      <button type="button" class="tab" id="clt-bosses" onclick="clTab('bosses')">⚔️ Bosse</button>
+      <button type="button" class="tab" id="clt-greymane" onclick="clTab('greymane')">🎖️ Greymane</button>
+      <button type="button" class="tab" id="clt-sanctums" onclick="clTab('sanctums')">🏛️ Sanctums</button>
+      <button type="button" class="tab" id="clt-waffen" onclick="clTab('waffen')">🗡️ Waffen</button>
+      <button type="button" class="tab" id="clt-missables" onclick="clTab('missables')">⚠️ Missables</button>
+      <button type="button" class="tab" id="clt-sanctum-guide" onclick="clTab('sanctum-guide')">📋 Sanctum-Info</button>
+      <button type="button" class="tab" id="clt-export" onclick="clTab('export')">💾 Export</button>
     </div>
 
     <!-- ── Übersicht ── -->
@@ -1889,7 +1891,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <div class="sanc-guide-grid" id="sg-grid"></div>
     </div>
     <div class="pane" id="clp-export">
-      <div class="sub-t" style="margin-top:0">Fortschritt exportieren / importieren</div>
+      <h3 class="sub-t" style="margin-top:0">Fortschritt exportieren / importieren</h3>
       <div style="font-size:12px;color:var(--dim);margin-bottom:12px">Exportiere deinen kompletten Fortschritt (Bosse, True Ending, Greymane, Waffen, Missables, Kapitel, Favoriten, Notizen, Kommentare, eigene Builds) als JSON. Kann jederzeit wieder importiert werden.</div>
       <div style="font-size:12px;color:var(--warn);margin-bottom:12px;line-height:1.6">⚠ Ohne Konto wird dein Fortschritt nur in diesem Browser gespeichert — Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren oder oben rechts anmelden (Cloud-Sync).</div>
       <div class="xp-row">
@@ -1911,18 +1913,18 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-builds">
-    <div class="sec-t">⚙️ Builds</div>
+    <h2 class="sec-t">⚙️ Builds</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Empfohlene Loadouts für verschiedene Spielstile. Alle Builds basieren auf Items, die nach dem angegebenen Kapitel verfügbar sind.</div>
     <div class="bo-wizard" id="bo-wizard" aria-label="Build-Loadout-Optimizer"></div>
-    <div class="sub-t" style="margin-top:24px">🧮 Build-Stat-Simulator</div>
+    <h3 class="sub-t" style="margin-top:24px">🧮 Build-Stat-Simulator</h3>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Waffe, Rüstung &amp; passive Cores wählen → live aggregierte Werte, zwei Loadouts (A/B) vergleichbar. Hinweis: ATK/DEF werden aus den Rüstungs-Effekttexten summiert; aktive Skill-Cores haben keine öffentlichen Schadenswerte (nur Buff-Effekte) und zählen hier nur Slots.</div>
     <div id="build-sim"></div>
-    <div class="sub-t">Klassische Build-Vorschläge</div>
+    <h3 class="sub-t">Klassische Build-Vorschläge</h3>
     <div id="builds-list"></div>
   </section>
 
   <section class="sec" id="sec-accessories">
-    <div class="sec-t">💎 Accessoires &amp; Schmuck</div>
+    <h2 class="sec-t">💎 Accessoires &amp; Schmuck</h2>
     <div class="fbar">
       <select class="fs" id="accf-type" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option></select>
     </div>
@@ -1930,20 +1932,20 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-witches">
-    <div class="sec-t">🧙 Hexen Guide</div>
+    <h2 class="sec-t">🧙 Hexen Guide</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet nur die Workshop-Basis (keine Synthese/kein Crafting). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; die versteckte <strong>White Crow</strong> ist erst nach 4 Witch Tokens erreichbar.</div>
     <div class="witch-grid" id="witch-grid"></div>
   </section>
 
   <section class="sec" id="sec-pets">
-    <div class="sec-t">🐾 Pets</div>
+    <h2 class="sec-t">🐾 Pets</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar.</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25), Füttern +10 bis +35 je nach Futter — das <strong>Lieblingsessen</strong> gibt +35. Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
   </section>
   <section class="sec" id="sec-collectibles">
-    <div class="sec-t">📚 Collectibles &amp; Knowledge</div>
+    <h2 class="sec-t">📚 Collectibles &amp; Knowledge</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, ~2.921 Einträge — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214, Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:#e84535">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">141</span> Sealed Abyss Artifacts</div>
@@ -1960,7 +1962,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="col-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-gatherables">
-    <div class="sec-t">🌿 Gatherables — Materialien &amp; Kräuter</div>
+    <h2 class="sec-t">🌿 Gatherables — Materialien &amp; Kräuter</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Über ganz Pywel sammelst du Erze, Kräuter, Pilze und Spezialmaterialien per Mining-Node, Foraging oder Logging Axe. Sie speisen Alchemie, Kochen, Schmieden, Färben und einige Stat-Upgrades. Mehrere Kräuter heben Stats über ihr Maximum, etwa Spirit oder Stamina.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">25</span> Materialien</div>
@@ -1975,7 +1977,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="gatherables-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-puzzles">
-    <div class="sec-t">🧩 Rätsel &amp; Strongboxes</div>
+    <h2 class="sec-t">🧩 Rätsel &amp; Strongboxes</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Pywel steckt voller Strongboxes (verschlossene Truhen mit fester Lösung) und Story-Rätsel im Abyss, die meist mit Axiom Force (L3 + rechter Stick) und Force Palm (R3) gelöst werden. Strongboxes folgen vier Mustern: feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">4</span> Strongbox-Methoden</div>
@@ -1990,7 +1992,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="puzzles-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-dyes">
-    <div class="sec-t">🎨 Dyes — Färbesystem</div>
+    <h2 class="sec-t">🎨 Dyes — Färbesystem</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Färbemittel (Dyes) schalten pro Grundfarbe ein Spektrum von ca. 20 Farbtönen für Rüstungen frei. Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">19</span> belegte Dyes</div>
@@ -2006,7 +2008,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="tw-wrap"><table><thead><tr><th class="dye-th"></th><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="dyes-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-food">
-    <div class="sec-t">🍲 Food &amp; Elixirs</div>
+    <h2 class="sec-t">🍲 Food &amp; Elixirs</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Kochen am Lagerfeuer und Alchemie liefern in Crimson Desert situative Buffs: Feldgerichte geben Heilung plus feste Ice- oder Fire-Resistance, während Elixiere aus dem Cauldron oder dem Greymane-Labor Angriff, Verteidigung, Spirit und Wiederbelebung abdecken. Wichtig: Resistance-Level und Wirkdauer eines Rezepts sind über alle Qualitätsstufen FIX - nur der HP-Wert steigt mit höherer Kochstufe.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">21</span> Einträge</div>
@@ -2022,31 +2024,31 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="food-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-chapters">
-    <div class="sec-t">📖 Kapitel-Guide</div>
+    <h2 class="sec-t">📖 Kapitel-Guide</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Schritt-für-Schritt Übersicht aller 12 Kapitel mit Key-Items, Bossen und missable Content. Markiere Kapitel als abgeschlossen um deinen Fortschritt zu tracken.</div>
     <div class="qst-hero" id="qst-hero" aria-label="Story-Timeline 12 Kapitel"></div>
     <div style="display:flex;flex-direction:column;gap:12px" id="ch-timeline"></div>
   </section>
 
   <section class="sec" id="sec-secrets">
-    <div class="sec-t">🕵️ Secrets &amp; Hidden Lore</div>
+    <h2 class="sec-t">🕵️ Secrets &amp; Hidden Lore</h2>
     <div class="spoiler-shield">
       <span class="spoiler-shield-ico">⚠️</span>
       <div><strong>SPOILER-WARNUNG:</strong> Diese Section enthält den Hidden Ending Lore (Run 108), Memory-Fragment-Lokationen, Boss-Identitäten und Story-Auflösungen. Wer sich überraschen lassen will: nur die Tabs öffnen, die zu eurem Story-Fortschritt passen.</div>
     </div>
     <div class="tabs">
-      <div class="tab active" id="sect-ending" onclick="secretsTab('ending')">🌑 Hidden Ending</div>
-      <div class="tab" id="sect-timeline" onclick="secretsTab('timeline')">🕰️ Story-Timeline</div>
-      <div class="tab" id="sect-fragments" onclick="secretsTab('fragments')">📜 Memory Fragments</div>
-      <div class="tab" id="sect-frtracker" onclick="secretsTab('frtracker')">📊 Fragment-Tracker</div>
-      <div class="tab" id="sect-cressets" onclick="secretsTab('cressets')">🔥 Abyss Cressets</div>
-      <div class="tab" id="sect-crtracker" onclick="secretsTab('crtracker')">🏆 Cresset-Tracker</div>
-      <div class="tab" id="sect-easter" onclick="secretsTab('easter')">🥚 Easter Eggs</div>
-      <div class="tab" id="sect-locations" onclick="secretsTab('locations')">📍 Hidden Locations</div>
-      <div class="tab" id="sect-weapons" onclick="secretsTab('weapons')">⚔️ Hidden Weapons</div>
-      <div class="tab" id="sect-mechanics" onclick="secretsTab('mechanics')">🔧 Versteckte Mechaniken</div>
-      <div class="tab" id="sect-tools" onclick="secretsTab('tools')">🔎 Such-Tools</div>
-      <div class="tab" id="sect-priority" onclick="secretsTab('priority')">⚡ Priorität</div>
+      <button type="button" class="tab active" id="sect-ending" onclick="secretsTab('ending')">🌑 Hidden Ending</button>
+      <button type="button" class="tab" id="sect-timeline" onclick="secretsTab('timeline')">🕰️ Story-Timeline</button>
+      <button type="button" class="tab" id="sect-fragments" onclick="secretsTab('fragments')">📜 Memory Fragments</button>
+      <button type="button" class="tab" id="sect-frtracker" onclick="secretsTab('frtracker')">📊 Fragment-Tracker</button>
+      <button type="button" class="tab" id="sect-cressets" onclick="secretsTab('cressets')">🔥 Abyss Cressets</button>
+      <button type="button" class="tab" id="sect-crtracker" onclick="secretsTab('crtracker')">🏆 Cresset-Tracker</button>
+      <button type="button" class="tab" id="sect-easter" onclick="secretsTab('easter')">🥚 Easter Eggs</button>
+      <button type="button" class="tab" id="sect-locations" onclick="secretsTab('locations')">📍 Hidden Locations</button>
+      <button type="button" class="tab" id="sect-weapons" onclick="secretsTab('weapons')">⚔️ Hidden Weapons</button>
+      <button type="button" class="tab" id="sect-mechanics" onclick="secretsTab('mechanics')">🔧 Versteckte Mechaniken</button>
+      <button type="button" class="tab" id="sect-tools" onclick="secretsTab('tools')">🔎 Such-Tools</button>
+      <button type="button" class="tab" id="sect-priority" onclick="secretsTab('priority')">⚡ Priorität</button>
     </div>
     <div class="pane active" id="secp-ending"></div>
     <div class="pane" id="secp-timeline"></div>
@@ -2089,7 +2091,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   .ruin-conf.med{color:#d9a441;cursor:help;border-bottom:1px dotted #d9a441}
 </style>
   <section class="sec" id="sec-ruins">
-    <div class="sec-t">🗿 Uralte Ruinen — Abyss-Grenzsteine</div>
+    <h2 class="sec-t">🗿 Uralte Ruinen — Abyss-Grenzsteine</h2>
     <div class="disarm-hero">
       <p><strong>Abyss-Grenzsteine</strong> (Abyss Cressets in den „Uralten Ruinen") sind Schnellreise-Knoten, die du durch das Lösen eines <strong>Rätsels</strong> freischaltest. Jeder gelöste Grenzstein gibt <strong>1 Abyss-Artefakt</strong> (Skillpunkt) und einen Schnellreisepunkt. Zu unterscheiden vom <strong>Abyss-Nexus</strong> (einfach betreten, kein Rätsel), von den 60 versteckten <strong>Abyss-Cressets</strong> der Oberwelt und von den Sky-/Restoration-Puzzles im Abyss. Nicht jeder Energiepunkt hat ein Rätsel — hier stehen nur die <strong>mit</strong> Rätsel.</p>
     </div>
@@ -2102,7 +2104,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-patches">
-    <div class="sec-t">📋 Patch-Notes</div>
+    <h2 class="sec-t">📋 Patch-Notes</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.10.01</span> (06.06.2026).</div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
@@ -2121,26 +2123,26 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </section>
 
   <section class="sec" id="sec-favorites">
-    <div class="sec-t">⭐ Favoriten</div>
+    <h2 class="sec-t">⭐ Favoriten</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Markiere Bosse, Skills, Waffen oder Mounts mit ⭐ um sie hier zu sammeln. Speicherung lokal.</div>
     <div id="fav-list"></div>
   </section>
 
   <section class="sec" id="sec-roadmap">
-    <div class="sec-t">🧭 Roadmap — Was als nächstes?</div>
+    <h2 class="sec-t">🧭 Roadmap — Was als nächstes?</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Personalisierte Aufgaben-Empfehlung basierend auf deinem Fortschritt. Auto-update bei jeder Aktion. Klick auf Task → springt zur passenden Section.</div>
     <div class="rm-progress" id="rm-progress"></div>
     <div class="rm-task-list" id="rm-list"></div>
   </section>
 
   <section class="sec" id="sec-achievements">
-    <div class="sec-t">🏆 Trophäen & Achievements</div>
-    <div class="sub-t" style="margin-top:0">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</div>
+    <h2 class="sec-t">🏆 Trophäen & Achievements</h2>
+    <h3 class="sub-t" style="margin-top:0">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</h3>
     <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Quellen: PowerPyx, PSNProfiles, Fextralife (Stand 06/2026).</div>
     <div id="trophy-filter" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0"></div>
     <div id="trophy-list"></div>
     <div id="trophy-roadmap" style="margin-top:16px"></div>
-    <div class="sub-t" style="margin-top:26px">🎮 Wiki-Achievements</div>
+    <h3 class="sub-t" style="margin-top:26px">🎮 Wiki-Achievements</h3>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Gamification deines Wiki-Fortschritts. Achievements werden automatisch bei Aktionen entsperrt (Boss markieren, Notiz schreiben, Theme wechseln, etc.). Alle Daten bleiben lokal.</div>
     <div class="ach-overview-bar" id="ach-overview"></div>
     <div class="ach-grid" id="ach-grid"></div>
@@ -6938,7 +6940,7 @@ function renderTrophies(){
       +'</div>';
   }).join('');
   const rm=document.getElementById('trophy-roadmap');
-  if(rm)rm.innerHTML='<div class="sub-t">🗺️ Platin-Roadmap (PowerPyx)</div><ol style="font-size:12px;line-height:1.65;color:var(--txt);padding-left:18px;margin:6px 0">'
+  if(rm)rm.innerHTML='<h3 class="sub-t">🗺️ Platin-Roadmap (PowerPyx)</h3><ol style="font-size:12px;line-height:1.65;color:var(--txt);padding-left:18px;margin:6px 0">'
     +TROPHY_ROADMAP.map(r=>'<li style="margin-bottom:5px">'+esc(r)+'</li>').join('')
     +'</ol><div style="font-size:11px;color:var(--dim);line-height:1.55;margin-top:6px">'+esc(TROPHY_NOTE)+'</div>';
 }
@@ -7880,7 +7882,7 @@ function renderTE(){
     return `<div class="te-grp">
       <div class="te-gh"><span class="te-gt">${cat}</span><span class="te-gc">${dc}/${items.length}</span></div>
       ${items.map(t=>`<div class="te-it${done.includes(t.id)?' done':''}" onclick="toggleTE('${t.id}')">
-        <div class="chk${done.includes(t.id)?' on':''}"></div>
+        <div class="chk${done.includes(t.id)?' on':''}" role="checkbox" aria-checked="${done.includes(t.id)?'true':'false'}" tabindex="0"></div>
         <span class="te-tx">${t.task}</span>
       </div>`).join('')}
     </div>`;
@@ -8242,9 +8244,9 @@ function skCard(s){
 function renderSkills(){
   document.getElementById('skp-kliff').innerHTML=
     '<div style="margin-bottom:10px;font-size:12px;color:var(--dim)">Stat-Maxima: HP 18 · Sta 14 · Spirit 12</div>'+
-    '<div class="sub-t" style="margin-top:0">Stamina Tree</div><div class="sk-grid">'+KLIFF_STAMINA.map(skCard).join('')+'</div>'+
-    '<div class="sub-t">Spirit Tree</div><div class="sk-grid">'+KLIFF_SPIRIT.map(skCard).join('')+'</div>'+
-    '<div class="sub-t">Health Tree / Elemente</div><div class="sk-grid">'+KLIFF_HEALTH.map(skCard).join('')+'</div>';
+    '<h3 class="sub-t" style="margin-top:0">Stamina Tree</h3><div class="sk-grid">'+KLIFF_STAMINA.map(skCard).join('')+'</div>'+
+    '<h3 class="sub-t">Spirit Tree</h3><div class="sk-grid">'+KLIFF_SPIRIT.map(skCard).join('')+'</div>'+
+    '<h3 class="sub-t">Health Tree / Elemente</h3><div class="sk-grid">'+KLIFF_HEALTH.map(skCard).join('')+'</div>';
 
   document.getElementById('skp-damiane').innerHTML=
     '<div class="card" style="margin-bottom:12px"><div class="ct">Damiane</div><div class="crows">'+
@@ -8253,7 +8255,7 @@ function renderSkills(){
     '<div class="crow"><span class="cl">Flight</span><span class="cv">Mechanischer Glider (kein Magie-System), Skystep via Scholastone Abyss-Fan</span></div>'+
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Rush · Frost Mantle · Lightning Strike · Storm Pillar</span></div>'+
     '</div></div>'+
-    '<div class="sub-t">Einzigartige Skills</div><div class="sk-grid">'+
+    '<h3 class="sub-t">Einzigartige Skills</h3><div class="sk-grid">'+
     ['Shield Toss (prallt bis 3-7x)','Shield Toss Proficiency/Expertise (5x/7x)','Blade Sentinel','Piercing Light (Lunge)','Smiting Strike (Speer)','Smiting Bolt (Lichtspeer)','Sword Flurry','Spinning Scissors Throw','Quick Reload (NUR Watch & Learn)','Aerial Stab [1.07]','Fists / Unarmed Combat [1.07]']
     .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>'+
     '<div style="font-size:11px;color:var(--dim);margin-top:8px">Voller Skill-Tree (58 Skills, inkl. Armed Combat / Grappling / Keen Senses / Focus) im Tab Graph → Damiane.</div>';
@@ -8265,10 +8267,10 @@ function renderSkills(){
     '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack (via White Crow Questline), Vertical Flight</span></div>'+
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse</span></div>'+
     '</div></div>'+
-    '<div class="sub-t">Einzigartige Skills</div><div class="sk-grid">'+
+    '<h3 class="sub-t">Einzigartige Skills</h3><div class="sk-grid">'+
     ['Dual Wielding Mastery (Zweihänder einhändig)','Leaping Smash','Rampage','Raging Lightning','Quaking Fury','Quick Grab','Explosive Leap','Storm Howl','Aerial Stab [1.07]','Explosive Strike — Charge-Phase [1.07]','Dual-Wield Stab-Chain (verbessert) [1.07]']
     .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>'+
-    '<div class="sub-t">Standard-Skills</div><div class="sk-grid">'+
+    '<h3 class="sub-t">Standard-Skills</h3><div class="sk-grid">'+
     ['Pump Kick','Dropkick','Body Slam','Clothesline','Lariat','Rage (Super Armor State)','Scatter Shot','Blinding Flash','Focused Shot']
     .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>';
 
@@ -8365,7 +8367,7 @@ function renderGreymane(){
     <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
     <div class="cl-group-body">${items.map(c=>`
       <div class="comm-it${done.includes(c.id)?' done':''}" onclick="toggleGM('${c.id}')">
-        <div class="chk${done.includes(c.id)?' on':''}"></div>
+        <div class="chk${done.includes(c.id)?' on':''}" role="checkbox" aria-checked="${done.includes(c.id)?'true':'false'}" tabindex="0"></div>
         <div class="comm-num">${String(c.n).padStart(2,'0')}</div>
         <div class="comm-body">
           <div class="comm-tx">${c.name} <span style="color:var(--dim);font-size:10.5px">· Kap. ${c.chapter}</span></div>
@@ -8390,7 +8392,7 @@ function renderBossChecklist(){
     {label:'Side-Bosse & Faction',filter:b=>!b.chapter},
   ];
   const itemHtml=b=>`<div class="comm-it${done.includes(b.name)?' done':''}" onclick="toggleBossDone('${b.name.replace(/'/g,"\\'")}')">
-    <div class="chk${done.includes(b.name)?' on':''}"></div>
+    <div class="chk${done.includes(b.name)?' on':''}" role="checkbox" aria-checked="${done.includes(b.name)?'true':'false'}" tabindex="0"></div>
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${b.name}
         <span style="color:var(--dim);font-size:10.5px;font-weight:400"> · ${b.chapter?'Kap. '+b.chapter:'Side'} · ${b.region.split(' - ')[0].split(' — ')[0]}</span>
@@ -8428,7 +8430,7 @@ function renderSanctumChecklist(){
     {label:'The Abyss — Endgame',ids:['te18','te19']},
   ];
   const itemHtml=s=>`<div class="comm-it${done.includes(s.id)?' done':''}" onclick="toggleTE('${s.id}');renderSanctumChecklist();updateStats();">
-    <div class="chk${done.includes(s.id)?' on':''}"></div>
+    <div class="chk${done.includes(s.id)?' on':''}" role="checkbox" aria-checked="${done.includes(s.id)?'true':'false'}" tabindex="0"></div>
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${s.name}
         <span style="color:var(--dim);font-size:10.5px;font-weight:400"> · ${s.region}</span>
@@ -8465,7 +8467,7 @@ function renderWeaponChecklist(){
   if(cnt)cnt.textContent=dc+'/'+WEAPONS.length+' Waffen gesammelt';
   const types=[...new Set(WEAPONS.map(w=>w.type))];
   const itemHtml=w=>`<div class="comm-it${done.includes(w.name)?' done':''}" onclick="toggleWep('${w.name.replace(/'/g,"\\'")}')">
-    <div class="chk${done.includes(w.name)?' on':''}"></div>
+    <div class="chk${done.includes(w.name)?' on':''}" role="checkbox" aria-checked="${done.includes(w.name)?'true':'false'}" tabindex="0"></div>
     ${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" loading="lazy" decoding="async" alt="" style="width:28px;height:28px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:4px;padding:2px;flex-shrink:0;margin-top:1px" onerror="this.style.display='none'">`:''}
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${w.name}</div>
@@ -8504,7 +8506,7 @@ function renderMissableChecklist(){
     <div class="cl-group-bar" style="margin-bottom:4px"><div class="cl-group-fill" style="width:${pct}%"></div></div>
     <div class="comm-grid" style="margin-bottom:4px">${items.map(m=>`
       <div class="comm-it${done.includes(m.id)?' done':''}" onclick="toggleMissable('${m.id}')">
-        <div class="chk${done.includes(m.id)?' on':''}"></div>
+        <div class="chk${done.includes(m.id)?' on':''}" role="checkbox" aria-checked="${done.includes(m.id)?'true':'false'}" tabindex="0"></div>
         <div class="comm-body">
           <div class="comm-tx" style="font-weight:600">${m.name}<span class="ms-badge ${badgeClass[m.cat]||'ms-b-quest'}" style="margin-left:7px">${m.cat}</span></div>
           <div class="comm-rew" style="color:var(--dim)">${m.when}</div>
@@ -8894,7 +8896,7 @@ function renderComments(sec){
   const listHtml=arr.length
     ? arr.map(c=>`<div class="cmt-item"><div><span class="cmt-usr">${escHtml(c.u)}</span><span class="cmt-time">${escHtml(c.t)}</span></div><p class="cmt-txt">${escHtml(c.m)}</p></div>`).join('')
     : '<div class="cmt-empty">Noch keine Kommentare — schreib den ersten!</div>';
-  wrap.innerHTML=`<div class="sub-t" style="margin-top:28px">💬 Feedback &amp; Kommentare</div>
+  wrap.innerHTML=`<h3 class="sub-t" style="margin-top:28px">💬 Feedback &amp; Kommentare</h3>
     <div class="cmt-list" id="cl-${sec}">${listHtml}</div>
     <div class="cmt-form">
       <textarea id="ci-${sec}" class="cmt-inp" placeholder="Tipp, Korrektur oder Feedback..."></textarea>
@@ -9675,6 +9677,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     ni.setAttribute('role','button');
     ni.setAttribute('tabindex','0');
   });
+  // A11y: Checklisten per Enter/Space toggeln (Klick bubbelt zur Zeile; aria-checked kommt aus dem Re-Render)
+  document.addEventListener('keydown',e=>{
+    if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('chk')){
+      e.preventDefault();e.target.click();
+    }
+  });
   document.getElementById('sidebar').addEventListener('keydown',e=>{
     if(e.key==='Enter'||e.key===' '){
       const item=e.target.closest('.ni,.recent-item');
@@ -9911,7 +9919,7 @@ function renderRuins(){
   var html="";
   order.forEach(function(r){
     var list=RUINS_DATA[r]||[]; if(!list.length)return;
-    html+='<div class="ruin-region" data-reg="'+_reRuin(r)+'"><div class="sub-t" style="scroll-margin-top:72px">'+_reRuin(r)+' — '+list.length+' Grenzstein-Rätsel</div>'+list.map(_ruinCard).join("")+'</div>';
+    html+='<div class="ruin-region" data-reg="'+_reRuin(r)+'"><h3 class="sub-t" style="scroll-margin-top:72px">'+_reRuin(r)+' — '+list.length+' Grenzstein-Rätsel</h3>'+list.map(_ruinCard).join("")+'</div>';
   });
   root.innerHTML=html;
 }
