@@ -1535,6 +1535,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
     <div class="ni" data-sec="ruins" onclick="showSec('ruins')"><span class="nicon">🗿</span><span class="nlabel">Uralte Ruinen</span></div>
     <div class="ni" data-sec="bestiary" onclick="showSec('bestiary')"><span class="nicon">🐺</span><span class="nlabel">Bestiarium</span></div>
+    <div class="ni" data-sec="npcs" onclick="showSec('npcs')"><span class="nicon">👤</span><span class="nlabel">Charaktere &amp; NPCs</span></div>
     <div class="nav-grp">Sammeln &amp; Fortschritt</div>
     <div class="ni" data-sec="checklists" onclick="showSec('checklists')"><span class="nicon">☑️</span><span class="nlabel">Checklisten</span></div>
     <div class="ni" data-sec="collectibles" onclick="showSec('collectibles')"><span class="nicon">📚</span><span class="nlabel">Collectibles</span></div>
@@ -2123,6 +2124,12 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div id="bestiary-root"></div>
   </section>
 
+  <section class="sec" id="sec-npcs">
+    <h2 class="sec-t">👤 Charaktere &amp; NPCs</h2>
+    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Wichtige benannte Figuren aus Crimson Desert: Begleiter, Verbündete, Antagonisten und Händler, jeweils mit Rolle, Region und kurzer Bio. Quellengestützt (Fextralife, game8, PowerPyx); unsichere Angaben sind als Badge markiert. Oben findest du eine Erklärung des Trust-Systems.</p>
+    <div id="npcs-root"></div>
+  </section>
+
   <section class="sec" id="sec-patches">
     <h2 class="sec-t">📋 Patch-Notes</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.10.01</span> (06.06.2026).</div>
@@ -2253,7 +2260,7 @@ const BOSSES=[
   {name:"Sir Catfish",chapter:null,region:"Hernand - Vellua/Vallua (Süd-Küste, Teich)",quest:"Optionaler Faction-Boss. Vellua Fishermen's Guild 'Beyond the Silent Waves'",drop_weapon:"–",drop_abyss_gear:"Abyss-Artefakt; Catfish Plate Helm (Feuer-Res); 'Voyages of Sir Catfish'",weakness:"–",parry_or_dodge:"Beides: an Land langsam → dodgen & Flanke treffen; schnelle Angriffe gut parier-/konterbar",strategy:"An Land locken (dort viel langsamer), durch Angriffe dodgen und die Flanke treffen (schnelle Hits auch parierbar). Wasserfontänen-Hazard meiden (Blasen im Teich). Heil-Food = Hauptheilung im langen Fight."},
   {name:"Hemon Beindel",chapter:null,region:"Hernand - Fort Hellwood (W Glenbright Manor)",quest:"Optional. Hellhound-Questline 'The Rabid Hound of Hellwood' (nach 'Reliquary of Saint Senia')",drop_weapon:"The Hound (2H Greatsword; AoE 'Hound's Claws')",drop_abyss_gear:"Abyss-Artefakt (+ Skillpunkt)",weakness:"–",parry_or_dodge:"Slash-Angriffe parieren (bricht Combo, Stagger); Spin-Angriffe dodgen (nicht blocken)",strategy:"Auf Hemon fokussieren, Bogenschützen ignorieren (er bleibt nah). Slash-Combos parieren für Konter, Multi-Hits nicht blocken (Stamina). Breite Spin-Angriffe seitlich ausweichen (bei niedriger HP schneller/größer)."},
   {name:"Gwen Kraber",chapter:null,region:"Hernand - Roothold (NO)",quest:"Frozen-Eldertree-Questline (House Celeste)",drop_weapon:"Frostfang (2H Speer, aus der Arena)",drop_abyss_gear:"Icewing Plate Armor mit Shattering Frost (Eis-Imbue)",weakness:"–",parry_or_dodge:"Dodge — schnelle Speer-Dashes/Thrusts vorwärts/seitlich ausweichen; Parry nicht ratsam",strategy:"Schnelle Speer-Kämpferin mit Long-Reach-Thrusts, Eis-Imbue und Klon-Beschwörung, aber niedrige HP. Dashes dodgen (nicht parieren), dann Heavy-Attacks — kann sie bis zum Tod stunlocken."},
-  {name:"Frostwalker Tervis",chapter:null,region:"Pailune - Wayward Woods",quest:"World-Boss, wandernd in den Wayward Woods (keine Quest nötig)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"Feuer (feuer-verzauberte Waffen beschleunigen)",parry_or_dodge:"–",strategy:"Pailune-Warlord mit Kälte-Thema: Eisspuren und Frost-AoEs in der Arena (können Unvorbereitete einfrieren). Feuer-Waffen/Skills für schnelleren Kill; Sichtlinie brechen senkt die Frost-Aura. (Parry/Dodge-Details unverifiziert.)"},
+  {name:"Forestwalker Tervis",chapter:null,region:"Pailune - Wayward Woods",quest:"World-Boss, wandernd in den Wayward Woods (keine Quest nötig)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"Feuer (Holzkörper – feuer-verzauberte Waffen beschleunigen den Kill)",parry_or_dodge:"–",strategy:"Uralter Baumgolem (Ent): eine in einem Baum gefangene Seele, Körper aus verschlungenen Wurzeln und Stämmen. Langsam, aber wuchtige Schläge mit den riesigen Armen. Feuer-Waffen/Skills brennen den Holzkörper schneller nieder. (Parry/Dodge-Details unverifiziert.)"},
   {name:"Bloodwalker Crussis",chapter:null,region:"Pailune - Silver Wolf Mountain (Süd)",quest:"Pailune-Militia 'Bloodied Path' / 'Hunting Red' — Bounty in Pailune City",drop_weapon:"–",drop_abyss_gear:"Abyss-Artefakt; Quest: Bloodstained Blessing, Crossroads Necklace, 7 Silber",weakness:"–",parry_or_dodge:"Dodge statt Block (Hits können Guard brechen); mit Focused Repulsion/Explosiv-Pfeilen Stagger aufbauen",strategy:"Ancient-Walker-Koloss (wie Cubewalker Lithus) mit Schutz-/Invuln-Totem: in der Invuln-Phase 5 Totems zerstören, dann ist er angreifbar. Mit Focused Repulsion (oder Explosiv-Pfeilen) staggern für große Fenster; dodgen statt blocken."},
   {name:"White Bearclaw",chapter:null,region:"Pailune - Vat'nholl Fortress",quest:"Optional, 'Shadows of Beasts' (Pailune Militia) — Festung befreien",drop_weapon:"–",drop_abyss_gear:"Ashad Plate Helm",weakness:"–",parry_or_dodge:"Dodge",strategy:"Seine Angriffe gehen nach vorn — hinter ihn repositionieren und den Blind Spot treffen. Bei seinem Ice-Shard-Sprung Distanz halten und in den Lücken zwischen den Eissplittern stehen. Kein Parry/Element dokumentiert."},
   {name:"White Bear of the High Mountains",chapter:null,region:"Pailune - Fort Askelund",quest:"Optional, Pailune-Militia 'The Unending Threat of the Black Bears'",drop_weapon:"Split Tooth (2H Greataxe, 3 vorinstallierte Cores / 5 Slots)",drop_abyss_gear:"(im Split Tooth)",weakness:"–",parry_or_dodge:"Dodge — breite Spins nicht zuverlässig parierbar; seitlich (nicht rückwärts) ausweichen",strategy:"Distanz halten und erst nach Ende seiner Combo-Strings kontern (lange Reichweite, hoher Schaden). Telegrafierten Straight-Line-Charge und breite Spins seitlich ausweichen, dann 2-3 Hits in der Erholung."},
@@ -3737,7 +3744,7 @@ const BOSS_IMGS={
   "Turbine":"cd_assets/bosses/turbine.webp",
   // Auto-recherchiert 2026-06-10 via questlog database.getKnowledges-API (Namens-Match in der Knowledge-DB,
   // alle URLs HTTP-200-verifiziert, Stichproben visuell geprueft). Sonderfaelle:
-  // - "Frostwalker Tervis" heisst bei questlog "Forestwalker Tervis" (Wald-Golem) -> Namens-/Lore-Diskrepanz, siehe Audit-Notiz
+  // - "Forestwalker Tervis" (Wald-/Ent-Golem): Eintrag 2026-06-12 von erfundenem "Frostwalker"+Eis-Lore auf den korrekten Namen + Baumgolem-Lore korrigiert (questlog/gaming.tools/GameRant-verifiziert; "Frostwalker"+Frost stammte aus einer fehlerhaften Drittanbieter-Wiki)
   // - Abyss Kutum: 1:1-Zuordnung (genau 2 Kutum-Knowledge-Eintraege fuer genau 2 Kutum-Bosse), nicht einzeln verifiziert
   // - One-Eyed Jackal Captain: questlog-Faktionsbild der Lonely Jackals (zeigt den Anfuehrer)
   // - Ohne questlog-Bild (Platzhalter bleibt): Black Bear Captain, Mountain God Boar, Crookrock Walker
@@ -3753,7 +3760,7 @@ const BOSS_IMGS={
   "Cloud Fortress Orbian":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_del_marniaircastle.webp",
   "Cubewalker Lithus":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_lithustheformshaken.webp",
   "Desert Marauder Rusten":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_desert_tank.webp",
-  "Frostwalker Tervis":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ent_golem.webp",
+  "Forestwalker Tervis":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ent_golem.webp",
   "Giath":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gears.webp",
   "Gristle, the Sandfang Marauder":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gobline_rider_boss.webp",
   "Gwen Kraber":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gwen_kraver.webp",
@@ -7204,6 +7211,7 @@ const SEC_RENDERERS={
   puzzles:['renderPuzzles'],
   minigames:['renderMinigames'],
   bestiary:['renderBestiary'],
+  npcs:['renderNpcs'],
   dyes:['renderDyes'],
   food:['renderFood'],
   witches:['renderWitches'],
@@ -9932,6 +9940,86 @@ function renderBestiary(){
       </div>`;
     }).join('');
     return `<h3 class="sub-t">${title} <span class="best-count">(${ENEMIES[key].length})</span></h3>
+      <p class="best-sub">${sub}</p>
+      <div class="grid">${cards}</div>`;
+  }).join('');
+}
+
+const NPC_PAL={
+  companions:['linear-gradient(135deg,#1a1407,#0c0c0c)','rgba(201,162,39,.5)','#d9b441'],
+  allies:['linear-gradient(135deg,#0b1410,#0c0c0c)','rgba(90,170,120,.45)','#7fc99a'],
+  antagonists:['linear-gradient(135deg,#160a0a,#0c0c0c)','rgba(180,45,32,.5)','#d2554a'],
+  merchants:['linear-gradient(135deg,#0b1014,#0c0c0c)','rgba(70,140,170,.45)','#6fb3cf']
+};
+function npcAva(name,key){
+  const [bg,bdr,col]=NPC_PAL[key]||['#141414','rgba(255,255,255,.12)','#ccc'];
+  const letter=escHtml((name||'?').charAt(0).toUpperCase());
+  return `<span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-weight:700;font-size:14px;margin-right:9px;vertical-align:middle;flex:0 0 auto;background:${bg};border:1px solid ${bdr};color:${col}">${letter}</span>`;
+}
+const NPCS={
+  companions:[
+    {name:"Kliff",role:"Protagonist · Anführer der Greymanes",region:"Greymane Camp / Hernand",conf:"high",bio:"Erfahrener Greymane-Kämpfer. Nach der Ermordung des Pailune-Anführers Jian durch die Black Bears übernimmt er die Führung und sammelt die verstreuten Mitglieder. Erwacht im 'Realm of Uncertainty' in der Abyss und kehrt mit neuen Kräften zurück."},
+    {name:"Damiane",role:"Spielbar (ab Kapitel 3) · Verbündete",region:"Demeniss (Herkunft) / Greymane Camp",conf:"high",bio:"Nachfahrin der zerstörten Familie Spencer, aus Demeniss nach Hernand geflohen. Kämpft mit Rapier, Großschwert und Pistole und schließt sich den Greymanes aus eigenem Willen an."},
+    {name:"Oongka",role:"Spielbar (nach Kapitel 7) · Greymane-Mitglied",region:"Pailune (Herkunft)",conf:"high",bio:"Ork-Krieger und Kliffs engster Gefährte, bekannt für außergewöhnliche Stärke und eine massive Axt. Wird nach dem Sieg über Myurdin spielbar."}
+  ],
+  allies:[
+    {name:"Alan Serkis",role:"Marquis von House Serkis",region:"Oakenshield Manor, Hernand",conf:"high",bio:"Weithin respektiert für seinen Einsatz für die Sicherheit der Region. Erster wichtiger Verbündeter — erlaubt Kliff, das Greymane-Lager in Howling Hill aufzubauen."},
+    {name:"Shakatu",role:"Trademaster der Goldleaf Merchant Guild",region:"Goldleaf Tradepost, Hernand",conf:"high",bio:"Goblin mit außergewöhnlichem Verstand. Beauftragt Kliff mit der Tötung Kailoks und wird danach selbst Gildenchef; erscheint in mehreren Hauptquests."},
+    {name:"Charles Celeste",role:"Herzog · Gouverneur von Hernand Castle",region:"Hernand Castle",conf:"medium",bio:"Leitet House Celeste und ist durch gegenseitiges Vertrauen mit Marquis Alan Serkis verbunden."},
+    {name:"Jian",role:"Ehem. Anführer von Pailune (verstorben)",region:"Pailune",conf:"high",bio:"Gütiger, außergewöhnlicher Anführer, von fast allen in Pailune respektiert. Seine Ermordung durch die Black Bears löst die Haupthandlung aus."},
+    {name:"Marius",role:"Greymane-Mitglied · Ermittler",region:"Greymane Camp",conf:"high",bio:"Erscheint in der Quest 'Return of the Comrade', in der Kliff ihn zum Greymane-Lager eskortiert."},
+    {name:"Ross",role:"Greymane-Mitglied · Personalmanager",region:"Greymane Camp",conf:"medium",bio:"Stationiert im Greymane-Lager und verwaltet die Besatzung der Fraktion."}
+  ],
+  antagonists:[
+    {name:"Myurdin",role:"Hauptantagonist · Anführer der Black Bear Forces",region:"Hills of No Return / Ashclaw Keep",conf:"high",bio:"Grausamer Angreifer mit der Überzeugung, nur die Mächtigen verdienten alles. Ermordete Jian und vernichtete das Greymane-Lager am Nas River; erscheint später als 'Lava Myurdin'."},
+    {name:"Kailok the Hornsplitter",role:"Erzwungener Anführer der Goldleaf Merchant Guild",region:"Hernand",conf:"high",bio:"Rakkash, der die Gilde mit Gewalt übernahm. Shakatu beauftragt Kliff mit seiner Tötung — ein Boss-Kampf im Spiel."},
+    {name:"Ludvig",role:"Anführer der Lonely Jackals",conf:"high",bio:"Barbar mit einer Unterdrückungsphilosophie ähnlich der Myurdins. Verwandelt sich durch verbotene Magie in 'Awakened Ludvig'. Boss."},
+    {name:"Gabriel Caliburn",role:"Korrupter Ex-Herzog",conf:"high",bio:"Strebt durch eine gewaltsame Revolution nach Macht; begleitet von seinem Leutnant Lucian Bastier. Boss."},
+    {name:"Lucian Bastier",role:"Caliburns Leutnant · Anführer der Righteous Inquisitors",conf:"high",bio:"Führt die Inquisitoren und besitzt eine 'Awakened'-Form. Boss."},
+    {name:"Draven the Crowcaller",role:"Anführer der Crow Brothers",conf:"high",bio:"Will böse Seelen aus 'Heaven's Gate' freisetzen und führt eine fanatische Gefolgschaft. Boss."},
+    {name:"Walter Lanford",role:"Boss · Alfonso-Anwesen",region:"Alfonso Estate",conf:"high",bio:"Meisterschütze mit Doppellaufgewehr; tritt in der House-Alfonso-Questreihe auf dem Anwesen auf."},
+    {name:"Valgash",role:"Anführer der Ironflame Orcs",region:"Delesyia",conf:"medium",bio:"Kontrolliert die Gorthak-Eisenwerke in Delesyia."}
+  ],
+  merchants:[
+    {name:"Rhett",role:"Waffen- & Ausrüstungshändler ('The Artist of Iron')",region:"Hernand Equipment Shop",conf:"high",bio:"Verkauft Waffen und Ausrüstung in Hernand."},
+    {name:"Patrigio",role:"Geheimer Wanderhändler",region:"Hernand (nachts, zufällig)",conf:"high",bio:"Nachts schwer auffindbarer Händler mit besonderen Waren; erscheint u.a. westlich des Kilnden Workshop und nahe der Springtide Mill."},
+    {name:"Tina",role:"Schneiderin",region:"Hernand Tailor's Shop",conf:"high",bio:"Betreibt den Schneiderladen in Hernand."},
+    {name:"Alden",role:"Allgemeinhändler",region:"Hernand Provisioner's Shop",conf:"high",bio:"Verkauft Verbrauchsgüter und Vorräte in Hernand."},
+    {name:"Merton",role:"Stallhalter",region:"Hernand Stable",conf:"high",bio:"Betreut die Ställe in Hernand."},
+    {name:"Tranan",role:"Ausrüstungshändler (Greymane-Mitglied)",region:"Greymane Camp",conf:"high",bio:"Verkauft Ausrüstung direkt im Greymane-Lager."}
+  ]
+};
+function renderNpcs(){
+  const el=document.getElementById('npcs-root');if(!el)return;
+  const trust=`<div class="card" data-s="trust system vertrauen affinity npc beziehung geschenk request belohnung gruessen" style="margin-bottom:20px;border-color:rgba(201,162,39,.35)">
+    <div class="ct">🤝 Trust-System (Vertrauen)</div>
+    <p class="best-sub" style="margin:8px 0 12px">Jeder interagierbare NPC hat einen Vertrauenswert von 0 bis 100. Höherer Trust schaltet Belohnungen frei.</p>
+    <div class="crows">
+      <div class="crow"><span class="cl">Steigern</span><span class="cv">Grüßen +5 (max. 5 NPCs/Tag) · Geschenke +5 bis +25 · erledigte Request-Nebenquest +50. Diebstahl vor ihren Augen oder Anrempeln senkt den Trust.</span></div>
+      <div class="crow"><span class="cl">Bei Trust 100</span><span class="cv">Händler: Handelsabkommen (liefern ihr Sortiment ins Greymane-Camp) + versteckte Waren. Andere NPCs: einmalige Belohnung je nach Typ (Handwerksmaterial, Schatzkarte, Endgame-Ressourcen). Tiere: werden permanente Begleiter und sammeln nach Kämpfen automatisch Loot.</span></div>
+      <div class="crow"><span class="cl">Tipp</span><span class="cv" style="color:var(--gold)">Die Bunny-Mask-Maske gibt +2 Trust pro Gruß/Geschenk (mit Abyss-Gear-Sockel +5).</span></div>
+    </div>
+    <div class="best-note">Gemeldet: Manche NPCs verschwinden bei Trust 100 dauerhaft aus der Spielwelt — bei questrelevanten NPCs vor dem Maxen vorsichtig sein. Ein eigenes Trust-/Loyalitätssystem speziell für Greymane-Comrades ist mit verlässlichen Quellen nicht eindeutig belegt.</div>
+  </div>`;
+  const GROUPS=[
+   ['companions','🛡️ Begleiter & spielbare Charaktere','Der Protagonist und die im Story-Verlauf spielbaren Gefährten.'],
+   ['allies','🤝 Verbündete & Quest-Geber','Wichtige freundliche NPCs, die Kliff unterstützen oder Aufträge vergeben.'],
+   ['antagonists','⚔️ Antagonisten','Gegenspieler und Fraktionsanführer — viele davon sind Bosse (Kampf-Details in der Boss-Sektion).'],
+   ['merchants','💰 Händler','Benannte Verkäufer. Außerhalb Hernands nennen die Guides meist nur Standorte, keine Namen.']
+  ];
+  el.innerHTML=trust+GROUPS.map(([key,title,sub])=>{
+    const cards=NPCS[key].map(n=>{
+      const s=[n.name,n.role,n.region||'',n.bio,'charakter npc figur',title].join(' ').toLowerCase();
+      const confBadge=n.conf==='medium'?'<span class="tag tx" title="Quellenlage dünn — teils nur eine Quelle">teils belegt</span>':n.conf==='low'?'<span class="tag tr" title="unsichere Quelle">unsicher</span>':'';
+      const cm=(n.region?`<span class="tag tx">${escHtml(n.region)}</span>`:'')+confBadge;
+      return `<div class="card" data-s="${escHtml(s)}">
+        <div class="ct">${npcAva(n.name,key)}${escHtml(n.name)}</div>
+        ${cm?`<div class="cm">${cm}</div>`:''}
+        <div class="crows"><div class="crow"><span class="cl">Rolle</span><span class="cv">${escHtml(n.role)}</span></div></div>
+        <div class="best-note">${escHtml(n.bio)}</div>
+      </div>`;
+    }).join('');
+    return `<h3 class="sub-t">${title} <span class="best-count">(${NPCS[key].length})</span></h3>
       <p class="best-sub">${sub}</p>
       <div class="grid">${cards}</div>`;
   }).join('');
