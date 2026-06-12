@@ -306,6 +306,10 @@ select.fs:hover{border-color:#333}
 .cl{color:var(--dim);min-width:84px;flex-shrink:0;font-size:11px}
 .cv{color:var(--text)}
 .cs{margin-top:11px;padding:9px 12px;background:rgba(180,45,32,.08);border-left:2px solid rgba(192,57,43,.55);border-radius:0 7px 7px 0;font-size:11.5px;color:#c4bcb4;line-height:1.6}
+.ct-sub{font-weight:400;color:var(--dim);font-size:12px}
+.best-note{font-size:12px;color:var(--dim);margin-top:10px;line-height:1.55}
+.best-count{font-weight:400;color:var(--dim);font-size:11px}
+.best-sub{color:var(--dim);font-size:11.5px;margin:2px 0 14px}
 
 /* ── Tables ── */
 .tw-wrap{overflow-x:auto;border:1px solid var(--bdr);border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,.35)}
@@ -9890,6 +9894,17 @@ const ENEMIES={
   {name:"Savage Fangs",region:"Crimson Desert (Feuchtgebiete)",drops:"Honey Tea, Thin Hide, Bulging Copper Pouch; selten: Ancient Shell Ring",note:"Nomadische Eberreiter, viele aus dem friedlichen Trolldorf Kharonso — müssen ihre Reit-Eber tränken und beanspruchen darum ein riesiges Gebiet samt Feuchtgebieten; wachsen rasant."}
  ]
 };
+// Themen-Platzhalter im Stil der Boss-Karten (genutzt bei fehlendem/kaputtem Bild)
+const BEST_PH_PAL={
+  wild:['#15110a','rgba(201,162,39,.45)','rgba(201,162,39,.6)'],
+  kreaturen:['#0b0e12','rgba(74,138,202,.45)','rgba(120,170,220,.66)'],
+  fraktionen:['#160a0a','rgba(180,45,32,.45)','rgba(210,80,70,.66)']
+};
+function bestPH(name,key){
+  const [bg,bdr,text]=BEST_PH_PAL[key]||['#141414','rgba(255,255,255,.08)','rgba(255,255,255,.4)'];
+  const letter=escHtml((name||'?').charAt(0).toUpperCase());
+  return `<div class="boss-img-ph" style="background:linear-gradient(135deg,${bg} 0%,#080808 100%);border:1px solid ${bdr}"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:${text}">${letter}</div><div class="boss-ph-cap" style="color:${text}">Kein Bild</div></div></div>`;
+}
 function renderBestiary(){
   const el=document.getElementById('bestiary-root');if(!el)return;
   const GROUPS=[
@@ -9901,21 +9916,24 @@ function renderBestiary(){
     const cards=ENEMIES[key].map(e=>{
       const s=[e.name,e.de||'',e.region,e.drops||'',e.tipp||'',e.note,'bestiarium gegner enemy',title].join(' ').toLowerCase();
       const img=ENEMY_IMGS[e.name];
-      const titel=e.de&&e.de!==e.name?`${e.de} <span style="font-weight:400;color:var(--dim);font-size:12px">(${e.name})</span>`:e.name;
+      const titel=e.de&&e.de!==e.name?`${escHtml(e.de)} <span class="ct-sub">(${escHtml(e.name)})</span>`:escHtml(e.name);
+      const head=img
+        ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" loading="lazy" decoding="async" alt="${escHtml(e.de||e.name)}" style="object-position:center center;background:linear-gradient(135deg,#15110d,#0c0c0c)" onerror="this.closest('.boss-img-wrap').outerHTML=bestPH('${escJsStr(e.name)}','${key}')"></div>`
+        :bestPH(e.name,key);
       return `<div class="card" data-s="${escHtml(s)}">
-        ${img?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:86px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${img}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:72px;width:72px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:''}
+        ${head}
         <div class="ct">${titel}</div>
         <div class="cm"><span class="tag tx">${escHtml(e.region)}</span>${e.conf==='medium'?'<span class="tag tw" title="Quellenlage dünn — Details teils nur eine Quelle">Details unbestätigt</span>':''}</div>
         <div class="crows">
-          ${e.drops&&e.drops!=='—'?`<div class="crow"><span class="cl">Drops</span><span class="cv" style="font-size:11px">${escHtml(e.drops)}</span></div>`:''}
-          ${e.tipp?`<div class="crow"><span class="cl">Taktik</span><span class="cv" style="font-size:11px;color:var(--gold)">${escHtml(e.tipp)}</span></div>`:''}
+          ${e.drops&&e.drops!=='—'?`<div class="crow"><span class="cl">Drops</span><span class="cv">${escHtml(e.drops)}</span></div>`:''}
+          ${e.tipp?`<div class="crow"><span class="cl">Taktik</span><span class="cv" style="color:var(--gold)">${escHtml(e.tipp)}</span></div>`:''}
         </div>
-        <div style="font-size:12px;color:var(--dim);margin-top:9px;line-height:1.55">${escHtml(e.note)}</div>
+        ${e.note?`<div class="best-note">${escHtml(e.note)}</div>`:''}
       </div>`;
     }).join('');
-    return `<h3 class="sub-t" style="margin-top:22px">${title} <span style="font-weight:400;color:var(--dim);font-size:11px">(${ENEMIES[key].length})</span></h3>
-      <p style="color:var(--dim);font-size:11.5px;margin:2px 0 12px">${sub}</p>
-      <div class="cards">${cards}</div>`;
+    return `<h3 class="sub-t">${title} <span class="best-count">(${ENEMIES[key].length})</span></h3>
+      <p class="best-sub">${sub}</p>
+      <div class="grid">${cards}</div>`;
   }).join('');
 }
 
