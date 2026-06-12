@@ -9,8 +9,12 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
 const urls = new Map(); // url -> [wo gefunden]
-for (const m of html.matchAll(/const ([A-Z_]+_IMGS(?:_CDN)?)\s*=\s*(\{[\s\S]*?\n\s*\};)/g)) {
-  const obj = eval('(' + m[2].replace(/;\s*$/, '') + ')');
+// Lazy bis zum ersten "};" — funktioniert fuer mehrzeilige UND einzeilige Maps
+// (CORE_IMGS_CDN ist ein Einzeiler; die alte \n};-Variante fraß sich bis in CORE_VIDS und crashte).
+for (const m of html.matchAll(/const ([A-Z_]+_IMGS(?:_CDN)?)\s*=\s*(\{[\s\S]*?\})\s*;/g)) {
+  let obj;
+  try { obj = eval('(' + m[2] + ')'); }
+  catch (e) { console.error('WARN: Map', m[1], 'nicht parsebar —', e.message); continue; }
   for (const [key, v] of Object.entries(obj)) {
     if (typeof v === 'string' && /^https?:\/\//.test(v)) {
       if (!urls.has(v)) urls.set(v, []);

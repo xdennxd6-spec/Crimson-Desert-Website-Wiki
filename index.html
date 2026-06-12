@@ -1530,6 +1530,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="mounts" onclick="showSec('mounts')"><span class="nicon">🐴</span><span class="nlabel">Mounts</span></div>
     <div class="ni" data-sec="pets" onclick="showSec('pets')"><span class="nicon">🐾</span><span class="nlabel">Pets</span></div>
     <div class="ni" data-sec="ruins" onclick="showSec('ruins')"><span class="nicon">🗿</span><span class="nlabel">Uralte Ruinen</span></div>
+    <div class="ni" data-sec="bestiary" onclick="showSec('bestiary')"><span class="nicon">🐺</span><span class="nlabel">Bestiarium</span></div>
     <div class="nav-grp">Sammeln &amp; Fortschritt</div>
     <div class="ni" data-sec="checklists" onclick="showSec('checklists')"><span class="nicon">☑️</span><span class="nlabel">Checklisten</span></div>
     <div class="ni" data-sec="collectibles" onclick="showSec('collectibles')"><span class="nicon">📚</span><span class="nlabel">Collectibles</span></div>
@@ -2110,6 +2111,12 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <h2 class="sec-t">🎲 Minispiele</h2>
     <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Alle spielbaren Minigames in Pywel — von den Launch-Klassikern (Armdrücken, Duo, Duelle) bis zu den 1.10-Neuzugängen Pinball und Orb Roll. Viele hängen an den Mind-Games-/Racing-Challenges.</p>
     <div class="cards" id="minigame-list"></div>
+  </section>
+
+  <section class="sec" id="sec-bestiary">
+    <h2 class="sec-t">🐺 Bestiarium</h2>
+    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Normale Gegner und Wildtiere in Pywel — Wildtiere fürs Skinning, Monster &amp; Kreaturen mit ihren Material-Drops und die feindlichen Fraktionen aller fünf Regionen. Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items). Bosse stehen in der Boss-Sektion.</p>
+    <div id="bestiary-root"></div>
   </section>
 
   <section class="sec" id="sec-patches">
@@ -5193,24 +5200,23 @@ function randomBoss(){
   const b=BOSSES[Math.floor(Math.random()*BOSSES.length)];
   const m=document.getElementById('rb-modal');
   const img=BOSS_IMGS[b.name];
-  const esc=s=>String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
   m.innerHTML=`<div class="rb-box">
     <button class="rb-close" onclick="document.getElementById('rb-modal').classList.remove('show');modalFocusClose()" aria-label="Schliessen">✕</button>
-    ${img?`<img class="rb-img" src="${img}" alt="${esc(b.name)}" loading="lazy">`:''}
+    ${img?`<img class="rb-img" src="${img}" alt="${escHtml(b.name)}" loading="lazy">`:''}
     <div class="rb-body">
-      <div class="rb-name">${esc(b.name)}</div>
+      <div class="rb-name">${escHtml(b.name)}</div>
       <div class="rb-meta">
-        <span class="tag tg">${esc(b.region)||'?'}</span>
+        <span class="tag tg">${escHtml(b.region)||'?'}</span>
         ${b.chapter?`<span class="tag tx">Kap. ${b.chapter}</span>`:''}
-        ${b.quest?`<span class="tag tr">${esc(b.quest)}</span>`:''}
+        ${b.quest?`<span class="tag tr">${escHtml(b.quest)}</span>`:''}
       </div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:4px">Parry/Dodge</div>
-      <div style="font-size:12px;color:var(--gold);margin-bottom:11px">${esc(b.parry_or_dodge)||'–'}</div>
+      <div style="font-size:12px;color:var(--gold);margin-bottom:11px">${escHtml(b.parry_or_dodge)||'–'}</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:4px">Strategie</div>
-      <div class="rb-strategy">${esc(b.strategy)||'–'}</div>
+      <div class="rb-strategy">${escHtml(b.strategy)||'–'}</div>
       ${(()=>{const lore=BOSS_LORE[b.name];if(!lore||!lore.desc||!lore.desc.trim())return '';return `<div class="boss-lore" style="margin-top:11px;cursor:default">
         <div class="boss-lore-hd"><span>📖 NPC-Lore${lore.faction?' · <span class="boss-lore-faction">'+lore.faction.replace(/"/g,'&quot;')+'</span>':''}</span><a href="https://questlog.gg/crimson-desert/en/db/npc/${lore.id}" target="_blank" rel="noopener" class="boss-lore-ext">questlog ↗</a></div>
-        <div style="font-style:italic">${esc(lore.desc)}</div>
+        <div style="font-style:italic">${escHtml(lore.desc)}</div>
       </div>`;})()}
       <button class="rb-rerollbtn" style="margin-top:12px" onclick="randomBoss()">🎲 Nochmal würfeln</button>
     </div>
@@ -5577,7 +5583,7 @@ function renderBossLore(b){
   if(!lore||!lore.desc||!lore.desc.trim())return '';
   const dbUrl=`https://questlog.gg/crimson-desert/en/db/npc/${lore.id}`;
   const factionLine=lore.faction&&lore.faction.trim()?`<span class="boss-lore-faction">${lore.faction.replace(/"/g,'&quot;')}</span>`:'';
-  const escDesc=lore.desc.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  const escDesc=escHtml(lore.desc);
   return `<div class="boss-lore boss-lore-collapsed" onclick="this.classList.toggle('boss-lore-collapsed')" data-tip="Klick zum Aus-/Einklappen" role="button" tabindex="0">
     <div class="boss-lore-hd">
       <span>📖 NPC-Lore${factionLine?' · '+factionLine:''}</span>
@@ -6611,17 +6617,16 @@ function closeItemCompare(){
 }
 function _icDetail(w){
   if(!w)return '<div style="text-align:center;color:var(--dim);padding:30px 0;font-size:12px">Waffe auswählen…</div>';
-  const esc=s=>String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
   const img=WEAPON_IMGS[w.name];
-  return `${img?`<img class="cmp-img" style="height:96px;object-fit:contain;background:rgba(255,255,255,.04);padding:8px" src="${img}" alt="${esc(w.name)}" loading="lazy" onerror="if(_fexFb(this))return;this.style.display='none'">`:''}
-    <div class="cmp-name">${esc(w.name)}</div>
-    <div class="cmp-meta"><span class="tag tx">${esc(w.type)}</span></div>
+  return `${img?`<img class="cmp-img" style="height:96px;object-fit:contain;background:rgba(255,255,255,.04);padding:8px" src="${img}" alt="${escHtml(w.name)}" loading="lazy" onerror="if(_fexFb(this))return;this.style.display='none'">`:''}
+    <div class="cmp-name">${escHtml(w.name)}</div>
+    <div class="cmp-meta"><span class="tag tx">${escHtml(w.type)}</span></div>
     <div class="cmp-row"><span class="cmp-row-lbl">ATK</span><span class="cmp-row-val">${w.atk!=null?w.atk:'<span style="color:var(--dim)">–</span>'}</span></div>
     <div class="cmp-row"><span class="cmp-row-lbl">Crit</span><span class="cmp-row-val">${w.crit!=null?w.crit:'<span style="color:var(--dim)">–</span>'}</span></div>
     <div class="cmp-row"><span class="cmp-row-lbl">Slots</span><span class="cmp-row-val">${w.slots!=null?w.slots:'<span style="color:var(--dim)">–</span>'}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Quelle</span><span class="cmp-row-val">${w.source&&w.source.trim()?esc(w.source):'<span style="color:var(--dim)">Bulk-Import</span>'}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Cores</span><span class="cmp-row-val">${esc(w.built_in)||'<span style="color:var(--dim)">–</span>'}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Notizen</span><span class="cmp-row-val" style="font-size:10.5px;color:#beb5a8">${esc(w.notes)||'<span style="color:var(--dim)">–</span>'}</span></div>`;
+    <div class="cmp-row"><span class="cmp-row-lbl">Quelle</span><span class="cmp-row-val">${w.source&&w.source.trim()?escHtml(w.source):'<span style="color:var(--dim)">Bulk-Import</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Cores</span><span class="cmp-row-val">${escHtml(w.built_in)||'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Notizen</span><span class="cmp-row-val" style="font-size:10.5px;color:#beb5a8">${escHtml(w.notes)||'<span style="color:var(--dim)">–</span>'}</span></div>`;
 }
 function renderItemCompare(){
   const sa=document.getElementById('ic-sel-a');
@@ -6704,7 +6709,7 @@ function renderSavedBuilds(){
         const dt=new Date(b.saved||Date.now()).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});
         return `<div class="bo-saved-card">
           <div class="bo-saved-info">
-            <div class="bo-saved-name">${style?style.ico:''} ${esc(b.name)}</div>
+            <div class="bo-saved-name">${style?style.ico:''} ${escHtml(b.name)}</div>
             <div class="bo-saved-meta">${style?style.name:'?'} · ${phase?phase.l:'?'} · ${dt}</div>
           </div>
           <div class="bo-saved-actions">
@@ -6817,23 +6822,22 @@ function closeCompare(){
 }
 function _cmpDetail(b){
   if(!b)return '<div style="text-align:center;color:var(--dim);padding:30px 0;font-size:12px">Boss auswählen…</div>';
-  const esc=s=>String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
   const img=BOSS_IMGS[b.name];
   const chap=b.chapter?'Kap. '+b.chapter:'Side/Faction';
-  return `${img?`<img class="cmp-img" src="${img}" alt="${esc(b.name)}" loading="lazy">`:''}
-    <div class="cmp-name">${esc(b.name)}</div>
+  return `${img?`<img class="cmp-img" src="${img}" alt="${escHtml(b.name)}" loading="lazy">`:''}
+    <div class="cmp-name">${escHtml(b.name)}</div>
     <div class="cmp-meta">
       <span class="tag tr">${chap}</span>
-      <span class="tag tg">${esc(b.region.split(' ')[0])}</span>
-      <span class="tag tx">${esc(b.quest)}</span>
+      <span class="tag tg">${escHtml(b.region.split(' ')[0])}</span>
+      <span class="tag tx">${escHtml(b.quest)}</span>
     </div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Region</span><span class="cmp-row-val">${esc(b.region)}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Quest</span><span class="cmp-row-val">${esc(b.quest)}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Waffe-Drop</span><span class="cmp-row-val">${b.drop_weapon&&b.drop_weapon!=='–'?esc(b.drop_weapon):'<span style="color:var(--dim)">–</span>'}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Abyss Core</span><span class="cmp-row-val">${b.drop_abyss_gear&&b.drop_abyss_gear!=='–'?esc(b.drop_abyss_gear):'<span style="color:var(--dim)">–</span>'}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Schwäche</span><span class="cmp-row-val" style="color:var(--warn)">${b.weakness&&b.weakness!=='–'?esc(b.weakness):'<span style="color:var(--dim)">–</span>'}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Parry/Dodge</span><span class="cmp-row-val">${esc(b.parry_or_dodge)}</span></div>
-    <div class="cmp-row"><span class="cmp-row-lbl">Strategie</span><span class="cmp-row-val" style="font-size:10.5px;line-height:1.45;color:#c4bcb4">${esc(b.strategy)}</span></div>`;
+    <div class="cmp-row"><span class="cmp-row-lbl">Region</span><span class="cmp-row-val">${escHtml(b.region)}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Quest</span><span class="cmp-row-val">${escHtml(b.quest)}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Waffe-Drop</span><span class="cmp-row-val">${b.drop_weapon&&b.drop_weapon!=='–'?escHtml(b.drop_weapon):'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Abyss Core</span><span class="cmp-row-val">${b.drop_abyss_gear&&b.drop_abyss_gear!=='–'?escHtml(b.drop_abyss_gear):'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Schwäche</span><span class="cmp-row-val" style="color:var(--warn)">${b.weakness&&b.weakness!=='–'?escHtml(b.weakness):'<span style="color:var(--dim)">–</span>'}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Parry/Dodge</span><span class="cmp-row-val">${escHtml(b.parry_or_dodge)}</span></div>
+    <div class="cmp-row"><span class="cmp-row-lbl">Strategie</span><span class="cmp-row-val" style="font-size:10.5px;line-height:1.45;color:#c4bcb4">${escHtml(b.strategy)}</span></div>`;
 }
 function renderCompare(){
   const sa=document.getElementById('cmp-sel-a');
@@ -6957,19 +6961,19 @@ function renderTrophies(){
   const list=TROPHIES.filter(t=>_trFilter==='all'||(_trFilter==='miss'?t.miss:t.grade===_trFilter));
   wrap.innerHTML=list.map(t=>{
     const g=TROPHY_GRADES[t.grade];
-    return '<div class="fac-q" data-s="'+esc((t.name+' '+t.desc+' '+(t.tip||'')+' trophäe trophy').toLowerCase())+'">'
-      +'<div class="fac-qh">'+g.ico+' '+esc(t.name)
+    return '<div class="fac-q" data-s="'+escHtml((t.name+' '+t.desc+' '+(t.tip||'')+' trophäe trophy').toLowerCase())+'">'
+      +'<div class="fac-qh">'+g.ico+' '+escHtml(t.name)
       +'<span class="tag" style="border-color:'+g.col+';color:'+g.col+'">'+g.lbl+'</span>'
       +facBadges(t)+'</div>'
-      +'<div style="font-size:12px;color:var(--txt);margin:4px 0 0">'+esc(t.desc)+'</div>'
-      +(t.tip?'<div style="font-size:11.5px;color:var(--dim);margin-top:4px">💡 '+esc(t.tip)+'</div>':'')
+      +'<div style="font-size:12px;color:var(--txt);margin:4px 0 0">'+escHtml(t.desc)+'</div>'
+      +(t.tip?'<div style="font-size:11.5px;color:var(--dim);margin-top:4px">💡 '+escHtml(t.tip)+'</div>':'')
       +(t.sec?'<button class="empty-state-action" style="margin-top:6px" onclick="showSec(\''+t.sec+'\')">Passende Wiki-Sektion →</button>':'')
       +'</div>';
   }).join('');
   const rm=document.getElementById('trophy-roadmap');
   if(rm)rm.innerHTML='<h3 class="sub-t">🗺️ Platin-Roadmap (PowerPyx)</h3><ol style="font-size:12px;line-height:1.65;color:var(--txt);padding-left:18px;margin:6px 0">'
-    +TROPHY_ROADMAP.map(r=>'<li style="margin-bottom:5px">'+esc(r)+'</li>').join('')
-    +'</ol><div style="font-size:11px;color:var(--dim);line-height:1.55;margin-top:6px">'+esc(TROPHY_NOTE)+'</div>';
+    +TROPHY_ROADMAP.map(r=>'<li style="margin-bottom:5px">'+escHtml(r)+'</li>').join('')
+    +'</ol><div style="font-size:11px;color:var(--dim);line-height:1.55;margin-top:6px">'+escHtml(TROPHY_NOTE)+'</div>';
 }
 
 function renderAchievements(){
@@ -7195,6 +7199,7 @@ const SEC_RENDERERS={
   gatherables:['renderGatherables'],
   puzzles:['renderPuzzles'],
   minigames:['renderMinigames'],
+  bestiary:['renderBestiary'],
   dyes:['renderDyes'],
   food:['renderFood'],
   witches:['renderWitches'],
@@ -7716,7 +7721,7 @@ function renderBosses(){
     const safeName=b.name.replace(/'/g,"\\'");
     const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge,notes[b.name]||''].join(' ').toLowerCase();
     const _spLock=sp>0&&b.chapter!=null&&b.chapter>sp;
-    return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-s="${esc(s)}">
+    return `<div class="card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-s="${escHtml(s)}">
       ${_spLock?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${b.chapter} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
       <div class="boss-done-badge">BESIEGT</div>
       ${favBtn('boss',b.name)}
@@ -7781,7 +7786,6 @@ function renderWeapons(){
     if(passFilter){ if(searching){show=s.includes(q);} else {fi++;show=(fi>=start&&fi<end);} }
     const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
-    const esc=v=>(v||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
     return `<div class="card${show?'':' hide'}" data-s="${s}">
       ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
       <div class="ct">${w.name}</div>
@@ -7794,7 +7798,7 @@ function renderWeapons(){
         ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:11px">${w.built_in}</span></div>`:''}
         ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:11px;color:var(--dim)">${w.notes}</span></div>`:''}
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${esc(w.name)}','${esc(w.source)}','Waffe — ${w.type}')">📍 Auf Karte</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">📍 Auf Karte</button>
     </div>`;
   }).join('');
   const pg=document.getElementById('weapon-pager');
@@ -7834,11 +7838,10 @@ function renderCores(){
     const s=[c.name,c.effect,c.source,c.slot].join(' ').toLowerCase();
     const ico=CORE_IMGS[c.name];
     const vid=CORE_VIDS[c.name];
-    const esc=n=>n.replace(/'/g,"\\'");
     return `<tr class="trow${show?'':' hide'}" data-s="${s}">
       <td><div style="display:flex;align-items:center;gap:8px">
         ${ico?`<img src="${ico}" data-cdn="${CORE_IMGS_CDN[c.name]||''}" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.style.display='none';}" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
-        <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${esc(c.name)}')" onmouseleave="hideCoreVid()">▶</span>`:''}
+        <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()">▶</span>`:''}
       </div></td>
       <td>${c.effect}${coreTierStrip(c.name)}</td>
       <td style="font-size:11.5px;color:var(--dim)">${c.source}</td>
@@ -7886,7 +7889,6 @@ function renderCrafting(){
     const show=!f||c.cat===f;
     const s=[c.name,c.station,c.ingr,c.effect,c.notes].join(' ').toLowerCase();
     const badge=c.cat==='Potion'?'tr':c.cat==='Food'?'tg':'tw';
-    const esc=v=>v.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     return `<div class="card${show?'':' hide'}" data-s="${s}">
       <div class="craft-icon-hd" style="background:${craftCatGrad(c.cat)}">${craftCatIcon(c.cat)}<span class="icon-hd-label" style="color:${craftCatColor(c.cat)}">${c.cat}</span></div>
       <div class="ct">${c.name}</div>
@@ -7896,7 +7898,7 @@ function renderCrafting(){
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${c.effect}</span></div>
         ${c.notes?'<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">'+c.notes+'</span></div>':''}
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${esc(c.name)}','${esc(c.station)}','Crafting Station')">📍 Auf Karte</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(c.name)}','${escJsStr(c.station)}','Crafting Station')">📍 Auf Karte</button>
     </div>`;
   }).join('');
   renderReverseLookup();
@@ -7946,13 +7948,13 @@ function qTab(id){
 function renderMQ(){
   // Quests als Objekte {q,trigger,prereq,reward,miss,tip,conf} (Walkthrough-Schema wie FAC_DATA;
   // alle Kapitel seit 2026-06-11). String-Fallback bleibt fuer Robustheit erhalten.
-  const qCard=q=>`<div class="fac-q" data-s="${esc((q.q+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
-      <div class="fac-qh">${esc(q.q)}${facBadges(q)}</div>
+  const qCard=q=>`<div class="fac-q" data-s="${escHtml((q.q+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
+      <div class="fac-qh">${escHtml(q.q)}${facBadges(q)}</div>
       <div class="fac-qm">
-        <div class="fac-qk">Trigger</div><div class="fac-qv">${esc(q.trigger)}</div>
-        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${esc(q.prereq)}</div>
-        <div class="fac-qk">Belohnung</div><div class="fac-qv">${esc(q.reward)}</div>
-        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+esc(q.tip)+'</div>':''}
+        <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
+        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${escHtml(q.prereq)}</div>
+        <div class="fac-qk">Belohnung</div><div class="fac-qv">${escHtml(q.reward)}</div>
+        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
       </div>
     </div>`;
   document.getElementById('mq-list').innerHTML=MAIN_QUESTS.map(ch=>{
@@ -7982,13 +7984,13 @@ function renderSideQuests(){
   el.innerHTML='<div style="font-size:12px;color:var(--dim);margin-bottom:14px">'+SIDE_QUESTS.length+' freie Side-Quests ausserhalb von Hauptstory und Fraktionen. Die Bewohner-Requests im Greymane Camp stehen in der Greymane-Sektion.</div>'+
     regions.map(r=>{
       const list=SIDE_QUESTS.filter(q=>q.region===r);
-      return '<h3 class="sub-t">'+esc(r)+' ('+list.length+')</h3>'+list.map(q=>`<div class="fac-q" data-s="${esc((q.q+' '+q.region+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
-      <div class="fac-qh">${esc(q.q)}${facBadges(q)}</div>
+      return '<h3 class="sub-t">'+escHtml(r)+' ('+list.length+')</h3>'+list.map(q=>`<div class="fac-q" data-s="${escHtml((q.q+' '+q.region+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
+      <div class="fac-qh">${escHtml(q.q)}${facBadges(q)}</div>
       <div class="fac-qm">
-        <div class="fac-qk">Trigger</div><div class="fac-qv">${esc(q.trigger)}</div>
-        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${esc(q.prereq)}</div>
-        <div class="fac-qk">Belohnung</div><div class="fac-qv">${esc(q.reward)}</div>
-        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+esc(q.tip)+'</div>':''}
+        <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
+        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${escHtml(q.prereq)}</div>
+        <div class="fac-qk">Belohnung</div><div class="fac-qv">${escHtml(q.reward)}</div>
+        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
       </div>
     </div>`).join('');
     }).join('');
@@ -8021,10 +8023,10 @@ function renderFactions(){
   const regs=FAC_DATA.regions.map(r=>{
     const fq=r.factions.reduce((n,f)=>n+f.quests.length,0);
     const facs=r.factions.map(f=>{
-      const quests=f.quests.map(q=>'<div class="fac-q"><div class="fac-qh">'+esc(q.q)+facBadges(q)+'</div><div class="fac-qm"><div class="fac-qk">Trigger</div><div class="fac-qv">'+esc(q.trigger)+'</div><div class="fac-qk">Voraussetzung</div><div class="fac-qv">'+esc(q.prereq)+'</div><div class="fac-qk">Belohnung</div><div class="fac-qv">'+esc(q.reward)+'</div></div></div>').join('');
-      return '<details class="fac-fac"><summary class="fac-sum"><span class="fac-cv">&#9654;</span><span class="fac-nm">'+esc(f.name)+'</span>'+(f.isNew?'<span class="tag tg">NEU</span>':'')+'<span class="fac-ct">'+f.quests.length+' Quest'+(f.quests.length!==1?'s':'')+'</span></summary><div class="fac-ov">'+esc(f.overview)+'</div>'+quests+'</details>';
+      const quests=f.quests.map(q=>'<div class="fac-q"><div class="fac-qh">'+escHtml(q.q)+facBadges(q)+'</div><div class="fac-qm"><div class="fac-qk">Trigger</div><div class="fac-qv">'+escHtml(q.trigger)+'</div><div class="fac-qk">Voraussetzung</div><div class="fac-qv">'+escHtml(q.prereq)+'</div><div class="fac-qk">Belohnung</div><div class="fac-qv">'+escHtml(q.reward)+'</div></div></div>').join('');
+      return '<details class="fac-fac"><summary class="fac-sum"><span class="fac-cv">&#9654;</span><span class="fac-nm">'+escHtml(f.name)+'</span>'+(f.isNew?'<span class="tag tg">NEU</span>':'')+'<span class="fac-ct">'+f.quests.length+' Quest'+(f.quests.length!==1?'s':'')+'</span></summary><div class="fac-ov">'+escHtml(f.overview)+'</div>'+quests+'</details>';
     }).join('');
-    return '<div class="fac-reg"><div class="fac-rh">'+esc(r.region)+' &mdash; '+r.factions.length+' Fraktionen &middot; '+fq+' Quests</div><div class="fac-b">'+facs+'</div></div>';
+    return '<div class="fac-reg"><div class="fac-rh">'+escHtml(r.region)+' &mdash; '+r.factions.length+' Fraktionen &middot; '+fq+' Quests</div><div class="fac-b">'+facs+'</div></div>';
   }).join('');
   const liberation='<div class="fac-reg"><div class="fac-rh">Liberation &mdash; Re-Blockade [1.05]</div><div class="fac-b"><span style="color:var(--dim);font-size:12px">23 Forts, 13 Fraktionen (regions&uuml;bergreifendes Endgame-System)</span><div><div class="fac-lb">Notable Forts</div><ul class="fac-ul"><li>Fort Warspike &mdash; Multishot-Lehrer!</li><li>Gorthak Ironworks Delesyia &mdash; beste Armaments-Quelle</li><li>Karin Quarry &mdash; House Roberts</li></ul></div></div></div>';
   document.getElementById('fac-list').innerHTML=lead+regs+liberation;
@@ -8097,7 +8099,6 @@ function renderArmor(){
     const show=!f||a.type===f;
     const s=[a.name,a.type,a.source,a.effect,a.notes].join(' ').toLowerCase();
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
-    const esc=v=>v.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     const srcDisp=a.source&&a.source.trim()?a.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     return `<div class="card${show?'':' hide'}" data-s="${s}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
@@ -8108,7 +8109,7 @@ function renderArmor(){
         <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:11px">${srcDisp}</span></div>
         ${a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:11px;color:var(--dim)">${a.notes}</span></div>`:''}
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${esc(a.name)}','${esc(a.source)}','Rüstung — ${a.type}')">📍 Auf Karte</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">📍 Auf Karte</button>
     </div>`;
   }).join('');
 }
@@ -8192,10 +8193,11 @@ function renderMounts(){
   ).join('');
 }
 
-// Top-level HTML-Escaper (Bugfix 2026-06-06): renderCollectibles/renderCompendium nutzten ein bare esc(),
-// das bislang nur LOKAL in anderen Funktionen existierte -> ReferenceError brach den DOMContentLoaded-Init
-// ab Collectibles ab (alle Tabellen-Sektionen danach leer + Besucherzaehler stuck auf "—"). Globales esc behebt das.
-function esc(s){return String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));}
+// Zentrale Escape-Helfer (Konsolidierung 2026-06-12, Audit-Optionalpunkt):
+// escHtml fuer Text UND Attribute (escapt auch Quotes), escJsStr fuer Strings in inline-Handlern
+// (onclick='fn(\'...\')'). Fruehere lokale esc-Varianten mit abweichender Semantik sind entfernt.
+function escHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function escJsStr(s){return String(s??'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
 
 // ===== COLLECTIBLES =====
 function renderCollectibles(){
@@ -8205,10 +8207,10 @@ function renderCollectibles(){
   const list=COLLECTIBLES.filter(c=>!f||(f==='1'?c.miss:!c.miss));
   const cnt=document.getElementById('cof-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
   tb.innerHTML=list.map(c=>`<tr>
-    <td><strong>${esc(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:#e84535;border:1px solid rgba(232,69,53,.5);border-radius:3px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}</td>
-    <td style="color:var(--dim);white-space:nowrap;font-size:11px">${esc(c.cat)}</td>
-    <td style="line-height:1.5">${esc(c.detail)}</td>
-    <td style="color:var(--dim);font-size:11px">${esc(c.loc)}</td>
+    <td><strong>${escHtml(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:#e84535;border:1px solid rgba(232,69,53,.5);border-radius:3px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}</td>
+    <td style="color:var(--dim);white-space:nowrap;font-size:11px">${escHtml(c.cat)}</td>
+    <td style="line-height:1.5">${escHtml(c.detail)}</td>
+    <td style="color:var(--dim);font-size:11px">${escHtml(c.loc)}</td>
   </tr>`).join('');
 }
 
@@ -8220,15 +8222,15 @@ function renderCompendium(secId,DATA,filterId,iconCell){
   const list=DATA.filter(x=>!f||x.cat===f);
   const cnt=document.getElementById(secId+'-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
   tb.innerHTML=list.map(c=>`<tr>${iconCell?'<td class="dye-td">'+iconCell(c)+'</td>':''}
-    <td><strong>${esc(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:#e84535;border:1px solid rgba(232,69,53,.5);border-radius:3px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}${c.conf&&c.conf!=='high'?` <span title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}" style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:3px;padding:1px 4px;vertical-align:middle">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:''}</td>
-    <td style="color:var(--dim);white-space:nowrap;font-size:11px">${esc(c.cat)}</td>
-    <td style="line-height:1.5">${esc(c.detail)}</td>
-    <td style="color:var(--dim);font-size:11px">${esc(c.loc)}</td>
+    <td><strong>${escHtml(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:#e84535;border:1px solid rgba(232,69,53,.5);border-radius:3px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}${c.conf&&c.conf!=='high'?` <span title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}" style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:3px;padding:1px 4px;vertical-align:middle">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:''}</td>
+    <td style="color:var(--dim);white-space:nowrap;font-size:11px">${escHtml(c.cat)}</td>
+    <td style="line-height:1.5">${escHtml(c.detail)}</td>
+    <td style="color:var(--dim);font-size:11px">${escHtml(c.loc)}</td>
   </tr>`).join('');
 }
 function renderGatherables(){renderCompendium('gatherables',GATHERABLES,'gatherables-cat');}
 function renderPuzzles(){renderCompendium('puzzles',PUZZLES,'puzzles-cat');}
-function dyeChip(c){var col=esc(c.color||'#888');if(c.icon)return '<span class="dye-chip" data-c="'+col+'" style="border-color:'+col+'"><img src="'+esc(c.icon)+'" alt="" loading="lazy" onerror="this.parentNode.style.background=this.parentNode.dataset.c;this.remove()"></span>';return '<span class="dye-chip" style="border-color:'+col+';background:'+col+'"></span>';}
+function dyeChip(c){var col=escHtml(c.color||'#888');if(c.icon)return '<span class="dye-chip" data-c="'+col+'" style="border-color:'+col+'"><img src="'+escHtml(c.icon)+'" alt="" loading="lazy" onerror="this.parentNode.style.background=this.parentNode.dataset.c;this.remove()"></span>';return '<span class="dye-chip" style="border-color:'+col+';background:'+col+'"></span>';}
 function renderDyes(){renderCompendium('dyes',DYES,'dyes-cat',dyeChip);}
 function renderFood(){renderCompendium('food',FOOD_ELIXIRS,'food-cat');}
 
@@ -8864,7 +8866,6 @@ function importProgress(input){
 }
 
 // ===== COMMENTS =====
-function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 // ===== MAP LOCATION HELPERS =====
 let _mapLocSearch='';
@@ -9115,7 +9116,6 @@ function renderAccessories(){
     const show=!f||a.type===f;
     const s=[a.name,a.type,a.effect,a.source,a.notes].join(' ').toLowerCase();
     const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
-    const esc=v=>v.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     return `<div class="card${show?'':' hide'}" data-s="${s}">
       <div class="acc-icon-hd" style="background:${accTypeGrad(a.type)}">${accTypeIcon(a.type)}<span class="icon-hd-label" style="color:${accTypeColor(a.type)}">${a.type}</span></div>
       <div class="ct">${a.name}</div>
@@ -9125,7 +9125,7 @@ function renderAccessories(){
         <div class="crow"><span class="cl">Quelle</span><span class="cv">${a.source}</span></div>
         ${a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${a.notes}</span></div>`:''}
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${esc(a.name)}','${esc(a.source)}','Accessoire — ${a.type}')">📍 Auf Karte</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Accessoire — ${a.type}')">📍 Auf Karte</button>
     </div>`;
   }).join('');
 }
@@ -9183,7 +9183,6 @@ const WITCHES=[
 
 function renderWitches(){
   document.getElementById('witch-grid').innerHTML=WITCHES.map(w=>{
-    const esc=v=>v.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     return `<div class="witch-card">
       <div class="witch-banner" style="background:${w.color}"></div>
       ${w.img?`<div class="witch-img-wrap"><img class="witch-img" src="${w.img}" loading="lazy" alt="${w.name}" onerror="this.parentElement.remove()"></div>`:''}
@@ -9193,7 +9192,7 @@ function renderWitches(){
           <div class="witch-icon-title">${w.name}</div>
           <div class="witch-icon-sub">${w.chapter}</div>
         </div>
-        <button class="map-pin-btn" style="margin-top:0;padding:4px 9px;font-size:10px" onclick="showMapLoc('${esc(w.name)}','${esc(w.location)}','Hexe')">📍</button>
+        <button class="map-pin-btn" style="margin-top:0;padding:4px 9px;font-size:10px" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.location)}','Hexe')">📍</button>
       </div>
       <div class="witch-body">
         <div class="witch-loc">📍 ${w.location}</div>
@@ -9796,6 +9795,130 @@ function renderMinigames(){
     </div>`;
   }).join('');
 }
+// ===== BESTIARIUM =====
+// Recherchiert 2026-06-12 via questlog database.getFactions/getFaction/getNpcs/getNpc (Beschreibungen,
+// Drop-Tabellen, Icons) + game8/Fextralife (Taktik, Orte). Drops kuratiert: Quest-Items/Knowledge-Eintraege
+// aus den rohen Drop-Tabellen entfernt. Rohdaten: /mnt/nvme/claude/cd-audit-pi/research/enemies_questlog.json
+const ENEMY_IMGS={
+ "Wolf":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_wolf_1.webp",
+ "Bear":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_bear_wild_30048.webp",
+ "Boar":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_wild_boar.webp",
+ "Deer":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_deer_wild_30031.webp",
+ "Fox":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_fox_wild_30046.webp",
+ "Goat":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_goat_domestic_30027.webp",
+ "Sheep":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_sheep_domestic_30026.webp",
+ "Cow":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_bull_wild_32217.webp",
+ "Rhinoceros":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_rhino.webp",
+ "Elephant":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_elephant_1.webp",
+ "Hedgehog":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_hedgehog_wild_30045.webp",
+ "Wandershrub":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_rush.webp",
+ "Bismuth Oreback Crab":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_bismuth_landspider.webp",
+ "Stoneback Crab":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_small_landspider.webp",
+ "Harpy":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_harpy.webp",
+ "Webbed Spider":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_web_spider.webp",
+ "Heloderma Lizard":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_hila_lizard_wild_30122.webp",
+ "Ogre":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_ogre.webp",
+ "Bleed Bandits":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_bleed_ruffians.webp",
+ "Fundamentalist Goblins":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_faction_reglegoblin.webp",
+ "Wolf Trackers":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_wolfpursuer.webp",
+ "Southern Bandits":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_bandit1.webp",
+ "Hornsplitter's Guards":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_splithornguard.webp",
+ "St. Halssius's House of Healing":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_faction_halsius.webp",
+ "Reed Devil Minions":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_reeddevil.webp",
+ "Dancing Catfish Pirates":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_piratei.webp",
+ "Antumbra Order":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_antumbra.webp",
+ "Bastier's Inquisitors":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_caliburnclan_ii.webp",
+ "Crow Brothers":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_questimage_quest_crowman_boss.webp",
+ "Mistwood Hunters":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_enthunter.webp",
+ "Black Bears":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_questimage_quest_mjordin_boss.webp",
+ "Lonely Jackals":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_lonelyjackal.webp",
+ "The Wyvernflames":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_wyvern_tamers.webp",
+ "The Helms":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_faction_desert_harrier.webp",
+ "The Faceless":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_sacked_fortress.webp",
+ "Muiquun Outlaws":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_crimson_riverruins.webp",
+ "Sandfang Marauders":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_faction_goblin_riders.webp",
+ "Goldenscale Bandits":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_iguana_riders.webp",
+ "Dusksong":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_isvatufortress.webp",
+ "Savage Fangs":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_crim_stompsandfortruins.webp"
+};
+const ENEMIES={
+ wild:[
+  {name:"Wolf",de:"Wolf",region:"Westliches Pywel",drops:"Small Bone, Long Hair Hide, Fine Meat, Fang",note:"Rudeljäger mit hoher Ausdauer und Intelligenz — testet Beute erst auf Schwächen und greift dann koordiniert an. Wird von den Sandfang Marauders als Reittier genutzt."},
+  {name:"Bear",de:"Bär",region:"Ganz Pywel außer Crimson Desert",drops:"Large Bone, Thick Hide, Tough Meat, Fang; seltener: Honey, Bear's Gallbladder, Boss Bear Hat, Bear Hide Cloak",tipp:"Wehrt sich beim Farmen massiv — Proviant mitnehmen. Kann geritten, aber nicht dauerhaft gezähmt werden.",note:"Spitzenprädator an der Spitze von Pywels Nahrungskette — trotz niedlicher Optik dominiert er das Ökosystem."},
+  {name:"Boar",de:"Wildschwein",region:"Ganz Pywel außer Crimson Desert",drops:"Small Bone, Long Hair Hide, Fine Meat, Fang",note:"Wildschwein mit langen, gebogenen Hauern für Kraftproben gegen Rivalen. Die Savage Fangs reiten Eber als Reittiere."},
+  {name:"Deer",de:"Hirsch",region:"Ganz Pywel außer Crimson Desert",drops:"Small Bone, Short Hair Hide, Fine Meat, Long Horn",note:"Nicht aggressives Herdentier und beliebtes Jagdziel — Männchen tragen mehrendige Geweihe."},
+  {name:"Fox",de:"Fuchs",region:"Südliche Regionen",drops:"Small Bone, Thin Hide, Lean Meat",note:"Anpassungsfähiger Beutegreifer nahe Siedlungen (stiehlt Vieh); tappt dank seiner Schläue selten in Fallen. Varianten: Snowfield Fox, Desert Fox."},
+  {name:"Goat",de:"Ziege",region:"Ganz Pywel",drops:"Small Bone, Short Hair Hide, Fine Meat, Short Horn",note:"Überlebenskünstler in rauen Umgebungen — liefert Milch, Fleisch, Wolle und Leder."},
+  {name:"Sheep",de:"Schaf",region:"Ganz Pywel",drops:"Small Bone, Short Hair Hide, Fine Meat, Short Horn, Fleece",note:"Wichtigstes Nutztier der Bewohner Pywels — einzige Wildtier-Quelle für Fleece (Skinning)."},
+  {name:"Cow",de:"Kuh/Stier",region:"Ganz Pywel",drops:"Large Bone, Short Hair Hide, Tender Meat, Short Horn",note:"Häufigstes Nutztier — muskulöses Zug- und Arbeitstier mit markanten Hörnern."},
+  {name:"Rhinoceros",de:"Nashorn",region:"Crimson Desert",drops:"Large Bone, Thick Hide, Tough Meat, Ivory",note:"Einzelgänger mit panzerartiger Haut, aber empfindlichem Gemüt — schützt sich mit Schlamm vor der Sonne. Ivory-Quelle."},
+  {name:"Elephant",de:"Elefant",region:"Demeniss (Wildlife Park)",drops:"Large Bone, Thick Hide, Tough Meat, Ivory",note:"Sanftes, hochintelligentes Großtier aus einem fernen Land — erinnert sich an Orte und erkennt Menschen wieder."},
+  {name:"Hedgehog",de:"Igel",region:"Hernand",drops:"Small Bone, Thin Hide, Lean Meat",tipp:"Der Golden Apple Hedgehog (u.a. bei Grey Rock Dock) trägt sichtbar einen Goldenen Apfel — Zutat fürs Gold-Barren-Crafting bei den Hexen (1 Golden Apple + 3 Gold Ores).",note:"Klein, aber durch dichte Stacheln gut geschützt; beim Dauerfressen bleiben Früchte auf den Stacheln hängen — daher die Apple-/Mushroom-/Grape-/Orange-Varianten."}
+ ],
+ kreaturen:[
+  {name:"Wandershrub",de:"Wandershrub",region:"Pywel (u.a. Haunted Hill)",drops:"Core-Drops: Swift I, Haste I, Ascent I (selten); Stein-Variante: Abyss Cell (Chance)",tipp:"Perfekt getarnt als Gestrüpp — lauert reglos und stürmt im letzten Moment los. Die große Blitz-Variante greift mit Elektrizität an; auf Haunted Hill bewachen sie den Abyss Nexus.",note:"Pflanzenwesen in Klein/Groß- sowie Dry- und Lightning-Varianten."},
+  {name:"Bismuth Oreback Crab",de:"Bismut-Erzrücken-Krabbe",region:"Crimson Desert; Farm-Spot: Drakesfall Castle (NO von Hernand)",drops:"Bismuth Ore (100%), Abyss Cell (30%), Destruction I/Insight I (selten)",tipp:"Turning Slash einsetzen, während sie still stehen, um das Bismut vom Rücken zu schlagen — Kontaktschaden ist kaum vermeidbar, Essen mitnehmen. Beste Abyss-Cell-Farmquelle (Gruppe übrig lassen und per Abyss-Nexus-Schnellreise respawnen).",note:"Züchtet Bismutkristalle auf dem Panzer — Rüstung und Waffe zugleich, bei Sammlern begehrt."},
+  {name:"Stoneback Crab",de:"Steinrücken-Krabbe",region:"Pywel-weit (auch Wüsten-Varianten)",drops:"Iron Ore (100%), Abyss Cell (30%), Destruction I/Insight I (selten)",note:"Trägt Steine verschiedener Größen auf dem Panzer und tauscht sie mit Artgenossen gegen besser passende; Varianten Klein/Mittel/Groß bis zur Queen Stoneback Crab."},
+  {name:"Harpy",de:"Harpyie",region:"Pailune (Karanda-Gebiet)",drops:"Harpy Feather (50%), Dandelion Longsword (1%)",note:"Fliegende Kreatur mit Frauenkopf und Vogelschwingen — verfolgt Eindringlinge ins Nest unerbittlich, sehr schnell, durchdringender Schrei. Auch als Shadow Harpy."},
+  {name:"Webbed Spider",de:"Netzspinne",region:"Hernand (Queen-Spider-Nester)",drops:"Spider Web (100%), Acidic Spider Venom (20%)",note:"Komplett in klebrige Netze gehüllt — verlangsamt Beute und fängt Angreifer; Varianten: Acid Spider, Golden Silk Spider, Queen Spider (Boss)."},
+  {name:"Heloderma Lizard",de:"Heloderma-Echse",region:"Crimson Desert, Hernand",drops:"Small Bone, Lean Meat",note:"Auffällig schwarz-orange gemusterte Echse trockener Regionen; verbringt die heißen Stunden im Bau. Verwandte: Monitor Lizard, Frilled-Neck Lizard."},
+  {name:"Ogre",de:"Oger",region:"Crimson Desert (versiegelt)",drops:"—",note:"Kolossales, rätselhaftes Monster der Wüste — fertigt sich Kleidung aus Tierhäuten, besitzt also eine gewisse Intelligenz. Herkunft und Zweck unbekannt; Ogre's-Items (Necklace/Ring) stammen aus anderen Quellen."},
+  {name:"Hostile Machines",de:"Feindliche Maschinen",region:"Delesyia (um Marnis Labor, SO der Stadt)",drops:"Cogwheel, Small Battery",conf:"medium",note:"Maschinen-Konstrukte, die auf Nah- und Ferndistanz kämpfen. Cogwheels braucht man u.a. für Kuku-Items aus Grimnirs Werkstatt in Hernand."}
+ ],
+ fraktionen:[
+  {name:"Bleed Bandits",region:"Hernand",drops:"Cloth Piece, Pelt, Fleece (Chance)",note:"Bewaffnete Banditen, die Hernand in Angst versetzen: Sie machen Opfer mit der Albtraum-Droge Dreamer's Bliss abhängig und versklaven sie — gestützt von einem mächtigen Hintermann im Schatten."},
+  {name:"Fundamentalist Goblins",region:"Hernand",drops:"Iron Ore, Copper Ore, Fleece, Small Bone; selten: Regglin Plate Helm, Silver Bullet",note:"Goblin-Gelehrte, kaum besser als gewöhnliche Diebe — forschen ohne Skrupel und schrecken vor unmenschlichen Taten nicht zurück; etablierte Institute erkennen sie nicht an."},
+  {name:"Wolf Trackers",region:"Hernand",drops:"Iron Ore, Copper Ore, Fleece, Small Bone",note:"Schlacht-besessene Jägerbande — keine Jäger, die der Natur danken, sondern Schlächter auf der Suche nach immer aufregenderer Beute, aktuell dem legendären Wolf. Blockieren mehrere Posten und Minen in Hernand."},
+  {name:"Southern Bandits",region:"Hernand (Süden, Lager bei Fort Anvil)",drops:"Iron Ore, Copper Ore, Fleece, Poison Arrow, Mask, Liquor Bottle",note:"Gewöhnliche Wegelagerer, die Händler und Reisende aus dem Hinterhalt überfallen — weniger berüchtigt als Bleed Bandits oder Fundamentalist Goblins."},
+  {name:"Hornsplitter's Guards",region:"Hernand",drops:"Bounty Hunter's Cloth Armor, Varnian Equipment Blueprint, Gunpowder (Chance)",note:"Die persönliche Elitegarde von Kailok the Hornsplitter (Goldleaf-Handelsgilde) — nur seine vertrautesten Leute, bereit, jeden Preis für seine Interessen zu zahlen."},
+  {name:"St. Halssius's House of Healing",region:"Hernand",drops:"Decent Copper Pouch, Bread, Cloth Piece, Thin Hide",note:"Einst eine Heilanstalt für psychisch Kranke, heute faktisch ein Gefängnis: Statt Patienten werden vor allem 'ideologisch Unreine' aus Demeniss weggesperrt; Besuche sind verboten."},
+  {name:"Reed Devil Minions",region:"Hernand (Schilffelder, Sunset Valley)",drops:"Hay, Battered Grains, Cloth Piece, Thin Hide",tipp:"Stehen immer wieder auf, egal wie oft man sie niederstreckt — es sind böse Geister in Vogelscheuchen-Körpern.",note:"Diener des Reed Devil (Boss). Für die Kranken von Sunset Valley paradoxerweise ein Hoffnungssymbol."},
+  {name:"Dancing Catfish Pirates",region:"Hernand/Delesyia (Küsten)",drops:"Iron Ore, Fleece, Copper Ore, Cogwheel, Small Battery; selten: A.T.A.G. Plating Mk III",note:"Skrupellose Piratencrew, die ihren aus Menschenexperimenten hervorgegangenen Anführer Sir Catfish fanatisch verehrt — Wracks und Opfer an fast jeder Küste Pywels."},
+  {name:"Antumbra Order",region:"Ganz Pywel",drops:"Cloth Piece, Thin Hide; selten: Sword of Greed, Greymane Leather Helm",note:"Dunkler Kult, der Licht und Leben lästert und die Finsternis mit Menschenopfern verehrt — Heiligtümer in ganz Pywel; verspricht 'Gleichheit und Freiheit durch Dunkelheit'."},
+  {name:"Bastier's Inquisitors",region:"Demeniss",drops:"Iron Ore, Copper Ore, Fleece, Captive's Cloth Armor; Kampfhunde: Small Bone, Long Hair Hide, Fang",note:"Das einst gegen Korruption gegründete Righteous Tribunal, degeneriert zu Bastiers Machtinstrument — verfolgt heute das Volk, statt es zu schützen."},
+  {name:"Crow Brothers",region:"Demeniss",drops:"Cloth Piece, Thin Hide; selten: Greymanes' Leather Armor",note:"Anhänger von Draven, dem Crowcaller — lernen seine Tötungstechniken, erhalten einen Teil seiner Macht und wirken finstere Magie; gieren ständig nach der Anerkennung ihres Meisters."},
+  {name:"Mistwood Hunters",region:"Pailune (Wayward Woods)",drops:"Sleep Arrow, Bundle of Arrows, Packaged Salt, Cloth Piece",note:"Wilderer, die die Waldgeister der Wayward Woods zu Geld machen — jagen alles, was sich bewegt, und stürzen die Ordnung des Waldes ins Chaos."},
+  {name:"Black Bears",region:"Pailune (Ashclaw Keep u.a.)",drops:"Cogwheel, Lubricant; selten: Crimson Banquet Helm Blueprint, Small Staglord Banner Pike",note:"Myurdins Fraktion — einst neben den Greymanes eine der stärksten Kampftruppen Pailunes, ermordete feige Jian und zerschlug die Greymanes; Belagerungsmaschinen und Lava Bears im Arsenal."},
+  {name:"Lonely Jackals",region:"Pailune (Hauptstadt)",drops:"Decent Copper Pouch, Beer, Golden Beer, Jerky, Arrow",note:"Ludvigs Fraktion — lebte einst neben den Greymanes, schwor nach deren Vertreibung den Black Bears die Treue und unterdrückt seither rücksichtslos die Bevölkerung der Hauptstadt."},
+  {name:"The Wyvernflames",region:"Delesyia (Windridge Fortress)",drops:"Gunpowder, Bundle of Bullets, Cloth Piece; selten: Sonic Resonator, Gear Blueprint: Spirit's Judgment",note:"Fremde Invasoren in ausländischer Tracht, die plötzlich in Dewhaven auftauchten — massakrieren oder versklaven Bewohner und befehligen mehrere Wyvern."},
+  {name:"The Helms",region:"Crimson Desert (Raids bis Demeniss/Delesyia)",drops:"Abyss Cell, Sealed Abyss Artifact, Bundle of Bullets, Destruction I; Hyänen: Small Bone, Fang",note:"Der bösartigste Stamm der Wüste — der gesamte Stamm operiert als eine einzige Banditenbande und baut aus gestohlener Technik massive Kriegsmaschinen."},
+  {name:"The Faceless",region:"Crimson Desert",drops:"Bulging Copper Pouch, Wine, Cheese; selten: Abyss Artifact Fabricator",note:"Maskierte Banditen in auffälligen Kampfroben, die an sich selbst statt an Götter glauben — reden von 'Befreiung', leben aber schlicht von Plünderung."},
+  {name:"Muiquun Outlaws",region:"Crimson Desert (Muiquun)",drops:"Bulging Copper Pouch, Wine, Cheese, Cloth Piece",note:"Verbannte, Berüchtigte und Ausgestoßene, die sich in der Wüste zusammengeschlossen haben — in Muiquun zählen weder Name noch Vergangenheit, nur die Stärke zu überleben."},
+  {name:"Sandfang Marauders",region:"Crimson Desert (größtes Territorium)",drops:"Bundle of Arrows, Heavy Copper Pouch (Chance)",note:"Die berüchtigtste Banditengruppe der Wüste, organisiert um Goblins, die wilde Wölfe zähmen und reiten — ihr Ziel: die Crimson Desert zu einen und ein eigenes Königreich zu errichten."},
+  {name:"Goldenscale Bandits",region:"Crimson Desert",drops:"Iron Ore, Copper Ore, Bundle of Bullets; selten: Gear Blueprint: Frostward, Kite Shield, Diver's Machine Knuckledrill",note:"Zwerge in Ganzkörperrüstung auf Riesenleguanen — schnell unterwegs, leben von Überfällen auf Handelswaren; andere Banden belächeln sie als kleine Diebe."},
+  {name:"Dusksong",region:"Crimson Desert (Isvatu-Festung)",drops:"Cloth Piece; selten: Groundsurge, Counterweight Leather Gloves, Autumn Banquet Leather Armor",note:"Banditen aus Musketen-Deserteuren — als Berufssoldaten ausgebildet, wenige, aber mit gestohlenen Armeewaffen verheerend effektiv; desertierten vermutlich nach Verbrechen."},
+  {name:"Savage Fangs",region:"Crimson Desert (Feuchtgebiete)",drops:"Honey Tea, Thin Hide, Bulging Copper Pouch; selten: Ancient Shell Ring",note:"Nomadische Eberreiter, viele aus dem friedlichen Trolldorf Kharonso — müssen ihre Reit-Eber tränken und beanspruchen darum ein riesiges Gebiet samt Feuchtgebieten; wachsen rasant."}
+ ]
+};
+function renderBestiary(){
+  const el=document.getElementById('bestiary-root');if(!el)return;
+  const GROUPS=[
+   ['wild','🦌 Wildtiere','Jagd- und Nutztiere — Skinning-Quellen für Knochen, Häute, Fleisch, Hörner und Fleece.'],
+   ['kreaturen','🕷️ Monster & Kreaturen','Nicht-humanoide Gegner mit besonderen Material-Drops (Abyss Cells, Webs, Federn).'],
+   ['fraktionen','⚔️ Feindliche Fraktionen','Humanoide Gegner-Gruppen nach Region — Lore aus der questlog-Datenbank, Drops von den Fraktions-Einheiten.']
+  ];
+  el.innerHTML=GROUPS.map(([key,title,sub])=>{
+    const cards=ENEMIES[key].map(e=>{
+      const s=[e.name,e.de||'',e.region,e.drops||'',e.tipp||'',e.note,'bestiarium gegner enemy',title].join(' ').toLowerCase();
+      const img=ENEMY_IMGS[e.name];
+      const titel=e.de&&e.de!==e.name?`${e.de} <span style="font-weight:400;color:var(--dim);font-size:12px">(${e.name})</span>`:e.name;
+      return `<div class="card" data-s="${escHtml(s)}">
+        ${img?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:86px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${img}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:72px;width:72px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:''}
+        <div class="ct">${titel}</div>
+        <div class="cm"><span class="tag tx">${escHtml(e.region)}</span>${e.conf==='medium'?'<span class="tag tw" title="Quellenlage dünn — Details teils nur eine Quelle">Details unbestätigt</span>':''}</div>
+        <div class="crows">
+          ${e.drops&&e.drops!=='—'?`<div class="crow"><span class="cl">Drops</span><span class="cv" style="font-size:11px">${escHtml(e.drops)}</span></div>`:''}
+          ${e.tipp?`<div class="crow"><span class="cl">Taktik</span><span class="cv" style="font-size:11px;color:var(--gold)">${escHtml(e.tipp)}</span></div>`:''}
+        </div>
+        <div style="font-size:12px;color:var(--dim);margin-top:9px;line-height:1.55">${escHtml(e.note)}</div>
+      </div>`;
+    }).join('');
+    return `<h3 class="sub-t" style="margin-top:22px">${title} <span style="font-weight:400;color:var(--dim);font-size:11px">(${ENEMIES[key].length})</span></h3>
+      <p style="color:var(--dim);font-size:11.5px;margin:2px 0 12px">${sub}</p>
+      <div class="cards">${cards}</div>`;
+  }).join('');
+}
+
 function renderPatches(){
   const el=document.getElementById('patch-list');
   if(!el)return;

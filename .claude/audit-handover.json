@@ -1,9 +1,9 @@
 {
- "zweck": "Uebergabe-Briefing fuer Claude auf dem Pi. Offene Aufgaben aus dem Fable-5-Vollaudit vom 2026-06-10 (17-Agenten-Workflow, 80 verifizierte Findings). Die Quick Wins wurden am 2026-06-10 bereits umgesetzt und mit Commit ebcb8f4 gepusht (live verifiziert). Stand 2026-06-11 (abends): MQ-Walkthrough Kap. 4-Epilog UND der komplette Mittel-Block erledigt (siehe erledigt_2026_06_11_pi / erledigt_2026_06_11_pi_block2).",
+ "zweck": "Uebergabe-Briefing fuer Claude auf dem Pi. Offene Aufgaben aus dem Fable-5-Vollaudit vom 2026-06-10 (17-Agenten-Workflow, 80 verifizierte Findings). Die Quick Wins wurden am 2026-06-10 bereits umgesetzt und mit Commit ebcb8f4 gepusht (live verifiziert). Stand 2026-06-12: Hoch- und Mittel-Block komplett; aus dem Optional-Block sind Minispiele, FAC-Verifikation, Modal-Fokus, Bestiarium und Escape-Konsolidierung erledigt (siehe erledigt_2026_06_12_pi).",
  "projekt": {
   "haupt_datei": "index.html (Single-File-App, ~9700 Zeilen)",
   "live": "https://crimson-desert-wiki.netlify.app/",
-  "regeln": "VERBINDLICH: .claude/CLAUDE.md in diesem Repo lesen und befolgen. Insbesondere: NIEMALS automatisch pushen (immer erst den User fragen), Aenderungen buendeln, Render-Verifikation mit echtem Browser (Headless-Chrome --dump-dom, danach <tr>-Count pruefen: Soll aktuell 278 tr / 1429 data-s-Karten, gemessen mit render_check3.mjs nach ensureAllRendered)."
+  "regeln": "VERBINDLICH: .claude/CLAUDE.md in diesem Repo lesen und befolgen. Insbesondere: NIEMALS automatisch pushen (immer erst den User fragen), Aenderungen buendeln, Render-Verifikation mit echtem Browser (Headless-Chrome --dump-dom, danach <tr>-Count pruefen: Soll aktuell 278 tr / 1489 data-s-Karten, gemessen mit render_check3.mjs nach ensureAllRendered)."
  },
  "wichtiger_hinweis_zeilennummern": "Alle Zeilenangaben in den Aufgaben beziehen sich auf den Stand VOR Commit ebcb8f4 und sind seitdem um einige Zeilen verschoben. Nicht blind springen, sondern per Grep nach den genannten Bezeichnern (z.B. MAIN_QUESTS, FAC_DATA, BOSS_IMGS) suchen.",
  "erledigt_2026_06_10_commit_ebcb8f4": [
@@ -40,14 +40,6 @@
    "hinweis": "LORE_TERMS (25 Eintraege) liefert die Basis fuer Kurzbios; Haendler stehen bisher nur in Location-Fliesstexten."
   },
   {
-   "titel": "Bestiarium fuer normale Gegner",
-   "hinweis": "Datenstruktur ENEMIES (Name, Region, Schwaeche, Drops, Knowledge) plus eigene Sektion; Gegner werden bereits als Drop-Quellen erwaehnt."
-  },
-  {
-   "titel": "Escape-Helfer konsolidieren",
-   "hinweis": "Drei parallele Escape-Implementierungen plus mehrere lokale esc-Definitionen mit anderer Semantik schatten das globale esc(). Auf zwei globale Helfer konsolidieren: escHtml (Text/Attribute inkl. Quotes) und escJsStr (inline-onclick)."
-  },
-  {
    "titel": "PWA-Polish Rest: Manifest-Screenshots",
    "hinweis": "id:\"/\" + iOS-Install-Hinweis sind seit 11.06. drin. Offen: 2 echte Screenshots (form_factor wide/narrow) ins Manifest - braucht echte Browser-Screenshots der Live-Site, nicht fabrizieren."
   },
@@ -78,5 +70,11 @@
   "Optional-Block (Commit 56ccda7): Neue Sektion Minispiele (MINIGAMES, 15 Eintraege inkl. 1.10-Content Pinball/Orb Roll/Marni Token Exchange + Claw Machine 1.06 + Launch-Klassiker; lazy via SEC_RENDERERS, suchbar via data-s).",
   "Fraktionsquest-Verifikation: 43 low/medium-Quests von 3 Agenten gegen PowerPyx/game8/Fextralife u.a. geprueft -> 28 conf-Aenderungen (medium 40->14, high 128->154), 43 Feld-Korrekturen, \"Darkness Over the Sanctum\" auf low (nur Aggregator-DBs). Befunde: research/facq_verify_results.md + apply_facq.mjs.",
   "Modal-Fokus (A11y, modalFocusOpen/Close an rb/cmp/ic/loc/mount/login + ESC), visits.mts-Haertung (Increment nur bei serverseitig neuer sid via xmax=0), Asset-Hygiene (tote .py/Bilder raus - priscus.webp ist entgegen Audit-Notiz IN BENUTZUNG und blieb; og-Bild 360->146KB; qrcode.js lazy; 15 Core-Icons lokal primaer + CORE_IMGS_CDN-Fallback), PWA (id, iOS-Hinweis), Onboarding-Panel (cd_intro_seen)."
+ ],
+ "erledigt_2026_06_12_pi": [
+  "Bestiarium (neue Sektion sec-bestiary, Sidebar 'Welt & Story'): ENEMIES mit 41 Karten in 3 Gruppen — 11 Wildtiere, 8 Monster & Kreaturen, 22 feindliche Fraktionen. Datenbasis: questlog database.getFactions/getFaction/getNpcs/getNpc (Fraktions-Lore, Drop-Tabellen mit Wahrscheinlichkeiten, Icons; Harvest-Skript /mnt/nvme/claude/cd-audit-pi/harvest_enemies.mjs, Rohdaten research/enemies_questlog.json) + game8/Fextralife (Taktik: Oreback-Crab-Abyss-Cell-Farm, Golden Apple Hedgehog, Wandershrub-Blitz-Variante). Drops kuratiert (Quest-Items raus). Neutrale Fraktionen (Tariv Sorcerers, Kharonso Troll Alliance, Blue Fangs) bewusst NICHT aufgenommen. ENEMY_IMGS (40 questlog-CDN-URLs) wird vom linkcheck erfasst. Lazy via SEC_RENDERERS.bestiary. Render-Soll jetzt 278 tr / 1489 data-s.",
+  "Escape-Helfer konsolidiert (Audit-Optionalpunkt): 9 lokale esc-Definitionen entfernt (3x HTML-Variante, 6x JS-String-Variante), 62 Aufrufe global auf escHtml umbenannt, 11 Event-Handler-Aufrufe auf escJsStr. escHtml escapt jetzt auch Quotes/Apostroph (&quot;/&#39;) — vorher escapte das globale escHtml KEINE Quotes (Attribut-Injection-Risiko). escJsStr fuer Strings in inline-onclick.",
+  "linkcheck.mjs-Regression aus 56ccda7 gefixt: die einzeilige CORE_IMGS_CDN-Map brach die \\n};-Regex (Match frass sich bis CORE_VIDS, eval-SyntaxError, Script tot). Neue lazy-};-Regex + try/catch pro Map. Lauf 2026-06-12: alle 430 externen Bild-URLs erreichbar (inkl. 40 neue ENEMY_IMGS + vorher uebersprungene CORE_IMGS_CDN).",
+  "HINWEIS render_check3.mjs: node beendet sich nach den Logs nicht von selbst (offene Page-Timer halten den Prozess; mit '| tail' kommt dadurch NIE Output). Mit 'timeout 240 node render_check3.mjs > log' laufen lassen, Logs sind vollstaendig bevor timeout killt."
  ]
 }
