@@ -1510,7 +1510,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </div>
 <div id="app">
 <nav id="sidebar" aria-label="Hauptnavigation">
-  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.10</div></div>
+  <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.11</div></div>
   <div class="sb-nav">
     <div class="nav-grp">Kampf</div>
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
@@ -1948,7 +1948,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-pets">
     <h2 class="sec-t">🐾 Pets</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten.</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25), Füttern +10 bis +35 je nach Futter — das <strong>Lieblingsessen</strong> gibt +35. Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
@@ -2132,7 +2132,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-patches">
     <h2 class="sec-t">📋 Patch-Notes</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.10.01</span> (06.06.2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.11.00</span> (12.06.2026).</div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev Update, 02.06.2026). Schrittweiser Rollout Juni–September 2026 — noch keine versionierten Patch-Notes, Inhalte können sich bis Release ändern.</div>
@@ -9375,6 +9375,47 @@ const SIDE_QUESTS=[
 ];
 
 const PATCHES=[
+  {ver:"1.11.00",date:"12.06.2026",size:"Console-Build 1.000.341",features:[
+    {cat:"Neuer Content",items:[
+      "4 neue Pet-Challenges schalten zusätzliche Pet-Slots frei: maximal 100 registrierbare Pets (Summon-Limit im Camp bleibt bei 50)",
+      "Bestehende Pet-Challenges um Belohnungs-Items ergänzt — wer sie bereits abgeschlossen hat, erhält die Belohnungen rückwirkend",
+      "Baby-Wyverns haben jetzt ein eigenes Karten-Icon",
+      "Verlorene Rare-Ausrüstung ist wiederbeschaffbar: Shopkeeper sammeln verlorenes Rare Equipment (aus Truhen, Quests etc.) ein und bieten es 7 Tage lang zum Rückkauf an — teurer als der Originalwert",
+      "'Flower Basket' neu im Sortiment des Hernand Provisioner's Shop",
+      "Neues Buch 'Ranged Weapons of the World - Bows, Vol. I' im Hernand Equipment Shop",
+      "Knowledge-Eintrag 'Irkyn' nach Abschluss der Kiln-Repair-Quest erhältlich"
+    ]},
+    {cat:"Charaktere & Skills",items:[
+      "Damiane und Oongka können jetzt 'Mining Drill' und 'Chainsaw' ausrüsten",
+      "Damiane/Oongka: Spirit-Recovery-Steigerung beim Leveln von 'Focus' griff nicht korrekt — behoben",
+      "'Explosive Evasive Shot' und 'Multishot' verbessert — Special Arrows lösen zuverlässiger aus",
+      "Wyvern lässt sich per 'Axiom Force' jetzt direkt besteigen (ohne 'Back Hang')",
+      "Angriffsmuster der Golem-Monster angepasst",
+      "Oongka: Kanonenkugel-Verbrauch von 'Scatter Shot' beim Wall-Cling korrigiert; Drill-Bonus-Yield beim Wall-Cling gefixt",
+      "Stamina-Verbrauch des Wyvern-Bodenangriffs reduziert"
+    ]},
+    {cat:"Quality of Life",items:[
+      "Controller: Buttons für Inventory, Map, Skills, Journal und Photo Mode frei belegbar",
+      "Pinball-Minigame entschärft: trägerer Ball, weniger Durch-Wand-Glitches, angepasste Pin-Positionen und Portal-Abschüsse, kein Festhängen mehr im oberen linken Bereich",
+      "Pet-Namen bleiben beim Aufwachsen (Growth) jetzt erhalten",
+      "Hard Difficulty: doppelter Nahrungsverbrauch entfernt",
+      "Photo Mode: Option zum Deaktivieren von 'Depth of Field' wiederhergestellt",
+      "Mounts werden nicht mehr in Gefahrenzonen beschworen",
+      "Foul-Erkennung im 'Duel'-Minigame verbessert",
+      "Tierbilder, Knowledge-Einträge und Guides überarbeitet"
+    ]},
+    {cat:"Bugfixes",items:[
+      "'Sigil of Solidarity' war in bestimmten Situationen nicht nutzbar — behoben",
+      "Wyvern-Beschwörung im nicht-reitbaren Zustand korrigiert",
+      "Auto-Wiederaufsitzen nach Wyvern-Absprung in der Luft behoben",
+      "'Kuku Bird'-Eier und Wyvern-Eier sind nicht mehr stapelbar",
+      "Housing Mode: Items blieben nach dem Entfernen bewegungsgesperrt — behoben",
+      "Rancher's Shop: Tiernamen zeigten '???' — behoben",
+      "Experience-UI erschien nach Pet-Fütterung nicht — behoben",
+      "Wasser-Eintauch-Probleme bei Blackstar und Wyvern behoben",
+      "Diverse Lokalisierungsfehler in allen Sprachen korrigiert"
+    ]}
+  ]},
   {ver:"1.10.01",date:"06.06.2026",size:"Hotfix, alle Plattformen",features:[
     {cat:"Bugfixes",items:[
       "Crash beim Teleport zum Abyss Nexus behoben",

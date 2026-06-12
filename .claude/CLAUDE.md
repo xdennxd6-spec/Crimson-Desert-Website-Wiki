@@ -4,7 +4,7 @@
 - Priorisierte Aufgabenliste aus dem Fable-5-Vollaudit: **`.claude/audit-handover.json`** (selbsterklaerendes Briefing, inkl. Was-ist-schon-erledigt). Dort starten, wenn der User "mach an der Wiki weiter" o.ae. sagt.
 
 ## Projekt
-- **Lokaler Ordner:** `C:\Users\Rainer Winkler\Desktop\deploy-69fcff9bfbeb7525ed81aec7\`
+- **Lokaler Ordner:** `C:\Users\Rainer Winkler\Desktop\Verschiedenes\deploy-69fcff9bfbeb7525ed81aec7\`
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
 - **Live-URL:** https://crimson-desert-wiki.netlify.app (via Netlify, Auto-Deploy bei Push)
 - **Haupt-Datei:** `index.html` (single-file app, ~2700+ Zeilen)
