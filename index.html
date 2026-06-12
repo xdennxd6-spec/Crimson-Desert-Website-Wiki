@@ -9997,6 +9997,46 @@ function npcAva(name,key){
   const letter=escHtml((name||'?').charAt(0).toUpperCase());
   return `<span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-weight:700;font-size:14px;margin-right:9px;vertical-align:middle;flex:0 0 auto;background:${bg};border:1px solid ${bdr};color:${col}">${letter}</span>`;
 }
+// Echte Charakter-Portraits (recherchiert 2026-06-12 via questlog database.getNpcs/getNpc, alle URLs HTTP-200- und
+// visuell verifiziert; Auswahl gegen generische Map-Pins/Shop-Icons gefiltert). Antagonisten teilen sich die
+// bereits in BOSS_IMGS_CDN verifizierten Boss-Portraits. Jian hat in questlog kein echtes Portrait -> lokale Fextralife-WebP.
+// Ohne Eintrag faellt npcAvatar() auf den Initial-Avatar (npcAva) zurueck.
+const NPC_IMGS={
+  // Begleiter & spielbare Charaktere
+  "Kliff":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_knowledge_kliff.webp",
+  "Damiane":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_knowledge_demian.webp",
+  "Oongka":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_knowledge_oongka.webp",
+  // Verbuendete & Quest-Geber
+  "Alan Serkis":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_alan_serkis.webp",
+  "Shakatu":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_shakatu.webp",
+  "Charles Celeste":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_charles_selester.webp",
+  "Jian":"cd_assets/npcs/jian.webp",
+  "Marius":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_knowledge_greyfur_marius.webp",
+  "Ross":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_knowledge_greyfur_russo.webp",
+  // Antagonisten (Boss-Portraits, vgl. BOSS_IMGS_CDN)
+  "Myurdin":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_myordin.webp",
+  "Kailok the Hornsplitter":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_kailokthehornsplitter.webp",
+  "Ludvig":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ludvig.webp",
+  "Gabriel Caliburn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_boss_caliburn_awakening.webp",
+  "Lucian Bastier":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp",
+  "Draven the Crowcaller":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_draven.webp",
+  "Walter Lanford":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_walter_bliss.webp",
+  "Valgash":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_valgash.webp",
+  // Haendler
+  "Rhett":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_rhett.webp",
+  "Patrigio":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_patrigio.webp",
+  "Tina":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_tina.webp",
+  "Alden":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_aldun.webp",
+  "Merton":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_merton.webp",
+  "Tranan":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_knowledge_greyfur_sven.webp"
+};
+// Avatar mit echtem Portrait (falls in NPC_IMGS vorhanden), sonst Initial-Avatar. Bei Ladefehler Fallback auf npcAva.
+function npcAvatar(name,key){
+  const url=NPC_IMGS[name];
+  if(!url) return npcAva(name,key);
+  const [bg,bdr]=NPC_PAL[key]||['#141414','rgba(255,255,255,.12)'];
+  return `<img src="${escHtml(url)}" loading="lazy" decoding="async" alt="" title="${escHtml(name)}" data-n="${escHtml(name)}" data-k="${escHtml(key)}" onerror="this.outerHTML=npcAva(this.dataset.n,this.dataset.k)" style="width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:9px;vertical-align:middle;flex:0 0 auto;background:${bg};border:1px solid ${bdr}">`;
+}
 const NPCS={
   companions:[
     {name:"Kliff",role:"Protagonist · Anführer der Greymanes",region:"Greymane Camp / Hernand",conf:"high",bio:"Erfahrener Greymane-Kämpfer. Nach der Ermordung des Pailune-Anführers Jian durch die Black Bears übernimmt er die Führung und sammelt die verstreuten Mitglieder. Erwacht im 'Realm of Uncertainty' in der Abyss und kehrt mit neuen Kräften zurück."},
@@ -10054,7 +10094,7 @@ function renderNpcs(){
       const confBadge=n.conf==='medium'?'<span class="tag tx" title="Quellenlage dünn — teils nur eine Quelle">teils belegt</span>':n.conf==='low'?'<span class="tag tr" title="unsichere Quelle">unsicher</span>':'';
       const cm=(n.region?`<span class="tag tx">${escHtml(n.region)}</span>`:'')+confBadge;
       return `<div class="card" data-s="${escHtml(s)}">
-        <div class="ct">${npcAva(n.name,key)}${escHtml(n.name)}</div>
+        <div class="ct">${npcAvatar(n.name,key)}${escHtml(n.name)}</div>
         ${cm?`<div class="cm">${cm}</div>`:''}
         <div class="crows"><div class="crow"><span class="cl">Rolle</span><span class="cv">${escHtml(n.role)}</span></div></div>
         <div class="best-note">${escHtml(n.bio)}</div>
