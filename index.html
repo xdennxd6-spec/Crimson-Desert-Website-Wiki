@@ -513,6 +513,8 @@ tbody{contain:layout style}
 /* .trow: KEIN content-visibility — verursachte auf der 520-Zeilen-Waffentabelle Reflow-/Compositor-Thrash (systemweiter Desktop-Freeze beim Scrollen) */
 /* Boss-Cards sind größer wegen Image + Phasen + Notes */
 #boss-grid .card{contain-intrinsic-size:0 540px}
+/* NPC-Karten haben jetzt ein 168px-Portrait -> groessere Schaetzung fuers Off-Screen-Culling */
+#npcs-root .grid .card{contain-intrinsic-size:0 470px}
 /* Skill-Graph-Tab darf vollständig content sein */
 .skill-graph-wrap{contain:layout style}
 
@@ -9992,10 +9994,66 @@ const NPC_PAL={
   antagonists:['linear-gradient(135deg,#160a0a,#0c0c0c)','rgba(180,45,32,.5)','#d2554a'],
   merchants:['linear-gradient(135deg,#0b1014,#0c0c0c)','rgba(70,140,170,.45)','#6fb3cf']
 };
-function npcAva(name,key){
-  const [bg,bdr,col]=NPC_PAL[key]||['#141414','rgba(255,255,255,.12)','#ccc'];
+// NPC-Portraits im Boss-Karten-Stil: lokale Bilder (cd_assets/npcs/ bzw. cd_assets/bosses/ fuer
+// Antagonisten, die bereits Bosse sind) als primary, questlog-/fextralife-CDN als onerror-Fallback.
+// Alle URLs 2026-06-13 HTTP-200-verifiziert und per Bild-QA visuell geprueft; nicht-triviale
+// questlog-Slugs (demian/charles_selester/ziane/greyfur_russo/aldun/greyfur_tranan) via
+// questlog database.getNpc/searchEntities-API ermittelt.
+const QLG='https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_';
+const NPC_IMGS={
+  "Kliff":"cd_assets/npcs/kliff.webp",
+  "Damiane":"cd_assets/npcs/damiane.webp",
+  "Oongka":"cd_assets/npcs/oongka.webp",
+  "Alan Serkis":"cd_assets/npcs/alan_serkis.webp",
+  "Shakatu":"cd_assets/npcs/shakatu.webp",
+  "Charles Celeste":"cd_assets/npcs/charles_celeste.webp",
+  "Jian":"cd_assets/npcs/jian.webp",
+  "Marius":"cd_assets/npcs/marius.png",
+  "Ross":"cd_assets/npcs/ross.webp",
+  "Myurdin":"cd_assets/bosses/myurdin.webp",
+  "Kailok the Hornsplitter":"cd_assets/bosses/kailok.webp",
+  "Ludvig":"cd_assets/bosses/ludvig.webp",
+  "Gabriel Caliburn":"cd_assets/bosses/gabriel.webp",
+  "Lucian Bastier":"cd_assets/bosses/lucian.webp",
+  "Draven the Crowcaller":"cd_assets/bosses/draven.webp",
+  "Walter Lanford":"cd_assets/bosses/walter_lanford.webp",
+  "Valgash":"cd_assets/npcs/valgash.webp",
+  "Rhett":"cd_assets/npcs/rhett.webp",
+  "Patrigio":"cd_assets/npcs/patrigio.webp",
+  "Tina":"cd_assets/npcs/tina.webp",
+  "Alden":"cd_assets/npcs/alden.webp",
+  "Merton":"cd_assets/npcs/merton.webp",
+  "Tranan":"cd_assets/npcs/tranan.webp"
+};
+const NPC_IMGS_CDN={
+  "Kliff":QLG+"kliff.webp",
+  "Damiane":QLG+"demian.webp",
+  "Oongka":QLG+"oongka.webp",
+  "Alan Serkis":QLG+"alan_serkis.webp",
+  "Shakatu":QLG+"shakatu.webp",
+  "Charles Celeste":QLG+"charles_selester.webp",
+  "Jian":QLG+"ziane.webp",
+  "Marius":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c2/Marius-npc-crimson-desert-wiki-guide-250px-fix.png",
+  "Ross":QLG+"greyfur_russo.webp",
+  "Myurdin":QLG+"myordin.webp",
+  "Kailok the Hornsplitter":QLG+"kailokthehornsplitter.webp",
+  "Ludvig":QLG+"ludvig.webp",
+  "Lucian Bastier":QLG+"basteer.webp",
+  "Draven the Crowcaller":QLG+"draven.webp",
+  "Walter Lanford":QLG+"walter_bliss.webp",
+  "Valgash":QLG+"valgash.webp",
+  "Rhett":QLG+"rhett.webp",
+  "Patrigio":QLG+"patrigio.webp",
+  "Tina":QLG+"tina.webp",
+  "Alden":QLG+"aldun.webp",
+  "Merton":QLG+"merton.webp",
+  "Tranan":QLG+"greyfur_tranan.webp"
+};
+// Platzhalter im Boss-Karten-Stil (Fraktionsfarbe je Gruppe), wenn ein Bild fehlt/kaputt ist.
+function npcPH(name,key){
+  const [bg,bdr,col]=NPC_PAL[key]||['linear-gradient(135deg,#1a1010,#0e0d0d)','rgba(255,255,255,.06)','rgba(201,162,39,.5)'];
   const letter=escHtml((name||'?').charAt(0).toUpperCase());
-  return `<span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-weight:700;font-size:14px;margin-right:9px;vertical-align:middle;flex:0 0 auto;background:${bg};border:1px solid ${bdr};color:${col}">${letter}</span>`;
+  return `<div class="boss-img-ph" style="background:${bg};border:1px solid ${bdr}"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:${col}">${letter}</div><div class="boss-ph-cap" style="color:${col}">Kein Bild</div></div></div>`;
 }
 const NPCS={
   companions:[
@@ -10053,8 +10111,14 @@ function renderNpcs(){
       const s=[n.name,n.role,n.region||'',n.bio,'charakter npc figur',title].join(' ').toLowerCase();
       const confBadge=n.conf==='medium'?'<span class="tag tx" title="Quellenlage dünn — teils nur eine Quelle">teils belegt</span>':n.conf==='low'?'<span class="tag tr" title="unsichere Quelle">unsicher</span>':'';
       const cm=(n.region?`<span class="tag tx">${escHtml(n.region)}</span>`:'')+confBadge;
+      const img=NPC_IMGS[n.name];
+      const cdn=NPC_IMGS_CDN[n.name]||'';
+      const head=img
+        ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" data-cdn="${cdn}" loading="lazy" decoding="async" alt="${escHtml(n.name)}" style="object-position:center top;background:linear-gradient(135deg,#15110d,#0c0c0c)" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.closest('.boss-img-wrap').outerHTML=npcPH('${escJsStr(n.name)}','${key}')}"></div>`
+        :npcPH(n.name,key);
       return `<div class="card" data-s="${escHtml(s)}">
-        <div class="ct">${npcAva(n.name,key)}${escHtml(n.name)}</div>
+        ${head}
+        <div class="ct">${escHtml(n.name)}</div>
         ${cm?`<div class="cm">${cm}</div>`:''}
         <div class="crows"><div class="crow"><span class="cl">Rolle</span><span class="cv">${escHtml(n.role)}</span></div></div>
         <div class="best-note">${escHtml(n.bio)}</div>
