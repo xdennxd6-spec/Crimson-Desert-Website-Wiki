@@ -32,10 +32,6 @@
    "hinweis": "index.html besteht zu ~84% aus JS-Daten (RUINS_DATA ~149KB, FAC_DATA ~56KB, WEAPONS ~65KB, MISSABLE_ITEMS ~38KB). Auslagern in .js-Dateien mit <script defer> + lange Cache-Header entkoppelt Caching und Deploys. Groesserer Umbau, vorher mit User abstimmen."
   },
   {
-   "titel": "Crafting ausbauen",
-   "hinweis": "CRAFTING hat nur 12 Rezepte. (Der Minigames-Teil ist seit 11.06. erledigt: eigene Sektion mit 15 Spielen.)"
-  },
-  {
    "titel": "Charaktere/NPC-Verzeichnis mit Trust-System-Guide",
    "hinweis": "LORE_TERMS (25 Eintraege) liefert die Basis fuer Kurzbios; Haendler stehen bisher nur in Location-Fliesstexten."
   },
@@ -76,5 +72,10 @@
   "Escape-Helfer konsolidiert (Audit-Optionalpunkt): 9 lokale esc-Definitionen entfernt (3x HTML-Variante, 6x JS-String-Variante), 62 Aufrufe global auf escHtml umbenannt, 11 Event-Handler-Aufrufe auf escJsStr. escHtml escapt jetzt auch Quotes/Apostroph (&quot;/&#39;) — vorher escapte das globale escHtml KEINE Quotes (Attribut-Injection-Risiko). escJsStr fuer Strings in inline-onclick.",
   "linkcheck.mjs-Regression aus 56ccda7 gefixt: die einzeilige CORE_IMGS_CDN-Map brach die \\n};-Regex (Match frass sich bis CORE_VIDS, eval-SyntaxError, Script tot). Neue lazy-};-Regex + try/catch pro Map. Lauf 2026-06-12: alle 430 externen Bild-URLs erreichbar (inkl. 40 neue ENEMY_IMGS + vorher uebersprungene CORE_IMGS_CDN).",
   "HINWEIS render_check3.mjs: node beendet sich nach den Logs nicht von selbst (offene Page-Timer halten den Prozess; mit '| tail' kommt dadurch NIE Output). Mit 'timeout 240 node render_check3.mjs > log' laufen lassen, Logs sind vollstaendig bevor timeout killt."
+ ],
+ "erledigt_2026_06_14_pi": [
+  "Crafting-Sektion 12 -> 279 Rezepte (Commit bc1f5d8): umfassende Koch-/Alchemie-Rezept-DB aus der questlog getRecipes-API (1000 Rezepte total; uebernommen 249 Food Wild-Pot/Pot/Frying-Pan/Plate + 30 Elixiere/Tees/Pillen). Smithing(433)/Witch-Cores(193)/Dyes(50)/Kuku-Gadgets(27) bewusst NICHT dupliziert -> verweisen auf WEAPONS/ARMOR, CORES, Dyes-Sektion. Effekte aus database.getItem.itemUseEffects dekodiert: HP=value/1000 (gegen FOOD_ELIXIRS-Guide kalibriert, 340000->+340), Resistenz=Level(timed), Angriff=flat. questlog kodiert KEIN Spirit/Stamina + keine %-Effekte -> aus game8/VGC ergaenzt. 7-Agenten-Anreicherungs-Workflow (4 Food-Stationen + Elixiere + Suppen-Backfill + Skalen-Verifizierer + Editor): 84 Rezepte gegen game8/Fextralife geprueft, questlog als geschuetzte Spine (13 Abweichungen als Hinweis NOTIERT statt ueberschrieben), 29 Suppen-Zutaten + 30 Elixier-Effekte recherchiert, 0-fx-Gerichte dekodiert (Chocolate +50% Max-HP, Lavish/Fine-Feasts). Attack Speed Potion + Spirit Gauge Restore Potion (fehlen in questlog-DB) kuratiert bewahrt. UI: Filter Kategorie/Station + Effekt-Typ + nur-Basis, questlog-CDN-Item-Icons (lazy, inline in CRAFTING statt *_IMGS-Map -> linkcheck erfasst sie NICHT, separat geprueft: 88 unique alle 200), Raritaets-Punkt, Tier-Badges, Fundort + Konflikt-Hinweise, Intro + Datenqualitaets-Details. jsdom 279 Karten / 0 JS-Fehler / data-s 1514->1781. Artefakte: cd-audit-pi/harvest_recipes_full.mjs, generate_crafting.mjs, research/recipes_full.json + enrichment.json + CRAFTING_literal.js.",
+  "OFFENER PUNKT Crafting: alchemy/collectibles (50 Dyes) sind in der DYES-Sektion, aber dort ggf. ohne Craft-Rezepte/Zutaten — questlog getRecipes hat sie (research/recipes_full.json, cat alchemy resSub collectibles). Witch-Cores (193 abyss-gear-Synthese) + Kuku-Gadget-Tree (27) waeren der naechste Crafting-Block, falls gewuenscht.",
+  "HINWEIS questlog-API: database.getRecipes (paginiert 40/Seite, mainCategory smithing/cooking/alchemy/witch-workshop) + database.getItem (itemUseEffects[statId,value,durationMs,effectType], description, copperPrice, Drop-Quellen). Effekt-Stat steckt im Icon-Dateinamen (cd_icon_ability_vitality/ice/fire/electric/offense). cooking-Subcat kuku-pot ist KEIN Food (Gadget-Crafts); ~29 flexible Suppen zeigen nur 'Water' (echte Zutaten flexibel). Render-Verifizierer ohne Hang: cd-audit-pi/render_check_craft.mjs (process.exit(0))."
  ]
 }
