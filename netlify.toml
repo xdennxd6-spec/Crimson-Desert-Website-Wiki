@@ -8,20 +8,28 @@
   directory    = "netlify/functions"
   node_bundler = "esbuild"
 
-# DB-Migrationen NICHT mehr bei jedem Deploy ausfuehren (entkoppelt 2026-06-15):
-# Der Migrations-Schritt verbindet sich bei JEDEM Build mit der Netlify-DB (Neon). Ist
-# deren monatliche "active time quota" (Compute-Wachzeit) aufgebraucht, scheitert dieser
-# Ping und der GESAMTE Build/Deploy bricht ab -- auch reine Frontend-Aenderungen. Da das
-# Schema stabil ist (1 Tabelle user_progress, 1 Migration seit Mai, laengst angewendet),
-# koppeln wir die Migration vom Build ab -> Deploys sind quota-unabhaengig. Die Runtime-DB
-# (Besucherzaehler visits.mts, Progress-Sync progress.mts) bleibt unveraendert -- die
-# Functions verbinden sich zur Laufzeit ueber ihre eigene Connection (NETLIFY_DATABASE_URL),
-# unabhaengig vom Build. Daten werden NICHT angefasst.
-# Kuenftige Schema-Aenderung? Migration EINMALIG manuell anwenden (drizzle-kit gegen
-# NETLIFY_DATABASE_URL bzw. Neon-Konsole), dann ggf. den Block hier temporaer reaktivieren.
-# [database]
-#   [database.migrations]
-#     path = "netlify/database/migrations"
+# DATENBANK vom Deploy ENTKOPPELT (Quota-unabhaengige Deploys) -- Root Cause + Fix:
+# Netlify stellt eine DB bereit / legt fuer Deploy-Previews einen DB-Branch an, SOBALD es
+# das Paket "@netlify/database" im Projekt erkennt -- DAS ist der eigentliche Ausloeser
+# (kein netlify.toml-Schalter; ein solcher existiert laut Doku nicht). Dieser "Netlify
+# Database setup"-Schritt braucht DB-Compute. War die monatliche Neon-"active time quota"
+# erschoepft, scheiterte er (Deploy-Preview: createSiteDatabaseBranch -> HTTP 500;
+# Produktion: Migrations-Ping) und der GESAMTE Build/Deploy brach ab -- auch reine
+# Frontend-Aenderungen (genau das war am 2026-06-15/16 der Fall).
+# FIX: "@netlify/database" ist aus package.json ENTFERNT (niemand importiert es; es war nur
+# der Trigger). @neondatabase/serverless ist jetzt direkte Dependency, damit der Runtime-
+# Treiber (drizzle-orm/netlify-db) weiter aufloest. -> Build fasst die DB nicht mehr an.
+# Zusaetzlich liegen die Migrationen jetzt unter "db/migrations/" statt im von Netlify
+# ueberwachten "netlify/database/migrations/" (s. drizzle.config.ts) -> kein Auto-Apply.
+# Das Schema ist stabil (1 Tabelle user_progress, 1 Migration seit Mai, laengst angewendet);
+# nichts geht verloren, die Migration bleibt als Historie in db/migrations/.
+# Die Runtime-DB (visits.mts Besucherzaehler, progress.mts Sync) verbindet sich zur LAUFZEIT
+# direkt per Connection-String aus einer Env-Var (NETLIFY_DB_URL / NETLIFY_DATABASE_URL /
+# DATABASE_URL; s. db/index.ts). DAMIT diese Features funktionieren, muss eine dieser
+# Env-Vars in der Netlify-UI auf den bestehenden Neon-Connection-String gesetzt sein --
+# sonst degradiert der Zaehler sauber (Fallback), Sync ist inaktiv.
+# Kuenftige Schema-Aenderung? Mit "npm run db:generate" erzeugen (landet in db/migrations/)
+# und EINMALIG manuell anwenden (drizzle-kit gegen den Connection-String bzw. Neon-Konsole).
 
 [[headers]]
 for = "/*"
