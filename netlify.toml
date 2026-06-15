@@ -8,9 +8,20 @@
   directory    = "netlify/functions"
   node_bundler = "esbuild"
 
-[database]
-  [database.migrations]
-    path = "netlify/database/migrations"
+# DB-Migrationen NICHT mehr bei jedem Deploy ausfuehren (entkoppelt 2026-06-15):
+# Der Migrations-Schritt verbindet sich bei JEDEM Build mit der Netlify-DB (Neon). Ist
+# deren monatliche "active time quota" (Compute-Wachzeit) aufgebraucht, scheitert dieser
+# Ping und der GESAMTE Build/Deploy bricht ab -- auch reine Frontend-Aenderungen. Da das
+# Schema stabil ist (1 Tabelle user_progress, 1 Migration seit Mai, laengst angewendet),
+# koppeln wir die Migration vom Build ab -> Deploys sind quota-unabhaengig. Die Runtime-DB
+# (Besucherzaehler visits.mts, Progress-Sync progress.mts) bleibt unveraendert -- die
+# Functions verbinden sich zur Laufzeit ueber ihre eigene Connection (NETLIFY_DATABASE_URL),
+# unabhaengig vom Build. Daten werden NICHT angefasst.
+# Kuenftige Schema-Aenderung? Migration EINMALIG manuell anwenden (drizzle-kit gegen
+# NETLIFY_DATABASE_URL bzw. Neon-Konsole), dann ggf. den Block hier temporaer reaktivieren.
+# [database]
+#   [database.migrations]
+#     path = "netlify/database/migrations"
 
 [[headers]]
 for = "/*"
