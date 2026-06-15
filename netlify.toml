@@ -1,5 +1,7 @@
 [build]
-  command   = "npm install"
+  # gen-seo.mjs erzeugt die statischen SEO-Landing-Pages (bosse/waffen/true-ending)
+  # + sitemap.xml frisch aus index.html, damit sie bei jedem Deploy synchron bleiben.
+  command   = "npm install && node scripts/gen-seo.mjs"
   publish   = "."
 
 [functions]

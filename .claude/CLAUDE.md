@@ -58,6 +58,14 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 - `node scripts/linkcheck.mjs` prüft alle externen URLs der *_IMGS-Maps (HEAD/GET, Exit 1 bei Brüchen).
 - Periodisch bzw. vor größeren Releases laufen lassen; kaputte questlog-/Fextralife-Links durch lokale Spiegel ersetzen (cd_assets/*/fex/).
 
+## SEO-Landing-Pages (statisch, aus index.html generiert)
+- **Ziel:** organischer Google-Traffic. Single-Page-App (`index.html`) ist für Crawler schlecht indexierbar (JS-nachgeladener Inhalt). Daher zusätzlich statische, vorgerenderte Seiten mit echten URLs.
+- **Generator:** `node scripts/gen-seo.mjs` — extrahiert BOSSES/WEAPONS/TRUE_ENDING (+ BOSS_IMGS/WEAPON_IMGS) per balancierter-Klammern-`eval` aus `index.html` (Single Source of Truth, KEINE Datenduplizierung) und schreibt `bosse.html`, `waffen.html`, `true-ending.html` + `sitemap.xml`.
+- **Build:** läuft automatisch im Netlify-Build (`netlify.toml` command = `npm install && node scripts/gen-seo.mjs`) → Seiten bleiben bei jedem Deploy synchron mit den Daten. Nach Änderungen an den Datenstrukturen lokal neu generieren, damit die committeten Seiten aktuell sind.
+- **Verifikation:** `node scripts/verify-seo.mjs` (Exit 1 bei Fehlern) prüft Soll-Mengen (dynamisch aus index.html), eindeutige Titel/Descriptions, Längen, canonical, valides JSON-LD, Deep-Links, Existenz aller referenzierten lokalen Bilder, sitemap-Einträge.
+- **URLs:** Netlify Pretty URLs ist standardmäßig AN → `bosse.html` wird unter `/bosse` ausgeliefert; canonical/sitemap/Links nutzen die `.html`-losen Pfade (`/bosse`, `/waffen`, `/true-ending`). CTAs springen via `/#sec-...` zurück in die App.
+- **OFFEN / nach erstem Deploy prüfen:** ob die Live-Site `/bosse` mit 200 ausliefert oder auf `/bosse/` (Trailing Slash) 301-weiterleitet. Falls Trailing-Slash erzwungen wird, canonical/sitemap in `gen-seo.mjs` auf `/bosse/`-Form umstellen und neu generieren. Außerdem 3 Seiten in der Google Search Console einreichen.
+
 ## Tech Stack
 - Static Single-Page HTML/JS/CSS App (kein Build-Step nötig)
 - `npx serve -p 5000 .` zum lokalen Testen
