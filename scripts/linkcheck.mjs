@@ -8,6 +8,12 @@ import { fileURLToPath } from 'url';
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 
+// Praefix-Konstante QLG aus dem HTML lesen und in den eval-Scope binden, damit
+// die NPC_IMGS_CDN-Map (Eintraege der Form QLG+"…webp") parsebar wird und nicht
+// still uebersprungen wird. Per Regex aus dem HTML gelesen, damit kein Drift entsteht.
+const qm = html.match(/const QLG\s*=\s*'([^']+)'/);
+const QLG = qm ? qm[1] : '';
+
 const urls = new Map(); // url -> [wo gefunden]
 // Lazy bis zum ersten "};" — funktioniert fuer mehrzeilige UND einzeilige Maps
 // (CORE_IMGS_CDN ist ein Einzeiler; die alte \n};-Variante fraß sich bis in CORE_VIDS und crashte).
