@@ -1,19 +1,28 @@
 # Crimson Desert Website Wiki — Projektregeln
 
-## Offene Aufgaben (Stand 2026-06-10)
-- Priorisierte Aufgabenliste aus dem Fable-5-Vollaudit: **`.claude/audit-handover.json`** (selbsterklaerendes Briefing, inkl. Was-ist-schon-erledigt). Dort starten, wenn der User "mach an der Wiki weiter" o.ae. sagt.
+## Offene Aufgaben
+- **ZUERST `git fetch && git pull --ff-only`** (siehe Sync-Disziplin unten), dann aktuellen `index.html`-Stand bewerten — NICHT blind dem alten Handover folgen.
+- `.claude/audit-handover.json` ist der Fable-5-Vollaudit vom 2026-06-10 und inzwischen GROSSTEILS ERLEDIGT (NPCs, Bestiarium, Crafting 12->310, Witch-Synthese-Baum, SEO-Seiten, Patch 1.11, Kuku-Gadgets, Abyss-Cores). Offen nur noch marginale Optionalpunkte (Waffen-crit/slots-Restluecken, PWA-Manifest-Screenshots, Monolith-Aufteilung nach Absprache).
 
 ## Projekt
 - **Lokaler Ordner:** `C:\Users\Rainer Winkler\Desktop\Verschiedenes\deploy-69fcff9bfbeb7525ed81aec7\`
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
 - **Live-URL:** https://crimson-desert-wiki.netlify.app (via Netlify, Auto-Deploy bei Push)
-- **Haupt-Datei:** `index.html` (single-file app, ~2700+ Zeilen)
+- **Haupt-Datei:** `index.html` (single-file app, ~11.200 Zeilen)
 
 ## Git / Push Regeln — WICHTIG
 - **NIEMALS automatisch pushen.** Immer erst den User fragen: "Soll ich das auf GitHub pushen?"
 - Mehrere Änderungen sammeln und in einem einzigen Push bündeln (spart Netlify Build Minutes)
 - Netlify deployt automatisch nach jedem Push (~21 Sekunden Build-Zeit)
 - Free Plan: 300 Build Minutes/Monat — sparsam verwenden
+
+## Sync-Disziplin Pi + PC — WICHTIG (vor JEDER Wiki-Änderung)
+Pi (schinkler) UND der PC pushen beide auf dieses Repo. Ohne Sync entsteht Divergenz (doppelte Arbeit, Merge-Konflikte) — genau das passierte am 2026-06-17 (Kuku/Synthese auf beiden Maschinen parallel gebaut).
+- **Vor jeder Änderung: `git fetch origin && git pull --ff-only`** auf den aktuellen `main`. Erst arbeiten, wenn lokal == origin/main.
+- Bei Divergenz / eigenen ungepushten Commits / nicht-ff-Pull: STOPP, nichts überschreiben, erst klären (ggf. Backup-Tag setzen).
+- Immer nur EINE Maschine bearbeitet das Wiki zur Zeit. Nach fremdem Push erst wieder pullen.
+- **Pflicht-Verifikation vor jedem Push:** `node scripts/verify-crafting.mjs` grün UND echter Headless-Chrome-Render (0 JS-Fehler, Karten-/Daten-Counts plausibel, keine Dubletten) — NICHT nur jsdom (das verdeckt Scope-/Init-Fehler). Chrome: `C:\Program Files\Google\Chrome\Application\chrome.exe`; Methode: Test-Kopie mit injiziertem `ensureAllRendered()` + `--dump-dom`, Ergebnis aus dem DOM-Dump lesen.
+- **Keine erfundenen Spielfakten.** Gegen echte Guides (game8 / Fextralife / VULKK / PowerPyx / Pearl Abyss) verifizieren; Unsicherheit als `conf`-Flag bzw. „nicht erfasst" markieren statt raten.
 
 ## Token-sparendes Datei-Lesen via GitHub Raw URL
 - GitHub MCP ist NICHT verfügbar — stattdessen Raw-URL nutzen:
