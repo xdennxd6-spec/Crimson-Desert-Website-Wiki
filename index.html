@@ -1606,7 +1606,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 <div id="main" role="main" tabindex="-1">
   <div id="credit-top">Design and Build by Christian Stein</div>
   <div id="sbar">
-    <input id="si" type="text" placeholder="Alles durchsuchen — Bosse, Waffen, Quests, Locations..." oninput="doSearch(this.value)">
+    <input id="si" type="text" aria-label="Wiki durchsuchen" placeholder="Alles durchsuchen — Bosse, Waffen, Quests, Locations..." oninput="doSearch(this.value)">
     <span class="kbd-hint" title="Ctrl+K oder ⌘K zum Fokussieren">Ctrl K</span>
     <span id="scnt"></span>
   </div>
@@ -1716,7 +1716,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <p style="margin:8px 0 0;font-size:10.5px;color:var(--gdim)">Bezug zum Baum unten: dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</p>
     </div>
     <h3 class="sub-t" style="margin-top:24px">🧪 Witch-Synthese-Baum <span style="font-size:11px;color:var(--dim);font-weight:400">(questlog-Datamine)</span></h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>185 Cores</strong> in 103 Familien mit ihren Synthese-Rezepten und Materialkosten. Tier-Ketten (I → II → III) entstehen durch <strong>Synthese</strong> — meist 2× Vorstufe + ein Katalysator (Mercury, Brimstone …). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst". Datenbasis: dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>185 Cores</strong> in 103 Familien mit ihren Synthese-Rezepten und Materialkosten. Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong> — 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst". Datenbasis: dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear).</div>
     <div class="fbar">
       <select class="fs" id="sf-tier" onchange="renderSynthesis()"><option value="">Alle Stufen</option><option value="1">Stufe I</option><option value="2">Stufe II</option><option value="3">Stufe III</option><option value="0">Basis / Sonstige</option></select>
       <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);cursor:pointer"><input type="checkbox" id="sf-eff" onchange="renderSynthesis()"> nur mit bekanntem Effekt</label>
@@ -2222,6 +2222,20 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Personalisierte Aufgaben-Empfehlung basierend auf deinem Fortschritt. Auto-update bei jeder Aktion. Klick auf Task → springt zur passenden Section.</div>
     <div class="rm-progress" id="rm-progress"></div>
     <div class="rm-task-list" id="rm-list"></div>
+    <div class="rm-faq" style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px">
+      <h3 class="sub-t" style="margin:0 0 4px">❓ Häufige Fragen — Endgame, NG+ &amp; Koop</h3>
+      <p style="font-size:11px;color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Patchnotes + game8/PowerPyx/Fextralife (Stand Patch 1.11, Juni 2026).</p>
+      <div style="display:grid;gap:12px">
+        <div style="background:linear-gradient(135deg,#15110d,#0c0c0c);border:1px solid rgba(201,162,39,.25);border-radius:10px;padding:12px 14px">
+          <div style="color:var(--gold);font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es ein New Game Plus?</div>
+          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Nein</strong> — kein klassisches NG+ (Stand Release 19.03.2026). Nach dem Abspann läuft <strong>derselbe Spielstand</strong> persistent weiter, Pywel bleibt frei begehbar (Hauptquests sind nicht wiederholbar). Das Endgame ist die Post-Game-Reihe <strong>„Journey's End"</strong> (Start: Quest „A New Beginning", ~8 Abschiedsquests ohne Bosse), dazu Sanctum-/Herausforderungsbosse, die 40 Abyss-Restaurationen und hochstufiges Crafting. Ein späteres NG+ hat Pearl Abyss nicht zugesagt.</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#160a0a,#0c0c0c);border:1px solid rgba(180,45,32,.3);border-radius:10px;padding:12px 14px">
+          <div style="color:#d2554a;font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es Koop oder Mehrspieler?</div>
+          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Nein</strong> — Crimson Desert ist Stand 2026 ein <strong>reines Singleplayer-Spiel</strong> (kein Online- oder lokaler Koop, kein Matchmaking). Will Powers (Pearl Abyss) verneinte einen Koop-Modus auf direkte Nachfrage mit „No". Ein Online-Modus ist nur als vage Zukunftsoption angedeutet und <strong>nicht bestätigt</strong>; kursierende „Another Journey"/GTA-Online-Gerüchte sind offiziell widerlegt.</div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="sec" id="sec-achievements">
@@ -2908,12 +2922,12 @@ const CORES=[
   {name:"Gourmet III",effect:"+15% Heal-Effizienz auf Food",source:"Animal Meat Life Challenge (Hernand Butcher)",slot:"Both"},
   {name:"Abyssal Rays",effect:"Abyss-Strahlen-Angriff",source:"Back Alley Shop (Schwarzmarkt außerhalb Demeniss City, ~40 Silber; auch bei Hexe craftbar)",slot:"Weapon"},
   {name:"Flames of Judgment",effect:"Funken-Angriff — zusätzlicher Feuerschaden. 2.000 Silber",source:"Drop: Lucian Bastier / Awakened Lucian Bastier",slot:"Weapon"},
-  {name:"Lightning God's Affliction",effect:"Blitzschlag auf Feinde — Schaden. 1.627 Silber",source:"Abyss Gear",slot:"Weapon"},
-  {name:"Spirit's Judgment",effect:"Geistiger Ritter schlägt auf Feind ein. 1.353 Silber",source:"Abyss Gear",slot:"Weapon"},
-  {name:"Pillar of Wind",effect:"Windsäule am Ziel — zusätzlicher Schaden. 1.987 Silber",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Lightning God's Affliction",effect:"Blitzschlag auf Feinde — Schaden. 1.627 Silber",source:"Reckoning-Speer von Titan/Donnergott (Windsong Peaks, NO-Pailune; Quest 'Ancient Barrier') · alternativ Hexen-Synthese",slot:"Weapon"},
+  {name:"Spirit's Judgment",effect:"Geistiger Ritter schlägt auf Feind ein. 1.353 Silber",source:"Fortain the Cursed Knight (Kap. 8, Thornbriar Fortress/Demeniss; via Shackle of Might) · alternativ Hexen-Synthese",slot:"Weapon"},
+  {name:"Pillar of Wind",effect:"Windsäule am Ziel — zusätzlicher Schaden. 1.987 Silber",source:"Pailune-Miliz-Questreihe 'Nest of White Feathers' · alternativ Hexen-Synthese",slot:"Weapon"},
   {name:"Slashing Reeds",effect:"Schilfhagel-Angriff — Schaden an getroffenen Feinden. 1.347 Silber",source:"Sunset Reed Cloth Gloves (Reward: Reed Devil)",slot:"Armor"},
   {name:"Warden of Darkness",effect:"Geistliche Ritter vernichten nahe Feinde mit Speeren. 1.987 Silber",source:"Vessel of Dark Pursuit / Antumbra",slot:"Weapon"},
-  {name:"Ancient Reckoning",effect:"Tödlicher Wirbel um den Feind — zusätzlicher Schaden",source:"Abyss Gear",slot:"Weapon"},
+  {name:"Ancient Reckoning",effect:"Tödlicher Wirbel um den Feind — zusätzlicher Schaden",source:"Primus the Ancient (Arrowhead Rock, SW Duehaven) / Shackled-God-Questreihe · alternativ Hexen-Synthese",slot:"Weapon"},
   {name:"Storm Fang",effect:"Kettenblitze — Schaden an mehreren Feinden. 1.993 Silber",source:"Abyss Gear",slot:"Weapon"},
   {name:"Fullmoon Slash",effect:"Vollmond-Klingenangriff nach bestimmter Aktion",source:"Abyss Gear",slot:"Weapon"},
   {name:"Half Moon Slash",effect:"Halbmond-Klingenangriff nach bestimmter Aktion",source:"Abyss Gear",slot:"Weapon"},
@@ -2960,7 +2974,7 @@ const CORES=[
   {name:"Greater Flameward",effect:"Feuerresistenz",source:"Abyss Gear",slot:"Armor"},
   {name:"Greater Frostward",effect:"Eisresistenz",source:"Abyss Gear",slot:"Armor"},
   {name:"Greater Shockward",effect:"Blitzresistenz",source:"Abyss Gear",slot:"Armor"},
-  {name:"Breath of Life I",effect:"HP-Regen +1/Sek",source:"Abyss Gear (Fundort unbestätigt)",slot:"Armor"},
+  {name:"Breath of Life I",effect:"HP-Regen +1/Sek",source:"Belohnung der Challenges 'Sword of Trials III' + 'Desperate Rescue' · Extraktion/Craft via Hexe",slot:"Armor"},
   {name:"Rampaging Insight",effect:"+10 Krit-Trefferchance (Greater)",source:"Spezial-Synthese (Greater)",slot:"Weapon"}
 ];
 
@@ -2969,7 +2983,7 @@ const WITCH_SYNTHESIS=[
   {name:"Abyssal Assimilation",family:"Abyssal Assimilation",tier:0,roman:"",role:"effect-core",recipe:"1x Aegis I + 1x Fortitude I + 1x Vitality I",effect:null,slot:"",grade:0,price:360,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_031.webp"},
   {name:"Abyssal Rays",family:"Abyssal Rays",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Haste I + 1x Surge I + 1x Fortitude I",effect:"Abyss-Strahlen-Angriff",slot:"Weapon",grade:0,price:2013,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_036.webp"},
   {name:"Abyssbane I",family:"Abyssbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Composure I + 1x Haste I",effect:"+Schaden gegen Abysswesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:533,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
-  {name:"Abyssbane II",family:"Abyssbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Abyssbane I + 1x Mercury + undefinedx undefined",effect:"+Schaden gegen Abysswesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
+  {name:"Abyssbane II",family:"Abyssbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Abyssbane I",effect:"+Schaden gegen Abysswesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
   {name:"Abyssbane III",family:"Abyssbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Abyssbane II",effect:"+40% Schaden gegen Abysswesen",slot:"Both",grade:0,price:2133,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
   {name:"Aegis I",family:"Aegis",tier:1,roman:"I",role:"tier-core",recipe:"1x Abyss Cell + 1x Azurite",effect:"Damage Reduction",slot:"Armor",grade:0,price:513,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_008.webp"},
   {name:"Aegis II",family:"Aegis",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Aegis I",effect:"Damage Reduction",slot:"Armor",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_008.webp"},
@@ -2978,7 +2992,7 @@ const WITCH_SYNTHESIS=[
   {name:"Ancient Retribution",family:"Ancient Retribution",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Shockward I + 1x Composure I + 1x Aegis I",effect:"Uralte Vergeltung (Skill 7)",slot:"Weapon",grade:0,price:1973,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_149.webp"},
   {name:"Ancient Wrath",family:"Ancient Wrath",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Flameward I + 1x Composure I + 1x Haste I",effect:"Uralter Zorn (Skill 6)",slot:"Weapon",grade:0,price:2033,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_148.webp"},
   {name:"Aptitude I",family:"Aptitude",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Insight I + 1x Vigor I",effect:"+10% Skill XP",slot:"Armor",grade:0,price:460,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_105.webp"},
-  {name:"Aptitude II",family:"Aptitude",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Aptitude I + 1x Brimstone + undefinedx undefined",effect:"Skill-EXP-Gain +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:913,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_105.webp"},
+  {name:"Aptitude II",family:"Aptitude",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Aptitude I",effect:"Skill-EXP-Gain +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:913,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_105.webp"},
   {name:"Aptitude III",family:"Aptitude",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Aptitude II",effect:"Skill-EXP-Gain +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:1833,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_105.webp"},
   {name:"Arrow Rain",family:"Arrow Rain",tier:0,roman:"",role:"effect-core",recipe:"1x Fortification I + 1x Swift I + 1x Composure I + 1x Vigor I",effect:"Pfeilregen nach Finisher",slot:"Weapon",grade:0,price:1573,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_049.webp"},
   {name:"Ascent I",family:"Ascent",tier:1,roman:"I",role:"tier-core",recipe:"1x Abyss Cell + 1x Diamond",effect:"Climb Speed +2% / +4% / +6% (Tier I/II/III)",slot:"Armor",grade:0,price:433,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_076.webp"},
@@ -2986,22 +3000,22 @@ const WITCH_SYNTHESIS=[
   {name:"Ascent III",family:"Ascent",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Ascent II",effect:"Climb Speed +2% / +4% / +6% (Tier I/II/III)",slot:"Armor",grade:0,price:1607,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_076.webp"},
   {name:"Ator's Orb",family:"Ator's Orb",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Fortitude I + 1x Vitality I",effect:"Forward/Heavy schiesst Tracking-Orbs",slot:"Weapon",grade:0,price:1973,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_070.webp"},
   {name:"Beastbane I",family:"Beastbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Composure I",effect:"+Schaden gegen Wildtiere (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:520,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
-  {name:"Beastbane II",family:"Beastbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Beastbane I + 1x Mercury + undefinedx undefined",effect:"+Schaden gegen Wildtiere (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
+  {name:"Beastbane II",family:"Beastbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Beastbane I",effect:"+Schaden gegen Wildtiere (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
   {name:"Beastbane III",family:"Beastbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Beastbane II",effect:"+40% Schaden gegen Wildtiere",slot:"Both",grade:0,price:2127,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
   {name:"Blessing of Nature I",family:"Blessing of Nature",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Vitality I",effect:"10% / 20% / 30% Chance auf zusätzliche Sammel-Items beim Pflücken (Tier I/II/III)",slot:"Armor",grade:0,price:433,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_101.webp"},
-  {name:"Blessing of Nature II",family:"Blessing of Nature",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of Nature I + 1x Brimstone + undefinedx undefined",effect:"10% / 20% / 30% Chance auf zusätzliche Sammel-Items beim Pflücken (Tier I/II/III)",slot:"Armor",grade:0,price:793,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_101.webp"},
+  {name:"Blessing of Nature II",family:"Blessing of Nature",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of Nature I",effect:"10% / 20% / 30% Chance auf zusätzliche Sammel-Items beim Pflücken (Tier I/II/III)",slot:"Armor",grade:0,price:793,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_101.webp"},
   {name:"Blessing of Nature III",family:"Blessing of Nature",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Blessing of Nature II",effect:"10% / 20% / 30% Chance auf zusätzliche Sammel-Items beim Pflücken (Tier I/II/III)",slot:"Armor",grade:0,price:1607,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_101.webp"},
   {name:"Blessing of the Beast I",family:"Blessing of the Beast",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Ascent I",effect:"10% / 20% / 30% Chance auf zusätzliche Materialien beim Häuten (Tier I/II/III)",slot:"Armor",grade:0,price:420,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_102.webp"},
-  {name:"Blessing of the Beast II",family:"Blessing of the Beast",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of the Beast I + 1x Brimstone + undefinedx undefined",effect:"10% / 20% / 30% Chance auf zusätzliche Materialien beim Häuten (Tier I/II/III)",slot:"Armor",grade:0,price:800,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_102.webp"},
+  {name:"Blessing of the Beast II",family:"Blessing of the Beast",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of the Beast I",effect:"10% / 20% / 30% Chance auf zusätzliche Materialien beim Häuten (Tier I/II/III)",slot:"Armor",grade:0,price:800,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_102.webp"},
   {name:"Blessing of the Beast III",family:"Blessing of the Beast",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Blessing of the Beast II",effect:"10% / 20% / 30% Chance auf zusätzliche Materialien beim Häuten (Tier I/II/III)",slot:"Armor",grade:0,price:1567,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_102.webp"},
   {name:"Blessing of the Earth I",family:"Blessing of the Earth",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Fortification I",effect:"10% / 20% / 30% Chance auf zusätzliche Mineralien beim Abbauen (Tier I/II/III)",slot:"Armor",grade:0,price:413,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_100.webp"},
-  {name:"Blessing of the Earth II",family:"Blessing of the Earth",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of the Earth I + 1x Rubber + undefinedx undefined",effect:"10% / 20% / 30% Chance auf zusätzliche Mineralien beim Abbauen (Tier I/II/III)",slot:"Armor",grade:0,price:820,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_100.webp"},
+  {name:"Blessing of the Earth II",family:"Blessing of the Earth",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of the Earth I",effect:"10% / 20% / 30% Chance auf zusätzliche Mineralien beim Abbauen (Tier I/II/III)",slot:"Armor",grade:0,price:820,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_100.webp"},
   {name:"Blessing of the Earth III",family:"Blessing of the Earth",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Blessing of the Earth II",effect:"10% / 20% / 30% Chance auf zusätzliche Mineralien beim Abbauen (Tier I/II/III)",slot:"Armor",grade:0,price:1580,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_100.webp"},
   {name:"Blessing of the Forest I",family:"Blessing of the Forest",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Surge I",effect:"10% / 20% / 30% Chance auf zusätzliches Holz beim Fällen (Tier I/II/III)",slot:"Armor",grade:0,price:427,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_103.webp"},
-  {name:"Blessing of the Forest II",family:"Blessing of the Forest",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of the Forest I + 1x Brimstone + undefinedx undefined",effect:"10% / 20% / 30% Chance auf zusätzliches Holz beim Fällen (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_103.webp"},
+  {name:"Blessing of the Forest II",family:"Blessing of the Forest",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of the Forest I",effect:"10% / 20% / 30% Chance auf zusätzliches Holz beim Fällen (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_103.webp"},
   {name:"Blessing of the Forest III",family:"Blessing of the Forest",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Blessing of the Forest II",effect:"10% / 20% / 30% Chance auf zusätzliches Holz beim Fällen (Tier I/II/III)",slot:"Armor",grade:0,price:1613,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_103.webp"},
   {name:"Bloodbane I",family:"Bloodbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Vitality I",effect:"+Schaden gegen Menschen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:500,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
-  {name:"Bloodbane II",family:"Bloodbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Bloodbane I + 1x Mercury + undefinedx undefined",effect:"+Schaden gegen Menschen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1100,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
+  {name:"Bloodbane II",family:"Bloodbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Bloodbane I",effect:"+Schaden gegen Menschen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1100,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
   {name:"Bloodbane III",family:"Bloodbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Bloodbane II",effect:"+40% Schaden gegen Menschen",slot:"Both",grade:0,price:2140,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
   {name:"Colossal Might",family:"Colossal Might",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Ascent I + 1x Fortification I",effect:"Kolossale Macht (Skill 17)",slot:"Weapon",grade:0,price:1973,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_129.webp"},
   {name:"Companionship I",family:"Companionship",tier:1,roman:"I",role:"tier-core",recipe:"1x Vitality I + 1x Composure I + 1x Haste I",effect:"Zusätzlicher Trust mit Begleitern/Pets (Tier I/II/III steigend)",slot:"Armor",grade:0,price:473,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_109.webp"},
@@ -3022,10 +3036,10 @@ const WITCH_SYNTHESIS=[
   {name:"Disarm III",family:"Disarm",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Disarm II",effect:"1% / 2% / 3% Chance, Gegner bei Treffer zu entwaffnen (Tier I/II/III)",slot:"Weapon",grade:0,price:1587,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_027.webp"},
   {name:"Earthrending Strike",family:"Earthrending Strike",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Fortification I + 1x Composure I + 1x Ascent I",effect:"Bodenspalter — Angriff beim Parieren",slot:"Weapon",grade:0,price:1620,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_140.webp"},
   {name:"Efficiency l",family:"Efficiency",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Insight I",effect:"3% / 6% / 9% Chance, 1 Crafting-Material zu sparen (Tier I/II/III)",slot:"Armor",grade:0,price:373,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_094.webp"},
-  {name:"Efficiency II",family:"Efficiency",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Efficiency I + 1x Rubber + undefinedx undefined",effect:"3% / 6% / 9% Chance, 1 Crafting-Material zu sparen (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_094.webp"},
+  {name:"Efficiency II",family:"Efficiency",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Efficiency I",effect:"3% / 6% / 9% Chance, 1 Crafting-Material zu sparen (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_094.webp"},
   {name:"Efficiency III",family:"Efficiency",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Efficiency II",effect:"3% / 6% / 9% Chance, 1 Crafting-Material zu sparen (Tier I/II/III)",slot:"Armor",grade:0,price:1593,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_094.webp"},
   {name:"Energy Drain I",family:"Energy Drain",tier:1,roman:"I",role:"tier-core",recipe:"1x Vitality I + 1x Composure I + 1x Swift I + 1x Haste I",effect:"Ressourcen-Rückgewinn bei Kill (Tier I/II/III steigend)",slot:"Both",grade:0,price:540,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_106.webp"},
-  {name:"Energy Drain II",family:"Energy Drain",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Energy Drain I + 1x Brimstone + undefinedx undefined",effect:"Ressourcen-Rückgewinn bei Kill (Tier I/II/III steigend)",slot:"Both",grade:0,price:1093,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_106.webp"},
+  {name:"Energy Drain II",family:"Energy Drain",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Energy Drain I",effect:"Ressourcen-Rückgewinn bei Kill (Tier I/II/III steigend)",slot:"Both",grade:0,price:1093,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_106.webp"},
   {name:"Energy Drain III",family:"Energy Drain",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Energy Drain II",effect:"Ressourcen-Rückgewinn bei Kill (Tier I/II/III steigend)",slot:"Both",grade:0,price:2167,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_106.webp"},
   {name:"Equestrian I",family:"Equestrian",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Composure I + 1x Haste I",effect:"Zusätzliche Pferde-EXP (Tier I/II/III steigend)",slot:"Armor",grade:0,price:460,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_116.webp"},
   {name:"Equestrian II",family:"Equestrian",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Equestrian I",effect:"Zusätzliche Pferde-EXP (Tier I/II/III steigend)",slot:"Armor",grade:0,price:927,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_116.webp"},
@@ -3042,7 +3056,7 @@ const WITCH_SYNTHESIS=[
   {name:"Fortitude II",family:"Fortitude",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Fortitude I",effect:"Guard Stamina Cost -3% / -6% / -9% (Tier I/II/III); Slot: Schild/Handschuhe/Schuhe",slot:"Armor",grade:0,price:560,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_012.webp"},
   {name:"Fortitude III",family:"Fortitude",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Fortitude II",effect:"Guard Stamina Cost -3% / -6% / -9% (Tier I/II/III); Slot: Schild/Handschuhe/Schuhe",slot:"Armor",grade:0,price:1040,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_012.webp"},
   {name:"Fortune I",family:"Fortune",tier:1,roman:"I",role:"tier-core",recipe:"1x Insight I + 1x Fortitude I + 1x Vigor I",effect:"Silber-Gewinn +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:400,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_091.webp"},
-  {name:"Fortune II",family:"Fortune",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Fortune I + 1x Rubber + undefinedx undefined",effect:"Silber-Gewinn +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_091.webp"},
+  {name:"Fortune II",family:"Fortune",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Fortune I",effect:"Silber-Gewinn +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_091.webp"},
   {name:"Fortune III",family:"Fortune",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Fortune II",effect:"Silber-Gewinn +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:1627,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_091.webp"},
   {name:"Frost Hail",family:"Frost Hail",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Frostward I + 1x Swift I",effect:"Eisregen-Angriff (imbue Ice)",slot:"Weapon",grade:0,price:1980,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_062.webp"},
   {name:"Frost Spike",family:"Frost Spike",tier:0,roman:"",role:"effect-core",recipe:"1x Frostward I + 1x Destruction I + 1x Fortitude I + 1x Vigor I",effect:"Eiszapfen-Angriff (Skill 1)",slot:"Weapon",grade:0,price:1967,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_020.webp"},
@@ -3052,7 +3066,7 @@ const WITCH_SYNTHESIS=[
   {name:"Fullmoon Slash",family:"Fullmoon Slash",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Insight I + 1x Haste I + 1x Fortification I",effect:"Vollmond-Klingenangriff nach bestimmter Aktion",slot:"Weapon",grade:0,price:1633,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_112.webp"},
   {name:"Gold Bar",family:"Gold Bar",tier:0,roman:"",role:"witch-other",recipe:"3x Brimstone + 3x Mercury + 10x Silver Ore",effect:null,slot:"",grade:0,price:50000,icon:"/assets/_sprites/itemicon_prefab_cd_t0000_goldbar_0001.webp"},
   {name:"Gourmet I",family:"Gourmet",tier:1,roman:"I",role:"tier-core",recipe:"1x Vitality I + 1x Vigor I + 1x Composure I",effect:"Food Effect Lv +1 / +2 / +3 (ca. +15% Heil-Effizienz auf Tier III)",slot:"Both",grade:0,price:527,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_093.webp"},
-  {name:"Gourmet II",family:"Gourmet",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Gourmet I + 1x Rubber + undefinedx undefined",effect:"Food Effect Lv +1 / +2 / +3 (ca. +15% Heil-Effizienz auf Tier III)",slot:"Both",grade:0,price:1093,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_093.webp"},
+  {name:"Gourmet II",family:"Gourmet",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Gourmet I",effect:"Food Effect Lv +1 / +2 / +3 (ca. +15% Heil-Effizienz auf Tier III)",slot:"Both",grade:0,price:1093,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_093.webp"},
   {name:"Gourmet III",family:"Gourmet",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Gourmet II",effect:"+15% Heal-Effizienz auf Food",slot:"Both",grade:0,price:2147,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_093.webp"},
   {name:"Greysoul Howling",family:"Greysoul Howling",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Swift I + 1x Haste I + 1x Insight I",effect:"Greysoul-Heulen (Skill 1)",slot:"Weapon",grade:0,price:1973,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_004.webp"},
   {name:"Groundsurge",family:"Groundsurge",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Fortification I + 1x Aegis I",effect:"Frontaler Kegel, Bodenwelle — Schaden + Stagger. 1.573 Silber",slot:"Weapon",grade:0,price:1573,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_059.webp"},
@@ -3068,7 +3082,7 @@ const WITCH_SYNTHESIS=[
   {name:"Hound's Claws",family:"Hound's Claws",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Vigor I + 1x Fortitude I",effect:"Hundsklauen-Angriff (Skill 7)",slot:"Weapon",grade:0,price:1353,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_079.webp"},
   {name:"Howling of Chaos",family:"Howling of Chaos",tier:0,roman:"",role:"effect-core",recipe:"1x Shockward I + 1x Composure I + 1x Haste I + 1x Insight I",effect:"Chaosheulen — Angriff beim Parieren",slot:"Weapon",grade:0,price:1587,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_158.webp"},
   {name:"Infinite Arrows I",family:"Infinite Arrows",tier:1,roman:"I",role:"tier-core",recipe:"1x Swift I + 1x Composure I + 1x Vigor I",effect:"Chance, keine Pfeile zu verbrauchen: 20% / 40% / 60% (Tier I/II/III; 100% nur mit Greater)",slot:"Weapon",grade:0,price:407,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp"},
-  {name:"Infinite Arrows II",family:"Infinite Arrows",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Infinite Arrows I + 1x Rubber + undefinedx undefined",effect:"Chance, keine Pfeile zu verbrauchen: 20% / 40% / 60% (Tier I/II/III; 100% nur mit Greater)",slot:"Weapon",grade:0,price:773,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp"},
+  {name:"Infinite Arrows II",family:"Infinite Arrows",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Infinite Arrows I",effect:"Chance, keine Pfeile zu verbrauchen: 20% / 40% / 60% (Tier I/II/III; 100% nur mit Greater)",slot:"Weapon",grade:0,price:773,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp"},
   {name:"Infinite Arrows III",family:"Infinite Arrows",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Infinite Arrows II",effect:"60% Chance keine Pfeil-Kosten (100% nur mit Infinite Arrows II+III kombiniert)",slot:"Weapon",grade:0,price:1633,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp"},
   {name:"Insight I",family:"Insight",tier:1,roman:"I",role:"tier-core",recipe:"1x Abyss Cell + 1x Garnet",effect:"+Kritische Trefferrate (Tier I/II/III steigend)",slot:"Both",grade:0,price:560,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_003.webp"},
   {name:"Insight II",family:"Insight",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Insight I",effect:"+Kritische Trefferrate (Tier I/II/III steigend)",slot:"Both",grade:0,price:1093,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_003.webp"},
@@ -3077,12 +3091,12 @@ const WITCH_SYNTHESIS=[
   {name:"Karmic Pulse",family:"Karmic Pulse",tier:0,roman:"",role:"effect-core",recipe:"1x Haste I + 1x Swift I + 1x Vitality I",effect:"Karmischer Puls (Skill 12 wiederholt)",slot:"Weapon",grade:0,price:1620,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_081.webp"},
   {name:"Kinetic Burst",family:"Kinetic Burst",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Vigor I + 1x Swift I + 1x Ascent I",effect:"Kinetischer Ausbruch (Skill 12 wiederholt)",slot:"Weapon",grade:0,price:1593,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_156.webp"},
   {name:"Ledgermain I",family:"Ledgermain",tier:1,roman:"I",role:"tier-core",recipe:"1x Insight I + 1x Fortitude I + 1x Vitality I",effect:"10% / 20% / 30% Chance auf zusätzliche Taschendiebstahl-Items (Tier I/II/III)",slot:"Armor",grade:0,price:420,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_099.webp"},
-  {name:"Ledgermain II",family:"Ledgermain",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Ledgermain I + 1x Rubber + undefinedx undefined",effect:"10% / 20% / 30% Chance auf zusätzliche Taschendiebstahl-Items (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_099.webp"},
+  {name:"Ledgermain II",family:"Ledgermain",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Ledgermain I",effect:"10% / 20% / 30% Chance auf zusätzliche Taschendiebstahl-Items (Tier I/II/III)",slot:"Armor",grade:0,price:813,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_099.webp"},
   {name:"Ledgermain III",family:"Ledgermain",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Ledgermain II",effect:"10% / 20% / 30% Chance auf zusätzliche Taschendiebstahl-Items (Tier I/II/III)",slot:"Armor",grade:0,price:1573,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_099.webp"},
   {name:"Life Transference",family:"Life Transference",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Vitality I + 1x Swift I",effect:"Lifesteal — Leben-Rückgewinn bei Treffern",slot:"Weapon",grade:0,price:500,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_014.webp"},
   {name:"Lightning God's Affliction",family:"Lightning God's Affliction",tier:0,roman:"",role:"effect-core",recipe:"1x Shockward I + 1x Destruction I + 1x Swift I + 1x Insight I",effect:"Blitzschlag auf Feinde — Schaden. 1.627 Silber",slot:"Weapon",grade:0,price:1627,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_155.webp"},
   {name:"Malicebane I",family:"Malicebane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Insight I + 1x Surge I",effect:"+Schaden gegen mächtige Feinde/Bosse (Tier I/II/III: +4% / +8% / +12%)",slot:"Weapon",grade:0,price:547,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
-  {name:"Malicebane II",family:"Malicebane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Malicebane I + 1x Mercury + undefinedx undefined",effect:"+Schaden gegen mächtige Feinde/Bosse (Tier I/II/III: +4% / +8% / +12%)",slot:"Weapon",grade:0,price:1033,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
+  {name:"Malicebane II",family:"Malicebane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Malicebane I",effect:"+Schaden gegen mächtige Feinde/Bosse (Tier I/II/III: +4% / +8% / +12%)",slot:"Weapon",grade:0,price:1033,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
   {name:"Malicebane III",family:"Malicebane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Malicebane II",effect:"+40% Schaden gegen mächtige Feinde",slot:"Both",grade:0,price:2120,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
   {name:"Momentum",family:"Momentum",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Swift I + 1x Insight I + 1x Fortitude I",effect:"+35% Turning Slash Schaden",slot:"Armor",grade:0,price:633,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_006.webp"},
   {name:"Narima's Horn",family:"Narima's Horn",tier:0,roman:"",role:"witch-other",recipe:"3x Dragon Claw Horn + 1x Stalactite + 2x Feather",effect:null,slot:"",grade:0,price:2000,icon:"/assets/_sprites/itemicon_prefab_cd_t0000_horn_flute_0002.webp"},
@@ -3093,7 +3107,7 @@ const WITCH_SYNTHESIS=[
   {name:"Pillar of Wind",family:"Pillar of Wind",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Fortification I + 1x Frostward I + 1x Haste I + 1x Composure I",effect:"Windsäule am Ziel — zusätzlicher Schaden. 1.987 Silber",slot:"Weapon",grade:0,price:1987,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_142.webp"},
   {name:"Platinum",family:"Platinum",tier:0,roman:"",role:"witch-other",recipe:"1x Gold Bar + 4x Brimstone + 3x Mercury + 2x Holy Water",effect:null,slot:"",grade:0,price:100000,icon:"/assets/_sprites/itemicon_prefab_cd_t0000_platinumbar_0001.webp"},
   {name:"Primalbane I",family:"Primalbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Aegis I",effect:"+Schaden gegen Walker/Primalwesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:500,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
-  {name:"Primalbane II",family:"Primalbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Primalbane I + 1x Mercury + undefinedx undefined",effect:"+Schaden gegen Walker/Primalwesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1067,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
+  {name:"Primalbane II",family:"Primalbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Primalbane I",effect:"+Schaden gegen Walker/Primalwesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1067,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
   {name:"Primalbane III",family:"Primalbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Primalbane II",effect:"+40% Schaden gegen Walker",slot:"Both",grade:0,price:2133,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
   {name:"Putrid Touch",family:"Putrid Touch",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Vitality I + 1x Composure I + 1x Ascent I",effect:"Fäulnisberührung (Skill 17)",slot:"Weapon",grade:0,price:1980,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_150.webp"},
   {name:"Queen's Fangs",family:"Queen's Fangs",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Insight I + 1x Vitality I + 1x Composure I",effect:"Königinnenzähne (Hold Skill 3)",slot:"Weapon",grade:0,price:2027,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_147.webp"},
@@ -3108,7 +3122,7 @@ const WITCH_SYNTHESIS=[
   {name:"Riding Wolf Amulet 0",family:"Riding Wolf Amulet 0",tier:0,roman:"",role:"witch-other",recipe:"1x Riding Wolf Tooth",effect:null,slot:"",grade:0,price:1,icon:"/assets/_sprites/itemicon_cd_riding_wolf_amulet.webp"},
   {name:"Rising Torrent",family:"Rising Torrent",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Vigor I + 1x Swift I",effect:"Aufsteigender Strom — Angriff nach Rolle bei Treffer",slot:"Weapon",grade:0,price:1573,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_154.webp"},
   {name:"Service I",family:"Service",tier:1,roman:"I",role:"tier-core",recipe:"1x Vitality I + 1x Fortitude I + 1x Composure I + 1x Swift I",effect:"Contribution-EXP-Gain +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:500,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_104.webp"},
-  {name:"Service II",family:"Service",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Service I + 1x Brimstone + undefinedx undefined",effect:"Contribution-EXP-Gain +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:913,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_104.webp"},
+  {name:"Service II",family:"Service",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Service I",effect:"Contribution-EXP-Gain +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:913,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_104.webp"},
   {name:"Service III",family:"Service",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Service II",effect:"Contribution-EXP-Gain +10% / +20% / +30% (Tier I/II/III)",slot:"Armor",grade:0,price:1880,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_104.webp"},
   {name:"Shadow Claw",family:"Shadow Claw",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Swift I + 1x Haste I + 1x Vitality I",effect:"Schattenklaue (Heavy Attack)",slot:"Weapon",grade:0,price:2007,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_146.webp"},
   {name:"Shatter I",family:"Shatter",tier:1,roman:"I",role:"tier-core",recipe:"1x Insight I + 1x Fortification I",effect:"+2.5% / +5% / +7.5% Krit-Rate gegen Platten-Rüstung (Tier I/II/III)",slot:"Weapon",grade:0,price:513,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_131.webp"},
@@ -3123,7 +3137,7 @@ const WITCH_SYNTHESIS=[
   {name:"Shred III",family:"Shred",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Shred I",effect:"+2.5% / +5% / +7.5% Krit-Rate gegen Stoff-Rüstung (Tier I/II/III)",slot:"Weapon",grade:0,price:2167,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_136.webp"},
   {name:"Slashing Reeds",family:"Slashing Reeds",tier:0,roman:"",role:"effect-core",recipe:"1x Swift I + 1x Ascent I + 1x Fortitude I",effect:"Schilfhagel-Angriff — Schaden an getroffenen Feinden. 1.347 Silber",slot:"Armor",grade:0,price:1347,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_046.webp"},
   {name:"Solidarity I",family:"Solidarity",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Fortitude I + 1x Vitality I + 1x Composure I",effect:"Erhöhter Trust-Gewinn (Tier I/II/III steigend)",slot:"Armor",grade:0,price:473,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_107.webp"},
-  {name:"Solidarity II",family:"Solidarity",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Solidarity I + 1x Brimstone + undefinedx undefined",effect:"Erhöhter Trust-Gewinn (Tier I/II/III steigend)",slot:"Armor",grade:0,price:967,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_107.webp"},
+  {name:"Solidarity II",family:"Solidarity",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Solidarity I",effect:"Erhöhter Trust-Gewinn (Tier I/II/III steigend)",slot:"Armor",grade:0,price:967,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_107.webp"},
   {name:"Solidarity III",family:"Solidarity",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Solidarity II",effect:"Erhöhter Trust-Gewinn (Tier I/II/III steigend)",slot:"Armor",grade:0,price:1853,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_107.webp"},
   {name:"Spirit Transference",family:"Spirit Transference",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Composure I + 1x Swift I",effect:"Spirit-Steal — Spirit-Rückgewinn bei Treffern",slot:"Weapon",grade:0,price:567,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_018.webp"},
   {name:"Spirit's Judgment",family:"Spirit's Judgment",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Insight I + 1x Vitality I",effect:"Geistiger Ritter schlägt auf Feind ein. 1.353 Silber",slot:"Weapon",grade:0,price:1353,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_118.webp"},
@@ -3775,7 +3789,7 @@ const ARMOR=[
   {name:"Frozen Heart Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
   {name:"Valortread Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:""},
   {name:"Cow Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"KuKu Rocket Helmet - Equipped by Default",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:""},
+  {name:"KuKu Rocket Helmet",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"Standardmäßig ausgerüstet"},
   {name:"Valortread Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
   {name:"Valortread Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +36, DEF +17",notes:""},
   {name:"Belkandor Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
@@ -4297,7 +4311,9 @@ const BOSS_IMGS={
   // - "Forestwalker Tervis" (Wald-/Ent-Golem): Eintrag 2026-06-12 von erfundenem "Frostwalker"+Eis-Lore auf den korrekten Namen + Baumgolem-Lore korrigiert (questlog/gaming.tools/GameRant-verifiziert; "Frostwalker"+Frost stammte aus einer fehlerhaften Drittanbieter-Wiki)
   // - Abyss Kutum: 1:1-Zuordnung (genau 2 Kutum-Knowledge-Eintraege fuer genau 2 Kutum-Bosse), nicht einzeln verifiziert
   // - One-Eyed Jackal Captain: questlog-Faktionsbild der Lonely Jackals (zeigt den Anfuehrer)
-  // - Ohne questlog-Bild (Platzhalter bleibt): Black Bear Captain, Mountain God Boar, Crookrock Walker
+  // - Black Bear Captain: questlog-Questbild der Mjordin-/Black-Bear-Fraktion (cd_questimage_quest_mjordin_boss)
+  // - Mountain God Boar / Crookrock Walker: kein questlog-Sprite vorhanden -> lokale Bilder (cd_assets/bosses/*.png),
+  //   Motiv gegen TheGamer/GameRant/game8 abgeglichen (Boar = mit Aesten/Laub bewachsener "Waldhuegel"; Walker = Stein-Golem). 2026-06-18
   "Abyss Kutum":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_ancientworm.webp",
   "Aeserion, the Great Serpent":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_giantsnake.webp",
   "Antumbra's Spear":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasspear.webp",
@@ -4469,7 +4485,25 @@ const SKILL_IMGS={
   "Flight (Kuku Rocket Pack)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_oongka_rocketpack.webp",
   "Rage (Super Armor State)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_oongka_roar.webp",
   "Explosive Strike — Charge":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_oongka_hadongta.webp",
-  "Focused Aerial Roll":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_crowdash.webp"
+  "Focused Aerial Roll":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_crowdash.webp",
+  // --- Auto-recherchiert 2026-06-18 (questlog getSkill-API, alle Icon-URLs HTTP-200 + Stichprobe visuell geprueft) ---
+  "Evasive Slash":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_evadeattack.webp",
+  "Forward Slash":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_movecutting_i.webp",
+  "Forward Slash Proficiency":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_movecutting_ii.webp",
+  "Turning Slash":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_rotationbash_i.webp",
+  "Turning Slash Rend Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_rotationbash_expert.webp",
+  "Stab":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_lunge_i.webp",
+  "Stab Rend Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_lunge_expert.webp",
+  "Swift Stab":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_lunge_ii.webp",
+  "Blinding Flash Finisher":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_rush.webp",
+  "Multishot":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_multi_shot.webp",
+  "Explosive Evasive Shot":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_smokebomb.webp",
+  "Musket":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_category_onehandcannon.webp",
+  "Aerial Maneuver":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_crowwing.webp",
+  "Aerial Roll":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_crowdash.webp",
+  "Healing Force Palm":"cd_assets/skills/force_palm.webp",
+  "Force Palm Expertise":"cd_assets/skills/force_palm.webp",
+  "Focused Force Palm":"cd_assets/skills/force_palm.webp"
 };
 
 const WEAPON_IMGS={
@@ -5395,6 +5429,10 @@ const MOUNT_INGAME_IMGS={
   "Herspia Packhorse":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_lumiph_horse.webp",
   "Marni's Mechahorse":"https://crimsondesert.gaming.tools/images/ui/texture/image/knowledgeimage/cd_knowledgeimage_knowledge_marni_horse.webp",
   "Hernandian Warhorse":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_00000.webp",
+  // Regionale Militaer-/Story-Warhorses: questlog mappt sie auf dasselbe kanonische Warhorse-Portrait wie das Hernand-Pferd (horse_00000), HTTP-200 verifiziert 2026-06-18.
+  "Demenissian War Horse":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_00000.webp",
+  "Delesyian Warhorse":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_00000.webp",
+  "Wells's Military Horse":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_00000.webp",
   "Calphadean Scout's Horse":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_riding_horse_strapero_2001.webp",
   "Swift Wolf":     "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_sandfangbandits_wolf_2083.webp",
   "Large White Wolf":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_white_wolf_wild_30034.webp",
@@ -8147,9 +8185,13 @@ function highlightInElement(el,q){
     node.parentNode.replaceChild(frag,node);
   });
 }
+// Diakritik-/Umlaut-Folding fuer die Suche: lowercase, ß->ss, dann NFD-Decompose + Combining-Marks strippen
+// (ae/oe/ue -> a/o/u, é->e ...). Damit finden "schwache"/"fahigkeit"/"trophae"/"rustung" auch die Umlaut-Eintraege.
+function _fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'');}
 function _doSearchImpl(q){
   q=q.trim();
   const qLow=q.toLowerCase();
+  const qF=_fold(q);
   const cnt=document.getElementById('scnt');
   // Clear highlights only on elements that actually had them
   document.querySelectorAll('[data-s]').forEach(el=>clearHighlight(el));
@@ -8178,7 +8220,7 @@ function _doSearchImpl(q){
   let total=0;
   const matchedForHL=[];
   scope.querySelectorAll('[data-s]').forEach(el=>{
-    const m=el.dataset.s.includes(qLow);
+    const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF);
     el.classList.toggle('hide',!m);
     if(m){total++;if(matchedForHL.length<80)matchedForHL.push(el);}
   });
@@ -8210,11 +8252,12 @@ function _doSearchImpl(q){
 function _searchOtherSections(qLow,activeSec){
   // Lazy-Rendering: [data-s]-Attribute existieren erst nach dem Rendern einer Sektion
   if(typeof ensureAllRendered==='function')ensureAllRendered();
+  const qF=_fold(qLow);
   const out=[];
   document.querySelectorAll('.sec').forEach(sec=>{
     if(sec===activeSec)return;
     let count=0;
-    sec.querySelectorAll('[data-s]').forEach(el=>{if(el.dataset.s.includes(qLow))count++;});
+    sec.querySelectorAll('[data-s]').forEach(el=>{if((el._sf||(el._sf=_fold(el.dataset.s))).includes(qF))count++;});
     if(!count)return;
     const key=sec.id.replace(/^sec-/,'');
     const nav=document.querySelector('[data-sec="'+key+'"]');
@@ -10631,7 +10674,9 @@ const ENEMY_IMGS={
  "Sandfang Marauders":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_faction_goblin_riders.webp",
  "Goldenscale Bandits":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_iguana_riders.webp",
  "Dusksong":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_isvatufortress.webp",
- "Savage Fangs":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_crim_stompsandfortruins.webp"
+ "Savage Fangs":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_crim_stompsandfortruins.webp",
+ // Hostile Machines: questlog hat keinen eigenen Sammel-Sprite; Mechanicus Mk.XII (eine von Marnis Kampfmaschinen) als repraesentatives Konstrukt-Bild (HTTP-200-verifiziert, visuell geprueft 2026-06-18).
+ "Hostile Machines":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mechanicusmk12.webp"
 };
 const ENEMIES={
  wild:[
