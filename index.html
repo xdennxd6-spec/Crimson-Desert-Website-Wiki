@@ -386,10 +386,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 
 /* ── Spoiler ── */
 .spl-bar{margin-bottom:14px;display:flex;align-items:center;gap:9px;font-size:12px;color:var(--dim)}
-.spl-btn{padding:4px 13px;background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:20px;cursor:pointer;font-size:11.5px;color:var(--dim);transition:all .15s}
-.spl-btn:hover{border-color:#333;color:var(--text)}
-.spl-btn.on{background:rgba(180,45,32,.13);border-color:rgba(192,57,43,.42);color:var(--rhi)}
-.spl-w.blur{filter:blur(6px);user-select:none;pointer-events:none}
+/* (spl-btn/spl-w-Blur entfernt — Spoiler laeuft jetzt pro Kapitel via .spoiler-cover) */
 
 /* ── Quest Chapters ── */
 .chap{background:var(--card);border:1px solid var(--bdr);border-radius:12px;margin-bottom:11px;overflow:hidden}
@@ -406,6 +403,77 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .ql li{font-size:11.5px;color:var(--dim);padding-left:13px;position:relative}
 .ql li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:.65}
 .warn-b{margin-top:7px;padding:7px 11px;background:rgba(212,116,42,.07);border-left:2px solid rgba(212,116,42,.55);font-size:11px;color:var(--warn);border-radius:0 5px 5px 0}
+
+/* ── Quests & Story v2 (Hero, Region-Akzente, Side-Quest-Lanes) ── */
+.qhero{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;margin-bottom:20px;padding:16px 18px;border:1px solid var(--bdr);border-radius:12px;background:linear-gradient(135deg,rgba(192,57,43,.06) 0%,rgba(201,162,39,.04) 50%,transparent 100%)}
+.qhero-ring-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+.qhero-ring-sub{font-size:9.5px;color:var(--dim);letter-spacing:.05em;text-transform:uppercase}
+.qhero-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qhero-stat{background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:9px 12px}
+.qhero-stat-val{font-family:'Cinzel',serif;font-size:19px;color:var(--glo);line-height:1;display:block}
+.qhero-stat-sub{font-size:9px;color:var(--gdim);margin-left:6px;font-family:'Inter',sans-serif}
+.qhero-stat-lbl{font-size:10px;color:var(--dim);letter-spacing:.04em;margin-top:4px;display:block}
+.qhero-heat{display:flex;flex-direction:column;gap:5px;min-width:172px}
+.qhero-heat-row{display:grid;grid-template-columns:78px 1fr 16px;align-items:center;gap:7px;font-size:9.5px;color:var(--dim)}
+.qhero-heat-bar{height:8px;border-radius:5px;background:var(--bg3);overflow:hidden}
+.qhero-heat-fill{height:100%;border-radius:5px;min-width:3px}
+.qhero-heat-c{text-align:right;font-variant-numeric:tabular-nums}
+.qhero-next{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:4px;padding-top:12px;border-top:1px solid var(--bdr);font-size:11.5px;color:var(--dim)}
+.qhero-next-chip{cursor:pointer;background:linear-gradient(180deg,rgba(201,162,39,.18),rgba(201,162,39,.06));border:1px solid var(--gold);border-radius:20px;padding:5px 13px;color:var(--gold);font-weight:600;transition:filter .12s;font-family:'Inter',sans-serif}
+.qhero-next-chip:hover{filter:brightness(1.2)}
+.qhero-next-chip.te{background:linear-gradient(180deg,rgba(192,57,43,.16),rgba(192,57,43,.05));border-color:rgba(192,57,43,.5);color:var(--rhi)}
+
+/* True-Ending Ring (conic) + Kategorie-Balken */
+.te-ring{--p:0;width:74px;height:74px;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p)*1%),var(--bg3) 0);display:flex;align-items:center;justify-content:center;position:relative;flex:0 0 auto}
+.te-ring::before{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--card)}
+.te-ring span{position:relative;font-family:'Cinzel',serif;font-weight:700;color:var(--glo);font-size:12.5px;text-align:center;line-height:1.05}
+.te-catbars{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px 16px;margin-bottom:16px}
+.te-catbar{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--dim)}
+.te-catbar-lbl{min-width:84px;color:var(--text)}
+.te-catbar .pgw{flex:1;height:6px}
+.te-catbar-c{font-variant-numeric:tabular-nums;min-width:40px;text-align:right}
+.te-catbar.full .te-catbar-c{color:var(--glo)}
+
+/* Hauptquest-Kapitel: Region-Akzent, Nummern-Badge, Boss-Pille */
+.chap[data-reg]{border-top:2px solid var(--reg)}
+.chap-hd{gap:10px}
+.chap-hl{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.chap-num{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 6px;border-radius:8px;font-family:'Cinzel',serif;font-weight:700;font-size:13px;color:var(--text);background:linear-gradient(160deg,var(--reg,rgba(201,162,39,.20)),transparent);border:1px solid var(--bdr);flex-shrink:0}
+.chap-boss-tag{display:inline-flex;align-items:center;gap:5px;font-family:'Cinzel',serif;font-size:10.5px;font-weight:700;color:var(--rhi);background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.3);padding:2px 9px;border-radius:14px;white-space:nowrap}
+.chap-r{flex-wrap:wrap;justify-content:flex-end}
+.fac-q.miss{border-left:2px solid var(--warn);padding-left:10px}
+
+/* Side-Quest Region-Lanes + Kompakt-Zeilen */
+.sq-regbar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.sq-regchip{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:4px 11px;cursor:pointer;transition:all .15s}
+.sq-regchip:hover{border-color:var(--gold);color:var(--gold)}
+.sq-regchip i{width:9px;height:9px;border-radius:3px;background:var(--reg,var(--gold));display:inline-block}
+.sq-lane{background:var(--card);border:1px solid var(--bdr);border-left:3px solid var(--reg,var(--gold));border-radius:10px;margin-bottom:12px;overflow:hidden;scroll-margin-top:78px}
+.sq-lane-hd{padding:10px 14px;display:flex;align-items:center;gap:9px;font-family:'Cinzel',serif;font-weight:700;color:var(--gold);font-size:12px;background:linear-gradient(90deg,var(--reg,transparent),transparent 60%)}
+.sq-lane-c{font-family:'Inter',sans-serif;font-weight:400;color:var(--dim);font-size:10.5px}
+.sq-lane-body{padding:2px 0}
+.sq-item{border-top:1px solid rgba(37,34,34,.55)}
+.sq-item:first-child{border-top:none}
+.sq-item>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:8px 14px;font-size:12px;transition:background .12s}
+.sq-item>summary::-webkit-details-marker{display:none}
+.sq-item>summary:hover{background:rgba(255,255,255,.02)}
+.sq-item[open]>summary{background:rgba(201,162,39,.05)}
+.sq-sum-q{color:var(--text);font-weight:500;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.sq-sum-rw{color:var(--gdim);font-size:11px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px}
+.sq-detail{padding:0 14px 11px 14px;display:grid;grid-template-columns:max-content 1fr;gap:2px 9px;font-size:11px;line-height:1.5}
+.sq-detail .fac-qk{color:var(--gdim);font-weight:600;white-space:nowrap}
+.sq-detail .fac-qv{color:var(--dim)}
+
+@media(max-width:768px){
+  .qhero{grid-template-columns:1fr;justify-items:stretch}
+  .qhero-ring-wrap{flex-direction:row;justify-content:center;gap:14px}
+  .qhero-stats{grid-template-columns:1fr 1fr}
+  .qhero-heat{min-width:0}
+  .te-catbars{grid-template-columns:1fr}
+  .chap-num{min-width:26px;height:26px;font-size:12px}
+  .sq-item>summary{grid-template-columns:1fr}
+  .sq-sum-rw{text-align:left;max-width:none}
+}
 
 /* ── Skills ── */
 .sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
@@ -754,8 +822,8 @@ tbody{contain:layout style}
 .rl-row:first-of-type{border-top:none}
 .rl-tag{font-size:9px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);border-radius:4px;padding:1px 6px;margin-right:6px;color:var(--dim);text-transform:uppercase}
 .rl-src{color:var(--dim);font-size:11px;margin-top:2px;line-height:1.4}
-.card.spoiler-locked,.ch-card.spoiler-locked{position:relative;overflow:hidden}
-.card.spoiler-locked>*:not(.spoiler-cover),.ch-card.spoiler-locked>*:not(.spoiler-cover){filter:blur(8px);pointer-events:none;user-select:none}
+.card.spoiler-locked,.ch-card.spoiler-locked,.chap.spoiler-locked{position:relative;overflow:hidden}
+.card.spoiler-locked>*:not(.spoiler-cover),.ch-card.spoiler-locked>*:not(.spoiler-cover),.chap.spoiler-locked>*:not(.spoiler-cover){filter:blur(8px);pointer-events:none;user-select:none}
 .spoiler-cover{position:absolute;inset:0;z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(8,6,6,.7);text-align:center;padding:20px}
 .spoiler-cover-ico{font-size:30px;opacity:.85}
 .spoiler-cover-tx{font-size:12px;color:var(--rhi);font-weight:600;letter-spacing:.03em}
@@ -1757,6 +1825,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 
   <section class="sec" id="sec-quests">
     <h2 class="sec-t">📜 Quests &amp; Story</h2>
+    <div id="quest-hero" class="qhero"></div>
     <div class="tabs">
       <button type="button" class="tab active" id="qt-te" onclick="qTab('te')">True Ending Checkliste</button>
       <button type="button" class="tab" id="qt-mq" onclick="qTab('mq')">Hauptquests</button>
@@ -1764,15 +1833,12 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <button type="button" class="tab" id="qt-sq" onclick="qTab('sq')">Side-Quests</button>
     </div>
     <div class="pane active" id="qp-te">
-      <div class="te-pg">
-        <div class="te-pgh"><span style="color:var(--dim)">True-Ending-Fortschritt</span><span id="te-pct" style="color:var(--gold);font-weight:700"></span></div>
-        <div class="pgw"><div class="pgb" id="te-bar" style="width:0%"></div></div>
-      </div>
+      <div class="te-catbars" id="te-catbars"></div>
       <div id="te-list"></div>
     </div>
     <div class="pane" id="qp-mq">
-      <div class="spl-bar">Story-Spoiler: <button class="spl-btn" id="spl-btn" onclick="toggleSpl()">ausgeblendet</button></div>
-      <div class="spl-w blur" id="spl-w"><div id="mq-list"></div></div>
+      <div class="spl-bar">🔒 Story-Spoiler ab Kapitel <select class="fs" id="mq-spoiler" onchange="setSpoilerChapter(this.value)" style="margin:0 4px"><option value="0">aus (alles sichtbar)</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> ausblenden</div>
+      <div id="mq-list"></div>
     </div>
     <div class="pane" id="qp-fac"><div id="fac-list"></div></div>
     <div class="pane" id="qp-sq"><div id="sq-list"></div></div>
@@ -7487,9 +7553,36 @@ const REGION_ACCENT={
   'Pailune':'rgba(79,112,136,.55)',
   'Demeniss':'rgba(113,126,62,.55)',
   'Delesyia':'rgba(199,154,47,.5)',
+  'Crimson Desert':'rgba(190,110,55,.5)',
   'The Abyss':'rgba(110,58,138,.55)',
   'Endgame':'rgba(168,48,72,.55)'
 };
+// Volle Region-Gradienten (datei-global, damit Boss-Heatmap UND Quest-Hero dieselben nutzen).
+const REGION_COLORS={
+  'Hernand':'linear-gradient(180deg,#b8432a 0%,#6e2114 100%)',
+  'Pailune':'linear-gradient(180deg,#4f7088 0%,#273948 100%)',
+  'Demeniss':'linear-gradient(180deg,#717e3e 0%,#39421f 100%)',
+  'Delesyia':'linear-gradient(180deg,#c79a2f 0%,#6e5616 100%)',
+  'Crimson Desert':'linear-gradient(180deg,#be6e37 0%,#7a4318 100%)',
+  'The Abyss':'linear-gradient(180deg,#6e3a8a 0%,#341848 100%)',
+  'Endgame':'linear-gradient(180deg,#a83048 0%,#5a1626 100%)'
+};
+// Kapitel -> Haupt-Schauplatz, verifiziert vs PowerPyx/Fextralife/game8 (2026-06).
+// Nur high/medium werden farbcodiert; low (Kap.10) bleibt neutral. ch ist String wie in MAIN_QUESTS.
+const CH_REGION={
+  'Prolog':{region:'Hernand',conf:'high'},
+  '1':{region:'Hernand',conf:'high'},'2':{region:'Hernand',conf:'high'},
+  '3':{region:'Hernand',conf:'high'},'4':{region:'Hernand',conf:'high'},
+  '5':{region:'Hernand',conf:'medium'},'6':{region:'Pailune',conf:'medium'},
+  '7':{region:'Pailune',conf:'high'},'8':{region:'Demeniss',conf:'medium'},
+  '9':{region:'Crimson Desert',conf:'medium'},'10':{region:null,conf:'low'},
+  '11':{region:'Delesyia',conf:'medium'},'12':{region:'The Abyss',conf:'medium'}
+};
+const REG_KEYS=['Hernand','Pailune','Demeniss','Delesyia','Crimson Desert','The Abyss','Endgame'];
+function regAccent(region){return region?(REGION_ACCENT[region]||null):null;}
+function normReg(s){s=String(s||'');return REG_KEYS.find(k=>s.includes(k))||null;}
+// Region-Akzent eines Kapitels nur wenn Faktenlage sicher genug (conf!=low), sonst null -> neutral gold.
+function chapAccent(ch){const m=CH_REGION[ch];if(!m||m.conf==='low'||!m.region)return null;return{region:m.region,col:regAccent(m.region)};}
 function applyRegionAtmosphere(reg){
   const sec=document.getElementById('sec-bosses');
   if(!sec)return;
@@ -7501,14 +7594,7 @@ function renderRegionHeatmap(){
   const el=document.getElementById('region-heatmap');
   if(!el||typeof BOSSES==='undefined')return;
   const REGIONS=['Hernand','Pailune','Demeniss','Delesyia','The Abyss','Endgame'];
-  const REGION_COLORS={
-    'Hernand':'linear-gradient(180deg,#b8432a 0%,#6e2114 100%)',
-    'Pailune':'linear-gradient(180deg,#4f7088 0%,#273948 100%)',
-    'Demeniss':'linear-gradient(180deg,#717e3e 0%,#39421f 100%)',
-    'Delesyia':'linear-gradient(180deg,#c79a2f 0%,#6e5616 100%)',
-    'The Abyss':'linear-gradient(180deg,#6e3a8a 0%,#341848 100%)',
-    'Endgame':'linear-gradient(180deg,#a83048 0%,#5a1626 100%)'
-  };
+  // REGION_COLORS ist jetzt datei-global (oben neben REGION_ACCENT, inkl. Crimson Desert).
   const filterReg=document.getElementById('bf-reg')?document.getElementById('bf-reg').value:'';
   const done=loadBossDone();
   const counts={};
@@ -7919,7 +8005,7 @@ const SEC_RENDERERS={
   cores:['renderCores','renderSynthesis'],
   armor:['renderArmor','renderArmorSets'],
   crafting:['renderCrafting'],
-  quests:['renderTE','renderMQ','renderFactions','renderSideQuests'],
+  quests:['renderQuestHero','renderTE','renderMQ','renderFactions','renderSideQuests'],
   locations:['renderLocs','renderBells'],
   ruins:['renderRuins'],
   mounts:['renderMounts'],
@@ -8439,8 +8525,9 @@ function setSpoilerChapter(v){
   localStorage.setItem('cd_spoiler_chapter',String(parseInt(v,10)||0));
   renderBosses();
   if(typeof renderChapters==='function')renderChapters();
+  if(typeof renderMQ==='function')renderMQ();
 }
-function revealSpoiler(btn){const c=btn.closest('.card,.ch-card');if(c)c.classList.remove('spoiler-locked');}
+function revealSpoiler(btn){const c=btn.closest('.card,.ch-card,.chap');if(c)c.classList.remove('spoiler-locked');}
 
 function renderBosses(){
   const reg=document.getElementById('bf-reg').value;
@@ -8715,22 +8802,31 @@ function saveTE(a){
   }
 }
 function renderTE(){
+  const list=document.getElementById('te-list');if(!list)return;
   const done=loadTE();
+  const ICON={Companions:'👥',Greymane:'🛡️',Sanctums:'🏛️',Hexen:'🌙',Story:'📖',Misc:'✦'};
   const cats=[...new Set(TRUE_ENDING.map(t=>t.cat))];
-  document.getElementById('te-list').innerHTML=cats.map(cat=>{
+  const bars=document.getElementById('te-catbars');
+  if(bars){
+    bars.innerHTML=cats.map(cat=>{
+      const items=TRUE_ENDING.filter(t=>t.cat===cat);
+      const dc=items.filter(t=>done.includes(t.id)).length;
+      const p=items.length?Math.round(dc/items.length*100):0;
+      return `<div class="te-catbar${dc===items.length?' full':''}"><span class="te-catbar-lbl">${ICON[cat]||'•'} ${escHtml(cat)}</span><div class="pgw"><div class="pgb" style="width:${p}%"></div></div><span class="te-catbar-c">${dc}/${items.length}</span></div>`;
+    }).join('');
+  }
+  list.innerHTML=cats.map(cat=>{
     const items=TRUE_ENDING.filter(t=>t.cat===cat);
     const dc=items.filter(t=>done.includes(t.id)).length;
     return `<div class="te-grp">
-      <div class="te-gh"><span class="te-gt">${cat}</span><span class="te-gc">${dc}/${items.length}</span></div>
+      <div class="te-gh"><span class="te-gt">${ICON[cat]||'•'} ${escHtml(cat)}</span><span class="te-gc">${dc}/${items.length}</span></div>
       ${items.map(t=>`<div class="te-it${done.includes(t.id)?' done':''}" onclick="toggleTE('${t.id}')">
         <div class="chk${done.includes(t.id)?' on':''}" role="checkbox" aria-checked="${done.includes(t.id)?'true':'false'}" tabindex="0"></div>
-        <span class="te-tx">${t.task}</span>
+        <span class="te-tx">${escHtml(t.task)}</span>
       </div>`).join('')}
     </div>`;
   }).join('');
-  const pct=Math.round(done.length/TRUE_ENDING.length*100);
-  document.getElementById('te-pct').textContent=done.length+'/'+TRUE_ENDING.length+' ('+pct+'%)';
-  document.getElementById('te-bar').style.width=pct+'%';
+  if(typeof renderQuestHero==='function')renderQuestHero();
 }
 function toggleTE(id){
   let d=loadTE();
@@ -8759,19 +8855,31 @@ function renderMQ(){
         ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
       </div>
     </div>`;
+  const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
   document.getElementById('mq-list').innerHTML=MAIN_QUESTS.map(ch=>{
     const detailed=ch.quests.length&&typeof ch.quests[0]==='object';
-    return `<div class="chap">
+    const acc=(typeof chapAccent==='function')?chapAccent(ch.ch):null;
+    const isNum=/^\d+$/.test(ch.ch);
+    const numLabel=isNum?ch.ch:(ch.ch==='Prolog'?'P':ch.ch==='Epilog'?'E':'•');
+    const chNum=parseInt(ch.ch,10);
+    const locked=sp>0&&!isNaN(chNum)&&chNum>sp;
+    const hasMiss=detailed&&ch.quests.some(q=>q.miss);
+    const bossTag=ch.boss?'<span class="chap-boss-tag">⚔ '+escHtml(ch.boss)+'</span>':'';
+    const missTag=hasMiss?'<span class="tag tw">verpassbar</span>':'';
+    const regAttr=acc?' data-reg style="--reg:'+acc.col+'"':'';
+    return `<div class="chap${locked?' spoiler-locked':''}"${regAttr}>
+    ${locked?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${escHtml(ch.ch)} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
     <div class="chap-hd" onclick="toggleChap(this)">
-      <span class="chap-title">Kap. ${ch.ch} — ${ch.name}</span>
-      <div class="chap-r"><span style="font-size:11px;color:var(--dim)">${ch.quests.length} Quests${detailed?' · Walkthrough':''}</span>${ch.boss?'<span class="chap-boss">'+ch.boss+'</span>':''}<span class="chap-arr">▼</span></div>
+      <div class="chap-hl"><span class="chap-num">${numLabel}</span><span class="chap-title">Kap. ${escHtml(ch.ch)} — ${escHtml(ch.name)}</span></div>
+      <div class="chap-r"><span style="font-size:11px;color:var(--dim)">${ch.quests.length} Quests${detailed?' · Walkthrough':''}</span>${missTag}${bossTag}<span class="chap-arr">▼</span></div>
     </div>
     <div class="chap-body">
-      ${detailed?ch.quests.map(qCard).join(''):'<ul class="ql">'+ch.quests.map(q=>'<li>'+q+'</li>').join('')+'</ul>'}
-      ${ch.unlock?'<div style="font-size:11.5px;color:var(--gold);margin-bottom:4px">Unlock: '+ch.unlock+'</div>':''}
-      ${ch.warn?'<div class="warn-b">'+ch.warn+'</div>':''}
+      ${detailed?ch.quests.map(qCard).join(''):'<ul class="ql">'+ch.quests.map(q=>'<li>'+escHtml(q)+'</li>').join('')+'</ul>'}
+      ${ch.unlock?'<div style="font-size:11.5px;color:var(--gold);margin-bottom:4px">Unlock: '+escHtml(ch.unlock)+'</div>':''}
+      ${ch.warn?'<div class="warn-b">'+escHtml(ch.warn)+'</div>':''}
     </div>
   </div>`;}).join('');
+  const sel=document.getElementById('mq-spoiler');if(sel)sel.value=String(sp);
 }
 function toggleChap(hd){
   hd.nextElementSibling.classList.toggle('open');
@@ -8782,30 +8890,76 @@ function toggleChap(hd){
 function renderSideQuests(){
   const el=document.getElementById('sq-list');
   if(!el||typeof SIDE_QUESTS==='undefined')return;
-  const regions=[...new Set(SIDE_QUESTS.map(q=>q.region))];
-  el.innerHTML='<div style="font-size:12px;color:var(--dim);margin-bottom:14px">'+SIDE_QUESTS.length+' freie Side-Quests ausserhalb von Hauptstory und Fraktionen. Die Bewohner-Requests im Greymane Camp stehen in der Greymane-Sektion.</div>'+
-    regions.map(r=>{
-      const list=SIDE_QUESTS.filter(q=>q.region===r);
-      return '<h3 class="sub-t">'+escHtml(r)+' ('+list.length+')</h3>'+list.map(q=>`<div class="fac-q" data-s="${escHtml((q.q+' '+q.region+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
-      <div class="fac-qh">${escHtml(q.q)}${facBadges(q)}</div>
-      <div class="fac-qm">
-        <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
-        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${escHtml(q.prereq)}</div>
-        <div class="fac-qk">Belohnung</div><div class="fac-qv">${escHtml(q.reward)}</div>
-        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
-      </div>
-    </div>`).join('');
+  const order=r=>{const i=REG_KEYS.indexOf(normReg(r));return i<0?99:i;};
+  const regions=[...new Set(SIDE_QUESTS.map(q=>q.region))].sort((a,b)=>order(a)-order(b));
+  const chips=regions.map((r,i)=>{
+    const c=SIDE_QUESTS.filter(q=>q.region===r).length;
+    const col=regAccent(normReg(r));
+    return `<span class="sq-regchip"${col?' style="--reg:'+col+'"':''} onclick="document.getElementById('sq-lane-${i}').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>${escHtml(r)} ${c}</span>`;
+  }).join('');
+  const lanes=regions.map((r,i)=>{
+    const list=SIDE_QUESTS.filter(q=>q.region===r);
+    const col=regAccent(normReg(r));
+    const rows=list.map(q=>{
+      const ds=escHtml((q.q+' '+q.region+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase());
+      const rw=(q.reward&&q.reward!=='—')?q.reward:'—';
+      return `<details class="sq-item" data-s="${ds}">
+        <summary><span class="sq-sum-q">${escHtml(q.q)}${facBadges(q)}</span><span class="sq-sum-rw">${escHtml(rw)}</span></summary>
+        <div class="sq-detail">
+          <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
+          <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${escHtml(q.prereq)}</div>
+          <div class="fac-qk">Belohnung</div><div class="fac-qv">${escHtml(q.reward)}</div>
+          ${q.tip?'<div class="fac-qk">Notiz</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
+        </div>
+      </details>`;
     }).join('');
+    return `<div class="sq-lane" id="sq-lane-${i}"${col?' style="--reg:'+col+'"':''}>
+      <div class="sq-lane-hd">${escHtml(r)} <span class="sq-lane-c">${list.length} Quests</span></div>
+      <div class="sq-lane-body">${rows}</div>
+    </div>`;
+  }).join('');
+  el.innerHTML='<div style="font-size:12px;color:var(--dim);margin-bottom:12px">'+SIDE_QUESTS.length+' freie Side-Quests ausserhalb von Hauptstory und Fraktionen, nach Region gruppiert &middot; Zeile anklicken f&uuml;r Details. Die Bewohner-Requests im Greymane Camp stehen in der Greymane-Sektion.</div><div class="sq-regbar">'+chips+'</div>'+lanes;
 }
 
-// ===== SPOILER =====
-let splOn=false;
-function toggleSpl(){
-  splOn=!splOn;
-  document.getElementById('spl-w').classList.toggle('blur',!splOn);
-  const b=document.getElementById('spl-btn');
-  b.classList.toggle('on',splOn);
-  b.textContent=splOn?'sichtbar':'ausgeblendet';
+// ===== QUEST HERO (Cockpit-Ueberblick) =====
+function renderQuestHero(){
+  const el=document.getElementById('quest-hero');if(!el)return;
+  const doneTE=(typeof loadTE==='function')?loadTE():[];
+  const teTotal=TRUE_ENDING.length, teDone=doneTE.length;
+  const tePct=teTotal?Math.round(teDone/teTotal*100):0;
+  const chDone=(typeof lsJson==='function')?lsJson('cd_ch_done',[]):[];
+  const numCh=MAIN_QUESTS.filter(c=>/^\d+$/.test(c.ch));
+  const doneChCount=numCh.filter(c=>chDone.includes(parseInt(c.ch,10))).length;
+  const totalMQ=MAIN_QUESTS.reduce((n,c)=>n+c.quests.length,0);
+  let tF=0,tQ=0;
+  if(typeof FAC_DATA!=='undefined'&&FAC_DATA.regions){
+    tF=FAC_DATA.regions.reduce((n,r)=>n+r.factions.length,0);
+    tQ=FAC_DATA.regions.reduce((n,r)=>n+r.factions.reduce((m,f)=>m+f.quests.length,0),0);
+  }
+  const sqTotal=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
+  const regCount={};
+  MAIN_QUESTS.forEach(c=>{const a=(typeof chapAccent==='function')?chapAccent(c.ch):null;if(a)regCount[a.region]=(regCount[a.region]||0)+1;});
+  const regRows=REG_KEYS.filter(r=>regCount[r]).map(r=>({r,n:regCount[r]}));
+  const maxReg=Math.max(1,...regRows.map(x=>x.n));
+  const heat=regRows.map(x=>`<div class="qhero-heat-row"><span>${escHtml(x.r)}</span><div class="qhero-heat-bar"><div class="qhero-heat-fill" style="width:${Math.round(x.n/maxReg*100)}%;background:${REGION_COLORS[x.r]||'var(--gold)'}"></div></div><span class="qhero-heat-c">${x.n}</span></div>`).join('');
+  const nextCh=numCh.find(c=>!chDone.includes(parseInt(c.ch,10)));
+  const nextTE=TRUE_ENDING.find(t=>!doneTE.includes(t.id));
+  let chips='';
+  chips+=nextCh?`<span class="qhero-next-chip" onclick="showSec('chapters')">Weiter: Kap. ${escHtml(nextCh.ch)} — ${escHtml(nextCh.name)}</span>`:'<span style="color:var(--glo)">Alle Kapitel erledigt</span>';
+  chips+=nextTE?`<span class="qhero-next-chip te" onclick="qTab('te')" title="${escHtml(nextTE.task)}">True Ending: ${escHtml(nextTE.task.length>44?nextTE.task.slice(0,44)+'…':nextTE.task)}</span>`:'<span style="color:var(--glo)">True Ending komplett</span>';
+  el.innerHTML=`
+    <div class="qhero-ring-wrap">
+      <div class="te-ring" style="--p:${tePct}"><span>${tePct}%</span></div>
+      <div class="qhero-ring-sub">${teDone}/${teTotal} True Ending</div>
+    </div>
+    <div class="qhero-stats">
+      <div class="qhero-stat"><span class="qhero-stat-val">${numCh.length}<span class="qhero-stat-sub">${doneChCount} erledigt</span></span><span class="qhero-stat-lbl">Kapitel</span></div>
+      <div class="qhero-stat"><span class="qhero-stat-val">${totalMQ}</span><span class="qhero-stat-lbl">Hauptquests</span></div>
+      <div class="qhero-stat"><span class="qhero-stat-val">${tF}<span class="qhero-stat-sub">${tQ} Quests</span></span><span class="qhero-stat-lbl">Fraktionen</span></div>
+      <div class="qhero-stat"><span class="qhero-stat-val">${sqTotal}</span><span class="qhero-stat-lbl">Side-Quests</span></div>
+    </div>
+    <div class="qhero-heat">${heat||'<span style="font-size:10px;color:var(--dim)">Story-Schauplätze</span>'}</div>
+    <div class="qhero-next"><span style="color:var(--dim)">Nächster Schritt:</span>${chips}</div>`;
 }
 
 // ===== FACTIONS =====
@@ -10115,6 +10269,7 @@ function toggleChDone(num){
   d=d.includes(num)?d.filter(n=>n!==num):[...d,num];
   localStorage.setItem('cd_ch_done',JSON.stringify(d));
   renderChapters();
+  if(typeof renderQuestHero==='function'&&document.getElementById('quest-hero'))renderQuestHero();
 }
 
 // ===== PATCH NOTES =====
