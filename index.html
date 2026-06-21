@@ -1767,7 +1767,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
         </div>
         <div style="padding:10px 13px;background:rgba(180,84,204,.05);border:1px solid var(--bdr);border-radius:8px">
           <strong style="color:#b554cc">Spezial-Synthese</strong> <span style="color:var(--dim);font-size:11px">(Gluecksspiel, kein Blueprint)</span>
-          <p style="margin:6px 0 0;color:var(--dim)">Zwei Cores werden verbraucht, der <strong>Typ</strong> des Ergebnisses ist <strong>zufaellig</strong>; nur die Stufe skaliert mit dem Input. <strong>Einziger Weg zu Greater-Cores</strong> (im deutschen Spiel „Wütende“ Cores; ca. 4% pro Versuch, im Schnitt ~25 Versuche). Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden). <strong>Wichtig:</strong> Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores — <strong>nicht</strong> zu Stufe III (Stufe III = +12%).</p>
+          <p style="margin:6px 0 0;color:var(--dim)">Zwei Cores werden verbraucht, der <strong>Typ</strong> des Ergebnisses ist <strong>zufaellig</strong>; nur die Stufe skaliert mit dem Input. <strong>Einziger Weg zu Greater-Cores</strong> (ca. 4% pro Versuch, im Schnitt ~25 Versuche). Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden). <strong>Wichtig:</strong> Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores — <strong>nicht</strong> zu Stufe III (Stufe III = +12%). Davon zu unterscheiden ist die eigene <strong>„Rampaging“</strong>-Core-Reihe (z.B. Rampaging Insight), die im deutschen Spiel <strong>„Wütend“</strong> heißt.</p>
         </div>
       </div>
       <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin:4px 0 12px">
@@ -8670,9 +8670,11 @@ function coreTierStrip(name){
   return '<div class="core-tiers"><span class="ct-lbl">Stufen-Werte</span>'+pills+'</div>';
 }
 function coreGreaterNote(c){
-  const isGreater=/^Greater\b/.test(c.name)||/^Rampaging\b/.test(c.name)||/Greater/.test(c.source||'');
-  if(!isGreater)return '';
-  return '<div style="font-size:10.5px;color:#b554cc;margin-top:4px">⚡ Greater-Core (im dt. Spiel „Wütend“) — nur per Spezial-Synthese (~4%), mit Haltbarkeit: zerbricht und ist nicht reparierbar</div>';
+  const isRampaging=/^Rampaging\b/.test(c.name);
+  const isGreater=/^Greater\b/.test(c.name)||(/Greater/.test(c.source||'')&&!isRampaging);
+  if(isRampaging)return '<div style="font-size:10.5px;color:#b554cc;margin-top:4px">⚡ Rampaging-Core (im dt. Spiel „Wütend“) — eigene Spezial-Core-Reihe, nicht identisch mit den „Greater“-Cores</div>';
+  if(isGreater)return '<div style="font-size:10.5px;color:#b554cc;margin-top:4px">⚡ Greater-Core — nur per Spezial-Synthese (~4%), mit Haltbarkeit: zerbricht und ist nicht reparierbar</div>';
+  return '';
 }
 function renderCores(){
   const f=document.getElementById('cf-slot').value;
