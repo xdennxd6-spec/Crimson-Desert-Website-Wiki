@@ -469,6 +469,10 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .sq-item-sp[open]>summary{background:rgba(201,162,39,.08)}
 .sq-item-sp .sq-sum-rw{color:var(--gold)}
 .sq-regchip-sp{border-color:var(--gold);color:var(--gold)}
+.sqchk{margin-top:0;cursor:pointer}
+.sq-item.done>summary{opacity:.6}
+.sq-item.done .sq-name{text-decoration:line-through;color:var(--dim)}
+.sq-progress-bar{display:flex;align-items:center;gap:10px;margin:2px 0 12px;font-size:11.5px;color:var(--dim)}
 
 @media(max-width:768px){
   .qhero{grid-template-columns:1fr;justify-items:stretch}
@@ -8840,6 +8844,33 @@ function toggleTE(id){
   saveTE(d);renderTE();
 }
 
+// ===== SIDE-QUEST ABHAKEN (lokal, cd_sq_done) =====
+function loadSQ(){return lsJson('cd_sq_done',[])}
+function saveSQ(a){localStorage.setItem('cd_sq_done',JSON.stringify(a));if(typeof updateStats==='function')updateStats();if(typeof renderOverview==='function')renderOverview();}
+function toggleSQ(key,el){
+  let d=loadSQ();
+  const now=!d.includes(key);
+  d=now?[...d,key]:d.filter(x=>x!==key);
+  saveSQ(d);
+  if(el){
+    el.classList.toggle('on',now);el.setAttribute('aria-checked',now?'true':'false');
+    const item=el.closest('.sq-item');if(item)item.classList.toggle('done',now);
+  }
+  sqUpdateCounts();
+  if(typeof renderQuestHero==='function')renderQuestHero();
+}
+function sqUpdateCounts(){
+  document.querySelectorAll('#sq-list .sq-lane').forEach(lane=>{
+    const items=lane.querySelectorAll('.sq-item').length;
+    const done=lane.querySelectorAll('.sq-item.done').length;
+    const c=lane.querySelector('.sq-lane-c');
+    if(c)c.textContent=done+'/'+items+(lane.classList.contains('sq-lane-sp')?' besondere':' Quests');
+  });
+  const all=document.querySelectorAll('#sq-list .sq-item').length;
+  const dn=document.querySelectorAll('#sq-list .sq-item.done').length;
+  const p=document.getElementById('sq-progress');if(p)p.textContent=dn+'/'+all;
+}
+
 // ===== QUEST TABS =====
 function qTab(id){
   ['te','mq','fac','sq'].forEach(t=>{
@@ -8898,6 +8929,9 @@ function renderSideQuests(){
   if(!el||typeof SIDE_QUESTS==='undefined')return;
   const specials=SIDE_QUESTS.filter(q=>q.special);
   const normal=SIDE_QUESTS.filter(q=>!q.special);
+  const done=loadSQ();
+  const isDone=q=>done.includes(q.q);
+  const sqChk=q=>'<span class="chk sqchk'+(isDone(q)?' on':'')+'" role="checkbox" aria-checked="'+(isDone(q)?'true':'false')+'" tabindex="0" title="Als erledigt markieren" onclick="event.preventDefault();event.stopPropagation();toggleSQ(\''+escJsStr(q.q)+'\',this)"></span>';
   const order=r=>{const i=REG_KEYS.indexOf(normReg(r));return i<0?99:i;};
   const regions=[...new Set(normal.map(q=>q.region))].sort((a,b)=>order(a)-order(b));
   const spChip=specials.length?`<span class="sq-regchip sq-regchip-sp" style="--reg:var(--gold)" onclick="document.getElementById('sq-lane-sp').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>&#9733; Legend&auml;re Mounts ${specials.length}</span>`:'';
@@ -8909,8 +8943,8 @@ function renderSideQuests(){
   const spRow=q=>{
     const ds=escHtml((q.q+' '+q.region+' '+q.trigger+' '+(q.boss||'')+' '+q.reward+' '+(q.craft||'')+' '+(q.tip||'')).toLowerCase());
     const rw=q.mount||((q.reward&&q.reward!=='—')?q.reward:'—');
-    return `<details class="sq-item sq-item-sp" data-s="${ds}">
-        <summary><span class="sq-sum-q">${escHtml(q.q)}${facBadges(q)}</span><span class="sq-sum-rw">${escHtml(rw)}</span></summary>
+    return `<details class="sq-item sq-item-sp${isDone(q)?' done':''}" data-s="${ds}">
+        <summary><span class="sq-sum-q">${sqChk(q)}<span class="sq-name">${escHtml(q.q)}</span>${facBadges(q)}</span><span class="sq-sum-rw">${escHtml(rw)}</span></summary>
         <div class="sq-detail">
           <div class="fac-qk">Region</div><div class="fac-qv">${escHtml(q.region)}</div>
           <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
@@ -8923,7 +8957,7 @@ function renderSideQuests(){
       </details>`;
   };
   const spLane=specials.length?`<div class="sq-lane sq-lane-sp" id="sq-lane-sp" style="--reg:var(--gold)">
-      <div class="sq-lane-hd">&#9733; Legend&auml;re Mount-Quests (Sigil) <span class="sq-lane-c">${specials.length} besondere Quests</span></div>
+      <div class="sq-lane-hd">&#9733; Legend&auml;re Mount-Quests (Sigil) <span class="sq-lane-c">${specials.filter(isDone).length}/${specials.length} besondere</span></div>
       <div class="sq-lane-body">${specials.map(spRow).join('')}</div>
     </div>`:'';
   const lanes=regions.map((r,i)=>{
@@ -8932,8 +8966,8 @@ function renderSideQuests(){
     const rows=list.map(q=>{
       const ds=escHtml((q.q+' '+q.region+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase());
       const rw=(q.reward&&q.reward!=='—')?q.reward:'—';
-      return `<details class="sq-item" data-s="${ds}">
-        <summary><span class="sq-sum-q">${escHtml(q.q)}${facBadges(q)}</span><span class="sq-sum-rw">${escHtml(rw)}</span></summary>
+      return `<details class="sq-item${isDone(q)?' done':''}" data-s="${ds}">
+        <summary><span class="sq-sum-q">${sqChk(q)}<span class="sq-name">${escHtml(q.q)}</span>${facBadges(q)}</span><span class="sq-sum-rw">${escHtml(rw)}</span></summary>
         <div class="sq-detail">
           <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
           <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${escHtml(q.prereq)}</div>
@@ -8943,12 +8977,14 @@ function renderSideQuests(){
       </details>`;
     }).join('');
     return `<div class="sq-lane" id="sq-lane-${i}"${col?' style="--reg:'+col+'"':''}>
-      <div class="sq-lane-hd">${escHtml(r)} <span class="sq-lane-c">${list.length} Quests</span></div>
+      <div class="sq-lane-hd">${escHtml(r)} <span class="sq-lane-c">${list.filter(isDone).length}/${list.length} Quests</span></div>
       <div class="sq-lane-body">${rows}</div>
     </div>`;
   }).join('');
   const intro='<div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">'+normal.length+' freie Side-Quests + <b style="color:var(--glo)">'+specials.length+' legend&auml;re Mount-Quests</b> (Sigil) au&szlig;erhalb von Hauptstory und Fraktionen, nach Region gruppiert &middot; Zeile anklicken f&uuml;r Details.<br><b>Gating-Regel:</b> Townsfolk-Requests/Commissions skalieren mit dem <b>Hauptquest-/Kapitel-Fortschritt</b> (nicht mit Ruf) &mdash; neue Aush&auml;nge erscheinen St&uuml;ck f&uuml;r St&uuml;ck, der &Uuml;bergang Kapitel&nbsp;4/5 &ouml;ffnet einen gro&szlig;en Block. &bdquo;&mdash;&ldquo; = kein eigenes Gate (ab Regions-Ankunft verf&uuml;gbar). Fraktions-Quests haben eigene Ruf-/Contribution-Schwellen (Tab Fraktionen).<br><span style="color:var(--warn)">Verpassbar:</span> Beim Lager-Umzug nach Pailune verschwinden die Lager-NPCs (Lola/Gunter/Harry) samt offener Requests &mdash; vorher erledigen. Die Bewohner-Requests im Greymane Camp stehen in der Greymane-Sektion.</div>';
-  el.innerHTML=intro+'<div class="sq-regbar">'+chips+'</div>'+spLane+lanes;
+  const sqDoneAll=SIDE_QUESTS.filter(isDone).length;
+  const progressBar='<div class="sq-progress-bar">&#10003; Erledigt: <b style="color:var(--glo)"><span id="sq-progress">'+sqDoneAll+'/'+SIDE_QUESTS.length+'</span></b> <button class="cl-reset" onclick="if(confirm(\'Alle Side-Quest-Haken zurücksetzen?\')){saveSQ([]);renderSideQuests();if(typeof renderQuestHero===\'function\')renderQuestHero();}">Zurücksetzen</button></div>';
+  el.innerHTML=intro+progressBar+'<div class="sq-regbar">'+chips+'</div>'+spLane+lanes;
 }
 
 // ===== QUEST HERO (Cockpit-Ueberblick) =====
@@ -8967,6 +9003,7 @@ function renderQuestHero(){
     tQ=FAC_DATA.regions.reduce((n,r)=>n+r.factions.reduce((m,f)=>m+f.quests.length,0),0);
   }
   const sqTotal=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
+  const sqDone=(typeof loadSQ==='function'&&typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.filter(q=>loadSQ().includes(q.q)).length:0;
   const regCount={};
   MAIN_QUESTS.forEach(c=>{const a=(typeof chapAccent==='function')?chapAccent(c.ch):null;if(a)regCount[a.region]=(regCount[a.region]||0)+1;});
   const regRows=REG_KEYS.filter(r=>regCount[r]).map(r=>({r,n:regCount[r]}));
@@ -8986,7 +9023,7 @@ function renderQuestHero(){
       <div class="qhero-stat"><span class="qhero-stat-val">${numCh.length}<span class="qhero-stat-sub">${doneChCount} erledigt</span></span><span class="qhero-stat-lbl">Kapitel</span></div>
       <div class="qhero-stat"><span class="qhero-stat-val">${totalMQ}</span><span class="qhero-stat-lbl">Hauptquests</span></div>
       <div class="qhero-stat"><span class="qhero-stat-val">${tF}<span class="qhero-stat-sub">${tQ} Quests</span></span><span class="qhero-stat-lbl">Fraktionen</span></div>
-      <div class="qhero-stat"><span class="qhero-stat-val">${sqTotal}</span><span class="qhero-stat-lbl">Side-Quests</span></div>
+      <div class="qhero-stat"><span class="qhero-stat-val">${sqDone}<span class="qhero-stat-sub">${sqTotal} gesamt</span></span><span class="qhero-stat-lbl">Side-Quests erledigt</span></div>
     </div>
     <div class="qhero-heat">${heat||'<span style="font-size:10px;color:var(--dim)">Story-Schauplätze</span>'}</div>
     <div class="qhero-next"><span style="color:var(--dim)">Nächster Schritt:</span>${chips}</div>`;
@@ -9337,6 +9374,8 @@ function updateStats(){
   const gmTotal=GREYMANE_COMMISSIONS.length;
   const sancDone=loadTE().filter(id=>SANCTUM_IDS.includes(id)).length;
   const sancTotal=SANCTUM_IDS.length;
+  const sqTotal=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
+  const sqDone=(typeof loadSQ==='function'&&typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.filter(q=>loadSQ().includes(q.q)).length:0;
   const set=(valId,subId,barId,done,total)=>{
     const el=document.getElementById(valId);
     const sb=document.getElementById(subId);
@@ -9357,7 +9396,8 @@ function updateStats(){
       {label:'Greymane',done:gmDone,total:gmTotal},
       {label:'Sanctums',done:sancDone,total:sancTotal},
       {label:'Waffen',done:loadWepDone().length,total:WEAPONS.length},
-      {label:'Missables',done:loadMissDone().length,total:MISSABLE_ITEMS.length}
+      {label:'Missables',done:loadMissDone().length,total:MISSABLE_ITEMS.length},
+      {label:'Side-Quests',done:sqDone,total:sqTotal}
     ].map(x=>`<div class="stat-block"><div class="stat-label">${x.label}</div><div class="stat-val">${x.done}</div><div class="stat-sub">von ${x.total}</div><div class="stat-mini-bar"><div class="stat-mini-fill" style="width:${Math.round(x.done/x.total*100)}%"></div></div></div>`).join('');
   }
 }
@@ -9570,6 +9610,8 @@ function renderOverview(){
   const wepDone=loadWepDone().length, wepTotal=WEAPONS.length;
   const msDone=loadMissDone().length, msTotal=MISSABLE_ITEMS.length;
   const teDone=loadTE().length, teTotal=TRUE_ENDING.length;
+  const sqTotal=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
+  const sqDone=(typeof loadSQ==='function'&&typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.filter(q=>loadSQ().includes(q.q)).length:0;
   const cards=[
     {icon:'⚔️',label:'Bosse besiegt',done:bossDone,total:bossTotal,tab:'bosses'},
     {icon:'🎖️',label:'Greymane',done:gmDone,total:gmTotal,tab:'greymane',sub:`+${gmDone*3} Inventarslots`},
@@ -9577,11 +9619,13 @@ function renderOverview(){
     {icon:'🗡️',label:'Waffen',done:wepDone,total:wepTotal,tab:'waffen'},
     {icon:'📋',label:'True Ending',done:teDone,total:teTotal,tab:'bosses'},
     {icon:'⚠️',label:'Missables erledigt',done:msDone,total:msTotal,tab:'missables'},
+    {icon:'📜',label:'Side-Quests',done:sqDone,total:sqTotal,go:"showSec('quests')"},
   ];
   const grid=document.getElementById('ov-grid');
   if(grid)grid.innerHTML=cards.map(c=>{
     const pct=c.total?Math.round(c.done/c.total*100):0;
-    return `<div class="ov-card" onclick="clTab('${c.tab}')">
+    const nav=c.go||("clTab('"+c.tab+"')");
+    return `<div class="ov-card" onclick="${nav}">
       <div class="ov-pct">${pct}%</div>
       <div class="ov-card-icon">${c.icon}</div>
       <div class="ov-card-label">${c.label}</div>
