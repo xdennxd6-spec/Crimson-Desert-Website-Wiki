@@ -1759,7 +1759,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
     <h3 class="sub-t" style="margin-top:24px">🔮 Synthese-Mechanik <span style="font-size:11px;color:var(--dim);font-weight:400">(Regulär vs. Spezial)</span></h3>
     <div id="synth-guide" style="font-size:12.5px;color:var(--text);line-height:1.65;margin-bottom:10px">
-      <p style="margin:0 0 9px;color:var(--dim)">Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot. An der Hexe: <em>Craft Abyss Gear</em> wählen, dann mit R2/RT in den Synthese-Tab wechseln. Die <strong>Core-Tabelle oben</strong> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt alle 185 datamineten Synthese-Rezepte. Dieser Block erklärt die Mechanik dahinter.</p>
+      <p style="margin:0 0 9px;color:var(--dim)">Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot. An der Hexe: <em>Craft Abyss Gear</em> wählen, dann mit R2/RT in den Synthese-Tab wechseln. Die <strong>Core-Tabelle oben</strong> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt die 175 datamineten Core-Synthese-Rezepte (Nicht-Core-Craftables wie die Sigil-Mount-Amulette stehen separat darunter). Dieser Block erklärt die Mechanik dahinter.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0">
         <div style="padding:10px 13px;background:rgba(201,162,39,.04);border:1px solid var(--bdr);border-radius:8px">
           <strong style="color:var(--gdim)">Regulaere Synthese</strong> <span style="color:var(--dim);font-size:11px">(sicher, deterministisch)</span>
@@ -1767,7 +1767,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
         </div>
         <div style="padding:10px 13px;background:rgba(180,84,204,.05);border:1px solid var(--bdr);border-radius:8px">
           <strong style="color:#b554cc">Spezial-Synthese</strong> <span style="color:var(--dim);font-size:11px">(Gluecksspiel, kein Blueprint)</span>
-          <p style="margin:6px 0 0;color:var(--dim)">Zwei Cores werden verbraucht, der <strong>Typ</strong> des Ergebnisses ist <strong>zufaellig</strong>; nur die Stufe skaliert mit dem Input. <strong>Einziger Weg zu Greater-Cores</strong> (ca. 4% pro Versuch, im Schnitt ~25 Versuche). Greater-Cores sind stark, haben aber Haltbarkeit und zerbrechen mit der Zeit.</p>
+          <p style="margin:6px 0 0;color:var(--dim)">Zwei Cores werden verbraucht, der <strong>Typ</strong> des Ergebnisses ist <strong>zufaellig</strong>; nur die Stufe skaliert mit dem Input. <strong>Einziger Weg zu Greater-Cores</strong> (im deutschen Spiel „Wütende“ Cores; ca. 4% pro Versuch, im Schnitt ~25 Versuche). Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden). <strong>Wichtig:</strong> Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores — <strong>nicht</strong> zu Stufe III (Stufe III = +12%).</p>
         </div>
       </div>
       <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin:4px 0 12px">
@@ -1794,13 +1794,16 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <p style="margin:8px 0 0;font-size:10.5px;color:var(--gdim)">Bezug zum Baum unten: dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</p>
     </div>
     <h3 class="sub-t" style="margin-top:24px">🧪 Witch-Synthese-Baum <span style="font-size:11px;color:var(--dim);font-weight:400">(questlog-Datamine)</span></h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>185 Cores</strong> in 103 Familien mit ihren Synthese-Rezepten und Materialkosten. Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong> — 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst". Datenbasis: dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>175 Core-Rezepte</strong> in 93 Familien mit ihren Synthese-Rezepten und Materialkosten (Nicht-Core-Craftables wie die Sigil-Mount-Amulette sind separat darunter gelistet). Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong> — 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst". Datenbasis: dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear).</div>
     <div class="fbar">
       <select class="fs" id="sf-tier" onchange="renderSynthesis()"><option value="">Alle Stufen</option><option value="1">Stufe I</option><option value="2">Stufe II</option><option value="3">Stufe III</option><option value="0">Basis / Sonstige</option></select>
       <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);cursor:pointer"><input type="checkbox" id="sf-eff" onchange="renderSynthesis()"> nur mit bekanntem Effekt</label>
       <span id="synth-count" style="font-size:11px;color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="grid" id="synth-grid"></div>
+    <h3 class="sub-t" style="margin-top:26px">🧰 Sonstiges bei der Hexe herstellbar <span style="font-size:11px;color:var(--dim);font-weight:400">(keine Cores)</span></h3>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">An derselben Hexen-Werkbank entstehen auch <strong>Nicht-Core-Gegenstände</strong> — allen voran die <strong>Sigil-Mount-Amulette</strong> (im Spiel <em>„Sigil of Solidarity“ / dt. „Siegel der Solidarität“</em>), die je ein legendäres Reittier dauerhaft freischalten, sowie einige Wertmaterialien. Sie tauchen im Datamine im selben Rezept-Baum auf, sind aber <strong>keine Abyss-Cores</strong> und hier bewusst getrennt gelistet.</div>
+    <div id="witch-craftables"></div>
   </section>
 
   <section class="sec" id="sec-crafting">
@@ -3063,7 +3066,7 @@ const WITCH_SYNTHESIS=[
   {name:"Abyssal Rays",family:"Abyssal Rays",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Haste I + 1x Surge I + 1x Fortitude I",effect:"Abyss-Strahlen-Angriff",slot:"Weapon",grade:0,price:2013,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_036.webp"},
   {name:"Abyssbane I",family:"Abyssbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Composure I + 1x Haste I",effect:"+Schaden gegen Abysswesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:533,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
   {name:"Abyssbane II",family:"Abyssbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Abyssbane I",effect:"+Schaden gegen Abysswesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
-  {name:"Abyssbane III",family:"Abyssbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Abyssbane II",effect:"+40% Schaden gegen Abysswesen",slot:"Both",grade:0,price:2133,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
+  {name:"Abyssbane III",family:"Abyssbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Abyssbane II",effect:"+12% Schaden gegen Abysswesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:2133,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_089.webp"},
   {name:"Aegis I",family:"Aegis",tier:1,roman:"I",role:"tier-core",recipe:"1x Abyss Cell + 1x Azurite",effect:"Damage Reduction",slot:"Armor",grade:0,price:513,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_008.webp"},
   {name:"Aegis II",family:"Aegis",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Aegis I",effect:"Damage Reduction",slot:"Armor",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_008.webp"},
   {name:"Aegis III",family:"Aegis",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Aegis II",effect:"Damage Reduction",slot:"Armor",grade:0,price:2167,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_008.webp"},
@@ -3080,7 +3083,7 @@ const WITCH_SYNTHESIS=[
   {name:"Ator's Orb",family:"Ator's Orb",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Fortitude I + 1x Vitality I",effect:"Forward/Heavy schiesst Tracking-Orbs",slot:"Weapon",grade:0,price:1973,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_070.webp"},
   {name:"Beastbane I",family:"Beastbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Composure I",effect:"+Schaden gegen Wildtiere (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:520,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
   {name:"Beastbane II",family:"Beastbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Beastbane I",effect:"+Schaden gegen Wildtiere (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1060,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
-  {name:"Beastbane III",family:"Beastbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Beastbane II",effect:"+40% Schaden gegen Wildtiere",slot:"Both",grade:0,price:2127,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
+  {name:"Beastbane III",family:"Beastbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Beastbane II",effect:"+12% Schaden gegen Wildtiere (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:2127,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_088.webp"},
   {name:"Blessing of Nature I",family:"Blessing of Nature",tier:1,roman:"I",role:"tier-core",recipe:"1x Vigor I + 1x Vitality I",effect:"10% / 20% / 30% Chance auf zusätzliche Sammel-Items beim Pflücken (Tier I/II/III)",slot:"Armor",grade:0,price:433,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_101.webp"},
   {name:"Blessing of Nature II",family:"Blessing of Nature",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Blessing of Nature I",effect:"10% / 20% / 30% Chance auf zusätzliche Sammel-Items beim Pflücken (Tier I/II/III)",slot:"Armor",grade:0,price:793,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_101.webp"},
   {name:"Blessing of Nature III",family:"Blessing of Nature",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Blessing of Nature II",effect:"10% / 20% / 30% Chance auf zusätzliche Sammel-Items beim Pflücken (Tier I/II/III)",slot:"Armor",grade:0,price:1607,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_101.webp"},
@@ -3095,7 +3098,7 @@ const WITCH_SYNTHESIS=[
   {name:"Blessing of the Forest III",family:"Blessing of the Forest",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Blessing of the Forest II",effect:"10% / 20% / 30% Chance auf zusätzliches Holz beim Fällen (Tier I/II/III)",slot:"Armor",grade:0,price:1613,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_103.webp"},
   {name:"Bloodbane I",family:"Bloodbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Vitality I",effect:"+Schaden gegen Menschen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:500,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
   {name:"Bloodbane II",family:"Bloodbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Bloodbane I",effect:"+Schaden gegen Menschen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1100,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
-  {name:"Bloodbane III",family:"Bloodbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Bloodbane II",effect:"+40% Schaden gegen Menschen",slot:"Both",grade:0,price:2140,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
+  {name:"Bloodbane III",family:"Bloodbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Bloodbane II",effect:"+12% Schaden gegen Menschen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:2140,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_086.webp"},
   {name:"Colossal Might",family:"Colossal Might",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Ascent I + 1x Fortification I",effect:"Kolossale Macht (Skill 17)",slot:"Weapon",grade:0,price:1973,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_129.webp"},
   {name:"Companionship I",family:"Companionship",tier:1,roman:"I",role:"tier-core",recipe:"1x Vitality I + 1x Composure I + 1x Haste I",effect:"Zusätzlicher Trust mit Begleitern/Pets (Tier I/II/III steigend)",slot:"Armor",grade:0,price:473,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_109.webp"},
   {name:"Companionship II",family:"Companionship",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Companionship I",effect:"Zusätzlicher Trust mit Begleitern/Pets (Tier I/II/III steigend)",slot:"Armor",grade:0,price:967,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_109.webp"},
@@ -3157,7 +3160,7 @@ const WITCH_SYNTHESIS=[
   {name:"Heart of the Serpent",family:"Heart of the Serpent",tier:0,roman:"",role:"effect-core",recipe:"1x Vitality I + 1x Fortitude I + 1x Composure I",effect:null,slot:"",grade:0,price:360,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_066.webp"},
   {name:"Hexebane I",family:"Hexebane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Fortitude I",effect:"+Schaden gegen verfluchte/Erd-Wesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:540,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_077.webp"},
   {name:"Hexebane II",family:"Hexebane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Hexebane I",effect:"+Schaden gegen verfluchte/Erd-Wesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1067,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_077.webp"},
-  {name:"Hexebane III",family:"Hexebane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Hexebane II",effect:"+40% Schaden gegen Erdwesen",slot:"Both",grade:0,price:2147,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_077.webp"},
+  {name:"Hexebane III",family:"Hexebane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Hexebane II",effect:"+12% Schaden gegen verfluchte/Erd-Wesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:2147,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_077.webp"},
   {name:"Hound's Claws",family:"Hound's Claws",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Vigor I + 1x Fortitude I",effect:"Hundsklauen-Angriff (Skill 7)",slot:"Weapon",grade:0,price:1353,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_079.webp"},
   {name:"Howling of Chaos",family:"Howling of Chaos",tier:0,roman:"",role:"effect-core",recipe:"1x Shockward I + 1x Composure I + 1x Haste I + 1x Insight I",effect:"Chaosheulen — Angriff beim Parieren",slot:"Weapon",grade:0,price:1587,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_158.webp"},
   {name:"Infinite Arrows I",family:"Infinite Arrows",tier:1,roman:"I",role:"tier-core",recipe:"1x Swift I + 1x Composure I + 1x Vigor I",effect:"Chance, keine Pfeile zu verbrauchen: 20% / 40% / 60% (Tier I/II/III; 100% nur mit Greater)",slot:"Weapon",grade:0,price:407,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp"},
@@ -3176,7 +3179,7 @@ const WITCH_SYNTHESIS=[
   {name:"Lightning God's Affliction",family:"Lightning God's Affliction",tier:0,roman:"",role:"effect-core",recipe:"1x Shockward I + 1x Destruction I + 1x Swift I + 1x Insight I",effect:"Blitzschlag auf Feinde — Schaden. 1.627 Silber",slot:"Weapon",grade:0,price:1627,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_155.webp"},
   {name:"Malicebane I",family:"Malicebane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Insight I + 1x Surge I",effect:"+Schaden gegen mächtige Feinde/Bosse (Tier I/II/III: +4% / +8% / +12%)",slot:"Weapon",grade:0,price:547,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
   {name:"Malicebane II",family:"Malicebane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Malicebane I",effect:"+Schaden gegen mächtige Feinde/Bosse (Tier I/II/III: +4% / +8% / +12%)",slot:"Weapon",grade:0,price:1033,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
-  {name:"Malicebane III",family:"Malicebane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Malicebane II",effect:"+40% Schaden gegen mächtige Feinde",slot:"Both",grade:0,price:2120,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
+  {name:"Malicebane III",family:"Malicebane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Malicebane II",effect:"+12% Schaden gegen mächtige Feinde/Bosse (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:2120,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp"},
   {name:"Momentum",family:"Momentum",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Swift I + 1x Insight I + 1x Fortitude I",effect:"+35% Turning Slash Schaden",slot:"Armor",grade:0,price:633,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_006.webp"},
   {name:"Narima's Horn",family:"Narima's Horn",tier:0,roman:"",role:"witch-other",recipe:"3x Dragon Claw Horn + 1x Stalactite + 2x Feather",effect:null,slot:"",grade:0,price:2000,icon:"/assets/_sprites/itemicon_prefab_cd_t0000_horn_flute_0002.webp"},
   {name:"Orbs of Lightning",family:"Orbs of Lightning",tier:0,roman:"",role:"effect-core",recipe:"1x Shockward I + 1x Destruction I + 1x Insight I + 1x Composure I + 1x Haste I",effect:"Blitzkugeln (imbue Lightning)",slot:"Weapon",grade:0,price:2020,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_048.webp"},
@@ -3187,7 +3190,7 @@ const WITCH_SYNTHESIS=[
   {name:"Platinum",family:"Platinum",tier:0,roman:"",role:"witch-other",recipe:"1x Gold Bar + 4x Brimstone + 3x Mercury + 2x Holy Water",effect:null,slot:"",grade:0,price:100000,icon:"/assets/_sprites/itemicon_prefab_cd_t0000_platinumbar_0001.webp"},
   {name:"Primalbane I",family:"Primalbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Aegis I",effect:"+Schaden gegen Walker/Primalwesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:500,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
   {name:"Primalbane II",family:"Primalbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Primalbane I",effect:"+Schaden gegen Walker/Primalwesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1067,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
-  {name:"Primalbane III",family:"Primalbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Primalbane II",effect:"+40% Schaden gegen Walker",slot:"Both",grade:0,price:2133,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
+  {name:"Primalbane III",family:"Primalbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Primalbane II",effect:"+12% Schaden gegen Walker/Primalwesen (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:2133,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_071.webp"},
   {name:"Putrid Touch",family:"Putrid Touch",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Vitality I + 1x Composure I + 1x Ascent I",effect:"Fäulnisberührung (Skill 17)",slot:"Weapon",grade:0,price:1980,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_150.webp"},
   {name:"Queen's Fangs",family:"Queen's Fangs",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Insight I + 1x Vitality I + 1x Composure I",effect:"Königinnenzähne (Hold Skill 3)",slot:"Weapon",grade:0,price:2027,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_147.webp"},
   {name:"Relentless",family:"Relentless",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Swift I",effect:"Schaden steigt mit aufeinanderfolgenden Treffern (Combo-Skalierung; Treffer-Erleiden resettet den Zähler)",slot:"Weapon",grade:0,price:693,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_124.webp"},
@@ -3223,7 +3226,7 @@ const WITCH_SYNTHESIS=[
   {name:"Stamina Transference",family:"Stamina Transference",tier:0,roman:"",role:"effect-core",recipe:"1x Vigor I + 1x Haste I",effect:"Stamina-Steal — Stamina-Rückgewinn bei Treffern",slot:"Weapon",grade:0,price:513,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_016.webp"},
   {name:"Steelbane I",family:"Steelbane",tier:1,roman:"I",role:"tier-core",recipe:"1x Destruction I + 1x Fortification I",effect:"+Schaden gegen Maschinen/Soldaten (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:540,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_058.webp"},
   {name:"Steelbane II",family:"Steelbane",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Steelbane I",effect:"+Schaden gegen Maschinen/Soldaten (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:1093,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_058.webp"},
-  {name:"Steelbane III",family:"Steelbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Steelbane II",effect:"+40% Schaden gegen Maschinen",slot:"Both",grade:0,price:2100,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_058.webp"},
+  {name:"Steelbane III",family:"Steelbane",tier:3,roman:"III",role:"tier-upgrade",recipe:"2x Steelbane II",effect:"+12% Schaden gegen Maschinen/Soldaten (Tier I/II/III: +4% / +8% / +12%)",slot:"Both",grade:0,price:2100,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_058.webp"},
   {name:"Storm Fang",family:"Storm Fang",tier:0,roman:"",role:"effect-core",recipe:"1x Destruction I + 1x Insight I + 1x Shockward I + 1x Haste I + 1x Swift I",effect:"Kettenblitze — Schaden an mehreren Feinden. 1.993 Silber",slot:"Weapon",grade:0,price:1993,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_083.webp"},
   {name:"Surge I",family:"Surge",tier:1,roman:"I",role:"tier-core",recipe:"1x Abyss Cell + 1x Diamond",effect:"Swim Speed +2% / +4% / +6% (Tier I/II/III)",slot:"Armor",grade:0,price:400,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_023.webp"},
   {name:"Surge II",family:"Surge",tier:2,roman:"II",role:"tier-upgrade",recipe:"2x Surge I",effect:"Swim Speed +2% / +4% / +6% (Tier I/II/III)",slot:"Armor",grade:0,price:807,icon:"/assets/_sprites/itemicon_abyssgear_socket_normal_023.webp"},
@@ -8666,6 +8669,11 @@ function coreTierStrip(name){
   const pills=t.vals.map((v,i)=>'<span class="ct-pill"><b>'+roman[i]+'</b> '+t.stat+': '+fmt(v)+'</span>').join('');
   return '<div class="core-tiers"><span class="ct-lbl">Stufen-Werte</span>'+pills+'</div>';
 }
+function coreGreaterNote(c){
+  const isGreater=/^Greater\b/.test(c.name)||/^Rampaging\b/.test(c.name)||/Greater/.test(c.source||'');
+  if(!isGreater)return '';
+  return '<div style="font-size:10.5px;color:#b554cc;margin-top:4px">⚡ Greater-Core (im dt. Spiel „Wütend“) — nur per Spezial-Synthese (~4%), mit Haltbarkeit: zerbricht und ist nicht reparierbar</div>';
+}
 function renderCores(){
   const f=document.getElementById('cf-slot').value;
   document.getElementById('core-tb').innerHTML=CORES.map(c=>{
@@ -8678,7 +8686,7 @@ function renderCores(){
         ${ico?`<img src="${ico}" data-cdn="${CORE_IMGS_CDN[c.name]||''}" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.style.display='none';}" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
         <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()">▶</span>`:''}
       </div></td>
-      <td>${c.effect}${coreTierStrip(c.name)}</td>
+      <td>${c.effect}${coreTierStrip(c.name)}${coreGreaterNote(c)}</td>
       <td style="font-size:11.5px;color:var(--dim)">${c.source}</td>
       <td><span class="tag ${c.slot==='Weapon'?'tr':c.slot==='Armor'?'tg':'tw'}">${c.slot}</span></td>
     </tr>`;
@@ -8690,7 +8698,8 @@ function renderSynthesis(){
   const tf=document.getElementById('sf-tier'); const tier=tf?tf.value:'';
   const ef=document.getElementById('sf-eff'); const effOnly=!!(ef&&ef.checked);
   const fams={};
-  WITCH_SYNTHESIS.forEach(c=>{(fams[c.family]=fams[c.family]||[]).push(c);});
+  const SYNTH_CORES=WITCH_SYNTHESIS.filter(c=>c.role!=='witch-other');
+  SYNTH_CORES.forEach(c=>{(fams[c.family]=fams[c.family]||[]).push(c);});
   const order=Object.keys(fams).sort((a,b)=>a.localeCompare(b));
   let shown=0;
   const matchC=c=>(tier===''||String(c.tier)===tier)&&(!effOnly||!!c.effect);
@@ -8716,7 +8725,57 @@ function renderSynthesis(){
     }).join('');
     return `<div class="synth-fam${anyShown?'':' hide'}" style="grid-column:1/-1"><div class="sub-t" style="font-size:12.5px;margin:14px 0 2px;color:var(--gdim)">${escHtml(fam)}${items.length>1?` <span style="font-size:10.5px;color:var(--dim);font-weight:400">${items.length} Stufen</span>`:''}</div></div>${cards}`;
   }).join('');
-  const cnt=document.getElementById('synth-count'); if(cnt)cnt.textContent=shown+' / '+WITCH_SYNTHESIS.length+' Cores';
+  const cnt=document.getElementById('synth-count'); if(cnt)cnt.textContent=shown+' / '+SYNTH_CORES.length+' Cores';
+  renderWitchCraftables();
+}
+
+// ===== WITCH-CRAFTABLES: Sigil-Mount-Amulette + sonstige Nicht-Core-Items (separat vom Core-Synthese-Baum) =====
+// Hinweis: Im Datamine heissen die Sigil-Amulette "Riding [Tier] Amulet 0" (interne IDs). Der IM SPIEL
+// angezeigte Name ist "Sigil of Solidarity (X)" / dt. "Siegel der Solidaritaet" (verifiziert: gaming.tools,
+// game8, Gamingdeputy DE). Hier wird daher der Spielname angezeigt + das Reittier verlinkt.
+const SIGIL_AMULETS={
+  "Riding Bear Amulet":{mount:"White Bear",sigil:"Sigil of Solidarity (White Bear)"},
+  "Riding Wolf Amulet":{mount:"Silver Fang",sigil:"Sigil of Solidarity (Silver Fang)"},
+  "Riding Deer Amulet":{mount:"Snowwhite Deer",sigil:"Sigil of Solidarity (Snowwhite Deer)"},
+  "Riding Warthog Amulet":{mount:"Rock Tusk Warthog",sigil:"Sigil of Solidarity (Rock Tusk Warthog)"},
+  "Riding AlpineIbex Amulet":{mount:"Icicle Edge Alpine Ibex",sigil:"Sigil of Solidarity (Icicle Edge Alpine Ibex)"}
+};
+function renderWitchCraftables(){
+  const host=document.getElementById('witch-craftables'); if(!host)return;
+  const other=WITCH_SYNTHESIS.filter(c=>c.role==='witch-other');
+  const clean=n=>String(n||'').replace(/\s+\d+$/,'');
+  const amulets=other.filter(c=>SIGIL_AMULETS[clean(c.name)]);
+  const misc=other.filter(c=>!SIGIL_AMULETS[clean(c.name)]);
+  const ico=c=>c.icon?`<img class="craft-ico" src="${SYNTH_CDN}${c.icon}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">`:'';
+  const amuletCard=c=>{
+    const m=SIGIL_AMULETS[clean(c.name)];
+    return `<div class="card">
+      <div class="ct">${ico(c)}<span>${escHtml(m.sigil)}</span><span class="tag tw">Sigil-Mount</span></div>
+      <div class="crows">
+        <div class="crow"><span class="cl">Reittier</span><span class="cv"><span class="xref" onclick="showSec('mounts')">${escHtml(m.mount)}</span> — dauerhaft freigeschaltet</span></div>
+        <div class="crow"><span class="cl">Material</span><span class="cv">${escHtml(c.recipe)}</span></div>
+        <div class="crow"><span class="cl">Herstellung</span><span class="cv" style="color:var(--dim)">Hexe → „Abyss-Ausrüstung herstellen“ → „Besondere Gegenstände“; danach aus dem Inventar benutzen</span></div>
+        ${c.price?`<div class="crow"><span class="cl">Kosten</span><span class="cv" style="color:var(--dim)">${c.price} Silber</span></div>`:''}
+      </div>
+    </div>`;
+  };
+  const miscCard=c=>`<div class="card">
+      <div class="ct">${ico(c)}<span>${escHtml(clean(c.name))}</span></div>
+      <div class="crows">
+        <div class="crow"><span class="cl">Rezept</span><span class="cv">${escHtml(c.recipe)}</span></div>
+        ${c.price?`<div class="crow"><span class="cl">Wert/Kosten</span><span class="cv" style="color:var(--dim)">${c.price} Silber</span></div>`:''}
+      </div>
+    </div>`;
+  let html='';
+  if(amulets.length){
+    html+=`<div class="sub-t" style="font-size:12.5px;margin:6px 0 4px;color:var(--gdim)">🐴 Sigil-Mount-Amulette <span style="font-size:10.5px;color:var(--dim);font-weight:400">${amulets.length} · schalten je ein legendäres Reittier dauerhaft frei</span></div>`;
+    html+=`<div class="grid">${amulets.map(amuletCard).join('')}</div>`;
+  }
+  if(misc.length){
+    html+=`<div class="sub-t" style="font-size:12.5px;margin:18px 0 4px;color:var(--gdim)">📦 Sonstige Hexen-Craftables <span style="font-size:10.5px;color:var(--dim);font-weight:400">${misc.length} · Wertmaterialien & Spezial-Items, keine Cores</span></div>`;
+    html+=`<div class="grid">${misc.map(miscCard).join('')}</div>`;
+  }
+  host.innerHTML=html||'<div style="font-size:12px;color:var(--dim)">Keine Einträge.</div>';
 }
 
 // ===== CRAFTING =====
