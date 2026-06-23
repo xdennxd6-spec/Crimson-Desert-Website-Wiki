@@ -1609,6 +1609,8 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 <nav id="sidebar" aria-label="Hauptnavigation">
   <div class="sb-hd"><div class="sb-t">Crimson Desert</div><div class="sb-s">Guide Dashboard · Patch 1.12</div></div>
   <div class="sb-nav">
+    <div class="nav-grp">Einstieg</div>
+    <div class="ni" data-sec="beginner" onclick="showSec('beginner')"><span class="nicon">🎓</span><span class="nlabel">Anfänger-Guide</span></div>
     <div class="nav-grp">Kampf</div>
     <div class="ni active" data-sec="bosses" onclick="showSec('bosses')"><span class="nicon">🗡️</span><span class="nlabel">Bosse</span></div>
     <div class="ni" data-sec="skills" onclick="showSec('skills')"><span class="nicon">⚡</span><span class="nlabel">Skills</span></div>
@@ -1701,6 +1703,62 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <span id="scnt" role="status" aria-live="polite"></span>
   </div>
 
+  <section class="sec" id="sec-beginner">
+    <h2 class="sec-t">🎓 Anfänger-Guide</h2>
+    <div class="disarm-hero">
+      <p>Die wichtigsten Kampf-Grundlagen und die Steuerung von <strong>Crimson Desert</strong> auf einen Blick. Faustregel der Guides: <strong>Menschen-Bosse parieren, Monster-Bosse ausweichen.</strong> Detail-Strategien zu einzelnen Bossen findest du im <a href="#" onclick="showSec('bosses');return false;">Bosse-Tab</a>.</p>
+    </div>
+
+    <div class="sub-t" style="margin-top:0;scroll-margin-top:72px">Kampf-Grundlagen</div>
+    <table class="farm-tbl" style="margin-bottom:20px">
+      <thead><tr><th>Mechanik</th><th>Erklärung</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Parieren (Parry)</strong></td><td>Getimtes Blocken (<span class="kbd">L1 / LB / Ctrl</span>) genau im Treffermoment. Ein perfekter Parry stellt etwas Ausdauer + Spirit her, füllt die Stagger-Leiste des Gegners und öffnet ein Konterfenster. <strong>Greifangriffe (Grabs) lassen sich NICHT parieren</strong> — nur ausweichen.</td></tr>
+        <tr><td><strong>Perfect Dodge</strong></td><td>Ausweichen (<span class="kbd">○ / B / Alt</span>) im letzten Moment → grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff. Verzeihender als Parry, unterbricht aber keine Combos — danach kann gekontert werden.</td></tr>
+        <tr><td><strong>Blocken / Guard Break</strong></td><td>Guard halten blockt, kostet aber Ausdauer (schwere Treffer mehr). Ist die Ausdauer leer, <strong>bricht die Deckung</strong>. Gegnerische Deckung brichst du mit schweren Angriffen (<span class="kbd">R2 / RT / RMB</span>).</td></tr>
+        <tr><td><strong>Rote &amp; blaue Signale</strong></td><td><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen. <strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen.</td></tr>
+        <tr><td><strong>Stamina vs. Spirit</strong></td><td><strong>Ausdauer (Stamina):</strong> Sprinten, Ausweichen, Klettern, Blocken, die meisten Skills. <strong>Spirit:</strong> separate Ressource für Force-Skills (z.B. Force Palm), wird über <em>Focus</em> wieder aufgefüllt.</td></tr>
+        <tr><td><strong>Force Palm</strong></td><td>Kurzreichweitiger Energiestoß (<span class="kbd">R3 / RS / MMB</span>), kostet 5 Spirit und senkt die Verteidigung des Ziels (Charakter Kliff; Varianten u.a. Aerial/Healing).</td></tr>
+        <tr><td><strong>Axiom Force</strong></td><td>Telekinetisches Ziehen/Stoßen (<span class="kbd">L3 halten / Tab</span>) — v.a. für Rätsel/Traversal, mit etwas Kampfnutzen. (Eigener Skill, NICHT dasselbe wie Force Palm.)</td></tr>
+        <tr><td><strong>Grappling (Ringkampf)</strong></td><td>Gegner packen, werfen &amp; slammen — für alle Charaktere kostenlos im Stamina-Skillbaum (bis 5 Stufen). Moves wie Throw, Lariat, Giant Swing (Crowd-Control). Geworfene Gegner verletzen, was sie treffen.</td></tr>
+        <tr><td><strong>Bogen-Fokus (Zeitlupe)</strong></td><td>Beim Bogen-Zielen verlangsamt sich kurz die Zeit für manuelles Zielen — nützlich für Schwachpunkte/Stagger.</td></tr>
+        <tr><td><strong>Elemente</strong></td><td>4 Elemente auf Angriffe legen: <strong>Feuer</strong> (Schaden über Zeit), <strong>Frost</strong> (Einfrieren/Shatter), <strong>Blitz</strong> (Schock, stärker gegen Nasse), <strong>Wind</strong> (in die Luft werfen). Gegen Schwächen gezielt einsetzen.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sub-t" style="scroll-margin-top:72px">Wichtige Faustregeln</div>
+    <div class="card" style="margin-bottom:20px">
+      <ul style="margin:0;padding-left:20px;line-height:1.9">
+        <li><strong>Menschen parieren, Monster ausweichen</strong> — die zuverlässigste Grundregel.</li>
+        <li><strong>Grabs (oft rotes Glint) nie parieren</strong>, immer wegrollen.</li>
+        <li><strong>Heilung über Essen</strong>, nicht über Tränke — gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü.</li>
+        <li><strong>Palmar-Pille = Auto-Revive:</strong> Hast du beim Tod eine im Inventar, stehst du sofort mit etwas HP wieder auf.</li>
+        <li><strong>Spirit per Focus auffüllen</strong>, bevor du Force-Skills brauchst.</li>
+        <li><strong>Achte auf Missables</strong> — viele Quests/Items sind kapitelgebunden (siehe Kapitel-Guide &amp; Checklisten).</li>
+      </ul>
+    </div>
+
+    <div class="sub-t" style="scroll-margin-top:72px">Steuerung (Werkseinstellung)</div>
+    <table class="farm-tbl" style="margin-bottom:12px">
+      <thead><tr><th>Aktion</th><th>PlayStation</th><th>Xbox</th><th>PC</th></tr></thead>
+      <tbody>
+        <tr><td>Bewegen / Kamera</td><td>Linker / Rechter Stick</td><td>Linker / Rechter Stick</td><td>WASD / Maus</td></tr>
+        <tr><td>Sprinten</td><td><span class="kbd">✕</span></td><td><span class="kbd">A</span></td><td><span class="kbd">Shift</span></td></tr>
+        <tr><td>Springen</td><td><span class="kbd">▢</span></td><td><span class="kbd">X</span></td><td><span class="kbd">Leertaste</span></td></tr>
+        <tr><td>Ausweichen / Rolle</td><td><span class="kbd">○</span></td><td><span class="kbd">B</span></td><td><span class="kbd">Alt</span></td></tr>
+        <tr><td>Leichter Angriff</td><td><span class="kbd">R1</span></td><td><span class="kbd">RB</span></td><td><span class="kbd">LMB</span></td></tr>
+        <tr><td>Schwerer Angriff</td><td><span class="kbd">R2</span></td><td><span class="kbd">RT</span></td><td><span class="kbd">RMB</span></td></tr>
+        <tr><td>Tritt / unbewaffnet</td><td><span class="kbd">△</span></td><td><span class="kbd">Y</span></td><td><span class="kbd">F</span></td></tr>
+        <tr><td>Blocken / Parieren</td><td><span class="kbd">L1</span></td><td><span class="kbd">LB</span></td><td><span class="kbd">Ctrl</span></td></tr>
+        <tr><td>Force Palm</td><td><span class="kbd">R3</span></td><td><span class="kbd">RS</span></td><td><span class="kbd">MMB</span></td></tr>
+        <tr><td>Axiom Force</td><td><span class="kbd">L3</span> halten</td><td><span class="kbd">LS</span> halten</td><td><span class="kbd">Tab</span></td></tr>
+        <tr><td>Fernkampf zielen</td><td><span class="kbd">L2</span></td><td><span class="kbd">LT</span></td><td><span class="kbd">Q</span></td></tr>
+        <tr><td>Mount rufen</td><td><span class="kbd">D-Pad ↑</span></td><td><span class="kbd">D-Pad ↑</span></td><td><span class="kbd">H</span></td></tr>
+        <tr><td>Heilen / Essen</td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">F3</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.82rem;opacity:.7;margin-bottom:24px">Werkseinstellung — seit Patch 1.09 sind alle Tasten frei belegbar. Eine separate „Parry"-Taste gibt es nicht: Parieren = Block im richtigen Moment. Einzelne Konsolen-Belegungen (Lock-On-Richtung, Menü-Tasten) können je nach Quelle leicht abweichen.</p>
+  </section>
   <section class="sec active" id="sec-bosses">
     <h2 class="sec-t">🗡️ Bosse</h2>
     <div class="stats-strip">
