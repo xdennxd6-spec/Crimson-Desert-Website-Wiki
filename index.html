@@ -1712,8 +1712,8 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="region-heatmap" id="region-heatmap" aria-label="Boss-Verteilung pro Region"></div>
     <div class="fbar">
       <select class="fs" id="bf-reg" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option value="Abyss">The Abyss</option></select>
-      <select class="fs" id="bf-type" onchange="renderBosses()"><option value="">Story + Side + Faction</option><option value="Story">Story</option><option value="Side">Side</option><option value="Faction">Faction</option><option value="Sanctum">Sanctum</option></select>
-      <select class="fs" id="bf-pd" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option><option value="NIE">NIE Parry</option><option value="KEIN">KEIN Parry/Block</option></select>
+      <select class="fs" id="bf-type" onchange="renderBosses()"><option value="">Alle Quest-Typen</option><option value="Story">Story</option><option value="Faction">Faction</option><option value="Side">Side</option><option value="Sanctum">Sanctum</option><option value="World">World-Boss</option><option value="Optional">Optional / Sonstige</option></select>
+      <select class="fs" id="bf-pd" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option></select>
       <select class="fs" id="bf-spoiler" onchange="setSpoilerChapter(this.value)" title="Spoiler-Horizont — blendet Bosse & Kapitel jenseits deines Fortschritts aus" aria-label="Spoiler-Horizont nach Kapitel">
         <option value="0">🔓 Spoiler: alles zeigen</option>
         <option value="1">🔒 Ich bin in Kap. 1</option>
@@ -8510,10 +8510,28 @@ function pmToggleQR(){
 }
 
 // ===== BOSS CHEAT-SHEET GENERATOR =====
+// Leitet den Quest-Typ eines Bosses aus den vorhandenen Feldern ab (heuristisch — der echte Quest-Text bleibt sichtbar)
+function bossType(b){
+  const q=b.quest||"", r=b.region||"";
+  if(/Sanctum/i.test(r)) return "Sanctum";
+  if(b.chapter!=null||/^Story\b/.test(q)) return "Story";
+  if(/World-Boss|World\/|wandernd|keine Quest/i.test(q)) return "World";
+  if(/Faction|Fraktion|House[- ]|Militia|Tribe|Clan|Lords of Unclaimed|Dusksong|Trade-?Group|Silvermoon|Faceless|Society of Progress|Parish|Guild|Wells |Longleaf|Stjar|Order|Wyvernflame|Bounty|Savage Fang|Wetlands|Witches|Hexen/i.test(q)) return "Faction";
+  if(/Side/i.test(q)) return "Side";
+  return "Optional";
+}
+// Leitet Parry-/Dodge-Tags aus dem Freitext ab
+function bossPD(b){
+  const p=(b.parry_or_dodge||"").toLowerCase(), t=[];
+  if(/parr|parier/.test(p)&&!/nie parry|kein parry|niemals parry|nicht parier/.test(p)) t.push("Parry");
+  if(/dodg|ausweich|rollen|roll|evasi|weben/.test(p)) t.push("Dodge");
+  if(/\bmix\b|beides|both/.test(p)){if(!t.includes("Parry"))t.push("Parry");if(!t.includes("Dodge"))t.push("Dodge");}
+  return t;
+}
 function _cheatBosses(){
   const reg=document.getElementById('bf-reg').value,type=document.getElementById('bf-type').value,pd=document.getElementById('bf-pd').value;
   const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
-  return BOSSES.filter(b=>(!reg||b.region.includes(reg))&&(!type||b.quest.includes(type))&&(!pd||b.parry_or_dodge.includes(pd))&&!(sp>0&&b.chapter!=null&&b.chapter>sp));
+  return BOSSES.filter(b=>(!reg||b.region.includes(reg))&&(!type||bossType(b)===type)&&(!pd||bossPD(b).includes(pd))&&!(sp>0&&b.chapter!=null&&b.chapter>sp));
 }
 function openCheatSheet(){
   let ov=document.getElementById('cheatsheet-modal');
@@ -8560,7 +8578,7 @@ function renderBosses(){
   const done=loadBossDone();
   const notes=loadBossNotes();
   document.getElementById('boss-grid').innerHTML=BOSSES.map(b=>{
-    const show=(!reg||b.region.includes(reg))&&(!type||b.quest.includes(type))&&(!pd||b.parry_or_dodge.includes(pd));
+    const show=(!reg||b.region.includes(reg))&&(!type||bossType(b)===type)&&(!pd||bossPD(b).includes(pd));
     const chap=b.chapter?'Kap. '+b.chapter:'Side/Faction';
     const isDone=done.includes(b.name);
     const hasNote=!!notes[b.name];
