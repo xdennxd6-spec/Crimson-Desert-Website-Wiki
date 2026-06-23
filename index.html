@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending</title>
-<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 97 Bosse, 500+ Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
+<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 98 Bosse, 500+ Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
 <link rel="canonical" href="https://crimson-desert-wiki.netlify.app/">
 <meta property="og:title" content="Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending">
 <meta property="og:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
@@ -381,6 +381,7 @@ tbody tr:hover td{background:rgba(255,255,255,.025)}
 .te-it.done .te-tx{text-decoration:line-through;color:var(--dim);opacity:.5}
 .chk{width:17px;height:17px;border:1.5px solid #555;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all .15s}
 .chk:hover{border-color:var(--gold)}
+.chk:focus-visible{outline:2px solid var(--glo);outline-offset:2px}
 .chk.on{background:linear-gradient(135deg,var(--gdim),var(--gold));border-color:var(--gold);box-shadow:0 0 8px rgba(201,162,39,.4)}
 .chk.on::after{content:'✓';font-size:10px;color:#000;font-weight:900}
 .te-tx{font-size:12px;line-height:1.55}
@@ -1433,13 +1434,24 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </head>
 <body>
 <h1 class="vh">Crimson Desert Wiki — Guides, Bosse, Quests &amp; Datenbanken</h1>
+<noscript>
+  <div style="max-width:880px;margin:2rem auto;padding:1.5rem;font-family:system-ui,sans-serif;line-height:1.6;color:#e8e2d6;background:#1a1714">
+    <h2>Crimson Desert Wiki &amp; Guide-Dashboard</h2>
+    <p>Dieses interaktive Wiki zu <strong>Crimson Desert</strong> (Pearl Abyss) benötigt JavaScript für das volle Dashboard. Die wichtigsten Guides sind aber auch als eigenständige Seiten verfügbar:</p>
+    <ul>
+      <li><a href="/bosse">Alle Bosse — Komplette Boss-Datenbank</a></li>
+      <li><a href="/waffen">Alle Waffen — Waffen-Datenbank</a></li>
+      <li><a href="/true-ending">True Ending — Checkliste &amp; Guide</a></li>
+    </ul>
+  </div>
+</noscript>
 <a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
 <button id="ham" onclick="toggleSidebar()" aria-label="Menü"><span></span><span></span><span></span></button>
 <div id="mob-overlay" onclick="toggleSidebar()"></div>
 <div id="toast">Kopiert!</div>
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben">↑</button>
 <!-- Easter Egg: Umbras Geheimtagebuch -->
-<div id="ee-overlay" style="display:none" onclick="if(event.target===this)closeEE()">
+<div id="ee-overlay" role="dialog" aria-modal="true" aria-label="Easter Egg" style="display:none" onclick="if(event.target===this)closeEE()">
   <div id="ee-box">
     <button class="ee-close" onclick="closeEE()">✕</button>
     <div class="ee-quill">🖋</div>
@@ -1491,7 +1503,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </div>
 </div>
 <!-- Location modal -->
-<div id="loc-modal" class="loc-modal-overlay" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+<div id="loc-modal" class="loc-modal-overlay" role="dialog" aria-modal="true" aria-label="Location-Details" style="display:none" onclick="if(event.target===this)this.style.display='none'">
   <div class="loc-modal-box">
     <button class="loc-modal-close" onclick="document.getElementById('loc-modal').style.display='none';modalFocusClose()">✕</button>
     <div class="loc-modal-type" id="lm-type"></div>
@@ -1509,7 +1521,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 <div id="core-vid-float"><video autoplay muted loop playsinline></video></div>
 <div id="mount-float-preview"><img id="mfp-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" onerror="_fexFb(this)"><div id="mfp-label"></div></div>
 <!-- Mount in-game screenshot modal -->
-<div id="mount-ingame-modal" onclick="if(event.target===this)closeMountModal()">
+<div id="mount-ingame-modal" role="dialog" aria-modal="true" aria-label="Mount-Details" onclick="if(event.target===this)closeMountModal()">
   <div class="mim-box">
     <img class="mim-img" id="mim-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" onerror="_fexFb(this)">
     <div class="mim-footer">
@@ -1665,7 +1677,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
 </nav>
 
 <!-- Login Modal -->
-<div id="login-overlay" onclick="closeLoginModal(event)">
+<div id="login-overlay" role="dialog" aria-modal="true" aria-label="Anmelden" onclick="closeLoginModal(event)">
   <div id="login-box">
     <button class="lf-close" onclick="closeLoginModal(null)" title="Schließen">✕</button>
     <h2>Konto</h2>
@@ -1675,8 +1687,8 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
       <button class="lf-tab" onclick="switchTab('signup')">Registrieren</button>
     </div>
     <div id="login-err"></div>
-    <div class="lf-row"><label>E-Mail</label><input id="lf-email" type="email" placeholder="deine@email.de" autocomplete="email"></div>
-    <div class="lf-row"><label>Passwort</label><input id="lf-pass" type="password" placeholder="Passwort" autocomplete="current-password" onkeydown="if(event.key==='Enter')submitAuth()"></div>
+    <div class="lf-row"><label for="lf-email">E-Mail</label><input id="lf-email" type="email" placeholder="deine@email.de" autocomplete="email"></div>
+    <div class="lf-row"><label for="lf-pass">Passwort</label><input id="lf-pass" type="password" placeholder="Passwort" autocomplete="current-password" onkeydown="if(event.key==='Enter')submitAuth()"></div>
     <div id="login-confirm-msg">E-Mail gesendet! Bitte bestätige deine Adresse, dann kannst du dich anmelden.</div>
     <button class="lf-submit" id="lf-submit" onclick="submitAuth()">Anmelden</button>
   </div>
@@ -1686,7 +1698,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <div id="sbar">
     <input id="si" type="text" aria-label="Wiki durchsuchen" placeholder="Alles durchsuchen — Bosse, Waffen, Quests, Locations..." oninput="doSearch(this.value)">
     <span class="kbd-hint" title="Ctrl+K oder ⌘K zum Fokussieren">Ctrl K</span>
-    <span id="scnt"></span>
+    <span id="scnt" role="status" aria-live="polite"></span>
   </div>
 
   <section class="sec active" id="sec-bosses">
@@ -1699,7 +1711,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     </div>
     <div class="region-heatmap" id="region-heatmap" aria-label="Boss-Verteilung pro Region"></div>
     <div class="fbar">
-      <select class="fs" id="bf-reg" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>The Abyss</option><option>Endgame</option></select>
+      <select class="fs" id="bf-reg" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option value="Abyss">The Abyss</option></select>
       <select class="fs" id="bf-type" onchange="renderBosses()"><option value="">Story + Side + Faction</option><option value="Story">Story</option><option value="Side">Side</option><option value="Faction">Faction</option><option value="Sanctum">Sanctum</option></select>
       <select class="fs" id="bf-pd" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option><option value="NIE">NIE Parry</option><option value="KEIN">KEIN Parry/Block</option></select>
       <select class="fs" id="bf-spoiler" onchange="setSpoilerChapter(this.value)" title="Spoiler-Horizont — blendet Bosse & Kapitel jenseits deines Fortschritts aus" aria-label="Spoiler-Horizont nach Kapitel">
@@ -1734,7 +1746,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   <section class="sec" id="sec-weapons">
     <h2 class="sec-t">⚔️ Waffen</h2>
     <div class="fbar">
-      <select class="fs" id="wf-type" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
+      <select class="fs" id="wf-type" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen-Compare">⚔️ Compare</button>
     </div>
     <div class="grid" id="weapon-tb"></div>
@@ -11724,6 +11736,9 @@ window.submitAuth = async () => {
   } catch (_) {}
 })();
 </script>
+<nav id="guide-links" aria-label="Guide-Seiten" style="text-align:center;padding:1rem;font-size:.85rem;opacity:.7">
+  <a href="/bosse">Alle Bosse</a> · <a href="/waffen">Alle Waffen</a> · <a href="/true-ending">True Ending</a>
+</nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>
 <script>
 /* ===== URALTE RUINEN / ABYSS-GRENZSTEINE — alle Regionen ===== */
