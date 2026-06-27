@@ -31,6 +31,22 @@
       "purpose": "maskable"
     }
   ],
+  "screenshots": [
+    {
+      "src": "cd_assets/screenshots/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Guide-Dashboard (Desktop) — Bosse, Fortschritt, Regionen"
+    },
+    {
+      "src": "cd_assets/screenshots/screenshot-narrow.png",
+      "sizes": "412x915",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Guide-Dashboard (Mobil) — Bosse, Fortschritt, Regionen"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Bosse",
