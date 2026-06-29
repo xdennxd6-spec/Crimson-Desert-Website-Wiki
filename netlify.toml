@@ -57,7 +57,7 @@ for = "/index.html"
 [[headers]]
 for = "/cd_assets/*"
   [headers.values]
-  Cache-Control = "public, max-age=86400"
+  Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 [[headers]]
 for = "/site.webmanifest"

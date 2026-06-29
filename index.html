@@ -60,7 +60,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://static0.fextralifeimages.com">
 <link rel="preconnect" href="https://cdn.questlog.gg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 <style>
 :root, [data-theme="dark"]{
   --bg:#060606;--bg2:#0d0c0c;--bg3:#161414;--sb:#080605;
@@ -1157,7 +1157,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   /* iOS-Auto-Zoom verhindern: Inputs brauchen mind. 16px */
   #si,#login-box input{font-size:16px}
   /* Touch-Targets vergroessern */
-  .theme-btn{width:34px;height:34px;font-size:13px}
+  .theme-btn{width:40px;height:40px;font-size:14px}
   #ham{width:42px;height:42px}
   /* Breite Tabellen scrollen statt das Layout zu sprengen */
   .farm-tbl,.tools-table,.sim-cmp-tbl{display:block;overflow-x:auto}
@@ -1448,7 +1448,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </div>
 </noscript>
 <a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
-<button id="ham" onclick="toggleSidebar()" aria-label="Menü"><span></span><span></span><span></span></button>
+<button id="ham" onclick="toggleSidebar()" aria-label="Menü" aria-controls="sidebar" aria-expanded="false"><span></span><span></span><span></span></button>
 <div id="mob-overlay" onclick="toggleSidebar()"></div>
 <div id="toast">Kopiert!</div>
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben">↑</button>
@@ -1505,7 +1505,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
   </div>
 </div>
 <!-- Location modal -->
-<div id="loc-modal" class="loc-modal-overlay" role="dialog" aria-modal="true" aria-label="Location-Details" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+<div id="loc-modal" class="loc-modal-overlay" role="dialog" aria-modal="true" aria-label="Location-Details" style="display:none" onclick="if(event.target===this){this.style.display='none';if(typeof modalFocusClose==='function')modalFocusClose();}">
   <div class="loc-modal-box">
     <button class="loc-modal-close" onclick="document.getElementById('loc-modal').style.display='none';modalFocusClose()">✕</button>
     <div class="loc-modal-type" id="lm-type"></div>
@@ -1644,7 +1644,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <div class="ni" data-sec="puzzles" onclick="showSec('puzzles')"><span class="nicon">🧩</span><span class="nlabel">Rätsel</span></div>
     <div class="ni" data-sec="minigames" onclick="showSec('minigames')"><span class="nicon">🎲</span><span class="nlabel">Minispiele</span></div>
     <div class="ni" data-sec="food" onclick="showSec('food')"><span class="nicon">🍲</span><span class="nlabel">Food &amp; Elixirs</span></div>
-    <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Trophäen</span></div>
+    <div class="ni" data-sec="achievements" onclick="showSec('achievements')"><span class="nicon">🏆</span><span class="nlabel">Trophäen &amp; Erfolge</span></div>
     <div class="ni" data-sec="favorites" onclick="showSec('favorites')"><span class="nicon">⭐</span><span class="nlabel">Favoriten</span></div>
     <div class="nav-grp">Meta</div>
     <div class="ni" data-sec="secrets" onclick="showSec('secrets')"><span class="nicon">🕵️</span><span class="nlabel">Secrets &amp; Lore</span></div>
@@ -8247,8 +8247,10 @@ function renderPets(filter){
 
 // ===== MOBILE SIDEBAR =====
 function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
+  const open=document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('mob-overlay').classList.toggle('show');
+  const ham=document.getElementById('ham');
+  if(ham)ham.setAttribute('aria-expanded',open?'true':'false');
 }
 
 // ===== COPY STRATEGIE =====
@@ -11705,6 +11707,14 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(icM&&icM.style.display!=='none'&&icM.style.display!==''){closeItemCompare();return;}
       const mim=document.getElementById('mount-ingame-modal');
       if(mim&&mim.classList.contains('show')){closeMountModal();return;}
+      const lm=document.getElementById('loc-modal');
+      if(lm&&lm.style.display!=='none'&&lm.style.display!==''){lm.style.display='none';if(typeof modalFocusClose==='function')modalFocusClose();return;}
+      const lo=document.getElementById('login-overlay');
+      if(lo&&lo.classList.contains('show')){closeLoginModal(null);return;}
+      const eeO=document.getElementById('ee-overlay');
+      if(eeO&&eeO.style.display!=='none'&&eeO.style.display!==''){closeEE();return;}
+      const csO=document.getElementById('cheatsheet-modal');
+      if(csO&&csO.classList.contains('show')){closeCheatSheet();return;}
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('mob-overlay').classList.remove('show');
       return;
