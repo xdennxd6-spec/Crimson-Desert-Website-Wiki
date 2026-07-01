@@ -2174,6 +2174,7 @@ mark.hl{background:rgba(244,204,82,.28);color:var(--glo);padding:0 2px;border-ra
     <h2 class="sec-t">🐾 Pets</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten.</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25), Füttern +10 bis +35 je nach Futter — das <strong>Lieblingsessen</strong> gibt +35. Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
+    <div id="legendary-pet-guide"></div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
   </section>
@@ -8237,12 +8238,46 @@ function renderPets(filter){
   const filterRow=document.getElementById('pet-filter-row');
   const grid=document.getElementById('pet-grid');
   if(!filterRow||!grid)return;
+  renderLegendaryPetGuide();
   const counts={}; PETS.forEach(p=>{counts[p.type]=(counts[p.type]||0)+1;});
   const filters=[{k:'all',l:'Alle'},{k:'cat',l:'Katzen'},{k:'dog',l:'Hunde'}];
   if(counts.critter)filters.push({k:'critter',l:'Kleintiere'});
   filterRow.innerHTML=filters.map(f=>`<button class="pet-filter-btn${_petFilter===f.k?' active':''}" onclick="renderPets('${f.k}')">${f.l}</button>`).join('');
   const list=_petFilter==='all'?PETS:PETS.filter(p=>p.type===_petFilter);
   grid.innerHTML=list.map(p=>`<div class="pet-card">${_petCardImg(p)}<div class="pet-card-name">${p.name}</div><div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food||'—'}</div></div>`).join('');
+}
+
+// ===== LEGENDÄRE BEGLEITER — FREISCHALT-GUIDE (Iron Eagle, seit 2026-07-01) =====
+// Featured-Guide fuer den mechanischen Adler "Iron Eagle" (der oft als "Marnis Adler" gesuchte Pet).
+// Existenz OFFIZIELL belegt (Pearl Abyss Patch 1.05.00, boardNo=88); die Freischalt-/Zaehm-Schritte
+// sind NUR ueber Community-Guides belegt und teils widerspruechlich -> im Card als (≈) markiert.
+function renderLegendaryPetGuide(){
+  const box=document.getElementById('legendary-pet-guide');
+  if(!box)return;
+  box.innerHTML='<div class="card" style="grid-column:1/-1;border:1px solid rgba(201,162,39,.35);background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(8,8,8,.35));margin:4px 0 22px;padding:16px 18px">'
+    +'<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'
+      +'<div class="boss-img-wrap" style="flex:0 0 110px;max-width:110px"><img class="boss-img" src="cd_assets/pets/cd_pet_iron-eagle.webp" loading="lazy" alt="Iron Eagle" onerror="this.parentElement.style.display=\'none\'"></div>'
+      +'<div style="flex:1;min-width:240px">'
+        +'<div style="font-size:16px;font-weight:700;color:var(--rhi)">🦅 Iron Eagle — Freischalten &amp; Zähmen</div>'
+        +'<div style="margin:7px 0 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">'
+          +'<span class="tag tr">Legendär · Mechanisch</span>'
+          +'<span class="tag tg">Begleiter-Pet (kein Mount)</span>'
+          +'<span class="tag tw">Patch 1.05.00</span>'
+          +'<span style="font-size:9px;font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:3px;padding:2px 5px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
+          +'<span style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:3px;padding:2px 5px;letter-spacing:.04em" title="Schritte nur über Community-Guides belegt, teils widersprüchlich">DETAILS: COMMUNITY (≈)</span>'
+        +'</div>'
+        +'<div style="font-size:12px;color:var(--dim);line-height:1.6">Der mechanische Adler, den viele als „Marnis Adler" suchen. Offizieller Ingame-Name: <strong style="color:var(--gold)">Iron Eagle</strong>. Ein legendärer bio-mechanischer Vogel-<strong>Begleiter</strong> (kein Reittier), laut Lore „vom genialen Erfinder <strong>Marni</strong> erschaffen" — daher die Marni-Verbindung. Offiziell mit <strong>Patch 1.05.00</strong> als zähmbares Pet eingeführt (Pearl Abyss: „erscheint, wenn bestimmte Bedingungen erfüllt sind"). Nicht mit <em>Marni\'s Mechahorse</em> (mechanisches Pferd, siehe Mounts) verwechseln.</div>'
+      +'</div>'
+    +'</div>'
+    +'<div class="crows" style="margin-top:14px;gap:9px;display:flex;flex-direction:column">'
+      +'<div class="crow"><span class="cl">📍 Fundort</span><span class="cv">Hawkstone Ruins, Ost-Region <strong>Delesyia</strong> — auf der Karte nahe dem „A" in „Delesyia", weit im Osten des Kontinents (in Marnis Maschinen-Gebiet, nahe Marni Mechworks).</span></div>'
+      +'<div class="crow"><span class="cl">🗝️ Voraussetzungen</span><span class="cv"><strong>(a)</strong> Item <strong>„Sotdae of Bond"</strong> (Vogel-Futterstelle) aus einer Quest — Quelle umstritten: <em>Trembling-Woods-Reihe / Pororin Forest</em> (TheGamer) oder <em>Unreachable Village</em> (method.gg); landet im Camp-Lager. <strong>(b)</strong> Seltenes Metall als Futter: ca. <strong>20× Mercury</strong> (Quecksilber, je +5 Trust) <em>oder</em> <strong>1× Platinum Bar</strong> (laut mehreren Guides sofort 100 Trust). Mercury aus Silber-Flüssigkeits-Pfützen (mit Frost-Charge-Shot einfrieren) oder Kauf bei Scholastone.</span></div>'
+      +'<div class="crow"><span class="cl">🌅 Schritte</span><span class="cv"><strong>1.</strong> Zu den Hawkstone Ruins reisen. <strong>2.</strong> In der Morgendämmerung (Ingame ~<strong>4:45–5:00 Uhr</strong>) am zentralen Zahnrad-Mechanismus interagieren → Zahnräder rasten ein, der Mechanismus öffnet sich und der Iron Eagle erwacht (Cutscene). <strong>3.</strong> „Sotdae of Bond" in seine Flugbahn stellen und mit Metall bestücken. <strong>4.</strong> Füttern, bis <strong>Trust 100</strong> erreicht ist. <strong>5.</strong> Wenn er landet: Option <strong>„Take In"</strong> wählen → als Pet registriert. <strong style="color:var(--warn)">Nicht auf ihn schießen</strong> — zählt als Angriff und bricht das Zähmen ab.</span></div>'
+      +'<div class="crow"><span class="cl">🎯 Nutzen</span><span class="cv">Legendärer Loot-Begleiter: folgt dir und sammelt nach Kämpfen automatisch Beute/Materialien vom Boden und von Kadavern ein. Kein direkter Kampfbonus.</span></div>'
+      +'<div class="crow"><span class="cl">⚠️ Unsicher</span><span class="cv" style="color:var(--gdim)">Offiziell nennt Pearl Abyss nur Existenz + „bestimmte Bedingungen", nicht die Schritte — alle Detailschritte stammen aus Community-Guides und sind teils widersprüchlich: Uhrzeit 4:45 vs 5:00 Uhr; Sotdae-Bond-Quest umstritten; Platinum-Abkürzung nicht überall bestätigt (Fextralife führt Platinum als Lieblingsfutter, andere Mercury). Im Zweifel im Spiel gegenprüfen.</span></div>'
+      +'<div class="crow"><span class="cl">🔗 Quellen</span><span class="cv" style="font-size:11px"><a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=88" target="_blank" rel="noopener">Pearl Abyss Patch 1.05.00 (offiziell)</a> · <a href="https://www.thegamer.com/crimson-desert-iron-eagle-pet-location-tame-mercury-guide/" target="_blank" rel="noopener">TheGamer</a> · <a href="https://www.method.gg/crimson-desert/iron-eagle-how-to-get-the-bio-mechanical-bird-pet-in-crimson-desert" target="_blank" rel="noopener">method.gg</a> · <a href="https://gamerant.com/crimson-desert-legendary-iron-eagle-pet-location-mercury/" target="_blank" rel="noopener">GameRant</a> · <a href="https://www.pcgamer.com/games/action/crimson-desert-iron-eagle-location-tame/" target="_blank" rel="noopener">PC Gamer</a></span></div>'
+    +'</div>'
+  +'</div>';
 }
 
 // ===== MOBILE SIDEBAR =====
