@@ -619,7 +619,7 @@ select.fs:hover{border-color:var(--survey-red)}
 .boss-recur{display:flex;align-items:flex-start;gap:5px;margin:-3px 0 10px;padding:4px 9px;font-family:var(--f-mono);font-size:10.5px;font-weight:500;line-height:1.4;color:var(--slate);background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--slate)}
 .boss-recur .ri{flex:none;font-size:11px;line-height:1.3;opacity:.85}
 .cm{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px}
-.tag{font-family:var(--f-mono);font-size:10px;padding:2px 9px;font-weight:600;white-space:nowrap;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line)}
+.tag{font-family:var(--f-mono);font-size:10px;padding:2px 9px;font-weight:600;white-space:nowrap;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:7px}
 .tr{background:var(--overprint);color:var(--survey-red);border-color:var(--survey-red)}
 .tg{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 .tx{background:var(--panel);color:var(--iron-soft);border-color:var(--line)}
@@ -1791,17 +1791,18 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 
 /* ── Pets section ── */
 .pet-filter-row{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap}
-.pet-filter-btn{padding:4px 12px;border:1px solid var(--line);background:transparent;color:var(--iron-soft);font-family:var(--f-mono);font-size:10px;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;transition:all .15s}
+.pet-filter-btn{border-radius:999px;padding:4px 12px;border:1px solid var(--line);background:transparent;color:var(--iron-soft);font-family:var(--f-mono);font-size:10px;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;transition:all .15s}
 .pet-filter-btn.active,.pet-filter-btn:hover{border-color:var(--brass);color:var(--brass);background:var(--instr-soft)}
 .pet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px}
-.pet-card{background:var(--vellum-hi);border:1px solid var(--iron-gall);padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:box-shadow .15s;cursor:default;box-shadow:2px 2px 0 var(--paper-shadow)}
+.pet-card{background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:var(--radius);padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:box-shadow .15s;cursor:default;box-shadow:2px 2px 0 var(--paper-shadow)}
 .pet-card:hover{box-shadow:3px 3px 0 var(--paper-shadow)}
-.pet-card-img{width:80px;height:80px;object-fit:contain;background:var(--vellum-hi);border:1px solid var(--iron-gall);filter:grayscale(.15) contrast(1.03)}
-.pet-card-ph{width:80px;height:80px;background:var(--vellum-hi);border:1px solid var(--iron-gall);display:flex;align-items:center;justify-content:center;font-size:42px;line-height:1;filter:grayscale(.15) contrast(1.03)}
+.pet-card-img{width:80px;height:80px;object-fit:contain;background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:12px;filter:grayscale(.15) contrast(1.03)}
+.pet-card-ph{width:80px;height:80px;background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:42px;line-height:1;filter:grayscale(.15) contrast(1.03)}
 .pet-card-name{font-size:12px;color:var(--iron-gall);font-weight:600;text-align:center;line-height:1.3}
 .pet-card-food{font-size:11px;color:var(--brass);text-align:center;line-height:1.3}
 .pet-card-food-lbl{font-family:var(--f-mono);font-size:8.5px;color:var(--iron-soft);text-align:center;text-transform:uppercase;letter-spacing:.08em;margin-bottom:-4px}
-#mount-float-preview{position:fixed;z-index:550;pointer-events:none;display:none;border:1.5px solid var(--brass);overflow:hidden;box-shadow:6px 6px 0 rgba(0,0,0,.4);max-width:320px;background:var(--iron-gall)}
+#legendary-pet-guide .boss-img-wrap{border-radius:12px}
+#mount-float-preview{position:fixed;z-index:550;pointer-events:none;display:none;border:1.5px solid var(--brass);border-radius:var(--radius);overflow:hidden;box-shadow:6px 6px 0 rgba(0,0,0,.4);max-width:320px;background:var(--iron-gall)}
 #mfp-img{display:block;max-width:320px;max-height:220px;object-fit:cover;width:320px}
 #mfp-label{background:var(--iron-gall);color:var(--brass-hi);font-family:var(--f-mono);font-size:10px;padding:5px 9px;text-align:center;font-weight:600;letter-spacing:.06em}
 #mount-ingame-modal{display:none;position:fixed;inset:0;background:rgba(20,16,12,.75);z-index:620;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
@@ -9618,8 +9619,8 @@ function renderLegendaryPetGuide(){
           +'<span class="tag tr">Legendär · Mechanisch</span>'
           +'<span class="tag tg">Begleiter-Pet (kein Mount)</span>'
           +'<span class="tag tw">Patch 1.05.00</span>'
-          +'<span style="font-size:9px;font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:3px;padding:2px 5px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
-          +'<span style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:3px;padding:2px 5px;letter-spacing:.04em" title="Schritte nur über Community-Guides belegt, teils widersprüchlich">DETAILS: COMMUNITY (≈)</span>'
+          +'<span style="font-size:9px;font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:999px;padding:2px 7px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
+          +'<span style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:999px;padding:2px 7px;letter-spacing:.04em" title="Schritte nur über Community-Guides belegt, teils widersprüchlich">DETAILS: COMMUNITY (≈)</span>'
         +'</div>'
         +'<div style="font-size:12px;color:var(--dim);line-height:1.6">Der mechanische Adler, den viele als „Marnis Adler" suchen. Offizieller Ingame-Name: <strong style="color:var(--gold)">Iron Eagle</strong>. Ein legendärer bio-mechanischer Vogel-<strong>Begleiter</strong> (kein Reittier), laut Lore „vom genialen Erfinder <strong>Marni</strong> erschaffen" — daher die Marni-Verbindung. Offiziell mit <strong>Patch 1.05.00</strong> als zähmbares Pet eingeführt (Pearl Abyss: „erscheint, wenn bestimmte Bedingungen erfüllt sind"). Nicht mit <em>Marni\'s Mechahorse</em> (mechanisches Pferd, siehe Mounts) verwechseln.</div>'
       +'</div>'
@@ -9643,8 +9644,8 @@ function renderLegendaryPetGuide(){
           +'<span class="tag tr">Legendär · Feuervogel</span>'
           +'<span class="tag tg">Begleiter-Pet (kein Mount)</span>'
           +'<span class="tag tw">Vogel-Pet-System 1.04.00</span>'
-          +'<span style="font-size:9px;font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:3px;padding:2px 5px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
-          +'<span style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:3px;padding:2px 5px;letter-spacing:.04em" title="Erlangungs-Schritte nur über Community-Guides belegt; keine offizielle Note nennt die konkrete Phoenix-Erlangung">DETAILS: COMMUNITY (≈)</span>'
+          +'<span style="font-size:9px;font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:999px;padding:2px 7px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
+          +'<span style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:999px;padding:2px 7px;letter-spacing:.04em" title="Erlangungs-Schritte nur über Community-Guides belegt; keine offizielle Note nennt die konkrete Phoenix-Erlangung">DETAILS: COMMUNITY (≈)</span>'
         +'</div>'
         +'<div style="font-size:12px;color:var(--dim);line-height:1.6">Der <strong>Phoenix</strong> ist laut spielinternem Codex ein <strong>legendärer Vogel, der immer wieder wiedergeboren wird</strong> — seine Flügel sind golden und <strong>glänzen wie die Sonne</strong>; der Mythos besagt, er erscheine, <strong>wenn sich die Welt ihrem Ende nähert</strong>. Am Himmel erkennt man ihn als markant großen, feurig gold-orange gefärbten Vogel, der einen kleinen Schwarm anführt. Funktional ist er — wie der <strong>Iron Eagle</strong> — ein <strong>fliegender Loot-Begleiter</strong>. Anders als andere Legendär-Tiere wird er nicht gezähmt, sondern aus der Luft geschossen und gehäutet; der eigentliche Pet entsteht erst durch einen Crafting-Schritt bei einer Hexe.</div>'
       +'</div>'
