@@ -2019,7 +2019,7 @@ thead tr{background:rgba(22,24,40,.75)}
    Nur #boss-grid .card (Modifier .record-card) — NPCs/Bestiarium
    nutzen eigene Render-Funktionen/Templates und bleiben unberuehrt.
    ============================================================ */
-#boss-grid.grid{grid-template-columns:repeat(auto-fill,minmax(480px,1fr))}
+#boss-grid.grid{grid-template-columns:repeat(auto-fill,minmax(480px,1fr));align-items:start}
 #boss-grid .card.record-card{
   display:grid;grid-template-columns:230px 1fr;gap:0;
   padding:0;border-radius:var(--radius);overflow:hidden;
@@ -2081,8 +2081,8 @@ thead tr{background:rgba(22,24,40,.75)}
   text-transform:uppercase;color:var(--amber);margin-bottom:4px;
 }
 /* Chips: Tags/Rotation im Record-Look (Mono, Ghost + roter Akzent auf erstem Tag) */
-#boss-grid .record-body .cm{gap:7px}
-#boss-grid .record-body .tag{
+#boss-grid .record-card .cm{gap:7px}
+#boss-grid .record-card .tag{
   font-family:var(--f-mono);font-size:11px;font-weight:600;border-radius:7px;
   padding:5px 10px;letter-spacing:.03em;text-transform:none;
 }
@@ -2157,6 +2157,57 @@ thead tr{background:rgba(22,24,40,.75)}
     max-height:none;
     align-self:stretch;
   }
+}
+
+/* ============================================================
+   PATCH: boss-record-rail (Layout-Redistribution 2026-07-08)
+   Problem: Portrait links, ALLES (Datagrid, Filter-Tags, Strategie,
+   Phasen, Empfehlungen, Notiz) rechts gestapelt -> Karte unnoetig
+   in die Laenge gezogen, unter dem Bild links viel toter Platz.
+   Fix: Portrait + Datagrid (Stat-Kacheln) + Filter-Tags in eine
+   linke Schiene (.record-rail) buendeln; der Lese-Content bleibt
+   rechts im .record-body. Fuellt den Platz unter dem Bild und
+   kuerzt die Karte deutlich. Scope: nur #boss-grid .record-*.
+   ============================================================ */
+#boss-grid .card.record-card{grid-template-columns:240px 1fr}
+#boss-grid .record-rail{
+  display:flex;flex-direction:column;align-self:start;min-width:0;
+  border-right:1px solid var(--line);
+  background:radial-gradient(120% 55% at 50% 0%, #150c12, #0a0710 82%);
+}
+/* Trennlinie wandert vom Bild auf die Schiene; Bild trennt sich per
+   Bottom-Border vom darunterliegenden Datagrid. */
+#boss-grid .record-rail .record-img{
+  border-right:0;border-bottom:1px solid var(--line);
+  align-self:auto;width:100%;
+}
+/* Datagrid als kompakte Stat-Kacheln unter dem Portrait (2 Spalten). */
+#boss-grid .record-rail .datagrid{margin:12px 12px 0}
+#boss-grid .record-rail .datagrid:last-child{margin-bottom:12px}
+/* Klickbare Filter-Tags unter das Datagrid. */
+#boss-grid .record-rail .cm{
+  display:flex;flex-wrap:wrap;gap:7px;margin:11px 12px 12px;
+}
+/* Lange Quest-Tags duerfen die schmale Schiene nicht sprengen: auf
+   Schienenbreite kappen (Ellipsis). Voller Text steht im Datagrid
+   darueber und im Hover-Tooltip; Klick filtert weiter nach Vollwert. */
+#boss-grid .record-rail .cm .tag{
+  max-width:100%;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+/* Mobile <=600px: Schiene stapelt ueber dem Body, Bild wieder 2/1,
+   Datagrid darf 2-spaltig bleiben (volle Breite verfuegbar). */
+@media(max-width:600px){
+  /* Muss die Desktop-Regel oben (gleiche Spezifitaet, frueher im Quelltext
+     -> wuerde sonst gewinnen) auf Einspaltigkeit zuruecksetzen. */
+  #boss-grid .card.record-card{grid-template-columns:1fr}
+  #boss-grid .record-rail{
+    border-right:0;border-bottom:1px solid var(--line);
+  }
+  #boss-grid .record-rail .record-img{
+    aspect-ratio:2/1;max-height:none;border-bottom:1px solid var(--line);
+  }
+  #boss-grid .record-rail .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 /* — PATCH blattbar — */
@@ -10089,6 +10140,7 @@ function renderBosses(){
     const _spLock=sp>0&&b.chapter!=null&&b.chapter>sp;
     return `<div class="card record-card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-s="${escHtml(s)}">
       ${_spLock?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${b.chapter} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
+      <div class="record-rail">
       <div class="record-img">
         <span class="record-tag">${escHtml(chapTag)}</span>
         <span class="crosshair" aria-hidden="true"></span>
@@ -10101,10 +10153,6 @@ function renderBosses(){
         }
         ${renderBossLore(b)}
       </div>
-      <div class="record-body">
-      <div class="ct">${b.name}</div>
-      <div class="record-desig">${escHtml(chap)} &middot; ${escHtml(b.region)} &middot; ${escHtml(b.quest)}</div>
-      ${b.recur?`<div class="boss-recur" title="Dieser Boss tritt mehrfach auf: Phase, spätere Wiederbegegnung oder Variante"><span class="ri">↻</span><span>${escHtml(b.recur)}</span></div>`:''}
       <dl class="datagrid">
         <div><dt>Kapitel</dt><dd class="mono">${b.chapter?String(b.chapter).padStart(2,'0'):'—'}</dd></div>
         <div><dt>Region</dt><dd>${escHtml(b.region)}</dd></div>
@@ -10119,6 +10167,11 @@ function renderBosses(){
         <span class="tag tg tag-clickable" onclick="event.stopPropagation();applyBossFilter('region','${b.region.split(' ')[0]}')" title="Filter: ${b.region.split(' ')[0]}" data-tip="Klick filtert nach Region">${b.region.split(' ')[0]}</span>
         <span class="tag tx tag-clickable" onclick="event.stopPropagation();applyBossFilter('quest','${b.quest.replace(/'/g,"\\'")}')" title="Filter: ${b.quest}" data-tip="Klick filtert nach Quest-Typ">${b.quest}</span>
       </div>
+      </div>
+      <div class="record-body">
+      <div class="ct">${b.name}</div>
+      <div class="record-desig">${escHtml(chap)} &middot; ${escHtml(b.region)} &middot; ${escHtml(b.quest)}</div>
+      ${b.recur?`<div class="boss-recur" title="Dieser Boss tritt mehrfach auf: Phase, spätere Wiederbegegnung oder Variante"><span class="ri">↻</span><span>${escHtml(b.recur)}</span></div>`:''}
       <div class="cs">${linkifyXrefs(b.strategy)}</div>
       ${comboChips(b.name)}
       <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">📋 Strategie kopieren</button>
