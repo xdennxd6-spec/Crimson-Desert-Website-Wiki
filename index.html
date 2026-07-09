@@ -12236,32 +12236,33 @@ const SIDE_QUESTS=[
 ];
 
 const PATCHES=[
-  {ver:"1.13.00",date:"03.07.2026",size:"Major Update. Steam (PC/Mac), PlayStation, Xbox & Epic Games Store; Mac App Store folgt später. Konsolen-Build 1.000.379 (laut mp1st)",features:[
+  {ver:"1.13.00",date:"03.07.2026",size:"Major Update. Steam (PC/Mac), PlayStation, Xbox, Epic Games Store & Mac App Store (Epic-Nutzer müssen sich laut Notes ggf. neu einloggen). Konsolen-Build 1.000.379 (laut mp1st)",features:[
     {cat:"Neuer Content",items:[
-      "Abyss-Endgame jetzt auch für Oongka und Damiane geöffnet (zuvor nur Kliff)",
+      "Abyss-Endgame jetzt auch für Oongka und Damiane geöffnet",
       "Memory-Fragment-Fundorte von vier Rematch-Bossen wurden im Zuge der Abyss-Öffnung verlegt: Corrupted Caliburn, Goyen, Draven the Crowcaller und Clockwork White Horn",
       "39 neue Ausrüstungsteile für Kliff/Oongka: 20 Boss-Ausrüstungsteile aus 5 Sets (Tarandus the Ashen 5, Unyielding Hero 5, Knight of Carnage 5, Martial Monk 3, Grand General of Demeniss 2), dazu 16 weitere Rüstungsteile und 3 Kopfbedeckungen",
       "Oongka kann jetzt die meisten Kliff-Outfits tragen",
       "6 zusätzliche Kuku-Ausrüstungsteile für Kliff/Oongka (separat von den 39): Kuku Lightning-Resistant Armor, Kuku Flame-Resistant Armor, Kuku Ice-Resistant Armor, Kuku Breeze-Step Boots, Kuku Rishi's Boots, Kuku Marni Laser Helm",
-      "8 neue Ausrüstungsteile für Damiane, darunter Boss-Ausrüstung der Sets Guardian of Odeck, Dark Marksman und Masked Liberator (offizielle Summenzeile nennt 8; die aufgeschlüsselten Set-Teile ergeben rechnerisch 9 — kleine Unstimmigkeit in den offiziellen Notes)",
+      "8 neue Ausrüstungsteile für Damiane, darunter Boss-Ausrüstung der Sets Guardian of Odeck, Dark Marksman und Masked Liberator",
       "Neues Item 'Hunter's Sigil': lässt ein Vogel-Pet Beute und Sammelobjekte passend zu seiner Spezialisierung apportieren",
-      "Neue kaufbare Crafting-Rezepte: 4 Teppich-Typen sowie die Plattenpanzer Lightning Bolt, Scorchflame und Frostcursed",
+      "Neue Crafting-Rezepte: 4 Teppich-Typen sowie die Plattenpanzer Lightning Bolt, Scorchflame und Frostcursed",
       "Neue Spezialangriffe für Gegner hinzugefügt: Flame Knight, Wyvernflames, Savage Fang, Goldenscale Bandits"
     ]},
     {cat:"Charaktere & Skills",items:[
-      "Iron Eagle und Phoenix können jetzt das 'Sigil of Valor' ausrüsten — in 1.10.01/1.11.00 war das noch nicht möglich bzw. wieder gestrichen worden; mit 1.13.00 offiziell freigeschaltet",
+      "Iron Eagle und Phoenix können jetzt das 'Sigil of Valor' ausrüsten (Historie siehe ältere Einträge: Freischaltung war in der revidierten 1.11.00-Notice vom 12.06. gestrichen worden, 1.10.01 hatte nur die Item-Beschreibung korrigiert)",
       "Damiane 'Smiting Strike': Speer-Proficiency (Waffenmeisterschaft) freigeschaltet",
       "Damiane 'Lightning Strike': Bewegungsablauf verbessert",
       "Damiane: Timing des element-imbued 'Smiting Strike' mit 'Groundsurge Abyss Gear' korrigiert",
       "Damiane 'Flame Rush': Besen-Wechsel-Geschwindigkeit normalisiert (Fehler behoben)",
       "Oongka: Aerial Grapple mit dem Kuku Rocket Pack nutzbar, Zielerfassung im Flug korrigiert, Greathammer-Finisher-Treffgenauigkeit verbessert, durch Gegner blockiertes Charging behoben, Puzzles jetzt mit 'Scatter Shot' lösbar",
       "Musketen und Pistolen können jetzt während des Slidings (Rutschens) genutzt werden",
-      "Counter Stance: Ausrüstungsbeschränkung für Flaggen entfernt",
-      "Axiom Force: Soft-Lock-On-Nutzung verbessert; Kontroll-Verfügbarkeitsproblem beim Reiten von Blackstar behoben"
+      "Counter Stance: konnte fälschlich mit ausgerüsteter Flagge genutzt werden — behoben (mit Flagge jetzt nicht mehr nutzbar)",
+      "Axiom Force: Soft-Lock-On-Nutzung verbessert; Steuerungs-Blockade beim Beschwören von Blackstar während Axiom Force behoben (außer Bewegung/Sprung war keine Eingabe möglich)"
     ]},
     {cat:"Quality of Life",items:[
       "Beschworene Pets ruhen jetzt gemeinsam mit dem Charakter, wenn dieser sich in ein Bett legt",
-      "Verkleidungs-Outfits UND -Waffen sind jetzt färbbar (erweiterte färbbare Ausrüstung)",
+      "Verkleidungs-Outfits sind jetzt färbbar",
+      "Die meisten Waffen und Sekundärwaffen sind jetzt färbbar",
       "Glühwürmchen-Sammeln liefert jetzt bis zu 3 Glühwürmchen pro Vorkommen",
       "'Gate to Advancement' ist jetzt auch ohne ausgerüstetes Visione nutzbar"
     ]},
@@ -12300,7 +12301,7 @@ const PATCHES=[
       "Offizielle Pearl-Abyss-Patchnotes 1.13.00 (Notice-Board boardNo 105, Release 03.07.2026 03:00 UTC). Verifiziert gegen VULKK, GamesRadar, GameWatcher und MP1st. Konsolen-Build 1.000.379 laut mp1st (Drittquelle, nicht in den offiziellen Notes). Teile-Zählung: 39 (Kliff/Oongka) + 8 (Damiane), die 6 Kuku-Teile separat; die von manchen Quellen genannte '47' ist schlicht 39+8. Die genauen neuen Memory-Fragment-Fundorte der vier Rematch-Bosse nennen die offiziellen Notes nicht."
     ]}
   ]},
-  {ver:"1.13.01",date:"08.07.2026",size:"Hotfix (All Platforms) — Steam (PC/Mac), PlayStation, Xbox & Epic Games Store; Mac App Store weiterhin ausstehend. Nachschärfung von 1.13.00; keine Build-Nummer in den Notes",features:[
+  {ver:"1.13.01",date:"08.07.2026",size:"Hotfix (All Platforms) — Steam (PC/Mac), PlayStation, Xbox, Epic Games Store & Mac App Store. Nachschärfung von 1.13.00; keine Build-Nummer in den Notes",features:[
     {cat:"Bugfixes",items:[
       "Behoben: gelegentlicher Absturz beim Reiten eines Bären",
       "Behoben: Charaktere wurden auf Konsolen und AMD-basierten Systemen teils fehlerhaft dargestellt (Rendering)",
