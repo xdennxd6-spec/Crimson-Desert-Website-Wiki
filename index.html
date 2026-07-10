@@ -3033,6 +3033,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
 
   <section class="sec" id="sec-weapons">
     <h2 class="sec-t"><span class="sec-sym">†</span> Waffen</h2>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Dyes-Sektion).</div>
     <div class="fbar">
       <select class="fs" id="wf-type" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen-Compare">⚔️ Compare</button>
@@ -3110,7 +3111,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <h2 class="sec-t"><span class="sec-sym">⚙</span> Crafting &amp; Farming</h2>
     <div style="margin-bottom:18px;border:1px solid var(--bdr);border-radius:12px;padding:14px 16px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px">🆕 Neu mit Patch 1.12.00 (19.06.2026): Möbel- &amp; Dekorations-Crafting</div>
-      <div style="font-size:12.5px;color:var(--text);line-height:1.7">Zwei neue Werkbänke zum Herstellen von Einrichtungs- und Dekorations-Items: <b>Workstation</b> (Greymane Camp, Timberham Sawmill) und <b>Loom</b> (Hernand Tailor's Shop). Erstmals lässt sich auch der <b>Außenbereich rund um das eigene Haus</b> dekorieren. Insgesamt <b>58 neue Hausgegenstände</b> (Facilities, Lights, Decorations/Pet Furniture). Bezug über Shops, Claw Machines, die Flower-Basket-Crafting-Mission, die <b>Box of Fortune</b> (Mysterious Shop, 100 Silver, max. 3 pro Restock) und die Orb-Roll-Challenge. <span style="color:var(--dim)">Werkbank-Funktion (Workstation = Holzmöbel, Loom = Stoffwaren) laut Community-Guides, nicht in den offiziellen Notes.</span> Vollständige Auflistung in den <span class="xref" onclick="showSec('patches')">Patch-Notes 1.12.00</span>.</div>
+      <div style="font-size:12.5px;color:var(--text);line-height:1.7">Zwei neue Werkbänke zum Herstellen von Einrichtungs- und Dekorations-Items: <b>Workstation</b> (Greymane Camp, Timberham Sawmill) und <b>Loom</b> (Hernand Tailor's Shop). Erstmals lässt sich auch der <b>Außenbereich rund um das eigene Haus</b> dekorieren. Insgesamt <b>58 neue Hausgegenstände</b> (Facilities, Lights, Decorations/Pet Furniture). Bezug über Shops, Claw Machines, die Flower-Basket-Crafting-Mission, die <b>Box of Fortune</b> (Mysterious Shop, 100 Silver, max. 3 pro Restock) und die Orb-Roll-Challenge. <span style="color:var(--dim)">Werkbank-Funktion (Workstation = Holzmöbel, Loom = Stoffwaren) laut Community-Guides, nicht in den offiziellen Notes.</span> Vollständige Auflistung in den <span class="xref" onclick="showSec('patches')">Patch-Notes 1.12.00</span>. <span style="color:var(--gold);font-weight:600">Update 1.13.00:</span> Herstellungsrezepte für 4 neue Teppich-Arten hinzugefügt (Rezept im Shop kaufbar, genaue Zutaten noch nicht dokumentiert).</div>
     </div>
     <div class="rl-tool">
       <h3 class="sub-t" style="margin-top:0">🔎 Wo bekomme ich …?</h3>
@@ -3393,7 +3394,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
 
   <section class="sec" id="sec-pets">
     <h2 class="sec-t"><span class="sec-sym">❥</span> Pets</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten. <span style="color:var(--gold)">Patch 1.13:</span> Beschworene Pets ruhen jetzt gemeinsam mit dem Charakter, wenn dieser sich in ein Bett legt.</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25), Füttern +10 bis +35 je nach Futter — das <strong>Lieblingsessen</strong> gibt +35. Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
     <div id="legendary-pet-guide"></div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
@@ -3448,7 +3449,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
   </section>
   <section class="sec" id="sec-dyes">
     <h2 class="sec-t"><span class="sec-sym">◑</span> Dyes — Färbesystem</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Färbemittel (Dyes) schalten pro Grundfarbe ein Spektrum von ca. 20 Farbtönen für Rüstungen frei. Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Färbemittel (Dyes) schalten pro Grundfarbe ein Spektrum von ca. 20 Farbtönen frei — seit Patch 1.13.00 nicht mehr nur für Rüstungen, sondern auch für die meisten Waffen, Sekundärwaffen und Verkleidungs-Outfits. Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">19</span> belegte Dyes</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">1,50 Silver</span> Standardpreis Dyehouse</div>
@@ -4280,7 +4281,7 @@ const WEAPONS=[
   {name:"Blue Scout Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Scout-Fraktion / Exploration"},
   {name:"Bekker Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Bekker-Region / Exploration"},
   {name:"Balton Shield",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Balton-Region / Exploration"},
-  {name:"Flame Knights Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Drop: Flame Knights-Feinde"},
+  {name:"Flame Knights Shield",type:"Shield",atk:null,crit:0,def:2,slots:2,source:"Crafting / Schmied (Manual: Shields of the World Vol. 1; Timber x10 + Fine Timber x5)"},
   {name:"City Guard's Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Drop: Stadtgarde-Feinde"},
   {name:"Eastern Wanderer's Shield",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Östliche Region / Wanderer-Quest"},
   {name:"Grey Wolf Wooden Shield",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Drop: Grey Wolf-Feinde / Pailune"},
@@ -4837,7 +4838,7 @@ const CRAFTING=[
   {name:"Kuku Spear",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:4,ingr:"1x Kuku Pot + 10x Small Battery",effect:"Modulare Waffenbasis aus dem Kuku-Pot. Behalt die Speicher-/Energie-Funktion, dient als Grundlage fur elementare Kuku-Speere (Blitz/Eis/Feuer/Laser/Bismut-Versteinerung) mit Ladungssystem und unbegrenzter Haltbarkeit.",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_prefab_cd_phm_02_spear_0052_empty.webp"},
   {name:"Enhanced Kuku Pot",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:0,ingr:"1x Kuku Pot + 1x Abyss Cell",effect:"Mit Abyss-Zelle verstarkter Kuku-Pot. Maximale Haltbarkeit, dient als hoherwertiges Crafting-Material fur die hochstufige Kuku-Ausrustung (Boots, Helme, Resistenz-Rustungen).",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_prefab_gimmick_pot_kuku_02_empty.webp"},
   {name:"Small Kuku A.T.A.G.",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:0,ingr:"1x Kuku Pot + 1x Abyss Cell + 5x Cogwheel + 5x Small Battery",effect:"All-Terrain Armored Gear (Mini-Mech). Autonom denkende Basis-Maschine; Crafting-Material/Vorstufe fur grossere A.T.A.G.-Mechs und Abyssal Fusion.",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_item_kuku_small_atag_empty.webp"},
-  {name:"Kuku Breeze-step Boots",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:4,ingr:"1x Enhanced Kuku Pot + 3x Electrical Component + 1x Core of Faith",effect:"Erzeugt per Effigy of Faith kurzzeitig schwebende Plattformen unter den Fussen -> uberhoher (Doppel-)Sprung / Luftsprung. Ladungsbasiert (ca. 3 Ladungen). [Mobility / Bewegung]",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_prefab_cd_phm_00_foot_00_0437.webp"},
+  {name:"Kuku Breeze-Step Boots",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:4,ingr:"1x Enhanced Kuku Pot + 3x Electrical Component + 1x Core of Faith",effect:"Erzeugt per Effigy of Faith kurzzeitig schwebende Plattformen unter den Fussen -> uberhoher (Doppel-)Sprung / Luftsprung. Ladungsbasiert (ca. 3 Ladungen). [Mobility / Bewegung]",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_prefab_cd_phm_00_foot_00_0437.webp"},
   {name:"Kuku Rishi's Boots",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:5,ingr:"1x Enhanced Kuku Pot + 1x Shoddy Rishi's Boots + 5x Abyss Cell",effect:"Verzerrt die Schwerkraft der Sohlen -> reibungsloses Hochgeschwindigkeits-Gleiten/Dash zum Ausweichen und schnellen Queren des Schlachtfelds. Ladungsbasiert (ca. 5 Ladungen). [Mobility / Bewegung]",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_prefab_cd_phm_00_foot_00_0470.webp"},
   {name:"Kuku Marni Laser Helm",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:4,ingr:"1x Enhanced Kuku Pot + 1x Marni Laser Helm + 1x Power Core - Gate of Collapse + 3x Electrical Component + 1x Core of Transgression",effect:"Feuert einen zerstorerischen Laserstrahl in Blickrichtung des Tragers (Effigy of Transgression). Ladungsbasiert (~3 Ladungen) mit Cooldown. [Aktiv-Fähigkeit / Skill]",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_prefab_cd_phm_00_hel_00_0363_c_index01.webp"},
   {name:"Kuku Lightning-Resistant Armor",cat:"Kuku-Gadget",station:"Kuku-Werkstatt",tier:"Gadget",grade:5,ingr:"1x Enhanced Kuku Pot + 1x Lightning Bolt Plate Armor + 1x Power Core - Ore of Resipiscence + 1x Core of Penitence",effect:"Absorbiert Blitz-/Elektroschaden gegnerischer Angriffe; voll aufgeladen entladt sie den gespeicherten Strom als verheerenden Konter (Effigy of Penitence).",source:"Kuku-Werkstatt (Kilnden, ab Kap. 4) · questlog-Datamine",conf:"high",icon:"itemicon_prefab_cd_phm_m0001_00_titan_ub_0002_index01.webp"},
@@ -4882,7 +4883,7 @@ const ARMOR=[
   {name:"Grey Wolf Leather Armor",type:"Torso",source:"Grey Wolf Territory, Pailune",effect:"Leather, Def 9, Lightning Resist Lv1",notes:"Agility-Build"},
   {name:"Hernand Ceremonial Guard Armor",type:"Torso",source:"Hernand Palastwache Questlinie",effect:"Def+20",notes:"Hernand-Set"},
   {name:"Jackals' Leather Armor",type:"Torso",source:"Jackals-Fraktion Gebiet",effect:"Leather, Def 3, Lightning Resist Lv1",notes:"Offensives Leder"},
-  {name:"Kuku Ice-Resistant Armor",type:"Torso",source:"Kilnden Workshop Blueprint",effect:"Ice Resist (Lv)",notes:"Bessere Version von Frostcursed"},
+  {name:"Kuku Ice-Resistant Armor",type:"Torso",source:"Kilnden Workshop Blueprint",effect:"Ice Resist (Lv)",notes:"Bessere Version von Frostcursed. Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
   {name:"Leather Armor of the Fallen Kingdom",type:"Torso",source:"Ruinen des alten Königreichs",effect:"Leather, Def+8",notes:"Fallen Kingdom Set"},
   {name:"Light of the Battlefield Plate Armor",type:"Torso",source:"Legendary Warrior Drop",effect:"Plate, Def+32",notes:"Bestes Mid-Game Plate"},
   {name:"Northern Fighter's Chain Mail",type:"Torso",source:"Nördliche Händler / Herstellung",effect:"Def+20, Ice Resist (Lv)",notes:"Balanciert für Pailune"},
@@ -5004,7 +5005,7 @@ const ARMOR=[
   {name:"Catfish Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
   {name:"White Bloodwind Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
   {name:"Pillager's Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Kuku Breeze-step Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:""},
+  {name:"Kuku Breeze-Step Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
   {name:"Strongbow Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
   {name:"Lightning Bolt Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
   {name:"Lightning Bolt Plate Armor",type:"Torso",source:"Welt-Drop / Händler; seit Patch 1.13.00 auch craftbar (Rezept im Shop kaufbar)",effect:"DEF +14",notes:""},
@@ -5030,10 +5031,10 @@ const ARMOR=[
   {name:"Delegation Leather Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
   {name:"Yrkabel Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +5",notes:""},
   {name:"Odeck's Protector Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Kuku Marni Laser Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Kuku Lightning-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:""},
-  {name:"Kuku Flame-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:""},
-  {name:"Kuku Cold-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:""},
+  {name:"Kuku Marni Laser Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
+  {name:"Kuku Lightning-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
+  {name:"Kuku Flame-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
+  {name:"Kuku Cold-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Sehr wahrscheinlich dasselbe Item wie 'Kuku Ice-Resistant Armor' (identisches Icon-Sprite; offizieller Patch-1.13.00-Name ist 'Ice-Resistant', 'Cold-Resistant' ist eine abweichende Bezeichnung). Kliff/Oongka-Equip-Hinweis siehe dort."},
   {name:"Demenissian Uniform Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
   {name:"Mistcloaked Owl Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +10",notes:""},
   {name:"Sungrove Standard Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
@@ -5135,7 +5136,7 @@ const ARMOR=[
   {name:"Unyielding Warrior's Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
   {name:"Canta Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
   {name:"Plate Cloak of Cursed Soul",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Kuku Rishi's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:""},
+  {name:"Kuku Rishi's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
   {name:"Desert Marauder's Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +5",notes:""},
   {name:"Beekeeping Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
   {name:"Disguise Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
@@ -5613,6 +5614,7 @@ const OONGKA_SKILLS=[
   {name:"Raging Lightning",prereq:"Default",cost:"1 AA",effect:"Blitz-Wuerge durchschlaegt Super Armor"},
   {name:"Quaking Fury",prereq:"Default",cost:"1 AA/Lv bis Lv 3",effect:"Boden-Slam Wirkungsradius"},
   {name:"Quick Grab",prereq:"Default",cost:"0",effect:"Sofort-Grapple ohne Wind-up"},
+  {name:"Restrain",prereq:"Default",cost:"0",effect:"△+〇 während Slash → Gegner als Geisel nehmen (gilt bei Slash-Waffe). Skill-Beschreibung ist seit Patch 1.13.00 waffenabhängig; Wortlaut für andere Waffen wie Greathammer nicht dokumentiert."},
   {name:"Explosive Leap",prereq:"Quaking Fury Lv 2",cost:"1 AA",effect:"Sprung-Smash mit explosivem Boden-Schlag"},
   {name:"Storm Howl",prereq:"Wind-Quelle Abyss",cost:"1 AA",effect:"Gebruell mit Wind-Shockwave"},
   {name:"Flame Quake",prereq:"Fire-Quelle Abyss",cost:"1 AA",effect:"Feuer-Boden-Slam"},
@@ -6976,7 +6978,7 @@ const ARMOR_IMGS={
   "Catfish Plate Helm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_sir_catfish_hel_00_0002_i.webp",
   "White Bloodwind Cloth Cloak":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_cloak_00_0160_s.webp",
   "Pillager's Leather Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_foot_00_0432.webp",
-  "Kuku Breeze-step Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_foot_00_0437.webp",
+  "Kuku Breeze-Step Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_foot_00_0437.webp",
   "Strongbow Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_00_0403_index01.webp",
   "Lightning Bolt Plate Helm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_m0001_00_titan_hel_0002_d.webp",
   "Lightning Bolt Plate Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_m0001_00_titan_ub_0002.webp",
@@ -10809,6 +10811,7 @@ const ARMOR_SETS=[
   {name:"Knight of Carnage",color:"#7a2420",desc:"[Patch 1.13.00 · Boss-Set Kliff] Vom Boss 'Gregor, the Halberd of Carnage' (Fort Ironclad, Hernand — teils Demeniss zugeordnet; Kap. 8, Quest 'Where The Wind Guides You'). Nach dem Sieg Helm + Plate Armor bei Brek's Back Alley Shop (Demeniss); Gloves/Cloak/Boots über Demeniss-Nebenquests/Commissions. Plate, voll färbbar. Einzelwerte noch nicht dokumentiert.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Knight of Carnage Plate Helm","Knight of Carnage Plate Armor","Knight of Carnage Plate Gloves","Knight of Carnage Plate Cloak","Knight of Carnage Plate Boots"]},
   {name:"Martial Monk",color:"#5a4a20",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'T'rukan the Ascended' (Kap. 9, 'The Sage of the Desert'). Cloth, 3 Teile (kein Helm), angriffs-/tempolastig. Belegte Werte: Robe Def 21 + Move Speed Lv1; Gloves Atk 26/Def 12 + Attack Speed Lv4; Boots Atk 27/Def 12 + Move Speed Lv3 (T4).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Martial Monk's Cloth Robe","Martial Monk's Cloth Gloves","Martial Monk's Cloth Boots"]},
   {name:"Grand General of Demeniss",color:"#4a4038",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'Lucian Bastier', Grand General of Demeniss (Region Demeniss); über Quests/Challenges/Shops. Nur 2 Teile (im Spiel 'Bastier Armor', wahrscheinlich Torso + Mantel); genaue Slots und Einzelwerte noch nicht dokumentiert.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Bastier Armor (Torso, Plate?)","Bastier-Mantel (Cloak?)"]},
+  {name:"16 Rüstungsteile + 3 Kopfbedeckungen (Patch 1.13, unbenannt)",color:"#3a3a3a",desc:"[Patch 1.13.00 · Weitere Kliff/Oongka-Ausrüstung] Zusätzlich zu den 20 Boss-Set-Teilen kamen mit 1.13.00 für Kliff/Oongka 16 weitere Rüstungsteile und 3 Kopfbedeckungen ins Spiel. Die offiziellen Notes führen diese 19 Teile nur als Anzahl, ohne Einzelnamen; Bezug laut Notes über Quests, Erfolge und Shops. Einzelnamen und -werte sind wenige Tage nach Release noch nicht quellenübergreifend belegt, daher hier als Sammel-Platzhalter analog zum Muster '5. Teil (unbestätigt)' bei Tarandus. Sobald zwei unabhängige Quellen die Teile benennen, durch echte Einträge ersetzen.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["16 Rüstungsteile (Namen unbestätigt)","3 Kopfbedeckungen (Namen unbestätigt)"]},
   {name:"Odeck's Protector (Guardian of Odeck)",color:"#2f6a7a",desc:"[ab Patch 1.13.00 auch für Damiane, 5 Teile] Boss-Set vom 'Odeck's Protector, the Forgotten General' (Drop in The General's Tomb, NW-Pailune; gilt als härtester Boss, droppt komplett + Waffe Awakened Spirit). Plate/Heavy mit Eis-Fokus, voll aufwertbar (Tier 10). Ursprünglich Kliff-only. Werte: Helm Def→21 (Daze-Immun.), Armor Def→41 (3 Sockel), Cloak Def→12 + Eis-Res Lv3 (Stamina -8%), Gloves Def→17/Atk→36, Boots Def→19/Atk→35.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Helm (Def→21, Daze-Immun.)","Armor (Def→41, 3 Sockel)","Cloak (Def→12, Eis-Res Lv3)","Gloves (Def→17, Atk→36)","Boots (Def→19, Atk→35)"]},
   {name:"Dark Marksman",color:"#3a2f4a",desc:"[bestehendes Boss-Set, ab Patch 1.13.00 auch für Damiane (3 Teile)] Assoziiert mit 'Samara, the Sandwatcher' (Izvatu Fortress, Tashkalp; Boss-Kill optional — Teile liegen in Truhen bei Fort Musket, Forgotten Watchtower, Warrior's Soul Cave). Plate, angriffslastig (Musket-Thema), Feuer-Res Lv I am Mantel, Daze-Immunität am Helm. Kern-Set je nach Quelle 4-5 Teile (kein regulärer Helm — Maske im Mantel integriert). Werte: Armor Def→41 (3 Sockel), Gloves Def→21/Atk→34, Boots Def→17/Atk→36, Cloak Def→12 + Feuer-Res Lv3. Welche 3 Teile Damiane erhält, ist noch nicht dokumentiert.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Dark Marksman's Plate Armor","Dark Marksman's Plate Gloves","Dark Marksman's Plate Boots","Dark Marksman's Plate Cloak"]},
   {name:"The Masked Liberator",color:"#2a3a4a",desc:"[bestehendes Boss-Set, ab Patch 1.13.00 auch für Damiane (1 Teil)] Von 'The Masked Liberator' (Kommandantin der Faceless-Fraktion; Drop bei Befreiung von Fort Manub, gibt Torso 'Cloth Armor' + Skill Multishot). Stoff+Leder, mobil statt defensiv, Eis-/Blitz-Grundresistenz, reduzierte Stamina-Regen. Eigener Set-Helm im Spiel NICHT erhältlich (Ersatz: The Faceless' Plate Helm). Damiane erhält 1 Teil (vermutlich die Cloth Armor).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["The Masked Liberator's Cloth Armor","The Masked Liberator's Cloth Cloak","The Masked Liberator's Leather Gloves","The Masked Liberator's Leather Boots"]}
@@ -12246,7 +12249,8 @@ const PATCHES=[
       "8 neue Ausrüstungsteile für Damiane, darunter Boss-Ausrüstung der Sets Guardian of Odeck, Dark Marksman und Masked Liberator",
       "Neues Item 'Hunter's Sigil': lässt ein Vogel-Pet Beute und Sammelobjekte passend zu seiner Spezialisierung apportieren",
       "Neue Crafting-Rezepte: 4 Teppich-Typen sowie die Plattenpanzer Lightning Bolt, Scorchflame und Frostcursed",
-      "Neue Spezialangriffe für Gegner hinzugefügt: Flame Knight, Wyvernflames, Savage Fang, Goldenscale Bandits"
+      "Neue Spezialangriffe für Gegner hinzugefügt: Flame Knight, Wyvernflames, Savage Fang, Goldenscale Bandits",
+      "Alchemy Explosive Pack der Bleed Bandits verliert jetzt bei jeder Bombenbeschwörung Haltbarkeit"
     ]},
     {cat:"Charaktere & Skills",items:[
       "Iron Eagle und Phoenix können jetzt das 'Sigil of Valor' ausrüsten (Historie siehe ältere Einträge: Freischaltung war in der revidierten 1.11.00-Notice vom 12.06. gestrichen worden, 1.10.01 hatte nur die Item-Beschreibung korrigiert)",
@@ -12255,6 +12259,8 @@ const PATCHES=[
       "Damiane: Timing des element-imbued 'Smiting Strike' mit 'Groundsurge Abyss Gear' korrigiert",
       "Damiane 'Flame Rush': Besen-Wechsel-Geschwindigkeit normalisiert (Fehler behoben)",
       "Oongka: Aerial Grapple mit dem Kuku Rocket Pack nutzbar, Zielerfassung im Flug korrigiert, Greathammer-Finisher-Treffgenauigkeit verbessert, durch Gegner blockiertes Charging behoben, Puzzles jetzt mit 'Scatter Shot' lösbar",
+      "Oongka: Beschreibungen bestimmter Greathammer-Skills korrigiert, sodass sie dem tatsächlichen Verhalten entsprechen (offizielle Notes nennen die betroffenen Skills nicht)",
+      "Oongka: Beschreibung des Skills 'Restrain' an die ausgerüstete Waffe angepasst",
       "Musketen und Pistolen können jetzt während des Slidings (Rutschens) genutzt werden",
       "Counter Stance: konnte fälschlich mit ausgerüsteter Flagge genutzt werden — behoben (mit Flagge jetzt nicht mehr nutzbar)",
       "Axiom Force: Soft-Lock-On-Nutzung verbessert; Steuerungs-Blockade beim Beschwören von Blackstar während Axiom Force behoben (außer Bewegung/Sprung war keine Eingabe möglich)"
@@ -12295,6 +12301,8 @@ const PATCHES=[
       "Wyvern-Flug-Animationen verbessert; Wyvern bleibt bei seinem Tod nicht mehr stecken",
       "Monster-Spawns in den Sovereign Wastes wiederhergestellt",
       "Knowledge-Eintrag 'Injured Ludvig' in 'One-Armed Ludvig' umbenannt",
+      "Meadow Bunting: In-Game-Beschreibungstext aktualisiert (Wortlaut in den Notes nicht spezifiziert)",
+      "Knowledge-Beschreibungen für Salmon und Burbot überarbeitet",
       "Zahlreiche Clipping-, Silhouetten-, Beschreibungs- und Lokalisierungsfehler in allen Sprachen behoben"
     ]},
     {cat:"Quelle",items:[
@@ -12994,7 +13002,7 @@ const ENEMIES={
   {name:"Hostile Machines",de:"Feindliche Maschinen",region:"Delesyia (um Marnis Labor, SO der Stadt)",drops:"Cogwheel, Small Battery",conf:"medium",note:"Maschinen-Konstrukte, die auf Nah- und Ferndistanz kämpfen. Cogwheels braucht man u.a. für Kuku-Items aus Grimnirs Werkstatt in Hernand."}
  ],
  fraktionen:[
-  {name:"Bleed Bandits",region:"Hernand",drops:"Cloth Piece, Pelt, Fleece (Chance)",note:"Bewaffnete Banditen, die Hernand in Angst versetzen: Sie machen Opfer mit der Albtraum-Droge Dreamer's Bliss abhängig und versklaven sie — gestützt von einem mächtigen Hintermann im Schatten."},
+  {name:"Bleed Bandits",region:"Hernand",drops:"Cloth Piece, Pelt, Fleece (Chance)",note:"Bewaffnete Banditen, die Hernand in Angst versetzen: Sie machen Opfer mit der Albtraum-Droge Dreamer's Bliss abhängig und versklaven sie — gestützt von einem mächtigen Hintermann im Schatten. [1.13.00: Alchemy Explosive Pack verliert jetzt bei jeder Bombenbeschwörung Haltbarkeit.]"},
   {name:"Fundamentalist Goblins",region:"Hernand",drops:"Iron Ore, Copper Ore, Fleece, Small Bone; selten: Regglin Plate Helm, Silver Bullet",note:"Goblin-Gelehrte, kaum besser als gewöhnliche Diebe — forschen ohne Skrupel und schrecken vor unmenschlichen Taten nicht zurück; etablierte Institute erkennen sie nicht an."},
   {name:"Wolf Trackers",region:"Hernand",drops:"Iron Ore, Copper Ore, Fleece, Small Bone",note:"Schlacht-besessene Jägerbande — keine Jäger, die der Natur danken, sondern Schlächter auf der Suche nach immer aufregenderer Beute, aktuell dem legendären Wolf. Blockieren mehrere Posten und Minen in Hernand."},
   {name:"Southern Bandits",region:"Hernand (Süden, Lager bei Fort Anvil)",drops:"Iron Ore, Copper Ore, Fleece, Poison Arrow, Mask, Liquor Bottle",note:"Gewöhnliche Wegelagerer, die Händler und Reisende aus dem Hinterhalt überfallen — weniger berüchtigt als Bleed Bandits oder Fundamentalist Goblins."},
@@ -13005,6 +13013,7 @@ const ENEMIES={
   {name:"Antumbra Order",region:"Ganz Pywel",drops:"Cloth Piece, Thin Hide; selten: Sword of Greed, Greymane Leather Helm",note:"Dunkler Kult, der Licht und Leben lästert und die Finsternis mit Menschenopfern verehrt — Heiligtümer in ganz Pywel; verspricht 'Gleichheit und Freiheit durch Dunkelheit'."},
   {name:"Bastier's Inquisitors",region:"Demeniss",drops:"Iron Ore, Copper Ore, Fleece, Captive's Cloth Armor; Kampfhunde: Small Bone, Long Hair Hide, Fang",note:"Das einst gegen Korruption gegründete Righteous Tribunal, degeneriert zu Bastiers Machtinstrument — verfolgt heute das Volk, statt es zu schützen."},
   {name:"Crow Brothers",region:"Demeniss",drops:"Cloth Piece, Thin Hide; selten: Greymanes' Leather Armor",note:"Anhänger von Draven, dem Crowcaller — lernen seine Tötungstechniken, erhalten einen Teil seiner Macht und wirken finstere Magie; gieren ständig nach der Anerkennung ihres Meisters."},
+  {name:"Flame Knights",region:"Demeniss (Flame Knights Castle, West)",drops:"—",note:"Feuerbesessene Ritter unter der Schirmherrschaft von Lucian Bastier, die die Flame Knights Castle im Westen von Demeniss besetzen — kämpfen mit feuergetränkten Waffen und Schießpulver; kommandiert vom optionalen Boss Tristan the Flame Knight. [1.13.00: neue Spezialangriffe erhalten — Details noch nicht dokumentiert.]"},
   {name:"Mistwood Hunters",region:"Pailune (Wayward Woods)",drops:"Sleep Arrow, Bundle of Arrows, Packaged Salt, Cloth Piece",note:"Wilderer, die die Waldgeister der Wayward Woods zu Geld machen — jagen alles, was sich bewegt, und stürzen die Ordnung des Waldes ins Chaos."},
   {name:"Black Bears",region:"Pailune (Ashclaw Keep u.a.)",drops:"Cogwheel, Lubricant; selten: Crimson Banquet Helm Blueprint, Small Staglord Banner Pike",note:"Myurdins Fraktion — einst neben den Greymanes eine der stärksten Kampftruppen Pailunes, ermordete feige Jian und zerschlug die Greymanes; Belagerungsmaschinen und Lava Bears im Arsenal."},
   {name:"Lonely Jackals",region:"Pailune (Hauptstadt)",drops:"Decent Copper Pouch, Beer, Golden Beer, Jerky, Arrow",note:"Ludvigs Fraktion — lebte einst neben den Greymanes, schwor nach deren Vertreibung den Black Bears die Treue und unterdrückt seither rücksichtslos die Bevölkerung der Hauptstadt."},
