@@ -1530,7 +1530,9 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
   /* Mobile-Nav-Fix 09.07.: Sheet-Chrome (Grip+Header+Suche+Zaehler+Footer ~538px) quetschte
      die eigentliche Seitenliste auf ~68px — Taps unterhalb landeten auf #visitor-bar (ohne
      Handler) und verpufften (elementFromPoint-verifiziert). Sheet scrollt jetzt selbst,
-     Liste in natuerlicher Hoehe, Zaehler mobil ausgeblendet. */
+     Liste in natuerlicher Hoehe, Zaehler mobil ausgeblendet. Am 2026-07-15 unabhaengig
+     erneut diagnostiziert (PC-Stand hinkte hinterher, #conList dort 12px hoch) — dieser
+     Block deckt beide Befunde ab, kein zweiter Fix noetig. */
   #sidebar{overflow-y:auto}
   #sidebar .console-list{flex:none;overflow:visible;min-height:0}
   #sidebar #visitor-bar{display:none}
@@ -1550,6 +1552,37 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
   #si,#login-box input{font-size:16px}
   .theme-btn{width:40px;height:40px;font-size:14px}
   .farm-tbl,.tools-table,.sim-cmp-tbl{display:block;overflow-x:auto}
+  /* Back-to-Top/Toast auf Mobile ueber die fixe Bottom-Rail (~55px hoch) heben,
+     sonst liegen sie darunter und sind unklickbar/verdeckt (Finding #btt/#toast). */
+  #btt{bottom:70px}
+  #toast{bottom:120px}
+}
+/* ============================================================
+   RAIL-OVERLAP-FIX (echte Telefonbreiten <=520px):
+   6 Ressort-Tabs (#railScroll) + 2 fixe Fuss-Buttons (Suche/Tag,
+   .rail-foot) brauchen zusammen ca. 476px min-Breite (siehe Kommentar
+   oben in .rail-item/.rail-btn). Auf 375-430px-Handys ragt dadurch
+   der nicht sichtbar scrollbare Tab-Streifen unter die Fuss-Buttons,
+   'Meta' ist optisch nicht erreichbar (verifizierter Blocker).
+   Fix: Fuss-Buttons hier ausblenden — Suche (Eingabe #si) und Tag/
+   Nacht-Wechsel (#sb-ft .theme-btn) bleiben ueber den immer sichtbaren
+   Kopf-Button "☰ Register" (#bbConsole -> oeffnet #sidebar-Sheet)
+   vollstaendig erreichbar, keine Funktion geht verloren. Dadurch
+   bekommt #railScroll die volle Breite und alle 6 Tabs passen ohne
+   Scrollen (kein "no-overflow-indicator"-Problem mehr auf Telefonen).
+   ============================================================ */
+@media(max-width:520px){
+  .rail-foot{display:none}
+  /* Platz durch Wegfall der Fuss-Buttons: Label wieder auf min. 9px anheben
+     (vorher 8px, unter Mobile-Tab-Empfehlung ~10-11px; siehe Code-Review).
+     Rail-Hoehe bleibt gleich (Fuss-Buttons waren nie hoehenbestimmend,
+     .rail-item war schon vorher das hoechste Kind) -> #main/#btt/#toast-
+     Offsets aus dem 860px-Block bleiben unveraendert gueltig. */
+  .rail-item .rl{font-size:9px}
+  /* Restliches Polster fuer echte Schmalgeraete (360px Android u.ae.):
+     min-width/Padding leicht reduzieren, damit alle 6 Tabs auch dort
+     ohne Scrollen passen (getestet 320-860px, kein Overlap mehr). */
+  .rail-item{min-width:52px;padding:7px 2px 6px}
 }
 
 /* ── Boss defeat tracking ── */
