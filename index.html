@@ -185,10 +185,8 @@
 /* Registratur-Chrome auf iron-gall-Creme (Nacht/AMOLED): dunkle Tinte statt Messing (~11.4:1) */
 [data-theme="sepia"] .console-hd .ch-kick,[data-theme="amoled"] .console-hd .ch-kick,
 [data-theme="sepia"] .finder>label,[data-theme="amoled"] .finder>label,
-[data-theme="sepia"] .rail-item .rno,[data-theme="amoled"] .rail-item .rno,
 [data-theme="sepia"] .leaf.active .lcount,[data-theme="amoled"] .leaf.active .lcount,
-[data-theme="sepia"] .leaf.active .lsym,[data-theme="amoled"] .leaf.active .lsym,
-[data-theme="sepia"] .rail-btn .g,[data-theme="amoled"] .rail-btn .g{
+[data-theme="sepia"] .leaf.active .lsym,[data-theme="amoled"] .leaf.active .lsym{
   color:#2a2320;
 }
 /* Tag-Vermessung: .nav-grp (9.5px) mit --brass auf --vellum-deep nur 4.10:1.
@@ -1124,6 +1122,7 @@ input:focus-visible,textarea:focus-visible,
 .bd-star{cursor:pointer;font-size:16px;color:var(--line);transition:all .12s;line-height:1;user-select:none}
 .bd-star.on{color:var(--survey-red)}
 .bd-star:hover,.bd-star.preview{color:var(--survey-red-hi);transform:scale(1.15)}
+.bd-star:focus-visible{color:var(--survey-red-hi);outline:2px solid currentColor;outline-offset:2px}
 .bd-clear{margin-left:6px;font-family:var(--f-mono);font-size:9px;color:var(--iron-soft);cursor:pointer;padding:2px 6px;background:var(--vellum);border:1px solid var(--line);border-radius:6px;transition:all .12s}
 .bd-attempts{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:7px;padding:6px 11px;background:var(--vellum-deep);border:1px solid var(--line);border-radius:8px}
 .bd-attempts.has-att{border-color:var(--brass)}
@@ -1549,7 +1548,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
   .bb-bearing{display:none}
   .grid{grid-template-columns:1fr}
   .sec{padding:18px 16px 32px}
-  #si,#login-box input{font-size:16px}
+  #si,#login-box input,.rl-input,.bo-save-input,.rt-input{font-size:16px}
   .theme-btn{width:40px;height:40px;font-size:14px}
   .farm-tbl,.tools-table,.sim-cmp-tbl{display:block;overflow-x:auto}
   /* Back-to-Top/Toast auf Mobile ueber die fixe Bottom-Rail (~55px hoch) heben,
@@ -3111,6 +3110,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
           <p style="margin:6px 0 0;color:var(--dim)">Zwei Cores werden verbraucht, der <strong>Typ</strong> des Ergebnisses ist <strong>zufaellig</strong>; nur die Stufe skaliert mit dem Input. <strong>Einziger Weg zu Greater-Cores</strong> (ca. 4% pro Versuch, im Schnitt ~25 Versuche). Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden). <strong>Wichtig:</strong> Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores — <strong>nicht</strong> zu Stufe III (Stufe III = +12%). Davon zu unterscheiden ist die eigene <strong>„Rampaging“</strong>-Core-Reihe (z.B. Rampaging Insight), die im deutschen Spiel <strong>„Wütend“</strong> heißt.</p>
         </div>
       </div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
       <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin:4px 0 12px">
         <thead><tr style="color:var(--gold);text-align:left"><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Spezial-Synthese Input</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Ergebnis-Chancen</th></tr></thead>
         <tbody style="color:var(--dim)">
@@ -3119,7 +3119,9 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
           <tr><td style="padding:4px 8px">2x Stufe III</td><td style="padding:4px 8px">96% III · 4% Greater</td></tr>
         </tbody>
       </table>
+      </div>
       <strong style="color:var(--gdim);font-size:12px">Hexen &amp; ihre Rezepte (Region)</strong>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
       <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin:4px 0 10px">
         <thead><tr style="color:var(--gold);text-align:left"><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Hexe</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Region</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">verkaufte Rezepte</th></tr></thead>
         <tbody style="color:var(--dim)">
@@ -3130,6 +3132,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
           <tr><td style="padding:4px 8px">Sylvia (Hermit)</td><td style="padding:4px 8px">Shadow's Whisper Cave (Kap.3)</td><td style="padding:4px 8px">nur Socket/Embed/Extract, KEINE Synthese</td></tr>
         </tbody>
       </table>
+      </div>
       <p style="margin:6px 0 0;font-size:11px;color:var(--gdim)">Benannte Synthese-Kombi (belegt, Einzelquelle): <strong>Wound of Darkness</strong> = Destruction I + Aegis I + Haste I + Ascent I.</p>
       <p style="margin:8px 0 0;font-size:10.5px;color:var(--dim)">Datenstand: Hexen→Rezept-Zuordnung Einzelquelle (vulkk), mittlere Konfidenz. Quellenkonflikt: eine Quelle nennt nur Elowen als synthese-faehig, andere vier Regional-Hexen. Odds und Tier-Regeln mehrfach belegt. White Crow als Synthese-Hexe nur einfach genannt und unbestaetigt. Spezial-Synthese-Output ist echt zufaellig, feste Input→Output-Rezepte existieren dafuer nicht.</p>
       <p style="margin:8px 0 0;font-size:10.5px;color:var(--gdim)">Bezug zum Baum unten: dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</p>
@@ -7676,12 +7679,12 @@ function renderBossRating(name){
   const ratings=loadBossRatings();
   const cur=ratings[name]||0;
   const safe=name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
-  const stars=[1,2,3,4,5].map(i=>`<span class="bd-star${i<=cur?' on':''}" onclick="event.stopPropagation();setBossRating('${safe}',${i})" title="${i} Stern${i>1?'e':''}" role="button" aria-label="${i} Stern${i>1?'e':''}">★</span>`).join('');
+  const stars=[1,2,3,4,5].map(i=>`<span class="bd-star${i<=cur?' on':''}" onclick="event.stopPropagation();setBossRating('${safe}',${i})" title="${i} Stern${i>1?'e':''}" role="button" aria-label="${i} Stern${i>1?'e':''}" tabindex="0">★</span>`).join('');
   return `<div class="bd-rating" data-rating-for="${name.replace(/"/g,'&quot;')}">
     <span class="bd-rating-lbl">Schwierigkeit</span>
     <div style="display:flex;align-items:center">
       <div class="bd-stars">${stars}</div>
-      ${cur?`<button class="bd-clear" onclick="event.stopPropagation();clearBossRating('${safe}')" title="Rating löschen">✕</button>`:''}
+      ${cur?`<button class="bd-clear" onclick="event.stopPropagation();clearBossRating('${safe}')" title="Rating löschen" tabindex="0">✕</button>`:''}
     </div>
   </div>`;
 }
@@ -9632,8 +9635,7 @@ function showSec(id, opts){
   localStorage.setItem('cd_sec',id);
   if(!opts.skipUrl)_writeUrlState(true);
   // Schliesse Sidebar auf Mobile nach Klick
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('mob-overlay').classList.remove('show');
+  if(typeof closeSheet==='function')closeSheet();
   window.scrollTo({top:0});
   // Registratur: Ressort ableiten, Rail/Konsole/Blattbar synchronisieren (additiv)
   if(typeof _registraturSync==='function')_registraturSync(id);
@@ -10321,7 +10323,7 @@ function renderCores(){
     return `<tr class="trow${show?'':' hide'}" data-s="${s}">
       <td><div style="display:flex;align-items:center;gap:8px">
         ${ico?`<img src="${ico}" data-cdn="${CORE_IMGS_CDN[c.name]||''}" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.style.display='none';}" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
-        <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()">▶</span>`:''}
+        <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()" onclick="showCoreVid(event,'${escJsStr(c.name)}')">▶</span>`:''}
       </div></td>
       <td>${c.effect}${coreTierStrip(c.name)}${coreGreaterNote(c)}</td>
       <td style="font-size:11.5px;color:var(--dim)">${c.source}</td>
@@ -10527,7 +10529,7 @@ function renderTE(){
     return `<div class="te-grp">
       <div class="te-gh"><span class="te-gt">${ICON[cat]||'•'} ${escHtml(cat)}</span><span class="te-gc">${dc}/${items.length}</span></div>
       ${items.map(t=>`<div class="te-it${done.includes(t.id)?' done':''}" onclick="toggleTE('${t.id}')">
-        <div class="chk${done.includes(t.id)?' on':''}" role="checkbox" aria-checked="${done.includes(t.id)?'true':'false'}" tabindex="0"></div>
+        <div class="chk${done.includes(t.id)?' on':''}" role="checkbox" aria-checked="${done.includes(t.id)?'true':'false'}" aria-label="${escHtml(t.task)}" tabindex="0"></div>
         <span class="te-tx">${escHtml(t.task)}</span>
       </div>`).join('')}
     </div>`;
@@ -11117,7 +11119,7 @@ const MISSABLE_ITEMS=[
   {id:'ms6',cat:'Quest',name:'Hexe Elowen — "The Missing Seal"',when:'Kap. 5 — vor Kap. 6 starten',tip:'Questlinie schaltet Tier-3 Core-Synthese + Kuku-Blueprint frei. Rechtzeitig beginnen.'},
   {id:'ms7',cat:'Quest',name:'Oongka permanent — Arm Wrestling',when:'Kap. 8 — Calphade Castle',tip:'"Strength Held in the Fingertips". Zeitfenster nur Kap. 8 — danach dauerhaft gesperrt.'},
   {id:'ms8',cat:'Quest',name:'Oongka permanent — Riverside',when:'Kap. 8 — S Pailune East Gate',tip:'"Words Left by the Riverside". Beide Oongka-Quests für True Ending Pflicht.'},
-  {id:'ms9',cat:'Quest',name:'Lyselia-Questlinie abschließen',when:'Vor Kap. 11',tip:'Sanctum of Expiation → Atonement + Shadow-Infusion. Muss vor Ende von Kap. 10 gestartet und abgeschlossen sein.'},
+  {id:'ms9',cat:'Quest',name:'Lyselia-Questlinie abschließen',when:'Vor Kap. 11',tip:'Sanctum of Devotion → Veneration → Oblation → Faith (Delesyia) + Shadow-Element Infusion. Muss vor Ende von Kap. 10 gestartet und abgeschlossen sein.'},
   {id:'ms10',cat:'Mount',name:'Snowwhite Deer fangen',when:'Pailune — Silver Wolf Mountain',tip:'Tier flieht sofort. Aerial Force Palm + Sleep/Poison Arrows. Einziger Spawn — Camp-Rest bei Fehler.'},
   {id:'ms11',cat:'Mount',name:'Icicle Edge Alpine Ibex',when:'Quest "The Sport Hunter" — Wayward Woods',tip:'Boss Moren der Mistwood Huntmaster. 2 Phasen. Feuer bricht Mount-Bindung.'},
   {id:'ms12',cat:'Mount',name:'Rock Tusk Warthog',when:'Quest "Master of the Wetlands" — Bordig Ruins',tip:'Nur über Faction-Quest zugänglich. Ravok of the Savage Fangs, 2 Phasen.'},
@@ -11158,7 +11160,7 @@ function renderGreymane(){
     <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
     <div class="cl-group-body">${items.map(c=>`
       <div class="comm-it${done.includes(c.id)?' done':''}" onclick="toggleGM('${c.id}')">
-        <div class="chk${done.includes(c.id)?' on':''}" role="checkbox" aria-checked="${done.includes(c.id)?'true':'false'}" tabindex="0"></div>
+        <div class="chk${done.includes(c.id)?' on':''}" role="checkbox" aria-checked="${done.includes(c.id)?'true':'false'}" aria-label="${escHtml(c.name)}" tabindex="0"></div>
         <div class="comm-num">${String(c.n).padStart(2,'0')}</div>
         <div class="comm-body">
           <div class="comm-tx">${c.name} <span style="color:var(--dim);font-size:10.5px">· Kap. ${c.chapter}</span></div>
@@ -11183,7 +11185,7 @@ function renderBossChecklist(){
     {label:'Side-Bosse & Faction',filter:b=>!b.chapter},
   ];
   const itemHtml=b=>`<div class="comm-it${done.includes(b.name)?' done':''}" onclick="toggleBossDone('${b.name.replace(/'/g,"\\'")}')">
-    <div class="chk${done.includes(b.name)?' on':''}" role="checkbox" aria-checked="${done.includes(b.name)?'true':'false'}" tabindex="0"></div>
+    <div class="chk${done.includes(b.name)?' on':''}" role="checkbox" aria-checked="${done.includes(b.name)?'true':'false'}" aria-label="${escHtml(b.name)}" tabindex="0"></div>
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${b.name}
         <span style="color:var(--dim);font-size:10.5px;font-weight:400"> · ${b.chapter?'Kap. '+b.chapter:'Side'} · ${b.region.split(' - ')[0].split(' — ')[0]}</span>
@@ -11221,7 +11223,7 @@ function renderSanctumChecklist(){
     {label:'The Abyss — Endgame',ids:['te18','te19']},
   ];
   const itemHtml=s=>`<div class="comm-it${done.includes(s.id)?' done':''}" onclick="toggleTE('${s.id}');renderSanctumChecklist();updateStats();">
-    <div class="chk${done.includes(s.id)?' on':''}" role="checkbox" aria-checked="${done.includes(s.id)?'true':'false'}" tabindex="0"></div>
+    <div class="chk${done.includes(s.id)?' on':''}" role="checkbox" aria-checked="${done.includes(s.id)?'true':'false'}" aria-label="${escHtml(s.name)}" tabindex="0"></div>
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${s.name}
         <span style="color:var(--dim);font-size:10.5px;font-weight:400"> · ${s.region}</span>
@@ -11258,7 +11260,7 @@ function renderWeaponChecklist(){
   if(cnt)cnt.textContent=dc+'/'+WEAPONS.length+' Waffen gesammelt';
   const types=[...new Set(WEAPONS.map(w=>w.type))];
   const itemHtml=w=>`<div class="comm-it${done.includes(w.name)?' done':''}" onclick="toggleWep('${w.name.replace(/'/g,"\\'")}')">
-    <div class="chk${done.includes(w.name)?' on':''}" role="checkbox" aria-checked="${done.includes(w.name)?'true':'false'}" tabindex="0"></div>
+    <div class="chk${done.includes(w.name)?' on':''}" role="checkbox" aria-checked="${done.includes(w.name)?'true':'false'}" aria-label="${escHtml(w.name)}" tabindex="0"></div>
     ${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" loading="lazy" decoding="async" alt="" style="width:28px;height:28px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:8px;padding:2px;flex-shrink:0;margin-top:1px" onerror="if(_fexFb(this))return;this.style.display='none'">`:''}
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${w.name}</div>
@@ -11297,7 +11299,7 @@ function renderMissableChecklist(){
     <div class="cl-group-bar" style="margin-bottom:4px"><div class="cl-group-fill" style="width:${pct}%"></div></div>
     <div class="comm-grid" style="margin-bottom:4px">${items.map(m=>`
       <div class="comm-it${done.includes(m.id)?' done':''}" onclick="toggleMissable('${m.id}')">
-        <div class="chk${done.includes(m.id)?' on':''}" role="checkbox" aria-checked="${done.includes(m.id)?'true':'false'}" tabindex="0"></div>
+        <div class="chk${done.includes(m.id)?' on':''}" role="checkbox" aria-checked="${done.includes(m.id)?'true':'false'}" aria-label="${escHtml(m.name)}" tabindex="0"></div>
         <div class="comm-body">
           <div class="comm-tx" style="font-weight:600">${m.name}<span class="ms-badge ${badgeClass[m.cat]||'ms-b-quest'}" style="margin-left:7px">${m.cat}</span></div>
           <div class="comm-rew" style="color:var(--dim)">${m.when}</div>
@@ -11985,7 +11987,7 @@ const ITEMS=[
   {name:"Wooden Lantern",cat:"Werkzeug — Lampe",detail:"Eine einfache, leichte Laterne aus Holz, gefertigt aus leicht verfügbaren Materialien. Wird wegen der Brandgefahr seltener genutzt als Metalllaternen. In der Refinement-Tabelle nur +0 (kein nennenswertes Upgrade).",loc:"Bezugsquelle auf der Wiki-Seite nicht angegeben (vermutlich käuflich/einfach verfügbar). Auch in der Liste der einzigartigen Laternen geführt. Quelle: Fextralife, Sportskeeda",miss:false,conf:"medium"},
   {name:"Bernor's Pickaxe",cat:"Werkzeug — Bergbau",detail:"Effekt: Mining Yield Up Lv 2 (höhere Ertragsstufe als Fine Pickaxe) mit \"Chance to Mine Additional Materials\" 20% -> 30%. Wird aus einem Blueprint gefertigt (u. a. 30 Fine Timber, 20 Iron Ore, 10 Sturdy Hide, 10 Diamonds bei einem Schmied). Beste reguläre Spitzhacke für maximalen Erzertrag.",loc:"Blueprint kaufbar bei Bernor im Mineral Shop von Fort Manub in Tashkalp (Crimson Desert / Wüstenregion); zuvor Fort Manub befreien und Bernors Vertrauen (Geschenke) aufbauen. Quelle: VULKK; Quelle: Nerdschalk; Quelle: GameRant",miss:false,conf:"high"},
   {name:"Fine Pickaxe",cat:"Werkzeug — Bergbau",detail:"Effekt: Mining Yield Up Lv 1 mit \"Chance to Mine Additional Materials\" 20% -> 30% (steigt durch Refinement). Höhere Grundchance auf Zusatzmaterialien als die Standard-Spitzhacke, bei gleicher Ertragsstufe. Wird aus einem Blueprint gefertigt.",loc:"Blueprint kaufbar im Mineral Shop in Karin Quarry, Hernand. Quelle: VULKK; Quelle: Game8",miss:false,conf:"high"},
-  {name:"Mining Knuckledrill",cat:"Werkzeug — Bergbau",detail:"Elektrisches Bergbau-Werkzeug (nur von Kliff nutzbar). Effekt: Mining Yield Up Lv 1 -> 2 durch Verbesserung, \"Chance to Mine Additional Materials\" 10% -> 30%; voll aufgewertet erreicht es die Erträge von Bernor's Pickaxe und sammelt abgebautes Erz zusätzlich automatisch ein. Dieses Werkzeug ist zugleich eine Knuckles-Waffe und erscheint auch im Waffen-Tab.",loc:"Belohnung für den Sieg über den Boss Marni's Excavatron (Faktions-Quest \"Estate in Dismay\"); zusätzlich als Drop von Bleed Bandits in Karin Quarry sowie per Missions-Dispatch (Vorwork Armory in Demeniss oder Karin Quarry in Hernand) nach Abschluss der Forschung \"Electric Tool Design Research\" am Dewhaven Keep Institute in Delesyia. Quelle: VULKK; Quelle: Game8; Quelle: Nerdschalk",miss:false,conf:"high"},
+  {name:"Mining Knuckledrill",cat:"Werkzeug — Bergbau",detail:"Elektrisches Bergbau-Werkzeug (nur von Kliff nutzbar). Effekt: Mining Yield Up Lv 1 -> 2 durch Verbesserung, \"Chance to Mine Additional Materials\" 10% -> 30%; voll aufgewertet erreicht es die Erträge von Bernor's Pickaxe und sammelt abgebautes Erz zusätzlich automatisch ein. Dieses Werkzeug ist zugleich eine Knuckles-Waffe und erscheint auch im Waffen-Tab.",loc:"Belohnung für den Sieg über den Boss Marni's Excavatron (Faktions-Quest \"Stolen Quarry\"); zusätzlich als Drop von Bleed Bandits in Karin Quarry sowie per Missions-Dispatch (Vorwork Armory in Demeniss oder Karin Quarry in Hernand) nach Abschluss der Forschung \"Electric Tool Design Research\" am Dewhaven Keep Institute in Delesyia. Quelle: VULKK; Quelle: Game8; Quelle: Nerdschalk",miss:false,conf:"high"},
   {name:"Pickaxe",cat:"Werkzeug — Bergbau",detail:"Standard-Spitzhacke (Attack 8, Fähigkeit \"Mining Mastery\"). Effekt: Mining Yield Up Lv 1 mit 10% Chance auf zusätzliches Erz pro Schlag. Bei voller Verbesserung (+10 Refinement) steigt der Angriffswert auf 31, die 10%-Bonuschance bleibt aktiv. Erhöht den Erz-/Mineral-Ertrag deutlich gegenüber Notmethoden wie Force Palm oder Explosivpfeilen.",loc:"Standard-Werkzeug, früh erhältlich bei Händlern/Schmieden in Hernand (z.B. Equipment Shop). Quelle: Fextralife; Quelle: Nerdschalk; Quelle: VULKK",miss:false,conf:"high"},
   {name:"Demenissian Chainsaw",cat:"Werkzeug — Holzfällen",detail:"Elektrische Kettensäge (nur von Kliff nutzbar); fällt Bäume schneller. Effekt: Logging Quality Up Lv 1 -> 2 durch Verbesserung, \"Chance to Log Additional Timber\" 10% -> 30% - voll aufgewertet erreicht sie die Erträge von Olvald's Logging Axe und sammelt gefälltes Timber zusätzlich automatisch ein.",loc:"Per Missions-Dispatch (Vorwork Armory in Demeniss oder Steelspike Armory in Delesyia) nach Abschluss der Forschung \"Electricity - Movement Conversion Mechanism Research\". Quelle: VULKK; Quelle: Game8",miss:false,conf:"high"},
   {name:"Fine Logging Axe",cat:"Werkzeug — Holzfällen",detail:"Effekt: Logging Quality Up Lv 1 mit \"Chance to Log Additional Timber\" 20% -> 30%. Höhere Chance auf Fine Timber und (durch Refinement) auf zusätzliches Timber als die Standard-Axt. Wird aus einem Blueprint gefertigt.",loc:"Blueprint kaufbar im Provisioner's Shop in Odeck, nordwestliches Pailune. Quelle: VULKK; Quelle: Game8",miss:false,conf:"high"},
@@ -13431,6 +13433,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   // A11y: Checklisten per Enter/Space toggeln (Klick bubbelt zur Zeile; aria-checked kommt aus dem Re-Render)
   document.addEventListener('keydown',e=>{
     if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('chk')){
+      e.preventDefault();e.target.click();
+    }
+    if((e.key==='Enter'||e.key===' ')&&e.target.classList&&(e.target.classList.contains('bd-star')||e.target.classList.contains('bd-clear'))){
+      e.preventDefault();e.target.click();
+    }
+    if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('boss-lore')){
       e.preventDefault();e.target.click();
     }
   });

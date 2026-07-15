@@ -1,7 +1,7 @@
 [build]
   # gen-seo.mjs erzeugt die statischen SEO-Landing-Pages (bosse/waffen/true-ending)
   # + sitemap.xml frisch aus index.html, damit sie bei jedem Deploy synchron bleiben.
-  command   = "npm install && node scripts/gen-seo.mjs"
+  command   = "npm install && node scripts/gen-seo.mjs && node scripts/verify-seo.mjs"
   publish   = "."
 
 [functions]
@@ -49,6 +49,11 @@ for = "/"
 
 [[headers]]
 for = "/index.html"
+  [headers.values]
+  Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+for = "/sw.js"
   [headers.values]
   Cache-Control = "public, max-age=0, must-revalidate"
 
