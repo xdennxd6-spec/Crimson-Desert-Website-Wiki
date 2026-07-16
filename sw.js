@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v23';
+const CACHE_VERSION = 'cd-guide-v24';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -36,8 +36,10 @@ self.addEventListener('fetch', e => {
       fetch(e.request)
         .then(r => {
           // Clone SOFORT ziehen — sonst Race: Body kann schon konsumiert sein
-          const clone = r.clone();
-          caches.open(CORE_CACHE).then(c => c.put(e.request, clone));
+          if (r.ok) {
+            const clone = r.clone();
+            caches.open(CORE_CACHE).then(c => c.put(e.request, clone));
+          }
           return r;
         })
         .catch(() => caches.match(e.request).then(r => r || caches.match('./index.html')))

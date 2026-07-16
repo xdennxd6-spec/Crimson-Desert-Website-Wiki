@@ -3869,7 +3869,7 @@ const WEAPONS=[
   {name:"Copper Knuckledrill",type:"Knuckles",atk:22,crit:null,slots:3,source:"Kauf bei Haendlern (~196 Bronze; Preis je nach Fraktions-Ruf)",built_in:"Mining Mastery",notes:"Funktioniert als Pickaxe. Audit 2026-06-23: Dublette 'Copper Knuckledrill Drill' entfernt, Slots 5→3 (Fextralife). Quelle: Haendler-Kauf (Fextralife)."},
   {name:"Savage Sawblade",type:"Sword",atk:12,crit:1,slots:3,source:"Drop: Giath (Drakesfall Castle, Hernand; House-Celeste-Quest 'Bloodied Sword')",built_in:"Bleed",notes:"Unique 1H-Schwert mit sägeähnlichen Widerhaken. Audit 2026-06-30: Typ Knuckles→Sword + Quelle korrigiert (game8/Fextralife/gaming.tools/gamerguides); atk quellenabhängig: Fextralife 12, game8 34."},
   // ── Shields ──
-  {name:"Shield of Betrayal",type:"Shield",atk:null,crit:0,def:29,slots:2,source:"Quest 'The Unyielding Shields' (Kap. 6)",built_in:"Aegis I, Fortitude I",notes:"Schilde nutzen DEF statt ATK/Crit."},
+  {name:"Shield of Betrayal",type:"Shield",atk:null,crit:0,def:29,slots:2,source:"Boss-Drop Cassius Morten, Quest 'Traitor' (Questlinie 'The Unyielding Shields', Kap. 6)",built_in:"Aegis I, Fortitude I",notes:"Schilde nutzen DEF statt ATK/Crit."},
   {name:"Rhonid Large Shield",type:"Shield",atk:null,crit:0,slots:2,source:"Lioncrest Manor (Erdgeschoss)",built_in:"Speed Lv.1",notes:"Grosser Schild (kein Shield Bash)."},
   {name:"Shield of Conviction",type:"Shield",atk:null,crit:0,def:29,slots:2,source:"Calphade Church Turm (Truhe)",built_in:"Aegis I, Fortitude I",notes:""},
   // ── Bows (Ranged) ──
@@ -5463,10 +5463,10 @@ const LOCATIONS=[
   {name:"Oongka — Explosive Strike Charge",region:"Skill-Tree",type:"Feature [1.07]",desc:"Explosive Strike hat jetzt eine Charge-Phase (länger halten = mehr Damage + AoE). Dual-Wield Stab-Chain fliesst flüssiger."},
   {name:"Kliff — Blinding Flash Finisher (unarmed)",region:"Skill-Tree",type:"Feature [1.07]",desc:"Blinding Flash Finisher kann jetzt ohne Waffe ausgeführt werden — vorher nur mit gezogenem Schwert. Setzt 1.06er 'Blinding Flash unarmed' konsequent fort."},
   {name:"Rematch — Muskan",region:"Bonepit",type:"Boss-Rematch [1.07]",desc:"Abyss-Boss Muskan ist jetzt an der Land-Location Bonepit via Laterne rematchbar. Memory Fragment droppt am Original-Kampfort. Reminisce-/Resonate-Modi gelten."},
-  {name:"Rematch — Corrupted Caliburn",region:"Fort Musket",type:"Boss-Rematch [1.07]",desc:"Corrupted Caliburn (Kap. 12 Endboss-Phase) ist jetzt bei Fort Musket via Laterne rematchbar — kein 2. Spieldurchgang nötig. [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Dort nicht mehr suchen.]"},
-  {name:"Rematch — Goyen",region:"Spire of the Sun",type:"Boss-Rematch [1.07]",desc:"Goyen-Rematch am Spire of the Sun via Laterne. Vorher nur einmaliger Story-Kill. [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Dort nicht mehr suchen.]"},
-  {name:"Rematch — Draven the Crowcaller",region:"Church of West Demeniss",type:"Boss-Rematch [1.07]",desc:"Draven-Rematch in der Church of West Demeniss via Laterne. Originaler Drop-Loop wiederholbar (Tauria Curved Sword bleibt aber Unique-Drop). [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Dort nicht mehr suchen.]"},
-  {name:"Rematch — Clockwork White Horn",region:"Gate to Advancement",type:"Boss-Rematch [1.07]",desc:"Clockwork-Variante des White Horn am Gate to Advancement via Laterne. Mechanik-Variante des Original-Bosses. [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Dort nicht mehr suchen.]"},
+  {name:"Rematch — Corrupted Caliburn",region:"Fort Musket",type:"Boss-Rematch [1.07]",desc:"Corrupted Caliburn (Kap. 12 Endboss-Phase) ist jetzt bei Fort Musket via Laterne rematchbar — kein 2. Spieldurchgang nötig. [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Praxis-Tipp: aktuellen Fundort selbst im Spiel prüfen via Journal > Knowledge > Memory Fragments > Bosses (zeigt pro besiegtem Boss den aktuellen Rematch-Ort); nicht auf Prä-1.13-Angaben (Fort Musket) verlassen. Dort nicht mehr suchen.]"},
+  {name:"Rematch — Goyen",region:"Spire of the Sun",type:"Boss-Rematch [1.07]",desc:"Goyen-Rematch am Spire of the Sun via Laterne. Vorher nur einmaliger Story-Kill. [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Praxis-Tipp: aktuellen Fundort selbst im Spiel prüfen via Journal > Knowledge > Memory Fragments > Bosses (zeigt pro besiegtem Boss den aktuellen Rematch-Ort); nicht auf Prä-1.13-Angaben (Spire of the Sun) verlassen. Dort nicht mehr suchen.]"},
+  {name:"Rematch — Draven the Crowcaller",region:"Church of West Demeniss",type:"Boss-Rematch [1.07]",desc:"Draven-Rematch in der Church of West Demeniss via Laterne. Originaler Drop-Loop wiederholbar (Tauria Curved Sword bleibt aber Unique-Drop). [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Praxis-Tipp: aktuellen Fundort selbst im Spiel prüfen via Journal > Knowledge > Memory Fragments > Bosses (zeigt pro besiegtem Boss den aktuellen Rematch-Ort); nicht auf Prä-1.13-Angaben (Church of West Demeniss) verlassen. Dort nicht mehr suchen.]"},
+  {name:"Rematch — Clockwork White Horn",region:"Gate to Advancement",type:"Boss-Rematch [1.07]",desc:"Clockwork-Variante des White Horn am Gate to Advancement via Laterne. Mechanik-Variante des Original-Bosses. [1.13.00: Memory-Fragment-Fundort im Zuge der Abyss-Öffnung verlegt — der genannte Ort galt bis Patch 1.12; den neuen Ort nennen die offiziellen 1.13-Notes bewusst nicht (Spoiler), kein Guide hat ihn dokumentiert. Praxis-Tipp: aktuellen Fundort selbst im Spiel prüfen via Journal > Knowledge > Memory Fragments > Bosses (zeigt pro besiegtem Boss den aktuellen Rematch-Ort); nicht auf Prä-1.13-Angaben (Gate to Advancement) verlassen. Dort nicht mehr suchen.]"},
   {name:"Mehr Wolf-/Bär-Mounts",region:"Wild",type:"Feature [1.07]",desc:"Zusätzliche Wolf- und Bär-Typen können jetzt als Mounts registriert werden. Auch Zügel-System auf mehr Mount-Typen ausgeweitet."},
   {name:"AMD GPU Crash-Fix",region:"PC-Performance",type:"Fix [1.07]",desc:"Crash bei AMD-Treiber 26.5.1 behoben. Download: 381 MB (Steam), Console-Build 1.000.283."}
 ];
@@ -8670,11 +8670,11 @@ function renderFavorites(){
   Object.entries(FAV_KINDS).forEach(([k,info])=>{
     const list=f[k]||[];
     if(!list.length)return;
-    out+=`<div class="fav-cat-hd">${info.ico} ${info.label}<span class="fav-cat-count">${list.length}</span></div>
+    const cards=list.map(n=>_favItemCard(k,n)).filter(Boolean);
+    if(!cards.length)return;
+    out+=`<div class="fav-cat-hd">${info.ico} ${info.label}<span class="fav-cat-count">${cards.length}</span></div>
       <div class="fav-grid">`;
-    list.forEach(name=>{
-      out+=_favItemCard(k,name);
-    });
+    out+=cards.join('');
     out+=`</div>`;
   });
   el.innerHTML=out;
@@ -9604,7 +9604,7 @@ function showSec(id, opts){
   // Sektion; die aktive Blatt-Markierung uebernimmt markConsoleActive() im Hook,
   // nachdem renderConsole das Ressort des Ziels gerendert hat.
   const nav=document.querySelector('#conList .leaf[data-sec="'+id+'"]');
-  if(!sec)return;
+  if(!sec){ if(id!=='bosses') return showSec('bosses',opts); return; }
   ensureSecRendered(id);
   // Re-render favorites when entering that section (favs may have changed since init)
   if(id==='favorites'&&typeof renderFavorites==='function')renderFavorites();
@@ -10248,17 +10248,20 @@ function renderWeapons(){
   const si=document.getElementById('si');
   const q=((si&&si.value)||'').trim().toLowerCase();
   const searching=!!q;
+  const qF=_fold(q);
   const total=f?WEAPONS.filter(w=>w.type.includes(f)).length:WEAPONS.length;
   const pages=Math.max(1,Math.ceil(total/WEP_PER));
   if(_wepPage>=pages)_wepPage=pages-1;
   if(_wepPage<0)_wepPage=0;
   const start=_wepPage*WEP_PER, end=start+WEP_PER;
   let fi=-1;
+  let shown=0;
   document.getElementById('weapon-tb').innerHTML=WEAPONS.map(w=>{
     const passFilter=!f||w.type.includes(f);
     const s=[w.name,w.type,w.source,w.built_in,w.notes].join(' ').toLowerCase();
     let show=false;
-    if(passFilter){ if(searching){show=s.includes(q);} else {fi++;show=(fi>=start&&fi<end);} }
+    if(passFilter){ if(searching){show=_fold(s).includes(qF);} else {fi++;show=(fi>=start&&fi<end);} }
+    if(show)shown++;
     const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
     return `<div class="card${show?'':' hide'}" data-s="${s}">
@@ -10276,6 +10279,7 @@ function renderWeapons(){
       <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">📍 Auf Karte</button>
     </div>`;
   }).join('');
+  if(searching){const cnt=document.getElementById('scnt');if(cnt)cnt.textContent=shown+' Treffer';}
   const pg=document.getElementById('weapon-pager');
   if(pg){
     if(searching||pages<=1){ pg.innerHTML=''; }
@@ -10540,6 +10544,9 @@ function toggleTE(id){
   let d=loadTE();
   d=d.includes(id)?d.filter(x=>x!==id):[...d,id];
   saveTE(d);renderTE();
+  if(typeof updateStats==='function')updateStats();
+  if(typeof checkAchievements==='function')checkAchievements();
+  if(typeof renderAchievements==='function')renderAchievements();
 }
 
 // ===== SIDE-QUEST ABHAKEN (lokal, cd_sq_done) =====
@@ -10851,15 +10858,15 @@ const ARMOR_SETS=[
   {name:"Canta Plate Set",color:"#1a3a5a",desc:"Mid-Game Plate-Set; Teile beim Händler Rhett (Hernand Town, neben der Schmiede).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Canta Plate Armor","Canta Plate Helm","Canta Plate Gloves","Canta Plate Boots"]},
   {name:"Hernandian Banquet Set",color:"#5a4a0a",desc:"Food-/Bankett-Themen-Set.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Hernandian Banquet Cloak","Autumn Banquet Leather Boots"]},
   {name:"Duskfang Set",color:"#2a3a1a",desc:"Nacht-/Bleed-Themen-Set.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Duskfang Leather Armor","Duskfang Leather Gloves"]},
-  {name:"Tarandus the Ashen",color:"#6a4636",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'Tarandus the Ashen'; über Fraktions-Quests und den Back-Alley-Shop an der Odeck-Floodgate/Odeck Village (Pailune). Material-Mix Plate (Helm/Torso/Hände) + Leather (Boots). Offizielle Notes nennen 5 Teile; öffentlich belegt sind bisher 4 (5. Teil, vermutlich Mantel, unbestätigt). Einzelwerte 3 Tage nach Release noch nicht dokumentiert. Fallstrick: gleichnamige beschädigte ('Damaged Gear')-Variante ist NICHT das tragbare Set-Teil.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Tarandus Plate Helm","Tarandus Plate Armor","Tarandus Plate Gloves","Tarandus Leather Boots","5. Teil (unbestätigt)"]},
-  {name:"Unyielding Hero",color:"#8a3230",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'Cassius Morten' (Kap. 6, Calphade Castle, Hernand); über die Questreihe 'The Unyielding Shields' + Back-Alley-Shop Thalwynd, teils via Challenge. Plate. NICHT identisch mit dem älteren 'Unyielding Warrior'-Set (8 Teile inkl. Waffen) — eigenständiges neues 5-Teile-Set. Einzelwerte noch nicht dokumentiert; genaue Teilnamen quellenabhängig.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Helm (Plate)","Torso (Plate)","Hände (Plate)","Mantel (Plate)","Schuhe (Plate)"]},
-  {name:"Knight of Carnage",color:"#7a2420",desc:"[Patch 1.13.00 · Boss-Set Kliff] Vom Boss 'Gregor, the Halberd of Carnage' (Fort Ironclad, Hernand — teils Demeniss zugeordnet; Kap. 8, Quest 'Where The Wind Guides You'). Nach dem Sieg Helm + Plate Armor bei Brek's Back Alley Shop (Demeniss); Gloves/Cloak/Boots über Demeniss-Nebenquests/Commissions. Plate, voll färbbar. Einzelwerte noch nicht dokumentiert.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Knight of Carnage Plate Helm","Knight of Carnage Plate Armor","Knight of Carnage Plate Gloves","Knight of Carnage Plate Cloak","Knight of Carnage Plate Boots"]},
+  {name:"Tarandus the Ashen",color:"#6a4636",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'Tarandus the Ashen'; 6 Teile: 5 Rüstungsteile (Material-Mix Plate + Leather) + Waffe. The Ashen's Plate Helm (Def→21, Daze-Immun.; Back Alley Shop Odeck Pier/Pailune, 100 Trust), The Ashen's Plate Armor (Def→39; Boss-Drop, Quest 'Executioner of Justice'), The Ashen's Plate Gloves (Def→21/Atk→34; Challenge 'On a Storm of Beasts'), The Ashen's Leather Cloak (Def→12, Eis-Res Lv5, Move Speed Lv1→2; Life-Challenge 'Tiny Citizens of Grasslands'), The Ashen's Leather Boots (Def→18/Atk→30, Blitz-Res Lv1, Crit Rate Lv1→2; Challenge 'Caves Exploration Log'). Waffe Ashen Execution (Greathammer, Atk→45, nur Oongka; Boss-Drop). Fallstrick: gleichnamige beschädigte ('Damaged Gear')-Variante ist NICHT das tragbare Set-Teil. Quelle: VULKK 09.07.2026, gamerant, Fextralife.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["The Ashen's Plate Helm","The Ashen's Plate Armor","The Ashen's Plate Gloves","The Ashen's Leather Cloak","The Ashen's Leather Boots","Ashen Execution (Greathammer)"]},
+  {name:"Unyielding Hero",color:"#8a3230",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'Cassius Morten', Boss-Drop am Ende von Kapitel VI (Quest 'Traitor'); Plate, 5 Teile. Plate Helm (Def→17, Daze-Immun.; Kauf Back Alley Shop, Vendor Thrak, Stadtteil Thalwynd in Calphade), Plate Armor (Def→39; Boss-Drop 'Traitor'), Plate Cloak (Def→12, Feuer-Res Lv7; Challenge 'Hunter's Discipline'), Plate Gloves (Def→19/Atk→35; Challenge 'Into the Barrage'), Plate Boots (Def→21/Atk→34; Challenge 'The Vanished Wagon'). NICHT identisch mit dem älteren 'Unyielding Warrior'-Set (8 Teile inkl. Waffen) — eigenständiges neues 5-Teile-Set. Gleiche Loot-Kette, aber NICHT Teil dieses Sets: Shield of Betrayal (Def→29), Mace of Betrayal (Atk→33), Traitor's Spear (Atk→35). Quelle: VULKK 07.07.2026, gamerant.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Helm","Plate Armor","Plate Cloak","Plate Gloves","Plate Boots"]},
+  {name:"Knight of Carnage",color:"#7a2420",desc:"[Patch 1.13.00 · Boss-Set Kliff] Vom Boss 'Gregor, the Halberd of Carnage' (Fort Ironclad, Hernand — teils Demeniss zugeordnet; Kap. 8, Quest 'Where The Wind Guides You'). Plate, voll färbbar, 5 Teile. Plate Helm (Def→21, Daze-Immun.; Back Alley Shop Brek, außerhalb der Demeniss-Ostmauer, ~8 Goldbarren), Plate Armor (Def→39; Boss-Drop Gregor 'Halberd of Carnage', Fort Ironclad, Kap. VIII), Plate Cloak (Def→12, Feuer-Res Lv5, Move Speed Lv2; Horse-Challenge 'Harmonious Hooves III'), Plate Gloves (Def→17/Atk→36; Sword-Challenge 'Sword of Trials VI'), Plate Boots (Def→19/Atk→35; Challenge 'Dancing Blade, Shining Shield III'). Quelle: VULKK 07.07.2026, gamerant, consolepulse.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Helm","Plate Armor","Plate Cloak","Plate Gloves","Plate Boots"]},
   {name:"Martial Monk",color:"#5a4a20",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'T'rukan the Ascended' (Kap. 9, 'The Sage of the Desert'). Cloth, 3 Teile (kein Helm), angriffs-/tempolastig. Belegte Werte: Robe Def 21 + Move Speed Lv1; Gloves Atk 26/Def 12 + Attack Speed Lv4; Boots Atk 27/Def 12 + Move Speed Lv3 (T4).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Martial Monk's Cloth Robe","Martial Monk's Cloth Gloves","Martial Monk's Cloth Boots"]},
   {name:"Grand General of Demeniss",color:"#4a4038",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'Lucian Bastier', Grand General of Demeniss (Region Demeniss); über Quests/Challenges/Shops. Nur 2 Teile (im Spiel 'Bastier Armor', wahrscheinlich Torso + Mantel); genaue Slots und Einzelwerte noch nicht dokumentiert.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Bastier Armor (Torso, Plate?)","Bastier-Mantel (Cloak?)"]},
   {name:"16 Rüstungsteile + 3 Kopfbedeckungen (Patch 1.13, unbenannt)",color:"#3a3a3a",desc:"[Patch 1.13.00 · Weitere Kliff/Oongka-Ausrüstung] Zusätzlich zu den 20 Boss-Set-Teilen kamen mit 1.13.00 für Kliff/Oongka 16 weitere Rüstungsteile und 3 Kopfbedeckungen ins Spiel. Die offiziellen Notes führen diese 19 Teile nur als Anzahl, ohne Einzelnamen; Bezug laut Notes über Quests, Erfolge und Shops. Einzelnamen und -werte sind wenige Tage nach Release noch nicht quellenübergreifend belegt, daher hier als Sammel-Platzhalter analog zum Muster '5. Teil (unbestätigt)' bei Tarandus. Sobald zwei unabhängige Quellen die Teile benennen, durch echte Einträge ersetzen.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["16 Rüstungsteile (Namen unbestätigt)","3 Kopfbedeckungen (Namen unbestätigt)"]},
   {name:"Odeck's Protector (Guardian of Odeck)",color:"#2f6a7a",desc:"[ab Patch 1.13.00 auch für Damiane, 5 Teile] Boss-Set vom 'Odeck's Protector, the Forgotten General' (Drop in The General's Tomb, NW-Pailune; gilt als härtester Boss, droppt komplett + Waffe Awakened Spirit). Plate/Heavy mit Eis-Fokus, voll aufwertbar (Tier 10). Ursprünglich Kliff-only. Werte: Helm Def→21 (Daze-Immun.), Armor Def→41 (3 Sockel), Cloak Def→12 + Eis-Res Lv3 (Stamina -8%), Gloves Def→17/Atk→36, Boots Def→19/Atk→35.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Helm (Def→21, Daze-Immun.)","Armor (Def→41, 3 Sockel)","Cloak (Def→12, Eis-Res Lv3)","Gloves (Def→17, Atk→36)","Boots (Def→19, Atk→35)"]},
   {name:"Dark Marksman",color:"#3a2f4a",desc:"[bestehendes Boss-Set, ab Patch 1.13.00 auch für Damiane (3 Teile)] Assoziiert mit 'Samara, the Sandwatcher' (Izvatu Fortress, Tashkalp; Boss-Kill optional — Teile liegen in Truhen bei Fort Musket, Forgotten Watchtower, Warrior's Soul Cave). Plate, angriffslastig (Musket-Thema), Feuer-Res Lv I am Mantel, Daze-Immunität am Helm. Kern-Set je nach Quelle 4-5 Teile (kein regulärer Helm — Maske im Mantel integriert). Werte: Armor Def→41 (3 Sockel), Gloves Def→21/Atk→34, Boots Def→17/Atk→36, Cloak Def→12 + Feuer-Res Lv3. Welche 3 Teile Damiane erhält, ist noch nicht dokumentiert.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Dark Marksman's Plate Armor","Dark Marksman's Plate Gloves","Dark Marksman's Plate Boots","Dark Marksman's Plate Cloak"]},
-  {name:"The Masked Liberator",color:"#2a3a4a",desc:"[bestehendes Boss-Set, ab Patch 1.13.00 auch für Damiane (1 Teil)] Von 'The Masked Liberator' (Kommandantin der Faceless-Fraktion; Drop bei Befreiung von Fort Manub, gibt Torso 'Cloth Armor' + Skill Multishot). Stoff+Leder, mobil statt defensiv, Eis-/Blitz-Grundresistenz, reduzierte Stamina-Regen. Eigener Set-Helm im Spiel NICHT erhältlich (Ersatz: The Faceless' Plate Helm). Damiane erhält 1 Teil (vermutlich die Cloth Armor).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["The Masked Liberator's Cloth Armor","The Masked Liberator's Cloth Cloak","The Masked Liberator's Leather Gloves","The Masked Liberator's Leather Boots"]}
+  {name:"The Masked Liberator",color:"#2a3a4a",desc:"[bestehendes Boss-Set, ab Patch 1.13.00 auch für Damiane (1 Teil)] Von 'The Masked Liberator' (Kommandantin der Faceless-Fraktion; Drop bei Befreiung von Fort Manub, gibt Torso 'Cloth Armor' + Skill Multishot). Stoff+Leder, mobil statt defensiv, Eis-/Blitz-Grundresistenz, reduzierte Stamina-Regen. Eigener Set-Helm im Spiel NICHT erhältlich (Ersatz: The Faceless' Plate Helm). Damiane erhält 1 Teil (bestätigt: die Cloth Armor; offizieller Wortlaut, keengamer).",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["The Masked Liberator's Cloth Armor","The Masked Liberator's Cloth Cloak","The Masked Liberator's Leather Gloves","The Masked Liberator's Leather Boots"]}
 ];
 function renderArmorSets(){
   document.getElementById('set-grid').innerHTML=ARMOR_SETS.map(s=>`
@@ -11133,6 +11140,7 @@ function toggleMissable(id){
   let d=loadMissDone();
   d=d.includes(id)?d.filter(x=>x!==id):[...d,id];
   saveMissDone(d);renderMissableChecklist();renderOverview();
+  if(typeof updateStats==='function')updateStats();
 }
 
 // ===== GREYMANE =====
@@ -11142,6 +11150,8 @@ function toggleGM(id){
   let d=loadGM();
   d=d.includes(id)?d.filter(x=>x!==id):[...d,id];
   saveGM(d);renderGreymane();
+  if(typeof checkAchievements==='function')checkAchievements();
+  if(typeof renderAchievements==='function')renderAchievements();
 }
 function renderGreymane(){
   const done=loadGM();
@@ -11972,7 +11982,7 @@ function renderWeaponUpgrade(){
 }
 
 const ITEMS=[
-  {name:"Hunter's Sigil",cat:"Pet-Ausrüstung — Vogel",detail:"Neu mit Patch 1.13.00. Ausrüstungs-Sigil für Vogel-Pets: Ausgerüstet lässt es den Vogel selbstständig Beute (prey) und Sammelobjekte passend zu seiner Spezialisierung apportieren — eine reine Sammel-/Loot-Funktion, kein Kampf. Gegenstück zum 'Sigil of Valor' (Kampf); pro Vogel entscheidet man sich faktisch für eine der beiden Rollen. Interner Item-Code deutet auf ein Pet-Amulett hin.",loc:"Bezugsquelle 3 Tage nach Release (Stand 06.07.2026) noch nicht dokumentiert — vermutlich Händler/Quest, offen. Quelle: offizielle Patchnotes 1.13.00 (Pearl Abyss, boardNo 105).",miss:false,conf:"medium"},
+  {name:"Hunter's Sigil",cat:"Pet-Ausrüstung — Vogel",detail:"Neu mit Patch 1.13.00. Ausrüstungs-Sigil für Vogel-Pets: Ausgerüstet lässt es den Vogel selbstständig Beute (prey) und Sammelobjekte passend zu seiner Spezialisierung apportieren — eine reine Sammel-/Loot-Funktion, kein Kampf. Gegenstück zum 'Sigil of Valor' (Kampf); pro Vogel entscheidet man sich faktisch für eine der beiden Rollen. Interner Item-Code deutet auf ein Pet-Amulett hin.",loc:"Verkauf durch die wandernde Pet-Händlerin Lacey (kein fester Stand) — tagsüber auf den Hauptwegen um Pororin/Florindale (Hernand) anzutreffen, z.B. morgens beim großen Baum in Florindale. Voraussetzung: Abschluss der Trembling-Woods-Questreihe (bereits erfüllt, wer via Sotdae of Bond Vögel gezähmt hat). Quelle: keengamer, thegameswiki, VULKK.",miss:false,conf:"high"},
   {name:"Sigil of Valor",cat:"Pet-Ausrüstung — Vogel",detail:"Pet-Ausrüstungs-Sigil, das ein Pet aktiv am Kampf teilnehmen lässt: Es greift nahe Gegner automatisch an (wirkt vor allem gegen starke Gegner mit viel HP), statt nur nach dem Kampf zu looten. Anlegbar auf Hunde und Baby-Wyverns; seit Patch 1.13.00 auch auf Iron Eagle und Phoenix (die Freischaltung war in 1.11.00 zunächst wieder gestrichen worden). Nicht mit dem neuen 'Hunter's Sigil' (reine Sammel-Funktion) verwechseln.",loc:"Bei der wandernden Geheimhändlerin Lacey (Shai-NPC) im Raum Pororin/Florindale (meist im Nebendorf Florindale), ~8 Silber — erfordert vorher den Abschluss der 'Unreachable Village'-Fraktions-Questreihe. Quelle: Gfinity Esports, game8, PC Gamer.",miss:false,conf:"high"},
   {name:"Firefly Lantern",cat:"Werkzeug — Lampe",detail:"Legendäre Laterne, die seit Generationen im Longleaf Forest weitergegeben wird. Wenn ihr Licht scheint, steigen kleine glühwürmchenartige Geister auf und lindern Wunden mit warmer Energie. Einzige Laterne im Spiel mit einer Zusatzfähigkeit ('Firefly Dust'): erhöht während des Tragens stark die Lebensregenerations-Rate.",loc:"Belohnung für die Faktions-Quest 'Dissipated Fog' (Bright Longleaf Forest) des Longleaf Tribe in Pailune; setzt das Abschließen der Questreihen von Pailune-Miliz und Skoghorn Tribe voraus. Quelle: Sportskeeda, Fextralife, gamerguides.com",miss:true,conf:"high"},
   {name:"Lantern",cat:"Werkzeug — Lampe",detail:"Basis-Laterne und tragbare Lichtquelle zum Ausleuchten dunkler Bereiche (Kerze oder Öl in einem Eisenrahmen). Sie heftet sich an Kliffs Ausrüstung und bleibt entzündet, ohne die Hände für Kampf oder Erkundung zu blockieren; sie kann manuell hochgehalten (gerichtetes Licht) oder im Auto-Modus genutzt werden. In der Nähe von Memory Fragments pulsiert sie und leuchtet blau, als Signal, dort mit dem Visione zu lesen, und hilft, Spuren und Hinweise für bestimmte Rätsel sichtbar zu machen. Aktivierung: L1/LB/Strg halten; Ein/Aus über das Ausrüstungs-Radialmenü (Links-D-Pad bzw. F2). Am Blacksmith verbesserbar.",loc:"Standardmäßig im Verlauf der Quest 'Unknown Space' (Prolog 'Dead of Night') freigeschaltet. Ersatz beim Provisioner's Shop für 10 Kupfer überall in Pywel kaufbar. Quelle: Game8, Fextralife",miss:false,conf:"high"},
@@ -12152,9 +12162,9 @@ const SANCTUM_GUIDE=[
   {name:"Sanctum of Deliverance",region:"Hernand (Stormtalon Ridge, SO)",req:"Hexe Bari freischalten (südwestl. Pailune City finden + Lagerfeuer entzünden — NICHT über Crow Tokens)",reward:"Bari-Questlinie",boss:"–",tip:"Bari (Güte). Die 4 Crow Tokens sind für White Crow, nicht für Bari."},
   {name:"Sanctum of Atonement",region:"Hernand (Haunted Hill, West)",req:"Bari-Questlinie",reward:"Craft-Rezept",boss:"–",tip:"Bari (Güte)."},
   {name:"Sanctum of Devotion",region:"Delesyia (Hushwind Hills / Dewhaven)",req:"Lyselia-Questlinie (Hexe der Demut)",reward:"Blueprint: Kuku Ice-Resistant Armor (hohe Eis-Resistenz, KEINE volle Immunität)",boss:"–",tip:"Lyselia (Demut). Quelle des Kuku-Ice-Blueprints."},
-  {name:"Sanctum of Veneration",region:"Delesyia (Mount Benus / Blue Thicket)",req:"Lyselia-Questlinie",reward:"Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
-  {name:"Sanctum of Oblation",region:"Delesyia (Insel bei Blue Thicket)",req:"Lyselia-Questlinie",reward:"Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
-  {name:"Sanctum of Faith",region:"Delesyia (Grey Forest, Ost)",req:"Lyselia-Questlinie",reward:"Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
+  {name:"Sanctum of Veneration",region:"Delesyia (Mount Benus / Blue Thicket)",req:"Lyselia-Questlinie",reward:"Fortschritt in der Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
+  {name:"Sanctum of Oblation",region:"Delesyia (Insel bei Blue Thicket)",req:"Lyselia-Questlinie",reward:"Fortschritt in der Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
+  {name:"Sanctum of Faith",region:"Delesyia (Grey Forest, Ost)",req:"Lyselia-Questlinie",reward:"Fortschritt in der Lyselia-Questlinie",boss:"–",tip:"Lyselia (Demut)."},
   {name:"Sanctum of Expiation",region:"Demeniss (Nord/NW, nördl. Gate of Truth)",req:"Hexe Areciel freischalten (1 Copper an Kind bei Tommaso)",reward:"Areciel-Questlinie",boss:"–",tip:"Areciel (Stärke). Erstes ihrer 3 Sanctums."},
   {name:"Sanctum of Renunciation",region:"Drywind Valley / Red River (Grenze Demeniss/Crimson Desert/Delesyia)",req:"Areciel-Questlinie",reward:"Revelation-Zugang",boss:"–",tip:"Areciel (Stärke). Genaue Regionsbezeichnung quellenübergreifend uneinheitlich (Grenzgebiet am Red River)."},
   {name:"Sanctum of Revelation",region:"Demeniss (Serpent Marsh, NO-Insel)",req:"Sanctum of Renunciation abgeschlossen",reward:"Endgame Abyss-Core + Stärke-Infusion",boss:"–",tip:"Areciel (Stärke). Spätspiel-Ziel, einer der Top-Endgame-Cores."},
@@ -12223,6 +12233,9 @@ function toggleChDone(num){
   localStorage.setItem('cd_ch_done',JSON.stringify(d));
   renderChapters();
   if(typeof renderQuestHero==='function'&&document.getElementById('quest-hero'))renderQuestHero();
+  if(typeof updateStats==='function')updateStats();
+  if(typeof checkAchievements==='function')checkAchievements();
+  if(typeof renderAchievements==='function')renderAchievements();
 }
 
 // ===== PATCH NOTES =====
@@ -12291,7 +12304,7 @@ const PATCHES=[
       "39 neue Ausrüstungsteile für Kliff/Oongka: 20 Boss-Ausrüstungsteile aus 5 Sets (Tarandus the Ashen 5, Unyielding Hero 5, Knight of Carnage 5, Martial Monk 3, Grand General of Demeniss 2), dazu 16 weitere Rüstungsteile und 3 Kopfbedeckungen",
       "Oongka kann jetzt die meisten Kliff-Outfits tragen",
       "6 zusätzliche Kuku-Ausrüstungsteile für Kliff/Oongka (separat von den 39): Kuku Lightning-Resistant Armor, Kuku Flame-Resistant Armor, Kuku Ice-Resistant Armor, Kuku Breeze-Step Boots, Kuku Rishi's Boots, Kuku Marni Laser Helm",
-      "8 neue Ausrüstungsteile für Damiane, darunter Boss-Ausrüstung der Sets Guardian of Odeck, Dark Marksman und Masked Liberator",
+      "8 neue Ausrüstungsteile für Damiane laut Notes-Zahl; separat nennen die Notes zusätzlich, dass Damiane jetzt Boss-Ausrüstung tragen kann: 5 Teile Odeck's Protector/Guardian of Odeck, 3 Teile Dark Marksman, 1 Teil Masked Liberator (Summe 9 — andere Zählung als die genannten 8 Teile)",
       "Neues Item 'Hunter's Sigil': lässt ein Vogel-Pet Beute und Sammelobjekte passend zu seiner Spezialisierung apportieren",
       "Neue Crafting-Rezepte: 4 Teppich-Typen sowie die Plattenpanzer Lightning Bolt, Scorchflame und Frostcursed",
       "Neue Spezialangriffe für Gegner hinzugefügt: Flame Knight, Wyvernflames, Savage Fang, Goldenscale Bandits",
@@ -13689,7 +13702,7 @@ function _reRuin(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").
 function _ruinCard(p){
   var steps=(p.steps||[]).map(function(s,i){return '<div class="disarm-step"><div class="disarm-num">'+(i+1)+'</div><div class="disarm-txt">'+_reRuin(s)+'</div></div>';}).join("");
   var warn=(p.warn&&p.warn.length)?'<div class="ruin-warn"><strong>⚠ Hinweise</strong><ul>'+p.warn.map(function(w){return '<li>'+_reRuin(w)+'</li>';}).join("")+'</ul></div>':"";
-  var imgs=(p.imgs||[]).map(function(b){var f=_RUIN_B+b+".jpg",t=_RUIN_B+b+"-300x169.jpg",cap=_reRuin(p.name+" · AR"+p.ar+" — Lösung (PowerPyx)");return '<img src="'+t+'" loading="lazy" alt="'+_reRuin(p.name)+'" onerror="this.style.display=\'none\'" onclick="openRuinImg(\''+f+'\',\''+cap+'\')">';}).join("");
+  var imgs=(p.imgs||[]).map(function(b){var f=_RUIN_B+b+".jpg",t=_RUIN_B+b+"-300x169.jpg",cap=_reRuin(p.name+" · AR"+p.ar+" — Lösung (PowerPyx)");var fJs=f.replace(/\\/g,'\\\\').replace(/'/g,"\\'"),capJs=cap.replace(/\\/g,'\\\\').replace(/'/g,"\\'");return '<img src="'+t+'" loading="lazy" alt="'+_reRuin(p.name)+'" onerror="this.style.display=\'none\'" onclick="openRuinImg(\''+fJs+'\',\''+capJs+'\')">';}).join("");
   var srcs=(p.srcs||[]).map(function(s){return '<a href="'+s.u+'" target="_blank" rel="noopener noreferrer">'+_reRuin(s.n)+'</a>';}).join(" · ");
   var badge=(p.conf==="medium")
     ? '<span class="ruin-conf med" title="'+_reRuin(p.conflicts||"")+'">geprüft · exakte Sequenz quellenabhängig</span>'
