@@ -61,6 +61,82 @@ const has = (v) => v != null && String(v).trim() !== "" && String(v).trim() !== 
 // Bild-URL: absolute (http/https, z.B. questlog-CDN) unveraendert, sonst root-relativ
 const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 
+// ── Echte Bild-Dimensionen aus Dateiheadern (PNG IHDR, WebP VP8/VP8L/VP8X) ────
+// Grund: #boss-grid-Karten und die SEO-Boss-Artikel sind auf einen 16:9-Container
+// fixiert (kein CLS wg. HUD-Overlays). ~44 Boss-Bilder SIND selbst 16:9 (fex/*300px)
+// -> object-fit:cover passt fast verlustfrei. ~54 Bilder sind quadratische 512x512-
+// Assets (lokale fex-Ausnahmen + questlog-CDN cd_knowledgeimage_*/cd_questimage_*)
+// -> cover schneidet dort ~42% vertikal weg. Fix: echte Dimension ermitteln, bei
+// Abweichung vom 16:9-Container (Verhaeltnis < 1.5) Klasse "sq" setzen, die per CSS
+// auf object-fit:contain umschaltet (Letterboxing auf dem dunklen img-Hintergrund).
+function dimsFromBuffer(buf) {
+  if (buf.length >= 24 && buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47) {
+    // PNG: IHDR-Chunk beginnt fix bei Offset 16 (Breite), 20 (Hoehe), big-endian
+    return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
+  }
+  if (buf.length >= 30 && buf.toString("ascii", 0, 4) === "RIFF" && buf.toString("ascii", 8, 12) === "WEBP") {
+    const fourcc = buf.toString("ascii", 12, 16);
+    if (fourcc === "VP8 ") {
+      // Lossy VP8: 14-Bit-Werte ab Offset 26/28 (obere 2 Bit sind Skalierungs-Flags)
+      return { w: buf.readUInt16LE(26) & 0x3fff, h: buf.readUInt16LE(28) & 0x3fff };
+    }
+    if (fourcc === "VP8L") {
+      // Lossless VP8L: 14-Bit-Werte (jeweils -1 gespeichert) ab Bit-Offset 21
+      const b0 = buf[21], b1 = buf[22], b2 = buf[23], b3 = buf[24];
+      return {
+        w: 1 + (((b1 & 0x3f) << 8) | b0),
+        h: 1 + (((b3 & 0xf) << 10) | (b2 << 2) | ((b1 & 0xc0) >> 6)),
+      };
+    }
+    if (fourcc === "VP8X") {
+      // Extended: 24-Bit-Werte (jeweils -1 gespeichert), little-endian, ab Offset 24/27
+      return {
+        w: 1 + (buf[24] | (buf[25] << 8) | (buf[26] << 16)),
+        h: 1 + (buf[27] | (buf[28] << 8) | (buf[29] << 16)),
+      };
+    }
+  }
+  return null;
+}
+function dimsFromLocalFile(relPath) {
+  try {
+    return dimsFromBuffer(fs.readFileSync(path.join(ROOT, relPath)));
+  } catch {
+    return null;
+  }
+}
+async function dimsFromRemote(url) {
+  try {
+    // Range-Request reicht fuer die Header (WebP/PNG-Dimensionen stehen in den ersten Bytes);
+    // Fallback auf volle Antwort, falls der Server Range ignoriert (Status 200 statt 206).
+    const res = await fetch(url, { headers: { Range: "bytes=0-65535" } });
+    if (!res.ok) return null;
+    return dimsFromBuffer(Buffer.from(await res.arrayBuffer()));
+  } catch (e) {
+    console.warn(`  WARN: Dimension von ${url} nicht per Netzwerk ermittelbar (${e.message})`);
+    return null;
+  }
+}
+// Map url -> {w,h}. Lokal: synchron aus Datei. Remote (questlog-CDN): per Range-Request
+// (Netzwerkzugriff zur Buildzeit ist in diesem Projekt etabliert, s. scripts/linkcheck.mjs).
+// Schlaegt ein Remote-Fetch fehl, wird konservativ quadratisch (512x512, => "sq") angenommen —
+// das entspricht dem tatsaechlich beobachteten Regelfall dieser CDN-Bildklasse und verhindert,
+// dass ein Netzwerk-Hänger die Cover-Crop-Regression stillschweigend wieder einschleppt.
+const bossImgUrls = [...new Set(Object.values(BOSS_IMGS))];
+const bossImgDims = new Map();
+const remoteUrls = [];
+for (const url of bossImgUrls) {
+  if (/^https?:/i.test(url)) { remoteUrls.push(url); continue; }
+  const d = dimsFromLocalFile(url);
+  if (d) bossImgDims.set(url, d);
+  else console.warn(`  WARN: Header von lokalem Boss-Bild nicht lesbar: ${url}`);
+}
+const remoteDims = await Promise.all(remoteUrls.map(async (url) => [url, await dimsFromRemote(url)]));
+for (const [url, d] of remoteDims) {
+  bossImgDims.set(url, d || { w: 512, h: 512 });
+  if (!d) console.warn(`  WARN: Fallback 512x512 (quadratisch) fuer nicht ermittelbares Remote-Bild: ${url}`);
+}
+
 // HOLO-GLAS-Palette (synchron mit index.html Standard-Theme, tokens.css Design-Sync 2026-07-04).
 // Sora (Display) / IBM Plex Sans (Body) / IBM Plex Mono (Daten). Glas-Panels, Glow-Schatten, Radius 16.
 const SHARED_CSS = `
@@ -106,8 +182,9 @@ background:var(--red);color:#160a08;font-family:var(--f-mono);font-weight:600;fo
 article.card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
 padding:14px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-soft);position:relative;overflow:hidden;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 article.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);box-shadow:0 0 12px var(--red-glow)}
-article.card img{width:100%;height:150px;object-fit:cover;border-radius:8px;
+article.card img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center;border-radius:8px;
 background:#131629;border:1px solid var(--line);filter:grayscale(.15) contrast(1.03)}
+article.card img.sq{object-fit:contain}
 ul.stats{list-style:none;margin:0;padding:0;font-size:13px;display:flex;
 flex-direction:column;gap:3px}
 ul.stats li b{color:var(--amber);font-weight:600;font-family:var(--f-mono)}
@@ -206,8 +283,11 @@ function breadcrumbLd(name, slugName) {
 // ── Seite 1: Bosse ────────────────────────────────────────────────────────────
 function bossArticle(b) {
   const img = BOSS_IMGS[b.name];
+  const d = img ? bossImgDims.get(img) : null;
+  const w = d ? d.w : 300, h = d ? d.h : 169;
+  const sqCls = d && d.w / d.h < 1.5 ? ' class="sq"' : "";
   const imgTag = img
-    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(b.name)} Boss in Crimson Desert" width="300" height="150">`
+    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(b.name)} Boss in Crimson Desert" width="${w}" height="${h}"${sqCls}>`
     : "";
   const stats = [];
   if (b.chapter != null) stats.push(["Kapitel", b.chapter]);

@@ -69,8 +69,9 @@ background:var(--red);color:#160a08;font-family:var(--f-mono);font-weight:600;fo
 article.card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
 padding:14px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-soft);position:relative;overflow:hidden;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 article.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);box-shadow:0 0 12px var(--red-glow)}
-article.card img{width:100%;height:150px;object-fit:cover;border-radius:8px;
+article.card img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center;border-radius:8px;
 background:#131629;border:1px solid var(--line);filter:grayscale(.15) contrast(1.03)}
+article.card img.sq{object-fit:contain}
 ul.stats{list-style:none;margin:0;padding:0;font-size:13px;display:flex;
 flex-direction:column;gap:3px}
 ul.stats li b{color:var(--amber);font-weight:600;font-family:var(--f-mono)}
@@ -108,590 +109,590 @@ font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-align:center;
 <p class="note">Mit Filter nach Region/Kapitel, Such- und Abhak-Funktion in der vollständigen App.</p>
 <h2>Story-Bosse (nach Kapitel, 26)</h2>
 <div class="grid"><article class="card" id="boss-kailok-the-hornsplitter">
-<img loading="lazy" src="/cd_assets/bosses/kailok.webp" alt="Kailok the Hornsplitter Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/kailok.webp" alt="Kailok the Hornsplitter Boss in Crimson Desert" width="300" height="169">
 <h3>Kailok the Hornsplitter</h3>
 <ul class="stats"><li><b>Kapitel:</b> 2</li><li><b>Region:</b> Hernand</li><li><b>Quest:</b> End of Greed</li><li><b>Parry / Dodge:</b> Parry</li><li><b>Waffen-Drop:</b> Sword of the Lord</li><li><b>Abyss-Gear:</b> Wind Slash</li></ul>
 <p class="strat"><b>Strategie:</b> Shield + Force Palm. Slow but powerful hits.</p>
 </article>
 <article class="card" id="boss-matthias">
-<img loading="lazy" src="/cd_assets/bosses/matthias.webp" alt="Matthias Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/matthias.webp" alt="Matthias Boss in Crimson Desert" width="300" height="169">
 <h3>Matthias</h3>
 <ul class="stats"><li><b>Kapitel:</b> 2</li><li><b>Region:</b> Hernand</li><li><b>Quest:</b> Story - For Honor (Unterkapitel Hernand in Chaos)</li><li><b>Parry / Dodge:</b> Parry (Flurry-Ende)</li></ul>
 <p class="strat"><b>Strategie:</b> Watch &amp; Learn: Pump Kick. Standard-Opener.</p>
 </article>
 <article class="card" id="boss-reed-devil">
-<img loading="lazy" src="/cd_assets/bosses/reed_devil.webp" alt="Reed Devil Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/reed_devil.webp" alt="Reed Devil Boss in Crimson Desert" width="300" height="169">
 <h3>Reed Devil</h3>
 <ul class="stats"><li><b>Kapitel:</b> 3</li><li><b>Region:</b> Hernand - Mountain of Frozen Souls (Sued)</li><li><b>Quest:</b> The Face Behind the Mask</li><li><b>Parry / Dodge:</b> Phase 1 Parry; Phase 2 Dodge Waves</li></ul>
 <p class="strat"><b>Strategie:</b> P1: Parry Flurry-Ende. P2: 5 Totems zerstören, Klone ignorieren, rote Waves dodgen. P3: Nahkampf, side-dodge.</p>
 </article>
 <article class="card" id="boss-tenebrum">
-<img loading="lazy" src="/cd_assets/bosses/fex/tenebrum.png" alt="Tenebrum Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/tenebrum.png" alt="Tenebrum Boss in Crimson Desert" width="300" height="169">
 <h3>Tenebrum</h3>
 <ul class="stats"><li><b>Kapitel:</b> 4</li><li><b>Region:</b> Hernand - Scholastone Institute (Abyss-Riss / Spire of the Stars)</li><li><b>Quest:</b> Story - Gate to the Otherworld</li><li><b>Parry / Dodge:</b> Dodge (Luftkampf, bodenlose Arena)</li><li><b>Abyss-Gear:</b> Abyss Artifact (+ Key to the Spire of the Stars vom Dekan)</li></ul>
 <p class="strat"><b>Strategie:</b> Erscheint, als Octavius in den Abyss gezogen wird. Bodenlose Arena gegen einen pausenlos kreisenden fliegenden Gegner: Blinding Flash aktivieren, um die Schwachpunkte sichtbar zu machen, dann per Doppelsprung + Force Palm in der Luft attackieren; hinter Saeulen Spirit regenerieren.</p>
 </article>
 <article class="card" id="boss-draven-the-crowcaller">
-<img loading="lazy" src="/cd_assets/bosses/draven.webp" alt="Draven the Crowcaller Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/draven.webp" alt="Draven the Crowcaller Boss in Crimson Desert" width="300" height="169">
 <h3>Draven the Crowcaller</h3>
 <ul class="stats"><li><b>Kapitel:</b> 5</li><li><b>Region:</b> The Abyss - Crow&#39;s Nest</li><li><b>Quest:</b> Toward the Nest</li><li><b>Parry / Dodge:</b> Mix</li><li><b>Waffen-Drop:</b> Tauria Curved Sword</li><li><b>Abyss-Gear:</b> Crow&#39;s Pursuit, Gale I, Wind Slash</li></ul>
 <p class="strat"><b>Strategie:</b> 3 HP-Bars. Aerial-Phasen: Glider nutzen. Reward auch: Blackwing Leather Mask + Armor.</p>
 </article>
 <article class="card" id="boss-kearush-the-slayer">
-<img loading="lazy" src="/cd_assets/bosses/kearush.webp" alt="Kearush the Slayer Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/kearush.webp" alt="Kearush the Slayer Boss in Crimson Desert" width="300" height="169">
 <h3>Kearush the Slayer</h3>
 <ul class="stats"><li><b>Kapitel:</b> 5</li><li><b>Region:</b> Hernand Highlands</li><li><b>Quest:</b> Story</li><li><b>Parry / Dodge:</b> KEIN Parry/Block — Dodge alles</li><li><b>Waffen-Drop:</b> Abyss Artefakte</li></ul>
 <p class="strat"><b>Strategie:</b> Gorilla. Forward-right dodge → 3 schnelle Hits → disengage. Min: HP Lv4, Sta Lv4, Refine 4 Plate.</p>
 </article>
 <article class="card" id="boss-black-bear-siege-engine">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_blackbear_tank.webp" alt="Black Bear Siege Engine Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_blackbear_tank.webp" alt="Black Bear Siege Engine Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Black Bear Siege Engine</h3>
 <ul class="stats"><li><b>Kapitel:</b> 6</li><li><b>Region:</b> Pailune - Calphade Territory</li><li><b>Quest:</b> Story Kap. 6 &#39;Hidden Fangs&#39;</li><li><b>Schwäche:</b> Whistling Arrows (Luftbombardement zerstört die Panzerung); Stahlpanzerung sonst resistent</li><li><b>Parry / Dodge:</b> Weder — Ranged-Objective: zu Pferd ranreiten, Whistling Arrow schießen, weiterreiten</li></ul>
 <p class="strat"><b>Strategie:</b> Radial-Menü (D-Pad rechts) → Whistling Arrows wählen und jedes gepanzerte Belagerungsgerät mit Kliffs Bogen beschießen → Luftbombardement zerstört es. Alle 5 Tanks in den süd-/zentralen Feldern; Whistling Arrows an freundlichen Lagern nachfüllen (ein Light/Heavy-Skill bricht sie auch direkt).</p>
 </article>
 <article class="card" id="boss-cassius-morten">
-<img loading="lazy" src="/cd_assets/bosses/cassius.webp" alt="Cassius Morten Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/cassius.webp" alt="Cassius Morten Boss in Crimson Desert" width="300" height="169">
 <h3>Cassius Morten</h3>
 <ul class="stats"><li><b>Kapitel:</b> 6</li><li><b>Region:</b> Hernand</li><li><b>Quest:</b> Story - Cracks in the Shield (Traitor)</li><li><b>Parry / Dodge:</b> Parry Sword-Strings; Dodge Shadow-Surge</li><li><b>Waffen-Drop:</b> Shield of Betrayal</li></ul>
 <p class="strat"><b>Strategie:</b> Story-Boss Kap. 6 (&#39;Traitor&#39;). Schildträger mit einer Lebensleiste und langen Angriffsketten. Schwere Angriffe (R2) schaden auch durch den Block - nach 3 Treffern unterbrochen und für leichte Angriffe offen; Tauria Curved Sword + Nature&#39;s Echo empfohlen. Hinweis: Tenebrum ist ein eigener Kap.-4-Boss (Gate to the Otherworld), nicht Cassius&#39; Verwandlung.</p>
 </article>
 <article class="card" id="boss-awakened-ludvig">
-<img loading="lazy" src="/cd_assets/bosses/awakened_ludvig.webp" alt="Awakened Ludvig Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/awakened_ludvig.webp" alt="Awakened Ludvig Boss in Crimson Desert" width="300" height="169">
 <h3>Awakened Ludvig</h3>
 <ul class="stats"><li><b>Kapitel:</b> 7</li><li><b>Region:</b> Pailune - Pailune Castle</li><li><b>Quest:</b> Lonely Jackals (Phase 2)</li><li><b>Parry / Dodge:</b> Dodge alles (unblockbar, kein Knockdown)</li><li><b>Waffen-Drop:</b> Hungering Fang Leather Cloak</li></ul>
 <p class="strat"><b>Strategie:</b> Phase 2 nach dem normalen Ludvig-Kampf. Kann nicht gestaggert/knockt werden, bewegt sich extrem schnell, alle Hits unblockbar. Nur Dodge-Rolls + Recovery Items. Niederlage = gesamter Ludvig-Fight neu. Post-Fight: Ludvig fluechtet einarmig (One Armed Ludvig). Drops: Hungering Fang Leather Cloak + Boots.</p>
 </article>
 <article class="card" id="boss-lava-myurdin-phase-2">
-<img loading="lazy" src="/cd_assets/bosses/lava_myurdin.webp" alt="Lava Myurdin (Phase 2) Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/lava_myurdin.webp" alt="Lava Myurdin (Phase 2) Boss in Crimson Desert" width="300" height="169">
 <h3>Lava Myurdin (Phase 2)</h3>
 <ul class="stats"><li><b>Kapitel:</b> 7</li><li><b>Region:</b> Pailune - Ashclaw Keep</li><li><b>Quest:</b> Battle at Silver Wolf Mountain</li><li><b>Parry / Dodge:</b> Parry Slow-Sword; Dodge Lava Springs</li><li><b>Waffen-Drop:</b> (Drop nach Phase 1)</li><li><b>Abyss-Gear:</b> Groundsurge</li></ul>
 <p class="strat"><b>Strategie:</b> Lava-Bear-Charge 3-4x. Lava Springs: 1s Warnung → wegrollen. Jump-Slam: Bildschirm dunkel → Force Palm. MITTE halten!</p>
 </article>
 <article class="card" id="boss-myurdin-phase-1">
-<img loading="lazy" src="/cd_assets/bosses/myurdin.webp" alt="Myurdin (Phase 1) Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/myurdin.webp" alt="Myurdin (Phase 1) Boss in Crimson Desert" width="300" height="169">
 <h3>Myurdin (Phase 1)</h3>
 <ul class="stats"><li><b>Kapitel:</b> 7</li><li><b>Region:</b> Pailune - Ashclaw Keep</li><li><b>Quest:</b> Battle at Silver Wolf Mountain</li><li><b>Parry / Dodge:</b> Parry Slow-Sword; Dodge All-Fours-Bait</li><li><b>Waffen-Drop:</b> Melted Ambition</li><li><b>Abyss-Gear:</b> Groundsurge</li></ul>
 <p class="strat"><b>Strategie:</b> All-Fours Stance = BAIT, nicht angreifen! Loop: Focus → Blinding Flash → Finisher → R2.</p>
 </article>
 <article class="card" id="boss-one-armed-ludvig">
-<img loading="lazy" src="/cd_assets/bosses/ludvig.webp" alt="One-Armed Ludvig Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/ludvig.webp" alt="One-Armed Ludvig Boss in Crimson Desert" width="300" height="169">
 <h3>One-Armed Ludvig</h3>
 <ul class="stats"><li><b>Kapitel:</b> 7</li><li><b>Region:</b> Pailune - Kingshield Mountain</li><li><b>Quest:</b> Story - Time to Face Justice (Twisted Fate, als Oongka)</li><li><b>Parry / Dodge:</b> Parry &amp; Dodge</li></ul>
 <p class="strat"><b>Strategie:</b> Tritt direkt nach dem Lava-Myurdin-Fight auf. Humanoider Nahkampf-Boss — Combos mit einem Arm. Vorsicht nach dem langen Myurdin-Gauntlet: Ressourcen einteilen! (Regions-Hinweis: Kingshield Mountain — game8 verortet den Kampf in Pailune/Kap. 7, Fextralife &amp; GameRant unter Demeniss; Quellenkonflikt, hier Pailune wegen Kap.-7-Zugehörigkeit direkt nach Lava Myurdin.)</p>
 </article>
 <article class="card" id="boss-awakened-lucian-bastier">
-<img loading="lazy" src="/cd_assets/bosses/awakened_lucian.webp" alt="Awakened Lucian Bastier Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/awakened_lucian.webp" alt="Awakened Lucian Bastier Boss in Crimson Desert" width="300" height="169">
 <h3>Awakened Lucian Bastier</h3>
 <ul class="stats"><li><b>Kapitel:</b> 8</li><li><b>Region:</b> Demeniss - Spire of Clockwork</li><li><b>Quest:</b> A Fleeting Dream (Phase 2)</li><li><b>Parry / Dodge:</b> Dodge (Fiend Dash unblockbar)</li><li><b>Waffen-Drop:</b> Official Knight&#39;s Plate Armor</li></ul>
 <p class="strat"><b>Strategie:</b> Phase 2 nach Lucian Bastier. Wechselt Shield+Morgenstern gegen riesige Armklinge. Fiend Dash = unblockbar, sofort kontern. Whirling Slash und Impale ausweichen. Force Palm 3-Combo fuelltStagger-Bar schnell. Feuer-DoT-Schaden ueber Zeit beachten. Drops: Ponytail Ticket + Official Knight Set + Eclipsed Solas Plate Gloves + Spire Key.</p>
 </article>
 <article class="card" id="boss-gabriel-caliburn">
-<img loading="lazy" src="/cd_assets/bosses/gabriel.webp" alt="Gabriel Caliburn Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/gabriel.webp" alt="Gabriel Caliburn Boss in Crimson Desert" width="300" height="169">
 <h3>Gabriel Caliburn</h3>
 <ul class="stats"><li><b>Kapitel:</b> 8</li><li><b>Region:</b> Demeniss - Demeniss Castle</li><li><b>Quest:</b> Story - The Blood Coronation (scripted Loss)</li><li><b>Parry / Dodge:</b> Scripted — kein klassischer Sieg</li></ul>
 <p class="strat"><b>Strategie:</b> SCRIPTED LOSS Kap. 8: Kliff verliert garantiert, egal wie gut man spielt. Cutscene-Übergang. Reale Rematch erst in Kap. 12 als Corrupted Caliburn. In 1.07 als Rematch-Boss bei Fort Musket via Laterne verfügbar.</p>
 </article>
 <article class="card" id="boss-gregor-the-halberd-of-carnage">
-<img loading="lazy" src="/cd_assets/bosses/gregor.webp" alt="Gregor the Halberd of Carnage Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/gregor.webp" alt="Gregor the Halberd of Carnage Boss in Crimson Desert" width="300" height="169">
 <h3>Gregor the Halberd of Carnage</h3>
 <ul class="stats"><li><b>Kapitel:</b> 8</li><li><b>Region:</b> Hernand - Fort Ironclad</li><li><b>Quest:</b> Where The Wind Guides You</li><li><b>Parry / Dodge:</b> Dodge (Impaling Spear unblockbar)</li><li><b>Waffen-Drop:</b> Golden Vanguard</li><li><b>Abyss-Gear:</b> Abyss Artifact</li></ul>
 <p class="strat"><b>Strategie:</b> Vor Kampf: Pfeilfallen in der Halle zerstoeren. Langsame Drehrate ausnutzen — Backstab-Konter. Force Palm maxen → 3er-Combo → Stagger. Defensive Spielweise, Distanz halten.</p>
 </article>
 <article class="card" id="boss-lucian-bastier">
-<img loading="lazy" src="/cd_assets/bosses/lucian.webp" alt="Lucian Bastier Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/lucian.webp" alt="Lucian Bastier Boss in Crimson Desert" width="300" height="169">
 <h3>Lucian Bastier</h3>
 <ul class="stats"><li><b>Kapitel:</b> 8</li><li><b>Region:</b> Demeniss - Spire of Clockwork</li><li><b>Quest:</b> Story - A Fleeting Dream (Damiane-Solo)</li><li><b>Parry / Dodge:</b> Dodge</li><li><b>Abyss-Gear:</b> Flames of Judgment</li></ul>
 <p class="strat"><b>Strategie:</b> Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Demeniss (Quest &#39;A Fleeting Dream&#39;).</p>
 </article>
 <article class="card" id="boss-goyen">
-<img loading="lazy" src="/cd_assets/bosses/fex/Goyen-image-1-bosses-wiki-guide-300px.webp" alt="Goyen Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Goyen-image-1-bosses-wiki-guide-300px.webp" alt="Goyen Boss in Crimson Desert" width="300" height="169">
 <h3>Goyen</h3>
 <ul class="stats"><li><b>Kapitel:</b> 9</li><li><b>Region:</b> Abyss - Nest of Valor (via Spire of the Sun)</li><li><b>Quest:</b> Story Kap. 9 &#39;Unwavering Steps&#39; (via Abyss)</li><li><b>Parry / Dodge:</b> Turning Slash &amp; Three-Slash-Combo parieren für Counter; Expertise-Move dodgen (Evasive/Aerial Roll)</li><li><b>Abyss-Gear:</b> Witch&#39;s Ring; Greymane&#39;s Earring</li></ul>
 <p class="strat"><b>Strategie:</b> Spiegelt dein eigenes Moveset und trifft extrem hart (1-2-Hit-Kills). HP oben halten, großen Schild führen, Konter abwarten.</p>
 </article>
 <article class="card" id="boss-hexe-marie">
-<img loading="lazy" src="/cd_assets/bosses/hexe_marie.webp" alt="Hexe Marie Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/hexe_marie.webp" alt="Hexe Marie Boss in Crimson Desert" width="300" height="169">
 <h3>Hexe Marie</h3>
 <ul class="stats"><li><b>Kapitel:</b> 9</li><li><b>Region:</b> Demeniss - Hexe Sanctuary</li><li><b>Quest:</b> Black Witch</li><li><b>Schwäche:</b> Feuer (Barrier-Phase)</li><li><b>Parry / Dodge:</b> Parry Melee; Dodge Crow Barrage</li><li><b>Waffen-Drop:</b> Crow Whisperer</li></ul>
 <p class="strat"><b>Strategie:</b> Vor-Quest: 4 Totems S→N. Crow Barrage: senkrecht zu ihr rollen. Adds: Urn Swordsman first. [Hidden Lore: Hexe Marie ist der korrumpierte/fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff. Siehe Secrets-Section.]</p>
 </article>
 <article class="card" id="boss-t-rukan-the-ascended">
-<img loading="lazy" src="/cd_assets/bosses/fex/Trukan-image-1-bosses-wiki-guide-300px.webp" alt="T&#39;rukan the Ascended Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Trukan-image-1-bosses-wiki-guide-300px.webp" alt="T&#39;rukan the Ascended Boss in Crimson Desert" width="300" height="169">
 <h3>T&#39;rukan the Ascended</h3>
 <ul class="stats"><li><b>Kapitel:</b> 9</li><li><b>Region:</b> Demeniss - Serpent Marsh (Süd)</li><li><b>Quest:</b> Story Kap. 9 &#39;The Sage of the Desert&#39; / &#39;True Strength&#39;</li><li><b>Parry / Dodge:</b> Beides: Block + Counter (L1) bricht Guard, oder Combos dodgen</li><li><b>Waffen-Drop:</b> T&#39;rukan&#39;s Fighting Spirit</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Wooden Mask of Lost Justice</li></ul>
 <p class="strat"><b>Strategie:</b> Unbewaffneter Boss, 1 HP-Bar, sehr schnell und hart. Geduldig: im Block countern (Guard brechen) oder Combos ausweichen, dann 1-2 Hits, zurückziehen. Bei lila Glühen wegflüchten.</p>
 </article>
 <article class="card" id="boss-cloud-fortress-orbian">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_del_marniaircastle.webp" alt="Cloud Fortress Orbian Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_del_marniaircastle.webp" alt="Cloud Fortress Orbian Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Cloud Fortress Orbian</h3>
 <ul class="stats"><li><b>Kapitel:</b> 11</li><li><b>Region:</b> Delesyia</li><li><b>Quest:</b> Story Kap. 11 &#39;Truth and Reality&#39; (Foreboding Shadow) — &#39;Flying Fortress Orbian&#39;; braucht &#39;Whispers in the Wind&#39;</li><li><b>Schwäche:</b> Zentrales goldenes Auge/Core — invuln bis Stun-Bar voll, dann Shutdown (massiver Schaden); Bogen mit Charged/Focused Shot</li><li><b>Parry / Dodge:</b> Dodge — Ranged-Fight (Bogen); in Bewegung bleiben gegen Laser/Projektile</li></ul>
 <p class="strat"><b>Strategie:</b> Zwei Phasen: erst auf Blackstar (Drache) die äußeren gelben Cores mit Feuer zerstören, dann zu Fuß innen. Core-Boss: mit Bogen zielen, Charged/Focused Shot (Auge 4x markieren) für großen Schaden; oder Nature&#39;s Snare/Axiom Force für Sofort-Stun, dann im Shutdown bursten. Volle Pfeile, nicht sterben (sonst Festung von vorn).</p>
 </article>
 <article class="card" id="boss-golden-star">
-<img loading="lazy" src="/cd_assets/bosses/golden_star.webp" alt="Golden Star Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/golden_star.webp" alt="Golden Star Boss in Crimson Desert" width="300" height="169">
 <h3>Golden Star</h3>
 <ul class="stats"><li><b>Kapitel:</b> 11</li><li><b>Region:</b> Delesyia - Marni&#39;s Masterium</li><li><b>Quest:</b> Master of a Forgotten Land</li><li><b>Schwäche:</b> Blitz P2 (3x Schaden)</li><li><b>Parry / Dodge:</b> Dodge alles</li><li><b>Waffen-Drop:</b> Power Core (Story)</li></ul>
 <p class="strat"><b>Strategie:</b> P1: Marni-Spear-Pylons → L2+R2 → Stagger-Bar. Golem Adds sofort killen. P2: auf Blackstar, Force Palm aufs Auge.</p>
 </article>
 <article class="card" id="boss-storm-crusher">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_tank_lase.webp" alt="Storm Crusher Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_tank_lase.webp" alt="Storm Crusher Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Storm Crusher</h3>
 <ul class="stats"><li><b>Kapitel:</b> 11</li><li><b>Region:</b> Delesyia - Aeronautical Research Base</li><li><b>Quest:</b> Story Kap. 11 &#39;Fortress Keys&#39; (Brave New World) — Basis befreien, Fortress Key</li><li><b>Parry / Dodge:</b> Dodge — Charge-Angriffe aus Distanz ausweichen (sonst One-Shot); Kanonensalven auf rotes Aufblitzen</li><li><b>Waffen-Drop:</b> Marni Musket (+ Delesyian Ornamental Shield)</li></ul>
 <p class="strat"><b>Strategie:</b> Feuer-Tank, 1 HP-Bar, 3 distanzabhängige Angriffe (Ram nah, Explosivschüsse mittel, Raketen weit). Auf Distanz bleiben und Raketen mit Nature&#39;s Snare/Retribution zurückwerfen; oder Stun-Bar mit Turning Slash (R1+R2), mit Axiom Force + Aerial draufspringen und den grünen Kern R2-staben (kann buggen).</p>
 </article>
 <article class="card" id="boss-thunder-tank">
-<img loading="lazy" src="/cd_assets/bosses/fex/Thunder-tank-image-1-bosses-wiki-guide-300px.webp" alt="Thunder Tank Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Thunder-tank-image-1-bosses-wiki-guide-300px.webp" alt="Thunder Tank Boss in Crimson Desert" width="300" height="169">
 <h3>Thunder Tank</h3>
 <ul class="stats"><li><b>Kapitel:</b> 11</li><li><b>Region:</b> Delesyia - Valvegard Garrison (SO)</li><li><b>Quest:</b> Kap. 11 &#39;Brave New World&#39; / Fortress Keys. Garrison via Marni&#39;s Transporter (Force-Field)</li><li><b>Schwäche:</b> Nicht block-/parrierbar; eigene Projektile reflektierbar</li><li><b>Parry / Dodge:</b> Dodge, kein Parry — Angriffe unblockbar. Distanz halten, Evasive Roll, Nature&#39;s Snare</li><li><b>Waffen-Drop:</b> Mechanical Clockwork Blaster</li><li><b>Abyss-Gear:</b> Abyss-Artefakt x1</li></ul>
 <p class="strat"><b>Strategie:</b> Abstand halten und mit Nature&#39;s Snare (Lv2, Nature&#39;s Retribution) die Raketen/Projektile abfangen und zurückwerfen; Spirit dazwischen aufladen.</p>
 </article>
 <article class="card" id="boss-avatar-of-umbra">
-<img loading="lazy" src="/cd_assets/bosses/avatar_umbra.webp" alt="Avatar of Umbra Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/avatar_umbra.webp" alt="Avatar of Umbra Boss in Crimson Desert" width="1280" height="720">
 <h3>Avatar of Umbra</h3>
 <ul class="stats"><li><b>Kapitel:</b> 12</li><li><b>Region:</b> The Abyss</li><li><b>Quest:</b> Blinding Darkness</li><li><b>Parry / Dodge:</b> Dodge rote Attacks</li></ul>
 <p class="strat"><b>Strategie:</b> Kombiniert alle Boss-Moves. Fire-Fist DoT + Ancestral Warriors. Maximum aggro + Healing.</p>
 </article>
 <article class="card" id="boss-corrupted-caliburn">
-<img loading="lazy" src="/cd_assets/bosses/gabriel.webp" alt="Corrupted Caliburn Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/gabriel.webp" alt="Corrupted Caliburn Boss in Crimson Desert" width="300" height="169">
 <h3>Corrupted Caliburn</h3>
 <ul class="stats"><li><b>Kapitel:</b> 12</li><li><b>Region:</b> The Abyss</li><li><b>Quest:</b> A Shadow in the Void</li><li><b>Parry / Dodge:</b> Parry Sword-Strings; Dodge Teleport-Smash</li><li><b>Waffen-Drop:</b> Twisted Verdict</li><li><b>Abyss-Gear:</b> Abyssal Rays</li></ul>
 <p class="strat"><b>Strategie:</b> SAVE VOR DEM GATE! Stillstand → hinter dodgen, 4 Heavy + Light bis Shadow-Wave → durchdodgen. [Hidden Lore: Caliburn ist eine Inkarnation von Umbra — siehe Run-108-Auflösung in Secrets-Section.]</p>
 </article>
 <article class="card" id="boss-umbra-final">
-<img loading="lazy" src="/cd_assets/bosses/umbra-final.webp" alt="Umbra (Final) Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/umbra-final.webp" alt="Umbra (Final) Boss in Crimson Desert" width="1920" height="1080">
 <h3>Umbra (Final)</h3>
 <ul class="stats"><li><b>Kapitel:</b> 12</li><li><b>Region:</b> The Abyss</li><li><b>Quest:</b> Blinding Darkness</li><li><b>Parry / Dodge:</b> Dodge Lasers/Rocks</li><li><b>Waffen-Drop:</b> Falling Palm Skill + 99.999 ATK Waffe</li></ul>
 <p class="strat"><b>Strategie:</b> Auf Blackstar. R1 Fireballs aufs Auge → Stagger → Dismount → Glide → Air-Dash → Force Palm aufs Auge (2-3x).</p>
 </article></div>
 <h2>Welt- &amp; Fraktionsbosse (72)</h2>
 <div class="grid"><article class="card" id="boss-abyss-kutum">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_ancientworm.webp" alt="Abyss Kutum Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_ancientworm.webp" alt="Abyss Kutum Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Abyss Kutum</h3>
 <ul class="stats"><li><b>Region:</b> Abyss - Twisted Thicketway (via Sage&#39;s Peak)</li><li><b>Quest:</b> Optionale Abyss-Puzzle-Kette (Twisted Thicketway / Spire of the Stars, Kap. IV)</li><li><b>Schwäche:</b> Abyss-Core (roter Diamant) — mit Axiom Force ziehen; freigelegtes Auge per Bogen staggerbar</li><li><b>Parry / Dodge:</b> Dodge (kein Parry): vor der Laser-Barrage sprinten, nach dem Burrow seitlich timen beim Ground-Slam</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Power Core (Spire of Defiance)</li></ul>
 <p class="strat"><b>Strategie:</b> Mit dem Bogen die Stagger-Bar aufbauen, das Auge runterholen, dann Axiom Force den roten Abyss-Core herausreißen für ein großes Fenster — dabei Laser-Regen und Burrow-Slam dodgen. Schneller Cheese: außerhalb der Arena einen Baum schlagen und mit Nature&#39;s Grasp draufhauen (One-Shot).</p>
 </article>
 <article class="card" id="boss-aeserion-the-great-serpent">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_giantsnake.webp" alt="Aeserion, the Great Serpent Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_giantsnake.webp" alt="Aeserion, the Great Serpent Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Aeserion, the Great Serpent</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Serpent Shrine (S Dewhaven)</li><li><b>Quest:</b> Faction &#39;Shackled God&#39; — erst die 3 Ancients (Priscus/Primus/Praevus) + Kap.-9-Force-Palm-Upgrade</li><li><b>Schwäche:</b> Freigelegte goldene Korruptions-Cores nach Zerstören der Bismuth-Emitter; Lightning-Res (periodische Blitze)</li><li><b>Parry / Dodge:</b> Kein klassischer Parry/Dodge-Fight — auf dem Rücken reiten, beim Emitter-Entladen vom elektrifizierten Rücken weg</li><li><b>Waffen-Drop:</b> Aeserion Sword (1H); schaltet 10 craftbare Aeserion-Waffen frei (Blueprint)</li></ul>
 <p class="strat"><b>Strategie:</b> Auf Aeserions Rücken klettern, die 3 Bismuth-Emitter mit Turning Slash (R1+R2) brechen, dann Focus (R3) auf den goldenen Schwachpunkt → loslassen zerstört den Core. Schnell arbeiten (Emitter graben sich neu ein), bei Elektrifizierung weggehen. Endgame-Tier — Heilung mitbringen.</p>
 </article>
 <article class="card" id="boss-antumbra-s-spear">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasspear.webp" alt="Antumbra&#39;s Spear Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasspear.webp" alt="Antumbra&#39;s Spear Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Antumbra&#39;s Spear</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Sanctum of Revelation (NO Serpent Marsh)</li><li><b>Quest:</b> Witches-Faction (Witch of Strength / Cloister of Ruination), optional</li><li><b>Schwäche:</b> Kein Element; sehr anfällig für Force Palm (stunnt mehrere Sekunden)</li><li><b>Parry / Dodge:</b> Mix: physische Speer-Thrusts parieren; Magie-Projektile + Teleport-Shadow-Pierce + Phalanx-Klone dodgen/gliden</li><li><b>Waffen-Drop:</b> Thorn of Dark Pursuit (2H Speer)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Seitlich bleiben (lange Speer-Reichweite), mit Force Palm wiederholt stunnen, dann Heavy/Pfeile/Turning Slash. Physische Thrusts parieren, Magie/Teleport-Dashes dodgen/gliden; Säulen (Axiom Force) und Aerial-Glide gegen die Dash-Combos.</p>
 </article>
 <article class="card" id="boss-antumbra-s-staff">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasstaff.webp" alt="Antumbra&#39;s Staff Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasstaff.webp" alt="Antumbra&#39;s Staff Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Antumbra&#39;s Staff</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Sanctum of Solace (O Wayward Woods)</li><li><b>Quest:</b> Optional. &#39;The Witch of Kindness&#39; (Bari) — Sanctum reinigen</li><li><b>Parry / Dodge:</b> Mix: Melee-Combo (bis 3 Hits) parier-/blockbar; Schatten-Projektile dodgen; Teleport-Combo ausweichen</li><li><b>Waffen-Drop:</b> Guidance of Dark Pursuit</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Schatten-Magier: aggressiv und nah bleiben (begrenzt das Casten), den roten geladenen Ground-Slam mit Force Palm unterbrechen, in Focus Mode mit Nature&#39;s Retribution/Snare die Homing-Schatten-Projektile ablenken/absorbieren. Teleport-Volleys dodgen (nicht blocken); Infinite + Explosive Arrows können stagger-locken.</p>
 </article>
 <article class="card" id="boss-antumbra-s-sword">
-<img loading="lazy" src="/cd_assets/bosses/antumbra_sword.webp" alt="Antumbra&#39;s Sword Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/antumbra_sword.webp" alt="Antumbra&#39;s Sword Boss in Crimson Desert" width="300" height="169">
 <h3>Antumbra&#39;s Sword</h3>
 <ul class="stats"><li><b>Region:</b> Sanctum of Absolution</li><li><b>Quest:</b> Sanctum</li><li><b>Parry / Dodge:</b> Dodge Illusionen</li><li><b>Waffen-Drop:</b> Vessel of Dark Pursuit</li><li><b>Abyss-Gear:</b> Wound of Darkness</li></ul>
 <p class="strat"><b>Strategie:</b> Enger Raum, Illusionen → Blinding Flash Spam.</p>
 </article>
 <article class="card" id="boss-ator-archon-of-antumbra">
-<img loading="lazy" src="/cd_assets/bosses/fex/Ator-anchor-of-antumbra-image-1-bosses-wiki-guide-300px.webp" alt="Ator, Archon of Antumbra Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Ator-anchor-of-antumbra-image-1-bosses-wiki-guide-300px.webp" alt="Ator, Archon of Antumbra Boss in Crimson Desert" width="300" height="169">
 <h3>Ator, Archon of Antumbra</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Cloister of Ruination (SW Silverwolf Mtn.)</li><li><b>Quest:</b> Antumbra-Order-Faction-Questline &#39;Archon of Antumbra&#39;</li><li><b>Parry / Dodge:</b> Dodge-Fokus — Rollen statt Blocken (volle Orb-Salve leert Stamina sofort)</li><li><b>Waffen-Drop:</b> Darkbringer</li><li><b>Abyss-Gear:</b> Seal of Pitch-Black Darkness; Abyss-Artefakt x1</li></ul>
 <p class="strat"><b>Strategie:</b> Defensiv: Angriff baiten, dodgen, countern. Nature&#39;s Retribution (Focus) wirft Orb-Projektile zurück (Stagger); Force-Palm-Combo baut die Stagger-Bar.</p>
 </article>
 <article class="card" id="boss-balthazar-the-wyvernflame">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_balthazarwyrmspeaker.webp" alt="Balthazar, the Wyvernflame Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_balthazarwyrmspeaker.webp" alt="Balthazar, the Wyvernflame Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Balthazar, the Wyvernflame</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Fort Windridge (SO Three Brothers&#39; Cliff)</li><li><b>Quest:</b> Faction &#39;The Wyvernflames&#39; (Ironwheel of Dewhaven; ab Kap. 5+)</li><li><b>Schwäche:</b> Ranged; 0 Defense (voller Rohschaden); Cannon-Fire mit Nature&#39;s Snare absorbier-/umlenkbar</li><li><b>Parry / Dodge:</b> Dodge/Block (kein Parry)</li><li><b>Waffen-Drop:</b> Wyvern Blaster (Hand Cannon, Oongka)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Balthazar kämpft v.a. auf Distanz mit Cannon-Fire. Mit Focus die Zeit verlangsamen und Sprung-Angriffe meiden, mit Nature&#39;s Snare Schüsse absorbieren/zurückwerfen + eigene Ranged-Salven, dann mit Melee finishen wenn die HP fällt.</p>
 </article>
 <article class="card" id="boss-beloth-the-darksworn">
-<img loading="lazy" src="/cd_assets/bosses/beloth.webp" alt="Beloth the Darksworn Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/beloth.webp" alt="Beloth the Darksworn Boss in Crimson Desert" width="300" height="169">
 <h3>Beloth the Darksworn</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Hoenmark Ruins (Nord)</li><li><b>Quest:</b> Faction - White Blizzard (House Lanford; Cursed Mountain / Wraith in the Frost)</li><li><b>Parry / Dodge:</b> Dodge fast alles</li><li><b>Waffen-Drop:</b> Plate Armor of the Shadows</li></ul>
 <p class="strat"><b>Strategie:</b> ~3-Hit-Killer (Eis-Thema). FROSTCURSED ICE-RESISTENZ-SET stark empfohlen. Geduld, kein Tank-and-Spank.</p>
 </article>
 <article class="card" id="boss-black-bear-captain">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_questimage_quest_mjordin_boss.webp" alt="Black Bear Captain Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_questimage_quest_mjordin_boss.webp" alt="Black Bear Captain Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Black Bear Captain</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Deepfog Basin (N Calphade Farmhouse)</li><li><b>Quest:</b> Miniboss beim Infiltrieren der Black-Bears-Basis (Kap. 6 &#39;In Ashes&#39; / &#39;Turning Tides&#39;)</li><li><b>Parry / Dodge:</b> Distanz halten &amp; dodgen — Superarmor-Sprungangriff schließt Lücken; Ranged-Encounter, kein Parry-Duell</li></ul>
 <p class="strat"><b>Strategie:</b> Mit den Quest-Whistling-Arrows Artillerie rufen (one-shot + räumt die Soldaten); alternativ vom Turm aus schießen. Abstand halten (Superarmor-Gap-Closer unterbricht Schüsse). Droppt nichts.</p>
 </article>
 <article class="card" id="boss-black-fang">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp" alt="Black Fang Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp" alt="Black Fang Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Black Fang</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Forest of Wolves (N The Sage&#39;s Peak)</li><li><b>Quest:</b> Legendary Wolf</li><li><b>Parry / Dodge:</b> Dodge Lunges/Shadow Claw (wegrollen, dann auf ihn zurollen)</li><li><b>Abyss-Gear:</b> Shadow Claw (+ Key Item: Leebur&#39;s Soul, deckt alle Legendary-Animal-Standorte auf)</li></ul>
 <p class="strat"><b>Strategie:</b> Wolf-Adds mit Meteor Kick wegraeumen, dann Nature&#39;s Grasp auf die Arena-Baeume ausloesen (1 Baum-Treffer = &gt;50% HP; Baeume per Force Palm faellen oder Lunges hineinlocken). Black Fang teleportiert + slasht — Lunges/Shadow-Claw dodgen. Reward: Leebur&#39;s Soul; das Silver-Fang-Mount kommt SEPARAT (eigenes Tier Silver Fang am Howling Hollow erlegen + haeuten = Fang of Silver Fang → bei Witch zum Sigil craften). Die Blitz-Schwaeche gehoert zum getrennten Silver-Fang-Tier, nicht zu Black Fang.</p>
 </article>
 <article class="card" id="boss-bloodwalker-crussis">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_crussistheformshaken.webp" alt="Bloodwalker Crussis Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_crussistheformshaken.webp" alt="Bloodwalker Crussis Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Bloodwalker Crussis</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Silver Wolf Mountain (Süd)</li><li><b>Quest:</b> Pailune-Militia &#39;Bloodied Path&#39; / &#39;Hunting Red&#39; — Bounty in Pailune City</li><li><b>Parry / Dodge:</b> Dodge statt Block (Hits können Guard brechen); mit Focused Repulsion/Explosiv-Pfeilen Stagger aufbauen</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Quest: Bloodstained Blessing, Crossroads Necklace, 7 Silber</li></ul>
 <p class="strat"><b>Strategie:</b> Ancient-Walker-Koloss (wie Cubewalker Lithus) mit Schutz-/Invuln-Totem: in der Invuln-Phase 5 Totems zerstören, dann ist er angreifbar. Mit Focused Repulsion (oder Explosiv-Pfeilen) staggern für große Fenster; dodgen statt blocken.</p>
 </article>
 <article class="card" id="boss-bradie-gu">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_bridie_gu.webp" alt="Bradie Gu Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_bridie_gu.webp" alt="Bradie Gu Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Bradie Gu</h3>
 <ul class="stats"><li><b>Region:</b> Pailune/Demeniss - Bloodsteel Camp (Region umstritten)</li><li><b>Quest:</b> House-Wells &#39;The Divine Echoes&#39; / &#39;Deathchime&#39;</li><li><b>Parry / Dodge:</b> Parry / Perfect-Dodge — nicht blocken (Stamina)</li></ul>
 <p class="strat"><b>Strategie:</b> Outlaw-Warlord mit schnellen Dual-Blade-Combos und Grapple-Countern. Heavy-Attacks meiden (er countert mit Grab); nicht blocken — Parry-Timing und Perfect-Dodges lernen, dann nach der Dual-Blade-Flurry in der Erholung kontern.</p>
 </article>
 <article class="card" id="boss-clockwork-white-horn">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_gearhornrenw.webp" alt="Clockwork White Horn Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_gearhornrenw.webp" alt="Clockwork White Horn Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Clockwork White Horn</h3>
 <ul class="stats"><li><b>Region:</b> Abyss - Clockwork Heart (Eternal Corridor)</li><li><b>Quest:</b> Optionaler/geheimer Boss am Clockwork Heart (finale Arena des Eternal Corridor)</li><li><b>Schwäche:</b> Feuer (Fire-Imbue brennt/staggert); Bonus-Schaden von Maschinen via Steelbane; macht Blitzschaden → Lightning-Res</li><li><b>Parry / Dodge:</b> Dodge/Roll (Parry unzuverlässig)</li></ul>
 <p class="strat"><b>Strategie:</b> Single-Phase, mechanische White-Horn-Variante. Seitlich rollen gegen Ground-Slams (Muster von 2-3) und Horn-Tackles, dann aus Flanke/Rücken kontern. Turning Slash (R1+R2) mit Fire-Imbue (L2+R2) für Stun + i-frames; Lightning-Res + Steelbane für Maschinen-Bonus.</p>
 </article>
 <article class="card" id="boss-crookrock-walker">
-<img loading="lazy" src="/cd_assets/bosses/crookrock_walker.png" alt="Crookrock Walker Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/crookrock_walker.png" alt="Crookrock Walker Boss in Crimson Desert" width="220" height="220" class="sq">
 <h3>Crookrock Walker</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Forebearer&#39;s Barrens</li><li><b>Quest:</b> Optionaler Boss (keine Quest)</li><li><b>Schwäche:</b> Flanken/Seiten offen</li><li><b>Parry / Dodge:</b> Dodge / auf die Flanke reposition (langsame Wind-ups; kein Parry)</li><li><b>Abyss-Gear:</b> Abyss Cell; Power Core - Spire of Defiance; Composure I; Destruction I</li></ul>
 <p class="strat"><b>Strategie:</b> Langsamer Stein-Golem auf einem Abyss-Nexus. Auf der Flanke bleiben (telegrafierte langsame Angriffe meiden), frei Combos setzen. Nach Stagger zerfällt er in Steinstücke — eines der Fragmente angreifen zum Finishen.</p>
 </article>
 <article class="card" id="boss-cubewalker-lithus">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_lithustheformshaken.webp" alt="Cubewalker Lithus Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_lithustheformshaken.webp" alt="Cubewalker Lithus Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Cubewalker Lithus</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Southern Quarry (Grace Estate)</li><li><b>Quest:</b> Optionale Side-Quest &#39;A Rumor in the Southern Quarry&#39; (House Felix)</li><li><b>Schwäche:</b> Leuchtender Würfel am Kopf</li><li><b>Parry / Dodge:</b> Dodge — hinter Felsen Deckung gegen langsame, harte AoE-Steinwürfe; kein Parry</li><li><b>Waffen-Drop:</b> Rune-Engraved Rock (2H)</li></ul>
 <p class="strat"><b>Strategie:</b> Mit Axiom Force den leuchtenden Würfel aus dem Kopf ziehen → zerfällt in angreifbare Fragmente; Heavy-Attacks bis er sich neu zusammensetzt, wiederholen. Bogen empfohlen. Kein Element/Parry nötig.</p>
 </article>
 <article class="card" id="boss-desert-marauder-rusten">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_desert_tank.webp" alt="Desert Marauder Rusten Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_desert_tank.webp" alt="Desert Marauder Rusten Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Desert Marauder Rusten</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Forebearer&#39;s Barrens (N Tashkalp)</li><li><b>Quest:</b> &#39;Marauder of the Desert&#39;</li><li><b>Schwäche:</b> Räder — nicht per Normal-Angriff; nur eigenes umgelenktes Cannon-Fire trifft die Räder, dann den Core</li><li><b>Parry / Dodge:</b> Weder — Nature&#39;s Snare Retribution fängt/lenkt Cannon-Fire um (mobil bleiben gegen Tracking-Shots)</li></ul>
 <p class="strat"><b>Strategie:</b> Cannon-Marauder, immun gegen Direktangriffe. Mit Nature&#39;s Snare Retribution die Tracking-Projektile sammeln und auf die Räder umlenken (2 Räder einer Seite). Wenn er hält und die Front-Hatch öffnet: rein und den Core staben.</p>
 </article>
 <article class="card" id="boss-dreadnought">
-<img loading="lazy" src="/cd_assets/bosses/fex/Dreadnought-image-1-bosses-wiki-guide-300px.webp" alt="Dreadnought Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Dreadnought-image-1-bosses-wiki-guide-300px.webp" alt="Dreadnought Boss in Crimson Desert" width="300" height="169">
 <h3>Dreadnought</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Marni&#39;s Laboratorium</li><li><b>Quest:</b> &#39;Forbidden Gatekeeper&#39; / Fortress-Befreiung (Marni&#39;s Laboratorium, Fortress Key)</li><li><b>Schwäche:</b> Sehr langsame Drehung (~2-3s für 180°) → Rücken offen für Backstabs; Stagger-Bar füllbar</li><li><b>Parry / Dodge:</b> Dodge — alle Angriffe unblockbar; Laser/Melee ausrollen (im Kreis um den Zyklopen-Laser)</li><li><b>Abyss-Gear:</b> Sonic Resonator (Pack/Rückenausrüstung, keine Waffe); Abyss-Artefakt; Frozen Heart Plate Cloak</li></ul>
 <p class="strat"><b>Strategie:</b> Dampf-Mech mit unblockbaren Heavy-Attacks (Drei-Arm-Swing, Charge, Ground-Slam, Zyklopen-Augenlaser, Laser-Regen). Im Kreis dodgen gegen den Laser, in der langsamen ~2-3s-Drehung hinter ihn dashen für Backstabs. Stagger-Bar mit Combos füllen → Stun → Finisher.</p>
 </article>
 <article class="card" id="boss-forestwalker-tervis">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ent_golem.webp" alt="Forestwalker Tervis Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ent_golem.webp" alt="Forestwalker Tervis Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Forestwalker Tervis</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Wayward Woods</li><li><b>Quest:</b> World-Boss, wandernd in den Wayward Woods (keine Quest nötig)</li><li><b>Schwäche:</b> Feuer (Holzkörper – feuer-verzauberte Waffen beschleunigen den Kill)</li></ul>
 <p class="strat"><b>Strategie:</b> Uralter Baumgolem (Ent): eine in einem Baum gefangene Seele, Körper aus verschlungenen Wurzeln und Stämmen. Langsam, aber wuchtige Schläge mit den riesigen Armen. Feuer-Waffen/Skills brennen den Holzkörper schneller nieder. (Parry/Dodge-Details unverifiziert.)</p>
 </article>
 <article class="card" id="boss-fortain-the-cursed-knight">
-<img loading="lazy" src="/cd_assets/bosses/fortain.webp" alt="Fortain the Cursed Knight Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fortain.webp" alt="Fortain the Cursed Knight Boss in Crimson Desert" width="300" height="169">
 <h3>Fortain the Cursed Knight</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Thornbriar Fortress</li><li><b>Quest:</b> The Cursed Knight</li><li><b>Parry / Dodge:</b> Dodge (Specter-Angriffe)</li><li><b>Waffen-Drop:</b> Shackle of Might</li><li><b>Abyss-Gear:</b> Abyss Artifact</li></ul>
 <p class="strat"><b>Strategie:</b> Schwere Ruestung reduziert eigenen Schaden stark. Defensiv spielen. Seelen-Doppelgaenger-Angriffe konsequent ausweichen. Recovery Items und Gear-Verbesserung am Amboss/Schleifstein vor dem Kampf. Lore: Verriet Lord Wells, wurde von der Schwarzen Hexe korrumpiert.</p>
 </article>
 <article class="card" id="boss-full-moon-reaper">
-<img loading="lazy" src="/cd_assets/bosses/fex/Full-moon-reaper-image-1-bosses-wiki-guide-300px.webp" alt="Full Moon Reaper Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Full-moon-reaper-image-1-bosses-wiki-guide-300px.webp" alt="Full Moon Reaper Boss in Crimson Desert" width="300" height="169">
 <h3>Full Moon Reaper</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Eastern Court</li><li><b>Quest:</b> Lunar-Judgment-Faction-Quest (House Elemore) — Eastern Court befreien</li><li><b>Parry / Dodge:</b> Mix: blockbare Schläge parieren (Moon Blade Slash, X-Strike); Blitz-Angriffe dodgen</li><li><b>Waffen-Drop:</b> Circling Moon (Spear)</li></ul>
 <p class="strat"><b>Strategie:</b> Hinter ihr bleiben (lange Speer-Reichweite, Crescent-Projektile); bewegt/dreht langsam — hinter ihr Backstabs für Stagger, dann finishen.</p>
 </article>
 <article class="card" id="boss-giath">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gears.webp" alt="Giath Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gears.webp" alt="Giath Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Giath</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Drakesfall Castle (Nord)</li><li><b>Quest:</b> Optional. House-Celeste-Faction &#39;Bloodied Sword&#39; — Giath &amp; Wolf Trackers in Drakesfall Castle</li><li><b>Schwäche:</b> Anfällig für Grapples (baut Stagger)</li><li><b>Parry / Dodge:</b> Dodge, kein zuverlässiges Parry — unblockbare Heavy-Power-Attacks mit langem Wind-up sofort ausweichen</li><li><b>Waffen-Drop:</b> Savage Sawblade (Unique 1H Sword)</li></ul>
 <p class="strat"><b>Strategie:</b> Wolf-Trackers-Anführer, großer Plattenträger mit Curved-1H-Sword und schnellen Multi-Hit-Combos: ganze Combo abwarten, dann countern. Lange-Wind-up-Power-Attacks dodgen (nicht blocken), zwischen Dodges grappeln für Stagger. Viel Heil-Food mitnehmen.</p>
 </article>
 <article class="card" id="boss-grave-walker">
-<img loading="lazy" src="/cd_assets/bosses/fex/Grave-walker-boss1-crimson-desert-wiki-guide-300px.webp" alt="Grave Walker Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Grave-walker-boss1-crimson-desert-wiki-guide-300px.webp" alt="Grave Walker Boss in Crimson Desert" width="300" height="169">
 <h3>Grave Walker</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Silent Falls Hideout (Hook Rapids)</li><li><b>Quest:</b> Optionaler World-Boss (keine Quest). In der Höhle besiegen</li><li><b>Parry / Dodge:</b> Dodge, kein Parry — Boulder-Wurf, Ground-Smash, Arm-Swing ausweichen, dann hinter ihn</li><li><b>Waffen-Drop:</b> Sorcerer&#39;s Staff (2H)</li><li><b>Abyss-Gear:</b> Power Core - Verse of Sowing; Abyss Cell x1</li></ul>
 <p class="strat"><b>Strategie:</b> Optionaler Fels-Golem, sehr langsam. Telegrafierte Angriffe (Boulder-Wurf, Ground-Smash, Overhead-Slam) dodgen und hinter ihn dashen für mehrere Hits.</p>
 </article>
 <article class="card" id="boss-gristle-the-sandfang-marauder">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gobline_rider_boss.webp" alt="Gristle, the Sandfang Marauder Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gobline_rider_boss.webp" alt="Gristle, the Sandfang Marauder Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Gristle, the Sandfang Marauder</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Howlsands Camp</li><li><b>Quest:</b> &#39;Outlaws of the Desert&#39;</li><li><b>Parry / Dodge:</b> Parry</li><li><b>Waffen-Drop:</b> Tommasoan Bow</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Optionaler Banditen-Anführer am Howlsands Camp; als Humanoid parry-anfällig (erfolgreicher Parry staggert ihn für Free-Damage). Detaillierte Mechanik nicht belegt.</p>
 </article>
 <article class="card" id="boss-gwen-kraber">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gwen_kraver.webp" alt="Gwen Kraber Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_gwen_kraver.webp" alt="Gwen Kraber Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Gwen Kraber</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Roothold (NO)</li><li><b>Quest:</b> Frozen-Eldertree-Questline (House Celeste)</li><li><b>Parry / Dodge:</b> Dodge — schnelle Speer-Dashes/Thrusts vorwärts/seitlich ausweichen; Parry nicht ratsam</li><li><b>Waffen-Drop:</b> Frostfang (2H Speer, aus der Arena)</li><li><b>Abyss-Gear:</b> Icewing Plate Armor mit Shattering Frost (Eis-Imbue)</li></ul>
 <p class="strat"><b>Strategie:</b> Schnelle Speer-Kämpferin mit Long-Reach-Thrusts, Eis-Imbue und Klon-Beschwörung, aber niedrige HP. Dashes dodgen (nicht parieren), dann Heavy-Attacks — kann sie bis zum Tod stunlocken.</p>
 </article>
 <article class="card" id="boss-half-moon-reaper">
-<img loading="lazy" src="/cd_assets/bosses/fex/Half-moon-reaper-image-1-bosses-wiki-guide-300px-re.webp" alt="Half Moon Reaper Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Half-moon-reaper-image-1-bosses-wiki-guide-300px-re.webp" alt="Half Moon Reaper Boss in Crimson Desert" width="300" height="169">
 <h3>Half Moon Reaper</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Western Court (NW)</li><li><b>Quest:</b> Optionaler Boss via &#39;Half Moon Reaper&#39;-Quest, Western Court</li><li><b>Parry / Dodge:</b> Scythe-Combos parieren für Counter; gegen unblockbare Crescent-Waves seitlich dodgen</li><li><b>Waffen-Drop:</b> Grasping Moon (2H Half-Moon-Spear)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt x1</li></ul>
 <p class="strat"><b>Strategie:</b> Aggressivster der drei Lunar Reapers — schnelle Scythe-Combos, Spins, trackende Crescent-Waves. Block/Parry für Counter, im Wave-Moment seitwärts, dann in der Erholung bursten.</p>
 </article>
 <article class="card" id="boss-hemon-beindel">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_hemon_beindel.webp" alt="Hemon Beindel Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_hemon_beindel.webp" alt="Hemon Beindel Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Hemon Beindel</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Fort Hellwood (W Glenbright Manor)</li><li><b>Quest:</b> Optional. Hellhound-Questline &#39;The Rabid Hound of Hellwood&#39; (nach &#39;Reliquary of Saint Senia&#39;)</li><li><b>Parry / Dodge:</b> Slash-Angriffe parieren (bricht Combo, Stagger); Spin-Angriffe dodgen (nicht blocken)</li><li><b>Waffen-Drop:</b> The Hound (2H Greatsword; AoE &#39;Hound&#39;s Claws&#39;)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt (+ Skillpunkt)</li></ul>
 <p class="strat"><b>Strategie:</b> Auf Hemon fokussieren, Bogenschützen ignorieren (er bleibt nah). Slash-Combos parieren für Konter, Multi-Hits nicht blocken (Stamina). Breite Spin-Angriffe seitlich ausweichen (bei niedriger HP schneller/größer).</p>
 </article>
 <article class="card" id="boss-icewalker">
-<img loading="lazy" src="/cd_assets/bosses/fex/Icewalker-image-1-bosses-wiki-guide-300px.webp" alt="Icewalker Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Icewalker-image-1-bosses-wiki-guide-300px.webp" alt="Icewalker Boss in Crimson Desert" width="300" height="169">
 <h3>Icewalker</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Everfrost (N Frostclaw Cave)</li><li><b>Quest:</b> Optionaler World-Boss (keine Quest). N von Everfrost Cave</li><li><b>Parry / Dodge:</b> Dodge/Evade — alle Angriffe unblockbar</li><li><b>Abyss-Gear:</b> Power Core - Verse of Sowing (auch Haste I, Aegis I)</li></ul>
 <p class="strat"><b>Strategie:</b> Zwei Icewalker teilen sich 1 HP-Bar; einen nach dem anderen fokussieren. Langsame Drehung: unblockbare Angriffe dodgen, hinter sie dashen für Backstabs + Stagger.</p>
 </article>
 <article class="card" id="boss-ironwing-ren-x">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_airplane.webp" alt="Ironwing REN-X Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_airplane.webp" alt="Ironwing REN-X Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Ironwing REN-X</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia</li><li><b>Quest:</b> Faction &#39;Wings Across the Sky&#39; (nach Kap. 11, Blackstar-Mount nötig)</li><li><b>Schwäche:</b> 6 grüne Orbs an Flügeln/Rücken + 1 finaler im Zentral-Hatch; zuerst die Flügel-Geschütze zerstören</li><li><b>Parry / Dodge:</b> Dodge/Mobilität auf dem Drachen-Mount (kein Parry — Luftkampf, schnell zurück wenn abgeworfen)</li></ul>
 <p class="strat"><b>Strategie:</b> Mit dem Blackstar-Drachen hoch und auf die fliegende Maschine landen, sofort die Flügel-Auto-Turrets zerstören (sonst Abwurf). Mit Stab (R1+△) → Pierce (R2) die 6 grünen Orbs brechen, dann ins geöffnete Zentral-Hatch und den finalen Orb staben → Kill-Cutscene.</p>
 </article>
 <article class="card" id="boss-keglord-garnier-mk-xxiii">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_circusgarnier.webp" alt="Keglord Garnier Mk. XXIII Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_circusgarnier.webp" alt="Keglord Garnier Mk. XXIII Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Keglord Garnier Mk. XXIII</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - The Laughing Marionette</li><li><b>Quest:</b> Optional. House-Marshell-Questline (Midnight Circus / &#39;Nightmare on Stage&#39;)</li><li><b>Schwäche:</b> Grüne Schwachpunkte (Hände, Schultern, Kopf); zentrale Spule stun-anfällig; Lightning-Res hilfreich</li><li><b>Parry / Dodge:</b> Meist unvermeidbare Angriffe — eher durchheilen als dodgen; Raketen mit Nature&#39;s Retribution ablenken</li><li><b>Abyss-Gear:</b> Official Knight&#39;s Cloth Cloak; Tech Hat; &#39;Wrecked Keglord&#39;-Material</li></ul>
 <p class="strat"><b>Strategie:</b> Zentrale Spule mit Turning Slash stunnen (gibt Schaden-Immunität), dann Stab auf die grünen Schwachpunkte — Hände/Schultern (Phase 1), Kopf (Phase 2). Da die meisten Angriffe nicht dodgebar sind: viel Heilung mitbringen (oder Raketensalven mit Nature&#39;s Retribution ablenken für großen Stagger).</p>
 </article>
 <article class="card" id="boss-kutum">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_kutum.webp" alt="Kutum Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_kutum.webp" alt="Kutum Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Kutum</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Kingshield Dig Site (Marshell Estate)</li><li><b>Quest:</b> Faction &#39;Beneath the Dig Site&#39; (optional)</li><li><b>Schwäche:</b> Leuchtendes rotes Auge oben (Abyss-Kreatur in Steinpanzerung — nur das Auge verwundbar)</li><li><b>Parry / Dodge:</b> Dodge</li><li><b>Waffen-Drop:</b> Kutum Shield</li><li><b>Abyss-Gear:</b> Abyss-Artefakt / Power Core (via Axiom Force)</li></ul>
 <p class="strat"><b>Strategie:</b> Wenn Kutum abtaucht, weg vom aufgewühlten Boden rollen (taucht sonst unter dir auf). Beim Auftauchen Axiom Force (L3) aufs rote Auge, L2 halten + rechten Stick ziehen → Auge herausreißen, Stun. Im langen Fenster R2-Schaden, bei wenig Stamina Turning Slash (R1+R2).</p>
 </article>
 <article class="card" id="boss-marni-s-clockwork-mantis">
-<img loading="lazy" src="/cd_assets/bosses/clockwork_mantis.webp" alt="Marni&#39;s Clockwork Mantis Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/clockwork_mantis.webp" alt="Marni&#39;s Clockwork Mantis Boss in Crimson Desert" width="300" height="169">
 <h3>Marni&#39;s Clockwork Mantis</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Regent&#39;s Rise</li><li><b>Quest:</b> Frozen Hearted Predator</li><li><b>Parry / Dodge:</b> Dodge (Mantis Ray unblockbar)</li></ul>
 <p class="strat"><b>Strategie:</b> Mechanische fliegende Mantis. Begleitet von 3 Dragonfly Fighters — erst eliminieren! Block/Parry-Konter fuer normale Angriffe. Force Palm fuer Stagger-Bar. Mantis Ray (Feuer) = ausweichen, kein Block. Folgt nach Turbine-Kampf im Krall Foundry.</p>
 </article>
 <article class="card" id="boss-marni-s-excavatron">
-<img loading="lazy" src="/cd_assets/bosses/excavatron.webp" alt="Marni&#39;s Excavatron Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/excavatron.webp" alt="Marni&#39;s Excavatron Boss in Crimson Desert" width="300" height="169">
 <h3>Marni&#39;s Excavatron</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Karin Quarry</li><li><b>Quest:</b> Faction: Stolen Quarry</li><li><b>Parry / Dodge:</b> NIE Parry — Dodge alles</li><li><b>Waffen-Drop:</b> Mining Knuckledrill</li><li><b>Abyss-Gear:</b> Mining Mastery</li></ul>
 <p class="strat"><b>Strategie:</b> Sword &amp; Shield. Force Palm Lv3 (3-Chain). Drill glow → Force Palm cancelt Burrow. Final 5%: kein Groggy → nur Sustain.</p>
 </article>
 <article class="card" id="boss-marni-s-machina-knight">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marni_machineknight.webp" alt="Marni&#39;s Machina Knight Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marni_machineknight.webp" alt="Marni&#39;s Machina Knight Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Marni&#39;s Machina Knight</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Marni&#39;s Outpost (NO Gorthak)</li><li><b>Quest:</b> Faction &#39;Blade of Discipline&#39; (auto bei Interaktion)</li><li><b>Schwäche:</b> Melee empfohlen; leicht pfeil-resistent; Stun-Bar für Fenster aufbauen</li><li><b>Parry / Dodge:</b> P1 (Longsword): 3-Hit-Combos parieren (L1), Opener-Overhead + Ranged-Slashes dodgen. P2 (Speer): alles dodgen, nicht parieren/blocken (Stamina)</li><li><b>Waffen-Drop:</b> Electro-Mecha Longsword (2H, Lightning, 27 ATK; nicht upgradebar)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Zwei-Phasen-Teleport-Boss (mid-late game). Mobil bleiben gegen Teleports/Ranged, Lücke schließen, Turning Slash (R1+R2) + Forward Slash für die Stun-Bar, in Stagger-Fenstern bursten. P1: Parry/Turning Slash abwechseln; P2: voll auf Dodge (schnellerer Speer + Seeking-Cube/Lightning).</p>
 </article>
 <article class="card" id="boss-master-du">
-<img loading="lazy" src="/cd_assets/bosses/master_du.webp" alt="Master Du Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/master_du.webp" alt="Master Du Boss in Crimson Desert" width="300" height="169">
 <h3>Master Du</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Cloister of Enlightenment</li><li><b>Quest:</b> The Sage of the Desert</li><li><b>Parry / Dodge:</b> Dodge (Green Ray: bis 3x konsekutiv)</li><li><b>Waffen-Drop:</b> Master Du&#39;s Circlet</li><li><b>Abyss-Gear:</b> Karmic Pulse</li></ul>
 <p class="strat"><b>Strategie:</b> 2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown fuer Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen).</p>
 </article>
 <article class="card" id="boss-mazzul-the-dark-justiciar">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mazzulthedarkjusticiar.webp" alt="Mazzul, the Dark Justiciar Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mazzulthedarkjusticiar.webp" alt="Mazzul, the Dark Justiciar Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Mazzul, the Dark Justiciar</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Burnhand Quarry (Byron Estate)</li><li><b>Quest:</b> Optional. House-Byron &#39;The Dark Justiciar&#39; / &#39;One Step Ahead&#39; (nach Demeniss-Befreiung Kap. 8 + Keglord)</li><li><b>Parry / Dodge:</b> Dodge — nicht blocken/traden (horizontaler Sweep zieht Stamina, staggert dich); Heavy-Swings &amp; AoEs ausweichen</li><li><b>Waffen-Drop:</b> Sanguine Knell</li><li><b>Abyss-Gear:</b> Ashad Plate Gloves (Abyss-Slot); Abyss-Artefakt; Golden Beer</li></ul>
 <p class="strat"><b>Strategie:</b> 2H-Axt-Nutzer mit starker Offense, schwacher Defense. Den langsamen Overhead-Cleave/Slam baiten für das sicherste Konter-Fenster; mobil bleiben (Ground-Slam, Aerial-Dive). Ranged-Builds (Focus/Keen Senses) über Melee empfohlen.</p>
 </article>
 <article class="card" id="boss-mechanicus">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mechanicusmk12.webp" alt="Mechanicus Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mechanicusmk12.webp" alt="Mechanicus Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Mechanicus</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Marni&#39;s Steel Armory</li><li><b>Quest:</b> Faction &#39;Plating Debris&#39; (Society of Progress)</li><li><b>Parry / Dodge:</b> Dodge — breite Frontal-Sweeps; nicht vorne stehen, seitlich ausweichen statt parieren</li><li><b>Waffen-Drop:</b> Marni Tank Blaster (Hand Cannon)</li><li><b>Abyss-Gear:</b> Machina Plate Armor Set</li></ul>
 <p class="strat"><b>Strategie:</b> Marni&#39;s Steel Armory via &#39;Plating Debris&#39; befreien. Aus dem Frontbereich raus, breite Melee-Sweeps seitlich dodgen, von der Seite kontern. Drückt konstant, aber vorhersehbar (low Crit) — Stagger aufbauen, niederwerfen, dann Heavy-Schaden.</p>
 </article>
 <article class="card" id="boss-merrick-the-knight-of-fortune">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_goldenarmor.webp" alt="Merrick, the Knight of Fortune Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_goldenarmor.webp" alt="Merrick, the Knight of Fortune Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Merrick, the Knight of Fortune</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Crimson Mountains Fortress</li><li><b>Quest:</b> Faction &#39;The Crimson Desert&#39;s Knight of Fortune&#39; (Lords of Unclaimed Lands)</li><li><b>Parry / Dodge:</b> Dodge (schwerer 2H-Warhammer, langsame Crushing-Swings)</li><li><b>Waffen-Drop:</b> Sword of Greed</li><li><b>Abyss-Gear:</b> Hologram Projector</li></ul>
 <p class="strat"><b>Strategie:</b> Optionaler Faction-World-Boss in goldener Rüstung, hält die Crimson Mountains Fortress; früher schon getroffen, hier härterer Rematch (~2.227 HP, 120 Def). Schwingt aggressiv einen 2H-Warhammer — Distanz schaffen und die Erholung nach den Platten-Slams bestrafen. Detaillierte Strategie nicht breit belegt.</p>
 </article>
 <article class="card" id="boss-moren-the-mistwood-huntmaster">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_enthunter.webp" alt="Moren the Mistwood Huntmaster Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_enthunter.webp" alt="Moren the Mistwood Huntmaster Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Moren the Mistwood Huntmaster</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Wayward Woods (N Ridgehunter Tannery)</li><li><b>Quest:</b> &#39;The Sport Hunter&#39; (Longleaf Tribe) — mit Laterne spuren</li><li><b>Parry / Dodge:</b> Dodge — durch Angriffe weben, Flanken treffen (kein Parry)</li></ul>
 <p class="strat"><b>Strategie:</b> Berittener Jäger auf Icicle-Edge-Alpine-Ibex mit Schwert + Tower-Shield, wechselt beritten/zu Fuß. Mit Turning Slash entreiten, dann durch Angriffe weben und Flanken treffen. Drop: Alpine Ibex Horn → Sigil of Solidarity (Ibex-Mount).</p>
 </article>
 <article class="card" id="boss-mountain-god-boar">
-<img loading="lazy" src="/cd_assets/bosses/mountain_god_boar.png" alt="Mountain God Boar Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/mountain_god_boar.png" alt="Mountain God Boar Boss in Crimson Desert" width="220" height="220" class="sq">
 <h3>Mountain God Boar</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Odeck (nahe Silver Wolf Mountain)</li><li><b>Quest:</b> World/Legendary-Boss. Nach Kap. 7 + Pailune freundlich; &#39;Lumberjacks&#39; Witness Report&#39;; ~15-20 Bäume fällen → spawnt am letzten Baum (+ ~4 kleine Eber)</li><li><b>Schwäche:</b> Feuer</li><li><b>Parry / Dodge:</b> Dodge — Haupt-Bedrohung sind Vorwärts-Charges (Vorderbeine heben sich zuerst)</li></ul>
 <p class="strat"><b>Strategie:</b> Single-Phase: Eber chargt/slamt und ruft ~4 kleine Eber. Feuer-Skills (ideal Elemental Turning Slash mit Feuer) füllen schnell die Stagger-Bar → Finisher, wiederholen. Telegrafierten Charge (Vorderbeine) dodgen, auf flachem Boden kämpfen.</p>
 </article>
 <article class="card" id="boss-mudwalker-lutemir">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mudwalkerlutemir.webp" alt="Mudwalker Lutemir Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mudwalkerlutemir.webp" alt="Mudwalker Lutemir Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Mudwalker Lutemir</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Swamp of Despair</li><li><b>Quest:</b> Optional, Longleaf-Tribe (&#39;Concern of the Tannery&#39; / &#39;Forest Drowned in Mud&#39;)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Rainstorm Necklace (Quest)</li></ul>
 <p class="strat"><b>Strategie:</b> Optionaler Boss im Swamp of Despair. Lore: ein Ancient ohne Körper, Seele im Schlamm gebunden — formloses Monster, das Wasser/Erde des Waldes assimiliert. Detaillierte Kampftaktiken in verlässlichen Quellen nicht dokumentiert.</p>
 </article>
 <article class="card" id="boss-muskan">
-<img loading="lazy" src="/cd_assets/bosses/fex/Muskan-image-1-bosses-wiki-guide-300px.webp" alt="Muskan Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Muskan-image-1-bosses-wiki-guide-300px.webp" alt="Muskan Boss in Crimson Desert" width="300" height="169">
 <h3>Muskan</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - The Bonepit (City of Tommaso)</li><li><b>Quest:</b> &#39;Emperor of the Bonepit&#39; (erst Drakane &amp; Jaleel besiegen)</li><li><b>Schwäche:</b> Kein Element; meiste Angriffe Superarmor; verwundbar nach Parry der Knie+Punch-Combo bzw. Dodge der Charges; Grapple/Spirit senken HP gut</li><li><b>Parry / Dodge:</b> Meist Dodge — Knie-Punch-Combo parierbar, meiste Angriffe Superarmor; Säulen für Line-of-Sight; Charge/Heavy-Punch blockbar</li><li><b>Waffen-Drop:</b> Combat God&#39;s Plate Gloves (Unarmed, Blitzschaden)</li><li><b>Abyss-Gear:</b> Relentless</li></ul>
 <p class="strat"><b>Strategie:</b> Unarmed-Gloves anziehen (z.B. Ordinary Gloves), erst Spirit/Health/Unarmed/Grappling upgraden. Geduldig nach seinen Angriffen kontern, mit Grappling + Spirit-Moves chippen. Bei dunklem Screen (invuln Champion&#39;s Combo) weiter dodgen und hinter einer Säule verstecken. Drop: die BIS-Unarmed-Gloves.</p>
 </article>
 <article class="card" id="boss-new-moon-reaper">
-<img loading="lazy" src="/cd_assets/bosses/fex/New-moon-reaper-image-1-bosses-wiki-guide-300px.webp" alt="New Moon Reaper Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/New-moon-reaper-image-1-bosses-wiki-guide-300px.webp" alt="New Moon Reaper Boss in Crimson Desert" width="300" height="169">
 <h3>New Moon Reaper</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Southern Court</li><li><b>Quest:</b> Optionaler Boss via Southern Court (&#39;New Moon Reaper&#39;-Quest)</li><li><b>Schwäche:</b> Stagger-Bar füllt schneller als bei den anderen Lunar Reapers</li><li><b>Parry / Dodge:</b> Defensiv spielen; nach Block/Parry oder Dodge hinter den Boss countern</li><li><b>Waffen-Drop:</b> Diverging Moon (2H Crescent-Spear)</li></ul>
 <p class="strat"><b>Strategie:</b> Stärkster/ausgewogenster der drei Lunar Reapers — wartet auf Öffnungen. Erst Hof-Adds killen, dann nach Block/Dodge mit Max-Force-Palm-3-Hit-Combos die schnell füllende Stagger-Bar nutzen.</p>
 </article>
 <article class="card" id="boss-ogre">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_ogre.webp" alt="Ogre Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_ogre.webp" alt="Ogre Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Ogre</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Desolate Megalith Altar (bei Tashkalp)</li><li><b>Quest:</b> Optionaler/geheimer Boss (keine Story-Quest)</li><li><b>Parry / Dodge:</b> Dodge</li><li><b>Abyss-Gear:</b> Ogre&#39;s Necklace; Ogre&#39;s Ring; Colossal Might</li></ul>
 <p class="strat"><b>Strategie:</b> Nah bleiben und diagonal vorwärts dodgen gegen den Kegel-AoE seiner Doppel-Hand-Slam-Combos. Höchstens 3 Hits nach Combo-Ende, dann reposition. Beim Vier-Slam-Sprung auf den Boss zulaufen wenn der Boden dunkelt, dann beim Aufschlag dodgen. Back Hang vermeiden.</p>
 </article>
 <article class="card" id="boss-one-eyed-jackal-captain">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_lonelyjackal.webp" alt="One-Eyed Jackal Captain Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_lonelyjackal.webp" alt="One-Eyed Jackal Captain Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>One-Eyed Jackal Captain</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Skallcove (N City of Pailune)</li><li><b>Quest:</b> Miniboss in &#39;Where Lightning Strikes&#39; (Stjar Clan)</li></ul>
 <p class="strat"><b>Strategie:</b> Recht leichter Miniboss mit wenigen wiederholten Angriffen (game8 vergleicht ihn mit Antumbra&#39;s Sword, weniger Schaden). Alles auf den Captain fokussieren, die endlos spawnenden Mobs ignorieren. Droppt nichts.</p>
 </article>
 <article class="card" id="boss-praevus-the-ancient">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_praevus.webp" alt="Praevus the Ancient Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_praevus.webp" alt="Praevus the Ancient Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Praevus the Ancient</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Abyss Debris (W Tashkalp)</li><li><b>Quest:</b> Faction &#39;The Shackled God&#39; (für Aeserion); einer der 3 Ancients</li><li><b>Schwäche:</b> Per Bogen aus der Luft staggerbar; Hitze-Res-Rüstung essenziell (Feuerschaden)</li><li><b>Parry / Dodge:</b> Dodge — rollen löscht Feuer-Status und weicht Feuer-Lasern/Meteoren aus (kein Parry)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Memory of Ancient Nature; Ancient Earring; Ancient Wrath</li></ul>
 <p class="strat"><b>Strategie:</b> Hoch-Level-Bogen (Lv3) mit Focused Shot baut Stagger während Praevus fliegt → zu Boden. Am Boden an die Nord-Felsen drängen und mit Melee/Heavy bursten. Ständig rollen (Feuer-Debuff löschen, Meteore meiden — Niederschlag beim Meteor = Instant-Kill).</p>
 </article>
 <article class="card" id="boss-primus-the-ancient">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_primus.webp" alt="Primus the Ancient Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_primus.webp" alt="Primus the Ancient Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Primus the Ancient</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Daggerhead Monolith (N Serpent Shrine)</li><li><b>Quest:</b> Faction &#39;Shackled God&#39;; einer der 3 Ancients (Aeserion-Wächter)</li><li><b>Schwäche:</b> Bogen (Focused Shot) während Flug; Stun-Bar → zu Boden</li><li><b>Parry / Dodge:</b> Block — Homing-Missiles kaum dodgebar, mit Schild blocken statt parieren</li><li><b>Abyss-Gear:</b> Ancient Reckoning (Wind-Core); Ancient Ring; Sage&#39;s Eye</li></ul>
 <p class="strat"><b>Strategie:</b> Flieger-Boss: mit Bogen zielen, Focused Shot (R1 markieren, Schnellpfeile) baut die Stun-Bar → Boden. Am Boden Melee-Finisher + Turning-Slash-Combos, beim Auffliegen Homing-Missiles mit Schild blocken, wiederholen.</p>
 </article>
 <article class="card" id="boss-priscus-the-ancient">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp" alt="Priscus the Ancient Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp" alt="Priscus the Ancient Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Priscus the Ancient</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Spire of Ringing Truth</li><li><b>Quest:</b> Faction</li><li><b>Parry / Dodge:</b> Nature&#39;s Snare fuer Projektile</li><li><b>Abyss-Gear:</b> Ancient Retribution</li></ul>
 <p class="strat"><b>Strategie:</b> Bow + Nature&#39;s Snare → Projektile zurückwerfen. Reward: Path of Trials (Frost Mantle Skill). Misc/Key-Item-Drop: Blessing of the Immortal (Consumable, ~10s Schadensimmunitaet — keine Waffe).</p>
 </article>
 <article class="card" id="boss-queen-bismuth-oreback-crab">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_bismuthqueenstonebackcrab.webp" alt="Queen Bismuth Oreback Crab Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_bismuthqueenstonebackcrab.webp" alt="Queen Bismuth Oreback Crab Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Queen Bismuth Oreback Crab</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Well of Enlightenment (S Forebearer&#39;s Barrens)</li><li><b>Quest:</b> &#39;Sage of the Desert&#39;-Questline — nach &#39;The Oreback Crab in the Desert&#39; / &#39;War Song of the Dusk&#39;</li><li><b>Abyss-Gear:</b> Abyss-Artefakt (+ 30x Bismuth Ore); befreit den Well of Enlightenment</li></ul>
 <p class="strat"><b>Strategie:</b> Gimmick/Climb-Boss: per Triple-Jump + Glide auf den Panzer (oder Beine angreifen zum Immobilisieren), festhalten (L3), Kristallformationen zerstören → weiße Schwachadern freilegen, dann Heavy (R2) für je ~1/3 HP. Finalphase: zum Topf-/Schalen-Cluster auf dem Rücken laufen und mit Normal-Attacks zerschlagen = Instant-Kill.</p>
 </article>
 <article class="card" id="boss-queen-spider">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_queenspider.webp" alt="Queen Spider Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_queenspider.webp" alt="Queen Spider Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Queen Spider</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Arboria Castle (Nord)</li><li><b>Quest:</b> Optional via Hernand-Faction (&#39;Queen&#39;s Nest&#39; / &#39;Queen of the Silkspun Citadel&#39;)</li><li><b>Schwäche:</b> Feuer (brennt, fällt zu Boden)</li><li><b>Parry / Dodge:</b> Dodge/Deflect, kein Parry — Nature&#39;s Retribution gegen Gift-Projektile, Bite-Lunge ausweichen</li><li><b>Abyss-Gear:</b> Queen&#39;s Fangs (Core, Gift-Stab); Stirrups of the Open Sky; Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Mit Nature&#39;s Retribution Gift-Projektile zurückwerfen; Feuer priorisieren (brennt sie, fällt zu Boden = leichter Schaden). Mit Bogen beschießen während sie an der Wand klebt, harte Combos wenn sie runterspringt; explodierende Spinnen-Adds meist ignorierbar.</p>
 </article>
 <article class="card" id="boss-queen-stoneback-crab">
-<img loading="lazy" src="/cd_assets/bosses/fex/Queen-stoneback-crab-image-1-bosses-wiki-guide-300px.webp" alt="Queen Stoneback Crab Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Queen-stoneback-crab-image-1-bosses-wiki-guide-300px.webp" alt="Queen Stoneback Crab Boss in Crimson Desert" width="300" height="169">
 <h3>Queen Stoneback Crab</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Stoneback Crab Wetlands</li><li><b>Quest:</b> Side-Quest &#39;The Queen&#39;s Lake&#39; (Diederik; ab Kap. 3)</li><li><b>Schwäche:</b> 3 grüne Schwachpunkte am Panzer; danach der magische Krug/Topfstapel oben = Kill-Punkt; Körper sonst invuln</li><li><b>Parry / Dodge:</b> Dodge (rückwärts dashen vor Ground-Slams, Boulder meiden) — kein Parry/Melee-Duell</li><li><b>Abyss-Gear:</b> Abyss-Artefakt (+ 2x Diamant, 3x Granat, 5x Azurit)</li></ul>
 <p class="strat"><b>Strategie:</b> Mit Force Palm die Erze vom Rücken schlagen, dann auf den Boss klettern und die 3 grünen Schwachpunkte staben (blaue HP-Bar). Boulder-Würfe/Ground-Slams dodgen. Wenn die rote Bar erscheint, den freigelegten magischen Krug/Topfstapel oben mit Normal-Attacks finishen.</p>
 </article>
 <article class="card" id="boss-ravok-of-the-savage-fangs">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_troll_rider.webp" alt="Ravok of the Savage Fangs Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_troll_rider.webp" alt="Ravok of the Savage Fangs Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Ravok of the Savage Fangs</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Tashkalp</li><li><b>Quest:</b> &#39;Savage Fang&#39; / &#39;Master of the Wetlands&#39;</li><li><b>Parry / Dodge:</b> Charges seitlich dodgen; nach Combo-Ende parry-countern; nicht blocken</li><li><b>Waffen-Drop:</b> Volcanic Blaster</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Optionaler Roaming-World-Boss (kann beim Erkunden ambushen). Aggressive Charges seitlich umgehen, am Combo-Ende mit Parry-Countern die Öffnungen nutzen. Heavy-Rüstung + Food für den langen Fight.</p>
 </article>
 <article class="card" id="boss-runewalker-vordis">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_lakegolemvordis.webp" alt="Runewalker Vordis Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_lakegolemvordis.webp" alt="Runewalker Vordis Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Runewalker Vordis</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Lake Kharonso (Scholastone)</li><li><b>Quest:</b> World-Boss. &#39;Destroyed Barrier Stone of the Lake&#39; — 4 Barrier-Stones am See wiederherstellen (nach &#39;Kharonso Troll Alliance&#39;)</li><li><b>Schwäche:</b> Leuchtendes Prisma am Kopf (kritischer Schwachpunkt)</li><li><b>Parry / Dodge:</b> Dodge &amp; Deckung statt Block — Kharonso-Ruinen-Säulen nutzen</li><li><b>Waffen-Drop:</b> Runewalker Shield (aus Vordis&#39; Kopf craftbar)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Mossy Secret Map (alle Legendary-Fische)</li></ul>
 <p class="strat"><b>Strategie:</b> Mit Axiom Force das leuchtende Prisma aus dem Kopf ziehen → Stein-Konstrukt kollabiert; im Fenster Heavy-Attacks spammen, bevor er sich neu formt. Säulen als Deckung. Kein Parry/Element dokumentiert.</p>
 </article>
 <article class="card" id="boss-saigord-the-staglord">
-<img loading="lazy" src="/cd_assets/bosses/saigord.webp" alt="Saigord the Staglord Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/saigord.webp" alt="Saigord the Staglord Boss in Crimson Desert" width="300" height="169">
 <h3>Saigord the Staglord</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Icemoor Castle Ruins</li><li><b>Quest:</b> Faction - Lord Amidst the Ruins (King of the Fallen Kingdom)</li><li><b>Parry / Dodge:</b> Dodge/Counter nach Heavy Attacks</li><li><b>Waffen-Drop:</b> Staglord&#39;s Shield</li></ul>
 <p class="strat"><b>Strategie:</b> Watch &amp; Learn: Turning Slash Expertise erlernen und gegen ihn einsetzen. Force Palm zum Cancel/Stagger. Phasen nach HP-Farbe: Blau defensiv, Grün offensiv (blockt viel), Rot mehr Heavy Attacks - nach deren Recovery kontern. Eis-Resistenz-Set nur defensiv (Kälte senkt Ausdauer-Regen), keine ausnutzbare Eis-Schwäche.</p>
 </article>
 <article class="card" id="boss-samara-the-sandwatcher">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_samuel.webp" alt="Samara the Sandwatcher Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_samuel.webp" alt="Samara the Sandwatcher Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Samara the Sandwatcher</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Izvatu Fortress (Golden Plains)</li><li><b>Quest:</b> &#39;Bullets Piercing the Sandstorm&#39; (The Dusksongs — Izvatu Fortress befreien)</li><li><b>Schwäche:</b> Kein Element; verwundbar in der Lande-Erholung nach der Wall-Barrage; Projektile mit Nature&#39;s Snare reflektierbar</li><li><b>Parry / Dodge:</b> Dodge (zu ihr rollen wenn ihre Gun funkt; kein Parry)</li><li><b>Waffen-Drop:</b> Gustav Musket</li></ul>
 <p class="strat"><b>Strategie:</b> Ranged-Firearm-Boss, wechselt zwischen Wall-Salven von oben und Bodenebene. Die kurze Lande-Animation mit voller Combo bestrafen, bei erhöhten Explosiv-Salven Deckung (Tore) nutzen. Nature&#39;s Snare blockt/reflektiert ihre Schüsse für Heavy-Schaden.</p>
 </article>
 <article class="card" id="boss-sir-catfish">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_catfish.webp" alt="Sir Catfish Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_catfish.webp" alt="Sir Catfish Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Sir Catfish</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Vellua/Vallua (Süd-Küste, Teich)</li><li><b>Quest:</b> Optionaler Faction-Boss. Vellua Fishermen&#39;s Guild &#39;Beyond the Silent Waves&#39;</li><li><b>Parry / Dodge:</b> Beides: an Land langsam → dodgen &amp; Flanke treffen; schnelle Angriffe gut parier-/konterbar</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Catfish Plate Helm (Feuer-Res); &#39;Voyages of Sir Catfish&#39;</li></ul>
 <p class="strat"><b>Strategie:</b> An Land locken (dort viel langsamer), durch Angriffe dodgen und die Flanke treffen (schnelle Hits auch parierbar). Wasserfontänen-Hazard meiden (Blasen im Teich). Heil-Food = Hauptheilung im langen Fight.</p>
 </article>
 <article class="card" id="boss-sizlek-the-insatiable">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_sizlektheinsatiable.webp" alt="Sizlek the Insatiable Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_sizlektheinsatiable.webp" alt="Sizlek the Insatiable Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Sizlek the Insatiable</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Ruined Chapel (SO, Steel Mountains)</li><li><b>Quest:</b> Optional. Finale Faction-Questline der Hernandian Parish of Solumen (&#39;Ruined Chapel&#39;); &#39;Mysterious Arrow&#39; @ Glenbright Farm</li><li><b>Waffen-Drop:</b> Greedy Lightningblade (Lightningblade of Greed)</li><li><b>Abyss-Gear:</b> Storm Fang (aus Goldbranch Plate Crown; Chain-Lightning)</li></ul>
 <p class="strat"><b>Strategie:</b> Optionaler Fundamentalist-Goblin-Boss. Vorbereitet kommen (Kuku Pot, Focused Force Palm). Quellen nennen keine klare Parry/Dodge-Linie oder Element-Schwäche. Drop: Greedy Lightningblade + Goldbranch Plate Crown (→ Storm Fang Abyss Gear).</p>
 </article>
 <article class="card" id="boss-skevald-the-carrion-king">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_hyena_boss.webp" alt="Skevald the Carrion King Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_hyena_boss.webp" alt="Skevald the Carrion King Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Skevald the Carrion King</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Hyena Den (SO Tashkalp Town)</li><li><b>Quest:</b> Bounty &#39;Skevald, the Carrion King&#39; (Lords of Unclaimed Lands)</li><li><b>Schwäche:</b> Feuer (entflammt → windet sich am Boden)</li><li><b>Parry / Dodge:</b> Dodge</li><li><b>Abyss-Gear:</b> Putrid Touch (Gift-DoT-Abyss-Gear) + Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Hyänen-Rudel per Laternen-Spur tracken, erst die Hyänen mit Pfeilen ausdünnen (sonst Sammel-Aggro). Seitlich gegen seine schnellen Charges, Bite-Combo abwarten, dann kontern. Er stößt beim Treffer Gift aus — Food mitbringen, mobil bleiben. 2 Phasen (verschwindet, neu tracken); Feuer staggert.</p>
 </article>
 <article class="card" id="boss-skull-knight">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_skullknight.webp" alt="Skull Knight Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_skullknight.webp" alt="Skull Knight Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Skull Knight</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Spire of Frost (frozener Norden, O Beighen)</li><li><b>Quest:</b> Optional &#39;The Frostwarden&#39; — 7 Steinlaternen im Spire of Frost entzünden (Start in Beighen, Kap. 7)</li><li><b>Parry / Dodge:</b> Dodge — seitlich rollen und gegen seine Swing-Richtung umkreisen (nicht rückwärts); kein Parry</li><li><b>Waffen-Drop:</b> Frozen Anguish (2H Greatsword, Truhe 1. Stock — kein Kill-Drop)</li><li><b>Abyss-Gear:</b> Quest: Frostcursed Plate Boots + Passage-of-Malice-Puzzle; Frostcursed-Set/Frostward-Gears Gebiets-assoziiert</li></ul>
 <p class="strat"><b>Strategie:</b> Nicht direkt besiegbar — er flieht bei ~20-25% HP; man tötet ihn, indem man alle 7 Laternen im Spire of Frost entzündet (hebt den Fluch). Im Fight teleportiert er hinter dich für Heavy-Strikes + breite Greatsword-AoE: seitlich dodgen/umkreisen, in der Pause kontern. Hohe Eis-/Kälte-Resistenz mitbringen.</p>
 </article>
 <article class="card" id="boss-stonewalker-antiquum">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_drylandsgolem.webp" alt="Stonewalker Antiquum Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_drylandsgolem.webp" alt="Stonewalker Antiquum Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Stonewalker Antiquum</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Gate of Truth (Pillar of Light)</li><li><b>Quest:</b> World/Optional via &#39;Gate of Truth&#39; (Secrets of the Ancient Ruins / Tariv-Sorcerers); braucht wohl Constellation Helmet (Scholastone)</li><li><b>Schwäche:</b> Leuchtendes rotes Auge (einziger Schwachpunkt); Körper = Stein-Panzerung, immun gegen Slash/Pierce</li><li><b>Parry / Dodge:</b> Dodge — Laser-Beams ausrollen; Gimmick-Boss, kein Parry</li><li><b>Waffen-Drop:</b> Earthsplitter (2H Greataxe, Oongka-exklusiv)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; zufälliger Power Core (Kuku-Upgrades am Kilndren)</li></ul>
 <p class="strat"><b>Strategie:</b> Laser dodgen, dann aufs rote Auge locken und mit Axiom Force (L3, L2 halten + rechten Stick zurück) das Auge herausziehen → Boss gestunnt und gespalten; R2/R1+R2 spammen solange am Boden. Phase 2: Kopf fliegt hoch → Axiom-Force-Augen-Pull wiederholen, dann finishen.</p>
 </article>
 <article class="card" id="boss-tarandus-the-ashen">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_tarandustheashen.webp" alt="Tarandus the Ashen Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_tarandustheashen.webp" alt="Tarandus the Ashen Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Tarandus the Ashen</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Odeck (Final; via Volvior/Verheim/Volstein Ruins)</li><li><b>Quest:</b> Pailune-Faction-Questline (Name unverifiziert: &#39;Executioner of Justice&#39; / Odeck-Tribe)</li><li><b>Parry / Dodge:</b> Nur Dodge — niemals Parry/Block; Greathammer bricht Guard und macht vollen Schaden</li><li><b>Waffen-Drop:</b> Ashen Execution (Greathammer)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Schneller, aggressiver Greathammer-Boss mit weiten Swings und tracking &#39;Jump Slams&#39;. In Bewegung bleiben, außerhalb der Combo-Reichweite. Durch Angriffe dodgen (nie blocken/parieren), in den kurzen Erholungsfenstern 1-2 Hits.</p>
 </article>
 <article class="card" id="boss-the-crimson-nightmare">
-<img loading="lazy" src="/cd_assets/bosses/fex/Crimson-nightmare-image-1-bosses-wiki-guide-300px.webp" alt="The Crimson Nightmare Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Crimson-nightmare-image-1-bosses-wiki-guide-300px.webp" alt="The Crimson Nightmare Boss in Crimson Desert" width="300" height="169">
 <h3>The Crimson Nightmare</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Fort Perwin</li><li><b>Quest:</b> Optionale Faction-Quest. 3 Fort-Sektionen (Barracks/Infirmary/Artillery) befreien</li><li><b>Schwäche:</b> Magie / Axiom Force (schwebender Würfel nur per Pull-Fähigkeit holbar)</li><li><b>Parry / Dodge:</b> AoE dodgen (Evasive Roll), kein Parry — Focused Repulsion/Axiom Force zum Runterziehen</li></ul>
 <p class="strat"><b>Strategie:</b> Erst die Banditen drumherum killen, Scarlet Blades Gas Mask gegen den Crimson-Smog-DoT tragen. In Focus Mode mit Focused Repulsion (R-Stick runter) den Würfel runterziehen, dann bursten.</p>
 </article>
 <article class="card" id="boss-the-crimson-warden">
-<img loading="lazy" src="/cd_assets/bosses/fex/Crimson-warden-image-1-bosses-wiki-guide-300px.webp" alt="The Crimson Warden Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/fex/Crimson-warden-image-1-bosses-wiki-guide-300px.webp" alt="The Crimson Warden Boss in Crimson Desert" width="300" height="169">
 <h3>The Crimson Warden</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Demeniss Wildlife Park</li><li><b>Quest:</b> Faction-Quest &#39;The Corrupted Greymane&#39; (House Thorel), optional</li><li><b>Parry / Dodge:</b> Schild hoch, Distanz schließen — sie ist hochbeweglicher Ranged-Bogen</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Dark Red Goblet</li></ul>
 <p class="strat"><b>Strategie:</b> Schnelle Bogenschützin mit hoher Evasion, 1 HP-Bar. Nahkampf mit Schild: in die Ecke drängen, Force Palm stunnt/deaktiviert sie, dann 3-Hit-Combos für Stagger.</p>
 </article>
 <article class="card" id="boss-the-forgotten-general">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_theforgottengeneral.webp" alt="The Forgotten General Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_theforgottengeneral.webp" alt="The Forgotten General Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>The Forgotten General</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - The General&#39;s Tomb (NW Silverwolf Mtn., bei Odeck)</li><li><b>Quest:</b> Endgame &#39;Overwhelming Being&#39;. Pailune-Faction komplett + Odeck-Subquest &#39;Slumbering Soul&#39;</li><li><b>Schwäche:</b> Feuer (Fire-Imbue/Heavy-Impact nötig, sonst kaum Schaden)</li><li><b>Parry / Dodge:</b> Dodge-Fokus — mit Aerial Force Palm über die arenaweiten &#39;Odeck&#39;s Army&#39;-Sweeps, dann Meteor Kick</li><li><b>Waffen-Drop:</b> Awakened Spirit (2H Halberd; &#39;Judgment of the Soul&#39;)</li><li><b>Abyss-Gear:</b> Judgment of the Soul (blaues Phantom auf Counter Stance)</li></ul>
 <p class="strat"><b>Strategie:</b> Hoch-HP, aggressives Overwhelming Being: spawnt mitten im Angriff eine Illusion (verdoppelt das Schadensfenster) — zweiten Swing respektieren. Arenaweite Illusions-Army-Sweeps mit Aerial Force Palm überspringen, mit Meteor Kick kontern. Fire-Imbue/Heavy-Impact mitbringen (sonst sehr resistent).</p>
 </article>
 <article class="card" id="boss-the-masked-liberator">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_mask_liberator_leader.webp" alt="The Masked Liberator Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_mask_liberator_leader.webp" alt="The Masked Liberator Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>The Masked Liberator</h3>
 <ul class="stats"><li><b>Region:</b> Crimson Desert - Fort Manub (Tashkalp)</li><li><b>Quest:</b> &#39;The Master of Masks&#39; (The Faceless / Lords of Unclaimed Lands)</li><li><b>Parry / Dodge:</b> Dodge (schnelle Dual-Dagger, Smoke-Teleports, Wurfbomben; kein belegtes Parry-Fenster)</li><li><b>Waffen-Drop:</b> Shadow of the Past Pistol; Oblivion of the Past (Greathammer, Oongka)</li><li><b>Abyss-Gear:</b> The Masked Liberator&#39;s Cloth Armor (6-teilig, Kliff)</li></ul>
 <p class="strat"><b>Strategie:</b> Erst die Faceless-Gegner clearen und die 3 Truhen in Fort Manub öffnen, vorher heilen/repositionieren. Sie teleportiert per Smoke-Bombs, wirft Bomben und nutzt akrobatische Dagger-Combos — in Bewegung bleiben, nach dem Wiederauftauchen bestrafen, Würfe dodgen statt tanken.</p>
 </article>
 <article class="card" id="boss-the-raging-tempest">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_ragingtempest.webp" alt="The Raging Tempest Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_ragingtempest.webp" alt="The Raging Tempest Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>The Raging Tempest</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Silvermoon Tradehouse (Demeniss Port)</li><li><b>Quest:</b> Silvermoon-Trade-Group &#39;The Day the Moonlight Waned&#39; (nach Kap. 8)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt</li></ul>
 <p class="strat"><b>Strategie:</b> Optionaler Faction-Boss der Silvermoon-Trade-Group-Questline am Silvermoon Tradehouse. Viel Instant-Heil-Food mitbringen. Detaillierte Weakness/Parry-Daten in den Quellen nicht belegt.</p>
 </article>
 <article class="card" id="boss-titan">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_titan.webp" alt="Titan Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_titan.webp" alt="Titan Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Titan</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Windsong Peaks (Scorched Mountain)</li><li><b>Quest:</b> Optionaler Faction-Boss. Stjar-Clan &#39;Master of Thunder&#39; + &#39;Ancient Barrier&#39;</li><li><b>Schwäche:</b> Blitz (Angriffe machen Blitzschaden/Shock; Lightning-Res tragen)</li><li><b>Parry / Dodge:</b> Dodge — Angriffe unblockbar; Turning Slash i-frames nutzen</li><li><b>Waffen-Drop:</b> Reckoning (2H Speer)</li></ul>
 <p class="strat"><b>Strategie:</b> Nicht parieren (unblockbar) — alles dodgen, Turning Slash (R1+R2) für i-frames gegen Blitz. Nur die freie Haut an der Hand nach Ground-Slam treffen (Panzerung = kein Schaden) bzw. den Nacken-Schwachpunkt, v.a. in der Gigantified-Phase. Starke Blitz-Resistenz + viel Heilung.</p>
 </article>
 <article class="card" id="boss-tristan-the-flame-knight">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_tristan.webp" alt="Tristan the Flame Knight Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_tristan.webp" alt="Tristan the Flame Knight Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Tristan the Flame Knight</h3>
 <ul class="stats"><li><b>Region:</b> Demeniss - Flame Knights Castle (West)</li><li><b>Quest:</b> Optional. House-Azerian-Flame-Knight-Questline (&#39;Letters of Ashes&#39;/&#39;Greed and Ashes&#39;) — Castle befreien</li><li><b>Parry / Dodge:</b> Feuer-AoEs dodgen; Superarmor-Moves (Phoenix Dive, Great Flame Explosion) nicht staggerbar → Distanz</li><li><b>Waffen-Drop:</b> Spada Sword &amp; Drake Shield (versteckt nahebei nach dem Fight)</li><li><b>Abyss-Gear:</b> Abyss-Artefakt; Seal of Devotion; Scorchflame Plate Gloves; Multishot-Skill</li></ul>
 <p class="strat"><b>Strategie:</b> Alle Nahkampf-Hits machen Feuerschaden; zwei Superarmor-Feuer-Moves (Phoenix Dive, Great Flame Explosion, massive AoE) zwingend dodgen. Force Palm zwischen Combos für Stagger → Turning Slash (oft Focus für Spirit). In Arena-Säulen locken und mit Nature&#39;s Grasp an gebrochener Säule ~1/3 HP abziehen.</p>
 </article>
 <article class="card" id="boss-turbine">
-<img loading="lazy" src="/cd_assets/bosses/turbine.webp" alt="Turbine Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/turbine.webp" alt="Turbine Boss in Crimson Desert" width="300" height="169">
 <h3>Turbine</h3>
 <ul class="stats"><li><b>Region:</b> Delesyia - Krall Foundry</li><li><b>Quest:</b> Invaders from the East</li><li><b>Parry / Dodge:</b> Mechanik-Boss (kein klassischer Kampf)</li></ul>
 <p class="strat"><b>Strategie:</b> 180-Sekunden-Verteidigung: Generator schuetzen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen waehrend Flug. Danach: vollgeladene Kanone auf Turbines feuern. Fuehrt direkt zu Marni&#39;s Clockwork Mantis.</p>
 </article>
 <article class="card" id="boss-walter-lanford">
-<img loading="lazy" src="/cd_assets/bosses/walter_lanford.webp" alt="Walter Lanford Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/walter_lanford.webp" alt="Walter Lanford Boss in Crimson Desert" width="300" height="169">
 <h3>Walter Lanford</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Fort Warspike</li><li><b>Quest:</b> Name Written in Blood</li><li><b>Parry / Dodge:</b> Dodge (kein Block)</li><li><b>Waffen-Drop:</b> Dane Shotgun</li></ul>
 <p class="strat"><b>Strategie:</b> Hochmobiler Pistolenschuetze. Run-and-Hit-Ansatz. &#39;Poof&#39;-Escape: zum Landepunkt dashen → Heavy Attack. Double Barrel Barrage: volle Distanz, sofort dodgen. Drops: Dane Shotgun + Rhonda Leather Boots + Golden Piggy Bank.</p>
 </article>
 <article class="card" id="boss-white-bear-of-the-high-mountains">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_whitebear.webp" alt="White Bear of the High Mountains Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_whitebear.webp" alt="White Bear of the High Mountains Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>White Bear of the High Mountains</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Fort Askelund</li><li><b>Quest:</b> Optional, Pailune-Militia &#39;The Unending Threat of the Black Bears&#39;</li><li><b>Parry / Dodge:</b> Dodge — breite Spins nicht zuverlässig parierbar; seitlich (nicht rückwärts) ausweichen</li><li><b>Waffen-Drop:</b> Split Tooth (2H Greataxe, 3 vorinstallierte Cores / 5 Slots)</li><li><b>Abyss-Gear:</b> (im Split Tooth)</li></ul>
 <p class="strat"><b>Strategie:</b> Distanz halten und erst nach Ende seiner Combo-Strings kontern (lange Reichweite, hoher Schaden). Telegrafierten Straight-Line-Charge und breite Spins seitlich ausweichen, dann 2-3 Hits in der Erholung.</p>
 </article>
 <article class="card" id="boss-white-bearclaw">
-<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_northernwarrior.webp" alt="White Bearclaw Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_northernwarrior.webp" alt="White Bearclaw Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>White Bearclaw</h3>
 <ul class="stats"><li><b>Region:</b> Pailune - Vat&#39;nholl Fortress</li><li><b>Quest:</b> Optional, &#39;Shadows of Beasts&#39; (Pailune Militia) — Festung befreien</li><li><b>Parry / Dodge:</b> Dodge</li><li><b>Abyss-Gear:</b> Ashad Plate Helm</li></ul>
 <p class="strat"><b>Strategie:</b> Seine Angriffe gehen nach vorn — hinter ihn repositionieren und den Blind Spot treffen. Bei seinem Ice-Shard-Sprung Distanz halten und in den Lücken zwischen den Eissplittern stehen. Kein Parry/Element dokumentiert.</p>
 </article>
 <article class="card" id="boss-white-horn">
-<img loading="lazy" src="/cd_assets/bosses/white_horn.webp" alt="White Horn Boss in Crimson Desert" width="300" height="150">
+<img loading="lazy" src="/cd_assets/bosses/white_horn.webp" alt="White Horn Boss in Crimson Desert" width="300" height="169">
 <h3>White Horn</h3>
 <ul class="stats"><li><b>Region:</b> Pailune</li><li><b>Quest:</b> Side</li><li><b>Schwäche:</b> Feuer (Pflicht!)</li><li><b>Parry / Dodge:</b> Dodge Ice-Breath (horizontal)</li></ul>
 <p class="strat"><b>Strategie:</b> Brazier in Arena entzünden. Fire-Element zwingend. Phase 2 Ice-Breath horizontal dodgen.</p>
