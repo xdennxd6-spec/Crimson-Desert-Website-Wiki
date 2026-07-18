@@ -514,12 +514,17 @@ body::before{
   padding:9px 14px;color:var(--iron-gall);
   font-size:13px;font-family:var(--f-mono);letter-spacing:.02em;
   outline:none;transition:border-color .2s,box-shadow .2s;
+  /* iOS/WebKit-Suchfeld-Optik (runde Ecken, Inset) unterdruecken -> bleibt eckig/flach wie type=text */
+  -webkit-appearance:none;appearance:none;border-radius:0;
 }
 #si:focus{border-color:var(--survey-red);box-shadow:0 0 0 2px var(--overprint)}
 #si:focus-visible{outline:2px solid var(--survey-red);outline-offset:2px}
 #si::placeholder{color:var(--iron-soft)}
 /* type=search neutralisieren: WebKit-Clear-X ausblenden, Optik bleibt wie beim alten type=text */
 #si::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none}
+/* Event-loses Autofill (#si) erkennbar machen: WebKit feuert animationstart, sobald :-webkit-autofill greift */
+@keyframes cdAutofill{from{opacity:1}to{opacity:1}}
+#si:-webkit-autofill{animation-name:cdAutofill;animation-duration:0.001s}
 #scnt{font-family:var(--f-mono);font-size:11px;color:var(--iron-soft);white-space:nowrap;min-width:90px;text-align:right;font-variant-numeric:tabular-nums}
 #credit-top{background:var(--iron-gall);border-bottom:1px solid var(--iron-gall);padding:6px 26px;font-family:var(--f-mono);font-size:10px;color:var(--brass-hi);text-align:center;letter-spacing:.16em;text-transform:uppercase}
 #credit-bottom{background:var(--vellum-deep);border-top:1px solid var(--iron-gall);padding:12px 26px;font-family:var(--f-mono);font-size:10px;color:var(--iron-soft);text-align:center;letter-spacing:.12em;text-transform:uppercase}
@@ -9611,6 +9616,12 @@ function initRegistratur(){
 // ===== NAVIGATION =====
 function showSec(id, opts){
   opts=opts||{};
+  // DoS-Schutz: Sektions-IDs sind ausschliesslich lowercase alphanumerisch mit Bindestrich
+  // (gleiches Muster wie das Legacy-Hash-Regex ^sec-([a-z0-9-]+)$ in _readUrlState). Ein
+  // manipulierter Hash wie #sec=%22 dekodiert valide zu '"' und wuerde unten einen ungueltigen
+  // querySelector-Selektor bauen -> SyntaxError. Darum hier auf '' normalisieren, damit der
+  // bestehende !sec-Fallback ('bosses') greift.
+  if(id&&!/^[a-z0-9-]+$/.test(id))id='';
   const sec=document.getElementById('sec-'+id);
   // Registratur: das Nav-Item ist jetzt ein Konsolen-.leaf und existiert nur, wenn
   // sein Ressort gerade in der Konsole steht. Der Guard haengt deshalb NUR an der
@@ -9661,10 +9672,14 @@ function _readUrlState(){
   // Klassische Anker-Links wie #sec-bosses weiterhin unterstuetzen
   const legacy=h.match(/^sec-([a-z0-9-]+)$/);
   if(legacy)return{sec:legacy[1]};
+  // Defekte Prozent-Kodierung (z.B. #q=% oder #q=%E0) wirft in decodeURIComponent einen URIError.
+  // Pro Parameter abfangen und dann den Rohwert nehmen, damit ein kaputter Hash nicht den
+  // restlichen Init (DOMContentLoaded, Keyboard-Shortcuts) killt — deckt alle Aufrufer ab.
+  const _dec=s=>{try{return decodeURIComponent(s);}catch(_){return s;}};
   const p={};
   h.split('&').forEach(kv=>{
     const [k,v]=kv.split('=');
-    if(k)p[decodeURIComponent(k)]=v?decodeURIComponent(v):'';
+    if(k)p[_dec(k)]=v?_dec(v):'';
   });
   return p;
 }
@@ -9920,11 +9935,14 @@ function _doSearchImpl(q){
   q=q.trim();
   // Autofill-Schutz: Chrome schreibt trotz autocomplete="off" gelegentlich die gespeicherte
   // Login-Mail ins Suchfeld. Sieht der Wert wie eine E-Mail aus UND ist das Feld nicht fokussiert
-  // (stammt also nicht von echter Nutzereingabe), verwerfen wir ihn — kein Fehltreffer, keine
-  // Mail im URL-Hash. Bewusst getippte E-Mails (Feld fokussiert) bleiben erlaubt.
+  // (stammt also nicht von echter Nutzereingabe) ODER hat der Browser ihn als Autofill markiert,
+  // verwerfen wir ihn — kein Fehltreffer, keine Mail im URL-Hash. Bewusst getippte E-Mails
+  // (fokussiert und NICHT autofilled) bleiben erlaubt.
   const _MAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const _si=document.getElementById('si');
-  if(_si&&document.activeElement!==_si&&_MAIL_RE.test(q)){
+  // matches(':-webkit-autofill') kann in Engines ohne diese Pseudoklasse werfen -> gekapselt
+  const _isAutofill=el=>{try{return el.matches(':-webkit-autofill');}catch(_){return false;}};
+  if(_si&&_MAIL_RE.test(q)&&(document.activeElement!==_si||_isAutofill(_si))){
     _si.value='';
     if(typeof _writeUrlState==='function')_writeUrlState();
     return;
@@ -13421,6 +13439,21 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     const _uq=_readUrlState().q;
     if(_uq&&_mailRe.test(_uq))history.replaceState(null,'',location.pathname+location.search);
+    // Auch das Suchfeld selbst pruefen: event-loses Autofill kann die Mail direkt im Feld hinterlassen
+    const _sf=document.getElementById('si');
+    if(_sf&&_mailRe.test((_sf.value||'').trim())&&document.activeElement!==_sf)_sf.value='';
+  }catch(e){}
+
+  // Spaet eintreffendes, event-loses Autofill (#si) per CSS-@keyframes (cdAutofill) abfangen:
+  // feuert der animationstart und der unfokussierte Wert sieht wie eine Mail aus, verwerfen.
+  try{
+    const _sfa=document.getElementById('si');
+    if(_sfa)_sfa.addEventListener('animationstart',e=>{
+      if(e.animationName==='cdAutofill'&&document.activeElement!==_sfa&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((_sfa.value||'').trim())){
+        _sfa.value='';
+        if(typeof _writeUrlState==='function')_writeUrlState();
+      }
+    });
   }catch(e){}
 
   // URL-State hat Vorrang vor letzter Section
