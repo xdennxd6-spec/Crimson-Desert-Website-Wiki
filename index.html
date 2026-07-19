@@ -1009,6 +1009,14 @@ input:focus-visible,textarea:focus-visible,
 [data-tip]{cursor:help;border-bottom:1px dotted var(--brass);text-decoration:none}
 [data-tip]:hover{border-bottom-color:var(--survey-red)}
 
+/* Basis-Link-Farbe (Screen): ungestylte Anker treffen die Gold/Messing-Konvention der Seite
+   statt des Browser-Default-Blaus. Spezifitaet 0-0-1 (schwaechster Selektor) -> ueberschreibt
+   KEINE bewussten Farben: inline-Styles, .skip-link, .boss-lore-ext, .ruin-src a und die
+   .xref-Spans (kein <a>) gewinnen weiterhin. */
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--glo);text-decoration:underline}
+a:visited{color:var(--gold)}
+
 /* Cross-Reference Links */
 .xref{color:var(--brass);cursor:pointer;border-bottom:1px dashed var(--brass);text-decoration:none;transition:all .15s}
 .xref:hover{color:var(--survey-red);border-bottom-color:var(--survey-red);background:var(--overprint);padding:0 2px}
