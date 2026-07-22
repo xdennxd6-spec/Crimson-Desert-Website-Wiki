@@ -1,0 +1,78 @@
+<svg viewBox="0 0 400 266" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="rhGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6b4530" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#3d2a1c" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#3d2a1c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="400" height="266" fill="#0d0906"/>
+  <circle cx="235" cy="135" r="128" fill="url(#rhGlow)"/>
+
+  <!-- stars -->
+  <circle cx="38" cy="34" r="1.4" fill="#f2e9d8" opacity="0.55"/>
+  <circle cx="64" cy="70" r="1.1" fill="#f2e9d8" opacity="0.4"/>
+  <circle cx="27" cy="112" r="1.6" fill="#f2e9d8" opacity="0.6"/>
+  <circle cx="90" cy="30" r="1.2" fill="#f2e9d8" opacity="0.45"/>
+  <circle cx="140" cy="18" r="1.5" fill="#f2e9d8" opacity="0.55"/>
+  <circle cx="350" cy="28" r="1.3" fill="#f2e9d8" opacity="0.5"/>
+  <circle cx="375" cy="60" r="1.6" fill="#f2e9d8" opacity="0.65"/>
+  <circle cx="368" cy="130" r="1.1" fill="#f2e9d8" opacity="0.4"/>
+  <circle cx="20" cy="180" r="1.3" fill="#f2e9d8" opacity="0.5"/>
+  <circle cx="55" cy="220" r="1.1" fill="#f2e9d8" opacity="0.35"/>
+  <circle cx="385" cy="200" r="1.4" fill="#f2e9d8" opacity="0.5"/>
+
+  <!-- far antler (behind head, hint of depth) -->
+  <polygon points="302,49 288,8 298,52" fill="#8f7452"/>
+  <polygon points="300,52 312,10 306,54" fill="#8f7452"/>
+
+  <!-- tail -->
+  <polygon points="116,150 94,144 111,169" fill="#5a3b26"/>
+
+  <!-- legs (back pair) -->
+  <rect x="238" y="203" width="15" height="55" fill="#48301f"/>
+  <rect x="238" y="248" width="15" height="10" fill="#221609"/>
+  <rect x="262" y="205" width="15" height="53" fill="#48301f"/>
+  <rect x="262" y="248" width="15" height="10" fill="#221609"/>
+
+  <!-- body -->
+  <ellipse cx="205" cy="163" rx="96" ry="53" fill="#7a5238"/>
+  <ellipse cx="192" cy="186" rx="80" ry="31" fill="#5c3d29" opacity="0.85"/>
+  <ellipse cx="253" cy="147" rx="42" ry="29" fill="#96694a" opacity="0.9"/>
+
+  <!-- legs (front pair, in front of body) -->
+  <rect x="158" y="206" width="16" height="56" fill="#48301f"/>
+  <rect x="158" y="252" width="16" height="10" fill="#221609"/>
+  <rect x="182" y="209" width="16" height="53" fill="#48301f"/>
+  <rect x="182" y="252" width="16" height="10" fill="#221609"/>
+
+  <!-- neck (long and slender, tapered) -->
+  <path d="M 238,146 C 252,118 272,90 300,68 L 316,76 C 294,96 274,122 258,150 Z" fill="#6b4830"/>
+
+  <!-- ear -->
+  <polygon points="310,52 294,38 308,62" fill="#6b4830"/>
+
+  <!-- head -->
+  <ellipse cx="327" cy="73" rx="27" ry="21" fill="#7a5238"/>
+  <ellipse cx="350" cy="80" rx="14" ry="10" fill="#6b4830"/>
+  <ellipse cx="361" cy="83" rx="6" ry="5" fill="#221509"/>
+
+  <!-- eye -->
+  <circle cx="333" cy="69" r="4.2" fill="#c9a227"/>
+  <circle cx="334" cy="69" r="2.1" fill="#1a1108"/>
+  <circle cx="332.3" cy="67.5" r="0.8" fill="#f2e9d8"/>
+
+  <!-- near antlers (mighty, branched, rose-accented tips) -->
+  <polygon points="319,54 307,20 315,56" fill="#cbb28a"/>
+  <polygon points="309,25 314,36 304,29" fill="#cf8b96"/>
+
+  <polygon points="321,51 328,4 335,52" fill="#cbb28a"/>
+  <polygon points="325,10 337,13 327,21" fill="#cf8b96"/>
+
+  <polygon points="319,56 343,21 334,58" fill="#cbb28a"/>
+  <polygon points="337,25 348,20 339,32" fill="#cf8b96"/>
+
+  <polygon points="316,58 298,43 309,60" fill="#b89a6e"/>
+  <polygon points="300,46 296,38 305,49" fill="#c17d8a"/>
+</svg>

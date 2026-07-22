@@ -1,0 +1,74 @@
+<svg viewBox="0 0 400 266" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="kkGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5c2418" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#2a1220" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#17111c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="400" height="266" fill="#130d10"/>
+  <circle cx="225" cy="130" r="126" fill="url(#kkGlow)"/>
+
+  <!-- stars -->
+  <circle cx="36" cy="30" r="1.4" fill="#f2e6d8" opacity="0.55"/>
+  <circle cx="66" cy="66" r="1.1" fill="#f2e6d8" opacity="0.4"/>
+  <circle cx="24" cy="108" r="1.6" fill="#f2e6d8" opacity="0.6"/>
+  <circle cx="95" cy="26" r="1.2" fill="#f2e6d8" opacity="0.45"/>
+  <circle cx="130" cy="16" r="1.5" fill="#f2e6d8" opacity="0.55"/>
+  <circle cx="352" cy="24" r="1.3" fill="#f2e6d8" opacity="0.5"/>
+  <circle cx="378" cy="58" r="1.6" fill="#f2e6d8" opacity="0.65"/>
+  <circle cx="366" cy="130" r="1.1" fill="#f2e6d8" opacity="0.4"/>
+  <circle cx="18" cy="178" r="1.3" fill="#f2e6d8" opacity="0.5"/>
+  <circle cx="52" cy="218" r="1.1" fill="#f2e6d8" opacity="0.35"/>
+  <circle cx="383" cy="196" r="1.4" fill="#f2e6d8" opacity="0.5"/>
+
+  <!-- tail plumes (behind body) -->
+  <polygon points="118,148 78,118 122,164" fill="#5c2015"/>
+  <polygon points="120,160 84,146 126,176" fill="#6b2015"/>
+  <polygon points="122,172 92,172 128,188" fill="#742a1f"/>
+
+  <!-- back leg -->
+  <ellipse cx="163" cy="208" rx="17" ry="23" fill="#8a3527"/>
+  <rect x="155" y="224" width="13" height="30" fill="#c9812f"/>
+  <polygon points="150,254 158,254 154,265" fill="#c9812f"/>
+  <polygon points="159,254 167,254 163,265" fill="#c9812f"/>
+  <polygon points="168,254 176,254 172,265" fill="#c9812f"/>
+
+  <!-- body -->
+  <ellipse cx="200" cy="172" rx="90" ry="51" fill="#9c3d2e"/>
+  <ellipse cx="184" cy="196" rx="72" ry="29" fill="#742a1f" opacity="0.85"/>
+  <ellipse cx="235" cy="160" rx="38" ry="27" fill="#d9b98a" opacity="0.85"/>
+
+  <!-- wing -->
+  <ellipse cx="163" cy="158" rx="22" ry="30" fill="#b34a36"/>
+  <ellipse cx="158" cy="168" rx="14" ry="18" fill="#8a3527"/>
+
+  <!-- front leg (in front of body) -->
+  <ellipse cx="228" cy="214" rx="19" ry="25" fill="#9c3d2e"/>
+  <rect x="219" y="233" width="15" height="34" fill="#d99a3f"/>
+  <polygon points="212,267 224,267 219,255" fill="#d99a3f"/>
+  <polygon points="222,267 234,267 228,255" fill="#d99a3f"/>
+  <polygon points="232,267 244,267 238,255" fill="#d99a3f"/>
+
+  <!-- neck -->
+  <path d="M 238,146 C 254,120 272,94 288,74 L 308,84 C 292,104 276,128 262,152 Z" fill="#8a3527"/>
+
+  <!-- crest spikes -->
+  <polygon points="292,52 282,10 297,48" fill="#6b2015"/>
+  <polygon points="299,50 296,6 308,46" fill="#9c3d2e"/>
+  <polygon points="306,50 310,10 318,48" fill="#6b2015"/>
+  <polygon points="312,52 322,16 322,50" fill="#742a1f"/>
+
+  <!-- head -->
+  <ellipse cx="303" cy="62" rx="23" ry="19" fill="#9c3d2e"/>
+
+  <!-- beak -->
+  <polygon points="320,58 349,64 320,71" fill="#e2932f"/>
+  <polygon points="320,66 344,68 320,71" fill="#c97a1f"/>
+
+  <!-- eye -->
+  <circle cx="308" cy="56" r="7" fill="#f4ede0"/>
+  <circle cx="310.5" cy="57" r="3.6" fill="#1a1108"/>
+  <circle cx="308.5" cy="54.5" r="1.2" fill="#ffffff"/>
+</svg>

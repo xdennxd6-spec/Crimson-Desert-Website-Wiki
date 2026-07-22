@@ -1861,8 +1861,8 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .pet-filter-btn{border-radius:999px;padding:4px 12px;border:1px solid var(--line);background:transparent;color:var(--iron-soft);font-family:var(--f-mono);font-size:10px;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;transition:all .15s}
 .pet-filter-btn.active,.pet-filter-btn:hover{border-color:var(--brass);color:var(--brass);background:var(--instr-soft)}
 .pet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px}
-.pet-card{background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:var(--radius);padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:box-shadow .15s;cursor:default;box-shadow:2px 2px 0 var(--paper-shadow)}
-.pet-card:hover{box-shadow:3px 3px 0 var(--paper-shadow)}
+.pet-card{background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:var(--radius);padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:box-shadow .18s,transform .18s;cursor:default;box-shadow:var(--shadow-soft)}
+.pet-card:hover{box-shadow:6px 6px 0 var(--paper-shadow);transform:translate(-1px,-1px)}
 .pet-card-img{width:80px;height:80px;object-fit:contain;background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:12px;filter:grayscale(.15) contrast(1.03)}
 .pet-card-ph{width:80px;height:80px;background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:42px;line-height:1;filter:grayscale(.15) contrast(1.03)}
 .pet-card-name{font-size:12px;color:var(--iron-gall);font-weight:600;text-align:center;line-height:1.3}
@@ -5755,14 +5755,14 @@ const BOSS_IMGS={
   // Auto-recherchiert 2026-06-03 Welle 3 (Bild-URLs HTTP 200 verifiziert):
   "Dreadnought":"cd_assets/bosses/fex/Dreadnought-image-1-bosses-wiki-guide-300px.webp",
   "Queen Stoneback Crab":"cd_assets/bosses/fex/Queen-stoneback-crab-image-1-bosses-wiki-guide-300px.webp",
-  "Muskan":"cd_assets/bosses/fex/Muskan-image-1-bosses-wiki-guide-300px.webp",
+  "Muskan":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_muscan_boss.webp",
   // Auto-recherchiert 2026-06-03 (neue Bosse, Bild-URLs HTTP 200 verifiziert):
   "T'rukan the Ascended":"cd_assets/bosses/fex/Trukan-image-1-bosses-wiki-guide-300px.webp",
   "Goyen":"cd_assets/bosses/fex/Goyen-image-1-bosses-wiki-guide-300px.webp",
   "Thunder Tank":"cd_assets/bosses/fex/Thunder-tank-image-1-bosses-wiki-guide-300px.webp",
   "The Crimson Nightmare":"cd_assets/bosses/fex/Crimson-nightmare-image-1-bosses-wiki-guide-300px.webp",
   "Icewalker":"cd_assets/bosses/fex/Icewalker-image-1-bosses-wiki-guide-300px.webp",
-  "Grave Walker":"cd_assets/bosses/fex/Grave-walker-boss1-crimson-desert-wiki-guide-300px.webp",
+  "Grave Walker":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_golems.webp",
   "Ator, Archon of Antumbra":"cd_assets/bosses/fex/Ator-anchor-of-antumbra-image-1-bosses-wiki-guide-300px.webp",
   "The Crimson Warden":"cd_assets/bosses/fex/Crimson-warden-image-1-bosses-wiki-guide-300px.webp",
   "New Moon Reaper":"cd_assets/bosses/fex/New-moon-reaper-image-1-bosses-wiki-guide-300px.webp",
@@ -5771,7 +5771,7 @@ const BOSS_IMGS={
   "Matthias":"cd_assets/bosses/matthias.webp",
   "Kailok the Hornsplitter":"cd_assets/bosses/kailok.webp",
   "Marni's Excavatron":"cd_assets/bosses/excavatron.webp",
-  "Reed Devil":"cd_assets/bosses/reed_devil.webp",
+  "Reed Devil":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_reeddevil.webp",
   "Kearush the Slayer":"cd_assets/bosses/kearush.webp",
   "Draven the Crowcaller":"cd_assets/bosses/draven.webp",
   "Myurdin (Phase 1)":"cd_assets/bosses/myurdin.webp",
@@ -5781,15 +5781,15 @@ const BOSS_IMGS={
   "Corrupted Caliburn":"cd_assets/bosses/gabriel.webp",
   "Gabriel Caliburn":"cd_assets/bosses/gabriel.webp",
   "One-Armed Ludvig":"cd_assets/bosses/ludvig.webp",
-  "Lucian Bastier":"cd_assets/bosses/lucian.webp",
+  "Lucian Bastier":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp",
   "Saigord the Staglord":"cd_assets/bosses/saigord.webp",
   "Hexe Marie":"cd_assets/bosses/hexe_marie.webp",
-  "Golden Star":"cd_assets/bosses/golden_star.webp",
-  "Beloth the Darksworn":"cd_assets/bosses/beloth.webp",
+  "Golden Star":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marni_golemdragon.webp",
+  "Beloth the Darksworn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_darkking.webp",
   "White Horn":"cd_assets/bosses/white_horn.webp",
   "Umbra (Final)":"cd_assets/bosses/umbra-final.webp",
   "Black Fang":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp",
-  "Avatar of Umbra":"cd_assets/bosses/avatar_umbra.webp",
+  "Avatar of Umbra":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_myurdinumbra.webp",
   "Priscus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp",
   "Antumbra's Sword":"cd_assets/bosses/antumbra_sword.webp",
   "Gregor the Halberd of Carnage":"cd_assets/bosses/gregor.webp",
@@ -5809,7 +5809,7 @@ const BOSS_IMGS={
   // - Mountain God Boar / Crookrock Walker: kein questlog-Sprite vorhanden -> lokale Bilder (cd_assets/bosses/*.png),
   //   Motiv gegen TheGamer/GameRant/game8 abgeglichen (Boar = mit Aesten/Laub bewachsener "Waldhuegel"; Walker = Stein-Golem). 2026-06-18
   "Abyss Kutum":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_ancientworm.webp",
-  "Aeserion, the Great Serpent":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_giantsnake.webp",
+  "Aeserion, the Great Serpent":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_questimage_mission_snaketemple_boss_block_aeserion.webp",
   "Antumbra's Spear":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasspear.webp",
   "Antumbra's Staff":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_antumbrasstaff.webp",
   "Balthazar, the Wyvernflame":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_balthazarwyrmspeaker.webp",
@@ -5827,10 +5827,10 @@ const BOSS_IMGS={
   "Hemon Beindel":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_hemon_beindel.webp",
   "Ironwing REN-X":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_airplane.webp",
   "Keglord Garnier Mk. XXIII":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_circusgarnier.webp",
-  "Kutum":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_kutum.webp",
+  "Kutum":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_ancientworm.webp",
   "Marni's Machina Knight":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marni_machineknight.webp",
   "Mazzul, the Dark Justiciar":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mazzulthedarkjusticiar.webp",
-  "Mechanicus":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mechanicusmk12.webp",
+  "Mechanicus":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_questimage_mission_marnimechfactory_block_boss.webp",
   "Merrick, the Knight of Fortune":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_goldenarmor.webp",
   "Moren the Mistwood Huntmaster":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_enthunter.webp",
   "Mudwalker Lutemir":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_mudwalkerlutemir.webp",
@@ -6875,8 +6875,8 @@ const MOUNT_IMGS={
   "Train":                    "cd_assets/mounts/train.webp",
   "Herspia Packhorse":        "cd_assets/mounts/herspia-packhorse.webp",
   "Marni's Mechahorse":       "cd_assets/mounts/marnis-mechahorse.webp",
-  "Rosehorn Deer":"cd_assets/mounts/rosehorn_deer.png",
-  "Leaping Kuku Bird":"cd_assets/mounts/leaping_kuku_bird.png",
+  "Rosehorn Deer":"cd_assets/mounts/rosehorn-deer.svg",
+  "Leaping Kuku Bird":"cd_assets/mounts/leaping-kuku-bird.svg",
   "Calphadean Scout's Horse":"cd_assets/mounts/calphadean_scouts_horse.png"
 };
 const MOUNT_INGAME_IMGS={
@@ -6938,8 +6938,9 @@ const MOUNT_INGAME_IMGS={
   "Female White-striped Longhorn":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_female_longhorn_wild_32396.webp",
   "Grizzly Bear":   "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_grizzly_bear_wild_30111.webp",
   "Helms Hyena":    "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_ride_wild_30376.webp",
-  "Leaping Kuku Bird":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_cucubird_2.webp",
+  "Leaping Kuku Bird":"cd_assets/mounts/ig/Leaping-kuku-bird-mount-crimson-desert-wiki-guide.png",
   "Misthorn Branhok":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_alpineibex_1.webp",
+  "Rosehorn Deer":  "cd_assets/mounts/ig/Rosehorn-deer-mount-crimson-desert-wiki-guide.png",
   "Small Black-Maned Boar":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_ride_battle_boar_30271.webp",
   "A.T.A.G.":       "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_warmachine_1.webp",
   "High-Mobility A.T.A.G.":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_machine_carmabirdsaurus_1.webp",
@@ -13292,7 +13293,7 @@ const NPC_IMGS={
   "Kailok the Hornsplitter":"cd_assets/bosses/kailok.webp",
   "Ludvig":"cd_assets/bosses/ludvig.webp",
   "Gabriel Caliburn":"cd_assets/bosses/gabriel.webp",
-  "Lucian Bastier":"cd_assets/bosses/lucian.webp",
+  "Lucian Bastier":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp",
   "Draven the Crowcaller":"cd_assets/bosses/draven.webp",
   "Walter Lanford":"cd_assets/bosses/walter_lanford.webp",
   "Valgash":"cd_assets/npcs/valgash.webp",
