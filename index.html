@@ -3642,7 +3642,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
 
   <section class="sec" id="sec-patches">
     <h2 class="sec-t"><span class="sec-sym">✎</span> Patch-Notes</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.14.00</span> (Cross-Save-Update, 16.07.2026; davor Hotfix 1.13.01 am 08.07.2026 und großer Content-Patch 1.13.00 am 03.07.2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.15.00</span> (Bugfix-Patch, 24.07.2026; einziger neuer Content ist die Verlegung des 'Mace of Ambition'). Davor Cross-Save-Update 1.14.00 am 16.07.2026 und großer Content-Patch 1.13.00 am 03.07.2026.</div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev Update, 02.06.2026). Schrittweiser Rollout Juni–September 2026 — noch keine versionierten Patch-Notes, Inhalte können sich bis Release ändern.</div>
@@ -3672,7 +3672,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <div class="rm-task-list" id="rm-list"></div>
     <div class="rm-faq" style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px">
       <h3 class="sub-t" style="margin:0 0 4px">❓ Häufige Fragen — Endgame, NG+, Koop &amp; Cross-Save</h3>
-      <p style="font-size:11px;color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Patchnotes + game8/PowerPyx/Fextralife (Stand Patch 1.14, Juli 2026).</p>
+      <p style="font-size:11px;color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Patchnotes + game8/PowerPyx/Fextralife (Stand Patch 1.15, Juli 2026).</p>
       <div style="display:grid;gap:12px">
         <div style="background:linear-gradient(135deg,#15110d,#0c0c0c);border:1px solid rgba(201,162,39,.25);border-radius:10px;padding:12px 14px">
           <div style="color:var(--gold);font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es ein New Game Plus?</div>
@@ -3979,7 +3979,7 @@ const WEAPONS=[
   {name:"Volcanic Blaster",type:"Firearm",atk:34,crit:null,slots:5,source:"Crimson Desert / Vulkan-Bereich"},
   {name:"Marni Tank Blaster",type:"Firearm",atk:30,crit:1,slots:5,source:"Drop: Marni's Clockwork Mantis (Regent's Rise, Delesyia)"},
   {name:"Blaster No. 8",type:"Firearm",atk:34,crit:null,slots:5,source:"Exploration / Händler"},
-  {name:"Mace of Ambition",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Sanctum / Ambitiöse-Quest"},
+  {name:"Mace of Ambition",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Spire of Clockwork (Demeniss): seit Patch 1.15.00 im Raum mit der Drehtür einige Stockwerke unter der Spitze (vorher nur per Clipping erreichbar)",notes:"Einhandwaffe mit eingebautem Feuerangriff, ohne Abyss-Gear-Slot-Kosten; ursprünglich von Inquisitor Bastier geführt. Fundort-Korrektur laut Pearl-Abyss-Patchnotes 1.15.00."},
   {name:"Marching Baton",type:"Blunt/Axe",atk:33,crit:1,slots:3,source:"Marsch-Quest / Hernand Armee"},
   {name:"Artisan's Hand",type:"Blunt/Axe",atk:37,crit:null,slots:3,source:"Artisan-Quest / Händler"},
   {name:"Desert Hammer",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Crimson Desert / Exploration"},
@@ -12427,6 +12427,42 @@ const SIDE_QUESTS=[
 ];
 
 const PATCHES=[
+  {ver:"1.15.00",date:"24.07.2026",size:"Bugfix-Patch (All Platforms). Steam (PC/Mac), PlayStation, Xbox Series X|S & Epic Games Store sofort; Mac App Store in Arbeit. Release 02:40 UTC (Fach-/Guide-Presse datiert ihn nach lokaler Zeit auf den 23.07.2026). Konsolen-Build 1.000.407. Kein neuer Content außer der Verlegung des 'Mace of Ambition' — sonst reine Fehlerbehebungen",features:[
+    {cat:"Content",items:[
+      "'Mace of Ambition' verlegt und dadurch regulär erreichbar: Die Einhandwaffe (eingebauter Feuerangriff, vergleichbar Electro-Mecha Spear/Longsword, aber ohne Abyss-Gear-Slot-Kosten; ursprünglich von Inquisitor Bastier geführt) lag bisher in einem unzugänglichen Raum nahe der Spitze der Spire of Clockwork in Demeniss und war nur durch Clipping in die Geometrie erreichbar. Sie befindet sich jetzt einige Stockwerke tiefer im Raum mit der Drehtür (spinning door)",
+      "Bosse erschienen im Kampf teilweise transparent — behoben",
+      "Feldfrüchte wuchsen bzw. ließen sich in bestimmten Situationen nicht mehr ernten — behoben",
+      "Der Sperrstatus (Lock) ausgerüsteter Ausrüstung wurde für Oongka/Damiane nicht gespeichert — behoben",
+      "In der Quest 'Scattered Honey Jars' ließ sich der als Questziel gerittene Bär nicht angreifen — Angriff während des Reitens jetzt möglich",
+      "Ein großer Fisch verschwand beim Einsammeln aus Fischfallen — behoben"
+    ]},
+    {cat:"Combat/Action",items:[
+      "Wyvern-Beschwörung ließ sich nicht aus der Luft auslösen — behoben (Beschwörung im Flug/Sprung jetzt möglich)",
+      "Distanz des 'Aerial Roll' nach Einsatz von 'Aerial Maneuver' normalisiert"
+    ]},
+    {cat:"Controls",items:[
+      "Das Fadenkreuz für 'Axiom Force' wurde auch dann angezeigt, wenn das Ziel außerhalb der Aktivierungsreichweite lag — behoben",
+      "Fehlerhaftes Kamera-Zoom-Verhalten beim Schwimmen an bestimmten Orten korrigiert"
+    ]},
+    {cat:"Graphics",items:[
+      "HDR-bezogene Farb- und Transparenz-Anomalien in der UI behoben"
+    ]},
+    {cat:"Localization",items:[
+      "Diverse Lokalisierungsfehler in allen Sprachen korrigiert und die Lokalisierungsqualität verbessert"
+    ]},
+    {cat:"Others",items:[
+      "Absturz beim Laden von Cross-Save-Daten verhindert (Nachbesserung zum 1.14.00-Cross-Save)",
+      "Unnatürlich wirkende Reithaltung des Charakters auf einem Mount korrigiert",
+      "Stabilität der Fluchtfunktion mit einem gestohlenen Wagen verbessert (Wagen verschwand)",
+      "Kliff versank bei 'Blinding Flash Finisher' an Hängen im Boden — behoben"
+    ]},
+    {cat:"Known Issues (Stand 24.07.2026)",items:[
+      "Diverse Vorgänger-Probleme bleiben offen (u. a. plattformspezifische Cross-Save-Fehler auf PlayStation, Bewegungseinschränkungen beim Fischen sowie einzelne UI-Glitches); die offizielle Known-Issues-Seite wird separat gepflegt"
+    ]},
+    {cat:"Quelle",items:[
+      "Offizielle Pearl-Abyss-Patchnotes 1.15.00 (Notice-Board boardNo 109, Release 24.07.2026 02:40 UTC), Konsolen-Build 1.000.407. Verifiziert gegen VULKK, TwistedVoxel, GameRant und MP1st. Reiner Bugfix-Patch ohne neue Quests, Gebiete oder Balance-Änderungen; einziger content-relevanter Punkt ist die Verlegung des 'Mace of Ambition'."
+    ]}
+  ]},
   {ver:"1.14.00",date:"16.07.2026",size:"Cross-Save-Update (All Platforms). Steam (PC/Mac), PlayStation, Xbox Series X|S & Epic Games Store sofort; Mac App Store folgt später (in Arbeit). Release 09:00 UTC",features:[
     {cat:"Neues Feature",items:[
       "Cross-Save (Cross-Progression) eingeführt: Speicherstände lassen sich jetzt plattformübergreifend über die Pearl-Abyss-ID verknüpfen — unterstützt werden PS5, Xbox Series X|S, Steam und Epic Games Store",
