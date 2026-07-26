@@ -44,11 +44,21 @@ function extract(name) {
   throw new Error("Klammern unbalanciert bei: " + name);
 }
 
+// Optionale Datenstruktur: fehlt sie in index.html, faellt das zugehoerige
+// Feature stillschweigend weg statt den Netlify-Build abzubrechen.
+function extractOptional(name) {
+  try { return extract(name); } catch { return null; }
+}
+
 const BOSSES = extract("BOSSES");
 const WEAPONS = extract("WEAPONS");
 const TRUE_ENDING = extract("TRUE_ENDING");
 const BOSS_IMGS = extract("BOSS_IMGS");
 const WEAPON_IMGS = extract("WEAPON_IMGS");
+// Zweitbild pro Boss ({url,label,btn,src}); in der App Hover-Preview + Modal,
+// hier ein JS-freier Aufklapper. Aktuell nur Sir Catfish, dessen Kartenbild das
+// gleichnamige Fisch-Knowledge-Icon ist.
+const BOSS_ALT_IMGS = extractOptional("BOSS_ALT_IMGS") || {};
 
 // ── Helfer ───────────────────────────────────────────────────────────────────
 const esc = (s) => String(s == null ? "" : s)
@@ -122,7 +132,8 @@ async function dimsFromRemote(url) {
 // Schlaegt ein Remote-Fetch fehl, wird konservativ quadratisch (512x512, => "sq") angenommen —
 // das entspricht dem tatsaechlich beobachteten Regelfall dieser CDN-Bildklasse und verhindert,
 // dass ein Netzwerk-Hänger die Cover-Crop-Regression stillschweigend wieder einschleppt.
-const bossImgUrls = [...new Set(Object.values(BOSS_IMGS))];
+const altImgUrls = Object.values(BOSS_ALT_IMGS).map((a) => a && a.url).filter(Boolean);
+const bossImgUrls = [...new Set([...Object.values(BOSS_IMGS), ...altImgUrls])];
 const bossImgDims = new Map();
 const remoteUrls = [];
 for (const url of bossImgUrls) {
@@ -189,6 +200,22 @@ ul.stats{list-style:none;margin:0;padding:0;font-size:13px;display:flex;
 flex-direction:column;gap:3px}
 ul.stats li b{color:var(--amber);font-weight:600;font-family:var(--f-mono)}
 p.strat{font-size:13px;color:var(--ink);margin:4px 0 0;background:rgba(224,163,90,.07);border-left:2px solid var(--amber);border-radius:8px;padding:8px 11px}
+details.boss-alt{margin:2px 0 0}
+details.boss-alt>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;
+font-family:var(--f-mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+color:var(--amber);background:rgba(224,163,90,.08);border:1px solid var(--line);border-radius:10px;
+padding:7px 12px;transition:background .15s,border-color .15s,color .15s}
+details.boss-alt>summary::-webkit-details-marker{display:none}
+details.boss-alt>summary::marker{content:""}
+details.boss-alt>summary:hover{background:rgba(224,163,90,.16);border-color:var(--amber);color:var(--ink-hi)}
+details.boss-alt>summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+details.boss-alt[open]>summary{color:var(--ink-hi);border-color:var(--amber)}
+details.boss-alt .alt-off{display:none}
+details.boss-alt[open] .alt-on{display:none}
+details.boss-alt[open] .alt-off{display:inline}
+details.boss-alt figure{margin:11px 0 0}
+details.boss-alt figure img{aspect-ratio:auto;object-fit:contain;max-height:64vh}
+details.boss-alt figcaption{font-family:var(--f-mono);font-size:11px;line-height:1.55;color:var(--ink-faint);margin-top:7px}
 .tbl-wrap{overflow-x:auto;margin-top:8px;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-soft)}
 table{border-collapse:collapse;width:100%;font-size:13px}
 th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -299,11 +326,30 @@ function bossArticle(b) {
   if (has(b.drop_abyss_gear)) stats.push(["Abyss-Gear", b.drop_abyss_gear]);
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
   const strat = has(b.strategy) ? `<p class="strat"><b>Strategie:</b> ${esc(b.strategy)}</p>` : "";
+  // Zweitbild als JS-freier Aufklapper (<details>): das Kartenbild bleibt stehen,
+  // das alternative Artwork erscheint darunter. Bewusst kein Modal — diese Seiten
+  // kommen ohne JavaScript aus, und ein Overlay ohne JS koennte weder Escape noch
+  // Fokusfalle noch Scroll-Lock sauber bedienen.
+  const alt = BOSS_ALT_IMGS[b.name];
+  let altHtml = "";
+  if (alt && alt.url) {
+    const ad = bossImgDims.get(alt.url);
+    const aw = ad ? ad.w : 512, ah = ad ? ad.h : 512;
+    const cap = [alt.label, alt.src].filter(has).map(esc).join(" &middot; ");
+    altHtml = `
+<details class="boss-alt">
+<summary><span class="alt-on">${esc(alt.btn || "Alternatives Artwork zeigen")}</span><span class="alt-off">Artwork wieder einklappen</span></summary>
+<figure>
+<img loading="lazy" src="${esc(imgSrc(alt.url))}" alt="${esc(alt.label || b.name)}" width="${aw}" height="${ah}">
+${cap ? `<figcaption>${cap}</figcaption>` : ""}
+</figure>
+</details>`;
+  }
   return `<article class="card" id="boss-${slug(b.name)}">
 ${imgTag}
 <h3>${esc(b.name)}</h3>
 <ul class="stats">${statsHtml}</ul>
-${strat}
+${strat}${altHtml}
 </article>`;
 }
 
