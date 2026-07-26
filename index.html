@@ -1813,6 +1813,13 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .craft-grade{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:auto;flex-shrink:0}
 .tag.tt{background:rgba(60,90,99,.13);color:var(--slate);border:1px solid var(--slate)}
 #craft-grid .ct{display:flex;align-items:center}
+/* Icons der Crafting-&-Farming-Karten +10%: bewusst per transform statt width/height, denn ein
+   transform beeinflusst die Layout-Box NICHT -> Kartenaufteilung, Zeilenhoehen und Abstaende
+   bleiben exakt wie vorher. Nachjustieren nur ueber --craft-ico-scale. */
+#craft-grid{--craft-ico-scale:1.1}
+#craft-grid .craft-ico{transform:scale(var(--craft-ico-scale))}
+#craft-grid .craft-icon-hd>:first-child{transform:scale(var(--craft-ico-scale))}
+#craft-grid .st-ico{display:inline-block;transform:scale(var(--craft-ico-scale))}
 
 /* ── Map pin button ── */
 .map-pin-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border:1px solid var(--brass);background:var(--vellum);color:var(--iron-soft);font-family:var(--f-mono);font-size:10px;cursor:pointer;transition:all .15s;margin-top:10px;text-transform:uppercase;letter-spacing:.06em;border-radius:8px}
@@ -11772,13 +11779,15 @@ function craftCatColor(cat){
   return'var(--gdim)';
 }
 function stationIcon(station){
-  if(/Cauldron|Kessel|Alchemie/i.test(station))return'🧪 ';
-  if(/Labor|Lab\b/i.test(station))return'⚗️ ';
-  if(/Bratpfanne|Frying|Grill|Bonfire/i.test(station))return'🍳 ';
-  if(/Wild Pot|Kochtopf|\bPot\b|Hearth|Spezial/i.test(station))return'🍲 ';
-  if(/Workshop|Kuku/i.test(station))return'⚒️ ';
-  if(/Inn/i.test(station))return'🏠 ';
-  return'🔧 ';
+  // Emoji im Span, damit es per CSS (--craft-ico-scale) mitskaliert werden kann; nackter Text ist nicht transformierbar.
+  const ico=e=>`<span class="st-ico">${e}</span> `;
+  if(/Cauldron|Kessel|Alchemie/i.test(station))return ico('🧪');
+  if(/Labor|Lab\b/i.test(station))return ico('⚗️');
+  if(/Bratpfanne|Frying|Grill|Bonfire/i.test(station))return ico('🍳');
+  if(/Wild Pot|Kochtopf|\bPot\b|Hearth|Spezial/i.test(station))return ico('🍲');
+  if(/Workshop|Kuku/i.test(station))return ico('⚒️');
+  if(/Inn/i.test(station))return ico('🏠');
+  return ico('🔧');
 }
 function accTypeIcon(type){
   if(type==='Ring')return`<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="12" r="6.5" stroke="#e04535" stroke-width="1.4" fill="rgba(180,45,32,.07)"/><circle cx="11" cy="12" r="3.5" stroke="#e04535" stroke-width="1" opacity=".35"/><path d="M11 5.5C12.5 3.5 16 4 17 6" stroke="#c9a227" stroke-width="1.4" stroke-linecap="round"/></svg>`;
