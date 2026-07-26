@@ -1817,6 +1817,17 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .craft-ico{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px;background:var(--vellum-hi);padding:2px;flex-shrink:0;border:1px solid var(--iron-gall);border-radius:8px;filter:grayscale(.15) contrast(1.03)}
 .craft-grade{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:auto;flex-shrink:0}
 .tag.tt{background:rgba(60,90,99,.13);color:var(--slate);border:1px solid var(--slate)}
+/* Koch-Stufen-Leiste: bündelt Basis/Filling/Satisfying/Hearty eines Gerichts auf EINER Karte.
+   Die Buttons sind zugleich die Stufenübersicht (Label + geheilte HP), der Klick blendet das
+   zugehörige Zutaten-/Effekt-Panel ein. Panels liegen alle im DOM, damit die Volltextsuche
+   (data-s) und das Highlighting weiter über alle Stufen greifen. */
+.ctier{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.ctier-b{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 8px;background:var(--vellum);border:1px solid var(--line);border-radius:8px;cursor:pointer;font-family:var(--f-mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--iron-soft);line-height:1.25;transition:background .15s,border-color .15s,color .15s}
+.ctier-b:hover{border-color:var(--iron-gall);color:var(--iron-gall)}
+.ctier-b.on{background:var(--instr-soft);border-color:var(--brass);color:var(--brass)}
+.ctier-b b{font-size:11px;font-weight:700;letter-spacing:0;text-transform:none}
+.ctier-p{display:none}
+.ctier-p.on{display:flex}
 #craft-grid .ct{display:flex;align-items:center}
 /* Icons der Crafting-&-Farming-Karten +10%: bewusst per transform statt width/height, denn ein
    transform beeinflusst die Layout-Box NICHT -> Kartenaufteilung, Zeilenhoehen und Abstaende
@@ -3202,6 +3213,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <details style="margin-bottom:12px">
       <summary style="cursor:pointer;font-size:11.5px;color:var(--gdim);user-select:none">ℹ️ Koch-Stufen &amp; Datenqualität (questlog datamined · game8/Fextralife verifiziert)</summary>
       <div style="font-size:11.5px;color:var(--dim);line-height:1.65;margin-top:8px;padding:10px 13px;background:rgba(201,162,39,.04);border:1px solid var(--bdr);border-radius:8px">
+        <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Darstellung:</strong> Die Koch-Stufen eines Gerichts (z.&nbsp;B. Harvest Roll / Filling Harvest Roll / Satisfying Harvest Roll) stehen gebündelt auf <em>einer</em> Karte: die Leiste unter dem Namen schaltet zwischen den Stufen um und zeigt direkt die geheilten HP je Stufe. Das ist sinnvoll, weil sich die Stufen nur in Zutatenmenge und HP unterscheiden, während Station, Item-Stufe und Resistenz-Level identisch bleiben. So werden aus 310 Rezept-Zeilen 150 Gerichte-Karten. Wer die alte Ansicht braucht, stellt den Filter rechts oben auf „Koch-Stufen einzeln“ (oder „nur Basis-Stufe“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p>
         <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Koch-Stufen:</strong> Gerichte erscheinen in bis zu drei Koch-Qualitaetsstufen (Basis -&gt; Filling/Satisfying -&gt; Hearty bzw. die Feast-Stufen). Bestaetigte Regel: Die geheilten Trefferpunkte (Flat-Heal-Gerichte) skalieren ueber die Stufen hoch (HP = questlog-Rohwert / 1000), waehrend die Resistenz-STUFE und meist auch die Wirkdauer fix bleibt (Resistenz-Level = questlog-Wert). Achtung: Prozent-Heiler wie Chocolate (+50% Max-HP) und die Feast-Gerichte mit reinen Buffs (Ignore Stamina/Spirit, Overheal, Angriff) folgen NICHT der /1000-HP-Logik - ihr Nutzen steckt im zeitlich begrenzten Buff, nicht in einer HP-Zahl. Bei Elixieren steigert die Stufe Lesser -&gt; normal -&gt; Greater sowohl Wert als auch Dauer (5/10/15 Min bei getimten Buffs, 4/8/12 s bei No-Cost-Buffs).</p>
         <p style="margin:0">Ehrlicher Datenstand: Verlaesslich sind Flat-Heal-HP (questlog-Wert/1000) und die Resistenz-STUFE (Eis und Feuer belegt; Blitz-Resistenz ist nur bei einem Plate-Feast und Elixieren/Gear belegt, fuer kein regulaeres Food-Gericht). Luecken: questlog erfasst bei vielen Gerichten und Tees KEINE Spirit-/Stamina-Werte - diese sind aus game8/VGC/keengamer ergaenzt und daher nur bei kuratierten Gerichten angegeben (z. B. Tees stellen zusaetzlich Stamina her: Pine ~+224, Oakwood +160, Honey +128, Mild Herb +96, Wine +64 - in questlog nicht kodiert). Wirkdauern divergieren zwischen Datenbanken (z. B. Fish Porridge questlog Lv 4/60 s vs game8 Lv 5/10 Min; Clear Soup 30 s vs game8 5 Min) - hier gilt der questlog-Wert, Abweichungen sind notiert. HP-Differenzen einzelner Gerichte stammen meist aus unterschiedlichen Zutatensets, nicht aus widerspruechlichen Effekten. Die /1000-Division und value=Level sind aus Anzeigewerten plausibel abgeleitet, nicht am rohen itemUseEffect-Feld (JS/tRPC-gated) bewiesen. Zutatenmengen sind in questlog teils unvollstaendig (oft nur 'Water'/'Empty Bottle'); echte Mengen siehe Food-Guide. Faerbemittel sind kein Koch-/Alchemie-Rezept - dafuer die separate Dyes-Sektion nutzen; detaillierte Zutaten-Farmrouten stehen im Food-Guide.</p>
       </div>
@@ -3209,7 +3221,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <div class="fbar">
       <select class="fs" id="kf-cat" onchange="renderCrafting()"><option value="">Alle Kategorien</option><option value="Food">🍲 Food (Kochen)</option><option value="Elixir">⚗️ Elixiere &amp; Tränke</option><option value="Kuku-Gadget">🔧 Kuku-Gadgets</option><option value="" disabled>──&nbsp;nach Station&nbsp;──</option><option value="Wild Pot">Wild Pot</option><option value="Kochtopf">Kochtopf (Pot)</option><option value="Bratpfanne">Bratpfanne (Frying Pan)</option><option value="Spezial-Kochtopf">Spezial-Kochtopf (Plate)</option></select>
       <select class="fs" id="kf-fx" onchange="renderCrafting()"><option value="">Alle Effekte</option><option value="Heilung">❤️ Heilung (HP)</option><option value="Eis-Res">❄️ Eis-Resistenz</option><option value="Feuer-Res">🔥 Feuer-Resistenz</option><option value="Blitz-Res">⚡ Blitz-Resistenz</option><option value="Buff">✨ Buff (Angriff/Spirit/Stamina)</option></select>
-      <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);cursor:pointer"><input type="checkbox" id="kf-basis" onchange="renderCrafting()"> nur Basis-Rezepte</label>
+      <select class="fs" id="kf-tier" onchange="renderCrafting()" aria-label="Koch-Stufen-Darstellung"><option value="group">🧬 Koch-Stufen gebündelt</option><option value="all">Koch-Stufen einzeln</option><option value="basis">nur Basis-Stufe</option></select>
       <span id="craft-count" style="font-size:11px;color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="grid" id="craft-grid"></div>
@@ -10081,6 +10093,8 @@ function _doSearchImpl(q){
   });
   // Hide elements outside active section (only if any non-active section element has data-s)
   // — they remain in DOM but won't render due to .sec not having active
+  // Crafting-Sammelkarten auf die gesuchte Koch-Stufe stellen, bevor highlightet wird
+  if(typeof craftSyncTier==='function')craftSyncTier(qF);
   // Highlight only top 80 matches (perceptual highlight, full-list-highlight would freeze on big lists)
   matchedForHL.forEach(el=>highlightInElement(el,q));
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
@@ -10627,39 +10641,148 @@ function craftGrade(g){
   const c=cols[g]||cols[0];
   return `<span class="craft-grade" title="Item-Stufe ${g}" style="background:${c};box-shadow:0 0 5px ${c}"></span>`;
 }
-function renderCrafting(){
-  const fc=document.getElementById('kf-cat').value;
-  const ffEl=document.getElementById('kf-fx'); const ff=ffEl?ffEl.value:'';
-  const bEl=document.getElementById('kf-basis'); const basisOnly=!!(bEl&&bEl.checked);
-  let shown=0;
-  document.getElementById('craft-grid').innerHTML=CRAFTING.map(c=>{
-    let show=true;
-    if(fc) show=(fc==='Food'||fc==='Elixir'||fc==='Kuku-Gadget')?c.cat===fc:c.station===fc;
-    if(show&&ff) show=craftHasFx(c,ff);
-    if(show&&basisOnly) show=(c.tier==='Basis');
-    if(show)shown++;
-    const s=[c.name,c.station,c.tier,c.ingr,c.effect,c.spirit,c.note,c.source].filter(Boolean).join(' ').toLowerCase();
-    const badge=c.cat==='Elixir'?'tr':'tg';
-    const ico=c.icon?`<img class="craft-ico" src="${CRAFT_CDN}${c.icon}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
-    const tierTag=c.tier&&c.tier!=='Basis'?`<span class="tag tt">${escHtml(c.tier)}</span>`:'';
-    const spiritTxt=c.spirit?` <span style="color:#7fb3d5">· ${escHtml(c.spirit)}</span>`:'';
-    const flexTxt=c.flex?` <span style="color:var(--dim);font-size:10.5px">(${c.cat==='Elixir'?'+ Reagenz/Katalysator':'+ flexible Zutaten: Fleisch/Fisch/Korn'})</span>`:'';
-    const effTxt=c.effect?escHtml(c.effect):'<span style="color:var(--dim)">nicht erfasst</span>';
-    const confTxt=c.conf&&c.conf!=='high'?` <span style="color:var(--dim);font-size:10px">(${c.conf==='medium'?'mittlere':'geringe'} Konfidenz)</span>`:'';
-    return `<div class="card${show?'':' hide'}" data-s="${escHtml(s)}">
-      <div class="craft-icon-hd" style="background:${craftCatGrad(c.cat)}">${craftCatIcon(c.cat)}<span class="icon-hd-label" style="color:${craftCatColor(c.cat)}">${c.cat}</span>${craftGrade(c.grade||0)}</div>
-      <div class="ct">${ico}<span>${escHtml(c.name)}</span></div>
-      <div class="cm"><span class="tag ${badge}">${c.cat}</span><span class="tag tx">${stationIcon(c.station)}${escHtml(c.station)}</span>${tierTag}</div>
-      <div class="crows">
+// ===== Koch-Stufen-Buendelung =====
+// Ein Gericht existiert in bis zu vier Koch-Stufen (Basis -> Filling -> Satisfying -> Hearty),
+// die sich NUR in Zutatenmenge und geheilten HP unterscheiden - Station, Item-Stufe, Icon und
+// Resistenz-Level sind identisch. Frueher war jede Stufe eine eigene Karte (310 Karten fuer
+// 150 Gerichte), was die Sektion mit Beinah-Dubletten geflutet hat. Jetzt: eine Karte pro
+// Gericht mit umschaltbarer Stufen-Leiste.
+// Gruppierungsschluessel = Name ohne Stufen-Praefix + Station + Kategorie. Station/Kategorie
+// gehoeren in den Schluessel, damit gleichnamige Gerichte verschiedener Stationen getrennt
+// bleiben. 'Lavish' wird bewusst NICHT als Praefix gestrippt: "Lavish Meal" ist ein eigenes
+// Gericht (Grundstufe) mit "Hearty Lavish Meal" als hoeherer Stufe - ein Strip wuerde die
+// Karte auf den sinnlosen Titel "Meal" reduzieren.
+const CRAFT_TIER_RANK={Basis:0,Lavish:0,Festmahl:0,Gadget:0,Filling:1,Satisfying:2,Hearty:3};
+const CRAFT_TIER_PREFIX=/^(?:Filling|Satisfying|Hearty) /;
+let _craftGroups=null;
+function craftGroups(){
+  if(_craftGroups)return _craftGroups;
+  const map=new Map();
+  CRAFTING.forEach(c=>{
+    const base=c.name.replace(CRAFT_TIER_PREFIX,'');
+    const key=base+'||'+c.station+'||'+c.cat;
+    let g=map.get(key);
+    if(!g){g={base,cat:c.cat,station:c.station,grade:c.grade,icon:c.icon,tiers:[]};map.set(key,g);}
+    g.tiers.push(c);
+  });
+  _craftGroups=[...map.values()];
+  _craftGroups.forEach(g=>g.tiers.sort((a,b)=>(CRAFT_TIER_RANK[a.tier]??9)-(CRAFT_TIER_RANK[b.tier]??9)));
+  return _craftGroups;
+}
+// Geheilte HP aus dem Effekt-Text ("+420 HP, Feuer-Res Lv 4 (60s)"). 0 = kein Flat-Heal
+// (Resistenz- und Buff-Gerichte, Elixiere) -> Stufen-Button zeigt dann nur das Label.
+function craftHp(c){const m=/\+\s*(\d+)\s*HP/i.exec(c.effect||'');return m?+m[1]:0;}
+function craftSearchStr(c){return [c.name,c.station,c.tier,c.ingr,c.effect,c.spirit,c.note,c.source].filter(Boolean).join(' ');}
+// showName: voller Ingame-Name der Stufe. Wird auf Sammelkarten gezeigt, sobald er vom
+// Kartentitel abweicht ("Satisfying Harvest Roll" auf der Karte "Harvest Roll") - dient dem
+// Abgleich mit dem Spiel UND macht Suchtreffer auf Stufennamen sichtbar hervorgehoben.
+function craftRows(c,showName){
+  const spiritTxt=c.spirit?` <span style="color:#7fb3d5">· ${escHtml(c.spirit)}</span>`:'';
+  const flexTxt=c.flex?` <span style="color:var(--dim);font-size:10.5px">(${c.cat==='Elixir'?'+ Reagenz/Katalysator':'+ flexible Zutaten: Fleisch/Fisch/Korn'})</span>`:'';
+  const effTxt=c.effect?escHtml(c.effect):'<span style="color:var(--dim)">nicht erfasst</span>';
+  const confTxt=c.conf&&c.conf!=='high'?` <span style="color:var(--dim);font-size:10px">(${c.conf==='medium'?'mittlere':'geringe'} Konfidenz)</span>`:'';
+  return `${showName?`<div class="crow"><span class="cl">Rezept</span><span class="cv" style="color:var(--dim)">${escHtml(c.name)}</span></div>`:''}
         <div class="crow"><span class="cl">Zutaten</span><span class="cv">${escHtml(c.ingr)}${flexTxt}</span></div>
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${effTxt}${spiritTxt}${confTxt}</span></div>
         ${c.note?`<div class="crow"><span class="cl">Tipp</span><span class="cv" style="color:#5ab87a">${escHtml(c.note)}</span></div>`:''}
         ${c.source?`<div class="crow"><span class="cl">Fundort</span><span class="cv" style="color:var(--dim)">${escHtml(c.source)}</span></div>`:''}
-        ${c.conflict?`<div class="crow"><span class="cl">Hinweis</span><span class="cv" style="color:var(--dim);font-size:10.5px">${escHtml(c.conflict)}</span></div>`:''}
+        ${c.conflict?`<div class="crow"><span class="cl">Hinweis</span><span class="cv" style="color:var(--dim);font-size:10.5px">${escHtml(c.conflict)}</span></div>`:''}`;
+}
+// Einzelrezept-Karte (Darstellung wie vor der Buendelung) - fuer Gerichte ohne weitere Stufen
+// und fuer die Modi "Koch-Stufen einzeln" / "nur Basis-Stufe".
+function craftCardSingle(c,show){
+  const badge=c.cat==='Elixir'?'tr':'tg';
+  const ico=c.icon?`<img class="craft-ico" src="${CRAFT_CDN}${c.icon}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
+  const tierTag=c.tier&&c.tier!=='Basis'?`<span class="tag tt">${escHtml(c.tier)}</span>`:'';
+  return `<div class="card${show?'':' hide'}" data-s="${escHtml(craftSearchStr(c).toLowerCase())}">
+      <div class="craft-icon-hd" style="background:${craftCatGrad(c.cat)}">${craftCatIcon(c.cat)}<span class="icon-hd-label" style="color:${craftCatColor(c.cat)}">${c.cat}</span>${craftGrade(c.grade||0)}</div>
+      <div class="ct">${ico}<span>${escHtml(c.name)}</span></div>
+      <div class="cm"><span class="tag ${badge}">${c.cat}</span><span class="tag tx">${stationIcon(c.station)}${escHtml(c.station)}</span>${tierTag}</div>
+      <div class="crows">
+        ${craftRows(c)}
       </div>
     </div>`;
+}
+// Gebuendelte Karte: ein Gericht, alle Koch-Stufen als Umschalt-Leiste.
+function craftCardGroup(g,show){
+  const ts=g.tiers;
+  if(ts.length===1)return craftCardSingle(ts[0],show);
+  const badge=g.cat==='Elixir'?'tr':'tg';
+  const ico=g.icon?`<img class="craft-ico" src="${CRAFT_CDN}${g.icon}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
+  // Suchindex umfasst ALLE Stufen -> "Satisfying Harvest Roll" findet weiterhin diese Karte.
+  const s=ts.map(craftSearchStr).join(' ').toLowerCase();
+  const btns=ts.map((c,i)=>{
+    const hp=craftHp(c);
+    return `<button type="button" class="ctier-b${i?'':' on'}" title="${escHtml(c.name)}" aria-pressed="${i?'false':'true'}" onclick="craftTier(this,${i})">${escHtml(c.tier)}${hp?`<b>${hp} HP</b>`:''}</button>`;
   }).join('');
-  const cnt=document.getElementById('craft-count'); if(cnt)cnt.textContent=shown+(shown===1?' Rezept':' Rezepte');
+  const panels=ts.map((c,i)=>`<div class="crows ctier-p${i?'':' on'}">
+        ${craftRows(c,c.name!==g.base)}
+      </div>`).join('');
+  return `<div class="card${show?'':' hide'}" data-s="${escHtml(s)}">
+      <div class="craft-icon-hd" style="background:${craftCatGrad(g.cat)}">${craftCatIcon(g.cat)}<span class="icon-hd-label" style="color:${craftCatColor(g.cat)}">${g.cat}</span>${craftGrade(g.grade||0)}</div>
+      <div class="ct">${ico}<span>${escHtml(g.base)}</span></div>
+      <div class="cm"><span class="tag ${badge}">${g.cat}</span><span class="tag tx">${stationIcon(g.station)}${escHtml(g.station)}</span><span class="tag tt">${ts.length} Stufen</span></div>
+      <div class="ctier" role="group" aria-label="Koch-Stufe wählen">${btns}</div>
+      ${panels}
+    </div>`;
+}
+// Stufenwechsel rein ueber Klassen (kein Re-Render), damit Such-Highlights und DOM-Zustand
+// der uebrigen Karten unangetastet bleiben.
+function craftTier(btn,i){
+  const card=btn.closest('.card'); if(!card)return;
+  card.querySelectorAll('.ctier-b').forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i?'true':'false');});
+  card.querySelectorAll('.ctier-p').forEach((p,j)=>p.classList.toggle('on',j===i));
+}
+// Sucht jemand gezielt nach einer Stufe ("Satisfying Harvest Roll"), klappt die Sammelkarte
+// genau diese Stufe auf statt der Grundstufe - sonst waere der Treffer zwar gefunden, aber
+// unsichtbar. Wird aus der Volltextsuche heraus aufgerufen (dort defensiv per typeof).
+// Gematcht wird gegen Stufenname UND Panel-Inhalt, damit auch die Suche nach einer
+// stufenspezifischen Zutatenmenge ("8x Egg") die richtige Stufe aufklappt. Die niedrigste
+// passende Stufe gewinnt, damit generische Begriffe die Grundstufe stehen lassen.
+function craftSyncTier(qF){
+  if(!qF)return;
+  const grid=document.getElementById('craft-grid'); if(!grid)return;
+  if(!grid.closest('.sec.active'))return; // Suche in anderen Sektionen nicht unnoetig belasten
+  grid.querySelectorAll('.card:not(.hide) .ctier').forEach(bar=>{
+    const btns=bar.querySelectorAll('.ctier-b');
+    const pans=bar.parentNode.querySelectorAll('.ctier-p');
+    for(let i=0;i<btns.length;i++){
+      const t=btns[i]._tf||(btns[i]._tf=_fold((btns[i].title||'')+' '+((pans[i]&&pans[i].textContent)||'')));
+      if(t.includes(qF)){if(!btns[i].classList.contains('on'))craftTier(btns[i],i);return;}
+    }
+  });
+}
+function renderCrafting(){
+  const fc=document.getElementById('kf-cat').value;
+  const ffEl=document.getElementById('kf-fx'); const ff=ffEl?ffEl.value:'';
+  const tEl=document.getElementById('kf-tier'); const mode=tEl?tEl.value:'group';
+  const match=c=>{
+    let show=true;
+    if(fc) show=(fc==='Food'||fc==='Elixir'||fc==='Kuku-Gadget')?c.cat===fc:c.station===fc;
+    if(show&&ff) show=craftHasFx(c,ff);
+    return show;
+  };
+  let shown=0,recipes=0,html='';
+  if(mode==='group'){
+    // Karte bleibt sichtbar, sobald IRGENDEINE ihrer Stufen den Filtern entspricht.
+    html=craftGroups().map(g=>{
+      const show=g.tiers.some(match);
+      if(show){shown++;recipes+=g.tiers.length;}
+      return craftCardGroup(g,show);
+    }).join('');
+  }else{
+    html=CRAFTING.map(c=>{
+      let show=match(c);
+      if(show&&mode==='basis') show=(c.tier==='Basis');
+      if(show){shown++;recipes++;}
+      return craftCardSingle(c,show);
+    }).join('');
+  }
+  document.getElementById('craft-grid').innerHTML=html;
+  const cnt=document.getElementById('craft-count');
+  if(cnt)cnt.textContent=(mode==='group'&&recipes!==shown)
+    ?`${shown} Gerichte · ${recipes} Rezepte`
+    :shown+(shown===1?' Rezept':' Rezepte');
   renderReverseLookup();
 }
 
