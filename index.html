@@ -1477,7 +1477,7 @@ a:visited{color:var(--gold)}
 @media print{
   body{background:#fff!important;color:#222!important;font-size:11pt;background-image:none!important}
   body::before{display:none!important}
-  #rail,#sidebar,#blattbar,.console-reopen,#sbar,#btt,#ham,#mob-overlay,#credit-top,#credit-bottom,#visitor-bar,#auth-area,#ee-overlay,#help-overlay,#rb-modal,.skip-link,.tabs,.fbar,.boss-notes-btn,.defeat-btn,#mount-float-preview,#mount-ingame-modal,#core-vid-float,.rb-trigger,.cl-reset,.copy-btn{display:none!important}
+  #rail,#sidebar,#blattbar,.console-reopen,#sbar,#btt,#ham,#mob-overlay,#credit-top,#credit-bottom,#visitor-bar,#auth-area,#ee-overlay,#help-overlay,#rb-modal,.skip-link,.tabs,.fbar,.boss-notes-btn,.defeat-btn,.boss-alt-btn,#mount-float-preview,#mount-ingame-modal,#core-vid-float,.rb-trigger,.cl-reset,.copy-btn{display:none!important}
   #main,.sec{padding:0!important;margin:0!important;display:block!important}
   .sec.active~.sec,.sec:not(.active){display:none!important}
   .card,.sk-c,.witch-card,.set-card,.chap,.fac-reg,.te-grp{background:#fff!important;border:1px solid #ccc!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid;color:#222!important}
@@ -1551,6 +1551,11 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
   #sidebar .console-list{flex:none;overflow:visible;min-height:0}
   #sidebar #visitor-bar{display:none}
   #app.console-collapsed #sidebar{width:auto!important;transform:translateY(105%)}  /* Collapse greift mobil nicht; Sheet-Modell uebernimmt */
+  /* ... der gemerkte Collapse-Zustand darf das Sheet aber nicht zuhalten. Ohne diese Zeile gewinnt
+     die Regel darueber (2 IDs + Klasse) gegen #sidebar.open (1 ID + Klasse): wer am Desktop einmal
+     eingeklappt hat oder aus dem Tablet-Querformat ins Hochformat dreht, bekommt die Blattliste
+     nicht mehr auf (verifiziert 2026-07-26: translateY blieb bei 105% statt 0). */
+  #app.console-collapsed #sidebar.open{transform:translateY(0)}
   .console-collapse{display:none}
   .console-reopen{display:none!important}
   .sheet-grip{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px;border-bottom:1px solid var(--line);background:var(--vellum-deep);font-family:var(--f-mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--iron-soft)}
@@ -1890,6 +1895,10 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .mim-close:hover{color:var(--vellum);background:var(--survey-red);border-color:var(--survey-red)}
 .mount-ig-btn{margin-top:9px;width:100%;padding:6px 0;background:var(--vellum);border:1px solid var(--line);color:var(--iron-soft);font-family:var(--f-mono);font-size:10px;cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.06em;border-radius:8px}
 .mount-ig-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
+/* Boss-Alternativbild: Button in der Bildschiene, nutzt Float-Preview + Modal
+   der Mounts wieder (siehe showBossAlt/openBossAlt und BOSS_ALT_IMGS). */
+#boss-grid .record-rail .boss-alt-btn{margin:10px 12px 0;width:calc(100% - 24px);padding:6px 0;background:var(--vellum);border:1px solid var(--line);color:var(--iron-soft);font-family:var(--f-mono);font-size:10px;cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.06em;border-radius:8px}
+#boss-grid .record-rail .boss-alt-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 
 /* ============================================================
    FELDATLAS-HERO — Seraph-Altar-Kontakt (additiv, fa-hero-Praefix)
@@ -5896,6 +5905,20 @@ const BOSS_IMGS_CDN={
   "Umbra (Final)":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_umbra_boss.webp",
   "Walter Lanford":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_walter_bliss.webp"
 };
+
+// Optionales Zweitbild pro Boss: das Kartenbild bleibt, per Button laesst sich
+// ein alternatives Artwork einblenden (Hover-Preview) bzw. gross oeffnen (Modal).
+// Sir Catfish: das Kartenbild ist questlogs Knowledge-Icon des *Fisches* Catfish
+// (gleicher Name, eigener Knowledge-Eintrag) — bewusst behalten, das echte
+// Boss-Artwork liegt unter dem internen Namen "Crogg the Catfish Man".
+const BOSS_ALT_IMGS={
+  "Sir Catfish":{
+    url:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_croggthecatfishman.webp",
+    label:"Sir Catfish — echtes Boss-Artwork (intern: Crogg the Catfish Man)",
+    btn:"🐟 Den echten Boss zeigen",
+    src:"questlog Knowledge-Artwork"
+  }
+};
 const SKILL_IMGS={
   "Blinding Flash":              "cd_assets/skills/blinding_flash.webp",
   "Charge":                      "cd_assets/skills/charge.webp",
@@ -9595,9 +9618,23 @@ function markRailActive(){
   });
 }
 function _consoleCollapsed(){ return document.getElementById('app').classList.contains('console-collapsed'); }
-function collapseConsole(){ document.getElementById('app').classList.add('console-collapsed'); try{localStorage.setItem('cd_console_collapsed','1');}catch(e){} }
-function expandConsole(){ document.getElementById('app').classList.remove('console-collapsed'); try{localStorage.setItem('cd_console_collapsed','0');}catch(e){} }
+/* Tablet im Querformat (861-1200px): Rail (74px) + Konsole (262px) nehmen dem Inhalt ein Drittel der
+   Breite. Auf einem 1024er Geraet bleiben 678px -- WENIGER als die 758px im Hochformat, wo ab 860px
+   das Sheet-Layout greift. Das breitere Format zeigte also weniger Inhalt als das schmalere. Darum
+   startet die Konsole hier eingeklappt (Inhalt 940px) und faehrt nach der Blattwahl wieder zu, genau
+   wie das Sheet auf Mobil. Entscheidet der Nutzer selbst (Einklapp-Knopf/Griff), gilt seine Wahl
+   dauerhaft; navigationsbedingtes Auf- und Zufahren wird bewusst NICHT gemerkt (persist=false). */
+function _isTabletWide(){ return window.matchMedia('(min-width:861px) and (max-width:1200px)').matches; }
+function _consolePref(){ try{ return localStorage.getItem('cd_console_collapsed'); }catch(e){ return null; } }
+function collapseConsole(persist){ document.getElementById('app').classList.add('console-collapsed'); if(persist!==false){ try{localStorage.setItem('cd_console_collapsed','1');}catch(e){} } }
+function expandConsole(persist){ document.getElementById('app').classList.remove('console-collapsed'); if(persist!==false){ try{localStorage.setItem('cd_console_collapsed','0');}catch(e){} } }
 function toggleConsole(){ _consoleCollapsed()?expandConsole():collapseConsole(); }
+function applyConsoleDefault(){
+  const pref=_consolePref();
+  if(pref==='1'){ collapseConsole(false); return; }
+  if(pref==='0'){ expandConsole(false); return; }
+  _isTabletWide()?collapseConsole(false):expandConsole(false);
+}
 /* Mobile-Sheet = bestehendes #sidebar.open (+ #mob-overlay Scrim). Nur CSS-Transform
    wechselt bei max-width:860px von Drawer-links auf Sheet-unten. showSec entfernt
    #sidebar.open weiterhin -> schliesst das Sheet bei Blattwahl (Auflage 4). */
@@ -9605,7 +9642,7 @@ function openSheet(){ document.getElementById('sidebar').classList.add('open'); 
 function closeSheet(){ document.getElementById('sidebar').classList.remove('open'); const s=document.getElementById('mob-overlay'); if(s)s.classList.remove('show'); const h=document.getElementById('ham'); if(h)h.setAttribute('aria-expanded','false'); }
 function openRessort(resId){
   _curRes=resId;
-  expandConsole();
+  expandConsole(false);
   renderConsole(resId);
   markRailActive();
   const leaves=SECTIONS.filter(s=>s.res===resId);
@@ -9616,6 +9653,10 @@ function openRessort(resId){
      "Tap tut nichts" und machte andere Seiten des Ressorts unerreichbar. Mobil bei mehreren
      Blaettern IMMER das Sheet mit der Liste oeffnen; Desktop-Verhalten unveraendert. */
   if(_isMobile() && leaves.length>1){ openSheet(); }
+  /* Tablet quer folgt demselben Gedanken: erst die Blattliste zeigen statt stumm zum zuletzt
+     gelesenen Blatt zu springen. Der Sprung passiert bei der Blattwahl, die die Konsole dann
+     auch wieder zufahren laesst. */
+  else if(_isTabletWide() && leaves.length>1){ /* Konsole steht offen, Auswahl abwarten */ }
   else if(jump){ showSec(jump); }
 }
 function updateBlattbar(s){
@@ -9634,6 +9675,10 @@ function _registraturSync(id){
   else { markConsoleActive(); }
   markRailActive();
   updateBlattbar(s);
+  /* Tablet quer: Blatt gewaehlt -> Konsole wieder zu, damit der Inhalt die volle Breite bekommt
+     (dasselbe Muster wie das Sheet auf Mobil). Wer die Konsole ausdruecklich offen haben will
+     (cd_console_collapsed==='0'), behaelt sie. */
+  if(_isTabletWide() && _consolePref()!=='0') collapseConsole(false);
   try{ localStorage.setItem('cd_lastleaf_'+res, id); }catch(e){}
 }
 function _syncRailThemeLbl(){
@@ -9643,7 +9688,11 @@ function _syncRailThemeLbl(){
 }
 function initRegistratur(){
   renderRail();
-  try{ if(localStorage.getItem('cd_console_collapsed')==='1') document.getElementById('app').classList.add('console-collapsed'); }catch(e){}
+  applyConsoleDefault();
+  /* Drehen ohne Neuladen: beim Wechsel in oder aus dem Tablet-Querformat den Vorgabezustand neu
+     setzen, solange der Nutzer nicht selbst entschieden hat. Sorgt nebenbei dafuer, dass die
+     Collapse-Klasse beim Wechsel ins Sheet-Layout (<=860px) wieder verschwindet. */
+  try{ window.matchMedia('(min-width:861px) and (max-width:1200px)').addEventListener('change',()=>{ if(_consolePref()===null) applyConsoleDefault(); }); }catch(e){}
   const start=localStorage.getItem('cd_sec')||'bosses';
   _curRes=SECTION_RESSORT[start]||'kampf';
   renderConsole(_curRes);
@@ -9651,9 +9700,12 @@ function initRegistratur(){
   const rf=document.getElementById('railFind'); if(rf)rf.addEventListener('click',()=>{const si=document.getElementById('si');if(si){ if(_isMobile())openSheet(); si.focus(); si.select(); }});
   const rt=document.getElementById('railTheme'); if(rt)rt.addEventListener('click',()=>{ if(typeof cycleTheme==='function')cycleTheme(); _syncRailThemeLbl(); });
   _syncRailThemeLbl();
-  const cc=document.getElementById('conCollapse'); if(cc)cc.addEventListener('click',collapseConsole);
-  const cr=document.getElementById('conReopen'); if(cr)cr.addEventListener('click',expandConsole);
-  const bc=document.getElementById('bbConsole'); if(bc)bc.addEventListener('click',()=>{ if(_isMobile())openSheet(); else expandConsole(); });
+  /* Einklapp-Knopf und Griff sind ausdrueckliche Nutzerwahl und werden gemerkt. Der Register-Knopf
+     in der Blattbar holt die Liste dagegen nur kurz hervor (mobil das Sheet) und soll die Vorgabe
+     im Tablet-Querformat nicht dauerhaft aushebeln. */
+  const cc=document.getElementById('conCollapse'); if(cc)cc.addEventListener('click',()=>collapseConsole(true));
+  const cr=document.getElementById('conReopen'); if(cr)cr.addEventListener('click',()=>expandConsole(true));
+  const bc=document.getElementById('bbConsole'); if(bc)bc.addEventListener('click',()=>{ if(_isMobile())openSheet(); else expandConsole(false); });
   const bh=document.getElementById('bbHome'); if(bh)bh.addEventListener('click',()=>openRessort('einstieg'));
   const grip=document.querySelector('#sidebar .sheet-grip'); if(grip)grip.addEventListener('click',closeSheet);
   window.addEventListener('resize',()=>{ if(!_isMobile()){ closeSheet(); } });
@@ -10299,6 +10351,7 @@ function renderBosses(){
         }
         ${renderBossLore(b)}
       </div>
+      ${BOSS_ALT_IMGS[b.name]?`<button class="boss-alt-btn" onmouseenter="showBossAlt(event,'${safeName}')" onmouseleave="hideMountIG()" onclick="event.stopPropagation();openBossAlt('${safeName}')" title="${escHtml(BOSS_ALT_IMGS[b.name].label)}" aria-label="${escHtml(BOSS_ALT_IMGS[b.name].label)}">${escHtml(BOSS_ALT_IMGS[b.name].btn)}</button>`:''}
       <dl class="datagrid">
         <div><dt>Kapitel</dt><dd class="mono">${b.chapter?String(b.chapter).padStart(2,'0'):'—'}</dd></div>
         <div><dt>Region</dt><dd>${escHtml(b.region)}</dd></div>
@@ -11591,7 +11644,8 @@ function renderBuilds(){
 // ===== MOUNT IN-GAME PREVIEW =====
 function showMountIG(e,name){
   const url=MOUNT_INGAME_IMGS[name];if(!url)return;
-  document.getElementById('mfp-img').src=url;
+  const im=document.getElementById('mfp-img');
+  im.src=url;im.style.objectFit='';
   document.getElementById('mfp-label').textContent=name+' — In-Game';
   document.getElementById('mount-float-preview').style.display='block';
   _moveMFP(e);
@@ -11621,10 +11675,33 @@ function showCoreVid(e,name){
 }
 function hideCoreVid(){const fp=document.getElementById('core-vid-float');fp.style.display='none';fp.querySelector('video').pause();}
 function hideMountIG(){document.getElementById('mount-float-preview').style.display='none';}
+// Quellen-Label im geteilten Modal (Mounts / Ruinen / Boss-Alternativbild).
+function _mimSrcLbl(t){const el=document.querySelector('#mount-ingame-modal .mim-src-lbl');if(el)el.textContent=t;}
 function openMountIG(name){
   const url=MOUNT_INGAME_IMGS[name];if(!url)return;
   document.getElementById('mim-img').src=url;
   document.getElementById('mim-name').textContent=name;
+  _mimSrcLbl('In-Game Screenshot');
+  document.getElementById('mount-ingame-modal').classList.add('show');
+  modalFocusOpen('mount-ingame-modal');
+  hideMountIG();
+}
+// ===== BOSS-ALTERNATIVBILD =====
+// Zeigt zu einem Boss ein zweites Artwork, ohne das Kartenbild zu ersetzen:
+// Hover = Float-Preview, Klick = grosses Modal (beide von den Mounts geteilt).
+function showBossAlt(e,name){
+  const a=BOSS_ALT_IMGS[name];if(!a)return;
+  const im=document.getElementById('mfp-img');
+  im.src=a.url;im.style.objectFit='contain';
+  document.getElementById('mfp-label').textContent=a.label;
+  document.getElementById('mount-float-preview').style.display='block';
+  _moveMFP(e);
+}
+function openBossAlt(name){
+  const a=BOSS_ALT_IMGS[name];if(!a)return;
+  document.getElementById('mim-img').src=a.url;
+  document.getElementById('mim-name').textContent=a.label;
+  _mimSrcLbl(a.src||'Artwork');
   document.getElementById('mount-ingame-modal').classList.add('show');
   modalFocusOpen('mount-ingame-modal');
   hideMountIG();
@@ -13608,7 +13685,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){
       e.preventDefault();
       if(typeof _isMobile==='function'&&_isMobile()&&typeof openSheet==='function')openSheet();
-      else if(typeof expandConsole==='function')expandConsole();
+      else if(typeof expandConsole==='function')expandConsole(false);
       si.focus(); si.select();
       return;
     }
@@ -13642,7 +13719,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(e.key==='/'){
       e.preventDefault();
       if(typeof _isMobile==='function'&&_isMobile()&&typeof openSheet==='function')openSheet();
-      else if(typeof expandConsole==='function')expandConsole();
+      else if(typeof expandConsole==='function')expandConsole(false);
       si.focus(); si.select();
       return;
     }
@@ -13999,6 +14076,7 @@ function ruinFilter(reg){
 function openRuinImg(url,cap){
   var im=document.getElementById("mim-img"); if(im)im.src=url;
   var n=document.getElementById("mim-name"); if(n)n.textContent=cap||"";
+  if(typeof _mimSrcLbl==="function")_mimSrcLbl("Rätsel-Bild");
   var m=document.getElementById("mount-ingame-modal"); if(m)m.classList.add("show");
 }
 // renderRuins laeuft jetzt lazy ueber SEC_RENDERERS.ruins (ensureSecRendered) statt eager bei DOMContentLoaded.
