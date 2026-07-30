@@ -551,7 +551,7 @@ body::before{
   color:var(--vellum);background:var(--survey-red);padding:4px 9px;flex:none;
   align-self:center;
 }
-/* Feste Blatt-Nummern §01-§33 (deterministisch, unabhaengig vom aktiven Tab) */
+/* Feste Blatt-Nummern §01-§34 (deterministisch, unabhaengig vom aktiven Tab) */
 #sec-beginner .sec-t::before{content:"§01"}
 #sec-bosses .sec-t::before{content:"§02"}
 #sec-items .sec-t::before{content:"§03"}
@@ -585,6 +585,7 @@ body::before{
 #sec-favorites .sec-t::before{content:"§31"}
 #sec-roadmap .sec-t::before{content:"§32"}
 #sec-achievements .sec-t::before{content:"§33"}
+#sec-camp .sec-t::before{content:"§34"}
 .sec-t::after{content:'';flex:1;min-width:20px;height:5px;align-self:end;margin-bottom:3px;
   background:repeating-linear-gradient(90deg,var(--tick) 0 1px,transparent 1px 32px);
   background-position:left bottom;background-repeat:repeat-x;background-size:32px 5px;}
@@ -1817,17 +1818,20 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .craft-ico{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px;background:var(--vellum-hi);padding:2px;flex-shrink:0;border:1px solid var(--iron-gall);border-radius:8px;filter:grayscale(.15) contrast(1.03)}
 .craft-grade{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:auto;flex-shrink:0}
 .tag.tt{background:rgba(60,90,99,.13);color:var(--slate);border:1px solid var(--slate)}
-/* Koch-Stufen-Leiste: bündelt Basis/Filling/Satisfying/Hearty eines Gerichts auf EINER Karte.
-   Die Buttons sind zugleich die Stufenübersicht (Label + geheilte HP), der Klick blendet das
-   zugehörige Zutaten-/Effekt-Panel ein. Panels liegen alle im DOM, damit die Volltextsuche
-   (data-s) und das Highlighting weiter über alle Stufen greifen. */
-.ctier{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
-.ctier-b{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 8px;background:var(--vellum);border:1px solid var(--line);border-radius:8px;cursor:pointer;font-family:var(--f-mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--iron-soft);line-height:1.25;transition:background .15s,border-color .15s,color .15s}
-.ctier-b:hover{border-color:var(--iron-gall);color:var(--iron-gall)}
-.ctier-b.on{background:var(--instr-soft);border-color:var(--brass);color:var(--brass)}
-.ctier-b b{font-size:11px;font-weight:700;letter-spacing:0;text-transform:none}
-.ctier-p{display:none}
-.ctier-p.on{display:flex}
+/* Koch-Stufen-Block: bündelt Basis/Filling/Satisfying/Hearty eines Gerichts auf EINER Karte.
+   Alle Stufen stehen gleichzeitig untereinander — dieselbe Logik wie die Stufen-Werte der
+   Abyss-Cores: was in allen Stufen identisch ist (Fundort, Resistenz/Dauer, oft die Zutaten)
+   steht einmal oben in den .crows, die Stufen-Zeilen tragen nur die Abweichung (HP, Menge).
+   Nichts zum Aufklappen -> Volltextsuche und Highlighting greifen ohne Zusatzlogik. */
+.ctl-wrap{margin-top:8px;padding-top:7px;border-top:1px solid var(--line)}
+.ctl-lbl{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--iron-soft);margin-bottom:4px}
+.ctl-r{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 8px;padding:4px 0}
+.ctl-r+.ctl-r{border-top:1px dashed var(--line-soft)}
+.ctl-t{font-family:var(--f-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--brass);background:var(--instr-soft);border:1px solid var(--brass);border-radius:7px;padding:1px 7px;white-space:nowrap;flex-shrink:0}
+.ctl-hp{font-family:var(--f-mono);font-size:11.5px;font-weight:700;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.ctl-x{flex:1 1 165px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ctl-f{font-size:11.5px;color:var(--iron-gall);line-height:1.5;overflow-wrap:anywhere}
+.ctl-fl{font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--iron-soft);margin-right:5px}
 #craft-grid .ct{display:flex;align-items:center}
 /* Icons der Crafting-&-Farming-Karten +10%: bewusst per transform statt width/height, denn ein
    transform beeinflusst die Layout-Box NICHT -> Kartenaufteilung, Zeilenhoehen und Abstaende
@@ -3213,7 +3217,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <details style="margin-bottom:12px">
       <summary style="cursor:pointer;font-size:11.5px;color:var(--gdim);user-select:none">ℹ️ Koch-Stufen &amp; Datenqualität (questlog datamined · game8/Fextralife verifiziert)</summary>
       <div style="font-size:11.5px;color:var(--dim);line-height:1.65;margin-top:8px;padding:10px 13px;background:rgba(201,162,39,.04);border:1px solid var(--bdr);border-radius:8px">
-        <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Darstellung:</strong> Die Koch-Stufen eines Gerichts (z.&nbsp;B. Harvest Roll / Filling Harvest Roll / Satisfying Harvest Roll) stehen gebündelt auf <em>einer</em> Karte: die Leiste unter dem Namen schaltet zwischen den Stufen um und zeigt direkt die geheilten HP je Stufe. Das ist sinnvoll, weil sich die Stufen nur in Zutatenmenge und HP unterscheiden, während Station, Item-Stufe und Resistenz-Level identisch bleiben. So werden aus 310 Rezept-Zeilen 150 Gerichte-Karten. Wer die alte Ansicht braucht, stellt den Filter rechts oben auf „Koch-Stufen einzeln“ (oder „nur Basis-Stufe“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p>
+        <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Darstellung:</strong> Die Koch-Stufen eines Gerichts (z.&nbsp;B. Harvest Roll / Filling Harvest Roll / Satisfying Harvest Roll) stehen gebündelt auf <em>einer</em> Karte, und zwar alle gleichzeitig sichtbar — genau wie die Stufen-Werte der Abyss-Cores: unter „Stufen-Werte“ steht je Stufe die geheilte HP-Zahl und, falls sie abweicht, die Zutatenmenge. Nichts muss aufgeklappt oder umgeschaltet werden. Alles, was über die Stufen identisch bleibt (Resistenz-Level, Dauer, Station, Item-Stufe, Fundort und bei vielen Gerichten auch die Zutaten), steht nur einmal oben auf der Karte. So werden aus 310 Rezept-Zeilen 149 Gerichte-Karten. Wer jede Stufe als eigene Karte braucht, stellt den Filter rechts oben auf „Koch-Stufen einzeln“ (oder „nur Basis-Stufe“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p>
         <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Koch-Stufen:</strong> Gerichte erscheinen in bis zu drei Koch-Qualitaetsstufen (Basis -&gt; Filling/Satisfying -&gt; Hearty bzw. die Feast-Stufen). Bestaetigte Regel: Die geheilten Trefferpunkte (Flat-Heal-Gerichte) skalieren ueber die Stufen hoch (HP = questlog-Rohwert / 1000), waehrend die Resistenz-STUFE und meist auch die Wirkdauer fix bleibt (Resistenz-Level = questlog-Wert). Achtung: Prozent-Heiler wie Chocolate (+50% Max-HP) und die Feast-Gerichte mit reinen Buffs (Ignore Stamina/Spirit, Overheal, Angriff) folgen NICHT der /1000-HP-Logik - ihr Nutzen steckt im zeitlich begrenzten Buff, nicht in einer HP-Zahl. Bei Elixieren steigert die Stufe Lesser -&gt; normal -&gt; Greater sowohl Wert als auch Dauer (5/10/15 Min bei getimten Buffs, 4/8/12 s bei No-Cost-Buffs).</p>
         <p style="margin:0">Ehrlicher Datenstand: Verlaesslich sind Flat-Heal-HP (questlog-Wert/1000) und die Resistenz-STUFE (Eis und Feuer belegt; Blitz-Resistenz ist nur bei einem Plate-Feast und Elixieren/Gear belegt, fuer kein regulaeres Food-Gericht). Luecken: questlog erfasst bei vielen Gerichten und Tees KEINE Spirit-/Stamina-Werte - diese sind aus game8/VGC/keengamer ergaenzt und daher nur bei kuratierten Gerichten angegeben (z. B. Tees stellen zusaetzlich Stamina her: Pine ~+224, Oakwood +160, Honey +128, Mild Herb +96, Wine +64 - in questlog nicht kodiert). Wirkdauern divergieren zwischen Datenbanken (z. B. Fish Porridge questlog Lv 4/60 s vs game8 Lv 5/10 Min; Clear Soup 30 s vs game8 5 Min) - hier gilt der questlog-Wert, Abweichungen sind notiert. HP-Differenzen einzelner Gerichte stammen meist aus unterschiedlichen Zutatensets, nicht aus widerspruechlichen Effekten. Die /1000-Division und value=Level sind aus Anzeigewerten plausibel abgeleitet, nicht am rohen itemUseEffect-Feld (JS/tRPC-gated) bewiesen. Zutatenmengen sind in questlog teils unvollstaendig (oft nur 'Water'/'Empty Bottle'); echte Mengen siehe Food-Guide. Faerbemittel sind kein Koch-/Alchemie-Rezept - dafuer die separate Dyes-Sektion nutzen; detaillierte Zutaten-Farmrouten stehen im Food-Guide.</p>
       </div>
@@ -5637,7 +5641,7 @@ const DYES=[
   {name:"Deep Sky Blue Dye",cat:"Blue",detail:"Castiel, Delesyia Dyehouse, 1,50 Silver. Craft: 10 White Lavender, 10 Blue Lavender, 3 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#1E6FE0"},
   {name:"Teal Dye",cat:"Teal",detail:"Laurick, Pailune Dyehouse, 1,50 Silver. Craft: 10 Blue Lavender, 10 Shrubby Sophora, 1 Longhorn, 1 Stag.",loc:"Game8 (586897)",miss:false,conf:"high",color:"#2f8b8e",icon:"cd_assets/dyes/dye_teal.webp"},
   {name:"Pure White Dye",cat:"Special (non-craftable)",detail:"Wilmer, Provisioner's Shop in Timberton (Delesyia), 15 Silver (NICHT 1,50). Nicht craftbar. Der Laden erscheint erst nach der Bohrturm-Questreihe des Bürgermeisters bzw. der Blackwater-Oil-Merchant-Guild-Kette (Cordelia).",loc:"Game8 (599343); VULKK",miss:true,conf:"high",color:"#FFFFFF",icon:"cd_assets/dyes/dye_pure-white.webp"},
-  {name:"Shadow Grey Dye",cat:"Special (non-craftable)",detail:"Oliver (Camp-Dyer) im Greymane Camp, 15 Silver (Preis unbestaetigt), nicht craftbar. Oliver kommt ueber die Greymane-Reihe Solid Foundation ins Camp, konkret ueber die Quest A Rumor at the Inksworth Bindery; Solid Foundation oeffnet sich erst nach dem 3. Camp-Ausbau (Ende der Reihe Gathered Will). VULKK nennt alternativ einen Provisioner in Senia.",loc:"Raider King; VULKK",miss:true,conf:"high",color:"#6c757d",icon:"cd_assets/dyes/dye_shadow-grey.webp"},
+  {name:"Shadow Grey Dye",cat:"Special (non-craftable)",detail:"Oliver (Camp-Dyer) im Greymane Camp, 15 Silver (Preis unbestätigt), nicht craftbar. Oliver kommt über die Greymane-Reihe Solid Foundation ins Camp, konkret über die Quest A Rumor at the Inksworth Bindery; Solid Foundation öffnet sich erst nach dem 3. Camp-Ausbau (Ende der Reihe Gathered Will). VULKK nennt alternativ einen Provisioner in Senia.",loc:"Raider King; VULKK",miss:true,conf:"high",color:"#6c757d",icon:"cd_assets/dyes/dye_shadow-grey.webp"},
   {name:"Black Dye",cat:"Special (non-craftable)",detail:"Back Alley Shop (Solan) in Muiquun, südöstlich von Tommaso, 37,5 Silver, nicht craftbar. Erst nach Befreiung von Muiquun und der Lawless-Market-Schmuggler-Kette (Muiquun's Black Market).",loc:"Raider King; VULKK",miss:true,conf:"high",color:"#0d0d0d",icon:"cd_assets/dyes/dye_black.webp"},
   {name:"Grey Dye",cat:"Special (non-craftable)",detail:"Belohnung der Quest Brightening the Spirits (Nairas Scattered Embers, Hernand), nicht craftbar. Eigenständig vom Bright Grey Dye. Hinweis: Quellen verorten die Quest in Howling Hills, nicht in Hernand.",loc:"VULKK; Raider King",miss:true,conf:"medium",color:"#727b7d",icon:"cd_assets/dyes/dye_grey.webp"},
   {name:"Bright Grey Dye",cat:"Special (non-craftable)",detail:"Back Alley Shop (Solan) im Saltroad Camp, 33 Silver, nicht craftbar. Erst nach Räumen des Camps und Principles of the Saltroad Merchants. Getrennt vom regulären Grey Dye.",loc:"Raider King; GAMES.GG",miss:true,conf:"high",color:"#aeb4b8",icon:"cd_assets/dyes/dye_bright-grey.webp"}
@@ -5706,7 +5710,7 @@ const LOCATIONS=[
   {name:"Witchwoods",region:"Hernand (SW)",type:"Witch Location",desc:"Elowen's Huette (Dornen; Dachloch eindringen). Sanctum of Temperance in der Nähe."},
   {name:"White Wastes Sanctuary",region:"Pailune (NW)",type:"Unique Weapon",desc:"Darkbringer Greatsword: Skelett-Krater, Schwert aus Riesenskeletts Maul ziehen. Kein Boss nötig."},
   {name:"Frostveiled Castle Ruins",region:"Pailune (N)",type:"Unique Weapon",desc:"Vow of the Dead King in der Citadel of the Forgotten Kingdom (Nord-Pailune): Banditen ausschalten, Steinlaterne anzünden öffnet die Zelle → Steinsarg. Audit 2026-06-02: Region S→N korrigiert."},
-  {name:"Howling Hill Camp",region:"Hernand",type:"Camp / Hub",desc:"Greymane-Basis suedlich der City of Hernand. Camp-Smithy, Stable, Dispatch-System, Privatlager (240–640 Slots). Ausbau in 4 Stufen, danach optionaler Umzug nach Pailune — Details im Camp-Ausbau-Blatt."},
+  {name:"Howling Hill Camp",region:"Hernand",type:"Camp / Hub",desc:"Greymane-Basis südlich der City of Hernand. Camp-Smithy, Stable, Dispatch-System, Privatlager (240–640 Slots). Ausbau in 4 Stufen, danach optionaler Umzug nach Pailune — Details im Camp-Ausbau-Blatt."},
   {name:"Wayward Woods",region:"Pailune (S)",type:"Witch / Mount",desc:"White Crow Hideout (4 Tokens). Stone Worm Cave (Gold-Farm). (Black Fang/Silver Fang ist NICHT hier, sondern im Forest of Wolves, Hernand.)"},
   {name:"Sanctum of Benediction",region:"Hernand/Pailune-Grenze",type:"Sanctum",desc:"Leather Helm of the Fallen Kingdom (mit Momentum-Core) — fertiges Item aus einer Truhe im versteckten Raum, KEIN Blueprint."},
   {name:"Ascetic's Rest",region:"The Abyss",type:"Alchemy Station",desc:"Refined Palmar Pill Rezept nach Kap. 9 Quest 'Six Statues and the Beast'."},
@@ -10280,8 +10284,6 @@ function _doSearchImpl(q){
   });
   // Hide elements outside active section (only if any non-active section element has data-s)
   // — they remain in DOM but won't render due to .sec not having active
-  // Crafting-Sammelkarten auf die gesuchte Koch-Stufe stellen, bevor highlightet wird
-  if(typeof craftSyncTier==='function')craftSyncTier(qF);
   // Highlight only top 80 matches (perceptual highlight, full-list-highlight would freeze on big lists)
   matchedForHL.forEach(el=>highlightInElement(el,q));
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
@@ -10833,7 +10835,7 @@ function craftGrade(g){
 // die sich NUR in Zutatenmenge und geheilten HP unterscheiden - Station, Item-Stufe, Icon und
 // Resistenz-Level sind identisch. Frueher war jede Stufe eine eigene Karte (310 Karten fuer
 // 150 Gerichte), was die Sektion mit Beinah-Dubletten geflutet hat. Jetzt: eine Karte pro
-// Gericht mit umschaltbarer Stufen-Leiste.
+// Gericht, auf der ALLE Stufen gleichzeitig stehen (Vorbild: Stufen-Werte der Abyss-Cores).
 // Gruppierungsschluessel = Name ohne Stufen-Praefix + Station + Kategorie. Station/Kategorie
 // gehoeren in den Schluessel, damit gleichnamige Gerichte verschiedener Stationen getrennt
 // bleiben. 'Lavish' wird bewusst NICHT als Praefix gestrippt: "Lavish Meal" ist ein eigenes
@@ -10856,20 +10858,20 @@ function craftGroups(){
   _craftGroups.forEach(g=>g.tiers.sort((a,b)=>(CRAFT_TIER_RANK[a.tier]??9)-(CRAFT_TIER_RANK[b.tier]??9)));
   return _craftGroups;
 }
-// Geheilte HP aus dem Effekt-Text ("+420 HP, Feuer-Res Lv 4 (60s)"). 0 = kein Flat-Heal
-// (Resistenz- und Buff-Gerichte, Elixiere) -> Stufen-Button zeigt dann nur das Label.
-function craftHp(c){const m=/\+\s*(\d+)\s*HP/i.exec(c.effect||'');return m?+m[1]:0;}
+// Geheilte HP + Effekt-Rest aus dem Effekt-Text ("+420 HP, Feuer-Res Lv 4 (60s)").
+// null, wenn der Text NICHT dem HP-Muster folgt (Prozent-Heiler wie Chocolate, reine
+// Resistenz-/Buff-Gerichte) -> dann wird der Effekt unveraendert je Stufe ausgegeben.
+const CRAFT_HP_RE=/^\+\s*(\d+)\s*HP\s*(?:,\s*(.*))?$/i;
+function craftEffSplit(c){const m=CRAFT_HP_RE.exec((c.effect||'').trim());return m?{hp:+m[1],rest:(m[2]||'').trim()}:null;}
 function craftSearchStr(c){return [c.name,c.station,c.tier,c.ingr,c.effect,c.spirit,c.note,c.source].filter(Boolean).join(' ');}
-// showName: voller Ingame-Name der Stufe. Wird auf Sammelkarten gezeigt, sobald er vom
-// Kartentitel abweicht ("Satisfying Harvest Roll" auf der Karte "Harvest Roll") - dient dem
-// Abgleich mit dem Spiel UND macht Suchtreffer auf Stufennamen sichtbar hervorgehoben.
-function craftRows(c,showName){
+function craftFlexTxt(c){return c.flex?` <span style="color:var(--dim);font-size:10.5px">(${c.cat==='Elixir'?'+ Reagenz/Katalysator':'+ flexible Zutaten: Fleisch/Fisch/Korn'})</span>`:'';}
+function craftConfTxt(conf){return conf&&conf!=='high'?` <span style="color:var(--dim);font-size:10px">(${conf==='medium'?'mittlere':'geringe'} Konfidenz)</span>`:'';}
+function craftRows(c){
   const spiritTxt=c.spirit?` <span style="color:#7fb3d5">· ${escHtml(c.spirit)}</span>`:'';
-  const flexTxt=c.flex?` <span style="color:var(--dim);font-size:10.5px">(${c.cat==='Elixir'?'+ Reagenz/Katalysator':'+ flexible Zutaten: Fleisch/Fisch/Korn'})</span>`:'';
+  const flexTxt=craftFlexTxt(c);
   const effTxt=c.effect?escHtml(c.effect):'<span style="color:var(--dim)">nicht erfasst</span>';
-  const confTxt=c.conf&&c.conf!=='high'?` <span style="color:var(--dim);font-size:10px">(${c.conf==='medium'?'mittlere':'geringe'} Konfidenz)</span>`:'';
-  return `${showName?`<div class="crow"><span class="cl">Rezept</span><span class="cv" style="color:var(--dim)">${escHtml(c.name)}</span></div>`:''}
-        <div class="crow"><span class="cl">Zutaten</span><span class="cv">${escHtml(c.ingr)}${flexTxt}</span></div>
+  const confTxt=craftConfTxt(c.conf);
+  return `<div class="crow"><span class="cl">Zutaten</span><span class="cv">${escHtml(c.ingr)}${flexTxt}</span></div>
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${effTxt}${spiritTxt}${confTxt}</span></div>
         ${c.note?`<div class="crow"><span class="cl">Tipp</span><span class="cv" style="color:#5ab87a">${escHtml(c.note)}</span></div>`:''}
         ${c.source?`<div class="crow"><span class="cl">Fundort</span><span class="cv" style="color:var(--dim)">${escHtml(c.source)}</span></div>`:''}
@@ -10890,7 +10892,10 @@ function craftCardSingle(c,show){
       </div>
     </div>`;
 }
-// Gebuendelte Karte: ein Gericht, alle Koch-Stufen als Umschalt-Leiste.
+// Gebuendelte Karte: ein Gericht, ALLE Koch-Stufen gleichzeitig sichtbar - dieselbe Logik wie
+// die Stufen-Werte der Abyss-Cores. Jedes Feld, das ueber alle Stufen identisch ist, steht
+// genau einmal oben in den .crows; die Stufen-Zeilen darunter tragen nur die echte Abweichung
+// (fast immer HP + Zutatenmenge). Kein Umschalten, kein verstecktes Panel.
 function craftCardGroup(g,show){
   const ts=g.tiers;
   if(ts.length===1)return craftCardSingle(ts[0],show);
@@ -10898,46 +10903,55 @@ function craftCardGroup(g,show){
   const ico=g.icon?`<img class="craft-ico" src="${CRAFT_CDN}${g.icon}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
   // Suchindex umfasst ALLE Stufen -> "Satisfying Harvest Roll" findet weiterhin diese Karte.
   const s=ts.map(craftSearchStr).join(' ').toLowerCase();
-  const btns=ts.map((c,i)=>{
-    const hp=craftHp(c);
-    return `<button type="button" class="ctier-b${i?'':' on'}" title="${escHtml(c.name)}" aria-pressed="${i?'false':'true'}" onclick="craftTier(this,${i})">${escHtml(c.tier)}${hp?`<b>${hp} HP</b>`:''}</button>`;
-  }).join('');
-  const panels=ts.map((c,i)=>`<div class="crows ctier-p${i?'':' on'}">
-        ${craftRows(c,c.name!==g.base)}
-      </div>`).join('');
+  const same=f=>ts.every(c=>String(c[f]??'')===String(ts[0][f]??''));
+  // HP je Stufe nur, wenn JEDE Stufe dem "+N HP"-Muster folgt UND der Rest (Resistenz, Dauer)
+  // identisch ist. Dann steht der Rest einmal oben und die Stufen-Zeile zeigt die HP-Zahl.
+  // Sonst bleibt der komplette Effekt-Text pro Stufe stehen - nichts wird umformuliert.
+  const sp=ts.map(craftEffSplit);
+  const hpMode=sp.every(Boolean)&&new Set(sp.map(x=>x.rest)).size===1;
+  const effShared=hpMode?sp[0].rest:(same('effect')?(ts[0].effect||''):'');
+  const spiritShared=same('spirit')&&ts[0].spirit?ts[0].spirit:'';
+  const confShared=same('conf')?craftConfTxt(ts[0].conf):'';
+  const ingrShared=same('ingr');
+  const rows=[];
+  if(ingrShared)rows.push(`<div class="crow"><span class="cl">Zutaten</span><span class="cv">${escHtml(ts[0].ingr)}${craftFlexTxt(ts[0])}</span></div>`);
+  const spiritTxt=spiritShared?` <span style="color:#7fb3d5">· ${escHtml(spiritShared)}</span>`:'';
+  if(effShared)rows.push(`<div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${escHtml(effShared)}${spiritTxt}${confShared}</span></div>`);
+  else{
+    // Kein gemeinsamer Effekt-Text (Effekt steht dann je Stufe) - Spirit und Konfidenz sind
+    // trotzdem gruppenweit gueltig und wuerden sonst in jeder Stufen-Zeile wiederholt.
+    if(spiritShared)rows.push(`<div class="crow"><span class="cl">Spirit</span><span class="cv" style="color:#7fb3d5">${escHtml(spiritShared)}</span></div>`);
+    if(confShared)rows.push(`<div class="crow"><span class="cl">Datenlage</span><span class="cv">${confShared}</span></div>`);
+  }
+  if(same('note')&&ts[0].note)rows.push(`<div class="crow"><span class="cl">Tipp</span><span class="cv" style="color:#5ab87a">${escHtml(ts[0].note)}</span></div>`);
+  if(same('source')&&ts[0].source)rows.push(`<div class="crow"><span class="cl">Fundort</span><span class="cv" style="color:var(--dim)">${escHtml(ts[0].source)}</span></div>`);
+  if(same('conflict')&&ts[0].conflict)rows.push(`<div class="crow"><span class="cl">Hinweis</span><span class="cv" style="color:var(--dim);font-size:10.5px">${escHtml(ts[0].conflict)}</span></div>`);
+  // Stufen-Zeile: Label (title = voller Ingame-Name) + HP + nur die abweichenden Felder.
+  const tierData=ts.map((c,i)=>{
+    const f=[];
+    if(!ingrShared)f.push(`<div class="ctl-f">${escHtml(c.ingr)}${craftFlexTxt(c)}</div>`);
+    if(!hpMode&&!same('effect'))f.push(`<div class="ctl-f"><span class="ctl-fl">Effekt</span><span style="color:var(--gold)">${c.effect?escHtml(c.effect):'<span style="color:var(--dim)">nicht erfasst</span>'}</span></div>`);
+    if(!same('spirit')&&c.spirit)f.push(`<div class="ctl-f"><span class="ctl-fl">Spirit</span><span style="color:#7fb3d5">${escHtml(c.spirit)}</span></div>`);
+    if(!same('note')&&c.note)f.push(`<div class="ctl-f"><span class="ctl-fl">Tipp</span><span style="color:#5ab87a">${escHtml(c.note)}</span></div>`);
+    if(!same('conflict')&&c.conflict)f.push(`<div class="ctl-f" style="color:var(--dim);font-size:10.5px"><span class="ctl-fl">Hinweis</span>${escHtml(c.conflict)}</div>`);
+    if(!same('conf')&&craftConfTxt(c.conf))f.push(`<div class="ctl-f">${craftConfTxt(c.conf)}</div>`);
+    return {c,f,hp:hpMode?sp[i].hp:0};
+  });
+  const pill=t=>`<span class="ctl-t" title="${escHtml(t.c.name)}">${escHtml(t.c.tier)}</span>`;
+  // Sonderfall (Pickled Fruit/Vegetables): die Quellen fuehren fuer alle Stufen exakt dieselben
+  // Zutaten und denselben Effekt und KEINE stufenabhaengigen HP - dann steht alles schon oben.
+  // Statt leerer Stufen-Zeilen die Stufen in einer Reihe + ehrlicher Hinweis auf die Datenluecke.
+  const hasTierValues=tierData.some(t=>t.f.length||t.hp);
+  const tierRows=hasTierValues
+    ? tierData.map(t=>`<div class="ctl-r">${pill(t)}${t.hp?`<span class="ctl-hp">${t.hp} HP</span>`:''}${t.f.length?`<div class="ctl-x">${t.f.join('')}</div>`:''}</div>`).join('')
+    : `<div class="ctl-r">${tierData.map(pill).join('')}<div class="ctl-x"><div class="ctl-f" style="color:var(--dim);font-size:10.5px">Zutaten und Effekt sind in allen Stufen identisch erfasst; stufenabhängige HP nennen die Quellen hier nicht.</div></div></div>`;
   return `<div class="card${show?'':' hide'}" data-s="${escHtml(s)}">
       <div class="craft-icon-hd" style="background:${craftCatGrad(g.cat)}">${craftCatIcon(g.cat)}<span class="icon-hd-label" style="color:${craftCatColor(g.cat)}">${g.cat}</span>${craftGrade(g.grade||0)}</div>
       <div class="ct">${ico}<span>${escHtml(g.base)}</span></div>
       <div class="cm"><span class="tag ${badge}">${g.cat}</span><span class="tag tx">${stationIcon(g.station)}${escHtml(g.station)}</span><span class="tag tt">${ts.length} Stufen</span></div>
-      <div class="ctier" role="group" aria-label="Koch-Stufe wählen">${btns}</div>
-      ${panels}
+      ${rows.length?`<div class="crows">${rows.join('')}</div>`:''}
+      <div class="ctl-wrap"><span class="ctl-lbl">${hasTierValues?`Stufen-Werte${ingrShared?'':' · Zutaten je Stufe'}`:'Stufen'}</span>${tierRows}</div>
     </div>`;
-}
-// Stufenwechsel rein ueber Klassen (kein Re-Render), damit Such-Highlights und DOM-Zustand
-// der uebrigen Karten unangetastet bleiben.
-function craftTier(btn,i){
-  const card=btn.closest('.card'); if(!card)return;
-  card.querySelectorAll('.ctier-b').forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i?'true':'false');});
-  card.querySelectorAll('.ctier-p').forEach((p,j)=>p.classList.toggle('on',j===i));
-}
-// Sucht jemand gezielt nach einer Stufe ("Satisfying Harvest Roll"), klappt die Sammelkarte
-// genau diese Stufe auf statt der Grundstufe - sonst waere der Treffer zwar gefunden, aber
-// unsichtbar. Wird aus der Volltextsuche heraus aufgerufen (dort defensiv per typeof).
-// Gematcht wird gegen Stufenname UND Panel-Inhalt, damit auch die Suche nach einer
-// stufenspezifischen Zutatenmenge ("8x Egg") die richtige Stufe aufklappt. Die niedrigste
-// passende Stufe gewinnt, damit generische Begriffe die Grundstufe stehen lassen.
-function craftSyncTier(qF){
-  if(!qF)return;
-  const grid=document.getElementById('craft-grid'); if(!grid)return;
-  if(!grid.closest('.sec.active'))return; // Suche in anderen Sektionen nicht unnoetig belasten
-  grid.querySelectorAll('.card:not(.hide) .ctier').forEach(bar=>{
-    const btns=bar.querySelectorAll('.ctier-b');
-    const pans=bar.parentNode.querySelectorAll('.ctier-p');
-    for(let i=0;i<btns.length;i++){
-      const t=btns[i]._tf||(btns[i]._tf=_fold((btns[i].title||'')+' '+((pans[i]&&pans[i].textContent)||'')));
-      if(t.includes(qF)){if(!btns[i].classList.contains('on'))craftTier(btns[i],i);return;}
-    }
-  });
 }
 function renderCrafting(){
   const fc=document.getElementById('kf-cat').value;
