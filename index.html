@@ -14184,13 +14184,35 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 <script type="module">
-import { login, signup, logout, getUser, handleAuthCallback, AuthError, MissingIdentityError } from 'https://esm.sh/@netlify/identity@1';
+// LADESTRATEGIE (2026-07-31): @netlify/identity wird BEDARFSGESTEUERT geladen,
+// nicht mehr per statischem import.
+//
+// Grund, gemessen am 31.07.2026 auf der Startseite:
+// Ein statischer import in einem type="module"-Script wird aufgeloest, BEVOR
+// DOMContentLoaded feuert. Das Modul kommt von einem Fremd-CDN (esm.sh) und zog
+// gotrue-js nach: 508 ms + 124 ms = 632 ms, in denen die Seite nicht interaktiv
+// wurde. Zum Vergleich: domInteractive lag bei 125 ms, das HTML samt des 1,34-MB-
+// Datenblocks war da also laengst fertig. Der Login ist ein Randfeature (optionaler
+// Fortschritts-Sync), das die grosse Mehrheit der Besucher nie benutzt.
+//
+// Mit dem dynamischen import() blockiert nichts mehr: das Script laeuft sofort
+// durch, das IIFE am Dateiende stoesst den Ladevorgang nur an. Die Sitzung wird
+// weiterhin automatisch wiederhergestellt, nur eben ohne den Seitenaufbau
+// aufzuhalten. Bewusst NICHT umgesetzt: das Modul bei scheinbar anonymen Besuchern
+// ganz wegzulassen. Dafuer muesste man erraten, woran eine bestehende Sitzung
+// erkennbar ist (gotrue legt vor dem Login keinen localStorage-Key an), und ein
+// Fehlgriff wuerde eingeloggte Nutzer stillschweigend ausloggen.
+let _identityPromise = null;
+function identity() {
+  return (_identityPromise ||= import('https://esm.sh/@netlify/identity@1'));
+}
 
 // ── Auth state globals ──────────────────────────────────────────────
 window._authUser = null;
 
 async function _syncProgress(items) {
   if (!window._authUser) return;
+  const { getUser } = await identity();
   const user = await getUser();
   if (!user) return;
   const token = user.token?.access_token;
@@ -14214,6 +14236,7 @@ async function _syncProgress(items) {
 window._syncProgress = _syncProgress;
 
 async function _loadServerProgress() {
+  const { getUser } = await identity();
   const user = await getUser();
   if (!user) return;
   const token = user.token?.access_token;
@@ -14261,6 +14284,7 @@ function updateAuthUI(user) {
 }
 
 async function doLogout() {
+  const { logout } = await identity();
   await logout();
   updateAuthUI(null);
 }
@@ -14303,6 +14327,22 @@ window.submitAuth = async () => {
   if (!email || !pass) { setErr('Bitte E-Mail und Passwort eingeben.'); return; }
   submit.disabled = true;
   setErr('');
+
+  // Beim ersten Login wird das Identity-Modul hier nachgeladen (siehe Ladestrategie oben).
+  // Bewusst VOR dem eigentlichen try: die Fehlerklassen werden unten im catch fuer
+  // instanceof gebraucht und muessen dort im Scope liegen. Ausserdem ist ein
+  // fehlgeschlagener Modul-Download ein eigener Fehlerfall (Fremd-CDN nicht erreichbar),
+  // der eine andere Meldung verdient als ein abgelehnter Login.
+  let ident;
+  try {
+    ident = await identity();
+  } catch (_) {
+    setErr('Anmelde-Modul konnte nicht geladen werden. Bitte Internetverbindung prüfen.');
+    submit.disabled = false;
+    return;
+  }
+  const { login, signup, AuthError, MissingIdentityError } = ident;
+
   try {
     if (_activeTab === 'login') {
       const user = await login(email, pass);
@@ -14333,12 +14373,24 @@ window.submitAuth = async () => {
 };
 
 // ── Init: restore session & process callbacks ────────────────────────
+// Laeuft absichtlich als abgesetzter async-Block: das Script selbst ist damit
+// sofort fertig, DOMContentLoaded wartet nicht auf den Modul-Download vom
+// Fremd-CDN. Die Sitzung wird wie bisher automatisch wiederhergestellt, nur
+// wenige hundert Millisekunden spaeter und ohne den Seitenaufbau zu blockieren.
+// Ist das CDN nicht erreichbar, bleibt die Seite voll benutzbar; nur der
+// optionale Fortschritts-Sync steht dann nicht zur Verfuegung.
 (async () => {
+  let ident;
   try {
-    await handleAuthCallback();
+    ident = await identity();
+  } catch (_) {
+    return;
+  }
+  try {
+    await ident.handleAuthCallback();
   } catch (_) {}
   try {
-    const user = await getUser();
+    const user = await ident.getUser();
     if (user) {
       updateAuthUI(user);
       await _loadServerProgress();
