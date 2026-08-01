@@ -1,0 +1,133 @@
+{
+  "ruestungen": [
+    {
+      "frage": "Wo finde ich alle Rüstungsteile in Crimson Desert?",
+      "antwort": "Die Übersicht sammelt alle 314 Rüstungsteile mit Fundort und Effekt. Nutze die Angaben zu Region, Gegnern, Händlern oder Aktivitäten, um gezielt nach einem bestimmten Teil zu suchen."
+    },
+    {
+      "frage": "Welche Rüstung ist in Crimson Desert die beste?",
+      "antwort": "Eine allgemein beste Rüstung gibt es nicht, weil Effekte und Ausrüstungsteile zu unterschiedlichen Spielweisen passen. Vergleiche vor allem den Effekt des Teils mit deiner bevorzugten Waffe, deinen Fähigkeiten und der aktuellen Herausforderung."
+    },
+    {
+      "frage": "Wie bekomme ich einen besseren Helm oder Brustschutz?",
+      "antwort": "Filtere die Rüstungsliste nach Kopf oder Torso und prüfe den jeweiligen Fundort. Falls ein Teil als Beute aufgeführt ist, lohnt sich das wiederholte Besiegen der angegebenen Gegner oder das Abschließen der zugehörigen Aktivität."
+    },
+    {
+      "frage": "Kann ich Rüstungsteile in Crimson Desert herstellen?",
+      "antwort": "unbekannt"
+    },
+    {
+      "frage": "Was bringen Mäntel bei Crimson Desert?",
+      "antwort": "Mäntel sind eine eigene Ausrüstungskategorie und können einen separaten Effekt besitzen. Prüfe in der Übersicht den Effekt jedes Mantels, statt nur auf seinen Fundort oder sein Aussehen zu achten."
+    },
+    {
+      "frage": "Wie viele Rüstungsteile gibt es in Crimson Desert?",
+      "antwort": "Die Rüstungsübersicht enthält 314 Teile. Sie verteilt sich auf Torso, Kopf, Hände, Schuhe und Mäntel."
+    }
+  ],
+  "crafting": [
+    {
+      "frage": "Wo finde ich alle Rezepte in Crimson Desert?",
+      "antwort": "Die Handwerksübersicht listet 310 Rezepte aus den Kategorien Elixier, Essen und Kuku Gadget. Zu jedem Rezept stehen Zutaten, benötigte Station und Wirkung, damit du fehlende Materialien gezielt suchen kannst."
+    },
+    {
+      "frage": "Welche Zutaten brauche ich für ein Rezept in Crimson Desert?",
+      "antwort": "Öffne den Eintrag des gewünschten Rezepts, dort sind die benötigten Zutaten aufgeführt. Achte zusätzlich auf die Station, weil ein Rezept nicht an jeder Handwerksmöglichkeit hergestellt werden kann."
+    },
+    {
+      "frage": "Wo kann ich in Crimson Desert kochen?",
+      "antwort": "Die passende Kochstation steht beim jeweiligen Essensrezept in der Übersicht. Wenn ein Rezept nicht verfügbar ist, prüfe zuerst, ob du an der richtigen Station bist und alle Zutaten besitzt."
+    },
+    {
+      "frage": "Welche Elixiere lohnen sich in Crimson Desert?",
+      "antwort": "Das hängt davon ab, welche Wirkung du für Kampf, Erkundung oder Ressourcenbeschaffung brauchst. Vergleiche die Wirkung direkt in der Rezeptliste und stelle bevorzugt Elixiere her, deren Zutaten für dich zuverlässig verfügbar sind."
+    },
+    {
+      "frage": "Was sind Kuku Gadgets in Crimson Desert?",
+      "antwort": "Kuku Gadgets bilden in der Rezeptübersicht eine eigene Handwerkskategorie. Ihre genaue Funktion ist je Rezept angegeben, daher solltest du den einzelnen Effekt vor dem Herstellen prüfen."
+    },
+    {
+      "frage": "Wie viele Crafting Rezepte gibt es in Crimson Desert?",
+      "antwort": "Die Übersicht enthält 310 Handwerks und Kochrezepte. Sie umfasst Elixiere, Essen und Kuku Gadgets."
+    }
+  ],
+  "trophaeen": [
+    {
+      "frage": "Wie viele Trophäen gibt es in Crimson Desert?",
+      "antwort": "Die Trophäenübersicht enthält 35 Erfolge in Platin, Gold, Silber und Bronze. Sie markiert außerdem fünf Trophäen als verpassbar."
+    },
+    {
+      "frage": "Welche Trophäen in Crimson Desert sind verpassbar?",
+      "antwort": "In der Übersicht sind fünf Trophäen als verpassbar gekennzeichnet. Plane diese Bedingungen frühzeitig ein und sichere deinen Fortschritt, bevor du irreversible Entscheidungen oder Storyabschnitte abschließt."
+    },
+    {
+      "frage": "Kann man in Crimson Desert alle Trophäen in einem Durchgang holen?",
+      "antwort": "unbekannt"
+    },
+    {
+      "frage": "Was muss ich für die Platin Trophäe in Crimson Desert machen?",
+      "antwort": "Die genaue Voraussetzung für die Platin Trophäe steht in ihrem Eintrag. In der Regel solltest du vorher prüfen, ob alle anderen erforderlichen Trophäen abgeschlossen sind, besonders die verpassbaren."
+    },
+    {
+      "frage": "Wie verhindere ich verpassbare Achievements in Crimson Desert?",
+      "antwort": "Vergleiche vor wichtigen Hauptquests und Entscheidungen deinen Fortschritt mit den fünf markierten Trophäen. Erledige optionale Ziele sofort, wenn ihre Beschreibung an einen bestimmten Abschnitt, Charakter oder Zustand gebunden ist."
+    },
+    {
+      "frage": "Sind Trophäen und Achievements in Crimson Desert dasselbe?",
+      "antwort": "Die Übersicht behandelt beide Begriffe als Erfolge des Spiels. Auf PlayStation werden sie üblicherweise als Trophäen bezeichnet, auf anderen Plattformen kann die Bezeichnung abweichen."
+    }
+  ],
+  "bestiarium": [
+    {
+      "frage": "Wo finde ich alle Gegner in Crimson Desert?",
+      "antwort": "Das Bestiarium enthält 44 normale Gegnertypen mit Region, möglichen Drops und Taktikhinweisen. Suche nach der gewünschten Region oder Gegnergruppe, um passende Fundorte schneller einzugrenzen."
+    },
+    {
+      "frage": "Welche Tiere kann man in Crimson Desert besiegen?",
+      "antwort": "Im Bestiarium sind 11 Wildtiere aufgeführt. Die Einträge zeigen, in welcher Region sie vorkommen und welche möglichen Beutedrops sie liefern."
+    },
+    {
+      "frage": "Welche Drops bekommt man von Gegnern in Crimson Desert?",
+      "antwort": "Mögliche Drops stehen direkt beim jeweiligen Gegner im Bestiarium. Behandle die Angaben als Orientierung für die Farmroute und prüfe mehrere Gegner derselben Region, wenn du ein bestimmtes Material suchst."
+    },
+    {
+      "frage": "Wie besiege ich starke Fraktionsgegner in Crimson Desert?",
+      "antwort": "Nutze den Taktikhinweis des jeweiligen Fraktionsgegners und beobachte seine Angriffsmuster zuerst aus sicherer Entfernung. Gegen Gruppen hilft es meist, einzelne Gegner aus dem Verband zu ziehen und Ausweichfenster konsequent zu nutzen."
+    },
+    {
+      "frage": "Was ist der Unterschied zwischen Kreaturen und Fraktionsgegnern?",
+      "antwort": "Das Bestiarium trennt 10 Kreaturen von 23 Fraktionsgegnertypen. Kreaturen werden als eigene Gegnergruppe geführt, während Fraktionsgegner einer organisierten Gegnerseite zugeordnet sind."
+    },
+    {
+      "frage": "Wo farmt man Materialien am besten in Crimson Desert?",
+      "antwort": "Wähle im Bestiarium zuerst das benötigte Material und vergleiche anschließend die aufgeführten Gegner und Regionen. Eine gute Farmroute verbindet Gegner mit passenden Drops, kurzen Wegen und einem für dich sicheren Schwierigkeitsgrad."
+    }
+  ],
+  "side-quests": [
+    {
+      "frage": "Wo finde ich alle Nebenquests in Crimson Desert?",
+      "antwort": "Die Übersicht enthält 78 Nebenquests aus sechs Regionen. Jeder Eintrag hilft dir, Quests nach Gebiet zu prüfen und verpassbare Aufgaben rechtzeitig zu erkennen."
+    },
+    {
+      "frage": "Welche Nebenquests in Crimson Desert sind verpassbar?",
+      "antwort": "Sechs Nebenquests sind in der Übersicht als verpassbar markiert. Erledige sie möglichst vor großen Storyfortschritten und prüfe ihre Voraussetzungen, bevor du ein Gebiet dauerhaft verlässt."
+    },
+    {
+      "frage": "Kann ich Nebenquests nach der Hauptstory noch machen?",
+      "antwort": "unbekannt"
+    },
+    {
+      "frage": "Wie viele Nebenquests gibt es in Crimson Desert?",
+      "antwort": "Die Questübersicht listet 78 Nebenquests. Sie sind den Regionen Hernand, Pailune, Crimson Desert, Demeniss und Delesyia zugeordnet."
+    },
+    {
+      "frage": "Warum startet eine Nebenquest in Crimson Desert nicht?",
+      "antwort": "Prüfe zuerst Region, Fortschritt und mögliche Voraussetzungen des Quest Eintrags. Falls die Aufgabe verpassbar ist, kann ein bestimmter Storyfortschritt oder ein geänderter Weltzustand relevant sein."
+    },
+    {
+      "frage": "Wie verpasse ich keine Nebenquests in Crimson Desert?",
+      "antwort": "Arbeite jede Region möglichst vollständig ab, bevor du die Hauptgeschichte weiterspielst. Nutze die Übersicht besonders für die sechs verpassbaren Quests und kontrolliere offene Aufgaben vor wichtigen Wendepunkten."
+    }
+  ]
+}
+

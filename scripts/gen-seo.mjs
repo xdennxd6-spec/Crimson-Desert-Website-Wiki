@@ -1,16 +1,33 @@
 // gen-seo.mjs — erzeugt statische, crawlbare SEO-Landing-Pages aus den
 // Datenstrukturen in index.html (Single Source of Truth bleibt index.html).
 //
-// Ausgabe: bosse.html, waffen.html, true-ending.html + sitemap.xml
+// Ausgabe: bosse.html, waffen.html, true-ending.html (hier direkt gebaut)
+//          + ruestungen.html, crafting.html, bestiarium.html, side-quests.html,
+//            trophaeen.html (aus den Modulen in scripts/seo-parts/)
+//          + sitemap.xml
 // Aufruf:  node scripts/gen-seo.mjs   (laeuft auch im Netlify-Build, s. netlify.toml)
 //
 // Die Seiten enthalten echten, vorgerenderten Inhalt (kein JS-Nachladen) und
 // verlinken zurueck in die interaktive App (/#sec-...). Keine Datenduplizierung:
 // alle Inhalte stammen live aus index.html.
+//
+// SEITEN-MODULE (seit 2026-07-31): Die fuenf neueren Seiten liegen als eigene
+// Module unter scripts/seo-parts/. Jedes Modul exportiert SLUG, NAV_LABEL,
+// DEEPLINK, SITEMAP, EXTRA_CSS, COUNT_CHECK(ctx) und build(ctx) und liefert damit
+// alles, was Navigation, Sitemap, CSS und Ausgabe brauchen. Eine neue Seite
+// erfordert deshalb nur: Modul anlegen, in SEO_PARTS eintragen, in NAV eintragen.
+// Getestet werden die Module gegen dieselbe Mechanik ueber einen Harness
+// (G:\Claude\Crimson-Desert-SEO\harness.mjs), der diese Datei spiegelt.
 
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+
+import * as partRuestungen from "./seo-parts/ruestungen.mjs";
+import * as partCrafting from "./seo-parts/crafting.mjs";
+import * as partBestiarium from "./seo-parts/bestiarium.mjs";
+import * as partSideQuests from "./seo-parts/side-quests.mjs";
+import * as partTrophaeen from "./seo-parts/trophaeen.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -60,6 +77,21 @@ const WEAPON_IMGS = extract("WEAPON_IMGS");
 // gleichnamige Fisch-Knowledge-Icon ist.
 const BOSS_ALT_IMGS = extractOptional("BOSS_ALT_IMGS") || {};
 
+// Datenstrukturen der Modul-Seiten (scripts/seo-parts/).
+const ARMOR = extract("ARMOR");
+const ARMOR_IMGS = extract("ARMOR_IMGS");
+const CRAFTING = extract("CRAFTING");
+const TROPHIES = extract("TROPHIES");
+const TROPHY_GRADES = extract("TROPHY_GRADES");
+const ENEMIES = extract("ENEMIES");
+const ENEMY_IMGS = extract("ENEMY_IMGS");
+const SIDE_QUESTS = extract("SIDE_QUESTS");
+
+// Icon-CDN der Crafting-Rezepte. Das icon-Feld in CRAFTING haelt nur den
+// Dateinamen; die vollstaendige URL ist CRAFT_CDN + icon. Spiegelt die
+// gleichnamige Konstante in index.html.
+const CRAFT_CDN = "https://cdn.questlog.gg/crimson-desert/assets/_sprites/";
+
 // ── Helfer ───────────────────────────────────────────────────────────────────
 const esc = (s) => String(s == null ? "" : s)
   .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -70,6 +102,70 @@ const has = (v) => v != null && String(v).trim() !== "" && String(v).trim() !== 
 
 // Bild-URL: absolute (http/https, z.B. questlog-CDN) unveraendert, sonst root-relativ
 const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
+
+// ── Seiten-Module + Navigation ───────────────────────────────────────────────
+// Reihenfolge hier = Reihenfolge in sitemap.xml.
+const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen];
+
+// Kopf-Menue aller acht Seiten. Thematisch gruppiert: erst Gegner, dann
+// Ausruestung, dann Herstellung, dann Quests, dann die Meta-Listen.
+const NAV = [
+  ["bosse", "Bosse"],
+  ["bestiarium", "Bestiarium"],
+  ["waffen", "Waffen"],
+  ["ruestungen", "Rüstungen"],
+  ["crafting", "Crafting"],
+  ["side-quests", "Nebenquests"],
+  ["trophaeen", "Trophäen"],
+  ["true-ending", "True Ending"],
+];
+
+// Schutz gegen stille Inkonsistenz: jedes Modul muss im Menue auftauchen.
+for (const p of SEO_PARTS) {
+  if (!NAV.some(([s]) => s === p.SLUG)) {
+    throw new Error(`Modul "${p.SLUG}" fehlt in der NAV-Liste von gen-seo.mjs`);
+  }
+}
+
+// ── Redaktionelle Texte (scripts/seo-content/) ───────────────────────────────
+// Einleitungsabsatz und FAQ pro Seite. Beides ist reiner Fliesstext ohne
+// Spielmechanik-Zahlen und liegt bewusst NICHT in index.html, weil es kein
+// Wiki-Datenbestand ist, sondern Seitentext. Fehlt eine Datei, entfaellt das
+// Feature stillschweigend, statt den Netlify-Build zu kippen.
+function ladeInhalt(datei) {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(__dirname, "seo-content", datei), "utf8"));
+  } catch {
+    console.warn(`  WARN: scripts/seo-content/${datei} fehlt oder ist ungueltig, wird uebersprungen`);
+    return {};
+  }
+}
+const SEO_INTROS = ladeInhalt("intros.json");
+const SEO_FAQ = ladeInhalt("faq.json");
+
+// Eine Antwort "unbekannt" ist eine ehrliche Nicht-Antwort der Recherche, aber auf
+// der Seite wertlos und ein schlechtes Signal. Solche Paare fliegen raus.
+function faqFuer(slugName) {
+  const liste = SEO_FAQ[slugName];
+  if (!Array.isArray(liste)) return [];
+  return liste.filter((f) =>
+    f && f.frage && f.antwort && String(f.antwort).trim().toLowerCase() !== "unbekannt");
+}
+
+// CSS der Module, regelweise dedupliziert. Mehrere Module definieren bewusst
+// dieselben Bausteine (z.B. span.miss und p.warn in trophaeen und side-quests);
+// identische Regeln sollen nur einmal ausgeliefert werden. Zerlegt wird an "}",
+// was zulaessig ist, solange die Module keine verschachtelten Regeln (@media,
+// @supports) verwenden — das prueft die Zusicherung unten.
+function cssRules(s) {
+  return String(s || "").split("}").map((r) => r.trim()).filter(Boolean).map((r) => r + "}");
+}
+for (const p of SEO_PARTS) {
+  if (/@(media|supports|container)/.test(p.EXTRA_CSS || "")) {
+    throw new Error(`EXTRA_CSS von "${p.SLUG}" enthaelt eine At-Regel; die naive Zerlegung an "}" traegt das nicht.`);
+  }
+}
+const PART_CSS = [...new Set(SEO_PARTS.flatMap((p) => cssRules(p.EXTRA_CSS)))].join("\n");
 
 // ── Echte Bild-Dimensionen aus Dateiheadern (PNG IHDR, WebP VP8/VP8L/VP8X) ────
 // Grund: #boss-grid-Karten und die SEO-Boss-Artikel sind auf einen 16:9-Container
@@ -234,6 +330,23 @@ ul.te li::before{content:"\\2610";position:absolute;left:0;color:var(--red);font
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Einleitungsabsatz und FAQ der Modul-Seiten --- */
+p.intro{font-size:15px;color:var(--ink);max-width:75ch;margin:0 0 4px}
+details.faq{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
+margin-top:10px;box-shadow:var(--shadow-soft);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+details.faq>summary{list-style:none;cursor:pointer;padding:13px 16px;font-family:var(--f-display);
+font-weight:600;font-size:15px;color:var(--ink-hi);display:flex;justify-content:space-between;gap:12px;align-items:center}
+details.faq>summary::-webkit-details-marker{display:none}
+details.faq>summary::marker{content:""}
+details.faq>summary::after{content:"+";font-family:var(--f-mono);font-size:18px;color:var(--red);line-height:1}
+details.faq[open]>summary::after{content:"\\2013"}
+details.faq>summary:hover{color:var(--red-hi)}
+details.faq>summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+details.faq>p{margin:0;padding:0 16px 14px;font-size:14px;color:var(--ink-dim);max-width:75ch}
+
+/* --- Bausteine der Modul-Seiten (scripts/seo-parts/), regelweise dedupliziert --- */
+${PART_CSS}
 `.trim();
 
 // slug fuer Anker-IDs
@@ -243,9 +356,7 @@ const slug = (s) => String(s).toLowerCase()
 function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, jsonld }) {
   const url = `${SITE}/${slugName}`;
   const og = ogImage ? `${SITE}/${ogImage}` : `${SITE}/cd_assets/bosses/umbra-final.jpg`;
-  const navLinks = [
-    ["bosse", "Bosse"], ["waffen", "Waffen"], ["true-ending", "True Ending"],
-  ].map(([s, l]) =>
+  const navLinks = NAV.map(([s, l]) =>
     `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${l}</a>`).join("");
   return `<!DOCTYPE html>
 <html lang="de">
@@ -498,11 +609,22 @@ ${sections}`;
 
 // ── Sitemap ───────────────────────────────────────────────────────────────────
 function buildSitemap() {
+  // Die drei urspruenglichen Seiten haben ihre Prioritaet hier fest; die
+  // Modul-Seiten bringen sie als SITEMAP-Export selbst mit. Die Reihenfolge
+  // folgt NAV, damit Menue und Sitemap nicht auseinanderlaufen.
+  const FEST = {
+    "bosse": { pri: "0.9", freq: "monthly" },
+    "waffen": { pri: "0.9", freq: "monthly" },
+    "true-ending": { pri: "0.8", freq: "monthly" },
+  };
+  const vonModul = Object.fromEntries(SEO_PARTS.map((p) => [p.SLUG, p.SITEMAP]));
   const urls = [
     { loc: SITE + "/", pri: "1.0", freq: "weekly" },
-    { loc: SITE + "/bosse", pri: "0.9", freq: "monthly" },
-    { loc: SITE + "/waffen", pri: "0.9", freq: "monthly" },
-    { loc: SITE + "/true-ending", pri: "0.8", freq: "monthly" },
+    ...NAV.map(([s]) => {
+      const cfg = FEST[s] || vonModul[s];
+      if (!cfg) throw new Error(`Keine Sitemap-Angabe fuer Seite "${s}"`);
+      return { loc: `${SITE}/${s}`, pri: cfg.pri, freq: cfg.freq };
+    }),
   ];
   const body = urls.map((u) =>
     `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`
@@ -510,15 +632,100 @@ function buildSitemap() {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
 
+// ── Redaktionelle Zutaten an eine Modul-Seite anflanschen ────────────────────
+// Zentral hier statt in jedem der fuenf Module, damit Aufbau, Markup und
+// JSON-LD ueber alle Seiten identisch bleiben.
+
+// Sichtbare FAQ als JS-freier Aufklapper. <details> braucht kein Script und ist
+// fuer Crawler vollstaendig lesbar, auch im zugeklappten Zustand.
+function faqSektion(liste) {
+  const items = liste.map((f) => `<details class="faq">
+<summary>${esc(f.frage)}</summary>
+<p>${esc(f.antwort)}</p>
+</details>`).join("\n");
+  return `
+<h2>Häufige Fragen (${liste.length})</h2>
+${items}`;
+}
+
+// FAQPage-Auszeichnung. Google kann daraus aufklappbare Treffer direkt in der
+// Suchergebnisliste bauen. Muss inhaltlich exakt dem sichtbaren Text entsprechen,
+// sonst wertet Google es als irrefuehrend, deshalb dieselbe gefilterte Liste.
+function faqPageLd(liste) {
+  return {
+    "@type": "FAQPage",
+    mainEntity: liste.map((f) => ({
+      "@type": "Question",
+      name: f.frage,
+      acceptedAnswer: { "@type": "Answer", text: f.antwort },
+    })),
+  };
+}
+
+// Baut die fertige Seite eines Moduls: Modul-Ausgabe + Intro-Absatz + FAQ.
+function baueModulSeite(p) {
+  const spec = p.build(CTX);
+
+  // Einleitungsabsatz ganz nach oben, direkt unter den Lead. Das ist der erste
+  // zusammenhaengende Fliesstext der Seite und damit das, was Suchmaschinen zur
+  // thematischen Einordnung heranziehen.
+  const intro = SEO_INTROS[p.SLUG];
+  if (intro && intro.intro) {
+    spec.bodyHtml = `<p class="intro">${esc(intro.intro)}</p>\n${spec.bodyHtml}`;
+  }
+
+  const faq = faqFuer(p.SLUG);
+  if (faq.length) {
+    spec.bodyHtml += "\n" + faqSektion(faq);
+    if (spec.jsonld && Array.isArray(spec.jsonld["@graph"])) {
+      spec.jsonld["@graph"].push(faqPageLd(faq));
+    }
+  }
+  return pageShell(spec);
+}
+
+// ── Kontext fuer die Seiten-Module ────────────────────────────────────────────
+// Die Module bekommen Daten und Helfer als Objekt uebergeben, statt sie aus dem
+// Dateiscope zu ziehen. Dadurch laufen sie unveraendert auch im Test-Harness.
+const CTX = {
+  data: {
+    ARMOR, ARMOR_IMGS, CRAFTING, TROPHIES, TROPHY_GRADES,
+    ENEMIES, ENEMY_IMGS, SIDE_QUESTS,
+  },
+  helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN },
+};
+
 // ── Schreiben ─────────────────────────────────────────────────────────────────
 const outputs = [
   ["bosse.html", buildBosse()],
   ["waffen.html", buildWaffen()],
   ["true-ending.html", buildTrueEnding()],
+  ...SEO_PARTS.map((p) => [`${p.SLUG}.html`, baueModulSeite(p)]),
   ["sitemap.xml", buildSitemap()],
 ];
 for (const [file, content] of outputs) {
   fs.writeFileSync(path.join(ROOT, file), content, "utf8");
   console.log(`  geschrieben: ${file.padEnd(18)} ${(content.length / 1024).toFixed(1)} KB`);
 }
-console.log(`\nDaten: ${BOSSES.length} Bosse, ${WEAPONS.length} Waffen, ${TRUE_ENDING.length} True-Ending-Aufgaben (Stand ${TODAY}).`);
+
+// Vollstaendigkeitskontrolle direkt beim Erzeugen: jedes Modul deklariert per
+// COUNT_CHECK, wie viele Datensaetze auf seiner Seite stehen muessen. Weicht das
+// ab, bricht der Build ab, statt eine unvollstaendige Seite zu deployen.
+let countFehler = 0;
+for (const p of SEO_PARTS) {
+  const { regex, expected, label } = p.COUNT_CHECK(CTX);
+  const seite = fs.readFileSync(path.join(ROOT, `${p.SLUG}.html`), "utf8");
+  const n = (seite.match(regex) || []).length;
+  if (n !== expected) {
+    console.error(`  FEHLER: ${p.SLUG}.html hat ${n} ${label}, erwartet ${expected}`);
+    countFehler++;
+  }
+}
+if (countFehler) {
+  console.error(`\n${countFehler} Seite(n) unvollstaendig — Abbruch.`);
+  process.exit(1);
+}
+
+const nEnemies = Object.values(ENEMIES).reduce((a, v) => a + (Array.isArray(v) ? v.length : 0), 0);
+console.log(`\nDaten: ${BOSSES.length} Bosse, ${WEAPONS.length} Waffen, ${TRUE_ENDING.length} True-Ending-Aufgaben,`);
+console.log(`       ${ARMOR.length} Ruestungen, ${CRAFTING.length} Rezepte, ${nEnemies} Gegner, ${SIDE_QUESTS.length} Nebenquests, ${TROPHIES.length} Trophaeen (Stand ${TODAY}).`);
