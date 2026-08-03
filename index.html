@@ -3362,7 +3362,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
         <tr class="trow" data-s="pailune umzug spacious pailunese house 1000 slots farm 32 saatgut ranch 35 tiere special cooking tools abyss nexus proud returnee"><td><strong>Umzug nach Pailune</strong><br><span style="color:var(--dim);font-size:11px">5. Ausbau</span></td><td>Privatlager als platzierbares Hausmöbel; spezielle Kochwerkzeuge (ersetzen Ronnies Kochtopf). <b>Keine neuen Händler.</b></td><td>Privatlager 1.000 Slots; Haus-Layout <em>Spacious Pailunese House</em>; Farm 32 Saatgut, Ranch 35 Tiere; Abyss-Nexus in Pailune; Trophäe <em>Proud Returnee</em></td></tr>
       </tbody>
     </table>
-    <div style="font-size:11.5px;color:var(--gdim);margin-bottom:22px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px">Nicht jede Einrichtung hängt am Ausbau: <b>Brunnen</b> (Patch 1.04.00), <b>Teich</b> (1.08.00, eigene Bau-Mission), <b>Workstation</b> (1.12.00) und der <b>Handelswagen</b> (Commission „Brice's Request", Bau am Timberturner Wainwright) kommen unabhängig davon. Die <b>Trainingspuppe</b> hinter der Ranch ist in keiner Quelle sicher zugeordnet.</div>
+    <div style="font-size:11.5px;color:var(--gdim);margin-bottom:22px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px">Nicht jede Einrichtung hängt am Ausbau: <b>Brunnen</b> (Patch 1.04.00), <b>Teich</b> (1.08.00, eigene Bau-Mission), <b>Workstation</b> (1.12.00) und der <b>Handelswagen</b> (Commission „Brice's Request", Bau am Timberturner Wainwright) kommen unabhängig davon. Die <b>Trainingspuppe</b> hinter der Ranch ist in keiner Quelle sicher zugeordnet. <b style="color:var(--gold)">Seit Patch 1.16.00</b> ist das Camp außerdem nicht mehr der einzige Ort zum Verpacken und Beladen: <b>7 regionale Wagenwerkstätten</b> (Hernand, Demeniss, Delesyia, Pailune, Tommaso, Urd'avah, Varnia) übernehmen beides unterwegs.</div>
 
     <div class="sub-t" style="scroll-margin-top:72px">Woher die Camp-Ressourcen kommen</div>
     <table class="farm-tbl" style="margin-bottom:8px">
@@ -3372,7 +3372,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
         <tr class="trow" data-s="stone stein erz mineralien mining dispatch perwin quarry karin quarry"><td><strong>Stone</strong></td><td>Stein, Erz, Mineralien</td><td>Mining-Dispatches; als Top-Ziel gilt <b>Perwin Quarry</b>.</td></tr>
         <tr class="trow" data-s="timber holz lumber logging dispatch timberham sawmill"><td><strong>Timber</strong></td><td>Holz</td><td>Logging-Dispatches, z.&nbsp;B. Timberham Sawmill.</td></tr>
         <tr class="trow" data-s="food nahrung provisions gerichte zutaten harvesting farming svenholt ranch calpheon farmhouse"><td><strong>Food</strong></td><td>Gerichte und Zutaten</td><td>Harvesting-/Farming-Dispatches — <b>Svenholt Ranch</b> (Fleisch), <b>Calpheon Farmhouse</b> (Getreide). Günstigste Kategorie.</td></tr>
-        <tr class="trow" data-s="camp funds geld silver copper nicht persoenliches silber arkosa bank of hernand kopfgeld wagenhandel donate funds"><td><strong>Camp Funds</strong></td><td>Camp-Geld — <b>nicht</b> dein persönliches Silber (eigene Anzeige oben rechts)</td><td>Defence-Dispatches (Top-Ziel <b>Arkosa</b>, ~11K Basisertrag); Kopfgeldjagd; Zinsen auf Goldbarren bei der Bank of Hernand; Wagenhandel. Einzahlen bei Carl über <em>Manage Provisions → Camp Provisions → Donate Funds</em>; Goldbarren sind die schnellste Spendenform.</td></tr>
+        <tr class="trow" data-s="camp funds geld silver copper nicht persoenliches silber arkosa bank of hernand kopfgeld wagenhandel donate funds"><td><strong>Camp Funds</strong></td><td>Camp-Geld — <b>nicht</b> dein persönliches Silber (eigene Anzeige oben rechts)</td><td>Defence-Dispatches (Top-Ziel <b>Arkosa</b>, ~11K Basisertrag); Kopfgeldjagd; Zinsen auf Goldbarren bei der Bank of Hernand; Wagenhandel. Einzahlen bei Carl über <em>Manage Provisions → Camp Provisions → Donate Funds</em>; Goldbarren sind die schnellste Spendenform.<br><span style="color:var(--gold)">Seit 1.16.00</span> ist der <b>Wagenhandel</b> deutlich stärker gewichtet: Königliche Handelsposten zahlen das Vierfache, der Gesamtgewinn wurde angehoben. Zugleich ist der Bankzins auf <b>±40 Goldbarren</b> je Ausschüttung gedeckelt.</td></tr>
       </tbody>
     </table>
     <div class="card" style="margin-bottom:20px" data-s="ressourcen quellen spenden carl dispatch missionen strongholds ruins defence engineering construction location recapture">
@@ -3380,6 +3380,23 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
         <div class="crow"><span class="cl">3 Wege</span><span class="cv"><b>(1)</b> Direktspende an die Vorratstruhe bei Carl · <b>(2)</b> Dispatch-Missionen · <b>(3)</b> Säubern feindlicher Strongholds — die Beute landet automatisch im Camp-Lager.</span></div>
         <div class="crow"><span class="cl">Missionstypen</span><span class="cv"><b>Resource</b> → Food/Stone/Timber · <b>Ruins</b> → Spezialmaterialien, die es beim normalen Sammeln nicht gibt · <b>Defence</b> → Camp Funds · <b>Engineering</b> → Spezialteile (u.&nbsp;a. Wagen) · <b>Construction</b> → liefert <b>keine</b> Materialien · <b>Location Recapture</b> → senkt die Gegnerdichte.</span></div>
         <div class="crow"><span class="cl">Achtung</span><span class="cv">Gespendete Items sind <b>unwiederbringlich</b> weg. Nichts spenden, was du noch für Crafting brauchst.</span></div>
+      </div>
+    </div>
+
+    <div class="sub-t" style="scroll-margin-top:72px">Wagenhandel — der Stand nach Patch 1.16.00</div>
+    <div style="font-size:11.5px;color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px">Patch <b>1.16.00</b> (01.08.2026) hat den Handel vom Nebenschauplatz zur eigenen Wirtschaftsschleife ausgebaut. Alles hier Genannte stammt aus den offiziellen Patch-Notes oder aus namentlich genannten Guides; kursierende Gewinnzahlen aus Foren sind bewusst nicht aufgeführt, weil sie sich nicht überprüfen ließen.</div>
+    <div class="card" style="margin-bottom:20px" data-s="wagenhandel handel trading wagon handelsposten trading post koeniglicher royal wagenwerkstatt wagon workshop brice arnold carl verpacken handelswaren kailok hornsplitter goldleaf guildhouse anleihen bonds bank handels-tab karte">
+      <div class="crows">
+        <div class="crow"><span class="cl">Freischalten</span><span class="cv">Am <b>Ende von Kapitel 2</b> nach dem Sieg über <b>Kailok the Hornsplitter</b> (game8). Für den Wagenbau per Dispatch braucht es <b>Brice</b> (Wagonmaster) und <b>Arnold</b> (Engineer) im Camp; gebaut wird an der <b>Timberturner Wainwright</b>. <span style="color:var(--gdim)">Die kursierenden Questnamen dazu sind unbestätigt, und die Guides sind sich über die Lage der Wainwright uneins (Osten, Westen bzw. Nordosten).</span></span></div>
+        <div class="crow"><span class="cl">Wagentypen</span><span class="cv">Drei Stufen: <b>Old Wagon</b>, <b>Freight Wagon</b>, <b>Trading Wagon</b> (Steam-Guide). Alle drei sind vierrädrige Zweigespanne. <span style="color:var(--gdim)">Die Spieldatenbank führt den ersten als <em>Worn Wagon</em> — derselbe Wagen, anderer Name. Angaben zu Bauzeit, Wendigkeit oder erhöhter Banditen-Anziehung kursieren, stehen aber in keiner belastbaren Quelle.</span></span></div>
+        <div class="crow"><span class="cl">Kreislauf</span><span class="cv">Ware verpacken → auf den Wagen laden → zu einem Handelsposten fahren → verkaufen → vor Ort billig einkaufen und die Rückfahrt nutzen. Verpackt wird bei <b>Carl</b> für <b>100 Copper je Stück</b>, aus Camp-Ressourcen im Verhältnis <b>1.000 zu 1</b> (PC Gamer). Verpacken ist <b>unumkehrbar</b>.</span></div>
+        <div class="crow"><span class="cl" style="color:var(--gold)">Neu 1.16</span><span class="cv"><b>133 neue Handelsposten</b>, die aber erst nach Abschluss der zugehörigen Händlergilden-Quests oder nach Beseitigung der Bedrohung in der Umgebung erscheinen. <b>7 regionale Wagenwerkstätten</b> (Hernand, Demeniss, Delesyia, Pailune, Tommaso, Urd'avah, Varnia) verpacken und beladen jetzt auch unterwegs.</span></div>
+        <div class="crow"><span class="cl" style="color:var(--gold)">Neu 1.16</span><span class="cv"><b>Königliche Handelsposten zahlen das Vierfache</b>, und der Wagen verschwindet dort nach der Lieferung nicht mehr. Schwer erreichbare Posten werfen mehr ab. Dafür sinkt der Preis, wenn du an einem Ort zu viel derselben Ware ablädst — eine einzige Dauerroute trägt nicht mehr.</span></div>
+        <div class="crow"><span class="cl" style="color:var(--gold)">Neu 1.16</span><span class="cv">Die <b>Mindestmenge von 25</b> ist weg, es lässt sich einzeln verkaufen. Verpackte Waren stapeln je nach Preis bis <b>10 oder 100</b> (vorher überall 50), unverpackte bis 5 oder 50. Waren lassen sich zwischen Pferd und Wagen umladen. <b>Mehr Verlust</b> beim Zurückholen des Pferdes und beim Zerstören des Wagens.</span></div>
+        <div class="crow"><span class="cl" style="color:var(--gold)">Neu 1.16</span><span class="cv">Ein eigener <b>Handels-Tab auf der Karte</b> zeigt Posten, Königliche Posten, Werkstätten und Wagenwege, filtert nach Ware, nennt Marktpreise und den <b>durchschnittlichen Kaufpreis</b>. Erst damit lässt sich Gewinn überhaupt sauber rechnen.</span></div>
+        <div class="crow"><span class="cl">Bank</span><span class="cv">Goldbarren bringen Zinsen, seit 1.16 auf <b>±40 Barren</b> je Ausschüttung gedeckelt. Neu sind der <b>Tresorraum der Anleihebank</b> (Investition ab 10 eingezahlten Anleihen) und der <b>Anleihen-Laden</b> für seltene Gegenstände. <span style="color:var(--gdim)">Ob Anleihen für 10 Goldbarren gekauft oder gegen 10 eingetauscht werden, ist aus dem offiziellen Wortlaut nicht eindeutig — im Spiel prüfen.</span></span></div>
+        <div class="crow"><span class="cl">Trophäe</span><span class="cv"><b>The Golden Merchant</b> hängt an den fünf Handels-Herausforderungen. Der Patch hat sie nicht angefasst, macht sie aber spürbar leichter — vor allem <em>Magnate of the Golden Desert</em> (300.000 Camp Funds durch Handel) profitiert von den vervierfachten Preisen.</span></div>
+        <div class="crow"><span class="cl">Bekannter Fehler</span><span class="cv">Der Timer beim <b>Bank-Investment</b> bleibt gelegentlich auf „REFRESHING" stehen. Das ist <b>nicht</b> neu und stammt nicht aus 1.16 — Meldungen dazu gibt es seit April 2026, und der Fehler besteht nach dem Patch fort.</span></div>
       </div>
     </div>
 
@@ -3414,7 +3431,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
         <div class="crow"><span class="cl">Vorlauf</span><span class="cv">Nach Kapitel 7 „Homecoming" (Pailune von Ludvig befreit) öffnet <b>Reconstructing Pailune</b>. Fünf Bauprojekte: <b>Pailune Council, Institute of Pailune, Infirmary, Barracks, Trading Post</b>. Kosten der Einzelprojekte sind nirgends beziffert.</span></div>
         <div class="crow"><span class="cl">Umzug</span><span class="cv">Quest <b>The Return Home</b>, gestartet bei <b>Serkis</b> in Hernand. Voraussetzung: Howling Hill voll ausgebaut, Pailune komplett wiederaufgebaut, Hauptstory inklusive Epilog durch.</span></div>
         <div class="crow"><span class="cl">Gewinn</span><span class="cv">Privatlager <b>640 → 1.000 Slots</b> (nur so erreichbar), <em>Spacious Pailunese House</em>, Farm 32 Saatgut, Ranch 35 Tiere, spezielle Kochwerkzeuge, Abyss-Nexus in Pailune, Trophäe <em>Proud Returnee</em>.</span></div>
-        <div class="crow"><span class="cl">Preis</span><span class="cv">Optional, aber praktisch <b>irreversibel</b> (nur per Save-Rollback). In der Nähe fehlen Goldleaf Trading Center und Royal Trading Post; keine neuen Händler. Wer bleibt, deckelt sein Lager dauerhaft bei 640.</span></div>
+        <div class="crow"><span class="cl">Preis</span><span class="cv">Optional, aber praktisch <b>irreversibel</b> (nur per Save-Rollback). In der Nähe fehlen Goldleaf Trading Center und Royal Trading Post; keine neuen Händler. Wer bleibt, deckelt sein Lager dauerhaft bei 640. <b style="color:var(--gold)">Seit Patch 1.16.00 entschärft:</b> Die Notes nennen ausdrücklich einen neuen <b>Händler am Pailuner Handelsposten</b>, und Pailune ist einer der 7 Standorte mit <b>Wagenwerkstatt</b> (Verpacken und Beladen vor Ort). Ein Königlicher Handelsposten in Pailune ist damit allerdings <em>nicht</em> belegt.</span></div>
         <div class="crow"><span class="cl">Vorher</span><span class="cv"><b>Manuell speichern.</b> Alle Feldfrüchte ernten (gehen sonst verloren — offizieller Ingame-Warnhinweis), Ranch-Tiere entfernen, <b>alle laufenden Dispatches abbrechen</b> (Kameraden müssen im Camp stehen), offene Händler-Requests abschließen. Es gibt Community-Berichte über einen Bug mit Schwarzbild und verschwundenem Camp.</span></div>
         <div class="crow"><span class="cl">Entwarnung</span><span class="cv">Der früher gemeldete NPC-Austausch in Pailune (Gunter, Harry, Bronton, Lola) war ein <b>Bug und ist seit Patch 1.03.00 offiziell gefixt</b> — kein dauerhaftes Missable mehr.</span></div>
       </div>
@@ -3860,7 +3877,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
 
   <section class="sec" id="sec-patches">
     <h2 class="sec-t"><span class="sec-sym">✎</span> Patch-Notes</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Patch 1.15.00</span> (Bugfix-Patch, 24.07.2026; einziger neuer Content ist die Verlegung des 'Mace of Ambition'). Davor Cross-Save-Update 1.14.00 am 16.07.2026 und großer Content-Patch 1.13.00 am 03.07.2026.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Hotfix 1.16.01</span> (02.08.2026) auf dem großen <span style="color:var(--gold);font-weight:600">Handels-Update 1.16.00</span> (01.08.2026) — 133 neue Handelsposten, vervierfachte Preise an Königlichen Handelsposten, 7 regionale Wagenwerkstätten und ein Anleihen-System bei der Bank. Davor Bugfix-Patch 1.15.00 am 24.07.2026 und Cross-Save-Update 1.14.00 am 16.07.2026.</div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev Update, 02.06.2026). Schrittweiser Rollout Juni–September 2026 — noch keine versionierten Patch-Notes, Inhalte können sich bis Release ändern.</div>
@@ -3890,7 +3907,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <div class="rm-task-list" id="rm-list"></div>
     <div class="rm-faq" style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px">
       <h3 class="sub-t" style="margin:0 0 4px">❓ Häufige Fragen — Endgame, NG+, Koop &amp; Cross-Save</h3>
-      <p style="font-size:11px;color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Patchnotes + game8/PowerPyx/Fextralife (Stand Patch 1.15, Juli 2026).</p>
+      <p style="font-size:11px;color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Patchnotes + game8/PowerPyx/Fextralife (Stand Patch 1.16, August 2026).</p>
       <div style="display:grid;gap:12px">
         <div style="background:linear-gradient(135deg,#15110d,#0c0c0c);border:1px solid rgba(201,162,39,.25);border-radius:10px;padding:12px 14px">
           <div style="color:var(--gold);font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es ein New Game Plus?</div>
@@ -4485,7 +4502,7 @@ const WEAPONS=[
   {name:"Small Wells Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:5,source:"Exploration / Feldbeute (Wells)"},
   {name:"Small Hellhounds Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:5,source:"Exploration / Feldbeute (Hellhounds)"},
   {name:"Small Staglord Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:5,source:"Exploration / Feldbeute (Staglord)"},
-  {name:"Small Vellua Pirates Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:5,source:"Exploration / Feldbeute (Vellua Pirates)"},
+  {name:"Small Vellua Pirates Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:5,source:"Exploration / Feldbeute (Vellua Pirates)",notes:"Patch 1.16.00 hat eine 'Bannerlanze der Vellua-Piraten' in 'Bannerlanze des Tanzenden Welses' umbenannt. Welche Groessenvariante gemeint ist, sagen die Notes nicht — der Wiki-Name bleibt daher vorerst stehen."},
   {name:"Small Musket of Demeniss Banner Pike",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:5,source:"Exploration / Feldbeute (Musket of Demeniss)"},
   {name:"Small Blinding Arrows Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:5,source:"Exploration / Feldbeute (Blinding Arrows)"},
   {name:"Small Halberd of Carnage's Banner Pike",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:5,source:"Exploration / Feldbeute (Halberd of Carnage)"},
@@ -4508,7 +4525,7 @@ const WEAPONS=[
   {name:"Medium Marni Banner Pike",type:"Halberd / Spear (2H)",atk:27,crit:null,slots:5,source:"Exploration / Feldbeute (Marni-Fraktion)"},
   {name:"Medium Musket of Demeniss Banner Pike",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:5,source:"Exploration / Feldbeute (Musket of Demeniss)"},
   {name:"Medium Pailunese Banner Pike",type:"Halberd / Spear (2H)",atk:21,crit:null,slots:5,source:"Exploration / Feldbeute (Pailune)"},
-  {name:"Medium Vellua Pirate Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:5,source:"Exploration / Feldbeute (Vellua Pirates)"},
+  {name:"Medium Vellua Pirate Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:5,source:"Exploration / Feldbeute (Vellua Pirates)",notes:"Betrifft dieselbe Umbenennung aus Patch 1.16.00 wie die Small-Variante ('Bannerlanze des Tanzenden Welses'); die Notes nennen keine Groessenvariante."},
   {name:"Medium Heavy Silence Banner Pike",type:"Halberd / Spear (2H)",atk:19,crit:null,slots:5,source:"Exploration / Feldbeute (Heavy Silence)"},
   {name:"Medium Blinding Arrows Banner Pike",type:"Halberd / Spear (2H)",atk:24,crit:null,slots:5,source:"Exploration / Feldbeute (Blinding Arrows)"},
   {name:"Medium Halberd of Carnage's Banner Pike",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:5,source:"Exploration / Feldbeute (Halberd of Carnage)"},
@@ -5600,9 +5617,9 @@ const GATHERABLES=[
   {name:"Wild Garlic",cat:"Kraut",detail:"Gesammeltes Kraut mit weissen Blueten zwischen langen breiten Blaettern, frischer Duft und knackige Textur; Kochzutat (passt zu Fleisch). Bekannt als Doppelgaenger von False Hellebore, daher vor dem Verzehr sorgfaeltig bestimmen.",loc:"Gesammelt in Hernand und hohen Bergstaedten Pailunes. Quelle: Fextralife Wild Garlic",miss:false,conf:"medium"},
   {name:"Marigold",cat:"Kraut",detail:"Gesammeltes Kraut der Korbbluetler; seine Wurzeln enthalten Stoffe, die Fadenwuermer toeten, Saft und Blueten vertreiben Fluginsekten. In der Alchemie genutzt (Angriffsverstaerkung beim Brauen) und als Faerbezutat der Gelbtoene.",loc:"Suedliche Regionen Pywels (z. B. suedlich der Muckroot Ranch in Hernand). Quelle: Fextralife/Gamer Guides Marigold",miss:false,conf:"medium"},
   {name:"Shrubby Sophora",cat:"Kraut",detail:"Gesammeltes Heilkraut mit verdrehter Wurzel und intensiv bitterem Geschmack; soll bei Verdauungsbeschwerden und Neuralgie helfen. Alchemie-/Trank-Zutat (die teils genannte Rolle als Schluesselkomponente der Palmar Pills ist nicht abgesichert).",loc:"Reichlich in den Hernand-Waeldern und im Grasland sowie in den suedlichen Regionen Pywels. Quelle: Fextralife/Game8 Shrubby Sophora",miss:false,conf:"medium"},
-  {name:"Pine Mushroom",cat:"Pilz",detail:"Gesammelter Pilz mit feinem Kiefernduft, als Kochzutat genutzt. Findet sich im Schatten grosser Baeume, am Fuss von Klippen und an Gewaessern.",loc:"Fast ueberall in Pywel ausser der trockenen Wueste (gute Stelle noerdlich von Hernand nahe Three Saints Falls). Quelle: Fextralife Pine Mushroom",miss:false,conf:"high"},
-  {name:"Coral Mushroom",cat:"Pilz",detail:"Verzweigter Wildpilz (markante korallenartige Form) als Koch- und Alchemiezutat (mit Stamina-Wiederherstellung verknuepft). Auch in zerstoerten Kisten an Ruinen zu finden.",loc:"Waechst natuerlich in Demeniss und Delesyia. Quelle: Fextralife/Game8 Mushrooms & Herbs",miss:false,conf:"high"},
-  {name:"Oakwood Mushroom",cat:"Pilz",detail:"Pilz mit kraeftiger Textur; Kochzutat (fuer Oakwood Mushroom Tea, der Ice Resistance erhoeht). Oft in der Wildnis und in zerstoerten Kisten/Faessern.",loc:"Quer durch Hernand (und suedliches Pailune). Quelle: Fextralife Oakwood Mushroom",miss:false,conf:"high"},
+  {name:"Pine Mushroom",cat:"Pilz",detail:"Gesammelter Pilz mit feinem Kiefernduft. Findet sich im Schatten grosser Baeume, am Fuss von Klippen und an Gewaessern. Seit Patch 1.16.00 fuehrt das Spiel Pilze als Alchemiezutat statt als Kochzutat; die Tee-Rezepte am Kessel bleiben davon unberuehrt.",loc:"Fast ueberall in Pywel ausser der trockenen Wueste (gute Stelle noerdlich von Hernand nahe Three Saints Falls). Quelle: Fextralife Pine Mushroom",miss:false,conf:"high"},
+  {name:"Coral Mushroom",cat:"Pilz",detail:"Verzweigter Wildpilz (markante korallenartige Form), mit Stamina-Wiederherstellung verknuepft. Auch in zerstoerten Kisten an Ruinen zu finden. Seit Patch 1.16.00 als Alchemiezutat kategorisiert (vorher Kochzutat).",loc:"Waechst natuerlich in Demeniss und Delesyia. Quelle: Fextralife/Game8 Mushrooms & Herbs",miss:false,conf:"high"},
+  {name:"Oakwood Mushroom",cat:"Pilz",detail:"Pilz mit kraeftiger Textur; Grundlage des Oakwood Mushroom Tea, der Ice Resistance erhoeht. Oft in der Wildnis und in zerstoerten Kisten/Faessern. Seit Patch 1.16.00 als Alchemiezutat kategorisiert (vorher Kochzutat).",loc:"Quer durch Hernand (und suedliches Pailune). Quelle: Fextralife Oakwood Mushroom",miss:false,conf:"high"},
   {name:"Honey",cat:"Spezialmaterial",detail:"Aus einem Apiary-Bienenkasten gesammelt. Suessungsmittel beim Kochen sowie Crafting-/Alchemiezutat. Der Zugang zum Bienenkasten wird ueber die zugehoerige Apiary-Quest freigeschaltet.",loc:"Pollengarth-Apiary-Bienenkasten (freigeschaltet via Quest Where the Sweetness Stopped). Quelle: Fextralife Honey",miss:false,conf:"medium"},
   {name:"Spider Web",cat:"Spezialmaterial",detail:"Crafting-Material, das beim Durchlaufen von Spinnweben gesammelt wird. Genutzt zum Verstaerken von Kleidung und Bau von Fallen (laut Quelle auch als Seil/Verband). Die teils genannte Rolle als Lesser-Catalyst-Bindemittel ist auf der Quellseite nicht abgesichert.",loc:"Spinnweben nahe Arboria in Hernand. Quelle: Fextralife/Game8 Spider Web",miss:false,conf:"medium"},
   {name:"Red Seaweed",cat:"Spezialmaterial",detail:"Kuesten-Gatherable (an roten Flecken am Boden erkennbar) als Koch-/Crafting-Zutat. Laut Game8 zudem noetig, um Stamina ueber Level 10 zu steigern (zusammen mit Abyss Artifacts).",loc:"Entlang der Kueste der Bay of Abundance, direkt suedlich der City of Demeniss. Quelle: Game8 Red Seaweed",miss:false,conf:"high"},
@@ -12837,6 +12854,99 @@ const SIDE_QUESTS=[
 ];
 
 const PATCHES=[
+  {ver:"1.16.01",date:"02.08.2026",size:"Hotfix (All Platforms). Steam (PC/Mac), PlayStation, Xbox & Epic Games Store sofort; Mac App Store in Arbeit. Release 01:00 UTC. Ein einziger Fix — der Lager-Bug, den der große Handels-Patch 1.16.00 einen Tag zuvor eingeschleppt hatte",features:[
+    {cat:"Content",items:[
+      "Nach dem Beladen von Handelswaren an einer <b>regionalen Wagenwerkstatt</b> zeigten die Lager-Oberflächen im Camp (Privatlager, Futtertrog, Sammelgut-Truhe) teilweise die Wagenladeraum-Oberfläche statt ihrer eigenen — behoben. <span style='color:var(--gdim)'>Der offizielle Text sagt ausdrücklich nur, dass die <em>Oberfläche</em> falsch erschien. Ob dabei auch Inhalte vertauscht wurden, steht nirgends; entsprechende Community-Deutungen sind unbelegt.</span>"
+    ]},
+    {cat:"Quelle",items:[
+      "Offizielle Pearl-Abyss-Patchnotes 1.16.01 (Notice-Board boardNo 111, Release 02.08.2026 01:00 UTC). Konsolen-Build 1.000.424 — diese Nummer ist <b>nicht offiziell dokumentiert</b> und wurde in der geprüften Fachpresse nur bei MP1st gefunden. Der Formulierung 'regionale Wagenwerkstatt' liegt keine erklärte Absicht zugrunde; sie trennt sprachlich von Brices Werkstatt im Camp."
+    ]}
+  ]},
+  {ver:"1.16.00",date:"01.08.2026",size:"Großes Handels-Update (All Platforms). Steam (PC/Mac), PlayStation, Xbox Series X|S & Epic Games Store sofort; Mac App Store in Arbeit. Release 03:30 UTC. Laut DSOGaming rund 5,7 GB und etwa 150 Änderungen. Der bislang größte Eingriff ins Handelssystem: 133 neue Handelsposten, vervierfachte Preise an Königlichen Handelsposten, 7 regionale Wagenwerkstätten und ein Anleihen-System bei der Bank",features:[
+    {cat:"Neu · Handelsposten",items:[
+      "<b>133 neue Handelsposten</b> hinzugefügt, darunter ausdrücklich der Händler am <b>Pailuner Handelsposten</b>",
+      "Neue Handelsposten erscheinen <b>erst nach Fortschritt</b>: entweder wenn bestehende Händlergilden-Quests abgeschlossen sind oder die Bedrohung in der Umgebung beseitigt wurde. <span style='color:var(--gdim)'>Dieser Satz steht nur in der deutschen und der koreanischen Fassung der Patch-Notes — die englische Fassung bricht offiziell mitten im Satz ab ('quests related to'). Wer sich auf die EN-Notes stützt, findet die Bedingung nicht.</span>",
+      "Art und Menge der an Handelsposten verkauften Waren insgesamt angepasst",
+      "Posten, die <b>mit dem Wagen schwer zu erreichen</b> sind, bringen höhere Gewinne",
+      "<b>Dynamische Preise:</b> Der Preis einer Handelsware sinkt, wenn an einem Ort zu viel davon verkauft wurde. Der alte Dauerlauf auf eine einzige Route lohnt damit nicht mehr unbegrenzt",
+      "Der insgesamt durch Handel erzielbare Gewinn wurde erhöht",
+      "<b>Wagen verschwinden nicht mehr</b> nach einer Lieferung an einen Königlichen Handelsposten (vorher war das Fahrzeug danach weg)",
+      "Preise für Handelswaren an <b>Königlichen Handelsposten vervierfacht</b>. <span style='color:var(--gdim)'>Was das in absoluten Zahlen bedeutet, nennt keine Quelle — weder Pearl Abyss noch Fachpresse oder Guides führen Vorher-Nachher-Preise.</span>"
+    ]},
+    {cat:"Neu · Handelswaren",items:[
+      "<b>28 neue Handelswaren</b>: 24 hochwertige und 4 allgemeine. <span style='color:var(--gdim)'>Die Namen sind offiziell nicht aufgelistet.</span>",
+      "<b>Stapelgrenzen geändert:</b> verpackte Handelswaren stapeln je nach Preis bis 10 oder 100 (vorher einheitlich 50 bei allen 31 verpackten Waren), unverpackte bis 5 oder 50",
+      "Handelswaren können jetzt auch <b>einzeln verkauft</b> werden — die alte Mindestmenge von 25 Stück pro Ware entfällt",
+      "Auf Wagen und Pferd geladene Handelswaren lassen sich <b>untereinander verschieben</b>",
+      "<b>Mehr Warenverlust</b> beim Zurückholen des Pferdes sowie beim Zerstören und Einsammeln des Wagens. <span style='color:var(--gdim)'>Ob das gezielt den von PowerPyx empfohlenen Pferderuf-Schnellreise-Trick treffen soll, sagen die Notes nicht — naheliegend, aber unbelegt.</span>"
+    ]},
+    {cat:"Neu · Wagenwerkstätten",items:[
+      "<b>7 Wagenwerkstätten</b> in ganz Pywel als Zwischenstützpunkte: <b>Hernand, Demeniss, Delesyia, Pailune, Tommaso, Urd'avah, Varnia</b>",
+      "In der Wagenwerkstatt lassen sich Handelswaren <b>verpacken und beladen</b> — Verpacken ist damit nicht mehr allein an Carl im Greymane Camp gebunden"
+    ]},
+    {cat:"Neu · Karte & Komfort",items:[
+      "Beim Reiten auf einem Wagen zeigt die Minikarte die <b>befahrbaren Wege</b>",
+      "<b>Neuer Handels-Tab auf der Karte</b> mit Handelsposten, Königlichen Handelsposten, Wagenwerkstätten und Wagenwegen",
+      "Filterfunktion für Posten, die eine gewünschte Ware verkaufen; Detailansicht zeigt die gesamten Marktpreise",
+      "Der <b>durchschnittliche Kaufpreis</b> einer Handelsware wird angezeigt — Grundlage, um Gewinn überhaupt zu berechnen",
+      "Verpackte Waren lassen sich aus Pferde-, Wagen-, Laden- und Lagerbildschirm heraus in den Gegenstandsfilter der Karte übernehmen; beim Prüfen auf der Karte erscheint die vorhandene Menge auf Pferd und Wagen",
+      "Händler mit Waren aus laufenden <b>Handels-Events</b> tragen im Handels-Tab eine eigene Markierung"
+    ]},
+    {cat:"Neu · Bank & Anleihen",items:[
+      "Gewinn und Verlust aus Bankzinsen sind auf <b>maximal 40 Goldbarren</b> begrenzt. <span style='color:var(--gdim)'>Dass der Zins vorher unbegrenzt gewesen wäre, steht nur in Sekundärquellen und ist offiziell nicht bestätigt.</span>",
+      "<b>Tresorraum der Anleihebank</b> hinzugefügt. Eine Investition startet, sobald <b>10 oder mehr Anleihen</b> eingezahlt sind. <span style='color:var(--gdim)'>Die koreanische Fassung nennt als Ort die Bank von Hernand, die englische und deutsche nennen keinen.</span>",
+      "Umtausch Anleihe ↔ Goldbarren im Verhältnis <b>1 zu 10</b>. <span style='color:var(--gdim)'>Die Richtung ist unklar: der offizielle Satz ist grammatisch mehrdeutig, die koreanische Fassung liest sich eher als 'Anleihe gegen 10 Goldbarren eintauschbar', Sportskeeda liest es umgekehrt als Kauf. Bis zur Klärung im Spiel keine Kaufempfehlung daraus ableiten.</span>",
+      "<b>Anleihen-Laden</b> hinzugefügt, in dem sich seltene Gegenstände mit Anleihen kaufen lassen. <span style='color:var(--gdim)'>Kursierende Preislisten (300–800 Goldbarren je Objekt) stammen aus nicht überprüfbaren Forenbeiträgen und stehen bewusst nicht hier.</span>"
+    ]},
+    {cat:"Content",items:[
+      "Herausforderung 'Der lange Arm des Gesetzes' ließ sich nicht abschließen, wenn bereits alle Gesetzlosen abgeliefert waren — behoben",
+      "Fortschritt von 'Schild des unveränderlichen Willens V' und 'Harmonische Hufe VIII' wurde nicht korrekt erfasst — behoben; 'Überwältigender Hieb II' ließ sich nicht abschließen — behoben",
+      "<b>421 questbezogene Wissenseinträge</b>, die bisher nicht in der Wissensliste erschienen, werden dort jetzt angezeigt",
+      "Beim Besiegen von <b>Karanda</b> lässt sich jetzt das Wissen über Harpyien erlangen; bei den <b>Tobenden Stürmen</b> ist das Wissen jetzt garantiert. <span style='color:var(--gdim)'>Ob ein Boss-Rematch die Nachvergabe für bereits besiegte Bosse auslöst, ist offen — keine Quelle bestätigt das.</span>",
+      "<b>Eichhörnchen und ähnliche Tiere lassen sich jetzt häuten</b> (vorher gar nicht möglich, sie waren daher keine Thin-Hide-Quelle)",
+      "Quest 'Schatten über dem Fluss' (Kapitel 2) muss jetzt abgeschlossen sein, um mit 'Wo das Elend herrscht' fortzufahren",
+      "Graf Byron ließ sich in 'Meuchle Graf Byron' nicht töten, wodurch die Quest hängen blieb — behoben",
+      "Item umbenannt: 'Bannerlanze der Vellua-Piraten' → <b>'Bannerlanze des Tanzenden Welses'</b>",
+      "<b>Pilze</b> wurden von Kochzutat zu <b>Alchemiezutat</b> umkategorisiert",
+      "Beitragspunkte konnten 100 überschreiten — behoben; Bomben stapeln jetzt in 10er-Einheiten und sind im Schnellzugriff registrierbar",
+      "Interaktionsanimationen mit Tieren ergänzt und verbessert (Schnabeltier, Waldwiesel, Gürteltier, Stachelschwein, Igel)",
+      "Weitere Behebungen u. a. am Sanktum der Transzendenz, an Marnis Labor, an der Tür der Spitze der Sterne, am Abyss 'Megalithkrone' und an der Quest 'Gesetzloser Markt' (läuft jetzt weiter, wenn ein Einspänner gestohlen wird)"
+    ]},
+    {cat:"Combat/Action",items:[
+      "Wyvern können nicht mehr gleichzeitig angreifen und ausweichen",
+      "'Präzisionsschuss' mit der Schrotflinte verbrauchte ungewöhnlich viele Kugeln — behoben; 'Präzisionsschuss' ist jetzt auch im Laufen mit Fernkampfwaffe einsetzbar",
+      "Verkettungsfähigkeiten nach 'Stechen' mit Schwert, Zweihandschwert oder Dolch gehen leichter von der Hand",
+      "Angriffsmuster von 'Antumbras Schwert' brach trotz erfolgreichem Blitz-Konter nicht ab — behoben",
+      "Zahlreiche Damiane- und Oongka-Korrekturen (Schild-Fähigkeiten, Himmelsschritt, Auge des Taifuns, Gleiten nach Abbruch, Fokus: Abwehr)",
+      "Bomben aus dem Alchemie-Bombenrucksack der Blut-Banditen treffen keine Verbündeten mehr"
+    ]},
+    {cat:"Steuerung",items:[
+      "Spezialausrüstung im Schnellzugriff war nach dem ersten Laden nicht sofort nutzbar — behoben",
+      "Essen von Gerichten auf Reittieren war im Schwierigkeitsgrad 'Schwer' unmöglich — behoben",
+      "Mit einer Keule ließ sich nicht aufsteigen — behoben; unabsichtliches wiederholtes Stoppen beim Rennen korrigiert"
+    ]},
+    {cat:"Graphics",items:[
+      "[PC] <b>AMD FSR SDK 2.3.0</b> implementiert; FSR Upscaling 4.1 wird jetzt auch auf <b>Radeon RX 7000 (RDNA 3)</b> unterstützt; Ray Regeneration auf 1.2.0 aktualisiert",
+      "Flackern an Fensterrahmen und Rändern behoben; entfernte Objekte waren in bestimmten Bereichen unsichtbar — behoben",
+      "<span style='color:var(--gdim)'>Gegenläufige Meldung: gamegpu berichtet, der Patch habe die Bildqualität auf Radeon RX 7000 verschlechtert (Ray Regeneration ohne Wirkung, FSR 4.1 unscharf, fehlende Regentropfen). Pearl Abyss führt Ray-Regeneration- und FSR-4.1-Fehler selbst als bekannte Probleme.</span>"
+    ]},
+    {cat:"Localization",items:[
+      "Lokalisierungsfehler in allen Sprachen behoben und die allgemeine Qualität verbessert"
+    ]},
+    {cat:"Others",items:[
+      "Abstürze behoben beim Verbessern von Gesundheits-/Ausdauer-/Geist-Fähigkeiten, im Kartenmenü, beim Charakterwechsel mit folgendem Begleiter und im Kampf gegen den 'Vergessenen General'",
+      "Nazk-Schwert wurde im Laden zu niedrig verkauft — behoben",
+      "[Oongka/Damiane] Der Silber-Erhöhungseffekt von Abyss-Ausrüstung griff bei Gegenständen wie dem Kupferbeutel nicht — behoben",
+      "Diverse Darstellungsfehler an Waffen, Outfits, Färbungen und Kameraführung korrigiert"
+    ]},
+    {cat:"Known Issues (Stand 02.08.2026)",items:[
+      "Die offizielle Known-Issues-Seite führt 12 Punkte, darunter Fehler an Ray Regeneration und FSR 4.1. <b>Nicht mehr enthalten</b> ist der Camp-Lager-/Wagenladeraum-Fehler — passend dazu behebt ihn Hotfix 1.16.01",
+      "<span style='color:var(--gdim)'>Weiterhin offen und <b>nicht</b> durch 1.16.00 verursacht: der seit April 2026 gemeldete Timer-Fehler beim Bank-Investment (Status bleibt auf 'REFRESHING' stehen). Er besteht auch nach dem Patch fort.</span>"
+    ]},
+    {cat:"Quelle",items:[
+      "Offizielle Pearl-Abyss-Patchnotes 1.16.00 (Notice-Board boardNo 110, Release 01.08.2026 03:30 UTC), hier nach der <b>deutschen Fassung</b> ausgewertet, weil die englische bei den Handelsposten mitten im Satz abbricht; strittige Stellen zusätzlich gegen die koreanische Fassung geprüft. Größe und Änderungszahl von DSOGaming. Konsolen-Build 1.000.423 ist <b>nicht offiziell dokumentiert</b> und stammt aus der Fachpresse (MP1st); die dort genannte Datierung auf den 31.07. ist ein Zeitzonen-Artefakt der US-Redaktion. Sekundärquellen: PC Gamer, GamesRadar, allthings.how, gamegpu, Steam-Guides. 298 Einzelfakten erhoben, 82 davon gegengeprüft; unbelegte Community-Zahlen (Anleihen-Laden-Preise, Wagen-Statwerte, neue Truhen-Fundorte) wurden bewusst nicht übernommen."
+    ]}
+  ]},
   {ver:"1.15.00",date:"24.07.2026",size:"Bugfix-Patch (All Platforms). Steam (PC/Mac), PlayStation, Xbox Series X|S & Epic Games Store sofort; Mac App Store in Arbeit. Release 02:40 UTC (Fach-/Guide-Presse datiert ihn nach lokaler Zeit auf den 23.07.2026). Konsolen-Build 1.000.407. Kein neuer Content außer der Verlegung des 'Mace of Ambition' — sonst reine Fehlerbehebungen",features:[
     {cat:"Content",items:[
       "'Mace of Ambition' verlegt und dadurch regulär erreichbar: Die Einhandwaffe (eingebauter Feuerangriff, vergleichbar Electro-Mecha Spear/Longsword, aber ohne Abyss-Gear-Slot-Kosten; ursprünglich von Inquisitor Bastier geführt) lag bisher in einem unzugänglichen Raum nahe der Spitze der Spire of Clockwork in Demeniss und war nur durch Clipping in die Geometrie erreichbar. Sie befindet sich jetzt einige Stockwerke tiefer im Raum mit der Drehtür (spinning door)",
