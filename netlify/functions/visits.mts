@@ -159,13 +159,21 @@ export default async (req: Request, _context: Context) => {
     ]);
 
     // 3) Pruning (best-effort; Fehler darf die Antwort NICHT kippen).
-    try {
-      await db.execute(sql`
-        DELETE FROM visit_presence
-        WHERE last_seen < now() - (${PRESENCE_TTL})::interval
-      `);
-    } catch {
-      /* prune ist nicht kritisch */
+    //    Laeuft NUR, wenn gerade eine neue sid dazugekommen ist. Die Tabelle
+    //    waechst ausschliesslich durch neue sids — wer nie eine anlegt, muss auch
+    //    nicht aufraeumen. Das koppelt die Putzarbeit ans tatsaechliche Wachstum
+    //    und spart bei Wiederkehrern einen von fuenf Neon-Roundtrips pro Aufruf
+    //    (relevant, weil Neon-Quota und Netlify-Function-Aufrufe gedeckelt sind).
+    //    Die TTL ist ein Tag, ein paar Minuten Verzug schaden also nichts.
+    if (isNewSid) {
+      try {
+        await db.execute(sql`
+          DELETE FROM visit_presence
+          WHERE last_seen < now() - (${PRESENCE_TTL})::interval
+        `);
+      } catch {
+        /* prune ist nicht kritisch */
+      }
     }
 
     // 4) Online = aktive Praesenz der letzten 5 Minuten.
