@@ -23,6 +23,10 @@ span.miss{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px
 font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
 p.warn{font-size:13.5px;color:var(--ink);background:rgba(255,90,68,.09);border-left:3px solid var(--red);
 border-radius:8px;padding:11px 14px;margin:14px 0 0}
+span.tr-when{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
+font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--ink-dim);border:1px solid var(--line);white-space:nowrap}
+p.tr-how{margin:7px 0 0;font-size:13.5px;color:var(--ink-dim);max-width:70ch}
+p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid var(--red);padding-left:9px;max-width:70ch}
 `.trim();
 
 // Der Vollstaendigkeitstest muss exakt das zaehlen, was build() ausgibt.
@@ -37,9 +41,26 @@ export function COUNT_CHECK(ctx) {
 // Reihenfolge der Wertigkeiten, wertvollste zuerst
 const GRADE_ORDER = ["platinum", "gold", "silver", "bronze"];
 
+// Wann eine Trophaee sinnvollerweise angegangen wird. Die Rohwerte stammen aus
+// scripts/seo-content/trophaeen.json und sind bewusst ASCII, damit die Datei
+// unabhaengig von der Zeichenkodierung der Lieferung bleibt.
+const ZEITPUNKT_LABEL = {
+  frueh: "früh im Spiel",
+  mitte: "Spielmitte",
+  spaet: "spät im Spiel",
+  "nach Abspann": "nach dem Abspann",
+};
+
 export function build(ctx) {
   const { TROPHIES, TROPHY_GRADES } = ctx.data;
   const { esc, has, breadcrumbLd, SITE } = ctx.helpers;
+
+  // Freischalt-Anleitungen, nach Trophaeenname indiziert. Fehlt die Datei, bleibt
+  // die Map leer und die Seite rendert exakt wie vorher — kein Build-Abbruch.
+  const roh = (ctx.content && ctx.content.trophaeen) || [];
+  const anleitungen = new Map(
+    (Array.isArray(roh) ? roh : []).filter((a) => a && a.name).map((a) => [a.name, a])
+  );
 
   const missCount = TROPHIES.filter((t) => t.miss).length;
 
@@ -52,10 +73,21 @@ export function build(ctx) {
       ? ` <a href="/#sec-${esc(t.sec)}">Details im Wiki</a>`
       : "";
     const tip = has(t.tip) ? `<br><span class="muted">Tipp: ${esc(t.tip)}</span>` : "";
+
+    // Redaktioneller Zusatz: der konkrete Weg zur Trophaee. Steht bewusst unter
+    // der knappen Bedingung, damit die Tabelle ueberfliegbar bleibt.
+    const a = anleitungen.get(t.name);
+    const when = a && ZEITPUNKT_LABEL[a.zeitpunkt]
+      ? `<span class="tr-when">${esc(ZEITPUNKT_LABEL[a.zeitpunkt])}</span>` : "";
+    const how = a && has(a.anleitung)
+      ? `<p class="tr-how"><strong>So gehst du vor:</strong> ${esc(a.anleitung)}</p>` : "";
+    const acht = a && has(a.achtung)
+      ? `<p class="tr-acht"><strong>Achtung:</strong> ${esc(a.achtung)}</p>` : "";
+
     return `<tr>
 <td class="grade" style="color:${esc(g.col)}">${esc(g.ico)} ${esc(g.lbl)}</td>
-<td><strong>${esc(t.name)}</strong>${missTag}</td>
-<td>${esc(t.desc)}${link}${tip}</td>
+<td><strong>${esc(t.name)}</strong>${missTag}${when}</td>
+<td>${esc(t.desc)}${link}${tip}${how}${acht}</td>
 </tr>`;
   };
 
@@ -96,12 +128,23 @@ ${sections}`;
     ],
   };
 
+  // Titel, Beschreibung und Lead sagen nur dann Anleitungen zu, wenn welche
+  // vorliegen. Fehlt die Inhaltsdatei, beschreibt die Seite sich wieder als
+  // reine Bedingungsliste, statt etwas zu versprechen, was nicht da steht.
+  const nHow = TROPHIES.filter((t) => anleitungen.has(t.name)).length;
+  const desc = nHow
+    ? `Alle ${TROPHIES.length} Trophäen in Crimson Desert mit Freischaltbedingung, Anleitung und empfohlenem Zeitpunkt, sortiert nach Wertung, samt Warnung vor den ${missCount} verpassbaren.`
+    : `Alle ${TROPHIES.length} Trophäen in Crimson Desert nach Platin, Gold, Silber und Bronze sortiert, jeweils mit Freischaltbedingung und Warnung vor den ${missCount} verpassbaren Erfolgen.`;
+  const leadHow = nHow === TROPHIES.length
+    ? " Zu jeder Trophäe steht eine konkrete Anleitung samt empfohlenem Zeitpunkt."
+    : nHow ? ` Zu ${nHow} davon steht eine konkrete Anleitung samt empfohlenem Zeitpunkt.` : "";
+
   return {
     slugName: SLUG,
     title: `Alle ${TROPHIES.length} Trophäen in Crimson Desert & Platin-Guide`,
-    desc: `Alle ${TROPHIES.length} Trophäen in Crimson Desert nach Platin, Gold, Silber und Bronze sortiert, jeweils mit Freischaltbedingung und Warnung vor den ${missCount} verpassbaren Erfolgen.`,
+    desc,
     h1: `Alle ${TROPHIES.length} Trophäen in Crimson Desert`,
-    lead: `Diese Übersicht listet alle <strong>${TROPHIES.length} Trophäen</strong> von Crimson Desert, sortiert nach Wertung, jeweils mit der genauen Freischaltbedingung. <strong>${missCount} davon sind verpassbar</strong> und sollten früh eingeplant werden.`,
+    lead: `Diese Übersicht listet alle <strong>${TROPHIES.length} Trophäen</strong> von Crimson Desert, sortiert nach Wertung, jeweils mit der genauen Freischaltbedingung.${leadHow} <strong>${missCount} davon sind verpassbar</strong> und sollten früh eingeplant werden.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Trophäen",
     bodyHtml: body,

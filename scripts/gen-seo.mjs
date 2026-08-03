@@ -142,6 +142,9 @@ function ladeInhalt(datei) {
 }
 const SEO_INTROS = ladeInhalt("intros.json");
 const SEO_FAQ = ladeInhalt("faq.json");
+// Freischalt-Anleitungen je Trophaee. Anders als intros/faq ein Array, weil es
+// pro Datensatz und nicht pro Seite gilt; das Modul indiziert selbst nach Namen.
+const SEO_TROPHAEEN = ladeInhalt("trophaeen.json");
 
 // Eine Antwort "unbekannt" ist eine ehrliche Nicht-Antwort der Recherche, aber auf
 // der Seite wertlos und ein schlechtes Signal. Solche Paare fliegen raus.
@@ -692,6 +695,10 @@ const CTX = {
     ARMOR, ARMOR_IMGS, CRAFTING, TROPHIES, TROPHY_GRADES,
     ENEMIES, ENEMY_IMGS, SIDE_QUESTS,
   },
+  // Redaktionelle Zusatztexte aus scripts/seo-content/. Bewusst getrennt von
+  // "data": das hier ist kein Wiki-Datenbestand, sondern Seitentext. Fehlt eine
+  // Datei, liefert ladeInhalt() {} und das Modul rendert den Teil einfach nicht.
+  content: { trophaeen: SEO_TROPHAEEN },
   helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN },
 };
 
