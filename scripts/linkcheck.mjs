@@ -28,6 +28,43 @@ for (const m of html.matchAll(/const ([A-Z_]+_IMGS(?:_CDN)?)\s*=\s*(\{[\s\S]*?\}
     }
   }
 }
+// --- Inline-Icons aus Daten-Arrays -------------------------------------------------
+// PETS, CRAFTING und WITCH_SYNTHESIS tragen ihre Bilder NICHT in einer *_IMGS-Map,
+// sondern als blosser Dateiname im Feld `icon`; die volle URL entsteht erst zur
+// Laufzeit als PRAEFIX + icon (index.html: PET_CDN/CRAFT_CDN/SYNTH_CDN). Die Regex
+// oben sieht davon nichts, wodurch mehrere hundert Bilder ungeprueft blieben.
+function constStr(name) {
+  const m = html.match(new RegExp('const ' + name + "\\s*=\\s*['\"]([^'\"]+)['\"]"));
+  return m ? m[1] : null;
+}
+// Array-Rumpf ab "const NAME=[" bis zur abschliessenden Zeile "];". Bewusst kein
+// Klammer-Zaehlen: die Daten enthalten eckige Klammern in Fliesstexten (z.B. "[Patch 1.10]"),
+// waehrend "];" am Zeilenanfang eindeutig das Array-Ende markiert.
+function arrayBlock(name) {
+  const m = html.match(new RegExp('const ' + name + '\\s*=\\s*\\['));
+  if (!m) return null;
+  const start = m.index + m[0].length;
+  const end = html.indexOf('\n];', start);
+  return end === -1 ? null : html.slice(start, end);
+}
+for (const [arr, prefixName] of [['PETS', 'PET_CDN'], ['CRAFTING', 'CRAFT_CDN'], ['WITCH_SYNTHESIS', 'SYNTH_CDN']]) {
+  const prefix = constStr(prefixName);
+  const block = arrayBlock(arr);
+  if (!prefix) { console.error('WARN: Praefix', prefixName, 'nicht gefunden — ' + arr + '-Icons ungeprueft'); continue; }
+  if (!block) { console.error('WARN: Array', arr, 'nicht abgrenzbar — Icons ungeprueft'); continue; }
+  let n = 0;
+  for (const im of block.matchAll(/\bicon:\s*"([^"]+)"/g)) {
+    const raw = im[1];
+    // gleiche Aufloesung wie im Renderer: absolute bzw. lokale Pfade bleiben unveraendert
+    const url = /^(https?:|cd_assets\/)/.test(raw) ? raw : prefix + raw;
+    if (!/^https?:\/\//.test(url)) continue;
+    if (!urls.has(url)) urls.set(url, []);
+    urls.get(url).push(arr + ':' + raw.slice(0, 48));
+    n++;
+  }
+  console.log('  ' + arr + '-Icons aufgeloest:', n, '(Praefix ' + prefixName + ')');
+}
+
 console.log('Externe Bild-URLs:', urls.size);
 
 const broken = [];

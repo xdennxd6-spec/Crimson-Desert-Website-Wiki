@@ -205,6 +205,24 @@ function dimsFromBuffer(buf) {
       };
     }
   }
+  if (buf.length >= 4 && buf[0] === 0xff && buf[1] === 0xd8) {
+    // JPEG: Segmentkette ab Offset 2 abschreiten bis zum ersten SOFn-Rahmenkopf.
+    // Dort stehen Hoehe/Breite als big-endian ab Offset 5 bzw. 7. Gebraucht wird das
+    // fuer das og:image-Fallbackbild (umbra-final.jpg) - PNG/WebP allein decken es nicht ab.
+    let off = 2;
+    while (off + 9 < buf.length) {
+      if (buf[off] !== 0xff) { off++; continue; }
+      const marker = buf[off + 1];
+      // Standalone-Marker ohne Laengenfeld ueberspringen (Padding, SOI, RSTn)
+      if (marker === 0xff || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd9)) { off += 2; continue; }
+      const len = buf.readUInt16BE(off + 2);
+      if (len < 2) break;
+      // SOF0-SOF15, aber nicht DHT (c4), JPG (c8), DAC (cc) - die tragen keine Bildmasse
+      const isSOF = marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc;
+      if (isSOF) return { w: buf.readUInt16BE(off + 7), h: buf.readUInt16BE(off + 5) };
+      off += 2 + len;
+    }
+  }
   return null;
 }
 function dimsFromLocalFile(relPath) {
@@ -358,7 +376,19 @@ const slug = (s) => String(s).toLowerCase()
 
 function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, jsonld }) {
   const url = `${SITE}/${slugName}`;
-  const og = ogImage ? `${SITE}/${ogImage}` : `${SITE}/cd_assets/bosses/umbra-final.jpg`;
+  const OG_FALLBACK = "cd_assets/bosses/umbra-final.jpg";
+  // Dimensionen je Seite frisch ermitteln - nicht alle Seiten teilen dasselbe og:image
+  // (z.B. seo-parts/ruestungen.mjs nutzt golden-greed-plate.webp).
+  let ogRel = ogImage || OG_FALLBACK;
+  let ogDim = dimsFromLocalFile(ogRel);
+  // twitter:card=summary_large_image braucht mindestens 600x315, sonst zeigen die
+  // Plattformen die Karte klein oder ohne Bild. Zu kleine Motive (z.B. 256x256-Item-Icons)
+  // deshalb auf das grosse Fallbackbild zuruecksetzen statt eine kaputte Vorschau zu erzeugen.
+  if (ogDim && (ogDim.w < 600 || ogDim.h < 315)) {
+    ogRel = OG_FALLBACK;
+    ogDim = dimsFromLocalFile(ogRel);
+  }
+  const og = `${SITE}/${ogRel}`;
   const navLinks = NAV.map(([s, l]) =>
     `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${l}</a>`).join("");
   return `<!DOCTYPE html>
@@ -376,7 +406,10 @@ function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, 
 <meta property="og:url" content="${url}">
 <meta property="og:site_name" content="Crimson Desert Wiki">
 <meta property="og:locale" content="de_DE">
-<meta property="og:image" content="${og}">
+<meta property="og:image" content="${og}">${ogDim ? `
+<meta property="og:image:width" content="${ogDim.w}">
+<meta property="og:image:height" content="${ogDim.h}">` : ""}
+<meta property="og:image:alt" content="${esc(title)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -600,7 +633,7 @@ ${sections}`;
   return pageShell({
     slugName: "true-ending",
     title: `Crimson Desert True Ending: komplette Checkliste (Deutsch)`,
-    desc: `Alle ${TRUE_ENDING.length} Pflichtaufgaben für das True Ending von Crimson Desert: Begleiter-Arcs, alle Sanctums, Hexen-Tokens, Greymane-Commissions und Story-Schritte als abhakbare Checkliste.`,
+    desc: `Alle ${TRUE_ENDING.length} Pflichtaufgaben für das True Ending von Crimson Desert: Begleiter-Arcs, Sanctums, Hexen-Tokens und Greymane-Commissions als abhakbare Checkliste.`,
     h1: "Crimson Desert True Ending: komplette Checkliste",
     lead: `Das <strong>True Ending</strong> (das „wahre Ende") von Crimson Desert schaltest du nur frei, wenn du vor dem Abschluss der Hauptstory bestimmte optionale Aufgaben erfüllst. Diese Checkliste fasst alle <strong>${TRUE_ENDING.length} Pflichtaufgaben</strong> zusammen, sortiert nach Bereich.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
-<title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending</title>
-<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 98 Bosse, 500+ Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
+<title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse &amp; Waffen</title>
+<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 99 Bosse, 500+ Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
 <link rel="canonical" href="https://crimson-desert-wiki.netlify.app/">
 <meta property="og:title" content="Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending">
 <meta property="og:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
@@ -311,6 +311,7 @@ body::before{
 .finder .fi-sym{font-family:var(--f-mono);color:var(--survey-red);font-size:12px;font-weight:700;flex:none}
 .finder .finder-in #si{flex:1;min-width:0;border:0;background:transparent;box-shadow:none;padding:8px 0}
 .finder .finder-in #si:focus{outline:none;box-shadow:none;border:0}
+.finder .finder-in #si:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .finder #scnt{min-width:0;text-align:right;padding-left:6px}
 .finder .kbd-hint{flex:none}
 /* Blattliste des Ressorts */
@@ -480,7 +481,7 @@ body::before{
 .lf-row{margin-bottom:12px}
 .lf-row label{display:block;font-family:var(--f-mono);font-size:9px;color:var(--iron-soft);margin-bottom:5px;letter-spacing:.14em;text-transform:uppercase}
 .lf-row input{width:100%;padding:9px 12px;background:var(--vellum);border:1px solid var(--iron-gall);color:var(--iron-gall);font-size:13px;font-family:var(--f-mono);outline:none;transition:border-color .2s;border-radius:10px}
-.lf-row input:focus{border-color:var(--survey-red)}
+.lf-row input:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 #login-err{font-family:var(--f-mono);font-size:11px;color:var(--survey-red);min-height:16px;margin-bottom:10px;display:none}
 #login-err.show{display:block}
 .lf-tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid var(--line)}
@@ -999,7 +1000,7 @@ input:focus-visible,textarea:focus-visible,
 .boss-notes-btn.has-note{background:var(--instr-soft);border-color:var(--brass);color:var(--brass)}
 .boss-notes-area{margin-top:7px;width:100%;min-height:62px;background:var(--vellum);border:1px solid var(--brass);color:var(--iron-gall);font-size:11.5px;font-family:var(--f-body);padding:8px 10px;resize:vertical;outline:none;line-height:1.5;display:none}
 .boss-notes-area.open{display:block}
-.boss-notes-area:focus{border-color:var(--survey-red)}
+.boss-notes-area:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 
 /* ── Tooltip-System ── */
 #tt-float{position:fixed;z-index:800;pointer-events:none;display:none;max-width:280px;padding:9px 12px;background:var(--iron-gall);border:1px solid var(--brass);color:var(--vellum);font-size:11.5px;line-height:1.55;box-shadow:4px 4px 0 rgba(0,0,0,.35);font-family:var(--f-body);border-radius:8px}
@@ -1187,7 +1188,7 @@ a:visited{color:var(--gold)}
 .sim-d.down{color:var(--survey-red)}
 .rl-tool{margin-bottom:22px}
 .rl-input{width:100%;max-width:520px;padding:10px 14px;background:var(--vellum-hi);border:1px solid var(--brass);color:var(--iron-gall);font-size:14px;font-family:var(--f-mono);outline:none;transition:border-color .2s}
-.rl-input:focus{border-color:var(--survey-red)}
+.rl-input:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 .rl-results{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px;align-items:start}
 .rl-hint{color:var(--iron-soft);font-size:12px;padding:8px 0}
 .rl-group{background:var(--vellum-hi);border:1px solid var(--iron-gall);padding:11px 13px}
@@ -1346,7 +1347,7 @@ a:visited{color:var(--gold)}
 /* Eigene Builds — Saver */
 .bo-save-row{display:flex;gap:8px;margin-top:12px;padding-top:13px;border-top:1px dashed var(--line);flex-wrap:wrap;align-items:center}
 .bo-save-input{flex:1;min-width:160px;background:var(--vellum);border:1px solid var(--iron-gall);padding:7px 11px;color:var(--iron-gall);font-family:var(--f-mono);font-size:11.5px;outline:none}
-.bo-save-input:focus{border-color:var(--survey-red)}
+.bo-save-input:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 .bo-save-btn{padding:7px 14px;background:var(--vellum-hi);border:1.5px solid var(--iron-gall);color:var(--iron-gall);font-family:var(--f-mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:all .15s}
 .bo-save-btn:hover{background:var(--iron-gall);color:var(--vellum)}
 .bo-saved-hd{font-family:var(--f-mono);font-size:10px;font-weight:700;color:var(--brass);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 9px;display:flex;justify-content:space-between;align-items:center}
@@ -1435,7 +1436,7 @@ a:visited{color:var(--gold)}
 .rt-btn.minus:hover{background:var(--survey-red);border-color:var(--survey-red);color:var(--vellum)}
 .rt-input{flex:1;background:var(--vellum);border:1px solid var(--iron-gall);padding:6px 8px;color:var(--iron-gall);font-family:var(--f-mono);font-size:13px;font-weight:700;outline:none;text-align:center;-moz-appearance:textfield;border-radius:8px}
 .rt-input::-webkit-outer-spin-button,.rt-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.rt-input:focus{border-color:var(--survey-red)}
+.rt-input:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 .rt-mini-bar{height:4px;background:var(--vellum-deep);margin-top:9px;overflow:hidden;border:1px solid var(--line)}
 .rt-mini-fill{height:4px;background:var(--survey-red);transition:width .35s ease}
 .rt-card.complete{border-color:var(--brass);background:var(--vellum-hi)}
@@ -1743,7 +1744,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .cmt-empty{font-size:11px;color:var(--iron-soft);padding:16px 0;text-align:center}
 .cmt-form{display:flex;gap:8px;align-items:flex-end}
 .cmt-inp{flex:1;background:var(--vellum);border:1px solid var(--iron-gall);padding:10px 13px;color:var(--iron-gall);font-family:var(--f-body);font-size:12px;resize:vertical;min-height:58px;outline:none;transition:border-color .15s;border-radius:10px}
-.cmt-inp:focus{border-color:var(--survey-red)}
+.cmt-inp:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 .cmt-btn{padding:10px 17px;background:var(--vellum-hi);border:1.5px solid var(--iron-gall);color:var(--iron-gall);font-family:var(--f-mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:all .15s;white-space:nowrap;border-radius:8px}
 .cmt-btn:hover{background:var(--iron-gall);color:var(--vellum)}
 
@@ -2842,16 +2843,16 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
         <div class="fa-hero-hud bl">
           <div class="ln"><span class="fa-hero-livedot"></span><span class="k">Status</span> Erfasst</div>
           <div class="ln"><span class="k">Bedrohung</span> <b>Extrem</b></div>
-          <div class="ln dim">Blatt B2 · <span id="fa-hero-hud-boss">98</span> Bosse kartiert</div>
+          <div class="ln dim">Blatt B2 · <span id="fa-hero-hud-boss">99</span> Bosse kartiert</div>
         </div>
         <span class="fa-hero-corner c-tl"></span><span class="fa-hero-corner c-tr"></span><span class="fa-hero-corner c-bl"></span><span class="fa-hero-corner c-br"></span>
       </div>
       <div class="fa-hero-text">
         <div class="fa-hero-eyebrow">Feldatlas &mdash; kein Reiseführer</div>
-        <h1 class="fa-hero-h">Eine gefährliche Welt, <em>vermessen</em>.</h1>
+        <h2 class="fa-hero-h">Eine gefährliche Welt, <em>vermessen</em>.</h2>
         <p class="fa-hero-lede">Kein Marketing, keine Effekte. Dieser Atlas kartiert Pywel wie ein Vermessungstrupp: jeder Boss ein Datensatz, jede Waffe ein Instrument, jede Quest eine Route. Du suchst schnell Fakten &mdash; und findest sie an ihrer Koordinate.</p>
         <div class="fa-readout" aria-label="Kennzahlen der Vermessung">
-          <div><div class="fa-val" id="fa-val-boss">98</div><div class="fa-cap">Bosse kartiert</div></div>
+          <div><div class="fa-val" id="fa-val-boss">99</div><div class="fa-cap">Bosse kartiert</div></div>
           <div><div class="fa-val">33</div><div class="fa-cap">Blätter</div></div>
           <div><div class="fa-val">09</div><div class="fa-cap">Regionen</div></div>
         </div>
@@ -3081,9 +3082,9 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     </div>
     <div class="region-heatmap" id="region-heatmap" aria-label="Boss-Verteilung pro Region"></div>
     <div class="fbar">
-      <select class="fs" id="bf-reg" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option value="Abyss">The Abyss</option></select>
-      <select class="fs" id="bf-type" onchange="renderBosses()"><option value="">Alle Quest-Typen</option><option value="Story">Story</option><option value="Faction">Faction</option><option value="Side">Side</option><option value="Sanctum">Sanctum</option><option value="World">World-Boss</option><option value="Optional">Optional / Sonstige</option></select>
-      <select class="fs" id="bf-pd" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option></select>
+      <select class="fs" id="bf-reg" aria-label="Bosse nach Region filtern" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option value="Abyss">The Abyss</option></select>
+      <select class="fs" id="bf-type" aria-label="Bosse nach Quest-Typ filtern" onchange="renderBosses()"><option value="">Alle Quest-Typen</option><option value="Story">Story</option><option value="Faction">Faction</option><option value="Side">Side</option><option value="Sanctum">Sanctum</option><option value="World">World-Boss</option><option value="Optional">Optional / Sonstige</option></select>
+      <select class="fs" id="bf-pd" aria-label="Bosse nach Parry oder Dodge filtern" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option></select>
       <select class="fs" id="bf-spoiler" onchange="setSpoilerChapter(this.value)" title="Spoiler-Horizont — blendet Bosse & Kapitel jenseits deines Fortschritts aus" aria-label="Spoiler-Horizont nach Kapitel">
         <option value="0">🔓 Spoiler: alles zeigen</option>
         <option value="1">🔒 Ich bin in Kap. 1</option>
@@ -3114,7 +3115,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <div id="it-dex" class="sub-t" style="scroll-margin-top:72px">Items-Kompendium</div>
     <div style="font-size:11.5px;color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst. Gekochte Gerichte (Food &amp; Elixirs), Roh-Materialien (Gatherables), Dyes, Cores und Ausrüstung haben eigene Tabs. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz". <span style="color:var(--dim);font-size:10px">[Recherche-Audit 2026-06-28, jeder Eintrag mehrquellig verifiziert; ≈ = nur Einzelquelle belegt]</span></div>
     <div class="fbar">
-      <select class="fs" id="itemdex-cat" onchange="renderItemdex()"><option value="">Alle Kategorien</option><option value="Werkzeug — Lampe">Werkzeug — Lampe</option><option value="Werkzeug — Bergbau">Werkzeug — Bergbau</option><option value="Werkzeug — Holzfällen">Werkzeug — Holzfällen</option><option value="Werkzeug — Sammeln">Werkzeug — Sammeln</option><option value="Werkzeug — Erkundung">Werkzeug — Erkundung</option><option value="Werkzeug — Mount">Werkzeug — Mount</option><option value="Munition">Munition</option><option value="Verbrauchsgegenstand — Wurf/Kampf">Verbrauchsgegenstand — Wurf/Kampf</option><option value="Verbrauchsgegenstand — Heilung/Status">Verbrauchsgegenstand — Heilung/Status</option><option value="Währung &amp; Progression">Währung &amp; Progression</option><option value="Schlüssel- &amp; Quest-Item">Schlüssel- &amp; Quest-Item</option><option value="Quest-Dokument &amp; Notiz">Quest-Dokument &amp; Notiz</option></select>
+      <select class="fs" id="itemdex-cat" aria-label="Gegenstaende nach Kategorie filtern" onchange="renderItemdex()"><option value="">Alle Kategorien</option><option value="Werkzeug — Lampe">Werkzeug — Lampe</option><option value="Werkzeug — Bergbau">Werkzeug — Bergbau</option><option value="Werkzeug — Holzfällen">Werkzeug — Holzfällen</option><option value="Werkzeug — Sammeln">Werkzeug — Sammeln</option><option value="Werkzeug — Erkundung">Werkzeug — Erkundung</option><option value="Werkzeug — Mount">Werkzeug — Mount</option><option value="Munition">Munition</option><option value="Verbrauchsgegenstand — Wurf/Kampf">Verbrauchsgegenstand — Wurf/Kampf</option><option value="Verbrauchsgegenstand — Heilung/Status">Verbrauchsgegenstand — Heilung/Status</option><option value="Währung &amp; Progression">Währung &amp; Progression</option><option value="Schlüssel- &amp; Quest-Item">Schlüssel- &amp; Quest-Item</option><option value="Quest-Dokument &amp; Notiz">Quest-Dokument &amp; Notiz</option></select>
       <span id="itemdex-cnt" style="font-size:11px;color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="itemdex-tb"></tbody></table></div>
@@ -3123,8 +3124,9 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
   <section class="sec" id="sec-weapons">
     <h2 class="sec-t"><span class="sec-sym">†</span> Waffen</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Dyes-Sektion).</div>
+<div style="font-size:11.5px;color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Datenlage:</b> Crimson Desert veröffentlicht keine Waffen-Schadenswerte, deshalb gibt es hier bewusst <b>keine DPS- oder Vergleichsformel</b>. Wo ein Wert nicht belegbar war, steht „nicht erfasst“ statt einer geratenen 0 — aktuell bei <b><span id="wep-nocrit">–</span> von <span id="wep-total">–</span></b> Waffen der Krit-Wert, bei <span id="wep-noslots">–</span> die Slot-Zahl und bei <span id="wep-noatk">–</span> weder ATK- noch DEF-Wert (Schilde führen strukturell DEF statt ATK). Die Basis-ATK ist zudem flach und wenig aussagekräftig; in der Praxis zählen Refine-Stufe, Abyss-Cores und Waffentyp mehr als die Grundzahl.</div>
     <div class="fbar">
-      <select class="fs" id="wf-type" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
+      <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen-Compare">⚔️ Compare</button>
     </div>
     <div class="grid" id="weapon-tb"></div>
@@ -3134,7 +3136,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
   <section class="sec" id="sec-armor">
     <h2 class="sec-t"><span class="sec-sym">⛓</span> Rüstungen</h2>
     <div class="fbar">
-      <select class="fs" id="af-type" onchange="renderArmor()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
+      <select class="fs" id="af-type" aria-label="Ruestungen nach Typ filtern" onchange="renderArmor()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
     </div>
     <div class="grid" id="armor-grid"></div>
     <div id="wt-sets" class="sub-t" style="scroll-margin-top:72px">Rüstungs-Sets</div>
@@ -3144,7 +3146,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
   <section class="sec" id="sec-cores">
     <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss Cores</h2>
     <div class="fbar">
-      <select class="fs" id="cf-slot" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Both">Both</option></select>
+      <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Weapon</option><option value="Armor">Armor</option><option value="Both">Both</option></select>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
     <h3 class="sub-t" style="margin-top:24px">🔮 Synthese-Mechanik <span style="font-size:11px;color:var(--dim);font-weight:400">(Regulär vs. Spezial)</span></h3>
@@ -3190,7 +3192,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <h3 class="sub-t" style="margin-top:24px">🧪 Witch-Synthese-Baum <span style="font-size:11px;color:var(--dim);font-weight:400">(questlog-Datamine)</span></h3>
     <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>175 Core-Rezepte</strong> in 93 Familien mit ihren Synthese-Rezepten und Materialkosten (Nicht-Core-Craftables wie die Sigil-Mount-Amulette sind separat darunter gelistet). Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong> — 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst". Datenbasis: dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear).</div>
     <div class="fbar">
-      <select class="fs" id="sf-tier" onchange="renderSynthesis()"><option value="">Alle Stufen</option><option value="1">Stufe I</option><option value="2">Stufe II</option><option value="3">Stufe III</option><option value="0">Basis / Sonstige</option></select>
+      <select class="fs" id="sf-tier" aria-label="Synthese nach Stufe filtern" onchange="renderSynthesis()"><option value="">Alle Stufen</option><option value="1">Stufe I</option><option value="2">Stufe II</option><option value="3">Stufe III</option><option value="0">Basis / Sonstige</option></select>
       <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--dim);cursor:pointer"><input type="checkbox" id="sf-eff" onchange="renderSynthesis()"> nur mit bekanntem Effekt</label>
       <span id="synth-count" style="font-size:11px;color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
@@ -3223,8 +3225,8 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
       </div>
     </details>
     <div class="fbar">
-      <select class="fs" id="kf-cat" onchange="renderCrafting()"><option value="">Alle Kategorien</option><option value="Food">🍲 Food (Kochen)</option><option value="Elixir">⚗️ Elixiere &amp; Tränke</option><option value="Kuku-Gadget">🔧 Kuku-Gadgets</option><option value="" disabled>──&nbsp;nach Station&nbsp;──</option><option value="Wild Pot">Wild Pot</option><option value="Kochtopf">Kochtopf (Pot)</option><option value="Bratpfanne">Bratpfanne (Frying Pan)</option><option value="Spezial-Kochtopf">Spezial-Kochtopf (Plate)</option></select>
-      <select class="fs" id="kf-fx" onchange="renderCrafting()"><option value="">Alle Effekte</option><option value="Heilung">❤️ Heilung (HP)</option><option value="Eis-Res">❄️ Eis-Resistenz</option><option value="Feuer-Res">🔥 Feuer-Resistenz</option><option value="Blitz-Res">⚡ Blitz-Resistenz</option><option value="Buff">✨ Buff (Angriff/Spirit/Stamina)</option></select>
+      <select class="fs" id="kf-cat" aria-label="Rezepte nach Kategorie filtern" onchange="renderCrafting()"><option value="">Alle Kategorien</option><option value="Food">🍲 Food (Kochen)</option><option value="Elixir">⚗️ Elixiere &amp; Tränke</option><option value="Kuku-Gadget">🔧 Kuku-Gadgets</option><option value="" disabled>──&nbsp;nach Station&nbsp;──</option><option value="Wild Pot">Wild Pot</option><option value="Kochtopf">Kochtopf (Pot)</option><option value="Bratpfanne">Bratpfanne (Frying Pan)</option><option value="Spezial-Kochtopf">Spezial-Kochtopf (Plate)</option></select>
+      <select class="fs" id="kf-fx" aria-label="Rezepte nach Effekt filtern" onchange="renderCrafting()"><option value="">Alle Effekte</option><option value="Heilung">❤️ Heilung (HP)</option><option value="Eis-Res">❄️ Eis-Resistenz</option><option value="Feuer-Res">🔥 Feuer-Resistenz</option><option value="Blitz-Res">⚡ Blitz-Resistenz</option><option value="Buff">✨ Buff (Angriff/Spirit/Stamina)</option></select>
       <select class="fs" id="kf-tier" onchange="renderCrafting()" aria-label="Koch-Stufen-Darstellung"><option value="group">🧬 Koch-Stufen gebündelt</option><option value="all">Koch-Stufen einzeln</option><option value="basis">nur Basis-Stufe</option></select>
       <span id="craft-count" style="font-size:11px;color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
@@ -3245,7 +3247,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
       <div id="te-list"></div>
     </div>
     <div class="pane" id="qp-mq">
-      <div class="spl-bar">🔒 Story-Spoiler ab Kapitel <select class="fs" id="mq-spoiler" onchange="setSpoilerChapter(this.value)" style="margin:0 4px"><option value="0">aus (alles sichtbar)</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> ausblenden</div>
+      <div class="spl-bar">🔒 Story-Spoiler ab Kapitel <select class="fs" id="mq-spoiler" aria-label="Spoiler-Horizont nach Kapitel setzen" onchange="setSpoilerChapter(this.value)" style="margin:0 4px"><option value="0">aus (alles sichtbar)</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> ausblenden</div>
       <div id="mq-list"></div>
     </div>
     <div class="pane" id="qp-fac"><div id="fac-list"></div></div>
@@ -3272,8 +3274,8 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <h2 class="sec-t"><span class="sec-sym">⌂</span> Locations</h2>
     <div id="lo-toc"></div>
     <div id="lo-locs" class="fbar" style="scroll-margin-top:72px">
-      <select class="fs" id="lf-reg" onchange="renderLocs()"><option value="">Alle Regionen</option><option value="Hernand">Hernand</option><option value="Pailune">Pailune</option><option value="Demeniss">Demeniss</option><option value="Delesyia">Delesyia</option><option value="Crimson Desert">Crimson Desert</option><option value="The Abyss">The Abyss</option></select>
-      <select class="fs" id="lf-type" onchange="renderLocs()"><option value="">Alle Typen</option><option value="Alchemy">Alchemy Station</option><option value="Dungeon">Dungeon / Farm</option><option value="Stadt">Stadt</option><option value="Unique Weapon">Unique Weapon</option><option value="Boss">Boss</option><option value="Sanctum">Sanctum</option><option value="Camp">Camp</option><option value="Crafting">Crafting Station</option><option value="Witch">Witch</option><option value="Faction">Faction</option></select>
+      <select class="fs" id="lf-reg" aria-label="Fundorte nach Region filtern" onchange="renderLocs()"><option value="">Alle Regionen</option><option value="Hernand">Hernand</option><option value="Pailune">Pailune</option><option value="Demeniss">Demeniss</option><option value="Delesyia">Delesyia</option><option value="Crimson Desert">Crimson Desert</option><option value="The Abyss">The Abyss</option></select>
+      <select class="fs" id="lf-type" aria-label="Fundorte nach Typ filtern" onchange="renderLocs()"><option value="">Alle Typen</option><option value="Alchemy">Alchemy Station</option><option value="Dungeon">Dungeon / Farm</option><option value="Stadt">Stadt</option><option value="Unique Weapon">Unique Weapon</option><option value="Boss">Boss</option><option value="Sanctum">Sanctum</option><option value="Camp">Camp</option><option value="Crafting">Crafting Station</option><option value="Witch">Witch</option><option value="Faction">Faction</option></select>
     </div>
     <div class="grid" id="loc-grid"></div>
     <div id="lo-bells" class="sub-t" style="scroll-margin-top:72px">🔔 Bell Towers</div>
@@ -3678,7 +3680,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
   <section class="sec" id="sec-accessories">
     <h2 class="sec-t"><span class="sec-sym">❖</span> Accessoires &amp; Schmuck</h2>
     <div class="fbar">
-      <select class="fs" id="accf-type" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option></select>
+      <select class="fs" id="accf-type" aria-label="Accessoires nach Typ filtern" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option></select>
     </div>
     <div class="grid" id="acc-grid"></div>
   </section>
@@ -3709,7 +3711,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:11.5px;color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30</span> Unique Pets</div>
     </div>
     <div class="fbar">
-      <select class="fs" id="cof-miss" onchange="renderCollectibles()"><option value="">Alle Sammelobjekte</option><option value="1">Nur Missable</option><option value="0">Nicht Missable</option></select>
+      <select class="fs" id="cof-miss" aria-label="Sammelobjekte nach Verpassbarkeit filtern" onchange="renderCollectibles()"><option value="">Alle Sammelobjekte</option><option value="1">Nur Missable</option><option value="0">Nicht Missable</option></select>
       <span id="cof-cnt" style="font-size:11px;color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="col-tb"></tbody></table></div>
@@ -3724,7 +3726,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     </div>
     <div style="font-size:11.5px;color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Siehe Alchemie-/Crafting-Sektion für Catalyst-Rezepte und die Stat-Upgrade-Sektion (Spirit, Stamina) für Turn-in-Materialien.</div>
     <div class="fbar">
-      <select class="fs" id="gatherables-cat" onchange="renderGatherables()"><option value="">Alle Kategorien</option><option value="Erz / Mineral">Erz / Mineral</option><option value="Edelstein">Edelstein</option><option value="Kraut">Kraut</option><option value="Kraut (giftig)">Kraut (giftig)</option><option value="Pilz">Pilz</option><option value="Spezialmaterial">Spezialmaterial</option><option value="Crafting-Material">Crafting-Material</option></select>
+      <select class="fs" id="gatherables-cat" aria-label="Sammelressourcen nach Kategorie filtern" onchange="renderGatherables()"><option value="">Alle Kategorien</option><option value="Erz / Mineral">Erz / Mineral</option><option value="Edelstein">Edelstein</option><option value="Kraut">Kraut</option><option value="Kraut (giftig)">Kraut (giftig)</option><option value="Pilz">Pilz</option><option value="Spezialmaterial">Spezialmaterial</option><option value="Crafting-Material">Crafting-Material</option></select>
       <span id="gatherables-cnt" style="font-size:11px;color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="gatherables-tb"></tbody></table></div>
@@ -3739,7 +3741,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     </div>
     <div style="font-size:11.5px;color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Generische Ancient-Ruins-Rätsel (Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light) sind hier NICHT gelistet - sie stehen einzeln in der Sektion &quot;Uralte Ruinen — Abyss-Grenzsteine&quot; (alle 37 Ruinen).</div>
     <div class="fbar">
-      <select class="fs" id="puzzles-cat" onchange="renderPuzzles()"><option value="">Alle Kategorien</option><option value="Strongbox">Strongbox</option><option value="Story / Abyss">Story / Abyss</option><option value="Story (Kapitel)">Story (Kapitel)</option><option value="Faction-Quest">Faction-Quest</option></select>
+      <select class="fs" id="puzzles-cat" aria-label="Raetsel nach Kategorie filtern" onchange="renderPuzzles()"><option value="">Alle Kategorien</option><option value="Strongbox">Strongbox</option><option value="Story / Abyss">Story / Abyss</option><option value="Story (Kapitel)">Story (Kapitel)</option><option value="Faction-Quest">Faction-Quest</option></select>
       <span id="puzzles-cnt" style="font-size:11px;color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="puzzles-tb"></tbody></table></div>
@@ -3755,7 +3757,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     </div>
     <div style="font-size:11.5px;color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Alle 10 Dyehouses zu finden zählt für Challenge: Trade 2 – Rainbow Mane. Nach genügend <span class="xref" onclick="showSec('camp')">Greymane-Camp-Ausbau</span> verkauft ein Camp-Dyer (Oliver, über die Reihe <em>Solid Foundation</em>) alle bereits entdeckten Dyehouse-Farben.</div>
     <div class="fbar">
-      <select class="fs" id="dyes-cat" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Special (non-craftable)</option></select>
+      <select class="fs" id="dyes-cat" aria-label="Faerbemittel nach Kategorie filtern" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Special (non-craftable)</option></select>
       <span id="dyes-cnt" style="font-size:11px;color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th class="dye-th"></th><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="dyes-tb"></tbody></table></div>
@@ -3771,7 +3773,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     </div>
     <div style="font-size:11.5px;color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Reagenzien wie Crimson Root, Adrenaline Gland und Palmar-Materialien siehe Gathering/Materials; Greymane-Labor und Cauldron-Standorte siehe Crafting Stations.</div>
     <div class="fbar">
-      <select class="fs" id="food-cat" onchange="renderFood()"><option value="">Alle Kategorien</option><option value="Food — Ice Resistance">Food — Ice Resistance</option><option value="Food — Fire Resistance">Food — Fire Resistance</option><option value="Elixir — Angriff/Tempo">Elixir — Angriff/Tempo</option><option value="Elixir — Verteidigung">Elixir — Verteidigung</option><option value="Elixir — Spirit/Stamina">Elixir — Spirit/Stamina</option><option value="Elixir — Wiederbelebung">Elixir — Wiederbelebung</option></select>
+      <select class="fs" id="food-cat" aria-label="Speisen nach Kategorie filtern" onchange="renderFood()"><option value="">Alle Kategorien</option><option value="Food — Ice Resistance">Food — Ice Resistance</option><option value="Food — Fire Resistance">Food — Fire Resistance</option><option value="Elixir — Angriff/Tempo">Elixir — Angriff/Tempo</option><option value="Elixir — Verteidigung">Elixir — Verteidigung</option><option value="Elixir — Spirit/Stamina">Elixir — Spirit/Stamina</option><option value="Elixir — Wiederbelebung">Elixir — Wiederbelebung</option></select>
       <span id="food-cnt" style="font-size:11px;color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="food-tb"></tbody></table></div>
@@ -3877,7 +3879,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
 
   <section class="sec" id="sec-patches">
     <h2 class="sec-t"><span class="sec-sym">✎</span> Patch-Notes</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Hotfix 1.16.01</span> (02.08.2026) auf dem großen <span style="color:var(--gold);font-weight:600">Handels-Update 1.16.00</span> (01.08.2026) — 133 neue Handelsposten, vervierfachte Preise an Königlichen Handelsposten, 7 regionale Wagenwerkstätten und ein Anleihen-System bei der Bank. Davor Bugfix-Patch 1.15.00 am 24.07.2026 und Cross-Save-Update 1.14.00 am 16.07.2026.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Aktuell: <span style="color:var(--gold);font-weight:600">Hotfix 1.16.02</span> (03.08.2026), davor <span style="color:var(--gold);font-weight:600">Hotfix 1.16.01</span> (02.08.2026) — beide auf dem großen <span style="color:var(--gold);font-weight:600">Handels-Update 1.16.00</span> (01.08.2026) — 133 neue Handelsposten, vervierfachte Preise an Königlichen Handelsposten, 7 regionale Wagenwerkstätten und ein Anleihen-System bei der Bank. Davor Bugfix-Patch 1.15.00 am 24.07.2026 und Cross-Save-Update 1.14.00 am 16.07.2026.</div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Ausblick: Dev-Update Juni–September 2026</div>
       <div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev Update, 02.06.2026). Schrittweiser Rollout Juni–September 2026 — noch keine versionierten Patch-Notes, Inhalte können sich bis Release ändern.</div>
@@ -4014,24 +4016,25 @@ const BOSSES=[
   {name:"Hexe Marie",chapter:9,region:"Demeniss - Hexe Sanctuary",quest:"Black Witch",drop_weapon:"Crow Whisperer",drop_abyss_gear:"–",weakness:"Feuer (Barrier-Phase)",parry_or_dodge:"Parry Melee; Dodge Crow Barrage",strategy:"Vor-Quest: 4 Totems S→N. Crow Barrage: senkrecht zu ihr rollen. Adds: Urn Swordsman first. [Hidden Lore: Hexe Marie ist der korrumpierte/fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff. Siehe Secrets-Section.]"},
   {name:"Golden Star",chapter:11,region:"Delesyia - Marni's Masterium",quest:"Master of a Forgotten Land",drop_weapon:"Power Core (Story)",drop_abyss_gear:"–",weakness:"Blitz P2 (3x Schaden)",parry_or_dodge:"Dodge alles",strategy:"P1: Marni-Spear-Pylons → L2+R2 → Stagger-Bar. Golem Adds sofort killen. P2: auf Blackstar, Force Palm aufs Auge."},
   {name:"Black Fang",chapter:null,region:"Hernand - Forest of Wolves (N The Sage's Peak)",quest:"Legendary Wolf",drop_weapon:"–",drop_abyss_gear:"Shadow Claw (+ Key Item: Leebur's Soul, deckt alle Legendary-Animal-Standorte auf)",weakness:"–",parry_or_dodge:"Dodge Lunges/Shadow Claw (wegrollen, dann auf ihn zurollen)",strategy:"Wolf-Adds mit Meteor Kick wegraeumen, dann Nature's Grasp auf die Arena-Baeume ausloesen (1 Baum-Treffer = >50% HP; Baeume per Force Palm faellen oder Lunges hineinlocken). Black Fang teleportiert + slasht — Lunges/Shadow-Claw dodgen. Reward: Leebur's Soul; das Silver-Fang-Mount kommt SEPARAT (eigenes Tier Silver Fang am Howling Hollow erlegen + haeuten = Fang of Silver Fang → bei Witch zum Sigil craften). Die Blitz-Schwaeche gehoert zum getrennten Silver-Fang-Tier, nicht zu Black Fang."},
-  {name:"Beloth the Darksworn",chapter:null,region:"Hernand - Hoenmark Ruins (Nord)",quest:"Faction - White Blizzard (House Lanford; Cursed Mountain / Wraith in the Frost)",drop_weapon:"Plate Armor of the Shadows",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge fast alles",strategy:"~3-Hit-Killer (Eis-Thema). FROSTCURSED ICE-RESISTENZ-SET stark empfohlen. Geduld, kein Tank-and-Spank."},
+  {name:"Beloth the Darksworn",chapter:null,region:"Hernand - Hoenmark Ruins (Nord)",quest:"Faction - White Blizzard (House Lanford; Cursed Mountain / Wraith in the Frost)",drop_weapon:"Plate Helm of the Shadows (Rüstungsteil, keine Waffe)",drop_abyss_gear:"–",weakness:"Feuer",parry_or_dodge:"Dodge fast alles",strategy:"~3-Hit-Killer (Eis-Thema). Defensiv: FROSTCURSED ICE-RESISTENZ-SET stark empfohlen. Offensiv: Beloth ist anfällig für FEUER — Feuerwaffen ziehen ihm zusätzlich Schaden über Zeit ab (game8, Deltia's Gaming, PC Gamer, GameRant übereinstimmend). Geduld, kein Tank-and-Spank. Hinweis: Er droppt nur den HELM des Shadows-Sets — die übrigen Teile liegen verstreut in Truhen und Höhlen, siehe Rüstungs-Sektion."},
   {name:"Corrupted Caliburn",recur:"Korrumpierte Form von Gabriel Caliburn · Finale-Gauntlet 1/3 (Kap. 12)",chapter:12,region:"The Abyss",quest:"A Shadow in the Void",drop_weapon:"Twisted Verdict",drop_abyss_gear:"Abyssal Rays",weakness:"–",parry_or_dodge:"Parry Sword-Strings; Dodge Teleport-Smash",strategy:"SAVE VOR DEM GATE! Stillstand → hinter dodgen, 4 Heavy + Light bis Shadow-Wave → durchdodgen. [Hidden Lore: Caliburn ist eine Inkarnation von Umbra — siehe Run-108-Auflösung in Secrets-Section.]"},
   {name:"Avatar of Umbra",recur:"Finale-Gauntlet 2/3 — der besessene Myurdin (Bodenkampf, Quest 'Blinding Darkness')",chapter:12,region:"The Abyss",quest:"Blinding Darkness",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge rote Attacks",strategy:"Kombiniert alle Boss-Moves. Fire-Fist DoT + Ancestral Warriors. Maximum aggro + Healing."},
   {name:"Umbra (Final)",recur:"Finale-Gauntlet 3/3 — wahre Form (Drachenkampf, Quest 'Blinding Darkness')",chapter:12,region:"The Abyss",quest:"Blinding Darkness",drop_weapon:"Falling Palm Skill + 99.999 ATK Waffe",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge Lasers/Rocks",strategy:"Auf Blackstar. R1 Fireballs aufs Auge → Stagger → Dismount → Glide → Air-Dash → Force Palm aufs Auge (2-3x)."},
   {name:"Kearush the Slayer",chapter:5,region:"Hernand Highlands",quest:"Story",drop_weapon:"Abyss Artefakte",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"KEIN Parry/Block — Dodge alles",strategy:"Gorilla. Forward-right dodge → 3 schnelle Hits → disengage. Min: HP Lv4, Sta Lv4, Refine 4 Plate."},
   {name:"White Horn",recur:"Natürliche Version (Pailune-Yeti, mehrphasig) — auch als Clockwork White Horn",chapter:null,region:"Pailune",quest:"Side",drop_weapon:"–",drop_abyss_gear:"–",weakness:"Feuer (Pflicht!)",parry_or_dodge:"Dodge Ice-Breath (horizontal)",strategy:"Brazier in Arena entzünden. Fire-Element zwingend. Phase 2 Ice-Breath horizontal dodgen."},
   {name:"Priscus the Ancient",chapter:null,region:"Pailune - Spire of Ringing Truth",quest:"Faction",drop_weapon:"–",drop_abyss_gear:"Ancient Retribution",weakness:"–",parry_or_dodge:"Nature's Snare fuer Projektile",strategy:"Bow + Nature's Snare → Projektile zurückwerfen. Reward: Path of Trials (Frost Mantle Skill). Misc/Key-Item-Drop: Blessing of the Immortal (Consumable, ~10s Schadensimmunitaet — keine Waffe)."},
+  {name:"Karanda",recur:"Legendäre Harpyien-Königin — Luftkampf über dem Nest",chapter:null,region:"Pailune - Harpy Nest (Berggipfel im Zentrum Pailunes)",quest:"Faction — Pailune-Miliz 'Nest of White Feathers' → 'Queen of the Skies' (schaltet nach 'Crossroads of Succession' frei)",drop_weapon:"–",drop_abyss_gear:"Pillar of Wind + Infinite Arrows II",weakness:"–",parry_or_dodge:"Dodge alles (KEIN Parry) — Nature's Snare gegen Projektile",strategy:"Fliegender Boss: kreist meist außerhalb der Nahkampfreichweite über der Gipfelplattform. Nature's Snare (L3+R3, rechter Stick im Uhrzeigersinn) absorbiert die Projektile, R3 schickt sie zurück; alternativ Focused Shot (Marksmanship Lv.2) auf das fliegende Ziel. Ihre Schneeklingen zweimal dodgen — beim Werfen UND beim Zurückziehen. Stagger aufbauen, bis sie landet, dann Turning Slash. Die kleineren Harpyien ignorieren. Mitbringen: Palmar Pills + Heilnahrung. Drop 'Eye of the Sky' schaltet das komplette Pailune-Regionswissen frei."},
   {name:"Antumbra's Sword",chapter:null,region:"Sanctum of Absolution",quest:"Sanctum",drop_weapon:"Vessel of Dark Pursuit",drop_abyss_gear:"Wound of Darkness",weakness:"–",parry_or_dodge:"Dodge Illusionen",strategy:"Enger Raum, Illusionen → Blinding Flash Spam."},
   {name:"One-Armed Ludvig",recur:"Spätere, SEPARATE 2. Ludvig-Begegnung (spätes Kap. 7, als Oongka)",chapter:7,region:"Pailune - Kingshield Mountain",quest:"Story - Time to Face Justice (Twisted Fate, als Oongka)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry & Dodge",strategy:"Tritt direkt nach dem Lava-Myurdin-Fight auf. Humanoider Nahkampf-Boss — Combos mit einem Arm. Vorsicht nach dem langen Myurdin-Gauntlet: Ressourcen einteilen! (Regions-Hinweis: Kingshield Mountain — game8 verortet den Kampf in Pailune/Kap. 7, Fextralife & GameRant unter Demeniss; Quellenkonflikt, hier Pailune wegen Kap.-7-Zugehörigkeit direkt nach Lava Myurdin.)"},
   {name:"Lucian Bastier",recur:"Phase 1 von 2 desselben Kampfes (als Damiane)",chapter:8,region:"Demeniss - Spire of Clockwork",quest:"Story - A Fleeting Dream (Damiane-Solo)",drop_weapon:"–",drop_abyss_gear:"Flames of Judgment",weakness:"–",parry_or_dodge:"Dodge",strategy:"Damiane kämpft diesen Boss allein (Kliff nicht steuerbar). Nutze Damianes eigene Skills. Story-kritischer Fight in Demeniss (Quest 'A Fleeting Dream')."},
   {name:"Gregor the Halberd of Carnage",chapter:8,region:"Hernand - Fort Ironclad",quest:"Where The Wind Guides You",drop_weapon:"Golden Vanguard",drop_abyss_gear:"Abyss Artifact",weakness:"–",parry_or_dodge:"Dodge (Impaling Spear unblockbar)",strategy:"Vor Kampf: Pfeilfallen in der Halle zerstoeren. Langsame Drehrate ausnutzen — Backstab-Konter. Force Palm maxen → 3er-Combo → Stagger. Defensive Spielweise, Distanz halten."},
   {name:"Walter Lanford",chapter:null,region:"Hernand - Fort Warspike",quest:"Name Written in Blood",drop_weapon:"Dane Shotgun",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (kein Block)",strategy:"Hochmobiler Pistolenschuetze. Run-and-Hit-Ansatz. 'Poof'-Escape: zum Landepunkt dashen → Heavy Attack. Double Barrel Barrage: volle Distanz, sofort dodgen. Drops: Dane Shotgun + Rhonda Leather Boots + Golden Piggy Bank."},
-  {name:"Master Du",chapter:null,region:"Crimson Desert - Cloister of Enlightenment",quest:"The Sage of the Desert",drop_weapon:"Master Du's Circlet",drop_abyss_gear:"Karmic Pulse",weakness:"–",parry_or_dodge:"Dodge (Green Ray: bis 3x konsekutiv)",strategy:"2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown fuer Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen)."},
-  {name:"Fortain the Cursed Knight",chapter:null,region:"Demeniss - Thornbriar Fortress",quest:"The Cursed Knight",drop_weapon:"Shackle of Might",drop_abyss_gear:"Abyss Artifact",weakness:"–",parry_or_dodge:"Dodge (Specter-Angriffe)",strategy:"Schwere Ruestung reduziert eigenen Schaden stark. Defensiv spielen. Seelen-Doppelgaenger-Angriffe konsequent ausweichen. Recovery Items und Gear-Verbesserung am Amboss/Schleifstein vor dem Kampf. Lore: Verriet Lord Wells, wurde von der Schwarzen Hexe korrumpiert."},
+  {name:"Master Du",chapter:9,region:"Crimson Desert - Cloister of Enlightenment",quest:"The Sage of the Desert",drop_weapon:"Master Du's Circlet",drop_abyss_gear:"Karmic Pulse",weakness:"–",parry_or_dodge:"Dodge (Green Ray: bis 3x konsekutiv)",strategy:"2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown fuer Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen)."},
+  {name:"Fortain the Cursed Knight",chapter:8,region:"Demeniss - Thornbriar Fortress",quest:"The Cursed Knight",drop_weapon:"Shackle of Might",drop_abyss_gear:"Abyss Artifact",weakness:"–",parry_or_dodge:"Dodge (Specter-Angriffe)",strategy:"Schwere Ruestung reduziert eigenen Schaden stark. Defensiv spielen. Seelen-Doppelgaenger-Angriffe konsequent ausweichen. Recovery Items und Gear-Verbesserung am Amboss/Schleifstein vor dem Kampf. Lore: Verriet Lord Wells, wurde von der Schwarzen Hexe korrumpiert."},
   {name:"Awakened Ludvig",recur:"Phase 2 der 1. Ludvig-Begegnung (Pailune Castle, Quest 'Lonely Jackals')",chapter:7,region:"Pailune - Pailune Castle",quest:"Lonely Jackals (Phase 2)",drop_weapon:"Hungering Fang Leather Cloak",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge alles (unblockbar, kein Knockdown)",strategy:"Phase 2 nach dem normalen Ludvig-Kampf. Kann nicht gestaggert/knockt werden, bewegt sich extrem schnell, alle Hits unblockbar. Nur Dodge-Rolls + Recovery Items. Niederlage = gesamter Ludvig-Fight neu. Post-Fight: Ludvig fluechtet einarmig (One Armed Ludvig). Drops: Hungering Fang Leather Cloak + Boots."},
   {name:"Awakened Lucian Bastier",recur:"Phase 2 von 2 — verwandelter Lucian Bastier (derselbe Kampf)",chapter:8,region:"Demeniss - Spire of Clockwork",quest:"A Fleeting Dream (Phase 2)",drop_weapon:"Official Knight's Plate Armor",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (Fiend Dash unblockbar)",strategy:"Phase 2 nach Lucian Bastier. Wechselt Shield+Morgenstern gegen riesige Armklinge. Fiend Dash = unblockbar, sofort kontern. Whirling Slash und Impale ausweichen. Force Palm 3-Combo fuelltStagger-Bar schnell. Feuer-DoT-Schaden ueber Zeit beachten. Drops: Ponytail Ticket + Official Knight Set + Eclipsed Solas Plate Gloves + Spire Key."},
-  {name:"Marni's Clockwork Mantis",chapter:null,region:"Delesyia - Regent's Rise",quest:"Frozen Hearted Predator",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (Mantis Ray unblockbar)",strategy:"Mechanische fliegende Mantis. Begleitet von 3 Dragonfly Fighters — erst eliminieren! Block/Parry-Konter fuer normale Angriffe. Force Palm fuer Stagger-Bar. Mantis Ray (Feuer) = ausweichen, kein Block. Folgt nach Turbine-Kampf im Krall Foundry."},
-  {name:"Turbine",chapter:null,region:"Delesyia - Krall Foundry",quest:"Invaders from the East",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Mechanik-Boss (kein klassischer Kampf)",strategy:"180-Sekunden-Verteidigung: Generator schuetzen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen waehrend Flug. Danach: vollgeladene Kanone auf Turbines feuern. Fuehrt direkt zu Marni's Clockwork Mantis."},
+  {name:"Marni's Clockwork Mantis",chapter:10,region:"Delesyia - Regent's Rise",quest:"Frozen Hearted Predator",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge (Mantis Ray unblockbar)",strategy:"Mechanische fliegende Mantis. Begleitet von 3 Dragonfly Fighters — erst eliminieren! Block/Parry-Konter fuer normale Angriffe. Force Palm fuer Stagger-Bar. Mantis Ray (Feuer) = ausweichen, kein Block. Folgt nach Turbine-Kampf im Krall Foundry."},
+  {name:"Turbine",chapter:10,region:"Delesyia - Krall Foundry",quest:"Invaders from the East",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Mechanik-Boss (kein klassischer Kampf)",strategy:"180-Sekunden-Verteidigung: Generator schuetzen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen waehrend Flug. Danach: vollgeladene Kanone auf Turbines feuern. Fuehrt direkt zu Marni's Clockwork Mantis."},
   {name:"Tenebrum",chapter:4,region:"Hernand - Scholastone Institute (Abyss-Riss / Spire of the Stars)",quest:"Story - Gate to the Otherworld",drop_weapon:"–",drop_abyss_gear:"Abyss Artifact (+ Key to the Spire of the Stars vom Dekan)",weakness:"–",parry_or_dodge:"Dodge (Luftkampf, bodenlose Arena)",strategy:"Erscheint, als Octavius in den Abyss gezogen wird. Bodenlose Arena gegen einen pausenlos kreisenden fliegenden Gegner: Blinding Flash aktivieren, um die Schwachpunkte sichtbar zu machen, dann per Doppelsprung + Force Palm in der Luft attackieren; hinter Saeulen Spirit regenerieren."},
   {name:"Cassius Morten",chapter:6,region:"Hernand",quest:"Story - Cracks in the Shield (Traitor)",drop_weapon:"Shield of Betrayal",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Parry Sword-Strings; Dodge Shadow-Surge",strategy:"Story-Boss Kap. 6 ('Traitor'). Schildträger mit einer Lebensleiste und langen Angriffsketten. Schwere Angriffe (R2) schaden auch durch den Block - nach 3 Treffern unterbrochen und für leichte Angriffe offen; Tauria Curved Sword + Nature's Echo empfohlen. Hinweis: Tenebrum ist ein eigener Kap.-4-Boss (Gate to the Otherworld), nicht Cassius' Verwandlung."},
   {name:"Gabriel Caliburn",recur:"1. Begegnung (Kap. 8, Skript-Niederlage) — kehrt als Corrupted Caliburn zurück",chapter:8,region:"Demeniss - Demeniss Castle",quest:"Story - The Blood Coronation (scripted Loss)",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Scripted — kein klassischer Sieg",strategy:"SCRIPTED LOSS Kap. 8: Kliff verliert garantiert, egal wie gut man spielt. Cutscene-Übergang. Reale Rematch erst in Kap. 12 als Corrupted Caliburn. In 1.07 als Rematch-Boss bei Fort Musket via Laterne verfügbar."},
@@ -4047,7 +4050,7 @@ const BOSSES=[
   {name:"New Moon Reaper",chapter:null,region:"Demeniss - Southern Court",quest:"Optionaler Boss via Southern Court ('New Moon Reaper'-Quest)",drop_weapon:"Diverging Moon (2H Crescent-Spear)",drop_abyss_gear:"–",weakness:"Stagger-Bar füllt schneller als bei den anderen Lunar Reapers",parry_or_dodge:"Defensiv spielen; nach Block/Parry oder Dodge hinter den Boss countern",strategy:"Stärkster/ausgewogenster der drei Lunar Reapers — wartet auf Öffnungen. Erst Hof-Adds killen, dann nach Block/Dodge mit Max-Force-Palm-3-Hit-Combos die schnell füllende Stagger-Bar nutzen."},
   {name:"Half Moon Reaper",chapter:null,region:"Demeniss - Western Court (NW)",quest:"Optionaler Boss via 'Half Moon Reaper'-Quest, Western Court",drop_weapon:"Grasping Moon (2H Half-Moon-Spear)",drop_abyss_gear:"Abyss-Artefakt x1",weakness:"–",parry_or_dodge:"Scythe-Combos parieren für Counter; gegen unblockbare Crescent-Waves seitlich dodgen",strategy:"Aggressivster der drei Lunar Reapers — schnelle Scythe-Combos, Spins, trackende Crescent-Waves. Block/Parry für Counter, im Wave-Moment seitwärts, dann in der Erholung bursten."},
   {name:"Full Moon Reaper",chapter:null,region:"Demeniss - Eastern Court",quest:"Lunar-Judgment-Faction-Quest (House Elemore) — Eastern Court befreien",drop_weapon:"Circling Moon (Spear)",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Mix: blockbare Schläge parieren (Moon Blade Slash, X-Strike); Blitz-Angriffe dodgen",strategy:"Hinter ihr bleiben (lange Speer-Reichweite, Crescent-Projektile); bewegt/dreht langsam — hinter ihr Backstabs für Stagger, dann finishen."},
-  // --- Auto-recherchiert 2026-06-03 Welle 2 (game8/PowerPyx/GameRant/Fextralife-Item-Pages); Existenz je Boss verifiziert, Roster 42->69. Ohne Fextralife-Bild (Placeholder). Karanda als Black-Desert-Verwechslung verworfen. ---
+  // --- Auto-recherchiert 2026-06-03 Welle 2 (game8/PowerPyx/GameRant/Fextralife-Item-Pages); Existenz je Boss verifiziert, Roster 42->69. Ohne Fextralife-Bild (Placeholder). KORREKTUR 2026-08-03: Karanda wurde damals faelschlich als Black-Desert-Verwechslung verworfen — sie ist ein echter Crimson-Desert-Boss (Pailune, Harpy Nest, Fraktionsquest 'Queen of the Skies'; belegt durch game8 596328 + GameRant + questlog-Asset abyssgear_karanda) und steht jetzt im Roster. NICHT erneut entfernen. ---
   {name:"Black Bear Captain",chapter:null,region:"Hernand - Deepfog Basin (N Calphade Farmhouse)",quest:"Miniboss beim Infiltrieren der Black-Bears-Basis (Kap. 6 'In Ashes' / 'Turning Tides')",drop_weapon:"–",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Distanz halten & dodgen — Superarmor-Sprungangriff schließt Lücken; Ranged-Encounter, kein Parry-Duell",strategy:"Mit den Quest-Whistling-Arrows Artillerie rufen (one-shot + räumt die Soldaten); alternativ vom Turm aus schießen. Abstand halten (Superarmor-Gap-Closer unterbricht Schüsse). Droppt nichts."},
   {name:"Storm Crusher",chapter:11,region:"Delesyia - Aeronautical Research Base",quest:"Story Kap. 11 'Fortress Keys' (Brave New World) — Basis befreien, Fortress Key",drop_weapon:"Marni Musket (+ Delesyian Ornamental Shield)",drop_abyss_gear:"–",weakness:"–",parry_or_dodge:"Dodge — Charge-Angriffe aus Distanz ausweichen (sonst One-Shot); Kanonensalven auf rotes Aufblitzen",strategy:"Feuer-Tank, 1 HP-Bar, 3 distanzabhängige Angriffe (Ram nah, Explosivschüsse mittel, Raketen weit). Auf Distanz bleiben und Raketen mit Nature's Snare/Retribution zurückwerfen; oder Stun-Bar mit Turning Slash (R1+R2), mit Axiom Force + Aerial draufspringen und den grünen Kern R2-staben (kann buggen)."},
   {name:"Queen Spider",chapter:null,region:"Hernand - Arboria Castle (Nord)",quest:"Optional via Hernand-Faction ('Queen's Nest' / 'Queen of the Silkspun Citadel')",drop_weapon:"–",drop_abyss_gear:"Queen's Fangs (Core, Gift-Stab); Stirrups of the Open Sky; Abyss-Artefakt",weakness:"Feuer (brennt, fällt zu Boden)",parry_or_dodge:"Dodge/Deflect, kein Parry — Nature's Retribution gegen Gift-Projektile, Bite-Lunge ausweichen",strategy:"Mit Nature's Retribution Gift-Projektile zurückwerfen; Feuer priorisieren (brennt sie, fällt zu Boden = leichter Schaden). Mit Bogen beschießen während sie an der Wand klebt, harte Combos wenn sie runterspringt; explodierende Spinnen-Adds meist ignorierbar."},
@@ -4075,7 +4078,7 @@ const BOSSES=[
   {name:"Mazzul, the Dark Justiciar",chapter:null,region:"Demeniss - Burnhand Quarry (Byron Estate)",quest:"Optional. House-Byron 'The Dark Justiciar' / 'One Step Ahead' (nach Demeniss-Befreiung Kap. 8 + Keglord)",drop_weapon:"Sanguine Knell",drop_abyss_gear:"Ashad Plate Gloves (Abyss-Slot); Abyss-Artefakt; Golden Beer",weakness:"–",parry_or_dodge:"Dodge — nicht blocken/traden (horizontaler Sweep zieht Stamina, staggert dich); Heavy-Swings & AoEs ausweichen",strategy:"2H-Axt-Nutzer mit starker Offense, schwacher Defense. Den langsamen Overhead-Cleave/Slam baiten für das sicherste Konter-Fenster; mobil bleiben (Ground-Slam, Aerial-Dive). Ranged-Builds (Focus/Keen Senses) über Melee empfohlen."},
   {name:"Keglord Garnier Mk. XXIII",chapter:null,region:"Demeniss - The Laughing Marionette",quest:"Optional. House-Marshell-Questline (Midnight Circus / 'Nightmare on Stage')",drop_weapon:"–",drop_abyss_gear:"Official Knight's Cloth Cloak; Tech Hat; 'Wrecked Keglord'-Material",weakness:"Grüne Schwachpunkte (Hände, Schultern, Kopf); zentrale Spule stun-anfällig; Lightning-Res hilfreich",parry_or_dodge:"Meist unvermeidbare Angriffe — eher durchheilen als dodgen; Raketen mit Nature's Retribution ablenken",strategy:"Zentrale Spule mit Turning Slash stunnen (gibt Schaden-Immunität), dann Stab auf die grünen Schwachpunkte — Hände/Schultern (Phase 1), Kopf (Phase 2). Da die meisten Angriffe nicht dodgebar sind: viel Heilung mitbringen (oder Raketensalven mit Nature's Retribution ablenken für großen Stagger)."},
   {name:"Queen Bismuth Oreback Crab",chapter:null,region:"Crimson Desert - Well of Enlightenment (S Forebearer's Barrens)",quest:"'Sage of the Desert'-Questline — nach 'The Oreback Crab in the Desert' / 'War Song of the Dusk'",drop_weapon:"–",drop_abyss_gear:"Abyss-Artefakt (+ 30x Bismuth Ore); befreit den Well of Enlightenment",weakness:"–",parry_or_dodge:"–",strategy:"Gimmick/Climb-Boss: per Triple-Jump + Glide auf den Panzer (oder Beine angreifen zum Immobilisieren), festhalten (L3), Kristallformationen zerstören → weiße Schwachadern freilegen, dann Heavy (R2) für je ~1/3 HP. Finalphase: zum Topf-/Schalen-Cluster auf dem Rücken laufen und mit Normal-Attacks zerschlagen = Instant-Kill."},
-  // --- Auto-recherchiert 2026-06-03 Welle 3 (game8/PowerPyx/GameRant/TheGamer/Fextralife); Existenz je Boss verifiziert, Roster 69->97. Karanda (Black Desert) verworfen; Kutum/Abyss Kutum als echte CD-Bosse bestaetigt. ---
+  // --- Auto-recherchiert 2026-06-03 Welle 3 (game8/PowerPyx/GameRant/TheGamer/Fextralife); Existenz je Boss verifiziert, Roster 69->97. Karanda-Verwerfung am 2026-08-03 revidiert (echter CD-Boss, siehe Roster-Eintrag oben); Kutum/Abyss Kutum als echte CD-Bosse bestaetigt. ---
   {name:"Dreadnought",chapter:null,region:"Delesyia - Marni's Laboratorium",quest:"'Forbidden Gatekeeper' / Fortress-Befreiung (Marni's Laboratorium, Fortress Key)",drop_weapon:"–",drop_abyss_gear:"Sonic Resonator (Pack/Rückenausrüstung, keine Waffe); Abyss-Artefakt; Frozen Heart Plate Cloak",weakness:"Sehr langsame Drehung (~2-3s für 180°) → Rücken offen für Backstabs; Stagger-Bar füllbar",parry_or_dodge:"Dodge — alle Angriffe unblockbar; Laser/Melee ausrollen (im Kreis um den Zyklopen-Laser)",strategy:"Dampf-Mech mit unblockbaren Heavy-Attacks (Drei-Arm-Swing, Charge, Ground-Slam, Zyklopen-Augenlaser, Laser-Regen). Im Kreis dodgen gegen den Laser, in der langsamen ~2-3s-Drehung hinter ihn dashen für Backstabs. Stagger-Bar mit Combos füllen → Stun → Finisher."},
   {name:"Cloud Fortress Orbian",chapter:11,region:"Delesyia",quest:"Story Kap. 11 'Truth and Reality' (Foreboding Shadow) — 'Flying Fortress Orbian'; braucht 'Whispers in the Wind'",drop_weapon:"–",drop_abyss_gear:"–",weakness:"Zentrales goldenes Auge/Core — invuln bis Stun-Bar voll, dann Shutdown (massiver Schaden); Bogen mit Charged/Focused Shot",parry_or_dodge:"Dodge — Ranged-Fight (Bogen); in Bewegung bleiben gegen Laser/Projektile",strategy:"Zwei Phasen: erst auf Blackstar (Drache) die äußeren gelben Cores mit Feuer zerstören, dann zu Fuß innen. Core-Boss: mit Bogen zielen, Charged/Focused Shot (Auge 4x markieren) für großen Schaden; oder Nature's Snare/Axiom Force für Sofort-Stun, dann im Shutdown bursten. Volle Pfeile, nicht sterben (sonst Festung von vorn)."},
   {name:"Marni's Machina Knight",chapter:null,region:"Delesyia - Marni's Outpost (NO Gorthak)",quest:"Faction 'Blade of Discipline' (auto bei Interaktion)",drop_weapon:"Electro-Mecha Longsword (2H, Lightning, 27 ATK; nicht upgradebar)",drop_abyss_gear:"Abyss-Artefakt",weakness:"Melee empfohlen; leicht pfeil-resistent; Stun-Bar für Fenster aufbauen",parry_or_dodge:"P1 (Longsword): 3-Hit-Combos parieren (L1), Opener-Overhead + Ranged-Slashes dodgen. P2 (Speer): alles dodgen, nicht parieren/blocken (Stamina)",strategy:"Zwei-Phasen-Teleport-Boss (mid-late game). Mobil bleiben gegen Teleports/Ranged, Lücke schließen, Turning Slash (R1+R2) + Forward Slash für die Stun-Bar, in Stagger-Fenstern bursten. P1: Parry/Turning Slash abwechseln; P2: voll auf Dodge (schnellerer Speer + Seeking-Cube/Lightning)."},
@@ -5220,7 +5223,7 @@ const ARMOR=[
   {name:"Northern Fighter's Chain Mail",type:"Torso",source:"Nördliche Händler / Herstellung",effect:"Def+20, Ice Resist (Lv)",notes:"Balanciert für Pailune"},
   {name:"Official Knight's Plate Armor",type:"Torso",source:"Ritter-Orden (Rep Rank 3)",effect:"Plate, Def+24",notes:""},
   {name:"Plate Armor of Cursed Soul",type:"Torso",source:"Corrupted Boss Drop (Kap. 7+)",effect:"Plate, Def+28",notes:"Cursed Soul Set"},
-  {name:"Plate Armor of the Shadows",type:"Torso",source:"Drop: Beloth the Darksworn",effect:"Plate, Def 4→41, 3 Abyss-Gear-Slots (Heart of Stone, Fortification I, Vigor I)",notes:"Defensive Late-Game"},
+  {name:"Plate Armor of the Shadows",type:"Torso",source:"Truhe am Everfrost Watchtower (nördlich des Flusses bei den Hoenmark Ruins, West-Hernand) — Fackel entzünden öffnet das Tor. NICHT der Beloth-Drop, das ist der Helm",effect:"Plate, Def 4→41, 3 Abyss-Gear-Slots (Heart of Stone, Fortification I, Vigor I)",notes:"Defensive Late-Game"},
   {name:"Scarlet Blades Cloth Armor",type:"Torso",source:"Scarlet Blades Fraktion",effect:"Cloth, Def 5, Lightning Resist Lv1",notes:"Fraktion-Exklusiv"},
   {name:"Scholastone Uniform",type:"Torso",source:"Scholastone Akademie",effect:"Cloth, Def 2, Move Speed Lv1",notes:"Mage-Style"},
   {name:"Scorchflame Plate Armor",type:"Torso",source:"Golden Trading Post, West-Demeniss (Truhe hinter Drehtür); seit Patch 1.13.00 auch craftbar (Rezept im Shop kaufbar)",effect:"Plate, Fire Resist (Lv)",notes:"Fire-Build Kernstück"},
@@ -5480,8 +5483,8 @@ const ARMOR=[
   {name:"Ironwilled Guardian's Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
   {name:"Boar Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
   {name:"White Horn Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Plate Helm of the Shadows",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Plate Cloak of the Shadows",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
+  {name:"Plate Helm of the Shadows",type:"Kopf",source:"Drop: Beloth the Darksworn (Hoenmark Ruins, West-Everfrost, Hernand — Fraktionsquest 'Wraith in the Frost')",effect:"DEF +21",notes:"Shadows-Set — das einzige Teil, das direkt vom Boss kommt"},
+  {name:"Plate Cloak of the Shadows",type:"Mantel",source:"Truhe an der Westseite der Hoenmark Ruins (Everfrost, West-Hernand) — Falltür darüber geduckt per Force Palm öffnen",effect:"DEF +12",notes:"Shadows-Set"},
   {name:"Lizard Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
   {name:"Wolf Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
   {name:"Wooden Mask of Lost Justice",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
@@ -6026,6 +6029,7 @@ const BOSS_IMGS={
   "Black Fang":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp",
   "Avatar of Umbra":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_myurdinumbra.webp",
   "Priscus the Ancient":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp",
+"Karanda":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_karanda.webp",
   "Antumbra's Sword":"cd_assets/bosses/antumbra_sword.webp",
   "Gregor the Halberd of Carnage":"cd_assets/bosses/gregor.webp",
   "Walter Lanford":"cd_assets/bosses/walter_lanford.webp",
@@ -9417,7 +9421,7 @@ const TROPHIES=[
   {"name":"Battlefield Conqueror","grade":"bronze","desc":"Alle 10 Schlacht-Herausforderungen abschließen.","miss":true,"tip":"'Battle 6: Into the Barrage' (5 Gegner mit einem Kanonenschuss) hat laut PowerPyx nur begrenzte Gelegenheiten — am besten in Kapitel 8 erledigen.","sec":null,"conf":"medium"},
   {"name":"Brilliant Tactician","grade":"bronze","desc":"Alle 10 Operations-Herausforderungen abschließen.","miss":true,"tip":"'Operation 7: Disruption' braucht Jackals-Gegner in Pailune — feindliche Camps nicht vorzeitig befreien.","sec":null,"conf":"medium"},
   {"name":"The Golden Merchant","grade":"bronze","desc":"Alle 5 Handels-Herausforderungen abschließen.","miss":false,"sec":null,"conf":"high"},
-  {"name":"Beast Slayer","grade":"bronze","desc":"Alle 7 'New Power'-Herausforderungen abschließen (einzigartige Bosse besiegen).","miss":false,"sec":"bosses","conf":"high"},
+  {"name":"Beast Slayer","grade":"bronze","desc":"Alle 7 'New Power'-Herausforderungen abschließen (einzigartige Bosse besiegen).","miss":false,"tip":"Die 7 'New Power'-Bosse (schalten zusammen auch die Erkundungs-Herausforderung 'Primal Frenzy' frei; die Kategorie taucht erst ab Kapitel 12 im Menü auf, besiegen lassen sich die Bosse aber früher): Skevald the Carrion King (Crimson Desert, Hyänenhöhle südöstlich von Tashkalp — Kopfgeld-Aushang bei Tommaso), Black Fang (Hernand, Norden — über die House-Celeste-Questreihe 'Legendary Wolf'), White Horn (Pailune, Snowhaven Hearth — nach den Pailune-Miliz- und Skoghorn-Tribe-Quests), Karanda (Pailune, Harpy Nest — ab 24/27 Pailune-Miliz-Quests), Queen Spider (Hernand, Arboria Castle — nach House Roberts und House Alfonso), Queen Stoneback Crab (Delesyia, Stoneback Crab Wetlands — Quest 'The Wolf's Ballad' vom Redfox Trading Post) und Queen Bismuth Oreback Crab (Crimson Desert, südlich des Well of Enlightenment — ohne Voraussetzung).","sec":"bosses","conf":"high"},
   {"name":"Shadowlord","grade":"bronze","desc":"Alle 10 'Above the Law'-Herausforderungen abschließen.","miss":true,"tip":"'Above the Law 4: Back Alley Cleanup' erfordert offene Kopfgelder — nicht alle Bounties vorher abschließen.","sec":null,"conf":"medium"},
   {"name":"Lord of Honor","grade":"bronze","desc":"Alle 9 'Challenges and Changes'-Herausforderungen abschließen.","miss":false,"sec":null,"conf":"high"},
   {"name":"Pilgrim of Wonders","grade":"silver","desc":"Alle 60 Geheimort-Herausforderungen (Secret Places) abschließen.","miss":false,"sec":"secrets","conf":"high"},
@@ -9730,7 +9734,7 @@ const RESSORTS = [
    Registratur-Koordinate. count = statischer Fallback (Live-Zahlen s. _leafCount). */
 const SECTIONS = [
   {id:'beginner',    res:'einstieg', name:'Anfänger-Guide',   plate:'§01', coord:'A1', glyph:'➤', count:'Basis'},
-  {id:'bosses',      res:'kampf', name:'Bosse',            plate:'§02', coord:'B2', glyph:'☠', count:'98'},
+  {id:'bosses',      res:'kampf', name:'Bosse',            plate:'§02', coord:'B2', glyph:'☠', count:'99'},
   {id:'skills',      res:'kampf', name:'Skills',           plate:'§13', coord:'B3', glyph:'✦', count:'6 Zweige'},
   {id:'disarm',      res:'kampf', name:'Entwaffnen',       plate:'§12', coord:'B4', glyph:'⛨', count:'Tabellen'},
   {id:'builds',      res:'kampf', name:'Builds',           plate:'§15', coord:'B5', glyph:'⊞', count:'Optimizer'},
@@ -9761,7 +9765,7 @@ const SECTIONS = [
   {id:'achievements',res:'register', name:'Trophäen & Erfolge', plate:'§33', coord:'E7', glyph:'★', count:'Erfolge'},
   {id:'favorites',   res:'register', name:'Favoriten',     plate:'§31', coord:'E8', glyph:'☆', count:'Merkliste'},
   {id:'secrets',     res:'meta', name:'Secrets & Lore',    plate:'§25', coord:'F1', glyph:'⚿', count:'Tracker'},
-  {id:'patches',     res:'meta', name:'Patch-Notes',       plate:'§30', coord:'F2', glyph:'✎', count:'1.12'},
+  {id:'patches',     res:'meta', name:'Patch-Notes',       plate:'§30', coord:'F2', glyph:'✎', count:'Log'},
   {id:'roadmap',     res:'meta', name:'Roadmap',           plate:'§32', coord:'F3', glyph:'⚑', count:'Board'}
 ];
 const SECTION_BY_ID = {}; SECTIONS.forEach(s=>SECTION_BY_ID[s.id]=s);
@@ -9778,6 +9782,7 @@ function _leafCount(id){
     if(id==='pets' && typeof PETS!=='undefined' && Array.isArray(PETS)) return String(PETS.length);
     if(id==='dyes' && typeof DYES!=='undefined' && Array.isArray(DYES)) return String(DYES.length);
     if(id==='accessories' && typeof ACCESSORIES!=='undefined' && Array.isArray(ACCESSORIES)) return String(ACCESSORIES.length);
+    if(id==='patches' && typeof PATCHES!=='undefined' && Array.isArray(PATCHES) && PATCHES.length) return String(PATCHES[0].ver||(SECTION_BY_ID[id]||{}).count||'');
   }catch(e){}
   return (SECTION_BY_ID[id]||{}).count || '';
 }
@@ -10602,7 +10607,7 @@ function renderBosses(){
       <button class="boss-notes-btn${hasNote?' has-note':''}" onclick="toggleBossNote('${safeName}',this)" aria-label="Eigene Notiz">
         📝 ${hasNote?'Notiz bearbeiten':'Eigene Notiz'}
       </button>
-      <textarea class="boss-notes-area" placeholder="Eigene Strategie / Build / Erinnerung..." oninput="persistBossNote('${safeName}',this,this.previousElementSibling)">${notes[b.name]||''}</textarea>
+      <textarea class="boss-notes-area" placeholder="Eigene Strategie / Build / Erinnerung..." oninput="persistBossNote('${safeName}',this,this.previousElementSibling)">${escHtml(notes[b.name]||'')}</textarea>
       </div>
     </div>`;
   }).join('');
@@ -11363,7 +11368,7 @@ const ARMOR_SETS=[
   {name:"Knight of Carnage",color:"#7a2420",desc:"[Patch 1.13.00 · Boss-Set Kliff] Vom Boss 'Gregor, the Halberd of Carnage' (Fort Ironclad, Hernand — teils Demeniss zugeordnet; Kap. 8, Quest 'Where The Wind Guides You'). Plate, voll färbbar, 5 Teile. Plate Helm (Def→21, Daze-Immun.; Back Alley Shop Brek, außerhalb der Demeniss-Ostmauer, ~8 Goldbarren), Plate Armor (Def→39; Boss-Drop Gregor 'Halberd of Carnage', Fort Ironclad, Kap. VIII), Plate Cloak (Def→12, Feuer-Res Lv5, Move Speed Lv2; Horse-Challenge 'Harmonious Hooves III'), Plate Gloves (Def→17/Atk→36; Sword-Challenge 'Sword of Trials VI'), Plate Boots (Def→19/Atk→35; Challenge 'Dancing Blade, Shining Shield III'). Quelle: VULKK 07.07.2026, gamerant, consolepulse.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Plate Helm","Plate Armor","Plate Cloak","Plate Gloves","Plate Boots"]},
   {name:"Martial Monk",color:"#5a4a20",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'T'rukan the Ascended', Kap. IX 'The Sage of the Desert' (Jijeong School / Serpent Marsh). Cloth, offiziell 3 Teile (kein Helm laut Patch Notes/keengamer). Martial Monk's Cloth Robe (Def→21, Move Speed Lv1; 3 Abyss-Sockets), Martial Monk's Cloth Gloves (Def→12/Atk→26, Attack Speed Lv3→4; 2 Sockets), Martial Monk's Cloth Boots (Def→12/Atk→27, Move Speed Lv2→3; 2 Sockets). Zusatzfund nur laut VULKK (nicht von Patch Notes/keengamer bestätigt): Helm 'Wooden Mask of Lost Justice' (Def→18, Blitz-Res Lv1) vom selben Boss — nicht Teil des offiziellen Sets. Quelle: VULKK 11.07.2026, keengamer, offizielle Patch Notes.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Martial Monk's Cloth Robe","Martial Monk's Cloth Gloves","Martial Monk's Cloth Boots"]},
   {name:"Grand General of Demeniss",color:"#4a4038",desc:"[Patch 1.13.00 · Boss-Set Kliff/Oongka] Vom Boss 'Lucian Bastier', Grand General of Demeniss, Ende Kapitel VIII 'Blood Coronation' (Spire of Clockwork). Plate, offiziell 2 Teile, kein Helm (Bastier trägt keinen). Demenissian Grand General Plate Armor (Def→37, 3 Sockel: Shockward I/Fortification I/Aegis I; Boss-Drop, auch käuflich im Demeniss Equipment Shop), Demenissian Grand General Plate Cloak (Def→12, Blitz-Res Lv5, Move Speed Lv1→2; Fraktionsquest 'Lunar Judgement' bei Count Elmore/Brookfield Manor, oder Equipment Shop). VULKK erwähnt zusätzlich 'Eclipsed Solas Plate Gloves' (Def→17/Atk→36) vom selben Boss — separat benanntes Item, nicht Teil dieses Sets. Quelle: VULKK 08.07.2026, keengamer.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Demenissian Grand General Plate Armor","Demenissian Grand General Plate Cloak"]},
-  {name:"16 Rüstungsteile + 3 Kopfbedeckungen (Patch 1.13, unbenannt)",color:"#3a3a3a",desc:"[Patch 1.13.00 · Weitere Kliff/Oongka-Ausrüstung] Zusätzlich zu den 20 Boss-Set-Teilen kamen mit 1.13.00 für Kliff/Oongka 16 weitere Rüstungsteile und 3 Kopfbedeckungen ins Spiel. Die offiziellen Notes führen diese 19 Teile nur als Anzahl, ohne Einzelnamen; Bezug laut Notes über Quests, Erfolge und Shops. Einzelnamen und -werte sind wenige Tage nach Release noch nicht quellenübergreifend belegt, daher hier als Sammel-Platzhalter analog zum Muster '5. Teil (unbestätigt)' bei Tarandus. Sobald zwei unabhängige Quellen die Teile benennen, durch echte Einträge ersetzen.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["16 Rüstungsteile (Namen unbestätigt)","3 Kopfbedeckungen (Namen unbestätigt)"]},
+  {name:"16 Rüstungsteile + 3 Kopfbedeckungen (Patch 1.13, unbenannt)",color:"#3a3a3a",desc:"[Patch 1.13.00 · Weitere Kliff/Oongka-Ausrüstung] Zusätzlich zu den 20 Boss-Set-Teilen kamen mit 1.13.00 für Kliff/Oongka 16 weitere Rüstungsteile und 3 Kopfbedeckungen ins Spiel. Die offiziellen Notes führen diese 19 Teile nur als Anzahl, ohne Einzelnamen; Bezug laut Notes über Quests, Erfolge und Shops. Einzelnamen und -werte sind wenige Tage nach Release noch nicht quellenübergreifend belegt, daher hier als Sammel-Platzhalter analog zum Muster '5. Teil (unbestätigt)' bei Tarandus. Sobald zwei unabhängige Quellen die Teile benennen, durch echte Einträge ersetzen.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieceCount:19,pieces:["16 Rüstungsteile (Namen unbestätigt)","3 Kopfbedeckungen (Namen unbestätigt)"]},
   {name:"Odeck's Protector (Guardian of Odeck)",color:"#2f6a7a",desc:"[ab Patch 1.13.00 auch für Damiane, 5 Teile] Boss-Set von 'Odeck's Protector, the Forgotten General' (weiblicher Boss; Drop in The General's Tomb, NW-Pailune; gilt als härtester Boss, droppt komplett + Waffe). Plate/Heavy mit Eis-Fokus, voll aufwertbar (Tier 10). Ursprünglich Kliff-only. Werte: Helm Def→21 (Daze-Immun.; Fundort Hollow Haven, eine Bismuth-blockierte Höhle NO von Demeniss / SW der Hexen-Sanctuary), Armor Def→41 (3 Sockel), Cloak Def→12 + Eis-Res Lv3 (Stamina -8%), Gloves Def→17/Atk→36, Boots Def→19/Atk→35. Waffe: Awakened Spirit (Zweihand-Speer, Atk→36, Crit Rate Lv2→3, Skill 'Judgment of the Soul'). Alternative Bezugsquelle für komplettes Set + Waffe: Abschluss der Quest 'Slumbering Soul' (Odeck-Tribe-Questlinie). Quelle: VULKK 22.05.2026, destructoid, games.gg.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Helm (Def→21, Daze-Immun.)","Armor (Def→41, 3 Sockel)","Cloak (Def→12, Eis-Res Lv3)","Gloves (Def→17, Atk→36)","Boots (Def→19, Atk→35)"]},
   {name:"Dark Marksman",color:"#3a2f4a",desc:"[bestehendes Boss-Set, ab Patch 1.13.00 auch für Damiane (3 von 4 Teilen)] Assoziiert mit 'Samara, the Sandwatcher' (Izvatu Fortress, Tashkalp; Boss-Kill optional — Teile liegen in Truhen). Plate, 4 Teile, kein eigener Helm (Maske ist Teil der Cloak). Dark Marksman's Plate Armor (Def→41, 3 Sockel: Fortification I/Vitality I/Composure I; Chest bei Fort Musket, Südwand, NW Crimson Desert), Dark Marksman's Plate Cloak (Def→12, Feuer-Res Lv3, Stamina -4%→-8%; Chest in der Warrior's Soul Cave, Denn-River-Gabelung), Dark Marksman's Plate Gloves (Def→21/Atk→34, 2 Sockel: Haste I/Shockward I; Chest auf der Dach-Falltür des Forgotten Watchtower), Dark Marksman's Plate Boots (Def→17/Atk→36, 2 Sockel: Haste I/Fortification I; Forgotten Watchtower Keller, hinter der Nature's-Snare-Wand). Welche 3 der 4 Teile Damiane laut Patch Notes erhält, ist nicht dokumentiert. Quelle: VULKK 25.05.2026 + 11.07.2026, keengamer, offizielle Patch Notes.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["Dark Marksman's Plate Armor","Dark Marksman's Plate Gloves","Dark Marksman's Plate Boots","Dark Marksman's Plate Cloak"]},
   {name:"The Masked Liberator",color:"#2a3a4a",desc:"[bestehendes Boss-Set, ab Patch 1.13.00 auch für Damiane (1 Teil)] Von 'The Masked Liberator' (Anführerin der Faceless-Fraktion; Drop bei der Befreiung von Fort Manub, Tashkalp, Quest 'The Master of Masks'). Stoff+Leder, 4 benannte Teile, kein eigener Helm (Ersatz: 'The Faceless' Plate Helm', Def→17, Daze-Immun., separat über Fort-Manub-Drops/Shop erhältlich). The Masked Liberator's Cloth Armor (Def→21, Move Speed Lv1; Boss-Drop; dieses Teil erhält Damiane), The Masked Liberator's Cloth Cloak (Def→12, Eis-Res Lv3, Stamina -4%→-8%; Chest in den Timeworn Ruins, Tashkalp), The Masked Liberator's Leather Gloves (Def→18/Atk→29, Blitz-Res Lv1, Crit Rate Lv2→3; Chest im Firesand Helmhole, Tashkalp), The Masked Liberator's Leather Boots (Def→18/Atk→30, Blitz-Res Lv1, Crit Rate Lv1→2; Chest in der Gearmelt Confectionery, Delesyia). Quelle: VULKK 28.05.2026, keengamer.",bonus:"Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Cores",pieces:["The Masked Liberator's Cloth Armor","The Masked Liberator's Cloth Cloak","The Masked Liberator's Leather Gloves","The Masked Liberator's Leather Boots"]}
@@ -11378,7 +11383,7 @@ function renderArmorSets(){
       <div class="set-pieces">
         ${s.pieces.map(p=>`<div class="set-piece"><div class="set-piece-dot" style="background:${s.color}"></div><span>${p}</span></div>`).join('')}
       </div>
-      <div class="set-count">${s.pieces.length} Teile im Set</div>
+      <div class="set-count">${s.pieceCount||s.pieces.length} Teile im Set</div>
     </div>`).join('');
 }
 
@@ -11487,11 +11492,11 @@ function renderUnlockTable(){
   );
   document.getElementById('skp-unlock').innerHTML=
     `<div class="fbar">
-      <select class="fs" id="uf-char" onchange="renderUnlockTable()">
+      <select class="fs" id="uf-char" aria-label="Freischaltungen nach Charakter filtern" onchange="renderUnlockTable()">
         <option value="">Alle Charaktere</option>
         <option${charF==='Kliff'?' selected':''}>Kliff</option>
       </select>
-      <select class="fs" id="uf-miss" onchange="renderUnlockTable()">
+      <select class="fs" id="uf-miss" aria-label="Freischaltungen nach Verpassbarkeit filtern" onchange="renderUnlockTable()">
         <option value="">Alle</option>
         <option value="1"${missF==='1'?' selected':''}>Nur Missable</option>
         <option value="0"${missF==='0'?' selected':''}>Nicht Missable</option>
@@ -11948,11 +11953,11 @@ function renderBuildSim(){
   el.innerHTML=`<div class="sim-grid">
       <div class="sim-editor">
         <label class="sim-lbl">Waffe</label>
-        <select class="fs sim-sel" id="sim-weapon" onchange="simRecalc()">${wOpts}</select>
+        <select class="fs sim-sel" id="sim-weapon" aria-label="Waffe fuer den Build-Simulator waehlen" onchange="simRecalc()">${wOpts}</select>
         <label class="sim-lbl">Rüstung</label>
         <div id="sim-armor-row" class="sim-armor-row">${armorSelects}</div>
         <label class="sim-lbl">Cores (Mehrfachauswahl: Strg/Cmd-Klick)</label>
-        <select class="fs sim-sel" id="sim-cores" multiple size="5" onchange="simRecalc()">${coreOpts}</select>
+        <select class="fs sim-sel" id="sim-cores" aria-label="Abyss-Cores fuer den Build-Simulator waehlen (Mehrfachauswahl)" multiple size="5" onchange="simRecalc()">${coreOpts}</select>
         <div class="sim-actions">
           <button class="sim-btn" onclick="simSnapshot('A')">→ In A</button>
           <button class="sim-btn" onclick="simSnapshot('B')">→ In B</button>
@@ -12854,6 +12859,17 @@ const SIDE_QUESTS=[
 ];
 
 const PATCHES=[
+  {ver:"1.16.02",date:"03.08.2026",size:"Hotfix (All Platforms). Steam (PC), PlayStation, Xbox & Epic Games Store sofort; Steam (Mac) und Mac App Store in Arbeit. Release 14:40 UTC. Vier reine Fehlerbehebungen — kein neuer Inhalt, keine Balance-Änderung",features:[
+    {cat:"Fixes",items:[
+      "Unter bestimmten Umständen blieb beim <b>Laden eines Spielstands</b> der Ladebildschirm hängen oder es erschien ein Schwarzbild — behoben.",
+      "<b>AMD Radeon RX 9070 XT</b> und höher: Grafikfehler bei aktivierter <b>Ray Regeneration</b> behoben. <span style='color:var(--gdim)'>Einordnung: Ray Regeneration steht auch in der offiziellen Known-Issues-Liste zu 1.16.00 — dieser Hotfix deckt davon den AMD-Teil ab. Ob die Liste deshalb gekürzt wird, ist noch nicht veröffentlicht.</span>",
+      "<b>Mac:</b> Absturz bei aktiviertem <b>MetalFX Denoising Upscaler</b> behoben.",
+      "Im <b>Housing-Modus</b> waren unter bestimmten Umständen die <b>Innenraum-Funktionen</b> nicht verfügbar — behoben."
+    ]},
+    {cat:"Quelle",items:[
+      "Offizielle Pearl-Abyss-Patchnotes 1.16.02 (Notice-Board boardNo 112, Release 03.08.2026 14:40 UTC). Konsolen-Build 1.000.425 — diese Nummer ist <b>nicht offiziell dokumentiert</b> und wurde nur bei MP1st gefunden; die offizielle Seite selbst nennt keine Build-Nummer."
+    ]}
+  ]},
   {ver:"1.16.01",date:"02.08.2026",size:"Hotfix (All Platforms). Steam (PC/Mac), PlayStation, Xbox & Epic Games Store sofort; Mac App Store in Arbeit. Release 01:00 UTC. Ein einziger Fix — der Lager-Bug, den der große Handels-Patch 1.16.00 einen Tag zuvor eingeschleppt hatte",features:[
     {cat:"Content",items:[
       "Nach dem Beladen von Handelswaren an einer <b>regionalen Wagenwerkstatt</b> zeigten die Lager-Oberflächen im Camp (Privatlager, Futtertrog, Sammelgut-Truhe) teilweise die Wagenladeraum-Oberfläche statt ihrer eigenen — behoben. <span style='color:var(--gdim)'>Der offizielle Text sagt ausdrücklich nur, dass die <em>Oberfläche</em> falsch erschien. Ob dabei auch Inhalte vertauscht wurden, steht nirgends; entsprechende Community-Deutungen sind unbelegt.</span>"
@@ -14102,6 +14118,18 @@ document.addEventListener('DOMContentLoaded',()=>{
   try{
     const _fvb=document.getElementById('fa-val-boss');
     if(_fvb&&typeof BOSSES!=='undefined'&&Array.isArray(BOSSES))_fvb.textContent=BOSSES.length;
+  }catch(e){}
+
+  // Waffen-Datenlage: die Luecken ehrlich beziffern, statt sie wie eine 0 wirken zu lassen.
+  // Bewusst aus den Daten gerechnet, damit die Zahlen beim Nachtragen nicht veralten.
+  try{
+    if(typeof WEAPONS!=='undefined'&&Array.isArray(WEAPONS)){
+      const _ws=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+      _ws('wep-total',WEAPONS.length);
+      _ws('wep-nocrit',WEAPONS.filter(w=>w.crit==null).length);
+      _ws('wep-noslots',WEAPONS.filter(w=>w.slots==null).length);
+      _ws('wep-noatk',WEAPONS.filter(w=>w.def==null&&w.atk==null&&w.type!=='A.T.A.G. Weapon').length);
+    }
   }catch(e){}
 
   // ── Keyboard-Shortcuts ────────────────────────────────────────────
