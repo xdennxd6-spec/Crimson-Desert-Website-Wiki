@@ -571,7 +571,7 @@ function buildWaffen() {
   }).join("\n");
   const body = `
 <a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
-<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). Crit-Stufe und Abyss-Slots sind die echten Differenzierer, nicht der flache Basis-Angriff.</p>
+<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>: Eine Kartierung aller 421 Waffen mit ATK gegen die Refinement-Tabellen von Fextralife (Stand 11.08.2026) zeigt, dass hier der höchste dokumentierte Wert steht — bei Kampfwaffen also die Refinement-Endstufe +10. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl.</p>
 ${sections}`;
   const jsonld = {
     "@context": "https://schema.org",
