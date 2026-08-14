@@ -1848,7 +1848,9 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 
 /* ── Location modal (Platte) ── */
 .loc-modal-overlay{position:fixed;inset:0;background:rgba(20,16,12,.72);z-index:600;backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center}
-.loc-modal-box{background:var(--vellum-hi);border:1.5px solid var(--iron-gall);box-shadow:6px 6px 0 var(--paper-shadow);padding:28px;width:400px;max-width:calc(100vw - 32px);position:relative;border-radius:var(--radius)}
+/* max-height + Scroll: mit Fundort-Karte wird die Box bis ~790px hoch und ragte
+   auf kleineren Fenstern oben heraus, samt Schliessen-Button (2026-08-14). */
+.loc-modal-box{background:var(--vellum-hi);border:1.5px solid var(--iron-gall);box-shadow:6px 6px 0 var(--paper-shadow);padding:28px;width:400px;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);overflow-y:auto;overscroll-behavior:contain;position:relative;border-radius:var(--radius)}
 .loc-modal-close{position:absolute;top:13px;right:15px;background:none;border:none;color:var(--iron-soft);font-size:18px;cursor:pointer;padding:4px;line-height:1;transition:color .15s}
 .loc-modal-close:hover{color:var(--survey-red)}
 .loc-modal-type{font-family:var(--f-mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--brass);margin-bottom:3px}
@@ -1861,6 +1863,27 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .loc-modal-copy:hover{background:var(--brass);color:var(--vellum)}
 .loc-modal-nav{width:100%;padding:11px;border:1.5px solid var(--survey-red);background:var(--survey-red);color:var(--vellum);font-family:var(--f-mono);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:background .2s;border-radius:12px}
 .loc-modal-nav:hover{background:var(--survey-red-hi)}
+
+/* ── Fundort-Karte im Location-Modal (2026-08-14) ──
+   Erscheint nur, wenn zu einem Item ein Eintrag in FUNDORTE liegt. Ohne Eintrag
+   bleibt das Modal exakt so, wie es vorher war. Die Karte ist ein gespiegelter
+   Ausschnitt der In-Game-Karte mit Marker; Quelle steht unter dem Bild. */
+.loc-modal-box.has-fundort{width:560px}
+.lm-fo{margin-bottom:16px}
+.lm-fo-hd{font-family:var(--f-mono);font-size:9px;color:var(--brass);text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.lm-fo-fig{margin:0 0 9px;border:1.5px solid var(--iron-gall);border-radius:10px;overflow:hidden;background:var(--vellum-deep);box-shadow:3px 3px 0 var(--paper-shadow)}
+.lm-fo-img{display:block;width:100%;height:auto;max-height:330px;object-fit:cover;object-position:center}
+.lm-fo-cred{font-family:var(--f-mono);font-size:8.5px;color:var(--iron-soft);opacity:.75;padding:5px 9px;border-top:1px solid var(--line);background:var(--vellum);letter-spacing:.03em}
+.lm-fo-cred a{color:var(--brass);text-decoration:none}
+.lm-fo-cred a:hover{text-decoration:underline}
+.lm-fo-txt{font-size:13.5px;line-height:1.72;color:var(--iron-gall);padding:12px 14px;background:var(--vellum-deep);border-left:3px solid var(--survey-red);border-radius:10px}
+.lm-fo-req{display:inline-flex;align-items:center;gap:5px;margin-top:9px;padding:4px 10px;border:1px dashed var(--brass);border-radius:20px;font-family:var(--f-mono);font-size:9.5px;color:var(--brass);text-transform:uppercase;letter-spacing:.06em}
+.lm-fo-warn{margin-top:9px;font-size:11px;color:var(--survey-red);line-height:1.5}
+@media(max-width:620px){
+  .loc-modal-box.has-fundort{width:100%}
+  .lm-fo-img{max-height:220px}
+  .lm-fo-txt{font-size:13px}
+}
 
 /* ── Map location banner ── */
 #map-loc-banner{display:none;align-items:center;gap:10px;padding:11px 15px;background:var(--vellum-hi);border:1px solid var(--brass);margin-bottom:13px;border-radius:10px}
@@ -2642,6 +2665,7 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <div class="loc-modal-type" id="lm-type"></div>
     <div class="loc-modal-name" id="lm-name"></div>
     <div class="loc-modal-src" id="lm-src"></div>
+    <div class="lm-fo" id="lm-fundort" style="display:none"></div>
     <div class="loc-modal-search-lbl">MapGenie-Suche eingeben</div>
     <div class="loc-modal-search-row">
       <div class="loc-modal-term" id="lm-term"></div>
@@ -4121,7 +4145,7 @@ const WEAPONS=[
   {name:"Melted Ambition",type:"Sword (1H)",atk:17,crit:0,slots:3,source:"Drop: Myurdin (Kap. 7)",built_in:"Groundsurge",notes:""},
   {name:"Sword of the Lord",type:"Sword (1H)",atk:13,crit:0,slots:3,source:"Drop: Kailok the Hornsplitter (Kap. 2)",built_in:"Wind Slash",notes:"Bestes Früh-Game Schwert."},
   {name:"Crow Whisperer",type:"Staff (2H)",atk:15,crit:2,slots:5,source:"Drop: Hexe Marie (Kap. 9)",built_in:"–",notes:""},
-  {name:"Vessel of Dark Pursuit",type:"Greatsword (2H)",atk:16,crit:1,slots:5,source:"Sanctum of Absolution",built_in:"Wound of Darkness",notes:""},
+  {name:"Vessel of Dark Pursuit",type:"Greatsword (2H)",atk:16,crit:1,slots:5,source:"Sanctum of Absolution: Bossdrop von Antumbra's Sword",built_in:"Wound of Darkness",notes:""},
   {name:"Hollow Visage",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Truhe Dawn Cave (Wasserfall Mt. of Frozen Souls, Stab-Skill nötig)",built_in:"Insight I, Gale I, Destruction I",notes:"Frühe gute Option."},
   {name:"Survivor's Solitude",type:"Sword (1H)",atk:12,crit:1,slots:3,source:"Death's Grip Cavern NW Lake Kharonso (Stab hinter Wasserfall)",built_in:"–",notes:""},
   {name:"Hwando",type:"Greatsword/Katana (2H)",atk:19,crit:1,slots:5,source:"Lioncrest Manor (Annex), Hernand",built_in:"Insight I, Stamina Transference, Destruction I",notes:"Bestes Early-Weapon vor Kap. 2-Ende. Audit 2026-06-02: type 'Verschiedenes'→2H-Katana; atk 16→19 (thegamer)."},
@@ -4130,22 +4154,22 @@ const WEAPONS=[
   {name:"Staglord's Shield",type:"Shield",atk:null,crit:0,slots:2,source:"Drop: Saigord the Staglord (Side-Boss, Hernand, Icemoor Castle Ruins)",built_in:"–",notes:"Einziger Side-Boss-Schild. Schilde nutzen DEF statt ATK/Crit."},
   // ── Swords (1H) ──
   {name:"Sword of the Wolf",type:"Sword (1H)",atk:12,crit:null,slots:3,source:"Standard-Startwaffe (Kliff)",built_in:"–",notes:"Default-Schwert ab Spielstart."},
-  {name:"The Grove's Thorn",type:"Sword (1H)",atk:17,crit:null,slots:3,source:"Wald-Gebiet (Exploration)",built_in:"Spirit Transference",notes:""},
+  {name:"The Grove's Thorn",type:"Sword (1H)",atk:17,crit:null,slots:3,source:"Bossdrop Kearush the Slayer, Bankettsaal Hernand Castle (Kapitel 4)",built_in:"Spirit Transference",notes:""},
   {name:"Wolf's Fang",type:"Sword (1H)",atk:18,crit:null,slots:3,source:"Kap. 7-Gebiet",built_in:"Speed Lv.2, Malicebane",notes:"Quelle des Malicebane-Cores (+Boss-Dmg)."},
   {name:"Acria Sword",type:"Sword (1H)",atk:20,crit:2,slots:3,source:"Stellen Manor (Raetsel loesen)",built_in:"Crit Rate Lv.2",notes:""},
   {name:"Sword of Greed",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Golden Greed-Gebiet / Drop",built_in:"–",notes:""},
-  {name:"Frozen Soul",type:"Sword (1H)",atk:11,crit:1,slots:3,source:"Mt. of Frozen Souls Region",built_in:"–",notes:""},
+  {name:"Frozen Soul",type:"Sword (1H)",atk:11,crit:1,slots:3,source:"Skoghorn, The Argent Peaks (West-Pailune), Skelett am Grund einer Grube",built_in:"–",notes:""},
   {name:"Greedy Lightningblade",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Drop: Sizlek the Insatiable / Sisel (Ruined Chapel — Blooded Sanctum, Hernandian Parish of Solumen)",built_in:"Lightning Affinity",notes:"Audit 2026-06-03: Quelle praezisiert (war 'Exploration') — Boss-Drop von Sizlek the Insatiable (Fextralife/game8)."},
   {name:"Royal Oath",type:"Sword (1H)",atk:11,crit:1,slots:3,source:"Hernand Palast-Questlinie",built_in:"–",notes:""},
   // ── Rapiere ──
-  {name:"Fallen Kingdom's Rapier",type:"Rapier",atk:27,crit:null,slots:3,source:"Icemoor Castle (Truhe)",built_in:"Speed Lv.2",notes:"atk-Korrektur 11.08.2026: stand auf 18, das in der Fextralife-Refinement-Tabelle (9, 10, 11, 13, 15, 17, 19, 21, 23, 25, 27) in keiner Zeile vorkommt; Built-ins sind nur Attack Speed Lv.2/Lv.3, kein Attack-Bonus. Auf die Endstufe 27 gesetzt. Restvorbehalt: Führte die Waffe einen nicht ausgewiesenen Attack+1-Bonus, wäre 18 als Stufe +5 (17) erklärbar — zwei unabhängige Abrufe listen keinen solchen Bonus."},
+  {name:"Fallen Kingdom's Rapier",type:"Rapier",atk:27,crit:null,slots:3,source:"Icemoor Castle Ruins, West-Hernand: liegt am Fass neben der Truhe, nicht darin",built_in:"Speed Lv.2",notes:"atk-Korrektur 11.08.2026: stand auf 18, das in der Fextralife-Refinement-Tabelle (9, 10, 11, 13, 15, 17, 19, 21, 23, 25, 27) in keiner Zeile vorkommt; Built-ins sind nur Attack Speed Lv.2/Lv.3, kein Attack-Bonus. Auf die Endstufe 27 gesetzt. Restvorbehalt: Führte die Waffe einen nicht ausgewiesenen Attack+1-Bonus, wäre 18 als Stufe +5 (17) erklärbar — zwei unabhängige Abrufe listen keinen solchen Bonus."},
   {name:"White Wind Rapier",type:"Rapier",atk:9,crit:null,slots:3,source:"Delesyia Region",built_in:"–",notes:""},
   {name:"Inquisitor's Rapier",type:"Rapier",atk:9,crit:null,slots:3,source:"Inquisitor-Fraktion / Drop",built_in:"–",notes:""},
   // ── Daggers ──
   {name:"Kylus Dagger",type:"Dagger",atk:14,crit:null,slots:0,source:"NPC in Hernand (nach Stag Lord)",built_in:"Speed Lv.3",notes:"Stealth-Execution-Waffe."},
   {name:"Goblin King's Treasure",type:"Dagger",atk:14,crit:5,slots:0,source:"Pororin Forest (Truhe)",built_in:"Crit Rate Lv.5",notes:"Hoechster Dagger-Crit. Audit 2026-06-30: atk 16→14."},
   {name:"Ator's Finger",type:"Dagger",atk:12,crit:5,slots:0,source:"Ator-Boss-Gebiet",built_in:"–",notes:""},
-  {name:"Dagger of Dark Pursuit",type:"Dagger",atk:16,crit:5,slots:0,source:"Sanctum-Reihe (Abyss)",built_in:"Wound of Darkness",notes:""},
+  {name:"Dagger of Dark Pursuit",type:"Dagger",atk:16,crit:5,slots:0,source:"Sanctum of Solace, südwestlich Pailune City (Truhe hinter der Drehwand)",built_in:"Wound of Darkness",notes:""},
   // ── Greatswords (2H) ──
   {name:"Righteous Verdict",type:"Greatsword (2H)",atk:23,crit:3,slots:5,source:"Demeniss Ancestors' Ruins (Exploration)",built_in:"Speed Lv.2, Gale II, Destruction I, Insight I",notes:"Frueh erreichbar, sehr stark."},
   {name:"Ignir",type:"Greatsword (2H)",atk:24,crit:null,slots:5,source:"Ende Kapitel 7 (automatisch)",built_in:"Destruction I x2, Insight I",notes:"Audit 2026-06-15: slots 3→5 (2H=5); die 3 entsprach nur den 3 built_in-Gears."},
@@ -4162,7 +4186,7 @@ const WEAPONS=[
   {name:"Savage Sawblade",type:"Sword",atk:12,crit:1,slots:3,source:"Drop: Giath (Drakesfall Castle, Hernand; House-Celeste-Quest 'Bloodied Sword')",built_in:"Bleed",notes:"Unique 1H-Schwert mit sägeähnlichen Widerhaken. Audit 2026-06-30: Typ Knuckles→Sword + Quelle korrigiert (game8/Fextralife/gaming.tools/gamerguides); atk quellenabhängig: Fextralife 12, game8 34."},
   // ── Shields ──
   {name:"Shield of Betrayal",type:"Shield",atk:null,crit:0,def:29,slots:2,source:"Boss-Drop Cassius Morten, Quest 'Traitor' (Questlinie 'The Unyielding Shields', Kap. 6)",built_in:"Aegis I, Fortitude I",notes:"Schilde nutzen DEF statt ATK/Crit."},
-  {name:"Rhonid Large Shield",type:"Shield",atk:null,crit:0,slots:2,source:"Lioncrest Manor (Erdgeschoss)",built_in:"Speed Lv.1",notes:"Grosser Schild (kein Shield Bash)."},
+  {name:"Rhonid Large Shield",type:"Shield",atk:null,crit:0,slots:2,source:"Lioncrest Manor, Obergeschoss (verschlossener Raum, Schlüssel nötig)",built_in:"Speed Lv.1",notes:"Grosser Schild (kein Shield Bash)."},
   {name:"Shield of Conviction",type:"Shield",atk:null,crit:0,def:29,slots:2,source:"Calphade Church Turm (Truhe)",built_in:"Aegis I, Fortitude I",notes:""},
   // ── Bows (Ranged) ──
   {name:"Noble Man's Bow",type:"Bow (Ranged)",atk:34,crit:1,slots:5,source:"Early Exploration",built_in:"–",notes:"Beste Wahl fuer Infinite-Arrows-Build."},
@@ -4187,7 +4211,7 @@ const WEAPONS=[
   {name:"Red Needle",type:"Sword (1H)",atk:30,crit:null,slots:3,source:"Exploration / Händler Crimson Desert"},
   {name:"Aeserion Sword",type:"Sword (1H)",atk:34,crit:null,slots:3,source:"Crafting / Aeserion-Material"},
   {name:"Knightlord's Sword",type:"Sword (1H)",atk:30,crit:1,slots:3,source:"Drop: Knightlord-Feinde / Fort"},
-  {name:"Divine Echoes Bow",type:"Bow (Ranged)",atk:33,crit:null,slots:5,source:"Sanctum / Endgame-Truhe"},
+  {name:"Divine Echoes Bow",type:"Bow (Ranged)",atk:33,crit:null,slots:5,source:"Rockshard Valley Ruins (Truhe im bewachten Lager)"},
   {name:"Aeserion Bow",type:"Bow (Ranged)",atk:33,crit:null,slots:5,source:"Crafting / Aeserion-Material"},
   {name:"Demenissian Hero's Musket",type:"Firearm",atk:38,crit:1,slots:5,source:"Drop: Demeniss-Held-Feinde / Demeniss"},
   {name:"Caliburn's Mercy Pistol",type:"Firearm",atk:36,crit:null,slots:5,source:"Fort Musket (NO Demeniss), Turm-Obergeschoss (Tisch); Kap. 1-7 oder nach Story",notes:"Welt-Pickup, kein Story-Drop. Basis-Angriff laut game8/Fextralife 12; Anzeige teils 36. Fort Musket ist Kap. 8-12 gesperrt."},
@@ -4199,7 +4223,7 @@ const WEAPONS=[
   {name:"Aeserion Greathammer",type:"Blunt/Axe",atk:45,crit:null,slots:null,source:"Crafting / Aeserion-Material"},
   {name:"Antumbra's Eye",type:"Blunt/Axe",atk:45,crit:null,slots:5,source:"Drop: Antumbra-Boss / Sanctum"},
   {name:"Aeserion Warhammer",type:"Blunt/Axe",atk:41,crit:null,slots:null,source:"Crafting / Aeserion-Material"},
-  {name:"Reckoning",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Endgame / Sanctum-Bereich"},
+  {name:"Reckoning",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Bossdrop Titan (Stjar-Clan-Fraktionsquest, Windsong Peaks NO-Pailune)"},
   {name:"Aeserion Spear",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Crafting / Aeserion-Material"},
   {name:"Aeserion Longsword",type:"Greatsword (2H)",atk:39,crit:null,slots:null,source:"Crafting / Aeserion-Material"},
   {name:"Kuku Spear",type:"Halberd / Spear (2H)",atk:1,crit:null,slots:5,source:"Drop: Kuku Bird-Pack + Kuku Pot craften (Basisbauplan)"},
@@ -4248,11 +4272,11 @@ const WEAPONS=[
   {name:"Ashen Execution",type:"Blunt/Axe",atk:45,crit:null,slots:null,source:"Asche-Region / Boss-Drop"},
   {name:"Roar of the Black Bear",type:"Blunt/Axe",atk:42,crit:1,slots:5,source:"Drop: Black Bear-Boss (Pailune-Region)"},
   {name:"Sanguine Knell",type:"Blunt/Axe",atk:41,crit:null,slots:null,source:"Blutroten Gebiet / Abyss"},
-  {name:"Guidance of Dark Pursuit",type:"Blunt/Axe",atk:45,crit:null,slots:5,source:"Sanctum / Antumbra-Bereich"},
+  {name:"Guidance of Dark Pursuit",type:"Blunt/Axe",atk:45,crit:null,slots:5,source:"Sanctum of Solace, östlich der Wayward Woods: Bossdrop von Antumbra's Staff"},
   {name:"Oblivion of the Past",type:"Blunt/Axe",atk:42,crit:1,slots:5,source:"Abyss / Vergessene Vergangenheit"},
   {name:"Dark Worshiper's Staff",type:"Blunt/Axe",atk:42,crit:1,slots:5,source:"Drop: Dark Worshiper-Feinde"},
-  {name:"Thorn of Dark Pursuit",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:5,source:"Sanctum / Antumbra-Bereich"},
-  {name:"Frostfang",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:5,source:"Pailune / Eis-Region (Truhe oder Drop)"},
+  {name:"Thorn of Dark Pursuit",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:5,source:"Sanctum of Revelation (Insel nordöstlich Serpent Marsh): Bossdrop von Antumbra's Spear"},
+  {name:"Frostfang",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:5,source:"Beute nach dem Bosskampf gegen Gwen Kraber in Roothold, NO-Hernand (House-Celeste-Quest 'Frozen Eldertree', ab Kap. 6)"},
   {name:"Elite Vanguard",type:"Halberd / Spear (2H)",atk:35,crit:1,slots:5,source:"Drop: Elite Vanguard-Feinde (Hernand)"},
   {name:"Sorcerer's Staff",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Hexe-Gebiet / Exploration"},
   {name:"Traitor's Spear",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Hernand / Verräter-Quest"},
@@ -4267,7 +4291,7 @@ const WEAPONS=[
   {name:"Kuku Boltspitter",type:"Firearm",atk:25,crit:null,slots:5,source:"Crafting: Sanctum-Blueprint (Kuku Pack + Electromagnetic Boltspitter), Hernand"},
   {name:"Demenissian Chainsaw",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Demeniss / Mechanik-Feinde"},
   {name:"Parashu Axe",type:"Blunt/Axe",atk:30,crit:null,slots:null,source:"Exploration / Seltener Drop"},
-  {name:"Ring of the Earth",type:"Blunt/Axe",atk:34,crit:1,slots:3,source:"Earth-Elemental-Bereich / Sanctum"},
+  {name:"Ring of the Earth",type:"Blunt/Axe",atk:34,crit:1,slots:3,source:"Reedfield Graves, Hernand Highlands (auf einem der Gräber); auch Drop von Mistwood Hunters"},
   {name:"Kylus Axe",type:"Blunt/Axe",atk:30,crit:null,slots:null,source:"Kylus-Region / Exploration"},
   {name:"Tardik Axe",type:"Blunt/Axe",atk:34,crit:null,slots:null,source:"Tardik-Region / Exploration"},
   {name:"Delonde Axe",type:"Blunt/Axe",atk:30,crit:null,slots:null,source:"Delonde-Region / Exploration"},
@@ -4284,7 +4308,7 @@ const WEAPONS=[
   {name:"Alabaster Mace",type:"Blunt/Axe",atk:33,crit:null,slots:null,source:"Alabaster-Region / Exploration"},
   {name:"Sorcerer's Massage Stick",type:"Blunt/Axe",atk:37,crit:null,slots:3,source:"Drop: Sorcerer-Feinde / Abyss"},
   {name:"Saltroad Mace",type:"Blunt/Axe",atk:33,crit:null,slots:null,source:"Saltroad-Region / Exploration"},
-  {name:"Acorn Mace",type:"Blunt/Axe",atk:37,crit:null,slots:null,source:"Exploration / Wald-Bereich Hernand"},
+  {name:"Acorn Mace",type:"Blunt/Axe",atk:37,crit:null,slots:null,source:"Demenissian Ruins am Willow River, Demeniss (oben auf den Ruinen)"},
   {name:"Odeck Wooden Club Mace",type:"Blunt/Axe",atk:37,crit:null,slots:null,source:"Odeck-Region / Frühspiel"},
   {name:"Savage Woodland Spirit Killer",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Witchwoods / Elowen-Bereich"},
   {name:"Lanford Hammer",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Lanford-Region / Fort Warspike"},
@@ -4299,7 +4323,7 @@ const WEAPONS=[
   {name:"Grey Wolf's Sword",type:"Sword (1H)",atk:30,crit:1,slots:3,source:"Drop: Grey Wolf-Boss (Side-Boss Pailune)"},
   {name:"Volono Sword",type:"Sword (1H)",atk:30,crit:null,slots:3,source:"Volono-Region / Exploration"},
   {name:"Shadowleaf Bow",type:"Bow (Ranged)",atk:33,crit:null,slots:5,source:"Witchwoods / Elowen-Bereich"},
-  {name:"Twilight Messengers' Bow",type:"Bow (Ranged)",atk:30,crit:null,slots:5,source:"Twilight Grotto / Demeniss"},
+  {name:"Twilight Messengers' Bow",type:"Bow (Ranged)",atk:30,crit:null,slots:5,source:"Fundort unsicher: laut Fextralife craftbar (Rezeptbuch 'Ranged Weapons of the World – Bows, Vol. III'). Die Twilight Grotto liegt in Hernand und enthält die Scorchflame Plate Gloves"},
   {name:"Tardik Bow",type:"Bow (Ranged)",atk:30,crit:null,slots:5,source:"Tardik-Region / Exploration"},
   {name:"Kylus Bow",type:"Bow (Ranged)",atk:33,crit:null,slots:5,source:"Kylus-Region / Exploration"},
   {name:"Bow of the Fleeting",type:"Bow (Ranged)",atk:30,crit:null,slots:5,source:"Exploration / Fleeting-Set"},
@@ -4312,11 +4336,11 @@ const WEAPONS=[
   {name:"Alpha Barrel Cannon",type:"Hand Cannon",atk:31,crit:null,slots:5,source:"Crafting / Alpha-Material"},
   {name:"Gamma Barrel Cannon",type:"Hand Cannon",atk:31,crit:null,slots:5,source:"Crafting / Gamma-Material"},
   {name:"Bismuth Cannon",type:"Hand Cannon",atk:34,crit:null,slots:5,source:"Bismuth Ore-Crafting (Stoneback Crabs unter Anvil Hill)"},
-  {name:"Sword of Wayward Woods",type:"Sword (1H)",atk:22,crit:null,slots:3,source:"Wayward Woods Cave, Pailune (Truhe)"},
+  {name:"Sword of Wayward Woods",type:"Sword (1H)",atk:22,crit:null,slots:3,source:"Drop von Mistwood Hunters (kein belegter Truhen-Fundort)"},
   {name:"Beehive Club",type:"Blunt/Axe",atk:18,crit:null,slots:3,source:"Drop: Bienenstock-Feinde / Wald Hernand"},
   {name:"Electro-Mecha Longsword",type:"Greatsword (2H)",atk:43,crit:0,slots:4,source:"Delesyia / Clockwork-Mecha-Drop"},
   {name:"Lightning Greathammer",type:"Blunt/Axe",atk:27,crit:null,slots:null,source:"Blitz-Region / Crafting"},
-  {name:"Soul Spear",type:"Halberd / Spear (2H)",atk:40,crit:null,slots:5,source:"Sanctum / Seelen-Bereich"},
+  {name:"Soul Spear",type:"Halberd / Spear (2H)",atk:40,crit:null,slots:5,source:"Antumbra Ritual Grounds, The Argent Peaks"},
   {name:"Blazing Spear",type:"Halberd / Spear (2H)",atk:22,crit:null,slots:5,source:"Flammenregion / Delesyia"},
   {name:"Electromagnetic Flamespitter",type:"Firearm",atk:25,crit:null,slots:5,source:"Crafting / Händler (Vorstufe Kuku Flamespitter)"},
   {name:"Electromagnetic Frostspitter",type:"Firearm",atk:25,crit:null,slots:5,source:"Crafting / Händler (Vorstufe Kuku Frostspitter)"},
@@ -4326,7 +4350,7 @@ const WEAPONS=[
   {name:"Alabaster Halberd",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Alabaster-Region / Exploration"},
   {name:"Iris Halberd",type:"Halberd / Spear (2H)",atk:36,crit:null,slots:5,source:"Iris-Region / Exploration"},
   {name:"Lambert Halberd",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Lambert-Gebiet / Exploration"},
-  {name:"Wheel of the Last Toll",type:"Blunt/Axe",atk:43,crit:1,slots:5,source:"Letzte Maut / Endgame-Truhe"},
+  {name:"Wheel of the Last Toll",type:"Blunt/Axe",atk:43,crit:1,slots:5,source:"Fundort unbekannt (Waffe von Bradie Gu, keine Quelle nennt einen Ort)"},
   {name:"Tardik Greataxe",type:"Blunt/Axe",atk:40,crit:null,slots:null,source:"Tardik-Region / Exploration"},
   {name:"Iris Greataxe",type:"Blunt/Axe",atk:39,crit:null,slots:null,source:"Iris-Region / Exploration"},
   {name:"Kylus Greataxe",type:"Blunt/Axe",atk:43,crit:null,slots:null,source:"Kylus-Region / Exploration"},
@@ -4343,9 +4367,9 @@ const WEAPONS=[
   {name:"Ceremonial Warhammer",type:"Blunt/Axe",atk:41,crit:null,slots:null,source:"Zeremonial-Quest / Exploration"},
   {name:"Shadowleaf Soul Branch",type:"Blunt/Axe",atk:42,crit:1,slots:5,source:"Witchwoods / Shadowleaf-Bereich"},
   {name:"Tardik Warhammer",type:"Blunt/Axe",atk:41,crit:null,slots:null,source:"Tardik-Region / Exploration"},
-  {name:"Grasping Moon",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:5,source:"Mondlicht-Gebiet / Sanctum"},
-  {name:"Diverging Moon",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Mondlicht-Gebiet / Sanctum"},
-  {name:"Circling Moon",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Mondlicht-Gebiet / Sanctum"},
+  {name:"Grasping Moon",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:5,source:"Western Court, Demeniss (im weissen Zelt, auch ohne Bosskampf)"},
+  {name:"Diverging Moon",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Southern Court, Demeniss (im Zeltbereich vor dem Gebäude)"},
+  {name:"Circling Moon",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Quest 'Lunar Judgement': Waffenständer im Eastern Court nach Sieg über den Full Moon Reaper"},
   {name:"Spear of the Fleeting",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Fleeting-Set / Exploration"},
   {name:"Alfonso Spear",type:"Halberd / Spear (2H)",atk:35,crit:null,slots:5,source:"Alfonso-NPC / Quest Delesyia"},
   {name:"Kylus Spear",type:"Halberd / Spear (2H)",atk:38,crit:null,slots:5,source:"Kylus-Region / Exploration"},
@@ -4377,7 +4401,7 @@ const WEAPONS=[
   {name:"Iris Mace",type:"Blunt/Axe",atk:37,crit:null,slots:null,source:"Iris-Region / Exploration"},
   {name:"Wells Mace",type:"Blunt/Axe",atk:37,crit:null,slots:null,source:"Wells-Region / Exploration"},
   {name:"Bonepit Mace",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Drop: Muskan (Bonepit)"},
-  {name:"Spine of the Earth",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Earth-Elemental-Sanctum"},
+  {name:"Spine of the Earth",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Zufallsdrop von Fundamentalist Goblins und Banditen; garantiert über die Quest 'Persistent Dark Shadow'"},
   {name:"Sydmon Hammer",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Sydmon-Region / Exploration"},
   {name:"Entwined Red Thread Hammer",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Crimson Desert / Red Thread-Quest"},
   {name:"Thalwynd Hammer",type:"Blunt/Axe",atk:33,crit:null,slots:3,source:"Thalwynd Village / Exploration"},
@@ -4386,7 +4410,7 @@ const WEAPONS=[
   {name:"Gilliam Rapier",type:"Rapier",atk:31,crit:null,slots:3,source:"Gilliam-Region / Exploration"},
   {name:"Lambert Rapier",type:"Rapier",atk:27,crit:null,slots:3,source:"Lambert-Region / Exploration"},
   {name:"Lightningblade of Greed",type:"Sword (1H)",atk:30,crit:null,slots:3,source:"Golden Greed-Gebiet / Drop"},
-  {name:"Fallen Kingdom's Sword",type:"Sword (1H)",atk:34,crit:null,slots:3,source:"Frostveiled Castle Ruins / Fallen Kingdom"},
+  {name:"Fallen Kingdom's Sword",type:"Sword (1H)",atk:34,crit:null,slots:3,source:"Drop vom Righteous Inquisitor; alternativ in Fort Warspike stehlbar"},
   {name:"Sydmon Sword",type:"Sword (1H)",atk:30,crit:null,slots:3,source:"Sydmon-Region / Exploration"},
   {name:"Wells Sword",type:"Sword (1H)",atk:30,crit:null,slots:3,source:"Wells-Region / Exploration"},
   {name:"Dekarr Sword",type:"Sword (1H)",atk:34,crit:null,slots:3,source:"Dekarr-Region / Exploration"},
@@ -4458,7 +4482,7 @@ const WEAPONS=[
   {name:"Bamboo Stalk",type:"Sword (1H)",atk:3,crit:null,slots:3,source:"Exploration / Bambusgebiet"},
   {name:"Sturdy Bamboo Stalk",type:"Sword (1H)",atk:3,crit:null,slots:3,source:"Exploration / Bambusgebiet (verstärkt)"},
   {name:"Specter Sword",type:"Sword (1H)",atk:16,crit:null,slots:3,source:"Abyss / Specter-Bereich"},
-  {name:"Invisible Longsword",type:"Greatsword (2H)",atk:15,crit:3,slots:5,source:"Verstecktes Schwert / Geheimnis"},
+  {name:"Invisible Longsword",type:"Greatsword (2H)",atk:15,crit:3,slots:5,source:"Fundort bislang unbelegt"},
   {name:"White Wood Bow",type:"Bow (Ranged)",atk:30,crit:null,slots:5,source:"Witchwoods SW Hernand / Exploration"},
   {name:"Bekker Bow",type:"Bow (Ranged)",atk:30,crit:null,slots:5,source:"Bekker-Region / Exploration"},
   {name:"Southern Wandering Troll's Crossbow",type:"Bow (Ranged)",atk:10,crit:null,slots:5,source:"Drop: Südlicher Wandertroll"},
@@ -4552,9 +4576,9 @@ const WEAPONS=[
   {name:"Black Bears Banner Pike with Tassel",type:"Halberd / Spear (2H)",atk:17,crit:null,slots:5,source:"Exploration / Feldbeute (Black Bears, mit Quaste)"},
   {name:"Balton Longsword",type:"Greatsword (2H)",atk:43,crit:null,slots:null,source:"Balton-Region / Exploration"},
   {name:"Delesyian Ornamental Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Delesyia / Händler"},
-  {name:"Ancient Shield",type:"Shield",atk:null,crit:0,def:13,slots:2,source:"Alte Ruinen / Exploration"},
+  {name:"Ancient Shield",type:"Shield",atk:null,crit:0,def:13,slots:2,source:"Sanctum of Faith, Delesyia (Truhe hinter den Ranken, Blinding Flash nötig)"},
   {name:"Demeniss Royal Guard Shield",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Drop: Demeniss Königsgarde"},
-  {name:"Shield of Radiance",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Sanctum / Radiance-Linie"},
+  {name:"Shield of Radiance",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Loch im Boden südlich von Trader's Expanse (keine Truhe)"},
   {name:"Kutum Shield",type:"Shield",atk:null,crit:0,def:29,slots:2,source:"Drop: Kutum (Demeniss — Kingshield Dig Site, Marshell Estate)"},
   {name:"Black Sun Shield",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Schwarze Sonne / Endgame"},
   {name:"Mirror of Night Shield",type:"Shield",atk:null,crit:0,def:15,slots:2,source:"Abyss / Nacht-Bereich"},
@@ -4611,7 +4635,7 @@ const WEAPONS=[
   {name:"Large Gilded Shield",type:"Shield",atk:null,crit:0,def:27,slots:2,source:"Händler / Gold-Crafting"},
   {name:"Gale Shield",type:"Shield",atk:null,crit:0,def:6,slots:2,source:"Gale-Bereich / Exploration"},
   {name:"Shotgun Shield",type:"Shield",atk:null,crit:0,def:7,slots:2,source:"Crafting / Firearm-Shield-Kombination"},
-  {name:"Shield of Ringing",type:"Shield",atk:null,crit:0,def:5,slots:2,source:"Spire of Ringing Truth / Priscus-Bereich"},
+  {name:"Shield of Ringing",type:"Shield",atk:null,crit:0,def:5,slots:2,source:"The Laughing Marionette: im rot-weissen Zelt neben einem Harlekin"},
   {name:"Purple Scout Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Scout-Fraktion / Exploration"},
   {name:"Blue Scout Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Scout-Fraktion / Exploration"},
   {name:"Bekker Shield",type:"Shield",atk:null,crit:0,def:14,slots:2,source:"Bekker-Region / Exploration"},
@@ -5213,13 +5237,13 @@ const ARMOR=[
   {name:"Demeniss Elite Uniform",type:"Torso",source:"Demeniss-Fraktion (Quest-Belohnung)",effect:"Def+18",notes:"Demeniss-Set"},
   {name:"Duskfang Leather Armor",type:"Torso",source:"Duskfang Wolves Gebiet",effect:"Leather, Def 3-5 (quellenabhängig: game8 5, VULKK 3)",notes:"Offensives Nacht-Set"},
   {name:"Elegant Carmine Leather Armor",type:"Torso",source:"Hernand Händler (hochrangig)",effect:"Leather, Def+14",notes:"Ästhetisch + offensiv"},
-  {name:"Frostcursed Plate Armor",type:"Torso",source:"Truhen-Loot (Nord-Demeniss); seit Patch 1.13.00 auch craftbar (Rezept im Shop kaufbar, genaue Zutaten noch nicht dokumentiert)",effect:"Ice Resist Lv.7, Movement Speed Lv2, Def 14 (nicht aufwertbar)",notes:"Pflicht vs. Pailune-Bosse. Audit 2026-06-02: Werte präzisiert (game8)."},
+  {name:"Frostcursed Plate Armor",type:"Torso",source:"Mistshard Cave, Ost-Demeniss an der Grenze zu Pailune (Wasserfall-Höhle, Truhe hinter der Felswand); seit Patch 1.13.00 auch craftbar",effect:"Ice Resist Lv.7, Movement Speed Lv2, Def 14 (nicht aufwertbar)",notes:"Pflicht vs. Pailune-Bosse. Audit 2026-06-02: Werte präzisiert (game8)."},
   {name:"Golden Greed Plate Armor",type:"Torso",source:"Bursada Castle Ruins (Truhe)",effect:"Def 41 (voll aufgewertet), Plate",notes:"Legendäre Plate-Rüstung. Audit 2026-06-02: 'Gold Drop+5%' erfunden (kein Gold-Stat auf Rüstung); Def 35→41 (vulkk); Quelle Truhe statt Blueprint."},
   {name:"Grey Wolf Leather Armor",type:"Torso",source:"Grey Wolf Territory, Pailune",effect:"Leather, Def 9, Lightning Resist Lv1",notes:"Agility-Build"},
   {name:"Hernand Ceremonial Guard Armor",type:"Torso",source:"Hernand Palastwache Questlinie",effect:"Def+20",notes:"Hernand-Set"},
   {name:"Jackals' Leather Armor",type:"Torso",source:"Jackals-Fraktion Gebiet",effect:"Leather, Def 3, Lightning Resist Lv1",notes:"Offensives Leder"},
   {name:"Kuku Ice-Resistant Armor",type:"Torso",source:"Kilnden Workshop Blueprint",effect:"Ice Resist (Lv)",notes:"Bessere Version von Frostcursed. Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
-  {name:"Leather Armor of the Fallen Kingdom",type:"Torso",source:"Ruinen des alten Königreichs",effect:"Leather, Def+8",notes:"Fallen Kingdom Set"},
+  {name:"Leather Armor of the Fallen Kingdom",type:"Torso",source:"Frozen Soul Cave, Everfrost (hinter dem Wasserfall, südlich Sanctum of Benediction)",effect:"Leather, Def+8",notes:"Fallen Kingdom Set"},
   {name:"Light of the Battlefield Plate Armor",type:"Torso",source:"Legendary Warrior Drop",effect:"Plate, Def+32",notes:"Bestes Mid-Game Plate"},
   {name:"Northern Fighter's Chain Mail",type:"Torso",source:"Nördliche Händler / Herstellung",effect:"Def+20, Ice Resist (Lv)",notes:"Balanciert für Pailune"},
   {name:"Official Knight's Plate Armor",type:"Torso",source:"Ritter-Orden (Rep Rank 3)",effect:"Plate, Def+24",notes:""},
@@ -5245,7 +5269,7 @@ const ARMOR=[
   {name:"Flame Knight's Plate Helm",type:"Kopf",source:"Flammen-Ritter Questlinie",effect:"Plate, Fire Resist (Lv)",notes:"Flammen-Krieger Build"},
   {name:"Frostcursed Plate Helm",type:"Kopf",source:"Truhen-Loot (Nord-Demeniss)",effect:"Plate, Ice Resist (Lv)",notes:"Kuku Ice Set"},
   {name:"Golden Greed Plate Helm",type:"Kopf",source:"Sanctum of Renunciation (Truhe)",effect:"Def 21 (voll aufgewertet), Daze Immunity",notes:"Audit 2026-06-02: 'Gold Find+8%' erfunden; Def 18→21, Daze Immunity (vulkk)."},
-  {name:"Helm of Ignition",type:"Kopf",source:"Feuer-Schrein / Volcanic Boss",effect:"Fire Resist (Lv)",notes:"Offensiver Fire-Helm"},
+  {name:"Helm of Ignition",type:"Kopf",source:"Torchlight Beacon westlich von Hernand (im grossen weissen Zelt am Fuss des Turms)",effect:"Fire Resist (Lv)",notes:"Offensiver Fire-Helm"},
   {name:"Helm of Knowledge",type:"Kopf",source:"Scholastone Akademie (Quest)",effect:"Def 5, Daze Immunity, 'Acquire Knowledge' (Wissen aus Distanz scannen)",notes:"Bester Skill-Farm Helm"},
   {name:"Hernandian Crown",type:"Kopf",source:"Hernand Contribution Shop (70 Punkte)",effect:"Kosmetisch — keine Combat-Stats (Prestige-Item)",notes:"Audit 2026-06-02: 'All Stats+5%, Leadership-Aura' war erfunden — game8: 0 Combat-Stats. Rein optische Krönung des Hernand-Sets."},
   {name:"Jackals' Leather Helm",type:"Kopf",source:"Jackals-Fraktion",effect:"Leather, Def 3, Move Speed Lv1",notes:""},
@@ -5254,7 +5278,7 @@ const ARMOR=[
   {name:"Plate Helm of Cursed Soul",type:"Kopf",source:"Cursed Boss Drop",effect:"Plate, Def 2→21, Daze Immunity, 1 Abyss-Slot (Fortification I)",notes:"Cursed Soul Set"},
   {name:"Scorchflame Plate Helm",type:"Kopf",source:"West-Demeniss (Scorchflame-Set, Kliff-only)",effect:"Plate, Fire Resist (Lv)",notes:""},
   {name:"Unyielding Warrior's Plate Helm",type:"Kopf",source:"Equipment-Shop Calphade (nach Kap. VI: Cracks in the Shield)",effect:"Plate, Def+19",notes:"Endgame Warrior Set"},
-  {name:"Visione Helm",type:"Kopf",source:"Lioncrest Watchtower (oberstes Stockwerk)",effect:"Quest-Item",notes:"Kap. 2 Quest-Item"},
+  {name:"Visione Helm",type:"Kopf",source:"Lioncrest Watchtower, oberstes Stockwerk (Hauptquest 'Unexpected Gift', Kap. 2)",effect:"Quest-Item",notes:"Kap. 2 Quest-Item"},
 
   // ── Hände / Gloves ──
   {name:"Blackwing Leather Gloves",type:"Hände",source:"Draven-Gebiet / Crafting",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set"},
@@ -5268,7 +5292,7 @@ const ARMOR=[
   {name:"Hernand Ceremonial Guard Gloves",type:"Hände",source:"Hernand Palastwache",effect:"Def 4, Atk 17, Lightning Resist Lv1",notes:""},
   {name:"Light of the Battlefield Plate Gloves",type:"Hände",source:"Varnia (Truhe hinter halb geschlossenem Tor)",effect:"Plate, Def+12",notes:"Damiane-exklusiv"},
   {name:"Plate Gloves of Cursed Soul",type:"Hände",source:"Cursed Boss Drop",effect:"Plate, Def 2→19, ATK 11→35, 2 Abyss-Slots (Fortification I, Flameward I)",notes:"Cursed Soul Set"},
-  {name:"Plate Gloves of the Shadows",type:"Hände",source:"Shadow's Whisper Cave",effect:"Plate, Def 0→17, ATK 12→36, 2 Abyss-Gear-Slots (Ascent I, Surge I)",notes:"Shadows-Set"},
+  {name:"Plate Gloves of the Shadows",type:"Hände",source:"Everfrost Cave am Westrand von Hernand (Truhe hinten in der Höhle)",effect:"Plate, Def 0→17, ATK 12→36, 2 Abyss-Gear-Slots (Ascent I, Surge I)",notes:"Shadows-Set"},
   {name:"Plate Boots of the Shadows",type:"Schuhe",source:"Frostclaw Cave (via Wasserfall SW Hernand, Stab nötig)",effect:"Plate, liefert Abyss-Core 'Aptitude I' (+10% Skill XP)",notes:"Shadows-Set"},
   {name:"Scorchflame Plate Gloves",type:"Hände",source:"West-Demeniss (Scorchflame-Set)",effect:"Plate, Fire Resist (Lv), Abyss-Core-Sockel",notes:"Fire-Buff Fokus"},
   {name:"Ynitium Leather Gloves",type:"Hände",source:"Ynitium Mines / Crafting",effect:"Leather, Def 1, Atk 11, Crit Lv1, Lightning Resist Lv1",notes:""},
@@ -5276,7 +5300,7 @@ const ARMOR=[
   // ── Schuhe / Footwear ──
   {name:"Ashen Wolf's Leather Boots",type:"Schuhe",source:"Ashen Wolf Boss Drop",effect:"Leather, Def 1, Atk 9, Crit Rate Lv2, Lightning Resist Lv1",notes:""},
   {name:"Autumn Banquet Leather Boots",type:"Schuhe",source:"Hernand Bankett (Quest)",effect:"Leather, Def 3, Atk 10, Crit Rate Lv1, Lightning Resist Lv1",notes:"Bankett-Set"},
-  {name:"Belkandor Plate Boots",type:"Schuhe",source:"Belkandor Ruins",effect:"Plate, Def+14",notes:""},
+  {name:"Belkandor Plate Boots",type:"Schuhe",source:"Kauf bei Brookners Ausrüstungsladen in Tommaso (Vertrauen 100)",effect:"Plate, Def+14",notes:""},
   {name:"Blackwing Leather Boots",type:"Schuhe",source:"Draven-Gebiet / Crafting",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set"},
   {name:"Bolton Leather Boots",type:"Schuhe",source:"Bolton Region",effect:"Leather, Def+10",notes:""},
   {name:"Canta Plate Boots",type:"Schuhe",source:"Händler Rhett (Hernand Town)",effect:"Plate, Def+13",notes:""},
@@ -5295,7 +5319,7 @@ const ARMOR=[
   // ── Mantel / Cloaks ──
   {name:"Ashad Plate Cloak",type:"Mantel",source:"Ashad Fortress",effect:"Plate, Def+12",notes:""},
   {name:"Ashen Wolf's Leather Cloak",type:"Mantel",source:"Ashen Wolf Drop / Crafting",effect:"Leather, Lightning Resist Lv3 (Def-Wert quellenabhängig: game8 12, crimsondb 18, Fextralife 0)",notes:""},
-  {name:"Belkandor Plate Cloak",type:"Mantel",source:"Belkandor Ruins",effect:"Plate, Def+10",notes:""},
+  {name:"Belkandor Plate Cloak",type:"Mantel",source:"Bauplan bei Brookners Ausrüstungsladen in Tommaso (Vertrauen 100), danach schmieden",effect:"Plate, Def+10",notes:""},
   {name:"Black Bears' Cloth Cloak",type:"Mantel",source:"Black Bear Boss Drop / Crafting",effect:"Cloth, Def 5, Ice Resist Lv3",notes:"Synergiert mit White Bear Mount"},
   {name:"Blackwing Leather Cloak",type:"Mantel",source:"Draven-Gebiet",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set"},
   {name:"Bolton Plate Cloak",type:"Mantel",source:"Bolton Fortress",effect:"Plate, Def+10",notes:""},
@@ -10660,7 +10684,7 @@ function renderWeapons(){
         ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:11px">${w.built_in}</span></div>`:''}
         ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:11px;color:var(--dim)">${w.notes}</span></div>`:''}
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">📍 Auf Karte</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>
     </div>`;
   }).join('');
   if(searching){const cnt=document.getElementById('scnt');if(cnt)cnt.textContent=shown+' Treffer';}
@@ -11344,7 +11368,7 @@ function renderArmor(){
         <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:11px">${srcDisp}</span></div>
         ${a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:11px;color:var(--dim)">${a.notes}</span></div>`:''}
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">📍 Auf Karte</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>
     </div>`;
   }).join('');
 }
@@ -12157,12 +12181,101 @@ function extractMapSearch(src){
   if(pm){const t=pm[1].split(/[,\/]/)[0].trim();if(t.length>3)return t;}
   return src.split(/[,\/\(]/)[0].trim().replace(/\s+(Blueprint|Drop|Händler|Crafting|Quest[\s-]Belohnung|Fraktion|Region|Exklusiv|Craft|Ruinen|Workshop|Territory|Gebiet)\b.*/i,'').trim();
 }
+// ── Fundort-Karten (2026-08-14) ────────────────────────────────────────────
+// Zu Items, die man in der Spielwelt FINDET (Truhe, Hoehle, hinter einem
+// Wasserfall), liegt hier ein Kartenausschnitt mit Marker plus eine kurze
+// Wegbeschreibung in einfacher Sprache. Bossdrops, Questbelohnungen,
+// Zufallsdrops und Haendlerware stehen bewusst NICHT drin: dort gibt es keine
+// Stelle auf der Karte, zu der man hingehen kann.
+// Bilder liegen unter cd_assets/maps/<id>.jpg, Quelle steht je Eintrag in q/qUrl.
+// Gepflegt ueber G:\Claude\Crimson-Desert-Fundorte\ (gen-fundorte.mjs).
+// FUNDORTE-START (nicht von Hand editieren, wird generiert)
+const FUNDORTE={
+  "Acorn Mace":{"txt":"Geh zu den Demenissian Ruins am Willow River in Demeniss. Schleich dich an ein paar Banditen vorbei, die dort patrouillieren. Oben auf den Ruinen findest du die Acorn Mace.","img":"w-acorn-mace.jpg","q":"Fextralife Crimson Desert Wiki","qUrl":"https://crimsondesertgame.wiki.fextralife.com/Acorn_Mace","reg":"Demenissian Ruins, am Willow River in Demeniss"},
+  "Acria Sword":{"txt":"Reite von Hernand aus nach Nordosten zum Stellen Manor am Fluss. Die Wachen am Eingang sind blind, klettere also die Wand hoch und steig durchs Fenster ein. Löse drinnen das Klavier-Rätsel, geh durch den Geheimgang hinter dem Bücherregal in den Keller und nimm das Schwert von der Wandhalterung.","img":"w-acria-sword.jpg","q":"GameRant","qUrl":"https://gamerant.com/crimson-desert-stellen-manor-strongbox-solutions-acria-sword-location/","reg":"Hernand (nordöstlich von Drakesfall Gorge)","vor":"Klettern; Rätsellösung des Piano-Strongbox-Codes im Herrenhaus"},
+  "Alpha Wolf Helm":{"txt":"Geh zum Sanctum of Deliverance im Stormtalon Ridge, nördlich von Hernand. Entzünde dort die zwei Feuerschalen, damit sich ein verschlossener Raum öffnet. In der Truhe in diesem Raum liegt der Alpha Wolf Helm.","img":"a-alpha-wolf-helm.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/04/21/sanctum-of-deliverance-puzzle-walkthrough-in-crimson-desert/","reg":"Stormtalon Ridge, nördlich Hernand","vor":"Zwei Feuerschalen (Braziers) im Sanctum anzünden, um den Raum zu öffnen."},
+  "Ancient Shield":{"txt":"Reise zum Sanctum of Faith am Rand von Delesyia, in der Nähe des Grey Forest im Südosten. Nutze dort die Fähigkeit Blinding Flash, um die Weinranken an einem Turm gegenüber dem Heiligtum wegzubrennen. Dahinter findest du eine Schatztruhe mit dem Ancient Shield.","img":"w-ancient-shield.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/05/10/sanctum-of-faith-puzzle-walkthrough-in-crimson-desert/","reg":"Delesyia, Sanctum of Faith","vor":"Du musst vorher Lyselia, die Witch of Humility, getroffen haben, um das Sanctum-Rätsel lösen zu können."},
+  "Brass Rose Rapier":{"txt":"Reise in den Norden der Region Delesyia, westlich der Stadt Delesyia zur Snake Tail Wall. Dort findest du die Silverbrook Ruins mit einem kleinen Turm. Geh in den Turm hinunter ins Kellergeschoss, dort liegt die Waffe neben der Wendeltreppe.","img":"w-brass-rose-rapier.jpg","q":"nerdschalk.com","qUrl":"https://nerdschalk.com/crimson-desert-brass-rose-rapier-location-stats-and-effects-explained/","reg":"Silverbrook Ruins, nördlich City of Delesyia","vor":"Keine, die Waffe liegt frei zugänglich ohne Gegner oder Rätsel."},
+  "Caliburn's Mercy Pistol":{"txt":"Geh zu Fort Musket nordöstlich von Demeniss, in der Nähe vom Valley of the Moon. Steig im Turmgebäude die Treppen bis ganz nach oben und betritt das Büro dort. Auf dem Tisch im Raum liegt die Pistole, erreichbar nur in Kapitel 1 bis 7 oder nach Abschluss der Story.","img":"w-caliburn-s-mercy-pistol.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/05/25/how-to-get-the-dark-marksmans-armor-in-crimson-desert-overview-and-stats/","reg":"Demeniss, Fort Musket (nordöstlich von Demeniss, beim Valley of the Moon)","vor":"Kapitel 1-7 oder nach Abschluss der Hauptstory (Fort in Kap. 8-12 gesperrt)"},
+  "Dagger of Dark Pursuit":{"txt":"Reite zum Sanctum of Solace südwestlich von Pailune City. Geh zum rechteckigen Wasserbecken in der Mitte und folge dem Tunnel mit den zwei Laternen. Am Ende drehst du die Steinwand mit Force Palm zur Seite, dahinter steht die Truhe.","img":"w-dagger-of-dark-pursuit.jpg","q":"GameRant","qUrl":"https://gamerant.com/crimson-desert-how-to-get-dagger-of-dark-pursuit-location/","reg":"Sanctum of Solace, südwestlich von Pailune City","vor":"Focus Palm (Höhenblick), Force Palm"},
+  "Darkbringer Greatsword":{"txt":"Geh in die Bergregion im Nordwesten von Pailune, zwischen Five-Finger Mountain und Silver Wolf Mountain. Dort liegt versteckt im Nebel das White Wastes Sanctuary mit einem riesigen gefrorenen Skelett. Zieh das Schwert direkt aus dem Maul des Skeletts, ein Bosskampf ist dafür nicht nötig.","img":"w-darkbringer-greatsword.jpg","q":"powerpyx.com","qUrl":"https://www.powerpyx.com/crimson-desert-darkbringer-sword-location/","reg":"White Wastes Sanctuary, Nordwest-Pailune","vor":"Keine, von Spielbeginn an erreichbar. Das Gebiet bleibt aber oft unter Nebel und wird leicht übersehen."},
+  "Diverging Moon":{"txt":"Reise zum Southern Court im Süden von Demeniss. Du musst weder ins Gebäude hinein noch einen Boss besiegen. Die Waffe liegt draussen im Zeltbereich links vom Eingang.","img":"w-diverging-moon.jpg","q":"Nerdschalk","qUrl":"https://nerdschalk.com/crimson-desert-diverging-moon-location-stats-and-crescent-moon-slash-abyss-gear-ability-explained/","reg":"Southern Court, Demeniss"},
+  "Divine Echoes Bow":{"txt":"Reise zu den Rockshard Valley Ruins, einem von Gegnern bewachten Lager. Kämpfen musst du nicht. Gleite von oben direkt zur Truhe im Lager und nimm den Bogen.","img":"w-divine-echoes-bow.jpg","q":"Nerdschalk","qUrl":"https://nerdschalk.com/crimson-desert-divine-echoes-bow-location-stats-and-effects-rockshard-valley-ruins-camp-guide/","reg":"Crimson Desert Region, Rockshard Valley Ruins (nahe Tashkalp)","warn":"Die Anreise zu den Rockshard Valley Ruins wird in den Quellen unterschiedlich beschrieben. Der Ortsname stimmt, die Route nicht sicher."},
+  "Fallen Kingdom's Rapier":{"txt":"Geh zu den Icemoor Castle Ruins im Westen von Hernand, hinter den Thron des Stag Lord. Folge Treppe und Brücke bis zur Sackgasse mit dem Loch in der Wand und schlag die Bretter davor ein. Im Raum dahinter steht eine Truhe, das Rapier lehnt links daneben am Fass.","img":"w-fallen-kingdom-s-rapier.jpg","q":"Nerdschalk / GameRant","qUrl":"https://nerdschalk.com/crimson-desert-fallen-kingdoms-rapier-location-unlock-and-stats-explained/","reg":"Icemoor Castle Ruins, westliches Hernand","vor":"Force Palm; nur von Damiane nutzbar","warn":"Ob für die Bretter zwingend Force Palm nötig ist, ist nicht belegt."},
+  "Frostcursed Plate Armor":{"txt":"Geh zur Mistshard Cave, einer Wasserfallhöhle an der Grenze zwischen Demeniss und Pailune beim Deadfire Mountain. Nutze den Stab-Stoß, um unbeschadet durch den Wasserfall zu kommen. Brich dahinter die Felswand mit Force Palm auf, dort steht die Truhe.","img":"a-frostcursed-plate-armor.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/04/26/how-to-get-the-frostcursed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Grenzgebiet Demeniss/Pailune nahe Deadfire Mountain, laut Ingame-Beschreibung in den 'Smoking Lands'","vor":"Kein Quest nötig, frei zugaenglicher Weltfund. Skills Stab und Force Palm nötig (beide frueh im Spiel verfuegbar). Die Rüstung selbst ist laut VULKK nicht aufwertbar, craftbar seit Patch 1.13.00 laut Wiki nicht separat verifiziert.","warn":"Anders als die übrigen Teile des Sets liegt die Rüstung nicht in den Grotten am Denn River, sondern in der Mistshard Cave im Osten."},
+  "Frostcursed Plate Boots":{"txt":"Geh nördlich von Demeniss zum Denn River und folge ihm stromaufwärts bis zu einem Wasserfall, der Well of Tragedy Grotto (nordwestlich von Tariv). Nutze am Wasserfall den Stab-Stoß, um die versteckte Höhle dahinter zu betreten. Darin steht die Truhe mit den Frostcursed Plate Boots.","img":"a-frostcursed-plate-boots.jpg","q":"vulkk.com, gamerant.com, game8.co","qUrl":"https://vulkk.com/2026/04/26/how-to-get-the-frostcursed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Demeniss (nördlich, Denn River)","vor":"Stab-Stoß"},
+  "Frostcursed Plate Gloves":{"txt":"Geh zur Lunar Spirit Grotto, einer Höhle hinter einem Wasserfall am Denn River in Demeniss, westlich von Tariv. Nutze den Stab-Stoß, um durch den Wasserfall zu gelangen. In der Höhle dahinter liegt die Truhe mit den Handschuhen.","img":"a-frostcursed-plate-gloves.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/04/26/how-to-get-the-frostcursed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Lunar Spirit Grotto, Demeniss (westlich Tariv)","vor":"Stab-Stoß, um durch den Wasserfall zu gelangen."},
+  "Frostcursed Plate Helm":{"txt":"Geh zu den Chattering Rocks im Nordwesten von Demeniss, im Gebiet der Tariv-Zauberer. Suche an einem Steingebäude mit Außenleiter eine Wand voller grüner Ranken. Verbrenne die Ranken mit einer Feuerfähigkeit, dahinter liegt die Truhe mit dem Helm.","img":"a-frostcursed-plate-helm.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/04/26/how-to-get-the-frostcursed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Chattering Rocks, Nordwest-Demeniss","vor":"Feuerfähigkeit (z.B. Blinding Flash), um die Ranken zu verbrennen."},
+  "Frozen Anguish":{"txt":"Reite zum Spire of Frost, östlich von Beighen an der Grenze zwischen Pailune und Demeniss. Löse die vereiste Säule links der Treppe mit Turning Slash und entzünde sie, damit sich die Tür öffnet. Direkt unter der Wendeltreppe im Turm steht die Truhe mit dem Frozen Anguish.","img":"w-frozen-anguish.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/04/18/spire-of-frost-walkthrough-in-crimson-desert/","reg":"Spire of Frost, Grenze Pailune/Demeniss östlich von Beighen","vor":"Turning Slash (Skill)"},
+  "Frozen Soul":{"txt":"Geh in die Region Skoghorn in den Argent Peaks im Westen von Pailune. Dort liegt eine Grube, umgeben von Felsen und zerbrochenen Holzbalken. Am Boden der Grube liegt ein Skelett, direkt daneben liegt das Frozen Soul zum Aufsammeln.","img":"w-frozen-soul.jpg","q":"Nerdschalk","qUrl":"https://nerdschalk.com/crimson-desert-frozen-soul-weapon-location-stats-and-effects-skoghorn-location-guide/","reg":"Skoghorn, The Argent Peaks (Pailune)"},
+  "Goblin King's Treasure":{"txt":"Reite zur Mudridge Cabin im Pororin Forest, nördlich von Pororin Village. Besiege die Banditen und klettere am kleineren Gebäude zur Plattform über dem Sumpf hinunter. Kriech durch die kleine Öffnung, am Ende des Gangs steht die Truhe.","img":"w-goblin-king-s-treasure.jpg","q":"GameRant","qUrl":"https://gamerant.com/crimson-desert-how-to-get-goblin-kings-treasure-dagger-location/","reg":"Mudridge Cabin, Pororin Forest"},
+  "Golden Greed Plate Armor":{"txt":"Geh zu den Bursada Castle Ruins im Dschungel zwischen Wüste und Delesyia. Betritt das große Tor am Fuß der Burg und folge dem Gang nach links bis zum Ende. Schlag dort die brüchige Wand mit Force Palm ein, dahinter steht die Truhe.","img":"a-golden-greed-plate-armor.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/05/07/how-to-get-the-golden-greed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Tashkalp / Grenze Krimsonwüste-Delesyia, Bursada Castle Ruins"},
+  "Golden Greed Plate Boots":{"txt":"Geh zur Arehaza Cave am Red River, nordwestlich der Bursada Castle Ruins im Dschungel zwischen Delesyia und der Crimson Desert. Der Eingang ist mit einer Bismuth-Wand blockiert, die du mit Focus: Force Palm zerstörst. Dahinter liegt die Truhe mit den Golden Greed Plate Boots.","img":"a-golden-greed-plate-boots.jpg","q":"vulkk.com, allthings.how","qUrl":"https://vulkk.com/2026/05/07/how-to-get-the-golden-greed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Grenzgebiet Delesyia/Crimson Desert (Red River)","vor":"Focus: Force Palm-Fähigkeit"},
+  "Golden Greed Plate Cloak":{"txt":"Folge dem Red River flussaufwärts nach Norden, bis du an einen Wasserfall kommst. Das ist der Eingang zur Venomblade Grotto, versteckt hinter den Wassermassen. Nutze den Stab-Stoß, um durch den Wasserfall in die Höhle zu gelangen, dort liegt die Truhe mit dem Golden Greed Plate Cloak.","img":"a-golden-greed-plate-cloak.jpg","q":"vulkk.com","qUrl":"https://vulkk.com/2026/05/07/how-to-get-the-golden-greed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Red River / Venomblade Grotto","vor":"Fähigkeit 'Stab' (Stoß-Angriff), um durch den Wasserfall zu tauchen."},
+  "Golden Greed Plate Gloves":{"txt":"Geh zur Holzbrücke östlich vom Drywind Valley, wo der Denn River einen Wasserfall bildet. Auf halber Höhe liegt ein schmaler Felsvorsprung. Stoß von dort mit dem Stab durch den Wasserfall in die Höhle, ganz hinten steht die Truhe.","img":"a-golden-greed-plate-gloves.jpg","q":"vulkk.com, gamerant.com","qUrl":"https://vulkk.com/2026/05/07/how-to-get-the-golden-greed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Delesyia (Drywind Valley, Denn River)","vor":"Stab-Stoß (Standard bei allen drei Charakteren)"},
+  "Golden Greed Plate Helm":{"txt":"Geh zum Sanctum of Renunciation am Red River, im Dschungel zwischen Delesyia und der Crimson-Wüste. Entzünde die zwei Fackeln neben der Treppe an der Südwestseite des Gebäudes. Dahinter öffnet sich eine geheime Wand mit der Truhe.","img":"a-golden-greed-plate-helm.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/05/07/how-to-get-the-golden-greed-plate-armor-in-crimson-desert-overview-and-stats/","reg":"Sanctum of Renunciation","vor":"Zwei Fackeln/Laternen an der Treppe anzünden."},
+  "Grasping Moon":{"txt":"Reise zum Western Court in Demeniss. Die Waffe liegt im weißen Zelt auf einem Waffenständer und lässt sich dort auch ohne Bosskampf mitnehmen.","reg":"Western Court, Demeniss","warn":"Ob der Western Court schon vor Kapitel 8 betretbar ist, ist nicht belegt. Vor Kapitel 8 kommt ihr eventuell nicht heran."},
+  "Helm of Ignition":{"txt":"Geh zum Torchlight Beacon, einem Leuchtturm auf einem Hügel westlich von Hernand Town. Folge der geschwungenen Straße bergauf bis zu den Zelten am Fuß des Turms. In einem der Zelte liegt der Helm einfach zum Mitnehmen bereit.","img":"a-helm-of-ignition.jpg","q":"Nerdschalk","qUrl":"https://nerdschalk.com/crimson-desert-how-to-find-helm-of-ignition-torchlight-beacon-location-stats-and-activation-guide/","reg":"Torchlight Beacon, westlich Hernand","vor":"Keine - freies Aufsammeln, kein Kampf nötig."},
+  "Hollow Visage":{"txt":"Geh zum Wasserfall am Mountain of Frozen Souls im südlichen Hernand. Stell dich vor den Wasserfall und nutze den Stab-Stoß, um hindurchzustoßen, dahinter öffnet sich die Dawn Cave. Folge der Höhle bis zum Ende, dort steht die Truhe mit der Waffe.","img":"w-hollow-visage.jpg","q":"gamerant.com","qUrl":"https://gamerant.com/crimson-desert-how-get-reed-devil-armor-sword-hollow-visage-location/","reg":"Dawn Cave, Mountain of Frozen Souls, Südliches Hernand","vor":"Stab-Stoß muss freigeschaltet sein, um durch den Wasserfall zu gelangen."},
+  "Hwando":{"txt":"Das Lioncrest Manor liegt im Nordwesten von Hernand, gleich bei Hernand Castle. Klettere an der Westseite des Nebengebäudes durch das Fenster ohne Glas hinein. Dahinter liegt ein verschlossener Raum, für den du einen Schlüssel brauchst, dort steht die Truhe.","reg":"Lioncrest Manor (Nebengebäude), Hernand","vor":"Ein Schlüssel wird benötigt (z.B. für 30 Bronzemünzen bei Grimrack in Hernand Farmhouse kaufbar, oder von Banditen erbeutbar)."},
+  "Leather Armor of the Fallen Kingdom":{"txt":"Geh zur Frozen Soul Cave in Everfrost, südlich vom Sanctum of Benediction (auf der Karte zwischen den Buchstaben E und R von 'Hernand'). Folge dem Fluss nach Westen bis du auf einen Wasserfall triffst und tritt mit dem Stab-Stoß hindurch. In der kleinen Höhle dahinter steht die Truhe mit der Rüstung.","img":"a-leather-armor-of-the-fallen-kingdom.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/03/31/how-to-get-the-fallen-kingdom-armor-in-crimson-desert-overview-and-stats/","reg":"Everfrost / West-Hernand","vor":"Stab-Stoß (Waffenskill), um durch den Wasserfall zu gelangen."},
+  "Leather Helm of the Fallen Kingdom":{"txt":"Geh zum Sanctum of Benediction im Westen von Hernand. Zünde dort die Fackel neben der Treppe an, dann öffnet sich eine geheime Tür in der Wand. Dahinter findest du die Truhe mit dem Helm.","img":"a-leather-helm-of-the-fallen-kingdom.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/03/31/how-to-get-the-fallen-kingdom-armor-in-crimson-desert-overview-and-stats/","reg":"Sanctum of Benediction, West-Hernand","vor":"Fackel/Laterne neben der Treppe anzünden."},
+  "Light of the Battlefield Plate Gloves":{"txt":"Geh in den Südbezirk von Varnia. Dort gibt es eine Kante mit zwei Bettlern, über die du dich hochziehen kannst. Schau von unten nach Süden, dann siehst du ein halb geschlossenes Tor; kriech hindurch zur Truhe mit den Light of the Battlefield Plate Gloves.","img":"a-light-of-the-battlefield-plate-gloves.jpg","q":"vulkk.com, gamerant.com","qUrl":"https://vulkk.com/2026/06/12/how-to-get-damianes-light-of-the-battlefield-armor-in-crimson-desert-overview-and-stats/","reg":"Varnia (Südbezirk)"},
+  "Light of the Battlefield Plate Helm":{"txt":"Geh zur Halbinsel in Trivana Sound, nordöstlich vom Outlaw Canyon an der Straße nach Varnia. Klettere unter den großen Felsen dort und schau nach Norden. Mitten unter dem Felsen steht die Truhe mit dem Helm.","img":"a-light-of-the-battlefield-plate-helm.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/06/12/how-to-get-damianes-light-of-the-battlefield-armor-in-crimson-desert-overview-and-stats/","reg":"Trivana Sound, nordöstlich Outlaw Canyon","vor":"Unter den Felsen klettern (Kletterfähigkeit)."},
+  "Mace of Ambition":{"txt":"Geh zum Spire of Clockwork bei Breezeblown Knoll im Osten von Demeniss. Den Schlüssel dafür bekommst du erst nach Kapitel 8 der Hauptstory. Seit Patch 1.15 liegt die Keule auf einem Holzsteg im Raum mit der Drehtür, einige Stockwerke unter der Turmspitze.","reg":"Demeniss, Spire of Clockwork bei Breezeblown Knoll","vor":"Hauptquest Kapitel 8 (A Fleeting Dream) abgeschlossen für den Spire-Schlüssel"},
+  "Plate Armor of the Shadows":{"txt":"Geh zum Everfrost Watchtower in den Argent Peaks, nördlich der Hoenmark Ruins im Westen von Hernand. An der Suedseite des Turms findest du eine verriegelte Tür in der Felswand mit einer Laterne daneben. Entzuende die Laterne, das Tor öffnet sich und in der Truhe dahinter liegt die Rüstung.","img":"a-plate-armor-of-the-shadows.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/04/26/how-to-get-the-plate-armor-of-the-shadows-saurons-set-in-crimson-desert-overview-and-stats/","reg":"Argent Peaks, West-Hernand","vor":"Kein Quest nötig, frei zugaenglicher Weltfund. Vorsicht vor Bleed Bandits im Turmbereich."},
+  "Plate Boots of the Shadows":{"txt":"Die Frostclaw Cave liegt hinter einem Wasserfall am Nas River im Süden von Hernand, dort wo der Fluss in Richtung Everfrost läuft. Stoß mit dem Stab durch den Wasserfall in die Höhle. Ganz hinten steht die Truhe.","img":"a-plate-boots-of-the-shadows.jpg","q":"vulkk.com, pcgamer.com","qUrl":"https://vulkk.com/2026/04/26/how-to-get-the-plate-armor-of-the-shadows-saurons-set-in-crimson-desert-overview-and-stats/","reg":"Hernand (Westen, Frostclaw)","vor":"Stab-Stoß","warn":"Zur genauen Lage der Höhle widersprechen sich die Quellen. Haltet euch an die Karte, der Wasserfall ist der sichere Anhaltspunkt."},
+  "Plate Cloak of the Shadows":{"txt":"Geh zu den Hoenmark Ruins nördlich von Hernand, wo ständig ein Schneesturm tobt. Etwas westlich der Ruinen steht ein Steinhaus, auf dessen Dach eine auffällige Steinplatte liegt. Ducke dich davor und schlag sie mit Force Palm ein, darunter wartet die Truhe.","img":"a-plate-cloak-of-the-shadows.jpg","q":"thegamer.com","qUrl":"https://www.thegamer.com/crimson-desert-armor-of-shadows-set-guide-map-location-beloth/","reg":"Everfrost / Hoenmark Ruins","vor":"Fähigkeit 'Force Palm', um die Steinplatte auf dem Dach einzuschlagen; Kälte-/Eisresistenz oder Vorrat an Essen wegen des Schneesturms empfohlen."},
+  "Plate Gloves of the Shadows":{"txt":"Geh an den Westrand von Hernand, etwas südlich des Flusses, der in die Everfrost-Berge fließt. Dort liegt die Everfrost Cave hinter einem Wasserfall, tief im Schnee. Ganz hinten in der Höhle steht die Truhe.","img":"a-plate-gloves-of-the-shadows.jpg","q":"vulkk.com","qUrl":"https://vulkk.com/2026/04/26/how-to-get-the-plate-armor-of-the-shadows-saurons-set-in-crimson-desert-overview-and-stats/","reg":"Hernand (Westen, Everfrost)"},
+  "Rhonid Large Shield":{"txt":"Reite nordwestlich von Hernand City zum Lioncrest Manor und besorg dir vorher einen Schlüssel oder eine Maske beim Hinterhof-Händler. Klettere an der rechten Seite des Herrenhauses durchs Fenster ein, geh durch die große Halle und über den Innenbalkon im Obergeschoss. Hinter der abgeschlossenen Tür auf dem Balkon steht die Truhe mit dem Rhonid Large Shield.","img":"w-rhonid-large-shield.jpg","q":"Fextralife Crimson Desert Wiki / GameRant","qUrl":"https://crimsondesertgame.wiki.fextralife.com/Rhonid_Large_Shield","reg":"Lioncrest Manor, nordwestlich von Hernand City","vor":"Schlüssel oder Maske (zum Diebstahl eines Schlüssels) nötig für die verschlossene Tür"},
+  "Righteous Verdict":{"txt":"Reite zum Nightfell Expedition Camp im Süden von Demeniss, nahe der Küste östlich der Steel Mountains. Von dort führt eine Höhle hinab in die Demeniss Ancestors' Ruins. Spring über die großen Steinsäulen im Wasser und geh durch die Tür am Ende - im letzten Raum steckt das Righteous Verdict im Boden.","img":"w-righteous-verdict.jpg","q":"GameRant","qUrl":"https://gamerant.com/crimson-desert-righteous-verdict-sword-location/","reg":"Demeniss Ancestors' Ruins, südliches Demeniss","vor":"Springen/Klettern über Steinsäulen"},
+  "Ring of the Earth":{"txt":"Geh zu den Reedfield Graves, einem Friedhof in den Hernand Highlands südlich von Hernand Castle. Dort steht das Haus, an dem du im Kapitel-3-Auftrag 'Nonhuman' zum ersten Mal auf den Reed Devil getroffen bist. Auf einem der Gräber rechts von diesem Haus liegt der Ring of the Earth.","img":"w-ring-of-the-earth.jpg","q":"Fextralife Crimson Desert Wiki","qUrl":"https://crimsondesertgame.wiki.fextralife.com/Ring_of_the_Earth","reg":"Reedfield Graves, Hernand Highlands (südlich von Hernand Castle)"},
+  "Scorchflame Plate Armor":{"txt":"Geh zum Golden Trading Post nördlich von Demeniss. Im westlichen Bereich zwischen zwei Holztreppen findest du eine schmale Holzwand, durch die du dich duckend hindurchzwaengst. Dahinter steht die Truhe mit der Scorchflame Plate Armor.","img":"a-scorchflame-plate-armor.jpg","q":"GameRant","qUrl":"https://gamerant.com/crimson-desert-scorchflame-knight-armor-full-set-locations/","reg":"Demeniss, noerdlicher Bereich beim Golden Trading Post","vor":"Kein Quest nötig, frei zugaenglicher Weltfund. Craftbar seit Patch 1.13.00 laut Wiki, das habe ich in dieser Recherche nicht separat verifiziert."},
+  "Shield of Conviction":{"txt":"Geh zur Church of Calphade nordwestlich von Hernand, nahe dem Deepfog Basin. Klettere am Turm hoch bis zu einem kaputten Fenster direkt unter der Glocke, zum Beispiel mit Force Palm. Im Turm steht die Truhe mit dem Schild und einer Palmar Pill.","img":"w-shield-of-conviction.jpg","q":"Nerdschalk","qUrl":"https://nerdschalk.com/crimson-desert-shield-of-conviction-location-guide-calphade-church-treasure-chest-and-how-to-get-there/","reg":"Hernand, Church of Calphade (nordwestlich von Hernand, nahe Deepfog Basin)","vor":"keine besondere, früh im Spiel erreichbar"},
+  "Shield of Radiance":{"txt":"Geh an den östlichen Rand der Karte, südlich von Trader's Expanse. Dort klafft ein grosses Loch im Boden, eher eine Grube. Steig hinein, der Schild liegt offen darin, ganz ohne Truhe.","img":"w-shield-of-radiance.jpg","q":"VULKK.com","qUrl":"https://vulkk.com/2026/06/12/how-to-get-damianes-light-of-the-battlefield-armor-in-crimson-desert-overview-and-stats/","reg":"Östlich der Karte, südlich von Trader's Expanse"},
+  "Shield of Ringing":{"txt":"Geh zum Laughing Marionette Zirkus außerhalb der Demenissian-Hauptstadt. Betritt das rot-weiße Zelt dort. Der Shield of Ringing liegt neben einem Harlekin auf einem Tisch im Zelt.","reg":"Demenissian-Hauptstadtregion, The Laughing Marionette"},
+  "Soul Spear":{"txt":"Schau auf der Weltkarte direkt über dem 'H' von Hernand: dort liegt in den Argent Peaks ein versteckter Dungeon, die Antumbra Ritual Grounds. Der Eingang liegt an einer Felswand; geh von dort zwei Ebenen nach unten. Auf einer Plattform in der Mitte des unteren Raums schwebt die Soul Spear.","img":"w-soul-spear.jpg","q":"Fextralife Crimson Desert Wiki","qUrl":"https://crimsondesertgame.wiki.fextralife.com/Soul_Spear","reg":"Antumbra Ritual Grounds / Tomb of Frozen Souls, Argent Peaks, nordwestlich von Hernand"},
+  "Survivor's Solitude":{"txt":"Geh westlich des Scholastone Institute durch The Witchwoods bis zu einem Fluss, dem du nach Norden folgst. Am Ende des Flusses liegt ein großer Wasserfall. Stell dich davor und nutze den Stab-Stoß, um hindurchzustoßen, dahinter liegt die Death's Grip Cavern mit der Truhe.","img":"w-survivor-s-solitude.jpg","q":"method.gg","qUrl":"https://www.method.gg/crimson-desert/crimson-desert-survivors-solitude-weapon-location-best-early-game-sword","reg":"Death's Grip Cavern, westlich Scholastone Institute / The Witchwoods","vor":"Stab-Stoß nötig, um durch den Wasserfall zu gelangen. Von Spielbeginn an erreichbar."},
+  "Troll Hook Greataxe":{"txt":"Geh zur Vinewood Winery in Demeniss, erkennbar an einem auffälligen weißen Silo. Betritt den Silo von unten und klettere mit einer Kletter-Fähigkeit nach oben zum Dach. Oben findest du die Truhe mit der Axt.","reg":"Demeniss, Vinewood Winery"},
+  "Visione Helm":{"txt":"Steig auf den Lioncrest Watchtower westlich von Hernand, dafür musst du den Rankenbewuchs am Turmfuss mit einem brennenden Pfeil abfackeln. Kaempfe dich an der Spitze durch Banditen und pass unterwegs auf Saegeblatt-Fallen auf, die durch Stolperdraehte ausgeloest werden. Oben liegt der Visione Helm auf dem Boden neben einem Fass in der Naehe des Altars.","reg":"West-Hernand, Lioncrest Watchtower","vor":"Teil der Hauptquest 'Unexpected Gift' in Kapitel 2 (Questschritte 'Where the Light Leads' und 'Reunion'). Der Helm wird zwangslaeufig beim Story-Fortschritt gefunden, kein rein optionaler Weltfund.","warn":"Kein freier Fund: der Helm gehört zur Hauptquest 'Unexpected Gift' in Kapitel 2. Vorher kommt ihr nicht heran."},
+  "Vow of the Dead King":{"txt":"Nimm die Straße südwestlich von Pailune City, die am Sanctum of Solace vorbeiführt, und folge ihr bergauf bis zu den Frostveiled Castle Ruins auf Silverwolf Mountain. Steig in die Ruinen hinab in den Keller, geh durch den Feuer-Korridor und zuende die Kerze an, um eine Tür zu öffnen. Dahinter liegt die Waffe auf einem Steinsarg bzw. Steintisch.","img":"w-vow-of-the-dead-king.jpg","q":"gamerant.com","qUrl":"https://gamerant.com/crimson-desert-vow-of-the-dead-king-location/","reg":"Frostveiled Castle Ruins, Silverwolf Mountain, Nord-Pailune","vor":"Keine besondere Voraussetzung genannt, Gebiet ist von Banditen bewacht."}
+};
+// FUNDORTE-ENDE
+
+// Button-Beschriftung: zeigt schon in der Karten-Uebersicht, wo eine Fundort-
+// Karte hinterlegt ist, damit niemand 500 Waffen durchklickt, um 47 zu finden.
+function foBtn(name){ return FUNDORTE[name]?'⌖ Fundort ansehen':'📍 Auf Karte'; }
+
+function foRender(name){
+  const el=document.getElementById('lm-fundort');
+  const box=document.querySelector('#loc-modal .loc-modal-box');
+  const d=FUNDORTE[name];
+  if(!d){ el.style.display='none'; el.innerHTML=''; box.classList.remove('has-fundort'); return; }
+  const bild=d.img?`<figure class="lm-fo-fig">
+      <!-- bewusst OHNE loading="lazy": das Markup entsteht erst beim Oeffnen des
+           Modals, und ein Lazy-Bild in einem noch unsichtbaren Container laedt
+           in Chrome nicht nach. -->
+      <img class="lm-fo-img" src="cd_assets/maps/${escHtml(d.img)}" decoding="async"
+           alt="Karte mit markiertem Fundort von ${escHtml(name)}"
+           onerror="this.closest('.lm-fo-fig').style.display='none'">
+      ${d.q?`<figcaption class="lm-fo-cred">Kartenausschnitt: ${d.qUrl?`<a href="${escHtml(d.qUrl)}" target="_blank" rel="noopener noreferrer">${escHtml(d.q)}</a>`:escHtml(d.q)} · Spielgrafik © Pearl Abyss</figcaption>`:''}
+    </figure>`:'';
+  el.innerHTML=`<div class="lm-fo-hd">⌖ Wo liegt das${d.reg?' — '+escHtml(d.reg):''}</div>
+    ${bild}
+    <div class="lm-fo-txt">${escHtml(d.txt)}</div>
+    ${d.vor?`<div class="lm-fo-req">🔑 ${escHtml(d.vor)}</div>`:''}
+    ${d.warn?`<div class="lm-fo-warn">⚠ ${escHtml(d.warn)}</div>`:''}`;
+  el.style.display='block';
+  box.classList.add('has-fundort');
+}
+
 function showMapLoc(name,src,type){
   _mapLocSearch=extractMapSearch(src);
   document.getElementById('lm-type').textContent=type||'Fundort';
   document.getElementById('lm-name').textContent=name;
   document.getElementById('lm-src').textContent=src;
   document.getElementById('lm-term').textContent=_mapLocSearch;
+  foRender(name);
   document.getElementById('loc-modal').style.display='flex';
   modalFocusOpen('loc-modal');
 }
