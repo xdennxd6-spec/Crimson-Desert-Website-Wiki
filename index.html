@@ -1818,8 +1818,14 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .icon-hd-label{font-family:var(--f-mono);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
 .craft-ico{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px;background:var(--vellum-hi);padding:2px;flex-shrink:0;border:1px solid var(--iron-gall);border-radius:8px;filter:grayscale(.15) contrast(1.03)}
 .craft-grade{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:auto;flex-shrink:0}
-/* Item-Icons in den Kompendium-Tabellen (Itemdex/Gatherables/Food) und auf Accessoire-Karten */
-.item-ico{width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:7px;background:var(--vellum-hi);padding:2px;border:1px solid var(--iron-gall);border-radius:7px;filter:grayscale(.15) contrast(1.03)}
+/* Item-Icons in den Kompendium-Tabellen (Itemdex/Gatherables/Food) und auf Accessoire-Karten.
+   Groesse zentral ueber --item-ico nachjustierbar. Das Kaestchen ist border-box, die sichtbare
+   Bildflaeche also Groesse minus 2x padding minus 2x border: 32px ergeben 26px Bild und damit
+   dieselbe Bildflaeche wie Dye-Chips (.dye-chip) und Accessoire-Icons (.acc-item-ico); mit den
+   alten 24px blieben nur 18px und die Icons wirkten in den 65-170px hohen Tabellenzeilen verloren.
+   Die Sprites sind 256px-Quellen, Vergroessern kostet keine Schaerfe. */
+:root{--item-ico:32px}
+.item-ico{width:var(--item-ico);height:var(--item-ico);object-fit:contain;vertical-align:middle;margin-right:8px;background:var(--vellum-hi);padding:2px;border:1px solid var(--iron-gall);border-radius:8px;filter:grayscale(.15) contrast(1.03)}
 .acc-item-ico{width:26px;height:26px;object-fit:contain;flex-shrink:0;filter:grayscale(.1) contrast(1.03)}
 .tag.tt{background:rgba(60,90,99,.13);color:var(--slate);border:1px solid var(--slate)}
 /* Koch-Stufen-Block: bündelt Basis/Filling/Satisfying/Hearty eines Gerichts auf EINER Karte.
