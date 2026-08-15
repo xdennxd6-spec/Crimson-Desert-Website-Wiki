@@ -3156,8 +3156,12 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
     <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
     <div id="it-dex" class="sub-t" style="scroll-margin-top:72px">Items-Kompendium</div>
     <div style="font-size:11.5px;color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst. Gekochte Gerichte (Food &amp; Elixirs), Roh-Materialien (Gatherables), Dyes, Cores und Ausrüstung haben eigene Tabs. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz". <span style="color:var(--dim);font-size:10px">[Recherche-Audit 2026-06-28, jeder Eintrag mehrquellig verifiziert; ≈ = nur Einzelquelle belegt]</span></div>
+    <!-- Bereichsleiste und Kategorie-Auswahl werden aus ITEMS erzeugt (renderItemBar / fillItemdexCats).
+         Bewusst nicht mehr als feste option-Liste im Markup: die stand sonst neben den Daten und hatte
+         zuletzt die Kategorie "Pet-Ausruestung — Vogel" nicht, deren Eintraege damit unfilterbar waren. -->
+    <div id="itemdex-bar" class="ibar"></div>
     <div class="fbar">
-      <select class="fs" id="itemdex-cat" aria-label="Gegenstaende nach Kategorie filtern" onchange="renderItemdex()"><option value="">Alle Kategorien</option><option value="Werkzeug — Lampe">Werkzeug — Lampe</option><option value="Werkzeug — Bergbau">Werkzeug — Bergbau</option><option value="Werkzeug — Holzfällen">Werkzeug — Holzfällen</option><option value="Werkzeug — Sammeln">Werkzeug — Sammeln</option><option value="Werkzeug — Erkundung">Werkzeug — Erkundung</option><option value="Werkzeug — Mount">Werkzeug — Mount</option><option value="Munition">Munition</option><option value="Verbrauchsgegenstand — Wurf/Kampf">Verbrauchsgegenstand — Wurf/Kampf</option><option value="Verbrauchsgegenstand — Heilung/Status">Verbrauchsgegenstand — Heilung/Status</option><option value="Währung &amp; Progression">Währung &amp; Progression</option><option value="Schlüssel- &amp; Quest-Item">Schlüssel- &amp; Quest-Item</option><option value="Quest-Dokument &amp; Notiz">Quest-Dokument &amp; Notiz</option></select>
+      <select class="fs" id="itemdex-cat" aria-label="Gegenstaende nach Kategorie filtern" onchange="renderItemdex()"><option value="">Alle Kategorien</option></select>
       <span id="itemdex-cnt" style="font-size:11px;color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="itemdex-tb"></tbody></table></div>
@@ -11555,11 +11559,13 @@ function renderCollectibles(){
 }
 
 // ===== COMPENDIUM-SEKTIONEN (Gatherables / Raetsel / Dyes / Food&Elixirs, seit 2026-06-06) =====
-function renderCompendium(secId,DATA,filterId,iconCell){
+// preFilter ist optional und greift VOR dem Kategorie-Filter. Nur der Itemdex nutzt ihn
+// (Bereichsleiste); Gatherables, Raetsel, Dyes und Food rufen unveraendert mit vier Argumenten auf.
+function renderCompendium(secId,DATA,filterId,iconCell,preFilter){
   const tb=document.getElementById(secId+'-tb');
   if(!tb)return;
   const f=(document.getElementById(filterId)||{}).value||'';
-  const list=DATA.filter(x=>!f||x.cat===f);
+  const list=DATA.filter(x=>(!preFilter||preFilter(x))&&(!f||x.cat===f));
   const cnt=document.getElementById(secId+'-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
   const itemIco=c=>(!iconCell&&c.icon&&c.icon.startsWith('/assets/'))?`<img class="item-ico" src="${SYNTH_CDN}${c.icon}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">`:'';
   tb.innerHTML=list.map(c=>`<tr>${iconCell?'<td class="dye-td">'+iconCell(c)+'</td>':''}
@@ -12878,7 +12884,45 @@ const ITEMS=[
   {name:"Wisdom between Donation and Fruition",cat:"Quest-Dokument & Notiz",detail:"Eine Notiz mit Details zu Bekehrungs- bzw. Missionierungsaktivitäten (conversion activities). Reines Lese-Dokument, das nach der Übergabe gelesen werden soll.",loc:"Wird in der Church of Hernand (Solumen-Orden, Stadt Hernand) erhalten; ein Priester auf der rechten Seite der Kirche begrüßt den Spieler und überreicht die Notiz. Quelle: Fextralife, crimsondesert.gaming.tools, Questlog.gg, GamerGuides",miss:false,conf:"high",icon:"/assets/_sprites/itemicon_prefab_cd_t0000_boardpaper_0239.webp"},
   {name:"Ugmon's Note",cat:"Quest-Dokument & Notiz",detail:"Eine als Key Item geführte Notiz von Ugmon vom Handelszentrum Goldleaf Guildhouse. Reines Lese-/Questdokument im Rahmen von „Ugmon's Request“; kann nicht verkauft werden.",loc:"Im Verlauf von „Ugmon's Request“ rund um Ugmon am Goldleaf Guildhouse erhältlich; die genaue Aufnahme ist in den Quellen nicht näher spezifiziert. Quelle: Fextralife",miss:false,conf:"medium",icon:"/assets/_sprites/itemicon_prefab_cd_t0000_boardpaper_0148.webp"},
 ];
-function renderItemdex(){renderCompendium('itemdex',ITEMS,'itemdex-cat');}
+// ===== ITEMDEX: Bereichsleiste =====
+// 165 Eintraege am Stueck waren zu viel fuer eine Liste. Die Feinkategorien sind zu sechs
+// Oberbereichen gebuendelt; die Kategorie-Auswahl darunter zeigt nur noch die Kategorien des
+// aktiven Bereichs, damit keine leeren Kombinationen waehlbar sind. Kategorien, die in keinem
+// Bereich stehen, sammelt "Sonstiges" ein — eine spaeter ergaenzte Kategorie kann so nicht
+// unbemerkt aus dem Filter fallen, was der alten festen option-Liste genau passiert war.
+const ITEM_BEREICHE=[
+  {key:'werkzeug',label:'Werkzeuge',icon:'🔧',cats:['Werkzeug — Lampe','Werkzeug — Bergbau','Werkzeug — Holzfällen','Werkzeug — Sammeln','Werkzeug — Erkundung','Werkzeug — Mount']},
+  {key:'kampf',label:'Kampf & Verbrauch',icon:'⚔️',cats:['Munition','Verbrauchsgegenstand — Wurf/Kampf','Verbrauchsgegenstand — Heilung/Status']},
+  {key:'waehrung',label:'Währung',icon:'💰',cats:['Währung & Progression']},
+  {key:'quest',label:'Schlüssel & Quest',icon:'🗝️',cats:['Schlüssel- & Quest-Item']},
+  {key:'doku',label:'Dokumente',icon:'📜',cats:['Quest-Dokument & Notiz']},
+  {key:'pet',label:'Pet-Ausrüstung',icon:'🐦',cats:['Pet-Ausrüstung — Vogel']}
+];
+let ITEMDEX_BEREICH='',ITEMDEX_INIT=false;
+function itemBereichVon(cat){const b=ITEM_BEREICHE.find(x=>x.cats.indexOf(cat)>-1);return b?b.key:'sonstiges';}
+function fillItemdexCats(){
+  const sel=document.getElementById('itemdex-cat');if(!sel)return;
+  const rang=c=>{const i=ITEM_BEREICHE.findIndex(b=>b.key===itemBereichVon(c));return i<0?99:i;};
+  const cats=[...new Set(ITEMS.filter(i=>!ITEMDEX_BEREICH||itemBereichVon(i.cat)===ITEMDEX_BEREICH).map(i=>i.cat))]
+    .sort((a,b)=>rang(a)-rang(b)||a.localeCompare(b,'de'));
+  sel.innerHTML='<option value="">Alle Kategorien</option>'+cats.map(c=>`<option value="${escHtml(c)}">${escHtml(c)}</option>`).join('');
+  sel.value='';
+}
+function setItemBereich(key){ITEMDEX_BEREICH=key;fillItemdexCats();renderItemdex();}
+function renderItemBar(){
+  const el=document.getElementById('itemdex-bar');if(!el)return;
+  const z={};ITEMS.forEach(i=>{const k=itemBereichVon(i.cat);z[k]=(z[k]||0)+1;});
+  const chips=[{key:'',label:'Alle',icon:'❒',n:ITEMS.length}]
+    .concat(ITEM_BEREICHE.filter(b=>z[b.key]).map(b=>({key:b.key,label:b.label,icon:b.icon,n:z[b.key]})));
+  if(z.sonstiges)chips.push({key:'sonstiges',label:'Sonstiges',icon:'❓',n:z.sonstiges});
+  el.innerHTML='<span class="ibar-l">Bereich:</span>'+chips.map(c=>
+    `<button class="ichip${ITEMDEX_BEREICH===c.key?' on':''}" onclick="setItemBereich('${c.key}')" aria-pressed="${ITEMDEX_BEREICH===c.key}">${c.icon} ${escHtml(c.label)}<span class="n">${c.n}</span></button>`).join('');
+}
+function renderItemdex(){
+  if(!ITEMDEX_INIT){ITEMDEX_INIT=true;fillItemdexCats();}
+  renderItemBar();
+  renderCompendium('itemdex',ITEMS,'itemdex-cat',null,x=>!ITEMDEX_BEREICH||itemBereichVon(x.cat)===ITEMDEX_BEREICH);
+}
 
 // ===== SANCTUM GUIDE =====
 const SANCTUM_GUIDE=[
