@@ -679,7 +679,7 @@ ${sections}`;
   return pageShell({
     slugName: "true-ending",
     title: `Crimson Desert True Ending: komplette Checkliste (Deutsch)`,
-    desc: `Alle ${TRUE_ENDING.length} Pflichtaufgaben für das True Ending von Crimson Desert: Begleiter-Arcs, Sanctums, Hexen-Tokens und Greymane-Commissions als abhakbare Checkliste.`,
+    desc: `Alle ${TRUE_ENDING.length} Pflichtaufgaben für das True Ending von Crimson Desert: Begleiter-Arcs, Sanctums, Hexen-Tokens und Abyss-Aufgaben als abhakbare Checkliste.`,
     h1: "Crimson Desert True Ending: komplette Checkliste",
     lead: `Das <strong>True Ending</strong> (das „wahre Ende") von Crimson Desert schaltest du nur frei, wenn du vor dem Abschluss der Hauptstory bestimmte optionale Aufgaben erfüllst. Diese Checkliste fasst alle <strong>${TRUE_ENDING.length} Pflichtaufgaben</strong> zusammen, sortiert nach Bereich.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
