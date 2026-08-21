@@ -636,7 +636,17 @@ input.fs::-webkit-search-cancel-button{cursor:pointer;opacity:.55}
   box-shadow:6px 6px 0 var(--paper-shadow);
   transform:translate(-1px,-1px);
 }
-.card.hide,.trow.hide,.set-card.hide{display:none!important}
+/* Ausgefiltert. Eine Regel fuer ALLE Knoten — vorher zaehlte sie nur .card,
+   .trow und .set-card auf, waehrend die Suche `hide` auf JEDEM [data-s]-Knoten
+   setzt. Dadurch liessen sich 367 durchsuchbare Knoten in fuenf Sektionen gar
+   nicht ausblenden (203 Fraktionsquests .fac-q, 78 Nebenquests details.sq-item,
+   64 Tabellenzeilen ohne .trow, 18 Trophaeenkarten .ach-card, 4 Roadmap-Aufgaben
+   .rm-task): Die Suche markierte sie, sichtbar blieb alles, und der Trefferzaehler
+   nannte eine Zahl, die nicht zum Bild passte. Dazu 52 von 93 Synthese-Familien-
+   koepfen (.synth-fam), die renderSynthesis selbst als hide markiert.
+   Die Klasse wird nirgends statisch im HTML vergeben und hat keine zweite
+   Bedeutung — geprueft am 22.08.2026 —, deshalb ist die klassenweite Regel sicher. */
+.hide{display:none!important}
 .ct{font-family:var(--f-display);font-size:16px;font-weight:700;color:var(--iron-gall);margin-bottom:9px;letter-spacing:.01em}
 .boss-recur{display:flex;align-items:flex-start;gap:5px;margin:-3px 0 10px;padding:4px 9px;font-family:var(--f-mono);font-size:10.5px;font-weight:500;line-height:1.4;color:var(--slate);background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--slate);border-radius:8px}
 .boss-recur .ri{flex:none;font-size:11px;line-height:1.3;opacity:.85}
