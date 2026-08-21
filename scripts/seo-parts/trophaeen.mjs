@@ -51,6 +51,22 @@ const ZEITPUNKT_LABEL = {
   "nach Abspann": "nach dem Abspann",
 };
 
+// Datenmengen, die die redaktionellen Texte in scripts/seo-content/ per
+// Platzhalter einsetzen ({{name}} = Ziffer, {{name|wort}} = ausgeschrieben).
+// Einzige Quelle fuer diese Zahlen ist die Datenstruktur selbst — nie ein
+// fest verdrahteter Wert im Text. Siehe zahlenEinsetzen() in gen-seo.mjs.
+export function ZAHLEN(ctx) {
+  const { TROPHIES } = ctx.data;
+  const je = (g) => TROPHIES.filter((t) => t.grade === g).length;
+  return {
+    anzahl: TROPHIES.length,
+    verpassbar: TROPHIES.filter((t) => t.miss).length,
+    // "alle uebrigen Trophaeen" in der Platin-Anleitung: alles ausser Platin selbst.
+    uebrige: TROPHIES.length - 1,
+    platin: je("platinum"), gold: je("gold"), silber: je("silver"), bronze: je("bronze"),
+  };
+}
+
 export function build(ctx) {
   const { TROPHIES, TROPHY_GRADES } = ctx.data;
   const { esc, has, breadcrumbLd, SITE } = ctx.helpers;

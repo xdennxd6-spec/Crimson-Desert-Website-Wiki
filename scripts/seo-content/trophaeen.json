@@ -1,5 +1,5 @@
 [
-  {"name":"Pywel Legend","anleitung":"Schalte alle 34 übrigen PlayStation-Trophäen frei. Die Platin-Trophäe wird danach automatisch vergeben.","zeitpunkt":"nach Abspann","achtung":""},
+  {"name":"Pywel Legend","anleitung":"Schalte alle {{uebrige}} übrigen PlayStation-Trophäen frei. Die Platin-Trophäe wird danach automatisch vergeben.","zeitpunkt":"nach Abspann","achtung":""},
   {"name":"Novice Adventurer","anleitung":"Folge ausschließlich den Hauptquests bis zum Abschluss von Kapitel 1. Die Trophäe wird während der Story automatisch freigeschaltet.","zeitpunkt":"frueh","achtung":""},
   {"name":"Master Camper","anleitung":"Spiele die Hauptstory bis Kapitel 3 weiter und schließe die Hauptquest „Familiar Curses“ im Unterkapitel „Homestead“ ab. Dadurch wird das Lager bei Howling Hill aktiviert.","zeitpunkt":"mitte","achtung":""},
   {"name":"Protector of Pailune","anleitung":"Folge der Hauptstory bis Kapitel 7 und schließe die Befreiung von Pailune ab. Besiege dabei die Black Bears und Jackals, wie es die Story verlangt.","zeitpunkt":"mitte","achtung":""},

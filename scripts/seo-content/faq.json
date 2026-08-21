@@ -2,7 +2,7 @@
   "ruestungen": [
     {
       "frage": "Wo finde ich alle Rüstungsteile in Crimson Desert?",
-      "antwort": "Die Übersicht sammelt alle 314 Rüstungsteile mit Fundort und Effekt. Nutze die Angaben zu Region, Gegnern, Händlern oder Aktivitäten, um gezielt nach einem bestimmten Teil zu suchen."
+      "antwort": "Die Übersicht sammelt alle {{anzahl}} Rüstungsteile mit Fundort und Effekt. Nutze die Angaben zu Region, Gegnern, Händlern oder Aktivitäten, um gezielt nach einem bestimmten Teil zu suchen."
     },
     {
       "frage": "Welche Rüstung ist in Crimson Desert die beste?",
@@ -22,13 +22,13 @@
     },
     {
       "frage": "Wie viele Rüstungsteile gibt es in Crimson Desert?",
-      "antwort": "Die Rüstungsübersicht enthält 314 Teile. Sie verteilt sich auf Torso, Kopf, Hände, Schuhe und Mäntel."
+      "antwort": "Die Rüstungsübersicht enthält {{anzahl}} Teile. Sie verteilt sich auf Torso, Kopf, Hände, Schuhe und Mäntel."
     }
   ],
   "crafting": [
     {
       "frage": "Wo finde ich alle Rezepte in Crimson Desert?",
-      "antwort": "Die Handwerksübersicht listet 310 Rezepte aus den Kategorien Elixier, Essen und Kuku Gadget. Zu jedem Rezept stehen Zutaten, benötigte Station und Wirkung, damit du fehlende Materialien gezielt suchen kannst."
+      "antwort": "Die Handwerksübersicht listet {{anzahl}} Rezepte aus den Kategorien Elixier, Essen und Kuku Gadget. Zu jedem Rezept stehen Zutaten, benötigte Station und Wirkung, damit du fehlende Materialien gezielt suchen kannst."
     },
     {
       "frage": "Welche Zutaten brauche ich für ein Rezept in Crimson Desert?",
@@ -48,17 +48,17 @@
     },
     {
       "frage": "Wie viele Crafting Rezepte gibt es in Crimson Desert?",
-      "antwort": "Die Übersicht enthält 310 Handwerks und Kochrezepte. Sie umfasst Elixiere, Essen und Kuku Gadgets."
+      "antwort": "Die Übersicht enthält {{anzahl}} Handwerks und Kochrezepte. Sie umfasst Elixiere, Essen und Kuku Gadgets."
     }
   ],
   "trophaeen": [
     {
       "frage": "Wie viele Trophäen gibt es in Crimson Desert?",
-      "antwort": "Die Trophäenübersicht enthält 35 Erfolge in Platin, Gold, Silber und Bronze. Sie markiert außerdem fünf Trophäen als verpassbar."
+      "antwort": "Die Trophäenübersicht enthält {{anzahl}} Erfolge in Platin, Gold, Silber und Bronze. Sie markiert außerdem {{verpassbar|wort}} Trophäen als verpassbar."
     },
     {
       "frage": "Welche Trophäen in Crimson Desert sind verpassbar?",
-      "antwort": "In der Übersicht sind fünf Trophäen als verpassbar gekennzeichnet. Plane diese Bedingungen frühzeitig ein und sichere deinen Fortschritt, bevor du irreversible Entscheidungen oder Storyabschnitte abschließt."
+      "antwort": "In der Übersicht sind {{verpassbar|wort}} Trophäen als verpassbar gekennzeichnet. Plane diese Bedingungen frühzeitig ein und sichere deinen Fortschritt, bevor du irreversible Entscheidungen oder Storyabschnitte abschließt."
     },
     {
       "frage": "Kann man in Crimson Desert alle Trophäen in einem Durchgang holen?",
@@ -70,7 +70,7 @@
     },
     {
       "frage": "Wie verhindere ich verpassbare Achievements in Crimson Desert?",
-      "antwort": "Vergleiche vor wichtigen Hauptquests und Entscheidungen deinen Fortschritt mit den fünf markierten Trophäen. Erledige optionale Ziele sofort, wenn ihre Beschreibung an einen bestimmten Abschnitt, Charakter oder Zustand gebunden ist."
+      "antwort": "Vergleiche vor wichtigen Hauptquests und Entscheidungen deinen Fortschritt mit den {{verpassbar|wort}} markierten Trophäen. Erledige optionale Ziele sofort, wenn ihre Beschreibung an einen bestimmten Abschnitt, Charakter oder Zustand gebunden ist."
     },
     {
       "frage": "Sind Trophäen und Achievements in Crimson Desert dasselbe?",
@@ -80,11 +80,11 @@
   "bestiarium": [
     {
       "frage": "Wo finde ich alle Gegner in Crimson Desert?",
-      "antwort": "Das Bestiarium enthält 44 normale Gegnertypen mit Region, möglichen Drops und Taktikhinweisen. Suche nach der gewünschten Region oder Gegnergruppe, um passende Fundorte schneller einzugrenzen."
+      "antwort": "Das Bestiarium enthält {{anzahl}} normale Gegnertypen mit Region, möglichen Drops und Taktikhinweisen. Suche nach der gewünschten Region oder Gegnergruppe, um passende Fundorte schneller einzugrenzen."
     },
     {
       "frage": "Welche Tiere kann man in Crimson Desert besiegen?",
-      "antwort": "Im Bestiarium sind 11 Wildtiere aufgeführt. Die Einträge zeigen, in welcher Region sie vorkommen und welche möglichen Beutedrops sie liefern."
+      "antwort": "Im Bestiarium sind {{wild}} Wildtiere aufgeführt. Die Einträge zeigen, in welcher Region sie vorkommen und welche möglichen Beutedrops sie liefern."
     },
     {
       "frage": "Welche Drops bekommt man von Gegnern in Crimson Desert?",
@@ -96,7 +96,7 @@
     },
     {
       "frage": "Was ist der Unterschied zwischen Kreaturen und Fraktionsgegnern?",
-      "antwort": "Das Bestiarium trennt 10 Kreaturen von 23 Fraktionsgegnertypen. Kreaturen werden als eigene Gegnergruppe geführt, während Fraktionsgegner einer organisierten Gegnerseite zugeordnet sind."
+      "antwort": "Das Bestiarium trennt {{kreaturen}} Kreaturen von {{fraktionen}} Fraktionsgegnertypen. Kreaturen werden als eigene Gegnergruppe geführt, während Fraktionsgegner einer organisierten Gegnerseite zugeordnet sind."
     },
     {
       "frage": "Wo farmt man Materialien am besten in Crimson Desert?",
@@ -106,11 +106,11 @@
   "side-quests": [
     {
       "frage": "Wo finde ich alle Nebenquests in Crimson Desert?",
-      "antwort": "Die Übersicht enthält 78 Nebenquests aus sechs Regionen. Jeder Eintrag hilft dir, Quests nach Gebiet zu prüfen und verpassbare Aufgaben rechtzeitig zu erkennen."
+      "antwort": "Die Übersicht enthält {{anzahl}} Nebenquests aus {{regionen|wort}} Regionen. Jeder Eintrag hilft dir, Quests nach Gebiet zu prüfen und verpassbare Aufgaben rechtzeitig zu erkennen."
     },
     {
       "frage": "Welche Nebenquests in Crimson Desert sind verpassbar?",
-      "antwort": "Sechs Nebenquests sind in der Übersicht als verpassbar markiert. Erledige sie möglichst vor großen Storyfortschritten und prüfe ihre Voraussetzungen, bevor du ein Gebiet dauerhaft verlässt."
+      "antwort": "{{verpassbar|Wort}} Nebenquests sind in der Übersicht als verpassbar markiert. Erledige sie möglichst vor großen Storyfortschritten und prüfe ihre Voraussetzungen, bevor du ein Gebiet dauerhaft verlässt."
     },
     {
       "frage": "Kann ich Nebenquests nach der Hauptstory noch machen?",
@@ -118,7 +118,7 @@
     },
     {
       "frage": "Wie viele Nebenquests gibt es in Crimson Desert?",
-      "antwort": "Die Questübersicht listet 78 Nebenquests. Sie sind den Regionen Hernand, Pailune, Crimson Desert, Demeniss und Delesyia zugeordnet."
+      "antwort": "Die Questübersicht listet {{anzahl}} Nebenquests. Sie sind den Regionen Hernand, Pailune, Crimson Desert, Demeniss und Delesyia zugeordnet."
     },
     {
       "frage": "Warum startet eine Nebenquest in Crimson Desert nicht?",
@@ -126,8 +126,7 @@
     },
     {
       "frage": "Wie verpasse ich keine Nebenquests in Crimson Desert?",
-      "antwort": "Arbeite jede Region möglichst vollständig ab, bevor du die Hauptgeschichte weiterspielst. Nutze die Übersicht besonders für die sechs verpassbaren Quests und kontrolliere offene Aufgaben vor wichtigen Wendepunkten."
+      "antwort": "Arbeite jede Region möglichst vollständig ab, bevor du die Hauptgeschichte weiterspielst. Nutze die Übersicht besonders für die {{verpassbar|wort}} verpassbaren Quests und kontrolliere offene Aufgaben vor wichtigen Wendepunkten."
     }
   ]
 }
-

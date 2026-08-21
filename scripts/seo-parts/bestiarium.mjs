@@ -105,6 +105,20 @@ ${note}${tipp}
 </article>`;
 }
 
+// Datenmengen, die die redaktionellen Texte in scripts/seo-content/ per
+// Platzhalter einsetzen ({{name}} = Ziffer, {{name|wort}} = ausgeschrieben).
+// Einzige Quelle fuer diese Zahlen ist die Datenstruktur selbst — nie ein
+// fest verdrahteter Wert im Text. Siehe zahlenEinsetzen() in gen-seo.mjs.
+export function ZAHLEN(ctx) {
+  const { ENEMIES } = ctx.data;
+  return {
+    anzahl: GROUPS.reduce((sum, [key]) => sum + ENEMIES[key].length, 0),
+    wild: ENEMIES.wild.length,
+    kreaturen: ENEMIES.kreaturen.length,
+    fraktionen: ENEMIES.fraktionen.length,
+  };
+}
+
 export function build(ctx) {
   const { ENEMIES } = ctx.data;
   const { breadcrumbLd, SITE } = ctx.helpers;

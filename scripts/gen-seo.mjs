@@ -146,6 +146,52 @@ const SEO_FAQ = ladeInhalt("faq.json");
 // pro Datensatz und nicht pro Seite gilt; das Modul indiziert selbst nach Namen.
 const SEO_TROPHAEEN = ladeInhalt("trophaeen.json");
 
+// ── Zahlen in redaktionellen Texten ──────────────────────────────────────────
+// Die Fliesstexte in seo-content/ behaupten Datenmengen ("alle 337 Ruestungsteile",
+// "fuenf verpassbare Trophaeen"). Fest verdrahtet driften diese Zahlen still von den
+// Daten weg — genau das war am 14.08.2026 passiert: der Ruestungsbestand wuchs von
+// 314 auf 337, Title und ItemList zogen automatisch mit, Intro und FAQ blieben bei
+// 314 stehen und widersprachen der eigenen Seite fuenf Tage lang.
+//
+// Deshalb stehen dort jetzt Platzhalter: {{anzahl}} setzt die Ziffernform ein,
+// {{verpassbar|wort}} die ausgeschriebene. Die Werte liefert das jeweilige Modul
+// ueber seinen ZAHLEN(ctx)-Export, abgeleitet aus denselben Daten, aus denen die
+// Seite gebaut wird. Ein unbekannter Platzhalter bricht den Build ab, statt still
+// im Text stehen zu bleiben.
+const ZAHLWORT = ["null", "eine", "zwei", "drei", "vier", "fünf", "sechs", "sieben",
+  "acht", "neun", "zehn", "elf", "zwölf"];
+const alsWort = (n) => (Number.isInteger(n) && n >= 0 && n < ZAHLWORT.length ? ZAHLWORT[n] : String(n));
+// {{name|Wort}} gross geschrieben — zwei der Redaktionssaetze beginnen mit der
+// Zahl ("Sechs Nebenquests sind verpassbar"). Ohne diese Variante tauscht man
+// einen Zahlenfehler gegen einen Grammatikfehler ein.
+const grossFormen = { wort: alsWort, Wort: (n) => { const w = alsWort(n); return w.charAt(0).toUpperCase() + w.slice(1); } };
+
+function zahlenEinsetzen(text, zahlen, herkunft) {
+  return String(text).replace(/\{\{(\w+)(?:\|(wort|Wort))?\}\}/g, (_, name, form) => {
+    if (!(name in zahlen)) {
+      throw new Error(`Unbekannter Platzhalter {{${name}}} in ${herkunft}. `
+        + `Bekannt sind: ${Object.keys(zahlen).join(", ") || "(keine — Modul exportiert kein ZAHLEN)"}`);
+    }
+    const wert = zahlen[name];
+    if (typeof wert !== "number") throw new Error(`Platzhalter {{${name}}} in ${herkunft} ist keine Zahl: ${wert}`);
+    return form ? grossFormen[form](wert) : String(wert);
+  });
+}
+
+// Dieselbe Ersetzung ueber eine ganze Datenstruktur. Gebraucht fuer
+// seo-content/trophaeen.json: das ist kein Seitentext, sondern ein Array von
+// Freischalt-Anleitungen, das gen-seo.mjs bisher ROH an das Modul weiterreichte —
+// und damit an jeder Absicherung vorbei. Dort stand "alle 34 uebrigen
+// PlayStation-Trophaeen" als hartes Literal, also TROPHIES.length-1.
+function platzhalterTief(wert, zahlen, herkunft) {
+  if (typeof wert === "string") return zahlenEinsetzen(wert, zahlen, herkunft);
+  if (Array.isArray(wert)) return wert.map((v, i) => platzhalterTief(v, zahlen, `${herkunft}[${i}]`));
+  if (wert && typeof wert === "object") {
+    return Object.fromEntries(Object.entries(wert).map(([k, v]) => [k, platzhalterTief(v, zahlen, `${herkunft}.${k}`)]));
+  }
+  return wert;
+}
+
 // Eine Antwort "unbekannt" ist eine ehrliche Nicht-Antwort der Recherche, aber auf
 // der Seite wertlos und ein schlechtes Signal. Solche Paare fliegen raus.
 function faqFuer(slugName) {
@@ -571,7 +617,7 @@ function buildWaffen() {
   }).join("\n");
   const body = `
 <a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
-<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>: Eine Kartierung aller 421 Waffen mit ATK gegen die Refinement-Tabellen von Fextralife (Stand 11.08.2026) zeigt, dass hier der höchste dokumentierte Wert steht — bei Kampfwaffen also die Refinement-Endstufe +10. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl.</p>
+<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>: Eine Kartierung aller ${WEAPONS.filter((w) => has(w.atk)).length} Waffen mit ATK gegen die Refinement-Tabellen von Fextralife (Stand 11.08.2026) zeigt, dass hier der höchste dokumentierte Wert steht — bei Kampfwaffen also die Refinement-Endstufe +10. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl.</p>
 ${sections}`;
   const jsonld = {
     "@context": "https://schema.org",
@@ -700,17 +746,29 @@ function faqPageLd(liste) {
 
 // Baut die fertige Seite eines Moduls: Modul-Ausgabe + Intro-Absatz + FAQ.
 function baueModulSeite(p) {
-  const spec = p.build(CTX);
+  // Zusatztexte des Moduls (ctx.content) VOR dem Rendern fuellen, sonst bliebe
+  // eine {{...}}-Klammer im ausgelieferten HTML stehen.
+  const vorabZahlen = typeof p.ZAHLEN === "function" ? p.ZAHLEN(CTX) : {};
+  const ctx = CTX.content[p.SLUG] === undefined ? CTX
+    : { ...CTX, content: { ...CTX.content, [p.SLUG]: platzhalterTief(CTX.content[p.SLUG], vorabZahlen, `${p.SLUG}.json`) } };
+  const spec = p.build(ctx);
 
   // Einleitungsabsatz ganz nach oben, direkt unter den Lead. Das ist der erste
   // zusammenhaengende Fliesstext der Seite und damit das, was Suchmaschinen zur
   // thematischen Einordnung heranziehen.
+  // Datenmengen des Moduls, fuer die Platzhalter in Intro, FAQ und Zusatztexten.
+  const zahlen = typeof p.ZAHLEN === "function" ? p.ZAHLEN(CTX) : {};
+
   const intro = SEO_INTROS[p.SLUG];
   if (intro && intro.intro) {
-    spec.bodyHtml = `<p class="intro">${esc(intro.intro)}</p>\n${spec.bodyHtml}`;
+    const text = zahlenEinsetzen(intro.intro, zahlen, `intros.json → ${p.SLUG}.intro`);
+    spec.bodyHtml = `<p class="intro">${esc(text)}</p>\n${spec.bodyHtml}`;
   }
 
-  const faq = faqFuer(p.SLUG);
+  const faq = faqFuer(p.SLUG).map((f, i) => ({
+    frage: zahlenEinsetzen(f.frage, zahlen, `faq.json → ${p.SLUG}[${i}].frage`),
+    antwort: zahlenEinsetzen(f.antwort, zahlen, `faq.json → ${p.SLUG}[${i}].antwort`),
+  }));
   if (faq.length) {
     spec.bodyHtml += "\n" + faqSektion(faq);
     if (spec.jsonld && Array.isArray(spec.jsonld["@graph"])) {

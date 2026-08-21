@@ -48,6 +48,19 @@ function regionsByCount(SIDE_QUESTS) {
   return Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b, "de"));
 }
 
+// Datenmengen, die die redaktionellen Texte in scripts/seo-content/ per
+// Platzhalter einsetzen ({{name}} = Ziffer, {{name|wort}} = ausgeschrieben).
+// Einzige Quelle fuer diese Zahlen ist die Datenstruktur selbst — nie ein
+// fest verdrahteter Wert im Text. Siehe zahlenEinsetzen() in gen-seo.mjs.
+export function ZAHLEN(ctx) {
+  const { SIDE_QUESTS } = ctx.data;
+  return {
+    anzahl: SIDE_QUESTS.length,
+    verpassbar: SIDE_QUESTS.filter((q) => q.miss).length,
+    regionen: regionsByCount(SIDE_QUESTS).length,
+  };
+}
+
 export function build(ctx) {
   const { SIDE_QUESTS } = ctx.data;
   const { esc, slug, breadcrumbLd } = ctx.helpers;

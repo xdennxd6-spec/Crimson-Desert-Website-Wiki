@@ -602,7 +602,7 @@ body::before{
 .ichip:hover{background:rgba(201,162,39,.22);border-color:rgba(201,162,39,.5)}
 .ichip.on{background:var(--gold);border-color:var(--gold);color:var(--bg)}
 .ichip .n{font-weight:400;opacity:.7;margin-left:6px;font-size:11px;font-family:var(--f-mono)}
-select.fs{
+select.fs,input.fs{
   background:var(--vellum-hi);border:1px solid var(--iron-gall);
   padding:7px 11px;color:var(--iron-gall);
   font-size:11.5px;font-family:var(--f-mono);letter-spacing:.02em;
@@ -613,6 +613,11 @@ select.fs{
 }
 select.fs:focus{border-color:var(--survey-red)}
 select.fs:hover{border-color:var(--survey-red)}
+/* Sucheingabe in einer Filterleiste: gleiche Optik wie die Selects daneben,
+   aber ohne Dropdown-Pfeil und mit Text-Cursor. */
+input.fs{cursor:text;appearance:none;background-image:none;padding-right:11px;min-width:170px}
+input.fs:focus,input.fs:hover{border-color:var(--survey-red)}
+input.fs::-webkit-search-cancel-button{cursor:pointer;opacity:.55}
 
 /* ============================================================
    KARTEN = kartografische Platten (harte Ecken, harte Schatten)
@@ -641,6 +646,11 @@ select.fs:hover{border-color:var(--survey-red)}
 .tg{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 .tx{background:var(--panel);color:var(--iron-soft);border-color:var(--line)}
 .tw{background:rgba(154,90,28,.12);color:var(--warn);border-color:var(--warn)}
+/* Provenienz-Marke (Ruestungen): eigene, gestrichelte Optik. Die Farbklassen
+   tr/tg/tx/tw stehen auf derselben Karte schon fuer den Ruestungstyp — zwei
+   Bedeutungen in einer Farbe waeren nicht lesbar. */
+.tag.pv{background:transparent;color:var(--gdim);border-color:var(--bdr);border-style:dashed;text-transform:none;letter-spacing:.02em}
+.tag.pv-warn{background:transparent;color:var(--warn);border-color:var(--warn);border-style:dashed;text-transform:none;letter-spacing:.02em}
 .tsp{background:var(--instr-soft);color:var(--brass);border:1px solid var(--brass);font-family:var(--f-mono);letter-spacing:.06em}
 .crows{display:flex;flex-direction:column;gap:5px}
 .crow{display:flex;gap:8px;font-size:12px}
@@ -2445,14 +2455,14 @@ table{
    index.html nicht (verifiziert per Grep der :root-Definitionen) —
    auf vorhandene Aequivalente --text/--rhi gemappt.
    ============================================================ */
-select.fs{
+select.fs,input.fs{
   background-color:rgba(10,11,18,.6);
   border:1px solid var(--line-strong);
   border-radius:10px;
   color:var(--text);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237d7fa0'/%3E%3C/svg%3E");
 }
-select.fs:focus,select.fs:hover{border-color:var(--red)}
+select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(--red)}
 
 /* Boss-Dossier: NPC-Lore kompakt als Glas-Overlay am Fuss der Portrait-Spalte */
 #boss-grid .record-img .boss-lore{
@@ -3181,8 +3191,14 @@ select.fs:focus,select.fs:hover{border-color:var(--red)}
 
   <section class="sec" id="sec-armor">
     <h2 class="sec-t"><span class="sec-sym">⛓</span> Rüstungen</h2>
+    <div style="font-size:11.5px;color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Quellenlage:</b> Jedes der <b><span id="armor-total">–</span></b> Teile sagt jetzt auf der Karte, <b>woher</b> sein Wert stammt — das stand bisher nur als Kommentar im Quelltext. <b><span id="armor-import">–</span></b> Teile kommen aus dem <b>Datenimport</b> der Spieldateien, <b><span id="armor-guide">–</span></b> sind <b>aus Guides belegt</b> (VULKK, game8, Fextralife, teils die offiziellen Patch Notes), <b><span id="armor-alt">–</span></b> stammen aus dem alten kuratierten Bestand und sind <b>ungeprüft</b> — dort hat der Fakten-Audit vom 02.06.2026 nachweislich erfundene Werte gefunden und die gröbsten entfernt. Bei <b><span id="armor-ohne">–</span></b> Teilen ist überhaupt kein Zahlenwert hinterlegt.<br><b>Was die Marke nicht sagt:</b> Sie ist eine Herkunftsangabe, keine Vertrauensnote. „Datenimport“ heißt <b>nicht</b> „gegengeprüft“ — diese Werte hat niemand einzeln gegen einen Guide gehalten, und einzelne von ihnen sind unvollständig: Odeck’s Protector Plate Helm fehlt die Daze-Immunität, dem zugehörigen Mantel die Eis-Resistenz, obwohl beides in der Set-Beschreibung weiter unten belegt ist. Umgekehrt kann ein „aus Guides belegt“ besser dokumentiert sein als ein Importwert.</div>
     <div class="fbar">
-      <select class="fs" id="af-type" aria-label="Ruestungen nach Typ filtern" onchange="renderArmor()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
+      <input class="fs" id="af-q" type="search" placeholder="Rüstung, Fundort, Effekt …" aria-label="Rüstungen durchsuchen" oninput="armorFilter()" style="min-width:190px">
+      <select class="fs" id="af-type" aria-label="Rüstungen nach Typ filtern" onchange="armorFilter()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
+      <select class="fs" id="af-mat" aria-label="Rüstungen nach Material filtern" onchange="armorFilter()"><option value="">Alle Materialien</option><option value="Plate">Plate</option><option value="Leather">Leather</option><option value="Cloth">Cloth</option><option value="Chain">Chain</option><option value="none">ohne Materialangabe</option></select>
+      <select class="fs" id="af-prov" aria-label="Rüstungen nach Quellenlage filtern" onchange="armorFilter()"><option value="">Alle Quellenlagen</option><option value="import">nur Datenimport</option><option value="guide">nur aus Guides belegt</option><option value="altbestand">nur ungeprüft</option><option value="ohnewert">nur ohne Zahlenwert</option></select>
+      <select class="fs" id="af-sort" aria-label="Rüstungen sortieren" onchange="renderArmor()"><option value="type">Sortierung: Typ, dann Name</option><option value="name">Name A–Z</option><option value="def">Defense absteigend</option><option value="atk">Angriff absteigend</option><option value="prov">Quellenlage</option></select>
+      <span id="armor-count" style="font-size:11px;color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="grid" id="armor-grid"></div>
     <div id="wt-sets" class="sub-t" style="scroll-margin-top:72px">Rüstungs-Sets</div>
@@ -5248,356 +5264,356 @@ const CRAFTING=[
 ];
 
 const ARMOR=[
-  // HINWEIS 2026-06-02 (Fakten-Audit Rüstungen — Quellen vulkk/game8/Fextralife): Auf Rüstung gibt es im Spiel NUR: Defense (Zahl), Element-Resist Fire/Ice/Lightning als STUFE/Level (NICHT %), bei Handschuhen/Stiefeln zusätzlich Attack, dazu Attack/Move Speed & Crit Rate als Level und Daze Immunity (Plate-Helme). Material Cloth/Leather/Plate (Def voll ~69/99/114) steckt hier nur im Namen. ERFUNDEN im kuratierten Block (bis ca. Z.2760): Physical/Bleeding/Stun/Knockback Resist, Agility, Evasion, Gold Drop/Find, Night/Aerial/Counter/Ranged Dmg %, Shield Block %, All Stats %, flat HP+, Life Steal, Skill-XP/Cooldown-%, Dark/Holy/Water/Ash/Cold-Resist (real nur Fire/Ice/Lightning) + diverse "-Aura"/"-Bonus". Unten verifiziert + korrigiert: Golden Greed (Armor/Helm), Frostcursed, Unyielding, Hernandian Crown. Übrige kuratierte effect-Strings: UNGEPRÜFT/teils erfunden, noch zu bereinigen. RAR-Import-Block (Format "DEF +X") ist real.
+  // HINWEIS 2026-06-02 (Fakten-Audit Rüstungen — Quellen vulkk/game8/Fextralife): Auf Rüstung gibt es im Spiel NUR: Defense (Zahl), Element-Resist Fire/Ice/Lightning als STUFE/Level (NICHT %), bei Handschuhen/Stiefeln zusätzlich Attack, dazu Attack/Move Speed & Crit Rate als Level und Daze Immunity (Plate-Helme). Material Cloth/Leather/Plate (Def voll ~69/99/114) steckt hier nur im Namen. ERFUNDEN im kuratierten Block (die fuenf Bloecke Torso/Kopf/Hände/Schuhe/Mantel direkt unten): Physical/Bleeding/Stun/Knockback Resist, Agility, Evasion, Gold Drop/Find, Night/Aerial/Counter/Ranged Dmg %, Shield Block %, All Stats %, flat HP+, Life Steal, Skill-XP/Cooldown-%, Dark/Holy/Water/Ash/Cold-Resist (real nur Fire/Ice/Lightning) + diverse "-Aura"/"-Bonus". Unten verifiziert + korrigiert: Golden Greed (Armor/Helm), Frostcursed, Unyielding, Hernandian Crown. Übrige kuratierte effect-Strings: UNGEPRÜFT/teils erfunden, noch zu bereinigen. RAR-Import-Block (Format "DEF +X") ist real. Ebenfalls einzeln auditiert, in der Aufzaehlung oben aber vergessen: Fire Walk Boots. SEIT 21.08.2026 traegt jeder Eintrag ein prov-Feld, das genau diese Herkunft maschinenlesbar macht: import (aus den Spieldateien, Format "DEF +X"), guide (aus Guides belegt: die einzeln auditierten Teile, der Patch-1.12-Block und die aus ARMOR_SETS nachgetragenen Set-Teile), altbestand (kuratiert, ungeprueft), ohnewert ("Stats variabel", gar kein Zahlenwert). ACHTUNG beim Bearbeiten DIESES Kommentars: der Array-Extraktor von scripts/gen-seo.mjs und scripts/verify-seo.mjs ueberspringt Kommentare NICHT und liest ein Apostroph als String-Anfang — ein "Odeck's" hier drin kippt die Klammerzaehlung und damit den ganzen Build. Keine Apostrophe in Kommentaren innerhalb von Datenarrays. WICHTIG: prov sagt WOHER ein Wert kommt, nicht wie gut er belegt ist — die Grenze import/guide ist die Schreibweise des Wertformats und trennt Import-Chargen. Beispiel: das Odeck-Protector-Set steht als "DEF +21" im Import-Block, obwohl ARMOR_SETS dafuer drei Quellen nennt; zwei seiner Eintraege sind dort sogar unvollstaendig (fehlende Daze-Immunitaet bzw. Eis-Resistenz).
   // ── Torso / Body Armor ──
-  {name:"Ashclaw Leather Armor",type:"Torso",source:"Silberbark Forest (Händler / Crafting)",effect:"Leather, Def+12",notes:"Gutes Early-Game Leder"},
-  {name:"Belkandor Plate Armor",type:"Torso",source:"Belkandor Ruins (Schmied / Drop)",effect:"Plate, Def+28",notes:"Belkandor-Set. Def-Wert unbestätigt (Prüfung 11.08.2026): Fextralife nennt für dieses Teil Defense 8 und führt keine Upgrade-Tabelle. Ob 28 ein aufgewerteter Wert ist, ließ sich nicht klären — das Def-Feld ist im Wiki uneinheitlich (teils Basis-, teils aufgewertete Werte)."},
-  {name:"Blackwing Leather Armor",type:"Torso",source:"Kap. 5 Schwarzflügel-Gebiet",effect:"Leather, Lightning Resist (Lv)",notes:"Leichte Variante zum Blackwing-Set"},
-  {name:"Bolton Plate Armor",type:"Torso",source:"Bolton Fortress (Händler / Drop)",effect:"Plate, Def+22",notes:"Bolton-Set"},
-  {name:"Canta Plate Armor",type:"Torso",source:"Händler Rhett (Hernand Town, neben der Schmiede)",effect:"Plate, Def+25",notes:"Canta-Set"},
-  {name:"Dark Ringleader's Cloth Armor",type:"Torso",source:"Dark Ringleader Fraktion",effect:"Cloth, Move Speed Lv2, Def 2-4 (quellenabhängig: game8/crimsondb 3, Fextralife 4, VULKK 2)",notes:"Cloth mit Crit-Ausrichtung"},
-  {name:"Demeniss Elite Uniform",type:"Torso",source:"Demeniss-Fraktion (Quest-Belohnung)",effect:"Def+18",notes:"Demeniss-Set"},
-  {name:"Duskfang Leather Armor",type:"Torso",source:"Duskfang Wolves Gebiet",effect:"Leather, Def 3-5 (quellenabhängig: game8 5, VULKK 3)",notes:"Offensives Nacht-Set"},
-  {name:"Elegant Carmine Leather Armor",type:"Torso",source:"Hernand Händler (hochrangig)",effect:"Leather, Def+14",notes:"Ästhetisch + offensiv"},
-  {name:"Frostcursed Plate Armor",type:"Torso",source:"Mistshard Cave, Ost-Demeniss an der Grenze zu Pailune (Wasserfall-Höhle, Truhe hinter der Felswand); seit Patch 1.13.00 auch craftbar",effect:"Ice Resist Lv.7, Movement Speed Lv2, Def 14 (nicht aufwertbar)",notes:"Pflicht vs. Pailune-Bosse. Audit 2026-06-02: Werte präzisiert (game8)."},
-  {name:"Golden Greed Plate Armor",type:"Torso",source:"Bursada Castle Ruins (Truhe)",effect:"Def 41 (voll aufgewertet), Plate",notes:"Legendäre Plate-Rüstung. Audit 2026-06-02: 'Gold Drop+5%' erfunden (kein Gold-Stat auf Rüstung); Def 35→41 (vulkk); Quelle Truhe statt Blueprint."},
-  {name:"Grey Wolf Leather Armor",type:"Torso",source:"Kauf bei einer NPC nach Aufbau der Freundschaft (kein Weltfund)",effect:"Leather, Def 9, Lightning Resist Lv1",notes:"Agility-Build"},
-  {name:"Hernand Ceremonial Guard Armor",type:"Torso",source:"Hernand Palastwache Questlinie",effect:"Def+20",notes:"Hernand-Set"},
-  {name:"Jackals' Leather Armor",type:"Torso",source:"Jackals-Fraktion Gebiet",effect:"Leather, Def 3, Lightning Resist Lv1",notes:"Offensives Leder"},
-  {name:"Kuku Ice-Resistant Armor",type:"Torso",source:"Kilnden Workshop Blueprint",effect:"Ice Resist (Lv)",notes:"Bessere Version von Frostcursed. Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
-  {name:"Leather Armor of the Fallen Kingdom",type:"Torso",source:"Frozen Soul Cave, Everfrost (hinter dem Wasserfall, südlich Sanctum of Benediction)",effect:"Leather, Def+8",notes:"Fallen Kingdom Set"},
-  {name:"Light of the Battlefield Plate Armor",type:"Torso",source:"Legendary Warrior Drop",effect:"Plate, Def+32",notes:"Bestes Mid-Game Plate"},
-  {name:"Northern Fighter's Chain Mail",type:"Torso",source:"Nördliche Händler / Herstellung",effect:"Def+20, Ice Resist (Lv)",notes:"Balanciert für Pailune"},
-  {name:"Official Knight's Plate Armor",type:"Torso",source:"Ritter-Orden (Rep Rank 3)",effect:"Plate, Def+24",notes:""},
-  {name:"Plate Armor of Cursed Soul",type:"Torso",source:"Corrupted Boss Drop (Kap. 7+)",effect:"Plate, Def+28",notes:"Cursed Soul Set"},
-  {name:"Plate Armor of the Shadows",type:"Torso",source:"Truhe am Everfrost Watchtower (nördlich des Flusses bei den Hoenmark Ruins, West-Hernand) — Fackel entzünden öffnet das Tor. NICHT der Beloth-Drop, das ist der Helm",effect:"Plate, Def 4→41, 3 Abyss-Gear-Slots (Heart of Stone, Fortification I, Vigor I)",notes:"Defensive Late-Game"},
-  {name:"Scarlet Blades Cloth Armor",type:"Torso",source:"Scarlet Blades Fraktion",effect:"Cloth, Def 5, Lightning Resist Lv1",notes:"Fraktion-Exklusiv"},
-  {name:"Scholastone Uniform",type:"Torso",source:"Questbelohnung, zusätzlich käuflich im Scholastone Institute",effect:"Cloth, Def 2, Move Speed Lv1",notes:"Mage-Style"},
-  {name:"Scorchflame Plate Armor",type:"Torso",source:"Golden Trading Post, West-Demeniss (Truhe hinter Drehtür); seit Patch 1.13.00 auch craftbar (Rezept im Shop kaufbar)",effect:"Plate, Fire Resist (Lv)",notes:"Fire-Build Kernstück"},
-  {name:"Skyblazer Cloth Armor",type:"Torso",source:"Aerial-Quests / Blackstar",effect:"Cloth, Def 21, Movement Speed Lv.1",notes:"Aerial Combat Set"},
-  {name:"Solas Plate Armor",type:"Torso",source:"Solas Region Schmied",effect:"Plate, Def+26",notes:"Solas-Set"},
-  {name:"Sunset Reed Leather Armor",type:"Torso",source:"Echoing Waves Cave hinter dem Wasserfall an der Ostseite des Mountain of Frozen Souls (Süd-Hernand), Truhe am Ende der Höhle",effect:"Leather, Def 10, Move Speed Lv1, Lightning Resist Lv1",notes:""},
-  {name:"Unyielding Warrior's Plate Armor",type:"Torso",source:"Kauf in Calphade (Kap. VI), Kliff-only",effect:"Sehr hohe Def + Unarmed-Atk-Bonus, Plate",notes:"Bestes Plate Endgame. Audit 2026-06-02: 'HP+300, Taunt-Effekt' erfunden (kein flat-HP/Taunt auf Rüstung; vulkk)."},
-  {name:"Weasel Leather Armor",type:"Torso",source:"Crafting (Wiesel-Pelz)",effect:"Leather, Def 3, Lightning Resist Lv1",notes:"Agility-Build"},
-  {name:"Ynitium Leather Armor",type:"Torso",source:"Ynitium Mines / Crafting",effect:"Leather, Def+16",notes:"Seltenes Material"},
+  {name:"Ashclaw Leather Armor",type:"Torso",source:"Silberbark Forest (Händler / Crafting)",effect:"Leather, Def+12",notes:"Gutes Early-Game Leder",prov:"altbestand"},
+  {name:"Belkandor Plate Armor",type:"Torso",source:"Belkandor Ruins (Schmied / Drop)",effect:"Plate, Def+28",notes:"Belkandor-Set. Def-Wert unbestätigt (Prüfung 11.08.2026): Fextralife nennt für dieses Teil Defense 8 und führt keine Upgrade-Tabelle. Ob 28 ein aufgewerteter Wert ist, ließ sich nicht klären — das Def-Feld ist im Wiki uneinheitlich (teils Basis-, teils aufgewertete Werte).",prov:"altbestand"},
+  {name:"Blackwing Leather Armor",type:"Torso",source:"Kap. 5 Schwarzflügel-Gebiet",effect:"Leather, Lightning Resist (Lv)",notes:"Leichte Variante zum Blackwing-Set",prov:"altbestand"},
+  {name:"Bolton Plate Armor",type:"Torso",source:"Bolton Fortress (Händler / Drop)",effect:"Plate, Def+22",notes:"Bolton-Set",prov:"altbestand"},
+  {name:"Canta Plate Armor",type:"Torso",source:"Händler Rhett (Hernand Town, neben der Schmiede)",effect:"Plate, Def+25",notes:"Canta-Set",prov:"altbestand"},
+  {name:"Dark Ringleader's Cloth Armor",type:"Torso",source:"Dark Ringleader Fraktion",effect:"Cloth, Move Speed Lv2, Def 2-4 (quellenabhängig: game8/crimsondb 3, Fextralife 4, VULKK 2)",notes:"Cloth mit Crit-Ausrichtung",prov:"altbestand"},
+  {name:"Demeniss Elite Uniform",type:"Torso",source:"Demeniss-Fraktion (Quest-Belohnung)",effect:"Def+18",notes:"Demeniss-Set",prov:"altbestand"},
+  {name:"Duskfang Leather Armor",type:"Torso",source:"Duskfang Wolves Gebiet",effect:"Leather, Def 3-5 (quellenabhängig: game8 5, VULKK 3)",notes:"Offensives Nacht-Set",prov:"altbestand"},
+  {name:"Elegant Carmine Leather Armor",type:"Torso",source:"Hernand Händler (hochrangig)",effect:"Leather, Def+14",notes:"Ästhetisch + offensiv",prov:"altbestand"},
+  {name:"Frostcursed Plate Armor",type:"Torso",source:"Mistshard Cave, Ost-Demeniss an der Grenze zu Pailune (Wasserfall-Höhle, Truhe hinter der Felswand); seit Patch 1.13.00 auch craftbar",effect:"Ice Resist Lv.7, Movement Speed Lv2, Def 14 (nicht aufwertbar)",notes:"Pflicht vs. Pailune-Bosse. Audit 2026-06-02: Werte präzisiert (game8).",prov:"guide"},
+  {name:"Golden Greed Plate Armor",type:"Torso",source:"Bursada Castle Ruins (Truhe)",effect:"Def 41 (voll aufgewertet), Plate",notes:"Legendäre Plate-Rüstung. Audit 2026-06-02: 'Gold Drop+5%' erfunden (kein Gold-Stat auf Rüstung); Def 35→41 (vulkk); Quelle Truhe statt Blueprint.",prov:"guide"},
+  {name:"Grey Wolf Leather Armor",type:"Torso",source:"Kauf bei einer NPC nach Aufbau der Freundschaft (kein Weltfund)",effect:"Leather, Def 9, Lightning Resist Lv1",notes:"Agility-Build",prov:"altbestand"},
+  {name:"Hernand Ceremonial Guard Armor",type:"Torso",source:"Hernand Palastwache Questlinie",effect:"Def+20",notes:"Hernand-Set",prov:"altbestand"},
+  {name:"Jackals' Leather Armor",type:"Torso",source:"Jackals-Fraktion Gebiet",effect:"Leather, Def 3, Lightning Resist Lv1",notes:"Offensives Leder",prov:"altbestand"},
+  {name:"Kuku Ice-Resistant Armor",type:"Torso",source:"Kilnden Workshop Blueprint",effect:"Ice Resist (Lv)",notes:"Bessere Version von Frostcursed. Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar.",prov:"altbestand"},
+  {name:"Leather Armor of the Fallen Kingdom",type:"Torso",source:"Frozen Soul Cave, Everfrost (hinter dem Wasserfall, südlich Sanctum of Benediction)",effect:"Leather, Def+8",notes:"Fallen Kingdom Set",prov:"altbestand"},
+  {name:"Light of the Battlefield Plate Armor",type:"Torso",source:"Legendary Warrior Drop",effect:"Plate, Def+32",notes:"Bestes Mid-Game Plate",prov:"altbestand"},
+  {name:"Northern Fighter's Chain Mail",type:"Torso",source:"Nördliche Händler / Herstellung",effect:"Def+20, Ice Resist (Lv)",notes:"Balanciert für Pailune",prov:"altbestand"},
+  {name:"Official Knight's Plate Armor",type:"Torso",source:"Ritter-Orden (Rep Rank 3)",effect:"Plate, Def+24",notes:"",prov:"altbestand"},
+  {name:"Plate Armor of Cursed Soul",type:"Torso",source:"Corrupted Boss Drop (Kap. 7+)",effect:"Plate, Def+28",notes:"Cursed Soul Set",prov:"altbestand"},
+  {name:"Plate Armor of the Shadows",type:"Torso",source:"Truhe am Everfrost Watchtower (nördlich des Flusses bei den Hoenmark Ruins, West-Hernand) — Fackel entzünden öffnet das Tor. NICHT der Beloth-Drop, das ist der Helm",effect:"Plate, Def 4→41, 3 Abyss-Gear-Slots (Heart of Stone, Fortification I, Vigor I)",notes:"Defensive Late-Game",prov:"altbestand"},
+  {name:"Scarlet Blades Cloth Armor",type:"Torso",source:"Scarlet Blades Fraktion",effect:"Cloth, Def 5, Lightning Resist Lv1",notes:"Fraktion-Exklusiv",prov:"altbestand"},
+  {name:"Scholastone Uniform",type:"Torso",source:"Questbelohnung, zusätzlich käuflich im Scholastone Institute",effect:"Cloth, Def 2, Move Speed Lv1",notes:"Mage-Style",prov:"altbestand"},
+  {name:"Scorchflame Plate Armor",type:"Torso",source:"Golden Trading Post, West-Demeniss (Truhe hinter Drehtür); seit Patch 1.13.00 auch craftbar (Rezept im Shop kaufbar)",effect:"Plate, Fire Resist (Lv)",notes:"Fire-Build Kernstück",prov:"altbestand"},
+  {name:"Skyblazer Cloth Armor",type:"Torso",source:"Aerial-Quests / Blackstar",effect:"Cloth, Def 21, Movement Speed Lv.1",notes:"Aerial Combat Set",prov:"altbestand"},
+  {name:"Solas Plate Armor",type:"Torso",source:"Solas Region Schmied",effect:"Plate, Def+26",notes:"Solas-Set",prov:"altbestand"},
+  {name:"Sunset Reed Leather Armor",type:"Torso",source:"Echoing Waves Cave hinter dem Wasserfall an der Ostseite des Mountain of Frozen Souls (Süd-Hernand), Truhe am Ende der Höhle",effect:"Leather, Def 10, Move Speed Lv1, Lightning Resist Lv1",notes:"",prov:"altbestand"},
+  {name:"Unyielding Warrior's Plate Armor",type:"Torso",source:"Kauf in Calphade (Kap. VI), Kliff-only",effect:"Sehr hohe Def + Unarmed-Atk-Bonus, Plate",notes:"Bestes Plate Endgame. Audit 2026-06-02: 'HP+300, Taunt-Effekt' erfunden (kein flat-HP/Taunt auf Rüstung; vulkk).",prov:"guide"},
+  {name:"Weasel Leather Armor",type:"Torso",source:"Crafting (Wiesel-Pelz)",effect:"Leather, Def 3, Lightning Resist Lv1",notes:"Agility-Build",prov:"altbestand"},
+  {name:"Ynitium Leather Armor",type:"Torso",source:"Ynitium Mines / Crafting",effect:"Leather, Def+16",notes:"Seltenes Material",prov:"altbestand"},
 
   // ── Kopf / Headgear ──
-  {name:"Alpha Wolf Helm",type:"Kopf",source:"Truhe – Sanctum of Deliverance (Stormtalon Ridge, nördlich Hernand)",effect:"Def 3, Wolf-Disguise (Tarnung, kein Abyss-Slot)",notes:"Synergiert mit Silver Fang Mount"},
-  {name:"Ashad Plate Helm",type:"Kopf",source:"Ashad Fortress (Drop)",effect:"Plate, Def+14",notes:"Ashad-Set"},
-  {name:"Blackwing Leather Mask",type:"Kopf",source:"Drop: Draven the Crowcaller (Kap. 5)",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set"},
-  {name:"Bolton Plate Helm",type:"Kopf",source:"Bolton Fortress (Händler)",effect:"Plate, Def+12",notes:""},
-  {name:"Canta Plate Helm",type:"Kopf",source:"Händler Rhett (Hernand Town)",effect:"Plate, Def+13",notes:""},
-  {name:"Dark Ringleader's Cloth Helm",type:"Kopf",source:"Dark Ringleader Fraktion",effect:"Cloth, Move Speed Lv1, Def 1-4 (quellenabhängig: game8 1, Fextralife 4)",notes:""},
-  {name:"Flame Knight's Plate Helm",type:"Kopf",source:"Flammen-Ritter Questlinie",effect:"Plate, Fire Resist (Lv)",notes:"Flammen-Krieger Build"},
-  {name:"Frostcursed Plate Helm",type:"Kopf",source:"Truhen-Loot (Nord-Demeniss)",effect:"Plate, Ice Resist (Lv)",notes:"Kuku Ice Set"},
-  {name:"Golden Greed Plate Helm",type:"Kopf",source:"Sanctum of Renunciation (Truhe)",effect:"Def 21 (voll aufgewertet), Daze Immunity",notes:"Audit 2026-06-02: 'Gold Find+8%' erfunden; Def 18→21, Daze Immunity (vulkk)."},
-  {name:"Helm of Ignition",type:"Kopf",source:"Torchlight Beacon westlich von Hernand (im grossen weissen Zelt am Fuss des Turms)",effect:"Fire Resist (Lv)",notes:"Offensiver Fire-Helm"},
-  {name:"Helm of Knowledge",type:"Kopf",source:"Scholastone Akademie (Quest)",effect:"Def 5, Daze Immunity, 'Acquire Knowledge' (Wissen aus Distanz scannen)",notes:"Bester Skill-Farm Helm"},
-  {name:"Hernandian Crown",type:"Kopf",source:"Hernand Contribution Shop (70 Punkte)",effect:"Kosmetisch — keine Combat-Stats (Prestige-Item)",notes:"Audit 2026-06-02: 'All Stats+5%, Leadership-Aura' war erfunden — game8: 0 Combat-Stats. Rein optische Krönung des Hernand-Sets."},
-  {name:"Jackals' Leather Helm",type:"Kopf",source:"Jackals-Fraktion",effect:"Leather, Def 3, Move Speed Lv1",notes:""},
-  {name:"Leather Helm of the Fallen Kingdom",type:"Kopf",source:"Sanctum of Benediction (West-Hernand)",effect:"Leather, Abyss-Core-Sockel",notes:"Fallen Kingdom Set"},
-  {name:"Light of the Battlefield Plate Helm",type:"Kopf",source:"Trivana Sound (Truhe unter Fels, NO Outlaw Canyon)",effect:"Plate, Def+16",notes:""},
-  {name:"Plate Helm of Cursed Soul",type:"Kopf",source:"Cursed Boss Drop",effect:"Plate, Def 2→21, Daze Immunity, 1 Abyss-Slot (Fortification I)",notes:"Cursed Soul Set"},
-  {name:"Scorchflame Plate Helm",type:"Kopf",source:"Stonewell Farm an der Grenze Demeniss/Hernand: Truhe im oberen Stockwerk des Lagerturms (Hofseite und Stockwerk je nach Quelle abweichend, Kliff-Bindung unbestätigt)",effect:"Plate, Fire Resist (Lv)",notes:""},
-  {name:"Unyielding Warrior's Plate Helm",type:"Kopf",source:"Equipment-Shop Calphade (nach Kap. VI: Cracks in the Shield)",effect:"Plate, Def+19",notes:"Endgame Warrior Set"},
-  {name:"Visione Helm",type:"Kopf",source:"Lioncrest Watchtower, oberstes Stockwerk (Hauptquest 'Unexpected Gift', Kap. 2)",effect:"Quest-Item",notes:"Kap. 2 Quest-Item"},
+  {name:"Alpha Wolf Helm",type:"Kopf",source:"Truhe – Sanctum of Deliverance (Stormtalon Ridge, nördlich Hernand)",effect:"Def 3, Wolf-Disguise (Tarnung, kein Abyss-Slot)",notes:"Synergiert mit Silver Fang Mount",prov:"altbestand"},
+  {name:"Ashad Plate Helm",type:"Kopf",source:"Ashad Fortress (Drop)",effect:"Plate, Def+14",notes:"Ashad-Set",prov:"altbestand"},
+  {name:"Blackwing Leather Mask",type:"Kopf",source:"Drop: Draven the Crowcaller (Kap. 5)",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set",prov:"altbestand"},
+  {name:"Bolton Plate Helm",type:"Kopf",source:"Bolton Fortress (Händler)",effect:"Plate, Def+12",notes:"",prov:"altbestand"},
+  {name:"Canta Plate Helm",type:"Kopf",source:"Händler Rhett (Hernand Town)",effect:"Plate, Def+13",notes:"",prov:"altbestand"},
+  {name:"Dark Ringleader's Cloth Helm",type:"Kopf",source:"Dark Ringleader Fraktion",effect:"Cloth, Move Speed Lv1, Def 1-4 (quellenabhängig: game8 1, Fextralife 4)",notes:"",prov:"altbestand"},
+  {name:"Flame Knight's Plate Helm",type:"Kopf",source:"Flammen-Ritter Questlinie",effect:"Plate, Fire Resist (Lv)",notes:"Flammen-Krieger Build",prov:"altbestand"},
+  {name:"Frostcursed Plate Helm",type:"Kopf",source:"Truhen-Loot (Nord-Demeniss)",effect:"Plate, Ice Resist (Lv)",notes:"Kuku Ice Set",prov:"altbestand"},
+  {name:"Golden Greed Plate Helm",type:"Kopf",source:"Sanctum of Renunciation (Truhe)",effect:"Def 21 (voll aufgewertet), Daze Immunity",notes:"Audit 2026-06-02: 'Gold Find+8%' erfunden; Def 18→21, Daze Immunity (vulkk).",prov:"guide"},
+  {name:"Helm of Ignition",type:"Kopf",source:"Torchlight Beacon westlich von Hernand (im grossen weissen Zelt am Fuss des Turms)",effect:"Fire Resist (Lv)",notes:"Offensiver Fire-Helm",prov:"altbestand"},
+  {name:"Helm of Knowledge",type:"Kopf",source:"Scholastone Akademie (Quest)",effect:"Def 5, Daze Immunity, 'Acquire Knowledge' (Wissen aus Distanz scannen)",notes:"Bester Skill-Farm Helm",prov:"altbestand"},
+  {name:"Hernandian Crown",type:"Kopf",source:"Hernand Contribution Shop (70 Punkte)",effect:"Kosmetisch — keine Combat-Stats (Prestige-Item)",notes:"Audit 2026-06-02: 'All Stats+5%, Leadership-Aura' war erfunden — game8: 0 Combat-Stats. Rein optische Krönung des Hernand-Sets.",prov:"guide"},
+  {name:"Jackals' Leather Helm",type:"Kopf",source:"Jackals-Fraktion",effect:"Leather, Def 3, Move Speed Lv1",notes:"",prov:"altbestand"},
+  {name:"Leather Helm of the Fallen Kingdom",type:"Kopf",source:"Sanctum of Benediction (West-Hernand)",effect:"Leather, Abyss-Core-Sockel",notes:"Fallen Kingdom Set",prov:"altbestand"},
+  {name:"Light of the Battlefield Plate Helm",type:"Kopf",source:"Trivana Sound (Truhe unter Fels, NO Outlaw Canyon)",effect:"Plate, Def+16",notes:"",prov:"altbestand"},
+  {name:"Plate Helm of Cursed Soul",type:"Kopf",source:"Cursed Boss Drop",effect:"Plate, Def 2→21, Daze Immunity, 1 Abyss-Slot (Fortification I)",notes:"Cursed Soul Set",prov:"altbestand"},
+  {name:"Scorchflame Plate Helm",type:"Kopf",source:"Stonewell Farm an der Grenze Demeniss/Hernand: Truhe im oberen Stockwerk des Lagerturms (Hofseite und Stockwerk je nach Quelle abweichend, Kliff-Bindung unbestätigt)",effect:"Plate, Fire Resist (Lv)",notes:"",prov:"altbestand"},
+  {name:"Unyielding Warrior's Plate Helm",type:"Kopf",source:"Equipment-Shop Calphade (nach Kap. VI: Cracks in the Shield)",effect:"Plate, Def+19",notes:"Endgame Warrior Set",prov:"altbestand"},
+  {name:"Visione Helm",type:"Kopf",source:"Lioncrest Watchtower, oberstes Stockwerk (Hauptquest 'Unexpected Gift', Kap. 2)",effect:"Quest-Item",notes:"Kap. 2 Quest-Item",prov:"altbestand"},
 
   // ── Hände / Gloves ──
-  {name:"Blackwing Leather Gloves",type:"Hände",source:"Draven-Gebiet / Crafting",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set"},
-  {name:"Canta Plate Gloves",type:"Hände",source:"Händler Rhett (Hernand Town)",effect:"Plate, Def+10",notes:"Canta-Set"},
-  {name:"Combat God's Plate Gloves",type:"Hände",source:"Endgame Legendary Drop",effect:"Plate, Def 2 (Basis), ATK 11, Crit Lv.1 + Lightning Affinity (Offensiv-Handschuh)",notes:"Bester Angriffs-Handschuh"},
-  {name:"Counterweight Leather Gloves",type:"Hände",source:"Quest-Belohnung (Balanceprüfung)",effect:"Leather, Def 18, Atk 33, Lightning Resist Lv1",notes:"Counter-Build Pflicht"},
-  {name:"Demeniss Elite Gloves",type:"Hände",source:"Demeniss Elite (Quest / Drop)",effect:"Plate, Def 2, Atk 11",notes:""},
-  {name:"Duskfang Leather Gloves",type:"Hände",source:"Duskfang Wolves Gebiet",effect:"Leather, Def 6, Atk 14, Crit Lv1, Lightning Resist Lv1",notes:"Duskfang-Set"},
-  {name:"Frostcursed Plate Gloves",type:"Hände",source:"Truhen-Loot (Nord-Demeniss)",effect:"Plate, Ice Resist (Lv)",notes:"Kuku Ice Set"},
-  {name:"Golden Greed Plate Gloves",type:"Hände",source:"Gale of Judgement Cave (Truhe)",effect:"Plate, Def 0→17, ATK 12→36, 2 Abyss-Gear-Slots (Fortification I)",notes:""},
-  {name:"Hernand Ceremonial Guard Gloves",type:"Hände",source:"Hernand Palastwache",effect:"Def 4, Atk 17, Lightning Resist Lv1",notes:""},
-  {name:"Light of the Battlefield Plate Gloves",type:"Hände",source:"Varnia (Truhe hinter halb geschlossenem Tor)",effect:"Plate, Def+12",notes:"Damiane-exklusiv"},
-  {name:"Plate Gloves of Cursed Soul",type:"Hände",source:"Cursed Boss Drop",effect:"Plate, Def 2→19, ATK 11→35, 2 Abyss-Slots (Fortification I, Flameward I)",notes:"Cursed Soul Set"},
-  {name:"Plate Gloves of the Shadows",type:"Hände",source:"Everfrost Cave am Westrand von Hernand (Truhe hinten in der Höhle)",effect:"Plate, Def 0→17, ATK 12→36, 2 Abyss-Gear-Slots (Ascent I, Surge I)",notes:"Shadows-Set"},
-  {name:"Plate Boots of the Shadows",type:"Schuhe",source:"Frostclaw Cave (via Wasserfall SW Hernand, Stab nötig)",effect:"Plate, liefert Abyss-Core 'Aptitude I' (+10% Skill XP)",notes:"Shadows-Set"},
-  {name:"Scorchflame Plate Gloves",type:"Hände",source:"Twilight Grotto an der Hernand/Demeniss-Grenze, nördlich Rocca's Hill (Truhe hinter dem zweiten Wasserfall); alternativ Drop von Tristan the Flame Knight",effect:"Plate, Fire Resist (Lv), Abyss-Core-Sockel",notes:"Fire-Buff Fokus"},
-  {name:"Ynitium Leather Gloves",type:"Hände",source:"Ynitium Mines / Crafting",effect:"Leather, Def 1, Atk 11, Crit Lv1, Lightning Resist Lv1",notes:""},
+  {name:"Blackwing Leather Gloves",type:"Hände",source:"Draven-Gebiet / Crafting",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set",prov:"altbestand"},
+  {name:"Canta Plate Gloves",type:"Hände",source:"Händler Rhett (Hernand Town)",effect:"Plate, Def+10",notes:"Canta-Set",prov:"altbestand"},
+  {name:"Combat God's Plate Gloves",type:"Hände",source:"Endgame Legendary Drop",effect:"Plate, Def 2 (Basis), ATK 11, Crit Lv.1 + Lightning Affinity (Offensiv-Handschuh)",notes:"Bester Angriffs-Handschuh",prov:"altbestand"},
+  {name:"Counterweight Leather Gloves",type:"Hände",source:"Quest-Belohnung (Balanceprüfung)",effect:"Leather, Def 18, Atk 33, Lightning Resist Lv1",notes:"Counter-Build Pflicht",prov:"altbestand"},
+  {name:"Demeniss Elite Gloves",type:"Hände",source:"Demeniss Elite (Quest / Drop)",effect:"Plate, Def 2, Atk 11",notes:"",prov:"altbestand"},
+  {name:"Duskfang Leather Gloves",type:"Hände",source:"Duskfang Wolves Gebiet",effect:"Leather, Def 6, Atk 14, Crit Lv1, Lightning Resist Lv1",notes:"Duskfang-Set",prov:"altbestand"},
+  {name:"Frostcursed Plate Gloves",type:"Hände",source:"Truhen-Loot (Nord-Demeniss)",effect:"Plate, Ice Resist (Lv)",notes:"Kuku Ice Set",prov:"altbestand"},
+  {name:"Golden Greed Plate Gloves",type:"Hände",source:"Gale of Judgement Cave (Truhe)",effect:"Plate, Def 0→17, ATK 12→36, 2 Abyss-Gear-Slots (Fortification I)",notes:"",prov:"altbestand"},
+  {name:"Hernand Ceremonial Guard Gloves",type:"Hände",source:"Hernand Palastwache",effect:"Def 4, Atk 17, Lightning Resist Lv1",notes:"",prov:"altbestand"},
+  {name:"Light of the Battlefield Plate Gloves",type:"Hände",source:"Varnia (Truhe hinter halb geschlossenem Tor)",effect:"Plate, Def+12",notes:"Damiane-exklusiv",prov:"altbestand"},
+  {name:"Plate Gloves of Cursed Soul",type:"Hände",source:"Cursed Boss Drop",effect:"Plate, Def 2→19, ATK 11→35, 2 Abyss-Slots (Fortification I, Flameward I)",notes:"Cursed Soul Set",prov:"altbestand"},
+  {name:"Plate Gloves of the Shadows",type:"Hände",source:"Everfrost Cave am Westrand von Hernand (Truhe hinten in der Höhle)",effect:"Plate, Def 0→17, ATK 12→36, 2 Abyss-Gear-Slots (Ascent I, Surge I)",notes:"Shadows-Set",prov:"altbestand"},
+  {name:"Plate Boots of the Shadows",type:"Schuhe",source:"Frostclaw Cave (via Wasserfall SW Hernand, Stab nötig)",effect:"Plate, liefert Abyss-Core 'Aptitude I' (+10% Skill XP)",notes:"Shadows-Set",prov:"altbestand"},
+  {name:"Scorchflame Plate Gloves",type:"Hände",source:"Twilight Grotto an der Hernand/Demeniss-Grenze, nördlich Rocca's Hill (Truhe hinter dem zweiten Wasserfall); alternativ Drop von Tristan the Flame Knight",effect:"Plate, Fire Resist (Lv), Abyss-Core-Sockel",notes:"Fire-Buff Fokus",prov:"altbestand"},
+  {name:"Ynitium Leather Gloves",type:"Hände",source:"Ynitium Mines / Crafting",effect:"Leather, Def 1, Atk 11, Crit Lv1, Lightning Resist Lv1",notes:"",prov:"altbestand"},
 
   // ── Schuhe / Footwear ──
-  {name:"Ashen Wolf's Leather Boots",type:"Schuhe",source:"Ashen Wolf Boss Drop",effect:"Leather, Def 1, Atk 9, Crit Rate Lv2, Lightning Resist Lv1",notes:""},
-  {name:"Autumn Banquet Leather Boots",type:"Schuhe",source:"Hernand Bankett (Quest)",effect:"Leather, Def 3, Atk 10, Crit Rate Lv1, Lightning Resist Lv1",notes:"Bankett-Set"},
-  {name:"Belkandor Plate Boots",type:"Schuhe",source:"Kauf bei Brookners Ausrüstungsladen in Tommaso (Vertrauen 100)",effect:"Plate, Def+14",notes:""},
-  {name:"Blackwing Leather Boots",type:"Schuhe",source:"Draven-Gebiet / Crafting",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set"},
-  {name:"Bolton Leather Boots",type:"Schuhe",source:"Bolton Region",effect:"Leather, Def+10",notes:""},
-  {name:"Canta Plate Boots",type:"Schuhe",source:"Händler Rhett (Hernand Town)",effect:"Plate, Def+13",notes:""},
-  {name:"Dark Marksman's Plate Boots",type:"Schuhe",source:"Marksman Elite Drop",effect:"Plate, Def 0, Atk 12",notes:"Ranged Build"},
-  {name:"Embersteps Leather Boots",type:"Schuhe",source:"Feuer-Gebiet / Crafting",effect:"Leather, Fire Resist (Lv)",notes:"Einzigartiger Bewegungseffekt"},
-  {name:"Fire Walk Boots",type:"Schuhe",source:"Drop von Flame-Knight-Gegnern im Flame Knights Castle (Grenze Hernand/Demeniss, östlich Anvil Hill)",effect:"Unique: aufeinanderfolgende Ausweichrollen setzen den Boden in Brand (offensiver Bewegungseffekt)",notes:"Audit 2026-06-02: KEINE 'Fire Immunity' — realer Effekt ist offensiv (crimsondesert.gaming.tools)."},
-  {name:"Frostcursed Plate Boots",type:"Schuhe",source:"Truhen-Loot (Nord-Demeniss)",effect:"Plate, Ice Resist (Lv)",notes:"Kuku Ice Set"},
-  {name:"Golden Greed Plate Boots",type:"Schuhe",source:"Arehaza Cave (Truhe)",effect:"Plate, Def 2→19, ATK 11→35, 2 Abyss-Gear-Slots (Vigor I, Haste I)",notes:""},
-  {name:"Hernand Ceremonial Guard Boots",type:"Schuhe",source:"Hernand Palastwache",effect:"Lightning Resist Lv1; Def/Atk quellenabhängig (game8 Def 4/Atk 17, Fextralife Def 1/Atk 11)",notes:""},
-  {name:"Icewing Plate Boots",type:"Schuhe",source:"Pailune / Ice Region",effect:"Plate, Ice Resist (Lv)",notes:"Pailune-Gebiet"},
-  {name:"Kairos Plate Boots",type:"Schuhe",source:"Kairos Region",effect:"Plate, Def+15",notes:""},
-  {name:"Light of the Battlefield Plate Boots",type:"Schuhe",source:"Legendary Warrior Drop",effect:"Plate, Def+14",notes:""},
-  {name:"Lightning Bolt Plate Boots",type:"Schuhe",source:"Bari Witch Questline (Token 2)",effect:"Plate, Lightning Resist (Lv)",notes:"Lightning-Boss-Spezial"},
-  {name:"Pailunese Boots",type:"Schuhe",source:"Pailune Region (Händler / Drop)",effect:"Ice Resist (Lv)",notes:"Günstig für Pailune"},
+  {name:"Ashen Wolf's Leather Boots",type:"Schuhe",source:"Ashen Wolf Boss Drop",effect:"Leather, Def 1, Atk 9, Crit Rate Lv2, Lightning Resist Lv1",notes:"",prov:"altbestand"},
+  {name:"Autumn Banquet Leather Boots",type:"Schuhe",source:"Hernand Bankett (Quest)",effect:"Leather, Def 3, Atk 10, Crit Rate Lv1, Lightning Resist Lv1",notes:"Bankett-Set",prov:"altbestand"},
+  {name:"Belkandor Plate Boots",type:"Schuhe",source:"Kauf bei Brookners Ausrüstungsladen in Tommaso (Vertrauen 100)",effect:"Plate, Def+14",notes:"",prov:"altbestand"},
+  {name:"Blackwing Leather Boots",type:"Schuhe",source:"Draven-Gebiet / Crafting",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set",prov:"altbestand"},
+  {name:"Bolton Leather Boots",type:"Schuhe",source:"Bolton Region",effect:"Leather, Def+10",notes:"",prov:"altbestand"},
+  {name:"Canta Plate Boots",type:"Schuhe",source:"Händler Rhett (Hernand Town)",effect:"Plate, Def+13",notes:"",prov:"altbestand"},
+  {name:"Dark Marksman's Plate Boots",type:"Schuhe",source:"Marksman Elite Drop",effect:"Plate, Def 0, Atk 12",notes:"Ranged Build",prov:"altbestand"},
+  {name:"Embersteps Leather Boots",type:"Schuhe",source:"Feuer-Gebiet / Crafting",effect:"Leather, Fire Resist (Lv)",notes:"Einzigartiger Bewegungseffekt",prov:"altbestand"},
+  {name:"Fire Walk Boots",type:"Schuhe",source:"Drop von Flame-Knight-Gegnern im Flame Knights Castle (Grenze Hernand/Demeniss, östlich Anvil Hill)",effect:"Unique: aufeinanderfolgende Ausweichrollen setzen den Boden in Brand (offensiver Bewegungseffekt)",notes:"Audit 2026-06-02: KEINE 'Fire Immunity' — realer Effekt ist offensiv (crimsondesert.gaming.tools).",prov:"guide"},
+  {name:"Frostcursed Plate Boots",type:"Schuhe",source:"Truhen-Loot (Nord-Demeniss)",effect:"Plate, Ice Resist (Lv)",notes:"Kuku Ice Set",prov:"altbestand"},
+  {name:"Golden Greed Plate Boots",type:"Schuhe",source:"Arehaza Cave (Truhe)",effect:"Plate, Def 2→19, ATK 11→35, 2 Abyss-Gear-Slots (Vigor I, Haste I)",notes:"",prov:"altbestand"},
+  {name:"Hernand Ceremonial Guard Boots",type:"Schuhe",source:"Hernand Palastwache",effect:"Lightning Resist Lv1; Def/Atk quellenabhängig (game8 Def 4/Atk 17, Fextralife Def 1/Atk 11)",notes:"",prov:"altbestand"},
+  {name:"Icewing Plate Boots",type:"Schuhe",source:"Pailune / Ice Region",effect:"Plate, Ice Resist (Lv)",notes:"Pailune-Gebiet",prov:"altbestand"},
+  {name:"Kairos Plate Boots",type:"Schuhe",source:"Kairos Region",effect:"Plate, Def+15",notes:"",prov:"altbestand"},
+  {name:"Light of the Battlefield Plate Boots",type:"Schuhe",source:"Legendary Warrior Drop",effect:"Plate, Def+14",notes:"",prov:"altbestand"},
+  {name:"Lightning Bolt Plate Boots",type:"Schuhe",source:"Bari Witch Questline (Token 2)",effect:"Plate, Lightning Resist (Lv)",notes:"Lightning-Boss-Spezial",prov:"altbestand"},
+  {name:"Pailunese Boots",type:"Schuhe",source:"Pailune Region (Händler / Drop)",effect:"Ice Resist (Lv)",notes:"Günstig für Pailune",prov:"altbestand"},
 
   // ── Mantel / Cloaks ──
-  {name:"Ashad Plate Cloak",type:"Mantel",source:"Questbelohnung nach der zugehörigen Bossquest (kein freier Fundort)",effect:"Plate, Def+12",notes:""},
-  {name:"Ashen Wolf's Leather Cloak",type:"Mantel",source:"Ashen Wolf Drop / Crafting",effect:"Leather, Lightning Resist Lv3 (Def-Wert quellenabhängig: game8 12, crimsondb 18, Fextralife 0)",notes:""},
-  {name:"Belkandor Plate Cloak",type:"Mantel",source:"Bauplan bei Brookners Ausrüstungsladen in Tommaso (Vertrauen 100), danach schmieden",effect:"Plate, Def+10",notes:""},
-  {name:"Black Bears' Cloth Cloak",type:"Mantel",source:"Black Bear Boss Drop / Crafting",effect:"Cloth, Def 5, Ice Resist Lv3",notes:"Synergiert mit White Bear Mount"},
-  {name:"Blackwing Leather Cloak",type:"Mantel",source:"Draven-Gebiet",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set"},
-  {name:"Bolton Plate Cloak",type:"Mantel",source:"Kauf beim Fraktionshändler in Hernand (kein Fundort in der Festung)",effect:"Plate, Def+10",notes:""},
-  {name:"Dragon Flame Cloak",type:"Mantel",source:"Blackstar / Drachen-Questlinie",effect:"Fire Resist (Lv)",notes:"Synergiert mit Blackstar Mount"},
-  {name:"Hernandian Banquet Cloak",type:"Mantel",source:"Goldleaf Faction (Extinguishing Last Flames)",effect:"Cloth, Def 2, Ice Resist Lv3",notes:"Gourmet-Fokus"},
+  {name:"Ashad Plate Cloak",type:"Mantel",source:"Questbelohnung nach der zugehörigen Bossquest (kein freier Fundort)",effect:"Plate, Def+12",notes:"",prov:"altbestand"},
+  {name:"Ashen Wolf's Leather Cloak",type:"Mantel",source:"Ashen Wolf Drop / Crafting",effect:"Leather, Lightning Resist Lv3 (Def-Wert quellenabhängig: game8 12, crimsondb 18, Fextralife 0)",notes:"",prov:"altbestand"},
+  {name:"Belkandor Plate Cloak",type:"Mantel",source:"Bauplan bei Brookners Ausrüstungsladen in Tommaso (Vertrauen 100), danach schmieden",effect:"Plate, Def+10",notes:"",prov:"altbestand"},
+  {name:"Black Bears' Cloth Cloak",type:"Mantel",source:"Black Bear Boss Drop / Crafting",effect:"Cloth, Def 5, Ice Resist Lv3",notes:"Synergiert mit White Bear Mount",prov:"altbestand"},
+  {name:"Blackwing Leather Cloak",type:"Mantel",source:"Draven-Gebiet",effect:"Leather, Lightning Resist (Lv)",notes:"Blackwing-Set",prov:"altbestand"},
+  {name:"Bolton Plate Cloak",type:"Mantel",source:"Kauf beim Fraktionshändler in Hernand (kein Fundort in der Festung)",effect:"Plate, Def+10",notes:"",prov:"altbestand"},
+  {name:"Dragon Flame Cloak",type:"Mantel",source:"Blackstar / Drachen-Questlinie",effect:"Fire Resist (Lv)",notes:"Synergiert mit Blackstar Mount",prov:"altbestand"},
+  {name:"Hernandian Banquet Cloak",type:"Mantel",source:"Goldleaf Faction (Extinguishing Last Flames)",effect:"Cloth, Def 2, Ice Resist Lv3",notes:"Gourmet-Fokus",prov:"altbestand"},
 
   // ── Patch 1.12.00 (19.06.2026) — neue Kliff-Ausrüstung & Greymane-Items. Existenz/Slot offiziell (Pearl-Abyss boardNo 100); Zahlenwerte stammen aus VULKKs Tag-1-Equipment-Übersicht (game8/Fextralife führen sie noch nicht), daher als unbestätigt markiert. ──
-  {name:"Silent Conqueror Plate Helm",type:"Kopf",source:"Equipment Shop Varnia (Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 5→18, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt), färbbar",notes:"Neu mit Patch 1.12.00 (eine von 5 neuen Kliff-Kopfrüstungen). Existenz/Slot offiziell (boardNo 100); Def 5→18 und fehlende Daze Immunity bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026). Einziger der neuen Plattenhelme, der färbbar ist; die '21' gehörte zum Sentinel of Tenacity Helm."},
-  {name:"Sentinel of Tenacity Helm",type:"Kopf",source:"Stronghelm Forge, Ost-Demeniss (Equipment Shop; Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 2→21, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Plattenhelm mit hochklappbarem Visier, nicht färbbar. Existenz/Slot offiziell (boardNo 100); Def 2→21 und fehlende Daze Immunity bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026)."},
-  {name:"Feral Sentinel Helm",type:"Kopf",source:"Stronghelm Forge, Ost-Demeniss (Equipment Shop; Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 5→18, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Existenz/Slot offiziell (boardNo 100); Def 5→18 und fehlende Daze Immunity mehrquellig bestätigt (VULKK, lootbar, Stand Juni 2026)."},
-  {name:"Sentinel of Trust Helm",type:"Kopf",source:"Stronghelm Forge, Ost-Demeniss (Equipment Shop; Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 7→17, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Hochklappbares Visier, nicht färbbar; symbolisiert 'Vertrauen' (Ritter von Pywel). Existenz/Slot offiziell (boardNo 100); Def 7→17 bestätigt, Daze Immunity FEHLT trotz Plattenhelm-Optik (VULKK, lootbar, gameshorizon, Stand Juni 2026)."},
-  {name:"Steelmaw Plate Helm",type:"Kopf",source:"Equipment Shop Thalwynd, Calphade (Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 7→17, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Keine Resistenzen/Perks, nicht färbbar. Existenz/Slot offiziell (boardNo 100); Def 7→17 und fehlende Daze Immunity bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026)."},
-  {name:"Greymane Light Armor",type:"Torso",source:"Carl (Camp Provisioner), Greymane Camp, 7 Greymane Contribution Tokens (Kliff-exklusiv, Patch 1.12.00)",effect:"Leather (Leichtrüstung), Def 7→30, 3 Abyss-Core-Slots (gesperrt)",notes:"Neu mit Patch 1.12.00. Einzelteil, KEIN Set (kein Set-Bonus). Keine Elementresistenzen, nicht färbbar. Existenz offiziell (boardNo 100); Def 7→30 und 3 Slots bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026)."},
-  {name:"Honorary Greymane Cloth Gloves",type:"Hände",source:"Damiane-exklusiv; Patch 1.12.00 (Bezug: Carl, Greymane Camp, 7 Greymane Contribution Tokens — übereinstimmend bei VULKK, lootbar & gameshorizon, aber nicht offiziell)",effect:"Cloth, dyebar. VULKK & lootbar nennen übereinstimmend den vollen Statline: Attack 8→26, ATK SPD Lv.3→4 (max Lv.4), Def 0→12, 2 Abyss-Slots (gesperrt). gameshorizon weicht als Einzelquelle ab: Attack 12, ATK SPD Lv.3, Def 3, Slots nicht gesperrt.",notes:"Neu mit Patch 1.12.00, nur für Damiane. Name+Slot offiziell (boardNo 100). Statwerte nur aus Guides: VULKK und lootbar stimmen komplett überein (inkl. Attack 8→26 und ATK SPD Lv.4 sowie Def 0→12 / 2 gesperrte Slots), gameshorizon ist der Ausreißer mit abweichenden Werten (Def 3, Slots offen, Attack 12, ATK SPD Lv.3). Also Zwei-Quellen-Konsens für die VULKK-Werte, aber keine offizielle Stat-Bestätigung; Bezug (Carl/7 Tokens) von allen drei Guides genannt."},
+  {name:"Silent Conqueror Plate Helm",type:"Kopf",source:"Equipment Shop Varnia (Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 5→18, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt), färbbar",notes:"Neu mit Patch 1.12.00 (eine von 5 neuen Kliff-Kopfrüstungen). Existenz/Slot offiziell (boardNo 100); Def 5→18 und fehlende Daze Immunity bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026). Einziger der neuen Plattenhelme, der färbbar ist; die '21' gehörte zum Sentinel of Tenacity Helm.",prov:"guide"},
+  {name:"Sentinel of Tenacity Helm",type:"Kopf",source:"Stronghelm Forge, Ost-Demeniss (Equipment Shop; Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 2→21, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Plattenhelm mit hochklappbarem Visier, nicht färbbar. Existenz/Slot offiziell (boardNo 100); Def 2→21 und fehlende Daze Immunity bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026).",prov:"guide"},
+  {name:"Feral Sentinel Helm",type:"Kopf",source:"Stronghelm Forge, Ost-Demeniss (Equipment Shop; Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 5→18, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Existenz/Slot offiziell (boardNo 100); Def 5→18 und fehlende Daze Immunity mehrquellig bestätigt (VULKK, lootbar, Stand Juni 2026).",prov:"guide"},
+  {name:"Sentinel of Trust Helm",type:"Kopf",source:"Stronghelm Forge, Ost-Demeniss (Equipment Shop; Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 7→17, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Hochklappbares Visier, nicht färbbar; symbolisiert 'Vertrauen' (Ritter von Pywel). Existenz/Slot offiziell (boardNo 100); Def 7→17 bestätigt, Daze Immunity FEHLT trotz Plattenhelm-Optik (VULKK, lootbar, gameshorizon, Stand Juni 2026).",prov:"guide"},
+  {name:"Steelmaw Plate Helm",type:"Kopf",source:"Equipment Shop Thalwynd, Calphade (Kliff-Ausrüstung, Patch 1.12.00)",effect:"Plate, Def 7→17, KEINE Daze Immunity, 1 Abyss-Core-Slot (gesperrt)",notes:"Neu mit Patch 1.12.00. Keine Resistenzen/Perks, nicht färbbar. Existenz/Slot offiziell (boardNo 100); Def 7→17 und fehlende Daze Immunity bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026).",prov:"guide"},
+  {name:"Greymane Light Armor",type:"Torso",source:"Carl (Camp Provisioner), Greymane Camp, 7 Greymane Contribution Tokens (Kliff-exklusiv, Patch 1.12.00)",effect:"Leather (Leichtrüstung), Def 7→30, 3 Abyss-Core-Slots (gesperrt)",notes:"Neu mit Patch 1.12.00. Einzelteil, KEIN Set (kein Set-Bonus). Keine Elementresistenzen, nicht färbbar. Existenz offiziell (boardNo 100); Def 7→30 und 3 Slots bestätigt (VULKK, lootbar, gameshorizon, Stand Juni 2026).",prov:"guide"},
+  {name:"Honorary Greymane Cloth Gloves",type:"Hände",source:"Damiane-exklusiv; Patch 1.12.00 (Bezug: Carl, Greymane Camp, 7 Greymane Contribution Tokens — übereinstimmend bei VULKK, lootbar & gameshorizon, aber nicht offiziell)",effect:"Cloth, dyebar. VULKK & lootbar nennen übereinstimmend den vollen Statline: Attack 8→26, ATK SPD Lv.3→4 (max Lv.4), Def 0→12, 2 Abyss-Slots (gesperrt). gameshorizon weicht als Einzelquelle ab: Attack 12, ATK SPD Lv.3, Def 3, Slots nicht gesperrt.",notes:"Neu mit Patch 1.12.00, nur für Damiane. Name+Slot offiziell (boardNo 100). Statwerte nur aus Guides: VULKK und lootbar stimmen komplett überein (inkl. Attack 8→26 und ATK SPD Lv.4 sowie Def 0→12 / 2 gesperrte Slots), gameshorizon ist der Ausreißer mit abweichenden Werten (Def 3, Slots offen, Attack 12, ATK SPD Lv.3). Also Zwei-Quellen-Konsens für die VULKK-Werte, aber keine offizielle Stat-Bestätigung; Bezug (Carl/7 Tokens) von allen drei Guides genannt.",prov:"guide"},
   // ── RAR Import ──
-  {name:"Desert Marauder's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:""},
-  {name:"Autumn Banquet Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Leather Armor of Earth's Honor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Official Knight's Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:""},
-  {name:"Official Knight's Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"St. Halssius Priest Attire",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Leather Boots of Earth's Honor",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"Pororin Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Leather Gloves of Earth's Honor",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"Odeck's Protector Plate Helm",type:"Kopf",source:"Hollow Haven, Höhle SW der Hexe Sanctuary (NO-Demeniss): Bismuth-Wand mit Focused Force Palm; alternativ Boss-Drop",effect:"DEF +21",notes:""},
-  {name:"Odeck's Protector Plate Armor",type:"Torso",source:"The Four Pits of the Wayward Woods, NW-Pailune (Truhe hinter zerstörbarer Wand); alternativ Boss-Drop",effect:"DEF +41",notes:""},
-  {name:"Odeck's Protector Plate Gloves",type:"Hände",source:"Kleine Höhle am Nordrand des Perwin Quarry, W-Zentral-Hernand (Truhe, Bismuth mit Focused Force Palm); alternativ Boss-Drop",effect:"ATK +36, DEF +17",notes:""},
-  {name:"Odeck's Protector Plate Boots",type:"Schuhe",source:"Sanctum of Temperance, SO von Howling Hill (Truhe); alternativ Boss-Drop",effect:"ATK +35, DEF +19",notes:""},
-  {name:"Dark Marksman's Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:""},
-  {name:"Dark Marksman's Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +34, DEF +21",notes:""},
-  {name:"Brimstone Gas Mask",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Shoddy Rishi's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Axiom Bracelet",type:"Mantel",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:""},
-  {name:"Autumn Banquet Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Official Knight's Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Stirrups of the Open Sky",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Musket Border Guard Standard Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"Herald of Six O'Clock",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Giant's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +15, DEF +5",notes:""},
-  {name:"Health Detection Device",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Great Thief's Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +15, DEF +5",notes:""},
-  {name:"Catfish Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"White Bloodwind Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Pillager's Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Kuku Breeze-Step Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
-  {name:"Strongbow Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Lightning Bolt Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Lightning Bolt Plate Armor",type:"Torso",source:"Welt-Drop / Händler; seit Patch 1.13.00 auch craftbar (Rezept im Shop kaufbar)",effect:"DEF +14",notes:""},
-  {name:"Lightning Bolt Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +36, DEF +17",notes:""},
-  {name:"Marni Laser Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"Sungrove Standard Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +8",notes:""},
-  {name:"Windmere Standard Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +8",notes:""},
-  {name:"Bear Hide Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Demeniss Elite Uniform Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Demenissian Elite Uniform Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:""},
-  {name:"Demenissian Uniform Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Demenissian Uniform Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Dewhaven Standard Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Demenissian Uniform Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"Hartmann Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Schtump Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Mistcloaked Owl Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:""},
-  {name:"Ashen Wolf's Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"Deceiver's Fedora",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Tiorant Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Tiorant Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Bandit Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Delegation Leather Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Yrkabel Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +5",notes:""},
-  {name:"Odeck's Protector Plate Cloak",type:"Mantel",source:"Frostwind Cave im Silver Wolf Mountain nahe dem Osttor von Pailune: liegt frei am Boden, Zugang über den versteckten Spalt mit Leiter (bei Destructoid als Blackbear's Hideout bezeichnet, derselbe Höhlenkomplex); alternativ Boss-Drop",effect:"DEF +12",notes:""},
-  {name:"Kuku Marni Laser Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
-  {name:"Kuku Lightning-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
-  {name:"Kuku Flame-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
-  {name:"Kuku Cold-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Sehr wahrscheinlich dasselbe Item wie 'Kuku Ice-Resistant Armor' (identisches Icon-Sprite; offizieller Patch-1.13.00-Name ist 'Ice-Resistant', 'Cold-Resistant' ist eine abweichende Bezeichnung). Kliff/Oongka-Equip-Hinweis siehe dort."},
-  {name:"Demenissian Uniform Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"Mistcloaked Owl Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +10",notes:""},
-  {name:"Sungrove Standard Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"White Bear Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"Yrkabel Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Golden Free Company's Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +11",notes:""},
-  {name:"Condemner's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:""},
-  {name:"Grey Wolf Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Oongka's Axiom Bracelet",type:"Mantel",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:""},
-  {name:"Purple Scout Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Purple Scout Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Purple Scout Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Blue Scout Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Blue Scout Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Blue Scout Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Dewhaven Standard Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:""},
-  {name:"Pale Predator's Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"Damiane's Axiom Bracelet",type:"Mantel",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:""},
-  {name:"Lizard Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Wolf Tracker Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Condemner's Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"Bandit Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +1",notes:""},
-  {name:"Labrak Cloth Cap",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Rivellon Cloth Cap",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Boren Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Icewing Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Ator's Will Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:""},
-  {name:"Ferman Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Grace Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Musket Border Guard Standard Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:""},
-  {name:"Black Bears' Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"Goldbranch Plate Crown",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Bedure Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Solas Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"The Faceless's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:""},
-  {name:"Northern Fighter's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Wyvernflame Cloth Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +1",notes:""},
-  {name:"Drish Cloth Cap",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Jester Leather Mask",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Rabbit Leather Mask",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Schtump Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Constellation Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +5",notes:""},
-  {name:"Autumn Banquet Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:""},
-  {name:"Low-heeled Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:""},
-  {name:"Radiant Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
-  {name:"Fluttering Radiance Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
-  {name:"Light of the Battlefield Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Miner's Lantern Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"The Faceless's Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +4",notes:""},
-  {name:"Ashad Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:""},
-  {name:"Carta Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:""},
-  {name:"Icewing Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:""},
-  {name:"White Bloodwind Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Dewhaven Standard Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +7",notes:""},
-  {name:"Matana Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Dancing Catfish Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Wolf Tracker Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Wolf Tracker Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Nibrak Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Wolf Tracker Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Circuit Hijacking Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +5",notes:""},
-  {name:"Beighen Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Tech Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Guard Visione",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:""},
-  {name:"Military Visione",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:""},
-  {name:"Prototype Visione",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:""},
-  {name:"Riding Attire",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +5",notes:""},
-  {name:"Leather Riding Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Master Trainer's Touch",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Riding Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Vaporwalker",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +16, DEF +5",notes:""},
-  {name:"Straw Bale Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Goblin Pumpkin Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Bedure Chain Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Dark Ringleader's Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Riding Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Tariv Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Skyblazer Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Delesyian Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"The Masked Liberator's Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Northern Fighter's Chain Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Crimson Chaser Chain Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Leather Cloak of the Fallen Kingdom",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Helfryn Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Sunset Reed Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Duskfang Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Grey Wolf Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Weasel Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Ynitium Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Jester Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Frozen Heart Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Scorchflame Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Golden Greed Plate Cloak",type:"Mantel",source:"Venomblade Grotto (Truhe)",effect:"DEF +12",notes:""},
-  {name:"Grotevant Cloak",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Frostcursed Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Ferman Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Dark Marksman's Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Icewing Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Unyielding Warrior's Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Canta Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Plate Cloak of Cursed Soul",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Kuku Rishi's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar."},
-  {name:"Desert Marauder's Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +5",notes:""},
-  {name:"Beekeeping Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Disguise Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"St. Halssius Priest's Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Lauques Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Shadowleaf Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Scarecrow Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Deer Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Raccoon Cloth Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Ironwilled Guardian's Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:""},
-  {name:"Boar Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"White Horn Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Plate Helm of the Shadows",type:"Kopf",source:"Drop: Beloth the Darksworn (Hoenmark Ruins, West-Everfrost, Hernand — Fraktionsquest 'Wraith in the Frost')",effect:"DEF +21",notes:"Shadows-Set — das einzige Teil, das direkt vom Boss kommt"},
-  {name:"Plate Cloak of the Shadows",type:"Mantel",source:"Truhe an der Westseite der Hoenmark Ruins (Everfrost, West-Hernand) — Falltür darüber geduckt per Force Palm öffnen",effect:"DEF +12",notes:"Shadows-Set"},
-  {name:"Lizard Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Wolf Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Wooden Mask of Lost Justice",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Leather Hat of Enlightenment",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:""},
-  {name:"Kairos Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Kairos Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:""},
-  {name:"Kairos Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Kairos Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +36, DEF +17",notes:""},
-  {name:"Jackal Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Golden Free Company's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:""},
-  {name:"Leather Cloak of Earth's Honor",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Solas Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Goldlight Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Executioner of Darkness Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Reindeer Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Beltran Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Autumn Banquet Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Pirate King Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"Official Knight's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Eclipsed Solas Plate Gloves",type:"Hände",source:"Drop: Awakened Lucian Bastier (Demeniss - Spire of Clockwork)",effect:"ATK +36, DEF +17",notes:""},
-  {name:"Executioner of Darkness Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Valortread Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +34, DEF +21",notes:""},
-  {name:"Ziggurat Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Elegant Carmine Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Elegant Carmine Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
-  {name:"Crimson Banquet Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
-  {name:"Elegant Carmine Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Wanderer of Faith Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:""},
-  {name:"Wanderer of Faith Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Wanderer of Faith Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:""},
-  {name:"Wanderer of Faith Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:""},
-  {name:"Frozen Heart Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
-  {name:"Valortread Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:""},
-  {name:"Cow Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"KuKu Rocket Helmet",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"Standardmäßig ausgerüstet"},
-  {name:"Valortread Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:""},
-  {name:"Valortread Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +36, DEF +17",notes:""},
-  {name:"Belkandor Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:""},
-  {name:"Valortread Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Belkandor Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:""},
-  {name:"Reins of Open Sky",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:""},
-  {name:"Tech Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +14, DEF +4",notes:""},
-  {name:"Blinding Arrow Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:""},
-  {name:"The Ashen's Plate Helm",type:"Kopf",source:"Back Alley Shop Odeck Pier/Pailune, 100 Trust",effect:"Plate, Def+21, Daze Immunity",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil"},
-  {name:"The Ashen's Plate Armor",type:"Torso",source:"Boss-Drop, Quest 'Executioner of Justice'",effect:"Plate, Def+39",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil"},
-  {name:"The Ashen's Plate Gloves",type:"Hände",source:"Challenge 'On a Storm of Beasts'",effect:"Plate, Def+21, Atk+34",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil"},
-  {name:"The Ashen's Leather Cloak",type:"Mantel",source:"Life-Challenge 'Tiny Citizens of Grasslands'",effect:"Leather, Def+12, Ice Resist Lv5, Move Speed Lv1-2",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil"},
-  {name:"The Ashen's Leather Boots",type:"Schuhe",source:"Challenge 'Caves Exploration Log'",effect:"Leather, Def+18, Atk+30, Lightning Resist Lv1, Crit Rate Lv1-2",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil"},
-  {name:"Unyielding Hero's Plate Helm",type:"Kopf",source:"Back Alley Shop, Vendor Thrak, Thalwynd/Calphade",effect:"Plate, Def+17, Daze Immunity",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch"},
-  {name:"Unyielding Hero's Plate Armor",type:"Torso",source:"Boss-Drop, Quest 'Traitor'",effect:"Plate, Def+39",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch"},
-  {name:"Unyielding Hero's Plate Cloak",type:"Mantel",source:"Challenge 'Hunter's Discipline'",effect:"Plate, Def+12, Fire Resist Lv7",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch"},
-  {name:"Unyielding Hero's Plate Gloves",type:"Hände",source:"Challenge 'Into the Barrage'",effect:"Plate, Def+19, Atk+35",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch"},
-  {name:"Unyielding Hero's Plate Boots",type:"Schuhe",source:"Challenge 'The Vanished Wagon'",effect:"Plate, Def+21, Atk+34",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch"},
-  {name:"Knight of Carnage Plate Helm",type:"Kopf",source:"Back Alley Shop Brek, Demeniss-Ostmauer, ca. 8 Goldbarren",effect:"Plate, Def+21, Daze Immunity",notes:"Knight-of-Carnage-Set"},
-  {name:"Knight of Carnage Plate Armor",type:"Torso",source:"Boss-Drop Gregor, Fort Ironclad, Kap. VIII",effect:"Plate, Def+39",notes:"Knight-of-Carnage-Set"},
-  {name:"Knight of Carnage Plate Cloak",type:"Mantel",source:"Horse-Challenge 'Harmonious Hooves III'",effect:"Plate, Def+12, Fire Resist Lv5, Move Speed Lv2",notes:"Knight-of-Carnage-Set"},
-  {name:"Knight of Carnage Plate Gloves",type:"Hände",source:"Sword-Challenge 'Sword of Trials VI'",effect:"Plate, Def+17, Atk+36",notes:"Knight-of-Carnage-Set"},
-  {name:"Knight of Carnage Plate Boots",type:"Schuhe",source:"Challenge 'Dancing Blade, Shining Shield III'",effect:"Plate, Def+19, Atk+35",notes:"Knight-of-Carnage-Set"},
-  {name:"Martial Monk's Cloth Robe",type:"Torso",source:"Boss-Drop 'T'rukan the Ascended', Kap. IX",effect:"Cloth, Def+21, Move Speed Lv1",notes:"Martial-Monk-Set; 3 Abyss-Sockets"},
-  {name:"Martial Monk's Cloth Gloves",type:"Hände",source:"Boss-Drop 'T'rukan the Ascended', Kap. IX",effect:"Cloth, Def+12, Atk+26, Attack Speed Lv3-4",notes:"Martial-Monk-Set; 2 Abyss-Sockets"},
-  {name:"Martial Monk's Cloth Boots",type:"Schuhe",source:"Boss-Drop 'T'rukan the Ascended', Kap. IX",effect:"Cloth, Def+12, Atk+27, Move Speed Lv2-3",notes:"Martial-Monk-Set; 2 Abyss-Sockets"},
-  {name:"Demenissian Grand General Plate Armor",type:"Torso",source:"Boss-Drop oder Demeniss Equipment Shop",effect:"Plate, Def+37",notes:"Grand-General-of-Demeniss-Set; 3 Abyss-Sockets: Shockward I, Fortification I, Aegis I"},
-  {name:"Demenissian Grand General Plate Cloak",type:"Mantel",source:"Fraktionsquest 'Lunar Judgement' bei Count Elmore/Brookfield Manor oder Equipment Shop",effect:"Plate, Def+12, Lightning Resist Lv5, Move Speed Lv1-2",notes:"Grand-General-of-Demeniss-Set"},
-  {name:"The Masked Liberator's Cloth Armor",type:"Torso",source:"Boss-Drop, Fort Manub, Quest 'The Master of Masks'",effect:"Cloth, Def+21, Move Speed Lv1",notes:"The-Masked-Liberator-Set; auch für Damiane"},
-  {name:"The Masked Liberator's Leather Gloves",type:"Hände",source:"Chest im Firesand Helmhole, Tashkalp",effect:"Leather, Def+18, Atk+29, Lightning Resist Lv1, Crit Rate Lv2-3",notes:"The-Masked-Liberator-Set"},
-  {name:"The Masked Liberator's Leather Boots",type:"Schuhe",source:"Chest in der Gearmelt Confectionery, Delesyia",effect:"Leather, Def+18, Atk+30, Lightning Resist Lv1, Crit Rate Lv1-2",notes:"The-Masked-Liberator-Set"},
+  {name:"Desert Marauder's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:"",prov:"import"},
+  {name:"Autumn Banquet Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Leather Armor of Earth's Honor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Official Knight's Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:"",prov:"import"},
+  {name:"Official Knight's Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"St. Halssius Priest Attire",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Leather Boots of Earth's Honor",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"Pororin Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Leather Gloves of Earth's Honor",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"Odeck's Protector Plate Helm",type:"Kopf",source:"Hollow Haven, Höhle SW der Hexe Sanctuary (NO-Demeniss): Bismuth-Wand mit Focused Force Palm; alternativ Boss-Drop",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Odeck's Protector Plate Armor",type:"Torso",source:"The Four Pits of the Wayward Woods, NW-Pailune (Truhe hinter zerstörbarer Wand); alternativ Boss-Drop",effect:"DEF +41",notes:"",prov:"import"},
+  {name:"Odeck's Protector Plate Gloves",type:"Hände",source:"Kleine Höhle am Nordrand des Perwin Quarry, W-Zentral-Hernand (Truhe, Bismuth mit Focused Force Palm); alternativ Boss-Drop",effect:"ATK +36, DEF +17",notes:"",prov:"import"},
+  {name:"Odeck's Protector Plate Boots",type:"Schuhe",source:"Sanctum of Temperance, SO von Howling Hill (Truhe); alternativ Boss-Drop",effect:"ATK +35, DEF +19",notes:"",prov:"import"},
+  {name:"Dark Marksman's Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:"",prov:"import"},
+  {name:"Dark Marksman's Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +34, DEF +21",notes:"",prov:"import"},
+  {name:"Brimstone Gas Mask",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Shoddy Rishi's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Axiom Bracelet",type:"Mantel",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"",prov:"ohnewert"},
+  {name:"Autumn Banquet Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Official Knight's Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Stirrups of the Open Sky",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Musket Border Guard Standard Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"Herald of Six O'Clock",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Giant's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +15, DEF +5",notes:"",prov:"import"},
+  {name:"Health Detection Device",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Great Thief's Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +15, DEF +5",notes:"",prov:"import"},
+  {name:"Catfish Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"White Bloodwind Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Pillager's Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Kuku Breeze-Step Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar.",prov:"import"},
+  {name:"Strongbow Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Lightning Bolt Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Lightning Bolt Plate Armor",type:"Torso",source:"Welt-Drop / Händler; seit Patch 1.13.00 auch craftbar (Rezept im Shop kaufbar)",effect:"DEF +14",notes:"",prov:"import"},
+  {name:"Lightning Bolt Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +36, DEF +17",notes:"",prov:"import"},
+  {name:"Marni Laser Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"Sungrove Standard Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +8",notes:"",prov:"import"},
+  {name:"Windmere Standard Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +8",notes:"",prov:"import"},
+  {name:"Bear Hide Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Demeniss Elite Uniform Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Demenissian Elite Uniform Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:"",prov:"import"},
+  {name:"Demenissian Uniform Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Demenissian Uniform Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Dewhaven Standard Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Demenissian Uniform Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"Hartmann Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Schtump Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Mistcloaked Owl Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:"",prov:"import"},
+  {name:"Ashen Wolf's Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"Deceiver's Fedora",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Tiorant Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Tiorant Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Bandit Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Delegation Leather Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Yrkabel Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +5",notes:"",prov:"import"},
+  {name:"Odeck's Protector Plate Cloak",type:"Mantel",source:"Frostwind Cave im Silver Wolf Mountain nahe dem Osttor von Pailune: liegt frei am Boden, Zugang über den versteckten Spalt mit Leiter (bei Destructoid als Blackbear's Hideout bezeichnet, derselbe Höhlenkomplex); alternativ Boss-Drop",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Kuku Marni Laser Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar.",prov:"import"},
+  {name:"Kuku Lightning-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar.",prov:"import"},
+  {name:"Kuku Flame-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar.",prov:"import"},
+  {name:"Kuku Cold-Resistant Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +38",notes:"Sehr wahrscheinlich dasselbe Item wie 'Kuku Ice-Resistant Armor' (identisches Icon-Sprite; offizieller Patch-1.13.00-Name ist 'Ice-Resistant', 'Cold-Resistant' ist eine abweichende Bezeichnung). Kliff/Oongka-Equip-Hinweis siehe dort.",prov:"import"},
+  {name:"Demenissian Uniform Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"Mistcloaked Owl Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +10",notes:"",prov:"import"},
+  {name:"Sungrove Standard Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"White Bear Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"Yrkabel Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Golden Free Company's Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +11",notes:"",prov:"import"},
+  {name:"Condemner's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:"",prov:"import"},
+  {name:"Grey Wolf Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Oongka's Axiom Bracelet",type:"Mantel",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"",prov:"ohnewert"},
+  {name:"Purple Scout Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Purple Scout Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Purple Scout Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Blue Scout Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Blue Scout Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Blue Scout Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Dewhaven Standard Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:"",prov:"import"},
+  {name:"Pale Predator's Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"Damiane's Axiom Bracelet",type:"Mantel",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"",prov:"ohnewert"},
+  {name:"Lizard Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Wolf Tracker Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Condemner's Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"Bandit Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +1",notes:"",prov:"import"},
+  {name:"Labrak Cloth Cap",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Rivellon Cloth Cap",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Boren Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Icewing Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Ator's Will Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +6",notes:"",prov:"import"},
+  {name:"Ferman Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Grace Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Musket Border Guard Standard Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:"",prov:"import"},
+  {name:"Black Bears' Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"Goldbranch Plate Crown",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Bedure Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Solas Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"The Faceless's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:"",prov:"import"},
+  {name:"Northern Fighter's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Wyvernflame Cloth Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +1",notes:"",prov:"import"},
+  {name:"Drish Cloth Cap",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Jester Leather Mask",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Rabbit Leather Mask",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Schtump Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Constellation Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +5",notes:"",prov:"import"},
+  {name:"Autumn Banquet Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:"",prov:"import"},
+  {name:"Low-heeled Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:"",prov:"import"},
+  {name:"Radiant Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:"",prov:"import"},
+  {name:"Fluttering Radiance Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:"",prov:"import"},
+  {name:"Light of the Battlefield Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Miner's Lantern Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"The Faceless's Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +4",notes:"",prov:"import"},
+  {name:"Ashad Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:"",prov:"import"},
+  {name:"Carta Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:"",prov:"import"},
+  {name:"Icewing Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:"",prov:"import"},
+  {name:"White Bloodwind Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Dewhaven Standard Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +7",notes:"",prov:"import"},
+  {name:"Matana Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Dancing Catfish Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Wolf Tracker Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Wolf Tracker Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Nibrak Cloth Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Wolf Tracker Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Circuit Hijacking Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +5",notes:"",prov:"import"},
+  {name:"Beighen Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Tech Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Guard Visione",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"",prov:"ohnewert"},
+  {name:"Military Visione",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"",prov:"ohnewert"},
+  {name:"Prototype Visione",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"",prov:"ohnewert"},
+  {name:"Riding Attire",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +5",notes:"",prov:"import"},
+  {name:"Leather Riding Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Master Trainer's Touch",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Riding Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Vaporwalker",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +16, DEF +5",notes:"",prov:"import"},
+  {name:"Straw Bale Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Goblin Pumpkin Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Bedure Chain Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Dark Ringleader's Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Riding Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Tariv Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Skyblazer Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Delesyian Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"The Masked Liberator's Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Northern Fighter's Chain Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Crimson Chaser Chain Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Leather Cloak of the Fallen Kingdom",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Helfryn Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Sunset Reed Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Duskfang Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Grey Wolf Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Weasel Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Ynitium Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Jester Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Frozen Heart Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Scorchflame Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Golden Greed Plate Cloak",type:"Mantel",source:"Venomblade Grotto (Truhe)",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Grotevant Cloak",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Frostcursed Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Ferman Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Dark Marksman's Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Icewing Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Unyielding Warrior's Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Canta Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Plate Cloak of Cursed Soul",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Kuku Rishi's Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +30, DEF +18",notes:"Seit Patch 1.13.00 auch für Kliff/Oongka ausrüstbar.",prov:"import"},
+  {name:"Desert Marauder's Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +5",notes:"",prov:"import"},
+  {name:"Beekeeping Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Disguise Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"St. Halssius Priest's Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Lauques Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Shadowleaf Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Scarecrow Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Deer Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Raccoon Cloth Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Ironwilled Guardian's Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +2",notes:"",prov:"import"},
+  {name:"Boar Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"White Horn Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Plate Helm of the Shadows",type:"Kopf",source:"Drop: Beloth the Darksworn (Hoenmark Ruins, West-Everfrost, Hernand — Fraktionsquest 'Wraith in the Frost')",effect:"DEF +21",notes:"Shadows-Set — das einzige Teil, das direkt vom Boss kommt",prov:"import"},
+  {name:"Plate Cloak of the Shadows",type:"Mantel",source:"Truhe an der Westseite der Hoenmark Ruins (Everfrost, West-Hernand) — Falltür darüber geduckt per Force Palm öffnen",effect:"DEF +12",notes:"Shadows-Set",prov:"import"},
+  {name:"Lizard Leather Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Wolf Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Wooden Mask of Lost Justice",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Leather Hat of Enlightenment",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +18",notes:"",prov:"import"},
+  {name:"Kairos Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Kairos Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:"",prov:"import"},
+  {name:"Kairos Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Kairos Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +36, DEF +17",notes:"",prov:"import"},
+  {name:"Jackal Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Golden Free Company's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +7",notes:"",prov:"import"},
+  {name:"Leather Cloak of Earth's Honor",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Solas Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Goldlight Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Executioner of Darkness Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Reindeer Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Beltran Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Autumn Banquet Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Pirate King Hat",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"Official Knight's Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Eclipsed Solas Plate Gloves",type:"Hände",source:"Drop: Awakened Lucian Bastier (Demeniss - Spire of Clockwork)",effect:"ATK +36, DEF +17",notes:"",prov:"import"},
+  {name:"Executioner of Darkness Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Valortread Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +34, DEF +21",notes:"",prov:"import"},
+  {name:"Ziggurat Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Elegant Carmine Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Elegant Carmine Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:"",prov:"import"},
+  {name:"Crimson Banquet Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:"",prov:"import"},
+  {name:"Elegant Carmine Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Wanderer of Faith Leather Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +32",notes:"",prov:"import"},
+  {name:"Wanderer of Faith Leather Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Wanderer of Faith Leather Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +33, DEF +18",notes:"",prov:"import"},
+  {name:"Wanderer of Faith Leather Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +29, DEF +18",notes:"",prov:"import"},
+  {name:"Frozen Heart Plate Boots",type:"Schuhe",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:"",prov:"import"},
+  {name:"Valortread Plate Armor",type:"Torso",source:"Welt-Drop / Händler",effect:"DEF +41",notes:"",prov:"import"},
+  {name:"Cow Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"KuKu Rocket Helmet",type:"Kopf",source:"Welt-Drop / Händler",effect:"Stats variabel",notes:"Standardmäßig ausgerüstet",prov:"ohnewert"},
+  {name:"Valortread Plate Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +12",notes:"",prov:"import"},
+  {name:"Valortread Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +36, DEF +17",notes:"",prov:"import"},
+  {name:"Belkandor Plate Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +35, DEF +19",notes:"",prov:"import"},
+  {name:"Valortread Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Belkandor Plate Helm",type:"Kopf",source:"Welt-Drop / Händler",effect:"DEF +21",notes:"",prov:"import"},
+  {name:"Reins of Open Sky",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +11, DEF +3",notes:"",prov:"import"},
+  {name:"Tech Gloves",type:"Hände",source:"Welt-Drop / Händler",effect:"ATK +14, DEF +4",notes:"",prov:"import"},
+  {name:"Blinding Arrow Cloth Cloak",type:"Mantel",source:"Welt-Drop / Händler",effect:"DEF +3",notes:"",prov:"import"},
+  {name:"The Ashen's Plate Helm",type:"Kopf",source:"Back Alley Shop Odeck Pier/Pailune, 100 Trust",effect:"Plate, Def+21, Daze Immunity",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil",prov:"guide"},
+  {name:"The Ashen's Plate Armor",type:"Torso",source:"Boss-Drop, Quest 'Executioner of Justice'",effect:"Plate, Def+39",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil",prov:"guide"},
+  {name:"The Ashen's Plate Gloves",type:"Hände",source:"Challenge 'On a Storm of Beasts'",effect:"Plate, Def+21, Atk+34",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil",prov:"guide"},
+  {name:"The Ashen's Leather Cloak",type:"Mantel",source:"Life-Challenge 'Tiny Citizens of Grasslands'",effect:"Leather, Def+12, Ice Resist Lv5, Move Speed Lv1-2",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil",prov:"guide"},
+  {name:"The Ashen's Leather Boots",type:"Schuhe",source:"Challenge 'Caves Exploration Log'",effect:"Leather, Def+18, Atk+30, Lightning Resist Lv1, Crit Rate Lv1-2",notes:"Tarandus-the-Ashen-Set; gleichnamige 'Damaged Gear'-Variante ist nicht das tragbare Set-Teil",prov:"guide"},
+  {name:"Unyielding Hero's Plate Helm",type:"Kopf",source:"Back Alley Shop, Vendor Thrak, Thalwynd/Calphade",effect:"Plate, Def+17, Daze Immunity",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch",prov:"guide"},
+  {name:"Unyielding Hero's Plate Armor",type:"Torso",source:"Boss-Drop, Quest 'Traitor'",effect:"Plate, Def+39",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch",prov:"guide"},
+  {name:"Unyielding Hero's Plate Cloak",type:"Mantel",source:"Challenge 'Hunter's Discipline'",effect:"Plate, Def+12, Fire Resist Lv7",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch",prov:"guide"},
+  {name:"Unyielding Hero's Plate Gloves",type:"Hände",source:"Challenge 'Into the Barrage'",effect:"Plate, Def+19, Atk+35",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch",prov:"guide"},
+  {name:"Unyielding Hero's Plate Boots",type:"Schuhe",source:"Challenge 'The Vanished Wagon'",effect:"Plate, Def+21, Atk+34",notes:"Unyielding-Hero-Set; nicht mit dem Unyielding-Warrior-Set identisch",prov:"guide"},
+  {name:"Knight of Carnage Plate Helm",type:"Kopf",source:"Back Alley Shop Brek, Demeniss-Ostmauer, ca. 8 Goldbarren",effect:"Plate, Def+21, Daze Immunity",notes:"Knight-of-Carnage-Set",prov:"guide"},
+  {name:"Knight of Carnage Plate Armor",type:"Torso",source:"Boss-Drop Gregor, Fort Ironclad, Kap. VIII",effect:"Plate, Def+39",notes:"Knight-of-Carnage-Set",prov:"guide"},
+  {name:"Knight of Carnage Plate Cloak",type:"Mantel",source:"Horse-Challenge 'Harmonious Hooves III'",effect:"Plate, Def+12, Fire Resist Lv5, Move Speed Lv2",notes:"Knight-of-Carnage-Set",prov:"guide"},
+  {name:"Knight of Carnage Plate Gloves",type:"Hände",source:"Sword-Challenge 'Sword of Trials VI'",effect:"Plate, Def+17, Atk+36",notes:"Knight-of-Carnage-Set",prov:"guide"},
+  {name:"Knight of Carnage Plate Boots",type:"Schuhe",source:"Challenge 'Dancing Blade, Shining Shield III'",effect:"Plate, Def+19, Atk+35",notes:"Knight-of-Carnage-Set",prov:"guide"},
+  {name:"Martial Monk's Cloth Robe",type:"Torso",source:"Boss-Drop 'T'rukan the Ascended', Kap. IX",effect:"Cloth, Def+21, Move Speed Lv1",notes:"Martial-Monk-Set; 3 Abyss-Sockets",prov:"guide"},
+  {name:"Martial Monk's Cloth Gloves",type:"Hände",source:"Boss-Drop 'T'rukan the Ascended', Kap. IX",effect:"Cloth, Def+12, Atk+26, Attack Speed Lv3-4",notes:"Martial-Monk-Set; 2 Abyss-Sockets",prov:"guide"},
+  {name:"Martial Monk's Cloth Boots",type:"Schuhe",source:"Boss-Drop 'T'rukan the Ascended', Kap. IX",effect:"Cloth, Def+12, Atk+27, Move Speed Lv2-3",notes:"Martial-Monk-Set; 2 Abyss-Sockets",prov:"guide"},
+  {name:"Demenissian Grand General Plate Armor",type:"Torso",source:"Boss-Drop oder Demeniss Equipment Shop",effect:"Plate, Def+37",notes:"Grand-General-of-Demeniss-Set; 3 Abyss-Sockets: Shockward I, Fortification I, Aegis I",prov:"guide"},
+  {name:"Demenissian Grand General Plate Cloak",type:"Mantel",source:"Fraktionsquest 'Lunar Judgement' bei Count Elmore/Brookfield Manor oder Equipment Shop",effect:"Plate, Def+12, Lightning Resist Lv5, Move Speed Lv1-2",notes:"Grand-General-of-Demeniss-Set",prov:"guide"},
+  {name:"The Masked Liberator's Cloth Armor",type:"Torso",source:"Boss-Drop, Fort Manub, Quest 'The Master of Masks'",effect:"Cloth, Def+21, Move Speed Lv1",notes:"The-Masked-Liberator-Set; auch für Damiane",prov:"guide"},
+  {name:"The Masked Liberator's Leather Gloves",type:"Hände",source:"Chest im Firesand Helmhole, Tashkalp",effect:"Leather, Def+18, Atk+29, Lightning Resist Lv1, Crit Rate Lv2-3",notes:"The-Masked-Liberator-Set",prov:"guide"},
+  {name:"The Masked Liberator's Leather Boots",type:"Schuhe",source:"Chest in der Gearmelt Confectionery, Delesyia",effect:"Leather, Def+18, Atk+30, Lightning Resist Lv1, Crit Rate Lv1-2",notes:"The-Masked-Liberator-Set",prov:"guide"},
 ];
 
 const MOUNTS=[
@@ -10073,7 +10089,7 @@ function showSec(id, opts){
   if(!opts.keepSearch){
     document.getElementById('si').value='';
     document.getElementById('scnt').textContent='';
-    document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));
+    document.querySelectorAll('.hide').forEach(el=>{if(el.dataset.filtered!=='1')el.classList.remove('hide');});
     document.querySelectorAll('[data-s]').forEach(el=>{
       if(typeof clearHighlight==='function')clearHighlight(el);
     });
@@ -10389,9 +10405,10 @@ function _doSearchImpl(q){
   }
   if(!q){
     cnt.textContent='';
-    document.querySelectorAll('.hide').forEach(el=>el.classList.remove('hide'));
+    document.querySelectorAll('.hide').forEach(el=>{if(el.dataset.filtered!=='1')el.classList.remove('hide');});
     document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
     if(document.getElementById('sec-weapons')&&document.getElementById('sec-weapons').classList.contains('active')&&typeof renderWeapons==='function')renderWeapons();
+    if(typeof armorCount==='function')armorCount();
     return;
   }
   // Only operate within the active section — drastically reduces work
@@ -10400,7 +10417,9 @@ function _doSearchImpl(q){
   let total=0;
   const matchedForHL=[];
   scope.querySelectorAll('[data-s]').forEach(el=>{
-    const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF);
+    // Von einem Sektionsfilter ausgeschlossene Karten bleiben ausgeschlossen —
+    // sonst holt ein Texttreffer sie zurueck und haebelt den Filter aus.
+    const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF)&&el.dataset.filtered!=='1';
     el.classList.toggle('hide',!m);
     if(m){total++;if(matchedForHL.length<80)matchedForHL.push(el);}
   });
@@ -10410,6 +10429,7 @@ function _doSearchImpl(q){
   matchedForHL.forEach(el=>highlightInElement(el,q));
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
   {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
+  if(typeof armorCount==='function')armorCount();
   // Empty-State — mit sektionsuebergreifendem Fallback ("Alles durchsuchen" einloesen)
   document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
   if(total===0&&activeSec){
@@ -11427,17 +11447,50 @@ function armorTypeGrad(type){
 }
 
 // ===== ARMOR =====
+// Provenienz-Marke. prov sagt, WOHER der Wert eines Eintrags stammt — nicht, wie
+// gut er belegt ist. Die Grenze import/guide ist in Wahrheit die Schreibweise des
+// Wertformats im Datenbestand und trennt Import-Chargen; deshalb steht das auch
+// so im Erklaerkasten ueber dem Raster und wird nicht als Guetesiegel verkauft.
+const ARMOR_PROV={
+  import:{cls:'pv',lbl:'Datenimport',tip:'Wert stammt aus dem Import der Spieldateien (Format „DEF +X“). Er gilt als echt, wurde aber NICHT einzeln gegen einen Guide gehalten — einzelne dieser Einträge sind unvollständig.'},
+  guide:{cls:'pv',lbl:'aus Guides belegt',tip:'Wert stammt aus recherchierten Guides (VULKK, game8, Fextralife, teils offizielle Patch Notes) oder aus einer einzeln dokumentierten Korrektur.'},
+  altbestand:{cls:'pv-warn',lbl:'ungeprüft',tip:'Alter kuratierter Bestand: dieser Effekt-Text wurde nie gegen das Spiel oder einen Guide geprüft. Der Fakten-Audit vom 02.06.2026 hat in diesem Block erfundene Werte nachgewiesen.'},
+  ohnewert:{cls:'pv',lbl:'kein Zahlenwert',tip:'Für dieses Teil ist kein Def-/Atk-Wert hinterlegt („Stats variabel“) — hier gibt es nichts, was sich prüfen ließe.'}
+};
+function armorProvBadge(p){const m=ARMOR_PROV[p];return m?`<span class="tag ${m.cls}" title="${escHtml(m.tip)}">${m.lbl}</span>`:'';}
+// Material steckt laut Fakten-Audit nur im Namen, nicht in den Werten — deshalb
+// wird es aus dem Namen gelesen und nicht als eigener Stat behauptet.
+function armorMat(n){return /\bchain\b/i.test(n)?'Chain':/\bplate\b/i.test(n)?'Plate':/\bleather\b/i.test(n)?'Leather':/\bcloth\b/i.test(n)?'Cloth':'';}
+// Def/Atk fuer die Sortierung aus dem Effekt-Text lesen. Nur der Teil VOR einer
+// Klammer zaehlt: dahinter stehen Quellenangaben mit eigenen Zahlen ("Def 2-4
+// (game8 3, Fextralife 4)"). Bei Spannen gilt der untere Wert, das ist die
+// vorsichtigere Lesart. 301 der 337 Eintraege haben so eine Zahl, der Rest
+// sortiert ans Ende.
+function armorNum(eff,key){const vorn=String(eff||'').split('(')[0];const m=new RegExp(key+'\\s*[+→]?\\s*(\\d+)','i').exec(vorn);return m?+m[1]:null;}
+const ARMOR_TYPE_ORDER=['Torso','Kopf','Hände','Schuhe','Mantel'];
+const ARMOR_PROV_ORDER={altbestand:0,ohnewert:1,guide:2,import:3};
+
+// Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
+// Suche laufen ueber armorFilter() und fassen das DOM nicht neu an, sonst wuerde
+// jeder Tastendruck 337 Karten samt <img> neu erzeugen.
 function renderArmor(){
-  const f=document.getElementById('af-type').value;
-  document.getElementById('armor-grid').innerHTML=ARMOR.map(a=>{
-    const show=!f||a.type===f;
+  const sortEl=document.getElementById('af-sort');
+  const sort=sortEl?sortEl.value:'type';
+  const liste=ARMOR.slice();
+  const nachName=(a,b)=>a.name.localeCompare(b.name,'de');
+  if(sort==='name')liste.sort(nachName);
+  else if(sort==='def')liste.sort((a,b)=>((armorNum(b.effect,'def')??-1)-(armorNum(a.effect,'def')??-1))||nachName(a,b));
+  else if(sort==='atk')liste.sort((a,b)=>((armorNum(b.effect,'atk')??-1)-(armorNum(a.effect,'atk')??-1))||nachName(a,b));
+  else if(sort==='prov')liste.sort((a,b)=>((ARMOR_PROV_ORDER[a.prov]??9)-(ARMOR_PROV_ORDER[b.prov]??9))||nachName(a,b));
+  else liste.sort((a,b)=>(ARMOR_TYPE_ORDER.indexOf(a.type)-ARMOR_TYPE_ORDER.indexOf(b.type))||nachName(a,b));
+  document.getElementById('armor-grid').innerHTML=liste.map(a=>{
     const s=[a.name,a.type,a.source,a.effect,a.notes].join(' ').toLowerCase();
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
     const srcDisp=a.source&&a.source.trim()?a.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
-    return `<div class="card${show?'':' hide'}" data-s="${s}">
+    return `<div class="card" data-s="${s}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${a.name}</div>
-      <div class="cm"><span class="tag ${typeColor}">${a.type}</span></div>
+      <div class="cm"><span class="tag ${typeColor}">${a.type}</span>${armorProvBadge(a.prov)}</div>
       <div class="crows">
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${a.effect}</span></div>
         <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:11px">${srcDisp}</span></div>
@@ -11446,6 +11499,41 @@ function renderArmor(){
       <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>
     </div>`;
   }).join('');
+  armorFilter();
+}
+
+// Wendet Sektionsfilter UND beide Suchfelder an, ohne das DOM neu zu bauen.
+//
+// data-filtered="1" markiert eine Karte als "von dieser Sektion ausgefiltert".
+// Die globale Suche (_doSearchImpl) respektiert diese Markierung, statt die
+// Sichtbarkeit allein nach Texttreffer zu setzen — vorher hat sie den Typ-Filter
+// stillschweigend ausgehebelt.
+function armorFilter(){
+  const g=document.getElementById('armor-grid');
+  if(!g||!g.children.length)return;
+  const wert=id=>{const el=document.getElementById(id);return el?el.value:'';};
+  const ft=wert('af-type'),fm=wert('af-mat'),fp=wert('af-prov');
+  const lq=_fold(wert('af-q').trim());
+  const si=document.getElementById('si');
+  const gq=_fold(((si&&si.value)||'').trim());
+  g.querySelectorAll('.card').forEach(el=>{
+    const d=el.dataset;
+    let ok=(!ft||d.type===ft)&&(!fp||d.prov===fp)&&(!fm||(fm==='none'?!d.mat:d.mat===fm));
+    const txt=el._sf||(el._sf=_fold(d.s));
+    if(ok&&lq)ok=txt.includes(lq);
+    d.filtered=ok?'0':'1';
+    el.classList.toggle('hide',!(ok&&(!gq||txt.includes(gq))));
+  });
+  armorCount();
+}
+
+// Trefferzahl. Wird auch von der globalen Suche aufgerufen, damit die Anzeige
+// nicht stehen bleibt, waehrend diese die Sichtbarkeit veraendert.
+function armorCount(){
+  const g=document.getElementById('armor-grid'),c=document.getElementById('armor-count');
+  if(!g||!c||!g.children.length)return;
+  const sichtbar=g.querySelectorAll('.card:not(.hide)').length;
+  c.textContent=sichtbar===ARMOR.length?ARMOR.length+' Rüstungsteile':sichtbar+' von '+ARMOR.length+' Rüstungsteilen';
 }
 
 // ===== ARMOR SETS =====
@@ -14537,6 +14625,20 @@ document.addEventListener('DOMContentLoaded',()=>{
       _ws('wep-nocrit',WEAPONS.filter(w=>w.crit==null).length);
       _ws('wep-noslots',WEAPONS.filter(w=>w.slots==null).length);
       _ws('wep-noatk',WEAPONS.filter(w=>w.def==null&&w.atk==null&&w.type!=='A.T.A.G. Weapon').length);
+    }
+  }catch(e){}
+
+  // Ruestungs-Quellenlage: dieselbe Logik wie oben — aus den Daten gerechnet,
+  // damit die Zahlen im Erklaerkasten beim Nachtragen nicht veralten.
+  try{
+    if(typeof ARMOR!=='undefined'&&Array.isArray(ARMOR)){
+      const _as=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+      const _ap=p=>ARMOR.filter(a=>a.prov===p).length;
+      _as('armor-total',ARMOR.length);
+      _as('armor-import',_ap('import'));
+      _as('armor-guide',_ap('guide'));
+      _as('armor-alt',_ap('altbestand'));
+      _as('armor-ohne',_ap('ohnewert'));
     }
   }catch(e){}
 

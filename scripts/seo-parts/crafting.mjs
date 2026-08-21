@@ -37,6 +37,21 @@ const CAT_ORDER = ["Elixir", "Food", "Kuku-Gadget"];
 // Elixiere haben nur "Basis", Kuku-Gadgets nur "Gadget" - dort lohnt keine Unterteilung.
 const FOOD_TIER_ORDER = ["Basis", "Festmahl", "Lavish", "Filling", "Satisfying", "Hearty"];
 
+// Datenmengen, die die redaktionellen Texte in scripts/seo-content/ per
+// Platzhalter einsetzen ({{name}} = Ziffer, {{name|wort}} = ausgeschrieben).
+// Einzige Quelle fuer diese Zahlen ist die Datenstruktur selbst — nie ein
+// fest verdrahteter Wert im Text. Siehe zahlenEinsetzen() in gen-seo.mjs.
+export function ZAHLEN(ctx) {
+  const { CRAFTING } = ctx.data;
+  const je = (cat) => CRAFTING.filter((c) => c.cat === cat).length;
+  return {
+    anzahl: CRAFTING.length,
+    elixiere: je("Elixir"), gerichte: je("Food"), gadgets: je("Kuku-Gadget"),
+    stationen: new Set(CRAFTING.map((c) => c.station).filter(Boolean)).size,
+    unsicher: CRAFTING.filter((c) => c.conf === "low" || c.conf === "medium").length,
+  };
+}
+
 export function build(ctx) {
   const { CRAFTING } = ctx.data;
   const { esc, has, imgSrc, breadcrumbLd, SITE, CRAFT_CDN } = ctx.helpers;

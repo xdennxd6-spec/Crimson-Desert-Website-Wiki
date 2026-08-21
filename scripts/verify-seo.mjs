@@ -130,7 +130,97 @@ const refMissing = [...refImgPaths].filter((v) => !fs.existsSync(path.join(ROOT,
 ok(refMissing.length === 0, `alle referenzierten Bilder existieren (fehlend: ${refMissing.length})`);
 refMissing.slice(0, 8).forEach((v) => console.log("       FEHLT:", v));
 
-// ── 4. sitemap.xml ───────────────────────────────────────────────────────────
+// ── 4. Zahlen in den redaktionellen Texten ───────────────────────────────────
+// Der Anlass: ruestungen.html warb ab dem 14.08.2026 in Title, H1 und ItemList mit
+// 337 Ruestungsteilen, waehrend Intro-Absatz und zwei FAQ-Antworten weiterhin 314
+// nannten — sichtbar UND im FAQPage-JSON-LD. Dieser Check lief damals gruen durch,
+// weil er die Fliesstexte gar nicht ansah. Er prueft jetzt beides:
+//
+//   (a) Quell-Lint: in scripts/seo-content/ duerfen Mengenangaben nur als
+//       Platzhalter stehen ({{anzahl}} / {{verpassbar|wort}}). Eine fest
+//       verdrahtete Zahl ist der Fehler selbst, unabhaengig davon, ob sie
+//       gerade zufaellig stimmt.
+//   (b) Ausgabe-Abgleich: jede Zahl in Intro und FAQ der erzeugten Seite muss
+//       einer echten Datenmenge entsprechen. Die Soll-Werte leitet dieser
+//       Pruefer BEWUSST selbst aus index.html ab statt ZAHLEN() der Module
+//       aufzurufen — sonst wuerde er einen Fehler in ZAHLEN() mitmachen.
+//
+// Ausgeschriebene Zahlwoerter zaehlen mit ("fuenf verpassbare", "sechs Regionen"):
+// genau so eine Angabe war falsch (SIDE_QUESTS hat fuenf Regionen, nicht sechs)
+// und waere einem reinen Ziffern-Check entgangen. "ein/eine" bleibt aussen vor,
+// das ist im Deutschen meist Artikel und nicht Menge.
+const ZAHLWORT = { zwei: 2, drei: 3, vier: 4, "fünf": 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10, elf: 11, "zwölf": 12 };
+const WORT_RE = new RegExp("\\b(" + Object.keys(ZAHLWORT).join("|") + ")\\b", "gi");
+const SEO_DIR = path.join(ROOT, "scripts", "seo-content");
+const ohnePlatzhalter = (t) => t.replace(/\{\{\w+(\|wort)?\}\}/g, " ");
+
+// GRENZE DIESES CHECKS, damit sie niemand ueberschaetzt: Die Ausgabe-Pruefung (b)
+// testet nur MENGENZUGEHOERIGKEIT, nicht den Bezug. Steht auf einer Seite "sechs
+// Regionen", waehrend 6 dort als Anzahl verpassbarer Quests eine gueltige Zahl
+// ist, rutscht die falsche Aussage durch. Genau so war es bei side-quests.html.
+// Der Quell-Lint (a) ist deshalb der eigentliche Waechter — er verbietet fest
+// verdrahtete Zahlen komplett, unabhaengig davon, ob sie gerade stimmen.
+console.log("\n[Redaktionelle Texte] scripts/seo-content/");
+for (const datei of ["intros.json", "faq.json"]) {
+  const pfad = path.join(SEO_DIR, datei);
+  if (!fs.existsSync(pfad)) { ok(false, `${datei} existiert`); continue; }
+  const rest = ohnePlatzhalter(fs.readFileSync(pfad, "utf8"));
+  const ziffern = [...new Set((rest.match(/\d+/g) || []))];
+  ok(ziffern.length === 0, `${datei}: keine fest verdrahtete Ziffer (gefunden: ${ziffern.join(", ") || "-"})`);
+  const woerter = [...new Set((rest.match(WORT_RE) || []).map((w) => w.toLowerCase()))];
+  ok(woerter.length === 0, `${datei}: keine ausgeschriebene Mengenangabe (gefunden: ${woerter.join(", ") || "-"})`);
+}
+
+// trophaeen.json faellt aus dem Voll-Lint heraus: die Freischalt-Anleitungen
+// nennen legitim viele Spielzahlen (13 Konstellationen, 60 Geheimorte, 16
+// Sanktume). Verboten sind dort nur die ABGELEITETEN Groessen — genau die
+// driften. "Schalte alle 34 uebrigen Trophaeen frei" war TROPHIES.length-1 als
+// Literal, und diese Datei lief bis 21.08.2026 an jeder Absicherung vorbei.
+{
+  const pfad = path.join(SEO_DIR, "trophaeen.json");
+  if (fs.existsSync(pfad)) {
+    const rest = ohnePlatzhalter(fs.readFileSync(pfad, "utf8"));
+    const verboten = new Set([N_TROPHIES, N_TROPHIES - 1]);
+    const treffer = [...new Set((rest.match(/\d+/g) || []).map(Number))].filter((n) => verboten.has(n));
+    ok(treffer.length === 0, `trophaeen.json: keine abgeleitete Groesse als Literal (verboten: ${[...verboten].join(", ")}; gefunden: ${treffer.join(", ") || "-"})`);
+  }
+}
+
+// Soll-Mengen je Seite, unabhaengig aus index.html abgeleitet.
+const ARMOR = extract("ARMOR"), CRAFTING = extract("CRAFTING");
+const TROPHIES = extract("TROPHIES"), SIDE_QUESTS = extract("SIDE_QUESTS");
+const zaehl = (arr, f) => arr.filter(f).length;
+const ERLAUBTE_ZAHLEN = {
+  "ruestungen.html": [N_ARMOR, ...["Torso", "Kopf", "Hände", "Schuhe", "Mantel"].map((t) => zaehl(ARMOR, (a) => a.type === t))],
+  "crafting.html": [N_CRAFTING, ...["Elixir", "Food", "Kuku-Gadget"].map((c) => zaehl(CRAFTING, (x) => x.cat === c)),
+    new Set(CRAFTING.map((c) => c.station).filter(Boolean)).size,
+    zaehl(CRAFTING, (c) => c.conf === "low" || c.conf === "medium")],
+  "trophaeen.html": [N_TROPHIES, zaehl(TROPHIES, (t) => t.miss),
+    ...["platinum", "gold", "silver", "bronze"].map((g) => zaehl(TROPHIES, (t) => t.grade === g))],
+  "bestiarium.html": [N_ENEMIES, ...["wild", "kreaturen", "fraktionen"].map((k) => (ENEMIES[k] || []).length)],
+  "side-quests.html": [N_SIDE_QUESTS, zaehl(SIDE_QUESTS, (q) => q.miss), new Set(SIDE_QUESTS.map((q) => q.region)).size],
+};
+
+for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
+  const c = fs.readFileSync(path.join(ROOT, datei), "utf8");
+  const menge = new Set(erlaubt);
+  // Intro-Absatz + alle sichtbaren FAQ-Antworten. Das FAQPage-JSON-LD wird aus
+  // derselben Quelle gebaut und ist damit mitgeprueft.
+  const stellen = [
+    ...[...c.matchAll(/<p class="intro">([\s\S]*?)<\/p>/g)].map((m) => ["Intro", m[1]]),
+    ...[...c.matchAll(/<details class="faq">([\s\S]*?)<\/details>/g)].map((m) => ["FAQ", m[1]]),
+  ];
+  const falsch = [];
+  for (const [wo, roh] of stellen) {
+    const text = decode(roh.replace(/<[^>]+>/g, " "));
+    for (const z of text.match(/\d+/g) || []) if (!menge.has(Number(z))) falsch.push(`${wo}: "${z}"`);
+    for (const w of text.match(WORT_RE) || []) if (!menge.has(ZAHLWORT[w.toLowerCase()])) falsch.push(`${wo}: "${w}"`);
+  }
+  ok(falsch.length === 0, `${datei}: alle Zahlen in Intro/FAQ decken sich mit den Daten [${erlaubt.join(",")}]`);
+  falsch.slice(0, 8).forEach((f) => console.log("       ABWEICHUNG " + f));
+}
+
+// ── 5. sitemap.xml ───────────────────────────────────────────────────────────
 const sm = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 // NEU (8-Seiten-Erweiterung): alle 8 Seiten-URLs statt 3 (plus Startseite),
 // Reihenfolge wie im Kopf-Menue (siehe harness.mjs NAV).
