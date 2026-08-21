@@ -4,6 +4,25 @@
 - **ZUERST `git fetch && git pull --ff-only`** (siehe Sync-Disziplin unten), dann aktuellen `index.html`-Stand bewerten — NICHT blind dem alten Handover folgen.
 - `.claude/audit-handover.json` ist der Fable-5-Vollaudit vom 2026-06-10 und inzwischen GROSSTEILS ERLEDIGT (NPCs, Bestiarium, Crafting 12->310, Witch-Synthese-Baum, SEO-Seiten, Patch 1.11, Kuku-Gadgets, Abyss-Cores). Offen nur noch marginale Optionalpunkte (Waffen-crit/slots-Restluecken, PWA-Manifest-Screenshots, Monolith-Aufteilung nach Absprache).
 
+## Zweites Repo: der Arbeitskontext (privat)
+Zu diesem Projekt gehören ZWEI Repos. Dieses hier ist die Website. Der **Arbeitskontext**
+liegt seit 2026-08-21 im privaten Repo **`xdennxd6-spec/crimson-wiki-werkstatt`**:
+Recherche-Rohdaten, Auswerteskripte, Prüfberichte, Codex-Prompts, Screenshots und der
+Projektstand — alles, was vorher nur auf dem PC lag und beim Maschinenwechsel verloren ging.
+
+- **Auf dem PC:** `G:\Claude\Crimson-Wiki-Werkstatt\`
+- **Auf dem Pi:** `~/crimson-wiki-werkstatt` (klonen, falls noch nicht vorhanden)
+- **Erste Anlaufstelle dort ist `STATUS.md`** — Projekthistorie und offene Punkte. Vor
+  größeren Aufgaben dort nachsehen, statt den Stand aus dem Code zu erraten.
+- Archiv unter `archiv/<projektordner>/`, u.a. `Crimson-Desert-Patch-Update` (Patch-Pflege
+  samt Insert-Skript), `Crimson-Desert-Fundorte`, `Crimson-Wiki-Faktencheck`.
+- Kein Deploy, kein Build → dort darf **jederzeit gepusht** werden, anders als in diesem Repo.
+- Auf dem PC spiegelt `sync-von-g.ps1` neue Arbeit von `G:\Claude\Crimson-*` ins Archiv.
+  Auf dem Pi ist das Skript wirkungslos, dort direkt unter `archiv/` arbeiten.
+
+Ist das Repo auf der aktuellen Maschine nicht vorhanden, den User fragen statt es
+anzulegen — es ist privat und braucht Credentials, die Claude nicht anfassen darf.
+
 ## Projekt
 - **Lokaler Ordner:** `C:\Users\Rainer Winkler\Desktop\Verschiedenes\deploy-69fcff9bfbeb7525ed81aec7\`
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
