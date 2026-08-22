@@ -1774,6 +1774,9 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .set-piece button:hover{color:var(--survey-red)}
 .set-piece button:focus-visible{outline:2px solid var(--survey-red);outline-offset:2px}
 .set-piece .fehlt{color:var(--gdim);font-style:italic}
+/* Sammelposten fuer Teile, deren NAMEN nicht belegt sind -- anders als .fehlt kein
+   Teil, das nur noch keinen Eintrag hat, sondern eine bekannte Luecke im Wissen. */
+.set-piece .luecke{color:var(--gdim);font-style:italic;opacity:.7;border-bottom:1px dotted var(--bdr)}
 
 /* ── Map iframe ── */
 #map-hint{font-family:var(--f-mono);font-size:10px;color:var(--iron-soft);text-align:center;letter-spacing:.06em;margin-top:8px;text-transform:uppercase}
@@ -11675,6 +11678,21 @@ const SET_BONUS_STD="Kein Set-Bonus — Wert nur aus Einzelteil-Stats + Abyss-Co
 // Sucht ein Set-Teil oben in der Ruestungsliste. Die uebrigen Filter werden
 // zurueckgesetzt, sonst faende die Suche das Teil nicht, wenn gerade ein Typ-
 // oder Quellenlagen-Filter aktiv ist.
+// Ein Set kann Teile enthalten, die keine Ruestung sind (bisher genau eines: die
+// Waffe Ashen Execution). Ihr Eintrag steht in WEAPONS, der Sprung geht deshalb in
+// die Waffensektion. Die Waffenliste hat kein eigenes Suchfeld, sie filtert ueber
+// die globale Suche -- deshalb #si setzen und renderWeapons neu laufen lassen,
+// sonst greift die Seitenblaetterung und das Teil steht auf einer anderen Seite.
+function waffeZeigeTeil(name){
+  const si=document.getElementById('si');
+  const wf=document.getElementById('wf-type'); if(wf)wf.value='';
+  if(si)si.value=name;
+  showSec('weapons',{keepSearch:true});
+  if(typeof renderWeapons==='function')renderWeapons();
+  if(typeof _doSearchImpl==='function')_doSearchImpl(name);
+  const g=document.getElementById('weapon-tb');
+  if(g)g.scrollIntoView({behavior:'smooth',block:'start'});
+}
 function armorZeigeTeil(name){
   const q=document.getElementById('af-q');
   if(!q||typeof armorFilter!=='function')return;
@@ -11689,16 +11707,30 @@ function renderArmorSets(){
   // Welche Set-Teile haben einen eigenen Ruestungseintrag? Die Klammerzusaetze
   // der Damiane-Teile ("Name (Fundort)") werden dafuer abgeschnitten.
   const vorhanden=new Set(ARMOR.map(a=>a.name));
-  const treffer=p=>{
-    if(vorhanden.has(p))return p;
+  // Nicht jedes Set-Teil ist eine Ruestung: das Tarandus-Set enthaelt eine Waffe,
+  // deren Eintrag in WEAPONS steht. Ohne diesen zweiten Topf galt sie als fehlend.
+  const vorhandenWaffe=new Set((typeof WEAPONS!=='undefined'?WEAPONS:[]).map(w=>w.name));
+  const suche=(topf,p)=>{
+    if(topf.has(p))return p;
     const blank=p.replace(/\s*\(.*\)$/,'').trim();
-    return vorhanden.has(blank)?blank:null;
+    return topf.has(blank)?blank:null;
   };
+  const treffer=p=>suche(vorhanden,p);
+  const trefferWaffe=p=>suche(vorhandenWaffe,p);
+  // "3 weitere Ruestungsteile (Namen nicht belegt)" ist kein Item, sondern ein
+  // Sammelposten fuer eine bekannte Wissensluecke -- pieceCount rechnet ihn schon
+  // richtig mit. Er darf nicht wie ein Teil aussehen, das nur noch fehlt.
+  const istSammelposten=p=>/^\d+\s+weitere/.test(p);
   document.getElementById('set-grid').innerHTML=ARMOR_SETS.map(s=>{
     const teile=s.pieces.map(p=>{
       const t=treffer(p);
+      const w=t?null:trefferWaffe(p);
       const inhalt=t
         ?`<button type="button" onclick="armorZeigeTeil('${escJsStr(t)}')" title="In der Rüstungsliste oben anzeigen">${escHtml(p)}</button>`
+        :w
+        ?`<button type="button" onclick="waffeZeigeTeil('${escJsStr(w)}')" title="Keine Rüstung — Eintrag in der Waffensektion anzeigen">${escHtml(p)}</button>`
+        :istSammelposten(p)
+        ?`<span class="luecke" title="Sammelposten: die Namen dieser Teile sind in keiner Quelle belegt — ein eigener Eintrag ist deshalb nicht möglich">${escHtml(p)}</span>`
         :`<span class="fehlt" title="Im Spiel belegt, aber noch ohne eigenen Eintrag in dieser Rüstungsliste">${escHtml(p)}</span>`;
       return `<div class="set-piece"><div class="set-piece-dot" style="background:${s.color}"></div>${inhalt}</div>`;
     }).join('');
