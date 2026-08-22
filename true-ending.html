@@ -115,6 +115,35 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
+   Die Leiste ist reines HTML und funktioniert ohne Skript. Das Suchfeld steht
+   mit [hidden] im Markup und wird erst vom Skript eingeblendet. */
+.pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
+border:1px solid var(--line);border-radius:var(--radius)}
+.pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
+text-transform:uppercase;letter-spacing:.06em}
+.pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
+background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+color:var(--ink);font-family:var(--f-sans);font-size:14px}
+.pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
+.pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+.jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:4px 10px;background:var(--bg);
+border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);
+text-decoration:none;font-family:var(--f-mono);font-size:var(--fs-11)}
+.jump a:hover,.jump a:focus{border-color:var(--red);color:var(--ink-hi)}
+.jump a .n{color:var(--ink-faint);margin-left:5px}
+h2[id]{scroll-margin-top:18px}
+/* Auf schmalen Schirmen darf die Sprungleiste den Inhalt nicht verdraengen:
+   waffen.html hat 21 Abschnitte, das waeren sonst ueber 300px Navigation vor
+   dem ersten Eintrag. Drei Zeilen bleiben, der Rest scrollt in der Leiste. */
+@media(max-width:600px){.jump{max-height:96px;overflow-y:auto}}
+.pt-empty{display:none;margin:18px 0;padding:14px;border:1px dashed var(--line-strong);
+border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-size:14px}
+/* !important, weil Layoutregeln wie article.card{display:flex} sonst gewinnen */
+[data-pt-hidden]{display:none!important}
 /* Mobil: nichts unter 11px. Gleiche Schwelle wie index.html. */
 @media(max-width:600px){:root{--fs-10:12px;--fs-11:12px;--fs-11-5:12px}}
 
@@ -164,14 +193,24 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; True Ending</nav>
 <h1>Crimson Desert True Ending: komplette Checkliste</h1>
 <p class="lead">Das <strong>True Ending</strong> (das „wahre Ende") von Crimson Desert schaltest du nur frei, wenn du vor dem Abschluss der Hauptstory bestimmte optionale Aufgaben erfüllst. Diese Checkliste fasst alle <strong>28 Pflichtaufgaben</strong> zusammen, sortiert nach Bereich.</p>
+<div class="pagetools">
+  <div class="ptline" hidden>
+    <label for="pt-suche">Auf dieser Seite</label>
+    <input type="search" id="pt-suche" autocomplete="off"
+           placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
+    <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-begleiter-companions">Begleiter (Companions)</a><a href="#a-sanctums">Sanctums</a><a href="#a-hexen-tokens">Hexen-Tokens</a><a href="#a-story-epilog">Story &amp; Epilog</a><a href="#a-sonstiges">Sonstiges</a></nav>
+</div>
+<p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 
 <a class="cta" href="/#sec-checklists">Interaktive Checkliste mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jede Aufgabe ab und siehst deinen Fortschritt in Prozent; der Stand wird lokal gespeichert.</p>
-<h2>Begleiter (Companions) (3)</h2>
+<h2 id="a-begleiter-companions">Begleiter (Companions) (3)</h2>
 <div class="te-cat"><ul class="te"><li>Damiane Arc komplett (bis Kap. 8 Blood Coronation + Solo + Lucian Bastier)</li>
 <li>Oongka permanent: Quest &#39;Words Left by the Riverside&#39; (S Pailune East Gate, Kap. 8)</li>
 <li>Oongka permanent: Quest &#39;Strength Held in the Fingertips&#39; (Calphade Castle Arm-Wrestling, Kap. 8)</li></ul></div>
-<h2>Sanctums (16)</h2>
+<h2 id="a-sanctums">Sanctums (16)</h2>
 <div class="te-cat"><ul class="te"><li>Sanctum of Temperance</li>
 <li>Sanctum of Penitence</li>
 <li>Sanctum of Benediction</li>
@@ -188,19 +227,109 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <li>Sanctum of Veneration (Delesyia)</li>
 <li>Sanctum of Oblation (Delesyia)</li>
 <li>Sanctum of Faith (Delesyia)</li></ul></div>
-<h2>Hexen-Tokens (6)</h2>
+<h2 id="a-hexen-tokens">Hexen-Tokens (6)</h2>
 <div class="te-cat"><ul class="te"><li>Sylvia gefunden und gesprochen (Cave N Hernand)</li>
 <li>Elowen freigeschaltet + Token erhalten</li>
 <li>Bari freigeschaltet + Token erhalten</li>
 <li>Lyselia freigeschaltet + Token erhalten</li>
 <li>Areciel freigeschaltet + Token erhalten</li>
-<li>White Crow Huette geöffnet (alle 4 Tokens)</li></ul></div>
-<h2>Story &amp; Epilog (2)</h2>
+<li>White Crow Hütte geöffnet (alle 4 Tokens)</li></ul></div>
+<h2 id="a-story-epilog">Story &amp; Epilog (2)</h2>
 <div class="te-cat"><ul class="te"><li>Kapitel 12 abschliessen + Epilog</li>
 <li>Axiom Archive Records lesen — 6 Bücher, 3. Stock (Abyss, nach Epilog)</li></ul></div>
-<h2>Sonstiges (1)</h2>
+<h2 id="a-sonstiges">Sonstiges (1)</h2>
 <div class="te-cat"><ul class="te"><li>Faction Contribution Threshold in jeder Region erreicht</li></ul></div>
 </main>
+<script>
+/* Seitensuche. Laeuft erst nach dem Laden und veraendert nichts, solange
+   niemand tippt -- ohne Skript bleibt die Seite exakt wie ausgeliefert.
+   Ein "Eintrag" ist eine Tabellenzeile, eine Karte oder ein Listenpunkt; die
+   Zuordnung zum Abschnitt ergibt sich aus den Geschwistern hinter jeder
+   Abschnittsueberschrift. */
+(function(){
+  var feld=document.getElementById('pt-suche');
+  var zaehler=document.getElementById('pt-count');
+  var leer=document.getElementById('pt-empty');
+  var main=document.querySelector('main');
+  if(!feld||!main)return;
+
+  /* Diakritika entfernen -- dieselbe Faltung wie _fold() im Hauptwiki.
+     ACHTUNG: doppelte Backslashes. Dieser Code steht in einem Template-Literal
+     des Generators; einfach geschrieben kaeme im HTML /s+/ statt /s+/ an. */
+  function fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');}
+  /* Suchbasis eines Eintrags: zusaetzlich die ausgeschriebene Umlautform.
+     Sonst faende "rüstung" das Wort, "ruestung" aber nicht -- auf Tastaturen
+     ohne Umlaute die haeufigere Eingabe. Der senkrechte Strich trennt beide
+     Formen, damit kein Begriff ueber die Naht hinweg zufaellig trifft. */
+  function basis(s){var k=String(s==null?'':s).toLowerCase();
+    return fold(k)+'|'+fold(k.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));}
+
+  // Abschnitte einsammeln: jedes h2 mit allem, was bis zum naechsten h2 folgt
+  var abschnitte=[];
+  var kinder=Array.prototype.slice.call(main.children);
+  var aktuell=null;
+  kinder.forEach(function(el){
+    if(el.tagName==='H2'){aktuell={kopf:el,bloecke:[],eintraege:[]};abschnitte.push(aktuell);return;}
+    if(aktuell)aktuell.bloecke.push(el);
+  });
+  var SEL='tbody tr, article, li';
+  abschnitte.forEach(function(a){
+    a.bloecke.forEach(function(b){
+      var treffer=b.matches&&b.matches(SEL)?[b]:Array.prototype.slice.call(b.querySelectorAll(SEL));
+      treffer.forEach(function(e){
+        /* Der aeusserste Kandidat gewinnt: eine Boss-Karte enthaelt Listen-
+           punkte, trotzdem ist die KARTE der Eintrag. Uebersprungen wird nur,
+           wer schon einen Eintrag als Vorfahren hat. */
+        var p=e.parentElement, drin=false;
+        while(p&&p!==document.body){ if(p.matches&&p.matches(SEL)){drin=true;break;} p=p.parentElement; }
+        if(drin)return;
+        a.eintraege.push(e);
+        e.__pt=basis(e.textContent||'');
+      });
+    });
+  });
+  var gesamt=abschnitte.reduce(function(n,a){return n+a.eintraege.length;},0);
+  if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
+
+  var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
+  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=basis;
+
+  function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
+
+  function filtern(){
+    var q=fold(feld.value.trim());
+    if(!q){
+      abschnitte.forEach(function(a){
+        zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
+        a.eintraege.forEach(function(e){zeige(e,true);});
+      });
+      zaehler.textContent=basis;leer.style.display='none';return;
+    }
+    var sichtbar=0;
+    abschnitte.forEach(function(a){
+      var inAbschnitt=0;
+      a.eintraege.forEach(function(e){
+        var ok=e.__pt.indexOf(q)>=0;
+        zeige(e,ok);if(ok)inAbschnitt++;
+      });
+      sichtbar+=inAbschnitt;
+      // Abschnitt ohne Treffer komplett ausblenden, sonst bleiben leere
+      // Ueberschriften und Tabellenkoepfe stehen
+      zeige(a.kopf,inAbschnitt>0);
+      a.bloecke.forEach(function(b){zeige(b,inAbschnitt>0);});
+    });
+    zaehler.textContent=sichtbar+' von '+gesamt;
+    leer.style.display=sichtbar?'none':'block';
+  }
+
+  feld.addEventListener('input',filtern);
+  feld.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){feld.value='';filtern();}
+  });
+})();
+</script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.

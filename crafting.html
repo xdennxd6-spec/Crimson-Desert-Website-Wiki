@@ -115,6 +115,35 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
+   Die Leiste ist reines HTML und funktioniert ohne Skript. Das Suchfeld steht
+   mit [hidden] im Markup und wird erst vom Skript eingeblendet. */
+.pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
+border:1px solid var(--line);border-radius:var(--radius)}
+.pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
+text-transform:uppercase;letter-spacing:.06em}
+.pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
+background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+color:var(--ink);font-family:var(--f-sans);font-size:14px}
+.pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
+.pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+.jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:4px 10px;background:var(--bg);
+border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);
+text-decoration:none;font-family:var(--f-mono);font-size:var(--fs-11)}
+.jump a:hover,.jump a:focus{border-color:var(--red);color:var(--ink-hi)}
+.jump a .n{color:var(--ink-faint);margin-left:5px}
+h2[id]{scroll-margin-top:18px}
+/* Auf schmalen Schirmen darf die Sprungleiste den Inhalt nicht verdraengen:
+   waffen.html hat 21 Abschnitte, das waeren sonst ueber 300px Navigation vor
+   dem ersten Eintrag. Drei Zeilen bleiben, der Rest scrollt in der Leiste. */
+@media(max-width:600px){.jump{max-height:96px;overflow-y:auto}}
+.pt-empty{display:none;margin:18px 0;padding:14px;border:1px dashed var(--line-strong);
+border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-size:14px}
+/* !important, weil Layoutregeln wie article.card{display:flex} sonst gewinnen */
+[data-pt-hidden]{display:none!important}
 /* Mobil: nichts unter 11px. Gleiche Schwelle wie index.html. */
 @media(max-width:600px){:root{--fs-10:12px;--fs-11:12px;--fs-11-5:12px}}
 
@@ -164,12 +193,22 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Crafting</nav>
 <h1>Alle 308 Crafting-Rezepte in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>308 Crafting-Rezepte</strong> aus Crimson Desert: <strong>28 Elixiere</strong>, <strong>249 Gerichte</strong> von der Basis-Stufe bis zur Hearty-Stufe und <strong>31 Kuku-Gadgets</strong>, jeweils mit Zutaten, Wirkung, Herstellungsort und offen markierter Datenlage.</p>
+<div class="pagetools">
+  <div class="ptline" hidden>
+    <label for="pt-suche">Auf dieser Seite</label>
+    <input type="search" id="pt-suche" autocomplete="off"
+           placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
+    <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-elixir">Elixir</a><a href="#a-food">Food</a><a href="#a-kuku-gadget">Kuku-Gadget</a><a href="#a-h-ufige-fragen">Häufige Fragen</a></nav>
+</div>
+<p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Mit Crafting stellst du in Crimson Desert Verbrauchsgegenstände und Kuku Gadgets an passenden Arbeitsstationen her. Die 308 Rezepte sind in Elixiere, Gerichte und Kuku Gadgets eingeteilt. Elixiere werden unter anderem am Kessel oder im Alchemie Labor des Greymane Camp hergestellt, während Gerichte je nach Rezept am Kochtopf oder in der Bratpfanne entstehen. Für Kuku Gadgets steht eine eigene Kuku Werkstatt zur Verfügung. Die Liste unterscheidet acht verschiedene Stationsangaben, daher ist nicht jedes Rezept an jedem Ort herstellbar. Bei Gerichten spielt außerdem die Qualitätsstufe eine Rolle, die von Basis bis Festmahl reicht. Diese Rezeptliste hilft dir dabei, schnell die richtige Station für ein Vorhaben zu finden und die verfügbaren Herstellungsoptionen nach Kategorie einzuordnen. Sie ist besonders nützlich, wenn du Zutaten bereits besitzt, aber nicht weißt, wo du daraus ein Elixier, ein Gericht oder ein Gadget machen kannst.</p>
 
 <a class="cta" href="/#sec-crafting">Interaktive Crafting-Datenbank mit Filtern öffnen &rarr;</a>
 <p class="note">In der App nach Kategorie, Station und Effekt filterbar, mit Volltextsuche und allen Kochstufen eines Gerichts gebündelt auf einer Karte.</p>
 <p class="note">30 von 308 Rezepten tragen eine Datenlage-Markierung, weil Zutaten oder Werte nur dünn belegt oder unbestätigt sind. Das steht hier offen dabei, statt einen unsicheren Wert als gesichert auszugeben.</p>
-<h2>Elixir (28)</h2>
+<h2 id="a-elixir">Elixir (28)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rezept</th><th>Zutaten</th><th>Wirkung</th><th>Station</th></tr></thead>
 <tbody><tr>
@@ -181,127 +220,127 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index05_r.webp" alt="" width="34" height="34">Apollonia&#39;s Elixir</td>
 <td>1x Empty Bottle (zusätzlich Reagenz und Katalysator nötig)</td>
-<td>Verteidigung ca. +20 fuer 10 Min <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
+<td>Verteidigung ca. +20 für 10 Min <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index04_r.webp" alt="" width="34" height="34">Apollonia&#39;s Greater Elixir</td>
 <td>Superior Defense Reagent + Superior Catalyst + 1x Empty Bottle</td>
-<td>Verteidigung +30 fuer 15 Min<br><span class="muted">Quelle: Witch&#39;s Hideout suedwestlich von Pailune (Formel im Buchregal) - aus gaming.tools/YouTube-Beleg</span></td>
+<td>Verteidigung +30 für 15 Min<br><span class="muted">Quelle: Witch&#39;s Hideout südwestlich von Pailune (Formel im Buchregal) - aus gaming.tools/YouTube-Beleg</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index03_r.webp" alt="" width="34" height="34">Apollonia&#39;s Lesser Elixir</td>
 <td>2x Lesser Defense Reagent + 2x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Verteidigung +10 fuer 5 Min<br><span class="muted">Quelle: Rezept in der Hernand-Region (Gasthaeuser/Haendler/Truhen); Formel in der Welt lootbar</span></td>
+<td>Verteidigung +10 für 5 Min<br><span class="muted">Quelle: Rezept in der Hernand-Region (Gasthäuser/Händler/Truhen); Formel in der Welt lootbar</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index14_r.webp" alt="" width="34" height="34">Astrid&#39;s Elixir</td>
 <td>3x Common Stamina Reagent + 2x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Ignoriere Ausdauer-(Stamina-)Verbrauch fuer 8 Sek <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
+<td>Ignoriere Ausdauer-(Stamina-)Verbrauch für 8 Sek <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index13_r.webp" alt="" width="34" height="34">Astrid&#39;s Greater Elixir</td>
 <td>Superior Stamina Reagent + Superior Catalyst + 1x Empty Bottle</td>
-<td>Ignoriere Ausdauer-(Stamina-)Verbrauch fuer 12 Sek <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
+<td>Ignoriere Ausdauer-(Stamina-)Verbrauch für 12 Sek <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index12_r.webp" alt="" width="34" height="34">Astrid&#39;s Lesser Elixir</td>
 <td>2x Lesser Stamina Reagent + 1x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Ignoriere Ausdauer-(Stamina-)Verbrauch fuer 4 Sek<br><span class="muted">Quelle: Back-Alley-Shop in Pailune (nach Teil der Hauptstory) (thegamer)</span></td>
+<td>Ignoriere Ausdauer-(Stamina-)Verbrauch für 4 Sek<br><span class="muted">Quelle: Back-Alley-Shop in Pailune (nach Teil der Hauptstory) (thegamer)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 2"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_honeytea_0006.webp" alt="" width="34" height="34">Coral Mushroom Tea</td>
 <td>2x Coral Mushroom + 2x Water</td>
-<td>Stellt Ausdauer her <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept, bestaetigt (crimsondesert.co / questlog.gg / crimsondb.gg: 2x Coral Mushroom + 2x Water; Effekt nur Ausdauer)</span></td>
+<td>Stellt Ausdauer her <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept, bestätigt (crimsondesert.co / questlog.gg / crimsondb.gg: 2x Coral Mushroom + 2x Water; Effekt nur Ausdauer)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 2"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_fine_wine_0001.webp" alt="" width="34" height="34">Delesyian Wine</td>
-<td>Ausgewaehlte Fruechte + Honig (Cauldron)</td>
-<td>Stellt Ausdauer her <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept, bestaetigt (gamerguides / questlog.gg / crimsondb.gg: ausgewaehlte Fruechte + Honig; Effekt Ausdauer)</span></td>
+<td>Ausgewählte Früchte + Honig (Cauldron)</td>
+<td>Stellt Ausdauer her <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept, bestätigt (gamerguides / questlog.gg / crimsondb.gg: ausgewählte Früchte + Honig; Effekt Ausdauer)</span></td>
 <td>Cauldron (Kessel) / Brauen</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index01_r.webp" alt="" width="34" height="34">Freya&#39;s Elixir</td>
 <td>5x Common Attack Reagent + 1x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Angriff +7 fuer 600s (10 Min)<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar (Regionen-Fundorte)</span></td>
+<td>Angriff +7 für 600s (10 Min)<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar (Regionen-Fundorte)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index02_r.webp" alt="" width="34" height="34">Freya&#39;s Greater Elixir</td>
 <td>Superior Attack Reagent + Superior Catalyst + 1x Empty Bottle (gaming.tools); questlog zeigt nur Empty Bottle</td>
-<td>Angriff +10 fuer 900s (15 Min)<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar (Greater meist in Witch-Hideouts/spaeten Regionen)</span></td>
+<td>Angriff +10 für 900s (15 Min)<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar (Greater meist in Witch-Hideouts/späten Regionen)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_r.webp" alt="" width="34" height="34">Freya&#39;s Lesser Elixir</td>
 <td>2x Lesser Attack Reagent + 1x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Angriff +5 fuer 300s (5 Min)<br><span class="muted">Quelle: Rezept als Alchemy-Formel in der Welt zu finden (Huetten/Manor-Bibliotheken/Hoehlen/Witch-Hideouts, 5 Regionen); exakter Fundort fuer Lesser nicht…</span></td>
+<td>Angriff +5 für 300s (5 Min)<br><span class="muted">Quelle: Rezept als Alchemy-Formel in der Welt zu finden (Hütten/Manor-Bibliotheken/Höhlen/Witch-Hideouts, 5 Regionen); exakter Fundort für Lesser nicht…</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 1"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_berry_juice_0001.webp" alt="" width="34" height="34">Fruit Juice</td>
-<td>Fein zerdrueckte Fruechte + Wasser (Cauldron)</td>
-<td>Stellt vermutlich Ausdauer her (unbestaetigt) <span class="unsure low">geringe Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept (crushed fruit + water, alle Quellen einig). Effekt UMSTRITTEN: Juice-Drinks der Kategorie stellen Ausdauer her (Vegetable Juice +32, Wine +64), doch gaming.tools/Frucht-Items deuten auf Spirit - nicht eindeutig belegt</span></td>
+<td>Fein zerdrückte Früchte + Wasser (Cauldron)</td>
+<td>Stellt vermutlich Ausdauer her (unbestätigt) <span class="unsure low">geringe Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept (crushed fruit + water, alle Quellen einig). Effekt UMSTRITTEN: Juice-Drinks der Kategorie stellen Ausdauer her (Vegetable Juice +32, Wine +64), doch gaming.tools/Frucht-Items deuten auf Spirit - nicht eindeutig belegt</span></td>
 <td>Cauldron (Kessel) / Mixen</td>
 </tr>
 <tr>
 <td title="Item-Stufe 1"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_honeytea_0002.webp" alt="" width="34" height="34">Fruit Tea</td>
-<td>Gehackte Fruechte + Kraeuter + Wasser (Cauldron)</td>
-<td>Stellt Ausdauer her <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept, bestaetigt (gamerguides / questlog.gg: gehackte Fruechte + Kraeuter; Effekt Ausdauer)</span></td>
+<td>Gehackte Früchte + Kräuter + Wasser (Cauldron)</td>
+<td>Stellt Ausdauer her <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Cauldron-Rezept, bestätigt (gamerguides / questlog.gg: gehackte Früchte + Kräuter; Effekt Ausdauer)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index11_r.webp" alt="" width="34" height="34">Haiden&#39;s Elixir</td>
 <td>3x Common Spirit Reagent + 2x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Ignoriere Spirit-Verbrauch fuer 8 Sek<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
+<td>Ignoriere Spirit-Verbrauch für 8 Sek<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index10_r.webp" alt="" width="34" height="34">Haiden&#39;s Greater Elixir</td>
 <td>Superior Spirit Reagent + Superior Catalyst + 1x Empty Bottle</td>
-<td>Ignoriere Spirit-Verbrauch fuer 12 Sek<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
+<td>Ignoriere Spirit-Verbrauch für 12 Sek<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index09_r.webp" alt="" width="34" height="34">Haiden&#39;s Lesser Elixir</td>
 <td>2x Lesser Spirit Reagent + 1x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Ignoriere Spirit-Verbrauch fuer 4 Sek<br><span class="muted">Quelle: In einem Haus in Hernand (kein Schluessel noetig); auch als &#39;Recipe looted in Hernand&#39; (game8/thegamer)</span></td>
+<td>Ignoriere Spirit-Verbrauch für 4 Sek<br><span class="muted">Quelle: In einem Haus in Hernand (kein Schlüssel nötig); auch als &#39;Recipe looted in Hernand&#39; (game8/thegamer)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 2"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_honeytea_0001.webp" alt="" width="34" height="34">Honey Tea</td>
 <td>2x Honey + 2x Water</td>
-<td>Stellt +128 Ausdauer her + Eis-Resistenz Lv2 fuer 30s<br><span class="muted">Quelle: Tee-Rezept; Honig + Wasser</span></td>
+<td>Stellt +128 Ausdauer her + Eis-Resistenz Lv2 für 30s<br><span class="muted">Quelle: Tee-Rezept; Honig + Wasser</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index08_r.webp" alt="" width="34" height="34">Meliara&#39;s Elixir</td>
 <td>3x Common Health Reagent + 2x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Max-HP +150 und Angriffstempo Lv2 fuer 10 Min<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
+<td>Max-HP +150 und Angriffstempo Lv2 für 10 Min<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index07_r.webp" alt="" width="34" height="34">Meliara&#39;s Greater Elixir</td>
 <td>Superior Health Reagent (z.B. Purple Emperor Butterfly, Red Croton) + Superior Catalyst (Brimstone/Diamond/Holy Water) + 1x Empty Bottle</td>
-<td>Max-HP +225 und Angriffstempo Lv3 fuer 15 Min<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar (spaete Region/Hideout)</span></td>
+<td>Max-HP +225 und Angriffstempo Lv3 für 15 Min<br><span class="muted">Quelle: Alchemy-Formel in der Welt lootbar (späte Region/Hideout)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_potion_0004_index06_r.webp" alt="" width="34" height="34">Meliara&#39;s Lesser Elixir</td>
 <td>2x Lesser Health Reagent + 1x Lesser Catalyst + 1x Empty Bottle</td>
-<td>Max-HP +75 und Angriffstempo Lv1 fuer 5 Min<br><span class="muted">Quelle: Mudridge Cabin noerdlich der Pororin Woods (Hernand), hinter Schiebebild-Puzzle (thegamer/mapmaster bestaetigt)</span></td>
+<td>Max-HP +75 und Angriffstempo Lv1 für 5 Min<br><span class="muted">Quelle: Mudridge Cabin nördlich der Pororin Woods (Hernand), hinter Schiebebild-Puzzle (thegamer/mapmaster bestätigt)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 2"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_honeytea_0005.webp" alt="" width="34" height="34">Mild Herb Tea</td>
 <td>2x Medicinal Herb + 1x Honey + 2x Water (keengamer); questlog zeigt nur 2x Water</td>
-<td>Stellt ca. +96 Ausdauer her + Eis-Resistenz Lv2 fuer 30s <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Tee-Rezept; Kraeuter + Honig</span></td>
+<td>Stellt ca. +96 Ausdauer her + Eis-Resistenz Lv2 für 30s <span class="unsure">mittlere Datenlage</span><br><span class="muted">Quelle: Tee-Rezept; Kräuter + Honig</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
@@ -312,20 +351,20 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_cd_t0000_revivalpill_0002.webp" alt="" width="34" height="34">Palmar Pill</td>
-<td>KONFLIKT bei Zutaten: questlog zeigt 2x Water; game8/Steam sagen 15x gleiches Kraut (eines von 31 Kraeutern, kein Mischen) + 2x Water. questlog-mats hier deutlich unvollstaendig.</td>
-<td>Belebt den Charakter sofort wieder und stellt teilweise (~30%) HP her<br><span class="muted">Quelle: Alchemy Formula: Palmar Pill - auf einem Tisch bei der Witch in Shadow&#39;s Whisper Cave (noerdlich Hernand Town) (game8)</span></td>
+<td>KONFLIKT bei Zutaten: questlog zeigt 2x Water; game8/Steam sagen 15x gleiches Kraut (eines von 31 Kräutern, kein Mischen) + 2x Water. questlog-mats hier deutlich unvollständig.</td>
+<td>Belebt den Charakter sofort wieder und stellt teilweise (~30%) HP her<br><span class="muted">Quelle: Alchemy Formula: Palmar Pill - auf einem Tisch bei der Witch in Shadow&#39;s Whisper Cave (nördlich Hernand Town) (game8)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 4"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_honeytea_0004.webp" alt="" width="34" height="34">Pine Mushroom Tea</td>
 <td>2x Pine Mushroom + 2x Water</td>
-<td>Stellt ca. +224 Ausdauer her + Eis-Resistenz Lv6 fuer 90s (1m30s)<br><span class="muted">Quelle: Tee-Rezept (gaming.tools recipe_songyi_mushroom_tea / questlog recipe 1000024)</span></td>
+<td>Stellt ca. +224 Ausdauer her + Eis-Resistenz Lv6 für 90s (1m30s)<br><span class="muted">Quelle: Tee-Rezept (gaming.tools recipe_songyi_mushroom_tea / questlog recipe 1000024)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
 <td title="Item-Stufe 0"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_cd_t0000_revivalpill_0001.webp" alt="" width="34" height="34">Refined Palmar Pill</td>
 <td>1x Palmar Leaf + 1x Palmar Beetle + 1x Long Horn (oder Ginseng/Bear&#39;s Gallbladder) + 1x Water</td>
-<td>Belebt den Charakter sofort wieder und stellt 100% (volle) HP her<br><span class="muted">Quelle: Veredeltes Wiederbelebungs-Item; teils als spaetes/Chapter-9-Item beschrieben. 4. Zutat per &#39;switch resource&#39; frei waehlbar (GameRant, allthings.how, games.gg)</span></td>
+<td>Belebt den Charakter sofort wieder und stellt 100% (volle) HP her<br><span class="muted">Quelle: Veredeltes Wiederbelebungs-Item; teils als spätes/Chapter-9-Item beschrieben. 4. Zutat per &#39;switch resource&#39; frei wählbar (GameRant, allthings.how, games.gg)</span></td>
 <td>Cauldron (Kessel)</td>
 </tr>
 <tr>
@@ -341,7 +380,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Cauldron (Kessel) / Brauen</td>
 </tr></tbody>
 </table></div>
-<h2>Food (249)</h2>
+<h2 id="a-food">Food (249)</h2>
 <p class="note">Filling, Satisfying und Hearty sind größere Varianten desselben Grundrezepts: mehr Zutaten, mehr geheilte HP, gleiche Station. Festmahl und Lavish sind dagegen eigene Grundrezepte der höchsten Item-Stufe, keine Ausbaustufe darüber.</p>
 <h3>Basis (67)</h3>
 <div class="tbl-wrap"><table>
@@ -463,7 +502,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <tr>
 <td title="Item-Stufe 5"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_king_side_dishes_0001.webp" alt="" width="34" height="34">Extravagant Meal</td>
 <td>1x Grilled Meat Steak + 1x Meatball Soup + 2x Pan-Fried Vegetables + 5x Pear</td>
-<td>Eis-Res Lv 6 (90s)<br><span class="muted">Stellt Spirit her + ignoriert Spirit-Verbrauch (zusaetzlich zur Eis-Res Lv 6)</span></td>
+<td>Eis-Res Lv 6 (90s)<br><span class="muted">Stellt Spirit her + ignoriert Spirit-Verbrauch (zusätzlich zur Eis-Res Lv 6)</span></td>
 <td>Spezial-Kochtopf</td>
 </tr>
 <tr>
@@ -673,7 +712,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <tr>
 <td title="Item-Stufe 5"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_king_supper_0001.webp" alt="" width="34" height="34">Refreshing Fine Meal</td>
 <td>2x Harvest Soup + 2x Chewy Rice Cakes + 2x Mixed Harvest Bowl + 2x Chaya</td>
-<td>Eis-Res Lv 6 (90s)<br><span class="muted">Spirit +75% + Kein Spirit-Verbrauch (6 s) + Schlaf-Immunität ~50 s (Chaya-Variante)</span><br><span class="muted">Tipp: Bester Eis-Res-Feast: Eis-Res Lv 6 (90 s) plus Spirit +75% und Kein-Spirit-Verbrauch - ideale Pre-Boss-Wahl in Kaeltezonen.</span></td>
+<td>Eis-Res Lv 6 (90s)<br><span class="muted">Spirit +75% + Kein Spirit-Verbrauch (6 s) + Schlaf-Immunität ~50 s (Chaya-Variante)</span><br><span class="muted">Tipp: Bester Eis-Res-Feast: Eis-Res Lv 6 (90 s) plus Spirit +75% und Kein-Spirit-Verbrauch - ideale Pre-Boss-Wahl in Kältezonen.</span></td>
 <td>Spezial-Kochtopf</td>
 </tr>
 <tr>
@@ -703,7 +742,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <tr>
 <td title="Item-Stufe 4"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_altang_0001.webp" alt="" width="34" height="34">Seafood Stew (Seafood)</td>
 <td>1x Egg + 3x Water</td>
-<td>+320 HP, Eis-Res Lv 6 (90s)<br><span class="muted">Spirit +24</span><br><span class="muted">Tipp: Billigster Eis-Res-Lv-6-Einstieg (Preis 76, 1x Egg + 3x Water) und liefert +24 Spirit - idealer guenstiger Resistenz-Top-up vor Eis-Encountern.</span></td>
+<td>+320 HP, Eis-Res Lv 6 (90s)<br><span class="muted">Spirit +24</span><br><span class="muted">Tipp: Billigster Eis-Res-Lv-6-Einstieg (Preis 76, 1x Egg + 3x Water) und liefert +24 Spirit - idealer günstiger Resistenz-Top-up vor Eis-Encountern.</span></td>
 <td>Kochtopf</td>
 </tr>
 <tr>
@@ -755,7 +794,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <tbody><tr>
 <td title="Item-Stufe 5"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_king_meal_0001.webp" alt="" width="34" height="34">Aromatic Grand Meal</td>
 <td>2x Assorted Meat and Fish Skewers + 3x Fish Skewers + 3x Pickled Vegetables + 3x Braised Ribs + 2x Palmar Leaf</td>
-<td>Spirit Consumption +5 fuer 180 Sek (reduzierter/erhoehter Spirit-Verbrauchs-Buff; T5-Variante der Grand Meal) <span class="unsure">mittlere Datenlage</span></td>
+<td>Spirit Consumption +5 für 180 Sek (reduzierter/erhöhter Spirit-Verbrauchs-Buff; T5-Variante der Grand Meal) <span class="unsure">mittlere Datenlage</span></td>
 <td>Kochtopf</td>
 </tr>
 <tr>
@@ -1289,7 +1328,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <tr>
 <td title="Item-Stufe 4"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_egg_gimbap_0001.webp" alt="" width="34" height="34">Satisfying Battered Harvest Roll</td>
 <td>8x Harvest Roll + 8x Egg + 2x Cooking Oil</td>
-<td>+880 HP, Feuer-Res Lv 6 (90s)<br><span class="muted">Spirit (zwischen Basis +62 und Hearty +92, exakter Wert unbekannt)</span><br><span class="muted">Tipp: Hoechstes Heal der Plate-Station (+880 HP) plus Feuer-Res Lv 6 (90 s) und Spirit-Bonus - Top-Wahl vor Feuer-Bossen.</span></td>
+<td>+880 HP, Feuer-Res Lv 6 (90s)<br><span class="muted">Spirit (zwischen Basis +62 und Hearty +92, exakter Wert unbekannt)</span><br><span class="muted">Tipp: Höchstes Heal der Plate-Station (+880 HP) plus Feuer-Res Lv 6 (90 s) und Spirit-Bonus - Top-Wahl vor Feuer-Bossen.</span></td>
 <td>Spezial-Kochtopf</td>
 </tr>
 <tr>
@@ -1337,7 +1376,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <tr>
 <td title="Item-Stufe 4"><img class="thumb" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_boiledmeat_0001.webp" alt="" width="34" height="34">Satisfying Boiled Meat</td>
 <td>12x Milk + 1x Salt + 3x Water</td>
-<td>+700 HP, Eis-Res Lv 6 (90s)<br><span class="muted">Tipp: +700 HP, Eis-Res Lv 6 und laut Quellen +40 Spirit (hoechster Spirit-Bonus der Pot-Station) - bestes Allround-Pre-Boss-Gericht fuer Eiszonen.</span></td>
+<td>+700 HP, Eis-Res Lv 6 (90s)<br><span class="muted">Tipp: +700 HP, Eis-Res Lv 6 und laut Quellen +40 Spirit (höchster Spirit-Bonus der Pot-Station) - bestes Allround-Pre-Boss-Gericht für Eiszonen.</span></td>
 <td>Kochtopf</td>
 </tr>
 <tr>
@@ -1861,7 +1900,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Wild Pot</td>
 </tr></tbody>
 </table></div>
-<h2>Kuku-Gadget (31)</h2>
+<h2 id="a-kuku-gadget">Kuku-Gadget (31)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rezept</th><th>Zutaten</th><th>Wirkung</th><th>Station</th></tr></thead>
 <tbody><tr>
@@ -2052,7 +2091,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 </tr></tbody>
 </table></div>
 
-<h2>Häufige Fragen (6)</h2>
+<h2 id="a-h-ufige-fragen">Häufige Fragen (6)</h2>
 <details class="faq">
 <summary>Wo finde ich alle Rezepte in Crimson Desert?</summary>
 <p>Die Handwerksübersicht listet 308 Rezepte aus den Kategorien Elixier, Essen und Kuku Gadget. Zu jedem Rezept stehen Zutaten, benötigte Station und Wirkung, damit du fehlende Materialien gezielt suchen kannst.</p>
@@ -2078,6 +2117,96 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <p>Die Übersicht enthält 308 Handwerks und Kochrezepte. Sie umfasst Elixiere, Essen und Kuku Gadgets.</p>
 </details>
 </main>
+<script>
+/* Seitensuche. Laeuft erst nach dem Laden und veraendert nichts, solange
+   niemand tippt -- ohne Skript bleibt die Seite exakt wie ausgeliefert.
+   Ein "Eintrag" ist eine Tabellenzeile, eine Karte oder ein Listenpunkt; die
+   Zuordnung zum Abschnitt ergibt sich aus den Geschwistern hinter jeder
+   Abschnittsueberschrift. */
+(function(){
+  var feld=document.getElementById('pt-suche');
+  var zaehler=document.getElementById('pt-count');
+  var leer=document.getElementById('pt-empty');
+  var main=document.querySelector('main');
+  if(!feld||!main)return;
+
+  /* Diakritika entfernen -- dieselbe Faltung wie _fold() im Hauptwiki.
+     ACHTUNG: doppelte Backslashes. Dieser Code steht in einem Template-Literal
+     des Generators; einfach geschrieben kaeme im HTML /s+/ statt /s+/ an. */
+  function fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');}
+  /* Suchbasis eines Eintrags: zusaetzlich die ausgeschriebene Umlautform.
+     Sonst faende "rüstung" das Wort, "ruestung" aber nicht -- auf Tastaturen
+     ohne Umlaute die haeufigere Eingabe. Der senkrechte Strich trennt beide
+     Formen, damit kein Begriff ueber die Naht hinweg zufaellig trifft. */
+  function basis(s){var k=String(s==null?'':s).toLowerCase();
+    return fold(k)+'|'+fold(k.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));}
+
+  // Abschnitte einsammeln: jedes h2 mit allem, was bis zum naechsten h2 folgt
+  var abschnitte=[];
+  var kinder=Array.prototype.slice.call(main.children);
+  var aktuell=null;
+  kinder.forEach(function(el){
+    if(el.tagName==='H2'){aktuell={kopf:el,bloecke:[],eintraege:[]};abschnitte.push(aktuell);return;}
+    if(aktuell)aktuell.bloecke.push(el);
+  });
+  var SEL='tbody tr, article, li';
+  abschnitte.forEach(function(a){
+    a.bloecke.forEach(function(b){
+      var treffer=b.matches&&b.matches(SEL)?[b]:Array.prototype.slice.call(b.querySelectorAll(SEL));
+      treffer.forEach(function(e){
+        /* Der aeusserste Kandidat gewinnt: eine Boss-Karte enthaelt Listen-
+           punkte, trotzdem ist die KARTE der Eintrag. Uebersprungen wird nur,
+           wer schon einen Eintrag als Vorfahren hat. */
+        var p=e.parentElement, drin=false;
+        while(p&&p!==document.body){ if(p.matches&&p.matches(SEL)){drin=true;break;} p=p.parentElement; }
+        if(drin)return;
+        a.eintraege.push(e);
+        e.__pt=basis(e.textContent||'');
+      });
+    });
+  });
+  var gesamt=abschnitte.reduce(function(n,a){return n+a.eintraege.length;},0);
+  if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
+
+  var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
+  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=basis;
+
+  function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
+
+  function filtern(){
+    var q=fold(feld.value.trim());
+    if(!q){
+      abschnitte.forEach(function(a){
+        zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
+        a.eintraege.forEach(function(e){zeige(e,true);});
+      });
+      zaehler.textContent=basis;leer.style.display='none';return;
+    }
+    var sichtbar=0;
+    abschnitte.forEach(function(a){
+      var inAbschnitt=0;
+      a.eintraege.forEach(function(e){
+        var ok=e.__pt.indexOf(q)>=0;
+        zeige(e,ok);if(ok)inAbschnitt++;
+      });
+      sichtbar+=inAbschnitt;
+      // Abschnitt ohne Treffer komplett ausblenden, sonst bleiben leere
+      // Ueberschriften und Tabellenkoepfe stehen
+      zeige(a.kopf,inAbschnitt>0);
+      a.bloecke.forEach(function(b){zeige(b,inAbschnitt>0);});
+    });
+    zaehler.textContent=sichtbar+' von '+gesamt;
+    leer.style.display=sichtbar?'none':'block';
+  }
+
+  feld.addEventListener('input',filtern);
+  feld.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){feld.value='';filtern();}
+  });
+})();
+</script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.

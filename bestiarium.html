@@ -115,6 +115,35 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
+   Die Leiste ist reines HTML und funktioniert ohne Skript. Das Suchfeld steht
+   mit [hidden] im Markup und wird erst vom Skript eingeblendet. */
+.pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
+border:1px solid var(--line);border-radius:var(--radius)}
+.pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
+text-transform:uppercase;letter-spacing:.06em}
+.pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
+background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+color:var(--ink);font-family:var(--f-sans);font-size:14px}
+.pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
+.pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+.jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:4px 10px;background:var(--bg);
+border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);
+text-decoration:none;font-family:var(--f-mono);font-size:var(--fs-11)}
+.jump a:hover,.jump a:focus{border-color:var(--red);color:var(--ink-hi)}
+.jump a .n{color:var(--ink-faint);margin-left:5px}
+h2[id]{scroll-margin-top:18px}
+/* Auf schmalen Schirmen darf die Sprungleiste den Inhalt nicht verdraengen:
+   waffen.html hat 21 Abschnitte, das waeren sonst ueber 300px Navigation vor
+   dem ersten Eintrag. Drei Zeilen bleiben, der Rest scrollt in der Leiste. */
+@media(max-width:600px){.jump{max-height:96px;overflow-y:auto}}
+.pt-empty{display:none;margin:18px 0;padding:14px;border:1px dashed var(--line-strong);
+border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-size:14px}
+/* !important, weil Layoutregeln wie article.card{display:flex} sonst gewinnen */
+[data-pt-hidden]{display:none!important}
 /* Mobil: nichts unter 11px. Gleiche Schwelle wie index.html. */
 @media(max-width:600px){:root{--fs-10:12px;--fs-11:12px;--fs-11-5:12px}}
 
@@ -164,12 +193,22 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Bestiarium</nav>
 <h1>Alle 44 Gegner in Crimson Desert</h1>
 <p class="lead">Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet alle <strong>44 Gegner</strong> der Spielwelt: 11 Wildtiere, 10 besondere Kreaturen und 23 humanoide Gegner-Fraktionen, jeweils mit Region, Beute und Beschreibung.</p>
+<div class="pagetools">
+  <div class="ptline" hidden>
+    <label for="pt-suche">Auf dieser Seite</label>
+    <input type="search" id="pt-suche" autocomplete="off"
+           placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
+    <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-wildtiere">🦌 Wildtiere</a><a href="#a-besondere-kreaturen">🕷️ Besondere Kreaturen</a><a href="#a-gegner-fraktionen">⚔️ Gegner-Fraktionen</a><a href="#a-h-ufige-fragen">Häufige Fragen</a></nav>
+</div>
+<p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Das Bestiarium sammelt 44 normale Gegnertypen aus Crimson Desert und grenzt sie von Bossen ab. Es umfasst elf Wildtiere, zehn besondere Kreaturen und 23 Fraktionsgegner. Zu jedem Gegner findest du die zugehörige Region, mögliche Beute und Hinweise zur Kampftaktik. Die Regionen helfen bei der Suche nach einem bestimmten Gegner, während die Drops zeigen, welche Belohnungen von Interesse sein können. Die taktischen Hinweise ordnen ein, worauf du im Kampf achten solltest, damit du nicht nur auf Schaden setzt, sondern gegnerisches Verhalten besser einschätzen kannst. Gerade zu Beginn erleichtert die Übersicht die Vorbereitung auf unbekannte Begegnungen und hilft dir, die verschiedenen Gegnergruppen einzuordnen. Auch bei der gezielten Suche nach Beute ist sie nützlich, weil du Gegner nicht allein über ihr Aussehen erkennen musst. Öffne den passenden Eintrag vor einem Gebiet oder einer Farmrunde, um Fundort, mögliche Drops und Kampfhinweise direkt zusammenzusehen.</p>
 
 <a class="cta" href="/#sec-bestiary">Interaktives Bestiarium mit Suche &amp; Filter öffnen &rarr;</a>
 <p class="note">In der App durchsuchst du alle Gegner nach Namen, Region oder Beute und filterst nach Wildtieren, Kreaturen oder Fraktionen.</p>
 <p class="note">Viele Drops sind Zutaten für Rezepte im <a href="/crafting">Crafting-Guide</a>, Gegner mit eigener Kampfmechanik stehen zusätzlich in der <a href="/bosse">Bossliste</a>.</p>
-<h2>🦌 Wildtiere (11)</h2>
+<h2 id="a-wildtiere">🦌 Wildtiere (11)</h2>
 <div class="grid"><article class="card" id="enemy-wolf">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_wolf_1.webp" alt="Wolf in Crimson Desert" width="256" height="256" class="enemy">
 <h3>Wolf</h3>
@@ -236,7 +275,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <ul class="stats"><li><b>Region:</b> Hernand</li><li><b>Drops:</b> Small Bone, Thin Hide, Lean Meat</li></ul>
 <p>Klein, aber durch dichte Stacheln gut geschützt; beim Dauerfressen bleiben Früchte auf den Stacheln hängen — daher die Apple-/Mushroom-/Grape-/Orange-Varianten.</p><p class="strat"><b>Tipp:</b> Der Golden Apple Hedgehog (u.a. bei Grey Rock Dock) trägt sichtbar einen Goldenen Apfel — Zutat fürs Gold-Barren-Crafting bei den Hexen (1 Golden Apple + 3 Gold Ores).</p>
 </article></div>
-<h2>🕷️ Besondere Kreaturen (10)</h2>
+<h2 id="a-besondere-kreaturen">🕷️ Besondere Kreaturen (10)</h2>
 <div class="grid"><article class="card" id="enemy-wandershrub">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_rush.webp" alt="Wandershrub in Crimson Desert" width="512" height="512" class="enemy">
 <h3>Wandershrub</h3>
@@ -297,7 +336,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <ul class="stats"><li><b>Region:</b> Delesyia (um Marnis Labor, SO der Stadt)</li><li><b>Drops:</b> Cogwheel, Small Battery</li><li><b>Quellenlage:</b> unbestätigt, Details teils nur durch eine Quelle belegt</li></ul>
 <p>Maschinen-Konstrukte, die auf Nah- und Ferndistanz kämpfen. Cogwheels braucht man u.a. für Kuku-Items aus Grimnirs Werkstatt in Hernand.</p>
 </article></div>
-<h2>⚔️ Gegner-Fraktionen (23)</h2>
+<h2 id="a-gegner-fraktionen">⚔️ Gegner-Fraktionen (23)</h2>
 <div class="grid"><article class="card" id="enemy-bleed-bandits">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_bleed_ruffians.webp" alt="Bleed Bandits in Crimson Desert" width="512" height="512" class="enemy">
 <h3>Bleed Bandits</h3>
@@ -437,7 +476,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <p>Nomadische Eberreiter, viele aus dem friedlichen Trolldorf Kharonso — müssen ihre Reit-Eber tränken und beanspruchen darum ein riesiges Gebiet samt Feuchtgebieten; wachsen rasant. [1.13.00: neue Spezialangriffe erhalten — Details noch nicht dokumentiert.]</p>
 </article></div>
 
-<h2>Häufige Fragen (6)</h2>
+<h2 id="a-h-ufige-fragen">Häufige Fragen (6)</h2>
 <details class="faq">
 <summary>Wo finde ich alle Gegner in Crimson Desert?</summary>
 <p>Das Bestiarium enthält 44 normale Gegnertypen mit Region, möglichen Drops und Taktikhinweisen. Suche nach der gewünschten Region oder Gegnergruppe, um passende Fundorte schneller einzugrenzen.</p>
@@ -463,6 +502,96 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <p>Wähle im Bestiarium zuerst das benötigte Material und vergleiche anschließend die aufgeführten Gegner und Regionen. Eine gute Farmroute verbindet Gegner mit passenden Drops, kurzen Wegen und einem für dich sicheren Schwierigkeitsgrad.</p>
 </details>
 </main>
+<script>
+/* Seitensuche. Laeuft erst nach dem Laden und veraendert nichts, solange
+   niemand tippt -- ohne Skript bleibt die Seite exakt wie ausgeliefert.
+   Ein "Eintrag" ist eine Tabellenzeile, eine Karte oder ein Listenpunkt; die
+   Zuordnung zum Abschnitt ergibt sich aus den Geschwistern hinter jeder
+   Abschnittsueberschrift. */
+(function(){
+  var feld=document.getElementById('pt-suche');
+  var zaehler=document.getElementById('pt-count');
+  var leer=document.getElementById('pt-empty');
+  var main=document.querySelector('main');
+  if(!feld||!main)return;
+
+  /* Diakritika entfernen -- dieselbe Faltung wie _fold() im Hauptwiki.
+     ACHTUNG: doppelte Backslashes. Dieser Code steht in einem Template-Literal
+     des Generators; einfach geschrieben kaeme im HTML /s+/ statt /s+/ an. */
+  function fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');}
+  /* Suchbasis eines Eintrags: zusaetzlich die ausgeschriebene Umlautform.
+     Sonst faende "rüstung" das Wort, "ruestung" aber nicht -- auf Tastaturen
+     ohne Umlaute die haeufigere Eingabe. Der senkrechte Strich trennt beide
+     Formen, damit kein Begriff ueber die Naht hinweg zufaellig trifft. */
+  function basis(s){var k=String(s==null?'':s).toLowerCase();
+    return fold(k)+'|'+fold(k.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));}
+
+  // Abschnitte einsammeln: jedes h2 mit allem, was bis zum naechsten h2 folgt
+  var abschnitte=[];
+  var kinder=Array.prototype.slice.call(main.children);
+  var aktuell=null;
+  kinder.forEach(function(el){
+    if(el.tagName==='H2'){aktuell={kopf:el,bloecke:[],eintraege:[]};abschnitte.push(aktuell);return;}
+    if(aktuell)aktuell.bloecke.push(el);
+  });
+  var SEL='tbody tr, article, li';
+  abschnitte.forEach(function(a){
+    a.bloecke.forEach(function(b){
+      var treffer=b.matches&&b.matches(SEL)?[b]:Array.prototype.slice.call(b.querySelectorAll(SEL));
+      treffer.forEach(function(e){
+        /* Der aeusserste Kandidat gewinnt: eine Boss-Karte enthaelt Listen-
+           punkte, trotzdem ist die KARTE der Eintrag. Uebersprungen wird nur,
+           wer schon einen Eintrag als Vorfahren hat. */
+        var p=e.parentElement, drin=false;
+        while(p&&p!==document.body){ if(p.matches&&p.matches(SEL)){drin=true;break;} p=p.parentElement; }
+        if(drin)return;
+        a.eintraege.push(e);
+        e.__pt=basis(e.textContent||'');
+      });
+    });
+  });
+  var gesamt=abschnitte.reduce(function(n,a){return n+a.eintraege.length;},0);
+  if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
+
+  var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
+  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=basis;
+
+  function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
+
+  function filtern(){
+    var q=fold(feld.value.trim());
+    if(!q){
+      abschnitte.forEach(function(a){
+        zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
+        a.eintraege.forEach(function(e){zeige(e,true);});
+      });
+      zaehler.textContent=basis;leer.style.display='none';return;
+    }
+    var sichtbar=0;
+    abschnitte.forEach(function(a){
+      var inAbschnitt=0;
+      a.eintraege.forEach(function(e){
+        var ok=e.__pt.indexOf(q)>=0;
+        zeige(e,ok);if(ok)inAbschnitt++;
+      });
+      sichtbar+=inAbschnitt;
+      // Abschnitt ohne Treffer komplett ausblenden, sonst bleiben leere
+      // Ueberschriften und Tabellenkoepfe stehen
+      zeige(a.kopf,inAbschnitt>0);
+      a.bloecke.forEach(function(b){zeige(b,inAbschnitt>0);});
+    });
+    zaehler.textContent=sichtbar+' von '+gesamt;
+    leer.style.display=sichtbar?'none':'block';
+  }
+
+  feld.addEventListener('input',filtern);
+  feld.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){feld.value='';filtern();}
+  });
+})();
+</script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.

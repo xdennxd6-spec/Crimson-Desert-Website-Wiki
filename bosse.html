@@ -115,6 +115,35 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
+   Die Leiste ist reines HTML und funktioniert ohne Skript. Das Suchfeld steht
+   mit [hidden] im Markup und wird erst vom Skript eingeblendet. */
+.pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
+border:1px solid var(--line);border-radius:var(--radius)}
+.pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
+text-transform:uppercase;letter-spacing:.06em}
+.pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
+background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+color:var(--ink);font-family:var(--f-sans);font-size:14px}
+.pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
+.pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+.jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:4px 10px;background:var(--bg);
+border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);
+text-decoration:none;font-family:var(--f-mono);font-size:var(--fs-11)}
+.jump a:hover,.jump a:focus{border-color:var(--red);color:var(--ink-hi)}
+.jump a .n{color:var(--ink-faint);margin-left:5px}
+h2[id]{scroll-margin-top:18px}
+/* Auf schmalen Schirmen darf die Sprungleiste den Inhalt nicht verdraengen:
+   waffen.html hat 21 Abschnitte, das waeren sonst ueber 300px Navigation vor
+   dem ersten Eintrag. Drei Zeilen bleiben, der Rest scrollt in der Leiste. */
+@media(max-width:600px){.jump{max-height:96px;overflow-y:auto}}
+.pt-empty{display:none;margin:18px 0;padding:14px;border:1px dashed var(--line-strong);
+border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-size:14px}
+/* !important, weil Layoutregeln wie article.card{display:flex} sonst gewinnen */
+[data-pt-hidden]{display:none!important}
 /* Mobil: nichts unter 11px. Gleiche Schwelle wie index.html. */
 @media(max-width:600px){:root{--fs-10:12px;--fs-11:12px;--fs-11-5:12px}}
 
@@ -164,10 +193,20 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Bosse</nav>
 <h1>Alle 99 Bosse in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>99 Bosse</strong> aus Crimson Desert mit Fundort, Kapitel, Schwäche, Parry-/Dodge-Empfehlung, Drops und einer kurzen Strategie. Aufgeteilt in Story-Bosse und freie Welt- &amp; Fraktionsbosse.</p>
+<div class="pagetools">
+  <div class="ptline" hidden>
+    <label for="pt-suche">Auf dieser Seite</label>
+    <input type="search" id="pt-suche" autocomplete="off"
+           placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
+    <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-story-bosse">Story-Bosse</a><a href="#a-welt-fraktionsbosse">Welt- &amp; Fraktionsbosse</a></nav>
+</div>
+<p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 
 <a class="cta" href="/#sec-bosses">Interaktive Boss-Übersicht öffnen &rarr;</a>
 <p class="note">Mit Filter nach Region/Kapitel, Such- und Abhak-Funktion in der vollständigen App.</p>
-<h2>Story-Bosse (nach Kapitel, 30)</h2>
+<h2 id="a-story-bosse">Story-Bosse (nach Kapitel, 30)</h2>
 <div class="grid"><article class="card" id="boss-kailok-the-hornsplitter">
 <img loading="lazy" src="/cd_assets/bosses/kailok.webp" alt="Kailok the Hornsplitter Boss in Crimson Desert" width="300" height="169">
 <h3>Kailok the Hornsplitter</h3>
@@ -183,14 +222,14 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <article class="card" id="boss-reed-devil">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_reeddevil.webp" alt="Reed Devil Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Reed Devil</h3>
-<ul class="stats"><li><b>Kapitel:</b> 3</li><li><b>Region:</b> Hernand - Mountain of Frozen Souls (Sued)</li><li><b>Quest:</b> The Face Behind the Mask</li><li><b>Parry / Dodge:</b> Phase 1 Parry; Phase 2 Dodge Waves</li></ul>
+<ul class="stats"><li><b>Kapitel:</b> 3</li><li><b>Region:</b> Hernand - Mountain of Frozen Souls (Süd)</li><li><b>Quest:</b> The Face Behind the Mask</li><li><b>Parry / Dodge:</b> Phase 1 Parry; Phase 2 Dodge Waves</li></ul>
 <p class="strat"><b>Strategie:</b> P1: Parry Flurry-Ende. P2: 5 Totems zerstören, Klone ignorieren, rote Waves dodgen. P3: Nahkampf, side-dodge.</p>
 </article>
 <article class="card" id="boss-tenebrum">
 <img loading="lazy" src="/cd_assets/bosses/fex/tenebrum.png" alt="Tenebrum Boss in Crimson Desert" width="300" height="169">
 <h3>Tenebrum</h3>
 <ul class="stats"><li><b>Kapitel:</b> 4</li><li><b>Region:</b> Hernand - Scholastone Institute (Abyss-Riss / Spire of the Stars)</li><li><b>Quest:</b> Story - Gate to the Otherworld</li><li><b>Parry / Dodge:</b> Dodge (Luftkampf, bodenlose Arena)</li><li><b>Abyss-Gear:</b> Abyss Artifact (+ Key to the Spire of the Stars vom Dekan)</li></ul>
-<p class="strat"><b>Strategie:</b> Erscheint, als Octavius in den Abyss gezogen wird. Bodenlose Arena gegen einen pausenlos kreisenden fliegenden Gegner: Blinding Flash aktivieren, um die Schwachpunkte sichtbar zu machen, dann per Doppelsprung + Force Palm in der Luft attackieren; hinter Saeulen Spirit regenerieren.</p>
+<p class="strat"><b>Strategie:</b> Erscheint, als Octavius in den Abyss gezogen wird. Bodenlose Arena gegen einen pausenlos kreisenden fliegenden Gegner: Blinding Flash aktivieren, um die Schwachpunkte sichtbar zu machen, dann per Doppelsprung + Force Palm in der Luft attackieren; hinter Säulen Spirit regenerieren.</p>
 </article>
 <article class="card" id="boss-draven-the-crowcaller">
 <img loading="lazy" src="/cd_assets/bosses/draven.webp" alt="Draven the Crowcaller Boss in Crimson Desert" width="300" height="169">
@@ -220,7 +259,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <img loading="lazy" src="/cd_assets/bosses/awakened_ludvig.webp" alt="Awakened Ludvig Boss in Crimson Desert" width="300" height="169">
 <h3>Awakened Ludvig</h3>
 <ul class="stats"><li><b>Kapitel:</b> 7</li><li><b>Region:</b> Pailune - Pailune Castle</li><li><b>Quest:</b> Lonely Jackals (Phase 2)</li><li><b>Parry / Dodge:</b> Dodge alles (unblockbar, kein Knockdown)</li><li><b>Waffen-Drop:</b> Hungering Fang Leather Cloak</li></ul>
-<p class="strat"><b>Strategie:</b> Phase 2 nach dem normalen Ludvig-Kampf. Kann nicht gestaggert/knockt werden, bewegt sich extrem schnell, alle Hits unblockbar. Nur Dodge-Rolls + Recovery Items. Niederlage = gesamter Ludvig-Fight neu. Post-Fight: Ludvig fluechtet einarmig (One Armed Ludvig). Drops: Hungering Fang Leather Cloak + Boots.</p>
+<p class="strat"><b>Strategie:</b> Phase 2 nach dem normalen Ludvig-Kampf. Kann nicht gestaggert/knockt werden, bewegt sich extrem schnell, alle Hits unblockbar. Nur Dodge-Rolls + Recovery Items. Niederlage = gesamter Ludvig-Fight neu. Post-Fight: Ludvig flüchtet einarmig (One Armed Ludvig). Drops: Hungering Fang Leather Cloak + Boots.</p>
 </article>
 <article class="card" id="boss-lava-myurdin-phase-2">
 <img loading="lazy" src="/cd_assets/bosses/lava_myurdin.webp" alt="Lava Myurdin (Phase 2) Boss in Crimson Desert" width="300" height="169">
@@ -244,13 +283,13 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <img loading="lazy" src="/cd_assets/bosses/awakened_lucian.webp" alt="Awakened Lucian Bastier Boss in Crimson Desert" width="300" height="169">
 <h3>Awakened Lucian Bastier</h3>
 <ul class="stats"><li><b>Kapitel:</b> 8</li><li><b>Region:</b> Demeniss - Spire of Clockwork</li><li><b>Quest:</b> A Fleeting Dream (Phase 2)</li><li><b>Parry / Dodge:</b> Dodge (Fiend Dash unblockbar)</li><li><b>Waffen-Drop:</b> Official Knight&#39;s Plate Armor</li></ul>
-<p class="strat"><b>Strategie:</b> Phase 2 nach Lucian Bastier. Wechselt Shield+Morgenstern gegen riesige Armklinge. Fiend Dash = unblockbar, sofort kontern. Whirling Slash und Impale ausweichen. Force Palm 3-Combo fuelltStagger-Bar schnell. Feuer-DoT-Schaden ueber Zeit beachten. Drops: Ponytail Ticket + Official Knight Set + Eclipsed Solas Plate Gloves + Spire Key.</p>
+<p class="strat"><b>Strategie:</b> Phase 2 nach Lucian Bastier. Wechselt Shield+Morgenstern gegen riesige Armklinge. Fiend Dash = unblockbar, sofort kontern. Whirling Slash und Impale ausweichen. Force Palm 3-Combo fülltStagger-Bar schnell. Feuer-DoT-Schaden über Zeit beachten. Drops: Ponytail Ticket + Official Knight Set + Eclipsed Solas Plate Gloves + Spire Key.</p>
 </article>
 <article class="card" id="boss-fortain-the-cursed-knight">
 <img loading="lazy" src="/cd_assets/bosses/fortain.webp" alt="Fortain the Cursed Knight Boss in Crimson Desert" width="300" height="169">
 <h3>Fortain the Cursed Knight</h3>
 <ul class="stats"><li><b>Kapitel:</b> 8</li><li><b>Region:</b> Demeniss - Thornbriar Fortress</li><li><b>Quest:</b> The Cursed Knight</li><li><b>Parry / Dodge:</b> Dodge (Specter-Angriffe)</li><li><b>Waffen-Drop:</b> Shackle of Might</li><li><b>Abyss-Gear:</b> Abyss Artifact</li></ul>
-<p class="strat"><b>Strategie:</b> Schwere Ruestung reduziert eigenen Schaden stark. Defensiv spielen. Seelen-Doppelgaenger-Angriffe konsequent ausweichen. Recovery Items und Gear-Verbesserung am Amboss/Schleifstein vor dem Kampf. Lore: Verriet Lord Wells, wurde von der Schwarzen Hexe korrumpiert.</p>
+<p class="strat"><b>Strategie:</b> Schwere Rüstung reduziert eigenen Schaden stark. Defensiv spielen. Seelen-Doppelgänger-Angriffe konsequent ausweichen. Recovery Items und Gear-Verbesserung am Amboss/Schleifstein vor dem Kampf. Lore: Verriet Lord Wells, wurde von der Schwarzen Hexe korrumpiert.</p>
 </article>
 <article class="card" id="boss-gabriel-caliburn">
 <img loading="lazy" src="/cd_assets/bosses/gabriel.webp" alt="Gabriel Caliburn Boss in Crimson Desert" width="300" height="169">
@@ -262,7 +301,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <img loading="lazy" src="/cd_assets/bosses/gregor.webp" alt="Gregor the Halberd of Carnage Boss in Crimson Desert" width="300" height="169">
 <h3>Gregor the Halberd of Carnage</h3>
 <ul class="stats"><li><b>Kapitel:</b> 8</li><li><b>Region:</b> Hernand - Fort Ironclad</li><li><b>Quest:</b> Where The Wind Guides You</li><li><b>Parry / Dodge:</b> Dodge (Impaling Spear unblockbar)</li><li><b>Waffen-Drop:</b> Golden Vanguard</li><li><b>Abyss-Gear:</b> Abyss Artifact</li></ul>
-<p class="strat"><b>Strategie:</b> Vor Kampf: Pfeilfallen in der Halle zerstoeren. Langsame Drehrate ausnutzen — Backstab-Konter. Force Palm maxen → 3er-Combo → Stagger. Defensive Spielweise, Distanz halten.</p>
+<p class="strat"><b>Strategie:</b> Vor Kampf: Pfeilfallen in der Halle zerstören. Langsame Drehrate ausnutzen — Backstab-Konter. Force Palm maxen → 3er-Combo → Stagger. Defensive Spielweise, Distanz halten.</p>
 </article>
 <article class="card" id="boss-lucian-bastier">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp" alt="Lucian Bastier Boss in Crimson Desert" width="512" height="512" class="sq">
@@ -286,7 +325,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <img loading="lazy" src="/cd_assets/bosses/master_du.webp" alt="Master Du Boss in Crimson Desert" width="300" height="169">
 <h3>Master Du</h3>
 <ul class="stats"><li><b>Kapitel:</b> 9</li><li><b>Region:</b> Crimson Desert - Cloister of Enlightenment</li><li><b>Quest:</b> The Sage of the Desert</li><li><b>Parry / Dodge:</b> Dodge (Green Ray: bis 3x konsekutiv)</li><li><b>Waffen-Drop:</b> Master Du&#39;s Circlet</li><li><b>Abyss-Gear:</b> Karmic Pulse</li></ul>
-<p class="strat"><b>Strategie:</b> 2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown fuer Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen).</p>
+<p class="strat"><b>Strategie:</b> 2 HP-Bars. Phase 1: defensiv, Konter bei Dash-Angriff. Phase 2: offensiv, Stagger mit Force Palm. Leg Sweep / Lariat / Scissor Takedown für Knockdown. Green Ray = sofort wegrollen. Schaltet Blinding Flash Finisher frei (2x erfolgreich ausweichen).</p>
 </article>
 <article class="card" id="boss-t-rukan-the-ascended">
 <img loading="lazy" src="/cd_assets/bosses/fex/Trukan-image-1-bosses-wiki-guide-300px.webp" alt="T&#39;rukan the Ascended Boss in Crimson Desert" width="300" height="169">
@@ -298,13 +337,13 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <img loading="lazy" src="/cd_assets/bosses/clockwork_mantis.webp" alt="Marni&#39;s Clockwork Mantis Boss in Crimson Desert" width="300" height="169">
 <h3>Marni&#39;s Clockwork Mantis</h3>
 <ul class="stats"><li><b>Kapitel:</b> 10</li><li><b>Region:</b> Delesyia - Regent&#39;s Rise</li><li><b>Quest:</b> Frozen Hearted Predator</li><li><b>Parry / Dodge:</b> Dodge (Mantis Ray unblockbar)</li></ul>
-<p class="strat"><b>Strategie:</b> Mechanische fliegende Mantis. Begleitet von 3 Dragonfly Fighters — erst eliminieren! Block/Parry-Konter fuer normale Angriffe. Force Palm fuer Stagger-Bar. Mantis Ray (Feuer) = ausweichen, kein Block. Folgt nach Turbine-Kampf im Krall Foundry.</p>
+<p class="strat"><b>Strategie:</b> Mechanische fliegende Mantis. Begleitet von 3 Dragonfly Fighters — erst eliminieren! Block/Parry-Konter für normale Angriffe. Force Palm für Stagger-Bar. Mantis Ray (Feuer) = ausweichen, kein Block. Folgt nach Turbine-Kampf im Krall Foundry.</p>
 </article>
 <article class="card" id="boss-turbine">
 <img loading="lazy" src="/cd_assets/bosses/turbine.webp" alt="Turbine Boss in Crimson Desert" width="300" height="169">
 <h3>Turbine</h3>
 <ul class="stats"><li><b>Kapitel:</b> 10</li><li><b>Region:</b> Delesyia - Krall Foundry</li><li><b>Quest:</b> Invaders from the East</li><li><b>Parry / Dodge:</b> Mechanik-Boss (kein klassischer Kampf)</li></ul>
-<p class="strat"><b>Strategie:</b> 180-Sekunden-Verteidigung: Generator schuetzen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen waehrend Flug. Danach: vollgeladene Kanone auf Turbines feuern. Fuehrt direkt zu Marni&#39;s Clockwork Mantis.</p>
+<p class="strat"><b>Strategie:</b> 180-Sekunden-Verteidigung: Generator schützen mit Valgash + Ironflame Orcs. Ironflame A.T.A.G. Mk.I Mech bedienen. Clockwork Wasps → Discharge EMP. Dragonfly Fighters → Rapidfire Gun. Mech Balloon Troopers → abschliessen während Flug. Danach: vollgeladene Kanone auf Turbines feuern. Führt direkt zu Marni&#39;s Clockwork Mantis.</p>
 </article>
 <article class="card" id="boss-cloud-fortress-orbian">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_node_del_marniaircastle.webp" alt="Cloud Fortress Orbian Boss in Crimson Desert" width="512" height="512" class="sq">
@@ -348,7 +387,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <ul class="stats"><li><b>Kapitel:</b> 12</li><li><b>Region:</b> The Abyss</li><li><b>Quest:</b> Blinding Darkness</li><li><b>Parry / Dodge:</b> Dodge Lasers/Rocks</li><li><b>Waffen-Drop:</b> Falling Palm Skill + 99.999 ATK Waffe</li></ul>
 <p class="strat"><b>Strategie:</b> Auf Blackstar. R1 Fireballs aufs Auge → Stagger → Dismount → Glide → Air-Dash → Force Palm aufs Auge (2-3x).</p>
 </article></div>
-<h2>Welt- &amp; Fraktionsbosse (69)</h2>
+<h2 id="a-welt-fraktionsbosse">Welt- &amp; Fraktionsbosse (69)</h2>
 <div class="grid"><article class="card" id="boss-abyss-kutum">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_naturecreature_ancientworm.webp" alt="Abyss Kutum Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Abyss Kutum</h3>
@@ -407,7 +446,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_leeburtheshadowwolf.webp" alt="Black Fang Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Black Fang</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Forest of Wolves (N The Sage&#39;s Peak)</li><li><b>Quest:</b> Legendary Wolf</li><li><b>Parry / Dodge:</b> Dodge Lunges/Shadow Claw (wegrollen, dann auf ihn zurollen)</li><li><b>Abyss-Gear:</b> Shadow Claw (+ Key Item: Leebur&#39;s Soul, deckt alle Legendary-Animal-Standorte auf)</li></ul>
-<p class="strat"><b>Strategie:</b> Wolf-Adds mit Meteor Kick wegraeumen, dann Nature&#39;s Grasp auf die Arena-Baeume ausloesen (1 Baum-Treffer = &gt;50% HP; Baeume per Force Palm faellen oder Lunges hineinlocken). Black Fang teleportiert + slasht — Lunges/Shadow-Claw dodgen. Reward: Leebur&#39;s Soul; das Silver-Fang-Mount kommt SEPARAT (eigenes Tier Silver Fang am Howling Hollow erlegen + haeuten = Fang of Silver Fang → bei Witch zum Sigil craften). Die Blitz-Schwaeche gehoert zum getrennten Silver-Fang-Tier, nicht zu Black Fang.</p>
+<p class="strat"><b>Strategie:</b> Wolf-Adds mit Meteor Kick wegräumen, dann Nature&#39;s Grasp auf die Arena-Bäume auslösen (1 Baum-Treffer = &gt;50% HP; Bäume per Force Palm fällen oder Lunges hineinlocken). Black Fang teleportiert + slasht — Lunges/Shadow-Claw dodgen. Reward: Leebur&#39;s Soul; das Silver-Fang-Mount kommt SEPARAT (eigenes Tier Silver Fang am Howling Hollow erlegen + häuten = Fang of Silver Fang → bei Witch zum Sigil craften). Die Blitz-Schwäche gehört zum getrennten Silver-Fang-Tier, nicht zu Black Fang.</p>
 </article>
 <article class="card" id="boss-bloodwalker-crussis">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_crussistheformshaken.webp" alt="Bloodwalker Crussis Boss in Crimson Desert" width="512" height="512" class="sq">
@@ -616,8 +655,8 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <article class="card" id="boss-priscus-the-ancient">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_priscus.webp" alt="Priscus the Ancient Boss in Crimson Desert" width="512" height="512" class="sq">
 <h3>Priscus the Ancient</h3>
-<ul class="stats"><li><b>Region:</b> Pailune - Spire of Ringing Truth</li><li><b>Quest:</b> Faction</li><li><b>Parry / Dodge:</b> Nature&#39;s Snare fuer Projektile</li><li><b>Abyss-Gear:</b> Ancient Retribution</li></ul>
-<p class="strat"><b>Strategie:</b> Bow + Nature&#39;s Snare → Projektile zurückwerfen. Reward: Path of Trials (Frost Mantle Skill). Misc/Key-Item-Drop: Blessing of the Immortal (Consumable, ~10s Schadensimmunitaet — keine Waffe).</p>
+<ul class="stats"><li><b>Region:</b> Pailune - Spire of Ringing Truth</li><li><b>Quest:</b> Faction</li><li><b>Parry / Dodge:</b> Nature&#39;s Snare für Projektile</li><li><b>Abyss-Gear:</b> Ancient Retribution</li></ul>
+<p class="strat"><b>Strategie:</b> Bow + Nature&#39;s Snare → Projektile zurückwerfen. Reward: Path of Trials (Frost Mantle Skill). Misc/Key-Item-Drop: Blessing of the Immortal (Consumable, ~10s Schadensimmunität — keine Waffe).</p>
 </article>
 <article class="card" id="boss-queen-bismuth-oreback-crab">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_faction_bismuthqueenstonebackcrab.webp" alt="Queen Bismuth Oreback Crab Boss in Crimson Desert" width="512" height="512" class="sq">
@@ -750,7 +789,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <img loading="lazy" src="/cd_assets/bosses/walter_lanford.webp" alt="Walter Lanford Boss in Crimson Desert" width="300" height="169">
 <h3>Walter Lanford</h3>
 <ul class="stats"><li><b>Region:</b> Hernand - Fort Warspike</li><li><b>Quest:</b> Name Written in Blood</li><li><b>Parry / Dodge:</b> Dodge (kein Block)</li><li><b>Waffen-Drop:</b> Dane Shotgun</li></ul>
-<p class="strat"><b>Strategie:</b> Hochmobiler Pistolenschuetze. Run-and-Hit-Ansatz. &#39;Poof&#39;-Escape: zum Landepunkt dashen → Heavy Attack. Double Barrel Barrage: volle Distanz, sofort dodgen. Drops: Dane Shotgun + Rhonda Leather Boots + Golden Piggy Bank.</p>
+<p class="strat"><b>Strategie:</b> Hochmobiler Pistolenschütze. Run-and-Hit-Ansatz. &#39;Poof&#39;-Escape: zum Landepunkt dashen → Heavy Attack. Double Barrel Barrage: volle Distanz, sofort dodgen. Drops: Dane Shotgun + Rhonda Leather Boots + Golden Piggy Bank.</p>
 </article>
 <article class="card" id="boss-white-bear-of-the-high-mountains">
 <img loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_whitebear.webp" alt="White Bear of the High Mountains Boss in Crimson Desert" width="512" height="512" class="sq">
@@ -771,6 +810,96 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <p class="strat"><b>Strategie:</b> Brazier in Arena entzünden. Fire-Element zwingend. Phase 2 Ice-Breath horizontal dodgen.</p>
 </article></div>
 </main>
+<script>
+/* Seitensuche. Laeuft erst nach dem Laden und veraendert nichts, solange
+   niemand tippt -- ohne Skript bleibt die Seite exakt wie ausgeliefert.
+   Ein "Eintrag" ist eine Tabellenzeile, eine Karte oder ein Listenpunkt; die
+   Zuordnung zum Abschnitt ergibt sich aus den Geschwistern hinter jeder
+   Abschnittsueberschrift. */
+(function(){
+  var feld=document.getElementById('pt-suche');
+  var zaehler=document.getElementById('pt-count');
+  var leer=document.getElementById('pt-empty');
+  var main=document.querySelector('main');
+  if(!feld||!main)return;
+
+  /* Diakritika entfernen -- dieselbe Faltung wie _fold() im Hauptwiki.
+     ACHTUNG: doppelte Backslashes. Dieser Code steht in einem Template-Literal
+     des Generators; einfach geschrieben kaeme im HTML /s+/ statt /s+/ an. */
+  function fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');}
+  /* Suchbasis eines Eintrags: zusaetzlich die ausgeschriebene Umlautform.
+     Sonst faende "rüstung" das Wort, "ruestung" aber nicht -- auf Tastaturen
+     ohne Umlaute die haeufigere Eingabe. Der senkrechte Strich trennt beide
+     Formen, damit kein Begriff ueber die Naht hinweg zufaellig trifft. */
+  function basis(s){var k=String(s==null?'':s).toLowerCase();
+    return fold(k)+'|'+fold(k.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));}
+
+  // Abschnitte einsammeln: jedes h2 mit allem, was bis zum naechsten h2 folgt
+  var abschnitte=[];
+  var kinder=Array.prototype.slice.call(main.children);
+  var aktuell=null;
+  kinder.forEach(function(el){
+    if(el.tagName==='H2'){aktuell={kopf:el,bloecke:[],eintraege:[]};abschnitte.push(aktuell);return;}
+    if(aktuell)aktuell.bloecke.push(el);
+  });
+  var SEL='tbody tr, article, li';
+  abschnitte.forEach(function(a){
+    a.bloecke.forEach(function(b){
+      var treffer=b.matches&&b.matches(SEL)?[b]:Array.prototype.slice.call(b.querySelectorAll(SEL));
+      treffer.forEach(function(e){
+        /* Der aeusserste Kandidat gewinnt: eine Boss-Karte enthaelt Listen-
+           punkte, trotzdem ist die KARTE der Eintrag. Uebersprungen wird nur,
+           wer schon einen Eintrag als Vorfahren hat. */
+        var p=e.parentElement, drin=false;
+        while(p&&p!==document.body){ if(p.matches&&p.matches(SEL)){drin=true;break;} p=p.parentElement; }
+        if(drin)return;
+        a.eintraege.push(e);
+        e.__pt=basis(e.textContent||'');
+      });
+    });
+  });
+  var gesamt=abschnitte.reduce(function(n,a){return n+a.eintraege.length;},0);
+  if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
+
+  var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
+  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=basis;
+
+  function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
+
+  function filtern(){
+    var q=fold(feld.value.trim());
+    if(!q){
+      abschnitte.forEach(function(a){
+        zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
+        a.eintraege.forEach(function(e){zeige(e,true);});
+      });
+      zaehler.textContent=basis;leer.style.display='none';return;
+    }
+    var sichtbar=0;
+    abschnitte.forEach(function(a){
+      var inAbschnitt=0;
+      a.eintraege.forEach(function(e){
+        var ok=e.__pt.indexOf(q)>=0;
+        zeige(e,ok);if(ok)inAbschnitt++;
+      });
+      sichtbar+=inAbschnitt;
+      // Abschnitt ohne Treffer komplett ausblenden, sonst bleiben leere
+      // Ueberschriften und Tabellenkoepfe stehen
+      zeige(a.kopf,inAbschnitt>0);
+      a.bloecke.forEach(function(b){zeige(b,inAbschnitt>0);});
+    });
+    zaehler.textContent=sichtbar+' von '+gesamt;
+    leer.style.display=sichtbar?'none':'block';
+  }
+
+  feld.addEventListener('input',filtern);
+  feld.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){feld.value='';filtern();}
+  });
+})();
+</script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.

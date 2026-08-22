@@ -115,6 +115,35 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
+   Die Leiste ist reines HTML und funktioniert ohne Skript. Das Suchfeld steht
+   mit [hidden] im Markup und wird erst vom Skript eingeblendet. */
+.pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
+border:1px solid var(--line);border-radius:var(--radius)}
+.pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
+text-transform:uppercase;letter-spacing:.06em}
+.pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
+background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+color:var(--ink);font-family:var(--f-sans);font-size:14px}
+.pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
+.pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+.jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:4px 10px;background:var(--bg);
+border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);
+text-decoration:none;font-family:var(--f-mono);font-size:var(--fs-11)}
+.jump a:hover,.jump a:focus{border-color:var(--red);color:var(--ink-hi)}
+.jump a .n{color:var(--ink-faint);margin-left:5px}
+h2[id]{scroll-margin-top:18px}
+/* Auf schmalen Schirmen darf die Sprungleiste den Inhalt nicht verdraengen:
+   waffen.html hat 21 Abschnitte, das waeren sonst ueber 300px Navigation vor
+   dem ersten Eintrag. Drei Zeilen bleiben, der Rest scrollt in der Leiste. */
+@media(max-width:600px){.jump{max-height:96px;overflow-y:auto}}
+.pt-empty{display:none;margin:18px 0;padding:14px;border:1px dashed var(--line-strong);
+border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-size:14px}
+/* !important, weil Layoutregeln wie article.card{display:flex} sonst gewinnen */
+[data-pt-hidden]{display:none!important}
 /* Mobil: nichts unter 11px. Gleiche Schwelle wie index.html. */
 @media(max-width:600px){:root{--fs-10:12px;--fs-11:12px;--fs-11-5:12px}}
 
@@ -164,12 +193,22 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Rüstungen</nav>
 <h1>Alle 359 Rüstungen in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>359 Rüstungsteile</strong> aus Crimson Desert: Torso, Kopf, Hände, Schuhe und Mantel, jeweils mit Effekt und Fundort, gruppiert nach Rüstungsteil und alphabetisch sortiert.</p>
+<div class="pagetools">
+  <div class="ptline" hidden>
+    <label for="pt-suche">Auf dieser Seite</label>
+    <input type="search" id="pt-suche" autocomplete="off"
+           placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
+    <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-torso">Torso</a><a href="#a-kopf">Kopf</a><a href="#a-h-nde">Hände</a><a href="#a-schuhe">Schuhe</a><a href="#a-mantel">Mantel</a><a href="#a-h-ufige-fragen">Häufige Fragen</a></nav>
+</div>
+<p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Rüstung bestimmt in Crimson Desert vor allem, wie gut Kliff gegnerische Angriffe übersteht. Jedes Teil gehört zu einem Ausrüstungsplatz für Torso, Kopf, Hände, Schuhe oder Mantel und erhöht die Verteidigung. Zusätzlich können Rüstungsteile Resistenzen gegen Feuer, Eis und Blitz besitzen. Diese Resistenzen werden als Stufe angegeben, nicht als Prozentwert, und helfen bei Gegnern oder Situationen mit dem jeweiligen Element. Handschuhe und Schuhe können neben ihrer Schutzwirkung außerdem Angriff verleihen, wodurch sie auch für einen offensiveren Spielstil relevant sind. Die Liste mit 359 Rüstungsteilen hilft dir, Ausrüstung gezielt nach den Werten auszuwählen, die für deinen aktuellen Kampf wichtig sind. Du kannst einzelne Teile vergleichen, passende Resistenzen für eine Herausforderung suchen und erkennen, ob sich ein Wechsel zugunsten von mehr Verteidigung oder Angriff lohnt.</p>
 
 <a class="cta" href="/#sec-armor">Interaktive Rüstungs-Datenbank öffnen &rarr;</a>
 <p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Defense (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense (voll ausgebaut rund 69, 99 bzw. 114). <b>Woher die Werte stammen</b>, steht seit dem 21.&nbsp;August&nbsp;2026 in einer eigenen Spalte: 210 Teile kommen aus dem Datenimport der Spieldateien, 59 sind aus Guides belegt, 82 stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 2.&nbsp;Juni&nbsp;2026 entfernt hat; bei 8 Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
 <p class="note">In der App filterst du die Rüstungs-Datenbank nach Teil und Set, siehst größere Icons und vergleichst mehrere Ausrüstungsteile direkt nebeneinander. Herstellbare Teile stehen zusätzlich im <a href="/#sec-crafting">Crafting-Bereich</a>, die mehrfach erwähnten Slots erklärt die <a href="/#sec-cores">Abyss-Core-Übersicht</a>, und als Gegenstück gibt es die <a href="/#sec-weapons">Waffen-Liste</a>.</p>
-<h2>Torso (94)</h2>
+<h2 id="a-torso">Torso (94)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rüstung</th><th>Effekt</th><th>Fundort</th><th>Quellenlage</th><th>Anmerkung</th></tr></thead>
 <tbody><tr>
@@ -831,7 +870,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td class="muted">–</td>
 </tr></tbody>
 </table></div>
-<h2>Kopf (96)</h2>
+<h2 id="a-kopf">Kopf (96)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rüstung</th><th>Effekt</th><th>Fundort</th><th>Quellenlage</th><th>Anmerkung</th></tr></thead>
 <tbody><tr>
@@ -1507,7 +1546,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td class="muted">–</td>
 </tr></tbody>
 </table></div>
-<h2>Hände (40)</h2>
+<h2 id="a-h-nde">Hände (40)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rüstung</th><th>Effekt</th><th>Fundort</th><th>Quellenlage</th><th>Anmerkung</th></tr></thead>
 <tbody><tr>
@@ -1791,7 +1830,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td class="muted">–</td>
 </tr></tbody>
 </table></div>
-<h2>Schuhe (44)</h2>
+<h2 id="a-schuhe">Schuhe (44)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rüstung</th><th>Effekt</th><th>Fundort</th><th>Quellenlage</th><th>Anmerkung</th></tr></thead>
 <tbody><tr>
@@ -2103,7 +2142,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td class="muted">–</td>
 </tr></tbody>
 </table></div>
-<h2>Mantel (85)</h2>
+<h2 id="a-mantel">Mantel (85)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rüstung</th><th>Effekt</th><th>Fundort</th><th>Quellenlage</th><th>Anmerkung</th></tr></thead>
 <tbody><tr>
@@ -2703,7 +2742,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 </tr></tbody>
 </table></div>
 
-<h2>Häufige Fragen (5)</h2>
+<h2 id="a-h-ufige-fragen">Häufige Fragen (5)</h2>
 <details class="faq">
 <summary>Wo finde ich alle Rüstungsteile in Crimson Desert?</summary>
 <p>Die Übersicht sammelt alle 359 Rüstungsteile mit Fundort und Effekt. Nutze die Angaben zu Region, Gegnern, Händlern oder Aktivitäten, um gezielt nach einem bestimmten Teil zu suchen.</p>
@@ -2725,6 +2764,96 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <p>Die Rüstungsübersicht enthält 359 Teile. Sie verteilt sich auf Torso, Kopf, Hände, Schuhe und Mäntel.</p>
 </details>
 </main>
+<script>
+/* Seitensuche. Laeuft erst nach dem Laden und veraendert nichts, solange
+   niemand tippt -- ohne Skript bleibt die Seite exakt wie ausgeliefert.
+   Ein "Eintrag" ist eine Tabellenzeile, eine Karte oder ein Listenpunkt; die
+   Zuordnung zum Abschnitt ergibt sich aus den Geschwistern hinter jeder
+   Abschnittsueberschrift. */
+(function(){
+  var feld=document.getElementById('pt-suche');
+  var zaehler=document.getElementById('pt-count');
+  var leer=document.getElementById('pt-empty');
+  var main=document.querySelector('main');
+  if(!feld||!main)return;
+
+  /* Diakritika entfernen -- dieselbe Faltung wie _fold() im Hauptwiki.
+     ACHTUNG: doppelte Backslashes. Dieser Code steht in einem Template-Literal
+     des Generators; einfach geschrieben kaeme im HTML /s+/ statt /s+/ an. */
+  function fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');}
+  /* Suchbasis eines Eintrags: zusaetzlich die ausgeschriebene Umlautform.
+     Sonst faende "rüstung" das Wort, "ruestung" aber nicht -- auf Tastaturen
+     ohne Umlaute die haeufigere Eingabe. Der senkrechte Strich trennt beide
+     Formen, damit kein Begriff ueber die Naht hinweg zufaellig trifft. */
+  function basis(s){var k=String(s==null?'':s).toLowerCase();
+    return fold(k)+'|'+fold(k.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));}
+
+  // Abschnitte einsammeln: jedes h2 mit allem, was bis zum naechsten h2 folgt
+  var abschnitte=[];
+  var kinder=Array.prototype.slice.call(main.children);
+  var aktuell=null;
+  kinder.forEach(function(el){
+    if(el.tagName==='H2'){aktuell={kopf:el,bloecke:[],eintraege:[]};abschnitte.push(aktuell);return;}
+    if(aktuell)aktuell.bloecke.push(el);
+  });
+  var SEL='tbody tr, article, li';
+  abschnitte.forEach(function(a){
+    a.bloecke.forEach(function(b){
+      var treffer=b.matches&&b.matches(SEL)?[b]:Array.prototype.slice.call(b.querySelectorAll(SEL));
+      treffer.forEach(function(e){
+        /* Der aeusserste Kandidat gewinnt: eine Boss-Karte enthaelt Listen-
+           punkte, trotzdem ist die KARTE der Eintrag. Uebersprungen wird nur,
+           wer schon einen Eintrag als Vorfahren hat. */
+        var p=e.parentElement, drin=false;
+        while(p&&p!==document.body){ if(p.matches&&p.matches(SEL)){drin=true;break;} p=p.parentElement; }
+        if(drin)return;
+        a.eintraege.push(e);
+        e.__pt=basis(e.textContent||'');
+      });
+    });
+  });
+  var gesamt=abschnitte.reduce(function(n,a){return n+a.eintraege.length;},0);
+  if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
+
+  var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
+  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=basis;
+
+  function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
+
+  function filtern(){
+    var q=fold(feld.value.trim());
+    if(!q){
+      abschnitte.forEach(function(a){
+        zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
+        a.eintraege.forEach(function(e){zeige(e,true);});
+      });
+      zaehler.textContent=basis;leer.style.display='none';return;
+    }
+    var sichtbar=0;
+    abschnitte.forEach(function(a){
+      var inAbschnitt=0;
+      a.eintraege.forEach(function(e){
+        var ok=e.__pt.indexOf(q)>=0;
+        zeige(e,ok);if(ok)inAbschnitt++;
+      });
+      sichtbar+=inAbschnitt;
+      // Abschnitt ohne Treffer komplett ausblenden, sonst bleiben leere
+      // Ueberschriften und Tabellenkoepfe stehen
+      zeige(a.kopf,inAbschnitt>0);
+      a.bloecke.forEach(function(b){zeige(b,inAbschnitt>0);});
+    });
+    zaehler.textContent=sichtbar+' von '+gesamt;
+    leer.style.display=sichtbar?'none':'block';
+  }
+
+  feld.addEventListener('input',filtern);
+  feld.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){feld.value='';filtern();}
+  });
+})();
+</script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.

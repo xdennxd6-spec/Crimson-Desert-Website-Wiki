@@ -220,6 +220,37 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
   falsch.slice(0, 8).forEach((f) => console.log("       ABWEICHUNG " + f));
 }
 
+// ── 4b. Inline-Skripte und Seitenwerkzeuge ───────────────────────────────────
+// Der Generator bettet das Suchskript als Template-Literal ein. Fehlt dort ein
+// doppeltes Backslash, wird aus dem Whitespace-Regex ein Buchstaben-Regex oder
+// aus einem Zeilenumbruch-Escape ein echter Umbruch im String -- die Seite laedt
+// dann voellig normal, nur das Skript ist tot. Genau das ist beim Bau der
+// Seitensuche passiert und blieb ohne Browsertest unsichtbar.
+// Deshalb: jedes erzeugte Inline-Skript kompilieren, bevor es ausgeliefert wird.
+const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
+  "bestiarium", "side-quests", "trophaeen", "true-ending"];
+for (const s of SEITEN_MIT_WERKZEUG) {
+  const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
+
+  const bloecke = [...t.matchAll(/<script(?![^>]*application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g)];
+  let syntaxFehler = null;
+  for (const b of bloecke) {
+    try { new Function(b[1]); } catch (e) { syntaxFehler = e.message; break; }
+  }
+  ok(bloecke.length > 0 && !syntaxFehler,
+    `${s}.html: ${bloecke.length} Inline-Skript(e) kompilieren` + (syntaxFehler ? ` — ${syntaxFehler}` : ""));
+
+  // Die Werkzeuge muessen im Markup stehen, sonst geht eine Seite ohne Suche
+  // oder ohne Sprungziele live, ohne dass es jemand bemerkt.
+  const h2 = [...t.matchAll(/<h2([^>]*)>/g)];
+  const ohneId = h2.filter((m) => !/\sid="a-/.test(m[1])).length;
+  const sprungziele = (t.match(/<a href="#a-/g) || []).length;
+  ok(t.includes('id="pt-suche"'), `${s}.html: Suchfeld vorhanden`);
+  ok(ohneId === 0, `${s}.html: alle ${h2.length} Abschnitte mit Sprung-id (ohne id: ${ohneId})`);
+  ok(h2.length < 2 || sprungziele === h2.length,
+    `${s}.html: ${sprungziele} Sprunglinks fuer ${h2.length} Abschnitte`);
+}
+
 // ── 5. sitemap.xml ───────────────────────────────────────────────────────────
 const sm = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 // NEU (8-Seiten-Erweiterung): alle 8 Seiten-URLs statt 3 (plus Startseite),

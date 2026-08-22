@@ -115,6 +115,35 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
+   Die Leiste ist reines HTML und funktioniert ohne Skript. Das Suchfeld steht
+   mit [hidden] im Markup und wird erst vom Skript eingeblendet. */
+.pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
+border:1px solid var(--line);border-radius:var(--radius)}
+.pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
+text-transform:uppercase;letter-spacing:.06em}
+.pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
+background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+color:var(--ink);font-family:var(--f-sans);font-size:14px}
+.pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
+.pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+.jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:4px 10px;background:var(--bg);
+border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);
+text-decoration:none;font-family:var(--f-mono);font-size:var(--fs-11)}
+.jump a:hover,.jump a:focus{border-color:var(--red);color:var(--ink-hi)}
+.jump a .n{color:var(--ink-faint);margin-left:5px}
+h2[id]{scroll-margin-top:18px}
+/* Auf schmalen Schirmen darf die Sprungleiste den Inhalt nicht verdraengen:
+   waffen.html hat 21 Abschnitte, das waeren sonst ueber 300px Navigation vor
+   dem ersten Eintrag. Drei Zeilen bleiben, der Rest scrollt in der Leiste. */
+@media(max-width:600px){.jump{max-height:96px;overflow-y:auto}}
+.pt-empty{display:none;margin:18px 0;padding:14px;border:1px dashed var(--line-strong);
+border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-size:14px}
+/* !important, weil Layoutregeln wie article.card{display:flex} sonst gewinnen */
+[data-pt-hidden]{display:none!important}
 /* Mobil: nichts unter 11px. Gleiche Schwelle wie index.html. */
 @media(max-width:600px){:root{--fs-10:12px;--fs-11:12px;--fs-11-5:12px}}
 
@@ -164,12 +193,22 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Trophäen</nav>
 <h1>Alle 35 Trophäen in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>35 Trophäen</strong> von Crimson Desert, sortiert nach Wertung, jeweils mit der genauen Freischaltbedingung. Zu jeder Trophäe steht eine konkrete Anleitung samt empfohlenem Zeitpunkt. <strong>5 davon sind verpassbar</strong> und sollten früh eingeplant werden.</p>
+<div class="pagetools">
+  <div class="ptline" hidden>
+    <label for="pt-suche">Auf dieser Seite</label>
+    <input type="search" id="pt-suche" autocomplete="off"
+           placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
+    <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-platin">💠 Platin</a><a href="#a-gold">🥇 Gold</a><a href="#a-silber">🥈 Silber</a><a href="#a-bronze">🥉 Bronze</a><a href="#a-h-ufige-fragen">Häufige Fragen</a></nav>
+</div>
+<p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Die Trophäen in Crimson Desert dokumentieren Fortschritte und besondere Ziele während eines Spieldurchgangs. Insgesamt gibt es 35 Trophäen, darunter eine Platin Trophäe sowie Auszeichnungen in Gold, Silber und Bronze. Besonders wichtig sind die fünf verpassbaren Trophäen: Ihre Bedingungen können im laufenden Spieldurchgang unwiederbringlich verloren gehen. Wer alle Trophäen erhalten möchte, sollte diese Anforderungen deshalb frühzeitig prüfen und wichtige Entscheidungen oder Fortschrittsmomente nicht unvorbereitet abschließen. Die Übersicht bündelt sämtliche Trophäen an einer Stelle und erleichtert es, den eigenen Fortschritt mit den noch offenen Zielen abzugleichen. Sie eignet sich sowohl für Spieler, die gezielt auf Platin spielen, als auch für alle, die keine dauerhaft verpassbare Auszeichnung übersehen möchten. Nutze die Liste vor wichtigen Abschnitten und kontrolliere besonders die als verpassbar gekennzeichneten Einträge, damit du rechtzeitig reagieren kannst.</p>
 
 <a class="cta" href="/#sec-achievements">Interaktive Trophäen-Liste mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jede Trophäe ab, filterst nach Wertung und siehst deinen Platin-Fortschritt in Prozent.</p>
 <p class="warn"><strong>5 verpassbare Trophäen:</strong> Battlefield Conqueror, Brilliant Tactician, Shadowlord, Grand Collector of Arms, Unvanquished Strategist. Diese lassen sich in einem laufenden Spieldurchgang unwiederbringlich verlieren. Prüfe sie, bevor du das jeweilige Kapitel abschließt.</p>
-<h2>💠 Platin (1)</h2>
+<h2 id="a-platin">💠 Platin (1)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Wertung</th><th>Trophäe</th><th>Bedingung</th></tr></thead>
 <tbody><tr>
@@ -178,7 +217,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Alle anderen Trophäen in Crimson Desert freischalten.<p class="tr-how"><strong>So gehst du vor:</strong> Schalte alle 34 übrigen PlayStation-Trophäen frei. Die Platin-Trophäe wird danach automatisch vergeben.</p></td>
 </tr></tbody>
 </table></div>
-<h2>🥇 Gold (4)</h2>
+<h2 id="a-gold">🥇 Gold (4)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Wertung</th><th>Trophäe</th><th>Bedingung</th></tr></thead>
 <tbody><tr>
@@ -202,7 +241,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Alle Meisterschafts-Herausforderungen in 10 Waffen-/Ausrüstungs-Unterkategorien abschließen (ca. 58–64 Einzel-Challenges; gilt als aufwendigste Trophäe). <a href="/#sec-skills">Details im Wiki</a><p class="tr-how"><strong>So gehst du vor:</strong> Schließe alle Meisterschafts-Herausforderungen der zehn Unterkategorien ab. Bearbeite die Waffen-, Spezialwaffen- und Pferdeziele fortlaufend, nachdem die passenden Versiegelten Abyss-Artefakte gefunden wurden.</p><p class="tr-acht"><strong>Achtung:</strong> Verpassbar: Operation 7 benötigt Jackals in Pailune und einige Spezialwaffen dürfen nicht verkauft, zerstört oder umgewandelt werden.</p></td>
 </tr></tbody>
 </table></div>
-<h2>🥈 Silber (10)</h2>
+<h2 id="a-silber">🥈 Silber (10)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Wertung</th><th>Trophäe</th><th>Bedingung</th></tr></thead>
 <tbody><tr>
@@ -256,7 +295,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Alle 11 Jagd-Herausforderungen abschließen.<p class="tr-how"><strong>So gehst du vor:</strong> Schließe alle elf Jagd-Herausforderungen ab. Arbeite fehlende Jagdzielarten gezielt ab, sobald die Kategorie über Versiegelte Abyss-Artefakte freigeschaltet ist.</p></td>
 </tr></tbody>
 </table></div>
-<h2>🥉 Bronze (20)</h2>
+<h2 id="a-bronze">🥉 Bronze (20)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Wertung</th><th>Trophäe</th><th>Bedingung</th></tr></thead>
 <tbody><tr>
@@ -361,7 +400,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 </tr></tbody>
 </table></div>
 
-<h2>Häufige Fragen (5)</h2>
+<h2 id="a-h-ufige-fragen">Häufige Fragen (5)</h2>
 <details class="faq">
 <summary>Wie viele Trophäen gibt es in Crimson Desert?</summary>
 <p>Die Trophäenübersicht enthält 35 Erfolge in Platin, Gold, Silber und Bronze. Sie markiert außerdem fünf Trophäen als verpassbar.</p>
@@ -383,6 +422,96 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <p>Die Übersicht behandelt beide Begriffe als Erfolge des Spiels. Auf PlayStation werden sie üblicherweise als Trophäen bezeichnet, auf anderen Plattformen kann die Bezeichnung abweichen.</p>
 </details>
 </main>
+<script>
+/* Seitensuche. Laeuft erst nach dem Laden und veraendert nichts, solange
+   niemand tippt -- ohne Skript bleibt die Seite exakt wie ausgeliefert.
+   Ein "Eintrag" ist eine Tabellenzeile, eine Karte oder ein Listenpunkt; die
+   Zuordnung zum Abschnitt ergibt sich aus den Geschwistern hinter jeder
+   Abschnittsueberschrift. */
+(function(){
+  var feld=document.getElementById('pt-suche');
+  var zaehler=document.getElementById('pt-count');
+  var leer=document.getElementById('pt-empty');
+  var main=document.querySelector('main');
+  if(!feld||!main)return;
+
+  /* Diakritika entfernen -- dieselbe Faltung wie _fold() im Hauptwiki.
+     ACHTUNG: doppelte Backslashes. Dieser Code steht in einem Template-Literal
+     des Generators; einfach geschrieben kaeme im HTML /s+/ statt /s+/ an. */
+  function fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');}
+  /* Suchbasis eines Eintrags: zusaetzlich die ausgeschriebene Umlautform.
+     Sonst faende "rüstung" das Wort, "ruestung" aber nicht -- auf Tastaturen
+     ohne Umlaute die haeufigere Eingabe. Der senkrechte Strich trennt beide
+     Formen, damit kein Begriff ueber die Naht hinweg zufaellig trifft. */
+  function basis(s){var k=String(s==null?'':s).toLowerCase();
+    return fold(k)+'|'+fold(k.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));}
+
+  // Abschnitte einsammeln: jedes h2 mit allem, was bis zum naechsten h2 folgt
+  var abschnitte=[];
+  var kinder=Array.prototype.slice.call(main.children);
+  var aktuell=null;
+  kinder.forEach(function(el){
+    if(el.tagName==='H2'){aktuell={kopf:el,bloecke:[],eintraege:[]};abschnitte.push(aktuell);return;}
+    if(aktuell)aktuell.bloecke.push(el);
+  });
+  var SEL='tbody tr, article, li';
+  abschnitte.forEach(function(a){
+    a.bloecke.forEach(function(b){
+      var treffer=b.matches&&b.matches(SEL)?[b]:Array.prototype.slice.call(b.querySelectorAll(SEL));
+      treffer.forEach(function(e){
+        /* Der aeusserste Kandidat gewinnt: eine Boss-Karte enthaelt Listen-
+           punkte, trotzdem ist die KARTE der Eintrag. Uebersprungen wird nur,
+           wer schon einen Eintrag als Vorfahren hat. */
+        var p=e.parentElement, drin=false;
+        while(p&&p!==document.body){ if(p.matches&&p.matches(SEL)){drin=true;break;} p=p.parentElement; }
+        if(drin)return;
+        a.eintraege.push(e);
+        e.__pt=basis(e.textContent||'');
+      });
+    });
+  });
+  var gesamt=abschnitte.reduce(function(n,a){return n+a.eintraege.length;},0);
+  if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
+
+  var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
+  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=basis;
+
+  function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
+
+  function filtern(){
+    var q=fold(feld.value.trim());
+    if(!q){
+      abschnitte.forEach(function(a){
+        zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
+        a.eintraege.forEach(function(e){zeige(e,true);});
+      });
+      zaehler.textContent=basis;leer.style.display='none';return;
+    }
+    var sichtbar=0;
+    abschnitte.forEach(function(a){
+      var inAbschnitt=0;
+      a.eintraege.forEach(function(e){
+        var ok=e.__pt.indexOf(q)>=0;
+        zeige(e,ok);if(ok)inAbschnitt++;
+      });
+      sichtbar+=inAbschnitt;
+      // Abschnitt ohne Treffer komplett ausblenden, sonst bleiben leere
+      // Ueberschriften und Tabellenkoepfe stehen
+      zeige(a.kopf,inAbschnitt>0);
+      a.bloecke.forEach(function(b){zeige(b,inAbschnitt>0);});
+    });
+    zaehler.textContent=sichtbar+' von '+gesamt;
+    leer.style.display=sichtbar?'none':'block';
+  }
+
+  feld.addEventListener('input',filtern);
+  feld.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){feld.value='';filtern();}
+  });
+})();
+</script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.

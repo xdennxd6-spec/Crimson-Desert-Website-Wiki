@@ -115,6 +115,35 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
+
+/* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
+   Die Leiste ist reines HTML und funktioniert ohne Skript. Das Suchfeld steht
+   mit [hidden] im Markup und wird erst vom Skript eingeblendet. */
+.pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
+border:1px solid var(--line);border-radius:var(--radius)}
+.pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
+text-transform:uppercase;letter-spacing:.06em}
+.pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
+background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+color:var(--ink);font-family:var(--f-sans);font-size:14px}
+.pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
+.pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+.jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:4px 10px;background:var(--bg);
+border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);
+text-decoration:none;font-family:var(--f-mono);font-size:var(--fs-11)}
+.jump a:hover,.jump a:focus{border-color:var(--red);color:var(--ink-hi)}
+.jump a .n{color:var(--ink-faint);margin-left:5px}
+h2[id]{scroll-margin-top:18px}
+/* Auf schmalen Schirmen darf die Sprungleiste den Inhalt nicht verdraengen:
+   waffen.html hat 21 Abschnitte, das waeren sonst ueber 300px Navigation vor
+   dem ersten Eintrag. Drei Zeilen bleiben, der Rest scrollt in der Leiste. */
+@media(max-width:600px){.jump{max-height:96px;overflow-y:auto}}
+.pt-empty{display:none;margin:18px 0;padding:14px;border:1px dashed var(--line-strong);
+border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-size:14px}
+/* !important, weil Layoutregeln wie article.card{display:flex} sonst gewinnen */
+[data-pt-hidden]{display:none!important}
 /* Mobil: nichts unter 11px. Gleiche Schwelle wie index.html. */
 @media(max-width:600px){:root{--fs-10:12px;--fs-11:12px;--fs-11-5:12px}}
 
@@ -164,12 +193,22 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Nebenquests</nav>
 <h1>Alle 78 Nebenquests in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>78 Nebenquests</strong> von Crimson Desert nach Region sortiert, jeweils mit Auslöser, Voraussetzung und Belohnung. <strong>6 davon sind verpassbar</strong> und sollten vor dem jeweiligen Regionsabschluss erledigt werden.</p>
+<div class="pagetools">
+  <div class="ptline" hidden>
+    <label for="pt-suche">Auf dieser Seite</label>
+    <input type="search" id="pt-suche" autocomplete="off"
+           placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
+    <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-hernand">Hernand</a><a href="#a-delesyia">Delesyia</a><a href="#a-pailune">Pailune</a><a href="#a-crimson-desert">Crimson Desert</a><a href="#a-demeniss">Demeniss</a><a href="#a-h-ufige-fragen">Häufige Fragen</a></nav>
+</div>
+<p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Nebenquests ergänzen die Hauptgeschichte von Crimson Desert um eigenständige Aufgaben in fünf Regionen. Die Übersicht umfasst 78 Nebenquests und nennt für jede Aufgabe ihren Auslöser, mögliche Voraussetzungen und die Belohnung. Damit kannst du schnell prüfen, wie eine Quest startet, ob zuvor etwas erfüllt sein muss und was du für den Abschluss erhältst. Sechs Nebenquests sind verpassbar, ihre Gelegenheit kann also im laufenden Spieldurchgang unwiederbringlich enden. Diese Einträge verdienen besondere Aufmerksamkeit, wenn du alle verfügbaren Inhalte abschließen möchtest. Die Liste ist hilfreich, wenn du in einer Region nach offenen Aufgaben suchst oder einen bestimmten Fortschritt nachvollziehen willst. Statt jede Quest zufällig zu entdecken, kannst du Voraussetzungen und Auslöser vorab vergleichen und deinen Weg entsprechend planen. Nutze die Übersicht besonders vor wichtigen Fortschrittsmomenten, damit verpassbare Aufgaben nicht offen bleiben und du die passenden Belohnungen gezielt mitnehmen kannst.</p>
 
 <a class="cta" href="/#sec-quests">Interaktive Nebenquest-Liste mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jede Nebenquest ab, siehst deinen Fortschritt je Region und kannst alle Haken auf einmal zurücksetzen.</p>
 <p class="warn"><strong>6 verpassbare Nebenquests:</strong> <a href="#sq-hernand-legendary-wolf-silver-fang-bossduell-gegen-den-schwarzen-wolf-black-fang">Legendary Wolf — Silver Fang (Bossduell gegen den Schwarzen Wolf &#39;Black Fang&#39;)</a> <span class="muted">(Hernand)</span>, <a href="#sq-pailune-white-bear-legend-r-tier-pailune">White Bear (Legendär-Tier, Pailune)</a> <span class="muted">(Pailune)</span>, <a href="#sq-pailune-snowwhite-deer-legend-r-tier-pailune">Snowwhite Deer (Legendär-Tier, Pailune)</a> <span class="muted">(Pailune)</span>, <a href="#sq-pailune-harry-s-request">Harry&#39;s Request</a> <span class="muted">(Pailune)</span>, <a href="#sq-pailune-lola-s-request">Lola&#39;s Request</a> <span class="muted">(Pailune)</span>, <a href="#sq-pailune-gunter-s-request">Gunter&#39;s Request</a> <span class="muted">(Pailune)</span>. Diese Quests lassen sich im laufenden Spieldurchgang dauerhaft verpassen, erledige sie vor dem jeweiligen Story- oder Regionsabschluss.</p>
-<h2>Hernand (38)</h2>
+<h2 id="a-hernand">Hernand (38)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Nebenquest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>
 <tbody><tr id="sq-hernand-alden-s-request">
@@ -411,7 +450,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Light Silver Pouch x1<br><span class="muted">Tipp: Bewohner-Auftrag in Hernand.</span></td>
 </tr></tbody>
 </table></div>
-<h2>Delesyia (18)</h2>
+<h2 id="a-delesyia">Delesyia (18)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Nebenquest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>
 <tbody><tr id="sq-delesyia-a-child-in-a-cave">
@@ -523,7 +562,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Delesyian Contribution x5, Fine Logging Axe x1, Fine Timber x15<br><span class="muted">Tipp: Die Banditen besiegen und den Holzfäller retten. Reihe: Tales from the Corners of Delesyia. Quelle: gaming.tools-Datamine.</span></td>
 </tr></tbody>
 </table></div>
-<h2>Pailune (16)</h2>
+<h2 id="a-pailune">Pailune (16)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Nebenquest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>
 <tbody><tr id="sq-pailune-ava-s-request">
@@ -638,7 +677,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 </details><br><span class="muted">Tipp: Verpassbar: nach dem Kill UNBEDINGT häuten — ohne &#39;White Bear Claws&#39; kein Mount. Quellen: game8, pcgamer, gamerant, powerpyx, neonlightsmedia, vgtimes.</span></td>
 </tr></tbody>
 </table></div>
-<h2>Crimson Desert (4)</h2>
+<h2 id="a-crimson-desert">Crimson Desert (4)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Nebenquest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>
 <tbody><tr id="sq-crimson-desert-harvest-of-greed">
@@ -671,7 +710,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <td>Kinetic Knight x1<br><span class="muted">Tipp: Ermittlungs-Kommission in der Wüstenregion; belohnt mit dem Kinetic Knight.</span></td>
 </tr></tbody>
 </table></div>
-<h2>Demeniss (2)</h2>
+<h2 id="a-demeniss">Demeniss (2)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Nebenquest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>
 <tbody><tr id="sq-demeniss-buried-treasure-ursula-s-treasure-map">
@@ -688,7 +727,7 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 </tr></tbody>
 </table></div>
 
-<h2>Häufige Fragen (5)</h2>
+<h2 id="a-h-ufige-fragen">Häufige Fragen (5)</h2>
 <details class="faq">
 <summary>Wo finde ich alle Nebenquests in Crimson Desert?</summary>
 <p>Die Übersicht enthält 78 Nebenquests aus fünf Regionen. Jeder Eintrag hilft dir, Quests nach Gebiet zu prüfen und verpassbare Aufgaben rechtzeitig zu erkennen.</p>
@@ -710,6 +749,96 @@ p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid v
 <p>Arbeite jede Region möglichst vollständig ab, bevor du die Hauptgeschichte weiterspielst. Nutze die Übersicht besonders für die sechs verpassbaren Quests und kontrolliere offene Aufgaben vor wichtigen Wendepunkten.</p>
 </details>
 </main>
+<script>
+/* Seitensuche. Laeuft erst nach dem Laden und veraendert nichts, solange
+   niemand tippt -- ohne Skript bleibt die Seite exakt wie ausgeliefert.
+   Ein "Eintrag" ist eine Tabellenzeile, eine Karte oder ein Listenpunkt; die
+   Zuordnung zum Abschnitt ergibt sich aus den Geschwistern hinter jeder
+   Abschnittsueberschrift. */
+(function(){
+  var feld=document.getElementById('pt-suche');
+  var zaehler=document.getElementById('pt-count');
+  var leer=document.getElementById('pt-empty');
+  var main=document.querySelector('main');
+  if(!feld||!main)return;
+
+  /* Diakritika entfernen -- dieselbe Faltung wie _fold() im Hauptwiki.
+     ACHTUNG: doppelte Backslashes. Dieser Code steht in einem Template-Literal
+     des Generators; einfach geschrieben kaeme im HTML /s+/ statt /s+/ an. */
+  function fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');}
+  /* Suchbasis eines Eintrags: zusaetzlich die ausgeschriebene Umlautform.
+     Sonst faende "rüstung" das Wort, "ruestung" aber nicht -- auf Tastaturen
+     ohne Umlaute die haeufigere Eingabe. Der senkrechte Strich trennt beide
+     Formen, damit kein Begriff ueber die Naht hinweg zufaellig trifft. */
+  function basis(s){var k=String(s==null?'':s).toLowerCase();
+    return fold(k)+'|'+fold(k.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));}
+
+  // Abschnitte einsammeln: jedes h2 mit allem, was bis zum naechsten h2 folgt
+  var abschnitte=[];
+  var kinder=Array.prototype.slice.call(main.children);
+  var aktuell=null;
+  kinder.forEach(function(el){
+    if(el.tagName==='H2'){aktuell={kopf:el,bloecke:[],eintraege:[]};abschnitte.push(aktuell);return;}
+    if(aktuell)aktuell.bloecke.push(el);
+  });
+  var SEL='tbody tr, article, li';
+  abschnitte.forEach(function(a){
+    a.bloecke.forEach(function(b){
+      var treffer=b.matches&&b.matches(SEL)?[b]:Array.prototype.slice.call(b.querySelectorAll(SEL));
+      treffer.forEach(function(e){
+        /* Der aeusserste Kandidat gewinnt: eine Boss-Karte enthaelt Listen-
+           punkte, trotzdem ist die KARTE der Eintrag. Uebersprungen wird nur,
+           wer schon einen Eintrag als Vorfahren hat. */
+        var p=e.parentElement, drin=false;
+        while(p&&p!==document.body){ if(p.matches&&p.matches(SEL)){drin=true;break;} p=p.parentElement; }
+        if(drin)return;
+        a.eintraege.push(e);
+        e.__pt=basis(e.textContent||'');
+      });
+    });
+  });
+  var gesamt=abschnitte.reduce(function(n,a){return n+a.eintraege.length;},0);
+  if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
+
+  var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
+  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=basis;
+
+  function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
+
+  function filtern(){
+    var q=fold(feld.value.trim());
+    if(!q){
+      abschnitte.forEach(function(a){
+        zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
+        a.eintraege.forEach(function(e){zeige(e,true);});
+      });
+      zaehler.textContent=basis;leer.style.display='none';return;
+    }
+    var sichtbar=0;
+    abschnitte.forEach(function(a){
+      var inAbschnitt=0;
+      a.eintraege.forEach(function(e){
+        var ok=e.__pt.indexOf(q)>=0;
+        zeige(e,ok);if(ok)inAbschnitt++;
+      });
+      sichtbar+=inAbschnitt;
+      // Abschnitt ohne Treffer komplett ausblenden, sonst bleiben leere
+      // Ueberschriften und Tabellenkoepfe stehen
+      zeige(a.kopf,inAbschnitt>0);
+      a.bloecke.forEach(function(b){zeige(b,inAbschnitt>0);});
+    });
+    zaehler.textContent=sichtbar+' von '+gesamt;
+    leer.style.display=sichtbar?'none':'block';
+  }
+
+  feld.addEventListener('input',filtern);
+  feld.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){feld.value='';filtern();}
+  });
+})();
+</script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
