@@ -3223,7 +3223,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
          zuletzt die Kategorie "Pet-Ausruestung — Vogel" nicht, deren Eintraege damit unfilterbar waren. -->
     <div id="itemdex-bar" class="ibar"></div>
     <div class="fbar">
-      <select class="fs" id="itemdex-cat" aria-label="Gegenstaende nach Kategorie filtern" onchange="renderItemdex()"><option value="">Alle Kategorien</option></select>
+      <select class="fs" id="itemdex-cat" aria-label="Gegenstände nach Kategorie filtern" onchange="renderItemdex()"><option value="">Alle Kategorien</option></select>
       <span id="itemdex-cnt" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="itemdex-tb"></tbody></table></div>
@@ -3857,7 +3857,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     </div>
     <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Generische Ancient-Ruins-Rätsel (Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light) sind hier NICHT gelistet - sie stehen einzeln in der Sektion &quot;Uralte Ruinen — Abyss-Grenzsteine&quot; (alle 37 Ruinen).</div>
     <div class="fbar">
-      <select class="fs" id="puzzles-cat" aria-label="Raetsel nach Kategorie filtern" onchange="renderPuzzles()"><option value="">Alle Kategorien</option><option value="Strongbox">Strongbox</option><option value="Story / Abyss">Story / Abyss</option><option value="Story (Kapitel)">Story (Kapitel)</option><option value="Faction-Quest">Faction-Quest</option></select>
+      <select class="fs" id="puzzles-cat" aria-label="Rätsel nach Kategorie filtern" onchange="renderPuzzles()"><option value="">Alle Kategorien</option><option value="Strongbox">Strongbox</option><option value="Story / Abyss">Story / Abyss</option><option value="Story (Kapitel)">Story (Kapitel)</option><option value="Faction-Quest">Faction-Quest</option></select>
       <span id="puzzles-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="puzzles-tb"></tbody></table></div>
@@ -3873,7 +3873,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     </div>
     <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Alle 10 Dyehouses zu finden zählt für Challenge: Trade 2 – Rainbow Mane. Nach genügend <span class="xref" onclick="showSec('camp')">Greymane-Camp-Ausbau</span> verkauft ein Camp-Dyer (Oliver, über die Reihe <em>Solid Foundation</em>) alle bereits entdeckten Dyehouse-Farben.</div>
     <div class="fbar">
-      <select class="fs" id="dyes-cat" aria-label="Faerbemittel nach Kategorie filtern" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Spezial (nicht herstellbar)</option></select>
+      <select class="fs" id="dyes-cat" aria-label="Färbemittel nach Kategorie filtern" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Spezial (nicht herstellbar)</option></select>
       <span id="dyes-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th class="dye-th"></th><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="dyes-tb"></tbody></table></div>
@@ -12391,11 +12391,11 @@ function renderBuildSim(){
   el.innerHTML=`<div class="sim-grid">
       <div class="sim-editor">
         <label class="sim-lbl">Waffe</label>
-        <select class="fs sim-sel" id="sim-weapon" aria-label="Waffe fuer den Build-Simulator waehlen" onchange="simRecalc()">${wOpts}</select>
+        <select class="fs sim-sel" id="sim-weapon" aria-label="Waffe für den Build-Simulator wählen" onchange="simRecalc()">${wOpts}</select>
         <label class="sim-lbl">Rüstung</label>
         <div id="sim-armor-row" class="sim-armor-row">${armorSelects}</div>
         <label class="sim-lbl">Cores (Mehrfachauswahl: Strg/Cmd-Klick)</label>
-        <select class="fs sim-sel" id="sim-cores" aria-label="Abyss-Cores fuer den Build-Simulator waehlen (Mehrfachauswahl)" multiple size="5" onchange="simRecalc()">${coreOpts}</select>
+        <select class="fs sim-sel" id="sim-cores" aria-label="Abyss-Cores für den Build-Simulator wählen (Mehrfachauswahl)" multiple size="5" onchange="simRecalc()">${coreOpts}</select>
         <div class="sim-actions">
           <button class="sim-btn" onclick="simSnapshot('A')">→ In A</button>
           <button class="sim-btn" onclick="simSnapshot('B')">→ In B</button>
