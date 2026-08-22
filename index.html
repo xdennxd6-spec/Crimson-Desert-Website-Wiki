@@ -10391,6 +10391,82 @@ function highlightInElement(el,q){
 // Diakritik-/Umlaut-Folding fuer die Suche: lowercase, ß->ss, dann NFD-Decompose + Combining-Marks strippen
 // (ae/oe/ue -> a/o/u, é->e ...). Damit finden "schwache"/"fahigkeit"/"trophae"/"rustung" auch die Umlaut-Eintraege.
 function _fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'');}
+
+// ===== SUCHBARKEIT: die vier Helfer der Umbaurunde vom 22.08.2026 =====
+//
+// Ausgangslage: 650 Blattknoten in 16 Sektionen trugen kein data-s. Die globale Suche
+// fasst nur [data-s]-Knoten an -- alles andere blieb bei jeder Suche unveraendert stehen.
+// Die datengetriebenen Renderer geben ihre Zeilen seither ein kuratiertes data-s aus den
+// Feldern mit. Was von Hand im HTML steht (statische Tabellen in beginner/disarm/secrets/
+// skills/items/cores, die Pet-Steckbriefe), hat keine Datenquelle -- dort ist der
+// Elementtext die einzige ehrliche Grundlage, und genau das macht autoSearchTags.
+const _AUTO_SEL='tbody tr, .card, .fac-q, details.sq-item, .ach-card, .rm-task, .trow';
+function autoSearchTags(scope){
+  if(!scope||!scope.querySelectorAll)return 0;
+  let n=0;
+  scope.querySelectorAll(_AUTO_SEL).forEach(el=>{
+    if(el.hasAttribute('data-s'))return;
+    // Knoten, dessen Vorfahr schon data-s traegt, ist ueber diesen erreichbar --
+    // ein zweites data-s wuerde ihn nur doppelt zaehlen.
+    if(el.parentElement&&el.parentElement.closest('[data-s]'))return;
+    const t=(el.textContent||'').replace(/\s+/g,' ').trim();
+    if(!t)return;
+    el.dataset.s=t.toLowerCase();
+    el.dataset.autoS='1';
+    n++;
+  });
+  return n;
+}
+
+// Ein Treffer in einem zugeklappten <details> ist unsichtbar: der Zaehler nennt
+// Treffer, das Bild zeigt nichts. Betrifft vor allem die 179 Fraktionsquests, die in
+// <details class="fac-fac"> stecken. Nur VORFAHREN aufklappen, nicht den Treffer
+// selbst -- sonst klappen bei jeder Suche alle 78 Nebenquest-Details auf.
+function _openForSearch(el){
+  let d=el.parentElement?el.parentElement.closest('details'):null;
+  while(d){
+    if(!d.open){d.open=true;d.dataset.srchOpen='1';}
+    d=d.parentElement?d.parentElement.closest('details'):null;
+  }
+}
+function _closeSearchOpened(){
+  document.querySelectorAll('details[data-srch-open]').forEach(d=>{d.open=false;delete d.dataset.srchOpen;});
+}
+
+// Gruppenkoepfe tragen selbst kein data-s und blieben deshalb als leere Huelsen stehen
+// ("House Roberts - 10 Quests" ohne eine einzige sichtbare Quest). Eine Gruppe wird
+// ausgeblendet, sobald keines ihrer durchsuchbaren Kinder mehr sichtbar ist.
+function _collapseEmptyGroups(scope,aktiv){
+  const GRP='.fac-fac, .fac-reg, .sq-lane, .ruin-region';
+  (scope||document).querySelectorAll(GRP).forEach(g=>{
+    if(!aktiv){g.classList.remove('hide');return;}
+    const kinder=g.querySelectorAll('[data-s]');
+    if(!kinder.length)return;
+    let sichtbar=false;
+    for(let i=0;i<kinder.length;i++){if(!kinder[i].classList.contains('hide')){sichtbar=true;break;}}
+    g.classList.toggle('hide',!sichtbar);
+  });
+}
+
+// renderCompendium & Co. bauen ihre Zeilen bei jedem Filterwechsel komplett neu auf --
+// das ist die zweite Filter-Architektur des Projekts (Array filtern + neu rendern statt
+// hide togglen). Eine laufende globale Suche waere danach wirkungslos, weil die frischen
+// Zeilen kein hide tragen. Deshalb nach jedem Neuaufbau die aktive Suche erneut anwenden;
+// so arbeiten die beiden Wege nicht mehr gegeneinander.
+function reapplySearch(root,cntEl,gesamt){
+  if(!root)return;
+  const si=document.getElementById('si');
+  const q=((si&&si.value)||'').trim();
+  if(!q){if(cntEl)cntEl.textContent=gesamt+' Einträge';return;}
+  const qF=_fold(q);
+  let n=0;
+  root.querySelectorAll('[data-s]').forEach(el=>{
+    const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF);
+    el.classList.toggle('hide',!m);
+    if(m)n++;
+  });
+  if(cntEl)cntEl.textContent=n+' von '+gesamt+' (Suche aktiv)';
+}
 function _doSearchImpl(q){
   q=q.trim();
   // Autofill-Schutz: Chrome schreibt trotz autocomplete="off" gelegentlich die gespeicherte
@@ -10412,6 +10488,7 @@ function _doSearchImpl(q){
   const cnt=document.getElementById('scnt');
   // Clear highlights only on elements that actually had them
   document.querySelectorAll('[data-s]').forEach(el=>clearHighlight(el));
+  _closeSearchOpened();
   // URL-State sync
   if(typeof _writeUrlState==='function')_writeUrlState();
   // Track recent: wenn Suche genau einen Item-Namen matcht
@@ -10427,6 +10504,7 @@ function _doSearchImpl(q){
   if(!q){
     cnt.textContent='';
     document.querySelectorAll('.hide').forEach(el=>{if(el.dataset.filtered!=='1')el.classList.remove('hide');});
+    _collapseEmptyGroups(document,false);
     document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
     if(document.getElementById('sec-weapons')&&document.getElementById('sec-weapons').classList.contains('active')&&typeof renderWeapons==='function')renderWeapons();
     if(typeof armorCount==='function')armorCount();
@@ -10435,6 +10513,7 @@ function _doSearchImpl(q){
   // Only operate within the active section — drastically reduces work
   const activeSec=document.querySelector('.sec.active');
   const scope=activeSec||document;
+  autoSearchTags(scope);
   let total=0;
   const matchedForHL=[];
   scope.querySelectorAll('[data-s]').forEach(el=>{
@@ -10442,12 +10521,13 @@ function _doSearchImpl(q){
     // sonst holt ein Texttreffer sie zurueck und haebelt den Filter aus.
     const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF)&&el.dataset.filtered!=='1';
     el.classList.toggle('hide',!m);
-    if(m){total++;if(matchedForHL.length<80)matchedForHL.push(el);}
+    if(m){total++;_openForSearch(el);if(matchedForHL.length<80)matchedForHL.push(el);}
   });
   // Hide elements outside active section (only if any non-active section element has data-s)
   // — they remain in DOM but won't render due to .sec not having active
   // Highlight only top 80 matches (perceptual highlight, full-list-highlight would freeze on big lists)
   matchedForHL.forEach(el=>highlightInElement(el,q));
+  _collapseEmptyGroups(scope,true);
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
   {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
   if(typeof armorCount==='function')armorCount();
@@ -10477,6 +10557,7 @@ function _searchOtherSections(qLow,activeSec){
   const out=[];
   document.querySelectorAll('.sec').forEach(sec=>{
     if(sec===activeSec)return;
+    autoSearchTags(sec);
     let count=0;
     sec.querySelectorAll('[data-s]').forEach(el=>{if((el._sf||(el._sf=_fold(el.dataset.s))).includes(qF))count++;});
     if(!count)return;
@@ -10702,7 +10783,7 @@ function renderBosses(){
     const safeName=b.name.replace(/'/g,"\\'");
     const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge,b.recur||'',notes[b.name]||''].join(' ').toLowerCase();
     const _spLock=sp>0&&b.chapter!=null&&b.chapter>sp;
-    return `<div class="card record-card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-s="${escHtml(s)}">
+    return `<div class="card record-card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}">
       ${_spLock?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${b.chapter} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
       <div class="record-rail">
       <div class="record-img">
@@ -10788,7 +10869,7 @@ function renderWeapons(){
     if(show)shown++;
     const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Bulk-Import — Quelle nicht recherchiert">Bulk-Import</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
-    return `<div class="card${show?'':' hide'}" data-s="${s}">
+    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
       ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
       <div class="ct">${w.name}</div>
       <div class="cm"><span class="tag tx">${w.type}</span></div>
@@ -10848,7 +10929,7 @@ function renderCores(){
     const s=[c.name,c.effect,c.source,c.slot].join(' ').toLowerCase();
     const ico=CORE_IMGS[c.name];
     const vid=CORE_VIDS[c.name];
-    return `<tr class="trow${show?'':' hide'}" data-s="${s}">
+    return `<tr class="trow${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
       <td><div style="display:flex;align-items:center;gap:8px">
         ${ico?`<img src="${ico}" data-cdn="${CORE_IMGS_CDN[c.name]||''}" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.style.display='none';}" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
         <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()" onclick="showCoreVid(event,'${escJsStr(c.name)}')">▶</span>`:''}
@@ -10881,7 +10962,7 @@ function renderSynthesis(){
       const tierTag=c.roman?`<span class="tag tt">${escHtml(c.roman)}</span>`:'';
       const slotTag=c.slot?`<span class="tag ${c.slot==='Weapon'?'tr':c.slot==='Armor'?'tg':'tw'}">${c.slot}</span>`:'';
       const effTxt=c.effect?escHtml(c.effect):'<span style="color:var(--dim)">Effekt nicht erfasst</span>';
-      return `<div class="card${show?'':' hide'}" data-s="${escHtml(s)}">
+      return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}">
         <div class="ct">${ico}<span>${escHtml(c.name)}</span>${tierTag}${slotTag}</div>
         <div class="crows">
           <div class="crow"><span class="cl">Rezept</span><span class="cv">${escHtml(c.recipe)}</span></div>
@@ -10890,7 +10971,7 @@ function renderSynthesis(){
         </div>
       </div>`;
     }).join('');
-    return `<div class="synth-fam${anyShown?'':' hide'}" style="grid-column:1/-1"><div class="sub-t" style="font-size:12.5px;margin:14px 0 2px;color:var(--gdim)">${escHtml(fam)}${items.length>1?` <span style="font-size:10.5px;color:var(--dim);font-weight:400">${items.length} Stufen</span>`:''}</div></div>${cards}`;
+    return `<div class="synth-fam${anyShown?'':' hide'}" data-filtered="${anyShown?'0':'1'}" data-s="${escHtml((fam+' '+items.map(c=>[c.name,c.recipe,c.effect,c.slot].filter(Boolean).join(' ')).join(' ')+' synthese familie').toLowerCase())}" style="grid-column:1/-1"><div class="sub-t" style="font-size:12.5px;margin:14px 0 2px;color:var(--gdim)">${escHtml(fam)}${items.length>1?` <span style="font-size:10.5px;color:var(--dim);font-weight:400">${items.length} Stufen</span>`:''}</div></div>${cards}`;
   }).join('');
   const cnt=document.getElementById('synth-count'); if(cnt)cnt.textContent=shown+' / '+SYNTH_CORES.length+' Cores';
   renderWitchCraftables();
@@ -10916,7 +10997,7 @@ function renderWitchCraftables(){
   const ico=c=>c.icon?`<img class="craft-ico" src="${SYNTH_CDN}${c.icon}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">`:'';
   const amuletCard=c=>{
     const m=SIGIL_AMULETS[clean(c.name)];
-    return `<div class="card">
+    return `<div class="card" data-s="${escHtml([m.sigil,m.mount,clean(c.name),c.recipe,'sigil amulett reittier hexe'].join(' ').toLowerCase())}">
       <div class="ct">${ico(c)}<span>${escHtml(m.sigil)}</span><span class="tag tw">Sigil-Mount</span></div>
       <div class="crows">
         <div class="crow"><span class="cl">Reittier</span><span class="cv"><span class="xref" onclick="showSec('mounts')">${escHtml(m.mount)}</span> — dauerhaft freigeschaltet</span></div>
@@ -10926,7 +11007,7 @@ function renderWitchCraftables(){
       </div>
     </div>`;
   };
-  const miscCard=c=>`<div class="card">
+  const miscCard=c=>`<div class="card" data-s="${escHtml([clean(c.name),c.recipe,'hexe craftable'].join(' ').toLowerCase())}">
       <div class="ct">${ico(c)}<span>${escHtml(clean(c.name))}</span></div>
       <div class="crows">
         <div class="crow"><span class="cl">Rezept</span><span class="cv">${escHtml(c.recipe)}</span></div>
@@ -11046,7 +11127,7 @@ function craftCardSingle(c,show){
   const badge=c.cat==='Elixir'?'tr':'tg';
   const ico=c.icon?`<img class="craft-ico" src="${CRAFT_CDN}${c.icon}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
   const tierTag=c.tier&&c.tier!=='Basis'?`<span class="tag tt">${escHtml(c.tier)}</span>`:'';
-  return `<div class="card${show?'':' hide'}" data-s="${escHtml(craftSearchStr(c).toLowerCase())}">
+  return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(craftSearchStr(c).toLowerCase())}">
       <div class="craft-icon-hd" style="background:${craftCatGrad(c.cat)}">${craftCatIcon(c.cat)}<span class="icon-hd-label" style="color:${craftCatColor(c.cat)}">${c.cat}</span>${craftGrade(c.grade||0)}</div>
       <div class="ct">${ico}<span>${escHtml(c.name)}</span></div>
       <div class="cm"><span class="tag ${badge}">${c.cat}</span><span class="tag tx">${stationIcon(c.station)}${escHtml(c.station)}</span>${tierTag}</div>
@@ -11108,7 +11189,7 @@ function craftCardGroup(g,show){
   const tierRows=hasTierValues
     ? tierData.map(t=>`<div class="ctl-r">${pill(t)}${t.hp?`<span class="ctl-hp">${t.hp} HP</span>`:''}${t.f.length?`<div class="ctl-x">${t.f.join('')}</div>`:''}</div>`).join('')
     : `<div class="ctl-r">${tierData.map(pill).join('')}<div class="ctl-x"><div class="ctl-f" style="color:var(--dim);font-size:10.5px">Zutaten und Effekt sind in allen Stufen identisch erfasst; stufenabhängige HP nennen die Quellen hier nicht.</div></div></div>`;
-  return `<div class="card${show?'':' hide'}" data-s="${escHtml(s)}">
+  return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}">
       <div class="craft-icon-hd" style="background:${craftCatGrad(g.cat)}">${craftCatIcon(g.cat)}<span class="icon-hd-label" style="color:${craftCatColor(g.cat)}">${g.cat}</span>${craftGrade(g.grade||0)}</div>
       <div class="ct">${ico}<span>${escHtml(g.base)}</span></div>
       <div class="cm"><span class="tag ${badge}">${g.cat}</span><span class="tag tx">${stationIcon(g.station)}${escHtml(g.station)}</span><span class="tag tt">${ts.length} Stufen</span></div>
@@ -11398,7 +11479,7 @@ function renderFactions(){
   const regs=FAC_DATA.regions.map(r=>{
     const fq=r.factions.reduce((n,f)=>n+f.quests.length,0);
     const facs=r.factions.map(f=>{
-      const quests=f.quests.map(q=>'<div class="fac-q"><div class="fac-qh">'+escHtml(q.q)+facBadges(q)+'</div><div class="fac-qm"><div class="fac-qk">Trigger</div><div class="fac-qv">'+escHtml(q.trigger)+'</div><div class="fac-qk">Voraussetzung</div><div class="fac-qv">'+escHtml(q.prereq)+'</div><div class="fac-qk">Belohnung</div><div class="fac-qv">'+escHtml(q.reward)+'</div></div></div>').join('');
+      const quests=f.quests.map(q=>'<div class="fac-q" data-s="'+escHtml((q.q+' '+q.trigger+' '+q.prereq+' '+q.reward+' '+f.name+' '+r.region+' fraktionsquest').toLowerCase())+'"><div class="fac-qh">'+escHtml(q.q)+facBadges(q)+'</div><div class="fac-qm"><div class="fac-qk">Trigger</div><div class="fac-qv">'+escHtml(q.trigger)+'</div><div class="fac-qk">Voraussetzung</div><div class="fac-qv">'+escHtml(q.prereq)+'</div><div class="fac-qk">Belohnung</div><div class="fac-qv">'+escHtml(q.reward)+'</div></div></div>').join('');
       return '<details class="fac-fac"><summary class="fac-sum"><span class="fac-cv">&#9654;</span><span class="fac-nm">'+escHtml(f.name)+'</span>'+(f.isNew?'<span class="tag tg">NEU</span>':'')+'<span class="fac-ct">'+f.quests.length+' Quest'+(f.quests.length!==1?'s':'')+'</span></summary><div class="fac-ov">'+escHtml(f.overview)+'</div>'+quests+'</details>';
     }).join('');
     return '<div class="fac-reg"><div class="fac-rh">'+escHtml(r.region)+' &mdash; '+r.factions.length+' Fraktionen &middot; '+fq+' Quests</div><div class="fac-b">'+facs+'</div></div>';
@@ -11415,7 +11496,7 @@ function renderLocs(){
     const show=(!reg||l.region.includes(reg))&&(!type||l.type.includes(type));
     const s=[l.name,l.region,l.type,l.desc].join(' ').toLowerCase();
     const tc=l.type.includes('Boss')?'tr':l.type.includes('Sanctum')||l.type.includes('Witch')?'tg':l.type.includes('Unique')?'tw':'tx';
-    return `<div class="card${show?'':' hide'}" data-s="${s}">
+    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
       <div class="ct">${l.name}</div>
       <div class="cm"><span class="tag tg">${l.region}</span><span class="tag ${tc}">${l.type}</span></div>
       <div style="font-size:12px">${l.desc}</div>
@@ -11699,12 +11780,13 @@ function renderCollectibles(){
   const f=(document.getElementById('cof-miss')||{}).value||'';
   const list=COLLECTIBLES.filter(c=>!f||(f==='1'?c.miss:!c.miss));
   const cnt=document.getElementById('cof-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
-  tb.innerHTML=list.map(c=>`<tr>
+  tb.innerHTML=list.map(c=>`<tr data-s="${escHtml([c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase())}">
     <td><strong>${escHtml(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:var(--survey-red);border:1px solid var(--survey-red);border-radius:7px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}</td>
     <td style="color:var(--dim);white-space:nowrap;font-size:11px">${escHtml(c.cat)}</td>
     <td style="line-height:1.5">${escHtml(c.detail)}</td>
     <td style="color:var(--dim);font-size:11px">${escHtml(c.loc)}</td>
   </tr>`).join('');
+  reapplySearch(tb,cnt,list.length);
 }
 
 // ===== COMPENDIUM-SEKTIONEN (Gatherables / Raetsel / Dyes / Food&Elixirs, seit 2026-06-06) =====
@@ -11717,12 +11799,13 @@ function renderCompendium(secId,DATA,filterId,iconCell,preFilter){
   const list=DATA.filter(x=>(!preFilter||preFilter(x))&&(!f||x.cat===f));
   const cnt=document.getElementById(secId+'-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
   const itemIco=c=>(!iconCell&&c.icon&&c.icon.startsWith('/assets/'))?`<img class="item-ico" src="${SYNTH_CDN}${c.icon}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">`:'';
-  tb.innerHTML=list.map(c=>`<tr>${iconCell?'<td class="dye-td">'+iconCell(c)+'</td>':''}
+  tb.innerHTML=list.map(c=>`<tr data-s="${escHtml([c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase())}">${iconCell?'<td class="dye-td">'+iconCell(c)+'</td>':''}
     <td><strong>${itemIco(c)}${escHtml(c.name)}</strong>${c.miss?' <span style="font-size:9px;font-weight:700;color:var(--survey-red);border:1px solid var(--survey-red);border-radius:7px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}${c.conf&&c.conf!=='high'?` <span title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}" style="font-size:9px;font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:7px;padding:1px 4px;vertical-align:middle">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:''}</td>
     <td style="color:var(--dim);white-space:nowrap;font-size:11px">${escHtml(c.cat)}</td>
     <td style="line-height:1.5">${escHtml(c.detail)}</td>
     <td style="color:var(--dim);font-size:11px">${escHtml(c.loc)}</td>
   </tr>`).join('');
+  reapplySearch(tb,cnt,list.length);
 }
 function renderGatherables(){renderCompendium('gatherables',GATHERABLES,'gatherables-cat');}
 function renderPuzzles(){renderCompendium('puzzles',PUZZLES,'puzzles-cat');}
@@ -12758,7 +12841,7 @@ function renderAccessories(){
     const show=!f||a.type===f;
     const s=[a.name,a.type,a.effect,a.source,a.notes].join(' ').toLowerCase();
     const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
-    return `<div class="card${show?'':' hide'}" data-s="${s}">
+    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
       <div class="acc-icon-hd" style="background:${accTypeGrad(a.type)}">${a.icon?`<img class="acc-item-ico" src="${SYNTH_CDN}${a.icon}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:accTypeIcon(a.type)}<span class="icon-hd-label" style="color:${accTypeColor(a.type)}">${a.type}</span></div>
       <div class="ct">${a.name}</div>
       <div class="cm"><span class="tag ${badge}">${a.type}</span></div>
@@ -15131,7 +15214,8 @@ function _ruinCard(p){
   var badge=(p.conf==="medium")
     ? '<span class="ruin-conf med" title="'+_reRuin(p.conflicts||"")+'">geprüft · exakte Sequenz quellenabhängig</span>'
     : '<span class="ruin-conf">verifiziert</span>';
-  return '<div class="card ruin-card">'
+  var _s=['AR'+p.ar,p.name,p.de||'',p.loc,p.mech,p.reward].concat(p.steps||[]).concat(p.warn||[]).join(' ')+' grenzstein rätsel ruine';
+  return '<div class="card ruin-card" data-s="'+_reRuin(_s.toLowerCase())+'">'
     +'<div class="ruin-top"><span class="ruin-ar">AR'+p.ar+'</span><span class="ruin-name">'+_reRuin(p.name)+'</span>'+(p.de?'<span class="ruin-de">'+_reRuin(p.de)+'</span>':"")+'</div>'
     +'<div class="crows">'
       +'<div class="crow"><span class="cl">📍 Ort</span><span class="cv">'+_reRuin(p.loc)+'</span></div>'
