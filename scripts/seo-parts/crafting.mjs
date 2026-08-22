@@ -28,8 +28,8 @@ export function COUNT_CHECK(ctx) {
 // Reihenfolge der Hauptkategorien, wie im Prompt vorgegeben.
 const CAT_ORDER = ["Elixir", "Food", "Kuku-Gadget"];
 
-// Die Food-Tiers, siehe CRAFT_TIER_RANK in index.html (Zeile ~10844): Filling/Satisfying/
-// Hearty sind echte Ausbaustufen DESSELBEN Grundrezepts (Rang 1-3, Hearty ist die hoechste
+// Die Food-Tiers, siehe CRAFT_TIER_RANK in data/d04-armor-imgs.js:1251 (Stand 23.08.2026,
+// nach dem Split): Filling/Satisfying/Hearty sind echte Ausbaustufen DESSELBEN Grundrezepts (Rang 1-3, Hearty ist die hoechste
 // Stufe). Festmahl und Lavish sind dagegen EIGENE Grundrezepte der hoechsten Item-Stufe
 // (Rang 0, genau wie Basis) - z.B. sind "Lavish Meal" (Tier Lavish) und "Hearty Lavish Meal"
 // (Tier Hearty) zwei verschiedene Karten, keine Basis- und Ausbaustufe desselben Rezepts.
@@ -66,7 +66,7 @@ export function build(ctx) {
       ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(CRAFT_CDN + c.icon))}" alt="" width="34" height="34">`
       : "";
     // flex heisst NICHT "Zutaten austauschbar", sondern "zusaetzliche, hier nicht gelistete
-    // Zutaten noetig" (siehe craftFlexTxt in index.html Zeile 10867).
+    // Zutaten noetig" (siehe craftFlexTxt in index.html:7172).
     const flexTxt = c.flex
       ? c.cat === "Elixir"
         ? " (zusätzlich Reagenz und Katalysator nötig)"

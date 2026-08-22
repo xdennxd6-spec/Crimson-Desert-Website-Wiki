@@ -32,7 +32,13 @@ import * as partTrophaeen from "./seo-parts/trophaeen.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const SITE = "https://crimson-desert-wiki.netlify.app";
-const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+// Seit dem Split (23.08.2026) liegen die Daten-Konstanten in data/*.js;
+// fuer extract() zaehlt index.html + alle Datendateien als EIN Quelltext.
+const html = [
+  fs.readFileSync(path.join(ROOT, "index.html"), "utf8"),
+  ...fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
+    .map(f => fs.readFileSync(path.join(ROOT, "data", f), "utf8")),
+].join("\n");
 const TODAY = new Date().toISOString().slice(0, 10);
 
 // ── Datenextraktion: balancierte Klammern + eval des Objektliterals ──────────

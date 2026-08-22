@@ -6,7 +6,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+// Seit dem Split (23.08.2026) liegen die Daten-Konstanten in data/*.js;
+// die *_IMGS-Maps stehen dort — index.html + Datendateien als EIN Quelltext lesen.
+const html = [
+  fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'),
+  ...fs.readdirSync(path.join(ROOT, 'data')).filter(f => f.endsWith('.js')).sort()
+    .map(f => fs.readFileSync(path.join(ROOT, 'data', f), 'utf8')),
+].join('\n');
 
 // Praefix-Konstante QLG aus dem HTML lesen und in den eval-Scope binden, damit
 // die NPC_IMGS_CDN-Map (Eintraege der Form QLG+"…webp") parsebar wird und nicht

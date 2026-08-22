@@ -1,19 +1,31 @@
 // Crimson Desert Guide — Service Worker
-// Network-First fuer index.html, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v25';
+// Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
+const CACHE_VERSION = 'cd-guide-v26';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
 const CORE_ASSETS = [
   './',
   './index.html',
-  './site.webmanifest'
+  './site.webmanifest',
+  './data/d01-weapons.js',
+  './data/d02-crafting.js',
+  './data/d03-main-quests.js',
+  './data/d04-armor-imgs.js',
+  './data/d05-fac-data.js',
+  './data/d06-items.js',
+  './data/d07-patches.js',
+  './data/d08-ruins-data.js'
 ];
 
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CORE_CACHE)
-      .then(c => c.addAll(CORE_ASSETS).catch(() => {/* allow partial */}))
+      // Einzel-Adds statt addAll(): addAll ist atomar (ein 404 wirft alle Assets aus dem
+      // Precache), und ein pauschales .catch() hat das bisher still verschluckt -- damit
+      // fehlte im Zweifel sogar index.html offline. Promise.allSettled cached jedes Asset
+      // fuer sich; "partial erlaubt" bleibt also das Verhalten, nur nicht mehr alles-oder-nichts.
+      .then(c => Promise.allSettled(CORE_ASSETS.map(p => c.add(p))))
       .then(() => self.skipWaiting())
   );
 });
@@ -30,8 +42,10 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET') return;
 
-  // Network-First fuer HTML/JS — User soll Updates sehen
-  if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
+  // Network-First fuer HTML und die ausgelagerten Datendateien — User soll Updates sehen.
+  // data/*.js muss mit index.html synchron bleiben, darf also nie stale ausgeliefert werden.
+  const istDatenSkript = url.origin === self.location.origin && url.pathname.startsWith('/data/') && url.pathname.endsWith('.js');
+  if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/' || istDatenSkript) {
     e.respondWith(
       fetch(e.request)
         .then(r => {
@@ -42,7 +56,8 @@ self.addEventListener('fetch', e => {
           }
           return r;
         })
-        .catch(() => caches.match(e.request).then(r => r || caches.match('./index.html')))
+        // NIE index.html als Skript-Fallback liefern — HTML als JS geparst crasht die Seite
+        .catch(() => caches.match(e.request).then(r => r || (istDatenSkript ? Response.error() : caches.match('./index.html'))))
     );
     return;
   }

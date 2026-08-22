@@ -9,11 +9,18 @@
 import fs from "fs";
 import path from "path";
 import vm from "vm";
+import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const html = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+// Seit dem Split (23.08.2026) liegen die Daten-Konstanten in data/*.js;
+// fuer extract() zaehlt index.html + alle Datendateien als EIN Quelltext.
+const html = [
+  fs.readFileSync(path.join(ROOT, "index.html"), "utf8"),
+  ...fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
+    .map(f => fs.readFileSync(path.join(ROOT, "data", f), "utf8")),
+].join("\n");
 
 let errors = 0;
 const fail = (m) => { console.error("FEHLER: " + m); errors++; };
@@ -80,6 +87,7 @@ if (Array.isArray(CORES)) {
 // ── 3) Alle Inline-<script>-Bloecke auf JS-Syntax pruefen (vm, ohne Ausfuehrung)
 const scriptRe = /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
 let sm, sidx = 0, compiled = 0, skippedModule = 0;
+const inlineClassicCodes = []; // fuer das Vereinigungs-Kompilat in 3f
 while ((sm = scriptRe.exec(html)) !== null) {
   const code = sm[1];
   sidx++;
@@ -87,10 +95,89 @@ while ((sm = scriptRe.exec(html)) !== null) {
   if (/type\s*=\s*["'](application\/(ld\+json|json)|text\/template)["']/i.test(sm[0])) continue;
   // ES-Module (import/export) koennen mit vm.Script nicht klassisch kompiliert werden -> separat zaehlen
   if (/type\s*=\s*["']module["']/i.test(sm[0])) { skippedModule++; continue; }
+  inlineClassicCodes.push(code);
   try { new vm.Script(code, { filename: `inline-script-${sidx}.js` }); compiled++; }
   catch (e) { fail(`Inline-Script #${sidx} SyntaxError: ${e.message}`); }
 }
 ok(`${compiled} klassische Inline-Script-Bloecke ohne SyntaxError kompiliert (${skippedModule} type=module uebersprungen)`);
+
+// ── 3b) Ausgelagerte Datendateien (data/*.js) auf JS-Syntax pruefen ──────────
+let dataCompiled = 0;
+for (const f of fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()) {
+  try { new vm.Script(fs.readFileSync(path.join(ROOT, "data", f), "utf8"), { filename: `data/${f}` }); dataCompiled++; }
+  catch (e) { fail(`data/${f} SyntaxError: ${e.message}`); }
+}
+ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
+
+// ── 3c) Tag-Abgleich: <script src="data/...">-Tags in index.html <-> data/*.js ──────
+{
+  const htmlOnly = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const tagRe = /<script\s+src="data\/([^"]+)"\s*>\s*<\/script>/g;
+  const tagFiles = new Set();
+  let tm;
+  while ((tm = tagRe.exec(htmlOnly)) !== null) tagFiles.add(tm[1]);
+  const dirFiles = new Set(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")));
+  const nurInHtml = [...tagFiles].filter(f => !dirFiles.has(f));
+  const nurInDir = [...dirFiles].filter(f => !tagFiles.has(f));
+  nurInHtml.forEach(f => fail(`<script src="data/${f}"> in index.html, aber Datei fehlt in data/`));
+  nurInDir.forEach(f => fail(`data/${f} existiert, aber index.html laedt sie nicht per <script src>`));
+  if (!nurInHtml.length && !nurInDir.length) ok(`Tag-Abgleich: ${tagFiles.size} <script src="data/...">-Tags == ${dirFiles.size} Dateien in data/`);
+}
+
+// ── 3d) sw-Abgleich: dieselbe Menge gegen './data/...'-Eintraege in CORE_ASSETS (sw.js) ──
+{
+  const swSrc = fs.readFileSync(path.join(ROOT, "sw.js"), "utf8");
+  // Nur der CORE_ASSETS-Block zaehlt — ein './data/...' in einem Kommentar
+  // wuerde sonst als Precache-Eintrag durchgehen.
+  const coreBlock = swSrc.match(/const CORE_ASSETS\s*=\s*\[([\s\S]*?)\]/);
+  if (!coreBlock) fail("sw.js: CORE_ASSETS-Block nicht gefunden");
+  const swRe = /['"]\.\/data\/([^'"]+)['"]/g;
+  const swFiles = new Set();
+  let wm;
+  while (coreBlock && (wm = swRe.exec(coreBlock[1])) !== null) swFiles.add(wm[1]);
+  const dirFiles2 = new Set(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")));
+  const fehltInSw = [...dirFiles2].filter(f => !swFiles.has(f));
+  const zuvielInSw = [...swFiles].filter(f => !dirFiles2.has(f));
+  fehltInSw.forEach(f => fail(`data/${f} fehlt in sw.js CORE_ASSETS -- Offline-Cache waere unvollstaendig`));
+  zuvielInSw.forEach(f => fail(`sw.js CORE_ASSETS verweist auf './data/${f}', das es nicht gibt`));
+  if (!fehltInSw.length && !zuvielInSw.length) ok(`sw-Abgleich: ${swFiles.size} './data/...'-Eintraege in CORE_ASSETS == ${dirFiles2.size} Dateien in data/`);
+}
+
+// ── 3e) git-Abgleich: data/*.js muss getrackt sein, sonst deployt ein Push eine halb tote Live-Site
+{
+  let gitOut = null;
+  try {
+    gitOut = execSync(`git -C ${JSON.stringify(ROOT)} ls-files data/`, { encoding: "utf8" });
+  } catch (e) { gitOut = null; }
+  if (gitOut === null) {
+    ok("git-Abgleich uebersprungen (kein Git verfuegbar bzw. kein Repo -- z.B. im Netlify-Build)");
+  } else {
+    const tracked = new Set(gitOut.split("\n").filter(Boolean).map(p => p.replace(/^data\//, "")));
+    const dirFiles3 = fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js"));
+    const untracked = dirFiles3.filter(f => !tracked.has(f));
+    untracked.forEach(f => fail(`data/${f} ist nicht in git -- Push wuerde eine halb tote Live-Site deployen`));
+    if (!untracked.length) ok(`git-Abgleich: alle ${dirFiles3.length} data/*.js-Dateien sind getrackt`);
+  }
+}
+
+// ── 3f) Konkat-Kompilat: Datendateien + klassische Inline-Bloecke als EIN vm.Script ──
+// Faengt, was 3b) nicht sieht: const-Doppeldeklarationen ueber Dateigrenzen hinweg —
+// UND zwischen data/*.js und den Inline-Skripten von index.html. Im Browser teilen
+// sich alle klassischen Skripte einen globalen Scope; ein doppeltes const wirft dort
+// beim zweiten Vorkommen, obwohl jeder Block fuer sich sauber kompiliert.
+// (Fuer die Doppeldeklarations-Pruefung ist die Reihenfolge egal.)
+{
+  const dataDir = path.join(ROOT, "data");
+  const orderedFiles = fs.readdirSync(dataDir).filter(f => f.endsWith(".js")).sort();
+  const concat = orderedFiles.map(f => fs.readFileSync(path.join(dataDir, f), "utf8"))
+    .concat(inlineClassicCodes).join("\n");
+  try {
+    new vm.Script(concat, { filename: "data/*.js + inline-scripts (globaler Scope)" });
+    ok(`Konkat-Kompilat: ${orderedFiles.length} Datendateien + ${inlineClassicCodes.length} Inline-Bloecke als ein Script kompiliert (keine Doppeldeklaration im globalen Scope)`);
+  } catch (e) {
+    fail(`Konkat-Kompilat SyntaxError im globalen Scope (z.B. doppelte const): ${e.message}`);
+  }
+}
 
 // ── 4) Abyss-Core-Synthese-Guide-Block vorhanden? (gesetzt nach Integration) ──
 if (html.includes('id="synth-guide"') || /Abyss-?Core-?Synthese|Special Synthesis/i.test(html)) {

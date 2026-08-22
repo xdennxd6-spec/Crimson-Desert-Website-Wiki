@@ -52,6 +52,14 @@ for = "/index.html"
   [headers.values]
   Cache-Control = "public, max-age=0, must-revalidate"
 
+# Die ausgelagerten Datendateien (Split 23.08.2026) muessen mit index.html
+# synchron bleiben: ebenfalls immer revalidieren (ETag macht das billig).
+# Sonst laege bis zu 1h zwischen Seite und Daten (Regel "/*" = max-age 3600).
+[[headers]]
+for = "/data/*"
+  [headers.values]
+  Cache-Control = "public, max-age=0, must-revalidate"
+
 [[headers]]
 for = "/sw.js"
   [headers.values]

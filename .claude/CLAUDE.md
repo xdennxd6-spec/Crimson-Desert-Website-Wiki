@@ -27,7 +27,8 @@ anzulegen — es ist privat und braucht Credentials, die Claude nicht anfassen d
 - **Lokaler Ordner:** `C:\Users\Rainer Winkler\Desktop\Verschiedenes\deploy-69fcff9bfbeb7525ed81aec7\`
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
 - **Live-URL:** https://crimson-desert-wiki.netlify.app (via Netlify, Auto-Deploy bei Push)
-- **Haupt-Datei:** `index.html` (single-file app, ~11.200 Zeilen)
+- **Haupt-Datei:** `index.html` (~9.600 Zeilen, Markup+CSS+Renderer) + `data/d01…d08-*.js`
+  (Datenkonstanten, seit 23.08.2026 ausgelagert; laden per `<script src>` vor dem Hauptscript)
 
 ## Git / Push Regeln — WICHTIG
 - **NIEMALS automatisch pushen.** Immer erst den User fragen: "Soll ich das auf GitHub pushen?"
@@ -50,6 +51,10 @@ Pi (schinkler) UND der PC pushen beide auf dieses Repo. Ohne Sync entsteht Diver
 - Repo ist public → kein Token nötig
 - WebFetch auf Raw-URL ist der bevorzugte Weg um index.html zu lesen (spart Token vs. lokalem Read)
 - Lokales Read-Tool nur nutzen wenn Änderungen noch nicht gepusht sind
+- **Seit 23.08.2026 liegen die Spieldaten (Waffen/Crafting/Quests/Armor/Fraktionen/Items/
+  Patches/Ruinen) in `data/d01…d08-*.js`, NICHT mehr in `index.html`.** Für Datenfragen
+  daher die passende Raw-URL unter `.../main/data/dNN-*.js` lesen statt `index.html` —
+  sonst fehlt der eigentliche Inhalt.
 
 ## KI-Auslagerung an Gemini 3 Pro — Token sparen
 **Ziel:** Einfache, gut abgrenzbare Teilaufgaben NICHT selbst erledigen, sondern dem User
