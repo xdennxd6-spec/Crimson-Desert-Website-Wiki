@@ -22,9 +22,9 @@ export const SITEMAP = { pri: "0.8", freq: "monthly" };
 // Nur Klassen, die es in SHARED_CSS noch nicht gibt. Wird an SHARED_CSS angehaengt.
 export const EXTRA_CSS = `
 span.miss{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
-font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
+font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
 span.sys{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
-font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#0d0b1a;background:var(--violet)}
+font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#0d0b1a;background:var(--violet)}
 p.warn{font-size:13.5px;color:var(--ink);background:rgba(255,90,68,.09);border-left:3px solid var(--red);
 border-radius:8px;padding:11px 14px;margin:14px 0 0}
 .muted{color:var(--ink-faint)}
