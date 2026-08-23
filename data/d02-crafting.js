@@ -2,6 +2,21 @@
 // REIHENFOLGE IST TRAGEND: Bloecke referenzieren frueher definierte (TDZ) — nicht umsortieren,
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: CRAFTING, ARMOR, MOUNTS, COLLECTIBLES, GATHERABLES, PUZZLES, DYES, FOOD_ELIXIRS, TRUE_ENDING
+//
+// FELDSEMANTIK tier UND grade (geklaert am 23.08.2026, Quellenrunde):
+// - tier ist eine KOCH-Stufe: Basis -> Filling -> Satisfying -> Hearty (dazu Lavish,
+//   Festmahl, Gadget). Elixiere kennen so etwas nicht; alle 28 stehen deshalb auf dem
+//   Fuellwert "Basis". Das ist ABSICHT und kein fehlender Datenwert. Die Stufung der
+//   Elixiere steckt im NAMEN (Lesser X / X / Greater X), nicht in einem Feld -- und je
+//   Stufe schreibt das Rezept eine feste Katalysator-Gruppe vor (Lesser/Common/Superior).
+//   Beleg dafuer siehe Silver Ore weiter unten. Nicht "nachtragen" wollen.
+// - grade ist ein INTERNER Datenwert 0-5 ohne belegte Bedeutung: weder gaming.tools noch
+//   questlog.gg fuehren fuer diese Rezepte ein Grade-, Rarity- oder Rank-Feld. Der
+//   Tooltip in craftGrade() sagt das inzwischen auch so. Keine Aussage darueber in
+//   Artikeltext schreiben, solange kein Beleg da ist.
+// KOMMENTARE HIER OBEN, NICHT IM ARRAY: extract() in gen-seo/verify-seo ist
+// kommentar-blind und liest ein Apostroph als String-Anfang -- ein Genitiv-s in einem
+// Kommentar INNERHALB des Arrays kippt die Klammerzaehlung und damit den Build.
 const CRAFTING=[
   {name:"Antler Tea",cat:"Elixir",station:"Cauldron (Kessel)",tier:"Basis",grade:4,ingr:"1x Long Horn + 2x Water + 1x Honey",effect:"Stellt Ausdauer (Stamina) her",source:"Tee-Rezept; Antler/Premium-Zutaten. gaming.tools recipe_deerantler_fruit_tea",conf:"medium",icon:"itemicon_prefab_cd_t0000_honeytea_0003.webp"},
   {name:"Apollonia's Elixir",cat:"Elixir",station:"Cauldron (Kessel)",tier:"Basis",grade:0,ingr:"4x Common Defense Reagent + 2x Common Catalyst + 1x Empty Bottle",effect:"Verteidigung +20 für 10 Min",flex:true,source:"Alchemy-Formel in der Welt lootbar; Rezeptmengen + Effekt: gaming.tools (Crafting Manual, Stand 1.18.01)",conf:"high",icon:"itemicon_prefab_cd_t0000_potion_0004_index05_r.webp"},
@@ -787,7 +802,7 @@ const COLLECTIBLES=[
 const GATHERABLES=[
   {name:"Iron Ore",cat:"Erz / Mineral",detail:"Silbergraues Metallerz, zäh aber leicht zu verarbeiten. Wird aus Iron-Nodes abgebaut und als Verfeinerungsmaterial für Waffen, Nägel und einfache Bauteile genutzt; gilt zudem als Alchemie-Bindemittel.",loc:"Iron-Nodes im felsigen Gelände (Hernand, Inland). Quelle: Fextralife Minerals",miss:false,conf:"high",icon:"/assets/_sprites/itemicon_ironstone.webp"},
   {name:"Copper Ore",cat:"Erz / Mineral",detail:"Gut dehn- und schmiedbares Metallerz, leitet Hitze und Strom gut. Aus Copper-Nodes abgebaut; das gewonnene Kupfer dient Maschinen, Geschirr und Schmuck. Frühes Progressions-Metall neben Iron.",loc:"Copper-Nodes an Felsen (Start-/Felsregionen). Quelle: Fextralife Minerals",miss:false,conf:"high",icon:"/assets/_sprites/itemicon_copperore.webp"},
-  {name:"Silver Ore",cat:"Erz / Mineral",detail:"Aus Silver-Nodes abgebaut. Hochwertiges Schmiede-/Verfeinerungsmetall; laut Game8 vor allem Bestandteil für Gold Bars (Rezept: ca. 10 Silver Ore + 3 Brimstone + 3 Mercury bei der Hexe). Zusätzlich als 'Common Catalyst' der Alchemie bestätigt (steigert die Elixier-Qualität; Quelle: KeenGamer Alchemy-Guide / Steam-Community Alchemy-Guide).",loc:"Hauptfundort: Höhle hinter dem Wasserfall an Three Saints' Falls (N Hernand Town) — 25-30 Silver Ore/Besuch (Vorkommen respawnen), Zugang via Stab Lv.1 (durch den Wasserfall-Fels) + Force Palm (Felsbrocken im Inneren); zweiter Fundort: Ancients Heart Cave (~23 Silver Ore + Truhe). Quelle: Game8",miss:false,conf:"medium",icon:"/assets/_sprites/itemicon_silverore.webp"},
+  {name:"Silver Ore",cat:"Erz / Mineral",detail:"Aus Silver-Nodes abgebaut. Hochwertiges Schmiede-/Verfeinerungsmetall; laut Game8 vor allem Bestandteil für Gold Bars (Rezept: ca. 10 Silver Ore + 3 Brimstone + 3 Mercury bei der Hexe). Gehört im Alchemie-Datensatz zur Gruppe der 'Common Catalysts': Das Crafting-Manual der mittleren Elixier-Stufe (Haiden's Elixir) nennt wörtlich 'Common Catalyst: Silver Ore, Gold Ore, Flawless Stone, etc.'. Die Katalysator-Güte ist pro Rezeptstufe FEST vorgegeben (Lesser-Stufe: Iron Ore/Copper Ore/Stone; Superior-Stufe: Brimstone/Diamond/Holy Water) — ein besserer Katalysator im selben Rezept ist nicht vorgesehen, die Elixier-Qualität lässt sich damit also NICHT steigern. Quelle: gaming.tools (recipe_potion_statbuff_tier1/2/3_0004).",loc:"Hauptfundort: Höhle hinter dem Wasserfall an Three Saints' Falls (N Hernand Town) — 25-30 Silver Ore/Besuch (Vorkommen respawnen), Zugang via Stab Lv.1 (durch den Wasserfall-Fels) + Force Palm (Felsbrocken im Inneren); zweiter Fundort: Ancients Heart Cave (~23 Silver Ore + Truhe). Quelle: Game8",miss:false,conf:"medium",icon:"/assets/_sprites/itemicon_silverore.webp"},
   {name:"Gold Ore",cat:"Erz / Mineral",detail:"Aus Gold-Nodes abgebaut. Wertvolles Edelmetallerz; laut Game8 werden ca. 100 Gold Ore beim Schmied zu 1 Gold Bar verarbeitet. Die Estate-in-Dismay-Nebenquest belohnt eine Gold Vein Map mit Fundorten.",loc:"Gold-Nodes in späteren Regionen Pywels. Quelle: Game8 Gold Ore",miss:false,conf:"medium",icon:"/assets/_sprites/itemicon_goldore.webp"},
   {name:"Garnet",cat:"Edelstein",detail:"Edelstein, der aus Garnet-Nodes abgebaut wird; begegnet einem mit fortschreitendem Spielverlauf in neuen Regionen Pywels. Verwendung in Gear-Crafting und Verfeinerung (Detail in den Quellen knapp).",loc:"Garnet-Nodes in mittleren/späten Regionen Pywels. Quelle: Game8 Erzliste",miss:false,conf:"medium",icon:"/assets/_sprites/itemicon_ruby.webp"},
   {name:"Azurite",cat:"Edelstein",detail:"Bläuliches Edelsteinerz aus Azurite-Nodes. Einer Ueberlieferung nach ist sein meerblauer Farbton bei Adligen beliebt und soll Körper und Geist binden. Dient als Zier- und Crafting-Stein.",loc:"Azurite-Nodes in Adern, verstreut in den Wüstenregionen. Quelle: Fextralife Minerals (verbatim)",miss:false,conf:"high",icon:"/assets/_sprites/itemicon_bluestone.webp"},
