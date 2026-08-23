@@ -4441,7 +4441,7 @@ function refreshSectionStats(){
     _injectSectionStats('mounts',[
       {lbl:'Mounts gesamt',val:MOUNTS.length},
       {lbl:'Sigil',val:MOUNTS.filter(m=>m.type&&m.type.includes('Sigil')).length},
-      {lbl:'Wildtiere',val:MOUNTS.filter(m=>m.type==='Wildtier').length}
+      {lbl:'Wildtiere',val:MOUNTS.filter(m=>m.type&&m.type.startsWith('Wildtier')).length}
     ]);
   }
   // Skills
