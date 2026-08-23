@@ -7951,10 +7951,9 @@ function renderSkills(){
     '<div class="crow"><span class="cl">Flight</span><span class="cv">Mechanischer Glider (kein Magie-System), Skystep via Scholastone Abyss-Fan</span></div>'+
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Rush · Frost Mantle · Lightning Strike · Storm Pillar</span></div>'+
     '</div></div>'+
-    '<h3 class="sub-t">Einzigartige Skills</h3><div class="sk-grid">'+
-    ['Shield Toss (prallt bis 3-7x)','Shield Toss Proficiency/Expertise (5x/7x)','Blade Sentinel','Piercing Light (Lunge)','Smiting Strike (Speer)','Smiting Bolt (Lichtspeer)','Sword Flurry','Spinning Scissors Throw','Quick Reload (NUR Watch & Learn)','Aerial Stab [1.07]','Fists / Unarmed Combat [1.07]']
-    .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>'+
-    '<div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Voller Skill-Tree (58 Skills, inkl. Armed Combat / Grappling / Keen Senses / Focus) im Tab Graph → Damiane.</div>';
+    '<h3 class="sub-t">Skill-Tree <span class="best-count">('+DAMIANE_SKILLS.length+')</span></h3><div class="sk-grid">'+
+    DAMIANE_SKILLS.map(skCard).join('')+'</div>'+
+    '<div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Dieselben Skills als Abhängigkeitsbaum: Tab „🌳 Tree-Graph“ → Damiane.</div>';
 
   document.getElementById('skp-oongka').innerHTML=
     '<div class="card" style="margin-bottom:12px"><div class="ct">Oongka</div><div class="crows">'+
@@ -7963,12 +7962,9 @@ function renderSkills(){
     '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack (via White Crow Questline), Vertical Flight</span></div>'+
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse</span></div>'+
     '</div></div>'+
-    '<h3 class="sub-t">Einzigartige Skills</h3><div class="sk-grid">'+
-    ['Dual Wielding Mastery (Zweihänder einhändig)','Leaping Smash','Rampage','Raging Lightning','Quaking Fury','Quick Grab','Explosive Leap','Storm Howl','Aerial Stab [1.07]','Explosive Strike — Charge-Phase [1.07]','Dual-Wield Stab-Chain (verbessert) [1.07]']
-    .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>'+
-    '<h3 class="sub-t">Standard-Skills</h3><div class="sk-grid">'+
-    ['Pump Kick','Dropkick','Body Slam','Clothesline','Lariat','Rage (Super Armor State)','Scatter Shot','Blinding Flash','Focused Shot']
-    .map(n=>'<div class="sk-c"><div class="sk-n">'+n+'</div></div>').join('')+'</div>';
+    '<h3 class="sub-t">Skill-Tree <span class="best-count">('+OONGKA_SKILLS.length+')</span></h3><div class="sk-grid">'+
+    OONGKA_SKILLS.map(skCard).join('')+'</div>'+
+    '<div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Dieselben Skills als Abhängigkeitsbaum: Tab „🌳 Tree-Graph“ → Oongka.</div>';
 
   document.getElementById('skp-watch').innerHTML=
     '<div class="tw-wrap"><table><thead><tr><th>Skill</th><th>Lernort</th><th>Status</th></tr></thead><tbody>'+
