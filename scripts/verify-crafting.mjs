@@ -179,6 +179,47 @@ ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
   }
 }
 
+// ── 3e) SECTIONS-count gegen die echte Datenmenge ────────────────────────────
+// Die Sektionsuebersicht zeigt je Sektion ein count-Feld. Steht dort ein Wort ("Sets",
+// "Liste"), ist das Absicht. Steht dort eine Zahl, ist es ein Zaehler -- und der driftet
+// lautlos, wenn das Datenarray waechst. Am 23.08.2026 zeigte die Seite so 502 Waffen bei
+// 500 Datensaetzen und 310 Rezepte bei 308.
+{
+  // Sektion -> Datenarray. Bewusst handgepflegt: nicht jede Sektion hat ein einzelnes
+  // Array, und eine falsche Zuordnung waere schlimmer als keine. Sektionen mit Zahl-count
+  // ohne Eintrag hier werden unten ausdruecklich gemeldet, damit die Luecke sichtbar bleibt.
+  const ZUORDNUNG = {
+    bosses: "BOSSES", weapons: "WEAPONS", crafting: "CRAFTING", armor: "ARMOR",
+    mounts: "MOUNTS", npcs: "NPCS", trophies: "TROPHIES", patches: "PATCHES",
+    "side-quests": "SIDE_QUESTS", bestiary: "BESTIARY",
+  };
+  let SECTIONS;
+  try { SECTIONS = extract("SECTIONS"); } catch (e) { fail("SECTIONS eval: " + e.message); }
+  if (Array.isArray(SECTIONS)) {
+    let geprueft = 0, drift = 0;
+    const ohneZuordnung = [];
+    for (const s of SECTIONS) {
+      if (!/^\d+$/.test(String(s.count))) continue; // Wort-count ist Absicht
+      const arrName = ZUORDNUNG[s.id];
+      if (!arrName) { ohneZuordnung.push(`${s.id} (count ${s.count})`); continue; }
+      let arr;
+      try { arr = extract(arrName); } catch { ohneZuordnung.push(`${s.id} -> ${arrName} nicht gefunden`); continue; }
+      if (!Array.isArray(arr)) { ohneZuordnung.push(`${s.id} -> ${arrName} ist kein Array`); continue; }
+      geprueft++;
+      if (arr.length !== Number(s.count)) {
+        drift++;
+        fail(`SECTIONS-count '${s.id}' zeigt ${s.count}, ${arrName} hat ${arr.length} Eintraege`);
+      }
+    }
+    if (!drift) ok(`SECTIONS-counts: ${geprueft} Zahl-Angaben stimmen mit ihren Datenarrays ueberein`);
+    if (ohneZuordnung.length) {
+      console.log("HINWEIS: Zahl-count ohne geprueftes Datenarray: " + ohneZuordnung.join(", "));
+    }
+  } else {
+    fail("SECTIONS ist kein Array");
+  }
+}
+
 // ── 4) Abyss-Core-Synthese-Guide-Block vorhanden? (gesetzt nach Integration) ──
 if (html.includes('id="synth-guide"') || /Abyss-?Core-?Synthese|Special Synthesis/i.test(html)) {
   ok("Abyss-Core-Synthese-Block referenziert");

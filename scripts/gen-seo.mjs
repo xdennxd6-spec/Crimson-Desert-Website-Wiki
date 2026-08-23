@@ -978,8 +978,27 @@ const outputs = [
   ["sitemap.xml", buildSitemap()],
 ];
 for (const [file, content] of outputs) {
-  fs.writeFileSync(path.join(ROOT, file), content, "utf8");
-  console.log(`  geschrieben: ${file.padEnd(18)} ${(content.length / 1024).toFixed(1)} KB`);
+  const ziel = path.join(ROOT, file);
+  // Zeilenenden der vorhandenen Datei uebernehmen. Der PC fuehrt die erzeugten Seiten als
+  // CRLF, der Pi als LF. Wer hart eines von beiden schreibt, erzeugt auf der jeweils anderen
+  // Maschine einen Diff ueber die komplette Datei -- und ein echter Fehler faellt darin
+  // niemandem mehr auf. Bis 23.08.2026 schrieb der Generator immer LF.
+  let vorhanden = null;
+  let ausgabe = content;
+  if (fs.existsSync(ziel)) {
+    vorhanden = fs.readFileSync(ziel, "utf8");
+    const crlf = (vorhanden.match(/\r\n/g) || []).length;
+    const lf = (vorhanden.match(/(?<!\r)\n/g) || []).length;
+    if (crlf > lf) ausgabe = content.replace(/\r?\n/g, "\r\n");
+  }
+  // Unveraenderte Dateien nicht anfassen: sonst wandert die mtime und git meldet Arbeit,
+  // die es nicht gab.
+  if (vorhanden === ausgabe) {
+    console.log(`  unveraendert: ${file.padEnd(18)} ${(ausgabe.length / 1024).toFixed(1)} KB`);
+    continue;
+  }
+  fs.writeFileSync(ziel, ausgabe, "utf8");
+  console.log(`  geschrieben: ${file.padEnd(18)} ${(ausgabe.length / 1024).toFixed(1)} KB`);
 }
 
 // Vollstaendigkeitskontrolle direkt beim Erzeugen: jedes Modul deklariert per
