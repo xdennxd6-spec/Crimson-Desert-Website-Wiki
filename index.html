@@ -60,6 +60,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://static0.fextralifeimages.com">
 <link rel="preconnect" href="https://cdn.questlog.gg">
+<link rel="preload" as="script" href="data/d01-weapons.js">
+<link rel="preload" as="script" href="data/d02-crafting.js">
+<link rel="preload" as="script" href="data/d03-main-quests.js">
+<link rel="preload" as="script" href="data/d04-armor-imgs.js">
+<link rel="preload" as="script" href="data/d05-fac-data.js">
+<link rel="preload" as="script" href="data/d06-items.js">
+<link rel="preload" as="script" href="data/d07-patches.js">
+<link rel="preload" as="script" href="data/d08-ruins-data.js">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 <style>
 /* ============================================================
@@ -1952,7 +1960,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .lm-fo{margin-bottom:16px}
 .lm-fo-hd{font-family:var(--f-mono);font-size:var(--fs-9);color:var(--brass);text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px;display:flex;align-items:center;gap:6px}
 .lm-fo-fig{margin:0 0 9px;border:1.5px solid var(--iron-gall);border-radius:10px;overflow:hidden;background:var(--vellum-deep);box-shadow:3px 3px 0 var(--paper-shadow)}
-.lm-fo-img{display:block;width:100%;height:auto;max-height:330px;object-fit:cover;object-position:center}
+.lm-fo-img{display:block;width:100%;height:auto;max-height:330px;aspect-ratio:16/9;object-fit:cover;object-position:center}
 .lm-fo-cred{font-family:var(--f-mono);font-size:var(--fs-8-5);color:var(--iron-soft);opacity:.75;padding:5px 9px;border-top:1px solid var(--line);background:var(--vellum);letter-spacing:.03em}
 .lm-fo-cred a{color:var(--brass);text-decoration:none}
 .lm-fo-cred a:hover{text-decoration:underline}
@@ -1997,6 +2005,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .pet-card-img{width:80px;height:80px;object-fit:contain;background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:12px;filter:grayscale(.15) contrast(1.03)}
 .pet-card-ph{width:80px;height:80px;background:var(--vellum-hi);border:1px solid var(--iron-gall);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:42px;line-height:1;filter:grayscale(.15) contrast(1.03)}
 .pet-card-name{font-size:12px;color:var(--iron-gall);font-weight:600;text-align:center;line-height:1.3}
+.pet-card-variant{font-family:var(--f-mono);font-size:var(--fs-9);color:var(--iron-soft);text-align:center;line-height:1.3}
 .pet-card-food{font-size:var(--fs-11);color:var(--brass);text-align:center;line-height:1.3}
 .pet-card-food-lbl{font-family:var(--f-mono);font-size:var(--fs-8-5);color:var(--iron-soft);text-align:center;text-transform:uppercase;letter-spacing:.08em;margin-bottom:-4px}
 #legendary-pet-guide .boss-img-wrap{border-radius:12px}
@@ -2674,9 +2683,14 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <h2>Crimson Desert Wiki &amp; Guide-Dashboard</h2>
     <p>Dieses interaktive Wiki zu <strong>Crimson Desert</strong> (Pearl Abyss) benötigt JavaScript für das volle Dashboard. Die wichtigsten Guides sind aber auch als eigenständige Seiten verfügbar:</p>
     <ul>
-      <li><a href="/bosse">Alle Bosse — Komplette Boss-Datenbank</a></li>
-      <li><a href="/waffen">Alle Waffen — Waffen-Datenbank</a></li>
-      <li><a href="/true-ending">True Ending — Checkliste &amp; Guide</a></li>
+      <li><a href="/bosse">Bosse</a></li>
+      <li><a href="/bestiarium">Bestiarium</a></li>
+      <li><a href="/waffen">Waffen</a></li>
+      <li><a href="/ruestungen">Rüstungen</a></li>
+      <li><a href="/crafting">Crafting</a></li>
+      <li><a href="/side-quests">Nebenquests</a></li>
+      <li><a href="/trophaeen">Trophäen</a></li>
+      <li><a href="/true-ending">True Ending</a></li>
     </ul>
   </div>
 </noscript>
@@ -2689,7 +2703,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 <!-- Easter Egg: Umbras Geheimtagebuch -->
 <div id="ee-overlay" role="dialog" aria-modal="true" aria-label="Easter Egg" style="display:none" onclick="if(event.target===this)closeEE()">
   <div id="ee-box">
-    <button class="ee-close" onclick="closeEE()">✕</button>
+    <button class="ee-close" onclick="closeEE()" aria-label="Schließen">✕</button>
     <div class="ee-quill">🖋</div>
     <div class="ee-title">Umbras Geheimtagebuch</div>
     <div class="ee-subtitle">Streng vertraulich · Nicht für Kliff bestimmt</div>
@@ -2741,7 +2755,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 <!-- Location modal -->
 <div id="loc-modal" class="loc-modal-overlay" role="dialog" aria-modal="true" aria-label="Fundort-Details" style="display:none" onclick="if(event.target===this){this.style.display='none';if(typeof modalFocusClose==='function')modalFocusClose();}">
   <div class="loc-modal-box">
-    <button class="loc-modal-close" onclick="document.getElementById('loc-modal').style.display='none';modalFocusClose()">✕</button>
+    <button class="loc-modal-close" onclick="document.getElementById('loc-modal').style.display='none';modalFocusClose()" aria-label="Schließen">✕</button>
     <div class="loc-modal-type" id="lm-type"></div>
     <div class="loc-modal-name" id="lm-name"></div>
     <div class="loc-modal-src" id="lm-src"></div>
@@ -2758,7 +2772,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 <div id="core-vid-float"><video autoplay muted loop playsinline></video></div>
 <div id="mount-float-preview"><img id="mfp-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" onerror="_fexFb(this)"><div id="mfp-label"></div></div>
 <!-- Mount in-game screenshot modal -->
-<div id="mount-ingame-modal" role="dialog" aria-modal="true" aria-label="Mount-Details" onclick="if(event.target===this)closeMountModal()">
+<div id="mount-ingame-modal" role="dialog" aria-modal="true" aria-labelledby="mim-name" onclick="if(event.target===this)closeMountModal()">
   <div class="mim-box">
     <img class="mim-img" id="mim-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" onerror="_fexFb(this)">
     <div class="mim-footer">
@@ -2863,7 +2877,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <label for="si">Koordinate suchen</label>
     <div class="finder-in">
       <span class="fi-sym" aria-hidden="true">&#9906;</span>
-      <input id="si" type="search" name="wiki-suche" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-label="Wiki durchsuchen" placeholder="Bosse, Waffen, Quests, Orte..." oninput="doSearch(this.value)">
+      <input id="si" type="search" name="wiki-suche" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Bosse, Waffen, Quests, Orte..." oninput="doSearch(this.value)">
       <span class="kbd-hint" title="Ctrl+K oder ⌘K zum Fokussieren">Ctrl K</span>
     </div>
     <span id="scnt" role="status" aria-live="polite"></span>
@@ -4112,6 +4126,7 @@ function lsJson(key,fallback){
     return fallback;
   }
 }
+function lsSet(key,val){try{localStorage.setItem(key,val);return true;}catch(e){console.warn('lsSet',key,e);try{_errToast('Fortschritt konnte nicht gespeichert werden — privater Modus oder Speicher voll.');}catch(_){}return false;}}
 // Globale Fehler-Auffangnetze: Seite soll nie kommentarlos kaputt wirken
 function _errToast(msg){
   const t=document.getElementById('toast');
@@ -4192,7 +4207,7 @@ function _fexFb(el){
 // ===== THEMES =====
 function setTheme(t){
   document.documentElement.setAttribute('data-theme',t);
-  localStorage.setItem('cd_theme',t);
+  lsSet('cd_theme',t);
   document.querySelectorAll('.theme-btn[data-theme-set]').forEach(b=>{
     b.classList.toggle('active',b.dataset.themeSet===t);
   });
@@ -4500,7 +4515,7 @@ function saveBossRating(name,rating){
   const r=loadBossRatings();
   if(rating&&rating>0&&rating<=5)r[name]=rating;
   else delete r[name];
-  localStorage.setItem('cd_boss_ratings',JSON.stringify(r));
+  lsSet('cd_boss_ratings',JSON.stringify(r));
 }
 function setBossRating(name,rating){
   saveBossRating(name,rating);
@@ -4546,7 +4561,7 @@ function bumpBossAttempt(name,delta){
   const a=loadBossAttempts();
   const v=Math.max(0,(a[name]||0)+delta);
   if(v)a[name]=v; else delete a[name];
-  localStorage.setItem('cd_boss_attempts',JSON.stringify(a));
+  lsSet('cd_boss_attempts',JSON.stringify(a));
   document.querySelectorAll('.bd-attempts[data-att-for="'+name.replace(/"/g,'&quot;')+'"]').forEach(el=>{
     const val=el.querySelector('.bd-att-val'); if(val)val.textContent=v;
     el.classList.toggle('has-att',v>0);
@@ -4848,9 +4863,9 @@ function secretsTab(id){
 
 
 function loadFrTracker(){return lsJson('cd_fr_tracker',{});}
-function saveFrTracker(d){localStorage.setItem('cd_fr_tracker',JSON.stringify(d));}
+function saveFrTracker(d){lsSet('cd_fr_tracker',JSON.stringify(d));}
 function loadCrTracker(){return lsJson('cd_cr_tracker',{});}
-function saveCrTracker(d){localStorage.setItem('cd_cr_tracker',JSON.stringify(d));}
+function saveCrTracker(d){lsSet('cd_cr_tracker',JSON.stringify(d));}
 
 function _trackerSet(kind,region,val){
   const cap=(kind==='fr'?FRAGMENT_REGIONS:CRESSET_REGIONS).find(r=>r.key===region)?.cap||0;
@@ -5326,7 +5341,7 @@ function renderSecrets(){
 
 // ===== FAVORITEN-SYSTEM (universal) =====
 function loadFavs(){return lsJson('cd_favs',{});}
-function saveFavs(d){localStorage.setItem('cd_favs',JSON.stringify(d));}
+function saveFavs(d){lsSet('cd_favs',JSON.stringify(d));}
 function isFav(kind,name){
   const f=loadFavs();
   return !!(f[kind]&&f[kind].includes(name));
@@ -5429,7 +5444,7 @@ function trackRecent(entry){
   let r=loadRecent().filter(x=>!(x.kind===entry.kind&&x.name===entry.name));
   r.unshift(entry);
   r=r.slice(0,8);
-  localStorage.setItem('cd_recent',JSON.stringify(r));
+  lsSet('cd_recent',JSON.stringify(r));
   renderRecentSidebar();
 }
 function renderRecentSidebar(){
@@ -5531,7 +5546,7 @@ function saveBuildPreset(){
     saved:Date.now()
   };
   builds.unshift(newBuild);
-  localStorage.setItem('cd_saved_builds',JSON.stringify(builds));
+  lsSet('cd_saved_builds',JSON.stringify(builds));
   if(nameInput)nameInput.value='';
   renderSavedBuilds();
   // Show micro-toast
@@ -5541,7 +5556,7 @@ function saveBuildPreset(){
 function deleteSavedBuild(id){
   if(!confirm('Diesen Build löschen?'))return;
   const builds=loadSavedBuilds().filter(b=>b.id!==id);
-  localStorage.setItem('cd_saved_builds',JSON.stringify(builds));
+  lsSet('cd_saved_builds',JSON.stringify(builds));
   renderSavedBuilds();
 }
 function loadSavedBuild(id){
@@ -5709,7 +5724,7 @@ function checkAchievements(silent){
     }catch(e){/* skip */}
   });
   if(next.length!==prev.length){
-    localStorage.setItem('cd_ach_unlocked',JSON.stringify(next));
+    lsSet('cd_ach_unlocked',JSON.stringify(next));
     if(!silent)newly.forEach(showAchToast);
   }
   return next;
@@ -5803,7 +5818,7 @@ if(_origSetTheme){
   window.setTheme=function(t){
     _origSetTheme(t);
     const seen=lsJson('cd_themes_seen',[]);
-    if(!seen.includes(t)){seen.push(t);localStorage.setItem('cd_themes_seen',JSON.stringify(seen));checkAchievements();}
+    if(!seen.includes(t)){seen.push(t);lsSet('cd_themes_seen',JSON.stringify(seen));checkAchievements();}
   };
 }
 
@@ -5940,7 +5955,7 @@ function saveBossNote(name,text){
   const n=loadBossNotes();
   if(text&&text.trim())n[name]=text.trim();
   else delete n[name];
-  localStorage.setItem('cd_boss_notes',JSON.stringify(n));
+  lsSet('cd_boss_notes',JSON.stringify(n));
 }
 function toggleBossNote(name,btn){
   const card=btn.closest('.card');
@@ -6185,7 +6200,7 @@ function showSec(id, opts){
   if(id==='achievements'&&typeof renderAchievements==='function')renderAchievements();
   if(id==='secrets'){
     if(!localStorage.getItem('cd_secrets_visited')){
-      localStorage.setItem('cd_secrets_visited','1');
+      lsSet('cd_secrets_visited','1');
       if(typeof checkAchievements==='function')checkAchievements();
       if(typeof renderAchievements==='function')renderAchievements();
     }
@@ -6205,7 +6220,7 @@ function showSec(id, opts){
     });
   }
   if(id==='weapons'&&typeof renderWeapons==='function')renderWeapons();
-  localStorage.setItem('cd_sec',id);
+  lsSet('cd_sec',id);
   if(!opts.skipUrl)_writeUrlState(true);
   // Schliesse Sidebar auf Mobile nach Klick
   if(typeof closeSheet==='function')closeSheet();
@@ -6277,6 +6292,14 @@ function _petCardImg(p){
   if(src)return `<img class="pet-card-img" src="${src}" alt="${p.name.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="pet-card-ph" style="display:none">${emoji}</div>`;
   return `<div class="pet-card-ph">${emoji}</div>`;
 }
+// Nur echte Farb- und Musterangaben aus dem Dateinamen anzeigen. Die Asset-Nummern
+// (z.B. cat_domestic_30024) sind interne IDs, sagen dem Leser nichts und bleiben weg —
+// lieber kein Untertitel als einer, der wie Datenmuell aussieht.
+function petVariant(p){
+  const m=(p.icon||'').match(/(?:^|_)(yellow|white|black|bicolor|tricolor|brown|striped)(?=_)/i);
+  if(!m)return '';
+  return m[1].replace(/^./,c=>c.toUpperCase());
+}
 function renderPets(filter){
   _petFilter=filter||_petFilter;
   const filterRow=document.getElementById('pet-filter-row');
@@ -6288,7 +6311,7 @@ function renderPets(filter){
   if(counts.critter)filters.push({k:'critter',l:'Kleintiere'});
   filterRow.innerHTML=filters.map(f=>`<button class="pet-filter-btn${_petFilter===f.k?' active':''}" onclick="renderPets('${f.k}')">${f.l}</button>`).join('');
   const list=_petFilter==='all'?PETS:PETS.filter(p=>p.type===_petFilter);
-  grid.innerHTML=list.map(p=>`<div class="pet-card">${_petCardImg(p)}<div class="pet-card-name">${p.name}</div><div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food||'—'}</div></div>`).join('');
+  grid.innerHTML=list.map(p=>{const variant=petVariant(p);return `<div class="pet-card">${_petCardImg(p)}<div class="pet-card-name">${p.name}</div>${variant?`<div class="pet-card-variant">${variant}</div>`:''}<div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food||'—'}</div></div>`;}).join('');
 }
 
 // ===== LEGENDÄRE BEGLEITER — FREISCHALT-GUIDE (Iron Eagle, seit 2026-07-01) =====
@@ -6669,7 +6692,7 @@ const doSearch=_debounce(_doSearchImpl,120);
 
 // ===== BOSSES =====
 function loadBossDone(){return lsJson('cd_bosses',[]);}
-function saveBossDone(a){localStorage.setItem('cd_bosses',JSON.stringify(a));updateStats();}
+function saveBossDone(a){lsSet('cd_bosses',JSON.stringify(a));updateStats();}
 // Throttled side-effects nach Boss-Done — verhindert Render-Stuttering bei schnellen Klicks
 const _afterBossAction=_throttle(()=>{
   if(typeof refreshSectionStats==='function')refreshSectionStats();
@@ -6838,7 +6861,7 @@ function printCheatSheet(){
 // ===== SPOILER HORIZON (nach Kapitel) =====
 function loadSpoilerChapter(){return parseInt(localStorage.getItem('cd_spoiler_chapter')||'0',10)||0;}
 function setSpoilerChapter(v){
-  localStorage.setItem('cd_spoiler_chapter',String(parseInt(v,10)||0));
+  lsSet('cd_spoiler_chapter',String(parseInt(v,10)||0));
   renderBosses();
   if(typeof renderChapters==='function')renderChapters();
   if(typeof renderMQ==='function')renderMQ();
@@ -7300,7 +7323,7 @@ function renderCrafting(){
 // ===== TRUE ENDING =====
 function loadTE(){return lsJson('cd_te',[])}
 function saveTE(a){
-  localStorage.setItem('cd_te',JSON.stringify(a));
+  lsSet('cd_te',JSON.stringify(a));
   if(window._authUser){
     window._syncProgress(a).catch(()=>{});
   }
@@ -7343,7 +7366,7 @@ function toggleTE(id){
 
 // ===== SIDE-QUEST ABHAKEN (lokal, cd_sq_done) =====
 function loadSQ(){return lsJson('cd_sq_done',[])}
-function saveSQ(a){localStorage.setItem('cd_sq_done',JSON.stringify(a));if(typeof updateStats==='function')updateStats();if(typeof renderOverview==='function')renderOverview();}
+function saveSQ(a){lsSet('cd_sq_done',JSON.stringify(a));if(typeof updateStats==='function')updateStats();if(typeof renderOverview==='function')renderOverview();}
 function toggleSQ(key,el){
   let d=loadSQ();
   const now=!d.includes(key);
@@ -8018,7 +8041,7 @@ function updateStats(){
 
 // ===== MISSABLES DATA =====
 function loadMissDone(){return lsJson('cd_ms',[]);}
-function saveMissDone(a){localStorage.setItem('cd_ms',JSON.stringify(a));}
+function saveMissDone(a){lsSet('cd_ms',JSON.stringify(a));}
 function toggleMissable(id){
   let d=loadMissDone();
   d=d.includes(id)?d.filter(x=>x!==id):[...d,id];
@@ -8028,7 +8051,7 @@ function toggleMissable(id){
 
 // ===== GREYMANE =====
 function loadGM(){return lsJson('cd_gm',[]);}
-function saveGM(a){localStorage.setItem('cd_gm',JSON.stringify(a));updateStats();}
+function saveGM(a){lsSet('cd_gm',JSON.stringify(a));updateStats();}
 function toggleGM(id){
   let d=loadGM();
   d=d.includes(id)?d.filter(x=>x!==id):[...d,id];
@@ -8140,7 +8163,7 @@ function renderSanctumChecklist(){
 
 // ===== WEAPON CHECKLIST =====
 function loadWepDone(){return lsJson('cd_wep',[]);}
-function saveWepDone(a){localStorage.setItem('cd_wep',JSON.stringify(a));updateStats();}
+function saveWepDone(a){lsSet('cd_wep',JSON.stringify(a));updateStats();}
 function toggleWep(name){
   let d=loadWepDone();
   d=d.includes(name)?d.filter(x=>x!==name):[...d,name];
@@ -8404,6 +8427,7 @@ function _mimSrcLbl(t){const el=document.querySelector('#mount-ingame-modal .mim
 function openMountIG(name){
   const url=MOUNT_INGAME_IMGS[name];if(!url)return;
   document.getElementById('mim-img').src=url;
+  document.getElementById('mim-img').alt=name;
   document.getElementById('mim-name').textContent=name;
   _mimSrcLbl('In-Game Screenshot');
   document.getElementById('mount-ingame-modal').classList.add('show');
@@ -8505,15 +8529,15 @@ function importProgress(input){
       if(data.version===2&&data.storage&&typeof data.storage==='object'){
         // v2: alle cd_*-Keys wiederherstellen
         Object.keys(data.storage).forEach(k=>{
-          if(k.startsWith('cd_')&&typeof data.storage[k]==='string')localStorage.setItem(k,data.storage[k]);
+          if(k.startsWith('cd_')&&typeof data.storage[k]==='string')lsSet(k,data.storage[k]);
         });
       }else{
         // v1-Fallback: nur die 5 klassischen Datenarten
         if(Array.isArray(data.bosses))saveBossDone(data.bosses);
-        if(Array.isArray(data.trueEnding)){localStorage.setItem('cd_te',JSON.stringify(data.trueEnding));}
+        if(Array.isArray(data.trueEnding)){lsSet('cd_te',JSON.stringify(data.trueEnding));}
         if(Array.isArray(data.greymane))saveGM(data.greymane);
         if(Array.isArray(data.weapons))saveWepDone(data.weapons);
-        if(data.attempts&&typeof data.attempts==='object')localStorage.setItem('cd_boss_attempts',JSON.stringify(data.attempts));
+        if(data.attempts&&typeof data.attempts==='object')lsSet('cd_boss_attempts',JSON.stringify(data.attempts));
       }
       const t=document.getElementById('toast');
       t.textContent='Fortschritt importiert! Seite wird neu geladen …';
@@ -8682,7 +8706,7 @@ function postComment(sec){
   const t=new Date().toLocaleString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
   const arr=lsJson('cd_cmt_'+sec,[]);
   arr.push({u,m,t});
-  localStorage.setItem('cd_cmt_'+sec,JSON.stringify(arr));
+  lsSet('cd_cmt_'+sec,JSON.stringify(arr));
   inp.value='';
   renderComments(sec);
   document.getElementById('cl-'+sec)?.scrollTo({top:9999,behavior:'smooth'});
@@ -8731,8 +8755,8 @@ async function initVisitorCount(){
   const day=_vsBerlinDay();
   const tKey="cd_vt", dKey="cd_vd_"+day;
   if(newSess){
-    localStorage.setItem(tKey, _vsInt(localStorage.getItem(tKey))+1);
-    localStorage.setItem(dKey, _vsInt(localStorage.getItem(dKey))+1);
+    lsSet(tKey, _vsInt(localStorage.getItem(tKey))+1);
+    lsSet(dKey, _vsInt(localStorage.getItem(dKey))+1);
   }
   _vsSet("sv-total",  _vsFmt(Math.max(1,_vsInt(localStorage.getItem(tKey)))));
   _vsSet("sv-today",  _vsFmt(Math.max(1,_vsInt(localStorage.getItem(dKey)))));
@@ -8756,8 +8780,8 @@ async function initVisitorCount(){
   const apply=(d)=>{
     // Server-Wahrheit anzeigen UND in localStorage spiegeln (besserer Fallback
     // beim naechsten Mal). Online wird bei min. 1 gehalten.
-    if(Number.isFinite(d.total)) { _vsSet("sv-total", _vsFmt(d.total)); localStorage.setItem(tKey,d.total); }
-    if(Number.isFinite(d.today)) { _vsSet("sv-today", _vsFmt(d.today)); localStorage.setItem(dKey,d.today); }
+    if(Number.isFinite(d.total)) { _vsSet("sv-total", _vsFmt(d.total)); lsSet(tKey,d.total); }
+    if(Number.isFinite(d.today)) { _vsSet("sv-today", _vsFmt(d.today)); lsSet(dKey,d.today); }
     if(Number.isFinite(d.online)){ _vsSet("sv-online", _vsFmt(Math.max(1,d.online))); }
   };
 
@@ -8809,7 +8833,7 @@ function renderWitches(){
           <div class="witch-icon-title">${w.name}</div>
           <div class="witch-icon-sub">${w.chapter}</div>
         </div>
-        <button class="map-pin-btn" style="margin-top:0;padding:4px 9px;font-size:var(--fs-10)" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.location)}','Hexe')">📍</button>
+        <button class="map-pin-btn" style="margin-top:0;padding:4px 9px;font-size:var(--fs-10)" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.location)}','Hexe')">${foBtn(w.name)}</button>
       </div>
       <div class="witch-body">
         <div class="witch-loc">📍 ${w.location}</div>
@@ -8914,7 +8938,7 @@ function renderChapters(){
 function toggleChDone(num){
   let d=lsJson('cd_ch_done',[]);
   d=d.includes(num)?d.filter(n=>n!==num):[...d,num];
-  localStorage.setItem('cd_ch_done',JSON.stringify(d));
+  lsSet('cd_ch_done',JSON.stringify(d));
   renderChapters();
   if(typeof renderQuestHero==='function'&&document.getElementById('quest-hero'))renderQuestHero();
   if(typeof updateStats==='function')updateStats();
@@ -9105,7 +9129,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const _rec=JSON.parse(localStorage.getItem('cd_recent')||'[]');
     if(Array.isArray(_rec)){
       const _clean=_rec.filter(x=>!_mailRe.test((x&&x.name)||''));
-      if(_clean.length!==_rec.length)localStorage.setItem('cd_recent',JSON.stringify(_clean));
+      if(_clean.length!==_rec.length)lsSet('cd_recent',JSON.stringify(_clean));
     }
     const _uq=_readUrlState().q;
     if(_uq&&_mailRe.test(_uq))history.replaceState(null,'',location.pathname+location.search);
@@ -9427,7 +9451,7 @@ async function _loadServerProgress() {
     if (Array.isArray(data.checkedItems) && data.checkedItems.length > 0) {
       const local = lsJson('cd_te', []);
       const merged = Array.from(new Set([...data.checkedItems, ...local]));
-      localStorage.setItem('cd_te', JSON.stringify(merged));
+      lsSet('cd_te', JSON.stringify(merged));
       if (typeof renderTE === 'function') renderTE();
       if (merged.length > data.checkedItems.length) {
         window._syncProgress(merged).catch(() => {});
@@ -9574,8 +9598,9 @@ window.submitAuth = async () => {
   } catch (_) {}
 })();
 </script>
+<style>@media(max-width:480px){#guide-links{line-height:1.8}}</style>
 <nav id="guide-links" aria-label="Guide-Seiten" style="text-align:center;padding:1rem;font-size:.85rem;opacity:.7">
-  <a href="/bosse">Alle Bosse</a> · <a href="/waffen">Alle Waffen</a> · <a href="/true-ending">True Ending</a>
+  <a href="/bosse">Bosse</a> · <a href="/bestiarium">Bestiarium</a> · <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/crafting">Crafting</a> · <a href="/side-quests">Nebenquests</a> · <a href="/trophaeen">Trophäen</a> · <a href="/true-ending">True Ending</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>
 <script>

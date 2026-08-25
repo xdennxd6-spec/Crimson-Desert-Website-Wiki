@@ -727,13 +727,29 @@ function buildBosse() {
     .sort((a, b) => a.chapter - b.chapter || a.name.localeCompare(b.name));
   const world = BOSSES.filter((b) => b.chapter == null)
     .sort((a, b) => a.name.localeCompare(b.name));
-  const body = `
+  // FAQ-Zutaten fuer diese Seite. buildBosse() ist kein seo-parts-Modul und hat
+  // deshalb kein ZAHLEN(ctx); die Werte werden hier lokal aus BOSSES/story/world
+  // abgeleitet, exakt nach demselben Muster wie ZAHLEN() in scripts/seo-parts/*.mjs.
+  const zahlen = {
+    anzahl: BOSSES.length,
+    story: story.length,
+    welt: world.length,
+    letztesKapitel: Math.max(...story.map((b) => b.chapter)),
+    mitabyssgear: BOSSES.filter((b) => has(b.drop_abyss_gear)).length,
+    mitschwaeche: BOSSES.filter((b) => has(b.weakness)).length,
+  };
+  const faq = faqFuer("bosse").map((f, i) => ({
+    frage: zahlenEinsetzen(f.frage, zahlen, `faq.json → bosse[${i}].frage`),
+    antwort: zahlenEinsetzen(f.antwort, zahlen, `faq.json → bosse[${i}].antwort`),
+  }));
+  let body = `
 <a class="cta" href="/#sec-bosses">Interaktive Boss-Übersicht öffnen &rarr;</a>
 <p class="note">Mit Filter nach Region/Kapitel, Such- und Abhak-Funktion in der vollständigen App.</p>
 <h2>Story-Bosse (nach Kapitel, ${story.length})</h2>
 <div class="grid">${story.map(bossArticle).join("\n")}</div>
 <h2>Welt- &amp; Fraktionsbosse (${world.length})</h2>
 <div class="grid">${world.map(bossArticle).join("\n")}</div>`;
+  if (faq.length) body += "\n" + faqSektion(faq);
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
@@ -748,6 +764,7 @@ function buildBosse() {
       },
     ],
   };
+  if (faq.length) jsonld["@graph"].push(faqPageLd(faq));
   return pageShell({
     slugName: "bosse",
     title: `Alle ${BOSSES.length} Bosse in Crimson Desert: Liste & Strategien`,
@@ -783,6 +800,15 @@ function buildWaffen() {
     (byType[t] ||= []).push(w);
   }
   const types = Object.keys(byType).sort((a, b) => a.localeCompare(b));
+  const zahlen = {
+    anzahl: WEAPONS.length,
+    typen: types.length,
+    mitatk: WEAPONS.filter((w) => has(w.atk)).length,
+  };
+  const faq = faqFuer("waffen").map((f, i) => ({
+    frage: zahlenEinsetzen(f.frage, zahlen, `faq.json → waffen[${i}].frage`),
+    antwort: zahlenEinsetzen(f.antwort, zahlen, `faq.json → waffen[${i}].antwort`),
+  }));
   const sections = types.map((t) => {
     const rows = byType[t].sort((a, b) => a.name.localeCompare(b.name)).map(weaponRow).join("\n");
     return `<h2>${esc(t)} (${byType[t].length})</h2>
@@ -791,10 +817,11 @@ function buildWaffen() {
 <tbody>${rows}</tbody>
 </table></div>`;
   }).join("\n");
-  const body = `
+  let body = `
 <a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
-<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>: Eine Kartierung aller ${WEAPONS.filter((w) => has(w.atk)).length} Waffen mit ATK gegen die Refinement-Tabellen von Fextralife (Stand 11.08.2026) zeigt, dass hier der höchste dokumentierte Wert steht — bei Kampfwaffen also die Refinement-Endstufe +10. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl.</p>
+<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>: Eine Kartierung aller ${WEAPONS.filter((w) => has(w.atk)).length} Waffen mit ATK gegen die Refinement-Tabellen von Fextralife (Stand 11.08.2026) zeigt, dass hier der höchste dokumentierte Wert steht — bei Kampfwaffen also die Refinement-Endstufe +10. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
 ${sections}`;
+  if (faq.length) body += "\n" + faqSektion(faq);
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
@@ -806,6 +833,7 @@ ${sections}`;
       },
     ],
   };
+  if (faq.length) jsonld["@graph"].push(faqPageLd(faq));
   return pageShell({
     slugName: "waffen",
     title: `Alle ${WEAPONS.length} Waffen in Crimson Desert: Werte & Fundorte`,

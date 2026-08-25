@@ -128,5 +128,41 @@
       "frage": "Wie verpasse ich keine Nebenquests in Crimson Desert?",
       "antwort": "Arbeite jede Region möglichst vollständig ab, bevor du die Hauptgeschichte weiterspielst. Nutze die Übersicht besonders für die {{verpassbar|wort}} verpassbaren Quests und kontrolliere offene Aufgaben vor wichtigen Wendepunkten."
     }
+  ],
+  "bosse": [
+    {
+      "frage": "Wie viele Bosse gibt es in Crimson Desert?",
+      "antwort": "Die Boss-Übersicht führt {{anzahl}} Bosse: {{story}} Story-Bosse, sortiert nach Kapitel, und {{welt}} optionale Welt- und Fraktionsbosse ohne festes Kapitel."
+    },
+    {
+      "frage": "Welcher ist der letzte Boss in Crimson Desert?",
+      "antwort": "In der Kapitel-Sortierung der Übersicht steht Umbra (Final) an letzter Stelle: die wahre Drachenform im dritten Teil des Finale-Gauntlets aus Kapitel {{letztesKapitel}}, während der Quest Blinding Darkness."
+    },
+    {
+      "frage": "Was droppt ein Boss in Crimson Desert?",
+      "antwort": "Die Übersicht führt zu jedem Boss mehrere mögliche Beutefelder: einen Waffen-Drop und eine Abyss-Fähigkeit, das Abyss-Gear. {{mitabyssgear}} der {{anzahl}} Bosse haben einen dokumentierten Abyss-Gear-Drop; steht bei einem Feld ein Gedankenstrich, ist dazu kein belastbarer Wert erfasst."
+    },
+    {
+      "frage": "Haben alle Bosse in Crimson Desert eine Elementschwäche?",
+      "antwort": "Nein. Nur bei {{mitschwaeche}} der {{anzahl}} Bosse ist eine Schwäche dokumentiert, etwa ein Element wie Feuer. Bei den übrigen steht im Feld Schwäche ein Gedankenstrich, weil dazu keine belastbare Quelle vorliegt. Eine eigene Kampf-Strategie hat dagegen jeder der {{anzahl}} Bosse."
+    }
+  ],
+  "waffen": [
+    {
+      "frage": "Wie viele Waffen gibt es in Crimson Desert?",
+      "antwort": "Die Waffen-Datenbank listet {{anzahl}} Waffen, gruppiert in {{typen}} Waffentypen, unter anderem Schwerter, Zweihänder, Dolche, Bögen, Feuerwaffen und Schilde."
+    },
+    {
+      "frage": "Was bedeutet die ATK-Zahl in der Waffentabelle?",
+      "antwort": "Die ATK-Spalte zeigt nicht den Fundzustand einer Waffe, sondern den höchsten dokumentierten Wert: Bei Kampfwaffen ist das die letzte Stufe der Waffenveredelung, das Refinement. Eine frisch gefundene, ungeschliffene Waffe liegt darunter. {{mitatk}} der {{anzahl}} Waffen haben überhaupt einen erfassten ATK-Wert, bei den übrigen fehlt ein belastbarer Quellenwert."
+    },
+    {
+      "frage": "Welche Waffentypen gibt es in Crimson Desert?",
+      "antwort": "Die Datenbank gruppiert die {{anzahl}} Waffen in {{typen}} Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Hellebarden, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde."
+    },
+    {
+      "frage": "Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?",
+      "antwort": "Abyss-Slots sind die Fassungen, in die eine Hexe gegen Silber Abyss-Kräfte einsetzt. Ihre Zahl hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Die Slot-Zahl ist unabhängig vom Refinement-Grad der Waffe."
+    }
   ]
 }

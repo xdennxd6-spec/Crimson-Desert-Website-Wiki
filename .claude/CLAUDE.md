@@ -97,7 +97,7 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 - **Build:** läuft automatisch im Netlify-Build (`netlify.toml` command = `npm install && node scripts/gen-seo.mjs`) → Seiten bleiben bei jedem Deploy synchron mit den Daten. Nach Änderungen an den Datenstrukturen lokal neu generieren, damit die committeten Seiten aktuell sind.
 - **Verifikation:** `node scripts/verify-seo.mjs` (Exit 1 bei Fehlern) prüft Soll-Mengen (dynamisch aus index.html), eindeutige Titel/Descriptions, Längen, canonical, valides JSON-LD, Deep-Links, Existenz aller referenzierten lokalen Bilder, sitemap-Einträge.
 - **URLs:** Netlify Pretty URLs ist standardmäßig AN → `bosse.html` wird unter `/bosse` ausgeliefert; canonical/sitemap/Links nutzen die `.html`-losen Pfade (`/bosse`, `/waffen`, `/true-ending`). CTAs springen via `/#sec-...` zurück in die App.
-- **OFFEN / nach erstem Deploy prüfen:** ob die Live-Site `/bosse` mit 200 ausliefert oder auf `/bosse/` (Trailing Slash) 301-weiterleitet. Falls Trailing-Slash erzwungen wird, canonical/sitemap in `gen-seo.mjs` auf `/bosse/`-Form umstellen und neu generieren. Außerdem 3 Seiten in der Google Search Console einreichen.
+- **ERLEDIGT / geprüft am 24.08.2026:** Die Live-Site `/bosse` liefert 200; `/bosse/` antwortet mit 301 auf `/bosse`. Canonical und Sitemap verwenden bereits die passende Form ohne Slash, daher ist keine Umstellung nötig. Offen bleibt die Einreichung der acht Seiten in der Google Search Console.
 
 ## Tech Stack
 - Static Single-Page HTML/JS/CSS App (kein Build-Step nötig)
