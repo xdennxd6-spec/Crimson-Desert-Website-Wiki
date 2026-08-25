@@ -10,6 +10,31 @@
 //          aus einem built_in-Core wie Crit Rate Lv.2 am selben Datensatz)
 // Die beiden Felder folgen also NICHT derselben Regel. Wer crit aus einer +10-Tabelle
 // abschreibt, traegt systematisch zu hohe Stufen ein.
+//
+// NACHTRAG 26.08.2026 — drei Fallen, an denen bereits Werte falsch entstanden sind:
+//   1) Fextralife rendert die eingebauten Abyss-Cores mit DEMSELBEN Markup wie ein
+//      Statfeld, direkt unter der Infobox. "Critical Rate Lv.1" dort ist der Sockel
+//      Insight I, nicht der Waffenstat. Auf questlog.gg stehen die Cores sauber getrennt
+//      unter "Abyss Gear Sockets" — das ist der verlaessliche Gegentest. Fuenf Bestands-
+//      werte sind so entstanden und wurden am 26.08. auf null zurueckgesetzt.
+//   2) "Kein Crit-Feld auf der Quellseite" heisst NICHT crit 0. crit:0 behauptet einen
+//      belegten Nullwert und braucht ein Feld, das woertlich 0 bzw. Lv.0 zeigt.
+//      Vier Bestandswerte ohne jede Feldgrundlage wurden am 26.08. auf null gesetzt.
+//   3) game8-Listenseiten zeigen die ENDSTUFE (Falconne Pistol dort "Attack: 33 ATK,
+//      Critical Rate: Lv.2" — 33 ist der +10-Wert). Als Crit-Quelle unbrauchbar.
+//
+// QUELLEN fuer crit, in dieser Reihenfolge:
+//   questlog.gg/crimson-desert/en/db/item/<id> — stellt den +0-Wert direkt neben die
+//     Spannweite ("Critical Rate|Lv.1|Lv.1 - Lv.2"), Verwechslung praktisch ausgeschlossen.
+//     Name-zu-ID-Mapping: crimson-wiki-werkstatt/archiv/Crimson-Desert-Icons/questlog-items.json
+//   crimsondesert.gaming.tools/items/<slug> — Refinement-Tabelle +0 bis +10. ACHTUNG: der
+//     obere Statblock steht per Default auf +10; nur die untere +0-Zeile zaehlt. Slugs sind
+//     interne Codenamen ohne Bezug zum Anzeigenamen, Identifikation ueber den title.
+//   Fextralife nur als Zweitquelle, wegen Falle 1.
+//
+// SKALA: die +0-Stufen liegen bisher zwischen 0 und 6. Die Endstufen gehen weiter, bei
+// Dolchen bis Lv.10. Ein Wert ueber 6 in diesem Feld ist deshalb fast sicher eine
+// versehentlich eingetragene Endstufe, kein Ausreisser.
 // Fehlt auf einer Quellseite das Critical-Rate-Statfeld, heisst das NICHT crit 0 — Gegenbeleg
 // ist Tauria Curved Sword: kein Crit-Feld auf Fextralife, im Bestand crit 3. Dann null lassen.
 const BOSSES=[
@@ -120,29 +145,29 @@ const WEAPONS=[
   // FIX 2026-06-14 (Pi): slots aus verifizierter Abyss-Core-Regel gefuellt (1H=3, 2H=5, Ranged=5, Shield=2, Dagger=0; Quellen gamingbolt/crimsondesert.app/game8, gegen kuratierte Werte validiert - 0 Ausnahmen in diesen Typen). Mehrdeutige Typen (Blunt/Axe, Greatsword, Knuckles) bewusst null gelassen.
   // HINWEIS 2026-06-02 (Fakten-Audit Waffen — Quellen Fextralife/game8/KeenGamer/PowerPyx/WccfTech): Refine = +0..+10 (Stufen 5-10 brauchen Abyss-Artefakte), NICHT 1-5. Abyss-Slots erstellt eine Hexe gegen Silber (max. 3 bei 1H, bis 5 bei 2H/Fernkampf), NICHT via Refine. Basis-atk ist bewusst flach (~±3) und low-signal; Crit + Abyss-Gear sind die echten Differenzierer — konkrete atk/crit-Zahlen sind teils unbelegt. A.T.A.G. ist ein Mech/Mount (Kap. 10), keine Waffenklasse (unten neutralisiert). 1H-Waffen mit slots>3 sind falsch.
   {name:"Tauria Curved Sword",type:"Curved Sword (1H)",atk:12,crit:3,slots:3,source:"Drop: Draven the Crowcaller (Kap. 5)",built_in:"Crow's Pursuit, Gale I, Wind Slash",notes:"Meta-Waffe Kap. 5 bis Endgame"},
-  {name:"Darkbringer Greatsword",type:"Greatsword (2H)",atk:22,crit:3,slots:5,source:"White Wastes Sanctuary NW Pailune — Schwert aus Skelett-Maul ziehen (kein Boss!)",built_in:"Ator's Orb",notes:"Refine 4 (gefunden), AS 1, Crit Lv3. Bei Max-Refine +10 steigt atk auf 39 (Fextralife). Frostcursed Set empfohlen."},
+  {name:"Darkbringer Greatsword",type:"Greatsword (2H)",atk:22,crit:2,slots:5,source:"White Wastes Sanctuary NW Pailune — Schwert aus Skelett-Maul ziehen (kein Boss!)",built_in:"Ator's Orb",notes:"Refine 4 (gefunden), AS 1, Crit Lv3. Bei Max-Refine +10 steigt atk auf 39 (Fextralife). Frostcursed Set empfohlen."},
   {name:"Vow of the Dead King",type:"Halberd (2H)",atk:16,crit:3,slots:5,source:"Frostveiled Castle Ruins N-Pailune (Citadel of the Forgotten Kingdom) — Treppe → Keller → Feuer-Korridor → Stone-Earth Vein → Kerze → Sarg",built_in:"+4% vs Humanoid/Walker/Mighty Foe",notes:"2H-Halberd. Audit 2026-06-02: atk 35→16 (game8); frühere Angabe 'höchster Crit im Spiel' entfernt — das ist Goblin King's Treasure (Crit Lv5). Audit 2026-06-15: slots 3→5 (2H=5); die '3' = 3 vorinstallierte Gears (Bloodbane/Primalbane/Malicebane), NICHT die Slot-Kapazität (game8 590395: 5 total, 3 belegt, 2 frei)."},
   {name:"Mining Knuckledrill",type:"Knuckles (auch Pickaxe)",atk:11,crit:0,slots:3,source:"Drop: Marni's Excavatron (Karin Quarry)",built_in:"Mining Mastery +10% Yield",notes:"Funktioniert als Pickaxe mit Auto-Pickup. Audit 2026-06-02: slots 5→3 (Knuckles = 1H, max 3)."},
   {name:"Twisted Verdict",type:"Greatsword (2H)",atk:28,crit:1,slots:5,source:"Drop: Corrupted Caliburn (Kap. 12)",built_in:"Abyssal Rays, Attack 1, Attack 2",notes:"BIS Endgame 2H. Audit 2026-06-02: slots 3→5 (2H, game8); Refine bis +10 (nicht 5)."},
-  {name:"Melted Ambition",type:"Sword (1H)",atk:17,crit:0,slots:3,source:"Drop: Myurdin (Kap. 7)",built_in:"Groundsurge",notes:""},
-  {name:"Sword of the Lord",type:"Sword (1H)",atk:13,crit:0,slots:3,source:"Drop: Kailok the Hornsplitter (Kap. 2)",built_in:"Wind Slash",notes:"Bestes Früh-Game Schwert."},
+  {name:"Melted Ambition",type:"Sword (1H)",atk:17,crit:null,slots:3,source:"Drop: Myurdin (Kap. 7)",built_in:"Groundsurge",notes:""},
+  {name:"Sword of the Lord",type:"Sword (1H)",atk:13,crit:null,slots:3,source:"Drop: Kailok the Hornsplitter (Kap. 2)",built_in:"Wind Slash",notes:"Bestes Früh-Game Schwert."},
   {name:"Crow Whisperer",type:"Staff (2H)",atk:15,crit:2,slots:5,source:"Drop: Hexe Marie (Kap. 9)",built_in:"–",notes:""},
-  {name:"Vessel of Dark Pursuit",type:"Greatsword (2H)",atk:16,crit:1,slots:5,source:"Sanctum of Absolution: Bossdrop von Antumbra's Sword",built_in:"Wound of Darkness",notes:""},
-  {name:"Hollow Visage",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Truhe Dawn Cave (Wasserfall Mt. of Frozen Souls, Stab-Skill nötig)",built_in:"Insight I, Gale I, Destruction I",notes:"Frühe gute Option."},
-  {name:"Survivor's Solitude",type:"Sword (1H)",atk:12,crit:1,slots:3,source:"Death's Grip Cavern NW Lake Kharonso (Stab hinter Wasserfall)",built_in:"–",notes:""},
+  {name:"Vessel of Dark Pursuit",type:"Greatsword (2H)",atk:16,crit:null,slots:5,source:"Sanctum of Absolution: Bossdrop von Antumbra's Sword",built_in:"Wound of Darkness",notes:""},
+  {name:"Hollow Visage",type:"Sword (1H)",atk:10,crit:null,slots:3,source:"Truhe Dawn Cave (Wasserfall Mt. of Frozen Souls, Stab-Skill nötig)",built_in:"Insight I, Gale I, Destruction I",notes:"Frühe gute Option."},
+  {name:"Survivor's Solitude",type:"Sword (1H)",atk:12,crit:null,slots:3,source:"Death's Grip Cavern NW Lake Kharonso (Stab hinter Wasserfall)",built_in:"–",notes:""},
   {name:"Hwando",type:"Greatsword/Katana (2H)",atk:19,crit:1,slots:5,source:"Lioncrest Manor (Annex), Hernand",built_in:"Insight I, Stamina Transference, Destruction I",notes:"Bestes Early-Weapon vor Kap. 2-Ende. Audit 2026-06-02: type 'Verschiedenes'→2H-Katana; atk 16→19 (thegamer)."},
-  {name:"Brass Rose Rapier",type:"Rapier",atk:9,crit:2,slots:3,source:"Silverbrook Ruins N City of Delesyia (kleiner Turm, unterste Ebene)",built_in:"AS 1",notes:"Audit 2026-06-02: frei aufsammelbar, NICHT Damiane-exklusiv beim Holen und NICHT nach Kap. 8 verpassbar (Fextralife). Rapier-Klasse. Audit 2026-06-30: atk 27→9 (game8/Fextralife)."},
+  {name:"Brass Rose Rapier",type:"Rapier",atk:9,crit:1,slots:3,source:"Silverbrook Ruins N City of Delesyia (kleiner Turm, unterste Ebene)",built_in:"AS 1",notes:"Audit 2026-06-02: frei aufsammelbar, NICHT Damiane-exklusiv beim Holen und NICHT nach Kap. 8 verpassbar (Fextralife). Rapier-Klasse. Audit 2026-06-30: atk 27→9 (game8/Fextralife)."},
   {name:"Alabaster Curved Sword",type:"Curved Sword",atk:16,crit:null,slots:3,source:"Forgotten City, Sandkrater an der Grenze Forebearer's Barrens / Urdavah: Memory Fragment auslösen, dann in der Kratermitte ausgraben (Visione-Helm nötig)",built_in:"–",notes:"Refine 2."},
   {name:"Staglord's Shield",type:"Shield",atk:null,crit:0,slots:2,source:"Drop: Saigord the Staglord (Side-Boss, Hernand, Icemoor Castle Ruins)",built_in:"–",notes:"Einziger Side-Boss-Schild. Schilde nutzen DEF statt ATK/Crit."},
   // ── Swords (1H) ──
   {name:"Sword of the Wolf",type:"Sword (1H)",atk:12,crit:null,slots:3,source:"Standard-Startwaffe (Kliff)",built_in:"–",notes:"Default-Schwert ab Spielstart."},
   {name:"The Grove's Thorn",type:"Sword (1H)",atk:17,crit:null,slots:3,source:"Bossdrop Kearush the Slayer, Bankettsaal Hernand Castle (Kapitel 4)",built_in:"Spirit Transference",notes:""},
   {name:"Wolf's Fang",type:"Sword (1H)",atk:18,crit:null,slots:3,source:"Kap. 7-Gebiet",built_in:"Speed Lv.2, Malicebane",notes:"Quelle des Malicebane-Cores (+Boss-Dmg)."},
-  {name:"Acria Sword",type:"Sword (1H)",atk:20,crit:2,slots:3,source:"Stellen Manor (Rätsel lösen)",built_in:"Crit Rate Lv.2",notes:""},
+  {name:"Acria Sword",type:"Sword (1H)",atk:20,crit:1,slots:3,source:"Stellen Manor (Rätsel lösen)",built_in:"Crit Rate Lv.2",notes:""},
   {name:"Sword of Greed",type:"Sword (1H)",atk:10,crit:1,slots:3,source:"Golden Greed-Gebiet / Drop",built_in:"–",notes:""},
   {name:"Frozen Soul",type:"Sword (1H)",atk:11,crit:1,slots:3,source:"Skoghorn, The Argent Peaks (West-Pailune), Skelett am Grund einer Grube",built_in:"–",notes:""},
-  {name:"Lightningblade of Greed",type:"Sword (1H)",atk:30,crit:2,slots:3,source:"Drop: Sizlek the Insatiable (Ruined Chapel — Bloodied Sanctum, Hernandian Parish of Solumen); laut Datamine zusätzlich käuflich im House Wells Equipment Shop bei Malchor (nur eine Quelle)",built_in:"Destruction I, Swift I, Swift II (drei ab Werk belegte Sockel) — trotz des Namens KEIN Blitzschaden",notes:"Auch als 'Greedy Lightningblade' geführt; am 22.08.2026 als dieselbe Waffe belegt und zusammengeführt (gleicher Flavour-Text, gleiche Sockel-Belegung, gleicher Boss, dazu je eine Negativprobe in beide Richtungen). Welcher Name der kanonische ist, bleibt offen: die aktuellste Datamine-Quelle und zwei Guides sagen 'of Greed', Fextralife 'Greedy'. Atk 30 und Crit Lv2 sind die Endwerte bei +10; im Grundzustand Atk 10 und Crit Lv1. Der frühere Eintrag nannte 'Lightning Affinity' — das ist widerlegt, das Blitz-Thema gehört zum Abyss Gear Storm Fang aus der Krone desselben Loots. Audit 2026-06-03 hatte den Boss-Drop bereits richtig, aber diese drei Fehler stehen lassen."},
-  {name:"Royal Oath",type:"Sword (1H)",atk:11,crit:1,slots:3,source:"Hernand Palast-Questlinie",built_in:"–",notes:""},
+  {name:"Lightningblade of Greed",type:"Sword (1H)",atk:30,crit:1,slots:3,source:"Drop: Sizlek the Insatiable (Ruined Chapel — Bloodied Sanctum, Hernandian Parish of Solumen); laut Datamine zusätzlich käuflich im House Wells Equipment Shop bei Malchor (nur eine Quelle)",built_in:"Destruction I, Swift I, Swift II (drei ab Werk belegte Sockel) — trotz des Namens KEIN Blitzschaden",notes:"Auch als 'Greedy Lightningblade' geführt; am 22.08.2026 als dieselbe Waffe belegt und zusammengeführt (gleicher Flavour-Text, gleiche Sockel-Belegung, gleicher Boss, dazu je eine Negativprobe in beide Richtungen). Welcher Name der kanonische ist, bleibt offen: die aktuellste Datamine-Quelle und zwei Guides sagen 'of Greed', Fextralife 'Greedy'. Atk 30 und Crit Lv2 sind die Endwerte bei +10; im Grundzustand Atk 10 und Crit Lv1. Der frühere Eintrag nannte 'Lightning Affinity' — das ist widerlegt, das Blitz-Thema gehört zum Abyss Gear Storm Fang aus der Krone desselben Loots. Audit 2026-06-03 hatte den Boss-Drop bereits richtig, aber diese drei Fehler stehen lassen."},
+  {name:"Royal Oath",type:"Sword (1H)",atk:11,crit:null,slots:3,source:"Hernand Palast-Questlinie",built_in:"–",notes:""},
   // ── Rapiere ──
   {name:"Fallen Kingdom's Rapier",type:"Rapier",atk:27,crit:null,slots:3,source:"Icemoor Castle Ruins, West-Hernand: liegt am Fass neben der Truhe, nicht darin",built_in:"Speed Lv.2",notes:"atk-Korrektur 11.08.2026: stand auf 18, das in der Fextralife-Refinement-Tabelle (9, 10, 11, 13, 15, 17, 19, 21, 23, 25, 27) in keiner Zeile vorkommt; Built-ins sind nur Attack Speed Lv.2/Lv.3, kein Attack-Bonus. Auf die Endstufe 27 gesetzt. Restvorbehalt: Führte die Waffe einen nicht ausgewiesenen Attack+1-Bonus, wäre 18 als Stufe +5 (17) erklärbar — zwei unabhängige Abrufe listen keinen solchen Bonus."},
   {name:"White Wind Rapier",type:"Rapier",atk:9,crit:null,slots:3,source:"Delesyia Region",built_in:"–",notes:""},
@@ -153,7 +178,7 @@ const WEAPONS=[
   {name:"Ator's Finger",type:"Dagger",atk:12,crit:5,slots:0,source:"Ator-Boss-Gebiet",built_in:"–",notes:""},
   {name:"Dagger of Dark Pursuit",type:"Dagger",atk:16,crit:5,slots:0,source:"Sanctum of Solace, südwestlich Pailune City (Truhe hinter der Drehwand)",built_in:"Wound of Darkness",notes:""},
   // ── Greatswords (2H) ──
-  {name:"Righteous Verdict",type:"Greatsword (2H)",atk:23,crit:3,slots:5,source:"Demeniss Ancestors' Ruins (Exploration)",built_in:"Speed Lv.2, Gale II, Destruction I, Insight I",notes:"Früh erreichbar, sehr stark."},
+  {name:"Righteous Verdict",type:"Greatsword (2H)",atk:23,crit:2,slots:5,source:"Demeniss Ancestors' Ruins (Exploration)",built_in:"Speed Lv.2, Gale II, Destruction I, Insight I",notes:"Früh erreichbar, sehr stark."},
   {name:"Ignir",type:"Greatsword (2H)",atk:24,crit:null,slots:5,source:"Ende Kapitel 7 (automatisch)",built_in:"Destruction I x2, Insight I",notes:"Audit 2026-06-15: slots 3→5 (2H=5); die 3 entsprach nur den 3 built_in-Gears."},
   {name:"Frozen Anguish",type:"Greatsword (2H)",atk:25,crit:null,slots:5,source:"Spire of Frost (Truhe)",built_in:"Stamina Transference, Gale I, Destruction I",notes:"Audit 2026-06-15: slots 3→5 (2H=5: 3 vorbelegt + 2 offen; questlog-Datamine sockets=5)."},
   // ── Spears / Halberds ──
@@ -170,9 +195,9 @@ const WEAPONS=[
   {name:"Rhonid Large Shield",type:"Shield",atk:null,crit:0,slots:2,source:"Lioncrest Manor, Obergeschoss (verschlossener Raum, Schlüssel nötig)",built_in:"Speed Lv.1",notes:"Grosser Schild (kein Shield Bash)."},
   {name:"Shield of Conviction",type:"Shield",atk:null,crit:0,def:29,slots:2,source:"Calphade Church Turm (Truhe)",built_in:"Aegis I, Fortitude I",notes:""},
   // ── Bows (Ranged) ──
-  {name:"Noble Man's Bow",type:"Bow (Ranged)",atk:34,crit:1,slots:5,source:"Early Exploration",built_in:"–",notes:"Beste Wahl für Infinite-Arrows-Build."},
+  {name:"Noble Man's Bow",type:"Bow (Ranged)",atk:34,crit:null,slots:5,source:"Early Exploration",built_in:"–",notes:"Beste Wahl für Infinite-Arrows-Build."},
   {name:"Golden-Knotted Ancestral Bow",type:"Bow (Ranged)",atk:11,crit:null,slots:5,source:"Early-Game Exploration",built_in:"–",notes:""},
-  {name:"Warspike Bow",type:"Bow (Ranged)",atk:30,crit:2,slots:5,source:"Exploration",built_in:"Crit Rate Lv.2",notes:"Gut für Crit-Scaling-Builds."},
+  {name:"Warspike Bow",type:"Bow (Ranged)",atk:30,crit:1,slots:5,source:"Exploration",built_in:"Crit Rate Lv.2",notes:"Gut für Crit-Scaling-Builds."},
   {name:"Grey Wolf Bow",type:"Bow (Ranged)",atk:10,crit:null,slots:5,source:"Grey Wolf-Gebiet",built_in:"–",notes:""},
   // ── Firearms ──
   {name:"A.T.A.G. (All-Terrain Armored Gear)",type:"A.T.A.G. Weapon",atk:null,crit:null,slots:null,source:"Mech/Mount — freischaltbar Kap. 10 (Pflicht-Quest 'Hidden Ace'), Region Gorthak/Delesyia. KEINE ausrüstbare Waffe.",built_in:"–",notes:"Audit 2026-06-02: 7 erfundene A.T.A.G.-'Waffen' (atk-Werte + Source 'Krall Foundry') neutralisiert. Bordwaffen (Minigun/Flammenwerfer/Raketen/Anti-Air/Jetpack) sind fest am Mech. Quelle: powerpyx.com (Robot Mount)."},
@@ -191,7 +216,7 @@ const WEAPONS=[
   {name:"Chillfallen Sword",type:"Sword (1H)",atk:30,crit:null,slots:3,source:"Pailune / Eis-Region"},
   {name:"Red Needle",type:"Sword (1H)",atk:30,crit:1,slots:3,source:"Exploration / Händler Crimson Desert"},
   {name:"Aeserion Sword",type:"Sword (1H)",atk:34,crit:null,slots:3,source:"Crafting / Aeserion-Material"},
-  {name:"Knightlord's Sword",type:"Sword (1H)",atk:30,crit:1,slots:3,source:"Drop: Knightlord-Feinde / Fort"},
+  {name:"Knightlord's Sword",type:"Sword (1H)",atk:30,crit:null,slots:3,source:"Drop: Knightlord-Feinde / Fort"},
   {name:"Divine Echoes Bow",type:"Bow (Ranged)",atk:33,crit:null,slots:5,source:"Rockshard Valley Ruins (Truhe im bewachten Lager)"},
   {name:"Aeserion Bow",type:"Bow (Ranged)",atk:33,crit:null,slots:5,source:"Crafting / Aeserion-Material"},
   {name:"Demenissian Hero's Musket",type:"Firearm",atk:38,crit:1,slots:5,source:"Drop: Demeniss-Held-Feinde / Demeniss"},
@@ -319,7 +344,7 @@ const WEAPONS=[
   {name:"Bismuth Cannon",type:"Hand Cannon",atk:34,crit:null,slots:5,source:"Bismuth Ore-Crafting (Stoneback Crabs unter Anvil Hill)"},
   {name:"Sword of Wayward Woods",type:"Sword (1H)",atk:22,crit:null,slots:3,source:"Drop von Mistwood Hunters (kein belegter Truhen-Fundort)"},
   {name:"Beehive Club",type:"Blunt/Axe",atk:18,crit:null,slots:3,source:"Drop: Bienenstock-Feinde / Wald Hernand"},
-  {name:"Electro-Mecha Longsword",type:"Greatsword (2H)",atk:43,crit:0,slots:4,source:"Delesyia / Clockwork-Mecha-Drop"},
+  {name:"Electro-Mecha Longsword",type:"Greatsword (2H)",atk:43,crit:null,slots:4,source:"Delesyia / Clockwork-Mecha-Drop"},
   {name:"Lightning Greathammer",type:"Blunt/Axe",atk:27,crit:null,slots:null,source:"Blitz-Region / Crafting"},
   {name:"Soul Spear",type:"Halberd / Spear (2H)",atk:40,crit:null,slots:5,source:"Antumbra Ritual Grounds, The Argent Peaks"},
   {name:"Blazing Spear",type:"Halberd / Spear (2H)",atk:22,crit:null,slots:5,source:"Flammenregion / Delesyia"},
