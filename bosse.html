@@ -126,7 +126,11 @@ border:1px solid var(--line);border-radius:var(--radius)}
 text-transform:uppercase;letter-spacing:.06em}
 .pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
 background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
-color:var(--ink);font-family:var(--f-sans);font-size:14px}
+/* --f-sans gibt es nicht: :root deklariert --f-display, --f-body und --f-mono.
+   Das Suchfeld fiel dadurch auf die Browser-Standardschrift zurueck statt auf
+   die Seitenschrift (seit Einbau der Seitensuche am 22.08.2026, alle Seiten).
+   Gefunden am 26.08. beim Bau der zwei neuen Seiten. */
+color:var(--ink);font-family:var(--f-body);font-size:14px}
 .pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
 .pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
 .jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
@@ -182,12 +186,31 @@ td.grade{font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;text-t
 span.tr-when{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;letter-spacing:.04em;color:var(--ink-dim);border:1px solid var(--line);white-space:nowrap}
 p.tr-how{margin:7px 0 0;font-size:13.5px;color:var(--ink-dim);max-width:70ch}
-p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid var(--red);padding-left:9px;max-width:70ch}</style>
+p.tr-acht{margin:5px 0 0;font-size:13px;color:var(--ink);border-left:2px solid var(--red);padding-left:9px;max-width:70ch}
+span.unsure{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
+font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#1a1204;background:var(--amber)}
+p.chapmeta{font-size:13.5px;color:var(--ink-dim);background:var(--panel-2);border:1px solid var(--line);
+border-radius:10px;padding:10px 13px;margin:10px 0 0}
+p.chapmeta b{color:var(--ink-hi)}
+/* Aus index.html uebernommen: die Patch-Texte setzen diese beiden Variablen in
+   inline-style-Attributen voraus. Fehlen sie, verliert die Einordnung ihre
+   optische Absetzung. */
+:root{--gold:#e0a35a;--gdim:#c78f4e}
+p.pmeta{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint);
+letter-spacing:.04em;margin:6px 0 0}
+p.psize{font-size:13.5px;color:var(--ink-dim);background:var(--panel-2);border:1px solid var(--line);
+border-radius:10px;padding:11px 14px;margin:10px 0 0}
+h3.pcat{font-family:var(--f-mono);font-size:var(--fs-11-5);text-transform:uppercase;letter-spacing:.08em;
+color:var(--gold);margin:16px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+ul.plist{margin:0;padding-left:20px}
+ul.plist li{margin:5px 0}
+span.latest{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
+font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}</style>
 </head>
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse" aria-current="page">Bosse</a><a href="/bestiarium">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a></nav>
+  <nav><a href="/bosse" aria-current="page">Bosse</a><a href="/bestiarium">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests">Hauptquests</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/patch-notes">Patch-Notes</a></nav>
 </header>
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Bosse</nav>

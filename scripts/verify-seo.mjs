@@ -52,6 +52,13 @@ const N_TROPHIES = extract("TROPHIES").length;
 const ENEMIES = extract("ENEMIES");
 const N_ENEMIES = Object.values(ENEMIES).reduce((sum, arr) => sum + arr.length, 0);
 const N_SIDE_QUESTS = extract("SIDE_QUESTS").length;
+// NEU (26.08.2026): hauptquests.html und patch-notes.html. MAIN_QUESTS ist wie
+// ENEMIES nicht flach, sondern nach Kapiteln gruppiert -- deshalb Summe der
+// quests-Arrays statt .length, analog zu parts/hauptquests.mjs.
+const MAIN_QUESTS = extract("MAIN_QUESTS");
+const N_MAIN_QUESTS = MAIN_QUESTS.reduce((sum, c) => sum + c.quests.length, 0);
+const PATCHES = extract("PATCHES");
+const N_PATCHES = PATCHES.length;
 const allImgVals = [...Object.values(B), ...Object.values(W)];
 const absUrls = allImgVals.filter((v) => /^https?:/i.test(v));
 console.log(`\n[Bild-Maps] BOSS_IMGS=${Object.keys(B).length}, WEAPON_IMGS=${Object.keys(W).length}, absolute URLs=${absUrls.length}`);
@@ -76,6 +83,12 @@ const pages = {
   "crafting.html": { sec: "/#sec-crafting", count: { regex: /<tr>\s*<td/g, expected: N_CRAFTING, label: "Crafting-Zeilen" } },
   "bestiarium.html": { sec: "/#sec-bestiary", count: { regex: /<article class="card" id="enemy-/g, expected: N_ENEMIES, label: "Gegner-Karten" } },
   "side-quests.html": { sec: "/#sec-quests", count: { regex: /<tr id="sq-/g, expected: N_SIDE_QUESTS, label: "Nebenquest-Zeilen" } },
+  "hauptquests.html": { sec: "/#sec-quests", count: { regex: /<tr id="mq-/g, expected: N_MAIN_QUESTS, label: "Hauptquest-Zeilen" } },
+  // Die Patch-Seite zaehlt Meta-Zeilen statt Karten: sie wickelt bewusst kein
+  // <article> um einen Patch, damit die Seitensuche die 647 Einzelpunkte findet
+  // und nicht die 32 Patches (SEL nimmt den aeussersten Treffer). Begruendung
+  // steht im Kopf von parts/patch-notes.mjs.
+  "patch-notes.html": { sec: "/#sec-patches", count: { regex: /<p class="pmeta" id="patch-/g, expected: N_PATCHES, label: "Patch-Meta-Zeilen" } },
 };
 const titles = new Set(), descs = new Set();
 const refImgPaths = new Set();
@@ -205,6 +218,13 @@ const ERLAUBTE_ZAHLEN = {
     ...["platinum", "gold", "silver", "bronze"].map((g) => zaehl(TROPHIES, (t) => t.grade === g))],
   "bestiarium.html": [N_ENEMIES, ...["wild", "kreaturen", "fraktionen"].map((k) => (ENEMIES[k] || []).length)],
   "side-quests.html": [N_SIDE_QUESTS, zaehl(SIDE_QUESTS, (q) => q.miss), new Set(SIDE_QUESTS.map((q) => q.region)).size],
+  "hauptquests.html": [N_MAIN_QUESTS, MAIN_QUESTS.length,
+    zaehl(MAIN_QUESTS.flatMap((c) => c.quests), (q) => q.miss),
+    zaehl(MAIN_QUESTS.flatMap((c) => c.quests), (q) => q.conf === "medium"),
+    zaehl(MAIN_QUESTS, (c) => c.boss)],
+  "patch-notes.html": [N_PATCHES,
+    PATCHES.reduce((n, p) => n + (p.features || []).length, 0),
+    PATCHES.reduce((n, p) => n + (p.features || []).reduce((m, f) => m + f.items.length, 0), 0)],
 };
 
 for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
@@ -234,7 +254,8 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
 // Seitensuche passiert und blieb ohne Browsertest unsichtbar.
 // Deshalb: jedes erzeugte Inline-Skript kompilieren, bevor es ausgeliefert wird.
 const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
-  "bestiarium", "side-quests", "trophaeen", "true-ending"];
+  "bestiarium", "side-quests", "trophaeen", "true-ending",
+  "hauptquests", "patch-notes"];
 for (const s of SEITEN_MIT_WERKZEUG) {
   const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
 
@@ -261,7 +282,8 @@ for (const s of SEITEN_MIT_WERKZEUG) {
 const sm = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 // NEU (8-Seiten-Erweiterung): alle 8 Seiten-URLs statt 3 (plus Startseite),
 // Reihenfolge wie im Kopf-Menue (siehe harness.mjs NAV).
-["/", "/bosse", "/waffen", "/ruestungen", "/crafting", "/bestiarium", "/side-quests", "/trophaeen", "/true-ending"].forEach((u) =>
+["/", "/bosse", "/waffen", "/ruestungen", "/crafting", "/bestiarium", "/side-quests", "/trophaeen", "/true-ending",
+ "/hauptquests", "/patch-notes"].forEach((u) =>
   ok(sm.includes(`<loc>https://crimson-desert-wiki.netlify.app${u}</loc>`), `sitemap enthaelt ${u}`));
 
 console.log(`\n${fail === 0 ? "ALLE CHECKS BESTANDEN" : fail + " CHECK(S) FEHLGESCHLAGEN"}`);

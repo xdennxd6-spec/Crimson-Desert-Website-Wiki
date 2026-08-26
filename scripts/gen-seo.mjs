@@ -28,6 +28,8 @@ import * as partCrafting from "./seo-parts/crafting.mjs";
 import * as partBestiarium from "./seo-parts/bestiarium.mjs";
 import * as partSideQuests from "./seo-parts/side-quests.mjs";
 import * as partTrophaeen from "./seo-parts/trophaeen.mjs";
+import * as partHauptquests from "./seo-parts/hauptquests.mjs";
+import * as partPatchNotes from "./seo-parts/patch-notes.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -92,6 +94,9 @@ const TROPHY_GRADES = extract("TROPHY_GRADES");
 const ENEMIES = extract("ENEMIES");
 const ENEMY_IMGS = extract("ENEMY_IMGS");
 const SIDE_QUESTS = extract("SIDE_QUESTS");
+// Seit 26.08.2026: Grundlage der Seiten hauptquests.html und patch-notes.html.
+const MAIN_QUESTS = extract("MAIN_QUESTS");
+const PATCHES = extract("PATCHES");
 
 // Icon-CDN der Crafting-Rezepte. Das icon-Feld in CRAFTING haelt nur den
 // Dateinamen; die vollstaendige URL ist CRAFT_CDN + icon. Spiegelt die
@@ -111,7 +116,8 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 
 // ── Seiten-Module + Navigation ───────────────────────────────────────────────
 // Reihenfolge hier = Reihenfolge in sitemap.xml.
-const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen];
+const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
+  partHauptquests, partPatchNotes];
 
 // Kopf-Menue aller acht Seiten. Thematisch gruppiert: erst Gegner, dann
 // Ausruestung, dann Herstellung, dann Quests, dann die Meta-Listen.
@@ -121,9 +127,11 @@ const NAV = [
   ["waffen", "Waffen"],
   ["ruestungen", "Rüstungen"],
   ["crafting", "Crafting"],
+  ["hauptquests", "Hauptquests"],
   ["side-quests", "Nebenquests"],
   ["trophaeen", "Trophäen"],
   ["true-ending", "True Ending"],
+  ["patch-notes", "Patch-Notes"],
 ];
 
 // Schutz gegen stille Inkonsistenz: jedes Modul muss im Menue auftauchen.
@@ -416,7 +424,11 @@ border:1px solid var(--line);border-radius:var(--radius)}
 text-transform:uppercase;letter-spacing:.06em}
 .pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
 background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
-color:var(--ink);font-family:var(--f-sans);font-size:14px}
+/* --f-sans gibt es nicht: :root deklariert --f-display, --f-body und --f-mono.
+   Das Suchfeld fiel dadurch auf die Browser-Standardschrift zurueck statt auf
+   die Seitenschrift (seit Einbau der Seitensuche am 22.08.2026, alle Seiten).
+   Gefunden am 26.08. beim Bau der zwei neuen Seiten. */
+color:var(--ink);font-family:var(--f-body);font-size:14px}
 .pagetools input[type=search]:focus{outline:2px solid var(--red);outline-offset:1px}
 .pagetools .pt-count{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
 .jump{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
@@ -988,7 +1000,7 @@ function baueModulSeite(p) {
 const CTX = {
   data: {
     ARMOR, ARMOR_IMGS, CRAFTING, TROPHIES, TROPHY_GRADES,
-    ENEMIES, ENEMY_IMGS, SIDE_QUESTS,
+    ENEMIES, ENEMY_IMGS, SIDE_QUESTS, MAIN_QUESTS, PATCHES,
   },
   // Redaktionelle Zusatztexte aus scripts/seo-content/. Bewusst getrennt von
   // "data": das hier ist kein Wiki-Datenbestand, sondern Seitentext. Fehlt eine

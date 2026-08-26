@@ -1,4 +1,40 @@
 {
+  "patch-notes": [
+    {
+      "frage": "Wie viele Patches gab es bisher für Crimson Desert?",
+      "antwort": "Das Archiv führt {{anzahl}} Patches mit zusammen {{punkte}} einzelnen Änderungen. Jeder Eintrag nennt Version und Datum und ist nach denselben Kategorien gegliedert wie die offiziellen Notes."
+    },
+    {
+      "frage": "Wo finde ich den aktuellsten Patch von Crimson Desert?",
+      "antwort": "Der neueste Patch steht ganz oben und ist als aktuell gekennzeichnet. Über die Sprungleiste am Seitenkopf erreichst du jede Version direkt, ohne die Seite durchblättern zu müssen."
+    },
+    {
+      "frage": "Was bedeuten die Hinweise in gedämpfter Schrift?",
+      "antwort": "Sie stammen nicht aus den offiziellen Notes, sondern ordnen ein, was dort offen bleibt: fehlende Bedingungen, unklare Formulierungen oder Unterschiede zwischen deutscher und englischer Fassung."
+    },
+    {
+      "frage": "Warum ein eigenes Archiv, wenn es offizielle Patch Notes gibt?",
+      "antwort": "Pearl Abyss überarbeitet Notes nachträglich und entfernt einzelne Punkte wieder. Diese Sammlung hält fest, was zum jeweiligen Zeitpunkt dokumentiert war, und macht die {{kategorien}} Kategorien über alle Versionen hinweg vergleichbar."
+    }
+  ],
+  "hauptquests": [
+    {
+      "frage": "Wie viele Hauptquests hat Crimson Desert?",
+      "antwort": "Die Hauptgeschichte umfasst {{anzahl}} Hauptquests, verteilt auf {{kapitel}} Kapitel von Prolog bis Epilog. Die Übersicht führt sie in Spielreihenfolge auf, jeweils mit Auslöser, Voraussetzung und Belohnung."
+    },
+    {
+      "frage": "Kann man in Crimson Desert Hauptquest-Inhalte verpassen?",
+      "antwort": "{{verpassbar|Wort}} Inhalte der Hauptgeschichte sind als verpassbar markiert. Erledige sie vor dem Abschluss des jeweiligen Kapitels, danach lässt sich die Gelegenheit im laufenden Durchgang nicht mehr nachholen."
+    },
+    {
+      "frage": "Welche Bosse gehören zur Hauptgeschichte von Crimson Desert?",
+      "antwort": "Zu {{bosse}} der {{kapitel}} Kapitel gehört mindestens ein Bosskampf. Er steht in der Kopfzeile des Kapitels, sodass sich die Kämpfe der Reihe nach vorbereiten lassen."
+    },
+    {
+      "frage": "Wie verlässlich sind die Angaben zu den Hauptquests?",
+      "antwort": "Die meisten Einträge stützen sich auf mehrere Quellen. Bei {{unsicher}} Quests ist die Lage dünner; diese tragen den Hinweis Quelle unsicher und sollten im Zweifel gegengeprüft werden."
+    }
+  ],
   "ruestungen": [
     {
       "frage": "Wo finde ich alle Rüstungsteile in Crimson Desert?",
