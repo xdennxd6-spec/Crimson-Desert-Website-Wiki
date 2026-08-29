@@ -59,6 +59,17 @@ const MAIN_QUESTS = extract("MAIN_QUESTS");
 const N_MAIN_QUESTS = MAIN_QUESTS.reduce((sum, c) => sum + c.quests.length, 0);
 const PATCHES = extract("PATCHES");
 const N_PATCHES = PATCHES.length;
+// NEU (29.08.2026): fraktionen.html und npcs.html. FAC_DATA ist wie MAIN_QUESTS
+// nach Ebenen gruppiert (Region -> Fraktion -> Quests), daher Summe aller
+// quests-Arrays statt .length. NPCS ist wie ENEMIES ein Objekt aus
+// Gruppen-Arrays (companions/allies/antagonists/merchants), daher Summe aller
+// Gruppenlaengen. Beides bewusst hier neu gerechnet und NICHT aus ZAHLEN() der
+// Module gezogen -- ein Fehler dort soll auffallen, nicht mitlaufen.
+const FAC_DATA = extract("FAC_DATA");
+const N_FAC_QUESTS = FAC_DATA.regions.reduce((sum, r) =>
+  sum + r.factions.reduce((m, f) => m + f.quests.length, 0), 0);
+const NPCS = extract("NPCS");
+const N_NPCS = Object.values(NPCS).reduce((sum, arr) => sum + arr.length, 0);
 const allImgVals = [...Object.values(B), ...Object.values(W)];
 const absUrls = allImgVals.filter((v) => /^https?:/i.test(v));
 console.log(`\n[Bild-Maps] BOSS_IMGS=${Object.keys(B).length}, WEAPON_IMGS=${Object.keys(W).length}, absolute URLs=${absUrls.length}`);
@@ -89,6 +100,12 @@ const pages = {
   // und nicht die 32 Patches (SEL nimmt den aeussersten Treffer). Begruendung
   // steht im Kopf von parts/patch-notes.mjs.
   "patch-notes.html": { sec: "/#sec-patches", count: { regex: /<p class="pmeta" id="patch-/g, expected: N_PATCHES, label: "Patch-Meta-Zeilen" } },
+  // NEU (29.08.2026): Regex und Label wortgleich aus COUNT_CHECK(ctx) in
+  // parts/fraktionen.mjs bzw. parts/npcs.mjs, "sec" aus deren DEEPLINK-Export.
+  // Die Fraktionsseite zaehlt Quest-Zeilen, nicht Fraktionen: eine Huelle je
+  // Fraktion wuerde die Seitensuche auf die Fraktion statt die Quest werfen.
+  "fraktionen.html": { sec: "/#sec-quests", count: { regex: /<tr id="fr-/g, expected: N_FAC_QUESTS, label: "Fraktionsquest-Zeilen" } },
+  "npcs.html": { sec: "/#sec-npcs", count: { regex: /<article class="card" id="npc-/g, expected: N_NPCS, label: "NPC-Karten" } },
 };
 const titles = new Set(), descs = new Set();
 const refImgPaths = new Set();
@@ -209,6 +226,13 @@ for (const datei of ["intros.json", "faq.json"]) {
 const ARMOR = extract("ARMOR"), CRAFTING = extract("CRAFTING");
 const TROPHIES = extract("TROPHIES"), SIDE_QUESTS = extract("SIDE_QUESTS");
 const zaehl = (arr, f) => arr.filter(f).length;
+// Gleiche Leer-Semantik wie has() in gen-seo.mjs, das parts/npcs.mjs fuer
+// "NPC ohne Region" benutzt. Bewusst hier nachgebaut statt importiert: der
+// Pruefer soll nicht denselben Helfer teilen wie der Erzeuger.
+const belegt = (v) => v != null && String(v).trim() !== "" && String(v).trim() !== "–" && String(v).trim() !== "-";
+const FAC_FACTIONS = FAC_DATA.regions.flatMap((r) => r.factions);
+const FAC_QUESTS = FAC_FACTIONS.flatMap((f) => f.quests);
+const NPCS_ALLE = Object.values(NPCS).flat();
 const ERLAUBTE_ZAHLEN = {
   "ruestungen.html": [N_ARMOR, ...["Torso", "Kopf", "Hände", "Schuhe", "Mantel"].map((t) => zaehl(ARMOR, (a) => a.type === t))],
   "crafting.html": [N_CRAFTING, ...["Elixir", "Food", "Kuku-Gadget"].map((c) => zaehl(CRAFTING, (x) => x.cat === c)),
@@ -225,6 +249,13 @@ const ERLAUBTE_ZAHLEN = {
   "patch-notes.html": [N_PATCHES,
     PATCHES.reduce((n, p) => n + (p.features || []).length, 0),
     PATCHES.reduce((n, p) => n + (p.features || []).reduce((m, f) => m + f.items.length, 0), 0)],
+  "fraktionen.html": [N_FAC_QUESTS, FAC_FACTIONS.length, FAC_DATA.regions.length,
+    zaehl(FAC_FACTIONS, (f) => f.isNew),
+    zaehl(FAC_QUESTS, (q) => q.conf === "medium" || q.conf === "low")],
+  "npcs.html": [N_NPCS, NPCS.companions.length, NPCS.allies.length,
+    NPCS.antagonists.length, NPCS.merchants.length,
+    zaehl(NPCS_ALLE, (n) => !belegt(n.region)),
+    zaehl(NPCS_ALLE, (n) => n.conf === "medium")],
 };
 
 for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
@@ -255,7 +286,7 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
 // Deshalb: jedes erzeugte Inline-Skript kompilieren, bevor es ausgeliefert wird.
 const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
   "bestiarium", "side-quests", "trophaeen", "true-ending",
-  "hauptquests", "patch-notes"];
+  "hauptquests", "patch-notes", "fraktionen", "npcs"];
 for (const s of SEITEN_MIT_WERKZEUG) {
   const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
 
@@ -280,11 +311,48 @@ for (const s of SEITEN_MIT_WERKZEUG) {
 
 // ── 5. sitemap.xml ───────────────────────────────────────────────────────────
 const sm = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
-// NEU (8-Seiten-Erweiterung): alle 8 Seiten-URLs statt 3 (plus Startseite),
-// Reihenfolge wie im Kopf-Menue (siehe harness.mjs NAV).
-["/", "/bosse", "/waffen", "/ruestungen", "/crafting", "/bestiarium", "/side-quests", "/trophaeen", "/true-ending",
- "/hauptquests", "/patch-notes"].forEach((u) =>
+// Alle Seiten-URLs (nicht nur die drei alten), plus Startseite. Reihenfolge wie
+// im Kopf-Menue von gen-seo.mjs (NAV); zuletzt am 29.08.2026 um /fraktionen und
+// /npcs ergaenzt.
+["/", "/bosse", "/bestiarium", "/waffen", "/ruestungen", "/crafting",
+ "/hauptquests", "/fraktionen", "/side-quests", "/trophaeen", "/true-ending",
+ "/npcs", "/patch-notes"].forEach((u) =>
   ok(sm.includes(`<loc>https://crimson-desert-wiki.netlify.app${u}</loc>`), `sitemap enthaelt ${u}`));
+
+// ── 6. Startseite verlinkt jede SEO-Seite ────────────────────────────────────
+// Warum es diesen Check gibt: hauptquests.html und patch-notes.html gingen am
+// 26.08.2026 live, wurden in index.html aber nie nachgetragen. Drei Tage lang
+// meldete verify-seo "ALLE CHECKS BESTANDEN", waehrend zwei Landingpages von der
+// Startseite aus unerreichbar waren -- fuer SEO-Seiten der teuerste stille Fehler.
+// Kein Gate sah es, weil index.html hier nur Datenquelle fuer extract() war.
+// index.html ist Handarbeit (siehe .claude/CLAUDE.md), der Generator kann die
+// Links nicht selbst setzen; deshalb muss die Pruefung sie einfordern.
+//
+// NAV wird als Text aus gen-seo.mjs gelesen statt importiert: ein Import wuerde
+// den Generator ausfuehren (Seiteneffekte, schreibt alle Seiten neu).
+const genSrc = fs.readFileSync(path.join(__dirname, "gen-seo.mjs"), "utf8");
+const navBlock = /const NAV = \[([\s\S]*?)\n\];/.exec(genSrc);
+ok(!!navBlock, "gen-seo.mjs: NAV-Liste lesbar");
+if (navBlock) {
+  const navSlugs = [...navBlock[1].matchAll(/\["([a-z0-9-]+)",/g)].map((m) => m[1]);
+  ok(navSlugs.length >= 8, `NAV enthaelt ${navSlugs.length} Seiten`);
+  const startseite = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  // Die zwei Stellen einzeln pruefen: die noscript-Liste traegt die Seiten fuer
+  // Crawler ohne JS, #guide-links ist die sichtbare Fusszeile. Eine allein reicht
+  // nicht -- fehlt die Fusszeile, sieht ein echter Leser die Seite nie.
+  // ALLE noscript-Bloecke zusammen, nicht nur den ersten: index.html traegt einen
+  // Font-Fallback-noscript im <head> und erst danach den mit der Seitenliste.
+  const noscript = [...startseite.matchAll(/<noscript>([\s\S]*?)<\/noscript>/g)]
+    .map((m) => m[1]).join("\n");
+  const guide = /<nav id="guide-links"[\s\S]*?<\/nav>/.exec(startseite);
+  ok(noscript.length > 0, "index.html: noscript-Block gefunden");
+  ok(!!guide, "index.html: Fusszeile #guide-links gefunden");
+  for (const slug of navSlugs) {
+    const href = `href="/${slug}"`;
+    ok(noscript.includes(href), `index.html noscript verlinkt /${slug}`);
+    ok(!!guide && guide[0].includes(href), `index.html #guide-links verlinkt /${slug}`);
+  }
+}
 
 console.log(`\n${fail === 0 ? "ALLE CHECKS BESTANDEN" : fail + " CHECK(S) FEHLGESCHLAGEN"}`);
 process.exit(fail === 0 ? 0 : 1);

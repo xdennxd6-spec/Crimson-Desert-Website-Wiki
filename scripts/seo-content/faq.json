@@ -200,5 +200,53 @@
       "frage": "Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?",
       "antwort": "Abyss-Slots sind die Fassungen, in die eine Hexe gegen Silber Abyss-Kräfte einsetzt. Ihre Zahl hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Die Slot-Zahl ist unabhängig vom Refinement-Grad der Waffe."
     }
+  ],
+  "fraktionen": [
+    {
+      "frage": "Wie viele Fraktionen und Fraktionsquests gibt es in Crimson Desert?",
+      "antwort": "Die Übersicht führt {{fraktionen}} Fraktionen in {{regionen}} Regionen mit insgesamt {{anzahl}} Fraktionsquests, jeweils mit eigener Tabelle für Auslöser, Voraussetzung und Belohnung."
+    },
+    {
+      "frage": "Wie schalte ich eine Fraktionskette in Crimson Desert frei?",
+      "antwort": "Jede Kette beginnt mit einer eigenen Startbedingung, meist ein bestimmter Kapitelfortschritt oder eine ansprechbare Figur an einem festen Ort; das steht im Feld Auslöser der ersten Quest. Jede weitere Quest setzt danach die vorherige als Voraussetzung, wie die Spalte Voraussetzung in der Tabelle zeigt."
+    },
+    {
+      "frage": "Was bringt Contribution bei Fraktionsquests in Crimson Desert?",
+      "antwort": "Manche Quest-Belohnungen vergeben zusätzlich zum Gegenstand Contribution-Punkte für die jeweilige Region, etwa Hernand Contribution bei mehreren Quests von House Roberts. Die genaue Punktzahl steht direkt im Feld Belohnung der einzelnen Quest; was die Punkte darüber hinaus bewirken, ist in den erfassten Daten nicht dokumentiert."
+    },
+    {
+      "frage": "Welche Region hat in Crimson Desert die meisten Fraktionsquests?",
+      "antwort": "Aktuell Hernand: Die Regionsüberschrift zeigt zu jeder der {{regionen}} Regionen direkt die Anzahl ihrer Fraktionsquests, sodass sich das jederzeit ohne feste Rangliste nachprüfen lässt."
+    },
+    {
+      "frage": "Woran erkenne ich neue oder unsicher belegte Fraktionseinträge?",
+      "antwort": "Auf der Seite tragen {{neu}} Fraktionen das Kennzeichen Neu erfasst, weil sie seit dem letzten großen Datenimport hinzugekommen sind. Bei {{unsicher}} Quests markiert zusätzlich ein Hinweis eine dünnere Quellenlage."
+    }
+  ],
+  "npcs": [
+    {
+      "frage": "Wer sind die NPCs in Crimson Desert?",
+      "antwort": "Die Übersicht führt {{anzahl}} NPCs in diesen Gruppen: {{begleiter}} Begleiter und spielbare Charaktere, {{verbuendete}} Verbündete und Quest-Geber, {{antagonisten}} Antagonisten und {{haendler}} Händler. Jeder Eintrag zeigt Rolle, nach Möglichkeit Region und einen Lore-Text zur Figur."
+    },
+    {
+      "frage": "Welche Begleiter sind in Crimson Desert spielbar?",
+      "antwort": "Alle {{begleiter}} Begleiter sind spielbar: Kliff von Anfang an als Protagonist, Damiane und Oongka jeweils ab einem bestimmten Kapitelfortschritt. Die genaue Bedingung steht in der Rolle-Zeile der Karte; bei Oongka nennt der Bio-Text zusätzlich den Sieg über Myurdin als Auslöser."
+    },
+    {
+      "frage": "Wo finde ich Händler in Crimson Desert?",
+      "antwort": "Die Gruppe Händler am Ende der Seite listet {{haendler}} Figuren mit Rolle und, soweit erfasst, ihrer Region. Öffne die Karte des gesuchten Händlers für Ort und Kurzbeschreibung."
+    },
+    {
+      "frage": "Wer sind die Antagonisten in Crimson Desert?",
+      "antwort": "Die Gruppe Antagonisten umfasst {{antagonisten}} Figuren, meist Anführer gegnerischer Gruppen wie der Black Bear Forces, der Lonely Jackals oder der Crow Brothers. Ihre Karte nennt Rolle und, soweit bekannt, Region."
+    },
+    {
+      "frage": "Warum fehlt bei manchen NPCs die Region?",
+      "antwort": "Bei {{ohneregion}} der {{anzahl}} NPCs ist keine Region erfasst, weil die vorliegenden Quellen sie nicht an einen festen Ort binden. Ihre Karte zeigt entsprechend keine Region-Zeile."
+    },
+    {
+      "frage": "Wie sicher sind die Angaben zu den NPCs?",
+      "antwort": "Die meisten der {{anzahl}} Einträge stützen sich auf eine als gesichert eingestufte Quellenlage. Bei {{teilsbelegt}} NPCs ist sie dünner; ihre Karte trägt dafür einen sichtbaren Hinweis."
+    }
   ]
 }

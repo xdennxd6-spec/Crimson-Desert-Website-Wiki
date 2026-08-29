@@ -3,7 +3,8 @@
 //
 // Ausgabe: bosse.html, waffen.html, true-ending.html (hier direkt gebaut)
 //          + ruestungen.html, crafting.html, bestiarium.html, side-quests.html,
-//            trophaeen.html (aus den Modulen in scripts/seo-parts/)
+//            trophaeen.html, hauptquests.html, fraktionen.html, patch-notes.html,
+//            npcs.html (aus den Modulen in scripts/seo-parts/)
 //          + sitemap.xml
 // Aufruf:  node scripts/gen-seo.mjs   (laeuft auch im Netlify-Build, s. netlify.toml)
 //
@@ -30,6 +31,8 @@ import * as partSideQuests from "./seo-parts/side-quests.mjs";
 import * as partTrophaeen from "./seo-parts/trophaeen.mjs";
 import * as partHauptquests from "./seo-parts/hauptquests.mjs";
 import * as partPatchNotes from "./seo-parts/patch-notes.mjs";
+import * as partFraktionen from "./seo-parts/fraktionen.mjs";
+import * as partNpcs from "./seo-parts/npcs.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -97,6 +100,16 @@ const SIDE_QUESTS = extract("SIDE_QUESTS");
 // Seit 26.08.2026: Grundlage der Seiten hauptquests.html und patch-notes.html.
 const MAIN_QUESTS = extract("MAIN_QUESTS");
 const PATCHES = extract("PATCHES");
+// Seit 29.08.2026: Grundlage der Seiten fraktionen.html und npcs.html.
+// FAC_DATA ist dreistufig ({regions:[{factions:[{quests:[...]}]}]}), NPCS ein
+// Objekt aus vier Gruppen-Arrays; die Module rechnen die Mengen selbst aus.
+// NPC_IMGS liegt vor NPC_IMGS_CDN in data/d07-patches.js — extract() nimmt den
+// ersten Treffer, "const NPC_IMGS_CDN" passt wegen des \s*=\s* nicht auf das
+// Muster fuer NPC_IMGS.
+const FAC_DATA = extract("FAC_DATA");
+const NPCS = extract("NPCS");
+const NPC_IMGS = extract("NPC_IMGS");
+const NPC_PAL = extract("NPC_PAL");
 
 // Icon-CDN der Crafting-Rezepte. Das icon-Feld in CRAFTING haelt nur den
 // Dateinamen; die vollstaendige URL ist CRAFT_CDN + icon. Spiegelt die
@@ -117,10 +130,15 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 // ── Seiten-Module + Navigation ───────────────────────────────────────────────
 // Reihenfolge hier = Reihenfolge in sitemap.xml.
 const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
-  partHauptquests, partPatchNotes];
+  partHauptquests, partFraktionen, partPatchNotes, partNpcs];
 
-// Kopf-Menue aller acht Seiten. Thematisch gruppiert: erst Gegner, dann
+// Kopf-Menue aller zwoelf Seiten. Thematisch gruppiert: erst Gegner, dann
 // Ausruestung, dann Herstellung, dann Quests, dann die Meta-Listen.
+// "fraktionen" steht zwischen Haupt- und Nebenquests, weil die App die
+// Fraktionen als dritten Tab innerhalb von sec-quests fuehrt (qt-mq -> qt-fac
+// -> qt-sq) und das Modul auf denselben Deeplink /#sec-quests zeigt.
+// "npcs" steht bei den Meta-Listen direkt vor den Patch-Notes; in index.html
+// liegt sec-npcs unmittelbar vor sec-patches.
 const NAV = [
   ["bosse", "Bosse"],
   ["bestiarium", "Bestiarium"],
@@ -128,9 +146,11 @@ const NAV = [
   ["ruestungen", "Rüstungen"],
   ["crafting", "Crafting"],
   ["hauptquests", "Hauptquests"],
+  ["fraktionen", "Fraktionen"],
   ["side-quests", "Nebenquests"],
   ["trophaeen", "Trophäen"],
   ["true-ending", "True Ending"],
+  ["npcs", "NPCs"],
   ["patch-notes", "Patch-Notes"],
 ];
 
@@ -420,6 +440,12 @@ font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align
 .pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
 border:1px solid var(--line);border-radius:var(--radius)}
 .pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+/* Ohne diese Zeile ist das [hidden] am Markup wirkungslos: Autoren-CSS schlaegt im
+   Kaskaden-Ursprung immer das [hidden]{display:none} des Browsers, unabhaengig von
+   Spezifitaet. Ohne JavaScript sah der Besucher sonst ein Suchfeld, das auf keine
+   Eingabe reagiert -- genau das Gegenteil der Absicht "ohne Skript bleibt die Seite
+   exakt wie ausgeliefert". Betraf alle Seiten, gefunden am 29.08.2026. */
+.pagetools .ptline[hidden]{display:none}
 .pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
 text-transform:uppercase;letter-spacing:.06em}
 .pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
@@ -633,8 +659,12 @@ ${bodyHtml}
   if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
 
   var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
-  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
-  zaehler.textContent=basis;
+  /* Hiess bis 29.08.2026 "basis" und ueberschrieb damit die gleichnamige Funktion
+     basis(s) oben im selben Scope. Folgenlos, solange niemand basis() innerhalb von
+     filtern() aufruft -- danach waere die Suche beim ersten Tastendruck tot, waehrend
+     die Seite perfekt aussieht. Genau die Fehlerklasse vom 22.08.2026. */
+  var startText=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=startText;
 
   function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
 
@@ -645,7 +675,7 @@ ${bodyHtml}
         zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
         a.eintraege.forEach(function(e){zeige(e,true);});
       });
-      zaehler.textContent=basis;leer.style.display='none';return;
+      zaehler.textContent=startText;leer.style.display='none';return;
     }
     var sichtbar=0;
     abschnitte.forEach(function(a){
@@ -1001,6 +1031,7 @@ const CTX = {
   data: {
     ARMOR, ARMOR_IMGS, CRAFTING, TROPHIES, TROPHY_GRADES,
     ENEMIES, ENEMY_IMGS, SIDE_QUESTS, MAIN_QUESTS, PATCHES,
+    FAC_DATA, NPCS, NPC_IMGS, NPC_PAL,
   },
   // Redaktionelle Zusatztexte aus scripts/seo-content/. Bewusst getrennt von
   // "data": das hier ist kein Wiki-Datenbestand, sondern Seitentext. Fehlt eine

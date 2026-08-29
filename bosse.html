@@ -122,6 +122,12 @@ font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align
 .pagetools{margin:14px 0 22px;padding:12px 14px;background:var(--panel-2);
 border:1px solid var(--line);border-radius:var(--radius)}
 .pagetools .ptline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+/* Ohne diese Zeile ist das [hidden] am Markup wirkungslos: Autoren-CSS schlaegt im
+   Kaskaden-Ursprung immer das [hidden]{display:none} des Browsers, unabhaengig von
+   Spezifitaet. Ohne JavaScript sah der Besucher sonst ein Suchfeld, das auf keine
+   Eingabe reagiert -- genau das Gegenteil der Absicht "ohne Skript bleibt die Seite
+   exakt wie ausgeliefert". Betraf alle Seiten, gefunden am 29.08.2026. */
+.pagetools .ptline[hidden]{display:none}
 .pagetools label{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-dim);
 text-transform:uppercase;letter-spacing:.06em}
 .pagetools input[type=search]{flex:1 1 220px;min-width:0;padding:7px 11px;
@@ -192,6 +198,9 @@ font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.
 p.chapmeta{font-size:13.5px;color:var(--ink-dim);background:var(--panel-2);border:1px solid var(--line);
 border-radius:10px;padding:10px 13px;margin:10px 0 0}
 p.chapmeta b{color:var(--ink-hi)}
+span.newfac{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
+font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#100c24;background:var(--violet)}
+p.fac-overview{margin:0 0 10px;color:var(--ink-dim);max-width:75ch}
 /* Aus index.html uebernommen: die Patch-Texte setzen diese beiden Variablen in
    inline-style-Attributen voraus. Fehlen sie, verliert die Einordnung ihre
    optische Absetzung. */
@@ -205,12 +214,14 @@ color:var(--gold);margin:16px 0 6px;padding-bottom:5px;border-bottom:1px solid v
 ul.plist{margin:0;padding-left:20px}
 ul.plist li{margin:5px 0}
 span.latest{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
-font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}</style>
+font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
+article.card img.npc{aspect-ratio:1/1;object-fit:contain}
+p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </head>
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse" aria-current="page">Bosse</a><a href="/bestiarium">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests">Hauptquests</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/patch-notes">Patch-Notes</a></nav>
+  <nav><a href="/bosse" aria-current="page">Bosse</a><a href="/bestiarium">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionen</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/npcs">NPCs</a><a href="/patch-notes">Patch-Notes</a></nav>
 </header>
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Bosse</nav>
@@ -904,8 +915,12 @@ font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.
   if(!gesamt)return;                       // nichts Filterbares: Feld bleibt verborgen
 
   var zeile=feld.parentNode; zeile.hidden=false;   /* Label und Zaehler mit einblenden */
-  var basis=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
-  zaehler.textContent=basis;
+  /* Hiess bis 29.08.2026 "basis" und ueberschrieb damit die gleichnamige Funktion
+     basis(s) oben im selben Scope. Folgenlos, solange niemand basis() innerhalb von
+     filtern() aufruft -- danach waere die Suche beim ersten Tastendruck tot, waehrend
+     die Seite perfekt aussieht. Genau die Fehlerklasse vom 22.08.2026. */
+  var startText=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  zaehler.textContent=startText;
 
   function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
 
@@ -916,7 +931,7 @@ font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.
         zeige(a.kopf,true);a.bloecke.forEach(function(b){zeige(b,true);});
         a.eintraege.forEach(function(e){zeige(e,true);});
       });
-      zaehler.textContent=basis;leer.style.display='none';return;
+      zaehler.textContent=startText;leer.style.display='none';return;
     }
     var sichtbar=0;
     abschnitte.forEach(function(a){
