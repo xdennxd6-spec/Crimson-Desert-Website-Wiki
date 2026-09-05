@@ -3,6 +3,144 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.01.00",date:"04.09.2026",size:"Erster Inhalts-Patch nach dem Enhanced-Umbau, Release 04.09.2026 04:20 UTC (boardNo 128). Die Notes fassen ihn selbst als „verschiedene Fehlerbehebungen und Maßnahmen zur Stabilisierung“ zusammen, das untertreibt aber: neben 30 Korrekturen in sechs Kategorien stecken drei echte Neuerungen darin — eine neue Entsendungsmission, die Kameraneigung im Foto-Modus und die Verzehnfachung der Camp-Mittel beim Silberspenden. Alle Plattformen außer dem Mac App Store waren zum Zeitpunkt der Veröffentlichung versorgt. Der Download liegt auf Steam bei rund 3,7 GB; Pearl Abyss selbst nennt keine Größe.",features:[
+    {cat:"Inhalt",items:[
+      "Im <b>Graumähnen-Camp</b> wurden zwar die Möbel geladen, aber nicht das Haus — behoben.",
+      "Beim <b>Beschwören des Schwarzsterns</b> wurde in bestimmten Situationen ein anderes Reittier gerufen — behoben. <span style='color:var(--gdim)'>Einordnung: Der Schwarzstern stand schon in 2.00.00 auf der Fehlerliste, dort ging es um eine fehlende Abklingzeit. Zwei Patches hintereinander am selben Reittier.</span>",
+      "Die Quest <b>„Der verfluchte Ritter“</b> wurde nicht abgeschlossen, obwohl alle untergeordneten Missionen erfüllt waren — behoben. <span style='color:var(--gdim)'>Einordnung: ein Fortschrittsblocker. Die Notes sagen nicht, ob betroffene Spielstände rückwirkend repariert werden oder die Quest neu begonnen werden muss.</span>",
+      "Der zum Abschluss der <b>Camp-Spendenmission</b> erforderliche Wert war tatsächlich niedriger angesetzt als angegeben — behoben. <span style='color:var(--gdim)'>Einordnung: Die Formulierung lässt offen, in welche Richtung korrigiert wurde. Entweder wurde die Anzeige an den echten Wert angeglichen oder die Anforderung an die Anzeige. Weder die deutsche noch die englische Fassung nennt eine Zahl.</span>",
+      "Als neue <b>Entsendungsmission</b> wurde <b>„Goldbarren-Investitionsmission“</b> hinzugefügt (englisch <em>Gold Bar Investment Mission</em>). <span style='color:var(--gdim)'>Einordnung: der einzige echte neue Inhalt dieses Patches. Ertrag, Laufzeit und Voraussetzungen stehen nicht in den Notes. Eine einzelne Sekundärquelle nennt dazu Zahlen, die hier bewusst nicht übernommen sind, weil sie nirgends gegengeprüft werden konnten.</span>",
+      "Bei Quests, die <b>beritten</b> absolviert werden, wird beim erneuten Versuch nun auch die <b>Lebenskraft des Pferdes</b> wiederhergestellt.",
+      "Im <b>Fähigkeitsmenü</b> zeigt eine neue Darstellung an, welche Fähigkeiten durch das Erlernen eines bestimmten Fähigkeitswissens freigeschaltet werden. <span style='color:var(--gdim)'>Einordnung: eine direkte Folge des in 2.00.00 umgebauten Lernsystems — der Abhängigkeitsbaum war dort neu, aber unsichtbar.</span>",
+      "Im <b>Foto-Modus</b> kann die Kamera nun geneigt werden.",
+      "Beim <b>Spenden von Silber an das Camp</b> erhält man nun die <b>zehnfache Menge an Camp-Mitteln</b>. <span style='color:var(--gdim)'>Einordnung: die einzige bezifferte Balance-Änderung des Patches. Der Kurs vor der Verzehnfachung steht weder in diesen noch in früheren Notes, ein absoluter Wert lässt sich daraus also nicht ableiten. Zusammen mit der Umstellung der Forschung auf Camp-Mittel aus 1.18.00 heißt das: alle in Silber dokumentierten Forschungskosten aus der Zeit davor sind unbrauchbar.</span>"
+    ]},
+    {cat:"Kampf / Aktion",items:[
+      "Der Flug wurde abgebrochen, wenn während des Flugs <b>„Kraftübertragung“</b> eingesetzt wurde — behoben.",
+      "Der Angriff nach dem Einsatz von <b>„Überfall“</b> wurde in einigen Situationen in eine andere Richtung als zum Ziel ausgeführt — behoben.",
+      "Charaktere froren <b>unter der Wasseroberfläche</b> ein, wenn <b>„Body-Slam“</b> in seichtem Wasser eingesetzt wurde — behoben.",
+      "<b>Geist</b> wurde nicht wiederhergestellt, wenn <b>„Fokus“</b> im hängenden Zustand verwendet wurde — behoben. <span style='color:var(--gdim)'>Einordnung: berührt dieselbe Mechanik wie die in 2.00.00 neu hinzugefügte Fähigkeit Serenity, die die Geist-Regeneration während Fokus erhöht.</span>",
+      "Der <b>Präzisionsschuss</b> wurde nicht mit der <b>Muskete</b> ausgeführt — behoben.",
+      "Eigene <b>Graumähnen und Reittiere</b> kämpften in bestimmten Situationen nicht gegen Gegner — behoben."
+    ]},
+    {cat:"UI",items:[
+      "Beim ersten Spielstart wird der Wert für die <b>minimale Schriftgröße</b> nun bereits mit einem einzigen Klick auf die Pfeiltaste angepasst.",
+      "Die untere Benutzeroberfläche verschwand, wenn beim Anlegen oder Entfernen von <b>Abyss-Ausrüstung</b> gleichzeitig mit dem Tab-Wechsel eine Auswahl eingegeben wurde — behoben.",
+      "In bestimmten Umgebungen ließ sich <b>Spanisch nicht als Sprachausgabe</b> auswählen — behoben. <span style='color:var(--gdim)'>Einordnung: eine der fünf Sprachausgaben, die erst zehn Tage zuvor mit 2.00.00 dazugekommen sind.</span>",
+      "Die Benutzeroberfläche wurde in bestimmten Situationen nicht korrekt angezeigt — behoben."
+    ]},
+    {cat:"Grafik und Einstellungen",items:[
+      "Bei <b>regnerischem Wetter oder Pfützen</b> trat auffälliges <b>Bildrauschen</b> auf — behoben.",
+      "[Mac] Innenräume wurden auf <b>M5-Geräten</b> aufgrund eines Fehlers beim Rendern der Beleuchtung sehr dunkel dargestellt — behoben.",
+      "Beim Platzieren von Gegenständen im Außenbereich im <b>Wohn-Modus</b> kam es in der Nähe von Zäunen zu <b>Frame-Drops</b> — behoben."
+    ]},
+    {cat:"Lokalisierung",items:[
+      "Lokalisierungsfehler in allen Sprachen wurden behoben und die allgemeine Qualität der Lokalisierung wurde verbessert. <span style='color:var(--gdim)'>Einordnung: derselbe Sammelpunkt wie in 2.00.00, ohne Angabe welche Sprachen oder welche Stellen.</span>"
+    ]},
+    {cat:"Sonstiges",items:[
+      "Die <b>Interaktion mit NPCs</b> hatte eine Verzögerung — behoben.",
+      "Die verfügbare Menge für die <b>Auszahlung von Goldbarren</b> wurde falsch angezeigt, wenn man mehr Gegenstände besaß, als das Inventar aufbewahren konnte — behoben.",
+      "Die <b>Stoffrobe des Kampfmönchs</b> war als <b>Kopfbedeckung</b> kategorisiert — behoben. <span style='color:var(--gdim)'>Einordnung: eine falsche Slot-Zuordnung im Ausrüstungssystem, kein reiner Anzeigefehler.</span>",
+      "Die in der <b>Schokoladenfabrik</b> aufgestellten <b>Förderbänder</b> funktionierten nicht — behoben.",
+      "Die <b>Kopfbedeckung</b> wurde vorübergehend eingeblendet, wenn man nach Auswahl von „Anzeige der Kopfbedeckung – Nur im Kampf anzeigen“ eine Waffe verbesserte — behoben.",
+      "<b>Barde Middler</b> verschwand nach der Schlusssequenz von Calphade, sobald er das Sichtfeld des Charakters verließ — behoben.",
+      "Beim Zielen mit einer <b>Fernkampfwaffe während des Rutschens</b> wurde der Tastenhinweis für „Ziel markieren“ nicht angezeigt — behoben.",
+      "[Damiane/Oongka] <b>Kliff verschwand beim Spielen nicht</b> und war weiterhin auf dem Bildschirm zu sehen — behoben.",
+      "Objekte überlappten bei Auswahl von „Untersuchen“ in einigen Regionen mit dem <b>Gelände</b> — behoben.",
+      "Man konnte gelegentlich selbst beim Abspielen eines <b>Erinnerungsfragments</b> die Laterne tragen und sich bewegen — behoben.",
+      "Für <b>nicht ausgerüstete Schwerter</b> werden nun keine <b>Scheiden</b> mehr angezeigt.",
+      "Während der Quest <b>„Dünner werdende Klinge“</b> konnte man nur dann mit der <b>Steintafel</b> interagieren, wenn man auf ihr stand — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Zum Zeitpunkt der Veröffentlichung stand der Patch für <b>Steam (PC)</b>, <b>Steam (Mac)</b>, <b>PlayStation</b>, <b>XBOX</b> und den <b>Epic Games Store</b> bereit; für den <b>Mac App Store</b> wurde er noch <b>vorbereitet</b>. <span style='color:var(--gdim)'>Einordnung: Der Mac App Store hinkt wieder hinterher, nachdem er bei 1.18.02 sowie bei beiden 2.00er-Hotfixes erstmals seit 1.16.04 zeitgleich versorgt war.</span>",
+      "Quelle: offizielle Patch-Notizen Version 2.01.00, Pearl Abyss, 04.09.2026 04:20 UTC (boardNo 128), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
+  {ver:"2.00.02",date:"28.08.2026",size:"Zweiter Hotfix nach dem Enhanced-Umbau, drei Punkte unter der einzigen Überschrift Patch-Details. Alle sechs Plattformen waren zeitgleich versorgt. Zum Datum gibt es einen ungelösten Widerspruch, siehe die Einordnung unten.",features:[
+    {cat:"Patch-Details",items:[
+      "Die <b>Lippensynchronisation</b> der Charaktere wurde in einigen Zwischensequenzen verbessert. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt an dieser Stelle <em>partially improved</em>, die deutsche lässt das „teilweise“ weg und klingt dadurch nach einer vollständigen Behebung. Derselbe Unterschied steht auch in 2.00.01, ist also kein Ausrutscher, sondern ein Muster der deutschen Fassung.</span>",
+      "Die <b>Steuerung</b> war bei Verwendung des <b>kleinen Krans im Steinbruch Karin</b> nicht mehr möglich — behoben.",
+      "Beim <b>Reiten</b> stieg man zwangsweise ab, sobald man mit einem <b>wandernden Händler</b> kollidierte — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Alle sechs Plattformen (Steam PC, Steam Mac, PlayStation, XBOX, Epic Games Store, Mac App Store) sind einzeln mit dem Status <em>Patch jetzt verfügbar</em> aufgeführt.",
+      "<b>Ungeklärter Datumswiderspruch:</b> Die offizielle Seite trägt für 2.00.01 und 2.00.02 <b>denselben</b> Zeitstempel 28.08.2026 00:00 UTC, in der deutschen wie in der englischen Fassung. Zwei getrennte Hotfixes zur selben Sekunde sind unplausibel. Sekundäre Indizien deuten für 2.00.02 auf den <b>01.09.2026</b>: MP1st veröffentlichte seinen Artikel dazu am 01.09. mit der Formulierung <em>here are the fixes for today</em>, und die SteamDB-Suchergebnisse passen zum selben Abstand. <span style='color:var(--gdim)'>Wir tragen das offizielle Datum ein, weil die Primärquelle in diesem Projekt Vorrang hat, und halten den Widerspruch hier fest statt ihn stillschweigend aufzulösen. Konsolen-Build-Nummern im Format 1.000.xxx stehen nie auf der Pearl-Abyss-Seite und gelten hier als inoffiziell.</span>",
+      "Quelle: offizielle Patch-Notizen Version 2.00.02, Pearl Abyss (boardNo 127), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
+  {ver:"2.00.01",date:"28.08.2026",size:"Erster Hotfix nach dem Enhanced-Umbau, vier Punkte unter der einzigen Überschrift Patch-Details. Drei der vier Punkte hängen unmittelbar an den Neuerungen aus 2.00.00: die arabische Textanzeige, die Lippensynchronisation der neu vertonten Zwischensequenzen und der Mac-Start.",features:[
+    {cat:"Patch-Details",items:[
+      "Einige <b>Texte</b> wurden fehlerhaft angezeigt, wenn die <b>Textsprache auf Arabisch</b> eingestellt war — behoben. <span style='color:var(--gdim)'>Einordnung: Arabisch kam drei Tage zuvor mit 2.00.00 als neue Oberflächen- und Untertitelsprache dazu.</span>",
+      "Die <b>Lippensynchronisation</b> der Charaktere wurde in einigen Zwischensequenzen verbessert. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt <em>partially improved</em>, die deutsche lässt das „teilweise“ weg. Hintergrund dürften die fünf neuen Sprachausgaben aus 2.00.00 sein.</span>",
+      "Die <b>Bildrate</b> sank in bestimmten Situationen — behoben.",
+      "[Steam Mac] Das Spiel ließ sich unter bestimmten <b>macOS-Umgebungen</b> nicht starten — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Alle sechs Plattformen (Steam PC, Steam Mac, PlayStation, XBOX, Epic Games Store, Mac App Store) sind einzeln mit dem Status <em>Patch jetzt verfügbar</em> aufgeführt.",
+      "<b>Widerspruch zur Known-Issues-Seite:</b> Die offizielle Liste bekannter Probleme (boardNo 68) führt weiterhin einen Punkt zu <b>nicht angezeigten arabischen Hilfetexten und Tastenbelegungen</b>, obwohl dieser Patch die fehlerhafte arabische Textanzeige als behoben meldet. <span style='color:var(--gdim)'>Einordnung: Die Formulierungen sind nicht wortgleich, es können also zwei verschiedene Fehler sein. Die Known-Issues-Seite nennt im Fließtext als letzte Aktualisierung den 09.04.2026 und ist damit deutlich älter als dieser Patch, was den Widerspruch am ehesten erklärt. Dasselbe Muster gab es schon bei 1.14.00 mit einem Pet-Fehler.</span>",
+      "Quelle: offizielle Patch-Notizen Version 2.00.01, Pearl Abyss, 28.08.2026 00:00 UTC (boardNo 126), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
+  {ver:"2.00.00",date:"25.08.2026",size:"Der größte Patch seit Release und der Grund für den Versionssprung von 1.18 auf 2.0: Mit ihm heißt das Spiel <b>Crimson Desert Enhanced</b>. Release 25.08.2026 18:20 UTC (boardNo 123), 49 Einzelpunkte in sieben Abschnitten. Kernstücke sind fünf neue Sprachausgaben samt arabischer Oberfläche, ein umgebautes Fähigkeiten-Lernsystem mit der neuen Währung Abyss-Verknüpfung, acht neue Kliff-Fähigkeiten, zusätzliche Story-Szenen und ein in Phasen unterteilter Golden-Star-Bosskampf. Das Update ist für alle Bestandsspieler kostenlos.",features:[
+    {cat:"Enhanced — die Kernänderungen",items:[
+      "Die <b>Hauptgeschichte und -quests</b> wurden verbessert, die <b>Nachvollziehbarkeit der Hauptgeschichte</b> wurde verbessert. Zur Vertiefung der <b>Boss-Geschichten</b> wurden <b>Wissen, Gegenstände, Erinnerungsfragmente sowie Dialoge und Gespräche</b> hinzugefügt. <span style='color:var(--gdim)'>Einordnung: der für ein Wiki folgenreichste Punkt des ganzen Patches, und zugleich der unbestimmteste. Die Notes nennen keinen einzigen Boss, keinen Fundort und keine Anzahl. Welche Erinnerungsfragmente dazugekommen sind und wo sie liegen, ist damit offen.</span>",
+      "<b>Fünf neue Sprachausgaben</b>: Deutsch, Französisch, Spanisch, Japanisch, Brasilianisches Portugiesisch. Dazu <b>Arabisch</b> als neue Spielsprache für Oberfläche und Untertitel. <span style='color:var(--gdim)'>Einordnung: Auf Steam, PlayStation, Xbox und Epic muss die gewünschte Sprache über die Plattform-Einstellungen ausgewählt und nachgeladen werden, nicht im Spielmenü; Pearl Abyss hat dazu eine eigene Anleitung veröffentlicht (boardNo 124).</span>",
+      "<b>„Abyss-Verknüpfung“</b> (englisch <em>Abyss Link</em>) wurde als neue Währung zum Erlernen von Fähigkeiten hinzugefügt. Erlernt ein Charakter mithilfe eines <b>Abyss-Artefakts</b> eine Fähigkeit, erhalten <b>alle anderen spielbaren Charaktere automatisch Abyss-Verknüpfungen in Höhe der verwendeten Abyss-Artefakte</b>.",
+      "Das <b>Zurücksetzen</b> erlernter Fähigkeiten ist nun <b>für jeden Charakter einzeln</b> möglich statt nur gemeinsam. Jeder Charakter setzt seine eigenen Abyss-Verknüpfungen ein, beim Zurücksetzen werden sie erstattet.",
+      "<b>Achtung beim ersten Start nach dem Update:</b> Mit der Einführung der Abyss-Verknüpfung werden die <b>bisher erlernten Fähigkeiten zurückgesetzt</b> und die verwendeten Abyss-Artefakte sowie sonstige Währungen erstattet. <span style='color:var(--gdim)'>Einordnung: Das ist ein einmaliger Pflicht-Reset, kein Fehler. Im Steam-Forum häuften sich danach Beiträge von Spielern, die den Reset für einen Bug hielten, weil das Spiel ihn nicht erklärt. Ein tatsächlicher Verlust ist bislang nicht belegt.</span>",
+      "Beim <b>Starten eines neuen Spiels</b> können die in bestehenden Speicherdateien erlangten <b>Währungen und Abyss-Verknüpfungen übernommen</b> werden. Diese Funktion steht zur Verfügung, <b>sobald alle Hauptquests abgeschlossen</b> wurden. <span style='color:var(--gdim)'>Einordnung: Das ist ausdrücklich kein vollwertiges New Game Plus. Übernommen werden laut Wortlaut nur Währungen und Verknüpfungen, nicht Fähigkeiten, Ausrüstung oder Questfortschritt.</span>",
+      "<b>Acht neue Kliff-Fähigkeiten</b> wurden hinzugefügt. Sie können ab einem bestimmten Zeitpunkt der Hauptgeschichte erlernt werden. <span style='color:var(--gdim)'>Die Notes nennen weder Namen noch Zeitpunkt. Community-Recherche führt diese acht: <em>Flowing Force Palm</em> (mehr Schaden auf den ersten beiden Force-Palm-Treffern, dazu ein Zusatztreffer), <em>Ascending Force Palm</em> (höherer Sprung, verbesserter Aerial Force Palm), <em>Descending Force Palm</em> (Sturzangriff im Anschluss an den Aerial Force Palm), <em>Enraged Parry</em> (parieren mitten in einer laufenden Aktion), <em>Serenity</em> (mehr Geist-Regeneration während Fokus), <em>Water Stride</em> (über Wasserflächen laufen statt schwimmen; eine Quelle schreibt <em>Water Slide</em>), <em>Enhanced Flight</em> (Sturzflug ohne Fallschaden) und <em>Finishing Rush</em> (nach einem Treffer per Leichtangriff zum nächsten Gegner wechseln).</span>",
+      "<b>Zum Belegstatus dieser acht Namen:</b> Sie stehen nicht in den offiziellen Notes. Eine einzelne westliche Guide-Seite ist die Erstquelle, mehrere weitere Seiten schreiben sie erkennbar ab, teils mit eigenen Tippfehlern. Unabhängig davon bestätigt ein koreanischer Fachartikel vom 03.09.2026 Anzahl und Wirkungen. <span style='color:var(--gdim)'>Bewusst NICHT übernommen sind die kursierenden Angaben zu Abyss-Artefakt-Kosten, Level-Voraussetzungen und der Zuordnung zu den Fähigkeitsbäumen: Die Erstquelle widerspricht sich bei der Baumzuordnung innerhalb desselben Artikels selbst, und für die Kosten gibt es nur diese eine Datenlinie. Deutsche Namen sind nirgends dokumentiert.</span>",
+      "Das <b>UI der Hauptquests</b> wurde verbessert."
+    ]},
+    {cat:"Inhalt",items:[
+      "Die <b>Herstellung von Gegenständen in der Kilnden-Werkstatt</b> funktionierte nicht ordnungsgemäß — behoben.",
+      "Der <b>Schwarzstern</b> konnte in bestimmten Situationen <b>ohne Abklingzeit</b> geritten werden — behoben.",
+      "Wurde man in der sich im <b>Kriegszustand befindenden Calphade-Region</b> als gesuchter Gesetzloser gefangen genommen, wurde man in das <b>Gefängnis von Schloss Calphade</b> gesperrt — behoben."
+    ]},
+    {cat:"Steuerung",items:[
+      "Die Option <b>„Steuerung von Flug-Reittieren“</b> wurde hinzugefügt, zu finden im Menü „Sonstiges – Eingabe“.",
+      "Bei <b>„Kamera“</b> bewegt sich das Flug-Reittier in die Richtung, in die die Kamera blickt.",
+      "Bei <b>„Manuell“</b> folgt die Bewegung des Flug-Reittiers nicht der Kamerarichtung, Auf- und Absteigen erfolgt über eine separate Eingabe. <span style='color:var(--gdim)'>Einordnung: In der englischen Fassung fehlt an genau dieser Stelle das Verb, der Satz bricht mitten in der Aussage ab. Die deutsche Fassung ist hier vollständig und damit die belastbarere Quelle.</span>"
+    ]},
+    {cat:"Kampf / Aktion",items:[
+      "Die Quest <b>„Unerwartetes Geschenk“</b> wurde so geändert, dass als Geschenkbelohnung von <b>Bilwise</b> die Fähigkeit <b>„Doppelsprung“</b> erlernt wird. <span style='color:var(--gdim)'>Einordnung: Damit ist der Doppelsprung an eine konkrete Quest gebunden. Wie Spieler ihn vor dem Patch bekamen, sagen die Notes nicht.</span>",
+      "Der <b>Schaden, den Begleitcharaktere erleiden</b>, wurde verringert.",
+      "Die <b>Macht des Axioms</b> ließ sich während des Flugs in <b>Sicherheitszonen</b> nicht einsetzen — behoben.",
+      "Man erlitt Schaden, wenn man sich beim Erscheinen der <b>Phantomritter des Vergessenen Generals</b> in deren Nähe befand — behoben. <span style='color:var(--gdim)'>Einordnung: Die deutsche Fassung spricht von mehreren Phantomrittern, die englische nur von einem einzelnen.</span>",
+      "Der <b>Rikoschettschuss-Effekt der Bogenschützen-Handschuhe</b> wurde beim Feuern von <b>Spezialpfeilen</b> nicht angewandt — behoben.",
+      "Ein Charakter wurde nach der Fähigkeit <b>„Anheben“</b> in eine andere Richtung geworfen, als die Wurfbewegung vorgab — behoben.",
+      "Der Bosskampf gegen <b>Goldener Stern</b> wurde in <b>mehrere Phasen unterteilt</b> und um <b>phasenspezifische Angriffsmuster</b> erweitert. <span style='color:var(--gdim)'>Einordnung: der einzige Punkt des Patches, der einen Bosskampf umbaut. Die Notes nennen weder die Anzahl der Phasen noch die neuen Muster, und bis heute hat keine der etablierten Boss-Quellen den Kampf nach dem Patch dokumentiert. Bis dahin beschreiben alle verfügbaren Golden-Star-Strategien den Zustand davor.</span>"
+    ]},
+    {cat:"UI",items:[
+      "Das <b>UI der Beitragswährung</b> wurde während des Gameplays gelegentlich nicht ausgeblendet — behoben.",
+      "Bestimmte <b>Wissenseinträge zu Fähigkeiten</b> wurden im Tab <b>„Meldungen“</b> angezeigt — behoben."
+    ]},
+    {cat:"Lokalisierung",items:[
+      "Lokalisierungsfehler in allen Sprachen wurden behoben und die allgemeine Qualität der Lokalisierung wurde verbessert."
+    ]},
+    {cat:"Sonstiges",items:[
+      "Das <b>Nachbild</b> erschien verzögert, wenn ein <b>Erinnerungsfragment mit der Laterne</b> angeleuchtet wurde — behoben.",
+      "In <b>Kapitel 2</b> verschwand der Hinweistext nicht, wenn ein Erinnerungsfragment mit der Fähigkeit <b>„Licht reflektieren“</b> erlangt wurde — behoben.",
+      "<b>Damiane</b> konnte während des Fallens den <b>Schildwurf</b> benutzen — behoben.",
+      "Bei ausgerüsteter <b>Muskete</b> war deren Aussehen auch bei Minispielen wie <b>Zweiblatt</b> sichtbar — behoben.",
+      "Der über die Abyss-Ausrüstung <b>„Urteil des Geistes“</b> beschworene <b>Gespensterritter</b> wurde von Projektilen getroffen — behoben.",
+      "Man stieg in bestimmten Situationen beim <b>Sturz aus großer Höhe</b> nicht vom Reittier ab — behoben.",
+      "<b>Handelsware im Stall</b> ließ sich nicht ins <b>Pferdeinventar</b> verschieben — behoben.",
+      "Einige <b>Bilder von Quests und Wissen</b> wurden verbessert.",
+      "<b>Rätselhinweise</b> wurden von <b>Baumwurzeln</b> verdeckt — behoben.",
+      "Einige <b>Gewänder</b> wurden fehlerhaft dargestellt — behoben.",
+      "Der <b>Kran</b> wurde beschädigt, wenn während der Mission „Haus Roberts › Ländereien im Aufruhr › Versiegelt im Stein › Bring das vergrabene Relikt an die Oberfläche“ mit einem <b>elementverbesserten Bogen</b> auf die Eisenkette geschossen wurde — behoben.",
+      "Die <b>Demeniss-Kettensäge</b> kann nun im <b>Camp gespendet</b> werden.",
+      "Bestimmte <b>Geländeobjekte</b> wurden fehlerhaft dargestellt — behoben.",
+      "Stirbt <b>Wusa oder Maegu</b> während der Anleitungs-Zwischensequenz in <b>Kapitel 9 „Eine unbekannte Stimme“</b>, kann diese nun neu gestartet werden."
+    ]},
+    {cat:"Was Enhanced für Bestandsspieler bedeutet",items:[
+      "Das Update ist <b>kostenlos</b> und wird automatisch mit der neuesten Version hinzugefügt. Es ist <b>kein neues Produkt</b>: Steam-App-ID, PlayStation- und Xbox-Produktkennungen bleiben dieselben wie beim Launch, nur der angezeigte Titel wurde geändert. Ein zweiter Kauf ist nicht nötig.",
+      "<b>Bestehende Spielstände bleiben nutzbar.</b> Einzige Einschränkung ist der oben beschriebene einmalige Fähigkeiten-Reset mit Erstattung.",
+      "Quelle: offizielle Patch-Notizen Version 2.00.00, Pearl Abyss, 25.08.2026 18:20 UTC (boardNo 123), deutsche und englische Fassung Punkt für Punkt gegengeprüft; dazu die begleitenden Ankündigungen zu Enhanced (boardNo 125) und zur Sprachunterstützung (boardNo 124)."
+    ]}
+  ]},
   {ver:"1.18.02",date:"16.08.2026",size:"Zweiter Hotfix des Tages, sechs Stunden nach 1.18.01. Release 10:00 UTC. Vier Fehlerbehebungen unter der einzigen Überschrift Patch-Details — die Notes kennen für diesen Patch keine Unterkategorien. Alle sechs Plattformen (Steam PC, Steam Mac, PlayStation, Xbox, Epic Games Store, Mac App Store) sind einzeln mit dem Status <em>Patch jetzt verfügbar</em> aufgeführt; damit ist der Mac App Store erstmals seit 1.16.04 wieder zeitgleich versorgt. Schwerpunkt sind zwei Fehler, die Spielerbesitz betrafen: eine auf 0 stehende Graumähnen-Anzeige und zurückgesetztes Silber",features:[
     {cat:"Patch-Details",items:[
       "Im <b>Währung-UI des Camps</b> wurde die Anzahl der <b>Graumähnen</b> als <b>0</b> angezeigt — behoben. <span style='color:var(--gdim)'>Einordnung: Die Notes sagen nicht, ob nur die Anzeige falsch war oder der Bestand selbst, und nennen weder Bedingung noch betroffene Spielstände. Die englische Fassung spricht an dieser Stelle von <em>comrades</em>, die deutsche von <em>Graumähnen</em> — derselbe Fix, nur je Sprachfassung anders benannt.</span>",
@@ -348,6 +486,22 @@ const PATCHES=[
       "Offizielle Pearl-Abyss-Patchnotes 1.14.00 (Notice-Board boardNo 108, Release 16.07.2026 09:00 UTC) sowie der separate Cross-Save-Guide (boardNo 107, 16.07.2026 10:10 UTC) und die aktualisierte Known-Issues-Seite (boardNo 68, 16.07.2026 10:30 UTC). Verifiziert gegen VULKK, GamesRadar+, RPG Site, Noisy Pixel und DSOGaming. Die Patch-Notes umfassen 10 dokumentierte Punkte: 1 neues Feature (Cross-Save) plus 9 Fixes (Content 2, Combat/Action 2, Localization 1, Others 4) — keine Balance-Änderungen, keine neuen Items, Quests oder Gebiete."
     ]}
   ]},
+  {ver:"1.13.01",date:"08.07.2026",size:"Hotfix (All Platforms) — Steam (PC/Mac), PlayStation, Xbox, Epic Games Store & Mac App Store. Nachschärfung von 1.13.00; keine Build-Nummer in den Notes",features:[
+    {cat:"Bugfixes",items:[
+      "Behoben: gelegentlicher Absturz beim Reiten eines Bären",
+      "Behoben: Charaktere wurden auf Konsolen und AMD-basierten Systemen teils fehlerhaft dargestellt (Rendering)",
+      "Behoben: Oongka folgte Kliff in bestimmten Hauptquest-Cutscenes nicht",
+      "Behoben: Belohnungen für den Abschluss bestimmter Challenges wurden nicht vergeben",
+      "Behoben: die Hoenmark Ruins konnten nicht befreit werden",
+      "Behoben: der Futterstand-Vorrat verringerte sich nicht, obwohl Nutztiere der Ranch in der Nähe fraßen"
+    ]},
+    {cat:"Grafik & Performance",items:[
+      "Verbessert: Framerate-Einbrüche in bestimmten Umgebungen"
+    ]},
+    {cat:"Quelle",items:[
+      "Offizielle Pearl-Abyss-Patchnotes 1.13.01 'Version 1.13.01 (All Platforms Hotfix)' (Notice-Board boardNo 106, Release 08.07.2026 05:51 UTC). Die Notes betreffen ausschließlich Bären-Reiten, Rendering, NPC-/Quest-Bugs (Oongka-Follow, Hoenmark-Ruins, Challenge-Belohnungen, Ranch-Futterstand) und Performance — KEIN Bosskampf-Fix (ein kursierendes X-Gerücht dazu ist von den offiziellen Notes nicht gedeckt)."
+    ]}
+  ]},
   {ver:"1.13.00",date:"03.07.2026",size:"Major Update. Steam (PC/Mac), PlayStation, Xbox, Epic Games Store & Mac App Store (Epic-Nutzer müssen sich laut Notes ggf. neu einloggen). Konsolen-Build 1.000.379 (laut mp1st)",features:[
     {cat:"Neuer Content",items:[
       "Abyss-Endgame jetzt auch für Oongka und Damiane geöffnet",
@@ -416,22 +570,6 @@ const PATCHES=[
     ]},
     {cat:"Quelle",items:[
       "Offizielle Pearl-Abyss-Patchnotes 1.13.00 (Notice-Board boardNo 105, Release 03.07.2026 03:00 UTC). Verifiziert gegen VULKK, GamesRadar, GameWatcher und MP1st. Konsolen-Build 1.000.379 laut mp1st (Drittquelle, nicht in den offiziellen Notes). Teile-Zählung: 39 (Kliff/Oongka) + 8 (Damiane), die 6 Kuku-Teile separat; die von manchen Quellen genannte '47' ist schlicht 39+8. Die genauen neuen Memory-Fragment-Fundorte der vier Rematch-Bosse nennen die offiziellen Notes nicht."
-    ]}
-  ]},
-  {ver:"1.13.01",date:"08.07.2026",size:"Hotfix (All Platforms) — Steam (PC/Mac), PlayStation, Xbox, Epic Games Store & Mac App Store. Nachschärfung von 1.13.00; keine Build-Nummer in den Notes",features:[
-    {cat:"Bugfixes",items:[
-      "Behoben: gelegentlicher Absturz beim Reiten eines Bären",
-      "Behoben: Charaktere wurden auf Konsolen und AMD-basierten Systemen teils fehlerhaft dargestellt (Rendering)",
-      "Behoben: Oongka folgte Kliff in bestimmten Hauptquest-Cutscenes nicht",
-      "Behoben: Belohnungen für den Abschluss bestimmter Challenges wurden nicht vergeben",
-      "Behoben: die Hoenmark Ruins konnten nicht befreit werden",
-      "Behoben: der Futterstand-Vorrat verringerte sich nicht, obwohl Nutztiere der Ranch in der Nähe fraßen"
-    ]},
-    {cat:"Grafik & Performance",items:[
-      "Verbessert: Framerate-Einbrüche in bestimmten Umgebungen"
-    ]},
-    {cat:"Quelle",items:[
-      "Offizielle Pearl-Abyss-Patchnotes 1.13.01 'Version 1.13.01 (All Platforms Hotfix)' (Notice-Board boardNo 106, Release 08.07.2026 05:51 UTC). Die Notes betreffen ausschließlich Bären-Reiten, Rendering, NPC-/Quest-Bugs (Oongka-Follow, Hoenmark-Ruins, Challenge-Belohnungen, Ranch-Futterstand) und Performance — KEIN Bosskampf-Fix (ein kursierendes X-Gerücht dazu ist von den offiziellen Notes nicht gedeckt)."
     ]}
   ]},
   {ver:"1.12.02",date:"24.06.2026",size:"Hotfix (All Platforms); Steam (PC/Mac), PlayStation & Xbox sofort, Epic Games Store & Mac App Store folgen später",features:[
