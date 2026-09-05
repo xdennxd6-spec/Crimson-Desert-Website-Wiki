@@ -406,7 +406,9 @@ const MOUNT_INGAME_IMGS={
   "A.T.A.G.":       "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_warmachine_1.webp",
   "High-Mobility A.T.A.G.":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_machine_carmabirdsaurus_1.webp",
   "Cloudcruiser":   "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_riding_airballoon2.webp",
-  "Skystreaker":    "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_riding_airballoon.webp"
+  "Skystreaker":    "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_riding_airballoon.webp",
+  "Clawed Bear": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_bear_1.webp",
+  "Giant Red Iguana": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_iguana_2.webp"
 };
 const ARMOR_IMGS={
   // Torso
