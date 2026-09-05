@@ -1013,6 +1013,52 @@ const PATCHES=[
       "Re-Blockade für 23 Forts mit 3 Frequenz-Modi (Stable / Conflict / War)"
     ]}
   ]},
+  {ver:"1.04.02",date:"24.04.2026",size:"Hotfix fuer alle Plattformen, Release 24.04.2026 00:00 UTC (boardNo 87). Der umfangreichste der frueher fehlenden Patches: 16 Punkte. Vier davon sind allerdings keine Fixes dieses Patches, sondern nachtraegliche Klarstellungen zu 1.04.00, die dort nicht dokumentiert waren — darunter der Graumaehnen-Beitragsladen bei Carl und die leicht erhoehte Bewegungsgeschwindigkeit des Charakters.",features:[
+    {cat:"Patch-Details",items:[
+      "Die Optionen <b>„Minimale Schriftgröße“</b> und <b>„Schriftgröße Untertitel“</b> wurden verbessert, sodass sie nun sofort im Spiel angewendet werden.",
+      "Es wurde ein <b>nicht gewählter Schwierigkeitsgrad</b> eingestellt, wenn das Spiel neu gestartet wird, während bereits andere Speicherstände existieren — behoben.",
+      "Einige Einträge in der <b>Hilfe-UI</b> wurden deaktiviert — behoben.",
+      "Teile der <b>Laden-UI bei Angelhändlern und Gerbern</b> wurden fehlerhaft angezeigt — behoben.",
+      "Durch die Änderung eines <b>Haustiernamens</b> in der Meldung zum Aufsteigen des Vertrauens wurde auch der Name eines <b>nicht gezähmten Tieres</b> geändert — behoben.",
+      "[Tastatur/Maus] Beim Einstellen von <b>Sonstiges › Einstellungen › Video › HDR</b> funktionierte die Eingabe von Tasten nicht — behoben.",
+      "Die im Hintergrund liegende <b>Anleitung zu Inhalten</b> reagierte vorrangig, wenn sie sich mit dem UI für „Liste zusätzlicher Belohnungen“ überschnitt — behoben.",
+      "Der <b>Fade-out</b> erfolgte in einigen Laden-Zwischensequenzen zu langsam — behoben.",
+      "Das <b>Färben von Pferdegeschirr</b> war nicht möglich — behoben.",
+      "[PlayStation 5 Pro] Die <b>Bildschirmhelligkeit</b> war instabil, wenn die Option <b>„PSSR-Bildschärfe“</b> aktiviert war — behoben.",
+      "Lokalisierungsfehler in allen Sprachen wurden behoben und die allgemeine Qualität der Lokalisierung wurde verbessert."
+    ]},
+    {cat:"Nachtrag zu Patch 1.04.00 (keine Änderungen dieses Patches)",items:[
+      "Die <b>Bewegungsgeschwindigkeit des Charakters</b> wurde leicht erhöht. <span style='color:var(--gdim)'>Die Notes schreiben dazu ausdrücklich: diese Änderung wurde bereits mit Patch 1.04.00 angewendet und hier nur nachträglich dokumentiert.</span>",
+      "Im <b>Graumähnen-Camp</b> wurde bei <b>Carl</b> der <b>Graumähnen-Beitragsladen</b> hinzugefügt. <span style='color:var(--gdim)'>Ebenfalls bereits mit 1.04.00 aktiv, hier nachgereicht.</span>",
+      "Bei der <b>Camperweiterung</b> werden in eurem Haus platzierte <b>Möbel nicht länger eingesammelt</b>. Achtung: Alle aufgestellten Möbelstücke werden ins Inventar zurückgelegt, falls die Hausstruktur im „Wohnen“-Modus direkt geändert wird. <span style='color:var(--gdim)'>Ebenfalls bereits mit 1.04.00 aktiv.</span>",
+      "Beim <b>Umzug des Graumähnen-Camps nach Pailune</b> werden nun auch die im Haus platzierten Möbel automatisch mit übertragen. <span style='color:var(--gdim)'>Auf der offiziellen Seite hinter einem Spoiler-Aufklapper versteckt, ebenfalls bereits mit 1.04.00 aktiv.</span>"
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Sieben Plattformen aufgeführt, alle versorgt. <span style='color:var(--gdim)'>Kuriosum der Quelle: Auf der deutschen Seite stehen ausgerechnet <b>Xbox</b> und <b>Xbox on PC</b> im englischen Wortlaut <em>Patch available now</em>, während die anderen fünf <em>Patch jetzt verfügbar</em> tragen.</span>",
+      "Quelle: offizielle Patch-Notizen Version 1.04.02 (Hotfix für alle Plattformen), Pearl Abyss, 24.04.2026 00:00 UTC (boardNo 87). <span style='color:var(--gdim)'>Nachtrag vom 05.09.2026: Dieser Patch fehlte im Wiki-Bestand und wurde direkt an der offiziellen Notice-Seite nachrecherchiert.</span>"
+    ]}
+  ]},
+  {ver:"1.04.01",date:"23.04.2026",size:"Hotfix am selben Tag wie der Hauptpatch 1.04.00, Release 23.04.2026 14:45 UTC (boardNo 85). 13 Punkte, breit gestreut von Controller-Belegung über Haustiere bis zu charakterspezifischen Fähigkeiten. Enthält einen der seltenen Faelle, in denen Pearl Abyss eine Anleitung zur Wiederherstellung verlorener Gegenstaende mitliefert.",features:[
+    {cat:"Patch-Details",items:[
+      "[Controller] Die Taste für die <b>Namensänderung von Haustieren und Pferden</b> wurde von (R3/RS) zu (L3/LS) geändert.",
+      "Einige <b>Reittiere</b> wurden nicht im Schnellzugriff angezeigt und konnten nicht gerufen werden — behoben.",
+      "[PlayStation/Xbox] Die Option <b>„Voreinstellung wechseln“</b> wird nun identisch zur Darstellung auf PC-Geräten angezeigt.",
+      "<b>Haustiere</b> fraßen Holz oder Erz, das durch eine Holzfälleraxt oder Spitzhacke gewonnen wurde — behoben.",
+      "[Tastatur/Maus] Die <b>Platzierung von Möbeln</b> war in bestimmten Situationen nicht möglich — behoben.",
+      "Während des <b>Färbens oder Anpassens</b> kam es gelegentlich zu <b>Abstürzen</b> — behoben.",
+      "Die <b>Ausdauer</b> regenerierte sich durch das Wegstauen und erneute Ziehen bestimmter Waffen während des Sprintens — behoben.",
+      "[Damiane] Die Fähigkeit <b>„Licht reflektieren“</b> wurde in sicheren Zonen abgebrochen — behoben.",
+      "[Kliff] Die <b>Fluggeschwindigkeit</b> der Fähigkeit <b>„Himmelstritt der Krähe“</b> wurde fälschlicherweise verringert — behoben.",
+      "[Oongka/Damiane] Im Bosskampf war es nicht möglich, mit <b>Fernkampfwaffen andere Ziele als den Boss</b> anzuvisieren — behoben.",
+      "Man wurde zum <b>Titelbildschirm zurückgeleitet</b>, wenn man bei vollem Inventar durch <b>„Lernen durch Beobachten“</b> eine Fähigkeit lernte, die bereits durch ein Abyss-Artefakt erlernt war. <b>Wer dadurch Abyss-Artefakte nicht zurückbekommen hat, erhält sie durch Zurücksetzen aller Werte zurück.</b> <span style='color:var(--gdim)'>Der Satz ist in der offiziellen Fassung grammatikalisch unvollständig, das Wort „behoben“ fehlt dort. Die mitgelieferte Wiederherstellungsanleitung ist ungewöhnlich, Pearl Abyss macht das selten.</span>",
+      "Ein <b>visueller Treffereffekt</b> wurde selbst dann angezeigt, wenn man mit angelegter Maske einen NPC anzugreifen versuchte, der nicht angreifbar ist — behoben.",
+      "Es kam zu einem <b>Absturz</b>, wenn man mit einem Charakter mit angepasstem Aussehen gegen einen bestimmten Boss kämpfte — behoben. <span style='color:var(--gdim)'>Die offizielle Seite versteckt den Bossnamen hinter einem Spoiler-Aufklapper: es geht um <b>Umbra</b>.</span>"
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Sechs Plattformen mit dem Status <em>Patch jetzt verfügbar</em>: Steam (PC), Steam (Mac), PlayStation, Xbox, Epic Games Store, Mac App Store. Anders als bei 1.03.01 ist <em>Xbox on PC</em> hier nicht eigens aufgeführt.",
+      "Quelle: offizielle Patch-Notizen Version 1.04.01 (Hotfix für alle Plattformen), Pearl Abyss, 23.04.2026 14:45 UTC (boardNo 85). <span style='color:var(--gdim)'>Nachtrag vom 05.09.2026: Dieser Patch fehlte im Wiki-Bestand und wurde direkt an der offiziellen Notice-Seite nachrecherchiert.</span>"
+    ]}
+  ]},
   {ver:"1.04.00",date:"23.04.2026",size:"",features:[
     {cat:"Neuer Content",items:[
       "Schwierigkeitsgrade Easy / Normal / Hard (Easy: längere Parry-/Dodge-Fenster; Hard: stärkere Gegner, weniger Roll-Unverwundbarkeit, mehr Boss-Konter)",
@@ -1039,6 +1085,17 @@ const PATCHES=[
     {cat:"Hotfixes 1.04.01 / 1.04.02 (23.–24.04.)",items:[
       "1.04.01: Pet-/Pferde-Umbenennung auf L3/LS verlegt, Mount-Quick-Slot-Fix, Stamina-Exploit behoben, Crash-Fixes (Färben, Umbra-Bosskampf)",
       "1.04.02: Bewegungsgeschwindigkeit leicht erhöht, Pferde-Ausrüstung färbbar, Greymane Contribution Shop bei Carl, Möbel ziehen beim Camp-Umzug mit"
+    ]}
+  ]},
+  {ver:"1.03.01",date:"12.04.2026",size:"Hotfix fuer alle Plattformen, Release 12.04.2026 02:50 UTC (boardNo 83), einen Tag nach dem Hauptpatch 1.03.00. Drei Punkte, zwei davon zur Faehigkeit „Schleier des Windes“. Sieben Plattformen alle versorgt.",features:[
+    {cat:"Patch-Details",items:[
+      "<b>Projektile</b> prallten ab oder verschwanden, wenn die Fähigkeit <b>„Schleier des Windes“</b> benutzt wurde — behoben.",
+      "[Xbox] Bei Verwendung eines <b>Wireless-Controllers</b> ließ sich die Fähigkeit <b>„Schleier des Windes“</b> sporadisch nicht einsetzen — behoben.",
+      "<b>Beute</b> wurde gelegentlich nicht im <b>privaten Lager</b> aufbewahrt, wenn eine Region in bestimmten Situationen befreit wurde — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Sieben Plattformen mit dem Status <em>Patch jetzt verfügbar</em>: Steam (PC), Steam (Mac), PlayStation, Xbox, Xbox on PC, Epic Games Store, Mac App Store.",
+      "Quelle: offizielle Patch-Notizen Version 1.03.01 (Hotfix für alle Plattformen), Pearl Abyss, 12.04.2026 02:50 UTC (boardNo 83). <span style='color:var(--gdim)'>Nachtrag vom 05.09.2026: Dieser Patch fehlte im Wiki-Bestand und wurde direkt an der offiziellen Notice-Seite nachrecherchiert.</span>"
     ]}
   ]},
   {ver:"1.03.00",date:"11.04.2026",size:"",features:[
@@ -1080,6 +1137,41 @@ const PATCHES=[
       "FSR-Qualität verbessert (FSR SDK 2.2 auf PC); PS5 Pro: PSSR Sharpen + Native AA; Xbox Series X: 4K-Upscaling im Performance Mode"
     ]}
   ]},
+  {ver:"1.01.03",date:"31.03.2026",size:"Hotfix fuer alle Plattformen, Release 31.03.2026 03:05 UTC (boardNo 79). Genau eine Fehlerbehebung, dafuer eine gewichtige: stehengebliebene Bosse. Sieben Plattformen einzeln als versorgt aufgefuehrt, hier taucht <em>Xbox on PC</em> als eigener Eintrag neben Xbox auf.",features:[
+    {cat:"Patch-Details",items:[
+      "Einige <b>Bosse</b> bewegten sich im Kampf gelegentlich nicht mehr — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Sieben Plattformen mit dem Status <em>Patch jetzt verfügbar</em>: Steam (PC), Steam (Mac), PlayStation, Xbox, Xbox on PC, Epic Games Store, Mac App Store.",
+      "Quelle: offizielle Patch-Notizen Version 1.01.03 (Hotfix für alle Plattformen), Pearl Abyss, 31.03.2026 03:05 UTC (boardNo 79). <span style='color:var(--gdim)'>Nachtrag vom 05.09.2026: Dieser Patch fehlte im Wiki-Bestand und wurde direkt an der offiziellen Notice-Seite nachrecherchiert.</span>"
+    ]}
+  ]},
+  {ver:"1.01.02",date:"30.03.2026",size:"Reiner Steam-Hotfix am selben Tag wie 1.01.01, Release 30.03.2026 10:05 UTC (boardNo 78). Zwei Punkte, beide zur Bildqualitaet. Kein Update-Zeitplan auf der Seite, weil die Notiz nur Steam betrifft.",features:[
+    {cat:"Patch-Details",items:[
+      "Die Bildqualität von <b>NVIDIA Ray Reconstruction</b> und <b>DLSS</b> wurde teilweise verbessert. Pearl Abyss kündigt an, den Bereich weiter zu prüfen und zu optimieren.",
+      "Das Bild wirkte in bestimmten Umgebungen <b>unscharf</b>, und an den Übergängen zwischen <b>Himmel und Wolken</b> sowie bei <b>Raucheffekten an Schornsteinen</b> kam es zu <b>Flackern</b>, wenn diese Effekte sich mit umgebenden Objekten überschnitten — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Nur <b>Steam</b>. Die Seite führt keinen Update-Zeitplan mit Plattformstatus.",
+      "Quelle: offizielle Patch-Notizen Version 1.01.02 (Steam Hotfix), Pearl Abyss, 30.03.2026 10:05 UTC (boardNo 78). <span style='color:var(--gdim)'>Nachtrag vom 05.09.2026: Dieser Patch fehlte im Wiki-Bestand und wurde direkt an der offiziellen Notice-Seite nachrecherchiert.</span>"
+    ]}
+  ]},
+  {ver:"1.01.01",date:"30.03.2026",size:"Erster Hotfix nach dem ersten großen Patch, Release 30.03.2026 00:20 UTC (boardNo 77). Acht Fehlerbehebungen, Schwerpunkt auf Reittieren und darauf, dass Damiane und Oongka Dinge nicht konnten oder angezeigt bekamen, die ihnen nicht zustanden. Xbox war zum Zeitpunkt der Veröffentlichung als einzige Plattform noch in Vorbereitung.",features:[
+    {cat:"Patch-Details",items:[
+      "Die Taste zur Verwendung der <b>Amulette der fünf neuen Reittiere</b> wurde fälschlicherweise auch für <b>Damiane und Oongka</b> angezeigt — behoben.",
+      "Der <b>Schwarzstern</b> verschwand nach dem Tod nicht, sondern blieb in der Luft stehen — behoben.",
+      "Der <b>A.T.A.G.</b> wurde nicht zerstört, auch wenn seine Gesundheit auf 0 sank — behoben.",
+      "Die Benutzeroberfläche zur Auswahl eines <b>Verfeinerungsziels</b> war unter bestimmten Bedingungen nicht mehr verfügbar — behoben.",
+      "Das Halten der Taste zum <b>Folgen von NPCs</b> führte während einiger Quests zu ungewöhnlichen Bewegungen des Pferdes — behoben.",
+      "Der <b>Sprint auf dem Weißbär</b> ließ sich nicht verwenden — behoben.",
+      "Die Steuerung reagierte während der Interaktion <b>„Untersuchen“ mit dem Sternbild-Helm</b> nicht mehr — behoben.",
+      "Die <b>Verfeinerung von Ausrüstung</b> war mit <b>Damiane und Oongka</b> nicht möglich — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Sechs Plattformen aufgeführt: Steam (PC), Steam (Mac), PlayStation, Epic Games Store und Mac App Store mit <em>Patch jetzt verfügbar</em>; <b>Xbox</b> stand als einzige auf <em>Patch wird derzeit vorbereitet</em>.",
+      "Quelle: offizielle Patch-Notizen Version 1.01.01 (Hotfix für alle Plattformen), Pearl Abyss, 30.03.2026 00:20 UTC (boardNo 77). <span style='color:var(--gdim)'>Nachtrag vom 05.09.2026: Dieser Patch fehlte im Wiki-Bestand und wurde direkt an der offiziellen Notice-Seite nachrecherchiert.</span>"
+    ]}
+  ]},
   {ver:"1.01.00",date:"28.03.2026",size:"",features:[
     {cat:"Content",items:[
       "5 neue beschwörbare Mounts: White Bear, Silver Fang, Snowwhite Deer, Rock Tusk Warthog, Icicle Edge Alpine Ibex",
@@ -1100,6 +1192,17 @@ const PATCHES=[
       "1.01.01: Mount-Talisman-, Blackstar-, A.T.A.G.- und Tempering-UI-Fixes; Sprint auf White Bear ermöglicht",
       "1.01.02 (Steam): DLSS-/Ray-Reconstruction-Verbesserungen, Flacker-Fixes an Himmel-/Wolkengrenzen",
       "1.01.03: Bosse blieben gelegentlich im Kampf stehen — behoben"
+    ]}
+  ]},
+  {ver:"1.00.04",date:"23.03.2026",size:"Besonderheit: Zu dieser Versionsnummer gibt es <b>zwei getrennte Patch-Notizen</b> unter zwei Board-Nummern, je eine pro Plattform. Der PlayStation-Hotfix erschien am 23.03.2026 um 07:25 UTC (boardNo 74), der Mac-Steam-Hotfix am 24.03.2026 um 16:51 UTC (boardNo 75). Beide tragen dieselbe Version, betreffen aber unterschiedliche Fehler. Hier sind sie als ein Eintrag zusammengefasst und nach Plattform getrennt ausgewiesen.",features:[
+    {cat:"PlayStation-Hotfix (23.03.2026, 07:25 UTC)",items:[
+      "[PS5 Pro, PS5] <b>Bewegungen und Interaktionen</b> funktionierten nach dem <b>Wechsel von einem anderen Charakter zu Kliff</b> nicht ordnungsgemäß — behoben."
+    ]},
+    {cat:"Mac-Steam-Hotfix (24.03.2026, 16:51 UTC)",items:[
+      "[Mac Steam] Es kam gelegentlich zu <b>Abstürzen</b>, wenn Quests abgeschlossen, das Spiel gestartet oder beendet wurde — behoben."
+    ]},
+    {cat:"Quelle",items:[
+      "Offizielle Patch-Notizen Version 1.00.04 (PlayStation Hotfix), boardNo 74, und Version 1.00.04 (Mac Steam Hotfix), boardNo 75, Pearl Abyss. <span style='color:var(--gdim)'>Nachtrag vom 05.09.2026: Diese Version fehlte im Wiki-Bestand und wurde direkt an beiden offiziellen Notice-Seiten nachrecherchiert. Dass eine Versionsnummer zwei plattformspezifische Notizen trägt, ist bei Pearl Abyss kein Einzelfall.</span>"
     ]}
   ]},
   {ver:"1.00.03",date:"23.03.2026",size:"",features:[
