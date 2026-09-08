@@ -70,9 +70,23 @@ const GEMISCHT = new Set(["Blunt/Axe"]);
 // - Electro-Mecha Longsword: 4 statt 5 Slots. Belegt durch Fextralife und
 //   questlog ("two-handed weapons come equipped with x5 Abyss Core slots, though
 //   the Electro-Mecha Longsword specifically has 4 slots available"), Stand
-//   Patch 1.08. Die Schwesterwaffe Electro-Mecha Spear hat regulaer 5.
+//   Patch 1.08.
+// - Acht weitere Zweihaender mit 4 Slots, belegt am 07.09.2026 ueber die questlog-tRPC-API
+//   (database.getItem, itemSockets.maxSocketCount 4 mit genau 4 socketOpenCosts) und VULKK
+//   (je vier Slot-Icons): die sechs Kuku-Speere, Electro-Mecha Spear und Soul Spear. Die
+//   fruehere Annahme "Electro-Mecha Spear hat regulaer 5" ist damit widerlegt. Fextralife
+//   taugt fuer Slots nicht als Quelle: die Seite druckt "x5" als Klassen-Boilerplate, auch
+//   dort, wo 4 belegt ist. Belege: G:/Claude/Crimson-Wiki-Slots-Crit-2026-09-07/.
 const AUSNAHMEN = new Map([
   ["Electro-Mecha Longsword", 4],
+  ["Electro-Mecha Spear", 4],
+  ["Soul Spear", 4],
+  ["Kuku Lightning Spear", 4],
+  ["Kuku Flame Spear", 4],
+  ["Kuku Bismuth Spear", 4],
+  ["Kuku Propeller Spear", 4],
+  ["Kuku Disruptor Spear", 4],
+  ["Kuku Laser Cannon Spear", 4],
 ]);
 
 const proTyp = {};
@@ -126,10 +140,17 @@ const doppelt = [...new Set(namen.filter((n, i) => namen.indexOf(n) !== i))];
 ok(doppelt.length === 0, `keine doppelten Waffennamen (gefunden: ${doppelt.length}${doppelt.length ? " -> " + doppelt.slice(0, 3).join(", ") : ""})`);
 
 // Abschliessende Lagemeldung zur Datenvollstaendigkeit (kein Fehler, nur Info)
-const ohneCrit = WEAPONS.filter((w) => w.crit == null).length;
+// crit_none:true markiert Waffen, bei denen questlog.gg (tRPC database.getItem, levels[0].stats)
+// und gaming.tools KEIN Critical-Rate-Feld fuehren (Ernte 07.09.2026). Das ist kein
+// Rueckstand, sondern der Spielstand; der Marker darf nur neben crit:null stehen.
+const critNoneFalsch = WEAPONS.filter((w) => w.crit_none && w.crit != null);
+ok(critNoneFalsch.length === 0,
+  `crit_none nur bei crit:null (Verstoesse: ${critNoneFalsch.length}${critNoneFalsch.length ? " -> " + critNoneFalsch.slice(0, 3).map((w) => w.name).join(", ") : ""})`);
+const ohneCrit = WEAPONS.filter((w) => w.crit == null && !w.crit_none).length;
+const keinCrit = WEAPONS.filter((w) => w.crit == null && w.crit_none).length;
 const ohneSlots = WEAPONS.filter((w) => w.slots == null).length;
-console.log(`\n  info  nicht erfasst: crit ${ohneCrit}/${WEAPONS.length}, slots ${ohneSlots}/${WEAPONS.length}`);
-console.log("  info  Slot-Regel: 2H und Ranged = 5, 1H = 3, Shield = 2, Dagger = 0");
+console.log(`\n  info  nicht erfasst: crit ${ohneCrit}/${WEAPONS.length} (dazu ${keinCrit} ohne Crit-Stat laut questlog/gaming.tools), slots ${ohneSlots}/${WEAPONS.length}`);
+console.log("  info  Slot-Regel: 2H und Ranged = 5, 1H = 3, Shield = 2, Dagger = 0; Kuku-/Electro-Mecha-/Soul-Speere = 4; nicht ausruestbare Items ohne Sockelsystem = 0");
 
 console.log(`\n${fail === 0 ? "ALLE CHECKS GRUEN" : fail + " CHECK(S) FEHLGESCHLAGEN"}`);
 process.exit(fail === 0 ? 0 : 1);
