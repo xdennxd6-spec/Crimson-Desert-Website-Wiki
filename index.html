@@ -655,6 +655,10 @@ input.fs::-webkit-search-cancel-button{cursor:pointer;opacity:.55}
    KARTEN = kartografische Platten (harte Ecken, harte Schatten)
    ============================================================ */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+#weapon-tb,
+#armor-grid{align-items:start}
+#weapon-tb .card,
+#armor-grid .card{align-self:start}
 .card{
   background:var(--vellum-hi);
   border:1px solid var(--iron-gall);
@@ -1801,6 +1805,45 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .set-more>summary:hover{color:var(--survey-red)}
 .set-more>summary:focus-visible{outline:2px solid var(--survey-red);outline-offset:2px}
 .set-more-body{font-size:var(--fs-11);color:var(--iron-soft);line-height:1.55;padding:6px 0 0}
+.item-more{
+  margin:0;
+}
+.item-more > summary{
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--f-mono);
+  font-size:var(--fs-10);
+  letter-spacing:.04em;
+  color:var(--brass);
+  padding:2px 0;
+}
+.item-more > summary::-webkit-details-marker{display:none}
+.item-more > summary::after{
+  content:"▸";
+  margin-left:auto;
+  transition:transform .16s,color .16s;
+  color:var(--dim);
+}
+.item-more[open] > summary::after{
+  transform:rotate(90deg);
+  color:var(--survey-red);
+}
+.item-more > summary:hover{
+  color:var(--survey-red);
+}
+.item-more > summary:focus-visible{
+  outline:2px solid var(--survey-red);
+  outline-offset:2px;
+}
+.item-more-body{
+  padding-top:6px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
 .set-quelle{font-size:var(--fs-10-5);color:var(--gdim);margin-top:6px}
 .set-piece button{background:none;border:0;padding:0;font:inherit;color:var(--brass);cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:2px}
 .set-piece button:hover{color:var(--survey-red)}
@@ -6572,8 +6615,33 @@ function _openForSearch(el){
     d=d.parentElement?d.parentElement.closest('details'):null;
   }
 }
-function _closeSearchOpened(){
-  document.querySelectorAll('details[data-srch-open]').forEach(d=>{d.open=false;delete d.dataset.srchOpen;});
+function _closeSearchOpened(scope=document){
+  scope.querySelectorAll('details[data-srch-open]').forEach(d=>{d.open=false;delete d.dataset.srchOpen;});
+}
+function _snapshotOpenItemDetails(scope){
+  const out={};
+  if(!scope)return out;
+  scope.querySelectorAll('.card[data-item-id] details.item-more').forEach(d=>{
+    if(!d.open||d.dataset.srchOpen==='1')return;
+    const k=d.closest('.card')?.dataset.itemId;
+    if(k) out[k]='1';
+  });
+  return out;
+}
+function _openItemDetailsForSearch(el,qF){
+  if(!el||!qF)return;
+  const d=el.querySelector('details.item-more');
+  if(!d)return;
+  const h=el._itemHidden||(_fold(el.dataset.itemHidden||''));
+  if(!h) return;
+  el._itemHidden=h;
+  const v=el._itemVisible||(_fold(el.dataset.itemVisible||''));
+  if(v) el._itemVisible=v;
+  if(v.includes(qF)) return;
+  if(h.includes(qF)&&!d.open){
+    d.open=true;
+    d.dataset.srchOpen='1';
+  }
 }
 
 // Gruppenkoepfe tragen selbst kein data-s und blieben deshalb als leere Huelsen stehen
@@ -6650,7 +6718,7 @@ function _doSearchImpl(q){
     _collapseEmptyGroups(document,false);
     document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
     if(document.getElementById('sec-weapons')&&document.getElementById('sec-weapons').classList.contains('active')&&typeof renderWeapons==='function')renderWeapons();
-    if(typeof armorCount==='function')armorCount();
+    if(typeof armorFilter==='function')armorFilter();
     return;
   }
   // Only operate within the active section — drastically reduces work
@@ -6664,7 +6732,12 @@ function _doSearchImpl(q){
     // sonst holt ein Texttreffer sie zurueck und haebelt den Filter aus.
     const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF)&&el.dataset.filtered!=='1';
     el.classList.toggle('hide',!m);
-    if(m){total++;_openForSearch(el);if(matchedForHL.length<80)matchedForHL.push(el);}
+    if(m){
+      total++;
+      _openForSearch(el);
+      _openItemDetailsForSearch(el,qF);
+      if(matchedForHL.length<80)matchedForHL.push(el);
+    }
   });
   // Hide elements outside active section (only if any non-active section element has data-s)
   // — they remain in DOM but won't render due to .sec not having active
@@ -6673,7 +6746,7 @@ function _doSearchImpl(q){
   _collapseEmptyGroups(scope,true);
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
   {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
-  if(typeof armorCount==='function')armorCount();
+  if(typeof armorFilter==='function')armorFilter();
   // Empty-State — mit sektionsuebergreifendem Fallback ("Alles durchsuchen" einloesen)
   document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
   if(total===0&&activeSec){
@@ -6986,6 +7059,7 @@ function changeWepPage(d){
 function renderWeapons(){
   const f=document.getElementById('wf-type').value;
   const si=document.getElementById('si');
+  const savedOpenState=_snapshotOpenItemDetails(document.getElementById('weapon-tb'));
   const q=((si&&si.value)||'').trim().toLowerCase();
   const searching=!!q;
   const qF=_fold(q);
@@ -6998,13 +7072,17 @@ function renderWeapons(){
   let shown=0;
   document.getElementById('weapon-tb').innerHTML=WEAPONS.map(w=>{
     const passFilter=!f||w.type.includes(f);
-    const s=[w.name,w.type,w.source,w.built_in,w.notes].join(' ').toLowerCase();
+    const sourceText=w.source&&w.source.trim()?w.source:'Sammelimport';
+    const s=[w.name,w.type,sourceText,w.built_in,w.notes].join(' ').toLowerCase();
+    const hidden=[sourceText,w.notes].filter(Boolean).join(' ');
+    const visible=[w.name,w.type,w.built_in,w.def,w.atk,w.crit,w.slots].filter(v=>v!==undefined&&v!==null&&v!=='').join(' ').toLowerCase();
     let show=false;
     if(passFilter){ if(searching){show=_fold(s).includes(qF);} else {fi++;show=(fi>=start&&fi<end);} }
     if(show)shown++;
-    const src=w.source&&w.source.trim()?w.source:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
+    const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
+    const wasOpen=savedOpenState[w.name]==='1';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
-    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
+    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
       ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
       <div class="ct">${w.name}</div>
       <div class="cm"><span class="tag tx">${w.type}</span></div>
@@ -7012,9 +7090,14 @@ function renderWeapons(){
         <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>')}</span></div>
         <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
         <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>
-        <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${src}</span></div>
         ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
-        ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${w.notes}</span></div>`:''}
+        <details class="item-more"${wasOpen?' open':''}>
+          <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
+          <div class="item-more-body">
+            <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${src}</span></div>
+            ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${w.notes}</span></div>`:''}
+          </div>
+        </details>
       </div>
       <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>
     </div>`;
@@ -7691,6 +7774,7 @@ function renderArmor(){
   const sortEl=document.getElementById('af-sort');
   const sort=sortEl?sortEl.value:'type';
   const liste=ARMOR.slice();
+  const savedOpenState=_snapshotOpenItemDetails(document.getElementById('armor-grid'));
   const nachName=(a,b)=>a.name.localeCompare(b.name,'de');
   if(sort==='name')liste.sort(nachName);
   else if(sort==='def')liste.sort((a,b)=>((armorNum(b.effect,'def')??-1)-(armorNum(a.effect,'def')??-1))||nachName(a,b));
@@ -7698,17 +7782,26 @@ function renderArmor(){
   else if(sort==='prov')liste.sort((a,b)=>((ARMOR_PROV_ORDER[a.prov]??9)-(ARMOR_PROV_ORDER[b.prov]??9))||nachName(a,b));
   else liste.sort((a,b)=>(ARMOR_TYPE_ORDER.indexOf(a.type)-ARMOR_TYPE_ORDER.indexOf(b.type))||nachName(a,b));
   document.getElementById('armor-grid').innerHTML=liste.map(a=>{
-    const s=[a.name,a.type,a.source,a.effect,a.notes].join(' ').toLowerCase();
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
-    const srcDisp=a.source&&a.source.trim()?a.source:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
-    return `<div class="card" data-s="${s}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}">
+    const sourceText=a.source&&a.source.trim()?a.source:'Sammelimport';
+    const s=[a.name,a.type,sourceText,a.effect,a.notes].join(' ').toLowerCase();
+    const hidden=[sourceText,a.notes].filter(Boolean).join(' ');
+    const visible=[a.name,a.type,a.effect].filter(v=>v).join(' ').toLowerCase();
+    const srcDisp=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
+    const wasOpen=savedOpenState[a.name]==='1';
+    return `<div class="card" data-s="${s}" data-item-id="${escHtml(a.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${a.name}</div>
       <div class="cm"><span class="tag ${typeColor}">${a.type}</span>${armorProvBadge(a.prov)}</div>
       <div class="crows">
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${a.effect}</span></div>
-        <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${srcDisp}</span></div>
-        ${a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${a.notes}</span></div>`:''}
+        <details class="item-more"${wasOpen?' open':''}>
+          <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
+          <div class="item-more-body">
+            <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${srcDisp}</span></div>
+            ${a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${a.notes}</span></div>`:''}
+          </div>
+        </details>
       </div>
       <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>
     </div>`;
@@ -7730,6 +7823,7 @@ function armorFilter(){
   const lq=_fold(wert('af-q').trim());
   const si=document.getElementById('si');
   const gq=_fold(((si&&si.value)||'').trim());
+  _closeSearchOpened(g);
   g.querySelectorAll('.card').forEach(el=>{
     const d=el.dataset;
     let ok=(!ft||d.type===ft)&&(!fp||d.prov===fp)&&(!fm||(fm==='none'?!d.mat:d.mat===fm));
@@ -7737,6 +7831,10 @@ function armorFilter(){
     if(ok&&lq)ok=txt.includes(lq);
     d.filtered=ok?'0':'1';
     el.classList.toggle('hide',!(ok&&(!gq||txt.includes(gq))));
+    if(ok&&(!gq||txt.includes(gq))){
+      _openItemDetailsForSearch(el,lq);
+      _openItemDetailsForSearch(el,gq);
+    }
   });
   armorCount();
 }
