@@ -1,0 +1,265 @@
+{
+  "verifiedOn": "2026-09-09",
+  "method": "Exact item names and explicit IDs verified against current questlog database.getItem responses; downloaded original sprites; visually checked. Grave Robber uses the armor-category record 1000348, not the goods variants.",
+  "flamespitterEvidence": "https://www.powerpyx.com/crimson-desert-all-special-equipment-challenges/",
+  "items": [
+    {
+      "name": "KuKu Rocket Helmet",
+      "group": "armor",
+      "id": "1000975",
+      "sourceName": "Kuku Rocket Helmet - Equipped by Default",
+      "icon": "/assets/_sprites/itemicon_.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000975",
+      "unresolved": "Source has only generic or empty icon"
+    },
+    {
+      "name": "Blacksmith's Leather Armor",
+      "group": "armor",
+      "id": "1004812",
+      "sourceName": "Blacksmith's Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_26063.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004812",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_26063.webp",
+      "localPath": "cd_assets/armor/item-1004812.webp"
+    },
+    {
+      "name": "Huskall Leather Armor",
+      "group": "armor",
+      "id": "113717",
+      "sourceName": "Huskall Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_21244.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/113717",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_21244.webp",
+      "localPath": "cd_assets/armor/item-113717.webp"
+    },
+    {
+      "name": "Grave Robber's Leather Armor",
+      "group": "armor",
+      "id": "1000348",
+      "sourceName": "Grave Robber's Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_no_pgm_ub_21011.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000348",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_no_pgm_ub_21011.webp",
+      "localPath": "cd_assets/armor/item-1000348.webp"
+    },
+    {
+      "name": "Oak Barrel Leather Armor",
+      "group": "armor",
+      "id": "1004811",
+      "sourceName": "Oak Barrel Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_43008.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004811",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_43008.webp",
+      "localPath": "cd_assets/armor/item-1004811.webp"
+    },
+    {
+      "name": "Stein Leather Armor",
+      "group": "armor",
+      "id": "1004821",
+      "sourceName": "Stein Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0188.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004821",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0188.webp",
+      "localPath": "cd_assets/armor/item-1004821.webp"
+    },
+    {
+      "name": "Lonely Bomb Leather Armor",
+      "group": "armor",
+      "id": "1004810",
+      "sourceName": "Lonely Bomb Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_de_phm_ub_23005.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004810",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_de_phm_ub_23005.webp",
+      "localPath": "cd_assets/armor/item-1004810.webp"
+    },
+    {
+      "name": "Mardain Leather Armor",
+      "group": "armor",
+      "id": "1004820",
+      "sourceName": "Mardain Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_nhm_so_ub_10634.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004820",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_nhm_so_ub_10634.webp",
+      "localPath": "cd_assets/armor/item-1004820.webp"
+    },
+    {
+      "name": "Vildyne Leather Armor",
+      "group": "armor",
+      "id": "12205",
+      "sourceName": "Vildyne Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_26002.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/12205",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_26002.webp",
+      "localPath": "cd_assets/armor/item-12205.webp"
+    },
+    {
+      "name": "Besnet Cloth Armor",
+      "group": "armor",
+      "id": "2114049",
+      "sourceName": "Besnet Cloth Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_23008.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2114049",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_23008.webp",
+      "localPath": "cd_assets/armor/item-2114049.webp"
+    },
+    {
+      "name": "Devan's Cloth Armor",
+      "group": "armor",
+      "id": "1001143",
+      "sourceName": "Devan's Cloth Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_nhm_so_ub_51028.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1001143",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_nhm_so_ub_51028.webp",
+      "localPath": "cd_assets/armor/item-1001143.webp"
+    },
+    {
+      "name": "Valnos Leather Armor",
+      "group": "armor",
+      "id": "1004818",
+      "sourceName": "Valnos Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_22004.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004818",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_22004.webp",
+      "localPath": "cd_assets/armor/item-1004818.webp"
+    },
+    {
+      "name": "Besnet Plate Helm",
+      "group": "armor",
+      "id": "1002092",
+      "sourceName": "Besnet Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_set_0101_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1002092",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hel_set_0101_c.webp",
+      "localPath": "cd_assets/armor/item-1002092.webp"
+    },
+    {
+      "name": "Red Rider's Plate Helm",
+      "group": "armor",
+      "id": "14402",
+      "sourceName": "Red Rider's Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_20_0349_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/14402",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hel_20_0349_c.webp",
+      "localPath": "cd_assets/armor/item-14402.webp"
+    },
+    {
+      "name": "Red Rider's Plate Armor",
+      "group": "armor",
+      "id": "1004883",
+      "sourceName": "Red Rider's Plate Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_20_0349.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004883",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_ub_20_0349.webp",
+      "localPath": "cd_assets/armor/item-1004883.webp"
+    },
+    {
+      "name": "Martial Artist's Cloth Garb",
+      "group": "armor",
+      "id": "1004780",
+      "sourceName": "Martial Artist's Cloth Garb",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_23139.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004780",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_23139.webp",
+      "localPath": "cd_assets/armor/item-1004780.webp"
+    },
+    {
+      "name": "Frenoa Plate Armor",
+      "group": "armor",
+      "id": "1004803",
+      "sourceName": "Frenoa Plate Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0141.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004803",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0141.webp",
+      "localPath": "cd_assets/armor/item-1004803.webp"
+    },
+    {
+      "name": "Blinding Arrow's Light Leather Armor",
+      "group": "armor",
+      "id": "2133099",
+      "sourceName": "Blinding Arrow's Light Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phw_ub_22001.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2133099",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phw_ub_22001.webp",
+      "localPath": "cd_assets/armor/item-2133099.webp"
+    },
+    {
+      "name": "Duskmoon Cloth Armor",
+      "group": "armor",
+      "id": "1004805",
+      "sourceName": "Duskmoon Cloth Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_01_ub_00_0380.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004805",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_01_ub_00_0380.webp",
+      "localPath": "cd_assets/armor/item-1004805.webp"
+    },
+    {
+      "name": "Bobfett Plate Helm",
+      "group": "armor",
+      "id": "1000040",
+      "sourceName": "Bobfett Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_0169_01_index01_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000040",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hel_0169_01_index01_c.webp",
+      "localPath": "cd_assets/armor/item-1000040.webp"
+    },
+    {
+      "name": "Dark Executioner Leather Armor",
+      "group": "armor",
+      "id": "1004802",
+      "sourceName": "Dark Executioner Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0145.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004802",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0145.webp",
+      "localPath": "cd_assets/armor/item-1004802.webp"
+    },
+    {
+      "name": "Rivenheim Cloth Armor",
+      "group": "armor",
+      "id": "1004804",
+      "sourceName": "Rivenheim Cloth Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0180_u.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004804",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0180_u.webp",
+      "localPath": "cd_assets/armor/item-1004804.webp"
+    },
+    {
+      "name": "Sermena Cloth Armor",
+      "group": "armor",
+      "id": "1004800",
+      "sourceName": "Sermena Cloth Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0184_u.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004800",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_ub_00_0184_u.webp",
+      "localPath": "cd_assets/armor/item-1004800.webp"
+    },
+    {
+      "name": "Rovenia Cloth Armor",
+      "group": "armor",
+      "id": "1004801",
+      "sourceName": "Rovenia Cloth Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_de_phw_ub_21002.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004801",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_de_phw_ub_21002.webp",
+      "localPath": "cd_assets/armor/item-1004801.webp"
+    },
+    {
+      "name": "Invisible Longsword",
+      "group": "weapons",
+      "id": "1000491",
+      "sourceName": "Invisible Longsword",
+      "icon": "/assets/_sprites/createicon.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000491",
+      "unresolved": "Source has only generic or empty icon"
+    },
+    {
+      "name": "Flamespitter",
+      "group": "weapons",
+      "id": "330002",
+      "sourceName": "Electromagnetic Flamespitter",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_02_greekfire_0001.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/330002",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_02_greekfire_0001.webp",
+      "localPath": "cd_assets/weapons/item-330002.webp"
+    }
+  ]
+}

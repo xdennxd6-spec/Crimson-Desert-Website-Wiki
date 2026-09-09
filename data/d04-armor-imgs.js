@@ -425,6 +425,31 @@ const MOUNT_INGAME_IMGS={
   "Giant Red Iguana": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_iguana_2.webp"
 };
 const ARMOR_IMGS={
+  // Item-Bilder am 09.09.2026 gegen questlog-IDs geprueft; Belege: item-image-sources.json
+  "Blacksmith's Leather Armor":"cd_assets/armor/item-1004812.webp",
+  "Huskall Leather Armor":"cd_assets/armor/item-113717.webp",
+  "Grave Robber's Leather Armor":"cd_assets/armor/item-1000348.webp",
+  "Oak Barrel Leather Armor":"cd_assets/armor/item-1004811.webp",
+  "Stein Leather Armor":"cd_assets/armor/item-1004821.webp",
+  "Lonely Bomb Leather Armor":"cd_assets/armor/item-1004810.webp",
+  "Mardain Leather Armor":"cd_assets/armor/item-1004820.webp",
+  "Vildyne Leather Armor":"cd_assets/armor/item-12205.webp",
+  "Besnet Cloth Armor":"cd_assets/armor/item-2114049.webp",
+  "Devan's Cloth Armor":"cd_assets/armor/item-1001143.webp",
+  "Valnos Leather Armor":"cd_assets/armor/item-1004818.webp",
+  "Besnet Plate Helm":"cd_assets/armor/item-1002092.webp",
+  "Red Rider's Plate Helm":"cd_assets/armor/item-14402.webp",
+  "Red Rider's Plate Armor":"cd_assets/armor/item-1004883.webp",
+  "Martial Artist's Cloth Garb":"cd_assets/armor/item-1004780.webp",
+  "Frenoa Plate Armor":"cd_assets/armor/item-1004803.webp",
+  "Blinding Arrow's Light Leather Armor":"cd_assets/armor/item-2133099.webp",
+  "Duskmoon Cloth Armor":"cd_assets/armor/item-1004805.webp",
+  "Bobfett Plate Helm":"cd_assets/armor/item-1000040.webp",
+  "Dark Executioner Leather Armor":"cd_assets/armor/item-1004802.webp",
+  "Rivenheim Cloth Armor":"cd_assets/armor/item-1004804.webp",
+  "Sermena Cloth Armor":"cd_assets/armor/item-1004800.webp",
+  "Rovenia Cloth Armor":"cd_assets/armor/item-1004801.webp",
+
   // Torso
   "Ashclaw Leather Armor":"cd_assets/armor/ashclaw-leather.webp",
   "Belkandor Plate Armor":"cd_assets/armor/belkandor-plate.webp",

@@ -501,6 +501,9 @@ const SKILL_IMGS={
   "Focused Force Palm":"cd_assets/skills/force_palm.webp"
 };
 const WEAPON_IMGS={
+  // Item-Bilder am 09.09.2026 gegen questlog-IDs geprueft; Belege: item-image-sources.json
+  "Flamespitter":"cd_assets/weapons/item-330002.webp",
+
   // FIX 2026-06-14 (Pi): 43 zuvor bildlose Waffen mit echten In-Game-Icons gefuellt (Schilde/Pikes/Greatsword-Giants/Musketen/Fists/Branches via crimsondb.gg-CDN; Lucon+Rhonid via Fextralife/Screenshot; A.T.A.G.-Mech-Render via TheGamer). Combat Gods Plate Gloves: fehlende cd_assets/armor/combat-gods-gloves.webp via Fextralife ergaenzt. Namen 1:1 gegen WEAPONS gematcht, alle Icons visuell verifiziert.
   "Parvel Greatsword Giant":"cd_assets/weapons/parvel-greatsword-giant.webp",
   "Arben Greatsword Giant":"cd_assets/weapons/arben-greatsword-giant.webp",
