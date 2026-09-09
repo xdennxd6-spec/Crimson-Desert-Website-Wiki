@@ -7837,7 +7837,7 @@ function renderArmorSets(){
 function mountCard(m){
   const sig=m.type.includes('Sigil');
   const badge=m.type==='Drache'?'tw':sig?'tg':m.type.startsWith('Fahrzeug')?'tx':'tr';
-  const img=MOUNT_IMGS[m.name]||MOUNT_INGAME_IMGS[m.name];
+  const img=MOUNT_IMGS[m.name];
   const s=[m.name,m.type,m.unlock,m.stats,m.notes].join(' ').toLowerCase();
   return `<div class="card" data-s="${s}">
     ${favBtn('mount',m.name)}

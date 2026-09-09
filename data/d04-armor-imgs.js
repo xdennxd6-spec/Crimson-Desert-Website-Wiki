@@ -357,7 +357,21 @@ const MOUNT_IMGS={
   "Marni's Mechahorse":       "cd_assets/mounts/marnis-mechahorse.webp",
   "Rosehorn Deer":"cd_assets/mounts/rosehorn-deer.svg",
   "Leaping Kuku Bird":"cd_assets/mounts/leaping-kuku-bird.svg",
-  "Calphadean Scout's Horse":"cd_assets/mounts/calphadean_scouts_horse.png"
+  "Calphadean Scout's Horse":"cd_assets/mounts/calphadean-scouts-horse.svg",
+  "Hernandian Warhorse":"cd_assets/mounts/hernandian-warhorse.svg",
+  "Demenissian War Horse":"cd_assets/mounts/demenissian-war-horse.svg",
+  "Delesyian Warhorse":"cd_assets/mounts/delesyian-warhorse.svg",
+  "Wells's Military Horse":"cd_assets/mounts/wells-military-horse.svg",
+  "Clawed Bear":"cd_assets/mounts/clawed-bear.svg",
+  "Grizzly Bear":"cd_assets/mounts/grizzly-bear.svg",
+  "Ibex":"cd_assets/mounts/ibex.svg",
+  "Swift Wolf":"cd_assets/mounts/swift-wolf.svg",
+  "Large White Wolf":"cd_assets/mounts/large-white-wolf.svg",
+  "Giant Red Iguana":"cd_assets/mounts/giant-red-iguana.svg",
+  "Cloudcruiser":"cd_assets/mounts/cloudcruiser.svg",
+  "Skystreaker":"cd_assets/mounts/skystreaker.svg",
+  "A.T.A.G.":"cd_assets/mounts/atag.svg",
+  "High-Mobility A.T.A.G.":"cd_assets/mounts/high-mobility-atag.svg"
 };
 const MOUNT_INGAME_IMGS={
   "Herspia":        "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_animal_lumif_wild_32506.webp",
