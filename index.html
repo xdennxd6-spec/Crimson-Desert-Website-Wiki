@@ -1941,12 +1941,12 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .craft-ico{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:8px;background:var(--vellum-hi);padding:2px;flex-shrink:0;border:1px solid var(--iron-gall);border-radius:8px;filter:grayscale(.15) contrast(1.03)}
 .craft-grade{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:auto;flex-shrink:0}
 /* Item-Icons in den Kompendium-Tabellen (Itemdex/Gatherables/Food).
-   Groesse zentral ueber --item-ico nachjustierbar. Das Kaestchen ist border-box, die sichtbare
-   Bildflaeche also Groesse minus 2x padding minus 2x border: 32px ergeben 26px Bild und damit
-   dieselbe Bildflaeche wie Dye-Chips (.dye-chip); mit den alten 24px blieben nur 18px und die
-   Icons wirkten in den 65-170px hohen Tabellenzeilen verloren.
+   32px bleibt die kompakte Basis fuer Gatherables und Food. Im deutlich hoeheren Itemdex
+   nutzt die lokale Variable 56px: Das ergibt 50px sichtbare Bildflaeche und passt zu den
+   77-396px hohen Tabellenzeilen, ohne andere Kompendium-Seiten mitzuveraendern.
    Die Sprites sind 256px-Quellen, Vergroessern kostet keine Schaerfe. */
 :root{--item-ico:32px}
+#itemdex-tb{--item-ico:56px}
 .item-ico{width:var(--item-ico);height:var(--item-ico);object-fit:contain;vertical-align:middle;margin-right:8px;background:var(--vellum-hi);padding:2px;border:1px solid var(--iron-gall);border-radius:8px;filter:grayscale(.15) contrast(1.03)}
 /* Accessoire-Karten: gleiche Bildgroesse und Kopfleistenhoehe wie Waffen/Ruestungen. */
 .acc-icon-hd{min-height:90px;justify-content:center;padding:5px 15px}
