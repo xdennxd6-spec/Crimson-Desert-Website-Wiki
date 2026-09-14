@@ -53,7 +53,7 @@ const MISSABLE_ITEMS=[
   {id:'ms2',cat:'Waffe',name:'Tauria Curved Sword + Crow\'s Pursuit',when:'Kap. 5 — Draven besiegen (Story)',tip:'BiS Curved Sword bis Endgame. Story-Pflicht, aber Core-Drop aus Loot sicherstellen.'},
   {id:'ms3',cat:'Waffe',name:'Brass Rose Rapier',when:'Silverbrook Ruins (Delesyia, N)',tip:'Audit 2026-06-02 KORREKTUR: doch NICHT missable — frei aufsammelbar (unterste Turm-Ebene), nicht Damiane-exklusiv beim Holen (Fextralife). Kein echter Missable.'},
   {id:'ms4',cat:'Waffe',name:'Hollow Visage (Dawn Cave)',when:'Kap. 3 — nördliche Kammer der Dawn Cave',tip:'Versteckte Truhe ohne Map-Marker. Einmaliger Spawn. Direkt beim ersten Besuch öffnen.'},
-  {id:'ms5',cat:'Rüstung',name:'Leather Helm of Fallen Kingdom',when:'Sanctum of Benediction (Hernand/Pailune)',tip:'Niemals für ein anderes Item tauschen. Momentum-Core (+35% Turning Slash) ist fest eingebaut.'},
+  {id:'ms5',cat:'Rüstung',name:'Leather Helm of the Fallen Kingdom',when:'Sanctum of Benediction (Hernand/Pailune)',tip:'Niemals für ein anderes Item tauschen. Momentum-Core (+35% Turning Slash) ist fest eingebaut.'},
   {id:'ms6',cat:'Quest',name:'Hexe Elowen — "The Missing Seal"',when:'Kap. 5 — vor Kap. 6 starten',tip:'Questlinie schaltet Tier-3 Core-Synthese + Kuku-Blueprint frei. Rechtzeitig beginnen.'},
   {id:'ms7',cat:'Quest',name:'Oongka permanent — Arm Wrestling',when:'Kap. 8 — Calphade Castle',tip:'"Strength Held in the Fingertips". Zeitfenster nur Kap. 8 — danach dauerhaft gesperrt.'},
   {id:'ms8',cat:'Quest',name:'Oongka permanent — Riverside',when:'Kap. 8 — S Pailune East Gate',tip:'"Words Left by the Riverside". Beide Oongka-Quests für True Ending Pflicht.'},

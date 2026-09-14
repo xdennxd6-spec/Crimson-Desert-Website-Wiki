@@ -827,7 +827,8 @@ function weaponRow(w) {
   const cell = (v) => has(v) ? esc(v) : `<span class="muted">nicht erfasst</span>`;
   return `<tr>
 <td>${thumb}${esc(w.name)}</td>
-<td>${has(w.atk) ? esc(w.atk) : '<span class="muted">–</span>'}</td>
+<td>${has(w.def) ? `<abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;${esc(w.def)}`
+      : (has(w.atk) ? esc(w.atk) : '<span class="muted">–</span>')}</td>
 <td>${w.crit != null ? esc(w.crit) : (w.crit_none ? '<span class="muted" title="kein Critical-Rate-Feld bei questlog.gg und gaming.tools">kein Crit</span>' : '<span class="muted">n.&nbsp;e.</span>')}</td>
 <td>${w.slots != null ? esc(w.slots) : '<span class="muted">n.&nbsp;e.</span>'}</td>
 <td>${cell(w.source)}</td>
@@ -855,13 +856,13 @@ function buildWaffen() {
     const rows = byType[t].sort((a, b) => a.name.localeCompare(b.name)).map(weaponRow).join("\n");
     return `<h2>${esc(t)} (${byType[t].length})</h2>
 <div class="tbl-wrap"><table>
-<thead><tr><th>Waffe</th><th>ATK</th><th>Crit</th><th>Slots</th><th>Fundort</th><th>Built-in / Abyss</th></tr></thead>
+<thead><tr><th>Waffe</th><th>ATK&nbsp;/&nbsp;DEF</th><th>Crit</th><th>Slots</th><th>Fundort</th><th>Built-in / Abyss</th></tr></thead>
 <tbody>${rows}</tbody>
 </table></div>`;
   }).join("\n");
   let body = `
 <a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
-<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>: Eine Kartierung aller ${WEAPONS.filter((w) => has(w.atk)).length} Waffen mit ATK gegen die Refinement-Tabellen von Fextralife (Stand 11.08.2026) zeigt, dass hier der höchste dokumentierte Wert steht — bei Kampfwaffen also die Refinement-Endstufe +10. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
+<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller ${WEAPONS.length} Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
 ${sections}`;
   if (faq.length) body += "\n" + faqSektion(faq);
   const jsonld = {

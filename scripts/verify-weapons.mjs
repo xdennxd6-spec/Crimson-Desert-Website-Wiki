@@ -77,6 +77,10 @@ const GEMISCHT = new Set(["Blunt/Axe"]);
 //   fruehere Annahme "Electro-Mecha Spear hat regulaer 5" ist damit widerlegt. Fextralife
 //   taugt fuer Slots nicht als Quelle: die Seite druckt "x5" als Klassen-Boilerplate, auch
 //   dort, wo 4 belegt ist. Belege: G:/Claude/Crimson-Wiki-Slots-Crit-2026-09-07/.
+// - Tree Branch, Sturdy Tree Branch, Bamboo Stalk, Sturdy Bamboo Stalk, Drake Shield und
+//   Runewalker Shield: trotz elf Verfeinerungsstufen item-spezifisch ohne Sockelsystem
+//   (questlog-tRPC, itemSockets:null und socketCompatibilityHash:"0", 14.09.2026).
+//   Item-IDs: 1003849, 1003850, 1003908, 1004108, 290021 und 1000201.
 const AUSNAHMEN = new Map([
   ["Electro-Mecha Longsword", 4],
   ["Electro-Mecha Spear", 4],
@@ -87,6 +91,12 @@ const AUSNAHMEN = new Map([
   ["Kuku Propeller Spear", 4],
   ["Kuku Disruptor Spear", 4],
   ["Kuku Laser Cannon Spear", 4],
+  ["Tree Branch", 0],
+  ["Sturdy Tree Branch", 0],
+  ["Bamboo Stalk", 0],
+  ["Sturdy Bamboo Stalk", 0],
+  ["Drake Shield", 0],
+  ["Runewalker Shield", 0],
 ]);
 
 const proTyp = {};

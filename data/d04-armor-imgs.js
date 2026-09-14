@@ -1150,7 +1150,7 @@ const TROPHIES=[
   {"name":"Lightbringer","grade":"silver","desc":"Alle 16 Sanktum-Herausforderungen abschließen.","miss":false,"sec":"witches","conf":"high"},
   {"name":"Grand Collector of Arms","grade":"silver","desc":"Alle 10 Spezialwaffen-Herausforderungen abschließen.","miss":true,"tip":"Spezialwaffe 10 (Vessel of Dark Pursuit) niemals verkaufen/spenden und den Marni Laser Helm nicht in die Kuku-Version umwandeln, sonst zählen sie nicht mehr.","sec":"collectibles","conf":"medium"},
   {"name":"Tamer of Legends","grade":"silver","desc":"Alle 10 Pferde-Herausforderungen abschließen.","miss":false,"sec":"mounts","conf":"high"},
-  {"name":"True Gamer","grade":"silver","desc":"Alle 5 Minispiel-Kategorien abschließen (Schießen, Krafttest, Duell, Rennen, Denkspiele).","miss":false,"sec":null,"conf":"high"},
+  {"name":"True Gamer","grade":"silver","desc":"Alle 5 Minispiel-Kategorien abschließen (Schießen, Krafttest, Duell, Rennen, Denkspiele).","miss":false,"sec":"minigames","conf":"high"},
   {"name":"Ultimate Hunter","grade":"silver","desc":"Alle 11 Jagd-Herausforderungen abschließen.","miss":false,"sec":null,"conf":"high"},
   {"name":"Natural Collector","grade":"silver","desc":"Alle 12 Lebens-Herausforderungen abschließen (Sammeln/Natur).","miss":false,"sec":"collectibles","conf":"high"},
   {"name":"Conqueror of the Abysses","grade":"gold","desc":"Alle 40 Abyss-Wiederherstellungsrätsel abschließen.","miss":false,"tip":"Für die letzte Challenge 'Dimensional Bonds' müssen alle Abyss-Rätsel und die komplette Hauptstory abgeschlossen sein.","sec":"locations","conf":"high"},

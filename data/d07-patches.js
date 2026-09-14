@@ -3,6 +3,35 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.02.00",date:"11.09.2026",size:"Patch 2.02.00 bringt Cross-Save für Mac sowie zwölf Fehlerbehebungen in sechs Bereichen. Veröffentlicht am 11.09.2026 um 05:30 UTC (boardNo 130). Zum Veröffentlichungszeitpunkt stand er für Steam (PC/Mac), PlayStation, XBOX und Epic bereit; der Mac App Store war noch in Vorbereitung. Die Notes nennen keine Downloadgröße und keine Build-Nummer.",features:[
+    {cat:"Neue Funktion",items:[
+      "[Mac] <b>Cross-Save</b> wurde hinzugefügt. <span style='color:var(--gdim)'>Die Notes erläutern weder Voraussetzungen noch den genauen Umfang der Übertragung.</span>"
+    ]},
+    {cat:"Inhalt",items:[
+      "Beim Anleuchten eines <b>NPCs mit der Laterne</b> wurden dessen Besitzgegenstände nicht sichtbar — behoben.",
+      "Die <b>Wohnfunktion</b> wurde nicht freigeschaltet, wenn das Banner im <b>Howling-Hill-Camp</b> bei vollem Inventar aufgestellt wurde — behoben.",
+      "<b>Thornbriar Fortress</b> ließ sich nicht befreien — behoben.",
+      "Nach dem Laden bestimmter Spielstände verschwanden vereinzelt Gegenstände aus dem <b>Handelswarenlager</b> — behoben.",
+      "Während <b>„The Words of Alustin“</b> verschwand unter bestimmten Umständen der Brief und blockierte den Questfortschritt — behoben."
+    ]},
+    {cat:"Steuerung",items:[
+      "Das Verketten von <b>„Descending Force Palm“</b> nach <b>„Aerial Force Palm“</b> funktionierte in bestimmten Situationen nicht korrekt — behoben."
+    ]},
+    {cat:"UI",items:[
+      "UI-Texte wirkten in bestimmten Situationen <b>zitternd</b> — behoben."
+    ]},
+    {cat:"Grafik und Einstellungen",items:[
+      "Beim Start eines neuen Spiels mit aktivierter <b>DLSS Frame Generation</b> konnte das Spiel abstürzen — behoben."
+    ]},
+    {cat:"Lokalisierung",items:[
+      "Lokalisierungsfehler wurden in allen Sprachen behoben und die allgemeine Qualität verbessert.",
+      "Bestimmter <b>arabischer Text</b> wurde nicht korrekt angezeigt — behoben."
+    ]},
+    {cat:"Sonstiges",items:[
+      "Auf Rüstung war <b>Bildrauschen</b> in Innenräumen besonders auffällig — behoben.",
+      "Kliffs Erscheinung wirkte mit der <b>Crow Cloth Blindfold</b> bei bestimmten Einstellungen unnatürlich — behoben."
+    ]}
+  ]},
   {ver:"2.01.00",date:"04.09.2026",size:"Erster Inhalts-Patch nach dem Enhanced-Umbau, Release 04.09.2026 04:20 UTC (boardNo 128). Die Notes fassen ihn selbst als „verschiedene Fehlerbehebungen und Maßnahmen zur Stabilisierung“ zusammen, das untertreibt aber: von den 35 Punkten in sechs Kategorien sind 27 Fehlerbehebungen, der Rest sind Anpassungen und drei echte Neuerungen — eine neue Entsendungsmission, die Kameraneigung im Foto-Modus und die Verzehnfachung der Camp-Mittel beim Silberspenden. Alle Plattformen außer dem Mac App Store waren zum Zeitpunkt der Veröffentlichung versorgt. Der Download liegt auf Steam laut vulkk.com bei rund 3,7 GB; Pearl Abyss selbst nennt keine Größe, und eine zweite Quelle dafür gibt es nicht.",features:[
     {cat:"Inhalt",items:[
       "Im <b>Graumähnen-Camp</b> wurden zwar die Möbel geladen, aber nicht das Haus — behoben.",
@@ -52,7 +81,7 @@ const PATCHES=[
       "Während der Quest <b>„Dünner werdende Klinge“</b> konnte man nur dann mit der <b>Steintafel</b> interagieren, wenn man auf ihr stand — behoben."
     ]},
     {cat:"Plattformen und Quelle",items:[
-      "Zum Zeitpunkt der Veröffentlichung stand der Patch für <b>Steam (PC)</b>, <b>Steam (Mac)</b>, <b>PlayStation</b>, <b>XBOX</b> und den <b>Epic Games Store</b> bereit; für den <b>Mac App Store</b> wurde er noch <b>vorbereitet</b>. <span style='color:var(--gdim)'>Einordnung: Der Mac App Store hinkt wieder hinterher, nachdem er bei 1.18.02 sowie bei beiden 2.00er-Hotfixes erstmals seit 1.16.04 zeitgleich versorgt war.</span>",
+      "Zum Zeitpunkt der Veröffentlichung stand der Patch für <b>Steam (PC)</b>, <b>Steam (Mac)</b>, <b>PlayStation</b>, <b>XBOX</b> und den <b>Epic Games Store</b> bereit; für den <b>Mac App Store</b> wurde er noch <b>vorbereitet</b>. <b>Nachtrag 09.09.2026:</b> Die offizielle Seite führt inzwischen alle sechs Plattformen einschließlich <b>Mac App Store</b> mit „Patch jetzt verfügbar“ — der Rückstand ist also aufgeholt. <span style='color:var(--gdim)'>Einordnung: Der Mac App Store hinkte zum Release wieder hinterher, nachdem er bei 1.18.02 sowie bei beiden 2.00er-Hotfixes erstmals seit 1.16.04 zeitgleich versorgt war. Wann genau er nachgezogen wurde, nennt Pearl Abyss nicht; die Meldung trägt weiterhin nur das Veröffentlichungsdatum 04.09.2026.</span>",
       "Quelle: offizielle Patch-Notizen Version 2.01.00, Pearl Abyss, 04.09.2026 04:20 UTC (boardNo 128), deutsche und englische Fassung gegengeprüft."
     ]}
   ]},
