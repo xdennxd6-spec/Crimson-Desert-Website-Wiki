@@ -9480,6 +9480,53 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 
+  // ── Speicher-Übernahme von der alten Adresse (Domainwechsel 09/2026) ──────
+  // localStorage ist an die Origin gebunden: Fortschritt, Favoriten, Builds usw., die
+  // Besucher unter crimson-desert-wiki.netlify.app gespeichert haben, sind unter der
+  // neuen Domain unsichtbar. Einmalig wird die alte Adresse unsichtbar als iframe
+  // geladen (dort liefert migrate-storage.html ihre cd_*-Keys per postMessage) und
+  // hier werden nur FEHLENDE Schluessel uebernommen; vorhandene lokale Werte gewinnen.
+  // Nach maximal 3 Anlaeufen (alte Adresse nicht erreichbar) wird aufgegeben.
+  (function(){
+    try{
+      const ALT='https://crimson-desert-wiki.netlify.app', FLAG='cd_migrated_v1', TRIES='cd_migrate_tries';
+      if(location.origin!=='https://crimson-desert-wiki.com')return;
+      if(localStorage.getItem(FLAG))return;
+      const tries=Number(localStorage.getItem(TRIES)||0);
+      if(tries>=3){lsSet(FLAG,'aufgegeben');localStorage.removeItem(TRIES);return;}
+      lsSet(TRIES,String(tries+1));
+      let done=false;
+      const fr=document.createElement('iframe');
+      fr.src=ALT+'/migrate-storage.html';
+      fr.setAttribute('aria-hidden','true');
+      fr.tabIndex=-1;
+      fr.style.cssText='position:absolute;width:0;height:0;border:0;visibility:hidden';
+      const cleanup=()=>{window.removeEventListener('message',onMsg);fr.remove();};
+      const onMsg=e=>{
+        if(done||e.origin!==ALT||!e.data||e.data.type!=='cd-migrate')return;
+        done=true;cleanup();
+        const keys=(e.data.keys&&typeof e.data.keys==='object')?e.data.keys:{};
+        let n=0;
+        Object.keys(keys).forEach(k=>{
+          if(!k.startsWith('cd_')||k===FLAG||k===TRIES||typeof keys[k]!=='string')return;
+          if(localStorage.getItem(k)===null&&lsSet(k,keys[k]))n++;
+        });
+        lsSet(FLAG,n?'uebernommen':'leer');
+        localStorage.removeItem(TRIES);
+        if(n){
+          const t=document.getElementById('toast');
+          if(t){t.textContent='Gespeicherter Fortschritt von der alten Adresse übernommen. Seite wird neu geladen …';t.classList.add('show');}
+          setTimeout(()=>location.reload(),1200);
+        }
+      };
+      window.addEventListener('message',onMsg);
+      window.addEventListener('load',()=>{
+        document.body.appendChild(fr);
+        setTimeout(()=>{if(!done)cleanup();},8000);
+      });
+    }catch(e){console.warn('Speicher-Übernahme übersprungen:',e);}
+  })();
+
   // ── PWA Install Prompt ────────────────────────────────────────────
   let _deferredInstall=null;
   window.addEventListener('beforeinstallprompt',e=>{

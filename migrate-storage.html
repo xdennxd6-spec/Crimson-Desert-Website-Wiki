@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>Speicher-Übernahme</title>
+</head>
+<body>
+<script>
+// Domainwechsel 09/2026: Diese Seite laeuft nur noch unter der ALTEN Adresse
+// crimson-desert-wiki.netlify.app (Ausnahme vom Domain-Redirect in netlify.toml).
+// Die neue Domain laedt sie einmalig unsichtbar als iframe (index.html, Abschnitt
+// "Speicher-Uebernahme") und bekommt per postMessage die hier gespeicherten
+// cd_*-Schluessel (Fortschritt, Favoriten, Builds usw.), weil localStorage an die
+// Origin gebunden ist. Nur lesen, nichts loeschen, Antwort nur an die neue Domain.
+(function(){
+  var ZIEL='https://crimson-desert-wiki.com';
+  if(window.parent===window)return; // nur eingebettet sinnvoll
+  var keys={};
+  try{
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i);
+      if(k&&k.indexOf('cd_')===0)keys[k]=localStorage.getItem(k);
+    }
+  }catch(e){}
+  try{window.parent.postMessage({type:'cd-migrate',keys:keys},ZIEL);}catch(e){}
+})();
+</script>
+</body>
+</html>
