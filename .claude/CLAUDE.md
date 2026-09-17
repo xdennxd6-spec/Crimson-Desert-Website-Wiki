@@ -26,7 +26,7 @@ anzulegen — es ist privat und braucht Credentials, die Claude nicht anfassen d
 ## Projekt
 - **Lokaler Ordner:** `C:\Users\Rainer Winkler\Desktop\Verschiedenes\deploy-69fcff9bfbeb7525ed81aec7\`
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
-- **Live-URL:** https://crimson-desert-wiki.netlify.app (via Netlify, Auto-Deploy bei Push)
+- **Live-URL:** https://crimson-desert-wiki.com (eigene Domain seit 09/2026, Hosting Netlify, Auto-Deploy bei Push; die bisherige Netlify-Subdomain `crimson-desert-wiki` bleibt bestehen und leitet per 301 auf die Domain um)
 - **Haupt-Datei:** `index.html` (~9.600 Zeilen, Markup+CSS+Renderer) + `data/d01…d08-*.js`
   (Datenkonstanten, seit 23.08.2026 ausgelagert; laden per `<script src>` vor dem Hauptscript)
 

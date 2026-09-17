@@ -127,7 +127,7 @@ for (const [file, exp] of Object.entries(pages)) {
   ok(desc.length >= 70 && desc.length <= 175, `Meta-Description-Laenge ${desc.length} (70-175)`);
   ok(!descs.has(desc), `Description eindeutig`); descs.add(desc);
 
-  ok(/<link rel="canonical" href="https:\/\/crimson-desert-wiki\.netlify\.app\//.test(c), "canonical gesetzt");
+  ok(/<link rel="canonical" href="https:\/\/crimson-desert-wiki\.com\//.test(c), "canonical gesetzt");
   ok(c.includes(`href="${exp.sec}"`), `Deep-Link in App (${exp.sec}) vorhanden`);
 
   // JSON-LD valide?
@@ -317,7 +317,7 @@ const sm = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 ["/", "/bosse", "/bestiarium", "/waffen", "/ruestungen", "/crafting",
  "/hauptquests", "/fraktionen", "/side-quests", "/trophaeen", "/true-ending",
  "/npcs", "/patch-notes"].forEach((u) =>
-  ok(sm.includes(`<loc>https://crimson-desert-wiki.netlify.app${u}</loc>`), `sitemap enthaelt ${u}`));
+  ok(sm.includes(`<loc>https://crimson-desert-wiki.com${u}</loc>`), `sitemap enthaelt ${u}`));
 
 // ── 6. Startseite verlinkt jede SEO-Seite ────────────────────────────────────
 // Warum es diesen Check gibt: hauptquests.html und patch-notes.html gingen am

@@ -31,6 +31,25 @@
 # Kuenftige Schema-Aenderung? Mit "npm run db:generate" erzeugen (landet in db/migrations/)
 # und EINMALIG manuell anwenden (drizzle-kit gegen den Connection-String bzw. Neon-Konsole).
 
+# Alte Netlify-Adresse -> eigene Domain (seit 09/2026). Netlify leitet die
+# *.netlify.app-Subdomain NICHT automatisch auf die Primaerdomain um (nur www<->Apex),
+# deshalb hier explizit per 301 mit erhaltenem Pfad. Domain-Level-Regeln brauchen
+# force = true, sonst gewinnt die lokal vorhandene Datei. Reihenfolge zaehlt: die
+# Search-Console-Verifikationsdatei bleibt auf der alten Adresse direkt erreichbar
+# (Rewrite 200), damit die alte Property verifiziert bleibt -- Voraussetzung fuer
+# Googles "Adressaenderung" von der alten auf die neue Property.
+[[redirects]]
+  from   = "https://crimson-desert-wiki.netlify.app/googleae4c65c5953c849f.html"
+  to     = "/googleae4c65c5953c849f.html"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "https://crimson-desert-wiki.netlify.app/*"
+  to     = "https://crimson-desert-wiki.com/:splat"
+  status = 301
+  force  = true
+
 [[headers]]
 for = "/*"
   [headers.values]

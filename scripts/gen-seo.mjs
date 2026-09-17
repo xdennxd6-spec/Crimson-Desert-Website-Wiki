@@ -36,7 +36,7 @@ import * as partNpcs from "./seo-parts/npcs.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const SITE = "https://crimson-desert-wiki.netlify.app";
+const SITE = "https://crimson-desert-wiki.com";
 // Seit dem Split (23.08.2026) liegen die Daten-Konstanten in data/*.js;
 // fuer extract() zaehlt index.html + alle Datendateien als EIN Quelltext.
 const html = [
