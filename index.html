@@ -2470,6 +2470,133 @@ thead tr{background:rgba(22,24,40,.75)}
   #boss-grid .record-rail .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
+/* ============================================================
+   BOSS-KOMPAKT (Lauf 2026-09-17-Bosskarten, Orchestrator B)
+   Zugeklappte Bosskarte = Portrait + Kopf + Kurz-Chips + Besiegt;
+   alles Weitere (Strategie, Datengitter, Lore, Notiz) liegt im
+   Aufklapper <details class="item-more boss-more">.
+   Scope: nur #boss-grid .record-card.boss-compact und .boss-more.
+   Bestehende Selektoren oben werden hier ueberschrieben, nie editiert.
+   ============================================================ */
+/* === BOSS-KOMPAKT-ANFANG === */
+/* Platzhalterhoehe fuer content-visibility:auto (Z. ~1013 wird nicht editiert, nur ueberschrieben).
+   "auto" merkt sich die zuletzt gerenderte Hoehe, 190 px gilt nur bis zum ersten Rendern;
+   bereits offene, noch nie gerenderte Karten (z. B. "Alle Details") bekommen einen groesseren Platzhalter. */
+#boss-grid .card.boss-compact{contain-intrinsic-size:auto 190px}
+#boss-grid .card.boss-compact:has(> details.boss-more[open]){contain-intrinsic-size:auto 560px}
+/* Karte: Zeile 1 = Schiene | Body, Zeile 2 = Aufklapper ueber beide Spalten.
+   Schiene streckt sich auf Body-Hoehe, das Portrait fuellt sie (kein Leerraum unter dem Bild). */
+#boss-grid .record-card.boss-compact{
+  grid-template-columns:240px minmax(0,1fr);grid-template-rows:auto auto;align-items:stretch;
+}
+#boss-grid .record-card.boss-compact .record-rail{align-self:stretch;min-height:135px}
+#boss-grid .record-card.boss-compact .record-rail .record-img{
+  flex:1 1 auto;aspect-ratio:auto;height:auto;max-height:none;min-height:135px;
+  align-self:auto;border-bottom:0;
+}
+/* Body: vertikal zentriert. Mindesthoehe 150 px = Hoehe eines Bodys mit 2 Chip-Zeilen und
+   einzeiligem Namen, damit Karten mit weniger Chips gleich hoch bleiben (Portrait 135 px passt darunter). */
+#boss-grid .record-card.boss-compact .record-body{
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:150px;min-width:0;padding:10px 12px 10px 14px;overflow:hidden;
+}
+#boss-grid .record-card.boss-compact .record-body .ct{
+  font-size:18px;line-height:1.12;margin:0 0 3px;overflow-wrap:anywhere;
+}
+/* Kennzeile auf 2 Zeilen gekappt, engerer Zeichenabstand fuer ~33 Zeichen je Zeile */
+#boss-grid .record-card.boss-compact .record-desig{
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  line-height:1.3;letter-spacing:.1em;margin-bottom:7px;overflow-wrap:anywhere;
+}
+/* Kurz-Chips: natuerliche Breite, umbrechend (Admin-Feinschliff 17.09.: statt 6er-Raster, damit
+   kein Chip mitten im Wort gekappt wird). Ellipsis nur als Sicherheitsnetz fuer Einzel-Chips
+   breiter als der Body; die Texte selbst werden schon im Renderer gekuerzt (_bossSumChips). */
+#boss-grid .boss-sum{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+#boss-grid .boss-sum .boss-sum-chip{
+  flex:0 1 auto;display:inline-block;min-width:0;max-width:100%;box-sizing:border-box;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:var(--f-mono);font-size:var(--fs-10);font-weight:500;line-height:1.25;letter-spacing:.02em;
+  padding:2px 7px;border:1px solid var(--line-strong);border-radius:7px;
+  background:rgba(255,255,255,.03);color:var(--text);
+}
+#boss-grid .boss-sum .bsc-pd{
+  color:var(--amber);border-color:rgba(224,163,90,.45);
+  font-weight:600;letter-spacing:0;padding:2px 7px;
+}
+#boss-grid .boss-sum .bsc-weak{color:var(--warn)}
+#boss-grid .boss-sum .bsc-note{color:var(--brass);border-color:rgba(224,163,90,.35)}
+/* Besiegt-Knopf kompakt, .on-Zustand kommt aus der bestehenden .defeat-btn.on-Regel */
+#boss-grid .record-card.boss-compact .boss-actions{display:flex;margin-top:8px}
+#boss-grid .record-card.boss-compact .boss-actions .defeat-btn{
+  margin:0;padding:4px 10px;width:fit-content;font-size:var(--fs-10);line-height:1.3;
+}
+/* Aufklapper: volle Leiste unter beiden Spalten */
+#boss-grid .boss-more{grid-column:1/-1;border-top:1px solid var(--line);margin:0;min-width:0}
+#boss-grid .boss-more > summary{
+  display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;
+  padding:7px 16px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--amber);line-height:1.3;
+  background:transparent;transition:background-color .15s,color .15s;
+}
+#boss-grid .boss-more > summary::after{color:var(--amber);opacity:.75;transition:transform .16s,color .16s}
+#boss-grid .boss-more[open] > summary{border-bottom:1px solid var(--line)}
+#boss-grid .boss-more[open] > summary::after{color:var(--red)}
+#boss-grid .boss-more > summary:hover{background:rgba(255,255,255,.03);color:var(--amber)}
+#boss-grid .boss-more > summary:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+/* Aufgeklappter Inhalt: einspaltig, ruhige Abstaende, nichts doppelt gerahmt */
+#boss-grid .boss-more .boss-more-body{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:10px 16px 16px;min-width:0}
+/* Strategie-Callout im Record-Look (die alten .record-body .cs-Regeln greifen hier nicht mehr) */
+#boss-grid .boss-more .boss-more-body .cs{
+  margin:0;font-size:14px;line-height:1.55;color:var(--text);background:rgba(224,163,90,.06);
+  border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:10px;padding:11px 14px;
+}
+#boss-grid .boss-more .boss-more-body .cs::before{
+  content:"Strategie";display:block;font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:4px;
+}
+#boss-grid .boss-more .boss-more-body .combo-seq{gap:7px}
+#boss-grid .boss-more .boss-more-body .combo-chip{
+  font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--text);
+  border:1px solid var(--line-strong);border-radius:7px;background:rgba(255,255,255,.03);padding:5px 10px;
+}
+#boss-grid .boss-more .boss-more-body .combo-chip:first-child{
+  color:#160a08;background:var(--red);border-color:var(--red);box-shadow:0 0 18px -6px var(--red-glow);
+}
+#boss-grid .boss-more .boss-more-body .copy-btn{margin:-4px 0 0 auto}
+#boss-grid .boss-more .boss-more-body .bp-phase,#boss-grid .boss-more .boss-more-body .bo-recs,#boss-grid .boss-more .boss-more-body .boss-lore,
+#boss-grid .boss-more .boss-more-body .boss-notes-btn,#boss-grid .boss-more .boss-more-body .boss-notes-area,#boss-grid .boss-more .boss-more-body .boss-recur{margin-top:0;margin-bottom:0}
+#boss-grid .boss-more .boss-more-body .boss-notes-btn{width:fit-content;padding:5px 12px}
+#boss-grid .boss-more .boss-more-body .boss-alt-btn{margin:0;width:fit-content;padding:6px 12px}
+/* Datengitter in voller Kartenbreite: 4 Spalten, Kapitel/Region je 1, Quest/Parry/Drops/Schwaeche je 2
+   (dense fuellt Luecken, wenn Drops oder Schwaeche fehlen) */
+#boss-grid .boss-more .boss-more-body .datagrid{
+  grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row dense;margin:0;
+}
+#boss-grid .boss-more .boss-more-body .datagrid>div{grid-column:span 2;min-width:0}
+#boss-grid .boss-more .boss-more-body .datagrid>div:nth-child(1),#boss-grid .boss-more .boss-more-body .datagrid>div:nth-child(2){grid-column:span 1}
+#boss-grid .boss-more .boss-more-body .datagrid dd{overflow-wrap:anywhere}
+#boss-grid .boss-more .boss-more-body .cm{display:flex;flex-wrap:wrap;gap:7px;margin:0}
+#boss-grid .boss-more .boss-more-body .cm .tag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:760px){
+  #boss-grid .boss-more .boss-more-body .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* Mobil: Schiene ueber dem Body, Portrait flach (21:9, max. 150 px), Karte zugeklappt <= 360 px */
+@media(max-width:600px){
+  #boss-grid .record-card.boss-compact{grid-template-columns:minmax(0,1fr)}
+  #boss-grid .record-card.boss-compact .record-rail{min-height:0;align-self:auto}
+  #boss-grid .record-card.boss-compact .record-rail .record-img{
+    flex:none;aspect-ratio:21/9;max-height:150px;min-height:0;height:auto;
+  }
+  #boss-grid .record-card.boss-compact .record-body{min-height:0;padding:11px 14px 12px}
+  #boss-grid .record-card.boss-compact .record-body .ct{font-size:19px}
+  #boss-grid .boss-more > summary{padding:8px 14px}
+  #boss-grid .boss-more .boss-more-body{padding:10px 14px 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  #boss-grid .boss-more > summary,#boss-grid .boss-more > summary::after{transition:none}
+}
+/* === BOSS-KOMPAKT-ENDE === */
+
 /* — PATCH blattbar — */
 /* Blattbar-Feinschliff: .bb-plate Textfarbe/Hintergrund fest auf
    Referenzwerte gepinnt, .bb-crumb .sep auf --line-strong. */
@@ -3315,6 +3442,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <button class="rb-trigger" onclick="randomBoss()" title="Zufälligen Boss anzeigen (R)" aria-label="Random Boss">🎲 Random Boss</button>
       <button class="cmp-trigger" onclick="openCompare()" title="Zwei Bosse vergleichen" aria-label="Bosse vergleichen">⚔️ Vergleichen</button>
       <button class="cmp-trigger" onclick="openCheatSheet()" title="Druckbares Boss-Cheat-Sheet (folgt den aktiven Filtern)" aria-label="Cheat-Sheet">📋 Cheat-Sheet</button>
+      <button class="cmp-trigger" id="boss-more-all" onclick="toggleAllBossDetails()" aria-pressed="false" title="Alle Bosskarten auf- oder zuklappen">▾ Alle Details</button>
     </div>
     <div class="grid" id="boss-grid"></div>
   </section>
@@ -6100,6 +6228,7 @@ const _afterNoteAction=_debounce(()=>{
 function persistBossNote(name,el,btn){
   saveBossNote(name,el.value);
   if(btn)btn.classList.toggle('has-note',!!el.value.trim());
+  if(typeof _syncBossNoteChip==='function')_syncBossNoteChip(el.closest('.card'),!!el.value.trim());
   _afterNoteAction();
 }
 
@@ -7030,6 +7159,10 @@ function renderBosses(){
   const pd=document.getElementById('bf-pd').value;
   const done=loadBossDone();
   const notes=loadBossNotes();
+  // Kompakte Bosskarten (Lauf 2026-09-17): Aufklapp-Zustand der details.boss-more ueber den
+  // Neu-Render hinweg erhalten (Such-Oeffnungen mit data-srch-open werden dabei ignoriert).
+  const savedOpen=_snapshotOpenItemDetails(document.getElementById('boss-grid'));
+  const openAll=loadBossOpenAll();
   document.getElementById('boss-grid').innerHTML=BOSSES.map(b=>{
     const show=(!reg||b.region.includes(reg))&&(!type||bossType(b)===type)&&(!pd||bossPD(b).includes(pd));
     const chap=b.chapter?'Kap. '+b.chapter:'Side/Faction';
@@ -7039,7 +7172,13 @@ function renderBosses(){
     const safeName=b.name.replace(/'/g,"\\'");
     const s=[b.name,b.region,b.quest,b.strategy,b.drop_weapon,b.drop_abyss_gear,b.weakness,b.parry_or_dodge,b.recur||'',notes[b.name]||''].join(' ').toLowerCase();
     const _spLock=sp>0&&b.chapter!=null&&b.chapter>sp;
-    return `<div class="card record-card${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}">
+    // Sichtbarer vs. eingeklappter Text fuer die Suche (_openItemDetailsForSearch oeffnet den
+    // Aufklapper nur, wenn der Treffer ausschliesslich im eingeklappten Teil liegt).
+    const loreDesc=(typeof BOSS_LORE!=='undefined'&&BOSS_LORE[b.name]&&BOSS_LORE[b.name].desc)||'';
+    const itemVisible=[b.name,b.region,chap,b.quest,bossPD(b).join('/')].filter(Boolean).join(' ').toLowerCase();
+    const itemHidden=[b.strategy,b.weakness,b.drop_weapon,b.drop_abyss_gear,b.recur||'',loreDesc,notes[b.name]||''].filter(v=>v&&v!=='–').join(' ').toLowerCase();
+    const wasOpen=openAll||savedOpen[b.name]==='1';
+    return `<div class="card record-card boss-compact${show?'':' hide'}${isDone?' boss-done':''}${_spLock?' spoiler-locked':''}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}" data-item-id="${escHtml(b.name)}" data-item-visible="${escHtml(itemVisible)}" data-item-hidden="${escHtml(itemHidden)}">
       ${_spLock?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${b.chapter} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
       <div class="record-rail">
       <div class="record-img">
@@ -7052,43 +7191,52 @@ function renderBosses(){
           ?`<div class="boss-img-wrap"><img class="boss-img" src="${BOSS_IMGS[b.name]}" data-cdn-fallback="${BOSS_IMGS_CDN[b.name]||''}" onerror="if(_fexFb(this))return;if(this.dataset.cdnFallback&&this.src!==this.dataset.cdnFallback){this.src=this.dataset.cdnFallback;}else{this.parentElement.innerHTML=bossPlaceholder({name:'${b.name.replace(/'/g,"\\'")}',region:'${b.region.replace(/'/g,"\\'")}',chapter:${b.chapter||'null'},quest:'${b.quest.replace(/'/g,"\\'")}'});}" onload="_bossImgFit(this)" loading="lazy" decoding="async" alt="${b.name}" style="object-position:center center"></div>`
           :bossPlaceholder(b)
         }
-        ${renderBossLore(b)}
-      </div>
-      ${BOSS_ALT_IMGS[b.name]?`<button class="boss-alt-btn" onmouseenter="showBossAlt(event,'${safeName}')" onmouseleave="hideMountIG()" onclick="event.stopPropagation();openBossAlt('${safeName}')" title="${escHtml(BOSS_ALT_IMGS[b.name].label)}" aria-label="${escHtml(BOSS_ALT_IMGS[b.name].label)}">${escHtml(BOSS_ALT_IMGS[b.name].btn)}</button>`:''}
-      <dl class="datagrid">
-        <div><dt>Kapitel</dt><dd class="mono">${b.chapter?String(b.chapter).padStart(2,'0'):'—'}</dd></div>
-        <div><dt>Region</dt><dd>${escHtml(b.region)}</dd></div>
-        <div><dt>Quest</dt><dd>${escHtml(b.quest)}</dd></div>
-        <div><dt>Parry / Dodge</dt><dd class="mono">${escHtml(b.parry_or_dodge)}</dd></div>
-        ${b.drop_weapon!=='–'?`<div><dt>Waffe-Drop</dt><dd>${escHtml(b.drop_weapon)}</dd></div>`:''}
-        ${b.drop_abyss_gear!=='–'?`<div><dt>Abyss Core</dt><dd>${escHtml(b.drop_abyss_gear)}</dd></div>`:''}
-        ${b.weakness!=='–'?`<div><dt>Schwäche</dt><dd style="color:var(--warn)">${escHtml(b.weakness)}</dd></div>`:''}
-      </dl>
-      <div class="cm">
-        <span class="tag tr tag-clickable" onclick="event.stopPropagation();applyBossFilter('chapter','${chap}')" title="Filter: ${chap}" data-tip="Klick filtert nach diesem Kapitel">${chap}</span>
-        <span class="tag tg tag-clickable" onclick="event.stopPropagation();applyBossFilter('region','${b.region.split(' ')[0]}')" title="Filter: ${b.region.split(' ')[0]}" data-tip="Klick filtert nach Region">${b.region.split(' ')[0]}</span>
-        <span class="tag tx tag-clickable" onclick="event.stopPropagation();applyBossFilter('quest','${b.quest.replace(/'/g,"\\'")}')" title="Filter: ${b.quest}" data-tip="Klick filtert nach Quest-Typ">${b.quest}</span>
       </div>
       </div>
       <div class="record-body">
       <div class="ct">${b.name}</div>
       <div class="record-desig">${escHtml(chap)} &middot; ${escHtml(b.region)} &middot; ${escHtml(b.quest)}</div>
-      ${b.recur?`<div class="boss-recur" title="Dieser Boss tritt mehrfach auf: Phase, spätere Wiederbegegnung oder Variante"><span class="ri">↻</span><span>${escHtml(b.recur)}</span></div>`:''}
-      <div class="cs">${linkifyXrefs(b.strategy)}</div>
-      ${comboChips(b.name)}
-      <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">📋 Strategie kopieren</button>
-      ${renderBossPhases(b)}
-      ${renderBossRecs(b)}
+      <div class="boss-sum">${_bossSumChips(b,hasNote)}</div>
+      <div class="boss-actions">
       <button class="defeat-btn${isDone?' on':''}" onclick="toggleBossDone('${safeName}')">
         ${isDone?'✓ Besiegt':'Als besiegt markieren'}
       </button>
-      <button class="boss-notes-btn${hasNote?' has-note':''}" onclick="toggleBossNote('${safeName}',this)" aria-label="Eigene Notiz">
-        📝 ${hasNote?'Notiz bearbeiten':'Eigene Notiz'}
-      </button>
-      <textarea class="boss-notes-area" placeholder="Eigene Strategie / Build / Erinnerung..." oninput="persistBossNote('${safeName}',this,this.previousElementSibling)">${escHtml(notes[b.name]||'')}</textarea>
       </div>
+      </div>
+      <details class="item-more boss-more"${wasOpen?' open':''}>
+        <summary onclick="this.parentElement.removeAttribute('data-srch-open')"><span class="boss-more-lbl">Details &amp; Strategie</span></summary>
+        <div class="item-more-body boss-more-body">
+        <div class="cs">${linkifyXrefs(b.strategy)}</div>
+        ${comboChips(b.name)}
+        <button class="copy-btn" onclick="copyStrat(event,'${b.strategy.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">📋 Strategie kopieren</button>
+        ${renderBossPhases(b)}
+        ${renderBossRecs(b)}
+        <dl class="datagrid">
+          <div><dt>Kapitel</dt><dd class="mono">${b.chapter?String(b.chapter).padStart(2,'0'):'—'}</dd></div>
+          <div><dt>Region</dt><dd>${escHtml(b.region)}</dd></div>
+          <div><dt>Quest</dt><dd>${escHtml(b.quest)}</dd></div>
+          <div><dt>Parry / Dodge</dt><dd class="mono">${escHtml(b.parry_or_dodge)}</dd></div>
+          ${b.drop_weapon!=='–'?`<div><dt>Waffe-Drop</dt><dd>${escHtml(b.drop_weapon)}</dd></div>`:''}
+          ${b.drop_abyss_gear!=='–'?`<div><dt>Abyss Core</dt><dd>${escHtml(b.drop_abyss_gear)}</dd></div>`:''}
+          ${b.weakness!=='–'?`<div><dt>Schwäche</dt><dd style="color:var(--warn)">${escHtml(b.weakness)}</dd></div>`:''}
+        </dl>
+        <div class="cm">
+          <span class="tag tr tag-clickable" onclick="event.stopPropagation();applyBossFilter('chapter','${chap}')" title="Filter: ${chap}" data-tip="Klick filtert nach diesem Kapitel">${chap}</span>
+          <span class="tag tg tag-clickable" onclick="event.stopPropagation();applyBossFilter('region','${b.region.split(' ')[0]}')" title="Filter: ${b.region.split(' ')[0]}" data-tip="Klick filtert nach Region">${b.region.split(' ')[0]}</span>
+          <span class="tag tx tag-clickable" onclick="event.stopPropagation();applyBossFilter('quest','${b.quest.replace(/'/g,"\\'")}')" title="Filter: ${b.quest}" data-tip="Klick filtert nach Quest-Typ">${b.quest}</span>
+        </div>
+        ${b.recur?`<div class="boss-recur" title="Dieser Boss tritt mehrfach auf: Phase, spätere Wiederbegegnung oder Variante"><span class="ri">↻</span><span>${escHtml(b.recur)}</span></div>`:''}
+        ${BOSS_ALT_IMGS[b.name]?`<button class="boss-alt-btn" onmouseenter="showBossAlt(event,'${safeName}')" onmouseleave="hideMountIG()" onclick="event.stopPropagation();openBossAlt('${safeName}')" title="${escHtml(BOSS_ALT_IMGS[b.name].label)}" aria-label="${escHtml(BOSS_ALT_IMGS[b.name].label)}">${escHtml(BOSS_ALT_IMGS[b.name].btn)}</button>`:''}
+        ${renderBossLore(b)}
+        <button class="boss-notes-btn${hasNote?' has-note':''}" onclick="toggleBossNote('${safeName}',this)" aria-label="Eigene Notiz">
+          📝 ${hasNote?'Notiz bearbeiten':'Eigene Notiz'}
+        </button>
+        <textarea class="boss-notes-area" placeholder="Eigene Strategie / Build / Erinnerung..." oninput="persistBossNote('${safeName}',this,this.previousElementSibling)">${escHtml(notes[b.name]||'')}</textarea>
+        </div>
+      </details>
     </div>`;
   }).join('');
+  _syncBossMoreAllBtn();
   // Cache-Hit-Fallback: onload feuert normalerweise auch bei gecachten Bildern,
   // aber falls ein img durch fruehere Navigation bereits complete ist bevor der
   // Handler haengt (z.B. sehr schnelles Layout), hier zusaetzlich direkt pruefen.
@@ -7096,6 +7244,98 @@ function renderBosses(){
     if(img.complete)_bossImgFit(img);
   });
 }
+
+// ===== BOSS-KOMPAKT-LOGIK (Lauf 2026-09-17-Bosskarten, Orchestrator A) =====
+// Aufklapp-Zustand, Kurz-Chips und "Alle Details"-Schalter der kompakten Bosskarten.
+// === BOSS-KOMPAKT-LOGIK-ANFANG ===
+// Kuerzt einen Anzeigetext an der Wortgrenze auf hoechstens max Zeichen (inklusive "…")
+// und escapt das Ergebnis. Volltext gehoert in das title-Attribut des Chips.
+function _bossShort(text,max){
+  const t=String(text==null?'':text).trim();
+  if(t.length<=max)return escHtml(t);
+  let cut=t.slice(0,max-1);
+  // Endet der Schnitt mitten im Wort, auf die letzte Wortgrenze zurueck (aber nicht unter 40 %).
+  if(!/\s/.test(t.charAt(max-1))){const sp=cut.lastIndexOf(' ');if(sp>Math.floor(max*0.4))cut=cut.slice(0,sp);}
+  return escHtml(cut.replace(/[\s,;:·/()\-–]+$/,'')+'…');
+}
+// Drop-Felder tragen oft Quellen- und Zusatzangaben ("Melted Ambition (Drop nach Phase 1) (game8-Bossliste,
+// geprueft …)", "Golden Fire; …"). Fuer den Chip zaehlt nur der erste Name ohne Klammern; Volltext im title.
+function _bossDropShort(text,max){
+  // Trenner: Semikolon, Komma, Gedankenstriche, Satzende. Kein " - ": das steckt in Item-Namen
+  // ("Power Core - Verse of Sowing").
+  const t=String(text==null?'':text).replace(/\s*\([^)]*\)/g,'').split(/\s*(?:;|,|—|–|\.\s)\s*/)[0].trim();
+  // Prosa statt Item-Name (Verneinung oder ueber 40 Zeichen): kein Chip, der Volltext steht im Aufklapper.
+  if(!t||/^(kein|nicht)\b/i.test(t)||t.length>40)return '';
+  return _bossShort(t,max);
+}
+// Kurz-Chips der zugeklappten Karte. Feste Reihenfolge: Parry/Dodge, Schwaeche, Waffe-Drop,
+// Abyss Core, Notiz. Leere Felder ('–') erzeugen keinen Chip. Die Schwaeche erscheint nur als Chip,
+// wenn sie ein kurzes Stichwort ist ("Feuer", "Blitz"; ohne Klammerzusatz hoechstens 16 Zeichen), damit
+// sie neben den Parry/Dodge-Chip passt; Prosa-Schwaechen stehen nur im Aufklapper.
+const BOSS_SUM_WEAK_MAX=16;
+function _bossSumChips(b,hasNote){
+  const out=[];
+  const pd=bossPD(b);
+  if(pd.length)out.push(`<span class="boss-sum-chip bsc-pd" title="${escHtml(b.parry_or_dodge||'')}">${pd.join('/')}</span>`);
+  const weakKurz=(b.weakness&&b.weakness!=='–')?String(b.weakness).replace(/\s*\([^)]*\)/g,'').trim():'';
+  if(weakKurz&&weakKurz.length<=BOSS_SUM_WEAK_MAX)out.push(`<span class="boss-sum-chip bsc-weak" title="${escHtml(b.weakness)}">Schwäche · ${escHtml(weakKurz)}</span>`);
+  const dropKurz=(b.drop_weapon&&b.drop_weapon!=='–')?_bossDropShort(b.drop_weapon,28):'';
+  if(dropKurz)out.push(`<span class="boss-sum-chip bsc-drop" title="${escHtml(b.drop_weapon)}">🗡 ${dropKurz}</span>`);
+  const coreKurz=(b.drop_abyss_gear&&b.drop_abyss_gear!=='–')?_bossDropShort(b.drop_abyss_gear,28):'';
+  if(coreKurz)out.push(`<span class="boss-sum-chip bsc-core" title="${escHtml(b.drop_abyss_gear)}">◈ ${coreKurz}</span>`);
+  if(hasNote)out.push(_bossNoteChip());
+  return out.join('');
+}
+// Direktdruck (Strg+P) der Bosse-Sektion: zugeklappte Aufklapper wuerden ohne Strategie drucken.
+// Vor dem Druck alle oeffnen, danach den vorherigen Zustand wiederherstellen. Der druckbare
+// Cheat-Sheet bleibt der bessere Druckweg.
+let _bossPrintRestore=null;
+window.addEventListener('beforeprint',()=>{
+  const sec=document.getElementById('sec-bosses');
+  const grid=document.getElementById('boss-grid');
+  if(!sec||!grid||!sec.classList.contains('active'))return;
+  _bossPrintRestore=[...grid.querySelectorAll('details.boss-more')].filter(d=>!d.open);
+  _bossPrintRestore.forEach(d=>{d.open=true;});
+});
+window.addEventListener('afterprint',()=>{
+  if(!_bossPrintRestore)return;
+  _bossPrintRestore.forEach(d=>{d.open=false;});
+  _bossPrintRestore=null;
+});
+function _bossNoteChip(){return '<span class="boss-sum-chip bsc-note" title="Eigene Notiz vorhanden (im Aufklapper)">📝 Notiz</span>';}
+// Notiz-Chip der Karte sofort nachziehen (persistBossNote), nicht erst beim naechsten Re-Render.
+function _syncBossNoteChip(card,hasNote){
+  const sum=card&&card.querySelector('.boss-sum');
+  if(!sum)return;
+  const chip=sum.querySelector('.bsc-note');
+  if(hasNote&&!chip)sum.insertAdjacentHTML('beforeend',_bossNoteChip());
+  else if(!hasNote&&chip)chip.remove();
+}
+// Einstellung "Alle Details" (localStorage cd_boss_open_all: '1' oder '0'). Einzelne Karten
+// werden absichtlich nicht gemerkt: Standard nach Reload ist zugeklappt.
+function loadBossOpenAll(){return String(lsJson('cd_boss_open_all','0'))==='1';}
+function saveBossOpenAll(v){lsSet('cd_boss_open_all',v?'1':'0');}
+// Knopftext und aria-pressed von #boss-more-all aus der Einstellung setzen.
+function _syncBossMoreAllBtn(){
+  const btn=document.getElementById('boss-more-all');
+  if(!btn)return;
+  const on=loadBossOpenAll();
+  btn.textContent=on?'▴ Alle einklappen':'▾ Alle Details';
+  btn.setAttribute('aria-pressed',on?'true':'false');
+}
+// Ist mindestens eine sichtbare (nicht .hide) Karte zu, werden alle sichtbaren geoeffnet und die
+// Einstellung auf '1' gesetzt; sonst werden alle geschlossen und die Einstellung auf '0'.
+function toggleAllBossDetails(){
+  const grid=document.getElementById('boss-grid');
+  if(!grid)return;
+  const visible=[...grid.querySelectorAll('.card.boss-compact:not(.hide) details.boss-more')];
+  const openAll=visible.some(d=>!d.open);
+  const target=openAll?visible:[...grid.querySelectorAll('.card.boss-compact details.boss-more')];
+  target.forEach(d=>{d.open=openAll;delete d.dataset.srchOpen;});
+  saveBossOpenAll(openAll);
+  _syncBossMoreAllBtn();
+}
+// === BOSS-KOMPAKT-LOGIK-ENDE ===
 
 // ===== WEAPONS =====
 let _wepPage=0; const WEP_PER=40;

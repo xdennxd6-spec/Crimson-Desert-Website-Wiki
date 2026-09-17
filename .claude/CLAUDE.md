@@ -117,6 +117,7 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 - `cd_ch_done` — Chapters Checklist
 - `cd_sec` — zuletzt aktive Sektion
 - `cd_migrate_hint` — Domainwechsel 09/2026: Hinweisleiste „Fortschritt von der alten Adresse übernehmen“ gesehen/abgelehnt/übernommen (Handoff über `migrate-storage.html` auf der alten Adresse und `#cdmig=` beim Rücksprung; kann nach 2027-03 samt Skript entfernt werden)
+- `cd_boss_open_all` — Bosskarten: `'1'` = „Alle Details“ aktiv (alle sichtbaren `details.boss-more` aufgeklappt, Knopf `#boss-more-all` zeigt „Alle einklappen“), sonst `'0'`/fehlend = Standard zugeklappt; einzelne Karten werden nicht gemerkt
 
 ## Bekannte Besonderheiten
 - MapGenie iframe ist cross-origin — kein JS-Zugriff möglich, nur Banner + Modal als Workaround
