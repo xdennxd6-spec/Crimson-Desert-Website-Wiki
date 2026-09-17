@@ -2,20 +2,28 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Speicher-Übernahme</title>
+<title>Speicher-Übernahme · Crimson Desert Wiki</title>
+<style>body{font:15px/1.5 system-ui,sans-serif;background:#1b1714;color:#e8dcc4;margin:0;padding:24px;max-width:640px}a{color:#e0b96a}</style>
 </head>
 <body>
+<p id="status">Übernehme gespeicherten Fortschritt …</p>
 <script>
-// Domainwechsel 09/2026: Diese Seite laeuft nur noch unter der ALTEN Adresse
-// crimson-desert-wiki.netlify.app (Ausnahme vom Domain-Redirect in netlify.toml).
-// Die neue Domain laedt sie einmalig unsichtbar als iframe (index.html, Abschnitt
-// "Speicher-Uebernahme") und bekommt per postMessage die hier gespeicherten
-// cd_*-Schluessel (Fortschritt, Favoriten, Builds usw.), weil localStorage an die
-// Origin gebunden ist. Nur lesen, nichts loeschen, Antwort nur an die neue Domain.
+// Domainwechsel 09/2026, Teil 1 von 2 (Gegenstueck: index.html, fruehes Skript vor #main).
+// Diese Seite ist nur noch unter der ALTEN Adresse crimson-desert-wiki.netlify.app
+// erreichbar (Ausnahme vom Domain-Redirect in netlify.toml). Sie wird von der neuen
+// Domain per Klick als Top-Level-Seite geoeffnet (nur so ist der first-party
+// localStorage lesbar; ein iframe saehe wegen Storage-Partitionierung nichts), liest
+// die cd_*-Schluessel und schickt den Browser mit den Daten im Fragment #cdmig=...
+// zurueck. Nur lesen, nichts loeschen. Zu grosse Staende werden als Datei angeboten.
 (function(){
-  var ZIEL='https://crimson-desert-wiki.com';
-  if(window.parent===window)return; // nur eingebettet sinnvoll
+  var NEU='https://crimson-desert-wiki.com';
+  var zurueck='/';
+  try{
+    var z=new URLSearchParams(location.search).get('zurueck')||'/';
+    if(z.charAt(0)==='/'&&z.indexOf('//')!==0&&z.indexOf('\\')<0)zurueck=z;
+  }catch(e){}
   var keys={};
   try{
     for(var i=0;i<localStorage.length;i++){
@@ -23,7 +31,19 @@
       if(k&&k.indexOf('cd_')===0)keys[k]=localStorage.getItem(k);
     }
   }catch(e){}
-  try{window.parent.postMessage({type:'cd-migrate',keys:keys},ZIEL);}catch(e){}
+  var json=JSON.stringify(keys);
+  var b64=btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  if(b64.length<=60000){
+    location.replace(NEU+zurueck+'#cdmig='+b64);
+    return;
+  }
+  // Zu gross fuer die URL: Export im v2-Format (wie "Fortschritt exportieren" der App)
+  var blob=new Blob([JSON.stringify({version:2,exported:new Date().toISOString(),storage:keys},null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  document.getElementById('status').innerHTML=
+    '<p>Dein gespeicherter Stand ist zu groß für die automatische Übernahme.</p>'
+    +'<p><a href="'+url+'" download="crimson-desert-progress.json">Als Datei speichern</a> und anschließend auf der neuen Seite über „Fortschritt importieren“ einlesen.</p>'
+    +'<p><a href="'+NEU+zurueck+'">Weiter zur neuen Adresse</a></p>';
 })();
 </script>
 </body>

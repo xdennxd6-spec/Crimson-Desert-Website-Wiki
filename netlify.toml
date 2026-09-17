@@ -44,10 +44,10 @@
   status = 200
   force  = true
 
-# Ebenfalls direkt erreichbar: die Seite, ueber die die neue Domain die unter der
-# alten Adresse gespeicherten cd_*-Keys (localStorage ist origin-gebunden) einmalig
-# per iframe + postMessage uebernimmt (siehe migrate-storage.html und index.html,
-# Abschnitt "Speicher-Uebernahme").
+# Ebenfalls direkt erreichbar: die Seite, ueber die Besucher die unter der alten
+# Adresse gespeicherten cd_*-Keys (localStorage ist origin-gebunden) mit einem Klick
+# auf die neue Domain mitnehmen (Top-Level-Handoff per #cdmig=..., siehe
+# migrate-storage.html und index.html, Abschnitt "Speicher-Uebernahme").
 [[redirects]]
   from   = "https://crimson-desert-wiki.netlify.app/migrate-storage.html"
   to     = "/migrate-storage.html"
@@ -66,9 +66,7 @@ for = "/*"
   X-Frame-Options             = "SAMEORIGIN"
   X-Content-Type-Options      = "nosniff"
   Referrer-Policy             = "strict-origin-when-cross-origin"
-  # frame-ancestors: zusaetzlich zur eigenen Origin darf die neue Domain einbetten,
-# damit sie migrate-storage.html von der alten Adresse als iframe laden kann.
-Content-Security-Policy     = "frame-ancestors 'self' https://crimson-desert-wiki.com; base-uri 'self'; object-src 'none'"
+  Content-Security-Policy     = "frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
   Cache-Control               = "public, max-age=3600"
 
 # index.html immer revalidieren (ETag macht das billig) — sonst sehen

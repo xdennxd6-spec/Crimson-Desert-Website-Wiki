@@ -990,6 +990,10 @@ tbody tr:hover td{background:var(--overprint)}
 /* ── Copy toast ── */
 #toast{position:fixed;bottom:74px;right:20px;background:var(--iron-gall);border:1px solid var(--iron-gall);padding:8px 16px;font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--brass-hi);z-index:200;opacity:0;transform:translateY(6px);transition:all .2s;pointer-events:none;border-radius:8px}
 #toast.show{opacity:1;transform:translateY(0)}
+/* Hinweisleiste Domainwechsel 09/2026 (Speicher-Uebernahme von der alten Adresse), kann nach 2027-03 samt Skript entfernt werden */
+#cd-migrate-hint{margin:10px 16px 0;padding:10px 14px;border:1px solid var(--brass);background:var(--iron-gall);color:var(--brass-hi);font-family:var(--f-mono);font-size:var(--fs-11-5);border-radius:var(--radius);display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+#cd-migrate-hint button{font:inherit;padding:4px 10px;border:1px solid var(--brass-hi);background:transparent;color:var(--brass-hi);cursor:pointer;border-radius:var(--radius)}
+#cd-migrate-hint button.primaer{background:var(--brass-hi);color:var(--iron-gall)}
 
 /* ── Copy button on boss card ── */
 .copy-btn{display:block;width:fit-content;margin:7px 0 0 auto;padding:4px 11px;background:var(--vellum);border:1px solid var(--line);font-family:var(--f-mono);font-size:var(--fs-10);color:var(--iron-soft);cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.06em}
@@ -2992,6 +2996,35 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     </form>
   </div>
 </div>
+<script>
+// Domainwechsel 09/2026, Teil 2 von 2: Rueckkehr von der alten Adresse.
+// migrate-storage.html (nur unter crimson-desert-wiki.netlify.app erreichbar) schickt den
+// Browser mit den dort gespeicherten cd_*-Keys als base64url-JSON im Fragment #cdmig=...
+// hierher zurueck. Laeuft bewusst VOR allen anderen Skripten, damit die App noch keine
+// Standardwerte in Schluessel geschrieben hat: nur FEHLENDE Schluessel werden uebernommen.
+(function(){
+  try{
+    var m=/[#&]cdmig=([A-Za-z0-9_-]*)/.exec(location.hash||'');
+    if(!m)return;
+    var keys={};
+    if(m[1]){
+      var b64=m[1].replace(/-/g,'+').replace(/_/g,'/');
+      while(b64.length%4)b64+='=';
+      keys=JSON.parse(decodeURIComponent(escape(atob(b64))))||{};
+    }
+    var n=0;
+    Object.keys(keys).forEach(function(k){
+      if(k.indexOf('cd_')!==0||k==='cd_migrate_hint'||typeof keys[k]!=='string')return;
+      if(localStorage.getItem(k)===null){localStorage.setItem(k,keys[k]);n++;}
+    });
+    localStorage.setItem('cd_migrate_hint',n?'uebernommen':'leer');
+    sessionStorage.setItem('cd_migrate_ergebnis',String(n));
+    var clean=location.pathname+location.search+(location.hash.replace(/[#&]cdmig=[A-Za-z0-9_-]*/,'')||'');
+    if(clean.charAt(clean.length-1)==='#')clean=clean.slice(0,-1);
+    location.replace(clean);
+  }catch(e){console.warn('Speicher-Uebernahme (Rueckkehr) fehlgeschlagen:',e);}
+})();
+</script>
 <div id="main" role="main" tabindex="-1">
   <div id="credit-top">Design and Build by Christian Stein</div>
   <!-- REGISTRATUR Blattbar: additiver Register-Kopf (Brotkrume/Peilung/Blattnummer), KEIN Wrapper -->
@@ -9480,51 +9513,48 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 
-  // ── Speicher-Übernahme von der alten Adresse (Domainwechsel 09/2026) ──────
+  // ── Speicher-Übernahme von der alten Adresse (Domainwechsel 09/2026), Teil 1 von 2 ──
   // localStorage ist an die Origin gebunden: Fortschritt, Favoriten, Builds usw., die
-  // Besucher unter crimson-desert-wiki.netlify.app gespeichert haben, sind unter der
-  // neuen Domain unsichtbar. Einmalig wird die alte Adresse unsichtbar als iframe
-  // geladen (dort liefert migrate-storage.html ihre cd_*-Keys per postMessage) und
-  // hier werden nur FEHLENDE Schluessel uebernommen; vorhandene lokale Werte gewinnen.
-  // Nach maximal 3 Anlaeufen (alte Adresse nicht erreichbar) wird aufgegeben.
+  // Besucher unter crimson-desert-wiki.netlify.app gespeichert haben, sind hier unsichtbar.
+  // Ein iframe der alten Adresse sieht wegen Storage-Partitionierung (Chrome 115+, Firefox,
+  // Safari) nur einen leeren Speicher, deshalb ein Top-Level-Handoff mit einem Klick:
+  // Hinweisleiste -> alte Adresse (migrate-storage.html liest dort first-party) -> zurueck
+  // mit #cdmig=... -> Import im fruehen Skript vor #main. Keine automatische Weiterleitung,
+  // damit Crawler auf der kanonischen Seite nie einen JS-Redirect sehen. Ablauf 2027-03-31.
   (function(){
     try{
-      const ALT='https://crimson-desert-wiki.netlify.app', FLAG='cd_migrated_v1', TRIES='cd_migrate_tries';
+      const ALT='https://crimson-desert-wiki.netlify.app', FLAG='cd_migrate_hint';
+      const erg=sessionStorage.getItem('cd_migrate_ergebnis');
+      if(erg!==null){
+        sessionStorage.removeItem('cd_migrate_ergebnis');
+        const t=document.getElementById('toast');
+        if(t){t.textContent=Number(erg)>0?'Gespeicherter Fortschritt von der alten Adresse übernommen ('+erg+' Einträge).':'Auf der alten Adresse war nichts gespeichert.';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),5000);}
+      }
       if(location.origin!=='https://crimson-desert-wiki.com')return;
-      if(localStorage.getItem(FLAG))return;
-      const tries=Number(localStorage.getItem(TRIES)||0);
-      if(tries>=3){lsSet(FLAG,'aufgegeben');localStorage.removeItem(TRIES);return;}
-      lsSet(TRIES,String(tries+1));
-      let done=false;
-      const fr=document.createElement('iframe');
-      fr.src=ALT+'/migrate-storage.html';
-      fr.setAttribute('aria-hidden','true');
-      fr.tabIndex=-1;
-      fr.style.cssText='position:absolute;width:0;height:0;border:0;visibility:hidden';
-      const cleanup=()=>{window.removeEventListener('message',onMsg);fr.remove();};
-      const onMsg=e=>{
-        if(done||e.origin!==ALT||!e.data||e.data.type!=='cd-migrate')return;
-        done=true;cleanup();
-        const keys=(e.data.keys&&typeof e.data.keys==='object')?e.data.keys:{};
-        let n=0;
-        Object.keys(keys).forEach(k=>{
-          if(!k.startsWith('cd_')||k===FLAG||k===TRIES||typeof keys[k]!=='string')return;
-          if(localStorage.getItem(k)===null&&lsSet(k,keys[k]))n++;
-        });
-        lsSet(FLAG,n?'uebernommen':'leer');
-        localStorage.removeItem(TRIES);
-        if(n){
-          const t=document.getElementById('toast');
-          if(t){t.textContent='Gespeicherter Fortschritt von der alten Adresse übernommen. Seite wird neu geladen …';t.classList.add('show');}
-          setTimeout(()=>location.reload(),1200);
+      if(localStorage.getItem(FLAG)||Date.now()>Date.UTC(2027,2,31))return;
+      const main=document.getElementById('main');
+      if(!main)return;
+      const box=document.createElement('div');
+      box.id='cd-migrate-hint';
+      box.setAttribute('role','region');
+      box.setAttribute('aria-label','Hinweis zur neuen Adresse');
+      box.innerHTML='<span>Neue Adresse: <b>crimson-desert-wiki.com</b>. Hattest du unter crimson-desert-wiki.netlify.app Fortschritt, Favoriten oder Builds gespeichert?</span>'
+        +'<button type="button" class="primaer" data-akt="ja">Jetzt übernehmen</button>'
+        +'<button type="button" data-akt="nein">Nein, danke</button>';
+      box.addEventListener('click',e=>{
+        const akt=e.target&&e.target.getAttribute&&e.target.getAttribute('data-akt');
+        if(!akt)return;
+        if(akt==='ja'){
+          lsSet(FLAG,'gestartet');
+          location.href=ALT+'/migrate-storage.html?zurueck='+encodeURIComponent(location.pathname+location.search);
+        }else{
+          lsSet(FLAG,'abgelehnt');
+          box.remove();
         }
-      };
-      window.addEventListener('message',onMsg);
-      window.addEventListener('load',()=>{
-        document.body.appendChild(fr);
-        setTimeout(()=>{if(!done)cleanup();},8000);
       });
-    }catch(e){console.warn('Speicher-Übernahme übersprungen:',e);}
+      const first=main.firstElementChild;
+      if(first&&first.id==='credit-top')first.insertAdjacentElement('afterend',box);else main.insertAdjacentElement('afterbegin',box);
+    }catch(e){console.warn('Speicher-Übernahme (Hinweis) übersprungen:',e);}
   })();
 
   // ── PWA Install Prompt ────────────────────────────────────────────
