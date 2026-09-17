@@ -24,7 +24,7 @@ Ist das Repo auf der aktuellen Maschine nicht vorhanden, den User fragen statt e
 anzulegen — es ist privat und braucht Credentials, die Claude nicht anfassen darf.
 
 ## Projekt
-- **Lokaler Ordner:** `C:\Users\Rainer Winkler\Desktop\Verschiedenes\deploy-69fcff9bfbeb7525ed81aec7\`
+- **Lokaler Ordner (seit 09.09.2026):** `G:\Claude\Crimson-Desert-Wiki\website\` (der alte Desktop-Ordner `deploy-69fcff9bfbeb7525ed81aec7` ist nur noch eine Kopie)
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
 - **Live-URL:** https://crimson-desert-wiki.com (eigene Domain seit 09/2026, Hosting Netlify, Auto-Deploy bei Push; die bisherige Netlify-Subdomain `crimson-desert-wiki` bleibt bestehen und leitet per 301 auf die Domain um)
 - **Haupt-Datei:** `index.html` (~9.600 Zeilen, Markup+CSS+Renderer) + `data/d01…d08-*.js`
@@ -97,7 +97,8 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 - **Build:** läuft automatisch im Netlify-Build (`netlify.toml` command = `npm install && node scripts/gen-seo.mjs`) → Seiten bleiben bei jedem Deploy synchron mit den Daten. Nach Änderungen an den Datenstrukturen lokal neu generieren, damit die committeten Seiten aktuell sind.
 - **Verifikation:** `node scripts/verify-seo.mjs` (Exit 1 bei Fehlern) prüft Soll-Mengen (dynamisch aus index.html), eindeutige Titel/Descriptions, Längen, canonical, valides JSON-LD, Deep-Links, Existenz aller referenzierten lokalen Bilder, sitemap-Einträge.
 - **URLs:** Netlify Pretty URLs ist standardmäßig AN → `bosse.html` wird unter `/bosse` ausgeliefert; canonical/sitemap/Links nutzen die `.html`-losen Pfade (`/bosse`, `/waffen`, `/true-ending`). CTAs springen via `/#sec-...` zurück in die App.
-- **ERLEDIGT / geprüft am 24.08.2026:** Die Live-Site `/bosse` liefert 200; `/bosse/` antwortet mit 301 auf `/bosse`. Canonical und Sitemap verwenden bereits die passende Form ohne Slash, daher ist keine Umstellung nötig. Offen bleibt die Einreichung der acht Seiten in der Google Search Console.
+- **ERLEDIGT / geprüft am 24.08.2026:** Die Live-Site `/bosse` liefert 200; `/bosse/` antwortet mit 301 auf `/bosse`. Canonical und Sitemap verwenden bereits die passende Form ohne Slash, daher ist keine Umstellung nötig.
+- **Search Console (Stand 17.09.2026):** Zwei URL-Präfix-Properties, beide per `googleae4c65c5953c849f.html` bestätigt: die alte `https://crimson-desert-wiki.netlify.app/` (Adressänderung auf die neue Domain eingereicht, 180 Tage Migrationsfenster, der 301 muss so lange bleiben) und die neue `https://crimson-desert-wiki.com/` (Sitemap eingereicht, 13 Seiten erkannt). Die 12 Unterseiten waren bis dahin „Gefunden – zurzeit nicht indexiert“; Indexierungsanträge über die URL-Prüfung auf der NEUEN Property stellen (Kontingent ca. 10 pro Tag).
 
 ## Tech Stack
 - Static Single-Page HTML/JS/CSS App (kein Build-Step nötig)
@@ -115,6 +116,7 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 - `cd_cmt_{sec}` — Kommentare pro Sektion
 - `cd_ch_done` — Chapters Checklist
 - `cd_sec` — zuletzt aktive Sektion
+- `cd_migrate_hint` — Domainwechsel 09/2026: Hinweisleiste „Fortschritt von der alten Adresse übernehmen“ gesehen/abgelehnt/übernommen (Handoff über `migrate-storage.html` auf der alten Adresse und `#cdmig=` beim Rücksprung; kann nach 2027-03 samt Skript entfernt werden)
 
 ## Bekannte Besonderheiten
 - MapGenie iframe ist cross-origin — kein JS-Zugriff möglich, nur Banner + Modal als Workaround
