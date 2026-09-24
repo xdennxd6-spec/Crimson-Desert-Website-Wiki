@@ -3,6 +3,69 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.03.02",date:"23.09.2026",size:"Dritter Patch innerhalb einer Woche und zweiter Hotfix auf 2.03.00, drei Fehlerbehebungen unter der einzigen Überschrift Patch-Details. Veröffentlicht am 23.09.2026 um 04:45 UTC (boardNo 133). Einer der drei Punkte, die fehlenden Kartensymbole, stand erst zwei Tage zuvor neu auf der offiziellen Liste bekannter Probleme.",features:[
+    {cat:"Patch-Details",items:[
+      "<b>Grimnir</b> erschien unter bestimmten Umständen während der Quest <b>„The Mysterious Pot“</b> (deutsch „Der geheimnisvolle Topf“) nicht — behoben. <span style='color:var(--gdim)'>Einordnung: Dieselbe Quest aus der Kilnden-Werkstatt stand schon in früheren Patches mehrfach auf der Fehlerliste, siehe unten.</span>",
+      "Die <b>Symbole neu entdeckter Objekte</b> wurden in einigen Regionen nicht auf der Karte angezeigt — behoben. <span style='color:var(--gdim)'>Einordnung: Pearl Abyss hatte genau diesen Fehler bis zum 21.09.2026 neu in die Liste bekannter Probleme aufgenommen. Die Liste wurde nach diesem Hotfix nicht mehr aktualisiert und führt ihn deshalb noch.</span>",
+      "Im Abyss <b>„Ether Rest“</b> (deutsch „Äthersruh“) wurde der <b>Energiekern</b> nicht erkannt, der Fortschritt war blockiert — behoben. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung spricht von einem Kern, die deutsche von mehreren.</span>"
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>in Vorbereitung</em>. Keine Downloadgröße, keine Build-Nummer.",
+      "Quelle: offizielle Patch-Notizen Version 2.03.02, Pearl Abyss, 23.09.2026 04:45 UTC (boardNo 133), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
+  {ver:"2.03.01",date:"21.09.2026",size:"Erster Hotfix auf 2.03.00, drei Fehlerbehebungen unter der einzigen Überschrift Patch-Details: Laternenzielen mit geänderter Controllerbelegung, das Duo-Minispiel in Tommaso und ein Absturz bei NPC-Interaktionen. Veröffentlicht am 21.09.2026 um 14:00 UTC (boardNo 132).",features:[
+    {cat:"Patch-Details",items:[
+      "Wurde die Taste für das <b>Laternenzielen</b> in der Controller-Anpassung geändert, funktionierte die Aktion mit der neuen Taste nicht — behoben.",
+      "In <b>Tommaso</b> erschienen die NPCs für <b>Duo</b> (deutsch „Zweiblatt“) nicht, das Minispiel war dort nicht spielbar — behoben. <span style='color:var(--gdim)'>Einordnung: Damit belegen die Notes Tommaso als weiteren Duo-Ort; die Minispiel-Übersicht ist entsprechend ergänzt.</span>",
+      "Das Spiel stürzte in bestimmten Situationen bei der <b>Interaktion mit NPCs</b> ab — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>in Vorbereitung</em>. Keine Downloadgröße, keine Build-Nummer.",
+      "Quelle: offizielle Patch-Notizen Version 2.03.01, Pearl Abyss, 21.09.2026 14:00 UTC (boardNo 132), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
+  {ver:"2.03.00",date:"18.09.2026",size:"Patch 2.03.00 bringt 21 Punkte in sieben Bereichen: zwei Neuerungen für Wasserlauf (Springen, mit Vaporwalker auch Rutschen), die Kamerafunktion „Präzise Bewegung“ im Foto-Modus, Silberbündel beim Neustart mit übernommenem Spielstand, DLSS Ray Reconstruction mit dem neuesten Transformer-Modell und eine Reihe von Fehlerbehebungen, darunter zu schnelle Gegnerpferde im Pferderennen und übersprungene Wartezeiten bei Missionen. Veröffentlicht am 18.09.2026 um 01:00 UTC (boardNo 131); die offizielle Übersicht zeigt nach US-Zeit den 17.09. Die Notes selbst fassen ihn als „verschiedene Bugs behoben und Stabilisierungsarbeiten“ zusammen.",features:[
+    {cat:"Inhalt",items:[
+      "Beim <b>Start eines neuen Spiels mit Übernahme bestehender Speicherdaten</b> wird Silber ab 1.000 Stück nun als stapelbares <b>Silberbündel</b> gutgeschrieben. <span style='color:var(--gdim)'>Einordnung: Die Notes nennen weder die Stückelung der Bündel noch, was mit Beträgen unter 1.000 geschieht.</span>",
+      "Im <b>Foto-Modus</b> gibt es die neue Funktion <b>„Präzise Bewegung“</b> (englisch <em>Precise Movement</em>) für eine feinere Kamerasteuerung. <span style='color:var(--gdim)'>Einordnung: nach der Kameraneigung aus 2.01.00 die zweite Foto-Modus-Erweiterung in zwei Wochen.</span>",
+      "Gegnerische Pferde bewegten sich im <b>Pferderennen</b> zu schnell — behoben.",
+      "Bestimmte <b>Missionen mit Wartezeit</b> ließen sich sofort fortsetzen — behoben. <span style='color:var(--gdim)'>Einordnung: Wer die Wartezeit bisher überspringen konnte, muss jetzt regulär warten. Welche Missionen betroffen waren, nennen die Notes nicht.</span>",
+      "<b>Kampf-Entsendungen</b> wurden abgebrochen, wenn nach dem Entsenden gespeichert und neu geladen wurde — behoben.",
+      "Der Aushang <b>„Lumberjacks' Witness Report“</b> (deutsch „Sichtung eines Holzfällers“) erscheint nun weiterhin, solange er nicht gelesen wurde.",
+      "Beim erneuten Versuch der Quest <b>„Shadowed Secrets“</b> (deutsch „Geheimnisse in der Dunkelheit“) erschien der Guide-NPC an der falschen Stelle — behoben."
+    ]},
+    {cat:"Steuerung",items:[
+      "Das <b>QTE nach dem Packen durch einen Bären</b> verhielt sich je nach gedrückter Taste unterschiedlich — behoben.",
+      "Die Taste für die <b>Fähigkeitsdetails</b> in der Stall- und Haustier-Verwaltung wurde geändert. <span style='color:var(--gdim)'>Die Notes nennen die neue Belegung nicht.</span>",
+      "Während der Quest <b>„Investigate the mysterious voice“</b> (deutsch „Gehe der geheimnisvollen Stimme nach“) ließ sich der Charakter nicht mehr steuern — behoben.",
+      "Beim Benutzen bestimmter Gegenstände <b>im Sattel</b> fror der Charakter ein — behoben."
+    ]},
+    {cat:"Kampf / Aktion",items:[
+      "Während <b>Water Stride</b> (Wasserlauf) kann nun gesprungen werden. <span style='color:var(--gdim)'>Einordnung: Die Fähigkeit kam mit dem Enhanced-Update 2.00.00 ins Spiel.</span>",
+      "Mit ausgerüsteten <b>Vaporwalker</b>-Schuhen (deutsch „Dunstläufer“) ist während Water Stride nun Rutschen möglich. <span style='color:var(--gdim)'>Einordnung: Damit bekommen die Schuhe erstmals eine eigene Bewegungsfunktion über ihre Werte hinaus.</span>",
+      "Im Kampf zurückgestoßene Gegner stürzten in bestimmten Situationen nicht von Klippen — behoben.",
+      "Beim Absteigen vom <b>A.T.A.G.</b> in der Luft entstand übermäßiger Fallschaden — behoben."
+    ]},
+    {cat:"UI",items:[
+      "Bestimmte UI-Texte <b>zitterten beim Scrollen</b> — behoben. <span style='color:var(--gdim)'>Einordnung: Zitternde UI-Texte standen schon in 2.02.00 auf der Fehlerliste, dort ohne Bezug zum Scrollen.</span>",
+      "Einige UI-Texte wurden fehlerhaft dargestellt — behoben."
+    ]},
+    {cat:"Grafik und Einstellungen",items:[
+      "Das <b>NVIDIA Streamline SDK</b> wurde auf Version 2.14.1 aktualisiert. Dadurch nutzt <b>DLSS Ray Reconstruction</b> jetzt das neueste Transformer-Modell."
+    ]},
+    {cat:"Lokalisierung",items:[
+      "Lokalisierungsfehler wurden in allen Sprachen behoben und die allgemeine Qualität verbessert."
+    ]},
+    {cat:"Sonstiges",items:[
+      "<b>Bildrauschen auf Rüstungen</b> fiel in Innenräumen besonders auf — behoben. <span style='color:var(--gdim)'>Einordnung: Derselbe Punkt steht wortgleich schon in 2.02.00. Die Notes erklären nicht, warum er ein zweites Mal behoben werden musste.</span>",
+      "Pferde sahen mit bestimmten <b>Rossharnischen</b> unnatürlich aus — behoben."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>in Vorbereitung</em>. Keine Downloadgröße, keine Build-Nummer.",
+      "Quelle: offizielle Patch-Notizen Version 2.03.00, Pearl Abyss, 18.09.2026 01:00 UTC (boardNo 131), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
   {ver:"2.02.00",date:"11.09.2026",size:"Patch 2.02.00 bringt Cross-Save für Mac sowie zwölf Fehlerbehebungen in sechs Bereichen. Veröffentlicht am 11.09.2026 um 05:30 UTC (boardNo 130). Zum Veröffentlichungszeitpunkt stand er für Steam (PC/Mac), PlayStation, XBOX und Epic bereit; der Mac App Store war noch in Vorbereitung. Die Notes nennen keine Downloadgröße und keine Build-Nummer.",features:[
     {cat:"Neue Funktion",items:[
       "[Mac] <b>Cross-Save</b> wurde hinzugefügt. <span style='color:var(--gdim)'>Die Notes erläutern weder Voraussetzungen noch den genauen Umfang der Übertragung.</span>"
@@ -1274,7 +1337,7 @@ const MINIGAMES=[
  {icon:"🦾",name:"Claw Machine (Greifautomat)",patch:"1.06.00",conf:"high",ort:"'Laughing Marionette', Jahrmarkt nordwestlich der City of Demeniss (Zelt mit 3 Automaten am Riesenrad)",start:"Am Automaten interagieren und mit Silber zahlen",ablauf:"Jeder Preis steckt in einem Käfig mit einer offenen fünfeckigen Seite — der Greifstab muss exakt durch diese Öffnung abgesenkt werden, um den Käfig von innen zu haken. Preise rotieren täglich.",belohnung:"Deko-Lampen, Stuhl, spezielle Kopfbedeckungen, Abyss Artifacts, Abyss Gear"},
  {icon:"✂️",name:"Schere, Stein, Papier",patch:"Release",conf:"high",ort:"Kinder in allen größeren Städten (Hernand, Demeniss, Delesyia, Tashkalp, Varnia, Pailune)",start:"Kind ansprechen und herausfordern; danach ~23 Ingame-Stunden Cooldown",ablauf:"Best-of-3 Schere-Stein-Papier. Siege zählen für die Mind-Games-Challenge 'A Silent War' (3 Siege an verschiedenen Tagen/Orten).",belohnung:"Zufälliges Insekt pro Sieg + Beziehungspunkte zur Fraktion"},
  {icon:"💪",name:"Armdrücken",patch:"Release",conf:"high",ort:"Hernand Inn (City of Hernand) u.a.",start:"Sitzenden Einwohner am Tisch herausfordern",ablauf:"Button-Mashing plus Kreis-QTE: Schnelles Drücken füllt die rote Leiste; beim QTE warten, bis der Zeiger auf dem weißen Segment links landet. Guide-Tipp: Grafik-Preset 'Performance' verlangsamt den QTE-Zeiger.",belohnung:"Kleinere Geld-/Beziehungsgewinne (nicht eindeutig belegt)"},
- {icon:"🃏",name:"Duo (Kartenspiel)",patch:"Release",conf:"high",ort:"1. Stock des Hernand Inn; auch Tashkalp und Beighen",start:"Am Glücksspieltisch Platz nehmen, Einsatz 15 Silber",ablauf:"Glücksspiel nach Art des koreanischen Seotda: 2 Karten, höchste Kombination gewinnt den Pot (Check, All-in, Half-/Double-Raise, Call, Fold). Wer die Mischbewegung des Gegners dreimal beobachtet (blaue Umrandung), schaltet eine Schummel-Fähigkeit frei. Mind-Games-Challenge: 'A Bloom of High Stakes'.",belohnung:"Geldgewinne (Pot)"},
+ {icon:"🃏",name:"Duo (Kartenspiel)",patch:"Release",conf:"high",ort:"1. Stock des Hernand Inn; auch Tashkalp, Beighen und Tommaso (Tommaso belegt durch Patch 2.03.01)",start:"Am Glücksspieltisch Platz nehmen, Einsatz 15 Silber",ablauf:"Glücksspiel nach Art des koreanischen Seotda: 2 Karten, höchste Kombination gewinnt den Pot (Check, All-in, Half-/Double-Raise, Call, Fold). Wer die Mischbewegung des Gegners dreimal beobachtet (blaue Umrandung), schaltet eine Schummel-Fähigkeit frei. Mind-Games-Challenge: 'A Bloom of High Stakes'.",belohnung:"Geldgewinne (Pot)"},
  {icon:"🂠",name:"Five-Card (Kartenspiel)",patch:"Release",conf:"high",ort:"Spielhölle in Beighen (Gebäude mit Ork-Türsteher), Pailune",start:"Erst nach der Odeck-Questreihe 'Executioner of Justice' zugänglich",ablauf:"Duo-Variante mit 5 Karten und gleicher Setz-/Schummelmechanik. Beste Hand: 'Prime Pair' (rote 3 + rote 8). Mind-Games-Challenge: 'Key of Destiny'.",belohnung:"Geldgewinne"},
  {icon:"🏹",name:"Shot Contest: Bogen",patch:"Release",conf:"high",ort:"Lioncrest Manor, Hernand",start:"Beim Veranstalter anmelden, 80 Kupfer Startgebühr",ablauf:"Wettschießen: Wer zuerst 10 zufällig erscheinende Ziele trifft, gewinnt. L2 spannt und zielt, Loslassen schießt.",belohnung:"Preisgeld"},
  {icon:"🔫",name:"Shot Contest: Gewehr",patch:"Release",conf:"high",ort:"City of Hernand",start:"Beim Veranstalter anmelden, 1 Silber Startgebühr",ablauf:"Wie der Bogenwettbewerb, nur mit Gewehr: zuerst 10 Zufallsziele treffen.",belohnung:"Preisgeld"},
