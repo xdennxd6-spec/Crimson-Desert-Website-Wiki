@@ -1,0 +1,1886 @@
+{
+  "_source": "questlog.gg tRPC database.getItem, independent snapshot 2026-09-09; see G:/Claude/Crimson-Wiki-Plan-2026-09-09/ausfuehrung/2026-09-09_1746/quellen/ernte-2026-09-09.json and def-analyse.json",
+  "_convention": "atk and def use highest documented refinement stage; nulls remain unverified",
+  "items": {
+    "Absolute Justice Greatsword": {
+      "id": "240031",
+      "atk": 45
+    },
+    "Acorn Mace": {
+      "id": "1001146",
+      "atk": 37
+    },
+    "Acria Sword": {
+      "id": "200919",
+      "atk": 30
+    },
+    "Aeserion Bow": {
+      "id": "301000",
+      "atk": 33
+    },
+    "Aeserion Dagger": {
+      "id": "231000",
+      "atk": 30
+    },
+    "Aeserion Greataxe": {
+      "id": "251000",
+      "atk": 40
+    },
+    "Aeserion Greathammer": {
+      "id": "14703",
+      "atk": 45
+    },
+    "Aeserion Halberd": {
+      "id": "15000",
+      "atk": 39
+    },
+    "Aeserion Longsword": {
+      "id": "241000",
+      "atk": 39
+    },
+    "Aeserion Mace": {
+      "id": "221000",
+      "atk": 33
+    },
+    "Aeserion Spear": {
+      "id": "15700",
+      "atk": 35
+    },
+    "Aeserion Sword": {
+      "id": "13811",
+      "atk": 34
+    },
+    "Aeserion Warhammer": {
+      "id": "261000",
+      "atk": 41
+    },
+    "Air Blaster": {
+      "id": "1001152",
+      "atk": 24
+    },
+    "Alabaster Curved Sword": {
+      "id": "200049",
+      "atk": 34
+    },
+    "Alabaster Dagger": {
+      "id": "230059",
+      "atk": 30
+    },
+    "Alabaster Halberd": {
+      "id": "265002",
+      "atk": 35
+    },
+    "Alabaster Mace": {
+      "id": "220021",
+      "atk": 33
+    },
+    "Alabaster Spear": {
+      "id": "310013",
+      "atk": 35
+    },
+    "Alfonso Spear": {
+      "id": "310009",
+      "atk": 35
+    },
+    "Alpha Barrel Cannon": {
+      "id": "15202",
+      "atk": 31
+    },
+    "Ancient Shield": {
+      "id": "1000266",
+      "def": 13
+    },
+    "Ancient Wood Pole": {
+      "id": "1001201",
+      "atk": 35
+    },
+    "Anti-Caliburn Signboard": {
+      "id": "1000258",
+      "atk": 24
+    },
+    "Antumbra Sign": {
+      "id": "1004111",
+      "atk": 24
+    },
+    "Antumbra's Eye": {
+      "id": "1001202",
+      "atk": 45
+    },
+    "Arben Greatsword Giant": {
+      "id": "1002104",
+      "atk": 45
+    },
+    "Arlem Warhammer": {
+      "id": "260018",
+      "atk": 45
+    },
+    "Arlen Musket": {
+      "id": "280001",
+      "atk": 38
+    },
+    "Arlen Warhammer": {
+      "id": "260019",
+      "atk": 42
+    },
+    "Artisan's Hand": {
+      "id": "1000184",
+      "atk": 37
+    },
+    "Artisan's Ornamented Shield": {
+      "id": "1000657",
+      "def": 15
+    },
+    "Ashen Execution": {
+      "id": "16001",
+      "atk": 45
+    },
+    "Ator's Finger": {
+      "id": "230073",
+      "atk": 34
+    },
+    "Awakened Spirit": {
+      "id": "1000239",
+      "atk": 36
+    },
+    "Balgran Shield": {
+      "id": "13604",
+      "def": 14
+    },
+    "Balton Hammer": {
+      "id": "1000513",
+      "atk": 33
+    },
+    "Balton Large Shield": {
+      "id": "290510",
+      "def": 31
+    },
+    "Balton Longsword": {
+      "id": "240018",
+      "atk": 43
+    },
+    "Balton Mace": {
+      "id": "220022",
+      "atk": 37
+    },
+    "Balton Shield": {
+      "id": "290001",
+      "def": 15
+    },
+    "Bamboo Spear": {
+      "id": "1002124",
+      "atk": 35
+    },
+    "Bamboo Stalk": {
+      "id": "1003908",
+      "atk": 3
+    },
+    "Beehive Club": {
+      "id": "1000103",
+      "atk": 18
+    },
+    "Bekker Axe": {
+      "id": "210003",
+      "atk": 34
+    },
+    "Bekker Bow": {
+      "id": "300003",
+      "atk": 30
+    },
+    "Bekker Dagger": {
+      "id": "230029",
+      "atk": 30
+    },
+    "Bekker Greataxe": {
+      "id": "250994",
+      "atk": 43
+    },
+    "Bekker Greathammer": {
+      "id": "400000",
+      "atk": 45
+    },
+    "Bekker Halberd": {
+      "id": "265008",
+      "atk": 36
+    },
+    "Bekker Hammer": {
+      "id": "1000515",
+      "atk": 37
+    },
+    "Bekker Large Shield": {
+      "id": "290523",
+      "def": 29
+    },
+    "Bekker Musket": {
+      "id": "280002",
+      "atk": 35
+    },
+    "Bekker Shield": {
+      "id": "1163043",
+      "def": 14
+    },
+    "Bekker Warhammer": {
+      "id": "260007",
+      "atk": 41
+    },
+    "Bismuth Cannon": {
+      "id": "1002118",
+      "atk": 34
+    },
+    "Bismuth Spear": {
+      "id": "1001251",
+      "atk": 27
+    },
+    "Black Bears Banner Pike with Tassel": {
+      "id": "1001925",
+      "atk": 17
+    },
+    "Black Iron Axe": {
+      "id": "210059",
+      "atk": 34
+    },
+    "Black Oath Shield": {
+      "id": "1002844",
+      "def": 14
+    },
+    "Black Sun Shield": {
+      "id": "1001211",
+      "def": 15
+    },
+    "Blaster No. 8": {
+      "id": "9507",
+      "atk": 34
+    },
+    "Blazing Shield": {
+      "id": "1002842",
+      "def": 14
+    },
+    "Blazing Spear": {
+      "id": "1000176",
+      "atk": 22
+    },
+    "Bleed Shotgun": {
+      "id": "370006",
+      "atk": 37
+    },
+    "Bloodsteel Bow": {
+      "id": "300015",
+      "atk": 30
+    },
+    "Blue Scout Shield": {
+      "id": "1003205",
+      "def": 14
+    },
+    "Bonepit Greataxe": {
+      "id": "250021",
+      "atk": 40
+    },
+    "Bonepit Greathammer": {
+      "id": "400005",
+      "atk": 42
+    },
+    "Bonepit Halberd": {
+      "id": "265006",
+      "atk": 36
+    },
+    "Bonepit Mace": {
+      "id": "220019",
+      "atk": 33
+    },
+    "Bonepit Warhammer": {
+      "id": "260013",
+      "atk": 45
+    },
+    "Bow of the Fleeting": {
+      "id": "1000796",
+      "atk": 30
+    },
+    "Brass Rose Rapier": {
+      "id": "201006",
+      "atk": 27
+    },
+    "Bringer of Balance": {
+      "id": "1000545",
+      "atk": 40
+    },
+    "Cactus Warhammer": {
+      "id": "260015",
+      "atk": 42
+    },
+    "Caliburn's Mercy Pistol": {
+      "id": "270013",
+      "atk": 36
+    },
+    "Calphadean Contribution Banner Pike": {
+      "id": "1000632",
+      "atk": 38
+    },
+    "Celeste Halberd": {
+      "id": "265010",
+      "atk": 39
+    },
+    "Ceremonial Warhammer": {
+      "id": "1001204",
+      "atk": 41
+    },
+    "Chillfallen Sword": {
+      "id": "13810",
+      "atk": 30
+    },
+    "Circling Moon": {
+      "id": "15707",
+      "atk": 35
+    },
+    "City Guard's Shield": {
+      "id": "1000519",
+      "def": 14
+    },
+    "Cog Destroyer Spear": {
+      "id": "310023",
+      "atk": 35
+    },
+    "Competition Musket": {
+      "id": "1003246",
+      "atk": 35
+    },
+    "Competition Shield": {
+      "id": "1000462",
+      "def": 15
+    },
+    "Competition Spear": {
+      "id": "1003247",
+      "atk": 38
+    },
+    "Competition Sword": {
+      "id": "1003244",
+      "atk": 30
+    },
+    "Competition Wooden Bow": {
+      "id": "1003245",
+      "atk": 33
+    },
+    "Copper Knuckledrill": {
+      "id": "410004",
+      "atk": 22
+    },
+    "Crimson Warden's Bow": {
+      "id": "301001",
+      "atk": 33
+    },
+    "Crow Brothers Axe": {
+      "id": "210075",
+      "atk": 30
+    },
+    "Crow Brothers Dagger": {
+      "id": "230065",
+      "atk": 30
+    },
+    "Crow Brothers Warhammer": {
+      "id": "1000844",
+      "atk": 42
+    },
+    "Crow Whisperer": {
+      "id": "1001207",
+      "atk": 41
+    },
+    "Crude Club": {
+      "id": "1000049",
+      "atk": 33
+    },
+    "Dagger of Dark Pursuit": {
+      "id": "230063",
+      "atk": 34
+    },
+    "Damaged Medium Calphadean Banner Pike": {
+      "id": "1001083",
+      "atk": 21
+    },
+    "Dandelion Longsword": {
+      "id": "241002",
+      "atk": 40
+    },
+    "Dane Shotgun": {
+      "id": "370007",
+      "atk": 41
+    },
+    "Dark Worshiper's Staff": {
+      "id": "1001203",
+      "atk": 42
+    },
+    "Darkbringer Greatsword": {
+      "id": "14705",
+      "atk": 39
+    },
+    "Dekarr Bow": {
+      "id": "300002",
+      "atk": 33
+    },
+    "Dekarr Dagger": {
+      "id": "230911",
+      "atk": 30
+    },
+    "Dekarr Greataxe": {
+      "id": "250995",
+      "atk": 43
+    },
+    "Dekarr Hammer": {
+      "id": "1000512",
+      "atk": 33
+    },
+    "Dekarr Shield": {
+      "id": "290057",
+      "def": 14
+    },
+    "Dekarr Sword": {
+      "id": "200904",
+      "atk": 34
+    },
+    "Delesyian Contribution Banner Pike": {
+      "id": "1000770",
+      "atk": 35
+    },
+    "Delesyian Dagger": {
+      "id": "230909",
+      "atk": 30
+    },
+    "Delesyian Longsword": {
+      "id": "240043",
+      "atk": 39
+    },
+    "Delesyian Musket": {
+      "id": "280003",
+      "atk": 38
+    },
+    "Delesyian Ornamental Shield": {
+      "id": "13605",
+      "def": 14
+    },
+    "Delesyian Shotgun": {
+      "id": "370005",
+      "atk": 38
+    },
+    "Delonde Axe": {
+      "id": "210051",
+      "atk": 30
+    },
+    "Demeniss Royal Guard Shield": {
+      "id": "1000394",
+      "def": 15
+    },
+    "Demenissian Chainsaw": {
+      "id": "1000171",
+      "atk": 33
+    },
+    "Demenissian Contribution Banner Pike": {
+      "id": "1000688",
+      "atk": 38
+    },
+    "Demenissian Gold-Decorated Shield": {
+      "id": "1000683",
+      "def": 15
+    },
+    "Demenissian Hero's Musket": {
+      "id": "13304",
+      "atk": 38
+    },
+    "Demenissian Silver-Decorated Shield": {
+      "id": "1000395",
+      "def": 14
+    },
+    "Derictus Spear": {
+      "id": "1000082",
+      "atk": 35
+    },
+    "Desert Hammer": {
+      "id": "1000238",
+      "atk": 33
+    },
+    "Dewhaven Longsword": {
+      "id": "240019",
+      "atk": 43
+    },
+    "Dewhaven Shield": {
+      "id": "290091",
+      "def": 14
+    },
+    "Dewhaven Shotgun": {
+      "id": "370002",
+      "atk": 37
+    },
+    "Disruptor Spear": {
+      "id": "1001212",
+      "atk": 27
+    },
+    "Diver's Machine Knuckledrill": {
+      "id": "1000022",
+      "atk": 18
+    },
+    "Diverging Moon": {
+      "id": "15706",
+      "atk": 35
+    },
+    "Divine Echoes Bow": {
+      "id": "12701",
+      "atk": 33
+    },
+    "Double-Headed Axe of Greed": {
+      "id": "12600",
+      "atk": 30
+    },
+    "Double-Sided Banner Pike": {
+      "id": "52011",
+      "atk": 17
+    },
+    "Drake Shield": {
+      "id": "290021",
+      "def": 15
+    },
+    "Drakhan Hammer": {
+      "id": "1000460",
+      "atk": 33
+    },
+    "Dueling Rapier": {
+      "id": "201011",
+      "atk": 27
+    },
+    "Earthsplitter": {
+      "id": "15100",
+      "atk": 43
+    },
+    "Eastern Wanderer's Shield": {
+      "id": "1000631",
+      "def": 15
+    },
+    "Eastern Witch's Fan": {
+      "id": "1000156",
+      "atk": 33
+    },
+    "Electro-Mecha Longsword": {
+      "id": "1001062",
+      "atk": 43
+    },
+    "Electro-Mecha Spear": {
+      "id": "1000957",
+      "atk": 39
+    },
+    "Electromagnetic Boltspitter": {
+      "id": "1000553",
+      "atk": 25
+    },
+    "Electromagnetic Flamespitter": {
+      "id": "330002",
+      "atk": 25
+    },
+    "Electromagnetic Frostspitter": {
+      "id": "330003",
+      "atk": 25
+    },
+    "Elemore Rapier": {
+      "id": "201010",
+      "atk": 27
+    },
+    "Elenore Rapier": {
+      "id": "201015",
+      "atk": 27
+    },
+    "Elite Vanguard": {
+      "id": "1002123",
+      "atk": 35
+    },
+    "Entwined Red Thread Hammer": {
+      "id": "1000494",
+      "atk": 33
+    },
+    "Falconne Pistol": {
+      "id": "270003",
+      "atk": 33
+    },
+    "Fallen Kingdom's Rapier": {
+      "id": "201009",
+      "atk": 27
+    },
+    "Fallen Kingdom's Sword": {
+      "id": "200053",
+      "atk": 34
+    },
+    "Fallen Noble's Rapier": {
+      "id": "201007",
+      "atk": 27
+    },
+    "Fan-Blade Greataxe": {
+      "id": "250022",
+      "atk": 40
+    },
+    "Fated Shadow": {
+      "id": "1000578",
+      "atk": 34
+    },
+    "Finest Rhinard Cannon": {
+      "id": "15200",
+      "atk": 34
+    },
+    "Flame Knights Shield": {
+      "id": "1000500",
+      "def": 14
+    },
+    "Flame Spear": {
+      "id": "1000451",
+      "atk": 27
+    },
+    "Freesword Halberd": {
+      "id": "265007",
+      "atk": 39
+    },
+    "Freesword's Shield": {
+      "id": "1000183",
+      "def": 15
+    },
+    "Frostbone Shield": {
+      "id": "13901",
+      "def": 13
+    },
+    "Frostfang": {
+      "id": "15703",
+      "atk": 38
+    },
+    "Frozen Anguish": {
+      "id": "15901",
+      "atk": 43
+    },
+    "Frozen Soul": {
+      "id": "220008",
+      "atk": 33
+    },
+    "Furious Waves Gauntlet": {
+      "id": "410008",
+      "atk": 28
+    },
+    "Gale Shield": {
+      "id": "1001192",
+      "def": 6
+    },
+    "Gamma Barrel Cannon": {
+      "id": "15204",
+      "atk": 31
+    },
+    "Gilded Shield": {
+      "id": "1000252",
+      "def": 14
+    },
+    "Gilliam Axe": {
+      "id": "210013",
+      "atk": 34
+    },
+    "Gilliam Halberd": {
+      "id": "265005",
+      "atk": 39
+    },
+    "Gilliam Rapier": {
+      "id": "201012",
+      "atk": 31
+    },
+    "Glenmore Sword": {
+      "id": "200021",
+      "atk": 30
+    },
+    "Golden Dragon's Claw": {
+      "id": "400001",
+      "atk": 41
+    },
+    "Golden Fire": {
+      "id": "1578535467",
+      "atk": 34
+    },
+    "Golden Greathammer": {
+      "id": "1000729",
+      "atk": 45
+    },
+    "Golden Kerria Shield": {
+      "id": "1001027",
+      "def": 13
+    },
+    "Golden Shield": {
+      "id": "1001246",
+      "def": 13
+    },
+    "Golden Sword": {
+      "id": "1001524",
+      "atk": 30
+    },
+    "Golden Vanguard": {
+      "id": "265011",
+      "atk": 39
+    },
+    "Golden-Knotted Ancestral Bow": {
+      "id": "300001",
+      "atk": 33
+    },
+    "Gorthak Greataxe": {
+      "id": "250017",
+      "atk": 40
+    },
+    "Gorthak Warhammer": {
+      "id": "260030",
+      "atk": 45
+    },
+    "Grace Rapier": {
+      "id": "201004",
+      "atk": 31
+    },
+    "Grasping Moon": {
+      "id": "15702",
+      "atk": 38
+    },
+    "Greathammer of Fire": {
+      "id": "400002",
+      "atk": 42
+    },
+    "Grey Wolf Bow": {
+      "id": "1003265",
+      "atk": 30
+    },
+    "Grey Wolf Wooden Shield": {
+      "id": "1001147",
+      "def": 15
+    },
+    "Grey Wolf's Sword": {
+      "id": "200001",
+      "atk": 30
+    },
+    "Guidance of Dark Pursuit": {
+      "id": "1000843",
+      "atk": 45
+    },
+    "Gustav Musket": {
+      "id": "280019",
+      "atk": 38
+    },
+    "Hellhounds Chopping Axe": {
+      "id": "250025",
+      "atk": 40
+    },
+    "Helms Greathammer": {
+      "id": "400003",
+      "atk": 42
+    },
+    "Helms Musket": {
+      "id": "280017",
+      "atk": 35
+    },
+    "Hernandian Contribution Banner Pike": {
+      "id": "1000556",
+      "atk": 35
+    },
+    "Hollow Visage": {
+      "id": "200902",
+      "atk": 30
+    },
+    "Horseshoe-Blade Greataxe": {
+      "id": "250024",
+      "atk": 43
+    },
+    "Hound": {
+      "id": "15902",
+      "atk": 39
+    },
+    "Hwando": {
+      "id": "1000080",
+      "atk": 43
+    },
+    "Hyde Crossbow": {
+      "id": "320001",
+      "atk": 18
+    },
+    "Ignir": {
+      "id": "240042",
+      "atk": 43
+    },
+    "Incomplete Masterpiece": {
+      "id": "250014",
+      "atk": 40
+    },
+    "Inquisitor's Greataxe": {
+      "id": "500001",
+      "atk": 39
+    },
+    "Inquisitor's Rapier": {
+      "id": "201003",
+      "atk": 27
+    },
+    "Invisible Longsword": {
+      "id": "1000491",
+      "atk": 15
+    },
+    "Iris Greataxe": {
+      "id": "250016",
+      "atk": 39
+    },
+    "Iris Halberd": {
+      "id": "265003",
+      "atk": 36
+    },
+    "Iris Longsword": {
+      "id": "240023",
+      "atk": 40
+    },
+    "Iris Mace": {
+      "id": "220023",
+      "atk": 37
+    },
+    "Iris Shield": {
+      "id": "290014",
+      "def": 14
+    },
+    "Iris Warhammer": {
+      "id": "260028",
+      "atk": 41
+    },
+    "Iron Fists Gauntlet": {
+      "id": "410009",
+      "atk": 28
+    },
+    "Jemel Pistol": {
+      "id": "270002",
+      "atk": 36
+    },
+    "Kadel Mace": {
+      "id": "220002",
+      "atk": 33
+    },
+    "Khaled Shield": {
+      "id": "1001422",
+      "def": 14
+    },
+    "King's Dagger": {
+      "id": "1000756",
+      "atk": 30
+    },
+    "Kite Shield": {
+      "id": "1000027",
+      "def": 14
+    },
+    "Knightlord's Sword": {
+      "id": "200052",
+      "atk": 30
+    },
+    "Kordaav Mace": {
+      "id": "220004",
+      "atk": 37
+    },
+    "Kuku Bismuth Spear": {
+      "id": "1001953",
+      "atk": 38
+    },
+    "Kuku Boltspitter": {
+      "id": "1003259",
+      "atk": 25
+    },
+    "Kuku Disruptor Spear": {
+      "id": "1002178",
+      "atk": 38
+    },
+    "Kuku Flame Spear": {
+      "id": "1002176",
+      "atk": 35
+    },
+    "Kuku Flamespitter": {
+      "id": "1002180",
+      "atk": 25
+    },
+    "Kuku Frostspitter": {
+      "id": "1002181",
+      "atk": 25
+    },
+    "Kuku Laser Cannon Spear": {
+      "id": "1002179",
+      "atk": 38
+    },
+    "Kuku Lightning Spear": {
+      "id": "1002175",
+      "atk": 35
+    },
+    "Kuku Propeller Spear": {
+      "id": "1002177",
+      "atk": 35
+    },
+    "Kuku Spear": {
+      "id": "1000374",
+      "atk": 1
+    },
+    "Kutum Shield": {
+      "id": "1000182",
+      "def": 29
+    },
+    "Kylus Axe": {
+      "id": "210035",
+      "atk": 30
+    },
+    "Kylus Bow": {
+      "id": "300013",
+      "atk": 33
+    },
+    "Kylus Dagger": {
+      "id": "230901",
+      "atk": 30
+    },
+    "Kylus Greataxe": {
+      "id": "250020",
+      "atk": 43
+    },
+    "Kylus Spear": {
+      "id": "310012",
+      "atk": 38
+    },
+    "Lambert Axe": {
+      "id": "210011",
+      "atk": 30
+    },
+    "Lambert Halberd": {
+      "id": "265004",
+      "atk": 35
+    },
+    "Lambert Rapier": {
+      "id": "201013",
+      "atk": 27
+    },
+    "Lanford Axe": {
+      "id": "210009",
+      "atk": 34
+    },
+    "Lanford Greathammer": {
+      "id": "400004",
+      "atk": 41
+    },
+    "Lanford Hammer": {
+      "id": "1000461",
+      "atk": 33
+    },
+    "Lanford Mace": {
+      "id": "220007",
+      "atk": 37
+    },
+    "Large Gilded Shield": {
+      "id": "1000253",
+      "def": 27
+    },
+    "Laser Cannon Spear": {
+      "id": "1001183",
+      "atk": 27
+    },
+    "Legionary's Gladius": {
+      "id": "200921",
+      "atk": 30
+    },
+    "Leofric Double-Headed Axe": {
+      "id": "210057",
+      "atk": 30
+    },
+    "Leofric Musket": {
+      "id": "280005",
+      "atk": 35
+    },
+    "Leonne Rapier": {
+      "id": "201005",
+      "atk": 31
+    },
+    "Liberre Rapier": {
+      "id": "201019",
+      "atk": 27
+    },
+    "Lightning Greathammer": {
+      "id": "1002741",
+      "atk": 27
+    },
+    "Lightning Spear": {
+      "id": "1001163",
+      "atk": 27
+    },
+    "Lightningblade of Greed": {
+      "id": "1000747",
+      "atk": 30
+    },
+    "Lusec Greatsword Giant": {
+      "id": "1002105",
+      "atk": 42
+    },
+    "Mace of Ambition": {
+      "id": "1001136",
+      "atk": 33
+    },
+    "Mace of Betrayal": {
+      "id": "1000237",
+      "atk": 33
+    },
+    "Mace of Resolve": {
+      "id": "13202",
+      "atk": 37
+    },
+    "Mace of the Fleeting": {
+      "id": "13200",
+      "atk": 33
+    },
+    "Maeve Axe": {
+      "id": "210023",
+      "atk": 30
+    },
+    "Marauder's Halberd": {
+      "id": "265001",
+      "atk": 35
+    },
+    "Marching Baton": {
+      "id": "220006",
+      "atk": 33
+    },
+    "Marni Devotee's Mace": {
+      "id": "13201",
+      "atk": 33
+    },
+    "Marni Musket": {
+      "id": "13301",
+      "atk": 35
+    },
+    "Marni Tank Blaster": {
+      "id": "9501",
+      "atk": 30
+    },
+    "Mass-Produced Large Rekel Shield": {
+      "id": "290526",
+      "def": 27
+    },
+    "Mechanical Clockwork Blaster": {
+      "id": "9502",
+      "atk": 30
+    },
+    "Medium Black Bears Banner Pike": {
+      "id": "1003165",
+      "atk": 17
+    },
+    "Medium Bleed Bandits Banner Pike": {
+      "id": "1003166",
+      "atk": 19
+    },
+    "Medium Caliburn's Banner Pike": {
+      "id": "1003167",
+      "atk": 24
+    },
+    "Medium Calphadean Banner Pike": {
+      "id": "1003168",
+      "atk": 21
+    },
+    "Medium Delesyian Banner Pike": {
+      "id": "1003170",
+      "atk": 27
+    },
+    "Medium Demenissian Banner Pike": {
+      "id": "1002158",
+      "atk": 24
+    },
+    "Medium Dewhaven Banner Pike": {
+      "id": "1003171",
+      "atk": 27
+    },
+    "Medium Dusksongs Banner Pike": {
+      "id": "1003337",
+      "atk": 24
+    },
+    "Medium Faceless Banner Pike": {
+      "id": "1003338",
+      "atk": 24
+    },
+    "Medium Flame Knights Banner Pike": {
+      "id": "1003355",
+      "atk": 33
+    },
+    "Medium Greymane Banner Pike": {
+      "id": "1003340",
+      "atk": 19
+    },
+    "Medium Halberd of Carnage's Banner Pike": {
+      "id": "1003349",
+      "atk": 17
+    },
+    "Medium Heavy Silence Banner Pike": {
+      "id": "1003347",
+      "atk": 19
+    },
+    "Medium Hellhounds Banner Pike": {
+      "id": "1003341",
+      "atk": 19
+    },
+    "Medium Hernandian Banner Pike": {
+      "id": "1003342",
+      "atk": 19
+    },
+    "Medium Ironflame Orcs Banner Pike": {
+      "id": "1003339",
+      "atk": 27
+    },
+    "Medium Marni Banner Pike": {
+      "id": "1003343",
+      "atk": 27
+    },
+    "Medium Musket of Demeniss Banner Pike": {
+      "id": "1003344",
+      "atk": 17
+    },
+    "Medium Pailunese Banner Pike": {
+      "id": "1003345",
+      "atk": 21
+    },
+    "Medium Staglord Banner Pike": {
+      "id": "1003169",
+      "atk": 24
+    },
+    "Medium Tommaso Banner Pike": {
+      "id": "1003350",
+      "atk": 24
+    },
+    "Medium Twilight Messengers Banner Pike": {
+      "id": "1003351",
+      "atk": 24
+    },
+    "Medium Varnian Banner Pike": {
+      "id": "1003352",
+      "atk": 24
+    },
+    "Medium Vellua Pirate Banner Pike": {
+      "id": "1003346",
+      "atk": 19
+    },
+    "Medium Wells Banner Pike": {
+      "id": "1003353",
+      "atk": 24
+    },
+    "Medium Wyvernflames Banner Pike": {
+      "id": "1003354",
+      "atk": 24
+    },
+    "Melted Ambition": {
+      "id": "200072",
+      "atk": 30
+    },
+    "Metilbahm Shotgun": {
+      "id": "370004",
+      "atk": 38
+    },
+    "Mining Knuckledrill": {
+      "id": "1001294",
+      "atk": 33
+    },
+    "Mirror of Night Shield": {
+      "id": "290020",
+      "def": 15
+    },
+    "Mortimer Shotgun": {
+      "id": "370003",
+      "atk": 41
+    },
+    "Muskan's Lower Body Clone Fists": {
+      "id": "410012",
+      "atk": 10
+    },
+    "Muskan's Upper Body Clone Fists": {
+      "id": "410011",
+      "atk": 10
+    },
+    "Musket Shield": {
+      "id": "1000498",
+      "def": 14
+    },
+    "Nazk Sword": {
+      "id": "13809",
+      "atk": 34
+    },
+    "Noble Man's Bow": {
+      "id": "12702",
+      "atk": 33
+    },
+    "North Wind Shield": {
+      "id": "1001417",
+      "def": 31
+    },
+    "North Wind Trident": {
+      "id": "310031",
+      "atk": 38
+    },
+    "Oath Ring Shield": {
+      "id": "1002847",
+      "def": 14
+    },
+    "Oblivion of the Past": {
+      "id": "1001208",
+      "atk": 42
+    },
+    "Octarr's Legacy": {
+      "id": "220012",
+      "atk": 37
+    },
+    "Odeck Hardwood Shield": {
+      "id": "1002846",
+      "def": 14
+    },
+    "Odeck Wooden Club Mace": {
+      "id": "1001149",
+      "atk": 37
+    },
+    "Orc Blaster": {
+      "id": "1675016612",
+      "atk": 34
+    },
+    "Pailunese Contribution Banner Pike": {
+      "id": "1000178",
+      "atk": 35
+    },
+    "Pailunese Logging Axe": {
+      "id": "250026",
+      "atk": 39
+    },
+    "Pailunese Musket": {
+      "id": "280018",
+      "atk": 35
+    },
+    "Pailunese Riteblade": {
+      "id": "230917",
+      "atk": 34
+    },
+    "Pailunese Shotgun": {
+      "id": "370001",
+      "atk": 38
+    },
+    "Parashu Axe": {
+      "id": "210077",
+      "atk": 30
+    },
+    "Parvel Greatsword Giant": {
+      "id": "1002103",
+      "atk": 41
+    },
+    "Patterned Stone Greataxe": {
+      "id": "500005",
+      "atk": 39
+    },
+    "Peltree Sword": {
+      "id": "200078",
+      "atk": 30
+    },
+    "Propeller Spear": {
+      "id": "1001193",
+      "atk": 27
+    },
+    "Purple Scout Shield": {
+      "id": "1003194",
+      "def": 14
+    },
+    "Rapier of Amity": {
+      "id": "201014",
+      "atk": 31
+    },
+    "Rattan Shield": {
+      "id": "1000090",
+      "def": 15
+    },
+    "Reckoning": {
+      "id": "15701",
+      "atk": 35
+    },
+    "Red Needle": {
+      "id": "1001055",
+      "atk": 30
+    },
+    "Red Rage": {
+      "id": "1000742",
+      "atk": 30
+    },
+    "Reinforced Steel Blaster": {
+      "id": "1675016614",
+      "atk": 30
+    },
+    "Rekel Large Spiked Shield": {
+      "id": "290531",
+      "def": 27
+    },
+    "Reventine Priest's Spear": {
+      "id": "1000245",
+      "atk": 35
+    },
+    "Rhett's Longsword": {
+      "id": "240026",
+      "atk": 40
+    },
+    "Rhias's Axe": {
+      "id": "210029",
+      "atk": 30
+    },
+    "Rhinard Cannon": {
+      "id": "330001",
+      "atk": 31,
+      "atkAlternatives": [
+        31,
+        39
+      ]
+    },
+    "Rhonid Large Shield": {
+      "id": "290509",
+      "def": 29
+    },
+    "Righteous Verdict": {
+      "id": "240030",
+      "atk": 39
+    },
+    "Ring of the Earth": {
+      "id": "210079",
+      "atk": 34
+    },
+    "Rising Arrow Shield": {
+      "id": "290023",
+      "def": 14
+    },
+    "Roar of the Black Bear": {
+      "id": "1000637",
+      "atk": 42
+    },
+    "Rogue's Mace": {
+      "id": "220014",
+      "atk": 33
+    },
+    "Rosemond Pistol": {
+      "id": "270001",
+      "atk": 33
+    },
+    "Royal Guard Shield": {
+      "id": "1000499",
+      "def": 15
+    },
+    "Royal Oath": {
+      "id": "13500",
+      "atk": 31
+    },
+    "Rune-Engraved Rock": {
+      "id": "15500",
+      "atk": 45
+    },
+    "Runewalker Shield": {
+      "id": "1000201",
+      "def": 15
+    },
+    "Saint's Blessing Shield": {
+      "id": "1000242",
+      "def": 14
+    },
+    "Saltroad Mace": {
+      "id": "1001063",
+      "atk": 33
+    },
+    "Saltroad Warhammer": {
+      "id": "260008",
+      "atk": 45
+    },
+    "Sanguine Knell": {
+      "id": "16003",
+      "atk": 41
+    },
+    "Savage Longsword": {
+      "id": "240016",
+      "atk": 40
+    },
+    "Savage Sawblade": {
+      "id": "1001019",
+      "atk": 34
+    },
+    "Savage Woodland Spirit Killer": {
+      "id": "1001150",
+      "atk": 33
+    },
+    "Serdin Greatsword Giant": {
+      "id": "1002102",
+      "atk": 42
+    },
+    "Shackle of Might": {
+      "id": "200924",
+      "atk": 30
+    },
+    "Shadow of the Past Pistol": {
+      "id": "270011",
+      "atk": 33
+    },
+    "Shadowleaf Bow": {
+      "id": "1000766",
+      "atk": 33
+    },
+    "Shadowleaf Soul Branch": {
+      "id": "1001205",
+      "atk": 42
+    },
+    "Shaman's Staff": {
+      "id": "1001209",
+      "atk": 42
+    },
+    "Shell of the Fleeting Shield": {
+      "id": "13600",
+      "def": 13
+    },
+    "Shield of Betrayal": {
+      "id": "1000761",
+      "def": 29
+    },
+    "Shield of Conviction": {
+      "id": "1000086",
+      "def": 29
+    },
+    "Shield of Radiance": {
+      "id": "1001064",
+      "def": 15
+    },
+    "Shield of Ringing": {
+      "id": "1000125",
+      "def": 5
+    },
+    "Shield of Sacrifice": {
+      "id": "1001427",
+      "def": 31
+    },
+    "Shield of a Blossoming Spring Day": {
+      "id": "290113",
+      "def": 13
+    },
+    "Shotgun Shield": {
+      "id": "1001305",
+      "def": 7
+    },
+    "Sielos Longsword": {
+      "id": "1000083",
+      "atk": 39
+    },
+    "Sigremon Greataxe": {
+      "id": "250028",
+      "atk": 39
+    },
+    "Silver Visione Stand": {
+      "id": "1000106",
+      "atk": 35
+    },
+    "Silverwolf Axe": {
+      "id": "210080",
+      "atk": 30
+    },
+    "Sior Blaster": {
+      "id": "1001039",
+      "atk": 30
+    },
+    "Slave Gladiator Branding Spear": {
+      "id": "1000366",
+      "atk": 38
+    },
+    "Small Bleed Bandits Banner Pike": {
+      "id": "1001828",
+      "atk": 19
+    },
+    "Small Dewhaven Banner Pike": {
+      "id": "1003322",
+      "atk": 27
+    },
+    "Small Dusksongs Banner Pike": {
+      "id": "52025",
+      "atk": 24
+    },
+    "Small Faceless Banner Pike": {
+      "id": "52026",
+      "atk": 24
+    },
+    "Small Flame Knights Banner Pike": {
+      "id": "1001827",
+      "atk": 33
+    },
+    "Small Greymane Banner Pike": {
+      "id": "1003326",
+      "atk": 19
+    },
+    "Small Halberd of Carnage's Banner Pike": {
+      "id": "1001818",
+      "atk": 17
+    },
+    "Small Heavy Silence Banner Pike": {
+      "id": "1003328",
+      "atk": 19
+    },
+    "Small Hellhounds Banner Pike": {
+      "id": "52033",
+      "atk": 19
+    },
+    "Small Hernandian Banner Pike": {
+      "id": "1001830",
+      "atk": 24
+    },
+    "Small Ironflame Orcs Banner Pike": {
+      "id": "1001825",
+      "atk": 27
+    },
+    "Small Marni Banner Pike": {
+      "id": "1001826",
+      "atk": 27
+    },
+    "Small Militia Banner Pike": {
+      "id": "1000124",
+      "atk": 19
+    },
+    "Small Musket of Demeniss Banner Pike": {
+      "id": "1003327",
+      "atk": 17
+    },
+    "Small Pailunese Banner Pike": {
+      "id": "1001820",
+      "atk": 21
+    },
+    "Small Royal Hunting Ground Banner Pike": {
+      "id": "380504",
+      "atk": 19
+    },
+    "Small Staglord Banner Pike": {
+      "id": "1001829",
+      "atk": 24
+    },
+    "Small Tommaso Banner Pike": {
+      "id": "1001822",
+      "atk": 24
+    },
+    "Small Twilight Messengers Banner Pike": {
+      "id": "1001824",
+      "atk": 24
+    },
+    "Small Varnian Banner Pike": {
+      "id": "1001823",
+      "atk": 24
+    },
+    "Small Wells Banner Pike": {
+      "id": "52029",
+      "atk": 24
+    },
+    "Small Wells Brigade Banner Pike": {
+      "id": "1000440",
+      "atk": 24
+    },
+    "Small Wyvernflames Banner Pike": {
+      "id": "1001821",
+      "atk": 24
+    },
+    "Soporific Blowpipe": {
+      "id": "430001",
+      "atk": 20
+    },
+    "Sorcerer's Massage Stick": {
+      "id": "1000465",
+      "atk": 37
+    },
+    "Sorcerer's Staff": {
+      "id": "1001200",
+      "atk": 35
+    },
+    "Soul Spear": {
+      "id": "1001188",
+      "atk": 40
+    },
+    "Southern Wandering Troll's Crossbow": {
+      "id": "320002",
+      "atk": 10
+    },
+    "Spada Sword": {
+      "id": "200917",
+      "atk": 30
+    },
+    "Spear of Righteousness": {
+      "id": "310024",
+      "atk": 35
+    },
+    "Spear of the Fleeting": {
+      "id": "15704",
+      "atk": 35
+    },
+    "Specter Sword": {
+      "id": "1000260",
+      "atk": 16
+    },
+    "Spencer Pistol": {
+      "id": "1001747",
+      "atk": 33
+    },
+    "Spine of the Earth": {
+      "id": "1000050",
+      "atk": 33
+    },
+    "Split Tooth": {
+      "id": "1001669",
+      "atk": 43
+    },
+    "Staff of the Fleeting": {
+      "id": "310039",
+      "atk": 35
+    },
+    "Staglord's Shield": {
+      "id": "290026",
+      "def": 13
+    },
+    "Steel Blaster": {
+      "id": "1675016613",
+      "atk": 30
+    },
+    "Sturdy Bamboo Stalk": {
+      "id": "1004108",
+      "atk": 3
+    },
+    "Sturdy Tree Branch": {
+      "id": "1003850",
+      "atk": 3
+    },
+    "Survivor's Solitude": {
+      "id": "200922",
+      "atk": 34
+    },
+    "Sword of Greed": {
+      "id": "1001210",
+      "atk": 30
+    },
+    "Sword of Starlight": {
+      "id": "1003776",
+      "atk": 27
+    },
+    "Sword of Wayward Woods": {
+      "id": "1002261",
+      "atk": 22
+    },
+    "Sword of the Fleeting": {
+      "id": "13812",
+      "atk": 30
+    },
+    "Sword of the Lord": {
+      "id": "200914",
+      "atk": 30
+    },
+    "Sword of the Wolf": {
+      "id": "1163042",
+      "atk": 34
+    },
+    "Sydmon Bow": {
+      "id": "300014",
+      "atk": 33
+    },
+    "Sydmon Dagger": {
+      "id": "230905",
+      "atk": 34
+    },
+    "Sydmon Hammer": {
+      "id": "1000490",
+      "atk": 33
+    },
+    "Sydmon Kite Shield": {
+      "id": "290058",
+      "def": 15
+    },
+    "Sydmon Longsword": {
+      "id": "240034",
+      "atk": 43
+    },
+    "Sydmon Round Shield": {
+      "id": "290017",
+      "def": 15
+    },
+    "Sydmon Spear": {
+      "id": "310008",
+      "atk": 38
+    },
+    "Sydmon Sword": {
+      "id": "200024",
+      "atk": 30
+    },
+    "Tardik Axe": {
+      "id": "210045",
+      "atk": 34
+    },
+    "Tardik Bow": {
+      "id": "300012",
+      "atk": 30
+    },
+    "Tardik Greataxe": {
+      "id": "250015",
+      "atk": 40
+    },
+    "Tardik Longsword": {
+      "id": "240001",
+      "atk": 39
+    },
+    "Tardik Shield": {
+      "id": "290090",
+      "def": 15
+    },
+    "Tardik Warhammer": {
+      "id": "260026",
+      "atk": 41
+    },
+    "Tauria Curved Sword": {
+      "id": "1000738",
+      "atk": 34
+    },
+    "Thalwynd Hammer": {
+      "id": "1000511",
+      "atk": 33
+    },
+    "Thalwynd Longsword": {
+      "id": "240020",
+      "atk": 39
+    },
+    "Thalwynd Warhammer": {
+      "id": "260014",
+      "atk": 45
+    },
+    "The Grove's Thorn": {
+      "id": "1001148",
+      "atk": 33
+    },
+    "The Laughing Marionette Shield": {
+      "id": "290516",
+      "def": 31
+    },
+    "Thorn of Dark Pursuit": {
+      "id": "310028",
+      "atk": 38
+    },
+    "Timberham Axe": {
+      "id": "210071",
+      "atk": 30
+    },
+    "Tiny Greymane Banner Pike": {
+      "id": "1001834",
+      "atk": 19
+    },
+    "Tommaso Guard's Dagger-Tipped Spear": {
+      "id": "1000328",
+      "atk": 35
+    },
+    "Tommasoan Bow": {
+      "id": "300018",
+      "atk": 30
+    },
+    "Tommasoan Contribution Banner Pike": {
+      "id": "1001804",
+      "atk": 35
+    },
+    "Tormented Soul Bow": {
+      "id": "300023",
+      "atk": 30
+    },
+    "Traitor's Spear": {
+      "id": "310035",
+      "atk": 35
+    },
+    "Tree Branch": {
+      "id": "1003849",
+      "atk": 3
+    },
+    "Troll Hook Greataxe": {
+      "id": "250019",
+      "atk": 39
+    },
+    "Trumpet Shotgun": {
+      "id": "1002293",
+      "atk": 41
+    },
+    "Twilight Messengers' Bow": {
+      "id": "300004",
+      "atk": 30
+    },
+    "Twisted Thorns Shield": {
+      "id": "1001073",
+      "def": 14
+    },
+    "Twisted Verdict": {
+      "id": "15903",
+      "atk": 40
+    },
+    "Valgash's Incomplete Work": {
+      "id": "310025",
+      "atk": 35
+    },
+    "Varnian Contribution Banner Pike": {
+      "id": "1001772",
+      "atk": 38
+    },
+    "Varnian Dagger": {
+      "id": "230003",
+      "atk": 30
+    },
+    "Varnian Sword": {
+      "id": "200051",
+      "atk": 30
+    },
+    "Verak Greatsword Giant": {
+      "id": "1002106",
+      "atk": 41
+    },
+    "Vessel of Dark Pursuit": {
+      "id": "240029",
+      "atk": 43
+    },
+    "Vilancia Pistol": {
+      "id": "270004",
+      "atk": 33
+    },
+    "Volcanic Blaster": {
+      "id": "410002",
+      "atk": 34
+    },
+    "Volono Rapier": {
+      "id": "201008",
+      "atk": 31
+    },
+    "Volono Sword": {
+      "id": "200077",
+      "atk": 30
+    },
+    "Vow of the Dead King": {
+      "id": "1000379",
+      "atk": 35
+    },
+    "Warspike Bow": {
+      "id": "300019",
+      "atk": 30
+    },
+    "Warspike Spear": {
+      "id": "310018",
+      "atk": 38
+    },
+    "Wells Mace": {
+      "id": "220018",
+      "atk": 37
+    },
+    "Wells Musket": {
+      "id": "280004",
+      "atk": 35
+    },
+    "Wells Sword": {
+      "id": "200035",
+      "atk": 30
+    },
+    "Wheel of the Last Toll": {
+      "id": "14706",
+      "atk": 43
+    },
+    "White Wind Rapier": {
+      "id": "200901",
+      "atk": 27
+    },
+    "White Wood Bow": {
+      "id": "300050",
+      "atk": 30
+    },
+    "Wolf's Fang": {
+      "id": "1001295",
+      "atk": 34
+    },
+    "Wyvern Blaster": {
+      "id": "9508",
+      "atk": 30
+    },
+    "Zargan Warhammer": {
+      "id": "260020",
+      "atk": 41
+    }
+  }
+}

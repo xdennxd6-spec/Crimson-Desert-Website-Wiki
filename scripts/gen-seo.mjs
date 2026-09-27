@@ -892,24 +892,30 @@ ${sections}`;
 
 // ── Seite 3: True Ending ──────────────────────────────────────────────────────
 function buildTrueEnding() {
-  const order = ["Companions", "Sanctums", "Hexen", "Greymane", "Story", "Misc"];
+  const order = ["Story", "Abyss", "Companions", "Sanctums", "Hexen", "Greymane", "Misc"];
   const label = {
+    Story: "Hauptstory und Epilog", Abyss: "40 Abyss-Challenges",
     Companions: "Begleiter (Companions)", Sanctums: "Sanctums",
-    Hexen: "Hexen-Tokens", Greymane: "Greymane-Commissions",
-    Story: "Story & Epilog", Misc: "Sonstiges",
+    Hexen: "Hexen-Tokens", Greymane: "Greymane-Commissions", Misc: "Sonstiges",
   };
   const cats = [...new Set(TRUE_ENDING.map((t) => t.cat))]
     .sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99));
   const sections = cats.map((cat) => {
     const items = TRUE_ENDING.filter((t) => t.cat === cat);
     const lis = items.map((t) => `<li>${esc(t.task)}</li>`).join("\n");
-    return `<h2>${esc(label[cat] || cat)} (${items.length})</h2>
+    return `<h2>${esc(label[cat] || cat)} (${items.length}; ${items[0]?.required ? "Pflicht" : "empfohlen"})</h2>
 <div class="te-cat"><ul class="te">${lis}</ul></div>`;
   }).join("\n");
+  const faq = [
+    { frage: "Was ist für das versteckte Ende Pflicht?", antwort: "Prolog, alle zwölf Hauptstory-Kapitel und den Epilog abschließen sowie alle 40 Abyss-Challenges einschließlich Dimensional Bonds erledigen." },
+    { frage: "Sind Sanctums, Hexen und Greymane-Commissions Pflicht?", antwort: "Nein. Diese Aufgaben sind zusätzliche Empfehlungen und zählen nicht zu den belegten Freischaltbedingungen für das versteckte Ende." },
+    { frage: "Zählen die vier Eternal-Corridor-Rätsel zu den 40?", antwort: "Nein. Sie gehören zu einer optionalen Questreihe und sind für das versteckte Ende nicht erforderlich." },
+  ];
   const body = `
-<a class="cta" href="/#sec-checklists">Interaktive Checkliste mit Fortschritt öffnen &rarr;</a>
-<p class="note">In der App hakst du jede Aufgabe ab und siehst deinen Fortschritt in Prozent; der Stand wird lokal gespeichert.</p>
-${sections}`;
+<a class="cta" href="/#sec=quests">Interaktive Checkliste mit Fortschritt öffnen &rarr;</a>
+<p class="note">Pflicht: Hauptstory samt Epilog und alle 40 Abyss-Challenges. Die weiteren Listen sind Empfehlungen. Den offiziellen Spielstand der Challenges findest du im Journal unter Challenges &rarr; Exploration &rarr; The Abyss. Quelle: <a href="https://vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert/">VULKK, Hidden Ending Guide</a> und <a href="https://vulkk.com/2026/06/14/abyss-challenges-list-in-crimson-desert-conqueror-of-the-abyss-achievement/">Liste der 40 Challenges</a> (geprüft 28.09.2026).</p>
+${sections}
+${faqSektion(faq)}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
@@ -921,14 +927,15 @@ ${sections}`;
         author: { "@type": "Person", name: "Christian Stein" },
         about: { "@type": "VideoGame", name: "Crimson Desert" },
       },
+      faqPageLd(faq),
     ],
   };
   return pageShell({
     slugName: "true-ending",
     title: `Crimson Desert True Ending: komplette Checkliste (Deutsch)`,
-    desc: `Alle ${TRUE_ENDING.length} Pflichtaufgaben für das True Ending von Crimson Desert: Begleiter-Arcs, Sanctums, Hexen-Tokens und Abyss-Aufgaben als abhakbare Checkliste.`,
+    desc: `Crimson Desert: Hauptstory und 40 Abyss-Challenges als Pflicht für das versteckte Ende. Checkliste mit ${TRUE_ENDING.length} Pflicht- und Zusatzaufgaben.`,
     h1: "Crimson Desert True Ending: komplette Checkliste",
-    lead: `Das <strong>True Ending</strong> (das „wahre Ende") von Crimson Desert schaltest du nur frei, wenn du vor dem Abschluss der Hauptstory bestimmte optionale Aufgaben erfüllst. Diese Checkliste fasst alle <strong>${TRUE_ENDING.length} Pflichtaufgaben</strong> zusammen, sortiert nach Bereich.`,
+    lead: `Für das <strong>versteckte Ende</strong> von Crimson Desert musst du die Hauptstory samt Epilog und alle <strong>40 Abyss-Challenges</strong> abschließen. Sanctums, Hexen und Greymane-Commissions sind zusätzliche Empfehlungen. Die Checkliste trennt beides nach Bereich.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "True Ending",
     bodyHtml: body,

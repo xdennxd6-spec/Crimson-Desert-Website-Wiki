@@ -844,6 +844,10 @@ tbody tr:hover td{background:var(--overprint)}
 .te-catbar .pgw{flex:1;height:6px}
 .te-catbar-c{font-variant-numeric:tabular-nums;min-width:40px;text-align:right}
 .te-catbar.full .te-catbar-c{color:var(--survey-red)}
+.te-intro{margin:0 0 16px;padding:12px 14px;background:var(--vellum-hi);border:1px solid var(--line);border-left:3px solid var(--survey-red);color:var(--iron-soft);font-size:var(--fs-11-5);line-height:1.65}
+.te-intro a{color:var(--survey-red)}
+.te-grp.te-abyss{max-height:540px;overflow:auto}
+.te-grp.te-abyss .te-gh{position:sticky;top:0;z-index:1}
 
 /* Hauptquest-Kapitel: Region-Akzent, Nummern-Badge, Boss-Pille */
 .chap[data-reg]{border-top:2px solid var(--reg)}
@@ -3598,6 +3602,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <button type="button" class="tab" id="qt-sq" onclick="qTab('sq')">Side-Quests</button>
     </div>
     <div class="pane active" id="qp-te">
+      <p class="te-intro">Pflicht für das versteckte Ende: Hauptstory samt Epilog und alle 40 Abyss-Challenges einschließlich Dimensional Bonds. Die übrigen Aufgaben sind zusätzliche Empfehlungen. Prüfe deinen Abyss-Stand im Spiel unter Journal → Challenges → Exploration → The Abyss. Die vier Eternal-Corridor-Rätsel zählen nicht zu den 40. <a href="https://vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert/" target="_blank" rel="noopener noreferrer">Quelle</a></p>
       <div class="te-catbars" id="te-catbars"></div>
       <div id="te-list"></div>
     </div>
@@ -3964,7 +3969,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <span style="font-size:12px;color:var(--dim)" id="gm-cl-count"></span>
         <button class="cl-reset" onclick="if(confirm('Alle Commissions zurücksetzen?')){saveGM([]);renderGreymane();updateStats();}">Zurücksetzen</button>
       </div>
-      <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:14px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr)">Jede Commission gibt <span style="color:var(--gold);font-weight:600">+3 Inventarslots</span>. Alle 27 = <span style="color:var(--gold);font-weight:600">+81 Slots</span>. Pflicht für das True Ending.</div>
+      <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:14px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr)">Jede Commission gibt <span style="color:var(--gold);font-weight:600">+3 Inventarslots</span>. Alle 27 = <span style="color:var(--gold);font-weight:600">+81 Slots</span>. Für das versteckte Ende nicht erforderlich.</div>
       <div id="gm-list"></div>
     </div>
 
@@ -4262,7 +4267,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 <li><b>Neue Gegner zu Land und zu Wasser.</b> <span style="color:var(--gdim)">Namen nennt die offizielle Seite keine. Der Reveal-Trailer zeigt laut Fachpresse einen großen Roboter-Gegner mit rotem Laser sowie eine Fortbewegung, bei der sich Kliff unter Wasser an einem Hai festhält.</span></li>
 <li><b>Vier parallele Erzählstränge</b> um Kliff, Oongka und Damiane: eine unheilvolle Präsenz in der Wüste, ein gefährlicher politischer Konflikt, eine Reise jenseits der Zeit und ein altes Geheimnis unter den Wellen.</li>
 <li><b>Vorbestellerbonus:</b> das „Tauchanzug-Set des Entdeckers“ für Kliff und Oongka sowie das „Leichte Tauchanzug-Set des Entdeckers“ für Damiane.</li>
-<li><b>Plattformen:</b> PS5, Xbox Series X|S, Steam, Epic Games Store und GeForce Now. <b>Zum Verkaufsstart nicht im Mac App Store</b> — Pearl Abyss kündigt dazu eine separate Meldung an, falls es später nachgereicht wird.</li>
+<li><b>Plattformen:</b> PS5, Xbox Series X|S, Steam, Epic Games Store und GeForce Now. <b>Zum Verkaufsstart nicht im Mac App Store</b>; inzwischen auch dort erhältlich. Cross-Save für Mac kam mit Patch 2.02.00 (11.09.2026).</li>
 </ul>
 <div style="font-size:var(--fs-10-5);color:var(--gdim);line-height:1.6">Was noch offen ist: Pearl Abyss nennt auf der eigenen Seite <b>keinen Preis</b> (kursierende Beträge stammen aus Store-Listings und werden hier deshalb nicht geführt), <b>keine Bossnamen</b>, keine neuen Waffen oder Rüstungen jenseits der Feature-Überschriften und <b>keine Angabe, ob ein bestimmter Story-Fortschritt Voraussetzung ist</b>. Quellen: <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=129" target="_blank" rel="noopener noreferrer">offizielle Ankündigung mit Startzeiten</a> und <a href="https://crimsondesert.pearlabyss.com/en-US/Game/DLC/charting-the-unknown" target="_blank" rel="noopener noreferrer">DLC-Seite</a>, geprüft am 07.09.2026.</div>
 </div>
@@ -4273,7 +4278,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <li><b>Story-Kohärenz:</b> Schlüsselszenen in Kliffs Handlung werden überarbeitet, um den Erzählfluss runder und nachvollziehbarer zu machen. <span style="color:var(--gold)">✓ ausgeliefert in Patch 2.00.00 (25.08.2026): Hauptgeschichte und Hauptquests überarbeitet, zusätzliche Zwischensequenzen und Story-Momente, dazu Wissen, Gegenstände, Erinnerungsfragmente und Dialoge zur Vertiefung der Boss-Geschichten.</span> <span style="color:var(--gdim)">Welche Bosse und welche Fragmente konkret betroffen sind, nennen die Patch-Notes nicht, und bislang hat das auch niemand aufgelistet.</span></li>
         <li><b>Re-Blockade-Überarbeitung:</b> neue Verteidigungsphasen bei Festungs-Belagerungen + höhere Beute- und Liberation-Belohnungen. <span style="color:var(--gold)">✓ ausgeliefert in Patch 1.10.00 (Phasen 'Battle' &amp; 'Reconstruct', neue Festungs-Befreiungs-Belohnungen).</span></li>
         <li><b>Neuer Kampf-Content:</b> eigene kampffokussierte Aktivität — „beweise deine wahre Stärke als Greymane".</li>
-        <li><b>Cross-Save:</b> Account-Verknüpfung erlaubt das Teilen von Speicherständen über PC, PlayStation und Xbox. <span style="color:var(--gold)">✓ ausgeliefert in Patch 1.14.00 (16.07.2026): Verknüpfung über die Pearl-Abyss-ID, ein gemeinsamer Cross-Save-Slot für PS5, Xbox Series X|S, Steam und Epic Games Store. Mac App Store folgt später.</span></li>
+        <li><b>Cross-Save:</b> Account-Verknüpfung erlaubt das Teilen von Speicherständen zwischen PS5, Xbox Series X|S, Steam, Epic Games Store und Mac App Store. <span style="color:var(--gold)">✓ ausgeliefert in Patch 1.14.00 (16.07.2026) für Konsole, Steam und Epic; Mac App Store seit Patch 2.02.00 (11.09.2026). Ein gemeinsamer Cross-Save-Slot pro Pearl-Abyss-ID.</span></li>
         <li><b>Damiane &amp; Oongka:</b> Gameplay-Verbesserungen, damit alle drei spielbaren Charaktere gleichwertig im Rampenlicht stehen. <span style="color:var(--gold)">✓ Patch 1.12.00 baut das aus: Damiane &amp; Oongka können jetzt Blackstar reiten, Visiones nutzen und Erinnerungen lesen; eigene Sit-Animation für Damiane. Patch 1.13.00 öffnet zusätzlich das Abyss-Endgame für Oongka &amp; Damiane (inkl. Rätsel), Oongka kann die meisten Kliff-Outfits tragen, dazu zahlreiche Skill-Verbesserungen.</span></li>
         <li><b>Non-Combat QoL:</b> Handel und Landwirtschaft werden komfortabler (träge Abläufe werden entschärft).</li>
         <li><b>DLC bestätigt:</b> „bedeutsame Ergänzung deiner Reise" in Entwicklung — Details folgen später. Erstmals erwähnt am 12.05.2026 (Q1-Earnings, als Prüfung verschiedener Optionen inkl. DLC), offiziell bestätigt im Dev-Update vom 02.06.2026. <span style="color:var(--gold)">✓ aufgelöst am 03.09.2026: Der DLC heißt <b>Charting the Unknown</b> und erscheint am 16.10.2026 — Einzelheiten im roten Kasten oben.</span></li>
@@ -4295,7 +4300,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="rm-task-list" id="rm-list"></div>
     <div class="rm-faq" style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px">
       <h3 class="sub-t" style="margin:0 0 4px">❓ Häufige Fragen — Endgame, NG+, Koop &amp; Cross-Save</h3>
-      <p style="font-size:var(--fs-11);color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Patchnotes + game8/PowerPyx/Fextralife (Stand Patch 2.01.00, 04.09.2026).</p>
+      <p style="font-size:var(--fs-11);color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Patchnotes + game8/PowerPyx/Fextralife (Cross-Save-Stand: Patch 2.02.00, 11.09.2026; übrige FAQ-Angaben zuletzt 04.09.2026 geprüft).</p>
       <div style="display:grid;gap:12px">
         <div style="background:linear-gradient(135deg,#15110d,#0c0c0c);border:1px solid rgba(201,162,39,.25);border-radius:10px;padding:12px 14px">
           <div style="color:var(--gold);font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es ein New Game Plus?</div>
@@ -4311,7 +4316,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         </div>
         <div style="background:linear-gradient(135deg,#0a141c,#0c0c0c);border:1px solid rgba(90,165,215,.3);border-radius:10px;padding:12px 14px">
           <div style="color:#5fb3e0;font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es Cross-Save / Cross-Progression?</div>
-          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Ja — seit Patch 1.14.00 (16.07.2026).</strong> Speicherstände lassen sich über die Pearl-Abyss-ID plattformübergreifend verknüpfen (Save-Game-Menü → „Cross-Save Settings"), unterstützt werden <strong>PS5, Xbox Series X|S, Steam und Epic Games Store</strong> mit einem gemeinsamen Cross-Save-Slot pro ID. Der Upload in den Slot erfolgt manuell vor jedem Plattformwechsel (kein Auto-Sync, es gilt der zuletzt hochgeladene Stand); Cross-Buy gibt es nicht, und bezahlte Deluxe-/Vorbesteller-Kosmetik bleibt plattformgebunden. Der <strong>Mac App Store</strong> folgt zu einem späteren Zeitpunkt.</div>
+          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Ja — seit Patch 1.14.00 (16.07.2026), auf Mac App Store seit Patch 2.02.00 (11.09.2026).</strong> Speicherstände lassen sich über die Pearl-Abyss-ID plattformübergreifend verknüpfen (Save-Game-Menü → „Cross-Save Settings"). Unterstützt werden <strong>PS5, Xbox Series X|S, Steam, Epic Games Store und Mac App Store</strong> mit einem gemeinsamen Cross-Save-Slot pro ID. Der Upload in den Slot erfolgt manuell vor jedem Plattformwechsel (kein Auto-Sync, es gilt der zuletzt hochgeladene Stand); Cross-Buy gibt es nicht, und bezahlte Deluxe-/Vorbesteller-Kosmetik bleibt plattformgebunden.</div>
         </div>
         <div style="background:linear-gradient(135deg,#0a141c,#0c0c0c);border:1px solid rgba(90,165,215,.35);border-radius:10px;padding:14px 16px">
           <div style="color:#5fb3e0;font-weight:600;font-size:12.5px;margin-bottom:8px">Cross-Save Schritt für Schritt: von Plattform A auf Plattform B</div>
@@ -4320,7 +4325,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
             <ul style="margin:0 0 10px;padding-left:18px">
               <li>Das Spiel auf <strong>beiden</strong> Plattformen separat besitzen (kein Cross-Buy).</li>
               <li>Eine <strong>Pearl-Abyss-ID</strong>, die du auf allen Plattformen verwendest.</li>
-              <li>Unterstützt: <strong>PS5, Xbox Series X|S, Steam (PC/Mac), Epic Games Store</strong>. Mac App Store folgt später.</li>
+              <li>Unterstützt: <strong>PS5, Xbox Series X|S, Steam (PC/Mac), Epic Games Store und Mac App Store</strong> (Mac App Store seit Patch 2.02.00).</li>
             </ul>
             <div style="color:#9fd0ec;font-weight:600;margin:2px 0 3px">A) Einmalige Einrichtung (auf jeder Plattform, die du verknüpfen willst)</div>
             <ol style="margin:0 0 10px;padding-left:18px">
@@ -5022,7 +5027,7 @@ function renderRoadmap(){
     tasks.push({
       prio:'md',
       title:`Greymane Commission ${gmDone.length+1}/27`,
-      desc:`Jede Commission gibt +3 Inventarslots. Alle 27 = Pflicht für True Ending.`,
+      desc:`Jede Commission gibt +3 Inventarslots. Alle 27 = +81 Slots; für das versteckte Ende nicht erforderlich.`,
       meta:['Side-Content',`+${(27-gmDone.length)*3} Inv-Slots offen`],
       action:"showSec('checklists');clTab('greymane')"
     });
@@ -7743,22 +7748,22 @@ function saveTE(a){
 function renderTE(){
   const list=document.getElementById('te-list');if(!list)return;
   const done=loadTE();
-  const ICON={Companions:'👥',Greymane:'🛡️',Sanctums:'🏛️',Hexen:'🌙',Story:'📖',Misc:'✦'};
-  const cats=[...new Set(TRUE_ENDING.map(t=>t.cat))];
+  const ICON={Story:'📖',Abyss:'✦',Companions:'👥',Greymane:'🛡️',Sanctums:'🏛️',Hexen:'🌙',Misc:'✦'};
+  const cats=[...new Set(TRUE_ENDING.map(t=>t.cat))].sort((a,b)=>['Story','Abyss','Companions','Sanctums','Hexen','Greymane','Misc'].indexOf(a)-['Story','Abyss','Companions','Sanctums','Hexen','Greymane','Misc'].indexOf(b));
   const bars=document.getElementById('te-catbars');
   if(bars){
     bars.innerHTML=cats.map(cat=>{
       const items=TRUE_ENDING.filter(t=>t.cat===cat);
       const dc=items.filter(t=>done.includes(t.id)).length;
       const p=items.length?Math.round(dc/items.length*100):0;
-      return `<div class="te-catbar${dc===items.length?' full':''}"><span class="te-catbar-lbl">${ICON[cat]||'•'} ${escHtml(cat)}</span><div class="pgw"><div class="pgb" style="width:${p}%"></div></div><span class="te-catbar-c">${dc}/${items.length}</span></div>`;
+      return `<div class="te-catbar${dc===items.length?' full':''}"><span class="te-catbar-lbl">${ICON[cat]||'•'} ${escHtml(cat)}${items[0]?.required?' (Pflicht)':' (empfohlen)'}</span><div class="pgw"><div class="pgb" style="width:${p}%"></div></div><span class="te-catbar-c">${dc}/${items.length}</span></div>`;
     }).join('');
   }
   list.innerHTML=cats.map(cat=>{
     const items=TRUE_ENDING.filter(t=>t.cat===cat);
     const dc=items.filter(t=>done.includes(t.id)).length;
-    return `<div class="te-grp">
-      <div class="te-gh"><span class="te-gt">${ICON[cat]||'•'} ${escHtml(cat)}</span><span class="te-gc">${dc}/${items.length}</span></div>
+    return `<div class="te-grp${cat==='Abyss'?' te-abyss':''}">
+      <div class="te-gh"><span class="te-gt">${ICON[cat]||'•'} ${escHtml(cat)}${items[0]?.required?' (Pflicht)':' (empfohlen)'}</span><span class="te-gc">${dc}/${items.length}</span></div>
       ${items.map(t=>`<div class="te-it${done.includes(t.id)?' done':''}" onclick="toggleTE('${t.id}')">
         <div class="chk${done.includes(t.id)?' on':''}" role="checkbox" aria-checked="${done.includes(t.id)?'true':'false'}" aria-label="${escHtml(t.task)}" tabindex="0"></div>
         <span class="te-tx">${escHtml(t.task)}</span>
@@ -7924,7 +7929,7 @@ function renderSideQuests(){
 function renderQuestHero(){
   const el=document.getElementById('quest-hero');if(!el)return;
   const doneTE=(typeof loadTE==='function')?loadTE():[];
-  const teTotal=TRUE_ENDING.length, teDone=doneTE.length;
+  const teTotal=TE_REQUIRED_IDS.size, teDone=doneTE.filter(id=>TE_REQUIRED_IDS.has(id)).length;
   const tePct=teTotal?Math.round(teDone/teTotal*100):0;
   const chDone=(typeof lsJson==='function')?lsJson('cd_ch_done',[]):[];
   const numCh=MAIN_QUESTS.filter(c=>/^\d+$/.test(c.ch));
@@ -7943,7 +7948,7 @@ function renderQuestHero(){
   const maxReg=Math.max(1,...regRows.map(x=>x.n));
   const heat=regRows.map(x=>`<div class="qhero-heat-row"><span>${escHtml(x.r)}</span><div class="qhero-heat-bar"><div class="qhero-heat-fill" style="width:${Math.round(x.n/maxReg*100)}%;background:${REGION_COLORS[x.r]||'var(--gold)'}"></div></div><span class="qhero-heat-c">${x.n}</span></div>`).join('');
   const nextCh=numCh.find(c=>!chDone.includes(parseInt(c.ch,10)));
-  const nextTE=TRUE_ENDING.find(t=>!doneTE.includes(t.id));
+  const nextTE=TRUE_ENDING.find(t=>t.required&&!doneTE.includes(t.id));
   let chips='';
   chips+=nextCh?`<span class="qhero-next-chip" onclick="showSec('chapters')">Weiter: Kap. ${escHtml(nextCh.ch)} — ${escHtml(nextCh.name)}</span>`:'<span style="color:var(--glo)">Alle Kapitel erledigt</span>';
   chips+=nextTE?`<span class="qhero-next-chip te" onclick="qTab('te')" title="${escHtml(nextTE.task)}">True Ending: ${escHtml(nextTE.task.length>44?nextTE.task.slice(0,44)+'…':nextTE.task)}</span>`:'<span style="color:var(--glo)">True Ending komplett</span>';
@@ -8440,8 +8445,8 @@ function renderSkills(){
 function updateStats(){
   const bossDone=loadBossDone().length;
   const bossTotal=BOSSES.length;
-  const teDone=loadTE().length;
-  const teTotal=TRUE_ENDING.length;
+  const teDone=loadTE().filter(id=>TE_REQUIRED_IDS.has(id)).length;
+  const teTotal=TE_REQUIRED_IDS.size;
   const gmDone=loadGM().length;
   const gmTotal=GREYMANE_COMMISSIONS.length;
   const sancDone=loadTE().filter(id=>SANCTUM_IDS.includes(id)).length;
@@ -8667,7 +8672,7 @@ function renderOverview(){
   const sancDone=loadTE().filter(id=>SANCTUM_IDS.includes(id)).length, sancTotal=SANCTUM_IDS.length;
   const wepDone=loadWepDone().length, wepTotal=WEAPONS.length;
   const msDone=loadMissDone().length, msTotal=MISSABLE_ITEMS.length;
-  const teDone=loadTE().length, teTotal=TRUE_ENDING.length;
+  const teDone=loadTE().filter(id=>TE_REQUIRED_IDS.has(id)).length, teTotal=TE_REQUIRED_IDS.size;
   const sqTotal=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
   const sqDone=(typeof loadSQ==='function'&&typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.filter(q=>loadSQ().includes(q.q)).length:0;
   const cards=[

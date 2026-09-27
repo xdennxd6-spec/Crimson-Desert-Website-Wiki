@@ -149,6 +149,29 @@ const namen = WEAPONS.map((w) => w.name);
 const doppelt = [...new Set(namen.filter((n, i) => namen.indexOf(n) !== i))];
 ok(doppelt.length === 0, `keine doppelten Waffennamen (gefunden: ${doppelt.length}${doppelt.length ? " -> " + doppelt.slice(0, 3).join(", ") : ""})`);
 
+// Unabhaengiger questlog-Abzug vom 09.09.2026. Der alte Typ-/Bereichscheck
+// fand 33 falsche ATK-Werte und 2 falsche DEF-Werte nicht, weil sie plausibel
+// aussahen. Diese Referenz prueft die tatsaechliche Endstufe pro Item-ID.
+// Nicht eindeutig zugeordnete Items bleiben ausserhalb dieses Gates.
+const statReference = JSON.parse(fs.readFileSync(path.join(__dirname, "weapon-stats-reference.json"), "utf8"));
+const weaponByName = new Map(WEAPONS.map(w => [w.name, w]));
+const statErrors = [];
+let atkChecked = 0, defChecked = 0;
+for (const [name, expected] of Object.entries(statReference.items)) {
+  const weapon = weaponByName.get(name);
+  if (!weapon) { statErrors.push(`${name} (questlog ${expected.id}): Eintrag fehlt`); continue; }
+  for (const field of ["atk", "def"]) {
+    if (!(field in expected)) continue;
+    if (field === "atk") atkChecked++; else defChecked++;
+    const allowed = field === "atk" && expected.atkAlternatives ? expected.atkAlternatives : [expected[field]];
+    if (!allowed.includes(weapon[field])) {
+      statErrors.push(`${name} (questlog ${expected.id}): ${field}=${weapon[field] ?? "nicht erfasst"}, belegte Endstufe=${allowed.join("/")}`);
+    }
+  }
+}
+ok(statErrors.length === 0,
+  `questlog-Endstufen: ${atkChecked} ATK und ${defChecked} DEF geprueft (Rhinard Cannon 31/39 quellenstrittig); ${statErrors.length} Abweichungen${statErrors.length ? " -> " + statErrors.slice(0, 8).join("; ") : ""}`);
+
 // Abschliessende Lagemeldung zur Datenvollstaendigkeit (kein Fehler, nur Info)
 // crit_none:true markiert Waffen, bei denen questlog.gg (tRPC database.getItem, levels[0].stats)
 // und gaming.tools KEIN Critical-Rate-Feld fuehren (Ernte 07.09.2026). Das ist kein

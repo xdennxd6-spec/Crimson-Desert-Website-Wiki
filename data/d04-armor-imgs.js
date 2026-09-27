@@ -873,7 +873,7 @@ const BUILDS=[
   },
   {
     name:"Elementalist",
-    desc:"Wechselt Elemente je nach Boss-Schwäche. Lightning Surge = 3× Schaden vs. Golden Star P2. Volcanic Eruption nach Turning Slash für kostenlosen AoE.",
+    desc:"Wechselt Elemente je nach Boss-Schwäche. Lightning Surge nutzt Golden Stars Blitzschwäche; ein 3×-Bonus ist nicht belegt. Volcanic Eruption nach Turning Slash für kostenlosen AoE.",
     tags:["Utility","Elemente","Kap. 9+"],
     slots:[
       {label:"Waffe",val:"Vow of the Dead King (Halberd)"},
@@ -883,7 +883,7 @@ const BUILDS=[
       {label:"Stat-Prio",val:"HP → Spirit → Stamina"},
       {label:"Verfügbar ab",val:"Kapitel 9+ (alle Elemente verfügbar)"}
     ],
-    tip:"Frost Mantle öffnet 2–3s Fenster gegen Ice-Bosse. Imbue Element Lv4 bufft alle Skills elementar. Gegen Golden Star P2: immer Lightning Surge — 3× Damage."
+    tip:"Frost Mantle öffnet 2–3s Fenster gegen Ice-Bosse. Imbue Element Lv4 bufft alle Skills elementar. Gegen Golden Star kann Lightning Surge wegen der Blitzschwäche sinnvoll sein; ein 3×-Bonus ist nicht belegt."
   },
   {
     name:"Greatsword Colossus",

@@ -82,7 +82,7 @@ missingLocal.slice(0, 8).forEach((v) => console.log("       FEHLT:", v));
 const pages = {
   "bosse.html": { expectArticles: N_BOSSES, sec: "/#sec-bosses" },
   "waffen.html": { expectRows: N_WEAPONS, sec: "/#sec-weapons" },
-  "true-ending.html": { expectTe: N_TE, sec: "/#sec-checklists" },
+  "true-ending.html": { expectTe: N_TE, sec: "/#sec=quests" },
   // NEU (8-Seiten-Erweiterung): die 5 zusaetzlichen SEO-Seiten. Jede bekommt
   // statt eines eigenen expectXxx-Felds ein generisches "count"-Feld
   // { regex, expected, label } — das ist der 1:1-Nachbau des COUNT_CHECK(ctx)-
