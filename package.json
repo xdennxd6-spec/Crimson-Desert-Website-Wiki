@@ -2,19 +2,5 @@
   "name": "crimson-desert-guide",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
-  "scripts": {
-    "db:generate": "drizzle-kit generate"
-  },
-  "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
-    "@netlify/functions": "^2.0.0",
-    "@netlify/identity": "^1.0.0",
-    "drizzle-orm": "beta",
-    "pg": "^8.13.0",
-    "ws": "^8.18.0"
-  },
-  "devDependencies": {
-    "drizzle-kit": "beta"
-  }
+  "type": "module"
 }

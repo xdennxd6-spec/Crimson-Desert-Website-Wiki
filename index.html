@@ -497,35 +497,45 @@ body::before{
 .ee-cta{display:block;margin:18px auto 0;padding:9px 22px;background:var(--survey-red);border:1.5px solid var(--survey-red);color:var(--vellum);font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;transition:background .15s;border-radius:12px}
 .ee-cta:hover{background:var(--survey-red-hi);border-color:var(--survey-red-hi)}
 
-/* ── Auth / Login ── */
+/* ── Sync-Code (Sidebar-Bereich; ersetzt seit 09/2026 den Netlify-Login) ── */
 #auth-area{padding:10px 14px;border-top:1px solid var(--iron-gall)}
 #auth-btn{width:100%;padding:8px 10px;border:1.5px solid var(--iron-gall);background:var(--vellum-hi);color:var(--iron-gall);font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:6px;border-radius:12px}
 #auth-btn:hover{background:var(--iron-gall);color:var(--vellum)}
-#auth-user{font-family:var(--f-mono);font-size:var(--fs-10);color:var(--iron-soft);text-align:center;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#auth-user{display:block;width:100%;background:none;border:0;padding:0;cursor:pointer;font-family:var(--f-mono);font-size:var(--fs-10);color:var(--iron-soft);text-align:center;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#auth-user:hover{color:var(--survey-red)}
 #auth-sync-status{font-family:var(--f-mono);font-size:var(--fs-9);color:var(--brass);text-align:center;margin-top:4px;min-height:12px}
 
-/* ── Login Modal (Platte) ── */
-#login-overlay{display:none;position:fixed;inset:0;background:rgba(20,16,12,.66);z-index:400;backdrop-filter:blur(3px);align-items:center;justify-content:center}
-#login-overlay.show{display:flex}
-#login-box{background:var(--vellum-hi);border:1.5px solid var(--iron-gall);box-shadow:6px 6px 0 var(--paper-shadow);padding:26px 24px;width:344px;max-width:calc(100vw - 32px);position:relative;border-radius:var(--radius)}
-#login-box h2{font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--iron-gall);margin-bottom:5px;letter-spacing:.01em}
-#login-box p{font-size:12px;color:var(--iron-soft);margin-bottom:20px}
+/* ── Sync-Modal (Platte) ── */
+#sync-overlay{display:none;position:fixed;inset:0;background:rgba(20,16,12,.66);z-index:400;backdrop-filter:blur(3px);align-items:center;justify-content:center}
+#sync-overlay.show{display:flex}
+#sync-box{background:var(--vellum-hi);border:1.5px solid var(--iron-gall);box-shadow:6px 6px 0 var(--paper-shadow);padding:26px 24px;width:400px;max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;position:relative;border-radius:var(--radius)}
+#sync-box [hidden]{display:none!important}
+#sync-box h2{font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--iron-gall);margin:0 28px 8px 0;letter-spacing:.01em}
+#sync-box p{font-size:12px;line-height:1.55;color:var(--iron-soft);margin:0 0 14px}
 .lf-row{margin-bottom:12px}
 .lf-row label{display:block;font-family:var(--f-mono);font-size:var(--fs-9);color:var(--iron-soft);margin-bottom:5px;letter-spacing:.14em;text-transform:uppercase}
 .lf-row input{width:100%;padding:9px 12px;background:var(--vellum);border:1px solid var(--iron-gall);color:var(--iron-gall);font-size:13px;font-family:var(--f-mono);outline:none;transition:border-color .2s;border-radius:10px}
 .lf-row input:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
-#login-err{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--survey-red);min-height:16px;margin-bottom:10px;display:none}
-#login-err.show{display:block}
-.lf-tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid var(--line)}
-.lf-tab{flex:1;padding:9px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:600;text-transform:uppercase;letter-spacing:.1em;border:none;background:none;color:var(--iron-soft);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
-.lf-tab.active{color:var(--survey-red);border-bottom-color:var(--survey-red)}
+#sync-err{font-family:var(--f-mono);font-size:var(--fs-11);line-height:1.5;color:var(--survey-red);margin-bottom:12px;display:none}
+#sync-err.show{display:block}
+.sy-sec{padding-top:14px;margin-top:2px;border-top:1px solid var(--line)}
 .lf-submit{width:100%;padding:10px;border:1.5px solid var(--survey-red);background:var(--survey-red);color:var(--vellum);font-family:var(--f-mono);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;transition:background .18s;margin-top:4px;border-radius:12px}
 .lf-submit:hover{background:var(--survey-red-hi);border-color:var(--survey-red-hi)}
 .lf-submit:disabled{opacity:.5;cursor:default}
 .lf-close{position:absolute;top:13px;right:15px;background:none;border:none;color:var(--iron-soft);font-size:18px;cursor:pointer;padding:4px;line-height:1}
 .lf-close:hover{color:var(--survey-red)}
-#login-confirm-msg{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--brass);text-align:center;padding:12px 0;display:none}
-#login-confirm-msg.show{display:block}
+.sy-btn{display:block;width:100%;padding:9px 14px;background:var(--vellum);border:1px solid var(--iron-gall);cursor:pointer;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--iron-gall);transition:all .15s;text-transform:uppercase;letter-spacing:.06em;border-radius:10px;margin-top:8px}
+.sy-btn:hover{background:var(--iron-gall);color:var(--vellum)}
+.sy-btn:disabled{opacity:.5;cursor:default}
+.sy-btn.pri{background:var(--vellum-hi);border-color:var(--survey-red);color:var(--survey-red)}
+.sy-btn.pri:hover{background:var(--survey-red);color:var(--vellum)}
+.sy-btn.danger{border-color:var(--survey-red);color:var(--survey-red)}
+.sy-btn.danger:hover{background:var(--survey-red);color:var(--vellum)}
+.sy-link{background:none;border:0;padding:4px 0;cursor:pointer;font-family:var(--f-mono);font-size:var(--fs-10);color:var(--iron-soft);text-decoration:underline;letter-spacing:.04em}
+.sy-link:hover{color:var(--survey-red)}
+.sy-code{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 8px;font-family:var(--f-mono);font-size:19px;font-weight:600;letter-spacing:.1em;color:var(--iron-gall);background:var(--vellum);border:1px dashed var(--brass);border-radius:10px;padding:12px 8px;text-align:center;user-select:all;margin-bottom:8px}
+.sy-msg{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--brass);min-height:16px;margin:6px 0 4px;text-align:center}
+.sy-warn{font-size:12px;line-height:1.55;color:var(--warn);border-left:3px solid var(--warn);padding:2px 0 2px 10px;margin:12px 0 14px}
 
 /* ============================================================
    INHALTSBLATT (bestehendes #main = das Vermessungsblatt)
@@ -1030,7 +1040,7 @@ tbody{contain:layout style}
 a:focus-visible,button:focus-visible,[tabindex]:focus-visible,
 select:focus-visible,summary:focus-visible,
 input:focus-visible,textarea:focus-visible,
-.tab:focus-visible,.lf-tab:focus-visible,
+.tab:focus-visible,
 .fav-btn:focus-visible,.pet-filter-btn:focus-visible,
 .defeat-btn:focus-visible,.bo-rec:focus-visible,
 .theme-btn:focus-visible,.ee-cta:focus-visible,
@@ -1600,7 +1610,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
   /* z-index:auto hebt den Stacking-Context von #app (Basis: position:relative;z-index:1) auf,
      damit das fixed Sheet(#sidebar z255)/Rail(z260) zur Wurzel escapen und ueber dem
      Scrim (#mob-overlay z250, Sibling von #app) liegen. Sonst verdeckt der Scrim das ganze
-     offene Sheet inkl. Anmelden-Button -> unklickbar (Finding #5, Kern-Ursache). */
+     offene Sheet inkl. Sync-Button -> unklickbar (Finding #5, Kern-Ursache). */
   #app{flex-direction:column;z-index:auto}
   /* Rail -> untere Leiste (Griffregister am Daumen) */
   #rail{
@@ -1621,7 +1631,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
     transform:translateY(105%);transition:transform .26s cubic-bezier(.3,0,.2,1);
     z-index:255;box-shadow:0 -8px 0 var(--paper-shadow);
     /* Bottom-Rail (z-index:260) sitzt ueber dem Sheet-Fuss: unteren Freiraum reservieren,
-       damit .sb-ft (Themes) + #auth-area (Anmelden) oberhalb der Rail-Kante klickbar bleiben.
+       damit .sb-ft (Themes) + #auth-area (Sync) oberhalb der Rail-Kante klickbar bleiben.
        box-sizing:border-box -> Freiraum liegt innerhalb max-height, .console-list (flex:1) gibt nach. */
     padding-bottom:64px;
   }
@@ -1653,7 +1663,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
   .bb-bearing{display:none}
   .grid{grid-template-columns:1fr}
   .sec{padding:18px 16px 32px}
-  #si,#login-box input,.rl-input,.bo-save-input,.rt-input{font-size:16px}
+  #si,#sync-box input,.rl-input,.bo-save-input,.rt-input{font-size:16px}
   .theme-btn{width:40px;height:40px;font-size:14px}
   .farm-tbl,.tools-table,.sim-cmp-tbl{display:block;overflow-x:auto}
   /* Back-to-Top/Toast auf Mobile ueber die fixe Bottom-Rail (~55px hoch) heben,
@@ -3106,30 +3116,47 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <button id="pwa-install" onclick="_pwaInstall()" style="display:none;width:100%;margin-top:8px;padding:7px;border-radius:8px;background:var(--vellum-hi);border:1.5px solid var(--iron-gall);color:var(--iron-gall);font-size:var(--fs-10);font-family:var(--f-mono);font-weight:600;text-transform:uppercase;cursor:pointer;align-items:center;justify-content:center;gap:5px;letter-spacing:.08em">⬇ Als App installieren</button>
   </div>
   <div id="auth-area">
-    <div id="auth-user" style="display:none"></div>
-    <button id="auth-btn" onclick="openLoginModal()">🔑 Anmelden</button>
-    <div id="auth-sync-status"></div>
+    <button id="auth-user" type="button" style="display:none"></button>
+    <button id="auth-btn" type="button" onclick="openSyncModal('start')">🔑 Sync</button>
+    <div id="auth-sync-status" role="status" aria-live="polite"></div>
   </div>
 </nav>
 <button class="console-reopen" id="conReopen" type="button" title="Konsole ausklappen" aria-label="Konsole ausklappen">&#8677;</button>
 
-<!-- Login Modal -->
-<div id="login-overlay" role="dialog" aria-modal="true" aria-label="Anmelden" onclick="closeLoginModal(event)">
-  <div id="login-box">
-    <button class="lf-close" onclick="closeLoginModal(null)" title="Schließen">✕</button>
-    <h2>Konto</h2>
-    <p>Speichere deinen Fortschritt und greife von überall darauf zu.</p>
-    <div class="lf-tabs">
-      <button class="lf-tab active" onclick="switchTab('login')">Anmelden</button>
-      <button class="lf-tab" onclick="switchTab('signup')">Registrieren</button>
+<!-- Sync-Modal (Sync-Code statt Konto; Logik im Skript "SYNC-CODE" weiter unten) -->
+<div id="sync-overlay" role="dialog" aria-modal="true" aria-labelledby="sync-title" onclick="closeSyncModal(event)">
+  <div id="sync-box">
+    <button class="lf-close" type="button" onclick="closeSyncModal(null)" title="Schließen" aria-label="Schließen">✕</button>
+    <h2 id="sync-title">Sync-Code</h2>
+    <div id="sync-err" role="alert"></div>
+
+    <div id="sy-v-start">
+      <p>Übertrage deine <b>True-Ending-Checkliste</b> ohne Konto auf andere Geräte. Alles andere (Bosse, Waffen, Favoriten, Notizen) bleibt in diesem Browser und lässt sich über „Fortschritt exportieren“ sichern. Die abgehakten Einträge liegen unverschlüsselt auf dem Server, der Code nur als Hash.</p>
+      <button class="lf-submit" id="sy-create" type="button">Neuen Sync-Code erstellen</button>
+      <form class="sy-sec" id="sy-enter-form" novalidate>
+        <div class="lf-row"><label for="sy-input">Vorhandenen Code eingeben</label><input id="sy-input" type="text" placeholder="Code hier einfügen" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" aria-describedby="sync-err"></div>
+        <button class="sy-btn" id="sy-enter" type="submit">Code verwenden</button>
+      </form>
     </div>
-    <div id="login-err"></div>
-    <form id="login-form" novalidate onsubmit="event.preventDefault();submitAuth();return false;">
-    <div class="lf-row"><label for="lf-email">E-Mail</label><input id="lf-email" type="email" placeholder="deine@email.de" autocomplete="email"></div>
-    <div class="lf-row"><label for="lf-pass">Passwort</label><input id="lf-pass" type="password" placeholder="Passwort" autocomplete="current-password"></div>
-    <div id="login-confirm-msg">E-Mail gesendet! Bitte bestätige deine Adresse, dann kannst du dich anmelden.</div>
-    <button class="lf-submit" id="lf-submit" type="submit">Anmelden</button>
-    </form>
+
+    <div id="sy-v-code" hidden>
+      <p id="sy-lead"></p>
+      <div class="sy-code" id="sy-code" tabindex="0"></div>
+      <button class="sy-btn pri" id="sy-copy" type="button">Code kopieren</button>
+      <div class="sy-msg" id="sy-copy-msg" role="status" aria-live="polite"></div>
+      <div class="sy-warn"><b>Der Code ist dein Schlüssel.</b> Wer ihn kennt, kann deinen Stand lesen und überschreiben. Auf dem Server liegt nur ein Hash davon, ein verlorener Code lässt sich nicht wiederherstellen. Bewahre ihn sicher auf, zum Beispiel in einem Passwortmanager.</div>
+      <p>Auf einem anderen Gerät: Sidebar, „🔑 Sync“, „Vorhandenen Code eingeben“.</p>
+      <button class="lf-submit" id="sy-done" type="button">Fertig</button>
+      <div class="sy-sec"><button class="sy-link" id="sy-end-open" type="button">Sync auf diesem Gerät beenden …</button></div>
+    </div>
+
+    <div id="sy-v-end" hidden>
+      <p>Sync auf diesem Gerät beenden? Dein Fortschritt bleibt in diesem Browser erhalten, nur die Verbindung wird gelöst. Um später wieder zu verbinden, brauchst du den Code.</p>
+      <p>Optional löschst du zusätzlich den Stand auf dem Server. Andere Geräte mit diesem Code legen ihn beim nächsten Speichern neu an.</p>
+      <button class="sy-btn" id="sy-end-local" type="button">Nur auf diesem Gerät beenden</button>
+      <button class="sy-btn danger" id="sy-end-server" type="button">Beenden und Serverdaten löschen</button>
+      <button class="sy-btn" id="sy-end-cancel" type="button">Abbrechen</button>
+    </div>
   </div>
 </div>
 <script>
@@ -3150,7 +3177,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     }
     var n=0;
     Object.keys(keys).forEach(function(k){
-      if(k.indexOf('cd_')!==0||k==='cd_migrate_hint'||typeof keys[k]!=='string')return;
+      if(k.indexOf('cd_')!==0||k==='cd_migrate_hint'||k==='cd_sync_code'||typeof keys[k]!=='string')return;
       if(localStorage.getItem(k)===null){localStorage.setItem(k,keys[k]);n++;}
     });
     localStorage.setItem('cd_migrate_hint',n?'uebernommen':'leer');
@@ -4008,7 +4035,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="pane" id="clp-export">
       <h3 class="sub-t" style="margin-top:0">Fortschritt exportieren / importieren</h3>
       <div style="font-size:12px;color:var(--dim);margin-bottom:12px">Exportiere deinen kompletten Fortschritt (Bosse, True Ending, Greymane, Waffen, Missables, Kapitel, Favoriten, Notizen, Kommentare, eigene Builds) als JSON. Kann jederzeit wieder importiert werden.</div>
-      <div style="font-size:12px;color:var(--warn);margin-bottom:12px;line-height:1.6">⚠ Ohne Konto wird dein Fortschritt nur in diesem Browser gespeichert — Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren oder oben rechts anmelden (Cloud-Sync).</div>
+      <div style="font-size:12px;color:var(--warn);margin-bottom:12px;line-height:1.6">⚠ Dein Fortschritt wird nur in diesem Browser gespeichert: Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren. Nur die True-Ending-Checkliste lässt sich zusätzlich per Sync-Code (Sidebar, „🔑 Sync“) auf andere Geräte übertragen.</div>
       <div class="xp-row">
         <button class="xp-btn pri" onclick="exportProgress()">Fortschritt exportieren (JSON)</button>
         <button class="xp-btn" onclick="document.getElementById('import-file').click()">Fortschritt importieren</button>
@@ -7741,7 +7768,8 @@ function renderCrafting(){
 function loadTE(){return lsJson('cd_te',[])}
 function saveTE(a){
   lsSet('cd_te',JSON.stringify(a));
-  if(window._authUser){
+  // Sync-Code (seit 09/2026): _syncProgress prüft selbst, ob ein Code aktiv ist, und entprellt.
+  if(typeof window._syncProgress==='function'){
     window._syncProgress(a).catch(()=>{});
   }
 }
@@ -8895,7 +8923,7 @@ function openBossAlt(name){
   hideMountIG();
 }
 // A11y: Fokus beim Oeffnen eines Modals auf das erste bedienbare Element,
-// beim Schliessen zurueck zum vorherigen Element (Vorbild openLoginModal).
+// beim Schliessen zurueck zum vorherigen Element (Vorbild: Sync-Modal).
 let _modalPrevFocus=null;
 function modalFocusOpen(sel){
   _modalPrevFocus=document.activeElement;
@@ -8938,7 +8966,9 @@ function exportProgress(){
   const all={};
   for(let i=0;i<localStorage.length;i++){
     const k=localStorage.key(i);
-    if(k&&k.startsWith('cd_'))all[k]=localStorage.getItem(k);
+    // cd_sync_code ist der Schlüssel zum Sync-Stand und darf nicht in einer Datei landen,
+    // die jemand weitergibt.
+    if(k&&k.startsWith('cd_')&&k!=='cd_sync_code')all[k]=localStorage.getItem(k);
   }
   const data={
     version:2,
@@ -8969,7 +8999,7 @@ function importProgress(input){
       if(data.version===2&&data.storage&&typeof data.storage==='object'){
         // v2: alle cd_*-Keys wiederherstellen
         Object.keys(data.storage).forEach(k=>{
-          if(k.startsWith('cd_')&&typeof data.storage[k]==='string')lsSet(k,data.storage[k]);
+          if(k.startsWith('cd_')&&k!=='cd_sync_code'&&typeof data.storage[k]==='string')lsSet(k,data.storage[k]);
         });
       }else{
         // v1-Fallback: nur die 5 klassischen Datenarten
@@ -9142,7 +9172,7 @@ function renderComments(sec){
 function postComment(sec){
   const inp=document.getElementById('ci-'+sec);
   const m=inp.value.trim(); if(!m) return;
-  const u=window._authUser?.email||'Anonym';
+  const u='Anonym'; // Seit 09/2026 gibt es kein Konto mehr (Sync-Code); Feld u bleibt für ältere Kommentare
   const t=new Date().toLocaleString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
   const arr=lsJson('cd_cmt_'+sec,[]);
   arr.push({u,m,t});
@@ -9153,7 +9183,8 @@ function postComment(sec){
 }
 
 // ===== VISITOR COUNTER (self-hosted via /api/visits) =====
-// Ersetzt den toten countapi.xyz. Backend: Netlify Function + Neon Postgres.
+// Ersetzt den toten countapi.xyz. Backend: kleiner Python-Dienst mit SQLite auf dem
+// eigenen Server (Pi, hinter nginx unter /api/visits); seit 09/2026, davor Netlify Function + Neon.
 // Robustheits-Vertrag: Die drei Sidebar-Felder (#sv-online/#sv-today/#sv-total)
 // werden SOFORT aus localStorage gefuellt und duerfen NIE "—" zeigen. Server-
 // Werte ueberschreiben den Fallback nur, wenn /api/visits mit ok:true antwortet.
@@ -9229,13 +9260,23 @@ async function initVisitorCount(){
   try{ apply(await fetchVisits(newSess)); }
   catch{ /* Fehler -> localStorage-Fallback bleibt stehen, Felder sind gefuellt */ }
 
-  // --- 3) Praesenz-Ping ~alle 60s (read-only, kein hit) haelt "Online" aktuell ---
-  if(!_vsPing){
-    _vsPing=setInterval(async()=>{
-      try{ apply(await fetchVisits(false)); }
-      catch{ /* Ping-Fehler ignorieren, alte Werte stehen lassen */ }
-    },60000);
-  }
+  // --- 3) Praesenz-Ping alle 60 s (read-only, kein hit) haelt "Online" aktuell ---
+  // Nur solange der Tab sichtbar ist: versteckt = Pause (spart Anfragen und zaehlt
+  // Hintergrund-Tabs nicht als "online"), wieder sichtbar = sofort einmal abfragen, dann
+  // wieder im 60-s-Takt.
+  const tick=async()=>{
+    try{ apply(await fetchVisits(false)); }
+    catch{ /* Ping-Fehler ignorieren, alte Werte stehen lassen */ }
+  };
+  const startPing=()=>{ if(!_vsPing) _vsPing=setInterval(tick,60000); };
+  const stopPing=()=>{ if(_vsPing){ clearInterval(_vsPing); _vsPing=null; } };
+  document.addEventListener("visibilitychange",()=>{
+    stopPing();
+    if(document.visibilityState==="hidden") return;
+    tick();
+    startPing();
+  });
+  if(document.visibilityState!=="hidden") startPing();
 }
 
 // ===== ACCESSORIES =====
@@ -9673,8 +9714,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(mim&&mim.classList.contains('show')){closeMountModal();return;}
       const lm=document.getElementById('loc-modal');
       if(lm&&lm.style.display!=='none'&&lm.style.display!==''){lm.style.display='none';if(typeof modalFocusClose==='function')modalFocusClose();return;}
-      const lo=document.getElementById('login-overlay');
-      if(lo&&lo.classList.contains('show')){closeLoginModal(null);return;}
+      const so=document.getElementById('sync-overlay');
+      if(so&&so.classList.contains('show')){closeSyncModal(null);return;}
       const eeO=document.getElementById('ee-overlay');
       if(eeO&&eeO.style.display!=='none'&&eeO.style.display!==''){closeEE();return;}
       const csO=document.getElementById('cheatsheet-modal');
@@ -9858,7 +9899,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         +'<li><b>Fortschritt abhaken:</b> Bosse, Waffen &amp; Checklisten lassen sich anklicken — alles wird lokal gespeichert.</li>'
         +'<li><b>Favoriten:</b> Das ☆ an Karten sammelt deine wichtigsten Einträge in der Favoriten-Sektion.</li>'
         +'<li><b>Suche:</b> <kbd>Strg</kbd>+<kbd>K</kbd> oder <kbd>/</kbd> durchsucht alle Sektionen gleichzeitig.</li>'
-        +'<li><b>Account-Sync:</b> Mit „🔑 Anmelden" (Sidebar) wandert dein Fortschritt verschlüsselt auf alle Geräte.</li></ul>';
+        +'<li><b>Sync:</b> Mit „🔑 Sync" (Sidebar) überträgst du deine True-Ending-Checkliste per Sync-Code auf andere Geräte, ohne Konto. Alles andere bleibt in diesem Browser.</li></ul>';
       // Anker nachgezogen: #sbar entfiel, jetzt hinter dem Register-Kopf #blattbar
       // (bleibt direktes #main-Kind vor den Sektionen -> Topologie/Hero-Regel intakt).
       const anchor=document.getElementById('blattbar');
@@ -9869,219 +9910,394 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 <script type="module">
-// LADESTRATEGIE (2026-07-31): @netlify/identity wird BEDARFSGESTEUERT geladen,
-// nicht mehr per statischem import.
+// ===== SYNC-CODE (seit 29.09.2026, ersetzt Netlify Identity) =====
+// Kein Konto, keine Fremdskripte: Der Client erzeugt einen zufälligen Code (24 Zeichen,
+// 31er-Alphabet ohne 0/O/1/I/L, ca. 119 Bit). Der Code geht NUR im Header X-Sync-Code
+// an /api/sync (nie in URL oder Body), der Server speichert nur sha256(code) als Schlüssel.
+// Synchronisiert wird ausschließlich die True-Ending-Checkliste (localStorage cd_te).
+// Der Code selbst liegt in localStorage cd_sync_code und wird bewusst NICHT exportiert.
 //
-// Grund, gemessen am 31.07.2026 auf der Startseite:
-// Ein statischer import in einem type="module"-Script wird aufgeloest, BEVOR
-// DOMContentLoaded feuert. Das Modul kommt von einem Fremd-CDN (esm.sh) und zog
-// gotrue-js nach: 508 ms + 124 ms = 632 ms, in denen die Seite nicht interaktiv
-// wurde. Zum Vergleich: domInteractive lag bei 125 ms, das HTML samt des 1,34-MB-
-// Datenblocks war da also laengst fertig. Der Login ist ein Randfeature (optionaler
-// Fortschritts-Sync), das die grosse Mehrheit der Besucher nie benutzt.
-//
-// Mit dem dynamischen import() blockiert nichts mehr: das Script laeuft sofort
-// durch, das IIFE am Dateiende stoesst den Ladevorgang nur an. Die Sitzung wird
-// weiterhin automatisch wiederhergestellt, nur eben ohne den Seitenaufbau
-// aufzuhalten. Bewusst NICHT umgesetzt: das Modul bei scheinbar anonymen Besuchern
-// ganz wegzulassen. Dafuer muesste man erraten, woran eine bestehende Sitzung
-// erkennbar ist (gotrue legt vor dem Login keinen localStorage-Key an), und ein
-// Fehlgriff wuerde eingeloggte Nutzer stillschweigend ausloggen.
-let _identityPromise = null;
-function identity() {
-  return (_identityPromise ||= import('https://esm.sh/@netlify/identity@1'));
+// Schnittstelle zum Rest der Seite (unverändert seit der Identity-Zeit):
+//   window._syncProgress(items)  wird von saveTE() nach jeder Änderung gerufen.
+// Änderungen werden entprellt (1,2 s) gesammelt, weil nginx /api/sync auf 20 Anfragen
+// pro Minute begrenzt: der letzte Stand geht immer raus, schnelles Abhaken erzeugt keine 429er.
+// Das Modul lädt sich nichts nach, es hat keine import-Anweisungen.
+
+const SY_KEY = 'cd_sync_code';
+const SY_LEN = 24;
+const SY_ALPHA = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // 31 Zeichen
+const SY_RE = /^[A-HJKMNP-Z2-9]{24}$/;               // wie die Server-Regex
+const SY_DEBOUNCE_MS = 1200;
+const SY_TIMEOUT_MS = 15000;
+const SY_MAX_ITEMS = 2000;   // Server-Grenze für PUT (Überschuss würde verworfen)
+// Server-Grenze für den PUT-Body ist 64 KiB (sonst 413). Die echte True-Ending-Liste liegt weit darunter.
+
+const $id = (id) => document.getElementById(id);
+
+// ── Code: Erzeugen, Normalisieren, Anzeigen ─────────────────────────
+// Rejection Sampling: Bytes ab 248 (= 31 * 8) werden verworfen, der Rest % 31 ist
+// dann gleichverteilt (kein Modulo-Bias).
+function syGenerate() {
+  if (!(window.crypto && crypto.getRandomValues)) throw new Error('no_crypto');
+  const out = [];
+  const buf = new Uint8Array(48);
+  while (out.length < SY_LEN) {
+    crypto.getRandomValues(buf);
+    for (let i = 0; i < buf.length && out.length < SY_LEN; i++) {
+      if (buf[i] < 248) out.push(SY_ALPHA[buf[i] % 31]);
+    }
+  }
+  return out.join('');
+}
+// Großbuchstaben, alles außer Alphabet-Zeichen entfernen (Bindestriche, Leerzeichen, Zeilenumbrüche).
+function syNormalize(s) {
+  return String(s == null ? '' : s).toUpperCase().replace(/[^A-HJKMNP-Z2-9]/g, '');
+}
+function syFormat(code) { return code.match(/.{4}/g).join('-'); }
+function syShort(code) { return code.slice(0, 4) + '-…-' + code.slice(-4); }
+
+function syGetCode() {
+  try {
+    const c = localStorage.getItem(SY_KEY);
+    return c && SY_RE.test(c) ? c : '';
+  } catch (_) { return ''; }
+}
+function syStoreCode(code) {
+  try { localStorage.setItem(SY_KEY, code); return localStorage.getItem(SY_KEY) === code; }
+  catch (_) { return false; }
+}
+function syForgetCode() { try { localStorage.removeItem(SY_KEY); } catch (_) {} }
+
+function syLocalItems() {
+  const v = lsJson('cd_te', []);
+  return Array.isArray(v) ? v.filter((x) => typeof x === 'string') : [];
 }
 
-// ── Auth state globals ──────────────────────────────────────────────
-window._authUser = null;
+// ── API ─────────────────────────────────────────────────────────────
+async function syApi(method, code, items) {
+  const headers = { 'X-Sync-Code': code, Accept: 'application/json' };
+  const init = { method, headers, cache: 'no-store' };
+  if (method === 'PUT') {
+    headers['Content-Type'] = 'application/json';
+    init.body = JSON.stringify({ checkedItems: items.slice(0, SY_MAX_ITEMS) });
+    if (init.body.length < 60000) init.keepalive = true; // überlebt das Schließen des Tabs (Limit 64 KiB)
+  }
+  const ctl = typeof AbortController === 'function' ? new AbortController() : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), SY_TIMEOUT_MS) : null;
+  if (ctl) init.signal = ctl.signal;
+  try {
+    const res = await fetch('/api/sync', init);
+    let data = null;
+    try { data = await res.json(); } catch (_) {}
+    return { status: res.status, data };
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+function syErrText(status) {
+  if (status === 429) return 'Zu viele Anfragen. Bitte in einer Minute noch einmal versuchen.';
+  if (status === 507) return 'Der Server nimmt gerade keine neuen Codes an. Bitte später noch einmal versuchen.';
+  if (status === 413) return 'Der Stand ist zu groß für den Server (Grenze 64 KiB, 2000 Einträge).';
+  if (status >= 500 || status === 0) return 'Der Server ist gerade nicht erreichbar. Bitte später noch einmal versuchen.';
+  return 'Unerwartete Antwort vom Server (HTTP ' + status + ').';
+}
+function syOk(r) { return r.status === 200 && r.data && r.data.ok === true; }
 
-async function _syncProgress(items) {
-  if (!window._authUser) return;
-  const { getUser } = await identity();
-  const user = await getUser();
-  if (!user) return;
-  const token = user.token?.access_token;
-  if (!token) return;
+// ── Status in der Sidebar (#auth-sync-status) ───────────────────────
+let _syStatusTimer = null;
+function setSyncStatus(msg, clearAfterMs) {
+  const el = $id('auth-sync-status');
+  if (el) el.textContent = msg;
+  clearTimeout(_syStatusTimer);
+  if (clearAfterMs) _syStatusTimer = setTimeout(() => { if (el) el.textContent = ''; }, clearAfterMs);
+}
+
+// ── Hochladen (entprellt, seriell, mit Wiederholung) ────────────────
+let _syTimer = null;
+let _syPending = null;
+let _syWaiters = [];
+let _syChain = Promise.resolve();
+let _syRetryTimer = null;
+let _syRetryMs = 15000;
+
+async function syPush(items, codeArg) {
+  const code = codeArg || syGetCode(); // beim Verbinden ist der Code noch nicht gespeichert
+  if (!code) return true;
   setSyncStatus('Speichert…');
   try {
-    const res = await fetch('/api/progress', {
-      method: 'POST',
-      headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ checkedItems: items })
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    setSyncStatus('Gespeichert ✓');
-    setTimeout(() => setSyncStatus(''), 2000);
+    const r = await syApi('PUT', code, items);
+    if (!syOk(r)) throw Object.assign(new Error('HTTP ' + r.status), { status: r.status });
+    _syRetryMs = 15000;
+    setSyncStatus('Gespeichert ✓', 2000);
+    return true;
   } catch (err) {
-    console.warn('Progress-Sync fehlgeschlagen:', err);
-    setSyncStatus('Sync fehlgeschlagen — lokal gespeichert');
-    setTimeout(() => setSyncStatus(''), 4000);
+    console.warn('Sync fehlgeschlagen:', err);
+    clearTimeout(_syRetryTimer);
+    _syRetryTimer = null;
+    // 413 (Stand zu groß) und 507 (Server voll) sind dauerhaft: nicht wiederholen, sondern
+    // melden. Die nächste Änderung des Nutzers versucht es von selbst wieder.
+    const st = err && err.status;
+    if (st === 413 || st === 507) {
+      setSyncStatus('Sync fehlgeschlagen, lokal gespeichert' + (st === 413 ? ' (Stand zu groß)' : ' (Server voll)'), 5000);
+      return false;
+    }
+    setSyncStatus('Sync fehlgeschlagen, lokal gespeichert', 4000);
+    // Sonst später noch einmal den dann aktuellen lokalen Stand senden (Backoff bis 2 Minuten).
+    _syRetryTimer = setTimeout(() => window._syncProgress(syLocalItems()).catch(() => {}), _syRetryMs);
+    _syRetryMs = Math.min(_syRetryMs * 2, 120000);
+    return false;
   }
 }
-window._syncProgress = _syncProgress;
+function syFlush() {
+  clearTimeout(_syTimer);
+  _syTimer = null;
+  const items = _syPending;
+  if (items === null) return _syChain;
+  _syPending = null;
+  const waiters = _syWaiters.splice(0);
+  _syChain = _syChain.then(() => syPush(items)).then(() => { waiters.forEach((w) => w()); });
+  return _syChain;
+}
+window._syncProgress = function _syncProgress(items) {
+  if (!syGetCode()) return Promise.resolve();
+  _syPending = Array.isArray(items) ? items : [];
+  clearTimeout(_syTimer);
+  _syTimer = setTimeout(syFlush, SY_DEBOUNCE_MS);
+  return new Promise((resolve) => { _syWaiters.push(resolve); });
+};
+// Tab wird versteckt oder verlassen: ausstehenden Stand sofort senden.
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') syFlush(); });
+window.addEventListener('pagehide', () => { syFlush(); });
+
+// ── Laden und Vereinigen ────────────────────────────────────────────
+// Server-Stand und lokaler Stand werden vereinigt (Server zuerst). Hat der lokale Stand
+// mehr, geht die Vereinigung zurück an den Server.
+async function syMergeFromServer(code) {
+  const r = await syApi('GET', code);
+  if (r.status === 404) return { missing: true };
+  if (!syOk(r)) throw Object.assign(new Error('HTTP ' + r.status), { status: r.status });
+  const server = Array.isArray(r.data.checkedItems) ? r.data.checkedItems.filter((x) => typeof x === 'string') : [];
+  const merged = Array.from(new Set([...server, ...syLocalItems()]));
+  const changedLocal = merged.length !== syLocalItems().length;
+  if (changedLocal) {
+    lsSet('cd_te', JSON.stringify(merged));
+    if (typeof renderTE === 'function') renderTE();
+  }
+  const grew = merged.length > server.length;
+  if (grew) await syPush(merged, code);
+  return { missing: false, serverCount: server.length, merged: merged.length, grew };
+}
 
 async function _loadServerProgress() {
-  const { getUser } = await identity();
-  const user = await getUser();
-  if (!user) return;
-  const token = user.token?.access_token;
-  if (!token) return;
+  const code = syGetCode();
+  if (!code) return;
   setSyncStatus('Lade Fortschritt…');
   try {
-    const res = await fetch('/api/progress', {
-      headers: { Authorization: 'Bearer ' + token }
-    });
-    if (!res.ok) return;
-    const data = await res.json();
-    if (Array.isArray(data.checkedItems) && data.checkedItems.length > 0) {
-      const local = lsJson('cd_te', []);
-      const merged = Array.from(new Set([...data.checkedItems, ...local]));
-      lsSet('cd_te', JSON.stringify(merged));
-      if (typeof renderTE === 'function') renderTE();
-      if (merged.length > data.checkedItems.length) {
-        window._syncProgress(merged).catch(() => {});
-      }
-    }
-    setSyncStatus('Fortschritt geladen ✓');
-    setTimeout(() => setSyncStatus(''), 2500);
-  } catch (_) {}
+    const res = await syMergeFromServer(code);
+    if (res.missing) setSyncStatus('Kein Stand auf dem Server, wird beim nächsten Speichern angelegt', 5000);
+    else if (!res.grew) setSyncStatus('Fortschritt geladen ✓', 2500);
+  } catch (err) {
+    console.warn('Sync-Laden fehlgeschlagen:', err);
+    setSyncStatus('Sync nicht erreichbar, lokal gespeichert', 4000);
+  }
 }
 
-function setSyncStatus(msg) {
-  const el = document.getElementById('auth-sync-status');
-  if (el) el.textContent = msg;
-}
-
-function updateAuthUI(user) {
-  window._authUser = user;
-  const btn = document.getElementById('auth-btn');
-  const userEl = document.getElementById('auth-user');
-  if (user) {
-    userEl.textContent = user.email;
+// ── Sidebar-Bereich #auth-area ──────────────────────────────────────
+function updateSyncUI() {
+  const btn = $id('auth-btn');
+  const userEl = $id('auth-user');
+  if (!btn || !userEl) return;
+  const code = syGetCode();
+  if (code) {
+    userEl.textContent = 'Code ' + syShort(code);
+    userEl.title = 'Sync-Code anzeigen';
+    userEl.setAttribute('aria-label', 'Sync-Code anzeigen');
     userEl.style.display = 'block';
-    btn.textContent = '🚪 Abmelden';
-    btn.onclick = doLogout;
+    btn.textContent = '🚪 Sync beenden';
+    btn.onclick = () => window.openSyncModal('end');
   } else {
     userEl.style.display = 'none';
-    btn.innerHTML = '🔑 Anmelden';
-    btn.onclick = () => window.openLoginModal();
+    btn.textContent = '🔑 Sync';
+    btn.onclick = () => window.openSyncModal('start');
   }
 }
 
-async function doLogout() {
-  const { logout } = await identity();
-  await logout();
-  updateAuthUI(null);
-}
-
-// ── Exposed globals for inline HTML onclick ──────────────────────────
-let _activeTab = 'login';
-
-window.openLoginModal = () => {
-  if (typeof modalFocusOpen === 'function') _modalPrevFocus = document.activeElement;
-  document.getElementById('login-overlay').classList.add('show');
-  document.getElementById('lf-email').focus();
-};
-window.closeLoginModal = (e) => {
-  if (e && e.target !== document.getElementById('login-overlay')) return;
-  document.getElementById('login-overlay').classList.remove('show');
-  setErr('');
-  document.getElementById('login-confirm-msg').classList.remove('show');
-  if (typeof modalFocusClose === 'function') modalFocusClose();
-};
-window.switchTab = (tab) => {
-  _activeTab = tab;
-  document.querySelectorAll('.lf-tab').forEach((t, i) => {
-    t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'signup'));
-  });
-  const submit = document.getElementById('lf-submit');
-  submit.textContent = tab === 'login' ? 'Anmelden' : 'Konto erstellen';
-  setErr('');
-};
-
-function setErr(msg) {
-  const el = document.getElementById('login-err');
-  el.textContent = msg;
+// ── Modal ───────────────────────────────────────────────────────────
+function syErr(msg) {
+  const el = $id('sync-err');
+  el.textContent = msg || '';
   el.classList.toggle('show', !!msg);
 }
-
-window.submitAuth = async () => {
-  const email = document.getElementById('lf-email').value.trim();
-  const pass = document.getElementById('lf-pass').value;
-  const submit = document.getElementById('lf-submit');
-  if (!email || !pass) { setErr('Bitte E-Mail und Passwort eingeben.'); return; }
-  submit.disabled = true;
-  setErr('');
-
-  // Beim ersten Login wird das Identity-Modul hier nachgeladen (siehe Ladestrategie oben).
-  // Bewusst VOR dem eigentlichen try: die Fehlerklassen werden unten im catch fuer
-  // instanceof gebraucht und muessen dort im Scope liegen. Ausserdem ist ein
-  // fehlgeschlagener Modul-Download ein eigener Fehlerfall (Fremd-CDN nicht erreichbar),
-  // der eine andere Meldung verdient als ein abgelehnter Login.
-  let ident;
-  try {
-    ident = await identity();
-  } catch (_) {
-    setErr('Anmelde-Modul konnte nicht geladen werden. Bitte Internetverbindung prüfen.');
-    submit.disabled = false;
-    return;
+function syBusy(on) {
+  ['sy-create', 'sy-enter', 'sy-end-local', 'sy-end-server', 'sy-end-cancel'].forEach((id) => {
+    const b = $id(id);
+    if (b) b.disabled = !!on;
+  });
+  $id('sync-box').setAttribute('aria-busy', on ? 'true' : 'false');
+}
+function syRenderCode(code) {
+  const box = $id('sy-code');
+  box.textContent = '';
+  syFormat(code).split('-').forEach((g) => {
+    const s = document.createElement('span');
+    s.textContent = g;
+    box.appendChild(s);
+  });
+  box.setAttribute('aria-label', 'Dein Sync-Code: ' + code.split('').join(' '));
+}
+// view: 'start' | 'code' | 'end'
+function syShow(view, lead) {
+  const titles = { start: 'Sync-Code', code: 'Dein Sync-Code', end: 'Sync beenden' };
+  ['start', 'code', 'end'].forEach((v) => { $id('sy-v-' + v).hidden = v !== view; });
+  $id('sync-title').textContent = titles[view];
+  syErr('');
+  $id('sy-copy-msg').textContent = '';
+  if (view === 'code') {
+    const code = syGetCode();
+    if (code) syRenderCode(code);
+    $id('sy-lead').textContent = lead || 'Sync ist auf diesem Gerät aktiv. Dein Code:';
   }
-  const { login, signup, AuthError, MissingIdentityError } = ident;
-
-  try {
-    if (_activeTab === 'login') {
-      const user = await login(email, pass);
-      updateAuthUI(user);
-      document.getElementById('login-overlay').classList.remove('show');
-      await _loadServerProgress();
-    } else {
-      const user = await signup(email, pass);
-      if (user.emailVerified) {
-        updateAuthUI(user);
-        document.getElementById('login-overlay').classList.remove('show');
-      } else {
-        document.getElementById('login-confirm-msg').classList.add('show');
-      }
-    }
-  } catch (err) {
-    if (err instanceof MissingIdentityError) {
-      setErr('Identity ist nicht aktiv. Bitte auf Netlify deployen.');
-    } else if (err instanceof AuthError) {
-      const msgs = { 401: 'Ungültige E-Mail oder falsches Passwort.', 403: 'Registrierung ist deaktiviert.', 422: 'Ungültige Eingabe — prüfe E-Mail und Passwort.' };
-      setErr(msgs[err.status] || err.message);
-    } else {
-      setErr('Unbekannter Fehler.');
-    }
-  } finally {
-    submit.disabled = false;
-  }
+  const focusId = { start: 'sy-create', code: 'sy-copy', end: 'sy-end-local' }[view];
+  const f = $id(focusId);
+  if (f) f.focus();
+}
+window.openSyncModal = (view) => {
+  $id('sync-overlay').classList.add('show');
+  if (typeof modalFocusOpen === 'function') modalFocusOpen('sync-overlay'); // merkt sich den Fokus für das Schließen
+  const code = syGetCode();
+  if (!code) syShow('start');
+  else if (view === 'end') syShow('end');
+  else syShow('code');
+};
+window.closeSyncModal = (e) => {
+  if (e && e.target !== $id('sync-overlay')) return;
+  $id('sync-overlay').classList.remove('show');
+  syErr('');
+  $id('sy-input').value = '';
+  $id('sy-copy-msg').textContent = '';
+  if (typeof modalFocusClose === 'function') modalFocusClose();
 };
 
-// ── Init: restore session & process callbacks ────────────────────────
-// Laeuft absichtlich als abgesetzter async-Block: das Script selbst ist damit
-// sofort fertig, DOMContentLoaded wartet nicht auf den Modul-Download vom
-// Fremd-CDN. Die Sitzung wird wie bisher automatisch wiederhergestellt, nur
-// wenige hundert Millisekunden spaeter und ohne den Seitenaufbau zu blockieren.
-// Ist das CDN nicht erreichbar, bleibt die Seite voll benutzbar; nur der
-// optionale Fortschritts-Sync steht dann nicht zur Verfuegung.
-(async () => {
-  let ident;
+// Neuen Code erzeugen: erst beim Server anlegen (erster PUT mit dem lokalen Stand),
+// erst danach lokal speichern und anzeigen.
+async function syCreate() {
+  syErr('');
+  let code;
+  try { code = syGenerate(); }
+  catch (_) { syErr('Dieser Browser kann keine sicheren Zufallszahlen erzeugen. Bitte einen aktuellen Browser verwenden.'); return; }
+  syBusy(true);
   try {
-    ident = await identity();
+    const r = await syApi('PUT', code, syLocalItems());
+    if (!syOk(r)) { syErr(syErrText(r.status)); return; }
+    if (!syStoreCode(code)) { syErr('Der Code konnte in diesem Browser nicht gespeichert werden (privater Modus?). Bitte nicht verwenden.'); return; }
+    updateSyncUI();
+    syShow('code', 'Neuer Code erstellt. Notiere ihn jetzt:');
   } catch (_) {
+    syErr(syErrText(0));
+  } finally {
+    syBusy(false);
+  }
+}
+
+// Vorhandenen Code eingeben: laden, mit lokalem Stand vereinigen, bei Zuwachs hochladen.
+async function syEnter() {
+  syErr('');
+  const code = syNormalize($id('sy-input').value);
+  if (code.length !== SY_LEN) {
+    syErr('Ein Code hat genau ' + SY_LEN + ' Zeichen (Buchstaben außer I, L, O und Ziffern 2 bis 9). Erkannt: ' + code.length + '.');
+    $id('sy-input').focus();
     return;
   }
+  syBusy(true);
   try {
-    await ident.handleAuthCallback();
-  } catch (_) {}
+    const res = await syMergeFromServer(code);
+    if (res.missing) { syErr('Diesen Code kennt der Server nicht. Prüfe die Eingabe oder erstelle einen neuen Code.'); return; }
+    if (!syStoreCode(code)) { syErr('Der Code konnte in diesem Browser nicht gespeichert werden (privater Modus?).'); return; }
+    updateSyncUI();
+    $id('sy-input').value = '';
+    syShow('code', 'Verbunden, ' + res.merged + ' Einträge zusammengeführt. Dein Code:');
+    setSyncStatus('Fortschritt geladen ✓', 2500);
+  } catch (err) {
+    syErr(err && err.status === 400 ? 'Ungültiger Code.' : syErrText(err && err.status ? err.status : 0));
+  } finally {
+    syBusy(false);
+  }
+}
+
+async function syCopy() {
+  const code = syGetCode();
+  if (!code) return;
+  const txt = syFormat(code);
+  let ok = false;
+  try { await navigator.clipboard.writeText(txt); ok = true; }
+  catch (_) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = txt;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      ok = document.execCommand('copy');
+      ta.remove();
+    } catch (_2) {}
+  }
+  $id('sy-copy-msg').textContent = ok ? 'Kopiert ✓' : 'Kopieren nicht möglich, bitte den Code markieren und von Hand kopieren.';
+  $id('sy-copy').focus();
+}
+
+// Sync beenden. Mit deleteServer wird zuerst der Serverstand gelöscht; scheitert das,
+// bleibt der Sync aktiv, damit niemand fälschlich glaubt, die Daten seien weg.
+async function syEnd(deleteServer) {
+  const code = syGetCode();
+  if (!code) { window.closeSyncModal(null); return; }
+  syErr('');
+  syBusy(true);
   try {
-    const user = await ident.getUser();
-    if (user) {
-      updateAuthUI(user);
-      await _loadServerProgress();
+    if (deleteServer) {
+      const r = await syApi('DELETE', code);
+      if (!syOk(r)) { syErr('Die Serverdaten konnten nicht gelöscht werden. ' + syErrText(r.status) + ' Der Sync bleibt aktiv.'); return; }
     }
-  } catch (_) {}
-})();
+    clearTimeout(_syTimer); _syTimer = null; _syPending = null;
+    clearTimeout(_syRetryTimer); _syRetryTimer = null;
+    _syWaiters.splice(0).forEach((w) => w());
+    syForgetCode();
+    updateSyncUI();
+    window.closeSyncModal(null);
+    setSyncStatus(deleteServer ? 'Sync beendet, Serverdaten gelöscht' : 'Sync beendet', 3500);
+  } catch (_) {
+    syErr(syErrText(0) + ' Der Sync bleibt aktiv.');
+  } finally {
+    syBusy(false);
+  }
+}
+
+// Tastatur im Modal: Tab bleibt im Dialog (Escape schließt der globale Handler).
+function syTrapTab(e) {
+  if (e.key !== 'Tab') return;
+  const box = $id('sync-box');
+  const list = Array.from(box.querySelectorAll('button,input,[tabindex="0"]'))
+    .filter((el) => !el.disabled && el.offsetParent !== null);
+  if (!list.length) return;
+  const first = list[0], last = list[list.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+}
+
+// ── Verdrahtung und Start ───────────────────────────────────────────
+$id('sy-create').addEventListener('click', syCreate);
+$id('sy-enter-form').addEventListener('submit', (e) => { e.preventDefault(); syEnter(); });
+$id('sy-copy').addEventListener('click', syCopy);
+$id('sy-done').addEventListener('click', () => window.closeSyncModal(null));
+$id('sy-end-open').addEventListener('click', () => syShow('end'));
+$id('sy-end-local').addEventListener('click', () => syEnd(false));
+$id('sy-end-server').addEventListener('click', () => syEnd(true));
+$id('sy-end-cancel').addEventListener('click', () => syShow(syGetCode() ? 'code' : 'start'));
+$id('auth-user').addEventListener('click', () => window.openSyncModal('code'));
+$id('sync-overlay').addEventListener('keydown', syTrapTab);
+
+updateSyncUI();
+if (syGetCode()) _loadServerProgress();
 </script>
 <style>@media(max-width:480px){#guide-links{line-height:1.8}}</style>
 <nav id="guide-links" aria-label="Guide-Seiten" style="text-align:center;padding:1rem;font-size:.85rem;opacity:.7">

@@ -26,15 +26,21 @@ anzulegen — es ist privat und braucht Credentials, die Claude nicht anfassen d
 ## Projekt
 - **Lokaler Ordner (seit 09.09.2026):** `G:\Claude\Crimson-Desert-Wiki\website\` (der alte Desktop-Ordner `deploy-69fcff9bfbeb7525ed81aec7` ist nur noch eine Kopie)
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
-- **Live-URL:** https://crimson-desert-wiki.com (eigene Domain seit 09/2026, Hosting Netlify, Auto-Deploy bei Push; die bisherige Netlify-Subdomain `crimson-desert-wiki` bleibt bestehen und leitet per 301 auf die Domain um)
+- **Live-URL:** https://crimson-desert-wiki.com (eigene Domain seit 09/2026). **Hosting seit 29.09.2026: eigener Raspberry Pi 5** (nginx + Cloudflare Tunnel + kleiner API-Dienst), NICHT mehr Netlify. Die alte Adresse `crimson-desert-wiki.netlify.app` bleibt nur als Mini-Umleitung auf Netlify bestehen (siehe Abschnitt Hosting)
 - **Haupt-Datei:** `index.html` (~9.600 Zeilen, Markup+CSS+Renderer) + `data/d01…d08-*.js`
   (Datenkonstanten, seit 23.08.2026 ausgelagert; laden per `<script src>` vor dem Hauptscript)
 
+## Hosting (seit 29.09.2026: Raspberry Pi, nicht mehr Netlify)
+- `https://crimson-desert-wiki.com` (Apex + `www`) wird vom Pi 5 ausgeliefert: Cloudflare (DNS/Proxy) → Cloudflare Tunnel → nginx → Webroot; `/api/` geht an den lokalen Python-Dienst (`127.0.0.1:8790`, SQLite). Betrieb, Deploy-Ablauf, Rückweg und Fehlersuche: `pi-hosting/LIESMICH.md` im Arbeitsordner `G:\Claude\Crimson-Desert-Wiki\pi-hosting\`.
+- **Deploy = Push auf `main`** (siehe Git-Regeln). Der Pi holt binnen ca. 2 Minuten. Nicht ausgeliefert werden Entwicklerdateien (`scripts/`, `.claude/`, `package.json`, `netlify.toml`, `legacy-netlify/`, `README.md` u. a.).
+- **Sync statt Konto:** Netlify Identity ist entfernt. „🔑 Sync" (Sidebar) erzeugt einen Sync-Code oder nimmt einen vorhandenen; synchronisiert wird nur die True-Ending-Checkliste. Der bisherige Serverstand aus dem Netlify-Login wurde NICHT übernommen (lokal abgehakte Einträge bleiben im Browser und wandern beim Erstellen eines Codes auf den Server).
+- **Netlify-Rest:** Die Netlify-Site `crimson-desert-wiki` liefert nur noch `legacy-netlify/` (Search-Console-Verifikationsdatei + `migrate-storage.html`) und leitet alles andere der alten Adresse `crimson-desert-wiki.netlify.app` per 301 auf die Domain um (`netlify.toml`, ausführlicher Kommentar dort). Bis 31.03.2027 so lassen, dann Netlify-Site löschen und `netlify.toml` + `legacy-netlify/` entfernen. Änderungen an diesen beiden Dateien lösen einen Netlify-Build aus, sonst wird übersprungen.
+- Die Kopien von `googleae4c65c5953c849f.html` und `migrate-storage.html` im Repo-Root gehören zur Pi-Auslieferung (Search-Console-Verifikation der neuen Property), die in `legacy-netlify/` zur alten Adresse: beim Ändern beide pflegen.
+
 ## Git / Push Regeln — WICHTIG
 - **NIEMALS automatisch pushen.** Immer erst den User fragen: "Soll ich das auf GitHub pushen?"
-- Mehrere Änderungen sammeln und in einem einzigen Push bündeln (spart Netlify Build Minutes)
-- Netlify deployt automatisch nach jedem Push (~21 Sekunden Build-Zeit)
-- Free Plan: 300 Build Minutes/Monat — sparsam verwenden
+- Mehrere Änderungen sammeln und in einem einzigen Push bündeln (jeder Push geht binnen ca. 2 Minuten live, es gibt kein „Zurückholen" ohne neuen Commit)
+- **Deploy = Push auf `main`.** Der Pi holt neue Commits von GitHub (Timer alle ~2 min), baut die SEO-Seiten neu (`gen-seo` + `verify-seo`, bei Fehler bleibt die alte Version live) und schaltet atomar um. Keine Netlify-Build-Minuten mehr, kein Kontingent.
 
 ## Sync-Disziplin Pi + PC — WICHTIG (vor JEDER Wiki-Änderung)
 Pi (schinkler) UND der PC pushen beide auf dieses Repo. Ohne Sync entsteht Divergenz (doppelte Arbeit, Merge-Konflikte) — genau das passierte am 2026-06-17 (Kuku/Synthese auf beiden Maschinen parallel gebaut).
@@ -85,7 +91,7 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 1. Änderungen lokal in `index.html` vornehmen
 2. User fragen ob gepusht werden soll
 3. Bei Ja: `git add . && git commit -m "..." && git push`
-4. Netlify deployed automatisch
+4. Der Pi deployt automatisch (Timer, ca. 2 Minuten nach dem Push)
 
 ## Linkcheck externe Bilder
 - `node scripts/linkcheck.mjs` prüft alle externen URLs der *_IMGS-Maps (HEAD/GET, Exit 1 bei Brüchen).
@@ -94,17 +100,16 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 ## SEO-Landing-Pages (statisch, aus index.html generiert)
 - **Ziel:** organischer Google-Traffic. Single-Page-App (`index.html`) ist für Crawler schlecht indexierbar (JS-nachgeladener Inhalt). Daher zusätzlich statische, vorgerenderte Seiten mit echten URLs.
 - **Generator:** `node scripts/gen-seo.mjs` — extrahiert BOSSES/WEAPONS/TRUE_ENDING (+ BOSS_IMGS/WEAPON_IMGS) per balancierter-Klammern-`eval` aus `index.html` (Single Source of Truth, KEINE Datenduplizierung) und schreibt `bosse.html`, `waffen.html`, `true-ending.html` + `sitemap.xml`.
-- **Build:** läuft automatisch im Netlify-Build (`netlify.toml` command = `npm install && node scripts/gen-seo.mjs`) → Seiten bleiben bei jedem Deploy synchron mit den Daten. Nach Änderungen an den Datenstrukturen lokal neu generieren, damit die committeten Seiten aktuell sind.
+- **Build:** läuft beim Deploy auf dem Pi (`node scripts/gen-seo.mjs && node scripts/verify-seo.mjs` im Build-Ordner, kein `npm install` nötig, keine Abhängigkeiten) → Seiten bleiben bei jedem Deploy synchron mit den Daten. Nach Änderungen an den Datenstrukturen lokal neu generieren, damit die committeten Seiten aktuell sind. Lokal setzt `gen-seo` nur das `lastmod` der `sitemap.xml` auf heute; das ist ohne Datenänderung kein Grund zu committen (`git checkout sitemap.xml`).
 - **Verifikation:** `node scripts/verify-seo.mjs` (Exit 1 bei Fehlern) prüft Soll-Mengen (dynamisch aus index.html), eindeutige Titel/Descriptions, Längen, canonical, valides JSON-LD, Deep-Links, Existenz aller referenzierten lokalen Bilder, sitemap-Einträge.
-- **URLs:** Netlify Pretty URLs ist standardmäßig AN → `bosse.html` wird unter `/bosse` ausgeliefert; canonical/sitemap/Links nutzen die `.html`-losen Pfade (`/bosse`, `/waffen`, `/true-ending`). CTAs springen via `/#sec-...` zurück in die App.
+- **URLs:** nginx liefert `bosse.html` unter `/bosse` aus (`try_files $uri $uri.html`, `/bosse/` → 301 auf `/bosse`, wie zuvor bei Netlify Pretty URLs); canonical/sitemap/Links nutzen die `.html`-losen Pfade (`/bosse`, `/waffen`, `/true-ending`). CTAs springen via `/#sec-...` zurück in die App.
 - **ERLEDIGT / geprüft am 24.08.2026:** Die Live-Site `/bosse` liefert 200; `/bosse/` antwortet mit 301 auf `/bosse`. Canonical und Sitemap verwenden bereits die passende Form ohne Slash, daher ist keine Umstellung nötig.
 - **Search Console (Stand 17.09.2026):** Zwei URL-Präfix-Properties, beide per `googleae4c65c5953c849f.html` bestätigt: die alte `https://crimson-desert-wiki.netlify.app/` (Adressänderung auf die neue Domain eingereicht, 180 Tage Migrationsfenster, der 301 muss so lange bleiben) und die neue `https://crimson-desert-wiki.com/` (Sitemap eingereicht, 13 Seiten erkannt). Die 12 Unterseiten waren bis dahin „Gefunden – zurzeit nicht indexiert“; Indexierungsanträge über die URL-Prüfung auf der NEUEN Property stellen (Kontingent ca. 10 pro Tag).
 
 ## Tech Stack
-- Static Single-Page HTML/JS/CSS App (kein Build-Step nötig)
-- `npx serve -p 5000 .` zum lokalen Testen
-- Netlify Functions in `netlify/functions/`
-- Datenbank-Schema in `db/schema.ts` (Drizzle ORM)
+- Static Single-Page HTML/JS/CSS App (kein Build-Step nötig, `package.json` ohne Abhängigkeiten)
+- `npx serve -p 5000 .` zum lokalen Testen (die `/api/*`-Aufrufe laufen dann ins Leere: Zähler fällt auf localStorage zurück, Sync-Anfragen scheitern sauber; zum Testen ein Mock nötig)
+- Backend (Besucherzähler `/api/visits`, Sync `/api/sync`, `/api/health`) ist ein Python-Dienst mit SQLite auf dem Pi, NICHT in diesem Repo (Quelle im Arbeitsordner `G:\Claude\Crimson-Desert-Wiki\pi-hosting\api\`, Vertrag und Betrieb dort in `LIESMICH.md`). Netlify Functions und Drizzle/Neon gibt es nicht mehr (09/2026 entfernt).
 - Assets unter `cd_assets/` (bosses, armor, weapons, skills, mounts, cores, map)
 
 ## localStorage Keys
@@ -117,6 +122,7 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 - `cd_ch_done` — Chapters Checklist
 - `cd_sec` — zuletzt aktive Sektion
 - `cd_migrate_hint` — Domainwechsel 09/2026: Hinweisleiste „Fortschritt von der alten Adresse übernehmen“ gesehen/abgelehnt/übernommen (Handoff über `migrate-storage.html` auf der alten Adresse und `#cdmig=` beim Rücksprung; kann nach 2027-03 samt Skript entfernt werden)
+- `cd_sync_code`: Sync-Code (24 Zeichen, Alphabet ohne 0/O/1/I/L) für den Fortschritts-Sync der True-Ending-Checkliste (`cd_te`) über `/api/sync`; Schlüssel zum Serverstand, der Server kennt nur `sha256(code)`. Wird bewusst NICHT in Export/Import und nicht bei der Speicher-Übernahme mitgenommen (nur „Sync beenden" oder Löschen der Website-Daten entfernt ihn).
 - `cd_boss_open_all` — Bosskarten: `'1'` = „Alle Details“ aktiv (alle sichtbaren `details.boss-more` aufgeklappt, Knopf `#boss-more-all` zeigt „Alle einklappen“), sonst `'0'`/fehlend = Standard zugeklappt; einzelne Karten werden nicht gemerkt
 
 ## Bekannte Besonderheiten

@@ -1,53 +1,51 @@
+# ============================================================================
+# Netlify ist NICHT mehr das Hosting dieses Wikis (Umzug 29.09.2026).
+# https://crimson-desert-wiki.com wird komplett vom eigenen Raspberry Pi
+# ausgeliefert (nginx + Cloudflare Tunnel, Deploy siehe .claude/CLAUDE.md).
+#
+# Diese Datei existiert nur noch für die ALTE Adresse
+# https://crimson-desert-wiki.netlify.app (Netlify-Site "crimson-desert-wiki"):
+#
+#   1. 301-Umleitung auf die neue Domain, Pfad bleibt erhalten. Sie muss laufen,
+#      solange Google die Adressänderung der Search Console abarbeitet: Migration
+#      eingereicht am 17.09.2026, Fenster 180 Tage, also bis etwa 16.03.2027.
+#   2. Zwei Ausnahmen, die direkt (Status 200) erreichbar bleiben:
+#      - googleae4c65c5953c849f.html: Search-Console-Verifikation der alten
+#        Property (ohne sie wäre die Adressänderung hinfällig).
+#      - migrate-storage.html: Speicher-Übernahme. localStorage ist origin-gebunden;
+#        Besucher holen ihren Fortschritt von der alten Adresse per Klick auf der
+#        neuen Seite ab (Handoff über #cdmig=..., siehe index.html). Die Hinweisleiste
+#        dort läuft bis 31.03.2027.
+#
+# Ausgeliefert wird nur der Ordner legacy-netlify/ (Kopien der beiden Dateien; die
+# Originale im Repo-Root gehören zur Pi-Auslieferung und bleiben). Es gibt keinen
+# Build, keine Functions, keine Datenbank. Der Build-Schritt ist ein echo, damit
+# Netlify nichts mehr installiert oder generiert.
+#
+# Bewusst KEINE Regel für andere Hosts (z. B. crimson-desert-wiki.com): Zeigt der
+# DNS-Eintrag irgendwo noch auf Netlify, würde eine Umleitung auf die Domain eine
+# Schleife erzeugen. Solche Anfragen laufen ins Leere (404) statt im Kreis.
+#
+# ENDE: Nach dem 31.03.2027 (Migrationsfenster vorbei, Übernahmeleiste entfernt)
+# die Netlify-Site "crimson-desert-wiki" löschen und dann netlify.toml sowie
+# legacy-netlify/ aus dem Repo entfernen. Die anderen Sites des Netlify-Teams
+# (z. B. Fußwerk) sind davon unabhängig.
+# ============================================================================
+
 [build]
-  # gen-seo.mjs erzeugt die statischen SEO-Landing-Pages (bosse/waffen/true-ending)
-  # + sitemap.xml frisch aus index.html, damit sie bei jedem Deploy synchron bleiben.
-  command   = "npm install && node scripts/gen-seo.mjs && node scripts/verify-seo.mjs"
-  publish   = "."
+  command = "echo 'Nur Weiterleitung der alten Adresse, kein Build'"
+  publish = "legacy-netlify"
+  # Nur bauen, wenn sich die Umleitung selbst ändert. Exit 0 (keine Änderung) = Build überspringen.
+  ignore  = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- legacy-netlify netlify.toml"
 
-[functions]
-  directory    = "netlify/functions"
-  node_bundler = "esbuild"
-
-# DATENBANK vom Deploy ENTKOPPELT (Quota-unabhaengige Deploys) -- Root Cause + Fix:
-# Netlify stellt eine DB bereit / legt fuer Deploy-Previews einen DB-Branch an, SOBALD es
-# das Paket "@netlify/database" im Projekt erkennt -- DAS ist der eigentliche Ausloeser
-# (kein netlify.toml-Schalter; ein solcher existiert laut Doku nicht). Dieser "Netlify
-# Database setup"-Schritt braucht DB-Compute. War die monatliche Neon-"active time quota"
-# erschoepft, scheiterte er (Deploy-Preview: createSiteDatabaseBranch -> HTTP 500;
-# Produktion: Migrations-Ping) und der GESAMTE Build/Deploy brach ab -- auch reine
-# Frontend-Aenderungen (genau das war am 2026-06-15/16 der Fall).
-# FIX: "@netlify/database" ist aus package.json ENTFERNT (niemand importiert es; es war nur
-# der Trigger). @neondatabase/serverless ist jetzt direkte Dependency, damit der Runtime-
-# Treiber (drizzle-orm/netlify-db) weiter aufloest. -> Build fasst die DB nicht mehr an.
-# Zusaetzlich liegen die Migrationen jetzt unter "db/migrations/" statt im von Netlify
-# ueberwachten "netlify/database/migrations/" (s. drizzle.config.ts) -> kein Auto-Apply.
-# Das Schema ist stabil (1 Tabelle user_progress, 1 Migration seit Mai, laengst angewendet);
-# nichts geht verloren, die Migration bleibt als Historie in db/migrations/.
-# Die Runtime-DB (visits.mts Besucherzaehler, progress.mts Sync) verbindet sich zur LAUFZEIT
-# direkt per Connection-String aus einer Env-Var (NETLIFY_DB_URL / NETLIFY_DATABASE_URL /
-# DATABASE_URL; s. db/index.ts). DAMIT diese Features funktionieren, muss eine dieser
-# Env-Vars in der Netlify-UI auf den bestehenden Neon-Connection-String gesetzt sein --
-# sonst degradiert der Zaehler sauber (Fallback), Sync ist inaktiv.
-# Kuenftige Schema-Aenderung? Mit "npm run db:generate" erzeugen (landet in db/migrations/)
-# und EINMALIG manuell anwenden (drizzle-kit gegen den Connection-String bzw. Neon-Konsole).
-
-# Alte Netlify-Adresse -> eigene Domain (seit 09/2026). Netlify leitet die
-# *.netlify.app-Subdomain NICHT automatisch auf die Primaerdomain um (nur www<->Apex),
-# deshalb hier explizit per 301 mit erhaltenem Pfad. Domain-Level-Regeln brauchen
-# force = true, sonst gewinnt die lokal vorhandene Datei. Reihenfolge zaehlt: die
-# Search-Console-Verifikationsdatei bleibt auf der alten Adresse direkt erreichbar
-# (Rewrite 200), damit die alte Property verifiziert bleibt -- Voraussetzung fuer
-# Googles "Adressaenderung" von der alten auf die neue Property.
+# Domain-Level-Regeln brauchen force = true, sonst gewinnt eine lokal vorhandene Datei.
+# Reihenfolge zählt: erst die beiden Ausnahmen, dann der Catch-all.
 [[redirects]]
   from   = "https://crimson-desert-wiki.netlify.app/googleae4c65c5953c849f.html"
   to     = "/googleae4c65c5953c849f.html"
   status = 200
   force  = true
 
-# Ebenfalls direkt erreichbar: die Seite, ueber die Besucher die unter der alten
-# Adresse gespeicherten cd_*-Keys (localStorage ist origin-gebunden) mit einem Klick
-# auf die neue Domain mitnehmen (Top-Level-Handoff per #cdmig=..., siehe
-# migrate-storage.html und index.html, Abschnitt "Speicher-Uebernahme").
 [[redirects]]
   from   = "https://crimson-desert-wiki.netlify.app/migrate-storage.html"
   to     = "/migrate-storage.html"
@@ -61,54 +59,7 @@
   force  = true
 
 [[headers]]
-for = "/*"
+  for = "/migrate-storage.html"
   [headers.values]
-  X-Frame-Options             = "SAMEORIGIN"
-  X-Content-Type-Options      = "nosniff"
-  Referrer-Policy             = "strict-origin-when-cross-origin"
-  Content-Security-Policy     = "frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
-  Cache-Control               = "public, max-age=3600"
-
-# index.html immer revalidieren (ETag macht das billig) — sonst sehen
-# Besucher nach einem Deploy bis zu 1h alte Inhalte
-[[headers]]
-for = "/"
-  [headers.values]
-  Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-for = "/index.html"
-  [headers.values]
-  Cache-Control = "public, max-age=0, must-revalidate"
-
-# Die ausgelagerten Datendateien (Split 23.08.2026) muessen mit index.html
-# synchron bleiben: ebenfalls immer revalidieren (ETag macht das billig).
-# Sonst laege bis zu 1h zwischen Seite und Daten (Regel "/*" = max-age 3600).
-[[headers]]
-for = "/data/*"
-  [headers.values]
-  Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-for = "/migrate-storage.html"
-  [headers.values]
-  X-Robots-Tag  = "noindex, nofollow"
-  Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-for = "/sw.js"
-  [headers.values]
-  Cache-Control = "public, max-age=0, must-revalidate"
-
-# Assets sind NICHT versioniert/fingerprinted — daher kein 'immutable',
-# 1 Tag Cache + Revalidierung reicht
-[[headers]]
-for = "/cd_assets/*"
-  [headers.values]
-  Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
-
-[[headers]]
-for = "/site.webmanifest"
-  [headers.values]
-  Content-Type  = "application/manifest+json"
-  Cache-Control = "public, max-age=86400"
+    X-Robots-Tag  = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
