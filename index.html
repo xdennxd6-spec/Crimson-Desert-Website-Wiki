@@ -9929,8 +9929,12 @@ const SY_ALPHA = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // 31 Zeichen
 const SY_RE = /^[A-HJKMNP-Z2-9]{24}$/;               // wie die Server-Regex
 const SY_DEBOUNCE_MS = 1200;
 const SY_TIMEOUT_MS = 15000;
-const SY_MAX_ITEMS = 2000;   // Server-Grenze für PUT (Überschuss würde verworfen)
-// Server-Grenze für den PUT-Body ist 64 KiB (sonst 413). Die echte True-Ending-Liste liegt weit darunter.
+// Server-Grenzen für PUT /api/sync: höchstens 500 Einträge, Body höchstens 16 KiB (sonst 413),
+// jeder Eintrag muss SY_ID_RE erfüllen (sonst verwirft der Server ihn). Der Client filtert vorab.
+// Belegt: alle IDs, die in cd_te stehen können (True-Ending-Liste te1..te31 und te_abyss_01..40,
+// Sanctum-IDs sind eine Teilmenge davon), sind höchstens 11 Zeichen lang und passen zur Regex.
+const SY_MAX_ITEMS = 500;
+const SY_ID_RE = /^[A-Za-z0-9_-]{1,40}$/;
 
 const $id = (id) => document.getElementById(id);
 
@@ -9968,6 +9972,16 @@ function syStoreCode(code) {
 }
 function syForgetCode() { try { localStorage.removeItem(SY_KEY); } catch (_) {} }
 
+// Nur zulässige Einträge (ID-Form), ohne Duplikate, höchstens SY_MAX_ITEMS. Alles, was an den Server geht, läuft hierdurch.
+function syValid(list) {
+  const out = [];
+  const seen = new Set();
+  for (const x of Array.isArray(list) ? list : []) {
+    if (typeof x === 'string' && SY_ID_RE.test(x) && !seen.has(x)) { seen.add(x); out.push(x); if (out.length >= SY_MAX_ITEMS) break; }
+  }
+  return out;
+}
+// Lokaler Stand roh (nur Strings); zum Hochladen immer syValid() verwenden.
 function syLocalItems() {
   const v = lsJson('cd_te', []);
   return Array.isArray(v) ? v.filter((x) => typeof x === 'string') : [];
@@ -9979,7 +9993,7 @@ async function syApi(method, code, items) {
   const init = { method, headers, cache: 'no-store' };
   if (method === 'PUT') {
     headers['Content-Type'] = 'application/json';
-    init.body = JSON.stringify({ checkedItems: items.slice(0, SY_MAX_ITEMS) });
+    init.body = JSON.stringify({ checkedItems: syValid(items) });
     if (init.body.length < 60000) init.keepalive = true; // überlebt das Schließen des Tabs (Limit 64 KiB)
   }
   const ctl = typeof AbortController === 'function' ? new AbortController() : null;
@@ -9997,7 +10011,7 @@ async function syApi(method, code, items) {
 function syErrText(status) {
   if (status === 429) return 'Zu viele Anfragen. Bitte in einer Minute noch einmal versuchen.';
   if (status === 507) return 'Der Server nimmt gerade keine neuen Codes an. Bitte später noch einmal versuchen.';
-  if (status === 413) return 'Der Stand ist zu groß für den Server (Grenze 64 KiB, 2000 Einträge).';
+  if (status === 413) return 'Der Stand ist zu groß für den Server (Grenze 16 KiB, 500 Einträge).';
   if (status >= 500 || status === 0) return 'Der Server ist gerade nicht erreichbar. Bitte später noch einmal versuchen.';
   return 'Unerwartete Antwort vom Server (HTTP ' + status + ').';
 }
@@ -10076,14 +10090,15 @@ async function syMergeFromServer(code) {
   const r = await syApi('GET', code);
   if (r.status === 404) return { missing: true };
   if (!syOk(r)) throw Object.assign(new Error('HTTP ' + r.status), { status: r.status });
-  const server = Array.isArray(r.data.checkedItems) ? r.data.checkedItems.filter((x) => typeof x === 'string') : [];
-  const merged = Array.from(new Set([...server, ...syLocalItems()]));
-  const changedLocal = merged.length !== syLocalItems().length;
-  if (changedLocal) {
+  const server = syValid(r.data.checkedItems);
+  const local = syLocalItems();
+  const merged = Array.from(new Set([...server, ...local]));
+  if (merged.length !== local.length) {
     lsSet('cd_te', JSON.stringify(merged));
     if (typeof renderTE === 'function') renderTE();
   }
-  const grew = merged.length > server.length;
+  // Hochgeladen wird nur der zulässige Teil; wächst er über den Serverstand hinaus, geht er zurück.
+  const grew = syValid(merged).length > server.length;
   if (grew) await syPush(merged, code);
   return { missing: false, serverCount: server.length, merged: merged.length, grew };
 }
@@ -10255,8 +10270,18 @@ async function syEnd(deleteServer) {
   syBusy(true);
   try {
     if (deleteServer) {
+      // Erst alles Ausstehende verwerfen und die laufende Upload-Kette abwarten, sonst kann ein
+      // PUT das DELETE überholen und den Serverstand wieder anlegen.
+      clearTimeout(_syTimer); _syTimer = null; _syPending = null;
+      clearTimeout(_syRetryTimer); _syRetryTimer = null;
+      _syWaiters.splice(0).forEach((w) => w());
+      await _syChain;
       const r = await syApi('DELETE', code);
-      if (!syOk(r)) { syErr('Die Serverdaten konnten nicht gelöscht werden. ' + syErrText(r.status) + ' Der Sync bleibt aktiv.'); return; }
+      if (!syOk(r)) {
+        syErr('Die Serverdaten konnten nicht gelöscht werden. ' + syErrText(r.status) + ' Der Sync bleibt aktiv.');
+        window._syncProgress(syLocalItems()).catch(() => {}); // verworfenen Stand wieder einreihen
+        return;
+      }
     }
     clearTimeout(_syTimer); _syTimer = null; _syPending = null;
     clearTimeout(_syRetryTimer); _syRetryTimer = null;
@@ -10267,6 +10292,7 @@ async function syEnd(deleteServer) {
     setSyncStatus(deleteServer ? 'Sync beendet, Serverdaten gelöscht' : 'Sync beendet', 3500);
   } catch (_) {
     syErr(syErrText(0) + ' Der Sync bleibt aktiv.');
+    if (syGetCode()) window._syncProgress(syLocalItems()).catch(() => {});
   } finally {
     syBusy(false);
   }

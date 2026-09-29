@@ -28,7 +28,8 @@
   try{
     for(var i=0;i<localStorage.length;i++){
       var k=localStorage.key(i);
-      if(k&&k.indexOf('cd_')===0)keys[k]=localStorage.getItem(k);
+      // cd_sync_code ist der Schlüssel zum Sync-Stand und gehört nicht in ein URL-Fragment (Browserverlauf).
+      if(k&&k.indexOf('cd_')===0&&k!=='cd_sync_code')keys[k]=localStorage.getItem(k);
     }
   }catch(e){}
   var json=JSON.stringify(keys);
