@@ -685,7 +685,7 @@ input.fs::-webkit-search-cancel-button{cursor:pointer;opacity:.55}
 /* Ausgefiltert. Eine Regel fuer ALLE Knoten — vorher zaehlte sie nur .card,
    .trow und .set-card auf, waehrend die Suche `hide` auf JEDEM [data-s]-Knoten
    setzt. Dadurch liessen sich 367 durchsuchbare Knoten in fuenf Sektionen gar
-   nicht ausblenden (203 Fraktionsquests .fac-q, 78 Nebenquests details.sq-item,
+   nicht ausblenden (218 Fraktionsquests .fac-q, 107 Nebenquests details.sq-item,
    64 Tabellenzeilen ohne .trow, 18 Trophaeenkarten .ach-card, 4 Roadmap-Aufgaben
    .rm-task): Die Suche markierte sie, sichtbar blieb alles, und der Trefferzaehler
    nannte eine Zahl, die nicht zum Bild passte. Dazu 52 von 93 Synthese-Familien-
@@ -3846,7 +3846,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <tr class="trow" data-s="privates lager private storage camp truhe zelt 240 1000 slots haus housing kuku cooler wardrobe collectibles chest sturdy gatherables"><td><strong>Privatlager ↔ Haus-Lagermöbel</strong></td><td>Das <b>Privatlager</b> (Truhe im Zelt) wächst mit dem Camp-Ausbau: 240 → 1.000 Slots. Die <b>Haus-Lagermöbel</b> kamen mit Patch 1.04.00 und sind davon <b>unabhängig</b> (Kauf bzw. Quest): Sturdy Gatherables Chest 1.000 · Collectibles Chest 1.000 · Wardrobe je 100 (max. 1.000) · Kuku Cooler 40 / Enhanced 330.</td></tr>
         <tr class="trow" data-s="haus housing select house compact standard spacious pailunese layout lukes request getrennt"><td><strong>Camp-Ausbau ↔ Haus</strong></td><td>Das Haus ist ein eigenes System (freigeschaltet über <em>First Step to Rebuilding</em> + <em>Luke's Request</em>). Gekoppelt ist nur die <b>Layout-Auswahl</b>: „Select House" (Patch 1.04.00) gibt Compact → Standard → Spacious → Spacious Pailunese je nach Ausbaustand frei.</td></tr>
         <tr class="trow" data-s="greymane commissions 27 medium bag 81 inventar slots nicht camp lager"><td><strong>Lager-Slots ↔ Inventar-Slots</strong></td><td>Die 27 <b>Greymane Commissions</b> geben je einen Medium Bag (+3 <b>Inventar</b>-Plätze, max. +81). Das hat mit dem Camp-Lager nichts zu tun.</td></tr>
-        <tr class="trow" data-s="for a better tomorrow spendenreihe contribution keine ausbaustufe"><td><strong>„For a Better Tomorrow" ≠ Ausbau</strong></td><td>Eine separate fünfteilige <b>Spendenreihe</b> für Greymane-Contribution — keine Ausbaustufe. Die kursierenden Stufenbeträge stammen aus widersprüchlichen Forenposts und sind hier bewusst nicht aufgeführt.</td></tr>
+        <tr class="trow" data-s="for a better tomorrow spendenreihe contribution keine ausbaustufe"><td><strong>„For a Better Tomorrow" ≠ Ausbau</strong></td><td>Eine separate <b>Spendenreihe</b> für Greymane-Contribution — keine Ausbaustufe. Die Stufenbeträge (bis 5.000 Silver / 50.000 Provisions / 25.000 Timber / 25.000 Stone / 12.500 Waffen) stehen laut Spieldatenbank (questlog) im Fraktionseintrag der Greymanes; Forenposts nennen teils abweichende Werte.</td></tr>
         <tr class="trow" data-s="greymane contribution tokens keine ausbau waehrung shop carl kaution"><td><strong>Contribution Tokens ≠ Ausbau-Währung</strong></td><td>Sie zahlen im Contribution-Shop bei Carl und dienen als rückerstattbare Kaution (4 pro Contribution Worker).</td></tr>
         <tr class="trow" data-s="cloudcart heissluftballon kein camp ausbau unlock emberwind workshop glenbright manor engineering"><td><strong>Cloudcart ≠ Ausbau-Belohnung</strong></td><td>Der Heißluftballon hängt <b>nicht</b> am Camp-Level, sondern an ≥5 Kameraden (einer mit Engineering-Skill) und dem Bauplan aus dem Rätsel in Glenbright Manor; gebaut wird er am Emberwind Workshop.</td></tr>
         <tr class="trow" data-s="alchemy lab alchemielabor camp cauldron vincent conrad kessel timberham widerlegt"><td><strong>Alchemy Lab im Camp?</strong> <span class="tag tr">widerlegt</span></td><td><b>Nein — es gibt keins.</b> Nachrecherche 22.08.2026: Im Datamine der Spielversion 1.18.01 existiert keine solche Station, und die In-Game-Beschreibung <em>jeder</em> Alchemie-Formel lautet „A formula to craft … using a cauldron“. Die offiziellen Patch Notes kennen als Camp-Station die <b>Workstation</b> (seit 1.12.00), kein Labor. Behauptet wurde das Labor ursprünglich nur von <b>KeenGamer</b>; alle weiteren Fundstellen sind wortgleiche Übernahmen davon. Ein Spieler mit ausgebautem Camp widerspricht ausdrücklich. <b>Konsequenz:</b> Die beiden Rezepte, die im Wiki an dieser Station hingen („Attack Speed Potion“, „Spirit Gauge Restore Potion“), sind am 22.08.2026 <b>entfernt</b> worden — sie tauchen in keiner unabhängigen Rezeptliste auf. Belegt ist stattdessen der <b>Cauldron</b> als Möbelstück: 48 Silver bei Vincent (Furniture Shop, Timberham Sawmill), nach dem „Furniture Supply Contract“ auch bei Conrad im Camp; dazu zwei kostenlose Cauldrons in der Welt (Hernand, Pororin Village). Aufgestellt wird er im eigenen Haus.</td></tr>
@@ -4438,6 +4438,14 @@ const BOSS_RENAMES={"Avatar of Umbra":"Myurdin, the Avatar of Umbra"};
     const f=lsJson('cd_favs',null);
     if(f&&typeof f==='object'&&hit(f.boss)){f.boss=[...new Set(f.boss.map(ren))];lsSet('cd_favs',JSON.stringify(f));}
   }catch(e){console.warn('migrateBossRenames',e);}
+})();
+// Nebenquest-Umbenennungen: gespeicherten Fortschritt (cd_sq_done = Liste der q-Namen) alt→neu migrieren. Idempotent, läuft bei jedem Laden.
+const SQ_RENAMES={"Legendary Wolf — Silver Fang (Bossduell gegen den Schwarzen Wolf 'Black Fang')":"Legendary Wolf","White Bear (Legendär-Tier, Pailune)":"White Bear","Snowwhite Deer (Legendär-Tier, Pailune)":"Snowwhite Deer","The Sport Hunter — Icicle Edge Alpine Ibex (Boss Moren)":"The Sport Hunter","Master of the Wetlands — Rock Tusk Warthog (Boss Ravok)":"Master of the Wetlands"};
+(function migrateSQRenames(){
+  try{
+    const d=lsJson('cd_sq_done',null);
+    if(Array.isArray(d)&&d.some(n=>SQ_RENAMES[n]))lsSet('cd_sq_done',JSON.stringify([...new Set(d.map(n=>SQ_RENAMES[n]||n))]));
+  }catch(e){console.warn('migrateSQRenames',e);}
 })();
 // Globale Fehler-Auffangnetze: Seite soll nie kommentarlos kaputt wirken
 function _errToast(msg){
@@ -5070,7 +5078,7 @@ function renderRoadmap(){
     tasks.push({prio:'md',title:'Watch & Learn: Focused Force Palm',desc:'Geist-NPC westlich Fort Perwin — MISSABLE bei falschem Weg in "On the Right Path".',meta:['Kapitel 4','Spirit Tree'],action:"showSec('skills');skTab('watch')"});
   }
   if(lastCh===7){
-    tasks.push({prio:'md',title:'Oongka-Unlock permanent machen',desc:'Oongka ist nach Kapitel 7 nur scripted dabei — PERMANENT erst nach 2 Kapitel-8-Quests!',meta:['Kapitel 8','Companion'],action:"showSec('quests');qTab('mq')"});
+    tasks.push({prio:'md',title:'Oongka-Unlock permanent machen',desc:'Oongka ist nach Kapitel 7 zeitweise nicht spielbar — laut game8 wird er mit der Greymanes-Quest "Words Left by the Riverside" (Kapitel 8) dauerhaft verfügbar.',meta:['Kapitel 8','Companion'],action:"showSec('quests');qTab('mq')"});
   }
 
   // 3. Greymane fortschreiten
@@ -6843,9 +6851,9 @@ function autoSearchTags(scope){
 }
 
 // Ein Treffer in einem zugeklappten <details> ist unsichtbar: der Zaehler nennt
-// Treffer, das Bild zeigt nichts. Betrifft vor allem die 184 Fraktionsquests, die in
+// Treffer, das Bild zeigt nichts. Betrifft vor allem die 218 Fraktionsquests, die in
 // <details class="fac-fac"> stecken. Nur VORFAHREN aufklappen, nicht den Treffer
-// selbst -- sonst klappen bei jeder Suche alle 78 Nebenquest-Details auf.
+// selbst -- sonst klappen bei jeder Suche alle 107 Nebenquest-Details auf.
 function _openForSearch(el){
   let d=el.parentElement?el.parentElement.closest('details'):null;
   while(d){
@@ -8477,7 +8485,7 @@ function renderSkills(){
 
   document.getElementById('skp-oongka').innerHTML=
     '<div class="card" style="margin-bottom:12px"><div class="ct">Oongka</div><div class="crows">'+
-    '<div class="crow"><span class="cl">Unlock</span><span class="cv">Ende Kap. 7 (Twisted Fate), nach Ludvig. PERMANENT erst nach 2 Kap.-8-Quests!</span></div>'+
+    '<div class="crow"><span class="cl">Unlock</span><span class="cv">Ende Kap. 7 (Twisted Fate), nach Ludvig. Dauerhaft laut game8 erst nach der Kap.-8-Quest Words Left by the Riverside.</span></div>'+
     '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">DEFAULT</span></div>'+
     '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack (via White Crow Questline), Vertical Flight</span></div>'+
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse</span></div>'+
@@ -9456,7 +9464,7 @@ function toggleChDone(num){
 // Grundbestand aus game8; Pailune-Haendlerreihe gegen gaming.tools-Datamine und Camzillasmom abgeglichen.
 // Delesyia-Ausbau 2026-07-23: 17 von 18 "Delesyia Requests" einzeln ergaenzt; "The Great Marni"
 // ist bereits als A-Favor-for-Delesyia-Eintrag im Fraktionsbereich vorhanden und wird nicht dupliziert.
-// Die 26 "[NPC]'s Request" im Greymane Camp sind NICHT hier, sondern in GREYMANE_COMMISSIONS (eigene
+// Die 27 "[NPC]'s Request" im Greymane Camp sind NICHT hier, sondern in GREYMANE_COMMISSIONS (eigene
 // Sektion). 'Sweet Deal' ist Greymanes-Fraktionsquest (Scattered Embers / Favorable Trade), nicht
 // missable belegt -- nur Softlock-Bug bekannt.
 

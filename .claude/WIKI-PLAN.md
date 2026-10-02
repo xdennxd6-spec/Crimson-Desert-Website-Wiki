@@ -63,10 +63,22 @@ game8, Fextralife, PowerPyx, VULKK, questlog. Unsicheres als `conf` bzw. „nich
   - Team B (Nebenquests & Fraktionen) **nur eingeschränkt**: Das WebSearch-Kontingent der Session (200) war erschöpft,
     questlog lieferte nur eine JS-Hülle, Fextralife 404, game8 nicht erreichbar. Eingebaut nur 13 kleine, belegte bzw.
     rein sprachliche Änderungen (u. a. Calphadean-Requests einzeln: 179 → 184 Fraktionsquests).
-- **Block 2b (offen): Faktenprüfung FAC_DATA (184), SIDE_QUESTS (78), GREYMANE_COMMISSIONS (27), Sanctum (16)
-  wiederholen** — in einer NEUEN Session (frisches WebSearch-Kontingent), vor Block 3. questlog-Daten über deren
-  API statt HTML abrufen; Fextralife-URLs über die Suche statt geraten.
-
+- **Block 2b: erledigt 03.10.2026** (Workflow `wf_7a8d62cf-6f6`, 25 Agenten, höchstens 2 gleichzeitig; nur die Integration
+  lief mit Opus bei mittlerer Denktiefe). Hauptquelle war ein lokaler Abzug der questlog-Datenbank über deren tRPC-API
+  (`~/cdwiki-work/questlog/{en,de}`, Suche: `~/cdwiki-work/tools/ql-find.py`; 135 Fraktionen, 809 Quests, 4423 Missionen).
+  322 belegte Vorschläge: 230 bestätigt, 70 in korrigierter Fassung, 4 widerlegt, 18 unsicher.
+  - FAC_DATA: rund 160 Feldkorrekturen (Belohnungen, Overviews nach den offiziellen Texten, questlog-Namen mit Alias);
+    jetzt 55 Fraktionen und 218 Fraktionsquests (vorher 53 und 184). Neu sind Hernand's Politics, Skoghorn Tribe,
+    House-Celeste-Bounties, 13 Greymane-Camp-Quests; Pailune-Bounties als Container.
+  - SIDE_QUESTS: 107 (vorher 78) mit belegten Startorten und Belohnungen. 5 Titel tragen jetzt den Spielnamen, der
+    gespeicherte Fortschritt wird über `SQ_RENAMES`/`migrateSQRenames` in index.html übernommen.
+  - Sanctums: alle 16 Belohnungen eingetragen (bleibt bei 16; Transcendence ist eine Abyss-Challenge).
+    GREYMANE_COMMISSIONS: Notizen, gm27 = Diederik's Request (IDs unverändert).
+  - Reste aus Block 2: Oongka-Permanenz (Words Left by the Riverside), ms15, beide „In Ashes“, Time to Face Justice
+    (questlog: Time of Reckoning), Stolen Quarry, Kap.-11-warn.
+  - Checks grün, Render-Check: tr 519, data_s 2692, 0 Fehler, 0 doppelte IDs, 34 Sektionen.
+  - Weiterhin offen: ca. 349 Tales-/Favor-/Corners-Missionen und die Bounties von Demeniss, Delesyia und Crimson Desert
+    (siehe Backlog „Aus Block 2b“). Diese Reste können bei Gelegenheit nachgezogen werden; als Nächstes kommt Block 3.
 ## Backlog (aus den Blöcken gesammelt)
 
 _wird nach jedem Block ergänzt_
@@ -97,3 +109,16 @@ _wird nach jedem Block ergänzt_
 - **Block 6 (Technik & Qualität) — Struktur/Namensformat:** Sub-Chapter-Gliederung im Modell; Epilog als CHAPTERS-Eintrag (Label-Logik); deutsche Kapiteltitel 9-12 (pcgames.de); Kap.-11-Namensvarianten (Thunder Tank/Crusher, Cloud/Flying Orbian).
 - **Laufend (Patch-Check) — Quellenabgleich:** Zugang zu questlog.gg (JS-App) für Quest-/Missionsnamen, Container; Demenissian-Delegation-Reward (Gale I vs. Swift I); Axiom Bracelet Prolog; unbelegte Tipps (Angeln Prolog, Palmar Pill hinter dem Haus, Barden Middler, Seal of Greed); Golden-Star-Patch-2.00.00-Check; neue Memory Fragments Patch 2.00.00; Shackle Breaking Hammer/Felix; Gating Vellua/Solumen; Hooves Through the Wind; Grimzle-Titel; CHAPTERS-Reste (Kap. 1 items/tip, Kap. 8 Brass Rose Rapier, Kap. 10 missable); conf-Stufen und isNew bei Fraktionen und Nebenquests.
 - **Block 6 (Technik & Qualität) — Schreibweise Silverwolf Mountain:** PowerPyx schreibt „Battle at Silverwolf Mountain“ (Questname, in MAIN_QUESTS und BOSSES.quest so angeglichen). Als Ortsname steht „Silver Wolf Mountain“ noch 16× (d01 3, d04 1, d05 8, d06 3, index.html 1) neben „Silverwolf Mountain“ 8× — offiziellen Ortsnamen belegen und einheitlich ziehen.
+
+### Aus Block 2b, Abnahme (konsolidiert), Stand 03.10.2026
+- **Block 2b (Reste) — Tales-/Favor-/Corners-Missionen:** 349 offene questlog-Missionen (Tales of Residents/Merchants, A Favor for Hernand/Demeniss/Crimson Desert, Corners, Tales After) als SIDE_QUESTS-Einträge mit neuen Namen; Namenskollisionen (Where the Wind Blows, Safety First) mit Suffix.
+- **Block 2b (Reste) — Bounty Notices:** Demeniss (13), Delesyia (11), Crimson Desert/Tommaso (10) ohne belastbare Guide-Quelle; Fextralife/PowerPyx suchen, dann je Region Sammelquest.
+- **Block 2b (Reste) — Dopplungen FAC/SIDE bereinigen:** Je Doppelung Primäreintrag festlegen; FAC behalten empfohlen. Calphadean-Anlaufstelle (Temir vs. Peregrine) klären.
+- **Block 2b (Reste) — Verpassbar-Flags und Pailune-Extras:** miss bei Harry/Lola/Gunter und Mounts mit Zweitquelle prüfen; Extra-Belohnungen der 13 Pailune-Händleraufträge ingame/mehrquellig klären; Plentiful Greeting Silver vs. Copper.
+- **Block 2b (Reste) — Fraktions-Lücken und Zuordnung:** Fehlende Missionen: Hound's Gate, Foundation of Abundance, Forsaken Factory, Spear Left Behind, Gathered Will (10), Solid Foundation (6), Concern of the Tannery, The Clue for Chaos, Black Bears' Claw. Regionszuordnung Aeserion und House Wells; Alfonso-Reihenfolge; The Missing Forbidden Book/Investigation; Legendary Animals (22 Jagdmissionen).
+- **Block 2b (Reste) — Kapitel-Gates und Contribution-Werte:** Gates und Beträge mit game8/PowerPyx/Fextralife gegenprüfen (Vellua, Solumen, Calphadean, Kharonso, Pailune/Demeniss, Delesyia).
+- **Block 2b (Reste) — Hauptquest-Aliase:** MAIN_QUESTS-Namensabgleich zu questlog (Time of Reckoning, Foul-Mouthed Reunion/Familiar Curses, Demeniss Bound, Bared Fangs, A Stand of Resolve); fehlende Belohnungen Bared Fang, Rekindled Hope, Podium of Resolve.
+- **Block 3 (Ausrüstung) — Mount-Stats und Itemnamen:** Stats von White Bear, Snowwhite Deer, Ibex, Warthog nur teilweise belegt; Champion's vs. Combat God's Plate Gloves; Machina Plate Armor Set Drop; Bossnamen Lithus/Beloth/Warspike Commander; Demenissian-Delegation Gale I vs. Swift I.
+- **Block 4 (Crafting & Sammeln) — Items, Cores, Bounty-Orte:** Kuku-Blueprint-Zuordnung zu Devotion/Exaltation prüfen; Core-Übersicht je Sanctum im Crafting; Pump Kick Widerspruch (For Honor); Bounty-Orte Alessio/Blix/Bianca und Beträge in d06; Firefly Lantern miss-Flag.
+- **Block 5 (Welt & Figuren) — Hexen, Sanctums, Fraktionen:** Hexen neu prüfen (Sylvia, The Hermit Witch/Refined Power, Hexe Marie, White Crow/Mortification, Frost-Mantle-Aussagen); Sanctum-Regionen (Temperance/Benediction/Expiation, Antumbra Order -> Pywel, Skull Knight Region); fehlende Fraktionen Wyvernflames, H.A.L.L., Tinkertons, Marnirail, Dusksongs, Tommaso, Varnia, Urdavah, Marni-Anlagen; Greymanes-Overview '~99 Einträge'.
+- **Block 6 (Technik & Qualität) — Roadmap-Empty-State:** 'TRUE ENDING UNLOCKED' von gmDone>=27 entkoppeln, GREYMANE_COMMISSIONS.length statt Hartkodierung; lastCh-Schwelle prüfen.

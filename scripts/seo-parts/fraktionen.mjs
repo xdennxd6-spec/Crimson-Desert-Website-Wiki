@@ -27,14 +27,14 @@
 //
 // Datenbesonderheiten (gemessen mit G:\Claude\Crimson-Wiki-SEO-NPCs-Fraktionen\
 // fraktionen-explore.mjs am 26.08.2026):
-//  - Alle 184 Quests haben trigger/prereq/reward vollstaendig belegt (keine
+//  - Alle 218 Quests (Stand 02.10.2026, Block 2b; vorher 184) haben trigger/prereq/reward vollstaendig belegt (keine
 //    "—"/"-"/leeren Platzhalter) -- anders als hauptquests.mjs braucht dieses
 //    Modul deshalb KEINE isReal()/cell()-Fallback-Logik, esc() genuegt direkt.
-//  - overview ist bei allen 53 Fraktionen belegt (79-173 Zeichen).
-//  - 41 von 53 Fraktionen tragen isNew:true. Das bedeutet "neu ins Wiki
+//  - overview ist bei allen 55 Fraktionen belegt (Stand 02.10.2026).
+//  - 43 von 55 Fraktionen tragen isNew:true. Das bedeutet "neu ins Wiki
 //    aufgenommen", NICHT "neu im Spiel" -- Badge-Text ist deshalb bewusst
 //    "Neu erfasst", nicht "NEU" (Verwechslungsgefahr mit Spielinhalt).
-//  - conf ist bei 161 Quests "high", 15 "medium", 3 "low". Die Badge-Texte
+//  - conf ist bei 134 Quests "high", 81 "medium", 2 "low" (02.10.2026). Die Badge-Texte
 //    "Quelle: teils belegt" (medium) / "Quelle: unsicher" (low) uebernehmen
 //    woertlich die Formulierung aus facBadges() in index.html (dort schon
 //    etabliert fuer denselben Datensatz) statt eigene Begriffe zu erfinden.

@@ -2,7 +2,7 @@
 
 ## Offene Aufgaben
 - **ZUERST `git fetch && git pull --ff-only`** (siehe Sync-Disziplin unten), dann aktuellen `index.html`-Stand bewerten — NICHT blind dem alten Handover folgen.
-- **Arbeitsplan Aktualisierung & Faktencheck (seit 01.10.2026): `.claude/WIKI-PLAN.md`** — Blöcke 1–7 mit Terminen, Rollen (Opus nur Orchestrator-Planung/-Integration, Rest Sonnet), Stand und Backlog. Block 1 (Aktualität + Bosse) erledigt am 02.10.2026, gearbeitet auf dem Hosting-Pi (winklerWak) in `~/cdwiki-work/repo`.
+- **Arbeitsplan Aktualisierung & Faktencheck (seit 01.10.2026): `.claude/WIKI-PLAN.md`** — Blöcke 1–7 mit Terminen, Rollen (Opus nur Orchestrator-Planung/-Integration, Rest Sonnet), Stand und Backlog. Block 1 (Aktualität + Bosse) und Block 2 (Story & Quests, inkl. 2b Fraktionen/Nebenquests am 03.10.) erledigt, gearbeitet auf dem Hosting-Pi (winklerWak) in `~/cdwiki-work/repo`.
 - `.claude/audit-handover.json` ist der Fable-5-Vollaudit vom 2026-06-10 und inzwischen GROSSTEILS ERLEDIGT (NPCs, Bestiarium, Crafting 12->310, Witch-Synthese-Baum, SEO-Seiten, Patch 1.11, Kuku-Gadgets, Abyss-Cores). Offen nur noch marginale Optionalpunkte (Waffen-crit/slots-Restluecken, PWA-Manifest-Screenshots, Monolith-Aufteilung nach Absprache).
 
 ## Zweites Repo: der Arbeitskontext (privat)

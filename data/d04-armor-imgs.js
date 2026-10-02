@@ -793,43 +793,43 @@ const ARMOR_IMGS={
   "The Masked Liberator's Leather Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0099_01_index05.webp",
 };
 const GREYMANE_COMMISSIONS=[
-  // Neu aufgebaut 2026-06-01 (Recherche Game8 Archiv 586021): echte Bewohner-Anfragen "[NPC]'s Request", ALLE im Greymane Camp (Howling Hill, Hernand) — NICHT über Regionen/Kapitel verteilt. Freischaltung: von geretteten/rekrutierten Kameraden gepostet (Journal → Faction Quests → Greymanes). Belohnung je: Medium Bag (+3 Inventarslots). KEINE finale "True Ending Gate"-Commission — und ueberhaupt keine Verbindung zum True Ending: die Nachrecherche vom 22.08.2026 (6 Quellen, adversarial gegengeprueft) fand KEINE einzige Quelle, die Commissions mit dem Ende verknuepft. Die drei fruehereren Wiki-Stellen, die das behaupteten, sind an dem Tag entfernt worden. Zur Zahl 27: sie stammt aus dem In-Game-Zaehler (x/27) und aus einem TheGamer-Artikel (27.04.2026), den mehrere SEO-Seiten wortgleich uebernommen haben — eine Kette, keine Mehrfachbestaetigung. Game8 listet 26 Namen (Carl bis Vernon) ohne Summe; der 27. Name ist nirgends dokumentiert. Yann gehoert zu "Scattered Embers" und ist NICHT die 27. Commission. Belegt ist als Belohnung je Commission nur "Medium Bag x1" (Game8); die Umrechnung "+3 Slots" und die Summe "+81" stammen allein aus der TheGamer-Kette.
-  {id:"gm1",n:1,name:"Carl's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm2",n:2,name:"Ronnie's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm3",n:3,name:"Ross's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm4",n:4,name:"Tranan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm5",n:5,name:"Brice's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm6",n:6,name:"Wynstan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm7",n:7,name:"Conrad's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm8",n:8,name:"Alec's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm9",n:9,name:"Eric's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm10",n:10,name:"Connor's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm11",n:11,name:"Oliver's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm12",n:12,name:"Ronald's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm13",n:13,name:"Brant's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm14",n:14,name:"Devan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm15",n:15,name:"Evelyn's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm16",n:16,name:"Joan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm17",n:17,name:"Pierce's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm18",n:18,name:"Niall's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm19",n:19,name:"Balder's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm20",n:20,name:"Terry's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm21",n:21,name:"Luther's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm22",n:22,name:"Duncan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm23",n:23,name:"Morrow's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm24",n:24,name:"Lars's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm25",n:25,name:"Gerald's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm26",n:26,name:"Vernon's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:""},
-  {id:"gm27",n:27,name:"27. Commission (Name nicht sicher belegt)",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Guides nennen 27 gesamt; Game8 listet 26 benannte. Genauer Name offen."}
+  // Neu aufgebaut 2026-06-01 (Recherche Game8 Archiv 586021): echte Bewohner-Anfragen "[NPC]'s Request", ALLE im Greymane Camp (Howling Hill, Hernand) — NICHT über Regionen/Kapitel verteilt. Freischaltung: von geretteten/rekrutierten Kameraden gepostet (Journal → Faction Quests → Greymanes). Belohnung je: Medium Bag (+3 Inventarslots). KEINE finale "True Ending Gate"-Commission — und ueberhaupt keine Verbindung zum True Ending: die Nachrecherche vom 22.08.2026 (6 Quellen, adversarial gegengeprueft) fand KEINE einzige Quelle, die Commissions mit dem Ende verknuepft. Die drei fruehereren Wiki-Stellen, die das behaupteten, sind an dem Tag entfernt worden. Zur Zahl 27: sie stammt aus dem In-Game-Zaehler (x/27) und aus einem TheGamer-Artikel (27.04.2026), den mehrere SEO-Seiten wortgleich uebernommen haben — eine Kette, keine Mehrfachbestaetigung. Game8 listet 26 Namen (Carl bis Vernon) ohne Summe; der 27. Name (Diederik's Request, gm27) ist seit 02.10.2026 durch questlog belegt (Quest 'Tales of the Greymanes', Q1000722, 27 Requests). Yann gehoert zu "Scattered Embers" und ist NICHT die 27. Commission. Belegt ist als Belohnung je Commission nur "Medium Bag x1" (Game8); die Umrechnung "+3 Slots" und die Summe "+81" stammen allein aus der TheGamer-Kette.
+  {id:"gm1",n:1,name:"Carl's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Carl (Provisions Keeper) will überschüssiges Leder als Vertrauensbeweis zur Totesmith Tannery bringen lassen: 5 Thick Hide dort abgeben, danach den Dank der Gerberei überbringen."},
+  {id:"gm2",n:2,name:"Ronnie's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Ronnie (Koch) bereitet ein Fest für die Moral des Camps vor: 5 Marbled Meat besorgen und abgeben."},
+  {id:"gm3",n:3,name:"Ross's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Ross (Dispatch Coordinator) hört Gerüchte über Banditenüberfälle auf die Halssius Apothecary: die Lage dort prüfen und zurückmelden."},
+  {id:"gm4",n:4,name:"Tranan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Tranan (Ausrüstungshändler/Quartermaster) wünscht ein Schwert des berühmten Schmieds von Hernand Castle: Rhett's Longsword besorgen und abgeben."},
+  {id:"gm5",n:5,name:"Brice's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Brice (Wagonmaster) braucht Rat zu Material und Bauweise eines langlebigen Wagens: Timberturner Wainwright aufsuchen, per Dispatch einen Wagen bauen lassen und die Fertigstellung melden."},
+  {id:"gm6",n:6,name:"Wynstan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Wynstan (Verbrauchsgüter-Handwerker) will gegen teure, schlechte Rohstoffe einen Direkthandel: der Goldleaf Merchant Guild ein Handelsangebot machen und das Ergebnis zurückmelden."},
+  {id:"gm7",n:7,name:"Conrad's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Conrad (Möbelbauer) will das Handwerksgeheimnis des besten Bettes: einen Gelehrten am Scholastone Institute fragen und das Geheimnis überbringen."},
+  {id:"gm8",n:8,name:"Alec's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Alec (Schmied) will sich bei Ronnie entschuldigen und selbst Fisch grillen: 1 Leopard Perch besorgen und abgeben."},
+  {id:"gm9",n:9,name:"Eric's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Eric (Barbier) will im Dorf der Kranken die Haare schneiden: sein Anliegen beim Dorfheiler in Sunset Valley überbringen und die Besuchserlaubnis zurückmelden."},
+  {id:"gm10",n:10,name:"Connor's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Connor (Lapidarist) will Accessoires für die Camp-Kasse fertigen: 1 Gold Ore als Muster-Material besorgen und abgeben."},
+  {id:"gm11",n:11,name:"Oliver's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Oliver (Dyer) sucht einen stark duftenden Kräuterstoff für einen Duft-Farbstoff: 3 Rosemary abgeben."},
+  {id:"gm12",n:12,name:"Ronald's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Ronald will eine Versorgungstafel vor Carls Lager aufstellen: 5 Timber abgeben."},
+  {id:"gm13",n:13,name:"Brant's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Brant (von den Erinnerungen geplagt) bittet um Alkohol: 1 Wine abgeben."},
+  {id:"gm14",n:14,name:"Devan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Devan will einen Gedenkstein für gefallene Kameraden errichten: 5 Stone abgeben."},
+  {id:"gm15",n:15,name:"Evelyn's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Evelyn will das Bogentraining der Greymanes beginnen: 20 Arrow abgeben."},
+  {id:"gm16",n:16,name:"Joan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Joan braucht Leder, um den Griff ihrer Axt neu zu wickeln: 3 Thin Hide abgeben."},
+  {id:"gm17",n:17,name:"Pierce's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Pierce will sich auf künftige Besuche vorbereiten: die Glücksspiel-Fähigkeiten der Gegner an der Hernand Tavern einschätzen und berichten."},
+  {id:"gm18",n:18,name:"Niall's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Niall will ein Signalhorn gegen den Hinterhalt der Black Bears bauen: 1 Short Horn abgeben."},
+  {id:"gm19",n:19,name:"Balder's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Balder wünscht Geschenke für die von ihm unterrichteten Kinder: den Bekker Large Shield überbringen."},
+  {id:"gm20",n:20,name:"Terry's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Terry will einen Apfel, der die Zukunft zeigt: 5 Apple abgeben."},
+  {id:"gm21",n:21,name:"Luther's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Luther will die Lederflicken an der Rüstung der Kameraden erneuern: 4 Thin Hide abgeben."},
+  {id:"gm22",n:22,name:"Duncan's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Duncan will für Ronnie ein vertrautes Gericht kochen: 1 Northern Pike (Pailune Lake) abgeben."},
+  {id:"gm23",n:23,name:"Morrow's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Morrow will den Menschen von Sunset Valley Kräuter zurückgeben: 5 Shrubby Sophora abgeben."},
+  {id:"gm24",n:24,name:"Lars's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Lars braucht Angelköder: 3 Jewel Beetle abgeben."},
+  {id:"gm25",n:25,name:"Gerald's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Gerald will Eier auf einem Schild braten: 5 Egg abgeben."},
+  {id:"gm26",n:26,name:"Vernon's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Vernon will mit einer Strohpuppe waffenlos trainieren: 5 Fleece abgeben."},
+  {id:"gm27",n:27,name:"Diederik's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Diederik (Schneider) lässt geflickte Kleidung (Weasel Leather Armor) ins Kloster für bedürftige Nachbarn bringen: dort abliefern und den Dank des Priesters überbringen. In der questlog-Reihenfolge steht diese Commission an Position 9 (zwischen Alec und Eric); game8 führt sie nicht."}
 ];
 const SANCTUM_DATA=[
-  // Neu aufgebaut 2026-06-01 (Fakten-Audit + Recherche PowerPyx/Game8): korrekte Hexen-Zuordnung + Regionen; 3 zuvor fehlende Lyselia-Sanctums (Veneration/Oblation/Faith) ergänzt. 16 Sanctums gesamt (15 reinigbar + Story-Mortification).
+  // Neu aufgebaut 2026-06-01 (Fakten-Audit + Recherche PowerPyx/Game8): korrekte Hexen-Zuordnung + Regionen; 3 zuvor fehlende Lyselia-Sanctums (Veneration/Oblation/Faith) ergänzt. 16 Sanctums gesamt (15 reinigbar + Story-Mortification). 'Sanctum of Transcendence' (te_abyss_35) ist eine Abyss-Challenge und zählt nicht zur Lightbringer-Trophy.
   {id:"te8",name:"Sanctum of Absolution",region:"Hernand (Süd/Südwest)",note:"Elowen (Wisdom). Boss Antumbra's Sword → Vessel of Dark Pursuit + Wound of Darkness Core"},
   {id:"te5",name:"Sanctum of Temperance",region:"Hernand (Pororin Forest / Unicorn Cliff)",note:"Elowen (Wisdom)"},
   {id:"te6",name:"Sanctum of Penitence",region:"Hernand (Plateau SO der Stadt / The Ironwood)",note:"Elowen (Wisdom)"},
   {id:"te7",name:"Sanctum of Benediction",region:"Hernand (Everfrost Mountains, West)",note:"Elowen (Wisdom). Leather Helm of the Fallen Kingdom (Momentum-Core) — fertiges Item aus verstecktem Raum, kein Blueprint"},
   {id:"te9",name:"Sanctum of Exaltation",region:"Pailune (Silver Wolf Mountain)",note:"Bari (Kindness)"},
-  {id:"te11",name:"Sanctum of Solace",region:"Pailune (Silver Wolf Mtn, Südost-Kette)",note:"Bari (Kindness)"},
+  {id:"te11",name:"Sanctum of Solace",region:"Pailune (Silver Wolf Mtn, Südost-Kette)",note:"Bari (Kindness). Boss Antumbra's Staff → Guidance of Dark Pursuit"},
   {id:"te10",name:"Sanctum of Deliverance",region:"Hernand (Stormtalon Ridge, SO)",note:"Bari (Kindness)"},
   {id:"te13",name:"Sanctum of Atonement",region:"Hernand (Haunted Hill, West)",note:"Bari (Kindness)"},
   {id:"te17",name:"Sanctum of Devotion",region:"Delesyia (Hushwind Hills / Dewhaven)",note:"Lyselia (Humility). Reward: Blueprint Kuku Ice-Resistant Armor"},
@@ -838,8 +838,8 @@ const SANCTUM_DATA=[
   {id:"te31",name:"Sanctum of Faith",region:"Delesyia (Grey Forest, Ost)",note:"Lyselia (Humility)"},
   {id:"te12",name:"Sanctum of Expiation",region:"Demeniss (Nord/NW, nördl. Gate of Truth)",note:"Areciel (Strength)"},
   {id:"te14",name:"Sanctum of Renunciation",region:"Drywind Valley / Red River (Grenze Demeniss/Crimson Desert/Delesyia)",note:"Areciel (Strength). Region quellenübergreifend uneinheitlich (Grenzgebiet)"},
-  {id:"te15",name:"Sanctum of Revelation",region:"Demeniss (Serpent Marsh, NO-Insel)",note:"Areciel (Strength). Reward: Endgame Abyss-Core + Stärke-Infusion"},
-  {id:"te16",name:"Sanctum of Mortification",region:"Demeniss (Denn River, Kap. 9 Story)",note:"White Crow (Story). Quest 'Fragments of Darkness'"},
+  {id:"te15",name:"Sanctum of Revelation",region:"Demeniss (Serpent Marsh, NO-Insel)",note:"Areciel (Strength). Boss Antumbra's Spear → Thorn of Dark Pursuit + Core of Revelation"},
+  {id:"te16",name:"Sanctum of Mortification",region:"Demeniss (Denn River, Kap. 9 Story)",note:"Story Kap. 9 (Veiled Witch / White Crow, Quellen uneinheitlich). Quest 'Fragments of Darkness'. Core of Mortification"},
 ];
 const SANCTUM_IDS=SANCTUM_DATA.map(s=>s.id);
 const BUILDS=[
@@ -1118,7 +1118,7 @@ const ACHIEVEMENTS=[
   {id:'fragment-half',ico:'📜',name:'Memory-Sammler',desc:'100+ Memory Fragments entdeckt',check:()=>typeof _frTotal==='function'&&_frTotal()>=100,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/100,1):0},
   {id:'fragment-master',ico:'🧠',name:'Visione-Master',desc:'Alle 201 Memory Fragments entdeckt',check:()=>typeof _frTotal==='function'&&_frTotal()>=201,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/201,1):0}
 ];
-const TROPHY_NOTE="PS5-Liste: 35 Trophäen (1 Platin, 4 Gold, 10 Silber, 20 Bronze); Grade durch PowerPyx + Fextralife bestätigt, Verteilung mit PSNProfiles abgeglichen. Xbox/Steam: identische 34 Achievements (1000 GS) ohne Platin. PowerPyx erwähnt KEINEN Point of No Return bei 'Orbian'/Kap.11 — nach der Story gibt es Free-Roam (aber kein Quest-Replay). Die 'verpassbar'-Markierungen beruhen auf begrenzter Verfügbarkeit einzelner Challenges, nicht auf einem Story-Cutoff; andere Quellen stufen die Liste als komplett nicht-verpassbar ein (daher conf medium).";
+const TROPHY_NOTE="PS5-Liste: 35 Trophäen (1 Platin, 4 Gold, 10 Silber, 20 Bronze); Grade durch PowerPyx + Fextralife bestätigt, Verteilung mit PSNProfiles abgeglichen. Xbox/Steam: identische 34 Achievements (1000 GS) ohne Platin. Ein Point of No Return bei 'Orbian'/Kap. 11 ist in keiner geprüften Quelle genannt (PowerPyx, game8, questlog; Fehlen eines Belegs ist kein Gegenbeweis) — nach der Story gibt es laut PowerPyx Free-Roam (aber kein Quest-Replay). Die 'verpassbar'-Markierungen beruhen auf begrenzter Verfügbarkeit einzelner Challenges, nicht auf einem Story-Cutoff; andere Quellen stufen die Liste als komplett nicht-verpassbar ein (daher conf medium).";
 const TROPHY_ROADMAP=["Geschätzt 200–300+ Stunden bei Schwierigkeit 7/10, 1 Playthrough, keine Online- oder Glitch-Trophäen — der Aufwand ist zeit-, nicht skill-getrieben.","Zuerst ca. 25+ Stunden Vorarbeit: die 8 versteckten Glocken aktivieren (entnebelt die Karte; Pailune-Glocke braucht Story-Fortschritt), Schnellreisepunkte freischalten und alle 141 Sealed Abyss Artifacts einsammeln — jedes schaltet eine Challenge frei, Fortschritt zählt nicht rückwirkend.","Story und Challenges parallel spielen; eiserne Regel: feindliche Camps NICHT vorzeitig befreien und die 10 Spezialwaffen niemals verkaufen/wegwerfen/umwandeln, sonst werden einzelne Challenges unerfüllbar.","Nach Kapitel 7 die Questreihen 'Reconstructing Pailune' und 'Scattered Embers' abschließen und per Expeditionen Ressourcen für die sechs Wiederaufbauphasen farmen (für 'Proud Returnee').","Nach dem Story-Ende ist Free-Roam für alle restlichen Challenges möglich (kein Quest-Replay); zeitintensive kumulative Challenges möglichst früh beginnen."];
 const TROPHIES=[
   {"name":"Pywel Legend","grade":"platinum","desc":"Alle anderen Trophäen in Crimson Desert freischalten.","miss":false,"sec":null,"conf":"high"},

@@ -885,8 +885,8 @@ const FOOD_ELIXIRS=[
 ];
 const TRUE_ENDING=[
   {id:"te1",cat:"Companions",task:"Damiane Arc komplett (bis Kap. 8 Blood Coronation + Solo + Lucian Bastier)"},
-  {id:"te2",cat:"Companions",task:"Oongka permanent: Quest 'Words Left by the Riverside' (S Pailune East Gate, Kap. 8)"},
-  {id:"te3",cat:"Companions",task:"Oongka permanent: Quest 'Strength Held in the Fingertips' (Calphade Castle Arm-Wrestling, Kap. 8)"},
+  {id:"te2",cat:"Companions",task:"Oongka dauerhaft verfügbar: Quest 'Words Left by the Riverside' (Greymanes-Fraktionsquest, Kap. 8; Oongka am Fluss bei der Beighen Weavery südlich von Pailune)"},
+  {id:"te3",cat:"Companions",task:"Optional: Greymanes-Quest 'Strength Held in the Fingertips' (Oongka bei Calphade Castle, nach der Angel-Quest, ab Kap. 8; laut PowerPyx Voraussetzung dafür, dass der Champion der Armdrück-Challenge 'Hero's Handshake 2' erscheint; kein belegter Bezug zu Oongkas Verfügbarkeit)"},
   {id:"te_abyss_01",cat:"Abyss",task:"Ethereal Pathway",required:true},
   {id:"te_abyss_02",cat:"Abyss",task:"Axiom Archive",required:true},
   {id:"te_abyss_03",cat:"Abyss",task:"Root’s End",required:true},
