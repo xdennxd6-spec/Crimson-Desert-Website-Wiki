@@ -27,7 +27,7 @@
 //
 // Datenbesonderheiten (gemessen mit G:\Claude\Crimson-Wiki-SEO-NPCs-Fraktionen\
 // fraktionen-explore.mjs am 26.08.2026):
-//  - Alle 179 Quests haben trigger/prereq/reward vollstaendig belegt (keine
+//  - Alle 184 Quests haben trigger/prereq/reward vollstaendig belegt (keine
 //    "—"/"-"/leeren Platzhalter) -- anders als hauptquests.mjs braucht dieses
 //    Modul deshalb KEINE isReal()/cell()-Fallback-Logik, esc() genuegt direkt.
 //  - overview ist bei allen 53 Fraktionen belegt (79-173 Zeichen).
@@ -38,7 +38,7 @@
 //    "Quelle: teils belegt" (medium) / "Quelle: unsicher" (low) uebernehmen
 //    woertlich die Formulierung aus facBadges() in index.html (dort schon
 //    etabliert fuer denselben Datensatz) statt eigene Begriffe zu erfinden.
-//  - miss:true kommt in FAC_DATA nicht vor (0 von 179) -- anders als bei den
+//  - miss:true kommt in FAC_DATA nicht vor (0 von 184) -- anders als bei den
 //    Hauptquests gibt es hier keine "verpassbar"-Badges.
 //  - Fraktions- und Questnamen sind ueber den gesamten Datensatz eindeutig
 //    (keine Dubletten, gegengeprueft) -- rowId() kann sich darauf verlassen.

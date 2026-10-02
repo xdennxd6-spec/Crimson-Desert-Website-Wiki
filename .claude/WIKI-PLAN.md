@@ -10,8 +10,8 @@ Gearbeitet wird auf dem Pi (winklerWak) in `~/cdwiki-work/repo` (Klon von `origi
 | Rolle | Wer | Aufgabe |
 |---|---|---|
 | Prozessverantwortlicher | Claude, Haupt-Session | Plan, Workflow starten, Abnahme, Commit/Push, Meldung per Telegram |
-| Orchestrator A / B | Opus | Lagebild, genau 5 Unteraufträge planen, bestätigte Änderungen einbauen (Integration mit mittlerer Denktiefe) |
-| Unteragenten (je 5) | Sonnet (mittlere Denktiefe) | nur Recherche: belegte Änderungsvorschläge (Ist-Text wörtlich, Soll-Text im Wiki-Stil, Quellen mit Zitat) |
+| Orchestrator A / B | Planung Sonnet (ab Block 2, hohe Denktiefe), Integration Opus (mittlere Denktiefe) | Lagebild, genau 5 Unteraufträge planen, bestätigte Änderungen einbauen |
+| Unteragenten (je 5) | Sonnet (mittlere Denktiefe); je Team höchstens 1 Auftrag mit Opus, wenn die Aufgabe es verlangt | nur Recherche: belegte Änderungsvorschläge (Ist-Text wörtlich, Soll-Text im Wiki-Stil, Quellen mit Zitat) |
 | Gegenprüfung | Sonnet, unabhängig (hohe Denktiefe) | versucht jeden Vorschlag zu widerlegen; nur Bestätigtes wird eingebaut |
 | Abnahme im Workflow | Sonnet (mittlere Denktiefe) | Diff-Review, Checks, Backlog, Commit-Text; danach Schlussprüfung durch den Prozessverantwortlichen |
 
@@ -53,7 +53,17 @@ game8, Fextralife, PowerPyx, VULKK, questlog. Unsicheres als `conf` bzw. „nich
   (geprüft 01.10.), Roadmap-Bilanz Juni–Sept., PATCHES-Metadaten (Uhrzeit, boardNo, Plattformstand); 100 Bosse
   (neu: Ludvig (Phase 1); „Avatar of Umbra“ → „Myurdin, the Avatar of Umbra“ mit localStorage-Migration),
   Quests/Beute/Schwächen/Lore korrigiert. Checks grün, Render-Check: tr 519, data_s 2624, 0 Fehler, 0 doppelte IDs.
-- Nächster Schritt: Fr 02.10.2026 Patch-Check, dann Block 2 (Story & Quests).
+- **Block 2: teilweise erledigt 02.10.2026** (Workflow `wf_09a44cf1-9b4`, 24 Agenten), Commit nur lokal; Push zusammen
+  mit Block 1, sobald GitHub auf dem Pi verbunden ist. Patch-Check 02.10. (02:42): keine neue Meldung nach #134.
+  - Team A (Hauptstory) vollständig: 77 Vorschläge → 74 eingebaut. CHAPTERS mit echten Kapitelnamen (vorher teils
+    erfunden), Items/Missables/Boss-Strategien korrigiert, MAIN_QUESTS-Felder überarbeitet, ~35 Quests mit
+    PowerPyx-Beleg auf conf high. TRUE_ENDING (68) und MISSABLE_ITEMS (15) gegen PowerPyx/VULKK geprüft: korrekt.
+  - Team B (Nebenquests & Fraktionen) **nur eingeschränkt**: Das WebSearch-Kontingent der Session (200) war erschöpft,
+    questlog lieferte nur eine JS-Hülle, Fextralife 404, game8 nicht erreichbar. Eingebaut nur 13 kleine, belegte bzw.
+    rein sprachliche Änderungen (u. a. Calphadean-Requests einzeln: 179 → 184 Fraktionsquests).
+- **Block 2b (offen): Faktenprüfung FAC_DATA (184), SIDE_QUESTS (78), GREYMANE_COMMISSIONS (27), Sanctum (16)
+  wiederholen** — in einer NEUEN Session (frisches WebSearch-Kontingent), vor Block 3. questlog-Daten über deren
+  API statt HTML abrufen; Fextralife-URLs über die Suche statt geraten.
 
 ## Backlog (aus den Blöcken gesammelt)
 
@@ -76,3 +86,12 @@ _wird nach jedem Block ergänzt_
 - **Block 6 (Technik & Qualität) — SEO, Format und Zeichen:** Kommentar in scripts/seo-parts/patch-notes.mjs („32 Eintraege“); Datumssemantik „Veröffentlicht am“ bei 2.00.02; ASCII-Transliterationen („fuer“, „ueber“ …) in index.html/data prüfen, ob sichtbar; Regionsfeld „The Abyss“ vs. „Abyss“ (split(' ')[0]) per Renderer-Anpassung vereinheitlichen; Format-Abweichungen der Bossnamen (Kommas) nur als Format; Typfilter-Zahlen auf Bossseite/SEO nach Typänderungen (Black Fang, Hemon); Switch-2-/Multiplayer-Hinweis optional; Namensschlüssel-Migration bei künftigen Umbenennungen (BOSS_RENAMES erweitern).
 - **Block 7 (DLC) — DLC nach Release (ab 30.10.2026):** Bosse, Gegner, Waffen, Rüstungen, Story-Voraussetzung, Inseln/Schiffe/Wirtschaftssystem, Beziehungen erfassen; DLC-Kasten von Vorschau auf Inhalt umstellen; SEO-Seiten um DLC ergänzen; vorher #134/#129 auf weitere Verschiebung prüfen, PS-Store-Metadaten (noch 15.10.), Epic (403), Marktliste-Stichprobe, Mac-Ankündigung, CEST/CET-Etikett.
 - **Laufend (Patch-Check) — Freitags-Patch-Check erweitern:** Apple-Versionsverlauf (itunes lookup id 6747100856) je Lauf festhalten; Known-Issues #68 EN/DE bei Änderung mit Zeitstempel archivieren; Steam-News-Abstände beobachten; revidierte 1.x-Notes (1.00.03 bis 1.11.00) inhaltlich gegen Revisionsstand prüfen; 1.14.00 Cross-Save/Steam-Mac-Angaben nachziehen; 1.13.00 DE/EN-Abweichung Kuku-Ausrüstung (Kliff/Oongka vs. Damiane/Oongka) vermerken; 2.00.00 Neustart-Übernahme (Questfortschritt) belegen; 2.01.00 Downloadgröße 3,7 GB (vulkk) belegen oder streichen; neue Roadmap, Switch 2, Multiplayer, 3Q26-Ergebnisse (Nov. 2026) beobachten; MP1st-Artikel sind per WebFetch lesbar, Wiki-Notizen zu HTTP 403 aktualisieren; vollständiger Abgleich der Boss-Listen (game8, Fextralife, PowerPyx) gegen alle 100 Namen.
+
+### Aus Block 2, Abnahme (konsolidiert), Stand 02.10.2026
+- **Block 2 (Reste) — Reste Block 2:** ms15 an „A Shadow in the Void“ angleichen; Oongka-Permanenz (Kap.-7-unlock, Kap.-8-warn, te2/te3, ms7/ms8) klären; miss-Flag-Semantik (For Honor, Time to Face Justice); zweites „In Ashes“ gegen questlog; Marni's Excavatron/„Stolen Quarry“; FAC-vs-SIDE_QUESTS-Dopplungen; 16 vs. 17 Sanctums (te_abyss_35); A5-Umfang (TRUE_ENDING, MISSABLE_ITEMS) nachholen; 27. Greymane Commission; Kap.-11-warn „Kein Point of No Return“ absichern.
+- **Block 3 (Ausrüstung) — Ausrüstung/Bosse:** Shield of Betrayal Questlinie (Undying statt Unyielding); Kailok-Strategie und Drop (Evasive Roll/Sword of the Lord vs. Wind Slash); Ludvig-Container „Dawnrise“; Leofric Musket Fundort (Lingering Shadow, Kap. 10); Kuku Ice-Resistant Armor Zuordnung; Marni Musket, Mechanical Clockwork Blaster, Frozen Heart Plate Cloak/Sonic Resonator; Reaper-Trio inkl. Elemore Rapier und New Moon als Elite Boss; BOSSES-Strategiereste (Draven Glider, Hexe Marie, Master Du, Myurdin All-Fours, Reed Devil Phase, Cassius R2, Black Bear Captain); Silverwolf/Silver Wolf Ortsnamen vereinheitlichen (d01:97,122, d02:727, d05:128).
+- **Block 4 (Crafting & Sammeln) — Skills/Missables/Sanctums:** Focused Force Palm (Ort, Kap.-9-Nachholmöglichkeit, WATCH_AND_LEARN, MISSABLE-Bezug); neue Missables prüfen (Marni Laser Helm Umbau, Vessel of Dark Pursuit); Sanctum-Felder (Regionen, Rewards, Bossbezug) prüfen.
+- **Block 5 (Welt & Figuren) — Fraktionen/Nebenquests/Hexen:** Hexe Elowen/Alfonso Estate (ms6); Hexen-Sanctum-Bezüge und Region Pywel; Marni-Fraktion (~27 Einträge, nur 1 erfasst); Gearmelt/Drywind-Regionsabgrenzung; Boss-Region vs. Quest-Trigger (Ravok, Queen Bismuth, Mechanicus); Sammel-/Platzhalter-Einträge auflösen; Celeste-Bounties; St. Halssius's House of Healing; Greymanes-Fraktion Details; te28 Fraktions-Threshold Beleg; deutsche Mischtitel SIDE_QUESTS 0-5 (Migration cd_sq_done nötig); Kapitel-Gates Demeniss/Pailune; Pailune Requests Vollständigkeit.
+- **Block 6 (Technik & Qualität) — Struktur/Namensformat:** Sub-Chapter-Gliederung im Modell; Epilog als CHAPTERS-Eintrag (Label-Logik); deutsche Kapiteltitel 9-12 (pcgames.de); Kap.-11-Namensvarianten (Thunder Tank/Crusher, Cloud/Flying Orbian).
+- **Laufend (Patch-Check) — Quellenabgleich:** Zugang zu questlog.gg (JS-App) für Quest-/Missionsnamen, Container; Demenissian-Delegation-Reward (Gale I vs. Swift I); Axiom Bracelet Prolog; unbelegte Tipps (Angeln Prolog, Palmar Pill hinter dem Haus, Barden Middler, Seal of Greed); Golden-Star-Patch-2.00.00-Check; neue Memory Fragments Patch 2.00.00; Shackle Breaking Hammer/Felix; Gating Vellua/Solumen; Hooves Through the Wind; Grimzle-Titel; CHAPTERS-Reste (Kap. 1 items/tip, Kap. 8 Brass Rose Rapier, Kap. 10 missable); conf-Stufen und isNew bei Fraktionen und Nebenquests.
+- **Block 6 (Technik & Qualität) — Schreibweise Silverwolf Mountain:** PowerPyx schreibt „Battle at Silverwolf Mountain“ (Questname, in MAIN_QUESTS und BOSSES.quest so angeglichen). Als Ortsname steht „Silver Wolf Mountain“ noch 16× (d01 3, d04 1, d05 8, d06 3, index.html 1) neben „Silverwolf Mountain“ 8× — offiziellen Ortsnamen belegen und einheitlich ziehen.
