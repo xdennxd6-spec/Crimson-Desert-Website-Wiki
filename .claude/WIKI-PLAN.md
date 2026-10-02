@@ -53,8 +53,10 @@ game8, Fextralife, PowerPyx, VULKK, questlog. Unsicheres als `conf` bzw. „nich
   (geprüft 01.10.), Roadmap-Bilanz Juni–Sept., PATCHES-Metadaten (Uhrzeit, boardNo, Plattformstand); 100 Bosse
   (neu: Ludvig (Phase 1); „Avatar of Umbra“ → „Myurdin, the Avatar of Umbra“ mit localStorage-Migration),
   Quests/Beute/Schwächen/Lore korrigiert. Checks grün, Render-Check: tr 519, data_s 2624, 0 Fehler, 0 doppelte IDs.
-- **Block 2: teilweise erledigt 02.10.2026** (Workflow `wf_09a44cf1-9b4`, 24 Agenten), Commit nur lokal; Push zusammen
-  mit Block 1, sobald GitHub auf dem Pi verbunden ist. Patch-Check 02.10. (02:42): keine neue Meldung nach #134.
+- **Block 2: teilweise erledigt 02.10.2026** (Workflow `wf_09a44cf1-9b4`, 24 Agenten). Patch-Check 02.10. (02:42):
+  keine neue Meldung nach #134.
+- **Block 1 + 2 gepusht und live am 02.10.2026** (`cbfc239..6166f6b`, Deploy auf dem Pi geprüft). GitHub ist auf dem
+  Pi seitdem per `gh` angemeldet (Konto xdennxd6-spec, HTTPS).
   - Team A (Hauptstory) vollständig: 77 Vorschläge → 74 eingebaut. CHAPTERS mit echten Kapitelnamen (vorher teils
     erfunden), Items/Missables/Boss-Strategien korrigiert, MAIN_QUESTS-Felder überarbeitet, ~35 Quests mit
     PowerPyx-Beleg auf conf high. TRUE_ENDING (68) und MISSABLE_ITEMS (15) gegen PowerPyx/VULKK geprüft: korrekt.
