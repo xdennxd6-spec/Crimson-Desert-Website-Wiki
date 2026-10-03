@@ -2007,6 +2007,17 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
    transform beeinflusst die Layout-Box NICHT -> Kartenaufteilung, Zeilenhoehen und Abstaende
    bleiben exakt wie vorher. Nachjustieren nur ueber --craft-ico-scale. */
 #craft-grid{--craft-ico-scale:1.1}
+/* Seit 03.10.2026: Karten eingeklappt (nur Icon + Name), Details per Klick; Icon deutlich größer */
+#craft-grid{align-items:start}
+#craft-grid .craft-card{cursor:pointer}
+#craft-grid .craft-card .craft-more{display:none}
+#craft-grid .craft-card.open .craft-more{display:block}
+#craft-grid .craft-card .ct{gap:12px;font-size:1.02em}
+#craft-grid .craft-card .craft-ico{width:60px;height:60px;padding:4px;margin-right:0;transform:none;border-radius:10px}
+#craft-grid .craft-arr{margin-left:auto;font-size:.8em;color:var(--dim);transition:transform .2s;flex-shrink:0}
+#craft-grid .craft-card.open .craft-arr{transform:rotate(180deg)}
+#craft-grid .craft-card.open .craft-more{margin-top:10px}
+#craft-grid .craft-card:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 #craft-grid .craft-ico{transform:scale(var(--craft-ico-scale))}
 #craft-grid .craft-icon-hd>:first-child{transform:scale(var(--craft-ico-scale))}
 #craft-grid .st-ico{display:inline-block;transform:scale(var(--craft-ico-scale))}
@@ -7745,12 +7756,14 @@ function craftCardSingle(c,show){
   const badge=c.cat==='Elixir'?'tr':'tg';
   const ico=c.icon?`<img class="craft-ico" src="${CRAFT_CDN}${c.icon}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
   const tierTag=c.tier&&c.tier!=='Basis'?`<span class="tag tt">${escHtml(c.tier)}</span>`:'';
-  return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(craftSearchStr(c).toLowerCase())}">
+  return `<div class="card craft-card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(craftSearchStr(c).toLowerCase())}" role="button" tabindex="0" aria-expanded="false" title="Klicken für Details">
       <div class="craft-icon-hd" style="background:${craftCatGrad(c.cat)}">${craftCatIcon(c.cat)}<span class="icon-hd-label" style="color:${craftCatColor(c.cat)}">${c.cat}</span>${craftGrade(c.grade||0)}</div>
-      <div class="ct">${ico}<span>${escHtml(c.name)}</span></div>
+      <div class="ct">${ico}<span>${escHtml(c.name)}</span><span class="craft-arr" aria-hidden="true">▾</span></div>
+      <div class="craft-more">
       <div class="cm"><span class="tag ${badge}">${c.cat}</span><span class="tag tx">${stationIcon(c.station)}${escHtml(c.station)}</span>${tierTag}</div>
       <div class="crows">
         ${craftRows(c)}
+      </div>
       </div>
     </div>`;
 }
@@ -7807,12 +7820,14 @@ function craftCardGroup(g,show){
   const tierRows=hasTierValues
     ? tierData.map(t=>`<div class="ctl-r">${pill(t)}${t.hp?`<span class="ctl-hp">${t.hp} HP</span>`:''}${t.f.length?`<div class="ctl-x">${t.f.join('')}</div>`:''}</div>`).join('')
     : `<div class="ctl-r">${tierData.map(pill).join('')}<div class="ctl-x"><div class="ctl-f" style="color:var(--dim);font-size:var(--fs-10-5)">Zutaten und Effekt sind in allen Stufen identisch erfasst; stufenabhängige HP nennen die Quellen hier nicht.</div></div></div>`;
-  return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}">
+  return `<div class="card craft-card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}" role="button" tabindex="0" aria-expanded="false" title="Klicken für Details">
       <div class="craft-icon-hd" style="background:${craftCatGrad(g.cat)}">${craftCatIcon(g.cat)}<span class="icon-hd-label" style="color:${craftCatColor(g.cat)}">${g.cat}</span>${craftGrade(g.grade||0)}</div>
-      <div class="ct">${ico}<span>${escHtml(g.base)}</span></div>
+      <div class="ct">${ico}<span>${escHtml(g.base)}</span><span class="craft-arr" aria-hidden="true">▾</span></div>
+      <div class="craft-more">
       <div class="cm"><span class="tag ${badge}">${g.cat}</span><span class="tag tx">${stationIcon(g.station)}${escHtml(g.station)}</span><span class="tag tt">${ts.length} Stufen</span></div>
       ${rows.length?`<div class="crows">${rows.join('')}</div>`:''}
       <div class="ctl-wrap"><span class="ctl-lbl">${hasTierValues?`Stufen-Werte${ingrShared?'':' · Zutaten je Stufe'}`:'Stufen'}</span>${tierRows}</div>
+      </div>
     </div>`;
 }
 function renderCrafting(){
@@ -7841,7 +7856,16 @@ function renderCrafting(){
       return craftCardSingle(c,show);
     }).join('');
   }
-  document.getElementById('craft-grid').innerHTML=html;
+  const grid=document.getElementById('craft-grid');
+  grid.innerHTML=html;
+  // Karten zeigen nur Icon + Name; Klick/Enter/Leertaste klappt die Details auf.
+  // Klicks im aufgeklappten Detailbereich klappen nicht zu (Text bleibt markierbar).
+  if(!grid.dataset.craftToggle){
+    grid.dataset.craftToggle='1';
+    const tog=c=>{const o=c.classList.toggle('open');c.setAttribute('aria-expanded',o?'true':'false');};
+    grid.addEventListener('click',e=>{const c=e.target.closest('.craft-card');if(!c||e.target.closest('a,button,input,select'))return;if(c.classList.contains('open')&&e.target.closest('.craft-more'))return;tog(c);});
+    grid.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('.craft-card');if(c&&e.target===c){e.preventDefault();tog(c);}});
+  }
   const cnt=document.getElementById('craft-count');
   if(cnt)cnt.textContent=(mode==='group'&&recipes!==shown)
     ?`${shown} Gerichte · ${recipes} Rezepte`
