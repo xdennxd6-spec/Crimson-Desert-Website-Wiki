@@ -791,6 +791,27 @@ const ARMOR_IMGS={
   "The Masked Liberator's Cloth Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_de_phm_ub_23002.webp",
   "The Masked Liberator's Leather Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_set_0011_index03.webp",
   "The Masked Liberator's Leather Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0099_01_index05.webp",
+  "Hungering Fang Leather Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0375.webp",
+  "Hungering Fang Leather Cloak":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_00_0375_t.webp",
+  "Hungering Fang Leather Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_00_0375.webp",
+  "Hungering Fang Leather Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_foot_set_0061_index01.webp",
+  "Sunset Reed Cloth Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_bush_devil_hand_0001.webp",
+  "Sunset Reed Cloth Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_bush_devil_foot_0001.webp",
+  "Skyblazer Leather Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_set_0140.webp",
+  "Skyblazer Cloth Helm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hel_0101_01.webp",
+  "Silver Fang Helm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hel_0028_01_i.webp",
+  "White Bloodwind Plate Helm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_hel_00_0141.webp",
+  "Frozen Heart Plate Armor":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_43014.webp",
+  "Frozen Heart Plate Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_0362.webp",
+  "Marni's Machina Knight Headgear":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_m0001_00_golem_hel_0041_c.webp",
+  "Goldlight Plate Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_hand_00_0146.webp",
+  "Goldlight Plate Helm":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_hel_00_0146_d.webp",
+  "Goldlight Plate Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_foot_00_0020_index02.webp",
+  "Brass Warden's Plate Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hand_set_0134.webp",
+  "White Bloodwind Plate Gloves":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_hand_00_0160.webp",
+  "White Bloodwind Leather Boots":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phw_00_foot_00_0160.webp",
+  "Plate Boots of the Fallen Kingdom":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_m0001_00_saigod_foot_00_0002.webp",
+  "Faded Deer Antler":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_hel_00_0500.webp"
 };
 const GREYMANE_COMMISSIONS=[
   // Neu aufgebaut 2026-06-01 (Recherche Game8 Archiv 586021): echte Bewohner-Anfragen "[NPC]'s Request", ALLE im Greymane Camp (Howling Hill, Hernand) — NICHT über Regionen/Kapitel verteilt. Freischaltung: von geretteten/rekrutierten Kameraden gepostet (Journal → Faction Quests → Greymanes). Belohnung je: Medium Bag (+3 Inventarslots). KEINE finale "True Ending Gate"-Commission — und ueberhaupt keine Verbindung zum True Ending: die Nachrecherche vom 22.08.2026 (6 Quellen, adversarial gegengeprueft) fand KEINE einzige Quelle, die Commissions mit dem Ende verknuepft. Die drei fruehereren Wiki-Stellen, die das behaupteten, sind an dem Tag entfernt worden. Zur Zahl 27: sie stammt aus dem In-Game-Zaehler (x/27) und aus einem TheGamer-Artikel (27.04.2026), den mehrere SEO-Seiten wortgleich uebernommen haben — eine Kette, keine Mehrfachbestaetigung. Game8 listet 26 Namen (Carl bis Vernon) ohne Summe; der 27. Name (Diederik's Request, gm27) ist seit 02.10.2026 durch questlog belegt (Quest 'Tales of the Greymanes', Q1000722, 27 Requests). Yann gehoert zu "Scattered Embers" und ist NICHT die 27. Commission. Belegt ist als Belohnung je Commission nur "Medium Bag x1" (Game8); die Umrechnung "+3 Slots" und die Summe "+81" stammen allein aus der TheGamer-Kette.
@@ -845,7 +866,7 @@ const SANCTUM_IDS=SANCTUM_DATA.map(s=>s.id);
 const BUILDS=[
   {
     name:"Spirit Striker",
-    desc:"Curved Sword mit Force Palm Loop — höchste Burst-Damage, optimal für Boss-Stagger. Crow's Pursuit gibt kostenlosen homing Hit nach jedem Heavy Attack.",
+    desc:"Curved Sword mit Force Palm Loop — höchste Burst-Damage, optimal für Boss-Stagger. Crow's Pursuit beschwört bei Heavy Attacks einen Krähenschwarm gegen nahe Feinde.",
     tags:["DPS","Force Palm","Kap. 5+"],
     slots:[
       {label:"Waffe",val:"Tauria Curved Sword"},
@@ -859,17 +880,17 @@ const BUILDS=[
   },
   {
     name:"Counter King",
-    desc:"Parry + Counter + Nature's Echo — ressourceneffizient, kann fast jeden Boss sicher kontern. Hernandian Cloak boosted Food-Buffs um 15%.",
+    desc:"Parry + Counter + Nature's Echo — ressourceneffizient, kann fast jeden Boss sicher kontern. Hernandian Cloak gibt laut questlog Ice Resistance Lv 3 und bis zu -10 % Stamina-Kosten (Refinement +10); stärkere Food-Effekte kommen vom Core Gourmet III (Food Effect Lv +3).",
     tags:["Defensiv","Parry","Kap. 2+"],
     slots:[
       {label:"Waffe",val:"Hollow Visage / Sword of the Lord"},
-      {label:"Rüstung",val:"Hernandian Cloak + Leather Helm of Fallen Kingdom"},
+      {label:"Rüstung",val:"Hernandian Cloak + Leather Helm of the Fallen Kingdom"},
       {label:"Key Cores",val:"Wind Slash · Momentum · Gourmet III"},
       {label:"Skills",val:"Parry · Counter · Evasive Roll · Nature's Echo · Quick Swap"},
       {label:"Stat-Prio",val:"HP → Stamina → Spirit"},
       {label:"Verfügbar ab",val:"Kapitel 2"}
     ],
-    tip:"Parry → Counter unterbricht feindliche Combos und öffnet ein freies Angriffsfenster. Nature's Echo verdoppelt Turning Slash. Pan-Fried Marinated Meat vor langen Bosskämpfen (Fire Res + HP)."
+    tip:"Parry → Counter unterbricht feindliche Combos und öffnet ein freies Angriffsfenster. Nature's Echo verstärkt laut Guides Heavy-Angriffe (doppelter Heavy-Schaden); der Core Momentum gibt +35 % Turning-Slash-Schaden. Pan-Fried Marinated Meat vor langen Bosskämpfen (Fire Res + HP)."
   },
   {
     name:"Elementalist",
@@ -887,17 +908,17 @@ const BUILDS=[
   },
   {
     name:"Greatsword Colossus",
-    desc:"Twisted Verdict mit Rend Armor — maximaler roher Schaden, ignoriert Super Armor Frames. Diving Force Palm = höchster Single-Hit-Damage im Spiel.",
+    desc:"Twisted Verdict mit Rend Armor — maximaler roher Schaden, ignoriert Super Armor Frames. Diving Force Palm ist der Burst-Skill dieses Builds; dass er den höchsten Single-Hit-Damage des Spiels liefert, ist nicht belegt.",
     tags:["DPS","Endgame","2H","Kap. 12"],
     slots:[
       {label:"Waffe",val:"Twisted Verdict"},
-      {label:"Rüstung",val:"Plate Armor of Shadows + Frostcursed Plate"},
+      {label:"Rüstung",val:"Plate Armor of the Shadows + Frostcursed Plate"},
       {label:"Key Cores",val:"Abyssal Rays · Ator's Orb · Destruction III"},
       {label:"Skills",val:"Turning Slash Rend Armor · Nature's Echo · Diving Force Palm · Stab Rend Armor"},
       {label:"Stat-Prio",val:"HP → Stamina → Spirit"},
       {label:"Verfügbar ab",val:"Kapitel 12 (nach Corrupted Caliburn)"}
     ],
-    tip:"Turning Slash Rend Armor + Nature's Echo = doppelter Super-Armor-ignorierender Hit. Abyssal Rays als kostenloser Projektil-Stack. Diving Force Palm immer aus maximaler Höhe ausführen — terminale Fallgeschwindigkeit ist Pflicht."
+    tip:"Turning Slash Rend Armor + Nature's Echo kombinieren (Wirkung beider Skills in den Spieldaten nicht belegt; laut game8/TheGamer verdoppelt Nature's Echo den Heavy-Schaden). Abyssal Rays als kostenloser Projektil-Stack. Diving Force Palm immer aus maximaler Höhe ausführen — terminale Fallgeschwindigkeit ist Pflicht."
   }
 ];
 const LORE_TERMS={
@@ -918,9 +939,9 @@ const LORE_TERMS={
   'Path of Trials':{tip:'Frost-Mantle-Unlock nach Priscus-Kill.',sec:'skills'},
   'Caliburn':{tip:'Lore: Inkarnation von Umbra (siehe Hidden Ending).',sec:'secrets',tab:'ending'},
   'Hexe Marie':{tip:'Boss Kap. 9. Lore: fragmentierter Teil des White Crow — Mutter-Obsession zu Kliff.',sec:'bosses'},
-  'Hollow Visage':{tip:'Hidden Weapon: ATK 17 mit 3 Cores (Insight I, Gale I, Destruction I). Dawn Cave hinter Wasserfall.',sec:'weapons'},
-  'Survivor\'s Solitude':{tip:'Hidden Weapon: ATK 21. Death\'s Grip Cave hinter Wasserfall NW Lake Kharonso.',sec:'weapons'},
-  'Vessel of Dark Pursuit':{tip:'Hidden Weapon: ATK 25 + Wound of Darkness. Antumbra\'s Sword Boss im Sanctum of Absolution.',sec:'weapons'},
+  'Hollow Visage':{tip:'Hidden Weapon: ATK 30 (Refinement +10) mit 3 Cores (Insight I, Swift I, Destruction I). Dawn Cave hinter Wasserfall.',sec:'weapons'},
+  'Survivor\'s Solitude':{tip:'Hidden Weapon: ATK 34 (Refinement +10) mit 3 Cores (Swift I, Insight I, Destruction I). Death\'s Grip Cavern hinter Wasserfall NW Lake Kharonso.',sec:'weapons'},
+  'Vessel of Dark Pursuit':{tip:'Hidden Weapon: ATK 43 (Refinement +10) + Wound of Darkness. Antumbra\'s Sword Boss im Sanctum of Absolution.',sec:'weapons'},
   'Sanctum of Absolution':{tip:'Sanctum-Boss Antumbra\'s Sword + Drop: Vessel of Dark Pursuit.',sec:'witches'},
   'Lord\'s Sword':{tip:'Sword of the Lord — Kailok-Drop. Secondary equippen → Wind Slash freischalten.',sec:'weapons'},
   'Wind Slash':{tip:'OP Range-Attack via Lord\'s Sword Secondary. Spam-bar.',sec:'cores'},
@@ -952,17 +973,17 @@ const BUILD_PHASES=[
   {k:'end',l:'Endgame (Kap. 12+)',ch:99}
 ];
 const BUILD_RECIPES={
-  'tank-early':{name:'Stahl-Wall Early',weapon:'Hwando + Rhonid Large Shield',armor:'Bolton Plate Set',cores:'Aegis I (Built-in)',skills:'Parry Lv 3 · Counter · Force Palm Lv 1',tip:'Hwando aus Lioncrest Manor + Rhonid Shield. Counter aus Hernand Castle Guards lernen — der Schlüssel zu jedem Früh-Boss.'},
+  'tank-early':{name:'Stahl-Wall Early',weapon:'Hwando + Rhonid Large Shield',armor:'Bolton Plate Set',cores:'Aegis I (Built-in)',skills:'Parry Lv 3 · Counter · Force Palm Lv 1',tip:'Hwando aus Lioncrest Manor + Rhonid Large Shield. Counter aus Hernand Castle Guards lernen — der Schlüssel zu jedem Früh-Boss.'},
   'tank-mid':{name:'Frostcursed Bulwark',weapon:'Sword of the Lord (Refine +10) + Shield of Conviction',armor:'Frostcursed Plate Set',cores:'Aegis II · Fortitude I · Steelbane',skills:'Parry Lv 3 · Counter · Force Palm Lv 2 · Keen Senses Lv 3',tip:'Frostcursed gibt Ice-Immunity → perfekt für Beloth-Prep. Shield of Conviction aus Calphade Church.'},
   'tank-late':{name:'Cursed Knight',weapon:'Wolf\'s Fang + Staglord\'s Shield',armor:'Plate Armor of the Shadows',cores:'Aegis III · Malicebane · Steelbane',skills:'Counter · Parry Lv 3 · Force Palm Expertise · Frost Mantle',tip:'Saigord-Shield blockt Ice-Breath. Malicebane (+Boss-Damage) aus Wolf\'s Fang.'},
   'tank-end':{name:'Antumbra-Bastion',weapon:'Twisted Verdict (2H) ODER Vow of the Dead King',armor:'Frostcursed + Plate of Shadows mix',cores:'Aegis III · Abyssal Rays · Malicebane · Greater Hexebane',skills:'Falling Palm · Parry Lv 3 · Counter · Frost Mantle · Nature\'s Echo',tip:'Frostcursed bleibt Pflicht für Beloth. Twisted Verdict aus Corrupted Caliburn. Falling Palm = 1-Shot Reserve.'},
   'dps-early':{name:'Crit-Rush Early',weapon:'Sword of the Lord (post-Kailok) + Kylus Dagger',armor:'Light Battlefield Set',cores:'Wind Slash · Destruction I',skills:'Forward Slash Proficiency · Stab · Quick Swap',tip:'Sword of the Lord ist Meta Kap. 2-5. Quick Swap auf Kylus Dagger für Stealth-Open + Bleed.'},
-  'dps-mid':{name:'Glass-Cannon',weapon:'Righteous Verdict (2H)',armor:'Blackwing Leather Set',cores:'Speed Lv.2 · Destruction I x2 · Insight I · Gale II',skills:'Turning Slash Rend Armor · Force Palm Lv 3 · Nature\'s Echo',tip:'Righteous Verdict aus Demeniss Ancestor Ruins. Nature\'s Echo verdoppelt jeden Hit.'},
-  'dps-late':{name:'Tauria-Spike',weapon:'Tauria Curved Sword (Refined)',armor:'Hungering Fang Leather',cores:'Crow\'s Pursuit · Wind Slash · Gale II · Destruction I',skills:'Quick Swap · Forward Slash Proficiency · Force Palm Expertise',tip:'Tauria stagger\'t fast jeden Humanoid. Aerial Roll lernen bei Draven für Mobility.'},
+  'dps-mid':{name:'Glass-Cannon',weapon:'Righteous Verdict (2H)',armor:'Blackwing Leather Set',cores:'Swift II (Speed Lv.2) · Destruction I x2 · Insight I',skills:'Turning Slash Rend Armor · Force Palm Lv 3 · Nature\'s Echo',tip:'Righteous Verdict aus Demeniss Ancestors\' Ruins. Nature\'s Echo verdoppelt laut Guides den Heavy-Schaden.'},
+  'dps-late':{name:'Tauria-Spike',weapon:'Tauria Curved Sword (Refined)',armor:'Hungering Fang Leather',cores:'Crow\'s Pursuit · Wind Slash · Swift II · Destruction I',skills:'Quick Swap · Forward Slash Proficiency · Force Palm Expertise',tip:'Tauria stagger\'t fast jeden Humanoid. Aerial Roll lernen bei Draven für Mobility.'},
   'dps-end':{name:'Antumbra-Burst',weapon:'Twisted Verdict (2H)',armor:'Combat God\'s Plate Gloves + Dark Marksman',cores:'Abyssal Rays · Destruction III · Greater Destruction · Malicebane · Ator\'s Orb',skills:'Falling Palm · Force Palm Expertise · Nature\'s Echo · Counter',tip:'Falling Palm aus terminaler Fallgeschwindigkeit = höchster Single-Hit. Echo verdoppelt es. BIS-DPS.'},
   'mobility-early':{name:'Glider-Scout',weapon:'Sword of the Lord + Noble Man\'s Bow',armor:'Grey Wolf Leather',cores:'Speed Lv.2 · Wind Slash',skills:'Evasive Roll · Flight (Crow\'s Wing) · Dodge',tip:'Noble Man\'s Bow + Flight für Aerial-Recon. Evasive Roll automatisch nach Kailok.'},
   'mobility-mid':{name:'Aerial Hawk',weapon:'Tauria Curved Sword',armor:'Blackwing Leather (post-Draven)',cores:'Speed Lv.2 · Crow\'s Pursuit · Wind Slash',skills:'Aerial Roll · Aerial Force Palm · Dodge · Glide',tip:'Blackwing Set + Aerial Roll = unschlagbar in offenem Terrain. Crow\'s Pursuit-Damage scaled mit Movement.'},
-  'mobility-late':{name:'Wind-Walker',weapon:'Tauria Curved Sword (Refined 5)',armor:'Dark Marksman + Blackwing Mix',cores:'Wind Slash · Crow\'s Pursuit · Gale II · Haste I',skills:'Aerial Roll · Aerial Force Palm · Storm Veil · Diving Force Palm',tip:'Storm Veil ab Kap. 8 via Riddle Square Chain. Diving Force Palm aus dem Precipice-of-Truth-Puzzle (Abyss).'},
+  'mobility-late':{name:'Wind-Walker',weapon:'Tauria Curved Sword (Refined 5)',armor:'Dark Marksman + Blackwing Mix',cores:'Wind Slash · Crow\'s Pursuit · Swift II · Haste I',skills:'Aerial Roll · Aerial Force Palm · Storm Veil · Diving Force Palm',tip:'Storm Veil ab Kap. 8 via Riddle Square Chain. Diving Force Palm aus dem Precipice-of-Truth-Puzzle (Abyss).'},
   'mobility-end':{name:'Blackstar-Hunter',weapon:'Tauria Curved Sword Refine 5',armor:'Blackwing + Combat God Mix',cores:'Wind Slash · Crow\'s Pursuit · Greater Swift · Haste I · Storm Fang',skills:'Aerial Force Palm · Falling Palm · Diving Force Palm · Storm Veil',tip:'Blackstar-Mount für Umbra. Falling Palm aus Drache abspringen = 1-Shot.'},
   'caster-early':{name:'Spirit-Channeler',weapon:'Hwando + Hollow Visage',armor:'Light Battlefield Cloak',cores:'Insight I · Destruction I',skills:'Force Palm Lv 2 · Focus · Nature\'s Grasp',tip:'Hollow Visage aus Dawn Cave hat Insight built-in. Force Palm Lv 2 via Force Palm Pulse-Quest.'},
   'caster-mid':{name:'Element-Adept',weapon:'Frozen Anguish (2H)',armor:'Frostcursed Set',cores:'Stamina Transference · Destruction I · Insight I',skills:'Flame Strike · Frost Mantle · Lightning Surge · Imbue Element Lv 2 · Focus Lv 2',tip:'Frostcursed Set + Frost Mantle = Ice-immunity-Combo. Path of Trials nach Priscus für Frost Mantle.'},
@@ -1028,9 +1049,9 @@ const SECRETS_MECHANICS=[
   {ico:'⚒️',name:'Free Grindstones & Anvils',body:'In der gesamten Welt verteilt. Kurze Cutscene → temporärer ATK-Buff (Grindstone) bzw. DEF-Buff (Anvil). <strong>Kostenlos</strong> — vor jedem Boss nutzen!',reward:'Pre-Boss-Buff gratis'}
 ];
 const SECRETS_HIDDEN_WEAPONS=[
-  {name:'Hollow Visage',atk:17,extra:'Speed Lv.2 · Insight I + Gale I + Destruction I (3 Cores built-in)',loc:'Truhe am Ende der <strong>Dawn Cave</strong> · hinter Wasserfall im Mountain of Frozen Souls',difficulty:'Mittel'},
-  {name:'Survivor\'s Solitude',atk:17,extra:'Speed Lv.1',loc:'<strong>Death\'s Grip Cave</strong> · hinter Wasserfall · NW von Lake Kharonso',difficulty:'Lehre: Wasserfälle sind nie nur Deko — immer mit Stab-Attack durchstoßen'},
-  {name:'Vessel of Dark Pursuit',atk:25,extra:'Abyss <strong>Wound of Darkness</strong>',loc:'<strong>Antumbra\'s Sword</strong>-Boss · Sanctum of Absolution',difficulty:'Stärkste Secret-Weapon — Pre-Boss-Buffs (Grindstone, Anvil, Pan-Fried Marinated Meat) empfohlen'}
+  {name:'Hollow Visage',atk:30,extra:'Speed Lv.2 · Insight I + Swift I + Destruction I (3 Cores built-in)',loc:'Truhe am Ende der <strong>Dawn Cave</strong> · hinter Wasserfall im Mountain of Frozen Souls · questlog führt zusätzlich den Händler Ronan (348 Silber), Fextralife nennt die Waffe nicht kaufbar',difficulty:'Mittel'},
+  {name:'Survivor\'s Solitude',atk:34,extra:'Speed Lv.1 · Swift I + Insight I + Destruction I (3 Cores built-in)',loc:'<strong>Death\'s Grip Cavern</strong> · hinter Wasserfall · NW von Lake Kharonso · questlog führt zusätzlich den Händler Nork (609 Silber), Fextralife nennt die Waffe nicht kaufbar',difficulty:'Lehre: Wasserfälle sind nie nur Deko — immer mit Stab-Attack durchstoßen'},
+  {name:'Vessel of Dark Pursuit',atk:43,extra:'Abyss <strong>Wound of Darkness</strong> + Insight I + Destruction I (3 von 5 Sockeln built-in)',loc:'<strong>Antumbra\'s Sword</strong>-Boss · Sanctum of Absolution · questlog führt zusätzlich den Händler Elowen (2.289 Silber), Fextralife nennt nur den Boss-Drop',difficulty:'Stärkste Secret-Weapon — Pre-Boss-Buffs (Grindstone, Anvil, Pan-Fried Marinated Meat) empfohlen'}
 ];
 const SECRETS_CRESSET_REGIONS=[
   {name:'Hernand',info:'Vertikale Climbs + Underground-Drops · Starter-Region, früh farmbar'},

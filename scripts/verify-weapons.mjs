@@ -170,7 +170,7 @@ for (const [name, expected] of Object.entries(statReference.items)) {
   }
 }
 ok(statErrors.length === 0,
-  `questlog-Endstufen: ${atkChecked} ATK und ${defChecked} DEF geprueft (Rhinard Cannon 31/39 quellenstrittig); ${statErrors.length} Abweichungen${statErrors.length ? " -> " + statErrors.slice(0, 8).join("; ") : ""}`);
+  `questlog-Endstufen: ${atkChecked} ATK und ${defChecked} DEF geprueft (Rhinard Cannon seit 03.10.2026 auf questlog-Endstufe 31); ${statErrors.length} Abweichungen${statErrors.length ? " -> " + statErrors.slice(0, 8).join("; ") : ""}`);
 
 // Abschliessende Lagemeldung zur Datenvollstaendigkeit (kein Fehler, nur Info)
 // crit_none:true markiert Waffen, bei denen questlog.gg (tRPC database.getItem, levels[0].stats)

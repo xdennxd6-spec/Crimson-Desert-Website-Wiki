@@ -2,6 +2,74 @@
   "_source": "questlog.gg tRPC database.getItem, independent snapshot 2026-09-09; see G:/Claude/Crimson-Wiki-Plan-2026-09-09/ausfuehrung/2026-09-09_1746/quellen/ernte-2026-09-09.json and def-analyse.json",
   "_convention": "atk and def use highest documented refinement stage; nulls remain unverified",
   "items": {
+    "Lifsoth Shield": {
+      "id": "290503",
+      "def": 29
+    },
+    "Legion Spearmen's Shield": {
+      "id": "290997",
+      "def": 31
+    },
+    "Lucon Shield": {
+      "id": "290508",
+      "def": 27
+    },
+    "Rekel Shield": {
+      "id": "290511",
+      "def": 31
+    },
+    "Demenissian of Valor Shield": {
+      "id": "290114",
+      "def": 13
+    },
+    "Demenissian of Loyalty Shield": {
+      "id": "290115",
+      "def": 13
+    },
+    "Demenissian of Obedience Shield": {
+      "id": "290116",
+      "def": 13
+    },
+    "Demenissian Soldier's Shield": {
+      "id": "290533",
+      "def": 27
+    },
+    "Lanford Shield": {
+      "id": "290515",
+      "def": 29
+    },
+    "Reinforced Warspike Shield": {
+      "id": "290504",
+      "def": 29
+    },
+    "Gilliam Shield": {
+      "id": "290502",
+      "def": 31
+    },
+    "Thalwynd Shield": {
+      "id": "290506",
+      "def": 27
+    },
+    "Thorny Warspike Shield": {
+      "id": "290532",
+      "def": 31
+    },
+    "Phantom Shield": {
+      "id": "1001428",
+      "def": 27
+    },
+    "Small Blinding Arrows Banner Pike": {
+      "id": "52031",
+      "atk": 24
+    },
+    "Medium Blinding Arrows Banner Pike": {
+      "id": "1003348",
+      "atk": 24
+    },
+    "Goblin King's Treasure": {
+      "id": "12900",
+      "atk": 34
+    },
     "Absolute Justice Greatsword": {
       "id": "240031",
       "atk": 45
@@ -1312,11 +1380,7 @@
     },
     "Rhinard Cannon": {
       "id": "330001",
-      "atk": 31,
-      "atkAlternatives": [
-        31,
-        39
-      ]
+      "atk": 31
     },
     "Rhonid Large Shield": {
       "id": "290509",

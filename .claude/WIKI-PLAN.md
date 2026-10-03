@@ -78,7 +78,21 @@ game8, Fextralife, PowerPyx, VULKK, questlog. Unsicheres als `conf` bzw. „nich
     (questlog: Time of Reckoning), Stolen Quarry, Kap.-11-warn.
   - Checks grün, Render-Check: tr 519, data_s 2692, 0 Fehler, 0 doppelte IDs, 34 Sektionen.
   - Weiterhin offen: ca. 349 Tales-/Favor-/Corners-Missionen und die Bounties von Demeniss, Delesyia und Crimson Desert
-    (siehe Backlog „Aus Block 2b“). Diese Reste können bei Gelegenheit nachgezogen werden; als Nächstes kommt Block 3.
+    (siehe Backlog „Aus Block 2b“). Diese Reste können bei Gelegenheit nachgezogen werden; Block 3 ist erledigt (siehe unten).
+- **Block 3: erledigt 03.10.2026** (Workflow `wf_db013d36-8eb`, 25 Agenten, höchstens 2 gleichzeitig, einmal pausiert
+  wegen Session-Limit; Integration Opus mittlere Denktiefe, sonst Sonnet). Neue Hauptquelle: questlog-Item-Abzug
+  (`~/cdwiki-work/questlog/{en,de}/items.json`, 1878 Ausrüstungsteile je Sprache, `tools/ql-items.py`; Suche
+  `ql-find.py --kind items`; Stat 1000002 = Angriff, 1000003 = Verteidigung, Werte ×1000). 735 belegte Vorschläge:
+  626 bestätigt, 103 in korrigierter Fassung, 0 widerlegt, 6 unsicher.
+  - WEAPONS (500): 277 Einträge überarbeitet (Fundorte nach questlog-Händler/Mission/Rezept/Boss statt Platzhaltern,
+    eingebaute Abyss Gears, Typen), ATK Rhinard Cannon 31, Goblin King's Treasure 34, Flamespitter 25; Axe of the
+    Apocalypse neu, Dublette Rhonid Shield entfernt (Migration `WEAPON_RENAMES`/`migrateWeaponRenames` für cd_wep und
+    cd_favs.weapon). „Gale I“ → „Swift I“ (questlog). WEAPON_UPGRADES mit Materialien je Klasse, Hidden Weapons, Builds entschärft.
+  - ARMOR: Def/Atk einheitlich als Höchststufe Refinement +10 (+0-Wert in notes); 380 Rüstungen (vorher 359),
+    ARMOR_SETS +6, ACCESSORIES 34 (vorher 25). CORES/WITCH_SYNTHESIS: Sockel-Zuordnung Weapon/Armor/Both nach questlog-Hash.
+  - Checks grün, Render-Check: tr 519, data_s 2728, 0 Fehler, 0 doppelte IDs, 34 Sektionen.
+  - Außerdem am 03.10.: NPC-Karten zeigen nur Bild und Name, Details per Klick (`8b24382`).
+
 ## Backlog (aus den Blöcken gesammelt)
 
 _wird nach jedem Block ergänzt_
@@ -122,3 +136,12 @@ _wird nach jedem Block ergänzt_
 - **Block 4 (Crafting & Sammeln) — Items, Cores, Bounty-Orte:** Kuku-Blueprint-Zuordnung zu Devotion/Exaltation prüfen; Core-Übersicht je Sanctum im Crafting; Pump Kick Widerspruch (For Honor); Bounty-Orte Alessio/Blix/Bianca und Beträge in d06; Firefly Lantern miss-Flag.
 - **Block 5 (Welt & Figuren) — Hexen, Sanctums, Fraktionen:** Hexen neu prüfen (Sylvia, The Hermit Witch/Refined Power, Hexe Marie, White Crow/Mortification, Frost-Mantle-Aussagen); Sanctum-Regionen (Temperance/Benediction/Expiation, Antumbra Order -> Pywel, Skull Knight Region); fehlende Fraktionen Wyvernflames, H.A.L.L., Tinkertons, Marnirail, Dusksongs, Tommaso, Varnia, Urdavah, Marni-Anlagen; Greymanes-Overview '~99 Einträge'.
 - **Block 6 (Technik & Qualität) — Roadmap-Empty-State:** 'TRUE ENDING UNLOCKED' von gmDone>=27 entkoppeln, GREYMANE_COMMISSIONS.length statt Hartkodierung; lastCh-Schwelle prüfen.
+
+### Aus Block 3, Abnahme (konsolidiert), Stand 03.10.2026
+- **Block 3 (Reste) — Ausrüstungslücken:** ca. 376 questlog-Teile ohne Wiki-Eintrag, davon 31 geliefert. Offen: 15 Set-Stämme (Chelcia, Sahazhad, Silverwolf, Grotevant, Grey Wolf, Carta, Ferman, Tariv, Greymane, Baltheon, Ator Will, Ironwilled Guardian, Helfryn, Lauques), ca. 25 Grade-4/5-Einzelteile, ca. 100 Grade-1/2-Teile, 5 special-accessories (neuer type-Wert, Renderer/gen-seo abstimmen), 41 Einhandwaffen; Animal Spirit, Harkan's Spear (ohne Bezugsquelle).
+- **Block 3 (Reste) — Konventionen und Namen:** built_in-Notation vereinheitlichen (Stat-Labels vs. Abyss-Gear-Namen); Aliasse (Serdin/Verak/Parvel/Arben/Lusec Greatsword „Giant“, Blackwing Leather Mask vs. Blackwing Mask, Darkbringer); CORES-Doppel Breath of Life I = Vitality I, Rampaging Insight = Greater Insight, Crow's Pursuit I; Goblin Pumpkin Helm und Demeniss Elite Uniform (Def +18) unbelegt; ARMOR_SETS.pieces mit Namen außerhalb ARMOR (Ashen Execution, Patch-1.13-Platzhalter).
+- **Block 3 (Reste) — Belege für Zusatzwerte:** Resist-/Move-Speed-Aussagen im Altbestand (prov altbestand) prüfen oder streichen; Set-Boni; „Drop“/„Feldbeute“ ohne questlog-Beleg (ca. 61 Banner Pikes, 25 Drops, Plate Armor of the Shadows, Cursed-Soul-Teile) einheitlich entschärfen; Axe of the Apocalypse nur Einzelquelle; Aeserion Gear Blueprint, Wolf's Fang, Ignir, Divine Echoes Bow, Sorcerer's Staff ohne gesicherten Fundort; Mount-Stats (nicht im questlog-Abzug).
+- **Block 4 (Crafting & Sammeln):** Munition/Wurfgegenstände (43 Projectiles) als Abschnitt; Rezept-Suffix „(+N)“; Blueprint-Herkunft Kuku-Teile; Destruction-I-Rezept; Faded Abyss Artifact, Gold Bar, Platinum, Riding-Amulette; Refinement-Kosten (Silber, Unlock-Orte).
+- **Block 5 (Welt & Figuren):** Orte der questlog-Händler (Kathor, Tranan, Temir, Quentin, Leore, Khron, Ronan, Nork, Elowen, Brek, Bari); Hexen Sylvia, The Hermit Witch, Refined Power, White Crow, Frost Mantle, Hexe Marie.
+- **Block 6 (Technik & Qualität):** Sockel-Semantik (Both = Waffen, Handschuhe, Schuhe) in Cores-Abschnitt und Build-Simulator; Crit-Mapping (Stat 1000007/1000010) dokumentieren und maschinell prüfen; Slot-Ausnahmen in verify-weapons; Typen Grotevant Cloak, Gale Shield; Legende „(+10)“ in der UI.
+- **Laufend (Ingame-Prüfung):** Händler vs. „nicht kaufbar“ (Righteous Verdict, Golden Greathammer, Oblivion of the Past, Mace of Ambition, Delesyian Longsword, Hwando); Sockelzahlen 0/null (Eastern Witch's Fan, Specter Sword, Gale Shield, Shotgun Shield, Shield of Ringing, Banner Pikes, Kuku-Spitter); x100/x20-Händlerpreise (17 Items); Boss-Drops Rhias, Octarr, Valgash, Grey Wolf, Black Bear, Crimson Warden, Muskan in BOSSES.drop_weapon.
