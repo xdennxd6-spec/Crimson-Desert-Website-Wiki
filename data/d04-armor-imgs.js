@@ -844,7 +844,7 @@ const GREYMANE_COMMISSIONS=[
   {id:"gm27",n:27,name:"Diederik's Request",region:"Greymane Camp",chapter:"—",reward:"Medium Bag (+3 Slots)",note:"Diederik (Schneider) lässt geflickte Kleidung (Weasel Leather Armor) ins Kloster für bedürftige Nachbarn bringen: dort abliefern und den Dank des Priesters überbringen. In der questlog-Reihenfolge steht diese Commission an Position 9 (zwischen Alec und Eric); game8 führt sie nicht."}
 ];
 const SANCTUM_DATA=[
-  // Neu aufgebaut 2026-06-01 (Fakten-Audit + Recherche PowerPyx/Game8): korrekte Hexen-Zuordnung + Regionen; 3 zuvor fehlende Lyselia-Sanctums (Veneration/Oblation/Faith) ergänzt. 16 Sanctums gesamt (15 reinigbar + Story-Mortification). 'Sanctum of Transcendence' (te_abyss_35) ist eine Abyss-Challenge und zählt nicht zur Lightbringer-Trophy.
+  // Neu aufgebaut 2026-06-01 (Fakten-Audit + Recherche PowerPyx/Game8): korrekte Hexen-Zuordnung + Regionen; 3 zuvor fehlende Lyselia-Sanctums (Veneration/Oblation/Faith) ergänzt. 16 Sanctums gesamt (15 reinigbar + Story-Mortification). Sanctum of Transcendence (te_abyss_35) ist ein Abyss-Puzzle (questlog: Mission in der Quest The Abyss, Rewards u. a. Sealed Abyss Artifact und Abyss Artifact; Zugang Spire of the Sun > Nest of Valor > Throne of Truth > Dimensional Labyrinth, Dry-Valley-Cluster) und steht nicht in der 16-Sanctum-Liste der Lightbringer-Trophy (PowerPyx).
   {id:"te8",name:"Sanctum of Absolution",region:"Hernand (Süd/Südwest)",note:"Elowen (Wisdom). Boss Antumbra's Sword → Vessel of Dark Pursuit + Wound of Darkness Core"},
   {id:"te5",name:"Sanctum of Temperance",region:"Hernand (Pororin Forest / Unicorn Cliff)",note:"Elowen (Wisdom)"},
   {id:"te6",name:"Sanctum of Penitence",region:"Hernand (Plateau SO der Stadt / The Ironwood)",note:"Elowen (Wisdom)"},
@@ -858,7 +858,7 @@ const SANCTUM_DATA=[
   {id:"te30",name:"Sanctum of Oblation",region:"Delesyia (Insel bei Blue Thicket)",note:"Lyselia (Humility)"},
   {id:"te31",name:"Sanctum of Faith",region:"Delesyia (Grey Forest, Ost)",note:"Lyselia (Humility)"},
   {id:"te12",name:"Sanctum of Expiation",region:"Demeniss (Nord/NW, nördl. Gate of Truth)",note:"Areciel (Strength)"},
-  {id:"te14",name:"Sanctum of Renunciation",region:"Drywind Valley / Red River (Grenze Demeniss/Crimson Desert/Delesyia)",note:"Areciel (Strength). Region quellenübergreifend uneinheitlich (Grenzgebiet)"},
+  {id:"te14",name:"Sanctum of Renunciation",region:"Drywind Valley, westlich des Red River (Delesyia/Demeniss, Grenzgebiet)",note:"Areciel (Strength). Region quellenübergreifend uneinheitlich (Grenzgebiet)"},
   {id:"te15",name:"Sanctum of Revelation",region:"Demeniss (Serpent Marsh, NO-Insel)",note:"Areciel (Strength). Boss Antumbra's Spear → Thorn of Dark Pursuit + Core of Revelation"},
   {id:"te16",name:"Sanctum of Mortification",region:"Demeniss (Denn River, Kap. 9 Story)",note:"Story Kap. 9 (Veiled Witch / White Crow, Quellen uneinheitlich). Quest 'Fragments of Darkness'. Core of Mortification"},
 ];
@@ -993,7 +993,7 @@ const BUILD_RECIPES={
   'ranged-mid':{name:'Infinite-Arrow',weapon:'Warspike Bow',armor:'Dark Marksman Boots + Blackwing',cores:'Infinite Arrows III · Crow\'s Pursuit · Crit Rate Lv.2',skills:'Marksmanship Lv 5 · Explosive Evasive Shot · Multishot · Focus',tip:'Crit-Scaling-Build via Warspike. Infinite Arrows = nie nachladen.'},
   'ranged-late':{name:'Sniper-Storm',weapon:'Divine Echoes Bow + Caliburn\'s Mercy Pistol (Quick Swap)',armor:'Dark Marksman Set',cores:'Infinite Arrows III · Crit Damage · Wind Slash',skills:'Multishot · Aerial Roll · Storm Veil · Focus Lv 2',tip:'Quick Swap zwischen Bow + Pistole für Burst. Storm Veil hidet vor Adds.'},
   'ranged-end':{name:'Aeserion-Hunter',weapon:'Aeserion Bow + Divine Echoes Bow',armor:'Combat God Gloves + Dark Marksman',cores:'Greater Infinite Arrows · Greater Destruction · Wind Slash · Storm Fang',skills:'Multishot · Aerial Roll · Falling Palm (Air-Shot) · Imbue Element Lv 4',tip:'Aeserion Bow ab Kap. 12. Imbued Arrows für Element-Schwächen.'},
-  'unarmed-early':{name:'Fist-Bandit',weapon:'(unarmed)',armor:'Light Battlefield Cloak',cores:'(in Armor)',skills:'Unarmed Combat Lv 3 · Pump Kick (Matthias!) · Dropkick (Watch&Learn Axt-Banditen)',tip:'Pump Kick beim Matthias-Boss (Kap. 2): via Watch & Learn oder als Skill-Scroll-Drop. Sofort einbinden.'},
+  'unarmed-early':{name:'Fist-Bandit',weapon:'(unarmed)',armor:'Light Battlefield Cloak',cores:'(in Armor)',skills:'Unarmed Combat Lv 3 · Pump Kick (Matthias!) · Dropkick (Watch&Learn Axt-Banditen)',tip:'Pump Kick beim Matthias-Boss (Kap. 2, For Honor): per Watch & Learn im Duell abschauen. Sofort einbinden.'},
   'unarmed-mid':{name:'Wrestler',weapon:'Mining Knuckledrill (auch Pickaxe)',armor:'Combat God\'s Plate Gloves (BIS)',cores:'Move Speed Lv.4 · Lightning Affinity',skills:'Body Slam · Clothesline · Vault · Meteor Kick · Grappling Lv 5',tip:'Mining Knuckledrill + Pickaxe-Funktion. Combat God\'s Plate Gloves früh sichern.'},
   'unarmed-late':{name:'Brawler-King',weapon:'Combat God\'s Plate Gloves + Savage Sawblade Quick Swap',armor:'Hungering Fang Leather + Combat God Gloves',cores:'Relentless · Lightning Affinity · Bleed (Savage)',skills:'Meteor Kick · Clothesline · Pump Kick · Body Slam · Blinding Flash Finisher',tip:'Blinding Flash Finisher seit 1.07 auch unbewaffnet ausführbar.'},
   'unarmed-end':{name:'Pure-Fist',weapon:'Combat God\'s Plate Gloves',armor:'Combat God Gloves + Plate of Shadows',cores:'Abyssal Rays · Greater Steelbane · Lightning Affinity · Malicebane',skills:'Meteor Kick · Falling Palm · Blinding Flash Finisher · Force Palm Expertise · Nature\'s Echo',tip:'Falling Palm auch ohne Waffe brutal. Nature\'s Echo verdoppelt jeden Faustschlag.'}
@@ -1231,7 +1231,7 @@ const SECTIONS = [
   {id:'cores',       res:'ausrue', name:'Abyss Cores',     plate:'§06', coord:'C3', glyph:'⧫', count:'Synthese'},
   {id:'accessories', res:'ausrue', name:'Accessoires',    plate:'§16', coord:'C4', glyph:'❖', count:'Liste'},
   {id:'items',       res:'ausrue', name:'Items',           plate:'§03', coord:'C5', glyph:'❒', count:'Kompendium'},
-  {id:'crafting',    res:'ausrue', name:'Crafting & Farming', plate:'§07', coord:'C6', glyph:'⚙', count:'308'},
+  {id:'crafting',    res:'ausrue', name:'Crafting & Farming', plate:'§07', coord:'C6', glyph:'⚙', count:'386'},
   {id:'dyes',        res:'ausrue', name:'Dyes',            plate:'§22', coord:'C7', glyph:'◑', count:'Farben'},
   {id:'map',         res:'welt', name:'Interaktive Karte', plate:'§09', coord:'D1', glyph:'⌖', count:'Pywel'},
   {id:'locations',   res:'welt', name:'Locations',         plate:'§10', coord:'D2', glyph:'⌂', count:'Orte'},

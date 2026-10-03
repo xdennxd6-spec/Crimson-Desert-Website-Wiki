@@ -93,6 +93,18 @@ game8, Fextralife, PowerPyx, VULKK, questlog. Unsicheres als `conf` bzw. „nich
   - Checks grün, Render-Check: tr 519, data_s 2728, 0 Fehler, 0 doppelte IDs, 34 Sektionen.
   - Außerdem am 03.10.: NPC-Karten zeigen nur Bild und Name, Details per Klick (`8b24382`).
 
+- **Block 4: erledigt 03.10.2026** (Workflow `wf_17d40dcb-a6e`, 25 Agenten, bis zu 5 gleichzeitig; Planung, Gegenprüfung
+  und Integration Opus, Recherche und Abnahme Sonnet; einmal pausiert wegen 5h-Limit). Neue Quellen: questlog-Abzüge
+  `tools/ql-db.py` → `questlog/{en,de}/{recipes,items-misc,gatherables,chests}.json` (1373 Rezepte, 4200 Items,
+  152 Gatherables, 39 Truhentypen). Achtung: questlog-recipeMaterials ohne Zutaten-Gruppen (Catalyst/Reagent).
+  352 belegte Vorschläge: 256 bestätigt, 93 in korrigierter Fassung, 2 widerlegt, 1 unsicher.
+  - CRAFTING 308 → 386 (78 neue Kochrezepte, Mahlzeiten-Familie, Rezeptbuch-Quellen für 315 Gerichte), Elixier-Formel-
+    Fundorte, Kuku-Werkstatt korrigiert (Laser Helm, Watcher Pack, Disruptor Spear), Kuku-Cores je Sanctum, DYES 19 → 55
+    (Icons der neuen Farbstoffe vom questlog-CDN).
+  - ITEMS 165 → 171, GATHERABLES 25 → 35, MISSABLE_ITEMS ms16/ms17 neu, Sanctum-Checkliste zeigt alle 16 (vorher 13),
+    Focused Force Palm/Pump Kick bereinigt, Ruinen Hoenmark/Smoking Lands (Alias), Camp-Texte bis Patch 2.03.00.
+  - Checks grün, Render-Check: tr 593, data_s 2792, 0 Fehler, 0 doppelte IDs, 34 Sektionen.
+
 ## Backlog (aus den Blöcken gesammelt)
 
 _wird nach jedem Block ergänzt_
@@ -145,3 +157,13 @@ _wird nach jedem Block ergänzt_
 - **Block 5 (Welt & Figuren):** Orte der questlog-Händler (Kathor, Tranan, Temir, Quentin, Leore, Khron, Ronan, Nork, Elowen, Brek, Bari); Hexen Sylvia, The Hermit Witch, Refined Power, White Crow, Frost Mantle, Hexe Marie.
 - **Block 6 (Technik & Qualität):** Sockel-Semantik (Both = Waffen, Handschuhe, Schuhe) in Cores-Abschnitt und Build-Simulator; Crit-Mapping (Stat 1000007/1000010) dokumentieren und maschinell prüfen; Slot-Ausnahmen in verify-weapons; Typen Grotevant Cloak, Gale Shield; Legende „(+10)“ in der UI.
 - **Laufend (Ingame-Prüfung):** Händler vs. „nicht kaufbar“ (Righteous Verdict, Golden Greathammer, Oblivion of the Past, Mace of Ambition, Delesyian Longsword, Hwando); Sockelzahlen 0/null (Eastern Witch's Fan, Specter Sword, Gale Shield, Shotgun Shield, Shield of Ringing, Banner Pikes, Kuku-Spitter); x100/x20-Händlerpreise (17 Items); Boss-Drops Rhias, Octarr, Valgash, Grey Wolf, Black Bear, Crimson Warden, Muskan in BOSSES.drop_weapon.
+
+### Aus Block 4, Abnahme (konsolidiert), Stand 03.10.2026
+- **Block 4 (Reste) — Farbstoffe:** neue DYES ohne Hex-Farbwert (Chip fällt auf Icon/Grau zurück); Dye-Intro „ca. 20 Farbtöne pro Grundfarbe“ vs. 5 Stufen je Grundfarbe bei questlog klären; 13 Kräutermengen nur nach Familienmuster; Händlerangaben Black Dye (Aris/Solan), Pure White, Spring Green, Teal, Shadow Grey.
+- **Block 4 (Reste) — ITEMS-Lücken:** 27 Projectiles (Bundles, Magic Bullets, Buckshot, Smoke Bomb, Oil Canister …), Platinum und Gold-Bar-Platinum-Weg, Medium/Large Bag, Sturdy Broom, Rucksäcke, Haven for Pets/Livestock, Wells-Military-Tack, 47 Schlüssel, 27 Schatzkarten; ITEMS[110]/[112] laut Abnahme gleiche questlog-ID 802926 (prüfen); Sprayer-Widersprüche (ITEMS 23/25/34); Disruptor Cannonball loc vs. Detail; Crude Bismuth Cannonball „flächig“ vs. Spieltext „verfolgt“.
+- **Block 4 (Reste) — Kochen/Alchemie-Werte:** HP der 54 Hearty- und 23 Basis-Stufen, Spirit-Wirkung bei 118 Gerichten, Gruppenmengen in 19 Familien, Resistenz-Dauer Lv 6, HP-Konflikt Fextralife; Elixier-Effektwerte nur aus Guides; Platinum als Katalysator-Ersatz; Destruction I (Butterfly) questlog vs. Guides.
+- **Block 4 (Reste) — Smithing/Kuku/Camp:** 715 Smithing-Rezepte nur als Hinweis/Liste; Refinement Stufen 6–10, Token-Grenze 4 vs. 5, Rezept-Suffix (+N); Blueprint-Quellen der 5 Special-Blueprint-Bücher ingame; Goldbarren-Investitionsmission (Einsatz/Ertrag), Camp-Spendenkurs vor 2.01.00, Kettensäge-Spende (2.00.00 vs. 2.01.00), Camp Food/Timber/Stone/Weapons.
+- **Block 4 (Reste) — Sammeln/FUNDORTE:** 105 weitere Gatherables (Filter-Kategorien Gemüse/Früchte/Fleisch); Missable-Mechanismen (Hoenmark 3/4, Sweet Deal, Fruit of Life, Skull Knight); 11 FUNDORTE ohne Quellen-URL, Soul Spear, Caliburn's Mercy, Divine Echoes Bow, Marni Laser Helm Fundort.
+- **Block 3 (Nachtrag):** Widersprüche FUNDORTE vs. WEAPONS/ARMOR (Plate Armor of the Shadows/Beloth, Odeck's Protector, Scorchflame, Darkbringer, Goblin King's Treasure, Hwando-Schlüssel, Shield of Ringing, Lightning Spear).
+- **Block 5 (Welt & Figuren):** Hexen-Tabelle index.html (Areciel/Lyselia-Regionen) vs. SANCTUM_DATA; Hauptquest-Aliase (Secret at the Church, Casted Shadow, Bloodwind, Path of Providence); Expert Explorer 178 Challenges; Guard's Report/Proof of Stay Varnia; Core Blueprint vs. Gear Blueprint: Haste.
+- **Block 6 (Technik & Qualität):** Knowledge-Intro Summe 2.905 vs. 2.921 und Memory Fragments 214 vs. 201; Missable-Chip-Konvention; Smoked Egg/Eggs; Saw und Heavy Bucket conf high ohne questlog-Beleg.
