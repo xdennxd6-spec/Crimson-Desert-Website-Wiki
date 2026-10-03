@@ -1706,6 +1706,12 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .card.boss-done .boss-img,.card.boss-done .boss-img-ph{filter:grayscale(.7)brightness(.85)}
 .boss-done-badge{display:none;position:absolute;top:50px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:var(--fs-9-5);font-weight:700;letter-spacing:.14em;color:var(--vellum);background:var(--survey-red);border:1px solid var(--survey-red);padding:2px 9px;pointer-events:none;z-index:5;white-space:nowrap;border-radius:999px}
 .card.boss-done .boss-done-badge{display:block}
+.npc-card{cursor:pointer}
+.npc-card .npc-more{display:none}
+.npc-card.open .npc-more{display:block}
+.npc-card .npc-arr{float:right;font-size:.8em;color:var(--dim);transition:transform .2s}
+.npc-card.open .npc-arr{transform:rotate(180deg)}
+.npc-card:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* ── Stats strip (Instrumenten-Ablesung) ── */
 .stats-strip{display:flex;flex-wrap:wrap;margin-bottom:18px;background:var(--vellum-hi);border:1px solid var(--iron-gall);overflow:hidden;box-shadow:4px 4px 0 var(--paper-shadow);border-radius:var(--radius)}
@@ -9567,18 +9573,27 @@ function renderNpcs(){
       const head=img
         ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" data-cdn="${cdn}" loading="lazy" decoding="async" alt="${escHtml(n.name)}" style="object-position:center top;background:linear-gradient(135deg,#15110d,#0c0c0c)" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.closest('.boss-img-wrap').outerHTML=npcPH('${escJsStr(n.name)}','${key}')}"></div>`
         :npcPH(n.name,key);
-      return `<div class="card" data-s="${escHtml(s)}">
+      return `<div class="card npc-card" data-s="${escHtml(s)}" role="button" tabindex="0" aria-expanded="false" title="Klicken für Details">
         ${head}
-        <div class="ct">${escHtml(n.name)}</div>
+        <div class="ct">${escHtml(n.name)}<span class="npc-arr" aria-hidden="true">▾</span></div>
+        <div class="npc-more">
         ${cm?`<div class="cm">${cm}</div>`:''}
         <div class="crows"><div class="crow"><span class="cl">Rolle</span><span class="cv">${escHtml(n.role)}</span></div></div>
         <div class="best-note">${escHtml(n.bio)}</div>
+        </div>
       </div>`;
     }).join('');
     return `<h3 class="sub-t">${title} <span class="best-count">(${NPCS[key].length})</span></h3>
       <p class="best-sub">${sub}</p>
       <div class="grid">${cards}</div>`;
   }).join('');
+  // Karten zeigen nur Bild + Name; Klick/Enter/Leertaste klappt die Details auf
+  if(!el.dataset.npcToggle){
+    el.dataset.npcToggle='1';
+    const tog=c=>{const o=c.classList.toggle('open');c.setAttribute('aria-expanded',o?'true':'false');};
+    el.addEventListener('click',e=>{const c=e.target.closest('.npc-card');if(c&&!e.target.closest('.spoiler-cover,a,button'))tog(c);});
+    el.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('.npc-card');if(c&&e.target===c){e.preventDefault();tog(c);}});
+  }
 }
 
 function renderPatches(){
