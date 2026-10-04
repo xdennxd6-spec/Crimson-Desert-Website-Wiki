@@ -1,17 +1,20 @@
 // parts/npcs.mjs — SEO-Seite "NPCs".
 //
 // Datenquelle ist NPCS: ein OBJEKT mit genau 4 Gruppen (kein Array) — companions
-// (3), allies (10), antagonists (8), merchants (8), Summe 29. Jeder NPC traegt
-// { name, role, region, conf, bio }. "region" FEHLT bei genau 3 Eintraegen
-// (Ludvig, Lucian Bastier, Draven the Crowcaller) — dort wird nichts erfunden,
-// die Region-Zeile faellt komplett weg statt "null" oder "-" zu zeigen. "conf"
-// ist bei 26 NPCs "high" und bei 3 "medium" (Charles Celeste, Ross, Valgash);
-// nur "medium" kommt in den Daten vor, kein "low" — dafuer wird deshalb bewusst
-// keine Fallunterscheidung erfunden. Die bio-Texte sind der eigentliche Inhalt
-// dieser Seite (30 bis 995 Zeichen echter Lore-Text), darum eine bildlastige
+// (3), allies (14), antagonists (7), merchants (16), Summe 40 (Stand 04.10.2026,
+// Block 5). Jeder NPC traegt { name, role, region, conf, bio }; "region" ist
+// inzwischen bei allen Eintraegen belegt, die Region-Zeile faellt bei fehlendem
+// Wert trotzdem weiterhin komplett weg statt "null" oder "-" zu zeigen. "conf"
+// ist bei 34 NPCs "high" und bei 6 "medium" (Kathor, Temir, Quentin, Leore,
+// Ronan, Brek); nur "medium" kommt in den Daten vor, kein "low" — dafuer wird
+// deshalb bewusst keine Fallunterscheidung erfunden. Die bio-Texte sind der
+// eigentliche Inhalt dieser Seite (echter Lore-Text), darum eine bildlastige
 // Karten-Seite nach dem Vorbild von bestiarium.mjs, keine duenne Tabelle.
 //
-// NPC_IMGS deckt alle 29 NPCs mit einem lokalen Bild ab (28x cd_assets/npcs/*.webp,
+// Stand 04.10.2026: 11 der 40 NPCs (die in Block 5 ergaenzten Naira, Stefan
+// Lanford, Drake Wells und die acht Haendler Kathor bis Brek) haben KEIN Bild in
+// NPC_IMGS — npcCard() gibt dann bewusst kein <img> aus, die App zeigt npcPH().
+// Fuer die uebrigen 29 gilt: NPC_IMGS deckt sie mit einem lokalen Bild ab (28x cd_assets/npcs/*.webp,
 // 1x cd_assets/bosses/lucian_bastier.webp fuer den bereits als Boss gefuehrten
 // Lucian Bastier, 1x cd_assets/npcs/marius.png). Gegen das Dateisystem geprueft
 // am 26.08.2026: alle 29 Pfade existieren, 28 davon sind 512x512, marius.png ist
@@ -21,8 +24,8 @@
 //
 // NPC_PAL ist nach GRUPPE geschluesselt (nicht nach NPC-Name), Form
 // [gradient, borderColor, accentColor] — identisch zur Fraktionsfarbe, mit der
-// die App fehlende NPC-Portraets einfaerbt (siehe npcPH() in index.html). Diese
-// Seite hat keine fehlenden Bilder, uebernimmt die Palette aber als leises
+// die App fehlende NPC-Portraets einfaerbt (siehe npcPH() in index.html). Fehlende
+// Bilder bleiben hier leer (siehe oben); die Seite uebernimmt die Palette aber als leises
 // Gruppen-Branding: Kartenrahmen und Namens-Farbe je Gruppe. Bewusst als
 // INLINE-STYLE aus ctx.data.NPC_PAL erzeugt statt als vier feste CSS-Klassen mit
 // abgeschriebenen Hex-/RGBA-Werten — sonst haette die Seite die Palette ein
@@ -80,7 +83,7 @@ const GROUPS = [
   ["antagonists", "⚔️", "Antagonisten",
     "Gegenspieler und Fraktionsanführer — viele davon sind Bosse (Kampf-Details in der Boss-Sektion)."],
   ["merchants", "💰", "Händler",
-    "Benannte Verkäufer. Außerhalb Hernands nennen die Guides meist nur Standorte, keine Namen."],
+    "Benannte Verkäufer in Hernand, im Greymane-Lager und in weiteren Regionen; außerhalb Hernands ist der genaue Standort teils nur auf Regionsebene belegt."],
 ];
 
 // Einzige gemessene Abweichung von der 512x512-Norm (26.08.2026, Bild-Header
@@ -138,6 +141,7 @@ export function ZAHLEN(ctx) {
     antagonisten: NPCS.antagonists.length,
     haendler: NPCS.merchants.length,
     ohneregion: alle.filter((n) => !has(n.region)).length,
+    mitregion: alle.filter((n) => has(n.region)).length,
     teilsbelegt: alle.filter((n) => n.conf === "medium").length,
   };
 }
@@ -166,7 +170,7 @@ export function build(ctx) {
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive NPC-Übersicht mit Trust-System öffnen &rarr;</a>
 <p class="note">In der App findest du zusätzlich das Trust-System: wie du bei jedem NPC Vertrauen aufbaust und welche Belohnungen es bei maximalem Trust gibt.</p>
-<p class="strat"><b>Zur Datenlage:</b> Bei ${z.ohneregion} der ${z.anzahl} NPCs (${ohneRegionNamen}) ist im Datenbestand kein fester Aufenthaltsort hinterlegt — die Region-Zeile fehlt dort bewusst, statt einen Ort zu raten. Bei ${z.teilsbelegt} weiteren NPCs gilt die Quellenlage als dünn (nur eine Quelle bestätigt die Angaben); das steht direkt auf der jeweiligen Karte.</p>
+<p class="strat"><b>Zur Datenlage:</b> ${z.ohneregion > 0 ? `Bei ${z.ohneregion} der ${z.anzahl} NPCs (${ohneRegionNamen}) ist im Datenbestand kein fester Aufenthaltsort hinterlegt — die Region-Zeile fehlt dort bewusst, statt einen Ort zu raten.` : `Bei allen ${z.anzahl} NPCs ist eine Region hinterlegt; wo die Quellen nur die Region und nicht den genauen Standort belegen, steht bewusst nur diese.`} Bei ${z.teilsbelegt} NPCs gilt die Quellenlage als dünn (nur eine Quelle bestätigt die Angaben); das steht direkt auf der jeweiligen Karte.</p>
 <p class="note">Mehrere Antagonisten sind zugleich Bosse mit eigener Kampfmechanik — Details dazu in der <a href="/bosse">Bossliste</a>. Wer stattdessen wilde und feindliche Kreaturen sucht, findet sie im <a href="/bestiarium">Bestiarium</a>.</p>
 ${sections}`;
 

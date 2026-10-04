@@ -90,27 +90,27 @@
   "trophaeen": [
     {
       "frage": "Wie viele Trophäen gibt es in Crimson Desert?",
-      "antwort": "Die Trophäenübersicht enthält {{anzahl}} Erfolge in Platin, Gold, Silber und Bronze. Sie markiert außerdem {{verpassbar|wort}} Trophäen als verpassbar."
+      "antwort": "Crimson Desert hat auf PlayStation {{anzahl}} Trophäen: {{platin}} Platin, {{gold}} Gold, {{silber}} Silber und {{bronze}} Bronze. Auf Xbox und Steam gibt es dieselben Erfolge ohne die Platin-Trophäe. Die Übersicht markiert {{verpassbar|wort}} Trophäen als verpassbar."
     },
     {
       "frage": "Welche Trophäen in Crimson Desert sind verpassbar?",
-      "antwort": "In der Übersicht sind {{verpassbar|wort}} Trophäen als verpassbar gekennzeichnet. Plane diese Bedingungen frühzeitig ein und sichere deinen Fortschritt, bevor du irreversible Entscheidungen oder Storyabschnitte abschließt."
+      "antwort": "In der Übersicht sind {{verpassbar|wort}} Trophäen als verpassbar gekennzeichnet: Battlefield Conqueror, Brilliant Tactician, Shadowlord, Grand Collector of Arms und Unvanquished Strategist. Verpassbar sind dabei keine Storyabschnitte, sondern einzelne Herausforderungen mit begrenzten Gelegenheiten, etwa „Into the Barrage“, „Disruption“ mit den Jackals in Pailune, „Back Alley Cleanup“ mit offenen Kopfgeldern und die Spezialwaffen, die du nie verkaufen, spenden oder umwandeln solltest."
     },
     {
       "frage": "Kann man in Crimson Desert alle Trophäen in einem Durchgang holen?",
-      "antwort": "unbekannt"
+      "antwort": "Ja. Übereinstimmende Trophäen-Guides nennen einen einzigen Durchgang als ausreichend für Platin; es gibt keine Online- oder Glitch-Trophäen und keine Vorgabe beim Schwierigkeitsgrad. Nach dem Epilog bleibt die offene Welt frei bespielbar, Hauptquests lassen sich aber nicht wiederholen. Die {{verpassbar|wort}} als verpassbar markierten Trophäen hängen an Herausforderungen mit begrenzten Gelegenheiten und sollten früh erledigt werden."
     },
     {
       "frage": "Was muss ich für die Platin Trophäe in Crimson Desert machen?",
-      "antwort": "Die genaue Voraussetzung für die Platin Trophäe steht in ihrem Eintrag. In der Regel solltest du vorher prüfen, ob alle anderen erforderlichen Trophäen abgeschlossen sind, besonders die verpassbaren."
+      "antwort": "Für die Platin-Trophäe „Pywel Legend“ brauchst du alle anderen Trophäen: die komplette Hauptstory bis zum Beginn des Epilogs, die Lagerverlegung nach Pailune und sämtliche Herausforderungs-Kategorien im Journal. Viele Meisterschafts-, Kampf- und Lebens-Herausforderungen erscheinen erst, wenn du das passende Versiegelte Abyss-Artefakt (Sealed Abyss Artifact) gefunden hast; vorher erledigte Ziele zählen nicht zuverlässig."
     },
     {
       "frage": "Wie verhindere ich verpassbare Achievements in Crimson Desert?",
-      "antwort": "Vergleiche vor wichtigen Hauptquests und Entscheidungen deinen Fortschritt mit den {{verpassbar|wort}} markierten Trophäen. Erledige optionale Ziele sofort, wenn ihre Beschreibung an einen bestimmten Abschnitt, Charakter oder Zustand gebunden ist."
+      "antwort": "Sammle früh die Versiegelten Abyss-Artefakte (Sealed Abyss Artifacts), denn viele Herausforderungen zählen erst danach und nicht rückwirkend. Befreie die feindlichen Lager in Pailune nicht vorschnell, erledige nicht alle Kopfgelder vor „Back Alley Cleanup“ und behalte die Spezialwaffen. So bleiben auch die {{verpassbar|wort}} als verpassbar markierten Trophäen erreichbar."
     },
     {
       "frage": "Sind Trophäen und Achievements in Crimson Desert dasselbe?",
-      "antwort": "Die Übersicht behandelt beide Begriffe als Erfolge des Spiels. Auf PlayStation werden sie üblicherweise als Trophäen bezeichnet, auf anderen Plattformen kann die Bezeichnung abweichen."
+      "antwort": "Inhaltlich ja: Steam und Xbox führen dieselben Erfolge mit denselben englischen Namen wie die PlayStation-Liste, nur ohne die Platin-Trophäe „Pywel Legend“. Auf PlayStation heißen sie Trophäen, auf den anderen Plattformen Achievements."
     }
   ],
   "bestiarium": [
@@ -241,8 +241,8 @@
       "antwort": "Die Gruppe Antagonisten umfasst {{antagonisten}} Figuren, meist Anführer gegnerischer Gruppen wie der Black Bear Forces, der Lonely Jackals oder der Crow Brothers. Ihre Karte nennt Rolle und, soweit bekannt, Region."
     },
     {
-      "frage": "Warum fehlt bei manchen NPCs die Region?",
-      "antwort": "Bei {{ohneregion}} der {{anzahl}} NPCs ist keine Region erfasst, weil die vorliegenden Quellen sie nicht an einen festen Ort binden. Ihre Karte zeigt entsprechend keine Region-Zeile."
+      "frage": "Ist bei jedem NPC eine Region angegeben?",
+      "antwort": "Bei {{mitregion}} der {{anzahl}} NPCs ist eine Region erfasst. Wo die Quellen nur die Region und nicht den genauen Standort belegen, steht bewusst nur diese; fehlt ein belegter Ort ganz, entfällt die Region-Zeile, statt einen Ort zu raten."
     },
     {
       "frage": "Wie sicher sind die Angaben zu den NPCs?",

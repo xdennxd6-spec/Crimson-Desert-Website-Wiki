@@ -3418,14 +3418,14 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <thead><tr><th>Mechanik</th><th>Erklärung</th></tr></thead>
       <tbody>
         <tr><td><strong>Parieren (Parry)</strong></td><td>Getimtes Blocken (<span class="kbd">L1 / LB / Ctrl</span>) genau im Treffermoment. Ein perfekter Parry stellt etwas Ausdauer + Spirit her, füllt die Stagger-Leiste des Gegners und öffnet ein Konterfenster. <strong>Greifangriffe (Grabs) lassen sich NICHT parieren</strong> — nur ausweichen.</td></tr>
-        <tr><td><strong>Perfect Dodge</strong></td><td>Ausweichen (<span class="kbd">○ / B / Alt</span>) im letzten Moment → grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff. Verzeihender als Parry, unterbricht aber keine Combos — danach kann gekontert werden.</td></tr>
+        <tr><td><strong>Perfect Dodge</strong></td><td>Skill <em>Dodge</em> (Ausweichen kurz vor dem Treffer), muss erst im Skillbaum freigeschaltet werden (Kliff: Keen Senses Lv 2, 1 Abyss Artifact). Ausweichen (<span class="kbd">○ / B / Alt</span>) im letzten Moment → grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff. Verzeihender als Parry, unterbricht aber keine Combos — danach kann gekontert werden.</td></tr>
         <tr><td><strong>Blocken / Guard Break</strong></td><td>Guard halten blockt, kostet aber Ausdauer (schwere Treffer mehr). Ist die Ausdauer leer, <strong>bricht die Deckung</strong>. Gegnerische Deckung brichst du mit schweren Angriffen (<span class="kbd">R2 / RT / RMB</span>).</td></tr>
-        <tr><td><strong>Rote &amp; blaue Signale</strong></td><td><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen. <strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen.</td></tr>
+        <tr><td><strong>Rote &amp; blaue Signale</strong></td><td><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen. <strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen. Nicht verwechseln: Färbt sich während eines gegnerischen Angriffs der ganze Bildschirm bläulich und erscheint oben links „Learning in Progress“, kannst du den Skill per <em>Watch &amp; Learn</em> abschauen (siehe Skills).</td></tr>
         <tr><td><strong>Stamina vs. Spirit</strong></td><td><strong>Ausdauer (Stamina):</strong> Sprinten, Ausweichen, Klettern, Blocken, die meisten Skills. <strong>Spirit:</strong> separate Ressource für Force-Skills (z.B. Force Palm), wird über <em>Focus</em> wieder aufgefüllt.</td></tr>
         <tr><td><strong>Force Palm</strong></td><td>Kurzreichweitiger Energiestoß (<span class="kbd">R3 / RS / MMB</span>), kostet 5 Spirit und senkt die Verteidigung des Ziels (Charakter Kliff; Varianten u.a. Aerial/Healing).</td></tr>
         <tr><td><strong>Axiom Force</strong></td><td>Telekinetisches Ziehen/Stoßen (<span class="kbd">L3 halten / Tab</span>) — v.a. für Rätsel/Traversal, mit etwas Kampfnutzen. (Eigener Skill, NICHT dasselbe wie Force Palm.)</td></tr>
-        <tr><td><strong>Grappling (Ringkampf)</strong></td><td>Gegner packen, werfen &amp; slammen — für alle Charaktere kostenlos im Stamina-Skillbaum (bis 5 Stufen). Moves wie Throw, Lariat, Giant Swing (Crowd-Control). Geworfene Gegner verletzen, was sie treffen.</td></tr>
-        <tr><td><strong>Bogen-Fokus (Zeitlupe)</strong></td><td>Beim Bogen-Zielen verlangsamt sich kurz die Zeit für manuelles Zielen — nützlich für Schwachpunkte/Stagger.</td></tr>
+        <tr><td><strong>Grappling (Ringkampf)</strong></td><td>Gegner packen, werfen &amp; slammen. Die Grundstufe ist von Beginn an verfügbar (Kliff im Stamina-Baum, Damiane und Oongka mit eigenem Grappling-Zweig); weitere Stufen bis Lv 5 kosten je 1 Abyss Artifact und erhöhen den Schaden der Griffe. Moves wie Throw, Lariat und Giant Swing (Crowd-Control). Geworfene Gegner verletzen, was sie treffen.</td></tr>
+        <tr><td><strong>Focus (Zeitlupe)</strong></td><td>Eigener Modus auf Tastendruck: verlangsamt die Zeit um dich herum und füllt dabei Spirit auf. Besonders nützlich beim Zielen mit Bogen oder Schusswaffe (Schwachpunkte/Stagger; <em>Focused Shot</em> markiert mehrere Ziele) und für <em>Focused Force Palm</em> (leuchtenden Kern treffen).</td></tr>
         <tr><td><strong>Elemente</strong></td><td>4 Elemente auf Angriffe legen: <strong>Feuer</strong> (Schaden über Zeit), <strong>Frost</strong> (Einfrieren/Shatter), <strong>Blitz</strong> (Schock, stärker gegen Nasse), <strong>Wind</strong> (in die Luft werfen). Gegen Schwächen gezielt einsetzen.</td></tr>
       </tbody>
     </table>
@@ -3436,8 +3436,9 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <li><strong>Menschen parieren, Monster ausweichen</strong> — die zuverlässigste Grundregel.</li>
         <li><strong>Grabs (oft rotes Glint) nie parieren</strong>, immer wegrollen.</li>
         <li><strong>Heilung über Essen</strong>, nicht über Tränke — gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü.</li>
-        <li><strong>Palmar-Pille = Auto-Revive:</strong> Hast du beim Tod eine im Inventar, stehst du sofort mit etwas HP wieder auf.</li>
+        <li><strong>Palmar-Pille = Auto-Revive:</strong> Hast du beim Tod eine im Inventar, stehst du sofort mit etwas HP wieder auf (<em>Palmar Pill</em>: Teil der Gesundheit; <em>Refined Palmar Pill</em>: volle Gesundheit). Beide sind herstellbar und u. a. beim Händler Lacey erhältlich.</li>
         <li><strong>Spirit per Focus auffüllen</strong>, bevor du Force-Skills brauchst.</li>
+        <li><strong>Schwierigkeitsgrad frei wählbar:</strong> Seit Patch 1.04.00 gibt es unter Settings &gt; Play die Grade Easy, Normal und Hard. Easy verlängert die Zeitfenster für Parry und Dodge und senkt den erlittenen Schaden; Hard verkürzt die Fenster, und Essen wirkt dort erst nach der Verzehranimation. Für Trophäen ist kein bestimmter Grad nötig.</li>
         <li><strong>Achte auf Missables</strong> — viele Quests/Items sind kapitelgebunden (siehe Kapitel-Guide &amp; Checklisten).</li>
       </ul>
     </div>
@@ -3461,7 +3462,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <tr><td>Heilen / Essen</td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">F3</span></td></tr>
       </tbody>
     </table>
-    <p style="font-size:.82rem;opacity:.7;margin-bottom:24px">Werkseinstellung — Tastatur/Maus lassen sich über „Shortcuts and Input Settings“ umbelegen (belegt spätestens seit Patch 1.00.03; seit 1.08.00 haben alle Eingaben eine Zweitbelegung, und die Menü-Shortcuts für Inventar, Karte, Skills, Journal, Foto-Modus und Menü sind frei belegbar). Patch 1.00.03 ergänzte außerdem die Standardbelegung Guard/Aim (Maus-Seitentaste 1) und Ausweichen (Maus-Seitentaste 2). Für Controller gibt es Remapping erst seit 1.09.00; die Axiom-Force-Tasten sind dort seit 1.10.00 anpassbar, die Tasten für Inventar, Karte, Skills, Journal und Foto-Modus seit 1.11.00. Eine separate „Parry"-Taste gibt es nicht: Parieren = Block im richtigen Moment. Einzelne Konsolen-Belegungen (Lock-On-Richtung, Menü-Tasten) können je nach Quelle leicht abweichen.</p>
+    <p style="font-size:.82rem;opacity:.7;margin-bottom:24px">Werkseinstellung — Tastatur/Maus lassen sich über „Shortcuts and Input Settings“ umbelegen (belegt spätestens seit Patch 1.00.03; seit 1.08.00 haben alle Eingaben eine Zweitbelegung, und die Menü-Shortcuts für Inventar, Karte, Skills, Journal, Foto-Modus und Menü sind frei belegbar). Patch 1.00.03 ergänzte außerdem die Standardbelegung Guard/Aim (Maus-Seitentaste 1) und Ausweichen (Maus-Seitentaste 2). Für Controller gibt es Remapping erst seit 1.09.00; die Axiom-Force-Tasten sind dort seit 1.10.00 anpassbar, die Tasten für Inventar, Karte, Skills, Journal und Foto-Modus seit 1.11.00. Eine separate „Parry"-Taste gibt es nicht: Parieren = Block im richtigen Moment. Einzelne Konsolen-Belegungen (Lock-On-Richtung, Menü-Tasten) können je nach Quelle leicht abweichen. Laut Fextralife-Steuerungsliste (PS5) gilt außerdem: <span class="kbd">✕</span> = Laufen, zweimal <span class="kbd">✕</span> = Sprint; <span class="kbd">○</span> = Rolle, zweimal <span class="kbd">○</span> = Ausweichen (Evasion); <span class="kbd">L3</span> = Axiom Force bzw. Ducken/Rutschen; <span class="kbd">D-Pad ↓</span> = Ziel fixieren (Hard Lock); Touchpad = Kamerawechsel.</p>
   </section>
   <section class="sec active" id="sec-bosses">
     <h2 class="sec-t"><span class="sec-sym">☠</span> Bosse</h2>
@@ -3575,21 +3576,21 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         </tbody>
       </table>
       </div>
-      <strong style="color:var(--gdim);font-size:12px">Hexen &amp; ihre Rezepte (Region)</strong>
+      <strong style="color:var(--gdim);font-size:12px">Hexen &amp; ihre Rezepte (Wohnort)</strong>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
       <table style="width:100%;border-collapse:collapse;font-size:var(--fs-11-5);margin:4px 0 10px">
-        <thead><tr style="color:var(--gold);text-align:left"><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Hexe</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Region</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">verkaufte Rezepte</th></tr></thead>
+        <thead><tr style="color:var(--gold);text-align:left"><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Hexe</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Wohnort (Region)</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">verkaufte Rezepte</th></tr></thead>
         <tbody style="color:var(--dim)">
-          <tr><td style="padding:4px 8px">Elowen (Wisdom)</td><td style="padding:4px 8px">Hernand / Witchwoods</td><td style="padding:4px 8px">Vigor I, Vitality I, Composure I</td></tr>
-          <tr><td style="padding:4px 8px">Areciel (Strength)</td><td style="padding:4px 8px">Crimson Desert / Red Desert</td><td style="padding:4px 8px">Destruction I, Insight I</td></tr>
-          <tr><td style="padding:4px 8px">Bari (Kindness)</td><td style="padding:4px 8px">Pailune / Silver Wolf Mountain</td><td style="padding:4px 8px">Haste I, Swift I, Ascent I</td></tr>
+          <tr><td style="padding:4px 8px">Elowen (Wisdom)</td><td style="padding:4px 8px">Hernand / Witchwoods (Alfonso Estate)</td><td style="padding:4px 8px">Vigor I, Vitality I, Composure I</td></tr>
+          <tr><td style="padding:4px 8px">Areciel (Strength)</td><td style="padding:4px 8px">Crimson Desert / nahe Urdavah</td><td style="padding:4px 8px">Destruction I, Insight I</td></tr>
+          <tr><td style="padding:4px 8px">Bari (Kindness)</td><td style="padding:4px 8px">Pailune / Crimson Lake (Silver Wolf Mountain)</td><td style="padding:4px 8px">Haste I, Swift I, Ascent I</td></tr>
           <tr><td style="padding:4px 8px">Lyselia (Humility)</td><td style="padding:4px 8px">Demeniss / Serpent Marsh</td><td style="padding:4px 8px">Fortification I, Aegis I, Fortitude I</td></tr>
-          <tr><td style="padding:4px 8px">Sylvia (Hermit)</td><td style="padding:4px 8px">Shadow's Whisper Cave (Kap.3)</td><td style="padding:4px 8px">nur Socket/Embed/Extract, KEINE Synthese</td></tr>
+          <tr><td style="padding:4px 8px">Sylvia (Hermit)</td><td style="padding:4px 8px">Hernand / Shadow's Whisper Cave (Kap.3)</td><td style="padding:4px 8px">keine Händlerware (questlog); laut Guides nur Socket/Embed/Extract, KEINE Synthese</td></tr>
         </tbody>
       </table>
       </div>
       <p style="margin:6px 0 0;font-size:var(--fs-11);color:var(--gdim)">Benannte Synthese-Kombi (belegt, Einzelquelle): <strong>Wound of Darkness</strong> = Destruction I + Aegis I + Haste I + Ascent I.</p>
-      <p style="margin:8px 0 0;font-size:var(--fs-10-5);color:var(--dim)">Datenstand: Hexen→Rezept-Zuordnung Einzelquelle (vulkk), mittlere Konfidenz. Quellenkonflikt: eine Quelle nennt nur Elowen als synthese-fähig, andere vier Regional-Hexen. Odds und Tier-Regeln mehrfach belegt. White Crow als Synthese-Hexe nur einfach genannt und unbestätigt. Spezial-Synthese-Output ist echt zufällig, feste Input→Output-Rezepte existieren dafür nicht.</p>
+      <p style="margin:8px 0 0;font-size:var(--fs-10-5);color:var(--dim)">Datenstand: Hexen→Rezept-Zuordnung durch questlog-Händlerdaten bestätigt (Elowen: Gear Blueprint: Vigor/Vitality/Composure; Areciel: Destruction/Insight; Bari: Swift/Haste/Ascent; Lyselia: Fortification/Aegis/Fortitude; zuvor nur Einzelquelle vulkk). Die Spalte nennt den Wohnort der Hexe — ihre Sanctums liegen teils in anderen Regionen (siehe Sanctum-Checkliste). Quellenkonflikt: eine Quelle nennt nur Elowen als synthese-fähig, andere vier Regional-Hexen. Odds und Tier-Regeln mehrfach belegt. White Crow als Synthese-Hexe nur einfach genannt und unbestätigt. Spezial-Synthese-Output ist echt zufällig, feste Input→Output-Rezepte existieren dafür nicht.</p>
       <p style="margin:8px 0 0;font-size:var(--fs-10-5);color:var(--gdim)">Bezug zum Baum unten: dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</p>
     </div>
     <h3 class="sub-t" style="margin-top:24px">🧪 Witch-Synthese-Baum <span style="font-size:var(--fs-11);color:var(--dim);font-weight:400">(questlog-Datamine)</span></h3>
@@ -3726,7 +3727,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="card" style="margin-bottom:20px" data-s="voraussetzung freischaltung camp kapitel 3 howling hill homestead cheers echoing from the edge kailok hornsplitter serkis first step to rebuilding a fresh start ein neuanfang a gentle touch pioneering bustling hill marius grounds of the sunrise">
       <div class="disarm-step">
         <div class="disarm-num">1</div>
-        <div class="disarm-txt"><strong>Das Camp entsteht — Kapitel 3, Unterkapitel „Homestead"</strong><br>Nach dem Sieg über <strong>Kailok the Hornsplitter</strong> („Cheers Echoing From the Edge") überlässt Marquis <strong>Alan Serkis</strong> den Greymanes das Land am Howling Hill. Gegründet wird das Lager mit den Hauptquests <strong>„First Step to Rebuilding"</strong> und <strong>„A Fresh Start"</strong> (32. Hauptmission). Ab jetzt stehen <strong>Carl</strong> (Versorger/Spenden) und <strong>Ross</strong> (Entsende-Koordinator) im Camp. Trophäe: <em>Master Camper</em>.</div>
+        <div class="disarm-txt"><strong>Das Camp entsteht — Kapitel 3, Unterkapitel „Homestead"</strong><br>Nach dem Sieg über <strong>Kailok the Hornsplitter</strong> („Cheers Echoing From the Edge") überlässt Marquis <strong>Alan Serkis</strong> den Greymanes das Land am Howling Hill. Gegründet wird das Lager mit den Hauptquests <strong>„First Step to Rebuilding"</strong> und <strong>„A Fresh Start"</strong> (32. Hauptmission). Mit der Homestead-Mission <strong>„Comrade's Return"</strong> (Treffen mit Marius) kommen <strong>Carl</strong> (Versorger/Spenden) und <strong>Ross</strong> (Entsende-Koordinator) ins Camp. Trophäe: <em>Master Camper</em>.</div>
       </div>
       <div class="disarm-step">
         <div class="disarm-num">2</div>
@@ -3734,11 +3735,11 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       </div>
       <div class="disarm-step">
         <div class="disarm-num">3</div>
-        <div class="disarm-txt"><strong>Erster Ausbau = Hauptquest „Bustling Hill"</strong><br>Die 45. Hauptmission direkt danach ist zugleich die erste Ausbaustufe. Du entsendest Luke und Ronald auf die Mission <strong>„Howling Hill Camp Expansion"</strong>.</div>
+        <div class="disarm-txt"><strong>Erster Ausbau = Hauptquest „Bustling Hill"</strong><br>Die 45. Hauptmission direkt danach ist zugleich die erste Ausbaustufe. <span style="color:var(--dim)">In den aktuellen Spieldaten (questlog) heißt diese Pioneering-Mission „Commotion at Howling Hill“ (gleichlautende Questbeschreibung, ebenfalls fünfte von sechs Pioneering-Missionen); Questbelohnung laut questlog: Cat Plate Helm, PowerPyx nennt keine Belohnung.</span> Du entsendest Luke und Ronald auf die Mission <strong>„Howling Hill Camp Expansion"</strong>.</div>
       </div>
       <div class="disarm-step">
         <div class="disarm-num">4</div>
-        <div class="disarm-txt"><strong>Alle weiteren Stufen laufen über „Grounds of the Sunrise"</strong><br>Journal → Fraktionsquests → Greymanes. Questgeber ist <strong>Marius</strong>. Die Ausbau-Quest heißt dort jedes Mal <strong>„Expanding the Camp"</strong> und steht am Ende einer Questreihe.<br><span style="color:var(--dim)">Camp- und Greymane-Quests lassen sich nur als <strong>Kliff</strong> vorantreiben — nicht als Damiane oder Oongka.</span></div>
+        <div class="disarm-txt"><strong>Alle weiteren Stufen laufen über „Grounds of the Sunrise"</strong><br>Journal → Fraktionsquests → Greymanes. Questgeber ist <strong>Marius</strong>. Die Ausbau-Quest heißt dort jedes Mal <strong>„Expanding the Camp"</strong> und steht am Ende einer Questreihe.<br><span style="color:var(--dim)">Camp- und Greymane-Quests lassen sich nur als <strong>Kliff</strong> vorantreiben — nicht als Damiane oder Oongka. Pearl Abyss führt das als bekannten Fehler (Known Issues, Stand 21.09.2026: „Greymane faction quests cannot be progressed while playing as Damiane or Oongka.“); eine Behebung melden die Notes bis 2.03.02 nicht.</span></div>
       </div>
     </div>
 
@@ -3777,10 +3778,10 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <thead><tr><th>Stufe</th><th>Auslöser</th><th>Bedingung / Kosten</th><th>Lager</th></tr></thead>
       <tbody>
         <tr class="trow" data-s="startzustand starter camp kapitel 3 a fresh start first step to rebuilding carl ross 240 slots luke ronald"><td><strong>Start</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">kein Ausbau</span></td><td>Hauptquests <b>First Step to Rebuilding</b> → <b>A Fresh Start</b><br><span style="color:var(--dim)">Kapitel 3, Unterkapitel „Homestead"</span></td><td>Sieg über Kailok the Hornsplitter</td><td>240</td></tr>
-        <tr class="trow" data-s="1 erster ausbau bustling hill pioneering hauptquest howling hill camp expansion 2 rekruten 100 food 250 camp funds 340 slots 17 18 stunden"><td><strong>1. Ausbau</strong></td><td>Hauptquest <b>Bustling Hill</b> (Kap. 3, <em>Pioneering</em>)<br>Mission: <b>Howling Hill Camp Expansion</b></td><td><b>2 Kameraden</b> (Luke + Ronald) · 100× Food · 250× Camp Funds<br><span style="color:var(--dim)">Laufzeit 17–18 Ingame-Stunden (Quellen uneins) · Belohnung: keine</span></td><td>340</td></tr>
+        <tr class="trow" data-s="1 erster ausbau bustling hill pioneering hauptquest howling hill camp expansion 2 rekruten 100 food 250 camp funds 340 slots 17 18 stunden"><td><strong>1. Ausbau</strong></td><td>Hauptquest <b>Bustling Hill</b> (Kap. 3, <em>Pioneering</em>)<br>Mission: <b>Howling Hill Camp Expansion</b></td><td><b>2 Kameraden</b> (Luke + Ronald) · 100× Food · 250× Camp Funds<br><span style="color:var(--dim)">Laufzeit 17–18 Ingame-Stunden (Quellen uneins) · Questbelohnung laut questlog: Cat Plate Helm (PowerPyx: keine)</span></td><td>340</td></tr>
         <tr class="trow" data-s="2 zweiter ausbau embers of return expanding the camp second expansion 4 greymanes 60 stone 60 timber 400 provisions 1600 copper 16 silver 440 slots lukes request secure resources timberham sawmill karin quarry"><td><strong>2. Ausbau</strong></td><td>Fraktionsquest <b>Expanding the Camp</b>, Ende der Reihe <b>Embers of Return</b> (7 Quests)<br>Mission: <b>Howling Hill Camp – Second Expansion</b></td><td><b>4 Greymanes</b> · 60× Stone · 60× Timber · 400× Provisions · 1.600 Copper (= 16 Silver)<br><span style="color:var(--dim)">Laufzeit 1 Tag 6 Stunden. Davor das Objective <em>Secure Resources</em>: Logging @ Timberham Sawmill + Quarry @ Karin Quarry.</span></td><td>440</td></tr>
         <tr class="trow" data-s="3 dritter ausbau gathered will expanding the camp warspike spearmaker secure resources kosten unbekannt 540 slots farm ranch"><td><strong>3. Ausbau</strong></td><td>Fraktionsquest <b>Expanding the Camp</b>, Ende der Reihe <b>Gathered Will</b> (10 Quests)</td><td><span class="tag" style="color:var(--red);border-color:var(--red)">Kosten unbekannt</span> Weder Kopfzahl noch Materialmengen noch Dauer sind irgendwo beziffert — mehrfach gegengeprüft.<br><span style="color:var(--dim)">Davor <em>Secure Resources</em>: Collect Weapons @ Warspike Spearmaker.</span></td><td>540</td></tr>
-        <tr class="trow" data-s="4 vierter ausbau solid foundation expanding the camp inksworth bindery azerian manor 10 rekruten 1500 armaments 2500 stone 2500 timber 4000 food 100000 640 slots letzter howling hill"><td><strong>4. Ausbau</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">letzter am Howling Hill</span></td><td>Fraktionsquest <b>Expanding the Camp</b>, Ende der Reihe <b>Solid Foundation</b> (6 Quests)<br><span style="color:var(--dim)">Öffnet sich erst nach dem 3. Ausbau.</span></td><td><span class="tag" style="color:var(--gold);border-color:var(--gold)">einquellig</span> 10 Rekruten · 1.500× Armaments · 2.500× Stone · 2.500× Timber · 4.000× Food · 100.000× Geld<br><span style="color:var(--dim)">Alle Angaben gehen auf KeenGamer zurück; ob 100.000 <em>Silver</em> oder <em>Copper</em> gemeint sind, ist strittig (Faktor 100). Nachrecherche 23.08.2026: <b>keine zulässige Quelle nennt Betrag oder Einheit</b> — game8, VULKK, Fextralife und gaming.tools führen zu dieser Stufe keine einzige Ressourcenzahl. Gegen <em>Silver</em> spricht der Vergleich mit den belegten Stufen dieser Tabelle: 100.000 Copper wären 1.000 Silver und damit das Zehnfache der 5. Stufe, 100.000 Silver dagegen deren Tausendfaches. Armaments sind der Flaschenhals. Davor <em>Secure Resources</em> @ Azerian Manor.</span></td><td>640</td></tr>
+        <tr class="trow" data-s="4 vierter ausbau solid foundation expanding the camp inksworth bindery azerian manor 10 rekruten 1500 armaments 2500 stone 2500 timber 4000 food 100000 640 slots letzter howling hill"><td><strong>4. Ausbau</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">letzter am Howling Hill</span></td><td>Fraktionsquest <b>Expanding the Camp</b>, Ende der Reihe <b>Solid Foundation</b> (6 Quests)<br><span style="color:var(--dim)">Öffnet sich erst nach dem 3. Ausbau.</span></td><td><span class="tag" style="color:var(--gold);border-color:var(--gold)">einquellig</span> 10 Rekruten · 1.500× Armaments · 2.500× Stone · 2.500× Timber · 4.000× Food · 100.000× Geld<br><span style="color:var(--dim)">Alle Angaben gehen auf KeenGamer zurück; ob 100.000 <em>Silver</em> oder <em>Copper</em> gemeint sind, ist strittig (Faktor 100). Nachrecherche 23.08.2026: <b>keine zulässige Quelle nennt Betrag oder Einheit</b> — game8, VULKK, Fextralife und gaming.tools führen zu dieser Stufe keine einzige Ressourcenzahl. Gegen <em>Silver</em> spricht der Vergleich mit den belegten Stufen dieser Tabelle: 100.000 Copper wären 1.000 Silver und damit das Zehnfache der 5. Stufe, 100.000 Silver dagegen deren Tausendfaches. Armaments sind der Flaschenhals. Davor <em>Secure Resources</em> @ Azerian Manor (Wachmission, sichert Camp Funds).</span></td><td>640</td></tr>
         <tr class="trow" data-s="5 finale stufe umzug pailune the return home homeward reconstructing pailune hope from ashes serkis 1000 slots epilog kapitel 12 abyss proud returnee"><td><strong>5. Ausbau</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">Umzug nach Pailune</span></td><td><b>Reconstructing Pailune</b> (Reihe <em>Hope from Ashes</em>) → Umzugsquest <b>The Return Home</b> (Reihe <em>Homeward</em>), gestartet bei <b>Serkis</b> in Hernand</td><td>Howling Hill voll ausgebaut · Pailune befreit (Kap. 7) und komplett wiederaufgebaut · Hauptstory inkl. Epilog<br><span style="color:var(--dim)">Vorbereitungsmission: 1.000× Stone · 1.000× Timber · 1.000× Food · 10.000 Copper (100 Silver) · 10 Rekruten · 2 Tage 6 Stunden.</span></td><td>1.000</td></tr>
       </tbody>
     </table>
@@ -3794,7 +3795,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <tr class="trow" data-s="embers of return ronnie cook food shop brice wagonmaster tranan quartermaster compact house otto silvan aldric fritz"><td><strong>Embers of Return</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">2. Ausbau</span></td><td><b>Ronnie</b> (Koch/Food Shop — vereint die Funktionen von Grocer, Butcher und Taverne in einem Stand; die Händler draußen in der Welt bleiben bestehen), <b>Brice</b> (Wagonmaster) — beide über <em>A Rumor at Glenbright Farm</em>; <b>Tranan</b> (Quartiermeister) <span class="tag" style="color:var(--dim);border-color:var(--line)">Rolle strittig</span></td><td>Haus-Layout <em>Compact House</em>; 4 weitere Kameraden (Otto, Silvan, Aldric, Fritz) → 6 gesamt</td></tr>
         <tr class="trow" data-s="gathered will wynstan provisioner conrad furniture maker alec smithy anvil grindstone kamu cultivator farm ed stablemaster ben rancher standard house novice balder ryan"><td><strong>Gathered Will</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">3. Ausbau</span></td><td><b>Wynstan</b> (Händler), <b>Conrad</b> (Möbel — hier gibt es den Cauldron), <b>Alec</b> (Schmied, dazu Amboss &amp; Schleifstein), <b>Kamu</b> (Farm), <b>Ed</b> (Stall), <b>Ben</b> (Ranch)</td><td>Haus-Layout <em>Standard House</em>; <b>Farm und Ranch</b> nutzbar (Bau je über eine eigene Quest und einen Kameraden mit Builder-Skill); Skillstufe <em>Novice</em> (+10 % Erträge) <span class="tag" style="color:var(--dim);border-color:var(--line)">nur VULKK</span>; 2 weitere Kameraden → 8 gesamt</td></tr>
         <tr class="trow" data-s="solid foundation oliver dyer eric barber connor lapidarist juwelier spacious house skilled 30 prozent inksworth bindery morrow fextralife quellen"><td><strong>Solid Foundation</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">4. Ausbau</span></td><td><b>Oliver</b> (Färber), <b>Eric</b> (Friseur), <b>Connor</b> (Edelsteinschleifer) — alle drei über <em>A Rumor at the Inksworth Bindery</em><br><span style="color:var(--gdim)">Fextralifes Seite <em>Greymane Camp</em> vertauscht die Rollen (Morrow als Barbier, Eric als Dyehouse-Betreiber) — ein Fehler dieser einen Seite: Fextralifes eigene <em>Characters</em>-Seite, die Spieldaten (questlog: Eric „The Greymane barber", Oliver „The Greymane dyer", Morrow „A Greymane scout"), game8 und VULKK sind sich einig.</span></td><td>Haus-Layout <em>Spacious House</em>; Skillstufe <em>Skilled</em> (+30 %) <span class="tag" style="color:var(--dim);border-color:var(--line)">nur VULKK</span>; öffnet die Rekrutierungsreihe <em>Reuniting with Comrades</em></td></tr>
-        <tr class="trow" data-s="reuniting with comrades diederik tailor schneider expert 60 prozent 37 greymanes rekrutierung keine ausbaustufe"><td><strong>Reuniting with Comrades</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">keine Ausbaustufe</span></td><td><b>Diederik</b> (Schneider)</td><td>Reine Rekrutierungsreihe (8 „A Rumor …"-Quests) bis zu <b>37 Kameraden</b>; Skillstufe <em>Expert</em> (+60 %) <span class="tag" style="color:var(--dim);border-color:var(--line)">nur VULKK</span></td></tr>
+        <tr class="trow" data-s="reuniting with comrades diederik tailor schneider expert 60 prozent 37 greymanes rekrutierung keine ausbaustufe"><td><strong>Reuniting with Comrades</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">keine Ausbaustufe</span></td><td><b>Diederik</b> (Schneider)</td><td>Reine Rekrutierungsreihe (7 „A Rumor in …"-Quests plus „A Familiar Voice at the Redfox Trading Post") bis zu <b>37 Kameraden</b>; Skillstufe <em>Expert</em> (+60 %) <span class="tag" style="color:var(--dim);border-color:var(--line)">nur VULKK</span></td></tr>
         <tr class="trow" data-s="pailune umzug spacious pailunese house 1000 slots farm 32 saatgut ranch 35 tiere special cooking tools abyss nexus proud returnee"><td><strong>Umzug nach Pailune</strong><br><span style="color:var(--dim);font-size:var(--fs-11)">5. Ausbau</span></td><td>Privatlager als platzierbares Hausmöbel; spezielle Kochwerkzeuge (ersetzen Ronnies Kochtopf). <b>Keine neuen Händler.</b></td><td>Privatlager 1.000 Slots; Haus-Layout <em>Spacious Pailunese House</em>; Farm 32 Saatgut, Ranch 35 Tiere; Abyss-Nexus in Pailune; Trophäe <em>Proud Returnee</em></td></tr>
       </tbody>
     </table>
@@ -3867,7 +3868,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <div class="crows">
         <div class="crow"><span class="cl">Vorlauf</span><span class="cv">Nach Kapitel 7 „Homecoming" (Pailune von Ludvig befreit) öffnet <b>Reconstructing Pailune</b>. Fünf Bauprojekte: <b>Pailune Council, Institute of Pailune, Infirmary, Barracks, Trading Post</b>. Kosten der Einzelprojekte sind nirgends beziffert.</span></div>
         <div class="crow"><span class="cl">Umzug</span><span class="cv">Quest <b>The Return Home</b>, gestartet bei <b>Serkis</b> in Hernand. Voraussetzung: Howling Hill voll ausgebaut, Pailune komplett wiederaufgebaut, Hauptstory inklusive Epilog durch.</span></div>
-        <div class="crow"><span class="cl">Gewinn</span><span class="cv">Privatlager <b>640 → 1.000 Slots</b> (nur so erreichbar), <em>Spacious Pailunese House</em>, Farm 32 Saatgut, Ranch 35 Tiere, spezielle Kochwerkzeuge, Abyss-Nexus in Pailune, Trophäe <em>Proud Returnee</em>.</span></div>
+        <div class="crow"><span class="cl">Gewinn</span><span class="cv">Privatlager <b>640 → 1.000 Slots</b> (nur so erreichbar), <em>Spacious Pailunese House</em>, Farm 32 Saatgut, Ranch 35 Tiere, spezielle Kochwerkzeuge, Abyss-Nexus in Pailune, Trophäe <em>Proud Returnee</em>. Questbelohnung von <em>The Return Home</em> laut questlog: Sentinel of Tenacity Helm, Slave's Cloth Boots, Private Storage.</span></div>
         <div class="crow"><span class="cl">Preis</span><span class="cv">Optional, aber praktisch <b>irreversibel</b> (nur per Save-Rollback). In der Nähe fehlen Goldleaf Trading Center und Royal Trading Post; keine neuen Händler. Wer bleibt, deckelt sein Lager dauerhaft bei 640. <b style="color:var(--gold)">Seit Patch 1.16.00 entschärft:</b> Die Notes nennen ausdrücklich einen neuen <b>Händler am Pailuner Handelsposten</b>, und Pailune ist einer der 7 Standorte mit <b>Wagenwerkstatt</b> (Verpacken und Beladen vor Ort). Ein Königlicher Handelsposten in Pailune ist damit allerdings <em>nicht</em> belegt.</span></div>
         <div class="crow"><span class="cl">Vorher</span><span class="cv"><b>Manuell speichern.</b> Alle Feldfrüchte ernten (gehen sonst verloren — offizieller Ingame-Warnhinweis), Ranch-Tiere entfernen, <b>alle laufenden Dispatches abbrechen</b> (Kameraden müssen im Camp stehen), offene Händler-Requests abschließen. Es gibt Community-Berichte über einen Bug mit Schwarzbild und verschwundenem Camp.</span></div>
         <div class="crow"><span class="cl">Bug-Historie</span><span class="cv">Pearl Abyss meldet in den Patchnotes zu <b>1.03.00</b> (11.04.2026) wörtlich: „Fixed an issue where Gunter (Equipment vendor), Harry (Blacksmith), Bronton (Stablekeep), and Lola (Seamstress) in Pailune would be replaced by different NPCs after a certain quest.“ Nachgeschoben wurde in <b>1.04.00</b> (23.04.2026) „…a certain Pailune merchant NPC would not appear in some save files“ und in <b>1.05.00</b> (02.05.2026) „…certain NPCs would be placed in awkward spots in Pailune“. Trotzdem meldeten Spieler noch am 12./13.04.2026 fehlende oder ersetzte NPCs; eine bestätigte Entwarnung gibt es bis heute (Stand 22.08.2026) weder in den Notes bis 1.18.02 noch in der Community — der Fix wirkt vermutlich nicht rückwirkend auf Spielstände, in denen der Bug schon ausgelöst war. <b>Deshalb weiterhin vorsichtshalber:</b> Harry’s, Lola’s und Gunter’s Request vor dem Umzug (Quest „The Return Home“) abschließen. Bronton hat keine eigene Request.</span></div>
@@ -3882,7 +3883,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <li><b>Ist ein Kamerad mit Builder-/Construction-Skill dabei?</b> Ohne ihn erscheint keine Bau-Mission.</li>
         <li><b>Läuft schon eine Construction-Mission?</b> Es kann immer nur eine gleichzeitig laufen.</li>
         <li><b>Ist jemand verletzt?</b> „Severely injured" blockiert bis zum Ende des Erholungs-Timers.</li>
-        <li><b>Spielst du Kliff?</b> Als Damiane oder Oongka lassen sich Greymane-Quests nicht vorantreiben.</li>
+        <li><b>Spielst du Kliff?</b> Als Damiane oder Oongka lassen sich Greymane-Quests nicht vorantreiben (offiziell bekannter Fehler, Stand 21.09.2026 offen).</li>
       </ul>
     </div>
 
@@ -4127,14 +4128,14 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 
   <section class="sec" id="sec-witches">
     <h2 class="sec-t"><span class="sec-sym">☾</span> Hexen Guide</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet nur die Workshop-Basis (keine Synthese/kein Crafting). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; die versteckte <strong>White Crow</strong> ist erst nach 4 Witch Tokens erreichbar.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>White Crow</strong> ist erst nach 4 Witch Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).</div>
     <div class="witch-grid" id="witch-grid"></div>
   </section>
 
   <section class="sec" id="sec-pets">
     <h2 class="sec-t"><span class="sec-sym">❥</span> Pets</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten. <span style="color:var(--gold)">Patch 1.13:</span> Beschworene Pets ruhen jetzt gemeinsam mit dem Charakter, wenn dieser sich in ein Bett legt.</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25), Füttern +10 bis +35 je nach Futter — das <strong>Lieblingsessen</strong> gibt +35. Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50). Die Plätze kommen über Werkzeuge: je ein <em>Small Haven for Pets</em> (+5) aus den vier Missionen der Challenge „Pets“ (Start of Companionship, Speedy Tamer, A New Reliable Companion, Bye, My Little Friend), <em>Haven for Pets</em> (+10) als Belohnung für die Jagd auf den legendären Phoenix (Challenge „Legendary Animals“) sowie für das Zähmen von Hyacinth Macaw und Iron Eagle (auch bei Conrad, Vincent und Erik kaufbar) und <em>Large Haven for Pets</em> (+20) aus der Mission „Little Companions“ (Challenge „Life“); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten. <span style="color:var(--gold)">Patch 1.13:</span> Beschworene Pets ruhen jetzt gemeinsam mit dem Charakter, wenn dieser sich in ein Bett legt.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25). Bei Katzen und Hunden gibt Füttern je nach Futter +10 oder +20 (Hunde: Knochen +25), das <strong>Lieblingsessen</strong> +35 und bei Katzen ein legendärer Fisch sogar +100. Kleintiere und Vögel haben eigene Vorlieben (Lieblingsfutter je nach Art meist +35 bis +100); viele Wildtiere und flugunfähige Vögel nehmen außerdem einen <strong>Golden Apple</strong> für +100 (Werte laut questlog-Spieldaten). Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
     <div id="legendary-pet-guide"></div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
@@ -4313,7 +4314,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 
   <section class="sec" id="sec-npcs">
     <h2 class="sec-t"><span class="sec-sym">♟</span> Charaktere &amp; NPCs</h2>
-    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Wichtige benannte Figuren aus Crimson Desert: Begleiter, Verbündete, Antagonisten und Händler, jeweils mit Rolle, Region und kurzer Bio. Quellengestützt (Fextralife, game8, PowerPyx); unsichere Angaben sind als Badge markiert. Oben findest du eine Erklärung des Trust-Systems.</p>
+    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Wichtige benannte Figuren aus Crimson Desert: Begleiter, Verbündete, Antagonisten und Händler, jeweils mit Rolle, Region und kurzer Bio. Quellengestützt (questlog-Spieldaten, Fextralife, game8, PowerPyx); unsichere Angaben sind als Badge markiert. Oben findest du eine Erklärung des Trust-Systems.</p>
     <div id="npcs-root"></div>
   </section>
 
@@ -4440,12 +4441,12 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <section class="sec" id="sec-achievements">
     <h2 class="sec-t"><span class="sec-sym">★</span> Trophäen & Achievements</h2>
     <h3 class="sub-t" style="margin-top:0">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Quellen: PowerPyx, PSNProfiles, Fextralife (Stand 06/2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Außer Platin und den Story-/Lager-Trophäen hängt jede Trophäe an einer Herausforderungs-Kategorie im Journal (Challenges); Platin ist laut PowerPyx und ConsolePulse in einem Durchgang möglich, nach dem Epilog bleibt Free-Roam. Quellen: PowerPyx, Steam-Erfolgsliste, questlog.gg (Herausforderungs-Zahlen), ConsolePulse, Fextralife (Stand 10/2026).</div>
     <div id="trophy-filter" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0"></div>
     <div id="trophy-list"></div>
     <div id="trophy-roadmap" style="margin-top:16px"></div>
     <h3 class="sub-t" style="margin-top:26px">🎮 Wiki-Achievements</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Gamification deines Wiki-Fortschritts. Achievements werden automatisch bei Aktionen entsperrt (Boss markieren, Notiz schreiben, Theme wechseln, etc.). Alle Daten bleiben lokal.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Gamification deines Wiki-Fortschritts. Achievements werden automatisch bei Aktionen entsperrt (Boss markieren, Notiz schreiben, Theme wechseln, etc.). Alle Daten bleiben lokal. Nicht mit den echten Trophäen verwechseln: Gleichnamige Einträge wie „Pilgrim of Wonders“ werten nur deine Häkchen im Wiki aus.</div>
     <div class="ach-overview-bar" id="ach-overview"></div>
     <div class="ach-grid" id="ach-grid"></div>
   </section>
@@ -4510,6 +4511,15 @@ const WEAPON_RENAMES={"Rhonid Shield":"Rhonid Large Shield"};
     const f=lsJson('cd_favs',null);
     if(f&&typeof f==='object'&&hit(f.weapon)){f.weapon=[...new Set(f.weapon.map(ren))];lsSet('cd_favs',JSON.stringify(f));}
   }catch(e){console.warn('migrateWeaponRenames',e);}
+})();
+// Skill-Umbenennungen (Oongka, 04.10.2026): gespeicherte Skill-Favoriten (cd_favs.skill) alt→neu migrieren. Idempotent, läuft bei jedem Laden.
+const SKILL_RENAMES={"Rage (Super Armor State)":"Rage","Explosive Strike — Charge":"Explosive Strike"};
+(function migrateSkillRenames(){
+  try{
+    const ren=n=>SKILL_RENAMES[n]||n, hit=a=>Array.isArray(a)&&a.some(n=>SKILL_RENAMES[n]);
+    const f=lsJson('cd_favs',null);
+    if(f&&typeof f==='object'&&hit(f.skill)){f.skill=[...new Set(f.skill.map(ren))];lsSet('cd_favs',JSON.stringify(f));}
+  }catch(e){console.warn('migrateSkillRenames',e);}
 })();
 // Globale Fehler-Auffangnetze: Seite soll nie kommentarlos kaputt wirken
 function _errToast(msg){
@@ -5343,12 +5353,12 @@ function _crTotal(){
 // ===== LORE TIMELINE (Run-108 Story-Graph) =====
 function renderLoreTimeline(){
   const el=document.getElementById('secp-timeline'); if(!el)return;
-  const frame=[{icon:'∞',phase:'Vor Run 108',title:'107 gescheiterte Zeitschleifen',desc:'White Crow & Alustin sind Time-Traveler-Wächter. Sie erschaffen und modifizieren Kliff über wiederholte Zeitsprünge, um Umbra zu besiegen — 107 dokumentierte Versuche, jeder fehlgeschlagen.',cls:'lt-special'}];
+  const frame=[{icon:'∞',phase:'Vor Run 108',title:'Archiv-Einträge bis #107',desc:'Die Archive Records im Axiom Archive (Verfasser ungenannt, nach Inhalt einer der Abyss-Wächter um Alustin und White Crow) berichten: Ein Zeitsprung rettete die Wächter vor Umbra, änderte aber nichts (Eintrag #1). Sie fanden Kliff (#4) und veränderten über viele Anläufe seine Wege und Eigenschaften — ohne Erfolg. Deutung der Guides: 107 gescheiterte Versuche.',cls:'lt-special'}];
   const chapters=(typeof CHAPTERS!=='undefined'?CHAPTERS:[]).map(c=>({icon:String(c.num).padStart(2,'0'),phase:'Kapitel '+c.num,title:c.title,desc:'Boss: '+c.boss}));
   const reveal=[
-    {icon:'🩸',phase:'Wendepunkt',title:'Caliburn = Umbra',desc:'Corrupted Caliburn ist eine Inkarnation von Umbra. Finaler Aufstieg: Corrupted Caliburn → Myurdin, the Avatar of Umbra → Umbra (Final).',cls:'lt-special'},
-    {icon:'🕯️',phase:'Wendepunkt',title:'Hexe Marie = White Crow',desc:'Hexe Marie ist der korrumpierte, fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff.',cls:'lt-special'},
-    {icon:'108',phase:'Run 108 — das Ende',title:'Der einzige Run, der zählt',desc:'Dein Playthrough ist Versuch Nr. 108. Sind alle True-Ending-Voraussetzungen erfüllt, durchbricht Kliff die Schleife.',cls:'lt-final'}
+    {icon:'🩸',phase:'Wendepunkt',title:'Caliburn und Umbra',desc:'Archive Entry #72: Caliburn „appears to be an incarnation of Umbra“ — und war nicht immer ein böser Mann. Im Finale folgen Corrupted Caliburn → Myurdin, the Avatar of Umbra → Umbra (Final).',cls:'lt-special'},
+    {icon:'🕯️',phase:'Wendepunkt',title:'Hexe Marie und White Crow',desc:'Archive Entry #2: Umbra verschlang ein Fragment des White Crow. Entry #18: Dieser abgespaltene Teil, nun Hexe Marie genannt, ist von Kliff besessen und will ihn zu ihrem Sohn machen.',cls:'lt-special'},
+    {icon:'108',phase:'Run 108 — das Ende',title:'Der letzte Versuch',desc:'Deutung der Guides: Dein Playthrough ist Versuch Nr. 108 — Entry #107 nennt den nächsten Versuch „our final chance“. Laut consolepulse kein alternatives Ende: Die Archive Records (nach Story-Abschluss und 40 Abyss-Challenges) deuten das reguläre Ende neu.',cls:'lt-final'}
   ];
   const nodes=[...frame,...chapters,...reveal];
   el.innerHTML=`<div class="spoiler-shield"><span class="spoiler-shield-ico">⚠️</span><div><strong>Maximale Story-Spoiler:</strong> Diese Timeline zeigt den kompletten Handlungsbogen inkl. Ende. Nur lesen, wenn du durch bist.</div></div>
@@ -5362,9 +5372,9 @@ function renderSecrets(){
   if(eEnd){
     eEnd.innerHTML=`
       <div class="sec-hero">
-        <div class="sec-hero-title">Run 108 — das wahre Ende</div>
+        <div class="sec-hero-title">Run 108 — das Hidden Ending</div>
         <div class="sec-hero-body">
-          <span class="sec-hero-num">108</span>Der Spieler-Playthrough ist <em>Versuch Nr. 108</em>. <strong>White Crow + Alustin</strong> sind Time-Traveler-Wächter, die Kliff durch wiederholte Zeitsprünge erschaffen und modifizieren, um Umbra zu besiegen. Sie haben 107 Versuche dokumentiert — jeder fehlgeschlagen. Caliburn ist eine <em>Inkarnation von Umbra</em>. Hexe Marie ist der korrumpierte/fragmentierte Teil des White Crow — daher die Mutter-Obsession gegenüber Kliff.
+          <span class="sec-hero-num">108</span>Die sechs <em>Archive Records</em> im Axiom Archive (Verfasser ungenannt) enthalten nummerierte Einträge bis <strong>#107</strong>: Nach einem Zeitsprung suchen die Abyss-Wächter um <strong>White Crow und Alustin</strong> einen Helden gegen Umbra, finden Kliff und verändern über viele Anläufe seine Wege — ohne Erfolg. Laut Eintrag #72 scheint Caliburn eine <em>Inkarnation Umbras</em> zu sein; laut #2 und #18 ist Hexe Marie der von Umbra verschlungene, abgespaltene Teil des White Crow und von Kliff besessen („wishing to make him her son“). <em>Deutung der Guides:</em> Der gespielte Durchlauf ist Versuch Nr. 108 — Eintrag #107 nennt den nächsten Versuch die letzte Chance. Laut consolepulse ist das kein alternatives Ende, sondern eine Lore-Ebene zum regulären Ende.
         </div>
       </div>
 
@@ -5384,8 +5394,8 @@ function renderSecrets(){
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📖</span>Schritt-für-Schritt</div>
         <div class="sec-block-body">
           <ol>
-            <li>Per Nexus-Teleport zum <strong>Axiom Archive</strong> (Path of Providence · unten links auf der Abyss-Karte) — schon aus Kapitel 1 freigeschaltet</li>
-            <li>In die <strong>Library</strong> eintreten — <em>Spirit Skills sind hier blockiert</em> (kein Aerial Force Palm)</li>
+            <li>Per Nexus-Teleport zum <strong>Axiom Archive</strong> (eigener Abyss Nexus · laut VULKK und consolepulse im Path of Providence, laut VULKK unten links auf der Abyss-Karte) — schon in Kapitel 1 freigeschaltet (Quest „Polar Opposites“)</li>
+            <li>In die <strong>Library</strong> eintreten — laut VULKK sind <em>Spirit Skills hier blockiert</em> (kein Aerial Force Palm)</li>
             <li><strong>Axiom Force</strong> nutzen, um den <strong>3. Stock</strong> zu erreichen</li>
             <li>Auf den Bücherregalen liegen <strong>6 Archive-Records-Bücher</strong> — alle aufnehmen</li>
             <li><strong>Jede Seite (links + rechts) scannen</strong> — die Bücher enthalten zusammen <strong>42 nummerierte Knowledge Logs</strong></li>
@@ -5408,14 +5418,14 @@ function renderSecrets(){
       </div>
 
       <div class="sec-block">
-        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔍</span>Die "107"-Markierungen (versteckt in der Welt)</div>
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔍</span>Die "107"-Markierungen (versteckt in der Welt, laut VULKK)</div>
         <div class="sec-block-body">
           <ol>
             <li><strong>Axiom Archive:</strong> Rückwand neben dem Teleporter, gegenüber Eingang</li>
             <li><strong>Goyen's Höhle (Nest of Valor):</strong> rechts der Arena, steinerne Treppe hoch — über dem Bett <strong>mit der Laterne beleuchten</strong>. 107 Striche werden sichtbar. Mit Blinding Flash auch möglich, bei Tageslicht schwerer zu zählen</li>
           </ol>
           <div class="lore-callout">
-            <strong>Implikation:</strong> Goyen zählt seit seinem eigenen Tod jede Wiederholung mit. Auch er wurde von White Crow + Alustin erschaffen (Nest of Valor).
+            <strong>Einordnung:</strong> Laut Archive Entry #45 nahm ein früherer Schützling der Wächter nach dem Verlust seiner Gefährten den Namen Goyen an; #47 nennt ihn „our painstaking creation“, gefangen in Umbra, und in #99 wird Goyen gebeten, „his younger spirit“ zu leiten. <em>Fan-Deutung:</em> Goyen ist Kliff aus einem früheren Durchlauf und hat die Wiederholungen mitgezählt.
           </div>
         </div>
       </div>
@@ -5423,7 +5433,7 @@ function renderSecrets(){
       <div class="sec-block">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📰</span>Quelle</div>
         <div class="sec-block-body">
-          <p>vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert — Stand: 17.05.2026 (RubyRose / Vulkk)</p>
+          <p>Archive Records Vol. I–VI und Archive Entries #1–#107: questlog.gg (Knowledge 1004713–1004754) · Voraussetzungen und Run-108-Deutung: consolepulse.com (Crimson Desert Ending Explained) · vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert — Stand: 17.05.2026 (RubyRose / Vulkk) · geprüft 04.10.2026</p>
         </div>
       </div>
     `;
@@ -5436,7 +5446,7 @@ function renderSecrets(){
       <div class="sec-hero">
         <div class="sec-hero-title">Memory Fragments &amp; Visione</div>
         <div class="sec-hero-body">
-          <span class="sec-hero-num">201</span>Memory Fragments insgesamt auf dem Kontinent Pywel. Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
+          <span class="sec-hero-num">201</span>Memory Fragments verzeichnet die interaktive Karte von crimsondesert.th.gl (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht (consolepulse nennt für die Knowledge-Kategorie Memory Fragments 327, Einzelquelle). Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
         </div>
       </div>
 
@@ -5519,7 +5529,7 @@ function renderSecrets(){
           <ul>
             <li><strong>1 Abyss Artifact</strong> (= 1 Skill Point) pro entdecktem Cresset</li>
             <li><strong>Fast-Travel-Point</strong> an jeder Location — essentiell für Late-Game-Mobility</li>
-            <li>Achievement / Trophy <strong>"Pilgrim of Wonders"</strong> bei allen 60</li>
+            <li>Achievement / Trophy <strong>"Pilgrim of Wonders"</strong> bei allen 60 (Trophäe: alle Secret-Places-Herausforderungen — jede wird durch das Finden eines Abyss Cresset abgeschlossen)</li>
           </ul>
         </div>
       </div>
@@ -5576,7 +5586,7 @@ function renderSecrets(){
               </div>
             `).join('')}
           </div>
-          <p style="font-size:var(--fs-11);color:var(--dim);margin-top:14px;line-height:1.5">Quelle: dropreference.com/en/blog/guide/crimson-desert-secrets-easter-eggs-2026 · allthings.how</p>
+          <p style="font-size:var(--fs-11);color:var(--dim);margin-top:14px;line-height:1.5">Quelle: dropreference.com/en/blog/guide/crimson-desert-secrets-easter-eggs-2026 · allthings.how · thegameswiki.com · giga.de (Drachensturz-Schlucht) · questlog.gg (Salvatore, Gold Bar)</p>
         </div>
       </div>
     `;
@@ -5616,7 +5626,7 @@ function renderSecrets(){
       <div class="sec-block">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">⚔️</span>Hidden Weapons</div>
         <div class="sec-block-body">
-          <p style="margin-bottom:11px">Drei oft-übersehene Waffen mit teils brutalem Power-Level. Hollow Visage und Survivor's Solitude sind ohne Story-Gating erreichbar; die Vessel of Dark Pursuit setzt den Boss Antumbra's Sword im Sanctum of Absolution voraus.</p>
+          <p style="margin-bottom:11px">Drei leicht zu übersehende Waffen. Hollow Visage und Survivor's Solitude liegen in Truhen in Höhlen hinter Wasserfällen; die Vessel of Dark Pursuit trägt der Boss Antumbra's Sword im Sanctum of Absolution.</p>
           <div class="easter-grid">
             ${SECRETS_HIDDEN_WEAPONS.map(w=>`
               <div class="easter-card">
@@ -6723,11 +6733,11 @@ function renderLegendaryPetGuide(){
     +'</div>'
     +'<div class="crows" style="margin-top:14px;gap:9px;display:flex;flex-direction:column">'
       +'<div class="crow"><span class="cl">📍 Fundort</span><span class="cv">Hawkstone Ruins, Ost-Region <strong>Delesyia</strong> — auf der Karte nahe dem „A" in „Delesyia", weit im Osten des Kontinents (in Marnis Maschinen-Gebiet, nahe Marni Mechworks).</span></div>'
-      +'<div class="crow"><span class="cl">🗝️ Voraussetzungen</span><span class="cv"><strong>(a)</strong> Item <strong>„Sotdae of Bond"</strong> (Vogel-Futterstelle) aus einer Quest — Quelle umstritten: <em>Trembling-Woods-Reihe / Pororin Forest</em> (TheGamer) oder <em>Unreachable Village</em> (method.gg); landet im Camp-Lager. <strong>(b)</strong> Seltenes Metall als Futter: ca. <strong>20× Mercury</strong> (Quecksilber, je +5 Trust) <em>oder</em> <strong>1× Platinum Bar</strong> (laut mehreren Guides sofort 100 Trust). Mercury aus Silber-Flüssigkeits-Pfützen (mit Frost-Charge-Shot einfrieren) oder Kauf bei Scholastone.</span></div>'
-      +'<div class="crow"><span class="cl">🌅 Schritte</span><span class="cv"><strong>1.</strong> Zu den Hawkstone Ruins reisen. <strong>2.</strong> In der Morgendämmerung (Ingame ~<strong>4:45–5:00 Uhr</strong>) am zentralen Zahnrad-Mechanismus interagieren → Zahnräder rasten ein, der Mechanismus öffnet sich und der Iron Eagle erwacht (Cutscene). <strong>3.</strong> „Sotdae of Bond" in seine Flugbahn stellen und mit Metall bestücken. <strong>4.</strong> Füttern, bis <strong>Trust 100</strong> erreicht ist. <strong>5.</strong> Wenn er landet: Option <strong>„Take In"</strong> wählen → als Pet registriert. <strong style="color:var(--warn)">Nicht auf ihn schießen</strong> — zählt als Angriff und bricht das Zähmen ab.</span></div>'
+      +'<div class="crow"><span class="cl">🗝️ Voraussetzungen</span><span class="cv"><strong>(a)</strong> Item <strong>„Sotdae of Bond"</strong> (Vogel-Futterstelle) — laut questlog-Spieldaten Belohnung der Mission „Authorized Access“ (Questreihe <em>Trembling Woods</em> bei Pororin, beginnt mit „The Unreachable Village“; TheGamer und method.gg meinen also dieselbe Questreihe) sowie der Mission „Fallen God“ (Questreihe <em>Master of Thunder</em>); landet im Camp-Lager. <strong>(b)</strong> Seltenes Metall als Futter: <strong>1× Platinum</strong> (Platin; laut questlog +100 Vertrauen, also sofort voll) <em>oder</em> <strong>Mercury</strong> (Quecksilber; laut questlog +15 je Stück, also etwa 7 Stück — Guides nennen +5 je Stück bzw. ca. 20 Stück). Mercury aus Silber-Flüssigkeits-Pfützen (mit Frost-Charge-Shot einfrieren) oder Kauf bei Scholastone.</span></div>'
+      +'<div class="crow"><span class="cl">🌅 Schritte</span><span class="cv"><strong>1.</strong> Zu den Hawkstone Ruins reisen. <strong>2.</strong> In der Morgendämmerung (Ingame ~<strong>4:45–5:00 Uhr</strong>) am zentralen Zahnrad-Mechanismus interagieren → Zahnräder rasten ein, der Mechanismus öffnet sich und der Iron Eagle erwacht (Cutscene). <strong>3.</strong> „Sotdae of Bond" in seine Flugbahn stellen und mit Metall bestücken. <strong>4.</strong> Füttern, bis <strong>Trust 100</strong> erreicht ist. <strong>5.</strong> Wenn er landet: Option <strong>„Take In"</strong> wählen → als Pet registriert. Das Zähmen gehört zur Challenge <strong>„Mysterious Animals“</strong> (Teilschritte u. a. „The Secret of the Eagle Clockwork Tower“, „Soaring Iron Eagle“, „Tame the iron eagle“; Belohnung u. a. <strong>Haven for Pets</strong>, +10 Pet-Plätze). <strong style="color:var(--warn)">Nicht auf ihn schießen</strong> — zählt als Angriff und bricht das Zähmen ab.</span></div>'
       +'<div class="crow"><span class="cl">🎯 Nutzen</span><span class="cv">Legendärer Loot-Begleiter: folgt dir und sammelt nach Kämpfen automatisch Beute/Materialien vom Boden und von Kadavern ein. Im Standardzustand kein direkter Kampfbonus — aber <strong style="color:var(--gold)">seit Patch 1.13.00</strong> kann der Iron Eagle das „Sigil of Valor" tragen und dann aktiv am Kampf teilnehmen (greift nahe Gegner automatisch an). Alternativ macht ihn das neue „Hunter\'s Sigil" (ebenfalls 1.13.00) zum spezialisierten Sammler, der Beute und passende Sammelobjekte apportiert.</span></div>'
-      +'<div class="crow"><span class="cl">⚠️ Unsicher</span><span class="cv" style="color:var(--gdim)">Offiziell nennt Pearl Abyss nur Existenz + „bestimmte Bedingungen", nicht die Schritte — alle Detailschritte stammen aus Community-Guides und sind teils widersprüchlich: Uhrzeit 4:45 vs 5:00 Uhr; Sotdae-Bond-Quest umstritten; Platinum-Abkürzung nicht überall bestätigt (Fextralife führt Platinum als Lieblingsfutter, andere Mercury). Im Zweifel im Spiel gegenprüfen.</span></div>'
-      +'<div class="crow"><span class="cl">🔗 Quellen</span><span class="cv" style="font-size:var(--fs-11)"><a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=88" target="_blank" rel="noopener">Pearl Abyss Patch 1.05.00 (offiziell)</a> · <a href="https://www.thegamer.com/crimson-desert-iron-eagle-pet-location-tame-mercury-guide/" target="_blank" rel="noopener">TheGamer</a> · <a href="https://www.method.gg/crimson-desert/iron-eagle-how-to-get-the-bio-mechanical-bird-pet-in-crimson-desert" target="_blank" rel="noopener">method.gg</a> · <a href="https://gamerant.com/crimson-desert-legendary-iron-eagle-pet-location-mercury/" target="_blank" rel="noopener">GameRant</a> · <a href="https://www.pcgamer.com/games/action/crimson-desert-iron-eagle-location-tame/" target="_blank" rel="noopener">PC Gamer</a></span></div>'
+      +'<div class="crow"><span class="cl">⚠️ Unsicher</span><span class="cv" style="color:var(--gdim)">Offiziell nennt Pearl Abyss nur Existenz + „bestimmte Bedingungen", nicht die Schritte — alle Detailschritte stammen aus Community-Guides und sind teils widersprüchlich: Uhrzeit 4:45 vs 5:00 Uhr; benötigte Mercury-Menge (Guides: +5 je Stück, questlog: +15). Herkunft des Sotdae of Bond und Platinum als Sofort-Futter (+100) sind inzwischen über questlog-Spieldaten belegt (Fextralife führt Platinum ebenfalls als Lieblingsfutter). Im Zweifel im Spiel gegenprüfen.</span></div>'
+      +'<div class="crow"><span class="cl">🔗 Quellen</span><span class="cv" style="font-size:var(--fs-11)"><a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=88" target="_blank" rel="noopener">Pearl Abyss Patch 1.05.00 (offiziell)</a> · <a href="https://www.thegamer.com/crimson-desert-iron-eagle-pet-location-tame-mercury-guide/" target="_blank" rel="noopener">TheGamer</a> · <a href="https://www.method.gg/crimson-desert/iron-eagle-how-to-get-the-bio-mechanical-bird-pet-in-crimson-desert" target="_blank" rel="noopener">method.gg</a> · <a href="https://gamerant.com/crimson-desert-legendary-iron-eagle-pet-location-mercury/" target="_blank" rel="noopener">GameRant</a> · <a href="https://www.pcgamer.com/games/action/crimson-desert-iron-eagle-location-tame/" target="_blank" rel="noopener">PC Gamer</a> · <a href="https://questlog.gg/crimson-desert/en/db/npc/1000798" target="_blank" rel="noopener">questlog (Spieldaten)</a></span></div>'
     +'</div>'
   +'</div>'
   // ── Phoenix-Karte (analog Iron Eagle; Recherche 2026-07-06, 5-Finder-Workflow) ──
@@ -8408,7 +8418,7 @@ function renderMounts(){
   const vehicle=MOUNTS.filter(m=>m.type.startsWith('Fahrzeug'));
   const groups=[
     {id:'ms-horses',title:'Pferde',icon:'🐎',items:[...horses,...legendary]},
-    {id:'ms-dragon',title:'Drachen-Mount',icon:'🐉',items:dragon},
+    {id:'ms-dragon',title:'Drachen-Mounts',icon:'🐉',items:dragon},
     {id:'ms-sigil',title:'Sigil Mounts',icon:'⚔️',items:sigil},
     {id:'ms-wild',title:'Zähmbare Wildtiere',icon:'🦁',items:wild},
     {id:'ms-vehicle',title:'Fahrzeuge',icon:'🚂',items:vehicle}
@@ -8544,7 +8554,7 @@ function skCard(s){
 }
 function renderSkills(){
   document.getElementById('skp-kliff').innerHTML=
-    '<div style="margin-bottom:10px;font-size:12px;color:var(--dim)">Stat-Maxima: HP 18 · Sta 14 · Spirit 12</div>'+
+    '<div style="margin-bottom:10px;font-size:12px;color:var(--dim)">Stat-Maxima: HP 18 · Sta 14 · Spirit 12<br>Kosten: „AA“ = <strong>Abyss-Artefakt</strong> (Abyss Artifact), die Skillpunkt-Währung: in der Regel 1 Artefakt pro Skill bzw. Stufe. Eine Fundquelle sind die <span class="xref" onclick="showSec(\'ruins\')">Uralten Ruinen (Abyss-Grenzsteine)</span>. Per Watch &amp; Learn gelernte Skills kosten kein Artefakt. Seit Patch 2.00.00 erhalten die anderen spielbaren Charaktere beim Erlernen per Abyss-Artefakt automatisch gleich viele <strong>Abyss-Verknüpfungen</strong> (Abyss Link); Zurücksetzen geht je Charakter einzeln.</div>'+
     '<h3 class="sub-t" style="margin-top:0">Stamina Tree</h3><div class="sk-grid">'+KLIFF_STAMINA.map(skCard).join('')+'</div>'+
     '<h3 class="sub-t">Spirit Tree</h3><div class="sk-grid">'+KLIFF_SPIRIT.map(skCard).join('')+'</div>'+
     '<h3 class="sub-t">Health Tree / Elemente</h3><div class="sk-grid">'+KLIFF_HEALTH.map(skCard).join('')+'</div>';
@@ -8553,7 +8563,8 @@ function renderSkills(){
     '<div class="card" style="margin-bottom:12px"><div class="ct">Damiane</div><div class="crows">'+
     '<div class="crow"><span class="cl">Unlock</span><span class="cv">Kapitel 3, First Step to Rebuilding (Howling Hill Camp)</span></div>'+
     '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">DEFAULT — kein Armed Combat Lv 5 nötig!</span></div>'+
-    '<div class="crow"><span class="cl">Flight</span><span class="cv">Mechanischer Glider (kein Magie-System), Skystep via Scholastone Abyss-Fan</span></div>'+
+    '<div class="crow"><span class="cl">Flight</span><span class="cv">Mechanischer Glider (kein Magie-System), ab Freischaltung verfügbar. Skystep (Abyss-Fan) über die Scholastone-Forschung nach Kap. 4 (The Price of Knowledge); seit Patch 1.14.00 gleiche Eingabe wie Oongkas Vertical Flight</span></div>'+
+    '<div class="crow"><span class="cl">Kosten (2.00.00)</span><span class="cv">Seit Patch 2.00.00 (25.08.2026) lernt Damiane mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihr eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.</span></div>'+
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Rush · Frost Mantle · Lightning Strike · Storm Pillar</span></div>'+
     '</div></div>'+
     '<h3 class="sub-t">Skill-Tree <span class="best-count">('+DAMIANE_SKILLS.length+')</span></h3><div class="sk-grid">'+
@@ -8562,9 +8573,10 @@ function renderSkills(){
 
   document.getElementById('skp-oongka').innerHTML=
     '<div class="card" style="margin-bottom:12px"><div class="ct">Oongka</div><div class="crows">'+
-    '<div class="crow"><span class="cl">Unlock</span><span class="cv">Ende Kap. 7 (Twisted Fate), nach Ludvig. Dauerhaft laut game8 erst nach der Kap.-8-Quest Words Left by the Riverside.</span></div>'+
-    '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">DEFAULT</span></div>'+
-    '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack (via White Crow Questline), Vertical Flight</span></div>'+
+    '<div class="crow"><span class="cl">Unlock</span><span class="cv">Erstmals spielbar in Kap. 7: Nach der Begegnung mit Myurdin in Ashclaw Keep fällt Kliff aus, Oongka übernimmt bis zum Sieg über One-Armed Ludvig (Twisted Fate). Dauerhaft laut game8 erst nach der Greymane-Fraktionsquest Words Left by the Riverside (Kap. 8).</span></div>'+
+    '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">laut game8 ab Armed Combat Lv 5 (Fextralife: Default)</span></div>'+
+    '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack: Fraktionsquest Fire Breathing Pack (Reihe The Giant&#39;s Leap, Kap. 8), Brief von Grimnir lesen. Vertical Flight über eine Forschung (Fextralife: „Machine Parts Research“)</span></div>'+
+    '<div class="crow"><span class="cl">Kosten (2.00.00)</span><span class="cv">Seit Patch 2.00.00 (25.08.2026) lernt Oongka mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihm eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.</span></div>'+
     '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse</span></div>'+
     '</div></div>'+
     '<h3 class="sub-t">Skill-Tree <span class="best-count">('+OONGKA_SKILLS.length+')</span></h3><div class="sk-grid">'+
@@ -8708,11 +8720,11 @@ function renderSanctumChecklist(){
   const cnt=document.getElementById('sanc-cl-count');
   if(cnt)cnt.textContent=dc+'/'+SANCTUM_DATA.length+' Sanctums abgeschlossen';
   const groups=[
-    {label:'Elowen (Weisheit) — Hernand',ids:['te8','te5','te6','te7']},
-    {label:'Bari (Güte) — Pailune / Hernand',ids:['te9','te11','te10','te13']},
-    {label:'Lyselia (Demut) — Delesyia',ids:['te17','te29','te30','te31']},
-    {label:'Areciel (Stärke) — Demeniss / Drywind Valley',ids:['te12','te14','te15']},
-    {label:'Story Kap. 9 — Demeniss',ids:['te16']},
+    {label:'Elowen (Weisheit) — Sanctums in Hernand',ids:['te8','te5','te6','te7']},
+    {label:'Bari (Güte) — Sanctums in Pailune / Hernand',ids:['te9','te11','te10','te13']},
+    {label:'Lyselia (Demut) — Sanctums in Delesyia',ids:['te17','te29','te30','te31']},
+    {label:'Areciel (Stärke) — Sanctums in Demeniss / am Red River',ids:['te12','te14','te15']},
+    {label:'Story Kap. 9 (Veiled Witch) — Demeniss',ids:['te16']},
   ];
   const itemHtml=s=>`<div class="comm-it${done.includes(s.id)?' done':''}" onclick="toggleTE('${s.id}');renderSanctumChecklist();updateStats();">
     <div class="chk${done.includes(s.id)?' on':''}" role="checkbox" aria-checked="${done.includes(s.id)?'true':'false'}" aria-label="${escHtml(s.name)}" tabindex="0"></div>
@@ -9631,7 +9643,7 @@ function renderNpcs(){
    ['companions','🛡️ Begleiter & spielbare Charaktere','Der Protagonist und die im Story-Verlauf spielbaren Gefährten.'],
    ['allies','🤝 Verbündete & Quest-Geber','Wichtige freundliche NPCs, die Kliff unterstützen oder Aufträge vergeben.'],
    ['antagonists','⚔️ Antagonisten','Gegenspieler und Fraktionsanführer — viele davon sind Bosse (Kampf-Details in der Boss-Sektion).'],
-   ['merchants','💰 Händler','Benannte Verkäufer. Außerhalb Hernands nennen die Guides meist nur Standorte, keine Namen.']
+   ['merchants','💰 Händler','Benannte Verkäufer in Hernand, im Greymane-Lager und in weiteren Regionen; außerhalb Hernands ist der genaue Standort teils nur auf Regionsebene belegt.']
   ];
   el.innerHTML=trust+GROUPS.map(([key,title,sub])=>{
     const cards=NPCS[key].map(n=>{

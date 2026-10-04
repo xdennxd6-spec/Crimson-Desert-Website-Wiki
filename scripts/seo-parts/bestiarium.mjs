@@ -1,7 +1,7 @@
 // SEO-Seitenmodul: Bestiarium (ENEMIES.wild + ENEMIES.kreaturen + ENEMIES.fraktionen)
 //
-// ENEMIES ist ein OBJEKT mit genau 3 Gruppen (kein Array): wild (11), kreaturen (10),
-// fraktionen (23) — Summe 44. "de" (deutscher Name) existiert nur bei wild/kreaturen,
+// ENEMIES ist ein OBJEKT mit genau 3 Gruppen (kein Array): wild (14), kreaturen (13),
+// fraktionen (27) — Summe 54 (Stand 04.10.2026). "de" (deutscher Name) existiert nur bei wild/kreaturen,
 // die Gruppe "fraktionen" hat kein de-Feld. "tipp" ist selten (2x wild, 2x kreaturen,
 // 1x fraktionen). "conf" (Quellen-Konfidenz) kommt 3x in kreaturen vor (Monitor Lizard,
 // Crocodile, Hostile Machines) und wird bei conf==="medium" sichtbar als Quellenlage-Hinweis
@@ -10,7 +10,7 @@
 // note und tipp. "—" (Em-Dash) ist bei zwei Eintraegen (Ogre, Flame Knights) ein Platzhalter
 // fuer "kein Drop" in ENEMIES.*.drops und wird wie in der App (renderBestiary) herausgefiltert,
 // statt als sichtbarer Gedankenstrich zu rendern (Regel 9).
-// Alle 44 Bilder in ENEMY_IMGS sind absolute questlog.gg-CDN-URLs, keine lokalen Assets.
+// Alle 54 Bilder in ENEMY_IMGS sind absolute questlog.gg-CDN-URLs, keine lokalen Assets.
 
 export const SLUG = "bestiarium";
 export const NAV_LABEL = "Bestiarium";
@@ -41,13 +41,13 @@ article.card p:not([class]){margin:0;font-size:13.5px;color:var(--ink-dim)}
 `.trim();
 
 // Reale Bildmasse per CDN-Range-Request gemessen (gleiche Byte-Header-Methode wie
-// dimsFromRemote/dimsFromBuffer in scripts/gen-seo.mjs), 2026-07-31 verifiziert: alle 44
+// dimsFromRemote/dimsFromBuffer in scripts/gen-seo.mjs), 2026-07-31 verifiziert (Hyena + 7 Block-5-Bilder am 04.10.2026): alle 54
 // ENEMY_IMGS sind quadratisch, aber NICHT einheitlich 512x512 wie bei den BOSS_IMGS-Sprites.
 // Die questlog-URLs mit "portraitimage_animal_" bzw. "mercenary_portrait_domestic_animal_"
 // im Pfad sind 256x256, alle anderen (knowledgeimage_*/questimage_*) sind 512x512.
 const IMG_256 = new Set([
   "Wolf", "Bear", "Deer", "Fox", "Goat", "Sheep", "Cow",
-  "Elephant", "Hedgehog", "Heloderma Lizard",
+  "Elephant", "Hedgehog", "Heloderma Lizard", "Hyena",
 ]);
 
 // "—" (Em-Dash) als reiner Platzhalterwert ohne Aussage, analog zur App-Filterung
