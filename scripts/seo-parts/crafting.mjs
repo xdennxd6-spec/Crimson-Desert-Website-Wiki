@@ -100,7 +100,7 @@ export function build(ctx) {
   const foodAll = CRAFTING.filter((c) => c.cat === "Food");
   const gadgetItems = CRAFTING.filter((c) => c.cat === "Kuku-Gadget").sort(byName);
 
-  const elixirSection = `<h2>Elixir (${elixirItems.length})</h2>
+  const elixirSection = `<h2>Elixiere (${elixirItems.length})</h2>
 ${table(elixirItems)}`;
 
   const foodTierSections = FOOD_TIER_ORDER
@@ -111,11 +111,11 @@ ${table(elixirItems)}`;
 ${table(items)}`;
     }).join("\n");
 
-  const foodSection = `<h2>Food (${foodAll.length})</h2>
+  const foodSection = `<h2>Gerichte (${foodAll.length})</h2>
 <p class="note">Filling, Satisfying und Hearty sind größere Varianten desselben Grundrezepts: mehr Zutaten, mehr geheilte HP, gleiche Station. Festmahl und Lavish sind dagegen eigene Grundrezepte der höchsten Item-Stufe, keine Ausbaustufe darüber.</p>
 ${foodTierSections}`;
 
-  const gadgetSection = `<h2>Kuku-Gadget (${gadgetItems.length})</h2>
+  const gadgetSection = `<h2>Kuku-Gadgets (${gadgetItems.length})</h2>
 ${table(gadgetItems)}`;
 
   const unsureCount = CRAFTING.filter((c) => c.conf === "low" || c.conf === "medium").length;

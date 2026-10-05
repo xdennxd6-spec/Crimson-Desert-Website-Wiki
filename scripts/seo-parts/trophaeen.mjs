@@ -126,7 +126,7 @@ export function build(ctx) {
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Trophäen-Liste mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jede Trophäe ab, filterst nach Wertung und siehst deinen Platin-Fortschritt in Prozent.</p>
-${missCount ? `<p class="warn"><strong>${missCount} verpassbare Trophäen:</strong> ${missList}. Diese lassen sich in einem laufenden Spieldurchgang unwiederbringlich verlieren. Prüfe sie, bevor du das jeweilige Kapitel abschließt.</p>` : ""}
+${missCount ? `<p class="warn"><strong>${missCount} verpassbare Trophäen:</strong> ${missList}. Diese lassen sich in einem laufenden Spieldurchgang unwiederbringlich verlieren. Sie hängen nicht an Storyabschnitten, sondern an Herausforderungen mit begrenzten Gelegenheiten; worauf du jeweils achten musst, steht im Tipp der Trophäe.</p>` : ""}
 ${sections}`;
 
   const jsonld = {

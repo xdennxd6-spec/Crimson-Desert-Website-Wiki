@@ -1458,7 +1458,7 @@ const ENEMIES={
   {name:"Reed Devil Minions",region:"Hernand (Schilffelder, Sunset Valley)",drops:"Hay, Battered Grains, Cloth Piece, Thin Hide",tipp:"Stehen immer wieder auf, egal wie oft man sie niederstreckt — es sind böse Geister in Vogelscheuchen-Körpern.",note:"Diener des Reed Devil (Boss). Für die Kranken von Sunset Valley paradoxerweise ein Hoffnungssymbol."},
   {name:"Dancing Catfish Pirates",region:"Hernand/Delesyia (Küsten)",drops:"Iron Ore, Fleece, Copper Ore, Cogwheel, Small Battery; selten: A.T.A.G. Plating Mk III",note:"Skrupellose Piratencrew, die ihren aus Menschenexperimenten hervorgegangenen Anführer Sir Catfish fanatisch verehrt — Wracks und Opfer an fast jeder Küste Pywels."},
   {name:"Antumbra Order",region:"Ganz Pywel",drops:"Cloth Piece, Thin Hide; selten: Sword of Greed, Greymanes' Leather Helm",note:"Dunkler Kult, der Licht und Leben lästert und die Finsternis mit Menschenopfern verehrt — Heiligtümer in ganz Pywel; verspricht 'Gleichheit und Freiheit durch Dunkelheit'."},
-  {name:"Bastier's Inquisitors",region:"Demeniss",drops:"Iron Ore, Copper Ore, Fleece, Captive's Cloth Armor; Kampfhunde: Small Bone, Long Hair Hide, Fang",note:"Das einst gegen Korruption gegründete Righteous Tribunal, degeneriert zu Bastiers Machtinstrument — verfolgt heute das Volk, statt es zu schützen."},
+  {name:"Bastier's Inquisitors",region:"Demeniss",drops:"Iron Ore, Copper Ore, Fleece, Captive's Cloth Armor; Kampfhunde: Small Bone, Long Hair Hide, Fang",note:"Auch als Righteous Inquisitors bekannt (die einzelnen Gegner heißen in questlog „Righteous Inquisitor“). Das einst gegen Korruption gegründete Righteous Tribunal, degeneriert zu Bastiers Machtinstrument — verfolgt heute das Volk, statt es zu schützen."},
   {name:"Crow Brothers",region:"Demeniss",drops:"Cloth Piece, Thin Hide; selten: Greymanes' Leather Armor",note:"Anhänger von Draven, dem Crowcaller — lernen seine Tötungstechniken, erhalten einen Teil seiner Macht und wirken finstere Magie; gieren ständig nach der Anerkennung ihres Meisters."},
   {name:"Flame Knights",region:"Demeniss (Flame Knights Castle, West)",drops:"Cloth Piece, Thin Hide, Light Copper Pouch (Chance); laut questlog-Droptabelle zusätzlich: Iron Ore, Fleece, Copper Ore, Small Bone",note:"Feuerbesessene Ritter unter der Schirmherrschaft von Lucian Bastier, die die Flame Knights Castle im Westen von Demeniss besetzen — kämpfen mit feuergetränkten Waffen und Schießpulver; kommandiert vom optionalen Boss Tristan the Flame Knight. [1.13.00: neue Spezialangriffe erhalten — Details noch nicht dokumentiert.]"},
   {name:"Mistwood Hunters",region:"Pailune (Wayward Woods)",drops:"Sleep Arrow, Bundle of Arrows, Packaged Salt, Cloth Piece",note:"Wilderer, die die Waldgeister der Wayward Woods zu Geld machen — jagen alles, was sich bewegt, und stürzen die Ordnung des Waldes ins Chaos."},
@@ -1519,7 +1519,18 @@ const NPC_IMGS={
   "Alden":"cd_assets/npcs/alden.webp",
   "Merton":"cd_assets/npcs/merton.webp",
   "Tranan":"cd_assets/npcs/tranan.webp",
-  "Barden Middler":"cd_assets/npcs/barden_middler.webp"
+  "Barden Middler":"cd_assets/npcs/barden_middler.webp",
+  "Naira":"cd_assets/npcs/naira.webp",
+  "Stefan Lanford":"cd_assets/npcs/stefan_lanford.webp",
+  "Drake Wells":"cd_assets/npcs/drake_wells.webp",
+  "Kathor":"cd_assets/npcs/kathor.webp",
+  "Temir":"cd_assets/npcs/temir.webp",
+  "Quentin":"cd_assets/npcs/quentin.webp",
+  "Leore":"cd_assets/npcs/leore.webp",
+  "Khron":"cd_assets/npcs/khron.webp",
+  "Nork":"cd_assets/npcs/nork.webp",
+  "Ronan":"cd_assets/npcs/ronan.webp",
+  "Brek":"cd_assets/npcs/brek.webp"
 };
 const NPC_IMGS_CDN={
   "Kliff":QLG+"kliff.webp",
@@ -1550,7 +1561,18 @@ const NPC_IMGS_CDN={
   "Alden":QLG+"aldun.webp",
   "Merton":QLG+"merton.webp",
   "Tranan":QLG+"greyfur_tranan.webp",
-  "Barden Middler":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_barden_midler.webp"
+  "Barden Middler":"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_barden_midler.webp",
+  "Naira":QLG+"nairah.webp",
+  "Stefan Lanford":QLG+"unique_stefan_lanford.webp",
+  "Drake Wells":QLG+"drake_wells.webp",
+  "Kathor":QLG+"kata.webp",
+  "Temir":QLG+"timmyr.webp",
+  "Quentin":QLG+"quentin.webp",
+  "Leore":QLG+"lior.webp",
+  "Khron":QLG+"khorn.webp",
+  "Nork":QLG+"yjork.webp",
+  "Ronan":QLG+"ronan.webp",
+  "Brek":QLG+"vrek.webp"
 };
 const NPCS={
   companions:[

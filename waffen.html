@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://crimson-desert-wiki.com/"},{"@type":"ListItem","position":2,"name":"Waffen","item":"https://crimson-desert-wiki.com/waffen"}]},{"@type":"ItemList","name":"Alle Waffen in Crimson Desert","numberOfItems":500},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wie viele Waffen gibt es in Crimson Desert?","acceptedAnswer":{"@type":"Answer","text":"Die Waffen-Datenbank listet 500 Waffen, gruppiert in 21 Waffentypen, unter anderem Schwerter, Zweihänder, Dolche, Bögen, Feuerwaffen und Schilde."}},{"@type":"Question","name":"Was bedeutet die ATK-Zahl in der Waffentabelle?","acceptedAnswer":{"@type":"Answer","text":"Die ATK-Spalte zeigt nicht den Fundzustand einer Waffe, sondern den höchsten dokumentierten Wert: Bei Kampfwaffen ist das die letzte Stufe der Waffenveredelung, das Refinement. Eine frisch gefundene, ungeschliffene Waffe liegt darunter. 423 der 500 Waffen haben überhaupt einen erfassten ATK-Wert, bei den übrigen fehlt ein belastbarer Quellenwert."}},{"@type":"Question","name":"Welche Waffentypen gibt es in Crimson Desert?","acceptedAnswer":{"@type":"Answer","text":"Die Datenbank gruppiert die 500 Waffen in 21 Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Hellebarden, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde."}},{"@type":"Question","name":"Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?","acceptedAnswer":{"@type":"Answer","text":"Abyss-Slots sind die Fassungen, in die eine Hexe gegen Silber Abyss-Kräfte einsetzt. Ihre Zahl hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Die Slot-Zahl ist unabhängig vom Refinement-Grad der Waffe."}}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://crimson-desert-wiki.com/"},{"@type":"ListItem","position":2,"name":"Waffen","item":"https://crimson-desert-wiki.com/waffen"}]},{"@type":"ItemList","name":"Alle Waffen in Crimson Desert","numberOfItems":500},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wie viele Waffen gibt es in Crimson Desert?","acceptedAnswer":{"@type":"Answer","text":"Die Waffen-Datenbank listet 500 Waffen, gruppiert in 21 Waffentypen, unter anderem Schwerter, Zweihänder, Speere und Hellebarden, Äxte und Stumpfwaffen, Dolche, Bögen, Feuerwaffen und Schilde."}},{"@type":"Question","name":"Was bedeutet die ATK-Zahl in der Waffentabelle?","acceptedAnswer":{"@type":"Answer","text":"Die ATK-Spalte zeigt nicht den Fundzustand einer Waffe, sondern den höchsten dokumentierten Wert: Bei Kampfwaffen ist das die letzte Stufe der Waffenveredelung, das Refinement. Eine frisch gefundene, ungeschliffene Waffe liegt darunter. 423 der 500 Waffen haben einen erfassten ATK-Wert. Die 76 Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert, der in derselben Spalte steht; nur wo beides fehlt, gibt es keinen belastbaren Quellenwert."}},{"@type":"Question","name":"Welche Waffentypen gibt es in Crimson Desert?","acceptedAnswer":{"@type":"Answer","text":"Die Datenbank gruppiert die 500 Waffen in 21 Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Speere und Hellebarden, Äxte und Stumpfwaffen, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde."}},{"@type":"Question","name":"Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?","acceptedAnswer":{"@type":"Answer","text":"Abyss-Slots sind die Fassungen für Abyss-Cores (Abyss Gears). Eine Hexe erstellt sie gegen Silber und setzt dort auch die Cores ein. Wie viele Slots eine Waffe haben kann, hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Boss-Waffen bringen teils schon vorinstallierte Sockel mit."}}]}]}
 </script>
 <style>:root{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
 --line:rgba(198,204,236,.16);--line-strong:rgba(198,204,236,.30);
@@ -234,12 +234,12 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
            placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
     <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
   </div>
-  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-a-t-a-g-weapon">A.T.A.G. Weapon</a><a href="#a-blunt-axe">Blunt/Axe</a><a href="#a-bow-ranged">Bow (Ranged)</a><a href="#a-curved-sword">Curved Sword</a><a href="#a-curved-sword-1h">Curved Sword (1H)</a><a href="#a-dagger">Dagger</a><a href="#a-firearm">Firearm</a><a href="#a-firearm-flamethrower">Firearm (Flamethrower)</a><a href="#a-greatsword-2h">Greatsword (2H)</a><a href="#a-greatsword-katana-2h">Greatsword/Katana (2H)</a><a href="#a-halberd-2h">Halberd (2H)</a><a href="#a-halberd-spear-2h">Halberd / Spear (2H)</a><a href="#a-hand-cannon">Hand Cannon</a><a href="#a-knuckles">Knuckles</a><a href="#a-knuckles-auch-pickaxe">Knuckles (auch Pickaxe)</a><a href="#a-knuckles-gauntlets">Knuckles / Gauntlets</a><a href="#a-rapier">Rapier</a><a href="#a-shield">Shield</a><a href="#a-staff-2h">Staff (2H)</a><a href="#a-sword">Sword</a><a href="#a-sword-1h">Sword (1H)</a><a href="#a-h-ufige-fragen">Häufige Fragen</a></nav>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-a-t-a-g-weapon">A.T.A.G. Weapon</a><a href="#a-blunt-axe">Blunt/Axe</a><a href="#a-bow-ranged">Bow (Ranged)</a><a href="#a-curved-sword">Curved Sword</a><a href="#a-curved-sword-1h">Curved Sword (1H)</a><a href="#a-dagger">Dagger</a><a href="#a-firearm">Firearm</a><a href="#a-firearm-flamethrower">Firearm (Flamethrower)</a><a href="#a-greatsword-2h">Greatsword (2H)</a><a href="#a-greatsword-katana-2h">Greatsword/Katana (2H)</a><a href="#a-halberd-2h">Halberd (2H)</a><a href="#a-halberd-spear-2h">Halberd / Spear (2H)</a><a href="#a-hand-cannon">Hand Cannon</a><a href="#a-knuckles">Knuckles</a><a href="#a-knuckles-auch-pickaxe">Knuckles (auch Pickaxe)</a><a href="#a-knuckles-gauntlets">Knuckles / Gauntlets</a><a href="#a-rapier">Rapier</a><a href="#a-shield">Shield</a><a href="#a-staff-2h">Staff (2H)</a><a href="#a-sword">Sword</a><a href="#a-sword-1h">Sword (1H)</a><a href="#a-haeufige-fragen">Häufige Fragen</a></nav>
 </div>
 <p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 
 <a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
-<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller 500 Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
+<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller damals 500 Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
 <h2 id="a-a-t-a-g-weapon">A.T.A.G. Weapon (1)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Waffe</th><th>ATK&nbsp;/&nbsp;DEF</th><th>Crit</th><th>Slots</th><th>Fundort</th><th>Built-in / Abyss</th></tr></thead>
@@ -716,7 +716,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 <td>33</td>
 <td><span class="muted" title="kein Critical-Rate-Feld bei questlog.gg und gaming.tools">kein Crit</span></td>
 <td>3</td>
-<td>Fundort (Fextralife): Wassermühle im Norden von Pailune nördlich der Silver Wolf Mountains, Haus mit gestapelten Säcken (nur mit Maske zu stehlen)</td>
+<td>Fundort (Fextralife): Wassermühle im Norden von Pailune nördlich des Silver Wolf Mountain, Haus mit gestapelten Säcken (nur mit Maske zu stehlen)</td>
 <td>Swift I</td>
 </tr>
 <tr>
@@ -860,7 +860,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 <td>42</td>
 <td>1</td>
 <td>5</td>
-<td>Fundort (Fextralife): Höhle unter den Bahngleisen östlich der Crimson Mountain Fortress; der Boss-Eintrag &#39;The Masked Liberator&#39; nennt dagegen eine Truhe in der Sandshift Basin Cave (VULKK), ob dieselbe Höhle, ist ungeklärt; Händler (questlog): Brookner, Fextralife nennt die Waffe abweichend als nicht kaufbar; questlog: von The Masked Liberator geführt</td>
+<td>Fundort (Fextralife): Höhle unter den Bahngleisen östlich der Crimson Mountains Fortress; der Boss-Eintrag &#39;The Masked Liberator&#39; nennt dagegen eine Truhe in der Sandshift Basin Cave (VULKK), ob dieselbe Höhle, ist ungeklärt; Händler (questlog): Brookner, Fextralife nennt die Waffe abweichend als nicht kaufbar; questlog: von The Masked Liberator geführt</td>
 <td>Stamina Transference, Swift I, Insight I</td>
 </tr>
 <tr>
@@ -1672,7 +1672,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 <td>30</td>
 <td><span class="muted" title="kein Critical-Rate-Feld bei questlog.gg und gaming.tools">kein Crit</span></td>
 <td>5</td>
-<td>Boss-Belohnung Thunder Crusher / Thunder Tank (Kap. 11, Quest &#39;Locked Barrier&#39;, Mission &#39;Thunder Crusher&#39;); Händler Forrex</td>
+<td>Boss-Belohnung Thunder Crusher (Kap. 11, Quest &#39;Locked Barrier&#39;, Mission &#39;Thunder Crusher&#39;); Händler Forrex</td>
 <td><span class="muted">nicht erfasst</span></td>
 </tr>
 <tr>
@@ -1872,7 +1872,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 <td>39</td>
 <td>2</td>
 <td>5</td>
-<td>Zwei belegte Wege: im White Wastes Sanctuary NW Pailune das Schwert aus dem Skelett-Maul ziehen, oder Ator, Archon of Antumbra besiegen (Questreihe Cloister of Ruination, Mission &#39;Archon of Antumbra&#39;); Händler Bari</td>
+<td>Zwei belegte Wege: im White Wastes Sanctuary NW Pailune das Schwert aus dem Skelett-Maul ziehen, oder Ator, Archon of Antumbra besiegen (Questreihe Cloister of Ruination, Mission &#39;Archon of Antumbra&#39;); Hexe Bari (Händlerin)</td>
 <td>Ator&#39;s Orb</td>
 </tr>
 <tr>
@@ -2364,7 +2364,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 <td>38</td>
 <td><span class="muted" title="kein Critical-Rate-Feld bei questlog.gg und gaming.tools">kein Crit</span></td>
 <td>5</td>
-<td>Western Court, Demeniss (im weissen Zelt, auch ohne Bosskampf)</td>
+<td>Western Court, Demeniss (im weißen Zelt, auch ohne Bosskampf)</td>
 <td><span class="muted">nicht erfasst</span></td>
 </tr>
 <tr>
@@ -3385,7 +3385,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 <thead><tr><th>Waffe</th><th>ATK&nbsp;/&nbsp;DEF</th><th>Crit</th><th>Slots</th><th>Fundort</th><th>Built-in / Abyss</th></tr></thead>
 <tbody><tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Ancient_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Ancient Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Sanctum of Faith, Delesyia (Truhe hinter den Ranken, Blinding Flash nötig)</td>
@@ -3393,7 +3393,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Artisan_s_ornamented_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Artisan&#39;s Ornamented Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Artisan-Quest</td>
@@ -3401,7 +3401,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Balgran_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Balgran Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Fundort nicht erfasst</td>
@@ -3409,7 +3409,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Balton_large_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Balton Large Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Händler Temir, Tranan (laut questlog); Crafting-Rezept vorhanden</td>
@@ -3417,7 +3417,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Balton_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Balton Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Händler Temir (laut questlog); Crafting-Rezept vorhanden</td>
@@ -3425,7 +3425,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Bekker_large_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Bekker Large Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Nork, Tranan; Missionsbelohnung: „Deliver the Bekker Large Shield“, „Talk to the person“ (questlog)</td>
@@ -3433,7 +3433,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Bekker_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Bekker Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Rhett, Tranan, Lederson; Missionsbelohnung: „Hand over 3 pieces of fine timber“ (questlog)</td>
@@ -3441,7 +3441,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Black_oath_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Black Oath Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Oath-Quest / Exploration</td>
@@ -3449,7 +3449,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/black-sun-shield.webp" alt="" width="34" height="34">Black Sun Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Kathor; außerdem in Schatztruhen (questlog; Orte nicht erfasst)</td>
@@ -3457,7 +3457,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Blazing_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Blazing Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Crimson Desert / Feuer-Bereich</td>
@@ -3465,7 +3465,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Blue_scout_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Blue Scout Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Scout-Fraktion / Exploration</td>
@@ -3473,7 +3473,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/City_guard_s_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">City Guard&#39;s Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Stadtgarde-Feinde</td>
@@ -3481,7 +3481,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Competition_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Competition Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Wettbewerb-Quest / Competition-Set</td>
@@ -3489,7 +3489,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Dekarr_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Dekarr Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Gunter, Tranan (questlog)</td>
@@ -3497,7 +3497,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Delesyian_ornamental_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Delesyian Ornamental Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Delesyia / Händler</td>
@@ -3505,7 +3505,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Demeniss_royal_guard_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Demeniss Royal Guard Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Demeniss Königsgarde</td>
@@ -3513,7 +3513,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Demenissian_gold_decorated_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Demenissian Gold-Decorated Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Demeniss / Händler oder Drop</td>
@@ -3521,7 +3521,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/demenissian-of-loyalty-shield.webp" alt="" width="34" height="34">Demenissian of Loyalty Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Demeniss / Loyalitäts-Quest</td>
@@ -3529,7 +3529,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/demenissian-of-obedience-shield.webp" alt="" width="34" height="34">Demenissian of Obedience Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Demeniss / Gehorsams-Quest</td>
@@ -3537,7 +3537,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/demenissian-of-valor-shield.webp" alt="" width="34" height="34">Demenissian of Valor Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Demeniss / Tapferkeits-Quest</td>
@@ -3545,7 +3545,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Demenissian_silver_decorated_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Demenissian Silver-Decorated Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Kathor (questlog)</td>
@@ -3553,7 +3553,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/demenissian-soldiers-shield.webp" alt="" width="34" height="34">Demenissian Soldier&#39;s Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Demenissianische Soldaten</td>
@@ -3561,7 +3561,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Dewhaven_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Dewhaven Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Fundort nicht erfasst</td>
@@ -3569,7 +3569,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Drake_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Drake Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>0</td>
 <td>Beute Tristan the Flame Knight (Flame Knights Castle, Demeniss; laut Boss-Eintrag); Händler Lyle</td>
@@ -3577,7 +3577,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Eastern_wanderer_s_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Eastern Wanderer&#39;s Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Östliche Region / Wanderer-Quest</td>
@@ -3585,7 +3585,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/flame-knights-shield.webp" alt="" width="34" height="34">Flame Knights Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Crafting / Schmied (Manual: Shields of the World Vol. 1; Timber x10 + Fine Timber x5)</td>
@@ -3593,7 +3593,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Freesword_s_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Freesword&#39;s Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Missionsbelohnung: „Defeat Mazzul, the Dark Justiciar“ (questlog)</td>
@@ -3601,7 +3601,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Frostbone_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Frostbone Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Gorio, Tranan; Missionsbelohnung: „Defeat the enemies around Icewatch Altar“ (questlog)</td>
@@ -3609,7 +3609,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Gale_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Gale Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;6</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;6</td>
 <td>0</td>
 <td>2</td>
 <td>Gale-Bereich / Exploration</td>
@@ -3617,7 +3617,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Gilded_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Gilded Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler / Gold-Crafting</td>
@@ -3625,7 +3625,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/gilliam-shield.webp" alt="" width="34" height="34">Gilliam Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Kathor, Tranan (questlog)</td>
@@ -3633,7 +3633,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Golden_kerria_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Golden Kerria Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Kerria-Quest / Exploration</td>
@@ -3641,7 +3641,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Golden_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Golden Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Gurbit (questlog)</td>
@@ -3649,7 +3649,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Grey_wolf_wooden_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Grey Wolf Wooden Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Grey Wolf-Feinde / Pailune</td>
@@ -3657,7 +3657,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Iris_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Iris Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Fundort nicht erfasst</td>
@@ -3665,7 +3665,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Khaled_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Khaled Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Missionsbelohnung: „Defeat Myurdin“ (Quest „Ambush“, questlog)</td>
@@ -3673,7 +3673,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Kite_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Kite Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Rhett, Tranan, Lederson (questlog)</td>
@@ -3681,7 +3681,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Kutum_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Kutum Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Kutum (Demeniss — Kingshield Dig Site, Marshell Estate)</td>
@@ -3689,7 +3689,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/lanford-shield.webp" alt="" width="34" height="34">Lanford Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Temir, Tranan (questlog)</td>
@@ -3697,7 +3697,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Large_gilded_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Large Gilded Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Bran, Leonard, Marin, Galen, Eldon, Varin (questlog)</td>
@@ -3705,7 +3705,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/legion-spearmens-shield.webp" alt="" width="34" height="34">Legion Spearmen&#39;s Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Legions-Speerkämpfer-Feinde</td>
@@ -3713,7 +3713,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/lifsoth-shield.webp" alt="" width="34" height="34">Lifsoth Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Witch&#39;s House (Fextralife)</td>
@@ -3721,7 +3721,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/lucon-shield.webp" alt="" width="34" height="34">Lucon Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
 <td>0</td>
 <td>2</td>
 <td>Fundort nicht erfasst</td>
@@ -3729,7 +3729,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/mass-produced-large-rekel-shield.webp" alt="" width="34" height="34">Mass-Produced Large Rekel Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
 <td>0</td>
 <td>2</td>
 <td>Crafting / Massenproduktion</td>
@@ -3737,7 +3737,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Mirror_of_night_shield_location_crimson_desert_wiki_guide.webp" alt="" width="34" height="34">Mirror of Night Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Sanctum of Atonement, nördlich des „A“ von „HERNAND“ auf der Karte (Fextralife)</td>
@@ -3745,7 +3745,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Musket_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Musket Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Fort Musket / Exploration</td>
@@ -3753,7 +3753,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/North_wind_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">North Wind Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Gorio; Missionsbelohnung: „Hand over the azurite“ (questlog)</td>
@@ -3761,7 +3761,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Oath_ring_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Oath Ring Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Bargul (questlog)</td>
@@ -3769,7 +3769,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Odeck_hardwood_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Odeck Hardwood Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Gunter, Tranan (questlog)</td>
@@ -3777,7 +3777,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/phantom-shield.webp" alt="" width="34" height="34">Phantom Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
 <td>0</td>
 <td>2</td>
 <td>Abyss / Phantom-Bereich</td>
@@ -3785,7 +3785,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Purple_scout_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Purple Scout Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Missionsbelohnung: „Hand over the spider“ (questlog)</td>
@@ -3793,7 +3793,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Rattan_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Rattan Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Missionsbelohnung: „Hand over the satintail root“ (questlog)</td>
@@ -3801,7 +3801,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/reinforced-warspike-shield.webp" alt="" width="34" height="34">Reinforced Warspike Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Fort Warspike / Exploration</td>
@@ -3809,7 +3809,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Rekel_large_spiked_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Rekel Large Spiked Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
 <td>0</td>
 <td>2</td>
 <td>Rekel-Region / Drop</td>
@@ -3817,7 +3817,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/rekel-shield.webp" alt="" width="34" height="34">Rekel Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Quentin (questlog)</td>
@@ -3825,7 +3825,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Rhonid_large_shield_shield_crimson_desert_wiki_guide.webp" alt="" width="34" height="34">Rhonid Large Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Lioncrest Manor, Obergeschoss (verschlossener Raum, Schlüssel nötig)</td>
@@ -3833,7 +3833,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Rising_arrow_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Rising Arrow Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Quentin; Missionsbelohnung: „Talk to the soldier“ (questlog)</td>
@@ -3841,7 +3841,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Royal_guard_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Royal Guard Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Königsgarde-Feinde</td>
@@ -3849,7 +3849,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Runewalker_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Runewalker Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>0</td>
 <td>Händler: Conrad, Nork, Edmon (questlog); laut Boss-Eintrag zusätzlich aus Vordis&#39; Kopf craftbar (Runewalker Vordis)</td>
@@ -3857,7 +3857,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/saints-blessing-shield.webp" alt="" width="34" height="34">Saint&#39;s Blessing Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Heiligen-Quest / Exploration</td>
@@ -3865,7 +3865,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/shell-of-the-fleeting-shield.webp" alt="" width="34" height="34">Shell of the Fleeting Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Fleeting-Set / Exploration</td>
@@ -3873,7 +3873,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Shield_of_a_blossoming_spring_day_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Shield of a Blossoming Spring Day</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Frühlingsquell-Quest / Exploration</td>
@@ -3881,7 +3881,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Shield_of_betrayal_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Shield of Betrayal</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Boss-Drop Cassius Morten, Mission &#39;Traitor&#39; (Questlinie &#39;The Unyielding Shields&#39;, Kap. 6); Händler Temir</td>
@@ -3889,7 +3889,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Shield_of_conviction_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Shield of Conviction</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;29</td>
 <td>0</td>
 <td>2</td>
 <td>Calphade Church Turm (Truhe)</td>
@@ -3897,7 +3897,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Shield_of_radiance_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Shield of Radiance</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Loch im Boden südlich von Trader&#39;s Expanse (keine Truhe)</td>
@@ -3905,15 +3905,15 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Shield_of_ringing_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Shield of Ringing</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;5</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;5</td>
 <td>0</td>
 <td>2</td>
-<td>The Laughing Marionette: im rot-weissen Zelt neben einem Harlekin</td>
+<td>The Laughing Marionette: im rot-weißen Zelt neben einem Harlekin</td>
 <td><span class="muted">nicht erfasst</span></td>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Shield_of_sacrifice_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Shield of Sacrifice</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Malchor (questlog)</td>
@@ -3921,7 +3921,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Shotgun_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Shotgun Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;7</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;7</td>
 <td>0</td>
 <td>2</td>
 <td>Crafting / Firearm-Shield-Kombination</td>
@@ -3929,7 +3929,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/staglords-shield.webp" alt="" width="34" height="34">Staglord&#39;s Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;13</td>
 <td>0</td>
 <td>2</td>
 <td>Drop: Saigord the Staglord (Side-Boss, Hernand, Icemoor Castle Ruins)</td>
@@ -3937,7 +3937,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Sydmon_kite_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Sydmon Kite Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Quentin (questlog)</td>
@@ -3945,7 +3945,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Sydmon_round_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Sydmon Round Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Grakon (questlog)</td>
@@ -3953,7 +3953,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/Tardik_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">Tardik Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;15</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Quentin (questlog)</td>
@@ -3961,7 +3961,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/thalwynd-shield.webp" alt="" width="34" height="34">Thalwynd Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;27</td>
 <td>0</td>
 <td>2</td>
 <td>Händler: Temir, Tranan (questlog)</td>
@@ -3969,7 +3969,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/fex/The_laughing_marionette_shield_shields_crimson_desert_wiki_guide_150px.webp" alt="" width="34" height="34">The Laughing Marionette Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Crafting / Schmied (Shields of the World, Vol. III)</td>
@@ -3977,7 +3977,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/thorny-warspike-shield.webp" alt="" width="34" height="34">Thorny Warspike Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;31</td>
 <td>0</td>
 <td>2</td>
 <td>Fort Warspike / Drop</td>
@@ -3985,7 +3985,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/weapons/twisted-thorns-shield.webp" alt="" width="34" height="34">Twisted Thorns Shield</td>
-<td><abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
+<td><abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;14</td>
 <td>0</td>
 <td>2</td>
 <td>Thornbriar Fortress / Fortain-Bereich</td>
@@ -4325,22 +4325,22 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </tr></tbody>
 </table></div>
 
-<h2 id="a-h-ufige-fragen">Häufige Fragen (4)</h2>
+<h2 id="a-haeufige-fragen">Häufige Fragen (4)</h2>
 <details class="faq">
 <summary>Wie viele Waffen gibt es in Crimson Desert?</summary>
-<p>Die Waffen-Datenbank listet 500 Waffen, gruppiert in 21 Waffentypen, unter anderem Schwerter, Zweihänder, Dolche, Bögen, Feuerwaffen und Schilde.</p>
+<p>Die Waffen-Datenbank listet 500 Waffen, gruppiert in 21 Waffentypen, unter anderem Schwerter, Zweihänder, Speere und Hellebarden, Äxte und Stumpfwaffen, Dolche, Bögen, Feuerwaffen und Schilde.</p>
 </details>
 <details class="faq">
 <summary>Was bedeutet die ATK-Zahl in der Waffentabelle?</summary>
-<p>Die ATK-Spalte zeigt nicht den Fundzustand einer Waffe, sondern den höchsten dokumentierten Wert: Bei Kampfwaffen ist das die letzte Stufe der Waffenveredelung, das Refinement. Eine frisch gefundene, ungeschliffene Waffe liegt darunter. 423 der 500 Waffen haben überhaupt einen erfassten ATK-Wert, bei den übrigen fehlt ein belastbarer Quellenwert.</p>
+<p>Die ATK-Spalte zeigt nicht den Fundzustand einer Waffe, sondern den höchsten dokumentierten Wert: Bei Kampfwaffen ist das die letzte Stufe der Waffenveredelung, das Refinement. Eine frisch gefundene, ungeschliffene Waffe liegt darunter. 423 der 500 Waffen haben einen erfassten ATK-Wert. Die 76 Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert, der in derselben Spalte steht; nur wo beides fehlt, gibt es keinen belastbaren Quellenwert.</p>
 </details>
 <details class="faq">
 <summary>Welche Waffentypen gibt es in Crimson Desert?</summary>
-<p>Die Datenbank gruppiert die 500 Waffen in 21 Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Hellebarden, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde.</p>
+<p>Die Datenbank gruppiert die 500 Waffen in 21 Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Speere und Hellebarden, Äxte und Stumpfwaffen, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde.</p>
 </details>
 <details class="faq">
 <summary>Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?</summary>
-<p>Abyss-Slots sind die Fassungen, in die eine Hexe gegen Silber Abyss-Kräfte einsetzt. Ihre Zahl hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Die Slot-Zahl ist unabhängig vom Refinement-Grad der Waffe.</p>
+<p>Abyss-Slots sind die Fassungen für Abyss-Cores (Abyss Gears). Eine Hexe erstellt sie gegen Silber und setzt dort auch die Cores ein. Wie viele Slots eine Waffe haben kann, hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Boss-Waffen bringen teils schon vorinstallierte Sockel mit.</p>
 </details>
 </main>
 <script>
@@ -4400,7 +4400,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
      basis(s) oben im selben Scope. Folgenlos, solange niemand basis() innerhalb von
      filtern() aufruft -- danach waere die Suche beim ersten Tastendruck tot, waehrend
      die Seite perfekt aussieht. Genau die Fehlerklasse vom 22.08.2026. */
-  var startText=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  var startText=gesamt+' Eintr'+(gesamt===1?'ag':'äge');
   zaehler.textContent=startText;
 
   function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
@@ -4439,7 +4439,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 </script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
-  Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
+  Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>
 </body>
 </html>

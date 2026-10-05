@@ -1,8 +1,8 @@
-// parts/side-quests.mjs — Seite "Nebenquests" (SIDE_QUESTS, 78 Eintraege).
+// parts/side-quests.mjs — Seite "Nebenquests" (SIDE_QUESTS, Stand 04.10.2026: 107 Eintraege, 5 Regionen).
 //
-// Aufbau: CTA + Hinweis (wie jede Seite) -> Warnbox mit den 6 verpassbaren
+// Aufbau: CTA + Hinweis (wie jede Seite) -> Warnbox mit den verpassbaren
 // Quests (zusaetzlich vorgezogen, analog zu trophaeen.mjs bei verpassbaren
-// Trophaeen) -> je ein <h2> pro Region (6 Werte), absteigend nach Anzahl
+// Trophaeen) -> je ein <h2> pro Region, absteigend nach Anzahl
 // Quests sortiert, darunter eine Tabelle Questname/Ausloeser/Voraussetzung/
 // Belohnung. Die 6 "special"-Eintraege (Sigil-Mount-System) tragen zusaetzlich
 // mount/boss/craft; Boss-Strategie und Craft-Kette sind lang (mehrere Saetze)
@@ -120,7 +120,7 @@ ${isReal(q.craft) ? `<p>${esc(q.craft)}</p>` : ""}
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Nebenquest-Liste mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jede Nebenquest ab, siehst deinen Fortschritt je Region und kannst alle Haken auf einmal zurücksetzen.</p>
-<p class="warn"><strong>${missCount} verpassbare Nebenquests:</strong> ${missList}. Diese Quests lassen sich im laufenden Spieldurchgang dauerhaft verpassen, erledige sie vor dem jeweiligen Story- oder Regionsabschluss.</p>
+<p class="warn"><strong>${missCount} verpassbare Nebenquests:</strong> ${missList}. Diese Quests lassen sich im laufenden Spieldurchgang dauerhaft verpassen, etwa durch ein vergessenes Häuten nach dem Kill oder durch den späteren Camp-Umzug; die Bedingung steht im Tipp der jeweiligen Quest.</p>
 ${sections}`;
 
   const jsonld = {
@@ -143,7 +143,7 @@ ${sections}`;
     title: `Alle ${SIDE_QUESTS.length} Nebenquests in Crimson Desert: Guide & Belohnungen`,
     desc: `Alle ${SIDE_QUESTS.length} Nebenquests in Crimson Desert im Überblick: nach Region sortiert, mit Auslöser, Voraussetzung, Belohnung und ${missCount} verpassbaren Quests als Warnhinweis.`,
     h1: `Alle ${SIDE_QUESTS.length} Nebenquests in Crimson Desert`,
-    lead: `Diese Übersicht listet alle <strong>${SIDE_QUESTS.length} Nebenquests</strong> von Crimson Desert nach Region sortiert, jeweils mit Auslöser, Voraussetzung und Belohnung. <strong>${missCount} davon sind verpassbar</strong> und sollten vor dem jeweiligen Regionsabschluss erledigt werden.`,
+    lead: `Diese Übersicht listet alle <strong>${SIDE_QUESTS.length} Nebenquests</strong> von Crimson Desert nach Region sortiert, jeweils mit Auslöser, Voraussetzung und Belohnung. <strong>${missCount} davon sind verpassbar</strong>; worauf es jeweils ankommt, steht im Tipp der Quest.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Nebenquests",
     bodyHtml: body,

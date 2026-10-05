@@ -172,6 +172,30 @@ for (const [name, expected] of Object.entries(statReference.items)) {
 ok(statErrors.length === 0,
   `questlog-Endstufen: ${atkChecked} ATK und ${defChecked} DEF geprueft (Rhinard Cannon seit 03.10.2026 auf questlog-Endstufe 31); ${statErrors.length} Abweichungen${statErrors.length ? " -> " + statErrors.slice(0, 8).join("; ") : ""}`);
 
+// Crit gegen questlog: statId 1000007 = Critical Rate, Stufe bei Refinement +0. 1000010 ist
+// Attack Speed und zaehlt NICHT als Crit. Referenz: weapon-crit-reference.json (Abzug 03.10.2026).
+// Schilde mit crit 0 ohne questlog-Feld sind eine dokumentierte Altkonvention (nur Info).
+const critRef = JSON.parse(fs.readFileSync(path.join(__dirname, "weapon-crit-reference.json"), "utf8"));
+const critErrors = [];
+let critChecked = 0, schildKonvention = 0;
+for (const [name, soll] of Object.entries(critRef.crit)) {
+  const w = weaponByName.get(name);
+  if (!w) continue;
+  critChecked++;
+  if (w.crit !== soll) critErrors.push(`${name}: crit=${w.crit ?? "null"}, questlog 1000007 = ${soll}`);
+}
+for (const name of critRef.noCritField) {
+  const w = weaponByName.get(name);
+  if (!w) continue;
+  critChecked++;
+  if (w.crit == null) continue;
+  if (w.type === "Shield" && w.crit === 0) { schildKonvention++; continue; }
+  critErrors.push(`${name}: crit=${w.crit}, questlog fuehrt kein Critical-Rate-Feld`);
+}
+ok(critErrors.length === 0,
+  `Crit gegen questlog-Stat 1000007: ${critChecked} geprueft, ${critErrors.length} Abweichungen${critErrors.length ? " -> " + critErrors.slice(0, 8).join("; ") : ""}`);
+if (schildKonvention) console.log(`  info  ${schildKonvention} Schilde mit crit 0, questlog ohne Critical-Rate-Feld (Altkonvention, siehe d01-Kommentar)`);
+
 // Abschliessende Lagemeldung zur Datenvollstaendigkeit (kein Fehler, nur Info)
 // crit_none:true markiert Waffen, bei denen questlog.gg (tRPC database.getItem, levels[0].stats)
 // und gaming.tools KEIN Critical-Rate-Feld fuehren (Ernte 07.09.2026). Das ist kein

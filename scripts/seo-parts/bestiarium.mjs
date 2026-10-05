@@ -47,6 +47,7 @@ article.card p:not([class]){margin:0;font-size:13.5px;color:var(--ink-dim)}
 // im Pfad sind 256x256, alle anderen (knowledgeimage_*/questimage_*) sind 512x512.
 const IMG_256 = new Set([
   "Wolf", "Bear", "Deer", "Fox", "Goat", "Sheep", "Cow",
+  "Highland Cow", "White-Striped Longhorn",
   "Elephant", "Hedgehog", "Heloderma Lizard", "Hyena",
 ]);
 
@@ -160,7 +161,7 @@ ${sections}`;
     title: `Bestiarium: Alle ${total} Gegner in Crimson Desert`,
     desc: `Das komplette Bestiarium zu Crimson Desert: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen mit Region, Beute-Drops und Kampf-Tipps im Überblick.`,
     h1: `Alle ${total} Gegner in Crimson Desert`,
-    lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet alle <strong>${total} Gegner</strong> der Spielwelt: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} humanoide Gegner-Fraktionen, jeweils mit Region, Beute und Beschreibung.`,
+    lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet <strong>${total} Gegnertypen</strong> der Spielwelt, getrennt von den Bossen: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen, jeweils mit Region, Beute und Beschreibung.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Bestiarium",
     bodyHtml: body,

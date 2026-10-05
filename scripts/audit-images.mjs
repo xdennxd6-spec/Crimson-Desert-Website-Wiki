@@ -1,11 +1,31 @@
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = path.join(ROOT, 'data');
-const REPORT_PATH = 'G:\\Claude\\Crimson-Desert-NPC-Bilder\\BILD-AUDIT.md';
+const ASSET_DIR = path.join(ROOT, 'cd_assets');
+// Reportziel: --report <pfad> | --report=<pfad> | Umgebungsvariable AUDIT_REPORT | Default im Temp-Verzeichnis (nie im Repo).
+function reportPath(argv = process.argv.slice(2)) {
+  const i = argv.findIndex((arg) => arg === '--report' || arg.startsWith('--report='));
+  const fromArg = i < 0 ? '' : argv[i].includes('=') ? argv[i].slice('--report='.length) : argv[i + 1] ?? '';
+  return path.resolve(fromArg || process.env.AUDIT_REPORT || path.join(os.tmpdir(), 'cdwiki-BILD-AUDIT.md'));
+}
+const REPORT_PATH = reportPath();
 const MIN_BYTES = 1024;
+// Echte Skill-Icons sind 44x44-WebP mit 0,7-1 KB: klein ist erst verdaechtig, wenn auch die Abmessungen winzig sind.
+const MIN_EDGE = 32;
+const TINY_BYTES = 256;
+const SVG_START = /^\uFEFF?\s*(?:<\?xml[^>]*\?>\s*)?(?:<!--[\s\S]*?-->\s*)*<svg[\s>]/i;
+// Dateien gelten als referenziert, wenn ihr Dateiname in einer dieser Quellen vorkommt.
+const SOURCE_GLOBS = [
+  ['.', /\.(?:html|webmanifest)$/i],
+  ['.', /^sw\.js$/i],
+  ['data', /\.js$/i],
+  ['scripts', /\.mjs$/i],
+  [path.join('scripts', 'seo-parts'), /\.mjs$/i],
+];
 const MAP_DECLARATION = /\b(?:const|let|var)\s+([A-Za-z_$][\w$]*_IMGS(?:_CDN)?)\s*=/g;
 const IMAGE_PATH = /\.(?:webp|png|jpe?g|svg)(?:[?#].*)?$/i;
 
@@ -178,6 +198,23 @@ async function listFilesRecursively(directory) {
   return output;
 }
 
+async function loadSourceText() {
+  const parts = [];
+  for (const [dir, pattern] of SOURCE_GLOBS) {
+    let entries = [];
+    try {
+      entries = await readdir(path.join(ROOT, dir), { withFileTypes: true });
+    } catch (error) {
+      if (error.code === 'ENOENT') continue;
+      throw error;
+    }
+    for (const entry of entries) {
+      if (entry.isFile() && pattern.test(entry.name)) parts.push(await readFile(path.join(ROOT, dir, entry.name), 'utf8'));
+    }
+  }
+  return parts.join('\n');
+}
+
 async function main() {
   const maps = await loadMaps();
   const mapOrder = maps.map((map) => map.name);
@@ -213,9 +250,17 @@ async function main() {
       }
 
       const buffer = await readFile(fullPath);
+      if (/\.svg$/i.test(fullPath)) {
+        // Mount-Karikaturen (scripts/generate-mount-caricatures.mjs) sind absichtlich SVG: nur den Anfang pruefen.
+        if (!SVG_START.test(buffer.toString('utf8', 0, 512))) suspicious.push({ ...base, reason: 'SVG beginnt nicht mit <svg' });
+        continue;
+      }
       const info = readImageInfo(buffer);
       const reasons = [];
-      if (fileStat.size <= MIN_BYTES) reasons.push(`nur ${fileStat.size} Bytes (muss > 1 KB sein)`);
+      if (fileStat.size < TINY_BYTES) reasons.push(`nur ${fileStat.size} Bytes`);
+      else if (fileStat.size <= MIN_BYTES && info && (info.width < MIN_EDGE || info.height < MIN_EDGE)) {
+        reasons.push(`nur ${fileStat.size} Bytes bei ${info.width}x${info.height} px`);
+      }
       if (!info) reasons.push('kein gueltiger WEBP-/PNG-/JPEG-Header oder Abmessungen nicht lesbar');
       if (reasons.length > 0) suspicious.push({ ...base, reason: reasons.join('; ') });
       if (map.name === 'NPC_IMGS' && info?.ratio > 1.3) {
@@ -227,13 +272,14 @@ async function main() {
     }
   }
 
-  const npcDirectory = path.join(ROOT, 'cd_assets', 'npcs');
-  const orphaned = (await listFilesRecursively(npcDirectory))
+  const sourceText = await loadSourceText();
+  const orphaned = (await listFilesRecursively(ASSET_DIR))
     .filter((file) => IMAGE_PATH.test(file))
     .map((file) => slash(path.relative(ROOT, file)))
-    .filter((file) => !referenced.has(file.toLowerCase()))
+    .filter((file) => !referenced.has(file.toLowerCase()) && !sourceText.includes(path.posix.basename(file)))
     .sort((a, b) => a.localeCompare(b))
-    .map((displayPath) => ({ map: 'cd_assets/npcs', key: '(keine Referenz)', displayPath }));
+    .map((displayPath) => ({ map: displayPath.split('/').slice(0, 2).join('/'), key: '(keine Referenz)', displayPath }));
+  const orphanOrder = [...new Set(orphaned.map((item) => item.map))];
 
   const now = new Date().toISOString();
   const report = [
@@ -246,7 +292,7 @@ async function main() {
     ...groupedSection('Fehlende Dateien', missing, mapOrder),
     ...groupedSection('Verdaechtige Dateien', suspicious, mapOrder),
     ...groupedSection('Querformat-Bilder in Portrait-Kontexten', landscape, mapOrder),
-    ...groupedSection('Verwaiste Dateien', orphaned, ['cd_assets/npcs']),
+    ...groupedSection('Verwaiste Dateien', orphaned, orphanOrder),
   ].join('\n');
 
   await mkdir(path.dirname(REPORT_PATH), { recursive: true });
@@ -257,7 +303,7 @@ async function main() {
     `Fehlend: ${missing.length}`,
     `Verdaechtig: ${suspicious.length}`,
     `Querformat in NPC_IMGS: ${landscape.length}`,
-    `Verwaist in cd_assets/npcs: ${orphaned.length}`,
+    `Verwaist in cd_assets: ${orphaned.length}`,
     `Report: ${REPORT_PATH}`,
   ].join('\n');
   console.log(summary);

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse &amp; Waffen</title>
-<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 100 Bosse, 500+ Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
+<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 100 Bosse, 500 Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
 <link rel="canonical" href="https://crimson-desert-wiki.com/">
 <meta property="og:title" content="Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending">
 <meta property="og:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
@@ -45,12 +45,12 @@
     {
       "@type":"VideoGame",
       "name":"Crimson Desert",
-      "description":"Open-World Action-Adventure von Pearl Abyss. Singleplayer, kein MMO, kein Pay-to-Win. ~90 km² Welt auf dem Kontinent Pywel.",
+      "description":"Open-World Action-Adventure von Pearl Abyss auf dem Kontinent Pywel. Singleplayer, kein MMO, kein Pay-to-Win.",
       "datePublished":"2026-03-19",
       "publisher":{"@type":"Organization","name":"Pearl Abyss"},
       "developer":{"@type":"Organization","name":"Pearl Abyss"},
       "genre":["Action-Adventure","Open-World","Singleplayer"],
-      "gamePlatform":["PC","PlayStation 5","Xbox Series X|S"],
+      "gamePlatform":["PC","macOS","PlayStation 5","Xbox Series X|S"],
       "playMode":"SinglePlayer"
     }
   ]
@@ -702,6 +702,7 @@ input.fs::-webkit-search-cancel-button{cursor:pointer;opacity:.55}
 .tg{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 .tx{background:var(--panel);color:var(--iron-soft);border-color:var(--line)}
 .tw{background:rgba(154,90,28,.12);color:var(--warn);border-color:var(--warn)}
+.tag.miss-chip-sm{font-size:var(--fs-9);padding:1px 5px;vertical-align:middle}
 /* Provenienz-Marke (Ruestungen): eigene, gestrichelte Optik. Die Farbklassen
    tr/tg/tx/tw stehen auf derselben Karte schon fuer den Ruestungstyp — zwei
    Bedeutungen in einer Farbe waeren nicht lesbar. */
@@ -3006,7 +3007,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <span class="mim-name" id="mim-name"></span>
       <div style="display:flex;align-items:center">
         <span class="mim-src-lbl">In-Game Screenshot</span>
-        <button class="mim-close" onclick="closeMountModal()">✕ Schliessen</button>
+        <button class="mim-close" onclick="closeMountModal()">✕ Schließen</button>
       </div>
     </div>
   </div>
@@ -3015,7 +3016,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 <!-- Help Modal (Keyboard Shortcuts) -->
 <div id="help-overlay" onclick="if(event.target===this)closeHelp()" role="dialog" aria-modal="true" aria-labelledby="help-title">
   <div id="help-box">
-    <button class="help-close" onclick="closeHelp()" aria-label="Schliessen">✕</button>
+    <button class="help-close" onclick="closeHelp()" aria-label="Schließen">✕</button>
     <h2 id="help-title">⌨️ Tastatur-Shortcuts</h2>
     <p>Navigation und Aktionen ohne Maus.</p>
     <div class="help-row"><span class="help-desc">Suchfeld fokussieren</span><span class="help-keys"><span class="kbd">/</span> oder <span class="kbd">Ctrl K</span></span></div>
@@ -3045,7 +3046,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <div class="cmp-box">
     <div class="cmp-header">
       <div class="cmp-title" id="cmp-title">⚔️ Boss-Vergleich</div>
-      <button class="cmp-close" onclick="closeCompare()" aria-label="Schliessen">✕ Schliessen</button>
+      <button class="cmp-close" onclick="closeCompare()" aria-label="Schließen">✕ Schließen</button>
     </div>
     <div class="cmp-body">
       <div class="cmp-grid">
@@ -3067,7 +3068,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <div class="cmp-box">
     <div class="cmp-header">
       <div class="cmp-title" id="ic-title">⚔️ Waffen-Vergleich</div>
-      <button class="cmp-close" onclick="closeItemCompare()" aria-label="Schliessen">✕ Schliessen</button>
+      <button class="cmp-close" onclick="closeItemCompare()" aria-label="Schließen">✕ Schließen</button>
     </div>
     <div class="cmp-body">
       <div class="cmp-grid">
@@ -3104,7 +3105,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <label for="si">Koordinate suchen</label>
     <div class="finder-in">
       <span class="fi-sym" aria-hidden="true">&#9906;</span>
-      <input id="si" type="search" name="wiki-suche" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Bosse, Waffen, Quests, Orte..." oninput="doSearch(this.value)">
+      <input id="si" type="search" name="wiki-suche" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Bosse, Waffen, Quests, Orte..." oninput="doSearch(this.value)" onkeydown="if(event.key==='Enter'&&typeof _isMobile==='function'&&_isMobile()){this.blur();closeSheet();}">
       <span class="kbd-hint" title="Ctrl+K oder ⌘K zum Fokussieren">Ctrl K</span>
     </div>
     <span id="scnt" role="status" aria-live="polite"></span>
@@ -3474,7 +3475,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     </div>
     <div class="region-heatmap" id="region-heatmap" aria-label="Boss-Verteilung pro Region"></div>
     <div class="fbar">
-      <select class="fs" id="bf-reg" aria-label="Bosse nach Region filtern" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option value="Abyss">The Abyss</option></select>
+      <select class="fs" id="bf-reg" aria-label="Bosse nach Region filtern" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option>The Abyss</option></select>
       <select class="fs" id="bf-type" aria-label="Bosse nach Quest-Typ filtern" onchange="renderBosses()"><option value="">Alle Quest-Typen</option><option value="Story">Story</option><option value="Faction">Faction</option><option value="Side">Side</option><option value="Sanctum">Sanctum</option><option value="World">World-Boss</option><option value="Optional">Optional / Sonstige</option></select>
       <select class="fs" id="bf-pd" aria-label="Bosse nach Parry oder Dodge filtern" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option></select>
       <select class="fs" id="bf-spoiler" onchange="setSpoilerChapter(this.value)" title="Spoiler-Horizont — blendet Bosse & Kapitel jenseits deines Fortschritts aus" aria-label="Spoiler-Horizont nach Kapitel">
@@ -3503,10 +3504,10 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <section class="sec" id="sec-items">
     <h2 class="sec-t"><span class="sec-sym">❒</span> Items</h2>
     <div id="wt-upgrade" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Waffen-Upgrade &amp; Refinement</div>
-    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Die meisten Waffen können bis <span style="color:var(--gold);font-weight:600">Refine +10</span> gesteigert werden (Stufen 5-10 erfordern zusätzlich Abyss-Artefakte; laut questlog sind 107 von 540 Waffen ohne Munition, v. a. Banner Pikes, nicht verfeinerbar). Abyss-Slots werden bei einer Hexe gegen Silber erstellt — max. 2 bei Schilden, 3 bei Einhand-, bis 5 bei Zweihand-/Fernkampf-Waffen; Boss-Waffen bringen teils vorinstallierte Sockel mit. Elementeffekte (Fire/Lightning/Frost Affinity) laufen über Cores/Abyss Gears. <span style="color:var(--dim);font-size:var(--fs-10)">[Fakten-Audit 2026-06-02]</span></div>
+    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Die meisten Waffen können bis <span style="color:var(--gold);font-weight:600">Refine +10</span> gesteigert werden (Stufen 5-10 erfordern zusätzlich Abyss-Artefakte; laut questlog-Spieldatenbank, die 540 Waffen ohne Munition führt (dieses Wiki erfasst 500), sind 107 davon nicht verfeinerbar, darunter 77 Banner Pikes). Abyss-Slots werden bei einer Hexe gegen Silber erstellt — max. 2 bei Schilden, 3 bei Einhand-, bis 5 bei Zweihand-/Fernkampf-Waffen; Boss-Waffen bringen teils vorinstallierte Sockel mit. Elementeffekte (Fire/Lightning/Frost Affinity) laufen über Cores/Abyss Gears. <span style="color:var(--dim);font-size:var(--fs-10)">[Fakten-Audit 02.06.2026]</span></div>
     <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
     <div id="it-dex" class="sub-t" style="scroll-margin-top:72px">Items-Kompendium</div>
-    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst. Gekochte Gerichte (Food &amp; Elixirs), Roh-Materialien (Gatherables), Dyes, Cores und Ausrüstung haben eigene Tabs. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz". <span style="color:var(--dim);font-size:var(--fs-10)">[Recherche-Audit 2026-06-28, jeder Eintrag mehrquellig verifiziert; ≈ = nur Einzelquelle belegt]</span></div>
+    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst. Gekochte Gerichte (Food &amp; Elixirs), Roh-Materialien (Gatherables), Dyes, Cores und Ausrüstung haben eigene Tabs. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz". <span style="color:var(--dim);font-size:var(--fs-10)">[Recherche-Audit 28.06.2026, jeder Eintrag mehrquellig verifiziert; ≈ = nur Einzelquelle belegt]</span></div>
     <!-- Bereichsleiste und Kategorie-Auswahl werden aus ITEMS erzeugt (renderItemBar / fillItemdexCats).
          Bewusst nicht mehr als feste option-Liste im Markup: die stand sonst neben den Daten und hatte
          zuletzt die Kategorie "Pet-Ausruestung — Vogel" nicht, deren Eintraege damit unfilterbar waren. -->
@@ -3550,8 +3551,9 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <section class="sec" id="sec-cores">
     <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss Cores</h2>
     <div class="fbar">
-      <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe</option><option value="Armor">Rüstung</option><option value="Both">Beide</option></select>
+      <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe</option><option value="Armor">Rüstung</option><option value="Both">Waffe, Handschuhe, Schuhe</option></select>
     </div>
+    <div style="font-size:var(--fs-11-5);color:var(--dim);margin:-4px 0 10px;line-height:1.55"><b>Slot-Typ:</b> „Waffe/Hand/Fuß“ passt laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe. „Waffe“ und „Rüstung“ sind Sammelangaben, einzelne Cores sind enger: Tempest of Destruction, Kinetic Burst, Colossal Might, Putrid Touch, The Showstopper und Karmic Pulse passen nur in Handschuhe, Infinite Arrows nur in Fernkampfwaffen; Aegis und Fortification passen auch in Schilde.</div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
     <h3 class="sub-t" style="margin-top:24px">🔮 Synthese-Mechanik <span style="font-size:var(--fs-11);color:var(--dim);font-weight:400">(Regulär vs. Spezial)</span></h3>
     <div id="synth-guide" style="font-size:12.5px;color:var(--text);line-height:1.65;margin-bottom:10px">
@@ -3619,11 +3621,11 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <div id="rl-results" class="rl-results"></div>
     </div>
     <h3 class="sub-t">⚗️ Crafting-Rezepte</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Diese Sektion bündelt erstmals sämtliche Crafting-Rezepte aus Crimson Desert: 327 Koch-Gerichte (Wild-Pot, Pot, Frying-Pan, Plate; alle Kochstufen einschließlich Hearty sowie die Mahlzeiten-Familien), 28 Elixier-/Tee-/Pillen-Rezepte am Kessel und 31 Kuku-Gadgets aus der Kuku-Werkstatt (Kilnden). Das Datengerüst (Spine) stammt aus dem dataminten questlog.gg und wird gegen game8 und Fextralife abgeglichen und angereichert. Wo Quellen voneinander abweichen, gilt der datamined questlog-Wert als autoritativ; jede dokumentierte Abweichung ist in den Rezept-Notizen festgehalten. Ziel ist ein praxistaugliches Dashboard: Welches Gericht heilt am meisten, welche Resistenz bekomme ich am günstigsten, und welches Elixier lohnt sich vor welchem Boss.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Diese Sektion bündelt erstmals sämtliche Crafting-Rezepte aus Crimson Desert: 327 Koch-Rezepte (95 Gerichte in bis zu vier Koch-Stufen; Wild-Pot, Pot, Frying-Pan, Plate; alle Kochstufen einschließlich Hearty sowie die Mahlzeiten-Familien), 28 Elixier-/Tee-/Pillen-Rezepte am Kessel und 31 Kuku-Gadgets aus der Kuku-Werkstatt (Kilnden). Das Datengerüst (Spine) stammt aus dem dataminten questlog.gg und wird gegen game8 und Fextralife abgeglichen und angereichert. Wo Quellen voneinander abweichen, gilt der datamined questlog-Wert als autoritativ; jede dokumentierte Abweichung ist in den Rezept-Notizen festgehalten. Ziel ist ein praxistaugliches Dashboard: Welches Gericht heilt am meisten, welche Resistenz bekomme ich am günstigsten, und welches Elixier lohnt sich vor welchem Boss.</div>
     <details style="margin-bottom:12px">
       <summary style="cursor:pointer;font-size:var(--fs-11-5);color:var(--gdim);user-select:none">ℹ️ Koch-Stufen &amp; Datenqualität (questlog datamined · game8/Fextralife verifiziert)</summary>
       <div style="font-size:var(--fs-11-5);color:var(--dim);line-height:1.65;margin-top:8px;padding:10px 13px;background:rgba(201,162,39,.04);border:1px solid var(--bdr);border-radius:8px">
-        <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Darstellung:</strong> Die Koch-Stufen eines Gerichts (z.&nbsp;B. Harvest Roll / Filling Harvest Roll / Satisfying Harvest Roll) stehen gebündelt auf <em>einer</em> Karte, und zwar alle gleichzeitig sichtbar — genau wie die Stufen-Werte der Abyss-Cores: unter „Stufen-Werte“ steht je Stufe die geheilte HP-Zahl und, falls sie abweicht, die Zutatenmenge. Nichts muss aufgeklappt oder umgeschaltet werden. Alles, was über die Stufen identisch bleibt (Resistenz-Level, Dauer, Station, Item-Stufe, Fundort und bei vielen Gerichten auch die Zutaten), steht nur einmal oben auf der Karte. So werden aus 310 Rezept-Zeilen 149 Gerichte-Karten. Wer jede Stufe als eigene Karte braucht, stellt den Filter rechts oben auf „Koch-Stufen einzeln“ (oder „nur Basis-Stufe“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p>
+        <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Darstellung:</strong> Die Koch-Stufen eines Gerichts (z.&nbsp;B. Harvest Roll / Filling Harvest Roll / Satisfying Harvest Roll) stehen gebündelt auf <em>einer</em> Karte, und zwar alle gleichzeitig sichtbar — genau wie die Stufen-Werte der Abyss-Cores: unter „Stufen-Werte“ steht je Stufe die geheilte HP-Zahl und, falls sie abweicht, die Zutatenmenge. Nichts muss aufgeklappt oder umgeschaltet werden. Alles, was über die Stufen identisch bleibt (Resistenz-Level, Dauer, Station, Item-Stufe, Fundort und bei vielen Gerichten auch die Zutaten), steht nur einmal oben auf der Karte. So werden aus 327 Koch-Rezepten 95 Gerichte-Karten; zusammen mit den 28 Elixieren und 31 Kuku-Gadgets zeigt die Sektion 154 Karten. Wer jede Stufe als eigene Karte braucht, stellt den Filter rechts oben auf „Koch-Stufen einzeln“ (oder „nur Basis-Stufe“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p>
         <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Koch-Stufen:</strong> Gerichte erscheinen in bis zu drei Koch-Qualitätsstufen (Basis -&gt; Filling/Satisfying -&gt; Hearty bzw. die Feast-Stufen). Bestätigte Regel: Die geheilten Trefferpunkte (Flat-Heal-Gerichte) skalieren über die Stufen hoch (HP = questlog-Rohwert / 1000), während die Resistenz-STUFE und meist auch die Wirkdauer fix bleibt (Resistenz-Level = questlog-Wert). Achtung: Prozent-Heiler wie Chocolate (+50% Max-HP) und die Feast-Gerichte mit reinen Buffs (Ignore Stamina/Spirit, Overheal, Angriff) folgen NICHT der /1000-HP-Logik - ihr Nutzen steckt im zeitlich begrenzten Buff, nicht in einer HP-Zahl. Bei Elixieren steigert die Stufe Lesser -&gt; normal -&gt; Greater sowohl Wert als auch Dauer (5/10/15 Min bei getimten Buffs, 4/8/12 s bei No-Cost-Buffs).</p>
         <p style="margin:0">Ehrlicher Datenstand: Verlässlich sind Flat-Heal-HP (questlog-Wert/1000) und die Resistenz-STUFE (Eis und Feuer belegt; Blitz-Resistenz ist nur bei einem Plate-Feast und Elixieren/Gear belegt, für kein reguläres Food-Gericht). Lücken: questlog erfasst bei vielen Gerichten und Tees KEINE Spirit-/Stamina-Werte - diese sind aus game8/VGC/keengamer ergänzt und daher nur bei kuratierten Gerichten angegeben (z. B. Tees stellen zusätzlich Stamina her: Pine ~+224, Oakwood +160, Honey +128, Mild Herb +96, Wine +64 - in questlog nicht kodiert). Wirkdauern divergieren zwischen Datenbanken (z. B. Fish Porridge questlog Lv 4/60 s vs game8 Lv 5/10 Min; Clear Soup 30 s vs game8 5 Min) - hier gilt der questlog-Wert, Abweichungen sind notiert. Guides wie Fextralife und thegameswiki nennen bei den meisten vergleichbaren Gerichten genau 60 HP weniger als der questlog-basierte Bestand (z. B. Braised Ribs +260 statt +320, Hearty Clear Soup +420 statt +480; method.gg nennt dort ebenfalls +480). Möglich ist, dass diese Guides den Stand vor Patch 1.00.03 (23.03.2026, Heilwirkung von Zutaten und Essen erhöht) wiedergeben; belegt ist das nicht. Übrige HP-Differenzen stammen meist aus unterschiedlichen Zutatensets. Die /1000-Division und value=Level sind aus Anzeigewerten plausibel abgeleitet, nicht am rohen itemUseEffect-Feld (JS/tRPC-gated) bewiesen. Zutatenmengen sind in questlog teils unvollständig (oft nur 'Water'/'Empty Bottle'); echte Mengen siehe Food-Guide. Färbemittel sind kein Koch-/Alchemie-Rezept - dafür die separate Dyes-Sektion nutzen; detaillierte Zutaten-Farmrouten stehen im Food-Guide.</p>
       </div>
@@ -3695,7 +3697,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <span class="mlb-lbl">Suche:</span>
       <span class="mlb-term" id="mlb-term"></span>
       <button class="mlb-copy" id="mlb-copy-btn" onclick="copyLocSearch(true)">📋 Kopieren</button>
-      <button class="mlb-close" onclick="document.getElementById('map-loc-banner').style.display='none'" title="Schliessen">✕</button>
+      <button class="mlb-close" onclick="document.getElementById('map-loc-banner').style.display='none'" title="Schließen">✕</button>
     </div>
     <div style="border-radius:10px;overflow:hidden;border:1px solid var(--bdr)">
       <iframe src="https://mapgenie.io/crimson-desert/maps/pywel?embed=light"
@@ -3727,7 +3729,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="card" style="margin-bottom:20px" data-s="voraussetzung freischaltung camp kapitel 3 howling hill homestead cheers echoing from the edge kailok hornsplitter serkis first step to rebuilding a fresh start ein neuanfang a gentle touch pioneering bustling hill marius grounds of the sunrise">
       <div class="disarm-step">
         <div class="disarm-num">1</div>
-        <div class="disarm-txt"><strong>Das Camp entsteht — Kapitel 3, Unterkapitel „Homestead"</strong><br>Nach dem Sieg über <strong>Kailok the Hornsplitter</strong> („Cheers Echoing From the Edge") überlässt Marquis <strong>Alan Serkis</strong> den Greymanes das Land am Howling Hill. Gegründet wird das Lager mit den Hauptquests <strong>„First Step to Rebuilding"</strong> und <strong>„A Fresh Start"</strong> (32. Hauptmission). Mit der Homestead-Mission <strong>„Comrade's Return"</strong> (Treffen mit Marius) kommen <strong>Carl</strong> (Versorger/Spenden) und <strong>Ross</strong> (Entsende-Koordinator) ins Camp. Trophäe: <em>Master Camper</em>.</div>
+        <div class="disarm-txt"><strong>Das Camp entsteht — Kapitel 3, Unterkapitel „Homestead"</strong><br>Nach dem Sieg über <strong>Kailok the Hornsplitter</strong> (Mission „Resounding Victory", bei thegameswiki „Cheers Echoing From the Edge") überlässt Marquis <strong>Alan Serkis</strong> den Greymanes das Land am Howling Hill. Gegründet wird das Lager mit den Hauptquests <strong>„First Step to Rebuilding"</strong> und <strong>„A Fresh Start"</strong> (32. Hauptmission). Mit der Homestead-Mission <strong>„Comrade's Return"</strong> (Treffen mit Marius) kommen <strong>Carl</strong> (Versorger/Spenden) und <strong>Ross</strong> (Entsende-Koordinator) ins Camp. Trophäe: <em>Master Camper</em>.</div>
       </div>
       <div class="disarm-step">
         <div class="disarm-num">2</div>
@@ -3748,7 +3750,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <thead><tr><th>Bedingung</th><th>Was genau</th><th>Wenn sie fehlt</th></tr></thead>
       <tbody>
         <tr class="trow" data-s="bedingung questreihe fraktionsquest expanding the camp grounds of the sunrise gate abgeschlossen"><td><strong>1. Questreihe</strong></td><td>Die vorangehende Greymane-Questreihe muss <b>komplett</b> abgeschlossen sein. Die Ausbau-Quest ist immer der <b>letzte Eintrag</b> der Reihe.</td><td>Häufigster Spielerfehler. Das Spiel erklärt dieses Tor nirgends — die Mission erscheint einfach nicht.</td></tr>
-        <tr class="trow" data-s="bedingung kameraden greymanes verfuegbar nicht entsandt builder construction skill kopfzahl"><td><strong>2. Kameraden</strong></td><td>Eine Mindestzahl <b>verfügbarer</b> (= nicht anderweitig entsandter) Greymanes, davon mindestens <b>einer mit Builder-/Construction-Skill</b>. <span class="tag" style="color:var(--gold);border-color:var(--gold)">Builder-Pflicht: 2 Quellen</span></td><td>Mission erscheint nicht. Abhilfe: bei Ross laufende Missionen per <b>„Cancel Mission"</b> abbrechen — Kameraden <em>und</em> eingesetzte Ressourcen kommen zurück.</td></tr>
+        <tr class="trow" data-s="bedingung kameraden greymanes verfuegbar verfügbar nicht entsandt builder construction skill kopfzahl"><td><strong>2. Kameraden</strong></td><td>Eine Mindestzahl <b>verfügbarer</b> (= nicht anderweitig entsandter) Greymanes, davon mindestens <b>einer mit Builder-/Construction-Skill</b>. <span class="tag" style="color:var(--gold);border-color:var(--gold)">Builder-Pflicht: 2 Quellen</span></td><td>Mission erscheint nicht. Abhilfe: bei Ross laufende Missionen per <b>„Cancel Mission"</b> abbrechen — Kameraden <em>und</em> eingesetzte Ressourcen kommen zurück.</td></tr>
         <tr class="trow" data-s="bedingung ressourcen camp lager armaments stone timber food funds carl spenden"><td><strong>3. Camp-Ressourcen</strong></td><td>Ein Mindestbestand der fünf Camp-Ressourcen <b>im Camp-Lager</b> — nicht in deinem Inventar.</td><td>Auffüllbar durch Spenden bei Carl oder durch Ressourcen-Dispatches.</td></tr>
       </tbody>
     </table>
@@ -3805,11 +3807,11 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <table class="farm-tbl" style="margin-bottom:8px">
       <thead><tr><th>Ressource</th><th>Was zählt</th><th>Beste Beschaffung</th></tr></thead>
       <tbody>
-        <tr class="trow" data-s="armaments waffen ruestung kleidung camp ressource flaschenhals crafting beute spenden carl"><td><strong>Armaments</strong></td><td>Waffen, Rüstung, Kleidung</td><td>Der Flaschenhals der späten Stufen — kommt praktisch nur aus Crafting und Beute. Früh horten.</td></tr>
+        <tr class="trow" data-s="armaments waffen ruestung rüstung kleidung camp ressource flaschenhals crafting beute spenden carl"><td><strong>Armaments</strong></td><td>Waffen, Rüstung, Kleidung</td><td>Der Flaschenhals der späten Stufen — kommt praktisch nur aus Crafting und Beute. Früh horten.</td></tr>
         <tr class="trow" data-s="stone stein erz mineralien mining dispatch perwin quarry karin quarry"><td><strong>Stone</strong></td><td>Stein, Erz, Mineralien</td><td>Mining-Dispatches; als Top-Ziel gilt <b>Perwin Quarry</b>.</td></tr>
         <tr class="trow" data-s="timber holz lumber logging dispatch timberham sawmill"><td><strong>Timber</strong></td><td>Holz</td><td>Logging-Dispatches, z.&nbsp;B. Timberham Sawmill.</td></tr>
         <tr class="trow" data-s="food nahrung provisions gerichte zutaten harvesting farming svenholt ranch calpheon farmhouse"><td><strong>Food</strong></td><td>Gerichte und Zutaten</td><td>Harvesting-/Farming-Dispatches — <b>Svenholt Ranch</b> (Fleisch), <b>Calpheon Farmhouse</b> (Getreide). Günstigste Kategorie.</td></tr>
-        <tr class="trow" data-s="camp funds geld silver copper nicht persoenliches silber arkosa bank of hernand kopfgeld wagenhandel donate funds"><td><strong>Camp Funds</strong></td><td>Camp-Geld — <b>nicht</b> dein persönliches Silber (eigene Anzeige oben rechts)</td><td>Defence-Dispatches (Top-Ziel <b>Arkosa</b>, ~11K Basisertrag); Kopfgeldjagd; Zinsen auf Goldbarren bei der Bank of Hernand; Wagenhandel. Einzahlen bei Carl über <em>Manage Provisions → Camp Provisions → Donate Funds</em>; Goldbarren sind laut älteren Guides (vor 2.01.00) die schnellste Spendenform.<br><span style="color:var(--gold)">Seit 2.01.00</span> (04.09.2026) bringt das <b>Spenden von Silber</b> die <b>zehnfache Menge Camp-Mittel</b>; den früheren Kurs nennen die Notes nicht. Ob Goldbarren danach noch die schnellste Spendenform sind, ist offen; die Beschreibung der Camp-Mittel in questlog nennt nur Silberspenden und Entsendungen als Quellen (im Spiel prüfen).<br><span style="color:var(--gold)">Seit 1.16.00</span> ist der <b>Wagenhandel</b> deutlich stärker gewichtet: Königliche Handelsposten zahlen das Vierfache, der Gesamtgewinn wurde angehoben. Zugleich ist der Bankzins auf <b>±40 Goldbarren</b> je Ausschüttung gedeckelt.</td></tr>
+        <tr class="trow" data-s="camp funds geld silver copper nicht persoenliches persönliches silber arkosa bank of hernand kopfgeld wagenhandel donate funds"><td><strong>Camp Funds</strong></td><td>Camp-Geld — <b>nicht</b> dein persönliches Silber (eigene Anzeige oben rechts)</td><td>Defence-Dispatches (Top-Ziel <b>Arkosa</b>, ~11K Basisertrag); Kopfgeldjagd; Zinsen auf Goldbarren bei der Bank of Hernand; Wagenhandel. Einzahlen bei Carl über <em>Manage Provisions → Camp Provisions → Donate Funds</em>; Goldbarren sind laut älteren Guides (vor 2.01.00) die schnellste Spendenform.<br><span style="color:var(--gold)">Seit 2.01.00</span> (04.09.2026) bringt das <b>Spenden von Silber</b> die <b>zehnfache Menge Camp-Mittel</b>; den früheren Kurs nennen die Notes nicht. Ob Goldbarren danach noch die schnellste Spendenform sind, ist offen; die Beschreibung der Camp-Mittel in questlog nennt nur Silberspenden und Entsendungen als Quellen (im Spiel prüfen).<br><span style="color:var(--gold)">Seit 1.16.00</span> ist der <b>Wagenhandel</b> deutlich stärker gewichtet: Königliche Handelsposten zahlen das Vierfache, der Gesamtgewinn wurde angehoben. Zugleich ist der Bankzins auf <b>±40 Goldbarren</b> je Ausschüttung gedeckelt.</td></tr>
       </tbody>
     </table>
     <div class="card" style="margin-bottom:20px" data-s="ressourcen quellen spenden carl dispatch missionen strongholds ruins defence engineering construction location recapture">
@@ -3822,7 +3824,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 
     <div class="sub-t" style="scroll-margin-top:72px">Wagenhandel — der Stand nach Patch 1.16.00 (Kartenfix 1.17.00)</div>
     <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px">Patch <b>1.16.00</b> (01.08.2026) hat den Handel vom Nebenschauplatz zur eigenen Wirtschaftsschleife ausgebaut. Alles hier Genannte stammt aus den offiziellen Patch-Notes oder aus namentlich genannten Guides; kursierende Gewinnzahlen aus Foren sind bewusst nicht aufgeführt, weil sie sich nicht überprüfen ließen.</div>
-    <div class="card" style="margin-bottom:20px" data-s="wagenhandel handel trading wagon handelsposten trading post koeniglicher royal wagenwerkstatt wagon workshop brice arnold carl verpacken handelswaren kailok hornsplitter goldleaf guildhouse anleihen bonds bank handels-tab karte handelsrouten trade routes kartenfix 1.17">
+    <div class="card" style="margin-bottom:20px" data-s="wagenhandel handel trading wagon handelsposten trading post koeniglicher königlicher royal wagenwerkstatt wagon workshop brice arnold carl verpacken handelswaren kailok hornsplitter goldleaf guildhouse anleihen bonds bank handels-tab karte handelsrouten trade routes kartenfix 1.17">
       <div class="crows">
         <div class="crow"><span class="cl">Freischalten</span><span class="cv">Am <b>Ende von Kapitel 2</b> nach dem Sieg über <b>Kailok the Hornsplitter</b> (game8). Für den Wagenbau per Dispatch braucht es <b>Brice</b> (Wagonmaster) und <b>Arnold</b> (Engineer) im Camp; gebaut wird an der <b>Timberturner Wainwright</b>. <span style="color:var(--gdim)">Die kursierenden Questnamen dazu sind unbestätigt, und die Guides sind sich über die Lage der Wainwright uneins (Osten, Westen bzw. Nordosten).</span></span></div>
         <div class="crow"><span class="cl">Wagentypen</span><span class="cv">Drei Stufen: <b>Old Wagon</b>, <b>Freight Wagon</b>, <b>Trading Wagon</b> (Steam-Guide). Alle drei sind vierrädrige Zweigespanne. <span style="color:var(--gdim)">Die Spieldatenbank führt den ersten als <em>Worn Wagon</em> — derselbe Wagen, anderer Name. Angaben zu Bauzeit, Wendigkeit oder erhöhter Banditen-Anziehung kursieren, stehen aber in keiner belastbaren Quelle.</span></span></div>
@@ -3839,7 +3841,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     </div>
 
     <div class="sub-t" style="scroll-margin-top:72px">Erträge vervielfachen — so verkürzt du Stufe 4 und 5</div>
-    <div class="card" style="margin-bottom:20px" data-s="ertrag multiplikator bonus stapelbar gold spezialist volle plaetze church conversion blessings golden beer mazzul burnhand quarry mecha worker grey-0">
+    <div class="card" style="margin-bottom:20px" data-s="ertrag multiplikator bonus stapelbar gold spezialist volle plaetze plätze church conversion blessings golden beer mazzul burnhand quarry mecha worker grey-0">
       <div class="crows">
         <div class="crow"><span class="cl">+40 %</span><span class="cv">Ein Spezialist mit passendem Gold-/Skilled-Skill als Missionsleiter.</span></div>
         <div class="crow"><span class="cl">+40 %</span><span class="cv">Alle Missionsplätze besetzt.</span></div>
@@ -3864,7 +3866,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     </div>
 
     <div class="sub-t" style="scroll-margin-top:72px">Finale Stufe: Umzug nach Pailune</div>
-    <div class="card" style="margin-bottom:20px" data-s="umzug pailune relocation reconstructing pailune council institute infirmary barracks trading post the return home serkis 1000 slots irreversibel feldfruechte ernten speichern">
+    <div class="card" style="margin-bottom:20px" data-s="umzug pailune relocation reconstructing pailune council institute infirmary barracks trading post the return home serkis 1000 slots irreversibel feldfruechte feldfrüchte ernten speichern">
       <div class="crows">
         <div class="crow"><span class="cl">Vorlauf</span><span class="cv">Nach Kapitel 7 „Homecoming" (Pailune von Ludvig befreit) öffnet <b>Reconstructing Pailune</b>. Fünf Bauprojekte: <b>Pailune Council, Institute of Pailune, Infirmary, Barracks, Trading Post</b>. Kosten der Einzelprojekte sind nirgends beziffert.</span></div>
         <div class="crow"><span class="cl">Umzug</span><span class="cv">Quest <b>The Return Home</b>, gestartet bei <b>Serkis</b> in Hernand. Voraussetzung: Howling Hill voll ausgebaut, Pailune komplett wiederaufgebaut, Hauptstory inklusive Epilog durch.</span></div>
@@ -3895,7 +3897,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <tr class="trow" data-s="haus housing select house compact standard spacious pailunese layout lukes request getrennt"><td><strong>Camp-Ausbau ↔ Haus</strong></td><td>Das Haus ist ein eigenes System (freigeschaltet über <em>First Step to Rebuilding</em> + <em>Luke's Request</em>). Gekoppelt ist nur die <b>Layout-Auswahl</b>: „Select House" (Patch 1.04.00) gibt Compact → Standard → Spacious → Spacious Pailunese je nach Ausbaustand frei.</td></tr>
         <tr class="trow" data-s="greymane commissions 27 medium bag 81 inventar slots nicht camp lager"><td><strong>Lager-Slots ↔ Inventar-Slots</strong></td><td>Die 27 <b>Greymane Commissions</b> geben je einen Medium Bag (+3 <b>Inventar</b>-Plätze, max. +81). Das hat mit dem Camp-Lager nichts zu tun.</td></tr>
         <tr class="trow" data-s="for a better tomorrow spendenreihe contribution keine ausbaustufe"><td><strong>„For a Better Tomorrow" ≠ Ausbau</strong></td><td>Eine separate <b>Spendenreihe</b> für Greymane-Contribution — keine Ausbaustufe. Die Stufenbeträge (bis 5.000 Silver / 50.000 Provisions / 25.000 Timber / 25.000 Stone / 12.500 Waffen) stehen laut Spieldatenbank (questlog) im Fraktionseintrag der Greymanes; Forenposts nennen teils abweichende Werte.</td></tr>
-        <tr class="trow" data-s="greymane contribution tokens keine ausbau waehrung shop carl kaution"><td><strong>Contribution Tokens ≠ Ausbau-Währung</strong></td><td>Sie zahlen im Contribution-Shop bei Carl und dienen als rückerstattbare Kaution (4 pro Contribution Worker).</td></tr>
+        <tr class="trow" data-s="greymane contribution tokens keine ausbau waehrung währung shop carl kaution"><td><strong>Contribution Tokens ≠ Ausbau-Währung</strong></td><td>Sie zahlen im Contribution-Shop bei Carl und dienen als rückerstattbare Kaution (4 pro Contribution Worker).</td></tr>
         <tr class="trow" data-s="cloudcart heissluftballon kein camp ausbau unlock emberwind workshop glenbright manor engineering"><td><strong>Cloudcart ≠ Ausbau-Belohnung</strong></td><td>Der Heißluftballon hängt <b>nicht</b> am Camp-Level, sondern an ≥5 Kameraden (einer mit Engineering-Skill) und dem Bauplan aus dem Rätsel in Glenbright Manor; gebaut wird er am Emberwind Workshop.</td></tr>
         <tr class="trow" data-s="alchemy lab alchemielabor camp cauldron vincent conrad kessel timberham widerlegt"><td><strong>Alchemy Lab im Camp?</strong> <span class="tag tr">widerlegt</span></td><td><b>Nein — es gibt keins.</b> Nachrecherche 22.08.2026: Im Datamine der Spielversion 1.18.01 existiert keine solche Station, und die In-Game-Beschreibung <em>jeder</em> Alchemie-Formel lautet „A formula to craft … using a cauldron“. Die offiziellen Patch Notes kennen als Camp-Station die <b>Workstation</b> (seit 1.12.00), kein Labor. Behauptet wurde das Labor ursprünglich nur von <b>KeenGamer</b>; alle weiteren Fundstellen sind wortgleiche Übernahmen davon. Ein Spieler mit ausgebautem Camp widerspricht ausdrücklich. <b>Konsequenz:</b> Die beiden Rezepte, die im Wiki an dieser Station hingen („Attack Speed Potion“, „Spirit Gauge Restore Potion“), sind am 22.08.2026 <b>entfernt</b> worden — sie tauchen in keiner unabhängigen Rezeptliste auf. Belegt ist stattdessen der <b>Cauldron</b> als Möbelstück: 48 Silver bei Vincent (Furniture Shop, Timberham Sawmill), nach dem „Furniture Supply Contract“ auch bei Conrad im Camp; dazu zwei kostenlose Cauldrons in der Welt (Hernand, Pororin Village). Aufgestellt wird er im eigenen Haus.</td></tr>
       </tbody>
@@ -3905,18 +3907,18 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <table class="farm-tbl" style="margin-bottom:20px">
       <thead><tr><th>Patch</th><th>Änderung</th></tr></thead>
       <tbody>
-        <tr class="trow" data-s="patch 1.00.03 private storage eingefuehrt 240 slots"><td><strong>1.00.03</strong></td><td>Privatlager überhaupt erst eingeführt (Maximum damals 240 Slots).</td></tr>
+        <tr class="trow" data-s="patch 1.00.03 private storage eingefuehrt eingeführt 240 slots"><td><strong>1.00.03</strong></td><td>Privatlager überhaupt erst eingeführt (Maximum damals 240 Slots).</td></tr>
         <tr class="trow" data-s="patch 1.01.00 lagertruhe zelt standort"><td><strong>1.01.00</strong></td><td>Lagertruhe an ihren heutigen Standort im Zelt beim eigenen Bett verlegt.</td></tr>
         <tr class="trow" data-s="patch 1.02.00 private storage an camp ausbau gekoppelt 240 1000 abyss nexus pailune"><td><strong>1.02.00</strong> <span style="color:var(--dim)">04.04.2026</span></td><td><b>Maßgeblich für alle Slot-Zahlen:</b> Lagerkapazität an den Ausbaustand gekoppelt (240 → max. 1.000 über 5 Stufen). Abyss-Nexus in Pailune ergänzt.</td></tr>
-        <tr class="trow" data-s="patch 1.03.00 pailune camp npcs erreichbar farm ranch flaechen gunter harry bronton lola fix"><td><strong>1.03.00</strong> <span style="color:var(--dim)">11.04.2026</span></td><td>Bedienung des Greymane Camps verbessert; im Pailune-Camp bessere NPC-Erreichbarkeit und größere Farm-/Ranch-Flächen. <b>Fix</b> für den NPC-Austausch (Gunter, Harry, Bronton, Lola).</td></tr>
-        <tr class="trow" data-s="patch 1.04.00 1.04.02 well brunnen howling hill select house private storage moebel contribution shop carl"><td><strong>1.04.00 / 1.04.02</strong></td><td>Brunnen in Howling Hill; „Select House"-Option; Privatlager nach dem Umzug als platzierbares Möbelstück; Hausmöbel überstehen Ausbau und Umzug; <b>Greymane Contribution Shop bei Carl</b>.</td></tr>
+        <tr class="trow" data-s="patch 1.03.00 pailune camp npcs erreichbar farm ranch flaechen flächen gunter harry bronton lola fix"><td><strong>1.03.00</strong> <span style="color:var(--dim)">11.04.2026</span></td><td>Bedienung des Greymane Camps verbessert; im Pailune-Camp bessere NPC-Erreichbarkeit und größere Farm-/Ranch-Flächen. <b>Fix</b> für den NPC-Austausch (Gunter, Harry, Bronton, Lola).</td></tr>
+        <tr class="trow" data-s="patch 1.04.00 1.04.02 well brunnen howling hill select house private storage moebel möbel contribution shop carl"><td><strong>1.04.00 / 1.04.02</strong></td><td>Brunnen in Howling Hill; „Select House"-Option; Privatlager nach dem Umzug als platzierbares Möbelstück; Hausmöbel überstehen Ausbau und Umzug; <b>Greymane Contribution Shop bei Carl</b>.</td></tr>
         <tr class="trow" data-s="patch 1.05.00 minimap pets camp verletzung timer"><td><strong>1.05.00</strong></td><td>Minimap zeigt eigene Pets im Greymane Camp.</td></tr>
         <tr class="trow" data-s="patch 1.08.00 pond teich howling hill pailune bau mission"><td><strong>1.08.00</strong></td><td>Teich (Pond) in Howling Hill und im Pailune-Camp — über eine eigene Bau-Mission, außerhalb der fünf Ausbaustufen.</td></tr>
         <tr class="trow" data-s="patch 1.10.00 contribution office assessor umbenannt"><td><strong>1.10.00</strong></td><td>Contribution Shop offiziell in „Contribution Office" umbenannt, Manager in „Contribution Assessor".</td></tr>
-        <tr class="trow" data-s="patch 1.12.00 workstation aussendekoration 58 hausgegenstaende crash fix damiane oongka camp funds ressourcenmengen"><td><strong>1.12.00</strong> <span style="color:var(--dim)">19.06.2026</span></td><td>Workstation u.&nbsp;a. im Greymane Camp; Außendekoration ums Haus; Fix für falsch angezeigte Ressourcenmengen beim Spenden; Crash-Fix beim Camp-Ausbau mit Damiane/Oongka.</td></tr>
-        <tr class="trow" data-s="patch 1.11.00 1.13.00 keine aenderungen camp ausbau pets 50 housing fix"><td><strong>1.11.00 / 1.13.00</strong></td><td>Keine Änderungen am Ausbausystem. 1.11 betrifft Pets (max. 50 gleichzeitig im Camp), 1.13 nur einen Housing-Bugfix.</td></tr>
+        <tr class="trow" data-s="patch 1.12.00 workstation aussendekoration 58 hausgegenstaende hausgegenstände crash fix damiane oongka camp funds ressourcenmengen"><td><strong>1.12.00</strong> <span style="color:var(--dim)">19.06.2026</span></td><td>Workstation u.&nbsp;a. im Greymane Camp; Außendekoration ums Haus; Fix für falsch angezeigte Ressourcenmengen beim Spenden; Crash-Fix beim Camp-Ausbau mit Damiane/Oongka.</td></tr>
+        <tr class="trow" data-s="patch 1.11.00 1.13.00 keine aenderungen änderungen camp ausbau pets 50 housing fix"><td><strong>1.11.00 / 1.13.00</strong></td><td>Keine Änderungen am Ausbausystem. 1.11 betrifft Pets (max. 50 gleichzeitig im Camp), 1.13 nur einen Housing-Bugfix.</td></tr>
         <tr class="trow" data-s="patch 1.18.00 forschung camp mittel camp funds silber umgestellt"><td><strong>1.18.00</strong> <span style="color:var(--dim)">15.08.2026</span></td><td>Forschung wird nicht mehr mit Silber, sondern mit <b>Camp-Mitteln</b> bezahlt. Kosten und Umrechnungskurs nennen die offiziellen Notes nicht.</td></tr>
-        <tr class="trow" data-s="patch 2.00.00 demeniss kettensaege chainsaw camp spenden"><td><strong>2.00.00</strong> <span style="color:var(--dim)">25.08.2026</span></td><td>Die <b>Demeniss-Kettensäge</b> (Demenissian Chainsaw) kann im Camp gespendet werden. Eine Gegenleistung nennen die Notes nicht.</td></tr>
+        <tr class="trow" data-s="patch 2.00.00 demeniss kettensaege kettensäge chainsaw camp spenden"><td><strong>2.00.00</strong> <span style="color:var(--dim)">25.08.2026</span></td><td>Die <b>Demeniss-Kettensäge</b> (Demenissian Chainsaw) kann im Camp gespendet werden. Eine Gegenleistung nennen die Notes nicht.</td></tr>
         <tr class="trow" data-s="patch 2.01.00 silber spenden zehnfach camp mittel goldbarren investitionsmission entsendung spendenmission"><td><strong>2.01.00</strong> <span style="color:var(--dim)">04.09.2026</span></td><td>Silberspenden bringen die <b>zehnfache Menge Camp-Mittel</b>. Neue Entsendungsmission <b>„Goldbarren-Investitionsmission“</b>. Der Wert zum Abschluss der Camp-Spendenmission war niedriger angesetzt als angegeben (behoben, Richtung der Korrektur unklar). Im Graumähnen-Camp wurde das Haus nicht geladen (behoben).</td></tr>
         <tr class="trow" data-s="patch 2.02.00 wohnfunktion banner howling hill camp inventar"><td><strong>2.02.00</strong> <span style="color:var(--dim)">11.09.2026</span></td><td>Die Wohnfunktion wurde nicht freigeschaltet, wenn das Banner im Howling-Hill-Camp bei vollem Inventar aufgestellt wurde (behoben).</td></tr>
         <tr class="trow" data-s="patch 2.03.00 kampf entsendung speichern laden abbruch"><td><strong>2.03.00</strong> <span style="color:var(--dim)">18.09.2026</span></td><td>Kampf-Entsendungen wurden abgebrochen, wenn nach dem Entsenden gespeichert und neu geladen wurde (behoben).</td></tr>
@@ -4128,7 +4130,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 
   <section class="sec" id="sec-witches">
     <h2 class="sec-t"><span class="sec-sym">☾</span> Hexen Guide</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>White Crow</strong> ist erst nach 4 Witch Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>White Crow</strong> ist erst nach 4 Witch's Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).</div>
     <div class="witch-grid" id="witch-grid"></div>
   </section>
 
@@ -4142,7 +4144,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
   <section class="sec" id="sec-collectibles">
     <h2 class="sec-t"><span class="sec-sym">⬦</span> Collectibles &amp; Knowledge</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, ~2.921 Einträge — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214, Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30; die Einzelwerte ergeben zusammen nur 2.905 und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:var(--survey-red)">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, 2.921 Einträge laut Fortschrittsanzeige im Knowledge-Menü — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214, Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30; die hier genannten Einzelwerte ergeben zusammen 2.905 (16 weniger als die Gesamtzahl) und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:var(--survey-red)">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">141</span> Sealed Abyss Artifacts</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">13</span> Constellations</div>
@@ -4376,7 +4378,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-roadmap">
-    <h2 class="sec-t"><span class="sec-sym">⚑</span> Roadmap — Was als nächstes?</h2>
+    <h2 class="sec-t"><span class="sec-sym">⚑</span> Roadmap — Was als Nächstes?</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Personalisierte Aufgaben-Empfehlung basierend auf deinem Fortschritt. Auto-update bei jeder Aktion. Klick auf Task → springt zur passenden Section.</div>
     <div class="rm-progress" id="rm-progress"></div>
     <div class="rm-task-list" id="rm-list"></div>
@@ -4476,7 +4478,7 @@ function lsJson(key,fallback){
 function lsSet(key,val){try{localStorage.setItem(key,val);return true;}catch(e){console.warn('lsSet',key,e);try{_errToast('Fortschritt konnte nicht gespeichert werden — privater Modus oder Speicher voll.');}catch(_){}return false;}}
 // Boss-Umbenennungen: gespeicherten Fortschritt (abgehakt, Notizen, Bewertungen, Versuche, Favoriten) alt→neu
 // migrieren. Idempotent, läuft bei jedem Laden — also auch nach Import/Sync, die die Seite neu laden.
-const BOSS_RENAMES={"Avatar of Umbra":"Myurdin, the Avatar of Umbra"};
+const BOSS_RENAMES={"Avatar of Umbra":"Myurdin, the Avatar of Umbra","Thunder Tank":"Thunder Crusher","Cloud Fortress Orbian":"Flying Fortress Orbian"};
 (function migrateBossRenames(){
   try{
     const ren=n=>BOSS_RENAMES[n]||n, hit=a=>Array.isArray(a)&&a.some(n=>BOSS_RENAMES[n]);
@@ -4490,6 +4492,12 @@ const BOSS_RENAMES={"Avatar of Umbra":"Myurdin, the Avatar of Umbra"};
     });
     const f=lsJson('cd_favs',null);
     if(f&&typeof f==='object'&&hit(f.boss)){f.boss=[...new Set(f.boss.map(ren))];lsSet('cd_favs',JSON.stringify(f));}
+    // Zuletzt angesehen (Seitenleiste): Einträge {kind:'boss',name,sec} mitziehen, sonst öffnet ein alter Eintrag eine Suche nach dem Altnamen
+    const rc=lsJson('cd_recent',null);
+    if(Array.isArray(rc)&&rc.some(x=>x&&x.kind==='boss'&&BOSS_RENAMES[x.name])){
+      const seen=new Set();
+      lsSet('cd_recent',JSON.stringify(rc.map(x=>x&&x.kind==='boss'&&BOSS_RENAMES[x.name]?{...x,name:BOSS_RENAMES[x.name]}:x).filter(x=>{const k=(x&&x.kind)+'|'+(x&&x.name);if(seen.has(k))return false;seen.add(k);return true;})));
+    }
   }catch(e){console.warn('migrateBossRenames',e);}
 })();
 // Nebenquest-Umbenennungen: gespeicherten Fortschritt (cd_sq_done = Liste der q-Namen) alt→neu migrieren. Idempotent, läuft bei jedem Laden.
@@ -4513,12 +4521,18 @@ const WEAPON_RENAMES={"Rhonid Shield":"Rhonid Large Shield"};
   }catch(e){console.warn('migrateWeaponRenames',e);}
 })();
 // Skill-Umbenennungen (Oongka, 04.10.2026): gespeicherte Skill-Favoriten (cd_favs.skill) alt→neu migrieren. Idempotent, läuft bei jedem Laden.
-const SKILL_RENAMES={"Rage (Super Armor State)":"Rage","Explosive Strike — Charge":"Explosive Strike"};
+const SKILL_RENAMES={"Rage (Super Armor State)":"Rage","Explosive Strike — Charge":"Explosive Strike","Slash (Oongka)":"Slash"};
 (function migrateSkillRenames(){
   try{
     const ren=n=>SKILL_RENAMES[n]||n, hit=a=>Array.isArray(a)&&a.some(n=>SKILL_RENAMES[n]);
     const f=lsJson('cd_favs',null);
     if(f&&typeof f==='object'&&hit(f.skill)){f.skill=[...new Set(f.skill.map(ren))];lsSet('cd_favs',JSON.stringify(f));}
+    // Zuletzt angesehen: Skill-Einträge {kind:'skill',name,sec} mitziehen, sonst öffnet ein alter Eintrag eine Suche nach dem Altnamen
+    const rc=lsJson('cd_recent',null);
+    if(Array.isArray(rc)&&rc.some(x=>x&&x.kind==='skill'&&SKILL_RENAMES[x.name])){
+      const seen=new Set();
+      lsSet('cd_recent',JSON.stringify(rc.map(x=>x&&x.kind==='skill'&&SKILL_RENAMES[x.name]?{...x,name:SKILL_RENAMES[x.name]}:x).filter(x=>{const k=(x&&x.kind)+'|'+(x&&x.name);if(seen.has(k))return false;seen.add(k);return true;})));
+    }
   }catch(e){console.warn('migrateSkillRenames',e);}
 })();
 // Globale Fehler-Auffangnetze: Seite soll nie kommentarlos kaputt wirken
@@ -4635,7 +4649,7 @@ function randomBoss(){
   const m=document.getElementById('rb-modal');
   const img=BOSS_IMGS[b.name];
   m.innerHTML=`<div class="rb-box">
-    <button class="rb-close" onclick="document.getElementById('rb-modal').classList.remove('show');modalFocusClose()" aria-label="Schliessen">✕</button>
+    <button class="rb-close" onclick="document.getElementById('rb-modal').classList.remove('show');modalFocusClose()" aria-label="Schließen">✕</button>
     ${img?`<img class="rb-img" src="${img}" alt="${escHtml(b.name)}" loading="lazy">`:''}
     <div class="rb-body">
       <div class="rb-name">${escHtml(b.name)}</div>
@@ -4695,77 +4709,91 @@ function _initTooltips(){
 // Lore-Begriffe → springen in Secrets-Section
 
 let _xrefMap=null;
+// Skill-Namen, die zu allgemein für automatische Textverlinkung sind (kommen als Teilwort/Attackenname in Fließtext vor,
+// z. B. „Whirling Slash“, „Slash-Combos“): bleiben in .skills (Tooltip, Favoriten, trackRecent), aber ohne Textlink.
+const _XREF_NOLINK=new Set(['Slash']);
 function _buildXrefMap(){
   if(_xrefMap)return _xrefMap;
-  _xrefMap={skills:{},bosses:{},lore:{}};
+  _xrefMap={skills:{},bosses:{},lore:{},skillVariants:{}};
   // Skill-Index aus Kliff + Damiane + Oongka
+  // Gleichnamige Skills (43 Namen): in .skills gewinnt Kliff, dann Damiane, dann Oongka;
+  // skillVariants merkt alle Träger, damit der Tooltip die Gleichnamigkeit zeigen kann.
+  const _var=(s,ch)=>{(_xrefMap.skillVariants[s.name]=_xrefMap.skillVariants[s.name]||[]).push({ch,s});};
   [KLIFF_STAMINA,KLIFF_SPIRIT,KLIFF_HEALTH].forEach(tree=>{
-    tree.forEach(s=>{_xrefMap.skills[s.name]=s;});
+    tree.forEach(s=>{_xrefMap.skills[s.name]=s;_var(s,'Kliff');});
   });
-  if(typeof DAMIANE_SKILLS!=='undefined')DAMIANE_SKILLS.forEach(s=>{if(!_xrefMap.skills[s.name])_xrefMap.skills[s.name]=s;});
-  if(typeof OONGKA_SKILLS!=='undefined')OONGKA_SKILLS.forEach(s=>{if(!_xrefMap.skills[s.name])_xrefMap.skills[s.name]=s;});
+  if(typeof DAMIANE_SKILLS!=='undefined')DAMIANE_SKILLS.forEach(s=>{if(!_xrefMap.skills[s.name])_xrefMap.skills[s.name]=s;_var(s,'Damiane');});
+  if(typeof OONGKA_SKILLS!=='undefined')OONGKA_SKILLS.forEach(s=>{if(!_xrefMap.skills[s.name])_xrefMap.skills[s.name]=s;_var(s,'Oongka');});
   // Boss-Index
   BOSSES.forEach(b=>{_xrefMap.bosses[b.name]=b;});
+  // Optionaler Hook (Inhalt kommt aus den Daten): XREF_BOSS_ALIASES={"Alias":"BOSSES.name"} verlinkt auch Alias-Schreibweisen im Text.
+  // Der Klick sucht den echten Bossnamen (b.name), nicht den Alias.
+  if(typeof XREF_BOSS_ALIASES!=='undefined'&&XREF_BOSS_ALIASES)Object.entries(XREF_BOSS_ALIASES).forEach(([al,nm])=>{if(_xrefMap.bosses[nm]&&!_xrefMap.bosses[al])_xrefMap.bosses[al]=_xrefMap.bosses[nm];});
   // Lore-Begriffe
   Object.entries(LORE_TERMS).forEach(([k,v])=>{_xrefMap.lore[k]=v;});
   // Sortiert nach Länge desc — längere Namen zuerst matchen (verhindert "Force Palm" → "Force Palm Expertise" wird zerschnitten)
   _xrefMap.skillNames=Object.keys(_xrefMap.skills).sort((a,b)=>b.length-a.length);
   _xrefMap.bossNames=Object.keys(_xrefMap.bosses).sort((a,b)=>b.length-a.length);
   _xrefMap.loreNames=Object.keys(_xrefMap.lore).sort((a,b)=>b.length-a.length);
+  // Ein kombinierter Matcher für alle Typen (ein Durchlauf, siehe linkifyXrefs).
+  // Reihenfolge der Alternativen = Priorität: Skills > Bosse > Lore, innerhalb eines Typs längster Name zuerst.
+  // Ein Name, der in mehreren Typen vorkommt, zählt nur beim ersten (typeOf). Apostroph auch als &#39; (escHtml-Eingaben).
+  // _XREF_NOLINK: Skill-Namen ohne automatischen Textlink (siehe Konstante vor _buildXrefMap).
+  const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/'/g,"(?:'|&#39;)");
+  const typeOf=Object.create(null),alts=[];
+  [['skill',_xrefMap.skillNames],['boss',_xrefMap.bossNames],['lore',_xrefMap.loreNames]].forEach(([t,names])=>names.forEach(n=>{
+    if(typeOf[n]||(t==='skill'&&typeof _XREF_NOLINK!=='undefined'&&_XREF_NOLINK.has(n)))return;typeOf[n]=t;alts.push(esc(n));
+  }));
+  _xrefMap.typeOf=typeOf;
+  _xrefMap.re=new RegExp('(?<!\\w)(?:'+alts.join('|')+')(?!\\w)','g');
   return _xrefMap;
 }
 
 function _xrefSpan(name,tipBody,tipTitle,action,extraClass){
   const safeAttr=s=>String(s||'').replace(/"/g,'&quot;');
   const safeJS=s=>String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
-  return `<span class="xref${extraClass?' '+extraClass:''}" data-tip="${safeAttr(tipBody)}" data-tip-title="${safeAttr(tipTitle)}" onclick="${action}">${name}</span>`;
+  // stopPropagation: Treffer liegen auch in klickbaren Eltern (Roadmap-Task, Boss-Lore-Box) — deren onclick darf den Sprung nicht überschreiben.
+  return `<span class="xref${extraClass?' '+extraClass:''}" data-tip="${safeAttr(tipBody)}" data-tip-title="${safeAttr(tipTitle)}" onclick="event.stopPropagation();${action}">${name}</span>`;
+}
+
+// Tooltip-Text eines Skills. Gleichnamige Skills (Kliff/Damiane/Oongka) werden benannt, damit nicht still Kliffs Werte für alle gelten.
+function _xrefSkillTip(name,m){
+  const sk=m.skills[name],vs=m.skillVariants[name]||[];
+  const first=(vs[0]&&vs[0].ch)||'Kliff';
+  let tip=`${vs.length>1||first!=='Kliff'?first+' · ':''}Voraussetzung: ${sk.prereq||'–'}<br>Effekt: ${sk.effect||'–'}`;
+  if(vs.length>1){
+    const others=vs.slice(1),differs=others.some(v=>v.s.prereq!==sk.prereq||v.s.effect!==sk.effect);
+    tip+=`<br>Gleichnamig bei ${others.map(v=>v.ch).join(', ')}${differs?' — Werte weichen ab':''}`;
+  }
+  return tip;
 }
 
 function linkifyXrefs(text){
   if(!text||typeof text!=='string')return text||'';
   const m=_buildXrefMap();
-  let out=text;
   const safeJS=s=>String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
-  // Maintain a marker so already-linked spans don't get re-matched (Achtung: regex match wird auf out neu gemacht — daher matchen wir NICHT innerhalb von <span>)
-  const escRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  // 1. Skills (längste zuerst)
-  m.skillNames.forEach(name=>{
-    const escName=escRe(name);
-    const re=new RegExp('(?<![\\w>"])('+escName+')(?![\\w<])','g');
-    const sk=m.skills[name];
-    const tipBody=`Voraussetzung: ${sk.prereq||'–'}<br>Effekt: ${sk.effect||'–'}`;
-    out=out.replace(re,_xrefSpan('$1',tipBody,name,`showSec('skills');document.getElementById('si').value='${safeJS(name)}';doSearch('${safeJS(name)}')`,'xref-skill'));
-  });
-  // 2. Bosse (längste zuerst, aber nicht innerhalb existing xref-Spans)
-  m.bossNames.forEach(name=>{
-    const escName=escRe(name);
-    const re=new RegExp('(?<![\\w>"])('+escName+')(?![\\w<])','g');
-    const b=m.bosses[name];
-    const tipBody=`${(b.region||'').replace(/"/g,'&quot;')}${b.chapter?' · Kap. '+b.chapter:''}<br>${(b.parry_or_dodge||'').replace(/"/g,'&quot;')}`;
-    out=out.replace(re,(match,p1,offset,full)=>{
-      // Skip wenn bereits in einem xref-Span
-      const before=full.slice(0,offset);
-      const openSpans=(before.match(/<span[^>]*class="xref/g)||[]).length;
-      const closeSpans=(before.match(/<\/span>/g)||[]).length;
-      if(openSpans>closeSpans)return match;
-      return _xrefSpan(p1,tipBody,name,`showSec('bosses');document.getElementById('si').value='${safeJS(name)}';doSearch('${safeJS(name)}')`,'xref-boss');
-    });
-  });
-  // 3. Lore-Begriffe
-  m.loreNames.forEach(name=>{
-    const escName=escRe(name);
-    const re=new RegExp('(?<![\\w>"])('+escName+')(?![\\w<])','g');
+  const link=hit=>{
+    const name=hit.replace(/&#39;/g,"'");
+    const type=m.typeOf[name];
+    if(type==='skill')return _xrefSpan(hit,_xrefSkillTip(name,m),name,`showSec('skills');document.getElementById('si').value='${safeJS(name)}';doSearch('${safeJS(name)}')`,'xref-skill');
+    if(type==='boss'){
+      const b=m.bosses[name];
+      const tipBody=`${(b.region||'').replace(/"/g,'&quot;')}${b.chapter?' · Kap. '+b.chapter:''}<br>${(b.parry_or_dodge||'').replace(/"/g,'&quot;')}`;
+      return _xrefSpan(hit,tipBody,b.name,`showSec('bosses');document.getElementById('si').value='${safeJS(b.name)}';doSearch('${safeJS(b.name)}')`,'xref-boss');
+    }
     const lr=m.lore[name];
-    out=out.replace(re,(match,p1,offset,full)=>{
-      const before=full.slice(0,offset);
-      const openSpans=(before.match(/<span[^>]*class="xref/g)||[]).length;
-      const closeSpans=(before.match(/<\/span>/g)||[]).length;
-      if(openSpans>closeSpans)return match;
-      const tabAction=lr.tab?`;if(typeof secretsTab==='function')secretsTab('${lr.tab}')`:'';
-      return _xrefSpan(p1,lr.tip||'',name,`showSec('${lr.sec}')${tabAction}`,'xref-lore');
-    });
-  });
-  return out;
+    const tabAction=lr.tab?`;if(typeof secretsTab==='function')secretsTab('${lr.tab}')`:'';
+    return _xrefSpan(hit,lr.tip||'',name,`showSec('${lr.sec}')${tabAction}`,'xref-lore');
+  };
+  // Nur Text zwischen Tags verlinken: Tags (samt Attributen) und bestehende xref-Spans bleiben unangetastet.
+  // So entstehen weder Spans in data-tip/onclick noch verschachtelte Spans.
+  let skip=0; // >0: innerhalb eines vorhandenen xref-Spans (Tiefe)
+  return text.split(/(<\/?[a-zA-Z][^>]*>)/).map((seg,i)=>{
+    if(i%2===0)return skip?seg:seg.replace(m.re,link);
+    if(skip){if(/^<span[\s>]/i.test(seg))skip++;else if(/^<\/span\s*>/i.test(seg))skip--;}
+    else if(/^<span[^>]*class="[^"]*\bxref\b/i.test(seg))skip=1;
+    return seg;
+  }).join('');
 }
 
 // ===== BOSS-PHASE-PARSER =====
@@ -4820,7 +4848,7 @@ function refreshSectionStats(){
     {lbl:'Bosse gesamt',val:BOSSES.length},
     {lbl:'Besiegt',val:bossDone},
     {lbl:'mit Notiz',val:bossNotes},
-    {lbl:'Regionen',val:[...new Set(BOSSES.map(b=>b.region.split(' ')[0]))].length}
+    {lbl:'Regionen',val:[...new Set(BOSSES.map(b=>normReg(b.region)||b.region))].length}
   ]);
   // Waffen
   const wTotal=WEAPONS.length;
@@ -4842,7 +4870,8 @@ function refreshSectionStats(){
     _injectSectionStats('cores',[
       {lbl:'Abyss Cores',val:CORES.length},
       {lbl:'Waffen-Slot',val:CORES.filter(c=>c.slot==='Weapon').length},
-      {lbl:'Rüstungs-Slot',val:CORES.filter(c=>c.slot==='Armor').length}
+      {lbl:'Rüstungs-Slot',val:CORES.filter(c=>c.slot==='Armor').length},
+      {lbl:'Waffe/Hand/Fuß',val:CORES.filter(c=>c.slot==='Both').length}
     ]);
   }
   // Mounts
@@ -5112,6 +5141,11 @@ function renderRoadmap(){
   const gmDone=lsJson('cd_gm',[]);
   const teDone=lsJson('cd_te',[]);
   const chDone=lsJson('cd_ch_done',[]);
+  // Kapitel nur aus nummerierten CHAPTERS-Einträgen zählen (robust, falls Prolog/Epilog dazukommen)
+  const chNums=CHAPTERS.filter(c=>typeof c.num==='number').map(c=>c.num);
+  const chTotal=chNums.length;
+  const chDoneN=chNums.filter(n=>chDone.includes(n)).length;
+  const gmTotal=GREYMANE_COMMISSIONS.length;
 
   // Progress-Header
   const progressEl=document.getElementById('rm-progress');
@@ -5120,8 +5154,8 @@ function renderRoadmap(){
     const sancTotal=typeof SANCTUM_IDS!=='undefined'?SANCTUM_IDS.length:16;
     progressEl.innerHTML=`
       <div class="rm-prog-pill"><span class="rm-prog-pill-val">${bossDone.length}/${BOSSES.length}</span><span class="rm-prog-pill-lbl">Bosse</span></div>
-      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${chDone.length}/12</span><span class="rm-prog-pill-lbl">Kapitel</span></div>
-      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${gmDone.length}/27</span><span class="rm-prog-pill-lbl">Greymane</span></div>
+      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${chDoneN}/${chTotal}</span><span class="rm-prog-pill-lbl">Kapitel</span></div>
+      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${gmDone.length}/${gmTotal}</span><span class="rm-prog-pill-lbl">Greymane</span></div>
       <div class="rm-prog-pill"><span class="rm-prog-pill-val">${sancCount}/${sancTotal}</span><span class="rm-prog-pill-lbl">Sanctums</span></div>
     `;
   }
@@ -5144,11 +5178,12 @@ function renderRoadmap(){
   }
 
   // 2. Missable warnings basierend auf chDone (welches Kapitel der User schon hat)
-  const lastCh=chDone.length>0?Math.max(...chDone):0;
-  if(lastCh===0||lastCh<1){
+  // Höchstes erledigtes Kapitel; nur gültige Kapitelnummern zählen (Altdaten wie 99 oder Text ignorieren)
+  const lastCh=chNums.filter(n=>chDone.includes(n)).reduce((m,n)=>Math.max(m,n),0);
+  if(lastCh<2){
     tasks.push({prio:'md',title:'Watch & Learn: Pump Kick',desc:'Im Matthias-Duell (Kapitel 2, Quest For Honor) per Watch & Learn abschauen. Verpasst? Laut ConsolePulse über Boss-Rematch nachholbar (seit Patch 1.05).',meta:['Kapitel 2','Skill Unarmed Combat'],action:"showSec('skills');skTab('watch')"});
   }
-  if(lastCh>=3&&lastCh<4){
+  if(lastCh===3){
     tasks.push({prio:'md',title:'Watch & Learn: Focused Force Palm',desc:'Geist im Gebirgsdurchgang westlich Fort Perwin — wird bei Schnellreise/anderem Weg zum Scholastone Institute leicht übersprungen (nachholbar, nächste bekannte Gelegenheit Kapitel 9).',meta:['Kapitel 4','Spirit Tree'],action:"showSec('skills');skTab('watch')"});
   }
   if(lastCh===7){
@@ -5156,12 +5191,12 @@ function renderRoadmap(){
   }
 
   // 3. Greymane fortschreiten
-  if(gmDone.length<27&&lastCh>=2){
+  if(gmDone.length<gmTotal&&lastCh>=2){
     tasks.push({
       prio:'md',
-      title:`Greymane Commission ${gmDone.length+1}/27`,
-      desc:`Jede Commission gibt +3 Inventarslots. Alle 27 = +81 Slots; für das versteckte Ende nicht erforderlich.`,
-      meta:['Side-Content',`+${(27-gmDone.length)*3} Inv-Slots offen`],
+      title:`Greymane Commission ${gmDone.length+1}/${gmTotal}`,
+      desc:`Jede Commission gibt +3 Inventarslots. Alle ${gmTotal} = +${gmTotal*3} Slots; für das versteckte Ende nicht erforderlich.`,
+      meta:['Side-Content',`+${(gmTotal-gmDone.length)*3} Inv-Slots offen`],
       action:"showSec('checklists');clTab('greymane')"
     });
   }
@@ -5181,14 +5216,13 @@ function renderRoadmap(){
   }
 
   // 5. Build-Empfehlung fuer aktuelle Phase
-  let buildPhase='early';
-  if(lastCh>=12)buildPhase='end';
-  else if(lastCh>=8)buildPhase='late';
-  else if(lastCh>=4)buildPhase='mid';
+  // Phase nach dem laufenden Kapitel (letztes erledigtes + 1); Grenzen und Texte aus BUILD_PHASES
+  const curCh=lastCh+1;
+  const phase=BUILD_PHASES.find(p=>curCh<=p.ch)||BUILD_PHASES[BUILD_PHASES.length-1];
   tasks.push({
     prio:'lo',
     title:'Build-Empfehlung für deine Phase',
-    desc:`Phase ${buildPhase==='early'?'Early (Kap. 1-3)':buildPhase==='mid'?'Mid (Kap. 4-7)':buildPhase==='late'?'Late (Kap. 8-11)':'Endgame (Kap. 12+)'} — passende Loadouts pro Spielstil.`,
+    desc:`Phase ${phase.l} — passende Loadouts pro Spielstil.`,
     meta:['Builds-Section'],
     action:`showSec('builds')`
   });
@@ -5208,11 +5242,13 @@ function renderRoadmap(){
   }
 
   // Empty-State: Alles done
-  if(bossDone.length===BOSSES.length&&gmDone.length>=27&&chDone.length>=12){
+  // Greymane und Sanctums sind laut True-Ending-Checkliste optional; Pflicht = TE_REQUIRED_IDS
+  const teReqDone=[...TE_REQUIRED_IDS].every(id=>teDone.includes(id));
+  if(BOSSES.every(b=>bossDone.includes(b.name))&&chDoneN>=chTotal&&teReqDone){
     cont.innerHTML=`<div class="rm-empty-celebrate">
       <div class="rm-empty-celebrate-icon">🏆</div>
-      <div style="font-family:var(--f-display);font-weight:700;font-size:16px;color:var(--survey-red);margin-bottom:4px;letter-spacing:.02em">TRUE ENDING UNLOCKED</div>
-      <div style="font-size:12px;color:#beb5a8;line-height:1.55">Alle Bosse besiegt, alle 12 Kapitel durch.<br>Du hast Kliff Macduffs Geschichte komplett gelebt.</div>
+      <div style="font-family:var(--f-display);font-weight:700;font-size:16px;color:var(--survey-red);margin-bottom:4px;letter-spacing:.02em">ALLE PFLICHTPUNKTE ABGEHAKT</div>
+      <div style="font-size:12px;color:#beb5a8;line-height:1.55">Alle Bosse als besiegt markiert, alle ${chTotal} Kapitel abgeschlossen und alle Pflichtpunkte der True-Ending-Checkliste abgehakt.<br>Greymane Commissions und Sanctums bleiben optional.</div>
     </div>`;
     return;
   }
@@ -5457,7 +5493,7 @@ function renderSecrets(){
             <li><strong>Quest:</strong> ${linkifyXrefs('Where the Light Leads')} / Unexpected Gift — Hauptstory <strong>Kapitel 2</strong></li>
             <li><strong>Ort:</strong> Spitze des <strong>Lioncrest Watchtower</strong> in Hernand</li>
             <li>Wird in mehreren späteren Quests verlangt</li>
-            <li>Seit Patch 1.00.03 wird Visione nach Laternen-Lesen <em>automatisch equippt und abgespielt</em></li>
+            <li>Seit Patch 1.00.03 (23.03.2026) wird die Visione laut den offiziellen Patch Notes nach dem Lesen eines Memory Fragments mit der Laterne <em>automatisch ausgerüstet und abgespielt</em></li>
           </ul>
         </div>
       </div>
@@ -5490,15 +5526,14 @@ function renderSecrets(){
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📌</span>Wichtige Storyfragmente</div>
         <div class="sec-block-body">
           <ul>
-            <li><strong>Hernand-Region:</strong> Lioncrest Watchtower (Quest-Trigger), Grotto of the Penitent, Dragon's Stone Chamber Ruins (Eingang)</li>
-            <li><strong>Great Palace of Demeniss</strong> (Kapitel 8): "Blood Coronation" — Pflicht-Memory der Hauptstory</li>
+            <li><strong>Lioncrest Watchtower</strong> (Hernand, Kapitel 2): Mission „Memory Fragment“ der Quest Unexpected Gift — hier erhältst du die Visione</li>
+            <li><strong>Palast in der Demeniss-Hauptstadt</strong> (Kapitel 8, Quest „The Blood Coronation“): Memory Fragment im 2. Stock — Pflichtschritt der Hauptstory</li>
           </ul>
-          <p style="margin-top:8px"><strong>Quest-Gating durch Memory Fragments</strong> (Kap. 2 "Hernand in Chaos"):</p>
+          <p style="margin-top:8px"><strong>Memory Fragments als Questschritt</strong> (Kap. 2 „Hernand in Chaos“, Aushang-Quests):</p>
           <ul>
-            <li>Trial After Trial</li>
-            <li>The Man Trapped in the Mire</li>
-            <li>Missing Companion</li>
-            <li>Secrets Hidden in the Dark</li>
+            <li>Trial After Trial — Erinnerung zu den gestohlenen Rindern</li>
+            <li>The Man Trapped in the Mire — Erinnerung zur „Hornless Goat“</li>
+            <li>Secrets Hidden in the Dark — Erinnerung „Lair of the Animal Thieves“</li>
           </ul>
         </div>
       </div>
@@ -5553,8 +5588,8 @@ function renderSecrets(){
         <div class="sec-block-body">
           <ul>
             <li>${linkifyXrefs('Aerial Force Palm')} — Vertikal-Boost</li>
-            <li><strong>Gliding</strong> (Cape-Glide) — Horizontal-Reach</li>
-            <li><strong>Triple Aerial Focus Palm</strong> — höchste Peaks</li>
+            <li><strong>Flight (Crow's Wing)</strong> (Gleiten) — Horizontal-Reach</li>
+            <li>${linkifyXrefs('Aerial Force Palm')} mehrfach in der Luft einsetzen (laut PowerPyx dreimal; nach kurzem Stillstand erneut, nicht sofort hintereinander spammen) — höchste Peaks</li>
           </ul>
           <div class="lore-callout">
             Diese Skills <strong>früh priorisieren</strong>, wenn man Cressets effizient farmen will. Workaround vor Skill-Unlock: <strong>Precision Jumping</strong> via "ohne Stamina-Verbrauch" Klettern (siehe Tab "Versteckte Mechaniken").
@@ -5717,7 +5752,7 @@ function renderSecrets(){
       </div>
 
       <div class="sec-block">
-        <div class="sec-block-hd"><span class="sec-block-hd-ico">📰</span>Quellen (Stand: 2026-05-20)</div>
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">📰</span>Quellen (Stand: 20.05.2026)</div>
         <div class="sec-block-body">
           <ul style="font-size:var(--fs-11);color:#beb5a8">
             <li><a href="https://vulkk.com" target="_blank" rel="noopener" style="color:var(--gold)">vulkk.com</a> — Visione-Guide + Hidden-Ending-Guide (RubyRose, Vulkk)</li>
@@ -5992,6 +6027,10 @@ function applyBossFilter(kind,val){
   if(kind==='region'){
     const s=document.getElementById('bf-reg');
     if(s){s.value=val;}
+  } else if(kind==='type'){
+    // Typ-Chip der Bosskarte: Wert stammt aus bossType(b), also derselben Logik wie der bf-type-Filter
+    const t=document.getElementById('bf-type');
+    if(t){t.value=val;}
   } else if(kind==='quest'){
     // Map quest-type to bf-type
     const t=document.getElementById('bf-type');
@@ -6018,7 +6057,7 @@ function applyBossFilter(kind,val){
 // Kapitel -> Haupt-Schauplatz, verifiziert vs PowerPyx/Fextralife/game8 (2026-06).
 // Nur high/medium werden farbcodiert; low (Kap.10) bleibt neutral. ch ist String wie in MAIN_QUESTS.
 function regAccent(region){return region?(REGION_ACCENT[region]||null):null;}
-function normReg(s){s=String(s||'');return REG_KEYS.find(k=>s.includes(k))||null;}
+function normReg(s){s=String(s||'');const h=s.split(/ - | — | \(/)[0].trim();if(/^(The )?Abyss\b/.test(h))return 'The Abyss';return REG_KEYS.find(k=>h.startsWith(k))||REG_KEYS.find(k=>s.includes(k))||null;}
 // Region-Akzent eines Kapitels nur wenn Faktenlage sicher genug (conf!=low), sonst null -> neutral gold.
 function chapAccent(ch){const m=CH_REGION[ch];if(!m||m.conf==='low'||!m.region)return null;return{region:m.region,col:regAccent(m.region)};}
 function applyRegionAtmosphere(reg){
@@ -6031,7 +6070,7 @@ function applyRegionAtmosphere(reg){
 function renderRegionHeatmap(){
   const el=document.getElementById('region-heatmap');
   if(!el||typeof BOSSES==='undefined')return;
-  const REGIONS=['Hernand','Pailune','Demeniss','Delesyia','The Abyss','Endgame'];
+  const REGIONS=['Hernand','Pailune','Demeniss','Delesyia','Crimson Desert','The Abyss'];
   // REGION_COLORS ist jetzt datei-global (oben neben REGION_ACCENT, inkl. Crimson Desert).
   const filterReg=document.getElementById('bf-reg')?document.getElementById('bf-reg').value:'';
   const done=loadBossDone();
@@ -6039,7 +6078,7 @@ function renderRegionHeatmap(){
   const doneCounts={};
   REGIONS.forEach(r=>{counts[r]=0;doneCounts[r]=0;});
   BOSSES.forEach(b=>{
-    const r=REGIONS.find(reg=>b.region.includes(reg));
+    const r=REGIONS.find(reg=>reg===normReg(b.region));
     if(r){counts[r]++;if(done.includes(b.name))doneCounts[r]++;}
   });
   const max=Math.max(...Object.values(counts),1);
@@ -6084,7 +6123,7 @@ function _cmpDetail(b){
     <div class="cmp-name">${escHtml(b.name)}</div>
     <div class="cmp-meta">
       <span class="tag tr">${chap}</span>
-      <span class="tag tg">${escHtml(b.region.split(' ')[0])}</span>
+      <span class="tag tg">${escHtml(normReg(b.region)||b.region.split(' - ')[0])}</span>
       <span class="tag tx">${escHtml(b.quest)}</span>
     </div>
     <div class="cmp-row"><span class="cmp-row-lbl">Region</span><span class="cmp-row-val">${escHtml(b.region)}</span></div>
@@ -6607,6 +6646,8 @@ function showSec(id, opts){
   // der showSec-Hook (renderConsole + markConsoleActive) die Blatt-Markierung.
   if(nav){nav.classList.add('active');nav.setAttribute('aria-current','page');}
   if(!opts.keepSearch){
+    if(typeof _closeSearchOpened==='function')_closeSearchOpened();
+    if(typeof _resetHitOrder==='function')_resetHitOrder();
     document.getElementById('si').value='';
     document.getElementById('scnt').textContent='';
     document.querySelectorAll('.hide').forEach(el=>{if(el.dataset.filtered!=='1')el.classList.remove('hide');});
@@ -6690,10 +6731,12 @@ function _petCardImg(p){
 // Nur echte Farb- und Musterangaben aus dem Dateinamen anzeigen. Die Asset-Nummern
 // (z.B. cat_domestic_30024) sind interne IDs, sagen dem Leser nichts und bleiben weg —
 // lieber kein Untertitel als einer, der wie Datenmuell aussieht.
+const PET_VARIANT_LABELS={russianblue:'Russian Blue',ragdoll:'Ragdoll'};
 function petVariant(p){
-  const m=(p.icon||'').match(/(?:^|_)(yellow|white|black|bicolor|tricolor|brown|striped)(?=_)/i);
+  const m=(p.icon||'').match(/(?:^|_)(yellow|white|black|bicolor|tricolor|brown|striped|russianblue|ragdoll)(?=[_.]|$)/i);
   if(!m)return '';
-  return m[1].replace(/^./,c=>c.toUpperCase());
+  const k=m[1].toLowerCase();
+  return PET_VARIANT_LABELS[k]||k.replace(/^./,c=>c.toUpperCase());
 }
 function renderPets(filter){
   _petFilter=filter||_petFilter;
@@ -6865,39 +6908,68 @@ function clearHighlight(el){
     t.parentNode.normalize();
   });
 }
-function highlightInElement(el,q){
+// Zeichenweise gefalteter Text samt Rueckabbildung auf den Originalindex, damit der Treffer im ORIGINALtext
+// markiert wird, auch wenn er nur ueber _fold gefunden wurde (Haendler/Händler, Marnis/Marni's, T'rukan).
+const _hlCharCache=new Map();
+function _hlFoldMap(text){
+  let f='';const map=[];
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    let x=_hlCharCache.get(c);
+    if(x===undefined){x=_foldBase(c);_hlCharCache.set(c,x);}
+    for(let k=0;k<x.length;k++){
+      const ch=x[k];
+      if(/\s/.test(ch)){if(f===''||f.charCodeAt(f.length-1)===32)continue;f+=' ';}else f+=ch;
+      map.push(i);
+    }
+  }
+  return {f,map};
+}
+// needles: bereits gefaltete Suchbegriffe (Standard: der gefaltete Suchtext)
+function highlightInElement(el,q,needles){
   if(!q)return;
-  const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+  const ns=(needles&&needles.length?needles:[_fold(q)||q.toLowerCase()]).filter(Boolean);
+  if(!ns.length)return;
   const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{
     acceptNode:n=>{
       const p=n.parentNode;
       if(!p||p.closest('script,style,mark.hl,.sk-ico-ph'))return NodeFilter.FILTER_REJECT;
       if(p.tagName==='OPTION')return NodeFilter.FILTER_REJECT;
-      return n.nodeValue.match(re)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+      const fv=_fold(n.nodeValue);
+      return ns.some(x=>fv.includes(x))?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
     }
   });
   const nodes=[];let n;while(n=walker.nextNode())nodes.push(n);
   if(!nodes.length)return;
-  el._hadHL=true;
+  let any=false;
   nodes.forEach(node=>{
+    const txt=node.nodeValue;
+    const {f,map}=_hlFoldMap(txt);
+    let ranges=[];
+    ns.forEach(x=>{let p=0,i;while((i=f.indexOf(x,p))>=0){ranges.push([map[i],map[i+x.length-1]+1]);p=i+x.length;}});
+    if(!ranges.length)return;
+    ranges.sort((a,b)=>a[0]-b[0]||b[1]-a[1]);
+    const merged=[];
+    ranges.forEach(r=>{const l=merged[merged.length-1];if(l&&r[0]<=l[1])l[1]=Math.max(l[1],r[1]);else merged.push(r.slice());});
     const frag=document.createDocumentFragment();
-    const parts=node.nodeValue.split(re);
-    const matches=node.nodeValue.match(re)||[];
-    parts.forEach((part,i)=>{
-      if(part)frag.appendChild(document.createTextNode(part));
-      if(i<matches.length){
-        const m=document.createElement('mark');
-        m.className='hl';
-        m.textContent=matches[i];
-        frag.appendChild(m);
-      }
+    let pos=0;
+    merged.forEach(([a,b])=>{
+      if(a>pos)frag.appendChild(document.createTextNode(txt.slice(pos,a)));
+      const m=document.createElement('mark');m.className='hl';m.textContent=txt.slice(a,b);frag.appendChild(m);
+      pos=b;
     });
+    if(pos<txt.length)frag.appendChild(document.createTextNode(txt.slice(pos)));
     node.parentNode.replaceChild(frag,node);
+    any=true;
   });
+  if(any)el._hadHL=true;
 }
 // Diakritik-/Umlaut-Folding fuer die Suche: lowercase, ß->ss, dann NFD-Decompose + Combining-Marks strippen
 // (ae/oe/ue -> a/o/u, é->e ...). Damit finden "schwache"/"fahigkeit"/"trophae"/"rustung" auch die Umlaut-Eintraege.
-function _fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'');}
+// _foldBase: lower, ß->ss, Diakritik weg, Apostrophe weg (Marni's = Marnis = Marni’s), Komma/Semikolon -> Leerzeichen
+// (questlog schreibt "Kailok, the Hornsplitter", das Wiki "Kailok the Hornsplitter"). _fold zusaetzlich Whitespace gekuerzt.
+function _foldBase(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/['\u2019\u2018`\u00b4]/g,'').replace(/[,;]/g,' ');}
+function _fold(s){return _foldBase(s).replace(/\s+/g,' ').trim();}
 
 // ===== SUCHBARKEIT: die vier Helfer der Umbaurunde vom 22.08.2026 =====
 //
@@ -6910,7 +6982,7 @@ function _fold(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').
 function autoSearchTags(scope){
   if(!scope||!scope.querySelectorAll)return 0;
   let n=0;
-  scope.querySelectorAll(_AUTO_SEL).forEach(el=>{
+  scope.querySelectorAll(_AUTO_SEL+', .sk-c').forEach(el=>{
     if(el.hasAttribute('data-s'))return;
     // Knoten, dessen Vorfahr schon data-s traegt, ist ueber diesen erreichbar --
     // ein zweites data-s wuerde ihn nur doppelt zaehlen.
@@ -6934,9 +7006,36 @@ function _openForSearch(el){
     if(!d.open){d.open=true;d.dataset.srchOpen='1';}
     d=d.parentElement?d.parentElement.closest('details'):null;
   }
+  // Hauptquest-Kapitel: .chap-body ist per display:none zu, bis toggleChap es oeffnet
+  const cb=el.closest('.chap-body');
+  if(cb&&!cb.classList.contains('open')){
+    cb.classList.add('open');cb.dataset.srchOpen='1';
+    const hd=cb.previousElementSibling;
+    if(hd){hd.setAttribute('aria-expanded','true');const a=hd.querySelector('.chap-arr');if(a)a.classList.add('open');}
+  }
 }
 function _closeSearchOpened(scope=document){
   scope.querySelectorAll('details[data-srch-open]').forEach(d=>{d.open=false;delete d.dataset.srchOpen;});
+  scope.querySelectorAll('.chap-body[data-srch-open]').forEach(cb=>{
+    cb.classList.remove('open');delete cb.dataset.srchOpen;
+    const hd=cb.previousElementSibling;
+    if(hd){hd.setAttribute('aria-expanded','false');const a=hd.querySelector('.chap-arr');if(a)a.classList.remove('open');}
+  });
+  scope.querySelectorAll('.craft-card[data-srch-open], .npc-card[data-srch-open]').forEach(c=>{c.classList.remove('open');c.setAttribute('aria-expanded','false');delete c.dataset.srchOpen;});
+}
+// Eingeklappte Karten (Crafting seit dd4c321, NPCs): steht der Treffer nur im Detailteil
+// (.craft-more/.npc-more), klappt die Suche die Karte auf, sonst zaehlt der Zaehler einen Treffer,
+// den niemand sieht. Kopf = alles ausser dem Detailteil (Name, Kategorie-Leiste).
+function _openCardForSearch(el,needles){
+  if(!el.classList||el.classList.contains('open')||!(el.classList.contains('craft-card')||el.classList.contains('npc-card')))return false;
+  if(el._srchHead===undefined){
+    let h='';
+    el.childNodes.forEach(n=>{if(!(n.nodeType===1&&n.matches('.craft-more, .npc-more')))h+=' '+n.textContent;});
+    el._srchHead=_fold(h);
+  }
+  if(needles.every(x=>el._srchHead.includes(x)))return false;
+  el.classList.add('open');el.setAttribute('aria-expanded','true');el.dataset.srchOpen='1';
+  return true;
 }
 function _snapshotOpenItemDetails(scope){
   const out={};
@@ -6950,6 +7049,7 @@ function _snapshotOpenItemDetails(scope){
 }
 function _openItemDetailsForSearch(el,qF){
   if(!el||!qF)return;
+  const ns=Array.isArray(qF)?qF:[qF];
   const d=el.querySelector('details.item-more');
   if(!d)return;
   const h=el._itemHidden||(_fold(el.dataset.itemHidden||''));
@@ -6957,12 +7057,87 @@ function _openItemDetailsForSearch(el,qF){
   el._itemHidden=h;
   const v=el._itemVisible||(_fold(el.dataset.itemVisible||''));
   if(v) el._itemVisible=v;
-  if(v.includes(qF)) return;
-  if(h.includes(qF)&&!d.open){
+  if(ns.every(x=>v.includes(x))) return;
+  if(ns.some(x=>!v.includes(x)&&h.includes(x))&&!d.open){
     d.open=true;
     d.dataset.srchOpen='1';
   }
 }
+
+// Mehrseitige Sektionen (Quests, Skills, Checklisten, Secrets) haben Tabs mit je einem .pane. Treffer in einem
+// verdeckten Pane zaehlt der Zaehler, das Bild zeigt nichts. Hat das aktive Pane keinen sichtbaren Treffer,
+// springt die Suche auf den Tab des ersten Panes mit Treffer. Rueckgabe: Zusatztext fuer den Zaehler.
+function _focusPaneForSearch(sec,total){
+  if(!sec||!sec.querySelectorAll)return '';
+  const panes=[...sec.querySelectorAll(':scope > .pane')];
+  if(panes.length<2)return '';
+  const hits=p=>[...p.querySelectorAll('[data-s]')].filter(e=>!e.classList.contains('hide')&&!e.closest('.hide'));
+  // aktives Pane: nur was auch gerendert ist zaehlt (Treffer in zugeklapptem Kapitel/Karte sind unsichtbar)
+  const shown=p=>hits(p).filter(e=>e.getClientRects().length>0);
+  const act=panes.find(p=>p.classList.contains('active'));
+  if(!(act&&shown(act).length)){
+    const idx=panes.findIndex(p=>p!==act&&hits(p).length);
+    const tabs=[...sec.querySelectorAll(':scope > .tabs > button')];
+    // Klassen direkt umschalten statt tab.click(): secretsTab/clTab rendern Panes neu und wuerden den Filter verlieren
+    if(idx>=0&&tabs.length===panes.length){
+      panes.forEach((p,i)=>p.classList.toggle('active',i===idx));
+      tabs.forEach((b,i)=>b.classList.toggle('active',i===idx));
+    }
+  }
+  const here=panes.find(p=>p.classList.contains('active'));
+  const n=here?shown(here).length:0;
+  return n<total?' · '+n+' in diesem Tab':'';
+}
+
+// Rangfolge: Treffer, deren NAME die Anfrage enthaelt, vor reinen Volltext-Treffern (Brice/Andrew, deren Bio
+// "Tranan" erwaehnt, standen vor Tranan selbst). In Raster-/Flex-Containern per CSS order, ohne DOM-Umbau;
+// Tabellenzeilen behalten ihre Reihenfolge. Rueckgabe: Treffer, beste zuerst (DOM-Reihenfolge bleibt stabil).
+function _hitScore(el,needles){
+  const ne=el.querySelector('.ct, .sk-n, .pet-card-name, .fac-qh, td strong');
+  if(!ne)return 0;
+  const t=_fold(ne.textContent.replace(/\u25be/g,''));
+  if(!needles.every(x=>t.includes(x)))return 0;
+  return needles.length===1&&(t===needles[0]||t.startsWith(needles[0]))?2:1;
+}
+function _rankHits(hits,needles){
+  const grid=new Map();
+  hits.forEach(el=>{el._hs=_hitScore(el,needles);});
+  const ranked=hits.map((el,i)=>[el,i]).sort((a,b)=>b[0]._hs-a[0]._hs||a[1]-b[1]).map(x=>x[0]);
+  ranked.forEach(el=>{
+    if(!el._hs)return;
+    const p=el.parentElement;
+    let g=grid.get(p);
+    if(g===undefined){g=/grid|flex/.test(getComputedStyle(p).display);grid.set(p,g);}
+    if(g){el.style.order=String(-el._hs);el.dataset.srchOrd='1';}
+  });
+  return ranked;
+}
+function _resetHitOrder(){
+  document.querySelectorAll('[data-srch-ord]').forEach(e=>{e.style.order='';delete e.dataset.srchOrd;});
+}
+// Liegt der beste Treffer ausserhalb des Sichtfensters (Nutzer stand weit unten in der Liste), nach oben holen.
+function _scrollToHit(el){
+  if(!el)return;
+  const r=el.getBoundingClientRect();
+  if(!r.height)return;
+  if(r.top<70||r.top>window.innerHeight-90)window.scrollTo({top:Math.max(0,window.scrollY+r.top-100)});
+}
+
+// Suchlaeufe in Reihenfolge: (1) Phrase wie getippt; nur bei 0 Treffern (2) ae/oe/ue als ä/ö/ü gelesen
+// ("haendler", "ruestung" -> data-s traegt "händler"/"rüstung", gefaltet "handler"/"rustung") und
+// (3) alle Woerter einzeln ("kailok hornsplitter" -> "Kailok the Hornsplitter"). Als Fallback, nie als
+// Ersatz, damit "blue"/"queen" nicht zu "blu"/"qen" werden. Waffen/Ruestungen haben eine eigene Filterkette
+// (renderWeapons/armorFilter, nur Phrase) und bleiben bei Lauf (1).
+function _searchSpecs(qF,allowFb){
+  const out=[{n:[qF],note:''}];
+  if(!allowFb)return out;
+  const qB=qF.replace(/ae/g,'a').replace(/oe/g,'o').replace(/ue/g,'u');
+  if(qB!==qF)out.push({n:[qB],note:' · gelesen als ä/ö/ü'});
+  const tk=qF.split(' ').filter(t=>t.length>1);
+  if(tk.length>1)out.push({n:tk,note:' · alle Wörter einzeln'});
+  return out;
+}
+function _specHit(sf,n){for(let i=0;i<n.length;i++)if(!sf.includes(n[i]))return false;return true;}
 
 // Gruppenkoepfe tragen selbst kein data-s und blieben deshalb als leere Huelsen stehen
 // ("House Roberts - 10 Quests" ohne eine einzige sichtbare Quest). Eine Gruppe wird
@@ -7015,11 +7190,12 @@ function _doSearchImpl(q){
     return;
   }
   const qLow=q.toLowerCase();
-  const qF=_fold(q);
+  const qF=_fold(q)||qLow;
   const cnt=document.getElementById('scnt');
   // Clear highlights only on elements that actually had them
   document.querySelectorAll('[data-s]').forEach(el=>clearHighlight(el));
   _closeSearchOpened();
+  _resetHitOrder();
   // URL-State sync
   if(typeof _writeUrlState==='function')_writeUrlState();
   // Track recent: wenn Suche genau einen Item-Namen matcht
@@ -7044,29 +7220,55 @@ function _doSearchImpl(q){
   // Only operate within the active section — drastically reduces work
   const activeSec=document.querySelector('.sec.active');
   const scope=activeSec||document;
+  // Waffenliste ist seitenweise gerendert (40 pro Seite, off-page = data-filtered="1"); mit aktiver
+  // Suche rendert renderWeapons() ALLE Treffer (liest #si). Ohne das sucht die Suche nur Seite 1.
+  if(activeSec&&activeSec.id==='sec-weapons'&&typeof renderWeapons==='function')renderWeapons();
   autoSearchTags(scope);
-  let total=0;
-  const matchedForHL=[];
-  scope.querySelectorAll('[data-s]').forEach(el=>{
-    // Von einem Sektionsfilter ausgeschlossene Karten bleiben ausgeschlossen —
-    // sonst holt ein Texttreffer sie zurueck und haebelt den Filter aus.
-    const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF)&&el.dataset.filtered!=='1';
-    el.classList.toggle('hide',!m);
-    if(m){
-      total++;
-      _openForSearch(el);
-      _openItemDetailsForSearch(el,qF);
-      if(matchedForHL.length<80)matchedForHL.push(el);
-    }
+  let total=0,openedCards=0,hits=[];
+  const specs=_searchSpecs(qF,!(activeSec&&/^sec-(weapons|armor)$/.test(activeSec.id)));
+  let sp=specs[0];
+  for(let k=0;k<specs.length;k++){
+    sp=specs[k];total=0;hits=[];
+    scope.querySelectorAll('[data-s]').forEach(el=>{
+      // Von einem Sektionsfilter ausgeschlossene Karten bleiben ausgeschlossen —
+      // sonst holt ein Texttreffer sie zurueck und haebelt den Filter aus.
+      const m=_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n)&&el.dataset.filtered!=='1';
+      el.classList.toggle('hide',!m);
+      if(m){total++;hits.push(el);}
+    });
+    if(total)break;
+  }
+  // Namens-Treffer zuerst: gehen sie nicht in den ersten 80 (Highlight-Grenze) unter
+  const ranked=_rankHits(hits,sp.n);
+  ranked.forEach(el=>{
+    _openForSearch(el);
+    _openItemDetailsForSearch(el,sp.n);
+    if(openedCards<12&&_openCardForSearch(el,sp.n))openedCards++;
   });
+  const matchedForHL=ranked.slice(0,80);
   // Hide elements outside active section (only if any non-active section element has data-s)
   // — they remain in DOM but won't render due to .sec not having active
   // Highlight only top 80 matches (perceptual highlight, full-list-highlight would freeze on big lists)
-  matchedForHL.forEach(el=>highlightInElement(el,q));
+  matchedForHL.forEach(el=>highlightInElement(el,q,sp.n));
   _collapseEmptyGroups(scope,true);
-  cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'');
+  // Skills-Sektion: Treffer in einem nicht sichtbaren Tab (Kliff/Damiane/Oongka/Watch & Learn/Freischalt-Details) wären unsichtbar —
+  // dann auf den ersten Tab mit Treffer umschalten; genau ein Skillname gesucht: Tab des ersten Trägers (Kliff vor Damiane vor Oongka).
+  function _skillsRevealPane(sec,q){
+    if(!sec||sec.id!=='sec-skills'||typeof skTab!=='function')return;
+    const has=p=>!!p&&[...p.querySelectorAll('[data-s]')].some(el=>!el.classList.contains('hide'));
+    const vs=_buildXrefMap().skillVariants[q];
+    const want=vs&&vs[0]?document.getElementById('skp-'+vs[0].ch.toLowerCase()):null;
+    if(has(want)){skTab(want.id.slice(4));return;}
+    if(has(sec.querySelector('.pane.active')))return;
+    const p=[...sec.querySelectorAll('.pane')].find(has);
+    if(p&&p.id.indexOf('skp-')===0)skTab(p.id.slice(4));
+  }
+  _skillsRevealPane(activeSec,q);
+  const paneNote=_focusPaneForSearch(activeSec,total);
+  cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'')+(total?sp.note:'')+paneNote;
   {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
   if(typeof armorFilter==='function')armorFilter();
+  if(total)_scrollToHit(ranked.find(el=>!el.classList.contains('hide')));
   // Empty-State — mit sektionsuebergreifendem Fallback ("Alles durchsuchen" einloesen)
   document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
   if(total===0&&activeSec){
@@ -7089,13 +7291,17 @@ function _doSearchImpl(q){
 function _searchOtherSections(qLow,activeSec){
   // Lazy-Rendering: [data-s]-Attribute existieren erst nach dem Rendern einer Sektion
   if(typeof ensureAllRendered==='function')ensureAllRendered();
-  const qF=_fold(qLow);
-  const out=[];
+  const qF=_fold(qLow)||qLow;
+  const specs=_searchSpecs(qF,true);
+  let out=[];
+  for(let k=0;k<specs.length&&!out.length;k++){
+  const sp=specs[k];
   document.querySelectorAll('.sec').forEach(sec=>{
     if(sec===activeSec)return;
+    if(k>0&&/^sec-(weapons|armor)$/.test(sec.id))return;
     autoSearchTags(sec);
     let count=0;
-    sec.querySelectorAll('[data-s]').forEach(el=>{if((el._sf||(el._sf=_fold(el.dataset.s))).includes(qF))count++;});
+    sec.querySelectorAll('[data-s]').forEach(el=>{if(_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n))count++;});
     if(!count)return;
     const key=sec.id.replace(/^sec-/,'');
     // Registratur: Konsole zeigt nur 5-9 Blaetter -> nav-Item existiert evtl. nicht im DOM.
@@ -7105,6 +7311,7 @@ function _searchOtherSections(qLow,activeSec){
     else{const nav=document.querySelector('[data-sec="'+key+'"] .lname, [data-sec="'+key+'"] .nlabel, [data-sec="'+key+'"]');if(nav)label=nav.textContent.trim();}
     out.push({key,label,count});
   });
+  }
   out.sort((a,b)=>b.count-a.count);
   return out.slice(0,8);
 }
@@ -7165,7 +7372,7 @@ function _bossImgFit(img){
   }
 }
 function bossPlaceholder(b){
-  const key=Object.keys(BOSS_PH_PALETTES).find(r=>b.region.includes(r))||'Hernand';
+  const key=BOSS_PH_PALETTES[normReg(b.region)]?normReg(b.region):'Hernand';
   const {bg,acc,text}=BOSS_PH_PALETTES[key];
   const letter=b.name.charAt(0).toUpperCase();
   const cap=b.chapter?'Kap. '+b.chapter:b.quest.includes('Faction')?'Faction':b.quest.includes('Sanctum')?'Sanctum':'Side';
@@ -7260,7 +7467,7 @@ function bossPD(b){
 function _cheatBosses(){
   const reg=document.getElementById('bf-reg').value,type=document.getElementById('bf-type').value,pd=document.getElementById('bf-pd').value;
   const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
-  return BOSSES.filter(b=>(!reg||b.region.includes(reg))&&(!type||bossType(b)===type)&&(!pd||bossPD(b).includes(pd))&&!(sp>0&&b.chapter!=null&&b.chapter>sp));
+  return BOSSES.filter(b=>(!reg||normReg(b.region)===reg)&&(!type||bossType(b)===type)&&(!pd||bossPD(b).includes(pd))&&!(sp>0&&b.chapter!=null&&b.chapter>sp));
 }
 function openCheatSheet(){
   let ov=document.getElementById('cheatsheet-modal');
@@ -7311,8 +7518,9 @@ function renderBosses(){
   const savedOpen=_snapshotOpenItemDetails(document.getElementById('boss-grid'));
   const openAll=loadBossOpenAll();
   document.getElementById('boss-grid').innerHTML=BOSSES.map(b=>{
-    const show=(!reg||b.region.includes(reg))&&(!type||bossType(b)===type)&&(!pd||bossPD(b).includes(pd));
+    const show=(!reg||normReg(b.region)===reg)&&(!type||bossType(b)===type)&&(!pd||bossPD(b).includes(pd));
     const chap=b.chapter?'Kap. '+b.chapter:'Side/Faction';
+    const regKey=normReg(b.region)||b.region.split(' - ')[0];
     const chapTag=b.chapter?('K.'+String(b.chapter).padStart(2,'0')):'Optional';
     const isDone=done.includes(b.name);
     const hasNote=!!notes[b.name];
@@ -7369,8 +7577,8 @@ function renderBosses(){
         </dl>
         <div class="cm">
           <span class="tag tr tag-clickable" onclick="event.stopPropagation();applyBossFilter('chapter','${chap}')" title="Filter: ${chap}" data-tip="Klick filtert nach diesem Kapitel">${chap}</span>
-          <span class="tag tg tag-clickable" onclick="event.stopPropagation();applyBossFilter('region','${b.region.split(' ')[0]}')" title="Filter: ${b.region.split(' ')[0]}" data-tip="Klick filtert nach Region">${b.region.split(' ')[0]}</span>
-          <span class="tag tx tag-clickable" onclick="event.stopPropagation();applyBossFilter('quest','${b.quest.replace(/'/g,"\\'")}')" title="Filter: ${b.quest}" data-tip="Klick filtert nach Quest-Typ">${b.quest}</span>
+          <span class="tag tg tag-clickable" onclick="event.stopPropagation();applyBossFilter('region','${regKey}')" title="Filter: ${regKey}" data-tip="Klick filtert nach Region">${regKey}</span>
+          <span class="tag tx tag-clickable" onclick="event.stopPropagation();applyBossFilter('type','${bossType(b)}')" title="Filter: ${b.quest}" data-tip="Klick filtert nach Quest-Typ">${b.quest}</span>
         </div>
         ${b.recur?`<div class="boss-recur" title="Dieser Boss tritt mehrfach auf: Phase, spätere Wiederbegegnung oder Variante"><span class="ri">↻</span><span>${escHtml(b.recur)}</span></div>`:''}
         ${BOSS_ALT_IMGS[b.name]?`<button class="boss-alt-btn" onmouseenter="showBossAlt(event,'${safeName}')" onmouseleave="hideMountIG()" onclick="event.stopPropagation();openBossAlt('${safeName}')" title="${escHtml(BOSS_ALT_IMGS[b.name].label)}" aria-label="${escHtml(BOSS_ALT_IMGS[b.name].label)}">${escHtml(BOSS_ALT_IMGS[b.name].btn)}</button>`:''}
@@ -7872,7 +8080,7 @@ function renderCrafting(){
   // Klicks im aufgeklappten Detailbereich klappen nicht zu (Text bleibt markierbar).
   if(!grid.dataset.craftToggle){
     grid.dataset.craftToggle='1';
-    const tog=c=>{const o=c.classList.toggle('open');c.setAttribute('aria-expanded',o?'true':'false');};
+    const tog=c=>{delete c.dataset.srchOpen;const o=c.classList.toggle('open');c.setAttribute('aria-expanded',o?'true':'false');};
     grid.addEventListener('click',e=>{const c=e.target.closest('.craft-card');if(!c||e.target.closest('a,button,input,select'))return;if(c.classList.contains('open')&&e.target.closest('.craft-more'))return;tog(c);});
     grid.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('.craft-card');if(c&&e.target===c){e.preventDefault();tog(c);}});
   }
@@ -7986,7 +8194,7 @@ function renderMQ(){
     const locked=sp>0&&!isNaN(chNum)&&chNum>sp;
     const hasMiss=detailed&&ch.quests.some(q=>q.miss);
     const bossTag=ch.boss?'<span class="chap-boss-tag">⚔ '+escHtml(ch.boss)+'</span>':'';
-    const missTag=hasMiss?'<span class="tag tw">verpassbar</span>':'';
+    const missTag=hasMiss?MISS_CHIP:'';
     const regAttr=acc?' data-reg style="--reg:'+acc.col+'"':'';
     return `<div class="chap${locked?' spoiler-locked':''}"${regAttr}>
     ${locked?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${escHtml(ch.ch)} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
@@ -8003,6 +8211,7 @@ function renderMQ(){
   const sel=document.getElementById('mq-spoiler');if(sel)sel.value=String(sp);
 }
 function toggleChap(hd){
+  delete hd.nextElementSibling.dataset.srchOpen;
   hd.nextElementSibling.classList.toggle('open');
   hd.querySelector('.chap-arr').classList.toggle('open');
   hd.setAttribute('aria-expanded', hd.nextElementSibling.classList.contains('open')?'true':'false');
@@ -8115,10 +8324,14 @@ function renderQuestHero(){
 }
 
 // ===== FACTIONS =====
+// Einheitliche Kennzeichnung verpassbarer Inhalte: Text „verpassbar“ (CSS setzt Großbuchstaben),
+// Klasse tag tw (Warnfarbe). MISS_CHIP_SM ist die kompakte Form neben Namen in Tabellenzellen.
+const MISS_CHIP='<span class="tag tw" title="Kann verpasst werden – Details im Text">verpassbar</span>';
+const MISS_CHIP_SM='<span class="tag tw miss-chip-sm" title="Kann verpasst werden – Details im Text">verpassbar</span>';
 function facBadges(q){
   let b='';
   if(q.special) b+='<span class="tag tsp">&#9733; '+escHtml(typeof q.special==='string'?q.special:'Legendär')+'</span>';
-  if(q.miss) b+='<span class="tag tw">verpassbar</span>';
+  if(q.miss) b+=MISS_CHIP;
   if(q.conf==='medium') b+='<span class="tag tx">Quelle: teils belegt</span>';
   else if(q.conf==='low') b+='<span class="tag tr">Quelle: unsicher</span>';
   return b;
@@ -8136,7 +8349,7 @@ function renderFactions(){
     }).join('');
     return '<div class="fac-reg"><div class="fac-rh">'+escHtml(r.region)+' &mdash; '+r.factions.length+' Fraktionen &middot; '+fq+' Quests</div><div class="fac-b">'+facs+'</div></div>';
   }).join('');
-  const liberation='<div class="fac-reg"><div class="fac-rh">Liberation &mdash; Re-Blockade [1.05]</div><div class="fac-b"><span style="color:var(--dim);font-size:12px">23 Forts, 13 Fraktionen (regions&uuml;bergreifendes Endgame-System)</span><div><div class="fac-lb">Notable Forts</div><ul class="fac-ul"><li>Fort Warspike &mdash; Multishot-Lehrer!</li><li>Gorthak Ironworks Delesyia &mdash; beste Armaments-Quelle</li><li>Karin Quarry &mdash; House Roberts</li></ul></div></div></div>';
+  const liberation='<div class="fac-reg"><div class="fac-rh">Liberation &mdash; Re-Blockade [1.05]</div><div class="fac-b"><span style="color:var(--dim);font-size:12px">23 Forts und Steinbr&uuml;che, 13 Fraktionen (Stand Patch 1.05.00; regions&uuml;bergreifendes Endgame-System)</span><div><div class="fac-lb">Notable Forts</div><ul class="fac-ul"><li>Fort Warspike &mdash; Multishot-Lehrer!</li><li>Gorthak Ironworks Delesyia &mdash; beste Armaments-Quelle</li><li>Karin Quarry &mdash; House Roberts</li></ul></div></div></div>';
   document.getElementById('fac-list').innerHTML=lead+regs+liberation;
 }
 
@@ -8446,7 +8659,7 @@ function renderCollectibles(){
   const list=COLLECTIBLES.filter(c=>!f||(f==='1'?c.miss:!c.miss));
   const cnt=document.getElementById('cof-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
   tb.innerHTML=list.map(c=>`<tr data-s="${escHtml([c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase())}">
-    <td><strong>${escHtml(c.name)}</strong>${c.miss?' <span style="font-size:var(--fs-9);font-weight:700;color:var(--survey-red);border:1px solid var(--survey-red);border-radius:7px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}</td>
+    <td><strong>${escHtml(c.name)}</strong>${c.miss?' '+MISS_CHIP_SM:''}</td>
     <td style="color:var(--dim);white-space:nowrap;font-size:var(--fs-11)">${escHtml(c.cat)}</td>
     <td style="line-height:1.5">${escHtml(c.detail)}</td>
     <td style="color:var(--dim);font-size:var(--fs-11)">${escHtml(c.loc)}</td>
@@ -8473,7 +8686,7 @@ function renderCompendium(secId,DATA,filterId,iconCell,preFilter){
     return imgs.length>1?`<span class="item-ico-set">${imgs.join('')}</span>`:imgs[0]||'';
   };
   tb.innerHTML=list.map(c=>`<tr data-s="${escHtml([c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase())}">${iconCell?'<td class="dye-td">'+iconCell(c)+'</td>':''}
-    <td><strong>${itemIco(c)}${escHtml(c.name)}</strong>${c.miss?' <span style="font-size:var(--fs-9);font-weight:700;color:var(--survey-red);border:1px solid var(--survey-red);border-radius:7px;padding:1px 4px;vertical-align:middle">MISSABLE</span>':''}${c.conf&&c.conf!=='high'?` <span title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}" style="font-size:var(--fs-9);font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:7px;padding:1px 4px;vertical-align:middle">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:''}</td>
+    <td><strong>${itemIco(c)}${escHtml(c.name)}</strong>${c.miss?' '+MISS_CHIP_SM:''}${c.conf&&c.conf!=='high'?` <span title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}" style="font-size:var(--fs-9);font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:7px;padding:1px 4px;vertical-align:middle">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:''}</td>
     <td style="color:var(--dim);white-space:nowrap;font-size:var(--fs-11)">${escHtml(c.cat)}</td>
     <td style="line-height:1.5">${escHtml(c.detail)}</td>
     <td style="color:var(--dim);font-size:var(--fs-11)">${escHtml(c.loc)}</td>
@@ -8525,7 +8738,7 @@ function renderUnlockTable(){
         <td>${icon}<strong style="color:var(--rhi)">${s.name}</strong></td>
         <td style="font-size:var(--fs-11-5);max-width:230px;line-height:1.5">${s.prereq}</td>
         <td style="font-size:var(--fs-11-5);white-space:nowrap;color:var(--gold)">${s.cost}</td>
-        <td>${miss?'<span class="tag tw">MISSABLE</span>':'<span style="color:var(--dim);font-size:var(--fs-11)">–</span>'}</td>
+        <td>${miss?MISS_CHIP:'<span style="color:var(--dim);font-size:var(--fs-11)">–</span>'}</td>
       </tr>`;
     }).join('')+
     '</tbody></table></div>';
@@ -8545,7 +8758,7 @@ function skCard(s){
   const m=isMiss(s);
   return `<div class="sk-c${m?' miss':''}">
     <div class="sk-n-row">
-      ${SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" loading="lazy" alt="${s.name} Skill-Icon">`:`<span class="sk-ico-ph" aria-hidden="true">✦</span>`}      <div class="sk-n">${s.name}${m?'<span class="sk-mb">MISSABLE</span>':''}</div>
+      ${SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" loading="lazy" alt="${s.name} Skill-Icon">`:`<span class="sk-ico-ph" aria-hidden="true">✦</span>`}      <div class="sk-n">${s.name}${m?'<span class="sk-mb">verpassbar</span>':''}</div>
     </div>
     <div class="sk-r">Voraussetzung: <span>${s.prereq}</span></div>
     <div class="sk-r">Kosten: <span>${s.cost}</span></div>
@@ -8585,7 +8798,7 @@ function renderSkills(){
 
   document.getElementById('skp-watch').innerHTML=
     '<div class="tw-wrap"><table><thead><tr><th>Skill</th><th>Lernort</th><th>Status</th></tr></thead><tbody>'+
-    WATCH_AND_LEARN.map(w=>`<tr><td><strong>${w.skill}</strong></td><td style="font-size:12px">${w.loc}</td><td>${w.miss?'<span class="tag tw">MISSABLE</span>':'<span class="tag tg">unkritisch</span>'}</td></tr>`).join('')+
+    WATCH_AND_LEARN.map(w=>`<tr><td><strong>${w.skill}</strong></td><td style="font-size:12px">${w.loc}</td><td>${w.miss?MISS_CHIP:'<span class="tag tg">unkritisch</span>'}</td></tr>`).join('')+
     '</tbody></table></div>';
   renderUnlockTable();
 }
@@ -8693,7 +8906,7 @@ function renderBossChecklist(){
     <div class="chk${done.includes(b.name)?' on':''}" role="checkbox" aria-checked="${done.includes(b.name)?'true':'false'}" aria-label="${escHtml(b.name)}" tabindex="0"></div>
     <div class="comm-body">
       <div class="comm-tx" style="font-weight:600">${b.name}
-        <span style="color:var(--dim);font-size:var(--fs-10-5);font-weight:400"> · ${b.chapter?'Kap. '+b.chapter:'Side'} · ${b.region.split(' - ')[0].split(' — ')[0]}</span>
+        <span style="color:var(--dim);font-size:var(--fs-10-5);font-weight:400"> · ${b.chapter?'Kap. '+b.chapter:'Side'} · ${normReg(b.region)||b.region.split(' - ')[0]}</span>
       </div>
       ${b.drop_weapon!=='–'?`<div class="comm-rew">Drop: ${b.drop_weapon}</div>`:''}
       ${b.weakness!=='–'?`<div class="comm-note">Schwäche: ${b.weakness}</div>`:''}
@@ -8895,9 +9108,11 @@ function _calcLoadout(){
   });
   const cores=[...document.getElementById('sim-cores').selectedOptions].map(o=>CORES.find(c=>c.name===o.value)).filter(Boolean);
   const wSlots=w&&w.slots!=null?w.slots:0;
-  const wCoresUsed=cores.filter(c=>c.slot==='Weapon'||c.slot==='Both').length;
+  // Both = Waffe, Handschuhe oder Schuhe (questlog-Sockelhash) — belegt nicht zwingend einen Waffensockel
+  const wCoresUsed=cores.filter(c=>c.slot==='Weapon').length;
+  const flexCores=cores.filter(c=>c.slot==='Both').length;
   const base=w&&w.atk!=null?w.atk:0;
-  return {weaponName:w?w.name:null,atkBase:base,atkArmor,atk:base+atkArmor,def,crit:w&&w.crit!=null?w.crit:null,slots:wSlots,coresUsed:wCoresUsed,armorNames,bonuses,cores:cores.map(c=>({name:c.name,effect:c.effect,slot:c.slot}))};
+  return {weaponName:w?w.name:null,atkBase:base,atkArmor,atk:base+atkArmor,def,crit:w&&w.crit!=null?w.crit:null,slots:wSlots,coresUsed:wCoresUsed,coresFlex:flexCores,armorNames,bonuses,cores:cores.map(c=>({name:c.name,effect:c.effect,slot:c.slot}))};
 }
 function simRecalc(){
   _simCurrent=_calcLoadout();const r=_simCurrent;const el=document.getElementById('sim-readout');if(!el)return;
@@ -8909,7 +9124,7 @@ function simRecalc(){
       ${stat('Crit-Lvl',r.crit!=null?r.crit:'–')}
       ${stat('Slots',r.slots)}
     </div>
-    <div class="sim-slot-use"${warn}>Weapon-Cores belegt: ${r.coresUsed} / ${r.slots}</div>
+    <div class="sim-slot-use"${warn}>Waffensockel belegt: ${r.coresUsed} / ${r.slots}${r.coresFlex?` · dazu ${r.coresFlex} Core${r.coresFlex>1?'s':''} für Waffe, Handschuhe oder Schuhe`:''}</div>
     ${r.cores.length?`<div class="sim-sub">Cores</div><div class="sim-cores-list">${r.cores.map(c=>`<div class="sim-core"><strong>${escHtml(c.name)}</strong><span class="sim-core-slot">${escHtml(slotDe(c.slot)||'?')}</span><div class="sim-core-eff">${escHtml(c.effect||'')}</div></div>`).join('')}</div>`:''}
     ${r.bonuses.length?`<div class="sim-sub">Rüstungs-Boni &amp; Resistenzen</div><div class="sim-bonuses">${r.bonuses.map(b=>`<span class="sim-bonus">${escHtml(b)}</span>`).join('')}</div>`:''}`;
 }
@@ -9672,7 +9887,7 @@ function renderNpcs(){
   // Karten zeigen nur Bild + Name; Klick/Enter/Leertaste klappt die Details auf
   if(!el.dataset.npcToggle){
     el.dataset.npcToggle='1';
-    const tog=c=>{const o=c.classList.toggle('open');c.setAttribute('aria-expanded',o?'true':'false');};
+    const tog=c=>{delete c.dataset.srchOpen;const o=c.classList.toggle('open');c.setAttribute('aria-expanded',o?'true':'false');};
     el.addEventListener('click',e=>{const c=e.target.closest('.npc-card');if(c&&!e.target.closest('.spoiler-cover,a,button'))tog(c);});
     el.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest('.npc-card');if(c&&e.target===c){e.preventDefault();tog(c);}});
   }

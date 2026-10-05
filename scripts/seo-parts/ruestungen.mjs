@@ -1,6 +1,6 @@
 // parts/ruestungen.mjs — SEO-Seite "Rüstungen".
 //
-// Gruppiert die ARMOR-Datenstruktur (337 Eintraege) nach Ruestungsteil
+// Gruppiert die ARMOR-Datenstruktur (380 Eintraege, Stand 04.10.2026) nach Ruestungsteil
 // (Torso/Kopf/Haende/Schuhe/Mantel), je Gruppe eine Tabelle (alphabetisch
 // sortiert). Stil und Spaltenaufbau orientieren sich an weaponRow/buildWaffen
 // aus scripts/gen-seo.mjs (Bild+Name, dann Werte-Spalten, dann Fundort).
@@ -74,8 +74,8 @@ export function build(ctx) {
   const { esc, has, imgSrc, breadcrumbLd } = ctx.helpers;
   const z = ZAHLEN(ctx);
 
-  // Eine Zeile pro Ruestungsteil. Genau EIN Eintrag hat kein Bild in ARMOR_IMGS
-  // (336 Schluessel auf 337 Eintraege) — dann faellt das <img> komplett weg
+  // Eine Zeile pro Ruestungsteil. Zwei Eintraege (KuKu Rocket Helmet, Faded Deer Antler)
+  // haben kein Bild in ARMOR_IMGS (Stand Block 6) — dann faellt das <img> komplett weg
   // statt einen kaputten Pfad zu rendern (kein <img src=""> o.ae.).
   const row = (a) => {
     const img = ARMOR_IMGS[a.name];
@@ -109,7 +109,7 @@ ${noteTd}
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Rüstungs-Datenbank öffnen &rarr;</a>
-<p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Defense (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense (voll ausgebaut rund 69, 99 bzw. 114). <b>Woher die Werte stammen</b>, steht seit dem 21.&nbsp;August&nbsp;2026 in einer eigenen Spalte: ${z.dsimport} Teile kommen aus dem Datenimport der Spieldateien, ${z.dsguide} sind aus Guides belegt, ${z.dsalt} stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 2.&nbsp;Juni&nbsp;2026 entfernt hat; bei ${z.dsohne} Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
+<p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Defense (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense. <b>Woher die Werte stammen</b>, steht seit dem 21.08.2026 in einer eigenen Spalte: ${z.dsimport} Teile kommen aus dem Datenimport der Spieldateien, ${z.dsguide} sind aus Guides belegt, ${z.dsalt} stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 02.06.2026 entfernt hat; bei ${z.dsohne} Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
 <p class="note">In der App filterst du die Rüstungs-Datenbank nach Teil und Set, siehst größere Icons und vergleichst mehrere Ausrüstungsteile direkt nebeneinander. Herstellbare Teile stehen zusätzlich im <a href="/#sec-crafting">Crafting-Bereich</a>, die mehrfach erwähnten Slots erklärt die <a href="/#sec-cores">Abyss-Core-Übersicht</a>, und als Gegenstück gibt es die <a href="/#sec-weapons">Waffen-Liste</a>.</p>
 ${sections}`;
 

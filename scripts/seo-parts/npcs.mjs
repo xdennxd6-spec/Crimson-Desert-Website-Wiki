@@ -11,16 +11,12 @@
 // eigentliche Inhalt dieser Seite (echter Lore-Text), darum eine bildlastige
 // Karten-Seite nach dem Vorbild von bestiarium.mjs, keine duenne Tabelle.
 //
-// Stand 04.10.2026: 11 der 40 NPCs (die in Block 5 ergaenzten Naira, Stefan
-// Lanford, Drake Wells und die acht Haendler Kathor bis Brek) haben KEIN Bild in
-// NPC_IMGS — npcCard() gibt dann bewusst kein <img> aus, die App zeigt npcPH().
-// Fuer die uebrigen 29 gilt: NPC_IMGS deckt sie mit einem lokalen Bild ab (28x cd_assets/npcs/*.webp,
-// 1x cd_assets/bosses/lucian_bastier.webp fuer den bereits als Boss gefuehrten
-// Lucian Bastier, 1x cd_assets/npcs/marius.png). Gegen das Dateisystem geprueft
-// am 26.08.2026: alle 29 Pfade existieren, 28 davon sind 512x512, marius.png ist
-// 250x250 (Bild-Header ausgelesen wie dimsFromBuffer() in scripts/gen-seo.mjs).
-// Alle Bilder sind quadratisch — anders als bei bestiarium.mjs (256 vs. 512) gibt
-// es hier nur EINE Ausnahme von der 512x512-Norm, siehe IMG_250 unten.
+// Stand 04.10.2026 (Block 6): alle 40 NPCs haben ein lokales Bild in NPC_IMGS
+// (39x cd_assets/npcs/*.webp bzw. marius.png, 1x cd_assets/bosses/lucian_bastier.webp fuer den
+// bereits als Boss gefuehrten Lucian Bastier). Die 11 in Block 6 nachgelieferten Portraets
+// (Naira, Stefan Lanford, Drake Wells, Kathor bis Brek) sind 512x512; marius.png ist 250x250
+// (Bild-Header ausgelesen wie dimsFromBuffer() in scripts/gen-seo.mjs). Alle Bilder sind
+// quadratisch -- es gibt nur EINE Ausnahme von der 512x512-Norm, siehe IMG_250 unten.
 //
 // NPC_PAL ist nach GRUPPE geschluesselt (nicht nach NPC-Name), Form
 // [gradient, borderColor, accentColor] — identisch zur Fraktionsfarbe, mit der
@@ -87,7 +83,7 @@ const GROUPS = [
 ];
 
 // Einzige gemessene Abweichung von der 512x512-Norm (26.08.2026, Bild-Header
-// ausgelesen). Alle anderen 28 NPC_IMGS-Eintraege sind 512x512.
+// ausgelesen). Alle anderen NPC_IMGS-Eintraege sind 512x512.
 const IMG_250 = new Set(["Marius"]);
 
 function npcCard(n, key, ctx) {
@@ -196,7 +192,7 @@ ${sections}`;
     title: `Alle ${z.anzahl} NPCs in Crimson Desert: Begleiter, Verbündete & Gegner`,
     desc: `Alle ${z.anzahl} NPCs in Crimson Desert im Überblick: ${z.begleiter} Begleiter, ${z.verbuendete} Verbündete, ${z.antagonisten} Antagonisten und ${z.haendler} Händler mit Rolle, Region und ausführlicher Bio. Deutsch.`,
     h1: `Alle ${z.anzahl} NPCs in Crimson Desert`,
-    lead: `Diese Übersicht listet alle <strong>${z.anzahl} benannten NPCs</strong> aus Crimson Desert: ${z.begleiter} spielbare Begleiter, ${z.verbuendete} Verbündete &amp; Quest-Geber, ${z.antagonisten} Antagonisten und ${z.haendler} Händler, jeweils mit Rolle, Region und ausführlicher Bio.`,
+    lead: `Diese Übersicht listet <strong>${z.anzahl} wichtige benannte NPCs</strong> aus Crimson Desert: ${z.begleiter} spielbare Begleiter, ${z.verbuendete} Verbündete &amp; Quest-Geber, ${z.antagonisten} Antagonisten und ${z.haendler} Händler, jeweils mit Rolle, Region und ausführlicher Bio.`,
     ogImage: "cd_assets/npcs/kliff.webp",
     crumb: "NPCs",
     bodyHtml: body,

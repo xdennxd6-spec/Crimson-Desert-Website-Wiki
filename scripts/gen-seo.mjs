@@ -22,6 +22,7 @@
 
 import fs from "fs";
 import path from "path";
+import { execFileSync } from "child_process";
 import { fileURLToPath } from "url";
 
 import * as partRuestungen from "./seo-parts/ruestungen.mjs";
@@ -495,6 +496,8 @@ ${PART_CSS}
 
 // slug fuer Anker-IDs
 const slug = (s) => String(s).toLowerCase()
+  .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
+  .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 // Vergibt jedem <h2> eine stabile id und liefert die Abschnittsliste zurueck.
@@ -505,10 +508,12 @@ function abschnitteAuszeichnen(bodyHtml) {
   const vergeben = new Set();
   const body = bodyHtml.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/g, (treffer, attr, inhalt) => {
     if (/\sid=/.test(attr)) return treffer;           // schon ausgezeichnet: nicht anfassen
-    const roh = inhalt.replace(/<[^>]*>/g, "").replace(/\\s+/g, " ").trim();
+    const roh = inhalt.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
     const ohneZahl = roh.replace(/\s*\([^()]*\)\s*$/, "").trim() || roh;
-    // fuer den slug die HTML-Entities aufloesen, sonst wird "&amp;" zu "amp"
-    const klar = ohneZahl.replace(/&amp;/g, "&").replace(/&[a-z]+;/g, " ");
+    // fuer den slug die HTML-Entities aufloesen, sonst wird "&amp;" zu "amp";
+    // Apostroph (&#39;) ersatzlos, damit "Journey's End" nicht zu "journey-39-s-end" wird
+    const klar = ohneZahl.replace(/&amp;/g, "&").replace(/&#0*39;|&apos;|&rsquo;/g, "")
+      .replace(/&#?[a-z0-9]+;/gi, " ");
     let id = "a-" + slug(klar);
     if (id === "a-") id = "a-abschnitt";
     if (vergeben.has(id)) {                            // Kollision: durchnummerieren
@@ -663,7 +668,7 @@ ${bodyHtml}
      basis(s) oben im selben Scope. Folgenlos, solange niemand basis() innerhalb von
      filtern() aufruft -- danach waere die Suche beim ersten Tastendruck tot, waehrend
      die Seite perfekt aussieht. Genau die Fehlerklasse vom 22.08.2026. */
-  var startText=gesamt+' Eintr'+(gesamt===1?'ag':'aege');
+  var startText=gesamt+' Eintr'+(gesamt===1?'ag':'äge');
   zaehler.textContent=startText;
 
   function zeige(el,an){if(an)el.removeAttribute('data-pt-hidden');else el.setAttribute('data-pt-hidden','');}
@@ -702,7 +707,7 @@ ${bodyHtml}
 </script>
 <footer class="site">
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
-  Quellen: Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
+  Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>
 </body>
 </html>`;
@@ -778,6 +783,7 @@ function buildBosse() {
     welt: world.length,
     letztesKapitel: Math.max(...story.map((b) => b.chapter)),
     mitabyssgear: BOSSES.filter((b) => has(b.drop_abyss_gear)).length,
+    mitwaffe: BOSSES.filter((b) => has(b.drop_weapon)).length,
     mitschwaeche: BOSSES.filter((b) => has(b.weakness)).length,
   };
   const faq = faqFuer("bosse").map((f, i) => ({
@@ -827,7 +833,7 @@ function weaponRow(w) {
   const cell = (v) => has(v) ? esc(v) : `<span class="muted">nicht erfasst</span>`;
   return `<tr>
 <td>${thumb}${esc(w.name)}</td>
-<td>${has(w.def) ? `<abbr title="Schilde fuehren strukturell DEF statt ATK">DEF</abbr>&nbsp;${esc(w.def)}`
+<td>${has(w.def) ? `<abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;${esc(w.def)}`
       : (has(w.atk) ? esc(w.atk) : '<span class="muted">–</span>')}</td>
 <td>${w.crit != null ? esc(w.crit) : (w.crit_none ? '<span class="muted" title="kein Critical-Rate-Feld bei questlog.gg und gaming.tools">kein Crit</span>' : '<span class="muted">n.&nbsp;e.</span>')}</td>
 <td>${w.slots != null ? esc(w.slots) : '<span class="muted">n.&nbsp;e.</span>'}</td>
@@ -847,6 +853,7 @@ function buildWaffen() {
     anzahl: WEAPONS.length,
     typen: types.length,
     mitatk: WEAPONS.filter((w) => has(w.atk)).length,
+    mitdef: WEAPONS.filter((w) => has(w.def)).length,
   };
   const faq = faqFuer("waffen").map((f, i) => ({
     frage: zahlenEinsetzen(f.frage, zahlen, `faq.json → waffen[${i}].frage`),
@@ -862,7 +869,7 @@ function buildWaffen() {
   }).join("\n");
   let body = `
 <a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
-<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller ${WEAPONS.length} Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
+<p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller damals 500 Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
 ${sections}`;
   if (faq.length) body += "\n" + faqSektion(faq);
   const jsonld = {
@@ -908,7 +915,7 @@ function buildTrueEnding() {
   }).join("\n");
   const faq = [
     { frage: "Was ist für das versteckte Ende Pflicht?", antwort: "Prolog, alle zwölf Hauptstory-Kapitel und den Epilog abschließen sowie alle 40 Abyss-Challenges einschließlich Dimensional Bonds erledigen." },
-    { frage: "Sind Sanctums, Hexen und Greymane-Commissions Pflicht?", antwort: "Nein. Diese Aufgaben sind zusätzliche Empfehlungen und zählen nicht zu den belegten Freischaltbedingungen für das versteckte Ende." },
+    { frage: "Sind Sanctums, Hexen-Tokens oder Greymane-Commissions Pflicht?", antwort: "Nein. Sanctums, Hexen-Tokens und die Begleiter-Aufgaben stehen nur als zusätzliche Empfehlungen in der Checkliste und zählen nicht zu den belegten Freischaltbedingungen. Für die Greymane-Commissions ist keine Verbindung zum versteckten Ende belegt: Keine geprüfte Quelle verknüpft sie damit." },
     { frage: "Zählen die vier Eternal-Corridor-Rätsel zu den 40?", antwort: "Nein. Sie gehören zu einer optionalen Questreihe und sind für das versteckte Ende nicht erforderlich." },
   ];
   const body = `
@@ -933,9 +940,9 @@ ${faqSektion(faq)}`;
   return pageShell({
     slugName: "true-ending",
     title: `Crimson Desert True Ending: komplette Checkliste (Deutsch)`,
-    desc: `Crimson Desert: Hauptstory und 40 Abyss-Challenges als Pflicht für das versteckte Ende. Checkliste mit ${TRUE_ENDING.length} Pflicht- und Zusatzaufgaben.`,
+    desc: `Crimson Desert: Hauptstory und 40 Abyss-Challenges als Pflicht für das versteckte Ende. Checkliste mit ${TRUE_ENDING.length} Aufgaben, davon ${TRUE_ENDING.filter((t) => t.required).length} Pflicht und ${TRUE_ENDING.filter((t) => !t.required).length} empfohlen.`,
     h1: "Crimson Desert True Ending: komplette Checkliste",
-    lead: `Für das <strong>versteckte Ende</strong> von Crimson Desert musst du die Hauptstory samt Epilog und alle <strong>40 Abyss-Challenges</strong> abschließen. Sanctums, Hexen und Greymane-Commissions sind zusätzliche Empfehlungen. Die Checkliste trennt beides nach Bereich.`,
+    lead: `Für das <strong>versteckte Ende</strong> von Crimson Desert musst du die Hauptstory samt Epilog und alle <strong>40 Abyss-Challenges</strong> abschließen. Begleiter-Aufgaben, Sanctums und Hexen-Tokens sind zusätzliche Empfehlungen. Die Checkliste trennt beides nach Bereich.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "True Ending",
     bodyHtml: body,
@@ -944,7 +951,37 @@ ${faqSektion(faq)}`;
 }
 
 // ── Sitemap ───────────────────────────────────────────────────────────────────
-function buildSitemap() {
+// lastmod je URL = Tag der letzten INHALTLICHEN Aenderung der Seite, nicht der
+// Lauf-Tag (bis 10/2026 trug jede URL das Lauf-Datum, die Angabe war damit
+// wertlos). Reihenfolge der Quellen je Seite:
+//   1. Die Seite aendert sich in diesem Lauf        -> TODAY
+//   2. sonst der bisherige Wert aus sitemap.xml      -> unveraendert
+//   3. kein bisheriger Wert: letzter Commit der Datei (git), sonst TODAY
+// Damit bleibt sitemap.xml byte-gleich, solange sich keine Seite aendert, und
+// der Generator braucht kein .git. Die Startseite ist Handarbeit und wird nicht
+// erzeugt; fuer sie zaehlt der letzte Commit von index.html und data/
+// (uncommittete Aenderungen dort -> TODAY), ohne git der bisherige Wert.
+function gitDatum(pfade) {
+  try {
+    const opt = { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] };
+    if (execFileSync("git", ["status", "--porcelain", "--", ...pfade], opt).trim()) return TODAY;
+    const d = execFileSync("git", ["log", "-1", "--format=%cd", "--date=short", "--", ...pfade], opt).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : null;
+  } catch {
+    return null;
+  }
+}
+function alteLastmods() {
+  try {
+    const xml = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
+    return Object.fromEntries([...xml.matchAll(
+      /<loc>([^<]+)<\/loc>\s*<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g)].map((m) => [m[1], m[2]]));
+  } catch {
+    return {};
+  }
+}
+
+function buildSitemap(geaendert) {
   // Die drei urspruenglichen Seiten haben ihre Prioritaet hier fest; die
   // Modul-Seiten bringen sie als SITEMAP-Export selbst mit. Die Reihenfolge
   // folgt NAV, damit Menue und Sitemap nicht auseinanderlaufen.
@@ -953,17 +990,21 @@ function buildSitemap() {
     "waffen": { pri: "0.9", freq: "monthly" },
     "true-ending": { pri: "0.8", freq: "monthly" },
   };
+  const alt = alteLastmods();
   const vonModul = Object.fromEntries(SEO_PARTS.map((p) => [p.SLUG, p.SITEMAP]));
   const urls = [
-    { loc: SITE + "/", pri: "1.0", freq: "weekly" },
+    { loc: SITE + "/", pri: "1.0", freq: "weekly",
+      mod: gitDatum(["index.html", "data"]) || alt[SITE + "/"] || TODAY },
     ...NAV.map(([s]) => {
       const cfg = FEST[s] || vonModul[s];
       if (!cfg) throw new Error(`Keine Sitemap-Angabe fuer Seite "${s}"`);
-      return { loc: `${SITE}/${s}`, pri: cfg.pri, freq: cfg.freq };
+      const loc = `${SITE}/${s}`;
+      const mod = geaendert.has(`${s}.html`) ? TODAY : (alt[loc] || gitDatum([`${s}.html`]) || TODAY);
+      return { loc, pri: cfg.pri, freq: cfg.freq, mod };
     }),
   ];
   const body = urls.map((u) =>
-    `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`
+    `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.mod}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>`
   ).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
@@ -1049,13 +1090,21 @@ const CTX = {
 };
 
 // ── Schreiben ─────────────────────────────────────────────────────────────────
-const outputs = [
+const seiten = [
   ["bosse.html", buildBosse()],
   ["waffen.html", buildWaffen()],
   ["true-ending.html", buildTrueEnding()],
   ...SEO_PARTS.map((p) => [`${p.SLUG}.html`, baueModulSeite(p)]),
-  ["sitemap.xml", buildSitemap()],
 ];
+// Welche Seiten sich in diesem Lauf inhaltlich aendern (Zeilenenden egal, siehe
+// unten) -- Grundlage fuer lastmod in buildSitemap(). Muss VOR dem Schreiben
+// ermittelt werden, danach sind alte und neue Fassung gleich.
+const ohneCR = (t) => t.replace(/\r\n/g, "\n");
+const geaendert = new Set(seiten.filter(([file, content]) => {
+  const ziel = path.join(ROOT, file);
+  return !fs.existsSync(ziel) || ohneCR(fs.readFileSync(ziel, "utf8")) !== ohneCR(content);
+}).map(([file]) => file));
+const outputs = [...seiten, ["sitemap.xml", buildSitemap(geaendert)]];
 for (const [file, content] of outputs) {
   const ziel = path.join(ROOT, file);
   // Zeilenenden der vorhandenen Datei uebernehmen. Der PC fuehrt die erzeugten Seiten als

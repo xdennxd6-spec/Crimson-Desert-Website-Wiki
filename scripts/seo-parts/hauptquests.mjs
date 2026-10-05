@@ -16,7 +16,7 @@
 //    wortgleich zu side-quests.mjs.
 //  - Die Kapitelfelder boss/warn/unlock sind entweder String oder null. Ohne
 //    Null-Pruefung stuende "null" auf der Seite.
-//  - 45 der Quests tragen conf:"medium". Das wird als Badge ausgewiesen statt
+//  - Quests mit conf:"medium" (Stand 04.10.2026: 7) werden als Badge ausgewiesen statt
 //    verschwiegen -- Projektregel: Unsicherheit markieren, nicht glaetten.
 
 export const SLUG = "hauptquests";
@@ -121,11 +121,18 @@ ${warnZeile}
     .map(({ c, x }) => `<a href="#${esc(rowId(c, x))}">${esc(x.q)}</a> <span class="muted">(${esc(kapTitel(c))})</span>`)
     .join(", ");
   const unsicher = q.filter((x) => x.conf === "medium").length;
+  // Die Tipps der derzeit markierten Inhalte sagen ausdruecklich "zeitweise"
+  // (ConsolePulse/PowerPyx: kein dauerhafter Verlust). Der Warnsatz richtet sich
+  // deshalb nach den Daten, statt pauschal "dauerhaft" zu behaupten.
+  const nurZeitweise = missQ.length > 0 && missQ.every(({ x }) => /zeitweise/i.test(String(x.tip || "")));
+  const missHinweis = nurZeitweise
+    ? "Laut den Quellen gehen sie nicht dauerhaft verloren, sondern sind nur zeitweise verpasst oder gesperrt; Einzelheiten stehen im Tipp der jeweiligen Quest."
+    : "Diese lassen sich im laufenden Durchgang dauerhaft verpassen, erledige sie vor dem jeweiligen Kapitelabschluss.";
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktiven Kapitel-Guide mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jedes Kapitel ab, siehst deinen Story-Fortschritt und springst direkt zu den zugehörigen Bossen und Nebenquests.</p>
-<p class="warn"><strong>${missQ.length} verpassbare Hauptquest-Inhalte:</strong> ${missList}. Diese lassen sich im laufenden Durchgang dauerhaft verpassen, erledige sie vor dem jeweiligen Kapitelabschluss.</p>
+<p class="warn"><strong>${missQ.length} verpassbare Hauptquest-Inhalte:</strong> ${missList}. ${missHinweis}</p>
 <p class="note">Bei ${unsicher} Quests ist die Quellenlage dünn; sie tragen den Hinweis „Quelle unsicher“ und sollten im Zweifel gegengeprüft werden.</p>
 ${sections}`;
 

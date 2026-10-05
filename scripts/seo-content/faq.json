@@ -24,7 +24,7 @@
     },
     {
       "frage": "Kann man in Crimson Desert Hauptquest-Inhalte verpassen?",
-      "antwort": "{{verpassbar|Wort}} Inhalte der Hauptgeschichte sind als verpassbar markiert. Erledige sie vor dem Abschluss des jeweiligen Kapitels, danach lässt sich die Gelegenheit im laufenden Durchgang nicht mehr nachholen."
+      "antwort": "{{verpassbar|Wort}} Inhalte der Hauptgeschichte sind als verpassbar markiert, gehen nach heutiger Quellenlage aber nicht dauerhaft verloren: Den Beobachtungspunkt mit dem Skill Focused Force Palm aus On the Right Path gibt es laut ConsolePulse in einem späteren Kapitel erneut, und Oongkas Ausrüstung ist nach Time to Face Justice laut PowerPyx nur bis zu seiner Rückkehr unzugänglich. Am einfachsten erledigst du beides im jeweiligen Kapitel."
     },
     {
       "frage": "Welche Bosse gehören zur Hauptgeschichte von Crimson Desert?",
@@ -50,7 +50,7 @@
     },
     {
       "frage": "Kann ich Rüstungsteile in Crimson Desert herstellen?",
-      "antwort": "unbekannt"
+      "antwort": "Ja, viele Rüstungsteile lassen sich herstellen, meist beim Schmied, sobald das passende Rezept vorliegt. Ob ein Teil herstellbar ist, steht in der Fundort-Spalte, etwa als Vermerk „herstellbar (Rezept)“ oder mit dem Rezeptnamen; bei den übrigen Teilen nennt sie Händler, Truhen, Drops oder Missionsbelohnungen als Quelle."
     },
     {
       "frage": "Was bringen Mäntel bei Crimson Desert?",
@@ -64,7 +64,7 @@
   "crafting": [
     {
       "frage": "Wo finde ich alle Rezepte in Crimson Desert?",
-      "antwort": "Die Handwerksübersicht listet {{anzahl}} Rezepte aus den Kategorien Elixier, Essen und Kuku Gadget. Zu jedem Rezept stehen Zutaten, benötigte Station und Wirkung, damit du fehlende Materialien gezielt suchen kannst."
+      "antwort": "Die Handwerksübersicht listet {{anzahl}} Rezepte aus den Kategorien Elixiere, Gerichte und Kuku-Gadgets. Zu jedem Rezept stehen Zutaten, benötigte Station und Wirkung, damit du fehlende Materialien gezielt suchen kannst."
     },
     {
       "frage": "Welche Zutaten brauche ich für ein Rezept in Crimson Desert?",
@@ -79,12 +79,12 @@
       "antwort": "Das hängt davon ab, welche Wirkung du für Kampf, Erkundung oder Ressourcenbeschaffung brauchst. Vergleiche die Wirkung direkt in der Rezeptliste und stelle bevorzugt Elixiere her, deren Zutaten für dich zuverlässig verfügbar sind."
     },
     {
-      "frage": "Was sind Kuku Gadgets in Crimson Desert?",
-      "antwort": "Kuku Gadgets bilden in der Rezeptübersicht eine eigene Handwerkskategorie. Ihre genaue Funktion ist je Rezept angegeben, daher solltest du den einzelnen Effekt vor dem Herstellen prüfen."
+      "frage": "Was sind Kuku-Gadgets in Crimson Desert?",
+      "antwort": "Kuku-Gadgets bilden in der Rezeptübersicht eine eigene Handwerkskategorie. Ihre genaue Funktion ist je Rezept angegeben, daher solltest du den einzelnen Effekt vor dem Herstellen prüfen."
     },
     {
-      "frage": "Wie viele Crafting Rezepte gibt es in Crimson Desert?",
-      "antwort": "Die Übersicht enthält {{anzahl}} Handwerks und Kochrezepte. Sie umfasst Elixiere, Essen und Kuku Gadgets."
+      "frage": "Wie viele Crafting-Rezepte gibt es in Crimson Desert?",
+      "antwort": "Die Übersicht enthält {{anzahl}} Handwerks- und Kochrezepte: {{elixiere}} Elixiere, {{gerichte}} Gerichte und {{gadgets}} Kuku-Gadgets."
     }
   ],
   "trophaeen": [
@@ -98,7 +98,7 @@
     },
     {
       "frage": "Kann man in Crimson Desert alle Trophäen in einem Durchgang holen?",
-      "antwort": "Ja. Übereinstimmende Trophäen-Guides nennen einen einzigen Durchgang als ausreichend für Platin; es gibt keine Online- oder Glitch-Trophäen und keine Vorgabe beim Schwierigkeitsgrad. Nach dem Epilog bleibt die offene Welt frei bespielbar, Hauptquests lassen sich aber nicht wiederholen. Die {{verpassbar|wort}} als verpassbar markierten Trophäen hängen an Herausforderungen mit begrenzten Gelegenheiten und sollten früh erledigt werden."
+      "antwort": "Ja. Die Trophäen-Guides von PowerPyx und Console Pulse nennen einen einzigen Durchgang als ausreichend für Platin; laut PowerPyx gibt es keine Online- oder Glitch-Trophäen und keine Vorgabe beim Schwierigkeitsgrad. Nach dem Epilog bleibt die offene Welt frei bespielbar, Hauptquests lassen sich aber nicht wiederholen. Die {{verpassbar|wort}} als verpassbar markierten Trophäen hängen an Herausforderungen mit begrenzten Gelegenheiten und sollten früh erledigt werden."
     },
     {
       "frage": "Was muss ich für die Platin Trophäe in Crimson Desert machen?",
@@ -146,7 +146,7 @@
     },
     {
       "frage": "Welche Nebenquests in Crimson Desert sind verpassbar?",
-      "antwort": "{{verpassbar|Wort}} Nebenquests sind in der Übersicht als verpassbar markiert. Erledige sie möglichst vor großen Storyfortschritten und prüfe ihre Voraussetzungen, bevor du ein Gebiet dauerhaft verlässt."
+      "antwort": "{{verpassbar|Wort}} Nebenquests sind in der Übersicht als verpassbar markiert: Legendary Wolf in Hernand sowie White Bear, Snowwhite Deer, Harry's Request, Lola's Request und Gunter's Request in Pailune. Bei White Bear und Snowwhite Deer musst du das Tier nach dem Kill häuten, bei Legendary Wolf zählt die Reihenfolge nach Black Fang, und die Aufträge von Harry, Lola und Gunter können beim späteren Camp-Umzug als fehlgeschlagen markiert werden, wenn sie dann noch offen sind."
     },
     {
       "frage": "Kann ich Nebenquests nach der Hauptstory noch machen?",
@@ -168,15 +168,15 @@
   "bosse": [
     {
       "frage": "Wie viele Bosse gibt es in Crimson Desert?",
-      "antwort": "Die Boss-Übersicht führt {{anzahl}} Bosse: {{story}} Story-Bosse, sortiert nach Kapitel, und {{welt}} optionale Welt- und Fraktionsbosse ohne festes Kapitel."
+      "antwort": "Die Boss-Übersicht führt {{anzahl}} Bosse: {{story}} Story-Bosse, sortiert nach Kapitel, und {{welt}} Bosse ohne festes Kapitel, überwiegend Welt- und Fraktionsbosse, dazu Sanctum- und weitere optionale Bosse."
     },
     {
       "frage": "Welcher ist der letzte Boss in Crimson Desert?",
-      "antwort": "In der Kapitel-Sortierung der Übersicht steht Umbra (Final) an letzter Stelle: die wahre Drachenform im dritten Teil des Finale-Gauntlets aus Kapitel {{letztesKapitel}}, während der Quest Blinding Darkness."
+      "antwort": "In der Kapitel-Sortierung der Übersicht steht Umbra (Final) an letzter Stelle: die wahre Drachenform im dritten Teil des Finale-Gauntlets aus Kapitel {{letztesKapitel}}, in der Mission Blinding Darkness (Quest The Void)."
     },
     {
       "frage": "Was droppt ein Boss in Crimson Desert?",
-      "antwort": "Die Übersicht führt zu jedem Boss mehrere mögliche Beutefelder: einen Waffen-Drop und eine Abyss-Fähigkeit, das Abyss-Gear. {{mitabyssgear}} der {{anzahl}} Bosse haben einen dokumentierten Abyss-Gear-Drop; steht bei einem Feld ein Gedankenstrich, ist dazu kein belastbarer Wert erfasst."
+      "antwort": "Die Übersicht führt zu jedem Boss die Beutefelder Waffen-Drop und Abyss-Gear. Beide Felder nennen nicht nur Waffen und Abyss-Gears: Im Feld Waffen-Drop stehen vereinzelt Rüstungsteile, im Feld Abyss-Gear auch Abyss-Artefakte, Schmuck oder Rüstungsteile. Einen Eintrag im Feld Waffen-Drop haben {{mitwaffe}} der {{anzahl}} Bosse, im Feld Abyss-Gear {{mitabyssgear}}; steht bei einem Feld ein Gedankenstrich, ist dazu kein belastbarer Wert erfasst."
     },
     {
       "frage": "Haben alle Bosse in Crimson Desert eine Elementschwäche?",
@@ -186,19 +186,19 @@
   "waffen": [
     {
       "frage": "Wie viele Waffen gibt es in Crimson Desert?",
-      "antwort": "Die Waffen-Datenbank listet {{anzahl}} Waffen, gruppiert in {{typen}} Waffentypen, unter anderem Schwerter, Zweihänder, Dolche, Bögen, Feuerwaffen und Schilde."
+      "antwort": "Die Waffen-Datenbank listet {{anzahl}} Waffen, gruppiert in {{typen}} Waffentypen, unter anderem Schwerter, Zweihänder, Speere und Hellebarden, Äxte und Stumpfwaffen, Dolche, Bögen, Feuerwaffen und Schilde."
     },
     {
       "frage": "Was bedeutet die ATK-Zahl in der Waffentabelle?",
-      "antwort": "Die ATK-Spalte zeigt nicht den Fundzustand einer Waffe, sondern den höchsten dokumentierten Wert: Bei Kampfwaffen ist das die letzte Stufe der Waffenveredelung, das Refinement. Eine frisch gefundene, ungeschliffene Waffe liegt darunter. {{mitatk}} der {{anzahl}} Waffen haben überhaupt einen erfassten ATK-Wert, bei den übrigen fehlt ein belastbarer Quellenwert."
+      "antwort": "Die ATK-Spalte zeigt nicht den Fundzustand einer Waffe, sondern den höchsten dokumentierten Wert: Bei Kampfwaffen ist das die letzte Stufe der Waffenveredelung, das Refinement. Eine frisch gefundene, ungeschliffene Waffe liegt darunter. {{mitatk}} der {{anzahl}} Waffen haben einen erfassten ATK-Wert. Die {{mitdef}} Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert, der in derselben Spalte steht; nur wo beides fehlt, gibt es keinen belastbaren Quellenwert."
     },
     {
       "frage": "Welche Waffentypen gibt es in Crimson Desert?",
-      "antwort": "Die Datenbank gruppiert die {{anzahl}} Waffen in {{typen}} Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Hellebarden, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde."
+      "antwort": "Die Datenbank gruppiert die {{anzahl}} Waffen in {{typen}} Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Speere und Hellebarden, Äxte und Stumpfwaffen, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde."
     },
     {
       "frage": "Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?",
-      "antwort": "Abyss-Slots sind die Fassungen, in die eine Hexe gegen Silber Abyss-Kräfte einsetzt. Ihre Zahl hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Die Slot-Zahl ist unabhängig vom Refinement-Grad der Waffe."
+      "antwort": "Abyss-Slots sind die Fassungen für Abyss-Cores (Abyss Gears). Eine Hexe erstellt sie gegen Silber und setzt dort auch die Cores ein. Wie viele Slots eine Waffe haben kann, hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Boss-Waffen bringen teils schon vorinstallierte Sockel mit."
     }
   ],
   "fraktionen": [

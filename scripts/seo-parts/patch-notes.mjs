@@ -1,4 +1,4 @@
-// parts/patch-notes.mjs — Seite "Patch-Notes" (PATCHES, 32 Eintraege).
+// parts/patch-notes.mjs — Seite "Patch-Notes" (PATCHES, ein Abschnitt je Eintrag).
 //
 // Aufbau: CTA + Hinweis (wie jede Seite) -> je ein <h2> pro Patch in
 // Veroeffentlichungsreihenfolge (neuester zuerst, so liegt PATCHES bereits vor),
@@ -21,7 +21,7 @@
 //
 // Bewusst KEIN <article> um einen Patch: die Seitensuche in gen-seo.mjs nimmt
 // den AEUSSERSTEN Treffer aus 'tbody tr, article, li'. Mit <article> waere ein
-// ganzer Patch ein Sucheintrag (32 Stueck), ohne sind es die 647 Einzelpunkte —
+// ganzer Patch ein Sucheintrag, ohne ist es jeder einzelne Punkt —
 // und genau die will man auf einer Patch-Notes-Seite finden.
 
 export const SLUG = "patch-notes";
@@ -94,7 +94,7 @@ ${f.items.map((it) => `<li>${it}</li>`).join("\n")}
 </ul>`).join("\n");
 
     return `<h2>Patch ${esc(p.ver)}${neuTag} (${esc(p.date)})</h2>
-<p class="pmeta" id="patch-${esc(slug(p.ver))}">Veröffentlicht am ${esc(p.date)} &middot; ${nPunkte} ${nPunkte === 1 ? "Eintrag" : "Einträge"} in ${kats.length} ${kats.length === 1 ? "Kategorie" : "Kategorien"}</p>
+<p class="pmeta" id="patch-${esc(slug(p.ver))}">Offizielle Notes vom ${esc(p.date)} &middot; ${nPunkte} ${nPunkte === 1 ? "Eintrag" : "Einträge"} in ${kats.length} ${kats.length === 1 ? "Kategorie" : "Kategorien"}</p>
 ${sizeBlock}
 ${katBloecke}`;
   }).join("\n");
