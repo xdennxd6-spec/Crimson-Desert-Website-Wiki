@@ -16,12 +16,12 @@
 //    wortgleich zu side-quests.mjs.
 //  - Die Kapitelfelder boss/warn/unlock sind entweder String oder null. Ohne
 //    Null-Pruefung stuende "null" auf der Seite.
-//  - Quests mit conf:"medium" (Stand 04.10.2026: 7) werden als Badge ausgewiesen statt
+//  - Quests mit conf:"medium" (Stand 06.10.2026: 8) werden als Badge ausgewiesen statt
 //    verschwiegen -- Projektregel: Unsicherheit markieren, nicht glaetten.
 
 export const SLUG = "hauptquests";
 export const NAV_LABEL = "Hauptquests";
-export const DEEPLINK = "/#sec-quests";
+export const DEEPLINK = "/#sec=quests&tab=mq";
 export const SITEMAP = { pri: "0.8", freq: "monthly" };
 
 // Nur Klassen, die es in SHARED_CSS noch nicht gibt. Wird an SHARED_CSS angehaengt.

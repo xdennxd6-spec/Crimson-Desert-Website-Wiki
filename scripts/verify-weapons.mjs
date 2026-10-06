@@ -5,9 +5,10 @@
 //   1. extern: "Two-handed weapons and ranged weapons get five Abyss Gear slots,
 //      while one-handed weapons get three, and shields get two." Dagger sind ein
 //      dokumentierter Sonderfall ohne Slots (Fextralife, King's Dagger).
-//   2. intern: ueber die 418 bereits erfassten Waffen ist der Wert je Typ
-//      eindeutig, z.B. Shield 2 (77/77), Halberd/Spear 5 (127/127),
-//      Sword (1H) 3 (41/41), Dagger 0 (15/15).
+//   2. intern: ueber die erfassten Waffen ist der Wert je Typ bis auf belegte
+//      Einzelausnahmen (AUSNAHMEN unten) eindeutig, z.B. Shield 2, Halberd/Spear 5,
+//      Sword (1H) 3, Dagger 0. Die aktuelle Verteilung je Typ gibt der Lauf am Ende
+//      als info aus (aus den Daten abgeleitet, keine zweite Handpflege).
 //
 // Wozu die Pruefung: Bei einer Datenlieferung von aussen (Recherche, LLM) sind
 // gerade diese Werte anfaellig fuer plausibel klingende Erfindungen. Am
@@ -81,6 +82,9 @@ const GEMISCHT = new Set(["Blunt/Axe"]);
 //   Runewalker Shield: trotz elf Verfeinerungsstufen item-spezifisch ohne Sockelsystem
 //   (questlog-tRPC, itemSockets:null und socketCompatibilityHash:"0", 14.09.2026).
 //   Item-IDs: 1003849, 1003850, 1003908, 1004108, 290021 und 1000201.
+// - Lightning Greathammer (Typ Blunt/Axe, daher von der Typpruefung ausgenommen): nur
+//   eine Stufe (levels=1), socketCompatibilityHash:"0", kein Sockelsystem (questlog,
+//   Item-ID 1002741, 06.10.2026). Slots 0 ist damit der questlog-Stand, kein Datenloch.
 const AUSNAHMEN = new Map([
   ["Electro-Mecha Longsword", 4],
   ["Electro-Mecha Spear", 4],
@@ -97,7 +101,17 @@ const AUSNAHMEN = new Map([
   ["Sturdy Bamboo Stalk", 0],
   ["Drake Shield", 0],
   ["Runewalker Shield", 0],
+  ["Lightning Greathammer", 0],
 ]);
+
+// Jede dokumentierte Ausnahme muss noch zu einer Waffe passen: Wurde eine Waffe
+// umbenannt oder entfernt, laeuft ein verwaister Eintrag sonst unbemerkt mit und
+// taeuscht eine Abdeckung vor.
+{
+  const vorhanden = new Set(WEAPONS.map((w) => w.name));
+  const verwaist = [...AUSNAHMEN.keys()].filter((n) => !vorhanden.has(n));
+  ok(verwaist.length === 0, `alle ${AUSNAHMEN.size} dokumentierten Slot-Ausnahmen betreffen noch vorhandene Waffen (verwaist: ${verwaist.join(", ") || "-"})`);
+}
 
 const proTyp = {};
 for (const w of WEAPONS) {
@@ -208,6 +222,17 @@ const keinCrit = WEAPONS.filter((w) => w.crit == null && w.crit_none).length;
 const ohneSlots = WEAPONS.filter((w) => w.slots == null).length;
 console.log(`\n  info  nicht erfasst: crit ${ohneCrit}/${WEAPONS.length} (dazu ${keinCrit} ohne Crit-Stat laut questlog/gaming.tools), slots ${ohneSlots}/${WEAPONS.length}`);
 console.log("  info  Slot-Regel: 2H und Ranged = 5, 1H = 3, Shield = 2, Dagger = 0; Kuku-/Electro-Mecha-/Soul-Speere = 4; nicht ausruestbare Items ohne Sockelsystem = 0");
+// Verteilung je Typ aus den Daten (ohne die belegten Einzelausnahmen), damit die
+// Regel oben nicht allein von Hand gepflegt wird. Knuckles/Gauntlets zeigen z.B. 0,
+// weil dort nicht ausruestbare Items und Standard-Faeuste liegen (Notiz im Datensatz:
+// kein Sockelsystem laut questlog), nicht weil Faeuste generell keine Slots haetten
+// (Mining Knuckledrill hat 5).
+for (const [t, d] of Object.entries(proTyp)) {
+  const teile = Object.entries(d.slots).map(([v, n]) => `${v}=${n.length}x`);
+  if (d.ohne) teile.push(`nicht erfasst=${d.ohne}x`);
+  if (teile.length) console.log(`  info  Slots je Typ  ${t.padEnd(26)} ${teile.join(", ")}`);
+}
+console.log(`  info  ${AUSNAHMEN.size} Einzelausnahmen mit Beleg (siehe AUSNAHMEN); Schilde mit crit 0: Altkonvention, Entscheidung offen (WIKI-PLAN, Backlog Block 3)`);
 
 console.log(`\n${fail === 0 ? "ALLE CHECKS GRUEN" : fail + " CHECK(S) FEHLGESCHLAGEN"}`);
 process.exit(fail === 0 ? 0 : 1);

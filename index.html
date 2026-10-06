@@ -1113,8 +1113,10 @@ a:visited{color:var(--gold)}
 /* Cross-Reference Links */
 .xref{color:var(--brass);cursor:pointer;border-bottom:1px dashed var(--brass);text-decoration:none;transition:all .15s}
 .xref:hover{color:var(--survey-red);border-bottom-color:var(--survey-red);background:var(--overprint);padding:0 2px}
+.xref:focus-visible{outline:2px solid var(--survey-red);outline-offset:2px;border-radius:2px}
 .xref-skill{color:var(--brass)}
 .xref-boss{color:var(--survey-red);border-bottom-color:var(--survey-red)}
+.sk-hit-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-8px 0 12px;font-family:var(--f-mono);font-size:var(--fs-11);color:var(--dim)}
 .xref-boss:hover{color:var(--survey-red-hi);border-bottom-color:var(--survey-red-hi);background:var(--overprint)}
 .xref-lore{color:var(--slate);border-bottom-color:var(--slate);border-bottom-style:dotted}
 .xref-lore:hover{color:var(--slate-soft);border-bottom-color:var(--slate-soft);background:rgba(60,90,99,.08)}
@@ -1153,6 +1155,12 @@ a:visited{color:var(--gold)}
 .rh-bar-lbl{font-family:var(--f-mono);font-size:var(--fs-9);color:var(--iron-soft);letter-spacing:.04em;text-align:center;text-transform:uppercase;line-height:1.2;height:22px;display:flex;align-items:flex-end}
 .rh-bar:hover .rh-bar-fill{background:var(--survey-red-hi)}
 .rh-bar:hover .rh-bar-lbl{color:var(--survey-red)}
+/* Schmale Phones (390 px): sechs Balken a 50 px reichen nicht fuer "DEMENISS"/"DELESYIA" in 11,5 px + Laufweite, die Beschriftungen stiessen aneinander. */
+@media(max-width:480px){
+  .region-heatmap{padding:9px 6px;gap:1px}
+  .rh-bar{min-width:0}
+  .rh-bar-lbl{font-size:11px;letter-spacing:0;max-width:100%}
+}
 
 /* Skill-Tree Graph */
 .skill-graph-wrap{position:relative;background:var(--vellum-hi);border:1px solid var(--iron-gall);padding:18px;margin-bottom:20px;overflow-x:auto;box-shadow:3px 3px 0 var(--paper-shadow);border-radius:var(--radius)}
@@ -2898,6 +2906,19 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   border-color:var(--red);color:var(--red);
   background:transparent;
 }
+/* Trefferzaehler ausserhalb des Sheets: #scnt liegt im Register-Sheet, das nach Enter/Blattwahl zufaehrt - die Pille zeigt den Stand weiter an. */
+#scnt-pill{display:none}
+@media(max-width:860px){
+  #scnt-pill.show{display:flex;align-items:center;gap:8px;position:fixed;left:12px;bottom:70px;z-index:120;max-width:calc(100vw - 80px);padding:4px 6px 4px 12px;border:1px solid var(--line-strong);border-radius:999px;background:rgba(15,17,28,.88);color:var(--text);font-family:var(--f-mono);font-size:var(--fs-11);box-shadow:var(--shadow-soft)}
+  #scnt-pill button{min-width:32px;min-height:32px;border:0;border-radius:50%;background:transparent;color:var(--iron-soft);font-size:14px;cursor:pointer}
+  #scnt-pill button:hover,#scnt-pill button:focus-visible{color:var(--red)}
+}
+/* — PATCH touch — Tap-Ziele der Filter auf Touch-Geraeten (pointer:coarse): Selects, Tabs, Filter-Chips, Seitenblaettern und
+   Werkzeugknoepfe waren nur 24-32 px hoch. Desktop (pointer:fine) bleibt unveraendert. */
+@media (pointer:coarse){
+  select.fs,input.fs,.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.cmp-trigger,.rb-trigger,.ic-trigger,.empty-state-action{min-height:44px}
+  .pet-filter-btn,.ruin-fbtn,.empty-state-action{display:inline-flex;align-items:center;justify-content:center}
+}
 </style>
 </head>
 <body>
@@ -2928,6 +2949,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 <div id="toast" role="status" aria-live="polite" aria-atomic="true">Kopiert!</div>
 <div id="ach-live" role="status" aria-live="polite" aria-atomic="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap"></div>
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben">↑</button>
+<div id="scnt-pill"><span id="scnt-pill-t"></span><button type="button" onclick="_clearSearchPill()" aria-label="Suche löschen">✕</button></div>
 <!-- Easter Egg: Umbras Geheimtagebuch -->
 <div id="ee-overlay" role="dialog" aria-modal="true" aria-label="Easter Egg" style="display:none" onclick="if(event.target===this)closeEE()">
   <div id="ee-box">
@@ -3418,7 +3440,8 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <table class="farm-tbl" style="margin-bottom:20px">
       <thead><tr><th>Mechanik</th><th>Erklärung</th></tr></thead>
       <tbody>
-        <tr><td><strong>Parieren (Parry)</strong></td><td>Getimtes Blocken (<span class="kbd">L1 / LB / Ctrl</span>) genau im Treffermoment. Ein perfekter Parry stellt etwas Ausdauer + Spirit her, füllt die Stagger-Leiste des Gegners und öffnet ein Konterfenster. <strong>Greifangriffe (Grabs) lassen sich NICHT parieren</strong> — nur ausweichen.</td></tr>
+        <tr><td><strong>Parieren (Parry)</strong></td><td>Getimtes Blocken (<span class="kbd">L1 / LB / Ctrl</span>) genau im Treffermoment. Ein perfekter Parry öffnet ein Konterfenster; laut den offiziellen Notes (1.00.03) baut er bei Bossen stärker die Stun-Leiste auf, und laut 8BitToast stellt er zusätzlich Ausdauer und Spirit wieder her (Einzelquelle). <strong>Greifangriffe (Grabs) lassen sich NICHT parieren</strong> — nur ausweichen.</td></tr>
+        <tr><td><strong>Neu seit 2.x</strong></td><td>Seit Patch 2.00.00 (25.08.2026) hat Kliff acht neue Fähigkeiten, laut den Skill-Daten des Wikis darunter <em>Enraged Parry</em> (Parry auch während anderer Aktionen) und <em>Serenity</em> (mehr Spirit-Regeneration, solange Focus gehalten wird). <em>Water Stride</em> (Wasserlauf: über Wasser sprinten, seit 2.03.00 mit Sprung) nennen die offiziellen Notes erstmals mit 2.03.00. Voraussetzungen und Kosten stehen im Skills-Tab.</td></tr>
         <tr><td><strong>Perfect Dodge</strong></td><td>Skill <em>Dodge</em> (Ausweichen kurz vor dem Treffer), muss erst im Skillbaum freigeschaltet werden (Kliff: Keen Senses Lv 2, 1 Abyss Artifact). Ausweichen (<span class="kbd">○ / B / Alt</span>) im letzten Moment → grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff. Verzeihender als Parry, unterbricht aber keine Combos — danach kann gekontert werden.</td></tr>
         <tr><td><strong>Blocken / Guard Break</strong></td><td>Guard halten blockt, kostet aber Ausdauer (schwere Treffer mehr). Ist die Ausdauer leer, <strong>bricht die Deckung</strong>. Gegnerische Deckung brichst du mit schweren Angriffen (<span class="kbd">R2 / RT / RMB</span>).</td></tr>
         <tr><td><strong>Rote &amp; blaue Signale</strong></td><td><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen. <strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen. Nicht verwechseln: Färbt sich während eines gegnerischen Angriffs der ganze Bildschirm bläulich und erscheint oben links „Learning in Progress“, kannst du den Skill per <em>Watch &amp; Learn</em> abschauen (siehe Skills).</td></tr>
@@ -3427,7 +3450,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <tr><td><strong>Axiom Force</strong></td><td>Telekinetisches Ziehen/Stoßen (<span class="kbd">L3 halten / Tab</span>) — v.a. für Rätsel/Traversal, mit etwas Kampfnutzen. (Eigener Skill, NICHT dasselbe wie Force Palm.)</td></tr>
         <tr><td><strong>Grappling (Ringkampf)</strong></td><td>Gegner packen, werfen &amp; slammen. Die Grundstufe ist von Beginn an verfügbar (Kliff im Stamina-Baum, Damiane und Oongka mit eigenem Grappling-Zweig); weitere Stufen bis Lv 5 kosten je 1 Abyss Artifact und erhöhen den Schaden der Griffe. Moves wie Throw, Lariat und Giant Swing (Crowd-Control). Geworfene Gegner verletzen, was sie treffen.</td></tr>
         <tr><td><strong>Focus (Zeitlupe)</strong></td><td>Eigener Modus auf Tastendruck: verlangsamt die Zeit um dich herum und füllt dabei Spirit auf. Besonders nützlich beim Zielen mit Bogen oder Schusswaffe (Schwachpunkte/Stagger; <em>Focused Shot</em> markiert mehrere Ziele) und für <em>Focused Force Palm</em> (leuchtenden Kern treffen).</td></tr>
-        <tr><td><strong>Elemente</strong></td><td>4 Elemente auf Angriffe legen: <strong>Feuer</strong> (Schaden über Zeit), <strong>Frost</strong> (Einfrieren/Shatter), <strong>Blitz</strong> (Schock, stärker gegen Nasse), <strong>Wind</strong> (in die Luft werfen). Gegen Schwächen gezielt einsetzen.</td></tr>
+        <tr><td><strong>Elemente</strong></td><td>4 Elemente auf Angriffe legen (<em>Imbue Element</em>; freigeschaltet über je ein Abyss-Rätsel): <strong>Feuer</strong> (Brandschaden über Zeit), <strong>Frost</strong> (friert Gegner ein und verlangsamt sie), <strong>Blitz</strong> (betäubt kurz), <strong>Wind</strong> (Wirkung in keiner geprüften Quelle beschrieben). Die Wirkungen von Feuer, Eis und Blitz stehen auf der Fextralife-Seite „Status Effects“; Angaben wie „Shatter“, ein Bonus gegen nasse Gegner oder Wind als Luftstoß sind nicht belegt und wurden entfernt. Gegen Schwächen gezielt einsetzen.</td></tr>
       </tbody>
     </table>
 
@@ -3436,7 +3459,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <ul style="margin:0;padding-left:20px;line-height:1.9">
         <li><strong>Menschen parieren, Monster ausweichen</strong> — die zuverlässigste Grundregel.</li>
         <li><strong>Grabs (oft rotes Glint) nie parieren</strong>, immer wegrollen.</li>
-        <li><strong>Heilung über Essen</strong>, nicht über Tränke — gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü.</li>
+        <li><strong>Heilung über Essen</strong>, nicht über Tränke — gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü. Richtwert laut PowerPyx (Einzelquelle): Das günstigste Grilled Meat stellt 140 Gesundheit wieder her und lässt sich etwa alle 2 Sekunden essen; auf Hard wirkt Essen erst nach der Verzehranimation. Heilwerte einzelner Gerichte stehen im Crafting-Tab (questlog-Werte).</li>
         <li><strong>Palmar-Pille = Auto-Revive:</strong> Hast du beim Tod eine im Inventar, stehst du sofort mit etwas HP wieder auf (<em>Palmar Pill</em>: Teil der Gesundheit; <em>Refined Palmar Pill</em>: volle Gesundheit). Beide sind herstellbar und u. a. beim Händler Lacey erhältlich.</li>
         <li><strong>Spirit per Focus auffüllen</strong>, bevor du Force-Skills brauchst.</li>
         <li><strong>Schwierigkeitsgrad frei wählbar:</strong> Seit Patch 1.04.00 gibt es unter Settings &gt; Play die Grade Easy, Normal und Hard. Easy verlängert die Zeitfenster für Parry und Dodge und senkt den erlittenen Schaden; Hard verkürzt die Fenster, und Essen wirkt dort erst nach der Verzehranimation. Für Trophäen ist kein bestimmter Grad nötig.</li>
@@ -3463,7 +3486,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <tr><td>Heilen / Essen</td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">F3</span></td></tr>
       </tbody>
     </table>
-    <p style="font-size:.82rem;opacity:.7;margin-bottom:24px">Werkseinstellung — Tastatur/Maus lassen sich über „Shortcuts and Input Settings“ umbelegen (belegt spätestens seit Patch 1.00.03; seit 1.08.00 haben alle Eingaben eine Zweitbelegung, und die Menü-Shortcuts für Inventar, Karte, Skills, Journal, Foto-Modus und Menü sind frei belegbar). Patch 1.00.03 ergänzte außerdem die Standardbelegung Guard/Aim (Maus-Seitentaste 1) und Ausweichen (Maus-Seitentaste 2). Für Controller gibt es Remapping erst seit 1.09.00; die Axiom-Force-Tasten sind dort seit 1.10.00 anpassbar, die Tasten für Inventar, Karte, Skills, Journal und Foto-Modus seit 1.11.00. Eine separate „Parry"-Taste gibt es nicht: Parieren = Block im richtigen Moment. Einzelne Konsolen-Belegungen (Lock-On-Richtung, Menü-Tasten) können je nach Quelle leicht abweichen. Laut Fextralife-Steuerungsliste (PS5) gilt außerdem: <span class="kbd">✕</span> = Laufen, zweimal <span class="kbd">✕</span> = Sprint; <span class="kbd">○</span> = Rolle, zweimal <span class="kbd">○</span> = Ausweichen (Evasion); <span class="kbd">L3</span> = Axiom Force bzw. Ducken/Rutschen; <span class="kbd">D-Pad ↓</span> = Ziel fixieren (Hard Lock); Touchpad = Kamerawechsel.</p>
+    <p style="font-size:.82rem;opacity:.7;margin-bottom:24px">Werkseinstellung — Tastatur/Maus lassen sich über „Shortcuts and Input Settings“ umbelegen (belegt spätestens seit Patch 1.00.03; seit 1.08.00 haben alle Eingaben eine Zweitbelegung, und die Menü-Shortcuts für Inventar, Karte, Skills, Journal, Foto-Modus und Menü sind frei belegbar). Patch 1.00.03 ergänzte außerdem die Standardbelegung Guard/Aim (Maus-Seitentaste 1) und Ausweichen (Maus-Seitentaste 2). Für Controller gibt es Remapping erst seit 1.09.00; die Axiom-Force-Tasten sind dort seit 1.10.00 anpassbar, die Tasten für Inventar, Karte, Skills, Journal und Foto-Modus seit 1.11.00. Eine separate „Parry"-Taste gibt es nicht: Parieren = Block im richtigen Moment. Einzelne Konsolen-Belegungen (Lock-On-Richtung, Menü-Tasten) können je nach Quelle leicht abweichen. Belegstand der Spalten: Die Xbox-Spalte ist die übliche Entsprechung der PlayStation-Tasten (✕/A, ○/B, ▢/X, △/Y, L1/LB, R1/RB, L2/LT, R2/RT, R3/RS, L3/LS) und nicht Taste für Taste aus dem Spiel belegt. Einzeln bestätigt sind Parieren (L1 / LB / Ctrl) und Ausweichen (○ / B / Alt) bei 8BitToast sowie Essen (D-Pad rechts / F3) und Force Palm (R3 / am PC laut PowerPyx das Mausrad, die Tabelle führt MMB) bei PowerPyx. Nicht belegt sind Axiom Force (L3 / Tab; PowerPyx nennt L3 / Tab nur für Healing Palm nach R3) und die übrigen PC-Tasten (Shift, Leertaste, F, Q, H); sie stammen aus früherer Recherche — im Spiel unter „Shortcuts and Input Settings“ prüfen. Laut Fextralife-Steuerungsliste (PS5) gilt außerdem: <span class="kbd">✕</span> = Laufen, zweimal <span class="kbd">✕</span> = Sprint; <span class="kbd">○</span> = Rolle, zweimal <span class="kbd">○</span> = Ausweichen (Evasion); <span class="kbd">L3</span> = Axiom Force bzw. Ducken/Rutschen; <span class="kbd">D-Pad ↓</span> = Ziel fixieren (Hard Lock); Touchpad = Kamerawechsel.</p>
   </section>
   <section class="sec active" id="sec-bosses">
     <h2 class="sec-t"><span class="sec-sym">☠</span> Bosse</h2>
@@ -3551,7 +3574,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <section class="sec" id="sec-cores">
     <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss Cores</h2>
     <div class="fbar">
-      <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe</option><option value="Armor">Rüstung</option><option value="Both">Waffe, Handschuhe, Schuhe</option></select>
+      <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe (auch Waffe/Hand/Fuß)</option><option value="Armor">Rüstung (auch Waffe/Hand/Fuß)</option><option value="Both">Nur Waffe, Handschuhe, Schuhe</option></select>
     </div>
     <div style="font-size:var(--fs-11-5);color:var(--dim);margin:-4px 0 10px;line-height:1.55"><b>Slot-Typ:</b> „Waffe/Hand/Fuß“ passt laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe. „Waffe“ und „Rüstung“ sind Sammelangaben, einzelne Cores sind enger: Tempest of Destruction, Kinetic Burst, Colossal Might, Putrid Touch, The Showstopper und Karmic Pulse passen nur in Handschuhe, Infinite Arrows nur in Fernkampfwaffen; Aegis und Fortification passen auch in Schilde.</div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
@@ -3612,7 +3635,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <h2 class="sec-t"><span class="sec-sym">⚙</span> Crafting &amp; Farming</h2>
     <div style="margin-bottom:18px;border:1px solid var(--bdr);border-radius:12px;padding:14px 16px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px">🆕 Neu mit Patch 1.12.00 (19.06.2026): Möbel- &amp; Dekorations-Crafting</div>
-      <div style="font-size:12.5px;color:var(--text);line-height:1.7">Zwei neue Werkbänke zum Herstellen von Einrichtungs- und Dekorations-Items: <b>Workstation</b> (Greymane Camp, Timberham Sawmill) und <b>Loom</b> (Hernand Tailor's Shop). Erstmals lässt sich auch der <b>Außenbereich rund um das eigene Haus</b> dekorieren. Insgesamt <b>58 neue Hausgegenstände</b> (Facilities, Lights, Decorations/Pet Furniture). Bezug über Shops, Claw Machines, die Flower-Basket-Crafting-Mission, die <b>Box of Fortune</b> (Mysterious Shop, 100 Silver, max. 3 pro Restock) und die Orb-Roll-Challenge. <span style="color:var(--dim)">Werkbank-Funktion (Workstation = Holzmöbel, Loom = Stoffwaren) laut Community-Guides, nicht in den offiziellen Notes.</span> Vollständige Auflistung in den <span class="xref" onclick="showSec('patches')">Patch-Notes 1.12.00</span>. <span style="color:var(--gold);font-weight:600">Update 1.13.00:</span> Herstellungsrezepte für 4 neue Teppich-Arten hinzugefügt (Rezept im Shop kaufbar, genaue Zutaten noch nicht dokumentiert).</div>
+      <div style="font-size:12.5px;color:var(--text);line-height:1.7">Zwei neue Werkbänke zum Herstellen von Einrichtungs- und Dekorations-Items: <b>Workstation</b> (Greymane Camp, Timberham Sawmill) und <b>Loom</b> (Hernand Tailor's Shop). Erstmals lässt sich auch der <b>Außenbereich rund um das eigene Haus</b> dekorieren. Insgesamt <b>58 neue Hausgegenstände</b> (Facilities, Lights, Decorations/Pet Furniture). Bezug über Shops, Claw Machines, die Flower-Basket-Crafting-Mission, die <b>Box of Fortune</b> (Mysterious Shop, 100 Silver, max. 3 pro Restock) und die Orb-Roll-Challenge. <span style="color:var(--dim)">Werkbank-Funktion (Workstation = Holzmöbel, Loom = Stoffwaren) laut Community-Guides, nicht in den offiziellen Notes.</span> Vollständige Auflistung in den <span class="xref" role="link" tabindex="0" onclick="showSec('patches')">Patch-Notes 1.12.00</span>. <span style="color:var(--gold);font-weight:600">Update 1.13.00:</span> Herstellungsrezepte für 4 neue Teppich-Arten hinzugefügt (Rezept im Shop kaufbar, genaue Zutaten noch nicht dokumentiert).</div>
     </div>
     <div class="rl-tool">
       <h3 class="sub-t" style="margin-top:0">🔎 Wo bekomme ich …?</h3>
@@ -3836,7 +3859,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <div class="crow"><span class="cl" style="color:var(--gold)">Fix 1.17</span><span class="cv">Patch <b>1.17.00</b> (07.08.2026) behebt eine <b>fehlerhafte Darstellung der Handelsrouten auf der Karte</b>. <span style="color:var(--gdim)">Worin der Fehler bestand, sagen die offiziellen Notes nicht — wer sich bislang auf angezeigte Wagenwege verlassen hat, sollte sie nach dem Patch neu prüfen.</span></span></div>
         <div class="crow"><span class="cl">Bank</span><span class="cv">Goldbarren bringen Zinsen, seit 1.16 auf <b>±40 Barren</b> je Ausschüttung gedeckelt. Neu sind der <b>Tresorraum der Anleihebank</b> (Investition ab 10 eingezahlten Anleihen) und der <b>Anleihen-Laden</b> für seltene Gegenstände. <span style="color:var(--gdim)">Ob Anleihen für 10 Goldbarren gekauft oder gegen 10 eingetauscht werden, ist aus dem offiziellen Wortlaut nicht eindeutig — im Spiel prüfen.</span> Getrennt davon gibt es seit 2.01.00 (04.09.2026) die <b>Entsendungsmission „Goldbarren-Investitionsmission“</b>: Sie läuft über die Entsendung und liefert Goldbarren als Belohnung, nicht über die Bank.</span></div>
         <div class="crow"><span class="cl">Trophäe</span><span class="cv"><b>The Golden Merchant</b> hängt an den fünf Handels-Herausforderungen. Der Patch hat sie nicht angefasst, macht sie aber spürbar leichter — vor allem <em>Magnate of the Golden Desert</em> (300.000 Camp Funds durch Handel) profitiert von den vervierfachten Preisen.</span></div>
-        <div class="crow"><span class="cl">Bekannter Fehler</span><span class="cv">Der Timer beim <b>Bank-Investment</b> bleibt gelegentlich auf „REFRESHING" stehen. Das ist <b>nicht</b> neu und stammt nicht aus 1.16 — Meldungen dazu gibt es seit April 2026, und der Fehler besteht nach dem Patch fort. <span style="color:var(--gdim)">Stand 21.08.2026: Der Punkt steht weder in der offiziellen Known-Issues-Liste (Stand 17.08.2026, 10 Punkte) noch in den Notes zu 1.16.02, 1.16.03, 1.16.04, 1.17.00, 1.18.00, 1.18.01 oder 1.18.02 — weder als offener noch als behobener Punkt. Belegt ist der Fehler nur durch Community-Meldungen; eine namentlich genannte Quelle führt dieses Wiki nicht.</span></span></div>
+        <div class="crow"><span class="cl">Bekannter Fehler</span><span class="cv">Der Timer beim <b>Bank-Investment</b> bleibt gelegentlich auf „REFRESHING" stehen. Das ist <b>nicht</b> neu und stammt nicht aus 1.16 — Meldungen dazu gibt es seit April 2026, und der Fehler besteht nach dem Patch fort. <span style="color:var(--gdim)">Offiziell war dieselbe Anzeige schon in Patch 1.02.00 (Nachtrag vom 04.04.2026, 05:00 UTC) als behoben gemeldet („bank investment refresh time would remain stuck in the Refreshing state“); ob der Fehler danach wieder auftrat oder nur ein Teilfall behoben wurde, ist ungeklärt. Stand 21.08.2026: Der Punkt steht weder in der offiziellen Known-Issues-Liste (Stand 17.08.2026, 10 Punkte) noch in den Notes zu 1.16.02, 1.16.03, 1.16.04, 1.17.00, 1.18.00, 1.18.01 oder 1.18.02 — weder als offener noch als behobener Punkt. Belegt ist der Fehler nur durch Community-Meldungen; eine namentlich genannte Quelle führt dieses Wiki nicht.</span></span></div>
       </div>
     </div>
 
@@ -3855,7 +3878,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="sub-t" style="scroll-margin-top:72px">Kameraden — die harte Kopfzahl</div>
     <div class="card" style="margin-bottom:20px" data-s="kameraden greymanes 37 rekrutieren a rumor in pflicht skills craftsman jeweler engineer cook explorer painter weaver contribution worker seal of devotion tristan flame knight mecha worker grey-0 chaya research">
       <div class="crows">
-        <div class="crow"><span class="cl">Obergrenze</span><span class="cv"><b>37 benannte Greymanes</b> sind rekrutierbar. Späte Großmissionen binden 8–10 Personen gleichzeitig.</span></div>
+        <div class="crow"><span class="cl">Obergrenze</span><span class="cv"><b>37 benannte Greymanes</b> sind rekrutierbar <span class="tag" style="color:var(--dim);border-color:var(--line)">nur VULKK</span>. Fextralifes Artikel zum Greymane Camp nennt keine Gesamtzahl, und questlog führt keine Zählung der Kameraden. Späte Großmissionen binden 8–10 Personen gleichzeitig.</span></div>
         <div class="crow"><span class="cl">Rekrutieren</span><span class="cv">Über die <b>„A Rumor in/at …"-Quests</b> der Greymane-Reihen. Einige erscheinen im Journal als gewöhnliche Nebenquest und sind nicht als Greymane-Quest markiert.</span></div>
         <div class="crow"><span class="cl">Pflicht-Skills</span><span class="cv">Ohne sie startet die jeweilige Mission gar nicht: <b>Craftsman, Jeweler, Engineer, Cook, Explorer, Painter, Weaver</b>. Rein ertragssteigernd (optional) sind: Escort, Farmer, Rancher, Fisherman, Smith, Logger, Miner.</span></div>
         <div class="crow"><span class="cl">Skillstufen</span><span class="cv">Hängen am Camp-Fortschritt — jeder Ausbau schaltet bessere Skills frei. Entsenden allein gibt <b>keine</b> Erfahrung.</span></div>
@@ -3868,8 +3891,8 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="sub-t" style="scroll-margin-top:72px">Finale Stufe: Umzug nach Pailune</div>
     <div class="card" style="margin-bottom:20px" data-s="umzug pailune relocation reconstructing pailune council institute infirmary barracks trading post the return home serkis 1000 slots irreversibel feldfruechte feldfrüchte ernten speichern">
       <div class="crows">
-        <div class="crow"><span class="cl">Vorlauf</span><span class="cv">Nach Kapitel 7 „Homecoming" (Pailune von Ludvig befreit) öffnet <b>Reconstructing Pailune</b>. Fünf Bauprojekte: <b>Pailune Council, Institute of Pailune, Infirmary, Barracks, Trading Post</b>. Kosten der Einzelprojekte sind nirgends beziffert.</span></div>
-        <div class="crow"><span class="cl">Umzug</span><span class="cv">Quest <b>The Return Home</b>, gestartet bei <b>Serkis</b> in Hernand. Voraussetzung: Howling Hill voll ausgebaut, Pailune komplett wiederaufgebaut, Hauptstory inklusive Epilog durch.</span></div>
+        <div class="crow"><span class="cl">Vorlauf</span><span class="cv">Nach Kapitel 7 „Homecoming" (Pailune von Ludvig befreit) öffnet die Mission <b>Reconstructing Pailune</b> (in questlog Teil der Quest „Hope from Ashes“). Sechs Schritte: die Vorbereitung (<em>Prepare to rebuild Pailune</em>) und fünf Bauprojekte, <b>Pailune Council, Institute of Pailune, Infirmary, Barracks, Trading Post</b>; PowerPyx zählt sie als sechs Expeditionen, die bei Ross mit dem Ziel Pailune gestartet werden. Kosten laut PowerPyx (Einzelquelle, Stand 26.07.2026, also vor Patch 1.18.00; „Armor“ und „Money“ sind die Begriffe der Quelle, im Trophäen-Eintrag <em>Proud Returnee</em> als Camp-Mittel geführt; die Summe der Einzelposten stimmt mit der Gesamtangabe überein): Vorbereitung 1K Stone, 1K Wood, 1K Food, 10K Money · Pailune Council 1,3K Armor, 3,5K Stone, 3,5K Wood, 2,8K Food, 132K Money · Institute of Pailune 3K Stone, 3K Wood, 35K Food, 75K Money · Infirmary 1,2K Armor, 13K Stone, 18K Wood, 3,5K Food, 65K Money · Barracks 20K Armor, 1,5K Stone, 2K Wood, 2,5K Food, 65K Money · Trading Post 2,4K Armor, 1,5K Stone, 2,5K Wood, 2,5K Food, 170K Money; zusammen 24,9K Armor, 23,5K Stone, 30K Wood, 47,3K Food, 517K Money.</span></div>
+        <div class="crow"><span class="cl">Umzug</span><span class="cv">Mission <b>The Return Home</b> (in questlog Teil der Quest „Homeward“), gestartet bei <b>Serkis</b> in Hernand. Voraussetzung: Howling Hill voll ausgebaut, Pailune komplett wiederaufgebaut, Hauptstory inklusive Epilog durch.</span></div>
         <div class="crow"><span class="cl">Gewinn</span><span class="cv">Privatlager <b>640 → 1.000 Slots</b> (nur so erreichbar), <em>Spacious Pailunese House</em>, Farm 32 Saatgut, Ranch 35 Tiere, spezielle Kochwerkzeuge, Abyss-Nexus in Pailune, Trophäe <em>Proud Returnee</em>. Questbelohnung von <em>The Return Home</em> laut questlog: Sentinel of Tenacity Helm, Slave's Cloth Boots, Private Storage.</span></div>
         <div class="crow"><span class="cl">Preis</span><span class="cv">Optional, aber praktisch <b>irreversibel</b> (nur per Save-Rollback). In der Nähe fehlen Goldleaf Trading Center und Royal Trading Post; keine neuen Händler. Wer bleibt, deckelt sein Lager dauerhaft bei 640. <b style="color:var(--gold)">Seit Patch 1.16.00 entschärft:</b> Die Notes nennen ausdrücklich einen neuen <b>Händler am Pailuner Handelsposten</b>, und Pailune ist einer der 7 Standorte mit <b>Wagenwerkstatt</b> (Verpacken und Beladen vor Ort). Ein Königlicher Handelsposten in Pailune ist damit allerdings <em>nicht</em> belegt.</span></div>
         <div class="crow"><span class="cl">Vorher</span><span class="cv"><b>Manuell speichern.</b> Alle Feldfrüchte ernten (gehen sonst verloren — offizieller Ingame-Warnhinweis), Ranch-Tiere entfernen, <b>alle laufenden Dispatches abbrechen</b> (Kameraden müssen im Camp stehen), offene Händler-Requests abschließen. Es gibt Community-Berichte über einen Bug mit Schwarzbild und verschwundenem Camp.</span></div>
@@ -3918,7 +3941,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <tr class="trow" data-s="patch 1.12.00 workstation aussendekoration 58 hausgegenstaende hausgegenstände crash fix damiane oongka camp funds ressourcenmengen"><td><strong>1.12.00</strong> <span style="color:var(--dim)">19.06.2026</span></td><td>Workstation u.&nbsp;a. im Greymane Camp; Außendekoration ums Haus; Fix für falsch angezeigte Ressourcenmengen beim Spenden; Crash-Fix beim Camp-Ausbau mit Damiane/Oongka.</td></tr>
         <tr class="trow" data-s="patch 1.11.00 1.13.00 keine aenderungen änderungen camp ausbau pets 50 housing fix"><td><strong>1.11.00 / 1.13.00</strong></td><td>Keine Änderungen am Ausbausystem. 1.11 betrifft Pets (max. 50 gleichzeitig im Camp), 1.13 nur einen Housing-Bugfix.</td></tr>
         <tr class="trow" data-s="patch 1.18.00 forschung camp mittel camp funds silber umgestellt"><td><strong>1.18.00</strong> <span style="color:var(--dim)">15.08.2026</span></td><td>Forschung wird nicht mehr mit Silber, sondern mit <b>Camp-Mitteln</b> bezahlt. Kosten und Umrechnungskurs nennen die offiziellen Notes nicht.</td></tr>
-        <tr class="trow" data-s="patch 2.00.00 demeniss kettensaege kettensäge chainsaw camp spenden"><td><strong>2.00.00</strong> <span style="color:var(--dim)">25.08.2026</span></td><td>Die <b>Demeniss-Kettensäge</b> (Demenissian Chainsaw) kann im Camp gespendet werden. Eine Gegenleistung nennen die Notes nicht.</td></tr>
+        <tr class="trow" data-s="patch 2.00.00 demeniss kettensaege kettensäge chainsaw camp spenden"><td><strong>2.00.00</strong> <span style="color:var(--dim)">25.08.2026</span></td><td>Die <b>Demeniss-Kettensäge</b> (Demenissian Chainsaw) kann im Camp gespendet werden. Die englischen Notes sagen genauer: „can now be donated as camp weapons“, vermutlich also als Camp-Ressource Armaments (Lesart des Wikis, nicht ausdrücklich belegt); eine Gegenleistung nennen die Notes nicht. Die Spenden-Mission „Reliable Arms“ der Reihe „For a Better Tomorrow“ verlangt laut questlog „spare equipment“, ob die Kettensäge dafür zählt, nennen die Notes nicht. In 2.01.00 steht dazu nichts.</td></tr>
         <tr class="trow" data-s="patch 2.01.00 silber spenden zehnfach camp mittel goldbarren investitionsmission entsendung spendenmission"><td><strong>2.01.00</strong> <span style="color:var(--dim)">04.09.2026</span></td><td>Silberspenden bringen die <b>zehnfache Menge Camp-Mittel</b>. Neue Entsendungsmission <b>„Goldbarren-Investitionsmission“</b>. Der Wert zum Abschluss der Camp-Spendenmission war niedriger angesetzt als angegeben (behoben, Richtung der Korrektur unklar). Im Graumähnen-Camp wurde das Haus nicht geladen (behoben).</td></tr>
         <tr class="trow" data-s="patch 2.02.00 wohnfunktion banner howling hill camp inventar"><td><strong>2.02.00</strong> <span style="color:var(--dim)">11.09.2026</span></td><td>Die Wohnfunktion wurde nicht freigeschaltet, wenn das Banner im Howling-Hill-Camp bei vollem Inventar aufgestellt wurde (behoben).</td></tr>
         <tr class="trow" data-s="patch 2.03.00 kampf entsendung speichern laden abbruch"><td><strong>2.03.00</strong> <span style="color:var(--dim)">18.09.2026</span></td><td>Kampf-Entsendungen wurden abgebrochen, wenn nach dem Entsenden gespeichert und neu geladen wurde (behoben).</td></tr>
@@ -4024,7 +4047,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <button type="button" class="tab" id="clt-greymane" onclick="clTab('greymane')">🎖️ Greymane</button>
       <button type="button" class="tab" id="clt-sanctums" onclick="clTab('sanctums')">🏛️ Sanctums</button>
       <button type="button" class="tab" id="clt-waffen" onclick="clTab('waffen')">🗡️ Waffen</button>
-      <button type="button" class="tab" id="clt-missables" onclick="clTab('missables')">⚠️ Missables</button>
+      <button type="button" class="tab" id="clt-missables" onclick="clTab('missables')">⚠️ Verpassbares</button>
       <button type="button" class="tab" id="clt-sanctum-guide" onclick="clTab('sanctum-guide')">📋 Sanctum-Info</button>
       <button type="button" class="tab" id="clt-export" onclick="clTab('export')">💾 Export</button>
     </div>
@@ -4125,6 +4148,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="fbar">
       <select class="fs" id="accf-type" aria-label="Accessoires nach Typ filtern" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option></select>
     </div>
+    <div style="font-size:var(--fs-11-5);color:var(--dim);margin:-4px 0 10px;line-height:1.55"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert.</div>
     <div class="grid" id="acc-grid"></div>
   </section>
 
@@ -4144,7 +4168,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
   <section class="sec" id="sec-collectibles">
     <h2 class="sec-t"><span class="sec-sym">⬦</span> Collectibles &amp; Knowledge</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, 2.921 Einträge laut Fortschrittsanzeige im Knowledge-Menü — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214, Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30; die hier genannten Einzelwerte ergeben zusammen 2.905 (16 weniger als die Gesamtzahl) und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:var(--survey-red)">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, 2.921 Einträge laut Fortschrittsanzeige im Knowledge-Menü — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214 (andere Zählweise als die 201 Kartenpositionen der Memory-Fragment-Sektion), Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30; die hier genannten Einzelwerte ergeben zusammen 2.905 (16 weniger als die Gesamtzahl) und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:var(--survey-red)">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">141</span> Sealed Abyss Artifacts</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">13</span> Constellations</div>
@@ -4154,7 +4178,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30</span> Unique Pets</div>
     </div>
     <div class="fbar">
-      <select class="fs" id="cof-miss" aria-label="Sammelobjekte nach Verpassbarkeit filtern" onchange="renderCollectibles()"><option value="">Alle Sammelobjekte</option><option value="1">Nur Missable</option><option value="0">Nicht Missable</option></select>
+      <select class="fs" id="cof-miss" aria-label="Sammelobjekte nach Verpassbarkeit filtern" onchange="renderCollectibles()"><option value="">Alle Sammelobjekte</option><option value="1">Nur verpassbare</option><option value="0">Nicht verpassbare</option></select>
       <span id="cof-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="col-tb"></tbody></table></div>
@@ -4163,13 +4187,13 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <h2 class="sec-t"><span class="sec-sym">☘</span> Gatherables — Materialien &amp; Kräuter</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Über ganz Pywel sammelst du Erze, Kräuter, Pilze und Spezialmaterialien per Mining-Node, Foraging oder Logging Axe. Sie speisen Alchemie, Kochen, Schmieden, Färben und einige Stat-Upgrades. Mehrere Kräuter heben Stats über ihr Maximum, etwa Spirit oder Stamina.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">35</span> Materialien</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">64</span> Materialien</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">4</span> Awakening-Kräuter</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">~7 Tage</span> Erz-Respawn</div>
     </div>
     <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Siehe Alchemie-/Crafting-Sektion für Catalyst-Rezepte und die Stat-Upgrade-Sektion (Spirit, Stamina) für Turn-in-Materialien.</div>
     <div class="fbar">
-      <select class="fs" id="gatherables-cat" aria-label="Sammelressourcen nach Kategorie filtern" onchange="renderGatherables()"><option value="">Alle Kategorien</option><option value="Erz / Mineral">Erz / Mineral</option><option value="Edelstein">Edelstein</option><option value="Kraut">Kraut</option><option value="Kraut (giftig)">Kraut (giftig)</option><option value="Pilz">Pilz</option><option value="Spezialmaterial">Spezialmaterial</option><option value="Crafting-Material">Crafting-Material</option></select>
+      <select class="fs" id="gatherables-cat" aria-label="Sammelressourcen nach Kategorie filtern" onchange="renderGatherables()"><option value="">Alle Kategorien</option><option value="Erz / Mineral">Erz / Mineral</option><option value="Edelstein">Edelstein</option><option value="Kraut">Kraut</option><option value="Kraut (giftig)">Kraut (giftig)</option><option value="Pilz">Pilz</option><option value="Spezialmaterial">Spezialmaterial</option><option value="Crafting-Material">Crafting-Material</option><option value="Gemüse / Frucht">Gemüse / Frucht</option><option value="Fleisch">Fleisch</option></select>
       <span id="gatherables-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="gatherables-tb"></tbody></table></div>
@@ -4191,14 +4215,14 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
   <section class="sec" id="sec-dyes">
     <h2 class="sec-t"><span class="sec-sym">◑</span> Dyes — Färbesystem</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Färbemittel (Dyes) schalten pro Grundfarbe ein Spektrum von ca. 20 Farbtönen frei — seit Patch 1.13.00 nicht mehr nur für Rüstungen, sondern auch für die meisten Waffen, Sekundärwaffen und Verkleidungs-Outfits. Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Färbemittel (Dyes) gibt es pro Grundfarbe in fünf Stufen (Bright, Rich, Basis, Dark, Deep); zehn Farbfamilien ergeben 50 herstellbare Dyes, dazu kommen zehn Grautöne einschließlich Pure White und Black, die nicht herstellbar sind (insgesamt 60 laut questlog). Sie färben seit Patch 1.13.00 nicht mehr nur Rüstungen, sondern auch die meisten Waffen, Sekundärwaffen und Verkleidungs-Outfits. Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">55</span> belegte Dyes</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">60</span> belegte Dyes</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">1,50 Silver</span> Standardpreis Dyehouse</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">37,5 Silver</span> teuerster (Black)</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">5</span> echte Missables</div>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Alle 10 Dyehouses zu finden zählt für Challenge: Trade 2 – Rainbow Mane. Nach genügend <span class="xref" onclick="showSec('camp')">Greymane-Camp-Ausbau</span> verkauft ein Camp-Dyer (Oliver, über die Reihe <em>Solid Foundation</em>) alle bereits entdeckten Dyehouse-Farben.</div>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Alle 10 Dyehouses zu finden zählt für Challenge: Trade 2 – Rainbow Mane. Nach genügend <span class="xref" role="link" tabindex="0" onclick="showSec('camp')">Greymane-Camp-Ausbau</span> verkauft ein Camp-Dyer (Oliver, über die Reihe <em>Solid Foundation</em>) alle bereits entdeckten Dyehouse-Farben.</div>
     <div class="fbar">
       <select class="fs" id="dyes-cat" aria-label="Färbemittel nach Kategorie filtern" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Spezial (nicht herstellbar)</option></select>
       <span id="dyes-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
@@ -4209,8 +4233,8 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <h2 class="sec-t"><span class="sec-sym">⚗</span> Food &amp; Elixirs</h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Kochen am Lagerfeuer und Alchemie liefern in Crimson Desert situative Buffs: Feldgerichte geben Heilung plus feste Ice- oder Fire-Resistance, während Elixiere aus dem Cauldron oder dem Greymane-Labor Angriff, Verteidigung, Spirit und Wiederbelebung abdecken. Wichtig: Resistance-Level und Wirkdauer eines Rezepts sind über alle Qualitätsstufen FIX - nur der HP-Wert steigt mit höherer Kochstufe.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">21</span> Einträge</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">11</span> Feldgerichte</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">19</span> Einträge</div>
+      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">12</span> Feldgerichte</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">+30%/60s</span> Attack Speed Potion</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30% / 100%</span> Palmar-Revive</div>
     </div>
@@ -4292,10 +4316,10 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <section class="sec" id="sec-ruins">
     <h2 class="sec-t"><span class="sec-sym">♜</span> Uralte Ruinen — Abyss-Grenzsteine</h2>
     <div class="disarm-hero">
-      <p><strong>Abyss-Grenzsteine</strong> (Abyss Cressets in den „Uralten Ruinen") sind Schnellreise-Knoten, die du durch das Lösen eines <strong>Rätsels</strong> freischaltest. Jeder gelöste Grenzstein gibt <strong>1 Abyss-Artefakt</strong> (Skillpunkt) und einen Schnellreisepunkt. Zu unterscheiden vom <strong>Abyss-Nexus</strong> (einfach betreten, kein Rätsel), von den 60 versteckten <strong>Abyss-Cressets</strong> der Oberwelt und von den Sky-/Restoration-Puzzles im Abyss. Nicht jeder Energiepunkt hat ein Rätsel — hier stehen nur die <strong>mit</strong> Rätsel.</p>
+      <p><strong>Abyss-Grenzsteine</strong> (Abyss Cressets in den „Uralten Ruinen") sind Schnellreise-Knoten, die du durch das Lösen eines <strong>Rätsels</strong> freischaltest. Jeder gelöste Grenzstein gibt <strong>1 Abyss-Artefakt</strong> (Lernwährung für Fähigkeiten) und einen Schnellreisepunkt. Zu unterscheiden vom <strong>Abyss-Nexus</strong> (einfach betreten, kein Rätsel), von den 60 versteckten <strong>Abyss-Cressets</strong> der Oberwelt und von den Sky-/Restoration-Puzzles im Abyss. Nicht jeder Energiepunkt hat ein Rätsel — hier stehen nur die <strong>mit</strong> Rätsel.</p>
     </div>
     <div class="ruin-note">
-      <strong>Alle 37 Abyss-Grenzstein-Rätsel über 5 Regionen</strong> — Hernand 15 · Pailune 5 · Demeniss 7 · Delesyia 8 · Crimson Desert 2. Regionszuordnung nach PowerPyx (deckt sich mit dem In-Game-Regionszähler); einzelne grenznahe Orte ordnen andere Guides abweichend ein. Das Badge <span class="ruin-conf med">geprüft · exakte Sequenz quellenabhängig</span> markiert komplexe Schiebe-/Säulen-Puzzles, bei denen Guides die genaue Zugnummerierung unterschiedlich angeben — die Ziel-Stellung bleibt identisch.
+      <strong>Alle 37 Abyss-Grenzstein-Rätsel über 5 Regionen</strong> — Hernand 15 · Pailune 5 · Demeniss 7 · Delesyia 8 · Crimson Desert 2. Regionszuordnung nach PowerPyx (deckt sich mit dem In-Game-Regionszähler); einzelne grenznahe Orte ordnen andere Guides abweichend ein. „Mysteriöse Energie“ steht in den Rätselbeschreibungen für die Kartenmarkierung „Mysterious Energy“ (game8: Orte, die ein Abyss Nexus oder ein Abyss Cresset sein können); der deutsche Spieltext dazu ist nicht belegt. Das Badge <span class="ruin-conf med">geprüft · exakte Sequenz quellenabhängig</span> markiert komplexe Schiebe-/Säulen-Puzzles, bei denen Guides die genaue Zugnummerierung unterschiedlich angeben — die Ziel-Stellung bleibt identisch.
     </div>
     <div id="ruins-filter" class="ruin-filter"></div>
     <div id="ruins-root"></div>
@@ -4322,10 +4346,10 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 
   <section class="sec" id="sec-patches">
     <h2 class="sec-t"><span class="sec-sym">✎</span> Patch-Notes</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>01.10.2026</b>: Die offizielle Übersicht führt weiterhin <b>Patch 2.03.02</b> vom 23.09.2026 (04:45 UTC) als neuesten Patch; seit dem 24.09.2026 ist kein neuer Patch erschienen. Hier sind <b>47 Versionen</b> geführt. Zuletzt ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen. Den Mac App Store haben laut den offiziellen Notes alle drei noch nicht erreicht (Status dort „in Vorbereitung“); im Mac App Store ist laut Apple die Version 2.0.8 vom 16.09.2026 (Stand von 2.02.00) die neueste. Plattformangaben in den Einträgen geben den Stand zur Veröffentlichung oder zur jeweils genannten Prüfung wieder, denn Pearl Abyss ändert sie nachträglich ohne Hinweis. Alle älteren Versionen folgen unten. <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">Offizielle Patchnotes</a></div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>06.10.2026</b>: Die offizielle Übersicht führt weiterhin <b>Patch 2.03.02</b> vom 23.09.2026 (04:45 UTC) als neuesten Patch; seit dem 24.09.2026 ist kein neuer Patch erschienen. Hier sind <b>47 Versionen</b> geführt. Zuletzt ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen. Den Mac App Store haben laut den offiziellen Notes alle drei noch nicht erreicht (Status dort „in Vorbereitung“); im Mac App Store ist laut Apple die Version 2.0.8 vom 16.09.2026 (Stand von 2.02.00) die neueste. Plattformangaben in den Einträgen geben den Stand zur Veröffentlichung oder zur jeweils genannten Prüfung wieder, denn Pearl Abyss ändert sie nachträglich ohne Hinweis. Alle älteren Versionen folgen unten. <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">Offizielle Patchnotes</a></div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px">
       <h3 style="font-size:15px;color:var(--gold);margin:0 0 8px">Weiterhin bekannte Probleme</h3>
-      <p style="font-size:12px;color:var(--dim);line-height:1.6;margin:0 0 8px">Quellenstand: Aktualisierungsvermerk 21.09.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt 18.09.2026, 10:00 UTC); die Liste ist seither unverändert, zuletzt geprüft am 01.10.2026. Der Punkt zu den fehlenden Kartensymbolen neu entdeckter Objekte steht weiterhin darin, obwohl ihn Hotfix 2.03.02 vom 23.09.2026 bereits behebt. Pearl Abyss führt aktuell diese Probleme:</p>
+      <p style="font-size:12px;color:var(--dim);line-height:1.6;margin:0 0 8px">Quellenstand: Aktualisierungsvermerk 21.09.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt 18.09.2026, 10:00 UTC); die Liste ist seither unverändert, zuletzt geprüft am 06.10.2026 (deutsche und englische Fassung, jeweils 10 Punkte; der Kartensymbol-Punkt steht weiterhin darin). Der Punkt zu den fehlenden Kartensymbolen neu entdeckter Objekte steht weiterhin darin, obwohl ihn Hotfix 2.03.02 vom 23.09.2026 bereits behebt. Pearl Abyss führt aktuell diese Probleme:</p>
       <ul style="font-size:12.5px;line-height:1.75;padding-left:18px;margin:0">
         <li><b>Kartensymbole:</b> Symbole neu entdeckter Objekte erscheinen in einigen Regionen nicht auf der Karte. <span style="color:var(--gdim)">Laut 2.03.02 behoben.</span></li>
         <li><b>Interaktionen blockiert:</b> NPCs, Reittiere oder Objekte reagieren gelegentlich nicht. Offizieller Behelf: Spiel neu starten.</li>
@@ -4338,7 +4362,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
         <li><b>PlayStation:</b> Schnelle Namenseingabe für Tiere oder Pferde kann das Bild einfrieren. Namen langsam mit Pausen eingeben.</li>
         <li><b>FSR4:</b> In Regen kann der Niederschlag verschwinden oder das Bild unscharf beziehungsweise verzerrt wirken.</li>
       </ul>
-      <p style="font-size:var(--fs-11);color:var(--dim);line-height:1.6;margin:8px 0 0"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beide Fassungen tragen denselben Aktualisierungsstand vom 21.09.2026, 14:00 UTC und waren am 01.10.2026 unverändert. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
+      <p style="font-size:var(--fs-11);color:var(--dim);line-height:1.6;margin:8px 0 0"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beide Fassungen tragen denselben Aktualisierungsstand vom 21.09.2026, 14:00 UTC und waren am 01.10.2026 und am 06.10.2026 unverändert. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
     </div>
     <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:15px;font-weight:700;color:var(--red);margin-bottom:4px">⛵ Erste DLC-Erweiterung: „Charting the Unknown“ — 29.10.2026, 23:00 MEZ</div>
@@ -4443,7 +4467,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <section class="sec" id="sec-achievements">
     <h2 class="sec-t"><span class="sec-sym">★</span> Trophäen & Achievements</h2>
     <h3 class="sub-t" style="margin-top:0">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Außer Platin und den Story-/Lager-Trophäen hängt jede Trophäe an einer Herausforderungs-Kategorie im Journal (Challenges); Platin ist laut PowerPyx und ConsolePulse in einem Durchgang möglich, nach dem Epilog bleibt Free-Roam. Quellen: PowerPyx, Steam-Erfolgsliste, questlog.gg (Herausforderungs-Zahlen), ConsolePulse, Fextralife (Stand 10/2026).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Außer Platin und den Story-/Lager-Trophäen hängt jede Trophäe an einer Herausforderungs-Kategorie im Journal (Challenges); Platin ist laut PowerPyx („Minimum Playthroughs: 1“) und ConsolePulse in einem Durchgang möglich, nach dem Epilog bleibt Free-Roam; 8BitToast beschreibt denselben Ablauf (Story, danach Free-Roam für die restlichen Challenges). Uneinig sind die Quellen bei der Verpassbarkeit: PowerPyx führt fünf Trophäen als verpassbar (Shadowlord, Battlefield Conqueror, Brilliant Tactician, Grand Collector of Arms, Unvanquished Strategist), 8BitToast kennt keine dauerhaft verpassbaren Trophäen und nur zwei Wachturm-Challenges (Sinking Fort, Barraging Cannon V), die nach der Befreiung aller Feindlager entfallen könnten; Leserkommentare bei PowerPyx berichten dagegen, dass der Wachturm-Abbau auch in befreiten Lagern zählt. Die Markierungen im Wiki folgen PowerPyx (conf medium). Drei Challenge-Kategorien, die questlog in einer eigenen Gruppe führt, kommen in keiner der 35 Trophäenbeschreibungen vor (Schluss aus der Trophäenliste, keine Quellenaussage): Mysterious Animals (2: Hyacinth Macaw, Iron Eagle), Toys (5) und Pets (4, schalten Pet-Plätze frei), zusammen 11 Challenges. Quellen: PowerPyx, Steam-Erfolgsliste, questlog.gg (Herausforderungs-Zahlen), ConsolePulse, Fextralife (Stand 10/2026).</div>
     <div id="trophy-filter" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0"></div>
     <div id="trophy-list"></div>
     <div id="trophy-roadmap" style="margin-top:16px"></div>
@@ -4501,7 +4525,7 @@ const BOSS_RENAMES={"Avatar of Umbra":"Myurdin, the Avatar of Umbra","Thunder Ta
   }catch(e){console.warn('migrateBossRenames',e);}
 })();
 // Nebenquest-Umbenennungen: gespeicherten Fortschritt (cd_sq_done = Liste der q-Namen) alt→neu migrieren. Idempotent, läuft bei jedem Laden.
-const SQ_RENAMES={"Legendary Wolf — Silver Fang (Bossduell gegen den Schwarzen Wolf 'Black Fang')":"Legendary Wolf","White Bear (Legendär-Tier, Pailune)":"White Bear","Snowwhite Deer (Legendär-Tier, Pailune)":"Snowwhite Deer","The Sport Hunter — Icicle Edge Alpine Ibex (Boss Moren)":"The Sport Hunter","Master of the Wetlands — Rock Tusk Warthog (Boss Ravok)":"Master of the Wetlands"};
+const SQ_RENAMES={"Sigil-Mount-System — Freischaltung (Übersicht)":"Sigil of Solidarity (Mount-System-Übersicht)","Legendary Wolf — Silver Fang (Bossduell gegen den Schwarzen Wolf 'Black Fang')":"Legendary Wolf","White Bear (Legendär-Tier, Pailune)":"White Bear","Snowwhite Deer (Legendär-Tier, Pailune)":"Snowwhite Deer","The Sport Hunter — Icicle Edge Alpine Ibex (Boss Moren)":"The Sport Hunter","Master of the Wetlands — Rock Tusk Warthog (Boss Ravok)":"Master of the Wetlands"};
 (function migrateSQRenames(){
   try{
     const d=lsJson('cd_sq_done',null);
@@ -4518,10 +4542,16 @@ const WEAPON_RENAMES={"Rhonid Shield":"Rhonid Large Shield"};
     if(hit(d))lsSet('cd_wep',JSON.stringify([...new Set(d.map(ren))]));
     const f=lsJson('cd_favs',null);
     if(f&&typeof f==='object'&&hit(f.weapon)){f.weapon=[...new Set(f.weapon.map(ren))];lsSet('cd_favs',JSON.stringify(f));}
+    // Zuletzt angesehen: Waffen-Eintraege {kind:'weapon',name,sec} mitziehen, sonst oeffnet ein alter Eintrag eine Suche nach dem Altnamen
+    const rc=lsJson('cd_recent',null);
+    if(Array.isArray(rc)&&rc.some(x=>x&&x.kind==='weapon'&&WEAPON_RENAMES[x.name])){
+      const seen=new Set();
+      lsSet('cd_recent',JSON.stringify(rc.map(x=>x&&x.kind==='weapon'&&WEAPON_RENAMES[x.name]?{...x,name:WEAPON_RENAMES[x.name]}:x).filter(x=>{const k=(x&&x.kind)+'|'+(x&&x.name);if(seen.has(k))return false;seen.add(k);return true;})));
+    }
   }catch(e){console.warn('migrateWeaponRenames',e);}
 })();
 // Skill-Umbenennungen (Oongka, 04.10.2026): gespeicherte Skill-Favoriten (cd_favs.skill) alt→neu migrieren. Idempotent, läuft bei jedem Laden.
-const SKILL_RENAMES={"Rage (Super Armor State)":"Rage","Explosive Strike — Charge":"Explosive Strike","Slash (Oongka)":"Slash"};
+const SKILL_RENAMES={"Rage (Super Armor State)":"Rage","Explosive Strike — Charge":"Explosive Strike","Slash (Oongka)":"Slash","Falling Palm (Center-Skill)":"Falling Palm"};
 (function migrateSkillRenames(){
   try{
     const ren=n=>SKILL_RENAMES[n]||n, hit=a=>Array.isArray(a)&&a.some(n=>SKILL_RENAMES[n]);
@@ -4534,6 +4564,24 @@ const SKILL_RENAMES={"Rage (Super Armor State)":"Rage","Explosive Strike — Cha
       lsSet('cd_recent',JSON.stringify(rc.map(x=>x&&x.kind==='skill'&&SKILL_RENAMES[x.name]?{...x,name:SKILL_RENAMES[x.name]}:x).filter(x=>{const k=(x&&x.kind)+'|'+(x&&x.name);if(seen.has(k))return false;seen.add(k);return true;})));
     }
   }catch(e){console.warn('migrateSkillRenames',e);}
+})();
+// Cresset-Tracker (cd_cr_tracker, Werte je Region): Die Region-Obergrenzen wurden an die game8-Liste angepasst (11/9/13/7/20 statt 13/10/9/7/21, Summe weiter 60).
+// Werte ueber der neuen Obergrenze einer Region werden gekappt und auf Regionen mit freiem Platz verteilt, damit die Gesamtzahl erhalten bleibt
+// (Achievement 'pilgrim' haengt an der Summe 60; cd_ach_unlocked bleibt ohnehin unangetastet). Idempotent (danach liegt jeder Wert <= Cap), laeuft bei jedem Laden.
+(function migrateCressetCaps(){
+  try{
+    const d=lsJson('cd_cr_tracker',null);
+    if(!d||typeof d!=='object'||Array.isArray(d)||typeof CRESSET_REGIONS==='undefined')return;
+    const o={};let over=0,ch=false;
+    CRESSET_REGIONS.forEach(r=>{
+      let v=parseInt(d[r.key],10);if(!(v>=0))v=0;
+      if(v>r.cap){over+=v-r.cap;v=r.cap;ch=true;}
+      o[r.key]=v;
+    });
+    if(!ch)return;
+    CRESSET_REGIONS.forEach(r=>{const take=Math.min(over,r.cap-o[r.key]);if(take>0){o[r.key]+=take;over-=take;}});
+    lsSet('cd_cr_tracker',JSON.stringify(o));
+  }catch(e){console.warn('migrateCressetCaps',e);}
 })();
 // Globale Fehler-Auffangnetze: Seite soll nie kommentarlos kaputt wirken
 function _errToast(msg){
@@ -4703,6 +4751,41 @@ function _initTooltips(){
       float.setAttribute('aria-hidden','true');
     },80);
   });
+  // Tooltip am Element platzieren (Tastaturfokus und Touch kennen keine Mausposition)
+  const showAt=(el,hint)=>{
+    clearTimeout(hideT);
+    const title=el.dataset.tipTitle||'';
+    float.innerHTML=(title?`<div class="tt-title">${title}</div>`:'')+`<div class="tt-body">${el.dataset.tip||''}</div>`+(hint?`<div class="tt-body" style="opacity:.7;margin-top:6px">${hint}</div>`:'');
+    float.classList.add('show');
+    float.setAttribute('aria-hidden','false');
+    const r=el.getBoundingClientRect(),w=float.getBoundingClientRect();
+    float.style.left=Math.max(8,Math.min(r.left,window.innerWidth-w.width-12))+'px';
+    float.style.top=Math.max(8,Math.min(r.bottom+8,window.innerHeight-w.height-12))+'px';
+  };
+  const hideNow=()=>{clearTimeout(hideT);float.classList.remove('show');float.setAttribute('aria-hidden','true');};
+  // Tastatur: Querverweise (.xref, role="link" tabindex="0") zeigen den Tooltip bei Fokus; Enter/Leertaste folgt dem Verweis
+  document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('.xref[data-tip]');if(el&&e.target===el)showAt(el);});
+  document.addEventListener('focusout',e=>{if(e.target.closest&&e.target.closest('.xref'))hideT=setTimeout(hideNow,80);});
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ')return;
+    const el=e.target.closest&&e.target.closest('.xref');
+    if(el&&e.target===el){e.preventDefault();el.click();}
+  });
+  // Touch (kein Hover): Der erste Tap auf einen Querverweis zeigt den Tooltip lesbar am Element, erst der zweite Tap
+  // innerhalb von 6 s folgt dem Verweis. Capture-Phase, damit weder das eingebaute onclick noch ein klickbarer Elternknoten feuert.
+  let tapEl=null,tapT=null;
+  document.addEventListener('click',e=>{
+    // detail===0: Tastatur-Aktivierung (Enter/Leertaste) oder programmatischer click() folgt dem Verweis immer sofort
+    if(e.detail===0||!window.matchMedia('(hover: none)').matches)return;
+    const el=e.target.closest&&e.target.closest('.xref[data-tip]');
+    if(!el){if(tapEl){tapEl=null;clearTimeout(tapT);hideNow();}return;}
+    if(tapEl===el){tapEl=null;clearTimeout(tapT);hideNow();return;}
+    e.stopPropagation();e.preventDefault();
+    tapEl=el;
+    showAt(el,'Nochmal tippen zum Öffnen');
+    clearTimeout(tapT);
+    tapT=setTimeout(()=>{tapEl=null;hideNow();},6000);
+  },true);
 }
 
 // ===== CROSS-REFERENCE: Skills + Bosse + Lore-Begriffe linkbar =====
@@ -4726,9 +4809,6 @@ function _buildXrefMap(){
   if(typeof OONGKA_SKILLS!=='undefined')OONGKA_SKILLS.forEach(s=>{if(!_xrefMap.skills[s.name])_xrefMap.skills[s.name]=s;_var(s,'Oongka');});
   // Boss-Index
   BOSSES.forEach(b=>{_xrefMap.bosses[b.name]=b;});
-  // Optionaler Hook (Inhalt kommt aus den Daten): XREF_BOSS_ALIASES={"Alias":"BOSSES.name"} verlinkt auch Alias-Schreibweisen im Text.
-  // Der Klick sucht den echten Bossnamen (b.name), nicht den Alias.
-  if(typeof XREF_BOSS_ALIASES!=='undefined'&&XREF_BOSS_ALIASES)Object.entries(XREF_BOSS_ALIASES).forEach(([al,nm])=>{if(_xrefMap.bosses[nm]&&!_xrefMap.bosses[al])_xrefMap.bosses[al]=_xrefMap.bosses[nm];});
   // Lore-Begriffe
   Object.entries(LORE_TERMS).forEach(([k,v])=>{_xrefMap.lore[k]=v;});
   // Sortiert nach Länge desc — längere Namen zuerst matchen (verhindert "Force Palm" → "Force Palm Expertise" wird zerschnitten)
@@ -4753,7 +4833,7 @@ function _xrefSpan(name,tipBody,tipTitle,action,extraClass){
   const safeAttr=s=>String(s||'').replace(/"/g,'&quot;');
   const safeJS=s=>String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
   // stopPropagation: Treffer liegen auch in klickbaren Eltern (Roadmap-Task, Boss-Lore-Box) — deren onclick darf den Sprung nicht überschreiben.
-  return `<span class="xref${extraClass?' '+extraClass:''}" data-tip="${safeAttr(tipBody)}" data-tip-title="${safeAttr(tipTitle)}" onclick="event.stopPropagation();${action}">${name}</span>`;
+  return `<span class="xref${extraClass?' '+extraClass:''}" role="link" tabindex="0" data-tip="${safeAttr(tipBody)}" data-tip-title="${safeAttr(tipTitle)}" onclick="event.stopPropagation();${action}">${name}</span>`;
 }
 
 // Tooltip-Text eines Skills. Gleichnamige Skills (Kliff/Damiane/Oongka) werden benannt, damit nicht still Kliffs Werte für alle gelten.
@@ -4782,8 +4862,7 @@ function linkifyXrefs(text){
       return _xrefSpan(hit,tipBody,b.name,`showSec('bosses');document.getElementById('si').value='${safeJS(b.name)}';doSearch('${safeJS(b.name)}')`,'xref-boss');
     }
     const lr=m.lore[name];
-    const tabAction=lr.tab?`;if(typeof secretsTab==='function')secretsTab('${lr.tab}')`:'';
-    return _xrefSpan(hit,lr.tip||'',name,`showSec('${lr.sec}')${tabAction}`,'xref-lore');
+    return _xrefSpan(hit,lr.tip||'',name,`_xrefLoreJump('${safeJS(name)}')`,'xref-lore');
   };
   // Nur Text zwischen Tags verlinken: Tags (samt Attributen) und bestehende xref-Spans bleiben unangetastet.
   // So entstehen weder Spans in data-tip/onclick noch verschachtelte Spans.
@@ -4794,6 +4873,28 @@ function linkifyXrefs(text){
     else if(/^<span[^>]*class="[^"]*\bxref\b/i.test(seg))skip=1;
     return seg;
   }).join('');
+}
+
+// Sprung eines Lore-Begriffs: Sektion (und Tab) oeffnen, dann den Begriff als Suche setzen, damit der Eintrag markiert wird
+// (Boss- und Skill-Links machen das schon). Trifft der Begriff in der Zielsektion bzw. im Ziel-Tab nichts (anderer Wortlaut, z. B. "Run 108"),
+// wird die Suche wieder geleert, statt "Keine Treffer" zu zeigen oder auf einen fremden Tab umzuschalten.
+function _xrefLoreJump(name){
+  const lr=LORE_TERMS[name];
+  if(!lr)return;
+  showSec(lr.sec);
+  if(lr.tab&&typeof secretsTab==='function')secretsTab(lr.tab);
+  const si=document.getElementById('si');
+  if(!si)return;
+  si.value=name;
+  _doSearchImpl(name);
+  const c=document.getElementById('scnt');
+  // Kein Treffer in der Zielsektion, oder die Suche hat auf einen anderen Tab umgeschaltet als den des Begriffs: Suche wieder leeren, Tab des Begriffs zeigen
+  const pane=lr.tab?document.getElementById('secp-'+lr.tab):null;
+  const paneHit=!pane||[...pane.querySelectorAll('[data-s]')].some(e=>!e.classList.contains('hide')&&!e.closest('.hide'));
+  if((c&&/^0 Treffer/.test(c.textContent))||!paneHit){
+    si.value='';_doSearchImpl('');
+    if(lr.tab&&typeof secretsTab==='function')secretsTab(lr.tab);
+  }
 }
 
 // ===== BOSS-PHASE-PARSER =====
@@ -4888,7 +4989,7 @@ function refreshSectionStats(){
   _injectSectionStats('skills',[
     {lbl:'Kliff-Skills',val:skillsTotal},
     {lbl:'Watch & Learn',val:watchLearn},
-    {lbl:'Missable',val:WATCH_AND_LEARN.filter(w=>w.miss).length}
+    {lbl:'Verpassbar',val:WATCH_AND_LEARN.filter(w=>w.miss).length}
   ]);
   // Quests
   if(typeof MAIN_QUESTS!=='undefined'){
@@ -5138,7 +5239,7 @@ function renderRoadmap(){
   const cont=document.getElementById('rm-list');
   if(!cont)return;
   const bossDone=loadBossDone();
-  const gmDone=lsJson('cd_gm',[]);
+  const gmDone=loadGM();
   const teDone=lsJson('cd_te',[]);
   const chDone=lsJson('cd_ch_done',[]);
   // Kapitel nur aus nummerierten CHAPTERS-Einträgen zählen (robust, falls Prolog/Epilog dazukommen)
@@ -5184,7 +5285,7 @@ function renderRoadmap(){
     tasks.push({prio:'md',title:'Watch & Learn: Pump Kick',desc:'Im Matthias-Duell (Kapitel 2, Quest For Honor) per Watch & Learn abschauen. Verpasst? Laut ConsolePulse über Boss-Rematch nachholbar (seit Patch 1.05).',meta:['Kapitel 2','Skill Unarmed Combat'],action:"showSec('skills');skTab('watch')"});
   }
   if(lastCh===3){
-    tasks.push({prio:'md',title:'Watch & Learn: Focused Force Palm',desc:'Geist im Gebirgsdurchgang westlich Fort Perwin — wird bei Schnellreise/anderem Weg zum Scholastone Institute leicht übersprungen (nachholbar, nächste bekannte Gelegenheit Kapitel 9).',meta:['Kapitel 4','Spirit Tree'],action:"showSec('skills');skTab('watch')"});
+    tasks.push({prio:'md',title:'Watch & Learn: Focused Force Palm',desc:'Geist im Gebirgsdurchgang westlich Fort Perwin (Fextralife: Straßensperre im Black Forest hinter Fort Perwin) — wird bei Schnellreise/anderem Weg zum Scholastone Institute leicht übersprungen; laut ConsolePulse genügt die Rückkehr zum Durchgang, eine Gelegenheit in Kapitel 9 ist nicht gesichert.',meta:['Kapitel 4','Spirit Tree'],action:"showSec('skills');skTab('watch')"});
   }
   if(lastCh===7){
     tasks.push({prio:'md',title:'Oongka-Unlock permanent machen',desc:'Oongka ist nach Kapitel 7 zeitweise nicht spielbar — laut game8 wird er mit der Greymanes-Quest "Words Left by the Riverside" (Kapitel 8) dauerhaft verfügbar.',meta:['Kapitel 8','Companion'],action:"showSec('quests');qTab('mq')"});
@@ -5394,6 +5495,11 @@ function renderLoreTimeline(){
   const reveal=[
     {icon:'🩸',phase:'Wendepunkt',title:'Caliburn und Umbra',desc:'Archive Entry #72: Caliburn „appears to be an incarnation of Umbra“ — und war nicht immer ein böser Mann. Im Finale folgen Corrupted Caliburn → Myurdin, the Avatar of Umbra → Umbra (Final).',cls:'lt-special'},
     {icon:'🕯️',phase:'Wendepunkt',title:'Hexe Marie und White Crow',desc:'Archive Entry #2: Umbra verschlang ein Fragment des White Crow. Entry #18: Dieser abgespaltene Teil, nun Hexe Marie genannt, ist von Kliff besessen und will ihn zu ihrem Sohn machen.',cls:'lt-special'},
+    {icon:'🦁',phase:'Archiv-Einträge',title:'Kearush (#17)',desc:'Die Wächter wollten Kearush zu Kliffs Verbündetem machen, doch Menschen sperrten ihn in einen Zoo; in seiner Verzweiflung erschlug er alle in der Umgebung (Eintrag #17). Der Eintrag nennt nur den Namen; die Gleichsetzung mit dem Boss Kearush the Slayer (Kapitel 5) folgt dem Namen, passend zu dessen Wissenseintrag („captured by Demeniss“).',cls:'lt-special'},
+    {icon:'🔮',phase:'Archiv-Einträge',title:'Die vier Sanctum-Hexen und die Witches of the East (#19, #25)',desc:'Eintrag #19: Der Verfasser bat die vier Hexen, die die Sanctums errichtet haben, um Hilfe, das Gleichgewicht im Abyss wiederherzustellen; an ihren Prüfungen scheiterte Kliff immer wieder. Eintrag #25: Weil Kliff noch viel zu schwach ist, will der Verfasser die Witches of the East in diese Welt rufen. Die Sanctums selbst beschreibt questlog als Orte, die jemand in der Vergangenheit schuf, um die Welt und ihre Vorsehung wiederherzustellen; der Antumbra-Kult verehrt sie als heiligen Boden und führt für jedes der 16 Sanctums ein nummeriertes Edikt auf (I Expiation, II Absolution, III Temperance, IV Benediction, V Atonement, VI Deliverance, VII Penitence, VIII Solace, IX Exaltation, X Renunciation, XI Revelation, XII Devotion, XIII Mortification, XIV Veneration, XV Faith, XVI Oblation).',cls:'lt-special'},
+    {icon:'⚙️',phase:'Archiv-Einträge',title:'Marni und Prinz Pryce (#48, #53)',desc:'Eintrag #48: Irgendwann taucht ein Mann namens Marni an Kliffs Seite auf, führt übermäßig viel Technologie ein und macht den Weg nach Umbra komplizierter — der Verfasser fragt sich, wer Marni ist (Story-Rolle im Spiel: siehe NPCs). Eintrag #53: Der Plan, Prinz Pryce bei der Rückeroberung von Demeniss zu helfen, ist gescheitert. In den Spieldaten ist Pryce nur ein Platzhalter-NPC; seine Rolle ist nicht erfasst.',cls:'lt-special'},
+    {icon:'🛡️',phase:'Archiv-Einträge',title:'Marius, Naira, Duane und Shane (#78, #82, #83)',desc:'Eintrag #78: Marius auf das Schlachtfeld zu stellen war ein Fehler; Naira fand den Tod, als sie die Bewegungen der Black Bears beobachten sollte, und ihr Tod trieb Kliff in den Wahnsinn. Eintrag #82: Dass Duane sich von den Greymanes abwandte, war eine Fehlkalkulation — die für ihn geschaffene Bindung an Shane sollte sein hitziges Wesen zügeln; Shane ging ebenfalls in die Irre und wurde zum Funken, der die Greymanes zerschlug. Eintrag #83: Mit den zerstreuten Greymanes ließ sich nichts mehr tun, Goyen blieb im Nichts zurück. Im regulären Spielverlauf leben Marius und Naira; die Guides lesen die Einträge als Berichte früherer Anläufe.',cls:'lt-special'},
+    {icon:'🐉',phase:'Archiv-Einträge',title:'Blackstar (#89)',desc:'Eintrag #89: Der Verfasser bat Blackstar, den Drachen, der an den Grenzen der Welt umherstreift, um Hilfe; das Wesen tobte mit Kliff auf dem Rücken, offenbar höchst unzufrieden. Im Spiel wird Blackstar in Kapitel 11 (Quest „Whispers in the Wind“) zum Flug-Reittier.',cls:'lt-special'},
     {icon:'108',phase:'Run 108 — das Ende',title:'Der letzte Versuch',desc:'Deutung der Guides: Dein Playthrough ist Versuch Nr. 108 — Entry #107 nennt den nächsten Versuch „our final chance“. Laut consolepulse kein alternatives Ende: Die Archive Records (nach Story-Abschluss und 40 Abyss-Challenges) deuten das reguläre Ende neu.',cls:'lt-final'}
   ];
   const nodes=[...frame,...chapters,...reveal];
@@ -5454,7 +5560,7 @@ function renderSecrets(){
       </div>
 
       <div class="sec-block">
-        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔍</span>Die "107"-Markierungen (versteckt in der Welt, laut VULKK)</div>
+        <div class="sec-block-hd"><span class="sec-block-hd-ico">🔍</span>Die "107"-Markierungen (versteckt in der Welt, laut VULKK — Einzelquelle)</div>
         <div class="sec-block-body">
           <ol>
             <li><strong>Axiom Archive:</strong> Rückwand neben dem Teleporter, gegenüber Eingang</li>
@@ -5482,7 +5588,7 @@ function renderSecrets(){
       <div class="sec-hero">
         <div class="sec-hero-title">Memory Fragments &amp; Visione</div>
         <div class="sec-hero-body">
-          <span class="sec-hero-num">201</span>Memory Fragments verzeichnet die interaktive Karte von crimsondesert.th.gl (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht (consolepulse nennt für die Knowledge-Kategorie Memory Fragments 327, Einzelquelle). Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
+          <span class="sec-hero-num">201</span>Memory Fragments verzeichnet die interaktive Karte von crimsondesert.th.gl (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht (consolepulse nennt für die Knowledge-Kategorie Memory Fragments 327, Einzelquelle; die Fortschrittsanzeige im Knowledge-Menü führt in dieser Kategorie 214 Einträge, siehe Knowledge-Sektion). Die drei Zahlen 201, 214 und 327 stammen aus unterschiedlichen Zählweisen und Zeitpunkten und werden hier nicht gegeneinander entschieden. Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
         </div>
       </div>
 
@@ -5529,12 +5635,7 @@ function renderSecrets(){
             <li><strong>Lioncrest Watchtower</strong> (Hernand, Kapitel 2): Mission „Memory Fragment“ der Quest Unexpected Gift — hier erhältst du die Visione</li>
             <li><strong>Palast in der Demeniss-Hauptstadt</strong> (Kapitel 8, Quest „The Blood Coronation“): Memory Fragment im 2. Stock — Pflichtschritt der Hauptstory</li>
           </ul>
-          <p style="margin-top:8px"><strong>Memory Fragments als Questschritt</strong> (Kap. 2 „Hernand in Chaos“, Aushang-Quests):</p>
-          <ul>
-            <li>Trial After Trial — Erinnerung zu den gestohlenen Rindern</li>
-            <li>The Man Trapped in the Mire — Erinnerung zur „Hornless Goat“</li>
-            <li>Secrets Hidden in the Dark — Erinnerung „Lair of the Animal Thieves“</li>
-          </ul>
+          <p style="margin-top:8px"><strong>Memory Fragments als Questschritt</strong> (Kap. 2): Laut questlog werden die Erinnerungen „Hornless Goats“ (die Banditen, die die Ziegenhörner stahlen) und „Lair of Animal Thieves“ (der Drahtzieher der Vorfälle in Hernand) in der Mission „Shakatu's Reward“ der Kailok-Quest „The End of Greed“ vergeben. Frühere Guide-Angaben ordnen Fragmente den Aushang-Quests aus „Hernand in Chaos“ zu („Trial After Trial“: gestohlene Rinder; „The Man Trapped in the Mire“: „Hornless Goat“; „Secrets Hidden in the Dark“: „Lair of the Animal Thieves“). Die letzten beiden Missionsnamen sind in questlog nicht auffindbar; dort enthält „Hernand in Chaos“ u. a. „Down in the Muck“ und „Shadowed Secrets“, und „Trial After Trial“ hat keine Fragment-Belohnung. Die Zuordnung ist nicht abschließend geklärt.</p>
         </div>
       </div>
 
@@ -5562,7 +5663,7 @@ function renderSecrets(){
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🎁</span>Belohnung pro Cresset</div>
         <div class="sec-block-body">
           <ul>
-            <li><strong>1 Abyss Artifact</strong> (= 1 Skill Point) pro entdecktem Cresset</li>
+            <li><strong>1 Abyss Artifact</strong> pro entdecktem Cresset — die Lernwährung für Fähigkeiten (seit 2.00.00 erhalten die anderen Charaktere beim Einsatz gleich viele Abyss-Verknüpfungen)</li>
             <li><strong>Fast-Travel-Point</strong> an jeder Location — essentiell für Late-Game-Mobility</li>
             <li>Achievement / Trophy <strong>"Pilgrim of Wonders"</strong> bei allen 60 (Trophäe: alle Secret-Places-Herausforderungen — jede wird durch das Finden eines Abyss Cresset abgeschlossen)</li>
           </ul>
@@ -5744,7 +5845,7 @@ function renderSecrets(){
             <li><strong>Visione</strong> (Kap. 2 Hernand) — Pflicht für Memory Fragments</li>
             <li><strong>Dark Fog Lantern</strong> (Alfonso-Quest, Hernand) — Mehrzweck-Secret-Scanner</li>
             <li>${linkifyXrefs('Force Palm')} + ${linkifyXrefs('Aerial Force Palm')} — für Abyss Cressets</li>
-            <li><strong>Gliding (Cape)</strong> — Horizontal-Reach Cressets</li>
+            <li><strong>Flight</strong> (Kap. 1, Quest „Woman in White“: White Crow verleiht die Flugfähigkeit) — Horizontal-Reach Cressets</li>
             <li><strong>Axiom Force</strong> — Axiom Archive 3. Stock = Hidden Ending Books</li>
             <li>Alle Main Quests + 40 Abyss Challenges → <strong>Hidden Ending</strong></li>
           </ol>
@@ -5835,7 +5936,8 @@ function _favItemCard(kind,name){
     const m=_buildXrefMap();
     const sk=m.skills[name];
     if(!sk)return '';
-    ico=SKILL_IMGS[name]?`<img class="fav-item-ico" src="${SKILL_IMGS[name]}" alt="${name.replace(/"/g,'&quot;')}" loading="lazy">`:`<div class="fav-item-ico" style="display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(201,162,39,.4)">✦</div>`;
+    const _skImg=skillImg(name,((m.skillVariants[name]||[])[0]||{}).ch);
+    ico=_skImg?`<img class="fav-item-ico" src="${_skImg}" alt="${name.replace(/"/g,'&quot;')}" loading="lazy">`:`<div class="fav-item-ico" style="display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(201,162,39,.4)">✦</div>`;
     meta=sk.effect||sk.prereq||'';
     action=`showSec('skills');document.getElementById('si').value='${safe}';doSearch('${safe}')`;
   } else if(kind==='weapon'){
@@ -6031,16 +6133,6 @@ function applyBossFilter(kind,val){
     // Typ-Chip der Bosskarte: Wert stammt aus bossType(b), also derselben Logik wie der bf-type-Filter
     const t=document.getElementById('bf-type');
     if(t){t.value=val;}
-  } else if(kind==='quest'){
-    // Map quest-type to bf-type
-    const t=document.getElementById('bf-type');
-    if(t){
-      if(/Story/.test(val))t.value='Story';
-      else if(/Side/.test(val))t.value='Side';
-      else if(/Faction/.test(val))t.value='Faction';
-      else if(/Sanctum/.test(val))t.value='Sanctum';
-      else t.value='';
-    }
   } else if(kind==='chapter'){
     // No direct chapter-filter — use search instead
     const si=document.getElementById('si');
@@ -6376,7 +6468,7 @@ function renderSkillGraph(which){
     </svg>
     <div class="skill-graph-legend">
       <span><i></i> Skill verfügbar</span>
-      <span><i class="miss"></i> Missable / NICHT erlernbar</span>
+      <span><i class="miss"></i> Verpassbar / NICHT erlernbar</span>
       <span>· Klick = Suche · Hover = Details</span>
     </div>
   `;
@@ -6626,7 +6718,8 @@ function showSec(id, opts){
   // Sektion; die aktive Blatt-Markierung uebernimmt markConsoleActive() im Hook,
   // nachdem renderConsole das Ressort des Ziels gerendert hat.
   const nav=document.querySelector('#conList .leaf[data-sec="'+id+'"]');
-  if(!sec){ if(id!=='bosses') return showSec('bosses',opts); return; }
+  // Ungueltige Sektion: Fallback Bosse, und der kaputte Hash (#sec=nichtvorhanden) wird dabei ersetzt statt stehenzubleiben
+  if(!sec){ if(id!=='bosses') return showSec('bosses',Object.assign({},opts,{skipUrl:false,replaceUrl:true})); return; }
   ensureSecRendered(id);
   // Re-render favorites when entering that section (favs may have changed since init)
   if(id==='favorites'&&typeof renderFavorites==='function')renderFavorites();
@@ -6646,6 +6739,7 @@ function showSec(id, opts){
   // der showSec-Hook (renderConsole + markConsoleActive) die Blatt-Markierung.
   if(nav){nav.classList.add('active');nav.setAttribute('aria-current','page');}
   if(!opts.keepSearch){
+    document.querySelectorAll('.sk-hit-chips').forEach(e=>e.remove());
     if(typeof _closeSearchOpened==='function')_closeSearchOpened();
     if(typeof _resetHitOrder==='function')_resetHitOrder();
     document.getElementById('si').value='';
@@ -6657,7 +6751,7 @@ function showSec(id, opts){
   }
   if(id==='weapons'&&typeof renderWeapons==='function')renderWeapons();
   lsSet('cd_sec',id);
-  if(!opts.skipUrl)_writeUrlState(true);
+  if(!opts.skipUrl)_writeUrlState(!opts.replaceUrl);
   // Schliesse Sidebar auf Mobile nach Klick
   if(typeof closeSheet==='function')closeSheet();
   window.scrollTo({top:0});
@@ -6696,9 +6790,19 @@ function _writeUrlState(pushEntry){
     else history.replaceState(null,'',newHash);
   }
 }
+// Optionaler Hash-Parameter tab=<id> (z. B. #sec=quests&tab=fac): klickt den Tab-Knopf der Sektion (qt-/skt-/clt-/sect-<id>).
+// Unbekannte Werte werden ignoriert; ohne tab bleibt der Standard-Tab. Die Tabs rendern ihre Panes selbst, daher kein eigener Zustand.
+const _TAB_PREFIX={quests:'qt-',skills:'skt-',checklists:'clt-',secrets:'sect-'};
+function _applyTabParam(sec,tab){
+  const pre=_TAB_PREFIX[sec];
+  if(!pre||!/^[a-z0-9-]+$/.test(tab||''))return;
+  const btn=document.getElementById(pre+tab);
+  if(btn&&btn.tagName==='BUTTON')btn.click();
+}
 function _applyUrlState(){
   const s=_readUrlState();
   if(s.sec)showSec(s.sec,{skipUrl:true,keepSearch:!!s.q});
+  if(s.sec&&s.tab)_applyTabParam(s.sec,s.tab);
   if(s.q){
     const si=document.getElementById('si');
     si.value=s.q;
@@ -6750,6 +6854,7 @@ function renderPets(filter){
   filterRow.innerHTML=filters.map(f=>`<button class="pet-filter-btn${_petFilter===f.k?' active':''}" onclick="renderPets('${f.k}')">${f.l}</button>`).join('');
   const list=_petFilter==='all'?PETS:PETS.filter(p=>p.type===_petFilter);
   grid.innerHTML=list.map(p=>{const variant=petVariant(p);return `<div class="pet-card">${_petCardImg(p)}<div class="pet-card-name">${p.name}</div>${variant?`<div class="pet-card-variant">${variant}</div>`:''}<div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food||'—'}</div></div>`;}).join('');
+  _reapplyActiveSearch(document.getElementById('sec-pets'));
 }
 
 // ===== LEGENDÄRE BEGLEITER — FREISCHALT-GUIDE (Iron Eagle, seit 2026-07-01) =====
@@ -7031,6 +7136,8 @@ function _openCardForSearch(el,needles){
   if(el._srchHead===undefined){
     let h='';
     el.childNodes.forEach(n=>{if(!(n.nodeType===1&&n.matches('.craft-more, .npc-more')))h+=' '+n.textContent;});
+    // data-grp: Gruppenbezeichner/Schlagwoerter, die nur in data-s stehen (NPC-Gruppe "Händler" usw.): Treffer darauf ist kein Grund, die Karte aufzuklappen
+    h+=' '+(el.dataset.grp||'');
     el._srchHead=_fold(h);
   }
   if(needles.every(x=>el._srchHead.includes(x)))return false;
@@ -7144,13 +7251,28 @@ function _specHit(sf,n){for(let i=0;i<n.length;i++)if(!sf.includes(n[i]))return 
 // ausgeblendet, sobald keines ihrer durchsuchbaren Kinder mehr sichtbar ist.
 function _collapseEmptyGroups(scope,aktiv){
   const GRP='.fac-fac, .fac-reg, .sq-lane, .ruin-region';
-  (scope||document).querySelectorAll(GRP).forEach(g=>{
+  const root=scope||document;
+  root.querySelectorAll(GRP).forEach(g=>{
     if(!aktiv){g.classList.remove('hide');return;}
     const kinder=g.querySelectorAll('[data-s]');
     if(!kinder.length)return;
     let sichtbar=false;
     for(let i=0;i<kinder.length;i++){if(!kinder[i].classList.contains('hide')){sichtbar=true;break;}}
     g.classList.toggle('hide',!sichtbar);
+  });
+  // Gruppen ohne Huelle: Ueberschrift(en) und Koerper sind Geschwister (Skill-Trees: h3.sub-t + .sk-grid;
+  // Bestiarium/NPCs: h3.sub-t + p.best-sub + .grid; Checklisten: .cl-group-hd/.ms-cat-hd + .cl-group-bar + .cl-group-body/.comm-grid).
+  // Koerper und die direkt davor stehenden Kopfelemente werden gemeinsam ausgeblendet, sobald kein Kind mehr sichtbar ist.
+  const KOPF='h3.sub-t, p.best-sub, .cl-group-hd, .ms-cat-hd, .cl-group-bar';
+  root.querySelectorAll('.sk-grid, #npcs-root > .grid, #bestiary-root > .grid, .cl-group-body, .comm-grid').forEach(b=>{
+    const kinder=b.querySelectorAll('[data-s]');
+    let sichtbar=true;
+    if(aktiv&&kinder.length){
+      sichtbar=false;
+      for(let i=0;i<kinder.length;i++){if(!kinder[i].classList.contains('hide')){sichtbar=true;break;}}
+    }
+    b.classList.toggle('hide',!sichtbar);
+    for(let p=b.previousElementSibling;p&&p.matches(KOPF);p=p.previousElementSibling)p.classList.toggle('hide',!sichtbar);
   });
 }
 
@@ -7172,6 +7294,31 @@ function reapplySearch(root,cntEl,gesamt){
     if(m)n++;
   });
   if(cntEl)cntEl.textContent=n+' von '+gesamt+' (Suche aktiv)';
+}
+// Fuer Listen, die sich nach einem Klick selbst neu aufbauen (Pets-Filter, Checklisten-Haken, Kapitel "abgeschlossen"):
+// Die frischen Knoten tragen weder data-s noch hide noch Highlight, eine laufende Suche waere dort sonst weg.
+// Gleiche Trefferlogik wie _doSearchImpl (Phrase, dann ae/oe/ue, dann Einzelwoerter), aber ohne Zaehler, Scroll und Empty-State.
+function _reapplyActiveSearch(root){
+  if(!root)return;
+  const si=document.getElementById('si');
+  const q=((si&&si.value)||'').trim();
+  if(!q)return;
+  autoSearchTags(root);
+  const qF=_fold(q)||q.toLowerCase();
+  const specs=_searchSpecs(qF,true);
+  let sp=specs[0],hits=[];
+  for(let k=0;k<specs.length;k++){
+    sp=specs[k];hits=[];
+    root.querySelectorAll('[data-s]').forEach(el=>{
+      const m=_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n)&&el.dataset.filtered!=='1';
+      el.classList.toggle('hide',!m);
+      if(m)hits.push(el);
+    });
+    if(hits.length)break;
+  }
+  hits.forEach(el=>_openForSearch(el));
+  hits.slice(0,80).forEach(el=>highlightInElement(el,q,sp.n));
+  _collapseEmptyGroups(root.closest&&root.closest('.sec')||root,true);
 }
 function _doSearchImpl(q){
   q=q.trim();
@@ -7210,6 +7357,7 @@ function _doSearchImpl(q){
   }
   if(!q){
     cnt.textContent='';
+    document.querySelectorAll('.sk-hit-chips').forEach(e=>e.remove());
     document.querySelectorAll('.hide').forEach(el=>{if(el.dataset.filtered!=='1')el.classList.remove('hide');});
     _collapseEmptyGroups(document,false);
     document.querySelectorAll('.empty-state-injected').forEach(el=>el.remove());
@@ -7264,6 +7412,7 @@ function _doSearchImpl(q){
     if(p&&p.id.indexOf('skp-')===0)skTab(p.id.slice(4));
   }
   _skillsRevealPane(activeSec,q);
+  _skillsHitChips(activeSec);
   const paneNote=_focusPaneForSearch(activeSec,total);
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'')+(total?sp.note:'')+paneNote;
   {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
@@ -7287,6 +7436,24 @@ function _doSearchImpl(q){
     activeSec.appendChild(es);
   }
 }
+// Skills-Sektion: Hat ein Suchbegriff Treffer in mehreren Panes (gleichnamige Skills bei Kliff/Damiane/Oongka, Watch & Learn, Freischaltungen),
+// zeigt eine Chip-Zeile unter den Tabs die Trefferzahl je Pane ("Damiane (3)"); ein Klick wechselt den Tab, ohne die Suche zu loeschen.
+function _skillsHitChips(sec){
+  document.querySelectorAll('.sk-hit-chips').forEach(e=>e.remove());
+  if(!sec||sec.id!=='sec-skills')return;
+  const L={kliff:'Kliff',damiane:'Damiane',oongka:'Oongka',watch:'Watch & Learn',unlock:'Freischaltungen'};
+  const cnt=Object.keys(L).map(k=>{
+    const p=document.getElementById('skp-'+k);
+    return [k,p?[...p.querySelectorAll('[data-s]')].filter(e=>!e.classList.contains('hide')&&!e.closest('.hide')).length:0];
+  }).filter(x=>x[1]>0);
+  if(cnt.length<2)return;
+  const act=sec.querySelector('.pane.active');
+  const el=document.createElement('div');
+  el.className='sk-hit-chips';
+  el.innerHTML='<span>Treffer in:</span>'+cnt.map(([k,n])=>`<button type="button" class="pet-filter-btn${act&&act.id==='skp-'+k?' active':''}" onclick="skTab('${k}');_skillsHitChips(document.getElementById('sec-skills'))">${L[k]} (${n})</button>`).join('');
+  const tabs=sec.querySelector(':scope > .tabs');
+  if(tabs)tabs.insertAdjacentElement('afterend',el);
+}
 // Zaehlt Treffer in allen nicht-aktiven Sektionen (Top 8, absteigend)
 function _searchOtherSections(qLow,activeSec){
   // Lazy-Rendering: [data-s]-Attribute existieren erst nach dem Rendern einer Sektion
@@ -7301,7 +7468,10 @@ function _searchOtherSections(qLow,activeSec){
     if(k>0&&/^sec-(weapons|armor)$/.test(sec.id))return;
     autoSearchTags(sec);
     let count=0;
-    sec.querySelectorAll('[data-s]').forEach(el=>{if(_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n))count++;});
+    // Sektionsfilter-Ausschluss (data-filtered="1") zaehlt nicht mit, sonst springt der Chip auf eine Sektion mit weniger Treffern.
+    // Ausnahme Waffen: dort markiert data-filtered die Seitenaufteilung (40 pro Seite), beim Sprung rendert renderWeapons() alle Treffer.
+    const _paged=sec.id==='sec-weapons';
+    sec.querySelectorAll('[data-s]').forEach(el=>{if((_paged||el.dataset.filtered!=='1')&&_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n))count++;});
     if(!count)return;
     const key=sec.id.replace(/^sec-/,'');
     // Registratur: Konsole zeigt nur 5-9 Blaetter -> nav-Item existiert evtl. nicht im DOM.
@@ -7321,6 +7491,30 @@ function _searchJump(secId){
   if(si)_doSearchImpl(si.value);
 }
 const doSearch=_debounce(_doSearchImpl,120);
+// Trefferzaehler-Pille (mobil): #scnt steckt im Register-Sheet und ist bei geschlossenem Sheet unsichtbar. Die Pille spiegelt den Text
+// ausserhalb des Sheets und loescht die Suche per Knopf. Nur sichtbar, wenn Text da ist und das Sheet zu ist (Anzeige per CSS nur <=860px).
+function _syncCountPill(){
+  const pill=document.getElementById('scnt-pill'),c=document.getElementById('scnt'),sb=document.getElementById('sidebar');
+  if(!pill||!c||!sb)return;
+  const txt=(c.textContent||'').trim();
+  pill.classList.toggle('show',!!txt&&!sb.classList.contains('open'));
+  const t=document.getElementById('scnt-pill-t');
+  if(t)t.textContent=txt;
+}
+function _clearSearchPill(){
+  const si=document.getElementById('si');
+  if(si)si.value='';
+  _doSearchImpl('');
+}
+(function _initCountPill(){
+  const run=()=>{
+    const c=document.getElementById('scnt'),sb=document.getElementById('sidebar');
+    if(!c||!sb||typeof MutationObserver==='undefined')return;
+    new MutationObserver(_syncCountPill).observe(c,{childList:true,characterData:true,subtree:true});
+    new MutationObserver(_syncCountPill).observe(sb,{attributes:true,attributeFilter:['class']});
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
 
 // ===== BOSSES =====
 function loadBossDone(){return lsJson('cd_bosses',[]);}
@@ -7452,7 +7646,7 @@ function bossType(b){
   if(/Sanctum/i.test(r)) return "Sanctum";
   if(b.chapter!=null||/^Story\b/.test(q)) return "Story";
   if(/World-Boss|World\/|wandernd|keine Quest/i.test(q)) return "World";
-  if(/Faction|Fraktion|House[- ]|Militia|Tribe|Clan|Lords of Unclaimed|Dusksong|Trade-?Group|Silvermoon|Faceless|Society of Progress|Parish|Guild|Wells |Longleaf|Stjar|Order|Wyvernflame|Bounty|Savage Fang|Wetlands|Witches|Hexen/i.test(q)) return "Faction";
+  if(/Faction|Fraktion|House[- ]|Militia|Tribe|Clan|Lords of Unclaimed|Dusksong|Trade-?Group|Silvermoon|Faceless|Society of Progress|Parish|Guild|Wells |Longleaf|Stjar|Order|Wyvernflame|Bounty|Savage Fang|Wetlands|Witches|Hexen|Name Written in Blood|Wings across the Sky|Emperor of the Bonepit|Marauder of the Desert/i.test(q)) return "Faction";
   if(/Side/i.test(q)) return "Side";
   return "Optional";
 }
@@ -7722,6 +7916,9 @@ function renderWeapons(){
     let show=false;
     if(passFilter){ if(searching){show=_fold(s).includes(qF);} else {fi++;show=(fi>=start&&fi<end);} }
     if(show)shown++;
+    // Nicht angezeigte Waffen (andere Seite, Typfilter, kein Suchtreffer) nur als leere Platzhalter: data-s bleibt fuer die
+    // Sektions-Chips erhalten, der Aufbau von 500 Karten je Eingabe entfaellt (Pi: ca. 500 ms je Tastendruck).
+    if(!show)return `<div class="card hide" data-filtered="1" data-s="${s}" data-item-id="${escHtml(w.name)}"></div>`;
     const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
     const wasOpen=savedOpenState[w.name]==='1';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
@@ -7779,7 +7976,8 @@ const slotDe=s=>SLOT_DE[s]||s||'';
 function renderCores(){
   const f=document.getElementById('cf-slot').value;
   document.getElementById('core-tb').innerHTML=CORES.map(c=>{
-    const show=!f||c.slot===f;
+    // "Both" (Waffe/Hand/Fuß) passt in Waffen UND in Handschuhe/Schuhe: der Filter Waffe bzw. Rüstung schliesst diese Cores nicht aus
+    const show=!f||c.slot===f||(c.slot==='Both'&&(f==='Weapon'||f==='Armor'));
     const s=[c.name,c.effect,c.source,c.slot,slotDe(c.slot)].join(' ').toLowerCase();
     const ico=CORE_IMGS[c.name];
     const vid=CORE_VIDS[c.name];
@@ -7846,7 +8044,7 @@ function renderWitchCraftables(){
     return `<div class="card" data-s="${escHtml([m.sigil,m.mount,clean(c.name),c.recipe,'sigil amulett reittier hexe'].join(' ').toLowerCase())}">
       <div class="ct">${ico(c)}<span>${escHtml(m.sigil)}</span><span class="tag tw">Sigil-Mount</span></div>
       <div class="crows">
-        <div class="crow"><span class="cl">Reittier</span><span class="cv"><span class="xref" onclick="showSec('mounts')">${escHtml(m.mount)}</span> — dauerhaft freigeschaltet</span></div>
+        <div class="crow"><span class="cl">Reittier</span><span class="cv"><span class="xref" role="link" tabindex="0" onclick="showSec('mounts')">${escHtml(m.mount)}</span> — dauerhaft freigeschaltet</span></div>
         <div class="crow"><span class="cl">Material</span><span class="cv">${escHtml(c.recipe)}</span></div>
         <div class="crow"><span class="cl">Herstellung</span><span class="cv" style="color:var(--dim)">Hexe → „Abyss-Ausrüstung herstellen“ → „Besondere Gegenstände“; danach aus dem Inventar benutzen</span></div>
         ${c.price?`<div class="crow"><span class="cl">Kosten</span><span class="cv" style="color:var(--dim)">${c.price} Silber</span></div>`:''}
@@ -8720,8 +8918,8 @@ function renderUnlockTable(){
       </select>
       <select class="fs" id="uf-miss" aria-label="Freischaltungen nach Verpassbarkeit filtern" onchange="renderUnlockTable()">
         <option value="">Alle</option>
-        <option value="1"${missF==='1'?' selected':''}>Nur Missable</option>
-        <option value="0"${missF==='0'?' selected':''}>Nicht Missable</option>
+        <option value="1"${missF==='1'?' selected':''}>Nur verpassbare</option>
+        <option value="0"${missF==='0'?' selected':''}>Nicht verpassbare</option>
       </select>
       <span style="font-size:var(--fs-11);color:var(--dim);align-self:center">${visible.length} Skills</span>
     </div>
@@ -8731,7 +8929,7 @@ function renderUnlockTable(){
     visible.map(s=>{
       const miss=isMiss(s);
       const treeTag=s.tree==='Stamina'?'tr':s.tree==='Geist'?'tg':'tw';
-      const icon=SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" loading="lazy" decoding="async" onerror="this.style.display='none'" alt="${s.name} Icon" style="vertical-align:middle;margin-right:5px">`:`<span class="sk-ico-ph" aria-hidden="true" style="margin-right:5px">✦</span>`;      const ds=[s.name,s.char,s.tree,s.prereq,s.cost].join(' ').toLowerCase();
+      const icon=skillImg(s.name,s.char)?`<img class="sk-ico" src="${skillImg(s.name,s.char)}" loading="lazy" decoding="async" onerror="this.style.display='none'" alt="${s.name} Icon" style="vertical-align:middle;margin-right:5px">`:`<span class="sk-ico-ph" aria-hidden="true" style="margin-right:5px">✦</span>`;      const ds=[s.name,s.char,s.tree,s.prereq,s.cost].join(' ').toLowerCase();
       return `<tr data-s="${ds}">
         <td><span class="tag tx">${s.char}</span></td>
         <td><span class="tag ${treeTag}">${s.tree}</span></td>
@@ -8754,11 +8952,18 @@ function skTab(id){
   if(id==='graph'&&typeof renderSkillGraph==='function')renderSkillGraph();
 }
 function isMiss(s){return s.prereq&&(s.prereq.includes('MISSABLE')||s.prereq.includes('NICHT erlernbar'));}
-function skCard(s){
+// Icon eines Skills: gleichnamige Skills verschiedener Charaktere haben bei questlog eigene Icons (SKILL_IMGS_BY_CHAR[Charakter][Name]);
+// ohne Eintrag gilt SKILL_IMGS[Name] (Name allein).
+function skillImg(name,ch){
+  const b=typeof SKILL_IMGS_BY_CHAR!=='undefined'&&SKILL_IMGS_BY_CHAR[ch];
+  return (b&&b[name])||SKILL_IMGS[name]||'';
+}
+function skCard(s,ch){
   const m=isMiss(s);
+  const img=skillImg(s.name,ch);
   return `<div class="sk-c${m?' miss':''}">
     <div class="sk-n-row">
-      ${SKILL_IMGS[s.name]?`<img class="sk-ico" src="${SKILL_IMGS[s.name]}" onerror="this.style.display='none'" loading="lazy" alt="${s.name} Skill-Icon">`:`<span class="sk-ico-ph" aria-hidden="true">✦</span>`}      <div class="sk-n">${s.name}${m?'<span class="sk-mb">verpassbar</span>':''}</div>
+      ${img?`<img class="sk-ico" src="${img}" onerror="this.style.display='none'" loading="lazy" alt="${s.name} Skill-Icon">`:`<span class="sk-ico-ph" aria-hidden="true">✦</span>`}      <div class="sk-n">${s.name}${m?'<span class="sk-mb">verpassbar</span>':''}</div>
     </div>
     <div class="sk-r">Voraussetzung: <span>${s.prereq}</span></div>
     <div class="sk-r">Kosten: <span>${s.cost}</span></div>
@@ -8767,10 +8972,10 @@ function skCard(s){
 }
 function renderSkills(){
   document.getElementById('skp-kliff').innerHTML=
-    '<div style="margin-bottom:10px;font-size:12px;color:var(--dim)">Stat-Maxima: HP 18 · Sta 14 · Spirit 12<br>Kosten: „AA“ = <strong>Abyss-Artefakt</strong> (Abyss Artifact), die Skillpunkt-Währung: in der Regel 1 Artefakt pro Skill bzw. Stufe. Eine Fundquelle sind die <span class="xref" onclick="showSec(\'ruins\')">Uralten Ruinen (Abyss-Grenzsteine)</span>. Per Watch &amp; Learn gelernte Skills kosten kein Artefakt. Seit Patch 2.00.00 erhalten die anderen spielbaren Charaktere beim Erlernen per Abyss-Artefakt automatisch gleich viele <strong>Abyss-Verknüpfungen</strong> (Abyss Link); Zurücksetzen geht je Charakter einzeln.</div>'+
-    '<h3 class="sub-t" style="margin-top:0">Stamina Tree</h3><div class="sk-grid">'+KLIFF_STAMINA.map(skCard).join('')+'</div>'+
-    '<h3 class="sub-t">Spirit Tree</h3><div class="sk-grid">'+KLIFF_SPIRIT.map(skCard).join('')+'</div>'+
-    '<h3 class="sub-t">Health Tree / Elemente</h3><div class="sk-grid">'+KLIFF_HEALTH.map(skCard).join('')+'</div>';
+    '<div style="margin-bottom:10px;font-size:12px;color:var(--dim)">Stat-Maxima: HP 18 · Sta 14 · Spirit 12<br>Kosten: „AA“ = <strong>Abyss-Artefakt</strong> (Abyss Artifact), die Skillpunkt-Währung: in der Regel 1 Artefakt pro Skill bzw. Stufe. Eine Fundquelle sind die <span class="xref" role="link" tabindex="0" onclick="showSec(\'ruins\')">Uralten Ruinen (Abyss-Grenzsteine)</span>. Per Watch &amp; Learn gelernte Skills kosten kein Artefakt. Schreibweise: „1 AA“ = einmalig, „1 AA/Lv“ = je Stufe („mindestens bis Lv N“ nennt die höchste belegte Voraussetzung, nicht eine belegte Maximalstufe), „0 oder 1 AA“ = per Watch &amp; Learn kostenlos oder mit 1 Artefakt. Die Elementar-Skills (Flame/Frost/Lightning/Wind) schaltet der Abschluss der zugehörigen Abyss-Challenges frei (laut Fextralife für alle drei Charaktere, ohne Artefakt). Seit Patch 2.00.00 erhalten die anderen spielbaren Charaktere beim Erlernen per Abyss-Artefakt automatisch gleich viele <strong>Abyss-Verknüpfungen</strong> (Abyss Link); Zurücksetzen geht je Charakter einzeln.</div>'+
+    '<h3 class="sub-t" style="margin-top:0">Stamina Tree</h3><div class="sk-grid">'+KLIFF_STAMINA.map(s=>skCard(s,'Kliff')).join('')+'</div>'+
+    '<h3 class="sub-t">Spirit Tree</h3><div class="sk-grid">'+KLIFF_SPIRIT.map(s=>skCard(s,'Kliff')).join('')+'</div>'+
+    '<h3 class="sub-t">Health Tree / Elemente</h3><div class="sk-grid">'+KLIFF_HEALTH.map(s=>skCard(s,'Kliff')).join('')+'</div>';
 
   document.getElementById('skp-damiane').innerHTML=
     '<div class="card" style="margin-bottom:12px"><div class="ct">Damiane</div><div class="crows">'+
@@ -8778,22 +8983,22 @@ function renderSkills(){
     '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">DEFAULT — kein Armed Combat Lv 5 nötig!</span></div>'+
     '<div class="crow"><span class="cl">Flight</span><span class="cv">Mechanischer Glider (kein Magie-System), ab Freischaltung verfügbar. Skystep (Abyss-Fan) über die Scholastone-Forschung nach Kap. 4 (The Price of Knowledge); seit Patch 1.14.00 gleiche Eingabe wie Oongkas Vertical Flight</span></div>'+
     '<div class="crow"><span class="cl">Kosten (2.00.00)</span><span class="cv">Seit Patch 2.00.00 (25.08.2026) lernt Damiane mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihr eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.</span></div>'+
-    '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Rush · Frost Mantle · Lightning Strike · Storm Pillar</span></div>'+
+    '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Rush · Frost Mantle · Lightning Strike · Storm Pillar — der Elementfortschritt wird mit Kliff und Oongka geteilt: Wer ein Element mit einem Charakter freischaltet, hat es für alle (Fextralife)</span></div>'+
     '</div></div>'+
     '<h3 class="sub-t">Skill-Tree <span class="best-count">('+DAMIANE_SKILLS.length+')</span></h3><div class="sk-grid">'+
-    DAMIANE_SKILLS.map(skCard).join('')+'</div>'+
+    DAMIANE_SKILLS.map(s=>skCard(s,'Damiane')).join('')+'</div>'+
     '<div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Dieselben Skills als Abhängigkeitsbaum: Tab „🌳 Tree-Graph“ → Damiane.</div>';
 
   document.getElementById('skp-oongka').innerHTML=
     '<div class="card" style="margin-bottom:12px"><div class="ct">Oongka</div><div class="crows">'+
     '<div class="crow"><span class="cl">Unlock</span><span class="cv">Erstmals spielbar in Kap. 7: Nach der Begegnung mit Myurdin in Ashclaw Keep fällt Kliff aus, Oongka übernimmt bis zum Sieg über One-Armed Ludvig (Twisted Fate). Dauerhaft laut game8 erst nach der Greymane-Fraktionsquest Words Left by the Riverside (Kap. 8).</span></div>'+
     '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">laut game8 ab Armed Combat Lv 5 (Fextralife: Default)</span></div>'+
-    '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack: Fraktionsquest Fire Breathing Pack (Reihe The Giant&#39;s Leap, Kap. 8), Brief von Grimnir lesen. Vertical Flight über eine Forschung (Fextralife: „Machine Parts Research“)</span></div>'+
+    '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack: Fraktionsquest Fire Breathing Pack (Reihe The Giant&#39;s Leap, Kap. 8), Brief von Grimnir lesen. Vertical Flight über die Forschung „Machine Parts Research“ (questlog-Wissenseintrag: der Raketenrucksack lässt sich damit um Vertical Flight erweitern)</span></div>'+
     '<div class="crow"><span class="cl">Kosten (2.00.00)</span><span class="cv">Seit Patch 2.00.00 (25.08.2026) lernt Oongka mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihm eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.</span></div>'+
-    '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse</span></div>'+
+    '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse — der Elementfortschritt wird mit Kliff und Damiane geteilt: Wer ein Element mit einem Charakter freischaltet, hat es für alle (Fextralife)</span></div>'+
     '</div></div>'+
     '<h3 class="sub-t">Skill-Tree <span class="best-count">('+OONGKA_SKILLS.length+')</span></h3><div class="sk-grid">'+
-    OONGKA_SKILLS.map(skCard).join('')+'</div>'+
+    OONGKA_SKILLS.map(s=>skCard(s,'Oongka')).join('')+'</div>'+
     '<div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Dieselben Skills als Abhängigkeitsbaum: Tab „🌳 Tree-Graph“ → Oongka.</div>';
 
   document.getElementById('skp-watch').innerHTML=
@@ -8852,7 +9057,14 @@ function toggleMissable(id){
 }
 
 // ===== GREYMANE =====
-function loadGM(){return lsJson('cd_gm',[]);}
+// Nur existierende Commission-IDs (gm1…gm27) zaehlen: veraltete oder doppelte Eintraege in cd_gm (aus frueheren Staenden/Imports)
+// wuerden Zaehler, Prozentbalken und Achievements ueber 27/27 treiben. Der gespeicherte Wert wird beim naechsten Haken bereinigt (saveGM).
+function loadGM(){
+  const raw=lsJson('cd_gm',[]);
+  if(!Array.isArray(raw))return [];
+  const ids=new Set(GREYMANE_COMMISSIONS.map(c=>c.id));
+  return [...new Set(raw)].filter(id=>ids.has(id));
+}
 function saveGM(a){lsSet('cd_gm',JSON.stringify(a));updateStats();}
 function toggleGM(id){
   let d=loadGM();
@@ -8887,6 +9099,7 @@ function renderGreymane(){
         </div>
       </div>`).join('')}</div>`;
   }).join('');
+  _reapplyActiveSearch(document.getElementById('gm-list'));
 }
 
 // ===== BOSS CHECKLIST =====
@@ -8924,6 +9137,7 @@ function renderBossChecklist(){
     <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
     <div class="cl-group-body">${items.map(itemHtml).join('')}</div>`;
   }).join('');
+  _reapplyActiveSearch(document.getElementById('boss-cl-list'));
 }
 
 // ===== SANCTUM CHECKLIST =====
@@ -8960,6 +9174,7 @@ function renderSanctumChecklist(){
     <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
     <div class="cl-group-body">${items.map(itemHtml).join('')}</div>`;
   }).join('');
+  _reapplyActiveSearch(document.getElementById('sanc-cl-list'));
 }
 
 // ===== WEAPON CHECKLIST =====
@@ -8995,6 +9210,7 @@ function renderWeaponChecklist(){
     <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
     <div class="cl-group-body">${items.map(itemHtml).join('')}</div>`;
   }).join('');
+  _reapplyActiveSearch(document.getElementById('wep-cl-list'));
 }
 
 // ===== MISSABLES CHECKLIST =====
@@ -9024,6 +9240,7 @@ function renderMissableChecklist(){
         </div>
       </div>`).join('')}</div>`;
   }).join('');
+  _reapplyActiveSearch(document.getElementById('ms-cl-list'));
 }
 
 // ===== OVERVIEW =====
@@ -9617,7 +9834,12 @@ async function initVisitorCount(){
 // ===== ACCESSORIES =====
 
 function renderAccessories(){
-  const f=document.getElementById('accf-type').value;
+  const sel=document.getElementById('accf-type');
+  // Typen aus den Daten: jeder type-Wert ausserhalb von Ring/Necklace/Earring (z. B. kuenftige Spezial-Accessoires) bekommt automatisch
+  // eine Filteroption; Badge, Icon und Verlauf fallen fuer unbekannte Typen auf die neutrale Variante zurueck.
+  const known=[...sel.options].map(o=>o.value);
+  [...new Set(ACCESSORIES.map(a=>a.type))].forEach(t=>{if(t&&!known.includes(t)){const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o);}});
+  const f=sel.value;
   document.getElementById('acc-grid').innerHTML=ACCESSORIES.map(a=>{
     const show=!f||a.type===f;
     const s=[a.name,a.type,a.effect,a.source,a.notes].join(' ').toLowerCase();
@@ -9750,6 +9972,7 @@ function renderChapters(){
       </div>
     </div>`;
   }).join('');
+  _reapplyActiveSearch(document.getElementById('ch-timeline'));
 }
 function toggleChDone(num){
   let d=lsJson('cd_ch_done',[]);
@@ -9849,7 +10072,7 @@ function renderNpcs(){
     <p class="best-sub" style="margin:8px 0 12px">Jeder interagierbare NPC hat einen Vertrauenswert von 0 bis 100. Höherer Trust schaltet Belohnungen frei.</p>
     <div class="crows">
       <div class="crow"><span class="cl">Steigern</span><span class="cv">Grüßen +5 (max. 5 NPCs/Tag) · Geschenke +5 bis +25 · erledigte Request-Nebenquest +50. Diebstahl vor ihren Augen oder Anrempeln senkt den Trust.</span></div>
-      <div class="crow"><span class="cl">Bei Trust 100</span><span class="cv">Händler: Handelsabkommen (liefern ihr Sortiment ins Greymane-Camp) + versteckte Waren. Andere NPCs: einmalige Belohnung je nach Typ (Handwerksmaterial, Schatzkarte, Endgame-Ressourcen). Tiere: werden permanente Begleiter und sammeln nach Kämpfen automatisch Loot.</span></div>
+      <div class="crow"><span class="cl">Bei Trust 100</span><span class="cv">Händler: Handelsabkommen (Supply Contract, z. B. Food Supply Contract - Hernand bei Dahlia oder Equipment Supply Contract - Hernand bei Rhett; laut questlog-Wissenseintrag ist der Händler Lieferant und die Greymanes sind Kunde, der Item-Text nennt den Kauf der regionalen Waren) + versteckte Waren. Andere NPCs: einmalige Belohnung je nach Typ (Handwerksmaterial, Schatzkarte, Endgame-Ressourcen). Tiere: werden permanente Begleiter und sammeln nach Kämpfen automatisch Loot.</span></div>
       <div class="crow"><span class="cl">Tipp</span><span class="cv" style="color:var(--gold)">Die Bunny-Mask-Maske gibt +2 Trust pro Gruß/Geschenk (mit Abyss-Gear-Sockel +5).</span></div>
     </div>
     <div class="best-note">Gemeldet: Manche NPCs verschwinden bei Trust 100 dauerhaft aus der Spielwelt — bei questrelevanten NPCs vor dem Maxen vorsichtig sein. Ein eigenes Trust-/Loyalitätssystem speziell für Greymane-Comrades ist mit verlässlichen Quellen nicht eindeutig belegt.</div>
@@ -9870,7 +10093,7 @@ function renderNpcs(){
       const head=img
         ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" data-cdn="${cdn}" loading="lazy" decoding="async" alt="${escHtml(n.name)}" style="object-position:center top;background:linear-gradient(135deg,#15110d,#0c0c0c)" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.closest('.boss-img-wrap').outerHTML=npcPH('${escJsStr(n.name)}','${key}')}"></div>`
         :npcPH(n.name,key);
-      return `<div class="card npc-card" data-s="${escHtml(s)}" role="button" tabindex="0" aria-expanded="false" title="Klicken für Details">
+      return `<div class="card npc-card" data-s="${escHtml(s)}" data-grp="${escHtml('charakter npc figur '+title)}" role="button" tabindex="0" aria-expanded="false" title="Klicken für Details">
         ${head}
         <div class="ct">${escHtml(n.name)}<span class="npc-arr" aria-hidden="true">▾</span></div>
         <div class="npc-more">

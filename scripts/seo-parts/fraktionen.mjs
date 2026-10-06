@@ -17,8 +17,8 @@
 // statt der einzelnen Questzeilen (siehe Projektfalle "aeusserster Knoten
 // gewinnt", exakt das Problem vom 22.08. bei patch-notes.html).
 //
-// Alle drei Verzweigungsebenen bekommen eine eigene Tabelle, AUCH die 7 von 53
-// Fraktionen mit nur einer Quest (z.B. Beighen Tribe, House Wells). Eine
+// Alle drei Verzweigungsebenen bekommen eine eigene Tabelle, AUCH die Fraktionen
+// mit nur einer Quest (Stand 06.10.2026: 8 von 60, z.B. Beighen Tribe, House Wells). Eine
 // Sonderbehandlung "ab N Quests keine eigene Tabelle" wuerde die Fraktion aus
 // der Sprungnavigation/Suche unauffindbar machen bzw. eine zweite Markup-Form
 // einfuehren, die die Eintragserkennung nur komplizierter macht -- die grosse
@@ -27,18 +27,18 @@
 //
 // Datenbesonderheiten (gemessen mit G:\Claude\Crimson-Wiki-SEO-NPCs-Fraktionen\
 // fraktionen-explore.mjs am 26.08.2026):
-//  - Alle 218 Quests (Stand 02.10.2026, Block 2b; vorher 184) haben trigger/prereq/reward vollstaendig belegt (keine
+//  - Alle 218 Quests (Stand 06.10.2026) haben trigger/prereq/reward vollstaendig belegt (keine
 //    "—"/"-"/leeren Platzhalter) -- anders als hauptquests.mjs braucht dieses
 //    Modul deshalb KEINE isReal()/cell()-Fallback-Logik, esc() genuegt direkt.
-//  - overview ist bei allen 55 Fraktionen belegt (Stand 02.10.2026).
-//  - 43 von 55 Fraktionen tragen isNew:true. Das bedeutet "neu ins Wiki
+//  - overview ist bei allen 60 Fraktionen belegt (Stand 06.10.2026).
+//  - 48 von 60 Fraktionen tragen isNew:true (Stand 06.10.2026). Das bedeutet "neu ins Wiki
 //    aufgenommen", NICHT "neu im Spiel" -- Badge-Text ist deshalb bewusst
 //    "Neu erfasst", nicht "NEU" (Verwechslungsgefahr mit Spielinhalt).
-//  - conf ist bei 134 Quests "high", 81 "medium", 2 "low" (02.10.2026). Die Badge-Texte
+//  - conf ist bei 134 Quests "high", 82 "medium", 2 "low" (06.10.2026). Die Badge-Texte
 //    "Quelle: teils belegt" (medium) / "Quelle: unsicher" (low) uebernehmen
 //    woertlich die Formulierung aus facBadges() in index.html (dort schon
 //    etabliert fuer denselben Datensatz) statt eigene Begriffe zu erfinden.
-//  - miss:true kommt in FAC_DATA nicht vor (0 von 184) -- anders als bei den
+//  - miss:true kommt in FAC_DATA nicht vor (0 von 218) -- anders als bei den
 //    Hauptquests gibt es hier keine "verpassbar"-Badges.
 //  - Fraktions- und Questnamen sind ueber den gesamten Datensatz eindeutig
 //    (keine Dubletten, gegengeprueft) -- rowId() kann sich darauf verlassen.
@@ -50,10 +50,10 @@
 
 export const SLUG = "fraktionen";
 export const NAV_LABEL = "Fraktionen";
-// Kein eigener Tab-Deeplink moeglich (die App springt nur auf Sektions-Ebene);
-// die App zeigt die Fraktionen als dritten Tab innerhalb von sec-quests
-// (id="qt-fac"/"qp-fac"), genau wie hauptquests.mjs auf denselben Abschnitt zeigt.
-export const DEEPLINK = "/#sec-quests";
+// Tab-Deeplink: die App zeigt die Fraktionen als dritten Tab innerhalb von sec-quests
+// (id="qt-fac"/"qp-fac"); der Hash-Parameter tab=fac (_applyTabParam in index.html)
+// oeffnet diesen Tab direkt, analog hauptquests.mjs (tab=mq) und side-quests.mjs (tab=sq).
+export const DEEPLINK = "/#sec=quests&tab=fac";
 export const SITEMAP = { pri: "0.8", freq: "monthly" };
 
 // Nur Klassen, die es in SHARED_CSS noch nicht gibt. span.unsure ist Wort-fuer-
@@ -135,7 +135,7 @@ ${r.factions.map((f) => facBlock(r, f)).join("\n")}`;
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Fraktions-Übersicht in der App öffnen &rarr;</a>
-<p class="note">In der App klappst du jede Fraktion einzeln auf und siehst zusätzlich das regionsübergreifende Liberation-Endgame-System (23 Forts, 13 Fraktionen), das hier nicht abgebildet ist.</p>
+<p class="note">In der App klappst du jede Fraktion einzeln auf und siehst zusätzlich das regionsübergreifende Liberation-Endgame-System (Re-Blockade für 23 Forts laut Patch 1.05.00), das hier nicht abgebildet ist.</p>
 <p class="note">Bei ${z.unsicher} Quests ist die Quellenlage nur teilweise oder unsicher belegt; das steht direkt neben dem Questnamen. ${z.neu} der ${z.fraktionen} Fraktionen sind seit dem letzten großen Datenimport neu ins Wiki aufgenommen.</p>
 ${sections}`;
 

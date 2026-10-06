@@ -93,18 +93,18 @@ const pages = {
   "ruestungen.html": { sec: "/#sec-armor", count: { regex: /<tr>\s*<td/g, expected: N_ARMOR, label: "Rüstungs-Zeilen" } },
   "crafting.html": { sec: "/#sec-crafting", count: { regex: /<tr>\s*<td/g, expected: N_CRAFTING, label: "Crafting-Zeilen" } },
   "bestiarium.html": { sec: "/#sec-bestiary", count: { regex: /<article class="card" id="enemy-/g, expected: N_ENEMIES, label: "Gegner-Karten" } },
-  "side-quests.html": { sec: "/#sec-quests", count: { regex: /<tr id="sq-/g, expected: N_SIDE_QUESTS, label: "Nebenquest-Zeilen" } },
-  "hauptquests.html": { sec: "/#sec-quests", count: { regex: /<tr id="mq-/g, expected: N_MAIN_QUESTS, label: "Hauptquest-Zeilen" } },
+  "side-quests.html": { sec: "/#sec=quests&tab=sq", count: { regex: /<tr id="sq-/g, expected: N_SIDE_QUESTS, label: "Nebenquest-Zeilen" } },
+  "hauptquests.html": { sec: "/#sec=quests&tab=mq", count: { regex: /<tr id="mq-/g, expected: N_MAIN_QUESTS, label: "Hauptquest-Zeilen" } },
   // Die Patch-Seite zaehlt Meta-Zeilen statt Karten: sie wickelt bewusst kein
-  // <article> um einen Patch, damit die Seitensuche die 647 Einzelpunkte findet
-  // und nicht die 32 Patches (SEL nimmt den aeussersten Treffer). Begruendung
+  // <article> um einen Patch, damit die Seitensuche die Einzelpunkte (Stand
+  // 06.10.2026: 844) findet und nicht die Patches (47; SEL nimmt den aeussersten Treffer). Begruendung
   // steht im Kopf von parts/patch-notes.mjs.
   "patch-notes.html": { sec: "/#sec-patches", count: { regex: /<p class="pmeta" id="patch-/g, expected: N_PATCHES, label: "Patch-Meta-Zeilen" } },
   // NEU (29.08.2026): Regex und Label wortgleich aus COUNT_CHECK(ctx) in
   // parts/fraktionen.mjs bzw. parts/npcs.mjs, "sec" aus deren DEEPLINK-Export.
   // Die Fraktionsseite zaehlt Quest-Zeilen, nicht Fraktionen: eine Huelle je
   // Fraktion wuerde die Seitensuche auf die Fraktion statt die Quest werfen.
-  "fraktionen.html": { sec: "/#sec-quests", count: { regex: /<tr id="fr-/g, expected: N_FAC_QUESTS, label: "Fraktionsquest-Zeilen" } },
+  "fraktionen.html": { sec: "/#sec=quests&tab=fac", count: { regex: /<tr id="fr-/g, expected: N_FAC_QUESTS, label: "Fraktionsquest-Zeilen" } },
   "npcs.html": { sec: "/#sec-npcs", count: { regex: /<article class="card" id="npc-/g, expected: N_NPCS, label: "NPC-Karten" } },
 };
 const titles = new Set(), descs = new Set();
@@ -275,6 +275,186 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
   }
   ok(falsch.length === 0, `${datei}: alle Zahlen in Intro/FAQ decken sich mit den Daten [${erlaubt.join(",")}]`);
   falsch.slice(0, 8).forEach((f) => console.log("       ABWEICHUNG " + f));
+}
+
+// ── 4a. Startseite: Zahlen in Meta-Descriptions, JSON-LD und Roadmap-FAQ ─────
+// index.html ist Handarbeit; die Meta-Description nennt "100 Bosse, 500 Waffen"
+// als fest getippte Ziffern und driftet damit still, sobald BOSSES oder WEAPONS
+// wachsen -- genau das ist an den erzeugten Seiten am 14.08.2026 passiert. Jede
+// "<Zahl> <Substantiv>"-Angabe im <head> muss deshalb einer echten Datenmenge
+// entsprechen; eine Mengenangabe mit unbekanntem Substantiv ist nicht pruefbar
+// und faellt durch, statt unbemerkt zu driften. Die Roadmap-FAQ (div.rm-faq) nennt
+// Patchstaende und Spielzahlen; dort wird nur geprueft, dass keine Datenmenge
+// (Bosse, Waffen ...) mit falscher Zahl auftaucht.
+{
+  const start = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const kopf = start.slice(0, start.indexOf("</head>"));
+  const SOLL_NOMEN = {
+    bosse: N_BOSSES, bossen: N_BOSSES, waffen: N_WEAPONS, "rüstungen": N_ARMOR,
+    rezepte: N_CRAFTING, gegner: N_ENEMIES, npcs: N_NPCS, nebenquests: N_SIDE_QUESTS,
+    hauptquests: N_MAIN_QUESTS, "trophäen": N_TROPHIES, patches: N_PATCHES,
+    fraktionsquests: N_FAC_QUESTS, fraktionen: FAC_FACTIONS.length,
+  };
+  const mengen = (text) => [...decode(text).matchAll(/(?<![\d.,])(\d{1,3}(?:\.\d{3})*|\d+)\s+([A-Za-zÄÖÜäöüß-]{3,})/g)]
+    .map((m) => ({ n: Number(m[1].replace(/\./g, "")), nomen: m[2].toLowerCase(), roh: m[0] }));
+  const stellen = [
+    ...[...kopf.matchAll(/<meta (?:name|property)="((?:og:|twitter:)?description)" content="([^"]*)"/g)].map((m) => [`meta ${m[1]}`, m[2]]),
+    ...[...kopf.matchAll(/"description"\s*:\s*"((?:[^"\\]|\\.)*)"/g)].map((m) => ["JSON-LD description", m[1]]),
+  ];
+  ok(stellen.some(([w]) => w === "meta description"), "index.html: <meta name=description> gefunden");
+  const abweich = [], unbekannt = [];
+  let geprueft = 0;
+  for (const [wo, text] of stellen) {
+    for (const g of mengen(text)) {
+      if (!(g.nomen in SOLL_NOMEN)) { unbekannt.push(`${wo}: "${g.roh}"`); continue; }
+      geprueft++;
+      if (g.n !== SOLL_NOMEN[g.nomen]) abweich.push(`${wo}: "${g.roh}" (Daten: ${SOLL_NOMEN[g.nomen]})`);
+    }
+    for (const w of decode(text).match(WORT_RE) || []) unbekannt.push(`${wo}: Zahlwort "${w}"`);
+  }
+  ok(abweich.length === 0, `index.html: ${geprueft} Mengenangabe(n) in Meta-/JSON-LD-Description decken sich mit den Daten`);
+  abweich.forEach((f) => console.log("       ABWEICHUNG " + f));
+  ok(unbekannt.length === 0, `index.html: keine nicht abgleichbare Mengenangabe in Meta-/JSON-LD-Description (gefunden: ${unbekannt.join("; ") || "-"})`);
+
+  const rmStart = start.indexOf('<div class="rm-faq"');
+  if (rmStart >= 0) {
+    let tiefe = 0, rmEnde = start.length;
+    const re = /<(\/?)div\b/g; re.lastIndex = rmStart;
+    for (let m; (m = re.exec(start));) { tiefe += m[1] ? -1 : 1; if (tiefe === 0) { rmEnde = m.index + 6; break; } }
+    const faqText = start.slice(rmStart, rmEnde).replace(/<[^>]+>/g, " ");
+    const falsch = mengen(faqText).filter((g) => g.nomen in SOLL_NOMEN && g.n !== SOLL_NOMEN[g.nomen]).map((g) => `"${g.roh}" (Daten: ${SOLL_NOMEN[g.nomen]})`);
+    ok(falsch.length === 0, `index.html: Roadmap-FAQ nennt keine Datenmenge mit falscher Zahl (${falsch.join("; ") || "-"})`);
+  }
+}
+
+// ── 4a-2. FAQ-Namenslisten gegen die Daten ───────────────────────────────────
+// Die FAQ "Welche ... sind verpassbar?" zaehlt Namen auf (Trophaeen, Nebenquests).
+// Zahlen sind per Platzhalter abgesichert, die Namen waren es nicht: wird eine
+// Trophaee oder Nebenquest neu als verpassbar markiert, bliebe die Liste im Text
+// stehen. Die Aufzaehlung (Text zwischen dem ersten ": " und dem ersten Satzende
+// der Antwort) muss deshalb genau die miss:true-Eintraege nennen -- keinen fehlenden,
+// keinen ueberzaehligen. Die Namen der Aufzaehlung stehen im Quelltext (faq.json),
+// weil Fliesstext im Rest der Antwort (Herausforderungen wie "Into the Barrage")
+// legitim weitere Namen nennt.
+{
+  const faqQuelle = JSON.parse(fs.readFileSync(path.join(SEO_DIR, "faq.json"), "utf8"));
+  const wortGrenze = (text, name) => new RegExp("(?<![\\p{L}\\p{N}'’])" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![\\p{L}\\p{N}])", "u").test(text);
+  const listen = [
+    ["trophaeen", "Trophäen", TROPHIES.map((t) => [t.name, !!t.miss])],
+    ["side-quests", "Nebenquests", SIDE_QUESTS.map((q) => [q.q, !!q.miss])],
+  ];
+  for (const [seite, label, eintraege] of listen) {
+    const frage = (faqQuelle[seite] || []).find((f) => /verpassbar/i.test(f.frage) && /^welche/i.test(f.frage));
+    if (!frage) { ok(false, `faq.json → ${seite}: FAQ "Welche ... verpassbar" gefunden`); continue; }
+    const antwort = ohnePlatzhalter(frage.antwort);
+    const i = antwort.indexOf(": ");
+    const ende = i < 0 ? -1 : antwort.slice(i + 2).search(/\.(\s|$)/);
+    const liste = i < 0 ? "" : antwort.slice(i + 2, ende < 0 ? undefined : i + 2 + ende);
+    const soll = eintraege.filter(([, miss]) => miss).map(([n]) => n);
+    const fehlt = soll.filter((n) => !wortGrenze(liste, n));
+    const zuviel = eintraege.filter(([n, miss]) => !miss && wortGrenze(liste, n)).map(([n]) => n);
+    ok(i >= 0 && fehlt.length === 0 && zuviel.length === 0,
+      `faq.json → ${seite}: Aufzählung der verpassbaren ${label} deckt sich mit miss:true (${soll.length} Einträge; fehlt: ${fehlt.join(", ") || "-"}; zu viel: ${zuviel.join(", ") || "-"})`);
+  }
+}
+
+// Einzelne Namen und Rangfolgen, die faq.json fest nennt (kein Platzhalter moeglich):
+// Platin-Trophaee, Boss "am Ende der Kapitel-Sortierung", Region mit den meisten
+// Fraktionsquests. Jede Aussage wird gegen die Daten gerechnet; kippt sie, wird
+// der Text zum Fehler statt still falsch zu bleiben.
+{
+  const faqQuelle = JSON.parse(fs.readFileSync(path.join(SEO_DIR, "faq.json"), "utf8"));
+  const alle = (seite) => (faqQuelle[seite] || []).map((f) => f.frage + " " + f.antwort).join("\n");
+  const platin = TROPHIES.filter((t) => t.grade === "platinum").map((t) => t.name);
+  ok(platin.length === 1 && alle("trophaeen").includes(`„${platin[0]}“`),
+    `faq.json → trophaeen: nennt die Platin-Trophäe "${platin.join(", ")}" (Daten: ${platin.length} Platin)`);
+  // Reihenfolge wie buildBosse() in gen-seo.mjs: Kapitel aufsteigend, dann Name (localeCompare).
+  const storyBosse = extract("BOSSES").filter((b) => b.chapter != null)
+    .sort((a, b) => a.chapter - b.chapter || a.name.localeCompare(b.name));
+  const letzter = storyBosse[storyBosse.length - 1].name;
+  ok(alle("bosse").includes(letzter + " an letzter Stelle"), `faq.json → bosse: letzter Story-Boss "${letzter}" stimmt mit der Kapitel-Sortierung überein`);
+  const proRegion = FAC_DATA.regions.map((r) => [r.region, r.factions.reduce((n, f) => n + f.quests.length, 0)]).sort((a, b) => b[1] - a[1]);
+  const spitze = proRegion[0][0];
+  ok(alle("fraktionen").includes("Aktuell " + spitze + ":") && proRegion[0][1] > proRegion[1][1],
+    `faq.json → fraktionen: Region mit den meisten Fraktionsquests ist ${spitze} (${proRegion[0][1]} gegen ${proRegion[1][0]} ${proRegion[1][1]})`);
+}
+
+// ── 4a-3. Anker (id) der Seiten: eindeutig, sauber geschlitzt, zu den Daten passend ──
+// slug() in gen-seo.mjs macht aus Namen die Anker. Drei Fallen: (1) Umlaute
+// koennen komponiert (ä) oder zerlegt (a + U+0308) im Datenbestand stehen --
+// zerlegt wuerde "a" statt "ae" ergeben und den Anker still verschieben;
+// (2) Apostrophe werden zu "-" ("Harry's" -> harry-s); (3) zwei Namen koennen auf
+// denselben Slug fallen. Geprueft wird deshalb: Daten NFC, ids je Seite eindeutig
+// und nur [a-z0-9-], jeder #a-/#-Sprunglink hat ein Ziel, und die ids der Karten bzw.
+// Zeilen entsprechen einer hier unabhaengig gerechneten slug-Fassung der Namen.
+{
+  const slugUnabh = (t) => String(t).normalize("NFC").toLowerCase()
+    .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const nichtNfc = [];
+  const laufe = (o, wo, d = 0) => {
+    if (d > 7 || o == null) return;
+    if (typeof o === "string") { if (o.normalize("NFC") !== o) nichtNfc.push(wo + ": " + o.slice(0, 30)); }
+    else if (Array.isArray(o)) o.forEach((x) => laufe(x, wo, d + 1));
+    else if (typeof o === "object") for (const [k, v] of Object.entries(o)) { laufe(k, wo + ".key", d + 1); laufe(v, wo, d + 1); }
+  };
+  [["BOSSES", extract("BOSSES")], ["ENEMIES", ENEMIES], ["NPCS", NPCS], ["SIDE_QUESTS", SIDE_QUESTS],
+   ["FAC_DATA", FAC_DATA], ["MAIN_QUESTS", MAIN_QUESTS], ["PATCHES", PATCHES]].forEach(([n, d]) => laufe(d, n));
+  ok(nichtNfc.length === 0, `Namen in den SEO-Daten sind NFC (zerlegte Umlaute würden Anker verschieben; gefunden: ${nichtNfc.length}${nichtNfc.length ? " -> " + nichtNfc.slice(0, 3).join("; ") : ""})`);
+
+  const soll = {
+    "bosse.html": extract("BOSSES").map((b) => "boss-" + slugUnabh(b.name)),
+    "bestiarium.html": Object.values(ENEMIES).flat().map((e) => "enemy-" + slugUnabh(e.name)),
+    "npcs.html": NPCS_ALLE.map((n) => "npc-" + slugUnabh(n.name)),
+    "side-quests.html": SIDE_QUESTS.map((q) => "sq-" + slugUnabh(q.region) + "-" + slugUnabh(q.q)),
+    "fraktionen.html": FAC_DATA.regions.flatMap((r) => r.factions.flatMap((f) => f.quests.map((q) =>
+      "fr-" + slugUnabh(r.region) + "-" + slugUnabh(f.name) + "-" + slugUnabh(q.q)))),
+  };
+  for (const datei of Object.keys(pages)) {
+    const c = fs.readFileSync(path.join(ROOT, datei), "utf8");
+    const ids = [...c.matchAll(/\sid="([^"]*)"/g)].map((m) => m[1]);
+    const gesehen = new Set(), doppelt = new Set();
+    ids.forEach((i) => (gesehen.has(i) ? doppelt.add(i) : gesehen.add(i)));
+    const schlecht = ids.filter((i) => !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(i));
+    const ohneZiel = [...c.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]).filter((h) => !gesehen.has(h));
+    ok(doppelt.size === 0 && schlecht.length === 0 && ohneZiel.length === 0,
+      `${datei}: ${ids.length} ids eindeutig und sauber, alle #-Sprunglinks mit Ziel (doppelt: ${doppelt.size}, unsauber: ${schlecht.length}, ohne Ziel: ${ohneZiel.length}${(doppelt.size + schlecht.length + ohneZiel.length) ? " -> " + [...doppelt, ...schlecht, ...ohneZiel].slice(0, 3).join(", ") : ""})`);
+    if (soll[datei]) {
+      const fehlend = soll[datei].filter((i) => !gesehen.has(i));
+      ok(fehlend.length === 0, `${datei}: alle ${soll[datei].length} Datensatz-Anker entsprechen der unabhängig berechneten slug-Fassung (fehlend: ${fehlend.length}${fehlend.length ? " -> " + fehlend.slice(0, 3).join(", ") : ""})`);
+    }
+  }
+}
+
+// ── 4a-4. Typ-Abdeckung und Formatinfos ──────────────────────────────────────
+// ARMOR.type: ruestungen.mjs gruppiert nach TYPE_ORDER; ein neuer type-Wert wuerde
+// ohne Abschnitt gar nicht erscheinen (COUNT_CHECK bricht dann ab) und stuende nicht
+// in der FAQ-Aufzaehlung der Teile. Neuer Typ -> hier bewusst nachziehen.
+{
+  const bekannt = new Set(["Torso", "Kopf", "Hände", "Schuhe", "Mantel"]);
+  const neu = [...new Set(ARMOR.map((a) => a.type).filter((t) => !bekannt.has(t)))];
+  ok(neu.length === 0, `ARMOR.type nur bekannte Werte (neu: ${neu.join(", ") || "-"}; bei neuem Wert faq.json "ruestungen" und ERLAUBTE_ZAHLEN nachziehen)`);
+}
+// Boss-Seite: "ueberwiegend Welt- und Fraktionsbosse" (FAQ) und die Ueberschrift der
+// kapitellosen Bosse stuetzen sich auf bossType() der App. Die Funktion wird als Text
+// aus index.html gelesen (nicht importiert) und auf die Daten angewandt.
+{
+  const bt = /function bossType\(b\)\{[\s\S]*?\n\}/.exec(fs.readFileSync(path.join(ROOT, "index.html"), "utf8"));
+  ok(!!bt, "index.html: bossType() lesbar");
+  if (bt) {
+    const bossType = new Function(bt[0] + "; return bossType;")();
+    const ohneKap = extract("BOSSES").filter((b) => b.chapter == null);
+    const verteilung = {};
+    ohneKap.forEach((b) => { const t = bossType(b); verteilung[t] = (verteilung[t] || 0) + 1; });
+    const wf = (verteilung.World || 0) + (verteilung.Faction || 0);
+    ok(wf * 2 > ohneKap.length, `Bosse ohne Kapitel: Welt- und Fraktionsbosse überwiegen weiterhin (${wf} von ${ohneKap.length}; Verteilung ${JSON.stringify(verteilung)})`);
+    const kapStory = extract("BOSSES").filter((b) => b.chapter != null && bossType(b) !== "Story").length;
+    ok(kapStory === 0, `Bosse mit Kapitel sind durchgehend Typ Story (Abweichler: ${kapStory})`);
+  }
+  // Format-Info: Bossnamen mit Komma (Format "Name, the Titel"). Nur Info, kein Fehler:
+  // die Suche findet beide Formen ueber _foldBase, verglichen wird nur die Schreibweise.
+  const mitKomma = extract("BOSSES").filter((b) => b.name.includes(","));
+  console.log(`  info  Bossnamen mit Komma: ${mitKomma.length} (${mitKomma.slice(0, 4).map((b) => b.name).join("; ")}${mitKomma.length > 4 ? " ..." : ""}); Umbenennung nur mit BOSS_RENAMES-Migration`);
 }
 
 // ── 4b. Inline-Skripte und Seitenwerkzeuge ───────────────────────────────────

@@ -16,7 +16,7 @@
 
 export const SLUG = "side-quests";
 export const NAV_LABEL = "Nebenquests";
-export const DEEPLINK = "/#sec-quests";
+export const DEEPLINK = "/#sec=quests&tab=sq";
 export const SITEMAP = { pri: "0.8", freq: "monthly" };
 
 // Nur Klassen, die es in SHARED_CSS noch nicht gibt. Wird an SHARED_CSS angehaengt.

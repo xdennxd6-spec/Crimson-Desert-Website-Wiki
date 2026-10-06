@@ -147,7 +147,7 @@ ${sections}`;
       breadcrumbLd("Bestiarium", SLUG),
       {
         "@type": "ItemList",
-        name: "Alle Gegner in Crimson Desert",
+        name: "Gegnertypen im Bestiarium von Crimson Desert",
         numberOfItems: total,
         itemListElement: allNames.map((name, i) => ({
           "@type": "ListItem", position: i + 1, name,
@@ -158,9 +158,9 @@ ${sections}`;
 
   return {
     slugName: SLUG,
-    title: `Bestiarium: Alle ${total} Gegner in Crimson Desert`,
-    desc: `Das komplette Bestiarium zu Crimson Desert: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen mit Region, Beute-Drops und Kampf-Tipps im Überblick.`,
-    h1: `Alle ${total} Gegner in Crimson Desert`,
+    title: `Bestiarium: ${total} Gegnertypen in Crimson Desert`,
+    desc: `Das Bestiarium zu Crimson Desert: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen mit Region, Beute-Drops und Kampf-Tipps im Überblick.`,
+    h1: `${total} Gegnertypen im Bestiarium von Crimson Desert`,
     lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet <strong>${total} Gegnertypen</strong> der Spielwelt, getrennt von den Bossen: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen, jeweils mit Region, Beute und Beschreibung.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Bestiarium",

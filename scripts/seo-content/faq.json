@@ -98,7 +98,7 @@
     },
     {
       "frage": "Kann man in Crimson Desert alle Trophäen in einem Durchgang holen?",
-      "antwort": "Ja. Die Trophäen-Guides von PowerPyx und Console Pulse nennen einen einzigen Durchgang als ausreichend für Platin; laut PowerPyx gibt es keine Online- oder Glitch-Trophäen und keine Vorgabe beim Schwierigkeitsgrad. Nach dem Epilog bleibt die offene Welt frei bespielbar, Hauptquests lassen sich aber nicht wiederholen. Die {{verpassbar|wort}} als verpassbar markierten Trophäen hängen an Herausforderungen mit begrenzten Gelegenheiten und sollten früh erledigt werden."
+      "antwort": "Ja. Die Trophäen-Guides von PowerPyx und Console Pulse nennen einen einzigen Durchgang als ausreichend für Platin; ein dritter Trophäen-Guide beschreibt denselben Ablauf (Story, danach Free-Roam für die restlichen Challenges). Laut PowerPyx gibt es keine Online- oder Glitch-Trophäen und keine Vorgabe beim Schwierigkeitsgrad. Nach dem Epilog bleibt die offene Welt frei bespielbar, Hauptquests lassen sich aber nicht wiederholen. Die {{verpassbar|wort}} als verpassbar markierten Trophäen hängen an Herausforderungen mit begrenzten Gelegenheiten und sollten früh erledigt werden."
     },
     {
       "frage": "Was muss ich für die Platin Trophäe in Crimson Desert machen?",
@@ -198,7 +198,7 @@
     },
     {
       "frage": "Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?",
-      "antwort": "Abyss-Slots sind die Fassungen für Abyss-Cores (Abyss Gears). Eine Hexe erstellt sie gegen Silber und setzt dort auch die Cores ein. Wie viele Slots eine Waffe haben kann, hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Boss-Waffen bringen teils schon vorinstallierte Sockel mit."
+      "antwort": "Abyss-Slots sind die Fassungen für Abyss-Cores (Abyss Gears). Eine Hexe erstellt sie gegen Silber und setzt dort auch die Cores ein. Wie viele Slots eine Waffe haben kann, hängt vom Waffentyp ab und steht in der Slots-Spalte der Tabelle: Dolche haben die wenigsten, Zweihand- und Fernkampfwaffen die meisten. Einzelne Waffen weichen vom Wert ihres Typs ab; maßgeblich ist immer die Zeile der Waffe. Boss-Waffen bringen teils schon vorinstallierte Sockel mit. Nicht jeder Core passt in jeden Slot: Es gibt Cores nur für Waffen, Cores nur für Rüstung und Cores, die in Waffen, Handschuhe oder Schuhe passen; Letztere belegen deshalb nicht zwingend einen Waffen-Slot."
     }
   ],
   "fraktionen": [

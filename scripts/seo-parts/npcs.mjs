@@ -178,7 +178,7 @@ ${sections}`;
       breadcrumbLd("NPCs", SLUG),
       {
         "@type": "ItemList",
-        name: "Alle NPCs in Crimson Desert",
+        name: "Wichtige NPCs in Crimson Desert",
         numberOfItems: z.anzahl,
         itemListElement: allNames.map((name, i) => ({
           "@type": "ListItem", position: i + 1, name,
@@ -189,9 +189,9 @@ ${sections}`;
 
   return {
     slugName: SLUG,
-    title: `Alle ${z.anzahl} NPCs in Crimson Desert: Begleiter, Verbündete & Gegner`,
-    desc: `Alle ${z.anzahl} NPCs in Crimson Desert im Überblick: ${z.begleiter} Begleiter, ${z.verbuendete} Verbündete, ${z.antagonisten} Antagonisten und ${z.haendler} Händler mit Rolle, Region und ausführlicher Bio. Deutsch.`,
-    h1: `Alle ${z.anzahl} NPCs in Crimson Desert`,
+    title: `${z.anzahl} wichtige NPCs in Crimson Desert: Begleiter & Händler`,
+    desc: `${z.anzahl} wichtige NPCs in Crimson Desert im Überblick: ${z.begleiter} Begleiter, ${z.verbuendete} Verbündete, ${z.antagonisten} Antagonisten und ${z.haendler} Händler mit Rolle, Region und ausführlicher Bio. Deutsch.`,
+    h1: `${z.anzahl} wichtige NPCs in Crimson Desert`,
     lead: `Diese Übersicht listet <strong>${z.anzahl} wichtige benannte NPCs</strong> aus Crimson Desert: ${z.begleiter} spielbare Begleiter, ${z.verbuendete} Verbündete &amp; Quest-Geber, ${z.antagonisten} Antagonisten und ${z.haendler} Händler, jeweils mit Rolle, Region und ausführlicher Bio.`,
     ogImage: "cd_assets/npcs/kliff.webp",
     crumb: "NPCs",

@@ -95,10 +95,16 @@ ${noteTd}
 </tr>`;
   };
 
-  const sections = TYPE_ORDER
-    .filter((t) => ARMOR.some((a) => a.type === t))
+  // Ein neuer ARMOR.type-Wert (z. B. spaeter ein Sondertyp) bekommt automatisch einen
+  // eigenen Abschnitt hinter den bekannten; ohne diese Zeile fiele er aus der Seite und
+  // erst COUNT_CHECK braeche den Build. verify-seo meldet den neuen Wert zusaetzlich,
+  // damit FAQ-Aufzaehlung und Zahlenliste bewusst nachgezogen werden.
+  const typ = (a) => (has(a.type) ? a.type : "Sonstige");
+  const reihenfolge = [...TYPE_ORDER, ...new Set(ARMOR.map(typ).filter((t) => !TYPE_ORDER.includes(t)))];
+  const sections = reihenfolge
+    .filter((t) => ARMOR.some((a) => typ(a) === t))
     .map((t) => {
-      const items = ARMOR.filter((a) => a.type === t)
+      const items = ARMOR.filter((a) => typ(a) === t)
         .sort((a, b) => a.name.localeCompare(b.name, "de"));
       return `<h2>${esc(t)} (${items.length})</h2>
 <div class="tbl-wrap"><table>

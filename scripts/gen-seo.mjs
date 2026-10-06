@@ -137,7 +137,7 @@ const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests,
 // Ausruestung, dann Herstellung, dann Quests, dann die Meta-Listen.
 // "fraktionen" steht zwischen Haupt- und Nebenquests, weil die App die
 // Fraktionen als dritten Tab innerhalb von sec-quests fuehrt (qt-mq -> qt-fac
-// -> qt-sq) und das Modul auf denselben Deeplink /#sec-quests zeigt.
+// -> qt-sq); die drei Module verlinken per /#sec=quests&tab=<mq|fac|sq> direkt auf ihren Tab.
 // "npcs" steht bei den Meta-Listen direkt vor den Patch-Notes; in index.html
 // liegt sec-npcs unmittelbar vor sec-patches.
 const NAV = [
@@ -225,6 +225,16 @@ function platzhalterTief(wert, zahlen, herkunft) {
     return Object.fromEntries(Object.entries(wert).map(([k, v]) => [k, platzhalterTief(v, zahlen, `${herkunft}.${k}`)]));
   }
   return wert;
+}
+
+// Einleitungsabsatz einer Seite aus intros.json (leer, wenn dort kein Eintrag steht).
+// Gemeinsam genutzt von den Modul-Seiten und den beiden direkt gebauten Seiten
+// bosse/waffen, damit alle Seiten dieselbe Platzhalter-Absicherung durchlaufen.
+function introHtml(slugName, zahlen) {
+  const intro = SEO_INTROS[slugName];
+  if (!intro || !intro.intro) return "";
+  const text = zahlenEinsetzen(intro.intro, zahlen, `intros.json → ${slugName}.intro`);
+  return `<p class="intro">${esc(text)}</p>\n`;
 }
 
 // Eine Antwort "unbekannt" ist eine ehrliche Nicht-Antwort der Recherche, aber auf
@@ -495,7 +505,9 @@ ${PART_CSS}
 `.trim();
 
 // slug fuer Anker-IDs
-const slug = (s) => String(s).toLowerCase()
+// normalize("NFC") zuerst: ein zerlegtes "ä" (a + U+0308) wuerde sonst zu "a" statt "ae"
+// und verschoebe den Anker still gegenueber der komponierten Schreibweise.
+const slug = (s) => String(s).normalize("NFC").toLowerCase()
   .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
   .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -791,11 +803,11 @@ function buildBosse() {
     antwort: zahlenEinsetzen(f.antwort, zahlen, `faq.json → bosse[${i}].antwort`),
   }));
   let body = `
-<a class="cta" href="/#sec-bosses">Interaktive Boss-Übersicht öffnen &rarr;</a>
+${introHtml("bosse", zahlen)}<a class="cta" href="/#sec-bosses">Interaktive Boss-Übersicht öffnen &rarr;</a>
 <p class="note">Mit Filter nach Region/Kapitel, Such- und Abhak-Funktion in der vollständigen App.</p>
 <h2>Story-Bosse (nach Kapitel, ${story.length})</h2>
 <div class="grid">${story.map(bossArticle).join("\n")}</div>
-<h2>Welt- &amp; Fraktionsbosse (${world.length})</h2>
+<h2>Bosse ohne festes Kapitel (${world.length})</h2>
 <div class="grid">${world.map(bossArticle).join("\n")}</div>`;
   if (faq.length) body += "\n" + faqSektion(faq);
   const jsonld = {
@@ -818,7 +830,7 @@ function buildBosse() {
     title: `Alle ${BOSSES.length} Bosse in Crimson Desert: Liste & Strategien`,
     desc: `Komplette Liste aller ${BOSSES.length} Bosse in Crimson Desert: Region, Kapitel, Schwächen, Parry- oder Dodge-Hinweise, Drops und Kampf-Strategie für jeden Boss. Deutsch.`,
     h1: `Alle ${BOSSES.length} Bosse in Crimson Desert`,
-    lead: `Diese Übersicht listet alle <strong>${BOSSES.length} Bosse</strong> aus Crimson Desert mit Fundort, Kapitel, Schwäche, Parry-/Dodge-Empfehlung, Drops und einer kurzen Strategie. Aufgeteilt in Story-Bosse und freie Welt- &amp; Fraktionsbosse.`,
+    lead: `Diese Übersicht listet alle <strong>${BOSSES.length} Bosse</strong> aus Crimson Desert mit Fundort, Kapitel, Schwäche, Parry-/Dodge-Empfehlung, Drops und einer kurzen Strategie. Aufgeteilt in Story-Bosse nach Kapitel und Bosse ohne festes Kapitel (überwiegend Fraktions- und Weltbosse, dazu Sanctum- und weitere optionale Bosse).`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Bosse",
     bodyHtml: body,
@@ -868,7 +880,7 @@ function buildWaffen() {
 </table></div>`;
   }).join("\n");
   let body = `
-<a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
+${introHtml("waffen", zahlen)}<a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
 <p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller damals 500 Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
 ${sections}`;
   if (faq.length) body += "\n" + faqSektion(faq);
@@ -1054,11 +1066,7 @@ function baueModulSeite(p) {
   // Datenmengen des Moduls, fuer die Platzhalter in Intro, FAQ und Zusatztexten.
   const zahlen = typeof p.ZAHLEN === "function" ? p.ZAHLEN(CTX) : {};
 
-  const intro = SEO_INTROS[p.SLUG];
-  if (intro && intro.intro) {
-    const text = zahlenEinsetzen(intro.intro, zahlen, `intros.json → ${p.SLUG}.intro`);
-    spec.bodyHtml = `<p class="intro">${esc(text)}</p>\n${spec.bodyHtml}`;
-  }
+  spec.bodyHtml = introHtml(p.SLUG, zahlen) + spec.bodyHtml;
 
   const faq = faqFuer(p.SLUG).map((f, i) => ({
     frage: zahlenEinsetzen(f.frage, zahlen, `faq.json → ${p.SLUG}[${i}].frage`),

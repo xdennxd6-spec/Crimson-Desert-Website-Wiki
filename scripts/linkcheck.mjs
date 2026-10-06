@@ -101,10 +101,33 @@ await Promise.all(Array.from({ length: 6 }, async () => {
   }
 }));
 
-if (broken.length) {
-  console.log('\nKAPUTTE URLS (' + broken.length + '):');
-  for (const b of broken) console.log('-', b.err, b.url, '  [' + b.refs.join(', ') + ']');
+// Bekannte CDN-Luecke (belegt 06.10.2026, questlog-Skill-API): Acht Kliff-2.x-Skills
+// (Finishing Rush, Flowing/Ascending/Descending Force Palm, Serenity, Enraged Parry,
+// Water Stride, Enhance Flight) fuehren dort nur Icons der Form
+// cd_icon_skill_<name>_enhanced.webp, und genau diese Dateien liefern auf
+// cdn.questlog.gg HTTP 404. Solche URLs sind eine Warnung, kein Fehler. Streng
+// begrenzt: nur diese acht Dateinamen auf diesem Host, ein anderer Treffer bleibt Fehler.
+// Liefert das CDN sie spaeter doch aus, meldet der Lauf das und der Eintrag kann raus.
+const BEKANNT_404 = new Set([
+  'finishattack', 'jijeongta_i', 'jijeongta_air', 'jijeongta_tathagata_mini',
+  'detect', 'shieldjustguard', 'crowwing', 'watermove',
+].map((n) => 'https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_' + n + '_enhanced.webp'));
+const bekannt = broken.filter((b) => b.err === 'HTTP 404' && BEKANNT_404.has(b.url));
+const echt = broken.filter((b) => !bekannt.includes(b));
+const erreichbar = [...BEKANNT_404].filter((u) => urls.has(u) && !broken.some((b) => b.url === u));
+
+if (bekannt.length) {
+  console.log('\nWARNUNG: ' + bekannt.length + ' bekannte CDN-404 (kein Fehler, siehe WIKI-PLAN Block laufend):');
+  for (const b of bekannt) console.log('-', b.err, b.url, '  [' + b.refs.join(', ') + ']');
+}
+if (erreichbar.length) {
+  console.log('\nHINWEIS: ' + erreichbar.length + ' Eintrag(e) aus BEKANNT_404 sind jetzt erreichbar und koennen entfallen:');
+  for (const u of erreichbar) console.log('-', u);
+}
+if (echt.length) {
+  console.log('\nKAPUTTE URLS (' + echt.length + '):');
+  for (const b of echt) console.log('-', b.err, b.url, '  [' + b.refs.join(', ') + ']');
   process.exit(1);
 } else {
-  console.log('Alle URLs erreichbar.');
+  console.log(bekannt.length ? 'Alle URLs erreichbar (ausser den ' + bekannt.length + ' bekannten CDN-404).' : 'Alle URLs erreichbar.');
 }
