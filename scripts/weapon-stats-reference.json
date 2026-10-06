@@ -2,19 +2,19 @@
   "_source": "questlog.gg tRPC database.getItem, independent snapshot 2026-09-09; see G:/Claude/Crimson-Wiki-Plan-2026-09-09/ausfuehrung/2026-09-09_1746/quellen/ernte-2026-09-09.json and def-analyse.json",
   "_convention": "atk and def use highest documented refinement stage; nulls remain unverified",
   "items": {
-    "Lifsoth Shield": {
+    "Lifsoth Large Shield": {
       "id": "290503",
       "def": 29
     },
-    "Legion Spearmen's Shield": {
+    "Legion Spearmen's Large Shield": {
       "id": "290997",
       "def": 31
     },
-    "Lucon Shield": {
+    "Lucon Large Shield": {
       "id": "290508",
       "def": 27
     },
-    "Rekel Shield": {
+    "Rekel Large Shield": {
       "id": "290511",
       "def": 31
     },
@@ -30,27 +30,27 @@
       "id": "290116",
       "def": 13
     },
-    "Demenissian Soldier's Shield": {
+    "Demenissian Soldier's Large Shield": {
       "id": "290533",
       "def": 27
     },
-    "Lanford Shield": {
+    "Lanford Large Shield": {
       "id": "290515",
       "def": 29
     },
-    "Reinforced Warspike Shield": {
+    "Reinforced Warspike Large Shield": {
       "id": "290504",
       "def": 29
     },
-    "Gilliam Shield": {
+    "Gilliam Large Shield": {
       "id": "290502",
       "def": 31
     },
-    "Thalwynd Shield": {
+    "Thalwynd Large Shield": {
       "id": "290506",
       "def": 27
     },
-    "Thorny Warspike Shield": {
+    "Thorny Warspike Large Shield": {
       "id": "290532",
       "def": 31
     },

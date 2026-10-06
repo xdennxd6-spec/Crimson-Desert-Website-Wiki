@@ -1564,7 +1564,7 @@ const NPC_IMGS_CDN={
   "Shakatu":QLG+"shakatu.webp",
   "Charles Celeste":QLG+"charles_selester.webp",
   "Jian":QLG+"ziane.webp",
-  "Marius":"https://static0.fextralifeimages.com/file/crimsondesertgame/c/c2/Marius-npc-crimson-desert-wiki-guide-250px-fix.png",
+  "Marius":QLG+"greyfur_marius.webp",
   "Ross":QLG+"greyfur_russo.webp",
   "Brice":QLG+"greyfur_brice.webp",
   "Myurdin":QLG+"myordin.webp",

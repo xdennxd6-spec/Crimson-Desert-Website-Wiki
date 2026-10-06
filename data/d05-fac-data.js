@@ -242,7 +242,7 @@ const WITCHES=[
     tip:"Hexe der Stärke. Freischaltung ist simpel — einfach 1 Kupfer an den bettelnden Jungen am Bounty Board nördlich von Tommaso geben, dann zu ihrem Haus an der Klippe westlich von Urdavah. Sie sitzt auf dem Dach, nicht drinnen. Sie wohnt in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River."
   },
   {
-    name:"White Crow",color:"#cfd2d6",img:"https://static0.fextralifeimages.com/file/crimsondesertgame/6/6f/White-crow-npc-crimson-desert-wiki-guide-250px-fix.png",
+    name:"White Crow",color:"#cfd2d6",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_whitecrow_witch.webp",
     location:"Wayward Woods Witch's Hideout — Baumhaus in einem toten, vom Blitz gespaltenen Baum auf einer Klippe in den Wayward Woods westlich von Pailune (questlog; ein Guide nennt „südlich der Wayward Woods“)",chapter:"Erst nach 4 Witch's Tokens erreichbar",
     services:["Workshop-Dienste nicht belegt: questlog führt für White Crow weder Werkstatt-Rezepte noch Händlerware; als Synthese-Hexe nur vereinzelt genannt"],
     quests:["Freischaltung: je 1 Witch's Token von Elowen, Bari, Lyselia und Areciel sammeln (questlog-Quest Wayward Woods Witch, Mission Protector of the Abyss)"],

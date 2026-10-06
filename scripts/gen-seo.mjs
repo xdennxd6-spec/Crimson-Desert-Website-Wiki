@@ -752,6 +752,8 @@ function bossArticle(b) {
   if (has(b.parry_or_dodge)) stats.push(["Parry / Dodge", b.parry_or_dodge]);
   if (has(b.drop_weapon)) stats.push(["Waffen-Drop", b.drop_weapon]);
   if (has(b.drop_abyss_gear)) stats.push(["Abyss-Gear", b.drop_abyss_gear]);
+  // conf:"low" = Boss ohne Beleg in den Spieldaten (questlog); sichtbar kennzeichnen statt streichen.
+  if (b.conf === "low") stats.push(["Quellenlage", has(b.notes) ? b.notes : "Nicht bestätigt"]);
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
   const strat = has(b.strategy) ? `<p class="strat"><b>Strategie:</b> ${esc(b.strategy)}</p>` : "";
   // Zweitbild als JS-freier Aufklapper (<details>): das Kartenbild bleibt stehen,

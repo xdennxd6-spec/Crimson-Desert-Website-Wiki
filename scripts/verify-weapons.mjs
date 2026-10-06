@@ -66,6 +66,23 @@ console.log(`\n[Waffen] ${WEAPONS.length} Eintraege`);
 // Eindeutigkeitspruefung ausgenommen.
 const GEMISCHT = new Set(["Blunt/Axe"]);
 
+// Feste Typliste (vereinheitlicht 07.10.2026, Richtschnur questlog sub-/tertiaryCategory).
+// Zusatzinfos wie Pickaxe-Funktion, Flammenwerfer, Krummschwert, Katana oder Stab stehen in
+// notes, nicht im Typ. Der Typfilter in index.html (#wf-type) vergleicht exakt; ein Typ ausserhalb
+// dieser Liste waere dort nicht filterbar. Neuer Typ: hier, im Filter und in faq.json "waffen" nachziehen.
+const TYPEN = ["Sword (1H)", "Greatsword (2H)", "Halberd / Spear (2H)", "Rapier", "Dagger",
+  "Knuckles / Gauntlets", "Blunt/Axe", "Bow (Ranged)", "Firearm", "Hand Cannon", "Shield", "A.T.A.G. Weapon"];
+{
+  const fremd = [...new Set(WEAPONS.map((w) => w.type).filter((t) => !TYPEN.includes(t)))];
+  ok(fremd.length === 0, `WEAPONS.type nur aus der festen Typliste (${TYPEN.length} Typen; fremd: ${fremd.join(", ") || "-"})`);
+  const leer = TYPEN.filter((t) => !WEAPONS.some((w) => w.type === t));
+  ok(leer.length === 0, `jeder Typ der Liste hat Waffen (leer: ${leer.join(", ") || "-"})`);
+  const sel = /<select[^>]*id="wf-type"[^>]*>([\s\S]*?)<\/select>/.exec(html);
+  const opts = sel ? [...sel[1].matchAll(/<option value="([^"]*)"/g)].map((m) => m[1]).filter(Boolean) : [];
+  const fehlt = TYPEN.filter((t) => !opts.includes(t)), extra = opts.filter((o) => !TYPEN.includes(o));
+  ok(sel && fehlt.length === 0 && extra.length === 0, `Typfilter #wf-type deckt genau die Typliste ab (fehlt: ${fehlt.join(", ") || "-"}; ueberzaehlig: ${extra.join(", ") || "-"})`);
+}
+
 // Einzelne Waffen, die nachweislich von der Typregel abweichen. Jeder Eintrag
 // braucht eine Quelle, sonst gehoert er hier nicht rein.
 // - Electro-Mecha Longsword: 4 statt 5 Slots. Belegt durch Fextralife und
@@ -85,6 +102,9 @@ const GEMISCHT = new Set(["Blunt/Axe"]);
 // - Lightning Greathammer (Typ Blunt/Axe, daher von der Typpruefung ausgenommen): nur
 //   eine Stufe (levels=1), socketCompatibilityHash:"0", kein Sockelsystem (questlog,
 //   Item-ID 1002741, 06.10.2026). Slots 0 ist damit der questlog-Stand, kein Datenloch.
+// - Mining Knuckledrill: 5 Slots (questlog-Item 1001294 unter equipment/tools, maxSocketCount 5,
+//   07.09.2026). Seit der Typvereinheitlichung (07.10.2026) steht er im Typ Knuckles / Gauntlets,
+//   dessen uebrige Eintraege nicht ausruestbare Items bzw. Standard-Faeuste ohne Sockelsystem (0) sind.
 const AUSNAHMEN = new Map([
   ["Electro-Mecha Longsword", 4],
   ["Electro-Mecha Spear", 4],
@@ -102,6 +122,7 @@ const AUSNAHMEN = new Map([
   ["Drake Shield", 0],
   ["Runewalker Shield", 0],
   ["Lightning Greathammer", 0],
+  ["Mining Knuckledrill", 5],
 ]);
 
 // Jede dokumentierte Ausnahme muss noch zu einer Waffe passen: Wurde eine Waffe
@@ -188,10 +209,11 @@ ok(statErrors.length === 0,
 
 // Crit gegen questlog: statId 1000007 = Critical Rate, Stufe bei Refinement +0. 1000010 ist
 // Attack Speed und zaehlt NICHT als Crit. Referenz: weapon-crit-reference.json (Abzug 03.10.2026).
-// Schilde mit crit 0 ohne questlog-Feld sind eine dokumentierte Altkonvention (nur Info).
+// Items ohne questlog-Feld (noCritField) muessen crit:null + crit_none:true tragen; das gilt seit
+// 07.10.2026 auch fuer die 76 Schilde, die frueher crit 0 trugen (User-Entscheidung).
 const critRef = JSON.parse(fs.readFileSync(path.join(__dirname, "weapon-crit-reference.json"), "utf8"));
 const critErrors = [];
-let critChecked = 0, schildKonvention = 0;
+let critChecked = 0;
 for (const [name, soll] of Object.entries(critRef.crit)) {
   const w = weaponByName.get(name);
   if (!w) continue;
@@ -202,13 +224,11 @@ for (const name of critRef.noCritField) {
   const w = weaponByName.get(name);
   if (!w) continue;
   critChecked++;
-  if (w.crit == null) continue;
-  if (w.type === "Shield" && w.crit === 0) { schildKonvention++; continue; }
-  critErrors.push(`${name}: crit=${w.crit}, questlog fuehrt kein Critical-Rate-Feld`);
+  if (w.crit == null && w.crit_none === true) continue;
+  critErrors.push(`${name}: crit=${w.crit ?? "null"}${w.crit_none ? "" : " ohne crit_none"}, questlog fuehrt kein Critical-Rate-Feld`);
 }
 ok(critErrors.length === 0,
   `Crit gegen questlog-Stat 1000007: ${critChecked} geprueft, ${critErrors.length} Abweichungen${critErrors.length ? " -> " + critErrors.slice(0, 8).join("; ") : ""}`);
-if (schildKonvention) console.log(`  info  ${schildKonvention} Schilde mit crit 0, questlog ohne Critical-Rate-Feld (Altkonvention, siehe d01-Kommentar)`);
 
 // Abschliessende Lagemeldung zur Datenvollstaendigkeit (kein Fehler, nur Info)
 // crit_none:true markiert Waffen, bei denen questlog.gg (tRPC database.getItem, levels[0].stats)
@@ -232,7 +252,7 @@ for (const [t, d] of Object.entries(proTyp)) {
   if (d.ohne) teile.push(`nicht erfasst=${d.ohne}x`);
   if (teile.length) console.log(`  info  Slots je Typ  ${t.padEnd(26)} ${teile.join(", ")}`);
 }
-console.log(`  info  ${AUSNAHMEN.size} Einzelausnahmen mit Beleg (siehe AUSNAHMEN); Schilde mit crit 0: Altkonvention, Entscheidung offen (WIKI-PLAN, Backlog Block 3)`);
+console.log(`  info  ${AUSNAHMEN.size} Einzelausnahmen mit Beleg (siehe AUSNAHMEN)`);
 
 console.log(`\n${fail === 0 ? "ALLE CHECKS GRUEN" : fail + " CHECK(S) FEHLGESCHLAGEN"}`);
 process.exit(fail === 0 ? 0 : 1);

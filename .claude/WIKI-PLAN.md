@@ -147,6 +147,13 @@ game8, Fextralife, PowerPyx, VULKK, questlog. Unsicheres als `conf` bzw. „nich
   - verify-seo prüft Meta-Zahlen, FAQ-Namenslisten und Anker; verify-weapons Ausnahmen/Slot-Verteilung.
   - Checks grün, Render-Check (neue Baseline): tr 727, data_s 3055, 0 Fehler, 0 doppelte IDs, 34 Sektionen.
 
+- **User-Entscheidungen umgesetzt 07.10.2026** (Workflow `wf_8494a2e0-c8d`, 7 Agenten seriell: Umsetzung Opus medium,
+  Review Sonnet high). Fextralife-Bilder ersetzt (434 Waffen + 12 Bosse als lokale questlog-Icons, 10 Mount-Portraits,
+  FEX_FB 458 → 4, preconnect entfernt, Belege data/item-image-sources.json); 10 Schilde → „… Large Shield“ (WEAPON_RENAMES);
+  WEAPONS.type auf 12 feste Typen; Schilde crit:null/crit_none; Epilog als eigener CHAPTERS-Eintrag (zählt nicht für
+  Storyteller/Roadmap 12/12); Demeniss/Demenissian-Rüstungsnamen nach questlog (ARMOR_RENAMES); Turbine und „13 Fraktionen“
+  als nicht bestätigt gekennzeichnet. Checks grün, Render-Check = Baseline (tr 727, data_s 3055).
+
 ## Backlog (bereinigt am 06.10.2026 nach der Backlog-Abarbeitung)
 
 _Ersetzt alle früheren Backlog-Abschnitte. Erledigtes ist entfernt; übrig ist nur, was Ingame-Prüfung, eine Entscheidung des Users, Block 7 oder laufende Beobachtung braucht oder zu groß für einen Durchgang ist._
@@ -205,3 +212,15 @@ _Ersetzt alle früheren Backlog-Abschnitte. Erledigtes ist entfernt; übrig ist 
 - Intro-Absatz für bosse.html und waffen.html (redaktionell); Switch-2-/Multiplayer-Hinweis optional; Mobile-Test-Hinweis
 - Fextralife-Spiegel (cd_assets/weapons/fex 435 Dateien, bosses/fex, mounts/ig, Fallback static0.fextralifeimages.com): Lizenz/Nutzungserlaubnis — rechtliche Klärung oder Umstellung auf questlog-/offizielle Icons
 - Regelfrage 'Boss ohne questlog-Beleg (Turbine) entfernen oder behalten' und '13 Fraktionen der Liberation nicht belegt' — Paket 2 liefert Befund, Streichung entscheidet der User
+
+### Nach den User-Entscheidungen (07.10.2026)
+- Fextralife-Bilder ohne questlog-Ersatz: Tenebrum (bosses/fex/tenebrum.png), mounts/ig Boar, Greywolf, Pywel Wagon und Train (FEX_FB-Fallback bleibt für diese 4), 7 Fundort-Screenshots (Acorn Mace, Rhonid Large Shield, Ring of the Earth, Scorchflame Plate Gloves und Helm, Soul Spear, Sunset Reed Leather Armor) und Combat God's Plate Gloves.
+- Etwa 45 weitere Fundort-Screenshots stammen von Drittseiten (VULKK, GameRant, Nerdschalk …); die Rechtefrage ist offen. Dazu kommen Hotlinks auf beebom, futurecdn und gaming.tools bei Mounts und Witches.
+- Ungeklärt, ob 'Rhonid Shield' als eigener Eintrag stimmt: questlog kennt nur 'Rhonid Large Shield', beide teilen jetzt item-290509.webp.
+- Weitere Schilde ohne questlog-Treffer (Black Sun, Mirror of Night, Phantom, Demenissian of Valor/Loyalty/Obedience …) sind nicht umbenannt. Questlog führt 'Shield of the Phantom' (1001428), das Wiki 'Phantom Shield'.
+- Typfragen offen: Sorcerer's Staff und Staff of the Fleeting stehen unter Halberd / Spear (2H), ihre questlog-Kategorie ist ungeprüft. Goblin King's Treasure fehlt im questlog-Abzug.
+- Veraltete Hinweise: Kommentar in index.html Z. 7587 ('bosses/fex/') und der Abschnitt Linkcheck in .claude/CLAUDE.md mit Verweis auf cd_assets/*/fex/. Beides bewusst nicht angefasst, wegen des kommentarblinden extract() bzw. weil CLAUDE.md außerhalb des Pakets liegt.
+- Toter Code: wTypeIcon() und renderQuestTimeline() in index.html werden nirgends aufgerufen. Bei Gelegenheit entfernen.
+- Epilog zählt bewusst nicht für Storyteller, Roadmap 12/12 und das Gate 'alle Pflichtpunkte'. Falls er künftig zählen soll, ist das eine eigene Entscheidung. Eine Unterkapitel-Gliederung im CHAPTERS-Modell braucht noch ein abgestimmtes Datenmodell.
+- Der Beschriftungstext für Waffen ohne Crit ('kein Crit-Stat' bzw. 'kein Crit') ist für alle 320 Waffen einheitlich geblieben. Eine Umbenennung in 'kein Crit-Wert' wäre eine eigene Entscheidung.
+- Der Liberation-Satz nennt weiter 'Forts und Steinbrüche'; Patch 1.05.00 belegt nur 23 Forts.

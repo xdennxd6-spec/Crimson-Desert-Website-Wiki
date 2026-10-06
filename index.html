@@ -58,7 +58,6 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://static0.fextralifeimages.com">
 <link rel="preconnect" href="https://cdn.questlog.gg">
 <link rel="preload" as="script" href="data/d01-weapons.js">
 <link rel="preload" as="script" href="data/d02-crafting.js">
@@ -1418,6 +1417,7 @@ a:visited{color:var(--gold)}
 .fav-btn.fav-inline{position:static;display:inline-flex;width:22px;height:22px;font-size:12px;background:transparent;border:none}
 .fav-btn.fav-inline:hover{background:var(--instr-soft)}
 .fav-btn.fav-inline.on{background:transparent;color:var(--brass)}
+.boss-unconf{font-family:var(--f-mono);font-size:var(--fs-9);font-weight:700;letter-spacing:.06em;color:var(--gdim);border:1px solid var(--bdr);border-radius:7px;padding:1px 5px;vertical-align:middle;white-space:nowrap}
 
 /* Favoriten-Section */
 .fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
@@ -3556,7 +3556,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Dyes-Sektion).</div>
 <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Datenlage:</b> Crimson Desert veröffentlicht keine Waffen-Schadenswerte, deshalb gibt es hier bewusst <b>keine DPS- oder Vergleichsformel</b>. Wo ein Wert nicht belegbar war, steht „nicht erfasst“ statt einer geratenen 0 — aktuell bei <b><span id="wep-nocrit">–</span> von <span id="wep-total">–</span></b> Waffen der Krit-Wert (weitere <span id="wep-critnone">–</span> Waffen führen laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld, dort steht „kein Crit-Stat“), bei <span id="wep-noslots">–</span> die Slot-Zahl und bei <span id="wep-noatk">–</span> weder ATK- noch DEF-Wert (Schilde führen strukturell DEF statt ATK). In der Praxis zählen ohnehin Refine-Stufe, Abyss-Cores und Waffentyp mehr als die Grundzahl.<br><b>Was die ATK-Zahl hier bedeutet:</b> Sie ist die <b>Refinement-Endstufe +10</b>, also ausdrücklich <b>kein Fundzustands-Wert</b> — eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer, bei Zweihändern oft nur etwa ein Drittel. Ein Vollabgleich am <b>09.09.2026</b> gegen die questlog-Stufentabellen (alle 500 Einträge einzeln abgerufen) bestätigt das für <b>406 der 407</b> Waffen, deren ATK-Wert dort überhaupt geführt wird; 32 abweichende Werte wurden dabei korrigiert, weil sie eine Zwischenstufe oder den Fundzustand zeigten. Die 14 übrigen ATK-Werte hat questlog nicht im Bestand und sie bleiben unverändert. Der damals einzige offene Widerspruch, die <b>Rhinard Cannon</b> (questlog und Fextralife führen zwei verschiedene Stufenreihen), ist seit 03.10.2026 zugunsten der questlog-Spieldaten aufgelöst (Endstufe 31). Für <b>Banner Pikes</b> gilt die Regel nur formal: 53 von ihnen sind laut questlog gar nicht verfeinerbar, ihr Wert ist damit zugleich Fund- und Endwert. Schilde führen statt ATK einen <b>DEF-Wert</b>, ebenfalls in der Endstufe (62 von 62 gegen questlog bestätigt).</div>
     <div class="fbar">
-      <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword">Sword (1H)</option><option value="Greatsword">Greatsword (2H)</option><option value="Curved Sword">Curved Sword</option><option value="Halberd">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles">Knuckles / Unarmed</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Shield">Shield</option><option value="Hand Cannon">Hand Cannon</option><option value="A.T.A.G.">A.T.A.G. Weapon</option></select>
+      <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword (1H)">Sword (1H)</option><option value="Greatsword (2H)">Greatsword (2H)</option><option value="Halberd / Spear (2H)">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles / Gauntlets">Knuckles / Gauntlets</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow (Ranged)">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Hand Cannon">Hand Cannon</option><option value="Shield">Shield</option><option value="A.T.A.G. Weapon">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen vergleichen">⚔️ Vergleichen</button>
     </div>
     <div class="grid" id="weapon-tb"></div>
@@ -4543,7 +4543,8 @@ const SQ_RENAMES={"Sigil-Mount-System — Freischaltung (Übersicht)":"Sigil of 
 })();
 // Waffen-Umbenennungen/Zusammenlegungen: gespeicherte Waffen-Namen (cd_wep = abgehakt, cd_favs.weapon) alt→neu migrieren.
 // 03.10.2026: Dublette "Rhonid Shield" entfernt, gleicher Gegenstand wie "Rhonid Large Shield" (questlog 290509). Idempotent, läuft bei jedem Laden.
-const WEAPON_RENAMES={"Rhonid Shield":"Rhonid Large Shield"};
+// 07.10.2026: zehn große Schilde auf ihren Spielnamen "… Large Shield" umbenannt (questlog large-shields).
+const WEAPON_RENAMES={"Rhonid Shield":"Rhonid Large Shield","Demenissian Soldier's Shield":"Demenissian Soldier's Large Shield","Gilliam Shield":"Gilliam Large Shield","Lanford Shield":"Lanford Large Shield","Legion Spearmen's Shield":"Legion Spearmen's Large Shield","Lifsoth Shield":"Lifsoth Large Shield","Lucon Shield":"Lucon Large Shield","Reinforced Warspike Shield":"Reinforced Warspike Large Shield","Rekel Shield":"Rekel Large Shield","Thalwynd Shield":"Thalwynd Large Shield","Thorny Warspike Shield":"Thorny Warspike Large Shield"};
 (function migrateWeaponRenames(){
   try{
     const ren=n=>WEAPON_RENAMES[n]||n, hit=a=>Array.isArray(a)&&a.some(n=>WEAPON_RENAMES[n]);
@@ -4573,6 +4574,22 @@ const SKILL_RENAMES={"Rage (Super Armor State)":"Rage","Explosive Strike — Cha
       lsSet('cd_recent',JSON.stringify(rc.map(x=>x&&x.kind==='skill'&&SKILL_RENAMES[x.name]?{...x,name:SKILL_RENAMES[x.name]}:x).filter(x=>{const k=(x&&x.kind)+'|'+(x&&x.name);if(seen.has(k))return false;seen.add(k);return true;})));
     }
   }catch(e){console.warn('migrateSkillRenames',e);}
+})();
+// Rüstungs-Umbenennungen (07.10.2026): Demeniss/Demenissian an questlog angeglichen (Item 1001532 bzw. 1001557).
+// Rüstungen haben derzeit keinen Favoriten-Knopf und landen nicht in cd_recent; die Migration sichert cd_favs.armor
+// und cd_recent-Einträge {kind:'armor'} trotzdem ab (Altdaten, Import). Idempotent, läuft bei jedem Laden.
+const ARMOR_RENAMES={"Demeniss Elite Uniform Leather Armor":"Demenissian Elite Uniform Leather Armor","Demenissian Elite Uniform Leather Boots":"Demeniss Elite Uniform Leather Boots"};
+(function migrateArmorRenames(){
+  try{
+    const ren=n=>ARMOR_RENAMES[n]||n, hit=a=>Array.isArray(a)&&a.some(n=>ARMOR_RENAMES[n]);
+    const f=lsJson('cd_favs',null);
+    if(f&&typeof f==='object'&&hit(f.armor)){f.armor=[...new Set(f.armor.map(ren))];lsSet('cd_favs',JSON.stringify(f));}
+    const rc=lsJson('cd_recent',null);
+    if(Array.isArray(rc)&&rc.some(x=>x&&x.kind==='armor'&&ARMOR_RENAMES[x.name])){
+      const seen=new Set();
+      lsSet('cd_recent',JSON.stringify(rc.map(x=>x&&x.kind==='armor'&&ARMOR_RENAMES[x.name]?{...x,name:ARMOR_RENAMES[x.name]}:x).filter(x=>{const k=(x&&x.kind)+'|'+(x&&x.name);if(seen.has(k))return false;seen.add(k);return true;})));
+    }
+  }catch(e){console.warn('migrateArmorRenames',e);}
 })();
 // Cresset-Tracker (cd_cr_tracker, Werte je Region): Die Region-Obergrenzen wurden an die game8-Liste angepasst (11/9/13/7/20 statt 13/10/9/7/21, Summe weiter 60).
 // Werte ueber der neuen Obergrenze einer Region werden gekappt und auf Regionen mit freiem Platz verteilt, damit die Gesamtzahl erhalten bleibt
@@ -5028,7 +5045,7 @@ function renderQuestTimeline(){
     const num=c.ch;
     const isNum=/^\d+$/.test(num);
     const dotLabel=isNum?num:(num==='Prolog'?'P':num==='Epilog'?'E':'?');
-    const isDone=isNum?doneRaw.includes(parseInt(num,10)):false;
+    const isDone=isNum?doneRaw.includes(parseInt(num,10)):(num==='Epilog'&&doneRaw.includes('Epilog'));
     return `<div class="qst-node${isDone?' done':''}" onclick="showSec('chapters');document.getElementById('si').value='';doSearch('')" data-tip="${(c.boss||'Kein Boss').replace(/"/g,'&quot;')}${c.warn?'<br>⚠ '+c.warn.replace(/"/g,'&quot;'):''}${c.unlock?'<br>🔓 '+c.unlock.replace(/"/g,'&quot;'):''}" data-tip-title="${num} — ${c.name.replace(/"/g,'&quot;')}">
       <div class="qst-node-dot">${dotLabel}</div>
       <div class="qst-node-label">${c.name}</div>
@@ -5500,7 +5517,7 @@ function _crTotal(){
 function renderLoreTimeline(){
   const el=document.getElementById('secp-timeline'); if(!el)return;
   const frame=[{icon:'∞',phase:'Vor Run 108',title:'Archiv-Einträge bis #107',desc:'Die Archive Records im Axiom Archive (Verfasser ungenannt, nach Inhalt einer der Abyss-Wächter um Alustin und White Crow) berichten: Ein Zeitsprung rettete die Wächter vor Umbra, änderte aber nichts (Eintrag #1). Sie fanden Kliff (#4) und veränderten über viele Anläufe seine Wege und Eigenschaften — ohne Erfolg. Deutung der Guides: 107 gescheiterte Versuche.',cls:'lt-special'}];
-  const chapters=(typeof CHAPTERS!=='undefined'?CHAPTERS:[]).map(c=>({icon:String(c.num).padStart(2,'0'),phase:'Kapitel '+c.num,title:c.title,desc:'Boss: '+c.boss}));
+  const chapters=(typeof CHAPTERS!=='undefined'?CHAPTERS:[]).map(c=>c.num==='Epilog'?({icon:'E',phase:'Epilog',title:c.title,desc:'Boss: '+c.boss}):({icon:String(c.num).padStart(2,'0'),phase:'Kapitel '+c.num,title:c.title,desc:'Boss: '+c.boss}));
   const reveal=[
     {icon:'🩸',phase:'Wendepunkt',title:'Caliburn und Umbra',desc:'Archive Entry #72: Caliburn „appears to be an incarnation of Umbra“ — und war nicht immer ein böser Mann. Im Finale folgen Corrupted Caliburn → Myurdin, the Avatar of Umbra → Umbra (Final).',cls:'lt-special'},
     {icon:'🕯️',phase:'Wendepunkt',title:'Hexe Marie und White Crow',desc:'Archive Entry #2: Umbra verschlang ein Fragment des White Crow. Entry #18: Dieser abgespaltene Teil, nun Hexe Marie genannt, ist von Kliff besessen und will ihn zu ihrem Sohn machen.',cls:'lt-special'},
@@ -5534,7 +5551,7 @@ function renderSecrets(){
         <div class="sec-block-body">
           <p>Erst freischaltbar <strong>nach vollständigem Story-Abschluss</strong>:</p>
           <ul>
-            <li>Prolog + alle <strong>12 Kapitel</strong> + Epilog (Kap. XII)</li>
+            <li>Prolog + alle <strong>12 Kapitel</strong> + Epilog (nach Kap. XII)</li>
             <li>Alle <strong>40 Abyss-Challenges</strong> inkl. <em>Dimensional Bonds</em> (Kap. XII)</li>
             <li>Nicht erforderlich: die 4 Eternal-Corridor-Puzzles — gehören zur optionalen Questreihe um Marni</li>
           </ul>
@@ -7706,6 +7723,8 @@ function printCheatSheet(){
 
 // ===== SPOILER HORIZON (nach Kapitel) =====
 function loadSpoilerChapter(){return parseInt(localStorage.getItem('cd_spoiler_chapter')||'0',10)||0;}
+// Kapitel-Reihenfolge fuer Spoiler-Horizont: Zahlen wie gehabt, Prolog=0, Epilog=hinter dem letzten nummerierten Kapitel.
+function chOrd(n){const s=String(n);if(/^\d+$/.test(s))return parseInt(s,10);if(s==='Prolog')return 0;if(s==='Epilog'){const m=(typeof CHAPTERS!=='undefined'?CHAPTERS:[]).filter(c=>typeof c.num==='number').reduce((a,c)=>Math.max(a,c.num),12);return m+1;}return NaN;}
 function setSpoilerChapter(v){
   lsSet('cd_spoiler_chapter',String(parseInt(v,10)||0));
   renderBosses();
@@ -7759,7 +7778,7 @@ function renderBosses(){
       </div>
       </div>
       <div class="record-body">
-      <div class="ct">${b.name}</div>
+      <div class="ct">${b.name}${b.conf==='low'?` <span class="boss-unconf" title="${escHtml(b.notes||'Nicht bestätigt – im Spiel prüfen')}">NICHT BESTÄTIGT</span>`:''}</div>
       <div class="record-desig">${escHtml(chap)} &middot; ${escHtml(b.region)} &middot; ${escHtml(b.quest)}</div>
       <div class="boss-sum">${_bossSumChips(b,hasNote)}</div>
       <div class="boss-actions">
@@ -7784,6 +7803,7 @@ function renderBosses(){
           ${b.drop_weapon!=='–'?`<div><dt>Waffe-Drop</dt><dd>${escHtml(b.drop_weapon)}</dd></div>`:''}
           ${b.drop_abyss_gear!=='–'?`<div><dt>Abyss Core</dt><dd>${escHtml(b.drop_abyss_gear)}</dd></div>`:''}
           ${b.weakness!=='–'?`<div><dt>Schwäche</dt><dd style="color:var(--warn)">${escHtml(b.weakness)}</dd></div>`:''}
+          ${b.conf==='low'&&b.notes?`<div><dt>Quellenlage</dt><dd>${escHtml(b.notes)}</dd></div>`:''}
         </dl>
         <div class="cm">
           <span class="tag tr tag-clickable" onclick="event.stopPropagation();applyBossFilter('chapter','${chap}')" title="Filter: ${chap}" data-tip="Klick filtert nach diesem Kapitel">${chap}</span>
@@ -7916,7 +7936,7 @@ function renderWeapons(){
   const q=((si&&si.value)||'').trim().toLowerCase();
   const searching=!!q;
   const qF=_fold(q);
-  const total=f?WEAPONS.filter(w=>w.type.includes(f)).length:WEAPONS.length;
+  const total=f?WEAPONS.filter(w=>w.type===f).length:WEAPONS.length;
   const pages=Math.max(1,Math.ceil(total/WEP_PER));
   if(_wepPage>=pages)_wepPage=pages-1;
   if(_wepPage<0)_wepPage=0;
@@ -7924,7 +7944,7 @@ function renderWeapons(){
   let fi=-1;
   let shown=0;
   document.getElementById('weapon-tb').innerHTML=WEAPONS.map(w=>{
-    const passFilter=!f||w.type.includes(f);
+    const passFilter=!f||w.type===f;
     const sourceText=w.source&&w.source.trim()?w.source:'Sammelimport';
     const s=[w.name,w.type,sourceText,w.built_in,w.notes].join(' ').toLowerCase();
     const hidden=[sourceText,w.notes].filter(Boolean).join(' ');
@@ -8404,16 +8424,16 @@ function renderMQ(){
     const acc=(typeof chapAccent==='function')?chapAccent(ch.ch):null;
     const isNum=/^\d+$/.test(ch.ch);
     const numLabel=isNum?ch.ch:(ch.ch==='Prolog'?'P':ch.ch==='Epilog'?'E':'•');
-    const chNum=parseInt(ch.ch,10);
+    const chNum=chOrd(ch.ch);
     const locked=sp>0&&!isNaN(chNum)&&chNum>sp;
     const hasMiss=detailed&&ch.quests.some(q=>q.miss);
     const bossTag=ch.boss?'<span class="chap-boss-tag">⚔ '+escHtml(ch.boss)+'</span>':'';
     const missTag=hasMiss?MISS_CHIP:'';
     const regAttr=acc?' data-reg style="--reg:'+acc.col+'"':'';
     return `<div class="chap${locked?' spoiler-locked':''}"${regAttr}>
-    ${locked?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${escHtml(ch.ch)} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
+    ${locked?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">${isNum?'Kapitel ':''}${escHtml(ch.ch)} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
     <div class="chap-hd" onclick="toggleChap(this)" role="button" tabindex="0" aria-expanded="false">
-      <div class="chap-hl"><span class="chap-num">${numLabel}</span><span class="chap-title">Kap. ${escHtml(ch.ch)} — ${escHtml(ch.name)}</span></div>
+      <div class="chap-hl"><span class="chap-num">${numLabel}</span><span class="chap-title">${isNum?'Kap. ':''}${escHtml(ch.ch)} — ${escHtml(ch.name)}</span></div>
       <div class="chap-r"><span style="font-size:var(--fs-11);color:var(--dim)">${ch.quests.length} Quests${detailed?' · Walkthrough':''}</span>${missTag}${bossTag}<span class="chap-arr">▼</span></div>
     </div>
     <div class="chap-body">
@@ -8563,7 +8583,7 @@ function renderFactions(){
     }).join('');
     return '<div class="fac-reg"><div class="fac-rh">'+escHtml(r.region)+' &mdash; '+r.factions.length+' Fraktionen &middot; '+fq+' Quests</div><div class="fac-b">'+facs+'</div></div>';
   }).join('');
-  const liberation='<div class="fac-reg"><div class="fac-rh">Liberation &mdash; Re-Blockade [1.05]</div><div class="fac-b"><span style="color:var(--dim);font-size:12px">23 Forts und Steinbr&uuml;che, 13 Fraktionen (Stand Patch 1.05.00; regions&uuml;bergreifendes Endgame-System)</span><div><div class="fac-lb">Notable Forts</div><ul class="fac-ul"><li>Fort Warspike &mdash; Multishot-Lehrer!</li><li>Gorthak Ironworks Delesyia &mdash; beste Armaments-Quelle</li><li>Karin Quarry &mdash; House Roberts</li></ul></div></div></div>';
+  const liberation='<div class="fac-reg"><div class="fac-rh">Liberation &mdash; Re-Blockade [1.05]</div><div class="fac-b"><span style="color:var(--dim);font-size:12px">23 Forts und Steinbr&uuml;che (Stand Patch 1.05.00; regions&uuml;bergreifendes Endgame-System). Die fr&uuml;here Angabe &bdquo;13 Fraktionen&ldquo; ist <span title="Die Patch-Notes 1.05.00 nennen nur die Re-Blockade f&uuml;r 23 Forts, keine Zahl beteiligter Fraktionen" style="font-weight:700;color:var(--gdim)">nicht belegt</span>.</span><div><div class="fac-lb">Notable Forts</div><ul class="fac-ul"><li>Fort Warspike &mdash; Multishot-Lehrer!</li><li>Gorthak Ironworks Delesyia &mdash; beste Armaments-Quelle</li><li>Karin Quarry &mdash; House Roberts</li></ul></div></div></div>';
   document.getElementById('fac-list').innerHTML=lead+regs+liberation;
 }
 
@@ -9965,15 +9985,16 @@ function renderSanctumGuide(){
 function renderChapters(){
   const done=lsJson('cd_ch_done',[]);
   const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
-  const toc=makeToc(CHAPTERS.map(c=>({id:`ch-${c.num}`,label:`Kap. ${String(c.num).padStart(2,'0')}`})));
+  const isEp=c=>c.num==='Epilog';
+  const toc=makeToc(CHAPTERS.map(c=>({id:`ch-${c.num}`,label:isEp(c)?'Epilog':`Kap. ${String(c.num).padStart(2,'0')}`})));
   document.getElementById('ch-timeline').innerHTML=toc+CHAPTERS.map(c=>{
     const d=done.includes(c.num);
-    const _l=sp>0&&c.num>sp;
+    const _l=sp>0&&chOrd(c.num)>sp;
     return `<div id="ch-${c.num}" class="ch-card${d?' ch-done':''}${_l?' spoiler-locked':''}" style="scroll-margin-top:72px">
-      ${_l?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">Kapitel ${c.num} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
+      ${_l?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">${isEp(c)?'Epilog':'Kapitel '+c.num} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
       <div class="ch-num-blk">
-        <div class="ch-kap-lbl">KAP.</div>
-        <div class="ch-num">${String(c.num).padStart(2,'0')}</div>
+        <div class="ch-kap-lbl">${isEp(c)?'EPILOG':'KAP.'}</div>
+        <div class="ch-num">${isEp(c)?'E':String(c.num).padStart(2,'0')}</div>
       </div>
       <div class="ch-body">
         <div class="ch-title">${c.title}</div>
@@ -9983,7 +10004,7 @@ function renderChapters(){
           ${c.missable?`<div class="ch-row"><span class="ch-row-lbl">⚠️ Missable</span><span class="ch-row-val ch-miss">${c.missable}</span></div>`:''}
           <div class="ch-row"><span class="ch-row-lbl">Tipp</span><span class="ch-row-val" style="color:var(--dim)">${c.tip}</span></div>
         </div>
-        <button class="ch-btn${d?' done':''}" onclick="toggleChDone(${c.num})">${d?'✓ Abgeschlossen':'Als abgeschlossen markieren'}</button>
+        <button class="ch-btn${d?' done':''}" onclick="toggleChDone(${typeof c.num==='number'?c.num:"'"+c.num+"'"})">${d?'✓ Abgeschlossen':'Als abgeschlossen markieren'}</button>
       </div>
     </div>`;
   }).join('');

@@ -194,7 +194,7 @@
     },
     {
       "frage": "Welche Waffentypen gibt es in Crimson Desert?",
-      "antwort": "Die Datenbank gruppiert die {{anzahl}} Waffen in {{typen}} Typen mit je eigenem Tabellenabschnitt, unter anderem Schwerter, gekrümmte Schwerter, Zweihänder, Speere und Hellebarden, Äxte und Stumpfwaffen, Dolche, Bögen, Feuerwaffen, Handkanonen, Fäuste, Stäbe, Rapiere und Schilde."
+      "antwort": "Die Datenbank gruppiert die {{anzahl}} Waffen in {{typen}} Typen mit je eigenem Tabellenabschnitt, nämlich Einhandschwerter, Zweihänder, Speere und Hellebarden, Rapiere, Dolche, Fäuste, Äxte und Stumpfwaffen, Bögen, Feuerwaffen, Handkanonen, Schilde sowie der A.T.A.G.-Mech als Sondereintrag."
     },
     {
       "frage": "Wie funktionieren Abyss-Slots bei Waffen in Crimson Desert?",
