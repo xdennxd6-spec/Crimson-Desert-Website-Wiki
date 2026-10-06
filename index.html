@@ -1715,6 +1715,15 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .card.boss-done .boss-img,.card.boss-done .boss-img-ph{filter:grayscale(.7)brightness(.85)}
 .boss-done-badge{display:none;position:absolute;top:50px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:var(--fs-9-5);font-weight:700;letter-spacing:.14em;color:var(--vellum);background:var(--survey-red);border:1px solid var(--survey-red);padding:2px 9px;pointer-events:none;z-index:5;white-space:nowrap;border-radius:999px}
 .card.boss-done .boss-done-badge{display:block}
+/* Mount-Karten: Stats und Notizen erst nach Aufklappen (seit 06.10.2026) */
+#mount-sections .grid{align-items:start}
+.mount-notes{margin-top:10px;border-top:1px solid var(--bdr);padding-top:8px}
+.mount-notes>summary{cursor:pointer;list-style:none;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gdim);user-select:none}
+.mount-notes>summary::-webkit-details-marker{display:none}
+.mount-notes>summary::before{content:'▸ ';display:inline-block;transition:transform .2s}
+.mount-notes[open]>summary::before{transform:rotate(90deg)}
+.mount-notes>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.mount-notes-body{margin-top:6px;font-size:var(--fs-11-5);color:var(--dim);line-height:1.55}
 .npc-card{cursor:pointer}
 .npc-card .npc-more{display:none}
 .npc-card.open .npc-more{display:block}
@@ -7132,6 +7141,13 @@ function _closeSearchOpened(scope=document){
 // (.craft-more/.npc-more), klappt die Suche die Karte auf, sonst zaehlt der Zaehler einen Treffer,
 // den niemand sieht. Kopf = alles ausser dem Detailteil (Name, Kategorie-Leiste).
 function _openCardForSearch(el,needles){
+  // Mount-Karten: Notizen stecken in <details class="mount-notes">; steht der Treffer nur dort, aufklappen
+  const mn=el.querySelector&&el.querySelector(':scope>details.mount-notes');
+  if(mn&&!mn.open){
+    if(el._srchHead===undefined){let h='';el.childNodes.forEach(n=>{if(n!==mn)h+=' '+n.textContent;});el._srchHead=_fold(h);}
+    if(needles.every(x=>el._srchHead.includes(x)))return false;
+    mn.open=true;mn.dataset.srchOpen='1';return true;
+  }
   if(!el.classList||el.classList.contains('open')||!(el.classList.contains('craft-card')||el.classList.contains('npc-card')))return false;
   if(el._srchHead===undefined){
     let h='';
@@ -8807,9 +8823,8 @@ function mountCard(m){
     <div class="cm"><span class="tag ${badge}">${m.type}</span></div>
     <div class="crows">
       <div class="crow"><span class="cl">Freischalten</span><span class="cv">${m.unlock}</span></div>
-      <div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${m.stats}</span></div>
-      ${m.notes?'<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">'+m.notes+'</span></div>':''}
     </div>
+    ${(m.stats||m.notes)?`<details class="mount-notes"><summary>${m.stats&&m.notes?'Stats &amp; Notizen':m.stats?'Stats':'Notizen'}</summary><div class="mount-notes-body">${m.stats?`<div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${m.stats}</span></div>`:''}${m.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${m.notes}</span></div>`:''}</div></details>`:''}
     ${MOUNT_INGAME_IMGS[m.name]?`<button class="mount-ig-btn" onmouseenter="showMountIG(event,'${m.name.replace(/'/g,"\\'")}')" onmouseleave="hideMountIG()" onclick="openMountIG('${m.name.replace(/'/g,"\\'")}')">👁 In-Game Ansicht</button>`:''}
   </div>`;
 }
