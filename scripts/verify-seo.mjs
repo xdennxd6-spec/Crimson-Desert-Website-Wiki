@@ -70,6 +70,43 @@ const N_FAC_QUESTS = FAC_DATA.regions.reduce((sum, r) =>
   sum + r.factions.reduce((m, f) => m + f.quests.length, 0), 0);
 const NPCS = extract("NPCS");
 const N_NPCS = Object.values(NPCS).reduce((sum, arr) => sum + arr.length, 0);
+// NEU (07.10.2026): zehn Themen-Seiten. Soll-Mengen auch hier bewusst selbst
+// gerechnet statt aus ZAHLEN()/COUNT_CHECK() der Module uebernommen.
+// RUINS_DATA steht in data/d08-ruins-data.js als "var", extract() sucht "const".
+const extractVar = (name) => {
+  const m = new RegExp("(?:var|let|const) " + name + "\\s*=\\s*([\\[{])").exec(html);
+  if (!m) throw new Error("Datenstruktur nicht gefunden: " + name);
+  const i = m.index + m[0].length - 1;
+  const open = html[i], close = open === "[" ? "]" : "}";
+  let d = 0, s = null, e = false;
+  for (let j = i; j < html.length; j++) {
+    const c = html[j];
+    if (e) { e = false; continue; }
+    if (c === "\\") { e = true; continue; }
+    if (s) { if (c === s) s = null; continue; }
+    if (c === '"' || c === "'" || c === "`") { s = c; continue; }
+    if (c === open) d++;
+    else if (c === close) { d--; if (d === 0) return eval("(" + html.slice(i, j + 1) + ")"); }
+  }
+  throw new Error("Klammern unbalanciert bei: " + name);
+};
+const KLIFF_BAEUME = [["Kliff", extract("KLIFF_STAMINA")], ["Kliff", extract("KLIFF_SPIRIT")], ["Kliff", extract("KLIFF_HEALTH")]];
+const SKILL_BAEUME = [...KLIFF_BAEUME, ["Damiane", extract("DAMIANE_SKILLS")], ["Oongka", extract("OONGKA_SKILLS")]];
+const WATCH_AND_LEARN = extract("WATCH_AND_LEARN");
+const N_SKILLS = SKILL_BAEUME.reduce((n, [, b]) => n + b.length, 0);
+const CORES = extract("CORES"), CORE_TIERS = extract("CORE_TIERS");
+const CHAPTERS = extract("CHAPTERS");
+const PUZZLES = extract("PUZZLES");
+const RUINS_DATA = extractVar("RUINS_DATA");
+const RUINEN = Object.values(RUINS_DATA).flat();
+const SECRETS = Object.fromEntries(["SECRETS_EASTER_EGGS", "SECRETS_LOCATIONS", "SECRETS_MECHANICS",
+  "SECRETS_HIDDEN_WEAPONS", "SECRETS_CRESSET_REGIONS", "SECRETS_TOOLS", "FRAGMENT_REGIONS", "CRESSET_REGIONS"]
+  .map((n) => [n, extract(n)]));
+const N_SECRETS = ["SECRETS_EASTER_EGGS", "SECRETS_LOCATIONS", "SECRETS_MECHANICS", "SECRETS_HIDDEN_WEAPONS",
+  "SECRETS_CRESSET_REGIONS", "SECRETS_TOOLS", "FRAGMENT_REGIONS"].reduce((n, k) => n + SECRETS[k].length, 0);
+const MOUNTS = extract("MOUNTS"), PETS = extract("PETS");
+const WITCHES = extract("WITCHES"), WITCH_SYNTHESIS = extract("WITCH_SYNTHESIS");
+const ACCESSORIES = extract("ACCESSORIES");
 const allImgVals = [...Object.values(B), ...Object.values(W)];
 const absUrls = allImgVals.filter((v) => /^https?:/i.test(v));
 console.log(`\n[Bild-Maps] BOSS_IMGS=${Object.keys(B).length}, WEAPON_IMGS=${Object.keys(W).length}, absolute URLs=${absUrls.length}`);
@@ -106,6 +143,17 @@ const pages = {
   // Fraktion wuerde die Seitensuche auf die Fraktion statt die Quest werfen.
   "fraktionen.html": { sec: "/#sec=quests&tab=fac", count: { regex: /<tr id="fr-/g, expected: N_FAC_QUESTS, label: "Fraktionsquest-Zeilen" } },
   "npcs.html": { sec: "/#sec-npcs", count: { regex: /<article class="card" id="npc-/g, expected: N_NPCS, label: "NPC-Karten" } },
+  // NEU (07.10.2026): Regex und Label aus COUNT_CHECK der zehn Module.
+  "skills.html": { sec: "/#sec-skills", count: { regex: /<tr id="(?:skill|wl)-/g, expected: N_SKILLS + WATCH_AND_LEARN.length, label: "Skill- und Watch-&-Learn-Zeilen" } },
+  "hexen.html": { sec: "/#sec-witches", count: { regex: /<(?:article class="card hx-card"|tr) id="(?:hexe|synth)-/g, expected: WITCHES.length + WITCH_SYNTHESIS.length, label: "Hexen-Karten und Synthese-Zeilen" } },
+  "abyss-cores.html": { sec: "/#sec-cores", count: { regex: /<tr id="core-/g, expected: CORES.length, label: "Core-Zeilen" } },
+  "accessoires.html": { sec: "/#sec-accessories", count: { regex: /<article class="card" id="acc-/g, expected: ACCESSORIES.length, label: "Accessoire-Karten" } },
+  "kapitel-guide.html": { sec: "/#sec-chapters", count: { regex: /<article class="card" id="kap-/g, expected: CHAPTERS.length, label: "Kapitel-Karten" } },
+  "mounts.html": { sec: "/#sec-mounts", count: { regex: /<article class="card" id="mount-/g, expected: MOUNTS.length, label: "Mount-Karten" } },
+  "pets.html": { sec: "/#sec-pets", count: { regex: /<tr id="pet-/g, expected: PETS.length, label: "Pet-Zeilen" } },
+  "ruinen.html": { sec: "/#sec-ruins", count: { regex: /<article class="card" id="ruine-/g, expected: RUINEN.length, label: "Ruinen-Karten" } },
+  "raetsel.html": { sec: "/#sec-puzzles", count: { regex: /<article class="card" id="raetsel-/g, expected: PUZZLES.length, label: "Rätsel-Karten" } },
+  "geheimnisse.html": { sec: "/#sec-secrets", count: { regex: /<(?:article class="card"|tr) id="geh-/g, expected: N_SECRETS, label: "Geheimnis-Karten und -Zeilen" } },
 };
 const titles = new Set(), descs = new Set();
 const refImgPaths = new Set();
@@ -197,7 +245,11 @@ const ohnePlatzhalter = (t) => t.replace(/\{\{\w+(\|wort)?\}\}/g, " ");
 // Der Quell-Lint (a) ist deshalb der eigentliche Waechter — er verbietet fest
 // verdrahtete Zahlen komplett, unabhaengig davon, ob sie gerade stimmen.
 console.log("\n[Redaktionelle Texte] scripts/seo-content/");
-for (const datei of ["intros.json", "faq.json"]) {
+// Seit 07.10.2026 zusaetzlich die Seitendateien seo-content/seiten/<slug>.json
+// (Intro + FAQ je neuer Seite), gleiche Regeln.
+const SEITEN_JSON = fs.existsSync(path.join(SEO_DIR, "seiten"))
+  ? fs.readdirSync(path.join(SEO_DIR, "seiten")).filter((f) => f.endsWith(".json")).sort().map((f) => "seiten/" + f) : [];
+for (const datei of ["intros.json", "faq.json", ...SEITEN_JSON]) {
   const pfad = path.join(SEO_DIR, datei);
   if (!fs.existsSync(pfad)) { ok(false, `${datei} existiert`); continue; }
   const rest = ohnePlatzhalter(fs.readFileSync(pfad, "utf8"));
@@ -256,6 +308,41 @@ const ERLAUBTE_ZAHLEN = {
     NPCS.antagonists.length, NPCS.merchants.length,
     zaehl(NPCS_ALLE, (n) => !belegt(n.region)),
     zaehl(NPCS_ALLE, (n) => n.conf === "medium")],
+  // NEU (07.10.2026)
+  "skills.html": [new Set(SKILL_BAEUME.map(([c]) => c)).size,
+    KLIFF_BAEUME.reduce((n, [, b]) => n + b.length, 0), ...SKILL_BAEUME.map(([, b]) => b.length),
+    N_SKILLS, WATCH_AND_LEARN.length,
+    new Set([...SKILL_BAEUME.flatMap(([, b]) => b.filter((s) => /MISSABLE|NICHT erlernbar/.test(s.prereq || "")).map((s) => s.name)),
+      ...WATCH_AND_LEARN.filter((w) => w.miss).map((w) => w.skill)]).size],
+  "abyss-cores.html": [CORES.length, ...["Weapon", "Armor", "Both"].map((s) => zaehl(CORES, (c) => c.slot === s)),
+    zaehl(CORES, (c) => c.name.startsWith("Greater ")), zaehl(CORES, (c) => String(c.source).startsWith("Vorgesockelt in ")),
+    Object.keys(CORE_TIERS).length],
+  "kapitel-guide.html": [zaehl(CHAPTERS, (c) => typeof c.num === "number"), CHAPTERS.length, MAIN_QUESTS.length,
+    zaehl(CHAPTERS, (c) => belegt(c.missable) && !/^\s*[—–-]/.test(c.missable))],
+  "raetsel.html": [PUZZLES.length, ...[...new Set(PUZZLES.map((p) => p.cat))].map((k) => zaehl(PUZZLES, (p) => p.cat === k)),
+    zaehl(PUZZLES, (p) => p.conf !== "high"),
+    ((PUZZLES.find((p) => /Strongbox solving methods/.test(p.name)) || {}).detail || "").match(/\([a-d]\)/g)?.length || 0],
+  "ruinen.html": [RUINEN.length, Object.keys(RUINS_DATA).length, zaehl(RUINEN, (r) => r.conf === "medium"),
+    ...Object.values(RUINS_DATA).map((r) => r.length)],
+  // 42 = Archive Entries der sechs Archive Records, in der App als questlog-Knowledge 1004713 bis 1004754 belegt.
+  "geheimnisse.html": [SECRETS.CRESSET_REGIONS.reduce((n, r) => n + r.cap, 0), SECRETS.CRESSET_REGIONS.length,
+    Math.max(...SECRETS.CRESSET_REGIONS.map((r) => r.cap)), Math.min(...SECRETS.CRESSET_REGIONS.map((r) => r.cap)),
+    SECRETS.FRAGMENT_REGIONS.reduce((n, r) => n + r.cap, 0),
+    ...["SECRETS_EASTER_EGGS", "SECRETS_LOCATIONS", "SECRETS_HIDDEN_WEAPONS", "SECRETS_MECHANICS", "SECRETS_TOOLS"].map((k) => SECRETS[k].length),
+    1004754 - 1004713 + 1],
+  "mounts.html": [MOUNTS.length, zaehl(MOUNTS, (m) => m.type.includes("Legendary")),
+    zaehl(MOUNTS, (m) => /pferd/i.test(m.type) && !m.type.includes("Legendary")), zaehl(MOUNTS, (m) => m.type === "Drache"),
+    zaehl(MOUNTS, (m) => m.type.includes("Sigil")), zaehl(MOUNTS, (m) => m.type.startsWith("Wildtier")),
+    zaehl(MOUNTS, (m) => m.type.startsWith("Fahrzeug"))],
+  "pets.html": [PETS.length, ...["cat", "dog", "critter"].map((t) => zaehl(PETS, (p) => p.type === t)),
+    zaehl(PETS, (p) => p.type === "critter" && /^Vogel/.test(p.cat || "")),
+    zaehl(PETS, (p) => p.type === "critter" && /^(Nager|Säugetier)/.test(p.cat || ""))],
+  "hexen.html": [WITCHES.length, zaehl(WITCHES, (w) => (w.sanctums || []).length >= 3), WITCH_SYNTHESIS.length,
+    zaehl(WITCH_SYNTHESIS, (s) => s.tier >= 1), zaehl(WITCH_SYNTHESIS, (s) => s.role === "effect-core"),
+    zaehl(WITCH_SYNTHESIS, (s) => s.role === "witch-other" && /^Riding .* Amulet/.test(s.name)),
+    zaehl(WITCH_SYNTHESIS, (s) => s.role !== "witch-other")],
+  "accessoires.html": [ACCESSORIES.length, ...["Ring", "Necklace", "Earring"].map((t) => zaehl(ACCESSORIES, (a) => a.type === t)),
+    zaehl(ACCESSORIES, (a) => /Unique/.test(a.effect || ""))],
 };
 
 for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
@@ -409,6 +496,24 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
     "side-quests.html": SIDE_QUESTS.map((q) => "sq-" + slugUnabh(q.region) + "-" + slugUnabh(q.q)),
     "fraktionen.html": FAC_DATA.regions.flatMap((r) => r.factions.flatMap((f) => f.quests.map((q) =>
       "fr-" + slugUnabh(r.region) + "-" + slugUnabh(f.name) + "-" + slugUnabh(q.q)))),
+    // NEU (07.10.2026). pets.html fehlt bewusst: doppelte Namen bekommen dort
+    // einen Icon-Zusatz, das deckt die Zaehlung (COUNT_CHECK) ab.
+    "skills.html": [...SKILL_BAEUME.flatMap(([c, b]) => b.map((s) => "skill-" + slugUnabh(c) + "-" + slugUnabh(s.name))),
+      ...WATCH_AND_LEARN.map((w) => "wl-" + slugUnabh(w.skill))],
+    "abyss-cores.html": CORES.map((c) => "core-" + slugUnabh(c.name)),
+    "kapitel-guide.html": CHAPTERS.map((c) => "kap-" + slugUnabh(c.num)),
+    "raetsel.html": PUZZLES.map((p) => "raetsel-" + slugUnabh(p.name)),
+    "ruinen.html": RUINEN.map((r) => "ruine-" + slugUnabh(r.name)),
+    "mounts.html": MOUNTS.map((m) => "mount-" + slugUnabh(m.name)),
+    "accessoires.html": ACCESSORIES.map((a) => "acc-" + slugUnabh(a.name)),
+    "hexen.html": [...WITCHES.map((w) => "hexe-" + slugUnabh(w.name)), ...WITCH_SYNTHESIS.map((s) => "synth-" + slugUnabh(s.name))],
+    "geheimnisse.html": [...SECRETS.SECRETS_EASTER_EGGS.map((x) => "geh-ei-" + slugUnabh(x.name)),
+      ...SECRETS.SECRETS_LOCATIONS.map((x) => "geh-ort-" + slugUnabh(x.name)),
+      ...SECRETS.SECRETS_MECHANICS.map((x) => "geh-mech-" + slugUnabh(x.name)),
+      ...SECRETS.SECRETS_HIDDEN_WEAPONS.map((x) => "geh-waffe-" + slugUnabh(x.name)),
+      ...SECRETS.SECRETS_CRESSET_REGIONS.map((x) => "geh-cresset-" + slugUnabh(x.name)),
+      ...SECRETS.SECRETS_TOOLS.map((x) => "geh-tool-" + slugUnabh(x.tool)),
+      ...SECRETS.FRAGMENT_REGIONS.map((x) => "geh-fragment-" + slugUnabh(x.name))],
   };
   for (const datei of Object.keys(pages)) {
     const c = fs.readFileSync(path.join(ROOT, datei), "utf8");
@@ -466,7 +571,9 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
 // Deshalb: jedes erzeugte Inline-Skript kompilieren, bevor es ausgeliefert wird.
 const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
   "bestiarium", "side-quests", "trophaeen", "true-ending",
-  "hauptquests", "patch-notes", "fraktionen", "npcs"];
+  "hauptquests", "patch-notes", "fraktionen", "npcs",
+  "skills", "hexen", "abyss-cores", "accessoires", "kapitel-guide",
+  "mounts", "pets", "ruinen", "raetsel", "geheimnisse"];
 for (const s of SEITEN_MIT_WERKZEUG) {
   const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
 
@@ -496,7 +603,8 @@ const sm = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 // /npcs ergaenzt.
 ["/", "/bosse", "/bestiarium", "/waffen", "/ruestungen", "/crafting",
  "/hauptquests", "/fraktionen", "/side-quests", "/trophaeen", "/true-ending",
- "/npcs", "/patch-notes"].forEach((u) =>
+ "/npcs", "/patch-notes", "/skills", "/hexen", "/abyss-cores", "/accessoires",
+ "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse"].forEach((u) =>
   ok(sm.includes(`<loc>https://crimson-desert-wiki.com${u}</loc>`), `sitemap enthaelt ${u}`));
 
 // ── 6. Startseite verlinkt jede SEO-Seite ────────────────────────────────────

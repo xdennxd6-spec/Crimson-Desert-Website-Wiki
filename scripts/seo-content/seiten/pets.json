@@ -1,0 +1,29 @@
+{
+  "intro": "Crimson Desert hat {{anzahl}} zähmbare Begleiter: {{katzen}} Katzen, {{hunde}} Hunde und {{kleintiere}} Kleintiere wie Vögel, Nager und Füchse. Zu jedem Pet zeigt diese Liste das Porträt und das Lieblingsessen, das beim Zähmen mehr Vertrauen bringt als gewöhnliches Futter. Dazu kommen Freischalt-Guides für die legendären Begleiter Iron Eagle und Phoenix. Katzen und Hunde mit mehreren Fellfarben stehen jeweils als eigener Eintrag da, weil Porträt und Futter je Farbe abweichen können.",
+  "faq": [
+    {
+      "frage": "Wie viele Pets gibt es in Crimson Desert?",
+      "antwort": "Das Wiki führt {{anzahl}} Pet-Einträge: {{katzen}} Katzen, {{hunde}} Hunde und {{kleintiere}} Kleintiere. Davon sind {{voegel}} Vögel und {{nager}} Nager oder andere Säugetiere. Katzen und Hunde zählen je Fellfarbe einzeln, deshalb tauchen viele Namen mehrfach auf."
+    },
+    {
+      "frage": "Wie zähme ich ein Pet?",
+      "antwort": "Du steigerst das Vertrauen durch Füttern oder Streicheln bis zum Maximum. Streicheln bringt Vertrauen, ist aber pro Tag begrenzt, und das Limit setzt sich um Mitternacht in der Spielzeit zurück. Bei Katzen und Hunden bringt das Lieblingsessen mehr als anderes Futter, bei Katzen sogar ein legendärer Fisch noch deutlich mehr. Viele Wildtiere und flugunfähige Vögel nehmen außerdem einen Golden Apple. Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen."
+    },
+    {
+      "frage": "Welches Lieblingsessen mögen Katzen und Hunde?",
+      "antwort": "Das hängt von Art und Fellfarbe ab. Katzen mögen überwiegend Fisch, etwa Salmon, Squid oder Mackerel, einzelne dagegen Milk oder Egg. Bei Hunden reicht das Spektrum von Fleisch wie Lean Meat oder Tender Meat über Cheese und Egg bis zu Milk und Sweet Potato. Das Lieblingsessen jedes einzelnen Eintrags steht in den Tabellen."
+    },
+    {
+      "frage": "Wie bekomme ich den Iron Eagle als Pet?",
+      "antwort": "Du brauchst das Item Sotdae of Bond und seltenes Metall als Futter, nämlich Platinum oder Mercury. An den Hawkstone Ruins im Osten von Delesyia aktivierst du in der Morgendämmerung den Zahnrad-Mechanismus, stellst das Sotdae of Bond in die Flugbahn, fütterst ihn bis zum vollen Vertrauen und wählst, wenn er landet, Take In. Schieß nicht auf ihn, das bricht das Zähmen ab. Die Details stammen aus Community-Guides und sind teils widersprüchlich, offiziell belegt ist nur, dass es den Iron Eagle als Pet gibt."
+    },
+    {
+      "frage": "Wie bekomme ich den Phoenix als Pet?",
+      "antwort": "Der Phoenix wird nicht gezähmt. Du schießt ihn südlich von Trader's Expanse in Varnia mit einem Bogen und Explosive Arrows vom Himmel, häutest den Kadaver und erhältst eine Phoenix Feather. Bei einer Hexe, laut Community zum Beispiel Elowen, craftest du daraus den Sigil of Solidarity (Phoenix), benutzt ihn im Inventar und beschwörst den Phoenix danach über den Pets-Reiter. Keine offizielle Pearl-Abyss-Note beschreibt diese Erlangung, die Schritte stammen aus Community-Guides."
+    },
+    {
+      "frage": "Gibt es Pets, die zu Mounts heranwachsen?",
+      "antwort": "Ja, Baby Wyvern und Kuku Bird Chick wachsen durch Füttern und lassen sich ab einem bestimmten Wachstumsgrad als Spezial-Mount registrieren. Die Reittiere selbst stehen auf der Mounts-Seite."
+    }
+  ]
+}

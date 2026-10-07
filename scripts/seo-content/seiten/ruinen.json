@@ -1,0 +1,29 @@
+{
+  "intro": "In den Uralten Ruinen von Crimson Desert schaltest du Abyss-Grenzsteine frei, indem du ein Rätsel an der Ruine löst. Diese Übersicht führt {{anzahl}} solcher Rätsel in {{regionen|wort}} Regionen auf. Jede Karte nennt Ort, Mechanik und Belohnung, dazu nummerierte Lösungsschritte, Hinweise, die verwendeten Quellen und Lösungs-Screenshots. Bei {{unsicher}} Ruinen weichen die Quellen bei Einzelheiten voneinander ab; das ist auf der Karte als Badge mit aufklappbarer Begründung ausgewiesen, statt eine Sicherheit vorzutäuschen.",
+  "faq": [
+    {
+      "frage": "Wie viele Uralte Ruinen mit Rätseln gibt es in Crimson Desert?",
+      "antwort": "Die Seite führt {{anzahl}} Abyss-Grenzstein-Rätsel in {{regionen|wort}} Regionen auf: Hernand {{r_hernand}}, Pailune {{r_pailune}}, Demeniss {{r_demeniss}}, Delesyia {{r_delesyia}} und Crimson Desert {{r_crimson_desert}}. Die Regionszuordnung folgt PowerPyx; einzelne grenznahe Orte ordnen andere Guides abweichend ein."
+    },
+    {
+      "frage": "Was bekomme ich für ein gelöstes Ruinen-Rätsel?",
+      "antwort": "Bei allen {{anzahl}} Ruinen nennen die Daten ein Abyss-Artefakt als Belohnung, die Lernwährung für Fähigkeiten, dazu die Freischaltung eines Schnellreisepunkts am Abyss-Grenzstein. Bei einzelnen Ruinen kommen zusätzliche Gegenstände oder Beute hinzu; das steht in der Belohnungs-Zeile der jeweiligen Karte."
+    },
+    {
+      "frage": "Was ist der Unterschied zwischen Abyss-Grenzsteinen, Abyss Nexus und Abyss Cressets?",
+      "antwort": "Abyss-Grenzsteine in den Uralten Ruinen werden durch das Lösen eines Rätsels freigeschaltet. Einen Abyss Nexus betrittst du einfach, ohne Rätsel. Die versteckten Abyss Cressets der Oberwelt sind eine eigene Sammlung, und die Sky- und Restoration-Puzzles im Abyss sind wieder etwas anderes. Auf dieser Seite stehen nur Orte, die ein Rätsel haben."
+    },
+    {
+      "frage": "Welche Arten von Rätseln gibt es in den Uralten Ruinen?",
+      "antwort": "Die Mechanik-Zeile jeder Karte nennt die Art des Rätsels. Vorkommende Arten sind unter anderem eine Glocken-Sequenz, das Anzünden von Steinlaternen, das Drehen von Statuen, Schiebepuzzles mit Steinblöcken, Wandscheiben und Rotlicht-Grünlicht mit einer Statue, die den Blick wendet."
+    },
+    {
+      "frage": "Wie sicher sind die Lösungen der Ruinen-Rätsel?",
+      "antwort": "Die Lösungen wurden gegen mehrere unabhängige Text- und Bild-Guides abgeglichen, Videos zählen nicht dazu. Bei {{unsicher}} der {{anzahl}} Ruinen weichen die Quellen bei Einzelheiten ab, etwa bei der Zugfolge oder der genauen Lage; diese Karten tragen das Badge „geprüft · exakte Sequenz quellenabhängig“, die Begründung lässt sich auf der Karte aufklappen."
+    },
+    {
+      "frage": "In welcher Region liegen die meisten Ruinen-Rätsel?",
+      "antwort": "In Hernand, mit {{r_hernand}} von {{anzahl}} Rätseln. Danach folgt Delesyia mit {{r_delesyia}}, die wenigsten Rätsel hat Crimson Desert mit {{r_crimson_desert}}."
+    }
+  ]
+}

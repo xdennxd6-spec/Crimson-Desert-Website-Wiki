@@ -1,0 +1,29 @@
+{
+  "intro": "Diese Übersicht sammelt die Skill-Bäume aller {{charaktere|wort}} spielbaren Charaktere von Crimson Desert. Für Kliff stehen {{kliff}} Skills in Stamina-, Spirit- und Health-Baum, für Damiane {{damiane}} und für Oongka {{oongka}}. Jede Zeile nennt Voraussetzung, Kosten in Abyss-Artefakten und Wirkung. Dazu kommen {{wl}} Fähigkeiten, die du per Watch & Learn lernst, mit Lernort und Hinweis auf Verpassbares.",
+  "faq": [
+    {
+      "frage": "Wie viele Skills gibt es in Crimson Desert?",
+      "antwort": "Im Wiki sind {{gesamt}} Skills in den Bäumen erfasst: {{kliff}} bei Kliff ({{stamina}} im Stamina-Baum, {{spirit}} im Spirit-Baum und {{health}} im Health-Baum samt Elementen), {{damiane}} bei Damiane und {{oongka}} bei Oongka. Gleichnamige Skills wie Armed Combat zählen pro Charakter einzeln. Die {{wl}} Watch-&-Learn-Einträge sind kein zusätzlicher Bestand, sondern ein weiterer Lernweg für Skills, die auch in den Bäumen stehen. Das ist der Datenstand des Wiki, keine offizielle Angabe."
+    },
+    {
+      "frage": "Was bedeutet AA bei den Skill-Kosten?",
+      "antwort": "AA steht für Abyss-Artefakt, die Skillpunkt-Währung: In der Regel kostet ein Skill bzw. eine Stufe ein Artefakt. Eine Fundquelle sind laut Wiki die Uralten Ruinen. Skills, die du per Watch & Learn abschaust, kosten kein Artefakt; wo beide Wege möglich sind, steht bei den Kosten eine Doppelangabe: kostenlos oder mit einem Artefakt."
+    },
+    {
+      "frage": "Wie lerne ich Skills per Watch & Learn?",
+      "antwort": "Du schaust dir den Skill in einer bestimmten Situation ab, statt ein Artefakt auszugeben. Die Lernorte reichen laut Wiki-Daten von Story-Hologrammen (Force Palm im Abyss) über Boss-Duelle (Pump Kick gegen Matthias, Evasive Roll bei Kailok the Hornsplitter, Aerial Roll bei Draven the Crowcaller) bis zu NPCs und Trainingsplätzen. Alle {{wl}} Lernorte stehen in der Tabelle am Ende der Seite."
+    },
+    {
+      "frage": "Welche Skills kann ich verpassen?",
+      "antwort": "Als verpassbar sind {{verpassbar|wort}} Skills markiert: Focused Force Palm (Observe-Hologramm im Gebirgsdurchgang westlich von Fort Perwin auf dem Weg zum Scholastone Institute) und Quick Reload bei Damiane. Focused Force Palm lässt sich laut Wiki-Daten nachholen, die Quellen nennen dafür aber unterschiedliche Wege. Quick Reload führen die Daten als nur per Watch & Learn erlernbar, sein Lernort fehlt in der Liste bisher."
+    },
+    {
+      "frage": "Wie schalte ich Damiane und Oongka frei?",
+      "antwort": "Laut Wiki-Daten wird Damiane mit der Quest First Step to Rebuilding im Howling Hill Camp freigeschaltet. Oongka ist erstmals nach der Begegnung mit Myurdin in Ashclaw Keep spielbar; dauerhaft laut einem Guide erst nach der Greymane-Fraktionsquest Words Left by the Riverside. Beide Charaktere lernen mit eigenen Abyss-Verknüpfungen, und Skills lassen sich pro Charakter zurücksetzen."
+    },
+    {
+      "frage": "Teilen sich die Charaktere die Elemente-Skills?",
+      "antwort": "Ja, laut Fextralife wird der Elementfortschritt zwischen Kliff, Damiane und Oongka geteilt: Wer ein Element mit einem Charakter freischaltet, hat es für alle. Freigeschaltet werden die Elementar-Skills durch den Abschluss der zugehörigen Abyss-Challenges, ohne Artefakt."
+    }
+  ]
+}

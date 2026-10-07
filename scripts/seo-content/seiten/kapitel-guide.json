@@ -1,0 +1,29 @@
+{
+  "intro": "Die Story von Crimson Desert gliedert das Wiki in {{kapitel}} nummerierte Kapitel und einen Epilog. Jede Karte dieser Übersicht nennt Titel, Region, die Bosse in Kampfreihenfolge, wichtige Key Items und einen Tipp. Verpassbares ist ausdrücklich markiert, und Angaben mit geringerer Sicherheit tragen einen Vermerk. Der Prolog gehört in diesem Guide zum ersten Kapitel. Die Karten enthalten Spoiler zu Bossen und Belohnungen.",
+  "faq": [
+    {
+      "frage": "Wie viele Kapitel hat Crimson Desert?",
+      "antwort": "Der Kapitel-Guide führt {{kapitel}} nummerierte Kapitel und einen Epilog, zusammen also {{gesamt}} Einträge. Der Prolog ist dort kein eigener Eintrag, sondern gehört zum ersten Kapitel („Prolog und Erste Begegnung“). Die Hauptquest-Liste des Wiki zählt den Prolog dagegen als eigenen Abschnitt und kommt deshalb auf {{hq}} Abschnitte: Prolog, {{kapitel|wort}} Kapitel und Epilog. Das ist der Datenstand des Wiki, keine offizielle Angabe."
+    },
+    {
+      "frage": "Gibt es in Crimson Desert einen Epilog?",
+      "antwort": "Ja, der Epilog „Journey's End“ ist im Wiki als letzter Eintrag geführt. Laut den Missionsbeschreibungen besteht er nur aus Lauf-, Dialog- und Cutscene-Quests ohne Bosskampf; der letzte Bosskampf der Story ist Umbra (Final) im letzten nummerierten Kapitel. Mit dem Abschluss von „A New Beginning“ gibt es die Gold-Trophäe „Expert Storyteller“."
+    },
+    {
+      "frage": "Welche Infos bekomme ich zu jedem Kapitel?",
+      "antwort": "Jede Karte nennt den deutschen und englischen Titel, die Region, den oder die Bosse in Kampfreihenfolge, wichtige Key Items und Belohnungen, einen Tipp und, falls vorhanden, eine Warnung vor Verpassbarem. Regionsangaben mit geringerer Sicherheit sind als solche markiert; wo die Region nicht klar ist, entfällt die Zeile."
+    },
+    {
+      "frage": "Welche Kapitel enthalten verpassbare Inhalte?",
+      "antwort": "In {{verpassbar|wort}} Kapiteln warnt der Guide vor Verpassbarem: Pump Kick (Watch & Learn im Duell gegen Matthias), Focused Force Palm (Observe-Hologramm auf dem Weg zum Scholastone Institute) und ein manueller Spielstand vor dem Tor zu Corrupted Caliburn im letzten nummerierten Kapitel. Die betroffenen Karten tragen den Hinweis „Verpassbar“."
+    },
+    {
+      "frage": "Welche Bosse warten im letzten Kapitel?",
+      "antwort": "Die Bosskette im letzten nummerierten Kapitel lautet laut Wiki: Corrupted Caliburn, danach Myurdin, the Avatar of Umbra und zuletzt Umbra (Final). Für das True Ending müssen zusätzlich alle Voraussetzungen erfüllt sein, die das Wiki auf der Seite zum True Ending auflistet."
+    },
+    {
+      "frage": "Wo finde ich die einzelnen Quests der Kapitel?",
+      "antwort": "Die Hauptquests jedes Kapitels mit Auslöser, Voraussetzung und Belohnung stehen in der Hauptquest-Liste des Wiki. Der Kapitel-Guide gibt dir die Übersicht pro Kapitel, die Hauptquest-Liste die Details pro Quest."
+    }
+  ]
+}

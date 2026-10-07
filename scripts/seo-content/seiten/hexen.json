@@ -1,0 +1,29 @@
+{
+  "intro": "Die Hexen sind in Crimson Desert die zentralen Dienstleisterinnen für Abyss Cores: Sie erstellen Sockel, setzen Cores ein, extrahieren sie und kombinieren sie per Synthese. Dieser Guide stellt alle {{hexen|wort}} Hexen mit Wohnort, Freischaltung, Diensten und Sanctum-Questlinie vor. Dazu kommen {{rezepte}} Synthese-Rezepte der Hexen-Werkstatt in Tabellen, darunter die Sigil-Mount-Amulette. Wo eine Quelle nur vermutet oder sich Guides widersprechen, steht das offen dabei.",
+  "faq": [
+    {
+      "frage": "Wie viele Hexen gibt es in Crimson Desert?",
+      "antwort": "Das Wiki führt {{hexen|wort}} Hexen: Sylvia, Elowen, Bari, Lyselia, Areciel und die versteckte White Crow. Elowen, Bari, Lyselia und Areciel sind die {{regional|wort}} regionalen Hexen mit eigener Sanctum-Questlinie. Hexe Marie ist dagegen keine Dienstleisterin, sondern eine feindliche Hexe und ein Boss."
+    },
+    {
+      "frage": "Wo finde ich die Hexen?",
+      "antwort": "Sylvia wartet in Shadow's Whisper Cave nördlich von Hernand Town. Elowen wohnt im Witch's House im Alfonso Estate in den Witchwoods im Süden von Hernand. Bari lebt in einer Hütte am Crimson Lake bei der Silver Wolf Mountain in Pailune. Lyselia versteckt sich in einer Hidden Cave südöstlich des Jijeong Temple im Serpent Marsh in Demeniss. Areciel hat ein Haus auf halber Höhe einer Klippe westlich von Urdavah in der Crimson Desert. White Crow lebt in einem Baumhaus in den Wayward Woods westlich von Pailune."
+    },
+    {
+      "frage": "Wie funktioniert die Core-Synthese bei der Hexe?",
+      "antwort": "Bei der regulären Synthese lassen sich Cores mit gleichem Namen und gleicher Stufe paarweise zu einem Core der nächsthöheren Stufe verschmelzen, höchstens bis Stufe III. Dafür brauchst du das passende Blueprint, das Hexen verkaufen. Elowens Questlinie schaltet den vollen Workshop samt Synthese frei, Sylvia bietet laut Guides nur die Workshop-Basis ohne Synthese. Die zufällige Spezial-Synthese hat keine festen Rezepte. Die Tabellen dieser Seite listen {{stufen}} Stufen-Rezepte und {{effektcores}} Rezepte für einzelne Effekt-Cores."
+    },
+    {
+      "frage": "Wie schalte ich die versteckte Hexe White Crow frei?",
+      "antwort": "White Crow ist erst erreichbar, wenn du je einen Witch's Token von Elowen, Bari, Lyselia und Areciel gesammelt hast, also {{regional|wort}} Token insgesamt. Dafür schließt du die Questlinien der regionalen Hexen ab. Die Freischaltung läuft laut questlog über die Quest Wayward Woods Witch und die Mission Protector of the Abyss."
+    },
+    {
+      "frage": "Wie bekomme ich ein Sigil-Mount-Amulett?",
+      "antwort": "Bei einer Hexe wählst du im Menü Abyss-Ausrüstung herstellen den Punkt Besondere Gegenstände und fertigst das Amulett aus einem Tierteil, etwa einer Klaue, einem Zahn oder einem Horn. Danach benutzt du es im Inventar. Es schaltet dauerhaft das zugehörige legendäre Reittier frei. Die {{amulette|wort}} Amulette gehören zu White Bear, Silver Fang, Snowwhite Deer, Rock Tusk Warthog und Icicle Edge Alpine Ibex."
+    },
+    {
+      "frage": "Welche Hexe verkauft welche Blueprints?",
+      "antwort": "Laut questlog-Händlerdaten verkauft Elowen Blueprints für Vigor, Vitality und Composure, Bari für Swift, Haste und Ascent, Lyselia für Fortification, Aegis und Fortitude und Areciel für Destruction und Insight. Für Sylvia führt questlog keine Händlerware, für White Crow sind keine Werkstattdienste belegt."
+    }
+  ]
+}

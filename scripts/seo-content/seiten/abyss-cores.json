@@ -1,0 +1,29 @@
+{
+  "intro": "Diese Seite listet {{anzahl}} Abyss Cores aus Crimson Desert mit Effekt, Quelle und Slot-Typ: {{waffe}} für Waffen, {{ruestung}} für Rüstung und {{both}} für Waffen, Handschuhe und Schuhe. Wo das Wiki Stufenwerte kennt, stehen sie direkt am Core. Greater-Cores und unsichere Zuordnungen sind markiert, und ein Abschnitt fasst zusammen, wie die Synthese bei den Hexen funktioniert.",
+  "faq": [
+    {
+      "frage": "Wie viele Abyss Cores gibt es in Crimson Desert?",
+      "antwort": "Im Wiki sind {{anzahl}} Abyss Cores erfasst: {{waffe}} Waffen-Cores, {{ruestung}} Rüstungs-Cores und {{both}} Cores mit dem Slot-Typ Waffe/Hand/Fuß. Davon sind {{greater}} Greater-Cores. Das ist der Datenstand des Wiki, keine offizielle Angabe."
+    },
+    {
+      "frage": "Wie bekomme ich Abyss Cores?",
+      "antwort": "Quellen sind laut Wiki versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot. Außerdem stellt dir eine craft-fähige Hexe Cores her (Option Craft Abyss Gear). Bei {{vorgesockelt}} Cores nennt die Quellenspalte ein Item, in dem sie vorgesockelt stecken; bei anderen stehen Händler, Boss-Drops oder Missionsbelohnungen. Die Quelle jedes Cores steht in der Tabelle."
+    },
+    {
+      "frage": "Wie funktioniert die Core-Synthese?",
+      "antwort": "Bei der regulären Synthese werden Cores mit gleichem Namen und gleicher Stufe zu einem Core der nächsthöheren Stufe, höchstens bis Stufe III. Dafür brauchst du das passende Blueprint, das bei Hexen kaufbar ist, und nicht jeder Core ist aufwertbar. Die Spezial-Synthese braucht kein Blueprint und würfelt den Typ des Ergebnisses; sie ist der einzige Weg zu Greater-Cores. Mehr zu den Hexen steht im Hexen-Guide."
+    },
+    {
+      "frage": "Was sind Greater Cores?",
+      "antwort": "Im Wiki gibt es {{greater}} Greater-Cores, zum Beispiel Greater Insight, Greater Destruction und Greater Swift. Sie entstehen nur per Spezial-Synthese, mit geringer Chance pro Versuch. Sie haben eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich nicht reparieren, sondern müssen neu synthetisiert werden. Die hohen Bane-Werte gehören laut Wiki zu den Greater-Cores und nicht zu Stufe III. Der Rampaging Insight („Wütend“ im deutschen Spiel) gilt als wahrscheinlicher Alias des Greater Insight, als eigene Reihe ist er nicht belegt."
+    },
+    {
+      "frage": "Welche Cores passen in Handschuhe und Schuhe?",
+      "antwort": "Cores mit dem Slot-Typ Waffe/Hand/Fuß ({{both}} im Wiki) passen laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe. Einzelne Cores sind enger: Tempest of Destruction, Kinetic Burst, Colossal Might, Putrid Touch, The Showstopper und Karmic Pulse passen nur in Handschuhe, Infinite Arrows nur in Fernkampfwaffen. Aegis und Fortification passen auch in Schilde."
+    },
+    {
+      "frage": "Welche Stufenwerte haben Abyss Cores?",
+      "antwort": "Für {{tiers}} passive Stat-Cores hinterlegt das Wiki konkrete Stufenwerte, zum Beispiel Attack bei Destruction, Critical Rate bei Insight und Movement Speed bei Haste. Sie stehen in der Effekt-Spalte. Im Spiel gibt es laut Wiki keine Prozentangabe: Flat-Werte erscheinen als Zahl, andere Werte als Lv.-Stufe."
+    }
+  ]
+}

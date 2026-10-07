@@ -1,0 +1,29 @@
+{
+  "intro": "Crimson Desert kennt {{anzahl}} Reittiere und Fahrzeuge, vom Startpferd über legendäre Wildpferde und Drachen bis zu Heißluftballons und dem Kampf-Mech. Diese Liste zeigt zu jedem Mount, wie du ihn freischaltest, welche Werte er hat und was du beachten musst. Die Einträge sind nach Pferden, Drachen, Sigil-Mounts, Wildtieren und Fahrzeugen sortiert. Wo Quellen sich widersprechen oder ein Beschaffungsweg nicht belegt ist, steht das offen bei den Notizen.",
+  "faq": [
+    {
+      "frage": "Wie viele Mounts gibt es in Crimson Desert?",
+      "antwort": "Das Wiki führt {{anzahl}} Mounts und Fahrzeuge: {{legendaer}} legendäre Pferde, {{pferde}} weitere Pferde und Kriegspferde, {{drachen}} Drachen-Mounts, {{sigil}} Sigil-Mounts, {{wildtiere}} Wildtiere und {{fahrzeuge}} Fahrzeuge. Einige davon sind nur temporär reitbar und lassen sich nicht dauerhaft registrieren, das steht jeweils bei den Stats."
+    },
+    {
+      "frage": "Wo bekomme ich die legendären Pferde?",
+      "antwort": "Alle {{legendaer}} legendären Pferde werden wild gezähmt. Royler lebt am Snowgrass Hearth bei der Silver Wolf Mountain in Pailune (Kaltklima). Rokade findest du in den Steel Mountains im südlichen Hernand, dort gibt es laut den Daten keine Umwelt-Debuffs beim Zähmen. Camora lebt im Redtree Forest in Tashkalp, einer heißen Region, deren Hitze-Debuff beim Zähmen Stamina entzieht. Für das Klima dort gibt es allerdings eine widersprechende Quelle."
+    },
+    {
+      "frage": "Welches ist das beste Pferd in Crimson Desert?",
+      "antwort": "Das hängt vom Ziel ab. Laut den Wiki-Daten ist Royler das beste Erkundungspferd mit der höchsten Geschwindigkeit, Rokade der beste HP-Tank und Camora die Wahl mit den höchsten Angriffs- und Verteidigungswerten, empfohlen als Begleiter bei Bosskämpfen. Alle {{legendaer|wort}} sind legendär und müssen wild gezähmt werden."
+    },
+    {
+      "frage": "Wie bekomme ich den Drachen Blackstar und einen Wyvern?",
+      "antwort": "Blackstar bekommst du automatisch im Verlauf der Story: Du besiegst den Boss Golden Star und holst das Reittier im Nest of Valor ab. Einen wilden Wyvern unterwirfst du bei Fort Windridge am Südrand von Delesyia, indem du ihn betäubst und dann aufsteigst, er ist aber nur zeitlich begrenzt reitbar. Dauerhaft wird ein Wyvern über die Aufzucht eines Baby Wyverns: Du fütterst es, und ab einem bestimmten Wachstumsgrad lässt es sich als Spezial-Mount registrieren."
+    },
+    {
+      "frage": "Wie zähme ich ein Wildtier als Reittier?",
+      "antwort": "Bei vielen Wildtieren steigst du auf oder holst sie ein und füllst die Vertrauensleiste mit rohem Fleisch oder Gemüse, bis du den Eintrag Take In wählen kannst. So funktioniert es etwa bei Lion und Tiger mit Fleisch und beim Rosehorn Deer mit Gemüse wie Sweet Potatoes. Manche Tiere musst du zuerst mit Force Palm betäuben oder dem berittenen Gegner abnehmen, andere stiehlst du. Cow und Elephant lassen sich nur temporär reiten."
+    },
+    {
+      "frage": "Welche Mounts sind nur temporär reitbar?",
+      "antwort": "Als nicht registrierbar führen die Daten Cow, Elephant, Kuku Bird Hatchling und Marni's Mechahorse. Beim Race Horse steht der Typ temporär, und der wilde Wyvern ist nur zeitlich begrenzt reitbar. Dauerhafte Kuku-Bird-Mounts entstehen nur über die Ei-Aufzucht."
+    }
+  ]
+}

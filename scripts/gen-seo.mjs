@@ -34,6 +34,17 @@ import * as partHauptquests from "./seo-parts/hauptquests.mjs";
 import * as partPatchNotes from "./seo-parts/patch-notes.mjs";
 import * as partFraktionen from "./seo-parts/fraktionen.mjs";
 import * as partNpcs from "./seo-parts/npcs.mjs";
+// Zehn Themen-Seiten vom 07.10.2026 (Ausbau fuer die Google-Suche).
+import * as partMounts from "./seo-parts/mounts.mjs";
+import * as partPets from "./seo-parts/pets.mjs";
+import * as partHexen from "./seo-parts/hexen.mjs";
+import * as partAccessoires from "./seo-parts/accessoires.mjs";
+import * as partSkills from "./seo-parts/skills.mjs";
+import * as partAbyssCores from "./seo-parts/abyss-cores.mjs";
+import * as partKapitelGuide from "./seo-parts/kapitel-guide.mjs";
+import * as partRaetsel from "./seo-parts/raetsel.mjs";
+import * as partRuinen from "./seo-parts/ruinen.mjs";
+import * as partGeheimnisse from "./seo-parts/geheimnisse.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -46,6 +57,13 @@ const html = [
     .map(f => fs.readFileSync(path.join(ROOT, "data", f), "utf8")),
 ].join("\n");
 const TODAY = new Date().toISOString().slice(0, 10);
+// Testlauf ohne die Seiten im Repo anzufassen: SEO_OUT=<ordner> schreibt alle
+// Ausgaben (Seiten + sitemap.xml) dorthin, SEO_ONLY=slug1,slug2 baut nur diese
+// Modul-Seiten. Gedacht fuer parallele Arbeit an einzelnen Modulen; der
+// normale Lauf ohne Variablen schreibt wie immer ins Repo.
+const OUT = process.env.SEO_OUT ? path.resolve(process.env.SEO_OUT) : ROOT;
+const ONLY = process.env.SEO_ONLY ? new Set(process.env.SEO_ONLY.split(",").map((s) => s.trim()).filter(Boolean)) : null;
+if (OUT !== ROOT) fs.mkdirSync(OUT, { recursive: true });
 
 // ── Datenextraktion: balancierte Klammern + eval des Objektliterals ──────────
 function extract(name) {
@@ -131,7 +149,9 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 // ── Seiten-Module + Navigation ───────────────────────────────────────────────
 // Reihenfolge hier = Reihenfolge in sitemap.xml.
 const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
-  partHauptquests, partFraktionen, partPatchNotes, partNpcs];
+  partHauptquests, partFraktionen, partPatchNotes, partNpcs,
+  partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
+  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse];
 
 // Kopf-Menue aller zwoelf Seiten. Thematisch gruppiert: erst Gegner, dann
 // Ausruestung, dann Herstellung, dann Quests, dann die Meta-Listen.
@@ -153,6 +173,19 @@ const NAV = [
   ["true-ending", "True Ending"],
   ["npcs", "NPCs"],
   ["patch-notes", "Patch-Notes"],
+  // Ab hier "mehr": stehen nicht im Kopf-Menue (das waere mit 22 Eintraegen auf
+  // dem Handy eine halbe Bildschirmseite), sondern in der Fussleiste "Alle Guides"
+  // jeder Seite. Die Fussleiste fuehrt alle Seiten, auch die oberen zwoelf.
+  ["skills", "Skills", "mehr"],
+  ["hexen", "Hexen-Guide", "mehr"],
+  ["abyss-cores", "Abyss Cores", "mehr"],
+  ["accessoires", "Accessoires", "mehr"],
+  ["kapitel-guide", "Kapitel-Guide", "mehr"],
+  ["mounts", "Mounts", "mehr"],
+  ["pets", "Pets", "mehr"],
+  ["ruinen", "Uralte Ruinen", "mehr"],
+  ["raetsel", "Rätsel", "mehr"],
+  ["geheimnisse", "Secrets & Lore", "mehr"],
 ];
 
 // Schutz gegen stille Inkonsistenz: jedes Modul muss im Menue auftauchen.
@@ -180,6 +213,22 @@ const SEO_FAQ = ladeInhalt("faq.json");
 // Freischalt-Anleitungen je Trophaee. Anders als intros/faq ein Array, weil es
 // pro Datensatz und nicht pro Seite gilt; das Modul indiziert selbst nach Namen.
 const SEO_TROPHAEEN = ladeInhalt("trophaeen.json");
+// Seit 07.10.2026: Intro und FAQ neuer Seiten liegen je Seite in
+// seo-content/seiten/<slug>.json ({ "intro": "...", "faq": [{frage, antwort}] }),
+// damit mehrere Seiten parallel entstehen koennen, ohne dieselbe Datei zu
+// bearbeiten. Gleiche Regeln wie intros.json/faq.json (Platzhalter statt
+// Mengenzahlen, verify-seo lintet beide Orte). Ein Slug darf nur an EINEM Ort stehen.
+{
+  const dir = path.join(__dirname, "seo-content", "seiten");
+  const dateien = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort() : [];
+  for (const datei of dateien) {
+    const s = datei.replace(/\.json$/, "");
+    if (s in SEO_INTROS || s in SEO_FAQ) throw new Error(`seo-content/seiten/${datei}: Slug "${s}" steht schon in intros.json/faq.json`);
+    const inhalt = JSON.parse(fs.readFileSync(path.join(dir, datei), "utf8"));
+    if (inhalt.intro) SEO_INTROS[s] = { intro: inhalt.intro };
+    if (Array.isArray(inhalt.faq)) SEO_FAQ[s] = inhalt.faq;
+  }
+}
 
 // ── Zahlen in redaktionellen Texten ──────────────────────────────────────────
 // Die Fliesstexte in seo-content/ behaupten Datenmengen ("alle 337 Ruestungsteile",
@@ -443,6 +492,9 @@ ul.te li:last-child{border-bottom:0}
 ul.te li::before{content:"\\2610";position:absolute;left:0;color:var(--red);font-size:16px}
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
+footer.site nav.alle{line-height:2.1;margin:0 0 14px;font-size:var(--fs-11-5)}
+footer.site nav.alle a{color:var(--amber);padding:4px 2px}
+footer.site nav.alle a[aria-current=page]{color:var(--ink-hi)}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
 
 /* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
@@ -576,8 +628,12 @@ function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, 
     ogDim = dimsFromLocalFile(ogRel);
   }
   const og = `${SITE}/${ogRel}`;
-  const navLinks = NAV.map(([s, l]) =>
-    `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${l}</a>`).join("");
+  const navLink = ([s, l]) =>
+    `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${l}</a>`;
+  // Kopf: die zwoelf Hauptseiten, eine "mehr"-Seite nur, wenn sie gerade offen ist.
+  const navLinks = NAV.filter(([s, , g]) => g !== "mehr" || s === slugName).map(navLink).join("")
+    + `<a href="#alle-guides">Alle Guides</a>`;
+  const alleGuides = NAV.map(navLink).join(" &middot; ");
   return `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -718,6 +774,7 @@ ${bodyHtml}
 })();
 </script>
 <footer class="site">
+  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten">${alleGuides}</nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>
@@ -1096,15 +1153,24 @@ const CTX = {
   // "data": das hier ist kein Wiki-Datenbestand, sondern Seitentext. Fehlt eine
   // Datei, liefert ladeInhalt() {} und das Modul rendert den Teil einfach nicht.
   content: { trophaeen: SEO_TROPHAEEN },
-  helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN },
+  // extract(name): weitere Datenkonstanten fuer neue Module (seit 07.10.2026),
+  // statt fuer jede Seite "data" oben zu erweitern. Wirft, wenn es sie nicht gibt.
+  helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN, extract },
 };
 
 // ── Schreiben ─────────────────────────────────────────────────────────────────
+const AKTIVE_PARTS = ONLY ? SEO_PARTS.filter((p) => ONLY.has(p.SLUG)) : SEO_PARTS;
+if (ONLY) {
+  const unbekannt = [...ONLY].filter((s) => !SEO_PARTS.some((p) => p.SLUG === s));
+  if (unbekannt.length) throw new Error(`SEO_ONLY: unbekannte Modul-Seite(n) ${unbekannt.join(", ")}`);
+}
 const seiten = [
-  ["bosse.html", buildBosse()],
-  ["waffen.html", buildWaffen()],
-  ["true-ending.html", buildTrueEnding()],
-  ...SEO_PARTS.map((p) => [`${p.SLUG}.html`, baueModulSeite(p)]),
+  ...(ONLY ? [] : [
+    ["bosse.html", buildBosse()],
+    ["waffen.html", buildWaffen()],
+    ["true-ending.html", buildTrueEnding()],
+  ]),
+  ...AKTIVE_PARTS.map((p) => [`${p.SLUG}.html`, baueModulSeite(p)]),
 ];
 // Welche Seiten sich in diesem Lauf inhaltlich aendern (Zeilenenden egal, siehe
 // unten) -- Grundlage fuer lastmod in buildSitemap(). Muss VOR dem Schreiben
@@ -1114,9 +1180,10 @@ const geaendert = new Set(seiten.filter(([file, content]) => {
   const ziel = path.join(ROOT, file);
   return !fs.existsSync(ziel) || ohneCR(fs.readFileSync(ziel, "utf8")) !== ohneCR(content);
 }).map(([file]) => file));
-const outputs = [...seiten, ["sitemap.xml", buildSitemap(geaendert)]];
+// Mit SEO_ONLY keine Sitemap: sie braucht alle Seiten fuer ein stimmiges lastmod.
+const outputs = ONLY ? seiten : [...seiten, ["sitemap.xml", buildSitemap(geaendert)]];
 for (const [file, content] of outputs) {
-  const ziel = path.join(ROOT, file);
+  const ziel = path.join(OUT, file);
   // Zeilenenden der vorhandenen Datei uebernehmen. Der PC fuehrt die erzeugten Seiten als
   // CRLF, der Pi als LF. Wer hart eines von beiden schreibt, erzeugt auf der jeweils anderen
   // Maschine einen Diff ueber die komplette Datei -- und ein echter Fehler faellt darin
@@ -1143,9 +1210,9 @@ for (const [file, content] of outputs) {
 // COUNT_CHECK, wie viele Datensaetze auf seiner Seite stehen muessen. Weicht das
 // ab, bricht der Build ab, statt eine unvollstaendige Seite zu deployen.
 let countFehler = 0;
-for (const p of SEO_PARTS) {
+for (const p of AKTIVE_PARTS) {
   const { regex, expected, label } = p.COUNT_CHECK(CTX);
-  const seite = fs.readFileSync(path.join(ROOT, `${p.SLUG}.html`), "utf8");
+  const seite = fs.readFileSync(path.join(OUT, `${p.SLUG}.html`), "utf8");
   const n = (seite.match(regex) || []).length;
   if (n !== expected) {
     console.error(`  FEHLER: ${p.SLUG}.html hat ${n} ${label}, erwartet ${expected}`);

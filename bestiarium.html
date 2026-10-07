@@ -114,6 +114,9 @@ ul.te li:last-child{border-bottom:0}
 ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-size:16px}
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
+footer.site nav.alle{line-height:2.1;margin:0 0 14px;font-size:var(--fs-11-5)}
+footer.site nav.alle a{color:var(--amber);padding:4px 2px}
+footer.site nav.alle a[aria-current=page]{color:var(--ink-hi)}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
 
 /* --- Sprungnavigation und Seitensuche (Punkt E-3) -------------------------
@@ -216,12 +219,83 @@ ul.plist li{margin:5px 0}
 span.latest{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
 article.card img.npc{aspect-ratio:1/1;object-fit:contain}
-p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
+p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}
+td.skl-n{min-width:190px}
+td.skl-n strong{color:var(--ink-hi)}
+img.skl-img{width:34px;height:34px;object-fit:contain;border-radius:6px;background:#131629;border:1px solid var(--line);vertical-align:middle;margin-right:8px}
+span.skl-ph{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:6px;border:1px solid var(--line);background:#131629;color:var(--ink-faint);vertical-align:middle;margin-right:8px;font-size:15px}
+span.skl-miss{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
+span.skl-ok{color:var(--ink-faint);font-size:12px}
+td.skl-cost{min-width:96px;max-width:260px;color:var(--amber);font-size:12.5px}
+p.skl-legend{font-size:13.5px;color:var(--ink-dim);max-width:78ch;margin:12px 0 0}
+dl.skl-info{margin:12px 0 0;padding:10px 14px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;font-size:13.5px}
+dl.skl-info dt{font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-top:8px}
+dl.skl-info dt:first-child{margin-top:0}
+dl.skl-info dd{margin:2px 0 0;color:var(--ink-dim)}
+article.card.hx-card::before{background:var(--hx-c,var(--red));box-shadow:0 0 12px var(--hx-c,var(--red-glow))}
+article.card img.hx-img{width:120px;height:120px;aspect-ratio:1/1;object-fit:cover}
+span.hx-slot{white-space:nowrap}
+td.crs-n{min-width:190px}
+td.crs-n strong{color:var(--ink-hi)}
+img.crs-img{width:44px;height:44px;object-fit:contain;border-radius:7px;background:rgba(255,255,255,.04);padding:3px;vertical-align:middle;margin-right:9px}
+span.crs-ph{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:7px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink-faint);vertical-align:middle;margin-right:9px;font-size:16px}
+p.crs-tiers{margin:6px 0 0;font-size:12.5px;color:var(--ink-dim)}
+p.crs-tiers b{color:var(--amber);font-family:var(--f-mono)}
+p.crs-warn{margin:6px 0 0;font-size:12.5px;color:#d9a8ff}
+td.crs-src{font-size:12.5px;color:var(--ink-faint)}
+div.crs-synth{margin-top:12px;padding:12px 16px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px}
+div.crs-synth p{margin:0 0 10px;font-size:14px;color:var(--ink-dim);max-width:78ch}
+div.crs-synth p:last-child{margin-bottom:0}
+div.crs-synth b{color:var(--ink-hi)}
+p.crs-legend{font-size:13.5px;color:var(--ink-dim);max-width:78ch;margin:12px 0 0}
+article.card img.acc-ico{width:64px;height:64px;aspect-ratio:1/1;object-fit:contain;padding:4px}
+div.kg-list{display:flex;flex-direction:column;gap:14px;margin-top:12px}
+p.kg-en{margin:0;font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint);text-transform:none}
+p.kg-miss{margin:4px 0 0;font-size:13px;color:var(--ink);background:rgba(255,90,68,.09);border-left:3px solid var(--red);border-radius:8px;padding:8px 11px}
+p.kg-hint{margin:4px 0 0;font-size:13px;color:var(--ink-dim);background:rgba(198,204,236,.05);border-left:3px solid var(--line-strong);border-radius:8px;padding:8px 11px}
+span.kg-unsure{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#1a1204;background:var(--amber)}
+p.kg-spoiler{font-size:13.5px;color:var(--ink-dim);max-width:78ch;margin:12px 0 0}
+article.card img.mnt-img{aspect-ratio:3/2;object-fit:cover}
+details.mnt-notes>summary{cursor:pointer;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:6px}
+details.mnt-notes>summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+p.mnt-ig{margin:0;font-family:var(--f-mono);font-size:var(--fs-11)}
+td img.pet-thumb{width:48px;height:48px;object-fit:cover;border-radius:8px;background:#131629;border:1px solid var(--line);vertical-align:middle;margin-right:10px}
+span.pet-var{margin-left:6px;color:var(--ink-faint);font-size:12px}
+article.card img.pet-guide-img{width:110px;height:110px;aspect-ratio:1/1;object-fit:cover}
+p.pet-ref{margin:0;font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-faint)}
+.ru-list{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+article.card .ru-ar{display:inline-block;margin-right:8px;padding:2px 8px;border-radius:7px;background:var(--red);color:#160a08;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;letter-spacing:.08em;vertical-align:middle}
+p.ru-de{margin:-4px 0 0;font-family:var(--f-mono);font-size:var(--fs-11-5);font-style:italic;color:var(--ink-faint)}
+ol.ru-steps{margin:2px 0 0;padding-left:22px;font-size:13.5px;color:var(--ink)}
+ol.ru-steps li{margin:0 0 5px}
+div.ru-warn{margin:4px 0 0;padding:8px 12px;font-size:13px;color:var(--ink);background:rgba(255,90,68,.08);border-left:2px solid var(--red);border-radius:8px}
+div.ru-warn ul{margin:5px 0 0;padding-left:18px}
+div.ru-warn li{margin:0 0 3px}
+div.ru-imgs{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+div.ru-imgs a{display:block;line-height:0}
+article.card img.ru-img{width:300px;max-width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+p.ru-src{margin:4px 0 0;padding-top:8px;border-top:1px solid var(--line);font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-faint);line-height:1.7}
+span.ru-conf{font-weight:700;color:#7fc17b}
+span.ru-conf.ru-med{color:var(--amber)}
+details.ru-conflicts{margin:2px 0 0;font-size:13px;color:var(--ink-dim)}
+details.ru-conflicts>summary{cursor:pointer;font-family:var(--f-mono);font-size:var(--fs-11);color:var(--amber)}
+details.ru-conflicts>p{margin:6px 0 0}
+p.rae-detail{margin:2px 0 0;font-size:13.5px;color:var(--ink-dim)}
+p.rae-sub{margin:4px 0 0;font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint)}
+p.geh-spoiler{margin:14px 0 0;padding:9px 13px;font-size:13px;color:var(--ink);background:rgba(255,90,68,.08);border-left:2px solid var(--red);border-radius:8px}
+h3.geh-h{margin:20px 0 0;font-size:16px}
+p.geh-text{margin:8px 0 0;font-size:14px;color:var(--ink);max-width:75ch}
+p.geh-body{margin:2px 0 0;font-size:13.5px;color:var(--ink-dim)}
+p.geh-reward{margin:2px 0 0;font-size:13px;color:var(--ink)}
+article.card img.geh-wimg{width:85px;height:85px;aspect-ratio:1/1;object-fit:contain}
+ul.geh-list,ol.geh-list{margin:6px 0 0;padding-left:22px;font-size:14px;color:var(--ink);max-width:75ch}
+ul.geh-list li,ol.geh-list li{margin:0 0 4px}
+code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</style>
 </head>
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse">Bosse</a><a href="/bestiarium" aria-current="page">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionen</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/npcs">NPCs</a><a href="/patch-notes">Patch-Notes</a></nav>
+  <nav><a href="/bosse">Bosse</a><a href="/bestiarium" aria-current="page">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionen</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/npcs">NPCs</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
 </header>
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Bestiarium</nav>
@@ -703,6 +777,7 @@ p.bio{margin:4px 0 0;font-size:13.5px;color:var(--ink-dim)}</style>
 })();
 </script>
 <footer class="site">
+  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><a href="/bosse">Bosse</a> &middot; <a href="/bestiarium" aria-current="page">Bestiarium</a> &middot; <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/crafting">Crafting</a> &middot; <a href="/hauptquests">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionen</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/trophaeen">Trophäen</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/npcs">NPCs</a> &middot; <a href="/patch-notes">Patch-Notes</a> &middot; <a href="/skills">Skills</a> &middot; <a href="/hexen">Hexen-Guide</a> &middot; <a href="/abyss-cores">Abyss Cores</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/mounts">Mounts</a> &middot; <a href="/pets">Pets</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/geheimnisse">Secrets & Lore</a></nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>

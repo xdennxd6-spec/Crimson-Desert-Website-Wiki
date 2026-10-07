@@ -1,0 +1,29 @@
+{
+  "intro": "Pywel steckt voller Rätsel: verschlossene Strongbox-Truhen mit fester Lösung, Story-Rätsel im Abyss und Aufgaben in Quests. Diese Übersicht führt {{anzahl}} Einträge mit Fundort und Lösung auf: {{strongboxes}} Strongbox-Einträge, {{abyss}} Rätsel im Abyss, {{kapitel}} Rätsel aus Kapitel-Quests und {{fraktion}} Rätsel aus Fraktions-Quests. Die Strongboxes folgen {{methoden|wort}} Mustern: feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder ein Dial, der bis zum Klacken gedreht wird. Wo die Quellenlage dünner ist, steht ein sichtbarer Hinweis auf der Karte.",
+  "faq": [
+    {
+      "frage": "Wie löse ich die Strongboxes in Crimson Desert?",
+      "antwort": "Strongboxes folgen {{methoden|wort}} Mustern: eine feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen. Die Seite führt {{strongboxes|wort}} Strongbox-Einträge: die Truhen im Turmzimmer und im Esszimmer des Stellen Manor mit ihrer konkreten Lösung sowie eine Übersicht der Methoden mit Beispielen aus weiteren Manors und Castles."
+    },
+    {
+      "frage": "Was brauche ich für die Rätsel im Abyss?",
+      "antwort": "Die Story-Rätsel im Abyss werden meist mit Axiom Force und Force Palm gelöst. Die Seite beschreibt {{abyss|wort}} davon: Precipice of Truth, Root's End und Passage of Malice. Bei Root's End ist Flight die vorgesehene Methode, um im Laserschacht den Sturz zu bremsen und durch die Lücken zu steuern."
+    },
+    {
+      "frage": "Wie löse ich das Rätsel „Secret at the Church“?",
+      "antwort": "Am Relic-Safe müssen die Würfel in dieser Reihenfolge gedrückt werden: unten rechts, oben links, unten links, oben rechts. Am Pillar of Radiance setzt du den Dagger of Radiance in das Pedestal und drehst die Scheiben zum vollständigen Eye-Bild; nur der äußerste und der zweitäußerste Ring müssen gedreht werden, jeder bis er aufleuchtet."
+    },
+    {
+      "frage": "Wie komme ich in den Keller des Glenbright Manor?",
+      "antwort": "Du brauchst beide Golden Daggers: den Ruby-Set Golden Dagger von einer Wandhalterung und den Sapphire-Set Golden Dagger, für den du im Wardrobe ein Handrad drehst, bis Licht auf die Statue fällt und eine Wandnische aufgeht. Beide steckst du in die Slots über dem Kamin, dann öffnet sich die Geheimtür zum Keller."
+    },
+    {
+      "frage": "Wie zuverlässig sind die Lösungen auf dieser Seite?",
+      "antwort": "Bei {{unsicher}} von {{anzahl}} Einträgen ist die Quellenlage dünner: Beim Ancient Generator im Kilnden Workshop ist die Erkennung der Ringstellung streng, und die Angaben sind teilweise quellenabhängig. Solche Einträge tragen auf der Karte eine eigene Zeile zur Quellenlage, statt eine Sicherheit vorzutäuschen."
+    },
+    {
+      "frage": "Wo finde ich die Rätsel der Uralten Ruinen?",
+      "antwort": "Die Rätsel der Uralten Ruinen (zum Beispiel Statuen drehen, Laternen, Tile-Walking und Red-Light-Green-Light) sind hier nicht gelistet. Sie stehen einzeln auf der Seite Uralte Ruinen, geordnet nach Regionen."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "intro": "Crimson Desert versteckt vieles abseits der Hauptwege: {{cressets}} Abyss Cressets in {{cressetregionen|wort}} Regionen, Memory Fragments, die du mit Laterne und Visione entdeckst, Pop-Culture-Easter-Eggs, versteckte Orte, Waffen und Spielmechaniken ohne Tutorial. Diese Seite bündelt {{easteregg|wort}} Easter Eggs, {{orte|wort}} Hidden Locations, {{geheimwaffen|wort}} Hidden Weapons, {{mechaniken|wort}} versteckte Mechaniken und {{tools|wort}} Such-Tools. Dazu kommt die Lore zum Hidden Ending. Achtung, Spoiler: Wer sich überraschen lassen will, liest nur die Abschnitte, die zum eigenen Fortschritt passen.",
+  "faq": [
+    {
+      "frage": "Wie schalte ich das Hidden Ending in Crimson Desert frei?",
+      "antwort": "Das Hidden Ending ist laut consolepulse kein alternatives Ende, sondern eine Lore-Ebene zum regulären Ende. Freischaltbar ist es erst nach vollständigem Story-Abschluss samt Epilog und nach allen Abyss-Challenges einschließlich Dimensional Bonds. Dann gehst du zum Axiom Archive, kommst in der Library mit Axiom Force in den dritten Stock und nimmst dort die {{buecher|wort}} Archive-Records-Bücher auf, die zusammen {{logs}} nummerierte Knowledge Logs enthalten."
+    },
+    {
+      "frage": "Wie viele Abyss Cressets gibt es in Crimson Desert und was bringen sie?",
+      "antwort": "Es gibt {{cressets}} verborgene Abyss Cressets, verteilt auf {{cressetregionen|wort}} Regionen. Die meisten liegen in der Region Crimson Desert mit {{cressetmax}}, die wenigsten in Delesyia mit {{cressetmin}} (Zählung laut Guide-Liste der Secret Places). Jeder Cresset gibt ein Abyss Artifact und einen Fast-Travel-Point; wer alle findet, erhält die Trophäe „Pilgrim of Wonders“."
+    },
+    {
+      "frage": "Wie viele Memory Fragments gibt es in Crimson Desert?",
+      "antwort": "Die interaktive Karte von crimsondesert.th.gl verzeichnet {{fragmente}} Memory Fragments, Stand April. Ein späterer Patch hat laut offiziellen Notes weitere hinzugefügt, ohne eine Anzahl zu nennen, und andere Zählweisen kommen auf abweichende Zahlen. Eine belegte aktuelle Gesamtzahl gibt es deshalb nicht."
+    },
+    {
+      "frage": "Wie bekomme ich die Visione und finde Memory Fragments?",
+      "antwort": "Die Visione bekommst du in der Hauptstory im zweiten Kapitel (Quest „Where the Light Leads“ beziehungsweise „Unexpected Gift“) auf der Spitze des Lioncrest Watchtower in Hernand. Zum Finden hältst du außerhalb des Kampfes die Laterne raus: In der Nähe eines Fragments pulsiert sie blau. Dann stillhalten, bis die Leiste „Learning in Progress“ voll ist, danach lässt sich das Fragment mit der Visione abspielen."
+    },
+    {
+      "frage": "Wo finde ich die Hidden Weapons in Crimson Desert?",
+      "antwort": "Es gibt {{geheimwaffen|wort}} leicht zu übersehende Waffen. Hollow Visage liegt in einer Truhe am Ende der Dawn Cave hinter einem Wasserfall im Mountain of Frozen Souls. Survivor's Solitude findest du in der Death's Grip Cave hinter dem Wasserfall im Everfrost Basin. Die Vessel of Dark Pursuit trägt der Boss Antumbra's Sword im Sanctum of Absolution; sie gilt als die stärkste dieser Waffen. Wasserfälle durchstößt du mit einem Stab-Attack."
+    },
+    {
+      "frage": "Welche Easter Eggs gibt es in Crimson Desert?",
+      "antwort": "Die Seite führt {{easteregg|wort}} Pop-Culture-Anspielungen: Squid Game (Red Light, Green Light) in den Ancient Ruins of Drakesfall Gorge, Diablo-Schatzgoblins als Random-Encounter auf den Straßen von Pywel und Salvatore in Hernand Town, dessen Optik laut Guides eine Hommage an „Let Me Solo Her“ aus Elden Ring ist."
+    }
+  ]
+}
