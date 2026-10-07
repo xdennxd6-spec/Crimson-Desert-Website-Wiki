@@ -367,6 +367,8 @@ const MOUNT_IMGS={
   "Demenissian War Horse":"cd_assets/mounts/demenissian-war-horse.svg",
   "Delesyian Warhorse":"cd_assets/mounts/delesyian-warhorse.svg",
   "Wells's Military Horse":"cd_assets/mounts/wells-military-horse.svg",
+  "Hernandian Soldier's Horse":"cd_assets/mounts/hernandian-soldiers-horse.svg",
+  "Race Horse":"cd_assets/mounts/race-horse.svg",
   "Clawed Bear":"cd_assets/mounts/clawed-bear.svg",
   "Grizzly Bear":"cd_assets/mounts/grizzly-bear.svg",
   "Ibex":"cd_assets/mounts/ibex.svg",

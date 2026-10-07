@@ -7,17 +7,25 @@ const path=(d,c,stroke='none',width=3)=>`<path d="${d}" fill="${c}" stroke="${st
 const rect=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
 const eye=(x,y)=>ellipse(x,y,7,8,'#e9e6d6')+ellipse(x+2,y,3,4,'#17181c');
 const legs=(c)=>[137,162,234,259].map((x,i)=>rect(x,169,17,60,c)+ellipse(x+8,229,14,7,i%2?'#242329':'#17171e')).join('');
-function horse(c,mane,cloth,scout=false){
- return path('M113 137 L53 107 L48 149 L111 167',mane)+legs(c)+
+// gear: false = war horse with chamfron, true = scout saddlebags, 'race' = racing cloth with number disc
+// dapple: dark spots for grey dappled coats (spots sit on the parts the saddle cloth leaves visible)
+const dapples=()=>[[122,148,7,5],[133,172,8,5],[185,190,10,5],[218,191,8,4],[255,168,8,6],[268,148,6,5],[272,118,5,6]]
+ .map(([x,y,rx,ry])=>ellipse(x,y,rx,ry,'#1a191c40')).join('');
+function horse(c,mane,cloth,scout=false,dapple=false){
+ const race=scout==='race';
+ return (race?path('M26 184 L94 184 M38 199 L104 199 M20 214 L82 214','none','#c9a22740',4):'')+
+ path('M113 137 L53 107 L48 149 L111 167',mane)+legs(c)+
  ellipse(193,157,91,44,c)+ellipse(183,143,66,22,'#ffffff12')+
  path('M236 140 L258 76 L283 83 L281 143',c)+
  path('M247 104 L242 76 L259 62 L270 73 L262 121',mane)+
  path('M274 70 L269 45 L281 55 L285 72 M288 70 L294 46 L301 63 L298 77',c)+
  ellipse(286,87,29,23,c)+ellipse(311,97,25,16,c)+ellipse(326,95,4,3,mane)+eye(292,81)+
+ (dapple?dapples():'')+
  path('M142 123 L220 121 L231 168 L145 171 Z',cloth)+
  path('M151 127 L153 166 M215 126 L222 164','none','#bd9c58',3)+
  ellipse(184,128,34,9,'#3b2d26')+
- (scout?rect(155,126,18,31,'#918259')+rect(193,126,18,31,'#918259'):
+ (race?ellipse(187,150,14,12,'#e9e6d6')+ellipse(187,150,8,7,'none').replace('fill="none"','fill="none" stroke="#3b2d26" stroke-width="3"'):
+ scout?rect(155,126,18,31,'#918259')+rect(193,126,18,31,'#918259'):
  path('M269 72 L289 69 L300 93 L284 108 L265 97 Z','#8e929b')+eye(291,82)+
  path('M175 144 L184 138 L193 144 L191 155 L184 161 L177 155 Z','#c8aa62'));
 }
@@ -68,6 +76,8 @@ const artwork={
  'delesyian-warhorse':horse('#a8a393','#4e4d50','#485765'),
  'wells-military-horse':horse('#8b633e','#392c25','#5e6345'),
  'calphadean-scouts-horse':horse('#6c5140','#252322','#536043',true),
+ 'hernandian-soldiers-horse':horse('#85827e','#2a292c','#6e5a34',false,true),
+ 'race-horse':horse('#9b978f','#333135','#7a3a2e','race',true),
  'clawed-bear':bear('#655345',true), 'grizzly-bear':bear('#8c6b48'),
  'swift-wolf':wolf('#ad9270','#625646'), 'large-white-wolf':wolf('#e0e1e3','#a3a6b2'),
  'ibex':ibex(), 'giant-red-iguana':iguana(),
