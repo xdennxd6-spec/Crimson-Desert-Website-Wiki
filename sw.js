@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v26';
+const CACHE_VERSION = 'cd-guide-v27';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
