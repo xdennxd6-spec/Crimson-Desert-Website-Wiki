@@ -5997,6 +5997,562 @@
       "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_00_0500.webp",
       "source": "https://questlog.gg/crimson-desert/en/db/item/1004879",
       "unresolved": "CDN liefert 404 (geprüft 08.10.2026)"
+    },
+    {
+      "name": "Sword of Starlight",
+      "group": "weapon",
+      "id": "1003776",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_01_sword_0027_r.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1003776",
+      "local": "cd_assets/weapons/item-1003776.webp",
+      "replaces": "cd_assets/weapons/sword-of-starlight.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Vow of the Dead King",
+      "group": "weapon",
+      "id": "1000379",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_02_alebard_0017.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000379",
+      "local": "cd_assets/weapons/item-1000379.webp",
+      "replaces": "cd_assets/weapons/vow-of-the-dead-king.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Twisted Verdict",
+      "group": "weapon",
+      "id": "15903",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_02_sword_0040.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/15903",
+      "local": "cd_assets/weapons/item-15903.webp",
+      "replaces": "cd_assets/weapons/twisted-verdict.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Brass Rose Rapier",
+      "group": "weapon",
+      "id": "201006",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_01_sword_0011_r.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/201006",
+      "local": "cd_assets/weapons/item-201006.webp",
+      "replaces": "cd_assets/weapons/brass-rose-rapier.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Survivor's Solitude",
+      "group": "weapon",
+      "id": "200922",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_01_sword_0053.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/200922",
+      "local": "cd_assets/weapons/item-200922.webp",
+      "replaces": "cd_assets/weapons/survivors-solitude.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Melted Ambition",
+      "group": "weapon",
+      "id": "200072",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_01_sword_0078.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/200072",
+      "local": "cd_assets/weapons/item-200072.webp",
+      "replaces": "cd_assets/weapons/melted-ambition.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Crow Whisperer",
+      "group": "weapon",
+      "id": "1001207",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_02_warhammer_0103.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1001207",
+      "local": "cd_assets/weapons/item-1001207.webp",
+      "replaces": "cd_assets/weapons/crow-whisperer.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Vessel of Dark Pursuit",
+      "group": "weapon",
+      "id": "240029",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_02_sword_0014.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/240029",
+      "local": "cd_assets/weapons/item-240029.webp",
+      "replaces": "cd_assets/weapons/vessel-of-dark-pursuit.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Hwando",
+      "group": "weapon",
+      "id": "1000080",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_02_sword_0036.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000080",
+      "local": "cd_assets/weapons/item-1000080.webp",
+      "replaces": "cd_assets/weapons/hwando.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Tauria Curved Sword",
+      "group": "weapon",
+      "id": "1000738",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_01_sword_0278_r.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000738",
+      "local": "cd_assets/weapons/item-1000738.webp",
+      "replaces": "cd_assets/weapons/tauria-curved-sword.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Hollow Visage",
+      "group": "weapon",
+      "id": "200902",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_01_sword_0016_r.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/200902",
+      "local": "cd_assets/weapons/item-200902.webp",
+      "replaces": "cd_assets/weapons/hollow-visage.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Alabaster Curved Sword",
+      "group": "weapon",
+      "id": "200049",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_01_sword_0037.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/200049",
+      "local": "cd_assets/weapons/item-200049.webp",
+      "replaces": "cd_assets/weapons/alabaster-curved-sword.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Sword of the Lord",
+      "group": "weapon",
+      "id": "200914",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_01_sword_0072.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/200914",
+      "local": "cd_assets/weapons/item-200914.webp",
+      "replaces": "cd_assets/weapons/sword-of-the-lord.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Staglord's Shield",
+      "group": "weapon",
+      "id": "290026",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_03_shield_0121.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/290026",
+      "local": "cd_assets/weapons/item-290026.webp",
+      "replaces": "cd_assets/weapons/staglords-shield.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Frostcursed Plate Armor",
+      "group": "armor",
+      "id": "111005",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_skullknight_ub_0003.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/111005",
+      "local": "cd_assets/armor/item-111005.webp",
+      "replaces": "cd_assets/armor/frostcursed-plate.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Plate Armor of the Shadows",
+      "group": "armor",
+      "id": "1000225",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_death_knight_ub_0001.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000225",
+      "local": "cd_assets/armor/item-1000225.webp",
+      "replaces": "cd_assets/armor/plate-armor-shadows.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Leather Helm of the Fallen Kingdom",
+      "group": "armor",
+      "id": "103023",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_saigod_hel_0001_i.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/103023",
+      "local": "cd_assets/armor/item-103023.webp",
+      "replaces": "cd_assets/armor/leather-helm-fallen.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Plate Boots of the Shadows",
+      "group": "armor",
+      "id": "1000382",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_death_knight_foot_0001.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000382",
+      "local": "cd_assets/armor/item-1000382.webp",
+      "replaces": "cd_assets/armor/plate-boots-shadows.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Scorchflame Plate Gloves",
+      "group": "armor",
+      "id": "121026",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_set_0043.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/121026",
+      "local": "cd_assets/armor/item-121026.webp",
+      "replaces": "cd_assets/armor/scorchflame-gloves.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ashen Wolf's Leather Boots",
+      "group": "armor",
+      "id": "133072",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0056.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/133072",
+      "local": "cd_assets/armor/item-133072.webp",
+      "replaces": "cd_assets/armor/ashen-wolf-boots.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Belkandor Plate Boots",
+      "group": "armor",
+      "id": "1000874",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_00_0440.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000874",
+      "local": "cd_assets/armor/item-1000874.webp",
+      "replaces": "cd_assets/armor/belkandor-plate-boots.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Bolton Leather Boots",
+      "group": "armor",
+      "id": "133097",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0110.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/133097",
+      "local": "cd_assets/armor/item-133097.webp",
+      "replaces": "cd_assets/armor/bolton-leather-boots.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Fire Walk Boots",
+      "group": "armor",
+      "id": "1001191",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_00_0424.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1001191",
+      "local": "cd_assets/armor/item-1001191.webp",
+      "replaces": "cd_assets/armor/fire-walk-boots.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Kairos Plate Boots",
+      "group": "armor",
+      "id": "1000567",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_00_0435.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000567",
+      "local": "cd_assets/armor/item-1000567.webp",
+      "replaces": "cd_assets/armor/kairos-plate-boots.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Lightning Bolt Plate Boots",
+      "group": "armor",
+      "id": "1001328",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_m0001_00_titan_foot_0002.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1001328",
+      "local": "cd_assets/armor/item-1001328.webp",
+      "replaces": "cd_assets/armor/lightning-bolt-boots.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Pailunese Boots",
+      "group": "armor",
+      "id": "134011",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0067_02_index01.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/134011",
+      "local": "cd_assets/armor/item-134011.webp",
+      "replaces": "cd_assets/armor/pailunese-boots.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ashad Plate Cloak",
+      "group": "armor",
+      "id": "1000681",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_00_0369_s.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000681",
+      "local": "cd_assets/armor/item-1000681.webp",
+      "replaces": "cd_assets/armor/ashad-plate-cloak.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ashen Wolf's Leather Cloak",
+      "group": "armor",
+      "id": "1000678",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_00_0056_t.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000678",
+      "local": "cd_assets/armor/item-1000678.webp",
+      "replaces": "cd_assets/armor/ashen-wolf-cloak.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Belkandor Plate Cloak",
+      "group": "armor",
+      "id": "1000982",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_00_0440_s.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000982",
+      "local": "cd_assets/armor/item-1000982.webp",
+      "replaces": "cd_assets/armor/belkandor-plate-cloak.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Black Bears' Cloth Cloak",
+      "group": "armor",
+      "id": "1000846",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_cloak_22068_s.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000846",
+      "local": "cd_assets/armor/item-1000846.webp",
+      "replaces": "cd_assets/armor/black-bears-cloak.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Dragon Flame Cloak",
+      "group": "armor",
+      "id": "1000286",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_01_0332_s.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000286",
+      "local": "cd_assets/armor/item-1000286.webp",
+      "replaces": "cd_assets/armor/dragon-flame-cloak.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Mining Knuckledrill",
+      "group": "weapon",
+      "id": "1001294",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_13_fist_0014_r.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1001294",
+      "local": "cd_assets/weapons/item-1001294.webp",
+      "replaces": "cd_assets/weapons/mining-knuckledrill.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Blackwing Leather Mask",
+      "group": "armor",
+      "id": "14415",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_crowman_hel_0001_d.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/14415",
+      "local": "cd_assets/armor/item-14415.webp",
+      "replaces": "cd_assets/armor/blackwing-mask.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Visione Helm",
+      "group": "armor",
+      "id": "14510",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_00_0354_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/14510",
+      "local": "cd_assets/armor/item-14510.webp",
+      "replaces": "cd_assets/armor/visione-helm.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Hernandian Banquet Cloak",
+      "group": "armor",
+      "id": "1000326",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_0054_01_t.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000326",
+      "local": "cd_assets/armor/item-1000326.webp",
+      "replaces": "cd_assets/armor/hernandian-cloak.webp",
+      "reason": "höhere Auflösung (256 px statt 75–200 px)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Matthias",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_matthias.webp",
+      "local": "cd_assets/bosses/ql-matthias.webp",
+      "replaces": "cd_assets/bosses/matthias.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Kailok the Hornsplitter",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_kailokthehornsplitter.webp",
+      "local": "cd_assets/bosses/ql-kailokthehornsplitter.webp",
+      "replaces": "cd_assets/bosses/kailok.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Marni's Excavatron",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marniexcavatron.webp",
+      "local": "cd_assets/bosses/ql-marniexcavatron.webp",
+      "replaces": "cd_assets/bosses/excavatron.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Kearush the Slayer",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_imp_banquet.webp",
+      "local": "cd_assets/bosses/ql-unique-imp-banquet.webp",
+      "replaces": "cd_assets/bosses/kearush.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Draven the Crowcaller",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_draven.webp",
+      "local": "cd_assets/bosses/ql-draven.webp",
+      "replaces": "cd_assets/bosses/draven.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Myurdin (Phase 1)",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_myordin.webp",
+      "local": "cd_assets/bosses/ql-myordin.webp",
+      "replaces": "cd_assets/bosses/myurdin.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Cassius Morten",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_silver_armor_boss.webp",
+      "local": "cd_assets/bosses/ql-silver-armor-boss.webp",
+      "replaces": "cd_assets/bosses/cassius.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Gabriel Caliburn",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_caliburn.webp",
+      "local": "cd_assets/bosses/ql-caliburn.webp",
+      "replaces": "cd_assets/bosses/gabriel.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "One-Armed Ludvig",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ludvig.webp",
+      "local": "cd_assets/bosses/ql-ludvig.webp",
+      "replaces": "cd_assets/bosses/ludvig.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ludvig (Phase 1)",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_ludvig.webp",
+      "local": "cd_assets/bosses/ql-ludvig.webp",
+      "replaces": "cd_assets/bosses/ludvig.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Saigord the Staglord",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_deerking.webp",
+      "local": "cd_assets/bosses/ql-deerking.webp",
+      "replaces": "cd_assets/bosses/saigord.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Hexe Marie",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_hexe_marie.webp",
+      "local": "cd_assets/bosses/ql-unique-hexe-marie.webp",
+      "replaces": "cd_assets/bosses/hexe_marie.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "White Horn",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_whitehorn.webp",
+      "local": "cd_assets/bosses/ql-unique-whitehorn.webp",
+      "replaces": "cd_assets/bosses/white_horn.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Gregor the Halberd of Carnage",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_gregorthehalberdofcarnage.webp",
+      "local": "cd_assets/bosses/ql-gregorthehalberdofcarnage.webp",
+      "replaces": "cd_assets/bosses/gregor.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Walter Lanford",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_walter_bliss.webp",
+      "local": "cd_assets/bosses/ql-walter-bliss.webp",
+      "replaces": "cd_assets/bosses/walter_lanford.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Master Du",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_master_doo.webp",
+      "local": "cd_assets/bosses/ql-unique-master-doo.webp",
+      "replaces": "cd_assets/bosses/master_du.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Fortain the Cursed Knight",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_fortainthehexboundknight.webp",
+      "local": "cd_assets/bosses/ql-fortainthehexboundknight.webp",
+      "replaces": "cd_assets/bosses/fortain.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Marni's Clockwork Mantis",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_marni_machinemantis.webp",
+      "local": "cd_assets/bosses/ql-marni-machinemantis.webp",
+      "replaces": "cd_assets/bosses/clockwork_mantis.webp",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Mountain God Boar",
+      "group": "boss",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_legend_wildspirit_boar.webp",
+      "local": "cd_assets/bosses/ql-legend-wildspirit-boar.webp",
+      "replaces": "cd_assets/bosses/mountain_god_boar.png",
+      "reason": "höhere Auflösung (512×512 statt 300×169)",
+      "verifiedOn": "2026-10-08"
     }
   ],
   "fextralifeReplacement": {
