@@ -1716,7 +1716,7 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
 .boss-done-badge{display:none;position:absolute;top:50px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:var(--fs-9-5);font-weight:700;letter-spacing:.14em;color:var(--vellum);background:var(--survey-red);border:1px solid var(--survey-red);padding:2px 9px;pointer-events:none;z-index:5;white-space:nowrap;border-radius:999px}
 .card.boss-done .boss-done-badge{display:block}
 /* Karten-Fokus (seit 08.10.2026): Großansicht einer Karte vor unscharfem Hintergrund */
-:is(#weapon-tb,#armor-grid,#set-grid,#acc-grid,#synth-grid,#mount-sections,#pet-grid,#bestiary-root) :is(.card,.pet-card){cursor:zoom-in}
+:is(#weapon-tb,#armor-grid,#set-grid,#acc-grid,#synth-grid,#mount-sections,#pet-grid,#bestiary-root) :is(.card,.pet-card) img,:is(#weapon-tb,#armor-grid,#set-grid,#acc-grid,#synth-grid,#mount-sections,#pet-grid,#bestiary-root) :is(.card,.pet-card) :has(> img:only-child){cursor:zoom-in}
 html.cf-open,html.cf-open body{overflow:hidden}
 #card-focus{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(6,6,10,.55);-webkit-backdrop-filter:blur(7px) saturate(.9);backdrop-filter:blur(7px) saturate(.9);animation:cfFade .18s ease-out}
 #card-focus .cf-box{position:relative;width:min(560px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.6);animation:cfPop .2s ease-out}
@@ -1731,12 +1731,7 @@ html.cf-open,html.cf-open body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){#card-focus,#card-focus .cf-box{animation:none}}
 /* Mount-Karten: Stats und Notizen erst nach Aufklappen (seit 06.10.2026) */
 #mount-sections .grid{align-items:start}
-.mount-notes{margin-top:10px;border-top:1px solid var(--bdr);padding-top:8px}
-.mount-notes>summary{cursor:pointer;list-style:none;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gdim);user-select:none}
-.mount-notes>summary::-webkit-details-marker{display:none}
-.mount-notes>summary::before{content:'▸ ';display:inline-block;transition:transform .2s}
-.mount-notes[open]>summary::before{transform:rotate(90deg)}
-.mount-notes>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.mount-notes{margin-top:10px}
 .mount-notes-body{margin-top:6px;font-size:var(--fs-11-5);color:var(--dim);line-height:1.55}
 .npc-card{cursor:pointer}
 .npc-card .npc-more{display:none}
@@ -1874,33 +1869,48 @@ html.cf-open,html.cf-open body{overflow:hidden}
 .item-more{
   margin:0;
 }
-.item-more > summary{
+.item-more > summary,.mount-notes > summary{
   cursor:pointer;
   list-style:none;
   display:flex;
   align-items:center;
   gap:8px;
+  min-height:36px;
+  margin-top:4px;
+  padding:7px 12px;
+  border:1px solid rgba(201,162,39,.45);
+  border-radius:8px;
+  background:rgba(201,162,39,.08);
   font-family:var(--f-mono);
-  font-size:var(--fs-10);
-  letter-spacing:.04em;
-  color:var(--brass);
-  padding:2px 0;
+  font-size:var(--fs-11);
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--gold);
+  user-select:none;
+  transition:background .16s,border-color .16s,color .16s;
 }
-.item-more > summary::-webkit-details-marker{display:none}
-.item-more > summary::after{
-  content:"▸";
+.item-more > summary::-webkit-details-marker,.mount-notes > summary::-webkit-details-marker{display:none}
+.item-more > summary::after,.mount-notes > summary::after{
+  content:"▾";
   margin-left:auto;
+  font-size:14px;
+  line-height:1;
   transition:transform .16s,color .16s;
-  color:var(--dim);
+  color:var(--gold);
 }
-.item-more[open] > summary::after{
-  transform:rotate(90deg);
+.item-more[open] > summary::after,.mount-notes[open] > summary::after{
+  transform:rotate(180deg);
   color:var(--survey-red);
 }
-.item-more > summary:hover{
-  color:var(--survey-red);
+.item-more > summary:hover,.mount-notes > summary:hover{
+  background:rgba(201,162,39,.16);
+  border-color:var(--gold);
 }
-.item-more > summary:focus-visible{
+.item-more[open] > summary,.mount-notes[open] > summary{
+  background:rgba(201,162,39,.12);
+}
+.item-more > summary:focus-visible,.mount-notes > summary:focus-visible{
   outline:2px solid var(--survey-red);
   outline-offset:2px;
 }
@@ -8899,7 +8909,7 @@ function escHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<'
 function escJsStr(s){return String(s??'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
 
 // ===== KARTEN-FOKUS (seit 08.10.2026) =====
-// Klick auf eine Karte in den unten genannten Rastern holt eine Kopie der Karte in den Vordergrund:
+// Klick auf das Bild einer Karte in den unten genannten Rastern holt eine Kopie der Karte in den Vordergrund:
 // Hintergrund abgedunkelt und unscharf, Bild groß, eingeklappte Details offen. Schließen per X,
 // Klick auf den Hintergrund oder Escape. Interaktive Elemente (Buttons, Links, Details-Köpfe,
 // Eingaben) behalten ihr eigenes Verhalten. Bosse, NPCs und Crafting haben eigene Klicklogik
@@ -8941,11 +8951,12 @@ document.addEventListener('click',e=>{
   if(e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey)return;
   const t=e.target;
   if(!t||!t.closest||t.closest('#card-focus'))return;
-  if(t.closest('a,button,input,select,textarea,label,summary,[onclick]:not(.card):not(.pet-card)'))return;
-  const card=t.closest('.card, .pet-card');
+  if(t.closest('a,button,input,select,textarea,label,summary'))return;
+  // Nur das Bild bzw. seine Bildfläche öffnet die Großansicht (User-Wunsch 08.10.2026)
+  const area=t.tagName==='IMG'?t:(t.firstElementChild&&t.children.length===1&&t.firstElementChild.tagName==='IMG'?t:null);
+  if(!area)return;
+  const card=area.closest('.card, .pet-card');
   if(!card||!card.closest(CARD_FOCUS_SCOPES)||card.classList.contains('hide'))return;
-  const sel=window.getSelection&&String(window.getSelection());
-  if(sel&&sel.trim())return;
   openCardFocus(card);
 });
 document.addEventListener('keydown',e=>{
