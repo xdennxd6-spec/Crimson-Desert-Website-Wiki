@@ -5588,6 +5588,415 @@
       "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_visione_chip_bossrematch_fullmooncyrus.webp",
       "localPath": "cd_assets/bosses/full_moon_reaper.webp",
       "replaced": "cd_assets/bosses/fex/Full-moon-reaper-image-1-bosses-wiki-guide-300px.webp"
+    },
+    {
+      "name": "Chelcia Plate Armor",
+      "group": "armor",
+      "id": "114629",
+      "sourceName": "Chelcia Plate Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_0054_09.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/114629",
+      "local": "cd_assets/armor/item-114629.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Chelcia Plate Helm",
+      "group": "armor",
+      "id": "101054",
+      "sourceName": "Chelcia Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_set_0010_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/101054",
+      "local": "cd_assets/armor/item-101054.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Chelcia Plate Boots",
+      "group": "armor",
+      "id": "131022",
+      "sourceName": "Chelcia Plate Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_set_0014.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/131022",
+      "local": "cd_assets/armor/item-131022.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Chelcia Plate Cloak",
+      "group": "armor",
+      "id": "1000307",
+      "sourceName": "Chelcia Plate Cloak",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_0054_09_s.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000307",
+      "local": "cd_assets/armor/item-1000307.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Sahazhad Plate Armor",
+      "group": "armor",
+      "id": "111255",
+      "sourceName": "Sahazhad Plate Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_0054_06.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/111255",
+      "local": "cd_assets/armor/item-111255.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Sahazhad Plate Helm",
+      "group": "armor",
+      "id": "2101037",
+      "sourceName": "Sahazhad Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_0054_06_d.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2101037",
+      "local": "cd_assets/armor/item-2101037.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Sahazhad Plate Boots",
+      "group": "armor",
+      "id": "131041",
+      "sourceName": "Sahazhad Plate Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_set_0036.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/131041",
+      "local": "cd_assets/armor/item-131041.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Sahazhad Plate Cloak",
+      "group": "armor",
+      "id": "1000314",
+      "sourceName": "Sahazhad Plate Cloak",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_0054_06_t.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1000314",
+      "local": "cd_assets/armor/item-1000314.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Silverwolf Leather Armor",
+      "group": "armor",
+      "id": "1163051",
+      "sourceName": "Silverwolf Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0055.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1163051",
+      "local": "cd_assets/armor/item-1163051.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Silverwolf Leather Gloves",
+      "group": "armor",
+      "id": "123324",
+      "sourceName": "Silverwolf Leather Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_0055.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/123324",
+      "local": "cd_assets/armor/item-123324.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Silverwolf Leather Boots",
+      "group": "armor",
+      "id": "133034",
+      "sourceName": "Silverwolf Leather Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0055.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/133034",
+      "local": "cd_assets/armor/item-133034.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Silverwolf Leather Cloak",
+      "group": "armor",
+      "id": "1004605",
+      "sourceName": "Silverwolf Leather Cloak",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_cloak_00_0055_s.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004605",
+      "local": "cd_assets/armor/item-1004605.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grotevant Plate Armor",
+      "group": "armor",
+      "id": "1473348912",
+      "sourceName": "Grotevant Plate Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_wellsknight_ub_0001.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1473348912",
+      "local": "cd_assets/armor/item-1473348912.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grotevant Plate Helm",
+      "group": "armor",
+      "id": "1955057078",
+      "sourceName": "Grotevant Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_wellsknight_hel_0001_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1955057078",
+      "local": "cd_assets/armor/item-1955057078.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grotevant Plate Gloves",
+      "group": "armor",
+      "id": "2094675372",
+      "sourceName": "Grotevant Plate Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_wellsknight_hand_0001.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2094675372",
+      "local": "cd_assets/armor/item-2094675372.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grotevant Plate Boots",
+      "group": "armor",
+      "id": "697368607",
+      "sourceName": "Grotevant Plate Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_wellsknight_foot_0001.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/697368607",
+      "local": "cd_assets/armor/item-697368607.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Baltheon Plate Armor",
+      "group": "armor",
+      "id": "1004047",
+      "sourceName": "Baltheon Plate Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_nhm_so_ub_51227.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004047",
+      "local": "cd_assets/armor/item-1004047.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Baltheon Plate Helm",
+      "group": "armor",
+      "id": "101001",
+      "sourceName": "Baltheon Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_0008_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/101001",
+      "local": "cd_assets/armor/item-101001.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Baltheon Plate Gloves",
+      "group": "armor",
+      "id": "1004048",
+      "sourceName": "Baltheon Plate Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_00_0379_index03.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004048",
+      "local": "cd_assets/armor/item-1004048.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ironwilled Guardian's Leather Armor",
+      "group": "armor",
+      "id": "1163551",
+      "sourceName": "Ironwilled Guardian's Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0187.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1163551",
+      "local": "cd_assets/armor/item-1163551.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ironwilled Guardian's Leather Gloves",
+      "group": "armor",
+      "id": "123137",
+      "sourceName": "Ironwilled Guardian's Leather Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_set_0030.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/123137",
+      "local": "cd_assets/armor/item-123137.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ironwilled Guardian's Leather Boots",
+      "group": "armor",
+      "id": "133076",
+      "sourceName": "Ironwilled Guardian's Leather Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0046.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/133076",
+      "local": "cd_assets/armor/item-133076.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Helfryn Leather Armor",
+      "group": "armor",
+      "id": "12218",
+      "sourceName": "Helfryn Leather Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0052_index01.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/12218",
+      "local": "cd_assets/armor/item-12218.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Helfryn Leather Gloves",
+      "group": "armor",
+      "id": "12410",
+      "sourceName": "Helfryn Leather Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_0052_index13.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/12410",
+      "local": "cd_assets/armor/item-12410.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Helfryn Leather Boots",
+      "group": "armor",
+      "id": "133011",
+      "sourceName": "Helfryn Leather Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0052_index10.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/133011",
+      "local": "cd_assets/armor/item-133011.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Lauques Plate Helm",
+      "group": "armor",
+      "id": "2101033",
+      "sourceName": "Lauques Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_0047_05_index01_i.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2101033",
+      "local": "cd_assets/armor/item-2101033.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Lauques Cloth Armor",
+      "group": "armor",
+      "id": "2114095",
+      "sourceName": "Lauques Cloth Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_22172.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2114095",
+      "local": "cd_assets/armor/item-2114095.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Lauques Leather Boots",
+      "group": "armor",
+      "id": "2133045",
+      "sourceName": "Lauques Leather Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0080_index15.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2133045",
+      "local": "cd_assets/armor/item-2133045.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ferman Plate Armor",
+      "group": "armor",
+      "id": "2111099",
+      "sourceName": "Ferman Plate Armor",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_m0001_00_so_phm_ub_22039.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2111099",
+      "local": "cd_assets/armor/item-2111099.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ferman Plate Gloves",
+      "group": "armor",
+      "id": "121043",
+      "sourceName": "Ferman Plate Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_0011_index04.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/121043",
+      "local": "cd_assets/armor/item-121043.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ferman Leather Boots",
+      "group": "armor",
+      "id": "2133023",
+      "sourceName": "Ferman Leather Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0054_01_index07.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/2133023",
+      "local": "cd_assets/armor/item-2133023.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Carta Plate Helm",
+      "group": "armor",
+      "id": "14417",
+      "sourceName": "Carta Plate Helm",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_set_0106_c.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/14417",
+      "local": "cd_assets/armor/item-14417.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Carta Leather Gloves",
+      "group": "armor",
+      "id": "12412",
+      "sourceName": "Carta Leather Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_0007_index08.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/12412",
+      "local": "cd_assets/armor/item-12412.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Carta Plate Boots",
+      "group": "armor",
+      "id": "12307",
+      "sourceName": "Carta Plate Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_set_0069.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/12307",
+      "local": "cd_assets/armor/item-12307.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Tariv Cloth Attire",
+      "group": "armor",
+      "id": "9103",
+      "sourceName": "Tariv Cloth Attire",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_ub_00_0376.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/9103",
+      "local": "cd_assets/armor/item-9103.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Tariv Cloth Gloves",
+      "group": "armor",
+      "id": "9302",
+      "sourceName": "Tariv Cloth Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_00_0376.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/9302",
+      "local": "cd_assets/armor/item-9302.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Tariv Cloth Boots",
+      "group": "armor",
+      "id": "9201",
+      "sourceName": "Tariv Cloth Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0051_index21.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/9201",
+      "local": "cd_assets/armor/item-9201.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grey Wolf Leather Gloves",
+      "group": "armor",
+      "id": "121050",
+      "sourceName": "Grey Wolf Leather Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hand_0054.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/121050",
+      "local": "cd_assets/armor/item-121050.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grey Wolf Cloth Gloves",
+      "group": "armor",
+      "id": "123320",
+      "sourceName": "Grey Wolf Cloth Gloves",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phw_01_hand_0009.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/123320",
+      "local": "cd_assets/armor/item-123320.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grey Wolf Leather Boots",
+      "group": "armor",
+      "id": "131050",
+      "sourceName": "Grey Wolf Leather Boots",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_foot_0054.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/131050",
+      "local": "cd_assets/armor/item-131050.webp",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Faded Deer Antler",
+      "group": "armor",
+      "id": "1004879",
+      "sourceName": "Faded Deer Antler",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_phm_00_hel_00_0500.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1004879",
+      "unresolved": "CDN liefert 404 (geprüft 08.10.2026)"
     }
   ],
   "fextralifeReplacement": {
