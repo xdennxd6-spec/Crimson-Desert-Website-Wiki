@@ -2952,6 +2952,178 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   select.fs,input.fs,.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.cmp-trigger,.rb-trigger,.ic-trigger,.empty-state-action{min-height:44px}
   .pet-filter-btn,.ruin-fbtn,.empty-state-action{display:inline-flex;align-items:center;justify-content:center}
 }
+/* ==== NAV-UMBAU 10/2026 · Bereich A (Navigation & Übersicht) ==== */
+/* Archiv-Optik raus: §-Plaketten vor den Seitenüberschriften und KOORD/§ in der Kopfzeile
+   werden nicht mehr gezeigt (alte Regeln bleiben stehen, hier nur ausgeblendet). */
+#main .sec-t::before{display:none}
+#blattbar .bb-bearing,#blattbar .bb-plate{display:none}
+#blattbar .bb-crumb [hidden]{display:none}
+.bb-crumb .home{min-height:28px}/* Rail: Kurzname der Kategorie, etwas weniger Sperrung, damit „Ausrüstung“ sicher passt */
+.rail-item .rl{letter-spacing:.06em}
+/* Konsolenkopf: Kurzbeschreibung statt „Ressort B“, darf umbrechen; Platz für den Einklapp-Knopf */
+.console-hd .ch-kick{letter-spacing:.1em;line-height:1.45;padding-right:30px}
+/* Seitenliste: Name darf umbrechen, englischer Spielbegriff klein darunter */
+.leaf{grid-template-columns:22px minmax(0,1fr) auto}
+.leaf .ltxt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.leaf .lname{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:break-word;hyphens:auto}
+.leaf .len{font-family:var(--f-mono);font-size:var(--fs-9-5);font-weight:400;letter-spacing:.02em;line-height:1.2;color:var(--ink-faint)}
+.leaf:hover .len{color:var(--dim)}
+.leaf.active .len{color:var(--dim)}
+.leaf .lcount{white-space:nowrap}
+/* Nacht/AMOLED: die alte A11y-Regel setzte aktive Zähler/Symbole auf dunkle Tinte (für den
+   früheren hellen Aktiv-Grund). Der Aktiv-Grund ist längst dunkles Glas, also wieder hell. */
+[data-theme="sepia"] .leaf.active .lcount,[data-theme="amoled"] .leaf.active .lcount{color:var(--amber)}
+[data-theme="sepia"] .leaf.active .lsym,[data-theme="amoled"] .leaf.active .lsym{color:var(--rhi)}
+/* Gleicher Altfehler beim Konsolenkopf und dem Label „Suche“: dunkle Tinte auf dunklem Glas war unlesbar. */
+[data-theme="sepia"] .console-hd .ch-kick,[data-theme="amoled"] .console-hd .ch-kick,
+[data-theme="sepia"] .finder>label,[data-theme="amoled"] .finder>label{color:var(--amber)}
+/* Griff des Mobil-Menüs ist jetzt ein echter Knopf („Menü schließen“) */
+button.sheet-grip{width:100%;border:0;border-bottom:1px solid var(--line);cursor:pointer;min-height:44px;font-family:var(--f-mono)}
+button.sheet-grip:hover{color:var(--rhi)}
+/* Such-Sprungtreffer unter dem Suchfeld */
+.nav-jump{display:flex;flex-direction:column;gap:6px;margin-top:9px}
+.nav-jump[hidden]{display:none}
+.nj-hd{font-family:var(--f-mono);font-size:var(--fs-8-5);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.nj-hit{display:grid;grid-template-columns:20px minmax(0,1fr) auto;align-items:center;gap:8px;width:100%;min-height:40px;padding:6px 10px;border:1px solid var(--line-strong);border-radius:10px;background:var(--overprint);color:var(--text);font-family:var(--f-body);font-size:13px;line-height:1.3;text-align:left;cursor:pointer;transition:border-color .15s,color .15s}
+.nj-hit:hover{border-color:var(--red);color:var(--ink-hi)}
+.nj-g{font-family:var(--f-mono);color:var(--red);text-align:center}
+.nj-t{min-width:0;display:flex;flex-direction:column;gap:1px}
+.nj-k{font-family:var(--f-mono);font-size:var(--fs-9);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.nj-n{font-weight:600;color:var(--ink-hi)}
+.nj-en{font-family:var(--f-mono);font-size:var(--fs-9-5);color:var(--ink-faint)}
+@media(max-width:860px){.finder .kbd-hint{display:none}}
+.nj-go{font-family:var(--f-mono);font-size:var(--fs-10);color:var(--rhi);white-space:nowrap}
+
+/* ── Übersichtsseite „Start“ (#sec-start) ── */
+#sec-start .so-lead{max-width:72ch;margin:0 0 16px;font-size:14px;line-height:1.6;color:var(--dim)}
+#sec-start .sec-t + #start-root > .so-lead{margin-top:-6px}
+#sec-start > .empty-state-injected{margin-bottom:20px}
+.so-search{display:flex;align-items:center;gap:10px;width:100%;max-width:560px;min-height:46px;padding:0 14px;border:1px solid var(--line-strong);border-radius:12px;background:var(--panel-2);color:var(--dim);font-family:var(--f-mono);font-size:13px;text-align:left;cursor:text;transition:border-color .15s,color .15s}
+.so-search:hover{border-color:var(--red);color:var(--text)}
+.so-search-g{color:var(--red);font-weight:700}
+.so-search-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.so-search-k{flex:none;padding:2px 7px;border:1px solid var(--line);border-radius:6px;font-size:var(--fs-10);color:var(--ink-faint)}
+.so-pop{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:16px 0 30px}
+.so-pop-l{font-family:var(--f-mono);font-size:var(--fs-10);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.so-pop-list{display:flex;flex-wrap:wrap;gap:8px}
+.so-chip{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:6px 14px;border:1px solid var(--line-strong);border-radius:999px;background:var(--panel-2);color:var(--text);font-size:13px;font-weight:500;line-height:1.2;text-decoration:none;transition:border-color .15s,color .15s}
+.so-chip:hover{border-color:var(--red);color:var(--ink-hi)}
+.so-chip .g{font-family:var(--f-mono);color:var(--red)}
+.so-cat{margin:0 0 30px}
+.so-cat-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 12px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.so-cat-g{font-family:var(--f-mono);font-size:16px;color:var(--red)}
+.so-cat-t{margin:0;font-family:var(--f-display);font-size:18px;font-weight:600;letter-spacing:-.005em;line-height:1.2;color:var(--ink-hi)}
+.so-cat-tag{font-size:12.5px;color:var(--dim)}
+.so-cat-n{margin-left:auto;font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
+.so-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(max(220px,calc((100% - 36px)/4)),1fr))}
+.so-tile{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start;padding:14px 14px 15px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);box-shadow:var(--shadow-soft);color:var(--text);text-decoration:none;transition:border-color .15s,background-color .15s,transform .15s}
+.so-tile:hover{border-color:var(--red);background:var(--cardh)}
+.so-tile-g{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line);border-radius:9px;background:var(--overprint);font-family:var(--f-mono);font-size:15px;line-height:1;color:var(--rhi)}
+.so-tile-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.so-tile-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.so-tile-n{font-family:var(--f-display);font-size:15px;font-weight:600;line-height:1.25;color:var(--ink-hi);overflow-wrap:break-word;hyphens:auto;min-width:0}
+.so-tile-c{flex:none;font-family:var(--f-mono);font-size:var(--fs-10);color:var(--amber);white-space:nowrap}
+.so-tile-en{font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.02em;color:var(--ink-faint)}
+.so-tile-d{margin-top:5px;font-size:12.5px;line-height:1.45;color:var(--dim)}
+@media (prefers-reduced-motion: no-preference){.so-tile:hover{transform:translateY(-1px)}}
+@media(max-width:860px){
+  .so-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .so-search-k{display:none}
+  .leaf{min-height:48px}
+  .so-cat-n{margin-left:0}
+  .bb-crumb .home,.bb-console{min-height:44px}
+}
+@media(max-width:520px){
+  .so-grid{grid-template-columns:1fr}
+  .so-tile{padding:12px 13px}
+  .rail-item .rl{letter-spacing:.03em}
+  #sec-start .sec-t .sec-sym{display:none}
+}
+@media (pointer:coarse){
+  .so-chip,.nj-hit{min-height:44px}
+}
+/* Admin-Nachtrag 08.10.2026 (Gegenprüfung S1/S2): Brotkrume mobil ohne „Start /“ und ohne Abschneiden,
+   kleine Zweittexte in Nacht/AMOLED heller (Kontrast >= 4,5:1). */
+@media (max-width:860px){
+  #bbHome,#bbHome + .sep{display:none}
+  .bb-crumb .cur-leaf{max-width:none;white-space:normal;overflow:visible}
+}
+[data-theme="sepia"] .leaf .len,[data-theme="sepia"] #conMeta,[data-theme="sepia"] .so-tile-en,[data-theme="sepia"] .so-cat-n,
+[data-theme="amoled"] .leaf .len,[data-theme="amoled"] #conMeta,[data-theme="amoled"] .so-tile-en,[data-theme="amoled"] .so-cat-n{color:var(--dim)}
+/* ==== /Bereich A ==== */
+/* ==== NAV-UMBAU 10/2026 · Bereich B (Begriffe & Texte) ==== */
+.sec-t .sec-t-en{font-family:var(--f-mono);font-size:.46em;font-weight:400;letter-spacing:.04em;color:var(--dim);margin-left:2px;line-height:1.3;align-self:center;max-width:100%;overflow-wrap:anywhere}
+/* B5 Orte und Glocken (08.10.2026): Karten mit Regionsband, Gruppen je Hauptregion. Farben je Karte per --lc-bg/--lc-acc/--lc-tx (aus BOSS_PH_PALETTES, inline gesetzt). */
+.loc-intro{margin:-4px 0 16px;max-width:72ch;font-size:13px;line-height:1.55;color:var(--iron-soft)}
+.loc-intro b{color:var(--iron-gall);font-weight:600}
+.loc-intro a{color:var(--brass-hi);text-decoration:underline;text-underline-offset:2px}
+.loc-intro a:hover{color:var(--survey-red-hi)}
+.loc-grp{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "bd";counter-reset:locn;margin:0 0 30px}
+.loc-grp:not(:has(.loc-card:not(.hide))){display:none}
+.loc-grp-t{grid-area:hd;position:relative;margin:0 0 14px;padding:2px 64px 9px 15px;font-family:var(--f-display);font-size:18px;font-weight:700;line-height:1.25;letter-spacing:.01em;color:var(--ink-hi);background:linear-gradient(90deg,var(--lc-acc),transparent 62%) left bottom/100% 2px no-repeat}
+.loc-grp-t::before{content:'';position:absolute;left:0;top:3px;width:5px;height:22px;border-radius:3px;background:var(--lc-tx);box-shadow:0 0 12px var(--lc-acc)}
+.loc-grp-n{grid-area:hd;justify-self:end;align-self:start;min-width:30px;padding:1px 10px;border:1px solid var(--lc-acc);border-radius:999px;background:var(--lc-bg);font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;line-height:1.5;text-align:center;color:var(--ink-hi);pointer-events:none}
+.loc-grp-n::before{content:counter(locn)}
+.loc-grp .loc-card:not(.hide){counter-increment:locn}
+.loc-grp-bd,.bell-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:16px}
+.loc-grp-bd{grid-area:bd}
+.loc-empty{margin:8px 0 24px;color:var(--iron-soft);font-size:13px}
+.loc-card{display:flex;flex-direction:column;min-width:0;padding:0;content-visibility:visible}
+.loc-card::before{display:none}
+.loc-hd{position:relative;display:flex;align-items:center;gap:13px;padding:14px 16px;overflow:hidden;border-bottom:1px solid var(--lc-acc);background:radial-gradient(130% 170% at 0% 0%,var(--lc-acc) 0%,transparent 62%),repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 1px,transparent 1px 10px),linear-gradient(135deg,var(--lc-bg) 0%,var(--vellum-deep) 100%)}
+.loc-sym,.loc-wm{font-family:'Segoe UI Symbol','Noto Sans Symbols 2','Noto Sans Symbols','DejaVu Sans',var(--f-body),sans-serif;font-style:normal}
+.loc-sym{position:relative;z-index:1;flex:none;display:grid;place-items:center;width:50px;height:50px;border:1px solid var(--lc-acc);border-radius:14px;background:rgba(0,0,0,.3);font-size:27px;line-height:1;color:var(--lc-tx);color:color-mix(in srgb,var(--lc-tx) 80%,#fff);text-shadow:0 0 14px var(--lc-acc)}
+.loc-wm{position:absolute;right:-2px;bottom:-24px;z-index:0;font-size:96px;line-height:1;color:var(--lc-tx);opacity:.14;pointer-events:none;user-select:none}
+.loc-hd-t{position:relative;z-index:1;flex:1;min-width:0}
+.loc-reg{margin-bottom:3px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--lc-tx);color:color-mix(in srgb,var(--lc-tx) 72%,#fff)}
+.loc-name{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.25;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
+.loc-bd{display:flex;flex-direction:column;gap:10px;flex:1;padding:13px 16px 15px}
+.loc-bd .cm{margin:0}
+.loc-bd .cm .tag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.loc-teaser{margin:0;font-size:13px;line-height:1.55;color:var(--iron-gall)}
+.loc-card .item-more{margin-top:auto}
+.loc-card .item-more > summary{margin-top:0;min-height:34px;padding:5px 12px;border-color:rgba(201,162,39,.3);background:rgba(201,162,39,.05)}
+.loc-card .item-more > summary:hover,.loc-card .item-more[open] > summary{background:rgba(201,162,39,.12)}
+.loc-card .item-more-body{padding-top:9px}
+.loc-rest{margin:0;font-size:12.5px;line-height:1.6;color:var(--iron-soft);overflow-wrap:anywhere}
+.bell-no{position:relative;z-index:1;align-self:flex-start;flex:none;padding:2px 9px;border:1px solid var(--lc-acc);border-radius:999px;background:rgba(0,0,0,.3);font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;white-space:nowrap;color:var(--ink-hi)}
+.bell-row{display:flex;flex-direction:column;gap:2px;margin:0;font-size:13px;line-height:1.5;color:var(--iron-gall);overflow-wrap:anywhere}
+.bell-k{font-family:var(--f-mono);font-size:var(--fs-10);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--iron-soft)}
+.bell-warn{display:flex;flex-direction:column;gap:8px;margin-top:2px;padding:9px 11px;border:1px solid var(--warn);border-left-width:3px;border-radius:10px;background:rgba(224,163,90,.08);font-size:12.5px;line-height:1.5;color:var(--warn)}
+.bell-warn-t{display:flex;gap:8px;align-items:flex-start;overflow-wrap:anywhere}
+.bell-warn-t > span:first-child{flex:none}
+.bell-warn .item-more{margin-top:0}
+.bell-warn .loc-rest{color:var(--warn)}
+#loc-patch{margin-top:22px}
+.loc-patch{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);overflow:hidden}
+.loc-patch:not(:has(.loc-pc:not(.hide))){display:none}
+.loc-patch > summary{display:flex;align-items:center;gap:10px;min-height:46px;padding:11px 16px;cursor:pointer;list-style:none;font-family:var(--f-mono);font-size:var(--fs-11-5);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);user-select:none}
+.loc-patch > summary::-webkit-details-marker{display:none}
+.loc-patch > summary::after{content:"\25BE";margin-left:auto;font-size:14px;line-height:1;transition:transform .16s}
+.loc-patch[open] > summary::after{transform:rotate(180deg)}
+.loc-patch > summary:hover{background:rgba(201,162,39,.08)}
+.loc-patch > summary:focus-visible{outline:2px solid var(--red);outline-offset:-3px}
+.loc-patch-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px;padding:4px 14px 14px}
+.loc-pc{min-width:0;padding:10px 12px;border:1px solid var(--line-soft);border-radius:12px;background:var(--panel)}
+.loc-pc-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.loc-pc-n{font-family:var(--f-display);font-size:13.5px;font-weight:700;line-height:1.3;color:var(--ink-hi);overflow-wrap:anywhere}
+.loc-pc-r{margin-top:3px;font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.06em;text-transform:uppercase;color:var(--iron-soft)}
+.loc-pc-d{margin:6px 0 0;font-size:12.5px;line-height:1.55;color:var(--iron-gall);overflow-wrap:anywhere}
+@media (max-width:600px){
+  .loc-hd{padding:12px 13px;gap:11px}
+  .loc-sym{width:44px;height:44px;font-size:24px;border-radius:12px}
+  .loc-bd{padding:12px 13px 14px}
+  .loc-grp-t{font-size:16px}
+  .loc-patch-list{padding:4px 10px 12px}
+}
+@media (pointer:coarse){
+  .loc-card .item-more > summary,.loc-patch > summary{min-height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .loc-card,.loc-card:hover{transition:none;transform:none}
+  .loc-card .item-more > summary,.loc-card .item-more > summary::after,.loc-patch > summary::after{transition:none}
+}
+/* ==== /Bereich B ==== */
 </style>
 </head>
 <body>
@@ -2961,28 +3133,28 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <h2>Crimson Desert Wiki &amp; Guide-Dashboard</h2>
     <p>Dieses interaktive Wiki zu <strong>Crimson Desert</strong> (Pearl Abyss) benötigt JavaScript für das volle Dashboard. Die wichtigsten Guides sind aber auch als eigenständige Seiten verfügbar:</p>
     <ul>
+      <li><a href="/patch-notes">Patch-Notes</a></li>
       <li><a href="/bosse">Bosse</a></li>
-      <li><a href="/bestiarium">Bestiarium</a></li>
+      <li><a href="/bestiarium">Gegner</a></li>
+      <li><a href="/skills">Fähigkeiten</a></li>
       <li><a href="/waffen">Waffen</a></li>
       <li><a href="/ruestungen">Rüstungen</a></li>
-      <li><a href="/crafting">Crafting</a></li>
-      <li><a href="/hauptquests">Hauptquests</a></li>
-      <li><a href="/fraktionen">Fraktionen</a></li>
-      <li><a href="/side-quests">Nebenquests</a></li>
-      <li><a href="/trophaeen">Trophäen</a></li>
-      <li><a href="/true-ending">True Ending</a></li>
-      <li><a href="/npcs">NPCs</a></li>
-      <li><a href="/patch-notes">Patch-Notes</a></li>
-      <li><a href="/skills">Skills</a></li>
-      <li><a href="/hexen">Hexen-Guide</a></li>
-      <li><a href="/abyss-cores">Abyss Cores</a></li>
       <li><a href="/accessoires">Accessoires</a></li>
+      <li><a href="/abyss-cores">Abyss-Ausrüstung</a></li>
+      <li><a href="/hexen">Hexen &amp; Fusion</a></li>
+      <li><a href="/hauptquests">Hauptquests</a></li>
+      <li><a href="/fraktionen">Fraktionsquests</a></li>
+      <li><a href="/side-quests">Nebenquests</a></li>
       <li><a href="/kapitel-guide">Kapitel-Guide</a></li>
-      <li><a href="/mounts">Mounts</a></li>
-      <li><a href="/pets">Pets</a></li>
+      <li><a href="/true-ending">True Ending</a></li>
       <li><a href="/ruinen">Uralte Ruinen</a></li>
       <li><a href="/raetsel">Rätsel</a></li>
-      <li><a href="/geheimnisse">Secrets &amp; Lore</a></li>
+      <li><a href="/trophaeen">Trophäen &amp; Errungenschaften</a></li>
+      <li><a href="/npcs">Charaktere &amp; NPCs</a></li>
+      <li><a href="/mounts">Reittiere</a></li>
+      <li><a href="/pets">Haustiere</a></li>
+      <li><a href="/geheimnisse">Geheimnisse &amp; Lore</a></li>
+      <li><a href="/crafting">Herstellen &amp; Farmen</a></li>
     </ul>
   </div>
 </noscript>
@@ -3082,21 +3254,22 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 <div id="help-overlay" onclick="if(event.target===this)closeHelp()" role="dialog" aria-modal="true" aria-labelledby="help-title">
   <div id="help-box">
     <button class="help-close" onclick="closeHelp()" aria-label="Schließen">✕</button>
-    <h2 id="help-title">⌨️ Tastatur-Shortcuts</h2>
+    <h2 id="help-title">⌨️ Tastenkürzel</h2>
     <p>Navigation und Aktionen ohne Maus.</p>
-    <div class="help-row"><span class="help-desc">Suchfeld fokussieren</span><span class="help-keys"><span class="kbd">/</span> oder <span class="kbd">Ctrl K</span></span></div>
-    <div class="help-row"><span class="help-desc">Suche / Sidebar / Modal schließen</span><span class="help-keys"><span class="kbd">Esc</span></span></div>
-    <div class="help-row"><span class="help-desc">Hilfe öffnen</span><span class="help-keys"><span class="kbd">?</span></span></div>
-    <div class="help-row"><span class="help-desc">Random Boss würfeln</span><span class="help-keys"><span class="kbd">R</span></span></div>
-    <div class="help-row"><span class="help-desc">Theme wechseln</span><span class="help-keys"><span class="kbd">T</span></span></div>
-    <div style="font-size:var(--fs-9-5);font-weight:700;color:var(--gdim);text-transform:uppercase;letter-spacing:.09em;margin:18px 0 6px">Section-Jumps (g + Buchstabe)</div>
-    <div class="help-row"><span class="help-desc">Bosse / Items / Waffen / Rüstung</span><span class="help-keys"><span class="kbd">g b</span> <span class="kbd">g i</span> <span class="kbd">g w</span> <span class="kbd">g a</span></span></div>
-    <div class="help-row"><span class="help-desc">Cores / Crafting / Quests / Map</span><span class="help-keys"><span class="kbd">g c</span> <span class="kbd">g f</span> <span class="kbd">g q</span> <span class="kbd">g m</span></span></div>
-    <div class="help-row"><span class="help-desc">Locations / Mounts / Skills / Disarm</span><span class="help-keys"><span class="kbd">g l</span> <span class="kbd">g o</span> <span class="kbd">g s</span> <span class="kbd">g d</span></span></div>
-    <div class="help-row"><span class="help-desc">Checklisten / Builds / Accessoires</span><span class="help-keys"><span class="kbd">g x</span> <span class="kbd">g u</span> <span class="kbd">g j</span></span></div>
-    <div class="help-row"><span class="help-desc">Hexen / Kapitel / Pets / Patches</span><span class="help-keys"><span class="kbd">g h</span> <span class="kbd">g e</span> <span class="kbd">g t</span> <span class="kbd">g p</span></span></div>
-    <div class="help-row"><span class="help-desc">Secrets / Achievements / Roadmap / Favoriten</span><span class="help-keys"><span class="kbd">g y</span> <span class="kbd">g z</span> <span class="kbd">g n</span> <span class="kbd">g v</span></span></div>
-    <div style="font-size:var(--fs-10-5);color:var(--dim);margin-top:14px;line-height:1.5;border-top:1px dashed rgba(201,162,39,.12);padding-top:11px">Tipp: URL teilen kopiert auch Section + Suchbegriff — z.B. <code style="color:var(--gold);font-size:var(--fs-10-5);background:rgba(201,162,39,.08);padding:1px 5px;border-radius:3px">#sec=bosses&amp;q=Myurdin</code></div>
+    <div class="help-row"><span class="help-desc">Suchfeld öffnen</span><span class="help-keys"><span class="kbd">/</span> oder <span class="kbd">Strg K</span></span></div>
+    <div class="help-row"><span class="help-desc">Suche, Menü oder Fenster schließen</span><span class="help-keys"><span class="kbd">Esc</span></span></div>
+    <div class="help-row"><span class="help-desc">Diese Hilfe öffnen</span><span class="help-keys"><span class="kbd">?</span></span></div>
+    <div class="help-row"><span class="help-desc">Zufälligen Boss würfeln</span><span class="help-keys"><span class="kbd">R</span></span></div>
+    <div class="help-row"><span class="help-desc">Farbschema wechseln</span><span class="help-keys"><span class="kbd">T</span></span></div>
+    <div style="font-size:var(--fs-9-5);font-weight:700;color:var(--gdim);text-transform:uppercase;letter-spacing:.09em;margin:18px 0 6px">Seite öffnen (erst g, dann Buchstabe)</div>
+    <div class="help-row"><span class="help-desc">Übersicht (Start)</span><span class="help-keys"><span class="kbd">g g</span></span></div>
+    <div class="help-row"><span class="help-desc">Bosse / Fähigkeiten / Builds / Entwaffnen</span><span class="help-keys"><span class="kbd">g b</span> <span class="kbd">g s</span> <span class="kbd">g u</span> <span class="kbd">g d</span></span></div>
+    <div class="help-row"><span class="help-desc">Waffen / Rüstungen / Accessoires / Abyss-Ausrüstung / Hexen &amp; Fusion</span><span class="help-keys"><span class="kbd">g w</span> <span class="kbd">g a</span> <span class="kbd">g j</span> <span class="kbd">g c</span> <span class="kbd">g h</span></span></div>
+    <div class="help-row"><span class="help-desc">Quests / Kapitel-Guide / Checklisten / Trophäen</span><span class="help-keys"><span class="kbd">g q</span> <span class="kbd">g e</span> <span class="kbd">g x</span> <span class="kbd">g z</span></span></div>
+    <div class="help-row"><span class="help-desc">Karte / Orte &amp; Glocken / Reittiere / Haustiere / Geheimnisse</span><span class="help-keys"><span class="kbd">g m</span> <span class="kbd">g l</span> <span class="kbd">g o</span> <span class="kbd">g t</span> <span class="kbd">g y</span></span></div>
+    <div class="help-row"><span class="help-desc">Herstellen &amp; Farmen / Materialien &amp; Items</span><span class="help-keys"><span class="kbd">g f</span> <span class="kbd">g i</span></span></div>
+    <div class="help-row"><span class="help-desc">Patch-Notes / Roadmap / Merkliste</span><span class="help-keys"><span class="kbd">g p</span> <span class="kbd">g n</span> <span class="kbd">g v</span></span></div>
+    <div style="font-size:var(--fs-10-5);color:var(--dim);margin-top:14px;line-height:1.5;border-top:1px dashed rgba(201,162,39,.12);padding-top:11px">Tipp: Die Adresse in der Browserzeile enthält Seite und Suchbegriff, zum Teilen einfach kopieren, z.B. <code style="color:var(--gold);font-size:var(--fs-10-5);background:rgba(201,162,39,.08);padding:1px 5px;border-radius:3px">#sec=bosses&amp;q=Myurdin</code></div>
   </div>
 </div>
 
@@ -3150,32 +3323,33 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </div>
 </div>
 <div id="app">
-<nav id="rail" aria-label="Ressorts">
+<nav id="rail" aria-label="Kategorien">
   <div class="rail-signet" aria-hidden="true"><div class="rk"><i></i></div></div>
-  <div class="rail-scroll" id="railScroll" aria-label="Ressort-Auswahl"><!-- rail-items per JS --></div>
+  <div class="rail-scroll" id="railScroll" role="group" aria-label="Kategorie wählen"><!-- rail-items per JS --></div>
   <div class="rail-foot">
-    <button class="rail-btn" id="railFind" type="button" title="Koordinate suchen (Strg K)"><span class="g" aria-hidden="true">&#9906;</span><span>Suche</span></button>
+    <button class="rail-btn" id="railFind" type="button" title="Im Wiki suchen (Strg K)"><span class="g" aria-hidden="true">&#9906;</span><span>Suche</span></button>
     <button class="rail-btn" id="railTheme" type="button" title="Modus wechseln"><span class="g" aria-hidden="true">&#9681;</span><span id="railThemeLbl">Tag</span></button>
   </div>
 </nav>
-<nav id="sidebar" aria-label="Blätter des Ressorts">
-  <div class="sheet-grip" aria-hidden="true">Register ziehen</div>
+<nav id="sidebar" aria-label="Seiten der Kategorie">
+  <button class="sheet-grip" type="button">Menü schließen</button>
   <div class="console-hd">
-    <div class="ch-kick" id="conKick">Ressort</div>
+    <div class="ch-kick" id="conKick">Kategorie</div>
     <div class="ch-name" id="conName">&mdash;</div>
     <div class="ch-meta" id="conMeta"></div>
-    <button class="console-collapse" id="conCollapse" type="button" title="Konsole einklappen" aria-label="Konsole einklappen">&#8676;</button>
+    <button class="console-collapse" id="conCollapse" type="button" title="Menü einklappen" aria-label="Menü einklappen">&#8676;</button>
   </div>
   <div class="finder">
-    <label for="si">Koordinate suchen</label>
+    <label for="si">Suche</label>
     <div class="finder-in">
       <span class="fi-sym" aria-hidden="true">&#9906;</span>
       <input id="si" type="search" name="wiki-suche" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Bosse, Waffen, Quests, Orte..." oninput="doSearch(this.value)" onkeydown="if(event.key==='Enter'&&typeof _isMobile==='function'&&_isMobile()){this.blur();closeSheet();}">
       <span class="kbd-hint" title="Ctrl+K oder ⌘K zum Fokussieren">Ctrl K</span>
     </div>
     <span id="scnt" role="status" aria-live="polite"></span>
+    <div class="nav-jump" id="navJump" aria-live="polite" hidden></div>
   </div>
-  <div class="console-list" id="conList" aria-label="Blatt-Auswahl"><!-- leaves per JS --></div>
+  <div class="console-list" id="conList" role="group" aria-label="Seitenauswahl"><!-- leaves per JS --></div>
   <div id="sb-recent" style="display:none">
     <div id="sb-recent-hd">Zuletzt</div>
     <div id="sb-recent-list"></div>
@@ -3187,10 +3361,10 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </div>
   <div class="sb-ft">
     <div style="display:flex;gap:5px;margin-bottom:8px" id="theme-row" role="radiogroup" aria-label="Farbschema">
-      <button class="theme-btn active" data-theme-set="dark" onclick="setTheme('dark')" title="Tag-Vermessung (Vellum, Standard)" aria-label="Modus: Tag-Vermessung">◐</button>
-      <button class="theme-btn" data-theme-set="sepia" onclick="setTheme('sepia')" title="Nacht-Rekognoszierung" aria-label="Modus: Nacht-Rekognoszierung">☾</button>
-      <button class="theme-btn" data-theme-set="amoled" onclick="setTheme('amoled')" title="AMOLED-Nacht (tiefstes Schwarz)" aria-label="Modus: AMOLED-Nacht">●</button>
-      <button class="theme-btn" onclick="openHelp()" title="Tastatur-Shortcuts (?)" aria-label="Shortcuts-Hilfe" style="margin-left:auto">?</button>
+      <button class="theme-btn active" data-theme-set="dark" onclick="setTheme('dark')" title="Farbschema Tag (Standard)" aria-label="Farbschema: Tag (Standard)">◐</button>
+      <button class="theme-btn" data-theme-set="sepia" onclick="setTheme('sepia')" title="Farbschema Nacht (gedämpft)" aria-label="Farbschema: Nacht">☾</button>
+      <button class="theme-btn" data-theme-set="amoled" onclick="setTheme('amoled')" title="Farbschema AMOLED (tiefstes Schwarz)" aria-label="Farbschema: AMOLED">●</button>
+      <button class="theme-btn" onclick="openHelp()" title="Tastenkürzel (?)" aria-label="Tastenkürzel-Hilfe" style="margin-left:auto">?</button>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between">
       <span>Pearl Abyss · 2026</span>
@@ -3204,7 +3378,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div id="auth-sync-status" role="status" aria-live="polite"></div>
   </div>
 </nav>
-<button class="console-reopen" id="conReopen" type="button" title="Konsole ausklappen" aria-label="Konsole ausklappen">&#8677;</button>
+<button class="console-reopen" id="conReopen" type="button" title="Menü ausklappen" aria-label="Menü ausklappen">&#8677;</button>
 
 <!-- Sync-Modal (Sync-Code statt Konto; Logik im Skript "SYNC-CODE" weiter unten) -->
 <div id="sync-overlay" role="dialog" aria-modal="true" aria-labelledby="sync-title" onclick="closeSyncModal(event)">
@@ -3228,7 +3402,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <button class="sy-btn pri" id="sy-copy" type="button">Code kopieren</button>
       <div class="sy-msg" id="sy-copy-msg" role="status" aria-live="polite"></div>
       <div class="sy-warn"><b>Der Code ist dein Schlüssel.</b> Wer ihn kennt, kann deinen Stand lesen und überschreiben. Auf dem Server liegt nur ein Hash davon, ein verlorener Code lässt sich nicht wiederherstellen. Bewahre ihn sicher auf, zum Beispiel in einem Passwortmanager.</div>
-      <p>Auf einem anderen Gerät: Sidebar, „🔑 Sync“, „Vorhandenen Code eingeben“.</p>
+      <p>Auf einem anderen Gerät: Menü, „🔑 Sync“, „Vorhandenen Code eingeben“.</p>
       <button class="lf-submit" id="sy-done" type="button">Fertig</button>
       <div class="sy-sec"><button class="sy-link" id="sy-end-open" type="button">Sync auf diesem Gerät beenden …</button></div>
     </div>
@@ -3275,47 +3449,45 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   <div id="credit-top">Design and Build by Christian Stein</div>
   <!-- REGISTRATUR Blattbar: additiver Register-Kopf (Brotkrume/Peilung/Blattnummer), KEIN Wrapper -->
   <div id="blattbar">
-    <button class="bb-console" id="bbConsole" type="button">&#9776; Register</button>
-    <div class="bb-crumb">
-      <button class="home" id="bbHome" type="button">Registratur</button>
-      <span class="sep">/</span>
+    <button class="bb-console" id="bbConsole" type="button" aria-label="Menü öffnen">&#9776; Menü</button>
+    <nav class="bb-crumb" aria-label="Du bist hier">
+      <button class="home" id="bbHome" type="button" title="Zur Übersicht aller Seiten">Start</button>
+      <span class="sep" id="bbResSep" aria-hidden="true">/</span>
       <span class="cur-res" id="bbRes">Kampf</span>
-      <span class="sep">/</span>
-      <span class="cur-leaf" id="bbLeaf">Bosse</span>
-    </div>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="cur-leaf" id="bbLeaf" aria-current="page">Bosse</span>
+    </nav>
     <span class="bb-spacer"></span>
-    <span class="bb-bearing">KOORD <b id="bbCoord">B2</b></span>
-    <span class="bb-plate" id="bbPlate">&sect;02</span>
   </div>
   <!-- #sbar (Instrumentenzeile) entfaellt: #si/#scnt sind in den Konsolen-Finder gewandert.
        Der Register-Kopf (#blattbar) stellt jetzt die sticky Chrome-Zeile ueber dem Blatt. -->
 
   <!-- FELDATLAS-HERO: Seraph-Altar-Kontakt, eigene abstrakte Auge/Federn/Ring-Komposition (additiv, fa-hero-Praefix) -->
-  <section class="fa-hero" id="fa-hero" aria-label="Feldatlas — Register-Kontakt von Pywel">
+  <section class="fa-hero" id="fa-hero" aria-label="Crimson Desert Wiki: Überblick über Pywel und die Bosse">
     <div class="fa-hero-grid">
-      <div class="fa-hero-altar" id="fa-hero-altar" role="img" aria-label="Animierte Wächter-Sigille des Feldatlas: ein zentrales glühendes Auge, umgeben von einem Flügelkranz und einem rotierenden Ring kleiner Augen, Sinnbild fürs Register der Bosse">
+      <div class="fa-hero-altar" id="fa-hero-altar" role="img" aria-label="Animierte Wächter-Sigille: ein zentrales glühendes Auge, umgeben von einem Flügelkranz und einem rotierenden Ring kleiner Augen, Sinnbild für die Bosse von Pywel">
         <canvas id="fa-hero-cv"></canvas>
-        <div class="fa-hero-hud tl"><b>&#9673;</b> Kontakt · Register</div>
-        <div class="fa-hero-hud tr">Sektion &Omega;<b>Feldatlas</b></div>
+        <div class="fa-hero-hud tl"><b>&#9673;</b> Boss-Übersicht</div>
+        <div class="fa-hero-hud tr">Crimson Desert<b>Wiki</b></div>
         <div class="fa-hero-hud bl">
           <div class="ln"><span class="fa-hero-livedot"></span><span class="k">Status</span> Erfasst</div>
           <div class="ln"><span class="k">Bedrohung</span> <b>Extrem</b></div>
-          <div class="ln dim">Blatt B2 · <span id="fa-hero-hud-boss">100</span> Bosse kartiert</div>
+          <div class="ln dim"><span id="fa-hero-hud-boss">100</span> Bosse erfasst</div>
         </div>
         <span class="fa-hero-corner c-tl"></span><span class="fa-hero-corner c-tr"></span><span class="fa-hero-corner c-bl"></span><span class="fa-hero-corner c-br"></span>
       </div>
       <div class="fa-hero-text">
-        <div class="fa-hero-eyebrow">Feldatlas &mdash; kein Reiseführer</div>
+        <div class="fa-hero-eyebrow">Wiki-Atlas für Pywel</div>
         <h2 class="fa-hero-h">Eine gefährliche Welt, <em>vermessen</em>.</h2>
-        <p class="fa-hero-lede">Kein Marketing, keine Effekte. Dieser Atlas kartiert Pywel wie ein Vermessungstrupp: jeder Boss ein Datensatz, jede Waffe ein Instrument, jede Quest eine Route. Du suchst schnell Fakten &mdash; und findest sie an ihrer Koordinate.</p>
-        <div class="fa-readout" aria-label="Kennzahlen der Vermessung">
-          <div><div class="fa-val" id="fa-val-boss">100</div><div class="fa-cap">Bosse kartiert</div></div>
-          <div><div class="fa-val">33</div><div class="fa-cap">Blätter</div></div>
+        <p class="fa-hero-lede">Kein Marketing, keine Effekte. Dieser Atlas kartiert Pywel wie ein Vermessungstrupp: jeder Boss ein Datensatz, jede Waffe ein Instrument, jede Quest eine Route. Du suchst schnell Fakten und findest sie über das Menü oder die Suche.</p>
+        <div class="fa-readout" aria-label="Kennzahlen des Wikis">
+          <div><div class="fa-val" id="fa-val-boss">100</div><div class="fa-cap">Bosse erfasst</div></div>
+          <div><div class="fa-val" id="fa-val-pages">35</div><div class="fa-cap">Seiten</div></div>
           <div><div class="fa-val">09</div><div class="fa-cap">Regionen</div></div>
         </div>
         <div class="fa-hero-cta">
-          <button class="fa-btn fa-btn-solid" type="button" onclick="showSec('bosses')">Register öffnen &rarr;</button>
-          <button class="fa-btn fa-btn-ghost" type="button" onclick="showSec('patches')">Feldprotokoll</button>
+          <button class="fa-btn fa-btn-solid" type="button" onclick="showSec('bosses')">Alle Bosse &rarr;</button>
+          <button class="fa-btn fa-btn-ghost" type="button" onclick="showSec('patches')">Patch-Notes</button>
         </div>
       </div>
     </div>
@@ -3468,15 +3640,22 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       try{
         var _fhb=document.getElementById('fa-hero-hud-boss');
         if(_fhb&&typeof BOSSES!=='undefined'&&Array.isArray(BOSSES))_fhb.textContent=BOSSES.length;
+        var _fvp=document.getElementById('fa-val-pages');
+        if(_fvp&&typeof SECTIONS!=='undefined'&&Array.isArray(SECTIONS))_fvp.textContent=SECTIONS.filter(function(s){return s.id!=='start';}).length;
       }catch(e){}
     });
   })();
   </script>
 
-  <section class="sec" id="sec-beginner">
+  <!-- NAV-UMBAU A: Übersichtsseite sec-start (Inhalt per renderStartOverview aus RESSORTS/SECTIONS) -->
+<section class="sec" id="sec-start" aria-labelledby="start-title">
+    <h2 class="sec-t" id="start-title"><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
+    <div id="start-root"></div>
+</section>
+<section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
     <div class="disarm-hero">
-      <p>Die wichtigsten Kampf-Grundlagen und die Steuerung von <strong>Crimson Desert</strong> auf einen Blick. Faustregel der Guides: <strong>Menschen-Bosse parieren, Monster-Bosse ausweichen.</strong> Detail-Strategien zu einzelnen Bossen findest du im <a href="#" onclick="showSec('bosses');return false;">Bosse-Tab</a>.</p>
+      <p>Die wichtigsten Kampf-Grundlagen und die Steuerung von <strong>Crimson Desert</strong> auf einen Blick. Faustregel der Guides: <strong>Menschen-Bosse parieren, Monster-Bosse ausweichen.</strong> Detail-Strategien zu einzelnen Bossen findest du auf der Seite <a href="#" onclick="showSec('bosses');return false;">Bosse</a>.</p>
     </div>
 
     <div class="sub-t" style="margin-top:0;scroll-margin-top:72px">Kampf-Grundlagen</div>
@@ -3484,10 +3663,10 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <thead><tr><th>Mechanik</th><th>Erklärung</th></tr></thead>
       <tbody>
         <tr><td><strong>Parieren (Parry)</strong></td><td>Getimtes Blocken (<span class="kbd">L1 / LB / Ctrl</span>) genau im Treffermoment. Ein perfekter Parry öffnet ein Konterfenster; laut den offiziellen Notes (1.00.03) baut er bei Bossen stärker die Stun-Leiste auf, und laut 8BitToast stellt er zusätzlich Ausdauer und Spirit wieder her (Einzelquelle). <strong>Greifangriffe (Grabs) lassen sich NICHT parieren</strong> — nur ausweichen.</td></tr>
-        <tr><td><strong>Neu seit 2.x</strong></td><td>Seit Patch 2.00.00 (25.08.2026) hat Kliff acht neue Fähigkeiten, laut den Skill-Daten des Wikis darunter <em>Enraged Parry</em> (Parry auch während anderer Aktionen) und <em>Serenity</em> (mehr Spirit-Regeneration, solange Focus gehalten wird). <em>Water Stride</em> (Wasserlauf: über Wasser sprinten, seit 2.03.00 mit Sprung) nennen die offiziellen Notes erstmals mit 2.03.00. Voraussetzungen und Kosten stehen im Skills-Tab.</td></tr>
+        <tr><td><strong>Neu seit 2.x</strong></td><td>Seit Patch 2.00.00 (25.08.2026) hat Kliff acht neue Fähigkeiten, laut den Skill-Daten des Wikis darunter <em>Enraged Parry</em> (Parry auch während anderer Aktionen) und <em>Serenity</em> (mehr Spirit-Regeneration, solange Focus gehalten wird). <em>Water Stride</em> (Wasserlauf: über Wasser sprinten, seit 2.03.00 mit Sprung) nennen die offiziellen Notes erstmals mit 2.03.00. Voraussetzungen und Kosten stehen auf der Seite Fähigkeiten.</td></tr>
         <tr><td><strong>Perfect Dodge</strong></td><td>Skill <em>Dodge</em> (Ausweichen kurz vor dem Treffer), muss erst im Skillbaum freigeschaltet werden (Kliff: Keen Senses Lv 2, 1 Abyss Artifact). Ausweichen (<span class="kbd">○ / B / Alt</span>) im letzten Moment → grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff. Verzeihender als Parry, unterbricht aber keine Combos — danach kann gekontert werden.</td></tr>
         <tr><td><strong>Blocken / Guard Break</strong></td><td>Guard halten blockt, kostet aber Ausdauer (schwere Treffer mehr). Ist die Ausdauer leer, <strong>bricht die Deckung</strong>. Gegnerische Deckung brichst du mit schweren Angriffen (<span class="kbd">R2 / RT / RMB</span>).</td></tr>
-        <tr><td><strong>Rote &amp; blaue Signale</strong></td><td><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen. <strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen. Nicht verwechseln: Färbt sich während eines gegnerischen Angriffs der ganze Bildschirm bläulich und erscheint oben links „Learning in Progress“, kannst du den Skill per <em>Watch &amp; Learn</em> abschauen (siehe Skills).</td></tr>
+        <tr><td><strong>Rote &amp; blaue Signale</strong></td><td><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen. <strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen. Nicht verwechseln: Färbt sich während eines gegnerischen Angriffs der ganze Bildschirm bläulich und erscheint oben links „Learning in Progress“, kannst du den Skill per <em>Watch &amp; Learn</em> abschauen (siehe Fähigkeiten).</td></tr>
         <tr><td><strong>Stamina vs. Spirit</strong></td><td><strong>Ausdauer (Stamina):</strong> Sprinten, Ausweichen, Klettern, Blocken, die meisten Skills. <strong>Spirit:</strong> separate Ressource für Force-Skills (z.B. Force Palm), wird über <em>Focus</em> wieder aufgefüllt.</td></tr>
         <tr><td><strong>Force Palm</strong></td><td>Kurzreichweitiger Energiestoß (<span class="kbd">R3 / RS / MMB</span>), kostet 5 Spirit und senkt die Verteidigung des Ziels (Charakter Kliff; Varianten u.a. Aerial/Healing).</td></tr>
         <tr><td><strong>Axiom Force</strong></td><td>Telekinetisches Ziehen/Stoßen (<span class="kbd">L3 halten / Tab</span>) — v.a. für Rätsel/Traversal, mit etwas Kampfnutzen. (Eigener Skill, NICHT dasselbe wie Force Palm.)</td></tr>
@@ -3502,7 +3681,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <ul style="margin:0;padding-left:20px;line-height:1.9">
         <li><strong>Menschen parieren, Monster ausweichen</strong> — die zuverlässigste Grundregel.</li>
         <li><strong>Grabs (oft rotes Glint) nie parieren</strong>, immer wegrollen.</li>
-        <li><strong>Heilung über Essen</strong>, nicht über Tränke — gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü. Richtwert laut PowerPyx (Einzelquelle): Das günstigste Grilled Meat stellt 140 Gesundheit wieder her und lässt sich etwa alle 2 Sekunden essen; auf Hard wirkt Essen erst nach der Verzehranimation. Heilwerte einzelner Gerichte stehen im Crafting-Tab (questlog-Werte).</li>
+        <li><strong>Heilung über Essen</strong>, nicht über Tränke — gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü. Richtwert laut PowerPyx (Einzelquelle): Das günstigste Grilled Meat stellt 140 Gesundheit wieder her und lässt sich etwa alle 2 Sekunden essen; auf Hard wirkt Essen erst nach der Verzehranimation. Heilwerte einzelner Gerichte stehen auf der Seite Herstellen &amp; Farmen (questlog-Werte).</li>
         <li><strong>Palmar-Pille = Auto-Revive:</strong> Hast du beim Tod eine im Inventar, stehst du sofort mit etwas HP wieder auf (<em>Palmar Pill</em>: Teil der Gesundheit; <em>Refined Palmar Pill</em>: volle Gesundheit). Beide sind herstellbar und u. a. beim Händler Lacey erhältlich.</li>
         <li><strong>Spirit per Focus auffüllen</strong>, bevor du Force-Skills brauchst.</li>
         <li><strong>Schwierigkeitsgrad frei wählbar:</strong> Seit Patch 1.04.00 gibt es unter Settings &gt; Play die Grade Easy, Normal und Hard. Easy verlängert die Zeitfenster für Parry und Dodge und senkt den erlittenen Schaden; Hard verkürzt die Fenster, und Essen wirkt dort erst nach der Verzehranimation. Für Trophäen ist kein bestimmter Grad nötig.</li>
@@ -3568,12 +3747,12 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-items">
-    <h2 class="sec-t"><span class="sec-sym">❒</span> Items</h2>
+    <h2 class="sec-t"><span class="sec-sym">❒</span> Materialien &amp; Items <span class="sec-t-en">Materials</span></h2>
     <div id="wt-upgrade" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Waffen-Upgrade &amp; Refinement</div>
     <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Die meisten Waffen können bis <span style="color:var(--gold);font-weight:600">Refine +10</span> gesteigert werden (Stufen 5-10 erfordern zusätzlich Abyss-Artefakte; laut questlog-Spieldatenbank, die 540 Waffen ohne Munition führt (dieses Wiki erfasst 500), sind 107 davon nicht verfeinerbar, darunter 77 Banner Pikes). Abyss-Slots werden bei einer Hexe gegen Silber erstellt — max. 2 bei Schilden, 3 bei Einhand-, bis 5 bei Zweihand-/Fernkampf-Waffen; Boss-Waffen bringen teils vorinstallierte Sockel mit. Elementeffekte (Fire/Lightning/Frost Affinity) laufen über Cores/Abyss Gears. <span style="color:var(--dim);font-size:var(--fs-10)">[Fakten-Audit 02.06.2026]</span></div>
     <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
     <div id="it-dex" class="sub-t" style="scroll-margin-top:72px">Items-Kompendium</div>
-    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst. Gekochte Gerichte (Food &amp; Elixirs), Roh-Materialien (Gatherables), Dyes, Cores und Ausrüstung haben eigene Tabs. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz". <span style="color:var(--dim);font-size:var(--fs-10)">[Recherche-Audit 28.06.2026, jeder Eintrag mehrquellig verifiziert; ≈ = nur Einzelquelle belegt]</span></div>
+    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst. Gekochte Gerichte (Kochen &amp; Elixiere), Roh-Materialien (Sammelobjekte), Färbemittel, Abyss-Ausrüstung und Ausrüstung haben eigene Seiten. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz". <span style="color:var(--dim);font-size:var(--fs-10)">[Recherche-Audit 28.06.2026, jeder Eintrag mehrquellig verifiziert; ≈ = nur Einzelquelle belegt]</span></div>
     <!-- Bereichsleiste und Kategorie-Auswahl werden aus ITEMS erzeugt (renderItemBar / fillItemdexCats).
          Bewusst nicht mehr als feste option-Liste im Markup: die stand sonst neben den Daten und hatte
          zuletzt die Kategorie "Pet-Ausruestung — Vogel" nicht, deren Eintraege damit unfilterbar waren. -->
@@ -3586,8 +3765,8 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-weapons">
-    <h2 class="sec-t"><span class="sec-sym">†</span> Waffen</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Dyes-Sektion).</div>
+    <h2 class="sec-t"><span class="sec-sym">†</span> Waffen <span class="sec-t-en">Weapons</span></h2>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Seite Färbemittel).</div>
 <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Datenlage:</b> Crimson Desert veröffentlicht keine Waffen-Schadenswerte, deshalb gibt es hier bewusst <b>keine DPS- oder Vergleichsformel</b>. Wo ein Wert nicht belegbar war, steht „nicht erfasst“ statt einer geratenen 0 — aktuell bei <b><span id="wep-nocrit">–</span> von <span id="wep-total">–</span></b> Waffen der Krit-Wert (weitere <span id="wep-critnone">–</span> Waffen führen laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld, dort steht „kein Crit-Stat“), bei <span id="wep-noslots">–</span> die Slot-Zahl und bei <span id="wep-noatk">–</span> weder ATK- noch DEF-Wert (Schilde führen strukturell DEF statt ATK). In der Praxis zählen ohnehin Refine-Stufe, Abyss-Cores und Waffentyp mehr als die Grundzahl.<br><b>Was die ATK-Zahl hier bedeutet:</b> Sie ist die <b>Refinement-Endstufe +10</b>, also ausdrücklich <b>kein Fundzustands-Wert</b> — eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer, bei Zweihändern oft nur etwa ein Drittel. Ein Vollabgleich am <b>09.09.2026</b> gegen die questlog-Stufentabellen (alle 500 Einträge einzeln abgerufen) bestätigt das für <b>406 der 407</b> Waffen, deren ATK-Wert dort überhaupt geführt wird; 32 abweichende Werte wurden dabei korrigiert, weil sie eine Zwischenstufe oder den Fundzustand zeigten. Die 14 übrigen ATK-Werte hat questlog nicht im Bestand und sie bleiben unverändert. Der damals einzige offene Widerspruch, die <b>Rhinard Cannon</b> (questlog und Fextralife führen zwei verschiedene Stufenreihen), ist seit 03.10.2026 zugunsten der questlog-Spieldaten aufgelöst (Endstufe 31). Für <b>Banner Pikes</b> gilt die Regel nur formal: 53 von ihnen sind laut questlog gar nicht verfeinerbar, ihr Wert ist damit zugleich Fund- und Endwert. Schilde führen statt ATK einen <b>DEF-Wert</b>, ebenfalls in der Endstufe (62 von 62 gegen questlog bestätigt).</div>
     <div class="fbar">
       <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword (1H)">Sword (1H)</option><option value="Greatsword (2H)">Greatsword (2H)</option><option value="Halberd / Spear (2H)">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles / Gauntlets">Knuckles / Gauntlets</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow (Ranged)">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Hand Cannon">Hand Cannon</option><option value="Shield">Shield</option><option value="A.T.A.G. Weapon">A.T.A.G. Weapon</option></select>
@@ -3598,7 +3777,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-armor">
-    <h2 class="sec-t"><span class="sec-sym">⛓</span> Rüstungen</h2>
+    <h2 class="sec-t"><span class="sec-sym">⛓</span> Rüstungen <span class="sec-t-en">Armor</span></h2>
     <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Quellenlage:</b> Jedes der <b><span id="armor-total">–</span></b> Teile sagt jetzt auf der Karte, <b>woher</b> sein Wert stammt — das stand bisher nur als Kommentar im Quelltext. <b><span id="armor-import">–</span></b> Teile kommen aus dem <b>Datenimport</b> der Spieldateien, <b><span id="armor-guide">–</span></b> sind <b>aus Guides belegt</b> (VULKK, game8, Fextralife, pywel.app, die Datamine-Datenbank gaming.tools, teils die offiziellen Patch Notes), <b><span id="armor-alt">–</span></b> stammen aus dem alten kuratierten Bestand und sind <b>ungeprüft</b> — dort hat der Fakten-Audit vom 02.06.2026 nachweislich erfundene Werte gefunden und die gröbsten entfernt. Bei <b><span id="armor-ohne">–</span></b> Teilen ist überhaupt kein Zahlenwert hinterlegt.<br><b>Welche Stufe?</b> Seit dem Abgleich mit der questlog-Spieldatenbank am 03.10.2026 gilt: „Def +N“ bzw. „Atk +N“ ist die <b>Höchststufe (Refinement +10)</b>, der Grundwert (+0) steht in den Notizen. Teile, die sich nicht aufwerten lassen, sind dort als „nicht aufwertbar“ vermerkt.<br><b>Was die Marke nicht sagt:</b> Sie ist eine Herkunftsangabe, keine Vertrauensnote. „Datenimport“ heißt <b>nicht</b> „gegengeprüft“ — diese Werte hat niemand einzeln gegen einen Guide gehalten, und einzelne von ihnen waren unvollständig. Zwei Beispiele sind am <b>22.08.2026</b> nachgetragen: dem Odeck’s Protector Plate Helm fehlte die Daze-Immunität, dem zugehörigen Mantel Eis-Resistenz&nbsp;Lv3 und der Ausdauer-Malus — beides stand längst in der Set-Beschreibung weiter unten. Umgekehrt kann ein „aus Guides belegt“ besser dokumentiert sein als ein Importwert.</div>
     <div class="fbar">
       <input class="fs" id="af-q" type="search" placeholder="Rüstung, Fundort, Effekt …" aria-label="Rüstungen durchsuchen" oninput="armorFilter()" style="min-width:190px">
@@ -3615,7 +3794,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-cores">
-    <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss Cores</h2>
+    <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss-Ausrüstung <span class="sec-t-en">Abyss Gear</span></h2>
     <div class="fbar">
       <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe (auch Waffe/Hand/Fuß)</option><option value="Armor">Rüstung (auch Waffe/Hand/Fuß)</option><option value="Both">Nur Waffe, Handschuhe, Schuhe</option></select>
     </div>
@@ -3675,7 +3854,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-crafting">
-    <h2 class="sec-t"><span class="sec-sym">⚙</span> Crafting &amp; Farming</h2>
+    <h2 class="sec-t"><span class="sec-sym">⚙</span> Herstellen &amp; Farmen <span class="sec-t-en">Crafting</span></h2>
     <div style="margin-bottom:18px;border:1px solid var(--bdr);border-radius:12px;padding:14px 16px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
       <div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px">🆕 Neu mit Patch 1.12.00 (19.06.2026): Möbel- &amp; Dekorations-Crafting</div>
       <div style="font-size:12.5px;color:var(--text);line-height:1.7">Zwei neue Werkbänke zum Herstellen von Einrichtungs- und Dekorations-Items: <b>Workstation</b> (Greymane Camp, Timberham Sawmill) und <b>Loom</b> (Hernand Tailor's Shop). Erstmals lässt sich auch der <b>Außenbereich rund um das eigene Haus</b> dekorieren. Insgesamt <b>58 neue Hausgegenstände</b> (Facilities, Lights, Decorations/Pet Furniture). Bezug über Shops, Claw Machines, die Flower-Basket-Crafting-Mission, die <b>Box of Fortune</b> (Mysterious Shop, 100 Silver, max. 3 pro Restock) und die Orb-Roll-Challenge. <span style="color:var(--dim)">Werkbank-Funktion (Workstation = Holzmöbel, Loom = Stoffwaren) laut Community-Guides, nicht in den offiziellen Notes.</span> Vollständige Auflistung in den <span class="xref" role="link" tabindex="0" onclick="showSec('patches')">Patch-Notes 1.12.00</span>. <span style="color:var(--gold);font-weight:600">Update 1.13.00:</span> Herstellungsrezepte für 4 neue Teppich-Arten hinzugefügt (Rezept im Shop kaufbar, genaue Zutaten noch nicht dokumentiert).</div>
@@ -3687,13 +3866,13 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <div id="rl-results" class="rl-results"></div>
     </div>
     <h3 class="sub-t">⚗️ Crafting-Rezepte</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Diese Sektion bündelt erstmals sämtliche Crafting-Rezepte aus Crimson Desert: 327 Koch-Rezepte (95 Gerichte in bis zu vier Koch-Stufen; Wild-Pot, Pot, Frying-Pan, Plate; alle Kochstufen einschließlich Hearty sowie die Mahlzeiten-Familien), 28 Elixier-/Tee-/Pillen-Rezepte am Kessel und 31 Kuku-Gadgets aus der Kuku-Werkstatt (Kilnden). Das Datengerüst (Spine) stammt aus dem dataminten questlog.gg und wird gegen game8 und Fextralife abgeglichen und angereichert. Wo Quellen voneinander abweichen, gilt der datamined questlog-Wert als autoritativ; jede dokumentierte Abweichung ist in den Rezept-Notizen festgehalten. Ziel ist ein praxistaugliches Dashboard: Welches Gericht heilt am meisten, welche Resistenz bekomme ich am günstigsten, und welches Elixier lohnt sich vor welchem Boss.</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Diese Seite bündelt erstmals sämtliche Crafting-Rezepte aus Crimson Desert: 327 Koch-Rezepte (95 Gerichte in bis zu vier Koch-Stufen; Wild-Pot, Pot, Frying-Pan, Plate; alle Kochstufen einschließlich Hearty sowie die Mahlzeiten-Familien), 28 Elixier-/Tee-/Pillen-Rezepte am Kessel und 31 Kuku-Gadgets aus der Kuku-Werkstatt (Kilnden). Das Datengerüst (Spine) stammt aus dem dataminten questlog.gg und wird gegen game8 und Fextralife abgeglichen und angereichert. Wo Quellen voneinander abweichen, gilt der datamined questlog-Wert als autoritativ; jede dokumentierte Abweichung ist in den Rezept-Notizen festgehalten. Ziel ist ein praxistaugliches Dashboard: Welches Gericht heilt am meisten, welche Resistenz bekomme ich am günstigsten, und welches Elixier lohnt sich vor welchem Boss.</div>
     <details style="margin-bottom:12px">
       <summary style="cursor:pointer;font-size:var(--fs-11-5);color:var(--gdim);user-select:none">ℹ️ Koch-Stufen &amp; Datenqualität (questlog datamined · game8/Fextralife verifiziert)</summary>
       <div style="font-size:var(--fs-11-5);color:var(--dim);line-height:1.65;margin-top:8px;padding:10px 13px;background:rgba(201,162,39,.04);border:1px solid var(--bdr);border-radius:8px">
-        <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Darstellung:</strong> Die Koch-Stufen eines Gerichts (z.&nbsp;B. Harvest Roll / Filling Harvest Roll / Satisfying Harvest Roll) stehen gebündelt auf <em>einer</em> Karte, und zwar alle gleichzeitig sichtbar — genau wie die Stufen-Werte der Abyss-Cores: unter „Stufen-Werte“ steht je Stufe die geheilte HP-Zahl und, falls sie abweicht, die Zutatenmenge. Nichts muss aufgeklappt oder umgeschaltet werden. Alles, was über die Stufen identisch bleibt (Resistenz-Level, Dauer, Station, Item-Stufe, Fundort und bei vielen Gerichten auch die Zutaten), steht nur einmal oben auf der Karte. So werden aus 327 Koch-Rezepten 95 Gerichte-Karten; zusammen mit den 28 Elixieren und 31 Kuku-Gadgets zeigt die Sektion 154 Karten. Wer jede Stufe als eigene Karte braucht, stellt den Filter rechts oben auf „Koch-Stufen einzeln“ (oder „nur Basis-Stufe“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p>
+        <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Darstellung:</strong> Die Koch-Stufen eines Gerichts (z.&nbsp;B. Harvest Roll / Filling Harvest Roll / Satisfying Harvest Roll) stehen gebündelt auf <em>einer</em> Karte, und zwar alle gleichzeitig sichtbar — genau wie die Stufen-Werte der Abyss-Cores: unter „Stufen-Werte“ steht je Stufe die geheilte HP-Zahl und, falls sie abweicht, die Zutatenmenge. Nichts muss aufgeklappt oder umgeschaltet werden. Alles, was über die Stufen identisch bleibt (Resistenz-Level, Dauer, Station, Item-Stufe, Fundort und bei vielen Gerichten auch die Zutaten), steht nur einmal oben auf der Karte. So werden aus 327 Koch-Rezepten 95 Gerichte-Karten; zusammen mit den 28 Elixieren und 31 Kuku-Gadgets zeigt die Seite 154 Karten. Wer jede Stufe als eigene Karte braucht, stellt den Filter rechts oben auf „Koch-Stufen einzeln“ (oder „nur Basis-Stufe“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p>
         <p style="margin:0 0 9px"><strong style="color:var(--gdim)">Koch-Stufen:</strong> Gerichte erscheinen in bis zu drei Koch-Qualitätsstufen (Basis -&gt; Filling/Satisfying -&gt; Hearty bzw. die Feast-Stufen). Bestätigte Regel: Die geheilten Trefferpunkte (Flat-Heal-Gerichte) skalieren über die Stufen hoch (HP = questlog-Rohwert / 1000), während die Resistenz-STUFE und meist auch die Wirkdauer fix bleibt (Resistenz-Level = questlog-Wert). Achtung: Prozent-Heiler wie Chocolate (+50% Max-HP) und die Feast-Gerichte mit reinen Buffs (Ignore Stamina/Spirit, Overheal, Angriff) folgen NICHT der /1000-HP-Logik - ihr Nutzen steckt im zeitlich begrenzten Buff, nicht in einer HP-Zahl. Bei Elixieren steigert die Stufe Lesser -&gt; normal -&gt; Greater sowohl Wert als auch Dauer (5/10/15 Min bei getimten Buffs, 4/8/12 s bei No-Cost-Buffs).</p>
-        <p style="margin:0">Ehrlicher Datenstand: Verlässlich sind Flat-Heal-HP (questlog-Wert/1000) und die Resistenz-STUFE (Eis und Feuer belegt; Blitz-Resistenz ist nur bei einem Plate-Feast und Elixieren/Gear belegt, für kein reguläres Food-Gericht). Lücken: questlog erfasst bei vielen Gerichten und Tees KEINE Spirit-/Stamina-Werte - diese sind aus game8/VGC/keengamer ergänzt und daher nur bei kuratierten Gerichten angegeben (z. B. Tees stellen zusätzlich Stamina her: Pine ~+224, Oakwood +160, Honey +128, Mild Herb +96, Wine +64 - in questlog nicht kodiert). Wirkdauern divergieren zwischen Datenbanken (z. B. Fish Porridge questlog Lv 4/60 s vs game8 Lv 5/10 Min; Clear Soup 30 s vs game8 5 Min) - hier gilt der questlog-Wert, Abweichungen sind notiert. Guides wie Fextralife und thegameswiki nennen bei den meisten vergleichbaren Gerichten genau 60 HP weniger als der questlog-basierte Bestand (z. B. Braised Ribs +260 statt +320, Hearty Clear Soup +420 statt +480; method.gg nennt dort ebenfalls +480). Möglich ist, dass diese Guides den Stand vor Patch 1.00.03 (23.03.2026, Heilwirkung von Zutaten und Essen erhöht) wiedergeben; belegt ist das nicht. Übrige HP-Differenzen stammen meist aus unterschiedlichen Zutatensets. Die /1000-Division und value=Level sind aus Anzeigewerten plausibel abgeleitet, nicht am rohen itemUseEffect-Feld (JS/tRPC-gated) bewiesen. Zutatenmengen sind in questlog teils unvollständig (oft nur 'Water'/'Empty Bottle'); echte Mengen siehe Food-Guide. Färbemittel sind kein Koch-/Alchemie-Rezept - dafür die separate Dyes-Sektion nutzen; detaillierte Zutaten-Farmrouten stehen im Food-Guide.</p>
+        <p style="margin:0">Ehrlicher Datenstand: Verlässlich sind Flat-Heal-HP (questlog-Wert/1000) und die Resistenz-STUFE (Eis und Feuer belegt; Blitz-Resistenz ist nur bei einem Plate-Feast und Elixieren/Gear belegt, für kein reguläres Food-Gericht). Lücken: questlog erfasst bei vielen Gerichten und Tees KEINE Spirit-/Stamina-Werte - diese sind aus game8/VGC/keengamer ergänzt und daher nur bei kuratierten Gerichten angegeben (z. B. Tees stellen zusätzlich Stamina her: Pine ~+224, Oakwood +160, Honey +128, Mild Herb +96, Wine +64 - in questlog nicht kodiert). Wirkdauern divergieren zwischen Datenbanken (z. B. Fish Porridge questlog Lv 4/60 s vs game8 Lv 5/10 Min; Clear Soup 30 s vs game8 5 Min) - hier gilt der questlog-Wert, Abweichungen sind notiert. Guides wie Fextralife und thegameswiki nennen bei den meisten vergleichbaren Gerichten genau 60 HP weniger als der questlog-basierte Bestand (z. B. Braised Ribs +260 statt +320, Hearty Clear Soup +420 statt +480; method.gg nennt dort ebenfalls +480). Möglich ist, dass diese Guides den Stand vor Patch 1.00.03 (23.03.2026, Heilwirkung von Zutaten und Essen erhöht) wiedergeben; belegt ist das nicht. Übrige HP-Differenzen stammen meist aus unterschiedlichen Zutatensets. Die /1000-Division und value=Level sind aus Anzeigewerten plausibel abgeleitet, nicht am rohen itemUseEffect-Feld (JS/tRPC-gated) bewiesen. Zutatenmengen sind in questlog teils unvollständig (oft nur 'Water'/'Empty Bottle'); echte Mengen siehe Food-Guide. Färbemittel sind kein Koch-/Alchemie-Rezept - dafür die separate Seite Färbemittel nutzen; detaillierte Zutaten-Farmrouten stehen im Food-Guide.</p>
       </div>
     </details>
     <div class="fbar">
@@ -3736,7 +3915,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-quests">
-    <h2 class="sec-t"><span class="sec-sym">❢</span> Quests &amp; Story</h2>
+    <h2 class="sec-t"><span class="sec-sym">❢</span> Quests <span class="sec-t-en">Main &amp; Faction Quests</span></h2>
     <div id="quest-hero" class="qhero"></div>
     <div class="tabs">
       <button type="button" class="tab active" id="qt-te" onclick="qTab('te')">True Ending Checkliste</button>
@@ -3758,7 +3937,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-map">
-    <h2 class="sec-t"><span class="sec-sym">⌖</span> Interaktive Karte</h2>
+    <h2 class="sec-t"><span class="sec-sym">⌖</span> Karte <span class="sec-t-en">Map</span></h2>
     <div id="map-loc-banner">
       <span class="mlb-lbl">Suche:</span>
       <span class="mlb-term" id="mlb-term"></span>
@@ -3774,19 +3953,21 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-locations">
-    <h2 class="sec-t"><span class="sec-sym">⌂</span> Locations</h2>
+    <h2 class="sec-t"><span class="sec-sym">⌂</span> Orte &amp; Glocken <span class="sec-t-en">Locations</span></h2>
+    <p class="loc-intro" id="loc-intro">Wichtige Orte je Region und alle Glocken. Eine Weltkarte findest du unter <a href="#" onclick="showSec('map');return false;">Karte</a>.</p>
     <div id="lo-toc"></div>
     <div id="lo-locs" class="fbar" style="scroll-margin-top:72px">
       <select class="fs" id="lf-reg" aria-label="Fundorte nach Region filtern" onchange="renderLocs()"><option value="">Alle Regionen</option><option value="Hernand">Hernand</option><option value="Pailune">Pailune</option><option value="Demeniss">Demeniss</option><option value="Delesyia">Delesyia</option><option value="Crimson Desert">Crimson Desert</option><option value="The Abyss">The Abyss</option></select>
-      <select class="fs" id="lf-type" aria-label="Fundorte nach Typ filtern" onchange="renderLocs()"><option value="">Alle Typen</option><option value="Alchemy">Alchemy Station</option><option value="Dungeon">Dungeon / Farm</option><option value="Stadt">Stadt</option><option value="Unique Weapon">Unique Weapon</option><option value="Boss">Boss</option><option value="Sanctum">Sanctum</option><option value="Camp">Camp</option><option value="Crafting">Crafting Station</option><option value="Witch">Witch</option><option value="Faction">Faction</option></select>
+      <select class="fs" id="lf-type" aria-label="Fundorte nach Typ filtern" onchange="renderLocs()"><option value="">Alle Typen</option><option value="Alchemy">Alchemie</option><option value="Dungeon">Dungeon / Farm</option><option value="Stadt">Stadt</option><option value="Unique Weapon">Einzigartige Waffe</option><option value="Boss">Boss</option><option value="Sanctum">Sanktum</option><option value="Camp">Camp</option><option value="Crafting">Werkstatt</option><option value="Witch">Hexe</option><option value="Faction">Fraktion</option><option value="Mount">Reittier</option><option value="Abyss">Abyss</option><option value="Quest Item">Quest-Item</option></select>
     </div>
-    <div class="grid" id="loc-grid"></div>
-    <div id="lo-bells" class="sub-t" style="scroll-margin-top:72px">🔔 Bell Towers</div>
-    <div class="tw-wrap"><table><thead><tr><th>#</th><th>Name</th><th>Ort</th><th>Mechanik</th><th>Hinweis</th></tr></thead><tbody id="bell-tb"></tbody></table></div>
+    <div id="loc-grid"></div>
+    <div id="lo-bells" class="sub-t" style="scroll-margin-top:72px">🔔 Glocken</div>
+    <div class="bell-grid" id="bell-grid"></div>
+    <div id="loc-patch" data-filtered="0"></div>
   </section>
 
   <section class="sec" id="sec-camp">
-    <h2 class="sec-t"><span class="sec-sym">⛫</span> Camp-Ausbau</h2>
+    <h2 class="sec-t"><span class="sec-sym">⛫</span> Graumähnen-Camp <span class="sec-t-en">Greymane Camp</span></h2>
     <div class="disarm-hero">
       <p>Das <strong>Greymane Camp</strong> am <strong>Howling Hill</strong> (Hernand, südlich der Hauptstadt) ist Kliffs Basis. Der Ausbau ist <strong>kein Baumenü und kein XP-Balken</strong>, sondern ein <strong>questgebundenes Entsende-System</strong>: Jede Stufe ist eine eigene Quest, die eine <em>Ausbau-Mission</em> freischaltet, auf die du Kameraden schickst. Es gibt <strong>vier Ausbaustufen am Howling Hill</strong> plus als offiziell mitgezählte <strong>fünfte, finale Stufe den Umzug nach Pailune</strong>. Jede Stufe hat <strong>drei Bedingungen gleichzeitig</strong> — die passende Questreihe, genug verfügbare Kameraden und genug Camp-Ressourcen im Lager. Fehlt eines davon, taucht die Ausbau-Mission gar nicht erst in der Liste auf.</p>
     </div>
@@ -3995,12 +4176,12 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-mounts">
-    <h2 class="sec-t"><span class="sec-sym">♞</span> Mounts</h2>
+    <h2 class="sec-t"><span class="sec-sym">♞</span> Reittiere <span class="sec-t-en">Mounts</span></h2>
     <div id="mount-sections"></div>
   </section>
 
   <section class="sec" id="sec-disarm">
-    <h2 class="sec-t"><span class="sec-sym">⛨</span> Entwaffnen</h2>
+    <h2 class="sec-t"><span class="sec-sym">⛨</span> Entwaffnen <span class="sec-t-en">Disarm</span></h2>
     <div id="da-toc"></div>
     <div class="disarm-hero">
       <p>Das Entwaffnungs-System in Crimson Desert basiert auf einem <strong>Shield Bash Counter</strong> — kein separater Skill-Tree-Eintrag nötig. Einzige Voraussetzung: <strong>Einhandwaffe + kleine Rundschild</strong>. Turmschilder funktionieren nicht. Entwaffnete Gegner kämpfen auf Fäusten weiter und verlieren jede Block-Option.</p>
@@ -4065,7 +4246,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-skills">
-    <h2 class="sec-t"><span class="sec-sym">✦</span> Skills</h2>
+    <h2 class="sec-t"><span class="sec-sym">✦</span> Fähigkeiten <span class="sec-t-en">Skills</span></h2>
     <div class="tabs">
       <button type="button" class="tab active" id="skt-kliff" onclick="skTab('kliff')">Kliff</button>
       <button type="button" class="tab" id="skt-damiane" onclick="skTab('damiane')">Damiane</button>
@@ -4084,6 +4265,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
 
   <section class="sec" id="sec-checklists">
     <h2 class="sec-t"><span class="sec-sym">☑</span> Checklisten</h2>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Die True-Ending-Checkliste steht auf der Seite <a href="#" onclick="showSec('quests');qTab('te');return false;">Quests</a> (erster Reiter). Dein Fortschritt dort zählt auch in der Übersicht unten.</div>
     <div class="tabs">
       <button type="button" class="tab active" id="clt-overview" onclick="clTab('overview')">Übersicht</button>
       <button type="button" class="tab" id="clt-bosses" onclick="clTab('bosses')">⚔️ Bosse</button>
@@ -4156,7 +4338,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="pane" id="clp-export">
       <h3 class="sub-t" style="margin-top:0">Fortschritt exportieren / importieren</h3>
       <div style="font-size:12px;color:var(--dim);margin-bottom:12px">Exportiere deinen kompletten Fortschritt (Bosse, True Ending, Greymane, Waffen, Missables, Kapitel, Favoriten, Notizen, Kommentare, eigene Builds) als JSON. Kann jederzeit wieder importiert werden.</div>
-      <div style="font-size:12px;color:var(--warn);margin-bottom:12px;line-height:1.6">⚠ Dein Fortschritt wird nur in diesem Browser gespeichert: Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren. Nur die True-Ending-Checkliste lässt sich zusätzlich per Sync-Code (Sidebar, „🔑 Sync“) auf andere Geräte übertragen.</div>
+      <div style="font-size:12px;color:var(--warn);margin-bottom:12px;line-height:1.6">⚠ Dein Fortschritt wird nur in diesem Browser gespeichert: Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren. Nur die True-Ending-Checkliste lässt sich zusätzlich per Sync-Code (Menü, „🔑 Sync“) auf andere Geräte übertragen.</div>
       <div class="xp-row">
         <button class="xp-btn pri" onclick="exportProgress()">Fortschritt exportieren (JSON)</button>
         <button class="xp-btn" onclick="document.getElementById('import-file').click()">Fortschritt importieren</button>
@@ -4166,7 +4348,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <div class="card" style="max-width:380px">
         <div class="crows">
           <div class="crow"><span class="cl"><span class="kbd">Ctrl K</span></span><span class="cv">Suchfeld fokussieren</span></div>
-          <div class="crow"><span class="cl"><span class="kbd">Esc</span></span><span class="cv">Suche leeren / Sidebar schließen</span></div>
+          <div class="crow"><span class="cl"><span class="kbd">Esc</span></span><span class="cv">Suche leeren / Menü schließen</span></div>
           <div class="crow"><span class="cl">↑ Button</span><span class="cv">Zurück nach oben (ab 300 px Scroll)</span></div>
         </div>
       </div>
@@ -4187,7 +4369,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-accessories">
-    <h2 class="sec-t"><span class="sec-sym">❖</span> Accessoires &amp; Schmuck</h2>
+    <h2 class="sec-t"><span class="sec-sym">❖</span> Accessoires</h2>
     <div class="fbar">
       <select class="fs" id="accf-type" aria-label="Accessoires nach Typ filtern" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option></select>
     </div>
@@ -4196,13 +4378,13 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-witches">
-    <h2 class="sec-t"><span class="sec-sym">☾</span> Hexen Guide</h2>
+    <h2 class="sec-t"><span class="sec-sym">☾</span> Hexen &amp; Fusion <span class="sec-t-en">Witches</span></h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>White Crow</strong> ist erst nach 4 Witch's Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).</div>
     <div class="witch-grid" id="witch-grid"></div>
   </section>
 
   <section class="sec" id="sec-pets">
-    <h2 class="sec-t"><span class="sec-sym">❥</span> Pets</h2>
+    <h2 class="sec-t"><span class="sec-sym">❥</span> Haustiere <span class="sec-t-en">Pets</span></h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50). Die Plätze kommen über Werkzeuge: je ein <em>Small Haven for Pets</em> (+5) aus den vier Missionen der Challenge „Pets“ (Start of Companionship, Speedy Tamer, A New Reliable Companion, Bye, My Little Friend), <em>Haven for Pets</em> (+10) als Belohnung für die Jagd auf den legendären Phoenix (Challenge „Legendary Animals“) sowie für das Zähmen von Hyacinth Macaw und Iron Eagle (auch bei Conrad, Vincent und Erik kaufbar) und <em>Large Haven for Pets</em> (+20) aus der Mission „Little Companions“ (Challenge „Life“); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten. <span style="color:var(--gold)">Patch 1.13:</span> Beschworene Pets ruhen jetzt gemeinsam mit dem Charakter, wenn dieser sich in ein Bett legt.</div>
     <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25). Bei Katzen und Hunden gibt Füttern je nach Futter +10 oder +20 (Hunde: Knochen +25), das <strong>Lieblingsessen</strong> +35 und bei Katzen ein legendärer Fisch sogar +100. Kleintiere und Vögel haben eigene Vorlieben (Lieblingsfutter je nach Art meist +35 bis +100); viele Wildtiere und flugunfähige Vögel nehmen außerdem einen <strong>Golden Apple</strong> für +100 (Werte laut questlog-Spieldaten). Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
     <div id="legendary-pet-guide"></div>
@@ -4210,8 +4392,9 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="pet-grid" id="pet-grid"></div>
   </section>
   <section class="sec" id="sec-collectibles">
-    <h2 class="sec-t"><span class="sec-sym">⬦</span> Collectibles &amp; Knowledge</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, 2.921 Einträge laut Fortschrittsanzeige im Knowledge-Menü — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214 (andere Zählweise als die 201 Kartenpositionen der Memory-Fragment-Sektion), Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30; die hier genannten Einzelwerte ergeben zusammen 2.905 (16 weniger als die Gesamtzahl) und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:var(--survey-red)">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
+    <h2 class="sec-t"><span class="sec-sym">⬦</span> Sammelgegenstände <span class="sec-t-en">Collectibles</span></h2>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Pflanzen, Erze und andere Rohstoffe zum Sammeln stehen auf der Seite <a href="#" onclick="showSec('gatherables');return false;">Sammelobjekte</a> (Gatherables). Hier geht es um die Sammlung im Wissen-Menü (Collectibles).</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, 2.921 Einträge laut Fortschrittsanzeige im Knowledge-Menü — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214 (andere Zählweise als die 201 Kartenpositionen der Memory-Fragment-Liste auf der Seite Geheimnisse &amp; Lore), Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30; die hier genannten Einzelwerte ergeben zusammen 2.905 (16 weniger als die Gesamtzahl) und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die echten <span style="color:var(--survey-red)">Missables</span> sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">141</span> Sealed Abyss Artifacts</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">13</span> Constellations</div>
@@ -4221,20 +4404,21 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30</span> Unique Pets</div>
     </div>
     <div class="fbar">
-      <select class="fs" id="cof-miss" aria-label="Sammelobjekte nach Verpassbarkeit filtern" onchange="renderCollectibles()"><option value="">Alle Sammelobjekte</option><option value="1">Nur verpassbare</option><option value="0">Nicht verpassbare</option></select>
+      <select class="fs" id="cof-miss" aria-label="Sammelgegenstände nach Verpassbarkeit filtern" onchange="renderCollectibles()"><option value="">Alle Sammelgegenstände</option><option value="1">Nur verpassbare</option><option value="0">Nicht verpassbare</option></select>
       <span id="cof-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
     </div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="col-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-gatherables">
-    <h2 class="sec-t"><span class="sec-sym">☘</span> Gatherables — Materialien &amp; Kräuter</h2>
+    <h2 class="sec-t"><span class="sec-sym">☘</span> Sammelobjekte <span class="sec-t-en">Gatherables</span></h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Über ganz Pywel sammelst du Erze, Kräuter, Pilze und Spezialmaterialien per Mining-Node, Foraging oder Logging Axe. Sie speisen Alchemie, Kochen, Schmieden, Färben und einige Stat-Upgrades. Mehrere Kräuter heben Stats über ihr Maximum, etwa Spirit oder Stamina.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">64</span> Materialien</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">4</span> Awakening-Kräuter</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">~7 Tage</span> Erz-Respawn</div>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Siehe Alchemie-/Crafting-Sektion für Catalyst-Rezepte und die Stat-Upgrade-Sektion (Spirit, Stamina) für Turn-in-Materialien.</div>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Sammelbare Gegenstände und Wissenseinträge (Collectibles) stehen auf der Seite <a href="#" onclick="showSec('collectibles');return false;">Sammelgegenstände</a>. Hier geht es um Rohstoffe zum Sammeln (Gatherables).</div>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Siehe Seite Herstellen &amp; Farmen (Alchemie) für Catalyst-Rezepte und den Stat-Upgrade-Abschnitt (Spirit, Stamina) für Turn-in-Materialien.</div>
     <div class="fbar">
       <select class="fs" id="gatherables-cat" aria-label="Sammelressourcen nach Kategorie filtern" onchange="renderGatherables()"><option value="">Alle Kategorien</option><option value="Erz / Mineral">Erz / Mineral</option><option value="Edelstein">Edelstein</option><option value="Kraut">Kraut</option><option value="Kraut (giftig)">Kraut (giftig)</option><option value="Pilz">Pilz</option><option value="Spezialmaterial">Spezialmaterial</option><option value="Crafting-Material">Crafting-Material</option><option value="Gemüse / Frucht">Gemüse / Frucht</option><option value="Fleisch">Fleisch</option></select>
       <span id="gatherables-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
@@ -4242,14 +4426,14 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="gatherables-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-puzzles">
-    <h2 class="sec-t"><span class="sec-sym">⍰</span> Rätsel &amp; Strongboxes</h2>
+    <h2 class="sec-t"><span class="sec-sym">⍰</span> Rätsel <span class="sec-t-en">Puzzles</span></h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Pywel steckt voller Strongboxes (verschlossene Truhen mit fester Lösung) und Story-Rätsel im Abyss, die meist mit Axiom Force (L3 + rechter Stick) und Force Palm (R3) gelöst werden. Strongboxes folgen vier Mustern: feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">4</span> Strongbox-Methoden</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">R3</span> Force Palm</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">L3 + Stick</span> Axiom Force</div>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Generische Ancient-Ruins-Rätsel (Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light) sind hier NICHT gelistet - sie stehen einzeln in der Sektion &quot;Uralte Ruinen — Abyss-Grenzsteine&quot; (alle 37 Ruinen).</div>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Generische Ancient-Ruins-Rätsel (Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light) sind hier NICHT gelistet - sie stehen einzeln auf der Seite „Uralte Ruinen“ (alle 37 Ruinen).</div>
     <div class="fbar">
       <select class="fs" id="puzzles-cat" aria-label="Rätsel nach Kategorie filtern" onchange="renderPuzzles()"><option value="">Alle Kategorien</option><option value="Strongbox">Strongbox</option><option value="Story / Abyss">Story / Abyss</option><option value="Story (Kapitel)">Story (Kapitel)</option><option value="Faction-Quest">Faction-Quest</option></select>
       <span id="puzzles-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
@@ -4257,7 +4441,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="puzzles-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-dyes">
-    <h2 class="sec-t"><span class="sec-sym">◑</span> Dyes — Färbesystem</h2>
+    <h2 class="sec-t"><span class="sec-sym">◑</span> Färbemittel <span class="sec-t-en">Dyes</span></h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Färbemittel (Dyes) gibt es pro Grundfarbe in fünf Stufen (Bright, Rich, Basis, Dark, Deep); zehn Farbfamilien ergeben 50 herstellbare Dyes, dazu kommen zehn Grautöne einschließlich Pure White und Black, die nicht herstellbar sind (insgesamt 60 laut questlog). Sie färben seit Patch 1.13.00 nicht mehr nur Rüstungen, sondern auch die meisten Waffen, Sekundärwaffen und Verkleidungs-Outfits. Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">60</span> belegte Dyes</div>
@@ -4273,7 +4457,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
     <div class="tw-wrap"><table><thead><tr><th class="dye-th"></th><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="dyes-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-food">
-    <h2 class="sec-t"><span class="sec-sym">⚗</span> Food &amp; Elixirs</h2>
+    <h2 class="sec-t"><span class="sec-sym">⚗</span> Kochen &amp; Elixiere <span class="sec-t-en">Cooking &amp; Elixirs</span></h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Kochen am Lagerfeuer und Alchemie liefern in Crimson Desert situative Buffs: Feldgerichte geben Heilung plus feste Ice- oder Fire-Resistance, während Elixiere aus dem Cauldron oder dem Greymane-Labor Angriff, Verteidigung, Spirit und Wiederbelebung abdecken. Wichtig: Resistance-Level und Wirkdauer eines Rezepts sind über alle Qualitätsstufen FIX - nur der HP-Wert steigt mit höherer Kochstufe.</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">19</span> Einträge</div>
@@ -4281,7 +4465,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">+30%/60s</span> Attack Speed Potion</div>
       <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30% / 100%</span> Palmar-Revive</div>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Reagenzien wie Crimson Root, Adrenaline Gland und Palmar-Materialien siehe Gathering/Materials; Greymane-Labor und Cauldron-Standorte siehe Crafting Stations.</div>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Reagenzien wie Crimson Root, Adrenaline Gland und Palmar-Materialien siehe Seiten Sammelobjekte und Materialien &amp; Items; Greymane-Labor und Cauldron-Standorte siehe Seite Herstellen &amp; Farmen.</div>
     <div class="fbar">
       <select class="fs" id="food-cat" aria-label="Speisen nach Kategorie filtern" onchange="renderFood()"><option value="">Alle Kategorien</option><option value="Food — Ice Resistance">Food — Ice Resistance</option><option value="Food — Fire Resistance">Food — Fire Resistance</option><option value="Elixir — Angriff/Tempo">Elixir — Angriff/Tempo</option><option value="Elixir — Verteidigung">Elixir — Verteidigung</option><option value="Elixir — Spirit/Stamina">Elixir — Spirit/Stamina</option><option value="Elixir — Wiederbelebung">Elixir — Wiederbelebung</option></select>
       <span id="food-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
@@ -4296,10 +4480,10 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-secrets">
-    <h2 class="sec-t"><span class="sec-sym">⚿</span> Secrets &amp; Hidden Lore</h2>
+    <h2 class="sec-t"><span class="sec-sym">⚿</span> Geheimnisse &amp; Lore <span class="sec-t-en">Secrets &amp; Lore</span></h2>
     <div class="spoiler-shield">
       <span class="spoiler-shield-ico">⚠️</span>
-      <div><strong>SPOILER-WARNUNG:</strong> Diese Section enthält den Hidden Ending Lore (Run 108), Memory-Fragment-Lokationen, Boss-Identitäten und Story-Auflösungen. Wer sich überraschen lassen will: nur die Tabs öffnen, die zu eurem Story-Fortschritt passen.</div>
+      <div><strong>SPOILER-WARNUNG:</strong> Diese Seite enthält den Hidden Ending Lore (Run 108), Memory-Fragment-Lokationen, Boss-Identitäten und Story-Auflösungen. Wer sich überraschen lassen will: nur die Tabs öffnen, die zu eurem Story-Fortschritt passen.</div>
     </div>
     <div class="tabs">
       <button type="button" class="tab active" id="sect-ending" onclick="secretsTab('ending')">🌑 Hidden Ending</button>
@@ -4357,7 +4541,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   .ruin-conf.med{color:var(--warn);cursor:help;border-bottom:1px dotted var(--warn)}
 </style>
   <section class="sec" id="sec-ruins">
-    <h2 class="sec-t"><span class="sec-sym">♜</span> Uralte Ruinen — Abyss-Grenzsteine</h2>
+    <h2 class="sec-t"><span class="sec-sym">♜</span> Uralte Ruinen <span class="sec-t-en">Ancient Ruins</span></h2>
     <div class="disarm-hero">
       <p><strong>Abyss-Grenzsteine</strong> (Abyss Cressets in den „Uralten Ruinen") sind Schnellreise-Knoten, die du durch das Lösen eines <strong>Rätsels</strong> freischaltest. Jeder gelöste Grenzstein gibt <strong>1 Abyss-Artefakt</strong> (Lernwährung für Fähigkeiten) und einen Schnellreisepunkt. Zu unterscheiden vom <strong>Abyss-Nexus</strong> (einfach betreten, kein Rätsel), von den 60 versteckten <strong>Abyss-Cressets</strong> der Oberwelt und von den Sky-/Restoration-Puzzles im Abyss. Nicht jeder Energiepunkt hat ein Rätsel — hier stehen nur die <strong>mit</strong> Rätsel.</p>
     </div>
@@ -4370,19 +4554,19 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-minigames">
-    <h2 class="sec-t"><span class="sec-sym">⚀</span> Minispiele</h2>
+    <h2 class="sec-t"><span class="sec-sym">⚀</span> Minispiele <span class="sec-t-en">Minigames</span></h2>
     <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Alle spielbaren Minigames in Pywel — von den Launch-Klassikern (Armdrücken, Duo, Duelle) bis zu den 1.10-Neuzugängen Pinball und Orb Roll. Viele hängen an den Mind-Games-/Racing-Challenges.</p>
     <div class="cards" id="minigame-list"></div>
   </section>
 
   <section class="sec" id="sec-bestiary">
-    <h2 class="sec-t"><span class="sec-sym">⛤</span> Bestiarium</h2>
-    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Normale Gegner und Wildtiere in Pywel — Wildtiere fürs Skinning, Monster &amp; Kreaturen mit ihren Material-Drops und die feindlichen Fraktionen aller fünf Regionen. Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items). Bosse stehen in der Boss-Sektion.</p>
+    <h2 class="sec-t"><span class="sec-sym">⛤</span> Gegner <span class="sec-t-en">Creatures</span></h2>
+    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Normale Gegner und Wildtiere in Pywel — Wildtiere fürs Skinning, Monster &amp; Kreaturen mit ihren Material-Drops und die feindlichen Fraktionen aller fünf Regionen. Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items). Bosse stehen auf der Seite Bosse.</p>
     <div id="bestiary-root"></div>
   </section>
 
   <section class="sec" id="sec-npcs">
-    <h2 class="sec-t"><span class="sec-sym">♟</span> Charaktere &amp; NPCs</h2>
+    <h2 class="sec-t"><span class="sec-sym">♟</span> Charaktere &amp; NPCs <span class="sec-t-en">People</span></h2>
     <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Wichtige benannte Figuren aus Crimson Desert: Begleiter, Verbündete, Antagonisten und Händler, jeweils mit Rolle, Region und kurzer Bio. Quellengestützt (questlog-Spieldaten, Fextralife, game8, PowerPyx); unsichere Angaben sind als Badge markiert. Oben findest du eine Erklärung des Trust-Systems.</p>
     <div id="npcs-root"></div>
   </section>
@@ -4439,14 +4623,14 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-favorites">
-    <h2 class="sec-t"><span class="sec-sym">☆</span> Favoriten</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Markiere Bosse, Skills, Waffen oder Mounts mit ⭐ um sie hier zu sammeln. Speicherung lokal.</div>
+    <h2 class="sec-t"><span class="sec-sym">☆</span> Merkliste <span class="sec-t-en">Favoriten</span></h2>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Markiere Bosse, Fähigkeiten, Waffen oder Reittiere mit ⭐, um sie hier zu sammeln. Speicherung lokal.</div>
     <div id="fav-list"></div>
   </section>
 
   <section class="sec" id="sec-roadmap">
-    <h2 class="sec-t"><span class="sec-sym">⚑</span> Roadmap — Was als Nächstes?</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Personalisierte Aufgaben-Empfehlung basierend auf deinem Fortschritt. Auto-update bei jeder Aktion. Klick auf Task → springt zur passenden Section.</div>
+    <h2 class="sec-t"><span class="sec-sym">⚑</span> Roadmap</h2>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Personalisierte Aufgaben-Empfehlung basierend auf deinem Fortschritt. Auto-update bei jeder Aktion. Klick auf Task → springt zur passenden Seite.</div>
     <div class="rm-progress" id="rm-progress"></div>
     <div class="rm-task-list" id="rm-list"></div>
     <div class="rm-faq" style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px">
@@ -4508,7 +4692,7 @@ select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(-
   </section>
 
   <section class="sec" id="sec-achievements">
-    <h2 class="sec-t"><span class="sec-sym">★</span> Trophäen & Achievements</h2>
+    <h2 class="sec-t"><span class="sec-sym">★</span> Trophäen &amp; Errungenschaften <span class="sec-t-en">Trophies / Achievements</span></h2>
     <h3 class="sub-t" style="margin-top:0">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</h3>
     <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Außer Platin und den Story-/Lager-Trophäen hängt jede Trophäe an einer Herausforderungs-Kategorie im Journal (Challenges); Platin ist laut PowerPyx („Minimum Playthroughs: 1“) und ConsolePulse in einem Durchgang möglich, nach dem Epilog bleibt Free-Roam; 8BitToast beschreibt denselben Ablauf (Story, danach Free-Roam für die restlichen Challenges). Uneinig sind die Quellen bei der Verpassbarkeit: PowerPyx führt fünf Trophäen als verpassbar (Shadowlord, Battlefield Conqueror, Brilliant Tactician, Grand Collector of Arms, Unvanquished Strategist), 8BitToast kennt keine dauerhaft verpassbaren Trophäen und nur zwei Wachturm-Challenges (Sinking Fort, Barraging Cannon V), die nach der Befreiung aller Feindlager entfallen könnten; Leserkommentare bei PowerPyx berichten dagegen, dass der Wachturm-Abbau auch in befreiten Lagern zählt. Die Markierungen im Wiki folgen PowerPyx (conf medium). Drei Challenge-Kategorien, die questlog in einer eigenen Gruppe führt, kommen in keiner der 35 Trophäenbeschreibungen vor (Schluss aus der Trophäenliste, keine Quellenaussage): Mysterious Animals (2: Hyacinth Macaw, Iron Eagle), Toys (5) und Pets (4, schalten Pet-Plätze frei), zusammen 11 Challenges. Quellen: PowerPyx, Steam-Erfolgsliste, questlog.gg (Herausforderungs-Zahlen), ConsolePulse, Fextralife (Stand 10/2026).</div>
     <div id="trophy-filter" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0"></div>
@@ -5384,7 +5568,7 @@ function renderRoadmap(){
     prio:'lo',
     title:'Build-Empfehlung für deine Phase',
     desc:`Phase ${phase.l} — passende Loadouts pro Spielstil.`,
-    meta:['Builds-Section'],
+    meta:['Seite Builds'],
     action:`showSec('builds')`
   });
 
@@ -5648,7 +5832,7 @@ function renderSecrets(){
       <div class="sec-hero">
         <div class="sec-hero-title">Memory Fragments &amp; Visione</div>
         <div class="sec-hero-body">
-          <span class="sec-hero-num">201</span>Memory Fragments verzeichnet die interaktive Karte von crimsondesert.th.gl (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht (consolepulse nennt für die Knowledge-Kategorie Memory Fragments 327, Einzelquelle; die Fortschrittsanzeige im Knowledge-Menü führt in dieser Kategorie 214 Einträge, siehe Knowledge-Sektion). Die drei Zahlen 201, 214 und 327 stammen aus unterschiedlichen Zählweisen und Zeitpunkten und werden hier nicht gegeneinander entschieden. Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
+          <span class="sec-hero-num">201</span>Memory Fragments verzeichnet die interaktive Karte von crimsondesert.th.gl (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht (consolepulse nennt für die Knowledge-Kategorie Memory Fragments 327, Einzelquelle; die Fortschrittsanzeige im Knowledge-Menü führt in dieser Kategorie 214 Einträge, siehe Seite Sammelgegenstände). Die drei Zahlen 201, 214 und 327 stammen aus unterschiedlichen Zählweisen und Zeitpunkten und werden hier nicht gegeneinander entschieden. Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
         </div>
       </div>
 
@@ -6357,7 +6541,7 @@ function renderTrophies(){
       +facBadges(t)+'</div>'
       +'<div style="font-size:12px;color:var(--iron-gall);margin:4px 0 0">'+escHtml(t.desc)+'</div>'
       +(t.tip?'<div style="font-size:var(--fs-11-5);color:var(--dim);margin-top:4px">💡 '+escHtml(t.tip)+'</div>':'')
-      +(t.sec?'<button class="empty-state-action" style="margin-top:6px" onclick="showSec(\''+t.sec+'\')">Passende Wiki-Sektion →</button>':'')
+      +(t.sec?'<button class="empty-state-action" style="margin-top:6px" onclick="showSec(\''+t.sec+'\')">Passende Wiki-Seite →</button>':'')
       +'</div>';
   }).join('');
   const rm=document.getElementById('trophy-roadmap');
@@ -6613,34 +6797,43 @@ function _leafCount(id){
   }catch(e){}
   return (SECTION_BY_ID[id]||{}).count || '';
 }
-let _curRes = 'kampf';
-let _contentRes = 'kampf';
+let _curRes = 'start';
+let _contentRes = 'start';
 function _isMobile(){ return window.matchMedia('(max-width:860px)').matches; }
+/* Navigations-Umbau 10/2026: Texte kommen aus RESSORTS/SECTIONS (d04). Kleine Helfer fuer
+   sicheres HTML und den Vergleich DE-Name/EN-Begriff (EN nur zeigen, wenn er sich unterscheidet). */
+function _navEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function _navKey(s){ return String(s||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,''); }   // „Rüstung“ = „Ruestung“
+function _navEn(s){ return (s && s.en && _navKey(s.en)!==_navKey(s.name)) ? s.en : ''; }
+function _navPageCount(n){ return n+(n===1?' Seite':' Seiten'); }
+/* Anzahl neben dem Seitennamen nur, wenn sie etwas zählt (Ziffer enthalten: „100“, „6 Zweige“, Patch-Stand).
+   Reine Wörter wie „Liste“ oder „Tabellen“ waren nur Füllrauschen und kosten auf schmalen Kacheln Platz. */
+function _navCountShown(id){ const c=String(_leafCount(id)||''); return /\d/.test(c)?c:''; }
 
 function renderRail(){
   const host=document.getElementById('railScroll');
   if(!host)return;
   host.innerHTML=RESSORTS.map(r=>
-    '<button class="rail-item" type="button" data-res="'+r.id+'" title="'+r.label+' — '+r.tag+'">'
+    '<button class="rail-item" type="button" data-res="'+r.id+'" title="'+_navEsc(r.label+': '+r.tag)+'">'
     +'<span class="glyph" aria-hidden="true">'+r.glyph+'</span>'
-    +'<span class="rl">'+r.label+'</span>'
-    +'<span class="rno">'+r.col+'</span>'
+    +'<span class="rl">'+_navEsc(r.short||r.label)+'</span>'
     +'</button>').join('');
   host.querySelectorAll('.rail-item').forEach(b=>{ b.addEventListener('click',()=>openRessort(b.dataset.res)); });
 }
 function renderConsole(resId){
   const r=RESSORT_BY_ID[resId]; if(!r)return;
   const leaves=SECTIONS.filter(s=>s.res===resId);
-  const kick=document.getElementById('conKick'); if(kick)kick.textContent='Ressort '+r.col;
+  const kick=document.getElementById('conKick'); if(kick)kick.textContent=r.tag;
   const nm=document.getElementById('conName'); if(nm)nm.textContent=r.label;
-  const meta=document.getElementById('conMeta'); if(meta)meta.textContent=leaves.length+(leaves.length===1?' Blatt · ':' Blätter · ')+r.tag;
+  const meta=document.getElementById('conMeta'); if(meta)meta.textContent=_navPageCount(leaves.length);
   const host=document.getElementById('conList'); if(!host)return;
-  host.innerHTML='<div class="console-note">Blätter dieses Ressorts</div>'+leaves.map(s=>
-    '<button class="leaf" type="button" data-sec="'+s.id+'">'
+  host.innerHTML=leaves.map(s=>{
+    const en=_navEn(s);
+    return '<button class="leaf" type="button" data-sec="'+s.id+'" title="'+_navEsc(s.desc||s.name)+'">'
     +'<span class="lsym" aria-hidden="true">'+s.glyph+'</span>'
-    +'<span class="lname">'+s.name+'</span>'
-    +'<span class="lmeta"><span class="lcoord">'+s.coord+'</span><span class="lcount">'+_leafCount(s.id)+'</span></span>'
-    +'</button>').join('');
+    +'<span class="ltxt"><span class="lname">'+_navEsc(s.name)+'</span>'+(en?'<span class="len">'+_navEsc(en)+'</span>':'')+'</span>'
+    +'<span class="lmeta"><span class="lcount">'+_navEsc(_navCountShown(s.id))+'</span></span>'
+    +'</button>';}).join('');
   host.querySelectorAll('.leaf').forEach(b=>{ b.addEventListener('click',()=>showSec(b.dataset.sec)); });
   host.classList.remove('swap'); void host.offsetWidth; host.classList.add('swap');
   markConsoleActive();
@@ -6665,7 +6858,7 @@ function markRailActive(){
     // .reading (Ressort haelt aktuellen Inhalt, waehrend man woanders blaettert) auch nicht-visuell melden
     let sr=i.querySelector('.vh.rail-reading-sr');
     if(reading){
-      if(!sr){ sr=document.createElement('span'); sr.className='vh rail-reading-sr'; sr.textContent='(hält aktuelles Blatt)'; i.appendChild(sr); }
+      if(!sr){ sr=document.createElement('span'); sr.className='vh rail-reading-sr'; sr.textContent='(enthält die geöffnete Seite)'; i.appendChild(sr); }
     } else if(sr){ sr.remove(); }
   });
 }
@@ -6693,6 +6886,8 @@ function applyConsoleDefault(){
 function openSheet(){ document.getElementById('sidebar').classList.add('open'); const s=document.getElementById('mob-overlay'); if(s)s.classList.add('show'); const h=document.getElementById('ham'); if(h)h.setAttribute('aria-expanded','true'); }
 function closeSheet(){ document.getElementById('sidebar').classList.remove('open'); const s=document.getElementById('mob-overlay'); if(s)s.classList.remove('show'); const h=document.getElementById('ham'); if(h)h.setAttribute('aria-expanded','false'); }
 function openRessort(resId){
+  /* Kategorie „Start“ öffnet direkt die Übersichtsseite (alle Geräte), statt nur ihre Seitenliste. */
+  if(resId==='start'){ if(!_isMobile()) expandConsole(false); showSec('start'); return; }
   _curRes=resId;
   expandConsole(false);
   renderConsole(resId);
@@ -6709,14 +6904,17 @@ function openRessort(resId){
      gelesenen Blatt zu springen. Der Sprung passiert bei der Blattwahl, die die Konsole dann
      auch wieder zufahren lässt. */
   else if(_isTabletWide() && leaves.length>1){ /* Konsole steht offen, Auswahl abwarten */ }
-  else if(jump){ showSec(jump); }
+  /* Desktop: ohne gemerkte Seite die erste Seite der Kategorie öffnen (Admin 08.10.2026),
+     sonst wechselte nur die Liste und der Klick wirkte wirkungslos. */
+  else if(jump||leaves.length){ showSec(jump||leaves[0].id); }
 }
 function updateBlattbar(s){
   const r=RESSORT_BY_ID[s.res]; if(!r)return;
-  const er=document.getElementById('bbRes'); if(er)er.textContent=r.label;
+  /* Brotkrume „Start / Kategorie / Seite“. Seiten der Kategorie Start zeigen nur „Start / Seite“. */
+  const own=s.res==='start';
+  const er=document.getElementById('bbRes'); if(er){ er.textContent=r.label; er.hidden=own; }
+  const es=document.getElementById('bbResSep'); if(es)es.hidden=own;
   const el=document.getElementById('bbLeaf'); if(el)el.textContent=s.name;
-  const ep=document.getElementById('bbPlate'); if(ep)ep.textContent=s.plate;
-  const eb=document.getElementById('bbCoord'); if(eb)eb.textContent=s.coord;
 }
 /* additiver showSec-Hook: NUR Registratur-Ableitung (Rail/Konsole/Blattbar/lastleaf). */
 function _registraturSync(id){
@@ -6732,6 +6930,8 @@ function _registraturSync(id){
      (cd_console_collapsed==='0'), behält sie. */
   if(_isTabletWide() && _consolePref()!=='0') collapseConsole(false);
   try{ localStorage.setItem('cd_lastleaf_'+res, id); }catch(e){}
+  /* Sprungtreffer an den Suchstand angleichen (showSec leert die Suche ohne input-Event). */
+  try{ const si=document.getElementById('si'); renderNavJump(si?si.value:''); }catch(e){}
 }
 function _syncRailThemeLbl(){
   const map={dark:'Tag',sepia:'Nacht',amoled:'AMOLED'};
@@ -6745,22 +6945,143 @@ function initRegistratur(){
      setzen, solange der Nutzer nicht selbst entschieden hat. Sorgt nebenbei dafür, dass die
      Collapse-Klasse beim Wechsel ins Sheet-Layout (<=860px) wieder verschwindet. */
   try{ window.matchMedia('(min-width:861px) and (max-width:1200px)').addEventListener('change',()=>{ if(_consolePref()===null) applyConsoleDefault(); }); }catch(e){}
-  const start=localStorage.getItem('cd_sec')||'bosses';
-  _curRes=SECTION_RESSORT[start]||'kampf';
+  const start=localStorage.getItem('cd_sec')||'start';
+  _curRes=SECTION_RESSORT[start]||'start';
   renderConsole(_curRes);
   markRailActive();
-  const rf=document.getElementById('railFind'); if(rf)rf.addEventListener('click',()=>{const si=document.getElementById('si');if(si){ if(_isMobile())openSheet(); si.focus(); si.select(); }});
+  const rf=document.getElementById('railFind'); if(rf)rf.addEventListener('click',()=>{const si=document.getElementById('si');if(si){ if(_isMobile())openSheet(); else expandConsole(false); si.focus(); si.select(); }});
   const rt=document.getElementById('railTheme'); if(rt)rt.addEventListener('click',()=>{ if(typeof cycleTheme==='function')cycleTheme(); _syncRailThemeLbl(); });
   _syncRailThemeLbl();
-  /* Einklapp-Knopf und Griff sind ausdrückliche Nutzerwahl und werden gemerkt. Der Register-Knopf
+  /* Einklapp-Knopf und Griff sind ausdrückliche Nutzerwahl und werden gemerkt. Der Menü-Knopf
      in der Blattbar holt die Liste dagegen nur kurz hervor (mobil das Sheet) und soll die Vorgabe
      im Tablet-Querformat nicht dauerhaft aushebeln. */
   const cc=document.getElementById('conCollapse'); if(cc)cc.addEventListener('click',()=>collapseConsole(true));
   const cr=document.getElementById('conReopen'); if(cr)cr.addEventListener('click',()=>expandConsole(true));
   const bc=document.getElementById('bbConsole'); if(bc)bc.addEventListener('click',()=>{ if(_isMobile())openSheet(); else expandConsole(false); });
-  const bh=document.getElementById('bbHome'); if(bh)bh.addEventListener('click',()=>openRessort('einstieg'));
+  const bh=document.getElementById('bbHome'); if(bh)bh.addEventListener('click',()=>showSec('start'));
   const grip=document.querySelector('#sidebar .sheet-grip'); if(grip)grip.addEventListener('click',closeSheet);
+  const nj=document.getElementById('navJump'); if(nj)nj.addEventListener('click',_navJumpClick);
   window.addEventListener('resize',()=>{ if(!_isMobile()){ closeSheet(); } });
+}
+
+/* ── Such-Sprungtreffer (A4) ──────────────────────────────────────────────
+   Tippt man einen Seiten- oder Kategorienamen, den englischen Spielbegriff oder ein
+   Suchwort aus SECTIONS[].aka, erscheint unter dem Suchfeld „Seite: Reittiere, öffnen“.
+   Rein additiv: die Volltextsuche (_doSearchImpl) bleibt unverändert und ruft nur
+   renderNavJump(q) auf. Treffer-Güte: 3 = exakt, 2 = Wortanfang/Singular, 1 = enthalten. */
+function _navTermScore(term,k){
+  const t=_navKey(term); if(!t)return 0;
+  if(t===k)return 3;
+  if(t.startsWith(k))return 2;
+  if(t.length>=4 && k.startsWith(t) && k.length-t.length<=2)return 2;   // „Reittiere“ findet „Reittier“
+  if(k.length>=4 && t.includes(k))return 1;
+  return 0;
+}
+function _navJumpHits(q){
+  const k=_navKey(q);
+  if(k.length<3)return [];
+  const cur=(function(){ try{ return localStorage.getItem('cd_sec')||''; }catch(e){ return ''; } })();
+  const out=[];
+  RESSORTS.forEach(r=>{
+    if(r.id==='start')return;
+    const sc=Math.max(_navTermScore(r.label,k),_navTermScore(r.short,k));
+    if(sc>=2)out.push({kind:'res',id:r.id,glyph:r.glyph,name:r.label,en:'',score:sc+.5});
+  });
+  SECTIONS.forEach(s=>{
+    if(s.id===cur)return;
+    // Treffer auf Name/EN-Begriff wiegen etwas mehr als ein Suchwort (aka): „abyss“ zeigt Abyss-Ausrüstung vor Fähigkeiten
+    const nameSc=Math.max(_navTermScore(s.name,k),_navTermScore(s.en,k));
+    let sc=nameSc?nameSc+.5:0;
+    (s.aka||[]).forEach(a=>{ sc=Math.max(sc,_navTermScore(a,k)); });
+    if(sc)out.push({kind:'sec',id:s.id,glyph:s.glyph,name:s.name,en:_navEn(s),score:sc+(_navKey(s.name)===k?1:0)});
+  });
+  out.sort((a,b)=>b.score-a.score);
+  return out.slice(0,4);
+}
+function renderNavJump(q){
+  const box=document.getElementById('navJump'); if(!box)return;
+  const hits=_navJumpHits(q||'');
+  if(!hits.length){ box.hidden=true; box.innerHTML=''; return; }
+  box.innerHTML='<div class="nj-hd" id="njHd">Direkt öffnen</div>'
+    +hits.map(h=>'<button type="button" class="nj-hit" data-kind="'+h.kind+'" data-id="'+h.id+'" aria-describedby="njHd">'
+      +'<span class="nj-g" aria-hidden="true">'+h.glyph+'</span>'
+      +'<span class="nj-t"><span class="nj-k">'+(h.kind==='res'?'Kategorie':'Seite')+':</span> <span class="nj-n">'+_navEsc(h.name)+'</span>'
+      +(h.en?' <span class="nj-en">'+_navEsc(h.en)+'</span>':'')+'</span>'
+      +'<span class="nj-go" aria-hidden="true">öffnen &rarr;</span></button>').join('');
+  box.hidden=false;
+}
+function _navJumpClick(e){
+  const b=e.target.closest('.nj-hit'); if(!b)return;
+  if(b.dataset.kind==='res'){
+    const si=document.getElementById('si'); if(si)si.value='';
+    if(typeof _doSearchImpl==='function')_doSearchImpl('');
+    openRessort(b.dataset.id);
+    /* Mobil bleibt das Sheet offen und zeigt die Seiten der Kategorie; Desktop: Fokus in die Liste */
+    const first=document.querySelector('#conList .leaf'); if(first)first.focus();
+  } else {
+    showSec(b.dataset.id);
+  }
+}
+
+/* ── Übersichtsseite „Start“ (A3) ────────────────────────────────────────
+   Wird aus RESSORTS/SECTIONS gerendert (keine doppelt gepflegten Listen), lazy über
+   SEC_RENDERERS.start. Kacheln sind echte Links (#sec=<id>), damit Mittelklick/neuer Tab
+   funktioniert; ein normaler Klick geht über showSec. */
+const START_POPULAR=[
+  {sec:'bosses'},{sec:'weapons'},
+  {sec:'quests',tab:'mq',label:'Hauptquests'},{sec:'quests',tab:'te',label:'True Ending'},
+  {sec:'map'},{sec:'checklists'},{sec:'crafting'},{sec:'cores'}
+];
+function _startHref(sec,tab){ return '#sec='+sec+(tab?'&tab='+tab:''); }
+function renderStartOverview(){
+  const root=document.getElementById('start-root'); if(!root)return;
+  const pages=SECTIONS.filter(s=>s.id!=='start');
+  const pop=START_POPULAR.filter(p=>SECTION_BY_ID[p.sec]).map(p=>{
+    const s=SECTION_BY_ID[p.sec];
+    return '<span role="listitem"><a class="so-chip" href="'+_startHref(p.sec,p.tab)+'" data-go="'+p.sec+'"'+(p.tab?' data-tab="'+p.tab+'"':'')+'>'
+      +'<span class="g" aria-hidden="true">'+s.glyph+'</span>'+_navEsc(p.label||s.name)+'</a></span>';
+  }).join('');
+  let h='<p class="so-lead">Alle '+pages.length+' Seiten des Wikis, sortiert nach dem, was du im Spiel gerade brauchst. Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p>'
+    +'<button type="button" class="so-search" id="soSearch"><span class="so-search-g" aria-hidden="true">&#9906;</span>'
+    +'<span class="so-search-t">Suchen: Bosse, Waffen, Quests, Orte …</span><span class="so-search-k" aria-hidden="true">Strg K</span></button>'
+    +'<div class="so-pop"><span class="so-pop-l" id="soPopL">Häufig gesucht</span><div class="so-pop-list" role="list" aria-labelledby="soPopL">'+pop+'</div></div>';
+  RESSORTS.forEach(r=>{
+    const list=pages.filter(s=>s.res===r.id); if(!list.length)return;
+    h+='<div class="so-cat" role="group" aria-labelledby="so-cat-'+r.id+'">'
+      +'<div class="so-cat-hd"><span class="so-cat-g" aria-hidden="true">'+r.glyph+'</span>'
+      +'<h3 class="so-cat-t" id="so-cat-'+r.id+'">'+_navEsc(r.label)+'</h3>'
+      +'<span class="so-cat-tag">'+_navEsc(r.id==='start'?'Einsteiger-Tipps, Neuigkeiten und deine Merkliste':r.tag)+'</span>'
+      +'<span class="so-cat-n">'+_navPageCount(list.length)+'</span></div>'
+      +'<div class="so-grid">'+list.map(s=>{
+        const en=_navEn(s);
+        return '<a class="so-tile" href="'+_startHref(s.id)+'" data-go="'+s.id+'">'
+          +'<span class="so-tile-g" aria-hidden="true">'+s.glyph+'</span>'
+          +'<span class="so-tile-body"><span class="so-tile-top"><span class="so-tile-n">'+_navEsc(s.name)+'</span>'
+          +(_navCountShown(s.id)?'<span class="so-tile-c">'+_navEsc(_navCountShown(s.id))+'</span>':'')+'</span>'
+          +(en?'<span class="so-tile-en">'+_navEsc(en)+'</span>':'')
+          +'<span class="so-tile-d">'+_navEsc(s.desc)+'</span></span></a>';
+      }).join('')+'</div></div>';
+  });
+  root.innerHTML=h;
+  if(!root.dataset.wired){
+    root.dataset.wired='1';
+    root.addEventListener('click',e=>{
+      if(e.target.closest('#soSearch')){ _startFocusSearch(); return; }
+      const a=e.target.closest('a[data-go]'); if(!a)return;
+      if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;   // neuer Tab/Fenster: Browser machen lassen
+      e.preventDefault();
+      showSec(a.dataset.go);
+      if(a.dataset.tab && typeof _applyTabParam==='function'){
+        _applyTabParam(a.dataset.go,a.dataset.tab);
+        try{ history.replaceState(null,'',_startHref(a.dataset.go,a.dataset.tab)); }catch(err){}   // Reload behält den Reiter
+      }
+    });
+  }
+}
+function _startFocusSearch(){
+  const si=document.getElementById('si'); if(!si)return;
+  if(_isMobile())openSheet(); else expandConsole(false);
+  si.focus();
 }
 
 // ===== NAVIGATION =====
@@ -6770,7 +7091,7 @@ function showSec(id, opts){
   // (gleiches Muster wie das Legacy-Hash-Regex ^sec-([a-z0-9-]+)$ in _readUrlState). Ein
   // manipulierter Hash wie #sec=%22 dekodiert valide zu '"' und wuerde unten einen ungueltigen
   // querySelector-Selektor bauen -> SyntaxError. Darum hier auf '' normalisieren, damit der
-  // bestehende !sec-Fallback ('bosses') greift.
+  // bestehende !sec-Fallback (seit 10/2026 die Übersicht 'start') greift.
   if(id&&!/^[a-z0-9-]+$/.test(id))id='';
   const sec=document.getElementById('sec-'+id);
   // Registratur: das Nav-Item ist jetzt ein Konsolen-.leaf und existiert nur, wenn
@@ -6778,8 +7099,8 @@ function showSec(id, opts){
   // Sektion; die aktive Blatt-Markierung uebernimmt markConsoleActive() im Hook,
   // nachdem renderConsole das Ressort des Ziels gerendert hat.
   const nav=document.querySelector('#conList .leaf[data-sec="'+id+'"]');
-  // Ungueltige Sektion: Fallback Bosse, und der kaputte Hash (#sec=nichtvorhanden) wird dabei ersetzt statt stehenzubleiben
-  if(!sec){ if(id!=='bosses') return showSec('bosses',Object.assign({},opts,{skipUrl:false,replaceUrl:true})); return; }
+  // Ungueltige Sektion: Fallback Übersicht (bis 10/2026: Bosse), und der kaputte Hash (#sec=nichtvorhanden) wird dabei ersetzt statt stehenzubleiben
+  if(!sec){ if(id!=='start') return showSec('start',Object.assign({},opts,{skipUrl:false,replaceUrl:true})); return; }
   ensureSecRendered(id);
   // Re-render favorites when entering that section (favs may have changed since init)
   if(id==='favorites'&&typeof renderFavorites==='function')renderFavorites();
@@ -6838,7 +7159,7 @@ function _readUrlState(){
   return p;
 }
 function _writeUrlState(pushEntry){
-  const sec=localStorage.getItem('cd_sec')||'bosses';
+  const sec=localStorage.getItem('cd_sec')||'start';
   const q=document.getElementById('si').value.trim();
   const parts=['sec='+encodeURIComponent(sec)];
   if(q)parts.push('q='+encodeURIComponent(q));
@@ -6936,7 +7257,7 @@ function renderLegendaryPetGuide(){
           +'<span style="font-size:var(--fs-9);font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:999px;padding:2px 7px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
           +'<span style="font-size:var(--fs-9);font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:999px;padding:2px 7px;letter-spacing:.04em" title="Schritte nur über Community-Guides belegt, teils widersprüchlich">DETAILS: COMMUNITY (≈)</span>'
         +'</div>'
-        +'<div style="font-size:12px;color:var(--dim);line-height:1.6">Der mechanische Adler, den viele als „Marnis Adler" suchen. Offizieller Ingame-Name: <strong style="color:var(--gold)">Iron Eagle</strong>. Ein legendärer bio-mechanischer Vogel-<strong>Begleiter</strong> (kein Reittier), laut Lore „vom genialen Erfinder <strong>Marni</strong> erschaffen" — daher die Marni-Verbindung. Offiziell mit <strong>Patch 1.05.00</strong> als zähmbares Pet eingeführt (Pearl Abyss: „erscheint, wenn bestimmte Bedingungen erfüllt sind"). Nicht mit <em>Marni\'s Mechahorse</em> (mechanisches Pferd, siehe Mounts) verwechseln.</div>'
+        +'<div style="font-size:12px;color:var(--dim);line-height:1.6">Der mechanische Adler, den viele als „Marnis Adler" suchen. Offizieller Ingame-Name: <strong style="color:var(--gold)">Iron Eagle</strong>. Ein legendärer bio-mechanischer Vogel-<strong>Begleiter</strong> (kein Reittier), laut Lore „vom genialen Erfinder <strong>Marni</strong> erschaffen" — daher die Marni-Verbindung. Offiziell mit <strong>Patch 1.05.00</strong> als zähmbares Pet eingeführt (Pearl Abyss: „erscheint, wenn bestimmte Bedingungen erfüllt sind"). Nicht mit <em>Marni\'s Mechahorse</em> (mechanisches Pferd, siehe Reittiere) verwechseln.</div>'
       +'</div>'
     +'</div>'
     +'<div class="crows" style="margin-top:14px;gap:9px;display:flex;flex-direction:column">'
@@ -7403,6 +7724,8 @@ function _doSearchImpl(q){
     if(typeof _writeUrlState==='function')_writeUrlState();
     return;
   }
+  // Navigations-Umbau 10/2026 (A4): Sprungtreffer zu Seiten/Kategorien, additiv vor den normalen Treffern
+  if(typeof renderNavJump==='function'){try{renderNavJump(q);}catch(e){}}
   const qLow=q.toLowerCase();
   const qF=_fold(q)||qLow;
   const cnt=document.getElementById('scnt');
@@ -7494,13 +7817,15 @@ function _doSearchImpl(q){
     es.className='empty-state empty-state-injected';
     es.innerHTML=`
       <span class="empty-state-icon">🔍</span>
-      <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}" in dieser Sektion</div>
+      <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}" auf dieser Seite</div>
       ${other.length
-        ?`<div class="empty-state-desc">Aber in anderen Sektionen gefunden — direkt hinspringen:</div><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px;max-width:560px;margin:0 auto">${chips}</div>`
-        :`<div class="empty-state-desc">Auch in den anderen Sektionen nichts gefunden. Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>`}
+        ?`<div class="empty-state-desc">Aber auf anderen Seiten gefunden — direkt hinspringen:</div><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px;max-width:560px;margin:0 auto">${chips}</div>`
+        :`<div class="empty-state-desc">Auch auf den anderen Seiten nichts gefunden. Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>`}
       <button class="empty-state-action" style="margin-top:10px;opacity:.75" onclick="document.getElementById('si').value='';doSearch('');document.getElementById('si').focus()">Suche zurücksetzen</button>
     `;
-    activeSec.appendChild(es);
+    // Übersichtsseite (Navigations-Umbau 10/2026): Hinweis oben statt unter 34 Kacheln, sonst sieht ihn niemand
+    if(activeSec.id==='sec-start'&&activeSec.children[1])activeSec.insertBefore(es,activeSec.children[1]);
+    else activeSec.appendChild(es);
   }
 }
 // Skills-Sektion: Hat ein Suchbegriff Treffer in mehreren Panes (gleichnamige Skills bei Kliff/Damiane/Oongka, Watch & Learn, Freischaltungen),
@@ -8543,7 +8868,7 @@ function renderSideQuests(){
       <div class="sq-lane-body">${rows}</div>
     </div>`;
   }).join('');
-  const intro='<div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">'+normal.length+' freie Side-Quests + <b style="color:var(--glo)">'+specials.length+' legend&auml;re Mount-Quests</b> (Sigil) au&szlig;erhalb von Hauptstory und Fraktionen, nach Region gruppiert &middot; Zeile anklicken f&uuml;r Details.<br><b>Gating-Regel:</b> Townsfolk-Requests/Commissions skalieren mit dem <b>Hauptquest-/Kapitel-Fortschritt</b> (nicht mit Ruf) &mdash; neue Aush&auml;nge erscheinen St&uuml;ck f&uuml;r St&uuml;ck, der &Uuml;bergang Kapitel&nbsp;4/5 &ouml;ffnet einen gro&szlig;en Block. &bdquo;&mdash;&ldquo; = kein eigenes Gate (ab Regions-Ankunft verf&uuml;gbar). Fraktions-Quests haben eigene Ruf-/Contribution-Schwellen (Tab Fraktionen).<br><span style="color:var(--warn)">Verpassbar:</span> Offene Pailune-H&auml;ndler-Requests von Lola, Gunter und Harry k&ouml;nnen beim sp&auml;teren Camp-Umzug als fehlgeschlagen markiert werden &mdash; vorher erledigen. Die Bewohner-Requests im Greymane Camp stehen in der Greymane-Sektion.</div>';
+  const intro='<div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">'+normal.length+' freie Side-Quests + <b style="color:var(--glo)">'+specials.length+' legend&auml;re Mount-Quests</b> (Sigil) au&szlig;erhalb von Hauptstory und Fraktionen, nach Region gruppiert &middot; Zeile anklicken f&uuml;r Details.<br><b>Gating-Regel:</b> Townsfolk-Requests/Commissions skalieren mit dem <b>Hauptquest-/Kapitel-Fortschritt</b> (nicht mit Ruf) &mdash; neue Aush&auml;nge erscheinen St&uuml;ck f&uuml;r St&uuml;ck, der &Uuml;bergang Kapitel&nbsp;4/5 &ouml;ffnet einen gro&szlig;en Block. &bdquo;&mdash;&ldquo; = kein eigenes Gate (ab Regions-Ankunft verf&uuml;gbar). Fraktions-Quests haben eigene Ruf-/Contribution-Schwellen (Tab Fraktionen).<br><span style="color:var(--warn)">Verpassbar:</span> Offene Pailune-H&auml;ndler-Requests von Lola, Gunter und Harry k&ouml;nnen beim sp&auml;teren Camp-Umzug als fehlgeschlagen markiert werden &mdash; vorher erledigen. Die Bewohner-Requests im Greymane Camp stehen auf der Seite Graumähnen-Camp.</div>';
   const sqDoneAll=SIDE_QUESTS.filter(isDone).length;
   const progressBar='<div class="sq-progress-bar">&#10003; Erledigt: <b style="color:var(--glo)"><span id="sq-progress">'+sqDoneAll+'/'+SIDE_QUESTS.length+'</span></b> <button class="cl-reset" onclick="if(confirm(\'Alle Side-Quest-Haken zurücksetzen?\')){saveSQ([]);renderSideQuests();if(typeof renderQuestHero===\'function\')renderQuestHero();}">Zurücksetzen</button></div>';
   el.innerHTML=intro+progressBar+'<div class="sq-regbar">'+chips+'</div>'+spLane+lanes;
@@ -8622,28 +8947,146 @@ function renderFactions(){
 }
 
 // ===== LOCATIONS =====
+// Orte-Karten (B5, 08.10.2026): Typ-Symbol auf Regionsband, Anriss + "Mehr lesen", Gruppen je Hauptregion,
+// Patch-Hinweise (Typ mit [x.xx] bzw. Region Einstellungen/Skill-Tree/...) als eingeklappter Block am Ende.
+// Farben je Hauptregion aus BOSS_PH_PALETTES (d04). Symbole sind Text-Glyphen (U+FE0E = Textdarstellung), damit sie die Regionsfarbe annehmen.
+const _LOC_REGS=['Hernand','Pailune','Demeniss','Delesyia','Crimson Desert','The Abyss'];
+const _LOC_HINT_REG=/^(Einstellungen|PC-Performance|Skill-Tree|Überall|Alle Regionen|Wild)$/;
+const _LOC_KINDS=[
+  {re:/Stadt/,g:'⌂',de:'Stadt',c:'tx'},
+  {re:/Dungeon|Farm/,g:'⛏︎',de:'Dungeon / Farm',c:'tx'},
+  {re:/Alchemy/,g:'⚗︎',de:'Alchemie',c:'tx'},
+  {re:/Witch/,g:'☾',de:'Hexe',c:'tg'},
+  {re:/Sanctum/,g:'✠',de:'Sanktum',c:'tg'},
+  {re:/Boss/,g:'☠︎',de:'Boss',c:'tr'},
+  {re:/Mount/,g:'♞',de:'Reittier',c:'tx'},
+  {re:/Unique/,g:'⚔︎',de:'Einzigartige Waffe',c:'tw'},
+  {re:/Camp/,g:'▲',de:'Camp',c:'tx'},
+  {re:/Crafting/,g:'⚒︎',de:'Werkstatt',c:'tx'},
+  {re:/Abyss/,g:'✺',de:'Abyss',c:'tx'},
+  {re:/Faction/,g:'⚑',de:'Fraktion',c:'tx'},
+  {re:/Quest Item/,g:'❢',de:'Quest-Item',c:'tx'},
+  {re:/Skill/,g:'✧',de:'Skill',c:'tx'},
+  {re:/Story/,g:'✎',de:'Story',c:'tx'}
+];
+function _locMain(r){r=String(r||'').trim();return _LOC_REGS.find(k=>r.indexOf(k)===0)||'';}
+function _locSub(r){const m=String(r||'').match(/\(([^)]*)\)/);return m?m[1].trim():'';}
+// Admin 08.10.2026: Boss-Revanchen und Minispiel-Orte (z. B. The Laughing Marionette) sind echte Orte und bleiben im Raster.
+function _locIsHint(l){const t=String(l.type||'');return (/\[\d[\d.]*\]/.test(t)&&!/Rematch|Minigame/.test(t))||_LOC_HINT_REG.test(String(l.region||'').trim());}
+// Typ-Schluesselwoerter in Reihenfolge ihres Auftretens im type-String: erstes = grosses Symbol, weitere = Chips.
+function _locKinds(type){
+  type=String(type||'');
+  const hit=[];
+  _LOC_KINDS.forEach(k=>{const i=type.search(k.re);if(i>=0)hit.push([i,k]);});
+  hit.sort((a,b)=>a[0]-b[0]);
+  return hit.map(h=>h[1]);
+}
+function _locPal(key){
+  const p=(typeof BOSS_PH_PALETTES!=='undefined')?BOSS_PH_PALETTES[key]:null;
+  return p?'--lc-bg:'+p.bg+';--lc-acc:'+p.acc+';--lc-tx:'+p.text:'--lc-bg:var(--vellum-deep);--lc-acc:var(--line-strong);--lc-tx:var(--iron-soft)';
+}
+function _locKap(desc){const out=[];String(desc||'').replace(/Kap\.\s*(\d+)/g,(m,n)=>{if(out.indexOf(n)<0)out.push(n);return m;});return out;}
+// Anriss: erster Satz (45 bis 200 Zeichen) bzw. ca. 160 Zeichen an der Wortgrenze; ab max Zeichen Gesamtlaenge wird gekuerzt.
+function _locSplit(t,max){
+  t=String(t==null?'':t).trim();
+  if(t.length<=max)return {head:t,rest:''};
+  const headMax=Math.min(200,max);
+  const abbr=/(?:^|[\s(])(?:Kap|ca|Nr|bzw|vgl|inkl|ggf|evtl|etc|Dr|St)$/i;
+  const re=/[.!?](?=\s+[A-ZÄÖÜ„"'(])/g;
+  let m,end=0;
+  while((m=re.exec(t))){
+    if(abbr.test(t.slice(0,m.index)))continue;
+    if(m.index+1<45)continue;
+    if(m.index+1<=headMax)end=m.index+1;
+    break;
+  }
+  if(!end){
+    let c=t.lastIndexOf(' ',160);
+    if(c<90)c=160;
+    return {head:t.slice(0,c).replace(/[\s,;:(–—-]+$/,'')+'…',rest:'…'+t.slice(c).trim()};
+  }
+  return {head:t.slice(0,end),rest:t.slice(end).trim()};
+}
+function _locMoreHtml(rest,wasOpen){
+  return rest?`<details class="item-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Mehr lesen</summary><div class="item-more-body"><p class="loc-rest">${escHtml(rest)}</p></div></details>`:'';
+}
+function _locCard(l,show,wasOpen){
+  const kinds=_locKinds(l.type);
+  const k0=kinds[0]||{g:'◈',de:String(l.type||''),c:'tx'};
+  const main=_locMain(l.region),sub=_locSub(l.region);
+  const regTxt=main?(main+(sub?' · '+sub:'')):String(l.region||'');
+  const sp=_locSplit(l.desc,230);
+  const s=[l.name,l.region,l.type,l.desc].concat(kinds.map(k=>k.de)).join(' ').toLowerCase();
+  const vis=[l.name,l.region,l.type,sp.head].concat(kinds.map(k=>k.de)).join(' ').toLowerCase();
+  const chips=(kinds.length?kinds.slice(0,2).map(k=>`<span class="tag ${k.c}">${escHtml(k.de)}</span>`):[`<span class="tag tx">${escHtml(l.type)}</span>`]);
+  _locKap(l.desc).slice(0,2).forEach(n=>chips.push(`<span class="tag pv" title="Im Text genannt: Kap. ${n}">Kap. ${n}</span>`));
+  return `<div class="card loc-card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}" data-item-id="${escHtml(l.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(sp.rest)}" style="${_locPal(main)}">
+    <div class="loc-hd"><span class="loc-wm" aria-hidden="true">${k0.g}</span><span class="loc-sym" aria-hidden="true">${k0.g}</span>
+      <div class="loc-hd-t"><div class="loc-reg" title="${escHtml(l.region)}">${escHtml(regTxt)}</div><h4 class="loc-name">${escHtml(l.name)}</h4></div></div>
+    <div class="loc-bd"><div class="cm loc-chips">${chips.slice(0,4).join('')}</div>
+      <p class="loc-teaser">${escHtml(sp.head)}</p>${_locMoreHtml(sp.rest,wasOpen)}</div>
+  </div>`;
+}
+function _locPatchHtml(hints){
+  const items=hints.map(l=>{
+    const s=[l.name,l.region,l.type,l.desc].join(' ').toLowerCase();
+    return `<div class="loc-pc" data-filtered="0" data-s="${escHtml(s)}"><div class="loc-pc-h"><span class="loc-pc-n">${escHtml(l.name)}</span><span class="tag tx">${escHtml(l.type)}</span></div><div class="loc-pc-r">${escHtml(l.region)}</div><p class="loc-pc-d">${escHtml(l.desc)}</p></div>`;
+  }).join('');
+  return `<details class="loc-patch"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Weitere Hinweise aus Patches (${hints.length})</summary><div class="loc-patch-list">${items}</div></details>`;
+}
 function renderLocs(){
   const reg=document.getElementById('lf-reg').value;
   const type=document.getElementById('lf-type').value;
-  document.getElementById('loc-grid').innerHTML=LOCATIONS.map(l=>{
-    const show=(!reg||l.region.includes(reg))&&(!type||l.type.includes(type));
-    const s=[l.name,l.region,l.type,l.desc].join(' ').toLowerCase();
-    const tc=l.type.includes('Boss')?'tr':l.type.includes('Sanctum')||l.type.includes('Witch')?'tg':l.type.includes('Unique')?'tw':'tx';
-    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
-      <div class="ct">${l.name}</div>
-      <div class="cm"><span class="tag tg">${l.region}</span><span class="tag ${tc}">${l.type}</span></div>
-      <div style="font-size:12px">${l.desc}</div>
-    </div>`;
-  }).join('');
+  const host=document.getElementById('loc-grid');
+  const was={};
+  host.querySelectorAll('.card[data-item-id] details.item-more[open]').forEach(d=>{if(d.dataset.srchOpen!=='1')was[d.closest('.card').dataset.itemId]=1;});
+  const places=[],hints=[];
+  LOCATIONS.forEach(l=>(_locIsHint(l)?hints:places).push(l));
+  const by={};
+  let shown=0;
+  places.forEach(l=>{
+    const main=_locMain(l.region);
+    const show=(!reg||main===reg)&&(!type||String(l.type).includes(type));
+    if(show)shown++;
+    (by[main]=by[main]||[]).push(_locCard(l,show,!!was[l.name]));
+  });
+  const order=_LOC_REGS.concat(['']);
+  host.innerHTML=order.filter(k=>by[k]).map(k=>`<div class="loc-grp" style="${_locPal(k)}"><h3 class="loc-grp-t">${k?escHtml(k):'Weitere Orte'}</h3><div class="loc-grp-bd">${by[k].join('')}</div><span class="loc-grp-n" aria-hidden="true"></span></div>`).join('')+(shown?'':'<p class="loc-empty">Keine Orte für diese Auswahl.</p>');
+  const pc=document.getElementById('loc-patch');
+  if(pc){
+    if(hints.length&&!pc.dataset.built){pc.innerHTML=_locPatchHtml(hints);pc.dataset.built='1';}
+    const off=!!(reg||type);
+    pc.classList.toggle('hide',off);
+    pc.dataset.filtered=off?'1':'0';
+  }
+  const intro=document.getElementById('loc-intro');
+  if(intro)intro.innerHTML=`<b>${places.length}</b> Orte in <b>${order.filter(k=>k&&by[k]).length}</b> Regionen und <b>${BELL_TOWERS.length}</b> Glocken. Eine Weltkarte findest du unter <a href="#" onclick="showSec('map');return false;">Karte</a>.`;
 }
+// Glocken als Karten (B5): Farbe nur, wenn eine Paletten-Region woertlich in Name oder Ort steht; sonst neutral.
 function renderBells(){
-  document.getElementById('bell-tb').innerHTML=BELL_TOWERS.map(b=>`<tr data-s="${[b.name,b.loc,b.mech,b.warn].join(' ').toLowerCase()}">
-    <td><span class="tag tg">#${b.n}</span></td>
-    <td><strong>${b.name}</strong></td>
-    <td style="font-size:var(--fs-11-5)">${b.loc}</td>
-    <td style="font-size:var(--fs-11-5)">${b.mech}</td>
-    <td style="font-size:var(--fs-11)">${b.warn?'<span style="color:var(--warn)">'+b.warn+'</span>':'<span class="dm">–</span>'}</td>
-  </tr>`).join('');
+  const host=document.getElementById('bell-grid');
+  if(!host)return;
+  const was={};
+  host.querySelectorAll('.card[data-item-id] details.item-more[open]').forEach(d=>{if(d.dataset.srchOpen!=='1')was[d.closest('.card').dataset.itemId]=1;});
+  host.innerHTML=BELL_TOWERS.map(b=>{
+    const nm=String(b.name||''),lc=String(b.loc||'');
+    const key=_LOC_REGS.find(k=>nm.indexOf(k)>=0)||_LOC_REGS.find(k=>lc.indexOf(k)>=0)||'';
+    const lbl=nm.replace(/^Toll of\s+/i,'');
+    const sp=_locSplit(b.warn,200);
+    const id='Glocke '+b.n;
+    const s=[b.name,b.loc,b.mech,b.warn,'glocke glockenturm bell tower'].join(' ').toLowerCase();
+    const vis=[b.name,b.loc,b.mech,sp.head,'glocke'].join(' ').toLowerCase();
+    return `<div class="card loc-card bell-card" data-filtered="0" data-s="${escHtml(s)}" data-item-id="${escHtml(id)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(sp.rest)}" style="${_locPal(key)}">
+    <div class="loc-hd"><span class="loc-wm" aria-hidden="true">\u{1F514}︎</span><span class="loc-sym" aria-hidden="true">\u{1F514}︎</span>
+      <div class="loc-hd-t"><div class="loc-reg">${escHtml(lbl)}</div><h4 class="loc-name">${escHtml(nm)}</h4></div>
+      <span class="bell-no" title="Glocke Nr. ${escHtml(b.n)}">Nr. ${escHtml(b.n)}</span></div>
+    <div class="loc-bd">
+      <p class="bell-row"><span class="bell-k">Ort</span><span>${escHtml(lc)}</span></p>
+      <p class="bell-row"><span class="bell-k">Mechanik</span><span>${escHtml(b.mech)}</span></p>
+      ${b.warn?`<div class="bell-warn"><div class="bell-warn-t"><span aria-hidden="true">⚠︎</span><span>${escHtml(sp.head)}</span></div>${_locMoreHtml(sp.rest,!!was[id])}</div>`:''}
+    </div>
+  </div>`;
+  }).join('');
 }
 
 // ===== ARMOR HELPERS =====
@@ -8836,7 +9279,7 @@ function renderArmorSets(){
       const inhalt=t
         ?`<button type="button" onclick="armorZeigeTeil('${escJsStr(t)}')" title="In der Rüstungsliste oben anzeigen">${escHtml(p)}</button>`
         :w
-        ?`<button type="button" onclick="waffeZeigeTeil('${escJsStr(w)}')" title="Keine Rüstung — Eintrag in der Waffensektion anzeigen">${escHtml(p)}</button>`
+        ?`<button type="button" onclick="waffeZeigeTeil('${escJsStr(w)}')" title="Keine Rüstung: Eintrag auf der Seite Waffen anzeigen">${escHtml(p)}</button>`
         :istSammelposten(p)
         ?`<span class="luecke" title="Sammelposten: die Namen dieser Teile sind in keiner Quelle belegt — ein eigener Eintrag ist deshalb nicht möglich">${escHtml(p)}</span>`
         :`<span class="fehlt" title="Im Spiel belegt, aber noch ohne eigenen Eintrag in dieser Rüstungsliste">${escHtml(p)}</span>`;
@@ -9391,7 +9834,7 @@ function renderOverview(){
     {icon:'🎖️',label:'Greymane',done:gmDone,total:gmTotal,tab:'greymane',sub:`+${gmDone*3} Inventarslots`},
     {icon:'🏛️',label:'Sanctums',done:sancDone,total:sancTotal,tab:'sanctums'},
     {icon:'🗡️',label:'Waffen',done:wepDone,total:wepTotal,tab:'waffen'},
-    {icon:'📋',label:'True Ending',done:teDone,total:teTotal,tab:'bosses'},
+    {icon:'📋',label:'True Ending',done:teDone,total:teTotal,go:"showSec('quests');qTab('te')"},
     {icon:'⚠️',label:'Missables erledigt',done:msDone,total:msTotal,tab:'missables'},
     {icon:'📜',label:'Side-Quests',done:sqDone,total:sqTotal,go:"showSec('quests')"},
   ];
@@ -9634,8 +10077,8 @@ function initStaticTocs(){
     {id:'da-cores',label:'💎 Disarm Cores'}
   ]);
   fill('lo-toc',[
-    {id:'lo-locs',label:'📍 Locations'},
-    {id:'lo-bells',label:'🔔 Bell Towers'}
+    {id:'lo-locs',label:'📍 Orte'},
+    {id:'lo-bells',label:'🔔 Glocken'}
   ]);
 }
 
@@ -10214,7 +10657,7 @@ function renderNpcs(){
   const GROUPS=[
    ['companions','🛡️ Begleiter & spielbare Charaktere','Der Protagonist und die im Story-Verlauf spielbaren Gefährten.'],
    ['allies','🤝 Verbündete & Quest-Geber','Wichtige freundliche NPCs, die Kliff unterstützen oder Aufträge vergeben.'],
-   ['antagonists','⚔️ Antagonisten','Gegenspieler und Fraktionsanführer — viele davon sind Bosse (Kampf-Details in der Boss-Sektion).'],
+   ['antagonists','⚔️ Antagonisten','Gegenspieler und Fraktionsanführer — viele davon sind Bosse (Kampf-Details auf der Seite Bosse).'],
    ['merchants','💰 Händler','Benannte Verkäufer in Hernand, im Greymane-Lager und in weiteren Regionen; außerhalb Hernands ist der genaue Standort teils nur auf Regionsebene belegt.']
   ];
   el.innerHTML=trust+GROUPS.map(([key,title,sub])=>{
@@ -10337,7 +10780,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(urlState.sec){
     _applyUrlState();
   } else {
-    const lastSec=localStorage.getItem('cd_sec')||'bosses';
+    // Erstbesuch (kein Hash, kein cd_sec): Übersichtsseite statt Bosse (Navigations-Umbau 10/2026)
+    const lastSec=localStorage.getItem('cd_sec')||'start';
     showSec(lastSec);
   }
 
@@ -10426,6 +10870,17 @@ document.addEventListener('DOMContentLoaded',()=>{
       return;
     }
     if(inInput)return;
+    // g-Praefix zuerst auswerten (Navigations-Umbau 10/2026): vorher fingen die Einzeltasten r/t
+    // die zweite Taste ab, „g t“ (Haustiere) wechselte stattdessen das Farbschema.
+    // „g g“ oeffnet die Uebersicht.
+    if(_gPrefix){
+      _gPrefix=false;
+      clearTimeout(_gTimer);
+      const k=e.key.toLowerCase();
+      const sec=k==='g'?'start':SHORTCUT_SECTIONS[k];
+      if(sec){e.preventDefault();showSec(sec);}
+      return;
+    }
     // / = Search-Focus (vim-style); Finder in der Konsole -> Mobile-Sheet oeffnen
     if(e.key==='/'){
       e.preventDefault();
@@ -10440,6 +10895,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       openHelp();
       return;
     }
+    // Einzeltasten nur ohne Strg/Cmd/Alt (vorher blockierte Strg+R das Neuladen und würfelte stattdessen einen Boss)
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
     // r = Random Boss
     if(e.key==='r'){
       e.preventDefault();
@@ -10452,18 +10909,11 @@ document.addEventListener('DOMContentLoaded',()=>{
       cycleTheme();
       return;
     }
-    // g-prefix: warte auf zweite Taste für Section-Jump
-    if(e.key==='g'){
+    // g-prefix: warte auf zweite Taste für den Seitensprung (Auswertung oben)
+    if(e.key==='g'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
       _gPrefix=true;
       clearTimeout(_gTimer);
       _gTimer=setTimeout(()=>{_gPrefix=false;},800);
-      return;
-    }
-    if(_gPrefix){
-      _gPrefix=false;
-      clearTimeout(_gTimer);
-      const sec=SHORTCUT_SECTIONS[e.key.toLowerCase()];
-      if(sec){e.preventDefault();showSec(sec);}
       return;
     }
   });
@@ -10598,9 +11048,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         +'<button onclick="_introDismiss()" style="border-radius:8px;background:var(--vellum);border:1.5px solid var(--iron-gall);color:var(--iron-gall);font-family:var(--f-mono);font-size:var(--fs-10);text-transform:uppercase;letter-spacing:.06em;padding:5px 11px;cursor:pointer">Verstanden ✕</button></div>'
         +'<ul style="margin:8px 0 0;padding-left:18px;color:var(--iron-gall)">'
         +'<li><b>Fortschritt abhaken:</b> Bosse, Waffen &amp; Checklisten lassen sich anklicken — alles wird lokal gespeichert.</li>'
-        +'<li><b>Favoriten:</b> Das ☆ an Karten sammelt deine wichtigsten Einträge in der Favoriten-Sektion.</li>'
-        +'<li><b>Suche:</b> <kbd>Strg</kbd>+<kbd>K</kbd> oder <kbd>/</kbd> durchsucht alle Sektionen gleichzeitig.</li>'
-        +'<li><b>Sync:</b> Mit „🔑 Sync" (Sidebar) überträgst du deine True-Ending-Checkliste per Sync-Code auf andere Geräte, ohne Konto. Alles andere bleibt in diesem Browser.</li></ul>';
+        +'<li><b>Merkliste:</b> Das ☆ an Karten sammelt deine wichtigsten Einträge in der Merkliste.</li>'
+        +'<li><b>Suche:</b> <kbd>Strg</kbd>+<kbd>K</kbd> oder <kbd>/</kbd> durchsucht alle Seiten gleichzeitig.</li>'
+        +'<li><b>Sync:</b> Mit „🔑 Sync“ (unten im Menü) überträgst du deine True-Ending-Checkliste per Sync-Code auf andere Geräte, ohne Konto. Alles andere bleibt in diesem Browser.</li></ul>';
       // Anker nachgezogen: #sbar entfiel, jetzt hinter dem Register-Kopf #blattbar
       // (bleibt direktes #main-Kind vor den Sektionen -> Topologie/Hero-Regel intakt).
       const anchor=document.getElementById('blattbar');
@@ -11028,8 +11478,12 @@ if (syGetCode()) _loadServerProgress();
 </script>
 <style>@media(max-width:480px){#guide-links{line-height:1.8}}</style>
 <nav id="guide-links" aria-label="Guide-Seiten" style="text-align:center;padding:1rem;font-size:.85rem;opacity:.7">
-  <a href="/bosse">Bosse</a> · <a href="/bestiarium">Bestiarium</a> · <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/crafting">Crafting</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/fraktionen">Fraktionen</a> · <a href="/side-quests">Nebenquests</a> · <a href="/trophaeen">Trophäen</a> · <a href="/true-ending">True Ending</a> · <a href="/npcs">NPCs</a> · <a href="/patch-notes">Patch-Notes</a><br>
-  <a href="/skills">Skills</a> · <a href="/hexen">Hexen-Guide</a> · <a href="/abyss-cores">Abyss Cores</a> · <a href="/accessoires">Accessoires</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/mounts">Mounts</a> · <a href="/pets">Pets</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/geheimnisse">Secrets &amp; Lore</a>
+  Start: <a href="/patch-notes">Patch-Notes</a><br>
+  Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a><br>
+  Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
+  Quests &amp; Herausforderungen: <a href="/hauptquests">Hauptquests</a> · <a href="/fraktionen">Fraktionsquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a><br>
+  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a><br>
+  Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>
 <script>

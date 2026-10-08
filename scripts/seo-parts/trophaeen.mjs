@@ -12,7 +12,7 @@
 // ctx = { data: {...alle Datenstrukturen...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
 export const SLUG = "trophaeen";
-export const NAV_LABEL = "Trophäen";
+export const NAV_LABEL = "Trophäen & Errungenschaften";
 export const DEEPLINK = "/#sec-achievements";
 export const SITEMAP = { pri: "0.8", freq: "monthly" };
 
@@ -132,7 +132,7 @@ ${sections}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Trophäen", SLUG),
+      breadcrumbLd("Trophäen & Errungenschaften", SLUG),
       {
         "@type": "ItemList",
         name: "Alle Trophäen in Crimson Desert",
@@ -162,7 +162,7 @@ ${sections}`;
     h1: `Alle ${TROPHIES.length} Trophäen in Crimson Desert`,
     lead: `Diese Übersicht listet alle <strong>${TROPHIES.length} Trophäen</strong> von Crimson Desert, sortiert nach Wertung, jeweils mit der genauen Freischaltbedingung.${leadHow} <strong>${missCount} davon sind verpassbar</strong> und sollten früh eingeplant werden.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
-    crumb: "Trophäen",
+    crumb: "Trophäen & Errungenschaften",
     bodyHtml: body,
     jsonld,
   };

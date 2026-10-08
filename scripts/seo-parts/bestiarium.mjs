@@ -13,7 +13,7 @@
 // Alle 54 Bilder in ENEMY_IMGS sind absolute questlog.gg-CDN-URLs, keine lokalen Assets.
 
 export const SLUG = "bestiarium";
-export const NAV_LABEL = "Bestiarium";
+export const NAV_LABEL = "Gegner";
 export const DEEPLINK = "/#sec-bestiary";
 export const SITEMAP = { pri: "0.8", freq: "monthly" };
 
@@ -134,9 +134,9 @@ export function build(ctx) {
   }).join("\n");
 
   const body = `
-<a class="cta" href="${DEEPLINK}">Interaktives Bestiarium mit Suche &amp; Filter öffnen &rarr;</a>
+<a class="cta" href="${DEEPLINK}">Interaktive Gegner-Übersicht mit Suche &amp; Filter öffnen &rarr;</a>
 <p class="note">In der App durchsuchst du alle Gegner nach Namen, Region oder Beute und filterst nach Wildtieren, Kreaturen oder Fraktionen.</p>
-<p class="note">Viele Drops sind Zutaten für Rezepte im <a href="/crafting">Crafting-Guide</a>, Gegner mit eigener Kampfmechanik stehen zusätzlich in der <a href="/bosse">Bossliste</a>.</p>
+<p class="note">Viele Drops sind Zutaten für Rezepte unter <a href="/crafting">Herstellen &amp; Farmen</a>, Gegner mit eigener Kampfmechanik stehen zusätzlich in der <a href="/bosse">Bossliste</a>.</p>
 ${sections}`;
 
   const allNames = GROUPS.flatMap(([key]) => ENEMIES[key].map((e) => e.name));
@@ -144,7 +144,7 @@ ${sections}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Bestiarium", SLUG),
+      breadcrumbLd("Gegner", SLUG),
       {
         "@type": "ItemList",
         name: "Gegnertypen im Bestiarium von Crimson Desert",
@@ -163,7 +163,7 @@ ${sections}`;
     h1: `${total} Gegnertypen im Bestiarium von Crimson Desert`,
     lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet <strong>${total} Gegnertypen</strong> der Spielwelt, getrennt von den Bossen: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen, jeweils mit Region, Beute und Beschreibung.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
-    crumb: "Bestiarium",
+    crumb: "Gegner",
     bodyHtml: body,
     jsonld,
   };

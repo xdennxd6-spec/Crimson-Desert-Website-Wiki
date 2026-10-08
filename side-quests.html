@@ -57,6 +57,10 @@ color:var(--ink-hi);letter-spacing:.02em;text-transform:uppercase}
 header.site nav{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 header.site nav a{color:var(--amber);display:inline-block;padding:10px 3px}
 header.site nav a[aria-current=page]{color:var(--ink-hi);border-bottom:2px solid var(--red)}
+@media (max-width:700px){header.site nav{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:14px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)}
+header.site nav::-webkit-scrollbar{display:none}
+header.site nav a{white-space:nowrap;flex:0 0 auto}
+header.site nav a[aria-current=page]{order:-1}}
 main{max-width:1040px;margin:0 auto;padding:22px 20px 60px}
 nav.crumbs{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-faint);margin:14px 0 6px;letter-spacing:.04em}
 nav.crumbs a{color:var(--ink-faint)}
@@ -115,6 +119,8 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 footer.site nav.alle{line-height:2.1;margin:0 0 14px;font-size:var(--fs-11-5)}
+footer.site nav.alle .alle-gruppe{margin:0 0 4px}
+footer.site nav.alle .alle-kat{color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-right:8px}
 footer.site nav.alle a{color:var(--amber);padding:4px 2px}
 footer.site nav.alle a[aria-current=page]{color:var(--ink-hi)}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
@@ -295,10 +301,10 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionen</a><a href="/side-quests" aria-current="page">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/npcs">NPCs</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
+  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionsquests</a><a href="/side-quests" aria-current="page">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
 </header>
 <main>
-<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Nebenquests</nav>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; <span class="crumb-kat">Quests &amp; Herausforderungen</span> &rsaquo; Nebenquests</nav>
 <h1>Alle 134 Nebenquests in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>134 Nebenquests</strong> von Crimson Desert nach Region sortiert, jeweils mit Auslöser, Voraussetzung und Belohnung. <strong>6 davon sind verpassbar</strong>; worauf es jeweils ankommt, steht im Tipp der Quest.</p>
 <div class="pagetools">
@@ -436,7 +442,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <tr id="sq-hernand-homeward">
 <td class="q-cell">Homeward</td>
 <td>Serkis über die Abreise nach Pailune informieren (Mission &#39;The Return Home&#39;)</td>
-<td>Umzug des Greymane-Camps nach Pailune: laut Camp-Ausbau Stufe 5 in diesem Wiki Howling Hill voll ausgebaut, Pailune befreit (Kap. 7) und wiederaufgebaut, Hauptstory inkl. Epilog; Kapitel-Angabe aus Questlog nicht erfasst</td>
+<td>Umzug des Greymane-Camps nach Pailune: laut Seite Graumähnen-Camp Stufe 5 in diesem Wiki Howling Hill voll ausgebaut, Pailune befreit (Kap. 7) und wiederaufgebaut, Hauptstory inkl. Epilog; Kapitel-Angabe aus Questlog nicht erfasst</td>
 <td>Sentinel of Tenacity Helm x2, Slave&#39;s Cloth Boots x1, Private Storage x1<br><span class="muted">Tipp: Einmission-Quest (Reihe &#39;Hope from Ashes&#39; -&gt; &#39;Homeward&#39;): &quot;It&#39;s time to move to Pailune. Inform Serkis about your departure.&quot; Belohnung Sentinel of Tenacity Helm x2, Slave&#39;s Cloth Boots x1, Private Storage x1. Steht im Zusammenhang mit dem Camp-Umzug (siehe offene Harry-/Lola-/Gunter-Aufträge); Verpassbarkeit nicht belegt.</span></td>
 </tr>
 <tr id="sq-hernand-invention-of-the-workshop">
@@ -490,7 +496,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <td class="q-cell">Refined Power</td>
 <td>White Crow weist zu einem Abyss-Gear-Experten (Mission &#39;The Hermit Witch&#39;; Ziel laut Questlog: Sylvia in einer versteckten Höhle, Icon &#39;shadow_whisper_cave&#39;)</td>
 <td>Laut Wiki-Eintrag &#39;Hexe Sylvia&#39; (Shadow&#39;s Whisper Cave) Kapitel 3; Verhältnis zur finalen White-Crow-Hexenreihe nicht belegt</td>
-<td><span class="muted">–</span><br><span class="muted">Tipp: Einmission-Quest: &quot;White Crow has pointed you toward an expert in Abyss gears.&quot; Ziel ist Sylvia in einer versteckten Höhle (Shadow&#39;s Whisper Cave, siehe Hexen / Witches); keine Belohnung im Questlog.</span></td>
+<td><span class="muted">–</span><br><span class="muted">Tipp: Einmission-Quest: &quot;White Crow has pointed you toward an expert in Abyss gears.&quot; Ziel ist Sylvia in einer versteckten Höhle (Shadow&#39;s Whisper Cave, siehe Hexen &amp; Fusion); keine Belohnung im Questlog.</span></td>
 </tr>
 <tr id="sq-hernand-renee-s-request">
 <td class="q-cell">Renee&#39;s Request</td>
@@ -544,7 +550,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <td class="q-cell">Sigil of Solidarity (Mount-System-Übersicht)<span class="sys">Legendäres System</span></td>
 <td>Gemeinsame Mechanik der 5 Tier-Mounts (Silver Fang, White Bear, Snowwhite Deer, Icicle Edge Alpine Ibex, Rock Tusk Warthog): Tier bzw. Boss besiegen → Material erhalten (Silver Fang, White Bear, Snowwhite Deer: Kadaver häuten; Moren und Ravok: Material kommt als Questbelohnung) → bei einer Hexe zum &#39;Sigil of Solidarity&#39; craften → Sigil im Inventar benutzen.</td>
 <td>HARTES GATE für JEDES Sigil-Mount: Das Hexen-Crafting (&#39;Craft Abyss Gear&#39;) wird erst in Kapitel 5 &#39;Guest Unbidden&#39; freigeschaltet — Story-Boss Kearush the Slayer (Bankett in Hernand Castle, 3 Lebensbalken) besiegen und die parallele Hexen-Reihe &#39;Black and White&#39; / &#39;The Missing Seal&#39; spielen, um die gefesselte Hexe Elowen zu befreien. Vor Kapitel 5 ist KEIN Sigil craftbar.</td>
-<td>Dauerhafte Registrierung des Mounts (danach jederzeit über das Charakter-Rad rufbar). Gilt NICHT für die 3 Legendär-Pferde Royler/Rokade/Camora — die werden wild gezähmt (Mounts-Sektion), ohne Hexe/Sigil.<br><span class="muted">Mount: betrifft alle 5 Tier-Mounts</span>
+<td>Dauerhafte Registrierung des Mounts (danach jederzeit über das Charakter-Rad rufbar). Gilt NICHT für die 3 Legendär-Pferde Royler/Rokade/Camora — die werden wild gezähmt (Seite Reittiere), ohne Hexe/Sigil.<br><span class="muted">Mount: betrifft alle 5 Tier-Mounts</span>
 <details class="boss-alt">
 <summary><span class="alt-on">Boss-Kampf &amp; Crafting anzeigen</span><span class="alt-off">Boss-Kampf &amp; Crafting verbergen</span></summary>
 
@@ -639,7 +645,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <td class="q-cell">Woman Who Lost Her Husband</td>
 <td>Frau spricht den Spieler an (Tales after Hernand)</td>
 <td>Folgequest-Reihe von Hernand; Saigord the Staglord laut Abschlusstext besiegt</td>
-<td>Kylus Dagger x1<br><span class="muted">Tipp: Folgequest: Die Frau reagiert auf den Tod des Staglord (BOSSES: Saigord the Staglord). Belohnung Kylus Dagger x1.</span></td>
+<td>Kylus Dagger x1<br><span class="muted">Tipp: Folgequest: Die Frau reagiert auf den Tod des Staglord (Seite Bosse: Saigord the Staglord). Belohnung Kylus Dagger x1.</span></td>
 </tr></tbody>
 </table></div>
 <h2 id="a-delesyia">Delesyia (32)</h2>
@@ -715,7 +721,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <td class="q-cell">Flight</td>
 <td>Mission &#39;Wings of Iron&#39; (Quest &#39;Flight&#39;): nach dem Sieg über Golden Star Rückkehr zum Nest of Valor; Startort nicht belegt</td>
 <td>Golden Star besiegt (Kap. 11; Rezept &#39;Abyssal Fusion&#39; von White Crow)</td>
-<td>Abyssal Fusion x1, Abyssal Dragon Armor x1<br><span class="muted">Tipp: Einmission-Quest &#39;Wings of Iron&#39; (Schritte laut Questlog: Aufzeichnungen der Hexen entschlüsseln, Rückkehr zum Nest of Valor, Abyssal Dragon Armor): Nach dem Sieg über Golden Star (BOSSES: Golden Star, Delesyia - Marni&#39;s Masterium) gibt White Crow das Rezept &#39;Abyssal Fusion&#39;; Abschlusstext: Blackstar in Abyssal Dragon Armor breitet die Flügel aus. Überschneidet sich zeitlich mit dem Blackstar-Unlock der Hauptquest &#39;Whispers in the Wind&#39; (Kap. 11). Region aus dem Questlog-Quest-Icon &#39;bravenest&#39; (Delesyia) abgeleitet; Wegangaben nicht erfasst.</span></td>
+<td>Abyssal Fusion x1, Abyssal Dragon Armor x1<br><span class="muted">Tipp: Einmission-Quest &#39;Wings of Iron&#39; (Schritte laut Questlog: Aufzeichnungen der Hexen entschlüsseln, Rückkehr zum Nest of Valor, Abyssal Dragon Armor): Nach dem Sieg über Golden Star (Seite Bosse: Golden Star, Delesyia - Marni&#39;s Masterium) gibt White Crow das Rezept &#39;Abyssal Fusion&#39;; Abschlusstext: Blackstar in Abyssal Dragon Armor breitet die Flügel aus. Überschneidet sich zeitlich mit dem Blackstar-Unlock der Hauptquest &#39;Whispers in the Wind&#39; (Kap. 11). Region aus dem Questlog-Quest-Icon &#39;bravenest&#39; (Delesyia) abgeleitet; Wegangaben nicht erfasst.</span></td>
 </tr>
 <tr id="sq-delesyia-forrex-s-request">
 <td class="q-cell">Forrex&#39;s Request</td>
@@ -744,8 +750,8 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <tr id="sq-delesyia-lake-stoneback-crab">
 <td class="q-cell">Lake Stoneback Crab</td>
 <td>Diederik am Stoneback Crab Wetlands wiedertreffen (Mission &#39;The Wolf&#39;s Ballad&#39;: &quot;A familiar voice can be heard nearby&quot;)</td>
-<td>Nach dem Calphade-Krieg (Abschlusstext: &quot;Reunited after the Calphade War&quot;; Calphade-Krieg endet in Kap. 6). Widerspruch: BOSSES nennt für Queen Stoneback Crab &#39;ab Kap. 3&#39;; nicht aufgelöst</td>
-<td>Queen Stoneback Crab x1, Demenissian Contribution x1, Small Explosive x1, Abyss Artifact x1, A.T.A.G. Thrusterpack Mk II x1, Diamond x2, Garnet x3, Azurite x5, Epidote x4<br><span class="muted">Tipp: Dreiteilige Reihe: The Wolf&#39;s Ballad -&gt; The Queen&#39;s Lake (Boss Queen Stoneback Crab, siehe BOSSES; Abyss Artifact) -&gt; The One and Only, Diederik (A.T.A.G. Thrusterpack Mk II, Diamond x2, Garnet x3, Azurite x5, Epidote x4). Die Boss-Mission &#39;The Queen&#39;s Lake&#39; steht bereits in BOSSES.</span></td>
+<td>Nach dem Calphade-Krieg (Abschlusstext: &quot;Reunited after the Calphade War&quot;; Calphade-Krieg endet in Kap. 6). Widerspruch: Die Seite Bosse nennt für Queen Stoneback Crab &#39;ab Kap. 3&#39;; nicht aufgelöst</td>
+<td>Queen Stoneback Crab x1, Demenissian Contribution x1, Small Explosive x1, Abyss Artifact x1, A.T.A.G. Thrusterpack Mk II x1, Diamond x2, Garnet x3, Azurite x5, Epidote x4<br><span class="muted">Tipp: Dreiteilige Reihe: The Wolf&#39;s Ballad -&gt; The Queen&#39;s Lake (Boss Queen Stoneback Crab, siehe Seite Bosse; Abyss Artifact) -&gt; The One and Only, Diederik (A.T.A.G. Thrusterpack Mk II, Diamond x2, Garnet x3, Azurite x5, Epidote x4). Die Boss-Mission &#39;The Queen&#39;s Lake&#39; steht bereits in BOSSES.</span></td>
 </tr>
 <tr id="sq-delesyia-leore-s-request">
 <td class="q-cell">Leore&#39;s Request</td>
@@ -1288,7 +1294,12 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 })();
 </script>
 <footer class="site">
-  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Bestiarium</a> &middot; <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/crafting">Crafting</a> &middot; <a href="/hauptquests">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionen</a> &middot; <a href="/side-quests" aria-current="page">Nebenquests</a> &middot; <a href="/trophaeen">Trophäen</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/npcs">NPCs</a> &middot; <a href="/patch-notes">Patch-Notes</a> &middot; <a href="/skills">Skills</a> &middot; <a href="/hexen">Hexen-Guide</a> &middot; <a href="/abyss-cores">Abyss Cores</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/mounts">Mounts</a> &middot; <a href="/pets">Pets</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/geheimnisse">Secrets & Lore</a></nav>
+  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><div class="alle-gruppe"><span class="alle-kat">Start</span> <a href="/">Übersicht</a> &middot; <a href="/patch-notes">Patch-Notes</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Kampf</span> <a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Gegner</a> &middot; <a href="/skills">Fähigkeiten</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Ausrüstung</span> <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/abyss-cores">Abyss-Ausrüstung</a> &middot; <a href="/hexen">Hexen &amp; Fusion</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/hauptquests">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionsquests</a> &middot; <a href="/side-quests" aria-current="page">Nebenquests</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Welt &amp; Karte</span> <a href="/npcs">Charaktere &amp; NPCs</a> &middot; <a href="/mounts">Reittiere</a> &middot; <a href="/pets">Haustiere</a> &middot; <a href="/geheimnisse">Geheimnisse &amp; Lore</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Herstellen &amp; Sammeln</span> <a href="/crafting">Herstellen &amp; Farmen</a></div></nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>

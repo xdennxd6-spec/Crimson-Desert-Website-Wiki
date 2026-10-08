@@ -31,7 +31,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 
 export const SLUG = "pets";
-export const NAV_LABEL = "Pets";
+export const NAV_LABEL = "Haustiere";
 export const DEEPLINK = "/#sec-pets";
 export const SITEMAP = { pri: "0.7", freq: "monthly" };
 
@@ -213,16 +213,16 @@ export function build(ctx) {
 ${petTable(g, ids, ctx)}`).join("\n");
 
   const body = `
-<a class="cta" href="${DEEPLINK}">Alle Pets interaktiv in der App öffnen &rarr;</a>
+<a class="cta" href="${DEEPLINK}">Alle Haustiere interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App filterst du die Pets nach Katzen, Hunden und Kleintieren und durchsuchst sie nach Name und Lieblingsessen.</p>
-<p class="note">Zwei Pets wachsen zu Reittieren heran, nämlich Baby Wyvern und Kuku Bird Chick: Die fertigen Reittiere stehen bei den <a href="/mounts">Mounts</a>. Wie Hexen Sigil-Amulette herstellen, steht im <a href="/hexen">Hexen-Guide</a>. Katzen und Hunde mit mehreren Fellfarben stehen als eigene Zeilen da, weil Porträt und Lieblingsessen je Farbe abweichen können.</p>
+<p class="note">Zwei Pets wachsen zu Reittieren heran, nämlich Baby Wyvern und Kuku Bird Chick: Die fertigen Reittiere stehen bei den <a href="/mounts">Reittieren</a>. Wie Hexen Sigil-Amulette herstellen, steht unter <a href="/hexen">Hexen &amp; Fusion</a>. Katzen und Hunde mit mehreren Fellfarben stehen als eigene Zeilen da, weil Porträt und Lieblingsessen je Farbe abweichen können.</p>
 ${guides}
 ${sections}`;
 
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Pets", SLUG),
+      breadcrumbLd("Haustiere", SLUG),
       {
         "@type": "ItemList",
         name: "Alle Pets in Crimson Desert",
@@ -242,7 +242,7 @@ ${sections}`;
     h1: `Alle ${total} Pets in Crimson Desert`,
     lead: `Diese Übersicht listet alle <strong>${total} Pets</strong> aus Crimson Desert: <strong>${z.katzen} Katzen</strong>, ${z.hunde} Hunde und ${z.kleintiere} Kleintiere wie Vögel, Nager und Füchse, jeweils mit Porträt und Lieblingsessen, dazu die Freischalt-Guides für Iron Eagle und Phoenix.`,
     ogImage: null,
-    crumb: "Pets",
+    crumb: "Haustiere",
     bodyHtml: body,
     jsonld,
   };

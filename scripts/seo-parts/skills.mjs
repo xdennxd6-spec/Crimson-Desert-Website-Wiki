@@ -24,7 +24,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const SLUG = "skills";
-export const NAV_LABEL = "Skills";
+export const NAV_LABEL = "Fähigkeiten";
 export const DEEPLINK = "/#sec-skills";
 export const SITEMAP = { pri: "0.7", freq: "monthly" };
 
@@ -205,7 +205,7 @@ ${wlSection}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Skills", SLUG),
+      breadcrumbLd("Fähigkeiten", SLUG),
       {
         "@type": "ItemList",
         name: "Alle Skills von Kliff, Damiane und Oongka in Crimson Desert",
@@ -222,7 +222,7 @@ ${wlSection}`;
     h1: `Alle ${z.gesamt} Skills in Crimson Desert: Kliff, Damiane und Oongka`,
     lead: `Die Skill-Bäume von <strong>Kliff</strong> (${z.kliff} Skills), <strong>Damiane</strong> (${z.damiane}) und <strong>Oongka</strong> (${z.oongka}) im Überblick, jeweils mit Voraussetzung, Kosten in Abyss-Artefakten und Wirkung. Dazu die <strong>${z.wl} Watch-&amp;-Learn-Skills</strong> mit Lernort und Hinweis auf Verpassbares.`,
     ogImage: null,
-    crumb: "Skills",
+    crumb: "Fähigkeiten",
     bodyHtml: body,
     jsonld,
   };

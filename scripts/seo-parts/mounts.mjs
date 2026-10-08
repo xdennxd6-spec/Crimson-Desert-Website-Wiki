@@ -24,7 +24,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 
 export const SLUG = "mounts";
-export const NAV_LABEL = "Mounts";
+export const NAV_LABEL = "Reittiere";
 export const DEEPLINK = "/#sec-mounts";
 export const SITEMAP = { pri: "0.7", freq: "monthly" };
 
@@ -150,15 +150,15 @@ export function build(ctx) {
 <div class="grid">${g.items.map((m) => mountCard(m, ctx, MOUNT_IMGS, MOUNT_INGAME_IMGS)).join("\n")}</div>`).join("\n");
 
   const body = `
-<a class="cta" href="${DEEPLINK}">Alle Mounts interaktiv in der App öffnen &rarr;</a>
+<a class="cta" href="${DEEPLINK}">Alle Reittiere interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App markierst du Favoriten und siehst die In-Game-Ansicht eines Mounts direkt als Vorschau.</p>
-<p class="note">Sigil-Mounts schaltest du mit Amuletten frei, die eine Hexe herstellt: Rezepte und Fundorte im <a href="/hexen">Hexen-Guide</a>. Tiere als Begleiter statt als Reittier stehen bei den <a href="/pets">Pets</a>, die Gegner hinter den Sigil-Mounts in der <a href="/bosse">Bossliste</a>. Wo sich Quellen widersprechen oder ein Beschaffungsweg fehlt, steht das offen in den Notizen der jeweiligen Karte.</p>
+<p class="note">Sigil-Mounts schaltest du mit Amuletten frei, die eine Hexe herstellt: Rezepte und Fundorte unter <a href="/hexen">Hexen &amp; Fusion</a>. Tiere als Begleiter statt als Reittier stehen bei den <a href="/pets">Haustieren</a>, die Gegner hinter den Sigil-Mounts in der <a href="/bosse">Bossliste</a>. Wo sich Quellen widersprechen oder ein Beschaffungsweg fehlt, steht das offen in den Notizen der jeweiligen Karte.</p>
 ${sections}`;
 
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Mounts", SLUG),
+      breadcrumbLd("Reittiere", SLUG),
       {
         "@type": "ItemList",
         name: "Alle Mounts und Fahrzeuge in Crimson Desert",
@@ -175,7 +175,7 @@ ${sections}`;
     h1: `Alle ${total} Mounts in Crimson Desert`,
     lead: `Diese Übersicht listet alle <strong>${total} Mounts</strong> aus Crimson Desert: <strong>${z.legendaer} legendäre Pferde</strong>, ${z.pferde} weitere Pferde und Kriegspferde, ${z.drachen} Drachen-Mounts, ${z.sigil} Sigil-Mounts, ${z.wildtiere} Wildtiere und ${z.fahrzeuge} Fahrzeuge, jeweils mit Freischaltweg, Stats und Notizen.`,
     ogImage: null,
-    crumb: "Mounts",
+    crumb: "Reittiere",
     bodyHtml: body,
     jsonld,
   };

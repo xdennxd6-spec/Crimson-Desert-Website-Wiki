@@ -117,7 +117,7 @@ export function build(ctx) {
   const body = `
 <a class="cta" href="${DEEPLINK}">Alle Rätsel &amp; Strongboxes in der App öffnen &rarr;</a>
 <p class="strat"><b>So funktionieren die Rätsel:</b> Pywel steckt voller Strongboxes (verschlossene Truhen mit fester Lösung) und Story-Rätsel im Abyss, die meist mit Axiom Force (L3 + rechter Stick) und Force Palm (R3) gelöst werden. Strongboxes folgen vier Mustern: feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen.</p>
-<p class="note">Generische Ancient-Ruins-Rätsel (Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light) stehen nicht hier, sondern einzeln auf der Seite <a href="/ruinen">Uralte Ruinen</a>. Tipps zu versteckten Orten und Hilfsmitteln findest du unter <a href="/geheimnisse">Secrets &amp; Lore</a>.</p>
+<p class="note">Generische Ancient-Ruins-Rätsel (Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light) stehen nicht hier, sondern einzeln auf der Seite <a href="/ruinen">Uralte Ruinen</a>. Tipps zu versteckten Orten und Hilfsmitteln findest du unter <a href="/geheimnisse">Geheimnisse &amp; Lore</a>.</p>
 <p class="note">Wo im Fundort ein Kapitel steht, hilft der <a href="/kapitel-guide">Kapitel-Guide</a> bei der Einordnung in den Story-Verlauf.</p>
 ${sections}`;
 

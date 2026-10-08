@@ -22,7 +22,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const SLUG = "abyss-cores";
-export const NAV_LABEL = "Abyss Cores";
+export const NAV_LABEL = "Abyss-Ausrüstung";
 export const DEEPLINK = "/#sec-cores";
 export const SITEMAP = { pri: "0.7", freq: "monthly" };
 
@@ -150,7 +150,7 @@ ${table(liste)}`;
   const body = `
 <a class="cta" href="${DEEPLINK}">Core-Datenbank mit Slot-Filter in der App öffnen &rarr;</a>
 <p class="note">In der App filterst du die Cores nach Slot-Typ und findest darunter den durchsuchbaren Witch-Synthese-Baum mit allen Rezepten.</p>
-<p class="note">Wie die Hexen Cores herstellen und welche Rezepte sie verkaufen, steht im <a href="/hexen">Hexen-Guide</a>; viele Cores fallen als Beute von Gegnern aus der <a href="/bosse">Bossliste</a>.</p>
+<p class="note">Wie die Hexen Cores herstellen und welche Rezepte sie verkaufen, steht unter <a href="/hexen">Hexen &amp; Fusion</a>; viele Cores fallen als Beute von Gegnern aus der <a href="/bosse">Bossliste</a>.</p>
 <p class="crs-legend">${esc(slotLegende)}</p>
 ${gruppen}
 ${synthese}`;
@@ -158,7 +158,7 @@ ${synthese}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Abyss Cores", SLUG),
+      breadcrumbLd("Abyss-Ausrüstung", SLUG),
       {
         "@type": "ItemList",
         name: "Alle Abyss Cores in Crimson Desert",
@@ -175,7 +175,7 @@ ${synthese}`;
     h1: `Alle ${z.anzahl} Abyss Cores in Crimson Desert`,
     lead: `Die Liste aller <strong>${z.anzahl} Abyss Cores</strong>: <strong>${z.waffe}</strong> für Waffen, <strong>${z.ruestung}</strong> für Rüstung und <strong>${z.both}</strong> für Waffe, Handschuhe und Schuhe, jeweils mit Effekt, Quelle bzw. Fundort und, wo bekannt, den Stufenwerten. Greater-Cores und unsichere Zuordnungen sind markiert.`,
     ogImage: null,
-    crumb: "Abyss Cores",
+    crumb: "Abyss-Ausrüstung",
     bodyHtml: body,
     jsonld,
   };

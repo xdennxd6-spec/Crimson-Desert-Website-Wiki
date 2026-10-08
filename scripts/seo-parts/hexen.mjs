@@ -24,7 +24,7 @@
 // synth-riding-bear-amulet-0). Die Namen sind in den Daten eindeutig.
 
 export const SLUG = "hexen";
-export const NAV_LABEL = "Hexen-Guide";
+export const NAV_LABEL = "Hexen & Fusion";
 export const DEEPLINK = "/#sec-witches";
 export const SITEMAP = { pri: "0.7", freq: "monthly" };
 
@@ -166,9 +166,9 @@ ${synthTable(t.amulette.map(amuletRow))}`;
 ${synthTable(t.sonstige.map((c) => synthRow(c, ctx)))}`;
 
   const body = `
-<a class="cta" href="${DEEPLINK}">Hexen-Guide interaktiv in der App öffnen &rarr;</a>
+<a class="cta" href="${DEEPLINK}">Hexen &amp; Fusion interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App ist die Synthese als durchsuchbarer Baum nach Stufe filterbar und lässt sich auf Cores mit bekanntem Effekt eingrenzen.</p>
-<p class="note">Die Core-Effekte selbst stehen im Überblick der <a href="/abyss-cores">Abyss Cores</a>, die Reittiere hinter den Sigil-Amuletten bei den <a href="/mounts">Mounts</a> und weitere Herstellung im <a href="/crafting">Crafting-Guide</a>.</p>
+<p class="note">Die Core-Effekte selbst stehen im Überblick der <a href="/abyss-cores">Abyss-Ausrüstung</a>, die Reittiere hinter den Sigil-Amuletten bei den <a href="/mounts">Reittieren</a> und weitere Herstellung unter <a href="/crafting">Herstellen &amp; Farmen</a>.</p>
 ${hexenSection}
 ${stufenSection}
 ${effektSection}
@@ -178,7 +178,7 @@ ${sonstigeSection}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Hexen-Guide", SLUG),
+      breadcrumbLd("Hexen & Fusion", SLUG),
       {
         "@type": "ItemList",
         name: "Hexen in Crimson Desert",
@@ -195,7 +195,7 @@ ${sonstigeSection}`;
     h1: `Hexen-Guide: ${z.hexen} Hexen und ${z.rezepte} Synthese-Rezepte`,
     lead: `Der Hexen-Guide zu Crimson Desert erklärt alle <strong>${z.hexen} Hexen</strong> mit Wohnort, Freischaltung, Diensten und Sanctum-Questlinie. Dazu stehen alle <strong>${z.rezepte} Synthese-Rezepte</strong> der Hexen-Werkstatt in Tabellen: ${z.stufen} Stufen-Cores, ${z.effektcores} Effekt-Cores, ${z.amulette} Sigil-Mount-Amulette und ${z.sonstige} sonstige Rezepte.`,
     ogImage: null,
-    crumb: "Hexen-Guide",
+    crumb: "Hexen & Fusion",
     bodyHtml: body,
     jsonld,
   };

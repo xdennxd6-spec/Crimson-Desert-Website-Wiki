@@ -57,6 +57,10 @@ color:var(--ink-hi);letter-spacing:.02em;text-transform:uppercase}
 header.site nav{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 header.site nav a{color:var(--amber);display:inline-block;padding:10px 3px}
 header.site nav a[aria-current=page]{color:var(--ink-hi);border-bottom:2px solid var(--red)}
+@media (max-width:700px){header.site nav{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:14px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)}
+header.site nav::-webkit-scrollbar{display:none}
+header.site nav a{white-space:nowrap;flex:0 0 auto}
+header.site nav a[aria-current=page]{order:-1}}
 main{max-width:1040px;margin:0 auto;padding:22px 20px 60px}
 nav.crumbs{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-faint);margin:14px 0 6px;letter-spacing:.04em}
 nav.crumbs a{color:var(--ink-faint)}
@@ -115,6 +119,8 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 footer.site nav.alle{line-height:2.1;margin:0 0 14px;font-size:var(--fs-11-5)}
+footer.site nav.alle .alle-gruppe{margin:0 0 4px}
+footer.site nav.alle .alle-kat{color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-right:8px}
 footer.site nav.alle a{color:var(--amber);padding:4px 2px}
 footer.site nav.alle a[aria-current=page]{color:var(--ink-hi)}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
@@ -295,10 +301,10 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionen</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/npcs">NPCs</a><a href="/patch-notes">Patch-Notes</a><a href="/accessoires" aria-current="page">Accessoires</a><a href="#alle-guides">Alle Guides</a></nav>
+  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionsquests</a><a href="/side-quests">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="/accessoires" aria-current="page">Accessoires</a><a href="#alle-guides">Alle Guides</a></nav>
 </header>
 <main>
-<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Accessoires</nav>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; <span class="crumb-kat">Ausrüstung</span> &rsaquo; Accessoires</nav>
 <h1>Alle 40 Accessoires in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>40 Accessoires</strong> aus Crimson Desert: <strong>13 Ringe</strong>, 14 Halsketten und 13 Ohrringe, jeweils mit Effekt, Fundort oder Händler und Notizen aus den Spieldaten.</p>
 <div class="pagetools">
@@ -315,7 +321,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 
 <a class="cta" href="/#sec-accessories">Alle Accessoires interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App filterst du nach Typ und lässt dir zu jedem Accessoire die Fundstelle auf der Karte anzeigen.</p>
-<p class="note"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert. Mehrere Accessoires kaufst du bei Hexen wie Elowen, Bari, Lyselia und Areciel, mehr dazu im <a href="/hexen">Hexen-Guide</a>; viele Stücke fallen als Beute oder Belohnung bei Gegnern an, die in der <a href="/bosse">Bossliste</a> stehen.</p>
+<p class="note"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert. Mehrere Accessoires kaufst du bei Hexen wie Elowen, Bari, Lyselia und Areciel, mehr dazu unter <a href="/hexen">Hexen &amp; Fusion</a>; viele Stücke fallen als Beute oder Belohnung bei Gegnern an, die in der <a href="/bosse">Bossliste</a> stehen.</p>
 <h2 id="a-ringe">💍 Ringe (13)</h2>
 <div class="grid"><article class="card" id="acc-tigerfang-ring">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_ring_0019_l.webp" alt="Tigerfang Ring in Crimson Desert" width="256" height="256">
@@ -386,7 +392,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <div class="grid"><article class="card" id="acc-necklace-of-lightning">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_necklace_0017.webp" alt="Necklace of Lightning in Crimson Desert" width="256" height="256">
 <h3>Necklace of Lightning</h3>
-<ul class="stats"><li><b>Typ:</b> Halskette (Necklace)</li><li><b>Effekt:</b> Attack 5, Crit Lv.4, Spirit +0.3/s (+10)</li><li><b>Quelle:</b> Strongbox-Puzzle, Keller Eastern Court (SO Golden Plains, Demeniss); Boss Full Moon Reaper; questlog: Hexe Bari (Händlerin); Rezept (ein Boss-Bezug zu Full Moon Reaper ist weder in questlog noch in BOSSES belegt)</li><li><b>Notiz:</b> Höchster Crit unter Necklaces. Werte bei +10 laut questlog (Item-ID 391518523).</li></ul>
+<ul class="stats"><li><b>Typ:</b> Halskette (Necklace)</li><li><b>Effekt:</b> Attack 5, Crit Lv.4, Spirit +0.3/s (+10)</li><li><b>Quelle:</b> Strongbox-Puzzle, Keller Eastern Court (SO Golden Plains, Demeniss); Boss Full Moon Reaper; questlog: Hexe Bari (Händlerin); Rezept (ein Boss-Bezug zu Full Moon Reaper ist weder in questlog noch auf der Seite Bosse belegt)</li><li><b>Notiz:</b> Höchster Crit unter Necklaces. Werte bei +10 laut questlog (Item-ID 391518523).</li></ul>
 </article>
 <article class="card" id="acc-saint-s-necklace">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_necklace_0003.webp" alt="Saint&#39;s Necklace in Crimson Desert" width="256" height="256">
@@ -401,12 +407,12 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <article class="card" id="acc-crossroads-necklace">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_necklace_0007.webp" alt="Crossroads Necklace in Crimson Desert" width="256" height="256">
 <h3>Crossroads Necklace</h3>
-<ul class="stats"><li><b>Typ:</b> Halskette (Necklace)</li><li><b>Effekt:</b> Defense 5, Attack 7, Crit Lv.3, Spirit +0.1/s (+10); Unique: heilt ODER schadet zufällig (10s CD)</li><li><b>Quelle:</b> Sieg über Crussis (&#39;Bloodied Path&#39;, Pailune-Militia-Faktion); questlog: Missionsbelohnungen &#39;Rhett&#39;s Request&#39; (Quest &#39;Tales of the Hernandian Merchants&#39;) und &#39;Vanquished Threat&#39; (Quest &#39;Bloodied Path&#39;); Händler Randolph. Der Boss-Bezug (Bloodwalker Crussis) steht auch in BOSSES</li><li><b>Notiz:</b> Glücksspiel-Effekt. Werte bei +10 laut questlog (Item-ID 1001101).</li></ul>
+<ul class="stats"><li><b>Typ:</b> Halskette (Necklace)</li><li><b>Effekt:</b> Defense 5, Attack 7, Crit Lv.3, Spirit +0.1/s (+10); Unique: heilt ODER schadet zufällig (10s CD)</li><li><b>Quelle:</b> Sieg über Crussis (&#39;Bloodied Path&#39;, Pailune-Militia-Faktion); questlog: Missionsbelohnungen &#39;Rhett&#39;s Request&#39; (Quest &#39;Tales of the Hernandian Merchants&#39;) und &#39;Vanquished Threat&#39; (Quest &#39;Bloodied Path&#39;); Händler Randolph. Der Boss-Bezug (Bloodwalker Crussis) steht auch auf der Seite Bosse</li><li><b>Notiz:</b> Glücksspiel-Effekt. Werte bei +10 laut questlog (Item-ID 1001101).</li></ul>
 </article>
 <article class="card" id="acc-rainstorm-necklace">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_necklace_0021.webp" alt="Rainstorm Necklace in Crimson Desert" width="256" height="256">
 <h3>Rainstorm Necklace</h3>
-<ul class="stats"><li><b>Typ:</b> Halskette (Necklace)</li><li><b>Effekt:</b> Attack 9, Crit Lv.2, Spirit +0.2/s (+10); Unique: ändert Wetter auf Regen (30 Min CD)</li><li><b>Quelle:</b> Sieg über Lutemir (Swamp of Despair, Longleaf &#39;Forest Drowned in Mud&#39;); questlog: Missionsbelohnung &#39;Deliver the news to the tannery&#39; (Quest &#39;Forest Drowned in Mud&#39;); Händler Lyselia. Der Boss-Bezug (Mudwalker Lutemir) steht auch in BOSSES</li><li><b>Notiz:</b> Attack 9 (Ancient&#39;s Necklace hat 11); Synergie mit Lightning-Items. Werte bei +10 laut questlog (Item-ID 1001182).</li></ul>
+<ul class="stats"><li><b>Typ:</b> Halskette (Necklace)</li><li><b>Effekt:</b> Attack 9, Crit Lv.2, Spirit +0.2/s (+10); Unique: ändert Wetter auf Regen (30 Min CD)</li><li><b>Quelle:</b> Sieg über Lutemir (Swamp of Despair, Longleaf &#39;Forest Drowned in Mud&#39;); questlog: Missionsbelohnung &#39;Deliver the news to the tannery&#39; (Quest &#39;Forest Drowned in Mud&#39;); Händler Lyselia. Der Boss-Bezug (Mudwalker Lutemir) steht auch auf der Seite Bosse</li><li><b>Notiz:</b> Attack 9 (Ancient&#39;s Necklace hat 11); Synergie mit Lightning-Items. Werte bei +10 laut questlog (Item-ID 1001182).</li></ul>
 </article>
 <article class="card" id="acc-radiant-necklace">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_necklace_0023.webp" alt="Radiant Necklace in Crimson Desert" width="256" height="256">
@@ -487,7 +493,7 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <article class="card" id="acc-white-horn-s-earring">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_earring_0014_l.webp" alt="White Horn&#39;s Earring in Crimson Desert" width="256" height="256">
 <h3>White Horn&#39;s Earring</h3>
-<ul class="stats"><li><b>Typ:</b> Ohrring (Earring)</li><li><b>Effekt:</b> Defense 4, Move SPD Lv.3, HP-Regen 0.8/s (+10)</li><li><b>Quelle:</b> Strongbox, Delesyia Castle 3. Etage (Speisekammer-Geheimraum, stehlen); zusätzlich laut questlog Missionsbelohnung &#39;White Horn of Snowhaven Hearth&#39; (Quest &#39;Soul Shepherd&#39;; passt zu BOSSES: White Horn droppt den Earring); Händler Gorio; Rezept</li><li><b>Notiz:</b> Eigener Earring (nicht der Ring). Altangabe Def 2 und Move SPD Lv.1; laut Fextralife Def 4 und Move SPD Lv.3 bei +10 (questlog: Def 4, Item-ID 391518521).</li></ul>
+<ul class="stats"><li><b>Typ:</b> Ohrring (Earring)</li><li><b>Effekt:</b> Defense 4, Move SPD Lv.3, HP-Regen 0.8/s (+10)</li><li><b>Quelle:</b> Strongbox, Delesyia Castle 3. Etage (Speisekammer-Geheimraum, stehlen); zusätzlich laut questlog Missionsbelohnung &#39;White Horn of Snowhaven Hearth&#39; (Quest &#39;Soul Shepherd&#39;; passt zur Seite Bosse: White Horn droppt den Earring); Händler Gorio; Rezept</li><li><b>Notiz:</b> Eigener Earring (nicht der Ring). Altangabe Def 2 und Move SPD Lv.1; laut Fextralife Def 4 und Move SPD Lv.3 bei +10 (questlog: Def 4, Item-ID 391518521).</li></ul>
 </article>
 <article class="card" id="acc-flower-petal-earring">
 <img class="acc-ico" loading="lazy" src="https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_phm_00_earring_0003.webp" alt="Flower Petal Earring in Crimson Desert" width="256" height="256">
@@ -641,7 +647,12 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 })();
 </script>
 <footer class="site">
-  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Bestiarium</a> &middot; <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/crafting">Crafting</a> &middot; <a href="/hauptquests">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionen</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/trophaeen">Trophäen</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/npcs">NPCs</a> &middot; <a href="/patch-notes">Patch-Notes</a> &middot; <a href="/skills">Skills</a> &middot; <a href="/hexen">Hexen-Guide</a> &middot; <a href="/abyss-cores">Abyss Cores</a> &middot; <a href="/accessoires" aria-current="page">Accessoires</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/mounts">Mounts</a> &middot; <a href="/pets">Pets</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/geheimnisse">Secrets & Lore</a></nav>
+  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><div class="alle-gruppe"><span class="alle-kat">Start</span> <a href="/">Übersicht</a> &middot; <a href="/patch-notes">Patch-Notes</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Kampf</span> <a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Gegner</a> &middot; <a href="/skills">Fähigkeiten</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Ausrüstung</span> <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/accessoires" aria-current="page">Accessoires</a> &middot; <a href="/abyss-cores">Abyss-Ausrüstung</a> &middot; <a href="/hexen">Hexen &amp; Fusion</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/hauptquests">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionsquests</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Welt &amp; Karte</span> <a href="/npcs">Charaktere &amp; NPCs</a> &middot; <a href="/mounts">Reittiere</a> &middot; <a href="/pets">Haustiere</a> &middot; <a href="/geheimnisse">Geheimnisse &amp; Lore</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Herstellen &amp; Sammeln</span> <a href="/crafting">Herstellen &amp; Farmen</a></div></nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>

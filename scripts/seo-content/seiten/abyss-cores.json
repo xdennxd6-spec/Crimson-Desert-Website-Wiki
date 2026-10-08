@@ -11,7 +11,7 @@
     },
     {
       "frage": "Wie funktioniert die Core-Synthese?",
-      "antwort": "Bei der regulären Synthese werden Cores mit gleichem Namen und gleicher Stufe zu einem Core der nächsthöheren Stufe, höchstens bis Stufe III. Dafür brauchst du das passende Blueprint, das bei Hexen kaufbar ist, und nicht jeder Core ist aufwertbar. Die Spezial-Synthese braucht kein Blueprint und würfelt den Typ des Ergebnisses; sie ist der einzige Weg zu Greater-Cores. Mehr zu den Hexen steht im Hexen-Guide."
+      "antwort": "Bei der regulären Synthese werden Cores mit gleichem Namen und gleicher Stufe zu einem Core der nächsthöheren Stufe, höchstens bis Stufe III. Dafür brauchst du das passende Blueprint, das bei Hexen kaufbar ist, und nicht jeder Core ist aufwertbar. Die Spezial-Synthese braucht kein Blueprint und würfelt den Typ des Ergebnisses; sie ist der einzige Weg zu Greater-Cores. Mehr zu den Hexen steht unter Hexen & Fusion."
     },
     {
       "frage": "Was sind Greater Cores?",

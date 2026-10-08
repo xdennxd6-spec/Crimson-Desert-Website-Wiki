@@ -57,6 +57,10 @@ color:var(--ink-hi);letter-spacing:.02em;text-transform:uppercase}
 header.site nav{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 header.site nav a{color:var(--amber);display:inline-block;padding:10px 3px}
 header.site nav a[aria-current=page]{color:var(--ink-hi);border-bottom:2px solid var(--red)}
+@media (max-width:700px){header.site nav{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:14px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)}
+header.site nav::-webkit-scrollbar{display:none}
+header.site nav a{white-space:nowrap;flex:0 0 auto}
+header.site nav a[aria-current=page]{order:-1}}
 main{max-width:1040px;margin:0 auto;padding:22px 20px 60px}
 nav.crumbs{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-faint);margin:14px 0 6px;letter-spacing:.04em}
 nav.crumbs a{color:var(--ink-faint)}
@@ -115,6 +119,8 @@ ul.te li::before{content:"\2610";position:absolute;left:0;color:var(--red);font-
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 footer.site nav.alle{line-height:2.1;margin:0 0 14px;font-size:var(--fs-11-5)}
+footer.site nav.alle .alle-gruppe{margin:0 0 4px}
+footer.site nav.alle .alle-kat{color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-right:8px}
 footer.site nav.alle a{color:var(--amber);padding:4px 2px}
 footer.site nav.alle a[aria-current=page]{color:var(--ink-hi)}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
@@ -295,10 +301,10 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Bestiarium</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/crafting">Crafting</a><a href="/hauptquests" aria-current="page">Hauptquests</a><a href="/fraktionen">Fraktionen</a><a href="/side-quests">Nebenquests</a><a href="/trophaeen">Trophäen</a><a href="/true-ending">True Ending</a><a href="/npcs">NPCs</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
+  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/hauptquests" aria-current="page">Hauptquests</a><a href="/fraktionen">Fraktionsquests</a><a href="/side-quests">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
 </header>
 <main>
-<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; Hauptquests</nav>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; <span class="crumb-kat">Quests &amp; Herausforderungen</span> &rsaquo; Hauptquests</nav>
 <h1>Alle 179 Hauptquests in Crimson Desert</h1>
 <p class="lead">Diese Übersicht listet alle <strong>179 Hauptquests</strong> von Crimson Desert in Spielreihenfolge, aufgeteilt auf <strong>14 Kapitel</strong>, jeweils mit Auslöser, Voraussetzung, Belohnung und dem Bosskampf des Kapitels.</p>
 <div class="pagetools">
@@ -1589,7 +1595,12 @@ code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}</styl
 })();
 </script>
 <footer class="site">
-  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Bestiarium</a> &middot; <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/crafting">Crafting</a> &middot; <a href="/hauptquests" aria-current="page">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionen</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/trophaeen">Trophäen</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/npcs">NPCs</a> &middot; <a href="/patch-notes">Patch-Notes</a> &middot; <a href="/skills">Skills</a> &middot; <a href="/hexen">Hexen-Guide</a> &middot; <a href="/abyss-cores">Abyss Cores</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/mounts">Mounts</a> &middot; <a href="/pets">Pets</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/geheimnisse">Secrets & Lore</a></nav>
+  <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><div class="alle-gruppe"><span class="alle-kat">Start</span> <a href="/">Übersicht</a> &middot; <a href="/patch-notes">Patch-Notes</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Kampf</span> <a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Gegner</a> &middot; <a href="/skills">Fähigkeiten</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Ausrüstung</span> <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/abyss-cores">Abyss-Ausrüstung</a> &middot; <a href="/hexen">Hexen &amp; Fusion</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/hauptquests" aria-current="page">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionsquests</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Welt &amp; Karte</span> <a href="/npcs">Charaktere &amp; NPCs</a> &middot; <a href="/mounts">Reittiere</a> &middot; <a href="/pets">Haustiere</a> &middot; <a href="/geheimnisse">Geheimnisse &amp; Lore</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Herstellen &amp; Sammeln</span> <a href="/crafting">Herstellen &amp; Farmen</a></div></nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>

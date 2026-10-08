@@ -1178,7 +1178,7 @@ const SECRETS_TOOLS=[
   {tool:'Laterne',input:'CTRL / L1 / LB (halten, out-of-combat)',effect:'Nearby-Loot, Memory Fragments, destructible Objects, Illusory Walls'},
   {tool:'Guiding Light',input:'L1+R1 / LB+RB',effect:'Distant Artifacts, Fast-Travel-Spots, Puzzle-Marker auf dem Horizont'},
   {tool:'Visione (equipped)',input:'Inventar oder Quick Slot',effect:'Memory Fragment Playback (alle Memory Fragments; 201 laut th.gl-Karte, Stand 07.04.2026)'},
-  {tool:'Blinding Flash',input:'siehe Skills',effect:'Licht mit dem Schwert reflektieren: blendet Gegner, zeigt Schwachstellen und versiegelte Abyss Artifacts in der Nähe; konzentriertes Licht aktiviert bestimmte Vorrichtungen. Laut VULKK lassen sich damit auch die „107“-Striche in Goyens Höhle erkennen'},
+  {tool:'Blinding Flash',input:'siehe Fähigkeiten',effect:'Licht mit dem Schwert reflektieren: blendet Gegner, zeigt Schwachstellen und versiegelte Abyss Artifacts in der Nähe; konzentriertes Licht aktiviert bestimmte Vorrichtungen. Laut VULKK lassen sich damit auch die „107“-Striche in Goyens Höhle erkennen'},
   {tool:'Dark Fog Lantern',input:'Alfonso-House-Quest „Transcendent Structure“',effect:'Verbesserte Laterne — ihr Licht durchdringt laut Spielbeschreibung selbst dichtesten Nebel; laut dropreference zeigt sie auch Memory Fragments, Hinweise, versiegelte Abyss Artifacts und Geister-Hologramme'}
 ];
 const FRAGMENT_REGIONS=[
@@ -1250,7 +1250,7 @@ const ACHIEVEMENTS=[
   {id:'true-ending',ico:'⭐',name:'True Ending Hunter',desc:'Alle True-Ending-Pflichten abgehakt',check:()=>{if(typeof TRUE_ENDING==='undefined')return false;const te=lsJson('cd_te',[]);return TRUE_ENDING.length>0&&TRUE_ENDING.every(t=>te.includes(t.id));},prog:()=>{if(typeof TRUE_ENDING==='undefined')return 0;const te=lsJson('cd_te',[]);return Math.min(te.length/TRUE_ENDING.length,1);}},
   {id:'chapter-done',ico:'📖',name:'Storyteller',desc:'Alle 12 Kapitel abgeschlossen',check:()=>{const d=lsJson('cd_ch_done',[]);return CHAPTERS.filter(c=>typeof c.num==='number').every(c=>d.includes(c.num));},prog:()=>{const d=lsJson('cd_ch_done',[]);const n=CHAPTERS.filter(c=>typeof c.num==='number');return n.length?n.filter(c=>d.includes(c.num)).length/n.length:0;}},
   {id:'theme-switcher',ico:'🎨',name:'Modisch',desc:'Probiere alle 3 Themes aus',check:()=>{const seen=lsJson('cd_themes_seen',[]);return seen.length>=3;},prog:()=>{const seen=lsJson('cd_themes_seen',[]);return Math.min(seen.length/3,1);}},
-  {id:'secrets-visited',ico:'🕵️',name:'Run 108',desc:'Besuche die Secrets-Section (Hidden-Ending-Lore)',check:()=>!!localStorage.getItem('cd_secrets_visited')},
+  {id:'secrets-visited',ico:'🕵️',name:'Run 108',desc:'Besuche die Seite Geheimnisse & Lore (Hidden-Ending-Lore)',check:()=>!!localStorage.getItem('cd_secrets_visited')},
   {id:'pilgrim',ico:'🏆',name:'Pilgrim of Wonders',desc:'Alle 60 Abyss Cressets im Cresset-Tracker erfasst (Wiki-Erfolg; die gleichnamige echte Trophäe verlangt alle 60 Secret-Places-Herausforderungen)',check:()=>typeof _crTotal==='function'&&_crTotal()>=60,prog:()=>typeof _crTotal==='function'?Math.min(_crTotal()/60,1):0},
   {id:'fragment-half',ico:'📜',name:'Memory-Sammler',desc:'100+ Memory Fragments entdeckt',check:()=>typeof _frTotal==='function'&&_frTotal()>=100,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/100,1):0},
   {id:'fragment-master',ico:'🧠',name:'Visione-Master',desc:`Alle ${FRAGMENT_TOTAL} Memory Fragments im Tracker erfasst (Kartenstand 07.04.2026)`,check:()=>typeof _frTotal==='function'&&_frTotal()>=FRAGMENT_TOTAL,prog:()=>typeof _frTotal==='function'?Math.min(_frTotal()/FRAGMENT_TOTAL,1):0}
@@ -1296,6 +1296,7 @@ const TROPHIES=[
 ];
 const TROPHY_GRADES={platinum:{ico:'💠',lbl:'Platin',col:'#9ad7f5'},gold:{ico:'🥇',lbl:'Gold',col:'#e7c34b'},silver:{ico:'🥈',lbl:'Silber',col:'#c9cdd4'},bronze:{ico:'🥉',lbl:'Bronze',col:'#c98a52'}};
 const SEC_RENDERERS={
+  start:['renderStartOverview'],
   bosses:['renderBosses','renderRegionHeatmap'],
   weapons:['renderWeapons'],
   items:['renderWeaponUpgrade','renderItemdex'],
@@ -1327,49 +1328,55 @@ const SEC_RENDERERS={
   roadmap:['renderRoadmap'],
   favorites:['renderFavorites']
 };
+/* Navigation (Umbau 10/2026): Kategorien nach dem, was Spieler suchen, Namen wie im deutschen Spiel-UI.
+   RESSORTS = Kategorien {id,label,short,glyph,tag}; short = Beschriftung der mobilen unteren Leiste.
+   SECTIONS = Seiten {id,res,name,en,desc,aka[],glyph,count}; id = Seiten-ID (Deep-Links #sec=<id>, cd_sec,
+   SEC_RENDERERS), NIE umbenennen. en = englischer Spielbegriff (klein unter dem Namen), desc = ein Satz fuer
+   Kachel/Tooltip, aka = zusaetzliche Suchwoerter. col/plate/coord sind Altfelder und werden nicht mehr angezeigt. */
 const RESSORTS = [
-  {id:'einstieg', label:'Einstieg',   glyph:'⎈', col:'A', tag:'Orientierung'},
-  {id:'kampf',    label:'Kampf',      glyph:'⚔', col:'B', tag:'Gegner & Technik'},
-  {id:'ausrue',   label:'Ausrüstung', glyph:'⬡', col:'C', tag:'Instrumente & Items'},
-  {id:'welt',     label:'Welt',       glyph:'◉', col:'D', tag:'Kontinent & Story'},
-  {id:'register', label:'Register',   glyph:'▦', col:'E', tag:'Sammeln & Fortschritt'},
-  {id:'meta',     label:'Meta',       glyph:'⚒', col:'F', tag:'Chronik'}
+  {id:'start',       label:'Start',                      short:'Start',      glyph:'⌂', col:'A', tag:'Übersicht, Einsteiger-Tipps, Neuigkeiten'},
+  {id:'kampf',       label:'Kampf',                      short:'Kampf',      glyph:'⚔', col:'B', tag:'Bosse, Gegner, Fähigkeiten, Builds'},
+  {id:'ausruestung', label:'Ausrüstung',                 short:'Ausrüstung', glyph:'⬡', col:'C', tag:'Waffen, Rüstungen, Abyss-Ausrüstung, Hexen'},
+  {id:'quests',      label:'Quests & Herausforderungen', short:'Quests',     glyph:'❢', col:'D', tag:'Quests, Kapitel, Ruinen, Rätsel, Checklisten'},
+  {id:'welt',        label:'Welt & Karte',               short:'Welt',       glyph:'◉', col:'E', tag:'Karte, Orte, Figuren, Camp, Reittiere'},
+  {id:'sammeln',     label:'Herstellen & Sammeln',       short:'Sammeln',    glyph:'⚙', col:'F', tag:'Kochen, Herstellen, Materialien, Sammelobjekte'}
 ];
 const SECTIONS = [
-  {id:'beginner',    res:'einstieg', name:'Anfänger-Guide',   plate:'§01', coord:'A1', glyph:'➤', count:'Basis'},
-  {id:'bosses',      res:'kampf', name:'Bosse',            plate:'§02', coord:'B2', glyph:'☠', count:'100'},
-  {id:'skills',      res:'kampf', name:'Skills',           plate:'§13', coord:'B3', glyph:'✦', count:'6 Zweige'},
-  {id:'disarm',      res:'kampf', name:'Entwaffnen',       plate:'§12', coord:'B4', glyph:'⛨', count:'Tabellen'},
-  {id:'builds',      res:'kampf', name:'Builds',           plate:'§15', coord:'B5', glyph:'⊞', count:'Optimizer'},
-  {id:'witches',     res:'kampf', name:'Hexen-Guide',      plate:'§17', coord:'B6', glyph:'☾', count:'Synthese'},
-  {id:'weapons',     res:'ausrue', name:'Waffen',          plate:'§04', coord:'C1', glyph:'†', count:'500'},
-  {id:'armor',       res:'ausrue', name:'Rüstungen',  plate:'§05', coord:'C2', glyph:'⛓', count:'Sets'},
-  {id:'cores',       res:'ausrue', name:'Abyss Cores',     plate:'§06', coord:'C3', glyph:'⧫', count:'Synthese'},
-  {id:'accessories', res:'ausrue', name:'Accessoires',    plate:'§16', coord:'C4', glyph:'❖', count:'Liste'},
-  {id:'items',       res:'ausrue', name:'Items',           plate:'§03', coord:'C5', glyph:'❒', count:'Kompendium'},
-  {id:'crafting',    res:'ausrue', name:'Crafting & Farming', plate:'§07', coord:'C6', glyph:'⚙', count:'386'},
-  {id:'dyes',        res:'ausrue', name:'Dyes',            plate:'§22', coord:'C7', glyph:'◑', count:'Farben'},
-  {id:'map',         res:'welt', name:'Interaktive Karte', plate:'§09', coord:'D1', glyph:'⌖', count:'Pywel'},
-  {id:'locations',   res:'welt', name:'Locations',         plate:'§10', coord:'D2', glyph:'⌂', count:'Orte'},
-  {id:'quests',      res:'welt', name:'Quests & Story',    plate:'§08', coord:'D3', glyph:'❢', count:'4 Stränge'},
-  {id:'chapters',    res:'welt', name:'Kapitel-Guide',     plate:'§24', coord:'D4', glyph:'▤', count:'Timeline'},
-  {id:'mounts',      res:'welt', name:'Mounts',            plate:'§11', coord:'D5', glyph:'♞', count:'Galerie'},
-  {id:'pets',        res:'welt', name:'Pets',              plate:'§18', coord:'D6', glyph:'❥', count:'Liste'},
-  {id:'ruins',       res:'welt', name:'Uralte Ruinen',     plate:'§26', coord:'D7', glyph:'♜', count:'Farm-Tab.'},
-  {id:'bestiary',    res:'welt', name:'Bestiarium',        plate:'§28', coord:'D8', glyph:'⛤', count:'Gegner'},
-  {id:'npcs',        res:'welt', name:'Charaktere & NPCs',  plate:'§29', coord:'D9', glyph:'♟', count:'NPCs'},
-  {id:'camp',        res:'welt', name:'Camp-Ausbau',        plate:'§34', coord:'D10', glyph:'⛫', count:'5 Stufen'},
-  {id:'checklists',  res:'register', name:'Checklisten',   plate:'§14', coord:'E1', glyph:'☑', count:'8 Reiter'},
-  {id:'collectibles',res:'register', name:'Collectibles',  plate:'§19', coord:'E2', glyph:'⬦', count:'Liste'},
-  {id:'gatherables', res:'register', name:'Gatherables',   plate:'§20', coord:'E3', glyph:'☘', count:'Liste'},
-  {id:'puzzles',     res:'register', name:'Rätsel',   plate:'§21', coord:'E4', glyph:'⍰', count:'Lösungen'},
-  {id:'minigames',   res:'register', name:'Minispiele',    plate:'§27', coord:'E5', glyph:'⚀', count:'Guides'},
-  {id:'food',        res:'register', name:'Food & Elixirs', plate:'§23', coord:'E6', glyph:'⚗', count:'Rezepte'},
-  {id:'achievements',res:'register', name:'Trophäen & Erfolge', plate:'§33', coord:'E7', glyph:'★', count:'Erfolge'},
-  {id:'favorites',   res:'register', name:'Favoriten',     plate:'§31', coord:'E8', glyph:'☆', count:'Merkliste'},
-  {id:'secrets',     res:'meta', name:'Secrets & Lore',    plate:'§25', coord:'F1', glyph:'⚿', count:'Tracker'},
-  {id:'patches',     res:'meta', name:'Patch-Notes',       plate:'§30', coord:'F2', glyph:'✎', count:'Log'},
-  {id:'roadmap',     res:'meta', name:'Roadmap',           plate:'§32', coord:'F3', glyph:'⚑', count:'Board'}
+  {id:'start',       res:'start', name:'Übersicht', en:'', desc:'Alle Kategorien und Seiten auf einen Blick', aka:['Start','Startseite','Home','Inhalt','Übersicht'], glyph:'▦', count:'Alle Seiten', plate:'', coord:''},
+  {id:'beginner',    res:'start', name:'Anfänger-Guide', en:'', desc:'Kampf-Grundlagen, Steuerung und erste Schritte', aka:['Einsteiger','Tipps','Steuerung','Parieren','Beginner','Grundlagen'], glyph:'➤', count:'Grundlagen', plate:'§01', coord:'A1'},
+  {id:'patches',     res:'start', name:'Patch-Notes', en:'Patch Notes', desc:'Alle Updates und Hotfixes mit den wichtigsten Änderungen', aka:['Update','Patch','Hotfix','Neuigkeiten','Known Issues','Changelog'], glyph:'✎', count:'Updates', plate:'§30', coord:'F2'},
+  {id:'roadmap',     res:'start', name:'Roadmap', en:'Roadmap', desc:'Was Pearl Abyss als Nächstes plant', aka:['DLC','geplant','Zukunft','Charting the Unknown'], glyph:'⚑', count:'Geplant', plate:'§32', coord:'F3'},
+  {id:'favorites',   res:'start', name:'Merkliste', en:'Favoriten', desc:'Deine mit ☆ markierten Einträge an einem Ort', aka:['Favoriten','Stern','gemerkt','Lesezeichen'], glyph:'☆', count:'Gemerkt', plate:'§31', coord:'E8'},
+  {id:'bosses',      res:'kampf', name:'Bosse', en:'Bosses', desc:'Fundort, Schwächen, Taktik und Beute aller Bosse', aka:['Boss','Endboss','Erinnerungsfragment','Revanche','Rematch'], glyph:'☠', count:'100', plate:'§02', coord:'B2'},
+  {id:'bestiary',    res:'kampf', name:'Gegner', en:'Creatures', desc:'Normale Gegner und Kreaturen mit Beute', aka:['Bestiarium','Monster','Kreaturen','Enemies','Tiere','Mobs'], glyph:'⛤', count:'Kreaturen', plate:'§28', coord:'D8'},
+  {id:'skills',      res:'kampf', name:'Fähigkeiten', en:'Skills', desc:'Fähigkeiten von Kliff, Damiane und Oongka', aka:['Skills','Skilltree','Skillbaum','Fähigkeit','Zusehen und Lernen','Watch and Learn','Abyss-Artefakt','Kraftfaust','Force Palm'], glyph:'✦', count:'6 Zweige', plate:'§13', coord:'B3'},
+  {id:'builds',      res:'kampf', name:'Builds', en:'Builds', desc:'Build-Vorschläge und der Build-Optimizer', aka:['Build','Skillung','Optimizer','Setup'], glyph:'⊞', count:'Optimizer', plate:'§15', coord:'B5'},
+  {id:'disarm',      res:'kampf', name:'Entwaffnen', en:'Disarm', desc:'Welche Gegner du entwaffnen kannst und wie', aka:['Disarm','Waffe abnehmen','entwaffnen'], glyph:'⛨', count:'Tabellen', plate:'§12', coord:'B4'},
+  {id:'weapons',     res:'ausruestung', name:'Waffen', en:'Weapons', desc:'Alle Waffen mit Werten, Fundort und Verfeinerung', aka:['Waffe','Schwert','Speer','Bogen','Schild','Rapier','Schusswaffe','Kanone','Zweihänder','Verfeinerung','Refinement'], glyph:'†', count:'500', plate:'§04', coord:'C1'},
+  {id:'armor',       res:'ausruestung', name:'Rüstungen', en:'Armor', desc:'Rüstungen und Sets mit Werten und Fundort', aka:['Rüstung','Helm','Kopfbedeckung','Handschuhe','Schuhwerk','Umhang','Set','Armor'], glyph:'⛓', count:'Sets', plate:'§05', coord:'C2'},
+  {id:'accessories', res:'ausruestung', name:'Accessoires', en:'Accessories', desc:'Ringe, Ohrringe und Halsketten mit Werten', aka:['Schmuck','Ring','Ohrring','Halskette','Amulett'], glyph:'❖', count:'Liste', plate:'§16', coord:'C4'},
+  {id:'cores',       res:'ausruestung', name:'Abyss-Ausrüstung', en:'Abyss Gear', desc:'Abyss-Ausrüstung (oft „Abyss Cores“ genannt), Sockel und Werte', aka:['Abyss Cores','Abyss-Kerne','Cores','Kerne','Sockel','Socket','Abyss Gear','einsetzen'], glyph:'⧫', count:'Kerne', plate:'§06', coord:'C3'},
+  {id:'witches',     res:'ausruestung', name:'Hexen & Fusion', en:'Witches', desc:'Alle Hexen, ihre Läden und Fusionsrezepte für Abyss-Ausrüstung', aka:['Hexe','Hexen-Guide','Synthese','Witch Synthesis','Fusion','fusionieren','Sockel erschaffen'], glyph:'☾', count:'Fusion', plate:'§17', coord:'B6'},
+  {id:'dyes',        res:'ausruestung', name:'Färbemittel', en:'Dyes', desc:'Farben und wo du sie bekommst', aka:['Farbe','Dye','färben','Farbstoff','Dyenamik'], glyph:'◑', count:'Farben', plate:'§22', coord:'C7'},
+  {id:'quests',      res:'quests', name:'Quests', en:'Main & Faction Quests', desc:'True Ending, Hauptquests, Fraktionsquests und Nebenquests', aka:['Hauptquest','Fraktionsquest','Fraktionen','Nebenquest','Side Quest','Kopfgeld','Bounty','Graumähnen','Greymane','Story','Tagebuch','Journal','True Ending'], glyph:'❢', count:'4 Stränge', plate:'§08', coord:'D3'},
+  {id:'chapters',    res:'quests', name:'Kapitel-Guide', en:'Chapters', desc:'Die Hauptstory Kapitel für Kapitel', aka:['Kapitel','Chapter','Prolog','Story','Timeline','Walkthrough','Komplettlösung'], glyph:'▤', count:'Kapitel', plate:'§24', coord:'D4'},
+  {id:'checklists',  res:'quests', name:'Checklisten', en:'', desc:'Bosse, Graumähnen, Sanktum, Waffen und Verpassbares zum Abhaken', aka:['Checkliste','Missables','verpassbar','Sanktum','Sanctum','Fortschritt','abhaken','100 Prozent'], glyph:'☑', count:'Abhaken', plate:'§14', coord:'E1'},
+  {id:'ruins',       res:'quests', name:'Uralte Ruinen', en:'Ancient Ruins', desc:'Ruinen-Herausforderungen und Abyss-Grenzsteine', aka:['Ruinen','Ruins','Grenzstein','Herausforderung'], glyph:'♜', count:'Ruinen', plate:'§26', coord:'D7'},
+  {id:'puzzles',     res:'quests', name:'Rätsel', en:'Puzzles', desc:'Lösungen zu Rätseln und Strongboxes', aka:['Puzzle','Strongbox','Truhe','Lösung','Abyss-Rätsel','Herausforderung'], glyph:'⍰', count:'Lösungen', plate:'§21', coord:'E4'},
+  {id:'minigames',   res:'quests', name:'Minispiele', en:'Minigames', desc:'Armdrücken, Duelle, Flipper und alle anderen Minispiele', aka:['Minigame','Armdrücken','Duo','Zweiblatt','Flipper','Pinball','Pferderennen','Herausforderung'], glyph:'⚀', count:'Guides', plate:'§27', coord:'E5'},
+  {id:'achievements',res:'quests', name:'Trophäen & Errungenschaften', en:'Trophies / Achievements', desc:'Alle Trophäen und Errungenschaften mit Tipps', aka:['Trophäe','Achievement','Erfolg','Errungenschaft','Platin'], glyph:'★', count:'Trophäen', plate:'§33', coord:'E7'},
+  {id:'map',         res:'welt', name:'Karte', en:'Map', desc:'Interaktive Karte von Pywel', aka:['Map','Weltkarte','interaktive Karte','Pywel'], glyph:'⌖', count:'Pywel', plate:'§09', coord:'D1'},
+  {id:'locations',   res:'welt', name:'Orte & Glocken', en:'Locations', desc:'Wichtige Orte je Region und alle Glocken', aka:['Locations','Ort','Stadt','Region','Höhle','Glocke','Glockenturm','Bell Tower'], glyph:'⌂', count:'Orte', plate:'§10', coord:'D2'},
+  {id:'npcs',        res:'welt', name:'Charaktere & NPCs', en:'People', desc:'Verbündete, Händler und wichtige Figuren', aka:['NPC','Händler','Charakter','Figur','Person','Verbündete'], glyph:'♟', count:'NPCs', plate:'§29', coord:'D9'},
+  {id:'camp',        res:'welt', name:'Graumähnen-Camp', en:'Greymane Camp', desc:'Ausbau des Camps Stufe für Stufe', aka:['Camp','Camp-Ausbau','Greymane','Graumähnen','Lager','Wohnen'], glyph:'⛫', count:'5 Stufen', plate:'§34', coord:'D10'},
+  {id:'mounts',      res:'welt', name:'Reittiere', en:'Mounts', desc:'Pferde und besondere Reittiere mit Fundort', aka:['Mount','Pferd','Horse','Reittier','Flug-Reittier','Stall'], glyph:'♞', count:'Galerie', plate:'§11', coord:'D5'},
+  {id:'pets',        res:'welt', name:'Haustiere', en:'Pets', desc:'Alle Haustiere und wie du sie bekommst', aka:['Pet','Haustier','Begleiter','Tier'], glyph:'❥', count:'Liste', plate:'§18', coord:'D6'},
+  {id:'secrets',     res:'welt', name:'Geheimnisse & Lore', en:'Secrets & Lore', desc:'Geheimes Ende, Erinnerungsfragmente, Easter Eggs und Lore', aka:['Secrets','geheim','Lore','Easter Egg','Erinnerungsfragment','Memory Fragment','Hidden Ending','Cresset'], glyph:'⚿', count:'Tracker', plate:'§25', coord:'F1'},
+  {id:'crafting',    res:'sammeln', name:'Herstellen & Farmen', en:'Crafting', desc:'Rezepte, Materialien und Farm-Routen', aka:['Crafting','Rezept','farmen','herstellen','Schmied','Kuku'], glyph:'⚙', count:'386', plate:'§07', coord:'C6'},
+  {id:'food',        res:'sammeln', name:'Kochen & Elixiere', en:'Cooking & Elixirs', desc:'Gerichte und Elixiere mit Wirkung und Zutaten', aka:['Food','Essen','Gericht','kochen','Elixier','Trank','Elixir','Buff'], glyph:'⚗', count:'Rezepte', plate:'§23', coord:'E6'},
+  {id:'items',       res:'sammeln', name:'Materialien & Items', en:'Materials', desc:'Nachschlagewerk für Materialien und sonstige Gegenstände', aka:['Item','Material','Gegenstand','Inventar','Dokument'], glyph:'❒', count:'Kompendium', plate:'§03', coord:'C5'},
+  {id:'gatherables', res:'sammeln', name:'Sammelobjekte', en:'Gatherables', desc:'Pflanzen, Erze und andere Rohstoffe zum Sammeln', aka:['Gatherables','Kräuter','Erz','Erzader','Pflanze','sammeln'], glyph:'☘', count:'Rohstoffe', plate:'§20', coord:'E3'},
+  {id:'collectibles',res:'sammeln', name:'Sammelgegenstände', en:'Collectibles', desc:'Sammelbare Gegenstände und Wissenseinträge', aka:['Collectibles','Sammlung','Wissen','Knowledge'], glyph:'⬦', count:'Sammlung', plate:'§19', coord:'E2'}
 ];
 const SECTION_BY_ID = {}; SECTIONS.forEach(s=>SECTION_BY_ID[s.id]=s);
 const SECTION_RESSORT = {}; SECTIONS.forEach(s=>SECTION_RESSORT[s.id]=s.res);

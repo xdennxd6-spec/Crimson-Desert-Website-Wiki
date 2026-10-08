@@ -32,7 +32,7 @@
 import fs from "fs";
 
 export const SLUG = "geheimnisse";
-export const NAV_LABEL = "Secrets & Lore";
+export const NAV_LABEL = "Geheimnisse & Lore";
 export const DEEPLINK = "/#sec-secrets";
 export const SITEMAP = { pri: "0.7", freq: "monthly" };
 
@@ -277,9 +277,9 @@ ${tabelle(["Tool", "Eingabe", "Wirkung"], toolZeilen)}
 </ol>`;
 
   const body = `
-<a class="cta" href="${DEEPLINK}">Secrets &amp; Lore in der App öffnen &rarr;</a>
+<a class="cta" href="${DEEPLINK}">Geheimnisse &amp; Lore in der App öffnen &rarr;</a>
 <p class="note">Die App enthält zusätzlich eine Story-Timeline mit maximalen Spoilern sowie Tracker für Memory Fragments und Abyss Cressets, die deinen Fortschritt speichern.</p>
-<p class="note">Die Trophäe „Pilgrim of Wonders“ und weitere Sammelziele stehen in den <a href="/trophaeen">Trophäen</a>, Rätsel und Strongboxes auf der Seite <a href="/raetsel">Rätsel</a>, die Rätsel der Abyss-Grenzsteine unter <a href="/ruinen">Uralte Ruinen</a>.</p>
+<p class="note">Die Trophäe „Pilgrim of Wonders“ und weitere Sammelziele stehen unter <a href="/trophaeen">Trophäen &amp; Errungenschaften</a>, Rätsel und Strongboxes auf der Seite <a href="/raetsel">Rätsel</a>, die Rätsel der Abyss-Grenzsteine unter <a href="/ruinen">Uralte Ruinen</a>.</p>
 ${ending}
 ${fragmente}
 ${cressets}
@@ -294,7 +294,7 @@ ${prio}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Secrets & Lore", SLUG),
+      breadcrumbLd("Geheimnisse & Lore", SLUG),
       {
         "@type": "ItemList",
         name: "Geheimnisse, Easter Eggs und versteckte Inhalte in Crimson Desert",
@@ -311,7 +311,7 @@ ${prio}`;
     h1: `Secrets & Lore in Crimson Desert: Cressets, Easter Eggs & Hidden Ending`,
     lead: `Alles Versteckte auf einer Seite: <strong>${z.cressets} Abyss Cressets</strong> in ${z.cressetregionen} Regionen, <strong>${z.fragmente} Memory Fragments</strong> laut Karte in ${z.fragmentregionen} Gebieten, ${z.easteregg} Easter Eggs, ${z.orte} Hidden Locations, ${z.geheimwaffen} Hidden Weapons, ${z.mechaniken} versteckte Mechaniken, ${z.tools} Such-Tools und die Lore zum Hidden Ending (Run 108).`,
     ogImage: null,
-    crumb: "Secrets & Lore",
+    crumb: "Geheimnisse & Lore",
     bodyHtml: body,
     jsonld,
   };

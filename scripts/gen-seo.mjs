@@ -153,46 +153,80 @@ const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
   partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse];
 
-// Kopf-Menue aller zwoelf Seiten. Thematisch gruppiert: erst Gegner, dann
-// Ausruestung, dann Herstellung, dann Quests, dann die Meta-Listen.
+// Kategorien wie im Wiki-Menue der App (Navigationsumbau 10/2026, Reihenfolge =
+// Reihenfolge in der Fussleiste "Alle Guides"). Die Namen sind die der App
+// (RESSORTS in data/d04-armor-imgs.js, dort mit id "kampf", "ausruestung" ...).
+// Die Kategorie hat KEINE eigene URL: sie steht in der sichtbaren Brotkrume als
+// reiner Text, nicht im JSON-LD (Schema.org verlangt dort fuer jede Ebene ausser
+// der letzten eine URL).
+const KATEGORIEN = [
+  ["start", "Start"],
+  ["kampf", "Kampf"],
+  ["ausruestung", "Ausrüstung"],
+  ["quests", "Quests & Herausforderungen"],
+  ["welt", "Welt & Karte"],
+  ["sammeln", "Herstellen & Sammeln"],
+];
+
+// Menue aller 22 Seiten: [slug, Beschriftung, Kategorie-id, "kopf"?]. Reihenfolge
+// = Kategorien-Reihenfolge der App, innerhalb der Kategorie wie dort. Die
+// Beschriftungen sind die Seitennamen der App (Spielbegriffe, nicht die alten
+// Wiki-Namen "Skills", "Mounts", "Pets", "Hexen-Guide" ...); die URLs bleiben.
+// Das vierte Element "kopf" markiert die zwoelf Seiten im Kopf-Menue, das wegen
+// der Handy-Breite kompakt bleibt (22 Eintraege waeren eine halbe Bildschirm-
+// seite); alle Seiten stehen nach Kategorien gruppiert in der Fussleiste
+// "Alle Guides" jeder Seite. Eine Seite ausserhalb der zwoelf erscheint im Kopf,
+// solange sie selbst offen ist.
 // "fraktionen" steht zwischen Haupt- und Nebenquests, weil die App die
 // Fraktionen als dritten Tab innerhalb von sec-quests fuehrt (qt-mq -> qt-fac
 // -> qt-sq); die drei Module verlinken per /#sec=quests&tab=<mq|fac|sq> direkt auf ihren Tab.
-// "npcs" steht bei den Meta-Listen direkt vor den Patch-Notes; in index.html
-// liegt sec-npcs unmittelbar vor sec-patches.
+// Wer NAV aendert, haelt verify-seo.mjs (liest die Slugs per Regex aus diesem
+// Block) und scripts/verify-nav.mjs (Soll-Abgleich der Labels) mit.
 const NAV = [
-  ["bosse", "Bosse"],
-  ["bestiarium", "Bestiarium"],
-  ["waffen", "Waffen"],
-  ["ruestungen", "Rüstungen"],
-  ["crafting", "Crafting"],
-  ["hauptquests", "Hauptquests"],
-  ["fraktionen", "Fraktionen"],
-  ["side-quests", "Nebenquests"],
-  ["trophaeen", "Trophäen"],
-  ["true-ending", "True Ending"],
-  ["npcs", "NPCs"],
-  ["patch-notes", "Patch-Notes"],
-  // Ab hier "mehr": stehen nicht im Kopf-Menue (das waere mit 22 Eintraegen auf
-  // dem Handy eine halbe Bildschirmseite), sondern in der Fussleiste "Alle Guides"
-  // jeder Seite. Die Fussleiste fuehrt alle Seiten, auch die oberen zwoelf.
-  ["skills", "Skills", "mehr"],
-  ["hexen", "Hexen-Guide", "mehr"],
-  ["abyss-cores", "Abyss Cores", "mehr"],
-  ["accessoires", "Accessoires", "mehr"],
-  ["kapitel-guide", "Kapitel-Guide", "mehr"],
-  ["mounts", "Mounts", "mehr"],
-  ["pets", "Pets", "mehr"],
-  ["ruinen", "Uralte Ruinen", "mehr"],
-  ["raetsel", "Rätsel", "mehr"],
-  ["geheimnisse", "Secrets & Lore", "mehr"],
+  ["patch-notes", "Patch-Notes", "start", "kopf"],
+  ["bosse", "Bosse", "kampf", "kopf"],
+  ["bestiarium", "Gegner", "kampf", "kopf"],
+  ["skills", "Fähigkeiten", "kampf", "kopf"],
+  ["waffen", "Waffen", "ausruestung", "kopf"],
+  ["ruestungen", "Rüstungen", "ausruestung", "kopf"],
+  ["accessoires", "Accessoires", "ausruestung"],
+  ["abyss-cores", "Abyss-Ausrüstung", "ausruestung"],
+  ["hexen", "Hexen & Fusion", "ausruestung"],
+  ["hauptquests", "Hauptquests", "quests", "kopf"],
+  ["fraktionen", "Fraktionsquests", "quests", "kopf"],
+  ["side-quests", "Nebenquests", "quests", "kopf"],
+  ["kapitel-guide", "Kapitel-Guide", "quests"],
+  ["true-ending", "True Ending", "quests", "kopf"],
+  ["ruinen", "Uralte Ruinen", "quests"],
+  ["raetsel", "Rätsel", "quests"],
+  ["trophaeen", "Trophäen & Errungenschaften", "quests"],
+  ["npcs", "Charaktere & NPCs", "welt"],
+  ["mounts", "Reittiere", "welt", "kopf"],
+  ["pets", "Haustiere", "welt"],
+  ["geheimnisse", "Geheimnisse & Lore", "welt"],
+  ["crafting", "Herstellen & Farmen", "sammeln", "kopf"],
 ];
+const KAT_NAME = Object.fromEntries(KATEGORIEN);
+const KAT_VON = Object.fromEntries(NAV.map(([s, , kat]) => [s, kat]));
+// Patch-Notes steht in der App unter "Start" und deshalb in NAV ganz vorn; im
+// Kopf-Menue bleibt es wie bisher ganz rechts vor "Alle Guides".
+const KOPF = [...NAV.filter(([, , kat, k]) => k === "kopf" && kat !== "start"),
+  ...NAV.filter(([, , kat, k]) => k === "kopf" && kat === "start")];
 
 // Schutz gegen stille Inkonsistenz: jedes Modul muss im Menue auftauchen.
 for (const p of SEO_PARTS) {
   if (!NAV.some(([s]) => s === p.SLUG)) {
     throw new Error(`Modul "${p.SLUG}" fehlt in der NAV-Liste von gen-seo.mjs`);
   }
+}
+// Gleiche Absicherung fuer Kategorien und Kopf-Menue.
+for (const [s, , kat] of NAV) {
+  if (!(kat in KAT_NAME)) throw new Error(`NAV: Seite "${s}" hat unbekannte Kategorie "${kat}"`);
+}
+if (new Set(NAV.map(([s]) => s)).size !== NAV.length) throw new Error("NAV: doppelter Slug");
+if (KOPF.length > 12) throw new Error(`NAV: ${KOPF.length} Kopf-Eintraege, hoechstens 12 (Handy-Breite)`);
+for (const [kid] of KATEGORIEN) {
+  if (!NAV.some(([, , kat]) => kat === kid)) throw new Error(`NAV: Kategorie "${kid}" ist leer`);
 }
 
 // ── Redaktionelle Texte (scripts/seo-content/) ───────────────────────────────
@@ -435,6 +469,10 @@ color:var(--ink-hi);letter-spacing:.02em;text-transform:uppercase}
 header.site nav{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 header.site nav a{color:var(--amber);display:inline-block;padding:10px 3px}
 header.site nav a[aria-current=page]{color:var(--ink-hi);border-bottom:2px solid var(--red)}
+@media (max-width:700px){header.site nav{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:14px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)}
+header.site nav::-webkit-scrollbar{display:none}
+header.site nav a{white-space:nowrap;flex:0 0 auto}
+header.site nav a[aria-current=page]{order:-1}}
 main{max-width:1040px;margin:0 auto;padding:22px 20px 60px}
 nav.crumbs{font-family:var(--f-mono);font-size:var(--fs-11);color:var(--ink-faint);margin:14px 0 6px;letter-spacing:.04em}
 nav.crumbs a{color:var(--ink-faint)}
@@ -493,6 +531,8 @@ ul.te li::before{content:"\\2610";position:absolute;left:0;color:var(--red);font
 footer.site{border-top:1px solid var(--line);padding:22px 20px;color:var(--ink-faint);
 font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;text-align:center;max-width:1040px;margin:0 auto}
 footer.site nav.alle{line-height:2.1;margin:0 0 14px;font-size:var(--fs-11-5)}
+footer.site nav.alle .alle-gruppe{margin:0 0 4px}
+footer.site nav.alle .alle-kat{color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-right:8px}
 footer.site nav.alle a{color:var(--amber);padding:4px 2px}
 footer.site nav.alle a[aria-current=page]{color:var(--ink-hi)}
 @media(max-width:560px){h1{font-size:24px}main{padding:16px 14px 50px}}
@@ -629,11 +669,22 @@ function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, 
   }
   const og = `${SITE}/${ogRel}`;
   const navLink = ([s, l]) =>
-    `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${l}</a>`;
-  // Kopf: die zwoelf Hauptseiten, eine "mehr"-Seite nur, wenn sie gerade offen ist.
-  const navLinks = NAV.filter(([s, , g]) => g !== "mehr" || s === slugName).map(navLink).join("")
+    `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${esc(l)}</a>`;
+  // Kopf: die zwoelf Hauptseiten, eine andere Seite nur, wenn sie gerade offen ist.
+  const navLinks = NAV.filter(([s, , , k]) => k === "kopf" || s === slugName)
+    .sort((a, b) => (KOPF.indexOf(a) + 1 || 99) - (KOPF.indexOf(b) + 1 || 99) || NAV.indexOf(a) - NAV.indexOf(b))
+    .map(navLink).join("")
     + `<a href="#alle-guides">Alle Guides</a>`;
-  const alleGuides = NAV.map(navLink).join(" &middot; ");
+  // Fussleiste: alle Seiten nach Kategorien gruppiert (Kategoriename + Links).
+  // Die Kategorie "Start" fuehrt zusaetzlich die Uebersicht der App.
+  const alleGuides = KATEGORIEN.map(([kid, kname]) => {
+    const links = NAV.filter(([, , kat]) => kat === kid).map(navLink);
+    if (kid === "start") links.unshift(`<a href="/">Übersicht</a>`);
+    return `<div class="alle-gruppe"><span class="alle-kat">${esc(kname)}</span> ${links.join(" &middot; ")}</div>`;
+  }).join("\n  ");
+  // Brotkrume: Startseite, Kategorie (nur Text, keine eigene URL), Seite.
+  const kat = KAT_VON[slugName];
+  const crumbHtml = `<a href="/">Startseite</a> &rsaquo; ${kat ? `<span class="crumb-kat">${esc(KAT_NAME[kat])}</span> &rsaquo; ` : ""}${esc(crumb)}`;
   return `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -674,7 +725,7 @@ ${JSON.stringify(jsonld)}
   <nav>${navLinks}</nav>
 </header>
 <main>
-<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; ${esc(crumb)}</nav>
+<nav class="crumbs" aria-label="Breadcrumb">${crumbHtml}</nav>
 <h1>${esc(h1)}</h1>
 <p class="lead">${lead}</p>
 ${bodyHtml}

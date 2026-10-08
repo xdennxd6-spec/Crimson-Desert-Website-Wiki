@@ -49,7 +49,7 @@
 // ctx = { data: {...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
 export const SLUG = "fraktionen";
-export const NAV_LABEL = "Fraktionen";
+export const NAV_LABEL = "Fraktionsquests";
 // Tab-Deeplink: die App zeigt die Fraktionen als dritten Tab innerhalb von sec-quests
 // (id="qt-fac"/"qp-fac"); der Hash-Parameter tab=fac (_applyTabParam in index.html)
 // oeffnet diesen Tab direkt, analog hauptquests.mjs (tab=mq) und side-quests.mjs (tab=sq).
@@ -142,7 +142,7 @@ ${sections}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Fraktionen", SLUG),
+      breadcrumbLd("Fraktionsquests", SLUG),
       {
         "@type": "ItemList",
         name: "Alle Fraktionsquests in Crimson Desert",
@@ -163,7 +163,7 @@ ${sections}`;
     h1: `Alle ${z.anzahl} Fraktionsquests in Crimson Desert`,
     lead: `Diese Übersicht listet alle <strong>${z.anzahl} Fraktionsquests</strong> von Crimson Desert, aufgeteilt auf <strong>${z.fraktionen} Fraktionen</strong> in <strong>${z.regionen} Regionen</strong>: mit Auslöser, Voraussetzung und Belohnung siehst du auf einen Blick, wie du jede Fraktion überhaupt erst freischaltest.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
-    crumb: "Fraktionen",
+    crumb: "Fraktionsquests",
     bodyHtml: body,
     jsonld,
   };

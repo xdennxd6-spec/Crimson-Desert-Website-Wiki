@@ -37,7 +37,7 @@
 // ctx = { data: {...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE } }
 
 export const SLUG = "npcs";
-export const NAV_LABEL = "NPCs";
+export const NAV_LABEL = "Charaktere & NPCs";
 export const DEEPLINK = "/#sec-npcs";
 export const SITEMAP = { pri: "0.8", freq: "monthly" };
 
@@ -77,7 +77,7 @@ const GROUPS = [
   ["allies", "🤝", "Verbündete & Quest-Geber",
     "Wichtige freundliche NPCs, die Kliff unterstützen oder Aufträge vergeben."],
   ["antagonists", "⚔️", "Antagonisten",
-    "Gegenspieler und Fraktionsanführer — viele davon sind Bosse (Kampf-Details in der Boss-Sektion)."],
+    "Gegenspieler und Fraktionsanführer — viele davon sind Bosse (Kampf-Details auf der Seite Bosse)."],
   ["merchants", "💰", "Händler",
     "Benannte Verkäufer in Hernand, im Greymane-Lager und in weiteren Regionen; außerhalb Hernands ist der genaue Standort teils nur auf Regionsebene belegt."],
 ];
@@ -167,7 +167,7 @@ export function build(ctx) {
 <a class="cta" href="${DEEPLINK}">Interaktive NPC-Übersicht mit Trust-System öffnen &rarr;</a>
 <p class="note">In der App findest du zusätzlich das Trust-System: wie du bei jedem NPC Vertrauen aufbaust und welche Belohnungen es bei maximalem Trust gibt.</p>
 <p class="strat"><b>Zur Datenlage:</b> ${z.ohneregion > 0 ? `Bei ${z.ohneregion} der ${z.anzahl} NPCs (${ohneRegionNamen}) ist im Datenbestand kein fester Aufenthaltsort hinterlegt — die Region-Zeile fehlt dort bewusst, statt einen Ort zu raten.` : `Bei allen ${z.anzahl} NPCs ist eine Region hinterlegt; wo die Quellen nur die Region und nicht den genauen Standort belegen, steht bewusst nur diese.`} Bei ${z.teilsbelegt} NPCs gilt die Quellenlage als dünn (nur eine Quelle bestätigt die Angaben); das steht direkt auf der jeweiligen Karte.</p>
-<p class="note">Mehrere Antagonisten sind zugleich Bosse mit eigener Kampfmechanik — Details dazu in der <a href="/bosse">Bossliste</a>. Wer stattdessen wilde und feindliche Kreaturen sucht, findet sie im <a href="/bestiarium">Bestiarium</a>.</p>
+<p class="note">Mehrere Antagonisten sind zugleich Bosse mit eigener Kampfmechanik — Details dazu in der <a href="/bosse">Bossliste</a>. Wer stattdessen wilde und feindliche Kreaturen sucht, findet sie unter <a href="/bestiarium">Gegner</a>.</p>
 ${sections}`;
 
   const allNames = GROUPS.flatMap(([key]) => NPCS[key].map((n) => n.name));
@@ -175,7 +175,7 @@ ${sections}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("NPCs", SLUG),
+      breadcrumbLd("Charaktere & NPCs", SLUG),
       {
         "@type": "ItemList",
         name: "Wichtige NPCs in Crimson Desert",
@@ -194,7 +194,7 @@ ${sections}`;
     h1: `${z.anzahl} wichtige NPCs in Crimson Desert`,
     lead: `Diese Übersicht listet <strong>${z.anzahl} wichtige benannte NPCs</strong> aus Crimson Desert: ${z.begleiter} spielbare Begleiter, ${z.verbuendete} Verbündete &amp; Quest-Geber, ${z.antagonisten} Antagonisten und ${z.haendler} Händler, jeweils mit Rolle, Region und ausführlicher Bio.`,
     ogImage: "cd_assets/npcs/kliff.webp",
-    crumb: "NPCs",
+    crumb: "Charaktere & NPCs",
     bodyHtml: body,
     jsonld,
   };

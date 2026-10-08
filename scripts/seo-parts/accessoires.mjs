@@ -93,7 +93,7 @@ export function build(ctx) {
   const body = `
 <a class="cta" href="${DEEPLINK}">Alle Accessoires interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App filterst du nach Typ und lässt dir zu jedem Accessoire die Fundstelle auf der Karte anzeigen.</p>
-<p class="note"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert. Mehrere Accessoires kaufst du bei Hexen wie Elowen, Bari, Lyselia und Areciel, mehr dazu im <a href="/hexen">Hexen-Guide</a>; viele Stücke fallen als Beute oder Belohnung bei Gegnern an, die in der <a href="/bosse">Bossliste</a> stehen.</p>
+<p class="note"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert. Mehrere Accessoires kaufst du bei Hexen wie Elowen, Bari, Lyselia und Areciel, mehr dazu unter <a href="/hexen">Hexen &amp; Fusion</a>; viele Stücke fallen als Beute oder Belohnung bei Gegnern an, die in der <a href="/bosse">Bossliste</a> stehen.</p>
 ${sections}`;
 
   const jsonld = {

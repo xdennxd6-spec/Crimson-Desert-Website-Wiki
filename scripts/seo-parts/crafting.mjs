@@ -3,7 +3,7 @@
 // ctx = { data: {...alle Datenstrukturen...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
 export const SLUG = "crafting";
-export const NAV_LABEL = "Crafting";
+export const NAV_LABEL = "Herstellen & Farmen";
 export const DEEPLINK = "/#sec-crafting";
 export const SITEMAP = { pri: "0.8", freq: "monthly" };
 
@@ -131,7 +131,7 @@ ${gadgetSection}`;
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [
-      breadcrumbLd("Crafting", SLUG),
+      breadcrumbLd("Herstellen & Farmen", SLUG),
       {
         "@type": "ItemList",
         name: "Alle Crafting-Rezepte in Crimson Desert",
@@ -150,7 +150,7 @@ ${gadgetSection}`;
     h1: `Alle ${CRAFTING.length} Crafting-Rezepte in Crimson Desert`,
     lead: `Diese Übersicht listet alle <strong>${CRAFTING.length} Crafting-Rezepte</strong> aus Crimson Desert: <strong>${elixirItems.length} Elixiere</strong>, <strong>${foodAll.length} Gerichte</strong> von der Basis-Stufe bis zur Hearty-Stufe und <strong>${gadgetItems.length} Kuku-Gadgets</strong>, jeweils mit Zutaten, Wirkung, Herstellungsort und offen markierter Datenlage.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
-    crumb: "Crafting",
+    crumb: "Herstellen & Farmen",
     bodyHtml: body,
     jsonld,
   };
