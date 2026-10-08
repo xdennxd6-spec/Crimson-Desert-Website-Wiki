@@ -765,7 +765,6 @@ const WEAPON_IMGS={
   "Helms Greathammer":"cd_assets/weapons/item-400003.webp",
   "Absolute Justice Greatsword":"cd_assets/weapons/absolute-justice-greatsword-giant.webp",
   "Hernandian Contribution Banner Pike":"cd_assets/weapons/hernandian-contribution-banner-pike.webp",
-  "Darkbringer Greatsword":"cd_assets/weapons/darkbringer.webp",
   "Mining Knuckledrill":"cd_assets/weapons/item-1001294.webp",
   "Copper Knuckledrill":"cd_assets/weapons/item-410004.webp",
   "Rhonid Large Shield":"cd_assets/weapons/item-290509.webp",

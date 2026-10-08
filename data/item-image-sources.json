@@ -6553,6 +6553,415 @@
       "replaces": "cd_assets/bosses/mountain_god_boar.png",
       "reason": "höhere Auflösung (512×512 statt 300×169)",
       "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Crow's Pursuit",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_026.webp",
+      "local": "cd_assets/cores/crows-pursuit.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Ator's Orb",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_070.webp",
+      "local": "cd_assets/cores/ators-orb.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Groundsurge",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_059.webp",
+      "local": "cd_assets/cores/groundsurge.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Wind Slash",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_073.webp",
+      "local": "cd_assets/cores/wind-slash.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Wound of Darkness",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_115.webp",
+      "local": "cd_assets/cores/wound-of-darkness.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Volcanic Eruption",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_024.webp",
+      "local": "cd_assets/cores/volcanic-eruption.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Momentum",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_006.webp",
+      "local": "cd_assets/cores/momentum.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Malicebane",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_087.webp",
+      "local": "cd_assets/cores/malicebane.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Insight III",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_003.webp",
+      "local": "cd_assets/cores/insight.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Destruction III",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_001.webp",
+      "local": "cd_assets/cores/destruction.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Infinite Arrows III",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_092.webp",
+      "local": "cd_assets/cores/infinite-arrows.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Aegis III",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_008.webp",
+      "local": "cd_assets/cores/aegis.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Aptitude I",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_105.webp",
+      "local": "cd_assets/cores/aptitude.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Haste I",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_074.webp",
+      "local": "cd_assets/cores/haste.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Abyssal Rays",
+      "group": "core",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_abyssgear_socket_normal_036.webp",
+      "local": "cd_assets/cores/abyssal-rays.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Dark Red Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0004.webp",
+      "local": "cd_assets/dyes/dye_dark-red.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Red Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0003.webp",
+      "local": "cd_assets/dyes/dye_red.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Rich Red Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0002.webp",
+      "local": "cd_assets/dyes/dye_rich-red.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Bright Red Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0001.webp",
+      "local": "cd_assets/dyes/dye_bright-red.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Bright Green Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0031.webp",
+      "local": "cd_assets/dyes/dye_bright-green.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Dark Orange Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0049.webp",
+      "local": "cd_assets/dyes/dye_dark-orange.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Bright Orange Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0046.webp",
+      "local": "cd_assets/dyes/dye_bright-orange.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Rich Spring Green Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0037.webp",
+      "local": "cd_assets/dyes/dye_rich-spring-green.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Bright Violet Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0006.webp",
+      "local": "cd_assets/dyes/dye_bright-violet.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Rich Purple Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0012.webp",
+      "local": "cd_assets/dyes/dye_rich-purple.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Bright Blue Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0016.webp",
+      "local": "cd_assets/dyes/dye_bright-blue.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Teal Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0028.webp",
+      "local": "cd_assets/dyes/dye_teal.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Pure White Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0051.webp",
+      "local": "cd_assets/dyes/dye_pure-white.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Shadow Grey Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0056.webp",
+      "local": "cd_assets/dyes/dye_shadow-grey.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Black Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0060.webp",
+      "local": "cd_assets/dyes/dye_black.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Grey Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0055.webp",
+      "local": "cd_assets/dyes/dye_grey.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Bright Grey Dye",
+      "group": "dye",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_collection_prop_dyewater_0052.webp",
+      "local": "cd_assets/dyes/dye_bright-grey.webp",
+      "reason": "höhere Auflösung (256×256 statt 96×96), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Blinding Flash",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_lightreflection.webp",
+      "local": "cd_assets/skills/blinding_flash.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Charge",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_shielddash.webp",
+      "local": "cd_assets/skills/charge.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Flame Strike",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_atribute_fire.webp",
+      "local": "cd_assets/skills/flame_strike.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Frost Mantle",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_atribute_ice.webp",
+      "local": "cd_assets/skills/frost_mantle.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Lightning Surge",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_atribute_lightning.webp",
+      "local": "cd_assets/skills/lightning_surge.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Parry",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_shieldjustguard.webp",
+      "local": "cd_assets/skills/parry.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Evasive Roll",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_rollcancel.webp",
+      "local": "cd_assets/skills/evasive_roll.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Counter",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_shieldjustguard_attack.webp",
+      "local": "cd_assets/skills/counter.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Falling Palm",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_tathagata.webp",
+      "local": "cd_assets/skills/falling_palm.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Aerial Force Palm",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_jijeongta_air.webp",
+      "local": "cd_assets/skills/aerial_force_palm.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Force Palm",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_jijeongta_i.webp",
+      "local": "cd_assets/skills/force_palm.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Dodge",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_justevade.webp",
+      "local": "cd_assets/skills/dodge.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Focus",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_detect.webp",
+      "local": "cd_assets/skills/focus.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Nature's Snare",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_mabongpa.webp",
+      "local": "cd_assets/skills/natures_snare.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Nature's Echo",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_cloneattack.webp",
+      "local": "cd_assets/skills/natures_echo.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Diving Force Palm",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_tathagata_mini.webp",
+      "local": "cd_assets/skills/diving_force_palm.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Quick Swap",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_subweapontoggle.webp",
+      "local": "cd_assets/skills/quick_swap.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Aerial Stab",
+      "group": "skill",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_icon_skill_lungeair.webp",
+      "local": "cd_assets/skills/aerial_stab.webp",
+      "reason": "höhere Auflösung (200×200 statt 44×44), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
+    },
+    {
+      "name": "Torch",
+      "group": "item",
+      "id": "200014",
+      "icon": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_torch_0001.webp",
+      "local": "cd_assets/items/torch.webp",
+      "reason": "höhere Auflösung (256×256 statt 125×125), Datei überschrieben",
+      "verifiedOn": "2026-10-08"
     }
   ],
   "fextralifeReplacement": {
