@@ -596,6 +596,89 @@ details.faq>p{margin:0;padding:0 16px 14px;font-size:14px;color:var(--ink-dim);m
 ${PART_CSS}
 `.trim();
 
+// ── Bewegung (Lauf 09.10.2026, Bereich B5) ───────────────────────────────────
+// Dieselbe Grundbewegung wie in der App (index.html, cdMotion), bewusst schlank.
+// Drei Bausteine, zusammen ca. 4 KB je Seite:
+//   MOTION_HEAD  Inline-Skript im <head>: cd_motion-Schalter -> html.cd-motion / html.cd-still
+//   MOTION_CSS   Lichtkegel auf Karten, Druckregel, Lenis-Weiche
+//   MOTION_JS    Skript am Ende des <body>: Libs aus /vendor/ nur bei Bewegung nachladen
+// ACHTUNG: Alles steht in Template-Literalen. Ein Backslash muss doppelt stehen
+// (\\b ergibt im HTML \b); "${" und Backticks sind im Browsercode tabu.
+// Die Libs liegen im Repo (vendor/), same-origin, kein CDN. Inhalt bleibt ohne JS
+// vollstaendig: versteckt wird erst im Skript, nachdem die Libs geladen sind.
+const MOTION_HEAD = `<script>/* cd_motion: 'auto' (folgt reduced-motion) | 'on' | 'off'; ?motion erzwingt an; Schlüssel wie die App */
+(function(){var h=document.documentElement,p='auto';try{p=localStorage.getItem('cd_motion')||'auto'}catch(e){}h.classList.add(/[?&]motion\\b/.test(location.search)||p==='on'||(p!=='off'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))?'cd-motion':'cd-still')})();</script>`;
+
+const MOTION_CSS = `
+/* --- Bewegung (nur html.cd-motion) --- */
+html.lenis{scroll-behavior:auto}
+h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen Sprung ohne Ring */
+/* nach React Bits SpotlightCard, (c) David Haz, MIT+Commons Clause; nur background-image, ::before bleibt */
+@media (hover:hover) and (pointer:fine){html.cd-motion article.card:hover,html.cd-motion .te-cat:hover{background-image:radial-gradient(280px circle at var(--mx) var(--my),color-mix(in srgb,var(--red) 13%,transparent),transparent 70%)}}
+/* Druck: alles sichtbar */
+@media print{main [style*="opacity"]{opacity:1!important;transform:none!important}}
+`;
+
+const MOTION_JS = `<script>
+/* Bewegung (nur html.cd-motion): Lenis, Einblenden unterhalb des Bildes, gleitende Anker. Scheitert etwas: alles sichtbar. */
+(()=>{
+const H=document.documentElement,mob=matchMedia('(max-width:860px)'),W=new Set(),
+SEL='main>h2,main>h3,main>ul,main>.te-cat,main>details.faq,article.card,tbody tr',
+LIBS=['gsap-3.15.0.min.js','ScrollTrigger-3.15.0.min.js','lenis-1.3.26.min.js'];
+let lenis,st=[];
+if(!H.classList.contains('cd-motion'))return;
+/* Netz: alles Wartende sofort sichtbar */
+const alle=()=>{st.forEach(t=>t.kill());st=[];const l=[...W];W.clear();
+if(l.length){gsap.killTweensOf(l);gsap.set(l,{clearProps:'transform,opacity'})}};
+const frei=l=>{l=l.filter(e=>W.delete(e));
+if(l.length)gsap.to(l,{opacity:1,y:0,duration:mob.matches?.25:.42,stagger:mob.matches?.02:.035,ease:'power2.out',overwrite:true,clearProps:'transform,opacity'})};
+const tick=t=>lenis&&lenis.raf(t*1000);
+const aus=()=>{alle();if(lenis){gsap.ticker.remove(tick);lenis.destroy();lenis=window.lenis=null}H.classList.replace('cd-motion','cd-still')};
+/* nur Elemente unterhalb des ersten Bildes, nie bei Hash/Scrollposition */
+const vorbereiten=()=>{
+if(scrollY>40||location.hash)return;
+const vh=innerHeight,zeilen=new Map(),liste=[];
+document.querySelectorAll(SEL).forEach(e=>{
+if(liste.length>=200)return;
+if(e.tagName=='TR'){const n=(zeilen.get(e.parentNode)||0)+1;zeilen.set(e.parentNode,n);if(n>40)return}
+const r=e.getBoundingClientRect(),a=e.parentElement.closest(SEL);
+if(r.top>=vh&&r.height&&!(a&&W.has(a))){liste.push(e);W.add(e)}});
+if(!liste.length)return;
+gsap.set(liste,{opacity:0,y:(i,e)=>e.tagName=='TR'?0:mob.matches?8:16});
+st=ScrollTrigger.batch(liste,{start:'top 94%',once:true,batchMax:12,interval:.06,onEnter:frei})};
+const los=()=>{
+gsap.registerPlugin(ScrollTrigger);
+lenis=window.lenis=new Lenis({lerp:.1,syncTouch:false,allowNestedScroll:true,stopInertiaOnNavigate:true,
+respectReducedMotion:false,prevent:n=>!!n.closest?.('input,select,textarea,[data-lenis-prevent]')});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(tick);gsap.ticker.lagSmoothing(0);
+vorbereiten();
+/* Netz: Seitensuche, Druck, Zurück/Vor */
+document.addEventListener('input',e=>{if(e.target.id=='pt-suche')alle()},true);
+addEventListener('beforeprint',alle);addEventListener('hashchange',alle);
+/* Anker gleiten; Versatz = feste Kopfzeile (Lenis zieht scroll-margin-top 18px selbst ab) */
+document.addEventListener('click',e=>{
+const a=e.target.closest('a[href^="#"]'),h=a&&a.getAttribute('href'),z=h&&h.length>1&&document.getElementById(h.slice(1));
+if(!z||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+e.preventDefault();alle();
+const k=document.querySelector('header.site'),p=getComputedStyle(k).position;
+lenis.scrollTo(z,{offset:-(p=='sticky'||p=='fixed'?k.offsetHeight:0),duration:.8});
+history[location.hash==h?'replaceState':'pushState'](null,'',h);
+z.tabIndex=-1;z.focus({preventScroll:true})});
+/* Lichtkegel: ein Listener, Position per rAF */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){let raf,k,x,y;
+document.addEventListener('pointermove',e=>{
+k=e.target.closest('article.card,.te-cat');if(!k)return;x=e.clientX;y=e.clientY;
+raf=raf||requestAnimationFrame(()=>{raf=0;if(!k)return;const r=k.getBoundingClientRect();
+k.style.setProperty('--mx',x-r.left+'px');k.style.setProperty('--my',y-r.top+'px')})},{passive:true})}};
+const laden=()=>{let n=0,fehl=0;
+LIBS.forEach(f=>{const s=document.createElement('script');s.src='/vendor/'+f;s.async=false;
+s.onload=()=>{if(++n<LIBS.length||fehl)return;try{los()}catch(x){fehl=1;console.warn('Bewegung aus:',x);aus()}};
+s.onerror=()=>{if(!fehl){fehl=1;aus()}};document.head.appendChild(s)})};
+document.readyState=='loading'?addEventListener('DOMContentLoaded',laden):laden();
+})();
+</script>`;
+
 // slug fuer Anker-IDs
 // normalize("NFC") zuerst: ein zerlegtes "ä" (a + U+0308) wuerde sonst zu "a" statt "ae"
 // und verschoebe den Anker still gegenueber der komponierten Schreibweise.
@@ -690,6 +773,7 @@ function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+${MOTION_HEAD}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${url}">
@@ -717,7 +801,8 @@ function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, 
 <script type="application/ld+json">
 ${JSON.stringify(jsonld)}
 </script>
-<style>${SHARED_CSS}</style>
+<style>${SHARED_CSS}
+${MOTION_CSS}</style>
 </head>
 <body>
 <header class="site">
@@ -829,6 +914,7 @@ ${bodyHtml}
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.
 </footer>
+${MOTION_JS}
 </body>
 </html>`;
 }

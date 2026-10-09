@@ -149,7 +149,7 @@ ${table(liste)}`;
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Core-Datenbank mit Slot-Filter in der App öffnen &rarr;</a>
-<p class="note">In der App filterst du die Cores nach Slot-Typ und findest darunter den durchsuchbaren Witch-Synthese-Baum mit allen Rezepten.</p>
+<p class="note">In der App filterst du die Cores nach Slot-Typ. Die Synthese-Mechanik und den durchsuchbaren Synthese-Baum mit allen Rezepten findest du dort auf der eigenen Seite <a href="/#sec-synthesis">Abyss-Synthese</a>.</p>
 <p class="note">Wie die Hexen Cores herstellen und welche Rezepte sie verkaufen, steht unter <a href="/hexen">Hexen &amp; Fusion</a>; viele Cores fallen als Beute von Gegnern aus der <a href="/bosse">Bossliste</a>.</p>
 <p class="crs-legend">${esc(slotLegende)}</p>
 ${gruppen}

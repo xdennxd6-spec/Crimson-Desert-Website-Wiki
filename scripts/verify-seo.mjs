@@ -596,8 +596,39 @@ for (const s of SEITEN_MIT_WERKZEUG) {
     `${s}.html: ${sprungziele} Sprunglinks fuer ${h2.length} Abschnitte`);
 }
 
+// ── 4c. Bewegung (Lauf 09.10.2026, B5) ───────────────────────────────────────
+// Jede Seite traegt den Kopf-Schnipsel (cd_motion) VOR dem ersten Paint, laedt
+// Bewegungs-Libs nur same-origin aus /vendor/ (Dateien muessen im Repo liegen) und
+// bindet kein Skript von einem fremden Host ein (kein CDN, DSGVO). Die bestehende
+// Google-Fonts-Einbindung (<link>, kein Skript) ist davon bewusst nicht betroffen.
+console.log("\n[Bewegung] Kopf-Schnipsel, /vendor/-Pfade, kein CDN");
+for (const s of SEITEN_MIT_WERKZEUG) {
+  const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
+  const kopf = t.slice(0, t.indexOf("</head>"));
+  const sniep = /<script>[^<]*cd_motion[\s\S]*?<\/script>/.exec(kopf);
+  ok(!!sniep && sniep[0].includes("cd-motion") && sniep[0].includes("cd-still") && sniep[0].includes("prefers-reduced-motion")
+      && /[?&]motion/.test(sniep[0]) && kopf.indexOf(sniep[0]) < kopf.indexOf("<style>"),
+    `${s}.html: Kopf-Schnipsel (cd_motion, ?motion, reduced-motion) steht im <head> vor dem <style>`);
+
+  // Skript-Quellen: nur /vendor/<datei>.js, nie ein Host
+  const srcs = [...t.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
+  const fremd = srcs.filter((u) => !/^\/vendor\/[A-Za-z0-9._-]+\.js$/.test(u));
+  // Inline-Skripte (ohne JSON-LD): kein Verweis auf einen Host (http(s):// oder //host)
+  const inline = [...t.matchAll(/<script(?![^>]*application\/ld\+json)(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+  const hostRef = inline.flatMap((b) => b.match(/(?:https?:)?\/\/[A-Za-z0-9-]+\.[A-Za-z]{2,}/g) || []);
+  ok(fremd.length === 0 && hostRef.length === 0,
+    `${s}.html: kein Bewegungs-Skript von fremden Hosts (fremde src: ${fremd.join(", ") || "-"}; Host im Inline-Skript: ${hostRef.join(", ") || "-"})`);
+
+  // Lib-Dateinamen im Loader (Literale "<name>-<x.y.z>.min.js") + Praefix /vendor/ muessen existieren
+  const namen = [...new Set(inline.flatMap((b) => b.match(/[A-Za-z]+-\d+\.\d+\.\d+\.min\.js/g) || []))];
+  const hatPraefix = inline.some((b) => b.includes("'/vendor/'+"));
+  const fehlt = namen.filter((n) => !fs.existsSync(path.join(ROOT, "vendor", n)));
+  ok(namen.length >= 3 && hatPraefix && fehlt.length === 0,
+    `${s}.html: ${namen.length} Libs aus /vendor/ (${namen.join(", ")}), alle im Repo vorhanden (fehlend: ${fehlt.join(", ") || "-"})`);
+}
+
 // ── 5. sitemap.xml ───────────────────────────────────────────────────────────
-const sm = fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
+const sm =fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 // Alle Seiten-URLs (nicht nur die drei alten), plus Startseite. Reihenfolge wie
 // im Kopf-Menue von gen-seo.mjs (NAV); zuletzt am 29.08.2026 um /fraktionen und
 // /npcs ergaenzt.
@@ -639,6 +670,31 @@ if (navBlock) {
     const href = `href="/${slug}"`;
     ok(noscript.includes(href), `index.html noscript verlinkt /${slug}`);
     ok(!!guide && guide[0].includes(href), `index.html #guide-links verlinkt /${slug}`);
+  }
+}
+
+// ── 7. In-App-Deep-Links zeigen auf vorhandene Seiten (SECTIONS) ─────────────
+// Seit dem Abyss-Split (09.10.2026) gibt es die App-Seite synthesis ("Abyss-Synthese"). Jede
+// Seite darf nur auf Seiten-IDs verlinken, die es in SECTIONS gibt (Formen /#sec-<id> und
+// /#sec=<id>); abyss-cores.html und hexen.html verweisen fuer die Synthese auf /#sec-synthesis.
+console.log("\n[In-App-Deep-Links]");
+{
+  const SECTIONS = extract("SECTIONS");
+  const secIds = new Set(SECTIONS.map((s) => s.id));
+  ok(secIds.has("synthesis") && secIds.has("cores") && secIds.has("witches"), `SECTIONS (${SECTIONS.length} Seiten) enthaelt cores, synthesis und witches`);
+  let geprueft = 0; const unbekannt = [];
+  for (const file of Object.keys(pages)) {
+    const c = fs.readFileSync(path.join(ROOT, file), "utf8");
+    for (const m of c.matchAll(/href="\/#sec[-=]([a-z0-9]+)/g)) {
+      geprueft++;
+      if (!secIds.has(m[1])) unbekannt.push(`${file}: ${m[0]}"`);
+    }
+  }
+  ok(unbekannt.length === 0, `${geprueft} In-App-Deep-Links zeigen auf Seiten aus SECTIONS (unbekannt: ${unbekannt.length})`);
+  unbekannt.slice(0, 8).forEach((u) => console.log("       UNBEKANNT:", u));
+  for (const file of ["abyss-cores.html", "hexen.html"]) {
+    const c = fs.readFileSync(path.join(ROOT, file), "utf8");
+    ok(c.includes('href="/#sec-synthesis"'), `${file} verlinkt die App-Seite Abyss-Synthese (/#sec-synthesis)`);
   }
 }
 

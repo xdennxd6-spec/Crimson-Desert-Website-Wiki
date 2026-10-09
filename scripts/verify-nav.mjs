@@ -15,6 +15,9 @@
 //   f) Verbotsliste sichtbarer Jargon-Woerter (index.html, data/*.js, SEO-Seiten) + Warnliste
 //   g) NAV-Slugs von gen-seo.mjs, noscript und #guide-links verweisen auf vorhandene Dateien
 //   h) NAV-Labels von gen-seo.mjs gegen VORGABEN-B Abschnitt 2, Linktexte in noscript/#guide-links
+//   i) Abyss-Split (Briefing 3.2 B1, 09.10.2026): Seite synthesis direkt nach cores; SEC_RENDERERS, Markup
+//      (sec-synthesis folgt direkt auf sec-cores, Bloecke in der richtigen Seite, beidseitige Querverweise),
+//      _leafCount-Zeile, #guide-links-Link auf /#sec-synthesis
 //
 // Wie gesucht wird (f): Kommentare, <style>-Bloecke und JS-Code werden unsichtbar gemacht, nur
 // HTML-Text/Attribute und der INHALT von JS-Strings/Template-Literalen bleiben stehen. Dafuer gibt
@@ -226,7 +229,8 @@ const SOLL_SEITEN = [
   ["weapons", "ausruestung", "Waffen", "Weapons", "Alle Waffen mit Werten, Fundort und Verfeinerung"],
   ["armor", "ausruestung", "Rüstungen", "Armor", "Rüstungen und Sets mit Werten und Fundort"],
   ["accessories", "ausruestung", "Accessoires", "Accessories", "Ringe, Ohrringe und Halsketten mit Werten"],
-  ["cores", "ausruestung", "Abyss-Ausrüstung", "Abyss Gear", "Abyss-Ausrüstung (oft „Abyss Cores“ genannt), Sockel und Werte"],
+  ["cores", "ausruestung", "Abyss-Ausrüstung", "Abyss Gear", "Alle Abyss-Ausrüstungen (oft „Abyss Cores“ genannt) mit Effekt, Quelle und Slot-Typ"],
+  ["synthesis", "ausruestung", "Abyss-Synthese", "Synthesis", "Synthese-Mechanik und alle Synthese-Rezepte für Abyss-Ausrüstung"],
   ["witches", "ausruestung", "Hexen & Fusion", "Witches", "Alle Hexen, ihre Läden und Fusionsrezepte für Abyss-Ausrüstung"],
   ["dyes", "ausruestung", "Färbemittel", "Dyes", "Farben und wo du sie bekommst"],
   ["quests", "quests", "Quests", "Main & Faction Quests", "True Ending, Hauptquests, Fraktionsquests und Nebenquests"],
@@ -249,7 +253,12 @@ const SOLL_SEITEN = [
   ["gatherables", "sammeln", "Sammelobjekte", "Gatherables", "Pflanzen, Erze und andere Rohstoffe zum Sammeln"],
   ["collectibles", "sammeln", "Sammelgegenstände", "Collectibles", "Sammelbare Gegenstände und Wissenseinträge"],
 ];
-const SOLL_ANZAHL = 35;
+// 36 Seiten seit dem Abyss-Split (Briefing 3.2 B1): synthesis steht direkt nach cores
+const SOLL_ANZAHL = 36;
+// Abyss-Split: Synthese-Woerter gehoeren in aka von "synthesis", nicht mehr in aka von "cores"
+const SOLL_SYNTHESIS_AKA = ["Synthese", "Synthesis", "Fusion", "fusionieren", "Assimilation", "Abyssal Assimilation",
+  "Synthese-Baum", "Witch Synthesis", "Hexen-Synthese", "Spezial-Synthese", "Special Synthesis", "Rezepte", "kombinieren"];
+const SYNTHESE_WOERTER_CORES_VERBOTEN = ["Synthese", "Synthesis", "Fusion", "fusionieren", "Assimilation", "Synthese-Baum", "Witch Synthesis", "Hexen-Synthese", "Spezial-Synthese", "Special Synthesis", "kombinieren"];
 const START_H2 = "Crimson Desert Wiki: Was suchst du?";
 // Linkbeschriftungen der statischen SEO-Seiten (VORGABEN-B Abschnitt 2): slug -> Label
 const SOLL_NAV_LABELS = {
@@ -515,6 +524,125 @@ if (NAV_ENTRIES.length) {
     }
   }
   if (!bad2) ok(`${anzahl} Linktexte in noscript/#guide-links stimmen mit den NAV-Labels ueberein`);
+}
+
+// ── i) Abyss-Split: Seite "synthesis" neben "cores" (Briefing 3.2 B1) ────────
+head("i) Abyss-Split: Seiten cores und synthesis");
+{
+  // i1) SECTIONS-Eintraege: Reihenfolge direkt hintereinander, aka/glyph/count von synthesis, keine Synthese-Woerter mehr in cores.aka
+  if (SECTIONS) {
+    let bad = 0;
+    const iC = SECTIONS.findIndex((s) => s.id === "cores");
+    const iS = SECTIONS.findIndex((s) => s.id === "synthesis");
+    if (iC < 0 || iS < 0) { fail(`${kindLoc("SECTIONS")}: cores (${iC}) oder synthesis (${iS}) fehlt in SECTIONS`); bad++; }
+    else {
+      if (iS !== iC + 1) { fail(`${navLoc("SECTIONS", "synthesis")}: synthesis steht an Position ${iS}, soll direkt nach cores (${iC + 1})`); bad++; }
+      const syn = SECTIONS[iS], cor = SECTIONS[iC];
+      const akaIst = (syn.aka || []).join("|"), akaSoll = SOLL_SYNTHESIS_AKA.join("|");
+      if (akaIst !== akaSoll) { fail(`${navLoc("SECTIONS", "synthesis")}: synthesis.aka = [${(syn.aka || []).join(", ")}], Soll [${SOLL_SYNTHESIS_AKA.join(", ")}]`); bad++; }
+      if (syn.glyph !== "⚗") { fail(`${navLoc("SECTIONS", "synthesis")}: synthesis.glyph = ${JSON.stringify(syn.glyph)}, Soll "⚗"`); bad++; }
+      if (syn.count !== "Rezepte") { fail(`${navLoc("SECTIONS", "synthesis")}: synthesis.count = ${JSON.stringify(syn.count)}, Soll "Rezepte"`); bad++; }
+      const wirr = (cor.aka || []).filter((a) => SYNTHESE_WOERTER_CORES_VERBOTEN.some((w) => a.toLowerCase() === w.toLowerCase()));
+      if (wirr.length) { fail(`${navLoc("SECTIONS", "cores")}: cores.aka enthaelt noch Synthese-Woerter: [${wirr.join(", ")}] (gehoeren zu synthesis)`); bad++; }
+      const wit = SECTIONS.find((s) => s.id === "witches");
+      if (!wit || wit.name !== "Hexen & Fusion") { fail(`${navLoc("SECTIONS", "witches")}: witches.name = ${JSON.stringify(wit && wit.name)}, Soll "Hexen & Fusion"`); bad++; }
+    }
+    if (!bad) ok("SECTIONS: synthesis direkt nach cores, aka/glyph/count wie Briefing, keine Synthese-Woerter in cores.aka, witches bleibt \"Hexen & Fusion\"");
+  }
+
+  // i2) SEC_RENDERERS
+  let SEC_RENDERERS = null;
+  try { SEC_RENDERERS = extract("SEC_RENDERERS"); } catch (e) { fail("SEC_RENDERERS laden: " + e.message); }
+  if (SEC_RENDERERS) {
+    let bad = 0;
+    const j = (a) => JSON.stringify(a);
+    if (j(SEC_RENDERERS.cores) !== j(["renderCores"])) { fail(`${kindLoc("SEC_RENDERERS")}: SEC_RENDERERS.cores = ${j(SEC_RENDERERS.cores)}, Soll ["renderCores"]`); bad++; }
+    if (j(SEC_RENDERERS.synthesis) !== j(["renderSynthesis"])) { fail(`${kindLoc("SEC_RENDERERS")}: SEC_RENDERERS.synthesis = ${j(SEC_RENDERERS.synthesis)}, Soll ["renderSynthesis"]`); bad++; }
+    if (SECTIONS) {
+      const known = new Set(SECTIONS.map((s) => s.id));
+      for (const id of Object.keys(SEC_RENDERERS)) if (!known.has(id)) { fail(`${kindLoc("SEC_RENDERERS")}: SEC_RENDERERS.${id} hat keine Seite in SECTIONS`); bad++; }
+    }
+    for (const fn of ["renderCores", "renderSynthesis", "renderWitchCraftables"]) {
+      if (!new RegExp("function\\s+" + fn + "\\s*\\(").test(allSrc)) { fail(`index.html/data: function ${fn}() nicht gefunden`); bad++; }
+    }
+    if (!bad) ok("SEC_RENDERERS.cores == [renderCores], .synthesis == [renderSynthesis], alle Schluessel sind Seiten-IDs, Renderer-Funktionen vorhanden");
+  }
+
+  // i3) Markup: sec-synthesis direkt hinter sec-cores, Bloecke in der richtigen Seite, Querverweise
+  {
+    let bad = 0;
+    const tC = secTags.find((t) => t.id === "cores");
+    const tS = secTags.find((t) => t.id === "synthesis");
+    if (!tS) { fail(`index.html: id="sec-synthesis" fehlt`); bad++; }
+    if (!tC) { fail(`index.html: id="sec-cores" fehlt`); bad++; }
+    if (tC && tS) {
+      // Ende von sec-cores: genau ein </section> zwischen den beiden Anfaengen, danach nur Leerraum bis sec-synthesis
+      const zwischen = structHtml.slice(tC.idx, tS.idx);
+      const closes = [...zwischen.matchAll(/<\/section\s*>/g)];
+      const opens = [...zwischen.matchAll(/<section\b/g)];
+      if (tS.idx < tC.idx) { fail(`index.html:${tS.line}: sec-synthesis steht VOR sec-cores (Zeile ${tC.line})`); bad++; }
+      else if (opens.length !== 1 || closes.length !== 1 || zwischen.slice(closes[0].index + closes[0][0].length).trim() !== "") {
+        fail(`index.html:${tS.line}: sec-synthesis folgt nicht direkt auf das Ende von sec-cores (zwischen den Anfaengen: ${opens.length} <section>, ${closes.length} </section>, Rest ${JSON.stringify(zwischen.slice(closes.length ? closes[0].index + closes[0][0].length : 0).trim().slice(0, 60))})`);
+        bad++;
+      }
+      const coresChunk = zwischen;
+      const next = secTags.filter((t) => t.idx > tS.idx).sort((x, y) => x.idx - y.idx)[0];
+      const synthChunkRaw = structHtml.slice(tS.idx, next ? next.idx : structHtml.length);
+      const sClose = synthChunkRaw.search(/<\/section\s*>/);
+      const synthChunk = sClose < 0 ? synthChunkRaw : synthChunkRaw.slice(0, sClose);
+      if (sClose < 0) { fail(`index.html:${tS.line}: sec-synthesis hat kein schliessendes </section>`); bad++; }
+      // Bloecke: IDs nur in sec-synthesis
+      for (const id of ["synth-grid", "sf-tier", "sf-eff", "synth-count", "witch-craftables", "synth-guide"]) {
+        const re = new RegExp(`\\bid="${id}"`, "g");
+        const inS = (synthChunk.match(re) || []).length;
+        const inC = (coresChunk.match(re) || []).length;
+        const gesamt = (structHtml.match(re) || []).length;
+        if (inS !== 1) { fail(`index.html:${tS.line}: #${id} kommt in sec-synthesis ${inS}x vor (erwartet 1)`); bad++; }
+        if (inC !== 0) { fail(`index.html:${tC.line}: #${id} liegt noch in sec-cores (gehoert nach sec-synthesis)`); bad++; }
+        if (gesamt !== 1) { fail(`index.html: #${id} kommt insgesamt ${gesamt}x vor (erwartet 1)`); bad++; }
+      }
+      // Gegenstueck: #core-tb und #cf-slot bleiben in sec-cores
+      for (const id of ["core-tb", "cf-slot"]) {
+        const re = new RegExp(`\\bid="${id}"`);
+        if (!re.test(coresChunk)) { fail(`index.html:${tC.line}: #${id} fehlt in sec-cores`); bad++; }
+        if (re.test(synthChunk)) { fail(`index.html:${tS.line}: #${id} liegt in sec-synthesis (gehoert nach sec-cores)`); bad++; }
+      }
+      // Querverweise (showSec steht in onclick-Attributen, bleibt also im Struktur-Text)
+      if (!/showSec\('synthesis'\)/.test(coresChunk)) { fail(`index.html:${tC.line}: sec-cores enthaelt kein showSec('synthesis') (Querverweis „Nicht verwechseln“)`); bad++; }
+      if (!/showSec\('cores'\)/.test(synthChunk)) { fail(`index.html:${tS.line}: sec-synthesis enthaelt kein showSec('cores') (Querverweis „Nicht verwechseln“)`); bad++; }
+      if (/showSec\('synthesis'\)/.test(synthChunk)) { fail(`index.html:${tS.line}: sec-synthesis verweist per showSec('synthesis') auf sich selbst`); bad++; }
+      if (/showSec\('cores'\)/.test(coresChunk)) { fail(`index.html:${tC.line}: sec-cores verweist per showSec('cores') auf sich selbst`); bad++; }
+      if (!/showSec\('witches'\)/.test(synthChunk)) { fail(`index.html:${tS.line}: sec-synthesis enthaelt kein showSec('witches') (Querverweis zu Hexen & Fusion)`); bad++; }
+      // veraltete Lagebeschreibungen: die Synthese liegt nicht mehr „unten“ auf der Core-Seite
+      if (/Synthese-Baum unten|Core-Tabelle oben/.test(coresChunk)) { fail(`index.html:${tC.line}: sec-cores enthaelt noch den alten Verweis „Synthese-Baum unten“ / „Core-Tabelle oben“`); bad++; }
+      if (/Core-Tabelle oben/.test(synthChunk)) { fail(`index.html:${tS.line}: sec-synthesis enthaelt noch „Core-Tabelle oben“ (Core-Tabelle ist eine eigene Seite)`); bad++; }
+    }
+    // _leafCount: Zeile fuer synthesis (Skripte sind im Struktur-Text weg, daher im Rohtext suchen)
+    {
+      const lc = /function\s+_leafCount\s*\(id\)\s*\{([\s\S]*?)\n\}/.exec(indexHtml);
+      if (!lc) { fail("index.html: function _leafCount nicht gefunden"); bad++; }
+      else {
+        const zeilen = lc[1].split("\n");
+        const iCore = zeilen.findIndex((z) => /id\s*===\s*'cores'/.test(z));
+        const iSyn = zeilen.findIndex((z) => /id\s*===\s*'synthesis'/.test(z));
+        const lineNo = lineOf(indexHtml, lc.index);
+        if (iSyn < 0) { fail(`index.html:${lineNo}: _leafCount hat keine Zeile fuer 'synthesis'`); bad++; }
+        else if (iCore < 0 || iSyn !== iCore + 1) { fail(`index.html:${lineNo + iSyn + 1}: _leafCount-Zeile 'synthesis' steht nicht direkt unter der 'cores'-Zeile`); bad++; }
+        else if (!/WITCH_SYNTHESIS/.test(zeilen[iSyn])) { fail(`index.html:${lineNo + iSyn + 1}: _leafCount-Zeile 'synthesis' zaehlt nicht aus WITCH_SYNTHESIS`); bad++; }
+      }
+    }
+    // #guide-links: Link /#sec-synthesis "Abyss-Synthese" (Anker-Link zur App-Seite, kein SEO-Slug)
+    {
+      const g = linkBereiche.find((b) => b.was === "#guide-links");
+      const m = g && /<a\b[^>]*\bhref="\/#sec-synthesis"[^>]*>([\s\S]*?)<\/a>/.exec(g.text);
+      if (!m) { fail(`index.html: #guide-links enthaelt keinen Link <a href="/#sec-synthesis">Abyss-Synthese</a>`); bad++; }
+      else {
+        const text = normWs(decodeEntities(m[1].replace(/<[^>]*>/g, " ")));
+        if (text !== "Abyss-Synthese") { fail(`index.html:${lineOf(indexHtml, g.idx + m.index)}: #guide-links Link /#sec-synthesis heisst ${JSON.stringify(text)}, Soll "Abyss-Synthese"`); bad++; }
+      }
+    }
+    if (!bad) ok("index.html: sec-synthesis direkt nach sec-cores, #synth-grid/#sf-tier/#sf-eff/#synth-count/#witch-craftables/#synth-guide nur in sec-synthesis, #core-tb/#cf-slot in sec-cores, Querverweise beidseitig, _leafCount-Zeile, #guide-links-Link");
+  }
 }
 
 // ── Ergebnis ─────────────────────────────────────────────────────────────────

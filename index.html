@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- MOTION 10/2026 · Bereich A: Kopf-Schnipsel (setzt html.cd-motion vor dem ersten Paint) -->
+<script>/* cd_motion: 'auto' (folgt prefers-reduced-motion), 'on', 'off'; ?motion erzwingt an. Bei Bewegung die Bibliotheken vorab anfordern (Ausführung erst nach DOMContentLoaded). */
+(function(){var h=document.documentElement,p='auto',on;try{p=localStorage.getItem('cd_motion')||'auto';}catch(e){}on=/[?&]motion\b/.test(location.search)||p==='on'||(p!=='off'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches));h.classList.add(on?'cd-motion':'cd-still');if(on){['gsap-3.15.0','ScrollTrigger-3.15.0','SplitText-3.15.0','lenis-1.3.26'].forEach(function(n){var l=document.createElement('link');l.rel='preload';l.as='script';l.href='vendor/'+n+'.min.js';document.head.appendChild(l);});}})();</script>
+<!-- /MOTION A Kopf -->
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse &amp; Waffen</title>
 <meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 100 Bosse, 500 Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
@@ -3124,6 +3128,140 @@ button.sheet-grip:hover{color:var(--rhi)}
   .loc-card .item-more > summary,.loc-card .item-more > summary::after,.loc-patch > summary::after{transition:none}
 }
 /* ==== /Bereich B ==== */
+/* ==== MOTION 10/2026 · Bereich A (Bewegungs-Kern & Navigation) ==== */
+/* Bewegungs-Kern und Kopfzeile (Lauf 09.10.2026). Alles, was sich bewegt, hängt an html.cd-motion.
+   Lenis-Grundregeln aus lenis.css 1.3.26 (MIT), bewusst OHNE .lenis-stopped{overflow:clip}: sonst verschwindet beim
+   Öffnen eines Fensters die Bildlaufleiste und die Seite springt seitlich. */
+html.lenis,html.lenis body{height:auto}
+html.lenis{scroll-behavior:auto}
+.lenis [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-smooth iframe{pointer-events:none}
+/* Kopfzeile wieder angeheftet: „#blattbar{position:relative}“ im Holo-Glas-Block (für das ::after) hatte sticky überschrieben */
+#main>#blattbar{position:sticky;top:0}
+#blattbar.cdx-scrolled{box-shadow:0 12px 22px -16px rgba(0,0,0,.9)}
+html.cd-motion #blattbar{transition:box-shadow .25s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
+@media(max-width:860px){html.cd-motion #blattbar.cdx-bb-off{transform:translateY(calc(-100% - 3px))}}
+/* Lesefortschritt: 2 px Tuschestrich an der Unterkante der Kopfzeile */
+.cdx-progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--red);transform-origin:0 50%;transform:scaleX(0);opacity:0;pointer-events:none;z-index:2;box-shadow:0 0 8px var(--red-glow);transition:opacity .3s ease}
+html.cd-motion .cdx-progress.on{opacity:.85}
+html.cd-still .cdx-progress{display:none}
+/* wartende/laufende Einblendungen: CSS-Übergänge pausieren, sonst ziehen sie GSAP-Werte nach */
+html.cd-motion .cdx-wait,html.cd-motion .cdx-run{transition:none!important}
+/* Nach oben: weich ein- und ausblenden */
+html.cd-motion #btt{display:flex;opacity:0;transform:translateY(10px);pointer-events:none;visibility:hidden;transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s,background .18s,color .18s,border-color .18s}
+html.cd-motion #btt.show{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:0s}
+/* Schalter „Bewegung“ neben den Theme-Knöpfen */
+.cdx-mbtn{position:relative}
+.cdx-mbtn[data-state="on"]{color:var(--rhi);border-color:var(--red)}
+.cdx-mbtn[data-state="off"]{opacity:.62}
+.cdx-mbtn[data-state="off"]::after{content:"";position:absolute;left:24%;right:24%;top:50%;height:1.5px;background:currentColor;transform:rotate(-38deg);pointer-events:none}
+/* angeheftete Gruppenköpfe (True Ending, Abyss) unter die nun angeheftete Kopfzeile */
+.te-grp.te-abyss .te-gh{top:var(--cdx-bb-h,0px)}
+@media print{
+  .cdx-wait,.cdx-run{opacity:1!important;transform:none!important}
+  .cdx-progress{display:none!important}
+  #main>#blattbar{position:static}
+}
+/* -- A5 Navigation: gleitende Markierungen + Lichtkegel -- */
+/* Gleitende Markierungen (Rail, Konsole) + Lichtkegel, nur unter html.cd-motion. Die statische Markierung weicht erst,
+   wenn JS den Indikator gesetzt hat (.cdx-ind-on am Container). */
+html.cd-motion .rail-scroll,html.cd-motion .console-list{position:relative;isolation:isolate}
+.cdx-ind{position:absolute;left:0;top:0;z-index:-1;pointer-events:none;opacity:0;will-change:transform}
+.cdx-ind-rail{background:color-mix(in srgb,var(--red) 13%,transparent)}
+.cdx-ind-rail::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;border-radius:2px;background:var(--red);box-shadow:0 0 10px var(--red-glow)}
+.cdx-ind-con{background:color-mix(in srgb,var(--red) 12%,transparent);box-shadow:inset 3px 0 0 var(--red),inset 0 0 0 1px var(--line-strong),0 0 26px -12px var(--red-glow)}
+@media(max-width:860px){.cdx-ind-rail::before{left:8px;right:8px;top:0;bottom:auto;width:auto;height:3px;border-radius:0 0 3px 3px}}
+html.cd-motion #rail.cdx-ind-on .rail-item.active{background-color:transparent}
+html.cd-motion #rail.cdx-ind-on .rail-item.active::before{display:none}
+html.cd-motion #conList.cdx-ind-on .leaf.active{background-color:transparent;box-shadow:none;border-left-color:transparent}
+@media(hover:hover) and (pointer:fine){
+  html.cd-motion .leaf:hover,html.cd-motion .rail-item:hover{background-image:radial-gradient(150px circle at var(--mx,-999px) var(--my,-999px),color-mix(in srgb,var(--red) 13%,transparent),transparent 72%)}
+}
+/* -- /A5 -- */
+/* -- A6 Abschnitts-Navigation „Auf dieser Seite“ -- */
+.cdx-toc{margin:1px 12px 9px 26px}
+.cdx-toc-h{padding:8px 0 6px 14px;font:600 var(--fs-9-5)/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.cdx-l{position:relative;border-left:1px solid var(--line)}
+.cdx-l ul{list-style:none;margin:0;padding:0}
+.cdx-l button{display:block;width:100%;padding:5px 8px 5px 14px;border:0;border-radius:0 6px 6px 0;background:none;text-align:left;cursor:pointer;color:var(--dim);font:500 12.5px/1.3 var(--f-body);transition:color .14s,background .14s}
+.cdx-l button span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.cdx-l button:hover{color:var(--rhi);background:rgba(198,204,236,.06)}
+.cdx-l button[aria-current]{color:var(--ink-hi)}
+.cdx-l button:focus-visible{outline-offset:-2px}
+.cdx-more button{font:600 var(--fs-10)/1.3 var(--f-mono);letter-spacing:.06em}
+.cdx-tbar{position:absolute;left:-1px;top:0;width:2px;height:0;opacity:0;background:var(--red);box-shadow:0 0 8px var(--red-glow);pointer-events:none}
+.cdx-bbtoc[hidden]{display:none!important}
+.cdx-bbtoc[aria-expanded=true]{border-color:var(--red);color:var(--rhi)}
+.cdx-bbtoc .cdx-n{display:none}
+.cdx-pop{position:absolute;z-index:60;top:100%;right:clamp(8px,3vw,24px);width:min(340px,calc(100vw - 20px));max-height:min(60vh,calc(100dvh - 150px));overflow-y:auto;overscroll-behavior:contain;margin-top:6px;padding:2px 10px 10px;background:var(--card);border:1px solid var(--line-strong);border-radius:12px;box-shadow:0 18px 40px -12px rgba(0,0,0,.8)}
+.cdx-pop button{padding:8px 8px 8px 14px;font-size:13.5px}
+@media(max-width:860px),(pointer:coarse){.cdx-pop button{min-height:44px;padding-block:12px}}
+@media(max-width:860px){
+  .cdx-bbtoc .cdx-t{display:none}.cdx-bbtoc .cdx-n{display:inline}
+  #blattbar:has(>.cdx-bbtoc:not([hidden])){flex-wrap:nowrap;gap:8px}
+  #blattbar:has(>.cdx-bbtoc:not([hidden])) .bb-crumb{flex-wrap:wrap;gap:0 8px}
+  #blattbar>.bb-console{flex:none;white-space:nowrap}
+}
+@keyframes cdxPop{from{opacity:0;transform:translateY(-6px)}}
+html.cd-motion .cdx-pop:not([hidden]){animation:cdxPop .18s ease-out}
+/* -- /A6 -- */
+/* ==== /Motion A ==== */
+/* ==== MOTION 10/2026 · Bereich B (Inhalte & Seiten-Effekte) ==== */
+/* B2/B3 Seiten-Signatur: rote Titellinie, Titel-Maske, Bild-Einblendung. Nur transform/opacity. */
+/* Tuschestrich: die Linie (.sec-t::after) wächst von links, sobald die Seite sichtbar wird. Reines CSS:
+   display:none -> block startet die Animation bei jedem Seitenwechsel neu, auch beim ersten Paint ohne Bibliotheken. */
+/* Dauern mit !important: die alte globale reduced-motion-Regel (alle Dauern 0.01ms!important) soll nicht greifen,
+   wenn Bewegung ausdrücklich an ist (cd-motion = Schalter „An“ bzw. ?motion trotz Systemeinstellung). */
+html.cd-motion .sec.active .sec-t::after{transform-origin:left center;animation:cdLine .6s cubic-bezier(.22,.7,.2,1) .12s backwards;animation-duration:.6s!important}
+html.cd-motion #sec-start.active .sec-t::after{animation-delay:.42s}
+html.cd-motion .sec.active .sec-t.cd-l0::after{animation:none;transform:scaleX(0)}
+@keyframes cdLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* SplitText-Maske des Starttitels: unten 0,12 em Luft, damit Unterlängen (g, j, y) nicht abgeschnitten werden */
+html.cd-motion .cd-w-mask{padding-bottom:.12em;margin-bottom:-.12em}
+/* Bilder in Karten: bis zum Laden unsichtbar (data-cd-iw="1"), dann weich ein ("0" bleibt, damit die Transition greift) */
+html.cd-motion img[data-cd-iw]{transition:opacity .35s ease;transition-duration:.35s!important}
+html.cd-motion img[data-cd-iw="1"]{opacity:0}
+@media (max-width:860px){html.cd-motion .sec.active .sec-t::after{animation-duration:.35s!important;animation-delay:.06s}}
+@media print{.sec-t::after{animation:none!important;transform:none!important}img[data-cd-iw]{opacity:1!important}}
+/* ---- B4 Inhalts-Feinschliff (alles unter html.cd-motion) ---- */
+/* Lichtkegel nach React Bits SpotlightCard, (c) David Haz, MIT+Commons Clause.
+   Freies ::after (.card::before = roter Balken bleibt); z-index:-1 im eigenen Stapelkontext:
+   über Kartengrund, unter Inhalt. */
+@media (hover:hover) and (pointer:fine){
+  html.cd-motion :is(.so-tile,.so-chip,.pet-card,.grid>.card){isolation:isolate}
+  html.cd-motion :is(.so-tile,.so-chip,.pet-card){position:relative}
+  html.cd-motion :is(.so-tile,.so-chip,.pet-card,.grid>.card)::after{
+    content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+    opacity:0;transition:opacity .25s;transition-duration:.25s!important;
+    background:radial-gradient(var(--sr,260px) circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--red) 13%,transparent),transparent 70%)}
+  html.cd-motion .so-chip{--sr:110px}
+  html.cd-motion .pet-card{--sr:150px}
+  html.cd-motion :is(.so-tile,.so-chip,.pet-card,.grid>.card):hover::after{opacity:1}
+  /* Lift nur, wo keiner existiert (.card/.pet-card haben einen); Kachel -1 px wird -2 px */
+  html.cd-motion .so-tile{transition-duration:.15s!important}
+  html.cd-motion .so-tile:hover{transform:translateY(-2px)}
+  html.cd-motion .so-chip{transition:border-color .15s,color .15s,transform .15s;transition-duration:.15s!important}
+  html.cd-motion .so-chip:hover{transform:translateY(-1px)}
+}
+/* Knöpfe, Chips, Filter, Reiter: leicht eindrücken (die meisten haben transition:all) */
+html.cd-motion .so-search{transition:border-color .15s,color .15s,transform .15s;transition-duration:.15s!important}
+html.cd-motion .ichip{transition:background .18s,border-color .18s,color .18s,transform .15s}
+html.cd-motion :is(.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.empty-state-action,.cmp-trigger,.ic-trigger,.rb-trigger,.defeat-btn,.copy-btn,.sy-btn,.xp-btn,.sim-btn,.fa-btn,.ch-btn,.boss-notes-btn,.mount-ig-btn,.bo-pill,.ichip,.so-search,.so-chip):active:not(:disabled){transform:scale(.97);transition-duration:.08s!important}
+/* Filter-Neurender (JS Block B): Tween ohne CSS-Übergang */
+html.cd-motion .cd-b4-in{transition:none!important}
+/* <details> weich auf/zu (Chrome 131+, sonst Sprung wie bisher). Geschlossen bleibt content-visibility:hidden
+   (Strg+F öffnet weiter von selbst), die Pfeil-Übergänge bleiben. */
+@supports (interpolate-size:allow-keywords) and selector(::details-content){
+  html.cd-motion :is(.item-more,.boss-more,.mount-notes,.set-more,.loc-patch,.fac-fac,.sq-item){interpolate-size:allow-keywords}
+  html.cd-motion :is(.item-more,.boss-more,.mount-notes,.set-more,.loc-patch,.fac-fac,.sq-item)::details-content{
+    block-size:0;overflow-y:clip;
+    transition:block-size .26s cubic-bezier(.22,.8,.3,1),content-visibility .26s allow-discrete;transition-duration:.26s!important}
+  html.cd-motion :is(.item-more,.boss-more,.mount-notes,.set-more,.loc-patch,.fac-fac,.sq-item)[open]::details-content{block-size:auto}
+  /* ohne Übergang: Such-Öffnung, "Alle Details" (JS: cd-b4-still), Druck */
+  html.cd-motion details[data-srch-open]::details-content,html.cd-b4-still details::details-content{transition:none}
+  @media print{html.cd-motion details::details-content{transition:none!important}}
+}
+/* ==== /Motion B ==== */
 </style>
 </head>
 <body>
@@ -3163,7 +3301,7 @@ button.sheet-grip:hover{color:var(--rhi)}
 <div id="mob-overlay" onclick="toggleSidebar()"></div>
 <div id="toast" role="status" aria-live="polite" aria-atomic="true">Kopiert!</div>
 <div id="ach-live" role="status" aria-live="polite" aria-atomic="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap"></div>
-<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben">↑</button>
+<button id="btt" onclick="if(window.cdMotion)cdMotion.scrollTo(0);else window.scrollTo({top:0,behavior:'smooth'})" title="Nach oben" aria-label="Nach oben">↑</button>
 <div id="scnt-pill"><span id="scnt-pill-t"></span><button type="button" onclick="_clearSearchPill()" aria-label="Suche löschen">✕</button></div>
 <!-- Easter Egg: Umbras Geheimtagebuch -->
 <div id="ee-overlay" role="dialog" aria-modal="true" aria-label="Easter Egg" style="display:none" onclick="if(event.target===this)closeEE()">
@@ -3261,6 +3399,8 @@ button.sheet-grip:hover{color:var(--rhi)}
     <div class="help-row"><span class="help-desc">Diese Hilfe öffnen</span><span class="help-keys"><span class="kbd">?</span></span></div>
     <div class="help-row"><span class="help-desc">Zufälligen Boss würfeln</span><span class="help-keys"><span class="kbd">R</span></span></div>
     <div class="help-row"><span class="help-desc">Farbschema wechseln</span><span class="help-keys"><span class="kbd">T</span></span></div>
+    <div class="help-row"><span class="help-desc">Bewegung (weiches Scrollen, Einblenden): Knopf <b>&#8779;</b> im Menü-Fuß wechselt Automatisch, An, Aus</span><span class="help-keys"><span class="kbd">&#8779;</span></span></div>
+    <div class="help-row"><span class="help-desc">Abschnitte der Seite anspringen: Liste „Auf dieser Seite“ unter der aktiven Seite im Menü, am Handy der Knopf „Abschnitte“ oben</span><span class="help-keys"><span class="kbd">Tab</span> <span class="kbd">Enter</span></span></div>
     <div style="font-size:var(--fs-9-5);font-weight:700;color:var(--gdim);text-transform:uppercase;letter-spacing:.09em;margin:18px 0 6px">Seite öffnen (erst g, dann Buchstabe)</div>
     <div class="help-row"><span class="help-desc">Übersicht (Start)</span><span class="help-keys"><span class="kbd">g g</span></span></div>
     <div class="help-row"><span class="help-desc">Bosse / Fähigkeiten / Builds / Entwaffnen</span><span class="help-keys"><span class="kbd">g b</span> <span class="kbd">g s</span> <span class="kbd">g u</span> <span class="kbd">g d</span></span></div>
@@ -3364,6 +3504,7 @@ button.sheet-grip:hover{color:var(--rhi)}
       <button class="theme-btn active" data-theme-set="dark" onclick="setTheme('dark')" title="Farbschema Tag (Standard)" aria-label="Farbschema: Tag (Standard)">◐</button>
       <button class="theme-btn" data-theme-set="sepia" onclick="setTheme('sepia')" title="Farbschema Nacht (gedämpft)" aria-label="Farbschema: Nacht">☾</button>
       <button class="theme-btn" data-theme-set="amoled" onclick="setTheme('amoled')" title="Farbschema AMOLED (tiefstes Schwarz)" aria-label="Farbschema: AMOLED">●</button>
+      <button class="theme-btn cdx-mbtn" id="motionBtn" type="button" onclick="if(window.cdMotion)cdMotion.cycle()" data-state="auto" title="Bewegung: Automatisch" aria-label="Bewegung: Automatisch">&#8779;</button>
       <button class="theme-btn" onclick="openHelp()" title="Tastenkürzel (?)" aria-label="Tastenkürzel-Hilfe" style="margin-left:auto">?</button>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between">
@@ -3649,7 +3790,7 @@ button.sheet-grip:hover{color:var(--rhi)}
 
   <!-- NAV-UMBAU A: Übersichtsseite sec-start (Inhalt per renderStartOverview aus RESSORTS/SECTIONS) -->
 <section class="sec" id="sec-start" aria-labelledby="start-title">
-    <h2 class="sec-t" id="start-title"><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
+    <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <div id="start-root"></div>
 </section>
 <section class="sec" id="sec-beginner">
@@ -3795,14 +3936,20 @@ button.sheet-grip:hover{color:var(--rhi)}
 
   <section class="sec" id="sec-cores">
     <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss-Ausrüstung <span class="sec-t-en">Abyss Gear</span></h2>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Synthese-Mechanik, der Witch-Synthese-Baum mit allen Rezepten und die übrigen Hexen-Craftables stehen auf der Seite <a href="#" onclick="showSec('synthesis');return false;">Abyss-Synthese</a> (Synthesis). Hier geht es um die Abyss-Ausrüstung selbst: Effekt, Quelle und Slot-Typ.</div>
     <div class="fbar">
       <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe (auch Waffe/Hand/Fuß)</option><option value="Armor">Rüstung (auch Waffe/Hand/Fuß)</option><option value="Both">Nur Waffe, Handschuhe, Schuhe</option></select>
     </div>
     <div style="font-size:var(--fs-11-5);color:var(--dim);margin:-4px 0 10px;line-height:1.55"><b>Slot-Typ:</b> „Waffe/Hand/Fuß“ passt laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe. „Waffe“ und „Rüstung“ sind Sammelangaben, einzelne Cores sind enger: Tempest of Destruction, Kinetic Burst, Colossal Might, Putrid Touch, The Showstopper und Karmic Pulse passen nur in Handschuhe, Infinite Arrows nur in Fernkampfwaffen; Aegis und Fortification passen auch in Schilde.</div>
     <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
+  </section>
+
+  <section class="sec" id="sec-synthesis">
+    <h2 class="sec-t"><span class="sec-sym">⚗</span> Abyss-Synthese <span class="sec-t-en">Synthesis</span></h2>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Die Abyss-Ausrüstung selbst mit Effekt, Quelle und Slot-Typ steht auf der Seite <a href="#" onclick="showSec('cores');return false;">Abyss-Ausrüstung</a> (Abyss Gear), die Hexen mit Wohnort und Diensten unter <a href="#" onclick="showSec('witches');return false;">Hexen &amp; Fusion</a>. Hier geht es um die Synthese: Mechanik, alle Synthese-Rezepte und was die Hexe sonst herstellt.</div>
     <h3 class="sub-t" style="margin-top:24px">🔮 Synthese-Mechanik <span style="font-size:var(--fs-11);color:var(--dim);font-weight:400">(Regulär vs. Spezial)</span></h3>
     <div id="synth-guide" style="font-size:12.5px;color:var(--text);line-height:1.65;margin-bottom:10px">
-      <p style="margin:0 0 9px;color:var(--dim)">Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot. An der Hexe: <em>Craft Abyss Gear</em> wählen, dann mit R2/RT in den Synthese-Tab wechseln. Die <strong>Core-Tabelle oben</strong> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt die 175 datamineten Core-Synthese-Rezepte (Nicht-Core-Craftables wie die Sigil-Mount-Amulette stehen separat darunter). Dieser Block erklärt die Mechanik dahinter.</p>
+      <p style="margin:0 0 9px;color:var(--dim)">Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot. An der Hexe: <em>Craft Abyss Gear</em> wählen, dann mit R2/RT in den Synthese-Tab wechseln. Die Core-Tabelle auf der Seite <a href="#" onclick="showSec('cores');return false;"><strong>Abyss-Ausrüstung</strong></a> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt die 175 datamineten Core-Synthese-Rezepte (Nicht-Core-Craftables wie die Sigil-Mount-Amulette stehen separat darunter). Dieser Block erklärt die Mechanik dahinter.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0">
         <div style="padding:10px 13px;background:rgba(201,162,39,.04);border:1px solid var(--bdr);border-radius:8px">
           <strong style="color:var(--gdim)">Reguläre Synthese</strong> <span style="color:var(--dim);font-size:var(--fs-11)">(sicher, deterministisch)</span>
@@ -6423,7 +6570,7 @@ function renderRegionHeatmap(){
     const dn=doneCounts[r];
     const h=Math.round(cnt/max*32)+6;
     const dim=filterReg&&filterReg!==r?'dim':'';
-    return `<div class="rh-bar" data-tip="${dn} von ${cnt} besiegt" data-tip-title="${r}" onclick="(function(){const s=document.getElementById('bf-reg');s.value='${r}';renderBosses();renderRegionHeatmap();window.scrollTo({top:0,behavior:'smooth'});})()">
+    return `<div class="rh-bar" data-tip="${dn} von ${cnt} besiegt" data-tip-title="${r}" onclick="(function(){const s=document.getElementById('bf-reg');s.value='${r}';renderBosses();renderRegionHeatmap();if(window.cdMotion)cdMotion.scrollTo(0);else window.scrollTo({top:0,behavior:'smooth'});})()">
       <div class="rh-bar-fill ${dim}" style="height:${h}px;background:${REGION_COLORS[r]||'inherit'}">
         <div class="rh-bar-val">${cnt}</div>
       </div>
@@ -6786,6 +6933,7 @@ function _leafCount(id){
     if(id==='weapons' && typeof WEAPONS!=='undefined' && Array.isArray(WEAPONS)) return String(WEAPONS.length);
     if(id==='crafting' && typeof CRAFTING!=='undefined' && Array.isArray(CRAFTING)) return String(CRAFTING.length);
     if(id==='cores' && typeof CORES!=='undefined' && Array.isArray(CORES)) return String(CORES.length);
+    if(id==='synthesis' && typeof WITCH_SYNTHESIS!=='undefined' && Array.isArray(WITCH_SYNTHESIS)) return String(WITCH_SYNTHESIS.filter(c=>c.role!=='witch-other').length);
     // NPCS ist ein Objekt mit vier Gruppen, kein Array — die alte Array.isArray-Pruefung
     // konnte nie greifen, der Zaehler zeigte deshalb dauerhaft das Wort "NPCs" statt einer Zahl.
     if(id==='npcs' && typeof NPCS!=='undefined' && NPCS && !Array.isArray(NPCS))
@@ -7135,9 +7283,12 @@ function showSec(id, opts){
   if(!opts.skipUrl)_writeUrlState(!opts.replaceUrl);
   // Schliesse Sidebar auf Mobile nach Klick
   if(typeof closeSheet==='function')closeSheet();
-  window.scrollTo({top:0});
+  // Motion 10/2026: sofort nach oben (immediate, sonst zieht eine laufende Lenis-Trägheit die neue Seite zurück)
+  if(window.cdMotion)cdMotion.scrollTo(0,{immediate:true});else window.scrollTo({top:0});
   // Registratur: Ressort ableiten, Rail/Konsole/Blattbar synchronisieren (additiv)
   if(typeof _registraturSync==='function')_registraturSync(id);
+  // Motion 10/2026: Seitenauftritt, Abschnitts-Navigation und Kopfzeile nachziehen
+  if(window.cdMotion&&cdMotion._page)cdMotion._page(id);
 }
 
 // ── URL-State (hash-basiert) ──────────────────────────────────────
@@ -7615,7 +7766,7 @@ function _scrollToHit(el){
   if(!el)return;
   const r=el.getBoundingClientRect();
   if(!r.height)return;
-  if(r.top<70||r.top>window.innerHeight-90)window.scrollTo({top:Math.max(0,window.scrollY+r.top-100)});
+  if(r.top<70||r.top>window.innerHeight-90){ if(window.cdMotion)cdMotion.scrollTo(el,{immediate:true,offset:100}); else window.scrollTo({top:Math.max(0,window.scrollY+r.top-100)}); }
 }
 
 // Suchlaeufe in Reihenfolge: (1) Phrase wie getippt; nur bei 0 Treffern (2) ae/oe/ue als ä/ö/ü gelesen
@@ -8286,7 +8437,7 @@ let _wepPage=0; const WEP_PER=40;
 function changeWepPage(d){
   _wepPage=Math.max(0,_wepPage+d);
   renderWeapons();
-  const s=document.getElementById('sec-weapons'); if(s)s.scrollIntoView({block:'start'});
+  const s=document.getElementById('sec-weapons'); if(s){ if(window.cdMotion)cdMotion.scrollTo(s,{immediate:true}); else s.scrollIntoView({block:'start'}); }
 }
 function renderWeapons(){
   const f=document.getElementById('wf-type').value;
@@ -8821,11 +8972,11 @@ function renderSideQuests(){
   const sqChk=q=>'<span class="chk sqchk'+(isDone(q)?' on':'')+'" role="checkbox" aria-checked="'+(isDone(q)?'true':'false')+'" tabindex="0" aria-label="'+escHtml(q.q)+'" title="Als erledigt markieren" onclick="event.preventDefault();event.stopPropagation();toggleSQ(\''+escJsStr(q.q)+'\',this)"></span>';
   const order=r=>{const i=REG_KEYS.indexOf(normReg(r));return i<0?99:i;};
   const regions=[...new Set(normal.map(q=>q.region))].sort((a,b)=>order(a)-order(b));
-  const spChip=specials.length?`<span class="sq-regchip sq-regchip-sp" style="--reg:var(--gold)" onclick="document.getElementById('sq-lane-sp').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>&#9733; Legend&auml;re Mounts ${specials.length}</span>`:'';
+  const spChip=specials.length?`<span class="sq-regchip sq-regchip-sp" style="--reg:var(--gold)" onclick="if(window.cdMotion)cdMotion.scrollTo(document.getElementById('sq-lane-sp'));else document.getElementById('sq-lane-sp').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>&#9733; Legend&auml;re Mounts ${specials.length}</span>`:'';
   const chips=spChip+regions.map((r,i)=>{
     const c=normal.filter(q=>q.region===r).length;
     const col=regAccent(normReg(r));
-    return `<span class="sq-regchip"${col?' style="--reg:'+col+'"':''} onclick="document.getElementById('sq-lane-${i}').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>${escHtml(r)} ${c}</span>`;
+    return `<span class="sq-regchip"${col?' style="--reg:'+col+'"':''} onclick="if(window.cdMotion)cdMotion.scrollTo(document.getElementById('sq-lane-${i}'));else document.getElementById('sq-lane-${i}').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>${escHtml(r)} ${c}</span>`;
   }).join('');
   const spRow=q=>{
     const ds=escHtml((q.q+' '+q.region+' '+q.trigger+' '+(q.boss||'')+' '+q.reward+' '+(q.craft||'')+' '+(q.tip||'')).toLowerCase());
@@ -9242,7 +9393,7 @@ function waffeZeigeTeil(name){
   if(typeof renderWeapons==='function')renderWeapons();
   if(typeof _doSearchImpl==='function')_doSearchImpl(name);
   const g=document.getElementById('weapon-tb');
-  if(g)g.scrollIntoView({behavior:'smooth',block:'start'});
+  if(g){ if(window.cdMotion)cdMotion.scrollTo(g); else g.scrollIntoView({behavior:'smooth',block:'start'}); }
 }
 function armorZeigeTeil(name){
   const q=document.getElementById('af-q');
@@ -9251,7 +9402,7 @@ function armorZeigeTeil(name){
   q.value=name;
   armorFilter();
   const g=document.getElementById('armor-grid');
-  if(g)g.scrollIntoView({behavior:'smooth',block:'start'});
+  if(g){ if(window.cdMotion)cdMotion.scrollTo(g); else g.scrollIntoView({behavior:'smooth',block:'start'}); }
 }
 
 function renderArmorSets(){
@@ -9326,7 +9477,7 @@ function mountCard(m){
   </div>`;
 }
 function makeToc(items){
-  const btn=i=>`<button onclick="document.getElementById('${i.id}').scrollIntoView({behavior:'smooth',block:'start'})" style="background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.28);color:var(--gold);padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:background .18s,border-color .18s" onmouseover="this.style.background='rgba(201,162,39,.22)';this.style.borderColor='rgba(201,162,39,.5)'" onmouseout="this.style.background='rgba(201,162,39,.1)';this.style.borderColor='rgba(201,162,39,.28)'">${i.label}</button>`;
+  const btn=i=>`<button onclick="if(window.cdMotion)cdMotion.scrollTo(document.getElementById('${i.id}'));else document.getElementById('${i.id}').scrollIntoView({behavior:'smooth',block:'start'})" style="background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.28);color:var(--gold);padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:background .18s,border-color .18s" onmouseover="this.style.background='rgba(201,162,39,.22)';this.style.borderColor='rgba(201,162,39,.5)'" onmouseout="this.style.background='rgba(201,162,39,.1)';this.style.borderColor='rgba(201,162,39,.28)'">${i.label}</button>`;
   return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:22px;padding:12px 16px;background:rgba(201,162,39,.05);border:1px solid rgba(201,162,39,.18);border-radius:8px"><span style="font-size:var(--fs-11);color:var(--dim);margin-right:4px;white-space:nowrap">Springe zu:</span>${items.map(btn).join('')}</div>`;
 }
 function renderMounts(){
@@ -10210,7 +10361,7 @@ function goToMap(){
   document.getElementById('mlb-term').textContent=_mapLocSearch;
   const b=document.getElementById('map-loc-banner');
   b.style.display='flex';
-  window.scrollTo({top:0});
+  if(window.cdMotion)cdMotion.scrollTo(0,{immediate:true});else window.scrollTo({top:0});
 }
 function copyLocSearch(fromBanner){
   navigator.clipboard.writeText(_mapLocSearch).catch(()=>{
@@ -10951,7 +11102,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Back-to-Top anzeigen ab 300px Scroll
   const btt=document.getElementById('btt');
   window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>300),{passive:true});
-  btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+  btt.onclick=()=>{ if(window.cdMotion)cdMotion.scrollTo(0); else window.scrollTo({top:0,behavior:'smooth'}); };
 
   // ── Service Worker (PWA) ──────────────────────────────────────────
   if('serviceWorker' in navigator && location.protocol!=='file:'){
@@ -11480,7 +11631,7 @@ if (syGetCode()) _loadServerProgress();
 <nav id="guide-links" aria-label="Guide-Seiten" style="text-align:center;padding:1rem;font-size:.85rem;opacity:.7">
   Start: <a href="/patch-notes">Patch-Notes</a><br>
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a><br>
-  Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
+  Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
   Quests &amp; Herausforderungen: <a href="/hauptquests">Hauptquests</a> · <a href="/fraktionen">Fraktionsquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a><br>
   Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a>
@@ -11533,7 +11684,7 @@ function ruinFilter(reg){
   for(var i=0;i<btns.length;i++){btns[i].classList.toggle("active", btns[i].getAttribute("data-reg")===reg);}
   var secs=document.querySelectorAll("#ruins-root .ruin-region");
   for(var j=0;j<secs.length;j++){secs[j].style.display=(reg==="__all__"||secs[j].getAttribute("data-reg")===reg)?"":"none";}
-  window.scrollTo({top:0});
+  if(window.cdMotion)cdMotion.scrollTo(0);else window.scrollTo({top:0});
 }
 function openRuinImg(url,cap){
   var im=document.getElementById("mim-img"); if(im)im.src=url;
@@ -11544,6 +11695,716 @@ function openRuinImg(url,cap){
 // renderRuins laeuft jetzt lazy ueber SEC_RENDERERS.ruins (ensureSecRendered) statt eager bei DOMContentLoaded.
 // Falls die Ruins-Sektion beim Laden dieses Blocks bereits offen ist (Deep-Link), direkt nachrendern:
 if(document.getElementById("sec-ruins")&&document.getElementById("sec-ruins").classList.contains("active")){try{renderRuins();}catch(e){console.error(e);}}
+</script>
+<script>
+/* ==== MOTION 10/2026 · Bereich A (Bewegungs-Kern & Navigation) ==== */
+/* Bewegungs-Kern window.cdMotion (09.10.2026). GSAP 3.15 (Standard License) + ScrollTrigger + SplitText, Lenis 1.3.26 (MIT),
+   same-origin aus vendor/, nur bei html.cd-motion und erst nach DOMContentLoaded geladen. Nur transform/opacity, nie visibility,
+   jede Animation endet mit clearProps; revealAll() ist das Sicherheitsnetz. Ohne Bibliotheken bleibt alles statisch.
+   Ereignisse auf document: cdmotion:page {id,sec,first} nach jedem showSec (auch ohne Bewegung), cdmotion:state {on},
+   cdmotion:refresh (nach Größenänderung, entprellt), cdmotion:revealall. */
+(function(){
+'use strict';
+var H=document.documentElement,KEY='cd_motion',
+  VENDOR=['gsap-3.15.0','ScrollTrigger-3.15.0','SplitText-3.15.0','lenis-1.3.26'],
+  REVEAL_SEL='.card, .so-tile, .pet-card, .ruin-card, .loc-card, .witch-card, .sk-card, tbody tr, [data-cd-reveal]',
+  /* nativ scrollende Bereiche (Lenis greift nicht ein) und Vollbild-Overlays (Lenis hält an, solange eines offen ist) */
+  NATIV='#sidebar,#rail,[aria-modal="true"],[role="dialog"],.loc-modal-box,#card-focus,.cs-overlay,.pm-overlay,#ee-overlay,#help-overlay,#cmp-modal,#ic-modal,#sync-overlay,#mount-ingame-modal,#rb-modal,iframe,[data-lenis-prevent],.cdx-pop,input,select,textarea',
+  OVERLAY='[aria-modal="true"],.cs-overlay,.pm-overlay,#card-focus',
+  mqR=matchMedia('(prefers-reduced-motion: reduce)'),mqM=matchMedia('(max-width:860px)'),
+  force=/[?&]motion\b/.test(location.search),
+  loading=null,lenis=null,ctx=null,active=false,hooks=[],waiting=new Set(),running=new Set(),batch=[],pages=0,progUntil=0,
+  readyRes,readyState='',readyP=new Promise(function(r){readyRes=r;}),
+  bb=null,prog=null,progX=null,docShort=true,bbOff=false,lastY=0,swT=0,swAt=0,refT=0,ovObs=null,ovSeen=new WeakSet(),ovT=0;
+var $=function(id){return document.getElementById(id);},
+  mob=function(){return mqM.matches;},
+  now=function(){return performance.now();},
+  pref=function(){var p='auto';try{p=localStorage.getItem(KEY)||'auto';}catch(e){}return p==='on'||p==='off'?p:'auto';},
+  wanted=function(){var p=pref();return force||p==='on'||(p==='auto'&&!mqR.matches);},
+  emit=function(n,d){document.dispatchEvent(new CustomEvent(n,{detail:d||{}}));},
+  setCls=function(on){H.classList.toggle('cd-motion',on);H.classList.toggle('cd-still',!on);},
+  activeSec=function(){return document.querySelector('#main > .sec.active');},
+  libs=function(first){return {gsap:window.gsap,ScrollTrigger:window.ScrollTrigger,SplitText:window.SplitText,lenis:lenis,first:!!first,mobile:mob()};};
+function settle(v){var st=v?'on':'off';if(readyState===st)return;if(readyState)readyP=new Promise(function(r){readyRes=r;});readyState=st;readyRes(v);}
+
+/* ---- Bibliotheken nachladen (async=false hält die Reihenfolge: gsap vor den Plugins) ---- */
+function load(){
+  if(loading)return loading;
+  loading=new Promise(function(res,rej){
+    if(window.gsap&&window.ScrollTrigger&&window.SplitText&&window.Lenis)return res();
+    var left=VENDOR.length;
+    VENDOR.forEach(function(n){
+      var s=document.createElement('script');s.src='vendor/'+n+'.min.js';s.async=false;
+      s.onload=function(){if(!--left)res();};
+      s.onerror=function(){rej(new Error('Bewegung: '+s.src+' nicht geladen'));};
+      document.head.appendChild(s);
+    });
+  }).then(function(){gsap.registerPlugin(ScrollTrigger,SplitText);ScrollTrigger.config({ignoreMobileResize:true});});
+  loading.catch(function(){loading=null;});
+  return loading;
+}
+
+/* ---- Lenis im gsap-Takt; Touch scrollt nativ (syncTouch:false) ---- */
+function raf(t){if(lenis)lenis.raf(t*1000);}
+function start(){
+  if(active)return;
+  active=true;setCls(true);
+  lenis=window.lenis=new Lenis({lerp:0.1,syncTouch:false,allowNestedScroll:true,stopInertiaOnNavigate:true,
+    respectReducedMotion:false,   /* es entscheidet der Schalter cd_motion */
+    prevent:function(n){return !!(n&&n.closest&&n.closest(NATIV));}});
+  lenis.on('scroll',ScrollTrigger.update);
+  lenis.on('scroll',onLenis);
+  gsap.ticker.add(raf);gsap.ticker.lagSmoothing(0);
+  watchOv();checkOv();
+  emit('cdmotion:state',{on:true});
+}
+function stop(){
+  if(!active)return;
+  revealAll();
+  if(ctx){ctx.revert();ctx=null;}
+  gsap.ticker.remove(raf);gsap.ticker.lagSmoothing(500,33);
+  lenis.destroy();lenis=window.lenis=null;
+  active=false;setCls(false);
+  if(prog)prog.style.transform='';
+  emit('cdmotion:state',{on:false});
+}
+function apply(){
+  if(wanted()){
+    setCls(true);
+    load().then(function(){
+      if(!wanted()||active)return;
+      start();settle(libs(true));
+      var s=activeSec();if(s)enter(s.id.slice(4),s,true);
+    },function(e){console.warn(e.message);setCls(false);settle(null);emit('cdmotion:state',{on:false});});
+  }else{stop();setCls(false);settle(null);}
+  syncBtn();
+}
+
+/* ---- Seitenauftritt (A4) ---- */
+function shown(el){var r=el.getBoundingClientRect();return r.width||r.height;}
+function skip(el){return !!el.closest('[data-cd-noreveal]')||!!el.style.opacity||!!el.style.transform;}
+/* oberste, schon im Bild stehende Blöcke (Kopf zuerst), höchstens 6; bei nur einem Hüllblock dessen Kinder */
+function topBlocks(sec,vh){
+  var k=[].filter.call(sec.children,shown),out=[];
+  if(k.length===1&&k[0].children.length>1)k=[].filter.call(k[0].children,shown);
+  for(var i=0;i<k.length&&out.length<6;i++){
+    var r=k[i].getBoundingClientRect();
+    if(r.top>=vh*0.96)break;
+    if(r.bottom>0&&!skip(k[i]))out.push(k[i]);
+  }
+  return out;
+}
+/* Karten unterhalb des Bildes vorbereiten (opacity 0, kleiner Weg), Freigabe per ScrollTrigger.batch; Tabellen nur 40 Zeilen */
+function prep(sec,vh){
+  var all=sec.querySelectorAll(REVEAL_SEL),list=[],set=new Set(),rows=new Map();
+  for(var i=0;i<all.length&&list.length<200;i++){
+    var el=all[i],a,r;
+    if(skip(el))continue;
+    if(el.tagName==='TR'){a=(rows.get(el.parentNode)||0)+1;rows.set(el.parentNode,a);if(a>40)continue;}
+    a=el.parentElement&&el.parentElement.closest(REVEAL_SEL);
+    if(a&&set.has(a))continue;                       /* Eltern-Karte blendet schon ein */
+    r=el.getBoundingClientRect();
+    if((!r.width&&!r.height)||r.top<vh*0.98)continue; /* verborgen oder schon im Bild */
+    list.push(el);set.add(el);
+  }
+  if(!list.length)return;
+  list.forEach(function(el){el.classList.add('cdx-wait');waiting.add(el);});
+  var tr=list.filter(function(el){return el.tagName==='TR';}),bl=list.filter(function(el){return el.tagName!=='TR';});
+  if(bl.length)gsap.set(bl,{opacity:0,y:mob()?8:16});
+  if(tr.length)gsap.set(tr,{opacity:0});            /* Zeilen nur blenden */
+  batch=ScrollTrigger.batch(list,{start:'top 96%',once:true,batchMax:12,interval:0.06,onEnter:function(b){reveal(b);}});
+}
+function reveal(list,instant){
+  list=[].filter.call(list,function(el){return waiting.has(el);});
+  if(!list.length||!window.gsap)return;
+  list.forEach(function(el){waiting.delete(el);});
+  if(instant){gsap.killTweensOf(list);gsap.set(list,{clearProps:'transform,opacity'});return list.forEach(function(el){el.classList.remove('cdx-wait');});}
+  /* Staffel insgesamt höchstens 0,3 s; jedes Element gibt seine Klasse selbst frei */
+  var tw=gsap.to(list,{opacity:1,y:0,duration:mob()?0.25:0.42,ease:'power2.out',overwrite:true,clearProps:'transform,opacity',
+    stagger:{each:Math.min(mob()?0.02:0.035,0.3/list.length),onComplete:function(){this.targets()[0].classList.remove('cdx-wait');}},
+    onComplete:function(){running.delete(tw);}});
+  running.add(tw);
+}
+/* Sicherheitsnetz nach Sprüngen und Umbauten: was im Bild oder darüber steht, wird freigegeben */
+function sweep(){
+  if(!waiting.size)return;
+  var vh=innerHeight,up=[],vis=[];
+  waiting.forEach(function(el){
+    if(!el.isConnected)return waiting.delete(el);
+    var r=el.getBoundingClientRect();
+    if(r.bottom<=0||(!r.width&&!r.height))up.push(el);else if(r.top<vh)vis.push(el);
+  });
+  if(up.length)reveal(up,true);
+  if(vis.length)reveal(vis);
+}
+function enter(id,sec,first){
+  revealAll(true);
+  if(ctx){ctx.revert();ctx=null;}
+  if(!active||!sec)return;
+  var m=mob(),vh=innerHeight;
+  ctx=gsap.context(function(){
+    if(!first){   /* beim ersten Laden stand der Inhalt schon da: nichts Sichtbares neu einblenden */
+      var b=topBlocks(sec,vh);
+      if(b.length){
+        b.forEach(function(el){el.classList.add('cdx-run');});
+        var tw=gsap.from(b,{opacity:0,y:m?7:14,duration:m?0.22:0.4,ease:'power2.out',stagger:0.05,clearProps:'transform,opacity',
+          onComplete:function(){running.delete(tw);b.forEach(function(el){el.classList.remove('cdx-run');});}});
+        running.add(tw);
+      }
+    }
+    prep(sec,vh);
+    var l=libs(first);
+    hooks.slice().forEach(function(fn){try{fn(id,sec,l);}catch(e){console.error('cdMotion.onEnter:',e);}});
+  },sec);
+  refreshSoon(60);
+}
+function revealAll(quiet){
+  batch.forEach(function(t){t.kill();});batch=[];
+  running.forEach(function(t){t.progress(1).kill();});running.clear();   /* laufende Einblendungen sofort ans Ende */
+  var list=Array.from(waiting);waiting.clear();
+  document.querySelectorAll('.cdx-wait,.cdx-run').forEach(function(el){if(list.indexOf(el)<0)list.push(el);});
+  if(list.length&&window.gsap){gsap.killTweensOf(list);gsap.set(list,{clearProps:'transform,opacity'});}
+  list.forEach(function(el){el.classList.remove('cdx-wait','cdx-run');});
+  if(!quiet)emit('cdmotion:revealall');
+}
+/* Hook am Ende von showSec */
+function page(id){
+  var sec=$('sec-'+id);if(!sec)return;
+  var first=!pages++;
+  emit('cdmotion:page',{id:id,sec:sec,first:first});
+  if(active)enter(id,sec,first);
+  measure();onScroll();
+}
+
+/* ---- Scrollen (A3): Versatz = angeheftete Kopfzeile + 8 px ---- */
+function headerOffset(){
+  bb=bb||$('blattbar');
+  var p=bb&&getComputedStyle(bb).position;
+  return p==='sticky'||p==='fixed'?Math.round(bb.offsetHeight)+8:8;
+}
+function scrollTo(target,o){
+  o=o||{};
+  var y=target,el;
+  if(typeof target!=='number'){
+    el=typeof target==='string'?document.querySelector(target):target;
+    if(!el||!el.getBoundingClientRect||!shown(el))return;
+    revealAll();   /* Sprungziel und alles davor sofort sichtbar */
+    y=el.getBoundingClientRect().top+scrollY-(o.offset!=null?+o.offset:headerOffset());
+  }
+  y=Math.round(Math.max(0,Math.min(H.scrollHeight-innerHeight,y)));
+  var d=Math.abs(y-scrollY),dur=Math.min(0.9,0.35+d/6000),done=function(){progUntil=now()+400;lastY=scrollY;if(typeof o.onComplete==='function')o.onComplete();};
+  progUntil=now()+dur*1000+400;setOff(false);   /* Kopfzeile bleibt während des Sprungs stehen */
+  if(lenis&&active&&!o.immediate&&d>1)lenis.scrollTo(y,{duration:dur,easing:function(t){return 1-Math.pow(1-t,4);},force:true,onComplete:done});
+  else{if(lenis&&active)lenis.scrollTo(y,{immediate:true,force:true});else window.scrollTo({top:y,behavior:'auto'});done();}
+}
+
+/* ---- Kopfzeile (A7): Schatten, Lesefortschritt, mobil ausweichen ---- */
+function measure(){
+  bb=bb||$('blattbar');if(!bb)return;
+  var lim=H.scrollHeight-innerHeight;
+  docShort=lim<innerHeight;
+  H.style.setProperty('--cdx-bb-h',bb.offsetHeight+'px');
+  if(prog)prog.classList.toggle('on',active&&lim>innerHeight*0.6);
+}
+function setOff(v){if(bb&&v!==bbOff){bbOff=v;bb.classList.toggle('cdx-bb-off',v);}}
+function onScroll(){
+  bb=bb||$('blattbar');if(!bb)return;
+  var y=scrollY,d=y-lastY,sb=$('sidebar');
+  bb.classList.toggle('cdx-scrolled',y>4);
+  if(!active||!mob()||now()<progUntil||docShort||y<bb.offsetHeight*2||(sb&&sb.classList.contains('open'))||bb.contains(document.activeElement)||bb.querySelector('[aria-expanded="true"]'))setOff(false);
+  else if(d>6)setOff(true);else if(d<-6)setOff(false);
+  if(Math.abs(d)>6||y<8)lastY=y;
+  if(waiting.size){clearTimeout(swT);swT=setTimeout(sweep,140);}   /* nach dem Scrollen nachkehren */
+}
+function onLenis(l){
+  if(progX&&l.limit>0)progX(Math.min(1,l.scroll/l.limit));
+  if(waiting.size&&now()-swAt>300){swAt=now();sweep();}
+}
+function setupBar(){
+  bb=$('blattbar');if(!bb)return;
+  if(!prog){prog=document.createElement('div');prog.className='cdx-progress';prog.setAttribute('aria-hidden','true');bb.appendChild(prog);}
+  progX=active?gsap.quickSetter(prog,'scaleX'):null;
+  measure();
+}
+
+/* ---- Overlays: Lenis anhalten, solange eines offen ist ---- */
+function isOpen(el){
+  if(!el.isConnected||!el.getClientRects().length)return false;
+  var c=getComputedStyle(el);return c.display!=='none'&&c.visibility!=='hidden'&&+c.opacity>0.05;
+}
+function checkOv(){
+  ovT=0;if(!lenis)return;
+  var open=[].some.call(document.querySelectorAll(OVERLAY),isOpen);
+  if(open!==lenis.isStopped)open?lenis.stop():lenis.start();
+}
+function attachOv(){
+  document.querySelectorAll(OVERLAY).forEach(function(el){
+    if(!ovSeen.has(el)){ovSeen.add(el);ovObs.observe(el,{attributes:true,attributeFilter:['class','style','hidden','open']});}
+  });
+}
+function watchOv(){
+  if(ovObs)return;
+  var s=function(){ovT=ovT||requestAnimationFrame(checkOv);};
+  ovObs=new MutationObserver(s);
+  new MutationObserver(function(){attachOv();s();}).observe(document.body,{childList:true});
+  attachOv();
+}
+
+/* ---- Refresh (entprellt) ---- */
+function refreshNow(){
+  if(lenis)lenis.resize();
+  if(active)ScrollTrigger.refresh();
+  measure();sweep();emit('cdmotion:refresh');
+}
+function refreshSoon(ms){clearTimeout(refT);refT=setTimeout(refreshNow,ms==null?150:ms);}
+
+/* ---- Schalter (A2): Automatisch, An, Aus ---- */
+var LBL={auto:'Automatisch',on:'An',off:'Aus'},NEXT={auto:'on',on:'off',off:'auto'};
+function syncBtn(){
+  var b=$('motionBtn');if(!b)return;
+  var p=pref(),eff=H.classList.contains('cd-motion'),
+    t='Bewegung: '+LBL[p]+(p==='auto'?(eff?' (an)':' (aus, folgt der Systemeinstellung)'):'')+(force&&p!=='on'?' (per Adresse erzwungen)':'');
+  b.dataset.state=p;b.title=t;
+  b.setAttribute('aria-pressed',eff?'true':'false');
+  b.setAttribute('aria-label',t+'. Klicken wechselt zu: '+LBL[NEXT[p]]);
+}
+function setPref(p){
+  if(!LBL[p])p='auto';
+  try{p==='auto'?localStorage.removeItem(KEY):localStorage.setItem(KEY,p);}catch(e){}
+  force=false;   /* ?motion gilt nur, bis jemand selbst schaltet */
+  apply();
+}
+
+/* ---- öffentliche API (Vertrag 4.1) + Zusätze ---- */
+window.cdMotion={
+  get on(){return active;},
+  get ready(){return readyP;},
+  onEnter:function(fn){
+    if(typeof fn!=='function')return;
+    hooks.push(fn);
+    var s=activeSec();   /* spät registriert: für die schon inszenierte Seite nachholen (ohne Auftritt) */
+    if(active&&ctx&&s)ctx.add(function(){try{fn(s.id.slice(4),s,libs(true));}catch(e){console.error('cdMotion.onEnter:',e);}});
+  },
+  scrollTo:scrollTo,
+  refresh:function(){refreshSoon();},
+  revealAll:function(){revealAll();},
+  REVEAL_SEL:REVEAL_SEL,
+  get pref(){return pref();},
+  setPref:setPref,
+  cycle:function(){setPref(NEXT[pref()]);},
+  headerOffset:headerOffset,
+  _page:page
+};
+
+document.addEventListener('input',function(e){if(e.target.id==='si')revealAll();},true);
+addEventListener('beforeprint',function(){revealAll();});
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',function(){refreshSoon(200);},{passive:true});
+try{mqR.addEventListener('change',function(){if(pref()==='auto'&&!force)apply();});}catch(e){}
+document.addEventListener('cdmotion:state',function(){setupBar();syncBtn();onScroll();});
+function boot(){
+  var m=$('main');
+  if(m){m.addEventListener('change',function(){revealAll();});if(window.ResizeObserver)new ResizeObserver(function(){refreshSoon(200);}).observe(m);}
+  setupBar();syncBtn();
+  if(!pages){var s=activeSec();if(s)page(s.id.slice(4));}
+  if(wanted())apply();else{setCls(false);settle(null);}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+/* -- A5 Navigation: gleitende Markierungen + Lichtkegel -- */
+/* Gleitende Markierungen in Rail und Konsole (ruhig, nach React Bits PillNav, (c) David Haz, MIT+Commons Clause) + Lichtkegel */
+(function(){
+  'use strict';
+  var D=document,M=window.cdMotion,rs=D.getElementById('railScroll'),cl=D.getElementById('conList'),sb=D.getElementById('sidebar');
+  if(!M||!rs||!cl) return;
+  var on=0,fr=0,sf=0,mo,ro,pt,px,py,fine=matchMedia('(hover:hover) and (pointer:fine)');
+  var R={h:rs,r:D.getElementById('rail'),c:'cdx-ind-rail',s:'.rail-item.active',snap:1};
+  var C={h:cl,r:cl,c:'cdx-ind-con',s:'.leaf.active'};
+  /* Lage im scrollenden Container; Platz einer noch stehenden .cdx-toc (A6) vor dem Ziel wird abgezogen */
+  function box(i,t){
+    var h=i.h.getBoundingClientRect(),r=t.getBoundingClientRect(),dy=0,p=t.previousElementSibling,a,b;
+    if(r.width<2||r.height<2||(i===C&&sb&&sb.getBoundingClientRect().width<2)) return;
+    for(;p;p=p.previousElementSibling) if(p.classList.contains('cdx-toc')){
+      a=p.previousElementSibling; b=p.nextElementSibling;
+      dy+=a&&b?b.getBoundingClientRect().top-a.getBoundingClientRect().bottom:p.getBoundingClientRect().height;
+    }
+    return {x:r.left-h.left-i.h.clientLeft+i.h.scrollLeft,y:r.top-dy-h.top-i.h.clientTop+i.h.scrollTop,width:r.width,height:r.height};
+  }
+  function off(i,rm){
+    if(i.e){ gsap.killTweensOf(i.e); if(rm) i.e.remove(); else gsap.set(i.e,{opacity:0}); }
+    i.r.classList.remove('cdx-ind-on'); i.l=i.v=0;
+  }
+  function upd(i){
+    var t=i.h.querySelector(i.s),b=t&&box(i,t),e=i.e;
+    if(!b) return off(i);
+    if(!e){ e=i.e=D.createElement('span'); e.className='cdx-ind '+i.c; e.setAttribute('aria-hidden','true'); }
+    if(e.parentNode!==i.h) i.h.appendChild(e);          /* innerHTML der Liste hat ihn ggf. entfernt */
+    if(!i.v||!i.l||!i.l.isConnected){                    /* neu oder Liste neu gebaut: einblenden statt quer gleiten */
+      gsap.killTweensOf(e); gsap.set(e,b);
+      if(i.snap) gsap.set(e,{opacity:1}); else i.w=gsap.fromTo(e,{opacity:0},{opacity:1,duration:.18,ease:'power1.out'});
+    } else if(t!==i.l||(i.w&&i.w.isActive()))            /* Blattwechsel oder Ziel wanderte beim Gleiten */
+      i.w=gsap.to(e,{x:b.x,y:b.y,width:b.width,height:b.height,opacity:1,duration:.32,ease:'power3.out',overwrite:true,onComplete:sched});
+    else gsap.set(e,b);                                  /* nur Größe/Scroll geändert */
+    i.l=t; i.v=1; i.r.classList.add('cdx-ind-on');
+  }
+  function sched(){ if(on&&!fr) fr=requestAnimationFrame(function(){ fr=0; if(on){ upd(R); upd(C); } }); }
+  function onMut(m){
+    for(var k=0,x,n;k<m.length;k++){
+      x=m[k]; n=x.addedNodes&&(x.addedNodes[0]||x.removedNodes[0]);
+      if(x.type==='childList'?n!==R.e&&n!==C.e:/\b(leaf|rail-item)\b/.test(x.target.className)) return sched();
+    }
+  }
+  /* Lichtkegel: ein delegierter, passiver Listener, Schreiben gebündelt per rAF */
+  function spot(){ sf=0; var r=pt.getBoundingClientRect(); pt.style.setProperty('--mx',px-r.left+'px'); pt.style.setProperty('--my',py-r.top+'px'); }
+  function move(e){ var t=e.target.closest&&e.target.closest('.leaf,.rail-item'); if(t){ pt=t; px=e.clientX; py=e.clientY; sf=sf||requestAnimationFrame(spot); } }
+  function enable(){
+    if(on||!window.gsap||!M.on) return;
+    on=1; mo=new MutationObserver(onMut);
+    var o={childList:true,subtree:true,attributes:true,attributeFilter:['class']};
+    mo.observe(rs,o); mo.observe(cl,o);
+    if(window.ResizeObserver){ ro=new ResizeObserver(sched); ro.observe(rs); ro.observe(cl); if(sb) ro.observe(sb); }
+    if(fine.matches) D.addEventListener('pointermove',move,{passive:true});
+    sched();
+  }
+  function disable(){
+    if(!on) return;
+    on=0; cancelAnimationFrame(fr); cancelAnimationFrame(sf); fr=sf=0;
+    if(mo) mo.disconnect(); if(ro) ro.disconnect();
+    D.removeEventListener('pointermove',move);
+    off(R,1); off(C,1); R.e=C.e=pt=null;
+  }
+  ['cdmotion:page','cdmotion:toc','cdmotion:refresh'].forEach(function(n){ D.addEventListener(n,sched); });
+  D.addEventListener('cdmotion:state',function(e){ if(e.detail&&e.detail.on) enable(); else disable(); });
+  if(M.on) enable(); else if(M.ready) M.ready.then(function(v){ if(v) enable(); });
+})();
+/* -- /A5 -- */
+/* -- A6 Abschnitts-Navigation „Auf dieser Seite“ -- */
+/* Abschnitts-Navigation: Überschriften der Seite -> Liste in der Konsole oder Popover in der Kopfzeile (Handy, Konsole zu),
+   Scrollspy per rAF, gleitender Balken (GSAP nur bei cdMotion.on). Ohne Bewegung identisch, nur ohne Gleiten. */
+(()=>{
+const SEL='.sub-t,.loc-grp-t,.ch-title,[data-toc]',MIN=3,CAP=14,mq=matchMedia('(max-width:860px)'),$=i=>document.getElementById(i),
+  HEAD='<div class="cdx-toc-h" aria-hidden="true">Auf dieser Seite</div>';
+let items=[],sig='',sec,nav,btn,pop,mo,more=0,act=-2,hold=-1,busy=0,fy=0,raf=0,tmr=0,ctr={};
+const side=()=>mq.matches||$('app').classList.contains('console-collapsed'),
+  Y=()=>window.scrollY||0,
+  fire=()=>document.dispatchEvent(new CustomEvent('cdmotion:toc')),
+  mk=(c,id)=>{const n=document.createElement('nav');n.className=c;n.id=id;n.setAttribute('aria-label','Abschnitte dieser Seite');n.onclick=click;return n};
+
+/* sichtbare Überschriften (nicht in zugeklappten details; wiederholte Karten-Köpfe wie in der Synthese zählen nicht) */
+function collect(){
+  const out=[],cnt={},seen=new Set();
+  sec.querySelectorAll(SEL).forEach(h=>{
+    const t=h.textContent.replace(/\s+/g,' ').trim();
+    if(t&&h.getClientRects().length&&!(h.closest('details:not([open])')&&!h.closest('summary')))out.push({el:h,t});
+  });
+  out.forEach(o=>{const p=o.el.parentElement;if(!seen.has(p)){seen.add(p);cnt[p.className]=(cnt[p.className]||0)+1}});
+  return out.filter(o=>!o.el.parentElement.className||cnt[o.el.parentElement.className]<20);
+}
+const list=cap=>'<div class="cdx-l"><i class="cdx-tbar"></i><ul>'+items.map((o,i)=>
+  `<li${cap&&i>=CAP&&!more?' hidden':''}><button type="button" data-i="${i}"><span>${o.t.replace(/[&<]/g,c=>'&#'+c.charCodeAt()+';')}</span></button></li>`).join('')
+  +(cap&&items.length>CAP?`<li class="cdx-more"><button type="button" data-m="1" aria-expanded="${!!more}">${more?'Weniger':'+ '+(items.length-CAP)+' weitere'}</button></li>`:'')+'</ul></div>';
+
+/* Liste direkt nach dem aktiven .leaf; weg bei Handy und eingeklappter Konsole */
+function put(){
+  const leaf=$('conList')?.querySelector('.leaf.active');let ch=0;
+  if(items.length<MIN||!leaf||side()){if(nav){nav.remove();nav=0;fire()}return}
+  if(!nav){nav=mk('cdx-toc','cdxToc');ch=1}
+  if(nav.dataset.s!==sig){nav.dataset.s=sig;nav.innerHTML=HEAD+list(1);ch=1}
+  if(nav.previousElementSibling!==leaf){leaf.after(nav);ch=1}
+  if(ch){mark();fire()}
+}
+function bar(){
+  const on=items.length>=MIN&&side();
+  btn.hidden=!on;if(!on)setPop(0);
+  btn.lastChild.textContent=items.length;btn.setAttribute('aria-label','Abschnitte dieser Seite ('+items.length+')');
+}
+function setPop(v){
+  if(pop.hidden===!v)return;
+  pop.hidden=!v;btn.setAttribute('aria-expanded',!!v);if(v)mark();
+}
+function refresh(force){
+  tmr=0;if(!sec||!sec.isConnected)return;
+  items=collect();
+  items.forEach(({el})=>{ /* fehlende IDs vergeben, vorhandene nie ändern; Fokus per Skript ermöglichen */
+    if(!el.id){let n=ctr[sec.id]||0,id;do id='cdx-'+sec.id.slice(4)+'-'+ ++n;while($(id));ctr[sec.id]=n;el.id=id}
+    if(!el.hasAttribute('tabindex'))el.tabIndex=-1;
+  });
+  const s=items.map(o=>o.t).join('\n');
+  if(force===true||s!==sig){sig=s;act=-2;pop.innerHTML=HEAD+list();if(nav)nav.dataset.s=''}
+  put();bar();spy();
+}
+const sched=()=>{clearTimeout(tmr);tmr=setTimeout(refresh,250)};
+
+/* aktiven Eintrag markieren, Balken gleiten lassen; nachgeführt wird nur der Container, nie das Fenster */
+function mark(anim){
+  for(const c of [nav,pop]){
+    if(!c||!c.isConnected||c.hidden)continue;
+    const ind=c.querySelector('.cdx-tbar');let cur;
+    c.querySelectorAll('button[data-i]').forEach(b=>{
+      const on=+b.dataset.i===act;if(on)cur=b;
+      on?b.setAttribute('aria-current','location'):b.removeAttribute('aria-current');
+    });
+    if(cur&&cur.parentNode.hidden){if(anim){more=1;nav.dataset.s='';put()}cur=0}
+    if(!cur){ind.style.opacity=0;ind.dataset.on='';continue}
+    const y=cur.offsetTop,h=cur.offsetHeight,was=ind.dataset.on;ind.dataset.on=1;
+    if(cdMotion.on&&window.gsap){
+      gsap.set(ind,{height:h,opacity:1});
+      anim&&was?gsap.to(ind,{y,duration:.3,ease:'power3.out',overwrite:true}):gsap.set(ind,{y});
+    }else ind.style.cssText=`opacity:1;height:${h}px;transform:translateY(${y}px)`;
+    const s=c===pop?pop:$('conList'),r=cur.getBoundingClientRect(),q=s.getBoundingClientRect();
+    if(r.top<q.top+4)s.scrollTop+=r.top-q.top-24;else if(r.bottom>q.bottom-4)s.scrollTop+=r.bottom-q.bottom+24;
+  }
+}
+/* Scrollspy: letzte Überschrift, deren Oberkante höchstens 30 % der Restfensterhöhe unter der Kopfzeile liegt */
+function spy(){
+  raf=0;if(items.length<MIN)return;
+  const top=Math.max(0,$('blattbar').getBoundingClientRect().bottom),lim=top+(innerHeight-top)*.3,y=Y();let a=-1;
+  for(let i=0;i<items.length;i++){
+    const e=items[i].el;if(!e.isConnected)continue;
+    if(e.getBoundingClientRect().top<=lim)a=i;else break;
+  }
+  if(y>0&&y+innerHeight>=document.documentElement.scrollHeight-2)a=items.length-1;
+  if(hold>=0){if(busy||Math.abs(y-fy)<40)a=hold;else hold=-1}
+  if(a!==act){act=a;mark(1)}
+}
+/* Sprung: Standard-Versatz der Kopfzeile; nachladende Bilder verschieben das Ziel, darum bis zu 4 mal nachjustieren */
+function go(i){
+  const el=items[i]?.el;if(!el||!el.isConnected)return;
+  setPop(0);hold=i;busy=1;act=i;mark(1);
+  const fin=n=>{
+    cdMotion.scrollTo(el,{immediate:true});fy=Y();
+    setTimeout(()=>{
+      const r=el.getBoundingClientRect().top-cdMotion.headerOffset(),y=Y();
+      if(n<4&&Math.abs(r)>3&&Math.abs(y-fy)<40&&y<document.documentElement.scrollHeight-innerHeight-2)return fin(n+1);
+      busy=0;fy=y;el.focus({preventScroll:true});
+    },250);
+  };
+  let d=0;const end=()=>{if(!d++)fin(0)};
+  cdMotion.scrollTo(el,{onComplete:end});setTimeout(end,1600);
+}
+function click(e){
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.m){more=!more;nav.dataset.s='';put();nav.querySelector('[data-m]').focus()}
+  else if(b.dataset.i)go(+b.dataset.i);
+}
+function start(s){
+  setPop(0);hold=-1;busy=0;sec=s;mo.disconnect();
+  mo.observe(s,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style','hidden','open']});
+  refresh(true);
+}
+const bb=$('blattbar'),D=document;
+btn=D.createElement('button');btn.type='button';btn.id='cdxBtn';btn.className='bb-console cdx-bbtoc';btn.hidden=true;
+btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-controls','cdxPop');
+btn.innerHTML='<span aria-hidden="true">&sect;</span><span class="cdx-t">Abschnitte</span><span class="cdx-n"></span>';
+btn.onclick=()=>setPop(pop.hidden);
+pop=mk('cdx-pop','cdxPop');pop.hidden=true;pop.setAttribute('data-lenis-prevent','');
+bb.querySelector('.bb-spacer').after(btn,pop);
+/* Beobachter: Seite (Filter, Reiter, Lazy-Render; Einblend-Animationen zählen nicht), Konsolenliste, Konsolen-Zustand */
+mo=new MutationObserver(r=>{if(r.some(m=>!m.target.classList?.contains('cdx-wait')&&!m.target.classList?.contains('cdx-run')))sched()});
+new MutationObserver(put).observe($('conList'),{childList:true});
+new MutationObserver(()=>{bar();put()}).observe($('app'),{attributes:true,attributeFilter:['class']});
+mq.addEventListener('change',()=>{bar();put()});
+D.addEventListener('cdmotion:page',e=>start(e.detail.sec));
+D.addEventListener('cdmotion:state',()=>sec&&refresh(true));
+D.addEventListener('cdmotion:refresh',()=>sec&&refresh());
+D.addEventListener('toggle',e=>{if(sec&&e.target.tagName==='DETAILS'&&sec.contains(e.target))sched()},true);
+const away=e=>{if(!pop.hidden&&!pop.contains(e.target)&&!btn.contains(e.target))setPop(0)};
+D.addEventListener('click',away);D.addEventListener('focusin',away);
+D.addEventListener('keydown',e=>{if(e.key==='Escape'&&!pop.hidden){setPop(0);btn.focus()}});
+addEventListener('scroll',()=>{raf=raf||requestAnimationFrame(spy)},{passive:true});
+const s0=D.querySelector('#main > .sec.active');if(s0)start(s0);
+window.cdToc={items:()=>items.map(o=>o.t),active:()=>act,el:i=>items[i].el};
+})();
+/* -- /A6 -- */
+/* ==== /Motion A ==== */
+</script>
+<script>
+/* ==== MOTION 10/2026 · Bereich B (Inhalte & Seiten-Effekte) ==== */
+/* B2 Startseiten-Inszenierung + B3 Seiten-Signatur. Hängt sich per cdMotion.onEnter ein (läuft im gsap.context der Seite). */
+(function(){
+'use strict';
+if(!window.cdMotion||!window.cdMotion.onEnter)return;
+var M=window.cdMotion,root=document.documentElement,G=null,cur=null,live=[],seen={};
+var COUNT='.sec-stat-val,.stat-val,.rm-prog-pill-val,.sec-hero-num';           /* Kennzahlen-Bänder */
+var IMG='[class*=card] img,img.boss-img,img.craft-ico,img.item-ico,img.sk-ico';
+var NUM=/^(\D*?)(\d{1,3}(?:\.\d{3})+|\d+)(\s*(?:\/\s*[\d.]+)?\D*)$/;      /* Präfix, Zahl (Tausenderpunkt), Suffix wie " %" oder "/ 175" */
+function mob(){return window.innerWidth<=860}
+function inView(el,f){var r=el.getBoundingClientRect();return r.width>0&&r.top<window.innerHeight*(f||1)&&r.bottom>0}
+function list(x){return Array.prototype.slice.call(x)}
+
+/* ---- Zähler: Endtext wird immer exakt wiederhergestellt, fremd geänderte Knoten bleiben unberührt ---- */
+function put(c,v){
+  var el=c.el;
+  if(!el.isConnected||el.textContent!==c.last){fin(c);return}              /* ersetzt oder von der App geändert */
+  if(v===c.v)return;c.v=v;
+  el.textContent=c.last=c.pre+(c.dot?v.toLocaleString('de-DE'):v)+c.suf;      /* Suffix unverändert: Einzahl-Kürzen ließ den Kopf mobil umbrechen */
+}
+function fin(c){
+  if(c.done)return;c.done=true;clearTimeout(c.to);if(c.tw)c.tw.kill();
+  var el=c.el,i=live.indexOf(c);if(i>-1)live.splice(i,1);
+  if(el.isConnected&&el.textContent===c.last)el.textContent=c.end;
+  if(c.al&&el.getAttribute('aria-label')===c.end)el.removeAttribute('aria-label');
+}
+function count(el,delay,dur){
+  var m=!el.childElementCount&&NUM.exec(el.textContent),n=m&&+m[2].replace(/\./g,'');
+  if(!m||n<2||n>999999||/^0\d/.test(m[2]))return;                           /* nur echte Zahlen */
+  var o={v:0},c={el:el,end:el.textContent,last:el.textContent,pre:m[1],suf:m[3],dot:m[2].indexOf('.')>-1,v:-1,al:!el.hasAttribute('aria-label')};
+  if(c.al)el.setAttribute('aria-label',c.end);                              /* Endwert sofort für Screenreader */
+  live.push(c);put(c,0);c.to=setTimeout(function(){fin(c)},3000);
+  later(function(){                                                          /* erst nach dem ersten Bild starten, sonst verpufft der Zähler im Rendern großer Seiten */
+    if(c.done)return;clearTimeout(c.to);
+    c.tw=G.to(o,{v:n,duration:dur,delay:delay,ease:'power2.out',onUpdate:function(){put(c,Math.round(o.v))},onComplete:function(){fin(c)}});
+    c.to=setTimeout(function(){fin(c)},(delay+dur+.2)*1000);                /* Zeit-Fallback, falls der Tween vom Kontext zurückgesetzt wird */
+  });
+}
+function later(fn){requestAnimationFrame(function(){requestAnimationFrame(fn)})}
+
+/* ---- Bilder in Karten: nur ungeladene weich einblenden (onerror-Logik der Bilder bleibt unberührt) ---- */
+function imgDone(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.dataset.cdIw==='1')t.dataset.cdIw='0'}
+function imgs(sec){
+  var mark=list(sec.querySelectorAll(IMG)).filter(function(im){return !im.complete&&im.dataset.cdIw==null&&inView(im,1.6)}).slice(0,60);
+  mark.forEach(function(im){im.dataset.cdIw='1'});
+  if(mark.length)setTimeout(function(){mark.forEach(function(im){if(im.dataset.cdIw==='1')im.dataset.cdIw='0'})},6000);
+}
+
+/* ---- Sicherheitsnetz: alles Eigene sofort fertig ---- */
+function finishAll(){
+  live.slice().forEach(fin);
+  if(cur&&G){cur.tl.kill();G.killTweensOf(cur.els);if(cur.els.length)G.set(cur.els,{clearProps:'transform,opacity'});if(cur.sp)cur.sp.revert()}
+  cur=null;
+  list(document.querySelectorAll('img[data-cd-iw="1"]')).forEach(function(im){im.dataset.cdIw='0'});
+  list(document.querySelectorAll('.sec-t.cd-l0')).forEach(function(t){t.classList.remove('cd-l0')});
+}
+
+M.onEnter(function(id,sec,L){
+  G=(L&&L.gsap)||window.gsap;if(!G||!sec)return;
+  finishAll();
+  var k=mob()?.5:1,P=function(x){return x*(k<1?.6:1)},D=function(x){return Math.max(.3,x*k)},
+      tl=G.timeline({defaults:{ease:'power2.out'}}),my=cur={tl:tl,els:[],sp:null},
+      first=!seen[id],cold=!!(L&&L.first);
+  seen[id]=1;
+  /* Erstes Laden (cold): Inhalt stand schon fertig da, bevor die Bibliotheken kamen. Nichts Sichtbares neu
+     abspielen (wie A); die Titellinie zeichnet das CSS ohnehin beim ersten Paint. Beim Seitenwechsel wartet die
+     Linie (cd-l0 = eingezogen) bis nach dem ersten Bild, damit sie auf großen Seiten nicht im Rendern verpufft. */
+  var lt=!cold&&sec.querySelector('.sec-t');
+  if(lt){var rm=function(){lt.classList.remove('cd-l0')};lt.classList.add('cd-l0');later(rm);setTimeout(rm,1500)}
+  /* Fremde Tweens (A) auf meinen Elementen beenden und Inline-Werte räumen, dann gehören sie mir */
+  function fresh(x){x=list(x);if(x.length){G.killTweensOf(x);G.set(x,{clearProps:'transform,opacity'});x.forEach(function(e){e.classList.remove('cdx-run')});my.els.push.apply(my.els,x)}return x}
+  function from(x,v,pos){x=fresh(x);if(x.length){v.clearProps='transform,opacity';tl.from(x,v,pos)}}
+  function unprep(e){return e.style.opacity===''&&!G.getTweensOf(e).length}   /* A hat diese Kachel nicht vorbereitet */
+
+  if(id==='start'&&!cold){
+    var h=sec.querySelector('#start-title'),tn=h&&list(h.childNodes).filter(function(n){return n.nodeType===3&&n.nodeValue.trim()})[0],tx=h&&h.querySelector('.cd-tt');
+    if(!tx&&tn){tx=document.createElement('span');tx.className='cd-tt';h.replaceChild(tx,tn);tx.appendChild(tn)}   /* nur der Textteil, .sec-sym bleibt unberührt */
+    if(tx&&L.SplitText){
+      /* aria:'none': SplitText würde sonst textContent samt Zierzeichen als aria-label setzen; der Titel bleibt als Klartext lesbar, nach der Animation wird zurückgebaut */
+      my.sp=L.SplitText.create(tx,{type:'words',mask:'words',wordsClass:'cd-w',aria:'none'});
+      tl.from(my.sp.words,{yPercent:110,duration:D(.5),stagger:.05*k,ease:'power3.out',clearProps:'transform',
+        onComplete:function(){if(my.sp)my.sp.revert()}},0);
+    }
+    fresh(sec.querySelectorAll('#start-root'));
+    from(sec.querySelectorAll('.so-lead,.so-search'),{opacity:0,y:10*k,duration:D(.4),stagger:.08*k},P(.08));
+    from(sec.querySelectorAll('.so-chip'),{opacity:0,y:8*k,duration:D(.35),stagger:.03*k},P(.18));
+    /* Kacheln im Bild nur, wenn A sie nicht vorbereitet hat; die unterhalb des Bildes gehören dem Reveal von A */
+    from(list(sec.querySelectorAll('.so-tile')).filter(function(e){return unprep(e)&&inView(e,.98)}).slice(0,12),{opacity:0,y:12*k,duration:D(.4),stagger:.03*k},P(.24));
+  }
+  if(id==='start'){
+    /* Seitenzahlen der Kategorie-Köpfe: zählen beim Hereinscrollen (nur beim ersten Besuch; im Bild nicht beim Kaltstart) */
+    if(first)list(sec.querySelectorAll('.so-cat-n')).forEach(function(n,i){
+      var hd=n.closest('.so-cat-hd')||n;
+      if(inView(hd,.95)){if(!cold)count(n,P(.3+i*.06),D(.6))}             /* im Bild: sofort auf 0, Zählung mit Verzögerung */
+      else if(L.ScrollTrigger)L.ScrollTrigger.create({trigger:hd,start:'top 92%',once:true,onEnter:function(){if(cur===my)count(n,0,D(.6))}});
+    });
+  }else if(first&&!cold){
+    list(sec.querySelectorAll(COUNT)).filter(function(e){return inView(e)}).slice(0,12).forEach(function(e,i){count(e,.1+i*.05,D(.6))});
+  }
+  imgs(sec);
+});
+
+/* Auslöser des Sicherheitsnetzes */
+var si=document.getElementById('si'),mn=document.getElementById('main');
+if(si)si.addEventListener('input',finishAll);
+if(mn)mn.addEventListener('change',finishAll);
+window.addEventListener('beforeprint',finishAll);
+new MutationObserver(function(){if(!root.classList.contains('cd-motion'))finishAll()}).observe(root,{attributes:true,attributeFilter:['class']});
+document.addEventListener('load',imgDone,true);document.addEventListener('error',imgDone,true);
+})();
+/* ---- B4: Lichtkegel, Filter-Neurender ---- */
+(function(){
+'use strict';
+var H=document.documentElement;
+
+/* Lichtkegel nach React Bits SpotlightCard, (c) David Haz, MIT+Commons Clause.
+   EIN delegierter pointermove (passive, rAF) setzt --mx/--my an der Karte unter dem Zeiger. */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  var SPOT='.so-tile,.so-chip,.pet-card,.grid>.card',px,py,pt,raf=0;
+  document.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse'||!H.classList.contains('cd-motion'))return;
+    var t=e.target.closest&&e.target.closest(SPOT);
+    if(!t)return;
+    px=e.clientX;py=e.clientY;pt=t;
+    if(!raf)raf=requestAnimationFrame(function(){
+      raf=0;var r=pt.getBoundingClientRect();
+      pt.style.setProperty('--mx',(px-r.left)+'px');
+      pt.style.setProperty('--my',(py-r.top)+'px');
+    });
+  },{passive:true});
+}
+
+/* "Alle Details" (~100 Karten): ohne Übergang */
+document.addEventListener('click',function(e){
+  if(e.target.closest('#boss-more-all')){
+    H.classList.add('cd-b4-still');setTimeout(function(){H.classList.remove('cd-b4-still')},700);
+  }
+},true);
+
+/* Filter-Neurender: neue Karten im Bild (max. 24) blenden kurz ein */
+var M=window.cdMotion;
+if(!M)return;
+var seen=new WeakSet(),tw=0,cur=[],BTN='.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.ichip';
+function cards(){
+  var s=document.querySelector('.sec.active');
+  return s?[].slice.call(s.querySelectorAll(M.REVEAL_SEL||'.card,.pet-card,.loc-card,.ruin-card')):[];
+}
+function snap(){cards().forEach(function(c){if(c.offsetParent)seen.add(c)})}
+function stop(){
+  if(tw)tw.kill();tw=0;
+  cur.forEach(function(c){c.classList.remove('cd-b4-in')});
+  if(cur.length)gsap.set(cur,{clearProps:'transform,opacity'});
+  cur=[];
+}
+function run(){
+  if(!M.on)return;
+  var list=[],m=innerWidth<=860,vh=innerHeight,r;
+  cards().forEach(function(c){
+    if(seen.has(c)||!c.offsetParent||c.tagName==='TR')return;
+    seen.add(c);
+    if(list.length<24&&!c.closest('[data-cd-noreveal]')){
+      r=c.getBoundingClientRect();
+      if(r.bottom>0&&r.top<vh)list.push(c);
+    }
+  });
+  if(!list.length)return;
+  stop();cur=list;
+  list.forEach(function(c){c.classList.add('cd-b4-in')});
+  tw=gsap.fromTo(list,{opacity:0,y:m?3:6},{opacity:1,y:0,duration:m?.18:.25,ease:'power2.out',
+    stagger:{amount:m?.1:.2},clearProps:'transform,opacity',onComplete:stop,onInterrupt:stop});
+  setTimeout(function(){if(cur===list)stop()},1200);
+}
+/* Auslöser: change an Select/Checkbox, Filter-Knöpfe; kein input-Event (Tippen flackert nicht) */
+function trigger(e){
+  var t=e.target;
+  if(!M.on||!t.closest||!t.closest('#main'))return;
+  if(e.type==='change'?!(t.tagName==='SELECT'||t.type==='checkbox'||t.type==='radio'):!t.closest(BTN))return;
+  snap(); /* Stand vor dem Neurender */
+  requestAnimationFrame(run);
+}
+document.addEventListener('change',trigger,true);
+document.addEventListener('click',trigger,true);
+if(M.onEnter)M.onEnter(snap);
+addEventListener('beforeprint',stop);
+})();
+/* ==== /Motion B ==== */
 </script>
 </body>
 </html>
