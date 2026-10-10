@@ -209,7 +209,7 @@ const normWs = (s) => s.replace(/\s+/g, " ").trim();
 const SOLL_RESSORTS = [
   { id: "start",       label: "Start",                      short: "Start",      glyph: "⌂", tag: "Übersicht, Einsteiger-Tipps, Neuigkeiten" },
   { id: "kampf",       label: "Kampf",                      short: "Kampf",      glyph: "⚔", tag: "Bosse, Gegner, Fähigkeiten, Builds" },
-  { id: "ausruestung", label: "Ausrüstung",                 short: "Ausrüstung", glyph: "⬡", tag: "Waffen, Rüstungen, Abyss-Ausrüstung, Hexen" },
+  { id: "ausruestung", label: "Ausrüstung",                 short: "Ausrüstung", glyph: "⬡", tag: "Waffen, Rüstungen, Abyss-Ausrüstung, Abyss-Synthese, Hexen" },
   { id: "quests",      label: "Quests & Herausforderungen", short: "Quests",     glyph: "❢", tag: "Quests, Kapitel, Ruinen, Rätsel, Checklisten" },
   { id: "welt",        label: "Welt & Karte",               short: "Welt",       glyph: "◉", tag: "Karte, Orte, Figuren, Camp, Reittiere" },
   { id: "sammeln",     label: "Herstellen & Sammeln",       short: "Sammeln",    glyph: "⚙", tag: "Kochen, Herstellen, Materialien, Sammelobjekte" },

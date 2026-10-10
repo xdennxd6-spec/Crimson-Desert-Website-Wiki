@@ -1337,7 +1337,7 @@ const SEC_RENDERERS={
 const RESSORTS = [
   {id:'start',       label:'Start',                      short:'Start',      glyph:'⌂', col:'A', tag:'Übersicht, Einsteiger-Tipps, Neuigkeiten'},
   {id:'kampf',       label:'Kampf',                      short:'Kampf',      glyph:'⚔', col:'B', tag:'Bosse, Gegner, Fähigkeiten, Builds'},
-  {id:'ausruestung', label:'Ausrüstung',                 short:'Ausrüstung', glyph:'⬡', col:'C', tag:'Waffen, Rüstungen, Abyss-Ausrüstung, Hexen'},
+  {id:'ausruestung', label:'Ausrüstung',                 short:'Ausrüstung', glyph:'⬡', col:'C', tag:'Waffen, Rüstungen, Abyss-Ausrüstung, Abyss-Synthese, Hexen'},
   {id:'quests',      label:'Quests & Herausforderungen', short:'Quests',     glyph:'❢', col:'D', tag:'Quests, Kapitel, Ruinen, Rätsel, Checklisten'},
   {id:'welt',        label:'Welt & Karte',               short:'Welt',       glyph:'◉', col:'E', tag:'Karte, Orte, Figuren, Camp, Reittiere'},
   {id:'sammeln',     label:'Herstellen & Sammeln',       short:'Sammeln',    glyph:'⚙', col:'F', tag:'Kochen, Herstellen, Materialien, Sammelobjekte'}
