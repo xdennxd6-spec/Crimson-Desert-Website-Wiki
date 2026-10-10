@@ -1037,7 +1037,7 @@ ${introHtml("bosse", zahlen)}<a class="cta" href="/#sec-bosses">Interaktive Boss
 // ── Seite 2: Waffen ───────────────────────────────────────────────────────────
 function weaponRow(w) {
   const img = WEAPON_IMGS[w.name];
-  const thumb = img ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="" width="34" height="34">` : "";
+  const thumb = img ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(w.name)}" width="34" height="34">` : "";
   const cell = (v) => has(v) ? esc(v) : `<span class="muted">nicht erfasst</span>`;
   return `<tr>
 <td>${thumb}${esc(w.name)}</td>

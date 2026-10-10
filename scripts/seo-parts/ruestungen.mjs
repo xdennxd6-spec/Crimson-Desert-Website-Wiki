@@ -80,7 +80,7 @@ export function build(ctx) {
   const row = (a) => {
     const img = ARMOR_IMGS[a.name];
     const thumb = has(img)
-      ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="" width="34" height="34">`
+      ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(a.name)}" width="34" height="34">`
       : "";
     // td.muted (nicht span.muted) nutzen — nur dafuer existiert eine Regel in SHARED_CSS.
     const noteTd = has(a.notes) ? `<td>${esc(a.notes)}</td>` : `<td class="muted">–</td>`;
