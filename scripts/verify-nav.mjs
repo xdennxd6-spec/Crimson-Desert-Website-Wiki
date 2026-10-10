@@ -227,7 +227,8 @@ const SOLL_SEITEN = [
   ["builds", "kampf", "Builds", "Builds", "Build-Vorschläge und der Build-Optimizer"],
   ["disarm", "kampf", "Entwaffnen", "Disarm", "Welche Gegner du entwaffnen kannst und wie"],
   ["weapons", "ausruestung", "Waffen", "Weapons", "Alle Waffen mit Werten, Fundort und Verfeinerung"],
-  ["armor", "ausruestung", "Rüstungen", "Armor", "Rüstungen und Sets mit Werten und Fundort"],
+  ["armor", "ausruestung", "Rüstungen", "Armor", "Alle Rüstungsteile mit Werten und Fundort"],
+  ["armorsets", "ausruestung", "Rüstungssets", "Armor Sets", "Alle Rüstungssets mit Bild, Teilen, Werten und Fundort"],
   ["accessories", "ausruestung", "Accessoires", "Accessories", "Ringe, Ohrringe und Halsketten mit Werten"],
   ["cores", "ausruestung", "Abyss-Ausrüstung", "Abyss Gear", "Alle Abyss-Ausrüstungen (oft „Abyss Cores“ genannt) mit Effekt, Quelle und Slot-Typ"],
   ["synthesis", "ausruestung", "Abyss-Synthese", "Synthesis", "Synthese-Mechanik und alle Synthese-Rezepte für Abyss-Ausrüstung"],
@@ -253,8 +254,9 @@ const SOLL_SEITEN = [
   ["gatherables", "sammeln", "Sammelobjekte", "Gatherables", "Pflanzen, Erze und andere Rohstoffe zum Sammeln"],
   ["collectibles", "sammeln", "Sammelgegenstände", "Collectibles", "Sammelbare Gegenstände und Wissenseinträge"],
 ];
-// 36 Seiten seit dem Abyss-Split (Briefing 3.2 B1): synthesis steht direkt nach cores
-const SOLL_ANZAHL = 36;
+// 36 Seiten seit dem Abyss-Split (Briefing 3.2 B1): synthesis steht direkt nach cores;
+// 37 seit 10.10.2026: armorsets (Rüstungssets) als eigene Seite direkt nach armor
+const SOLL_ANZAHL = 37;
 // Abyss-Split: Synthese-Woerter gehoeren in aka von "synthesis", nicht mehr in aka von "cores"
 const SOLL_SYNTHESIS_AKA = ["Synthese", "Synthesis", "Fusion", "fusionieren", "Assimilation", "Abyssal Assimilation",
   "Synthese-Baum", "Witch Synthesis", "Hexen-Synthese", "Spezial-Synthese", "Special Synthesis", "Rezepte", "kombinieren"];

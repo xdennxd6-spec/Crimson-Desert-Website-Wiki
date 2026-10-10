@@ -606,9 +606,10 @@ for (const s of SEITEN_MIT_WERKZEUG) {
   const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
   const kopf = t.slice(0, t.indexOf("</head>"));
   const sniep = /<script>[^<]*cd_motion[\s\S]*?<\/script>/.exec(kopf);
-  ok(!!sniep && sniep[0].includes("cd-motion") && sniep[0].includes("cd-still") && sniep[0].includes("prefers-reduced-motion")
-      && /[?&]motion/.test(sniep[0]) && kopf.indexOf(sniep[0]) < kopf.indexOf("<style>"),
-    `${s}.html: Kopf-Schnipsel (cd_motion, ?motion, reduced-motion) steht im <head> vor dem <style>`);
+  // Seit 10.10.2026 Bewegung als Standard: nur cd_motion='off' schaltet aus (kein reduced-motion, kein ?motion mehr)
+  ok(!!sniep && sniep[0].includes("cd-motion") && sniep[0].includes("cd-still") && sniep[0].includes("'off'")
+      && kopf.indexOf(sniep[0]) < kopf.indexOf("<style>"),
+    `${s}.html: Kopf-Schnipsel (cd_motion, Standard an, 'off' schaltet aus) steht im <head> vor dem <style>`);
 
   // Skript-Quellen: nur /vendor/<datei>.js, nie ein Host
   const srcs = [...t.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);

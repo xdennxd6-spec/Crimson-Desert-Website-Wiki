@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>/* cd_motion: 'auto' (folgt reduced-motion) | 'on' | 'off'; ?motion erzwingt an; Schlüssel wie die App */
-(function(){var h=document.documentElement,p='auto';try{p=localStorage.getItem('cd_motion')||'auto'}catch(e){}h.classList.add(/[?&]motion\b/.test(location.search)||p==='on'||(p!=='off'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))?'cd-motion':'cd-still')})();</script>
+<script>/* cd_motion: Bewegung ist Standard, nur 'off' (Häkchen im Hilfe-Fenster der App) schaltet aus; Schlüssel wie die App */
+(function(){var h=document.documentElement,p='auto';try{p=localStorage.getItem('cd_motion')||'auto'}catch(e){}h.classList.add(p!=='off'?'cd-motion':'cd-still')})();</script>
 <title>Hexen-Guide Crimson Desert: 6 Hexen &amp; 185 Synthese-Rezepte</title>
 <meta name="description" content="Hexen-Guide zu Crimson Desert: 6 Hexen mit Fundort und Freischaltung plus 185 Synthese-Rezepte für Abyss Cores, Sigil-Amulette und mehr mit Zutaten und Kosten.">
 <link rel="canonical" href="https://crimson-desert-wiki.com/hexen">
@@ -26,9 +26,6 @@
 <meta name="theme-color" content="#0a0b12">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/cd_assets/icons/favicon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://crimson-desert-wiki.com/"},{"@type":"ListItem","position":2,"name":"Hexen & Fusion","item":"https://crimson-desert-wiki.com/hexen"}]},{"@type":"ItemList","name":"Hexen in Crimson Desert","numberOfItems":6,"itemListElement":[{"@type":"ListItem","position":1,"name":"Hexe Sylvia"},{"@type":"ListItem","position":2,"name":"Hexe Elowen"},{"@type":"ListItem","position":3,"name":"Hexe Bari"},{"@type":"ListItem","position":4,"name":"Hexe Lyselia"},{"@type":"ListItem","position":5,"name":"Hexe Areciel"},{"@type":"ListItem","position":6,"name":"White Crow"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wie viele Hexen gibt es in Crimson Desert?","acceptedAnswer":{"@type":"Answer","text":"Das Wiki führt sechs Hexen: Sylvia, Elowen, Bari, Lyselia, Areciel und die versteckte White Crow. Elowen, Bari, Lyselia und Areciel sind die vier regionalen Hexen mit eigener Sanctum-Questlinie. Hexe Marie ist dagegen keine Dienstleisterin, sondern eine feindliche Hexe und ein Boss."}},{"@type":"Question","name":"Wo finde ich die Hexen?","acceptedAnswer":{"@type":"Answer","text":"Sylvia wartet in Shadow's Whisper Cave nördlich von Hernand Town. Elowen wohnt im Witch's House im Alfonso Estate in den Witchwoods im Süden von Hernand. Bari lebt in einer Hütte am Crimson Lake bei der Silver Wolf Mountain in Pailune. Lyselia versteckt sich in einer Hidden Cave südöstlich des Jijeong Temple im Serpent Marsh in Demeniss. Areciel hat ein Haus auf halber Höhe einer Klippe westlich von Urdavah in der Crimson Desert. White Crow lebt in einem Baumhaus in den Wayward Woods westlich von Pailune."}},{"@type":"Question","name":"Wie funktioniert die Core-Synthese bei der Hexe?","acceptedAnswer":{"@type":"Answer","text":"Bei der regulären Synthese lassen sich Cores mit gleichem Namen und gleicher Stufe paarweise zu einem Core der nächsthöheren Stufe verschmelzen, höchstens bis Stufe III. Dafür brauchst du das passende Blueprint, das Hexen verkaufen. Elowens Questlinie schaltet den vollen Workshop samt Synthese frei, Sylvia bietet laut Guides nur die Workshop-Basis ohne Synthese. Die zufällige Spezial-Synthese hat keine festen Rezepte. Die Tabellen dieser Seite listen 124 Stufen-Rezepte und 51 Rezepte für einzelne Effekt-Cores."}},{"@type":"Question","name":"Wie schalte ich die versteckte Hexe White Crow frei?","acceptedAnswer":{"@type":"Answer","text":"White Crow ist erst erreichbar, wenn du je einen Witch's Token von Elowen, Bari, Lyselia und Areciel gesammelt hast, also vier Token insgesamt. Dafür schließt du die Questlinien der regionalen Hexen ab. Die Freischaltung läuft laut questlog über die Quest Wayward Woods Witch und die Mission Protector of the Abyss."}},{"@type":"Question","name":"Wie bekomme ich ein Sigil-Mount-Amulett?","acceptedAnswer":{"@type":"Answer","text":"Bei einer Hexe wählst du im Menü Abyss-Ausrüstung herstellen den Punkt Besondere Gegenstände und fertigst das Amulett aus einem Tierteil, etwa einer Klaue, einem Zahn oder einem Horn. Danach benutzt du es im Inventar. Es schaltet dauerhaft das zugehörige legendäre Reittier frei. Die fünf Amulette gehören zu White Bear, Silver Fang, Snowwhite Deer, Rock Tusk Warthog und Icicle Edge Alpine Ibex."}},{"@type":"Question","name":"Welche Hexe verkauft welche Blueprints?","acceptedAnswer":{"@type":"Answer","text":"Laut questlog-Händlerdaten verkauft Elowen Blueprints für Vigor, Vitality und Composure, Bari für Swift, Haste und Ascent, Lyselia für Fortification, Aegis und Fortitude und Areciel für Destruction und Insight. Für Sylvia führt questlog keine Händlerware, für White Crow sind keine Werkstattdienste belegt."}}]}]}
 </script>
@@ -39,9 +36,9 @@
 /* Schriftskala wie in index.html: unter 12px zentral gesteuert, mobil angehoben. */
 --fs-10:10px;--fs-11:11px;--fs-11-5:11.5px;
 --shadow-soft:0 16px 34px -26px rgba(0,0,0,.85);
---f-display:'Sora',sans-serif;
---f-body:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
---f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace}
+--f-display:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif;
+--f-body:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif;
+--f-mono:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);

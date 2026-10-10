@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- MOTION 10/2026 · Bereich A: Kopf-Schnipsel (setzt html.cd-motion vor dem ersten Paint) -->
-<script>/* cd_motion: 'auto' (folgt prefers-reduced-motion), 'on', 'off'; ?motion erzwingt an. Bei Bewegung die Bibliotheken vorab anfordern (Ausführung erst nach DOMContentLoaded). */
-(function(){var h=document.documentElement,p='auto',on;try{p=localStorage.getItem('cd_motion')||'auto';}catch(e){}on=/[?&]motion\b/.test(location.search)||p==='on'||(p!=='off'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches));h.classList.add(on?'cd-motion':'cd-still');if(on){['gsap-3.15.0','ScrollTrigger-3.15.0','SplitText-3.15.0','lenis-1.3.26'].forEach(function(n){var l=document.createElement('link');l.rel='preload';l.as='script';l.href='vendor/'+n+'.min.js';document.head.appendChild(l);});}})();</script>
+<script>/* cd_motion: Bewegung ist Standard für alle (auch bei prefers-reduced-motion); nur 'off' (Häkchen im Hilfe-Fenster ⚙) schaltet aus. Bei Bewegung die Bibliotheken vorab anfordern (Ausführung erst nach DOMContentLoaded). */
+(function(){var h=document.documentElement,p='auto',on;try{p=localStorage.getItem('cd_motion')||'auto';}catch(e){}on=p!=='off';h.classList.add(on?'cd-motion':'cd-still');if(on){['gsap-3.15.0','ScrollTrigger-3.15.0','SplitText-3.15.0','lenis-1.3.26'].forEach(function(n){var l=document.createElement('link');l.rel='preload';l.as='script';l.href='vendor/'+n+'.min.js';document.head.appendChild(l);});}})();</script>
 <!-- /MOTION A Kopf -->
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse &amp; Waffen</title>
@@ -60,8 +60,6 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.questlog.gg">
 <link rel="preload" as="script" href="data/d01-weapons.js">
 <link rel="preload" as="script" href="data/d02-crafting.js">
@@ -71,7 +69,6 @@
 <link rel="preload" as="script" href="data/d06-items.js">
 <link rel="preload" as="script" href="data/d07-patches.js">
 <link rel="preload" as="script" href="data/d08-ruins-data.js">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"></noscript>
 <style>
 /* ============================================================
    CRIMSON DESERT — FELDATLAS · HOLO-GLAS  (Design-Sync 2026-07-04)
@@ -142,9 +139,11 @@
   --grd-sb:linear-gradient(rgba(22,24,40,.5),rgba(22,24,40,.5));
   --grd-hd:linear-gradient(90deg,rgba(224,163,90,.10) 0%,transparent 70%);
 
-  --f-display:'Sora', sans-serif;
-  --f-body:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
-  --f-mono:'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+  /* Schrift seit 10.10.2026 auf der ganzen Seite Century Gothic (Wunsch des Betreibers). Lokal installierte Schrift,
+     kein externer Font-Dienst mehr (Google Fonts entfernt). Ohne Century Gothic greifen die geometrischen Verwandten. */
+  --f-display:'Century Gothic', CenturyGothic, 'URW Gothic', 'URW Gothic L', 'TeX Gyre Adventor', Futura, sans-serif;
+  --f-body:'Century Gothic', CenturyGothic, 'URW Gothic', 'URW Gothic L', 'TeX Gyre Adventor', Futura, sans-serif;
+  --f-mono:'Century Gothic', CenturyGothic, 'URW Gothic', 'URW Gothic L', 'TeX Gyre Adventor', Futura, sans-serif;
 }
 /* --- GEDAEMPFT (exp-dim): Nacht-Komfort, gehobener Grund, reduzierter Glow --- */
 [data-theme="sepia"]{
@@ -604,6 +603,7 @@ body::before{
 #sec-items .sec-t::before{content:"§03"}
 #sec-weapons .sec-t::before{content:"§04"}
 #sec-armor .sec-t::before{content:"§05"}
+#sec-armorsets .sec-t::before{content:"§05·S"}
 #sec-cores .sec-t::before{content:"§06"}
 #sec-crafting .sec-t::before{content:"§07"}
 #sec-quests .sec-t::before{content:"§08"}
@@ -1871,6 +1871,65 @@ html.cf-open,html.cf-open body{overflow:hidden}
 .set-more>summary:hover{color:var(--survey-red)}
 .set-more>summary:focus-visible{outline:2px solid var(--survey-red);outline-offset:2px}
 .set-more-body{font-size:var(--fs-11);color:var(--iron-soft);line-height:1.55;padding:6px 0 0}
+/* ── Rüstungssets: Vitrine je Set (eigene Seite #sec-armorsets seit 10.10.2026) ──
+   Dunkle Bühne wie der Bildkopf der Rüstungskarten, darin die Teile als Figur; --set = Set-Farbe aus ARMOR_SETS. */
+.aset-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));align-items:start}
+.set-card.aset{padding:0;display:flex;flex-direction:column}
+.aset.aset-off{display:none}
+.aset-stage{position:relative;padding:20px 14px 14px;background:linear-gradient(160deg,#161616,#0b0b0b);border-bottom:1px solid var(--iron-gall);overflow:hidden;isolation:isolate}
+.aset-stage::before{content:"";position:absolute;left:12%;right:12%;top:-25%;bottom:15%;background:var(--set);opacity:.5;filter:blur(48px);border-radius:50%;z-index:-1;pointer-events:none}
+.aset-stage::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--set)}
+.aset-doll{display:grid;grid-template-columns:repeat(3,minmax(0,86px));grid-template-areas:". kopf ." "haende torso mantel" ". schuhe .";gap:8px;justify-content:center}
+.aset-slot[data-slot="Kopf"]{grid-area:kopf}
+.aset-slot[data-slot="Hände"]{grid-area:haende}
+.aset-slot[data-slot="Torso"]{grid-area:torso}
+.aset-slot[data-slot="Mantel"]{grid-area:mantel}
+.aset-slot[data-slot="Schuhe"]{grid-area:schuhe}
+.aset-slot{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:6px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);border-radius:10px;font:inherit;color:inherit;cursor:pointer;transition:transform .18s,border-color .18s,background .18s}
+.aset-slot img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(0,0,0,.8))}
+.aset-slot[data-slot="Torso"]{background:rgba(255,255,255,.07)}
+.aset-slot:hover{transform:translateY(-2px);border-color:var(--brass);background:rgba(255,255,255,.09)}
+.aset-slot:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.aset-empty{cursor:default;flex-direction:column;gap:4px;border-style:dashed;opacity:.5}
+.aset-empty:hover{transform:none;border-color:rgba(255,255,255,.13);background:rgba(255,255,255,.045)}
+.aset-sl{font-size:var(--fs-9);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.aset-sv{position:absolute;right:4px;bottom:3px;padding:0 5px;border-radius:6px;background:rgba(0,0,0,.65);color:rgba(255,255,255,.9);font-size:var(--fs-9-5);font-weight:700;line-height:1.5;font-variant-numeric:tabular-nums}
+.aset-badge{position:absolute;top:10px;right:10px;padding:1px 8px;border-radius:8px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:var(--fs-10);font-weight:700;font-variant-numeric:tabular-nums}
+.aset-extra{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:11px}
+.aset-xl{font-size:var(--fs-10);color:rgba(255,255,255,.72)}
+.aset-xb{width:40px;height:40px;padding:3px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);cursor:pointer}
+.aset-xb img{width:100%;height:100%;object-fit:contain}
+.aset-xb:hover{border-color:var(--brass)}
+.aset-xb:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.aset-body{padding:13px 15px 15px}
+.aset .set-name{padding-left:0;margin:0 0 5px;font-size:16px;line-height:1.25}
+.aset .set-desc,.aset .set-count{padding-left:0}
+.aset .set-tag,.aset .set-more{margin-left:0}
+.aset-stats{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 10px}
+.aset-st{padding:2px 8px;border:1px solid var(--bdr);border-radius:7px;background:var(--vellum-deep);color:var(--iron-soft);font-size:var(--fs-10-5);font-variant-numeric:tabular-nums}
+.aset-st b{color:var(--iron-gall)}
+.aset-chips{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+.aset-chips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr))}
+.aset-chip button{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;padding:3px 6px 3px 3px;border:1px solid transparent;border-radius:8px;background:none;font:inherit;text-align:left;color:var(--iron-gall);cursor:pointer}
+.aset-chip button:hover{border-color:var(--bdr);background:var(--vellum-deep)}
+.aset-chip button:hover .aset-cn{color:var(--survey-red)}
+.aset-chip button:focus-visible{outline:2px solid var(--survey-red);outline-offset:1px}
+.aset-ci{flex:0 0 36px;height:36px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:7px;border-left:3px solid var(--set);background:linear-gradient(160deg,#161616,#0b0b0b)}
+.aset-ci img{width:31px;height:31px;object-fit:contain}
+.aset-ct{display:flex;flex-direction:column;min-width:0}
+.aset-cn{font-size:var(--fs-11-5);font-weight:600;line-height:1.3;color:var(--brass)}
+.aset-cm{font-size:var(--fs-10);color:var(--gdim);font-variant-numeric:tabular-nums}
+.aset-chip-off{padding:5px 6px;font-size:var(--fs-11)}
+.aset-chip-off .fehlt{color:var(--gdim);font-style:italic}
+.aset-chip-off .luecke{color:var(--gdim);font-style:italic;opacity:.75;border-bottom:1px dotted var(--bdr)}
+.aset-group .set-count{margin-top:10px}
+.aset-link{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 6px;padding:12px 14px;border:1px solid var(--iron-gall);background:var(--vellum-hi);box-shadow:3px 3px 0 var(--paper-shadow)}
+.aset-link-t{flex:1 1 220px;font-size:var(--fs-11-5);color:var(--iron-soft);line-height:1.5}
+.aset-link-t b{color:var(--iron-gall)}
+.aset-link button{min-height:44px;padding:8px 16px;border:1.5px solid var(--iron-gall);border-radius:8px;background:var(--vellum-deep);color:var(--iron-gall);font:inherit;font-weight:700;cursor:pointer}
+.aset-link button:hover{color:var(--survey-red);border-color:var(--survey-red)}
+.aset-link button:focus-visible{outline:2px solid var(--survey-red);outline-offset:2px}
+@media(max-width:860px){.aset-doll{grid-template-columns:repeat(3,minmax(0,78px))}}
 .item-more{
   margin:0;
 }
@@ -3154,13 +3213,16 @@ html.cd-motion tr.cdx-wait,html.cd-motion tr.cdx-in{transform:none}
 /* Nach oben: weich ein- und ausblenden */
 html.cd-motion #btt{display:flex;opacity:0;transform:translateY(10px);pointer-events:none;visibility:hidden;transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s,background .18s,color .18s,border-color .18s}
 html.cd-motion #btt.show{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:0s}
-/* Schalter „Bewegung“ neben den Theme-Knöpfen */
-.cdx-mbtn{position:relative}
-.cdx-mbtn[data-state="on"]{color:var(--rhi);border-color:var(--red)}
-.cdx-mbtn[data-state="off"]{border-style:dashed}
-.cdx-mbtn[data-state="off"]::after{content:"";position:absolute;left:24%;right:24%;top:50%;height:1.5px;background:currentColor;transform:rotate(-38deg);pointer-events:none}
+/* Einstellungen im Hilfe-Fenster: kleines Zahnrad unten rechts, darin das Häkchen „Animationen ausschalten“ */
+.help-set{margin-top:10px}
+.help-set>summary{list-style:none;cursor:pointer;width:32px;height:32px;margin-left:auto;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;color:var(--iron-soft);border-radius:var(--radius);opacity:.7}
+.help-set>summary::-webkit-details-marker{display:none}
+.help-set>summary:hover,.help-set[open]>summary{color:var(--survey-red);opacity:1}
+.help-set>summary:focus-visible{outline:2px solid var(--survey-red);outline-offset:2px;opacity:1}
+.help-set-row{display:flex;align-items:center;gap:8px;min-height:44px;font-size:12px;color:var(--iron-gall);cursor:pointer;border-top:1px dashed var(--line)}
+.help-set-row input{width:16px;height:16px;accent-color:var(--survey-red);flex:none}
+.help-set-row span{color:var(--iron-soft)}
 @media(max-width:860px){
-  #theme-row .cdx-mbtn{width:44px;height:44px}
   html.cd-motion .cdx-wait{--cdx-y:8px}
   /* Kopfzeile einzeilig: nur der Blattname */
   #blattbar{flex-wrap:nowrap}
@@ -3415,7 +3477,6 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
     <div class="help-row"><span class="help-desc">Diese Hilfe öffnen</span><span class="help-keys"><span class="kbd">?</span></span></div>
     <div class="help-row"><span class="help-desc">Zufälligen Boss würfeln</span><span class="help-keys"><span class="kbd">R</span></span></div>
     <div class="help-row"><span class="help-desc">Farbschema wechseln</span><span class="help-keys"><span class="kbd">T</span></span></div>
-    <div class="help-row"><span class="help-desc">Bewegung (weiches Scrollen, Einblenden): Knopf <b>&#8779;</b> im Menü-Fuß wechselt Automatisch, An, Aus</span><span class="help-keys"><span class="kbd">&#8779;</span></span></div>
     <div class="help-row"><span class="help-desc">Abschnitte der Seite anspringen: Liste „Auf dieser Seite“ unter der aktiven Seite im Menü, am Handy der Knopf „Abschnitte“ oben</span><span class="help-keys"><span class="kbd">Tab</span> <span class="kbd">Enter</span></span></div>
     <div style="font-size:var(--fs-9-5);font-weight:700;color:var(--gdim);text-transform:uppercase;letter-spacing:.09em;margin:18px 0 6px">Seite öffnen (erst g, dann Buchstabe)</div>
     <div class="help-row"><span class="help-desc">Übersicht (Start)</span><span class="help-keys"><span class="kbd">g g</span></span></div>
@@ -3426,6 +3487,10 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
     <div class="help-row"><span class="help-desc">Herstellen &amp; Farmen / Materialien &amp; Items</span><span class="help-keys"><span class="kbd">g f</span> <span class="kbd">g i</span></span></div>
     <div class="help-row"><span class="help-desc">Patch-Notes / Roadmap / Merkliste</span><span class="help-keys"><span class="kbd">g p</span> <span class="kbd">g n</span> <span class="kbd">g v</span></span></div>
     <div style="font-size:var(--fs-10-5);color:var(--dim);margin-top:14px;line-height:1.5;border-top:1px dashed rgba(201,162,39,.12);padding-top:11px">Tipp: Die Adresse in der Browserzeile enthält Seite und Suchbegriff, zum Teilen einfach kopieren, z.B. <code style="color:var(--gold);font-size:var(--fs-10-5);background:rgba(201,162,39,.08);padding:1px 5px;border-radius:3px">#sec=bosses&amp;q=Myurdin</code></div>
+    <details class="help-set" ontoggle="var c=document.getElementById('motionOff');if(c&&this.open)c.checked=!!(window.cdMotion&&cdMotion.pref==='off')">
+      <summary title="Einstellungen" aria-label="Einstellungen">&#9881;</summary>
+      <label class="help-set-row"><input type="checkbox" id="motionOff" onchange="if(window.cdMotion)cdMotion.setPref(this.checked?'off':'auto')"> Animationen ausschalten <span>(weiches Scrollen, Einblenden)</span></label>
+    </details>
   </div>
 </div>
 
@@ -3520,7 +3585,6 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
       <button class="theme-btn active" data-theme-set="dark" onclick="setTheme('dark')" title="Farbschema Tag (Standard)" aria-label="Farbschema: Tag (Standard)">◐</button>
       <button class="theme-btn" data-theme-set="sepia" onclick="setTheme('sepia')" title="Farbschema Nacht (gedämpft)" aria-label="Farbschema: Nacht">☾</button>
       <button class="theme-btn" data-theme-set="amoled" onclick="setTheme('amoled')" title="Farbschema AMOLED (tiefstes Schwarz)" aria-label="Farbschema: AMOLED">●</button>
-      <button class="theme-btn cdx-mbtn" id="motionBtn" type="button" onclick="if(window.cdMotion)cdMotion.cycle()" data-state="auto" title="Bewegung: Automatisch" aria-label="Bewegung: Automatisch">&#8779;</button>
       <button class="theme-btn" onclick="openHelp()" title="Tastenkürzel (?)" aria-label="Tastenkürzel-Hilfe" style="margin-left:auto">?</button>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between">
@@ -3935,7 +3999,7 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
 
   <section class="sec" id="sec-armor">
     <h2 class="sec-t"><span class="sec-sym">⛓</span> Rüstungen <span class="sec-t-en">Armor</span></h2>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Quellenlage:</b> Jedes der <b><span id="armor-total">–</span></b> Teile sagt jetzt auf der Karte, <b>woher</b> sein Wert stammt — das stand bisher nur als Kommentar im Quelltext. <b><span id="armor-import">–</span></b> Teile kommen aus dem <b>Datenimport</b> der Spieldateien, <b><span id="armor-guide">–</span></b> sind <b>aus Guides belegt</b> (VULKK, game8, Fextralife, pywel.app, die Datamine-Datenbank gaming.tools, teils die offiziellen Patch Notes), <b><span id="armor-alt">–</span></b> stammen aus dem alten kuratierten Bestand und sind <b>ungeprüft</b> — dort hat der Fakten-Audit vom 02.06.2026 nachweislich erfundene Werte gefunden und die gröbsten entfernt. Bei <b><span id="armor-ohne">–</span></b> Teilen ist überhaupt kein Zahlenwert hinterlegt.<br><b>Welche Stufe?</b> Seit dem Abgleich mit der questlog-Spieldatenbank am 03.10.2026 gilt: „Def +N“ bzw. „Atk +N“ ist die <b>Höchststufe (Refinement +10)</b>, der Grundwert (+0) steht in den Notizen. Teile, die sich nicht aufwerten lassen, sind dort als „nicht aufwertbar“ vermerkt.<br><b>Was die Marke nicht sagt:</b> Sie ist eine Herkunftsangabe, keine Vertrauensnote. „Datenimport“ heißt <b>nicht</b> „gegengeprüft“ — diese Werte hat niemand einzeln gegen einen Guide gehalten, und einzelne von ihnen waren unvollständig. Zwei Beispiele sind am <b>22.08.2026</b> nachgetragen: dem Odeck’s Protector Plate Helm fehlte die Daze-Immunität, dem zugehörigen Mantel Eis-Resistenz&nbsp;Lv3 und der Ausdauer-Malus — beides stand längst in der Set-Beschreibung weiter unten. Umgekehrt kann ein „aus Guides belegt“ besser dokumentiert sein als ein Importwert.</div>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Quellenlage:</b> Jedes der <b><span id="armor-total">–</span></b> Teile sagt jetzt auf der Karte, <b>woher</b> sein Wert stammt — das stand bisher nur als Kommentar im Quelltext. <b><span id="armor-import">–</span></b> Teile kommen aus dem <b>Datenimport</b> der Spieldateien, <b><span id="armor-guide">–</span></b> sind <b>aus Guides belegt</b> (VULKK, game8, Fextralife, pywel.app, die Datamine-Datenbank gaming.tools, teils die offiziellen Patch Notes), <b><span id="armor-alt">–</span></b> stammen aus dem alten kuratierten Bestand und sind <b>ungeprüft</b> — dort hat der Fakten-Audit vom 02.06.2026 nachweislich erfundene Werte gefunden und die gröbsten entfernt. Bei <b><span id="armor-ohne">–</span></b> Teilen ist überhaupt kein Zahlenwert hinterlegt.<br><b>Welche Stufe?</b> Seit dem Abgleich mit der questlog-Spieldatenbank am 03.10.2026 gilt: „Def +N“ bzw. „Atk +N“ ist die <b>Höchststufe (Refinement +10)</b>, der Grundwert (+0) steht in den Notizen. Teile, die sich nicht aufwerten lassen, sind dort als „nicht aufwertbar“ vermerkt.<br><b>Was die Marke nicht sagt:</b> Sie ist eine Herkunftsangabe, keine Vertrauensnote. „Datenimport“ heißt <b>nicht</b> „gegengeprüft“ — diese Werte hat niemand einzeln gegen einen Guide gehalten, und einzelne von ihnen waren unvollständig. Zwei Beispiele sind am <b>22.08.2026</b> nachgetragen: dem Odeck’s Protector Plate Helm fehlte die Daze-Immunität, dem zugehörigen Mantel Eis-Resistenz&nbsp;Lv3 und der Ausdauer-Malus — beides stand längst in der Set-Beschreibung auf der Seite Rüstungssets. Umgekehrt kann ein „aus Guides belegt“ besser dokumentiert sein als ein Importwert.</div>
     <div class="fbar">
       <input class="fs" id="af-q" type="search" placeholder="Rüstung, Fundort, Effekt …" aria-label="Rüstungen durchsuchen" oninput="armorFilter()" style="min-width:190px">
       <select class="fs" id="af-type" aria-label="Rüstungen nach Typ filtern" onchange="armorFilter()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
@@ -3945,9 +4009,22 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
       <span id="armor-count" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="grid" id="armor-grid"></div>
-    <div id="wt-sets" class="sub-t" style="scroll-margin-top:72px">Rüstungs-Sets</div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Crimson Desert hat keine Set-Boni.</b> Ein vollständiges Set gibt <em>keinen</em> zusätzlichen Effekt — der Wert entsteht allein aus den Werten der Einzelteile und den Abyss-Cores, die du selbst hineinsetzt (Fakten-Audit 02.06.2026; game8: „sets do not provide set bonuses“, Fextralife: vor allem kosmetisch). Die Sets stehen hier als <b>Gruppierung und Fundort-Übersicht</b>, nicht als Bauempfehlung. Ein Klick auf ein Set-Teil sucht es oben in der Rüstungsliste; Teile ohne eigenen Eintrag sind als solche markiert.</div>
-    <div class="grid" id="set-grid"></div>
+    <div class="aset-link"><span class="aset-link-t"><b>Komplette Sets mit Bild:</b> Alle Rüstungssets stehen als eigene Seite mit Figur-Ansicht, Def-Summe und verlinkten Teilen.</span><button type="button" onclick="showSec('armorsets')">⛉ Zu den Rüstungssets</button></div>
+  </section>
+
+  <section class="sec" id="sec-armorsets">
+    <h2 class="sec-t"><span class="sec-sym">⛉</span> Rüstungssets <span class="sec-t-en">Armor Sets</span></h2>
+    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Crimson Desert hat keine Set-Boni.</b> Ein vollständiges Set gibt <em>keinen</em> zusätzlichen Effekt — der Wert entsteht allein aus den Werten der Einzelteile und den Abyss-Cores, die du selbst hineinsetzt (Fakten-Audit 02.06.2026; game8: „sets do not provide set bonuses“, Fextralife: vor allem kosmetisch). Die Sets stehen hier als <b>Gruppierung und Fundort-Übersicht</b>, nicht als Bauempfehlung. Jedes Set steht als Figur: Kopf oben, Hände, Torso und Mantel in der Mitte, Schuhe unten; leere Plätze sind gestrichelt. Die Zahl im Bild ist der Def-Höchstwert (Refinement +10) des Teils, „Def gesamt“ die Summe der Teile in der Figur. Ein Klick auf ein Teil öffnet es in der <a href="#" onclick="showSec('armor');return false;">Rüstungsliste</a>; Teile ohne eigenen Eintrag sind als solche markiert.</div>
+    <div class="fbar">
+      <input class="fs" id="asf-q" type="search" placeholder="Set, Teil, Fundort …" aria-label="Rüstungssets durchsuchen" oninput="armorSetFilter()" style="min-width:190px">
+      <select class="fs" id="asf-mat" aria-label="Rüstungssets nach Material filtern" onchange="armorSetFilter()"><option value="">Alle Materialien</option><option value="Plate">mit Plate</option><option value="Leather">mit Leather</option><option value="Cloth">mit Cloth</option><option value="mix">gemischte Materialien</option></select>
+      <select class="fs" id="asf-sort" aria-label="Rüstungssets sortieren" onchange="renderArmorSets()"><option value="std">Sortierung: Standard</option><option value="name">Name A–Z</option><option value="def">Def gesamt absteigend</option><option value="slots">belegte Plätze</option></select>
+      <label class="fs" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="asf-full" onchange="armorSetFilter()" style="accent-color:var(--survey-red)"> nur alle 5 Plätze</label>
+      <span id="aset-count" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
+    </div>
+    <div class="grid aset-grid" id="set-grid"></div>
+    <div id="wt-sets-gruppen" class="sub-t" style="scroll-margin-top:72px">Sammelgruppen aus Patch 1.13 (keine Sets)</div>
+    <div class="grid aset-grid" id="set-groups"></div>
   </section>
 
   <section class="sec" id="sec-cores">
@@ -5370,7 +5447,16 @@ function refreshSectionStats(){
   if(typeof ARMOR!=='undefined'){
     _injectSectionStats('armor',[
       {lbl:'Rüstungen',val:ARMOR.length},
-      {lbl:'Sets',val:typeof ARMOR_SETS!=='undefined'?ARMOR_SETS.length:'–'}
+      {lbl:'Sets',val:typeof ARMOR_SETS!=='undefined'?ARMOR_SETS.filter(s=>!s.pieceCount).length:'–'}
+    ]);
+  }
+  // Rüstungssets (eigene Seite seit 10.10.2026)
+  if(typeof ARMOR_SETS!=='undefined'){
+    const echte=ARMOR_SETS.filter(s=>!s.pieceCount);
+    _injectSectionStats('armorsets',[
+      {lbl:'Sets',val:echte.length},
+      {lbl:'Set-Teile',val:echte.reduce((n,s)=>n+s.pieces.length,0)},
+      {lbl:'Boss-Sets (1.13)',val:echte.filter(s=>/Boss-Set/.test(s.tag||'')).length}
     ]);
   }
   // Cores
@@ -6957,6 +7043,7 @@ function _leafCount(id){
     if(id==='bosses' && typeof BOSSES!=='undefined' && Array.isArray(BOSSES)) return String(BOSSES.length);
     if(id==='weapons' && typeof WEAPONS!=='undefined' && Array.isArray(WEAPONS)) return String(WEAPONS.length);
     if(id==='crafting' && typeof CRAFTING!=='undefined' && Array.isArray(CRAFTING)) return String(CRAFTING.length);
+    if(id==='armorsets' && typeof ARMOR_SETS!=='undefined' && Array.isArray(ARMOR_SETS)) return String(ARMOR_SETS.filter(s=>!s.pieceCount).length);
     if(id==='cores' && typeof CORES!=='undefined' && Array.isArray(CORES)) return String(CORES.length);
     if(id==='synthesis' && typeof WITCH_SYNTHESIS!=='undefined' && Array.isArray(WITCH_SYNTHESIS)) return String(WITCH_SYNTHESIS.filter(c=>c.role!=='witch-other').length);
     // NPCS ist ein Objekt mit vier Gruppen, kein Array — die alte Array.isArray-Pruefung
@@ -9421,6 +9508,8 @@ function waffeZeigeTeil(name){
   if(g){ if(window.cdMotion)cdMotion.scrollTo(g); else g.scrollIntoView({behavior:'smooth',block:'start'}); }
 }
 function armorZeigeTeil(name){
+  // Seit 10.10.2026 stehen die Sets auf einer eigenen Seite: erst zur Rüstungsliste wechseln (rendert sie bei Bedarf)
+  if(typeof showSec==='function'&&!document.getElementById('sec-armor')?.classList.contains('active'))showSec('armor');
   const q=document.getElementById('af-q');
   if(!q||typeof armorFilter!=='function')return;
   ['af-type','af-mat','af-prov'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
@@ -9430,54 +9519,143 @@ function armorZeigeTeil(name){
   if(g){ if(window.cdMotion)cdMotion.scrollTo(g); else g.scrollIntoView({behavior:'smooth',block:'start'}); }
 }
 
-function renderArmorSets(){
-  // Welche Set-Teile haben einen eigenen Ruestungseintrag? Die Klammerzusaetze
-  // der Damiane-Teile ("Name (Fundort)") werden dafuer abgeschnitten.
-  const vorhanden=new Set(ARMOR.map(a=>a.name));
-  // Nicht jedes Set-Teil ist eine Ruestung: das Tarandus-Set enthaelt eine Waffe,
-  // deren Eintrag in WEAPONS steht. Ohne diesen zweiten Topf galt sie als fehlend.
-  const vorhandenWaffe=new Set((typeof WEAPONS!=='undefined'?WEAPONS:[]).map(w=>w.name));
-  const suche=(topf,p)=>{
-    if(topf.has(p))return p;
-    const blank=p.replace(/\s*\(.*\)$/,'').trim();
-    return topf.has(blank)?blank:null;
+// ===== RÜSTUNGSSETS (eigene Seite #sec-armorsets seit 10.10.2026) =====
+// Jedes Set als Vitrine: die Teile stehen wie an einer Figur (Kopf oben; Hände, Torso,
+// Mantel in der Mitte; Schuhe unten). Typ, Bild und Def kommen aus ARMOR/ARMOR_IMGS,
+// geschaetzt wird nichts: Teile ohne eigenen Eintrag bleiben als solche markiert.
+// Sammelgruppen (pieceCount gesetzt, z. B. die 1.13-Einzelteile) sind keine Sets und
+// stehen als Bildleiste darunter.
+const ASET_SLOTS=['Kopf','Hände','Torso','Mantel','Schuhe'];
+let _asetIdx=null;
+function _asetPiece(p){
+  if(!_asetIdx)_asetIdx={
+    ar:new Map(ARMOR.map(a=>[a.name,a])),
+    wp:new Map((typeof WEAPONS!=='undefined'?WEAPONS:[]).map(w=>[w.name,w]))
   };
-  const treffer=p=>suche(vorhanden,p);
-  const trefferWaffe=p=>suche(vorhandenWaffe,p);
-  // "3 weitere Ruestungsteile (Namen nicht belegt)" ist kein Item, sondern ein
-  // Sammelposten fuer eine bekannte Wissensluecke -- pieceCount rechnet ihn schon
-  // richtig mit. Er darf nicht wie ein Teil aussehen, das nur noch fehlt.
-  const istSammelposten=p=>/^\d+\s+weitere/.test(p);
-  document.getElementById('set-grid').innerHTML=ARMOR_SETS.map(s=>{
-    const teile=s.pieces.map(p=>{
-      const t=treffer(p);
-      const w=t?null:trefferWaffe(p);
-      const inhalt=t
-        ?`<button type="button" onclick="armorZeigeTeil('${escJsStr(t)}')" title="In der Rüstungsliste oben anzeigen">${escHtml(p)}</button>`
-        :w
-        ?`<button type="button" onclick="waffeZeigeTeil('${escJsStr(w)}')" title="Keine Rüstung: Eintrag auf der Seite Waffen anzeigen">${escHtml(p)}</button>`
-        :istSammelposten(p)
-        ?`<span class="luecke" title="Sammelposten: die Namen dieser Teile sind in keiner Quelle belegt — ein eigener Eintrag ist deshalb nicht möglich">${escHtml(p)}</span>`
-        :`<span class="fehlt" title="Im Spiel belegt, aber noch ohne eigenen Eintrag in dieser Rüstungsliste">${escHtml(p)}</span>`;
-      return `<div class="set-piece"><div class="set-piece-dot" style="background:${s.color}"></div>${inhalt}</div>`;
-    }).join('');
-    const detailTeil=(s.detail||s.quelle)
-      ?`<details class="set-more"><summary>Details & Quellen</summary><div class="set-more-body">${s.detail?escHtml(s.detail):''}${s.quelle?`<div class="set-quelle">${escHtml(s.quelle)}</div>`:''}</div></details>`
-      :'';
-    // Volltext ins data-s, damit die Suche auch findet, was hinter <details> liegt.
-    const such=[s.name,s.tag,s.kurz,s.detail,s.quelle,s.bonus,s.pieces.join(' ')].filter(Boolean).join(' ').toLowerCase();
-    return `
-    <div class="set-card" data-s="${escHtml(such)}">
-      <div class="set-stripe" style="background:${s.color}"></div>
-      <div class="set-name">${escHtml(s.name)}</div>
+  // Klammerzusaetze ("Name (Fundort)") gehoeren nicht zum Itemnamen
+  const blank=p.replace(/\s*\(.*\)$/,'').trim();
+  const a=_asetIdx.ar.get(p)||_asetIdx.ar.get(blank);
+  if(a)return {kind:'armor',name:a.name,label:p,type:a.type,img:ARMOR_IMGS[a.name]||'',def:armorNum(a.effect,'def'),atk:armorNum(a.effect,'atk'),mat:armorMat(a.name)};
+  const w=_asetIdx.wp.get(p)||_asetIdx.wp.get(blank);
+  if(w)return {kind:'weapon',name:w.name,label:p,type:'Waffe',img:(typeof WEAPON_IMGS!=='undefined'&&WEAPON_IMGS[w.name])||'',def:null,atk:w.atk!=null?w.atk:null,mat:''};
+  // "3 weitere Rüstungsteile (Namen nicht belegt)" ist ein Sammelposten, kein fehlendes Teil
+  return {kind:/^\d+\s+weitere/.test(p)?'luecke':'fehlt',name:blank,label:p,type:'',img:'',def:null,atk:null,mat:armorMat(p)};
+}
+function _asetGo(t){
+  return t.kind==='armor'?`armorZeigeTeil('${escJsStr(t.name)}')`:t.kind==='weapon'?`waffeZeigeTeil('${escJsStr(t.name)}')`:'';
+}
+function _asetWerte(t){
+  return [t.def!=null?'Def '+t.def:'',t.atk!=null?'Atk '+t.atk:''].filter(Boolean).join(' · ');
+}
+function _asetSlot(t,slot){
+  if(!t)return `<div class="aset-slot aset-empty" data-slot="${slot}" title="${slot}: kein Teil in diesem Set belegt">${armorTypeIcon(slot)}<span class="aset-sl">${slot}</span></div>`;
+  const w=_asetWerte(t);
+  const tip=`${t.name}${w?' · '+w+' (Höchststufe)':''} · ${t.kind==='weapon'?'auf der Seite Waffen':'in der Rüstungsliste'} anzeigen`;
+  return `<button type="button" class="aset-slot" data-slot="${slot}" onclick="${_asetGo(t)}" title="${escHtml(tip)}" aria-label="${escHtml(tip)}">`
+    +(t.img?`<img src="${t.img}" loading="lazy" decoding="async" alt="" onerror="this.style.visibility='hidden'">`:armorTypeIcon(slot))
+    +(t.def!=null?`<span class="aset-sv">${t.def}</span>`:'')
+    +`</button>`;
+}
+function _asetChip(t,color){
+  if(t.kind==='luecke')return `<li class="aset-chip aset-chip-off"><span class="luecke" title="Sammelposten: die Namen dieser Teile sind in keiner Quelle belegt, ein eigener Eintrag ist deshalb nicht möglich">${escHtml(t.label)}</span></li>`;
+  if(t.kind==='fehlt')return `<li class="aset-chip aset-chip-off"><span class="fehlt" title="Im Spiel belegt, aber noch ohne eigenen Eintrag in der Rüstungsliste">${escHtml(t.label)}</span></li>`;
+  const w=_asetWerte(t);
+  return `<li class="aset-chip"><button type="button" onclick="${_asetGo(t)}" title="${t.kind==='weapon'?'Keine Rüstung: Eintrag auf der Seite Waffen anzeigen':'In der Rüstungsliste anzeigen'}">`
+    +`<span class="aset-ci" style="--set:${color}">${t.img?`<img src="${t.img}" loading="lazy" decoding="async" alt="" onerror="this.style.visibility='hidden'">`:''}</span>`
+    +`<span class="aset-ct"><span class="aset-cn">${escHtml(t.label)}</span><span class="aset-cm">${escHtml(t.type)}${w?' · '+w:''}</span></span>`
+    +`</button></li>`;
+}
+function _asetSuch(s){
+  return [s.name,s.tag,s.kurz,s.detail,s.quelle,s.bonus,s.pieces.join(' ')].filter(Boolean).join(' ').toLowerCase();
+}
+function _asetDetails(s){
+  return (s.detail||s.quelle)
+    ?`<details class="set-more"><summary>Details & Quellen</summary><div class="set-more-body">${s.detail?escHtml(s.detail):''}${s.quelle?`<div class="set-quelle">${escHtml(s.quelle)}</div>`:''}</div></details>`
+    :'';
+}
+function _asetInfo(s){
+  const teile=s.pieces.map(_asetPiece);
+  const slots={},extra=[];
+  teile.forEach(t=>{
+    if(ASET_SLOTS.includes(t.type)&&!slots[t.type])slots[t.type]=t;
+    else if(t.kind==='armor'||t.kind==='weapon')extra.push(t);
+  });
+  const belegt=ASET_SLOTS.filter(k=>slots[k]);
+  // Def-Summe nur ueber die Figur (je Platz ein Teil): zwei Torso-Teile kann niemand gleichzeitig tragen
+  const mitDef=belegt.filter(k=>slots[k].def!=null);
+  const def=mitDef.reduce((n,k)=>n+slots[k].def,0);
+  const mats=[...new Set(teile.filter(t=>t.kind==='armor'&&t.mat).map(t=>t.mat))];
+  return {teile,slots,extra,belegt:belegt.length,def,defLuecke:belegt.length-mitDef.length,mats};
+}
+function _asetCard(s,i){
+  const color=/^#[0-9a-f]{3,8}$/i.test(s.color||'')?s.color:'#4a4038';
+  const I=_asetInfo(s);
+  const fig=`<div class="aset-doll">${ASET_SLOTS.map(k=>_asetSlot(I.slots[k],k)).join('')}</div>`;
+  const extra=I.extra.length?`<div class="aset-extra"><span class="aset-xl">+ ${I.extra.length===1?'1 weiteres Teil':I.extra.length+' weitere Teile'}</span>${I.extra.map(t=>`<button type="button" class="aset-xb" onclick="${_asetGo(t)}" title="${escHtml(t.name+' ('+t.type+')')}">${t.img?`<img src="${t.img}" loading="lazy" decoding="async" alt="" onerror="this.style.visibility='hidden'">`:armorTypeIcon('Torso')}</button>`).join('')}</div>`:'';
+  const defTxt=I.def?`<span class="aset-st" title="${escHtml('Summe der Def-Höchstwerte (Refinement +10) der Teile in der Figur, je Platz ein Teil'+(I.defLuecke?'; '+I.defLuecke+' Teil(e) ohne Zahlenwert nicht mitgezählt':''))}"><b>${I.defLuecke?'≥ ':''}${I.def}</b> Def gesamt</span>`:'';
+  const n=s.pieceCount||s.pieces.length;
+  return `<article class="set-card aset" data-cd-reveal data-s="${escHtml(_asetSuch(s))}" data-mat="${escHtml(I.mats.join(' '))}" data-full="${I.belegt===5?1:0}" data-def="${I.def}" data-n="${n}" data-i="${i}" style="--set:${color}">
+    <div class="aset-stage">
+      <span class="aset-badge" title="${I.belegt} von 5 Ausrüstungsplätzen mit einem Teil dieses Sets belegt">${I.belegt}/5</span>
+      ${fig}${extra}
+    </div>
+    <div class="aset-body">
+      <h3 class="set-name">${escHtml(s.name)}</h3>
+      ${s.tag?`<div class="set-tag">${escHtml(s.tag)}</div>`:''}
+      <div class="aset-stats">${defTxt}<span class="aset-st"><b>${n}</b> ${n===1?'Teil':'Teile'}</span>${I.mats.length?`<span class="aset-st">${escHtml(I.mats.join(' · '))}</span>`:''}</div>
+      <div class="set-desc">${escHtml(s.kurz)}</div>
+      ${_asetDetails(s)}
+      ${s.bonus&&s.bonus!==SET_BONUS_STD?`<div class="set-bonus">${escHtml(s.bonus)}</div>`:''}
+      <ul class="aset-chips">${I.teile.map(t=>_asetChip(t,color)).join('')}</ul>
+    </div>
+  </article>`;
+}
+function _asetGroup(s){
+  const color=/^#[0-9a-f]{3,8}$/i.test(s.color||'')?s.color:'#3a3a3a';
+  const teile=s.pieces.map(_asetPiece);
+  return `<article class="set-card aset aset-group" data-cd-reveal data-s="${escHtml(_asetSuch(s))}" style="--set:${color}">
+    <div class="aset-body">
+      <h3 class="set-name">${escHtml(s.name)}</h3>
       ${s.tag?`<div class="set-tag">${escHtml(s.tag)}</div>`:''}
       <div class="set-desc">${escHtml(s.kurz)}</div>
-      ${detailTeil}
-      ${s.bonus&&s.bonus!==SET_BONUS_STD?`<div class="set-bonus">${escHtml(s.bonus)}</div>`:''}
-      <div class="set-pieces">${teile}</div>
-      <div class="set-count">${s.pieceCount||s.pieces.length} Teile im Set</div>
-    </div>`;
-  }).join('');
+      ${_asetDetails(s)}
+      <ul class="aset-chips aset-chips-grid">${teile.map(t=>_asetChip(t,color)).join('')}</ul>
+      <div class="set-count">${s.pieceCount||s.pieces.length} Teile in dieser Gruppe</div>
+    </div>
+  </article>`;
+}
+function renderArmorSets(){
+  const g=document.getElementById('set-grid'),gg=document.getElementById('set-groups');
+  if(!g)return;
+  const sort=(document.getElementById('asf-sort')||{}).value||'std';
+  const sets=ARMOR_SETS.map((s,i)=>({s,i})).filter(x=>!x.s.pieceCount);
+  if(sort!=='std'){
+    const info=new Map(sets.map(x=>[x.i,_asetInfo(x.s)]));
+    const nachName=(a,b)=>a.s.name.localeCompare(b.s.name,'de');
+    if(sort==='name')sets.sort(nachName);
+    else if(sort==='def')sets.sort((a,b)=>(info.get(b.i).def-info.get(a.i).def)||nachName(a,b));
+    else if(sort==='slots')sets.sort((a,b)=>(info.get(b.i).belegt-info.get(a.i).belegt)||nachName(a,b));
+  }
+  g.innerHTML=sets.map(x=>_asetCard(x.s,x.i)).join('');
+  if(gg)gg.innerHTML=ARMOR_SETS.filter(s=>s.pieceCount).map(_asetGroup).join('');
+  armorSetFilter();
+}
+function armorSetFilter(){
+  const g=document.getElementById('set-grid');if(!g)return;
+  const q=((document.getElementById('asf-q')||{}).value||'').trim().toLowerCase();
+  const mat=(document.getElementById('asf-mat')||{}).value||'';
+  const full=!!(document.getElementById('asf-full')||{}).checked;
+  const worte=q.split(/\s+/).filter(Boolean);
+  let n=0;const karten=g.querySelectorAll('.aset');
+  karten.forEach(k=>{
+    const m=(k.dataset.mat||'').split(' ');
+    const ok=worte.every(w=>(k.dataset.s||'').includes(w))
+      &&(!mat||(mat==='mix'?m.length>1:m.includes(mat)))
+      &&(!full||k.dataset.full==='1');
+    k.classList.toggle('aset-off',!ok);if(ok)n++;
+  });
+  const c=document.getElementById('aset-count');
+  if(c)c.textContent=n===karten.length?karten.length+' Sets':n+' von '+karten.length+' Sets';
 }
 
 // ===== MOUNTS =====
@@ -11656,7 +11834,7 @@ if (syGetCode()) _loadServerProgress();
 <nav id="guide-links" aria-label="Guide-Seiten" style="text-align:center;padding:1rem;font-size:.85rem;opacity:.7">
   Start: <a href="/patch-notes">Patch-Notes</a><br>
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a><br>
-  Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
+  Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
   Quests &amp; Herausforderungen: <a href="/hauptquests">Hauptquests</a> · <a href="/fraktionen">Fraktionsquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a><br>
   Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a>
@@ -11743,7 +11921,7 @@ var $=function(id){return document.getElementById(id);},
   mob=function(){return mqM.matches;},
   now=function(){return performance.now();},
   pref=function(){var p='auto';try{p=localStorage.getItem(KEY)||'auto';}catch(e){}return p==='on'||p==='off'?p:'auto';},
-  wanted=function(){var p=pref();return force||p==='on'||(p==='auto'&&!mqR.matches);},
+  wanted=function(){return pref()!=='off';},   /* Standard an (Wunsch 10.10.2026), nur das Häkchen im Hilfe-Fenster schaltet aus */
   emit=function(n,d){document.dispatchEvent(new CustomEvent(n,{detail:d||{}}));},
   setCls=function(on){H.classList.toggle('cd-motion',on);H.classList.toggle('cd-still',!on);},
   activeSec=function(){return document.querySelector('#main > .sec.active');},

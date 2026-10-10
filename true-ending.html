@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>/* cd_motion: 'auto' (folgt reduced-motion) | 'on' | 'off'; ?motion erzwingt an; Schlüssel wie die App */
-(function(){var h=document.documentElement,p='auto';try{p=localStorage.getItem('cd_motion')||'auto'}catch(e){}h.classList.add(/[?&]motion\b/.test(location.search)||p==='on'||(p!=='off'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))?'cd-motion':'cd-still')})();</script>
+<script>/* cd_motion: Bewegung ist Standard, nur 'off' (Häkchen im Hilfe-Fenster der App) schaltet aus; Schlüssel wie die App */
+(function(){var h=document.documentElement,p='auto';try{p=localStorage.getItem('cd_motion')||'auto'}catch(e){}h.classList.add(p!=='off'?'cd-motion':'cd-still')})();</script>
 <title>Crimson Desert True Ending: komplette Checkliste (Deutsch)</title>
 <meta name="description" content="Crimson Desert: Hauptstory und 40 Abyss-Challenges als Pflicht für das versteckte Ende. Checkliste mit 68 Aufgaben, davon 41 Pflicht und 27 empfohlen.">
 <link rel="canonical" href="https://crimson-desert-wiki.com/true-ending">
@@ -26,9 +26,6 @@
 <meta name="theme-color" content="#0a0b12">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/cd_assets/icons/favicon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://crimson-desert-wiki.com/"},{"@type":"ListItem","position":2,"name":"True Ending","item":"https://crimson-desert-wiki.com/true-ending"}]},{"@type":"Article","headline":"Crimson Desert True Ending: komplette Checkliste","inLanguage":"de-DE","author":{"@type":"Person","name":"Christian Stein"},"about":{"@type":"VideoGame","name":"Crimson Desert"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Was ist für das versteckte Ende Pflicht?","acceptedAnswer":{"@type":"Answer","text":"Prolog, alle zwölf Hauptstory-Kapitel und den Epilog abschließen sowie alle 40 Abyss-Challenges einschließlich Dimensional Bonds erledigen."}},{"@type":"Question","name":"Sind Sanctums, Hexen-Tokens oder Greymane-Commissions Pflicht?","acceptedAnswer":{"@type":"Answer","text":"Nein. Sanctums, Hexen-Tokens und die Begleiter-Aufgaben stehen nur als zusätzliche Empfehlungen in der Checkliste und zählen nicht zu den belegten Freischaltbedingungen. Für die Greymane-Commissions ist keine Verbindung zum versteckten Ende belegt: Keine geprüfte Quelle verknüpft sie damit."}},{"@type":"Question","name":"Zählen die vier Eternal-Corridor-Rätsel zu den 40?","acceptedAnswer":{"@type":"Answer","text":"Nein. Sie gehören zu einer optionalen Questreihe und sind für das versteckte Ende nicht erforderlich."}}]}]}
 </script>
@@ -39,9 +36,9 @@
 /* Schriftskala wie in index.html: unter 12px zentral gesteuert, mobil angehoben. */
 --fs-10:10px;--fs-11:11px;--fs-11-5:11.5px;
 --shadow-soft:0 16px 34px -26px rgba(0,0,0,.85);
---f-display:'Sora',sans-serif;
---f-body:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
---f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace}
+--f-display:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif;
+--f-body:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif;
+--f-mono:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);

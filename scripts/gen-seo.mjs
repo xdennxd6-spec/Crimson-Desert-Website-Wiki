@@ -440,7 +440,7 @@ for (const [url, d] of remoteDims) {
 }
 
 // HOLO-GLAS-Palette (synchron mit index.html Standard-Theme, tokens.css Design-Sync 2026-07-04).
-// Sora (Display) / IBM Plex Sans (Body) / IBM Plex Mono (Daten). Glas-Panels, Glow-Schatten, Radius 16.
+// Schrift seit 10.10.2026 überall Century Gothic (lokal installiert, kein externer Font-Dienst). Glas-Panels, Glow-Schatten, Radius 16.
 const SHARED_CSS = `
 :root{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
 --line:rgba(198,204,236,.16);--line-strong:rgba(198,204,236,.30);
@@ -449,9 +449,9 @@ const SHARED_CSS = `
 /* Schriftskala wie in index.html: unter 12px zentral gesteuert, mobil angehoben. */
 --fs-10:10px;--fs-11:11px;--fs-11-5:11.5px;
 --shadow-soft:0 16px 34px -26px rgba(0,0,0,.85);
---f-display:'Sora',sans-serif;
---f-body:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
---f-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace}
+--f-display:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif;
+--f-body:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif;
+--f-mono:'Century Gothic',CenturyGothic,'URW Gothic','URW Gothic L','TeX Gyre Adventor',Futura,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);
@@ -606,8 +606,8 @@ ${PART_CSS}
 // (\\b ergibt im HTML \b); "${" und Backticks sind im Browsercode tabu.
 // Die Libs liegen im Repo (vendor/), same-origin, kein CDN. Inhalt bleibt ohne JS
 // vollstaendig: versteckt wird erst im Skript, nachdem die Libs geladen sind.
-const MOTION_HEAD = `<script>/* cd_motion: 'auto' (folgt reduced-motion) | 'on' | 'off'; ?motion erzwingt an; Schlüssel wie die App */
-(function(){var h=document.documentElement,p='auto';try{p=localStorage.getItem('cd_motion')||'auto'}catch(e){}h.classList.add(/[?&]motion\\b/.test(location.search)||p==='on'||(p!=='off'&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))?'cd-motion':'cd-still')})();</script>`;
+const MOTION_HEAD = `<script>/* cd_motion: Bewegung ist Standard, nur 'off' (Häkchen im Hilfe-Fenster der App) schaltet aus; Schlüssel wie die App */
+(function(){var h=document.documentElement,p='auto';try{p=localStorage.getItem('cd_motion')||'auto'}catch(e){}h.classList.add(p!=='off'?'cd-motion':'cd-still')})();</script>`;
 
 const MOTION_CSS = `
 /* --- Bewegung (nur html.cd-motion) --- */
@@ -795,9 +795,6 @@ ${MOTION_HEAD}
 <meta name="theme-color" content="#0a0b12">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/cd_assets/icons/favicon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <script type="application/ld+json">
 ${JSON.stringify(jsonld)}
 </script>
