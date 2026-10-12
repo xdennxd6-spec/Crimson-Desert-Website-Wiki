@@ -262,6 +262,16 @@
       "localPath": "cd_assets/weapons/item-330002.webp"
     },
     {
+      "name": "Axe of the Apocalypse",
+      "group": "weapons",
+      "id": "1002138",
+      "sourceName": "Axe of the Apocalypse",
+      "icon": "/assets/_sprites/itemicon_prefab_cd_t0000_axe_0003.webp",
+      "source": "https://questlog.gg/crimson-desert/en/db/item/1002138",
+      "imageUrl": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/itemicon_prefab_cd_t0000_axe_0003.webp",
+      "localPath": "cd_assets/weapons/item-1002138.webp"
+    },
+    {
       "name": "Acorn Mace",
       "group": "weapons",
       "id": "1001146",

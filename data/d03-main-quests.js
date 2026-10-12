@@ -858,6 +858,8 @@ const WEAPON_IMGS={
   "Golden Dragon's Claw":"cd_assets/weapons/item-400001.webp",
   "Golden Greathammer":"cd_assets/weapons/item-1000729.webp",
   "Ashen Execution":"cd_assets/weapons/item-16001.webp",
+  // 2026-10-12: questlog-Item 1002138 (Icon itemicon_prefab_cd_t0000_axe_0003), visuell geprueft
+  "Axe of the Apocalypse":"cd_assets/weapons/item-1002138.webp",
   "Roar of the Black Bear":"cd_assets/weapons/item-1000637.webp",
   "Sanguine Knell":"cd_assets/weapons/item-16003.webp",
   "Guidance of Dark Pursuit":"cd_assets/weapons/item-1000843.webp",
