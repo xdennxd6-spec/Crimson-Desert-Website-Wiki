@@ -220,7 +220,7 @@
     },
     {
       "frage": "Woran erkenne ich neue oder unsicher belegte Fraktionseinträge?",
-      "antwort": "Auf der Seite tragen {{neu}} Fraktionen das Kennzeichen Neu erfasst, weil sie seit dem letzten großen Datenimport hinzugekommen sind. Bei {{unsicher}} Quests markiert zusätzlich ein Hinweis eine dünnere Quellenlage."
+      "antwort": "Auf der Seite tragen {{neu}} Fraktionen das Kennzeichen „Neu erfasst“, weil sie erst später ins Wiki aufgenommen wurden; mit neuen Spielinhalten hat das nichts zu tun. Bei {{unsicher}} Quests markiert zusätzlich ein Hinweis eine dünnere Quellenlage."
     }
   ],
   "npcs": [

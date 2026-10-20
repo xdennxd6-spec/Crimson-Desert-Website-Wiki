@@ -136,7 +136,7 @@ ${r.factions.map((f) => facBlock(r, f)).join("\n")}`;
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Fraktions-Übersicht in der App öffnen &rarr;</a>
 <p class="note">In der App klappst du jede Fraktion einzeln auf und siehst zusätzlich das regionsübergreifende Liberation-Endgame-System (Re-Blockade für 23 Forts laut Patch 1.05.00), das hier nicht abgebildet ist.</p>
-<p class="note">Bei ${z.unsicher} Quests ist die Quellenlage nur teilweise oder unsicher belegt; das steht direkt neben dem Questnamen. ${z.neu} der ${z.fraktionen} Fraktionen sind seit dem letzten großen Datenimport neu ins Wiki aufgenommen.</p>
+<p class="note">Bei ${z.unsicher} Quests ist die Quellenlage nur teilweise oder unsicher belegt; das steht direkt neben dem Questnamen. ${z.neu} der ${z.fraktionen} Fraktionen tragen das Kennzeichen „Neu erfasst“ (später ins Wiki aufgenommen, kein neuer Spielinhalt).</p>
 ${sections}`;
 
   const jsonld = {

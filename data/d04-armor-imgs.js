@@ -399,7 +399,7 @@ const MOUNT_INGAME_IMGS={
   "Cow":            "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_bull_wild_32217.webp",
   "Elephant":       "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_elephant_1.webp",
   "Greywolf":       "cd_assets/mounts/ig/Greywolf-mount-crimson-desert-wiki-guide.webp",
-  "Red-Feathered Raptor": "https://static.beebom.com/wp-content/uploads/2026/03/Crimson-Desert-Raptor-mount.jpg",
+  "Red-Feathered Raptor": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_carmabirdsaurus_1.webp",
   "Cloudcart":      "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_riding_airballoon1.webp",
   "Pywel Wagon":    "cd_assets/mounts/ig/Wagon-horse-mount-crimson-desert-wiki-guide.webp",
   "Train":          "cd_assets/mounts/ig/Train-vehicle-mount-crimson-desert-wiki-guide.webp",
@@ -408,7 +408,7 @@ const MOUNT_INGAME_IMGS={
   "Priden":         "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_01001.webp",
   "Icicle Edge Alpine Ibex": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_alpineibex_1.webp",
   "Rock Tusk Warthog": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_warthog_1.webp",
-  "Kuku Bird Hatchling": "https://cdn.mos.cms.futurecdn.net/bUrGHLPs4oj5htpBK7t2f9.jpg",
+  "Kuku Bird Hatchling": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_cucubird_1.webp",
   "Lion":           "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_lion_wild_30374.webp",
   "Tiger":          "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_animal_tiger_wild_2.webp",
   "Numont":         "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_05001.webp",
@@ -431,7 +431,9 @@ const MOUNT_INGAME_IMGS={
   "Clawed Bear": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_bear_1.webp",
   "Hernandian Soldier's Horse": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_01002.webp",
   "Race Horse": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_01002.webp",
-  "Giant Red Iguana": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_iguana_2.webp"
+  "Giant Red Iguana": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_portraitimage_riding_iguana_2.webp",
+  "Giant Green Iguana": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_iguana_1.webp",
+  "Ibex": "https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_mercenary_portrait_animal_alpineibex_10.webp"
 };
 const ARMOR_IMGS={
   // Item-Bilder am 09.09.2026 gegen questlog-IDs geprueft; Belege: item-image-sources.json
