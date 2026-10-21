@@ -258,8 +258,37 @@ const WITCHES=[
   }
 ];
 const WEAPON_UPGRADES=[
-  {level:"Refinement 1-4",mat:"Waffen je nach Klasse Eisenerz (z. B. Schwerter; ab Stufe 3 zusätzlich Kupfererz) oder Timber (z. B. Schilde; ab Stufe 3 zusätzlich Fine Timber); Rüstung je nach Teil Stoff, Häute oder Erz. Beispiel Hollow Visage: Stufe 1 = 2x Eisenerz, 2 = 3x Eisenerz, 3 = 4x Eisenerz + 2x Kupfererz, 4 = 5x Eisenerz + 4x Kupfererz (Menge je Waffenklasse verschieden). Bei vielen Waffen kann alternativ eine zweite, gleiche Waffe als Material dienen",effect:"Basis-Werte (z.B. ATK) steigen pro Stufe",unlock:"Schmied Turnali, Hernand (Startstadt, Bezirk Nord-Mitte)",note:"Laut Guides nur Materialkosten, keine Silberkosten (KeenGamer: „costs materials only, no silver or currency“); auch die questlog-Rezeptdaten führen nur Materialien; Refinement-Tokens ersetzen die Materialien bis Stufe 4 (laut Guides; der questlog-Item-Text nennt „refined less than five times“ — ob Stufe +5 noch per Token geht, ist ingame zu prüfen; laut Item-Text reichen die Token für die „wertvollen Ressourcen“ darüber hinaus nicht); deterministisch, keine Fehlschlagchance"},
-  {level:"Refinement 5-9",mat:"Waffen je nach Klasse Eisenerz, Kupfererz und Bloodstone (ab Stufe 8 zusätzlich Scolecite Ore) oder Timber, Fine Timber und Bloodstone (ab Stufe 8 zusätzlich Flawless Timber, z. B. Schilde); Rüstung je nach Teil Häute, Knochen, Stoff oder Erz (ohne Bloodstone); dazu je Stufe 1 Abyss Artifact",effect:"Basis-Werte steigen weiter pro Stufe",unlock:"Jeder Schmied (gleicher Service in allen Städten)",note:"Ab Stufe 5 je 1 Abyss Artifact pro Stufe (konkurriert mit Skillpunkten). Beispiel Hollow Visage: Stufe 5 = 6x Eisenerz, 6x Kupfererz, 1x Bloodstone; Stufe 9 = 25x Eisenerz, 20x Kupfererz, 12x Bloodstone, 6x Scolecite Ore (Menge je Waffenklasse verschieden)"},
-  {level:"Refinement 10 (Max)",mat:"1x Aeserion's Scale + 1x Abyss Artifact (kein Erz mehr)",effect:"Maximale Basis-Werte",unlock:"Jeder Schmied",note:"Höchste der insgesamt 10 Stufen; laut questlog-Rezepten nur 1x Aeserion's Scale und 1x Abyss Artifact (Bezugsquelle der Scale nicht erfasst)"},
-  {level:"Abyss-Gear-Slots (separat)",mat:"Abyss Gear (Stat-Mods & Fähigkeits-Cores)",effect:"Mehrere Sockets pro Ausrüstung (Anzahl je Gegenstandstyp)",unlock:"Hexe (Witch, z.B. Sylvia/Elowen) per 'Create Socket', NICHT der Schmied",note:"Eigenes System, unabhängig vom Refinement; Sockets kosten Silber und werden pro Stück progressiv teurer: Waffen 5 / 10 / 20 Silber (Zweihänder und Fernkampf weiter 30 / 40), Schilde 5 / 10, Rüstung 2 / 4 / 8 Silber (questlog, Kupferpreis durch 100)"},
+  {level:"Refinement 1-4",mat:"Waffen je nach Klasse Eisenerz (z. B. Schwerter; ab Stufe 3 zusätzlich Kupfererz) oder Timber (z. B. Schilde; ab Stufe 3 zusätzlich Fine Timber); Rüstung je nach Teil Stoff, Häute oder Erz. Beispiel Hollow Visage: Stufe 1 = 2x Eisenerz, 2 = 3x Eisenerz, 3 = 4x Eisenerz + 2x Kupfererz, 4 = 5x Eisenerz + 4x Kupfererz (Menge je Waffenklasse verschieden). Bei vielen Waffen kann alternativ eine zweite, gleiche Waffe als Material dienen",effect:"Basis-Werte (z.B. ATK) steigen pro Stufe",unlock:"Schmied Turnali, Hernand (Startstadt, Bezirk Nord-Mitte)",note:"Laut Guides nur Materialkosten, keine Silberkosten (KeenGamer: „costs materials only, no silver or currency“); auch die questlog-Rezeptdaten führen nur Materialien; Refinement-Tokens ersetzen die Materialien bis Stufe 4 (laut Guides; der questlog-Item-Text nennt „refined less than five times“ — ob Stufe +5 noch per Token geht, ist ingame zu prüfen; laut Item-Text reichen die Token für die „wertvollen Ressourcen“ darüber hinaus nicht); deterministisch, keine Fehlschlagchance",
+    // Strukturfelder fuer den Stufenpfad (renderWeaponUpgrade), wortgetreu aus mat/note abgeleitet; mat und note bleiben die Quelle.
+    // ref = Name des GATHERABLES/ITEMS-Eintrags, dessen icon der Chip zeigt (nur wo eindeutig belegt).
+    stufe:"1-4",ort:"schmied",
+    gruppen:[
+      {t:"Waffen je nach Klasse",alt:[
+        {m:[{n:"Eisenerz",ref:"Iron Ore"},{n:"Kupfererz",ref:"Copper Ore",ab:"ab Stufe 3"}],zb:"z. B. Schwerter"},
+        {m:[{n:"Timber",ref:"Timber / Fine Timber"},{n:"Fine Timber",ab:"ab Stufe 3"}],zb:"z. B. Schilde"}]},
+      {t:"Rüstung je nach Teil",alt:[{m:[{n:"Stoff"},{n:"Häute"},{n:"Erz"}]}]}],
+    alt:"Bei vielen Waffen kann alternativ eine zweite, gleiche Waffe als Material dienen",
+    bsp:{n:"Hollow Visage",z:[["1","2x Eisenerz"],["2","3x Eisenerz"],["3","4x Eisenerz + 2x Kupfererz"],["4","5x Eisenerz + 4x Kupfererz"]],hw:"Menge je Waffenklasse verschieden"},
+    fakten:["nur Materialkosten, keine Silberkosten","deterministisch, keine Fehlschlagchance"]},
+  {level:"Refinement 5-9",mat:"Waffen je nach Klasse Eisenerz, Kupfererz und Bloodstone (ab Stufe 8 zusätzlich Scolecite Ore) oder Timber, Fine Timber und Bloodstone (ab Stufe 8 zusätzlich Flawless Timber, z. B. Schilde); Rüstung je nach Teil Häute, Knochen, Stoff oder Erz (ohne Bloodstone); dazu je Stufe 1 Abyss Artifact",effect:"Basis-Werte steigen weiter pro Stufe",unlock:"Jeder Schmied (gleicher Service in allen Städten)",note:"Ab Stufe 5 je 1 Abyss Artifact pro Stufe (konkurriert mit Skillpunkten). Beispiel Hollow Visage: Stufe 5 = 6x Eisenerz, 6x Kupfererz, 1x Bloodstone; Stufe 9 = 25x Eisenerz, 20x Kupfererz, 12x Bloodstone, 6x Scolecite Ore (Menge je Waffenklasse verschieden)",
+    stufe:"5-9",ort:"schmied",noteGeteilt:true,
+    gruppen:[
+      {t:"Waffen je nach Klasse",alt:[
+        {m:[{n:"Eisenerz",ref:"Iron Ore"},{n:"Kupfererz",ref:"Copper Ore"},{n:"Bloodstone",ref:"Bloodstone"},{n:"Scolecite Ore",ref:"Scolecite Ore",ab:"ab Stufe 8"}]},
+        {m:[{n:"Timber",ref:"Timber / Fine Timber"},{n:"Fine Timber"},{n:"Bloodstone",ref:"Bloodstone"},{n:"Flawless Timber",ab:"ab Stufe 8"}],zb:"z. B. Schilde"}]},
+      {t:"Rüstung je nach Teil",alt:[{m:[{n:"Häute"},{n:"Knochen"},{n:"Stoff"},{n:"Erz"}],zb:"ohne Bloodstone"}]},
+      {t:"dazu je Stufe",alt:[{m:[{n:"1 Abyss Artifact",ref:"Abyss Artifact"}]}]}],
+    hinweis:"Ab Stufe 5 je 1 Abyss Artifact pro Stufe (konkurriert mit Skillpunkten).",
+    bsp:{n:"Hollow Visage",z:[["5","6x Eisenerz, 6x Kupfererz, 1x Bloodstone"],["9","25x Eisenerz, 20x Kupfererz, 12x Bloodstone, 6x Scolecite Ore"]],hw:"Menge je Waffenklasse verschieden"}},
+  {level:"Refinement 10 (Max)",mat:"1x Aeserion's Scale + 1x Abyss Artifact (kein Erz mehr)",effect:"Maximale Basis-Werte",unlock:"Jeder Schmied",note:"Höchste der insgesamt 10 Stufen; laut questlog-Rezepten nur 1x Aeserion's Scale und 1x Abyss Artifact (Bezugsquelle der Scale nicht erfasst)",
+    stufe:"10",max:true,ort:"schmied",
+    gruppen:[{t:"Material",alt:[{m:[{n:"1x Aeserion's Scale"},{n:"1x Abyss Artifact",ref:"Abyss Artifact"}],zb:"kein Erz mehr"}]}],
+    fakten:["Höchste der insgesamt 10 Stufen"]},
+  {level:"Abyss-Gear-Slots (separat)",mat:"Abyss Gear (Stat-Mods & Fähigkeits-Cores)",effect:"Mehrere Sockets pro Ausrüstung (Anzahl je Gegenstandstyp)",unlock:"Hexe (Witch, z.B. Sylvia/Elowen) per 'Create Socket', NICHT der Schmied",note:"Eigenes System, unabhängig vom Refinement; Sockets kosten Silber und werden pro Stück progressiv teurer: Waffen 5 / 10 / 20 Silber (Zweihänder und Fernkampf weiter 30 / 40), Schilde 5 / 10, Rüstung 2 / 4 / 8 Silber (questlog, Kupferpreis durch 100)",
+    system:"gear",ort:"hexe",noteGeteilt:true,
+    gruppen:[{t:"Material",alt:[{m:[{n:"Abyss Gear",ref:"Abyss Gear"}],zb:"Stat-Mods & Fähigkeits-Cores"}]}],
+    fakten:["Eigenes System, unabhängig vom Refinement"],
+    kostenT:"Sockets kosten Silber und werden pro Stück progressiv teurer",
+    kosten:[["Waffen","5 / 10 / 20 Silber","Zweihänder und Fernkampf weiter 30 / 40"],["Schilde","5 / 10",""],["Rüstung","2 / 4 / 8 Silber",""]],
+    kostenQ:"questlog, Kupferpreis durch 100"},
 ];

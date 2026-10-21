@@ -2069,9 +2069,6 @@ html.cf-open,html.cf-open body{overflow:hidden}
 .sg-val{color:var(--iron-gall);line-height:1.5}
 .sg-reward{color:var(--brass)!important}
 
-/* ── Upgrade table ── */
-.upgrade-lvl{color:var(--brass);font-weight:600;font-family:var(--f-mono)}
-.upgrade-effect{color:#4a7a3a}
 
 /* ── Craft / Acc icon headers ── */
 .craft-icon-hd,.acc-icon-hd{display:flex;align-items:center;gap:9px;margin:-15px -16px 13px -16px;padding:11px 15px;border-bottom:1px solid var(--iron-gall)}
@@ -3113,6 +3110,72 @@ button.sheet-grip:hover{color:var(--rhi)}
 [data-theme="sepia"] .leaf .len,[data-theme="sepia"] #conMeta,[data-theme="sepia"] .so-tile-en,[data-theme="sepia"] .so-cat-n,
 [data-theme="amoled"] .leaf .len,[data-theme="amoled"] #conMeta,[data-theme="amoled"] .so-tile-en,[data-theme="amoled"] .so-cat-n{color:var(--dim)}
 /* ==== /Bereich A ==== */
+/* ==== REDESIGN 10/2026 · Sammelobjekte ==== */
+#sec-gatherables .gt-intro{max-width:72ch;margin:0 0 14px;font-size:13px;line-height:1.6;color:var(--dim)}
+#sec-gatherables .gt-stats{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.gt-stat{display:inline-flex;align-items:baseline;gap:6px;min-height:34px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;font-family:inherit;font-size:12px;line-height:1.4;color:var(--dim)}
+.gt-stat b{font-family:var(--f-mono);font-size:13px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+button.gt-stat{cursor:pointer;background:rgba(201,162,39,.08);border-color:rgba(201,162,39,.28);transition:background .18s cubic-bezier(.2,.7,.2,1),border-color .18s cubic-bezier(.2,.7,.2,1),color .18s}
+button.gt-stat:hover{background:rgba(201,162,39,.12);border-color:rgba(201,162,39,.45);color:var(--text)}
+button.gt-stat:focus-visible,#sec-gatherables .ichip:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.gt-xref{list-style:none;margin:0 0 16px;padding:10px 14px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--line);border-radius:8px;background:rgba(201,162,39,.05);font-size:12.5px;line-height:1.55;color:var(--dim)}
+.gt-xref li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:6px;align-items:start;max-width:78ch}
+.gt-xref-k{font-size:12px;line-height:1.6}
+.gt-xref a{color:var(--glo);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.gt-xref a:hover{color:var(--rhi)}
+.gt-xref a:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:2px}
+#sec-gatherables .gt-bar{margin-bottom:10px}
+#sec-gatherables .ichip{display:inline-flex;align-items:center;min-height:36px}
+.gt-chip-g{margin-right:6px;font-size:13px;line-height:1}
+#sec-gatherables .gt-fbar{margin-bottom:10px}
+.gt-cnt{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.gt-tbl th{font-size:var(--fs-11);letter-spacing:.1em}
+.gt-tbl td{padding:14px}
+.gt-td-name{width:24%;min-width:190px}
+.gt-name{display:flex;align-items:flex-start;gap:12px}
+.gt-ico{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:var(--item-ico);height:var(--item-ico)}
+.gt-ico .item-ico{margin:0}
+.gt-noimg{border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.gt-noimg::before{content:attr(data-g);font-size:26px;line-height:1;color:var(--gold)}
+.gt-name-tx{min-width:0;display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.gt-name-tx strong{font-family:var(--f-display);font-size:14px;font-weight:700;line-height:1.3;color:var(--ink-hi);overflow-wrap:anywhere}
+.gt-flags{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.gt-flags .miss-chip-sm{font-size:var(--fs-11)}
+.gt-conf{display:inline-flex;align-items:center;padding:1px 8px;border:1px dashed var(--gdim);border-radius:999px;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;line-height:1.4;color:var(--gdim);cursor:help}
+.gt-td-cat{width:1%;white-space:nowrap}
+.gt-cat{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(201,162,39,.05);font-size:12px;line-height:1.4;color:var(--text)}
+.gt-td-det{min-width:240px}
+.gt-lead,.gt-rest{margin:0;max-width:72ch;font-size:13px;line-height:1.55;color:var(--text)}
+.gt-more{margin-top:8px}
+.gt-more > summary{display:inline-flex;min-height:32px;margin-top:0;padding:4px 12px}
+.gt-more > summary::after{margin-left:4px}
+.gt-td-loc{width:23%;min-width:180px}
+.gt-loc-l{display:none}
+.gt-loc{display:block;font-size:12.5px;line-height:1.5;color:var(--text)}
+.gt-src{display:block;margin-top:6px;font-size:12px;line-height:1.45;color:var(--dim)}
+@media (max-width:600px){
+  #gatherables-tb{--item-ico:52px}
+  #sec-gatherables .gt-wrap{overflow:visible}
+  .gt-tbl,.gt-tbl tbody{display:block}
+  .gt-tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .gt-tbl tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 8px;padding:16px 14px;border-bottom:1px solid var(--line)}
+  .gt-tbl tr:last-child{border-bottom:0}
+  .gt-tbl td{display:block;width:auto;min-width:0;padding:0;border:0}
+  #gatherables-tb td{background:transparent}
+  .gt-td-cat{align-self:start;padding-top:2px}
+  .gt-td-det,.gt-td-loc{grid-column:1 / -1}
+  .gt-td-loc{padding-top:10px;border-top:1px solid var(--line-soft)}
+  .gt-loc-l{display:flex;align-items:center;gap:4px;margin-bottom:4px;font-size:var(--fs-11);font-weight:700;color:var(--dim)}
+  .gt-xref{padding:10px 12px}
+  #sec-gatherables .ichip{min-height:40px}
+}
+@media (pointer:coarse){
+  #sec-gatherables .ichip,#sec-gatherables button.gt-stat,#sec-gatherables .item-more > summary{min-height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  button.gt-stat,#sec-gatherables .ichip{transition:none}
+}
+/* ==== /Sammelobjekte ==== */
 /* ==== NAV-UMBAU 10/2026 · Bereich B (Begriffe & Texte) ==== */
 .sec-t .sec-t-en{font-family:var(--f-mono);font-size:.46em;font-weight:400;letter-spacing:.04em;color:var(--dim);margin-left:2px;line-height:1.3;align-self:center;max-width:100%;overflow-wrap:anywhere}
 /* B5 Orte und Glocken (08.10.2026): Karten mit Regionsband, Gruppen je Hauptregion. Farben je Karte per --lc-bg/--lc-acc/--lc-tx (aus BOSS_PH_PALETTES, inline gesetzt). */
@@ -3186,6 +3249,100 @@ button.sheet-grip:hover{color:var(--rhi)}
   .loc-card .item-more > summary,.loc-card .item-more > summary::after,.loc-patch > summary::after{transition:none}
 }
 /* ==== /Bereich B ==== */
+/* ==== REDESIGN 10/2026 · Materialien & Items (Stufen-Erklärung) ==== */
+/* Intro als kurzer Satz + Fakten-Kacheln, Volltext aufklappbar. Stufenpfad: Standard vertikal (Timeline),
+   ab 820px Containerbreite horizontal. Abyss-Gear-Slots als eigene Karte mit violettem 1px-Rand. */
+.upg-intro{margin:0 0 18px}
+.upg-lead{margin:0 0 12px;max-width:72ch;font-size:13px;line-height:1.6;color:var(--dim)}
+.upg-lead b{color:var(--gold);font-weight:700}
+.upg-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin:0 0 10px}
+.upg-fact{display:flex;flex-direction:column;gap:4px;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.upg-fv{font-family:var(--f-mono);font-size:16px;font-weight:700;line-height:1.2;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.upg-fl{font-size:12px;line-height:1.45;color:var(--dim);overflow-wrap:anywhere}
+.upg-intro .upg-more{max-width:72ch}
+.upg-more > summary{margin-top:0}
+.upg-rest{margin:0;font-size:12.5px;line-height:1.6;color:var(--dim);overflow-wrap:anywhere}
+.upg-rest b{color:var(--gold);font-weight:700}
+.upg-legend{margin:0 0 10px;font-size:12px;line-height:1.5;color:var(--dim)}
+.upg-legend b{color:var(--gdim);font-family:var(--f-mono)}
+.upg-wrap{container-type:inline-size;margin:0 0 8px}
+.upg-path{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin:0;padding:0;list-style:none}
+.upg-step{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:start;align-content:start;min-width:0}
+.upg-step:not(:last-child)::before{content:"";position:absolute;z-index:0;left:22px;top:27px;bottom:-41px;width:1px;background:var(--line-strong)}
+.upg-node{position:relative;z-index:1;display:grid;place-items:center;min-width:44px;height:30px;margin-top:12px;padding:0 7px;border:1px solid var(--gold);border-radius:999px;background:var(--panel);font-family:var(--f-mono);font-size:12px;font-weight:700;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.upg-max .upg-node{background:var(--gold);color:var(--bg)}
+.upg-card,.upg-gear{display:flex;flex-direction:column;gap:10px;min-width:0;padding:14px 16px;content-visibility:visible}
+.upg-card::before,.upg-gear::before{display:none}
+.upg-t{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.25;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
+.upg-ort{display:flex;gap:7px;align-items:baseline;max-width:100%;margin:-2px 0 0;font-size:12.5px;line-height:1.45;color:var(--text);overflow-wrap:anywhere}
+.upg-ort > span{flex:none;color:var(--gold)}
+.upg-ort-hexe > span{color:var(--slate)}
+.upg-k{display:block;margin:0 0 6px;font-size:12px;font-weight:600;line-height:1.4;color:var(--dim)}
+.upg-eff{margin:0;padding:9px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.upg-eff .upg-k{margin-bottom:2px}
+.upg-ev{display:block;font-size:14px;font-weight:600;line-height:1.45;color:var(--ink-hi)}
+.upg-mat{display:flex;flex-direction:column;gap:12px}
+.upg-grp{min-width:0}
+.upg-chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.upg-oder{display:block;margin:6px 0 6px 2px;font-size:12px;font-style:italic;color:var(--dim)}
+.upg-chip{display:inline-flex;align-items:center;gap:7px;max-width:100%;min-height:32px;padding:3px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:12.5px;line-height:1.3;color:var(--text)}
+.upg-chip-i{padding-left:3px}
+.upg-ico{flex:none;width:28px;height:28px;object-fit:contain;border-radius:50%;background:var(--vellum-deep)}
+.upg-cn{overflow-wrap:anywhere}
+.upg-ab{padding:1px 7px;border-radius:999px;background:rgba(201,162,39,.12);font-family:var(--f-mono);font-size:var(--fs-11);color:var(--gold);white-space:nowrap}
+.upg-zb{flex-basis:100%;font-size:12px;line-height:1.4;color:var(--dim)}
+.upg-alt{margin:0;font-size:12.5px;line-height:1.5;color:var(--dim)}
+.upg-hinweis{margin:0;font-size:12.5px;line-height:1.5;color:var(--text)}
+.upg-fakten{display:flex;flex-wrap:wrap;gap:6px}
+.upg-fakt{padding:4px 10px;border:1px dashed var(--line-strong);border-radius:8px;font-size:12px;line-height:1.4;color:var(--dim)}
+.upg-card .upg-more{margin-top:auto}
+.upg-bsp-l{display:grid;margin:0}
+.upg-bsp-r{display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px;padding:6px 0;border-bottom:1px solid var(--line-soft);font-size:12.5px;line-height:1.45}
+.upg-bsp-r:last-child{border-bottom:0}
+.upg-bsp-r dt{font-family:var(--f-mono);font-weight:700;font-variant-numeric:tabular-nums;color:var(--gold)}
+.upg-bsp-r dd{margin:0;color:var(--text);overflow-wrap:anywhere}
+.upg-hw{margin:6px 0 0;font-size:12px;line-height:1.45;color:var(--dim)}
+.upg-note{margin-top:10px}
+.upg-gear{margin-top:16px;gap:14px;border-color:var(--slate)}
+.upg-gear-hd{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.upg-tile{display:grid;place-items:center;width:64px;height:64px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.upg-tile .upg-ico{width:56px;height:56px;border-radius:8px;background:none}
+.upg-tile-g{font-size:26px;line-height:1;color:var(--slate)}
+.upg-gear-tt{display:flex;flex-direction:column;gap:7px;min-width:0}
+.upg-gear .upg-fakt{border-style:solid;border-color:var(--slate);color:var(--slate)}
+.upg-gear-bd{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.upg-gear-a{display:flex;flex-direction:column;gap:10px;min-width:0}
+.upg-kost{display:grid;margin:0}
+.upg-kost-r{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:12.5px;line-height:1.45}
+.upg-kost-r:last-child{border-bottom:0}
+.upg-kost-r dt{color:var(--dim)}
+.upg-kost-r dd{margin:0;color:var(--text)}
+.upg-kost-r b{font-family:var(--f-mono);font-weight:700;font-variant-numeric:tabular-nums;color:var(--gold)}
+.upg-kost-x{display:block;font-size:12px;color:var(--dim)}
+@container (min-width:820px){
+  .upg-path{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .upg-step{grid-template-columns:minmax(0,1fr);gap:12px}
+  .upg-step:not(:last-child)::before{top:15px;bottom:auto;right:-38px;width:auto;height:1px}
+  .upg-node{justify-self:start;margin-top:0}
+  .upg-gear-bd{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+}
+/* Itemdex darunter: nur Lesbarkeit angleichen (Renderer renderCompendium bleibt unberuehrt, daher !important gegen Inline-Stile). */
+#sec-items th{font-size:var(--fs-11)}
+#itemdex-tb td:nth-child(2),#itemdex-tb td:nth-child(4){font-size:12px!important}
+#itemdex-tb .tag.miss-chip-sm,#itemdex-tb td > span[title]{font-size:var(--fs-11)!important}
+@media (max-width:600px){
+  .upg-card,.upg-gear{padding:12px 13px}
+  .upg-gear-hd{grid-template-columns:52px minmax(0,1fr)}
+  .upg-tile{width:52px;height:52px}
+  .upg-tile .upg-ico{width:44px;height:44px}
+}
+@media (pointer:coarse){
+  #sec-items .upg-more > summary{min-height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .upg-card,.upg-card:hover,.upg-gear,.upg-gear:hover{transition:none;transform:none}
+}
+/* ==== /Materialien & Items ==== */
 /* ==== MOTION 10/2026 · Bereich A (Bewegungs-Kern & Navigation) ==== */
 /* Bewegung hängt an html.cd-motion. Lenis-Regeln aus lenis.css 1.3.26 (MIT), ohne .lenis-stopped{overflow:clip} (Seitensprung) */
 html.lenis,html.lenis body{height:auto}
@@ -3295,6 +3452,109 @@ html.cd-motion img[data-cd-iw]{transition:opacity .35s ease;transition-duration:
 html.cd-motion img[data-cd-iw="1"]{opacity:0;transition:none}   /* ausblenden sofort (Markierung kommt asynchron), einblenden weich */
 @media (max-width:860px){html.cd-motion .sec.active .sec-t::after{animation-duration:.35s!important;animation-delay:.06s}}
 @media print{.sec-t::after{animation:none!important;transform:none!important}img[data-cd-iw]{opacity:1!important}}
+/* ==== REDESIGN 10/2026 · Kochen & Elixiere ==== */
+/* Karten statt Tabelle: Kopf mit 64px-Icon, Wirkung als Wert-Pills bzw. Stufenleiter, Rezept als Mengenliste, Herkunft als Zeilen (Herstellen/Lernen/Kaufen/Quellen), Volltext aufklappbar. */
+.fd-intro{margin:0 0 6px;max-width:72ch;font-size:13px;line-height:1.6;color:var(--dim)}
+.fd-key{margin:0 0 14px;max-width:72ch;font-size:13px;line-height:1.6;color:var(--text)}
+.fd-key b{color:var(--gold);font-weight:700}
+.fd-stats{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;padding:0;list-style:none}
+.fd-stat{display:inline-flex;align-items:baseline;gap:6px;min-height:34px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;font-size:12px;line-height:1.4;color:var(--dim)}
+.fd-stat b{font-family:var(--f-mono);font-size:13px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+.fd-xref{margin:0 0 16px;max-width:80ch;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:rgba(201,162,39,.05);font-size:12.5px;line-height:1.55;color:var(--dim)}
+.fd-xref a,.fd-key a{color:var(--glo);text-decoration:underline;text-underline-offset:2px}
+.fd-xref a:hover{color:var(--rhi)}
+.fd-xref a:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:3px}
+.fd-bar{margin:0 0 6px}
+.fd-chips{display:contents}
+.fd-chip{display:inline-flex;align-items:center;gap:6px;min-height:36px}
+.fd-chip:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.fd-chip-g,.fd-ico-g,.fd-fx-g,.fd-cat > span,.fd-row dt > span,.fd-alt > span,.fd-tier-d > span,.fd-xref > span:first-child{font-family:'Segoe UI Symbol','Noto Sans Symbols 2','Noto Sans Symbols','DejaVu Sans',var(--f-body),sans-serif;font-style:normal}
+.fd-chip-g{font-size:14px;line-height:1}
+.fd-chip-sep{align-self:stretch;width:1px;margin:4px 3px;background:var(--line)}
+.fd-cnt{margin-left:auto;font-size:12px;color:var(--dim);white-space:nowrap}
+.fd-grp{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "bd";counter-reset:fdn}
+.fd-grp:not(:has(.fd-card:not(.hide))){display:none}
+.fd-grp-t{grid-area:hd;margin:26px 0 14px;padding-right:48px}
+.fd-grp:first-child .fd-grp-t{margin-top:16px}
+.fd-grp-n{grid-area:hd;justify-self:end;align-self:center;margin-top:12px;min-width:30px;padding:1px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;line-height:1.6;text-align:center;color:var(--gold);font-variant-numeric:tabular-nums;pointer-events:none}
+.fd-grp:first-child .fd-grp-n{margin-top:2px}
+.fd-grp-n::before{content:counter(fdn)}
+.fd-grp .fd-card:not(.hide){counter-increment:fdn}
+#sec-food .fd-grid{grid-area:bd;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;align-items:start;contain:layout}
+.fd-card{display:flex;flex-direction:column;gap:10px;min-width:0;padding:16px;content-visibility:visible}
+.fd-card::before{display:none}
+.fd-card .tag,.fd-card .miss-chip-sm{font-size:var(--fs-11)}
+.fd-hd{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.fd-ico{display:grid;place-items:center;width:64px;height:64px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.fd-ico img{width:56px;height:56px;object-fit:contain}
+.fd-ico-set{grid-auto-flow:column;gap:2px}
+.fd-ico-set img{width:30px;height:30px}
+.fd-ico-g{font-size:26px;line-height:1;color:var(--gold)}
+.fd-ico:has(img) .fd-ico-g{display:none}
+.fd-hd-t{min-width:0}
+.fd-name{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.25;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
+.fd-tags{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px}
+.fd-tags .tag{line-height:1.5}
+.fd-cat{text-transform:none;letter-spacing:.02em}
+.fd-lead{margin:0;font-size:13px;line-height:1.55;color:var(--text)}
+.fd-fx{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.fd-fx-i{display:inline-flex;align-items:baseline;gap:6px;padding:4px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:12px;line-height:1.4;color:var(--dim)}
+.fd-fx-g{font-size:12px;color:var(--gdim)}
+.fd-fx-v{font-family:var(--f-mono);font-size:13px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+.fd-fx-hp .fd-fx-g,.fd-fx-fire .fd-fx-g{color:var(--red)}
+.fd-fx-ice .fd-fx-g{color:var(--slate)}
+.fd-fx-spirit .fd-fx-g,.fd-fx-stam .fd-fx-g{color:var(--violet)}
+.fd-fx-rev .fd-fx-g{color:var(--gold)}
+.fd-tiers{display:grid;grid-template-columns:max-content minmax(0,1fr) max-content;margin:0;padding:0;list-style:none}
+.fd-tiers li{display:grid;grid-column:1 / -1;grid-template-columns:subgrid;gap:4px 12px;align-items:baseline;padding:6px 0;border-top:1px solid var(--line-soft)}
+.fd-tiers li:first-child{border-top:0;padding-top:0}
+.fd-tier-n{font-size:12px;color:var(--dim);overflow-wrap:anywhere}
+.fd-tier-e{font-size:13px;font-weight:700;color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.fd-tier-d{font-family:var(--f-mono);font-size:12px;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.fd-alt{margin:0;font-size:12px;line-height:1.5;color:var(--dim)}
+.fd-alt > span{color:var(--gdim)}
+.fd-rec{padding-top:10px;border-top:1px solid var(--line-soft)}
+.fd-k{margin:0 0 6px;font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--dim)}
+.fd-ing{display:grid;gap:4px;margin:0;padding:0;list-style:none}
+.fd-ing li{display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:8px;align-items:baseline;font-size:13px;line-height:1.45;color:var(--text)}
+.fd-q{font-family:var(--f-mono);font-weight:700;text-align:right;color:var(--gold);font-variant-numeric:tabular-nums}
+.fd-ing-nq li{grid-template-columns:minmax(0,1fr)}
+.fd-ing-nq .fd-q{display:none}
+.fd-ing-n{overflow-wrap:anywhere}
+.fd-ing-alt{font-size:12px;color:var(--dim)}
+.fd-meta{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:6px 12px;margin:0;padding-top:10px;border-top:1px solid var(--line-soft)}
+.fd-row{display:grid;grid-column:1 / -1;grid-template-columns:subgrid;align-items:baseline}
+.fd-row dt{font-size:12px;color:var(--dim);white-space:nowrap}
+.fd-row dt > span{color:var(--gdim)}
+.fd-row dd{margin:0;font-size:12.5px;line-height:1.5;color:var(--text);overflow-wrap:anywhere}
+.fd-srcs{display:flex;flex-wrap:wrap;gap:4px}
+.fd-sb{padding:0 8px;border:1px solid var(--line);border-radius:999px;font-size:var(--fs-11);line-height:1.7;color:var(--dim)}
+.fd-card .item-more{margin-top:auto}
+.fd-card .item-more > summary{margin-top:0;min-height:36px;padding:5px 12px;border-color:rgba(201,162,39,.28);background:rgba(201,162,39,.05)}
+.fd-card .item-more > summary:hover,.fd-card .item-more[open] > summary{background:rgba(201,162,39,.12)}
+.fd-card .item-more-body{gap:8px;padding-top:10px}
+.fd-full{margin:0;font-size:12.5px;line-height:1.6;color:var(--dim);overflow-wrap:anywhere}
+.fd-full b{color:var(--text);font-weight:600}
+@media (max-width:600px){
+  .fd-card{padding:14px}
+  .fd-hd{grid-template-columns:52px minmax(0,1fr);gap:11px}
+  .fd-ico{width:52px;height:52px}
+  .fd-ico img{width:46px;height:46px}
+  .fd-tiers{grid-template-columns:minmax(0,1fr) max-content}
+  .fd-tier-n{grid-column:1 / -1}
+  .fd-meta{grid-template-columns:minmax(0,1fr)}
+  .fd-row{gap:2px}
+  .fd-cnt{margin-left:0;flex-basis:100%}
+  #sec-food .ichip{min-height:40px}
+}
+@media (pointer:coarse){
+  #sec-food .ichip,#sec-food .item-more > summary{min-height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .fd-card,.fd-card:hover{transition:none;transform:none}
+  .fd-card .item-more > summary,.fd-card .item-more > summary::after{transition:none}
+}
+/* ==== /Kochen & Elixiere ==== */
 /* ---- B4 Inhalts-Feinschliff (alles unter html.cd-motion) ---- */
 /* Lichtkegel nach React Bits SpotlightCard, (c) David Haz, MIT+Commons Clause.
    Freies ::after (.card::before = roter Balken bleibt); z-index:-1 im eigenen Stapelkontext:
@@ -3337,6 +3597,103 @@ html.cd-motion .cd-b4-in{transition:none!important}
 html.cd-motion :is(.so-tile,.so-chip):hover{text-decoration:none}
 /* Zähler: Ziffern gleich breit, damit Hochzählen nichts verschiebt */
 html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
+/* ==== REDESIGN 10/2026 · Sammelgegenstände ==== */
+#sec-collectibles .col-xref{max-width:72ch;margin:0 0 16px;padding:8px 12px;font-size:12.5px;line-height:1.5;color:var(--dim);background:rgba(201,162,39,.05);border:1px solid var(--line);border-radius:8px}
+#sec-collectibles .col-xref a{color:var(--glo);text-decoration:underline;text-underline-offset:2px}
+#sec-collectibles .col-xref a:hover{color:var(--rhi)}
+.col-kn{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px 36px;margin:0 0 16px;padding:18px 20px 20px;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-soft)}
+.col-kn-a{display:flex;flex-direction:column;gap:14px;min-width:0}
+.col-kn-b{min-width:0}
+.col-kn-t{margin:0 0 10px;font-family:var(--f-display);font-size:13px;font-weight:700;letter-spacing:.01em;color:var(--ink-hi)}
+.col-intro{margin:0;max-width:60ch;font-size:13px;line-height:1.6;color:var(--text)}
+.col-intro strong{color:var(--ink-hi)}
+.col-total{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0;font-size:13px;line-height:1.45;color:var(--dim)}
+.col-total b{font-family:var(--f-mono);font-size:28px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:var(--gold)}
+.col-total span{flex:1 1 200px;max-width:42ch}
+.col-keys{padding-top:12px;border-top:1px solid var(--line-soft)}
+.col-keys .col-kn-t{margin-bottom:6px}
+.col-key{margin:0 0 4px;font-size:12.5px;line-height:1.5;color:var(--dim)}
+.col-key b{font-weight:700;color:var(--text)}
+.col-kn-miss{display:flex;gap:8px;margin:0;padding-top:12px;font-size:12.5px;line-height:1.5;color:var(--text);border-top:1px solid var(--line-soft)}
+.col-kn-miss > span[aria-hidden]{color:var(--warn)}
+.col-kn-miss strong{color:var(--warn)}
+.col-more .item-more-body{gap:8px;padding-top:10px}
+.col-kb{display:grid;grid-template-columns:max-content minmax(48px,1fr) 4ch;align-items:center;gap:7px 12px;margin:0}
+.col-kb-r{display:contents}
+.col-kb dt{font-size:12.5px;line-height:1.3;color:var(--text);white-space:nowrap}
+.col-kb dt b{color:var(--gold);font-weight:700}
+.col-kb dd{margin:0}
+.col-kb-bar{height:8px;overflow:hidden;background:var(--line-soft);border-radius:999px}
+.col-kb-bar i{display:block;width:var(--col-w,0%);height:100%;background:rgba(201,162,39,.45);border-radius:inherit}
+.col-kb-n{font-family:var(--f-mono);font-size:12.5px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-hi)}
+.col-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 20px}
+.col-stat{display:grid;grid-template-columns:40px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;align-items:center;min-height:64px;padding:10px 12px;text-align:left;font:inherit;color:var(--text);cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:12px;transition:border-color .18s,background-color .18s,transform .18s cubic-bezier(.2,.7,.2,1)}
+.col-stat-g{grid-row:1 / 3;display:grid;place-items:center;width:40px;height:40px;font-size:19px;line-height:1;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.28);border-radius:10px}
+.col-stat b{align-self:end;font-family:var(--f-mono);font-size:20px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--gold)}
+.col-stat-l{align-self:start;font-size:12px;line-height:1.3;color:var(--dim);overflow-wrap:break-word}
+.col-stat:hover{background:rgba(201,162,39,.08);border-color:var(--line-strong);transform:translateY(-1px)}
+.col-stat:hover .col-stat-l{color:var(--text)}
+.col-stat:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#sec-collectibles .col-bar{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin:0 0 8px;padding:12px 14px}
+.col-fg{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.col-fg .ibar-l{min-width:54px;font-size:12px}
+#sec-collectibles .ichip{min-height:36px}
+.col-cnt{margin:0 0 16px;font-size:12px;color:var(--dim)}
+.col-grp{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "bd";counter-reset:coln;margin:0 0 28px}
+.col-grp:not(:has(.col-card:not(.hide))){display:none}
+.col-grp-t{grid-area:hd;display:flex;align-items:center;gap:8px;margin:0 0 12px;padding:0 60px 8px 0;font-family:var(--f-display);font-size:17px;font-weight:700;line-height:1.3;color:var(--ink-hi);border-bottom:1px solid var(--line-soft)}
+.col-grp--miss .col-grp-t{color:var(--warn)}
+.col-grp-n{grid-area:hd;justify-self:end;align-self:start;min-width:32px;padding:1px 10px;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;line-height:1.6;text-align:center;font-variant-numeric:tabular-nums;color:var(--dim);border:1px solid var(--line);border-radius:999px;pointer-events:none}
+.col-grp--miss .col-grp-n{color:var(--warn);border-color:var(--warn)}
+.col-grp-n::before{content:counter(coln)}
+.col-grp .col-card:not(.hide){counter-increment:coln}
+.col-grp-bd{grid-area:bd;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+.col-card{display:flex;flex-direction:column;gap:10px;min-width:0;padding:14px 16px 15px;content-visibility:visible;scroll-margin-top:96px}
+.col-card::before{display:none}
+.col-card:hover{box-shadow:var(--shadow-soft)}
+.col-card.col-hit{outline:2px solid var(--gold);outline-offset:3px}
+.col-hd{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:start}
+.col-sym{display:grid;place-items:center;width:64px;height:64px;font-size:26px;line-height:1;color:var(--gold);background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.col-hd-t{display:flex;flex-direction:column;gap:7px;min-width:0;padding-top:2px}
+.col-name{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.3;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
+.col-tags{display:flex;flex-wrap:wrap;gap:5px}
+.col-card .tag,.col-card .miss-chip-sm{font-size:var(--fs-11)}
+.col-tags .tag{max-width:100%;white-space:normal;line-height:1.35;text-transform:none;letter-spacing:.02em}
+.col-conf{color:var(--gdim);background:transparent;border-color:var(--bdr);border-style:dashed;text-transform:none;letter-spacing:.02em}
+.col-goal{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:58px;min-height:58px;padding:6px 10px;text-align:center;background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.45);border-radius:12px}
+.col-goal b{font-family:var(--f-mono);font-size:22px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:var(--gold)}
+.col-goal small{margin-top:4px;font-size:var(--fs-11);line-height:1.2;white-space:nowrap;color:var(--dim)}
+.col-miss{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:-14px -16px 2px;padding:8px 16px;font-size:12.5px;line-height:1.4;color:var(--warn);background:rgba(224,163,90,.08);border-bottom:1px solid var(--warn)}
+.col-loc{display:flex;gap:7px;margin:0;font-size:12px;line-height:1.5;color:var(--dim)}
+.col-loc b{margin-right:4px;font-weight:700;color:var(--text)}
+.col-lead{margin:0;font-size:13px;line-height:1.55;color:var(--text)}
+.col-rest{margin:0;font-size:12.5px;line-height:1.6;color:var(--dim);overflow-wrap:anywhere}
+.col-rest b{color:var(--gold)}
+.col-card .item-more > summary{margin-top:0}
+.col-empty{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0 24px;font-size:13px;color:var(--dim)}
+@media (max-width:860px){
+  .col-kn{grid-template-columns:minmax(0,1fr);gap:18px}
+}
+@media (max-width:600px){
+  .col-kn{padding:14px 14px 16px}
+  .col-total b{font-size:24px}
+  .col-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .col-hd{grid-template-columns:52px minmax(0,1fr) auto;gap:10px}
+  .col-sym{width:52px;height:52px}
+  .col-goal{min-width:50px;min-height:50px;padding:5px 8px}
+  .col-goal b{font-size:19px}
+  .col-card{padding:13px 13px 14px}
+  .col-miss{margin:-13px -13px 2px;padding:8px 13px}
+  #sec-collectibles .ichip{min-height:40px}
+  .col-fg .ibar-l{flex-basis:100%}
+}
+@media (pointer:coarse){
+  #sec-collectibles .ichip,#sec-collectibles .item-more > summary{min-height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .col-card,.col-card:hover,.col-stat,.col-stat:hover{transition:none;transform:none}
+}
+/* ==== /Sammelgegenstände ==== */
 /* ==== /Motion B ==== */
 </style>
 </head>
@@ -3978,10 +4335,24 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
   <section class="sec" id="sec-items">
     <h2 class="sec-t"><span class="sec-sym">❒</span> Materialien &amp; Items <span class="sec-t-en">Materials</span></h2>
     <div id="wt-upgrade" class="sub-t" style="margin-top:0;scroll-margin-top:72px">Waffen-Upgrade &amp; Refinement</div>
-    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Die meisten Waffen können bis <span style="color:var(--gold);font-weight:600">Refine +10</span> gesteigert werden (Stufen 5-10 erfordern zusätzlich Abyss-Artefakte; laut questlog-Spieldatenbank, die 540 Waffen ohne Munition führt (dieses Wiki erfasst 500), sind 107 davon nicht verfeinerbar, darunter 77 Banner Pikes). Abyss-Slots werden bei einer Hexe gegen Silber erstellt — max. 2 bei Schilden, 3 bei Einhand-, bis 5 bei Zweihand-/Fernkampf-Waffen; Boss-Waffen bringen teils vorinstallierte Sockel mit. Elementeffekte (Fire/Lightning/Frost Affinity) laufen über Cores/Abyss Gears.</div>
-    <div class="tw-wrap"><table><thead><tr><th>Stufe</th><th>Material</th><th>Effekt</th><th>Freischalten bei</th><th>Notiz</th></tr></thead><tbody id="wupgrade-tb"></tbody></table></div>
+    <!-- REDESIGN 10/2026: Stufen-Erklaerung als Fakten-Kacheln + Stufenpfad (renderWeaponUpgrade). Der volle Hinweistext steht unveraendert im aufklappbaren Teil. -->
+    <div class="upg-intro">
+      <p class="upg-lead">Die meisten Waffen können bis <b>Refine +10</b> gesteigert werden. Der Schmied verfeinert in drei Stufenblöcken, die Abyss-Slots der Hexe sind ein eigenes System.</p>
+      <div class="upg-facts">
+        <div class="upg-fact"><b class="upg-fv">+10</b><span class="upg-fl">höchste Refine-Stufe</span></div>
+        <div class="upg-fact"><b class="upg-fv">5-10</b><span class="upg-fl">Stufen, die zusätzlich Abyss-Artefakte erfordern</span></div>
+        <div class="upg-fact"><b class="upg-fv">107 / 540</b><span class="upg-fl">Waffen laut questlog nicht verfeinerbar, darunter 77 Banner Pikes</span></div>
+        <div class="upg-fact"><b class="upg-fv">2 / 3 / 5</b><span class="upg-fl">Abyss-Slots max.: Schild / Einhand / bis 5 Zweihand und Fernkampf</span></div>
+      </div>
+      <details class="item-more upg-more"><summary>Ganzen Hinweis lesen</summary><div class="item-more-body"><p class="upg-rest">Die meisten Waffen können bis <b>Refine +10</b> gesteigert werden (Stufen 5-10 erfordern zusätzlich Abyss-Artefakte; laut questlog-Spieldatenbank, die 540 Waffen ohne Munition führt (dieses Wiki erfasst 500), sind 107 davon nicht verfeinerbar, darunter 77 Banner Pikes). Abyss-Slots werden bei einer Hexe gegen Silber erstellt — max. 2 bei Schilden, 3 bei Einhand-, bis 5 bei Zweihand-/Fernkampf-Waffen; Boss-Waffen bringen teils vorinstallierte Sockel mit. Elementeffekte (Fire/Lightning/Frost Affinity) laufen über Cores/Abyss Gears.</p></div></details>
+    </div>
+    <div class="upg-wrap"><ol class="upg-path" id="wupgrade-path" aria-label="Refinement-Stufen beim Schmied"></ol><div id="wupgrade-gear"></div></div>
     <div id="it-dex" class="sub-t" style="scroll-margin-top:72px">Items-Kompendium</div>
-    <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:10px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr);line-height:1.6">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst. Gekochte Gerichte (Kochen &amp; Elixiere), Roh-Materialien (Sammelobjekte), Färbemittel, Abyss-Ausrüstung und Ausrüstung haben eigene Seiten. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz". <span style="color:var(--dim);font-size:var(--fs-10)">[Einträge mehrquellig belegt; ≈ = nur Einzelquelle]</span></div>
+    <div class="upg-intro upg-intro-dex">
+      <p class="upg-lead">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst.</p>
+      <p class="upg-legend">Einträge mehrquellig belegt; <b>≈</b> = nur Einzelquelle</p>
+      <details class="item-more upg-more"><summary>Was steht auf anderen Seiten?</summary><div class="item-more-body"><p class="upg-rest">Gekochte Gerichte (Kochen &amp; Elixiere), Roh-Materialien (Sammelobjekte), Färbemittel, Abyss-Ausrüstung und Ausrüstung haben eigene Seiten. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz".</p></div></details>
+    </div>
     <!-- Bereichsleiste und Kategorie-Auswahl werden aus ITEMS erzeugt (renderItemBar / fillItemdexCats).
          Bewusst nicht mehr als feste option-Liste im Markup: die stand sonst neben den Daten und hatte
          zuletzt die Kategorie "Pet-Ausruestung — Vogel" nicht, deren Eintraege damit unfilterbar waren. -->
@@ -4643,37 +5014,71 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
   </section>
   <section class="sec" id="sec-collectibles">
     <h2 class="sec-t"><span class="sec-sym">⬦</span> Sammelgegenstände <span class="sec-t-en">Collectibles</span></h2>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Pflanzen, Erze und andere Rohstoffe zum Sammeln stehen auf der Seite <a href="#" onclick="showSec('gatherables');return false;">Sammelobjekte</a> (Gatherables). Hier geht es um die Sammlung im Wissen-Menü (Collectibles).</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong> (11 Kategorien, 2.921 Einträge laut Fortschrittsanzeige im Knowledge-Menü — u.a. Territories 573, People 462, Adventure 430, Creatures 396, Crafting Manuals 362, Memory Fragments 214 (andere Zählweise als die 201 Kartenpositionen der Memory-Fragment-Liste auf der Seite Geheimnisse &amp; Lore), Gatherables 151, Factions 115, Collectibles 95, Bosses 77, Mounts 30; die hier genannten Einzelwerte ergeben zusammen 2.905 (16 weniger als die Gesamtzahl) und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu). Das meiste ist <strong>nicht</strong> permanent verpassbar (viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar) — die tatsächlich <span style="color:var(--survey-red)">verpassbaren</span> Einträge sind unten markiert. Schlüssel: Guiding Light (L1+R1) zeigt Abyss-Artefakte · Visione-Helm zeigt Memory Fragments · Constellation Helm für Sternbilder.</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">141</span> Sealed Abyss Artifacts</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">13</span> Constellations</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">22</span> Legendary Animals</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">100/133</span> Caves</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">76</span> Insekten</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30</span> Unique Pets</div>
+    <p class="col-xref">↪ Nicht verwechseln: Pflanzen, Erze und andere Rohstoffe zum Sammeln stehen auf der Seite <a href="#" onclick="showSec('gatherables');return false;">Sammelobjekte</a> (Gatherables). Hier geht es um die Sammlung im Wissen-Menü (Collectibles).</p>
+    <div class="col-kn">
+      <div class="col-kn-a">
+        <p class="col-intro">Crimson Desert sammelt alle Entdeckungen im <strong>Knowledge-System</strong>.</p>
+        <p class="col-total"><b>2.921</b><span>Einträge in 11 Kategorien laut Fortschrittsanzeige im Knowledge-Menü</span></p>
+        <div class="col-keys">
+          <h3 class="col-kn-t">Schlüssel</h3>
+          <p class="col-key"><b>Guiding Light (L1+R1)</b> zeigt Abyss-Artefakte</p>
+          <p class="col-key"><b>Visione-Helm</b> zeigt Memory Fragments</p>
+          <p class="col-key"><b>Constellation Helm</b> für Sternbilder</p>
+        </div>
+        <p class="col-kn-miss"><span aria-hidden="true">⚠</span> <span>Das meiste ist <strong>nicht</strong> permanent verpassbar; die tatsächlich verpassbaren Einträge sind unten markiert.</span></p>
+        <details class="item-more col-more"><summary>Zählweise und Hinweise</summary><div class="item-more-body">
+          <p class="col-rest"><b>*</b> Memory Fragments 214: andere Zählweise als die 201 Kartenpositionen der Memory-Fragment-Liste auf der Seite Geheimnisse &amp; Lore.</p>
+          <p class="col-rest">Die hier genannten Einzelwerte ergeben zusammen 2.905 (16 weniger als die Gesamtzahl) und schwanken je nach Quelle und Patchstand, z. B. kamen mit Patch 1.12.00 (19.06.2026) 51 neue Einträge der Kategorie 'Collectibles - Contract' hinzu.</p>
+          <p class="col-rest">Nicht permanent verpassbar: viele Gatherable-Kategorien per Boss-Belohnung 'Memory of Ancient Nature' retroaktiv vervollständigbar.</p>
+        </div></details>
+      </div>
+      <div class="col-kn-b">
+        <h3 class="col-kn-t">Einträge je Kategorie</h3>
+        <dl class="col-kb">
+          <div class="col-kb-r"><dt>Territories</dt><dd class="col-kb-bar"><i data-n="573"></i></dd><dd class="col-kb-n">573</dd></div>
+          <div class="col-kb-r"><dt>People</dt><dd class="col-kb-bar"><i data-n="462"></i></dd><dd class="col-kb-n">462</dd></div>
+          <div class="col-kb-r"><dt>Adventure</dt><dd class="col-kb-bar"><i data-n="430"></i></dd><dd class="col-kb-n">430</dd></div>
+          <div class="col-kb-r"><dt>Creatures</dt><dd class="col-kb-bar"><i data-n="396"></i></dd><dd class="col-kb-n">396</dd></div>
+          <div class="col-kb-r"><dt>Crafting Manuals</dt><dd class="col-kb-bar"><i data-n="362"></i></dd><dd class="col-kb-n">362</dd></div>
+          <div class="col-kb-r"><dt>Memory Fragments <b title="Andere Zählweise, siehe Zählweise und Hinweise">*</b></dt><dd class="col-kb-bar"><i data-n="214"></i></dd><dd class="col-kb-n">214</dd></div>
+          <div class="col-kb-r"><dt>Gatherables</dt><dd class="col-kb-bar"><i data-n="151"></i></dd><dd class="col-kb-n">151</dd></div>
+          <div class="col-kb-r"><dt>Factions</dt><dd class="col-kb-bar"><i data-n="115"></i></dd><dd class="col-kb-n">115</dd></div>
+          <div class="col-kb-r"><dt>Collectibles</dt><dd class="col-kb-bar"><i data-n="95"></i></dd><dd class="col-kb-n">95</dd></div>
+          <div class="col-kb-r"><dt>Bosses</dt><dd class="col-kb-bar"><i data-n="77"></i></dd><dd class="col-kb-n">77</dd></div>
+          <div class="col-kb-r"><dt>Mounts</dt><dd class="col-kb-bar"><i data-n="30"></i></dd><dd class="col-kb-n">30</dd></div>
+        </dl>
+      </div>
     </div>
-    <div class="fbar">
-      <select class="fs" id="cof-miss" aria-label="Sammelgegenstände nach Verpassbarkeit filtern" onchange="renderCollectibles()"><option value="">Alle Sammelgegenstände</option><option value="1">Nur verpassbare</option><option value="0">Nicht verpassbare</option></select>
-      <span id="cof-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
+    <div class="col-stats" role="group" aria-label="Sammelziele mit fester Zahl: zur Karte springen">
+      <button type="button" class="col-stat" data-col-jump="Sealed Abyss Artifacts (141)" onclick="colJump(this.dataset.colJump)"><span class="col-stat-g" aria-hidden="true">🏆</span><b>141</b><span class="col-stat-l">Sealed Abyss Artifacts</span></button>
+      <button type="button" class="col-stat" data-col-jump="Constellations (13)" onclick="colJump(this.dataset.colJump)"><span class="col-stat-g" aria-hidden="true">🧭</span><b>13</b><span class="col-stat-l">Constellations</span></button>
+      <button type="button" class="col-stat" data-col-jump="Legendary Animals (22)" onclick="colJump(this.dataset.colJump)"><span class="col-stat-g" aria-hidden="true">🧭</span><b>22</b><span class="col-stat-l">Legendary Animals</span></button>
+      <button type="button" class="col-stat" data-col-jump="Caves (100 von 133)" onclick="colJump(this.dataset.colJump)"><span class="col-stat-g" aria-hidden="true">🧭</span><b>100/133</b><span class="col-stat-l">Caves</span></button>
+      <button type="button" class="col-stat" data-col-jump="Insekten (76)" onclick="colJump(this.dataset.colJump)"><span class="col-stat-g" aria-hidden="true">📖</span><b>76</b><span class="col-stat-l">Insekten</span></button>
+      <button type="button" class="col-stat" data-col-jump="Unique Pets (30)" onclick="colJump(this.dataset.colJump)"><span class="col-stat-g" aria-hidden="true">🏺</span><b>30</b><span class="col-stat-l">Unique Pets</span></button>
     </div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="col-tb"></tbody></table></div>
+    <div class="ibar col-bar" id="col-bar"></div>
+    <p class="col-cnt" id="cof-cnt" aria-live="polite"></p>
+    <div class="col-grid" id="col-grid"></div>
   </section>
   <section class="sec" id="sec-gatherables">
     <h2 class="sec-t"><span class="sec-sym">☘</span> Sammelobjekte <span class="sec-t-en">Gatherables</span></h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Über ganz Pywel sammelst du Erze, Kräuter, Pilze und Spezialmaterialien per Mining-Node, Foraging oder Logging Axe. Sie speisen Alchemie, Kochen, Schmieden, Färben und einige Stat-Upgrades. Mehrere Kräuter heben Stats über ihr Maximum, etwa Spirit oder Stamina.</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">64</span> Materialien</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">4</span> Awakening-Kräuter</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">~7 Tage</span> Erz-Respawn</div>
+    <p class="gt-intro">Über ganz Pywel sammelst du Erze, Kräuter, Pilze und Spezialmaterialien per Mining-Node, Foraging oder Logging Axe. Sie speisen Alchemie, Kochen, Schmieden, Färben und einige Stat-Upgrades. Mehrere Kräuter heben Stats über ihr Maximum, etwa Spirit oder Stamina.</p>
+    <div class="gt-stats">
+      <button type="button" class="gt-stat" onclick="setGatherCat('')" title="Alle Materialien anzeigen"><b id="gt-n-all">64</b> Materialien</button>
+      <span class="gt-stat gt-stat-static"><b>4</b> Awakening-Kräuter</span>
+      <button type="button" class="gt-stat" onclick="setGatherCat('Erz / Mineral')" title="Nur Erze und Mineralien anzeigen"><b>~7 Tage</b> Erz-Respawn</button>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Sammelbare Gegenstände und Wissenseinträge (Collectibles) stehen auf der Seite <a href="#" onclick="showSec('collectibles');return false;">Sammelgegenstände</a>. Hier geht es um Rohstoffe zum Sammeln (Gatherables).</div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Siehe Seite Herstellen &amp; Farmen (Alchemie) für Catalyst-Rezepte und den Stat-Upgrade-Abschnitt (Spirit, Stamina) für Turn-in-Materialien.</div>
-    <div class="fbar">
-      <select class="fs" id="gatherables-cat" aria-label="Sammelressourcen nach Kategorie filtern" onchange="renderGatherables()"><option value="">Alle Kategorien</option><option value="Erz / Mineral">Erz / Mineral</option><option value="Edelstein">Edelstein</option><option value="Kraut">Kraut</option><option value="Kraut (giftig)">Kraut (giftig)</option><option value="Pilz">Pilz</option><option value="Spezialmaterial">Spezialmaterial</option><option value="Crafting-Material">Crafting-Material</option><option value="Gemüse / Frucht">Gemüse / Frucht</option><option value="Fleisch">Fleisch</option></select>
-      <span id="gatherables-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
+    <ul class="gt-xref" aria-label="Verwandte Seiten">
+      <li><span class="gt-xref-k" aria-hidden="true">🔗</span><span>Nicht verwechseln: Sammelbare Gegenstände und Wissenseinträge (Collectibles) stehen auf der Seite <a href="#" onclick="showSec('collectibles');return false;">Sammelgegenstände</a>. Hier geht es um Rohstoffe zum Sammeln (Gatherables).</span></li>
+      <li><span class="gt-xref-k" aria-hidden="true">🔗</span><span>Siehe Seite <a href="#" onclick="showSec('crafting');return false;">Herstellen &amp; Farmen</a> (Alchemie) für Catalyst-Rezepte und den Stat-Upgrade-Abschnitt (Spirit, Stamina) für Turn-in-Materialien.</span></li>
+    </ul>
+    <div class="ibar gt-bar" id="gatherables-bar" role="group" aria-label="Sammelobjekte nach Kategorie filtern"></div>
+    <div class="fbar gt-fbar">
+      <select class="fs" id="gatherables-cat" aria-label="Sammelressourcen nach Kategorie filtern" onchange="renderGatherables()" hidden><option value="">Alle Kategorien</option></select>
+      <span id="gatherables-cnt" class="gt-cnt" aria-live="polite"></span>
     </div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="gatherables-tb"></tbody></table></div>
+    <div class="tw-wrap gt-wrap"><table class="gt-tbl"><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="gatherables-tb"></tbody></table></div>
   </section>
   <section class="sec" id="sec-puzzles">
     <h2 class="sec-t"><span class="sec-sym">⍰</span> Rätsel <span class="sec-t-en">Puzzles</span></h2>
@@ -4708,19 +5113,19 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
   </section>
   <section class="sec" id="sec-food">
     <h2 class="sec-t"><span class="sec-sym">⚗</span> Kochen &amp; Elixiere <span class="sec-t-en">Cooking &amp; Elixirs</span></h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Kochen am Lagerfeuer und Alchemie liefern in Crimson Desert situative Buffs: Feldgerichte geben Heilung plus feste Ice- oder Fire-Resistance, während Elixiere aus dem Cauldron Angriff, Verteidigung, Spirit und Wiederbelebung abdecken. Wichtig: Resistance-Level und Wirkdauer eines Rezepts sind über alle Qualitätsstufen FIX - nur der HP-Wert steigt mit höherer Kochstufe.</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">19</span> Einträge</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">12</span> Feldgerichte</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">+10 / 15 Min</span> Freya's Greater Elixir</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">30% / 100%</span> Palmar-Revive</div>
+    <p class="fd-intro">Kochen am Lagerfeuer und Alchemie liefern in Crimson Desert situative Buffs: Feldgerichte geben Heilung plus feste Ice- oder Fire-Resistance, während Elixiere aus dem Cauldron Angriff, Verteidigung, Spirit und Wiederbelebung abdecken.</p>
+    <p class="fd-key"><b>Wichtig:</b> Resistance-Level und Wirkdauer eines Rezepts sind über alle Qualitätsstufen FIX - nur der HP-Wert steigt mit höherer Kochstufe.</p>
+    <ul class="fd-stats" aria-label="Kennzahlen">
+      <li class="fd-stat"><b>19</b> Einträge</li>
+      <li class="fd-stat"><b>12</b> Feldgerichte</li>
+      <li class="fd-stat"><b>+10 / 15 Min</b> Freya's Greater Elixir</li>
+      <li class="fd-stat"><b>30% / 100%</b> Palmar-Revive</li>
+    </ul>
+    <p class="fd-xref"><span aria-hidden="true">↪</span> Reagenzien wie Crimson Root, Adrenaline Gland und Palmar-Materialien siehe Seiten <a href="#sec-gatherables" onclick="showSec('gatherables');return false;">Sammelobjekte</a> und <a href="#sec-items" onclick="showSec('items');return false;">Materialien &amp; Items</a>; Cauldron-Standorte siehe Seite <a href="#sec-crafting" onclick="showSec('crafting');return false;">Herstellen &amp; Farmen</a>.</p>
+    <div class="ibar fd-bar" role="group" aria-label="Kochen und Elixiere nach Kategorie filtern">
+      <span class="ibar-l">Kategorie</span><span class="fd-chips" id="food-chips"></span><span id="food-cnt" class="fd-cnt"></span>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Reagenzien wie Crimson Root, Adrenaline Gland und Palmar-Materialien siehe Seiten Sammelobjekte und Materialien &amp; Items; Cauldron-Standorte siehe Seite Herstellen &amp; Farmen.</div>
-    <div class="fbar">
-      <select class="fs" id="food-cat" aria-label="Speisen nach Kategorie filtern" onchange="renderFood()"><option value="">Alle Kategorien</option><option value="Food — Ice Resistance">Food — Ice Resistance</option><option value="Food — Fire Resistance">Food — Fire Resistance</option><option value="Elixir — Angriff/Tempo">Elixir — Angriff/Tempo</option><option value="Elixir — Verteidigung">Elixir — Verteidigung</option><option value="Elixir — Spirit/Stamina">Elixir — Spirit/Stamina</option><option value="Elixir — Wiederbelebung">Elixir — Wiederbelebung</option></select>
-      <span id="food-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
-    </div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="food-tb"></tbody></table></div>
+    <div id="food-tb" class="fd-list"></div>
   </section>
   <section class="sec" id="sec-chapters">
     <h2 class="sec-t"><span class="sec-sym">▤</span> Kapitel-Guide</h2>
@@ -9792,20 +10197,94 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-// ===== COLLECTIBLES =====
+// ===== COLLECTIBLES (Redesign 10/2026: Kartenraster, Status- und Themenfilter als Chips) =====
+// Themengruppen werden nur aus dem cat-Text abgeleitet (erste passende Regel gewinnt); Glyphen laut Leitplanken.
+const COL_GRP=[
+  {k:'challenge',g:'🏆',l:'Challenge',re:/Challenge/i},
+  {k:'explore',g:'🧭',l:'Exploration',re:/^Exploration/i},
+  {k:'knowledge',g:'📖',l:'Knowledge',re:/Knowledge/i},
+  {k:'deko',g:'🏺',l:'Collectible',re:/Collectible/i},
+  {k:'quest',g:'⏳',l:'Quest & Einmalig',re:/Quest|Skill|einmalig/i}
+];
+const COL_OTHER={k:'other',g:'❓',l:'Sonstiges'};
+let COL_MISS='',COL_TH='';
+function _colGrp(cat){return COL_GRP.find(g=>g.re.test(String(cat||'')))||COL_OTHER;}
+// Zielzahl am Namensende: "(141)" bzw. "(100 von 133)"; der Name bleibt im Datensatz und in data-s unverändert.
+function _colGoal(name){
+  name=String(name||'');
+  const m=name.match(/\s*\((\d[\d.]*)(?:\s+von\s+(\d[\d.]*))?\)\s*$/);
+  return m?{title:name.slice(0,m.index),n:m[1],of:m[2]||''}:{title:name,n:'',of:''};
+}
+function setColFilter(kind,v){
+  if(kind==='reset'){COL_MISS='';COL_TH='';}
+  else if(kind==='miss')COL_MISS=v;else COL_TH=v;
+  renderCollectibles();
+}
+function _colBar(){
+  const el=document.getElementById('col-bar');if(!el)return;
+  if(!el.dataset.built){
+    const nMiss=COLLECTIBLES.filter(c=>c.miss).length,z={};
+    COLLECTIBLES.forEach(c=>{const k=_colGrp(c.cat).k;z[k]=(z[k]||0)+1;});
+    const chip=(kind,v,lbl,n)=>`<button type="button" class="ichip" data-col-f="${kind}" data-col-v="${v}" aria-pressed="false" onclick="setColFilter('${kind}','${v}')">${lbl}<span class="n">${n}</span></button>`;
+    el.innerHTML=`<div class="col-fg" role="group" aria-label="Nach Verpassbarkeit filtern"><span class="ibar-l">Status</span>${chip('miss','','Alle',COLLECTIBLES.length)}${chip('miss','1','<span aria-hidden="true">⚠</span> Verpassbar',nMiss)}${chip('miss','0','Nicht verpassbar',COLLECTIBLES.length-nMiss)}</div>
+      <div class="col-fg" role="group" aria-label="Nach Thema filtern"><span class="ibar-l">Thema</span>${chip('th','','Alle',COLLECTIBLES.length)}${COL_GRP.concat([COL_OTHER]).filter(g=>z[g.k]).map(g=>chip('th',g.k,`<span aria-hidden="true">${g.g}</span> ${escHtml(g.l)}`,z[g.k])).join('')}</div>`;
+    el.dataset.built='1';
+  }
+  // Zustand nur umschalten statt neu aufbauen: der Tastaturfokus bleibt auf dem gedrückten Chip
+  el.querySelectorAll('.ichip').forEach(b=>{const on=b.dataset.colV===(b.dataset.colF==='miss'?COL_MISS:COL_TH);b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false');});
+}
+// Balken der Knowledge-Übersicht: Breite relativ zum größten Wert, Zahlen stehen im Markup
+function _colBars(){
+  const bars=document.querySelectorAll('#sec-collectibles .col-kb i[data-n]');
+  if(!bars.length||bars[0].dataset.done)return;
+  const max=Math.max(...[...bars].map(b=>+b.dataset.n||0))||1;
+  bars.forEach(b=>{b.style.setProperty('--col-w',(Math.round((+b.dataset.n||0)/max*1000)/10)+'%');b.dataset.done='1';});
+}
+/* REDESIGN 10/2026: gemeinsame Helfer der Sammeln-Seiten (Sammelobjekte, Kochen & Elixiere, Sammelgegenstände). conf-Text und title wörtlich wie renderCompendium. */
+function _sgConf(c,cls){return c.conf&&c.conf!=='high'?`<span class="${cls}" title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:'';}
+function _sgSrc(p){p=String(p||'');return p.startsWith('/assets/')?SYNTH_CDN+p:p.startsWith('cd_assets/items/')?p:'';}
+function _colCard(c,g,wasOpen){
+  const gl=_colGoal(c.name),sp=_locSplit(c.detail,200);
+  const s=[c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase();
+  const vis=[c.name,c.cat,sp.head,c.loc,c.miss?'verpassbar':''].join(' ').toLowerCase();
+  const conf=_sgConf(c,'tag col-conf');
+  const goal=gl.n?`<span class="col-goal"><b>${escHtml(gl.n)}</b>${gl.of?`<small>von ${escHtml(gl.of)}</small>`:''}</span>`:'';
+  const more=sp.rest?`<details class="item-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Mehr lesen</summary><div class="item-more-body"><p class="col-rest">${escHtml(sp.rest)}</p></div></details>`:'';
+  return `<article class="card col-card${c.miss?' col-card--miss':''}" tabindex="-1" data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(sp.rest)}">
+    ${c.miss?`<p class="col-miss"><span aria-hidden="true">⚠</span>${MISS_CHIP_SM}<span>Kann verpasst werden, Details im Text</span></p>`:''}
+    <div class="col-hd"><span class="col-sym" aria-hidden="true">${g.g}</span><div class="col-hd-t"><h4 class="col-name">${escHtml(gl.title)}</h4><div class="col-tags"><span class="tag tx">${escHtml(c.cat)}</span>${conf}</div></div>${goal}</div>
+    <p class="col-loc"><span aria-hidden="true">📍</span><span><b>Fundort</b> ${escHtml(c.loc)}</span></p>
+    <p class="col-lead">${escHtml(sp.head)}</p>${more}
+  </article>`;
+}
+// Sortierung: verpassbare Einträge als eigene Gruppe zuerst (sie verlangen eine Handlung), danach Themenfolge, innerhalb gleicher Gruppe Datenreihenfolge.
 function renderCollectibles(){
-  const tb=document.getElementById('col-tb');
-  if(!tb)return;
-  const f=(document.getElementById('cof-miss')||{}).value||'';
-  const list=COLLECTIBLES.filter(c=>!f||(f==='1'?c.miss:!c.miss));
+  const host=document.getElementById('col-grid');
+  if(!host)return;
+  _colBars();_colBar();
+  const was={};
+  host.querySelectorAll('.card[data-item-id] details.item-more[open]').forEach(d=>{if(d.dataset.srchOpen!=='1')was[d.closest('.card').dataset.itemId]=1;});
+  const ord=COL_GRP.concat([COL_OTHER]).map(g=>g.k);
+  const list=COLLECTIBLES.map((c,i)=>({c,i,g:_colGrp(c.cat)}))
+    .filter(x=>(!COL_MISS||(COL_MISS==='1'?x.c.miss:!x.c.miss))&&(!COL_TH||x.g.k===COL_TH))
+    .sort((a,b)=>(ord.indexOf(a.g.k)-ord.indexOf(b.g.k))||(a.i-b.i));
+  const grp=(arr,cls,t)=>arr.length?`<div class="col-grp${cls}"><h3 class="col-grp-t">${t}</h3><div class="col-grp-bd">${arr.map(x=>_colCard(x.c,x.g,!!was[x.c.name])).join('')}</div><span class="col-grp-n" aria-hidden="true"></span></div>`:'';
+  host.innerHTML=grp(list.filter(x=>x.c.miss),' col-grp--miss','<span aria-hidden="true">⚠</span> Verpassbar')
+    +grp(list.filter(x=>!x.c.miss),'','Nicht verpassbar')
+    +(list.length?'':`<p class="col-empty">Keine Einträge für diese Auswahl. <button type="button" class="ichip" onclick="setColFilter('reset')">Filter zurücksetzen</button></p>`);
   const cnt=document.getElementById('cof-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
-  tb.innerHTML=list.map(c=>`<tr data-s="${escHtml([c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase())}">
-    <td><strong>${escHtml(c.name)}</strong>${c.miss?' '+MISS_CHIP_SM:''}</td>
-    <td style="color:var(--dim);white-space:nowrap;font-size:var(--fs-11)">${escHtml(c.cat)}</td>
-    <td style="line-height:1.5">${escHtml(c.detail)}</td>
-    <td style="color:var(--dim);font-size:var(--fs-11)">${escHtml(c.loc)}</td>
-  </tr>`).join('');
-  reapplySearch(tb,cnt,list.length);
+  reapplySearch(host,cnt,list.length);
+}
+// Kennzahl-Kachel: springt zur passenden Karte und hebt sie kurz hervor (setzt Filter zurück, falls die Karte ausgefiltert ist)
+function colJump(name){
+  const find=()=>[...document.querySelectorAll('#col-grid .col-card')].find(e=>e.dataset.itemId===name);
+  let el=find();
+  if(!el&&(COL_MISS||COL_TH)){COL_MISS='';COL_TH='';renderCollectibles();el=find();}
+  if(!el||el.classList.contains('hide'))return;
+  if(window.cdMotion&&cdMotion.scrollTo)cdMotion.scrollTo(el);else el.scrollIntoView({behavior:'smooth',block:'center'});
+  el.classList.remove('col-hit');void el.offsetWidth;el.classList.add('col-hit');
+  try{el.focus({preventScroll:true});}catch(e){}
+  clearTimeout(el._colT);el._colT=setTimeout(()=>el.classList.remove('col-hit'),1800);
 }
 
 // ===== COMPENDIUM-SEKTIONEN (Gatherables / Raetsel / Dyes / Food&Elixirs, seit 2026-06-06) =====
@@ -9834,11 +10313,134 @@ function renderCompendium(secId,DATA,filterId,iconCell,preFilter){
   </tr>`).join('');
   reapplySearch(tb,cnt,list.length);
 }
-function renderGatherables(){renderCompendium('gatherables',GATHERABLES,'gatherables-cat');}
+// ===== SAMMELOBJEKTE (Redesign 10/2026): eigener Renderer mit Kategorie-Chips =====
+// renderCompendium bleibt fuer Raetsel/Dyes/Itemdex unveraendert. Das Select #gatherables-cat bleibt
+// (versteckt) die Quelle des Filters, die Chips setzen es nur. Kategorien kommen dynamisch aus GATHERABLES.
+var GT_GLYPH={'Erz / Mineral':'⛏','Edelstein':'💎','Kraut':'🌿','Kraut (giftig)':'☠','Pilz':'🍄','Spezialmaterial':'✨','Crafting-Material':'🧵','Gemüse / Frucht':'🍎','Fleisch':'🍖'};
+function _gtGlyph(cat){return GT_GLYPH[cat]||'❓';}
+function _gtCats(){
+  const order=Object.keys(GT_GLYPH),z={};
+  GATHERABLES.forEach(g=>{z[g.cat]=(z[g.cat]||0)+1;});
+  const rang=c=>{const i=order.indexOf(c);return i<0?99:i;};
+  return Object.keys(z).sort((a,b)=>rang(a)-rang(b)||a.localeCompare(b,'de')).map(c=>({cat:c,n:z[c]}));
+}
+function setGatherCat(cat){
+  const sel=document.getElementById('gatherables-cat');if(!sel)return;
+  if(sel.options.length<2)renderGatherables();
+  sel.value=[...sel.options].some(o=>o.value===cat)?cat:'';
+  renderGatherables();
+}
+function _gtBar(cats,f){
+  const el=document.getElementById('gatherables-bar');if(!el)return;
+  if(!el.children.length){
+    const chips=[{cat:'',label:'Alle',g:'❒',n:GATHERABLES.length}].concat(cats.map(c=>({cat:c.cat,label:c.cat,g:_gtGlyph(c.cat),n:c.n})));
+    el.innerHTML='<span class="ibar-l">Kategorie:</span>'+chips.map(c=>`<button type="button" class="ichip" data-cat="${escHtml(c.cat)}" aria-pressed="false" onclick="setGatherCat(this.dataset.cat)"><span class="gt-chip-g" aria-hidden="true">${c.g}</span>${escHtml(c.label)}<span class="n">${c.n}</span></button>`).join('');
+  }
+  el.querySelectorAll('.ichip').forEach(b=>{const on=b.dataset.cat===f;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
+}
+function _gtIco(c){
+  const g=_gtGlyph(c.cat);
+  const p=c.icon||(Array.isArray(c.icons)&&c.icons[0])||'';
+  const src=_sgSrc(p);
+  return src?`<span class="gt-ico" data-g="${g}" aria-hidden="true"><img class="item-ico" src="${escHtml(src)}" alt="" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('gt-noimg');this.remove()"></span>`:`<span class="gt-ico gt-noimg" data-g="${g}" aria-hidden="true"></span>`;
+}
+function _gtRow(c,wasOpen){
+  const sp=_locSplit(c.detail,240);
+  const s=[c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase();
+  const lm=String(c.loc||'').match(/^(.+?)\s*(Quelle:.*)$/);
+  const conf=_sgConf(c,'gt-conf');
+  return `<tr data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml([c.name,c.cat,sp.head,c.loc].join(' '))}" data-item-hidden="${escHtml(sp.rest)}">
+    <td class="gt-td-name"><div class="gt-name">${_gtIco(c)}<div class="gt-name-tx"><strong>${escHtml(c.name)}</strong>${c.miss||conf?`<div class="gt-flags">${c.miss?MISS_CHIP_SM:''}${conf}</div>`:''}</div></div></td>
+    <td class="gt-td-cat"><span class="gt-cat"><span aria-hidden="true">${_gtGlyph(c.cat)}</span>${escHtml(c.cat)}</span></td>
+    <td class="gt-td-det"><p class="gt-lead">${escHtml(sp.head)}</p>${sp.rest?`<details class="item-more gt-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Mehr lesen</summary><div class="item-more-body"><p class="gt-rest">${escHtml(sp.rest)}</p></div></details>`:''}</td>
+    <td class="gt-td-loc"><span class="gt-loc-l"><span aria-hidden="true">📍</span>Fundort</span><span class="gt-loc">${escHtml(lm?lm[1]:c.loc)}</span>${lm?`<span class="gt-src">${escHtml(lm[2])}</span>`:''}</td>
+  </tr>`;
+}
+function renderGatherables(){
+  const tb=document.getElementById('gatherables-tb');if(!tb)return;
+  const sel=document.getElementById('gatherables-cat');
+  const cats=_gtCats();
+  const nAll=document.getElementById('gt-n-all');if(nAll)nAll.textContent=GATHERABLES.length;
+  if(sel&&sel.options.length!==cats.length+1){const v=sel.value;sel.innerHTML='<option value="">Alle Kategorien</option>'+cats.map(c=>`<option value="${escHtml(c.cat)}">${escHtml(c.cat)}</option>`).join('');sel.value=v;}
+  const f=(sel&&sel.value)||'';
+  _gtBar(cats,f);
+  const list=GATHERABLES.filter(x=>!f||x.cat===f);
+  const cnt=document.getElementById('gatherables-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
+  const was={};
+  tb.querySelectorAll('tr[data-item-id] details.item-more[open]').forEach(d=>{if(d.dataset.srchOpen!=='1')was[d.closest('tr').dataset.itemId]=1;});
+  tb.innerHTML=list.map(c=>_gtRow(c,was[c.name])).join('');
+  reapplySearch(tb,cnt,list.length);
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  if(q){const qF=_fold(q);tb.querySelectorAll('tr[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
+}
 function renderPuzzles(){renderCompendium('puzzles',PUZZLES,'puzzles-cat');}
 function dyeChip(c){var col=escHtml(c.color||'#888');if(c.icon)return '<span class="dye-chip" data-c="'+col+'" style="border-color:'+col+'"><img src="'+escHtml(c.icon)+'" alt="" loading="lazy" onerror="this.parentNode.style.background=this.parentNode.dataset.c;this.remove()"></span>';return '<span class="dye-chip" style="border-color:'+col+';background:'+col+'"></span>';}
 function renderDyes(){renderCompendium('dyes',DYES,'dyes-cat',dyeChip);}
-function renderFood(){renderCompendium('food',FOOD_ELIXIRS,'food-cat');}
+// ===== KOCHEN & ELIXIERE (Redesign 10/2026): Karten statt Tabelle. Eigener Renderer, renderCompendium bleibt fuer
+// Gatherables/Raetsel/Dyes/Itemdex unveraendert. Strukturfelder (lead/fx/tiers/recipe/alt/station/learn/buy/src) stehen
+// wortgetreu aus detail/loc in FOOD_ELIXIRS; detail und loc bleiben vollstaendig und stehen in "Volltext lesen".
+const FD_CATS=[
+  {cat:'Food — Ice Resistance',g:'❄',l:'Ice Resistance',grp:'food',c:'tt'},
+  {cat:'Food — Fire Resistance',g:'🔥',l:'Fire Resistance',grp:'food',c:'tr'},
+  {cat:'Elixir — Angriff/Tempo',g:'⚔',l:'Angriff/Tempo',grp:'elix',c:'tg'},
+  {cat:'Elixir — Verteidigung',g:'🛡',l:'Verteidigung',grp:'elix',c:'tg'},
+  {cat:'Elixir — Spirit/Stamina',g:'🌀',l:'Spirit/Stamina',grp:'elix',c:'tg'},
+  {cat:'Elixir — Wiederbelebung',g:'✚',l:'Wiederbelebung',grp:'elix',c:'tg'}
+];
+const FD_GRPS=[{k:'food',t:'Feldgerichte'},{k:'elix',t:'Elixiere'}];
+const FD_FX={hp:'❤',ice:'❄',fire:'🔥',spirit:'🌀',stam:'🌀',dur:'⏱',rev:'✚'};
+let FOOD_CAT='';
+function setFoodCat(c){FOOD_CAT=c||'';renderFood();}
+function _fdCard(c,wasOpen){
+  const k=FD_CATS.find(x=>x.cat===c.cat)||{g:'❓',l:String(c.cat||'Sonstiges'),c:'tx'};
+  const paths=Array.isArray(c.icons)?c.icons:(c.icon?[c.icon]:[]);
+  const srcs=paths.map(p=>_sgSrc(p)).filter(Boolean);
+  const ico=`<span class="fd-ico${srcs.length>1?' fd-ico-set':''}"><span class="fd-ico-g" aria-hidden="true">${k.g}</span>${srcs.map(s=>`<img src="${escHtml(s)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`).join('')}</span>`;
+  const conf=_sgConf(c,'tag pv fd-conf');
+  const lead=c.lead||_locSplit(c.detail,160).head;
+  const fx=(c.fx||[]).map(x=>`<li class="fd-fx-i fd-fx-${escHtml(x[0])}"><span class="fd-fx-g" aria-hidden="true">${FD_FX[x[0]]||'•'}</span><span class="fd-fx-k">${escHtml(x[1])}</span><b class="fd-fx-v">${escHtml(x[2])}</b></li>`).join('');
+  const tiers=(c.tiers||[]).map(t=>`<li><span class="fd-tier-n">${escHtml(t[0])}</span><span class="fd-tier-e">${escHtml(t[1])}</span><span class="fd-tier-d"><span aria-hidden="true">⏱</span> ${escHtml(t[2])}</span></li>`).join('');
+  const rec=(c.recipe||[]).map(r=>`<li><span class="fd-q">${escHtml(r[0]||'')}</span><span class="fd-ing-n">${escHtml(r[1])}${r[2]?` <span class="fd-ing-alt">${escHtml(/^oder /.test(r[2])?r[2]:'('+r[2]+')')}</span>`:''}</span></li>`).join('');
+  const rows=[c.station&&['⚒','Herstellen',c.station],c.learn&&['📜','Lernen',c.learn],c.buy&&['💰','Kaufen',c.buy]].filter(Boolean);
+  if(!rows.length&&c.loc)rows.push(['📍','Fundort',c.loc]);
+  const srcB=(c.src||[]).length?`<div class="fd-row"><dt><span aria-hidden="true">🔗</span> Quellen</dt><dd class="fd-srcs">${c.src.map(s=>`<span class="fd-sb">${escHtml(s)}</span>`).join('')}</dd></div>`:'';
+  const s=[c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase();
+  const flat=a=>(a||[]).map(x=>Array.isArray(x)?x.join(' '):x).join(' ');
+  const vis=[c.name,c.cat,k.l,lead,flat(c.fx),flat(c.tiers),flat(c.recipe),c.alt,c.station,c.learn,c.buy,flat(c.src)].filter(Boolean).join(' ').toLowerCase();
+  const hid=[c.detail,c.loc].join(' ').toLowerCase();
+  return `<article class="card fd-card" data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(hid)}">
+    <header class="fd-hd">${ico}<div class="fd-hd-t"><h4 class="fd-name">${escHtml(c.name)}</h4><div class="fd-tags"><span class="tag ${k.c} fd-cat" title="${escHtml(c.cat)}"><span aria-hidden="true">${k.g}</span> ${escHtml(k.l)}</span>${c.miss?MISS_CHIP_SM:''}${conf}</div></div></header>
+    <p class="fd-lead">${escHtml(lead)}</p>
+    ${fx?`<ul class="fd-fx" aria-label="Wirkung">${fx}</ul>`:''}${tiers?`<ol class="fd-tiers" aria-label="Wirkung je Stufe">${tiers}</ol>`:''}${c.alt?`<p class="fd-alt"><span aria-hidden="true">≈</span> ${escHtml(c.alt)}</p>`:''}
+    ${rec?`<div class="fd-rec"><h5 class="fd-k">Rezept</h5><ul class="fd-ing${(c.recipe||[]).some(r=>r[0])?'':' fd-ing-nq'}">${rec}</ul></div>`:''}
+    <dl class="fd-meta">${rows.map(r=>`<div class="fd-row"><dt><span aria-hidden="true">${r[0]}</span> ${r[1]}</dt><dd>${escHtml(r[2])}</dd></div>`).join('')}${srcB}</dl>
+    <details class="item-more fd-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Volltext lesen</summary><div class="item-more-body"><p class="fd-full">${escHtml(c.detail)}</p><p class="fd-full"><b>Fundort:</b> ${escHtml(c.loc)}</p></div></details>
+  </article>`;
+}
+function renderFood(){
+  const root=document.getElementById('food-tb');
+  if(!root)return;
+  const chips=document.getElementById('food-chips');
+  if(chips){
+    if(!chips.firstChild){
+      const n=cat=>FOOD_ELIXIRS.filter(x=>!cat||x.cat===cat).length;
+      let prev='';
+      chips.innerHTML=[{cat:'',g:'❒',l:'Alle'}].concat(FD_CATS).filter(k=>!k.cat||n(k.cat)).map(k=>{const sep=k.grp&&prev&&k.grp!==prev?'<span class="fd-chip-sep" aria-hidden="true"></span>':'';prev=k.grp||'all';return sep+`<button type="button" class="ichip fd-chip" data-c="${escHtml(k.cat)}" title="${escHtml(k.cat||'Alle Kategorien')}" onclick="setFoodCat(this.dataset.c)" aria-pressed="false"><span class="fd-chip-g" aria-hidden="true">${k.g}</span>${escHtml(k.l)}<span class="n">${n(k.cat)}</span></button>`;}).join('');
+    }
+    chips.querySelectorAll('.fd-chip').forEach(b=>{const on=b.dataset.c===FOOD_CAT;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
+  }
+  const open=_snapshotOpenItemDetails(root);
+  const list=FOOD_ELIXIRS.filter(x=>!FOOD_CAT||x.cat===FOOD_CAT);
+  const grpOf=x=>(FD_CATS.find(k=>k.cat===x.cat)||{grp:/^Elixir/.test(x.cat)?'elix':'food'}).grp;
+  root.innerHTML=FD_GRPS.map(g=>{
+    const items=list.filter(x=>grpOf(x)===g.k);
+    if(!items.length)return '';
+    return `<section class="fd-grp"><h3 class="sub-t fd-grp-t">${g.t}</h3><div class="grid fd-grid">${items.map(c=>_fdCard(c,open[c.name])).join('')}</div><span class="fd-grp-n" aria-hidden="true"></span></section>`;
+  }).join('');
+  const cnt=document.getElementById('food-cnt');
+  if(cnt)cnt.textContent=list.length+' Einträge';
+  reapplySearch(root,cnt,list.length);
+}
 
 // ===== SKILLS =====
 function renderUnlockTable(){
@@ -10829,15 +11431,64 @@ function renderWitches(){
 
 // ===== WEAPON UPGRADES =====
 
+// Redesign 10/2026: statt einer 5-Spalten-Tabelle ein Stufenpfad (1-4, 5-9, 10) plus eigene Karte
+// fuer die Abyss-Gear-Slots. Grundlage sind die wortgetreuen Strukturfelder in WEAPON_UPGRADES
+// (stufe/gruppen/bsp/fakten/...); mat und note bleiben vollstaendig in data-s und, wo sie nicht
+// komplett in Strukturfelder aufgeteilt sind (noteGeteilt), im aufklappbaren Teil.
+function _upgIco(ref){
+  if(!ref)return '';
+  const e=[].concat(typeof GATHERABLES!=='undefined'?GATHERABLES:[],typeof ITEMS!=='undefined'?ITEMS:[]).find(x=>x.name===ref);
+  const p=e&&e.icon;if(!p)return '';
+  const src=p.startsWith('/assets/')?SYNTH_CDN+p:p.startsWith('cd_assets/')?p:'';
+  return src?`<img class="upg-ico" src="${escHtml(src)}" alt="" loading="lazy" decoding="async" onerror="this.parentNode.classList.remove('upg-chip-i');this.remove()">`:'';
+}
+function _upgMat(u){
+  return (u.gruppen||[]).map(g=>`<div class="upg-grp"><span class="upg-k">${escHtml(g.t)}</span>${g.alt.map((a,i)=>`${i?'<span class="upg-oder">oder</span>':''}<div class="upg-chips">${a.m.map(m=>`<span class="upg-chip${m.ref&&_upgIco(m.ref)?' upg-chip-i':''}">${_upgIco(m.ref)}<span class="upg-cn">${escHtml(m.n)}</span>${m.ab?`<span class="upg-ab">${escHtml(m.ab)}</span>`:''}</span>`).join('')}${a.zb?`<span class="upg-zb">${escHtml(a.zb)}</span>`:''}</div>`).join('')}</div>`).join('');
+}
+function _upgBsp(b){
+  if(!b)return '';
+  return `<div class="upg-bsp"><span class="upg-k">Beispiel ${escHtml(b.n)}</span><dl class="upg-bsp-l">${b.z.map(z=>`<div class="upg-bsp-r"><dt>Stufe ${escHtml(z[0])}</dt><dd>${escHtml(z[1])}</dd></div>`).join('')}</dl>${b.hw?`<p class="upg-hw">${escHtml(b.hw)}</p>`:''}</div>`;
+}
+function _upgSuch(u){return [u.level,u.mat,u.effect,u.unlock,u.note].join(' ').toLowerCase();}
 function renderWeaponUpgrade(){
-  document.getElementById('wupgrade-tb').innerHTML=WEAPON_UPGRADES.map(u=>`
-    <tr>
-      <td><span class="upgrade-lvl">${u.level}</span></td>
-      <td>${u.mat}</td>
-      <td><span class="upgrade-effect">${u.effect}</span></td>
-      <td>${u.unlock}</td>
-      <td style="color:var(--dim);font-size:var(--fs-10-5)">${u.note}</td>
-    </tr>`).join('');
+  const pathEl=document.getElementById('wupgrade-path'),gearEl=document.getElementById('wupgrade-gear');
+  if(!pathEl||!gearEl)return;
+  const ortB=u=>`<p class="upg-ort upg-ort-${u.ort==='hexe'?'hexe':'schmied'}"><span aria-hidden="true">${u.ort==='hexe'?'✦':'⚒'}</span> ${escHtml(u.unlock)}</p>`;
+  const fakten=u=>u.fakten&&u.fakten.length?`<div class="upg-fakten">${u.fakten.map(f=>`<span class="upg-fakt">${escHtml(f)}</span>`).join('')}</div>`:'';
+  const mehr=u=>{
+    const body=_upgBsp(u.bsp)+(u.noteGeteilt?'':`<div class="upg-note"><span class="upg-k">Notiz</span><p class="upg-rest">${escHtml(u.note)}</p></div>`);
+    return body?`<details class="item-more upg-more"><summary>${u.bsp?(u.noteGeteilt?'Beispiel zeigen':'Beispiel und Notiz'):'Notiz lesen'}</summary><div class="item-more-body">${body}</div></details>`:'';
+  };
+  const hidden=u=>[u.mat,u.note].join(' ');
+  const vis=u=>[u.level,u.effect,u.unlock,u.hinweis,u.alt,(u.fakten||[]).join(' '),(u.gruppen||[]).map(g=>g.t+' '+g.alt.map(a=>a.m.map(m=>m.n+' '+(m.ab||'')).join(' ')+' '+(a.zb||'')).join(' ')).join(' '),(u.kosten||[]).map(k=>k.join(' ')).join(' ')].filter(Boolean).join(' ');
+  const stufen=WEAPON_UPGRADES.filter(u=>u.system!=='gear');
+  pathEl.innerHTML=stufen.map((u,i)=>`<li class="upg-step${u.max?' upg-max':''}" data-s="${escHtml(_upgSuch(u))}" data-item-id="${escHtml(u.level)}" data-item-visible="${escHtml(vis(u))}" data-item-hidden="${escHtml(hidden(u))}">
+    <span class="upg-node" aria-hidden="true">${escHtml(u.stufe||String(i+1))}</span>
+    <div class="card upg-card">
+      <h4 class="upg-t">${escHtml(u.level)}</h4>
+      ${ortB(u)}
+      <p class="upg-eff"><span class="upg-k">Effekt</span><span class="upg-ev">${escHtml(u.effect)}</span></p>
+      <div class="upg-mat">${_upgMat(u)}${u.alt?`<p class="upg-alt">${escHtml(u.alt)}</p>`:''}</div>
+      ${u.hinweis?`<p class="upg-hinweis"><span class="upg-k">Hinweis</span>${escHtml(u.hinweis)}</p>`:''}
+      ${fakten(u)}
+      ${mehr(u)}
+    </div>
+  </li>`).join('');
+  gearEl.innerHTML=WEAPON_UPGRADES.filter(u=>u.system==='gear').map(u=>`<article class="card upg-gear" data-s="${escHtml(_upgSuch(u))}" data-item-id="${escHtml(u.level)}" data-item-visible="${escHtml(vis(u))}" data-item-hidden="${escHtml(hidden(u))}">
+    <div class="upg-gear-hd">
+      <span class="upg-tile">${_upgIco('Abyss Gear')||'<span class="upg-tile-g" aria-hidden="true">✦</span>'}</span>
+      <div class="upg-gear-tt"><h4 class="upg-t">${escHtml(u.level)}</h4>${fakten(u)}</div>
+    </div>
+    <div class="upg-gear-bd">
+      <div class="upg-gear-a">
+        ${ortB(u)}
+        <p class="upg-eff"><span class="upg-k">Effekt</span><span class="upg-ev">${escHtml(u.effect)}</span></p>
+        <div class="upg-mat">${_upgMat(u)}</div>
+      </div>
+      ${u.kosten?`<div class="upg-gear-b"><span class="upg-k">${escHtml(u.kostenT||'Kosten')}</span><dl class="upg-kost">${u.kosten.map(k=>`<div class="upg-kost-r"><dt>${escHtml(k[0])}</dt><dd><b>${escHtml(k[1])}</b>${k[2]?`<span class="upg-kost-x">${escHtml(k[2])}</span>`:''}</dd></div>`).join('')}</dl>${u.kostenQ?`<p class="upg-hw">${escHtml(u.kostenQ)}</p>`:''}</div>`:''}
+    </div>
+    ${mehr(u)}
+  </article>`).join('');
 }
 
 // ===== ITEMDEX: Bereichsleiste =====
