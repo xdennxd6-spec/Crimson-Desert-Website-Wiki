@@ -67,6 +67,7 @@
 <link rel="preload" as="script" href="data/d06-items.js">
 <link rel="preload" as="script" href="data/d07-patches.js">
 <link rel="preload" as="script" href="data/d08-ruins-data.js">
+<link rel="preload" as="script" href="data/d09-scenes.js">
 <style>
 /* ============================================================
    CRIMSON DESERT — FELDATLAS · HOLO-GLAS  (Design-Sync 2026-07-04)
@@ -3363,6 +3364,10 @@ html.cd-motion .cdx-wait,html.cd-motion .cdx-run{transition:none!important}
 html.cd-motion .cdx-wait{opacity:0;transform:translateY(var(--cdx-y,16px))}
 html.cd-motion .cdx-in{transform:translateY(var(--cdx-t,0px))}
 html.cd-motion tr.cdx-wait,html.cd-motion tr.cdx-in{transform:none}
+/* R2: Freigabe als CSS-Übergang (Compositor), Staffel per --cdx-d aus dem JS; !important schlägt die alte reduce-Regel */
+html.cd-motion .cdx-show{transition:opacity .42s ease-out var(--cdx-d,0s),transform .42s cubic-bezier(.22,.7,.2,1) var(--cdx-d,0s)!important}
+@media(max-width:860px){html.cd-motion .cdx-show{transition-duration:.25s,.25s!important}}
+@media print{.cdx-show{transition:none!important}}
 /* reduce + Bewegung an: Theme-Übergänge wie bei no-preference */
 @media (prefers-reduced-motion: reduce){:where(html.cd-motion,html.cd-motion :is(body,#sidebar,#sbar,.card,.sk-c,.fac-reg,.sec,.tab,.ni,#main,.witch-card,.set-card,.chap,.ch-card,.te-grp,.cmt-item,.build-card,table,thead tr,select.fs,.kbd)){transition:background-color .25s ease,border-color .25s ease,color .25s ease}}
 /* Nach oben: weich ein- und ausblenden */
@@ -3560,15 +3565,7 @@ html.cd-motion img[data-cd-iw="1"]{opacity:0;transition:none}   /* ausblenden so
    Freies ::after (.card::before = roter Balken bleibt); z-index:-1 im eigenen Stapelkontext:
    über Kartengrund, unter Inhalt. */
 @media (hover:hover) and (pointer:fine){
-  html.cd-motion :is(.so-tile,.so-chip,.pet-card,.grid>.card){isolation:isolate}
-  html.cd-motion :is(.so-tile,.so-chip,.pet-card){position:relative}
-  html.cd-motion :is(.so-tile,.so-chip,.pet-card,.grid>.card)::after{
-    content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
-    opacity:0;transition:opacity .25s;transition-duration:.25s!important;
-    background:radial-gradient(var(--sr,260px) circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--red) 13%,transparent),transparent 70%)}
-  html.cd-motion .so-chip{--sr:110px}
-  html.cd-motion .pet-card{--sr:150px}
-  html.cd-motion :is(.so-tile,.so-chip,.pet-card,.grid>.card):hover::after{opacity:1}
+  /* Lichtkegel selbst: seit Redesign 2 für alle Kartentypen im Block "R2 FUNDAMENT" (Liste CD_SPOT_SEL) */
   /* Lift nur, wo keiner existiert (.card/.pet-card haben einen); Kachel -1 px wird -2 px */
   html.cd-motion .so-tile{transition-duration:.15s!important}
   html.cd-motion .so-tile:hover{transform:translateY(-2px)}
@@ -3578,7 +3575,7 @@ html.cd-motion img[data-cd-iw="1"]{opacity:0;transition:none}   /* ausblenden so
 /* Knöpfe, Chips, Filter, Reiter: leicht eindrücken (die meisten haben transition:all) */
 html.cd-motion .so-search{transition:border-color .15s,color .15s,transform .15s;transition-duration:.15s!important}
 html.cd-motion .ichip{transition:background .18s,border-color .18s,color .18s,transform .15s}
-html.cd-motion :is(.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.empty-state-action,.cmp-trigger,.ic-trigger,.rb-trigger,.defeat-btn,.copy-btn,.sy-btn,.xp-btn,.sim-btn,.fa-btn,.ch-btn,.boss-notes-btn,.mount-ig-btn,.bo-pill,.ichip,.so-search,.so-chip):active:not(:disabled){transform:scale(.97);transition-duration:.08s!important}
+html.cd-motion :is(.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.empty-state-action,.cmp-trigger,.ic-trigger,.rb-trigger,.defeat-btn,.copy-btn,.sy-btn,.xp-btn,.sim-btn,.fa-btn,.ch-btn,.boss-notes-btn,.mount-ig-btn,.bo-pill,.ichip,.so-search,.so-chip,.cd-pill):active:not(:disabled){transform:scale(.97);transition-duration:.08s!important}
 /* Filter-Neurender (JS Block B): Tween ohne CSS-Übergang */
 html.cd-motion .cd-b4-in{transition:none!important}
 /* <details> weich auf/zu (Chrome 131+, sonst Sprung wie bisher). Geschlossen bleibt content-visibility:hidden
@@ -3695,6 +3692,297 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
 }
 /* ==== /Sammelgegenstände ==== */
 /* ==== /Motion B ==== */
+/* ==== R2 FUNDAMENT (Redesign 2, 21.10.2026) · gemeinsame Bausteine ====
+   API und Do/Don't: redesign-2/FUNDAMENT.md. JS-Helfer im Block "R2 FUNDAMENT · Kern" nach den data/*.js.
+   Bausteine: Szene (.cd-scene/.cd-scened), Faltkarte (.cd-fold), Chips (.cd-chip), Effekt-Badges (.cd-fx),
+   Pillen (.cd-pills/.cd-pill), Abhaken (.cd-check), Seitenkopf (.cd-hero), Stepper (.cd-stepper),
+   Fakten (.cd-facts), Hinweis (.cd-note), Quellen (.cd-src), Aufleuchten (.cd-flash), Lichtkegel (.cd-spot).
+   Farben nur über Tokens; Bewegung nur unter html.cd-motion. Bauer schreiben NICHT hier, sondern in ihre R2-Bx-Anker. */
+:root,[data-theme="dark"]{
+  --cd-fx-stam:#5fd394; --cd-fx-hp:#ff6b5e; --cd-fx-spirit:#6ea8ff; --cd-fx-ice:#8fdcff; --cd-fx-fire:#ff9748;
+  --cd-fx-bolt:#f0d04e; --cd-fx-poison:#a8e04a; --cd-fx-atk:#ff7849; --cd-fx-def:#a9b7cc; --cd-fx-speed:#46d6c6;
+  --cd-fx-res:#b7a0ff; --cd-fx-neutral:#a6a8c6;
+  --cd-ok:#5fd394;
+  --cd-scene-op:.32; --cd-scene-op-hero:.42; --cd-glyph-op:.2;
+}
+[data-theme="sepia"]{
+  --cd-fx-stam:#6fbf8c; --cd-fx-hp:#e8786a; --cd-fx-spirit:#7d9fdc; --cd-fx-ice:#8fc4dc; --cd-fx-fire:#df9256;
+  --cd-fx-bolt:#d6bb5c; --cd-fx-poison:#a3c45a; --cd-fx-atk:#e2825c; --cd-fx-def:#a2adbe; --cd-fx-speed:#5fbcb1;
+  --cd-fx-res:#ab9ae0; --cd-fx-neutral:#9698b4;
+  --cd-ok:#6fbf8c;
+  --cd-scene-op:.24; --cd-scene-op-hero:.32; --cd-glyph-op:.16;
+}
+[data-theme="amoled"]{
+  --cd-fx-stam:#5fd394; --cd-fx-hp:#ff6b5e; --cd-fx-spirit:#6ea8ff; --cd-fx-ice:#8fdcff; --cd-fx-fire:#ff9748;
+  --cd-fx-bolt:#f0d04e; --cd-fx-poison:#a8e04a; --cd-fx-atk:#ff7849; --cd-fx-def:#a9b7cc; --cd-fx-speed:#46d6c6;
+  --cd-fx-res:#b7a0ff; --cd-fx-neutral:#9a9cbb;
+  --cd-ok:#5fd394;
+  --cd-scene-op:.36; --cd-scene-op-hero:.46; --cd-glyph-op:.22;
+}
+.cd-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.cd-i{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+.cd-g{font-family:'Segoe UI Symbol','Noto Sans Symbols 2','Noto Sans Symbols','DejaVu Sans',var(--f-body),sans-serif;font-style:normal;line-height:1}
+
+/* -- Szene: Bild weich rechts in der Karte (Epitome-Technik), sonst Akzentverlauf + Glyphe -- */
+.cd-scened{position:relative;isolation:isolate;overflow:hidden}
+.cd-scene{--cd-acc:var(--red);position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;border-radius:inherit;container-type:size;
+  background:radial-gradient(70% 140% at 100% 30%,color-mix(in srgb,var(--cd-acc) 24%,transparent),transparent 72%),
+    linear-gradient(90deg,transparent 40%,color-mix(in srgb,var(--cd-acc) 7%,transparent))}
+.cd-scene-img{position:absolute;top:0;right:0;width:var(--cd-scene-w,62%);height:100%;max-width:none;object-fit:cover;object-position:var(--cd-pos,50% 40%);opacity:var(--cd-op,var(--cd-scene-op));
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 45%,#000 93%,rgba(0,0,0,.3) 100%),linear-gradient(180deg,transparent 0%,#000 20%,#000 80%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0%,#000 45%,#000 93%,rgba(0,0,0,.3) 100%),linear-gradient(180deg,transparent 0%,#000 20%,#000 80%,transparent 100%);mask-composite:intersect}
+.cd-scene::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--card) 55%,transparent) 0%,color-mix(in srgb,var(--card) 20%,transparent) 42%,transparent 68%)}
+.cd-scene-g{position:absolute;right:max(10px,3%);top:50%;transform:translateY(-50%) rotate(-6deg);font-size:clamp(36px,82cqh,170px);color:var(--cd-acc);opacity:var(--cd-glyph-op);white-space:nowrap;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 60%);mask-image:linear-gradient(90deg,transparent,#000 60%)}
+.cd-scene:has(.cd-scene-img) .cd-scene-g{display:none}
+.cd-scene--full .cd-scene-img{width:100%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.55) 30%,#000 60%,#000 96%,rgba(0,0,0,.4) 100%),linear-gradient(180deg,transparent 0%,#000 18%,#000 78%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.55) 30%,#000 60%,#000 96%,rgba(0,0,0,.4) 100%),linear-gradient(180deg,transparent 0%,#000 18%,#000 78%,transparent 100%)}
+.cd-scene--hero{--cd-scene-op:var(--cd-scene-op-hero)}
+@media (max-width:600px){.cd-scene-img{width:var(--cd-scene-w-m,78%)}.cd-scene::after{background:linear-gradient(90deg,color-mix(in srgb,var(--card) 62%,transparent) 0%,color-mix(in srgb,var(--card) 30%,transparent) 50%,transparent 80%)}}
+
+/* -- Chips -- */
+.cd-chips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.cd-chip{--c:var(--dim);display:inline-flex;align-items:center;gap:5px;min-height:24px;max-width:100%;padding:2px 10px;border:1px solid color-mix(in srgb,var(--c) 34%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--c) 8%,transparent);font-size:12px;line-height:1.3;color:var(--text);overflow-wrap:anywhere}
+.cd-chip b{font-family:var(--f-mono);font-weight:700;color:var(--c);font-variant-numeric:tabular-nums}
+.cd-chip .cd-i,.cd-chip .cd-g{color:var(--c);font-size:13px}
+.cd-chip--gold{--c:var(--gold)}.cd-chip--red{--c:var(--red)}.cd-chip--violet{--c:var(--violet)}.cd-chip--ok{--c:var(--cd-ok)}.cd-chip--warn{--c:var(--warn)}.cd-chip--ice{--c:var(--cd-fx-ice)}
+
+/* -- Effekt-Badges (cdFx) -- */
+.cd-fx-list{display:flex;flex-wrap:wrap;gap:6px}
+.cd-fx{--c:var(--cd-fx-neutral);display:inline-flex;align-items:center;gap:6px;max-width:100%;min-height:26px;padding:3px 10px 3px 7px;border:1px solid color-mix(in srgb,var(--c) 42%,transparent);border-radius:8px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--c) 14%,transparent),color-mix(in srgb,var(--c) 5%,transparent));font-size:12px;line-height:1.35;color:var(--text);overflow-wrap:anywhere}
+.cd-fx .cd-i{width:15px;height:15px;color:var(--c)}
+.cd-fx--stam{--c:var(--cd-fx-stam)}.cd-fx--hp{--c:var(--cd-fx-hp)}.cd-fx--spirit{--c:var(--cd-fx-spirit)}.cd-fx--ice{--c:var(--cd-fx-ice)}
+.cd-fx--fire{--c:var(--cd-fx-fire)}.cd-fx--bolt{--c:var(--cd-fx-bolt)}.cd-fx--poison{--c:var(--cd-fx-poison)}.cd-fx--atk{--c:var(--cd-fx-atk)}
+.cd-fx--def{--c:var(--cd-fx-def)}.cd-fx--speed{--c:var(--cd-fx-speed)}.cd-fx--res{--c:var(--cd-fx-res)}
+
+/* -- Faltkarte (cdFold) -- */
+.cd-fold{--cd-acc:var(--red);position:relative;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);box-shadow:var(--shadow-soft);overflow:hidden;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 12px)}
+.cd-fold[open]{border-color:var(--line-strong)}
+.cd-fold>summary{list-style:none;position:relative;isolation:isolate;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"ico main aside arr";align-items:center;gap:6px 14px;
+  min-height:68px;padding:12px 14px 12px 18px;cursor:pointer;border-radius:inherit;-webkit-tap-highlight-color:transparent}
+.cd-fold>summary::-webkit-details-marker{display:none}
+.cd-fold>summary::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--cd-acc);opacity:.8;box-shadow:0 0 12px color-mix(in srgb,var(--cd-acc) 50%,transparent)}
+.cd-fold>summary:focus-visible{outline:2px solid var(--red);outline-offset:-3px;box-shadow:none}
+.cd-fold-ico{grid-area:ico;display:grid;place-items:center;width:46px;height:46px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--cd-acc);font-size:22px;overflow:hidden}
+.cd-fold-ico img{width:40px;height:40px;object-fit:contain}
+.cd-fold-ico.is-photo img{width:100%;height:100%;object-fit:cover}
+.cd-fold-main{grid-area:main;display:flex;flex-direction:column;gap:3px;min-width:0}
+.cd-fold-t{margin:0;font-family:var(--f-display);font-size:15.5px;font-weight:700;line-height:1.3;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
+.cd-fold-lead{max-width:70ch;font-size:13px;line-height:1.45;color:var(--dim)}
+.cd-fold:not([open]) .cd-fold-lead{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.cd-fold-chips{margin-top:5px}
+.cd-fold-aside{grid-area:aside;display:flex;flex-direction:column;align-items:flex-end;gap:5px;min-width:0}
+.cd-fold-arr{grid-area:arr;display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;color:var(--dim);background:color-mix(in srgb,var(--card) 50%,transparent)}
+.cd-fold-arr .cd-i{width:15px;height:15px}
+.cd-fold>summary:hover .cd-fold-arr{color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
+.cd-fold[open] .cd-fold-arr{transform:rotate(180deg);color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
+.cd-fold-body{display:grid;gap:14px;padding:14px 18px 18px;border-top:1px solid var(--line-soft);font-size:13.5px;line-height:1.6;color:var(--text)}
+.cd-fold-body>p{margin:0;max-width:72ch}
+.cd-fold-body:empty{display:none}
+/* Fortschritt in der Kopfzeile */
+.cd-prog{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cd-prog-bar{position:relative;width:64px;height:5px;border-radius:5px;background:var(--line);overflow:hidden}
+.cd-prog-bar>i{position:absolute;inset:0 auto 0 0;width:var(--p,0%);border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--glo))}
+.cd-prog.is-done{color:var(--cd-ok)}.cd-prog.is-done .cd-prog-bar>i{background:var(--cd-ok)}
+/* Liste von Faltkarten: einheitlicher Abstand */
+.cd-folds{display:grid;gap:10px}
+.cd-folds>.cd-fold{content-visibility:auto;contain-intrinsic-size:auto 76px}
+.cd-folds>.cd-fold[open]{content-visibility:visible}
+@media (max-width:600px){
+  .cd-fold>summary{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"ico main arr" "ico aside aside";padding:12px 12px 12px 16px;gap:6px 12px}
+  .cd-fold-ico{width:40px;height:40px;font-size:19px;align-self:start}
+  .cd-fold-ico img{width:34px;height:34px}
+  .cd-fold-aside{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
+  .cd-fold-body{padding:12px 14px 16px}
+}
+/* sanft auf/zu (Chrome 131+), sonst Sprung; Such-Öffnung und Druck ohne Übergang */
+@supports (interpolate-size:allow-keywords) and selector(::details-content){
+  html.cd-motion .cd-fold{interpolate-size:allow-keywords}
+  html.cd-motion .cd-fold::details-content{block-size:0;overflow-y:clip;transition:block-size .3s cubic-bezier(.22,.8,.3,1),content-visibility .3s allow-discrete;transition-duration:.3s!important}
+  html.cd-motion .cd-fold[open]::details-content{block-size:auto}
+  html.cd-motion .cd-fold[data-srch-open]::details-content,html.cd-b4-still .cd-fold::details-content{transition:none}
+}
+html.cd-motion .cd-fold-arr{transition:transform .3s cubic-bezier(.22,.8,.3,1),color .18s,border-color .18s;transition-duration:.3s!important}
+html.cd-motion .cd-fold[open]:not([data-srch-open])>.cd-fold-body{animation:cdFoldIn .32s ease-out both;animation-duration:.32s!important}
+@keyframes cdFoldIn{from{opacity:0;transform:translateY(-6px)}}
+
+/* -- Pillen (cdPills): Filter (aria-pressed) oder Reiter (role=tab); gleiche Sprache wie .ichip -- */
+.cd-pills{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px}
+.cd-pill{--c:var(--gold);display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 15px;border:1px solid color-mix(in srgb,var(--c) 30%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--c) 8%,transparent);color:var(--c);font:600 12.5px/1.2 var(--f-body);cursor:pointer;white-space:nowrap;transition:background .18s,border-color .18s,color .18s,transform .15s}
+.cd-pill:hover{background:color-mix(in srgb,var(--c) 18%,transparent);border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+.cd-pill[aria-pressed="true"],.cd-pill[aria-selected="true"]{background:var(--c);border-color:var(--c);color:var(--bg)}
+.cd-pill:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.cd-pill-g{font-size:14px}
+.cd-pill-n{margin-left:1px;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:400;opacity:.75;font-variant-numeric:tabular-nums}
+.cd-pills--red .cd-pill{--c:var(--red)}.cd-pills--violet .cd-pill{--c:var(--violet)}
+@media (pointer:coarse){.cd-pill{min-height:44px}}
+@media (max-width:600px){.cd-pills{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding:2px 16px 6px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 22px),transparent)}.cd-pills::-webkit-scrollbar{display:none}.cd-pills--wrap{flex-wrap:wrap;overflow:visible;margin-inline:0;padding:0;-webkit-mask-image:none;mask-image:none}}
+
+/* -- Abhaken (cdCheck) -- */
+.cd-checks{display:grid;gap:8px}
+.cd-check{position:relative;display:flex;align-items:stretch;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.cd-check-l{flex:1;display:flex;align-items:center;gap:12px;min-width:0;min-height:52px;padding:10px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cd-check-in{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.cd-check-box{flex:none;display:grid;place-items:center;width:24px;height:24px;border:1.5px solid var(--line-strong);border-radius:7px;background:var(--panel);color:var(--bg)}
+.cd-check-box .cd-i{width:16px;height:16px;stroke-width:2.4;stroke-dasharray:22;stroke-dashoffset:22}
+.cd-check-in:checked+.cd-check-box{background:var(--gold);border-color:var(--gold)}
+.cd-check-in:checked+.cd-check-box .cd-i{stroke-dashoffset:0}
+.cd-check-in:focus-visible+.cd-check-box{outline:2px solid var(--red);outline-offset:3px}
+.cd-check-l:hover .cd-check-box{border-color:var(--gold)}
+.cd-check-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cd-check-t{font-size:14px;line-height:1.4;color:var(--ink-hi);overflow-wrap:anywhere}
+.cd-check-sub{font-size:12px;line-height:1.45;color:var(--dim)}
+.cd-check:has(.cd-check-in:checked){background:color-mix(in srgb,var(--panel-2) 60%,transparent);border-color:var(--line-soft)}
+.cd-check:has(.cd-check-in:checked) .cd-check-txt{opacity:.55}
+.cd-check:has(.cd-check-in:checked) .cd-check-t{text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--gold) 60%,transparent);text-decoration-thickness:1px}
+.cd-check-go{flex:none;display:grid;place-items:center;min-width:48px;border-left:1px solid var(--line-soft);border-radius:0 12px 12px 0;color:var(--glo);text-decoration:none}
+.cd-check-go:hover{color:var(--rhi);background:color-mix(in srgb,var(--red) 8%,transparent)}
+.cd-check-go:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+html.cd-motion .cd-check-box .cd-i{transition:stroke-dashoffset .28s cubic-bezier(.3,.7,.3,1) .04s;transition-duration:.28s!important}
+html.cd-motion .cd-check-box{transition:background .18s,border-color .18s,transform .18s}
+html.cd-motion .cd-check-in:checked+.cd-check-box{animation:cdTick .32s cubic-bezier(.3,.7,.3,1.4);animation-duration:.32s!important}
+html.cd-motion .cd-check-txt{transition:opacity .25s}
+@keyframes cdTick{40%{transform:scale(1.18)}}
+
+/* -- Seitenkopf (cdHero) -- */
+.cd-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:end;gap:18px 28px;min-height:190px;margin:0 0 22px;padding:26px 28px;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);box-shadow:var(--shadow-soft)}
+.cd-hero-main{display:flex;flex-direction:column;gap:8px;min-width:0}
+.cd-hero-k{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.cd-hero-t{margin:0;font-family:var(--f-display);font-size:clamp(22px,2.6vw,30px);font-weight:700;line-height:1.15;letter-spacing:-.005em;color:var(--ink-hi);text-wrap:balance}
+.cd-hero-sub{margin:0;max-width:60ch;font-size:14px;line-height:1.55;color:var(--dim)}
+.cd-hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}
+.cd-hero-stats[data-n="1"]{grid-template-columns:minmax(0,1fr)}.cd-hero-stats[data-n="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cd-hero-stat{display:flex;flex-direction:column-reverse;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--card) 62%,transparent)}
+.cd-hero-stat dt{font-size:12px;line-height:1.3;color:var(--dim)}
+.cd-hero-stat dd{margin:0;font-family:var(--f-mono);font-size:24px;font-weight:700;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+@media (max-width:860px){.cd-hero{grid-template-columns:minmax(0,1fr);min-height:0;padding:20px 18px}}
+@media (max-width:600px){.cd-hero-stat{padding:10px 12px}.cd-hero-stat dd{font-size:21px}}
+
+/* -- Stepper, Fakten, Hinweis, Quellen -- */
+.cd-stepper{display:grid;margin:0;padding:0;list-style:none;counter-reset:cdst}
+.cd-stepper>li{position:relative;min-height:30px;padding:3px 0 14px 42px;counter-increment:cdst;font-size:13.5px;line-height:1.55;color:var(--text)}
+.cd-stepper>li::before{content:counter(cdst);position:absolute;left:0;top:0;display:grid;place-items:center;width:28px;height:28px;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:50%;
+  background:color-mix(in srgb,var(--gold) 12%,var(--card));font:700 12.5px/1 var(--f-mono);color:var(--gold);font-variant-numeric:tabular-nums}
+.cd-stepper>li::after{content:'';position:absolute;left:13.5px;top:31px;bottom:3px;width:1px;background:linear-gradient(var(--line-strong),var(--line-soft))}
+.cd-stepper>li:last-child{padding-bottom:0}.cd-stepper>li:last-child::after{display:none}
+.cd-step-t{display:block;font-weight:700;color:var(--ink-hi)}
+.cd-step-d{display:block;max-width:70ch;color:var(--text)}
+.cd-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:1px;margin:0;overflow:hidden;border:1px solid var(--line-soft);border-radius:12px;background:var(--line-soft)}
+.cd-facts>div{display:flex;flex-direction:column;gap:2px;min-width:0;padding:9px 12px;background:var(--card)}
+.cd-facts dt{font-size:11.5px;line-height:1.3;letter-spacing:.02em;color:var(--dim)}
+.cd-facts dd{margin:0;font-size:13.5px;line-height:1.45;color:var(--ink-hi);overflow-wrap:anywhere}
+.cd-facts--wide>div{grid-column:1/-1}
+.cd-note{--c:var(--slate);display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:11px 14px;border:1px solid color-mix(in srgb,var(--c) 38%,transparent);border-left:3px solid var(--c);border-radius:10px;
+  background:color-mix(in srgb,var(--c) 8%,transparent);font-size:13px;line-height:1.55;color:var(--text)}
+.cd-note>.cd-i{width:18px;height:18px;margin-top:1px;color:var(--c)}
+.cd-note-t{display:block;font-weight:700;color:var(--ink-hi)}
+.cd-note--warn{--c:var(--warn)}.cd-note--miss{--c:var(--red)}
+.cd-src{margin:0;font-size:max(11.5px,var(--fs-11));line-height:1.55;color:var(--ink-faint)}
+.cd-src-l{margin-right:6px;font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.cd-src a{color:var(--dim);text-decoration:underline;text-underline-offset:2px}
+.cd-src a:hover{color:var(--rhi)}
+.cd-go{display:inline-flex;align-items:center;gap:5px;color:var(--glo);text-decoration:underline;text-underline-offset:2px}
+.cd-go:hover{color:var(--rhi)}
+
+/* -- Aufleuchten nach cdGo -- */
+html.cd-motion .cd-flash{animation:cdFlash 1.8s ease-out;animation-duration:1.8s!important}
+html.cd-still .cd-flash{outline:2px solid var(--gold);outline-offset:3px}
+@keyframes cdFlash{0%,18%{box-shadow:0 0 0 2px var(--gold),0 0 34px -4px color-mix(in srgb,var(--gold) 70%,transparent)}100%{box-shadow:0 0 0 2px transparent,0 0 34px -4px transparent}}
+
+/* -- Lichtkegel auf ALLEN Karten (ein delegierter Listener, JS "R2 Fundament · Lichtkegel").
+   Liste = CD_SPOT_SEL im Kern-Skript; eigene Karten bekommen einfach .cd-spot. Freies ::after, z-index:-1 im eigenen Stapelkontext. -- */
+@media (hover:hover) and (pointer:fine){
+  :where(html.cd-motion) :where(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check){position:relative}
+  html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check){isolation:isolate}
+  html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check)::after{
+    content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;transition-duration:.25s!important;
+    background:radial-gradient(var(--sr,260px) circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--red) 13%,transparent),transparent 70%)}
+  html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check):hover::after{opacity:1}
+  html.cd-motion :is(.so-chip,.comm-it,.ov-miss-it,.qhero-stat,.sim-stat,.col-stat,.upg-fact,.cd-check){--sr:130px}
+  html.cd-motion :is(.pet-card,.qst-node,.loc-pc){--sr:160px}
+  html.cd-motion :is(.te-grp,.fac-reg,.chap,.sec-block,.qhero,.qst-hero,.cd-hero,.disarm-hero,.sec-hero){--sr:420px}
+  html.cd-motion .cd-fold[open]::after{--sr:360px}
+}
+
+/* -- Performance (gemessen 21.10.2026, redesign-2/FUNDAMENT.md):
+   1) Karten-Glas ohne backdrop-filter. Hinter den Karten liegt nur die weiche Aurora; blur(3px) darauf ist unsichtbar, kostet aber je
+      Karte eine eigene Rendering-Fläche (Waffen 500, Rüstungen 420, Skills 257 Stück: Scroll-p95 bis 76 ms). Glas bleibt auf Rail,
+      Konsole, Kopfzeile und Overlays. Mobil etwas dichterer Grund statt Unschärfe.
+   2) content-visibility:auto merkt sich die echte Höhe (auto): kein Springen der Bildlaufleiste, weniger Neu-Layout beim Scrollen. -- */
+.card,.sk-c,.witch-card,.set-card,.chap,.ch-card,.te-grp,.cmt-item,.build-card,.fac-reg,.empty-state{-webkit-backdrop-filter:none;backdrop-filter:none}
+@media (max-width:860px),(pointer:coarse){
+  .card,.sk-c,.witch-card,.set-card,.chap,.ch-card,.te-grp,.cmt-item,.build-card,.fac-reg{background:color-mix(in srgb,var(--card) 82%,transparent)}
+}
+.card,.sk-c,.ach-card,.fav-item,.rm-task,.witch-card,.set-card,.bo-saved-card,.pet-card,.fac-reg,.chap,.te-grp,.ch-card,.sg-card,.build-card,.comm-it,.te-it{contain-intrinsic-height:auto 280px}
+.cd-checks>.cd-check{content-visibility:auto;contain-intrinsic-size:auto 54px}
+
+/* -- Faltkarte ohne Icon, Szene im Kopf, Tasten-Kappe -- */
+.cd-fold--noico>summary{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"main aside arr"}
+.cd-fold>summary>.cd-scene{border-radius:inherit}
+.cd-fold>summary>.cd-scene .cd-scene-g{right:clamp(60px,16%,200px);font-size:clamp(36px,120cqh,120px);opacity:calc(var(--cd-glyph-op) * .75)}
+.cd-fold:has(>summary>.cd-scene) .cd-fold-main{text-shadow:0 1px 10px color-mix(in srgb,var(--card) 80%,transparent)}
+.cd-keycap{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 7px;margin:0 2px;border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;
+  background:linear-gradient(180deg,var(--cardh),var(--card));font:700 12px/1 var(--f-mono);color:var(--ink-hi);vertical-align:1px;white-space:nowrap}
+.cd-chip>span{min-width:0}
+@media (max-width:600px){.cd-fold--noico>summary{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"main arr" "aside aside"}}
+@media print{.cd-fold:not([open])>.cd-fold-body{display:block}.cd-fold::details-content{content-visibility:visible!important;block-size:auto!important}}
+/* ==== /R2 FUNDAMENT ==== */
+
+/* ---- Bereich Bauer 1 (nur B1 schreibt hier) ---- */
+/* R2-B1 Anfang */
+/* R2-B1 Ende */
+
+/* ---- Bereich Bauer 2 (nur B2 schreibt hier) ---- */
+/* R2-B2 Anfang */
+/* R2-B2 Ende */
+
+/* ---- Bereich Bauer 3 (nur B3 schreibt hier) ---- */
+/* R2-B3 Anfang */
+/* R2-B3 Ende */
+
+/* ---- Bereich Bauer 4 (nur B4 schreibt hier) ---- */
+/* R2-B4 Anfang */
+/* R2-B4 Ende */
+
+/* ---- Bereich Bauer 5 (nur B5 schreibt hier) ---- */
+/* R2-B5 Anfang */
+/* R2-B5 Ende */
+
+/* ---- Bereich Bauer 6 (nur B6 schreibt hier) ---- */
+/* R2-B6 Anfang */
+/* R2-B6 Ende */
+
+/* ---- Bereich Bauer 7 (nur B7 schreibt hier) ---- */
+/* R2-B7 Anfang */
+/* R2-B7 Ende */
+
+/* ---- Bereich Bauer 8 (nur B8 schreibt hier) ---- */
+/* R2-B8 Anfang */
+/* R2-B8 Ende */
+
+/* ---- Bereich Bauer 9 (nur B9 schreibt hier) ---- */
+/* R2-B9 Anfang */
+/* R2-B9 Ende */
+
+/* ---- Bereich Bauer 10 (nur B10 schreibt hier) ---- */
+/* R2-B10 Anfang */
+/* R2-B10 Ende */
+
+/* ---- Bereich Bauer 11 (nur B11 schreibt hier) ---- */
+/* R2-B11 Anfang */
+/* R2-B11 Ende */
+
+/* ---- Bereich Bauer 12 (nur B12 schreibt hier) ---- */
+/* R2-B12 Anfang */
+/* R2-B12 Ende */
+
+/* ---- Bereich Bauer 13 (nur B13 schreibt hier) ---- */
+/* R2-B13 Anfang */
+/* R2-B13 Ende */
 </style>
 </head>
 <body>
@@ -5368,6 +5656,403 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
 <script src="data/d06-items.js"></script>
 <script src="data/d07-patches.js"></script>
 <script src="data/d08-ruins-data.js"></script>
+<script src="data/d09-scenes.js"></script>
+<script>
+/* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
+   Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
+   Alle Helfer liefern HTML-Strings (Text wird escaped, rohes HTML nur über {h:'…'} bzw. body/aside).
+   CSS: Block "R2 FUNDAMENT" am Ende des Haupt-Stylesheets. Bauer ändern hier NICHTS (Wünsche in den Bericht). */
+/* Lichtkegel: alle Karten-/Kacheltypen (gleiche Liste wie im CSS-Block "Lichtkegel"); neue Karten bekommen einfach .cd-spot */
+var CD_SPOT_SEL='.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check';
+function cdEsc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+/* Text oder {h:'roh'} */
+function _cdT(x){return x&&typeof x==='object'&&'h' in x?String(x.h):cdEsc(x);}
+/* LEITPLANKEN 4: klein, Umlaute/Akzente weg, ß→ss, alles außer a-z0-9 → '-', Ränder ohne '-' */
+function cdSlug(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+function _cdFoldTxt(s){return String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function _cdAttrs(a){
+  if(!a)return '';
+  if(typeof a==='string')return ' '+a.trim();
+  var o='';for(var k in a){if(a[k]==null||a[k]===false)continue;o+=' '+k+(a[k]===true?'':'="'+cdEsc(a[k])+'"');}
+  return o;
+}
+
+/* ---- Icons: ein SVG-Sprite (24er Raster, Strich), Aufruf cdIcon('fire') ---- */
+var CD_ICONS={
+  hp:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  stam:'<path d="M5 19c0-8.3 5.7-14 14-14 0 8.3-5.7 14-14 14z"/><path d="M5 19l8-8"/>',
+  spirit:'<path d="M12 3l6 9-6 9-6-9z"/><path d="M12 8v8"/>',
+  ice:'<path d="M12 2v20M3.4 7l17.2 10M3.4 17L20.6 7"/><path d="M9 3.6l3 2 3-2M9 20.4l3-2 3 2"/>',
+  fire:'<path d="M12 21c-3.9 0-6-2.6-6-5.6 0-3.3 2.6-5 3.6-8.4.4 1.7 1.4 2.7 2.4 3.2C12.6 7 13.8 4.6 13.5 3c3 2 4.5 6 4.5 10.4 0 4.6-2.4 7.6-6 7.6z"/>',
+  bolt:'<path d="M13 2L5 14h6l-1 8 8-12h-6z"/>',
+  poison:'<path d="M12 3c3 4.5 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 3-6.5 6-11z"/><path d="M10 14.5h.01M14 16.5h.01M12.5 12h.01"/>',
+  atk:'<path d="M20 4l-9.5 9.5M20 4h-5M20 4v5M7.5 12.5l4 4M5 19l3-3M3.5 20.5l1.5-1.5"/>',
+  def:'<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/>',
+  speed:'<path d="M4 6l6 6-6 6M12 6l6 6-6 6"/>',
+  res:'<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  neutral:'<path d="M12 4l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>',
+  chev:'<path d="M6 9l6 6 6-6"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7"/>',
+  info:'<path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z"/><path d="M12 11v5M12 8h.01"/>',
+  warn:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h.01"/>',
+  miss:'<path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z"/><path d="M12 7v6l3.5 2"/>',
+  go:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  pin:'<path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><path d="M12 8a2 2 0 1 0 0 4a2 2 0 1 0 0-4z"/>',
+  key:'<path d="M8 15a4 4 0 1 1 3.4-6.1L21 9v3h-2v2h-3v-2h-4.6A4 4 0 0 1 8 15z"/>'
+};
+function cdIcon(n,cls){return '<svg class="cd-i'+(cls?' '+cls:'')+'" aria-hidden="true" focusable="false"><use href="#cd-i-'+(CD_ICONS[n]?n:'neutral')+'"/></svg>';}
+(function(){
+  var s='';for(var k in CD_ICONS)s+='<symbol id="cd-i-'+k+'" viewBox="0 0 24 24">'+CD_ICONS[k]+'</symbol>';
+  document.body.insertAdjacentHTML('afterbegin','<svg class="cd-sprite" aria-hidden="true" focusable="false">'+s+'</svg>');
+})();
+
+/* ---- Akzentfarbe: tone = Token-Name (gold, red, violet, ok, warn, ice, slate, amber) oder CSS-Farbe; region = Regionsname ---- */
+var CD_TONES={gold:'var(--gold)',red:'var(--red)',violet:'var(--violet)',ok:'var(--cd-ok)',warn:'var(--warn)',ice:'var(--cd-fx-ice)',slate:'var(--slate)',amber:'var(--amber)'};
+function cdTone(o){
+  o=o||{};
+  if(o.tone)return CD_TONES[o.tone]||(/^(#|rgb|hsl|var\(|color-mix)/.test(o.tone)?o.tone:null);
+  if(o.region&&typeof REGION_COLORS!=='undefined'){
+    var r=typeof normReg==='function'?normReg(o.region):o.region,m=r&&REGION_COLORS[r]&&/#[0-9a-f]{6}/i.exec(REGION_COLORS[r]);
+    if(m)return m[0];
+  }
+  return null;
+}
+
+/* ---- Szene (Epitome-Technik, LEITPLANKEN 4) ----
+   keys: 'reg-hernand' | ['ruin-x','reg-hernand'] | {src,pos} (gemischt erlaubt). Erster vorhandener Schlüssel gewinnt,
+   die übrigen sind Ladefehler-Rückfall. Ohne Bild: Akzentverlauf + Glyphe. opts: region, tone, glyph, full, hero, pos, w, op, cls */
+function _cdSceneSrc(k){
+  if(!k)return null;
+  if(typeof k==='object'&&k.src)return {src:k.src,pos:k.pos||'',alt:k.alt||''};
+  var e=typeof SCENES!=='undefined'&&SCENES[k];
+  if(!e||!e.f)return null;
+  return {src:e.f.indexOf('/')>-1?e.f:'cd_assets/scenes/'+e.f,pos:e.pos||'',w:e.w,h:e.h};
+}
+function cdSceneHas(keys){return [].concat(keys||[]).some(function(k){return !!_cdSceneSrc(k);});}
+function cdScene(keys,opts){
+  opts=opts||{};
+  var list=[].concat(keys||[]).map(_cdSceneSrc).filter(Boolean),acc=cdTone(opts),st='';
+  if(acc)st+='--cd-acc:'+acc+';';
+  if(opts.w)st+='--cd-scene-w:'+(+opts.w)+'%;';
+  if(opts.op!=null)st+='--cd-op:'+(+opts.op)+';';
+  var h='<div class="cd-scene'+(opts.full?' cd-scene--full':'')+(opts.hero?' cd-scene--hero':'')+(opts.cls?' '+cdEsc(opts.cls):'')+'" aria-hidden="true"'+(st?' style="'+cdEsc(st)+'"':'')+'>';
+  if(list.length){
+    var a=list[0],pos=opts.pos||a.pos,next=list.slice(1).map(function(x){return x.src+'|'+(x.pos||'');}).join(';;');
+    h+='<img class="cd-scene-img" src="'+cdEsc(a.src)+'" alt="" loading="lazy" decoding="async" fetchpriority="low"'
+      +(a.w&&a.h?' width="'+(+a.w)+'" height="'+(+a.h)+'"':'')
+      +(pos?' style="--cd-pos:'+cdEsc(pos)+'"':'')+(next?' data-cd-next="'+cdEsc(next)+'"':'')+'>';
+  }
+  if(opts.glyph)h+='<i class="cd-scene-g cd-g">'+cdEsc(opts.glyph)+'</i>';
+  return h+'</div>';
+}
+/* Ladefehler: nächster Schlüssel der Kette, sonst Bild weg (Farbfläche + Glyphe bleiben) */
+document.addEventListener('error',function(e){
+  var t=e.target;
+  if(!t||t.tagName!=='IMG'||!t.classList.contains('cd-scene-img'))return;
+  var n=(t.getAttribute('data-cd-next')||'').split(';;').filter(Boolean);
+  if(!n.length){t.remove();return;}
+  var p=n.shift().split('|');
+  if(n.length)t.setAttribute('data-cd-next',n.join(';;'));else t.removeAttribute('data-cd-next');
+  t.removeAttribute('width');t.removeAttribute('height');
+  if(p[1])t.style.setProperty('--cd-pos',p[1]);else t.style.removeProperty('--cd-pos');
+  t.src=p[0];
+},true);
+
+/* ---- Chips: 'Text' | {t, v, c, g, i, h, title} (v = fetter Wert, c = gold|red|violet|ok|warn|ice, g = Glyphe, i = Icon) ---- */
+function cdChip(x){
+  if(x==null||x==='')return '';
+  if(typeof x!=='object')return '<span class="cd-chip">'+cdEsc(x)+'</span>';
+  if('h' in x&&!('t' in x))return String(x.h);
+  return '<span class="cd-chip'+(x.c?' cd-chip--'+cdEsc(x.c):'')+'"'+(x.title?' title="'+cdEsc(x.title)+'"':'')+'>'
+    +(x.i?cdIcon(x.i):x.g?'<i class="cd-g" aria-hidden="true">'+cdEsc(x.g)+'</i>':'')
+    +(x.v!=null&&x.v!==''?'<b>'+cdEsc(x.v)+'</b>':'')+(x.t!=null?'<span>'+cdEsc(x.t)+'</span>':'')+'</span>';
+}
+function cdChips(list,cls){list=[].concat(list||[]).map(cdChip).join('');return list?'<span class="cd-chips'+(cls?' '+cls:'')+'">'+list+'</span>':'';}
+
+/* ---- Effekt-Badges: Kategorie per Stichwort (frühester Treffer gewinnt, bei Gleichstand die Reihenfolge) ---- */
+var CD_FX=[
+  ['res',/[a-z]*(?:resist|widerstand|immun)/],
+  ['speed',/angriffs(?:tempo|geschw)|attack speed|tempo|speed|geschwindigkeit|schneller|bewegung|movement/],
+  ['stam',/ausdauer|stamina/],
+  ['hp',/\bhp\b|\bleben|lebens|health|gesundheit|\bheil|\bheal/],
+  ['spirit',/\bgeist|spirit|\bmana\b/],
+  ['ice',/kalte|\bfrost|\bcold\b|\bice\b|\beis\b|\beis(?:schaden|resist|wider|-)|\bfreez|gefrier|erfrier|schnee|\bsnow/],
+  ['fire',/feuer|\bfire|hitze|\bheat|\bbrand|\bburn|flamm|flame|\bglut/],
+  ['bolt',/blitz|lightning|elektr|electr|donner|thunder|schock|shock/],
+  ['poison',/\bgift|poison|toxi|venom/],
+  ['atk',/angriff|attack|\batk\b|schaden|damage|\bdmg\b|kritisch|\bcrit/],
+  ['def',/abwehr|defen[cs]e|\bdef\b|verteidigung|rustung|\barmou?r|\bblock|parier/]
+];
+var CD_FX_LBL={res:'Resistenz',speed:'Tempo',stam:'Ausdauer',hp:'Leben',spirit:'Geist',ice:'Kälte',fire:'Feuer',bolt:'Blitz',poison:'Gift',atk:'Angriff',def:'Abwehr',neutral:'Effekt'};
+function cdFxKind(text){
+  var t=_cdFoldTxt(text),best='neutral',bi=1e9;
+  for(var i=0;i<CD_FX.length;i++){var m=CD_FX[i][1].exec(t);if(m&&m.index<bi){bi=m.index;best=CD_FX[i][0];}}
+  return best;
+}
+/* text: String (wird an ; · | Zeilenumbruch geteilt, opts.split = eigenes RegExp oder false) oder Liste. opts: kind (erzwingen), bare, cls */
+function cdFx(text,opts){
+  opts=opts||{};
+  var parts=Array.isArray(text)?text:(opts.split===false?[text]:String(text==null?'':text).split(opts.split||/\s*(?:;|·|\||\n)\s*/));
+  var h=parts.map(function(p){return String(p==null?'':p).trim();}).filter(Boolean).map(function(p){
+    var k=opts.kind||cdFxKind(p);
+    return '<span class="cd-fx cd-fx--'+k+'" title="'+CD_FX_LBL[k]+'">'+cdIcon(k)+'<span>'+cdEsc(p)+'</span></span>';
+  }).join('');
+  if(!h)return '';
+  return opts.bare?h:'<span class="cd-fx-list'+(opts.cls?' '+cdEsc(opts.cls):'')+'">'+h+'</span>';
+}
+
+/* ---- Fortschritt (für Faltkarten-Kopf, Checklisten) ---- */
+function cdProg(done,total,label){
+  done=+done||0;total=+total||0;var p=total?Math.round(done/total*100):0;
+  return '<span class="cd-prog'+(total&&done>=total?' is-done':'')+'" role="img" aria-label="'+cdEsc(label||(done+' von '+total+' erledigt'))+'">'
+    +'<span class="cd-prog-bar"><i style="--p:'+p+'%"></i></span>'+done+'/'+total+'</span>';
+}
+
+/* ---- Faltkarte ----
+   cdFold({title, lead, chips, scene, icon, aside, prog, body, open, cls, attrs, id, s, tone, region, h})
+   scene: {keys, ...cdScene-opts} oder fertiges HTML; icon: Glyphe | {src, alt, photo}; body: HTML oder Funktion (lazy, erst beim Öffnen);
+   s: Volltext für data-s (Suche); prog: {done,total,label}; h: Überschriftenebene (Standard 3). */
+var _cdLazy=new Map(),_cdLazyN=0;
+function cdFold(o){
+  o=o||{};
+  var acc=cdTone(o),body=o.body,lazy='';
+  if(typeof body==='function'){
+    if(_cdLazy.size>4000)_cdLazy.forEach(function(v,k){if(!document.querySelector('[data-cd-lazy="'+k+'"]'))_cdLazy.delete(k);});
+    lazy=String(++_cdLazyN);_cdLazy.set(lazy,body);body=o.open?body():'';if(o.open){_cdLazy.delete(lazy);lazy='';}
+  }
+  var sc=o.scene?(typeof o.scene==='string'?o.scene:cdScene(o.scene.keys,o.scene)):'';
+  var ico='';
+  if(o.icon){
+    ico=typeof o.icon==='object'
+      ?'<span class="cd-fold-ico'+(o.icon.photo?' is-photo':'')+'"><img src="'+cdEsc(o.icon.src)+'" alt="'+cdEsc(o.icon.alt||'')+'" loading="lazy" decoding="async" width="40" height="40"></span>'
+      :'<span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">'+cdEsc(o.icon)+'</i></span>';
+  }
+  var hl=Math.min(6,Math.max(2,+o.h||3)),
+    aside=(o.prog?cdProg(o.prog.done,o.prog.total,o.prog.label):'')+(o.aside||'');
+  return '<details class="cd-fold cd-spot'+(o.cls?' '+cdEsc(o.cls):'')+(ico?'':' cd-fold--noico')+'"'
+    +(o.id?' id="'+cdEsc(o.id)+'"':'')+(o.s!=null?' data-s="'+cdEsc(String(o.s).toLowerCase())+'"':'')
+    +(acc?' style="--cd-acc:'+cdEsc(acc)+'"':'')+(lazy?' data-cd-lazy="'+lazy+'"':'')+(o.open?' open':'')+_cdAttrs(o.attrs)+'>'
+    +'<summary>'+sc+ico
+    +'<span class="cd-fold-main"><h'+hl+' class="cd-fold-t">'+_cdT(o.title)+'</h'+hl+'>'
+    +(o.lead?'<span class="cd-fold-lead">'+_cdT(o.lead)+'</span>':'')
+    +(o.chips&&[].concat(o.chips).length?cdChips(o.chips,'cd-fold-chips'):'')+'</span>'
+    +(aside?'<span class="cd-fold-aside">'+aside+'</span>':'')
+    +'<span class="cd-fold-arr" aria-hidden="true">'+cdIcon('chev')+'</span></summary>'
+    +'<div class="cd-fold-body">'+(body||'')+'</div></details>';
+}
+/* lazy Inhalt einsetzen (beim Öffnen, bei Such-Öffnung und cdGo sofort) */
+function cdFoldFill(d){
+  var k=d&&d.getAttribute&&d.getAttribute('data-cd-lazy');if(!k)return;
+  d.removeAttribute('data-cd-lazy');
+  var fn=_cdLazy.get(k);_cdLazy.delete(k);if(!fn)return;
+  var b=d.querySelector(':scope>.cd-fold-body');
+  try{if(b)b.innerHTML=fn();}catch(e){console.error('cdFold body:',e);}
+  if(b&&typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(b);
+}
+document.addEventListener('toggle',function(e){var d=e.target;if(d.open&&d.classList&&d.classList.contains('cd-fold'))cdFoldFill(d);},true);
+/* eigener Klick auf den Kopf: Such-Öffnung wird zur Nutzer-Öffnung (bleibt beim Leeren der Suche offen) */
+document.addEventListener('click',function(e){var s=e.target.closest&&e.target.closest('.cd-fold>summary');if(s)s.parentElement.removeAttribute('data-srch-open');},true);
+
+/* ---- Suche: Faltkarte öffnen, wenn der Treffer nicht schon im Kopf steht (needles: gefaltete Suchbegriffe) ----
+   Aufgerufen aus _openForSearch (Suchablauf); Öffnungen tragen data-srch-open und schließen beim Leeren wieder. */
+function _cdFoldSearch(el,needles){
+  if(!el||!needles||!needles.length)return;
+  var fs=el.classList&&el.classList.contains('cd-fold')?[el]:(el.querySelectorAll?[].slice.call(el.querySelectorAll('.cd-fold:not([open])'),0,6):[]);
+  fs.forEach(function(d){
+    if(d.open)return;
+    var sm=d.querySelector(':scope>summary');
+    if(d._cdHead===undefined)d._cdHead=_cdFoldTxt(sm?sm.textContent:'').replace(/\s+/g,' ');
+    if(needles.every(function(x){return d._cdHead.indexOf(x)>-1;}))return;
+    cdFoldFill(d);d.open=true;d.dataset.srchOpen='1';
+  });
+}
+
+/* ---- Pillen (Filter/Reiter) ----
+   cdPills(items,{name, mode:'filter'|'tab', multi, label, cls, wrap}); items: [{v, t, n, g, on}]
+   Klick → aria-pressed/aria-selected umschalten + Ereignis 'cd-pills' (bubbles) mit detail {name, value, values, pill, group} */
+function cdPills(items,o){
+  o=o||{};var tab=o.mode==='tab';
+  var h=[].concat(items||[]).map(function(x,i){
+    if(typeof x!=='object')x={v:x,t:x};
+    var on=!!x.on,v=x.v!=null?x.v:x.t;
+    return '<button type="button" class="cd-pill" data-v="'+cdEsc(v)+'"'
+      +(tab?' role="tab" aria-selected="'+on+'" tabindex="'+(on?0:-1)+'"'+(x.controls?' aria-controls="'+cdEsc(x.controls)+'"':''):' aria-pressed="'+on+'"')+'>'
+      +(x.g?'<i class="cd-pill-g cd-g" aria-hidden="true">'+cdEsc(x.g)+'</i>':'')+'<span>'+cdEsc(x.t)+'</span>'
+      +(x.n!=null?'<span class="cd-pill-n">'+cdEsc(x.n)+'</span>':'')+'</button>';
+  }).join('');
+  return '<div class="cd-pills'+(o.wrap?' cd-pills--wrap':'')+(o.cls?' '+cdEsc(o.cls):'')+'" role="'+(tab?'tablist':'group')+'"'
+    +(o.label?' aria-label="'+cdEsc(o.label)+'"':'')+' data-cd-pills="'+cdEsc(o.name||'')+'"'+(o.multi&&!tab?' data-multi':'')+'>'+h+'</div>';
+}
+function _cdPillsFire(g,p){
+  var tab=g.getAttribute('role')==='tablist',vals=[];
+  g.querySelectorAll('.cd-pill').forEach(function(b){if(b.getAttribute(tab?'aria-selected':'aria-pressed')==='true')vals.push(b.dataset.v);});
+  g.dispatchEvent(new CustomEvent('cd-pills',{bubbles:true,detail:{name:g.dataset.cdPills,value:p.dataset.v,values:vals,pill:p,group:g}}));
+}
+document.addEventListener('click',function(e){
+  var p=e.target.closest&&e.target.closest('.cd-pill'),g=p&&p.closest('[data-cd-pills]');if(!g||p.disabled)return;
+  if(g.getAttribute('role')==='tablist')g.querySelectorAll('.cd-pill').forEach(function(b){var on=b===p;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;});
+  else if(g.hasAttribute('data-multi'))p.setAttribute('aria-pressed',p.getAttribute('aria-pressed')!=='true');
+  else g.querySelectorAll('.cd-pill').forEach(function(b){b.setAttribute('aria-pressed',b===p);});
+  _cdPillsFire(g,p);
+});
+document.addEventListener('keydown',function(e){
+  var p=e.target.closest&&e.target.closest('[role=tablist][data-cd-pills] .cd-pill');if(!p)return;
+  var all=[].slice.call(p.parentElement.querySelectorAll('.cd-pill')),i=all.indexOf(p),j=-1;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')j=(i+1)%all.length;else if(e.key==='ArrowLeft'||e.key==='ArrowUp')j=(i-1+all.length)%all.length;
+  else if(e.key==='Home')j=0;else if(e.key==='End')j=all.length-1;
+  if(j<0)return;e.preventDefault();all[j].focus();all[j].click();
+});
+
+/* ---- Abhaken ----
+   cdCheck({key, id, title, sub, go:{sec,q,label}, checked, cls, s}); key = localStorage-Schlüssel (bestehende weiterverwenden,
+   neue mit eigenem Präfix 'cd_r2_<bauer>_…'). Speicherform des Schlüssels bleibt erhalten (Liste oder Objekt).
+   Änderung → Speicher + Ereignis 'cd-check' (bubbles) mit detail {key, id, checked}. key:false = nur Ereignis, kein Speichern. */
+function _cdCkRead(key){var raw=null;try{raw=JSON.parse(localStorage.getItem(key));}catch(e){}return raw;}
+function cdCheckGet(key){
+  var r=_cdCkRead(key),s=new Set();
+  if(Array.isArray(r))r.forEach(function(x){s.add(String(x));});
+  else if(r&&typeof r==='object')Object.keys(r).forEach(function(k){if(r[k])s.add(k);});
+  return s;
+}
+function cdCheckSet(key,id,on){
+  var r=_cdCkRead(key);id=String(id);
+  if(r&&typeof r==='object'&&!Array.isArray(r)){if(on)r[id]=true;else delete r[id];}
+  else{r=Array.isArray(r)?r.map(String):[];var i=r.indexOf(id);if(on&&i<0)r.push(id);if(!on&&i>-1)r.splice(i,1);}
+  var v=JSON.stringify(r);
+  try{typeof lsSet==='function'?lsSet(key,v):localStorage.setItem(key,v);}catch(e){}
+  return cdCheckGet(key);
+}
+function cdCheck(o){
+  o=o||{};
+  var on=o.checked!=null?!!o.checked:(o.key?cdCheckGet(o.key).has(String(o.id)):false),
+    uid='cdck-'+cdSlug((o.key||'x')+'-'+o.id);
+  return '<div class="cd-check cd-spot'+(o.cls?' '+cdEsc(o.cls):'')+'"'+(o.s!=null?' data-s="'+cdEsc(String(o.s).toLowerCase())+'"':'')+'>'
+    +'<label class="cd-check-l" for="'+uid+'"><input type="checkbox" class="cd-check-in" id="'+uid+'"'+(on?' checked':'')
+    +' data-ck-key="'+cdEsc(o.key||'')+'" data-ck-id="'+cdEsc(o.id)+'">'
+    +'<span class="cd-check-box" aria-hidden="true">'+cdIcon('check')+'</span>'
+    +'<span class="cd-check-txt"><span class="cd-check-t">'+_cdT(o.title)+'</span>'+(o.sub?'<span class="cd-check-sub">'+_cdT(o.sub)+'</span>':'')+'</span></label>'
+    +(o.go&&o.go.sec?'<a class="cd-check-go" href="'+cdGoHref(o.go.sec,o.go.q)+'" data-go="'+cdEsc(o.go.sec)+'"'+(o.go.q?' data-goq="'+cdEsc(o.go.q)+'"':'')
+      +' aria-label="'+cdEsc(o.go.label||'Zum Eintrag springen')+'" title="'+cdEsc(o.go.label||'Zum Eintrag springen')+'">'+cdIcon('go')+'</a>':'')
+    +'</div>';
+}
+document.addEventListener('change',function(e){
+  var t=e.target;if(!t.classList||!t.classList.contains('cd-check-in'))return;
+  var key=t.getAttribute('data-ck-key'),id=t.getAttribute('data-ck-id');
+  if(key)cdCheckSet(key,id,t.checked);
+  t.dispatchEvent(new CustomEvent('cd-check',{bubbles:true,detail:{key:key,id:id,checked:t.checked}}));
+});
+
+/* ---- Sprung: Seite öffnen, Eintrag finden (id, data-go-id, Titel, data-s), aufklappen, hinscrollen, aufleuchten ----
+   cdGo(sec, q, {tab, noShow, flash:false}); Link: cdGoLink(sec,q,label) bzw. <a href="#sec=x&go=q" data-go="x" data-goq="q"> */
+function cdGoHref(sec,q){return '#sec='+encodeURIComponent(sec)+(q?'&go='+encodeURIComponent(q):'');}
+function cdGoLink(sec,q,label,cls){
+  return '<a class="cd-go'+(cls?' '+cdEsc(cls):'')+'" href="'+cdGoHref(sec,q)+'" data-go="'+cdEsc(sec)+'"'+(q?' data-goq="'+cdEsc(q)+'"':'')+'>'
+    +_cdT(label==null?q:label)+cdIcon('go')+'</a>';
+}
+function _cdGoFind(root,q){
+  if(!root||!q)return null;
+  var byId=document.getElementById(q);if(byId&&root.contains(byId))return byId;
+  var all=root.querySelectorAll('[data-go-id]');
+  for(var i=0;i<all.length;i++)if(all[i].getAttribute('data-go-id')===q)return all[i];
+  var n=_cdFoldTxt(q).replace(/\s+/g,' ').trim(),c=root.querySelectorAll('[data-s]'),first=null,firstVis=null,T='.cd-fold-t,.fd-name,.col-name,.ct,.sk-n,.pet-card-name,.fac-qh,h3,h4,strong';
+  for(var j=0;j<c.length;j++){
+    var el=c[j];if(el.dataset.filtered==='1')continue;
+    var hd=el.querySelector(T),ht=hd&&_cdFoldTxt(hd.textContent).replace(/\s+/g,' ').trim();
+    var vis=!el.closest('.hide');
+    if(ht===n&&vis)return el;
+    if(_cdFoldTxt(el.dataset.s).indexOf(n)>-1){if(!first)first=el;if(vis&&!firstVis)firstVis=el;}
+  }
+  return firstVis||first;
+}
+function _cdGoOpen(t){
+  for(var d=t.closest('details');d;d=d.parentElement&&d.parentElement.closest('details')){if(!d.open){cdFoldFill(d);d.open=true;}}
+  if(t.tagName==='DETAILS'&&!t.open){cdFoldFill(t);t.open=true;}
+  var cb=t.closest('.chap-body');
+  if(cb&&!cb.classList.contains('open')){var hd=cb.previousElementSibling;if(hd&&hd.click)hd.click();if(!cb.classList.contains('open'))cb.classList.add('open');}
+  var pane=t.closest('.pane');
+  if(pane&&!pane.classList.contains('active')&&pane.parentElement){
+    var ps=[].slice.call(pane.parentElement.querySelectorAll(':scope > .pane')),bs=[].slice.call(pane.parentElement.querySelectorAll(':scope > .tabs > button')),k=ps.indexOf(pane);
+    if(k>-1&&bs.length===ps.length){ps.forEach(function(p,i){p.classList.toggle('active',i===k);});bs.forEach(function(b,i){b.classList.toggle('active',i===k);});}
+  }
+}
+function cdFlash(t){
+  if(!t)return;t.classList.remove('cd-flash');void t.offsetWidth;t.classList.add('cd-flash');
+  clearTimeout(t._cdFl);t._cdFl=setTimeout(function(){t.classList.remove('cd-flash');},1900);
+}
+function cdGo(sec,q,o){
+  o=o||{};
+  if(sec&&!o.noShow&&typeof showSec==='function'){var cur=document.querySelector('#main > .sec.active');if(!cur||cur.id!=='sec-'+sec)showSec(sec);}
+  if(o.tab&&typeof _applyTabParam==='function')_applyTabParam(sec,o.tab);
+  if(!q)return Promise.resolve(null);
+  var root=document.getElementById('sec-'+sec)||document,tries=0;
+  return new Promise(function(res){
+    (function look(){
+      var t=_cdGoFind(root,q);
+      if(!t){if(++tries<12)return setTimeout(look,100);return res(null);}
+      _cdGoOpen(t);
+      requestAnimationFrame(function(){
+        var land=function(){
+          var f=t.tagName==='DETAILS'?t.querySelector(':scope>summary'):t;
+          if(f&&f.focus){if(!f.matches('a,button,summary,input,select,textarea,[tabindex]'))f.setAttribute('tabindex','-1');try{f.focus({preventScroll:true});}catch(e){}}
+          if(o.flash!==false)cdFlash(t);res(t);
+        };
+        if(window.cdMotion&&cdMotion.scrollTo){var d=0,end=function(){if(d++)return;
+            setTimeout(function(){var r=t.getBoundingClientRect().top-cdMotion.headerOffset();if(Math.abs(r)>4)cdMotion.scrollTo(t,{immediate:true});land();},120);};
+          cdMotion.scrollTo(t,{onComplete:end});setTimeout(end,1400);}
+        else{t.scrollIntoView({block:'start'});land();}
+      });
+    })();
+  });
+}
+document.addEventListener('click',function(e){
+  if(e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+  var a=e.target.closest&&e.target.closest('a[data-go]');if(!a||a.closest('#start-root'))return;
+  e.preventDefault();cdGo(a.dataset.go,a.dataset.goq||'',{tab:a.dataset.tab});
+});
+
+/* ---- Seitenkopf: cdHero({title, sub, kicker, scene, stats:[[wert,label]], glyph, region, tone, cls, h}) ---- */
+function cdHero(o){
+  o=o||{};
+  var acc=cdTone(o),sc=o.scene?(typeof o.scene==='string'?o.scene:cdScene(o.scene.keys,Object.assign({hero:true,full:true,glyph:o.glyph,region:o.region,tone:o.tone},o.scene))):cdScene([],{hero:true,glyph:o.glyph,region:o.region,tone:o.tone}),
+    hl=Math.min(6,Math.max(2,+o.h||2)),st=[].concat(o.stats||[]).slice(0,4);
+  return '<header class="cd-hero cd-scened cd-spot'+(o.cls?' '+cdEsc(o.cls):'')+'"'+(acc?' style="--cd-acc:'+cdEsc(acc)+'"':'')+'>'+sc
+    +'<div class="cd-hero-main">'+(o.kicker?'<p class="cd-hero-k">'+_cdT(o.kicker)+'</p>':'')
+    +'<h'+hl+' class="cd-hero-t">'+_cdT(o.title)+'</h'+hl+'>'+(o.sub?'<p class="cd-hero-sub">'+_cdT(o.sub)+'</p>':'')+'</div>'
+    +(st.length?'<dl class="cd-hero-stats" data-n="'+st.length+'">'+st.map(function(s){return '<div class="cd-hero-stat"><dt>'+_cdT(s[1])+'</dt><dd>'+cdEsc(s[0])+'</dd></div>';}).join('')+'</dl>':'')
+    +'</header>';
+}
+
+/* ---- Kleine Bausteine ---- */
+/* steps: ['Text'] | [{t:'Titel', d:'Beschreibung'}] */
+function cdStepper(steps,cls){
+  return '<ol class="cd-stepper'+(cls?' '+cdEsc(cls):'')+'">'+[].concat(steps||[]).map(function(s){
+    return '<li>'+(typeof s==='object'&&!('h' in s)?(s.t?'<span class="cd-step-t">'+_cdT(s.t)+'</span>':'')+(s.d?'<span class="cd-step-d">'+_cdT(s.d)+'</span>':''):'<span class="cd-step-d">'+_cdT(s)+'</span>')+'</li>';
+  }).join('')+'</ol>';
+}
+/* rows: [[label, wert]] (wert Text oder {h}); leere Werte fallen weg; opts.wide = eine Spalte */
+function cdFacts(rows,o){
+  o=o||{};
+  var h=[].concat(rows||[]).filter(function(r){return r&&r[1]!=null&&r[1]!=='';}).map(function(r){return '<div><dt>'+_cdT(r[0])+'</dt><dd>'+_cdT(r[1])+'</dd></div>';}).join('');
+  return h?'<dl class="cd-facts'+(o.wide?' cd-facts--wide':'')+(o.cls?' '+cdEsc(o.cls):'')+'">'+h+'</dl>':'';
+}
+/* kind: info | warn | miss (Verpassbar); title optional */
+function cdNote(text,o){
+  o=o||{};var k=o.kind==='warn'||o.kind==='miss'?o.kind:'info',
+    tt=o.title!=null?o.title:(k==='miss'?'Verpassbar':'');
+  return '<div class="cd-note cd-note--'+k+(o.cls?' '+cdEsc(o.cls):'')+'" role="note">'+cdIcon(k)
+    +'<div>'+(tt?'<b class="cd-note-t">'+_cdT(tt)+'</b>':'')+_cdT(text)+'</div></div>';
+}
+/* list: ['Name'] | [{t:'Name', url:'https://…'}] */
+function cdSrc(list,label){
+  var h=[].concat(list||[]).filter(Boolean).map(function(s){
+    if(typeof s!=='object')return cdEsc(s);
+    return /^https?:\/\//.test(s.url||'')?'<a href="'+cdEsc(s.url)+'" target="_blank" rel="noopener noreferrer">'+cdEsc(s.t||s.url)+'</a>':cdEsc(s.t);
+  }).join(', ');
+  return h?'<p class="cd-src"><span class="cd-src-l">'+cdEsc(label||'Quellen')+'</span>'+h+'</p>':'';
+}
+function cdKey(k){return '<kbd class="cd-keycap">'+cdEsc(k)+'</kbd>';}
+/* ==== /R2 FUNDAMENT · Kern ==== */
+</script>
 <script>
 // Robustes localStorage-JSON-Lesen: korrupte Eintraege duerfen die Seite nicht crashen
 function lsJson(key,fallback){
@@ -7865,6 +8550,8 @@ function _applyUrlState(){
   const s=_readUrlState();
   if(s.sec)showSec(s.sec,{skipUrl:true,keepSearch:!!s.q});
   if(s.sec&&s.tab)_applyTabParam(s.sec,s.tab);
+  // R2 Fundament: #sec=x&go=<Eintrag> (cdGoHref, z. B. Mittelklick auf einen Sprung-Link) springt zum Eintrag
+  if(s.sec&&s.go&&!s.q&&typeof cdGo==='function')cdGo(s.sec,s.go,{noShow:true});
   if(s.q){
     const si=document.getElementById('si');
     si.value=s.q;
@@ -8167,7 +8854,9 @@ function autoSearchTags(scope){
 // Treffer, das Bild zeigt nichts. Betrifft vor allem die 218 Fraktionsquests, die in
 // <details class="fac-fac"> stecken. Nur VORFAHREN aufklappen, nicht den Treffer
 // selbst -- sonst klappen bei jeder Suche alle 107 Nebenquest-Details auf.
-function _openForSearch(el){
+function _openForSearch(el,needles){
+  // R2 Fundament: Faltkarte (.cd-fold) des Treffers aufklappen, wenn der Treffer nicht schon im Kopf steht
+  if(needles&&typeof _cdFoldSearch==='function')_cdFoldSearch(el,needles);
   let d=el.parentElement?el.parentElement.closest('details'):null;
   while(d){
     if(!d.open){d.open=true;d.dataset.srchOpen='1';}
@@ -8319,7 +9008,8 @@ function _specHit(sf,n){for(let i=0;i<n.length;i++)if(!sf.includes(n[i]))return 
 // ("House Roberts - 10 Quests" ohne eine einzige sichtbare Quest). Eine Gruppe wird
 // ausgeblendet, sobald keines ihrer durchsuchbaren Kinder mehr sichtbar ist.
 function _collapseEmptyGroups(scope,aktiv){
-  const GRP='.fac-fac, .fac-reg, .sq-lane, .ruin-region';
+  // R2 Fundament: Faltkarte ohne eigenes data-s, die durchsuchbare Zeilen gruppiert, verschwindet wie eine Gruppe
+  const GRP='.fac-fac, .fac-reg, .sq-lane, .ruin-region, .cd-fold:not([data-s])';
   const root=scope||document;
   root.querySelectorAll(GRP).forEach(g=>{
     if(!aktiv){g.classList.remove('hide');return;}
@@ -8360,7 +9050,7 @@ function reapplySearch(root,cntEl,gesamt){
   root.querySelectorAll('[data-s]').forEach(el=>{
     const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF);
     el.classList.toggle('hide',!m);
-    if(m)n++;
+    if(m){n++;if(typeof _cdFoldSearch==='function')_cdFoldSearch(el,[qF]);}
   });
   if(cntEl)cntEl.textContent=n+' von '+gesamt+' (Suche aktiv)';
 }
@@ -8385,7 +9075,7 @@ function _reapplyActiveSearch(root){
     });
     if(hits.length)break;
   }
-  hits.forEach(el=>_openForSearch(el));
+  hits.forEach(el=>_openForSearch(el,sp.n));
   hits.slice(0,80).forEach(el=>highlightInElement(el,q,sp.n));
   _collapseEmptyGroups(root.closest&&root.closest('.sec')||root,true);
 }
@@ -8460,7 +9150,7 @@ function _doSearchImpl(q){
   // Namens-Treffer zuerst: gehen sie nicht in den ersten 80 (Highlight-Grenze) unter
   const ranked=_rankHits(hits,sp.n);
   ranked.forEach(el=>{
-    _openForSearch(el);
+    _openForSearch(el,sp.n);
     _openItemDetailsForSearch(el,sp.n);
     if(openedCards<12&&_openCardForSearch(el,sp.n))openedCards++;
   });
@@ -12572,7 +13262,8 @@ if(document.getElementById("sec-ruins")&&document.getElementById("sec-ruins").cl
 'use strict';
 var H=document.documentElement,KEY='cd_motion',
   VENDOR=['gsap-3.15.0','ScrollTrigger-3.15.0','SplitText-3.15.0','lenis-1.3.26'],
-  REVEAL_SEL='.card, .so-tile, .pet-card, .ruin-card, .loc-card, .witch-card, .sk-card, tbody tr, [data-cd-reveal]',
+  /* R2 Fundament: alle Karten-/Kacheltypen aller Seiten plus die Bausteine (.cd-spot, .cd-fold, .cd-check, .cd-hero) */
+  REVEAL_SEL='.card, .so-tile, .pet-card, .ruin-card, .loc-card, .witch-card, .sk-card, .sk-c, .set-card, .ch-card, .chap, .build-card, .ach-card, .rm-task, .fav-item, .sg-card, .comm-it, .ov-card, .qst-node, .loc-pc, .cmt-item, .bo-saved-card, .witch-svc, .cd-spot, .cd-fold, .cd-check, .cd-hero, tbody tr, [data-cd-reveal]',
   /* nativ scrollende Bereiche (Lenis greift nicht ein) und Vollbild-Overlays (Lenis hält an, solange eines offen ist) */
   NATIV='#sidebar,#rail,[aria-modal="true"],[role="dialog"],.loc-modal-box,#card-focus,.cs-overlay,.pm-overlay,#ee-overlay,#help-overlay,#cmp-modal,#ic-modal,#sync-overlay,#mount-ingame-modal,#rb-modal,iframe,[data-lenis-prevent],.cdx-pop,input,select,textarea',
   OVERLAY='[aria-modal="true"],.cs-overlay,.pm-overlay,#card-focus',
@@ -12580,7 +13271,7 @@ var H=document.documentElement,KEY='cd_motion',
   force=/[?&]motion\b/.test(location.search),
   loading=null,lenis=null,ctx=null,active=false,hooks=[],waiting=new Set(),running=new Set(),batch=[],pages=0,progUntil=0,
   readyRes,readyState='',readyP=new Promise(function(r){readyRes=r;}),
-  bb=null,prog=null,progX=null,docShort=true,bbOff=false,bbH='',lastY=0,prevY=0,scAt=0,swT=0,swAt=0,refT=0,ovObs=null,ovSeen=new WeakSet(),ovT=0;
+  bb=null,prog=null,progX=null,docShort=true,bbOff=false,bbH='',bbN=0,lastY=0,prevY=0,scAt=0,swT=0,swAt=0,refT=0,ovObs=null,ovSeen=new WeakSet(),ovT=0;
 var $=function(id){return document.getElementById(id);},
   mob=function(){return mqM.matches;},
   now=function(){return performance.now();},
@@ -12625,6 +13316,7 @@ function start(){
 }
 function stop(){
   if(!active)return;
+  if(lateMo){lateMo.disconnect();lateQ=[];}
   revealAll();
   if(ctx){ctx.revert();ctx=null;}
   gsap.ticker.remove(raf);gsap.ticker.lagSmoothing(500,33);
@@ -12681,17 +13373,16 @@ function prep(sec,vh){
 function reveal(list,instant){
   list=[].filter.call(list,function(el){return waiting.has(el);});
   if(!list.length)return;
-  var m=mob(),go=!instant&&window.gsap,y=(m?8:16)+'px';
-  list.forEach(function(el){waiting.delete(el);el.classList.remove('cdx-wait');
-    if(go){el.classList.add('cdx-run','cdx-in');el.style.opacity=0;el.style.setProperty('--cdx-t',y);}});
-  if(!go)return;
-  /* --cdx-t: nichts lesen; außerhalb des Kontexts (revert() ließe opacity 0 stehen) */
-  var tw,f=function(){tw=gsap.to(list,{opacity:1,'--cdx-t':'0px',duration:m?0.25:0.42,ease:'power2.out',overwrite:true,
-    stagger:{each:Math.min(m?0.02:0.035,0.3/list.length),onComplete:function(){done(this.targets()[0]);}},
-    onComplete:function(){running.delete(tw);}});};
-  ctx?ctx.ignore(f):f();
-  running.add(tw);
+  /* R2 Performance: CSS-Übergang statt gsap-Tween je Bild. opacity/transform laufen so auf dem Compositor, ohne
+     Stil-Neuberechnung im Hauptthread pro Bild (vorher je Karte und Bild eine, mobil spürbar). Staffel über --cdx-d. */
+  var m=mob(),go=!instant,each=Math.min(m?0.02:0.035,0.3/list.length),dur=m?250:420;
+  list.forEach(function(el,i){waiting.delete(el);
+    if(go){el.style.setProperty('--cdx-d',(i*each).toFixed(3)+'s');el.classList.add('cdx-show');showing.add(el);}
+    el.classList.remove('cdx-wait');});
+  if(go)setTimeout(function(){list.forEach(unshow);},dur+list.length*each*1000+80);
 }
+var showing=new Set();
+function unshow(el){if(!showing.delete(el))return;el.classList.remove('cdx-show');el.style.removeProperty('--cdx-d');}
 function done(el){el.classList.remove('cdx-run','cdx-in');el.style.removeProperty('--cdx-t');el.style.removeProperty('opacity');}
 /* Sicherheitsnetz: darüber sofort frei, im Bild eingeblendet (now: sofort) */
 function sweep(now){
@@ -12723,9 +13414,44 @@ function enter(id,sec,first){
     var l=libs(first);
     hooks.slice().forEach(function(fn){try{fn(id,sec,l);}catch(e){console.error('cdMotion.onEnter:',e);}});
   },sec);
+  lateWatch(sec);
   refreshSoon(60);
 }
+/* R2 Fundament: spät gerenderte Karten (Reiter, Filter-Neurender, Nachladen, geöffnete Faltkarten) unterhalb des Bildes
+   blenden ebenfalls ein. Ein MutationObserver je Seite, gebündelt per rAF, höchstens 120 je Durchgang. */
+var lateMo=null,lateQ=[],lateF=0;
+function lateWatch(sec){
+  if(lateMo){lateMo.disconnect();lateQ=[];}
+  if(!active||!sec||!window.MutationObserver)return;
+  lateMo=lateMo||new MutationObserver(lateOn);
+  lateMo.observe(sec,{childList:true,subtree:true});
+}
+function lateOn(recs){
+  for(var i=0;i<recs.length;i++){var a=recs[i].addedNodes;for(var j=0;j<a.length;j++)if(a[j].nodeType===1&&a[j].tagName!=='MARK')lateQ.push(a[j]);}
+  if(lateQ.length&&!lateF)lateF=requestAnimationFrame(lateRun);
+}
+function lateRun(){
+  lateF=0;var q=lateQ;lateQ=[];
+  if(!active||!ctx)return;
+  var vh=innerHeight,list=[],set=new Set();
+  for(var i=0;i<q.length&&list.length<120;i++){
+    var n=q[i];if(!n.isConnected)continue;
+    var c=(n.matches(REVEAL_SEL)?[n]:[]).concat([].slice.call(n.querySelectorAll(REVEAL_SEL),0,240));
+    for(var k=0;k<c.length&&list.length<120;k++){
+      var el=c[k],r,p;
+      if(set.has(el)||waiting.has(el)||skip(el)||el.classList.contains('cdx-run')||el.classList.contains('cd-b4-in'))continue;
+      p=el.parentElement&&el.parentElement.closest(REVEAL_SEL);if(p&&(set.has(p)||waiting.has(p)))continue;
+      r=el.getBoundingClientRect();
+      if((!r.width&&!r.height)||r.top<vh*0.98)continue;
+      list.push(el);set.add(el);
+    }
+  }
+  if(!list.length)return;
+  list.forEach(function(el){el.classList.add('cdx-wait');waiting.add(el);});
+  ctx.add(function(){batch=batch.concat(ScrollTrigger.batch(list,{start:'top 96%',once:true,batchMax:12,interval:0.06,onEnter:function(b){reveal(b);}}));});
+}
 function revealAll(quiet){
+  lateQ=[];showing.forEach(unshow);
   batch.forEach(function(t){t.kill();});batch=[];
   running.forEach(function(t){t.progress(1).kill();});running.clear();   /* laufende Einblendungen sofort ans Ende */
   waiting.clear();
@@ -12771,7 +13497,7 @@ function measure(){
   bb=bb||$('blattbar');if(!bb)return;
   var lim=H.scrollHeight-innerHeight;
   docShort=lim<innerHeight;
-  var h=bb.offsetHeight+'px';if(h!==bbH){bbH=h;H.style.setProperty('--cdx-bb-h',h);}
+  bbN=bb.offsetHeight;var h=bbN+'px';if(h!==bbH){bbH=h;H.style.setProperty('--cdx-bb-h',h);}
   if(prog)prog.classList.toggle('on',active&&lim>innerHeight*0.6);
 }
 function setOff(v){if(bb&&v!==bbOff){bbOff=v;bb.classList.toggle('cdx-bb-off',v);}}
@@ -12779,7 +13505,8 @@ function onScroll(){
   bb=bb||$('blattbar');if(!bb)return;
   var y=scrollY,d=y-lastY,sb=$('sidebar');
   bb.classList.toggle('cdx-scrolled',y>4);
-  if(!active||!mob()||now()<progUntil||docShort||y<bb.offsetHeight*2||(sb&&sb.classList.contains('open'))||bb.contains(document.activeElement)||bb.querySelector('[aria-expanded="true"]'))setOff(false);
+  /* R2: Höhe aus measure() (kein erzwungenes Layout je Scroll-Ereignis) */
+  if(!active||!mob()||now()<progUntil||docShort||y<(bbN||64)*2||(sb&&sb.classList.contains('open'))||bb.contains(document.activeElement)||bb.querySelector('[aria-expanded="true"]'))setOff(false);
   else if(d>6)setOff(true);else if(d<-6)setOff(false);
   if(Math.abs(d)>6||y<8)lastY=y;
   var j=Math.abs(y-prevY)>innerHeight*1.5;prevY=y;scAt=now();
@@ -12928,24 +13655,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       if(x.type==='childList'?n!==R.e&&n!==C.e:/\b(leaf|rail-item)\b/.test(x.target.className)) return sched();
     }
   }
-  /* Lichtkegel: ein delegierter, passiver Listener, Schreiben gebündelt per rAF */
-  function spot(){ sf=0; var r=pt.getBoundingClientRect(); pt.style.setProperty('--mx',px-r.left+'px'); pt.style.setProperty('--my',py-r.top+'px'); }
-  function move(e){ var t=e.target.closest&&e.target.closest('.leaf,.rail-item'); if(t){ pt=t; px=e.clientX; py=e.clientY; sf=sf||requestAnimationFrame(spot); } }
   function enable(){
     if(on||!window.gsap||!M.on) return;
     on=1; mo=new MutationObserver(onMut);
     var o={childList:true,subtree:true,attributes:true,attributeFilter:['class']};
     mo.observe(rs,o); mo.observe(cl,o);
     if(window.ResizeObserver){ ro=new ResizeObserver(sched); ro.observe(rs); ro.observe(cl); if(sb) ro.observe(sb); }
-    if(fine.matches) D.addEventListener('pointermove',move,{passive:true});
+    /* Lichtkegel auf .leaf/.rail-item: seit R2 im einen gemeinsamen Listener (Bereich B4, CD_SPOT_SEL) */
     sched();
   }
   function disable(){
     if(!on) return;
     on=0; cancelAnimationFrame(fr); cancelAnimationFrame(sf); fr=sf=0;
     if(mo) mo.disconnect(); if(ro) ro.disconnect();
-    D.removeEventListener('pointermove',move);
-    off(R,1); off(C,1); R.e=C.e=pt=null;
+    off(R,1); off(C,1); R.e=C.e=null;
   }
   ['cdmotion:page','cdmotion:toc','cdmotion:refresh'].forEach(function(n){ D.addEventListener(n,sched); });
   D.addEventListener('cdmotion:state',function(e){ if(e.detail&&e.detail.on) enable(); else disable(); });
@@ -13062,7 +13785,7 @@ function click(e){
 }
 function start(s){
   setPop(0);hold=-1;busy=0;sec=s;mo.disconnect();
-  mo.observe(s,{childList:true,subtree:true,attributes:true,attributeFilter:['class','hidden','open']});   /* ohne style: Lichtkegel --mx/--my */
+  mo.observe(s,{childList:true,subtree:true,attributes:true,attributeOldValue:true,attributeFilter:['class','hidden','open']});   /* ohne style: Lichtkegel --mx/--my */
   refresh(true);
 }
 const bb=$('blattbar'),D=document;
@@ -13073,7 +13796,10 @@ btn.onclick=()=>setPop(pop.hidden);
 pop=mk('cdx-pop','cdxPop');pop.hidden=true;pop.setAttribute('data-lenis-prevent','');
 bb.querySelector('.bb-spacer').after(btn,pop);
 /* Beobachter: Seite (ohne Einblendungen), Konsolenliste, Konsolen-Zustand */
-mo=new MutationObserver(r=>{if(r.some(m=>!m.target.classList?.contains('cdx-wait')&&!m.target.classList?.contains('cdx-run')))sched()});
+/* R2: reine Effekt-Klassen (Einblendung, Aufleuchten, Filter-Tween) lösen keinen Neuaufbau aus */
+const FXC=/\b(cdx-[a-z]+|cd-flash|cd-b4-in)\b/g,cls=s=>(s||'').replace(FXC,' ').trim().split(/\s+/).sort().join(' '),
+  fxOnly=m=>m.type==='attributes'&&m.attributeName==='class'&&cls(m.oldValue)===cls(m.target.getAttribute('class'));
+mo=new MutationObserver(r=>{if(r.some(m=>!fxOnly(m)))sched()});
 new MutationObserver(put).observe($('conList'),{childList:true});
 new MutationObserver(()=>{bar();put()}).observe($('app'),{attributes:true,attributeFilter:['class']});
 mq.addEventListener('change',()=>{bar();put()});
@@ -13098,7 +13824,7 @@ window.cdToc={items:()=>items.map(o=>o.t),active:()=>act,el:i=>items[i].el};
 'use strict';
 if(!window.cdMotion||!window.cdMotion.onEnter)return;
 var M=window.cdMotion,root=document.documentElement,G=null,cur=null,live=[],seen={};
-var COUNT='.sec-stat-val,.stat-val,.rm-prog-pill-val,.sec-hero-num';           /* Kennzahlen-Bänder */
+var COUNT='.sec-stat-val,.stat-val,.rm-prog-pill-val,.sec-hero-num,.cd-hero-stat dd';           /* Kennzahlen-Bänder */
 var IMG='[class*=card] img,img.boss-img,img.craft-ico,img.item-ico,img.sk-ico';
 var NUM=/^(\D*?)(\d{1,3}(?:\.\d{3})+|\d+)(\s*(?:\/\s*[\d.]+)?\D*)$/;      /* Präfix, Zahl (Tausenderpunkt), Suffix wie " %" oder "/ 175" */
 function mob(){return window.innerWidth<=860}
@@ -13222,18 +13948,20 @@ var H=document.documentElement;
 
 /* Lichtkegel nach React Bits SpotlightCard, (c) David Haz, MIT+Commons Clause.
    EIN delegierter pointermove (passive, rAF) setzt --mx/--my an der Karte unter dem Zeiger. */
+/* R2 Fundament: einziger Lichtkegel-Listener der Seite. Gilt für alle Karten (CD_SPOT_SEL aus dem Fundament-Kern, alles mit .cd-spot)
+   und die Navigation (.leaf, .rail-item). Zielsuche und Schreiben erst im rAF: höchstens einmal je Bild. */
 if(matchMedia('(hover:hover) and (pointer:fine)').matches){
-  var SPOT='.so-tile,.so-chip,.pet-card,.grid>.card',px,py,pt,raf=0;
+  var SPOT=(window.CD_SPOT_SEL||'.so-tile,.so-chip,.pet-card,.grid>.card,.cd-spot')+',.leaf,.rail-item',px,py,pe,raf=0;
+  var spot=function(){
+    raf=0;var t=pe&&pe.closest&&pe.closest(SPOT);if(!t)return;
+    var r=t.getBoundingClientRect();
+    t.style.setProperty('--mx',(px-r.left)+'px');
+    t.style.setProperty('--my',(py-r.top)+'px');
+  };
   document.addEventListener('pointermove',function(e){
     if(e.pointerType!=='mouse'||!H.classList.contains('cd-motion'))return;
-    var t=e.target.closest&&e.target.closest(SPOT);
-    if(!t)return;
-    px=e.clientX;py=e.clientY;pt=t;
-    if(!raf)raf=requestAnimationFrame(function(){
-      raf=0;var r=pt.getBoundingClientRect();
-      pt.style.setProperty('--mx',(px-r.left)+'px');
-      pt.style.setProperty('--my',(py-r.top)+'px');
-    });
+    px=e.clientX;py=e.clientY;pe=e.target;
+    if(!raf)raf=requestAnimationFrame(spot);
   },{passive:true});
 }
 
@@ -13247,7 +13975,7 @@ document.addEventListener('click',function(e){
 /* Filter-Neurender: neue Karten im Bild (max. 24) blenden kurz ein */
 var M=window.cdMotion;
 if(!M)return;
-var seen=new WeakSet(),tw=0,cur=[],BTN='.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.ichip';
+var seen=new WeakSet(),tw=0,cur=[],BTN='.tab,.pet-filter-btn,.wpg-btn,.ruin-fbtn,.ichip,.cd-pill';
 function cards(){
   var s=document.querySelector('.sec.active');
   return s?[].slice.call(s.querySelectorAll(M.REVEAL_SEL||'.card,.pet-card,.loc-card,.ruin-card')):[];
