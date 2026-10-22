@@ -10,7 +10,7 @@ const SCENES={
   'reg-demeniss':{f:'reg-demeniss.webp',alt:'Demeniss: Burgstadt auf dem Hügel vor Schneeberg-Kette',pos:'40% 55%',w:640,h:254},
   'reg-delesyia':{f:'reg-delesyia.webp',alt:'Delesyia: Stadtplatz mit goldener Statue und Girlanden',pos:'40% 40%',w:640,h:254},
   'reg-crimson-desert':{f:'reg-crimson-desert.webp',alt:'Crimson Desert: rote Wüste mit Felsformationen und Bögen',pos:'50% 55%',w:640,h:254},
-  'reg-the-abyss':{f:'reg-the-abyss.webp',alt:'The Abyss: schwebende Ruineninseln über den Wolken',pos:'50% 50%',w:1920,h:1080},
+  'reg-the-abyss':{f:'reg-the-abyss-v2.webp',alt:'The Abyss: schwebende Ruineninseln über den Wolken',pos:'50% 50%',w:1920,h:1080},
   'ch-1':{f:'ch-1.webp',alt:'Myurdin im Prolog-Kampf (Zwischensequenz am Feuer, Boss laut Guide)',pos:'55% 45%',w:1280,h:654},
   'ch-2':{f:'ch-2.webp',alt:'Kailok the Hornsplitter, Boss von Kapitel 2',pos:'55% 35%',w:1280,h:720},
   'ch-3':{f:'ch-3.webp',alt:'Reed Devil mit Hornmaske im hohen Gras, Boss von Kapitel 3',pos:'45% 45%',w:1280,h:720},
