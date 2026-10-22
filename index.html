@@ -6512,7 +6512,7 @@ html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,
 .r2b12-node.is-done .r2b12-node-dot{border-color:var(--gold);background:var(--gold);color:var(--bg)}
 .r2b12-node.is-cur .r2b12-node-dot{width:44px;height:44px;margin-top:-3px;border-color:var(--red);background:color-mix(in srgb,var(--red) 22%,var(--card));color:var(--ink-hi);box-shadow:0 0 0 5px color-mix(in srgb,var(--red) 16%,transparent),0 0 22px -2px color-mix(in srgb,var(--red) 70%,transparent)}
 .r2b12-node-t{max-width:100%;font-size:11px;line-height:1.3;letter-spacing:-.01em;text-align:center;color:var(--dim);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.r2b12-node.is-cur .r2b12-node-t{color:var(--ink-hi);font-weight:700}
+.r2b12-node.is-cur .r2b12-node-t{color:var(--ink-hi);font-weight:700;-webkit-line-clamp:3}
 .r2b12-node.is-done .r2b12-node-t{color:var(--text)}
 .r2b12-node.is-lock .r2b12-node-t{font-style:italic;opacity:.7}
 .r2b12-node-b{font:11px/1.2 var(--f-mono);color:var(--ink-faint);white-space:nowrap}
@@ -8087,8 +8087,8 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
       </article>
       <article class="r2b13-dyeinfo-i cd-spot">
         <h4 class="r2b13-dyeinfo-t">Kaufen oder craften</h4>
-        <div class="cd-chips r2b13-dyeprice"><span class="cd-chip cd-chip--gold"><b>1,50 Silver</b><span>Standardpreis Dyehouse</span></span><span class="cd-chip cd-chip--red"><b>37,5 Silver</b><span>teuerster (Black)</span></span></div>
-        <p>Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</p>
+        <div class="cd-chips r2b13-dyeprice"><span class="cd-chip cd-chip--gold"><b>1,50 Silber</b><span>Standardpreis Dyehouse</span></span><span class="cd-chip cd-chip--red"><b>37,5 Silber</b><span>teuerster (Black)</span></span></div>
+        <p>Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silber kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</p>
       </article>
     </div>
     <div class="cd-note cd-spot r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Dyehouses &amp; Camp-Dyer</b>Alle 10 Dyehouses zu finden zählt für Challenge: Trade 2 – Rainbow Mane. Nach genügend <span class="xref" role="link" tabindex="0" onclick="showSec('camp')">Greymane-Camp-Ausbau</span> verkauft ein Camp-Dyer (Oliver, über die Reihe <em>Solid Foundation</em>) alle bereits entdeckten Dyehouse-Farben.</div></div>
@@ -9430,7 +9430,7 @@ function refreshSectionStats(){
 // je Abschnitt Regions-Szene (reg-…) + Regionsfarbe, Knoten = MAIN_QUESTS-Abschnitte (Prolog, 1 bis 12, Epilog).
 // Klick springt per cdGo zur Kapitelkarte (Kapitel 1 umfasst den Prolog). Tooltips (data-tip) wie bisher: Boss, Warnung, Unlock.
 /* Feinschliff: weiche Trennstellen (nur Anzeige) vor häufigen englischen Wortteilen, damit lange Namen in schmalen Knoten nicht mitten im Wort brechen ("Homecom ing") */
-function r2b3Hy(s){return cdEsc(s).replace(/[A-Za-z]{8,}/g,w=>w.replace(/^(.{3,}?)(coming|attack|splitter|caller|work|ledge|nation|bidden|ened|ress|brum|ter)$/i,'$1&shy;$2'));}
+function r2b3Hy(s){return cdEsc(s).replace(/[A-Za-z]{8,}/g,w=>w.replace(/^(.{3,}?)(coming|attack|splitter|caller|work|edge|nation|bidden|ened|tress|brum|ter)$/i,'$1&shy;$2'));}
 function r2b3ChOf(ch){return ch==='Prolog'?1:/^\d+$/.test(ch)?parseInt(ch,10):ch;}
 function renderQuestTimeline(){
   if(typeof MAIN_QUESTS==='undefined')return;
@@ -9856,7 +9856,7 @@ function _r2b12Track(o){
   const rail=`<ol class="r2b12-rail" data-lenis-prevent>${nodes.map(x=>`<li class="r2b12-node${x.done?' is-done':''}${x.cur?' is-cur':''}${x.lock?' is-lock':''}">
       <a href="${cdGoHref('chapters','ch-'+x.n)}" data-go="chapters" data-goq="ch-${x.n}" aria-label="${cdEsc('Kapitel '+x.n+(x.lock?'':': '+short(x.c.title))+(x.done?', abgeschlossen':x.cur?', aktuelles Kapitel':''))}"${x.cur?' aria-current="step"':''}>
         <span class="r2b12-node-dot">${x.done?cdIcon('check'):x.n}</span>
-        <span class="r2b12-node-t">${x.lock?'Spoiler':cdEsc(short(x.c.title))}</span>
+        <span class="r2b12-node-t"${x.lock?'':` title="${cdEsc(short(x.c.title))}"`}>${x.lock?'Spoiler':cdEsc(short(x.c.title))}</span>
         ${x.bs.length&&!x.lock?`<span class="r2b12-node-b">${x.bd}/${x.bs.length} ${x.bs.length===1?'Boss':'Bosse'}</span>`:''}
       </a></li>`).join('')}</ol>`;
   let now='';
@@ -12909,7 +12909,7 @@ function _r2b13CoreCard(c,wasOpen){
   const ico=CORE_IMGS[c.name],vid=CORE_VIDS[c.name];
   const pm=/^(.*?)[.\s]*?\s([\d.]+)\s+Silber\s*$/.exec(c.effect||'');
   const eff=_r2b13Dash(pm?pm[1].replace(/\.\s*$/,''):c.effect);
-  const src=_r2b13Dash(c.source),sp=_locSplit(src,150);
+  const src=_r2b13Dash(c.source).replace(/\s+-\s+(?=\D)/g,' · '),sp=_locSplit(src,150);
   const gr=_r2b13Greater(c);
   const s=[c.name,c.effect,c.source,c.slot,slotDe(c.slot)].join(' ').toLowerCase();
   const gem=ico?`<img src="${escHtml(ico)}" data-cdn="${escHtml(CORE_IMGS_CDN[c.name]||'')}" width="52" height="52" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.parentNode.classList.add('no-img');this.remove();}">`:'';
