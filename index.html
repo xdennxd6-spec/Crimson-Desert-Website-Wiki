@@ -4356,7 +4356,7 @@ html.cd-motion .r2b2-npc .r2b2-por .cd-scene-img{transition:transform .5s cubic-
 .r2b2-npc--hero .cd-fold-t{font-size:23px}
 .r2b2-npc--hero .cd-fold-chips{max-width:calc(100% - 44px)}
 .r2b2-npc--hero .r2b2-sum{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-#npcs-root .r2b2-grid>.r2b2-npc--hero{contain-intrinsic-size:auto 330px}
+#npcs-root .r2b2-grid>.r2b2-npc--hero{contain-intrinsic-size:none auto 330px}
 .r2b2-npc--hero .r2b2-por{--cd-scene-w:100%;--cd-scene-w-m:100%}
 .r2b2-npc--hero .r2b2-por .cd-scene-img{height:84%;object-position:var(--cd-pos,50% 14%);
   -webkit-mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.5) 70%,transparent 100%),linear-gradient(90deg,rgba(0,0,0,.35),#000 22%,#000 78%,rgba(0,0,0,.35));
@@ -4839,7 +4839,7 @@ html.cd-motion .r2b4-shot:hover img{transform:scale(1.06)}
 @media (min-width:980px){.q5-notes-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .q5-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0 0 6px}
 .q5-bar>.cd-pills,.q5-bar-r>.cd-pills{margin:0 0 8px}
-.q5-bar-r{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.q5-bar-r{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;min-width:0;max-width:100%}
 .q5-cnt{margin:0 0 8px;font:600 12px/1 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
 .q5-reset{min-height:40px;margin:0 0 8px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--dim);font:600 12px/1.2 var(--f-body);cursor:pointer}
 .q5-reset:hover{color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
@@ -4850,7 +4850,8 @@ html.cd-motion .r2b4-shot:hover img{transform:scale(1.06)}
 .q5-grp-hd::after{content:'';grid-column:3;grid-row:1;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 60%,transparent),transparent)}
 .q5-grp-g{grid-column:1;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);font-size:14px;box-shadow:0 0 14px -4px var(--c)}
 .q5-grp-t{grid-column:2;margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.25;color:var(--ink-hi)}
-.q5-grp-n{grid-column:4;font:600 12px/1 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.q5-grp-n{grid-column:4;font:600 12px/1.35 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;text-align:right;text-wrap:balance}
+@media (max-width:359px){.q5-grp-hd{gap:7px}}
 /* -- Faltkarten der Quests -- */
 .q5-folds>.cd-fold{contain-intrinsic-size:auto 104px}
 @media (min-width:1240px){.q5-grid2{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;align-items:stretch}.q5-grid2>.cd-fold:not([open])>summary{height:100%}.q5-grid2>.cd-fold[open]{grid-column:1/-1}.q5-grid2>.cd-fold:not([open]) .cd-prog-bar{width:34px}.q5-grid2>.cd-fold>summary{gap:6px 12px}}
@@ -5463,8 +5464,11 @@ html.cd-motion .b8-shr-bar>i{transition:width .45s cubic-bezier(.22,.8,.3,1)}
 .b8-grp-p:empty{display:none}
 .b8-grp:not(:has(.b8-tr:not(.hide):not(.b8-off))){display:none}
 .b8-trs,.b8-chunk{display:grid;gap:10px}
-/* Block aus 5 Karten: content-visibility je Block (Motion B4 fragt offsetParent jeder Karte ab, je Karte erzwänge das ein Layout) */
-.b8-chunk{content-visibility:auto;contain-intrinsic-size:auto 540px}
+/* R2 Abnahme 2: eine Spalte, die nie breiter als die Seite wird (sonst gab die Ersatzbreite ungerenderter Blöcke die Spaltenbreite vor) */
+.b8-trs{grid-template-columns:minmax(0,1fr)}
+/* Block aus 5 Karten: content-visibility je Block (Motion B4 fragt offsetParent jeder Karte ab, je Karte erzwänge das ein Layout).
+   Ersatzgröße nur für die Höhe: ein einzelner Wert gälte für beide Achsen (540 px Mindestbreite, mobil 556 px Seitenbreite). */
+.b8-chunk{content-visibility:auto;contain-intrinsic-size:none auto 540px}
 .b8-chunk:not(:has(.b8-tr:not(.hide):not(.b8-off))){display:none}
 .b8-tr{--b8-ico:46px;--b8-pt:12px;--b8-pl:18px;position:relative;border-radius:14px}
 .b8-tr.b8-off{display:none}
@@ -5577,7 +5581,7 @@ html.cd-motion .b8-pip:hover{transform:translateY(-2px)}
   .b8-stage-t{font-size:16.5px}
   .b8-stage-ck{max-width:none}
   .b8-route-bar{flex-wrap:wrap;gap:8px 12px}
-  .b8-route-p{flex-basis:100%;gap:12px}
+  .b8-route-p{flex-basis:100%;flex-wrap:wrap;gap:8px 12px}
   .b8-pips{gap:10px}
   .b8-badges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
   .b8-badges>li{display:flex;min-width:0}
@@ -5689,7 +5693,7 @@ html.cd-motion .r2b9-brnav-b:hover{transform:translateY(-2px)}
 .r2b9-br-ico{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;color:var(--br);border:1px solid color-mix(in srgb,var(--br) 55%,transparent);
   background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--br) 30%,transparent),color-mix(in srgb,var(--br) 8%,transparent));box-shadow:0 0 18px -4px color-mix(in srgb,var(--br) 60%,transparent)}
 .r2b9-br-ico .cd-i{width:21px;height:21px}
-#sec-skills .r2b9-br{display:block;margin:0 0 34px;container-type:inline-size;content-visibility:auto;contain-intrinsic-size:auto 1400px;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 16px)}
+#sec-skills .r2b9-br{display:block;margin:0 0 34px;container-type:inline-size;content-visibility:auto;contain-intrinsic-size:none auto 1400px;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 16px)}
 .r2b9-br-hd{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;margin:0 0 16px;padding:0 0 12px;border-bottom:1px solid color-mix(in srgb,var(--br) 38%,var(--line))}
 .r2b9-br-tx{flex:1 1 220px;min-width:0}
 .r2b9-br-t{margin:0;font-family:var(--f-display);font-size:20px;font-weight:700;line-height:1.2;color:var(--ink-hi)}
@@ -6159,7 +6163,7 @@ html.cd-motion .r2b10-hold-tag i{animation:r2b10Pulse 1.6s ease-out infinite;ani
 .r2b11-cat{container-type:inline-size;margin:0 0 34px;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 14px)}
 .r2b11-cat[hidden]{display:none}
 /* Kategorienfarbe als weicher Lichthof hinter der Leitkachel (Hintergrund lebt, Text bleibt auf ruhiger Fläche) */
-.r2b11-cat{position:relative;isolation:isolate;content-visibility:auto;contain-intrinsic-size:auto 460px}
+.r2b11-cat{position:relative;isolation:isolate;content-visibility:auto;contain-intrinsic-size:none auto 460px}
 .r2b11-cat::before{content:'';position:absolute;z-index:-1;inset:0;pointer-events:none;
   background:radial-gradient(46% 72% at 20% 58%,color-mix(in srgb,var(--rc) 19%,transparent),transparent 74%),
     radial-gradient(42% 64% at 86% 42%,color-mix(in srgb,var(--rc) 8%,transparent),transparent 76%)}
@@ -6274,8 +6278,8 @@ article.r2b11-rule{padding:16px 16px 17px}
 .r2b11-rule .cd-fold-body>p{max-width:none}
 html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,.8,.3,1)}
 /* Mechaniken: Gruppen mit Farbe, Faltkarten im Zweierraster */
-.r2b11-grp{--rc:var(--gold);margin:0 0 24px;content-visibility:auto;contain-intrinsic-size:auto 420px}
-.r2b11-keys,.r2b11-cfolds{content-visibility:auto;contain-intrinsic-size:auto 640px}
+.r2b11-grp{--rc:var(--gold);margin:0 0 24px;content-visibility:auto;contain-intrinsic-size:none auto 420px}
+.r2b11-keys,.r2b11-cfolds{content-visibility:auto;contain-intrinsic-size:none auto 640px}
 .r2b11-grp-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 11px;font:700 var(--fs-11,11px)/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--rc)}
 .r2b11-grp-t>span{display:inline-flex;align-items:center;gap:9px}
 .r2b11-grp-t>span::before{content:'';width:9px;height:9px;border-radius:3px;background:var(--rc);box-shadow:0 0 10px var(--rc);transform:rotate(45deg)}
@@ -6354,7 +6358,7 @@ html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,
   .r2b11-rule--lead :is(.r2b11-rule-t,.r2b11-rule-d){max-width:none}
   #sec-beginner>.sub-t{margin-top:34px;font-size:19px}
   .r2b11-sig,.r2b11-vs{grid-template-columns:minmax(0,1fr)}
-  .r2b11-ctrl-bar{flex-direction:column;align-items:stretch}
+  .r2b11-ctrl-bar{flex-direction:column;flex-wrap:nowrap;align-items:stretch}
   .r2b11-ctrl:not([data-plat="all"]) .r2b11-keys{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .r2b11-ctrl:not([data-plat="all"]) .r2b11-key{flex-direction:column;align-items:flex-start;gap:8px;padding:11px 12px}
   .r2b11-el li{grid-template-columns:minmax(0,1fr);gap:4px}
