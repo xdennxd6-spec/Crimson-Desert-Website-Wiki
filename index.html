@@ -4976,6 +4976,27 @@ html.cd-motion .q5-clp-b .cd-i{transition:transform .25s}
   .q5-steps>li{padding-left:38px}
   .q5-st-f>div{padding:8px 10px}
 }
+/* R2 Abnahme: alter Kennzahl-Streifen über dem Kopf aus (die Zahlen stehen im Cockpit und in den Strang-Köpfen) */
+#sec-quests>.sec-stats-auto{display:none}
+/* R2 Abnahme (Barrierefreiheit): Nebenquest-Karte als Hülle aus Faltkarte + Abhak-Knopf. Der Knopf liegt über dem Platzhalter
+   im Kopf (oben ausgerichtet: Rand 1 px + Polster 12 px; rechts: Rand + Polster 14 px + Pfeil 34 px + Spalt). */
+.q5-sqw{position:relative;min-width:0}
+.q5-sqw>.cd-fold{content-visibility:auto;contain-intrinsic-size:auto 104px}
+.q5-sqw>.cd-fold[open]{content-visibility:visible;contain-intrinsic-size:none}
+.q5-sqw>.cd-fold>summary{align-items:start}
+.q5-sqw>.cd-fold>summary .cd-fold-ico,.q5-sqw>.cd-fold>summary .cd-fold-arr{align-self:start}
+.q5-sqw>.cd-fold>summary .cd-fold-arr{margin-top:3px}
+.q5-ck-ph{display:block;width:40px;height:40px}
+.q5-sqw>.q5-ck{position:absolute;z-index:3;top:13px;right:63px}
+.q5-sqw:has(>.cd-fold.hide){display:none}
+@media (min-width:1240px){
+  .q5-grid2>.q5-sqw:has(>.cd-fold[open]){grid-column:1/-1}
+  .q5-grid2>.q5-sqw>.cd-fold:not([open]){height:100%}
+  .q5-grid2>.q5-sqw>.cd-fold:not([open])>summary{height:100%}
+  .q5-grid2>.q5-sqw>.cd-fold>summary{gap:6px 12px}
+  .q5-grid2>.q5-sqw>.q5-ck{right:61px}
+}
+@media (max-width:600px){.q5-sqw>.q5-ck{right:auto;left:17px}}
 /* R2-B5 Ende */
 
 /* ---- Bereich Bauer 6 (nur B6 schreibt hier) ---- */
@@ -13551,6 +13572,8 @@ function renderCrafting(){
 function loadTE(){return lsJson('cd_te',[])}
 function saveTE(a){
   lsSet('cd_te',JSON.stringify(a));
+  // R2 Abnahme: schon gebaute Checklisten-Seite (Sanctums, True-Ending-Kachel) nachziehen, auch bei Häkchen auf der Seite Quests und beim Sync-Import
+  if(typeof _r2b6Render==='function')_r2b6Render();
   // Sync-Code (seit 09/2026): _syncProgress prüft selbst, ob ein Code aktiv ist, und entprellt.
   if(typeof window._syncProgress==='function'){
     window._syncProgress(a).catch(()=>{});
@@ -13661,7 +13684,7 @@ function _q5Wire(){
       const key=b.dataset.q5K,id=b.dataset.q5Id,on=b.getAttribute('aria-pressed')!=='true';
       cdCheckSet(key,id,on);
       b.setAttribute('aria-pressed',on?'true':'false');
-      const host=b.closest('.q5-st,.cd-fold');if(host)host.classList.toggle(host.classList.contains('q5-st')?'is-done':'q5-done',on);
+      const host=b.closest('.q5-st,.cd-fold')||(b.parentElement.classList.contains('q5-sqw')?b.parentElement.querySelector(':scope>.cd-fold'):null);if(host)host.classList.toggle(host.classList.contains('q5-st')?'is-done':'q5-done',on);
       if(key==='cd_sq_done'){saveSQ(loadSQ());_q5SqRefresh();}
       else if(key===_Q5_FAC_KEY)_q5FacRefresh(b.closest('.cd-fold'));
       renderQuestHero();
@@ -13894,12 +13917,15 @@ function renderSideQuests(){
         +(q.tip?cdNote(q.tip,{kind:q.miss?'miss':'info',title:q.miss?'Verpassbar':(sp?'Hinweis':'Notiz')}):'')
         +(q.conf&&q.conf!=='high'?'<p class="cd-src"><span class="cd-src-l">Quellenlage</span>'+(q.conf==='low'?'unsicher':'teils belegt')+'</p>':'');
     };
-    return cdFold({title:q.q,lead:_q5First(q.trigger,170),icon:sp?'★':'❖',chips,
+    /* R2 Abnahme (Barrierefreiheit): der Abhak-Knopf steckt nicht mehr im Faltkarten-Kopf (summary), sondern liegt als Geschwister
+       daneben und wird per CSS über den Platzhalter im Kopf gelegt. Kein verschachteltes Bedienelement mehr; Optik und Klicklogik bleiben. */
+    return '<div class="q5-sqw" data-cd-reveal>'+cdFold({title:q.q,lead:_q5First(q.trigger,170),icon:sp?'★':'❖',chips,
       region:reg||undefined,tone:sp?'gold':(reg?undefined:'gold'),
       scene:sp?{keys:['reg-'+cdSlug(reg||'')],region:reg||undefined,tone:'gold',glyph:'♞'}:undefined,
-      aside:_q5Ck('cd_sq_done',q.q,on,q.q),s,body,
+      aside:'<span class="q5-ck-ph" aria-hidden="true"></span>',s,body,
       cls:'q5-sq'+(sp?' q5-sp':'')+(on?' q5-done':''),
-      attrs:{'data-q5-reg':cdSlug(reg||q.region),'data-q5-sp':sp?'1':null,'data-q5-miss':q.miss?'1':null,'data-filtered':'0'}});
+      attrs:{'data-q5-reg':cdSlug(reg||q.region),'data-q5-sp':sp?'1':null,'data-q5-miss':q.miss?'1':null,'data-filtered':'0'}})
+      +_q5Ck('cd_sq_done',q.q,on,q.q)+'</div>';
   };
   const lane=(id,title,col,list,glyph)=>'<section class="q5-grp sq-lane" id="'+id+'" style="--c:'+cdEsc(col)+'">'
     +'<header class="q5-grp-hd"><span class="q5-grp-g cd-g" aria-hidden="true">'+glyph+'</span><h4 class="q5-grp-t">'+cdEsc(title)+'</h4>'
@@ -13933,7 +13959,7 @@ function _q5SqApply(){
   const done=new Set(loadSQ()),F=_q5SqF;let n=0,tot=0;
   el.querySelectorAll('.q5-sq').forEach(f=>{
     tot++;
-    const name=f.querySelector('.q5-ck')?.dataset.q5Id||'';
+    const name=(f.querySelector('.q5-ck')||f.parentElement.querySelector(':scope>.q5-ck'))?.dataset.q5Id||'';
     let ok=F.reg==='all'||(F.reg==='sp'?f.dataset.q5Sp==='1':f.dataset.q5Reg===F.reg);
     if(ok&&F.st==='open')ok=!done.has(name);
     else if(ok&&F.st==='done')ok=done.has(name);
@@ -13950,7 +13976,7 @@ function _q5SqRefresh(){
   const el=document.getElementById('sq-list');if(!el)return;
   const done=new Set(loadSQ());
   el.querySelectorAll('.q5-grp').forEach(g=>{
-    const ks=[...g.querySelectorAll('.q5-sq .q5-ck')],d=ks.filter(k=>done.has(k.dataset.q5Id)).length;
+    const ks=[...g.querySelectorAll('.q5-sqw>.q5-ck')],d=ks.filter(k=>done.has(k.dataset.q5Id)).length;
     const n=g.querySelector('[data-q5-n]');if(n)n.textContent=d+'/'+ks.length;
   });
   const all=SIDE_QUESTS.filter(q=>done.has(q.q)).length,hd=el.querySelector('.q5-head');
@@ -17996,7 +18022,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     // ESC: Suchfeld leeren / Modals schliessen / Sidebar schliessen
     if(e.key==='Escape'){
-      if(document.activeElement===si){si.blur();return;}
+      /* R2 Abnahme: wie im Hinweis "Esc: Suche leeren" zugesagt. Erstes Esc leert eine volle Suche, zweites verlässt das Feld */
+      if(document.activeElement===si){if(si.value){e.preventDefault();si.value='';_doSearchImpl('');}else si.blur();return;}
       const helpO=document.getElementById('help-overlay');
       if(helpO&&helpO.classList.contains('show')){helpO.classList.remove('show');return;}
       const rbM=document.getElementById('rb-modal');
@@ -18397,6 +18424,7 @@ async function syMergeFromServer(code) {
   if (merged.length !== local.length) {
     lsSet('cd_te', JSON.stringify(merged));
     if (typeof renderTE === 'function') renderTE();
+    if (typeof _r2b6Render === 'function') _r2b6Render();   /* R2 Abnahme: Checklisten-Seite nachziehen */
   }
   // Hochgeladen wird nur der zulässige Teil; wächst er über den Serverstand hinaus, geht er zurück.
   const grew = syValid(merged).length > server.length;
