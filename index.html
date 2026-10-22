@@ -4761,6 +4761,210 @@ html.cd-motion .r2b4-shot:hover img{transform:scale(1.06)}
 
 /* ---- Bereich Bauer 5 (nur B5 schreibt hier) ---- */
 /* R2-B5 Anfang */
+/* Quests (renderQuestHero, renderTE, renderMQ, renderFactions, renderSideQuests): Cockpit, Strang-Reiter, Strang-Köpfe, Faltkarten */
+/* -- Cockpit: True-Ending-Ring + nächste Schritte -- */
+.q5-cockpit{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:16px 22px;margin:0 0 14px;padding:16px 20px;border:1px solid var(--line);border-radius:var(--radius);
+  background:radial-gradient(60% 130% at 0% 50%,color-mix(in srgb,var(--red) 10%,transparent),transparent 70%),var(--panel-2);box-shadow:var(--shadow-soft)}
+.q5-ring{--p:0;display:grid;place-items:center;width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--red) calc(var(--p)*1%),color-mix(in srgb,var(--line-strong) 70%,transparent) 0);
+  box-shadow:0 0 26px -8px color-mix(in srgb,var(--red) 60%,transparent)}
+.q5-ring>span{display:grid;place-items:center;align-content:center;gap:2px;width:76px;height:76px;border-radius:50%;background:var(--card);text-align:center}
+.q5-ring b{font:700 20px/1 var(--f-mono);color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.q5-ring small{font-size:11px;line-height:1.1;color:var(--dim)}
+.q5-ck-main{display:flex;flex-direction:column;gap:4px;min-width:0}
+.q5-ck-k{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.q5-ck-t{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.3;color:var(--ink-hi)}
+.q5-nexts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:8px}
+.q5-next{--c:var(--gold);display:flex;align-items:center;gap:12px;min-width:0;min-height:56px;padding:9px 14px 9px 10px;border:1px solid color-mix(in srgb,var(--c) 32%,transparent);border-radius:12px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--c) 11%,transparent),transparent 80%);color:var(--text);text-decoration:none;transition:border-color .18s,background .18s}
+.q5-next:hover{border-color:color-mix(in srgb,var(--c) 60%,transparent);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 18%,transparent),transparent 85%)}
+.q5-next:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.q5-next>.cd-i{margin-left:auto;color:var(--c)}
+.q5-next-g{flex:none;display:grid;place-items:center;width:38px;height:38px;border:1px solid color-mix(in srgb,var(--c) 45%,transparent);border-radius:50%;background:color-mix(in srgb,var(--c) 12%,var(--card));
+  color:var(--c);font:700 15px/1 var(--f-mono)}
+.q5-next-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+.q5-next-k{font-size:11.5px;line-height:1.25;color:var(--dim)}
+.q5-next-t{font-size:13.5px;font-weight:600;line-height:1.35;color:var(--ink-hi);overflow-wrap:anywhere}
+.q5-next.is-done{--c:var(--cd-ok)}
+/* -- Strang-Reiter: vier Kacheln mit Fortschritt (IDs qt-* bleiben für #sec=quests&tab=…) -- */
+#sec-quests .q5-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 20px;border:0}
+#sec-quests .q5-tabs .tab{--q5c:var(--gold);position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"g tx" "bar bar";align-items:center;gap:10px 12px;
+  min-height:68px;margin:0;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);color:var(--text);
+  font:inherit;text-transform:none;letter-spacing:0;text-align:left;box-shadow:none;transition:border-color .18s,background .18s,box-shadow .18s}
+#sec-quests .q5-tabs .tab:hover{border-color:color-mix(in srgb,var(--q5c) 45%,transparent);color:var(--text)}
+#sec-quests .q5-tabs .tab.active{border-color:color-mix(in srgb,var(--q5c) 70%,transparent);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--q5c) 17%,transparent),transparent 70%),var(--panel-2);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--q5c) 25%,transparent),0 10px 26px -16px var(--q5c)}
+#sec-quests .q5-tabs .tab:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.q5-tab-g{grid-area:g;display:grid;place-items:center;width:36px;height:36px;border:1px solid color-mix(in srgb,var(--q5c) 40%,transparent);border-radius:50%;
+  background:color-mix(in srgb,var(--q5c) 10%,var(--card));color:var(--q5c);font-size:17px}
+.q5-tab-tx{grid-area:tx;display:flex;flex-direction:column;gap:2px;min-width:0}
+.q5-tab-t{font-family:var(--f-display);font-size:14.5px;font-weight:700;line-height:1.2;color:var(--ink-hi)}
+.q5-tab-s{font:500 11.5px/1.3 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.q5-tab-bar{grid-area:bar;display:block;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.q5-tab-bar>i{display:block;width:var(--p,0%);height:100%;border-radius:inherit;background:var(--q5c)}
+#sec-quests .q5-tabs .tab:not(.active) .q5-tab-bar>i{opacity:.7}
+/* -- Strang-Kopf (cdHero) -- */
+.q5-head.cd-hero{min-height:0;margin:0 0 14px;padding:22px 24px}
+.q5-head .cd-hero-sub{max-width:58ch}
+.q5-hprog{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:14px}
+.q5-hprog .cd-prog{font-size:13px;color:var(--ink-hi)}
+.q5-hprog .cd-prog-bar{width:clamp(120px,24vw,260px);height:7px;background:color-mix(in srgb,var(--line-strong) 80%,transparent)}
+.q5-hprog .cd-prog-bar>i{background:linear-gradient(90deg,var(--cd-acc,var(--gold)),color-mix(in srgb,var(--cd-acc,var(--gold)) 55%,var(--glo)))}
+.q5-hprog .cd-prog.is-done .cd-prog-bar>i{background:var(--cd-ok)}
+.q5-hprog-l{font-size:12px;color:var(--dim)}
+.q5-head .cd-hero-stat dd{color:var(--cd-acc,var(--gold))}
+/* -- Hinweise, Leisten, Gruppen -- */
+.q5-notes{display:grid;gap:8px;margin:0 0 16px}
+.q5-notes .cd-src{margin-left:2px}
+.q5-notes .cd-note .cd-chip{min-height:22px;vertical-align:1px}
+@media (min-width:980px){.q5-notes-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.q5-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0 0 6px}
+.q5-bar>.cd-pills,.q5-bar-r>.cd-pills{margin:0 0 8px}
+.q5-bar-r{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.q5-cnt{margin:0 0 8px;font:600 12px/1 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.q5-reset{min-height:40px;margin:0 0 8px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--dim);font:600 12px/1.2 var(--f-body);cursor:pointer}
+.q5-reset:hover{color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
+.q5-reset:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#sec-quests .q5-grp.sq-lane{margin:0 0 24px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 12px)}
+#sec-quests .q5-grp.q5-off{display:none}
+.q5-grp-hd{display:grid;grid-template-columns:auto auto minmax(16px,1fr) auto;align-items:center;gap:10px;margin:14px 0 10px}
+.q5-grp-hd::after{content:'';grid-column:3;grid-row:1;height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 60%,transparent),transparent)}
+.q5-grp-g{grid-column:1;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);font-size:14px;box-shadow:0 0 14px -4px var(--c)}
+.q5-grp-t{grid-column:2;margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.25;color:var(--ink-hi)}
+.q5-grp-n{grid-column:4;font:600 12px/1 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+/* -- Faltkarten der Quests -- */
+.q5-folds>.cd-fold{contain-intrinsic-size:auto 104px}
+@media (min-width:1240px){.q5-grid2{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;align-items:stretch}.q5-grid2>.cd-fold:not([open])>summary{height:100%}.q5-grid2>.cd-fold[open]{grid-column:1/-1}.q5-grid2>.cd-fold:not([open]) .cd-prog-bar{width:34px}.q5-grid2>.cd-fold>summary{gap:6px 12px}}
+.q5-folds>.cd-fold[open]{contain-intrinsic-size:none}
+.q5-regc .q5-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.q5-kick{display:block;margin-bottom:2px;font:600 11px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--cd-acc) 70%,var(--dim))}
+.cd-fold.q5-chap .cd-fold-ico,.cd-fold.q5-te .cd-fold-ico{width:52px;height:52px;border-color:color-mix(in srgb,var(--cd-acc) 45%,transparent);
+  background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--cd-acc) 22%,var(--card)),var(--card));box-shadow:0 0 20px -8px var(--cd-acc)}
+.cd-fold.q5-chap .cd-fold-ico .cd-g{font:700 21px/1 var(--f-mono);color:var(--ink-hi);text-shadow:0 0 12px var(--cd-acc)}
+.cd-fold.q5-chap>summary,.cd-fold.q5-te>summary{min-height:92px}
+.cd-fold.q5-fac .cd-fold-ico,.cd-fold.q5-sq .cd-fold-ico{background:color-mix(in srgb,var(--cd-acc) 10%,var(--card));border-color:color-mix(in srgb,var(--cd-acc) 30%,transparent)}
+/* Farbe mit Bedeutung: Region bzw. Pflicht/Empfehlung als weicher Schein rechts (ohne Bild, kostet nichts) */
+.cd-fold.q5-fac>summary,.cd-fold.q5-sq:not(.q5-sp)>summary{background:radial-gradient(55% 120% at 100% 50%,color-mix(in srgb,var(--cd-acc) 9%,transparent),transparent 75%)}
+.cd-fold.q5-hasov[open] .cd-fold-lead{display:none}
+.q5-ov{margin:0;max-width:72ch;font-size:13.5px;line-height:1.6;color:var(--dim)}
+.q5-more{margin:0}
+/* Erledigt */
+.cd-fold.q5-done .cd-fold-ico{border-color:color-mix(in srgb,var(--cd-ok) 55%,transparent);color:var(--cd-ok);background:color-mix(in srgb,var(--cd-ok) 12%,var(--card))}
+.cd-fold.q5-sq.q5-done .cd-fold-t{color:var(--dim);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+.cd-fold.q5-sq.q5-done .cd-fold-chips,.cd-fold.q5-sq.q5-done .cd-fold-lead{opacity:.6}
+.cd-fold.q5-te.q5-full>summary::before,.cd-fold.q5-done>summary::before{background:var(--cd-ok);box-shadow:0 0 12px color-mix(in srgb,var(--cd-ok) 50%,transparent)}
+/* Abhak-Knopf */
+/* Feinschliff: offener Haken zeigt ein blasses Häkchen (liest sich als Checkbox, nicht als leeres Feld), satter Grund auch über Szenenbildern */
+.q5-ck{flex:none;display:grid;place-items:center;width:40px;height:40px;padding:0;border:1.5px solid color-mix(in srgb,var(--gold) 30%,var(--line-strong));border-radius:11px;
+  background:color-mix(in srgb,var(--card) 82%,transparent);color:color-mix(in srgb,var(--dim) 50%,transparent);cursor:pointer;
+  box-shadow:0 4px 14px -6px color-mix(in srgb,var(--bg) 80%,transparent);transition:border-color .18s,background .18s,color .18s}
+.q5-ck .cd-i{width:18px;height:18px;stroke-width:2.4;stroke-dasharray:22;stroke-dashoffset:0}
+.q5-ck:hover{border-color:var(--gold);color:var(--gold)}
+.q5-ck[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--bg);box-shadow:0 0 16px -4px color-mix(in srgb,var(--gold) 70%,transparent)}
+.q5-ck:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+@keyframes q5Draw{from{stroke-dashoffset:22}to{stroke-dashoffset:0}}
+html.cd-motion .q5-ck[aria-pressed="true"] .cd-i{animation:q5Draw .3s cubic-bezier(.3,.7,.3,1) .04s both;animation-duration:.3s!important}
+html.cd-motion .q5-ck[aria-pressed="true"]{animation:cdTick .32s cubic-bezier(.3,.7,.3,1.4);animation-duration:.32s!important}
+/* Fortschritt rechts im Kartenkopf: eigene ruhige Fläche, damit Zahl und Balken auch über Szenenbildern lesbar bleiben */
+.q5-folds>.cd-fold>summary .cd-fold-aside>.cd-prog{padding:5px 10px;border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--card) 80%,transparent);color:var(--ink-hi)}
+.q5-folds>.cd-fold.q5-full>summary .cd-fold-aside>.cd-prog,.q5-folds>.cd-fold.q5-done>summary .cd-fold-aside>.cd-prog{border-color:color-mix(in srgb,var(--cd-ok) 45%,transparent);color:var(--cd-ok)}
+/* Lange Lösungen/Hinweise: drei Zeilen, dann „Weiterlesen“ (bei aktiver Suche immer ganz) */
+.q5-clp{display:grid;justify-items:start;gap:4px}
+.q5-clp>.q5-clp-t{justify-self:stretch}
+.q5-clp:not(.is-open)>.q5-clp-t{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--l,3);overflow:hidden}
+.q5-clp-b{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:4px 13px;border:1px solid color-mix(in srgb,var(--gold) 38%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--gold) 7%,transparent);color:var(--gold);font:600 12px/1.2 var(--f-body);cursor:pointer;transition:background .18s,border-color .18s}
+.q5-clp-b:hover{background:color-mix(in srgb,var(--gold) 15%,transparent);border-color:color-mix(in srgb,var(--gold) 60%,transparent)}
+.q5-clp-b:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.q5-clp-b .cd-i{width:14px;height:14px}
+html.cd-motion .q5-clp-b .cd-i{transition:transform .25s}
+.q5-clp.is-open .q5-clp-b .cd-i{transform:rotate(180deg)}
+html:has(#si:not(:placeholder-shown)) .q5-clp>.q5-clp-t{display:block;-webkit-line-clamp:unset;overflow:visible}
+html:has(#si:not(:placeholder-shown)) .q5-clp-b{display:none}
+.q5-clp--m>.q5-clp-b{display:none}
+.q5-clp--m:not(.is-open)>.q5-clp-t{display:block}
+/* Stepper mit Questschritten */
+.q5-steps>li{padding-bottom:18px}
+.q5-st-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.q5-steps .cd-step-t{font-size:14.5px;line-height:1.4}
+.q5-st-b{margin:5px 0 0}
+.q5-st-b .cd-chip{min-height:22px;font-size:11.5px}
+.q5-st-f{margin-top:9px}
+.q5-st-f dd{font-size:13px;color:var(--text)}
+.q5-st-tip{margin:10px 0 0;max-width:76ch;padding:9px 14px 0;border-bottom:9px solid transparent;border-left:2px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:0 10px 10px 0;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 7%,transparent),transparent 85%);font-size:13px;line-height:1.6;color:var(--text)}
+.q5-clp>.q5-st-tip{margin-top:10px}
+.q5-clp:has(>.q5-st-tip){margin-bottom:2px}
+.q5-st-tip b{margin-right:6px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.q5-steps>li.is-miss::before{border-color:color-mix(in srgb,var(--red) 70%,transparent);background:color-mix(in srgb,var(--red) 16%,var(--card));color:var(--rhi)}
+.q5-steps>li.is-done::before{border-color:var(--gold);background:var(--gold);color:var(--bg)}
+.q5-steps>li.is-done .cd-step-t{color:var(--dim);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+.q5-steps>li.is-done .q5-st-f,.q5-steps>li.is-done .q5-st-b{opacity:.6}
+.q5-sq-steps .cd-step-t{font-family:var(--f-mono);font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--cd-acc,var(--gold))}
+.q5-sq-steps .cd-step-d{margin-top:2px}
+/* True Ending: Häkchen-Raster */
+.q5-te-grid.is-many{grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+.q5-te-grid .cd-check-l{min-height:48px}
+/* Hauptquests: Kapitelfolge + Spoiler */
+.q5-routebox{margin:0 0 12px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2)}
+.q5-route{display:flex;align-items:center;margin:0 0 12px}
+.q5-rt{--c:var(--dim);flex:none;display:grid;place-items:center;width:34px;height:34px;border:1.5px solid color-mix(in srgb,var(--c) 75%,transparent);border-radius:50%;
+  background:color-mix(in srgb,var(--c) 12%,var(--card));color:var(--ink-hi);font:700 12.5px/1 var(--f-mono);text-decoration:none;transition:transform .15s,background .18s}
+.q5-rt:hover{background:color-mix(in srgb,var(--c) 30%,var(--card))}
+.q5-rt:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.q5-rt.is-done{background:var(--c);border-color:var(--c);color:var(--bg);box-shadow:0 0 12px -2px var(--c)}
+.q5-rt.is-locked{border-style:dashed;color:var(--dim)}
+.q5-rt-ln{flex:1 1 4px;min-width:3px;height:2px;background:linear-gradient(90deg,var(--line-strong),var(--line))}
+.q5-route-leg{gap:6px 8px}
+.q5-route-k{margin-right:4px;font:600 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.q5-spl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;padding:8px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);font-size:13px;color:var(--dim)}
+.q5-spl select{min-height:40px;margin:0}
+.q5-spoil-btn{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:5px 13px;border:1px solid color-mix(in srgb,var(--red) 50%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--red) 12%,transparent);color:var(--rhi);font:600 12px/1.2 var(--f-body);cursor:pointer;white-space:nowrap}
+.q5-spoil-btn:hover{background:color-mix(in srgb,var(--red) 22%,transparent)}
+.q5-spoil-btn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.cd-fold.q5-spoil .cd-fold-main,.cd-fold.q5-spoil>.cd-fold-body{filter:blur(7px);user-select:none}
+.cd-fold.q5-spoil>.cd-fold-body{pointer-events:none}
+.cd-fold.q5-spoil .cd-scene-img{display:none}
+.cd-fold.q5-spoil>summary{cursor:default}
+.q5-forts dt{color:var(--ink-hi);font-weight:600}
+@media (max-width:860px){
+  #sec-quests .q5-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .q5-nexts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:600px){
+  .q5-cockpit{grid-template-columns:auto minmax(0,1fr);gap:12px 14px;padding:14px}
+  .q5-ring{width:74px;height:74px}.q5-ring>span{width:60px;height:60px}.q5-ring b{font-size:16px}.q5-ring small{font-size:11px}
+  .q5-ck-t{font-size:14.5px}
+  .q5-nexts{grid-column:1/-1;margin-top:2px}
+  #sec-quests .q5-tabs .tab{grid-template-columns:auto minmax(0,1fr);gap:8px 10px;min-height:62px;padding:10px 11px}
+  .q5-tab-g{width:30px;height:30px;font-size:15px}
+  .q5-tab-t{font-size:13.5px}
+  .q5-tab-s{font-size:11px}
+  .q5-head.cd-hero{padding:18px 16px}
+  .q5-routebox{padding:12px}
+  /* Feinschliff: Kapitelroute mobil als 7er-Raster mit Tap-Zielen bis 40 px statt 22-px-Punkten */
+  .q5-route{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px 6px;justify-items:center}
+  .q5-rt{width:100%;max-width:40px;height:auto;aspect-ratio:1;font-size:12px}
+  .q5-rt-ln{display:none}
+  .q5-clp-b{min-height:40px}
+  .q5-clp--m>.q5-clp-b{display:inline-flex}
+  .q5-clp--m:not(.is-open)>.q5-clp-t .cd-note>div{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:var(--l,3);overflow:hidden}
+  .q5-clp--m:not(.is-open)>.q5-clp-t .cd-note-t{display:block}
+  .q5-st-hd .q5-ck{width:40px;height:40px}
+  .cd-fold.q5-chap .cd-fold-ico,.cd-fold.q5-te .cd-fold-ico{width:44px;height:44px}
+  .cd-fold.q5-chap .cd-fold-ico .cd-g{font-size:18px}
+  .q5-bar-r{gap:4px 10px}
+  .cd-fold.q5-sq>summary{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"aside main arr"}
+  .cd-fold.q5-sq .cd-fold-ico{display:none}
+  .cd-fold.q5-sq .cd-fold-aside{align-self:start}
+  .q5-te-grid.is-many{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .q5-te-grid .cd-check-l{gap:9px;padding:8px 10px}
+  .q5-te-grid .cd-check-t{font-size:13px}
+  .q5-steps>li{padding-left:38px}
+  .q5-st-f>div{padding:8px 10px}
+}
 /* R2-B5 Ende */
 
 /* ---- Bereich Bauer 6 (nur B6 schreibt hier) ---- */
@@ -5664,24 +5868,24 @@ html.cd-motion .r2b4-shot:hover img{transform:scale(1.06)}
 
   <section class="sec" id="sec-quests">
     <h2 class="sec-t"><span class="sec-sym">❢</span> Quests <span class="sec-t-en">Main &amp; Faction Quests</span></h2>
-    <div id="quest-hero" class="qhero"></div>
-    <div class="tabs">
-      <button type="button" class="tab active" id="qt-te" onclick="qTab('te')">True Ending Checkliste</button>
-      <button type="button" class="tab" id="qt-mq" onclick="qTab('mq')">Hauptquests</button>
-      <button type="button" class="tab" id="qt-fac" onclick="qTab('fac')">Fraktionen</button>
-      <button type="button" class="tab" id="qt-sq" onclick="qTab('sq')">Side-Quests</button>
+    <!-- R2 B5: Cockpit (Weiter-Schritte), vier Strang-Reiter mit Fortschritt, je Strang ein Kopf mit Szene + schlanke Faltkarten -->
+    <div id="quest-hero" class="q5-cockpit cd-spot"></div>
+    <div class="tabs q5-tabs" role="tablist" aria-label="Quest-Stränge">
+      <button type="button" class="tab active" id="qt-te" role="tab" aria-selected="true" aria-controls="qp-te" onclick="qTab('te')" style="--q5c:var(--red)"><span class="q5-tab-g cd-g" aria-hidden="true">✺</span><span class="q5-tab-tx"><span class="q5-tab-t">True Ending</span><span class="q5-tab-s" id="q5-ts-te"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-te"></i></span></button>
+      <button type="button" class="tab" id="qt-mq" role="tab" aria-selected="false" aria-controls="qp-mq" onclick="qTab('mq')" style="--q5c:var(--gold)"><span class="q5-tab-g cd-g" aria-hidden="true">❢</span><span class="q5-tab-tx"><span class="q5-tab-t">Hauptquests</span><span class="q5-tab-s" id="q5-ts-mq"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-mq"></i></span></button>
+      <button type="button" class="tab" id="qt-fac" role="tab" aria-selected="false" aria-controls="qp-fac" onclick="qTab('fac')" style="--q5c:var(--slate)"><span class="q5-tab-g cd-g" aria-hidden="true">⚑</span><span class="q5-tab-tx"><span class="q5-tab-t">Fraktionen</span><span class="q5-tab-s" id="q5-ts-fac"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-fac"></i></span></button>
+      <button type="button" class="tab" id="qt-sq" role="tab" aria-selected="false" aria-controls="qp-sq" onclick="qTab('sq')" style="--q5c:var(--cd-ok)"><span class="q5-tab-g cd-g" aria-hidden="true">❖</span><span class="q5-tab-tx"><span class="q5-tab-t">Nebenquests</span><span class="q5-tab-s" id="q5-ts-sq"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-sq"></i></span></button>
     </div>
-    <div class="pane active" id="qp-te">
-      <p class="te-intro">Pflicht für das versteckte Ende: Hauptstory samt Epilog und alle 40 Abyss-Challenges einschließlich Dimensional Bonds. Die übrigen Aufgaben sind zusätzliche Empfehlungen. Prüfe deinen Abyss-Stand im Spiel unter Journal → Challenges → Exploration → The Abyss. Die vier Eternal-Corridor-Rätsel zählen nicht zu den 40. <a href="https://vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert/" target="_blank" rel="noopener noreferrer">Quelle</a></p>
-      <div class="te-catbars" id="te-catbars"></div>
+    <div class="pane active" id="qp-te" role="tabpanel" aria-labelledby="qt-te">
       <div id="te-list"></div>
     </div>
-    <div class="pane" id="qp-mq">
-      <div class="spl-bar">🔒 Story-Spoiler ab Kapitel <select class="fs" id="mq-spoiler" aria-label="Spoiler-Horizont nach Kapitel setzen" onchange="setSpoilerChapter(this.value)" style="margin:0 4px"><option value="0">aus (alles sichtbar)</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> ausblenden</div>
+    <div class="pane" id="qp-mq" role="tabpanel" aria-labelledby="qt-mq">
+      <div id="mq-head"></div>
+      <div class="spl-bar q5-spl"><span class="q5-spl-l"><span aria-hidden="true">🔒</span> Story-Spoiler ab Kapitel</span> <select class="fs" id="mq-spoiler" aria-label="Spoiler-Horizont nach Kapitel setzen" onchange="setSpoilerChapter(this.value)"><option value="0">aus (alles sichtbar)</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> <span class="q5-spl-l">ausblenden</span></div>
       <div id="mq-list"></div>
     </div>
-    <div class="pane" id="qp-fac"><div id="fac-list"></div></div>
-    <div class="pane" id="qp-sq"><div id="sq-list"></div></div>
+    <div class="pane" id="qp-fac" role="tabpanel" aria-labelledby="qt-fac"><div id="fac-list"></div></div>
+    <div class="pane" id="qp-sq" role="tabpanel" aria-labelledby="qt-sq"><div id="sq-list"></div></div>
   </section>
 
   <section class="sec" id="sec-map">
@@ -11274,32 +11478,208 @@ function saveTE(a){
     window._syncProgress(a).catch(()=>{});
   }
 }
+
+/* ==== R2 B5 · Quests (Redesign 2, 21.10.2026) ====
+   Vier Stränge (True Ending, Hauptquests, Fraktionen, Nebenquests): oben Cockpit + Strang-Reiter mit Fortschritt,
+   je Strang ein Kopf (cdHero mit Szene q-*) und schlanke Faltkarten (cdFold). Eingeklappt: Name, Kurzsatz, Kernfakten
+   als Chips; aufgeklappt: Schritte als Stepper (lazy, data-s trägt den Volltext). Fortschritt: cd_te, cd_ch_done (nur
+   Anzeige), cd_sq_done (Liste der Questnamen) und neu cd_r2_b5_fac (abgehakte Fraktionsquests). */
+const _Q5_FAC_KEY='cd_r2_b5_fac';
+const _Q5_TE_ORDER=['Story','Abyss','Companions','Sanctums','Hexen','Greymane','Misc'];
+const _Q5_TE_META={
+  Story:{t:'Hauptstory',g:'❢',keys:['q-main']},
+  Abyss:{t:'Abyss-Challenges',g:'✺',keys:['reg-the-abyss']},
+  Companions:{t:'Gefährten',g:'⚭',keys:['char-damiane']},
+  Sanctums:{t:'Sanktum',g:'✠',keys:['cl-sanctum']},
+  Hexen:{t:'Hexen',g:'☾',keys:[]},
+  Greymane:{t:'Graumähnen',g:'⛨',keys:['cl-greymane']},
+  Misc:{t:'Sonstiges',g:'✧',keys:[]}
+};
+const _Q5_TE_SRC='https://vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert/';
+function _q5Reg(r){return (typeof normReg==='function'&&r)?(normReg(r)||null):null;}
+function _q5RegCol(r){return cdTone({region:r})||'var(--gold)';}
+/* Regions-Chip: Farbpunkt + Name (Farbe aus REGION_COLORS) */
+function _q5RegChip(label,reg){
+  return '<span class="cd-chip q5-regc" style="--c:'+cdEsc(_q5RegCol(reg||label))+'"><i class="q5-dot" aria-hidden="true"></i><span>'+cdEsc(label)+'</span></span>';
+}
+/* erster Teilsatz (wortgetreu) für den Kurzsatz eingeklappter Karten */
+function _q5First(s,max){
+  s=String(s||'').trim();
+  const parts=s.split(/\s[—–]\s/);
+  let m=parts[0];
+  if(m.length<40&&parts[1])m=m.replace(/[.:;,]$/,'')+': '+parts[1];
+  const dot=m.search(/[.!?](\s|$)/);
+  if(dot>24)m=m.slice(0,dot+1);
+  if(max&&m.length>max)m=m.slice(0,m.lastIndexOf(' ',max)>20?m.lastIndexOf(' ',max):max)+' …';
+  return m;
+}
+/* kurzer Belohnungs-Chip: erstes Element der Aufzählung, nur wenn knapp */
+function _q5Short(s,max){
+  s=String(s||'').trim();if(!s||s==='—'||s==='-')return '';
+  const p=s.split(/\s*(?:;|,|\(|\s[—–]\s|\s→\s)\s*/)[0].trim();
+  return p&&p.length<=(max||34)?p:'';
+}
+/* 'Kapitel N …' am Anfang einer Voraussetzung → Chip 'Kap. N' (Volltext im title) */
+function _q5ChapChip(pre){
+  const m=/^(?:ab\s+)?Kapitel\s+(\d{1,2})\b/i.exec(String(pre||'').trim());
+  return m?{i:'key',t:'Kap. '+m[1],title:'Voraussetzung: '+pre}:null;
+}
+function _q5Badges(q){
+  let b='';
+  if(q.miss)b+=cdChip({t:'verpassbar',i:'miss',c:'red',title:'Kann verpasst werden, Details im Text'});
+  if(q.conf==='medium')b+=cdChip({t:'Quelle: teils belegt',title:'Quellenabhängige Angabe'});
+  else if(q.conf==='low')b+=cdChip({t:'Quelle: unsicher',c:'warn',title:'Quellenabhängige Angabe'});
+  return b?'<span class="cd-chips q5-st-b">'+b+'</span>':'';
+}
+/* Abhak-Knopf (in Faltkarten-Köpfen und Stepper-Zeilen); Klick wird delegiert (_q5Wire) */
+function _q5Ck(key,id,on,label){
+  return '<button type="button" class="q5-ck" data-q5-k="'+cdEsc(key)+'" data-q5-id="'+cdEsc(id)+'" aria-pressed="'+(on?'true':'false')+'" aria-label="'+cdEsc('Erledigt: '+label)+'" title="Als erledigt markieren">'+cdIcon('check')+'</button>';
+}
+/* Questschritt im Stepper: Name + Badges + Fakten-Raster + Lösung/Notiz */
+function _q5Step(q,o){
+  o=o||{};
+  if(!q||typeof q!=='object')return '<li><span class="cd-step-t">'+cdEsc(q)+'</span></li>';
+  const ck=o.key?_q5Ck(o.key,o.id,o.on,q.q):'';
+  return '<li class="q5-st'+(q.miss?' is-miss':'')+(o.on?' is-done':'')+'"'+(o.id?' data-q5-id="'+cdEsc(o.id)+'"':'')+'>'
+    +'<div class="q5-st-hd"><span class="cd-step-t">'+cdEsc(q.q)+'</span>'+ck+'</div>'+_q5Badges(q)
+    +cdFacts([['Trigger',q.trigger],['Voraussetzung',q.prereq],['Belohnung',q.reward]],{cls:'q5-st-f'})
+    +(q.tip?_q5Clamp('<p class="q5-st-tip q5-clp-t"><b>'+cdEsc(o.tipLbl||'Lösung')+'</b> '+cdEsc(q.tip)+'</p>',String(q.tip).length>230,{l:3,more:'Ganze '+(o.tipLbl||'Lösung')}):'')+'</li>';
+}
+/* Feinschliff: lange Texte auf wenige Zeilen kürzen, Knopf klappt auf (Text bleibt im DOM, Suche zeigt alles).
+   m = nur mobil kürzen (Hinweis-Kästen über der Liste). */
+function _q5Clamp(html,on,o){
+  o=o||{};if(!on)return html;
+  return '<div class="q5-clp'+(o.m?' q5-clp--m':'')+'" style="--l:'+(o.l||3)+'">'+html
+    +'<button type="button" class="q5-clp-b" aria-expanded="false" data-more="'+cdEsc(o.more||'Weiterlesen')+'"><span>'+cdEsc(o.more||'Weiterlesen')+'</span>'+cdIcon('chev')+'</button></div>';
+}
+/* Strang-Kopf: cdHero mit Szene + großem Fortschrittsbalken */
+function _q5Head(o){
+  const pr=[].concat(o.prog||[]).map(p=>'<span class="q5-hprog" data-q5-hprog>'+cdProg(p.done,p.total,p.label)+'<span class="q5-hprog-l">'+cdEsc(p.lbl)+'</span></span>').join('');
+  return cdHero({kicker:o.kicker,title:o.title,sub:{h:cdEsc(o.sub)+pr},scene:{keys:o.keys,pos:o.pos},glyph:o.glyph,tone:o.tone,stats:o.stats,cls:'q5-head',h:3});
+}
+function _q5SetProg(el,done,total,label){
+  const p=el&&el.querySelector('.cd-prog');
+  if(p)p.outerHTML=cdProg(done,total,label);
+}
+/* Performance: verdeckte Reiter (Hauptquests, Fraktionen, Nebenquests) erst nach dem ersten Bild aufbauen.
+   Reiter-Klick (qTab) baut sofort; cdGo sucht bis 1,2 s nach, die Suche wird nach dem Aufbau erneut angewandt. */
+const _q5Pending={};
+function _q5Lazy(id,fn){
+  const p=document.getElementById('qp-'+id);
+  if(!p||p.classList.contains('active')||_q5Pending[id]==='now'){delete _q5Pending[id];return false;}
+  if(!_q5Pending[id]){_q5Pending[id]=fn;requestAnimationFrame(()=>setTimeout(()=>_q5Flush(id),0));}
+  return true;
+}
+function _q5Flush(id){const fn=_q5Pending[id];if(typeof fn!=='function')return;_q5Pending[id]='now';fn();}
+/* ein Satz delegierter Handler für die ganze Quest-Seite */
+function _q5Wire(){
+  const sec=document.getElementById('sec-quests');
+  if(!sec||sec.dataset.q5Wired)return;
+  sec.dataset.q5Wired='1';
+  sec.addEventListener('click',e=>{
+    const b=e.target.closest('.q5-ck');
+    if(b){
+      e.preventDefault();e.stopPropagation();
+      const key=b.dataset.q5K,id=b.dataset.q5Id,on=b.getAttribute('aria-pressed')!=='true';
+      cdCheckSet(key,id,on);
+      b.setAttribute('aria-pressed',on?'true':'false');
+      const host=b.closest('.q5-st,.cd-fold');if(host)host.classList.toggle(host.classList.contains('q5-st')?'is-done':'q5-done',on);
+      if(key==='cd_sq_done'){saveSQ(loadSQ());_q5SqRefresh();}
+      else if(key===_Q5_FAC_KEY)_q5FacRefresh(b.closest('.cd-fold'));
+      renderQuestHero();
+      return;
+    }
+    const cb=e.target.closest('.q5-clp-b');
+    if(cb){
+      e.preventDefault();e.stopPropagation();
+      const w=cb.closest('.q5-clp'),open=!w.classList.contains('is-open');
+      w.classList.toggle('is-open',open);cb.setAttribute('aria-expanded',open?'true':'false');
+      cb.firstChild.textContent=open?'Weniger anzeigen':cb.dataset.more;
+      return;
+    }
+    const sp=e.target.closest('.q5-spoil-btn');
+    if(sp){e.preventDefault();e.stopPropagation();const f=sp.closest('.cd-fold');if(f)f.classList.remove('q5-spoil');sp.remove();return;}
+    // Spoiler-Sperre: gesperrte Kapitelkarte nicht aufklappen
+    if(e.target.closest('.q5-spoil>summary'))e.preventDefault();
+  });
+  sec.addEventListener('cd-check',e=>{
+    if(e.detail.key!=='cd_te')return;
+    saveTE(loadTE()); // Sync + Fortschritt nachziehen (cdCheckSet hat schon gespeichert)
+    _q5TeRefresh();
+    if(typeof updateStats==='function')updateStats();
+    if(typeof checkAchievements==='function')checkAchievements();
+    if(typeof renderAchievements==='function')renderAchievements();
+  });
+  sec.addEventListener('cd-pills',e=>{
+    const n=e.detail.name,v=e.detail.values[0]||'all';
+    if(n==='q5-sq-reg'){_q5SqF.reg=v;_q5SqApply();}
+    else if(n==='q5-sq-st'){_q5SqF.st=v;_q5SqApply();}
+    else if(n==='q5-fac-reg'){_q5FacF=v;_q5FacApply();}
+  });
+}
+
 function renderTE(){
   const list=document.getElementById('te-list');if(!list)return;
-  const done=loadTE();
-  const ICON={Story:'📖',Abyss:'✦',Companions:'👥',Greymane:'🛡️',Sanctums:'🏛️',Hexen:'🌙',Misc:'✦'};
-  const cats=[...new Set(TRUE_ENDING.map(t=>t.cat))].sort((a,b)=>['Story','Abyss','Companions','Sanctums','Hexen','Greymane','Misc'].indexOf(a)-['Story','Abyss','Companions','Sanctums','Hexen','Greymane','Misc'].indexOf(b));
-  const bars=document.getElementById('te-catbars');
-  if(bars){
-    bars.innerHTML=cats.map(cat=>{
-      const items=TRUE_ENDING.filter(t=>t.cat===cat);
-      const dc=items.filter(t=>done.includes(t.id)).length;
-      const p=items.length?Math.round(dc/items.length*100):0;
-      return `<div class="te-catbar${dc===items.length?' full':''}"><span class="te-catbar-lbl">${ICON[cat]||'•'} ${escHtml(cat)}${items[0]?.required?' (Pflicht)':' (empfohlen)'}</span><div class="pgw"><div class="pgb" style="width:${p}%"></div></div><span class="te-catbar-c">${dc}/${items.length}</span></div>`;
-    }).join('');
-  }
-  list.innerHTML=cats.map(cat=>{
+  _q5Wire();
+  const done=new Set(loadTE().map(String));
+  const cats=_Q5_TE_ORDER.filter(c=>TRUE_ENDING.some(t=>t.cat===c)).concat([...new Set(TRUE_ENDING.map(t=>t.cat))].filter(c=>!_Q5_TE_ORDER.includes(c)));
+  const req=TRUE_ENDING.filter(t=>t.required),reqDone=req.filter(t=>done.has(t.id)).length;
+  const opt=TRUE_ENDING.filter(t=>!t.required),optDone=opt.filter(t=>done.has(t.id)).length;
+  const nAbyss=TRUE_ENDING.filter(t=>t.cat==='Abyss').length;
+  const head=_q5Head({kicker:'Strang 1 · Verstecktes Ende',title:'True Ending',
+    sub:'Pflicht: Hauptstory samt Epilog und alle '+nAbyss+' Abyss-Challenges. Alles andere ist Empfehlung.',
+    keys:['q-true-ending'],glyph:'✺',tone:'red',
+    stats:[[req.length,'Pflichtaufgaben'],[opt.length,'Empfehlungen'],[cats.length,'Bereiche']],
+    prog:[{done:reqDone,total:req.length,lbl:'Pflicht',label:reqDone+' von '+req.length+' Pflichtaufgaben erledigt'},{done:optDone,total:opt.length,lbl:'Empfehlungen',label:optDone+' von '+opt.length+' Empfehlungen erledigt'}]});
+  const split=s=>{
+    s=String(s);if(s.length<=64)return [s,''];
+    const i=s.search(/\s[—–]\s|\s\(/);
+    if(i>8&&i<70)return [s.slice(0,i),s.slice(i).replace(/^\s[—–]\s/,'').trim()];
+    return [s,''];
+  };
+  const fix=h=>h.replace(/(id|for)="cdck-/g,'$1="cdck-q5-');
+  const folds=cats.map(cat=>{
+    const m=_Q5_TE_META[cat]||{t:cat,g:'✧',keys:[]};
     const items=TRUE_ENDING.filter(t=>t.cat===cat);
-    const dc=items.filter(t=>done.includes(t.id)).length;
-    return `<div class="te-grp${cat==='Abyss'?' te-abyss':''}">
-      <div class="te-gh"><span class="te-gt">${ICON[cat]||'•'} ${escHtml(cat)}${items[0]?.required?' (Pflicht)':' (empfohlen)'}</span><span class="te-gc">${dc}/${items.length}</span></div>
-      ${items.map(t=>`<div class="te-it${done.includes(t.id)?' done':''}" onclick="toggleTE('${t.id}')">
-        <div class="chk${done.includes(t.id)?' on':''}" role="checkbox" aria-checked="${done.includes(t.id)?'true':'false'}" aria-label="${escHtml(t.task)}" tabindex="0"></div>
-        <span class="te-tx">${escHtml(t.task)}</span>
-      </div>`).join('')}
-    </div>`;
+    const isReq=items.some(t=>t.required);
+    const dc=items.filter(t=>done.has(t.id)).length;
+    const names=items.slice(0,3).map(t=>split(t.task)[0].replace(/^Optional:\s*/,'')).join(', ')+(items.length>3?' …':'');
+    const lead=(isReq?(cat==='Abyss'?'Alle '+items.length+' Challenges einschließlich Dimensional Bonds: ':'Pflicht: '):'Empfehlung: ')+names;
+    const checks=items.map(t=>{const [a,b]=split(t.task);return cdCheck({key:'cd_te',id:t.id,title:a,sub:b||'',s:t.task+' '+cat+' '+m.t+' true ending'});}).join('');
+    return cdFold({title:m.t,lead,icon:m.g,
+      chips:[isReq?{t:'Pflicht',i:'warn',c:'red'}:{t:'Empfohlen',c:'gold'},{v:items.length,t:items.length===1?'Aufgabe':'Aufgaben'}],
+      prog:{done:dc,total:items.length},tone:isReq?'red':'gold',
+      scene:{keys:m.keys,glyph:m.g,tone:isReq?'red':'gold'},
+      cls:'q5-te'+(isReq?' q5-req':'')+(dc===items.length?' q5-full':''),attrs:{'data-q5-cat':cat},
+      body:'<div class="cd-checks q5-te-grid'+(items.length>8?' is-many':'')+'">'+fix(checks)+'</div>'});
   }).join('');
-  if(typeof renderQuestHero==='function')renderQuestHero();
+  list.innerHTML=head
+    +'<div class="q5-notes">'+cdNote('Abyss-Stand im Spiel prüfen: Journal → Challenges → Exploration → The Abyss. Die vier Eternal-Corridor-Rätsel zählen nicht zu den 40.',{kind:'info',title:'Im Spiel prüfen'})
+    +cdSrc([{t:'vulkk.com',url:_Q5_TE_SRC}],'Quelle')+'</div>'
+    +'<div class="cd-folds q5-folds" id="te-folds">'+folds+'</div>';
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(list);
+  renderQuestHero();
+}
+/* nach einem Haken: Zähler in Köpfen nachziehen, ohne neu zu rendern (offene Karten bleiben offen) */
+function _q5TeRefresh(){
+  const list=document.getElementById('te-list');if(!list)return;
+  const done=new Set(loadTE().map(String));
+  list.querySelectorAll('.cd-fold[data-q5-cat]').forEach(f=>{
+    const items=TRUE_ENDING.filter(t=>t.cat===f.dataset.q5Cat),dc=items.filter(t=>done.has(t.id)).length;
+    _q5SetProg(f.querySelector(':scope>summary .cd-fold-aside'),dc,items.length);
+    f.classList.toggle('q5-full',dc===items.length);
+  });
+  const req=TRUE_ENDING.filter(t=>t.required),rd=req.filter(t=>done.has(t.id)).length;
+  const opt=TRUE_ENDING.filter(t=>!t.required),od=opt.filter(t=>done.has(t.id)).length;
+  const hd=list.querySelector('.q5-head');
+  if(hd){
+    const hp=hd.querySelectorAll('[data-q5-hprog]');
+    _q5SetProg(hp[0],rd,req.length,rd+' von '+req.length+' Pflichtaufgaben erledigt');
+    _q5SetProg(hp[1],od,opt.length,od+' von '+opt.length+' Empfehlungen erledigt');
+  }
+  // Häkchen anderer Karten mit demselben Schlüssel (z. B. Checklisten-Seite) bleiben über renderTE synchron
+  list.querySelectorAll('.cd-check-in[data-ck-key="cd_te"]').forEach(i=>{const on=done.has(i.dataset.ckId);if(i.checked!==on)i.checked=on;});
+  renderQuestHero();
 }
 function toggleTE(id){
   let d=loadTE();
@@ -11318,71 +11698,84 @@ function toggleSQ(key,el){
   const now=!d.includes(key);
   d=now?[...d,key]:d.filter(x=>x!==key);
   saveSQ(d);
-  if(el){
-    el.classList.toggle('on',now);el.setAttribute('aria-checked',now?'true':'false');
-    const item=el.closest('.sq-item');if(item)item.classList.toggle('done',now);
-  }
+  if(el){el.setAttribute('aria-pressed',now?'true':'false');const f=el.closest('.cd-fold');if(f)f.classList.toggle('q5-done',now);}
   sqUpdateCounts();
   if(typeof renderQuestHero==='function')renderQuestHero();
 }
-function sqUpdateCounts(){
-  document.querySelectorAll('#sq-list .sq-lane').forEach(lane=>{
-    const items=lane.querySelectorAll('.sq-item').length;
-    const done=lane.querySelectorAll('.sq-item.done').length;
-    const c=lane.querySelector('.sq-lane-c');
-    if(c)c.textContent=done+'/'+items+(lane.classList.contains('sq-lane-sp')?' besondere':' Quests');
-  });
-  const all=document.querySelectorAll('#sq-list .sq-item').length;
-  const dn=document.querySelectorAll('#sq-list .sq-item.done').length;
-  const p=document.getElementById('sq-progress');if(p)p.textContent=dn+'/'+all;
-}
+function sqUpdateCounts(){_q5SqRefresh();}
 
 // ===== QUEST TABS =====
 function qTab(id){
+  _q5Flush(id);
   ['te','mq','fac','sq'].forEach(t=>{
-    document.getElementById('qt-'+t).classList.toggle('active',t===id);
-    document.getElementById('qp-'+t).classList.toggle('active',t===id);
+    const b=document.getElementById('qt-'+t),p=document.getElementById('qp-'+t);
+    if(b){b.classList.toggle('active',t===id);b.setAttribute('aria-selected',t===id?'true':'false');}
+    if(p)p.classList.toggle('active',t===id);
   });
 }
 
 // ===== MAIN QUESTS =====
+function _q5ChId(ch){return 'mq-'+(/^\d+$/.test(ch.ch)?'ch-'+ch.ch:cdSlug(ch.ch));}
 function renderMQ(){
-  // Quests als Objekte {q,trigger,prereq,reward,miss,tip,conf} (Walkthrough-Schema wie FAC_DATA;
-  // alle Kapitel seit 2026-06-11). String-Fallback bleibt fuer Robustheit erhalten.
-  const qCard=q=>`<div class="fac-q" data-s="${escHtml((q.q+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase())}">
-      <div class="fac-qh">${escHtml(q.q)}${facBadges(q)}</div>
-      <div class="fac-qm">
-        <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
-        <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${escHtml(q.prereq)}</div>
-        <div class="fac-qk">Belohnung</div><div class="fac-qv">${escHtml(q.reward)}</div>
-        ${q.tip?'<div class="fac-qk">Lösung</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
-      </div>
-    </div>`;
+  if(_q5Lazy('mq',renderMQ))return;
+  _q5Wire();
+  const list=document.getElementById('mq-list');if(!list)return;
   const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
-  document.getElementById('mq-list').innerHTML=MAIN_QUESTS.map(ch=>{
-    const detailed=ch.quests.length&&typeof ch.quests[0]==='object';
-    const acc=(typeof chapAccent==='function')?chapAccent(ch.ch):null;
-    const isNum=/^\d+$/.test(ch.ch);
-    const numLabel=isNum?ch.ch:(ch.ch==='Prolog'?'P':ch.ch==='Epilog'?'E':'•');
-    const chNum=chOrd(ch.ch);
-    const locked=sp>0&&!isNaN(chNum)&&chNum>sp;
+  const chDone=(typeof lsJson==='function')?lsJson('cd_ch_done',[]):[];
+  const numCh=MAIN_QUESTS.filter(c=>/^\d+$/.test(c.ch));
+  const doneN=numCh.filter(c=>chDone.includes(parseInt(c.ch,10))).length;
+  const totalQ=MAIN_QUESTS.reduce((n,c)=>n+c.quests.length,0);
+  const missN=MAIN_QUESTS.reduce((n,c)=>n+c.quests.filter(q=>q&&q.miss).length,0);
+  const info=MAIN_QUESTS.map(ch=>{
+    const isNum=/^\d+$/.test(ch.ch),acc=(typeof chapAccent==='function')?chapAccent(ch.ch):null;
+    const num=chOrd(ch.ch);
+    return {ch,isNum,acc,reg:acc?acc.region:null,lbl:isNum?ch.ch:(ch.ch==='Prolog'?'P':ch.ch==='Epilog'?'E':'•'),
+      locked:sp>0&&!isNaN(num)&&num>sp,done:isNum&&chDone.includes(parseInt(ch.ch,10)),id:_q5ChId(ch)};
+  });
+  // Kapitelfolge als Route: Punkte in Regionsfarbe, erledigte gefüllt; Klick springt zur Karte
+  const route='<nav class="q5-route" aria-label="Kapitelfolge">'+info.map(x=>
+    '<a class="q5-rt'+(x.done?' is-done':'')+(x.locked?' is-locked':'')+'" href="'+cdGoHref('quests',x.id)+'" data-go="quests" data-goq="'+x.id+'" style="--c:'+cdEsc(x.reg?_q5RegCol(x.reg):'var(--dim)')+'" title="'+cdEsc((x.isNum?'Kapitel ':'')+x.ch.ch+(x.locked?' · Spoiler':' · '+x.ch.name)+(x.reg?' · '+x.reg:''))+'"><span>'+cdEsc(x.lbl)+'</span></a>'
+  ).join('<i class="q5-rt-ln" aria-hidden="true"></i>')+'</nav>';
+  const regs=REG_KEYS.filter(r=>info.some(x=>x.reg===r));
+  const legend='<div class="cd-chips q5-route-leg"><span class="q5-route-k">Schauplätze</span>'+regs.map(r=>_q5RegChip(r+' · '+info.filter(x=>x.reg===r).length,r)).join('')+'</div>';
+  const hd=document.getElementById('mq-head');
+  if(hd)hd.innerHTML=_q5Head({kicker:'Strang 2 · Hauptstory',title:'Hauptquests',
+    sub:'Prolog, '+numCh.length+' Kapitel und Epilog. Jede Quest mit Trigger, Voraussetzung und Belohnung.',
+    keys:['q-main'],glyph:'❢',tone:'gold',
+    stats:[[MAIN_QUESTS.length,'Abschnitte'],[totalQ,'Quests'],[missN,'verpassbar'],[doneN,'Kapitel erledigt']],
+    prog:{done:doneN,total:numCh.length,lbl:'Kapitel abgeschlossen (Kapitel-Guide)',label:doneN+' von '+numCh.length+' Kapiteln abgeschlossen'}})
+    +'<div class="q5-routebox cd-spot">'+route+legend+'</div>';
+  list.innerHTML='<div class="cd-folds q5-folds q5-chaps">'+info.map(x=>{
+    const ch=x.ch,detailed=ch.quests.length&&typeof ch.quests[0]==='object';
     const hasMiss=detailed&&ch.quests.some(q=>q.miss);
-    const bossTag=ch.boss?'<span class="chap-boss-tag">⚔ '+escHtml(ch.boss)+'</span>':'';
-    const missTag=hasMiss?MISS_CHIP:'';
-    const regAttr=acc?' data-reg style="--reg:'+acc.col+'"':'';
-    return `<div class="chap${locked?' spoiler-locked':''}"${regAttr}>
-    ${locked?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">${isNum?'Kapitel ':''}${escHtml(ch.ch)} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
-    <div class="chap-hd" onclick="toggleChap(this)" role="button" tabindex="0" aria-expanded="false">
-      <div class="chap-hl"><span class="chap-num">${numLabel}</span><span class="chap-title">${isNum?'Kap. ':''}${escHtml(ch.ch)} — ${escHtml(ch.name)}</span></div>
-      <div class="chap-r"><span style="font-size:var(--fs-11);color:var(--dim)">${ch.quests.length} Quests${detailed?' · Walkthrough':''}</span>${missTag}${bossTag}<span class="chap-arr">▼</span></div>
-    </div>
-    <div class="chap-body">
-      ${detailed?ch.quests.map(qCard).join(''):'<ul class="ql">'+ch.quests.map(q=>'<li>'+escHtml(q)+'</li>').join('')+'</ul>'}
-      ${ch.unlock?'<div style="font-size:var(--fs-11-5);color:var(--gold);margin-bottom:4px">Unlock: '+escHtml(ch.unlock)+'</div>':''}
-      ${ch.warn?'<div class="warn-b">'+escHtml(ch.warn)+'</div>':''}
-    </div>
-  </div>`;}).join('');
+    const names=ch.quests.slice(0,3).map(q=>String(typeof q==='object'?q.q:q).replace(/\s*\(.*$/,'')).join(' → ')+(ch.quests.length>3?' …':'');
+    const lead=ch.boss?'Boss: '+ch.boss:'Quests: '+names;
+    const unl=ch.unlock?String(ch.unlock).split(/\s*[(.]/)[0].trim():'';
+    const chips=[];
+    if(x.reg)chips.push({h:_q5RegChip(x.reg,x.reg)});
+    chips.push({v:ch.quests.length,t:'Quests',c:'gold'});
+    if(unl&&unl.length<=28)chips.push({i:'key',t:'Neu: '+unl,c:'ok',title:'Freischaltung: '+ch.unlock});
+    if(hasMiss)chips.push({t:'verpassbar',i:'miss',c:'red'});
+    const s=[(x.isNum?'Kapitel ':'')+ch.ch,ch.name,ch.boss||'',ch.unlock||'',ch.warn||'',
+      ...ch.quests.map(q=>typeof q==='object'?[q.q,q.trigger,q.prereq,q.reward,q.tip||''].join(' '):q)].join(' ');
+    const keys=x.isNum?['ch-'+ch.ch]:(ch.ch==='Prolog'?[]:['ch-epilog','ch-13']);
+    if(x.reg)keys.push('reg-'+cdSlug(x.reg));
+    const guide=x.isNum?'ch-'+ch.ch:(ch.ch==='Prolog'?'ch-1':'ch-Epilog');
+    const body=()=>
+      cdFacts([['Freischaltung',ch.unlock||'']]) /* Boss steht schon im Kurzsatz (aufgeklappt ungekürzt) */
+      +(ch.warn?cdNote(ch.warn,{kind:'warn',title:'Achtung'}):'')
+      +(detailed?'<ol class="cd-stepper q5-steps">'+ch.quests.map(q=>_q5Step(q)).join('')+'</ol>'
+        :cdStepper(ch.quests.map(q=>String(q))))
+      +'<p class="q5-more">'+cdGoLink('chapters',guide,'Im Kapitel-Guide öffnen')+'</p>';
+    return cdFold({id:x.id,title:{h:'<span class="q5-kick">'+cdEsc(x.isNum?'Kapitel '+ch.ch:ch.ch)+' </span>'+cdEsc(ch.name)},lead,
+      icon:x.lbl,chips,region:x.reg||undefined,tone:x.reg?undefined:'gold',
+      scene:{keys:keys.concat('q-main'),region:x.reg||undefined,tone:x.reg?undefined:'gold',glyph:x.lbl},
+      aside:(x.locked?'<button type="button" class="q5-spoil-btn"><span aria-hidden="true">🔒</span> Spoiler zeigen</button>':'')
+        +(x.done?cdChip({t:'Abgeschlossen',i:'check',c:'ok'}):''),
+      s,body,cls:'q5-chap'+(x.locked?' q5-spoil':'')+(x.done?' q5-done':''),attrs:{'data-go-id':x.id}});
+  }).join('')+'</div>';
   const sel=document.getElementById('mq-spoiler');if(sel)sel.value=String(sp);
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(list);
 }
 function toggleChap(hd){
   delete hd.nextElementSibling.dataset.srchOpen;
@@ -11392,70 +11785,111 @@ function toggleChap(hd){
 }
 
 // ===== SIDE QUESTS (frei) =====
+let _q5SqF={reg:'all',st:'all'};
 function renderSideQuests(){
+  if(_q5Lazy('sq',renderSideQuests))return;
+  _q5Wire();
   const el=document.getElementById('sq-list');
   if(!el||typeof SIDE_QUESTS==='undefined')return;
   const specials=SIDE_QUESTS.filter(q=>q.special);
   const normal=SIDE_QUESTS.filter(q=>!q.special);
-  const done=loadSQ();
-  const isDone=q=>done.includes(q.q);
-  const sqChk=q=>'<span class="chk sqchk'+(isDone(q)?' on':'')+'" role="checkbox" aria-checked="'+(isDone(q)?'true':'false')+'" tabindex="0" aria-label="'+escHtml(q.q)+'" title="Als erledigt markieren" onclick="event.preventDefault();event.stopPropagation();toggleSQ(\''+escJsStr(q.q)+'\',this)"></span>';
+  const done=new Set(loadSQ());
   const order=r=>{const i=REG_KEYS.indexOf(normReg(r));return i<0?99:i;};
   const regions=[...new Set(normal.map(q=>q.region))].sort((a,b)=>order(a)-order(b));
-  const spChip=specials.length?`<span class="sq-regchip sq-regchip-sp" style="--reg:var(--gold)" onclick="if(window.cdMotion)cdMotion.scrollTo(document.getElementById('sq-lane-sp'));else document.getElementById('sq-lane-sp').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>&#9733; Legend&auml;re Mounts ${specials.length}</span>`:'';
-  const chips=spChip+regions.map((r,i)=>{
-    const c=normal.filter(q=>q.region===r).length;
-    const col=regAccent(normReg(r));
-    return `<span class="sq-regchip"${col?' style="--reg:'+col+'"':''} onclick="if(window.cdMotion)cdMotion.scrollTo(document.getElementById('sq-lane-${i}'));else document.getElementById('sq-lane-${i}').scrollIntoView({behavior:'smooth',block:'start'})"><i></i>${escHtml(r)} ${c}</span>`;
-  }).join('');
-  const spRow=q=>{
-    const ds=escHtml((q.q+' '+q.region+' '+q.trigger+' '+(q.boss||'')+' '+q.reward+' '+(q.craft||'')+' '+(q.tip||'')).toLowerCase());
-    const rw=q.mount||((q.reward&&q.reward!=='—')?q.reward:'—');
-    return `<details class="sq-item sq-item-sp${isDone(q)?' done':''}" data-s="${ds}">
-        <summary><span class="sq-sum-q">${sqChk(q)}<span class="sq-name">${escHtml(q.q)}</span>${facBadges(q)}</span><span class="sq-sum-rw">${escHtml(rw)}</span></summary>
-        <div class="sq-detail">
-          <div class="fac-qk">Region</div><div class="fac-qv">${escHtml(q.region)}</div>
-          <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
-          <div class="fac-qk">Voraussetzung (Ausl&ouml;sen)</div><div class="fac-qv">${escHtml(q.prereq)}</div>
-          ${q.boss&&q.boss!=='—'?'<div class="fac-qk">Boss &amp; Sieg-Voraussetzung</div><div class="fac-qv">'+escHtml(q.boss)+'</div>':''}
-          <div class="fac-qk">Belohnung</div><div class="fac-qv">${escHtml(q.reward)}</div>
-          ${q.craft&&q.craft!=='—'?'<div class="fac-qk">Crafting (Sigil)</div><div class="fac-qv">'+escHtml(q.craft)+'</div>':''}
-          ${q.tip?'<div class="fac-qk">Hinweis</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
-        </div>
-      </details>`;
+  const missN=SIDE_QUESTS.filter(q=>q.miss).length,doneAll=SIDE_QUESTS.filter(q=>done.has(q.q)).length;
+  const card=q=>{
+    const sp=!!q.special,reg=_q5Reg(q.region),on=done.has(q.q);
+    const chips=sp?[{h:_q5RegChip(q.region,reg)}]:[];
+    if(sp&&q.mount)chips.push({g:'♞',t:q.mount,c:'gold'});
+    else if(q.prereq==='—')chips.push({i:'key',t:'kein Gate',c:'ok',title:'„—“ = kein eigenes Gate (ab Regions-Ankunft verfügbar)'});
+    else{const cc=_q5ChapChip(q.prereq);if(cc)chips.push(cc);}
+    const rw=_q5Short(q.reward);if(rw&&!sp)chips.push({g:'◆',t:rw,title:'Belohnung: '+q.reward});
+    if(q.miss)chips.push({t:'verpassbar',i:'miss',c:'red'});
+    else if(q.conf==='low')chips.push({t:'unsicher',c:'warn',title:'Quelle: unsicher'});
+    const s=[q.q,q.region,q.trigger,q.prereq,q.boss||'',q.reward,q.craft||'',q.mount||'',q.tip||'',sp?'legendär mount sigil':'','nebenquest side quest'].join(' ');
+    const body=()=>{
+      const st=[{t:sp?'Voraussetzung (Auslösen)':'Voraussetzung',d:q.prereq},{t:'Start (Trigger)',d:q.trigger}];
+      if(q.boss&&q.boss!=='—')st.push({t:'Boss & Sieg-Voraussetzung',d:q.boss});
+      if(q.craft&&q.craft!=='—')st.push({t:'Crafting (Sigil)',d:q.craft});
+      st.push({t:'Belohnung',d:q.reward});
+      return cdStepper(st,'q5-steps q5-sq-steps')
+        +(q.tip?cdNote(q.tip,{kind:q.miss?'miss':'info',title:q.miss?'Verpassbar':(sp?'Hinweis':'Notiz')}):'')
+        +(q.conf&&q.conf!=='high'?'<p class="cd-src"><span class="cd-src-l">Quellenlage</span>'+(q.conf==='low'?'unsicher':'teils belegt')+'</p>':'');
+    };
+    return cdFold({title:q.q,lead:_q5First(q.trigger,170),icon:sp?'★':'❖',chips,
+      region:reg||undefined,tone:sp?'gold':(reg?undefined:'gold'),
+      scene:sp?{keys:['reg-'+cdSlug(reg||'')],region:reg||undefined,tone:'gold',glyph:'♞'}:undefined,
+      aside:_q5Ck('cd_sq_done',q.q,on,q.q),s,body,
+      cls:'q5-sq'+(sp?' q5-sp':'')+(on?' q5-done':''),
+      attrs:{'data-q5-reg':cdSlug(reg||q.region),'data-q5-sp':sp?'1':null,'data-q5-miss':q.miss?'1':null,'data-filtered':'0'}});
   };
-  const spLane=specials.length?`<div class="sq-lane sq-lane-sp" id="sq-lane-sp" style="--reg:var(--gold)">
-      <div class="sq-lane-hd">&#9733; Legend&auml;re Mount-Quests (Sigil) <span class="sq-lane-c">${specials.filter(isDone).length}/${specials.length} besondere</span></div>
-      <div class="sq-lane-body">${specials.map(spRow).join('')}</div>
-    </div>`:'';
-  const lanes=regions.map((r,i)=>{
-    const list=normal.filter(q=>q.region===r);
-    const col=regAccent(normReg(r));
-    const rows=list.map(q=>{
-      const ds=escHtml((q.q+' '+q.region+' '+q.trigger+' '+q.reward+' '+(q.tip||'')).toLowerCase());
-      const rw=(q.reward&&q.reward!=='—')?q.reward:'—';
-      return `<details class="sq-item${isDone(q)?' done':''}" data-s="${ds}">
-        <summary><span class="sq-sum-q">${sqChk(q)}<span class="sq-name">${escHtml(q.q)}</span>${facBadges(q)}</span><span class="sq-sum-rw">${escHtml(rw)}</span></summary>
-        <div class="sq-detail">
-          <div class="fac-qk">Trigger</div><div class="fac-qv">${escHtml(q.trigger)}</div>
-          <div class="fac-qk">Voraussetzung</div><div class="fac-qv">${escHtml(q.prereq)}</div>
-          <div class="fac-qk">Belohnung</div><div class="fac-qv">${escHtml(q.reward)}</div>
-          ${q.tip?'<div class="fac-qk">Notiz</div><div class="fac-qv">'+escHtml(q.tip)+'</div>':''}
-        </div>
-      </details>`;
-    }).join('');
-    return `<div class="sq-lane" id="sq-lane-${i}"${col?' style="--reg:'+col+'"':''}>
-      <div class="sq-lane-hd">${escHtml(r)} <span class="sq-lane-c">${list.filter(isDone).length}/${list.length} Quests</span></div>
-      <div class="sq-lane-body">${rows}</div>
-    </div>`;
-  }).join('');
-  const intro='<div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">'+normal.length+' freie Side-Quests + <b style="color:var(--glo)">'+specials.length+' legend&auml;re Mount-Quests</b> (Sigil) au&szlig;erhalb von Hauptstory und Fraktionen, nach Region gruppiert &middot; Zeile anklicken f&uuml;r Details.<br><b>Gating-Regel:</b> Townsfolk-Requests/Commissions skalieren mit dem <b>Hauptquest-/Kapitel-Fortschritt</b> (nicht mit Ruf) &mdash; neue Aush&auml;nge erscheinen St&uuml;ck f&uuml;r St&uuml;ck, der &Uuml;bergang Kapitel&nbsp;4/5 &ouml;ffnet einen gro&szlig;en Block. &bdquo;&mdash;&ldquo; = kein eigenes Gate (ab Regions-Ankunft verf&uuml;gbar). Fraktions-Quests haben eigene Ruf-/Contribution-Schwellen (Tab Fraktionen).<br><span style="color:var(--warn)">Verpassbar:</span> Offene Pailune-H&auml;ndler-Requests von Lola, Gunter und Harry k&ouml;nnen beim sp&auml;teren Camp-Umzug als fehlgeschlagen markiert werden &mdash; vorher erledigen. Die Bewohner-Requests im Greymane Camp stehen auf der Seite Graumähnen-Camp.</div>';
-  const sqDoneAll=SIDE_QUESTS.filter(isDone).length;
-  const progressBar='<div class="sq-progress-bar">&#10003; Erledigt: <b style="color:var(--glo)"><span id="sq-progress">'+sqDoneAll+'/'+SIDE_QUESTS.length+'</span></b> <button class="cl-reset" onclick="if(confirm(\'Alle Side-Quest-Haken zurücksetzen?\')){saveSQ([]);renderSideQuests();if(typeof renderQuestHero===\'function\')renderQuestHero();}">Zurücksetzen</button></div>';
-  el.innerHTML=intro+progressBar+'<div class="sq-regbar">'+chips+'</div>'+spLane+lanes;
+  const lane=(id,title,col,list,glyph)=>'<section class="q5-grp sq-lane" id="'+id+'" style="--c:'+cdEsc(col)+'">'
+    +'<header class="q5-grp-hd"><span class="q5-grp-g cd-g" aria-hidden="true">'+glyph+'</span><h4 class="q5-grp-t">'+cdEsc(title)+'</h4>'
+    +'<span class="q5-grp-n" data-q5-n>'+list.filter(q=>done.has(q.q)).length+'/'+list.length+'</span></header>'
+    +'<div class="cd-folds q5-folds q5-grid2">'+list.map(card).join('')+'</div></section>';
+  const head=_q5Head({kicker:'Strang 4 · Nebenquests',title:'Nebenquests',
+    sub:normal.length+' freie Side-Quests und '+specials.length+' legendäre Mount-Quests außerhalb von Hauptstory und Fraktionen, nach Region.',
+    keys:['q-side'],glyph:'❖',tone:'ok',
+    stats:[[normal.length,'Nebenquests'],[specials.length,'Legendäre Mounts'],[missN,'verpassbar'],[doneAll,'erledigt']],
+    prog:{done:doneAll,total:SIDE_QUESTS.length,lbl:'erledigt',label:doneAll+' von '+SIDE_QUESTS.length+' Nebenquests erledigt'}});
+  const notes='<div class="q5-notes q5-notes-2">'
+    +_q5Clamp('<div class="q5-clp-t">'+cdNote('Townsfolk-Requests und Commissions skalieren mit dem Hauptquest-/Kapitel-Fortschritt (nicht mit Ruf): neue Aushänge erscheinen Stück für Stück, der Übergang Kapitel 4/5 öffnet einen großen Block. Fraktions-Quests haben eigene Ruf-/Contribution-Schwellen (Reiter Fraktionen).',{kind:'info',title:'Gating-Regel'})+'</div>',true,{m:1,l:4,more:'Ganze Gating-Regel'})
+    +cdNote('Offene Pailune-Händler-Requests von Lola, Gunter und Harry können beim späteren Camp-Umzug als fehlgeschlagen markiert werden, vorher erledigen. Die Bewohner-Requests im Greymane Camp stehen auf der Seite Graumähnen-Camp.',{kind:'miss'})
+    +'</div>';
+  const pReg=[{v:'all',t:'Alle',n:SIDE_QUESTS.length},{v:'sp',t:'Legendäre Mounts',g:'★',n:specials.length}]
+    .concat(regions.map(r=>({v:cdSlug(_q5Reg(r)||r),t:r,n:normal.filter(q=>q.region===r).length})))
+    .map(x=>Object.assign(x,{on:x.v===_q5SqF.reg}));
+  const pSt=[{v:'all',t:'Alle'},{v:'open',t:'Offen'},{v:'done',t:'Erledigt'},{v:'miss',t:'Verpassbar',n:missN}].map(x=>Object.assign(x,{on:x.v===_q5SqF.st}));
+  const bar='<div class="q5-bar">'+cdPills(pReg,{name:'q5-sq-reg',label:'Region'})
+    +'<div class="q5-bar-r">'+cdPills(pSt,{name:'q5-sq-st',label:'Status',cls:'cd-pills--violet q5-pills-st'})
+    +'<span class="q5-cnt" id="q5-sq-cnt" aria-live="polite"></span>'
+    +'<button type="button" class="q5-reset" onclick="if(confirm(\'Alle Side-Quest-Haken zurücksetzen?\')){saveSQ([]);renderSideQuests();renderQuestHero();}">Haken zurücksetzen</button></div></div>';
+  el.innerHTML=head+notes+bar
+    +(specials.length?lane('sq-lane-sp','Legendäre Mount-Quests (Sigil)','var(--gold)',specials,'★'):'')
+    +regions.map((r,i)=>lane('sq-lane-'+i,r,_q5RegCol(r),normal.filter(q=>q.region===r),'❖')).join('');
+  _q5SqApply();
+}
+/* Filter über Klassen (hide + data-filtered), kein Neuaufbau; Gruppen ohne sichtbare Karte: q5-off */
+function _q5SqApply(){
+  const el=document.getElementById('sq-list');if(!el)return;
+  const done=new Set(loadSQ()),F=_q5SqF;let n=0,tot=0;
+  el.querySelectorAll('.q5-sq').forEach(f=>{
+    tot++;
+    const name=f.querySelector('.q5-ck')?.dataset.q5Id||'';
+    let ok=F.reg==='all'||(F.reg==='sp'?f.dataset.q5Sp==='1':f.dataset.q5Reg===F.reg);
+    if(ok&&F.st==='open')ok=!done.has(name);
+    else if(ok&&F.st==='done')ok=done.has(name);
+    else if(ok&&F.st==='miss')ok=f.dataset.q5Miss==='1';
+    f.dataset.filtered=ok?'0':'1';
+    if(!ok)f.classList.add('hide');else if(f.classList.contains('hide'))f.classList.remove('hide');
+    if(ok)n++;
+  });
+  el.querySelectorAll('.q5-grp').forEach(g=>g.classList.toggle('q5-off',!g.querySelector('.q5-sq[data-filtered="0"]')));
+  const c=document.getElementById('q5-sq-cnt');if(c)c.textContent=n===tot?tot+' Quests':n+' von '+tot;
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(el);
+}
+function _q5SqRefresh(){
+  const el=document.getElementById('sq-list');if(!el)return;
+  const done=new Set(loadSQ());
+  el.querySelectorAll('.q5-grp').forEach(g=>{
+    const ks=[...g.querySelectorAll('.q5-sq .q5-ck')],d=ks.filter(k=>done.has(k.dataset.q5Id)).length;
+    const n=g.querySelector('[data-q5-n]');if(n)n.textContent=d+'/'+ks.length;
+  });
+  const all=SIDE_QUESTS.filter(q=>done.has(q.q)).length,hd=el.querySelector('.q5-head');
+  if(hd){_q5SetProg(hd.querySelector('[data-q5-hprog]'),all,SIDE_QUESTS.length,all+' von '+SIDE_QUESTS.length+' Nebenquests erledigt');
+    const dd=hd.querySelectorAll('.cd-hero-stat dd');if(dd[3])dd[3].textContent=all;}
+  if(_q5SqF.st==='open'||_q5SqF.st==='done')_q5SqApply();
 }
 
-// ===== QUEST HERO (Cockpit-Ueberblick) =====
+// ===== QUEST HERO (Cockpit: True-Ending-Ring, nächste Schritte, Fortschritt der Strang-Reiter) =====
+function _q5FacStats(){
+  let tF=0,tQ=0,dQ=0;
+  if(typeof FAC_DATA!=='undefined'&&FAC_DATA.regions){
+    const d=cdCheckGet(_Q5_FAC_KEY);
+    FAC_DATA.regions.forEach(r=>r.factions.forEach(f=>{tF++;f.quests.forEach(q=>{tQ++;if(d.has(_q5FacId(f,q)))dQ++;});}));
+  }
+  return {tF,tQ,dQ};
+}
 function renderQuestHero(){
   const el=document.getElementById('quest-hero');if(!el)return;
   const doneTE=(typeof loadTE==='function')?loadTE():[];
@@ -11464,37 +11898,28 @@ function renderQuestHero(){
   const chDone=(typeof lsJson==='function')?lsJson('cd_ch_done',[]):[];
   const numCh=MAIN_QUESTS.filter(c=>/^\d+$/.test(c.ch));
   const doneChCount=numCh.filter(c=>chDone.includes(parseInt(c.ch,10))).length;
-  const totalMQ=MAIN_QUESTS.reduce((n,c)=>n+c.quests.length,0);
-  let tF=0,tQ=0;
-  if(typeof FAC_DATA!=='undefined'&&FAC_DATA.regions){
-    tF=FAC_DATA.regions.reduce((n,r)=>n+r.factions.length,0);
-    tQ=FAC_DATA.regions.reduce((n,r)=>n+r.factions.reduce((m,f)=>m+f.quests.length,0),0);
-  }
+  const fs=_q5FacStats();
   const sqTotal=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
-  const sqDone=(typeof loadSQ==='function'&&typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.filter(q=>loadSQ().includes(q.q)).length:0;
-  const regCount={};
-  MAIN_QUESTS.forEach(c=>{const a=(typeof chapAccent==='function')?chapAccent(c.ch):null;if(a)regCount[a.region]=(regCount[a.region]||0)+1;});
-  const regRows=REG_KEYS.filter(r=>regCount[r]).map(r=>({r,n:regCount[r]}));
-  const maxReg=Math.max(1,...regRows.map(x=>x.n));
-  const heat=regRows.map(x=>`<div class="qhero-heat-row"><span>${escHtml(x.r)}</span><div class="qhero-heat-bar"><div class="qhero-heat-fill" style="width:${Math.round(x.n/maxReg*100)}%;background:${REGION_COLORS[x.r]||'var(--gold)'}"></div></div><span class="qhero-heat-c">${x.n}</span></div>`).join('');
+  const sqL=loadSQ(),sqDone=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.filter(q=>sqL.includes(q.q)).length:0;
   const nextCh=numCh.find(c=>!chDone.includes(parseInt(c.ch,10)));
   const nextTE=TRUE_ENDING.find(t=>t.required&&!doneTE.includes(t.id));
-  let chips='';
-  chips+=nextCh?`<span class="qhero-next-chip" onclick="showSec('chapters')">Weiter: Kap. ${escHtml(nextCh.ch)} — ${escHtml(nextCh.name)}</span>`:'<span style="color:var(--glo)">Alle Kapitel erledigt</span>';
-  chips+=nextTE?`<span class="qhero-next-chip te" onclick="qTab('te')" title="${escHtml(nextTE.task)}">True Ending: ${escHtml(nextTE.task.length>44?nextTE.task.slice(0,44)+'…':nextTE.task)}</span>`:'<span style="color:var(--glo)">True Ending komplett</span>';
-  el.innerHTML=`
-    <div class="qhero-ring-wrap">
-      <div class="te-ring" style="--p:${tePct}"><span>${tePct}%</span></div>
-      <div class="qhero-ring-sub">${teDone}/${teTotal} True Ending</div>
-    </div>
-    <div class="qhero-stats">
-      <div class="qhero-stat"><span class="qhero-stat-val">${numCh.length}<span class="qhero-stat-sub">${doneChCount} erledigt</span></span><span class="qhero-stat-lbl">Kapitel</span></div>
-      <div class="qhero-stat"><span class="qhero-stat-val">${totalMQ}</span><span class="qhero-stat-lbl">Hauptquests</span></div>
-      <div class="qhero-stat"><span class="qhero-stat-val">${tF}<span class="qhero-stat-sub">${tQ} Quests</span></span><span class="qhero-stat-lbl">Fraktionen</span></div>
-      <div class="qhero-stat"><span class="qhero-stat-val">${sqDone}<span class="qhero-stat-sub">${sqTotal} gesamt</span></span><span class="qhero-stat-lbl">Side-Quests erledigt</span></div>
-    </div>
-    <div class="qhero-heat">${heat||'<span style="font-size:var(--fs-10);color:var(--dim)">Story-Schauplätze</span>'}</div>
-    <div class="qhero-next"><span style="color:var(--dim)">Nächster Schritt:</span>${chips}</div>`;
+  const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
+  const chLocked=nextCh&&sp>0&&parseInt(nextCh.ch,10)>sp;
+  const step=(g,k,t,go,tone)=>'<a class="q5-next" href="'+go.href+'" data-go="'+go.sec+'" data-goq="'+cdEsc(go.q)+'"'+(go.tab?' data-tab="'+go.tab+'"':'')+' style="--c:'+tone+'">'
+    +'<span class="q5-next-g cd-g" aria-hidden="true">'+g+'</span><span class="q5-next-tx"><span class="q5-next-k">'+cdEsc(k)+'</span><span class="q5-next-t">'+cdEsc(t)+'</span></span>'+cdIcon('go')+'</a>';
+  let nx='';
+  nx+=nextCh?step(nextCh.ch,'Weiter in der Story','Kap. '+nextCh.ch+(chLocked?'':' · '+nextCh.name),{href:cdGoHref('chapters','ch-'+nextCh.ch),sec:'chapters',q:'ch-'+nextCh.ch},'var(--gold)')
+    :'<span class="q5-next is-done"><span class="q5-next-g cd-g" aria-hidden="true">✓</span><span class="q5-next-tx"><span class="q5-next-k">Story</span><span class="q5-next-t">Alle Kapitel erledigt</span></span></span>';
+  nx+=nextTE?step('✺','Nächste Pflicht für das True Ending',nextTE.task.length>60?nextTE.task.slice(0,58)+' …':nextTE.task,{href:cdGoHref('quests',nextTE.task),sec:'quests',q:nextTE.task,tab:'te'},'var(--red)')
+    :'<span class="q5-next is-done"><span class="q5-next-g cd-g" aria-hidden="true">✓</span><span class="q5-next-tx"><span class="q5-next-k">True Ending</span><span class="q5-next-t">Alle Pflichtaufgaben erledigt</span></span></span>';
+  el.innerHTML='<div class="q5-ring" style="--p:'+tePct+'" role="img" aria-label="True Ending: '+teDone+' von '+teTotal+' Pflichtaufgaben erledigt"><span><b>'+tePct+'%</b><small>True Ending</small></span></div>'
+    +'<div class="q5-ck-main"><p class="q5-ck-k">Dein Quest-Stand</p><p class="q5-ck-t">'+teDone+' von '+teTotal+' Pflichtaufgaben fürs versteckte Ende</p>'
+    +'<div class="q5-nexts">'+nx+'</div></div>';
+  const tab=(id,txt,d,t)=>{const s=document.getElementById('q5-ts-'+id),b=document.getElementById('q5-tb-'+id);if(s)s.textContent=txt;if(b)b.style.setProperty('--p',(t?Math.round(d/t*100):0)+'%');};
+  tab('te',teDone+'/'+teTotal+' Pflicht',teDone,teTotal);
+  tab('mq',doneChCount+'/'+numCh.length+' Kapitel',doneChCount,numCh.length);
+  tab('fac',fs.dQ+'/'+fs.tQ+' Quests',fs.dQ,fs.tQ); /* Fraktionszahl steht im Strang-Kopf; einzeilig wie die übrigen Reiter */
+  tab('sq',sqDone+'/'+sqTotal+' erledigt',sqDone,sqTotal);
 }
 
 // ===== FACTIONS =====
@@ -11510,22 +11935,92 @@ function facBadges(q){
   else if(q.conf==='low') b+='<span class="tag tr">Quelle: unsicher</span>';
   return b;
 }
+function _q5FacId(f,q){return cdSlug(f.name)+'--'+cdSlug(q.q);}
+/* Symbol je Fraktionsart, nur aus dem Namen abgeleitet (Darstellung, keine Spielangabe) */
+function _q5FacGlyph(n){
+  n=String(n);
+  if(/Hexen|Witch/i.test(n))return '☾';
+  if(/House|Haus|Count/i.test(n))return '⚜';
+  if(/Guild|Merchant|Trad|Company|Collective|Confection|Oil/i.test(n))return '⚖';
+  if(/Institute|Society|Research|Academy|Ironwheel|H\.A\.L\.L|Tinker|rail/i.test(n))return '⚙';
+  if(/Militia|Order|Force|knight|Fangs|Outlaws|Orcs|Wyvern/i.test(n))return '⚔';
+  if(/Tribe|Clan|Alliance|Guardians|Sage|Dusksong|Lords/i.test(n))return '⛺';
+  if(/Parish|Healing|Retreat|Serpent/i.test(n))return '✠';
+  if(/Requests|Commissions|Politics/i.test(n))return '✉';
+  return '⚑';
+}
+let _q5FacF='all';
 function renderFactions(){
+  if(_q5Lazy('fac',renderFactions))return;
+  _q5Wire();
+  const el=document.getElementById('fac-list');if(!el)return;
+  const done=cdCheckGet(_Q5_FAC_KEY);
   const tF=FAC_DATA.regions.reduce((n,r)=>n+r.factions.length,0);
   const tQ=FAC_DATA.regions.reduce((n,r)=>n+r.factions.reduce((m,f)=>m+f.quests.length,0),0);
   const tN=FAC_DATA.regions.reduce((n,r)=>n+r.factions.filter(f=>f.isNew).length,0);
-  const lead='<div class="fac-lead"><b style="color:var(--gold)">'+tF+' Fraktionen</b> &middot; <b style="color:var(--gold)">'+tQ+' Quests</b> &middot; '+FAC_DATA.regions.length+' Regionen &middot; <span style="color:var(--warn)">'+tN+' neu erfasst</span><br>Jede Fraktion ausklappen f&uuml;r die einzelnen Quests mit <b>Trigger</b> (Start-NPC/Ort), <b>Voraussetzung</b> (Kapitel-Gate, Vorquest, Ruf, Item) und <b>Belohnung</b>. Badges: <span class="tag tw">verpassbar</span> = kann verpasst werden, <span class="tag tx">teils belegt</span> / <span class="tag tr">unsicher</span> = quellenabh&auml;ngige Angabe (Hauptquellen: game8, PowerPyx, Fextralife, gamerant, thegamer).</div>';
-  const regs=FAC_DATA.regions.map(r=>{
-    const fq=r.factions.reduce((n,f)=>n+f.quests.length,0);
-    const facs=r.factions.map(f=>{
-      const quests=f.quests.map(q=>'<div class="fac-q" data-s="'+escHtml((q.q+' '+q.trigger+' '+q.prereq+' '+q.reward+' '+f.name+' '+r.region+' fraktionsquest').toLowerCase())+'"><div class="fac-qh">'+escHtml(q.q)+facBadges(q)+'</div><div class="fac-qm"><div class="fac-qk">Trigger</div><div class="fac-qv">'+escHtml(q.trigger)+'</div><div class="fac-qk">Voraussetzung</div><div class="fac-qv">'+escHtml(q.prereq)+'</div><div class="fac-qk">Belohnung</div><div class="fac-qv">'+escHtml(q.reward)+'</div></div></div>').join('');
-      return '<details class="fac-fac"><summary class="fac-sum"><span class="fac-cv">&#9654;</span><span class="fac-nm">'+escHtml(f.name)+'</span>'+(f.isNew?'<span class="tag tg">NEU</span>':'')+'<span class="fac-ct">'+f.quests.length+' Quest'+(f.quests.length!==1?'s':'')+'</span></summary><div class="fac-ov">'+escHtml(f.overview)+'</div>'+quests+'</details>';
-    }).join('');
-    return '<div class="fac-reg"><div class="fac-rh">'+escHtml(r.region)+' &mdash; '+r.factions.length+' Fraktionen &middot; '+fq+' Quests</div><div class="fac-b">'+facs+'</div></div>';
+  const dQ=FAC_DATA.regions.reduce((n,r)=>n+r.factions.reduce((m,f)=>m+f.quests.filter(q=>done.has(_q5FacId(f,q))).length,0),0);
+  const head=_q5Head({kicker:'Strang 3 · Fraktionen',title:'Fraktionsquests',
+    sub:tF+' Fraktionen in '+FAC_DATA.regions.length+' Regionen. Jede Quest mit Trigger (Start-NPC/Ort), Voraussetzung (Kapitel-Gate, Vorquest, Ruf, Item) und Belohnung.',
+    keys:['q-faction'],glyph:'⚑',tone:'violet',
+    stats:[[tF,'Fraktionen'],[tQ,'Quests'],[tN,'neu erfasst'],[dQ,'erledigt']],
+    prog:{done:dQ,total:tQ,lbl:'Quests abgehakt',label:dQ+' von '+tQ+' Fraktionsquests abgehakt'}});
+  const legend='<div class="q5-notes">'+cdNote({h:cdChip({t:'verpassbar',i:'miss',c:'red'})+' kann verpasst werden · '+cdChip({t:'Quelle: teils belegt'})+' / '+cdChip({t:'Quelle: unsicher',c:'warn'})+' quellenabhängige Angabe. Haken hier sind neu und nur in diesem Browser gespeichert.'},{kind:'info',title:'Kennzeichnung'})
+    +cdSrc(['game8','PowerPyx','Fextralife','gamerant','thegamer'],'Hauptquellen')+'</div>';
+  const rName=r=>String(r).split(' (')[0];
+  const pills=cdPills([{v:'all',t:'Alle',n:tF,on:_q5FacF==='all'}].concat(FAC_DATA.regions.map(r=>({v:cdSlug(r.region),t:rName(r.region),n:r.factions.length,on:_q5FacF===cdSlug(r.region)}))),{name:'q5-fac-reg',label:'Region'});
+  const fold=(f,r)=>{
+    const reg=_q5Reg(r.region),ids=f.quests.map(q=>_q5FacId(f,q)),dc=ids.filter(i=>done.has(i)).length;
+    const lead=_q5First(f.overview,190),hasOv=lead!==String(f.overview).trim();
+    const chips=[f.quests.length?{v:f.quests.length,t:f.quests.length===1?'Quest':'Quests',c:'gold'}:{t:'nur Übersicht'}];
+    const cc=f.quests[0]&&_q5ChapChip(f.quests[0].prereq);if(cc)chips.push(cc);
+    if(f.isNew)chips.push({t:'NEU',c:'ok'});
+    if(f.quests.some(q=>q.miss))chips.push({t:'verpassbar',i:'miss',c:'red'});
+    const s=[f.name,f.overview,r.region,'fraktion fraktionsquest',...f.quests.map(q=>[q.q,q.trigger,q.prereq,q.reward].join(' '))].join(' ');
+    const body=()=>(hasOv?'<p class="q5-ov">'+cdEsc(f.overview)+'</p>':'')
+      +(f.quests.length?'<ol class="cd-stepper q5-steps">'+f.quests.map((q,i)=>_q5Step(q,{key:_Q5_FAC_KEY,id:ids[i],on:done.has(ids[i])})).join('')+'</ol>'
+        :cdNote('Für diese Fraktion sind keine einzelnen Quests erfasst.',{kind:'info'}));
+    return cdFold({title:f.name,lead,icon:_q5FacGlyph(f.name),chips,region:reg||undefined,tone:reg?undefined:'gold',
+      prog:f.quests.length?{done:dc,total:f.quests.length}:null,s,body,
+      cls:'q5-fac'+(hasOv?' q5-hasov':'')+(f.quests.length&&dc===f.quests.length?' q5-done':''),attrs:{'data-q5-fac':cdSlug(f.name)}});
+  };
+  const groups=FAC_DATA.regions.map(r=>{
+    const fq=r.factions.reduce((n,f)=>n+f.quests.length,0),reg=_q5Reg(r.region);
+    return '<section class="q5-grp sq-lane" data-q5-reg="'+cdSlug(r.region)+'" style="--c:'+cdEsc(reg?_q5RegCol(reg):'var(--gold)')+'">'
+      +'<header class="q5-grp-hd"><span class="q5-grp-g cd-g" aria-hidden="true">⚑</span><h4 class="q5-grp-t">'+cdEsc(r.region)+'</h4><span class="q5-grp-n">'+r.factions.length+' Fraktionen · '+fq+' Quests</span></header>'
+      +'<div class="cd-folds q5-folds q5-grid2">'+r.factions.map(f=>fold(f,r)).join('')+'</div></section>';
   }).join('');
-  const liberation='<div class="fac-reg"><div class="fac-rh">Liberation &mdash; Re-Blockade [1.05]</div><div class="fac-b"><span style="color:var(--dim);font-size:12px">23 Forts und Steinbr&uuml;che (Stand Patch 1.05.00; regions&uuml;bergreifendes Endgame-System). Die fr&uuml;here Angabe &bdquo;13 Fraktionen&ldquo; ist <span title="Die Patch-Notes 1.05.00 nennen nur die Re-Blockade f&uuml;r 23 Forts, keine Zahl beteiligter Fraktionen" style="font-weight:700;color:var(--gdim)">nicht belegt</span>.</span><div><div class="fac-lb">Notable Forts</div><ul class="fac-ul"><li>Fort Warspike &mdash; Multishot-Lehrer!</li><li>Gorthak Ironworks Delesyia &mdash; beste Armaments-Quelle</li><li>Karin Quarry &mdash; House Roberts</li></ul></div></div></div>';
-  document.getElementById('fac-list').innerHTML=lead+regs+liberation;
+  const libS='Liberation Re-Blockade 1.05 23 Forts und Steinbrüche Stand Patch 1.05.00 regionsübergreifendes Endgame-System 13 Fraktionen nicht belegt Notable Forts Fort Warspike Multishot-Lehrer Gorthak Ironworks Delesyia beste Armaments-Quelle Karin Quarry House Roberts';
+  const liberation='<section class="q5-grp sq-lane" data-q5-reg="liberation" style="--c:'+cdEsc(_q5RegCol('Endgame'))+'">'
+    +'<header class="q5-grp-hd"><span class="q5-grp-g cd-g" aria-hidden="true">⛫</span><h4 class="q5-grp-t">Regionsübergreifend</h4><span class="q5-grp-n">Endgame-System</span></header>'
+    +'<div class="cd-folds q5-folds">'+cdFold({title:'Liberation · Re-Blockade [1.05]',lead:'23 Forts und Steinbrüche (Stand Patch 1.05.00; regionsübergreifendes Endgame-System).',icon:'⛫',
+      chips:[{v:23,t:'Forts & Steinbrüche',c:'gold'},{t:'Patch 1.05.00'}],tone:'red',s:libS,cls:'q5-fac',
+      body:'<p>Die frühere Angabe „13 Fraktionen“ ist <b title="Die Patch-Notes 1.05.00 nennen nur die Re-Blockade für 23 Forts, keine Zahl beteiligter Fraktionen">nicht belegt</b>.</p>'
+        +cdFacts([['Fort Warspike','Multishot-Lehrer!'],['Gorthak Ironworks Delesyia','beste Armaments-Quelle'],['Karin Quarry','House Roberts']],{cls:'q5-forts'})})+'</div></section>';
+  el.innerHTML=head+legend+'<div class="q5-bar">'+pills+'</div>'+groups+liberation;
+  _q5FacApply();
 }
+function _q5FacApply(){
+  const el=document.getElementById('fac-list');if(!el)return;
+  el.querySelectorAll('.q5-grp').forEach(g=>{
+    const ok=_q5FacF==='all'||g.dataset.q5Reg===_q5FacF;
+    g.classList.toggle('q5-off',!ok);
+    g.querySelectorAll('.q5-fac').forEach(f=>{f.dataset.filtered=ok?'0':'1';if(!ok)f.classList.add('hide');else if(f.classList.contains('hide'))f.classList.remove('hide');});
+  });
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(el);
+}
+function _q5FacRefresh(fold){
+  const el=document.getElementById('fac-list');if(!el)return;
+  const done=cdCheckGet(_Q5_FAC_KEY);
+  if(fold){
+    const ids=[...fold.querySelectorAll('.q5-st[data-q5-id]')].map(x=>x.dataset.q5Id),dc=ids.filter(i=>done.has(i)).length;
+    _q5SetProg(fold.querySelector(':scope>summary .cd-fold-aside'),dc,ids.length);
+    fold.classList.toggle('q5-done',!!ids.length&&dc===ids.length);
+  }
+  const s=_q5FacStats(),hd=el.querySelector('.q5-head');
+  if(hd){_q5SetProg(hd.querySelector('[data-q5-hprog]'),s.dQ,s.tQ,s.dQ+' von '+s.tQ+' Fraktionsquests abgehakt');
+    const dd=hd.querySelectorAll('.cd-hero-stat dd');if(dd[3])dd[3].textContent=s.dQ;}
+}
+/* ==== /R2 B5 · Quests ==== */
 
 // ===== LOCATIONS =====
 // Orte-Karten (B5, 08.10.2026): Typ-Symbol auf Regionsband, Anriss + "Mehr lesen", Gruppen je Hauptregion,
