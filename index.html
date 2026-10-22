@@ -4456,6 +4456,8 @@ html.cd-motion .r2b2-npc .r2b2-por .cd-scene-img{transition:transform .5s cubic-
 .r2b3-legend-h{margin-left:auto;color:var(--ink-faint)}
 /* Feinschliff: englische Kapitelnamen in schmalen Knoten mit Silbentrennung statt Bruch mitten im Wort (nur 28 kurze Beschriftungen), offene Region leiser */
 .r2b3-nl,.r2b3-nb{-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:7 3 3}
+/* R2 Abnahme: drei Zeilen je Name, damit Kapitel- und Bossnamen nicht mitten im Wort enden (voller Text im Tooltip) */
+.r2b3-nl,.r2b3-nb{-webkit-line-clamp:3}
 .r2b3-seg.is-unk .r2b3-seg-l{color:var(--ink-faint);font-weight:600}
 /* Puls nur über transform/opacity (Compositor), kein box-shadow-Neuzeichnen je Bild */
 .r2b3-nd.is-next .r2b3-dot::after{content:'';position:absolute;inset:-7px;border:2px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:50%;opacity:0;pointer-events:none}
@@ -5841,6 +5843,9 @@ html.cd-motion #sec-skills .r2b9-pick:hover .cd-scene-img{transform:scale(1.035)
 /* Watch & Learn: breite Bildschirme zweispaltig, aufgeklappter Mehrfach-Lernort ohne doppelten Kurzsatz */
 @media (min-width:1180px){#sec-skills .r2b9-wlg>.cd-folds{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
 #sec-skills .r2b9-wl--multi[open] .cd-fold-lead{display:none}
+/* R2 Abnahme: alter Kennzahl-Streifen aus (Zahlen stehen in den Charakterkarten); Kurzsatz im schmalen Baum drei statt zwei Zeilen */
+#sec-skills>.sec-stats-auto{display:none}
+#sec-skills .r2b9-sk:not([open])>summary .cd-fold-lead{-webkit-line-clamp:3}
 /* R2-B9 Ende */
 
 /* ---- Bereich Bauer 10 (nur B10 schreibt hier) ---- */
@@ -6355,6 +6360,9 @@ html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,
   .r2b11-el li{grid-template-columns:minmax(0,1fr);gap:4px}
 }
 @media (max-width:600px){#sec-beginner .r2b11-bhero{min-height:0}}
+/* R2 Abnahme: Kacheltitel bricht nicht mehr vor dem Bindestrich ("Graumähnen / -Camp"); passt Titel + Zahl nicht in eine Zeile, rutscht die Zahl darunter */
+#sec-start .so-tile-top{flex-wrap:wrap;row-gap:4px}
+#sec-start .so-tile-n{overflow-wrap:normal;hyphens:manual}
 /* R2-B11 Ende */
 
 /* ---- Bereich Bauer 12 (nur B12 schreibt hier) ---- */
@@ -9399,7 +9407,7 @@ function refreshSectionStats(){
   if(typeof MAIN_QUESTS!=='undefined'){
     const totalQ=MAIN_QUESTS.reduce((a,c)=>a+(c.quests?c.quests.length:0),0);
     _injectSectionStats('quests',[
-      {lbl:'Kapitel',val:MAIN_QUESTS.length},
+      {lbl:'Story-Abschnitte',val:MAIN_QUESTS.length},   /* Prolog + 12 Kapitel + Epilog */
       {lbl:'Quests gesamt',val:totalQ},
       {lbl:'Bosse',val:MAIN_QUESTS.filter(c=>c.boss).length}
     ]);
@@ -9425,7 +9433,8 @@ function renderQuestTimeline(){
   const target=document.getElementById('qst-hero');
   if(!target)return;
   const st=(typeof r2b3State==='function')?r2b3State():{done:lsJson('cd_ch_done',[]),sp:0,next:null};
-  const total=CHAPTERS.length,nDone=CHAPTERS.filter(c=>st.done.includes(c.num)).length,nextC=CHAPTERS.find(c=>c.num===st.next);
+  /* R2 Abnahme: Ring zählt wie Roadmap und Quests die 12 nummerierten Kapitel (Epilog hat sein eigenes Häkchen auf der Karte) */
+  const chN=CHAPTERS.filter(c=>typeof c.num==='number'),total=chN.length,nDone=chN.filter(c=>st.done.includes(c.num)).length,nextC=CHAPTERS.find(c=>c.num===st.next);
   const segs=[];
   MAIN_QUESTS.forEach(m=>{
     const r=r2b3Reg(m.ch),reg=r?r.region:'',last=segs[segs.length-1];
@@ -9809,7 +9818,7 @@ function renderRoadmap(){
         <span class="r2b12-prio">${_prio[t.prio][0]}</span>
         <div class="rm-task-title">${_r2b12Dash(t.title)}</div>
         <div class="rm-task-desc">${_r2b12Dash(t.desc)}</div>
-        ${t.preview?`<div class="r2b12-task-pre"><span class="r2b12-clamp">${_r2b12Dash(linkifyXrefs(t.preview))}</span></div>`:''}
+        ${t.preview?`<div class="r2b12-task-pre"><span class="r2b12-clamp" title="${cdEsc(String(t.preview).replace(/<[^>]*>/g,'').replace(/\s+[—–]\s+/g,': '))}">${_r2b12Dash(linkifyXrefs(t.preview))}</span></div>`:''}
         ${t.meta&&t.meta.length?(()=>{const raw=t.meta.filter(Boolean),kv=raw.filter(m=>typeof m==='object'),ms=raw.filter(m=>typeof m!=='object').map(m=>_r2b12Dash(m)),sh=ms.filter(m=>_r2b12Strip(m).length<=40),lg=ms.filter(m=>_r2b12Strip(m).length>40);
           /* Feinschliff: beschriftete Zusatzinfos (Quest, Schwäche) als kompakte Zeilen mit 2-Zeilen-Grenze statt Textblock; voller Text im title und auf der Bossseite */
           return (kv.length?`<dl class="r2b12-task-kv">${kv.map(m=>{const v=_r2b12Dash(_r2b12Strip(m.v),true);return `<div><dt>${cdEsc(m.l)}</dt><dd title="${cdEsc(v)}">${cdEsc(v)}</dd></div>`;}).join('')}</dl>`:'')
@@ -9825,7 +9834,10 @@ function renderRoadmap(){
 /* R2 B12: Kurzüberblick des aktuellen Kapitels (wortgetreu aus CHAPTERS boss/items/tip, je 2 Zeilen; voller Text auf der Kapitelseite) */
 function _r2b12NowFacts(c,hasBossChips){
   const f=[['Boss',hasBossChips?'':c.boss],['Belohnungen',c.items],['Tipp',c.tip]].filter(r=>r[1]&&String(r[1]).trim()).map(r=>[r[0],_r2b12Dash(_r2b12Strip(r[1]),true)]);
-  return cdFacts(f,{cls:'r2b12-now-facts'});
+  /* R2 Abnahme: gekappte Fakten lassen sich hier aufklappen (vorher nur über die Kapitelseite lesbar) */
+  const long=f.some(r=>String(r[1]).length>80);
+  return '<div class="r2b12-now-fw">'+cdFacts(f,{cls:'r2b12-now-facts'}).replace('<dl ','<dl id="r2b12-now-facts" ')
+    +(long?'<button type="button" class="r2b12-more r2b12-now-more" aria-expanded="false" aria-controls="r2b12-now-facts">'+cdIcon('chev')+'<span>Ganze Hinweise zeigen</span></button>':'')+'</div>';
 }
 /* R2 B12: Kapitel-Zeitachse der Roadmap. Kapitel aus CHAPTERS, erledigt aus cd_ch_done, Bosse je Kapitel aus BOSSES.chapter,
    Spoilerschutz (cd_spoiler_chapter) verbirgt Titel, Bosse und Hinweise späterer Kapitel. */
@@ -9866,7 +9878,10 @@ function _r2b12Track(o){
     <span class="r2b12-trk-leg"><i class="is-done"></i>erledigt<i class="is-cur"></i>aktuell<i></i>offen</span></div>${rail}</section>${now}`;
   if(!box.dataset.r2b12){
     box.dataset.r2b12='1';
-    box.addEventListener('click',e=>{const b=e.target.closest('[data-r2b12-ch]');if(!b)return;
+    box.addEventListener('click',e=>{
+      const mo=e.target.closest('.r2b12-now-more');
+      if(mo){const w=mo.closest('.r2b12-now-fw'),op=!w.classList.contains('is-open');w.classList.toggle('is-open',op);mo.setAttribute('aria-expanded',op?'true':'false');mo.lastChild.textContent=op?'Weniger anzeigen':'Ganze Hinweise zeigen';return;}
+      const b=e.target.closest('[data-r2b12-ch]');if(!b)return;
       const n=+b.dataset.r2b12Ch;if(typeof toggleChDone==='function'&&!lsJson('cd_ch_done',[]).includes(n))toggleChDone(n);renderRoadmap();});
   }
   const r=box.querySelector('.r2b12-rail'),c=r&&r.querySelector('.is-cur');
@@ -10903,7 +10918,7 @@ function renderTrophies(){
   if(rm){
     const hero=cdHero({kicker:'Platin-Roadmap · nach PowerPyx',title:'Weg zur Platin: '+((TROPHIES.find(t=>t.grade==='platinum')||{}).name||'Platin'),
       sub:'1 Playthrough, keine Online- oder Glitch-Trophäen: der Aufwand ist zeit-, nicht skill-getrieben.',
-      scene:{keys:['trophies'],pos:'50% 66%'},glyph:'✦',tone:'gold',h:3,cls:'b8-hero',
+      scene:{keys:['cl-missables']},glyph:'✦',tone:'gold',h:3,cls:'b8-hero', /* R2 Abnahme: Spielszene (Glockenturm, Toll of Pywel) statt Trophäen-Artwork mit fremdem Markenlogo */
       stats:[[TROPHIES.length,'Trophäen'],[TROPHY_ROADMAP.length,'Etappen'],[missCnt,'verpassbar (PowerPyx)']]}).replace('class="cd-hero-t"','class="cd-hero-t" data-toc');
     const nd=TROPHY_ROADMAP.filter((_,i)=>doneRm.has('e'+(i+1))).length;
     rm.innerHTML=hero
@@ -13205,7 +13220,7 @@ function _r2b1Ing(c,lbl){
     if(pm&&pm[1]){n=pm[1];note=pm[2];}
     var hit=idx.get(n.toLowerCase()),cl='r2b1-in'+(q?'':' r2b1-in--nq'),ig=hit&&hit.src?'':_r2b1Ig(n),at=ig?' data-ig="'+ig+'"':'';
     var inner=(q?'<b>'+q[1]+'×</b>':'')+(hit&&hit.src?'<img src="'+cdEsc(hit.src)+'" alt="" width="20" height="20" loading="lazy" decoding="async" onerror="this.remove()">':'')
-      +(note?'<span class="r2b1-in-t">'+cdEsc(n)+'<small>'+cdEsc(note)+'</small></span>':cdEsc(n));
+      +(note?'<span class="r2b1-in-t">'+cdEsc(n)+'<small>'+cdEsc(note.replace(/\s+[—–]\s+/g,': '))+'</small></span>':cdEsc(n)); /* R2 Abnahme: Strich nur in der Anzeige */
     return hit?'<a class="'+cl+' r2b1-in--go"'+at+' href="'+cdGoHref(hit.sec,hit.q)+'" data-go="'+hit.sec+'" data-goq="'+cdEsc(hit.q)+'" title="'+cdEsc(hit.t)+'">'+inner+'</a>':'<span class="'+cl+'"'+at+'>'+inner+'</span>';
   });
   if(c.flex)h.push('<span class="r2b1-in r2b1-in--nq r2b1-in--flex">'+cdEsc(_r2b1FlexTxt(c))+'</span>');
@@ -15433,6 +15448,8 @@ function _r2b9Icon(name,ch){
   const src=skillImg(name,ch);
   return src?{src,alt:''}:_r2b9Mono(name);
 }
+/* R2 Abnahme: Gedankenstriche nur in der Anzeige des Kurzsatzes durch Doppelpunkt ersetzen (Regel 9); data-s behält den Originaltext */
+function _r2b9Dash(s){return String(s==null?'':s).replace(/\s+[—–]\s+/g,': ').replace(/\s+-\s+(?=\D)/g,': ').replace(/—/g,'-');}
 function _r2b9Row(s,ch,b,d){
   const wl=_r2b9WL(s.name,ch),miss=_r2b9Miss(s,ch),canWL=/Watch & Learn/.test(s.prereq||'');
   const flags=(canWL?'<span class="r2b9-flag r2b9-flag--wl" title="Auch per Watch &amp; Learn erlernbar">W&amp;L</span>':'')
@@ -15440,7 +15457,7 @@ function _r2b9Row(s,ch,b,d){
   const tree=b.tree?(ch+' · '+b.en):ch;
   return cdFold({
     title:{h:'<span class="sk-n">'+cdEsc(s.name)+'</span>'+(flags?'<span class="r2b9-flags">'+flags+'</span>':'')},
-    lead:s.effect,
+    lead:_r2b9Dash(s.effect),
     icon:_r2b9Icon(s.name,ch),
     aside:_r2b9Cost(s.cost),
     id:_r2b9Id(ch,s.name),
@@ -16813,13 +16830,15 @@ function renderDisarm(){
 // ===== STATIC SECTION TOCs =====
 function initStaticTocs(){
   const fill=(id,items)=>{const el=document.getElementById(id);if(el)el.innerHTML=makeToc(items);};
-  fill('da-toc',[
-    {id:'da-setup',label:'⚙️ Setup'},
-    {id:'da-steps',label:'👣 Schritt-für-Schritt'},
-    {id:'da-use',label:'💡 Waffen nutzen'},
-    {id:'da-farm',label:'🗺️ Farm-Spots'},
-    {id:'da-cores',label:'💎 Disarm Cores'}
-  ]);
+  /* R2 Abnahme: Sprungleiste der Entwaffnen-Seite in der R2-Kartensprache (Linien-Icons statt Emojis, Tap-Ziele 40 px) */
+  const da=document.getElementById('da-toc');
+  if(da){
+    da.innerHTML='<nav class="r2b10-jump" aria-label="Springe zu"><span class="r2b10-jump-l">Springe zu</span>'
+      +[['da-setup','key','Setup'],['da-steps','go','Schritt für Schritt'],['da-use','atk','Waffen nutzen'],['da-farm','pin','Farm-Spots'],['da-cores','neutral','Disarm Cores']]
+        .map(x=>'<button type="button" class="r2b10-jb" data-da-go="'+x[0]+'">'+cdIcon(x[1])+'<span>'+x[2]+'</span></button>').join('')+'</nav>';
+    if(!da.dataset.w){da.dataset.w='1';da.addEventListener('click',e=>{const b=e.target.closest('[data-da-go]'),t=b&&document.getElementById(b.dataset.daGo);if(!t)return;
+      if(window.cdMotion)cdMotion.scrollTo(t);else t.scrollIntoView({behavior:'smooth',block:'start'});});}
+  }
   fill('lo-toc',[
     {id:'lo-locs',label:'📍 Orte'},
     {id:'lo-bells',label:'🔔 Glocken'}
@@ -17032,7 +17051,7 @@ function renderComments(sec){
   const arr=lsJson('cd_cmt_'+sec,[]);
   const listHtml=arr.length
     ? arr.map(c=>`<div class="cmt-item"><div><span class="cmt-usr">${escHtml(c.u)}</span><span class="cmt-time">${escHtml(c.t)}</span></div><p class="cmt-txt">${escHtml(c.m)}</p></div>`).join('')
-    : '<div class="cmt-empty">Noch keine Kommentare — schreib den ersten!</div>';
+    : '<div class="cmt-empty">Noch keine Kommentare. Schreib den ersten!</div>';
   wrap.innerHTML=`<h3 class="sub-t" style="margin-top:28px">💬 Feedback &amp; Kommentare</h3>
     <div class="cmt-list" id="cl-${sec}">${listHtml}</div>
     <div class="cmt-form">
@@ -17570,7 +17589,7 @@ function _r2b7MgCard(m,g){
     attrs:{'data-go-id':slug,'data-grp':g.k},
     scene:{keys:['mg-'+slug].concat(reg?['reg-'+cdSlug(reg)]:[]),tone:g.tone,glyph:m.icon,cls:'r2b7-scene'},
     s:[m.name,m.ort,m.start,m.ablauf,m.belohnung||'',m.patch,'minispiel minigame'].join(' '),
-    body:function(){return _r2b7MgBody(m,g);}},m.icon);
+    body:function(){return _r2b7MgBody(m,g);}},_r2b7Svg(g.ico)); /* R2 Abnahme: Linien-Icon der Gruppe wie bei den Rätseln; das Emoji bleibt Szenen-Glyphe */
 }
 function renderMinigames(){
   var el=document.getElementById('minigame-list');if(!el)return;
@@ -17946,7 +17965,7 @@ function renderPatches(){
       return `<p class="r2b12-leg"><span>Farbbalken je Patch = Änderungen nach Art:</span>${used.map(k=>`<span class="r2b12-leg-i r2b12-k-${k}"><i aria-hidden="true"></i>${cdEsc(_r2b12KMeta(k)[2])}</span>`).join('')}</p>`;})()
     +`<div class="r2b12-tl">${groups.map((g,gi)=>`<div class="r2b12-month">
         <div class="r2b12-month-hd"><span class="r2b12-month-dot" aria-hidden="true"></span><h3 class="r2b12-month-t">${g.m!=null?_R2B12_MONL[g.m]:''} <span>${g.y}</span></h3><span class="r2b12-month-n">${g.items.length} ${g.items.length===1?'Version':'Versionen'}</span></div>
-        <div class="cd-folds r2b12-list">${_r2b12Blocks(g.items.map((x,i)=>_r2b12Fold(x,gi===0&&i===0)))}</div></div>`).join('')}</div>`;
+        <div class="cd-folds r2b12-list">${_r2b12Blocks(g.items.map(x=>_r2b12Fold(x,false)))}</div></div>`).join('')}</div>`; /* R2 Abnahme: auch der neueste Patch startet eingeklappt (Kurzsatz + Chips als Vorschau) */
   if(sec&&!sec.dataset.r2b12){
     sec.dataset.r2b12='1';
     sec.addEventListener('cd-pills',e=>{if(e.detail.name==='r2b12-art')_r2b12Filter(sec,e.detail.value);});
