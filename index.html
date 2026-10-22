@@ -3368,6 +3368,10 @@ html.cd-motion tr.cdx-wait,html.cd-motion tr.cdx-in{transform:none}
 html.cd-motion .cdx-show{transition:opacity .42s ease-out var(--cdx-d,0s),transform .42s cubic-bezier(.22,.7,.2,1) var(--cdx-d,0s)!important}
 @media(max-width:860px){html.cd-motion .cdx-show{transition-duration:.25s,.25s!important}}
 @media print{.cdx-show{transition:none!important}}
+/* R2 Integration (Wunsch B9/B12/B13): Staffel und Versatz nicht vererben. Beide Werte gelten nur an der Karte selbst;
+   vererbt rechnete jede Freigabe den ganzen Kartenbaum neu (gemessen: Stil-Zeit beim Scrollen 3-5x). */
+@property --cdx-d{syntax:'<time>';inherits:false;initial-value:0s}
+@property --cdx-y{syntax:'<length>';inherits:false;initial-value:16px}
 /* reduce + Bewegung an: Theme-Übergänge wie bei no-preference */
 @media (prefers-reduced-motion: reduce){:where(html.cd-motion,html.cd-motion :is(body,#sidebar,#sbar,.card,.sk-c,.fac-reg,.sec,.tab,.ni,#main,.witch-card,.set-card,.chap,.ch-card,.te-grp,.cmt-item,.build-card,table,thead tr,select.fs,.kbd)){transition:background-color .25s ease,border-color .25s ease,color .25s ease}}
 /* Nach oben: weich ein- und ausblenden */
@@ -3771,13 +3775,13 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
 .cd-fold-main{grid-area:main;display:flex;flex-direction:column;gap:3px;min-width:0}
 .cd-fold-t{margin:0;font-family:var(--f-display);font-size:15.5px;font-weight:700;line-height:1.3;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
 .cd-fold-lead{max-width:70ch;font-size:13px;line-height:1.45;color:var(--dim)}
-.cd-fold:not([open]) .cd-fold-lead{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.cd-fold:not([open])>:where(summary) .cd-fold-lead{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .cd-fold-chips{margin-top:5px}
 .cd-fold-aside{grid-area:aside;display:flex;flex-direction:column;align-items:flex-end;gap:5px;min-width:0}
 .cd-fold-arr{grid-area:arr;display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;color:var(--dim);background:color-mix(in srgb,var(--card) 50%,transparent)}
 .cd-fold-arr .cd-i{width:15px;height:15px}
 .cd-fold>summary:hover .cd-fold-arr{color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
-.cd-fold[open] .cd-fold-arr{transform:rotate(180deg);color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
+.cd-fold[open]>:where(summary) .cd-fold-arr{transform:rotate(180deg);color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
 .cd-fold-body{display:grid;gap:14px;padding:14px 18px 18px;border-top:1px solid var(--line-soft);font-size:13.5px;line-height:1.6;color:var(--text)}
 .cd-fold-body>p{margin:0;max-width:72ch}
 .cd-fold-body:empty{display:none}
@@ -3790,6 +3794,9 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
 .cd-folds{display:grid;gap:10px}
 .cd-folds>.cd-fold{content-visibility:auto;contain-intrinsic-size:auto 76px}
 .cd-folds>.cd-fold[open]{content-visibility:visible}
+/* R2 Integration (Wunsch B12): Faltkarten in Einblend-Blöcken (.cd-folds>[data-cd-reveal]) ebenso, niedrige Spezifität: eigene Werte der Seite gewinnen */
+:where(.cd-folds>[data-cd-reveal])>.cd-fold{content-visibility:auto;contain-intrinsic-size:auto 76px}
+:where(.cd-folds>[data-cd-reveal])>.cd-fold[open]{content-visibility:visible}
 @media (max-width:600px){
   .cd-fold>summary{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"ico main arr" "ico aside aside";padding:12px 12px 12px 16px;gap:6px 12px}
   .cd-fold-ico{width:40px;height:40px;font-size:19px;align-self:start}
@@ -3900,7 +3907,7 @@ html.cd-still .cd-flash{outline:2px solid var(--gold);outline-offset:3px}
   html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check){isolation:isolate}
   html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check)::after{
     content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;transition-duration:.25s!important;
-    background:radial-gradient(var(--sr,260px) circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--red) 13%,transparent),transparent 70%)}
+    background:radial-gradient(var(--sr,260px) circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--cd-spot-c,var(--red)) 13%,transparent),transparent 70%)} /* --cd-spot-c: Kegelfarbe je Karte (R2 Integration, Wunsch B11) */
   html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check):hover::after{opacity:1}
   html.cd-motion :is(.so-chip,.comm-it,.ov-miss-it,.qhero-stat,.sim-stat,.col-stat,.upg-fact,.cd-check){--sr:130px}
   html.cd-motion :is(.pet-card,.qst-node,.loc-pc){--sr:160px}
@@ -8422,7 +8429,7 @@ function cdTone(o){
    die übrigen sind Ladefehler-Rückfall. Ohne Bild: Akzentverlauf + Glyphe. opts: region, tone, glyph, full, hero, pos, w, op, cls */
 function _cdSceneSrc(k){
   if(!k)return null;
-  if(typeof k==='object'&&k.src)return {src:k.src,pos:k.pos||'',alt:k.alt||''};
+  if(typeof k==='object'&&k.src)return {src:k.src,pos:k.pos||'',alt:k.alt||'',w:k.w,h:k.h};
   var e=typeof SCENES!=='undefined'&&SCENES[k];
   if(!e||!e.f)return null;
   return {src:e.f.indexOf('/')>-1?e.f:'cd_assets/scenes/'+e.f,pos:e.pos||'',w:e.w,h:e.h};
@@ -8522,7 +8529,9 @@ function cdFold(o){
   var sc=o.scene?(typeof o.scene==='string'?o.scene:cdScene(o.scene.keys,o.scene)):'';
   var ico='';
   if(o.icon){
-    ico=typeof o.icon==='object'
+    ico=typeof o.icon==='object'&&o.icon.h!=null&&!o.icon.src
+      ?'<span class="cd-fold-ico" aria-hidden="true">'+o.icon.h+'</span>' /* R2 Integration (Wunsch B4/B7): rohes Icon-HTML */
+      :typeof o.icon==='object'
       ?'<span class="cd-fold-ico'+(o.icon.photo?' is-photo':'')+'"><img src="'+cdEsc(o.icon.src)+'" alt="'+cdEsc(o.icon.alt||'')+'" loading="lazy" decoding="async" width="40" height="40"></span>'
       :'<span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">'+cdEsc(o.icon)+'</i></span>';
   }
@@ -8616,7 +8625,10 @@ function cdCheckGet(key){
 function cdCheckSet(key,id,on){
   var r=_cdCkRead(key);id=String(id);
   if(r&&typeof r==='object'&&!Array.isArray(r)){if(on)r[id]=true;else delete r[id];}
-  else{r=Array.isArray(r)?r.map(String):[];var i=r.indexOf(id);if(on&&i<0)r.push(id);if(!on&&i>-1)r.splice(i,1);}
+  else{ /* R2 Integration (Wunsch B3): Zahlen-Listen (z. B. cd_ch_done) bleiben Zahlen-Listen */
+    r=Array.isArray(r)?r:[];var num=r.length>0&&r.every(function(x){return typeof x==='number';}),i=-1;
+    r.forEach(function(x,j){if(i<0&&String(x)===id)i=j;});
+    if(on&&i<0)r.push(num&&/^-?\d+(\.\d+)?$/.test(id)?+id:id);if(!on&&i>-1)r.splice(i,1);}
   var v=JSON.stringify(r);
   try{typeof lsSet==='function'?lsSet(key,v):localStorage.setItem(key,v);}catch(e){}
   return cdCheckGet(key);
@@ -11987,7 +11999,7 @@ function _focusPaneForSearch(sec,total){
 // "Tranan" erwaehnt, standen vor Tranan selbst). In Raster-/Flex-Containern per CSS order, ohne DOM-Umbau;
 // Tabellenzeilen behalten ihre Reihenfolge. Rueckgabe: Treffer, beste zuerst (DOM-Reihenfolge bleibt stabil).
 function _hitScore(el,needles){
-  const ne=el.querySelector('.ct, .sk-n, .pet-card-name, .fac-qh, td strong');
+  const ne=el.querySelector('.ct, .sk-n, .pet-card-name, .fac-qh, td strong, .cd-fold-t'); /* .cd-fold-t: R2 Integration (Wunsch B5/B9) */
   if(!ne)return 0;
   const t=_fold(ne.textContent.replace(/\u25be/g,''));
   if(!needles.every(x=>t.includes(x)))return 0;
