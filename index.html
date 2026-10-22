@@ -4378,6 +4378,222 @@ html.cd-motion .r2b2-npc .r2b2-por .cd-scene-img{transition:transform .5s cubic-
 
 /* ---- Bereich Bauer 3 (nur B3 schreibt hier) ---- */
 /* R2-B3 Anfang */
+/* Kapitel-Guide (chapters): Story-Reise #qst-hero (renderQuestTimeline) + Kapitel-Faltkarten #ch-timeline (renderChapters). Präfix r2b3-. */
+.r2b3-sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* -- Story-Reise -- */
+.r2b3-jr{margin:0 0 16px;padding:22px 24px 14px;border:1px solid var(--line);border-radius:var(--radius);
+  background:radial-gradient(90% 120% at 0% 0%,color-mix(in srgb,var(--red) 9%,transparent),transparent 60%),var(--panel-2);box-shadow:var(--shadow-soft)}
+.r2b3-jr-hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;margin-bottom:18px}
+.r2b3-jr-main{display:flex;flex-direction:column;gap:6px;min-width:0;max-width:62ch}
+.r2b3-k{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.r2b3-jr-t{margin:0;font-family:var(--f-display);font-size:clamp(21px,2.3vw,27px);font-weight:700;line-height:1.15;color:var(--ink-hi);text-wrap:balance}
+.r2b3-jr-sub{margin:0;font-size:13.5px;line-height:1.55;color:var(--dim)}
+.r2b3-jr-st{display:flex;align-items:center;gap:14px;min-width:0}
+.r2b3-ring{--p:0%;position:relative;flex:none;display:grid;place-items:center;width:70px;height:70px;border-radius:50%;
+  background:conic-gradient(var(--gold) var(--p),color-mix(in srgb,var(--line-strong) 70%,transparent) 0)}
+.r2b3-ring::before{content:'';position:absolute;inset:5px;border-radius:50%;background:var(--panel-2)}
+.r2b3-ring>span{position:relative;font:700 21px/1 var(--f-mono);color:var(--gold);font-variant-numeric:tabular-nums}
+.r2b3-ring small{font-size:12px;font-weight:400;color:var(--dim)}
+.r2b3-jr-st-t{display:flex;flex-direction:column;gap:5px;min-width:0}
+.r2b3-jr-st-l{font-size:12px;letter-spacing:.04em;color:var(--dim)}
+.r2b3-jr-next{font-size:13.5px;font-weight:600;text-decoration:none}
+.r2b3-jr-all{font-size:13.5px;color:var(--cd-ok)}
+.r2b3-track{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:2px 1px 10px;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
+.r2b3-seg{--c:var(--dim);flex:var(--n) 1 0;min-width:calc(var(--n) * 58px);display:flex;flex-direction:column;gap:4px;padding:9px 2px 8px;
+  border:1px solid color-mix(in srgb,var(--c) 32%,transparent);border-top:3px solid var(--c);border-radius:12px;background:color-mix(in srgb,var(--c) 6%,var(--card))}
+.r2b3-seg .cd-scene{--cd-scene-op:.2}
+[data-theme="sepia"] .r2b3-seg .cd-scene{--cd-scene-op:.15}
+.r2b3-seg .cd-scene::after{background:linear-gradient(180deg,color-mix(in srgb,var(--card) 25%,transparent),color-mix(in srgb,var(--card) 70%,transparent) 75%)}
+.r2b3-seg.is-unk{border-style:dashed;border-top-style:solid}
+.r2b3-seg-l{position:sticky;left:0;align-self:flex-start;max-width:100%;display:flex;align-items:flex-start;gap:4px;min-height:27px;padding:0 6px;font:700 11px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;overflow-wrap:anywhere;
+  color:color-mix(in srgb,var(--c) 55%,var(--ink-hi))}
+.r2b3-seg-l .cd-i{flex:none;width:13px;height:13px;color:var(--c)}
+.r2b3-seg.is-one{min-width:68px}
+.r2b3-seg.is-one .r2b3-seg-l{align-self:stretch;justify-content:center;text-align:center;padding:0 3px;letter-spacing:.02em;overflow-wrap:normal}
+.r2b3-seg.cd-scened{overflow:clip}
+.r2b3-seg.is-one .r2b3-seg-l .cd-i{display:none}
+.r2b3-nds{display:flex}
+.r2b3-nd{position:relative;flex:1 1 0;min-width:58px;scroll-snap-align:center}
+.r2b3-nd::before{content:'';position:absolute;top:24px;left:0;right:0;height:2px;background:color-mix(in srgb,var(--c) 45%,transparent)}
+.r2b3-nd:first-child::before{left:50%}.r2b3-nd:last-child::before{right:50%}
+.r2b3-nd:only-child::before{display:none}
+.r2b3-nd.is-done::before{background:color-mix(in srgb,var(--gold) 70%,transparent)}
+.r2b3-nd>a{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:100px;padding:10px 1px 4px;border:0;border-radius:10px;color:inherit;text-decoration:none;cursor:pointer;text-align:center}
+.r2b3-nd>a:hover{background:color-mix(in srgb,var(--c) 10%,transparent)}
+.r2b3-nd>a:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+.r2b3-dot{position:relative;display:grid;place-items:center;width:30px;height:30px;border:2px solid var(--c);border-radius:50%;background:var(--card);
+  font:700 12.5px/1 var(--f-mono);color:var(--ink-hi);font-variant-numeric:tabular-nums;box-shadow:0 0 0 4px var(--card)}
+.r2b3-nd.is-unsure .r2b3-dot{border-style:dashed}
+.r2b3-nd.is-done .r2b3-dot{border-color:var(--gold);background:var(--gold);color:var(--bg)}
+.r2b3-dk{position:absolute;right:-6px;bottom:-5px;width:15px;height:15px;padding:2px;border-radius:50%;background:var(--cd-ok);color:var(--bg);stroke-width:3}
+.r2b3-nd.is-next .r2b3-dot{border-color:var(--gold);color:var(--gold);box-shadow:0 0 0 4px var(--card),0 0 0 6px color-mix(in srgb,var(--gold) 45%,transparent),0 0 18px color-mix(in srgb,var(--gold) 55%,transparent)}
+.r2b3-nl{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-width:100%;overflow-wrap:break-word;font-size:11px;font-weight:600;line-height:1.25;letter-spacing:-.01em;color:var(--ink-hi)}
+.r2b3-nb{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-width:100%;overflow-wrap:break-word;font-size:11px;letter-spacing:-.01em;line-height:1.25;color:color-mix(in srgb,var(--red) 70%,var(--ink-hi))}
+.r2b3-nd.is-locked .r2b3-nl{color:var(--dim);font-style:italic}
+.r2b3-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:6px 2px 0;font-size:12px;color:var(--dim)}
+.r2b3-legend span{display:inline-flex;align-items:center;gap:6px}
+.r2b3-legend i{width:11px;height:11px;border-radius:50%;border:2px solid var(--dim);background:var(--card)}
+.r2b3-legend i.is-d{border-color:var(--gold);background:var(--gold)}
+.r2b3-legend i.is-n{border-color:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 40%,transparent)}
+.r2b3-legend i.is-u{border-style:dashed}
+.r2b3-legend-h{margin-left:auto;color:var(--ink-faint)}
+/* Feinschliff: englische Kapitelnamen in schmalen Knoten mit Silbentrennung statt Bruch mitten im Wort (nur 28 kurze Beschriftungen), offene Region leiser */
+.r2b3-nl,.r2b3-nb{-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:7 3 3}
+.r2b3-seg.is-unk .r2b3-seg-l{color:var(--ink-faint);font-weight:600}
+/* Puls nur über transform/opacity (Compositor), kein box-shadow-Neuzeichnen je Bild */
+.r2b3-nd.is-next .r2b3-dot::after{content:'';position:absolute;inset:-7px;border:2px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:50%;opacity:0;pointer-events:none}
+html.cd-motion .r2b3-nd.is-next .r2b3-dot::after{animation:r2b3Pulse 2.4s cubic-bezier(.2,.6,.3,1) infinite;animation-duration:2.4s!important}
+html.cd-motion .r2b3-dot{transition:transform .2s cubic-bezier(.3,.7,.3,1.4)}
+html.cd-motion .r2b3-nd>a:hover .r2b3-dot{transform:scale(1.1)}
+@keyframes r2b3Pulse{0%{transform:scale(.8);opacity:.9}70%,100%{transform:scale(1.45);opacity:0}}
+/* -- Filter -- */
+.r2b3-bar .cd-pills{margin:0 0 12px}
+.r2b3-empty{margin:0;padding:22px;border:1px dashed var(--line-strong);border-radius:14px;text-align:center;font-size:13.5px;color:var(--dim)}
+/* -- Kapitel-Faltkarten -- */
+.r2b3-list{gap:12px}
+.r2b3-ch{--cd-scene-w:60%;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 16px)}
+.r2b3-list>.r2b3-ch{contain-intrinsic-size:auto 108px}
+.r2b3-ch>summary{min-height:106px;padding:16px 16px 16px 20px;gap:6px 18px}
+.r2b3-ch .cd-fold-ico{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:70px;height:70px;border-radius:14px;
+  border-color:color-mix(in srgb,var(--cd-acc) 45%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--cd-acc) 30%,var(--card)),color-mix(in srgb,var(--cd-acc) 7%,var(--card)));
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--ink-hi) 8%,transparent)}
+.r2b3-ch .cd-fold-ico::before{content:'Kap.';font:700 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--cd-acc) 45%,var(--ink-hi))}
+.r2b3-ch.is-ep .cd-fold-ico::before{content:'Epilog';letter-spacing:.08em}
+.r2b3-ch .cd-fold-ico .cd-g{font:700 29px/1 var(--f-mono);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink-hi)}
+.r2b3-ch.is-done .cd-fold-ico{border-color:color-mix(in srgb,var(--cd-ok) 55%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--cd-ok) 22%,var(--card)),color-mix(in srgb,var(--cd-ok) 6%,var(--card)))}
+.r2b3-ch.is-done .cd-fold-ico .cd-g,.r2b3-ch.is-done .cd-fold-ico::before{color:var(--cd-ok)}
+.r2b3-ch.is-next{border-color:color-mix(in srgb,var(--gold) 45%,transparent);box-shadow:var(--shadow-soft),0 0 0 1px color-mix(in srgb,var(--gold) 18%,transparent),0 10px 30px -18px var(--gold)}
+.r2b3-ch .cd-fold-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;font-size:18px}
+.r2b3-en{font:500 12px/1.3 var(--f-mono);letter-spacing:.03em;color:var(--dim)}
+.r2b3-ch .cd-fold-lead{margin-top:1px}
+.r2b3-loot{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 8px;font-size:13px;font-weight:600;color:color-mix(in srgb,var(--gold) 78%,var(--ink-hi))}
+.r2b3-loot .cd-i{width:15px;height:15px;color:var(--gold)}
+.r2b3-li{white-space:nowrap}
+.r2b3-li:not(:last-child)::after{content:'·';margin-left:8px;font-weight:400;color:var(--ink-faint)}
+/* Lesbarkeit über dem Szenenbild ohne weichgezeichneten Textschatten (der kostete je Bild ca. 25 ms Malzeit bei CPU/4) */
+.r2b3-ch .cd-fold-main,.r2b3-ch .cd-fold-aside{text-shadow:0 1px 0 color-mix(in srgb,var(--card) 85%,transparent)}
+.r2b3-rc{border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 16%,transparent);color:color-mix(in srgb,var(--c) 35%,var(--ink-hi));font-weight:600}
+.r2b3-rc.is-unsure{border-style:dashed}
+.r2b3-rc small{font-size:12px;opacity:.8}
+.r2b3-qn{font:12px/1.2 var(--f-mono);color:var(--dim);white-space:nowrap}
+.r2b3-qn b{font-size:16px;color:var(--ink-hi);margin-right:3px}
+.r2b3-doneb,.r2b3-nextb{display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.r2b3-doneb{border:1px solid color-mix(in srgb,var(--cd-ok) 50%,transparent);background:color-mix(in srgb,var(--cd-ok) 14%,transparent);color:var(--cd-ok)}
+.r2b3-doneb .cd-i{width:14px;height:14px;stroke-width:2.4}
+.r2b3-nextb{border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);background:color-mix(in srgb,var(--gold) 14%,transparent);color:var(--gold)}
+/* Spoiler-Schutz (Einstellung "Spoiler bis Kapitel") */
+.r2b3-ch.is-locked>summary>:not(.cd-fold-aside),.r2b3-ch.is-locked .cd-fold-aside>:not(.r2b3-spoil){filter:blur(7px)}
+.r2b3-ch.is-locked>.cd-fold-body{display:none}
+.r2b3-spoil{position:absolute;inset:0;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 14px;padding:8px;
+  background:color-mix(in srgb,var(--card) 50%,transparent);font-size:13.5px;font-weight:600;color:var(--ink-hi);cursor:default}
+/* aufgeklappt */
+.r2b3-ch .cd-fold-body{gap:18px;padding:18px 20px 20px}
+.r2b3-sec{min-width:0}
+.r2b3-h{display:flex;align-items:center;gap:8px;margin:0 0 10px;font:700 12px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.r2b3-h .cd-i{width:15px;height:15px;color:var(--cd-acc)}
+.r2b3-chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 2px;margin:0;padding:0;list-style:none}
+.r2b3-chain>li{display:flex;align-items:center;gap:2px;min-width:0;max-width:100%}
+.r2b3-bc{display:flex;align-items:center;gap:10px;min-width:0;max-width:300px;min-height:56px;padding:5px 14px 5px 5px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:inherit;text-decoration:none}
+a.r2b3-bc:hover{border-color:color-mix(in srgb,var(--red) 50%,transparent);background:color-mix(in srgb,var(--red) 7%,var(--panel))}
+a.r2b3-bc:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b3-bp{position:relative;flex:none;display:grid;place-items:center;width:44px;height:44px;overflow:hidden;border:2px solid color-mix(in srgb,var(--cd-acc) 65%,transparent);border-radius:50%;background:color-mix(in srgb,var(--cd-acc) 20%,var(--card))}
+.r2b3-bp>i{font:700 17px/1 var(--f-display);font-style:normal;color:var(--ink-hi)}
+.r2b3-bp>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.r2b3-bn{display:flex;flex-direction:column;gap:1px;min-width:0;line-height:1.25}
+.r2b3-bn b{font-size:13.5px;color:var(--ink-hi);overflow-wrap:anywhere}
+.r2b3-bn small{font-size:11.5px;color:var(--dim);overflow-wrap:anywhere}
+.r2b3-sep{flex:none;display:grid;place-items:center;width:24px;font:700 15px/1 var(--f-mono);color:var(--dim)}
+.r2b3-sep .cd-i{width:15px;height:15px;color:var(--cd-acc)}
+.r2b3-bt{margin:12px 0 0;max-width:78ch;font-size:12.5px;line-height:1.6;color:var(--dim)}
+.r2b3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;align-items:stretch}
+.r2b3-box{padding:12px 14px;border:1px solid color-mix(in srgb,var(--gold) 28%,transparent);border-radius:12px;background:color-mix(in srgb,var(--gold) 6%,var(--card))}
+.r2b3-box .r2b3-h{margin-bottom:8px}.r2b3-box .r2b3-h .cd-i{color:var(--gold)}
+.r2b3-box p{margin:0;max-width:70ch;font-size:13.5px;line-height:1.6;color:var(--text)}
+.r2b3-box p+p{margin-top:8px}
+.r2b3-unl b{color:var(--gold)}
+.r2b3-tip{max-width:none}
+/* Feinschliff: Tipp beim Bosskampf, lange Tipps eingekürzt (Titel + 4 Zeilen), Knopf klappt den Rest auf; Such-Öffnung zeigt alles */
+.r2b3-tipw{margin-top:14px;max-width:96ch}
+.r2b3-tipw.is-clamp:not(.is-open) .r2b3-tip>div{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+.r2b3-ch[data-srch-open] .r2b3-tipw .r2b3-tip>div{display:block}
+.r2b3-ch[data-srch-open] .r2b3-tipbtn{display:none}
+.r2b3-tipbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin:4px 0 0 2px;padding:6px 12px 6px 8px;border:0;border-radius:999px;background:none;
+  color:var(--glo);font:600 13px/1.2 var(--f-body);cursor:pointer}
+.r2b3-tipbtn .cd-i{width:15px;height:15px}
+.r2b3-tipbtn:hover{background:color-mix(in srgb,var(--gold) 9%,transparent)}
+.r2b3-tipbtn:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+.r2b3-tipw.is-open .r2b3-tipbtn .cd-i{transform:rotate(180deg)}
+html.cd-motion .r2b3-tipbtn .cd-i{transition:transform .25s cubic-bezier(.22,.8,.3,1)}
+.r2b3-grid>.r2b3-miss{margin:0}
+/* Feinschliff: Zusatz rechts (Status, Quest-Anzahl) liegt über dem Szenenbild auf einem weichen Schleier in Kartenfarbe */
+.r2b3-ch>summary>.cd-fold-aside{margin:-8px -12px;padding:8px 12px;border-radius:14px;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--card) 78%,transparent),color-mix(in srgb,var(--card) 40%,transparent) 65%,transparent)}
+.r2b3-qn{color:color-mix(in srgb,var(--dim) 70%,var(--ink-hi))}
+/* Feinschliff: Mikrointeraktion, Szene rückt beim Überfahren leicht heran, geöffnete Karte zeigt ihre Szene etwas kräftiger */
+.r2b3-ch[open]>summary>.cd-scene{--cd-op:calc(var(--cd-scene-op) * 1.3)}
+@media (hover:hover) and (pointer:fine){
+  html.cd-motion .r2b3-ch>summary .cd-scene-img{transform-origin:75% 50%;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .35s}
+  html.cd-motion .r2b3-ch>summary:hover .cd-scene-img{transform:scale(1.045)}
+}
+.r2b3-sgh{margin:4px 0 6px;font:700 12px/1.3 var(--f-mono);letter-spacing:.06em;color:var(--amber)}
+.r2b3-steps{margin:0 0 6px;padding:0;list-style:none;counter-reset:r2b3s;columns:270px 3;column-gap:12px}
+.r2b3-steps>li{break-inside:avoid;counter-increment:r2b3s;padding-bottom:3px}
+.r2b3-step{display:flex;align-items:center;gap:10px;min-height:42px;padding:5px 10px 5px 5px;border:1px solid transparent;border-radius:10px;color:var(--text);text-decoration:none}
+.r2b3-step::before{content:counter(r2b3s);flex:none;display:grid;place-items:center;width:27px;height:27px;border:1px solid color-mix(in srgb,var(--cd-acc) 55%,transparent);border-radius:50%;
+  background:color-mix(in srgb,var(--cd-acc) 13%,var(--card));font:700 12px/1 var(--f-mono);color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.r2b3-step:hover{border-color:var(--line-soft);background:color-mix(in srgb,var(--red) 6%,transparent)}
+.r2b3-step:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+.r2b3-st{flex:1;min-width:0;font-size:13.5px;line-height:1.35;color:var(--ink-hi);overflow-wrap:anywhere}
+.r2b3-st small{display:block;font-size:11.5px;color:var(--dim)}
+.r2b3-sm{display:inline-flex;align-items:center;gap:4px;flex:none;font-size:11.5px;font-weight:700;color:var(--red)}
+.r2b3-sm .cd-i{width:13px;height:13px}
+.r2b3-sgo{flex:none;color:var(--glo);opacity:0;transition:opacity .15s}
+.r2b3-step:hover .r2b3-sgo,.r2b3-step:focus-visible .r2b3-sgo{opacity:1}
+.r2b3-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;padding-top:14px;border-top:1px solid var(--line-soft)}
+.r2b3-donebtn{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:8px 18px 8px 14px;border:1px solid var(--line-strong);border-radius:999px;background:var(--panel);
+  color:var(--ink-hi);font:600 13.5px/1.2 var(--f-body);cursor:pointer;transition:background .18s,border-color .18s,color .18s}
+.r2b3-donebtn .cd-i{width:17px;height:17px;stroke-width:2.4;color:var(--dim)}
+.r2b3-donebtn:hover{border-color:var(--cd-ok)}
+.r2b3-donebtn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b3-donebtn[aria-pressed="true"]{border-color:color-mix(in srgb,var(--cd-ok) 60%,transparent);background:color-mix(in srgb,var(--cd-ok) 15%,var(--panel));color:var(--cd-ok)}
+.r2b3-donebtn[aria-pressed="true"] .cd-i{color:var(--cd-ok)}
+.r2b3-foot .cd-go{font-size:13px}
+@media (max-width:600px){
+  .r2b3-jr{padding:16px 14px 12px;margin-inline:0}
+  .r2b3-jr-hd{margin-bottom:14px}
+  .r2b3-ring{width:58px;height:58px}.r2b3-ring>span{font-size:18px}
+  .r2b3-track{margin-inline:-14px;padding-inline:14px;scroll-padding-inline:14px}
+  .r2b3-seg,.r2b3-seg.is-one{flex:none;width:calc(var(--n) * 84px);min-width:0}
+  .r2b3-nd{min-width:0}
+  .r2b3-ch .r2b3-b2,.r2b3-ch .r2b3-more,.r2b3-loot>.r2b3-li:nth-of-type(n+4){display:none}
+  .r2b3-loot>.r2b3-li:nth-of-type(3)::after{content:none}
+  .r2b3-legend-h{margin-left:0}
+  .r2b3-ch>summary{min-height:0;padding:14px 12px 14px 16px;gap:6px 12px}
+  .r2b3-ch .cd-fold-ico{width:54px;height:54px;border-radius:12px;gap:3px}
+  .r2b3-ch .cd-fold-ico .cd-g{font-size:22px}
+  .r2b3-ch .cd-fold-t{font-size:16.5px}
+  .r2b3-ch .cd-fold-body{padding:14px 14px 16px}
+  .r2b3-bc{max-width:100%}
+  .r2b3-steps{columns:auto}
+  /* Feinschliff mobil: Nummer, Titel und Status oben nebeneinander, Kern-Items und Chips darunter über die volle Kartenbreite
+     (vorher teilten sich Nummer, Text und Pfeil ~200 px, Chips brachen einzeln um, Karten bis 210 px hoch) */
+  .r2b3-ch>summary{grid-template-columns:54px minmax(0,1fr) auto;grid-template-areas:"ico t arr" "ico aside arr" "lead lead lead" "chips chips chips";gap:4px 12px}
+  .r2b3-ch .cd-fold-main{display:contents}
+  .r2b3-ch .cd-fold-ico{grid-area:ico;align-self:center}
+  .r2b3-ch .cd-fold-t{grid-area:t;align-self:end;column-gap:8px}
+  .r2b3-ch .cd-fold-lead{grid-area:lead;margin-top:8px}
+  .r2b3-ch .cd-fold-chips{grid-area:chips;margin-top:6px}
+  .r2b3-ch .cd-fold-arr{grid-area:arr}
+  .r2b3-ch>summary>.cd-fold-aside{grid-area:aside;align-self:start;flex-direction:row;align-items:center;flex-wrap:wrap;gap:4px 10px;margin:0;padding:0;background:none}
+  .r2b3-ch.is-locked>summary>.cd-fold-main>*{filter:blur(7px)}
+  /* untere Zeilen liegen jetzt auch über dem Bild: Szene unten ruhiger */
+  .r2b3-ch>summary>.cd-scene::after{background:linear-gradient(90deg,color-mix(in srgb,var(--card) 62%,transparent) 0%,color-mix(in srgb,var(--card) 30%,transparent) 50%,transparent 80%),
+    linear-gradient(0deg,color-mix(in srgb,var(--card) 55%,transparent),transparent 55%)}
+  .r2b3-bc{min-height:50px}
+  .r2b3-bp{width:40px;height:40px}
+  .r2b3-tipw.is-clamp:not(.is-open) .r2b3-tip>div{-webkit-line-clamp:6}
+}
+@media print{.r2b3-track{overflow:visible;flex-wrap:wrap}.r2b3-ch.is-locked>summary>*{filter:none}.r2b3-spoil{display:none}}
 /* R2-B3 Ende */
 
 /* ---- Bereich Bauer 4 (nur B4 schreibt hier) ---- */
@@ -5883,9 +6099,9 @@ html.cd-motion .r2b2-npc .r2b2-por .cd-scene-img{transition:transform .5s cubic-
   </section>
   <section class="sec" id="sec-chapters">
     <h2 class="sec-t"><span class="sec-sym">▤</span> Kapitel-Guide</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Schritt-für-Schritt-Übersicht über Prolog, alle 12 Kapitel und Epilog mit wichtigen Gegenständen, Bossen und verpassbaren Inhalten. Markiere Kapitel als abgeschlossen, um deinen Fortschritt zu verfolgen.</div>
-    <div class="qst-hero" id="qst-hero" aria-label="Story-Timeline 12 Kapitel"></div>
-    <div style="display:flex;flex-direction:column;gap:12px" id="ch-timeline"></div>
+    <section class="r2b3-jr cd-spot" id="qst-hero" aria-label="Story-Reise: Prolog, 12 Kapitel und Epilog"></section>
+    <div class="r2b3-bar" id="ch-filter"></div>
+    <div class="cd-folds r2b3-list" id="ch-timeline"></div>
   </section>
 
   <section class="sec" id="sec-secrets">
@@ -7077,27 +7293,61 @@ function refreshSectionStats(){
 }
 
 // ===== QUEST-STORY-TIMELINE HERO =====
+// R2 B3 (21.10.2026): Story-Reise durch die Regionen. Abschnitte nach CH_REGION (zusammenhängende Kapitel derselben Region),
+// je Abschnitt Regions-Szene (reg-…) + Regionsfarbe, Knoten = MAIN_QUESTS-Abschnitte (Prolog, 1 bis 12, Epilog).
+// Klick springt per cdGo zur Kapitelkarte (Kapitel 1 umfasst den Prolog). Tooltips (data-tip) wie bisher: Boss, Warnung, Unlock.
+/* Feinschliff: weiche Trennstellen (nur Anzeige) vor häufigen englischen Wortteilen, damit lange Namen in schmalen Knoten nicht mitten im Wort brechen ("Homecom ing") */
+function r2b3Hy(s){return cdEsc(s).replace(/[A-Za-z]{8,}/g,w=>w.replace(/^(.{3,}?)(coming|attack|splitter|caller|work|ledge|nation|bidden|ened|ress|brum|ter)$/i,'$1&shy;$2'));}
+function r2b3ChOf(ch){return ch==='Prolog'?1:/^\d+$/.test(ch)?parseInt(ch,10):ch;}
 function renderQuestTimeline(){
   if(typeof MAIN_QUESTS==='undefined')return;
   const target=document.getElementById('qst-hero');
   if(!target)return;
-  const doneRaw=lsJson('cd_ch_done',[]);
-  target.innerHTML=`<div class="qst-rail">${MAIN_QUESTS.map((c,i)=>{
-    const num=c.ch;
-    const isNum=/^\d+$/.test(num);
-    const dotLabel=isNum?num:(num==='Prolog'?'P':num==='Epilog'?'E':'?');
-    const isDone=isNum?doneRaw.includes(parseInt(num,10)):(num==='Epilog'&&doneRaw.includes('Epilog'));
-    return `<div class="qst-node${isDone?' done':''}" onclick="showSec('chapters');document.getElementById('si').value='';doSearch('')" data-tip="${(c.boss||'Kein Boss').replace(/"/g,'&quot;')}${c.warn?'<br>⚠ '+c.warn.replace(/"/g,'&quot;'):''}${c.unlock?'<br>🔓 '+c.unlock.replace(/"/g,'&quot;'):''}" data-tip-title="${num} — ${c.name.replace(/"/g,'&quot;')}">
-      <div class="qst-node-dot">${dotLabel}</div>
-      <div class="qst-node-label">${c.name}</div>
-      ${c.boss?`<div class="qst-node-boss">${(c.boss.length>22?c.boss.slice(0,22)+'…':c.boss)}</div>`:''}
-    </div>`;
-  }).join('')}</div>
-  <div class="qst-legend">
-    <span><i></i> Offen</span>
-    <span><i class="done"></i> Abgeschlossen</span>
-    <span>· Klick = Kapitel-Detail</span>
-  </div>`;
+  const st=(typeof r2b3State==='function')?r2b3State():{done:lsJson('cd_ch_done',[]),sp:0,next:null};
+  const total=CHAPTERS.length,nDone=CHAPTERS.filter(c=>st.done.includes(c.num)).length,nextC=CHAPTERS.find(c=>c.num===st.next);
+  const segs=[];
+  MAIN_QUESTS.forEach(m=>{
+    const r=r2b3Reg(m.ch),reg=r?r.region:'',last=segs[segs.length-1];
+    if(last&&last.reg===reg)last.items.push({m,r});else segs.push({reg,items:[{m,r}]});
+  });
+  const node=({m,r})=>{
+    const n=r2b3ChOf(m.ch),isNum=/^\d+$/.test(m.ch),done=st.done.includes(n),locked=st.sp>0&&chOrd(m.ch)>st.sp;
+    const lbl=isNum?m.ch:m.ch==='Prolog'?'P':'E',chain=m.boss?r2b3Chain(m.boss):[],boss=chain.length?chain[chain.length-1].name:'';
+    const tip=locked?'Spoiler-Schutz aktiv':cdEsc(m.boss||'Kein Boss')+(m.warn?'<br>⚠ '+cdEsc(m.warn):'')+(m.unlock?'<br>🔓 '+cdEsc(m.unlock):'');
+    const name=isNum?'Kapitel '+m.ch:m.ch;
+    return '<div role="listitem" class="r2b3-nd'+(done?' is-done':'')+(st.next===n&&!(n===1&&m.ch==='1')?' is-next':'')
+      +(r&&r.conf!=='high'?' is-unsure':'')+(locked?' is-locked':'')+'">'
+      +'<a href="'+cdGoHref('chapters','ch-'+n)+'" data-go="chapters" data-goq="ch-'+cdEsc(n)+'" data-tip="'+cdEsc(tip)+'" data-tip-title="'+cdEsc(name+(locked?'':' · '+m.name))+'">'
+      +'<span class="r2b3-dot">'+cdEsc(lbl)+(done?cdIcon('check','r2b3-dk'):'')+'</span>'
+      +'<span class="r2b3-nl" lang="en">'+(locked?cdEsc(name):r2b3Hy(m.name))+'</span>'
+      +(boss&&!locked?'<span class="r2b3-nb" lang="en">'+r2b3Hy(boss)+'</span>':'')
+      +'<span class="r2b3-sr">'+(done?', abgeschlossen':'')+'</span></a></div>';
+  };
+  target.innerHTML='<div class="r2b3-jr-hd"><div class="r2b3-jr-main"><p class="r2b3-k">Story-Reise</p>'
+    +'<h3 class="r2b3-jr-t">Prolog, 12 Kapitel, Epilog</h3>'
+    +'<p class="r2b3-jr-sub">Je Kapitel Bosse, Schlüssel-Items, verpassbare Inhalte und alle Schritte. Hake ab, was du geschafft hast.</p></div>'
+    +'<div class="r2b3-jr-st"><span class="r2b3-ring" style="--p:'+Math.round(nDone/Math.max(total,1)*100)+'%" role="img" aria-label="'+nDone+' von '+total+' Kapiteln abgeschlossen"><span>'+nDone+'<small>/'+total+'</small></span></span>'
+    +'<span class="r2b3-jr-st-t"><span class="r2b3-jr-st-l">Kapitel abgeschlossen</span>'
+    +(nextC?'<a class="cd-go r2b3-jr-next" href="'+cdGoHref('chapters','ch-'+nextC.num)+'" data-go="chapters" data-goq="ch-'+cdEsc(nextC.num)+'">Weiter mit '
+      +cdEsc((typeof nextC.num==='number'?'Kap. '+nextC.num+': ':'')+r2b3Title(nextC,r2b3MQ(nextC)).de)+cdIcon('go')+'</a>':'<b class="r2b3-jr-all">Alle Kapitel erledigt</b>')
+    +'</span></div></div>'
+    +'<div class="r2b3-track" data-lenis-prevent role="list" aria-label="Kapitel nach Region">'
+    +segs.map(sg=>{
+      const col=sg.reg?cdTone({region:sg.reg}):null;
+      return '<div class="r2b3-seg cd-scened'+(sg.reg?'':' is-unk')+(sg.items.length===1?' is-one':'')+'" role="presentation" style="--n:'+sg.items.length+(col?';--c:'+col:'')+'">'
+        +(sg.reg?cdScene(['reg-'+cdSlug(sg.reg)],{region:sg.reg,full:true}):cdScene([],{tone:'var(--dim)'}))
+        +'<span class="r2b3-seg-l">'+(sg.reg?cdIcon('pin')+cdEsc(sg.reg):'Region offen')+'</span>'
+        +'<div class="r2b3-nds" role="presentation">'+sg.items.map(node).join('')+'</div></div>';
+    }).join('')+'</div>'
+    +'<p class="r2b3-legend"><span><i class="is-o"></i>Offen</span><span><i class="is-d"></i>Abgeschlossen</span><span><i class="is-n"></i>Als Nächstes</span>'
+    +'<span><i class="is-u"></i>Region weniger sicher</span><span class="r2b3-legend-h">Klick auf ein Kapitel springt zur Karte</span></p>';
+  // Handy: Zeitleiste auf das nächste offene Kapitel rollen (einmal lesen, einmal schreiben)
+  requestAnimationFrame(()=>{
+    const tr=target.querySelector('.r2b3-track'),nx=tr&&tr.querySelector('.r2b3-nd.is-next');
+    if(!tr||!nx||tr.scrollWidth<=tr.clientWidth+2)return;
+    const x=nx.getBoundingClientRect().left-tr.getBoundingClientRect().left+tr.scrollLeft-tr.clientWidth/2+nx.offsetWidth/2;
+    tr.scrollLeft=Math.max(0,x);
+  });
 }
 
 // ===== BOSS DIFFICULTY RATING =====
@@ -13023,40 +13273,181 @@ function renderSanctumGuide(){
 }
 
 // ===== CHAPTER GUIDE =====
-
+// R2 B3 (21.10.2026): schlanke Faltkarten (cdFold) mit Szene je Kapitel, Boss-Kette, Schritten (Hauptquests) und
+// Filter-Pillen; Story-Reise oben in renderQuestTimeline. Hilfen mit Präfix r2b3, CSS im Anker R2-B3.
+/* Eingeklappte Karte: handverlesene, WORTGETREUE Teilstrings aus CHAPTERS[i].items bzw. .boss (Schlüssel = num).
+   Steht ein Eintrag nach einer Datenänderung nicht mehr im Text, fällt er weg (r2b3Pick). */
+const R2B3_ITEMS={1:['Axiom Bracelet','Blinding Flash','Force Palm'],2:['Sword of the Lord','Wind Slash Core'],3:['Hollow Visage'],
+  4:['Abyss-Artefakte','Refine-Materialien'],5:['Tauria Curved Sword',"Crow's Pursuit Core",'Blackwing Leather Armor'],6:['Elowens vier Sanctums'],
+  7:['Melted Ambition','Hungering Fang Leather Cloak'],8:['Golden Vanguard','Official Knight Set','Spire of Clockwork Key'],
+  9:['Crow Whisperer Staff','Earring of Dark Magic','Sanctum of Mortification'],10:['Leofric Musket'],11:['3 Fortress Keys','Golden Fire','Blackstar-Drachen-Reittier'],
+  12:['Twisted Verdict','True Ending'],Epilog:['Expert Storyteller','Dark Executioner Leather Armor','Axe of the Apocalypse']};
+const R2B3_BOSS={1:['Myurdin'],2:['Matthias','Kailok the Hornsplitter'],3:['Reed Devil'],4:['Tenebrum'],5:['Kearush the Slayer','Draven the Crowcaller'],
+  6:['Cassius Morten'],7:['Ludvig','Myurdin'],8:['Gregor the Halberd of Carnage','Lucian Bastier'],9:['Hexe Marie','Master Du'],10:["Marni's Clockwork Mantis"],
+  11:['Golden Star','Flying Fortress Orbian'],12:['Corrupted Caliburn','Umbra'],Epilog:[]};
+let _r2b3F='all';
+function r2b3Pick(list,txt){txt=String(txt||'');return (list||[]).filter(x=>txt.indexOf(x)>-1);}
+function r2b3Dash(t){return /^\s*[—–-]/.test(String(t||''));}
+/* MAIN_QUESTS-Abschnitte eines Kapitels (Kapitel 1 umfasst laut Titel den Prolog) */
+function r2b3MQ(c){
+  if(typeof MAIN_QUESTS==='undefined')return [];
+  return (c.num===1?['Prolog','1']:[String(c.num)]).map(k=>MAIN_QUESTS.find(m=>m.ch===k)).filter(Boolean);
+}
+/* Region wie chapAccent(): conf low / null entfällt */
+function r2b3Reg(k){const m=typeof CH_REGION!=='undefined'&&CH_REGION[String(k)];return m&&m.region&&m.conf!=='low'?m:null;}
+function r2b3Title(c,mq){const m=/^(.*?)\s*\(([^()]*)\)\s*$/.exec(c.title||'');return m?{de:m[1],en:m[2]}:{de:c.title||'',en:mq.map(x=>x.name).join(' / ')};}
+/* Boss-Kette aus MAIN_QUESTS.boss: oberste Ebene an → (danach) und + (und) teilen, Klammerzusätze bleiben wortgetreu */
+function r2b3Chain(s){
+  const out=[];let d=0,cur='';s=String(s||'');
+  for(let i=0;i<s.length;i++){const ch=s[i];if(ch==='(')d++;else if(ch===')')d--;
+    if(!d&&(ch==='→'||(ch==='+'&&s[i-1]===' '))){if(cur.trim())out.push({t:cur.trim(),sep:ch});cur='';continue;}cur+=ch;}
+  if(cur.trim())out.push({t:cur.trim(),sep:''});
+  return out.map(x=>{const m=/^(.*?)\s*(\(.*\))\s*$/.exec(x.t);return {name:m?m[1]:x.t,note:m?m[2]:'',sep:x.sep};});
+}
+function r2b3Boss(name){
+  if(typeof BOSSES==='undefined')return null;
+  return BOSSES.find(b=>b.name===name)||BOSSES.find(b=>b.name.indexOf(name+' (')===0)||null;
+}
+function r2b3BossImg(b){return b&&typeof BOSS_IMGS!=='undefined'&&BOSS_IMGS[b.name]||null;}
+function r2b3ChainHtml(chain){
+  return '<ol class="r2b3-chain">'+chain.map(x=>{
+    const b=r2b3Boss(x.name),img=r2b3BossImg(b);
+    const inner='<span class="r2b3-bp" aria-hidden="true"><i>'+cdEsc(x.name.charAt(0))+'</i>'
+      +(img?'<img src="'+cdEsc(img)+'" alt="" loading="lazy" decoding="async" width="44" height="44" onerror="this.remove()">':'')+'</span>'
+      +'<span class="r2b3-bn"><b>'+cdEsc(x.name)+'</b>'+(x.note?'<small>'+cdEsc(x.note)+'</small>':'')+'</span>';
+    const node=b?'<a class="r2b3-bc" href="'+cdGoHref('bosses',b.name)+'" data-go="bosses" data-goq="'+cdEsc(b.name)+'" title="Zum Boss-Eintrag">'+inner+'</a>'
+      :'<span class="r2b3-bc">'+inner+'</span>';
+    return '<li>'+node+(x.sep?'<span class="r2b3-sep" role="img" aria-label="'+(x.sep==='→'?'danach':'und')+'">'+(x.sep==='→'?cdIcon('go'):'+')+'</span>':'')+'</li>';
+  }).join('')+'</ol>';
+}
+function r2b3Steps(mq){
+  return mq.map(m=>(mq.length>1?'<p class="r2b3-sgh">'+cdEsc(m.ch==='Prolog'?'Prolog':'Kapitel '+m.ch)+' · '+cdEsc(m.name)+'</p>':'')
+    +'<ol class="r2b3-steps">'+m.quests.map(q=>{
+      const t=typeof q==='object'?q.q:String(q),mm=/^(.*?)\s+(\(.*\))$/.exec(t);
+      return '<li><a class="r2b3-step" href="'+cdGoHref('quests',t)+'" data-go="quests" data-goq="'+cdEsc(t)+'" data-tab="mq">'
+        +'<span class="r2b3-st">'+cdEsc(mm?mm[1]:t)+(mm?'<small>'+cdEsc(mm[2])+'</small>':'')+'</span>'
+        +(q&&q.miss?'<span class="r2b3-sm">'+cdIcon('miss')+'Verpassbar</span>':'')+cdIcon('go','r2b3-sgo')+'</a></li>';
+    }).join('')+'</ol>').join('');
+}
+function r2b3State(){
+  const done=lsJson('cd_ch_done',[]),nx=CHAPTERS.find(c=>!done.includes(c.num));
+  return {done,sp:(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0,next:nx?nx.num:null};
+}
+function r2b3Aside(c,st,nQ){
+  const d=st.done.includes(c.num);
+  return (d?'<span class="r2b3-doneb">'+cdIcon('check')+'Erledigt</span>':st.next===c.num?'<span class="r2b3-nextb">Als Nächstes</span>':'')
+    +'<span class="r2b3-qn"><b>'+nQ+'</b> Quests</span>';
+}
+function r2b3Body(c,o){
+  const noBoss=r2b3Dash(c.boss),bossTxt=noBoss?'Kein Boss '+String(c.boss).replace(/^\s*[—–-]\s*/,''):c.boss;
+  const unl=o.mq.filter(m=>m.unlock).map(m=>m.unlock);
+  /* Feinschliff: langer Tipp eingekürzt mit "Ganzen Tipp lesen" (voller Text bleibt im DOM und in data-s), direkt beim Bosskampf, zu dem er gehört */
+  const tipLong=String(c.tip||'').length>240;
+  const tip=c.tip?'<div class="r2b3-tipw'+(tipLong?' is-clamp':'')+'">'+cdNote(c.tip,{kind:'info',title:'Tipp',cls:'r2b3-tip'})
+    +(tipLong?'<button type="button" class="r2b3-tipbtn" data-r2b3-tip aria-expanded="false">'+cdIcon('chev')+'<span>Ganzen Tipp lesen</span></button>':'')+'</div>':'';
+  return '<div class="r2b3-sec"><h4 class="r2b3-h">'+cdIcon('atk')+'Bosskämpfe</h4>'
+      +(o.chain.length?r2b3ChainHtml(o.chain):'')+'<p class="r2b3-bt">'+cdEsc(bossTxt)+'</p>'+tip+'</div>'
+    +'<div class="r2b3-grid">'
+      +'<div class="r2b3-box r2b3-box--loot"><h4 class="r2b3-h">'+cdIcon('key')+'Schlüssel-Items</h4><p>'+cdEsc(c.items)+'</p>'
+      +(unl.length?'<p class="r2b3-unl"><b>Neu freigeschaltet:</b> '+cdEsc(unl.join(' · '))+'</p>':'')+'</div>'
+      +(o.miss?cdNote(c.missable,{kind:'miss',cls:'r2b3-miss'}):c.missable?cdNote(c.missable,{kind:'info',title:'Verpassbar? Nein',cls:'r2b3-miss'}):'')+'</div>'
+    +'<div class="r2b3-sec"><h4 class="r2b3-h">'+cdIcon('pin')+'Schritte · '+o.nQ+' Hauptquests</h4>'+r2b3Steps(o.mq)+'</div>'
+    +'<div class="r2b3-foot"><button type="button" class="r2b3-donebtn" data-r2b3-done="'+cdEsc(c.num)+'" aria-pressed="'+o.done+'">'+cdIcon('check')
+      +'<span>'+(o.done?'Abgeschlossen':'Als abgeschlossen markieren')+'</span></button>'
+      +'<a class="cd-go" href="'+cdGoHref('quests')+'" data-go="quests" data-tab="mq">Ganzer Walkthrough auf der Seite Quests'+cdIcon('go')+'</a></div>';
+}
+function r2b3Card(c,st){
+  const mq=r2b3MQ(c),ep=typeof c.num!=='number',key=String(c.num),reg=r2b3Reg(c.num),T=r2b3Title(c,mq);
+  const done=st.done.includes(c.num),locked=st.sp>0&&chOrd(c.num)>st.sp;
+  const nQ=mq.reduce((a,m)=>a+m.quests.length,0);
+  const chain=[].concat(...mq.filter(m=>m.boss).map(m=>r2b3Chain(m.boss)));
+  const bosses=r2b3Pick(R2B3_BOSS[key],c.boss),items=r2b3Pick(R2B3_ITEMS[key],c.items);
+  const miss=!!(c.missable&&String(c.missable).trim()&&!r2b3Dash(c.missable));
+  const bImg=chain.map(x=>r2b3BossImg(r2b3Boss(x.name))).filter(Boolean).pop();
+  const col=reg?cdTone({region:reg.region}):null;
+  const chips=[];
+  if(reg)chips.push({h:'<span class="cd-chip r2b3-rc'+(reg.conf!=='high'?' is-unsure':'')+'" style="--c:'+col+'"'+(reg.conf!=='high'?' title="Zuordnung weniger sicher"':'')+'>'
+    +cdIcon('pin')+'<span>'+cdEsc(reg.region)+'</span>'+(reg.conf!=='high'?'<small aria-hidden="true">≈</small>':'')+'</span>'});
+  bosses.forEach((b,i)=>chips.push({h:'<span class="cd-chip cd-chip--red'+(i?' r2b3-b2':'')+'">'+cdIcon('atk')+'<span>'+cdEsc(b)+'</span></span>'}));
+  if(chain.length>bosses.length&&bosses.length)chips.push({h:'<span class="cd-chip r2b3-more" title="'+cdEsc(chain.map(x=>x.name).join(', '))+'">+'+(chain.length-bosses.length)+' weitere</span>'});
+  if(r2b3Dash(c.boss))chips.push({t:'Kein Bosskampf'});
+  if(miss)chips.push({t:'Verpassbar',i:'miss',c:'warn'});
+  const s=[T.de,T.en,c.title,c.boss,c.items,c.missable,c.tip,reg&&reg.region]
+    .concat(...mq.map(m=>[m.name,m.boss,m.unlock].concat(m.quests.map(q=>typeof q==='object'?q.q:q)))).filter(Boolean).join(' ');
+  return cdFold({
+    id:'ch-'+key, s,
+    cls:'r2b3-ch'+(ep?' is-ep':'')+(done?' is-done':'')+(st.next===c.num?' is-next':'')+(locked?' is-locked':''),
+    attrs:{'data-ch':key,'data-miss':miss?'1':null},
+    region:reg?reg.region:null, tone:reg?null:'var(--dim)',
+    icon:ep?'E':String(c.num).padStart(2,'0'),
+    title:{h:'<span class="r2b3-tt" data-toc><span class="r2b3-sr">'+(ep?'':'Kapitel '+c.num+': ')+'</span>'+cdEsc(T.de)+'</span>'+(T.en?'<small class="r2b3-en" lang="en">'+cdEsc(T.en)+'</small>':'')},
+    lead:items.length?{h:'<span class="r2b3-loot">'+cdIcon('key')+'<span class="r2b3-sr">Schlüssel-Items: </span>'+items.map(i=>'<span class="r2b3-li">'+cdEsc(i)+'</span>').join(' ')+'</span>'}:'',
+    chips,
+    scene:{keys:['ch-'+cdSlug(key)].concat(ep?['ch-13','q-main']:[]).concat(reg?['reg-'+cdSlug(reg.region)]:[]).concat(bImg?[{src:bImg}]:[]),
+      region:reg?reg.region:null,tone:reg?null:'var(--dim)',glyph:ep?'∞':'§'},
+    aside:r2b3Aside(c,st,nQ)+(locked?'<span class="r2b3-spoil"><span>🔒 '+(ep?'Epilog':'Kapitel '+c.num)+' · Spoiler</span><button type="button" class="spoiler-reveal-btn">Trotzdem anzeigen</button></span>':''),
+    body:()=>r2b3Body(c,{mq,chain,miss,nQ,done:lsJson('cd_ch_done',[]).includes(c.num)})
+  });
+}
+function r2b3Pills(st){
+  const n=CHAPTERS.length,d=CHAPTERS.filter(c=>st.done.includes(c.num)).length,
+    m=CHAPTERS.filter(c=>c.missable&&String(c.missable).trim()&&!r2b3Dash(c.missable)).length;
+  return cdPills([{v:'all',t:'Alle',n},{v:'open',t:'Offen',n:n-d},{v:'done',t:'Erledigt',n:d},{v:'miss',t:'Mit Verpassbarem',n:m}]
+    .map(x=>Object.assign(x,{on:x.v===_r2b3F})),{name:'r2b3-f',label:'Kapitel filtern'});
+}
+function r2b3Filter(){
+  const list=document.getElementById('ch-timeline');if(!list)return;
+  let vis=0;
+  list.querySelectorAll(':scope>.r2b3-ch').forEach(el=>{
+    const v=_r2b3F,ok=v==='all'||(v==='open'&&!el.classList.contains('is-done'))||(v==='done'&&el.classList.contains('is-done'))||(v==='miss'&&el.dataset.miss==='1');
+    if(ok){if(el.dataset.filtered==='1'){delete el.dataset.filtered;el.classList.remove('hide');}vis++;}
+    else{el.dataset.filtered='1';el.classList.add('hide');}
+  });
+  let e=list.querySelector(':scope>.r2b3-empty');
+  if(!vis){if(!e)list.insertAdjacentHTML('beforeend','<p class="r2b3-empty">Keine Kapitel in dieser Auswahl.</p>');}else if(e)e.remove();
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(list);
+}
+/* Fortschritt ändern, ohne offene Karten zu schließen */
+function r2b3Sync(){
+  const st=r2b3State(),list=document.getElementById('ch-timeline');if(!list)return;
+  CHAPTERS.forEach(c=>{
+    const el=document.getElementById('ch-'+c.num);if(!el)return;
+    const d=st.done.includes(c.num);
+    el.classList.toggle('is-done',d);el.classList.toggle('is-next',st.next===c.num);
+    const a=el.querySelector(':scope>summary>.cd-fold-aside'),sp=a&&a.querySelector('.r2b3-spoil');
+    if(a){a.innerHTML=r2b3Aside(c,st,r2b3MQ(c).reduce((x,m)=>x+m.quests.length,0));if(sp)a.appendChild(sp);}
+    const b=el.querySelector('[data-r2b3-done]');
+    if(b){b.setAttribute('aria-pressed',d);b.lastElementChild.textContent=d?'Abgeschlossen':'Als abgeschlossen markieren';}
+  });
+  const f=document.getElementById('ch-filter');if(f)f.innerHTML=r2b3Pills(st);
+  r2b3Filter();
+}
 function renderChapters(){
-  const done=lsJson('cd_ch_done',[]);
-  const sp=(typeof loadSpoilerChapter==='function')?loadSpoilerChapter():0;
-  const isEp=c=>c.num==='Epilog';
-  const toc=makeToc(CHAPTERS.map(c=>({id:`ch-${c.num}`,label:isEp(c)?'Epilog':`Kap. ${String(c.num).padStart(2,'0')}`})));
-  document.getElementById('ch-timeline').innerHTML=toc+CHAPTERS.map(c=>{
-    const d=done.includes(c.num);
-    const _l=sp>0&&chOrd(c.num)>sp;
-    return `<div id="ch-${c.num}" class="ch-card${d?' ch-done':''}${_l?' spoiler-locked':''}" style="scroll-margin-top:72px">
-      ${_l?`<div class="spoiler-cover"><div class="spoiler-cover-ico">🔒</div><div class="spoiler-cover-tx">${isEp(c)?'Epilog':'Kapitel '+c.num} · Spoiler</div><button class="spoiler-reveal-btn" onclick="event.stopPropagation();revealSpoiler(this)">Trotzdem anzeigen</button></div>`:''}
-      <div class="ch-num-blk">
-        <div class="ch-kap-lbl">${isEp(c)?'EPILOG':'KAP.'}</div>
-        <div class="ch-num">${isEp(c)?'E':String(c.num).padStart(2,'0')}</div>
-      </div>
-      <div class="ch-body">
-        <div class="ch-title">${c.title}</div>
-        <div class="ch-rows">
-          <div class="ch-row"><span class="ch-row-lbl">Boss</span><span class="ch-row-val">${c.boss}</span></div>
-          <div class="ch-row"><span class="ch-row-lbl">Key Items</span><span class="ch-row-val">${c.items}</span></div>
-          ${c.missable?`<div class="ch-row"><span class="ch-row-lbl">⚠️ Verpassbar</span><span class="ch-row-val ch-miss">${c.missable}</span></div>`:''}
-          <div class="ch-row"><span class="ch-row-lbl">Tipp</span><span class="ch-row-val" style="color:var(--dim)">${c.tip}</span></div>
-        </div>
-        <button class="ch-btn${d?' done':''}" onclick="toggleChDone(${typeof c.num==='number'?c.num:"'"+c.num+"'"})">${d?'✓ Abgeschlossen':'Als abgeschlossen markieren'}</button>
-      </div>
-    </div>`;
-  }).join('');
-  _reapplyActiveSearch(document.getElementById('ch-timeline'));
+  const list=document.getElementById('ch-timeline');if(!list)return;
+  const st=r2b3State();
+  list.innerHTML=CHAPTERS.map(c=>r2b3Card(c,st)).join('');
+  const f=document.getElementById('ch-filter');if(f)f.innerHTML=r2b3Pills(st);
+  const sec=document.getElementById('sec-chapters');
+  if(sec&&!sec._r2b3){
+    sec._r2b3=1;
+    sec.addEventListener('cd-pills',e=>{if(e.detail.name!=='r2b3-f')return;_r2b3F=e.detail.value;r2b3Filter();});
+    sec.addEventListener('click',e=>{
+      const sp=e.target.closest('.r2b3-spoil');
+      if(sp){e.preventDefault();if(e.target.closest('button')){const card=sp.closest('.r2b3-ch');sp.remove();if(card)card.classList.remove('is-locked');}return;}
+      const tb=e.target.closest('[data-r2b3-tip]');
+      if(tb){const w=tb.parentElement,op=w.classList.toggle('is-open');tb.setAttribute('aria-expanded',op);tb.lastElementChild.textContent=op?'Tipp einklappen':'Ganzen Tipp lesen';return;}
+      const b=e.target.closest('[data-r2b3-done]');
+      if(b){const v=b.dataset.r2b3Done;toggleChDone(/^\d+$/.test(v)?parseInt(v,10):v);}
+    });
+  }
+  r2b3Filter();
 }
 function toggleChDone(num){
   let d=lsJson('cd_ch_done',[]);
   d=d.includes(num)?d.filter(n=>n!==num):[...d,num];
   lsSet('cd_ch_done',JSON.stringify(d));
-  renderChapters();
+  if(document.getElementById('ch-'+num))r2b3Sync();else renderChapters();
+  if(typeof renderQuestTimeline==='function')renderQuestTimeline();
   if(typeof renderQuestHero==='function'&&document.getElementById('quest-hero'))renderQuestHero();
   if(typeof updateStats==='function')updateStats();
   if(typeof checkAchievements==='function')checkAchievements();
