@@ -5142,6 +5142,184 @@ html.cd-motion .r2b6-pend .r2b6-out{opacity:0;transition:opacity .3s ease;transi
 
 /* ---- Bereich Bauer 7 (nur B7 schreibt hier) ---- */
 /* R2-B7 Anfang */
+/* Rätsel (#sec-puzzles) + Minispiele (#sec-minigames): Gruppen mit Faltkarten, Lösungskacheln. JS: "R2-B7" vor renderPuzzles/renderMinigames. */
+.r2b7-svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.r2b7-head .cd-hero{margin-bottom:14px}
+.r2b7-tools{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:10px;margin:0 0 20px}
+.r2b7-tool{display:flex;align-items:center;gap:12px;min-width:0;min-height:56px;padding:9px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);color:var(--text);text-decoration:none}
+.r2b7-tool>span:last-child{display:flex;flex-direction:column;gap:1px;min-width:0}
+.r2b7-tool b{font-size:13.5px;font-weight:700;color:var(--ink-hi);line-height:1.3}
+.r2b7-tool small{font-size:12px;line-height:1.4;color:var(--dim)}
+.r2b7-tool-k{display:flex;align-items:center;gap:3px;flex:none;color:var(--dim);font-size:12px}
+.r2b7-tool-k i{font-style:normal}
+.r2b7-tool--go .r2b7-tool-k{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid color-mix(in srgb,var(--red) 40%,transparent);color:var(--rhi)}
+.r2b7-tool--go:hover{border-color:color-mix(in srgb,var(--red) 45%,transparent)}
+.r2b7-tool--go:hover b{color:var(--rhi)}
+.r2b7-tool--go:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b7-bar{display:flex;align-items:flex-end;gap:8px 14px;margin:0 0 20px}
+.r2b7-pills{flex:1;min-width:0}
+.r2b7-pills .cd-pills{margin:0}
+.r2b7-cnt{flex:none;font-family:var(--f-mono);font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.r2b7-list{display:grid;gap:30px}
+.r2b7-grp{--cd-acc:var(--gold);display:grid;gap:12px}
+.r2b7-grp[hidden],.r2b7-grp:not(:has(.cd-fold:not(.hide))){display:none}
+.r2b7-gh{display:flex;align-items:center;gap:12px;padding:0 0 10px;background:linear-gradient(90deg,color-mix(in srgb,var(--cd-acc) 70%,transparent),color-mix(in srgb,var(--cd-acc) 12%,transparent) 45%,transparent 80%) left bottom/100% 1px no-repeat}
+.r2b7-gh-i{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:11px;color:var(--cd-acc);border:1px solid color-mix(in srgb,var(--cd-acc) 40%,transparent);background:color-mix(in srgb,var(--cd-acc) 10%,transparent)}
+.r2b7-gh-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+.r2b7-gh-t{margin:0;font-family:var(--f-display);font-size:17px;font-weight:700;line-height:1.25;color:var(--ink-hi)}
+.r2b7-gh-n{margin-left:4px;font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--cd-acc);vertical-align:2px}
+.r2b7-gh-s{margin:0;max-width:72ch;font-size:13px;line-height:1.5;color:var(--dim)}
+/* Faltkarte: etwas größerer Kopf, Icon in Kategoriefarbe, Szene kräftiger */
+.r2b7-card>summary{min-height:84px;padding-top:14px;padding-bottom:14px}
+.r2b7-card .cd-fold-t{font-size:16.5px}
+.r2b7-card .cd-fold-lead .cd-i{width:13px;height:13px;margin-right:2px;color:var(--cd-acc);vertical-align:-2px}
+.r2b7-ico{color:var(--cd-acc);border-color:color-mix(in srgb,var(--cd-acc) 38%,var(--line));background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--cd-acc) 20%,var(--panel)),var(--panel) 75%);box-shadow:0 0 18px -6px color-mix(in srgb,var(--cd-acc) 70%,transparent)}
+.r2b7-ico .r2b7-svg{width:24px;height:24px}
+.r2b7-ico--emo i{font-style:normal;font-size:23px;line-height:1}
+.r2b7-card .r2b7-scene{--cd-scene-w:60%}
+.r2b7-card .r2b7-scene .cd-scene-img{opacity:calc(var(--cd-op,var(--cd-scene-op)) * 1.12)}
+.r2b7-card[open] .cd-fold-lead{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.r2b7-reg .cd-i{width:13px;height:13px}
+/* aufgeklappt: links Weg, rechts Lösung + Fakten */
+.r2b7-split{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(250px,1fr);gap:16px 26px;align-items:start}
+.r2b7-split--one{grid-template-columns:minmax(0,1fr)}
+.r2b7-main,.r2b7-side{display:grid;gap:12px;align-content:start;min-width:0}
+.r2b7-h{margin:0;font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--cd-acc)}
+.r2b7-steps>li::before{border-color:color-mix(in srgb,var(--cd-acc) 60%,transparent);background:color-mix(in srgb,var(--cd-acc) 14%,var(--card));color:var(--cd-acc)}
+.r2b7-steps .cd-step-d{max-width:68ch}
+.r2b7-steps .cd-step-t{color:var(--cd-acc);font-size:13px;letter-spacing:.02em}
+.r2b7-flow .cd-step-d+.cd-step-d{margin-top:6px}
+.r2b7-play1{color:var(--ink-hi)}
+.r2b7-more{font-size:13px;color:var(--dim)}
+.r2b7-money{font-family:var(--f-mono);font-weight:700;color:var(--gold);white-space:nowrap}
+.r2b7-card .cd-keycap{height:22px;min-width:22px;font-size:11.5px}
+/* Lösungskachel */
+.r2b7-code{display:grid;gap:12px;margin:0;padding:14px 14px 16px;border:1px solid color-mix(in srgb,var(--cd-acc) 34%,var(--line));border-radius:14px;
+  background:radial-gradient(130% 100% at 0% 0%,color-mix(in srgb,var(--cd-acc) 13%,transparent),transparent 62%),var(--card)}
+.r2b7-code figcaption{font-size:12.5px;font-weight:700;line-height:1.35;color:var(--cd-acc)}
+.r2b7-code-f{margin:0;font-size:12.5px;line-height:1.5;color:var(--dim)}
+.r2b7-wheels{display:flex;flex-wrap:wrap;gap:8px}
+.r2b7-wh{position:relative;display:grid;justify-items:center;gap:4px;width:54px;padding:12px 0 7px;border:1px solid var(--line-strong);border-radius:11px;
+  background:linear-gradient(180deg,var(--panel) 0%,var(--card) 26%,color-mix(in srgb,var(--cd-acc) 12%,var(--card)) 50%,var(--card) 74%,var(--panel) 100%);
+  box-shadow:inset 0 10px 12px -10px color-mix(in srgb,var(--bg) 90%,transparent),inset 0 -10px 12px -10px color-mix(in srgb,var(--bg) 90%,transparent)}
+/* Feinschliff: Ablese-Marke oben statt seitlicher Balken (die lasen sich als "|2||5|") */
+.r2b7-wh::before{content:'';position:absolute;top:-1px;left:50%;width:14px;height:6px;margin-left:-7px;border-radius:0 0 4px 4px;background:var(--cd-acc);box-shadow:0 2px 8px color-mix(in srgb,var(--cd-acc) 55%,transparent)}
+.r2b7-wh b{font-family:var(--f-mono);font-size:32px;font-weight:700;line-height:1.05;color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.r2b7-wh small{font-size:11px;color:var(--dim)}
+.r2b7-keys{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 5px}
+.r2b7-run{position:relative;display:inline-flex;gap:3px;padding-bottom:17px}
+.r2b7-run small{position:absolute;left:0;right:0;bottom:0;text-align:center;font-family:var(--f-mono);font-size:11px;color:var(--cd-acc)}
+.r2b7-k{display:inline-grid;place-items:center;min-width:36px;height:40px;padding:0 6px;border:1px solid var(--line-strong);border-bottom-width:3px;border-radius:9px;
+  background:linear-gradient(180deg,var(--cardh),var(--card));font:700 19px/1 var(--f-mono);color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.r2b7-grid{display:grid;grid-template-columns:repeat(2,minmax(0,96px));gap:8px}
+.r2b7-gc{display:grid;place-items:center;align-content:center;gap:2px;aspect-ratio:1;border:1px solid color-mix(in srgb,var(--cd-acc) 35%,var(--line));border-radius:12px;
+  background:radial-gradient(circle,color-mix(in srgb,var(--cd-acc) 16%,var(--card)),var(--card) 70%)}
+.r2b7-gc b{font-family:var(--f-mono);font-size:32px;line-height:1;color:var(--cd-acc)}
+.r2b7-gc small{font-size:11px;color:var(--dim)}
+.r2b7-lv{display:grid;margin:0;padding:0;list-style:none;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.r2b7-lv li{display:flex;align-items:center;gap:12px;padding:9px 12px;background:var(--card)}
+.r2b7-lv li+li{border-top:1px dashed var(--line)}
+.r2b7-lv li>span{display:flex;flex-direction:column;min-width:0}
+.r2b7-lv b{font-size:14px;color:var(--ink-hi)}
+.r2b7-lv small{font-size:12px;line-height:1.35;color:var(--dim)}
+.r2b7-sym{flex:none;width:30px;height:30px;fill:color-mix(in srgb,var(--cd-acc) 14%,transparent);stroke:var(--cd-acc);stroke-width:1.6;stroke-linejoin:round}
+.r2b7-rings{display:flex;align-items:center;gap:16px}
+.r2b7-rings svg{flex:none;width:108px;height:108px}
+.r2b7-rings circle{fill:none}
+.r2b7-r1,.r2b7-r2{stroke:var(--cd-acc);stroke-width:9}
+.r2b7-r2{stroke-opacity:.6}
+.r2b7-r3{stroke:var(--line-strong);stroke-width:1.5;fill:color-mix(in srgb,var(--panel) 80%,transparent)!important}
+.r2b7-rot{fill:none;stroke:var(--ink-hi);stroke-width:1.5;stroke-dasharray:3 4;stroke-linecap:round;opacity:.55}
+.r2b7-rings ul{display:grid;gap:6px;margin:0;padding:0;list-style:none;font-size:13px;color:var(--text)}
+.r2b7-dot{display:inline-block;width:10px;height:10px;margin-right:7px;border-radius:50%;background:var(--cd-acc);vertical-align:0}
+.r2b7-dot--2{opacity:.6}
+.r2b7-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.r2b7-slot{--c:var(--cd-fx-hp);position:relative;display:flex;flex-direction:column;gap:3px;padding:12px 12px 12px 22px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--c) 8%,var(--card))}
+.r2b7-slot--sapph{--c:var(--cd-fx-spirit)}
+.r2b7-slot i{position:absolute;left:9px;top:12px;bottom:12px;width:4px;border-radius:4px;background:var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 60%,transparent)}
+.r2b7-slot b{font-size:13px;line-height:1.3;color:var(--ink-hi)}
+.r2b7-slot small{font-size:12px;line-height:1.35;color:var(--dim)}
+.r2b7-methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.r2b7-m{position:relative;display:grid;align-content:start;gap:10px;padding:13px 14px 14px 50px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.r2b7-m-l{position:absolute;left:13px;top:12px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1px solid color-mix(in srgb,var(--cd-acc) 55%,transparent);font:700 12.5px/1 var(--f-mono);color:var(--cd-acc)}
+.r2b7-m-t{margin:2px 0 0;font-size:14px;font-weight:700;line-height:1.35;color:var(--ink-hi)}
+.r2b7-mc{display:grid;gap:8px}
+.r2b7-mc-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:13px;color:var(--text)}
+.r2b7-mc-p{margin:0;font-size:13px;line-height:1.5;color:var(--dim)}
+.r2b7-m .r2b7-wh{width:46px;padding:9px 0 6px}.r2b7-m .r2b7-wh b{font-size:26px}
+.r2b7-m .r2b7-k{min-width:30px;height:34px;font-size:16px}
+.r2b7-lootbox{display:grid;gap:10px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--gold) 30%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--gold) 6%,var(--card))}
+.r2b7-loot{display:grid;gap:7px}
+.r2b7-loot-l{font-size:12.5px;font-weight:700;color:var(--gold)}
+.r2b7-loot-x{margin:0;font-size:12.5px;line-height:1.5;color:var(--dim)}
+.r2b7-loot-v{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-hi)}
+.r2b7-lootbox .r2b7-ladder{margin:0;background:var(--line-soft)}
+.r2b7-facts dd .cd-chips{margin-top:3px}
+/* Minispiele: Phasen, Kartenpaar, Level-Leiter */
+.r2b7-phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin:8px 0 0;padding:0;list-style:none}
+.r2b7-phases li{display:flex;flex-direction:column;gap:4px;padding:10px 11px;border:1px solid var(--line);border-top:3px solid var(--cd-acc);border-radius:10px;background:var(--card)}
+.r2b7-phases b{font-family:var(--f-display);font-size:14px;color:var(--cd-acc)}
+.r2b7-phases span{font-size:12.5px;line-height:1.45;color:var(--text)}
+.r2b7-pair{display:flex;align-items:center;gap:8px;margin-top:10px}
+.r2b7-pc{display:grid;place-items:center;width:42px;height:58px;border:1px solid color-mix(in srgb,var(--cd-fx-hp) 55%,var(--line));border-radius:7px;background:linear-gradient(160deg,color-mix(in srgb,var(--cd-fx-hp) 12%,var(--card)),var(--card));
+  font:700 23px/1 var(--f-mono);color:var(--cd-fx-hp);box-shadow:0 4px 12px -6px color-mix(in srgb,var(--bg) 80%,transparent)}
+.r2b7-pc+.r2b7-pc{transform:rotate(6deg) translateY(2px)}
+.r2b7-pair small{margin-left:6px;font-size:12px;color:var(--dim)}
+.r2b7-ladder{display:grid;margin:4px 0 0;padding:0;list-style:none;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.r2b7-ladder li{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;gap:6px 12px;padding:9px 12px;background:var(--card)}
+.r2b7-ladder li+li{border-top:1px solid var(--line-soft)}
+.r2b7-ladder li>small{grid-column:2;font-size:12px;color:var(--dim)}
+.r2b7-lv-n{display:flex;flex-direction:column;align-items:center;line-height:1}
+.r2b7-lv-n small{font-size:11px;color:var(--dim)}
+.r2b7-lv-n b{font-family:var(--f-mono);font-size:21px;color:var(--gold);font-variant-numeric:tabular-nums}
+/* Feinschliff: Vorschau-Chip "5 Räder" (Lösung wartet im aufgeklappten Teil), gestrichelt wie ein Siegel */
+.r2b7-kind{--c:var(--cd-acc);border-style:dashed;border-color:color-mix(in srgb,var(--cd-acc) 55%,transparent);background:color-mix(in srgb,var(--cd-acc) 11%,transparent);color:var(--ink-hi)}
+.r2b7-kind .cd-i{width:13px;height:13px}
+.r2b7-chal{font-weight:700;color:var(--gold)}
+.r2b7-task{display:block;margin-top:6px;padding:7px 10px;border-left:2px solid color-mix(in srgb,var(--cd-acc) 60%,transparent);border-radius:0 8px 8px 0;background:color-mix(in srgb,var(--cd-acc) 7%,transparent);color:var(--ink-hi)}
+.r2b7-task>b{color:var(--cd-acc)}
+/* offene Karte: Trennlinie in Kategoriefarbe, Lösungskachel bekommt Tiefe */
+.r2b7-card[open]>.cd-fold-body{border-top-color:color-mix(in srgb,var(--cd-acc) 30%,var(--line-soft))}
+.r2b7-code{box-shadow:0 10px 26px -18px color-mix(in srgb,var(--cd-acc) 70%,transparent)}
+/* Mikrointeraktion (nur Maus, nur mit Bewegung): Szene rückt näher, Icon glüht */
+@media (hover:hover) and (pointer:fine){
+  html.cd-motion .r2b7-card .r2b7-scene .cd-scene-img{transform-origin:85% 50%;transition:transform .7s cubic-bezier(.22,.8,.3,1),opacity .35s ease}
+  html.cd-motion .r2b7-card>summary:hover .r2b7-scene .cd-scene-img{transform:scale(1.045);opacity:calc(var(--cd-op,var(--cd-scene-op)) * 1.4)}
+  html.cd-motion .r2b7-ico{transition:box-shadow .3s ease,border-color .3s ease,transform .3s cubic-bezier(.22,.8,.3,1)}
+  html.cd-motion .r2b7-card>summary:hover .r2b7-ico{transform:translateY(-1px);border-color:color-mix(in srgb,var(--cd-acc) 65%,var(--line));box-shadow:0 0 24px -4px color-mix(in srgb,var(--cd-acc) 80%,transparent)}
+  html.cd-motion .r2b7-tool{transition:border-color .2s ease,transform .25s cubic-bezier(.22,.8,.3,1)}
+  html.cd-motion .r2b7-tool--go:hover{transform:translateY(-1px)}
+}
+@media (max-width:860px){
+  /* Kopf-Unterzeile liegt mobil über dem Bild: ruhiger Grund für den Text */
+  .r2b7-hero .cd-hero-sub{color:var(--text);text-shadow:0 1px 2px var(--bg),0 0 14px var(--bg)}
+  .r2b7-tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .r2b7-tool--go{grid-column:1/-1}
+  .r2b7-split{grid-template-columns:minmax(0,1fr)}
+  .r2b7-side:has(.r2b7-code){order:-1}
+}
+@media (max-width:600px){
+  .r2b7-bar{flex-wrap:wrap}
+  .r2b7-pills{flex:1 1 100%}
+  .r2b7-tools{gap:8px}
+  .r2b7-tool{padding:10px 12px;gap:8px}
+  .r2b7-tool:not(.r2b7-tool--go){flex-direction:column;align-items:flex-start}
+  .r2b7-list{gap:24px}
+  .r2b7-gh-t{font-size:16px}
+  .r2b7-card>summary{min-height:76px}
+  .r2b7-card .cd-fold-t{font-size:15.5px}
+  .r2b7-methods{grid-template-columns:minmax(0,1fr)}
+  .r2b7-wh{width:50px}.r2b7-wh b{font-size:28px}
+  .r2b7-k{min-width:32px;height:36px;font-size:17px}
+  .r2b7-slots{grid-template-columns:minmax(0,1fr)}
+  .r2b7-m{padding:12px 12px 14px}
+  .r2b7-m-t{display:flex;align-items:center;min-height:26px;padding-left:36px}
+  .r2b7-m .r2b7-wheels{gap:6px}
+  .r2b7-m .r2b7-wh{width:42px}.r2b7-m .r2b7-wh b{font-size:23px}
+  .r2b7-code{padding:12px 12px 14px}
+  /* eingeklappt mobil: "seit Release" ist Normalfall (steht aufgeklappt unter Verfügbar), spart eine Chipzeile */
+  .r2b7-rel{display:none}
+}
 /* R2-B7 Ende */
 
 /* ---- Bereich Bauer 8 (nur B8 schreibt hier) ---- */
@@ -6511,18 +6689,13 @@ html.cd-motion .r2b6-pend .r2b6-out{opacity:0;transition:opacity .3s ease;transi
   </section>
   <section class="sec" id="sec-puzzles">
     <h2 class="sec-t"><span class="sec-sym">⍰</span> Rätsel <span class="sec-t-en">Puzzles</span></h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Pywel steckt voller Strongboxes (verschlossene Truhen mit fester Lösung) und Story-Rätsel im Abyss, die meist mit Axiom Force (L3 + rechter Stick) und Force Palm (R3) gelöst werden. Strongboxes folgen vier Mustern: feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen.</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">4</span> Strongbox-Methoden</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">R3</span> Force Palm</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">L3 + Stick</span> Axiom Force</div>
+    <div id="pz-hero" class="r2b7-head"></div>
+    <div class="r2b7-bar">
+      <select class="fs" id="puzzles-cat" aria-label="Rätsel nach Kategorie filtern" onchange="renderPuzzles()" hidden><option value="">Alle Kategorien</option><option value="Strongbox">Strongbox</option><option value="Story / Abyss">Story / Abyss</option><option value="Story (Kapitel)">Story (Kapitel)</option><option value="Faction-Quest">Faction-Quest</option></select>
+      <div id="pz-pills" class="r2b7-pills"></div>
+      <span id="puzzles-cnt" class="r2b7-cnt" aria-live="polite"></span>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Generische Ancient-Ruins-Rätsel (Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light) sind hier NICHT gelistet - sie stehen einzeln auf der Seite „Uralte Ruinen“ (alle 37 Ruinen).</div>
-    <div class="fbar">
-      <select class="fs" id="puzzles-cat" aria-label="Rätsel nach Kategorie filtern" onchange="renderPuzzles()"><option value="">Alle Kategorien</option><option value="Strongbox">Strongbox</option><option value="Story / Abyss">Story / Abyss</option><option value="Story (Kapitel)">Story (Kapitel)</option><option value="Faction-Quest">Faction-Quest</option></select>
-      <span id="puzzles-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
-    </div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="puzzles-tb"></tbody></table></div>
+    <div id="puzzles-tb" class="r2b7-list"></div>
   </section>
   <section class="sec" id="sec-dyes">
     <h2 class="sec-t"><span class="sec-sym">◑</span> Färbemittel <span class="sec-t-en">Dyes</span></h2>
@@ -6647,8 +6820,12 @@ html.cd-motion .r2b6-pend .r2b6-out{opacity:0;transition:opacity .3s ease;transi
 
   <section class="sec" id="sec-minigames">
     <h2 class="sec-t"><span class="sec-sym">⚀</span> Minispiele <span class="sec-t-en">Minigames</span></h2>
-    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Alle spielbaren Minigames in Pywel — von den Launch-Klassikern (Armdrücken, Duo, Duelle) bis zu den 1.10-Neuzugängen Pinball und Orb Roll. Viele hängen an den Mind-Games-/Racing-Challenges.</p>
-    <div class="cards" id="minigame-list"></div>
+    <div id="mg-hero" class="r2b7-head"></div>
+    <div class="r2b7-bar">
+      <div id="mg-pills" class="r2b7-pills"></div>
+      <span id="mg-cnt" class="r2b7-cnt" aria-live="polite"></span>
+    </div>
+    <div class="r2b7-list" id="minigame-list"></div>
   </section>
 
   <section class="sec" id="sec-bestiary">
@@ -12864,7 +13041,243 @@ function renderGatherables(){
   const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
   if(q){const qF=_fold(q);tb.querySelectorAll('tr[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
 }
-function renderPuzzles(){renderCompendium('puzzles',PUZZLES,'puzzles-cat');}
+/* ===== R2-B7 · Rätsel + Minispiele (Redesign 2, 21.10.2026) =====
+   Schlanke Faltkarten (cdFold) mit Szene, gruppiert nach Kategorie, Filter als Pillen. Aufgeklappt: Lösungsweg/Ablauf als Stepper,
+   Lösungscodes als große Kacheln (Räder, Tastenfolgen, 2x2-Raster, Symbol-Stufen). PUZZLES/MINIGAMES bleiben unverändert;
+   alles Sichtbare ist wortgetreu aus den vorhandenen Feldern abgeleitet (Satzteilung, Stichworte, Regex auf Zahlen/Folgen). */
+var R2B7_ICO={
+  strongbox:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="12" cy="12" r="3.3"/><path d="M12 7.4v1.4M12 15.2v1.4M7.4 12h1.4M15.2 12h1.4M6.5 19v2M17.5 19v2"/>',
+  abyss:'<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>',
+  story:'<path d="M4 5.5C6.5 4 9.5 4 12 6c2.5-2 5.5-2 8-.5V19c-2.5-1.5-5.5-1.5-8 .5-2.5-2-5.5-2-8-.5z"/><path d="M12 6v13.5"/>',
+  faction:'<path d="M6 21V3.5M6 4h12l-3 4 3 4H6"/>',
+  auto:'<rect x="5" y="2.5" width="14" height="19" rx="3"/><circle cx="12" cy="8.5" r="2.6"/><path d="M8.3 16.8l3.7-1.7 3.7 1.7M12 11.1v4"/>',
+  luck:'<rect x="3.5" y="6" width="10" height="14" rx="2" transform="rotate(-10 8.5 13)"/><rect x="10.5" y="4" width="10" height="14" rx="2"/><path d="M15.5 8.6l-1.8 2.4 1.8 2.4 1.8-2.4z"/>',
+  kraft:'<path d="M2.5 9.5v5M5.5 7v10M18.5 7v10M21.5 9.5v5M5.5 12h13"/>',
+  duel:'<path d="M4 4l10.5 10.5M20 4L9.5 14.5M13 16l3 3M11 16l-3 3M17.5 20.5l3-3M6.5 20.5l-3-3"/>',
+  shot:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>',
+  out:'<path d="M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>'
+};
+function _r2b7Svg(n,cls){return '<svg class="r2b7-svg'+(cls?' '+cls:'')+'" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+(R2B7_ICO[n]||'')+'</svg>';}
+/* cdFold mit eigenem SVG-Icon statt Glyphe (Platzhalter im fertigen HTML ersetzen) */
+function _r2b7Fold(o,ico){
+  var h=cdFold(Object.assign({},o,{icon:'⁂'}));
+  return h.replace('<span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⁂</i></span>',
+    ico&&ico.charAt(0)==='<'?'<span class="cd-fold-ico r2b7-ico" aria-hidden="true">'+ico+'</span>':'<span class="cd-fold-ico r2b7-ico r2b7-ico--emo" aria-hidden="true"><i>'+cdEsc(ico||'')+'</i></span>');
+}
+/* Sätze trennen, Klammern bleiben zusammen ("(… . …)" wird nicht zerschnitten) */
+function _r2b7Sent(t){
+  t=String(t||'').trim();var out=[],d=0,s=0;
+  for(var i=0;i<t.length;i++){
+    var c=t[i];
+    if(c==='(')d++;else if(c===')'&&d>0)d--;
+    else if((c==='.'||c==='!'||c==='?')&&d===0&&t[i+1]===' '&&/[A-ZÄÖÜ(]/.test(t[i+2]||'')){out.push(t.slice(s,i+1).trim());s=i+2;}
+  }
+  if(s<t.length)out.push(t.slice(s).trim());
+  return out.filter(Boolean);
+}
+/* sichtbarer Text: Gedankenstrich als Doppelpunkt (Leitplanke 9), Daten bleiben unverändert */
+function _r2b7Dash(s){return String(s==null?'':s).replace(/\s+—\s+/g,': ').replace(/—/g,'-');}
+/* escapen + Tasten als Kappen + Geldbeträge betonen */
+function _r2b7Rich(s){
+  var h=cdEsc(_r2b7Dash(s));
+  h=h.replace(/(^|[\s(\/])(L1\+R1|L1\/R1|L2\/LT|R2\/RT|L3\/W|Viereck\/X|D-Pad|L1|R1|L2|R2|L3|R3)(?=[\s),.;:]|$)/g,function(m,a,k){return a+cdKey(k);});
+  h=h.replace(/(\d+(?:[.,]\d+)?)\s(Silber|Kupfer|Silver)\b/g,'<b class="r2b7-money">$1 $2</b>');
+  return h;
+}
+function _r2b7RegOf(txt){
+  var t=String(txt||''),best=null,bi=1e9;
+  ['Hernand','Pailune','Demeniss','Delesyia','Crimson Desert','Abyss'].forEach(function(r){var i=t.indexOf(r);if(i>-1&&i<bi){bi=i;best=r;}});
+  return best==='Abyss'?'The Abyss':best;
+}
+function _r2b7RegChip(reg){
+  if(!reg)return '';var col=cdTone({region:reg});
+  return {h:'<span class="cd-chip r2b7-reg"'+(col?' style="--c:'+cdEsc(col)+'"':'')+'>'+cdIcon('pin')+'<span>'+cdEsc(reg)+'</span></span>'};
+}
+/* ---- Lösungs-Kacheln ---- */
+function _r2b7Wheels(ds,lbl){
+  return '<div class="r2b7-wheels" role="img" aria-label="'+cdEsc((lbl||'Räder')+': '+ds.join(', '))+'">'
+    +ds.map(function(d,i){return '<span class="r2b7-wh"><b>'+cdEsc(d)+'</b><small>Rad '+(i+1)+'</small></span>';}).join('')+'</div>';
+}
+function _r2b7Keys(seq,lbl){
+  var runs=[];seq.forEach(function(k){var l=runs[runs.length-1];if(l&&l.k===k)l.n++;else runs.push({k:k,n:1});});
+  return '<div class="r2b7-keys" role="img" aria-label="'+cdEsc((lbl||'Tastenfolge')+': '+seq.join(', '))+'">'
+    +runs.map(function(r,i){var ks='';for(var j=0;j<r.n;j++)ks+='<kbd class="r2b7-k">'+cdEsc(r.k)+'</kbd>';
+      return '<span class="r2b7-run">'+ks+(r.n>1?'<small>'+r.n+'×</small>':'')+'</span>';}).join('')+'</div>';
+}
+function _r2b7Grid(order){
+  var pos={'oben-links':0,'oben-rechts':1,'unten-links':2,'unten-rechts':3},cell=['','','',''];
+  order.forEach(function(o,i){if(o in pos)cell[pos[o]]=i+1;});
+  return '<div class="r2b7-grid" role="img" aria-label="'+cdEsc('Reihenfolge: '+order.join(', '))+'">'
+    +cell.map(function(n,i){return '<span class="r2b7-gc"><b>'+n+'</b><small>'+['oben links','oben rechts','unten links','unten rechts'][i]+'</small></span>';}).join('')+'</div>';
+}
+var R2B7_SYM={sand:'<path d="M4 6l7 6-7 6zM20 6l-7 6 7 6z"/>',kreis:'<circle cx="12" cy="12" r="7"/>',dreieck:'<path d="M12 4.5l8 14H4z"/>',quadrat:'<rect x="5.5" y="5.5" width="13" height="13"/>'};
+function _r2b7Levels(rows){
+  return '<ol class="r2b7-lv" aria-label="Symbole von oben nach unten">'+rows.map(function(r){
+    return '<li><svg class="r2b7-sym" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+R2B7_SYM[r[0]]+'</svg><span><b>'+cdEsc(r[1])+'</b><small>'+cdEsc(r[2])+'</small></span></li>';}).join('')+'</ol>';
+}
+function _r2b7Rings(){
+  return '<div class="r2b7-rings" role="img" aria-label="Nur der äußerste und der zweitäußerste Ring werden gedreht">'
+    +'<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="r2b7-r1" cx="60" cy="60" r="52"/><circle class="r2b7-r2" cx="60" cy="60" r="38"/><circle class="r2b7-r3" cx="60" cy="60" r="23"/>'
+    +'<path class="r2b7-rot" d="M60 4a56 56 0 0 1 48 27"/><path class="r2b7-rot" d="M60 18a42 42 0 0 1 36 21"/></svg>'
+    +'<ul><li><i class="r2b7-dot r2b7-dot--1"></i>äußerster Ring</li><li><i class="r2b7-dot r2b7-dot--2"></i>zweitäußerster Ring</li></ul></div>';
+}
+function _r2b7Code(cap,inner,foot){return '<figure class="r2b7-code"><figcaption>'+cdEsc(cap)+'</figcaption>'+inner+(foot?'<p class="r2b7-code-f">'+_r2b7Rich(foot)+'</p>':'')+'</figure>';}
+/* Lösungskachel je Rätsel, nur wenn der Text eine eindeutige Folge enthält */
+function _r2b7PzCode(p){
+  var d=p.detail,m,re,w=[];
+  re=/(\d)\.\s*=\s*(\d)/g;while((m=re.exec(d)))w.push(m[2]);
+  if(w.length>=3)return _r2b7Code('Räder von links nach rechts',_r2b7Wheels(w,'Räder von links nach rechts'),/Schalter rechts/.test(d)?'dann den Schalter rechts betätigen':'');
+  if((m=/Reihenfolge:\s*(\d(?:\s*>\s*\d)+)/.exec(d)))return _r2b7Code('Melodie auf der unteren Tastenreihe (1-5)',_r2b7Keys(m[1].split(/\s*>\s*/),'Reihenfolge'));
+  if((m=/Reihenfolge gedrückt werden:\s*([a-z>\s-]+?)\./.exec(d)))return _r2b7Code('Würfel in dieser Reihenfolge drücken',_r2b7Grid(m[1].split(/\s*>\s*/).map(function(x){return x.trim();})));
+  if(/liegende Sanduhr/.test(d)&&/Quadrat ganz unten/.test(d))return _r2b7Code('Symbole von oben nach unten',_r2b7Levels([['sand','liegende Sanduhr','ganz oben (in anderen Guides als X beschrieben)'],['kreis','Kreis','zweite Stelle von oben (Stufe 3)'],['dreieck','Dreieck','zweite Stelle von unten (Stufe 2)'],['quadrat','Quadrat','ganz unten']]));
+  if(/äußerste und der zweitäußerste Ring/.test(d))return _r2b7Code('Nur diese Ringe drehen',_r2b7Rings(),'jeden drehen, bis er aufleuchtet (= verriegelt)');
+  if(/Ruby-Set Golden Dagger/.test(d)&&/Sapphire-Set Golden Dagger/.test(d))return _r2b7Code('Beide Dolche in die Slots über dem Kamin',
+    '<div class="r2b7-slots"><span class="r2b7-slot r2b7-slot--ruby"><i aria-hidden="true"></i><b>Ruby-Set Golden Dagger</b><small>von einer Wandhalterung</small></span>'
+    +'<span class="r2b7-slot r2b7-slot--sapph"><i aria-hidden="true"></i><b>Sapphire-Set Golden Dagger</b><small>Handrad im Wardrobe drehen</small></span></div>');
+  return '';
+}
+/* Strongbox-Methoden (a) bis (d): vier Kacheln mit den Codes */
+function _r2b7Methods(p){
+  var parts=String(p.detail).split(/\s*\(([a-d])\)\s*/);if(parts.length<9)return '';
+  var out=[];
+  for(var i=1;i<parts.length;i+=2){
+    var txt=parts[i+1].replace(/\.\s*$/,''),cm=/^([^()]*?)\s-\s(.*)$/.exec(txt),title=cm?cm[1]:txt,rest=cm?cm[2]:'',body='';
+    var codes=[],m,re=/([A-Z][A-Za-z' ]+?\d?):\s*(\d(?:-\d)+)(?:\s*\(([^)]+)\))?/g;
+    while((m=re.exec(rest)))codes.push(m);
+    if(codes.length){
+      body=codes.map(function(c){var seq=c[2].split('-'),wheel=/Räder/.test(title);
+        return '<div class="r2b7-mc"><span class="r2b7-mc-h"><b>'+cdEsc(c[1].trim())+'</b>'+(c[3]?cdChip({t:c[3],c:'gold',g:'◆'}):'')+'</span>'
+          +(wheel?_r2b7Wheels(seq,c[1].trim()):_r2b7Keys(seq,c[1].trim()))+'</div>';}).join('');
+    }else{
+      var pm=/^(.*?)\s*\(([^)]+)\)$/.exec(title);
+      if(pm){title=pm[1];body='<p class="r2b7-mc-p">'+cdEsc(pm[2])+'</p>';}else if(rest)body='<p class="r2b7-mc-p">'+cdEsc(rest)+'</p>';
+    }
+    out.push('<div class="r2b7-m"><span class="r2b7-m-l" aria-hidden="true">'+parts[i]+'</span><h5 class="r2b7-m-t">'+cdEsc(title)+'</h5>'+body+'</div>');
+  }
+  return '<div class="r2b7-methods">'+out.join('')+'</div>';
+}
+var R2B7_PZ_GRP=[
+  {k:'strongbox',cat:'Strongbox',t:'Strongboxes',tone:'gold',ico:'strongbox',glyph:'◎',sub:'Strongboxes folgen vier Mustern: feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen.'},
+  {k:'abyss',cat:'Story / Abyss',t:'Abyss-Rätsel',tone:'violet',ico:'abyss',glyph:'◈',sub:''},
+  {k:'story',cat:'Story (Kapitel)',t:'Story-Rätsel der Kapitel',p:'Kapitel',tone:'red',ico:'story',glyph:'✦',sub:''},
+  {k:'faction',cat:'Faction-Quest',t:'Fraktionsquests',tone:'amber',ico:'faction',glyph:'⚑',sub:''}
+];
+var R2B7_ABIL=[['Force Palm','red'],['Axiom Force','violet'],['Flight','ice'],['Lampe','gold'],['Lantern','gold']];
+function _r2b7PzParts(p){
+  var r={steps:[],reward:[],warn:[],info:[],result:[],src:[]};
+  _r2b7Sent(p.detail).forEach(function(s){
+    if(/^Belohnung/.test(s))r.reward.push(s);
+    else if(/^dazu laut/.test(s)&&r.reward.length)r.reward.push(s);
+    else if(/^Vorsicht/.test(s))r.warn.push(s);
+    else if(/^\([^()]*\)\.?$/.test(s))r.src.push(s);
+    else if(/^(Öffnet|Aktiviert)\b/.test(s))r.result.push(s);
+    else if(/^(Diese Quest|Der Dagger of Radiance|In questlog|Das angrenzende)/.test(s))r.info.push(s);
+    else r.steps.push(s);
+  });
+  return r;
+}
+/* "Belohnung laut questlog: A, B und C." → {label, items} */
+function _r2b7Loot(s){
+  var m=/^(Belohnung[^:]*):\s*(.+?)\.?$/.exec(s);if(!m)return null;
+  var semi=m[2].split(/;\s*/),v=semi.shift();
+  return {label:m[1],more:semi.join('; '),items:v.split(/,\s*|\s+und\s+(?![^(]*\))/).map(function(x){return x.trim();}).filter(Boolean)};
+}
+function _r2b7PzBody(p,g){
+  var r=_r2b7PzParts(p),code=p.name.indexOf('solving methods')>-1?'':_r2b7PzCode(p),meth=p.name.indexOf('solving methods')>-1?_r2b7Methods(p):'';
+  var steps=[];
+  r.steps.forEach(function(s){(/\d\.\s*=\s*\d/.test(s)?s.split(/\s+-\s+/):[s]).forEach(function(x){steps.push({h:'<span class="cd-step-d">'+_r2b7Rich(x)+'</span>'});});});
+  r.result.forEach(function(s){steps.push({t:'Ergebnis',d:{h:_r2b7Rich(s)}});});
+  var main=meth?'<h5 class="r2b7-h">Vier Methoden</h5>'+meth
+    :'<h5 class="r2b7-h">Lösungsweg</h5>'+cdStepper(steps,'r2b7-steps');
+  main+=r.warn.map(function(s){return cdNote({h:_r2b7Rich(s)},{kind:'warn',title:''});}).join('')
+    +r.info.map(function(s){return cdNote({h:_r2b7Rich(s)},{kind:'info',title:''});}).join('');
+  var side=code,loot='',one=!!meth;
+  r.reward.forEach(function(s){
+    var l=_r2b7Loot(s);
+    loot+=l?'<div class="r2b7-loot"><span class="r2b7-loot-l">'+cdEsc(l.label)+'</span>'+cdChips(l.items.map(function(x){return {t:x,c:'gold',g:'◆'};}))+(l.more?'<p class="r2b7-loot-x">'+_r2b7Rich(l.more)+'</p>':'')+'</div>'
+      :'<p class="r2b7-loot-x">'+_r2b7Rich(s)+'</p>';
+  });
+  if(loot)side+='<div class="r2b7-lootbox">'+loot+'</div>';
+  var ab=R2B7_ABIL.filter(function(a){return p.detail.indexOf(a[0])>-1;});
+  side+=cdFacts([['Fundort',p.loc],ab.length?['Benötigt',{h:cdChips(ab.map(function(a){return {t:a[0],c:a[1]};}))}]:null].filter(Boolean),{wide:true,cls:'r2b7-facts'});
+  return '<div class="r2b7-split'+(one?' r2b7-split--one':'')+'"><div class="r2b7-main">'+main+'</div><aside class="r2b7-side">'+side+'</aside></div>'
+    +(r.src.length||p.conf!=='high'?'<p class="cd-src">'+(p.conf!=='high'?'<span class="cd-src-l">Hinweis</span>Wert teils quellenabhängig. ':'')+r.src.map(cdEsc).join(' ')+'</p>':'');
+}
+/* Feinschliff: Art der Lösungskachel als Vorschau-Chip im eingeklappten Kopf (zählt nur, was _r2b7PzCode/_r2b7Methods zeigen) */
+function _r2b7PzKind(p){
+  var d=String(p.detail||''),m,re=/(\d)\.\s*=\s*(\d)/g,w=0;
+  if(p.name.indexOf('solving methods')>-1){m=(d.match(/\([a-d]\)/g)||[]).filter(function(x,i,a){return a.indexOf(x)===i;}).length;return m>=4?[m,'Methoden']:null;}
+  while(re.exec(d))w++;
+  if(w>=3)return [w,'Räder'];
+  if((m=/Reihenfolge:\s*(\d(?:\s*>\s*\d)+)/.exec(d)))return [m[1].split(/\s*>\s*/).length,'Töne'];
+  if((m=/Reihenfolge gedrückt werden:\s*([a-z>\s-]+?)\./.exec(d)))return [m[1].split(/\s*>\s*/).length,'Würfel'];
+  if(/liegende Sanduhr/.test(d)&&/Quadrat ganz unten/.test(d))return [4,'Symbole'];
+  if(/äußerste und der zweitäußerste Ring/.test(d))return [2,'Ringe'];
+  if(/Ruby-Set Golden Dagger/.test(d)&&/Sapphire-Set Golden Dagger/.test(d))return [2,'Dolche'];
+  return null;
+}
+function _r2b7PzCard(p,g){
+  var r=_r2b7PzParts(p),tc={gold:'gold',violet:'violet',red:'red',amber:'warn'}[g.tone],chips=[{t:p.cat,c:tc}];
+  var km=/Kapitel (\d+)/.exec(p.loc);
+  /* "Story (Kapitel)" + "Kapitel 5" lasen sich doppelt: ein Chip, Kategorie als Titel */
+  if(km&&g.k==='story')chips[0]={t:'Story · Kapitel '+km[1],c:tc,title:p.cat};else if(km)chips.push({t:'Kapitel '+km[1]});
+  var kind=_r2b7PzKind(p);
+  if(kind)chips.push({h:'<span class="cd-chip r2b7-kind" title="Lösungskachel im aufgeklappten Teil">'+cdIcon('key')+'<b>'+kind[0]+'</b><span>'+cdEsc(kind[1])+'</span></span>'});
+  var l=r.reward.length&&_r2b7Loot(r.reward[0]);
+  if(l)chips.push({g:'◆',t:l.items[0]+(l.items.length>1?' +'+(l.items.length-1):''),c:'gold',title:l.label+': '+l.items.join(', ')});
+  if(p.conf!=='high')chips.push({t:'≈ quellenabhängig',title:'Wert teils quellenabhängig'});
+  var reg=_r2b7RegOf(p.loc),slug=cdSlug(p.name);
+  return _r2b7Fold({title:p.name,lead:{h:cdIcon('pin')+' '+cdEsc(p.loc)},chips:chips,id:'pz-'+slug,h:4,tone:g.tone,cls:'r2b7-card r2b7-pzc',
+    attrs:{'data-go-id':slug,'data-grp':g.k},
+    scene:{keys:['pz-'+slug].concat(reg?['reg-'+cdSlug(reg)]:[]),tone:g.tone,glyph:g.glyph,cls:'r2b7-scene'},
+    s:[p.name,p.cat,p.detail,p.loc,p.miss?'missable verpassbar':''].join(' '),
+    body:function(){return _r2b7PzBody(p,g);}},_r2b7Svg(g.ico));
+}
+function _r2b7Grp(g,n,inner,tone,lbl){
+  return '<section class="r2b7-grp" data-grp="'+g.k+'" style="--cd-acc:'+cdEsc(cdTone({tone:tone})||'var(--gold)')+'" aria-label="'+cdEsc(lbl||g.t)+'">'
+    +'<header class="r2b7-gh"><span class="r2b7-gh-i">'+_r2b7Svg(g.ico)+'</span><span class="r2b7-gh-tx"><h3 class="r2b7-gh-t">'+cdEsc(g.t)+' <span class="r2b7-gh-n">'+n+'</span></h3>'
+    +(g.sub?'<p class="r2b7-gh-s">'+cdEsc(g.sub)+'</p>':'')+'</span></header><div class="cd-folds">'+inner+'</div></section>';
+}
+/* Pillen-Filter: blendet Gruppen ein/aus (kein Neuaufbau); ausgeblendete Karten zählen nicht für die Suche */
+function _r2b7Filter(root,v){
+  root.querySelectorAll('.r2b7-grp').forEach(function(s){
+    var on=!v||v==='all'||s.dataset.grp===v;s.hidden=!on;
+    s.querySelectorAll('[data-s]').forEach(function(el){if(on)delete el.dataset.filtered;else el.dataset.filtered='1';});
+  });
+}
+function renderPuzzles(){
+  var tb=document.getElementById('puzzles-tb');if(!tb)return;
+  var sel=document.getElementById('puzzles-cat'),f=(sel&&sel.value)||'',hero=document.getElementById('pz-hero');
+  var byCat={};PUZZLES.forEach(function(p){(byCat[p.cat]=byCat[p.cat]||[]).push(p);});
+  var grps=R2B7_PZ_GRP.filter(function(g){return byCat[g.cat];});
+  /* unbekannte Kategorien landen in eigener Gruppe, nichts geht verloren */
+  Object.keys(byCat).forEach(function(c){if(!R2B7_PZ_GRP.some(function(g){return g.cat===c;}))grps.push({k:cdSlug(c),cat:c,t:c,tone:'slate',ico:'story',sub:''});});
+  if(hero&&!hero.firstChild){
+    var story=PUZZLES.filter(function(p){return /^Story/.test(p.cat);}).length;
+    hero.innerHTML=cdHero({kicker:'Rätsel',title:'Strongboxes und Story-Rätsel',
+      sub:'Pywel steckt voller Strongboxes (verschlossene Truhen mit fester Lösung) und Story-Rätsel im Abyss, die meist mit Axiom Force und Force Palm gelöst werden.',
+      scene:{keys:['pz-secret-at-the-church-pillar-of-radiance','pz-precipice-of-truth','reg-the-abyss'],pos:'50% 45%'},tone:'gold',
+      stats:[[PUZZLES.length,'Rätsel'],[4,'Strongbox-Methoden'],[story,'Story-Rätsel']],cls:'r2b7-hero'})
+      +'<div class="r2b7-tools"><span class="r2b7-tool cd-spot"><span class="r2b7-tool-k">'+cdKey('R3')+'</span><span><b>Force Palm</b><small>R3</small></span></span>'
+      +'<span class="r2b7-tool cd-spot"><span class="r2b7-tool-k">'+cdKey('L3')+'<i>+</i>'+cdKey('Stick')+'</span><span><b>Axiom Force</b><small>L3 + rechter Stick</small></span></span>'
+      +'<a class="r2b7-tool r2b7-tool--go cd-spot" href="'+cdGoHref('ruins')+'" data-go="ruins"><span class="r2b7-tool-k">'+cdIcon('go')+'</span><span><b>Ruinen-Rätsel stehen auf „Uralte Ruinen“</b><small>Statuen drehen, Laternen, Tile-Walking, Match-3, Red-Light-Green-Light (alle 37 Ruinen)</small></span></a></div>';
+    var pills=document.getElementById('pz-pills');
+    if(pills)pills.innerHTML=cdPills([{v:'all',t:'Alle',n:PUZZLES.length,on:!f}].concat(grps.map(function(g){return {v:g.k,t:g.p||g.t,n:byCat[g.cat].length,on:f===g.cat};})),{name:'r2b7-pz',label:'Rätsel nach Kategorie filtern'});
+  }
+  tb.innerHTML=grps.map(function(g){return _r2b7Grp(g,byCat[g.cat].length,byCat[g.cat].map(function(p){return _r2b7PzCard(p,g);}).join(''),g.tone);}).join('');
+  var gk=(grps.find(function(g){return g.cat===f;})||{}).k;
+  _r2b7Filter(tb,gk);
+  var cnt=document.getElementById('puzzles-cnt'),n=f?(byCat[f]||[]).length:PUZZLES.length;
+  reapplySearch(tb,cnt,n);
+}
+document.addEventListener('cd-pills',function(e){
+  var d=e.detail;if(d.name!=='r2b7-pz'&&d.name!=='r2b7-mg')return;
+  var pz=d.name==='r2b7-pz',root=document.getElementById(pz?'puzzles-tb':'minigame-list');if(!root)return;
+  if(pz){var sel=document.getElementById('puzzles-cat'),g=R2B7_PZ_GRP.find(function(x){return x.k===d.value;});if(sel)sel.value=g?g.cat:'';}
+  _r2b7Filter(root,d.value);
+  var vis=root.querySelectorAll('.r2b7-grp:not([hidden]) [data-s]').length,cnt=document.getElementById(pz?'puzzles-cnt':'mg-cnt');
+  reapplySearch(root,cnt,vis);
+});
 function dyeChip(c){var col=escHtml(c.color||'#888');if(c.icon)return '<span class="dye-chip" data-c="'+col+'" style="border-color:'+col+'"><img src="'+escHtml(c.icon)+'" alt="" loading="lazy" onerror="this.parentNode.style.background=this.parentNode.dataset.c;this.remove()"></span>';return '<span class="dye-chip" style="border-color:'+col+';background:'+col+'"></span>';}
 function renderDyes(){renderCompendium('dyes',DYES,'dyes-cat',dyeChip);}
 // ===== KOCHEN & ELIXIERE (Redesign 10/2026): Karten statt Tabelle. Eigener Renderer, renderCompendium bleibt fuer
@@ -14418,21 +14831,100 @@ function toggleChDone(num){
 
 // ===== MINISPIELE (recherchiert 11.06.2026: offizielle Patch-Notes, Fextralife,
 // PowerPyx, game8, Gamerant; conf=medium -> Details teils nur eine Quelle) =====
+/* R2-B7: Gruppen per Stichwort aus dem Namen (Reihenfolge = Prüfreihenfolge, erster Treffer gewinnt) */
+var R2B7_MG_GRP=[
+  {k:'auto',t:'Spielautomaten',p:'Automaten',tone:'violet',ico:'auto',re:/pinball|token|orb roll|claw/i},
+  {k:'luck',t:'Karten & Glück',tone:'gold',ico:'luck',re:/duo|five-card|schere/i},
+  {k:'kraft',t:'Kraftproben',tone:'amber',ico:'kraft',re:/armdr|handdr|ringkampf/i},
+  {k:'duel',t:'Duelle',tone:'red',ico:'duel',re:/duel/i},
+  {k:'shot',t:'Schießwettbewerbe',p:'Schießen',tone:'ice',ico:'shot',re:/shot contest/i},
+  {k:'out',t:'Rennen & Angeln',tone:'ok',ico:'out',re:/pferderennen|angeln/i}
+];
+function _r2b7MgGrp(m){return R2B7_MG_GRP.find(function(g){return g.re.test(m.name);})||{k:'misc',t:'Weitere',tone:'slate',ico:'auto'};}
+function _r2b7MgCost(m){
+  var s=String(m.start||''),x=/(\d+(?:[.,]\d+)?)\s*(Silber|Kupfer)/.exec(s);
+  if(/^Kostenlos/.test(s))return {t:'Kostenlos',c:'ok',i:'check'};
+  return x?{v:x[1],t:x[2],c:'gold',title:'Einsatz bzw. Startgebühr laut Starttext'}:null;
+}
+function _r2b7MgChal(m){
+  var x=/Challenges?:?\s*(?:wie dem\s+)?'((?:[^']|'s\b)+)'/.exec(String(m.ablauf||'')+' '+String(m.belohnung||''));
+  return x?x[1]:'';
+}
+/* Spezial-Kacheln: Angel-Phasen, Prime Pair, Orb-Roll-Stufen */
+function _r2b7MgPlay(m,first){
+  var a=/^Vier Phasen\s*\u2014\s*([^:]+):\s*(.+?)\.?$/.exec(first);
+  if(a){var ph=a[1].split(/,\s*/),cl=a[2].split(/,\s*/);
+    if(ph.length===cl.length)return '<ol class="r2b7-phases" aria-label="Vier Phasen">'+ph.map(function(p,i){return '<li><b>'+cdEsc(p)+'</b><span>'+_r2b7Rich(cl[i])+'</span></li>';}).join('')+'</ol>';}
+  return '';
+}
+function _r2b7Cards(t){
+  var x=/'Prime Pair'\s*\(rote (\d+) \+ rote (\d+)\)/.exec(t);if(!x)return '';
+  return '<div class="r2b7-pair" role="img" aria-label="Prime Pair: rote '+x[1]+' und rote '+x[2]+'"><span class="r2b7-pc">'+x[1]+'</span><span class="r2b7-pc">'+x[2]+'</span></div>';
+}
+function _r2b7Ladder(b){
+  var parts=String(b||'').split(/\s*·\s*/),rows=[];
+  for(var i=0;i<parts.length;i++){var x=/^Level (\d+):\s*(.+)$/.exec(parts[i]);if(!x)return '';rows.push(x);}
+  if(rows.length<2)return '';
+  var last=rows[rows.length-1],tail=/^(.*?)\s*(\([^)]*\))$/.exec(last[2]);
+  return '<ol class="r2b7-ladder">'+rows.map(function(r,i){var t=r[2],note='';
+      if(i===rows.length-1&&tail){t=tail[1];note='<small>'+cdEsc(tail[2])+'</small>';}
+      return '<li><span class="r2b7-lv-n"><small>Level</small><b>'+r[1]+'</b></span>'+cdChips(t.split(/,\s*/).map(function(x){return {t:x,c:/Abyss|Golden Apple|Blueprint|Chest/i.test(x)?'gold':''};}))+note+'</li>';
+    }).join('')+'</ol>';
+}
+function _r2b7MgBody(m,g){
+  var sent=_r2b7Sent(m.ablauf),play=[],chal=[],tips=[];
+  sent.forEach(function(s,i){
+    if(i&&/Challenge/.test(s))chal.push(s);
+    else if(i&&/^(Guide-Tipp|Mit dem |Bezug laut|Namen der)/.test(s))tips.push(s);
+    else play.push(s);
+  });
+  var vis=_r2b7MgPlay(m,play[0]||''),pair=_r2b7Cards(m.ablauf);
+  var playH=(vis?'<span class="cd-step-d">'+cdEsc(play[0].split(/\s*—/)[0])+':</span>'+vis:'<span class="cd-step-d r2b7-play1">'+_r2b7Rich(play[0]||'')+'</span>')
+    +play.slice(1).map(function(s){return '<span class="cd-step-d r2b7-more">'+_r2b7Rich(s)+'</span>';}).join('')+pair;
+  var lad=_r2b7Ladder(m.belohnung);
+  var steps=[{t:'Starten',d:{h:_r2b7Rich(m.start)}},{t:'Spielen',d:{h:playH}}];
+  /* Feinschliff: Challenge-Name hervorheben, "Aufgabe:" als eigene Zeile (lange Challenge-Sätze lasen sich als Block) */
+  var cn=_r2b7MgChal(m),cnE=cn?cdEsc(cn):'';
+  if(chal.length)steps.push({t:'Challenge',d:{h:chal.map(function(s){var h=_r2b7Rich(s);
+    if(cnE&&h.indexOf(cnE)>-1)h=h.replace(cnE,'<b class="r2b7-chal">'+cnE+'</b>');
+    if(/\sAufgabe:\s/.test(h))h=h.replace(/\s(Aufgabe:)\s/,'<span class="r2b7-task"><b>$1</b> ')+'</span>';
+    return '<span class="cd-step-d">'+h+'</span>';}).join('')}});
+  var side=(m.belohnung?'<div class="r2b7-lootbox"><div class="r2b7-loot"><span class="r2b7-loot-l">Belohnung</span>'+(lad||'<p class="r2b7-loot-v">'+_r2b7Rich(m.belohnung)+'</p>')+'</div></div>':'')
+    +cdFacts([['Ort',{h:_r2b7Rich(m.ort)}],['Verfügbar',m.patch==='Release'?'seit Release':'seit Patch '+m.patch]],{wide:true,cls:'r2b7-facts'})
+    +tips.map(function(s){return cdNote({h:_r2b7Rich(s)},{kind:/^Guide-Tipp|^Mit dem /.test(s)?'info':'warn',title:''});}).join('')
+    +(m.conf!=='high'?cdNote('Quellenlage dünn: Details teils nur eine Quelle.',{kind:'warn',title:'Details unbestätigt'}):'');
+  return '<div class="r2b7-split"><div class="r2b7-main">'+cdStepper(steps,'r2b7-steps r2b7-flow')+'</div><aside class="r2b7-side">'+side+'</aside></div>';
+}
+function _r2b7MgCard(m,g){
+  var reg=_r2b7RegOf(m.ort),slug=cdSlug(m.name),cost=_r2b7MgCost(m),chal=_r2b7MgChal(m);
+  var chips=[_r2b7RegChip(reg),cost,
+    m.patch==='Release'?{h:'<span class="cd-chip r2b7-rel">seit Release</span>'}:{t:'Neu seit '+m.patch,c:'violet',g:'✦'},
+    chal?{g:'✦',t:chal,c:'gold',title:'Challenge'}:null,
+    m.conf!=='high'?{t:'Details unbestätigt',c:'warn',i:'warn',title:'Quellenlage dünn: Details teils nur eine Quelle'}:null].filter(Boolean);
+  return _r2b7Fold({title:_r2b7Dash(m.name),lead:{h:cdIcon('pin')+' '+cdEsc(_r2b7Dash(m.ort))},chips:chips,id:'mg-'+slug,h:4,tone:g.tone,cls:'r2b7-card r2b7-mgc',
+    attrs:{'data-go-id':slug,'data-grp':g.k},
+    scene:{keys:['mg-'+slug].concat(reg?['reg-'+cdSlug(reg)]:[]),tone:g.tone,glyph:m.icon,cls:'r2b7-scene'},
+    s:[m.name,m.ort,m.start,m.ablauf,m.belohnung||'',m.patch,'minispiel minigame'].join(' '),
+    body:function(){return _r2b7MgBody(m,g);}},m.icon);
+}
 function renderMinigames(){
-  const el=document.getElementById('minigame-list');if(!el)return;
-  el.innerHTML=MINIGAMES.map(m=>{
-    const s=[m.name,m.ort,m.start,m.ablauf,m.belohnung||'',m.patch,'minispiel minigame'].join(' ').toLowerCase();
-    return `<div class="card" data-s="${s}">
-      <div class="ct">${m.icon} ${m.name}</div>
-      <div class="cm"><span class="tag tx">seit ${m.patch}</span>${m.conf!=='high'?'<span class="tag tw" title="Quellenlage dünn — Details teils nur eine Quelle">Details unbestätigt</span>':''}</div>
-      <div class="crows">
-        <div class="crow"><span class="cl">Ort</span><span class="cv" style="font-size:var(--fs-11-5)">${m.ort}</span></div>
-        <div class="crow"><span class="cl">Start</span><span class="cv" style="font-size:var(--fs-11-5)">${m.start}</span></div>
-        ${m.belohnung?`<div class="crow"><span class="cl">Belohnung</span><span class="cv" style="font-size:var(--fs-11-5)">${m.belohnung}</span></div>`:''}
-      </div>
-      <div style="font-size:12px;color:var(--dim);margin-top:9px;line-height:1.55">${m.ablauf}</div>
-    </div>`;
-  }).join('');
+  var el=document.getElementById('minigame-list');if(!el)return;
+  var hero=document.getElementById('mg-hero'),by={},order=[];
+  MINIGAMES.forEach(function(m){var g=_r2b7MgGrp(m);if(!by[g.k]){by[g.k]={g:g,list:[]};order.push(g.k);}by[g.k].list.push(m);});
+  var grps=R2B7_MG_GRP.map(function(g){return g.k;}).concat(['misc']).filter(function(k){return by[k];});
+  if(hero&&!hero.firstChild){
+    var neu=MINIGAMES.filter(function(m){return m.patch!=='Release';}).length,ch=MINIGAMES.filter(function(m){return _r2b7MgChal(m);}).length;
+    hero.innerHTML=cdHero({kicker:'Minispiele',title:'Wetten, kämpfen, Flipper spielen',
+      sub:'Alle spielbaren Minigames in Pywel: von den Launch-Klassikern (Armdrücken, Duo, Duelle) bis zu den 1.10-Neuzugängen Pinball und Orb Roll. Viele hängen an den Mind-Games-/Racing-Challenges.',
+      scene:{keys:['mg-claw-machine-greifautomat','mg-pinball','reg-demeniss']},tone:'violet',
+      stats:[[MINIGAMES.length,'Minispiele'],[neu,'neu per Patch'],[ch,'mit Challenge']],cls:'r2b7-hero'});
+    var pills=document.getElementById('mg-pills');
+    if(pills)pills.innerHTML=cdPills([{v:'all',t:'Alle',n:MINIGAMES.length,on:true}].concat(grps.map(function(k){return {v:k,t:by[k].g.p||by[k].g.t,n:by[k].list.length};})),{name:'r2b7-mg',label:'Minispiele nach Art filtern'});
+  }
+  el.innerHTML=grps.map(function(k){var b=by[k];return _r2b7Grp(b.g,b.list.length,b.list.map(function(m){return _r2b7MgCard(m,b.g);}).join(''),b.g.tone);}).join('');
+  var pv=document.querySelector('#mg-pills .cd-pill[aria-pressed="true"]');
+  _r2b7Filter(el,pv?pv.dataset.v:'all');
+  reapplySearch(el,document.getElementById('mg-cnt'),MINIGAMES.length);
 }
 // ===== BESTIARIUM =====
 // Recherchiert 2026-06-12 via questlog database.getFactions/getFaction/getNpcs/getNpc (Beschreibungen,
