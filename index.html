@@ -6311,6 +6311,289 @@ html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,
 
 /* ---- Bereich Bauer 12 (nur B12 schreibt hier) ---- */
 /* R2-B12 Anfang */
+/* Patch-Notes (#sec-patches) und Roadmap (#sec-roadmap). Präfix r2b12-. Farben nur über Tokens. */
+#sec-patches>.sec-stats-auto{display:none} /* gleiche Kennzahlen stehen im Seitenkopf */
+.r2b12-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.r2b12-kick{font:600 11px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cd-acc)}
+.r2b12-prose{margin:0;max-width:72ch;font-size:13px;line-height:1.65;color:var(--dim)}
+.r2b12-prose b{color:var(--ink-hi)}
+/* Art der Änderung: sieben klar trennbare Farben (Neu gold, Kampf rot, Steuerung violett, Grafik blau, Komfort türkis, Fixes grün, Sonstiges grau, Probleme gelb) */
+.r2b12-k-new{--k:var(--gold)}.r2b12-k-fight{--k:var(--red)}.r2b12-k-ctrl{--k:var(--violet)}.r2b12-k-gfx{--k:var(--cd-fx-spirit)}
+.r2b12-k-qol{--k:var(--cd-fx-speed)}.r2b12-k-fix{--k:var(--cd-ok)}.r2b12-k-misc{--k:var(--cd-fx-neutral)}.r2b12-k-issue{--k:var(--cd-fx-bolt)}.r2b12-k-note{--k:var(--cd-fx-neutral)}.r2b12-k-src{--k:var(--cd-fx-neutral)}
+.r2b12-chip-k{color:var(--k);border-color:color-mix(in srgb,var(--k) 42%,transparent);background:color-mix(in srgb,var(--k) 10%,transparent)}
+.r2b12-chip-k .cd-i{color:var(--k)}
+.r2b12-art-update{--a:var(--gold)}.r2b12-art-hotfix{--a:var(--cd-fx-ice)}.r2b12-art-patch{--a:var(--slate)}
+.r2b12-ov{display:flex;flex-wrap:wrap;gap:6px}
+.r2b12-ov-i{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:3px 11px 3px 8px;border:1px solid color-mix(in srgb,var(--k) 40%,transparent);border-radius:8px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--k) 14%,transparent),color-mix(in srgb,var(--k) 4%,transparent));font-size:12px;color:var(--text)}
+.r2b12-ov-i .cd-i{width:15px;height:15px;color:var(--k)}
+.r2b12-ov-i b{font-family:var(--f-mono);color:var(--k)}
+.r2b12-task-note{margin:6px 0 0;max-width:72ch;font-size:12.5px;line-height:1.5;color:var(--dim)}
+
+/* -- Brennpunkte: DLC (breit), bekannte Probleme + Dev-Update nebeneinander, Prüfstand -- */
+.r2b12-brief{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;margin:0 0 30px}
+.r2b12-brief>.r2b12-dlc,.r2b12-brief>.r2b12-stand{grid-column:1/-1}
+.r2b12-dlc>summary{min-height:132px;padding-top:18px;padding-bottom:18px}
+.r2b12-dlc .cd-fold-t{font-size:clamp(19px,2vw,24px)}
+.r2b12-dlc .cd-fold-ico{width:54px;height:54px;font-size:26px;border-color:color-mix(in srgb,var(--cd-acc) 40%,transparent);background:color-mix(in srgb,var(--cd-acc) 10%,var(--panel))}
+.r2b12-cd{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:86px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--cd-acc) 45%,transparent);border-radius:14px;
+  background:color-mix(in srgb,var(--card) 70%,transparent);font-size:11.5px;line-height:1.2;color:var(--dim);text-align:center}
+.r2b12-cd b{font:700 30px/1 var(--f-mono);color:var(--cd-acc);font-variant-numeric:tabular-nums;margin:2px 0}
+.r2b12-cd:empty{display:none}
+.r2b12-feat{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.r2b12-feat>li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start;padding:12px 14px;border:1px solid var(--line-soft);border-radius:12px;background:var(--card);font-size:13px;line-height:1.55;color:var(--text)}
+.r2b12-feat>li>.cd-g{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--cd-fx-ice) 12%,transparent);color:var(--cd-fx-ice);font-size:17px}
+.r2b12-feat>li.is-warn>.cd-g{background:color-mix(in srgb,var(--warn) 12%,transparent);color:var(--warn)}
+.r2b12-feat b{color:var(--ink-hi)}
+.r2b12-iss{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:8px}
+.r2b12-iss>li{--c:var(--warn);position:relative;display:flex;flex-direction:column;gap:3px;padding:10px 12px 10px 15px;border:1px solid var(--line-soft);border-radius:10px;background:var(--card);font-size:12.5px;line-height:1.5;color:var(--text)}
+.r2b12-iss>li::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--c)}
+.r2b12-iss>li b{font-size:13px;color:var(--ink-hi)}
+.r2b12-iss>li em{font-style:normal;font:600 11.5px/1.3 var(--f-mono);color:var(--c)}
+.r2b12-iss>li.is-ok{--c:var(--cd-ok)}.r2b12-iss>li.is-unk{--c:var(--slate)}
+.r2b12-mtrack{display:flex;align-items:center;gap:0;margin-top:7px}
+.r2b12-mtrack i{position:relative;width:14px;height:14px;border-radius:50%;border:2px solid var(--c,var(--line-strong));background:color-mix(in srgb,var(--c,var(--line)) 30%,var(--card))}
+.r2b12-mtrack i+i{margin-left:16px}
+.r2b12-mtrack i+i::before{content:'';position:absolute;right:calc(100% + 2px);top:50%;width:16px;height:2px;background:var(--line-strong);transform:translateY(-50%)}
+.r2b12-mtrack i.ok{--c:var(--gold);background:var(--gold)}.r2b12-mtrack i.part{--c:var(--amber);background:linear-gradient(90deg,var(--amber) 50%,transparent 50%)}.r2b12-mtrack i.no{--c:var(--red)}
+.r2b12-ms{list-style:none;margin:0;padding:0;display:grid}
+.r2b12-ms>li{--c:var(--gold);position:relative;display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:0 0 16px}
+.r2b12-ms>li:last-child{padding-bottom:0}
+.r2b12-ms>li::after{content:'';position:absolute;left:14.5px;top:32px;bottom:2px;width:1px;background:linear-gradient(var(--line-strong),var(--line-soft))}
+.r2b12-ms>li:last-child::after{display:none}
+.r2b12-ms>li.part{--c:var(--amber)}.r2b12-ms>li.no{--c:var(--red)}
+.r2b12-ms-n{display:grid;place-items:center;width:30px;height:30px;border:1px solid color-mix(in srgb,var(--c) 60%,transparent);border-radius:50%;background:color-mix(in srgb,var(--c) 14%,var(--card));color:var(--c);font:700 14px/1 var(--f-body)}
+.r2b12-ms>li>div{min-width:0;font-size:13px;line-height:1.6;color:var(--text)}
+.r2b12-ms>li>div>b{font-size:14px;color:var(--ink-hi)}
+.r2b12-ms p{margin:4px 0 0;max-width:72ch}
+.r2b12-st{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent);font:600 11px/1.6 var(--f-mono);color:var(--c);vertical-align:2px}
+.r2b12-ms-r{color:var(--text)}.r2b12-ms-d{color:var(--gdim,var(--dim));font-size:12.5px}
+
+/* -- Patch-Rhythmus -- */
+.r2b12-rh{margin:0 0 26px;padding:18px 20px 16px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(160deg,color-mix(in srgb,var(--gold) 5%,var(--panel-2)),var(--panel-2) 60%);box-shadow:var(--shadow-soft)}
+.r2b12-rh-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;margin-bottom:14px}
+.r2b12-rh-t{margin:0;font-family:var(--f-display);font-size:17px;color:var(--ink-hi)}
+.r2b12-rh-hd p{margin:0;flex:1 1 280px;font-size:12.5px;color:var(--dim)}
+.r2b12-rh-leg{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim)}
+.r2b12-rh-leg i{width:10px;height:10px;border-radius:50%;background:var(--a);margin-left:6px}
+.r2b12-rh-grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:6px;align-items:end}
+.r2b12-rh-col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.r2b12-rh-dots{display:flex;flex-wrap:wrap-reverse;align-content:flex-start;justify-content:center;gap:2px;min-height:120px;padding:8px 4px;border-radius:12px;background:color-mix(in srgb,var(--line) 35%,transparent)}
+.r2b12-dot{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;text-decoration:none}
+.r2b12-dot i{display:block;width:var(--d);height:var(--d);border-radius:50%;background:var(--a);box-shadow:0 0 0 2px color-mix(in srgb,var(--a) 25%,transparent),0 0 12px -2px color-mix(in srgb,var(--a) 70%,transparent);transition:transform .18s,opacity .2s}
+.r2b12-sz-s{--d:9px}.r2b12-sz-m{--d:15px}.r2b12-sz-l{--d:22px}
+.r2b12-dot:hover i,.r2b12-dot:focus-visible i{transform:scale(1.3)}
+.r2b12-dot:focus-visible{outline:2px solid var(--red);outline-offset:0}
+.r2b12-dot.is-dim i{opacity:.18;box-shadow:none}
+.r2b12-rh-lbl{display:flex;justify-content:center;align-items:baseline;gap:5px;font-size:12px;color:var(--dim)}
+.r2b12-rh-lbl b{font-family:var(--f-display);font-size:13px;color:var(--ink-hi)}
+.r2b12-rh-lbl span{font:12px var(--f-mono);color:var(--gold)}
+
+/* -- Zeitachse nach Monaten -- */
+.r2b12-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0 0 6px}
+.r2b12-bar .cd-pills{margin:0}
+.r2b12-bar-t{margin:0;font-family:var(--f-display);font-size:17px;color:var(--ink-hi)}
+.r2b12-tl{position:relative;display:grid;gap:8px}
+.r2b12-month{position:relative;display:grid;grid-template-columns:150px minmax(0,1fr);gap:0 18px;padding:16px 0 4px}
+.r2b12-month::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(var(--line-strong),var(--line-soft))}
+.r2b12-month:first-child::before{top:26px}
+.r2b12-month-hd{position:sticky;top:calc(var(--cdx-bb-h,0px) + 14px);align-self:start;display:grid;grid-template-columns:16px minmax(0,1fr);gap:2px 10px;padding-top:4px}
+.r2b12-month-dot{grid-row:span 2;width:16px;height:16px;margin-top:2px;border:2px solid var(--gold);border-radius:50%;background:var(--bg);box-shadow:0 0 0 4px var(--bg),0 0 14px -2px color-mix(in srgb,var(--gold) 70%,transparent);z-index:1}
+.r2b12-month-t{margin:0;font-family:var(--f-display);font-size:16px;line-height:1.2;color:var(--ink-hi)}
+.r2b12-month-t span{display:block;font:12px/1.4 var(--f-mono);color:var(--dim)}
+.r2b12-month-n{font:12px/1.3 var(--f-mono);color:var(--gold)}
+.r2b12-month:not(:has(.r2b12-pt:not(.hide):not(.r2b12-off))){display:none}
+.r2b12-off{display:none!important}
+/* Patch-Faltkarte */
+.r2b12-pt .cd-fold-t{font-family:var(--f-mono);font-size:16px;letter-spacing:.01em}
+.r2b12-cal{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:50px;height:54px;border-color:color-mix(in srgb,var(--cd-acc) 40%,transparent);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--cd-acc) 22%,var(--panel)) 0 15px,var(--panel) 15px);color:var(--ink-hi)}
+.r2b12-cal b{font:700 20px/1 var(--f-mono);font-variant-numeric:tabular-nums;margin-top:12px}
+.r2b12-cal small{font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cd-acc)}
+.r2b12-cal::before{content:'';position:absolute;top:0;left:0;right:0;height:15px;border-bottom:1px solid color-mix(in srgb,var(--cd-acc) 35%,transparent)}
+.r2b12-mix{display:flex;width:112px;height:7px;border-radius:7px;overflow:hidden;background:var(--line);gap:2px}
+.r2b12-mix i{display:block;width:var(--w);min-width:4px;background:var(--k)}
+.r2b12-pt .cd-fold-aside{gap:6px}
+.r2b12-pt[open]{box-shadow:var(--shadow-soft),0 0 0 1px color-mix(in srgb,var(--cd-acc) 22%,transparent)}
+.r2b12-pt-intro{margin:0;max-width:74ch;padding:10px 14px;border-left:2px solid color-mix(in srgb,var(--cd-acc) 60%,transparent);border-radius:0 10px 10px 0;background:color-mix(in srgb,var(--cd-acc) 6%,transparent);font-size:13px;line-height:1.6;color:var(--dim)}
+.r2b12-cat{display:grid;gap:6px}
+.r2b12-cat-h{display:flex;align-items:center;gap:8px;margin:0;font:700 12px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--k)}
+.r2b12-cat-h .cd-i{width:18px;height:18px;padding:3px;box-sizing:content-box;border-radius:7px;background:color-mix(in srgb,var(--k) 14%,transparent)}
+.r2b12-cat-h b{margin-left:2px;padding:0 7px;border-radius:999px;background:color-mix(in srgb,var(--k) 14%,transparent);font-size:11px;line-height:1.7;letter-spacing:0}
+.r2b12-items{list-style:none;margin:0;padding:0 0 0 13px;display:grid;gap:6px;border-left:1px solid color-mix(in srgb,var(--k) 30%,transparent);margin-left:12px}
+.r2b12-items>li{position:relative;max-width:76ch;padding-left:14px;font-size:13px;line-height:1.6;color:var(--text)}
+.r2b12-items>li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--k);opacity:.85}
+.r2b12-items b{color:var(--ink-hi)}
+.r2b12-srcbox{padding:9px 12px;border:1px dashed var(--line);border-radius:10px;font-size:12px;line-height:1.55;color:var(--ink-faint)}
+.r2b12-srcbox ul{margin:4px 0 0;padding-left:16px}
+.r2b12-srcbox li{margin:2px 0}
+
+/* -- Roadmap: Kopf-Kennzahlen mit Fortschrittsbalken -- */
+.r2b12-rm-hero .cd-hero-stat{position:relative;overflow:hidden}
+.r2b12-statbar{display:block;height:4px;margin-top:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.r2b12-statbar i{display:block;width:var(--p,0%);height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--glo))}
+/* Kapitel-Zeitachse */
+.r2b12-trk{margin:0 0 14px;padding:18px 20px 12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);box-shadow:var(--shadow-soft)}
+.r2b12-trk-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:12px}
+.r2b12-trk-t{margin:0;font-family:var(--f-display);font-size:17px;color:var(--ink-hi)}
+.r2b12-trk-n{font-size:12.5px;color:var(--dim)}.r2b12-trk-n b{font-family:var(--f-mono);color:var(--gold)}
+.r2b12-trk-leg{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:12px;color:var(--dim)}
+.r2b12-trk-leg i{width:10px;height:10px;margin-left:8px;border-radius:50%;border:2px solid var(--line-strong);background:var(--card)}
+.r2b12-trk-leg i.is-done{border-color:var(--gold);background:var(--gold)}.r2b12-trk-leg i.is-cur{border-color:var(--red);background:color-mix(in srgb,var(--red) 30%,var(--card))}
+.r2b12-rail{position:relative;list-style:none;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(78px,1fr);margin:0;padding:6px 0 10px;overflow-x:auto;scrollbar-width:thin;scroll-snap-type:x proximity}
+.r2b12-node{position:relative;z-index:1;scroll-snap-align:center;min-width:0}
+.r2b12-node:not(:last-child)::before{content:'';position:absolute;z-index:-1;left:50%;width:100%;top:18px;height:3px;border-radius:3px;background:var(--line)}
+.r2b12-node.is-done:not(:last-child)::before{background:linear-gradient(90deg,var(--gold),var(--glo));box-shadow:0 0 10px color-mix(in srgb,var(--gold) 55%,transparent)}
+.r2b12-node>a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 1px;text-decoration:none;color:inherit;border-radius:10px}
+.r2b12-node>a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b12-node-dot{display:grid;place-items:center;width:38px;height:38px;border:2px solid var(--line-strong);border-radius:50%;background:var(--card);font:700 14px/1 var(--f-mono);color:var(--dim);transition:transform .18s,border-color .18s}
+.r2b12-node-dot .cd-i{width:18px;height:18px;stroke-width:2.4}
+.r2b12-node>a:hover .r2b12-node-dot{transform:translateY(-2px);border-color:var(--gold)}
+.r2b12-node.is-done .r2b12-node-dot{border-color:var(--gold);background:var(--gold);color:var(--bg)}
+.r2b12-node.is-cur .r2b12-node-dot{width:44px;height:44px;margin-top:-3px;border-color:var(--red);background:color-mix(in srgb,var(--red) 22%,var(--card));color:var(--ink-hi);box-shadow:0 0 0 5px color-mix(in srgb,var(--red) 16%,transparent),0 0 22px -2px color-mix(in srgb,var(--red) 70%,transparent)}
+.r2b12-node-t{max-width:100%;font-size:11px;line-height:1.3;letter-spacing:-.01em;text-align:center;color:var(--dim);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.r2b12-node.is-cur .r2b12-node-t{color:var(--ink-hi);font-weight:700}
+.r2b12-node.is-done .r2b12-node-t{color:var(--text)}
+.r2b12-node.is-lock .r2b12-node-t{font-style:italic;opacity:.7}
+.r2b12-node-b{font:11px/1.2 var(--f-mono);color:var(--ink-faint);white-space:nowrap}
+/* Du bist hier */
+.r2b12-now{margin:0 0 26px;min-height:200px;padding:22px 24px;border:1px solid color-mix(in srgb,var(--red) 35%,var(--line));border-radius:var(--radius);background:var(--panel-2);box-shadow:var(--shadow-soft)}
+.r2b12-now .cd-scene{--cd-acc:var(--red)}
+.r2b12-now-main{position:relative;display:grid;gap:10px;max-width:640px}
+.r2b12-now-k{display:flex;align-items:center;gap:8px;margin:0;font:600 11.5px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--rhi,var(--red))}
+.r2b12-pulse{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 color-mix(in srgb,var(--red) 60%,transparent)}
+html.cd-motion .r2b12-pulse{animation:r2b12Pulse 2.2s ease-out infinite}
+@keyframes r2b12Pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--red) 55%,transparent)}70%,100%{box-shadow:0 0 0 10px transparent}}
+.r2b12-now-t{margin:0;font-family:var(--f-display);font-size:clamp(22px,2.6vw,30px);line-height:1.15;color:var(--ink-hi);text-wrap:balance;text-shadow:0 1px 12px color-mix(in srgb,var(--card) 80%,transparent)}
+.r2b12-now .cd-note{max-width:62ch;background:color-mix(in srgb,var(--card) 78%,transparent)}
+.r2b12-boss{text-decoration:none;min-height:30px;background:color-mix(in srgb,var(--card) 70%,color-mix(in srgb,var(--c) 14%,transparent))}
+.r2b12-boss:hover{border-color:var(--c)}
+.r2b12-now-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.r2b12-btn{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 16px;border:1px solid var(--gold);border-radius:999px;background:var(--gold);color:var(--bg);font:700 13px/1.2 var(--f-body);text-decoration:none;cursor:pointer;transition:transform .15s,background .18s}
+.r2b12-btn:hover{transform:translateY(-1px);background:var(--glo)}
+.r2b12-btn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b12-btn .cd-i{width:16px;height:16px;stroke-width:2.2}
+.r2b12-btn--ghost{background:color-mix(in srgb,var(--card) 70%,transparent);color:var(--glo)}
+.r2b12-btn--ghost:hover{background:color-mix(in srgb,var(--gold) 14%,var(--card));color:var(--glo)}
+/* Nächste Schritte als Weg */
+.r2b12-path-hd{display:flex;align-items:baseline;gap:12px;margin:0 0 4px}
+.r2b12-path-t{margin:0;font-family:var(--f-display);font-size:17px;color:var(--ink-hi)}
+.r2b12-path-n{font:12px var(--f-mono);color:var(--gold)}
+.r2b12-path{position:relative;display:grid;gap:10px;padding-left:0}
+.r2b12-path::before{content:'';position:absolute;left:31px;top:30px;bottom:30px;width:2px;background:linear-gradient(var(--red),color-mix(in srgb,var(--gold) 60%,transparent),var(--line-soft));opacity:.6}
+#sec-roadmap .rm-task.r2b12-task{--c:var(--gold);display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:start;padding:14px 16px 14px 10px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);box-shadow:var(--shadow-soft);transform:none}
+#sec-roadmap .rm-task.r2b12-task:hover{border-color:color-mix(in srgb,var(--c) 45%,var(--line));transform:none}
+#sec-roadmap .rm-task.r2b12-task:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b12-p-hi{--c:var(--red)!important}.r2b12-p-md{--c:var(--warn)!important}.r2b12-p-lo{--c:var(--gold)!important}
+.r2b12-task-node{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border:1px solid color-mix(in srgb,var(--c) 55%,transparent);border-radius:13px;background:color-mix(in srgb,var(--c) 14%,var(--panel));color:var(--c)}
+.r2b12-task-node .cd-i{width:22px;height:22px}
+.r2b12-task-node i{position:absolute;right:-6px;bottom:-6px;display:grid;place-items:center;min-width:19px;height:19px;padding:0 4px;border-radius:999px;background:var(--c);color:var(--bg);font:700 11px/1 var(--f-mono);font-style:normal}
+.r2b12-prio{display:inline-block;margin-bottom:3px;font:600 11px/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+#sec-roadmap .r2b12-task .rm-task-title{font-size:15px;color:var(--ink-hi)}
+#sec-roadmap .r2b12-task .rm-task-desc{max-width:72ch;font-size:13px;color:var(--dim)}
+.r2b12-task-pre{margin-top:6px;max-width:72ch;padding:7px 11px;border-left:2px solid color-mix(in srgb,var(--c) 60%,transparent);border-radius:0 8px 8px 0;background:color-mix(in srgb,var(--c) 7%,transparent);font-size:12.5px;line-height:1.55;color:var(--text)}
+.r2b12-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.r2b12-task-meta{margin-top:8px}
+.r2b12-task-meta .cd-chip{font-size:11.5px}
+.r2b12-task-go{display:grid;place-items:center;width:34px;height:34px;align-self:center;border:1px solid var(--line);border-radius:50%;color:var(--dim);transition:color .18s,border-color .18s,transform .18s}
+.r2b12-task:hover .r2b12-task-go{color:var(--c);border-color:var(--c);transform:translateX(2px)}
+.r2b12-done{border-radius:var(--radius);background:var(--panel-2);border-color:var(--gold)}
+.r2b12-done-t{margin-bottom:4px;font-family:var(--f-display);font-size:18px;font-weight:700;color:var(--gold)}
+.r2b12-done-d{font-size:13px;line-height:1.6;color:var(--dim)}
+/* Häufige Fragen */
+.r2b12-faq{margin-top:34px}
+.r2b12-hd{margin:0 0 12px}
+.r2b12-hd .sub-t{margin:0 0 4px}
+.r2b12-hd-sub{margin:0;max-width:80ch;font-size:12.5px;line-height:1.55;color:var(--dim)}
+.r2b12-faq .cd-fold-body p{max-width:74ch;margin:0}
+.r2b12-xs-h{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:13.5px;color:var(--ink-hi)}
+.r2b12-xs-k{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:color-mix(in srgb,var(--cd-fx-ice) 18%,transparent);color:var(--cd-fx-ice);font:700 12px/1 var(--f-mono)}
+.r2b12-xs-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px 22px}
+.r2b12-xs-cols>div,.r2b12-xs-pre{padding:14px;border:1px solid var(--line-soft);border-radius:12px;background:var(--card)}
+.r2b12-ticks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.r2b12-ticks>li{position:relative;padding-left:20px;font-size:13px;line-height:1.55;color:var(--text)}
+.r2b12-ticks>li::before{content:'';position:absolute;left:3px;top:.45em;width:8px;height:5px;border-left:2px solid var(--cd-ok);border-bottom:2px solid var(--cd-ok);transform:rotate(-45deg)}
+.r2b12-ticks--warn>li::before{left:5px;top:.55em;width:5px;height:5px;border:0;border-radius:50%;background:var(--warn);transform:none}
+
+/* -- Mobil -- */
+@media (max-width:860px){
+  .r2b12-brief{grid-template-columns:minmax(0,1fr)}
+  .r2b12-month{grid-template-columns:minmax(0,1fr);padding-left:28px}
+  .r2b12-month-hd{position:static;margin:0 0 10px -28px}
+  .r2b12-month::before{left:7px}
+}
+@media (max-width:600px){
+  .r2b12-dlc>summary{min-height:0}
+  .r2b12-cd{flex-direction:row;gap:6px;min-width:0;padding:5px 10px}
+  .r2b12-cd b{font-size:20px;margin:0}
+  .r2b12-rh{padding:14px 14px 12px}
+  .r2b12-rh-grid{grid-template-columns:minmax(0,1fr);gap:6px}
+  .r2b12-rh-col{flex-direction:row-reverse;align-items:center;gap:10px}
+  .r2b12-rh-dots{flex:1;flex-wrap:wrap;justify-content:flex-start;min-height:0;padding:3px 6px}
+  .r2b12-rh-lbl{flex:0 0 58px;justify-content:flex-start}
+  .r2b12-dt{display:none}
+  .r2b12-pt .cd-fold-chips{gap:5px}
+  .r2b12-cal{width:44px;height:48px}.r2b12-cal b{font-size:17px;margin-top:11px}
+  .r2b12-mix{width:96px}
+  .r2b12-trk{padding:14px 12px 8px}
+  .r2b12-trk-leg{margin-left:0}
+  .r2b12-rail{grid-auto-columns:76px;margin:0 -12px;padding:6px 12px 10px}
+  .r2b12-now{padding:18px 16px;min-height:0}
+  #sec-roadmap .rm-task.r2b12-task{grid-template-columns:40px minmax(0,1fr);padding:12px 12px 12px 10px;gap:12px}
+  .r2b12-task-node{width:40px;height:40px}
+  .r2b12-path::before{left:29px}
+  .r2b12-task-go{display:none}
+}
+/* -- Feinschnitt B12 (Fortsetzung 22.10.) -- */
+.r2b12-fxd{display:inline-flex;align-items:center;gap:3px;margin-left:2px;padding:0 7px 0 6px;border-radius:999px;border:1px solid color-mix(in srgb,var(--cd-ok) 40%,transparent);background:color-mix(in srgb,var(--cd-ok) 12%,transparent);font:600 11px/1.6 var(--f-mono);color:var(--cd-ok);white-space:nowrap;vertical-align:1px}
+.r2b12-fxd::before{content:'';width:6px;height:3px;margin:-2px 1px 0 0;border-left:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg)}
+.r2b12-pt[open]>summary .cd-fold-lead{display:none}
+.r2b12-blk{display:grid;gap:10px;min-width:0}
+.r2b12-blk>.cd-fold{content-visibility:auto;contain-intrinsic-size:auto 96px}
+.r2b12-blk>.cd-fold[open]{content-visibility:visible}
+.r2b12-blk:not(:has(>.cd-fold:not(.hide):not(.r2b12-off))){display:none}
+.r2b12-leg{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin:2px 0 4px;font-size:12px;color:var(--dim)}
+.r2b12-leg>span:first-child{margin-right:2px}
+.r2b12-leg-i{display:inline-flex;align-items:center;gap:5px;color:var(--text)}
+.r2b12-leg-i i{width:14px;height:6px;border-radius:6px;background:var(--k)}
+.r2b12-now-facts{max-width:640px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.r2b12-now-facts>div{background:color-mix(in srgb,var(--card) 86%,transparent)}
+.r2b12-now-facts dd{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:12.5px;line-height:1.5;color:var(--text)}
+@media (max-width:860px){.r2b12-now-facts{grid-template-columns:minmax(0,1fr)}.r2b12-now-facts dd{-webkit-line-clamp:2}}
+@media (max-width:600px){.r2b12-leg>span:first-child{flex-basis:100%}}
+/* -- Feinschliff Art Director (22.10.) -- */
+/* Redaktionelle Einordnung als ruhige Randnotiz statt orangem Fließtext */
+.r2b12-ann{display:block;margin:6px 0 2px;padding:2px 0 2px 11px;border-left:2px solid color-mix(in srgb,var(--gold) 34%,transparent);font-size:12.5px;line-height:1.55;color:var(--dim)}
+.r2b12-ann--in{display:inline;margin:0;padding:0;border:0;font-size:inherit;color:var(--dim)}
+.r2b12-ann-k{display:inline-block;margin-right:7px;font:600 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gdim)}
+.r2b12-ann b:not(.r2b12-ann-k),.r2b12-ann strong{color:var(--text)}
+.r2b12-pt-intro .r2b12-ann{margin-top:8px}
+/* statische DLC-Kacheln: dieselbe Randnotiz (Inline-Farbe der Vorlage überstimmt) */
+#sec-patches .r2b12-feat span[style*="--gdim"],#sec-patches .r2b12-prose span[style*="--gdim"]{display:block;margin-top:6px;padding:1px 0 1px 10px;border-left:2px solid color-mix(in srgb,var(--gold) 34%,transparent);font-size:12.5px;line-height:1.55;color:var(--dim)!important}
+/* Roadmap: beschriftete Zusatzinfos kompakt (2 Spalten Desktop, 2 Zeilen je Wert) */
+.r2b12-task-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:6px 18px;max-width:72ch;margin:8px 0 0}
+.r2b12-task-kv>div{min-width:0;padding-left:10px;border-left:2px solid color-mix(in srgb,var(--c) 30%,var(--line-soft))}
+.r2b12-task-kv dt{font:600 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.r2b12-task-kv dd{margin:1px 0 0;font-size:12.5px;line-height:1.5;color:var(--dim);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+/* Lesbarkeit: Kopf-Kurzsatz liegt auf der Szene, ruhiger Schatten in Kartenfarbe */
+#sec-patches .cd-hero-sub,#sec-roadmap .cd-hero-sub{color:var(--text);text-shadow:0 1px 2px var(--card),0 0 14px var(--card)}
+.r2b12-rh-hd p,.r2b12-hd-sub,.r2b12-pt-intro,.r2b12-items>li{text-wrap:pretty}
+/* lange Einleitung: 4 Zeilen, weicher Auslauf, Knopf zum Aufklappen */
+.r2b12-intro-w{display:grid;justify-items:start;gap:4px}
+.r2b12-intro-txt{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.r2b12-intro-w.is-open .r2b12-intro-txt,.r2b12-pt[data-srch-open] .r2b12-intro-txt{display:block;-webkit-line-clamp:unset;overflow:visible}
+.r2b12-more{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 12px 4px 8px;border:1px solid transparent;border-radius:999px;background:none;color:var(--cd-acc,var(--gold));font:600 12px/1.2 var(--f-body);cursor:pointer;transition:background .18s,border-color .18s}
+.r2b12-more:hover{background:color-mix(in srgb,var(--cd-acc,var(--gold)) 10%,transparent);border-color:color-mix(in srgb,var(--cd-acc,var(--gold)) 35%,transparent)}
+.r2b12-more:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b12-more .cd-i{width:15px;height:15px;transition:transform .2s}
+.r2b12-intro-w.is-open .r2b12-more .cd-i{transform:rotate(180deg)}
+.r2b12-pt[data-srch-open] .r2b12-more{display:none}
+@media print{.r2b12-intro-txt{display:block;-webkit-line-clamp:unset;overflow:visible}.r2b12-more{display:none}}
+/* Tap-Ziele auf Touch-Geräten ab 40 px */
+@media (pointer:coarse){
+  .r2b12-boss,.r2b12-more{min-height:40px}
+  .r2b12-dot{width:36px;height:36px}
+}
 /* R2-B12 Ende */
 
 /* ---- Bereich Bauer 13 (nur B13 schreibt hier) ---- */
@@ -7526,51 +7809,107 @@ html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,
 
   <section class="sec" id="sec-patches">
     <h2 class="sec-t"><span class="sec-sym">✎</span> Patch-Notes</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>20.10.2026</b>: Die offizielle Übersicht führt weiterhin <b>Patch 2.03.02</b> vom 23.09.2026 (04:45 UTC) als neuesten Patch; seit dem 24.09.2026 ist kein neuer Patch erschienen. Hier sind <b>47 Versionen</b> geführt. Zuletzt ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen. Den Mac App Store haben laut den offiziellen Notes alle drei noch nicht erreicht (Status dort „in Vorbereitung“); im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“). Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss; die offiziellen Notes zu 2.03.00 bis 2.03.02 nennen für den Mac App Store auch am 20.10.2026 noch „Patch wird derzeit vorbereitet“. Plattformangaben in den Einträgen geben den Stand zur Veröffentlichung oder zur jeweils genannten Prüfung wieder, denn Pearl Abyss ändert sie nachträglich ohne Hinweis. Alle älteren Versionen folgen unten. <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">Offizielle Patchnotes</a></div>
-    <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px">
-      <h3 style="font-size:15px;color:var(--gold);margin:0 0 8px">Weiterhin bekannte Probleme</h3>
-      <p style="font-size:12px;color:var(--dim);line-height:1.6;margin:0 0 8px">Quellenstand: Aktualisierungsvermerk 21.09.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt 18.09.2026, 10:00 UTC); die Liste ist seither unverändert, zuletzt geprüft am 20.10.2026 (deutsche und englische Fassung, jeweils 10 Punkte; der Kartensymbol-Punkt steht weiterhin darin). Der Punkt zu den fehlenden Kartensymbolen neu entdeckter Objekte steht weiterhin darin, obwohl ihn Hotfix 2.03.02 vom 23.09.2026 bereits behebt. Pearl Abyss führt aktuell diese Probleme:</p>
-      <ul style="font-size:12.5px;line-height:1.75;padding-left:18px;margin:0">
-        <li><b>Kartensymbole:</b> Symbole neu entdeckter Objekte erscheinen in einigen Regionen nicht auf der Karte. <span style="color:var(--gdim)">Laut 2.03.02 behoben.</span></li>
-        <li><b>Interaktionen blockiert:</b> NPCs, Reittiere oder Objekte reagieren gelegentlich nicht. Offizieller Behelf: Spiel neu starten.</li>
-        <li><b>Angeln:</b> In bestimmten Gebieten können gerade gefangene Fische sich nicht bewegen.</li>
-        <li><b>Graumähnen-Quests:</b> Fraktionsquests stocken mit Damiane/Oongka.</li>
-        <li><b>Ausweichen:</b> Bei der Methode „Gedrückt halten“ bleibt die Standardtaste trotz geänderter Ausweichtaste aktiv.</li>
-        <li><b>Quest-NPCs:</b> Benötigte NPCs können nicht gemeinsam auf legendären Reittieren aufsitzen.</li>
-        <li><b>Mac:</b> Bei Tastatur- und Maussteuerung weicht bei bestimmten Auflösungen im Wohnen-Modus die Mauszeiger- von der tatsächlichen Möbelposition ab.</li>
-        <li><b>Mac-Farbenblindmodus:</b> Bei aktiviertem Farbenblind-Modus wird der Filter nicht auf die Benutzeroberfläche angewendet. Die deutsche Liste formuliert das als behoben, die englische führt es weiter als Problem. Status unklar.</li>
-        <li><b>PlayStation:</b> Schnelle Namenseingabe für Tiere oder Pferde kann das Bild einfrieren. Namen langsam mit Pausen eingeben.</li>
-        <li><b>FSR4:</b> In Regen kann der Niederschlag verschwinden oder das Bild unscharf beziehungsweise verzerrt wirken.</li>
-      </ul>
-      <p style="font-size:var(--fs-11);color:var(--dim);line-height:1.6;margin:8px 0 0"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beide Fassungen tragen denselben Aktualisierungsstand vom 21.09.2026, 14:00 UTC und waren am 01.10.2026, am 06.10.2026 und am 20.10.2026 unverändert. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
-    </div>
-    <div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
-      <div style="font-size:15px;font-weight:700;color:var(--red);margin-bottom:4px">⛵ Erste DLC-Erweiterung: „Charting the Unknown“ — 29.10.2026, 23:00 MEZ</div>
-<div style="font-size:var(--fs-11);color:var(--dim);margin-bottom:12px;line-height:1.6">Angekündigt am 03.09.2026 im Rahmen einer PlayStation State of Play. Voller Titel <b>Crimson Desert Enhanced: Charting the Unknown</b>. Am 30.09.2026 (10:20 UTC) hat Pearl Abyss den Start um zwei Wochen verschoben, weil mehr Entwicklungszeit für ein ausgereifteres und stabileres Spielerlebnis nötig sei. Neuer weltweiter Start: <b>29.10.2026, 22:00 UTC</b>, in Deutschland also <b>Donnerstag, 29.10.2026, 23:00 MEZ</b>. Weil die Sommerzeit am 25.10.2026 endet, startet der DLC hierzulande am Donnerstagabend und nicht mehr um Mitternacht. Ursprünglich angekündigt war der 15.10.2026, 22:00 UTC (16.10.2026, 00:00 MESZ). Die Vorbestellung läuft seit dem 03.09.2026 im PlayStation Store, im Microsoft Store, bei Steam und im Epic Games Store; laut der ursprünglichen Fassung der Ankündigung sollte sie zuerst im PlayStation Store ab 15:00 UTC starten, danach bei Steam und im Epic Games Store, im Microsoft Store ab 21:00 UTC. <span style="color:var(--gdim)">Die englische Fassung der Verschiebungsmeldung beschriftet 23:00 Uhr fälschlich mit „CEST“ (Sommerzeit). Richtig ist MEZ (CET, UTC+1): So steht es in der deutschen Fassung, in der überarbeiteten Ankündigung, in der Steam-Meldung und in allen anderen geprüften Sprachfassungen.</span></div>
-<ul style="margin:0 0 10px;padding-left:18px;font-size:12.5px;line-height:1.75;color:var(--text)">
-<li><b>Ozean-Erkundung:</b> Man übernimmt das Kommando über das eigene Schiff, segelt zu neuen Inseln am Horizont und taucht unter die Wasseroberfläche, um Schätze, versunkene Ruinen und verborgene Geheimnisse zu finden.</li>
-<li><b>Wohnen, Wirtschaften und Beziehungen:</b> Einrichtungen lassen sich mieten und verwalten, um ein Vermögen zu machen, der Wohn-Modus wird erweitert, und man knüpft engere Bande zu den Bewohnern von Pywel.</li>
-<li><b>Neue Gegner zu Land und zu Wasser.</b> <span style="color:var(--gdim)">Namen nennt die offizielle Seite keine. Der Reveal-Trailer zeigt laut Fachpresse einen großen Roboter-Gegner mit rotem Laser sowie eine Fortbewegung, bei der sich Kliff unter Wasser an einem Hai festhält.</span></li>
-<li><b>Neue Geschichten</b> um Kliff, Oongka und Damiane: von einer unheilvollen Präsenz in der Wüste und einem gefährlichen politischen Konflikt bis zu einer Reise jenseits der Zeit und einem uralten Geheimnis unter den Wellen.</li>
-<li><b>Vorbestellerbonus:</b> das „Tauchanzug-Set des Entdeckers“ für Kliff und Oongka sowie das „Leichte Tauchanzug-Set des Entdeckers“ für Damiane (englisch Charter's Diving Set und Charter's Light Diving Set).</li>
-<li><b>Plattformen:</b> PS5, Xbox Series X|S, Steam und Epic Games Store; die DLC-Seite zeigt zusätzlich das GeForce-Now-Logo. <b>Zum Verkaufsstart nicht im Mac App Store.</b> Ob der DLC später für Mac erscheint, ist offen; Pearl Abyss will das gegebenenfalls gesondert ankündigen. <span style="color:var(--gdim)">Der Steam-Shop führt den DLC auch für macOS, mit eigenen Mac-Systemanforderungen; zu Steam auf dem Mac äußert sich Pearl Abyss nicht ausdrücklich. Cross-Save für Mac kam mit Patch 2.02.00 (11.09.2026).</span></li>
-<li><b>Nicht in allen Märkten:</b> Nach einer Prüfung der Inhalts- und Altersfreigabe-Anforderungen erscheint der DLC in bestimmten Märkten und Regionen nicht. Dort werden die Vorbestellungen eingestellt; erstattet wird je nach Plattform automatisch oder über das übliche Rückerstattungsverfahren der Plattform. <span style="color:var(--gdim)">Pearl Abyss nennt die betroffenen Märkte nicht. Eine Stichprobe in Steam und PlayStation Store am 01.10.2026 ergab: Der DLC fehlt in den Vereinigten Arabischen Emiraten, Saudi-Arabien, Kuwait, Katar und Bahrain, das Basisspiel wird dort weiter angeboten. In archivierten Fassungen der Ankündigung vom 04.09. und 08.09.2026 fehlte der Hinweis noch; Fachmedien berichteten ab dem 14.09.2026 darüber. Eine erneute Stichprobe im Steam-Shop am 20.10.2026 ergab dasselbe Bild für alle fünf Länder.</span></li>
-</ul>
-<div style="font-size:var(--fs-10-5);color:var(--gdim);line-height:1.6">Was noch offen ist: Pearl Abyss nennt auf der eigenen Seite <b>keinen Preis</b> (kursierende Beträge stammen aus Store-Listings und werden hier deshalb nicht geführt), <b>keine Bossnamen</b>, keine neuen Waffen oder Rüstungen außer dem Vorbestellerbonus und <b>keine Angabe, ob ein bestimmter Story-Fortschritt Voraussetzung ist</b>. Game Informer berichtet, der DLC setze Kliffs Geschichte nach dem Ende des Hauptspiels fort; offiziell bestätigt ist das nicht. Laut Steam-Shop braucht der DLC die Steam-Fassung des Basisspiels Crimson Desert Enhanced. Quellen: Verschiebung <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=134" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=134" target="_blank" rel="noopener noreferrer">EN</a>, offizielle Ankündigung mit Startzeiten <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=129" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=129" target="_blank" rel="noopener noreferrer">EN</a> (Startzeiten überarbeitet am 30.09.2026, Beitrag zuletzt überarbeitet am 12.10.2026), <a href="https://crimsondesert.pearlabyss.com/de-DE/Game/DLC/charting-the-unknown" target="_blank" rel="noopener noreferrer">DLC-Seite</a>, <a href="https://pressreleases.triplepointpr.com/2026/09/03/pearl-abyss-announces-crimson-desert-enhanced-charting-the-unknown-dlc/" target="_blank" rel="noopener noreferrer">Pressemitteilung vom 03.09.2026</a> und <a href="https://store.steampowered.com/app/5001840/" target="_blank" rel="noopener noreferrer">Steam-Shopseite</a>, geprüft am 20.10.2026.</div>
-</div>
-<div style="margin-bottom:22px;border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;background:linear-gradient(135deg,rgba(204,159,40,.07),transparent 70%)">
-<div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:4px">🧭 Bilanz: Dev-Update Juni–September 2026</div>
-      <div style="font-size:var(--fs-11);color:var(--dim);margin-bottom:12px;line-height:1.6">Offizielle Roadmap von Pearl Abyss (Dev-Update vom 02.06.2026, 07:00 UTC) für die Monate Juni bis September 2026. Der Zeitraum ist abgelaufen: Von den sechs Punkten sind vier ausgeliefert, einer teilweise (Landwirtschaft) und einer gar nicht (neuer Kampf-Content). Goldene Haken markieren Ausgeliefertes, graue Vermerke Teilumsetzungen und offene Punkte. Abgleich mit den offiziellen Patch-Notes 1.10.00 bis 2.03.02: 01.10.2026.</div>
-      <ul style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.75;color:var(--text)">
-        <li><b>Story-Kohärenz:</b> Schlüsselszenen in Kliffs Handlung werden überarbeitet, um den Erzählfluss runder und nachvollziehbarer zu machen. <span style="color:var(--gold)">✓ ausgeliefert in Patch 2.00.00 (25.08.2026): Hauptgeschichte und Hauptquests überarbeitet, zusätzliche Zwischensequenzen und Story-Momente, dazu Wissen, Gegenstände, Erinnerungsfragmente und Dialoge zur Vertiefung der Boss-Geschichten.</span> <span style="color:var(--gdim)">Welche Bosse und welche Fragmente konkret betroffen sind, nennen die Patch-Notes nicht; eine Aufstellung dazu war bei der Prüfung am 01.10.2026 auch in den gesichteten Guides (u. a. Fextralife) nicht zu finden.</span></li>
-        <li><b>Re-Blockade-Überarbeitung:</b> eine neue Phase, die den Ablauf vor und nach einer Blockade natürlicher macht, dazu Möglichkeiten, bestimmte Stützpunkte vor Invasionen zu schützen, und bessere Belohnungen für die Befreiung von Stützpunkten. <span style="color:var(--gold)">✓ ausgeliefert in Patch 1.10.00 (05.06.2026): neue Stufen „Battle“ und „Reconstruct“ (deutsch „Kampf“ und „Wiederaufbau“), bei wichtigen Stützpunkten lässt sich über den Contribution Assessor der Region „Protection“ (deutsch „Schutz“) gegen erneute Blockaden anfordern, und Befreiungen bringen jetzt Beitragspunkte, Camp-Währung, Handelswaren und weitere Gegenstände.</span></li>
-        <li><b>Neuer Kampf-Content:</b> neue kampffokussierte Inhalte, in denen man „die wahre Stärke der Graumähnen beweisen“ kann; Details wollte Pearl Abyss später nennen. <span style="color:var(--gdim)">Nicht ausgeliefert: Keine der offiziellen Patch-Notes von 1.10.00 bis 2.03.02 enthält einen solchen Inhalt, und Pearl Abyss hat ihn bis 20.10.2026 weder näher beschrieben noch neu terminiert. Angekündigt war kampffokussierter Inhalt schon im Dev-Update vom 09.04.2026. Im Zeitraum kamen nur Erweiterungen bestehender Systeme hinzu, etwa die acht neuen Kliff-Fähigkeiten aus 2.00.00.</span></li>
-        <li><b>Cross-Save:</b> Über eine Kontoverknüpfung sollen sich Speicherstände zwischen PC, PlayStation und Xbox teilen lassen. <span style="color:var(--gold)">✓ ausgeliefert in Patch 1.14.00 (16.07.2026) für PlayStation, Xbox, Steam und Epic Games Store; Cross-Save für Mac kam mit Patch 2.02.00 (11.09.2026 laut offiziellen Patch-Notes) hinzu. Der Apple-Store-Eintrag der Mac-Fassung (Version 2.0.8) trägt den Cross-Save-Hinweis allerdings erst mit dem Datum 16.09.2026. Ein gemeinsamer Cross-Save-Slot pro Pearl-Abyss-ID.</span></li>
-        <li><b>Damiane &amp; Oongka:</b> Gameplay-Verbesserungen, damit alle drei spielbaren Charaktere gleichermaßen im Rampenlicht stehen. <span style="color:var(--gold)">✓ in mehreren Patches umgesetzt: 1.11.00 (12.06.2026) Mining Drill und Chainsaw für beide; 1.12.00 (19.06.2026) Blackstar reiten, Visiones nutzen und Erinnerungen lesen, eigene Sitzanimation für Damiane; 1.13.00 (03.07.2026) Zugang zum Abyss für beide, Rätsel auch mit Oongkas „Scatter Shot“ lösbar, Oongka trägt die meisten Outfits von Kliff, Damiane Teile von drei Boss-Outfits; 1.14.00 (16.07.2026) Damianes „Skystep“ mit derselben Eingabe wie Oongkas „Vertical Flight“. Seit 2.00.00 (25.08.2026) erhalten die anderen spielbaren Charaktere für jede mit Abyss-Artefakten erlernte Fähigkeit gleich viele Abyss-Verknüpfungen, und Fähigkeiten lassen sich pro Charakter zurücksetzen.</span></li>
-        <li><b>Non-Combat QoL:</b> weitere Komfortverbesserungen bei Alltagsaktivitäten wie Handel und Landwirtschaft, wo Spieler Abläufe als umständlich empfunden haben. <span style="color:var(--gold)">✓ Handel ausgeliefert in Patch 1.16.00 (01.08.2026): 133 neue Handelsposten, sieben Wagenwerkstätten als Zwischenstationen, ein Handels-Tab auf der Karte, neue Stapelgrenzen und der Verkauf auch einzelner Handelswaren.</span> <span style="color:var(--gdim)">Landwirtschaft nur teilweise: Im Zeitraum gab es dafür nur Kleinigkeiten, nämlich Sammelobjekte mit der Large Farming Scythe (1.10.00, 05.06.2026) und zwei Fehlerbehebungen für Feldfrüchte, die nicht wuchsen oder sich nicht ernten ließen (1.15.00, 24.07.2026). Die Anbau-Verbesserung, die Pearl Abyss in seiner Update-Übersicht vom 12.08.2026 als Verbesserung der Landwirtschaftsinhalte führt (Samen über den Schnellzugriff), kam schon mit 1.09.00 am 29.05.2026, also vor der Roadmap.</span></li>
-        <li><b>DLC bestätigt:</b> „eine bedeutende Erweiterung für eure Reise“ in Entwicklung, Details sollten später folgen. Erstmals erwähnt am 12.05.2026 (Q1-Earnings, als Prüfung verschiedener Optionen inkl. DLC), offiziell bestätigt im Dev-Update vom 02.06.2026. <span style="color:var(--gold)">✓ aufgelöst am 03.09.2026: Der DLC heißt <b>Charting the Unknown</b>.</span> <span style="color:var(--gdim)">Angesetzt war er zunächst für den 15.10.2026, 22:00 UTC (16.10.2026, 00:00 MESZ). Am 30.09.2026 hat Pearl Abyss ihn um zwei Wochen verschoben: Neuer Start ist der <b>29.10.2026, 22:00 UTC</b>, in Deutschland 23:00 MEZ. Einzelheiten im DLC-Kasten oben.</span></li>
-      </ul>
-      <div style="font-size:var(--fs-10-5);color:var(--gdim);line-height:1.6;margin-top:10px">Eine neue Roadmap oder ein weiteres Dev-Update hat Pearl Abyss bis 20.10.2026 nicht veröffentlicht (geprüft: Ankündigungen auf der offiziellen Seite, Steam-Ankündigungen, offizieller YouTube-Kanal, Investor Relations). Im Earnings Letter zum zweiten Quartal (11.08.2026) kündigt Pearl Abyss allgemein weitere Inhalts-Updates an, nennt für eine Switch-2-Fassung das erste Halbjahr 2027 als Ziel und lässt Zahl und Takt weiterer DLCs offen. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=95" target="_blank" rel="noopener noreferrer">Dev-Update vom 02.06.2026</a>, <a href="https://www.pearlabyss.com/en-US/Board/Detail?_boardNo=15177" target="_blank" rel="noopener noreferrer">Earnings Letter Q2 2026</a>.</div>
+    <div id="r2b12-pt-hero"></div>
+    <div class="r2b12-brief">
+      <details class="cd-fold cd-spot r2b12-sf r2b12-dlc" style="--cd-acc:var(--cd-fx-ice)">
+        <summary>
+          <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⚓</i></span>
+          <span class="cd-fold-main"><span class="r2b12-kick">Nächster Meilenstein · erste DLC-Erweiterung</span><h3 class="cd-fold-t">„Charting the Unknown“</h3>
+            <span class="cd-fold-lead">Neuer weltweiter Start: 29.10.2026, 22:00 UTC, in Deutschland also Donnerstag, 29.10.2026, 23:00 MEZ.</span>
+            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--ice"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-miss"/></svg><b>29.10.</b><span>23:00 MEZ</span></span><span class="cd-chip cd-chip--warn"><span>um zwei Wochen verschoben</span></span><span class="cd-chip"><span>nicht im Mac App Store</span></span></span>
+          </span>
+          <span class="cd-fold-aside"><span class="r2b12-cd" id="r2b12-dlc-cd"></span></span>
+          <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+        </summary>
+        <div class="cd-fold-body">
+          <dl class="cd-facts">
+            <div><dt>Voller Titel</dt><dd>Crimson Desert Enhanced: Charting the Unknown</dd></div>
+            <div><dt>Start weltweit</dt><dd>29.10.2026, 22:00 UTC</dd></div>
+            <div><dt>In Deutschland</dt><dd>Donnerstag, 29.10.2026, 23:00 MEZ</dd></div>
+            <div><dt>Ursprünglich angekündigt</dt><dd>15.10.2026, 22:00 UTC</dd></div>
+          </dl>
+          <ul class="r2b12-feat">
+            <li><i class="cd-g" aria-hidden="true">⚓</i><div><b>Ozean-Erkundung:</b> Man übernimmt das Kommando über das eigene Schiff, segelt zu neuen Inseln am Horizont und taucht unter die Wasseroberfläche, um Schätze, versunkene Ruinen und verborgene Geheimnisse zu finden.</div></li>
+            <li><i class="cd-g" aria-hidden="true">⌂</i><div><b>Wohnen, Wirtschaften und Beziehungen:</b> Einrichtungen lassen sich mieten und verwalten, um ein Vermögen zu machen, der Wohn-Modus wird erweitert, und man knüpft engere Bande zu den Bewohnern von Pywel.</div></li>
+            <li><i class="cd-g" aria-hidden="true">⚔</i><div><b>Neue Gegner zu Land und zu Wasser.</b> <span style="color:var(--gdim)">Namen nennt die offizielle Seite keine. Der Reveal-Trailer zeigt laut Fachpresse einen großen Roboter-Gegner mit rotem Laser sowie eine Fortbewegung, bei der sich Kliff unter Wasser an einem Hai festhält.</span></div></li>
+            <li><i class="cd-g" aria-hidden="true">✒</i><div><b>Neue Geschichten</b> um Kliff, Oongka und Damiane: von einer unheilvollen Präsenz in der Wüste und einem gefährlichen politischen Konflikt bis zu einer Reise jenseits der Zeit und einem uralten Geheimnis unter den Wellen.</div></li>
+            <li><i class="cd-g" aria-hidden="true">✦</i><div><b>Vorbestellerbonus:</b> das „Tauchanzug-Set des Entdeckers“ für Kliff und Oongka sowie das „Leichte Tauchanzug-Set des Entdeckers“ für Damiane (englisch Charter's Diving Set und Charter's Light Diving Set).</div></li>
+            <li><i class="cd-g" aria-hidden="true">▣</i><div><b>Plattformen:</b> PS5, Xbox Series X|S, Steam und Epic Games Store; die DLC-Seite zeigt zusätzlich das GeForce-Now-Logo. <b>Zum Verkaufsstart nicht im Mac App Store.</b> Ob der DLC später für Mac erscheint, ist offen; Pearl Abyss will das gegebenenfalls gesondert ankündigen. <span style="color:var(--gdim)">Der Steam-Shop führt den DLC auch für macOS, mit eigenen Mac-Systemanforderungen; zu Steam auf dem Mac äußert sich Pearl Abyss nicht ausdrücklich. Cross-Save für Mac kam mit Patch 2.02.00 (11.09.2026).</span></div></li>
+            <li class="is-warn"><i class="cd-g" aria-hidden="true">⚠</i><div><b>Nicht in allen Märkten:</b> Nach einer Prüfung der Inhalts- und Altersfreigabe-Anforderungen erscheint der DLC in bestimmten Märkten und Regionen nicht. Dort werden die Vorbestellungen eingestellt; erstattet wird je nach Plattform automatisch oder über das übliche Rückerstattungsverfahren der Plattform. <span style="color:var(--gdim)">Pearl Abyss nennt die betroffenen Märkte nicht. Eine Stichprobe in Steam und PlayStation Store am 01.10.2026 ergab: Der DLC fehlt in den Vereinigten Arabischen Emiraten, Saudi-Arabien, Kuwait, Katar und Bahrain, das Basisspiel wird dort weiter angeboten. In archivierten Fassungen der Ankündigung vom 04.09. und 08.09.2026 fehlte der Hinweis noch; Fachmedien berichteten ab dem 14.09.2026 darüber. Eine erneute Stichprobe im Steam-Shop am 20.10.2026 ergab dasselbe Bild für alle fünf Länder.</span></div></li>
+          </ul>
+          <p class="r2b12-prose">Angekündigt am 03.09.2026 im Rahmen einer PlayStation State of Play. Voller Titel <b>Crimson Desert Enhanced: Charting the Unknown</b>. Am 30.09.2026 (10:20 UTC) hat Pearl Abyss den Start um zwei Wochen verschoben, weil mehr Entwicklungszeit für ein ausgereifteres und stabileres Spielerlebnis nötig sei. Neuer weltweiter Start: <b>29.10.2026, 22:00 UTC</b>, in Deutschland also <b>Donnerstag, 29.10.2026, 23:00 MEZ</b>. Weil die Sommerzeit am 25.10.2026 endet, startet der DLC hierzulande am Donnerstagabend und nicht mehr um Mitternacht. Ursprünglich angekündigt war der 15.10.2026, 22:00 UTC (16.10.2026, 00:00 MESZ). Die Vorbestellung läuft seit dem 03.09.2026 im PlayStation Store, im Microsoft Store, bei Steam und im Epic Games Store; laut der ursprünglichen Fassung der Ankündigung sollte sie zuerst im PlayStation Store ab 15:00 UTC starten, danach bei Steam und im Epic Games Store, im Microsoft Store ab 21:00 UTC. <span style="color:var(--gdim)">Die englische Fassung der Verschiebungsmeldung beschriftet 23:00 Uhr fälschlich mit „CEST“ (Sommerzeit). Richtig ist MEZ (CET, UTC+1): So steht es in der deutschen Fassung, in der überarbeiteten Ankündigung, in der Steam-Meldung und in allen anderen geprüften Sprachfassungen.</span></p>
+          <div class="cd-note cd-note--warn" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Was noch offen ist</b>Pearl Abyss nennt auf der eigenen Seite <b>keinen Preis</b> (kursierende Beträge stammen aus Store-Listings und werden hier deshalb nicht geführt), <b>keine Bossnamen</b>, keine neuen Waffen oder Rüstungen außer dem Vorbestellerbonus und <b>keine Angabe, ob ein bestimmter Story-Fortschritt Voraussetzung ist</b>. Game Informer berichtet, der DLC setze Kliffs Geschichte nach dem Ende des Hauptspiels fort; offiziell bestätigt ist das nicht. Laut Steam-Shop braucht der DLC die Steam-Fassung des Basisspiels Crimson Desert Enhanced.</div></div>
+          <p class="cd-src"><span class="cd-src-l">Quellen</span>Verschiebung <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=134" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=134" target="_blank" rel="noopener noreferrer">EN</a>, offizielle Ankündigung mit Startzeiten <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=129" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=129" target="_blank" rel="noopener noreferrer">EN</a> (Startzeiten überarbeitet am 30.09.2026, Beitrag zuletzt überarbeitet am 12.10.2026), <a href="https://crimsondesert.pearlabyss.com/de-DE/Game/DLC/charting-the-unknown" target="_blank" rel="noopener noreferrer">DLC-Seite</a>, <a href="https://pressreleases.triplepointpr.com/2026/09/03/pearl-abyss-announces-crimson-desert-enhanced-charting-the-unknown-dlc/" target="_blank" rel="noopener noreferrer">Pressemitteilung vom 03.09.2026</a> und <a href="https://store.steampowered.com/app/5001840/" target="_blank" rel="noopener noreferrer">Steam-Shopseite</a>, geprüft am 20.10.2026.</p>
+        </div>
+      </details>
+
+      <details class="cd-fold cd-spot r2b12-sf r2b12-iss-fold" style="--cd-acc:var(--warn)">
+        <summary>
+          <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg></span>
+          <span class="cd-fold-main"><h3 class="cd-fold-t">Weiterhin bekannte Probleme</h3>
+            <span class="cd-fold-lead">Offizielle Liste von Pearl Abyss, Stand 21.09.2026 (14:00 UTC), zuletzt geprüft am 20.10.2026.</span>
+            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--warn"><b>10</b><span>Punkte</span></span><span class="cd-chip cd-chip--ok"><b>1</b><span>laut 2.03.02 behoben</span></span><span class="cd-chip"><b>1</b><span>Status unklar</span></span></span>
+          </span>
+          <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+        </summary>
+        <div class="cd-fold-body">
+          <p class="r2b12-prose">Quellenstand: Aktualisierungsvermerk 21.09.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt 18.09.2026, 10:00 UTC); die Liste ist seither unverändert, zuletzt geprüft am 20.10.2026 (deutsche und englische Fassung, jeweils 10 Punkte; der Kartensymbol-Punkt steht weiterhin darin). Der Punkt zu den fehlenden Kartensymbolen neu entdeckter Objekte steht weiterhin darin, obwohl ihn Hotfix 2.03.02 vom 23.09.2026 bereits behebt. Pearl Abyss führt aktuell diese Probleme:</p>
+          <ul class="r2b12-iss">
+            <li class="is-ok"><b>Kartensymbole</b><span>Symbole neu entdeckter Objekte erscheinen in einigen Regionen nicht auf der Karte.</span><em>Laut 2.03.02 behoben.</em></li>
+            <li><b>Interaktionen blockiert</b><span>NPCs, Reittiere oder Objekte reagieren gelegentlich nicht. Offizieller Behelf: Spiel neu starten.</span></li>
+            <li><b>Angeln</b><span>In bestimmten Gebieten können gerade gefangene Fische sich nicht bewegen.</span></li>
+            <li><b>Graumähnen-Quests</b><span>Fraktionsquests stocken mit Damiane/Oongka.</span></li>
+            <li><b>Ausweichen</b><span>Bei der Methode „Gedrückt halten“ bleibt die Standardtaste trotz geänderter Ausweichtaste aktiv.</span></li>
+            <li><b>Quest-NPCs</b><span>Benötigte NPCs können nicht gemeinsam auf legendären Reittieren aufsitzen.</span></li>
+            <li><b>Mac</b><span>Bei Tastatur- und Maussteuerung weicht bei bestimmten Auflösungen im Wohnen-Modus die Mauszeiger- von der tatsächlichen Möbelposition ab.</span></li>
+            <li class="is-unk"><b>Mac-Farbenblindmodus</b><span>Bei aktiviertem Farbenblind-Modus wird der Filter nicht auf die Benutzeroberfläche angewendet. Die deutsche Liste formuliert das als behoben, die englische führt es weiter als Problem.</span><em>Status unklar.</em></li>
+            <li><b>PlayStation</b><span>Schnelle Namenseingabe für Tiere oder Pferde kann das Bild einfrieren. Namen langsam mit Pausen eingeben.</span></li>
+            <li><b>FSR4</b><span>In Regen kann der Niederschlag verschwinden oder das Bild unscharf beziehungsweise verzerrt wirken.</span></li>
+          </ul>
+          <p class="cd-src"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beide Fassungen tragen denselben Aktualisierungsstand vom 21.09.2026, 14:00 UTC und waren am 01.10.2026, am 06.10.2026 und am 20.10.2026 unverändert. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
+        </div>
+      </details>
+
+      <details class="cd-fold cd-spot r2b12-sf r2b12-dev-fold" style="--cd-acc:var(--gold)">
+        <summary>
+          <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⚑</i></span>
+          <span class="cd-fold-main"><h3 class="cd-fold-t">Bilanz: Dev-Update Juni bis September 2026</h3>
+            <span class="cd-fold-lead">Von den sechs Punkten sind vier ausgeliefert, einer teilweise (Landwirtschaft) und einer gar nicht (neuer Kampf-Content).</span>
+            <span class="r2b12-mtrack" role="img" aria-label="Story-Kohärenz ausgeliefert, Re-Blockade ausgeliefert, neuer Kampf-Content nicht ausgeliefert, Cross-Save ausgeliefert, Damiane und Oongka umgesetzt, Non-Combat QoL teilweise, DLC aufgelöst"><i class="ok" title="Story-Kohärenz: ausgeliefert"></i><i class="ok" title="Re-Blockade: ausgeliefert"></i><i class="no" title="Neuer Kampf-Content: nicht ausgeliefert"></i><i class="ok" title="Cross-Save: ausgeliefert"></i><i class="ok" title="Damiane &amp; Oongka: umgesetzt"></i><i class="part" title="Non-Combat QoL: teilweise"></i><i class="ok" title="DLC: aufgelöst"></i></span>
+          </span>
+          <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+        </summary>
+        <div class="cd-fold-body">
+          <p class="r2b12-prose">Offizielle Roadmap von Pearl Abyss (Dev-Update vom 02.06.2026, 07:00 UTC) für die Monate Juni bis September 2026. Der Zeitraum ist abgelaufen: Von den sechs Punkten sind vier ausgeliefert, einer teilweise (Landwirtschaft) und einer gar nicht (neuer Kampf-Content). Goldene Haken markieren Ausgeliefertes, graue Vermerke Teilumsetzungen und offene Punkte. Abgleich mit den offiziellen Patch-Notes 1.10.00 bis 2.03.02: 01.10.2026.</p>
+          <ol class="r2b12-ms">
+            <li class="ok"><span class="r2b12-ms-n" aria-hidden="true">✓</span><div><b>Story-Kohärenz</b> <span class="r2b12-st">ausgeliefert</span><p>Schlüsselszenen in Kliffs Handlung werden überarbeitet, um den Erzählfluss runder und nachvollziehbarer zu machen.</p><p class="r2b12-ms-r">✓ ausgeliefert in Patch 2.00.00 (25.08.2026): Hauptgeschichte und Hauptquests überarbeitet, zusätzliche Zwischensequenzen und Story-Momente, dazu Wissen, Gegenstände, Erinnerungsfragmente und Dialoge zur Vertiefung der Boss-Geschichten.</p><p class="r2b12-ms-d">Welche Bosse und welche Fragmente konkret betroffen sind, nennen die Patch-Notes nicht; eine Aufstellung dazu war bei der Prüfung am 01.10.2026 auch in den gesichteten Guides (u. a. Fextralife) nicht zu finden.</p></div></li>
+            <li class="ok"><span class="r2b12-ms-n" aria-hidden="true">✓</span><div><b>Re-Blockade-Überarbeitung</b> <span class="r2b12-st">ausgeliefert</span><p>Eine neue Phase, die den Ablauf vor und nach einer Blockade natürlicher macht, dazu Möglichkeiten, bestimmte Stützpunkte vor Invasionen zu schützen, und bessere Belohnungen für die Befreiung von Stützpunkten.</p><p class="r2b12-ms-r">✓ ausgeliefert in Patch 1.10.00 (05.06.2026): neue Stufen „Battle“ und „Reconstruct“ (deutsch „Kampf“ und „Wiederaufbau“), bei wichtigen Stützpunkten lässt sich über den Contribution Assessor der Region „Protection“ (deutsch „Schutz“) gegen erneute Blockaden anfordern, und Befreiungen bringen jetzt Beitragspunkte, Camp-Währung, Handelswaren und weitere Gegenstände.</p></div></li>
+            <li class="no"><span class="r2b12-ms-n" aria-hidden="true">✕</span><div><b>Neuer Kampf-Content</b> <span class="r2b12-st">nicht ausgeliefert</span><p>Neue kampffokussierte Inhalte, in denen man „die wahre Stärke der Graumähnen beweisen“ kann; Details wollte Pearl Abyss später nennen.</p><p class="r2b12-ms-d">Nicht ausgeliefert: Keine der offiziellen Patch-Notes von 1.10.00 bis 2.03.02 enthält einen solchen Inhalt, und Pearl Abyss hat ihn bis 20.10.2026 weder näher beschrieben noch neu terminiert. Angekündigt war kampffokussierter Inhalt schon im Dev-Update vom 09.04.2026. Im Zeitraum kamen nur Erweiterungen bestehender Systeme hinzu, etwa die acht neuen Kliff-Fähigkeiten aus 2.00.00.</p></div></li>
+            <li class="ok"><span class="r2b12-ms-n" aria-hidden="true">✓</span><div><b>Cross-Save</b> <span class="r2b12-st">ausgeliefert</span><p>Über eine Kontoverknüpfung sollen sich Speicherstände zwischen PC, PlayStation und Xbox teilen lassen.</p><p class="r2b12-ms-r">✓ ausgeliefert in Patch 1.14.00 (16.07.2026) für PlayStation, Xbox, Steam und Epic Games Store; Cross-Save für Mac kam mit Patch 2.02.00 (11.09.2026 laut offiziellen Patch-Notes) hinzu. Der Apple-Store-Eintrag der Mac-Fassung (Version 2.0.8) trägt den Cross-Save-Hinweis allerdings erst mit dem Datum 16.09.2026. Ein gemeinsamer Cross-Save-Slot pro Pearl-Abyss-ID.</p></div></li>
+            <li class="ok"><span class="r2b12-ms-n" aria-hidden="true">✓</span><div><b>Damiane &amp; Oongka</b> <span class="r2b12-st">umgesetzt</span><p>Gameplay-Verbesserungen, damit alle drei spielbaren Charaktere gleichermaßen im Rampenlicht stehen.</p><p class="r2b12-ms-r">✓ in mehreren Patches umgesetzt: 1.11.00 (12.06.2026) Mining Drill und Chainsaw für beide; 1.12.00 (19.06.2026) Blackstar reiten, Visiones nutzen und Erinnerungen lesen, eigene Sitzanimation für Damiane; 1.13.00 (03.07.2026) Zugang zum Abyss für beide, Rätsel auch mit Oongkas „Scatter Shot“ lösbar, Oongka trägt die meisten Outfits von Kliff, Damiane Teile von drei Boss-Outfits; 1.14.00 (16.07.2026) Damianes „Skystep“ mit derselben Eingabe wie Oongkas „Vertical Flight“. Seit 2.00.00 (25.08.2026) erhalten die anderen spielbaren Charaktere für jede mit Abyss-Artefakten erlernte Fähigkeit gleich viele Abyss-Verknüpfungen, und Fähigkeiten lassen sich pro Charakter zurücksetzen.</p></div></li>
+            <li class="part"><span class="r2b12-ms-n" aria-hidden="true">◐</span><div><b>Non-Combat QoL</b> <span class="r2b12-st">teilweise</span><p>Weitere Komfortverbesserungen bei Alltagsaktivitäten wie Handel und Landwirtschaft, wo Spieler Abläufe als umständlich empfunden haben.</p><p class="r2b12-ms-r">✓ Handel ausgeliefert in Patch 1.16.00 (01.08.2026): 133 neue Handelsposten, sieben Wagenwerkstätten als Zwischenstationen, ein Handels-Tab auf der Karte, neue Stapelgrenzen und der Verkauf auch einzelner Handelswaren.</p><p class="r2b12-ms-d">Landwirtschaft nur teilweise: Im Zeitraum gab es dafür nur Kleinigkeiten, nämlich Sammelobjekte mit der Large Farming Scythe (1.10.00, 05.06.2026) und zwei Fehlerbehebungen für Feldfrüchte, die nicht wuchsen oder sich nicht ernten ließen (1.15.00, 24.07.2026). Die Anbau-Verbesserung, die Pearl Abyss in seiner Update-Übersicht vom 12.08.2026 als Verbesserung der Landwirtschaftsinhalte führt (Samen über den Schnellzugriff), kam schon mit 1.09.00 am 29.05.2026, also vor der Roadmap.</p></div></li>
+            <li class="ok"><span class="r2b12-ms-n" aria-hidden="true">✓</span><div><b>DLC bestätigt</b> <span class="r2b12-st">aufgelöst</span><p>„Eine bedeutende Erweiterung für eure Reise“ in Entwicklung, Details sollten später folgen. Erstmals erwähnt am 12.05.2026 (Q1-Earnings, als Prüfung verschiedener Optionen inkl. DLC), offiziell bestätigt im Dev-Update vom 02.06.2026.</p><p class="r2b12-ms-r">✓ aufgelöst am 03.09.2026: Der DLC heißt <b>Charting the Unknown</b>.</p><p class="r2b12-ms-d">Angesetzt war er zunächst für den 15.10.2026, 22:00 UTC (16.10.2026, 00:00 MESZ). Am 30.09.2026 hat Pearl Abyss ihn um zwei Wochen verschoben: Neuer Start ist der <b>29.10.2026, 22:00 UTC</b>, in Deutschland 23:00 MEZ. Einzelheiten im DLC-Kasten oben.</p></div></li>
+          </ol>
+          <p class="cd-src"><span class="cd-src-l">Ausblick</span>Eine neue Roadmap oder ein weiteres Dev-Update hat Pearl Abyss bis 20.10.2026 nicht veröffentlicht (geprüft: Ankündigungen auf der offiziellen Seite, Steam-Ankündigungen, offizieller YouTube-Kanal, Investor Relations). Im Earnings Letter zum zweiten Quartal (11.08.2026) kündigt Pearl Abyss allgemein weitere Inhalts-Updates an, nennt für eine Switch-2-Fassung das erste Halbjahr 2027 als Ziel und lässt Zahl und Takt weiterer DLCs offen. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=95" target="_blank" rel="noopener noreferrer">Dev-Update vom 02.06.2026</a>, <a href="https://www.pearlabyss.com/en-US/Board/Detail?_boardNo=15177" target="_blank" rel="noopener noreferrer">Earnings Letter Q2 2026</a>.</p>
+        </div>
+      </details>
+
+      <details class="cd-fold cd-spot r2b12-sf r2b12-stand" style="--cd-acc:var(--slate)">
+        <summary>
+          <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span>
+          <span class="cd-fold-main"><h3 class="cd-fold-t">Stand der Prüfung: 20.10.2026</h3>
+            <span class="cd-fold-lead">Die offizielle Übersicht führt weiterhin Patch 2.03.02 vom 23.09.2026 (04:45 UTC) als neuesten Patch; seit dem 24.09.2026 ist kein neuer Patch erschienen.</span>
+            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neuester Patch</span><b>2.03.02</b></span><span class="cd-chip cd-chip--warn"><span>Mac App Store: 2.03.00 bis 2.03.02 in Vorbereitung</span></span></span>
+          </span>
+          <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+        </summary>
+        <div class="cd-fold-body">
+          <p class="r2b12-prose">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>20.10.2026</b>: Die offizielle Übersicht führt weiterhin <b>Patch 2.03.02</b> vom 23.09.2026 (04:45 UTC) als neuesten Patch; seit dem 24.09.2026 ist kein neuer Patch erschienen. Hier sind <b>47 Versionen</b> geführt. Zuletzt ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen.</p>
+          <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Mac App Store</b>Den Mac App Store haben laut den offiziellen Notes alle drei noch nicht erreicht (Status dort „in Vorbereitung“); im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“). Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss; die offiziellen Notes zu 2.03.00 bis 2.03.02 nennen für den Mac App Store auch am 20.10.2026 noch „Patch wird derzeit vorbereitet“.</div></div>
+          <p class="r2b12-prose">Plattformangaben in den Einträgen geben den Stand zur Veröffentlichung oder zur jeweils genannten Prüfung wieder, denn Pearl Abyss ändert sie nachträglich ohne Hinweis. Alle älteren Versionen folgen unten.</p>
+          <p class="cd-src"><span class="cd-src-l">Quelle</span><a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">Offizielle Patchnotes</a></p>
+        </div>
+      </details>
     </div>
     <div id="patch-list"></div>
   </section>
@@ -7583,63 +7922,103 @@ html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,
 
   <section class="sec" id="sec-roadmap">
     <h2 class="sec-t"><span class="sec-sym">⚑</span> Roadmap</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Persönliche Aufgaben-Empfehlungen auf Basis deines Fortschritts. Die Liste aktualisiert sich bei jeder Aktion; ein Klick auf eine Aufgabe springt zur passenden Seite.</div>
-    <div class="rm-progress" id="rm-progress"></div>
+    <div id="rm-progress"></div>
+    <div id="r2b12-rm-track"></div>
     <div class="rm-task-list" id="rm-list"></div>
-    <div class="rm-faq" style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:16px">
-      <h3 class="sub-t" style="margin:0 0 4px">❓ Häufige Fragen — Endgame, NG+, Koop &amp; Cross-Save</h3>
-      <p style="font-size:var(--fs-11);color:var(--dim);margin:0 0 12px">Verifiziert gegen offizielle Pearl-Abyss-Quellen (Patch-Notes bis 2.03.02, Cross-Save-Anleitung und Cross-Save-Seite, Earnings Letter Q2 2026) sowie game8, Fextralife und Fachpresse. Stand: 01.10.2026 (Patch 2.03.02).</p>
-      <div style="display:grid;gap:12px">
-        <div style="background:linear-gradient(135deg,#15110d,#0c0c0c);border:1px solid rgba(201,162,39,.25);border-radius:10px;padding:12px 14px">
-          <div style="color:var(--gold);font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es ein New Game Plus?</div>
-          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Nicht im klassischen Sinn</strong>, aber seit Patch 2.00.00 (25.08.2026) gibt es einen <strong>Neustart mit Übernahme</strong>: Sobald alle Hauptquests abgeschlossen sind, lassen sich beim Start eines neuen Spiels die im alten Spielstand erlangten <strong>Währungen und Abyss-Verknüpfungen</strong> übernehmen. Seit Patch 2.03.00 (18.09.2026) wird Silber ab 1.000 Stück dabei als stapelbares <strong>Silberbündel</strong> gutgeschrieben. Mehr nennen die Patch-Notes nicht. Laut Fachpresse (allthings.how, 27.08.2026) kommen Fähigkeiten und Ausrüstung nicht mit; die übernommenen Abyss-Verknüpfungen dienen dem erneuten Erlernen von Fähigkeiten. Pearl Abyss nennt die Funktion selbst nicht New Game Plus, Fextralife spricht von einem „semi New Game Plus“. Ohne Neustart läuft nach dem Abspann <strong>derselbe Spielstand</strong> persistent weiter, Pywel bleibt frei begehbar (Hauptquests sind darin nicht wiederholbar). Das Endgame ist die Post-Game-Reihe <strong>„Journey's End“</strong> (Start: Quest „A New Beginning“, ~8 Abschiedsquests ohne Bosse), dazu Sanctum-/Herausforderungsbosse, die 40 Abyss-Restaurationen und hochstufiges Crafting.</div>
-        </div>
-        <div style="background:linear-gradient(135deg,#160a0a,#0c0c0c);border:1px solid rgba(180,45,32,.3);border-radius:10px;padding:12px 14px">
-          <div style="color:#d2554a;font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es Koop oder Mehrspieler?</div>
-          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Nein</strong> — Crimson Desert ist (Stand Patch 2.03.02) ein <strong>reines Singleplayer-Spiel</strong> (kein Online- oder lokaler Koop, kein Matchmaking). Will Powers (PR-Verantwortlicher bei Pearl Abyss) antwortete vor Release im YouTube-Interview bei Luke Stephens auf die Frage nach Multiplayer knapp mit „No“. Ausgeschlossen ist ein Mehrspielermodus damit nicht, angekündigt aber auch nicht: Im offiziellen Earnings Letter zum zweiten Quartal 2026 (11.08.2026) sieht Pearl Abyss erhebliches Potenzial für Mehrspielermodi, nennt den Einbau aber ein großes technisches Vorhaben (Serverarchitektur, Balance, plattformübergreifende Stabilität, Live-Service-Betrieb), das derzeit technisch und spielerisch untersucht wird. Eine Zusage oder einen Zeitplan gibt es <strong>nicht</strong>.</div>
-        </div>
-        <div style="background:linear-gradient(135deg,#0d1510,#0c0c0c);border:1px solid rgba(120,180,140,.3);border-radius:10px;padding:12px 14px">
-          <div style="color:#7bcf9a;font-weight:600;font-size:12.5px;margin-bottom:5px">Können Oongka und Damiane ins Abyss-Endgame?</div>
-          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Ja — seit Patch 1.13.00 (03.07.2026).</strong> Zuvor war der Abyss ausschließlich Kliff vorbehalten; jetzt können auch <strong>Oongka</strong> und <strong>Damiane</strong> den Abyss betreten. Im Zuge dieser Öffnung wurden die <strong>Memory-Fragment-Fundorte</strong> von vier Rematch-Bossen verlegt (Corrupted Caliburn, Goyen, Draven the Crowcaller, Clockwork White Horn). Die Patch-Notes nennen nur diese Bosse, versteckt in einem Spoiler-Aufklappmenü, aber keine neuen Fundorte. Laut KeenGamer (14.07.2026) zeigt das Wissen-Menü im Spiel den aktuellen Fundort. Zusätzlich trägt Oongka seitdem die meisten Outfits von Kliff, Damiane Teile von drei Boss-Outfits (5 Teile Guardian of Odeck, 3 Teile Dark Marksman, 1 Teil Masked Liberator).</div>
-        </div>
-        <div style="background:linear-gradient(135deg,#0a141c,#0c0c0c);border:1px solid rgba(90,165,215,.3);border-radius:10px;padding:12px 14px">
-          <div style="color:#5fb3e0;font-weight:600;font-size:12.5px;margin-bottom:5px">Gibt es Cross-Save / Cross-Progression?</div>
-          <div style="font-size:12px;color:#c9c2b6;line-height:1.65"><strong>Ja — seit Patch 1.14.00 (16.07.2026), im Mac App Store seit Patch 2.02.00 (11.09.2026 laut offiziellen Patch-Notes; der Apple-Store-Eintrag datiert die Version mit Cross-Save-Hinweis auf den 16.09.2026).</strong> Speicherstände lassen sich über die Pearl-Abyss-ID plattformübergreifend verknüpfen (Menü „Spiel speichern“ → „Cross-Save-Einstellungen“). Unterstützt werden <strong>PS5, Xbox Series X|S, Steam, Epic Games Store und Mac App Store</strong> mit einem gemeinsamen Cross-Save-Slot pro ID. Der Upload in den Slot erfolgt manuell vor jedem Plattformwechsel (kein Auto-Sync, es gilt der zuletzt hochgeladene Stand); Cross-Buy gibt es nicht, und bezahlte Deluxe-/Vorbesteller-Kosmetik bleibt plattformgebunden. Einen Spielstand aus einer neueren Spielversion kann eine noch nicht aktualisierte Plattform nicht laden.</div>
-        </div>
-        <div style="background:linear-gradient(135deg,#0a141c,#0c0c0c);border:1px solid rgba(90,165,215,.35);border-radius:10px;padding:14px 16px">
-          <div style="color:#5fb3e0;font-weight:600;font-size:12.5px;margin-bottom:8px">Cross-Save Schritt für Schritt: von Plattform A auf Plattform B</div>
-          <div style="font-size:12px;color:#c9c2b6;line-height:1.65">
-            <div style="color:#9fd0ec;font-weight:600;margin:2px 0 3px">Voraussetzungen</div>
-            <ul style="margin:0 0 10px;padding-left:18px">
-              <li>Das Spiel auf <strong>beiden</strong> Plattformen separat besitzen (kein Cross-Buy).</li>
-              <li>Eine <strong>Pearl-Abyss-ID</strong>, die du auf allen Plattformen verwendest. Wer noch keine hat, legt sie beim ersten Verknüpfen auf der Cross-Save-Seite an.</li>
-              <li>Unterstützt: <strong>PS5, Xbox Series X|S, Steam (PC/Mac), Epic Games Store und Mac App Store</strong> (Mac App Store seit Patch 2.02.00). Verknüpfbar ist je ein Konto pro Plattform (PlayStation Network, Xbox, Steam, Epic Games, Apple), also höchstens fünf.</li>
-              <li>Eine <strong>Internetverbindung</strong>: Offline lassen sich weder Konten verknüpfen noch Spielstände hoch- oder herunterladen.</li>
-            </ul>
-            <div style="color:#9fd0ec;font-weight:600;margin:2px 0 3px">A) Einmalige Einrichtung (auf jeder Plattform, die du verknüpfen willst)</div>
-            <ol style="margin:0 0 10px;padding-left:18px">
-              <li>Im Menü <strong>„Spiel speichern“</strong> (Save Game) unten rechts <strong>„Cross-Save-Einstellungen“</strong> (Cross-Save Settings) wählen.</li>
-              <li>Über den angezeigten <strong>Link oder QR-Code</strong> die Cross-Save-Webseite aufrufen.</li>
-              <li>Dort mit dem Plattform-Konto anmelden und es mit deiner <strong>Pearl-Abyss-ID</strong> verknüpfen (überall dieselbe ID).</li>
-              <li>Zurück im Spiel <strong>„Aktualisieren“</strong> (Refresh) wählen. Der gemeinsame Cross-Save-Slot erscheint danach unten rechts im Menü „Spiel speichern“.</li>
-            </ol>
-            <div style="color:#9fd0ec;font-weight:600;margin:2px 0 3px">B) Fortschritt übertragen (Plattform A auf B, bei jedem Wechsel)</div>
-            <ol style="margin:0 0 10px;padding-left:18px">
-              <li>Auf <strong>Plattform A</strong> (Quelle): aktuellen Spielstand manuell in den Cross-Save-Slot <strong>hochladen</strong>. Es gibt keinen Auto-Sync.</li>
-              <li>Auf <strong>Plattform B</strong> (Ziel): den Cross-Save-Slot <strong>laden</strong>. Fehlt der neue Stand, rät Pearl Abyss, Verknüpfung und Internetverbindung zu prüfen und das Spiel auf Plattform B neu zu starten.</li>
-              <li>Weiterspielen. Vor dem nächsten Wechsel zuerst wieder auf der gerade aktiven Plattform hochladen.</li>
-            </ol>
-            <div style="color:#e0a35a;font-weight:600;margin:2px 0 3px">Wichtig</div>
-            <ul style="margin:0;padding-left:18px">
-              <li>Es gilt immer der <strong>zuletzt hochgeladene</strong> Stand. Beendest du das Spiel, ohne in den Slot zu speichern, landet der neueste Fortschritt nicht im Slot, und auf der anderen Plattform geht es mit dem älteren Stand weiter.</li>
-              <li>Gekaufte <strong>Deluxe-/Vorbesteller-Kosmetik</strong> bleibt plattformgebunden und erscheint auf Plattformen ohne eigenen Kauf deaktiviert.</li>
-              <li><strong>Spielversion:</strong> Ältere Spielstände lassen sich nach einem Update weiter laden, einen Stand aus einer neueren Version kann eine noch nicht aktualisierte Plattform aber nicht laden. Pearl Abyss empfiehlt deshalb überall dieselbe aktuelle Version. Im Mac App Store stehen die Patches 2.03.00 bis 2.03.02 laut den offiziellen Notes noch aus (Stand 20.10.2026; Apple führt dort seit dem 08.10.2026 die Version 2.0.12, ordnet sie aber keinem Patch zu); ob sich dadurch Spielstände nicht austauschen lassen, ist nicht belegt.</li>
-              <li>Löst du die <strong>letzte</strong> verbliebene Plattform-Verknüpfung oder löschst du die Pearl-Abyss-ID, wird der Cross-Save-Slot dauerhaft gelöscht. Vorher den Stand in einen lokalen Slot speichern.</li>
-              <li>In Regionen, in denen sich keine Pearl-Abyss-ID anlegen lässt, ist Cross-Save nicht nutzbar.</li>
-            </ul>
-            <div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=107" target="_blank" rel="noopener noreferrer">offizielle Cross-Save-Anleitung</a> und <a href="https://account.pearlabyss.com/Member/Linking/CrimsonDesert" target="_blank" rel="noopener noreferrer">Cross-Save-Seite mit FAQ</a>.</div>
+    <div class="rm-faq r2b12-faq">
+      <div class="r2b12-hd"><h3 class="sub-t">Häufige Fragen: Endgame, NG+, Koop &amp; Cross-Save</h3><p class="r2b12-hd-sub">Verifiziert gegen offizielle Pearl-Abyss-Quellen (Patch-Notes bis 2.03.02, Cross-Save-Anleitung und Cross-Save-Seite, Earnings Letter Q2 2026) sowie game8, Fextralife und Fachpresse. Stand: 01.10.2026 (Patch 2.03.02).</p></div>
+      <div class="cd-folds r2b12-faq-list">
+        <details class="cd-fold cd-spot r2b12-sf" style="--cd-acc:var(--gold)">
+          <summary>
+            <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">↻</i></span>
+            <span class="cd-fold-main"><h4 class="cd-fold-t">Gibt es ein New Game Plus?</h4>
+              <span class="cd-fold-lead">Nicht im klassischen Sinn, aber seit Patch 2.00.00 (25.08.2026) gibt es einen Neustart mit Übernahme.</span>
+              <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neustart mit Übernahme</span></span><span class="cd-chip"><span>seit</span><b>2.00.00</b></span></span>
+            </span>
+            <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+          </summary>
+          <div class="cd-fold-body"><p><strong>Nicht im klassischen Sinn</strong>, aber seit Patch 2.00.00 (25.08.2026) gibt es einen <strong>Neustart mit Übernahme</strong>: Sobald alle Hauptquests abgeschlossen sind, lassen sich beim Start eines neuen Spiels die im alten Spielstand erlangten <strong>Währungen und Abyss-Verknüpfungen</strong> übernehmen. Seit Patch 2.03.00 (18.09.2026) wird Silber ab 1.000 Stück dabei als stapelbares <strong>Silberbündel</strong> gutgeschrieben. Mehr nennen die Patch-Notes nicht. Laut Fachpresse (allthings.how, 27.08.2026) kommen Fähigkeiten und Ausrüstung nicht mit; die übernommenen Abyss-Verknüpfungen dienen dem erneuten Erlernen von Fähigkeiten. Pearl Abyss nennt die Funktion selbst nicht New Game Plus, Fextralife spricht von einem „semi New Game Plus“.</p><p>Ohne Neustart läuft nach dem Abspann <strong>derselbe Spielstand</strong> persistent weiter, Pywel bleibt frei begehbar (Hauptquests sind darin nicht wiederholbar). Das Endgame ist die Post-Game-Reihe <strong>„Journey's End“</strong> (Start: Quest „A New Beginning“, ~8 Abschiedsquests ohne Bosse), dazu Sanctum-/Herausforderungsbosse, die 40 Abyss-Restaurationen und hochstufiges Crafting.</p></div>
+        </details>
+        <details class="cd-fold cd-spot r2b12-sf" style="--cd-acc:var(--red)">
+          <summary>
+            <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⚇</i></span>
+            <span class="cd-fold-main"><h4 class="cd-fold-t">Gibt es Koop oder Mehrspieler?</h4>
+              <span class="cd-fold-lead">Nein: Crimson Desert ist (Stand Patch 2.03.02) ein reines Singleplayer-Spiel.</span>
+              <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--red"><b>Nein</b><span>reines Singleplayer-Spiel</span></span><span class="cd-chip"><span>keine Zusage, kein Zeitplan</span></span></span>
+            </span>
+            <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+          </summary>
+          <div class="cd-fold-body"><p><strong>Nein</strong>: Crimson Desert ist (Stand Patch 2.03.02) ein <strong>reines Singleplayer-Spiel</strong> (kein Online- oder lokaler Koop, kein Matchmaking). Will Powers (PR-Verantwortlicher bei Pearl Abyss) antwortete vor Release im YouTube-Interview bei Luke Stephens auf die Frage nach Multiplayer knapp mit „No“.</p><p>Ausgeschlossen ist ein Mehrspielermodus damit nicht, angekündigt aber auch nicht: Im offiziellen Earnings Letter zum zweiten Quartal 2026 (11.08.2026) sieht Pearl Abyss erhebliches Potenzial für Mehrspielermodi, nennt den Einbau aber ein großes technisches Vorhaben (Serverarchitektur, Balance, plattformübergreifende Stabilität, Live-Service-Betrieb), das derzeit technisch und spielerisch untersucht wird. Eine Zusage oder einen Zeitplan gibt es <strong>nicht</strong>.</p></div>
+        </details>
+        <details class="cd-fold cd-spot r2b12-sf" style="--cd-acc:var(--cd-ok)">
+          <summary>
+            <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">◈</i></span>
+            <span class="cd-fold-main"><h4 class="cd-fold-t">Können Oongka und Damiane ins Abyss-Endgame?</h4>
+              <span class="cd-fold-lead">Ja, seit Patch 1.13.00 (03.07.2026). Zuvor war der Abyss ausschließlich Kliff vorbehalten.</span>
+              <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--ok"><b>Ja</b><span>seit 1.13.00</span></span><span class="cd-chip"><span>4 Fragment-Fundorte verlegt</span></span></span>
+            </span>
+            <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+          </summary>
+          <div class="cd-fold-body"><p><strong>Ja, seit Patch 1.13.00 (03.07.2026).</strong> Zuvor war der Abyss ausschließlich Kliff vorbehalten; jetzt können auch <strong>Oongka</strong> und <strong>Damiane</strong> den Abyss betreten.</p><p>Im Zuge dieser Öffnung wurden die <strong>Memory-Fragment-Fundorte</strong> von vier Rematch-Bossen verlegt (Corrupted Caliburn, Goyen, Draven the Crowcaller, Clockwork White Horn). Die Patch-Notes nennen nur diese Bosse, versteckt in einem Spoiler-Aufklappmenü, aber keine neuen Fundorte. Laut KeenGamer (14.07.2026) zeigt das Wissen-Menü im Spiel den aktuellen Fundort. Zusätzlich trägt Oongka seitdem die meisten Outfits von Kliff, Damiane Teile von drei Boss-Outfits (5 Teile Guardian of Odeck, 3 Teile Dark Marksman, 1 Teil Masked Liberator).</p></div>
+        </details>
+        <details class="cd-fold cd-spot r2b12-sf" style="--cd-acc:var(--cd-fx-ice)">
+          <summary>
+            <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⇄</i></span>
+            <span class="cd-fold-main"><h4 class="cd-fold-t">Gibt es Cross-Save / Cross-Progression?</h4>
+              <span class="cd-fold-lead">Ja, seit Patch 1.14.00 (16.07.2026), im Mac App Store seit Patch 2.02.00. Ein gemeinsamer Cross-Save-Slot pro Pearl-Abyss-ID.</span>
+              <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--ok"><b>Ja</b><span>seit 1.14.00</span></span><span class="cd-chip cd-chip--warn"><span>kein Auto-Sync</span></span><span class="cd-chip"><span>kein Cross-Buy</span></span></span>
+            </span>
+            <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+          </summary>
+          <div class="cd-fold-body"><p><strong>Ja, seit Patch 1.14.00 (16.07.2026), im Mac App Store seit Patch 2.02.00 (11.09.2026 laut offiziellen Patch-Notes; der Apple-Store-Eintrag datiert die Version mit Cross-Save-Hinweis auf den 16.09.2026).</strong> Speicherstände lassen sich über die Pearl-Abyss-ID plattformübergreifend verknüpfen (Menü „Spiel speichern“ → „Cross-Save-Einstellungen“).</p><p>Unterstützt werden <strong>PS5, Xbox Series X|S, Steam, Epic Games Store und Mac App Store</strong> mit einem gemeinsamen Cross-Save-Slot pro ID. Der Upload in den Slot erfolgt manuell vor jedem Plattformwechsel (kein Auto-Sync, es gilt der zuletzt hochgeladene Stand); Cross-Buy gibt es nicht, und bezahlte Deluxe-/Vorbesteller-Kosmetik bleibt plattformgebunden. Einen Spielstand aus einer neueren Spielversion kann eine noch nicht aktualisierte Plattform nicht laden.</p></div>
+        </details>
+        <details class="cd-fold cd-spot r2b12-sf r2b12-xs" style="--cd-acc:var(--cd-fx-ice)">
+          <summary>
+            <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⇆</i></span>
+            <span class="cd-fold-main"><h4 class="cd-fold-t">Cross-Save Schritt für Schritt: von Plattform A auf Plattform B</h4>
+              <span class="cd-fold-lead">Einmal je Plattform verknüpfen, dann bei jedem Wechsel hochladen und auf der anderen Plattform laden.</span>
+              <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--ice"><b>4</b><span>Schritte Einrichtung</span></span><span class="cd-chip cd-chip--ice"><b>3</b><span>Schritte je Wechsel</span></span></span>
+            </span>
+            <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+          </summary>
+          <div class="cd-fold-body">
+            <div class="r2b12-xs-pre"><b class="r2b12-xs-h">Voraussetzungen</b>
+              <ul class="r2b12-ticks">
+                <li>Das Spiel auf <strong>beiden</strong> Plattformen separat besitzen (kein Cross-Buy).</li>
+                <li>Eine <strong>Pearl-Abyss-ID</strong>, die du auf allen Plattformen verwendest. Wer noch keine hat, legt sie beim ersten Verknüpfen auf der Cross-Save-Seite an.</li>
+                <li>Unterstützt: <strong>PS5, Xbox Series X|S, Steam (PC/Mac), Epic Games Store und Mac App Store</strong> (Mac App Store seit Patch 2.02.00). Verknüpfbar ist je ein Konto pro Plattform (PlayStation Network, Xbox, Steam, Epic Games, Apple), also höchstens fünf.</li>
+                <li>Eine <strong>Internetverbindung</strong>: Offline lassen sich weder Konten verknüpfen noch Spielstände hoch- oder herunterladen.</li>
+              </ul>
+            </div>
+            <div class="r2b12-xs-cols">
+              <div><b class="r2b12-xs-h"><span class="r2b12-xs-k">A</span>Einmalige Einrichtung (auf jeder Plattform, die du verknüpfen willst)</b>
+                <ol class="cd-stepper">
+                  <li><span class="cd-step-d">Im Menü <strong>„Spiel speichern“</strong> (Save Game) unten rechts <strong>„Cross-Save-Einstellungen“</strong> (Cross-Save Settings) wählen.</span></li>
+                  <li><span class="cd-step-d">Über den angezeigten <strong>Link oder QR-Code</strong> die Cross-Save-Webseite aufrufen.</span></li>
+                  <li><span class="cd-step-d">Dort mit dem Plattform-Konto anmelden und es mit deiner <strong>Pearl-Abyss-ID</strong> verknüpfen (überall dieselbe ID).</span></li>
+                  <li><span class="cd-step-d">Zurück im Spiel <strong>„Aktualisieren“</strong> (Refresh) wählen. Der gemeinsame Cross-Save-Slot erscheint danach unten rechts im Menü „Spiel speichern“.</span></li>
+                </ol>
+              </div>
+              <div><b class="r2b12-xs-h"><span class="r2b12-xs-k">B</span>Fortschritt übertragen (Plattform A auf B, bei jedem Wechsel)</b>
+                <ol class="cd-stepper">
+                  <li><span class="cd-step-d">Auf <strong>Plattform A</strong> (Quelle): aktuellen Spielstand manuell in den Cross-Save-Slot <strong>hochladen</strong>. Es gibt keinen Auto-Sync.</span></li>
+                  <li><span class="cd-step-d">Auf <strong>Plattform B</strong> (Ziel): den Cross-Save-Slot <strong>laden</strong>. Fehlt der neue Stand, rät Pearl Abyss, Verknüpfung und Internetverbindung zu prüfen und das Spiel auf Plattform B neu zu starten.</span></li>
+                  <li><span class="cd-step-d">Weiterspielen. Vor dem nächsten Wechsel zuerst wieder auf der gerade aktiven Plattform hochladen.</span></li>
+                </ol>
+              </div>
+            </div>
+            <div class="cd-note cd-note--warn" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Wichtig</b>
+              <ul class="r2b12-ticks r2b12-ticks--warn">
+                <li>Es gilt immer der <strong>zuletzt hochgeladene</strong> Stand. Beendest du das Spiel, ohne in den Slot zu speichern, landet der neueste Fortschritt nicht im Slot, und auf der anderen Plattform geht es mit dem älteren Stand weiter.</li>
+                <li>Gekaufte <strong>Deluxe-/Vorbesteller-Kosmetik</strong> bleibt plattformgebunden und erscheint auf Plattformen ohne eigenen Kauf deaktiviert.</li>
+                <li><strong>Spielversion:</strong> Ältere Spielstände lassen sich nach einem Update weiter laden, einen Stand aus einer neueren Version kann eine noch nicht aktualisierte Plattform aber nicht laden. Pearl Abyss empfiehlt deshalb überall dieselbe aktuelle Version. Im Mac App Store stehen die Patches 2.03.00 bis 2.03.02 laut den offiziellen Notes noch aus (Stand 20.10.2026; Apple führt dort seit dem 08.10.2026 die Version 2.0.12, ordnet sie aber keinem Patch zu); ob sich dadurch Spielstände nicht austauschen lassen, ist nicht belegt.</li>
+                <li>Löst du die <strong>letzte</strong> verbliebene Plattform-Verknüpfung oder löschst du die Pearl-Abyss-ID, wird der Cross-Save-Slot dauerhaft gelöscht. Vorher den Stand in einen lokalen Slot speichern.</li>
+                <li>In Regionen, in denen sich keine Pearl-Abyss-ID anlegen lässt, ist Cross-Save nicht nutzbar.</li>
+              </ul>
+            </div></div>
+            <p class="cd-src"><span class="cd-src-l">Quellen</span><a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=107" target="_blank" rel="noopener noreferrer">offizielle Cross-Save-Anleitung</a> und <a href="https://account.pearlabyss.com/Member/Linking/CrimsonDesert" target="_blank" rel="noopener noreferrer">Cross-Save-Seite mit FAQ</a>.</p>
           </div>
-        </div>
+        </details>
       </div>
     </div>
   </section>
@@ -8896,24 +9275,26 @@ function renderRoadmap(){
   const chDoneN=chNums.filter(n=>chDone.includes(n)).length;
   const gmTotal=GREYMANE_COMMISSIONS.length;
 
-  // Progress-Header
+  // Progress-Header (R2 B12: Seitenkopf mit Szene, Kennzahlen aus demselben Fortschritt)
   const progressEl=document.getElementById('rm-progress');
   if(progressEl){
     const sancCount=typeof SANCTUM_IDS!=='undefined'?SANCTUM_IDS.filter(s=>teDone.includes(s)).length:0;
     const sancTotal=typeof SANCTUM_IDS!=='undefined'?SANCTUM_IDS.length:16;
-    progressEl.innerHTML=`
-      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${bossDone.length}/${BOSSES.length}</span><span class="rm-prog-pill-lbl">Bosse</span></div>
-      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${chDoneN}/${chTotal}</span><span class="rm-prog-pill-lbl">Kapitel</span></div>
-      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${gmDone.length}/${gmTotal}</span><span class="rm-prog-pill-lbl">Greymane</span></div>
-      <div class="rm-prog-pill"><span class="rm-prog-pill-val">${sancCount}/${sancTotal}</span><span class="rm-prog-pill-lbl">Sanctums</span></div>
-    `;
+    const bossN=BOSSES.filter(b=>bossDone.includes(b.name)).length;
+    progressEl.innerHTML=cdHero({kicker:'Persönlich · aus deinem Fortschritt',title:'Dein Weg durch Pywel',
+      sub:'Persönliche Aufgaben-Empfehlungen auf Basis deines Fortschritts. Die Liste aktualisiert sich bei jeder Aktion; ein Klick auf eine Aufgabe springt zur passenden Seite.',
+      scene:{keys:['roadmap'],pos:'50% 40%'},glyph:'⚑',tone:'gold',h:3,cls:'r2b12-rm-hero',
+      stats:[[`${bossN}/${BOSSES.length}`,'Bosse besiegt'],[`${chDoneN}/${chTotal}`,'Kapitel'],[`${gmDone.length}/${gmTotal}`,'Greymane'],[`${sancCount}/${sancTotal}`,'Sanctums']]});
+    const pc=(a,b)=>b?Math.round(a/b*100):0;
+    progressEl.querySelectorAll('.cd-hero-stat').forEach((st,i)=>{const v=[pc(bossN,BOSSES.length),pc(chDoneN,chTotal),pc(gmDone.length,gmTotal),pc(sancCount,sancTotal)][i];st.style.setProperty('--p',v+'%');st.insertAdjacentHTML('afterbegin','<span class="r2b12-statbar" aria-hidden="true"><i></i></span>');});
   }
 
   // Tasks generieren
   const tasks=[];
 
   // 1. Naechster unbesiegter Story-Boss + Strategie-Preview
-  const nextStoryBoss=BOSSES.find(b=>b.chapter&&!bossDone.includes(b.name));
+  // R2 B12: frühestes Kapitel zuerst (vorher erste Fundstelle in BOSSES, z. B. Kapitel 5 vor Kapitel 4); gleiche Kapitel behalten ihre Reihenfolge
+  const nextStoryBoss=BOSSES.filter(b=>b.chapter&&!bossDone.includes(b.name)).sort((a,b)=>(+a.chapter||99)-(+b.chapter||99))[0];
   if(nextStoryBoss){
     const stratShort=nextStoryBoss.strategy?nextStoryBoss.strategy.slice(0,180)+(nextStoryBoss.strategy.length>180?'…':''):'';
     tasks.push({
@@ -8921,7 +9302,7 @@ function renderRoadmap(){
       title:`Story-Boss: ${nextStoryBoss.name}`,
       desc:`Kapitel ${nextStoryBoss.chapter} · ${nextStoryBoss.region}. ${nextStoryBoss.parry_or_dodge}.`,
       preview:stratShort,
-      meta:[nextStoryBoss.quest,nextStoryBoss.weakness!=='–'?'Schwäche: '+nextStoryBoss.weakness:''].filter(Boolean),
+      meta:[nextStoryBoss.quest?{l:'Quest',v:nextStoryBoss.quest}:'',nextStoryBoss.weakness&&nextStoryBoss.weakness!=='–'?{l:'Schwäche',v:nextStoryBoss.weakness}:''].filter(Boolean),
       action:`showSec('bosses');document.getElementById('si').value='${nextStoryBoss.name.replace(/'/g,"\\'")}';doSearch('${nextStoryBoss.name.replace(/'/g,"\\'")}')`
     });
   }
@@ -8990,29 +9371,97 @@ function renderRoadmap(){
     });
   }
 
+  // R2 B12: Kapitel-Zeitachse mit „Du bist hier“; Suchtext der statischen FAQ-Faltkarten (Volltext inkl. aufgeklapptem Teil)
+  _r2b12Track({chNums,chDone,lastCh,chTotal,bossDone});
+  document.querySelectorAll('#sec-roadmap .r2b12-sf').forEach(d=>{if(!d.dataset.s)d.dataset.s=d.textContent.replace(/\s+/g,' ').trim().toLowerCase();});
+
   // Empty-State: Alles done
   // Greymane und Sanctums sind laut True-Ending-Checkliste optional; Pflicht = TE_REQUIRED_IDS
   const teReqDone=[...TE_REQUIRED_IDS].every(id=>teDone.includes(id));
   if(BOSSES.every(b=>bossDone.includes(b.name))&&chDoneN>=chTotal&&teReqDone){
-    cont.innerHTML=`<div class="rm-empty-celebrate">
-      <div class="rm-empty-celebrate-icon">🏆</div>
-      <div style="font-family:var(--f-display);font-weight:700;font-size:16px;color:var(--survey-red);margin-bottom:4px;letter-spacing:.02em">ALLE PFLICHTPUNKTE ABGEHAKT</div>
-      <div style="font-size:12px;color:#beb5a8;line-height:1.55">Alle Bosse als besiegt markiert, alle ${chTotal} Kapitel abgeschlossen und alle Pflichtpunkte der True-Ending-Checkliste abgehakt.<br>Greymane Commissions und Sanctums bleiben optional.</div>
+    cont.innerHTML=`<div class="rm-empty-celebrate cd-spot r2b12-done">
+      <div class="rm-empty-celebrate-icon" aria-hidden="true">🏆</div>
+      <div class="r2b12-done-t">Alle Pflichtpunkte abgehakt</div>
+      <div class="r2b12-done-d">Alle Bosse als besiegt markiert, alle ${chTotal} Kapitel abgeschlossen und alle Pflichtpunkte der True-Ending-Checkliste abgehakt.<br>Greymane Commissions und Sanctums bleiben optional.</div>
     </div>`;
     return;
   }
 
-  cont.innerHTML=tasks.map(t=>`
-    <div class="rm-task" onclick="${t.action}" data-s="${[t.title,t.desc,t.preview||''].join(' ').toLowerCase()}">
-      <div class="rm-task-prio ${t.prio}">${t.prio==='hi'?'!!!':t.prio==='md'?'!!':'!'}</div>
+  // R2 B12: Aufgaben als Stationen eines Weges (Priorität = Farbe, Icon = Art der Aufgabe)
+  const _prio={hi:['Priorität hoch','red'],md:['Priorität mittel','warn'],lo:['Priorität niedrig','gold']};
+  const _ico=t=>/Watch & Learn/.test(t)?'spirit':/Boss/.test(t)?'atk':/Greymane/.test(t)?'def':/Sanctum/.test(t)?'res':/Build/.test(t)?'speed':/Oongka/.test(t)?'key':'neutral';
+  cont.innerHTML=`<div class="r2b12-path-hd"><h3 class="r2b12-path-t">Nächste Schritte</h3><span class="r2b12-path-n">${tasks.length} ${tasks.length===1?'Empfehlung':'Empfehlungen'}</span></div>`
+  +`<div class="r2b12-path">${tasks.map((t,i)=>`
+    <div class="rm-task r2b12-task r2b12-p-${t.prio}" role="button" tabindex="0" onclick="${t.action}" data-s="${cdEsc([t.title,t.desc,t.preview||'',...(t.meta||[]).filter(Boolean).map(m=>typeof m==='object'?m.l+' '+m.v:_r2b12Strip(m))].join(' ').toLowerCase())}">
+      <span class="r2b12-task-node" aria-hidden="true">${cdIcon(_ico(t.title))}<i>${i+1}</i></span>
       <div class="rm-task-body">
-        <div class="rm-task-title">${t.title}</div>
-        <div class="rm-task-desc">${t.desc}</div>
-        ${t.preview?`<div style="margin-top:6px;padding:7px 10px;background:rgba(180,45,32,.07);border-left:2px solid rgba(192,57,43,.45);border-radius:0 5px 5px 0;font-size:var(--fs-11);line-height:1.5;color:#beb5a8">${linkifyXrefs(t.preview)}</div>`:''}
-        ${t.meta&&t.meta.length?`<div class="rm-task-meta" style="margin-top:6px">${t.meta.map(m=>`<span>${m}</span>`).join('')}</div>`:''}
+        <span class="r2b12-prio">${_prio[t.prio][0]}</span>
+        <div class="rm-task-title">${_r2b12Dash(t.title)}</div>
+        <div class="rm-task-desc">${_r2b12Dash(t.desc)}</div>
+        ${t.preview?`<div class="r2b12-task-pre"><span class="r2b12-clamp">${_r2b12Dash(linkifyXrefs(t.preview))}</span></div>`:''}
+        ${t.meta&&t.meta.length?(()=>{const raw=t.meta.filter(Boolean),kv=raw.filter(m=>typeof m==='object'),ms=raw.filter(m=>typeof m!=='object').map(m=>_r2b12Dash(m)),sh=ms.filter(m=>_r2b12Strip(m).length<=40),lg=ms.filter(m=>_r2b12Strip(m).length>40);
+          /* Feinschliff: beschriftete Zusatzinfos (Quest, Schwäche) als kompakte Zeilen mit 2-Zeilen-Grenze statt Textblock; voller Text im title und auf der Bossseite */
+          return (kv.length?`<dl class="r2b12-task-kv">${kv.map(m=>{const v=_r2b12Dash(_r2b12Strip(m.v),true);return `<div><dt>${cdEsc(m.l)}</dt><dd title="${cdEsc(v)}">${cdEsc(v)}</dd></div>`;}).join('')}</dl>`:'')
+            +(sh.length?cdChips(sh.map(m=>({h:`<span class="cd-chip">${m}</span>`})),'r2b12-task-meta'):'')+lg.map(m=>`<p class="r2b12-task-note">${m}</p>`).join('');})():''}
       </div>
-    </div>
-  `).join('');
+      <span class="r2b12-task-go" aria-hidden="true">${cdIcon('go')}</span>
+    </div>`).join('')}</div>`;
+  if(!cont.dataset.r2b12){
+    cont.dataset.r2b12='1';
+    cont.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const t=e.target.closest('.rm-task');if(t&&e.target===t){e.preventDefault();t.click();}});
+  }
+}
+/* R2 B12: Kurzüberblick des aktuellen Kapitels (wortgetreu aus CHAPTERS boss/items/tip, je 2 Zeilen; voller Text auf der Kapitelseite) */
+function _r2b12NowFacts(c,hasBossChips){
+  const f=[['Boss',hasBossChips?'':c.boss],['Belohnungen',c.items],['Tipp',c.tip]].filter(r=>r[1]&&String(r[1]).trim()).map(r=>[r[0],_r2b12Dash(_r2b12Strip(r[1]),true)]);
+  return cdFacts(f,{cls:'r2b12-now-facts'});
+}
+/* R2 B12: Kapitel-Zeitachse der Roadmap. Kapitel aus CHAPTERS, erledigt aus cd_ch_done, Bosse je Kapitel aus BOSSES.chapter,
+   Spoilerschutz (cd_spoiler_chapter) verbirgt Titel, Bosse und Hinweise späterer Kapitel. */
+function _r2b12Track(o){
+  const box=document.getElementById('r2b12-rm-track');if(!box)return;
+  const sp=typeof loadSpoilerChapter==='function'?loadSpoilerChapter():0;
+  const cur=o.lastCh+1,short=t=>String(t||'').replace(/\s*\(.*$/,'');
+  const nodes=o.chNums.map(n=>{
+    const c=CHAPTERS.find(x=>x.num===n)||{},bs=BOSSES.filter(b=>String(b.chapter)===String(n)),bd=bs.filter(b=>o.bossDone.includes(b.name)).length;
+    return {n,c,bs,bd,done:o.chDone.includes(n),cur:n===cur,lock:sp>0&&n>sp};
+  });
+  const rail=`<ol class="r2b12-rail" data-lenis-prevent>${nodes.map(x=>`<li class="r2b12-node${x.done?' is-done':''}${x.cur?' is-cur':''}${x.lock?' is-lock':''}">
+      <a href="${cdGoHref('chapters','ch-'+x.n)}" data-go="chapters" data-goq="ch-${x.n}" aria-label="${cdEsc('Kapitel '+x.n+(x.lock?'':': '+short(x.c.title))+(x.done?', abgeschlossen':x.cur?', aktuelles Kapitel':''))}"${x.cur?' aria-current="step"':''}>
+        <span class="r2b12-node-dot">${x.done?cdIcon('check'):x.n}</span>
+        <span class="r2b12-node-t">${x.lock?'Spoiler':cdEsc(short(x.c.title))}</span>
+        ${x.bs.length&&!x.lock?`<span class="r2b12-node-b">${x.bd}/${x.bs.length} ${x.bs.length===1?'Boss':'Bosse'}</span>`:''}
+      </a></li>`).join('')}</ol>`;
+  let now='';
+  const cn=nodes.find(x=>x.cur);
+  if(cn){
+    const t=cn.lock?'Kapitel '+cn.n:short(cn.c.title);
+    const chips=cn.lock?'':cn.bs.map(b=>{const d=o.bossDone.includes(b.name);
+      return `<a class="cd-chip cd-chip--${d?'ok':'red'} r2b12-boss" href="${cdGoHref('bosses',b.name)}" data-go="bosses" data-goq="${cdEsc(b.name)}">${cdIcon(d?'check':'atk')}<span>${cdEsc(b.name)}</span></a>`;}).join('');
+    now=`<article class="r2b12-now cd-spot cd-scened">${cn.lock?cdScene([],{tone:'red',glyph:'⚔'}):cdScene(['ch-'+cn.n,'roadmap'],{tone:'red',glyph:'⚔',w:64})}
+      <div class="r2b12-now-main">
+        <p class="r2b12-now-k"><span class="r2b12-pulse" aria-hidden="true"></span>Du bist hier · Kapitel ${cn.n} von ${o.chTotal}</p>
+        <h3 class="r2b12-now-t">${cdEsc(t)}</h3>
+        ${chips?`<div class="cd-chips r2b12-now-chips">${chips}</div>`:''}
+        ${cn.lock?cdNote('Spoilerschutz ist aktiv: Titel, Bosse und Hinweise dieses Kapitels bleiben verborgen.',{kind:'info'}):cn.c.missable?cdNote(_r2b12Dash(_r2b12Strip(cn.c.missable),true),{kind:'miss'}):''}
+        ${cn.lock?'':_r2b12NowFacts(cn.c,cn.bs.length>0)}
+        <div class="r2b12-now-act">${cdGoLink('chapters','ch-'+cn.n,'Kapitel ansehen','r2b12-btn r2b12-btn--ghost')}<button type="button" class="r2b12-btn" data-r2b12-ch="${cn.n}">${cdIcon('check')}<span>Kapitel ${cn.n} abschließen</span></button></div>
+      </div></article>`;
+  }else if(o.chTotal&&o.chNums.every(n=>o.chDone.includes(n))){
+    now=`<article class="r2b12-now r2b12-now--fin cd-spot cd-scened">${cdScene(['roadmap'],{tone:'gold',glyph:'✓'})}<div class="r2b12-now-main"><p class="r2b12-now-k">Hauptgeschichte</p><h3 class="r2b12-now-t">Alle ${o.chTotal} Kapitel abgeschlossen</h3></div></article>`;
+  }
+  const dn=o.chNums.filter(n=>o.chDone.includes(n)).length;
+  box.innerHTML=`<section class="r2b12-trk cd-spot" aria-label="Kapitel-Zeitachse"><div class="r2b12-trk-hd"><h3 class="r2b12-trk-t">Kapitel-Zeitachse</h3><span class="r2b12-trk-n"><b>${dn}</b> von ${o.chTotal} abgeschlossen</span>
+    <span class="r2b12-trk-leg"><i class="is-done"></i>erledigt<i class="is-cur"></i>aktuell<i></i>offen</span></div>${rail}</section>${now}`;
+  if(!box.dataset.r2b12){
+    box.dataset.r2b12='1';
+    box.addEventListener('click',e=>{const b=e.target.closest('[data-r2b12-ch]');if(!b)return;
+      const n=+b.dataset.r2b12Ch;if(typeof toggleChDone==='function'&&!lsJson('cd_ch_done',[]).includes(n))toggleChDone(n);renderRoadmap();});
+  }
+  const r=box.querySelector('.r2b12-rail'),c=r&&r.querySelector('.is-cur');
+  /* aktuelles Kapitel in die Mitte der Leiste holen, sobald die Leiste sichtbar ist (Seite evtl. noch verborgen) */
+  if(r&&c){const ctr=()=>{if(!r.clientWidth)return false;if(r.scrollWidth>r.clientWidth+4)r.scrollLeft=Math.max(0,c.offsetLeft-r.clientWidth/2+c.offsetWidth/2);return true;};
+    requestAnimationFrame(()=>{if(!ctr()&&typeof ResizeObserver==='function'){const ro=new ResizeObserver(()=>{if(ctr())ro.disconnect();});ro.observe(r);}});}
 }
 
 // ===== BOSS NPC-LORE (gesammelt aus questlog.gg DB) =====
@@ -16705,29 +17154,180 @@ function renderNpcs(){
   }
 }
 
+/* ===== R2 B12 · Patch-Notes (Redesign 2, 21.10.2026) =====
+   Kopf mit Szene, Brennpunkte (DLC, bekannte Probleme, Dev-Update, Prüfstand) als Faltkarten im Markup,
+   Patch-Rhythmus (Monatsraster, Punkt je Version) und Zeitachse nach Monaten. Je Patch eine Faltkarte:
+   Kalender-Kachel, Version, Art (Hotfix/Update/Patch, aus Versionsnummer und Text), Anzahl Einzelpunkte,
+   Zusammensetzung nach Art der Änderung. Inhalt lazy, data-s trägt den Volltext. Neuester Patch offen. */
+const _R2B12_MON=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+const _R2B12_MONL=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+/* Art der Änderung: nur Stichwort im vorhandenen Kategorienamen, die Überschrift selbst bleibt wortgetreu */
+const _R2B12_KINDS=[
+  ['issue',/known issues|bekannte probleme/i,'Bekannte Probleme','warn'],
+  ['src',/^quelle|plattformen und quelle/i,'Quelle & Plattformen','go'],
+  ['note',/einordnung|nachtrag|nachträge|was enhanced/i,'Einordnung','info'],
+  ['fix',/fix|patch-details|stabilisierung|bugfix/i,'Fixes & Details','check'],
+  ['fight',/kampf|combat|skill|charaktere|fähigkeit/i,'Kampf & Fähigkeiten','atk'],
+  ['gfx',/grafik|graphics|performance|accessibility/i,'Grafik & Technik','spirit'],
+  ['ctrl',/steuerung|controls|technik|\bui\b|quests & ui/i,'Steuerung & UI','key'],
+  ['new',/neu|content|inhalt|feature|kernänderung|mounts|crafting|bosse|minigames|forts|damiane|handel/i,'Neu & Inhalt','neutral'],
+  ['qol',/quality of life|komfort/i,'Komfort','stam'],
+  ['misc',/./,'Sonstiges','pin']
+];
+const _R2B12_KORD=['new','fight','ctrl','gfx','qol','fix','misc','issue','note','src'];
+const _R2B12_ART={update:{t:'Update',tone:'gold',c:'gold',i:'neutral'},hotfix:{t:'Hotfix',tone:'ice',c:'ice',i:'bolt'},patch:{t:'Patch',tone:'slate',c:'',i:'check'}};
+function _r2b12Strip(h){return String(h==null?'':h).replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();}
+/* Sichtbarer Text ohne Gedankenstriche (LEITPLANKEN 2.9); data-s behält den Originaltext.
+   „— behoben“ wird zur grünen Status-Marke (txt=true: reiner Text für escapte Felder), „— x —“ zur Klammer, sonst Doppelpunkt. */
+function _r2b12Dash(h,txt){
+  return String(h==null?'':h)
+    .replace(/ [—–] (behoben|gefixt)\b/g,txt?': $1':' <span class="r2b12-fxd">$1</span>')
+    .replace(/ [—–] ([^—–.<>]{1,90}?) [—–] /g,' ($1) ')
+    .replace(/ [—–] /g,': ').replace(/—/g,'-');
+}
+/* Feinschliff: redaktionelle Einordnungen (150 Stellen, in den Daten als <span style='color:var(--gdim)'>) wurden als
+   lange orange Fließtexte gelesen. Anzeige jetzt als ruhige Randnotiz unter dem Punkt; ein vorhandenes Stichwort
+   („Einordnung:“, „Nachtrag:“ …) wird zum kleinen Etikett. Nur Darstellung, Text wortgetreu, data-s unverändert.
+   Steht die Notiz mitten im Satz, bleibt sie im Fluss (nur gedämpft). */
+function _r2b12Ann(h){
+  return String(h==null?'':h).replace(/<span style=['"]color:var\(--gdim\)['"]>(?:([A-ZÄÖÜ][A-Za-zÄÖÜäöüß-]{2,20}):\s)?/g,(m,lab,off,str)=>{
+    const before=str.slice(Math.max(0,off-40),off).replace(/<[^>]*>/g,'').replace(/^[^<]*>/,'').trimEnd();
+    const blk=!before||/[.!?“")\]]$/.test(before);
+    return `<span class="r2b12-ann${blk?'':' r2b12-ann--in'}">`+(lab?(blk?`<b class="r2b12-ann-k">${lab}</b>`:lab+': '):'');
+  });
+}
+function _r2b12Kind(cat){for(const k of _R2B12_KINDS)if(k[1].test(cat))return k[0];return 'misc';}
+function _r2b12KMeta(k){return _R2B12_KINDS.find(x=>x[0]===k)||_R2B12_KINDS[_R2B12_KINDS.length-1];}
+/* Art aus Versionsnummer (x.yy.00 = Update) und dem Wort „Hotfix“ im Beschreibungstext */
+function _r2b12Art(p){const last=String(p.ver).split('.').pop();if(last==='00')return 'update';return /hotfix/i.test(_r2b12Strip(p.size))?'hotfix':'patch';}
+/* Kurzsatz: erster aussagekräftiger Satz der vorhandenen Beschreibung (wortgetreu), sonst erster Punkt */
+function _r2b12Lead(p){
+  const t=_r2b12Strip(p.size),bor=/^(veröffentlicht am|release \d|konsolen-build|steam \(|die seite führt|nachtrag|stand der seite|der titel trägt|laut update|\d+ mb|hotfix \(all|hotfix, alle|hotfix \(|alle sechs plattformen|sieben plattformen|im mac app store|die englische seite)/i;
+  const s=t.split(/(?<=[.!?])\s+(?=[A-ZÄÖÜ„])/).find(x=>x.length>24&&!bor.test(x));
+  if(s)return _r2b12Dash(s,true);
+  const f=p.features.find(f=>!/^(src|note|issue)$/.test(_r2b12Kind(f.cat)));
+  return _r2b12Dash(f&&f.items[0]?_r2b12Strip(f.items[0]):t,true);
+}
+function _r2b12Date(d){const m=/^(\d{2})\.(\d{2})\.(\d{4})$/.exec(d||'');return m?{d:+m[1],m:+m[2]-1,y:+m[3]}:null;}
+function _r2b12Info(p){
+  const art=_r2b12Art(p),dt=_r2b12Date(p.date),cnt={};let n=0;
+  p.features.forEach(f=>{const k=_r2b12Kind(f.cat);cnt[k]=(cnt[k]||0)+f.items.length;if(!/^(src|note|issue)$/.test(k))n+=f.items.length;});
+  return {p,art,dt,cnt,n,id:'r2b12-p-'+cdSlug(p.ver),enh:/crimson desert enhanced/i.test(_r2b12Strip(p.size))&&art==='update'};
+}
+function _r2b12Mix(x){
+  const ks=_R2B12_KORD.filter(k=>x.cnt[k]&&!/^(src|note)$/.test(k)),tot=ks.reduce((a,k)=>a+x.cnt[k],0)||1;
+  const lbl=ks.map(k=>_r2b12KMeta(k)[2]+' '+x.cnt[k]).join(', ');
+  return `<span class="r2b12-mix" role="img" aria-label="${cdEsc('Zusammensetzung: '+lbl)}" title="${cdEsc(lbl)}">${ks.map(k=>`<i class="r2b12-k-${k}" style="--w:${(x.cnt[k]/tot*100).toFixed(1)}%"></i>`).join('')}</span>`;
+}
+function _r2b12Body(x){
+  const p=x.p,feats=p.features.map((f,i)=>({f,i,k:_r2b12Kind(f.cat)}));
+  feats.sort((a,b)=>_R2B12_KORD.indexOf(a.k)-_R2B12_KORD.indexOf(b.k)||a.i-b.i);
+  const main=feats.filter(o=>o.k!=='src'),src=feats.filter(o=>o.k==='src');
+  /* Überblick nach Art (nur bei mehreren Arten): farbige Zähler, gleiche Farben wie die Abschnitte */
+  const ks=_R2B12_KORD.filter(k=>x.cnt[k]&&!/^(src|note)$/.test(k));
+  const ov=ks.length>1?`<div class="r2b12-ov" aria-label="Änderungen nach Art">${ks.map(k=>{const m=_r2b12KMeta(k);return `<span class="r2b12-ov-i r2b12-k-${k}">${cdIcon(m[3])}<b>${x.cnt[k]}</b><span>${m[2]}</span></span>`;}).join('')}</div>`:'';
+  const D=(h,txt)=>txt?_r2b12Dash(h,true):_r2b12Ann(_r2b12Dash(h));
+  /* Feinschliff: lange Einleitungen (bis 11 Zeilen) auf 4 Zeilen kürzen, Knopf zeigt den ganzen Text; bei Such-Öffnung ungekürzt */
+  const intro=p.size?(_r2b12Strip(p.size).length>360
+    ?`<div class="r2b12-intro-w"><p class="r2b12-pt-intro r2b12-intro-long" id="${x.id}-intro"><span class="r2b12-intro-txt">${D(p.size)}</span></p><button type="button" class="r2b12-more" aria-expanded="false" aria-controls="${x.id}-intro">${cdIcon('chev')}<span>Ganzen Text zeigen</span></button></div>`
+    :`<p class="r2b12-pt-intro">${D(p.size)}</p>`):'';
+  return ov+intro
+    +main.map(o=>{const m=_r2b12KMeta(o.k);return `<section class="r2b12-cat r2b12-k-${o.k}"><h4 class="r2b12-cat-h">${cdIcon(m[3])}<span>${cdEsc(D(o.f.cat,true))}</span><b>${o.f.items.length}</b></h4><ul class="r2b12-items">${o.f.items.map(it=>`<li>${D(it)}</li>`).join('')}</ul></section>`;}).join('')
+    +src.map(o=>`<div class="r2b12-srcbox"><span class="cd-src-l">${cdEsc(D(o.f.cat,true))}</span><ul>${o.f.items.map(it=>`<li>${D(it)}</li>`).join('')}</ul></div>`).join('');
+}
+function _r2b12Fold(x,open){
+  const p=x.p,a=_R2B12_ART[x.art],chips=[{t:a.t,c:a.c,i:a.i},{v:x.n,t:x.n===1?'Punkt':'Punkte',title:x.n+(x.n===1?' Einzelpunkt':' Einzelpunkte')+' in den Patch-Notes'}];
+  if(x.enh)chips.unshift({t:'Enhanced',c:'red',g:'★'});
+  if(x.cnt.issue)chips.push({h:`<span class="cd-chip r2b12-chip-k r2b12-k-issue">${cdIcon('warn')}<span><span class="r2b12-dt">Bekannte </span>Probleme</span></span>`});
+  const s=[p.ver,'patch '+p.ver,p.date,a.t,_r2b12Strip(p.size),...p.features.flatMap(f=>[f.cat,...f.items.map(_r2b12Strip)])].join(' ');
+  let h=cdFold({title:'Patch '+p.ver,lead:_r2b12Lead(p),chips,icon:'§R2B12§',aside:_r2b12Mix(x),body:()=>_r2b12Body(x),s,open,id:x.id,
+    cls:'r2b12-pt r2b12-art-'+x.art,tone:x.enh?'red':a.tone,attrs:{'data-go-id':p.ver,'data-art':x.art}});
+  const cal=x.dt?`<span class="cd-fold-ico r2b12-cal" title="${cdEsc(p.date)}"><b>${x.dt.d}</b><small>${_R2B12_MON[x.dt.m]}</small><span class="r2b12-sr">${cdEsc(p.date)}</span></span>`:'<span class="cd-fold-ico r2b12-cal"><b>?</b></span>';
+  return h.replace('<span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">§R2B12§</i></span>',cal);
+}
+/* Performance: Faltkarten in Blöcken zu 4 einblenden (data-cd-reveal am Block). Die Einblendung je Karte setzte bei
+   47 kompakten Karten je eine vererbte Variable (--cdx-d) und berechnete jedes Mal den ganzen Kartenbaum neu;
+   als Block bleibt der Teil außerhalb des Bildes per content-visibility übersprungen (Stil-Elemente beim Scrollen 390: 5960 -> ~3600). */
+function _r2b12Blocks(cards){
+  const out=[];for(let i=0;i<cards.length;i+=4)out.push(`<div class="r2b12-blk" data-cd-reveal>${cards.slice(i,i+4).join('')}</div>`);
+  return out.join('');
+}
+function _r2b12Rhythm(groups){
+  const asc=groups.slice().reverse();
+  return `<div class="r2b12-rh cd-spot" aria-label="Patch-Rhythmus seit Release">
+    <div class="r2b12-rh-hd"><h3 class="r2b12-rh-t">Patch-Rhythmus</h3><p>Jeder Punkt ist eine Version, die Größe zeigt die Zahl der Einzelpunkte. Klick springt zum Patch.</p>
+      <span class="r2b12-rh-leg"><i class="r2b12-art-update"></i>Update<i class="r2b12-art-hotfix"></i>Hotfix<i class="r2b12-art-patch"></i>Patch</span></div>
+    <div class="r2b12-rh-grid" style="--cols:${asc.length}">${asc.map(g=>{
+      const it=g.items.slice().reverse();
+      return `<div class="r2b12-rh-col"><div class="r2b12-rh-dots">${it.map(x=>{const sz=x.n>20?'l':x.n>5?'m':'s';
+        return `<a class="r2b12-dot r2b12-art-${x.art} r2b12-sz-${sz}" href="${cdGoHref('patches',x.id)}" data-r2b12-go="${x.id}" data-art="${x.art}" title="${cdEsc('Patch '+x.p.ver+' · '+x.p.date+' · '+_R2B12_ART[x.art].t+' · '+x.n+' Einzelpunkte')}" aria-label="${cdEsc('Patch '+x.p.ver+', '+x.p.date+', '+_R2B12_ART[x.art].t)}"><i></i></a>`;}).join('')}</div>
+        <div class="r2b12-rh-lbl"><b>${_R2B12_MON[g.m]}</b><span>${g.items.length}</span></div></div>`;
+    }).join('')}</div></div>`;
+}
+function _r2b12Filter(sec,v){
+  const list=sec.querySelector('#patch-list');if(!list)return;
+  list.querySelectorAll('.r2b12-pt').forEach(d=>{
+    const off=v!=='all'&&d.dataset.art!==v;
+    d.classList.toggle('r2b12-off',off);
+    if(off)d.dataset.filtered='1';else if(d.dataset.filtered==='1'){delete d.dataset.filtered;d.classList.remove('hide');}
+  });
+  sec.querySelectorAll('.r2b12-dot').forEach(a=>a.classList.toggle('is-dim',v!=='all'&&a.dataset.art!==v));
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(list);
+}
+function _r2b12Countdown(){
+  const el=document.getElementById('r2b12-dlc-cd');if(!el)return;
+  const diff=Date.UTC(2026,9,29,22,0,0)-Date.now();
+  if(diff<=0){el.innerHTML='<b>✓</b><span>Termin erreicht</span>';return;}
+  const d=Math.ceil(diff/864e5);
+  el.innerHTML=d<=1?'<b>&lt;1</b><span>Tag bis Start</span>':`<span>noch</span><b>${d}</b><span>Tage</span>`;
+}
 function renderPatches(){
   const el=document.getElementById('patch-list');
   if(!el)return;
-  el.innerHTML=PATCHES.slice().sort((a,b)=>b.ver.localeCompare(a.ver,undefined,{numeric:true})).map(p=>{
-    const s=[p.ver,p.date,p.size,...p.features.flatMap(f=>[f.cat,...f.items])].join(' ').toLowerCase();
-    return `<div class="card" data-s="${s}" style="margin-bottom:14px;padding:18px 20px">
-      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap">
-        <span style="font-family:var(--f-display);font-size:18px;font-weight:700;color:var(--iron-gall);letter-spacing:.02em">Patch ${p.ver}</span>
-        <span style="font-size:var(--fs-11);color:var(--gold);font-weight:600">${p.date}</span>
-        ${p.size?`<span style="font-size:var(--fs-10-5);color:var(--dim)">${p.size}</span>`:''}
-      </div>
-      <div style="border-top:1px solid var(--bdr);margin:10px 0 12px"></div>
-      ${p.features.map(f=>`
-        <div style="margin-bottom:10px">
-          <div style="font-size:var(--fs-10);font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.09em;margin-bottom:5px">${f.cat}</div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:4px">
-            ${f.items.map(it=>`<li style="font-size:12px;color:var(--text);padding-left:13px;position:relative;line-height:1.55">
-              <span style="position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--red);opacity:.65"></span>${it}
-            </li>`).join('')}
-          </ul>
-        </div>`).join('')}
-    </div>`;
-  }).join('');
+  const sec=document.getElementById('sec-patches');
+  const all=PATCHES.slice().sort((a,b)=>b.ver.localeCompare(a.ver,undefined,{numeric:true})).map(_r2b12Info);
+  const nArt=k=>all.filter(x=>x.art===k).length,sum=all.reduce((a,x)=>a+x.n,0);
+  /* Monatsgruppen in Listenreihenfolge (neueste zuerst) */
+  const groups=[];all.forEach(x=>{const key=x.dt?x.dt.y*12+x.dt.m:-1,g=groups[groups.length-1];if(g&&g.key===key)g.items.push(x);else groups.push({key,m:x.dt?x.dt.m:0,y:x.dt?x.dt.y:'',items:[x]});});
+  const hero=document.getElementById('r2b12-pt-hero');
+  if(hero){
+    const nw=all[0];
+    hero.innerHTML=cdHero({kicker:'Patch-Historie seit Release (19.03.2026)',title:'Jede Version, neueste zuerst',
+      sub:nw?`Neuester Patch: ${nw.p.ver} vom ${nw.p.date}. Patch aufklappen für alle Änderungen, nach Art gegliedert.`:'',
+      scene:{keys:['patches'],pos:'60% 45%'},glyph:'✎',tone:'gold',h:3,
+      stats:[[all.length,'Versionen'],[nArt('update'),'Updates'],[nArt('hotfix'),'Hotfixes'],[sum,'Einzelpunkte']]});
+  }
+  /* Szene + Suchtext für die statischen Brennpunkt-Faltkarten (einmalig) */
+  if(sec){
+    const dlcSum=sec.querySelector('.r2b12-dlc>summary');
+    if(dlcSum&&!dlcSum.querySelector('.cd-scene'))dlcSum.insertAdjacentHTML('afterbegin',cdScene(['roadmap'],{tone:'ice',glyph:'⚓',w:58}));
+    sec.querySelectorAll('.r2b12-sf').forEach(d=>{if(!d.dataset.s)d.dataset.s=d.textContent.replace(/\s+/g,' ').trim().toLowerCase();});
+    _r2b12Countdown();
+  }
+  const pills=[{v:'all',t:'Alle',n:all.length,on:true},{v:'update',t:'Updates',n:nArt('update')},{v:'hotfix',t:'Hotfixes',n:nArt('hotfix')}];
+  if(nArt('patch'))pills.push({v:'patch',t:'Weitere Patches',n:nArt('patch')});
+  el.innerHTML=_r2b12Rhythm(groups)
+    +`<div class="r2b12-bar"><h3 class="r2b12-bar-t">Alle Versionen</h3>${cdPills(pills,{name:'r2b12-art',label:'Patch-Art'})}</div>`
+    +(()=>{const used=_R2B12_KORD.filter(k=>!/^(src|note)$/.test(k)&&all.some(x=>x.cnt[k]));
+      return `<p class="r2b12-leg"><span>Farbbalken je Patch = Änderungen nach Art:</span>${used.map(k=>`<span class="r2b12-leg-i r2b12-k-${k}"><i aria-hidden="true"></i>${cdEsc(_r2b12KMeta(k)[2])}</span>`).join('')}</p>`;})()
+    +`<div class="r2b12-tl">${groups.map((g,gi)=>`<div class="r2b12-month">
+        <div class="r2b12-month-hd"><span class="r2b12-month-dot" aria-hidden="true"></span><h3 class="r2b12-month-t">${g.m!=null?_R2B12_MONL[g.m]:''} <span>${g.y}</span></h3><span class="r2b12-month-n">${g.items.length} ${g.items.length===1?'Version':'Versionen'}</span></div>
+        <div class="cd-folds r2b12-list">${_r2b12Blocks(g.items.map((x,i)=>_r2b12Fold(x,gi===0&&i===0)))}</div></div>`).join('')}</div>`;
+  if(sec&&!sec.dataset.r2b12){
+    sec.dataset.r2b12='1';
+    sec.addEventListener('cd-pills',e=>{if(e.detail.name==='r2b12-art')_r2b12Filter(sec,e.detail.value);});
+    sec.addEventListener('click',e=>{
+      const mb=e.target.closest('.r2b12-more');
+      if(mb){const o=mb.getAttribute('aria-expanded')!=='true';mb.setAttribute('aria-expanded',o?'true':'false');
+        mb.parentElement.classList.toggle('is-open',o);mb.lastElementChild.textContent=o?'Weniger zeigen':'Ganzen Text zeigen';return;}
+      const a=e.target.closest('a[data-r2b12-go]');if(!a||e.ctrlKey||e.metaKey||e.shiftKey||e.button!==0)return;
+      e.preventDefault();
+      const t=document.getElementById(a.dataset.r2b12Go);
+      if(t&&t.classList.contains('r2b12-off')){const allP=sec.querySelector('[data-cd-pills="r2b12-art"] .cd-pill[data-v="all"]');if(allP)allP.click();}
+      cdGo('patches',a.dataset.r2b12Go,{noShow:true});
+    });
+  }
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(el);
 }
 
 // ===== INIT =====
