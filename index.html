@@ -704,6 +704,8 @@ input.fs::-webkit-search-cancel-button{cursor:pointer;opacity:.55}
 .tr{background:var(--overprint);color:var(--survey-red);border-color:var(--survey-red)}
 .tg{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 .tx{background:var(--panel);color:var(--iron-soft);border-color:var(--line)}
+/* R2 Abnahme: lange Text-Tags (Bestiarium-Regionen, Reittier-Typen) brechen um statt an der Karte abgeschnitten zu werden */
+#sec-bestiary .tag.tx,#sec-mounts .tag.tx{max-width:100%;white-space:normal;overflow-wrap:anywhere}
 .tw{background:rgba(154,90,28,.12);color:var(--warn);border-color:var(--warn)}
 .tag.miss-chip-sm{font-size:var(--fs-9);padding:1px 5px;vertical-align:middle}
 /* Provenienz-Marke (Ruestungen): eigene, gestrichelte Optik. Die Farbklassen
@@ -2008,6 +2010,7 @@ html.cf-open,html.cf-open body{overflow:hidden}
 .cmt-inp:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 .cmt-btn{padding:10px 17px;background:var(--vellum-hi);border:1.5px solid var(--iron-gall);color:var(--iron-gall);font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:all .15s;white-space:nowrap;border-radius:8px}
 .cmt-btn:hover{background:var(--iron-gall);color:var(--vellum)}
+.cmt-btn{min-height:40px} /* R2 Abnahme: Tap-Ziel ab 40 px (vorher 38) */
 
 /* ── Visitor bar ── */
 #visitor-bar{padding:11px 14px 5px;border-top:1px solid var(--iron-gall);display:flex;flex-direction:column;gap:5px}
@@ -3894,6 +3897,9 @@ html.cd-motion .cd-check-txt{transition:opacity .25s}
 .cd-src a:hover{color:var(--rhi)}
 .cd-go{display:inline-flex;align-items:center;gap:5px;color:var(--glo);text-decoration:underline;text-underline-offset:2px}
 .cd-go:hover{color:var(--rhi)}
+/* R2 Abnahme: Sprung-Links auf Touch-Geräten mit 40 px Trefferhöhe, ohne die Zeilenhöhe zu ändern (Polster + gleich großer Negativ-Rand).
+   Ausgenommen die Links, die schon selbst 40 px hoch sind. */
+@media (pointer:coarse){.cd-go:where(:not(.r2b3-jr-next,.r2b1-go,.r2b13-wc-mount .cd-go)){padding-block:10px;margin-block:-10px}}
 
 /* -- Aufleuchten nach cdGo -- */
 html.cd-motion .cd-flash{animation:cdFlash 1.8s ease-out;animation-duration:1.8s!important}
@@ -4249,6 +4255,7 @@ a.r2b1-in--go:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .r2b1-card .item-more>summary,.r2b1-rl-try{min-height:44px}
   a.r2b1-in--go{min-height:40px}
   .r2b1-rl-go{width:44px;height:44px}
+  .r2b1-bar .cd-pill,a.cd-go.r2b1-go{min-height:40px} /* R2 Abnahme: Filterpillen und Sprung-Links ab 40 px */
 }
 @media (prefers-reduced-motion:reduce){
   #sec-crafting .r2b1-card,.r2b1-rl-go,a.r2b1-in--go,.r2b1-rl-try,.r2b1-ico,.r2b1-card .item-more>summary{transition:none}
@@ -4404,6 +4411,7 @@ html.cd-motion .r2b2-npc .r2b2-por .cd-scene-img{transition:transform .5s cubic-
 .r2b3-jr-st-t{display:flex;flex-direction:column;gap:5px;min-width:0}
 .r2b3-jr-st-l{font-size:12px;letter-spacing:.04em;color:var(--dim)}
 .r2b3-jr-next{font-size:13.5px;font-weight:600;text-decoration:none}
+.r2b3-jr-next{min-height:40px} /* R2 Abnahme: alleinstehender Sprung-Link, Tap-Ziel ab 40 px */
 .r2b3-jr-all{font-size:13.5px;color:var(--cd-ok)}
 .r2b3-track{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:2px 1px 10px;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
 .r2b3-seg{--c:var(--dim);flex:var(--n) 1 0;min-width:calc(var(--n) * 58px);display:flex;flex-direction:column;gap:4px;padding:9px 2px 8px;
@@ -5547,7 +5555,7 @@ html.cd-motion .b8-pip:hover{transform:translateY(-2px)}
 .b8-plat-ring .b8-ring-v{font-size:17px}.b8-plat-ring .b8-ring-v small{font-size:11px}
 .b8-plat-l{font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--b8-platinum)}
 .b8-tr--plat .cd-fold-aside{align-items:center;margin-right:6px}
-@media (pointer:coarse){.b8-badge{min-height:40px}.b8-pip{width:36px;height:36px}}
+@media (pointer:coarse){.b8-badge{min-height:40px}.b8-pip{width:40px;height:40px}.b8-more.cd-fold>summary{min-height:40px}} /* R2 Abnahme: Etappen-Perlen 36 -> 40 px, "Weiterlesen" 40 px */
 
 /* -- Breiten -- */
 @media (max-width:1100px){
@@ -6107,6 +6115,14 @@ html.cd-motion .r2b10-hold-tag i{animation:r2b10Pulse 1.6s ease-out infinite;ani
   background:linear-gradient(90deg,color-mix(in srgb,var(--panel-2) 82%,transparent) 0%,color-mix(in srgb,var(--panel-2) 40%,transparent) 60%,transparent 100%)}
 .r2b10-fs>*:not(.cd-scene){position:relative;z-index:1}
 .r2b10-fs>.r2b10-fs-rank{position:absolute}
+/* R2 Abnahme: Sprungleiste "Springe zu" als Pillen mit Linien-Icon, Tap-Ziele 40 px */
+.r2b10-jump{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 22px}
+.r2b10-jump-l{margin-right:4px;font:600 11px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.r2b10-jb{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 14px 6px 11px;border:1px solid color-mix(in srgb,var(--gold) 30%,var(--line));border-radius:999px;
+  background:color-mix(in srgb,var(--gold) 6%,transparent);color:var(--ink-hi);font:600 12.5px/1.2 var(--f-body);cursor:pointer;transition:background .18s,border-color .18s}
+.r2b10-jb .cd-i{width:15px;height:15px;color:var(--gold)}
+.r2b10-jb:hover{border-color:color-mix(in srgb,var(--gold) 60%,var(--line));background:color-mix(in srgb,var(--gold) 14%,transparent)}
+.r2b10-jb:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 /* R2-B10 Ende */
 
 /* ---- Bereich Bauer 11 (nur B11 schreibt hier) ---- */
@@ -6626,6 +6642,13 @@ html.cd-motion .r2b12-pulse{animation:r2b12Pulse 2.2s ease-out infinite}
   .r2b12-boss,.r2b12-more{min-height:40px}
   .r2b12-dot{width:36px;height:36px}
 }
+/* R2 Abnahme: "Mehr"-Knöpfe ab 40 px, Rhythmus-Punkte mit unsichtbarem Trefferrand (Optik bleibt), Du-bist-hier-Fakten aufklappbar */
+.r2b12-more{min-height:40px}
+@media (pointer:coarse){.r2b12-dot{position:relative}.r2b12-dot::before{content:'';position:absolute;inset:-2px;border-radius:50%}}
+.r2b12-now-fw{display:grid;justify-items:start;gap:4px;max-width:640px}
+.r2b12-now-fw>.r2b12-now-facts{justify-self:stretch}
+.r2b12-now-fw.is-open .r2b12-now-facts dd{display:block;-webkit-line-clamp:unset;overflow:visible}
+.r2b12-now-fw.is-open .r2b12-more .cd-i{transform:rotate(180deg)}
 /* R2-B12 Ende */
 
 /* ---- Bereich Bauer 13 (nur B13 schreibt hier) ---- */
@@ -8011,11 +8034,11 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
     <h2 class="sec-t"><span class="sec-sym">☘</span> Sammelobjekte <span class="sec-t-en">Gatherables</span></h2>
     <p class="gt-intro">Über ganz Pywel sammelst du Erze, Kräuter, Pilze und Spezialmaterialien per Mining-Node, Foraging oder Logging Axe. Sie speisen Alchemie, Kochen, Schmieden, Färben und einige Stat-Upgrades. Mehrere Kräuter heben Stats über ihr Maximum, etwa Spirit oder Stamina.</p>
     <div class="gt-stats">
-      <button type="button" class="gt-stat" onclick="setGatherCat('')" title="Alle Materialien anzeigen"><b id="gt-n-all">64</b> Materialien</button>
-      <span class="gt-stat gt-stat-static"><b>4</b> Awakening-Kräuter</span>
-      <button type="button" class="gt-stat" onclick="setGatherCat('Erz / Mineral')" title="Nur Erze und Mineralien anzeigen"><b>~7 Tage</b> Erz-Respawn</button>
+      <button type="button" class="gt-stat cd-spot" onclick="setGatherCat('')" title="Alle Materialien anzeigen"><b id="gt-n-all">64</b> Materialien</button>
+      <span class="gt-stat gt-stat-static cd-spot"><b>4</b> Awakening-Kräuter</span>
+      <button type="button" class="gt-stat cd-spot" onclick="setGatherCat('Erz / Mineral')" title="Nur Erze und Mineralien anzeigen"><b>~7 Tage</b> Erz-Respawn</button>
     </div>
-    <ul class="gt-xref" aria-label="Verwandte Seiten">
+    <ul class="gt-xref cd-spot" aria-label="Verwandte Seiten">
       <li><span class="gt-xref-k" aria-hidden="true">🔗</span><span>Nicht verwechseln: Sammelbare Gegenstände und Wissenseinträge (Collectibles) stehen auf der Seite <a href="#" onclick="showSec('collectibles');return false;">Sammelgegenstände</a>. Hier geht es um Rohstoffe zum Sammeln (Gatherables).</span></li>
       <li><span class="gt-xref-k" aria-hidden="true">🔗</span><span>Siehe Seite <a href="#" onclick="showSec('crafting');return false;">Herstellen &amp; Farmen</a> (Alchemie) für Catalyst-Rezepte und den Stat-Upgrade-Abschnitt (Spirit, Stamina) für Turn-in-Materialien.</span></li>
     </ul>
@@ -18908,7 +18931,7 @@ if(document.getElementById("sec-ruins")&&document.getElementById("sec-ruins").cl
 var H=document.documentElement,KEY='cd_motion',
   VENDOR=['gsap-3.15.0','ScrollTrigger-3.15.0','SplitText-3.15.0','lenis-1.3.26'],
   /* R2 Fundament: alle Karten-/Kacheltypen aller Seiten plus die Bausteine (.cd-spot, .cd-fold, .cd-check, .cd-hero) */
-  REVEAL_SEL='.card, .so-tile, .pet-card, .ruin-card, .loc-card, .witch-card, .sk-card, .sk-c, .set-card, .ch-card, .chap, .build-card, .ach-card, .rm-task, .fav-item, .sg-card, .comm-it, .ov-card, .qst-node, .loc-pc, .cmt-item, .bo-saved-card, .witch-svc, .cd-spot, .cd-fold, .cd-check, .cd-hero, tbody tr, [data-cd-reveal]',
+  REVEAL_SEL='.card, .so-tile, .pet-card, .ruin-card, .loc-card, .witch-card, .sk-card, .sk-c, .set-card, .ch-card, .chap, .build-card, .ach-card, .rm-task, .fav-item, .sg-card, .comm-it, .ov-card, .qst-node, .loc-pc, .cmt-item, .bo-saved-card, .witch-svc, .cd-spot, .cd-fold, .cd-check, .cd-hero, tbody tr, [data-cd-reveal], .sec-block, .sec-hero, .col-stat',   /* R2 Abnahme: + Geheimnisse-Blöcke und Sammelgegenstände-Kacheln */
   /* nativ scrollende Bereiche (Lenis greift nicht ein) und Vollbild-Overlays (Lenis hält an, solange eines offen ist) */
   NATIV='#sidebar,#rail,[aria-modal="true"],[role="dialog"],.loc-modal-box,#card-focus,.cs-overlay,.pm-overlay,#ee-overlay,#help-overlay,#cmp-modal,#ic-modal,#sync-overlay,#mount-ingame-modal,#rb-modal,iframe,[data-lenis-prevent],.cdx-pop,input,select,textarea',
   OVERLAY='[aria-modal="true"],.cs-overlay,.pm-overlay,#card-focus',
