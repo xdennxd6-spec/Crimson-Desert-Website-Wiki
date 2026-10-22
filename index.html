@@ -6079,6 +6079,234 @@ html.cd-motion .r2b10-hold-tag i{animation:r2b10Pulse 1.6s ease-out infinite;ani
 
 /* ---- Bereich Bauer 11 (nur B11 schreibt hier) ---- */
 /* R2-B11 Anfang */
+/* ── B11 · Übersicht (#sec-start): Seitenkopf mit Szene, Ressort-Farben, Leitkachel je Kategorie ──
+   Farbe mit Bedeutung: eine Farbe je Kategorie (Pille, Chip, Kopf, Kachel, Lichtkegel). Nur Tokens. */
+#sec-start{--r2b11-c-start:var(--cd-fx-ice);--r2b11-c-kampf:var(--red);--r2b11-c-ausruestung:var(--gold);--r2b11-c-quests:var(--violet);--r2b11-c-welt:var(--cd-fx-stam);--r2b11-c-sammeln:var(--cd-fx-poison)}
+#sec-start .r2b11-r-start{--rc:var(--r2b11-c-start)}#sec-start .r2b11-r-kampf{--rc:var(--r2b11-c-kampf)}#sec-start .r2b11-r-ausruestung{--rc:var(--r2b11-c-ausruestung)}
+#sec-start .r2b11-r-quests{--rc:var(--r2b11-c-quests)}#sec-start .r2b11-r-welt{--rc:var(--r2b11-c-welt)}#sec-start .r2b11-r-sammeln{--rc:var(--r2b11-c-sammeln)}
+#sec-start .r2b11-hero{min-height:236px;margin-bottom:16px}
+#sec-start .r2b11-hero .cd-hero-t{max-width:24ch}
+#sec-start .r2b11-hero .cd-scene-img{--cd-pos:50% 58%}
+/* Suche + Häufig gesucht */
+.r2b11-quick{display:grid;gap:12px;margin:0 0 20px}
+/* Feinschliff: Suche auf Rasterbreite (gleiche Kanten wie Kopf und Kacheln), Chips mit Tap-Ziel 40 px und etwas enger, damit die Reihe auf Desktop nicht mit einem Waisen-Chip umbricht */
+.r2b11-quick .so-search{max-width:none}
+#sec-start .r2b11-quick .so-chip{min-height:40px;padding:6px 12px}
+.r2b11-quick .so-pop{margin:0}
+#sec-start :is(.so-search-k,.so-pop-l,.so-cat-n,.so-tile-c,.so-tile-en){font-size:max(11px,var(--fs-10))}
+#sec-start .so-chip{border-color:color-mix(in srgb,var(--rc) 30%,var(--line))}
+#sec-start .so-chip .g{color:var(--rc)}
+#sec-start .so-chip:hover{border-color:var(--rc);background:color-mix(in srgb,var(--rc) 10%,var(--panel-2))}
+/* Kategorie-Pillen in Kategorienfarbe */
+#sec-start .r2b11-pills{margin:0 0 24px}
+#sec-start .r2b11-pills .cd-pill:nth-child(1){--c:var(--ink-hi)}
+#sec-start .r2b11-pills .cd-pill:nth-child(2){--c:var(--r2b11-c-start)}#sec-start .r2b11-pills .cd-pill:nth-child(3){--c:var(--r2b11-c-kampf)}#sec-start .r2b11-pills .cd-pill:nth-child(4){--c:var(--r2b11-c-ausruestung)}
+#sec-start .r2b11-pills .cd-pill:nth-child(5){--c:var(--r2b11-c-quests)}#sec-start .r2b11-pills .cd-pill:nth-child(6){--c:var(--r2b11-c-welt)}#sec-start .r2b11-pills .cd-pill:nth-child(7){--c:var(--r2b11-c-sammeln)}
+/* Kategorie */
+.r2b11-cat{container-type:inline-size;margin:0 0 34px;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 14px)}
+.r2b11-cat[hidden]{display:none}
+/* Kategorienfarbe als weicher Lichthof hinter der Leitkachel (Hintergrund lebt, Text bleibt auf ruhiger Fläche) */
+.r2b11-cat{position:relative;isolation:isolate;content-visibility:auto;contain-intrinsic-size:auto 460px}
+.r2b11-cat::before{content:'';position:absolute;z-index:-1;inset:0;pointer-events:none;
+  background:radial-gradient(46% 72% at 20% 58%,color-mix(in srgb,var(--rc) 19%,transparent),transparent 74%),
+    radial-gradient(42% 64% at 86% 42%,color-mix(in srgb,var(--rc) 8%,transparent),transparent 76%)}
+#sec-start .r2b11-cat .so-cat-hd{position:relative;align-items:center;border-bottom:0;margin-bottom:14px;padding-bottom:11px}
+#sec-start .r2b11-cat .so-cat-hd::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--rc),color-mix(in srgb,var(--rc) 30%,var(--line)) 28%,var(--line) 62%,transparent)}
+#sec-start .r2b11-cat .so-cat-g{display:grid;place-items:center;width:36px;height:36px;border:1px solid color-mix(in srgb,var(--rc) 45%,transparent);border-radius:11px;background:color-mix(in srgb,var(--rc) 14%,transparent);color:var(--rc);font-size:17px;line-height:1;box-shadow:0 0 18px -6px color-mix(in srgb,var(--rc) 70%,transparent)}
+#sec-start .r2b11-cat .so-cat-t{font-size:19px}
+#sec-start .r2b11-cat .so-cat-n{color:var(--rc)}
+.r2b11-body{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.3fr);gap:12px;align-items:stretch}
+.r2b11-body--one{grid-template-columns:minmax(0,1fr)}
+.r2b11-tiles{display:flex;flex-wrap:wrap;gap:12px;align-content:stretch}
+.r2b11-tiles>.so-tile{flex:1 1 calc(50% - 6px);min-width:min(100%,220px)}
+/* Kachel */
+#sec-start .r2b11-t{position:relative;grid-template-columns:40px minmax(0,1fr) auto;gap:13px;padding:14px 12px 15px 15px;border-color:color-mix(in srgb,var(--rc) 18%,var(--line));
+  background:linear-gradient(135deg,color-mix(in srgb,var(--rc) 8%,var(--panel-2)) 0%,var(--panel-2) 58%)}
+#sec-start .r2b11-t::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--rc);opacity:.55;transition:opacity .2s}
+#sec-start .r2b11-t:hover{border-color:color-mix(in srgb,var(--rc) 62%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--rc) 13%,var(--cardh)) 0%,var(--cardh) 62%)}
+#sec-start .r2b11-t:hover::before{opacity:1}
+#sec-start .r2b11-t:focus-visible{outline:2px solid var(--rc);outline-offset:2px}
+#sec-start .r2b11-t .so-tile-g{width:40px;height:40px;border-color:color-mix(in srgb,var(--rc) 42%,transparent);border-radius:11px;background:color-mix(in srgb,var(--rc) 13%,var(--panel));color:var(--rc);font-size:18px}
+#sec-start .r2b11-t .so-tile-c{padding:1px 8px;border:1px solid color-mix(in srgb,var(--rc) 34%,transparent);border-radius:999px;background:color-mix(in srgb,var(--rc) 9%,transparent);color:var(--rc);font-weight:700}
+#sec-start .r2b11-t .so-tile-d{margin-top:4px}
+.r2b11-arr{align-self:center;display:grid;place-items:center;width:26px;height:26px;color:var(--rc);opacity:.35;transition:opacity .2s,transform .2s}
+.r2b11-arr .cd-i{width:15px;height:15px}
+#sec-start .r2b11-t:hover .r2b11-arr{opacity:1;transform:translateX(2px)}
+/* Leitkachel mit Szene */
+#sec-start .r2b11-lead{display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-height:250px;padding:20px 20px 18px;border-color:color-mix(in srgb,var(--rc) 34%,var(--line));
+  background:linear-gradient(160deg,color-mix(in srgb,var(--rc) 10%,var(--panel-2)),var(--panel-2) 70%)}
+#sec-start .r2b11-lead::before{top:20px;bottom:20px;width:4px;opacity:.9;box-shadow:0 0 14px color-mix(in srgb,var(--rc) 60%,transparent)}
+#sec-start .r2b11-lead .cd-scene::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,color-mix(in srgb,var(--card) 82%,transparent) 0%,color-mix(in srgb,var(--card) 40%,transparent) 45%,transparent 75%)}
+#sec-start .r2b11-lead .cd-scene-img{opacity:calc(var(--cd-scene-op-hero) + .1)}
+#sec-start .r2b11-lead .so-tile-g{width:50px;height:50px;border-radius:14px;font-size:23px;background:color-mix(in srgb,var(--rc) 20%,var(--panel));box-shadow:0 6px 22px -8px color-mix(in srgb,var(--rc) 80%,transparent)}
+#sec-start .r2b11-lead .so-tile-body{gap:3px;text-shadow:0 1px 12px color-mix(in srgb,var(--card) 90%,transparent)}
+#sec-start .r2b11-lead .so-tile-top{justify-content:flex-start;gap:10px}
+#sec-start .r2b11-lead .so-tile-n{font-size:22px;line-height:1.2}
+#sec-start .r2b11-lead .so-tile-d{max-width:36ch;font-size:13.5px;color:var(--text)}
+.r2b11-cta{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font:700 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--rc)}
+.r2b11-cta .cd-i{width:15px;height:15px;transition:transform .2s}
+#sec-start .r2b11-lead:hover .r2b11-cta .cd-i{transform:translateX(3px)}
+/* Lichtkegel in Kategorienfarbe */
+@media (hover:hover) and (pointer:fine){
+  html.cd-motion #sec-start :is(.r2b11-t,.so-chip)::after{background:radial-gradient(var(--sr,260px) circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--rc) 17%,transparent),transparent 70%)}
+}
+@container (max-width:720px){
+  .r2b11-body{grid-template-columns:minmax(0,1fr)}
+  #sec-start .r2b11-lead{min-height:184px;padding:16px 16px 15px}
+  #sec-start .r2b11-lead .so-tile-n{font-size:19px}
+}
+@container (max-width:460px){
+  .r2b11-tiles{gap:8px}
+  #sec-start .r2b11-t:not(.r2b11-lead){padding:11px 8px 12px 13px;gap:11px}
+  #sec-start .r2b11-lead{min-height:168px}
+  #sec-start .r2b11-lead .so-tile-g{width:44px;height:44px;font-size:20px}
+}
+@media (max-width:600px){
+  #sec-start .r2b11-hero{min-height:0}
+  #sec-start .r2b11-pills{margin-bottom:18px}
+  #sec-start .r2b11-cat .so-cat-tag{flex-basis:100%;order:3}
+}
+
+/* ── B11 · Anfänger-Guide (#sec-beginner): Kopf mit Szene, Merksätze, Mechaniken als Faltkarten, Steuerung als Tasten-Kappen ──
+   Farbe mit Bedeutung: Effekt-Farben des Fundaments (Leben, Ausdauer, Spirit, Feuer …), Plattformfarben bei der Steuerung,
+   Grün = einzeln belegt, gestrichelte Kappe = nicht einzeln belegt. Das Feldatlas-Altar-Banner (#fa-hero) weicht hier dem eigenen Kopf. */
+#main:has(> #sec-beginner.active) #fa-hero{display:none}
+#sec-beginner{container:r2b11beg/inline-size}
+#sec-beginner .r2b11-bhero{min-height:250px}
+#sec-beginner .r2b11-bhero .cd-hero-t{font-size:clamp(24px,3vw,34px);max-width:19ch}
+#sec-beginner .r2b11-bhero .cd-hero-sub a{color:var(--rhi)}
+#sec-beginner .cd-keycap:is(.r2b11-ps-x,.r2b11-ps-o,.r2b11-ps-sq,.r2b11-ps-tri){font-family:'Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',var(--f-body),sans-serif;font-size:14px;font-weight:700}
+#sec-beginner .cd-keycap.r2b11-ps-x{color:var(--cd-fx-spirit)}#sec-beginner .cd-keycap.r2b11-ps-o{color:var(--cd-fx-hp)}
+#sec-beginner .cd-keycap.r2b11-ps-sq{color:var(--cd-fx-res)}#sec-beginner .cd-keycap.r2b11-ps-tri{color:var(--cd-fx-stam)}
+#sec-beginner .cd-keycap.r2b11-unv{border-style:dashed;border-bottom-width:1px;background:transparent;color:var(--dim)}
+.r2b11-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Merksätze */
+.r2b11-rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch;margin:0 0 32px}
+/* Feinschliff: Karten einer Reihe gleich hoch (keine Löcher); ist eine aufgeklappt, wachsen die Nachbarn nicht mit */
+.r2b11-rules:has(>[open]){align-items:start}
+/* Feinschliff: Abschnittstitel tragen die Seite (vorher kleiner als die Kartentitel) */
+#sec-beginner>.sub-t{position:relative;margin-top:44px;margin-bottom:16px;padding-bottom:11px;font-size:21px;letter-spacing:.005em}
+#sec-beginner>.sub-t::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,var(--red),color-mix(in srgb,var(--red) 28%,var(--line)) 26%,var(--line) 60%,transparent)}
+.r2b11-rules>:first-child{grid-column:span 2}
+.r2b11-rule{--rc:var(--gold);position:relative;border:1px solid color-mix(in srgb,var(--rc) 24%,var(--line));border-radius:14px;box-shadow:var(--shadow-soft);
+  background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--rc) 13%,transparent),transparent 60%),var(--panel-2)}
+article.r2b11-rule{padding:16px 16px 17px}
+.r2b11-rule::before{content:'';position:absolute;left:16px;right:16px;top:-1px;height:2px;border-radius:0 0 2px 2px;background:linear-gradient(90deg,var(--rc),transparent);opacity:.85}
+.r2b11-rule.cd-fold>summary{display:block;min-height:0;padding:16px 16px 13px}
+.r2b11-rule.cd-fold>summary::before{display:none}
+.r2b11-rule.cd-fold>summary:focus-visible{outline:2px solid var(--rc);outline-offset:-3px}
+.r2b11-rule-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.r2b11-rule-ico{display:grid;place-items:center;width:42px;height:42px;border:1px solid color-mix(in srgb,var(--rc) 42%,transparent);border-radius:12px;background:color-mix(in srgb,var(--rc) 15%,var(--panel));color:var(--rc);box-shadow:0 6px 20px -10px var(--rc)}
+.r2b11-rule-ico .cd-i{width:21px;height:21px}
+.r2b11-rule-n{font:700 26px/1 var(--f-mono);color:color-mix(in srgb,var(--rc) 38%,transparent);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.r2b11-rule-t{margin:0 0 5px;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.3;color:var(--ink-hi);text-wrap:balance}
+.r2b11-rule-d{margin:0;font-size:13px;line-height:1.5;color:var(--dim)}
+.r2b11-rules>:first-child .r2b11-rule-t{font-size:20px}
+.r2b11-rules>:first-child .r2b11-rule-d{font-size:14px}
+/* Feinschliff: Merksatz 01 als Leitkarte mit Szene; Satz unten links auf ruhiger Fläche, Bild läuft nach links weich aus */
+.r2b11-rule--lead{display:flex;flex-direction:column;min-height:190px}
+.r2b11-rule--lead .r2b11-rule-top{margin-bottom:auto;padding-bottom:18px}
+.r2b11-rule--lead :is(.r2b11-rule-t,.r2b11-rule-d){max-width:24ch;text-shadow:0 1px 14px color-mix(in srgb,var(--card) 90%,transparent)}
+.r2b11-rules>.r2b11-rule--lead .r2b11-rule-t{font-size:23px;line-height:1.22}
+.r2b11-rule--lead .r2b11-rule-d{max-width:34ch;color:var(--text)}
+.r2b11-rule--lead .r2b11-rule-n{color:color-mix(in srgb,var(--rc) 70%,transparent)}
+.r2b11-rule--lead .cd-scene-img{--cd-pos:50% 45%}
+.r2b11-rule-more{display:inline-flex;align-items:center;gap:6px;min-height:30px;margin-top:10px;padding:3px 11px 3px 12px;border:1px solid color-mix(in srgb,var(--rc) 34%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--rc) 8%,transparent);font:600 12px/1.2 var(--f-body);color:var(--rc)}
+.r2b11-rule-more .cd-i{width:14px;height:14px}
+.r2b11-rule[open] .r2b11-rule-more .cd-i{transform:rotate(180deg)}
+.r2b11-rule:not([open]) .r2b11-m2,.r2b11-rule[open] .r2b11-m1{display:none}
+.r2b11-rule .cd-fold-body{padding:12px 16px 16px;font-size:13px}
+.r2b11-rule .cd-fold-body>p{max-width:none}
+html.cd-motion .r2b11-rule-more .cd-i{transition:transform .3s cubic-bezier(.22,.8,.3,1)}
+/* Mechaniken: Gruppen mit Farbe, Faltkarten im Zweierraster */
+.r2b11-grp{--rc:var(--gold);margin:0 0 24px;content-visibility:auto;contain-intrinsic-size:auto 420px}
+.r2b11-keys,.r2b11-cfolds{content-visibility:auto;contain-intrinsic-size:auto 640px}
+.r2b11-grp-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 11px;font:700 var(--fs-11,11px)/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--rc)}
+.r2b11-grp-t>span{display:inline-flex;align-items:center;gap:9px}
+.r2b11-grp-t>span::before{content:'';width:9px;height:9px;border-radius:3px;background:var(--rc);box-shadow:0 0 10px var(--rc);transform:rotate(45deg)}
+.r2b11-grp-t small{font:400 12.5px/1.4 var(--f-body);letter-spacing:0;text-transform:none;color:var(--dim)}
+.r2b11-mechs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.r2b11-mech{background:linear-gradient(120deg,color-mix(in srgb,var(--cd-acc) 7%,var(--panel-2)),var(--panel-2) 55%)}
+.r2b11-mech .cd-fold-ico{border-color:color-mix(in srgb,var(--cd-acc) 38%,transparent);background:color-mix(in srgb,var(--cd-acc) 13%,var(--panel))}
+.r2b11-mech .cd-fold-ico .cd-i{width:22px;height:22px}
+.r2b11-mech .cd-fold-chips{gap:6px 8px}
+.r2b11-kgrp{display:inline-flex;flex-wrap:wrap;align-items:center;gap:3px}
+.r2b11-kgrp .cd-keycap{margin:0}
+.r2b11-kgrp>i{font-style:normal;font-size:11px;color:var(--ink-faint)}
+.r2b11-kx{margin-left:3px;font-size:12px;color:var(--dim)}
+.r2b11-mech .cd-fold-body p .r2b11-kgrp{vertical-align:middle}
+.r2b11-sig,.r2b11-vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.r2b11-sig>p,.r2b11-vs>div{margin:0;padding:10px 12px;border:1px solid var(--line-soft);border-left:3px solid var(--c);border-radius:10px;background:color-mix(in srgb,var(--c) 8%,transparent)}
+.r2b11-sig-r{--c:var(--red)}.r2b11-sig-b{--c:var(--cd-fx-spirit)}.r2b11-vs-a{--c:var(--cd-fx-stam)}.r2b11-vs-b{--c:var(--cd-fx-spirit)}
+.r2b11-vs>div{display:flex;flex-direction:column;gap:4px}
+.r2b11-vs b{display:flex;align-items:center;gap:7px;color:var(--c)}
+.r2b11-el{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.r2b11-el li{display:grid;grid-template-columns:94px minmax(0,1fr);align-items:center;gap:10px}
+.r2b11-el .cd-fx{justify-self:start}
+/* Steuerung */
+.r2b11-ctrl-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;margin:0 0 12px}
+.r2b11-ctrl-bar .cd-pills{margin:0}
+.r2b11-plats .cd-pill[data-v="all"]{--c:var(--ink-hi)}.r2b11-pp-ps{--c:var(--cd-fx-spirit)}.r2b11-pp-xb{--c:var(--cd-fx-stam)}.r2b11-pp-pc{--c:var(--gold)}
+.r2b11-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0;font-size:12px;color:var(--dim)}
+.r2b11-legend-sep{width:1px;height:14px;margin:0 4px;background:var(--line)}
+.r2b11-okm{display:inline-grid;place-items:center;flex:none;width:20px;height:20px;border-radius:50%;background:color-mix(in srgb,var(--cd-ok) 16%,transparent);color:var(--cd-ok)}
+.r2b11-okm .cd-i{width:13px;height:13px;stroke-width:2.4}
+.r2b11-keys{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:10px}
+.r2b11-key{display:flex;flex-direction:column;gap:10px;padding:12px 14px 13px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);box-shadow:var(--shadow-soft)}
+.r2b11-key.is-ok{border-color:color-mix(in srgb,var(--cd-ok) 30%,var(--line))}
+.r2b11-key-a{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:700;line-height:1.3;color:var(--ink-hi)}
+.r2b11-key-ks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.r2b11-key-k{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.r2b11-key-k .cd-keycap{margin:0;max-width:100%}
+.r2b11-pl{font:600 11px/1.2 var(--f-mono);letter-spacing:.04em;color:var(--c,var(--dim))}
+.r2b11-pl-ps{--c:var(--cd-fx-spirit)}.r2b11-pl-xb{--c:var(--cd-fx-stam)}.r2b11-pl-pc{--c:var(--gold)}
+.r2b11-ktxt{font-size:12.5px;line-height:1.35;color:var(--text)}
+.r2b11-key-k .r2b11-kx{margin:0}
+.r2b11-ctrl:not([data-plat="all"]) .r2b11-keys{grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+.r2b11-ctrl:not([data-plat="all"]) .r2b11-key{flex-direction:row;align-items:center;justify-content:space-between;min-height:58px}
+.r2b11-ctrl:not([data-plat="all"]) .r2b11-key-ks{display:block}
+.r2b11-ctrl:not([data-plat="all"]) .r2b11-key-k{flex-direction:row;align-items:center}
+.r2b11-ctrl:not([data-plat="all"]) .r2b11-pl{display:none}
+.r2b11-ctrl:not([data-plat="all"]) .r2b11-key .cd-keycap{min-width:36px;height:32px;font-size:14px}
+.r2b11-ctrl[data-plat="ps"] .r2b11-key-k:not([data-p="ps"]),.r2b11-ctrl[data-plat="xb"] .r2b11-key-k:not([data-p="xb"]),.r2b11-ctrl[data-plat="pc"] .r2b11-key-k:not([data-p="pc"]){display:none}
+.r2b11-parry{margin:14px 0 12px}
+.r2b11-fex{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:8px 18px;margin:0;padding:0;list-style:none}
+.r2b11-fex li{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:10px;font-size:13px}
+.r2b11-fex-k{display:flex;gap:3px}.r2b11-fex-k .cd-keycap{margin:0}
+@container r2b11beg (max-width:900px){
+  .r2b11-rules{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@container r2b11beg (max-width:760px){
+  .r2b11-mechs{grid-template-columns:minmax(0,1fr)}
+}
+@container r2b11beg (max-width:520px){
+  .r2b11-rules{grid-template-columns:minmax(0,1fr);gap:10px}
+  .r2b11-rules>:first-child{grid-column:auto}
+  .r2b11-rules>:first-child .r2b11-rule-t{font-size:18px}
+  /* Feinschliff mobil: Icon links neben dem Satz statt darüber, Nummer klein in der Ecke (etwa 40 % kürzere Karten) */
+  article.r2b11-rule,.r2b11-rule.cd-fold>summary{display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:14px;align-items:start}
+  article.r2b11-rule{padding:14px 14px 15px}
+  .r2b11-rule.cd-fold>summary{padding:14px 14px 12px}
+  .r2b11-rule-top{display:contents}
+  .r2b11-rule-ico{grid-column:1;grid-row:1/span 3}
+  .r2b11-rule-n{position:absolute;top:12px;right:14px;font-size:16px}
+  .r2b11-rule-t,.r2b11-rule-d,.r2b11-rule-more{grid-column:2}
+  .r2b11-rule-t{padding-right:30px}
+  .r2b11-rule-more{justify-self:start;margin-top:8px}
+  .r2b11-rule .cd-fold-body{padding:10px 14px 14px 70px}
+  .r2b11-rule--lead{min-height:0}
+  .r2b11-rules>.r2b11-rule--lead .r2b11-rule-t{font-size:19px}
+  .r2b11-rule--lead :is(.r2b11-rule-t,.r2b11-rule-d){max-width:none}
+  #sec-beginner>.sub-t{margin-top:34px;font-size:19px}
+  .r2b11-sig,.r2b11-vs{grid-template-columns:minmax(0,1fr)}
+  .r2b11-ctrl-bar{flex-direction:column;align-items:stretch}
+  .r2b11-ctrl:not([data-plat="all"]) .r2b11-keys{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .r2b11-ctrl:not([data-plat="all"]) .r2b11-key{flex-direction:column;align-items:flex-start;gap:8px;padding:11px 12px}
+  .r2b11-el li{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+@media (max-width:600px){#sec-beginner .r2b11-bhero{min-height:0}}
 /* R2-B11 Ende */
 
 /* ---- Bereich Bauer 12 (nur B12 schreibt hier) ---- */
@@ -6633,61 +6861,37 @@ html.cd-motion .r2b10-hold-tag i{animation:r2b10Pulse 1.6s ease-out infinite;ani
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
-    <div class="disarm-hero">
-      <p>Die wichtigsten Kampf-Grundlagen und die Steuerung von <strong>Crimson Desert</strong> auf einen Blick. Faustregel der Guides: <strong>Menschen-Bosse parieren, Monster-Bosse ausweichen.</strong> Detail-Strategien zu einzelnen Bossen findest du auf der Seite <a href="#" onclick="showSec('bosses');return false;">Bosse</a>.</p>
-    </div>
+    <!-- R2 B11 (21.10.2026): Seitenkopf mit Szene „beginner“ (Bild setzt r2b11Beginner per cdScene ein), Merksätze, Mechaniken als Faltkarten, Steuerung als Tasten-Kappen. Markup erzeugt aus den bisherigen Texten (wortgetreu, nur gegliedert). -->
+    <header class="cd-hero cd-scened cd-spot r2b11-bhero" style="--cd-acc:var(--red)">
+      <div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" data-r2b11-scene="beginner"><i class="cd-scene-g cd-g">➤</i></div>
+      <div class="cd-hero-main">
+        <p class="cd-hero-k">Faustregel der Guides</p>
+        <h3 class="cd-hero-t">Menschen-Bosse parieren, Monster-Bosse ausweichen.</h3>
+        <p class="cd-hero-sub">Die wichtigsten Kampf-Grundlagen und die Steuerung von <strong>Crimson Desert</strong> auf einen Blick. Detail-Strategien zu einzelnen Bossen findest du auf der Seite <a href="#sec=bosses" data-go="bosses">Bosse</a>.</p>
+      </div>
+      <dl class="cd-hero-stats" data-n="3"><div class="cd-hero-stat"><dt>Merksätze</dt><dd>7</dd></div><div class="cd-hero-stat"><dt>Mechaniken</dt><dd>11</dd></div><div class="cd-hero-stat"><dt>Aktionen</dt><dd>13</dd></div></dl>
+    </header>
 
-    <div class="sub-t" style="margin-top:0;scroll-margin-top:72px">Kampf-Grundlagen</div>
-    <table class="farm-tbl" style="margin-bottom:20px">
-      <thead><tr><th>Mechanik</th><th>Erklärung</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Parieren (Parry)</strong></td><td>Getimtes Blocken (<span class="kbd">L1 / LB / Ctrl</span>) genau im Treffermoment. Ein perfekter Parry öffnet ein Konterfenster; laut den offiziellen Notes (1.00.03) baut er bei Bossen stärker die Stun-Leiste auf, und laut 8BitToast stellt er zusätzlich Ausdauer und Spirit wieder her (Einzelquelle). <strong>Greifangriffe (Grabs) lassen sich NICHT parieren</strong> — nur ausweichen.</td></tr>
-        <tr><td><strong>Neu seit 2.x</strong></td><td>Seit Patch 2.00.00 (25.08.2026) hat Kliff acht neue Fähigkeiten, laut den Skill-Daten des Wikis darunter <em>Enraged Parry</em> (Parry auch während anderer Aktionen) und <em>Serenity</em> (mehr Spirit-Regeneration, solange Focus gehalten wird). <em>Water Stride</em> (Wasserlauf: über Wasser sprinten, seit 2.03.00 mit Sprung) nennen die offiziellen Notes erstmals mit 2.03.00. Voraussetzungen und Kosten stehen auf der Seite Fähigkeiten.</td></tr>
-        <tr><td><strong>Perfect Dodge</strong></td><td>Skill <em>Dodge</em> (Ausweichen kurz vor dem Treffer), muss erst im Skillbaum freigeschaltet werden (Kliff: Keen Senses Lv 2, 1 Abyss Artifact). Ausweichen (<span class="kbd">○ / B / Alt</span>) im letzten Moment → grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff. Verzeihender als Parry, unterbricht aber keine Combos — danach kann gekontert werden.</td></tr>
-        <tr><td><strong>Blocken / Guard Break</strong></td><td>Guard halten blockt, kostet aber Ausdauer (schwere Treffer mehr). Ist die Ausdauer leer, <strong>bricht die Deckung</strong>. Gegnerische Deckung brichst du mit schweren Angriffen (<span class="kbd">R2 / RT / RMB</span>).</td></tr>
-        <tr><td><strong>Rote &amp; blaue Signale</strong></td><td><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen. <strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen. Nicht verwechseln: Färbt sich während eines gegnerischen Angriffs der ganze Bildschirm bläulich und erscheint oben links „Learning in Progress“, kannst du den Skill per <em>Watch &amp; Learn</em> abschauen (siehe Fähigkeiten).</td></tr>
-        <tr><td><strong>Stamina vs. Spirit</strong></td><td><strong>Ausdauer (Stamina):</strong> Sprinten, Ausweichen, Klettern, Blocken, die meisten Skills. <strong>Spirit:</strong> separate Ressource für Force-Skills (z.B. Force Palm), wird über <em>Focus</em> wieder aufgefüllt.</td></tr>
-        <tr><td><strong>Force Palm</strong></td><td>Kurzreichweitiger Energiestoß (<span class="kbd">R3 / RS / MMB</span>), kostet 5 Spirit und senkt die Verteidigung des Ziels (Charakter Kliff; Varianten u.a. Aerial/Healing).</td></tr>
-        <tr><td><strong>Axiom Force</strong></td><td>Telekinetisches Ziehen/Stoßen (<span class="kbd">L3 halten / Tab</span>) — v.a. für Rätsel/Traversal, mit etwas Kampfnutzen. (Eigener Skill, NICHT dasselbe wie Force Palm.)</td></tr>
-        <tr><td><strong>Grappling (Ringkampf)</strong></td><td>Gegner packen, werfen &amp; slammen. Die Grundstufe ist von Beginn an verfügbar (Kliff im Stamina-Baum, Damiane und Oongka mit eigenem Grappling-Zweig); weitere Stufen bis Lv 5 kosten je 1 Abyss Artifact und erhöhen den Schaden der Griffe. Moves wie Throw, Lariat und Giant Swing (Crowd-Control). Geworfene Gegner verletzen, was sie treffen.</td></tr>
-        <tr><td><strong>Focus (Zeitlupe)</strong></td><td>Eigener Modus auf Tastendruck: verlangsamt die Zeit um dich herum und füllt dabei Spirit auf. Besonders nützlich beim Zielen mit Bogen oder Schusswaffe (Schwachpunkte/Stagger; <em>Focused Shot</em> markiert mehrere Ziele) und für <em>Focused Force Palm</em> (leuchtenden Kern treffen).</td></tr>
-        <tr><td><strong>Elemente</strong></td><td>4 Elemente auf Angriffe legen (<em>Imbue Element</em>; freigeschaltet über je ein Abyss-Rätsel): <strong>Feuer</strong> (Brandschaden über Zeit), <strong>Frost</strong> (friert Gegner ein und verlangsamt sie), <strong>Blitz</strong> (betäubt kurz), <strong>Wind</strong> (Wirkung in keiner geprüften Quelle beschrieben). Die Wirkungen von Feuer, Eis und Blitz stehen auf der Fextralife-Seite „Status Effects“; Angaben wie „Shatter“, ein Bonus gegen nasse Gegner oder Wind als Luftstoß sind nicht belegt. Gegen Schwächen gezielt einsetzen.</td></tr>
-      </tbody>
-    </table>
+    <div class="sub-t" style="margin-top:0;scroll-margin-top:72px">Wichtige Faustregeln</div>
+    <div class="r2b11-rules"><article class="r2b11-rule r2b11-rule--lead cd-scened cd-spot" data-s="01 menschen parieren, monster ausweichen die zuverlässigste grundregel." style="--rc:var(--gold)"><div class="cd-scene" aria-hidden="true" data-r2b11-scene="cl-bosses" data-r2b11-card="1"><i class="cd-scene-g cd-g">⚔</i></div><span class="r2b11-rule-top"><span class="r2b11-rule-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-def"/></svg></span><span class="r2b11-rule-n" aria-hidden="true">01</span></span><h4 class="r2b11-rule-t">Menschen parieren, Monster ausweichen</h4><p class="r2b11-rule-d">Die zuverlässigste Grundregel.</p></article><article class="r2b11-rule cd-spot" data-s="02 grabs (oft rotes glint) nie parieren immer wegrollen." style="--rc:var(--red)"><span class="r2b11-rule-top"><span class="r2b11-rule-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg></span><span class="r2b11-rule-n" aria-hidden="true">02</span></span><h4 class="r2b11-rule-t">Grabs (oft rotes Glint) nie parieren</h4><p class="r2b11-rule-d">Immer wegrollen.</p></article><details class="cd-fold cd-spot r2b11-rule" data-s="03 heilung über essen nicht über tränke: gekochtes essen heilt mehr als rohes, fast ohne cooldown (z.b. grilled meat). im radial-/schnellmenü. mehr dazu weniger richtwert laut powerpyx (einzelquelle): das günstigste grilled meat stellt 140 gesundheit wieder her und lässt sich etwa alle 2 sekunden essen; auf hard wirkt essen erst nach der verzehranimation. heilwerte einzelner gerichte stehen auf der seite herstellen &amp; farmen (questlog-werte)." style="--rc:var(--cd-fx-hp);--cd-acc:var(--cd-fx-hp)"><summary><span class="r2b11-rule-top"><span class="r2b11-rule-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-hp"/></svg></span><span class="r2b11-rule-n" aria-hidden="true">03</span></span><h4 class="r2b11-rule-t">Heilung über Essen</h4><p class="r2b11-rule-d">Nicht über Tränke: gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü.</p><span class="r2b11-rule-more"><span class="r2b11-m1">Mehr dazu</span><span class="r2b11-m2">Weniger</span><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Richtwert laut PowerPyx (Einzelquelle): Das günstigste Grilled Meat stellt 140 Gesundheit wieder her und lässt sich etwa alle 2 Sekunden essen; auf Hard wirkt Essen erst nach der Verzehranimation.</p><p>Heilwerte einzelner Gerichte stehen auf der Seite <a class="cd-go" href="#sec=crafting" data-go="crafting">Herstellen &amp; Farmen<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a> (questlog-Werte).</p></div></details><details class="cd-fold cd-spot r2b11-rule" data-s="04 palmar-pille = auto-revive hast du beim tod eine im inventar, stehst du sofort mit etwas hp wieder auf. mehr dazu weniger palmar pill teil der gesundheit refined palmar pill volle gesundheit beide sind herstellbar und u. a. beim händler lacey erhältlich." style="--rc:var(--cd-ok);--cd-acc:var(--cd-ok)"><summary><span class="r2b11-rule-top"><span class="r2b11-rule-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-res"/></svg></span><span class="r2b11-rule-n" aria-hidden="true">04</span></span><h4 class="r2b11-rule-t">Palmar-Pille = Auto-Revive</h4><p class="r2b11-rule-d">Hast du beim Tod eine im Inventar, stehst du sofort mit etwas HP wieder auf.</p><span class="r2b11-rule-more"><span class="r2b11-m1">Mehr dazu</span><span class="r2b11-m2">Weniger</span><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><dl class="cd-facts"><div><dt><em>Palmar Pill</em></dt><dd>Teil der Gesundheit</dd></div><div><dt><em>Refined Palmar Pill</em></dt><dd>volle Gesundheit</dd></div></dl><p>Beide sind herstellbar und u. a. beim Händler Lacey erhältlich.</p></div></details><article class="r2b11-rule cd-spot" data-s="05 spirit per focus auffüllen bevor du force-skills brauchst." style="--rc:var(--cd-fx-spirit)"><span class="r2b11-rule-top"><span class="r2b11-rule-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-spirit"/></svg></span><span class="r2b11-rule-n" aria-hidden="true">05</span></span><h4 class="r2b11-rule-t">Spirit per Focus auffüllen</h4><p class="r2b11-rule-d">Bevor du Force-Skills brauchst.</p></article><details class="cd-fold cd-spot r2b11-rule" data-s="06 schwierigkeitsgrad frei wählbar seit patch 1.04.00 gibt es unter settings > play die grade easy, normal und hard. mehr dazu weniger easy verlängert die zeitfenster für parry und dodge und senkt den erlittenen schaden; hard verkürzt die fenster, und essen wirkt dort erst nach der verzehranimation. für trophäen ist kein bestimmter grad nötig." style="--rc:var(--violet);--cd-acc:var(--violet)"><summary><span class="r2b11-rule-top"><span class="r2b11-rule-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-neutral"/></svg></span><span class="r2b11-rule-n" aria-hidden="true">06</span></span><h4 class="r2b11-rule-t">Schwierigkeitsgrad frei wählbar</h4><p class="r2b11-rule-d">Seit Patch 1.04.00 gibt es unter Settings &gt; Play die Grade Easy, Normal und Hard.</p><span class="r2b11-rule-more"><span class="r2b11-m1">Mehr dazu</span><span class="r2b11-m2">Weniger</span><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Easy verlängert die Zeitfenster für Parry und Dodge und senkt den erlittenen Schaden; Hard verkürzt die Fenster, und Essen wirkt dort erst nach der Verzehranimation. Für Trophäen ist kein bestimmter Grad nötig.</p></div></details><article class="r2b11-rule cd-spot" data-s="07 achte auf verpassbares viele quests und items sind kapitelgebunden (siehe kapitel-guide &amp; checklisten )." style="--rc:var(--red)"><span class="r2b11-rule-top"><span class="r2b11-rule-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-miss"/></svg></span><span class="r2b11-rule-n" aria-hidden="true">07</span></span><h4 class="r2b11-rule-t">Achte auf Verpassbares</h4><p class="r2b11-rule-d">Viele Quests und Items sind kapitelgebunden (siehe <a class="cd-go" href="#sec=chapters" data-go="chapters">Kapitel-Guide<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a> &amp; <a class="cd-go" href="#sec=checklists" data-go="checklists">Checklisten<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a>).</p></article></div>
 
-    <div class="sub-t" style="scroll-margin-top:72px">Wichtige Faustregeln</div>
-    <div class="card" style="margin-bottom:20px">
-      <ul style="margin:0;padding-left:20px;line-height:1.9">
-        <li><strong>Menschen parieren, Monster ausweichen</strong> — die zuverlässigste Grundregel.</li>
-        <li><strong>Grabs (oft rotes Glint) nie parieren</strong>, immer wegrollen.</li>
-        <li><strong>Heilung über Essen</strong>, nicht über Tränke — gekochtes Essen heilt mehr als rohes, fast ohne Cooldown (z.B. Grilled Meat). Im Radial-/Schnellmenü. Richtwert laut PowerPyx (Einzelquelle): Das günstigste Grilled Meat stellt 140 Gesundheit wieder her und lässt sich etwa alle 2 Sekunden essen; auf Hard wirkt Essen erst nach der Verzehranimation. Heilwerte einzelner Gerichte stehen auf der Seite Herstellen &amp; Farmen (questlog-Werte).</li>
-        <li><strong>Palmar-Pille = Auto-Revive:</strong> Hast du beim Tod eine im Inventar, stehst du sofort mit etwas HP wieder auf (<em>Palmar Pill</em>: Teil der Gesundheit; <em>Refined Palmar Pill</em>: volle Gesundheit). Beide sind herstellbar und u. a. beim Händler Lacey erhältlich.</li>
-        <li><strong>Spirit per Focus auffüllen</strong>, bevor du Force-Skills brauchst.</li>
-        <li><strong>Schwierigkeitsgrad frei wählbar:</strong> Seit Patch 1.04.00 gibt es unter Settings &gt; Play die Grade Easy, Normal und Hard. Easy verlängert die Zeitfenster für Parry und Dodge und senkt den erlittenen Schaden; Hard verkürzt die Fenster, und Essen wirkt dort erst nach der Verzehranimation. Für Trophäen ist kein bestimmter Grad nötig.</li>
-        <li><strong>Achte auf Verpassbares:</strong> Viele Quests und Items sind kapitelgebunden (siehe Kapitel-Guide &amp; Checklisten).</li>
-      </ul>
-    </div>
+    <div class="sub-t" style="scroll-margin-top:72px">Kampf-Grundlagen</div>
+    <div class="r2b11-grp" style="--rc:var(--gold)"><h3 class="r2b11-grp-t"><span>Verteidigung</span><small>Parieren, Ausweichen, Blocken und die Warnsignale der Gegner</small></h3><div class="r2b11-mechs"><details class="cd-fold cd-spot r2b11-mech" data-s="parieren (parry) getimtes blocken genau im treffermoment. ein perfekter parry öffnet ein konterfenster. l1 / lb / ctrl grabs nicht parierbar getimtes blocken ( l1 / lb / ctrl ) genau im treffermoment. ein perfekter parry öffnet ein konterfenster; laut den offiziellen notes (1.00.03) baut er bei bossen stärker die stun-leiste auf, und laut 8bittoast stellt er zusätzlich ausdauer und spirit wieder her (einzelquelle). achtung greifangriffe (grabs) lassen sich nicht parieren , nur ausweichen." style="--cd-acc:var(--gold)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-def"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Parieren (Parry)</h4><span class="cd-fold-lead">Getimtes Blocken genau im Treffermoment. Ein perfekter Parry öffnet ein Konterfenster.</span><span class="cd-chips cd-fold-chips"><span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap">L1</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">LB</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">Ctrl</kbd></span><span class="cd-chip cd-chip--warn"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><span>Grabs nicht parierbar</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Getimtes Blocken (<span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap">L1</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">LB</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">Ctrl</kbd></span>) genau im Treffermoment. Ein perfekter Parry öffnet ein Konterfenster; laut den offiziellen Notes (1.00.03) baut er bei Bossen stärker die Stun-Leiste auf, und laut 8BitToast stellt er zusätzlich Ausdauer und Spirit wieder her (Einzelquelle).</p><div class="cd-note cd-note--warn" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Achtung</b><strong>Greifangriffe (Grabs) lassen sich NICHT parieren</strong>, nur ausweichen.</div></div></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="perfect dodge ausweichen im letzten moment: grünes aufblitzen, stellt ausdauer her und erlaubt einen folgeangriff. ○ / b / alt skill nötig skill dodge (ausweichen kurz vor dem treffer), muss erst im skillbaum freigeschaltet werden. ausweichen ( ○ / b / alt ) im letzten moment → grünes aufblitzen, stellt ausdauer her und erlaubt einen folgeangriff. verzeihender als parry, unterbricht aber keine combos, danach kann gekontert werden. freischalten kliff: keen senses lv 2, 1 abyss artifact" style="--cd-acc:var(--cd-ok)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-speed"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Perfect Dodge</h4><span class="cd-fold-lead">Ausweichen im letzten Moment: grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff.</span><span class="cd-chips cd-fold-chips"><span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap r2b11-ps-o">○</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">B</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">Alt</kbd></span><span class="cd-chip cd-chip--violet"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-key"/></svg><span>Skill nötig</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Skill <em>Dodge</em> (Ausweichen kurz vor dem Treffer), muss erst im Skillbaum freigeschaltet werden. Ausweichen (<span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap r2b11-ps-o">○</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">B</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">Alt</kbd></span>) im letzten Moment → grünes Aufblitzen, stellt Ausdauer her und erlaubt einen Folgeangriff. Verzeihender als Parry, unterbricht aber keine Combos, danach kann gekontert werden.</p><dl class="cd-facts"><div><dt>Freischalten</dt><dd>Kliff: Keen Senses Lv 2, 1 Abyss Artifact</dd></div></dl></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="blocken / guard break guard halten blockt, kostet aber ausdauer. ist die ausdauer leer, bricht die deckung. deckung brechen: r2 / rt / rmb guard halten blockt, kostet aber ausdauer (schwere treffer mehr). ist die ausdauer leer, bricht die deckung . gegnerische deckung brichst du mit schweren angriffen ( r2 / rt / rmb )." style="--cd-acc:var(--cd-fx-def)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-def"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Blocken / Guard Break</h4><span class="cd-fold-lead">Guard halten blockt, kostet aber Ausdauer. Ist die Ausdauer leer, bricht die Deckung.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip"><span>Deckung brechen:</span></span><span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap">R2</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">RT</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">RMB</kbd></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Guard halten blockt, kostet aber Ausdauer (schwere Treffer mehr). Ist die Ausdauer leer, <strong>bricht die Deckung</strong>. Gegnerische Deckung brichst du mit schweren Angriffen (<span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap">R2</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">RT</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">RMB</kbd></span>).</p></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="rote &amp; blaue signale rotes leuchten = unblockbarer angriff, ausweichen. blaues leuchten = super armor, angriffe stoppen. rot: ausweichen blau: blocken/ausweichen rotes leuchten am gegner = unblockbarer/unparierbarer angriff → ausweichen. blaues leuchten = super armor/kurz unverwundbar → angriffe stoppen, blocken/ausweichen. nicht verwechseln färbt sich während eines gegnerischen angriffs der ganze bildschirm bläulich und erscheint oben links „learning in progress“, kannst du den skill per watch &amp; learn abschauen (siehe fähigkeiten )." style="--cd-acc:var(--red)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Rote &amp; blaue Signale</h4><span class="cd-fold-lead">Rotes Leuchten = unblockbarer Angriff, ausweichen. Blaues Leuchten = Super Armor, Angriffe stoppen.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--red"><span>Rot: ausweichen</span></span><span class="cd-chip cd-chip--ice"><span>Blau: blocken/ausweichen</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><div class="r2b11-sig"><p class="r2b11-sig-r"><strong>Rotes Leuchten</strong> am Gegner = unblockbarer/unparierbarer Angriff → ausweichen.</p><p class="r2b11-sig-b"><strong>Blaues Leuchten</strong> = Super Armor/kurz unverwundbar → Angriffe stoppen, blocken/ausweichen.</p></div><div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Nicht verwechseln</b>Färbt sich während eines gegnerischen Angriffs der ganze Bildschirm bläulich und erscheint oben links „Learning in Progress“, kannst du den Skill per <em>Watch &amp; Learn</em> abschauen (siehe <a class="cd-go" href="#sec=skills" data-go="skills">Fähigkeiten<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a>).</div></div></div></details></div></div>
+    <div class="r2b11-grp" style="--rc:var(--cd-fx-spirit)"><h3 class="r2b11-grp-t"><span>Ressourcen</span><small>Ausdauer, Spirit und der Zeitlupen-Modus Focus</small></h3><div class="r2b11-mechs"><details class="cd-fold cd-spot r2b11-mech" data-s="stamina vs. spirit ausdauer für sprinten, ausweichen, klettern und blocken; spirit für force-skills, aufgefüllt über focus. ausdauer (stamina) spirit ausdauer (stamina) sprinten, ausweichen, klettern, blocken, die meisten skills. spirit separate ressource für force-skills (z.b. force palm), wird über focus wieder aufgefüllt." style="--cd-acc:var(--cd-fx-stam)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-stam"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Stamina vs. Spirit</h4><span class="cd-fold-lead">Ausdauer für Sprinten, Ausweichen, Klettern und Blocken; Spirit für Force-Skills, aufgefüllt über Focus.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--ok"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-stam"/></svg><span>Ausdauer (Stamina)</span></span><span class="cd-chip cd-chip--ice"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-spirit"/></svg><span>Spirit</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><div class="r2b11-vs"><div class="r2b11-vs-a"><b><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-stam"/></svg> Ausdauer (Stamina)</b><span>Sprinten, Ausweichen, Klettern, Blocken, die meisten Skills.</span></div><div class="r2b11-vs-b"><b><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-spirit"/></svg> Spirit</b><span>separate Ressource für Force-Skills (z.B. Force Palm), wird über <em>Focus</em> wieder aufgefüllt.</span></div></div></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="focus (zeitlupe) eigener modus auf tastendruck: verlangsamt die zeit um dich herum und füllt dabei spirit auf. bogen &amp; schusswaffe focused shot focused force palm eigener modus auf tastendruck: verlangsamt die zeit um dich herum und füllt dabei spirit auf. besonders nützlich beim zielen mit bogen oder schusswaffe (schwachpunkte/stagger; focused shot markiert mehrere ziele) und für focused force palm (leuchtenden kern treffen)." style="--cd-acc:var(--cd-fx-spirit)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-miss"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Focus (Zeitlupe)</h4><span class="cd-fold-lead">Eigener Modus auf Tastendruck: verlangsamt die Zeit um dich herum und füllt dabei Spirit auf.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip"><span>Bogen &amp; Schusswaffe</span></span><span class="cd-chip cd-chip--ice"><span>Focused Shot</span></span><span class="cd-chip cd-chip--ice"><span>Focused Force Palm</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Eigener Modus auf Tastendruck: verlangsamt die Zeit um dich herum und füllt dabei Spirit auf. Besonders nützlich beim Zielen mit Bogen oder Schusswaffe (Schwachpunkte/Stagger; <em>Focused Shot</em> markiert mehrere Ziele) und für <em>Focused Force Palm</em> (leuchtenden Kern treffen).</p></div></details></div></div>
+    <div class="r2b11-grp" style="--rc:var(--red)"><h3 class="r2b11-grp-t"><span>Angriff &amp; Fähigkeiten</span><small>Force Palm, Axiom Force, Ringkampf, Elemente und die Neuerungen seit 2.x</small></h3><div class="r2b11-mechs"><details class="cd-fold cd-spot r2b11-mech" data-s="force palm kurzreichweitiger energiestoß, kostet 5 spirit und senkt die verteidigung des ziels. r3 / rs / mmb 5 spirit kurzreichweitiger energiestoß ( r3 / rs / mmb ), kostet 5 spirit und senkt die verteidigung des ziels (charakter kliff; varianten u.a. aerial/healing)." style="--cd-acc:var(--cd-fx-spirit)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-spirit"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Force Palm</h4><span class="cd-fold-lead">Kurzreichweitiger Energiestoß, kostet 5 Spirit und senkt die Verteidigung des Ziels.</span><span class="cd-chips cd-fold-chips"><span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap">R3</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">RS</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">MMB</kbd></span><span class="cd-chip cd-chip--ice"><b>5</b><span>Spirit</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Kurzreichweitiger Energiestoß (<span class="r2b11-kgrp" title="PlayStation / Xbox / PC"><kbd class="cd-keycap">R3</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">RS</kbd><i aria-hidden="true">/</i><kbd class="cd-keycap">MMB</kbd></span>), kostet 5 Spirit und senkt die Verteidigung des Ziels (Charakter Kliff; Varianten u.a. Aerial/Healing).</p></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="axiom force telekinetisches ziehen/stoßen, v.a. für rätsel/traversal, mit etwas kampfnutzen. l3 halten / tab nicht force palm telekinetisches ziehen/stoßen ( l3 halten / tab ), v.a. für rätsel/traversal, mit etwas kampfnutzen. eigener skill, nicht dasselbe wie force palm." style="--cd-acc:var(--violet)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-neutral"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Axiom Force</h4><span class="cd-fold-lead">Telekinetisches Ziehen/Stoßen, v.a. für Rätsel/Traversal, mit etwas Kampfnutzen.</span><span class="cd-chips cd-fold-chips"><span class="r2b11-kgrp" title="PlayStation / PC"><kbd class="cd-keycap">L3</kbd><span class="r2b11-kx">halten</span><i aria-hidden="true">/</i><kbd class="cd-keycap">Tab</kbd></span><span class="cd-chip cd-chip--violet"><span>Nicht Force Palm</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Telekinetisches Ziehen/Stoßen (<kbd class="cd-keycap">L3</kbd> halten / <kbd class="cd-keycap">Tab</kbd>), v.a. für Rätsel/Traversal, mit etwas Kampfnutzen.</p><div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div>Eigener Skill, NICHT dasselbe wie Force Palm.</div></div></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="grappling (ringkampf) gegner packen, werfen &amp; slammen. geworfene gegner verletzen, was sie treffen. grundstufe ab beginn bis lv 5 gegner packen, werfen &amp; slammen. die grundstufe ist von beginn an verfügbar (kliff im stamina-baum, damiane und oongka mit eigenem grappling-zweig); weitere stufen bis lv 5 kosten je 1 abyss artifact und erhöhen den schaden der griffe. moves wie throw, lariat und giant swing (crowd-control). geworfene gegner verletzen, was sie treffen." style="--cd-acc:var(--cd-fx-atk)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-atk"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Grappling (Ringkampf)</h4><span class="cd-fold-lead">Gegner packen, werfen &amp; slammen. Geworfene Gegner verletzen, was sie treffen.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--ok"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-check"/></svg><span>Grundstufe ab Beginn</span></span><span class="cd-chip cd-chip--gold"><span>bis</span><b>Lv 5</b></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Gegner packen, werfen &amp; slammen. Die Grundstufe ist von Beginn an verfügbar (Kliff im Stamina-Baum, Damiane und Oongka mit eigenem Grappling-Zweig); weitere Stufen bis Lv 5 kosten je 1 Abyss Artifact und erhöhen den Schaden der Griffe. Moves wie Throw, Lariat und Giant Swing (Crowd-Control). Geworfene Gegner verletzen, was sie treffen.</p></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="elemente 4 elemente auf angriffe legen ( imbue element ; freigeschaltet über je ein abyss-rätsel). feuer frost blitz wind 4 elemente auf angriffe legen ( imbue element ; freigeschaltet über je ein abyss-rätsel). gegen schwächen gezielt einsetzen. feuer brandschaden über zeit frost friert gegner ein und verlangsamt sie blitz betäubt kurz wind wirkung in keiner geprüften quelle beschrieben belegstand die wirkungen von feuer, eis und blitz stehen auf der fextralife-seite „status effects“; angaben wie „shatter“, ein bonus gegen nasse gegner oder wind als luftstoß sind nicht belegt." style="--cd-acc:var(--cd-fx-fire)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-fire"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Elemente</h4><span class="cd-fold-lead">4 Elemente auf Angriffe legen (<em>Imbue Element</em>; freigeschaltet über je ein Abyss-Rätsel).</span><span class="cd-chips cd-fold-chips"><span class="cd-fx cd-fx--fire"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-fire"/></svg><span>Feuer</span></span><span class="cd-fx cd-fx--ice"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-ice"/></svg><span>Frost</span></span><span class="cd-fx cd-fx--bolt"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-bolt"/></svg><span>Blitz</span></span><span class="cd-fx cd-fx--neutral"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-neutral"/></svg><span>Wind</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>4 Elemente auf Angriffe legen (<em>Imbue Element</em>; freigeschaltet über je ein Abyss-Rätsel). Gegen Schwächen gezielt einsetzen.</p><ul class="r2b11-el"><li><span class="cd-fx cd-fx--fire"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-fire"/></svg><span>Feuer</span></span><span>Brandschaden über Zeit</span></li><li><span class="cd-fx cd-fx--ice"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-ice"/></svg><span>Frost</span></span><span>friert Gegner ein und verlangsamt sie</span></li><li><span class="cd-fx cd-fx--bolt"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-bolt"/></svg><span>Blitz</span></span><span>betäubt kurz</span></li><li><span class="cd-fx cd-fx--neutral"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-neutral"/></svg><span>Wind</span></span><span>Wirkung in keiner geprüften Quelle beschrieben</span></li></ul><div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Belegstand</b>Die Wirkungen von Feuer, Eis und Blitz stehen auf der Fextralife-Seite „Status Effects“; Angaben wie „Shatter“, ein Bonus gegen nasse Gegner oder Wind als Luftstoß sind nicht belegt.</div></div></div></details><details class="cd-fold cd-spot r2b11-mech" data-s="neu seit 2.x seit patch 2.00.00 (25.08.2026) hat kliff acht neue fähigkeiten. enraged parry serenity water stride seit patch 2.00.00 (25.08.2026) hat kliff acht neue fähigkeiten, laut den skill-daten des wikis darunter enraged parry (parry auch während anderer aktionen) und serenity (mehr spirit-regeneration, solange focus gehalten wird). water stride (wasserlauf: über wasser sprinten, seit 2.03.00 mit sprung) nennen die offiziellen notes erstmals mit 2.03.00. voraussetzungen und kosten stehen auf der seite fähigkeiten ." style="--cd-acc:var(--violet)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-neutral"/></svg></span><span class="cd-fold-main"><h4 class="cd-fold-t">Neu seit 2.x</h4><span class="cd-fold-lead">Seit Patch 2.00.00 (25.08.2026) hat Kliff acht neue Fähigkeiten.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--violet"><span>Enraged Parry</span></span><span class="cd-chip cd-chip--violet"><span>Serenity</span></span><span class="cd-chip cd-chip--violet"><span>Water Stride</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Seit Patch 2.00.00 (25.08.2026) hat Kliff acht neue Fähigkeiten, laut den Skill-Daten des Wikis darunter <em>Enraged Parry</em> (Parry auch während anderer Aktionen) und <em>Serenity</em> (mehr Spirit-Regeneration, solange Focus gehalten wird). <em>Water Stride</em> (Wasserlauf: über Wasser sprinten, seit 2.03.00 mit Sprung) nennen die offiziellen Notes erstmals mit 2.03.00. Voraussetzungen und Kosten stehen auf der Seite <a class="cd-go" href="#sec=skills" data-go="skills">Fähigkeiten<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a>.</p></div></details></div></div>
 
     <div class="sub-t" style="scroll-margin-top:72px">Steuerung (Werkseinstellung)</div>
-    <table class="farm-tbl" style="margin-bottom:12px">
-      <thead><tr><th>Aktion</th><th>PlayStation</th><th>Xbox</th><th>PC</th></tr></thead>
-      <tbody>
-        <tr><td>Bewegen / Kamera</td><td>Linker / Rechter Stick</td><td>Linker / Rechter Stick</td><td>WASD / Maus</td></tr>
-        <tr><td>Sprinten</td><td><span class="kbd">✕</span></td><td><span class="kbd">A</span></td><td><span class="kbd">Shift</span></td></tr>
-        <tr><td>Springen</td><td><span class="kbd">▢</span></td><td><span class="kbd">X</span></td><td><span class="kbd">Leertaste</span></td></tr>
-        <tr><td>Ausweichen / Rolle</td><td><span class="kbd">○</span></td><td><span class="kbd">B</span></td><td><span class="kbd">Alt</span></td></tr>
-        <tr><td>Leichter Angriff</td><td><span class="kbd">R1</span></td><td><span class="kbd">RB</span></td><td><span class="kbd">LMB</span></td></tr>
-        <tr><td>Schwerer Angriff</td><td><span class="kbd">R2</span></td><td><span class="kbd">RT</span></td><td><span class="kbd">RMB</span></td></tr>
-        <tr><td>Tritt / unbewaffnet</td><td><span class="kbd">△</span></td><td><span class="kbd">Y</span></td><td><span class="kbd">F</span></td></tr>
-        <tr><td>Blocken / Parieren</td><td><span class="kbd">L1</span></td><td><span class="kbd">LB</span></td><td><span class="kbd">Ctrl</span></td></tr>
-        <tr><td>Force Palm</td><td><span class="kbd">R3</span></td><td><span class="kbd">RS</span></td><td><span class="kbd">MMB</span></td></tr>
-        <tr><td>Axiom Force</td><td><span class="kbd">L3</span> halten</td><td><span class="kbd">LS</span> halten</td><td><span class="kbd">Tab</span></td></tr>
-        <tr><td>Fernkampf zielen</td><td><span class="kbd">L2</span></td><td><span class="kbd">LT</span></td><td><span class="kbd">Q</span></td></tr>
-        <tr><td>Mount rufen</td><td><span class="kbd">D-Pad ↑</span></td><td><span class="kbd">D-Pad ↑</span></td><td><span class="kbd">H</span></td></tr>
-        <tr><td>Heilen / Essen</td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">D-Pad →</span></td><td><span class="kbd">F3</span></td></tr>
-      </tbody>
-    </table>
-    <p style="font-size:.82rem;opacity:.7;margin-bottom:24px">Werkseinstellung — Tastatur/Maus lassen sich über „Shortcuts and Input Settings“ umbelegen (belegt spätestens seit Patch 1.00.03; seit 1.08.00 haben alle Eingaben eine Zweitbelegung, und die Menü-Shortcuts für Inventar, Karte, Skills, Journal, Foto-Modus und Menü sind frei belegbar). Patch 1.00.03 ergänzte außerdem die Standardbelegung Guard/Aim (Maus-Seitentaste 1) und Ausweichen (Maus-Seitentaste 2). Für Controller gibt es Remapping erst seit 1.09.00; die Axiom-Force-Tasten sind dort seit 1.10.00 anpassbar, die Tasten für Inventar, Karte, Skills, Journal und Foto-Modus seit 1.11.00. Eine separate „Parry"-Taste gibt es nicht: Parieren = Block im richtigen Moment. Einzelne Konsolen-Belegungen (Lock-On-Richtung, Menü-Tasten) können je nach Quelle leicht abweichen. Belegstand der Spalten: Die Xbox-Spalte ist die übliche Entsprechung der PlayStation-Tasten (✕/A, ○/B, ▢/X, △/Y, L1/LB, R1/RB, L2/LT, R2/RT, R3/RS, L3/LS) und nicht Taste für Taste aus dem Spiel belegt. Einzeln bestätigt sind Parieren (L1 / LB / Ctrl) und Ausweichen (○ / B / Alt) bei 8BitToast sowie Essen (D-Pad rechts / F3) und Force Palm (R3 / am PC laut PowerPyx das Mausrad, die Tabelle führt MMB) bei PowerPyx. Nicht belegt sind Axiom Force (L3 / Tab; PowerPyx nennt L3 / Tab nur für Healing Palm nach R3) und die übrigen PC-Tasten (Shift, Leertaste, F, Q, H); sie stammen aus früherer Recherche — im Spiel unter „Shortcuts and Input Settings“ prüfen. Laut Fextralife-Steuerungsliste (PS5) gilt außerdem: <span class="kbd">✕</span> = Laufen, zweimal <span class="kbd">✕</span> = Sprint; <span class="kbd">○</span> = Rolle, zweimal <span class="kbd">○</span> = Ausweichen (Evasion); <span class="kbd">L3</span> = Axiom Force bzw. Ducken/Rutschen; <span class="kbd">D-Pad ↓</span> = Ziel fixieren (Hard Lock); Touchpad = Kamerawechsel.</p>
+    <div class="r2b11-ctrl" data-plat="all">
+      <div class="r2b11-ctrl-bar"><div class="cd-pills r2b11-plats" role="group" aria-label="Plattform wählen" data-cd-pills="r2b11-plat"><button type="button" class="cd-pill" data-v="all" aria-pressed="true"><span>Alle</span></button><button type="button" class="cd-pill r2b11-pp-ps" data-v="ps" aria-pressed="false"><span>PlayStation</span></button><button type="button" class="cd-pill r2b11-pp-xb" data-v="xb" aria-pressed="false"><span>Xbox</span></button><button type="button" class="cd-pill r2b11-pp-pc" data-v="pc" aria-pressed="false"><span>PC</span></button></div>
+      <p class="r2b11-legend"><span class="r2b11-okm"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-check"/></svg></span> einzeln belegt <span class="r2b11-legend-sep" aria-hidden="true"></span> <kbd class="cd-keycap r2b11-unv">F</kbd> nicht einzeln belegt, im Spiel prüfen</p></div>
+      <div class="r2b11-keys"><div class="r2b11-key cd-spot" data-s="bewegen / kamera playstation linker / rechter stick xbox linker / rechter stick pc wasd / maus"><span class="r2b11-key-a">Bewegen / Kamera</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><span class="r2b11-ktxt">Linker / Rechter Stick</span></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><span class="r2b11-ktxt">Linker / Rechter Stick</span></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><span class="r2b11-ktxt">WASD / Maus</span></span></span></div><div class="r2b11-key cd-spot" data-s="sprinten playstation ✕ xbox a pc shift"><span class="r2b11-key-a">Sprinten</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap r2b11-ps-x">✕</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">A</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap r2b11-unv">Shift</kbd></span></span></div><div class="r2b11-key cd-spot" data-s="springen playstation ▢ xbox x pc leertaste"><span class="r2b11-key-a">Springen</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap r2b11-ps-sq">▢</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">X</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap r2b11-unv">Leertaste</kbd></span></span></div><div class="r2b11-key cd-spot is-ok" data-s="ausweichen / rolle einzeln belegt playstation ○ xbox b pc alt einzeln bestätigt bei 8bittoast (○ / b / alt)"><span class="r2b11-key-a">Ausweichen / Rolle<span class="r2b11-okm" title="Einzeln bestätigt bei 8BitToast (○ / B / Alt)"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-check"/></svg><span class="r2b11-sr">Einzeln belegt</span></span></span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap r2b11-ps-o">○</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">B</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap">Alt</kbd></span></span></div><div class="r2b11-key cd-spot" data-s="leichter angriff playstation r1 xbox rb pc lmb"><span class="r2b11-key-a">Leichter Angriff</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap">R1</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">RB</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap">LMB</kbd></span></span></div><div class="r2b11-key cd-spot" data-s="schwerer angriff playstation r2 xbox rt pc rmb"><span class="r2b11-key-a">Schwerer Angriff</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap">R2</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">RT</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap">RMB</kbd></span></span></div><div class="r2b11-key cd-spot" data-s="tritt / unbewaffnet playstation △ xbox y pc f"><span class="r2b11-key-a">Tritt / unbewaffnet</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap r2b11-ps-tri">△</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">Y</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap r2b11-unv">F</kbd></span></span></div><div class="r2b11-key cd-spot is-ok" data-s="blocken / parieren einzeln belegt playstation l1 xbox lb pc ctrl einzeln bestätigt bei 8bittoast (l1 / lb / ctrl)"><span class="r2b11-key-a">Blocken / Parieren<span class="r2b11-okm" title="Einzeln bestätigt bei 8BitToast (L1 / LB / Ctrl)"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-check"/></svg><span class="r2b11-sr">Einzeln belegt</span></span></span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap">L1</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">LB</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap">Ctrl</kbd></span></span></div><div class="r2b11-key cd-spot is-ok" data-s="force palm einzeln belegt playstation r3 xbox rs pc mmb r3 bei powerpyx bestätigt; am pc laut powerpyx das mausrad, die tabelle führt mmb"><span class="r2b11-key-a">Force Palm<span class="r2b11-okm" title="R3 bei PowerPyx bestätigt; am PC laut PowerPyx das Mausrad, die Tabelle führt MMB"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-check"/></svg><span class="r2b11-sr">Einzeln belegt</span></span></span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap">R3</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">RS</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap">MMB</kbd></span></span></div><div class="r2b11-key cd-spot" data-s="axiom force playstation l3 halten xbox ls halten pc tab"><span class="r2b11-key-a">Axiom Force</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap r2b11-unv">L3</kbd><span class="r2b11-kx">halten</span></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap r2b11-unv">LS</kbd><span class="r2b11-kx">halten</span></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap r2b11-unv">Tab</kbd></span></span></div><div class="r2b11-key cd-spot" data-s="fernkampf zielen playstation l2 xbox lt pc q"><span class="r2b11-key-a">Fernkampf zielen</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap">L2</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">LT</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap r2b11-unv">Q</kbd></span></span></div><div class="r2b11-key cd-spot" data-s="mount rufen playstation d-pad ↑ xbox d-pad ↑ pc h"><span class="r2b11-key-a">Mount rufen</span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap">D-Pad ↑</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">D-Pad ↑</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap r2b11-unv">H</kbd></span></span></div><div class="r2b11-key cd-spot is-ok" data-s="heilen / essen einzeln belegt playstation d-pad → xbox d-pad → pc f3 einzeln bestätigt bei powerpyx (d-pad rechts / f3)"><span class="r2b11-key-a">Heilen / Essen<span class="r2b11-okm" title="Einzeln bestätigt bei PowerPyx (D-Pad rechts / F3)"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-check"/></svg><span class="r2b11-sr">Einzeln belegt</span></span></span><span class="r2b11-key-ks"><span class="r2b11-key-k" data-p="ps"><span class="r2b11-pl r2b11-pl-ps">PlayStation</span><kbd class="cd-keycap">D-Pad →</kbd></span><span class="r2b11-key-k" data-p="xb"><span class="r2b11-pl r2b11-pl-xb">Xbox</span><kbd class="cd-keycap">D-Pad →</kbd></span><span class="r2b11-key-k" data-p="pc"><span class="r2b11-pl r2b11-pl-pc">PC</span><kbd class="cd-keycap">F3</kbd></span></span></div></div>
+    </div>
+    <div class="r2b11-parry cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Keine eigene Parry-Taste</b>Eine separate „Parry“-Taste gibt es nicht: Parieren = Block im richtigen Moment.</div></div>
+    <div class="cd-folds r2b11-cfolds">
+      <details class="cd-fold cd-spot r2b11-mech" data-s="tasten umbelegen tastatur/maus über „shortcuts and input settings“, controller-remapping erst seit 1.09.00. 5 patches patch 1.00.03 tastatur/maus lassen sich über „shortcuts and input settings“ umbelegen (belegt spätestens seit diesem patch). neue standardbelegung guard/aim (maus-seitentaste 1) und ausweichen (maus-seitentaste 2). patch 1.08.00 alle eingaben haben eine zweitbelegung; die menü-shortcuts für inventar, karte, skills, journal, foto-modus und menü sind frei belegbar. patch 1.09.00 remapping auch für controller. patch 1.10.00 die axiom-force-tasten sind am controller anpassbar. patch 1.11.00 am controller zusätzlich die tasten für inventar, karte, skills, journal und foto-modus." style="--cd-acc:var(--gold)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-key"/></svg></span><span class="cd-fold-main"><h3 class="cd-fold-t">Tasten umbelegen</h3><span class="cd-fold-lead">Tastatur/Maus über „Shortcuts and Input Settings“, Controller-Remapping erst seit 1.09.00.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>5 Patches</span></span></span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><ol class="cd-stepper"><li><span class="cd-step-t">Patch 1.00.03</span><span class="cd-step-d">Tastatur/Maus lassen sich über „Shortcuts and Input Settings“ umbelegen (belegt spätestens seit diesem Patch). Neue Standardbelegung Guard/Aim (Maus-Seitentaste 1) und Ausweichen (Maus-Seitentaste 2).</span></li><li><span class="cd-step-t">Patch 1.08.00</span><span class="cd-step-d">Alle Eingaben haben eine Zweitbelegung; die Menü-Shortcuts für Inventar, Karte, Skills, Journal, Foto-Modus und Menü sind frei belegbar.</span></li><li><span class="cd-step-t">Patch 1.09.00</span><span class="cd-step-d">Remapping auch für Controller.</span></li><li><span class="cd-step-t">Patch 1.10.00</span><span class="cd-step-d">Die Axiom-Force-Tasten sind am Controller anpassbar.</span></li><li><span class="cd-step-t">Patch 1.11.00</span><span class="cd-step-d">Am Controller zusätzlich die Tasten für Inventar, Karte, Skills, Journal und Foto-Modus.</span></li></ol></div></details>
+      <details class="cd-fold cd-spot r2b11-mech" data-s="mehr ps5-belegungen (fextralife) laufen, sprint, rolle, ausweichen, ducken, hard lock und kamerawechsel laut fextralife-steuerungsliste. ✕ laufen ✕ ✕ zweimal: sprint ○ rolle ○ ○ zweimal: ausweichen (evasion) l3 axiom force bzw. ducken/rutschen d-pad ↓ ziel fixieren (hard lock) touchpad kamerawechsel" style="--cd-acc:var(--cd-fx-spirit)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-neutral"/></svg></span><span class="cd-fold-main"><h3 class="cd-fold-t">Mehr PS5-Belegungen (Fextralife)</h3><span class="cd-fold-lead">Laufen, Sprint, Rolle, Ausweichen, Ducken, Hard Lock und Kamerawechsel laut Fextralife-Steuerungsliste.</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><ul class="r2b11-fex"><li><span class="r2b11-fex-k"><kbd class="cd-keycap r2b11-ps-x">✕</kbd></span><span>Laufen</span></li><li><span class="r2b11-fex-k"><kbd class="cd-keycap r2b11-ps-x">✕</kbd><kbd class="cd-keycap r2b11-ps-x">✕</kbd></span><span>zweimal: Sprint</span></li><li><span class="r2b11-fex-k"><kbd class="cd-keycap r2b11-ps-o">○</kbd></span><span>Rolle</span></li><li><span class="r2b11-fex-k"><kbd class="cd-keycap r2b11-ps-o">○</kbd><kbd class="cd-keycap r2b11-ps-o">○</kbd></span><span>zweimal: Ausweichen (Evasion)</span></li><li><span class="r2b11-fex-k"><kbd class="cd-keycap">L3</kbd></span><span>Axiom Force bzw. Ducken/Rutschen</span></li><li><span class="r2b11-fex-k"><kbd class="cd-keycap">D-Pad ↓</kbd></span><span>Ziel fixieren (Hard Lock)</span></li><li><span class="r2b11-fex-k"><kbd class="cd-keycap">Touchpad</kbd></span><span>Kamerawechsel</span></li></ul></div></details>
+      <details class="cd-fold cd-spot r2b11-mech" data-s="belegstand der tasten welche tasten einzeln bestätigt sind und welche aus früherer recherche stammen. die xbox-spalte ist die übliche entsprechung der playstation-tasten (✕/a, ○/b, ▢/x, △/y, l1/lb, r1/rb, l2/lt, r2/rt, r3/rs, l3/ls) und nicht taste für taste aus dem spiel belegt. einzeln bestätigt sind parieren (l1 / lb / ctrl) und ausweichen (○ / b / alt) bei 8bittoast sowie essen (d-pad rechts / f3) und force palm (r3 / am pc laut powerpyx das mausrad, die tabelle führt mmb) bei powerpyx. nicht belegt sind axiom force (l3 / tab; powerpyx nennt l3 / tab nur für healing palm nach r3) und die übrigen pc-tasten (shift, leertaste, f, q, h); sie stammen aus früherer recherche. im spiel unter „shortcuts and input settings“ prüfen. einzelne konsolen-belegungen (lock-on-richtung, menü-tasten) können je nach quelle leicht abweichen." style="--cd-acc:var(--slate)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span><span class="cd-fold-main"><h3 class="cd-fold-t">Belegstand der Tasten</h3><span class="cd-fold-lead">Welche Tasten einzeln bestätigt sind und welche aus früherer Recherche stammen.</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><p>Die Xbox-Spalte ist die übliche Entsprechung der PlayStation-Tasten (✕/A, ○/B, ▢/X, △/Y, L1/LB, R1/RB, L2/LT, R2/RT, R3/RS, L3/LS) und nicht Taste für Taste aus dem Spiel belegt.</p><p>Einzeln bestätigt sind Parieren (L1 / LB / Ctrl) und Ausweichen (○ / B / Alt) bei 8BitToast sowie Essen (D-Pad rechts / F3) und Force Palm (R3 / am PC laut PowerPyx das Mausrad, die Tabelle führt MMB) bei PowerPyx.</p><p>Nicht belegt sind Axiom Force (L3 / Tab; PowerPyx nennt L3 / Tab nur für Healing Palm nach R3) und die übrigen PC-Tasten (Shift, Leertaste, F, Q, H); sie stammen aus früherer Recherche. Im Spiel unter „Shortcuts and Input Settings“ prüfen.</p><p>Einzelne Konsolen-Belegungen (Lock-On-Richtung, Menü-Tasten) können je nach Quelle leicht abweichen.</p></div></details>
+    </div>
   </section>
   <section class="sec active" id="sec-bosses">
     <h2 class="sec-t"><span class="sec-sym">☠</span> Bosse</h2>
@@ -10410,34 +10614,80 @@ const START_POPULAR=[
   {sec:'map'},{sec:'checklists'},{sec:'crafting'},{sec:'cores'}
 ];
 function _startHref(sec,tab){ return '#sec='+sec+(tab?'&tab='+tab:''); }
+/* R2 B11 (21.10.2026): Anfänger-Guide. Das Markup steht statisch in #sec-beginner (durchsuchbar, data-s je Karte).
+   r2b11Beginner läuft lazy beim ersten Öffnen (eigener SEC_RENDERERS-Eintrag, additiv): setzt die Kopf-Szene über
+   cdScene ein und schaltet die Plattform-Pillen der Steuerung (nur Attribut am Container, gemerkt in cd_r2_b11_plat). */
+function r2b11Beginner(){
+  const sec=document.getElementById('sec-beginner'); if(!sec)return;
+  sec.querySelectorAll('[data-r2b11-scene]').forEach(ph=>{
+    // Feinschliff: Merksatz 01 trägt eine Szene rechts (Karten-Variante), der Kopf die volle Breite
+    ph.outerHTML=ph.dataset.r2b11Card
+      ? cdScene([ph.dataset.r2b11Scene],{glyph:'⚔',tone:'var(--gold)',w:66})
+      : cdScene([ph.dataset.r2b11Scene],{full:true,hero:true,glyph:'➤',tone:'red'});
+  });
+  const box=sec.querySelector('.r2b11-ctrl'); if(!box)return;
+  const set=v=>{
+    if(!/^(all|ps|xb|pc)$/.test(v))v='all';
+    box.dataset.plat=v;
+    box.querySelectorAll('.r2b11-plats .cd-pill').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===v)));
+  };
+  try{ set(localStorage.getItem('cd_r2_b11_plat')||'all'); }catch(e){}
+  box.addEventListener('cd-pills',e=>{
+    if(e.detail.name!=='r2b11-plat')return;
+    set(e.detail.value);
+    try{ localStorage.setItem('cd_r2_b11_plat',box.dataset.plat); }catch(err){}
+  });
+}
+if(typeof SEC_RENDERERS!=='undefined'&&!SEC_RENDERERS.beginner)SEC_RENDERERS.beginner=['r2b11Beginner'];
+
+/* R2 B11 (21.10.2026): Übersicht mit Seitenkopf (Szene „start“), Ressort-Farben und Leitkachel je Kategorie.
+   Farbe mit Bedeutung: jede Kategorie hat eine Farbe (CSS --r2b11-c-<id>), die in Pillen, Häufig-gesucht-Chips,
+   Kategoriekopf, Kacheln und Lichtkegel gleich bleibt. Die erste Seite jeder Kategorie wird zur Leitkachel mit Szene.
+   Texte kommen weiter nur aus RESSORTS/SECTIONS, Zahlen nur aus _leafCount (Daten). */
+const R2B11_RES_SCENE={start:['beginner'],kampf:['cl-bosses'],ausruestung:['cl-weapons'],quests:['q-main'],welt:['reg-pailune'],sammeln:['mg-angeln']};
+function _r2b11Tile(s,lead){
+  const en=_navEn(s),c=_navCountShown(s.id);
+  return '<a class="so-tile r2b11-t'+(lead?' r2b11-lead cd-scened':'')+'" href="'+_startHref(s.id)+'" data-go="'+s.id+'">'
+    +(lead?cdScene(R2B11_RES_SCENE[s.res]||[],{tone:'var(--rc)',glyph:s.glyph,full:true,hero:true}):'')
+    +'<span class="so-tile-g" aria-hidden="true"><i class="cd-g">'+s.glyph+'</i></span>'
+    +'<span class="so-tile-body"><span class="so-tile-top"><span class="so-tile-n">'+_navEsc(s.name)+'</span>'
+    +(c?'<span class="so-tile-c">'+_navEsc(c)+'</span>':'')+'</span>'
+    +(en?'<span class="so-tile-en">'+_navEsc(en)+'</span>':'')
+    +'<span class="so-tile-d">'+_navEsc(s.desc)+'</span>'
+    +(lead?'<span class="r2b11-cta">Seite öffnen'+cdIcon('go')+'</span>':'')+'</span>'
+    +(lead?'':'<span class="r2b11-arr" aria-hidden="true">'+cdIcon('go')+'</span>')+'</a>';
+}
 function renderStartOverview(){
   const root=document.getElementById('start-root'); if(!root)return;
   const pages=SECTIONS.filter(s=>s.id!=='start');
+  const cats=RESSORTS.map(r=>({r,list:pages.filter(s=>s.res===r.id)})).filter(x=>x.list.length);
   const pop=START_POPULAR.filter(p=>SECTION_BY_ID[p.sec]).map(p=>{
     const s=SECTION_BY_ID[p.sec];
-    return '<span role="listitem"><a class="so-chip" href="'+_startHref(p.sec,p.tab)+'" data-go="'+p.sec+'"'+(p.tab?' data-tab="'+p.tab+'"':'')+'>'
+    return '<span role="listitem"><a class="so-chip r2b11-r-'+s.res+'" href="'+_startHref(p.sec,p.tab)+'" data-go="'+p.sec+'"'+(p.tab?' data-tab="'+p.tab+'"':'')+'>'
       +'<span class="g" aria-hidden="true">'+s.glyph+'</span>'+_navEsc(p.label||s.name)+'</a></span>';
   }).join('');
-  let h='<p class="so-lead">Alle '+pages.length+' Seiten des Wikis, sortiert nach dem, was du im Spiel gerade brauchst. Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p>'
+  const num=id=>{const c=_navCountShown(id);return /^\d+$/.test(c)?+c:0;};
+  const stats=[[pages.length,'Seiten'],[cats.length,'Kategorien']];
+  if(num('bosses'))stats.push([num('bosses'),'Bosse']);
+  if(num('weapons'))stats.push([num('weapons'),'Waffen']);
+  let h=cdHero({kicker:'Wiki-Atlas für Pywel',title:'Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst',
+      sub:'Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.',
+      scene:{keys:['start']},glyph:'▦',tone:'red',stats,cls:'r2b11-hero',h:3})
+    +'<div class="r2b11-quick">'
     +'<button type="button" class="so-search" id="soSearch"><span class="so-search-g" aria-hidden="true">&#9906;</span>'
     +'<span class="so-search-t">Suchen: Bosse, Waffen, Quests, Orte …</span><span class="so-search-k" aria-hidden="true">Strg K</span></button>'
-    +'<div class="so-pop"><span class="so-pop-l" id="soPopL">Häufig gesucht</span><div class="so-pop-list" role="list" aria-labelledby="soPopL">'+pop+'</div></div>';
-  RESSORTS.forEach(r=>{
-    const list=pages.filter(s=>s.res===r.id); if(!list.length)return;
-    h+='<div class="so-cat" role="group" aria-labelledby="so-cat-'+r.id+'">'
+    +'<div class="so-pop"><span class="so-pop-l" id="soPopL">Häufig gesucht</span><div class="so-pop-list" role="list" aria-labelledby="soPopL">'+pop+'</div></div></div>'
+    +cdPills([{v:'all',t:'Alle',n:pages.length,on:true}].concat(cats.map(x=>({v:x.r.id,t:x.r.short,g:x.r.glyph,n:x.list.length}))),{name:'r2b11-res',label:'Kategorien filtern',cls:'r2b11-pills'});
+  cats.forEach(({r,list})=>{
+    const tag=r.id==='start'?'Einsteiger-Tipps, Neuigkeiten und deine Merkliste':r.tag;
+    h+='<div class="so-cat r2b11-cat r2b11-r-'+r.id+'" role="group" aria-labelledby="so-cat-'+r.id+'" data-res="'+r.id+'">'
       +'<div class="so-cat-hd"><span class="so-cat-g" aria-hidden="true">'+r.glyph+'</span>'
-      +'<h3 class="so-cat-t" id="so-cat-'+r.id+'">'+_navEsc(r.label)+'</h3>'
-      +'<span class="so-cat-tag">'+_navEsc(r.id==='start'?'Einsteiger-Tipps, Neuigkeiten und deine Merkliste':r.tag)+'</span>'
+      +'<h3 class="so-cat-t" id="so-cat-'+r.id+'" data-toc>'+_navEsc(r.label)+'</h3>'
+      +'<span class="so-cat-tag">'+_navEsc(tag)+'</span>'
       +'<span class="so-cat-n">'+_navPageCount(list.length)+'</span></div>'
-      +'<div class="so-grid">'+list.map(s=>{
-        const en=_navEn(s);
-        return '<a class="so-tile" href="'+_startHref(s.id)+'" data-go="'+s.id+'">'
-          +'<span class="so-tile-g" aria-hidden="true">'+s.glyph+'</span>'
-          +'<span class="so-tile-body"><span class="so-tile-top"><span class="so-tile-n">'+_navEsc(s.name)+'</span>'
-          +(_navCountShown(s.id)?'<span class="so-tile-c">'+_navEsc(_navCountShown(s.id))+'</span>':'')+'</span>'
-          +(en?'<span class="so-tile-en">'+_navEsc(en)+'</span>':'')
-          +'<span class="so-tile-d">'+_navEsc(s.desc)+'</span></span></a>';
-      }).join('')+'</div></div>';
+      +'<div class="r2b11-body'+(list.length<2?' r2b11-body--one':'')+'">'+_r2b11Tile(list[0],true)
+      +(list.length>1?'<div class="r2b11-tiles">'+list.slice(1).map(s=>_r2b11Tile(s,false)).join('')+'</div>':'')
+      +'</div></div>';
   });
   root.innerHTML=h;
   if(!root.dataset.wired){
@@ -10452,6 +10702,13 @@ function renderStartOverview(){
         _applyTabParam(a.dataset.go,a.dataset.tab);
         try{ history.replaceState(null,'',_startHref(a.dataset.go,a.dataset.tab)); }catch(err){}   // Reload behält den Reiter
       }
+    });
+    /* Kategorie-Pillen: nur Kategorien ein-/ausblenden (Attribut, kein Neuaufbau) */
+    root.addEventListener('cd-pills',e=>{
+      if(e.detail.name!=='r2b11-res')return;
+      const v=e.detail.value;
+      root.querySelectorAll('.r2b11-cat').forEach(c=>{ c.hidden=!(v==='all'||c.dataset.res===v); });
+      if(window.cdMotion&&cdMotion.revealAll)cdMotion.revealAll();
     });
   }
 }
