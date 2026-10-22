@@ -4598,6 +4598,165 @@ html.cd-motion .r2b3-tipbtn .cd-i{transition:transform .25s cubic-bezier(.22,.8,
 
 /* ---- Bereich Bauer 4 (nur B4 schreibt hier) ---- */
 /* R2-B4 Anfang */
+/* Uralte Ruinen (renderRuins): Seitenkopf, Werkzeugleiste, Regionsbänder mit Fortschritt + AR-Leiste, Ruinen-Faltkarten.
+   Regionsfarben spiegeln REGION_COLORS (d04); --rc = Regionsfarbe, --rc-t = aufgehellt für Text auf dunklem Grund. */
+#sec-ruins{--r2b4-hernand:#b8432a;--r2b4-pailune:#4f7088;--r2b4-demeniss:#717e3e;--r2b4-delesyia:#c79a2f;--r2b4-cdesert:#be6e37}
+#sec-ruins .r2b4-hero{margin-bottom:14px}
+#sec-ruins .r2b4-hero .cd-hero-stat:last-child dd{color:var(--cd-ok)}
+.r2b4-intro{margin:0 0 18px}
+.r2b4-intro-body p{margin:0;max-width:72ch}
+.r2b4-intro-body strong{color:var(--ink-hi)}
+.r2b4-conf-chip{vertical-align:1px}
+/* Werkzeugleiste: Region + Status als Pillen, Gesamtfortschritt rechts */
+.r2b4-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 22px;margin:0 0 26px;padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2)}
+.r2b4-bar-f{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;min-width:0}
+.r2b4-bar .cd-pills{margin:0}
+.r2b4-pills-st{padding-left:18px;border-left:1px solid var(--line)}
+.r2b4-pills-st .cd-pill{--c:var(--cd-ok)}
+.r2b4-pills-reg .cd-pill[data-v="Hernand"]{--c:color-mix(in srgb,var(--r2b4-hernand) 72%,var(--ink-hi))}
+.r2b4-pills-reg .cd-pill[data-v="Pailune"]{--c:color-mix(in srgb,var(--r2b4-pailune) 62%,var(--ink-hi))}
+.r2b4-pills-reg .cd-pill[data-v="Demeniss"]{--c:color-mix(in srgb,var(--r2b4-demeniss) 66%,var(--ink-hi))}
+.r2b4-pills-reg .cd-pill[data-v="Delesyia"]{--c:color-mix(in srgb,var(--r2b4-delesyia) 80%,var(--ink-hi))}
+.r2b4-pills-reg .cd-pill[data-v="Crimson Desert"]{--c:color-mix(in srgb,var(--r2b4-cdesert) 76%,var(--ink-hi))}
+.r2b4-bar-p{display:flex;align-items:center;gap:12px;margin-left:auto}
+.r2b4-bar-l{font:600 var(--fs-11)/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.r2b4-bar .cd-prog{font-size:13px;color:var(--ink-hi)}
+.r2b4-bar .cd-prog-bar{width:120px;height:6px}
+.r2b4-bar .cd-prog-bar>i{background:linear-gradient(90deg,color-mix(in srgb,var(--cd-ok) 60%,var(--gold)),var(--cd-ok))}
+/* Feinschliff: zwei klare Zeilen statt umbrechendem Rest. Oben Regionen, unten Status links + Gesamtfortschritt rechts */
+@media (min-width:601px){
+  .r2b4-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px 22px}
+  .r2b4-bar-f{display:contents}
+  .r2b4-pills-reg{grid-column:1/-1;padding-bottom:12px;border-bottom:1px solid var(--line-soft)}
+  .r2b4-pills-st{padding-left:0;border-left:0}
+  .r2b4-bar-p{margin-left:0}
+  .r2b4-bar .cd-prog-bar{width:clamp(120px,16vw,200px)}
+}
+/* Region: Band + Liste */
+.r2b4-reg{--rc:var(--red);--rc-t:color-mix(in srgb,var(--rc) 64%,var(--ink-hi));margin:0 0 38px;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 12px)}
+.r2b4-reg.r2b4-out{display:none}
+.r2b4-band{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"main prog" "dots dots";align-items:end;gap:16px 28px;min-height:150px;margin:0 0 12px;padding:24px 26px 18px 30px;
+  border:1px solid color-mix(in srgb,var(--rc) 38%,var(--line));border-radius:18px;background:linear-gradient(100deg,color-mix(in srgb,var(--rc) 15%,var(--panel-2)) 0%,var(--panel-2) 58%);box-shadow:var(--shadow-soft);--sr:460px}
+.r2b4-band::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:4px;border-radius:0 4px 4px 0;background:var(--rc);box-shadow:0 0 18px color-mix(in srgb,var(--rc) 65%,transparent)}
+.r2b4-band-sc{--cd-scene-op:var(--cd-scene-op-hero)}
+.r2b4-band-main{grid-area:main;display:flex;flex-direction:column;gap:5px;min-width:0}
+.r2b4-band-k{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--rc-t)}
+.r2b4-band-t{margin:0;font-family:var(--f-display);font-size:clamp(24px,2.6vw,32px);font-weight:700;line-height:1.08;letter-spacing:.005em;color:var(--ink-hi);text-shadow:0 2px 16px color-mix(in srgb,var(--card) 85%,transparent)}
+.r2b4-band-sub{margin:0;font-size:13px;line-height:1.45;color:var(--dim);text-shadow:0 1px 8px color-mix(in srgb,var(--card) 90%,transparent)}
+.r2b4-band-prog{grid-area:prog;display:grid;grid-template-columns:auto auto;align-items:baseline;justify-content:end;gap:6px 8px;padding:10px 14px;border:1px solid color-mix(in srgb,var(--rc) 30%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--card) 70%,transparent)}
+.r2b4-band-num{font:700 26px/1 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums}
+.r2b4-band-num b{color:var(--rc-t)}
+.r2b4-band-lbl{font-size:12px;color:var(--dim)}
+.r2b4-band-bar{grid-column:1/-1;position:relative;width:150px;height:6px;border-radius:6px;background:color-mix(in srgb,var(--line) 85%,transparent);overflow:hidden}
+.r2b4-band-bar>i{position:absolute;inset:0 auto 0 0;width:var(--p,0%);border-radius:inherit;background:linear-gradient(90deg,var(--rc),var(--rc-t))}
+.r2b4-reg.is-complete .r2b4-band-num b,.r2b4-reg.is-complete .r2b4-band-lbl{color:var(--cd-ok)}
+.r2b4-reg.is-complete .r2b4-band-bar>i{background:var(--cd-ok)}
+html.cd-motion .r2b4-band-bar>i{transition:width .55s cubic-bezier(.22,.8,.3,1)}
+/* AR-Leiste: ein Feld je Ruine, springt zur Karte; gelöst = gefüllt */
+.r2b4-dots{grid-area:dots;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.r2b4-dots::before{content:'AR';margin-right:4px;font:600 var(--fs-11)/1 var(--f-mono);letter-spacing:.14em;color:var(--dim)}
+.r2b4-dot{position:relative;display:grid;place-items:center;min-width:38px;height:38px;padding:0 6px;border:1px solid color-mix(in srgb,var(--rc) 45%,transparent);border-radius:10px;
+  background:color-mix(in srgb,var(--card) 72%,transparent);font:700 13px/1 var(--f-mono);color:var(--rc-t);text-decoration:none;font-variant-numeric:tabular-nums}
+.r2b4-dot:hover{background:color-mix(in srgb,var(--rc) 24%,var(--card));border-color:var(--rc);color:var(--ink-hi)}
+.r2b4-dot:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b4-dot.is-done{background:color-mix(in srgb,var(--rc) 62%,var(--card));border-color:var(--rc);color:var(--ink-hi)}
+.r2b4-dot.is-done::after{content:'';position:absolute;top:-4px;right:-4px;width:12px;height:12px;border:2px solid var(--panel-2);border-radius:50%;background:var(--cd-ok)}
+html.cd-motion .r2b4-dot{transition:background .18s,border-color .18s,color .18s,transform .18s}
+html.cd-motion .r2b4-dot:hover{transform:translateY(-2px)}
+@media (pointer:coarse){.r2b4-dot{min-width:42px;height:42px}}
+/* Ruinen-Faltkarte */
+.r2b4-list{gap:8px}
+.r2b4-list>.cd-fold{contain-intrinsic-size:auto 86px}   /* echte Kopfhöhe statt 76 px: kein Nachrutschen beim ersten Rendern */
+@media (max-width:600px){.r2b4-list>.cd-fold{contain-intrinsic-size:auto 180px}}
+.r2b4-ruin:hover{border-color:color-mix(in srgb,var(--rc) 42%,var(--line))}
+.r2b4-ruin .cd-fold-ico{display:flex;flex-direction:column;gap:2px;width:54px;height:54px;border-color:color-mix(in srgb,var(--rc) 42%,var(--line));background:color-mix(in srgb,var(--rc) 13%,var(--panel));color:var(--rc-t)}
+.r2b4-ruin .cd-fold-ico::before{content:'AR';font:600 11px/1 var(--f-mono);letter-spacing:.12em;color:var(--dim)}
+.r2b4-ruin .cd-fold-ico .cd-g{font:700 21px/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.r2b4-ruin.is-solved .cd-fold-ico{border-color:color-mix(in srgb,var(--cd-ok) 55%,transparent);background:color-mix(in srgb,var(--cd-ok) 14%,var(--panel));color:var(--cd-ok)}
+.r2b4-en{margin-left:8px;font:italic 400 12.5px/1.3 var(--f-body);letter-spacing:.01em;color:var(--dim)}
+.r2b4-ruin .cd-fold-chips .cd-chip{background:color-mix(in srgb,var(--c) 10%,color-mix(in srgb,var(--card) 70%,transparent))}
+/* Feinschliff: Chip-Hierarchie. Mechanik führt (kräftiger, heller Text), Ort neutral, Belohnung als ein ruhiger Doppel-Chip */
+.r2b4-ruin .cd-fold-chips>.cd-chip:first-child{font-weight:600;color:var(--ink-hi);border-color:color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 18%,color-mix(in srgb,var(--card) 70%,transparent))}
+.r2b4-rw{gap:5px;color:var(--dim)}
+.r2b4-rw .cd-g{font-size:12px}
+.r2b4-rw .r2b4-rw-ft{color:var(--cd-fx-ice)}
+.r2b4-rw-sep{width:1px;height:12px;margin:0 3px;background:color-mix(in srgb,var(--c) 40%,transparent)}
+.r2b4-ruin .cd-fold-aside{gap:6px}
+/* Feinschliff: AR-Kachel reagiert auf Überfahren, geöffnete Karte trägt die Regionsfarbe */
+.r2b4-ruin[open]{border-color:color-mix(in srgb,var(--rc) 55%,var(--line));box-shadow:var(--shadow-soft),0 0 0 1px color-mix(in srgb,var(--rc) 18%,transparent)}
+.r2b4-ruin[open]>.cd-fold-body{border-top-color:color-mix(in srgb,var(--rc) 30%,var(--line-soft));background:linear-gradient(180deg,color-mix(in srgb,var(--rc) 6%,transparent),transparent 160px)}
+.r2b4-ruin>summary:hover .cd-fold-ico,.r2b4-ruin[open] .cd-fold-ico{border-color:var(--rc);box-shadow:0 0 14px color-mix(in srgb,var(--rc) 35%,transparent)}
+.r2b4-ruin.is-solved>summary:hover .cd-fold-ico,.r2b4-ruin.is-solved[open] .cd-fold-ico{border-color:var(--cd-ok);box-shadow:0 0 14px color-mix(in srgb,var(--cd-ok) 30%,transparent)}
+html.cd-motion .r2b4-ruin .cd-fold-ico{transition:border-color .2s,box-shadow .25s}
+/* Szene der Ruine etwas kräftiger, beim Überfahren heller (nur Deckkraft, Compositor) */
+.r2b4-ruin>summary>.cd-scene{--cd-scene-w:64%}
+.r2b4-ruin>summary>.cd-scene .cd-scene-img{opacity:calc(var(--cd-scene-op) + .06)}
+.r2b4-ruin.is-solved>summary>.cd-scene .cd-scene-img{opacity:calc(var(--cd-scene-op) - .06)}
+html.cd-motion .r2b4-ruin>summary>.cd-scene .cd-scene-img{transition:opacity .35s ease}
+@media (hover:hover){html.cd-motion .r2b4-ruin>summary:hover>.cd-scene .cd-scene-img{opacity:calc(var(--cd-scene-op) + .2)}}
+/* Abhaken im aufgeklappten Teil: „Gelöst“ bleibt lesbar (nicht durchgestrichen), grün getönt */
+.r2b4-ck:has(.cd-check-in:checked){background:color-mix(in srgb,var(--cd-ok) 9%,var(--panel-2));border-color:color-mix(in srgb,var(--cd-ok) 40%,transparent)}
+.r2b4-ck:has(.cd-check-in:checked) .cd-check-txt{opacity:1}
+.r2b4-ck:has(.cd-check-in:checked) .cd-check-t{text-decoration:none;color:var(--cd-ok)}
+.r2b4-ck .cd-check-in:checked+.cd-check-box{background:var(--cd-ok);border-color:var(--cd-ok)}
+.r2b4-n{font-size:12px;color:var(--dim);white-space:nowrap}
+.r2b4-n b{font-family:var(--f-mono);font-size:13px;color:var(--ink-hi)}
+.r2b4-med,.r2b4-done{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.r2b4-med{color:var(--warn)}
+.r2b4-med .cd-i,.r2b4-done .cd-i{width:14px;height:14px}
+.r2b4-done{display:none;padding:2px 9px 2px 6px;border:1px solid color-mix(in srgb,var(--cd-ok) 45%,transparent);border-radius:999px;background:color-mix(in srgb,var(--cd-ok) 12%,transparent);color:var(--cd-ok)}
+.r2b4-ruin.is-solved .r2b4-done{display:inline-flex}
+.r2b4-ruin.is-solved .r2b4-med{display:none}
+/* aufgeklappt: Lösung links, Abhaken/Fakten/Hinweise/Bilder rechts */
+.r2b4-body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start;gap:18px 28px}
+.r2b4-h{display:flex;align-items:baseline;gap:10px;margin:2px 0 14px;font:700 12px/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--rc-t)}
+.r2b4-h span{font-weight:400;letter-spacing:.03em;text-transform:none;color:var(--dim)}
+.r2b4-steps>li::before{border-color:color-mix(in srgb,var(--rc) 62%,transparent);background:color-mix(in srgb,var(--rc) 15%,var(--card));color:var(--rc-t)}
+.r2b4-side{display:grid;gap:12px;min-width:0}
+.r2b4-ck .cd-check-t{font-weight:600}
+.r2b4-facts dd{font-size:13px}
+.r2b4-ul{margin:4px 0 0;padding-left:18px}
+.r2b4-ul li+li{margin-top:4px}
+.r2b4-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
+.r2b4-shot{display:block;aspect-ratio:16/9;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:zoom-in}
+.r2b4-shot img{display:block;width:100%;height:100%;object-fit:cover}
+.r2b4-shot:hover{border-color:var(--rc)}
+.r2b4-shot:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+html.cd-motion .r2b4-shot img{transition:transform .3s cubic-bezier(.22,.8,.3,1)}
+html.cd-motion .r2b4-shot:hover img{transform:scale(1.06)}
+.r2b4-verif{display:flex}
+.r2b4-empty{margin:0 0 30px;padding:28px 16px;border:1px dashed var(--line-strong);border-radius:14px;text-align:center;color:var(--dim)}
+.r2b4-foot{margin:6px auto 0;max-width:70ch;text-align:center;font-size:12px;line-height:1.55;color:var(--ink-faint)}
+@media (max-width:860px){
+  .r2b4-body{grid-template-columns:minmax(0,1fr)}
+  .r2b4-bar-p{margin-left:0}
+}
+@media (max-width:600px){
+  .r2b4-bar{display:grid;gap:10px;padding:0;border:0;background:none}
+  .r2b4-bar-f{display:grid;gap:8px}
+  .r2b4-pills-st{border-left:0}
+  .r2b4-bar-p{justify-content:space-between}
+  .r2b4-band{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "prog" "dots";gap:14px;min-height:0;padding:20px 16px 16px 20px}
+  .r2b4-band-prog{grid-template-columns:auto auto minmax(0,1fr);justify-content:start;align-items:center;padding:8px 12px}
+  .r2b4-band-bar{grid-column:auto;width:100%}
+  .r2b4-dots{gap:5px}
+  .r2b4-en{display:block;margin:2px 0 0}
+  /* Kopf mobil: Titelzeile neben der AR-Kachel, Chips über die volle Breite (statt vier Zeilen à ein Chip) */
+  /* Feinschliff: Schrittzahl/Status rücken unter den Titel neben die AR-Kachel (eine Zeile weniger je Karte) */
+  .r2b4-ruin>summary{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"ico t arr" "ico aside arr" "chips chips chips";align-items:center;gap:4px 12px}
+  .r2b4-ruin .cd-fold-ico{grid-row:1/3;align-self:start}
+  .r2b4-ruin .cd-fold-arr{grid-row:1/3;align-self:start}
+  .r2b4-ruin .cd-fold-main{display:contents}
+  .r2b4-ruin .cd-fold-t{grid-area:t;align-self:end}
+  .r2b4-ruin .cd-fold-chips{grid-area:chips;margin-top:6px;gap:5px 4px}
+  .r2b4-ruin .cd-fold-chips .cd-chip{padding:2px 8px;gap:4px;font-size:11.5px}
+  .r2b4-rw-sep{margin:0 2px}
+  .r2b4-ruin .cd-fold-aside{grid-area:aside;gap:4px 10px;align-items:center;align-self:start}
+  .r2b4-done{padding:1px 8px 1px 5px}
+  .r2b4-ruin>summary>.cd-scene{--cd-scene-w-m:86%}
+  .r2b4-ruin .cd-fold-ico{width:46px;height:46px}
+  .r2b4-ruin .cd-fold-ico .cd-g{font-size:18px}
+}
 /* R2-B4 Ende */
 
 /* ---- Bereich Bauer 5 (nur B5 schreibt hier) ---- */
@@ -6167,15 +6326,23 @@ html.cd-motion .r2b3-tipbtn .cd-i{transition:transform .25s cubic-bezier(.22,.8,
 </style>
   <section class="sec" id="sec-ruins">
     <h2 class="sec-t"><span class="sec-sym">♜</span> Uralte Ruinen <span class="sec-t-en">Ancient Ruins</span></h2>
-    <div class="disarm-hero">
-      <p><strong>Abyss-Grenzsteine</strong> (Abyss Cressets in den „Uralten Ruinen") sind Schnellreise-Knoten, die du durch das Lösen eines <strong>Rätsels</strong> freischaltest. Jeder gelöste Grenzstein gibt <strong>1 Abyss-Artefakt</strong> (Lernwährung für Fähigkeiten) und einen Schnellreisepunkt. Zu unterscheiden vom <strong>Abyss-Nexus</strong> (einfach betreten, kein Rätsel), von den 60 versteckten <strong>Abyss-Cressets</strong> der Oberwelt und von den Sky-/Restoration-Puzzles im Abyss. Nicht jeder Energiepunkt hat ein Rätsel — hier stehen nur die <strong>mit</strong> Rätsel.</p>
-    </div>
-    <div class="ruin-note">
-      <strong>Alle 37 Abyss-Grenzstein-Rätsel über 5 Regionen</strong> — Hernand 15 · Pailune 5 · Demeniss 7 · Delesyia 8 · Crimson Desert 2. Regionszuordnung nach PowerPyx (deckt sich mit dem In-Game-Regionszähler); einzelne grenznahe Orte ordnen andere Guides abweichend ein. „Mysteriöse Energie“ steht in den Rätselbeschreibungen für die Kartenmarkierung „Mysterious Energy“ (game8: Orte, die ein Abyss Nexus oder ein Abyss Cresset sein können); der deutsche Spieltext dazu ist nicht belegt. Das Badge <span class="ruin-conf med">geprüft · exakte Sequenz quellenabhängig</span> markiert komplexe Schiebe-/Säulen-Puzzles, bei denen Guides die genaue Zugnummerierung unterschiedlich angeben — die Ziel-Stellung bleibt identisch.
-    </div>
-    <div id="ruins-filter" class="ruin-filter"></div>
+    <div id="r2b4-hero"></div>
+    <details class="cd-fold cd-spot r2b4-intro" style="--cd-acc:var(--gold)" data-s="abyss-grenzsteine abyss cressets uralte ruinen schnellreise-knoten rätsel abyss-artefakt lernwährung fähigkeiten schnellreisepunkt abyss-nexus 60 versteckte abyss-cressets oberwelt sky restoration puzzles energiepunkt alle 37 abyss-grenzstein-rätsel 5 regionen hernand 15 pailune 5 demeniss 7 delesyia 8 crimson desert 2 regionszuordnung powerpyx in-game-regionszähler grenznahe orte mysteriöse energie mysterious energy game8 abyss nexus abyss cresset deutscher spieltext nicht belegt geprüft exakte sequenz quellenabhängig schiebe säulen puzzles zugnummerierung ziel-stellung">
+      <summary>
+        <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⛬</i></span>
+        <span class="cd-fold-main"><h3 class="cd-fold-t">Was sind Abyss-Grenzsteine?</h3><span class="cd-fold-lead">Schnellreise-Knoten, die du durch das Lösen eines Rätsels freischaltest. Abgrenzung zu Nexus und Cressets, Regionszuordnung, Begriffe.</span></span>
+        <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+      </summary>
+      <div class="cd-fold-body r2b4-intro-body">
+      <p><strong>Abyss-Grenzsteine</strong> (Abyss Cressets in den „Uralten Ruinen") sind Schnellreise-Knoten, die du durch das Lösen eines <strong>Rätsels</strong> freischaltest. Jeder gelöste Grenzstein gibt <strong>1 Abyss-Artefakt</strong> (Lernwährung für Fähigkeiten) und einen Schnellreisepunkt. Zu unterscheiden vom <strong>Abyss-Nexus</strong> (einfach betreten, kein Rätsel), von den 60 versteckten <strong>Abyss-Cressets</strong> der Oberwelt und von den Sky-/Restoration-Puzzles im Abyss. Nicht jeder Energiepunkt hat ein Rätsel, hier stehen nur die <strong>mit</strong> Rätsel.</p>
+      <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Alle 37 Abyss-Grenzstein-Rätsel über 5 Regionen</b>Hernand 15 · Pailune 5 · Demeniss 7 · Delesyia 8 · Crimson Desert 2. Regionszuordnung nach PowerPyx (deckt sich mit dem In-Game-Regionszähler); einzelne grenznahe Orte ordnen andere Guides abweichend ein.</div></div>
+      <p>„Mysteriöse Energie“ steht in den Rätselbeschreibungen für die Kartenmarkierung „Mysterious Energy“ (game8: Orte, die ein Abyss Nexus oder ein Abyss Cresset sein können); der deutsche Spieltext dazu ist nicht belegt.</p>
+      <p>Das Badge <span class="cd-chip cd-chip--warn r2b4-conf-chip"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><span>Sequenz quellenabhängig</span></span> (bisher „geprüft · exakte Sequenz quellenabhängig“) markiert komplexe Schiebe-/Säulen-Puzzles, bei denen Guides die genaue Zugnummerierung unterschiedlich angeben. Die Ziel-Stellung bleibt identisch.</p>
+      </div>
+    </details>
+    <div id="ruins-filter" class="r2b4-bar"></div>
     <div id="ruins-root"></div>
-    <div class="ruin-foot">Lösungen gegen mehrere unabhängige Text-/Bild-Guides verifiziert (keine Videos). Screenshots: PowerPyx (zum Vergrößern anklicken).</div>
+    <p class="r2b4-foot">Lösungen gegen mehrere unabhängige Text-/Bild-Guides verifiziert (keine Videos). Screenshots: PowerPyx (zum Vergrößern anklicken).</p>
   </section>
 
   <section class="sec" id="sec-minigames">
@@ -14474,51 +14641,179 @@ if (syGetCode()) _loadServerProgress();
 <script>
 /* ===== URALTE RUINEN / ABYSS-GRENZSTEINE — alle Regionen ===== */
 function _reRuin(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function _ruinCard(p){
-  var steps=(p.steps||[]).map(function(s,i){return '<div class="disarm-step"><div class="disarm-num">'+(i+1)+'</div><div class="disarm-txt">'+_reRuin(s)+'</div></div>';}).join("");
-  var warn=(p.warn&&p.warn.length)?'<div class="ruin-warn"><strong>⚠ Hinweise</strong><ul>'+p.warn.map(function(w){return '<li>'+_reRuin(w)+'</li>';}).join("")+'</ul></div>':"";
-  var imgs=(p.imgs||[]).map(function(b){var f=_RUIN_B+b+".jpg",t=_RUIN_B+b+"-300x169.jpg",cap=_reRuin(p.name+" · AR"+p.ar+" — Lösung (PowerPyx)");var fJs=f.replace(/\\/g,'\\\\').replace(/'/g,"\\'"),capJs=cap.replace(/\\/g,'\\\\').replace(/'/g,"\\'");return '<img src="'+t+'" loading="lazy" alt="'+_reRuin(p.name)+'" onerror="this.style.display=\'none\'" onclick="openRuinImg(\''+fJs+'\',\''+capJs+'\')">';}).join("");
-  var srcs=(p.srcs||[]).map(function(s){return '<a href="'+s.u+'" target="_blank" rel="noopener noreferrer">'+_reRuin(s.n)+'</a>';}).join(" · ");
-  var badge=(p.conf==="medium")
-    ? '<span class="ruin-conf med" title="'+_reRuin(p.conflicts||"")+'">geprüft · exakte Sequenz quellenabhängig</span>'
-    : '<span class="ruin-conf">verifiziert</span>';
-  var _s=['AR'+p.ar,p.name,p.de||'',p.loc,p.mech,p.reward].concat(p.steps||[]).concat(p.warn||[]).join(' ')+' grenzstein rätsel ruine';
-  return '<div class="card ruin-card" data-s="'+_reRuin(_s.toLowerCase())+'">'
-    +'<div class="ruin-top"><span class="ruin-ar">AR'+p.ar+'</span><span class="ruin-name">'+_reRuin(p.name)+'</span>'+(p.de?'<span class="ruin-de">'+_reRuin(p.de)+'</span>':"")+'</div>'
-    +'<div class="crows">'
-      +'<div class="crow"><span class="cl">📍 Ort</span><span class="cv">'+_reRuin(p.loc)+'</span></div>'
-      +'<div class="crow"><span class="cl">⚙️ Mechanik</span><span class="cv">'+_reRuin(p.mech)+'</span></div>'
-      +'<div class="crow"><span class="cl">🎁 Belohnung</span><span class="cv">'+_reRuin(p.reward)+'</span></div>'
-    +'</div>'
-    +'<div class="ruin-steps">'+steps+'</div>'
-    +warn
-    +'<div class="ruin-imgs">'+imgs+'</div>'
-    +'<div class="ruin-src">Quellen: '+srcs+' · '+badge+'</div>'
-  +'</div>';
+/* ---- R2 B4: Uralte Ruinen als Regions-Atlas (Faltkarten mit Ruinen-Szene, Regionsbänder mit Fortschritt) ----
+   Kopf je Ruine: AR-Nummer, deutscher + englischer Name, Chips Mechanik/Ort/Belohnung. Aufgeklappt (lazy): Lösung als Stepper,
+   Abhaken, Fakten, Hinweise, Screenshots, Quellen. Kurz-Chips sind wörtliche Ausschnitte aus mech/loc desselben Eintrags
+   (_r2b4Cut prüft das, sonst automatischer Rückfall). Fortschritt: localStorage cd_r2_b4_ruins (Liste 'ar<Nr>'). */
+var R2B4_KEY='cd_r2_b4_ruins';
+var R2B4_SHORT={ /* AR: [Mechanik, Ort] als wörtliche Teilstrings von mech bzw. loc */
+  1:['Glocken-Sequenz','in den Stählernen Bergen'],3:['Säulen-Rotation','Nebeltal'],4:['Säulen-Höhenangleichung','Gebiet Duskwood'],
+  7:['Steinlaternen anzünden','Jägerhütte'],11:['Wandscheiben-Toggle','Mäandernde Hügel'],12:['Go-/Mühle-artiges Steinbrett','Dämmerwald'],
+  14:['Symbol-Kacheln','südlich von Fort Perwin'],15:['Block-/Bild-Schiebepuzzle','Nebeltiefenbecken'],21:['Statuen-Rotation','Südlich von Glenbright Manor'],
+  23:['Statuen-Rotation','südwestlich von Arboria Castle'],27:['Wasser abzulassen','Spukhügel'],28:['Statuen-Lichtstrahl','Bereich des Serkis-Anwesens'],
+  30:['Statuen-Blick','Drakesfall-Schlucht'],32:['Scheiben-Rotation','Hernand Highlands'],37:['Symbol-Wandscheiben','Phoniel Ranch'],
+  10:['Naturgriff','Östlich der Stadt Pailune'],16:['Schiebepuzzle','Fünf-Finger-Berg'],17:['Statuen-Rotation','Fünf-Finger-Berg'],
+  26:['Eis brechen + Wasserablassen','Silver Wolf Mountain'],33:['Element-Knöpfe','Silberwolfberg'],
+  2:['Wandmosaik','südöstlich von Galleypulley'],8:['Wasser ablassen','nordwestlich der Golden-Gallop-Rennbahn'],19:['Steine stapeln','Bambuswald'],
+  20:['Vier Krüge mittig stapeln','westlich von Tariv'],22:['Vier gekoppelte Statuen zur Mitte drehen','östlich des Burnhand Quarry'],
+  34:['Symbol-Kacheln','nördlich von Wheelsmith Wainright'],35:['Konstellations-Scheiben','westlich der Rustleleaf Farm'],
+  5:['Wandscheiben','Gebiet Timberdale'],6:['Energie-/Wandscheiben','östlich des Sanctum of Devotion'],9:['Naturgriff-Wandscheiben','Nordosten des Blauen Dickichts'],
+  13:['Druckplatten-Pfad','westlich des Redfox-Handelspostens'],25:['Wasserstand-Senken','östlich des Redfox-Handelspostens'],
+  29:['Symbol-Kacheln/Drehscheibe','südöstlich des Heiligtums der Verehrung'],31:['Rotlicht-Grünlicht','Berg Benus'],
+  36:['Knopf-Sequenz','Stoneback Crab Wetlands'],18:['Statuen-Rotation','Klippe am Roten Fluss'],24:['Brunnen-Säulen-Rotation','In den Rauchenden Landen']
+};
+/* wörtlicher Ausschnitt (nur wenn er im Text steht), sonst erster Abschnitt bis Klammer/Komma; erster Buchstabe groß */
+function _r2b4Cut(full,want){
+  full=String(full||'');
+  var s=want&&full.indexOf(want)>-1?want:full.split(/\s*(?:\(|,|;|·|>| - | – )\s*/)[0];
+  s=s.trim();if(s.length>44)s=s.slice(0,42).replace(/\s+\S*$/,'')+' …';
+  return s.charAt(0).toUpperCase()+s.slice(1);
 }
+/* Belohnungs-Chips: nur was wörtlich im reward steht */
+function _r2b4Reward(rw){
+  rw=String(rw||'');var out=[],seg=[];
+  var m=/^(\d+) Abyss-Artefakt/.exec(rw);
+  if(m)seg.push('<i class="cd-g" aria-hidden="true">✦</i><b>'+cdEsc(m[1])+'</b><span>Abyss-Artefakt</span>');
+  if(/Schnellreise/.test(rw)&&!/nicht ausdrücklich/.test(rw))seg.push('<i class="cd-g r2b4-rw-ft" aria-hidden="true">⌖</i><span>Schnellreisepunkt</span>');
+  /* Feinschliff: Artefakt + Schnellreisepunkt als EIN Belohnungs-Chip (gleicher Wortlaut, weniger Wiederholung je Karte) */
+  if(seg.length)out.push({h:'<span class="cd-chip cd-chip--gold r2b4-rw" title="'+cdEsc('Belohnung: '+rw)+'">'+seg.join('<i class="r2b4-rw-sep" aria-hidden="true"></i>')+'</span>'});
+  var q=/['„"]((?:Memor|Erinnerung|Forgotten)[^'"“”]*)['"“”]/.exec(rw);
+  if(q)out.push({t:q[1],c:'violet',g:'❖'});
+  return out;
+}
+function _r2b4Shots(p){
+  var h=(p.imgs||[]).map(function(b,i){
+    var f=_RUIN_B+b+'.jpg',t=_RUIN_B+b+'-300x169.jpg',cap=p.name+' · AR'+p.ar+' · Lösung (PowerPyx)';
+    return '<button type="button" class="r2b4-shot" data-full="'+cdEsc(f)+'" data-cap="'+cdEsc(cap)+'" aria-label="Screenshot '+(i+1)+' vergrößern">'
+      +'<img src="'+cdEsc(t)+'" alt="'+cdEsc(p.name)+', Lösungsbild '+(i+1)+'" width="300" height="169" loading="lazy" decoding="async"></button>';
+  }).join('');
+  return h?'<div class="r2b4-shots">'+h+'</div>':'';
+}
+function _r2b4Body(p){
+  var warn=(p.warn&&p.warn.length)?cdNote({h:'<ul class="r2b4-ul">'+p.warn.map(function(w){return '<li>'+cdEsc(w)+'</li>';}).join('')+'</ul>'},{kind:'warn',title:'Hinweise'}):'';
+  var conf=p.conf==='medium'?cdNote(p.conflicts||'Guides geben die genaue Zugnummerierung unterschiedlich an; die Ziel-Stellung bleibt identisch.',{kind:'info',title:'Exakte Sequenz quellenabhängig'}):'';
+  var srcs=cdSrc((p.srcs||[]).map(function(s){return {t:s.n,url:s.u};}),'Quellen');
+  return '<div class="r2b4-body">'
+    +'<div class="r2b4-sol"><h5 class="r2b4-h">Lösung <span>'+(p.steps||[]).length+' Schritte</span></h5>'+cdStepper(p.steps||[],'r2b4-steps')+'</div>'
+    +'<div class="r2b4-side">'
+      +cdCheck({key:R2B4_KEY,id:'ar'+p.ar,title:'Gelöst',sub:'Abhaken, sobald der Grenzstein aktiv ist · zählt für den Regions-Fortschritt',cls:'r2b4-ck'})
+      +cdFacts([['Ort',p.loc],['Mechanik',p.mech],['Belohnung',p.reward]],{wide:true,cls:'r2b4-facts'})
+      +warn+conf+_r2b4Shots(p)
+      +'<div class="r2b4-verif">'+(p.conf==='medium'?cdChip({t:'Geprüft · Sequenz quellenabhängig',c:'warn',i:'warn'}):cdChip({t:'Verifiziert',c:'ok',i:'check'}))+'</div>'
+      +srcs
+    +'</div></div>';
+}
+function _r2b4Fold(p,reg,done){
+  var sh=R2B4_SHORT[p.ar]||[],slug=cdSlug(p.name);
+  var title=p.de?{h:cdEsc(p.de)+' <span class="r2b4-en" lang="en">'+cdEsc(p.name)+'</span>'}:{h:'<span lang="en">'+cdEsc(p.name)+'</span>'};
+  var chips=[{t:_r2b4Cut(p.mech,sh[0]),c:'violet',g:'⚙',title:'Mechanik: '+p.mech},{t:_r2b4Cut(p.loc,sh[1]),i:'pin',title:'Ort: '+p.loc}].concat(_r2b4Reward(p.reward));
+  var s=['AR'+p.ar,p.name,p.de||'',reg,p.loc,p.mech,p.reward].concat(p.steps||[]).concat(p.warn||[]).join(' ')+' grenzstein rätsel ruine';
+  var aside='<span class="r2b4-n"><b>'+(p.steps||[]).length+'</b> Schritte</span>'
+    +(p.conf==='medium'?'<span class="r2b4-med" title="Exakte Sequenz quellenabhängig">'+cdIcon('warn')+'<span>Sequenz quellenabhängig</span></span>':'')
+    +'<span class="r2b4-done">'+cdIcon('check')+'<span>Gelöst</span></span>';
+  return cdFold({title:title,icon:String(p.ar),chips:chips,aside:aside,h:4,region:reg,
+    scene:{keys:['ruin-'+slug,'reg-'+cdSlug(reg)],region:reg,glyph:'♜'},
+    body:function(){return _r2b4Body(p);},s:s,id:'ru-'+slug,
+    cls:'r2b4-ruin'+(done?' is-solved':''),attrs:{'data-ar':p.ar,'data-reg':reg,'data-go-id':'ruin-'+slug}});
+}
+function _r2b4Band(reg,list,i,n,solved){
+  var d=list.filter(function(p){return solved.has('ar'+p.ar);}).length,rs=cdSlug(reg);
+  var dots=list.map(function(p){
+    var on=solved.has('ar'+p.ar),lbl='AR'+p.ar+' '+(p.de||p.name)+(on?' (gelöst)':'');
+    return '<a class="r2b4-dot'+(on?' is-done':'')+'" href="'+cdGoHref('ruins','ru-'+cdSlug(p.name))+'" data-go="ruins" data-goq="ru-'+cdSlug(p.name)+'" data-ar="'+p.ar+'" title="'+cdEsc(lbl)+'" aria-label="'+cdEsc(lbl)+'">'+p.ar+'</a>';
+  }).join('');
+  return '<header class="r2b4-band cd-spot cd-scened">'
+    +cdScene(['reg-'+rs],{region:reg,full:true,glyph:'♜',cls:'r2b4-band-sc'})
+    +'<div class="r2b4-band-main"><p class="r2b4-band-k">Region '+(i+1)+' von '+n+'</p>'
+    +'<h3 class="r2b4-band-t">'+cdEsc(reg)+'</h3>'
+    +'<p class="r2b4-band-sub">'+list.length+' Grenzstein-Rätsel · '+list.reduce(function(a,p){return a+(p.steps||[]).length;},0)+' Lösungsschritte</p></div>'
+    +'<div class="r2b4-band-prog"><span class="r2b4-band-num"><b>'+d+'</b>/'+list.length+'</span><span class="r2b4-band-lbl">gelöst</span>'
+    +'<span class="r2b4-band-bar"><i style="--p:'+(list.length?Math.round(d/list.length*100):0)+'%"></i></span></div>'
+    +'<nav class="r2b4-dots" aria-label="Ruinen in '+cdEsc(reg)+'">'+dots+'</nav>'
+    +'</header>';
+}
+var _r2b4St={reg:'all',st:'all'};
 function renderRuins(){
-  var root=document.getElementById("ruins-root"); if(!root)return;
-  var fbar=document.getElementById("ruins-filter");
-  var order=window.RUINS_REGION_ORDER||[];
-  if(fbar){
-    var total=0; order.forEach(function(r){total+=(RUINS_DATA[r]||[]).length;});
-    var b='<button class="ruin-fbtn active" data-reg="__all__" onclick="ruinFilter(\'__all__\')">Alle ('+total+')</button>';
-    order.forEach(function(r){var n=(RUINS_DATA[r]||[]).length; if(n){b+='<button class="ruin-fbtn" data-reg="'+_reRuin(r)+'" onclick="ruinFilter(\''+r.replace(/'/g,"\\'")+'\')">'+_reRuin(r)+' ('+n+')</button>';}});
-    fbar.innerHTML=b;
+  var root=document.getElementById('ruins-root');if(!root)return;
+  var bar=document.getElementById('ruins-filter'),hero=document.getElementById('r2b4-hero');
+  var order=(window.RUINS_REGION_ORDER||[]).filter(function(r){return (RUINS_DATA[r]||[]).length;});
+  var solved=cdCheckGet(R2B4_KEY),total=0,done=0;
+  order.forEach(function(r){RUINS_DATA[r].forEach(function(p){total++;if(solved.has('ar'+p.ar))done++;});});
+  _r2b4St={reg:'all',st:'all'};
+  if(hero)hero.innerHTML=cdHero({kicker:'Abyss-Grenzsteine',title:'Jedes Ruinen-Rätsel, Schritt für Schritt',
+    sub:'Jeder gelöste Grenzstein gibt 1 Abyss-Artefakt und einen Schnellreisepunkt. Hake ab, was du schon hast.',
+    scene:{keys:['ruin-mount-benus-ruins','reg-delesyia'],pos:'50% 45%'},glyph:'♜',tone:'gold',h:3,cls:'r2b4-hero',
+    stats:[[total,'Grenzstein-Rätsel'],[order.length,'Regionen'],[done,'gelöst']]});
+  if(bar){
+    bar.innerHTML='<div class="r2b4-bar-f">'
+      +cdPills([{v:'all',t:'Alle',n:total,on:true}].concat(order.map(function(r){return {v:r,t:r,n:RUINS_DATA[r].length};})),{name:'r2b4-reg',label:'Region',cls:'r2b4-pills-reg'})
+      +cdPills([{v:'all',t:'Alle',on:true},{v:'open',t:'Offen'},{v:'done',t:'Gelöst'}],{name:'r2b4-st',label:'Status',cls:'r2b4-pills-st'})
+      +'</div><div class="r2b4-bar-p"><span class="r2b4-bar-l">Fortschritt</span><span class="r2b4-total">'+cdProg(done,total,done+' von '+total+' Ruinen gelöst')+'</span></div>';
   }
-  var html="";
-  order.forEach(function(r){
-    var list=RUINS_DATA[r]||[]; if(!list.length)return;
-    html+='<div class="ruin-region" data-reg="'+_reRuin(r)+'"><h3 class="sub-t" style="scroll-margin-top:72px">'+_reRuin(r)+' — '+list.length+' Grenzstein-Rätsel</h3>'+list.map(_ruinCard).join("")+'</div>';
-  });
-  root.innerHTML=html;
+  root.innerHTML=order.map(function(r,i){
+    var list=RUINS_DATA[r],acc=cdTone({region:r});
+    return '<section class="ruin-region r2b4-reg" data-reg="'+cdEsc(r)+'" id="r2b4-reg-'+cdSlug(r)+'"'+(acc?' style="--rc:'+cdEsc(acc)+'"':'')+'>'
+      +_r2b4Band(r,list,i,order.length,solved)
+      +'<div class="cd-folds r2b4-list">'+list.map(function(p){return _r2b4Fold(p,r,solved.has('ar'+p.ar));}).join('')+'</div></section>';
+  }).join('')+'<p class="r2b4-empty" hidden>Keine Ruine passt zu diesem Filter.</p>';
+  _r2b4Wire();
 }
+/* Fortschritt nachziehen (Bänder, Punkte, Karten, Kopfzahl, Gesamtbalken) ohne Neuaufbau */
+function _r2b4Prog(){
+  var root=document.getElementById('ruins-root');if(!root)return;
+  var solved=cdCheckGet(R2B4_KEY),all=0,dn=0;
+  root.querySelectorAll('.r2b4-reg').forEach(function(sec){
+    var cards=sec.querySelectorAll('.r2b4-ruin'),d=0;
+    cards.forEach(function(c){var on=solved.has('ar'+c.dataset.ar);c.classList.toggle('is-solved',on);if(on)d++;});
+    sec.querySelectorAll('.r2b4-dot').forEach(function(a){
+      var on=solved.has('ar'+a.dataset.ar),t=a.title.replace(/ \(gelöst\)$/,'')+(on?' (gelöst)':'');
+      a.classList.toggle('is-done',on);a.title=t;a.setAttribute('aria-label',t);
+    });
+    var b=sec.querySelector('.r2b4-band-num b');if(b)b.textContent=d;
+    var i=sec.querySelector('.r2b4-band-bar>i');if(i)i.style.setProperty('--p',(cards.length?Math.round(d/cards.length*100):0)+'%');
+    sec.classList.toggle('is-complete',cards.length>0&&d===cards.length);
+    all+=cards.length;dn+=d;
+  });
+  var tp=document.querySelector('#ruins-filter .r2b4-total');if(tp)tp.innerHTML=cdProg(dn,all,dn+' von '+all+' Ruinen gelöst');
+  var dd=document.querySelectorAll('#r2b4-hero .cd-hero-stat dd');if(dd[2]){dd[2].textContent=dn;dd[2].removeAttribute('aria-label');}
+}
+/* Filter über Klassen (kein Neuaufbau): data-filtered + .hide wie die übrigen Sektionsfilter, danach aktive Suche erneut anwenden */
+function _r2b4Filter(){
+  var root=document.getElementById('ruins-root');if(!root)return;
+  var solved=cdCheckGet(R2B4_KEY),st=_r2b4St,vis=0;
+  root.querySelectorAll('.r2b4-reg').forEach(function(sec){
+    var regOut=st.reg!=='all'&&sec.dataset.reg!==st.reg,n=0;
+    sec.querySelectorAll('.r2b4-ruin').forEach(function(c){
+      var on=solved.has('ar'+c.dataset.ar),out=regOut||(st.st==='open'&&on)||(st.st==='done'&&!on);
+      if(out){c.dataset.filtered='1';c.classList.add('hide');}else{delete c.dataset.filtered;c.classList.remove('hide');n++;}
+    });
+    sec.classList.toggle('r2b4-out',!n);vis+=n;
+  });
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(root);
+  var e=root.querySelector('.r2b4-empty');if(e)e.hidden=vis>0;
+}
+function _r2b4Wire(){
+  var sec=document.getElementById('sec-ruins');if(!sec||sec._r2b4)return;sec._r2b4=true;
+  sec.addEventListener('cd-pills',function(e){
+    var d=e.detail||{};
+    if(d.name==='r2b4-reg')_r2b4St.reg=d.value;else if(d.name==='r2b4-st')_r2b4St.st=d.value;else return;
+    _r2b4Filter();
+    var bar=document.getElementById('ruins-filter');
+    if(bar&&bar.getBoundingClientRect().top<0&&window.cdMotion&&cdMotion.scrollTo)cdMotion.scrollTo(bar,{offset:16});
+  });
+  sec.addEventListener('cd-check',function(e){if(e.detail&&e.detail.key===R2B4_KEY)_r2b4Prog();});
+  sec.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.r2b4-shot');if(!b)return;
+    openRuinImg(b.getAttribute('data-full'),b.getAttribute('data-cap'));
+  });
+  /* kaputte Lösungsbilder ausblenden (Bild-Fehler steigen nicht auf, darum capture) */
+  sec.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.parentElement&&t.parentElement.classList.contains('r2b4-shot'))t.parentElement.hidden=true;},true);
+}
+/* Altbestand: Region filtern per Funktionsaufruf (früher Knopfleiste) */
 function ruinFilter(reg){
-  var btns=document.querySelectorAll("#ruins-filter .ruin-fbtn");
-  for(var i=0;i<btns.length;i++){btns[i].classList.toggle("active", btns[i].getAttribute("data-reg")===reg);}
-  var secs=document.querySelectorAll("#ruins-root .ruin-region");
-  for(var j=0;j<secs.length;j++){secs[j].style.display=(reg==="__all__"||secs[j].getAttribute("data-reg")===reg)?"":"none";}
-  if(window.cdMotion)cdMotion.scrollTo(0);else window.scrollTo({top:0});
+  var g=document.querySelector('#ruins-filter [data-cd-pills="r2b4-reg"]'),v=reg==='__all__'?'all':reg;
+  var p=g&&[].slice.call(g.querySelectorAll('.cd-pill')).find(function(x){return x.dataset.v===v;});
+  if(p)p.click();
 }
 function openRuinImg(url,cap){
   var im=document.getElementById("mim-img"); if(im)im.src=url;
