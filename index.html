@@ -6598,6 +6598,272 @@ html.cd-motion .r2b12-pulse{animation:r2b12Pulse 2.2s ease-out infinite}
 
 /* ---- Bereich Bauer 13 (nur B13 schreibt hier) ---- */
 /* R2-B13 Anfang */
+/* Abyss-Ausrüstung (cores), Abyss-Synthese (synthesis), Färbemittel (dyes). Präfix r2b13-.
+   Farbe mit Bedeutung: Slot (Waffe rot, Rüstung blau, Waffe/Hand/Fuß gold), Stufe (I silber, II grün, III gold, Basis violett, Greater rot),
+   Dyes in ihrer eigenen Farbe. Tokens nur hier definiert, sonst Theme-Variablen. */
+#sec-cores,#sec-synthesis,#sec-dyes{
+  --r2b13-w:var(--red);--r2b13-a:var(--cd-fx-spirit);--r2b13-b:var(--gold);
+  --r2b13-t0:var(--violet);--r2b13-t1:var(--cd-fx-def);--r2b13-t2:var(--cd-ok);--r2b13-t3:var(--gold);--r2b13-tg:var(--red);
+  --r2b13-hi:#ffffff;--r2b13-lo:#000000}
+#sec-cores>.sec-stats-auto,#sec-synthesis>.sec-stats-auto,#sec-dyes>.sec-stats-auto{display:none}
+#cf-slot,#sf-tier,#sf-eff,#dyes-cat{display:none!important}
+.r2b13-k--w{--k:var(--r2b13-w)}.r2b13-k--a{--k:var(--r2b13-a)}.r2b13-k--b{--k:var(--r2b13-b)}.r2b13-k--n{--k:var(--violet)}
+.r2b13-t--0{--t:var(--r2b13-t0)}.r2b13-t--1{--t:var(--r2b13-t1)}.r2b13-t--2{--t:var(--r2b13-t2)}.r2b13-t--3{--t:var(--r2b13-t3)}.r2b13-t--g,.r2b13-t--x{--t:var(--r2b13-tg)}
+.r2b13-off{display:none!important}
+.r2b13-dim{color:var(--dim)}
+.r2b13-lbl{display:inline-flex;align-items:center;gap:5px;font:600 11.5px/1.25 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.r2b13-lbl .cd-i{width:13px;height:13px;color:var(--gold)}
+.r2b13-xref{margin:0 0 16px}
+.r2b13-greaternote{margin:10px 0 0}
+.r2b13-greaternote a{color:var(--glo)}
+.r2b13-xref a{color:var(--glo)}
+.r2b13-intro>p,p.r2b13-intro{max-width:76ch}
+.r2b13-intro p,p.r2b13-intro{margin:0 0 10px;font-size:13.5px;line-height:1.65;color:var(--text)}
+p.r2b13-dim,.r2b13-intro p.r2b13-dim{color:var(--dim)}
+.r2b13-h3-s{font-size:12px;font-weight:400;color:var(--dim)}
+/* Filterleiste: Pillen + Zähler */
+.r2b13-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:18px 0 6px}
+.r2b13-bar .cd-pills{margin:0}
+.r2b13-pillrow{display:flex;flex-wrap:wrap;gap:8px 12px;flex:1 1 0;min-width:0;max-width:100%}
+.r2b13-pillrow>.cd-pills{min-width:0;max-width:100%}
+#r2b13-core-pills{min-width:0;max-width:100%}
+.r2b13-cnt{margin-left:auto;font:600 12px/1.2 var(--f-mono);color:var(--gdim);font-variant-numeric:tabular-nums}
+.r2b13-cnt:empty{display:none}
+.r2b13-slotpills .cd-pill[data-v="Weapon"]{--c:var(--r2b13-w)}.r2b13-slotpills .cd-pill[data-v="Armor"]{--c:var(--r2b13-a)}
+.r2b13-tierpills .cd-pill[data-v="1"]{--c:var(--r2b13-t1)}.r2b13-tierpills .cd-pill[data-v="2"]{--c:var(--r2b13-t2)}.r2b13-tierpills .cd-pill[data-v="0"]{--c:var(--r2b13-t0)}
+.r2b13-effpill .cd-pill{--c:var(--cd-ok)}
+/* Slot-Chip, Preis, Abzeichen */
+.r2b13-slot{--k:var(--dim);display:inline-flex;align-items:center;gap:5px;min-height:22px;padding:2px 9px;border:1px solid color-mix(in srgb,var(--k) 42%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--k) 11%,transparent);font:600 11.5px/1.2 var(--f-body);color:color-mix(in srgb,var(--k) 72%,var(--ink-hi));white-space:nowrap}
+.r2b13-slot .cd-g{font-size:12px;color:var(--k)}
+.r2b13-slot--w{--k:var(--r2b13-w)}.r2b13-slot--a{--k:var(--r2b13-a)}.r2b13-slot--b{--k:var(--r2b13-b)}
+.r2b13-price{display:inline-flex;align-items:center;min-height:22px;padding:2px 9px;border:1px solid color-mix(in srgb,var(--gold) 34%,transparent);border-radius:999px;background:color-mix(in srgb,var(--gold) 8%,transparent);
+  font:600 11.5px/1.2 var(--f-mono);color:var(--glo);font-variant-numeric:tabular-nums;white-space:nowrap}
+.r2b13-badge{display:inline-flex;align-items:center;min-height:22px;padding:2px 9px;border:1px solid var(--line-strong);border-radius:999px;font:600 11.5px/1.2 var(--f-body);color:var(--text);white-space:nowrap}
+.r2b13-badge--g{border-color:color-mix(in srgb,var(--r2b13-tg) 50%,transparent);background:color-mix(in srgb,var(--r2b13-tg) 12%,transparent);color:var(--rhi)}
+.r2b13-badge--gold{border-color:color-mix(in srgb,var(--gold) 45%,transparent);background:color-mix(in srgb,var(--gold) 10%,transparent);color:var(--glo)}
+.r2b13-core-tags{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:6px}
+/* Gruppen-Überschriften */
+.r2b13-grp,.r2b13-syn-grp,.r2b13-dfam{margin-top:6px}
+.r2b13-grp-hd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:28px 0 13px}
+.r2b13-grp-hd>.sub-t{margin:0}
+.r2b13-grp-t::before,.r2b13-dfam-t::before{display:none}
+.r2b13-grp-hd>.cd-g{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:color-mix(in srgb,var(--k,var(--gold)) 16%,transparent);color:var(--k,var(--gold));font-size:15px}
+.r2b13-grp-n{font:400 12px/1.3 var(--f-body);color:var(--dim)}
+.r2b13-sub-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:22px 0 10px;font:700 14.5px/1.3 var(--f-display);color:var(--ink-hi)}
+.r2b13-sub-h>.cd-g{color:var(--gold)}
+.r2b13-sub-h>span{font:400 12px/1.4 var(--f-body);color:var(--dim)}
+
+/* ---------- Abyss-Ausrüstung ---------- */
+.r2b13-slotkey{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:10px;margin:12px 0 4px}
+.r2b13-slotkey-i{display:flex;flex-direction:column;gap:7px;padding:12px 14px;border:1px solid var(--line-soft);border-radius:12px;background:var(--panel-2)}
+.r2b13-slotkey-i p{margin:0;font-size:13px;line-height:1.55;color:var(--dim)}
+.r2b13-slotkey-pair{display:flex;flex-wrap:wrap;gap:6px}
+.r2b13-slotkey-x{display:grid;gap:5px;margin:0;padding:0;list-style:none;font-size:13px;line-height:1.55;color:var(--text)}
+.r2b13-slotkey-x .r2b13-lbl{margin-right:8px;color:var(--gdim)}
+.r2b13-slotkey-x a{color:var(--glo);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--glo) 40%,transparent);text-underline-offset:2px}
+.r2b13-slotkey-x a:hover{color:var(--rhi)}
+.r2b13-core-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:14px}
+.r2b13-core,.r2b13-fam{display:flex;flex-direction:column;gap:10px;min-width:0;padding:15px 16px 14px;border:1px solid var(--line);border-top:2px solid color-mix(in srgb,var(--k,var(--violet)) 70%,transparent);border-radius:14px;
+  background:color-mix(in srgb,var(--k,var(--violet)) 4%,var(--card));box-shadow:var(--shadow-soft);scroll-margin-top:calc(var(--cdx-bb-h,0px) + 12px);
+  content-visibility:auto;contain-intrinsic-size:auto 320px auto 250px;transition:border-color .2s,box-shadow .2s}
+.r2b13-core:hover,.r2b13-fam:hover{border-color:color-mix(in srgb,var(--k,var(--violet)) 42%,var(--line));box-shadow:var(--shadow-soft),0 0 0 1px color-mix(in srgb,var(--k,var(--violet)) 16%,transparent)}
+.r2b13-core-hd{display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-items:center;gap:12px}
+.r2b13-gem{position:relative;display:grid;place-items:center;width:56px;height:56px;border:1px solid color-mix(in srgb,var(--violet) 38%,transparent);border-radius:15px;overflow:hidden;
+  background:radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--violet) 30%,transparent),transparent 72%),var(--panel);box-shadow:inset 0 0 18px color-mix(in srgb,var(--violet) 20%,transparent)}
+.r2b13-gem>img{width:52px;height:52px;object-fit:contain}
+.r2b13-core-n,.r2b13-fam-n,.r2b13-dye-n{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.25;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
+.r2b13-vid{align-self:start;display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 11px;border:1px solid color-mix(in srgb,var(--red) 45%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--red) 8%,transparent);color:var(--rhi);font:600 11.5px/1 var(--f-body);cursor:pointer;transition:background .18s}
+.r2b13-vid:hover{background:color-mix(in srgb,var(--red) 18%,transparent)}
+.r2b13-vid:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b13-vid>span{font-size:11.5px}
+/* Vorschau-Knopf als runder ▶ rechts im Kopf, auf allen Breiten (mobil spart das eine Zeile je Karte) */
+.r2b13-vid{justify-content:center;width:36px;min-height:36px;padding:0}
+.r2b13-vid-t{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.r2b13-vid>span[aria-hidden]{font-size:12px;margin-left:2px}
+/* Effekt als ruhige, volle Zeile: gleiche Kante in jeder Karte statt unterschiedlich breiter Kästen */
+.r2b13-core-fx>.cd-fx{display:flex}
+/* Dyes: „Mehr lesen“ leiser (60 gleiche Knöpfe), Farbe nur als Hauch der Dye-Farbe am Rand */
+.r2b13-dye .r2b13-more>summary{min-height:34px;padding:5px 11px;border-color:color-mix(in srgb,var(--sw) 40%,var(--line));background:transparent;color:var(--dim);font-weight:600;letter-spacing:.08em}
+.r2b13-dye .r2b13-more>summary::after{color:var(--dim)}
+.r2b13-dye .r2b13-more>summary:hover,.r2b13-dye .r2b13-more[open]>summary{border-color:color-mix(in srgb,var(--sw) 70%,var(--gold));background:color-mix(in srgb,var(--sw) 12%,transparent);color:var(--ink-hi)}
+.r2b13-dye .miss-chip-sm{font-size:11.5px}
+.r2b13-core-fx .cd-fx,.r2b13-fam-fx .cd-fx,.r2b13-step-fx .cd-fx{font-size:13px;line-height:1.45;padding:5px 11px 5px 8px}
+.r2b13-step-fx .cd-fx{font-size:12px;padding:3px 9px 3px 7px;background:none}
+.r2b13-ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.r2b13-ladder.is-single{grid-template-columns:minmax(0,1fr)}
+.r2b13-ladder-l{grid-column:1/-1;font:600 11.5px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.r2b13-rung{display:flex;align-items:center;justify-content:space-between;gap:6px;min-width:0;padding:6px 9px;border:1px solid color-mix(in srgb,var(--t) 38%,transparent);border-radius:8px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--t) 24%,transparent) var(--p),color-mix(in srgb,var(--t) 5%,transparent) var(--p));font:600 12px/1.2 var(--f-mono);color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.r2b13-rung>b{color:var(--t)}
+.r2b13-note-sm{padding:8px 11px;font-size:12.5px;gap:8px}
+.r2b13-note-sm>.cd-i{width:16px;height:16px}
+.r2b13-core-src{display:flex;flex-direction:column;gap:4px;margin-top:auto;padding-top:10px;border-top:1px dashed var(--line-soft)}
+.r2b13-core-src p,.r2b13-more p{margin:0;font-size:13px;line-height:1.55;color:var(--dim);overflow-wrap:anywhere}
+.r2b13-more>summary{min-height:32px;padding:4px 11px;font-size:12px}
+
+/* ---------- Abyss-Synthese ---------- */
+.r2b13-h3{flex-wrap:wrap}
+.r2b13-guide{display:grid;gap:14px;margin-bottom:6px}
+.r2b13-path{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;margin:4px 0 12px;counter-reset:r2b13s}
+.r2b13-path>.r2b13-lbl{margin-right:-12px}
+/* Hängender Einzug: umbrechende Zeilen beginnen 26 px eingerückt, damit Pfeil bzw. Plus davor in der Fläche bleibt statt über den Kartenrand zu hängen */
+.r2b13-path{padding-left:26px}.r2b13-path>:first-child{margin-left:-26px}
+.r2b13-single .r2b13-ins{flex:1 1 100%;box-sizing:border-box;padding-left:22px}.r2b13-single .r2b13-ins>:first-child{margin-left:-22px}
+.r2b13-modenotes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.r2b13-modenotes>.cd-note{margin:0}
+.r2b13-crumb{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:4px 13px 4px 4px;border:1px solid color-mix(in srgb,var(--gold) 30%,var(--line));border-radius:999px;background:var(--panel-2);font-size:13px;color:var(--text);counter-increment:r2b13s}
+.r2b13-crumb::before{content:counter(r2b13s) / "";display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--gold) 18%,var(--panel));border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);font:700 11.5px/1 var(--f-mono);color:var(--glo)}
+.r2b13-crumb+.r2b13-crumb::after{content:"→" / "";position:absolute;left:-20px;top:50%;transform:translateY(-50%);font:700 14px/1 var(--f-mono);color:var(--gold)}
+.r2b13-modes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px;align-items:start}
+.r2b13-mode{--m:var(--gold);display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px 18px;border:1px solid var(--line);border-top:2px solid color-mix(in srgb,var(--m) 75%,transparent);border-radius:16px;
+  background:linear-gradient(155deg,color-mix(in srgb,var(--m) 12%,var(--card)) 0%,var(--card) 55%);box-shadow:var(--shadow-soft)}
+.r2b13-mode--spec{--m:var(--violet)}
+.r2b13-mode-hd{display:flex;align-items:center;gap:12px}
+.r2b13-mode-g{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;background:color-mix(in srgb,var(--m) 16%,transparent);border:1px solid color-mix(in srgb,var(--m) 45%,transparent);color:var(--m);font-size:20px}
+.r2b13-mode-hd h4{margin:0;font:700 16px/1.25 var(--f-display);color:var(--ink-hi)}
+.r2b13-mode-tag{font-size:12px;color:color-mix(in srgb,var(--m) 80%,var(--ink-hi))}
+.r2b13-mode>p{margin:0;max-width:70ch;font-size:13.5px;line-height:1.6;color:var(--text)}
+.r2b13-facts{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.r2b13-facts li{display:grid;grid-template-columns:118px minmax(0,1fr);align-items:baseline;gap:10px;padding:7px 11px;border:1px solid color-mix(in srgb,var(--m) 18%,transparent);border-radius:9px;background:color-mix(in srgb,var(--m) 6%,transparent);font-size:13px;line-height:1.5}
+.r2b13-odds{display:grid;gap:8px;padding:12px 13px;border:1px solid var(--line-soft);border-radius:12px;background:color-mix(in srgb,var(--card) 70%,transparent)}
+.r2b13-odds-h,.r2b13-odds-r{display:grid;grid-template-columns:118px minmax(0,1fr);align-items:center;gap:12px}
+.r2b13-odds-h{font:600 11.5px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.r2b13-odds-in{font:700 13px/1.2 var(--f-mono);color:var(--ink-hi)}
+.r2b13-bar3{display:flex;height:10px;border-radius:6px;overflow:hidden;background:var(--line-soft);gap:2px}
+.r2b13-bar3>i{flex:0 0 calc(var(--w) - 2px);min-width:5px;background:var(--t);box-shadow:0 0 10px -2px color-mix(in srgb,var(--t) 70%,transparent)}
+.r2b13-odds-t{display:block;margin-top:5px;font:600 12px/1.3 var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums}
+.r2b13-note-v{--c:var(--violet)}
+.r2b13-witches{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}
+.r2b13-witch{display:flex;flex-direction:column;gap:9px;min-width:0;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--cd-acc,var(--violet));border-radius:12px;
+  background:color-mix(in srgb,var(--cd-acc,var(--violet)) 7%,var(--card))}
+.r2b13-witch-hd{display:flex;align-items:center;gap:10px}
+.r2b13-witch-av{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:color-mix(in srgb,var(--cd-acc,var(--violet)) 38%,var(--card));border:1px solid color-mix(in srgb,var(--cd-acc,var(--violet)) 70%,transparent);font:700 16px/1 var(--f-display);color:var(--ink-hi)}
+.r2b13-witch-n{margin:0;font:700 15px/1.25 var(--f-display);color:var(--ink-hi)}
+.r2b13-witch-n>span{font:400 12px/1 var(--f-body);color:var(--dim)}
+.r2b13-witch-reg{display:inline-flex;align-items:flex-start;gap:4px;margin-top:2px;font-size:12px;line-height:1.4;color:var(--dim)}
+.r2b13-witch-reg .cd-i{width:13px;height:13px;margin-top:1px;color:var(--cd-acc,var(--gold))}
+.r2b13-witch-r{display:grid;gap:6px}
+.r2b13-witch.is-none{border-left-style:dashed}
+.r2b13-witch-none{margin:0;font-size:12.5px;line-height:1.5;color:var(--dim);font-style:italic}
+.r2b13-combo{display:grid;gap:8px;padding:12px 14px;border:1px dashed color-mix(in srgb,var(--violet) 45%,transparent);border-radius:12px;background:color-mix(in srgb,var(--violet) 6%,transparent)}
+.r2b13-combo p{margin:0;font-size:12.5px}
+.r2b13-datafold .cd-fold-t{font-size:14.5px}
+.r2b13-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:4px 0 8px}
+.r2b13-legend .r2b13-lbl{margin-right:4px}
+/* Formel-Marken: Zutat + Zutat → Ergebnis (römische Stufe im Kreis per ::before, "+" und "→" per CSS mit Alternativtext) */
+.r2b13-eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;min-width:0}
+.r2b13-ins{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;min-width:0}
+.r2b13-eq--list .r2b13-tok{margin-right:0}
+:where(.r2b13-tok){--t:var(--dim)}
+.r2b13-tok{position:relative;display:inline-flex;align-items:center;gap:6px;max-width:100%;min-height:30px;padding:3px 11px 3px 4px;border:1px solid color-mix(in srgb,var(--t) 42%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--t) 10%,var(--card));font:500 12.5px/1.2 var(--f-body);color:var(--text);text-decoration:none;overflow-wrap:anywhere}
+.r2b13-tok::before{content:attr(data-r) / "";display:grid;place-items:center;flex:none;min-width:22px;height:22px;padding:0 3px;border-radius:999px;background:color-mix(in srgb,var(--t) 24%,var(--panel));font:700 11px/1 var(--f-mono);color:var(--t)}
+.r2b13-tok:not([data-r])::before{display:none}
+.r2b13-tok:not([data-r]){padding-left:11px}
+.r2b13-ins>.r2b13-tok+.r2b13-tok::after{content:"+" / "plus";position:absolute;left:-16px;top:50%;transform:translateY(-50%);font:700 14px/1 var(--f-mono);color:var(--dim)}
+.r2b13-res{display:inline-flex;align-items:center;gap:8px;max-width:100%}
+.r2b13-res::before{content:"→" / "ergibt";font:700 17px/1 var(--f-mono);color:var(--gold)}
+.r2b13-tok>b{font:700 12px/1 var(--f-mono);color:var(--t)}
+.r2b13-tok.is-mat{--t:var(--dim);border-style:dashed;background:transparent}
+.r2b13-tok.is-res{font-weight:700;color:var(--ink-hi);border-width:1.5px;border-color:color-mix(in srgb,var(--t) 70%,transparent);box-shadow:0 0 16px -6px color-mix(in srgb,var(--t) 75%,transparent)}
+a.r2b13-tok{cursor:pointer;transition:background .16s,border-color .16s}
+a.r2b13-tok:hover{border-color:var(--t);background:color-mix(in srgb,var(--t) 22%,var(--card));color:var(--ink-hi)}
+a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b13-eq--big .r2b13-tok{min-height:36px;padding-right:14px;font-size:13.5px}
+/* Familienkarten */
+.r2b13-syn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
+.r2b13-fam-hd{display:grid;grid-template-columns:50px minmax(0,1fr);align-items:center;gap:12px}
+:where(.r2b13-fam-ico){--t:var(--violet)}
+.r2b13-fam-ico{display:grid;place-items:center;width:50px;height:50px;border:1.5px solid color-mix(in srgb,var(--t) 58%,transparent);border-radius:14px;overflow:hidden;
+  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--t) 24%,transparent),transparent 72%),var(--panel)}
+.r2b13-fam-ico img{width:44px;height:44px;object-fit:contain}
+.r2b13-fam-ico.no-img::before,.r2b13-gem.no-img::before{content:attr(data-r) / "";font-size:22px;line-height:1;color:var(--t,var(--violet));opacity:.85}
+.r2b13-fam-fx.is-none{opacity:.85}
+.r2b13-noeff{font-size:12.5px;font-style:italic;color:var(--ink-faint)}
+.r2b13-chain{display:grid;margin:0;padding:0;list-style:none}
+.r2b13-step{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:start;gap:10px;padding:9px 0;border-top:1px dashed var(--line-soft)}
+.r2b13-step:first-child{border-top:0;padding-top:2px}
+.r2b13-tn{display:grid;place-items:center;width:28px;height:28px;margin-top:1px;border:1.5px solid var(--t);border-radius:50%;background:color-mix(in srgb,var(--t) 15%,var(--card));font:700 11.5px/1 var(--f-mono);color:var(--t)}
+.r2b13-step-b{display:grid;gap:6px;min-width:0}
+.r2b13-step>.r2b13-price{margin-top:4px}
+.r2b13-single{display:grid;gap:6px}
+.r2b13-wc-mount{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin:0;font-size:13px}
+
+/* ---------- Färbemittel ---------- */
+.r2b13-spectrum{grid-column:1/-1;display:flex;height:12px;border-radius:7px;overflow:hidden;box-shadow:0 8px 26px -10px color-mix(in srgb,var(--gold) 55%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--ink-hi) 12%,transparent)}
+.r2b13-spectrum>i{flex:1;background:var(--sw)}
+.r2b13-dyeinfo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin:0 0 14px}
+.r2b13-dyeinfo-i{display:flex;flex-direction:column;gap:10px;min-width:0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);box-shadow:var(--shadow-soft)}
+.r2b13-dyeinfo-i p{margin:0;font-size:13px;line-height:1.6;color:var(--dim)}
+.r2b13-dyeinfo-t{margin:0;font:700 14.5px/1.3 var(--f-display);color:var(--ink-hi)}
+.r2b13-ramp{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:46px;border-radius:10px;overflow:hidden;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink-hi) 12%,transparent)}
+.r2b13-ramp>span{display:flex;align-items:flex-end;padding:4px 6px;background:var(--sw)}
+.r2b13-ramp b{font:600 11.5px/1 var(--f-mono);color:color-mix(in srgb,var(--r2b13-hi) 90%,transparent);text-shadow:0 1px 3px color-mix(in srgb,var(--r2b13-lo) 70%,transparent)}
+.r2b13-dyeuse{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.r2b13-dyeuse li{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:3px 11px;border:1px solid var(--line);border-radius:999px;font-size:12.5px;color:var(--gold)}
+.r2b13-dyeuse li span{color:var(--text)}
+.r2b13-dot{flex:none;width:14px;height:14px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink-hi) 28%,transparent)}
+.r2b13-dyepills .cd-pill[aria-pressed="true"] .r2b13-dot{box-shadow:0 0 0 2px var(--bg)}
+
+.r2b13-dfam-sw{flex:none;width:64px;height:16px;border-radius:8px;background:var(--sw);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink-hi) 16%,transparent),0 4px 14px -6px var(--sw)}
+.r2b13-dye-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,max(176px,calc((100% - 48px) / 5))),1fr));gap:12px}
+.r2b13-dye{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:var(--shadow-soft);
+  scroll-margin-top:calc(var(--cdx-bb-h,0px) + 12px);content-visibility:auto;contain-intrinsic-size:auto 260px auto 330px;transition:border-color .2s}
+.r2b13-dye:hover{border-color:color-mix(in srgb,var(--sw) 55%,var(--line-strong));box-shadow:var(--shadow-soft),0 10px 30px -18px var(--sw)}
+.r2b13-dye.is-miss{border-color:color-mix(in srgb,var(--red) 38%,var(--line))}
+.r2b13-sw{position:relative;flex:none;height:84px;background:var(--sw);
+  color:color-mix(in srgb,var(--r2b13-hi) 90%,transparent)}
+.r2b13-sw.is-light{color:color-mix(in srgb,var(--r2b13-lo) 78%,transparent)}
+.r2b13-sw-tier{position:absolute;top:10px;left:12px;font:700 11.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.r2b13-sw-hex{position:absolute;left:12px;bottom:10px;font:600 11.5px/1 var(--f-mono);letter-spacing:.04em;opacity:.85}
+.r2b13-sw-ico{position:absolute;right:10px;bottom:8px;width:48px;height:48px;object-fit:contain}
+.r2b13-dye-b{display:flex;flex-direction:column;flex:1;gap:7px;min-width:0;padding:11px 12px 12px}
+.r2b13-dye-n{font-size:14px}
+.r2b13-dye-b .r2b13-core-tags{margin-top:-2px}
+.r2b13-dye-b .r2b13-core-tags:empty{display:none}
+.r2b13-dye-src .cd-chip{min-height:22px;padding:1px 9px;font-size:11.5px}
+.r2b13-dye-lead{margin:0;font-size:12px;line-height:1.5;color:var(--dim);overflow-wrap:anywhere}
+.r2b13-ing{display:flex;flex-direction:column;gap:5px}
+.r2b13-ing ul{display:flex;flex-wrap:wrap;gap:4px;margin:0;padding:0;list-style:none}
+.r2b13-ing li{display:inline-flex;align-items:baseline;gap:4px;padding:2px 8px;border:1px solid color-mix(in srgb,var(--cd-ok) 26%,transparent);border-radius:6px;background:color-mix(in srgb,var(--cd-ok) 7%,transparent);font-size:12px;line-height:1.35;color:var(--text)}
+.r2b13-ing li b{font:700 12px/1 var(--f-mono);color:var(--cd-ok)}
+.r2b13-ing li sup{color:var(--gold);font-size:11.5px}
+.r2b13-ing .r2b13-lbl .cd-i{color:var(--cd-ok)}
+.r2b13-est{font-size:11.5px;font-style:italic;color:var(--dim)}
+.r2b13-dye .item-more{margin-top:auto}
+.r2b13-conf{display:inline-flex;align-items:center;min-height:22px;padding:1px 9px;border:1px dashed var(--line-strong);border-radius:999px;font:500 11.5px/1.2 var(--f-body);font-style:italic;color:var(--dim);cursor:help}
+.r2b13-more .cd-src{margin-top:6px}
+
+/* Mobil */
+@media (max-width:860px){
+  .r2b13-modes,.r2b13-slotkey,.r2b13-modenotes{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:600px){
+  .r2b13-cnt{margin-left:0;width:100%}
+  .r2b13-core,.r2b13-fam{padding:13px 13px 12px}
+  .r2b13-core-hd{grid-template-columns:48px minmax(0,1fr) auto;gap:10px}
+  .r2b13-gem{width:48px;height:48px;border-radius:13px}.r2b13-gem>img{width:44px;height:44px}
+  .r2b13-mode{padding:14px}
+  .r2b13-path{flex-direction:column;align-items:flex-start;gap:8px}
+  .r2b13-path>.r2b13-lbl{margin-right:0}
+  .r2b13-path{padding-left:0}.r2b13-path>:first-child{margin-left:0}
+  .r2b13-crumb+.r2b13-crumb::after{display:none}
+  .r2b13-facts li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .r2b13-odds-h{display:none}
+  .r2b13-odds-r{grid-template-columns:minmax(0,1fr);gap:5px}
+  .r2b13-step{grid-template-columns:28px minmax(0,1fr);gap:8px}
+  .r2b13-step>.r2b13-price{grid-column:2;justify-self:start;margin-top:0}
+  .r2b13-tok{min-height:28px;font-size:12px}
+  .r2b13-dye{flex-direction:row;contain-intrinsic-size:auto 340px auto 200px}
+  .r2b13-sw{width:92px;height:auto;min-height:150px}
+  .r2b13-sw-tier{top:auto;bottom:34px;left:10px;font-size:11.5px;letter-spacing:.08em}
+  .r2b13-sw-hex{left:10px;bottom:12px}
+  .r2b13-sw-ico{top:10px;right:auto;left:50%;bottom:auto;width:50px;height:50px;transform:translateX(-50%)}
+  .r2b13-dye-b{padding:11px 12px 12px}
+}
+@media (pointer:coarse){a.r2b13-tok{min-height:36px}.r2b13-vid{width:44px;min-height:44px}.r2b13-dye .r2b13-more>summary{min-height:44px}}
 /* R2-B13 Ende */
 </style>
 </head>
@@ -7288,67 +7554,97 @@ html.cd-motion .r2b12-pulse{animation:r2b12Pulse 2.2s ease-out infinite}
 
   <section class="sec" id="sec-cores">
     <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss-Ausrüstung <span class="sec-t-en">Abyss Gear</span></h2>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Synthese-Mechanik, der Witch-Synthese-Baum mit allen Rezepten und die übrigen Hexen-Craftables stehen auf der Seite <a href="#" onclick="showSec('synthesis');return false;">Abyss-Synthese</a> (Synthesis). Hier geht es um die Abyss-Ausrüstung selbst: Effekt, Quelle und Slot-Typ.</div>
-    <div class="fbar">
-      <select class="fs" id="cf-slot" aria-label="Abyss-Cores nach Slot-Typ filtern" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe (auch Waffe/Hand/Fuß)</option><option value="Armor">Rüstung (auch Waffe/Hand/Fuß)</option><option value="Both">Nur Waffe, Handschuhe, Schuhe</option></select>
+    <div id="r2b13-cores-hero"></div>
+    <div class="cd-note cd-spot r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Nicht verwechseln</b>Synthese-Mechanik, der Witch-Synthese-Baum mit allen Rezepten und die übrigen Hexen-Craftables stehen auf der Seite <a href="#" onclick="showSec('synthesis');return false;">Abyss-Synthese</a> (Synthesis). Hier geht es um die Abyss-Ausrüstung selbst: Effekt, Quelle und Slot-Typ.</div></div>
+    <div class="r2b13-bar">
+      <div id="r2b13-core-pills"></div>
+      <span id="core-cnt" class="r2b13-cnt" aria-live="polite"></span>
+      <select class="fs" id="cf-slot" hidden aria-hidden="true" tabindex="-1" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe (auch Waffe/Hand/Fuß)</option><option value="Armor">Rüstung (auch Waffe/Hand/Fuß)</option><option value="Both">Nur Waffe, Handschuhe, Schuhe</option></select>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--dim);margin:-4px 0 10px;line-height:1.55"><b>Slot-Typ:</b> „Waffe/Hand/Fuß“ passt laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe. „Waffe“ und „Rüstung“ sind Sammelangaben, einzelne Cores sind enger: Tempest of Destruction, Kinetic Burst, Colossal Might, Putrid Touch, The Showstopper und Karmic Pulse passen nur in Handschuhe, Infinite Arrows nur in Fernkampfwaffen; Aegis und Fortification passen auch in Schilde.</div>
-    <div class="tw-wrap"><table><thead><tr><th>Name</th><th>Effekt</th><th>Quelle</th><th>Slot-Typ</th></tr></thead><tbody id="core-tb"></tbody></table></div>
+    <div class="r2b13-slotkey">
+      <div class="r2b13-slotkey-i cd-spot r2b13-k--b"><span class="r2b13-slot r2b13-slot--b"><i class="cd-g" aria-hidden="true">✦</i>Waffe/Hand/Fuß</span><p>passt laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe.</p></div>
+      <div class="r2b13-slotkey-i cd-spot"><span class="r2b13-slotkey-pair"><span class="r2b13-slot r2b13-slot--w"><i class="cd-g" aria-hidden="true">⚔</i>Waffe</span><span class="r2b13-slot r2b13-slot--a"><i class="cd-g" aria-hidden="true">⛨</i>Rüstung</span></span><p>sind Sammelangaben, einzelne Cores sind enger:</p>
+        <ul class="r2b13-slotkey-x">
+          <li><span class="r2b13-lbl">nur Handschuhe</span><a href="#sec=cores&amp;go=tempest-of-destruction" data-go="cores" data-goq="tempest-of-destruction">Tempest of Destruction</a>, <a href="#sec=cores&amp;go=kinetic-burst" data-go="cores" data-goq="kinetic-burst">Kinetic Burst</a>, <a href="#sec=cores&amp;go=colossal-might" data-go="cores" data-goq="colossal-might">Colossal Might</a>, <a href="#sec=cores&amp;go=putrid-touch" data-go="cores" data-goq="putrid-touch">Putrid Touch</a>, <a href="#sec=cores&amp;go=the-showstopper" data-go="cores" data-goq="the-showstopper">The Showstopper</a> und <a href="#sec=cores&amp;go=karmic-pulse" data-go="cores" data-goq="karmic-pulse">Karmic Pulse</a></li>
+          <li><span class="r2b13-lbl">nur Fernkampfwaffen</span><a href="#sec=cores&amp;go=infinite-arrows-iii" data-go="cores" data-goq="infinite-arrows-iii">Infinite Arrows</a></li>
+          <li><span class="r2b13-lbl">auch Schilde</span><a href="#sec=cores&amp;go=aegis-iii" data-go="cores" data-goq="aegis-iii">Aegis</a> und <a href="#sec=cores&amp;go=fortification-iii" data-go="cores" data-goq="fortification-iii">Fortification</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="cd-note cd-note--warn cd-spot r2b13-greaternote" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Abzeichen „Greater · Spezial-Synthese“</b>Greater-Core: nur per Spezial-Synthese (~4%), mit Haltbarkeit; zerbricht und ist nicht reparierbar. Die +40%-Bane-Werte gehören zu diesen Greater-Cores, Stufe III liegt bei +12% (Details auf der Seite <a href="#sec=synthesis" data-go="synthesis">Abyss-Synthese</a>).</div></div>
+    <div id="core-tb" class="r2b13-cores"></div>
   </section>
 
   <section class="sec" id="sec-synthesis">
     <h2 class="sec-t"><span class="sec-sym">⚗</span> Abyss-Synthese <span class="sec-t-en">Synthesis</span></h2>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Nicht verwechseln: Die Abyss-Ausrüstung selbst mit Effekt, Quelle und Slot-Typ steht auf der Seite <a href="#" onclick="showSec('cores');return false;">Abyss-Ausrüstung</a> (Abyss Gear), die Hexen mit Wohnort und Diensten unter <a href="#" onclick="showSec('witches');return false;">Hexen &amp; Fusion</a>. Hier geht es um die Synthese: Mechanik, alle Synthese-Rezepte und was die Hexe sonst herstellt.</div>
-    <h3 class="sub-t" style="margin-top:24px">🔮 Synthese-Mechanik <span style="font-size:var(--fs-11);color:var(--dim);font-weight:400">(Regulär vs. Spezial)</span></h3>
-    <div id="synth-guide" style="font-size:12.5px;color:var(--text);line-height:1.65;margin-bottom:10px">
-      <p style="margin:0 0 9px;color:var(--dim)">Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot. An der Hexe: <em>Craft Abyss Gear</em> wählen, dann mit R2/RT in den Synthese-Tab wechseln. Die Core-Tabelle auf der Seite <a href="#" onclick="showSec('cores');return false;"><strong>Abyss-Ausrüstung</strong></a> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt die 175 datamineten Core-Synthese-Rezepte (Nicht-Core-Craftables wie die Sigil-Mount-Amulette stehen separat darunter). Dieser Block erklärt die Mechanik dahinter.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0">
-        <div style="padding:10px 13px;background:rgba(201,162,39,.04);border:1px solid var(--bdr);border-radius:8px">
-          <strong style="color:var(--gdim)">Reguläre Synthese</strong> <span style="color:var(--dim);font-size:var(--fs-11)">(sicher, deterministisch)</span>
-          <p style="margin:6px 0 0;color:var(--dim)">Zwei Cores mit <strong>gleichem Namen + gleicher Stufe</strong> → ein Core eine Stufe höher. Z.B. 2x Destruction I → 1x Destruction II; 2x Haste I → 1x Haste II. Höchste so erreichbare Stufe ist <strong>III</strong>. Braucht das passende Blueprint (bei Hexen kaufbar). Nicht jeder Core ist aufwertbar.</p>
+    <div id="r2b13-syn-hero"></div>
+    <div class="cd-note cd-spot r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Nicht verwechseln</b>Die Abyss-Ausrüstung selbst mit Effekt, Quelle und Slot-Typ steht auf der Seite <a href="#" onclick="showSec('cores');return false;">Abyss-Ausrüstung</a> (Abyss Gear), die Hexen mit Wohnort und Diensten unter <a href="#" onclick="showSec('witches');return false;">Hexen &amp; Fusion</a>. Hier geht es um die Synthese: Mechanik, alle Synthese-Rezepte und was die Hexe sonst herstellt.</div></div>
+    <h3 class="sub-t r2b13-h3">🔮 Synthese-Mechanik <span class="r2b13-h3-s">(Regulär vs. Spezial)</span></h3>
+    <div id="synth-guide" class="r2b13-guide">
+      <div class="r2b13-intro">
+        <p>Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot.</p>
+        <div class="r2b13-path" aria-label="So geht es an der Hexe"><span class="r2b13-lbl">An der Hexe</span><span class="r2b13-crumb"><em>Craft Abyss Gear</em> wählen</span><span class="r2b13-crumb">mit <kbd class="cd-keycap">R2</kbd>/<kbd class="cd-keycap">RT</kbd> in den Synthese-Tab wechseln</span></div>
+        <p class="r2b13-dim">Die Seite <a href="#" onclick="showSec('cores');return false;"><strong>Abyss-Ausrüstung</strong></a> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt die 175 datamineten Core-Synthese-Rezepte (Nicht-Core-Craftables wie die Sigil-Mount-Amulette stehen separat darunter). Dieser Block erklärt die Mechanik dahinter.</p>
+      </div>
+      <div class="r2b13-modes">
+        <article class="r2b13-mode r2b13-mode--reg cd-spot">
+          <header class="r2b13-mode-hd"><span class="r2b13-mode-g" aria-hidden="true">⇈</span><div><h4>Reguläre Synthese</h4><span class="r2b13-mode-tag">sicher, deterministisch</span></div></header>
+          <div class="r2b13-eq r2b13-eq--big" aria-label="Beispiel: 2x Destruction I ergibt 1x Destruction II"><span class="r2b13-ins"><span class="r2b13-tok is-core r2b13-t--1" data-r="I"><b>2×</b>Destruction I</span></span><span class="r2b13-res"><span class="r2b13-tok is-res r2b13-t--2" data-r="II"><b>1×</b>Destruction II</span></span></div>
+          <p>Zwei Cores mit <strong>gleichem Namen + gleicher Stufe</strong> → ein Core eine Stufe höher. Z.B. 2x Destruction I → 1x Destruction II; 2x Haste I → 1x Haste II.</p>
+          <ul class="r2b13-facts">
+            <li><span class="r2b13-lbl">höchste Stufe</span><span>Höchste so erreichbare Stufe ist <strong>III</strong>.</span></li>
+            <li><span class="r2b13-lbl">Blueprint</span><span>Braucht das passende Blueprint (bei Hexen kaufbar).</span></li>
+            <li><span class="r2b13-lbl">Grenze</span><span>Nicht jeder Core ist aufwertbar.</span></li>
+          </ul>
+        </article>
+        <article class="r2b13-mode r2b13-mode--spec cd-spot">
+          <header class="r2b13-mode-hd"><span class="r2b13-mode-g" aria-hidden="true">⚄</span><div><h4>Spezial-Synthese</h4><span class="r2b13-mode-tag">Glücksspiel, kein Blueprint</span></div></header>
+          <div class="r2b13-eq r2b13-eq--big" aria-label="Zwei beliebige Cores ergeben einen zufälligen Core"><span class="r2b13-ins"><span class="r2b13-tok is-core r2b13-t--0" data-r="⧫">Core</span><span class="r2b13-tok is-core r2b13-t--0" data-r="⧫">Core</span></span><span class="r2b13-res"><span class="r2b13-tok is-res r2b13-t--x" data-r="?">zufällig</span></span></div>
+          <p>Zwei Cores werden verbraucht, der <strong>Typ</strong> des Ergebnisses ist <strong>zufällig</strong>; nur die Stufe skaliert mit dem Input. <strong>Einziger Weg zu Greater-Cores</strong> (ca. 4% pro Versuch, im Schnitt ~25 Versuche).</p>
+          <div class="r2b13-odds" role="table" aria-label="Spezial-Synthese: Ergebnis-Chancen je Input">
+            <div class="r2b13-odds-h" role="row"><span role="columnheader">Spezial-Synthese Input</span><span role="columnheader">Ergebnis-Chancen</span></div>
+            <div class="r2b13-odds-r" role="row"><span role="rowheader" class="r2b13-odds-in">2x Stufe I</span><span role="cell"><span class="r2b13-bar3" aria-hidden="true"><i class="r2b13-t--1" style="--w:50%"></i><i class="r2b13-t--2" style="--w:46%"></i><i class="r2b13-t--g" style="--w:4%"></i></span><span class="r2b13-odds-t">50% I · 46% II · 4% Greater</span></span></div>
+            <div class="r2b13-odds-r" role="row"><span role="rowheader" class="r2b13-odds-in">2x Stufe II</span><span role="cell"><span class="r2b13-bar3" aria-hidden="true"><i class="r2b13-t--2" style="--w:50%"></i><i class="r2b13-t--3" style="--w:46%"></i><i class="r2b13-t--g" style="--w:4%"></i></span><span class="r2b13-odds-t">50% II · 46% III · 4% Greater</span></span></div>
+            <div class="r2b13-odds-r" role="row"><span role="rowheader" class="r2b13-odds-in">2x Stufe III</span><span role="cell"><span class="r2b13-bar3" aria-hidden="true"><i class="r2b13-t--3" style="--w:96%"></i><i class="r2b13-t--g" style="--w:4%"></i></span><span class="r2b13-odds-t">96% III · 4% Greater</span></span></div>
+          </div>
+        </article>
+      </div>
+      <div class="r2b13-modenotes">
+          <div class="cd-note cd-note--warn cd-spot" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Greater-Cores</b>Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden).</div></div>
+          <div class="cd-note r2b13-note-v cd-spot" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Wichtig</b>Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores, <strong>nicht</strong> zu Stufe III (Stufe III = +12%). Davon zu unterscheiden ist die eigene <strong>„Rampaging“</strong>-Core-Reihe (z.B. Rampaging Insight), die im deutschen Spiel <strong>„Wütend“</strong> heißt.</div></div>
+      </div>
+      <h4 class="r2b13-sub-h"><i class="cd-g" aria-hidden="true">✶</i>Hexen &amp; ihre Rezepte <span>Wohnort (Region) und verkaufte Rezepte</span></h4>
+      <div id="r2b13-witches" class="r2b13-witches"></div>
+      <div class="r2b13-combo cd-spot">
+        <span class="r2b13-lbl">Benannte Synthese-Kombi (belegt, Einzelquelle)</span>
+        <div id="r2b13-wod"></div>
+        <p class="r2b13-dim"><strong>Wound of Darkness</strong> = Destruction I + Aegis I + Haste I + Ascent I.</p>
+      </div>
+      <div class="cd-note cd-spot r2b13-bezug" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Bezug zum Baum unten</b>Dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</div></div>
+      <details class="cd-fold cd-spot cd-fold--noico r2b13-datafold">
+        <summary><span class="cd-fold-main"><span class="cd-fold-t">Datenstand &amp; Quellenlage</span><span class="cd-fold-lead">Hexen→Rezept-Zuordnung, Quellenkonflikte, White Crow</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary>
+        <div class="cd-fold-body">
+          <p>Datenstand: Hexen→Rezept-Zuordnung durch questlog-Händlerdaten bestätigt (Elowen: Gear Blueprint: Vigor/Vitality/Composure; Areciel: Destruction/Insight; Bari: Swift/Haste/Ascent; Lyselia: Fortification/Aegis/Fortitude; zuvor nur Einzelquelle vulkk). Die Spalte nennt den Wohnort der Hexe; ihre Sanctums liegen teils in anderen Regionen (siehe Sanctum-Checkliste).</p>
+          <p>Quellenkonflikt: eine Quelle nennt nur Elowen als synthese-fähig, andere vier Regional-Hexen. Odds und Tier-Regeln mehrfach belegt. White Crow als Synthese-Hexe nur einfach genannt und unbestätigt. Spezial-Synthese-Output ist echt zufällig, feste Input→Output-Rezepte existieren dafür nicht.</p>
         </div>
-        <div style="padding:10px 13px;background:rgba(180,84,204,.05);border:1px solid var(--bdr);border-radius:8px">
-          <strong style="color:#b554cc">Spezial-Synthese</strong> <span style="color:var(--dim);font-size:var(--fs-11)">(Glücksspiel, kein Blueprint)</span>
-          <p style="margin:6px 0 0;color:var(--dim)">Zwei Cores werden verbraucht, der <strong>Typ</strong> des Ergebnisses ist <strong>zufällig</strong>; nur die Stufe skaliert mit dem Input. <strong>Einziger Weg zu Greater-Cores</strong> (ca. 4% pro Versuch, im Schnitt ~25 Versuche). Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden). <strong>Wichtig:</strong> Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores — <strong>nicht</strong> zu Stufe III (Stufe III = +12%). Davon zu unterscheiden ist die eigene <strong>„Rampaging“</strong>-Core-Reihe (z.B. Rampaging Insight), die im deutschen Spiel <strong>„Wütend“</strong> heißt.</p>
-        </div>
-      </div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-      <table style="width:100%;border-collapse:collapse;font-size:var(--fs-11-5);margin:4px 0 12px">
-        <thead><tr style="color:var(--gold);text-align:left"><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Spezial-Synthese Input</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Ergebnis-Chancen</th></tr></thead>
-        <tbody style="color:var(--dim)">
-          <tr><td style="padding:4px 8px">2x Stufe I</td><td style="padding:4px 8px">50% I · 46% II · 4% Greater</td></tr>
-          <tr><td style="padding:4px 8px">2x Stufe II</td><td style="padding:4px 8px">50% II · 46% III · 4% Greater</td></tr>
-          <tr><td style="padding:4px 8px">2x Stufe III</td><td style="padding:4px 8px">96% III · 4% Greater</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <strong style="color:var(--gdim);font-size:12px">Hexen &amp; ihre Rezepte (Wohnort)</strong>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-      <table style="width:100%;border-collapse:collapse;font-size:var(--fs-11-5);margin:4px 0 10px">
-        <thead><tr style="color:var(--gold);text-align:left"><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Hexe</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">Wohnort (Region)</th><th style="padding:4px 8px;border-bottom:1px solid var(--bdr)">verkaufte Rezepte</th></tr></thead>
-        <tbody style="color:var(--dim)">
-          <tr><td style="padding:4px 8px">Elowen (Wisdom)</td><td style="padding:4px 8px">Hernand / Witchwoods (Alfonso Estate)</td><td style="padding:4px 8px">Vigor I, Vitality I, Composure I</td></tr>
-          <tr><td style="padding:4px 8px">Areciel (Strength)</td><td style="padding:4px 8px">Crimson Desert / nahe Urdavah</td><td style="padding:4px 8px">Destruction I, Insight I</td></tr>
-          <tr><td style="padding:4px 8px">Bari (Kindness)</td><td style="padding:4px 8px">Pailune / Crimson Lake (Silver Wolf Mountain)</td><td style="padding:4px 8px">Haste I, Swift I, Ascent I</td></tr>
-          <tr><td style="padding:4px 8px">Lyselia (Humility)</td><td style="padding:4px 8px">Demeniss / Serpent Marsh</td><td style="padding:4px 8px">Fortification I, Aegis I, Fortitude I</td></tr>
-          <tr><td style="padding:4px 8px">Sylvia (Hermit)</td><td style="padding:4px 8px">Hernand / Shadow's Whisper Cave (Kap.3)</td><td style="padding:4px 8px">keine Händlerware (questlog); laut Guides nur Socket/Embed/Extract, KEINE Synthese</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <p style="margin:6px 0 0;font-size:var(--fs-11);color:var(--gdim)">Benannte Synthese-Kombi (belegt, Einzelquelle): <strong>Wound of Darkness</strong> = Destruction I + Aegis I + Haste I + Ascent I.</p>
-      <p style="margin:8px 0 0;font-size:var(--fs-10-5);color:var(--dim)">Datenstand: Hexen→Rezept-Zuordnung durch questlog-Händlerdaten bestätigt (Elowen: Gear Blueprint: Vigor/Vitality/Composure; Areciel: Destruction/Insight; Bari: Swift/Haste/Ascent; Lyselia: Fortification/Aegis/Fortitude; zuvor nur Einzelquelle vulkk). Die Spalte nennt den Wohnort der Hexe — ihre Sanctums liegen teils in anderen Regionen (siehe Sanctum-Checkliste). Quellenkonflikt: eine Quelle nennt nur Elowen als synthese-fähig, andere vier Regional-Hexen. Odds und Tier-Regeln mehrfach belegt. White Crow als Synthese-Hexe nur einfach genannt und unbestätigt. Spezial-Synthese-Output ist echt zufällig, feste Input→Output-Rezepte existieren dafür nicht.</p>
-      <p style="margin:8px 0 0;font-size:var(--fs-10-5);color:var(--gdim)">Bezug zum Baum unten: dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</p>
+      </details>
     </div>
-    <h3 class="sub-t" style="margin-top:24px">🧪 Witch-Synthese-Baum <span style="font-size:var(--fs-11);color:var(--dim);font-weight:400">(questlog-Datamine)</span></h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>175 Core-Rezepte</strong> in 93 Familien mit ihren Synthese-Rezepten und Materialkosten (Nicht-Core-Craftables wie die Sigil-Mount-Amulette sind separat darunter gelistet). Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong> — 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst". Datenbasis: dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear).</div>
-    <div class="fbar">
-      <select class="fs" id="sf-tier" aria-label="Synthese nach Stufe filtern" onchange="renderSynthesis()"><option value="">Alle Stufen</option><option value="1">Stufe I</option><option value="2">Stufe II</option><option value="3">Stufe III</option><option value="0">Basis / Sonstige</option></select>
-      <label style="display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-11-5);color:var(--dim);cursor:pointer"><input type="checkbox" id="sf-eff" onchange="renderSynthesis()"> nur mit bekanntem Effekt</label>
-      <span id="synth-count" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
+    <h3 class="sub-t r2b13-h3">🧪 Witch-Synthese-Baum <span class="r2b13-h3-s">(questlog-Datamine)</span></h3>
+    <div class="r2b13-intro">
+      <p>Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>175 Core-Rezepte</strong> in 93 Familien mit ihren Synthese-Rezepten und Materialkosten (Nicht-Core-Craftables wie die Sigil-Mount-Amulette sind separat darunter gelistet).</p>
+      <p class="r2b13-dim">Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong>: 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst".</p>
+      <div class="r2b13-legend" aria-label="Legende"><span class="r2b13-lbl">So liest du die Karten</span><span class="r2b13-tok is-core r2b13-t--1" data-r="I">Stufe I</span><span class="r2b13-tok is-core r2b13-t--2" data-r="II">Stufe II</span><span class="r2b13-tok is-core r2b13-t--3" data-r="III">Stufe III</span><span class="r2b13-tok is-core r2b13-t--0" data-r="✦">Basis / Sonstige</span><span class="r2b13-tok is-mat" data-r="◆">Material</span><span class="r2b13-dim">Zutat antippen: springt zu ihrem Rezept</span></div>
+      <p class="cd-src"><span class="cd-src-l">Datenbasis</span>dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear)</p>
     </div>
-    <div class="grid" id="synth-grid"></div>
-    <h3 class="sub-t" style="margin-top:26px">🧰 Sonstiges bei der Hexe herstellbar <span style="font-size:var(--fs-11);color:var(--dim);font-weight:400">(keine Cores)</span></h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">An derselben Hexen-Werkbank entstehen auch <strong>Nicht-Core-Gegenstände</strong> — allen voran die <strong>Sigil-Mount-Amulette</strong> (im Spiel <em>„Sigil of Solidarity“ / dt. „Siegel der Solidarität“</em>), die je ein legendäres Reittier dauerhaft freischalten, sowie einige Wertmaterialien. Sie tauchen im Datamine im selben Rezept-Baum auf, sind aber <strong>keine Abyss-Cores</strong> und hier bewusst getrennt gelistet.</div>
+    <div class="r2b13-bar r2b13-bar--syn">
+      <div id="r2b13-tier-pills" class="r2b13-pillrow"></div>
+      <span id="synth-count" class="r2b13-cnt" aria-live="polite"></span>
+      <select class="fs" id="sf-tier" hidden aria-hidden="true" tabindex="-1" onchange="renderSynthesis()"><option value="">Alle Stufen</option><option value="1">Stufe I</option><option value="2">Stufe II</option><option value="3">Stufe III</option><option value="0">Basis / Sonstige</option></select>
+      <input type="checkbox" id="sf-eff" hidden aria-hidden="true" tabindex="-1" onchange="renderSynthesis()">
+    </div>
+    <div id="synth-grid" class="r2b13-syn"></div>
+    <h3 class="sub-t r2b13-h3">🧰 Sonstiges bei der Hexe herstellbar <span class="r2b13-h3-s">(keine Cores)</span></h3>
+    <p class="r2b13-intro r2b13-dim">An derselben Hexen-Werkbank entstehen auch <strong>Nicht-Core-Gegenstände</strong>, allen voran die <strong>Sigil-Mount-Amulette</strong> (im Spiel <em>„Sigil of Solidarity“ / dt. „Siegel der Solidarität“</em>), die je ein legendäres Reittier dauerhaft freischalten, sowie einige Wertmaterialien. Sie tauchen im Datamine im selben Rezept-Baum auf, sind aber <strong>keine Abyss-Cores</strong> und hier bewusst getrennt gelistet.</p>
     <div id="witch-craftables"></div>
   </section>
 
@@ -7667,19 +7963,31 @@ html.cd-motion .r2b12-pulse{animation:r2b12Pulse 2.2s ease-out infinite}
   </section>
   <section class="sec" id="sec-dyes">
     <h2 class="sec-t"><span class="sec-sym">◑</span> Färbemittel <span class="sec-t-en">Dyes</span></h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Färbemittel (Dyes) gibt es pro Grundfarbe in fünf Stufen (Bright, Rich, Basis, Dark, Deep); zehn Farbfamilien ergeben 50 herstellbare Dyes, dazu kommen zehn Grautöne einschließlich Pure White und Black, die nicht herstellbar sind (insgesamt 60 laut questlog). Sie färben seit Patch 1.13.00 nicht mehr nur Rüstungen, sondern auch die meisten Waffen, Sekundärwaffen und Verkleidungs-Outfits. Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">60</span> belegte Dyes</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">1,50 Silver</span> Standardpreis Dyehouse</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">37,5 Silver</span> teuerster (Black)</div>
-      <div style="padding:6px 11px;background:rgba(201,162,39,.06);border:1px solid var(--bdr);border-radius:8px;font-size:var(--fs-11-5);color:var(--gdim)"><span style="color:var(--gold);font-weight:700">5</span> verpassbar</div>
+    <div id="r2b13-dyes-hero"></div>
+    <div class="r2b13-dyeinfo">
+      <article class="r2b13-dyeinfo-i cd-spot">
+        <h4 class="r2b13-dyeinfo-t">Fünf Stufen je Grundfarbe</h4>
+        <div id="r2b13-dye-ramp" class="r2b13-ramp" aria-hidden="true"></div>
+        <p>Färbemittel (Dyes) gibt es pro Grundfarbe in fünf Stufen (Bright, Rich, Basis, Dark, Deep); zehn Farbfamilien ergeben 50 herstellbare Dyes, dazu kommen zehn Grautöne einschließlich Pure White und Black, die nicht herstellbar sind (insgesamt 60 laut questlog).</p>
+      </article>
+      <article class="r2b13-dyeinfo-i cd-spot">
+        <h4 class="r2b13-dyeinfo-t">Was sich färben lässt</h4>
+        <ul class="r2b13-dyeuse" aria-hidden="true"><li>⛨<span>Rüstungen</span></li><li>⚔<span>Waffen</span></li><li>◈<span>Sekundärwaffen</span></li><li>✦<span>Verkleidung</span></li></ul>
+        <p>Sie färben seit Patch 1.13.00 nicht mehr nur Rüstungen, sondern auch die meisten Waffen, Sekundärwaffen und Verkleidungs-Outfits.</p>
+      </article>
+      <article class="r2b13-dyeinfo-i cd-spot">
+        <h4 class="r2b13-dyeinfo-t">Kaufen oder craften</h4>
+        <div class="cd-chips r2b13-dyeprice"><span class="cd-chip cd-chip--gold"><b>1,50 Silver</b><span>Standardpreis Dyehouse</span></span><span class="cd-chip cd-chip--red"><b>37,5 Silver</b><span>teuerster (Black)</span></span></div>
+        <p>Die meisten Dyes lassen sich in einem der Dyehouses für 1,50 Silver kaufen oder mit Käfern und Kräutern craften; einige seltene Spezialfarben sind nicht craftbar und nur über Quests oder versteckte Händler erhältlich.</p>
+      </article>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Alle 10 Dyehouses zu finden zählt für Challenge: Trade 2 – Rainbow Mane. Nach genügend <span class="xref" role="link" tabindex="0" onclick="showSec('camp')">Greymane-Camp-Ausbau</span> verkauft ein Camp-Dyer (Oliver, über die Reihe <em>Solid Foundation</em>) alle bereits entdeckten Dyehouse-Farben.</div>
-    <div class="fbar">
-      <select class="fs" id="dyes-cat" aria-label="Färbemittel nach Kategorie filtern" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Spezial (nicht herstellbar)</option></select>
-      <span id="dyes-cnt" style="font-size:var(--fs-11);color:var(--dim);align-self:center"></span>
+    <div class="cd-note cd-spot r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Dyehouses &amp; Camp-Dyer</b>Alle 10 Dyehouses zu finden zählt für Challenge: Trade 2 – Rainbow Mane. Nach genügend <span class="xref" role="link" tabindex="0" onclick="showSec('camp')">Greymane-Camp-Ausbau</span> verkauft ein Camp-Dyer (Oliver, über die Reihe <em>Solid Foundation</em>) alle bereits entdeckten Dyehouse-Farben.</div></div>
+    <div class="r2b13-bar">
+      <div id="r2b13-dye-pills" class="r2b13-pillrow"></div>
+      <span id="dyes-cnt" class="r2b13-cnt" aria-live="polite"></span>
+      <select class="fs" id="dyes-cat" hidden aria-hidden="true" tabindex="-1" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Spring Green</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Spezial (nicht herstellbar)</option></select>
     </div>
-    <div class="tw-wrap"><table><thead><tr><th class="dye-th"></th><th>Name</th><th>Kategorie</th><th>Detail</th><th>Fundort</th></tr></thead><tbody id="dyes-tb"></tbody></table></div>
+    <div id="dyes-tb" class="r2b13-dyes"></div>
   </section>
   <section class="sec" id="sec-food">
     <h2 class="sec-t"><span class="sec-sym">⚗</span> Kochen &amp; Elixiere <span class="sec-t-en">Cooking &amp; Elixirs</span></h2>
@@ -12440,79 +12748,201 @@ function renderWeapons(){
   }
 }
 
-// Verifizierte Stufen-Werte passiver Stat-Cores (Quelle: questlog.gg-API + Fextralife, 2026-05).
-// In-Game-Anzeige: Flat-Stats als "Attack: N", Lv.-Stats als "Critical Rate: Lv.N" (es gibt KEINE %-Angabe im Spiel).
-function coreTierStrip(name){
-  const t=CORE_TIERS[name]; if(!t)return '';
-  const fmt=v=>t.lv?'Lv.'+v:''+v;
-  if(t.single!=null) return '<div class="core-tiers"><span class="ct-lbl">Stufe</span><span class="ct-pill">'+t.stat+': '+fmt(t.single)+'</span></div>';
-  const roman=['I','II','III','IV','V'];
-  const pills=t.vals.map((v,i)=>'<span class="ct-pill"><b>'+roman[i]+'</b> '+t.stat+': '+fmt(v)+'</span>').join('');
-  return '<div class="core-tiers"><span class="ct-lbl">Stufen-Werte</span>'+pills+'</div>';
-}
-function coreGreaterNote(c){
-  const isRampaging=/^Rampaging\b/.test(c.name);
-  const isGreater=/^Greater\b/.test(c.name)||(/Greater/.test(c.source||'')&&!isRampaging);
-  if(isRampaging)return '<div style="font-size:var(--fs-10-5);color:#b554cc;margin-top:4px">⚡ Rampaging-Core (im dt. Spiel „Wütend“) — wahrscheinlich Alias des gleichnamigen „Greater“-Cores (dessen deutscher Name ebenfalls „Wütende …“ lautet); als eigene Reihe nicht belegt</div>';
-  if(isGreater)return '<div style="font-size:var(--fs-10-5);color:#b554cc;margin-top:4px">⚡ Greater-Core — nur per Spezial-Synthese (~4%), mit Haltbarkeit: zerbricht und ist nicht reparierbar</div>';
-  return '';
-}
 // Slot-Typ deutsch anzeigen. Der Datenwert bleibt englisch: Filter-value,
 // CORES-Daten und saemtliche Vergleiche auf den Slot haengen daran.
 const slotDe=s=>SLOT_DE[s]||s||'';
-function renderCores(){
-  const f=document.getElementById('cf-slot').value;
-  document.getElementById('core-tb').innerHTML=CORES.map(c=>{
-    // "Both" (Waffe/Hand/Fuß) passt in Waffen UND in Handschuhe/Schuhe: der Filter Waffe bzw. Rüstung schliesst diese Cores nicht aus
-    const show=!f||c.slot===f||(c.slot==='Both'&&(f==='Weapon'||f==='Armor'));
-    const s=[c.name,c.effect,c.source,c.slot,slotDe(c.slot)].join(' ').toLowerCase();
-    const ico=CORE_IMGS[c.name];
-    const vid=CORE_VIDS[c.name];
-    return `<tr class="trow${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
-      <td><div style="display:flex;align-items:center;gap:8px">
-        ${ico?`<img src="${ico}" data-cdn="${CORE_IMGS_CDN[c.name]||''}" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.style.display='none';}" style="width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:7px;padding:3px;flex-shrink:0">`:'<div style="width:48px;height:48px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--dim)">◈</div>'}
-        <strong>${c.name}</strong>${vid?`<span class="core-vid-btn" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()" onclick="showCoreVid(event,'${escJsStr(c.name)}')">▶</span>`:''}
-      </div></td>
-      <td>${c.effect}${coreTierStrip(c.name)}${coreGreaterNote(c)}</td>
-      <td style="font-size:var(--fs-11-5);color:var(--dim)">${c.source}</td>
-      <td><span class="tag ${c.slot==='Weapon'?'tr':c.slot==='Armor'?'tg':'tw'}">${slotDe(c.slot)}</span></td>
-    </tr>`;
-  }).join('');
-}
+// ===== R2-B13 (Redesign 2, 21.10.2026): Abyss-Ausrüstung, Abyss-Synthese, Färbemittel =====
+// Karten statt Tabelle/Dropdown, Filter als Pillen (cdPills), Rezepte als Formel A + B → C mit Stufenfarben.
+// Alle Texte wortgetreu aus CORES / WITCH_SYNTHESIS / DYES; Datenfelder unverändert. Gedankenstriche aus den
+// Daten werden nur in der Anzeige zu " · " (data-s behält den Originaltext). Hilfen mit Präfix _r2b13.
+const _r2b13Dash=s=>String(s==null?'':s).replace(/\s+—\s+/g,' · ').replace(/—/g,'-');
+const R2B13_SLOT={Weapon:{t:'Waffe',g:'⚔',k:'w'},Armor:{t:'Rüstung',g:'⛨',k:'a'},Both:{t:'Waffe/Hand/Fuß',g:'✦',k:'b'}};
+const R2B13_ROMAN=['','I','II','III','IV','V'];
+function _r2b13Kind(t){return /reduction|reduktion/i.test(String(t||''))?'def':cdFxKind(t);}
+function _r2b13Silver(n){n=+n||0;return n.toLocaleString('de-DE')+' Silber';}
+function _r2b13SlotChip(slot){const m=R2B13_SLOT[slot];return m?`<span class="r2b13-slot r2b13-slot--${m.k}" title="Slot-Typ"><i class="cd-g" aria-hidden="true">${m.g}</i>${escHtml(m.t)}</span>`:'';}
+// Hero einmal je Seite in seinen Platzhalter setzen (die Kennzahlen zählen beim ersten Besuch hoch)
+function _r2b13Hero(id,o,extra){const el=document.getElementById(id);if(!el||el.firstChild)return;let h=cdHero(o);if(extra)h=h.replace(/<\/header>$/,extra+'</header>');el.innerHTML=h;}
 
-function renderSynthesis(){
-  const tf=document.getElementById('sf-tier'); const tier=tf?tf.value:'';
-  const ef=document.getElementById('sf-eff'); const effOnly=!!(ef&&ef.checked);
-  const fams={};
-  const SYNTH_CORES=WITCH_SYNTHESIS.filter(c=>c.role!=='witch-other');
-  SYNTH_CORES.forEach(c=>{(fams[c.family]=fams[c.family]||[]).push(c);});
-  const order=Object.keys(fams).sort((a,b)=>a.localeCompare(b));
+// ---------- Abyss-Ausrüstung ----------
+// Stufen-Werte passiver Stat-Cores (CORE_TIERS, verifiziert questlog.gg + Fextralife): als Leiter mit Balken.
+function _r2b13Tiers(name){
+  const t=CORE_TIERS[name];if(!t)return '';
+  const fmt=v=>t.lv?'Lv.'+v:''+v;
+  if(t.single!=null)return `<div class="r2b13-ladder is-single" aria-label="Stufen-Wert"><span class="r2b13-ladder-l">Stufe</span><span class="r2b13-rung r2b13-t--g" style="--p:100%"><b>${escHtml(t.stat)}</b><span>${fmt(t.single)}</span></span></div>`;
+  const mx=Math.max(...t.vals);
+  return `<div class="r2b13-ladder" aria-label="Stufen-Werte"><span class="r2b13-ladder-l">Stufen-Werte · ${escHtml(t.stat)}</span>${t.vals.map((v,i)=>`<span class="r2b13-rung r2b13-t--${i+1}" style="--p:${Math.round(v/mx*100)}%"><b>${R2B13_ROMAN[i+1]}</b><span>${fmt(v)}</span></span>`).join('')}</div>`;
+}
+function _r2b13Greater(c){
+  const isRampaging=/^Rampaging\b/.test(c.name);
+  const isGreater=/^Greater\b/.test(c.name)||(/Greater/.test(c.source||'')&&!isRampaging);
+  if(isRampaging)return {chip:'<span class="r2b13-badge r2b13-badge--g">Wütend</span>',note:cdNote('Rampaging-Core (im dt. Spiel „Wütend“): wahrscheinlich Alias des gleichnamigen „Greater“-Cores (dessen deutscher Name ebenfalls „Wütende …“ lautet); als eigene Reihe nicht belegt',{kind:'info',cls:'r2b13-note-sm'})};
+  if(isGreater)return {chip:'<span class="r2b13-badge r2b13-badge--g" title="Greater-Core: nur per Spezial-Synthese (~4%), mit Haltbarkeit; zerbricht und ist nicht reparierbar">Greater · Spezial-Synthese</span>',note:''};
+  return {chip:'',note:''};
+}
+function _r2b13CoreCard(c,wasOpen){
+  const m=R2B13_SLOT[c.slot]||R2B13_SLOT.Both;
+  const ico=CORE_IMGS[c.name],vid=CORE_VIDS[c.name];
+  const pm=/^(.*?)[.\s]*?\s([\d.]+)\s+Silber\s*$/.exec(c.effect||'');
+  const eff=_r2b13Dash(pm?pm[1].replace(/\.\s*$/,''):c.effect);
+  const src=_r2b13Dash(c.source),sp=_locSplit(src,150);
+  const gr=_r2b13Greater(c);
+  const s=[c.name,c.effect,c.source,c.slot,slotDe(c.slot)].join(' ').toLowerCase();
+  const gem=ico?`<img src="${escHtml(ico)}" data-cdn="${escHtml(CORE_IMGS_CDN[c.name]||'')}" width="52" height="52" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.parentNode.classList.add('no-img');this.remove();}">`:'';
+  return `<article class="r2b13-core cd-spot r2b13-k--${m.k}" data-slot="${escHtml(c.slot)}" data-go-id="${escHtml(cdSlug(c.name))}" data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml([c.name,eff,sp.head,m.t].join(' '))}" data-item-hidden="${escHtml(sp.rest)}">
+    <header class="r2b13-core-hd"><span class="r2b13-gem${ico?'':' no-img'}" aria-hidden="true" data-r="${cdFxKind(c.effect)==='neutral'?'◈':'⧫'}">${gem}</span>
+      <div class="r2b13-core-t"><h4 class="r2b13-core-n">${escHtml(c.name)}</h4><div class="r2b13-core-tags">${gr.chip}${pm?`<span class="r2b13-price">${escHtml(pm[2])} Silber</span>`:''}</div></div>
+      ${vid?`<button type="button" class="r2b13-vid" aria-label="Video-Vorschau ${escHtml(c.name)}" title="Video-Vorschau" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()" onclick="showCoreVid(event,'${escJsStr(c.name)}')"><span aria-hidden="true">▶</span><span class="r2b13-vid-t">Vorschau</span></button>`:''}
+    </header>
+    <div class="r2b13-core-fx">${cdFx(eff,{split:false,bare:true,kind:_r2b13Kind(eff)})}</div>
+    ${_r2b13Tiers(c.name)}${gr.note}
+    <div class="r2b13-core-src"><span class="r2b13-lbl">${cdIcon('pin')}Quelle</span><p>${escHtml(sp.head)}</p>${sp.rest?`<details class="item-more r2b13-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Ganze Quelle</summary><div class="item-more-body"><p>${escHtml(sp.rest)}</p></div></details>`:''}</div>
+  </article>`;
+}
+const R2B13_CORE_GRPS=[{slot:'Weapon',t:'Waffen-Cores',sub:'nur Waffen-Slot'},{slot:'Both',t:'Waffe, Handschuhe, Schuhe',sub:'passt in Waffe und Rüstung'},{slot:'Armor',t:'Rüstungs-Cores',sub:'nur Rüstungs-Slot'}];
+function renderCores(){
+  const sel=document.getElementById('cf-slot'),root=document.getElementById('core-tb');if(!root)return;
+  const f=(sel&&sel.value)||'';
+  const n=k=>CORES.filter(c=>c.slot===k).length;
+  _r2b13Hero('r2b13-cores-hero',{kicker:'Abyss Gear',title:'Effekt, Quelle und Slot jeder Abyss-Ausrüstung',sub:'Kerne aus dem Abyss, gesockelt in Waffe oder Rüstung. Filter nach Slot-Typ, Stufen-Werte direkt an der Karte.',
+    region:'The Abyss',glyph:'⧫',scene:{keys:['cores','reg-the-abyss'],region:'The Abyss'},stats:[[CORES.length,'Abyss Cores'],[n('Weapon'),'Waffen-Slot'],[n('Armor'),'Rüstungs-Slot'],[n('Both'),'Waffe/Hand/Fuß']]});
+  const pills=document.getElementById('r2b13-core-pills');
+  if(pills&&!pills.firstChild){
+    pills.innerHTML=cdPills([{v:'',t:'Alle',n:CORES.length,on:!f},{v:'Weapon',t:'Waffe',g:'⚔',n:n('Weapon')+n('Both'),on:f==='Weapon'},{v:'Armor',t:'Rüstung',g:'⛨',n:n('Armor')+n('Both'),on:f==='Armor'},{v:'Both',t:'Nur Waffe/Hand/Fuß',g:'✦',n:n('Both'),on:f==='Both'}],{name:'r2b13-slot',label:'Abyss-Cores nach Slot-Typ filtern',cls:'r2b13-slotpills'});
+  }
+  // "Both" (Waffe/Hand/Fuß) passt in Waffen UND in Handschuhe/Schuhe: Filter Waffe bzw. Rüstung schließt diese Cores nicht aus
+  const show=c=>!f||c.slot===f||(c.slot==='Both'&&(f==='Weapon'||f==='Armor'));
+  const open=_r2b13OpenSnap(root);
   let shown=0;
-  const matchC=c=>(tier===''||String(c.tier)===tier)&&(!effOnly||!!c.effect);
-  document.getElementById('synth-grid').innerHTML=order.map(fam=>{
-    const items=fams[fam].slice().sort((a,b)=>(a.tier||0)-(b.tier||0));
-    const anyShown=items.some(matchC);
-    const cards=items.map(c=>{
-      const show=matchC(c);
-      if(show)shown++;
-      const s=[c.name,c.family,c.recipe,c.effect,c.slot,slotDe(c.slot)].filter(Boolean).join(' ').toLowerCase();
-      const ico=c.icon?`<img class="craft-ico" src="${SYNTH_CDN}${c.icon}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">`:'';
-      const tierTag=c.roman?`<span class="tag tt">${escHtml(c.roman)}</span>`:'';
-      const slotTag=c.slot?`<span class="tag ${c.slot==='Weapon'?'tr':c.slot==='Armor'?'tg':'tw'}">${slotDe(c.slot)}</span>`:'';
-      const effTxt=c.effect?escHtml(c.effect):'<span style="color:var(--dim)">Effekt nicht erfasst</span>';
-      return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}">
-        <div class="ct">${ico}<span>${escHtml(c.name)}</span>${tierTag}${slotTag}</div>
-        <div class="crows">
-          <div class="crow"><span class="cl">Rezept</span><span class="cv">${escHtml(c.recipe)}</span></div>
-          <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${effTxt}</span></div>
-          ${c.price?`<div class="crow"><span class="cl">Synth-Kosten</span><span class="cv" style="color:var(--dim)">${c.price} Silber</span></div>`:''}
-        </div>
-      </div>`;
-    }).join('');
-    return `<div class="synth-fam${anyShown?'':' hide'}" data-filtered="${anyShown?'0':'1'}" data-s="${escHtml((fam+' '+items.map(c=>[c.name,c.recipe,c.effect,c.slot].filter(Boolean).join(' ')).join(' ')+' synthese familie').toLowerCase())}" style="grid-column:1/-1"><div class="sub-t" style="font-size:12.5px;margin:14px 0 2px;color:var(--gdim)">${escHtml(fam)}${items.length>1?` <span style="font-size:var(--fs-10-5);color:var(--dim);font-weight:400">${items.length} Stufen</span>`:''}</div></div>${cards}`;
+  root.innerHTML=R2B13_CORE_GRPS.map(g=>{
+    const list=CORES.filter(c=>c.slot===g.slot&&show(c));if(!list.length)return '';
+    shown+=list.length;const m=R2B13_SLOT[g.slot];
+    return `<section class="r2b13-grp r2b13-k--${m.k}"><div class="r2b13-grp-hd"><i class="cd-g" aria-hidden="true">${m.g}</i><h3 class="sub-t r2b13-grp-t">${escHtml(g.t)}</h3><span class="r2b13-grp-n">${list.length} · ${escHtml(g.sub)}</span></div><div class="r2b13-core-grid">${list.map(c=>_r2b13CoreCard(c,open[c.name])).join('')}</div></section>`;
   }).join('');
-  const cnt=document.getElementById('synth-count'); if(cnt)cnt.textContent=shown+' / '+SYNTH_CORES.length+' Cores';
+  const cnt=document.getElementById('core-cnt');
+  reapplySearch(root,cnt,shown);
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  if(q){const qF=_fold(q);root.querySelectorAll('[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
+}
+function _r2b13OpenSnap(root){const o={};root.querySelectorAll('[data-item-id] details.item-more[open]').forEach(d=>{if(d.dataset.srchOpen!=='1'){const k=d.closest('[data-item-id]');if(k)o[k.dataset.itemId]=1;}});return o;}
+// Sprung-Links (a[data-go]) auf eine meiner Seiten: aktiven Filter vorher zurücksetzen, sonst fehlt das Ziel (Filter rendert nur Treffer)
+function _r2b13ResetFilter(sec){
+  const v=id=>document.getElementById(id);
+  if(sec==='cores'){const s=v('cf-slot');if(s&&s.value){s.value='';const p=v('r2b13-core-pills');if(p)p.innerHTML='';renderCores();}}
+  else if(sec==='synthesis'){const s=v('sf-tier'),c=v('sf-eff');if((s&&s.value)||(c&&c.checked)){if(s)s.value='';if(c)c.checked=false;const p=v('r2b13-tier-pills');if(p)p.innerHTML='';renderSynthesis();}}
+  else if(sec==='dyes'){const s=v('dyes-cat');if(s&&s.value){s.value='';const p=v('r2b13-dye-pills');if(p)p.innerHTML='';renderDyes();}}
+}
+document.addEventListener('click',e=>{const a=e.target&&e.target.closest&&e.target.closest('a[data-go]');if(a&&/^(cores|synthesis|dyes)$/.test(a.dataset.go))_r2b13ResetFilter(a.dataset.go);},true);
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail||{};
+  if(d.name==='r2b13-slot'){const s=document.getElementById('cf-slot');if(s){s.value=d.value||'';renderCores();}}
+  else if(d.name==='r2b13-tier'){const s=document.getElementById('sf-tier');if(s){s.value=d.value||'';renderSynthesis();}}
+  else if(d.name==='r2b13-eff'){const c=document.getElementById('sf-eff');if(c){c.checked=(d.values||[]).length>0;renderSynthesis();}}
+  else if(d.name==='r2b13-dye'){const s=document.getElementById('dyes-cat');if(s){s.value=d.value||'';renderDyes();}}
+});
+
+// ---------- Abyss-Synthese ----------
+let _r2b13SynIdx=null;
+function _r2b13Syn(){
+  if(_r2b13SynIdx)return _r2b13SynIdx;
+  const by={},fam={};
+  WITCH_SYNTHESIS.forEach(c=>{by[c.name]=c;if(c.role!=='witch-other')(fam[c.family]=fam[c.family]||[]).push(c);});
+  return _r2b13SynIdx={by,fam};
+}
+const _r2b13FamId=f=>'syn-'+cdSlug(f);
+function _r2b13Ico(c,sz){return c&&c.icon?`<img src="${escHtml(SYNTH_CDN+c.icon)}" width="${sz}" height="${sz}" alt="" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-img');this.remove()">`:'';}
+// Zutat als Marke: Core (Stufenfarbe + römische Stufe, Sprung zum Rezept) oder Material (neutral). Schlank: 1 bis 2 Elemente je Marke,
+// "+" und "→" kommen aus CSS (mit Alternativtext für Screenreader).
+function _r2b13Tok(part,selfFam,noQty){
+  const m=/^(\d+)x\s+(.+)$/.exec(String(part).trim());if(!m)return `<span class="r2b13-tok is-mat" data-r="◆">${escHtml(part)}</span>`;
+  const c=_r2b13Syn().by[m[2]];
+  const core=c&&c.role!=='witch-other';
+  const cls='r2b13-tok '+(core?'is-core r2b13-t--'+(c.tier||0):'is-mat'),r=core?(c.roman||'✦'):'◆';
+  const inner=(noQty?'':`<b>${escHtml(m[1])}×</b>`)+escHtml(m[2]);
+  if(core&&c.family!==selfFam){const id=_r2b13FamId(c.family);return `<a class="${cls}" data-r="${r}" href="${cdGoHref('synthesis',id)}" data-go="synthesis" data-goq="${escHtml(id)}" title="Zum Rezept: ${escHtml(c.family)}">${inner}</a>`;}
+  return `<span class="${cls}" data-r="${r}">${inner}</span>`;
+}
+function _r2b13Eq(recipe,selfFam,res,noQty){
+  const parts=String(recipe||'').split(/\s+\+\s+/).filter(Boolean);
+  return `<div class="r2b13-eq"><span class="r2b13-ins">${parts.map(p=>_r2b13Tok(p,selfFam,noQty)).join('')}</span>${res?`<span class="r2b13-res">${res}</span>`:''}</div>`;
+}
+function _r2b13Res(c){return `<span class="r2b13-tok is-res r2b13-t--${c.tier||0}" data-r="${c.roman||'✦'}">${escHtml(c.name)}</span>`;}
+function _r2b13Eff(c){return c.effect?cdFx(_r2b13Dash(c.effect),{split:false,kind:_r2b13Kind(c.effect)}):'<span class="r2b13-noeff">Effekt nicht erfasst</span>';}
+function _r2b13FamCard(fam,items,match){
+  const c0=items[0],chain=items.length>1,anyEff=items.some(c=>c.effect);
+  const effs=new Set(items.map(c=>c.effect||''));const oneEff=effs.size===1;
+  const s=(fam+' '+items.map(c=>[c.name,c.recipe,c.effect,c.slot,slotDe(c.slot)].filter(Boolean).join(' ')).join(' ')+' synthese familie').toLowerCase();
+  const last=items[items.length-1];
+  // Effekt je Stufe nur zeigen, wenn er sich von der (sichtbaren) Vorstufe unterscheidet: kein dreifach wiederholter Satz
+  const effHere=(c,i)=>i===0||(c.effect||'')!==(items[i-1].effect||'')||!match(items[i-1]);
+  const rows=chain?`<ol class="r2b13-chain">${items.map((c,i)=>`<li class="r2b13-step r2b13-t--${c.tier||0}${match(c)?'':' r2b13-off'}" data-go-id="${escHtml(cdSlug(c.name))}"><span class="r2b13-tn" aria-label="Stufe ${escHtml(c.roman||'')}">${escHtml(c.roman||'·')}</span>${oneEff?_r2b13Eq(c.recipe,fam,_r2b13Res(c)):`<div class="r2b13-step-b">${_r2b13Eq(c.recipe,fam,_r2b13Res(c))}${effHere(c,i)?`<div class="r2b13-step-fx">${_r2b13Eff(c)}</div>`:''}</div>`}${c.price?`<span class="r2b13-price">${_r2b13Silver(c.price)}</span>`:''}</li>`).join('')}</ol>`
+    :`<div class="r2b13-single${match(c0)?'':' r2b13-off'}" data-go-id="${escHtml(cdSlug(c0.name))}">${_r2b13Eq(c0.recipe,fam,_r2b13Res(c0))}</div>`;
+  return `<article class="r2b13-fam cd-spot ${chain?'is-chain':'is-single'} r2b13-k--${(R2B13_SLOT[c0.slot]||{k:'n'}).k}" data-go-id="${_r2b13FamId(fam)}" data-s="${escHtml(s)}">
+    <header class="r2b13-fam-hd"><span class="r2b13-fam-ico r2b13-t--${last.tier||0}${last.icon?'':' no-img'}" aria-hidden="true" data-r="⧫">${_r2b13Ico(last,44)}</span>
+      <div class="r2b13-fam-t"><h4 class="r2b13-fam-n">${escHtml(fam)}</h4><div class="r2b13-core-tags">${_r2b13SlotChip(c0.slot)}${chain?`<span class="r2b13-badge">${items.length} Stufen</span>`:''}${!chain&&c0.price?`<span class="r2b13-price">${_r2b13Silver(c0.price)}</span>`:''}</div></div></header>
+    ${oneEff||!chain?`<div class="r2b13-fam-fx${anyEff?'':' is-none'}">${_r2b13Eff(chain?last:c0)}</div>`:''}
+    ${rows}
+  </article>`;
+}
+function renderSynthesis(){
+  const tf=document.getElementById('sf-tier');const tier=tf?tf.value:'';
+  const ef=document.getElementById('sf-eff');const effOnly=!!(ef&&ef.checked);
+  const {fam}=_r2b13Syn();
+  const SYNTH_CORES=WITCH_SYNTHESIS.filter(c=>c.role!=='witch-other');
+  _r2b13Hero('r2b13-syn-hero',{kicker:'Hexen-Werkstatt',title:'Aus zwei Cores wird einer',sub:'Reguläre Synthese hebt die Stufe, Spezial-Synthese würfelt den Typ. Darunter alle Rezepte als Formel, gefärbt nach Stufe.',
+    region:'The Abyss',glyph:'⚗',scene:{keys:['synthesis','reg-the-abyss'],region:'The Abyss',pos:'50% 60%'},stats:[[SYNTH_CORES.length,'Synthese-Rezepte'],[Object.keys(fam).length,'Core-Familien'],[WITCH_SYNTHESIS.length-SYNTH_CORES.length,'Sonstiges bei der Hexe']]});
+  _r2b13Guide();
+  const tp=document.getElementById('r2b13-tier-pills');
+  if(tp&&!tp.firstChild){
+    const nt=t=>SYNTH_CORES.filter(c=>String(c.tier)===t).length;
+    tp.innerHTML=cdPills([{v:'',t:'Alle Stufen',n:SYNTH_CORES.length,on:!tier},{v:'1',t:'Stufe I',n:nt('1'),on:tier==='1'},{v:'2',t:'Stufe II',n:nt('2'),on:tier==='2'},{v:'3',t:'Stufe III',n:nt('3'),on:tier==='3'},{v:'0',t:'Basis / Sonstige',n:nt('0'),on:tier==='0'}],{name:'r2b13-tier',label:'Synthese nach Stufe filtern',cls:'r2b13-tierpills'})
+      // Effekt-Filter nur anbieten, solange es Rezepte ohne erfassten Effekt gibt (Stand 10/2026: alle 175 haben einen)
+      +(SYNTH_CORES.some(c=>!c.effect)?cdPills([{v:'eff',t:'nur mit bekanntem Effekt',g:'✓',n:SYNTH_CORES.filter(c=>c.effect).length,on:effOnly}],{name:'r2b13-eff',multi:true,label:'Nur Cores mit bekanntem Effekt',cls:'r2b13-effpill'}):'');
+  }
+  const matchC=c=>(tier===''||String(c.tier)===tier)&&(!effOnly||!!c.effect);
+  let shown=0;
+  const order=Object.keys(fam).sort((a,b)=>a.localeCompare(b));
+  const grp=(chain)=>order.filter(f=>(fam[f].length>1)===chain).map(f=>{
+    const items=fam[f].slice().sort((a,b)=>(a.tier||0)-(b.tier||0));
+    const n=items.filter(matchC).length;shown+=n;
+    const card=_r2b13FamCard(f,items,matchC);
+    return n?card:card.replace('class="r2b13-fam ','class="r2b13-fam hide ').replace(' data-s=',' data-filtered="1" data-s=');
+  });
+  const chains=grp(true),singles=grp(false);
+  const vis=a=>a.filter(h=>!/class="r2b13-fam hide /.test(h)).length;
+  const sec=(t,sub,g,cards)=>`<section class="r2b13-syn-grp${vis(cards)?'':' r2b13-off'}"><div class="r2b13-grp-hd"><i class="cd-g" aria-hidden="true">${g}</i><h3 class="sub-t r2b13-grp-t">${t}</h3><span class="r2b13-grp-n">${vis(cards)} ${vis(cards)===1?'Familie':'Familien'} · ${sub}</span></div><div class="r2b13-syn-grid">${cards.join('')}</div></section>`;
+  const host=document.getElementById('synth-grid');
+  host.innerHTML=sec('Stufen-Ketten I → II → III','reguläre Synthese','⇈',chains)+sec('Effekt-Cores','eigene Rezepte mit Sonderwirkung','✦',singles);
+  const cnt=document.getElementById('synth-count');if(cnt)cnt.textContent=shown+' / '+SYNTH_CORES.length+' Cores';
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(host);
   renderWitchCraftables();
+}
+// Mechanik-Block: Hexen-Karten und benannte Kombi (Texte wortgetreu aus der bisherigen Tabelle)
+const R2B13_WITCHES=[
+  {n:'Elowen',v:'Wisdom',reg:'Hernand',home:'Witchwoods (Alfonso Estate)',r:['Vigor I','Vitality I','Composure I']},
+  {n:'Areciel',v:'Strength',reg:'Crimson Desert',home:'nahe Urdavah',r:['Destruction I','Insight I']},
+  {n:'Bari',v:'Kindness',reg:'Pailune',home:'Crimson Lake (Silver Wolf Mountain)',r:['Haste I','Swift I','Ascent I']},
+  {n:'Lyselia',v:'Humility',reg:'Demeniss',home:'Serpent Marsh',r:['Fortification I','Aegis I','Fortitude I']},
+  {n:'Sylvia',v:'Hermit',reg:'Hernand',home:"Shadow's Whisper Cave (Kap.3)",none:'keine Händlerware (questlog); laut Guides nur Socket/Embed/Extract, KEINE Synthese'}
+];
+function _r2b13Guide(){
+  const w=document.getElementById('r2b13-witches');
+  if(w&&!w.firstChild){
+    w.innerHTML=R2B13_WITCHES.map(x=>{
+      const acc=cdTone({region:x.reg});
+      return `<article class="r2b13-witch cd-spot${x.none?' is-none':''}"${acc?` style="--cd-acc:${acc}"`:''} data-s="${escHtml([x.n,x.v,x.reg,x.home,(x.r||[]).join(' '),x.none||'','hexe synthese rezepte'].join(' ').toLowerCase())}">
+        <header class="r2b13-witch-hd"><span class="r2b13-witch-av" aria-hidden="true">${escHtml(x.n.charAt(0))}</span><div><h4 class="r2b13-witch-n">${escHtml(x.n)} <span>(${escHtml(x.v)})</span></h4><span class="r2b13-witch-reg">${cdIcon('pin')}${escHtml(x.reg)} / ${escHtml(x.home)}</span></div></header>
+        ${x.r?`<div class="r2b13-witch-r"><span class="r2b13-lbl">verkaufte Rezepte</span><div class="r2b13-eq r2b13-eq--list">${x.r.map(r=>_r2b13Tok('1x '+r,'',true)).join('')}</div></div>`:`<p class="r2b13-witch-none">${escHtml(x.none)}</p>`}
+      </article>`;}).join('');
+  }
+  // Statische Faltkarte "Datenstand" durchsuchbar machen (Suche öffnet sie bei Treffer im eingeklappten Teil)
+  const df=document.querySelector('#synth-guide .r2b13-datafold');
+  if(df&&!df.dataset.s)df.dataset.s=df.textContent.replace(/\s+/g,' ').trim().toLowerCase();
+  const k=document.getElementById('r2b13-wod');
+  if(k&&!k.firstChild){
+    const wod={name:'Wound of Darkness',tier:0};
+    k.innerHTML=_r2b13Eq('1x Destruction I + 1x Aegis I + 1x Haste I + 1x Ascent I','',_r2b13Res(wod),true);
+  }
 }
 
 // ===== WITCH-CRAFTABLES: Sigil-Mount-Amulette + sonstige Nicht-Core-Items (separat vom Core-Synthese-Baum) =====
@@ -12520,41 +12950,36 @@ function renderSynthesis(){
 // angezeigte Name ist "Sigil of Solidarity (X)" / dt. "Siegel der Solidaritaet" (verifiziert: gaming.tools,
 // game8, Gamingdeputy DE). Hier wird daher der Spielname angezeigt + das Reittier verlinkt.
 function renderWitchCraftables(){
-  const host=document.getElementById('witch-craftables'); if(!host)return;
+  const host=document.getElementById('witch-craftables');if(!host)return;
   const other=WITCH_SYNTHESIS.filter(c=>c.role==='witch-other');
   const clean=n=>String(n||'').replace(/\s+\d+$/,'');
   const amulets=other.filter(c=>SIGIL_AMULETS[clean(c.name)]);
   const misc=other.filter(c=>!SIGIL_AMULETS[clean(c.name)]);
-  const ico=c=>c.icon?`<img class="craft-ico" src="${SYNTH_CDN}${c.icon}" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">`:'';
   const amuletCard=c=>{
     const m=SIGIL_AMULETS[clean(c.name)];
-    return `<div class="card" data-s="${escHtml([m.sigil,m.mount,clean(c.name),c.recipe,'sigil amulett reittier hexe'].join(' ').toLowerCase())}">
-      <div class="ct">${ico(c)}<span>${escHtml(m.sigil)}</span><span class="tag tw">Sigil-Mount</span></div>
-      <div class="crows">
-        <div class="crow"><span class="cl">Reittier</span><span class="cv"><span class="xref" role="link" tabindex="0" onclick="showSec('mounts')">${escHtml(m.mount)}</span> — dauerhaft freigeschaltet</span></div>
-        <div class="crow"><span class="cl">Material</span><span class="cv">${escHtml(c.recipe)}</span></div>
-        <div class="crow"><span class="cl">Herstellung</span><span class="cv" style="color:var(--dim)">Hexe → „Abyss-Ausrüstung herstellen“ → „Besondere Gegenstände“; danach aus dem Inventar benutzen</span></div>
-        ${c.price?`<div class="crow"><span class="cl">Kosten</span><span class="cv" style="color:var(--dim)">${c.price} Silber</span></div>`:''}
-      </div>
-    </div>`;
+    return `<article class="r2b13-fam r2b13-wc is-amulet cd-spot" data-s="${escHtml([m.sigil,m.mount,clean(c.name),c.recipe,'sigil amulett reittier hexe'].join(' ').toLowerCase())}">
+      <header class="r2b13-fam-hd"><span class="r2b13-fam-ico r2b13-t--3${c.icon?'':' no-img'}" aria-hidden="true" data-r="✦">${_r2b13Ico(c,44)}</span><div class="r2b13-fam-t"><h4 class="r2b13-fam-n">${escHtml(m.sigil)}</h4><div class="r2b13-core-tags"><span class="r2b13-badge r2b13-badge--gold">Sigil-Mount</span>${c.price?`<span class="r2b13-price">${_r2b13Silver(c.price)}</span>`:''}</div></div></header>
+      <p class="r2b13-wc-mount"><span class="r2b13-lbl">Reittier</span>${cdGoLink('mounts',m.mount,m.mount)} <span class="r2b13-dim">dauerhaft freigeschaltet</span></p>
+      <div class="r2b13-single"><span class="r2b13-lbl">Material</span>${_r2b13Eq(c.recipe,'',_r2b13Res({name:m.sigil,tier:3,icon:c.icon}))}</div>
+    </article>`;
   };
-  const miscCard=c=>`<div class="card" data-s="${escHtml([clean(c.name),c.recipe,'hexe craftable'].join(' ').toLowerCase())}">
-      <div class="ct">${ico(c)}<span>${escHtml(clean(c.name))}</span></div>
-      <div class="crows">
-        <div class="crow"><span class="cl">Rezept</span><span class="cv">${escHtml(c.recipe)}</span></div>
-        ${c.price?`<div class="crow"><span class="cl">Wert/Kosten</span><span class="cv" style="color:var(--dim)">${c.price} Silber</span></div>`:''}
-      </div>
-    </div>`;
+  const miscCard=c=>`<article class="r2b13-fam r2b13-wc cd-spot" data-s="${escHtml([clean(c.name),c.recipe,c.effect||'','hexe craftable'].join(' ').toLowerCase())}">
+      <header class="r2b13-fam-hd"><span class="r2b13-fam-ico${c.icon?'':' no-img'}" aria-hidden="true" data-r="◆">${_r2b13Ico(c,44)}</span><div class="r2b13-fam-t"><h4 class="r2b13-fam-n">${escHtml(clean(c.name))}</h4><div class="r2b13-core-tags">${c.price?`<span class="r2b13-price" title="Wert/Kosten">${_r2b13Silver(c.price)}</span>`:''}</div></div></header>
+      ${c.effect?`<div class="r2b13-fam-fx">${cdFx(_r2b13Dash(c.effect),{split:false,kind:'neutral'})}</div>`:''}
+      <div class="r2b13-single"><span class="r2b13-lbl">Rezept</span>${_r2b13Eq(c.recipe,'','')}</div>
+    </article>`;
   let html='';
   if(amulets.length){
-    html+=`<div class="sub-t" style="font-size:12.5px;margin:6px 0 4px;color:var(--gdim)">🐴 Sigil-Mount-Amulette <span style="font-size:var(--fs-10-5);color:var(--dim);font-weight:400">${amulets.length} · schalten je ein legendäres Reittier dauerhaft frei</span></div>`;
-    html+=`<div class="grid">${amulets.map(amuletCard).join('')}</div>`;
+    html+=`<h4 class="r2b13-sub-h"><i class="cd-g" aria-hidden="true">✦</i>Sigil-Mount-Amulette <span>${amulets.length} · schalten je ein legendäres Reittier dauerhaft frei</span></h4>`;
+    html+=`<div class="r2b13-path" aria-label="Herstellung"><span class="r2b13-lbl">Herstellung</span><span class="r2b13-crumb">Hexe</span><span class="r2b13-crumb">„Abyss-Ausrüstung herstellen“</span><span class="r2b13-crumb">„Besondere Gegenstände“</span><span class="r2b13-dim">danach aus dem Inventar benutzen</span></div>`;
+    html+=`<div class="r2b13-syn-grid">${amulets.map(amuletCard).join('')}</div>`;
   }
   if(misc.length){
-    html+=`<div class="sub-t" style="font-size:12.5px;margin:18px 0 4px;color:var(--gdim)">📦 Sonstige Hexen-Craftables <span style="font-size:var(--fs-10-5);color:var(--dim);font-weight:400">${misc.length} · Wertmaterialien & Spezial-Items, keine Cores</span></div>`;
-    html+=`<div class="grid">${misc.map(miscCard).join('')}</div>`;
+    html+=`<h4 class="r2b13-sub-h"><i class="cd-g" aria-hidden="true">◆</i>Sonstige Hexen-Craftables <span>${misc.length} · Wertmaterialien &amp; Spezial-Items, keine Cores</span></h4>`;
+    html+=`<div class="r2b13-syn-grid">${misc.map(miscCard).join('')}</div>`;
   }
-  host.innerHTML=html||'<div style="font-size:12px;color:var(--dim)">Keine Einträge.</div>';
+  host.innerHTML=html||'<div class="r2b13-dim">Keine Einträge.</div>';
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(host);
 }
 
 // ===== CRAFTING =====
@@ -14640,8 +15065,103 @@ document.addEventListener('cd-pills',function(e){
   var vis=root.querySelectorAll('.r2b7-grp:not([hidden]) [data-s]').length,cnt=document.getElementById(pz?'puzzles-cnt':'mg-cnt');
   reapplySearch(root,cnt,vis);
 });
-function dyeChip(c){var col=escHtml(c.color||'#888');if(c.icon)return '<span class="dye-chip" data-c="'+col+'" style="border-color:'+col+'"><img src="'+escHtml(c.icon)+'" alt="" loading="lazy" onerror="this.parentNode.style.background=this.parentNode.dataset.c;this.remove()"></span>';return '<span class="dye-chip" style="border-color:'+col+';background:'+col+'"></span>';}
-function renderDyes(){renderCompendium('dyes',DYES,'dyes-cat',dyeChip);}
+// ===== R2-B13 Färbemittel: Farbfelder je Familie statt Tabelle. Stufe aus dem Namen (Bright/Rich/Dark/Deep, sonst Basis),
+// Bezugs-Chips per Stichwort aus detail, Craft-Zutaten wortgetreu aus detail, Volltext + Quelle im aufklappbaren Teil.
+const R2B13_DYE_FAM=[
+  {cat:'Red',t:'Red'},{cat:'Orange',t:'Orange'},{cat:'Yellow',t:'Yellow'},{cat:'Spring Green',t:'Spring Green'},{cat:'Green',t:'Green'},
+  {cat:'Teal',t:'Teal'},{cat:'Blue',t:'Blue'},{cat:'Violet',t:'Violet'},{cat:'Purple',t:'Purple'},
+  {cat:'Special (non-craftable)',t:'Grautöne & Spezial',sub:'nicht herstellbar'}
+];
+const R2B13_DYE_TIER=['Bright','Rich','Basis','Dark','Deep'];
+function _r2b13DyeTier(n){const m=/^(Bright|Rich|Dark|Deep)\b/.exec(n||'');return m?m[1]:'Basis';}
+function _r2b13Lum(hex){const m=/^#?([0-9a-f]{6})$/i.exec(String(hex||'').trim());if(!m)return .3;const v=parseInt(m[1],16),f=x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);};return .2126*f(v>>16&255)+.7152*f(v>>8&255)+.0722*f(v&255);}
+function _r2b13DyeSort(list,cat){
+  if(/^Special/.test(cat))return list.slice().sort((a,b)=>_r2b13Lum(b.color)-_r2b13Lum(a.color));
+  const sub=n=>/Sky Blue/.test(n)?1:0;
+  return list.slice().sort((a,b)=>sub(a.name)-sub(b.name)||R2B13_DYE_TIER.indexOf(_r2b13DyeTier(a.name))-R2B13_DYE_TIER.indexOf(_r2b13DyeTier(b.name)));
+}
+// Zutatenliste "Craft: 10 Medicinal Herb, 3 Rhinoceros, …" (Kommas in Klammern bleiben zusammen)
+function _r2b13DyeCraft(detail){
+  const re=/(Craft(?:-Rezept)?|[^.;]*?(?:gecraftet|craftbar)[^:.;]*):\s*(.+?)\.(?=\s|$)/;
+  const m=re.exec(detail||'');if(!m)return null;
+  const items=[];let depth=0,cur='';
+  for(const ch of m[2]){if(ch==='(')depth++;if(ch===')')depth--;if(ch===','&&!depth){items.push(cur.trim());cur='';}else cur+=ch;}
+  if(cur.trim())items.push(cur.trim());
+  if(!items.length||!items.every(x=>/^\d+\s+\S/.test(x)))return null;
+  const isLbl=/^Craft(?:-Rezept)?$/.test(m[1].trim());
+  let rest=detail.slice(0,m.index)+(isLbl?'':m[1].trim()+'.')+detail.slice(m.index+m[0].length);
+  let est='';const em=/\s*\((Kräutermenge nach Familienmuster)\)/.exec(rest);if(em){est=em[1];rest=rest.replace(em[0],'');}
+  return {items,rest:rest.replace(/\s{2,}/g,' ').trim(),est};
+}
+function _r2b13DyeSrc(c){
+  const d=c.detail||'',out=[];
+  const price=/(\d+(?:,\d+)?)\s*Silver/.exec(d);
+  if(price||/Dyehouse|Shop\b|Händler\s+[A-ZÄÖÜ]/.test(d)&&!/^Kein Händler/.test(d))out.push({t:'Händler',g:'⚖',c:'gold'});
+  if(/^Kein Händler erfasst/.test(d))out.push({t:'kein Händler erfasst',g:'∅'});
+  if(/Craft|gecraftet|craftbar/i.test(d)&&!/nicht craftbar/i.test(d))out.push({t:'Herstellbar',g:'⚒',c:'ok'});
+  if(/\bDrop\b/.test(d))out.push({t:'Drop',g:'✧',c:'violet',title:/Dyer\/Expert Dyer/.test(d)?'Drop von Dyer/Expert Dyer':''});
+  if(/Quest|Mission|Belohnung/.test(d))out.push({t:/^Kein Händler erfasst; auch Drop/.test(d)&&!/Belohnung|Quest/.test(d)?'Dispatch-Mission':'Quest / Mission',g:'❖',c:'ice'});
+  if(/Gestohlen/i.test(d))out.push({t:'Gestohlen',g:'✋',c:'red'});
+  return {chips:out,price:price?price[1]+' Silver':''};
+}
+function _r2b13DyeCard(c,wasOpen){
+  const col=/^#[0-9a-f]{3,8}$/i.test(c.color||'')?c.color:'#888888';
+  const lum=_r2b13Lum(col),tier=_r2b13DyeTier(c.name);
+  const cr=_r2b13DyeCraft(c.detail),src=_r2b13DyeSrc(c);
+  // Standardsatz der Dyer-Drops steckt schon in den Chips Drop + Quest/Mission: eingeklappt weglassen (Volltext unter "Mehr lesen")
+  const R2B13_STD="Kein Händler erfasst; auch Drop von Dyer/Expert Dyer und aus der Dispatch-Mission 'Dyehouse Labor Support'.";
+  let leadSrc=cr?cr.rest:c.detail;const std=leadSrc.indexOf(R2B13_STD)===0;if(std)leadSrc=leadSrc.slice(R2B13_STD.length).trim();
+  const sp=_locSplit(leadSrc,150);
+  const conf=c.conf&&c.conf!=='high'?`<span class="r2b13-conf" title="${c.conf==='low'?'unbestätigt, im Spiel prüfen':'Wert teils quellenabhängig'}">${c.conf==='low'?'unbestätigt':'≈ quellenabhängig'}</span>`:'';
+  const s=[c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase();
+  const vis=[c.name,c.cat,tier,sp.head,cr?cr.items.join(' '):'',src.chips.map(x=>x.t).join(' '),src.price].join(' ');
+  const ico=c.icon?`<img class="r2b13-sw-ico" src="${escHtml(c.icon)}" width="56" height="56" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:'';
+  const ing=cr?`<div class="r2b13-ing"><span class="r2b13-lbl">${cdIcon('key')}Craft</span><ul>${cr.items.map(x=>{const m=/^(\d+)\s+([^(]+?)\s*(?:\((.*)\))?$/.exec(x);return m?`<li${m[3]?` title="${escHtml(m[3])}"`:''}><b>${escHtml(m[1])}</b>${escHtml(m[2])}${m[3]?'<sup aria-hidden="true">*</sup>':''}</li>`:`<li>${escHtml(x)}</li>`;}).join('')}</ul>${cr.est?`<span class="r2b13-est">${escHtml(cr.est)}</span>`:''}</div>`:'';
+  return `<article class="r2b13-dye cd-spot${c.miss?' is-miss':''}" style="--sw:${escHtml(col)}" data-go-id="${escHtml(cdSlug(c.name))}" data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml([c.detail,c.loc].join(' '))}">
+    <div class="r2b13-sw${lum>.42?' is-light':''}"><span class="r2b13-sw-tier">${escHtml(tier)}</span><code class="r2b13-sw-hex">${escHtml(col.toUpperCase())}</code>${ico}</div>
+    <div class="r2b13-dye-b">
+      <h4 class="r2b13-dye-n">${escHtml(c.name)}</h4>
+      <div class="r2b13-core-tags">${src.price?`<span class="r2b13-price">${escHtml(src.price)}</span>`:''}${c.miss?MISS_CHIP_SM:''}${conf}</div>
+      ${src.chips.length?`<span class="cd-chips r2b13-dye-src">${src.chips.map(x=>`<span class="cd-chip${x.c?' cd-chip--'+x.c:''}"${x.title?` title="${escHtml(x.title)}"`:''}><i class="cd-g" aria-hidden="true">${x.g}</i>${escHtml(x.t)}</span>`).join('')}</span>`:''}
+      ${sp.head?`<p class="r2b13-dye-lead">${escHtml(sp.head)}</p>`:''}
+      ${ing}
+      <details class="item-more r2b13-more"${wasOpen?' open':''} data-r2b13-more="${escHtml(c.name)}"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Mehr lesen</summary><div class="item-more-body">${wasOpen?_r2b13DyeMore(c):''}</div></details>
+    </div>
+  </article>`;
+}
+// "Mehr lesen" erst beim Öffnen füllen (auch Such-Öffnung und cdGo lösen toggle aus); data-s/data-item-hidden tragen den Volltext
+function _r2b13DyeMore(c){return `<p>${escHtml(c.detail)}</p>${cdSrc([c.loc])}`;}
+document.addEventListener('toggle',e=>{
+  const d=e.target;if(!d||!d.open||!d.matches||!d.matches('details[data-r2b13-more]'))return;
+  const b=d.querySelector('.item-more-body');if(!b||b.firstChild)return;
+  const c=DYES.find(x=>x.name===d.dataset.r2b13More);if(c)b.innerHTML=_r2b13DyeMore(c);
+},true);
+function renderDyes(){
+  const root=document.getElementById('dyes-tb');if(!root)return;
+  const sel=document.getElementById('dyes-cat'),f=(sel&&sel.value)||'';
+  const fam=R2B13_DYE_FAM.map(x=>Object.assign({},x,{list:_r2b13DyeSort(DYES.filter(d=>d.cat===x.cat),x.cat)})).filter(x=>x.list.length);
+  const ramp=l=>l.map(d=>d.color).filter(Boolean);
+  const grad=l=>{const c=ramp(l);return c.length>1?'linear-gradient(90deg,'+c.join(',')+')':(c[0]||'#888');};
+  const nonCraft=DYES.filter(d=>/^Special/.test(d.cat)).length;
+  _r2b13Hero('r2b13-dyes-hero',{kicker:'Dyes · Farbpalette',title:'Jede Farbe, jede Stufe, jede Quelle',sub:'Fünf Stufen je Grundfarbe, dazu zehn Grautöne. Kaufen, finden oder craften: hier steht, wie.',
+    tone:'gold',glyph:'◑',stats:[[DYES.length,'belegte Dyes'],[DYES.length-nonCraft,'herstellbar'],[nonCraft,'Grautöne & Spezial'],[DYES.filter(d=>d.miss).length,'verpassbar']]},
+    `<div class="r2b13-spectrum" aria-hidden="true">${fam.map(x=>x.list.map(d=>`<i style="--sw:${escHtml(d.color||'#888')}"></i>`).join('')).join('')}</div>`);
+  const ramp5=document.getElementById('r2b13-dye-ramp');
+  if(ramp5&&!ramp5.firstChild){const red=fam.find(x=>x.cat==='Red');if(red)ramp5.innerHTML=red.list.map(d=>`<span style="--sw:${escHtml(d.color)}"><b>${escHtml(_r2b13DyeTier(d.name))}</b></span>`).join('');}
+  const pills=document.getElementById('r2b13-dye-pills');
+  if(pills&&!pills.firstChild){
+    pills.innerHTML=cdPills([{v:'',t:'Alle',n:DYES.length,on:!f}].concat(fam.map(x=>({v:x.cat,t:x.t,n:x.list.length,on:f===x.cat}))),{name:'r2b13-dye',label:'Färbemittel nach Farbfamilie filtern',cls:'r2b13-dyepills'});
+    pills.querySelectorAll('.cd-pill').forEach(p=>{const x=fam.find(y=>y.cat===p.dataset.v);p.insertAdjacentHTML('afterbegin',`<i class="r2b13-dot" aria-hidden="true" style="--sw:${escHtml(x?grad(x.list):'conic-gradient('+ramp(DYES.filter(d=>!/^Special/.test(d.cat)&&_r2b13DyeTier(d.name)==='Basis')).join(',')+')')}"></i>`);});
+  }
+  const open=_r2b13OpenSnap(root);
+  const list=fam.filter(x=>!f||x.cat===f);
+  root.innerHTML=list.map(x=>`<section class="r2b13-dfam"><div class="r2b13-grp-hd"><span class="r2b13-dfam-sw" aria-hidden="true" style="--sw:${escHtml(grad(x.list))}"></span><h3 class="sub-t r2b13-grp-t">${escHtml(x.t)}</h3><span class="r2b13-grp-n">${x.list.length}${x.sub?' · '+escHtml(x.sub):''}</span></div><div class="r2b13-dye-grid">${x.list.map(d=>_r2b13DyeCard(d,open[d.name])).join('')}</div></section>`).join('');
+  const n=list.reduce((a,x)=>a+x.list.length,0);
+  const cnt=document.getElementById('dyes-cnt');
+  reapplySearch(root,cnt,n);
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  if(q){const qF=_fold(q);root.querySelectorAll('[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
+}
 // ===== KOCHEN & ELIXIERE (Redesign 10/2026): Karten statt Tabelle. Eigener Renderer, renderCompendium bleibt fuer
 // Gatherables/Raetsel/Dyes/Itemdex unveraendert. Strukturfelder (lead/fx/tiers/recipe/alt/station/learn/buy/src) stehen
 // wortgetreu aus detail/loc in FOOD_ELIXIRS; detail und loc bleiben vollstaendig und stehen in "Volltext lesen".
