@@ -6805,8 +6805,9 @@ p.r2b13-dim,.r2b13-intro p.r2b13-dim{color:var(--dim)}
 .r2b13-witches{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}
 .r2b13-witch{display:flex;flex-direction:column;gap:9px;min-width:0;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--cd-acc,var(--violet));border-radius:12px;
   background:color-mix(in srgb,var(--cd-acc,var(--violet)) 7%,var(--card))}
-.r2b13-witch-hd{display:flex;align-items:center;gap:10px}
-.r2b13-witch-av{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:color-mix(in srgb,var(--cd-acc,var(--violet)) 38%,var(--card));border:1px solid color-mix(in srgb,var(--cd-acc,var(--violet)) 70%,transparent);font:700 16px/1 var(--f-display);color:var(--ink-hi)}
+.r2b13-witch-hd{display:flex;align-items:center;gap:12px}
+.r2b13-witch-av{position:relative;overflow:hidden;display:grid;place-items:center;flex:none;width:64px;height:64px;border-radius:14px;background:color-mix(in srgb,var(--cd-acc,var(--violet)) 38%,var(--card));border:1px solid color-mix(in srgb,var(--cd-acc,var(--violet)) 70%,transparent);font:700 22px/1 var(--f-display);color:var(--ink-hi)}
+.r2b13-witch-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .r2b13-witch-n{margin:0;font:700 15px/1.25 var(--f-display);color:var(--ink-hi)}
 .r2b13-witch-n>span{font:400 12px/1 var(--f-body);color:var(--dim)}
 .r2b13-witch-reg{display:inline-flex;align-items:flex-start;gap:4px;margin-top:2px;font-size:12px;line-height:1.4;color:var(--dim)}
@@ -13055,7 +13056,7 @@ function _r2b13Guide(){
     w.innerHTML=R2B13_WITCHES.map(x=>{
       const acc=cdTone({region:x.reg});
       return `<article class="r2b13-witch cd-spot${x.none?' is-none':''}"${acc?` style="--cd-acc:${acc}"`:''} data-s="${escHtml([x.n,x.v,x.reg,x.home,(x.r||[]).join(' '),x.none||'','hexe synthese rezepte'].join(' ').toLowerCase())}">
-        <header class="r2b13-witch-hd"><span class="r2b13-witch-av" aria-hidden="true">${escHtml(x.n.charAt(0))}</span><div><h4 class="r2b13-witch-n">${escHtml(x.n)} <span>(${escHtml(x.v)})</span></h4><span class="r2b13-witch-reg">${cdIcon('pin')}${escHtml(x.reg)} / ${escHtml(x.home)}</span></div></header>
+        <header class="r2b13-witch-hd"><span class="r2b13-witch-av" aria-hidden="true">${escHtml(x.n.charAt(0))}<img src="cd_assets/npcs/witch-${x.n.toLowerCase()}.webp" width="64" height="64" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span><div><h4 class="r2b13-witch-n">${escHtml(x.n)} <span>(${escHtml(x.v)})</span></h4><span class="r2b13-witch-reg">${cdIcon('pin')}${escHtml(x.reg)} / ${escHtml(x.home)}</span></div></header>
         ${x.r?`<div class="r2b13-witch-r"><span class="r2b13-lbl">verkaufte Rezepte</span><div class="r2b13-eq r2b13-eq--list">${x.r.map(r=>_r2b13Tok('1x '+r,'',true)).join('')}</div></div>`:`<p class="r2b13-witch-none">${escHtml(x.none)}</p>`}
       </article>`;}).join('');
   }
