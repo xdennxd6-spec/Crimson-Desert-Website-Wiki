@@ -19350,7 +19350,9 @@ function click(e){
 function start(s){
   setPop(0);hold=-1;busy=0;sec=s;mo.disconnect();
   mo.observe(s,{childList:true,subtree:true,attributes:true,attributeOldValue:true,attributeFilter:['class','hidden','open']});   /* ohne style: Lichtkegel --mx/--my */
-  refresh(true);
+  /* R2 Integration: erst nach dem ersten Bild sammeln. Synchron erzwang collect() Stil und Layout in noch gesperrten
+     content-visibility-Karten (Kapitel-Guide: Seitenwechsel 63 -> 25 ms bei 1366, gemessen mit r2-int-probe.mjs) */
+  items=[];sig='';put();bar();requestAnimationFrame(()=>setTimeout(()=>{if(sec===s)refresh(true)},0));
 }
 const bb=$('blattbar'),D=document;
 btn=D.createElement('button');btn.type='button';btn.id='cdxBtn';btn.className='bb-console cdx-bbtoc';btn.hidden=true;
@@ -19544,7 +19546,9 @@ function cards(){
   var s=document.querySelector('.sec.active');
   return s?[].slice.call(s.querySelectorAll(M.REVEAL_SEL||'.card,.pet-card,.loc-card,.ruin-card')):[];
 }
-function snap(){cards().forEach(function(c){if(c.offsetParent)seen.add(c)})}
+/* R2 Integration (Wunsch B8): Karten in einer schon sichtbaren Eltern-Karte ohne offsetParent abfragen. Die Abfrage erzwang
+   je gesperrtem content-visibility-Block ein eigenes Layout (Trophäen: Seitenwechsel 58 -> 30 ms bei 1366). */
+function snap(){var on=new Set(),sel=M.REVEAL_SEL||'.card';cards().forEach(function(c){var a=c.parentElement&&c.parentElement.closest(sel);if(a&&on.has(a)){if(!c.hidden&&!c.classList.contains('hide')){seen.add(c);on.add(c);}return;}if(c.offsetParent){seen.add(c);on.add(c);}})}
 function stop(){
   if(tw)tw.kill();tw=0;
   cur.forEach(function(c){c.classList.remove('cd-b4-in')});
