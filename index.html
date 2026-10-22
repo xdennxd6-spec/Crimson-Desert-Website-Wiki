@@ -5564,6 +5564,243 @@ html.cd-motion .b8-pip:hover{transform:translateY(-2px)}
 
 /* ---- Bereich Bauer 9 (nur B9 schreibt hier) ---- */
 /* R2-B9 Anfang */
+/* Fähigkeiten (B9): Charakterwahl als Porträtkarten, Zweige als Bäume, Watch & Learn als Zeitleiste, Freischalt-Leitfaden.
+   Die sechs .tab-Knöpfe (skt-*) bleiben Knöpfe derselben .tabs-Leiste (Deep-Link &tab=, Suche, cdGo), nur neu gestaltet. */
+#sec-skills>.r2b9-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:0 0 24px;border:0}
+#sec-skills>.r2b9-tabs>.tab{grid-column:span 2;margin:0;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--panel-2);box-shadow:var(--shadow-soft);
+  color:var(--text);font-family:var(--f-body);font-size:13px;font-weight:400;letter-spacing:0;text-transform:none;text-align:left;user-select:none;
+  transition:border-color .2s,box-shadow .25s,transform .2s,background-color .2s}
+#sec-skills>.r2b9-tabs>.tab:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+/* Porträtkarten */
+#sec-skills>.r2b9-tabs>.r2b9-pick{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;min-height:184px;padding:18px 20px 18px}
+#sec-skills .r2b9-pick::before{content:'';position:absolute;left:20px;bottom:0;width:44px;height:3px;border-radius:3px 3px 0 0;background:var(--cd-acc);opacity:0;transition:opacity .2s,width .25s}
+#sec-skills .r2b9-pick .cd-scene{background:radial-gradient(90% 120% at 80% 10%,color-mix(in srgb,var(--cd-acc) 26%,transparent),transparent 70%)}
+#sec-skills .r2b9-pick .cd-scene-img{width:100%;opacity:.5;filter:saturate(.55);transition:opacity .3s,filter .3s;
+  -webkit-mask-image:linear-gradient(180deg,#000 30%,rgba(0,0,0,.35) 78%,transparent 100%);mask-image:linear-gradient(180deg,#000 30%,rgba(0,0,0,.35) 78%,transparent 100%);-webkit-mask-composite:source-over;mask-composite:add}
+#sec-skills .r2b9-pick .cd-scene::after{background:linear-gradient(0deg,var(--card) 4%,color-mix(in srgb,var(--card) 50%,transparent) 42%,transparent 72%)}
+#sec-skills .r2b9-pick .cd-scene-g{font-family:var(--f-display);font-weight:700;opacity:.14;right:6%}
+#sec-skills #skt-kliff .cd-scene-img{object-position:62% 22%}
+#sec-skills #skt-damiane .cd-scene-img{object-position:50% 30%}
+#sec-skills #skt-oongka .cd-scene-img{object-position:50% 20%}
+.r2b9-pick-n{font-family:var(--f-display);font-size:26px;font-weight:700;line-height:1.05;letter-spacing:.01em;color:var(--ink-hi);text-shadow:0 2px 14px color-mix(in srgb,var(--card) 90%,transparent)}
+.r2b9-pick-s{font-size:12.5px;line-height:1.35;color:var(--dim)}
+.r2b9-pick-s b{font-family:var(--f-mono);color:var(--cd-acc);font-weight:700}
+#sec-skills .r2b9-pick:hover{border-color:color-mix(in srgb,var(--cd-acc) 45%,var(--line))}
+#sec-skills .r2b9-pick:hover .cd-scene-img{opacity:.66;filter:saturate(.85)}
+#sec-skills .r2b9-pick.active{border-color:var(--cd-acc);box-shadow:0 0 0 1px var(--cd-acc),0 14px 34px -16px color-mix(in srgb,var(--cd-acc) 75%,transparent)}
+#sec-skills .r2b9-pick.active .cd-scene-img{opacity:.82;filter:none}
+#sec-skills .r2b9-pick.active::before{opacity:1;width:64px}
+html.cd-motion #sec-skills .r2b9-pick:hover{transform:translateY(-2px)}
+/* Werkzeugkarten */
+#sec-skills>.r2b9-tabs>.r2b9-tool{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 16px}
+.r2b9-tool-g{display:grid;place-items:center;flex:none;width:38px;height:38px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--gold);font-size:19px}
+.r2b9-tool-tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.r2b9-tool-t{font-weight:700;font-size:13.5px;color:var(--ink-hi)}
+.r2b9-tool-s{font-size:12px;color:var(--dim)}
+#sec-skills .r2b9-tool:hover{border-color:color-mix(in srgb,var(--gold) 45%,var(--line))}
+#sec-skills .r2b9-tool.active{border-color:var(--gold);background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 13%,var(--panel-2)),var(--panel-2) 70%)}
+#sec-skills .r2b9-tool.active .r2b9-tool-g{border-color:var(--gold);background:var(--gold);color:var(--bg)}
+#sec-skills>.sk-hit-chips{margin:-12px 0 16px}
+
+/* Steckbrief */
+.r2b9-prof{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:16px 26px;margin:0 0 14px;padding:24px 26px;border:1px solid var(--line);border-radius:16px;background:var(--panel-2);box-shadow:var(--shadow-soft)}
+.r2b9-prof-hd{display:flex;flex-direction:column;gap:6px;min-width:0;max-width:62ch}
+.r2b9-kick{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cd-acc)}
+.r2b9-prof-t{margin:0;font-family:var(--f-display);font-size:30px;font-weight:700;line-height:1.05;color:var(--ink-hi)}
+.r2b9-prof-lead{margin:0;font-size:13.5px;line-height:1.55;color:var(--text)}
+.r2b9-stats{position:relative;display:grid;grid-template-columns:repeat(3,minmax(92px,1fr));gap:8px;margin:0;padding-top:18px}
+.r2b9-stats-k{position:absolute;top:0;left:2px;margin:0;font:600 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.r2b9-stat{--c:var(--cd-fx-neutral);display:grid;grid-template-columns:auto 1fr;grid-template-areas:"i v" "l l";align-items:center;gap:2px 8px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:12px;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 16%,var(--card)),color-mix(in srgb,var(--card) 70%,transparent))}
+.r2b9-stat .cd-i{grid-area:i;width:20px;height:20px;color:var(--c)}
+.r2b9-stat dt{grid-area:l;font-size:11.5px;color:var(--dim)}
+.r2b9-stat dd{grid-area:v;margin:0;font:700 24px/1 var(--f-mono);color:var(--c);font-variant-numeric:tabular-nums}
+.r2b9-stat--hp{--c:var(--cd-fx-hp)}.r2b9-stat--stam{--c:var(--cd-fx-stam)}.r2b9-stat--spirit{--c:var(--cd-fx-spirit)}
+.r2b9-prof-facts{grid-column:1/-1;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.r2b9-prof-facts>div{background:color-mix(in srgb,var(--card) 88%,transparent)}
+.r2b9-prof-facts dd{font-size:13px}
+.r2b9-prof-facts .cd-fx-list{margin:2px 0 6px}
+.r2b9-el-tx{display:block;color:var(--text)}
+.r2b9-pre{margin:0 0 18px}
+#sec-skills .r2b9-costfold .cd-fold-chips .cd-chip{font-family:var(--f-mono);font-size:12px}
+.r2b9-legend{display:grid;gap:8px;margin:0}
+.r2b9-legend>div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:baseline}
+.r2b9-legend dt{margin:0}.r2b9-legend dd{margin:0;max-width:68ch;color:var(--text)}
+.r2b9-points{display:grid;gap:6px;margin:0;padding-left:18px;max-width:72ch}
+.r2b9-points li::marker{color:var(--gold)}
+
+/* Zweige: Übersicht + Abschnitte */
+.r2b9-brnav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 26px}
+.r2b9-brnav-b{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i t" "s s";align-items:center;gap:10px 12px;padding:14px 16px;cursor:pointer;text-align:left;color:var(--text);font:inherit;
+  border:1px solid color-mix(in srgb,var(--br) 34%,var(--line));border-radius:14px;background:linear-gradient(140deg,color-mix(in srgb,var(--br) 14%,var(--panel-2)),var(--panel-2) 72%);transition:border-color .2s,transform .2s}
+.r2b9-brnav-b:hover{border-color:var(--br)}
+.r2b9-brnav-b:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+html.cd-motion .r2b9-brnav-b:hover{transform:translateY(-2px)}
+.r2b9-brnav-b>.r2b9-br-ico{grid-area:i}
+.r2b9-brnav-tx{grid-area:t;display:flex;flex-direction:column;gap:1px;min-width:0}
+.r2b9-brnav-t{font-family:var(--f-display);font-weight:700;font-size:15.5px;color:var(--ink-hi)}
+.r2b9-brnav-s{font-size:12px;color:var(--dim)}.r2b9-brnav-s b{font-family:var(--f-mono);color:var(--br)}
+.r2b9-brnav-b>.r2b9-stack{grid-area:s}
+.r2b9-stack{display:flex;align-items:center}
+.r2b9-stack img{width:28px;height:28px;object-fit:contain;padding:2px;border:1px solid var(--line);border-radius:8px;background:var(--panel);margin-left:-6px;box-shadow:0 0 0 2px var(--panel-2)}
+.r2b9-stack img:first-child{margin-left:0}
+.r2b9-br-ico{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;color:var(--br);border:1px solid color-mix(in srgb,var(--br) 55%,transparent);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--br) 30%,transparent),color-mix(in srgb,var(--br) 8%,transparent));box-shadow:0 0 18px -4px color-mix(in srgb,var(--br) 60%,transparent)}
+.r2b9-br-ico .cd-i{width:21px;height:21px}
+#sec-skills .r2b9-br{display:block;margin:0 0 34px;container-type:inline-size;content-visibility:auto;contain-intrinsic-size:auto 1400px;scroll-margin-top:calc(var(--cdx-bb-h,0px) + 16px)}
+.r2b9-br-hd{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;margin:0 0 16px;padding:0 0 12px;border-bottom:1px solid color-mix(in srgb,var(--br) 38%,var(--line))}
+.r2b9-br-tx{flex:1 1 220px;min-width:0}
+.r2b9-br-t{margin:0;font-family:var(--f-display);font-size:20px;font-weight:700;line-height:1.2;color:var(--ink-hi)}
+.r2b9-br-en{margin-left:6px;font:600 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--br);vertical-align:3px}
+.r2b9-br-sub{margin:2px 0 0;font-size:12.5px;color:var(--dim)}
+.r2b9-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.r2b9-col{display:grid;gap:14px;align-content:start;min-width:0}
+@container (max-width:820px){.r2b9-cols{display:flex;flex-direction:column;gap:12px}.r2b9-col{display:contents}}
+/* Linie = Grundfähigkeit + Ausbauten (Baum mit Verbindungslinien) */
+#sec-skills .r2b9-fam{display:block;--cd-acc:var(--br);min-width:0}
+/* Einblendung der Linien per CSS-Scroll-Timeline (Compositor): die Fundament-Einblendung schaltet je Karte eine geerbte
+   Custom Property (--cdx-y/--cdx-d) um, das rechnet bei 100+ Fähigkeits-Zeilen jeden Unterbaum neu (Scroll mobil 3x langsamer, gemessen) */
+@supports (animation-timeline:view()){
+  html.cd-motion #sec-skills :is(.r2b9-fam,.r2b9-br-hd){animation:r2b9In linear both;animation-timeline:view();animation-range:entry 0% entry 45%}
+}
+@keyframes r2b9In{from{opacity:0;transform:translateY(12px)}}
+.r2b9-kids{position:relative;margin:6px 0 0 21px;padding-left:16px}
+.r2b9-kids::before{content:'';position:absolute;left:0;top:-6px;bottom:26px;width:2px;border-radius:2px;background:linear-gradient(color-mix(in srgb,var(--br) 70%,transparent),color-mix(in srgb,var(--br) 25%,transparent))}
+#sec-skills .r2b9-kid{display:block;position:relative;margin-top:6px}
+.r2b9-kid::before{content:'';position:absolute;left:-16px;top:26px;width:16px;height:2px;border-radius:2px;background:color-mix(in srgb,var(--br) 55%,transparent)}
+.r2b9-kid[data-d="2"],.r2b9-kid[data-d="3"]{margin-left:18px}
+.r2b9-kid[data-d="2"]::before,.r2b9-kid[data-d="3"]::before{left:-34px;width:34px}
+/* Fähigkeits-Zeile (kompakte .cd-fold) */
+#sec-skills .r2b9-sk{--cd-acc:var(--br);content-visibility:auto;contain-intrinsic-size:auto 70px;border-radius:12px;background:var(--panel-2);box-shadow:none}
+#sec-skills .r2b9-sk.is-root{border-color:color-mix(in srgb,var(--br) 40%,var(--line));background:linear-gradient(150deg,color-mix(in srgb,var(--br) 11%,var(--panel-2)),var(--panel-2) 65%);box-shadow:var(--shadow-soft)}
+#sec-skills .r2b9-sk>summary{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"ico main aside" "ico main arr";align-items:start;gap:2px 11px;min-height:0;padding:10px 10px 10px 13px}
+#sec-skills .r2b9-sk>summary::before{top:11px;bottom:11px;width:2px;opacity:.75;box-shadow:none}
+#sec-skills .r2b9-sk .cd-fold-ico{width:36px;height:36px;border-radius:9px;align-self:start;font-size:15px}
+#sec-skills .r2b9-sk .cd-fold-ico img{width:32px;height:32px}
+#sec-skills .r2b9-sk.is-root .cd-fold-ico{width:44px;height:44px;border-color:color-mix(in srgb,var(--br) 40%,var(--line))}
+#sec-skills .r2b9-sk.is-root .cd-fold-ico img{width:40px;height:40px}
+#sec-skills .r2b9-sk .cd-fold-main{gap:2px}
+#sec-skills .r2b9-sk .cd-fold-t{font-size:13.5px;line-height:1.3}
+#sec-skills .r2b9-sk.is-root .cd-fold-t{font-size:15px}
+#sec-skills .r2b9-sk .sk-n{display:inline;margin:0;font:inherit;color:inherit}
+#sec-skills .r2b9-sk .cd-fold-lead{font-size:12.5px;line-height:1.42}
+#sec-skills .r2b9-sk .cd-fold-aside{grid-area:aside;align-items:flex-end;flex-direction:column}
+#sec-skills .r2b9-sk .cd-fold-arr{width:22px;height:22px;border:0;background:none;justify-self:end;align-self:end}
+#sec-skills .r2b9-sk .cd-fold-arr .cd-i{width:14px;height:14px}
+#sec-skills .r2b9-sk .cd-fold-body{gap:10px;padding:10px 12px 12px;font-size:13px}
+#sec-skills .r2b9-sk .cd-facts dd{font-size:13px}
+#sec-skills .r2b9-sk[open]{content-visibility:visible;border-color:color-mix(in srgb,var(--br) 55%,var(--line))}
+.r2b9-flags{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:6px;vertical-align:1px}
+.r2b9-flag{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:999px;font:700 11px/1.35 var(--f-mono);letter-spacing:.02em;white-space:nowrap}
+.r2b9-flag .cd-i{width:12px;height:12px}
+.r2b9-flag--wl{color:var(--cd-fx-ice);border:1px solid color-mix(in srgb,var(--cd-fx-ice) 40%,transparent);background:color-mix(in srgb,var(--cd-fx-ice) 9%,transparent)}
+.r2b9-flag--miss{color:var(--red);border:1px solid color-mix(in srgb,var(--red) 45%,transparent);background:color-mix(in srgb,var(--red) 10%,transparent)}
+.r2b9-cost{--c:var(--gold);display:inline-block;max-width:104px;padding:4px 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:7px;
+  background:color-mix(in srgb,var(--c) 10%,transparent);color:var(--c);font:700 11.5px/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.r2b9-cost--free{--c:var(--cd-ok)}.r2b9-cost--dim{--c:var(--dim)}
+.r2b9-foot{margin:4px 0 0;font-size:12.5px;color:var(--dim)}
+.r2b9-link{padding:0;border:0;background:none;color:var(--glo);font:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.r2b9-link:hover{color:var(--rhi)}
+
+/* Hinweiszeile über Watch & Learn / Leitfaden */
+.r2b9-intro{display:flex;align-items:flex-start;gap:10px;max-width:78ch;margin:0 0 18px;font-size:13.5px;line-height:1.55;color:var(--dim)}
+.r2b9-intro .cd-i{width:18px;height:18px;margin-top:2px;color:var(--gold)}
+/* Watch & Learn: Zeitleiste */
+.r2b9-tl{position:relative}
+.r2b9-tl::before{content:'';position:absolute;left:31px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),color-mix(in srgb,var(--gold) 15%,transparent))}
+#sec-skills .r2b9-wlg{display:grid;grid-template-columns:64px minmax(0,1fr);gap:0 18px;margin:0 0 22px;contain:none}
+.r2b9-wlg-t{position:sticky;top:calc(var(--cdx-bb-h,0px) + 12px);align-self:start;display:grid;place-items:center;align-content:center;width:64px;height:64px;margin:0;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:50%;
+  background:radial-gradient(circle at 40% 30%,color-mix(in srgb,var(--gold) 22%,var(--card)),var(--card));box-shadow:0 0 0 5px var(--bg),0 0 22px -6px color-mix(in srgb,var(--gold) 70%,transparent)}
+.r2b9-wlg-k{font:600 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.r2b9-wlg-n{font:700 22px/1.05 var(--f-mono);color:var(--gold)}
+.r2b9-wlg:last-child .r2b9-wlg-n{font-size:12px;letter-spacing:.06em}
+.r2b9-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#sec-skills .cd-fold-ico .cd-g{font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:.03em;color:var(--cd-acc)}
+#sec-skills .r2b9-sk.is-root .cd-fold-ico .cd-g{font-size:17px}
+#sec-skills .r2b9-costfold .cd-fold-ico .cd-g,#sec-skills .r2b9-ulg .cd-fold-ico .cd-g{font-family:'Segoe UI Symbol','Noto Sans Symbols 2',var(--f-body),sans-serif;font-size:20px}
+#sec-skills .r2b9-wlg{position:relative}
+#sec-skills .r2b9-wl .cd-fold-ico{border-color:color-mix(in srgb,var(--cd-acc) 40%,var(--line))}
+.r2b9-alts{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.r2b9-alts li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:baseline;max-width:76ch}
+.r2b9-alt-n{justify-self:start;padding:2px 7px;border:1px solid var(--line);border-radius:999px;font:700 11px/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.r2b9-alts li+li .r2b9-alt-n{color:var(--dim)}
+.r2b9-alt-one{margin:0;max-width:76ch}
+.r2b9-go{margin:0}
+/* Freischalt-Leitfaden */
+#sec-skills .r2b9-ulpills{margin-bottom:16px}
+#sec-skills .r2b9-ulg .cd-fold-aside .r2b9-stack img{width:26px;height:26px}
+.r2b9-uls{display:grid}
+.r2b9-ul{display:grid;grid-template-columns:10px minmax(150px,.85fr) minmax(0,2fr) auto;align-items:baseline;gap:4px 14px;padding:10px 2px;border-top:1px solid var(--line-soft)}
+.r2b9-ul:first-child{border-top:0;padding-top:2px}
+.r2b9-ul-dot{width:9px;height:9px;border-radius:50%;background:var(--br);box-shadow:0 0 8px -1px var(--br);align-self:center}
+.r2b9-ul-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;min-width:0}
+.r2b9-ul-n{font-weight:700;color:var(--ink-hi);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--br) 50%,transparent)}
+.r2b9-ul-n:hover{color:var(--rhi);border-bottom-color:var(--rhi)}
+.r2b9-ul-tree{font-size:11.5px;color:var(--br)}
+.r2b9-ul-p{font-size:12.5px;line-height:1.5;color:var(--text);max-width:72ch}
+.r2b9-ul>.r2b9-cost{justify-self:end}
+
+@media (max-width:600px){
+  #sec-skills>.r2b9-tabs{gap:8px;margin-bottom:18px}
+  #sec-skills>.r2b9-tabs>.tab{border-radius:13px}
+  #sec-skills>.r2b9-tabs>.r2b9-pick{min-height:148px;padding:10px 10px 12px;gap:2px}
+  #sec-skills .r2b9-pick::before{left:10px}
+  .r2b9-pick-n{font-size:17px}
+  .r2b9-pick-s{font-size:11px}
+  #sec-skills>.r2b9-tabs>.r2b9-tool{flex-direction:column;align-items:flex-start;gap:6px;min-height:0;padding:10px}
+  .r2b9-tool-g{width:30px;height:30px;font-size:15px;border-radius:9px}
+  .r2b9-tool-t{font-size:12px;line-height:1.25}
+  .r2b9-tool-s{font-size:11px}
+  .r2b9-prof{grid-template-columns:minmax(0,1fr);padding:18px 16px;gap:14px}
+  .r2b9-prof-t{font-size:25px}
+  .r2b9-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .r2b9-stat{padding:8px 10px}.r2b9-stat dd{font-size:20px}
+  .r2b9-brnav{gap:8px}
+  .r2b9-brnav-b{grid-template-columns:minmax(0,1fr);grid-template-areas:"i" "t";padding:10px;gap:6px}
+  .r2b9-brnav-b>.r2b9-stack{display:none}
+  .r2b9-br-ico{width:34px;height:34px}.r2b9-br-ico .cd-i{width:18px;height:18px}
+  .r2b9-brnav-t{font-size:13.5px}
+  .r2b9-br-en{display:block;margin:4px 0 0}
+  .r2b9-kids{margin-left:17px;padding-left:12px}
+  .r2b9-kid::before{left:-12px;width:12px}
+  .r2b9-kid[data-d="2"],.r2b9-kid[data-d="3"]{margin-left:12px}
+  .r2b9-kid[data-d="2"]::before,.r2b9-kid[data-d="3"]::before{left:-24px;width:24px}
+  .r2b9-legend>div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .r2b9-tl::before{left:21px}
+  #sec-skills .r2b9-wlg{grid-template-columns:44px minmax(0,1fr);gap:0 10px}
+  .r2b9-wlg-t{width:44px;height:44px}
+  .r2b9-wlg-k{font-size:11px;letter-spacing:0}.r2b9-wlg-n{font-size:16px}
+  .r2b9-ul{grid-template-columns:10px minmax(0,1fr) auto;grid-template-areas:"d h c" ". p p"}
+  .r2b9-ul-dot{grid-area:d;align-self:start;margin-top:6px}.r2b9-ul-h{grid-area:h}.r2b9-ul-p{grid-area:p}.r2b9-ul>.r2b9-cost{grid-area:c}
+  #sec-skills .r2b9-ulg .cd-fold-aside .r2b9-stack{display:none}
+}
+
+/* Feinschliff (Art Director) */
+/* Baum lesbarer: Grundfähigkeit = getönte Karte, Ausbauten = ruhige Zeilen; mehr Luft zwischen den Linien */
+.r2b9-cols{gap:18px}
+.r2b9-col{gap:20px}
+#sec-skills .r2b9-kid>.r2b9-sk{background:color-mix(in srgb,var(--panel-2) 50%,transparent);border-color:color-mix(in srgb,var(--br) 14%,var(--line-soft))}
+#sec-skills .r2b9-kid>.r2b9-sk>summary::before{opacity:.3}
+#sec-skills .r2b9-kid>.r2b9-sk:hover,#sec-skills .r2b9-kid>.r2b9-sk[open]{border-color:color-mix(in srgb,var(--br) 50%,var(--line));background:var(--panel-2)}
+#sec-skills .r2b9-kid>.r2b9-sk .cd-fold-t{font-weight:600}
+/* Monogramm-Kacheln als gewollte Plaketten in Zweig-/Kartenfarbe statt leerer Kästen */
+#sec-skills .cd-fold-ico:has(>.cd-g){border-color:color-mix(in srgb,var(--cd-acc) 38%,var(--line));
+  background:radial-gradient(circle at 30% 22%,color-mix(in srgb,var(--cd-acc) 26%,transparent),color-mix(in srgb,var(--cd-acc) 5%,var(--panel)) 75%)}
+#sec-skills .r2b9-kid .cd-fold-ico:has(>.cd-g){background:color-mix(in srgb,var(--cd-acc) 9%,var(--panel))}
+/* Zweigkopf als farbiges Band */
+.r2b9-br-hd{padding:12px 14px;border:1px solid color-mix(in srgb,var(--br) 22%,transparent);border-bottom-color:color-mix(in srgb,var(--br) 45%,var(--line));border-radius:14px 14px 4px 4px;
+  background:linear-gradient(100deg,color-mix(in srgb,var(--br) 13%,transparent),color-mix(in srgb,var(--br) 3%,transparent) 55%,transparent)}
+/* Zweigkacheln: Monogramme im Stapel, gleich hohe Kacheln */
+.r2b9-stack>:first-child{margin-left:0}
+.r2b9-mono{display:grid;place-items:center;flex:none;width:28px;height:28px;margin-left:-6px;border:1px solid color-mix(in srgb,var(--br) 45%,var(--line));border-radius:8px;
+  background:color-mix(in srgb,var(--br) 15%,var(--panel));box-shadow:0 0 0 2px var(--panel-2);color:var(--br);font:700 11px/1 var(--f-display);letter-spacing:.02em}
+/* Porträtkarten: aktive Karte trägt ein klares Auswahlzeichen, Szene zoomt beim Überfahren leicht */
+#sec-skills .r2b9-pick .cd-scene-img{transition:opacity .3s,filter .3s,transform .6s cubic-bezier(.2,.7,.2,1)}
+html.cd-motion #sec-skills .r2b9-pick:hover .cd-scene-img{transform:scale(1.035)}
+#sec-skills .r2b9-pick.active .r2b9-pick-n::after{content:'';display:inline-block;width:8px;height:8px;margin-left:10px;border-radius:50%;vertical-align:5px;background:var(--cd-acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--cd-acc) 28%,transparent),0 0 14px var(--cd-acc)}
+/* Watch & Learn: breite Bildschirme zweispaltig, aufgeklappter Mehrfach-Lernort ohne doppelten Kurzsatz */
+@media (min-width:1180px){#sec-skills .r2b9-wlg>.cd-folds{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
+#sec-skills .r2b9-wl--multi[open] .cd-fold-lead{display:none}
 /* R2-B9 Ende */
 
 /* ---- Bereich Bauer 10 (nur B10 schreibt hier) ---- */
@@ -6784,13 +7021,13 @@ html.cd-motion .b8-pip:hover{transform:translateY(-2px)}
 
   <section class="sec" id="sec-skills">
     <h2 class="sec-t"><span class="sec-sym">✦</span> Fähigkeiten <span class="sec-t-en">Skills</span></h2>
-    <div class="tabs">
-      <button type="button" class="tab active" id="skt-kliff" onclick="skTab('kliff')">Kliff</button>
-      <button type="button" class="tab" id="skt-damiane" onclick="skTab('damiane')">Damiane</button>
-      <button type="button" class="tab" id="skt-oongka" onclick="skTab('oongka')">Oongka</button>
-      <button type="button" class="tab" id="skt-watch" onclick="skTab('watch')">Watch &amp; Learn</button>
-      <button type="button" class="tab" id="skt-unlock" onclick="skTab('unlock')">Freischalt-Details</button>
-      <button type="button" class="tab" id="skt-graph" onclick="skTab('graph')">🌳 Tree-Graph</button>
+    <div class="tabs r2b9-tabs" aria-label="Charakter oder Ansicht wählen">
+      <button type="button" class="tab active" id="skt-kliff" aria-pressed="true" onclick="skTab('kliff')">Kliff</button>
+      <button type="button" class="tab" id="skt-damiane" aria-pressed="false" onclick="skTab('damiane')">Damiane</button>
+      <button type="button" class="tab" id="skt-oongka" aria-pressed="false" onclick="skTab('oongka')">Oongka</button>
+      <button type="button" class="tab" id="skt-watch" aria-pressed="false" onclick="skTab('watch')">Watch &amp; Learn</button>
+      <button type="button" class="tab" id="skt-unlock" aria-pressed="false" onclick="skTab('unlock')">Freischaltungen</button>
+      <button type="button" class="tab" id="skt-graph" aria-pressed="false" onclick="skTab('graph')">🌳 Tree-Graph</button>
     </div>
     <div class="pane active" id="skp-kliff"></div>
     <div class="pane" id="skp-damiane"></div>
@@ -13757,60 +13994,12 @@ function renderFood(){
   reapplySearch(root,cnt,list.length);
 }
 
-// ===== SKILLS =====
-function renderUnlockTable(){
-  const charF=(document.getElementById('uf-char')||{}).value||'';
-  const missF=(document.getElementById('uf-miss')||{}).value||'';
-  const ALL=[
-    ...KLIFF_STAMINA.map(s=>({...s,char:'Kliff',tree:'Stamina'})),
-    ...KLIFF_SPIRIT.map(s=>({...s,char:'Kliff',tree:'Geist'})),
-    ...KLIFF_HEALTH.map(s=>({...s,char:'Kliff',tree:'Health/Elemente'}))
-  ];
-  const visible=ALL.filter(s=>
-    (!charF||s.char===charF)&&
-    (!missF||(missF==='1'?isMiss(s):!isMiss(s)))
-  );
-  document.getElementById('skp-unlock').innerHTML=
-    `<div class="fbar">
-      <select class="fs" id="uf-char" aria-label="Freischaltungen nach Charakter filtern" onchange="renderUnlockTable()">
-        <option value="">Alle Charaktere</option>
-        <option${charF==='Kliff'?' selected':''}>Kliff</option>
-      </select>
-      <select class="fs" id="uf-miss" aria-label="Freischaltungen nach Verpassbarkeit filtern" onchange="renderUnlockTable()">
-        <option value="">Alle</option>
-        <option value="1"${missF==='1'?' selected':''}>Nur verpassbare</option>
-        <option value="0"${missF==='0'?' selected':''}>Nicht verpassbare</option>
-      </select>
-      <span style="font-size:var(--fs-11);color:var(--dim);align-self:center">${visible.length} Skills</span>
-    </div>
-    <div class="tw-wrap"><table><thead><tr>
-      <th>Char.</th><th>Tree</th><th>Skill</th><th>Voraussetzung / Kapitel-Gate</th><th>Kosten</th><th>Status</th>
-    </tr></thead><tbody>`+
-    visible.map(s=>{
-      const miss=isMiss(s);
-      const treeTag=s.tree==='Stamina'?'tr':s.tree==='Geist'?'tg':'tw';
-      const icon=skillImg(s.name,s.char)?`<img class="sk-ico" src="${skillImg(s.name,s.char)}" loading="lazy" decoding="async" onerror="this.style.display='none'" alt="${s.name} Icon" style="vertical-align:middle;margin-right:5px">`:`<span class="sk-ico-ph" aria-hidden="true" style="margin-right:5px">✦</span>`;      const ds=[s.name,s.char,s.tree,s.prereq,s.cost].join(' ').toLowerCase();
-      return `<tr data-s="${ds}">
-        <td><span class="tag tx">${s.char}</span></td>
-        <td><span class="tag ${treeTag}">${s.tree}</span></td>
-        <td>${icon}<strong style="color:var(--rhi)">${s.name}</strong></td>
-        <td style="font-size:var(--fs-11-5);max-width:230px;line-height:1.5">${s.prereq}</td>
-        <td style="font-size:var(--fs-11-5);white-space:nowrap;color:var(--gold)">${s.cost}</td>
-        <td>${miss?MISS_CHIP:'<span style="color:var(--dim);font-size:var(--fs-11)">–</span>'}</td>
-      </tr>`;
-    }).join('')+
-    '</tbody></table></div>';
-}
-
-function skTab(id){
-  ['kliff','damiane','oongka','watch','unlock','graph'].forEach(t=>{
-    const tab=document.getElementById('skt-'+t);
-    const pane=document.getElementById('skp-'+t);
-    if(tab)tab.classList.toggle('active',t===id);
-    if(pane)pane.classList.toggle('active',t===id);
-  });
-  if(id==='graph'&&typeof renderSkillGraph==='function')renderSkillGraph();
-}
+// ===== SKILLS (Redesign 2, B9) =====
+// Aufbau: Charakterwahl (die sechs .tab-Knöpfe skt-* bleiben, nur als Porträt-/Werkzeugkarten gefüllt), je Charakter ein Steckbrief
+// und die Fähigkeiten als Bäume (Linie = Grundfähigkeit + was laut Voraussetzung darauf aufbaut), Watch & Learn als Zeitleiste nach Kapitel,
+// Freischaltungen als Leitfaden nach Freischaltweg. Daten unverändert (KLIFF_*, DAMIANE_SKILLS, OONGKA_SKILLS, WATCH_AND_LEARN, SKILL_IMGS);
+// Gruppierungen nur per Stichwort aus den vorhandenen Feldern. Deep-Links: #sec=skills&tab=<kliff|damiane|oongka|watch|unlock|graph>,
+// Sprung zu einer Fähigkeit per cdGo('skills','sk-<charakter>-<slug>').
 function isMiss(s){return s.prereq&&(s.prereq.includes('MISSABLE')||s.prereq.includes('NICHT erlernbar'));}
 // Icon eines Skills: gleichnamige Skills verschiedener Charaktere haben bei questlog eigene Icons (SKILL_IMGS_BY_CHAR[Charakter][Name]);
 // ohne Eintrag gilt SKILL_IMGS[Name] (Name allein).
@@ -13818,54 +14007,313 @@ function skillImg(name,ch){
   const b=typeof SKILL_IMGS_BY_CHAR!=='undefined'&&SKILL_IMGS_BY_CHAR[ch];
   return (b&&b[name])||SKILL_IMGS[name]||'';
 }
-function skCard(s,ch){
-  const m=isMiss(s);
-  const img=skillImg(s.name,ch);
-  return `<div class="sk-c${m?' miss':''}">
-    <div class="sk-n-row">
-      ${img?`<img class="sk-ico" src="${img}" onerror="this.style.display='none'" loading="lazy" alt="${s.name} Skill-Icon">`:`<span class="sk-ico-ph" aria-hidden="true">✦</span>`}      <div class="sk-n">${s.name}${m?'<span class="sk-mb">verpassbar</span>':''}</div>
-    </div>
-    <div class="sk-r">Voraussetzung: <span>${s.prereq}</span></div>
-    <div class="sk-r">Kosten: <span>${s.cost}</span></div>
-    <div class="sk-eff">${s.effect}</div>
+function skTab(id){
+  if(R2B9_PANES[id])_r2b9Pane(id);
+  ['kliff','damiane','oongka','watch','unlock','graph'].forEach(t=>{
+    const tab=document.getElementById('skt-'+t);
+    const pane=document.getElementById('skp-'+t);
+    if(tab){tab.classList.toggle('active',t===id);tab.setAttribute('aria-pressed',String(t===id));}
+    if(pane)pane.classList.toggle('active',t===id);
+  });
+  if(id==='graph'&&typeof renderSkillGraph==='function')renderSkillGraph();
+}
+const R2B9_CH={
+  Kliff:{k:'kliff',acc:'var(--red)',scene:'char-kliff'},
+  Damiane:{k:'damiane',acc:'var(--violet)',scene:'char-damiane'},
+  Oongka:{k:'oongka',acc:'var(--amber)',scene:'char-oongka'}
+};
+const R2B9_BR=[
+  {k:'stam',list:()=>KLIFF_STAMINA,t:'Ausdauer',en:'Stamina Tree',tree:'Stamina',ico:'stam',acc:'var(--cd-fx-stam)'},
+  {k:'spirit',list:()=>KLIFF_SPIRIT,t:'Geist',en:'Spirit Tree',tree:'Geist',ico:'spirit',acc:'var(--cd-fx-spirit)'},
+  {k:'hp',list:()=>KLIFF_HEALTH,t:'Leben & Elemente',en:'Health Tree / Elemente',tree:'Health/Elemente',ico:'hp',acc:'var(--cd-fx-hp)'}
+];
+function _r2b9Lists(ch){
+  if(ch==='Kliff')return R2B9_BR.map(b=>({b,list:b.list()}));
+  const list=ch==='Damiane'?(typeof DAMIANE_SKILLS!=='undefined'?DAMIANE_SKILLS:[]):(typeof OONGKA_SKILLS!=='undefined'?OONGKA_SKILLS:[]);
+  return [{b:{k:R2B9_CH[ch].k,t:'Skill-Tree',en:ch,tree:'',ico:'neutral',acc:R2B9_CH[ch].acc},list}];
+}
+function _r2b9Id(ch,name){return 'sk-'+ch.toLowerCase()+'-'+cdSlug(name);}
+// Watch-&-Learn-Eintrag derselben Fähigkeit: „Nur Damiane“-Einträge gehören zu Damiane, alle übrigen zu Kliffs Bäumen.
+function _r2b9WL(name,ch){
+  if(typeof WATCH_AND_LEARN==='undefined')return null;
+  return WATCH_AND_LEARN.find(w=>w.skill===name&&(/^Nur Damiane/.test(w.loc)?ch==='Damiane':ch==='Kliff'))||null;
+}
+function _r2b9Miss(s,ch){const w=_r2b9WL(s.name,ch);return !!(isMiss(s)||(w&&w.miss));}
+// Kosten kurz für den Kartenkopf: Klammern weg, lange Angaben am ersten Trenner gekürzt; der volle Text steht im Tooltip und aufgeklappt.
+function _r2b9Cost(c){
+  c=String(c||'');
+  let t=c.replace(/\s*\([^)]*\)/g,'').replace(/\s+/g,' ').replace(/ bis Lv \d+$/,'').trim();
+  if(t.length>16){const f=t.split(/,\s*|\s·\s/)[0];t=f.length<=16?f:t.slice(0,15).trim()+'…';}
+  const k=/nicht erfasst/.test(c)?'dim':(/AA|Artifact/.test(t)?'aa':'free');
+  return `<span class="r2b9-cost r2b9-cost--${k}" title="Kosten: ${cdEsc(c)}">${cdEsc(t||'?')}</span>`;
+}
+// Linien eines Baums: Elternteil = Fähigkeit derselben Liste, die in der Voraussetzung zuerst genannt wird
+// (auch als Kürzel „FS/TS/FP/UC Lv“ bzw. „Flight Lv“). Nennt die Voraussetzung mehr als zwei Fähigkeiten (Auswahl „eine davon“), bleibt sie eine eigene Linie.
+const R2B9_ABBR={FS:'Forward Slash',TS:'Turning Slash',FP:'Force Palm',UC:'Unarmed Combat'};
+function _r2b9Re(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function _r2b9Families(list){
+  const idx=new Map(list.map((s,i)=>[s.name,i])),pats=[];
+  list.forEach(s=>{
+    pats.push([s.name,new RegExp('(^|[^A-Za-z])'+_r2b9Re(s.name)+'(?![A-Za-z])')]);
+    const b=s.name.replace(/\s*\(.*\)$/,'');
+    if(b!==s.name&&!idx.has(b))pats.push([s.name,new RegExp('(^|[^A-Za-z])'+_r2b9Re(b)+' Lv')]);
+  });
+  Object.keys(R2B9_ABBR).forEach(a=>{if(idx.has(R2B9_ABBR[a]))pats.push([R2B9_ABBR[a],new RegExp('(^|[^A-Za-z])'+a+' Lv')]);});
+  const par=list.map(s=>{
+    const p=s.prereq||'',spans=[];
+    pats.forEach(([n,re])=>{if(n===s.name)return;const m=re.exec(p);if(m){const st=m.index+m[1].length;spans.push({n,st,en:st+m[0].length-m[1].length});}});
+    const keep=spans.filter(a=>!spans.some(b=>b!==a&&b.st<=a.st&&b.en>=a.en&&(b.en-b.st)>(a.en-a.st)));
+    const names=[...new Set(keep.map(x=>x.n))];
+    if(!names.length||names.length>2)return -1;
+    keep.sort((a,b)=>a.st-b.st||(b.en-b.st)-(a.en-a.st));
+    return idx.get(keep[0].n);
+  });
+  // Kreise auflösen
+  par.forEach((p,i)=>{const seen=new Set([i]);let j=p;while(j>-1){if(seen.has(j)){par[i]=-1;break;}seen.add(j);j=par[j];}});
+  const kids=list.map(()=>[]);par.forEach((p,i)=>{if(p>-1)kids[p].push(i);});
+  const fams=[];
+  list.forEach((s,i)=>{
+    if(par[i]>-1)return;
+    const items=[];(function walk(j,d){items.push({i:j,d});kids[j].forEach(k=>walk(k,d+1));})(i,0);
+    fams.push({root:i,items});
+  });
+  return fams;
+}
+// ohne Bild: Monogramm (Anfangsbuchstaben) in Zweigfarbe statt leerer Kachel
+function _r2b9Mono(name){const w=String(name).replace(/\s*\(.*\)$/,'').replace(/[^A-Za-z\s]/g,'').trim().split(/\s+/);return (w.length>1?w[0][0]+w[1][0]:w[0].slice(0,2)).replace(/^(.)(.?)$/,(m,a,b)=>a.toUpperCase()+b);}
+function _r2b9Icon(name,ch){
+  const src=skillImg(name,ch);
+  return src?{src,alt:''}:_r2b9Mono(name);
+}
+function _r2b9Row(s,ch,b,d){
+  const wl=_r2b9WL(s.name,ch),miss=_r2b9Miss(s,ch),canWL=/Watch & Learn/.test(s.prereq||'');
+  const flags=(canWL?'<span class="r2b9-flag r2b9-flag--wl" title="Auch per Watch &amp; Learn erlernbar">W&amp;L</span>':'')
+    +(miss?'<span class="r2b9-flag r2b9-flag--miss" title="Kann verpasst werden, Details im Text">'+cdIcon('miss')+'verpassbar</span>':'');
+  const tree=b.tree?(ch+' · '+b.en):ch;
+  return cdFold({
+    title:{h:'<span class="sk-n">'+cdEsc(s.name)+'</span>'+(flags?'<span class="r2b9-flags">'+flags+'</span>':'')},
+    lead:s.effect,
+    icon:_r2b9Icon(s.name,ch),
+    aside:_r2b9Cost(s.cost),
+    id:_r2b9Id(ch,s.name),
+    cls:'r2b9-sk'+(d===0?' is-root':''),
+    attrs:{'data-d':d},
+    s:[s.name,ch,b.tree||'',b.en||'',s.prereq,s.cost,s.effect,wl?'watch & learn '+wl.loc:'',miss?'verpassbar':''].join(' '),
+    body:()=>cdFacts([['Voraussetzung',s.prereq],['Kosten',s.cost],['Baum',tree]],{wide:true})
+      +(wl?cdNote(wl.loc,{kind:wl.miss?'miss':'info',title:wl.miss?'Watch & Learn · verpassbar':'Watch & Learn'}):'')
+      +(miss&&!(wl&&wl.miss)?cdNote('Kann verpasst werden, Details in der Voraussetzung.',{kind:'miss'}):'')
+  });
+}
+function _r2b9Branch(b,list,ch){
+  const fams=_r2b9Families(list),n=list.length;
+  const cols=[0,1,2].map(()=>({h:0,f:[]}));
+  fams.forEach((f,fi)=>{const c=cols.reduce((a,x)=>x.h<a.h?x:a);c.f.push([f,fi]);c.h+=f.items.length+0.9;});
+  const famHtml=([f,fi])=>{
+    const root=f.items[0],rest=f.items.slice(1);
+    return `<div class="sk-grid r2b9-fam" style="order:${fi}">`+_r2b9Row(list[root.i],ch,b,0)
+      +(rest.length?'<div class="r2b9-kids">'+rest.map(x=>`<div class="sk-grid r2b9-kid" data-d="${Math.min(x.d,3)}">${_r2b9Row(list[x.i],ch,b,x.d)}</div>`).join('')+'</div>':'')+'</div>';
+  };
+  const wlN=list.filter(s=>/Watch & Learn/.test(s.prereq||'')).length,missN=list.filter(s=>_r2b9Miss(s,ch)).length;
+  return `<section class="sk-grid r2b9-br" id="r2b9-br-${b.k}" data-cd-noreveal style="--br:${b.acc}">
+    <header class="r2b9-br-hd"><span class="r2b9-br-ico" aria-hidden="true">${cdIcon(b.ico)}</span>
+      <div class="r2b9-br-tx"><h3 class="r2b9-br-t" data-toc>${cdEsc(b.t)}${b.tree?' <span class="r2b9-br-en">'+cdEsc(b.en)+'</span>':''}</h3>
+      <p class="r2b9-br-sub">${n} Fähigkeiten in ${fams.length} Linien</p></div>
+      ${cdChips([wlN?{v:wlN,t:'per Watch & Learn',c:'ice'}:'',missN?{v:missN,t:'verpassbar',c:'red',i:'miss'}:''],'r2b9-br-chips')}
+    </header>
+    <div class="r2b9-cols">${cols.map(c=>'<div class="r2b9-col">'+c.f.map(famHtml).join('')+'</div>').join('')}</div>
+  </section>`;
+}
+// Porträt-/Werkzeugkarten in die bestehenden Reiter-Knöpfe
+function _r2b9Picks(){
+  const cnt={Kliff:KLIFF_STAMINA.length+KLIFF_SPIRIT.length+KLIFF_HEALTH.length,
+    Damiane:typeof DAMIANE_SKILLS!=='undefined'?DAMIANE_SKILLS.length:0,Oongka:typeof OONGKA_SKILLS!=='undefined'?OONGKA_SKILLS.length:0};
+  const sub={Kliff:'3 Zweige',Damiane:'ab Kap. 3',Oongka:'ab Kap. 7'};
+  Object.keys(R2B9_CH).forEach(ch=>{
+    const c=R2B9_CH[ch],el=document.getElementById('skt-'+c.k);if(!el)return;
+    el.classList.add('r2b9-pick','cd-scened','cd-spot');el.style.setProperty('--cd-acc',c.acc);
+    el.innerHTML=cdScene([c.scene],{full:true,glyph:ch[0]})
+      +`<span class="r2b9-pick-n">${ch}</span><span class="r2b9-pick-s"><b>${cnt[ch]}</b> Fähigkeiten · ${sub[ch]}</span>`;
+    el.setAttribute('aria-label',ch+': '+cnt[ch]+' Fähigkeiten');
+  });
+  const tools=[['watch','◉','Watch &amp; Learn',(typeof WATCH_AND_LEARN!=='undefined'?WATCH_AND_LEARN.length:0)+' Lernorte'],['unlock','⚿','Freischaltungen','Leitfaden je Weg'],['graph','🌳','Tree-Graph','Abhängigkeiten']];
+  tools.forEach(([k,g,t,s])=>{
+    const el=document.getElementById('skt-'+k);if(!el)return;
+    el.classList.add('r2b9-tool','cd-spot');
+    el.innerHTML=`<span class="r2b9-tool-g cd-g" aria-hidden="true">${g}</span><span class="r2b9-tool-tx"><span class="r2b9-tool-t">${t}</span><span class="r2b9-tool-s">${s}</span></span>`;
+  });
+  ['kliff','damiane','oongka','watch','unlock','graph'].forEach(k=>{const el=document.getElementById('skt-'+k);if(el)el.setAttribute('aria-pressed',String(el.classList.contains('active')));});
+}
+function _r2b9Jump(k){
+  const el=document.getElementById('r2b9-br-'+k);if(!el)return;
+  if(window.cdMotion&&cdMotion.scrollTo)cdMotion.scrollTo(el);else el.scrollIntoView({block:'start'});
+}
+function _r2b9Kliff(){
+  const brs=_r2b9Lists('Kliff'),total=brs.reduce((a,x)=>a+x.list.length,0);
+  const stats=[['hp','HP','18'],['stam','Ausdauer (Sta)','14'],['spirit','Geist (Spirit)','12']];
+  const intro='Stat-Maxima: HP 18 · Sta 14 · Spirit 12';
+  const prof=`<div class="r2b9-prof cd-spot cd-scened" style="--cd-acc:${R2B9_CH.Kliff.acc}" data-s="${cdEsc((intro+' kliff').toLowerCase())}">
+    ${cdScene(['char-kliff'],{glyph:'K',w:58})}
+    <div class="r2b9-prof-hd"><p class="r2b9-kick">Charakter · ${total} Fähigkeiten</p><h3 class="r2b9-prof-t">Kliff</h3>
+      <p class="r2b9-prof-lead">Drei Zweige: Ausdauer, Geist und Leben mit den Elementen.</p></div>
+    <dl class="r2b9-stats" aria-label="Stat-Maxima">${stats.map(([k,l,v])=>`<div class="r2b9-stat r2b9-stat--${k}">${cdIcon(k)}<dt>${l}</dt><dd>${v}</dd></div>`).join('')}<p class="r2b9-stats-k">Stat-Maxima</p></dl>
   </div>`;
+  const nav=`<nav class="r2b9-brnav" aria-label="Zweige von Kliff">${brs.map(({b,list})=>{
+      const fams=_r2b9Families(list);
+      // Grundfähigkeiten der ersten Linien; ohne Bild als Monogramm, damit alle drei Kacheln gleich gebaut sind
+      const stack=fams.slice(0,5).map(f=>{const nm=list[f.root].name,src=skillImg(nm,'Kliff');return src?`<img src="${cdEsc(src)}" alt="" loading="lazy" decoding="async" width="26" height="26" data-mono="${cdEsc(_r2b9Mono(nm))}">`:`<span class="r2b9-mono">${cdEsc(_r2b9Mono(nm))}</span>`;}).join('');
+      return `<button type="button" class="r2b9-brnav-b cd-spot" style="--br:${b.acc}" onclick="_r2b9Jump('${b.k}')">
+        <span class="r2b9-br-ico" aria-hidden="true">${cdIcon(b.ico)}</span>
+        <span class="r2b9-brnav-tx"><span class="r2b9-brnav-t">${cdEsc(b.t)}</span><span class="r2b9-brnav-s"><b>${list.length}</b> Fähigkeiten</span></span>
+        <span class="r2b9-stack" aria-hidden="true">${stack}</span></button>`;}).join('')}</nav>`;
+  const legend=[['1 AA','einmalig'],['1 AA/Lv','je Stufe („mindestens bis Lv N“ nennt die höchste belegte Voraussetzung, nicht eine belegte Maximalstufe)'],['0 oder 1 AA','per Watch & Learn kostenlos oder mit 1 Artefakt']];
+  const costTxt='Kosten: „AA“ = Abyss-Artefakt (Abyss Artifact), die Skillpunkt-Währung: in der Regel 1 Artefakt pro Skill bzw. Stufe. Eine Fundquelle sind die Uralten Ruinen (Abyss-Grenzsteine). Per Watch & Learn gelernte Skills kosten kein Artefakt. Schreibweise: „1 AA“ = einmalig, „1 AA/Lv“ = je Stufe („mindestens bis Lv N“ nennt die höchste belegte Voraussetzung, nicht eine belegte Maximalstufe), „0 oder 1 AA“ = per Watch & Learn kostenlos oder mit 1 Artefakt. Die Elementar-Skills (Flame/Frost/Lightning/Wind) schaltet der Abschluss der zugehörigen Abyss-Challenges frei (laut Fextralife für alle drei Charaktere, ohne Artefakt). Seit Patch 2.00.00 erhalten die anderen spielbaren Charaktere beim Erlernen per Abyss-Artefakt automatisch gleich viele Abyss-Verknüpfungen (Abyss Link); Zurücksetzen geht je Charakter einzeln.';
+  const cost=cdFold({
+    title:'Kosten lesen: Abyss-Artefakte (AA)',
+    lead:'„AA“ = Abyss-Artefakt (Abyss Artifact), die Skillpunkt-Währung: in der Regel 1 Artefakt pro Skill bzw. Stufe.',
+    icon:'◈',tone:'gold',cls:'r2b9-costfold',s:costTxt,
+    chips:legend.map(([k])=>({t:k,c:'gold'})),
+    body:()=>`<dl class="r2b9-legend">${legend.map(([k,v])=>`<div><dt><span class="r2b9-cost r2b9-cost--aa">${cdEsc(k)}</span></dt><dd>${cdEsc(v)}</dd></div>`).join('')}</dl>`
+      +`<ul class="r2b9-points"><li>Eine Fundquelle sind die ${cdGoLink('ruins','','Uralten Ruinen (Abyss-Grenzsteine)')}.</li>`
+      +'<li>Per Watch &amp; Learn gelernte Skills kosten kein Artefakt.</li>'
+      +'<li>Die Elementar-Skills (Flame/Frost/Lightning/Wind) schaltet der Abschluss der zugehörigen Abyss-Challenges frei (laut Fextralife für alle drei Charaktere, ohne Artefakt).</li>'
+      +'<li>Seit Patch 2.00.00 erhalten die anderen spielbaren Charaktere beim Erlernen per Abyss-Artefakt automatisch gleich viele <strong>Abyss-Verknüpfungen</strong> (Abyss Link); Zurücksetzen geht je Charakter einzeln.</li></ul>'
+  });
+  return prof+'<div class="r2b9-pre">'+cost+'</div>'+nav+brs.map(({b,list})=>_r2b9Branch(b,list,'Kliff')).join('');
+}
+// Steckbrief Damiane/Oongka: Texte wortgleich aus der bisherigen Kartenansicht (Gedankenstriche als Doppelpunkt/Komma)
+const R2B9_PROF={
+  Damiane:{lead:'Unlock: Kapitel 3, First Step to Rebuilding (Howling Hill Camp)',facts:[
+    ['Quick Swap','DEFAULT: kein Armed Combat Lv 5 nötig!'],
+    ['Flight','Mechanischer Glider (kein Magie-System), ab Freischaltung verfügbar. Skystep (Abyss-Fan) über die Scholastone-Forschung nach Kap. 4 (The Price of Knowledge); seit Patch 1.14.00 gleiche Eingabe wie Oongkas Vertical Flight'],
+    ['Kosten (2.00)','Seit Patch 2.00.00 (25.08.2026) lernt Damiane mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihr eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.']],
+    el:['Flame Rush','Frost Mantle','Lightning Strike','Storm Pillar'],elTxt:'Der Elementfortschritt wird mit Kliff und Oongka geteilt: Wer ein Element mit einem Charakter freischaltet, hat es für alle (Fextralife)'},
+  Oongka:{lead:'Unlock: Erstmals spielbar in Kap. 7: Nach der Begegnung mit Myurdin in Ashclaw Keep fällt Kliff aus, Oongka übernimmt bis zum Sieg über One-Armed Ludvig (Twisted Fate). Dauerhaft laut game8 erst nach der Greymane-Fraktionsquest Words Left by the Riverside (Kap. 8).',facts:[
+    ['Quick Swap','laut game8 ab Armed Combat Lv 5 (Fextralife: Default)'],
+    ['Flight','Kuku Rocket Pack: Fraktionsquest Fire Breathing Pack (Reihe The Giant\'s Leap, Kap. 8), Brief von Grimnir lesen. Vertical Flight über die Forschung „Machine Parts Research“ (questlog-Wissenseintrag: der Raketenrucksack lässt sich damit um Vertical Flight erweitern)'],
+    ['Kosten (2.00)','Seit Patch 2.00.00 (25.08.2026) lernt Oongka mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihm eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.']],
+    el:['Flame Quake','Frost Mantle','Storm Howl','Lightning Pulse'],elTxt:'Der Elementfortschritt wird mit Kliff und Damiane geteilt: Wer ein Element mit einem Charakter freischaltet, hat es für alle (Fextralife)'}
+};
+function _r2b9Other(ch){
+  const P=R2B9_PROF[ch],c=R2B9_CH[ch],[{b,list}]=_r2b9Lists(ch);
+  const qs=P.facts[0],more=P.facts.slice(1);
+  const full=[ch,P.lead,qs.join(' '),'Elemente',P.el.join(' · '),P.elTxt].join(' ');
+  const prof=`<div class="r2b9-prof cd-spot cd-scened" style="--cd-acc:${c.acc}" data-s="${cdEsc(full.toLowerCase())}">
+    ${cdScene([c.scene],{glyph:ch[0],w:58})}
+    <div class="r2b9-prof-hd"><p class="r2b9-kick">Charakter · ${list.length} Fähigkeiten</p><h3 class="r2b9-prof-t">${ch}</h3>
+      <p class="r2b9-prof-lead">${cdEsc(P.lead)}</p></div>
+    ${cdFacts([qs,['Elemente',{h:cdFx(P.el)+'<span class="r2b9-el-tx">'+cdEsc(P.elTxt)+'</span>'}]],{cls:'r2b9-prof-facts'})}
+  </div>`+'<div class="r2b9-pre">'+cdFold({title:'Flug und Kosten seit Patch 2.00.00',lead:more[0][1],icon:'✈',tone:ch==='Damiane'?'violet':'amber',cls:'r2b9-costfold',
+    chips:more.map(m=>({t:m[0]})),s:[ch,...more.map(m=>m.join(' '))].join(' '),body:()=>cdFacts(more,{wide:true})})+'</div>';
+  const g=ch==='Damiane'?'damiane':'oongka';
+  return prof+_r2b9Branch(b,list,ch)
+    +`<p class="r2b9-foot">Dieselben Skills als Abhängigkeitsbaum: <button type="button" class="r2b9-link" onclick="skTab('graph');renderSkillGraph('${g}')">Tab „🌳 Tree-Graph“ → ${ch}</button>.</p>`;
+}
+// Watch & Learn: Zeitleiste nach dem ersten Kapitel, das der Lernort nennt
+function _r2b9Watch(){
+  const W=typeof WATCH_AND_LEARN!=='undefined'?WATCH_AND_LEARN:[];
+  const allK=new Set([...KLIFF_STAMINA,...KLIFF_SPIRIT,...KLIFF_HEALTH].map(s=>s.name)),allD=new Set((typeof DAMIANE_SKILLS!=='undefined'?DAMIANE_SKILLS:[]).map(s=>s.name));
+  const rows=W.map((w,i)=>{
+    const m=/(?:(nach|ab)\s)?Kap\.\s?(\d+)(?:\/\d+)?/.exec(w.loc);
+    return {w,i,kap:m?+m[2]:99,kapT:m?m[0]:''};
+  }).sort((a,b)=>a.kap-b.kap||a.i-b.i);
+  const groups=[];rows.forEach(r=>{let g=groups[groups.length-1];if(!g||g.kap!==r.kap){g={kap:r.kap,items:[]};groups.push(g);}g.items.push(r);});
+  const card=({w,kapT})=>{
+    const alts=w.loc.split(/\s+ODER\s+/).map(x=>x.trim()).filter(Boolean),dam=/^Nur Damiane/.test(w.loc),life=/^Life Skill/.test(w.loc);
+    const ch=dam?'Damiane':'Kliff',tgt=dam?(allD.has(w.skill)?_r2b9Id('Damiane',w.skill):''):(allK.has(w.skill)?_r2b9Id('Kliff',w.skill):'');
+    // Kapitel steht schon an der Zeitleisten-Marke: Chip nur, wenn der Lernort mehr sagt („nach Kap. 4“, „Kap. 2/3“)
+    const chips=[kapT&&/^(nach|ab)\s|\//.test(kapT)?{t:kapT,c:'gold',i:'pin'}:'',alts.length>1?{v:alts.length,t:'Lernorte'}:'',dam?{t:'Nur Damiane',c:'violet'}:'',life?{t:'Life Skill',c:'ok'}:'',/\bBoss\b/.test(w.loc)?{t:'Boss',c:'red'}:'',w.miss?{t:'verpassbar',c:'red',i:'miss'}:''];
+    return cdFold({
+      title:w.skill,lead:alts[0],icon:_r2b9Icon(w.skill,ch),chips,tone:w.miss?'red':(dam?'violet':(life?'ok':'ice')),cls:'r2b9-wl'+(alts.length>1?' r2b9-wl--multi':''),
+      s:[w.skill,w.loc,w.miss?'verpassbar':'unkritisch','watch & learn'].join(' '),
+      body:()=>(alts.length>1?'<ol class="r2b9-alts">'+alts.map((a,k)=>`<li><span class="r2b9-alt-n">${k===0?'Ort':'oder'}</span><span>${cdEsc(a)}</span></li>`).join('')+'</ol>'
+          :'')/* ein einziger Lernort steht aufgeklappt schon vollständig als Kurzsatz im Kopf */
+        +cdFacts([['Status',w.miss?'verpassbar':'unkritisch'],['Kosten','Per Watch & Learn gelernte Skills kosten kein Artefakt.']])
+        +(w.miss?cdNote('Kann verpasst werden, Details im Text.',{kind:'miss'}):'')
+        +(tgt?'<p class="r2b9-go">'+cdGoLink('skills',tgt,'Zur Fähigkeit im Baum von '+ch)+'</p>':'')
+    });
+  };
+  return `<p class="r2b9-intro">${cdIcon('info')}<span>Fähigkeiten, die du dir bei NPCs und Bossen abschaust: kostet kein Artefakt. Sortiert nach dem ersten Kapitel, das der Lernort nennt.</span></p>`
+    +'<div class="r2b9-tl">'+groups.map(g=>`<section class="sk-grid r2b9-wlg">
+      <div class="r2b9-wlg-t" aria-hidden="true"><span class="r2b9-wlg-k">${g.kap<99?'Kap.':'ohne'}</span><span class="r2b9-wlg-n">${g.kap<99?g.kap:'Kap.'}</span></div><h3 class="r2b9-sr" data-toc>${g.kap<99?'Kapitel '+g.kap:'Ohne Kapitelangabe'}</h3>
+      <div class="cd-folds">${g.items.map(card).join('')}</div></section>`).join('')+'</div>';
+}
+// Freischalt-Leitfaden: Fähigkeiten nach Freischaltweg (Stichwort in Voraussetzung/Kosten), je Charakter
+const R2B9_UL=[
+  {k:'start',t:'Von Anfang an',g:'◆',tone:'ok',lead:'Voraussetzung „Default“: ohne Vorbedingung im Skill-Menü.',test:s=>/^Default/.test(s.prereq)},
+  {k:'open',t:'Freischaltweg offen',g:'?',tone:'slate',lead:'Für diesen Charakter nicht erfasst oder nicht belegt.',test:s=>/nicht erfasst|nicht (gesondert )?belegt/.test(s.prereq)},
+  {k:'abyss',t:'Abyss-Rätsel & Elemente',g:'✧',tone:'violet',lead:'Voraussetzung ist ein Element oder ein Rätsel im Abyss.',test:s=>/^(Element |Puzzle)/.test(s.prereq)},
+  {k:'auto',t:'Automatisch freigeschaltet',g:'↻',tone:'ice',lead:'Laut Voraussetzung oder Kosten ohne eigenen Kauf.',test:s=>/automatisch/i.test(s.cost)||/automatisch freigeschaltet/i.test(s.prereq)},
+  {k:'wl',t:'Auch per Watch & Learn',g:'◉',tone:'ice',lead:'Per Watch & Learn gelernte Skills kosten kein Artefakt.',test:s=>/Watch & Learn/.test(s.prereq)},
+  {k:'story',t:'Story, Quests & Forschung',g:'❖',tone:'gold',lead:'Voraussetzung nennt ein Kapitel, eine Quest oder eine Forschung.',test:s=>/Kap\.|Kapitel|Quest|Prolog|Forschung|Mission/.test(s.prereq)},
+  {k:'art',t:'Direkt mit Abyss-Artefakt',g:'◈',tone:'gold',lead:'Voraussetzung ist das Artefakt selbst.',test:s=>/^(Abyss Artifact|\d+ AA)/.test(s.prereq)},
+  {k:'lv',t:'Aufbauend auf Skill-Stufen',g:'⇡',tone:'amber',lead:'Voraussetzung ist die Stufe einer anderen Fähigkeit.',test:s=>/Lv\s?\d|Lv\b/.test(s.prereq)},
+  {k:'other',t:'Sonderfälle',g:'…',tone:'slate',lead:'Eigene Bedingungen, siehe Voraussetzung.',test:()=>true}
+];
+let _r2b9UlCh='Kliff';
+function _r2b9Unlock(){
+  const sets=Object.keys(R2B9_CH).map(ch=>{
+    const all=[];_r2b9Lists(ch).forEach(({b,list})=>list.forEach(s=>all.push({s,b})));
+    const cats=R2B9_UL.map(c=>({c,items:[]}));
+    all.forEach(x=>{cats.find(k=>k.c.test(x.s)).items.push(x);});
+    const off=ch!==_r2b9UlCh;
+    return `<div class="r2b9-ulset" data-ch="${ch}"${off?' hidden':''}><div class="cd-folds">`+cats.filter(k=>k.items.length).map(({c,items})=>{
+      const missN=items.filter(x=>_r2b9Miss(x.s,ch)).length;
+      const stack=items.map(x=>skillImg(x.s.name,ch)).filter(Boolean).slice(0,5).map(src=>`<img src="${cdEsc(src)}" alt="" loading="lazy" decoding="async" width="26" height="26">`).join('');
+      return cdFold({
+        title:c.t,lead:c.lead,icon:c.g,tone:c.tone,cls:'r2b9-ulg',attrs:{'data-cat':c.k},
+        chips:[{v:items.length,t:'Fähigkeiten',c:c.tone==='slate'?'':c.tone},missN?{v:missN,t:'verpassbar',c:'red',i:'miss'}:''],
+        aside:stack?'<span class="r2b9-stack" aria-hidden="true">'+stack+'</span>':'',
+        body:'<div class="r2b9-uls">'+items.map(({s,b})=>{
+          const id=_r2b9Id(ch,s.name),miss=_r2b9Miss(s,ch),tree=b.tree||ch;
+          return `<div class="r2b9-ul" style="--br:${b.acc}"${off?' data-filtered="1"':''} data-s="${cdEsc([s.name,ch,tree,s.prereq,s.cost].join(' ').toLowerCase())}">
+            <span class="r2b9-ul-dot" title="${cdEsc(b.tree?b.en:ch)}"></span>
+            <span class="r2b9-ul-h"><a class="r2b9-ul-n" href="${cdGoHref('skills',id)}" data-go="skills" data-goq="${cdEsc(id)}">${cdEsc(s.name)}</a>${b.tree?'<span class="r2b9-ul-tree">'+cdEsc(b.t)+'</span>':''}${miss?'<span class="r2b9-flag r2b9-flag--miss">'+cdIcon('miss')+'verpassbar</span>':''}</span>
+            <span class="r2b9-ul-p">${cdEsc(s.prereq)}</span>${_r2b9Cost(s.cost)}</div>`;}).join('')+'</div>'
+      });
+    }).join('')+'</div></div>';
+  }).join('');
+  const pills=cdPills(Object.keys(R2B9_CH).map(ch=>({v:ch,t:ch,n:_r2b9Lists(ch).reduce((a,x)=>a+x.list.length,0),on:ch===_r2b9UlCh})),{name:'r2b9-ulc',label:'Charakter',cls:'r2b9-ulpills'});
+  return `<p class="r2b9-intro">${cdIcon('key')}<span>Wie du jede Fähigkeit freischaltest, sortiert nach Weg. Ein Klick auf den Namen springt zur Fähigkeit im Baum.</span></p>`+pills+sets;
+}
+function _r2b9UlFilter(ch){
+  _r2b9UlCh=ch;
+  const pane=document.getElementById('skp-unlock');if(!pane)return;
+  pane.querySelectorAll('.r2b9-ulset').forEach(set=>{
+    const on=set.dataset.ch===ch;set.hidden=!on;
+    set.querySelectorAll('.r2b9-ul').forEach(r=>{if(on){delete r.dataset.filtered;r.classList.remove('hide');}else r.dataset.filtered='1';});
+  });
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(pane);
+}
+document.addEventListener('cd-pills',e=>{if(e.detail&&e.detail.name==='r2b9-ulc')_r2b9UlFilter(e.detail.value);});
+// Fehlende/kaputte Skill-Icons: Glyphe statt leerer Kachel
+document.addEventListener('error',e=>{
+  const t=e.target;if(!t||t.tagName!=='IMG'||!t.closest)return;
+  const ico=t.closest('#sec-skills .cd-fold-ico');
+  if(ico){const tt=ico.parentElement&&ico.parentElement.querySelector('.sk-n,.cd-fold-t');ico.innerHTML='<i class="cd-g" aria-hidden="true">'+cdEsc(tt?_r2b9Mono(tt.textContent):'✦')+'</i>';return;}
+  if(t.closest('#sec-skills .r2b9-stack')){
+    if(t.dataset.mono){const m=document.createElement('span');m.className='r2b9-mono';m.textContent=t.dataset.mono;t.replaceWith(m);}else t.remove();
+  }
+},true);
+// Erstaufbau: nur der sichtbare Reiter sofort, die übrigen im Leerlauf direkt danach (spätestens beim Reiterwechsel,
+// bei einer Suche oder einem Sprung). data-s aller Einträge ist damit nach dem ersten Bild vollständig.
+const R2B9_PANES={kliff:()=>_r2b9Kliff(),damiane:()=>_r2b9Other('Damiane'),oongka:()=>_r2b9Other('Oongka'),watch:()=>_r2b9Watch(),unlock:()=>_r2b9Unlock()};
+function _r2b9Pane(k){
+  const el=document.getElementById('skp-'+k);if(!el||el.dataset.r2b9||!R2B9_PANES[k])return false;
+  el.dataset.r2b9='1';el.innerHTML=R2B9_PANES[k]();return true;
+}
+function _r2b9RenderRest(){
+  let n=0;Object.keys(R2B9_PANES).forEach(k=>{if(_r2b9Pane(k))n++;});
+  if(n&&typeof _reapplyActiveSearch==='function'){const si=document.getElementById('si');if(si&&si.value.trim())_reapplyActiveSearch(document.getElementById('sec-skills'));}
 }
 function renderSkills(){
-  document.getElementById('skp-kliff').innerHTML=
-    '<div style="margin-bottom:10px;font-size:12px;color:var(--dim)">Stat-Maxima: HP 18 · Sta 14 · Spirit 12<br>Kosten: „AA“ = <strong>Abyss-Artefakt</strong> (Abyss Artifact), die Skillpunkt-Währung: in der Regel 1 Artefakt pro Skill bzw. Stufe. Eine Fundquelle sind die <span class="xref" role="link" tabindex="0" onclick="showSec(\'ruins\')">Uralten Ruinen (Abyss-Grenzsteine)</span>. Per Watch &amp; Learn gelernte Skills kosten kein Artefakt. Schreibweise: „1 AA“ = einmalig, „1 AA/Lv“ = je Stufe („mindestens bis Lv N“ nennt die höchste belegte Voraussetzung, nicht eine belegte Maximalstufe), „0 oder 1 AA“ = per Watch &amp; Learn kostenlos oder mit 1 Artefakt. Die Elementar-Skills (Flame/Frost/Lightning/Wind) schaltet der Abschluss der zugehörigen Abyss-Challenges frei (laut Fextralife für alle drei Charaktere, ohne Artefakt). Seit Patch 2.00.00 erhalten die anderen spielbaren Charaktere beim Erlernen per Abyss-Artefakt automatisch gleich viele <strong>Abyss-Verknüpfungen</strong> (Abyss Link); Zurücksetzen geht je Charakter einzeln.</div>'+
-    '<h3 class="sub-t" style="margin-top:0">Stamina Tree</h3><div class="sk-grid">'+KLIFF_STAMINA.map(s=>skCard(s,'Kliff')).join('')+'</div>'+
-    '<h3 class="sub-t">Spirit Tree</h3><div class="sk-grid">'+KLIFF_SPIRIT.map(s=>skCard(s,'Kliff')).join('')+'</div>'+
-    '<h3 class="sub-t">Health Tree / Elemente</h3><div class="sk-grid">'+KLIFF_HEALTH.map(s=>skCard(s,'Kliff')).join('')+'</div>';
-
-  document.getElementById('skp-damiane').innerHTML=
-    '<div class="card" style="margin-bottom:12px"><div class="ct">Damiane</div><div class="crows">'+
-    '<div class="crow"><span class="cl">Unlock</span><span class="cv">Kapitel 3, First Step to Rebuilding (Howling Hill Camp)</span></div>'+
-    '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">DEFAULT — kein Armed Combat Lv 5 nötig!</span></div>'+
-    '<div class="crow"><span class="cl">Flight</span><span class="cv">Mechanischer Glider (kein Magie-System), ab Freischaltung verfügbar. Skystep (Abyss-Fan) über die Scholastone-Forschung nach Kap. 4 (The Price of Knowledge); seit Patch 1.14.00 gleiche Eingabe wie Oongkas Vertical Flight</span></div>'+
-    '<div class="crow"><span class="cl">Kosten (2.00.00)</span><span class="cv">Seit Patch 2.00.00 (25.08.2026) lernt Damiane mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihr eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.</span></div>'+
-    '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Rush · Frost Mantle · Lightning Strike · Storm Pillar — der Elementfortschritt wird mit Kliff und Oongka geteilt: Wer ein Element mit einem Charakter freischaltet, hat es für alle (Fextralife)</span></div>'+
-    '</div></div>'+
-    '<h3 class="sub-t">Skill-Tree <span class="best-count">('+DAMIANE_SKILLS.length+')</span></h3><div class="sk-grid">'+
-    DAMIANE_SKILLS.map(s=>skCard(s,'Damiane')).join('')+'</div>'+
-    '<div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Dieselben Skills als Abhängigkeitsbaum: Tab „🌳 Tree-Graph“ → Damiane.</div>';
-
-  document.getElementById('skp-oongka').innerHTML=
-    '<div class="card" style="margin-bottom:12px"><div class="ct">Oongka</div><div class="crows">'+
-    '<div class="crow"><span class="cl">Unlock</span><span class="cv">Erstmals spielbar in Kap. 7: Nach der Begegnung mit Myurdin in Ashclaw Keep fällt Kliff aus, Oongka übernimmt bis zum Sieg über One-Armed Ludvig (Twisted Fate). Dauerhaft laut game8 erst nach der Greymane-Fraktionsquest Words Left by the Riverside (Kap. 8).</span></div>'+
-    '<div class="crow"><span class="cl">Quick Swap</span><span class="cv" style="color:var(--gold)">laut game8 ab Armed Combat Lv 5 (Fextralife: Default)</span></div>'+
-    '<div class="crow"><span class="cl">Flight</span><span class="cv">Kuku Rocket Pack: Fraktionsquest Fire Breathing Pack (Reihe The Giant&#39;s Leap, Kap. 8), Brief von Grimnir lesen. Vertical Flight über die Forschung „Machine Parts Research“ (questlog-Wissenseintrag: der Raketenrucksack lässt sich damit um Vertical Flight erweitern)</span></div>'+
-    '<div class="crow"><span class="cl">Kosten (2.00.00)</span><span class="cv">Seit Patch 2.00.00 (25.08.2026) lernt Oongka mit eigenen Abyss-Verknüpfungen: Jedes Abyss-Artefakt, das ein anderer Charakter für einen Skill ausgibt, schreibt ihm eine Verknüpfung gut. Skills lassen sich pro Charakter zurücksetzen.</span></div>'+
-    '<div class="crow"><span class="cl">Elemente</span><span class="cv">Flame Quake · Frost Mantle · Storm Howl · Lightning Pulse — der Elementfortschritt wird mit Kliff und Damiane geteilt: Wer ein Element mit einem Charakter freischaltet, hat es für alle (Fextralife)</span></div>'+
-    '</div></div>'+
-    '<h3 class="sub-t">Skill-Tree <span class="best-count">('+OONGKA_SKILLS.length+')</span></h3><div class="sk-grid">'+
-    OONGKA_SKILLS.map(s=>skCard(s,'Oongka')).join('')+'</div>'+
-    '<div style="font-size:var(--fs-11);color:var(--dim);margin-top:8px">Dieselben Skills als Abhängigkeitsbaum: Tab „🌳 Tree-Graph“ → Oongka.</div>';
-
-  document.getElementById('skp-watch').innerHTML=
-    '<div class="tw-wrap"><table><thead><tr><th>Skill</th><th>Lernort</th><th>Status</th></tr></thead><tbody>'+
-    WATCH_AND_LEARN.map(w=>`<tr><td><strong>${w.skill}</strong></td><td style="font-size:12px">${w.loc}</td><td>${w.miss?MISS_CHIP:'<span class="tag tg">unkritisch</span>'}</td></tr>`).join('')+
-    '</tbody></table></div>';
-  renderUnlockTable();
+  _r2b9Picks();
+  const act=document.querySelector('#sec-skills>.pane.active'),k=act?act.id.slice(4):'kliff';
+  _r2b9Pane(R2B9_PANES[k]?k:'kliff');
+  const sec=document.getElementById('sec-skills');
+  // eilige Fälle (Suche, globale Suche über alle Seiten, Sprung): sofort alles
+  const si=document.getElementById('si');
+  if((si&&si.value.trim())||!sec)_r2b9RenderRest();
+  else (window.requestIdleCallback||function(f){return setTimeout(f,60);})(_r2b9RenderRest,{timeout:400});
 }
 
 // ===== STATS =====
