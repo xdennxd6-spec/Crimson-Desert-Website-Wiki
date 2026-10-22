@@ -4969,6 +4969,175 @@ html:has(#si:not(:placeholder-shown)) .q5-clp-b{display:none}
 
 /* ---- Bereich Bauer 6 (nur B6 schreibt hier) ---- */
 /* R2-B6 Anfang */
+/* Checklisten (Bauer B6): Kategorien als schlanke Faltkarten mit Fortschrittsring um das Icon, Szene rechts,
+   echte Häkchen mit Sprung-Pfeil. Farbe je Kategorie: Bosse Gold, Greymane Blau, Sanctums Violett, Waffen Stahl,
+   Verpassbares Rot; Komplett = Grün. Alles hängt an .r2b6 (#cl-root). */
+@property --r2b6-p{syntax:'<number>';inherits:true;initial-value:0}
+.r2b6{display:grid;gap:14px}
+.r2b6-stack{gap:12px}
+.r2b6-hero{margin:0}
+.r2b6-hero .cd-hero-stat.r2b6-hot dd{color:var(--red)}
+.r2b6-hero .cd-hero-stat.r2b6-calm dd{color:var(--cd-ok)}
+/* Fortschrittsring: Kategorie-Icon und Link-Karten */
+.r2b6-cat{--r2b6-p:0}
+.r2b6-cat.r2b6-done,.r2b6-link.r2b6-done,.r2b6-done>summary>.cd-scene,.r2b6-link.r2b6-done>.cd-scene{--cd-acc:var(--cd-ok)!important}
+.r2b6-cat>summary{min-height:88px;padding-block:14px}
+/* Lesbarkeit über der Szene mit kleinem Schatten (10px-Unschärfe des Fundaments kostet mobil beim ersten Scrollen spürbar Malzeit) */
+.r2b6 .cd-fold:has(>summary>.cd-scene) .cd-fold-main{text-shadow:0 1px 3px color-mix(in srgb,var(--card) 85%,transparent)}
+.r2b6-cat .cd-fold-ico,.r2b6-ring{position:relative;display:grid;place-items:center;width:56px;height:56px;border:0;border-radius:50%;overflow:visible;color:var(--cd-acc);font-size:23px;
+  background:conic-gradient(var(--cd-acc) calc(var(--r2b6-p) * 1%),color-mix(in srgb,var(--cd-acc) 18%,var(--card)) 0)}
+/* Ring ohne Maske (billiger beim ersten Scrollen): innere Scheibe deckt die Mitte ab */
+.r2b6-cat .cd-fold-ico::before,.r2b6-ring::before{content:'';position:absolute;inset:4px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--cd-acc) 16%,var(--card)) 0 58%,color-mix(in srgb,var(--cd-acc) 5%,var(--card)) 100%)}
+.r2b6-cat .cd-fold-ico .cd-g,.r2b6-ring .cd-g{position:relative}
+html.cd-motion .r2b6-cat,html.cd-motion .r2b6-link{transition:--r2b6-p .7s cubic-bezier(.3,.7,.3,1)}
+/* Zähler rechts im Kopf */
+.r2b6-cnt{display:flex;flex-direction:column;align-items:flex-end;gap:3px;min-width:74px;white-space:nowrap}
+.r2b6-cnt-n{font-family:var(--f-mono);font-size:13px;font-weight:700;color:var(--dim);font-variant-numeric:tabular-nums}
+.r2b6-cnt-n b{margin-right:1px;font-size:22px;line-height:1;color:var(--ink-hi)}
+.r2b6-cnt-st{font-size:12px;font-weight:600;color:var(--cd-acc)}
+.r2b6-cat--pend:not(.r2b6-done) .r2b6-cnt-n b{color:var(--red)}
+.r2b6-done .r2b6-cnt-n b{color:var(--cd-ok)}
+.r2b6-cnt:empty{display:none}
+/* Feinschliff: Häkchen in der Farbe der Kategorie (Bosse Gold, Greymane Blau, Sanctums Violett, Waffen Stahl);
+   rote Kategorien haken golden ab (Rot bleibt Warnung), komplette Kategorien grün. Wert wird an der Kategorie aufgelöst
+   und vererbt, innere Faltkarten mit Regionsfarbe ändern ihn nicht. */
+.r2b6-cat{--r2b6-ck:var(--cd-acc)}
+.r2b6-cat--pend,.r2b6-cat--missables{--r2b6-ck:var(--gold)}
+.r2b6-cat.r2b6-done{--r2b6-ck:var(--cd-ok)}
+.r2b6 .cd-check-in:checked+.cd-check-box{background:var(--r2b6-ck,var(--gold));border-color:var(--r2b6-ck,var(--gold))}
+.r2b6 .cd-check-l:hover .cd-check-box{border-color:var(--r2b6-ck,var(--gold))}
+.r2b6 .cd-check:has(.cd-check-in:checked) .cd-check-t{text-decoration-color:color-mix(in srgb,var(--r2b6-ck,var(--gold)) 65%,transparent)}
+/* gerade komplett: Ring leuchtet einmal grün auf */
+html.cd-motion .r2b6-pop>summary>.cd-fold-ico,html.cd-motion .r2b6-link.r2b6-pop>.r2b6-ring{animation:r2b6Pop .8s cubic-bezier(.3,.7,.3,1);animation-duration:.8s!important}
+@keyframes r2b6Pop{0%{transform:scale(1);box-shadow:0 0 0 0 color-mix(in srgb,var(--cd-ok) 55%,transparent)}
+  30%{transform:scale(1.12)}100%{transform:scale(1);box-shadow:0 0 0 16px color-mix(in srgb,var(--cd-ok) 0%,transparent)}}
+/* Licht nur auf der Karte unter dem Zeiger: offene Karte dimmt, solange der Zeiger im Inhalt steht */
+.r2b6 .cd-fold[open]:has(>.cd-fold-body:hover)::after{opacity:0}
+.r2b6-cat>.cd-fold-body{gap:16px;padding:16px 18px 20px}
+.r2b6-cat>.cd-fold-body,.r2b6 .r2b6-grp>.cd-fold-body,.r2b6-sec{grid-template-columns:minmax(0,1fr)}
+/* innere Faltkarte: Pfeil nur bei der eigenen Öffnung drehen (Fundament-Regel .cd-fold[open] .cd-fold-arr greift sonst auf alle inneren) */
+.r2b6 .cd-fold:not([open])>summary .cd-fold-arr{transform:none;color:var(--dim);border-color:var(--line)}
+.r2b6 .cd-fold:not([open])>summary:hover .cd-fold-arr{color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
+/* innere Faltkarten (Kapitelabschnitte, Waffentypen) */
+.r2b6-grps{gap:8px}
+.r2b6 .r2b6-grp{border-radius:12px;background:color-mix(in srgb,var(--card) 72%,transparent);box-shadow:none}
+.r2b6 .r2b6-grp>summary{min-height:54px;padding:8px 12px 8px 18px;gap:4px 12px}
+.r2b6 .r2b6-grp .cd-fold-t{font-size:14.5px}
+.r2b6 .r2b6-grp .cd-fold-lead{font-size:12.5px}
+.r2b6 .r2b6-grp .cd-fold-arr{width:30px;height:30px}
+.r2b6 .r2b6-grp>.cd-fold-body{padding:12px;border-top-color:var(--line-soft)}
+.r2b6-gp .cd-prog-bar{width:72px}
+/* Gruppenköpfe ohne Faltung (Sanctums je Hexe, Verpassbares je Art); Klassen cl-group-* für das Ausblenden leerer Gruppen bei der Suche */
+.r2b6-sec{display:grid;gap:10px}
+.r2b6 .cl-group-hd{display:flex;align-items:center;gap:10px;margin:8px 0 0;padding:0 2px;background:none;border:0;border-radius:0}
+.r2b6 .cl-group-hd:first-child{margin-top:0}
+.r2b6-gh-tx{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;min-width:0}
+.r2b6 .cl-group-title{font-family:var(--f-display);font-size:14.5px;font-weight:700;letter-spacing:.01em;text-transform:none;color:var(--ink-hi)}
+.r2b6-gh-s{font-size:12.5px;color:var(--dim)}
+.r2b6-gh .r2b6-gp{margin-left:auto}
+.r2b6 .cl-group-body{margin:0;padding:0;border:0;border-radius:0;overflow:visible}
+.r2b6-gh-dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent)}
+/* Zeilen */
+.r2b6-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));align-items:start}
+.r2b6-grid--wp{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.r2b6 .cd-check-t{font-weight:600}
+.r2b6 .cd-check-sub{display:flex;flex-wrap:wrap;align-items:center;gap:3px 10px}
+.r2b6-dot{flex:none;width:8px;height:8px;margin-right:-4px;border-radius:50%;background:var(--c)}
+.r2b6-drop{color:var(--glo)}
+.r2b6-boss{color:color-mix(in srgb,var(--red) 70%,var(--text))}
+.r2b6-n{display:inline-block;min-width:24px;margin-right:6px;font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--cd-fx-spirit);font-variant-numeric:tabular-nums}
+.r2b6-gm .cd-check-sub{display:block;max-width:70ch}
+/* lange Greymane-Aufträge: 2 Zeilen, Aufklapper "Ganzer Auftrag" zeigt den vollen Text an ihrer Stelle */
+.r2b6 .r2b6-gm.r2b6-rich .cd-check-sub{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.r2b6 .r2b6-gm:has(>.r2b6-more[open]) .cd-check-sub{display:none}
+.r2b6-wp .cd-check-sub span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.r2b6-thumb{flex:none;width:34px;height:34px;object-fit:contain;padding:2px;border-radius:9px;background:color-mix(in srgb,var(--text) 6%,transparent)}
+.r2b6-thumb--none{display:grid;place-items:center;color:var(--dim);font-size:15px}
+.r2b6 .cd-check:has(.cd-check-in:checked) .r2b6-thumb{opacity:.5;filter:grayscale(.6)}
+/* Sprung-Pfeil mit Wort, wohin er führt */
+.r2b6 .cd-check-go{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:52px;padding:0 12px;font-size:12px;font-weight:600;white-space:nowrap}
+.r2b6 .cd-check-go::before{color:var(--dim);transition:color .15s}
+.r2b6 .cd-check-go:hover::before{color:inherit}
+.r2b6 .cd-check-go[data-go="bosses"]::before{content:"Boss"}
+.r2b6 .cd-check-go[data-go="weapons"]::before{content:"Waffe"}
+.r2b6 .cd-check-go[data-go="armor"]::before{content:"Rüstung"}
+.r2b6 .cd-check-go[data-go="witches"]::before{content:"Hexe"}
+.r2b6 .cd-check-go[data-go="quests"]::before{content:"Quest"}
+.r2b6 .cd-check-go[data-go="mounts"]::before{content:"Reittier"}
+.r2b6 .cd-check-go[data-go="npcs"]::before{content:"Person"}
+.r2b6 .cd-check-go[data-go="camp"]::before{content:"Camp"}
+.r2b6 .cd-check-go[data-go="chapters"]::before{content:"Kapitel"}
+.r2b6 .cd-check-go[data-go="checklists"]::before{content:"Liste"}
+#boss-cl-list .cd-check-go::before,#wep-cl-list .cd-check-go::before{display:none}
+#boss-cl-list .cd-check-go,#wep-cl-list .cd-check-go{min-width:50px;padding:0}
+/* Zeile mit Aufklapper (Tipp, Schwäche, Belohnung) */
+.r2b6 .r2b6-rich{flex-wrap:wrap}
+.r2b6 .r2b6-rich>.cd-check-go{border-radius:0 12px 0 0}
+.r2b6 .r2b6-more{flex:1 0 100%;order:5;min-width:0;max-width:100%;margin:0;border-top:1px solid var(--line-soft)}
+.r2b6 .r2b6-more>summary{min-width:0;overflow:hidden}
+.r2b6 .r2b6-more>summary{min-height:36px;margin:0;padding:6px 14px 6px 50px;border:0;border-radius:0 0 12px 12px;background:none;
+  font:600 12.5px/1.3 var(--f-body);letter-spacing:0;text-transform:none;color:var(--dim);gap:10px}
+.r2b6 .r2b6-more>summary::after{flex:none;color:var(--dim)}
+.r2b6-more-l{flex:none;color:var(--ink-hi)}
+.r2b6-more-pv{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:400;color:var(--dim)}
+.r2b6-more[open] .r2b6-more-pv{visibility:hidden}
+.r2b6 .r2b6-more>summary:hover{background:color-mix(in srgb,var(--text) 4%,transparent);color:var(--ink-hi)}
+.r2b6 .r2b6-more[open]>summary{background:none;color:var(--ink-hi)}
+.r2b6 .r2b6-more>summary:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+.r2b6-more-b{display:grid;gap:10px;padding:2px 14px 14px 50px;font-size:13.5px;line-height:1.6;color:var(--text)}
+.r2b6-more-b>p{margin:0;max-width:72ch}
+.r2b6-more-b .cd-facts--wide dd{max-width:70ch}
+/* Übersicht "noch offen" */
+.r2b6-pend .cd-check:has(.cd-check-in:checked):not(.r2b6-keep){display:none}
+html.cd-motion .r2b6-pend .r2b6-out{opacity:0;transition:opacity .3s ease;transition-duration:.3s!important}
+.r2b6-pend-empty{display:none;align-items:center;gap:8px;margin:0;padding:12px 14px;border:1px solid color-mix(in srgb,var(--cd-ok) 40%,transparent);border-radius:12px;
+  background:color-mix(in srgb,var(--cd-ok) 8%,transparent);color:var(--cd-ok);font-weight:600}
+.r2b6-pend.is-empty{display:none}
+.r2b6-pend.is-empty+.r2b6-pend-empty{display:flex}
+.r2b6-tag{--c:var(--dim);display:inline-flex;align-items:center;padding:1px 8px;border:1px solid color-mix(in srgb,var(--c) 42%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--c) 10%,transparent);color:var(--c);font-size:11.5px;font-weight:600;line-height:1.5}
+.r2b6-tag--waffe{--c:var(--gold)}.r2b6-tag--ruestung{--c:var(--cd-fx-def)}.r2b6-tag--quest{--c:var(--violet)}.r2b6-tag--mount{--c:var(--cd-fx-speed)}.r2b6-tag--true{--c:var(--red)}
+/* Weitere Checklisten (andere Seiten) */
+.r2b6-else-t{margin:10px 0 0}
+.r2b6-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:12px}
+.r2b6-link{--r2b6-p:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:14px;min-height:88px;padding:14px 16px 14px 18px;
+  border:1px solid var(--line);border-radius:14px;background:var(--panel-2);box-shadow:var(--shadow-soft);color:var(--text);text-decoration:none}
+.r2b6-link:hover{border-color:var(--line-strong)}
+.r2b6-link:hover .cd-fold-arr{color:var(--rhi);border-color:color-mix(in srgb,var(--red) 45%,transparent)}
+.r2b6-link:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.r2b6-link-m{display:flex;flex-direction:column;gap:3px;min-width:0;text-shadow:0 1px 3px color-mix(in srgb,var(--card) 85%,transparent)}
+.r2b6-link-t{font-family:var(--f-display);font-size:15.5px;font-weight:700;color:var(--ink-hi)}
+.r2b6-link-s{max-width:60ch;font-size:13px;line-height:1.45;color:var(--dim)}
+.r2b6-link .cd-fold-arr{grid-area:auto}
+.r2b6-link .r2b6-cnt{margin-right:6px}
+.r2b6-h4{margin:4px 0 -6px;font-family:var(--f-display);font-size:14px;color:var(--ink-hi)}
+.r2b6 .xp-row{margin:0}
+.r2b6 .xp-btn{min-height:42px;font-size:12px}
+.r2b6 .stats-strip{margin:0;background:var(--card);border-color:var(--line);box-shadow:none}
+.r2b6 .stat-label{font-size:11.5px;letter-spacing:.04em;text-transform:none;color:var(--dim)}
+.r2b6 .stat-sub{font-size:12px;color:var(--dim)}
+@media (max-width:600px){
+  .r2b6-cat>summary{min-height:76px}
+  .r2b6-cat .cd-fold-ico,.r2b6-ring{width:46px;height:46px;font-size:19px}
+  .r2b6-cnt{flex-direction:row;align-items:baseline;gap:8px;min-width:0}
+  .r2b6-cnt-n b{font-size:18px}
+  /* Kernfakten im Kategorie-Kopf kompakter (Verpassbares: 5 Chips in 2 statt 3 Zeilen), alles bleibt sichtbar */
+  .r2b6-cat>summary .cd-fold-chips{gap:5px;margin-top:3px}
+  .r2b6-cat>summary .cd-chip{min-height:22px;padding:1px 8px;gap:4px;font-size:11.5px}
+  .r2b6-cat>.cd-fold-body{padding:10px 10px 14px}
+  .r2b6 .r2b6-grp>.cd-fold-body{padding:8px}
+  .r2b6 .r2b6-grp>summary{padding:8px 10px 8px 14px}
+  .r2b6 .cd-check-l{padding:10px 12px;gap:10px}
+  .r2b6 .cd-check-go{min-width:46px;padding:0 10px}
+  .r2b6 .cd-check-go::before{display:none}
+  .r2b6 .r2b6-more>summary{min-height:40px;padding-left:12px}
+  .r2b6-link .r2b6-cnt{margin-right:0}
+  .r2b6-more-b{padding:2px 14px 14px}
+  .r2b6-link{grid-template-columns:auto minmax(0,1fr) auto;padding:12px 14px}
+  .r2b6-link .cd-fold-arr{display:none}
+  .r2b6-gp .cd-prog-bar{width:48px}
+}
 /* R2-B6 Ende */
 
 /* ---- Bereich Bauer 7 (nur B7 schreibt hier) ---- */
@@ -6219,95 +6388,22 @@ html:has(#si:not(:placeholder-shown)) .q5-clp-b{display:none}
 
   <section class="sec" id="sec-checklists">
     <h2 class="sec-t"><span class="sec-sym">☑</span> Checklisten</h2>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:7px 11px;background:rgba(201,162,39,.05);border:1px solid var(--bdr);border-radius:8px">↪ Die True-Ending-Checkliste steht auf der Seite <a href="#" onclick="showSec('quests');qTab('te');return false;">Quests</a> (erster Reiter). Dein Fortschritt dort zählt auch in der Übersicht unten.</div>
-    <div class="tabs">
-      <button type="button" class="tab active" id="clt-overview" onclick="clTab('overview')">Übersicht</button>
-      <button type="button" class="tab" id="clt-bosses" onclick="clTab('bosses')">⚔️ Bosse</button>
-      <button type="button" class="tab" id="clt-greymane" onclick="clTab('greymane')">🎖️ Greymane</button>
-      <button type="button" class="tab" id="clt-sanctums" onclick="clTab('sanctums')">🏛️ Sanctums</button>
-      <button type="button" class="tab" id="clt-waffen" onclick="clTab('waffen')">🗡️ Waffen</button>
-      <button type="button" class="tab" id="clt-missables" onclick="clTab('missables')">⚠️ Verpassbares</button>
-      <button type="button" class="tab" id="clt-sanctum-guide" onclick="clTab('sanctum-guide')">📋 Sanctum-Info</button>
-      <button type="button" class="tab" id="clt-export" onclick="clTab('export')">💾 Export</button>
-    </div>
-
-    <!-- ── Übersicht ── -->
-    <div class="pane active" id="clp-overview">
-      <div class="ov-grid" id="ov-grid"></div>
-      <div class="ov-warn-hd">⚠️ Nicht verpassen — noch ausstehend</div>
-      <div id="ov-miss-list" class="ov-miss-list"></div>
-    </div>
-
-    <!-- ── Bosse ── -->
-    <div class="pane" id="clp-bosses">
-      <div class="cl-hdr">
-        <span style="font-size:12px;color:var(--dim)" id="boss-cl-count"></span>
-        <button class="cl-reset" onclick="if(confirm('Alle Boss-Markierungen zurücksetzen?')){saveBossDone([]);renderBossChecklist();renderBosses();updateStats();}">Zurücksetzen</button>
+    <!-- R2-B6: Kategorien als Faltkarten (Renderer _r2b6Build). Die früheren Reiter-Knöpfe #clt-* bleiben verborgen für Deep-Links (&tab=) und clTab. -->
+    <div class="r2b6" id="cl-root">
+      <div class="r2b6-jump" hidden>
+        <button type="button" id="clt-overview" onclick="clTab('overview')">Nicht verpassen</button>
+        <button type="button" id="clt-bosses" onclick="clTab('bosses')">Bosse</button>
+        <button type="button" id="clt-greymane" onclick="clTab('greymane')">Greymane</button>
+        <button type="button" id="clt-sanctums" onclick="clTab('sanctums')">Sanctums</button>
+        <button type="button" id="clt-waffen" onclick="clTab('waffen')">Waffen</button>
+        <button type="button" id="clt-missables" onclick="clTab('missables')">Verpassbares</button>
+        <button type="button" id="clt-sanctum-guide" onclick="clTab('sanctum-guide')">Sanctum-Info</button>
+        <button type="button" id="clt-export" onclick="clTab('export')">Export</button>
       </div>
-      <div id="boss-cl-list"></div>
-    </div>
-
-    <!-- ── Greymane ── -->
-    <div class="pane" id="clp-greymane">
-      <div class="cl-hdr">
-        <span style="font-size:12px;color:var(--dim)" id="gm-cl-count"></span>
-        <button class="cl-reset" onclick="if(confirm('Alle Commissions zurücksetzen?')){saveGM([]);renderGreymane();updateStats();}">Zurücksetzen</button>
-      </div>
-      <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:14px;padding:8px 12px;background:var(--card);border-radius:6px;border:1px solid var(--bdr)">Jede Commission gibt <span style="color:var(--gold);font-weight:600">+3 Inventarslots</span>. Alle 27 = <span style="color:var(--gold);font-weight:600">+81 Slots</span>. Für das versteckte Ende nicht erforderlich.</div>
-      <div id="gm-list"></div>
-    </div>
-
-    <!-- ── Sanctums ── -->
-    <div class="pane" id="clp-sanctums">
-      <div class="cl-hdr">
-        <span style="font-size:12px;color:var(--dim)" id="sanc-cl-count"></span>
-        <button class="cl-reset" onclick="if(confirm('Sanctum-Fortschritt zurücksetzen?')){let d=loadTE().filter(id=>!SANCTUM_IDS.includes(id));saveTE(d);renderSanctumChecklist();updateStats();}">Zurücksetzen</button>
-      </div>
-      <div id="sanc-cl-list"></div>
-    </div>
-
-    <!-- ── Waffen ── -->
-    <div class="pane" id="clp-waffen">
-      <div class="cl-hdr">
-        <span style="font-size:12px;color:var(--dim)" id="wep-cl-count"></span>
-        <button class="cl-reset" onclick="if(confirm('Waffen-Fortschritt zurücksetzen?')){saveWepDone([]);renderWeaponChecklist();updateStats();}">Zurücksetzen</button>
-      </div>
-      <div id="wep-cl-list"></div>
-    </div>
-
-    <!-- ── Missables (new) ── -->
-    <div class="pane" id="clp-missables">
-      <div class="cl-hdr">
-        <span style="font-size:12px;color:var(--dim)" id="ms-cl-count"></span>
-        <button class="cl-reset" onclick="if(confirm('Fortschritt bei Verpassbarem zurücksetzen?')){saveMissDone([]);renderMissableChecklist();renderOverview();}">Zurücksetzen</button>
-      </div>
-      <div style="font-size:var(--fs-11-5);color:var(--dim);margin-bottom:14px;padding:9px 12px;background:rgba(212,116,42,.04);border:1px solid rgba(212,116,42,.2);border-radius:6px">Einmalige Items, zeitkritische Quests und Story-Weichen. Hake sie ab, sobald sie erledigt sind; sie verschwinden dann aus der Übersicht.</div>
-      <div id="ms-cl-list"></div>
-    </div>
-
-    <!-- ── Sanctum-Info ── -->
-    <div class="pane" id="clp-sanctum-guide">
-      <div class="sanc-guide-grid" id="sg-grid"></div>
-    </div>
-    <div class="pane" id="clp-export">
-      <h3 class="sub-t" style="margin-top:0">Fortschritt exportieren / importieren</h3>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:12px">Exportiere deinen kompletten Fortschritt (Bosse, True Ending, Greymane, Waffen, Verpassbares, Kapitel, Favoriten, Notizen, Kommentare, eigene Builds) als JSON. Kann jederzeit wieder importiert werden.</div>
-      <div style="font-size:12px;color:var(--warn);margin-bottom:12px;line-height:1.6">⚠ Dein Fortschritt wird nur in diesem Browser gespeichert: Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren. Nur die True-Ending-Checkliste lässt sich zusätzlich per Sync-Code (Menü, „🔑 Sync“) auf andere Geräte übertragen.</div>
-      <div class="xp-row">
-        <button class="xp-btn pri" onclick="exportProgress()">Fortschritt exportieren (JSON)</button>
-        <button class="xp-btn" onclick="document.getElementById('import-file').click()">Fortschritt importieren</button>
-        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importProgress(this)">
-      </div>
-      <div style="margin-top:22px" class="sub-t">Keyboard-Shortcuts</div>
-      <div class="card" style="max-width:380px">
-        <div class="crows">
-          <div class="crow"><span class="cl"><span class="kbd">Ctrl K</span></span><span class="cv">Suchfeld fokussieren</span></div>
-          <div class="crow"><span class="cl"><span class="kbd">Esc</span></span><span class="cv">Suche leeren / Menü schließen</span></div>
-          <div class="crow"><span class="cl">↑ Button</span><span class="cv">Zurück nach oben (ab 300 px Scroll)</span></div>
-        </div>
-      </div>
-      <div style="margin-top:22px" class="sub-t">Gesamt-Fortschritt</div>
-      <div class="stats-strip" id="export-stats-strip" style="margin-bottom:0"></div>
+      <div id="cl-hero"></div>
+      <div class="cd-folds r2b6-stack" id="cl-stack"></div>
+      <div class="r2b6-else" id="cl-else"></div>
+      <div class="cd-folds r2b6-stack" id="cl-tail"></div>
     </div>
   </section>
 
@@ -13013,111 +13109,8 @@ function toggleGM(id){
   if(typeof checkAchievements==='function')checkAchievements();
   if(typeof renderAchievements==='function')renderAchievements();
 }
-function renderGreymane(){
-  const done=loadGM();
-  const dc=done.length;
-  const cnt=document.getElementById('gm-cl-count');
-  if(cnt)cnt.textContent=dc+'/'+GREYMANE_COMMISSIONS.length+' abgeschlossen (+'+dc*3+' Inventarslots)';
-  const regions=[...new Set(GREYMANE_COMMISSIONS.map(c=>c.region))];
-  document.getElementById('gm-list').innerHTML=regions.map(reg=>{
-    const items=GREYMANE_COMMISSIONS.filter(c=>c.region===reg);
-    const rdc=items.filter(c=>done.includes(c.id)).length;
-    const pct=Math.round(rdc/items.length*100);
-    return `<div class="cl-group-hd">
-      <span class="cl-group-title">${reg}</span>
-      <span class="cl-group-ct">${rdc}/${items.length} · +${rdc*3} Slots</span>
-    </div>
-    <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
-    <div class="cl-group-body">${items.map(c=>`
-      <div class="comm-it${done.includes(c.id)?' done':''}" onclick="toggleGM('${c.id}')">
-        <div class="chk${done.includes(c.id)?' on':''}" role="checkbox" aria-checked="${done.includes(c.id)?'true':'false'}" aria-label="${escHtml(c.name)}" tabindex="0"></div>
-        <div class="comm-num">${String(c.n).padStart(2,'0')}</div>
-        <div class="comm-body">
-          <div class="comm-tx">${c.name} <span style="color:var(--dim);font-size:var(--fs-10-5)">· Kap. ${c.chapter}</span></div>
-          <div class="comm-rew">${c.reward}</div>
-          ${c.note?`<div class="comm-note">${c.note}</div>`:''}
-        </div>
-      </div>`).join('')}</div>`;
-  }).join('');
-  _reapplyActiveSearch(document.getElementById('gm-list'));
-}
 
-// ===== BOSS CHECKLIST =====
-function renderBossChecklist(){
-  const done=loadBossDone();
-  const dc=done.length;
-  const cnt=document.getElementById('boss-cl-count');
-  if(cnt)cnt.textContent=dc+'/'+BOSSES.length+' Bosse besiegt';
-  const groups=[
-    {label:'Hernand — Kapitel 1–4',filter:b=>b.chapter&&b.chapter<=4},
-    {label:'Pailune & Crow\'s Nest — Kapitel 5–7',filter:b=>b.chapter&&b.chapter>=5&&b.chapter<=7},
-    {label:'Demeniss & Delesyia — Kapitel 8–9',filter:b=>b.chapter&&b.chapter>=8&&b.chapter<=9},
-    {label:'The Abyss & Endgame — Kapitel 10–12',filter:b=>b.chapter&&b.chapter>=10},
-    {label:'Side-Bosse & Faction',filter:b=>!b.chapter},
-  ];
-  const itemHtml=b=>`<div class="comm-it${done.includes(b.name)?' done':''}" onclick="toggleBossDone('${b.name.replace(/'/g,"\\'")}')">
-    <div class="chk${done.includes(b.name)?' on':''}" role="checkbox" aria-checked="${done.includes(b.name)?'true':'false'}" aria-label="${escHtml(b.name)}" tabindex="0"></div>
-    <div class="comm-body">
-      <div class="comm-tx" style="font-weight:600">${b.name}
-        <span style="color:var(--dim);font-size:var(--fs-10-5);font-weight:400"> · ${b.chapter?'Kap. '+b.chapter:'Side'} · ${normReg(b.region)||b.region.split(' - ')[0]}</span>
-      </div>
-      ${b.drop_weapon!=='–'?`<div class="comm-rew">Drop: ${b.drop_weapon}</div>`:''}
-      ${b.weakness!=='–'?`<div class="comm-note">Schwäche: ${b.weakness}</div>`:''}
-    </div>
-  </div>`;
-  document.getElementById('boss-cl-list').innerHTML=groups.map(g=>{
-    const items=BOSSES.filter(g.filter);
-    if(!items.length)return'';
-    const gdc=items.filter(b=>done.includes(b.name)).length;
-    const pct=Math.round(gdc/items.length*100);
-    return `<div class="cl-group-hd">
-      <span class="cl-group-title">${g.label}</span>
-      <span class="cl-group-ct">${gdc}/${items.length}</span>
-    </div>
-    <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
-    <div class="cl-group-body">${items.map(itemHtml).join('')}</div>`;
-  }).join('');
-  _reapplyActiveSearch(document.getElementById('boss-cl-list'));
-}
-
-// ===== SANCTUM CHECKLIST =====
-function renderSanctumChecklist(){
-  const done=loadTE();
-  const dc=done.filter(id=>SANCTUM_IDS.includes(id)).length;
-  const cnt=document.getElementById('sanc-cl-count');
-  if(cnt)cnt.textContent=dc+'/'+SANCTUM_DATA.length+' Sanctums abgeschlossen';
-  const groups=[
-    {label:'Elowen (Weisheit) — Sanctums in Hernand',ids:['te8','te5','te6','te7']},
-    {label:'Bari (Güte) — Sanctums in Pailune / Hernand',ids:['te9','te11','te10','te13']},
-    {label:'Lyselia (Demut) — Sanctums in Delesyia',ids:['te17','te29','te30','te31']},
-    {label:'Areciel (Stärke) — Sanctums in Demeniss / am Red River',ids:['te12','te14','te15']},
-    {label:'Story Kap. 9 (Veiled Witch) — Demeniss',ids:['te16']},
-  ];
-  const itemHtml=s=>`<div class="comm-it${done.includes(s.id)?' done':''}" onclick="toggleTE('${s.id}');renderSanctumChecklist();updateStats();">
-    <div class="chk${done.includes(s.id)?' on':''}" role="checkbox" aria-checked="${done.includes(s.id)?'true':'false'}" aria-label="${escHtml(s.name)}" tabindex="0"></div>
-    <div class="comm-body">
-      <div class="comm-tx" style="font-weight:600">${s.name}
-        <span style="color:var(--dim);font-size:var(--fs-10-5);font-weight:400"> · ${s.region}</span>
-      </div>
-      ${s.note?`<div class="comm-note">${s.note}</div>`:''}
-    </div>
-  </div>`;
-  document.getElementById('sanc-cl-list').innerHTML=groups.map(g=>{
-    const items=g.ids.map(id=>SANCTUM_DATA.find(s=>s.id===id)).filter(Boolean);
-    if(!items.length)return'';
-    const gdc=items.filter(s=>done.includes(s.id)).length;
-    const pct=Math.round(gdc/items.length*100);
-    return `<div class="cl-group-hd">
-      <span class="cl-group-title">${g.label}</span>
-      <span class="cl-group-ct">${gdc}/${items.length}</span>
-    </div>
-    <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
-    <div class="cl-group-body">${items.map(itemHtml).join('')}</div>`;
-  }).join('');
-  _reapplyActiveSearch(document.getElementById('sanc-cl-list'));
-}
-
-// ===== WEAPON CHECKLIST =====
+// ===== WEAPON CHECKLIST (Speicher) =====
 function loadWepDone(){return lsJson('cd_wep',[]);}
 function saveWepDone(a){lsSet('cd_wep',JSON.stringify(a));updateStats();}
 function toggleWep(name){
@@ -13125,120 +13118,429 @@ function toggleWep(name){
   d=d.includes(name)?d.filter(x=>x!==name):[...d,name];
   saveWepDone(d);renderWeaponChecklist();
 }
-function renderWeaponChecklist(){
-  const done=loadWepDone();
-  const dc=done.length;
-  const cnt=document.getElementById('wep-cl-count');
-  if(cnt)cnt.textContent=dc+'/'+WEAPONS.length+' Waffen gesammelt';
-  const types=[...new Set(WEAPONS.map(w=>w.type))];
-  const itemHtml=w=>`<div class="comm-it${done.includes(w.name)?' done':''}" onclick="toggleWep('${w.name.replace(/'/g,"\\'")}')">
-    <div class="chk${done.includes(w.name)?' on':''}" role="checkbox" aria-checked="${done.includes(w.name)?'true':'false'}" aria-label="${escHtml(w.name)}" tabindex="0"></div>
-    ${WEAPON_IMGS[w.name]?`<img src="${WEAPON_IMGS[w.name]}" loading="lazy" decoding="async" alt="" style="width:28px;height:28px;object-fit:contain;background:rgba(255,255,255,.04);border-radius:8px;padding:2px;flex-shrink:0;margin-top:1px" onerror="if(_fexFb(this))return;this.style.display='none'">`:''}
-    <div class="comm-body">
-      <div class="comm-tx" style="font-weight:600">${w.name}</div>
-      <div class="comm-note">${w.source}</div>
-    </div>
-  </div>`;
-  document.getElementById('wep-cl-list').innerHTML=types.map(type=>{
-    const items=WEAPONS.filter(w=>w.type===type);
-    const tdc=items.filter(w=>done.includes(w.name)).length;
-    const pct=Math.round(tdc/items.length*100);
-    return `<div class="cl-group-hd">
-      <span class="cl-group-title">${type}</span>
-      <span class="cl-group-ct">${tdc}/${items.length}</span>
-    </div>
-    <div class="cl-group-bar"><div class="cl-group-fill" style="width:${pct}%"></div></div>
-    <div class="cl-group-body">${items.map(itemHtml).join('')}</div>`;
-  }).join('');
-  _reapplyActiveSearch(document.getElementById('wep-cl-list'));
+
+/* ==== R2-B6 Checklisten (Redesign 2, Bauer B6) ====
+   Jede Kategorie ist eine schlanke Faltkarte (cdFold) mit Szene rechts und Fortschrittsring um das Icon; aufgeklappt
+   stehen echte Häkchen (cdCheck) mit Sprung-Pfeil zur passenden Seite (cdGo, Rückfall: globale Suche).
+   Zustand bleibt in den bisherigen Schlüsseln cd_bosses, cd_gm, cd_te (Sanctums), cd_wep, cd_ms und läuft über die
+   bisherigen toggle-Funktionen (Zähler, Sync-Code, Erfolge, Bosskarten). Die Übersicht "noch offen" und die
+   Detaillisten haben eigene Checkboxen (ID b6|<Ansicht>|<Speicher>|<Eintrag>); _r2b6Sync() zieht nach jeder
+   Änderung alle Häkchen, Ringe und Zähler nach. Die Renderer-Namen aus SEC_RENDERERS bleiben, sie bauen beim
+   ersten Aufruf die Seite und gleichen danach nur ab. */
+var _r2b6={built:false,wired:false,model:null,pend:false,hv:null};
+const R2B6_BOSS_GROUPS=[
+  {t:'Hernand',s:'Kapitel 1 bis 4',region:'Hernand',f:b=>b.chapter&&b.chapter<=4},
+  {t:"Pailune & Crow's Nest",s:'Kapitel 5 bis 7',region:'Pailune',f:b=>b.chapter&&b.chapter>=5&&b.chapter<=7},
+  {t:'Demeniss & Delesyia',s:'Kapitel 8 bis 9',region:'Demeniss',f:b=>b.chapter&&b.chapter>=8&&b.chapter<=9},
+  {t:'The Abyss & Endgame',s:'Kapitel 10 bis 12',region:'The Abyss',f:b=>b.chapter&&b.chapter>=10},
+  {t:'Side-Bosse & Fraktionen',s:'ohne Kapitelbindung',tone:'gold',f:b=>!b.chapter}
+];
+const R2B6_SANC_GROUPS=[
+  {t:'Elowen (Weisheit)',s:'Sanctums in Hernand',witch:'Hexe Elowen',ids:['te8','te5','te6','te7']},
+  {t:'Bari (Güte)',s:'Sanctums in Pailune / Hernand',witch:'Hexe Bari',ids:['te9','te11','te10','te13']},
+  {t:'Lyselia (Demut)',s:'Sanctums in Delesyia',witch:'Hexe Lyselia',ids:['te17','te29','te30','te31']},
+  {t:'Areciel (Stärke)',s:'Sanctums in Demeniss / am Red River',witch:'Hexe Areciel',ids:['te12','te14','te15']},
+  {t:'Story Kap. 9 (Veiled Witch)',s:'Demeniss',go:['chapters','ch-9','Zu Kapitel 9'],ids:['te16']}
+];
+/* Sprungziele der Verpassbaren, die nicht schon per Namen in WEAPONS/ARMOR stehen (nur Navigation, keine Spielfakten) */
+const R2B6_MS_GO={ms2:['weapons','Tauria Curved Sword'],ms4:['weapons','Hollow Visage'],ms6:['witches','Hexe Elowen'],
+  ms7:['quests','Strength Held in the Fingertips'],ms8:['quests','Words Left by the Riverside'],ms9:['witches','Hexe Lyselia'],
+  ms10:['mounts','Snowwhite Deer'],ms11:['mounts','Icicle Edge Alpine Ibex'],ms12:['mounts','Rock Tusk Warthog'],
+  ms13:['checklists','clp-greymane','Zu den Greymane Commissions'],ms14:['quests','qp-te','Zur True-Ending-Checkliste'],ms15:['bosses','Corrupted Caliburn']};
+const R2B6_GO_LBL={bosses:'Zum Boss',weapons:'Zur Waffe',armor:'Zur Rüstung',witches:'Zur Hexe',quests:'Zur Quest',mounts:'Zum Reittier',
+  npcs:'Zur Person',camp:'Zum Camp',chapters:'Zum Kapitel',checklists:'Zur Liste'};
+const R2B6_MS_TAG={'Waffe':'waffe','Rüstung':'ruestung','Quest':'quest','Mount':'mount','True Ending':'true'};
+const R2B6_OPEN_KEY='cd_r2_b6_open';
+
+/* Gedankenstriche aus Datentexten nur in der Anzeige ersetzen (Titel/Zeitpunkt: Doppelpunkt, Fließtext: Komma) */
+function _r2b6D(s,prose){return String(s==null?'':s).replace(/\s+—\s+/g,prose?', ':': ');}
+function _r2b6Go1(sec,q,name,label){return {sec:sec,q:q,label:label||((R2B6_GO_LBL[sec]||'Hinspringen')+': '+(name||q))};}
+/* cdCheck plus: attrs (am Zeilenkopf), thumb (Bild vor dem Text), more ({label, html}: Aufklapper unter der Zeile) */
+function _r2b6Ck(o){
+  let h=cdCheck(o);
+  if(o.attrs){const a=Object.keys(o.attrs).filter(k=>o.attrs[k]!=null&&o.attrs[k]!=='').map(k=>k+'="'+cdEsc(o.attrs[k])+'"').join(' ');if(a)h=h.replace(/^<div /,'<div '+a+' ');}
+  if(o.thumb)h=h.replace('<span class="cd-check-txt">',o.thumb+'<span class="cd-check-txt">');
+  if(o.more){
+    const pv=o.more.pv?'<span class="r2b6-more-pv">'+cdEsc(o.more.pv)+'</span>':'';
+    const m='<details class="item-more r2b6-more"><summary><span class="r2b6-more-l">'+cdEsc(o.more.label)+'</span>'+pv+'</summary><div class="r2b6-more-b">'+o.more.html+'</div></details>';
+    h=/<\/div>$/.test(h)?h.replace(/<\/div>$/,m+'</div>'):h+m;
+  }
+  return h;
 }
+function _r2b6Sets(){
+  return {bo:new Set(loadBossDone()),gm:new Set(loadGM()),te:new Set(loadTE()),wp:new Set(loadWepDone()),ms:new Set(loadMissDone())};
+}
+/* Kategorien → Gruppen → Eintrags-IDs (Zähler und Ringe rechnen daraus, nicht aus dem DOM: Waffen-Gruppen sind lazy) */
+function _r2b6Model(){
+  if(_r2b6.model)return _r2b6.model;
+  const wt=[...new Set(WEAPONS.map(w=>w.type))],mc=[...new Set(MISSABLE_ITEMS.map(m=>m.cat))];
+  const sd=SANCTUM_DATA.map(s=>s.id),inG=new Set(R2B6_SANC_GROUPS.flatMap(g=>g.ids)),rest=sd.filter(id=>!inG.has(id));
+  const sg=R2B6_SANC_GROUPS.map(g=>g.ids.filter(id=>sd.includes(id)));
+  if(rest.length)sg.push(rest);
+  return _r2b6.model={
+    bosses:{store:'bo',fid:'clp-bosses',groups:R2B6_BOSS_GROUPS.map(g=>BOSSES.filter(g.f).map(b=>b.name))},
+    greymane:{store:'gm',fid:'clp-greymane',groups:[GREYMANE_COMMISSIONS.map(c=>c.id)]},
+    sanctums:{store:'te',fid:'clp-sanctums',groups:sg,rest:rest},
+    waffen:{store:'wp',fid:'clp-waffen',types:wt,groups:wt.map(t=>WEAPONS.filter(w=>w.type===t).map(w=>w.name))},
+    missables:{store:'ms',fid:'clp-missables',cats:mc,groups:mc.map(c=>MISSABLE_ITEMS.filter(m=>m.cat===c).map(m=>m.id))}
+  };
+}
+function _r2b6Cnt(d,t,word){
+  const p=t?Math.round(d/t*100):0;
+  return '<span class="r2b6-cnt-n"><b>'+d+'</b>/'+t+'</span><span class="r2b6-cnt-st">'+(t&&d>=t?'Komplett':(word||p+' %'))+'</span>';
+}
+function _r2b6Gh(t,s,key,done,total,tag){
+  return '<div class="cl-group-hd r2b6-gh">'+(tag||'')+'<span class="r2b6-gh-tx"><span class="cl-group-title">'+cdEsc(t)+'</span>'
+    +(s?'<span class="r2b6-gh-s">'+cdEsc(s)+'</span>':'')+'</span><span class="r2b6-gp" data-r2b6-g="'+key+'" data-v="'+done+'/'+total+'">'+cdProg(done,total)+'</span></div>';
+}
+
+/* ---- Zeilen je Kategorie ---- */
+function _r2b6BossRow(b,S){
+  const reg=(typeof normReg==='function'&&normReg(b.region))||String(b.region||'').split(' - ')[0];
+  const col=cdTone({region:reg}),drop=b.drop_weapon&&b.drop_weapon!=='–'?b.drop_weapon:'',weak=b.weakness&&b.weakness!=='–'?b.weakness:'';
+  const meta=(b.chapter?'Kap. '+b.chapter:'Side')+', '+reg;
+  return _r2b6Ck({key:'',id:'b6|c|bo|'+b.name,checked:S.bo.has(b.name),title:b.name,
+    sub:{h:(col?'<i class="r2b6-dot" style="--c:'+cdEsc(col)+'"></i>':'')+'<span>'+cdEsc(meta)+'</span>'+(drop?'<span class="r2b6-drop">Drop: '+cdEsc(_r2b6D(drop))+'</span>':'')},
+    cls:'r2b6-row'+(weak?' r2b6-rich':''),go:_r2b6Go1('bosses',b.name),
+    s:[b.name,meta,b.region,drop?'Drop: '+drop:'',weak?'Schwäche: '+weak:''].join(' '),
+    attrs:weak?{'data-go-id':'cl-bo-'+cdSlug(b.name),'data-item-visible':[b.name,meta,drop].join(' '),'data-item-hidden':weak}:{'data-go-id':'cl-bo-'+cdSlug(b.name)},
+    more:weak?{label:'Schwäche',pv:_r2b6D(weak,1),html:'<p>'+cdEsc(_r2b6D(weak,1))+'</p>'}:null});
+}
+function _r2b6GmRow(c,S,npc){
+  const who=String(c.name).replace(/'s Request$/,'');
+  const go=npc.has(who)?_r2b6Go1('npcs',who):_r2b6Go1('camp','Greymane Commissions','','Zum Graumähnen-Camp');
+  /* lange Aufträge: eingeklappt 2 Zeilen, voller Text im Aufklapper (ersetzt dann die gekürzte Zeile) */
+  const note=_r2b6D(c.note,1),long=note.length>150;
+  return _r2b6Ck({key:'',id:'b6|c|gm|'+c.id,checked:S.gm.has(c.id),
+    title:{h:'<span class="r2b6-n">'+cdEsc(String(c.n).padStart(2,'0'))+'</span>'+cdEsc(c.name)},sub:note,
+    cls:'r2b6-row r2b6-gm'+(long?' r2b6-rich':''),go:go,s:[c.name,c.note,c.reward,c.region].join(' '),
+    attrs:long?{'data-go-id':'cl-'+c.id,'data-item-visible':c.name,'data-item-hidden':c.note}:{'data-go-id':'cl-'+c.id},
+    more:long?{label:'Ganzer Auftrag',html:'<p>'+cdEsc(note)+'</p>'}:null});
+}
+function _r2b6SancRow(s,g,S){
+  const gd=(typeof SANCTUM_GUIDE!=='undefined'&&SANCTUM_GUIDE.find(x=>x.name===s.name))||null;
+  const boss=gd&&gd.boss&&gd.boss!=='–'?gd.boss:'',facts=[],hid=[];
+  if(gd){
+    facts.push(['Voraussetzung',_r2b6D(gd.req,1)],['Belohnung',_r2b6D(gd.reward,1)]);
+    if(boss)facts.push(['Boss',{h:cdGoLink('bosses',boss,boss)}]);
+    facts.push(['Tipp',_r2b6D(gd.tip,1)]);
+    if(gd.region&&gd.region!==s.region)facts.push(['Lage laut Sanctum-Info',_r2b6D(gd.region,1)]);
+    hid.push(gd.req,gd.reward,gd.tip,gd.region);
+  }
+  if(s.note){facts.push(['Notiz',_r2b6D(s.note,1)]);hid.push(s.note);}
+  const go=g&&g.witch?_r2b6Go1('witches',g.witch):g&&g.go?_r2b6Go1(g.go[0],g.go[1],'',g.go[2]):null;
+  return _r2b6Ck({key:'',id:'b6|c|te|'+s.id,checked:S.te.has(s.id),title:s.name,
+    sub:{h:'<span>'+cdEsc(_r2b6D(s.region))+'</span>'+(boss?'<span class="r2b6-boss">Boss: '+cdEsc(boss)+'</span>':'')},
+    cls:'r2b6-row'+(facts.length?' r2b6-rich':''),go:go,s:[s.name,s.region,g?g.t:'',boss].concat(hid).join(' '),
+    attrs:{'data-go-id':'cl-'+s.id,'data-item-visible':[s.name,s.region,boss].join(' '),'data-item-hidden':hid.join(' ')},
+    more:facts.length?{label:gd?'Belohnung & Tipp':'Notiz',pv:gd?_r2b6D(gd.reward,1):_r2b6D(s.note,1),html:cdFacts(facts,{wide:true})}:null});
+}
+function _r2b6WepRow(w,S){
+  const img=typeof WEAPON_IMGS!=='undefined'&&WEAPON_IMGS[w.name];
+  const src=w.source&&String(w.source).trim()?_r2b6D(w.source,1):'';
+  return _r2b6Ck({key:'',id:'b6|c|wp|'+w.name,checked:S.wp.has(w.name),title:w.name,
+    sub:src?{h:'<span title="'+cdEsc(src)+'">'+cdEsc(src)+'</span>'}:'',cls:'r2b6-row r2b6-wp',go:_r2b6Go1('weapons',w.name),
+    s:[w.name,w.type,w.source||''].join(' '),
+    thumb:img?'<img class="r2b6-thumb" src="'+cdEsc(img)+'" alt="" width="34" height="34" loading="lazy" decoding="async" onerror="if(window._fexFb&&_fexFb(this))return;this.remove()">'
+      :'<span class="r2b6-thumb r2b6-thumb--none" aria-hidden="true"><i class="cd-g">⚔</i></span>'});
+}
+function _r2b6MsGo(m){
+  const g=R2B6_MS_GO[m.id];if(g)return _r2b6Go1(g[0],g[1],'',g[2]);
+  if(WEAPONS.some(w=>w.name===m.name))return _r2b6Go1('weapons',m.name);
+  if(typeof ARMOR!=='undefined'&&ARMOR.some(a=>a.name===m.name))return _r2b6Go1('armor',m.name);
+  return null;
+}
+function _r2b6MsTag(cat){return '<span class="r2b6-tag r2b6-tag--'+(R2B6_MS_TAG[cat]||'quest')+'">'+cdEsc(cat)+'</span>';}
+/* view 'c' = Detailliste (mit Tipp, durchsuchbar), 'p' = Übersicht "noch offen" (kompakt, ohne data-s: zählt nicht doppelt) */
+function _r2b6MsRow(m,S,view){
+  const p=view==='p';
+  return _r2b6Ck({key:'',id:'b6|'+view+'|ms|'+m.id,checked:S.ms.has(m.id),title:_r2b6D(m.name),
+    sub:p?{h:_r2b6MsTag(m.cat)+'<span>'+cdEsc(_r2b6D(m.when))+'</span>'}:_r2b6D(m.when),
+    cls:'r2b6-row'+(p?' r2b6-pr':(m.tip?' r2b6-rich':'')),go:_r2b6MsGo(m),
+    s:p?null:[m.name,m.cat,m.when,m.tip||''].join(' '),
+    attrs:p?null:{'data-go-id':'cl-'+m.id,'data-item-visible':m.name+' '+m.when,'data-item-hidden':m.tip||''},
+    more:!p&&m.tip?{label:'Tipp',pv:_r2b6D(m.tip,1),html:'<p>'+cdEsc(_r2b6D(m.tip,1))+'</p>'}:null});
+}
+
+/* ---- Kategorie-Faltkarte: Icon im Fortschrittsring, Szene rechts, Zähler im Kopf ---- */
+/* lazy: body als Funktion + full (Volltext). Geschlossen trägt die Kategorie full als data-s, offen gebaut nicht. */
+function _r2b6Cat(o){
+  const lazy=typeof o.body==='function'&&!o.open&&o.full!=null;
+  return cdFold({id:o.id,title:o.t,lead:o.lead,icon:o.glyph,chips:o.chips,tone:o.tone,open:!!o.open,h:3,
+    scene:{keys:o.scene?[o.scene]:[],tone:o.tone,glyph:o.glyph},
+    aside:'<span class="r2b6-cnt" data-r2b6-cnt="'+o.key+'"></span>',
+    body:o.body,s:lazy?o.full:o.s,cls:'r2b6-cat r2b6-cat--'+o.key,attrs:lazy?{'data-r2b6-cat':o.key,'data-r2b6-lazy':'1'}:{'data-r2b6-cat':o.key}});
+}
+function _r2b6OpenGet(){try{const v=JSON.parse(localStorage.getItem(R2B6_OPEN_KEY));return Array.isArray(v)?v:null;}catch(e){return null;}}
+function _r2b6OpenSave(){
+  const sec=document.getElementById('sec-checklists');if(!sec)return;
+  const ids=[...sec.querySelectorAll('.r2b6-cat')].filter(d=>d.open&&!d.dataset.srchOpen).map(d=>d.id);
+  try{localStorage.setItem(R2B6_OPEN_KEY,JSON.stringify(ids));}catch(e){}
+}
+function _r2b6Link(o){
+  return '<a class="r2b6-link cd-spot cd-scened" href="#sec='+o.sec+'&amp;tab='+o.tab+'" data-go="'+o.sec+'" data-tab="'+o.tab+'" data-r2b6-link="'+o.key+'" data-s="'+cdEsc(o.s)+'" style="--cd-acc:'+o.tone+'">'
+    +cdScene([o.scene],{tone:o.tone,glyph:o.glyph})
+    +'<span class="r2b6-ring" aria-hidden="true"><i class="cd-g">'+cdEsc(o.glyph)+'</i></span>'
+    +'<span class="r2b6-link-m"><span class="r2b6-link-t">'+cdEsc(o.t)+'</span><span class="r2b6-link-s">'+cdEsc(o.sub)+'</span></span>'
+    +'<span class="r2b6-cnt" data-r2b6-cnt="'+o.key+'"></span><span class="cd-fold-arr" aria-hidden="true">'+cdIcon('go')+'</span></a>';
+}
+function _r2b6TeSq(){
+  const te=loadTE().filter(id=>TE_REQUIRED_IDS.has(id)).length;
+  const sqT=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
+  const sq=(typeof loadSQ==='function'&&sqT)?SIDE_QUESTS.filter(q=>loadSQ().includes(q.q)).length:0;
+  return {te:te,teT:TE_REQUIRED_IDS.size,sq:sq,sqT:sqT};
+}
+function _r2b6HeroVals(S,M){
+  const msOpen=M.missables.groups.flat().filter(id=>!S.ms.has(id)).length;
+  const bo=M.bosses.groups.flat().filter(id=>S.bo.has(id)).length;
+  const te=M.sanctums.groups.flat().filter(id=>S.te.has(id)).length;
+  const gm=M.greymane.groups.flat().filter(id=>S.gm.has(id)).length;
+  return [String(msOpen),String(bo),String(te),'+'+gm*3];
+}
+
+/* ---- Aufbau (einmal) ---- */
+function _r2b6Build(){
+  const root=document.getElementById('cl-root');if(!root)return false;
+  const S=_r2b6Sets(),M=_r2b6Model(),st=_r2b6OpenGet();
+  const isOpen=(id,def)=>st?st.includes(id):def;
+  const msOpenN=MISSABLE_ITEMS.filter(m=>!S.ms.has(m.id)).length;
+  /* Kopf */
+  const hv=_r2b6HeroVals(S,M);_r2b6.hv=hv.slice();
+  document.getElementById('cl-hero').innerHTML=cdHero({title:'Was noch offen ist',
+    sub:'Hake ab, was du erledigt hast. Der Pfeil an jedem Eintrag bringt dich zur passenden Seite im Wiki.',
+    scene:{keys:['cl-overview']},glyph:'☑',tone:'red',cls:'r2b6-hero',
+    stats:[[hv[0],'Verpassbares offen'],[hv[1],'Bosse besiegt'],[hv[2],'Sanctums abgeschlossen'],[hv[3],'Inventarslots (Greymane)']]});
+  /* Übersicht: noch offen */
+  const pend='<div class="cd-checks r2b6-grid r2b6-pend" id="ov-miss-list">'+MISSABLE_ITEMS.map(m=>_r2b6MsRow(m,S,'p')).join('')+'</div>'
+    +'<p class="r2b6-pend-empty">'+cdIcon('check')+' Alles Verpassbare erledigt oder abgehakt. Gut gespielt!</p>';
+  /* Bosse, Greymane, Sanctums, Verpassbares: Inhalt erst beim ersten Öffnen (cdFold lazy). Bis dahin trägt die Kategorie
+     den Volltext als data-s (Suche öffnet sie und filtert die Zeilen); danach tragen die Zeilen ihn selbst (Toggle-Handler). */
+  const bossBody=()=>{const S=_r2b6Sets(),M=_r2b6Model(),firstOpen=M.bosses.groups.findIndex(ids=>ids.some(id=>!S.bo.has(id)));
+    return '<div class="cd-folds r2b6-grps" id="boss-cl-list">'+R2B6_BOSS_GROUPS.map((g,i)=>{
+      const list=BOSSES.filter(g.f);if(!list.length)return '';
+      const d=list.filter(b=>S.bo.has(b.name)).length;
+      return cdFold({title:g.t,lead:g.s,cls:'r2b6-grp',region:g.region,tone:g.tone,h:4,open:i===firstOpen,id:'cl-bo-g'+i,
+        aside:'<span class="r2b6-gp" data-r2b6-g="bosses:'+i+'" data-v="'+d+'/'+list.length+'">'+cdProg(d,list.length)+'</span>',
+        body:'<div class="cd-checks r2b6-grid">'+list.map(b=>_r2b6BossRow(b,S)).join('')+'</div>'});
+    }).join('')+'</div>';};
+  const npc=new Set(typeof NPCS!=='undefined'?Object.values(NPCS).flat().map(n=>n.name):[]);
+  const gmBody=()=>{const S=_r2b6Sets();return '<div class="cd-checks r2b6-grid" id="gm-list">'+GREYMANE_COMMISSIONS.map(c=>_r2b6GmRow(c,S,npc)).join('')+'</div>';};
+  /* Sanctums: je Hexe eine Gruppe (Belohnung, Boss und Tipp aus der früheren Sanctum-Info im Aufklapper) */
+  const sancGroups=R2B6_SANC_GROUPS.concat(M.sanctums.rest.length?[{t:'Weitere',s:'',ids:M.sanctums.rest}]:[]);
+  const sancBody=()=>{const S=_r2b6Sets();return '<div class="r2b6-sec" id="sanc-cl-list">'+sancGroups.map((g,i)=>{
+    const list=g.ids.map(id=>SANCTUM_DATA.find(s=>s.id===id)).filter(Boolean);if(!list.length)return '';
+    const d=list.filter(s=>S.te.has(s.id)).length;
+    return _r2b6Gh(g.t,g.s,'sanctums:'+i,d,list.length)+'<div class="cl-group-body cd-checks r2b6-grid">'+list.map(s=>_r2b6SancRow(s,g,S)).join('')+'</div>';
+  }).join('')+'</div>';};
+  /* Waffen: Typen als innere Faltkarten, Zeilen erst beim Öffnen (data-s der Gruppe trägt bis dahin den Volltext) */
+  const wepBody='<div class="cd-folds r2b6-grps" id="wep-cl-list">'+M.waffen.types.map((t,i)=>{
+    const list=WEAPONS.filter(w=>w.type===t),d=list.filter(w=>S.wp.has(w.name)).length;
+    return cdFold({title:t,cls:'r2b6-grp',h:4,tone:'var(--cd-fx-def)',id:'cl-wp-g'+i,
+      aside:'<span class="r2b6-gp" data-r2b6-g="waffen:'+i+'" data-v="'+d+'/'+list.length+'">'+cdProg(d,list.length)+'</span>',
+      s:list.map(w=>[w.name,w.type,w.source||''].join(' ')).join(' '),attrs:{'data-r2b6-lazy':'1'},
+      body:()=>{const S2=_r2b6Sets();return '<div class="cd-checks r2b6-grid r2b6-grid--wp">'+list.map(w=>_r2b6WepRow(w,S2)).join('')+'</div>';}});
+  }).join('')+'</div>';
+  /* Verpassbares: alle mit Tipp, nach Art gruppiert */
+  const msBody=()=>{const S=_r2b6Sets();return '<div class="r2b6-sec" id="ms-cl-list">'+M.missables.cats.map((c,i)=>{
+    const list=MISSABLE_ITEMS.filter(m=>m.cat===c),d=list.filter(m=>S.ms.has(m.id)).length;
+    return _r2b6Gh(c,'','missables:'+i,d,list.length,'<i class="r2b6-gh-dot r2b6-tag--'+(R2B6_MS_TAG[c]||'quest')+'"></i>')
+      +'<div class="cl-group-body cd-checks r2b6-grid">'+list.map(m=>_r2b6MsRow(m,S,'c')).join('')+'</div>';
+  }).join('')+'</div>';};
+  const full={
+    bosses:BOSSES.map(b=>[b.name,b.chapter?'Kap. '+b.chapter:'Side',b.region,b.drop_weapon,b.weakness].join(' ')).join(' '),
+    greymane:GREYMANE_COMMISSIONS.map(c=>[c.name,c.note,c.reward,c.region].join(' ')).join(' '),
+    sanctums:SANCTUM_DATA.map(s=>{const g=typeof SANCTUM_GUIDE!=='undefined'&&SANCTUM_GUIDE.find(x=>x.name===s.name);return [s.name,s.region,s.note].concat(g?[g.req,g.reward,g.boss,g.tip,g.region]:[]).join(' ');}).join(' ')+' '+R2B6_SANC_GROUPS.map(g=>g.t).join(' '),
+    missables:MISSABLE_ITEMS.map(m=>[m.name,m.cat,m.when,m.tip||''].join(' ')).join(' ')
+  };
+  const nStory=BOSSES.filter(b=>b.chapter).length,nBossSanc=(typeof SANCTUM_GUIDE!=='undefined'?SANCTUM_GUIDE.filter(g=>g.boss&&g.boss!=='–').length:0);
+  const msCats=M.missables.cats.map(c=>({v:MISSABLE_ITEMS.filter(m=>m.cat===c).length,t:c}));
+  document.getElementById('cl-stack').innerHTML=[
+    _r2b6Cat({key:'pend',id:'clp-overview',t:'Nicht verpassen',lead:'Verpassbares, das du noch nicht abgehakt hast. Erledigtes verschwindet aus dieser Liste.',
+      glyph:'⚠',tone:'red',open:isOpen('clp-overview',msOpenN>0),body:pend,s:''}),
+    _r2b6Cat({key:'bosses',id:'clp-bosses',t:'Bosse',lead:'Abgehakte Bosse gelten auch auf der Seite Bosse als besiegt. Sortiert nach Kapitelabschnitten.',
+      glyph:'☠',tone:'gold',scene:'cl-bosses',chips:[{v:nStory,t:'Story'},{v:BOSSES.length-nStory,t:'Side & Fraktion'}],open:isOpen('clp-bosses',false),body:bossBody,full:full.bosses}),
+    _r2b6Cat({key:'greymane',id:'clp-greymane',t:'Greymane Commissions',lead:'Jede Commission gibt +3 Inventarslots, alle '+GREYMANE_COMMISSIONS.length+' zusammen +'+GREYMANE_COMMISSIONS.length*3+'. Für das versteckte Ende nicht erforderlich.',
+      glyph:'⛫',tone:'var(--cd-fx-spirit)',scene:'cl-greymane',chips:[{v:'+3',t:'Slots je Auftrag',c:'gold'},{t:'Greymane Camp',i:'pin'}],open:isOpen('clp-greymane',false),body:gmBody,full:full.greymane}),
+    _r2b6Cat({key:'sanctums',id:'clp-sanctums',t:'Sanctums',lead:'Nach Hexe geordnet, mit Belohnung und Tipp aus der Sanctum-Info. Abhaken zählt auch in der True-Ending-Checkliste.',
+      glyph:'☾',tone:'violet',scene:'cl-sanctum',chips:[{v:R2B6_SANC_GROUPS.filter(g=>g.witch).length,t:'Hexen'},{v:nBossSanc,t:'mit Boss',c:'red'}],open:isOpen('clp-sanctums',false),body:sancBody,full:full.sanctums}),
+    _r2b6Cat({key:'waffen',id:'clp-waffen',t:'Waffen',lead:'Alle '+WEAPONS.length+' Waffen nach Typ. Der Pfeil öffnet die Waffe mit Quelle und Werten.',
+      glyph:'⚔',tone:'var(--cd-fx-def)',scene:'cl-weapons',chips:[{v:M.waffen.types.length,t:'Waffentypen'}],open:isOpen('clp-waffen',false),body:wepBody}),
+    _r2b6Cat({key:'missables',id:'clp-missables',t:'Verpassbares',lead:'Einmalige Items, zeitkritische Quests und Story-Weichen, jeweils mit Tipp. Hake sie ab, sobald sie erledigt sind.',
+      glyph:'⧗',tone:'red',scene:'cl-missables',chips:msCats.slice(0,5),open:isOpen('clp-missables',false),body:msBody,full:full.missables})
+  ].join('');
+  /* Andere Seiten */
+  document.getElementById('cl-else').innerHTML='<h3 class="sub-t r2b6-else-t">Weitere Checklisten</h3><div class="r2b6-links">'
+    +_r2b6Link({key:'te',sec:'quests',tab:'te',scene:'q-true-ending',glyph:'✦',tone:'var(--cd-fx-res)',t:'True-Ending-Checkliste',
+      sub:'Steht auf der Seite Quests (erster Reiter). Die Sanctums von hier zählen dort mit.',s:'true ending true-ending checkliste quests sanctums'})
+    +_r2b6Link({key:'sq',sec:'quests',tab:'sq',scene:'q-side',glyph:'❖',tone:'var(--cd-fx-speed)',t:'Side-Quests',
+      sub:'Abhaken direkt bei den Nebenquests auf der Seite Quests.',s:'side-quests side quests nebenquests quests'})+'</div>';
+  /* Sichern */
+  document.getElementById('cl-tail').innerHTML=_r2b6Cat({key:'xp',id:'clp-export',t:'Fortschritt sichern',lead:'Als JSON exportieren oder importieren. Gespeichert wird nur in diesem Browser.',
+    glyph:'⇅',tone:'var(--slate)',open:isOpen('clp-export',false),s:'fortschritt sichern exportieren importieren export import json backup sicherung tastenkürzel shortcuts gesamt-fortschritt',
+    body:cdNote('Dein Fortschritt wird nur in diesem Browser gespeichert: Cache/Website-Daten leeren löscht ihn unwiderruflich. Tipp: regelmäßig exportieren. Nur die True-Ending-Checkliste lässt sich zusätzlich per Sync-Code (Menü, „🔑 Sync“) auf andere Geräte übertragen.',{kind:'warn',title:'Nur in diesem Browser'})
+      +'<p>Exportiere deinen kompletten Fortschritt (Bosse, True Ending, Greymane, Waffen, Verpassbares, Kapitel, Favoriten, Notizen, Kommentare, eigene Builds) als JSON. Kann jederzeit wieder importiert werden.</p>'
+      +'<div class="xp-row"><button type="button" class="xp-btn pri" onclick="exportProgress()">Fortschritt exportieren (JSON)</button><button type="button" class="xp-btn" onclick="document.getElementById(\'import-file\').click()">Fortschritt importieren</button><input type="file" id="import-file" accept=".json" style="display:none" onchange="importProgress(this)"></div>'
+      +'<h4 class="r2b6-h4">Tastenkürzel</h4>'+cdFacts([[{h:cdKey('Ctrl')+cdKey('K')},'Suchfeld fokussieren'],[{h:cdKey('Esc')},'Suche leeren / Menü schließen'],['↑ Button','Zurück nach oben (ab 300 px Scroll)']])
+      +'<h4 class="r2b6-h4">Gesamt-Fortschritt</h4><div class="stats-strip" id="export-stats-strip" style="margin-bottom:0"></div>'});
+  _r2b6.built=true;
+  _r2b6Wire();
+  _r2b6Sync();
+  if(typeof updateStats==='function')updateStats();
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(root);
+  return true;
+}
+
+/* ---- Abgleich aller Ansichten (Häkchen, Ringe, Zähler, Kennzahlen) ---- */
+function _r2b6Sync(){
+  if(!_r2b6.built)return;
+  const root=document.getElementById('cl-root');if(!root)return;
+  const S=_r2b6Sets(),M=_r2b6Model();
+  root.querySelectorAll('.cd-check-in[data-ck-id^="b6|"]').forEach(inp=>{
+    const p=inp.getAttribute('data-ck-id').split('|'),st=S[p[2]],on=!!st&&st.has(p.slice(3).join('|'));
+    if(inp.checked!==on)inp.checked=on;
+  });
+  const setCnt=(key,html)=>root.querySelectorAll('[data-r2b6-cnt="'+key+'"]').forEach(el=>{if(el._r2b6!==html){el._r2b6=html;el.innerHTML=html;}});
+  /* Ring und Komplett-Zustand; wird eine Kategorie gerade komplett, leuchtet der Ring einmal grün auf (nur bei Bewegung, nicht beim Aufbau) */
+  const live=_r2b6.synced;
+  const pop=el=>{if(!live)return;el.classList.remove('r2b6-pop');void el.offsetWidth;el.classList.add('r2b6-pop');clearTimeout(el._r2b6p);el._r2b6p=setTimeout(()=>el.classList.remove('r2b6-pop'),900);};
+  const setDone=(el,on)=>{if(el.classList.contains('r2b6-done')!==on){el.classList.toggle('r2b6-done',on);if(on)pop(el);}};
+  const setRing=(el,d,t)=>{if(!el)return;el.style.setProperty('--r2b6-p',t?Math.round(d/t*100):0);setDone(el,t>0&&d>=t);};
+  Object.keys(M).forEach(k=>{
+    const c=M[k],st=S[c.store];let d=0,t=0;
+    c.groups.forEach((ids,i)=>{
+      const gd=ids.reduce((n,id)=>n+(st.has(id)?1:0),0),v=gd+'/'+ids.length;d+=gd;t+=ids.length;
+      root.querySelectorAll('[data-r2b6-g="'+k+':'+i+'"]').forEach(el=>{if(el.dataset.v!==v){el.dataset.v=v;el.innerHTML=cdProg(gd,ids.length);}});
+    });
+    c.done=d;c.total=t;
+    setRing(document.getElementById(c.fid),d,t);setCnt(k,_r2b6Cnt(d,t));
+  });
+  /* Übersicht "noch offen": abgehakte Zeilen verschwinden (CSS), außer gerade dort abgehakte (r2b6-keep, kurz sichtbar) */
+  const ms=M.missables,open=ms.total-ms.done,pf=document.getElementById('clp-overview');
+  if(pf)setDone(pf,open===0);
+  setCnt('pend',open?'<span class="r2b6-cnt-n"><b>'+open+'</b></span><span class="r2b6-cnt-st">noch offen</span>':'<span class="r2b6-cnt-n"><b>0</b></span><span class="r2b6-cnt-st">Komplett</span>');
+  const pl=document.getElementById('ov-miss-list');
+  if(pl){let vis=0;pl.querySelectorAll('.cd-check').forEach(r=>{const i=r.querySelector('.cd-check-in');if(i&&(!i.checked||r.classList.contains('r2b6-keep')))vis++;});pl.classList.toggle('is-empty',!vis);}
+  /* Kopf-Kennzahlen: nur bei echter Änderung schreiben (der Zähler der Einblendung bleibt sonst unberührt) */
+  const hv=_r2b6HeroVals(S,M),dd=root.querySelectorAll('#cl-hero .cd-hero-stat dd');
+  hv.forEach((v,i)=>{if(_r2b6.hv&&_r2b6.hv[i]!==v&&dd[i]){dd[i].textContent=v;dd[i].removeAttribute('aria-label');}});
+  _r2b6.hv=hv;
+  const hs=root.querySelector('#cl-hero .cd-hero-stat');if(hs){hs.classList.toggle('r2b6-hot',hv[0]!=='0');hs.classList.toggle('r2b6-calm',hv[0]==='0');}
+  /* True Ending / Side-Quests (andere Seiten) */
+  const x=_r2b6TeSq();
+  [['te',x.te,x.teT],['sq',x.sq,x.sqT]].forEach(a=>{setRing(root.querySelector('[data-r2b6-link="'+a[0]+'"]'),a[1],a[2]);setCnt(a[0],_r2b6Cnt(a[1],a[2]));});
+  _r2b6.synced=true;
+}
+function _r2b6SyncSoon(){
+  if(_r2b6.pend)return;_r2b6.pend=true;
+  Promise.resolve().then(()=>{_r2b6.pend=false;_r2b6Sync();});
+}
+/* Renderer aus SEC_RENDERERS: erster Aufruf (Sektion wird gerendert) baut, danach nur Abgleich.
+   Aufrufe von außen vor dem ersten Besuch (z. B. toggleBossDone auf der Bosse-Seite) bauen nichts. */
+function _r2b6Render(){
+  if(!_r2b6.built){
+    if(typeof _secRendered!=='undefined'&&!_secRendered.checklists)return;
+    _r2b6Build();return;
+  }
+  _r2b6SyncSoon();
+}
+
+/* ---- Haken: über die bisherigen toggle-Funktionen speichern (Sync-Code, Erfolge, Bosskarten bleiben wie bisher) ---- */
+function _r2b6Has(S,st,raw){return !!S[st]&&S[st].has(raw);}
+function _r2b6OnCheck(e){
+  const d=e.detail||{},id=String(d.id||'');if(id.indexOf('b6|')!==0)return;
+  const p=id.split('|'),view=p[1],st=p[2],raw=p.slice(3).join('|'),on=!!d.checked;
+  if(_r2b6Has(_r2b6Sets(),st,raw)!==on){
+    if(st==='bo')toggleBossDone(raw);else if(st==='gm')toggleGM(raw);else if(st==='te')toggleTE(raw);
+    else if(st==='wp')toggleWep(raw);else if(st==='ms')toggleMissable(raw);
+  }
+  /* in der Übersicht abgehakt: Zeile bleibt kurz stehen (Rückgängig per erneutem Klick), dann blendet sie aus */
+  const row=e.target&&e.target.closest&&e.target.closest('.cd-check');
+  if(view==='p'&&row){
+    clearTimeout(row._r2b6t);row.classList.remove('r2b6-out');
+    if(on){
+      row.classList.add('r2b6-keep');
+      const still=!document.documentElement.classList.contains('cd-motion');
+      row._r2b6t=setTimeout(()=>{row.classList.add('r2b6-out');row._r2b6t=setTimeout(()=>{
+        /* Tastaturfokus nicht verlieren: auf die nächste offene Zeile (sonst den Kartenkopf) setzen */
+        if(row.contains(document.activeElement)){
+          let n=row.nextElementSibling;while(n&&n.querySelector('.cd-check-in:checked'))n=n.nextElementSibling;
+          const f=n?n.querySelector('.cd-check-in'):document.querySelector('#clp-overview>summary');if(f)try{f.focus({preventScroll:true});}catch(e){}
+        }
+        row.classList.remove('r2b6-keep','r2b6-out');_r2b6Sync();},still?0:320);},1500);
+    }else row.classList.remove('r2b6-keep');
+  }
+  _r2b6Sync();
+}
+/* Sprung: Seite öffnen; steht der Eintrag dort nicht als Karte (z. B. Waffe auf einer anderen Listenseite),
+   übernimmt die globale Suche, danach scrollt cdGo hin und lässt ihn aufleuchten */
+function _r2b6Findable(sec,q){
+  const root=document.getElementById('sec-'+sec);if(!root)return false;
+  const f=s=>(typeof _fold==='function'?_fold(s):String(s).toLowerCase()).replace(/\s+/g,' ').trim(),n=f(q);
+  if(document.getElementById(q)&&root.contains(document.getElementById(q)))return true;
+  const T='.cd-fold-t,.fd-name,.col-name,.ct,.sk-n,.pet-card-name,.fac-qh,h3,h4,strong',c=root.querySelectorAll('[data-s]');
+  for(let i=0;i<c.length;i++){
+    const el=c[i];if(el.dataset.filtered==='1'||el.classList.contains('hide')||el.closest('.hide'))continue;
+    const hd=el.querySelector(T);if(hd&&f(hd.textContent)===n)return true;
+  }
+  return false;
+}
+function _r2b6Go(sec,q,o){
+  o=o||{};
+  if(!q||sec==='checklists'||typeof cdGo!=='function')return typeof cdGo==='function'?cdGo(sec,q,Object.assign({noShow:sec==='checklists'},o)):Promise.resolve(null);
+  const cur=document.querySelector('#main > .sec.active');
+  if((!cur||cur.id!=='sec-'+sec)&&typeof showSec==='function')showSec(sec);
+  if(o.tab&&typeof _applyTabParam==='function')_applyTabParam(sec,o.tab);
+  if(!_r2b6Findable(sec,q)){
+    const si=document.getElementById('si');
+    if(si&&typeof _doSearchImpl==='function'){si.value=q;_doSearchImpl(q);}
+  }
+  return cdGo(sec,q,{noShow:true});
+}
+function _r2b6Wire(){
+  const sec=document.getElementById('sec-checklists');if(!sec||_r2b6.wired)return;_r2b6.wired=true;
+  sec.addEventListener('cd-check',_r2b6OnCheck);
+  sec.addEventListener('click',e=>{
+    if(e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;
+    const a=e.target.closest&&e.target.closest('a[data-go][data-goq]');if(!a||!sec.contains(a))return;
+    e.preventDefault();_r2b6Go(a.dataset.go,a.dataset.goq,{tab:a.dataset.tab});
+  });
+  /* nach dem Fundament (cdFoldFill) laufen: geöffnete Waffen-Gruppe trägt ab jetzt ihre Zeilen selbst (kein Doppeltreffer) */
+  document.addEventListener('toggle',e=>{
+    const d=e.target;if(!d||!d.classList||!sec.contains(d))return;
+    if(d.open&&d.hasAttribute('data-r2b6-lazy')&&!d.hasAttribute('data-cd-lazy')){
+      d.removeAttribute('data-r2b6-lazy');d.removeAttribute('data-s');delete d._sf;_r2b6Sync();
+      /* Suche aktiv: Treffer, die nur im Aufklapper (Tipp, Schwäche, Belohnung) stehen, sichtbar machen */
+      const si=document.getElementById('si'),q=si&&si.value.trim();
+      if(q&&typeof _openItemDetailsForSearch==='function'){const n=[typeof _fold==='function'?_fold(q):q.toLowerCase()];
+        d.querySelectorAll('[data-item-hidden]').forEach(el=>{if(!el.classList.contains('hide'))_openItemDetailsForSearch(el,n);});}
+    }
+    if(d.id==='clp-export'&&d.open&&typeof updateStats==='function')updateStats();
+    if(d.classList.contains('r2b6-cat')&&!d.dataset.srchOpen)_r2b6OpenSave();
+  },true);
+}
+
+// ===== Renderer (Namen stabil, SEC_RENDERERS) =====
+function renderGreymane(){_r2b6Render();}
+function renderBossChecklist(){_r2b6Render();}
+function renderSanctumChecklist(){_r2b6Render();}
+function renderWeaponChecklist(){_r2b6Render();}
 
 // ===== MISSABLES CHECKLIST =====
-function renderMissableChecklist(){
-  const done=loadMissDone();
-  const dc=done.length;
-  const cnt=document.getElementById('ms-cl-count');
-  if(cnt)cnt.textContent=dc+'/'+MISSABLE_ITEMS.length+' abgehakt';
-  const badgeClass={Waffe:'ms-b-waffe',Rüstung:'ms-b-ruestung',Quest:'ms-b-quest',Mount:'ms-b-mount','True Ending':'ms-b-true'};
-  const cats=[...new Set(MISSABLE_ITEMS.map(m=>m.cat))];
-  document.getElementById('ms-cl-list').innerHTML=cats.map(cat=>{
-    const items=MISSABLE_ITEMS.filter(m=>m.cat===cat);
-    const cdc=items.filter(m=>done.includes(m.id)).length;
-    const pct=Math.round(cdc/items.length*100);
-    return `<div class="ms-cat-hd">
-      <span>${cat}</span>
-      <span class="cl-group-ct">${cdc}/${items.length}</span>
-    </div>
-    <div class="cl-group-bar" style="margin-bottom:4px"><div class="cl-group-fill" style="width:${pct}%"></div></div>
-    <div class="comm-grid" style="margin-bottom:4px">${items.map(m=>`
-      <div class="comm-it${done.includes(m.id)?' done':''}" onclick="toggleMissable('${m.id}')">
-        <div class="chk${done.includes(m.id)?' on':''}" role="checkbox" aria-checked="${done.includes(m.id)?'true':'false'}" aria-label="${escHtml(m.name)}" tabindex="0"></div>
-        <div class="comm-body">
-          <div class="comm-tx" style="font-weight:600">${m.name}<span class="ms-badge ${badgeClass[m.cat]||'ms-b-quest'}" style="margin-left:7px">${m.cat}</span></div>
-          <div class="comm-rew" style="color:var(--dim)">${m.when}</div>
-          ${m.tip?`<div class="comm-note">${m.tip}</div>`:''}
-        </div>
-      </div>`).join('')}</div>`;
-  }).join('');
-  _reapplyActiveSearch(document.getElementById('ms-cl-list'));
-}
+function renderMissableChecklist(){_r2b6Render();}
 
 // ===== OVERVIEW =====
-function renderOverview(){
-  const bossDone=loadBossDone().length, bossTotal=BOSSES.length;
-  const gmDone=loadGM().length, gmTotal=GREYMANE_COMMISSIONS.length;
-  const sancDone=loadTE().filter(id=>SANCTUM_IDS.includes(id)).length, sancTotal=SANCTUM_IDS.length;
-  const wepDone=loadWepDone().length, wepTotal=WEAPONS.length;
-  const msDone=loadMissDone().length, msTotal=MISSABLE_ITEMS.length;
-  const teDone=loadTE().filter(id=>TE_REQUIRED_IDS.has(id)).length, teTotal=TE_REQUIRED_IDS.size;
-  const sqTotal=(typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.length:0;
-  const sqDone=(typeof loadSQ==='function'&&typeof SIDE_QUESTS!=='undefined')?SIDE_QUESTS.filter(q=>loadSQ().includes(q.q)).length:0;
-  const cards=[
-    {icon:'⚔️',label:'Bosse besiegt',done:bossDone,total:bossTotal,tab:'bosses'},
-    {icon:'🎖️',label:'Greymane',done:gmDone,total:gmTotal,tab:'greymane',sub:`+${gmDone*3} Inventarslots`},
-    {icon:'🏛️',label:'Sanctums',done:sancDone,total:sancTotal,tab:'sanctums'},
-    {icon:'🗡️',label:'Waffen',done:wepDone,total:wepTotal,tab:'waffen'},
-    {icon:'📋',label:'True Ending',done:teDone,total:teTotal,go:"showSec('quests');qTab('te')"},
-    {icon:'⚠️',label:'Verpassbares erledigt',done:msDone,total:msTotal,tab:'missables'},
-    {icon:'📜',label:'Side-Quests',done:sqDone,total:sqTotal,go:"showSec('quests')"},
-  ];
-  const grid=document.getElementById('ov-grid');
-  if(grid)grid.innerHTML=cards.map(c=>{
-    const pct=c.total?Math.round(c.done/c.total*100):0;
-    const nav=c.go||("clTab('"+c.tab+"')");
-    return `<div class="ov-card" onclick="${nav}">
-      <div class="ov-pct">${pct}%</div>
-      <div class="ov-card-icon">${c.icon}</div>
-      <div class="ov-card-label">${c.label}</div>
-      <div class="ov-card-val">${c.done}</div>
-      <div class="ov-card-sub">${c.sub||('von '+c.total)}</div>
-      <div class="ov-card-bar"><div class="ov-card-fill" style="width:${pct}%"></div></div>
-      <span class="ov-arrow">→</span>
-    </div>`;
-  }).join('');
-  // Pending missables
-  const missDone=loadMissDone();
-  const pending=MISSABLE_ITEMS.filter(m=>!missDone.includes(m.id));
-  const badgeClass={Waffe:'ms-b-waffe',Rüstung:'ms-b-ruestung',Quest:'ms-b-quest',Mount:'ms-b-mount','True Ending':'ms-b-true'};
-  const ml=document.getElementById('ov-miss-list');
-  if(ml){
-    ml.innerHTML=pending.length
-      ?pending.map(m=>`<div class="ov-miss-it">
-          <span class="ov-miss-badge">${m.cat}</span>
-          <div><div class="ov-miss-name">${m.name}</div><div class="ov-miss-when">${m.when}</div></div>
-        </div>`).join('')
-      :`<div class="ov-all-ok">✓ Alles Verpassbare erledigt oder abgehakt. Gut gespielt!</div>`;
-  }
-}
+function renderOverview(){_r2b6Render();}
 
 // ===== CHECKLIST TABS =====
+// Frühere Reiter sind jetzt Faltkarten derselben Seite: clTab (Erfolge, Deep-Link #sec=checklists&tab=…) öffnet die
+// passende Karte und springt hin. Die Knöpfe #clt-* bleiben (verborgen) für _applyTabParam.
 function clTab(id){
-  ['overview','bosses','greymane','sanctums','waffen','missables','sanctum-guide','export'].forEach(t=>{
-    document.getElementById('clt-'+t).classList.toggle('active',t===id);
-    document.getElementById('clp-'+t).classList.toggle('active',t===id);
-  });
-  if(id==='export')updateStats();
-  if(id==='overview')renderOverview();
+  const map={overview:'clp-overview',bosses:'clp-bosses',greymane:'clp-greymane',sanctums:'clp-sanctums',waffen:'clp-waffen',
+    missables:'clp-missables','sanctum-guide':'clp-sanctums','export':'clp-export'};
+  if(typeof ensureSecRendered==='function')ensureSecRendered('checklists');
+  if(id==='export'&&typeof updateStats==='function')updateStats();
+  const t=map[id];if(!t||typeof cdGo!=='function')return;
+  cdGo('checklists',t,{noShow:true});
 }
 
 // ===== BUILDS =====
@@ -13919,20 +14221,9 @@ function renderItemdex(){
 }
 
 // ===== SANCTUM GUIDE =====
-
-function renderSanctumGuide(){
-  const el=document.getElementById('sg-grid');
-  if(!el) return;
-  el.innerHTML=SANCTUM_GUIDE.map(s=>`
-    <div class="sg-card">
-      <div class="sg-name">${s.name}</div>
-      <div class="sg-reg">${s.region}</div>
-      <div class="sg-row"><span class="sg-lbl">Voraussetzung</span><span class="sg-val">${s.req}</span></div>
-      <div class="sg-row"><span class="sg-lbl">Belohnung</span><span class="sg-val sg-reward">${s.reward}</span></div>
-      ${s.boss!=='–'?`<div class="sg-row"><span class="sg-lbl">Boss</span><span class="sg-val">${s.boss}</span></div>`:''}
-      <div class="sg-row"><span class="sg-lbl">Tipp</span><span class="sg-val" style="color:var(--dim)">${s.tip}</span></div>
-    </div>`).join('');
-}
+// R2-B6: Die frühere Sanctum-Info (SANCTUM_GUIDE: Voraussetzung, Belohnung, Boss, Tipp) steht jetzt im Aufklapper
+// "Belohnung & Tipp" jeder Sanctum-Zeile der Checkliste (_r2b6SancRow). Name bleibt für SEC_RENDERERS.
+function renderSanctumGuide(){_r2b6Render();}
 
 // ===== CHAPTER GUIDE =====
 // R2 B3 (21.10.2026): schlanke Faltkarten (cdFold) mit Szene je Kapitel, Boss-Kette, Schritten (Hauptquests) und
