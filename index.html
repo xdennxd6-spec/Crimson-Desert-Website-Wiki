@@ -5324,6 +5324,242 @@ html.cd-motion .r2b6-pend .r2b6-out{opacity:0;transition:opacity .3s ease;transi
 
 /* ---- Bereich Bauer 8 (nur B8 schreibt hier) ---- */
 /* R2-B8 Anfang */
+/* Trophäen & Errungenschaften (renderTrophies, renderAchievements). Grad-Farben als Tokens, Rest über Theme-Variablen. */
+:root,[data-theme="dark"],[data-theme="amoled"]{--b8-platinum:#9fd6f0;--b8-gold:#e8c54f;--b8-silver:#c5cad6;--b8-bronze:#d08c58;--b8-shine:#ffffff;--b8-shade:#140d06}
+[data-theme="sepia"]{--b8-platinum:#93c6dc;--b8-gold:#dbbb5e;--b8-silver:#b9bfcb;--b8-bronze:#c88a5c;--b8-shine:#fff8ec;--b8-shade:#1a120a}
+.b8-g-platinum{--b8c:var(--b8-platinum)}.b8-g-gold{--b8c:var(--b8-gold)}.b8-g-silver{--b8c:var(--b8-silver)}.b8-g-bronze{--b8c:var(--b8-bronze)}
+#sec-achievements .b8-sub{margin-top:38px}
+/* Medaille (gemeinsame Optik für Schrein, Faltkarten, Badges) */
+.b8-shr-med,.b8-bmed,.b8-grp-med,.b8-tr.is-got .cd-fold-ico{background:radial-gradient(circle at 34% 28%,color-mix(in srgb,var(--b8c) 42%,var(--b8-shine)) 0%,var(--b8c) 46%,color-mix(in srgb,var(--b8c) 52%,var(--b8-shade)) 100%);color:color-mix(in srgb,var(--b8c) 22%,var(--b8-shade))}
+
+/* -- Seitenkopf + Route -- */
+.b8-rm{margin:0 0 6px}
+.b8-hero{margin-bottom:16px}
+.b8-hero .cd-scene-img{filter:saturate(1.15) contrast(1.06)}
+.b8-route-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;padding:0 2px 0 4px}
+.b8-route-l{font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.b8-route{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.b8-stage{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:start}
+.b8-stage::before{content:'';position:absolute;left:27px;top:60px;bottom:-14px;width:2px;border-radius:2px;background:linear-gradient(var(--line-strong),var(--line-soft))}
+.b8-stage:last-child::before{display:none}
+.b8-stage.is-done::before{background:linear-gradient(var(--gold),color-mix(in srgb,var(--gold) 35%,transparent))}
+.b8-node{position:relative;display:grid;place-items:center;width:56px;height:56px;margin-top:6px;border:2px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:50%;
+  background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--gold) 16%,var(--card)),var(--card));box-shadow:0 0 0 4px var(--bg),0 8px 22px -10px color-mix(in srgb,var(--gold) 70%,transparent)}
+.b8-node-n{font:700 18px/1 var(--f-mono);color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.b8-node-ok{display:none;color:var(--bg)}.b8-node-ok .cd-i{width:24px;height:24px;stroke-width:2.6}
+.b8-stage.is-done .b8-node{background:var(--gold);border-color:var(--gold)}
+.b8-stage.is-done .b8-node-n{display:none}.b8-stage.is-done .b8-node-ok{display:block}
+.b8-stage-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,290px);gap:16px 24px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--panel-2);box-shadow:var(--shadow-soft);
+  scroll-margin-top:calc(var(--cdx-bb-h,0px) + 16px)}
+.b8-stage-card .cd-scene-g{right:calc(290px + 52px);font-size:clamp(60px,62cqh,140px);opacity:calc(var(--cd-glyph-op) * .6)}
+.b8-stage.is-done .b8-stage-card{border-color:color-mix(in srgb,var(--gold) 34%,var(--line))}
+.b8-stage-main{display:flex;flex-direction:column;gap:8px;min-width:0}
+.b8-stage-k{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.b8-stage-t{margin:0;font-family:var(--f-display);font-size:18px;font-weight:700;line-height:1.25;color:var(--ink-hi)}
+.b8-stage-chips{margin:2px 0 2px}
+.b8-stage-txt{margin:0;max-width:68ch;font-size:13.5px;line-height:1.62;color:var(--text)}
+.b8-num{font-family:var(--f-mono);font-weight:700;color:var(--glo);font-variant-numeric:tabular-nums}
+.b8-stage-side{display:flex;flex-direction:column;gap:10px;min-width:0;padding-left:20px;border-left:1px solid var(--line-soft)}
+.b8-side-h{margin:2px 0 0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.b8-badges{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.b8-badge{display:inline-flex;align-items:center;gap:8px;min-height:32px;max-width:100%;padding:4px 10px 4px 4px;border:1px solid color-mix(in srgb,var(--b8c) 36%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--b8c) 9%,transparent);color:var(--text);font-size:12.5px;line-height:1.25;text-decoration:none;transition:background .18s,border-color .18s}
+.b8-badge:hover{background:color-mix(in srgb,var(--b8c) 18%,transparent);border-color:color-mix(in srgb,var(--b8c) 60%,transparent);color:var(--ink-hi)}
+.b8-badge:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.b8-bmed{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;font-size:12px}
+.b8-bname{min-width:0;overflow-wrap:anywhere}
+.b8-badge.is-got::after{content:'✓';margin-left:-2px;font-weight:700;color:var(--cd-ok)}
+.b8-badge.is-got{border-color:color-mix(in srgb,var(--b8c) 60%,transparent)}
+.b8-badge:not(.is-got) .b8-bmed{opacity:.72}
+.b8-stage-ck{margin-top:auto}
+.b8-stage-ck .cd-check-l{min-height:44px;padding:8px 12px}
+.b8-stage-ck .cd-check-t{font-size:13px}
+.b8-stage-ck:has(.cd-check-in:checked){border-color:color-mix(in srgb,var(--gold) 40%,transparent);background:color-mix(in srgb,var(--gold) 8%,transparent)}
+.b8-stage-ck:has(.cd-check-in:checked) .cd-check-txt{opacity:1}
+.b8-stage-ck:has(.cd-check-in:checked) .cd-check-t{text-decoration:none;color:var(--glo)}
+/* Mini-Faltkarte "Weiterlesen" in einer Etappe (nutzt .cd-fold nur für Suche/Lazy-Logik, Optik zurückgesetzt) */
+.b8-more.cd-fold{border:0;border-radius:8px;background:none;box-shadow:none;overflow:visible}
+.b8-more.cd-fold>summary{display:inline-flex;grid-template-columns:none;grid-template-areas:none;align-items:center;gap:6px;min-height:36px;padding:4px 2px;color:var(--glo);font-size:12.5px;font-weight:600}
+.b8-more.cd-fold>summary::before{display:none}
+.b8-more>summary .cd-i{width:15px;height:15px;transition:transform .25s}
+.b8-more[open]>summary .cd-i{transform:rotate(180deg)}
+.b8-more .b8-more-c,.b8-more[open] .b8-more-o{display:none}.b8-more[open] .b8-more-c{display:inline}
+.b8-more>summary:hover{color:var(--rhi)}
+.b8-more>.cd-fold-body{padding:2px 0 0;border:0}
+
+/* -- Trophäen-Schrein -- */
+.b8-shrine{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:4px 0 10px}
+.b8-shr{display:flex;align-items:center;gap:14px;min-width:0;padding:14px 16px;border:1px solid color-mix(in srgb,var(--b8c) 26%,var(--line));border-radius:14px;
+  background:color-mix(in srgb,var(--b8c) 7%,var(--panel-2))}
+.b8-shr.is-full{border-color:color-mix(in srgb,var(--b8c) 70%,transparent);box-shadow:0 0 22px -8px color-mix(in srgb,var(--b8c) 70%,transparent)}
+.b8-shr-med{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;font-size:22px;
+  box-shadow:0 0 0 3px var(--card),0 0 0 4px color-mix(in srgb,var(--b8c) 45%,transparent),0 8px 20px -8px color-mix(in srgb,var(--b8c) 70%,transparent)}
+.b8-shr-main{min-width:0;flex:1}
+.b8-shr-l{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--b8c)}
+.b8-shr-n{margin:3px 0 7px;font-size:13px;color:var(--dim)}
+.b8-shr-n b{font:700 22px/1 var(--f-mono);color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.b8-shr-got{display:flex;align-items:center;gap:8px;margin:0;font:12px/1.3 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums}
+.b8-shr-got b{color:var(--ink-hi)}
+.b8-shr-bar{flex:1;min-width:28px;max-width:90px;height:5px;border-radius:5px;background:var(--line);overflow:hidden}
+.b8-shr-bar>i{display:block;width:var(--p,0%);height:100%;border-radius:inherit;background:var(--b8c)}
+html.cd-motion .b8-shr-bar>i{transition:width .45s cubic-bezier(.22,.8,.3,1)}
+.b8-hint{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:12.5px;line-height:1.45;color:var(--dim)}
+.b8-hint .cd-i{color:var(--slate)}
+#b8-about{margin:0 0 16px}
+.b8-about .cd-fold-ico{font-size:20px;color:var(--slate)}
+.b8-pills .cd-pill[data-v="platinum"]{--c:var(--b8-platinum)}.b8-pills .cd-pill[data-v="gold"]{--c:var(--b8-gold)}
+.b8-pills .cd-pill[data-v="silver"]{--c:var(--b8-silver)}.b8-pills .cd-pill[data-v="bronze"]{--c:var(--b8-bronze)}
+.b8-pills .cd-pill[data-v="miss"]{--c:var(--red)}.b8-pills .cd-pill[data-v="open"]{--c:var(--cd-ok)}
+
+/* -- Trophäen nach Grad -- */
+.b8-grp{margin-top:22px}
+.b8-grp-t{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-family:var(--f-display);font-size:15px;font-weight:700;line-height:1.2;color:var(--ink-hi)}
+.b8-grp-t::after{content:'';flex:1;height:1px;margin-left:4px;background:linear-gradient(90deg,color-mix(in srgb,var(--b8c) 40%,transparent),transparent)}
+.b8-grp-med{flex:none;width:14px;height:14px;border-radius:50%;box-shadow:0 0 10px color-mix(in srgb,var(--b8c) 55%,transparent)}
+.b8-grp-n{padding:1px 9px;border:1px solid color-mix(in srgb,var(--b8c) 40%,transparent);border-radius:999px;font:700 12px/1.5 var(--f-mono);color:var(--b8c);font-variant-numeric:tabular-nums}
+.b8-grp-p{order:3;font:12px/1.2 var(--f-mono);color:var(--cd-ok)}
+.b8-grp-p:empty{display:none}
+.b8-grp:not(:has(.b8-tr:not(.hide):not(.b8-off))){display:none}
+.b8-trs,.b8-chunk{display:grid;gap:10px}
+/* Block aus 5 Karten: content-visibility je Block (Motion B4 fragt offsetParent jeder Karte ab, je Karte erzwänge das ein Layout) */
+.b8-chunk{content-visibility:auto;contain-intrinsic-size:auto 540px}
+.b8-chunk:not(:has(.b8-tr:not(.hide):not(.b8-off))){display:none}
+.b8-tr{--b8-ico:46px;--b8-pt:12px;--b8-pl:18px;position:relative;border-radius:14px}
+.b8-tr.b8-off{display:none}
+.b8-fold .cd-fold-ico{align-self:start;width:var(--b8-ico);height:var(--b8-ico);border:2px solid color-mix(in srgb,var(--b8c) 50%,transparent);border-radius:50%;
+  background:color-mix(in srgb,var(--b8c) 10%,var(--card));color:var(--b8c);font-size:calc(var(--b8-ico) * .42);
+  box-shadow:inset 0 0 0 3px var(--card),inset 0 0 0 4px color-mix(in srgb,var(--b8c) 22%,transparent)}
+.b8-tr.is-got .b8-fold .cd-fold-ico{border-color:var(--b8c);box-shadow:0 0 18px -4px color-mix(in srgb,var(--b8c) 65%,transparent)}
+html.cd-motion .b8-fold .cd-fold-ico{transition:background .25s,box-shadow .25s,border-color .25s}
+.b8-tr.is-got .b8-fold{border-color:color-mix(in srgb,var(--b8c) 34%,var(--line))}
+.b8-fold>summary{padding-top:var(--b8-pt);padding-left:var(--b8-pl)}
+.b8-fold .cd-fold-t{font-size:16px}
+.b8-tr.is-got .cd-fold-t::after{content:'erhalten';margin-left:10px;padding:1px 8px;border-radius:999px;background:color-mix(in srgb,var(--cd-ok) 14%,transparent);font:600 11px/1.5 var(--f-mono);letter-spacing:.06em;color:var(--cd-ok);vertical-align:2px}
+.b8-gc{--c:var(--b8c)}
+.b8-gc b{text-transform:uppercase;letter-spacing:.08em;font-size:11px}
+.b8-got{position:absolute;left:var(--b8-pl);top:var(--b8-pt);z-index:2;width:var(--b8-ico);height:var(--b8-ico);padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.b8-got:hover{box-shadow:0 0 0 2px color-mix(in srgb,var(--b8c) 70%,transparent),0 0 16px -2px color-mix(in srgb,var(--b8c) 60%,transparent)}
+.b8-got:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.b8-got[aria-pressed="true"]::after{content:'✓';position:absolute;right:-4px;bottom:-4px;display:grid;place-items:center;width:20px;height:20px;border:2px solid var(--card);border-radius:50%;
+  background:var(--cd-ok);color:var(--bg);font:700 12px/1 var(--f-body)}
+html.cd-motion .b8-got[aria-pressed="true"]::after{animation:cdTick .32s cubic-bezier(.3,.7,.3,1.4)}
+/* Platin: Bühne */
+.b8-tr--plat{--b8-ico:60px;--b8-pt:18px}
+.b8-fold--plat{border-color:color-mix(in srgb,var(--b8-platinum) 38%,var(--line));background:color-mix(in srgb,var(--b8-platinum) 6%,var(--panel-2))}
+.b8-fold--plat>summary{min-height:96px;padding-bottom:18px}
+.b8-fold--plat .cd-fold-t{font-size:19px}
+.b8-fold .cd-fold-body .cd-facts{max-width:820px}
+.b8-acts{margin:0}
+.b8-golink{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 14px;border:1px solid color-mix(in srgb,var(--gold) 38%,transparent);border-radius:999px;
+  background:color-mix(in srgb,var(--gold) 9%,transparent);color:var(--glo);font-size:13px;font-weight:600;text-decoration:none}
+.b8-golink:hover{background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--ink-hi)}
+
+/* -- Wiki-Achievements -- */
+.b8-ach-head{display:flex;align-items:center;gap:20px;margin:0 0 10px;padding:16px 20px;border:1px solid var(--line);border-radius:16px;
+  background:linear-gradient(120deg,color-mix(in srgb,var(--gold) 10%,var(--panel-2)),var(--panel-2) 58%)}
+.b8-ach-head-main{min-width:0}
+.b8-ach-k{margin:0;font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.b8-ach-n{margin:4px 0 6px;font-family:var(--f-display);font-size:17px;font-weight:700;color:var(--ink-hi)}
+.b8-ach-n b{font-family:var(--f-mono);color:var(--gold)}
+.b8-ach-lead{margin:0;max-width:72ch;font-size:13px;line-height:1.55;color:var(--dim)}
+.b8-ach-note{margin:0 0 14px}
+.b8-ring{--p:0;--rc:var(--gold);position:relative;isolation:isolate;flex:none;display:grid;place-items:center;width:54px;height:54px;border-radius:50%;
+  background:conic-gradient(var(--rc) calc(var(--p) * 1%),var(--line) 0)}
+.b8-ring::before{content:'';position:absolute;inset:4px;z-index:-1;border-radius:50%;background:var(--card)}
+.b8-ring--lg{width:86px;height:86px}.b8-ring--lg::before{inset:6px}
+.b8-ring-v{font:700 22px/1 var(--f-mono);color:var(--ink-hi);font-variant-numeric:tabular-nums}
+.b8-ring-v small{font-size:12px;color:var(--dim)}
+#sec-achievements .b8-ach-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:12px;margin-top:0}
+#sec-achievements .ach-card.b8-ach{gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);box-shadow:none;contain-intrinsic-height:auto 92px}
+#sec-achievements .ach-card.b8-ach.unlocked{border-color:color-mix(in srgb,var(--gold) 45%,var(--line));background:color-mix(in srgb,var(--gold) 7%,var(--panel-2))}
+#sec-achievements .b8-ach .ach-ico{font-size:23px;opacity:.5}
+#sec-achievements .b8-ach.unlocked .ach-ico{opacity:1}
+#sec-achievements .b8-ach .ach-name{margin-bottom:3px;font-size:14px;line-height:1.3;color:var(--ink-hi)}
+#sec-achievements .b8-ach.unlocked .ach-name{color:var(--glo)}
+#sec-achievements .b8-ach .ach-desc{font-size:12.5px;line-height:1.45;color:var(--dim)}
+.b8-ach-st{display:flex;align-items:center;gap:8px;margin-top:7px;font:12px/1.2 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums}
+.b8-ach.unlocked .b8-ach-st{color:var(--cd-ok)}
+.b8-ach-st .cd-i{width:14px;height:14px;stroke-width:2.4}
+.b8-ach-bar{flex:1;max-width:120px;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.b8-ach-bar>i{display:block;width:var(--p,0%);height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--glo))}
+
+/* -- Feinschliff -- */
+/* Seitenkopf: Untertitel nicht unter die Kennzahlen laufen lassen */
+.b8-hero .cd-hero-sub{max-width:46ch}
+/* Route-Leiste: Etappen-Perlen mit Faden, erledigte golden, Zähler rechts */
+.b8-route-bar{justify-content:flex-start;gap:18px;margin:4px 0 14px;padding:0 2px 0 4px}
+.b8-route-p{display:flex;align-items:center;gap:16px;flex:1;min-width:0}
+.b8-pips{position:relative;display:flex;align-items:center;gap:14px;margin:0;padding:0;list-style:none}
+.b8-pips::before{content:'';position:absolute;left:14px;right:14px;top:50%;height:2px;margin-top:-1px;background:linear-gradient(90deg,var(--line-strong),var(--line-soft))}
+.b8-pips li{position:relative;display:flex}
+.b8-pip{display:grid;place-items:center;width:30px;height:30px;border:2px solid color-mix(in srgb,var(--gold) 50%,transparent);border-radius:50%;background:var(--bg);
+  color:var(--gold);font:700 12px/1 var(--f-mono);font-variant-numeric:tabular-nums;text-decoration:none;transition:transform .18s,background .18s,border-color .18s}
+.b8-pip:hover{border-color:var(--gold);color:var(--ink-hi)}
+html.cd-motion .b8-pip:hover{transform:translateY(-2px)}
+.b8-pip:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.b8-pip.is-done{background:var(--gold);border-color:var(--gold);color:var(--bg);box-shadow:0 0 14px -3px color-mix(in srgb,var(--gold) 70%,transparent)}
+.b8-route-n{margin-left:auto;font:12px/1.2 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.b8-route-n b{color:var(--ink-hi)}.b8-route-n.is-full,.b8-route-n.is-full b{color:var(--gold)}
+/* Etappe: Zähler der passenden Trophäen */
+.b8-side-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.b8-side-n{font:12px/1 var(--f-mono);letter-spacing:0;text-transform:none;color:var(--dim);font-variant-numeric:tabular-nums}
+.b8-side-n b{color:var(--ink-hi)}
+/* Ungeöffnete Medaille: leichter Metallschimmer statt flacher Scheibe */
+.b8-fold .cd-fold-ico{background:radial-gradient(circle at 34% 28%,color-mix(in srgb,var(--b8c) 22%,var(--card)) 0%,color-mix(in srgb,var(--b8c) 7%,var(--card)) 62%)}
+/* Vorschau beim Überfahren: so sähe "erhalten" aus */
+.b8-got[aria-pressed="false"]:hover::after{content:'✓';position:absolute;right:-4px;bottom:-4px;display:grid;place-items:center;width:20px;height:20px;border:2px dashed color-mix(in srgb,var(--cd-ok) 70%,transparent);border-radius:50%;
+  background:var(--card);color:var(--cd-ok);font:700 12px/1 var(--f-body);opacity:.85}
+/* Platin-Bühne: Fortschritt zur Platin als Ring rechts */
+.b8-plat-ring{--rc:var(--b8-platinum);width:62px;height:62px}
+.b8-plat-ring::before{inset:5px}
+.b8-plat-ring .b8-ring-v{font-size:17px}.b8-plat-ring .b8-ring-v small{font-size:11px}
+.b8-plat-l{font:600 var(--fs-11)/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--b8-platinum)}
+.b8-tr--plat .cd-fold-aside{align-items:center;margin-right:6px}
+@media (pointer:coarse){.b8-badge{min-height:40px}.b8-pip{width:36px;height:36px}}
+
+/* -- Breiten -- */
+@media (max-width:1100px){
+  .b8-shrine{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .b8-stage-card{grid-template-columns:minmax(0,1fr)}
+  .b8-stage-card .cd-scene-g{right:max(10px,3%)}
+  .b8-stage-side{padding:14px 0 0;border-left:0;border-top:1px solid var(--line-soft)}
+  .b8-stage-ck{margin-top:0;max-width:320px}
+}
+@media (max-width:600px){
+  .b8-stage{grid-template-columns:38px minmax(0,1fr);gap:10px}
+  .b8-stage::before{left:18px;top:44px}
+  .b8-node{width:38px;height:38px;margin-top:4px;box-shadow:0 0 0 3px var(--bg)}
+  .b8-node-n{font-size:14px}
+  .b8-node-ok .cd-i{width:19px;height:19px}
+  .b8-stage-card{padding:14px 14px 16px;gap:12px}
+  .b8-stage-t{font-size:16.5px}
+  .b8-stage-ck{max-width:none}
+  .b8-route-bar{flex-wrap:wrap;gap:8px 12px}
+  .b8-route-p{flex-basis:100%;gap:12px}
+  .b8-pips{gap:10px}
+  .b8-badges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .b8-badges>li{display:flex;min-width:0}
+  .b8-badge{position:relative;flex:1;gap:6px;border-radius:12px;padding:5px 8px 5px 4px;font-size:12px}
+  .b8-bmed{width:22px;height:22px;font-size:11px}
+  .b8-bname{overflow-wrap:normal;word-break:normal;hyphens:manual}
+  .b8-badge.is-got::after{position:absolute;left:17px;bottom:3px;display:grid;place-items:center;width:14px;height:14px;margin:0;border-radius:50%;background:var(--cd-ok);color:var(--bg);font-size:10px;line-height:1}
+  .b8-fold .b8-gc{display:none}
+  .b8-plat-ring{width:50px;height:50px}.b8-plat-ring::before{inset:4px}.b8-plat-ring .b8-ring-v{font-size:14px}
+  .b8-tr--plat .cd-fold-aside{align-items:center;gap:10px;margin:2px 0 0}
+  .b8-shrine{gap:8px}
+  .b8-shr{flex-direction:column;align-items:flex-start;gap:10px;padding:12px}
+  .b8-shr-med{width:40px;height:40px;font-size:18px}
+  .b8-shr-n b{font-size:20px}
+  .b8-tr{--b8-ico:40px;--b8-pt:12px;--b8-pl:16px}
+  .b8-tr--plat{--b8-ico:48px;--b8-pt:14px}
+  .b8-fold--plat>summary{min-height:80px;padding-bottom:14px}
+  .b8-fold--plat .cd-fold-t{font-size:17px}
+  .b8-fold .cd-fold-ico{width:var(--b8-ico);height:var(--b8-ico)}
+  .b8-tr.is-got .cd-fold-t::after{margin-left:6px}
+  .b8-ach-head{gap:14px;padding:14px}
+  .b8-ring--lg{width:70px;height:70px}
+  .b8-ring-v{font-size:18px}
+}
 /* R2-B8 Ende */
 
 /* ---- Bereich Bauer 9 (nur B9 schreibt hier) ---- */
@@ -6961,15 +7197,17 @@ html.cd-motion .r2b6-pend .r2b6-out{opacity:0;transition:opacity .3s ease;transi
 
   <section class="sec" id="sec-achievements">
     <h2 class="sec-t"><span class="sec-sym">★</span> Trophäen &amp; Errungenschaften <span class="sec-t-en">Trophies / Achievements</span></h2>
-    <h3 class="sub-t" style="margin-top:0">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;line-height:1.6">Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin. Außer Platin und den Story-/Lager-Trophäen hängt jede Trophäe an einer Herausforderungs-Kategorie im Journal (Challenges); Platin ist laut PowerPyx („Minimum Playthroughs: 1“) und ConsolePulse in einem Durchgang möglich, nach dem Epilog bleibt Free-Roam; 8BitToast beschreibt denselben Ablauf (Story, danach Free-Roam für die restlichen Challenges). Uneinig sind die Quellen bei der Verpassbarkeit: PowerPyx führt fünf Trophäen als verpassbar (Shadowlord, Battlefield Conqueror, Brilliant Tactician, Grand Collector of Arms, Unvanquished Strategist), 8BitToast kennt keine dauerhaft verpassbaren Trophäen und nur zwei Wachturm-Challenges (Sinking Fort, Barraging Cannon V), die nach der Befreiung aller Feindlager entfallen könnten; Leserkommentare bei PowerPyx berichten dagegen, dass der Wachturm-Abbau auch in befreiten Lagern zählt. Die Markierungen im Wiki folgen PowerPyx (conf medium). Drei Challenge-Kategorien, die questlog in einer eigenen Gruppe führt, kommen in keiner der 35 Trophäenbeschreibungen vor (Schluss aus der Trophäenliste, keine Quellenaussage): Mysterious Animals (2: Hyacinth Macaw, Iron Eagle), Toys (5) und Pets (4, schalten Pet-Plätze frei), zusammen 11 Challenges. Quellen: PowerPyx, Steam-Erfolgsliste, questlog.gg (Herausforderungs-Zahlen), ConsolePulse, Fextralife (Stand 10/2026).</div>
-    <div id="trophy-filter" style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0"></div>
+    <!-- R2 B8: Platin-Roadmap als Seitenkopf + Etappen-Route, darunter Trophäen-Schrein, Filter-Pillen, Trophäen nach Grad, Wiki-Achievements.
+         Alle Inhalte rendert renderTrophies/renderAchievements; die frühere Einleitung steht wortgetreu in _B8_ABOUT (Faltkarte "Über diese Liste"). -->
+    <div id="trophy-roadmap" class="b8-rm"></div>
+    <h3 class="sub-t b8-sub">🏅 Echte In-Game-Trophäen (PS5 / Xbox / Steam)</h3>
+    <div id="b8-shrine"></div>
+    <div id="b8-about"></div>
+    <div id="trophy-filter"></div>
     <div id="trophy-list"></div>
-    <div id="trophy-roadmap" style="margin-top:16px"></div>
-    <h3 class="sub-t" style="margin-top:26px">🎮 Wiki-Achievements</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Gamification deines Wiki-Fortschritts. Achievements werden automatisch bei Aktionen entsperrt (Boss markieren, Notiz schreiben, Theme wechseln, etc.). Alle Daten bleiben lokal. Nicht mit den echten Trophäen verwechseln: Gleichnamige Einträge wie „Pilgrim of Wonders“ werten nur deine Häkchen im Wiki aus.</div>
-    <div class="ach-overview-bar" id="ach-overview"></div>
-    <div class="ach-grid" id="ach-grid"></div>
+    <h3 class="sub-t b8-sub">🎮 Wiki-Achievements</h3>
+    <div class="b8-ach-ov" id="ach-overview"></div>
+    <div class="ach-grid b8-ach-grid" id="ach-grid"></div>
   </section>
 </div>
 </div>
@@ -9240,31 +9478,208 @@ function showAchToast(a){
 // (Grade PowerPyx+Fextralife-bestaetigt, Verteilung 1/4/10/20 gegen PSNProfiles abgeglichen).
 // 'miss'-Flags folgen PowerPyx (begrenzte Challenge-Verfuegbarkeit, KEIN Story-Cutoff; andere
 // Quellen stufen die Liste als komplett nicht-verpassbar ein -> conf medium an diesen Stellen).
+/* ===== R2 B8: Trophäen & Errungenschaften (Redesign 2, 21.10.2026) =====
+   Seitenkopf = Platin-Roadmap (cdHero, Szene "trophies") mit Etappen-Route, Trophäen-Schrein (Fortschritt je Grad),
+   Faltkarte "Über diese Liste", Filter-Pillen, Trophäen als Faltkarten nach Grad mit Medaille zum Abhaken,
+   Wiki-Achievements mit Fortschrittsring. CSS: Anker R2-B8. Alle Texte wortgetreu aus TROPHIES/TROPHY_ROADMAP/TROPHY_NOTE
+   bzw. der früheren Einleitung; Etappen-Titel und Chips sind nur Kurzlabels aus dem Text der jeweiligen Etappe.
+   Neue localStorage-Schlüssel: cd_r2_b8_tr (erhaltene Trophäen, Liste aus cdSlug(name)), cd_r2_b8_rm (erledigte Etappen). */
 let _trFilter='all';
-function trophyFilter(f){_trFilter=f;renderTrophies();}
+function trophyFilter(f){_trFilter=f||'all';_b8ApplyFilter();}
+const _B8_GR=['platinum','gold','silver','bronze'];
+const _B8_KTR='cd_r2_b8_tr',_B8_KRM='cd_r2_b8_rm';
+/* Gedankenstriche aus den Daten (" — ") sichtbar als Semikolon (LEITPLANKEN 2.9); data-s behält den Originaltext */
+function _b8Dash(s){return String(s==null?'':s).replace(/\s+—\s+/g,'; ');}
+/* escaped + Zahlen hervorgehoben (nicht in Entities wie &#39;) */
+function _b8Hi(s){return cdEsc(_b8Dash(s)).replace(/(?<![#\d&.,])(\d+(?:[.,]\d+)*(?:–\d+)?\+?(?:\/10)?)/g,'<b class="b8-num">$1</b>');}
+/* Etappen: Kurztitel + Chips; ein Chip erscheint nur, wenn sein Beleg ("need") wörtlich im Etappentext steht.
+   tr = Trophäen, die der Etappentext bzw. deren eigene Beschreibung/Tipp benennt:
+   1 "1 Playthrough" → Platin; 2 Challenge-Kategorien mit Sealed Abyss Artifact (Meisterschaft, Training/Battle/Operation,
+   Hunting/Life/Trade/Above the Law/Challenges and Changes); 3 Camps (Tipp Brilliant Tactician) und Spezialwaffen (Tipps
+   Grand Collector of Arms, Unvanquished Strategist); 4 Kapitel 7 und Proud Returnee; 5 Story-Ende (Expert Storyteller,
+   Tipp Conqueror of the Abysses) und kumulative Challenges (Tipp Natural Collector). */
+const _B8_RM=[
+  {t:'Aufwand einschätzen',g:'⚖',chips:[['200–300+ Stunden',{v:'200–300+',t:'Stunden',c:'gold'}],['7/10 auf Normal',{v:'7/10',t:'auf Normal'}],['1 Playthrough',{v:'1',t:'Playthrough'}],['keine Online-',{t:'keine Online-Trophäen',i:'check',c:'ok'}]],
+    tr:['Pywel Legend']},
+  {t:'Vorarbeit',g:'⚒',chips:[['25+ Stunden Vorarbeit',{v:'25+',t:'Stunden',c:'gold'}],['8 versteckten Glocken',{v:'8',t:'Glocken'}],['141 Sealed Abyss Artifacts',{v:'141',t:'Sealed Abyss Artifacts'}],['nicht rückwirkend',{t:'zählt nicht rückwirkend',i:'warn',c:'warn'}]],
+    tr:['Unvanquished Strategist','Relentless Warrior','Battlefield Conqueror','Brilliant Tactician','Ultimate Hunter','Natural Collector','The Golden Merchant','Shadowlord','Lord of Honor']},
+  {t:'Story und Challenges parallel',g:'⚔',chips:[['Camps NICHT vorzeitig befreien',{t:'Camps nicht vorzeitig befreien',i:'warn',c:'red'}],['10 Spezialwaffen niemals verkaufen',{v:'10',t:'Spezialwaffen behalten',i:'warn',c:'red'}]],
+    tr:['Brilliant Tactician','Grand Collector of Arms','Unvanquished Strategist']},
+  {t:'Nach Kapitel 7: Pailune',g:'⛺',chips:[["Mission 'Reconstructing Pailune'",{t:'Reconstructing Pailune',i:'pin'}],['sechs Schritte',{v:'6',t:'Schritte'}],['Greymane-Fraktionsquests',{t:'Greymane-Fraktionsquests'}],['Ressourcen dafür farmen',{t:'Ressourcen farmen',c:'gold'}]],
+    tr:['Protector of Pailune','Proud Returnee']},
+  {t:'Nach dem Story-Ende: Free-Roam',g:'⛰',chips:[['Free-Roam',{t:'Free-Roam',i:'pin',c:'ok'}],['kein Quest-Replay',{t:'kein Quest-Replay',i:'warn',c:'warn'}],['kumulative Challenges möglichst früh',{t:'Kumulatives früh starten'}]],
+    tr:['Expert Storyteller','Conqueror of the Abysses','Natural Collector']}
+];
+/* frühere Einleitung (wortgetreu, nur in Abschnitte gegliedert) */
+const _B8_ABOUT={
+  lead:'Die offizielle Trophäen-Liste: 35 Trophäen auf PS5 (1 Platin · 4 Gold · 10 Silber · 20 Bronze), auf Xbox/Steam dieselben 34 Achievements ohne Platin.',
+  facts:[['Aufbau','Außer Platin und den Story-/Lager-Trophäen hängt jede Trophäe an einer Herausforderungs-Kategorie im Journal (Challenges).'],
+    ['Durchgänge','Platin ist laut PowerPyx („Minimum Playthroughs: 1“) und ConsolePulse in einem Durchgang möglich, nach dem Epilog bleibt Free-Roam; 8BitToast beschreibt denselben Ablauf (Story, danach Free-Roam für die restlichen Challenges).']],
+  miss:'PowerPyx führt fünf Trophäen als verpassbar (Shadowlord, Battlefield Conqueror, Brilliant Tactician, Grand Collector of Arms, Unvanquished Strategist), 8BitToast kennt keine dauerhaft verpassbaren Trophäen und nur zwei Wachturm-Challenges (Sinking Fort, Barraging Cannon V), die nach der Befreiung aller Feindlager entfallen könnten; Leserkommentare bei PowerPyx berichten dagegen, dass der Wachturm-Abbau auch in befreiten Lagern zählt. Die Markierungen im Wiki folgen PowerPyx (conf medium).',
+  none:'Drei Challenge-Kategorien, die questlog in einer eigenen Gruppe führt, kommen in keiner der 35 Trophäenbeschreibungen vor (Schluss aus der Trophäenliste, keine Quellenaussage): Mysterious Animals (2: Hyacinth Macaw, Iron Eagle), Toys (5) und Pets (4, schalten Pet-Plätze frei), zusammen 11 Challenges.',
+  src:['PowerPyx','Steam-Erfolgsliste','questlog.gg (Herausforderungs-Zahlen)','ConsolePulse','Fextralife (Stand 10/2026)']
+};
+function _b8Stages(name){const r=[];_B8_RM.forEach((m,i)=>{if(i<TROPHY_ROADMAP.length&&m.tr.includes(name))r.push(i);});return r;}
+function _b8Grade(g){return TROPHY_GRADES[g]||{lbl:String(g||''),ico:'',col:''};}
+function _b8Medal(t){if(t.grade==='platinum')return '✦';const s=t.sec&&typeof SECTIONS!=='undefined'&&SECTIONS.find(x=>x.id===t.sec);return (s&&s.glyph)||'★';}
+/* Feinschliff: Zähler "x/y" je Etappe, Etappen-Perlen über der Route (Sprung zur Etappe), Platin-Ring */
+function _b8SideN(k,n){return '<b>'+k+'</b>/'+n;}
+function _b8Pips(doneRm){
+  const N=TROPHY_ROADMAP.length;let nd=0,h='';
+  for(let i=1;i<=N;i++){const d=doneRm.has('e'+i);if(d)nd++;
+    h+='<li><a class="b8-pip'+(d?' is-done':'')+'" href="'+cdGoHref('achievements','b8-etappe-'+i)+'" data-go="achievements" data-goq="b8-etappe-'+i+'" title="Etappe '+i+': '+cdEsc((_B8_RM[i-1]||{}).t||'')+'" aria-label="Etappe '+i+': '+cdEsc((_B8_RM[i-1]||{}).t||'')+(d?' (erledigt)':'')+'">'+i+'</a></li>';}
+  return '<ol class="b8-pips">'+h+'</ol><span class="b8-route-n'+(nd===N?' is-full':'')+'"><b>'+nd+'</b>/'+N+' erledigt</span>';
+}
+function _b8PlatRing(k,n){const p=n?Math.round(k/n*100):0;return '<span class="b8-ring b8-plat-ring" style="--p:'+p+'" aria-hidden="true"><span class="b8-ring-v">'+k+'<small>/'+n+'</small></span></span><span class="b8-plat-l">für Platin</span>';}
+/* Etappe der Route */
+function _b8Stage(txt,i,got,doneRm){
+  const m=_B8_RM[i]||{t:'Etappe '+(i+1),g:'★',chips:[],tr:[]},n=i+1,nn=(n<10?'0':'')+n,done=doneRm.has('e'+n);
+  const chips=m.chips.filter(c=>txt.indexOf(c[0])>-1).map(c=>c[1]);
+  /* langer Text: erster Satz sichtbar, Rest in einer Mini-Faltkarte (Suche öffnet sie über die Fundament-Hilfe) */
+  let head=txt,rest='';
+  if(txt.length>360){const k=txt.indexOf('. ',120);if(k>-1&&txt.length-k>80){head=txt.slice(0,k+1);rest=txt.slice(k+2);}}
+  const trs=m.tr.map(nm=>TROPHIES.find(t=>t.name===nm)).filter(Boolean);
+  const badges=trs.map(t=>'<li><a class="b8-badge b8-g-'+cdEsc(t.grade)+(got.has(cdSlug(t.name))?' is-got':'')+'" data-b8b="'+cdEsc(cdSlug(t.name))+'" href="'+cdGoHref('achievements',t.name)+'" data-go="achievements" data-goq="'+cdEsc(t.name)+'" title="'+cdEsc(_b8Grade(t.grade).lbl+': '+t.desc)+'">'
+    +'<span class="b8-bmed cd-g" aria-hidden="true">'+cdEsc(_b8Medal(t))+'</span><span class="b8-bname">'+cdEsc(t.name)+'</span></a></li>').join('');
+  const s=['etappe',n,m.t,txt,trs.map(t=>t.name).join(' '),'platin roadmap'].join(' ');
+  return '<li class="b8-stage'+(done?' is-done':'')+'" data-s="'+cdEsc(s.toLowerCase())+'">'
+    +'<div class="b8-node" aria-hidden="true"><span class="b8-node-n">'+nn+'</span><span class="b8-node-ok">'+cdIcon('check')+'</span></div>'
+    +'<article class="b8-stage-card cd-spot cd-scened" data-go-id="b8-etappe-'+n+'">'+cdScene([],{tone:'gold',glyph:m.g})
+    +'<div class="b8-stage-main"><p class="b8-stage-k">Etappe '+n+' von '+TROPHY_ROADMAP.length+'</p>'
+    +'<h4 class="b8-stage-t">'+cdEsc(m.t)+'</h4>'+cdChips(chips,'b8-stage-chips')
+    +'<p class="b8-stage-txt">'+_b8Hi(head)+'</p>'
+    +(rest?'<details class="cd-fold b8-more"><summary><span class="b8-more-o">Weiterlesen</span><span class="b8-more-c">Weniger</span>'+cdIcon('chev')+'</summary><div class="cd-fold-body"><p class="b8-stage-txt">'+_b8Hi(rest)+'</p></div></details>':'')
+    +'</div>'
+    +'<div class="b8-stage-side">'+(badges?'<p class="b8-side-h"><span>Passende Trophäen</span><span class="b8-side-n" data-b8-sn>'+_b8SideN(trs.filter(t=>got.has(cdSlug(t.name))).length,trs.length)+'</span></p><ul class="b8-badges">'+badges+'</ul>':'')
+    +cdCheck({key:_B8_KRM,id:'e'+n,title:'Etappe erledigt',cls:'b8-stage-ck'})+'</div>'
+    +'</article></li>';
+}
+/* Performance: je 5 Karten ein Block mit content-visibility + eigener Scroll-Einblendung (data-cd-reveal). So fragt die
+   Einblendung nur den Block ab, nicht jede Karte, und Unsichtbares wird nicht gelayoutet. */
+function _b8Chunks(h){let o='';for(let i=0;i<h.length;i+=5)o+='<div class="b8-chunk" data-cd-reveal>'+h.slice(i,i+5).join('')+'</div>';return o;}
+/* Trophäe: Hülle trägt data-s (Volltext) + Medaillen-Knopf "erhalten" (außerhalb von summary), darin die Faltkarte */
+function _b8Trophy(t,got){
+  const g=_b8Grade(t.grade),id=cdSlug(t.name),on=got.has(id),st=_b8Stages(t.name);
+  const sec=t.sec&&typeof SECTIONS!=='undefined'?SECTIONS.find(x=>x.id===t.sec):null;
+  const m=/\bAlle (\d+) (\S+)/.exec(t.desc)||/\b(\d+) (Einzel-Challenges)/.exec(t.desc);
+  const chips=[{h:'<span class="cd-chip b8-gc b8-g-'+cdEsc(t.grade)+'"><b>'+cdEsc(g.lbl)+'</b></span>'}];
+  if(m)chips.push({v:m[1],t:/Kategorien$/.test(m[2])?'Kategorien':/rätsel$/i.test(m[2])?'Rätsel':/Challenges$/.test(m[2])?'Challenges':'Herausforderungen'});
+  if(t.miss)chips.push({t:'Verpassbar',i:'miss',c:'red'});
+  else if(t.tip)chips.push({t:'Tipp',i:'info',c:'violet'});
+  const pl=t.grade==='platinum',base=pl?TROPHIES.filter(x=>x.grade!=='platinum'):null;
+  const body=()=>{
+    let h='';
+    if(t.miss)h+=cdNote(_b8Dash(t.tip||'Laut PowerPyx verpassbar.'),{kind:'miss'});
+    else if(t.tip)h+=cdNote(_b8Dash(t.tip),{title:'Tipp'});
+    const stl=st.map(i=>'<a class="cd-go" href="'+cdGoHref('achievements','b8-etappe-'+(i+1))+'" data-go="achievements" data-goq="b8-etappe-'+(i+1)+'">Etappe '+(i+1)+': '+cdEsc((_B8_RM[i]||{}).t||'')+'</a>').join('<br>');
+    h+=cdFacts([['Grad',g.lbl],['Plattform',t.grade==='platinum'?'nur PS5 (Xbox/Steam ohne Platin)':'PS5, Xbox, Steam'],
+      ['Quellenlage',t.conf==='high'?'gesichert':t.conf==='medium'?'teils belegt':t.conf==='low'?'unsicher':''],['Platin-Roadmap',stl?{h:stl}:'']]);
+    if(sec)h+='<p class="b8-acts">'+cdGoLink(t.sec,'','Zur Wiki-Seite: '+sec.name,'b8-golink')+'</p>';
+    return h;
+  };
+  const s=[t.name,t.desc,t.tip||'',g.lbl,t.miss?'verpassbar missable':'','trophäe trophy'].join(' ');
+  return '<div class="b8-tr b8-g-'+cdEsc(t.grade)+(t.grade==='platinum'?' b8-tr--plat':'')+(on?' is-got':'')+'" data-s="'+cdEsc(s.toLowerCase())+'" data-tr="'+cdEsc(id)+'" data-grade="'+cdEsc(t.grade)+'"'+(t.miss?' data-miss="1"':'')+'>'
+    +cdFold({title:t.name,lead:_b8Dash(t.desc),icon:_b8Medal(t),chips,tone:'var(--b8-'+t.grade+')',aside:pl?_b8PlatRing(base.filter(x=>got.has(cdSlug(x.name))).length,base.length):'',cls:'b8-fold'+(t.grade==='platinum'?' b8-fold--plat':''),attrs:{'data-go-id':t.name},body})
+    +'<button type="button" class="b8-got" aria-pressed="'+on+'" aria-label="'+cdEsc(t.name)+': als erhalten markieren" title="Als erhalten markieren"></button>'
+    +'</div>';
+}
 function renderTrophies(){
   const wrap=document.getElementById('trophy-list'); if(!wrap)return;
+  const sec=document.getElementById('sec-achievements');
+  const got=cdCheckGet(_B8_KTR),doneRm=cdCheckGet(_B8_KRM);
   const cnt=g=>TROPHIES.filter(t=>t.grade===g).length;
   const missCnt=TROPHIES.filter(t=>t.miss).length;
-  const chips=[['all','Alle ('+TROPHIES.length+')'],['platinum',TROPHY_GRADES.platinum.ico+' '+cnt('platinum')],['gold',TROPHY_GRADES.gold.ico+' '+cnt('gold')],['silver',TROPHY_GRADES.silver.ico+' '+cnt('silver')],['bronze',TROPHY_GRADES.bronze.ico+' '+cnt('bronze')],['miss','⚠ Verpassbar ('+missCnt+')']];
-  const fb=document.getElementById('trophy-filter');
-  if(fb)fb.innerHTML=chips.map(c=>'<button class="ruin-fbtn'+(_trFilter===c[0]?' active':'')+'" onclick="trophyFilter(\''+c[0]+'\')">'+c[1]+'</button>').join('');
-  const list=TROPHIES.filter(t=>_trFilter==='all'||(_trFilter==='miss'?t.miss:t.grade===_trFilter));
-  wrap.innerHTML=list.map(t=>{
-    const g=TROPHY_GRADES[t.grade];
-    return '<div class="fac-q" data-s="'+escHtml((t.name+' '+t.desc+' '+(t.tip||'')+' trophäe trophy').toLowerCase())+'">'
-      +'<div class="fac-qh">'+g.ico+' '+escHtml(t.name)
-      +'<span class="tag" style="border-color:'+g.col+';color:'+g.col+'">'+g.lbl+'</span>'
-      +facBadges(t)+'</div>'
-      +'<div style="font-size:12px;color:var(--iron-gall);margin:4px 0 0">'+escHtml(t.desc)+'</div>'
-      +(t.tip?'<div style="font-size:var(--fs-11-5);color:var(--dim);margin-top:4px">💡 '+escHtml(t.tip)+'</div>':'')
-      +(t.sec?'<button class="empty-state-action" style="margin-top:6px" onclick="showSec(\''+t.sec+'\')">Passende Wiki-Seite →</button>':'')
-      +'</div>';
-  }).join('');
+  /* Kopf + Route */
   const rm=document.getElementById('trophy-roadmap');
-  if(rm)rm.innerHTML='<h3 class="sub-t">🗺️ Platin-Roadmap (PowerPyx)</h3><ol style="font-size:12px;line-height:1.65;color:var(--iron-gall);padding-left:18px;margin:6px 0">'
-    +TROPHY_ROADMAP.map(r=>'<li style="margin-bottom:5px">'+escHtml(r)+'</li>').join('')
-    +'</ol><div style="font-size:var(--fs-11);color:var(--dim);line-height:1.55;margin-top:6px">'+escHtml(TROPHY_NOTE)+'</div>';
+  if(rm){
+    const hero=cdHero({kicker:'Platin-Roadmap · nach PowerPyx',title:'Weg zur Platin: '+((TROPHIES.find(t=>t.grade==='platinum')||{}).name||'Platin'),
+      sub:'1 Playthrough, keine Online- oder Glitch-Trophäen: der Aufwand ist zeit-, nicht skill-getrieben.',
+      scene:{keys:['trophies'],pos:'50% 66%'},glyph:'✦',tone:'gold',h:3,cls:'b8-hero',
+      stats:[[TROPHIES.length,'Trophäen'],[TROPHY_ROADMAP.length,'Etappen'],[missCnt,'verpassbar (PowerPyx)']]}).replace('class="cd-hero-t"','class="cd-hero-t" data-toc');
+    const nd=TROPHY_ROADMAP.filter((_,i)=>doneRm.has('e'+(i+1))).length;
+    rm.innerHTML=hero
+      +'<nav class="b8-route-bar" aria-label="Etappen der Platin-Roadmap"><span class="b8-route-l">Deine Route</span><span class="b8-route-p" data-b8-rmp>'+_b8Pips(doneRm)+'</span></nav>'
+      +'<ol class="b8-route">'+TROPHY_ROADMAP.map((r,i)=>_b8Stage(r,i,got,doneRm)).join('')+'</ol>';
+  }
+  /* Schrein: Fortschritt je Grad (Platin = alle anderen) */
+  const sh=document.getElementById('b8-shrine');
+  if(sh)sh.innerHTML='<div class="b8-shrine" role="list">'+_B8_GR.map(gr=>{
+    const g=_b8Grade(gr),n=cnt(gr),pl=gr==='platinum';
+    const tot=pl?TROPHIES.length-n:n,lbl=pl?'für Platin':'erhalten';
+    return '<div class="b8-shr cd-spot b8-g-'+gr+'" role="listitem" data-b8-shr="'+gr+'">'
+      +'<span class="b8-shr-med" aria-hidden="true"><i class="cd-g">'+(pl?'✦':'★')+'</i></span>'
+      +'<div class="b8-shr-main"><p class="b8-shr-l">'+cdEsc(g.lbl)+'</p><p class="b8-shr-n"><b>'+n+'</b> '+(n===1?'Trophäe':'Trophäen')+'</p>'
+      +'<p class="b8-shr-got"><span class="b8-shr-bar"><i style="--p:0%"></i></span><span><b data-b8-c>0</b>/'+tot+' '+lbl+'</span></p></div></div>';
+  }).join('')+'</div><p class="b8-hint">'+cdIcon('info')+'<span>Ein Klick auf eine Medaille markiert die Trophäe als erhalten. Der Stand bleibt nur in diesem Browser.</span></p>';
+  /* Über diese Liste */
+  const ab=document.getElementById('b8-about');
+  if(ab){
+    const A=_B8_ABOUT,s=[A.lead,A.facts.map(f=>f.join(' ')).join(' '),'Uneinig sind die Quellen bei der Verpassbarkeit:',A.miss,A.none,TROPHY_NOTE,'Quellen:',A.src.join(', ')].join(' ');
+    ab.innerHTML=cdFold({title:'Über diese Liste: Plattformen, Quellen, Verpassbarkeit',lead:A.lead,icon:'ⓘ',tone:'slate',cls:'b8-about',
+      chips:[{v:'35',t:'PS5'},{v:'34',t:'Xbox / Steam'},{v:String(missCnt),t:'verpassbar laut PowerPyx',c:'red'}],s,
+      body:()=>cdFacts(A.facts)+cdNote(A.miss,{kind:'warn',title:'Uneinig bei der Verpassbarkeit'})+cdNote(A.none,{title:'Challenges ohne eigene Trophäe'})
+        +cdNote(_b8Dash(TROPHY_NOTE),{title:'Datenstand der Liste'})+cdSrc(A.src)});
+  }
+  /* Filter-Pillen */
+  const fb=document.getElementById('trophy-filter');
+  if(fb){
+    const open=TROPHIES.filter(t=>!got.has(cdSlug(t.name))).length;
+    fb.innerHTML=cdPills([{v:'all',t:'Alle',n:TROPHIES.length},{v:'platinum',t:'Platin',n:cnt('platinum'),g:'✦'},{v:'gold',t:'Gold',n:cnt('gold'),g:'★'},
+      {v:'silver',t:'Silber',n:cnt('silver'),g:'★'},{v:'bronze',t:'Bronze',n:cnt('bronze'),g:'★'},{v:'miss',t:'Verpassbar',n:missCnt,g:'⚠'},{v:'open',t:'Noch offen',n:open,g:'○'}]
+      .map(p=>Object.assign(p,{on:p.v===_trFilter})),{name:'b8-tr',label:'Trophäen filtern',cls:'b8-pills'});
+  }
+  /* Liste nach Grad */
+  wrap.innerHTML=_B8_GR.map(gr=>{
+    const L=TROPHIES.filter(t=>t.grade===gr);if(!L.length)return '';
+    return '<section class="b8-grp b8-g-'+gr+'" data-grade="'+gr+'" aria-label="'+cdEsc(_b8Grade(gr).lbl)+'-Trophäen">'
+      +'<h4 class="b8-grp-t"><span class="b8-grp-med" aria-hidden="true"></span><span class="b8-grp-l">'+cdEsc(_b8Grade(gr).lbl)+'</span><span class="b8-grp-n">'+L.length+'</span>'
+      +'<span class="b8-grp-p" data-b8-gp></span></h4>'
+      +'<div class="b8-trs">'+_b8Chunks(L.map(t=>_b8Trophy(t,got)))+'</div></section>';
+  }).join('');
+  _b8Sync();_b8ApplyFilter();
+  if(sec&&!sec._b8){
+    sec._b8=1;
+    sec.addEventListener('cd-pills',e=>{if(e.detail.name!=='b8-tr')return;_trFilter=e.detail.value||'all';_b8ApplyFilter();});
+    sec.addEventListener('click',e=>{
+      const b=e.target.closest('.b8-got');
+      if(b){const w=b.closest('.b8-tr'),on=b.getAttribute('aria-pressed')!=='true';cdCheckSet(_B8_KTR,w.dataset.tr,on);_b8Sync();if(_trFilter==='open')_b8ApplyFilter();return;}
+      /* Sprung zu einer Trophäe: Filter vorher lösen, sonst läge das Ziel verdeckt */
+      const a=e.target.closest('a[data-go="achievements"]');
+      if(a&&_trFilter!=='all'){_trFilter='all';_b8ApplyFilter();}
+    });
+    sec.addEventListener('cd-check',e=>{if(e.detail.key===_B8_KRM)_b8Sync();});
+  }
+}
+/* Zustände nachziehen (ohne Neuaufbau): Medaillen, Badges, Schrein, Gruppen, Route, Pillen-Zahl */
+function _b8Sync(){
+  const sec=document.getElementById('sec-achievements');if(!sec)return;
+  const got=cdCheckGet(_B8_KTR),doneRm=cdCheckGet(_B8_KRM);
+  sec.querySelectorAll('.b8-tr').forEach(w=>{const on=got.has(w.dataset.tr);w.classList.toggle('is-got',on);const b=w.querySelector('.b8-got');if(b){b.setAttribute('aria-pressed',on);b.title=on?'Erhalten (Klick: zurücknehmen)':'Als erhalten markieren';}});
+  sec.querySelectorAll('.b8-badge').forEach(a=>a.classList.toggle('is-got',got.has(a.dataset.b8b)));
+  const has=t=>got.has(cdSlug(t.name));
+  _B8_GR.forEach(gr=>{
+    const L=TROPHIES.filter(t=>t.grade===gr),pl=gr==='platinum',base=pl?TROPHIES.filter(t=>t.grade!=='platinum'):L,n=base.filter(has).length;
+    const sh=sec.querySelector('[data-b8-shr="'+gr+'"]');
+    if(sh){sh.querySelector('[data-b8-c]').textContent=n;sh.querySelector('.b8-shr-bar>i').style.setProperty('--p',(base.length?Math.round(n/base.length*100):0)+'%');sh.classList.toggle('is-full',!!base.length&&n>=base.length);}
+    const gp=sec.querySelector('.b8-grp[data-grade="'+gr+'"] [data-b8-gp]');if(gp){const k=L.filter(has).length;gp.textContent=k?k+'/'+L.length+' erhalten':'';}
+  });
+  const nd=TROPHY_ROADMAP.filter((_,i)=>doneRm.has('e'+(i+1))).length,route=sec.querySelector('.b8-route');
+  if(route){route.querySelectorAll('.b8-stage').forEach((li,i)=>li.classList.toggle('is-done',doneRm.has('e'+(i+1))));}
+  const rp=sec.querySelector('[data-b8-rmp]');if(rp)rp.innerHTML=_b8Pips(doneRm);
+  sec.querySelectorAll('.b8-stage').forEach(li=>{const sn=li.querySelector('[data-b8-sn]');if(sn)sn.innerHTML=_b8SideN(li.querySelectorAll('.b8-badge.is-got').length,li.querySelectorAll('.b8-badge').length);});
+  const pr=sec.querySelector('.b8-tr--plat .cd-fold-aside');if(pr){const base=TROPHIES.filter(t=>t.grade!=='platinum');pr.innerHTML=_b8PlatRing(base.filter(has).length,base.length);}
+  const pn=sec.querySelector('[data-cd-pills="b8-tr"] .cd-pill[data-v="open"] .cd-pill-n');if(pn)pn.textContent=TROPHIES.filter(t=>!has(t)).length;
+}
+/* Filter über Klassen (kein Neuaufbau); data-filtered lässt cdGo gefilterte Karten überspringen */
+function _b8ApplyFilter(){
+  const sec=document.getElementById('sec-achievements');if(!sec)return;
+  const f=_trFilter;
+  sec.querySelectorAll('.b8-tr').forEach(w=>{
+    const ok=f==='all'||(f==='miss'?w.dataset.miss==='1':f==='open'?!w.classList.contains('is-got'):w.dataset.grade===f);
+    w.classList.toggle('b8-off',!ok);if(ok)delete w.dataset.filtered;else w.dataset.filtered='1';
+  });
+  const p=sec.querySelector('[data-cd-pills="b8-tr"]');
+  if(p)p.querySelectorAll('.cd-pill').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===f));
 }
 
 function renderAchievements(){
@@ -9273,28 +9688,24 @@ function renderAchievements(){
   const unlocked=checkAchievements(true);
   const total=ACHIEVEMENTS.length;
   const done=unlocked.length;
-  const pct=Math.round(done/total*100);
+  const pct=total?Math.round(done/total*100):0;
   const overview=document.getElementById('ach-overview');
   if(overview){
-    overview.innerHTML=`
-      <div class="ach-ov-icon">🏆</div>
-      <div class="ach-ov-txt">
-        <div class="ach-ov-pct">${done}/${total} <span style="font-size:12px;color:var(--gold);font-weight:400">(${pct}%)</span></div>
-        <div class="ach-ov-lbl">Wiki-Achievements</div>
-      </div>
-    `;
+    overview.innerHTML='<div class="b8-ach-head cd-spot">'
+      +'<span class="b8-ring b8-ring--lg" style="--p:'+pct+'" role="img" aria-label="'+done+' von '+total+' Wiki-Achievements freigeschaltet"><span class="b8-ring-v">'+pct+'<small>%</small></span></span>'
+      +'<div class="b8-ach-head-main"><p class="b8-ach-k">Wiki-Achievements</p><p class="b8-ach-n"><b>'+done+'</b> von '+total+' freigeschaltet</p>'
+      +'<p class="b8-ach-lead">Gamification deines Wiki-Fortschritts. Achievements werden automatisch bei Aktionen entsperrt (Boss markieren, Notiz schreiben, Theme wechseln, etc.). Alle Daten bleiben lokal.</p></div></div>'
+      +cdNote('Gleichnamige Einträge wie „Pilgrim of Wonders“ werten nur deine Häkchen im Wiki aus.',{title:'Nicht mit den echten Trophäen verwechseln',cls:'b8-ach-note'});
   }
   el.innerHTML=ACHIEVEMENTS.map(a=>{
     const isUnlocked=unlocked.includes(a.id);
     let prog=isUnlocked?1:(a.prog?a.prog():0);
-    return `<div class="ach-card${isUnlocked?' unlocked':''}" data-s="${[a.name,a.desc].join(' ').toLowerCase()}">
-      <div class="ach-ico">${a.ico}</div>
-      <div class="ach-info">
-        <div class="ach-name">${a.name}</div>
-        <div class="ach-desc">${a.desc}</div>
-      </div>
-      <div class="ach-prog" style="width:${Math.round(prog*100)}%"></div>
-    </div>`;
+    const p=Math.max(0,Math.min(100,Math.round((+prog||0)*100)));
+    return '<div class="ach-card b8-ach'+(isUnlocked?' unlocked':'')+'" data-s="'+cdEsc([a.name,a.desc].join(' ').toLowerCase())+'">'
+      +'<span class="b8-ring" style="--p:'+p+'" aria-hidden="true"><span class="ach-ico">'+cdEsc(a.ico)+'</span></span>'
+      +'<div class="ach-info"><div class="ach-name">'+cdEsc(a.name)+'</div><div class="ach-desc">'+cdEsc(a.desc)+'</div>'
+      +'<div class="b8-ach-st">'+(isUnlocked?cdIcon('check')+'<span>Freigeschaltet</span>':a.prog?'<span class="b8-ach-bar"><i style="--p:'+p+'%"></i></span><span>'+p+' %</span>':'<span>Noch gesperrt</span>')+'</div></div>'
+      +'</div>';
   }).join('');
 }
 
