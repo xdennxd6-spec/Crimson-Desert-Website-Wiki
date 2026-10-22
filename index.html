@@ -6896,6 +6896,18 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .r2b13-dye-b{padding:11px 12px 12px}
 }
 @media (pointer:coarse){a.r2b13-tok{min-height:36px}.r2b13-vid{width:44px;min-height:44px}.r2b13-dye .r2b13-more>summary{min-height:44px}}
+/* R2 Abnahme: Erklärteile als Faltkarten (Synthese: "So funktioniert Synthese", "Hexen & ihre Rezepte"; Ausrüstung: "So liest du die Karten") */
+.r2b13-howfold{margin:0 0 14px}
+.r2b13-synfolds{display:grid;gap:10px}
+.r2b13-synfolds>.r2b13-howfold{margin:0}
+.r2b13-howfold>.cd-fold-body>.r2b13-xref,.r2b13-howfold>.cd-fold-body>.r2b13-greaternote{margin:0}
+.r2b13-howfold>.cd-fold-body>.r2b13-slotkey{margin:0}
+.r2b13-howfold .cd-fold-chips{display:flex;flex-wrap:wrap;gap:6px}
+.r2b13-regfacts{--m:var(--gold);display:grid;gap:8px}
+.r2b13-witchfold>.cd-fold-body{padding-top:16px}
+/* Tap-Ziele ab 40 px: Rezept-Marken, "Ganze Quelle"/"Mehr lesen", Datenfalte, alleinstehende Sprung-Links */
+@media (pointer:coarse){a.r2b13-tok,.r2b13-more>summary,.r2b13-datafold>summary{min-height:40px}}
+.r2b13-wc-mount .cd-go{min-height:40px}
 /* R2-B13 Ende */
 </style>
 </head>
@@ -7587,12 +7599,15 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   <section class="sec" id="sec-cores">
     <h2 class="sec-t"><span class="sec-sym">⧫</span> Abyss-Ausrüstung <span class="sec-t-en">Abyss Gear</span></h2>
     <div id="r2b13-cores-hero"></div>
-    <div class="cd-note cd-spot r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Nicht verwechseln</b>Synthese-Mechanik, der Witch-Synthese-Baum mit allen Rezepten und die übrigen Hexen-Craftables stehen auf der Seite <a href="#" onclick="showSec('synthesis');return false;">Abyss-Synthese</a> (Synthesis). Hier geht es um die Abyss-Ausrüstung selbst: Effekt, Quelle und Slot-Typ.</div></div>
-    <div class="r2b13-bar">
-      <div id="r2b13-core-pills"></div>
-      <span id="core-cnt" class="r2b13-cnt" aria-live="polite"></span>
-      <select class="fs" id="cf-slot" hidden aria-hidden="true" tabindex="-1" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe (auch Waffe/Hand/Fuß)</option><option value="Armor">Rüstung (auch Waffe/Hand/Fuß)</option><option value="Both">Nur Waffe, Handschuhe, Schuhe</option></select>
-    </div>
+    <!-- R2 Abnahme: die drei Erklärkästen (Nicht verwechseln, Slot-Legende, Greater-Abzeichen) stehen gebündelt in einer Faltkarte vor den Karten -->
+    <details class="cd-fold cd-spot r2b13-howfold" style="--cd-acc:var(--slate)">
+      <summary>
+        <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span>
+        <span class="cd-fold-main"><span class="cd-fold-t">So liest du die Karten</span><span class="cd-fold-lead">Slot-Typen, das Abzeichen „Greater“ und was auf der Nachbarseite Abyss-Synthese steht.</span><span class="cd-chips cd-fold-chips"><span class="r2b13-slot r2b13-slot--w"><i class="cd-g" aria-hidden="true">⚔</i>Waffe</span><span class="r2b13-slot r2b13-slot--a"><i class="cd-g" aria-hidden="true">⛨</i>Rüstung</span><span class="r2b13-slot r2b13-slot--b"><i class="cd-g" aria-hidden="true">✦</i>Waffe/Hand/Fuß</span><span class="r2b13-badge r2b13-badge--g">Greater</span></span></span>
+        <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+      </summary>
+      <div class="cd-fold-body">
+    <div class="cd-note r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Nicht verwechseln</b>Synthese-Mechanik, der Witch-Synthese-Baum mit allen Rezepten und die übrigen Hexen-Craftables stehen auf der Seite <a href="#" onclick="showSec('synthesis');return false;">Abyss-Synthese</a> (Synthesis). Hier geht es um die Abyss-Ausrüstung selbst: Effekt, Quelle und Slot-Typ.</div></div>
     <div class="r2b13-slotkey">
       <div class="r2b13-slotkey-i cd-spot r2b13-k--b"><span class="r2b13-slot r2b13-slot--b"><i class="cd-g" aria-hidden="true">✦</i>Waffe/Hand/Fuß</span><p>passt laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe.</p></div>
       <div class="r2b13-slotkey-i cd-spot"><span class="r2b13-slotkey-pair"><span class="r2b13-slot r2b13-slot--w"><i class="cd-g" aria-hidden="true">⚔</i>Waffe</span><span class="r2b13-slot r2b13-slot--a"><i class="cd-g" aria-hidden="true">⛨</i>Rüstung</span></span><p>sind Sammelangaben, einzelne Cores sind enger:</p>
@@ -7603,31 +7618,28 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
         </ul>
       </div>
     </div>
-    <div class="cd-note cd-note--warn cd-spot r2b13-greaternote" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Abzeichen „Greater · Spezial-Synthese“</b>Greater-Core: nur per Spezial-Synthese (~4%), mit Haltbarkeit; zerbricht und ist nicht reparierbar. Die +40%-Bane-Werte gehören zu diesen Greater-Cores, Stufe III liegt bei +12% (Details auf der Seite <a href="#sec=synthesis" data-go="synthesis">Abyss-Synthese</a>).</div></div>
+    <div class="cd-note cd-note--warn r2b13-greaternote" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Abzeichen „Greater · Spezial-Synthese“</b>Greater-Core: nur per Spezial-Synthese (~4%), mit Haltbarkeit; zerbricht und ist nicht reparierbar. Die +40%-Bane-Werte gehören zu diesen Greater-Cores, Stufe III liegt bei +12% (Details auf der Seite <a href="#sec=synthesis" data-go="synthesis">Abyss-Synthese</a>).</div></div>
+      </div>
+    </details>
+    <div class="r2b13-bar">
+      <div id="r2b13-core-pills"></div>
+      <span id="core-cnt" class="r2b13-cnt" aria-live="polite"></span>
+      <select class="fs" id="cf-slot" hidden aria-hidden="true" tabindex="-1" onchange="renderCores()"><option value="">Alle Slot-Typen</option><option value="Weapon">Waffe (auch Waffe/Hand/Fuß)</option><option value="Armor">Rüstung (auch Waffe/Hand/Fuß)</option><option value="Both">Nur Waffe, Handschuhe, Schuhe</option></select>
+    </div>
     <div id="core-tb" class="r2b13-cores"></div>
   </section>
 
   <section class="sec" id="sec-synthesis">
     <h2 class="sec-t"><span class="sec-sym">⚗</span> Abyss-Synthese <span class="sec-t-en">Synthesis</span></h2>
     <div id="r2b13-syn-hero"></div>
-    <div class="cd-note cd-spot r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Nicht verwechseln</b>Die Abyss-Ausrüstung selbst mit Effekt, Quelle und Slot-Typ steht auf der Seite <a href="#" onclick="showSec('cores');return false;">Abyss-Ausrüstung</a> (Abyss Gear), die Hexen mit Wohnort und Diensten unter <a href="#" onclick="showSec('witches');return false;">Hexen &amp; Fusion</a>. Hier geht es um die Synthese: Mechanik, alle Synthese-Rezepte und was die Hexe sonst herstellt.</div></div>
     <h3 class="sub-t r2b13-h3">🔮 Synthese-Mechanik <span class="r2b13-h3-s">(Regulär vs. Spezial)</span></h3>
     <div id="synth-guide" class="r2b13-guide">
-      <div class="r2b13-intro">
-        <p>Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot.</p>
-        <div class="r2b13-path" aria-label="So geht es an der Hexe"><span class="r2b13-lbl">An der Hexe</span><span class="r2b13-crumb"><em>Craft Abyss Gear</em> wählen</span><span class="r2b13-crumb">mit <kbd class="cd-keycap">R2</kbd>/<kbd class="cd-keycap">RT</kbd> in den Synthese-Tab wechseln</span></div>
-        <p class="r2b13-dim">Die Seite <a href="#" onclick="showSec('cores');return false;"><strong>Abyss-Ausrüstung</strong></a> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt die 175 datamineten Core-Synthese-Rezepte (Nicht-Core-Craftables wie die Sigil-Mount-Amulette stehen separat darunter). Dieser Block erklärt die Mechanik dahinter.</p>
-      </div>
+      <!-- R2 Abnahme: sichtbar bleiben die zwei Modus-Karten mit Formel und Chancen. Erklärtext, Hinweise, Hexen und Datenstand stehen in Faltkarten (vorher rund 4 400 px Text vor dem ersten Rezept, mobil). -->
       <div class="r2b13-modes">
         <article class="r2b13-mode r2b13-mode--reg cd-spot">
           <header class="r2b13-mode-hd"><span class="r2b13-mode-g" aria-hidden="true">⇈</span><div><h4>Reguläre Synthese</h4><span class="r2b13-mode-tag">sicher, deterministisch</span></div></header>
           <div class="r2b13-eq r2b13-eq--big" aria-label="Beispiel: 2x Destruction I ergibt 1x Destruction II"><span class="r2b13-ins"><span class="r2b13-tok is-core r2b13-t--1" data-r="I"><b>2×</b>Destruction I</span></span><span class="r2b13-res"><span class="r2b13-tok is-res r2b13-t--2" data-r="II"><b>1×</b>Destruction II</span></span></div>
           <p>Zwei Cores mit <strong>gleichem Namen + gleicher Stufe</strong> → ein Core eine Stufe höher. Z.B. 2x Destruction I → 1x Destruction II; 2x Haste I → 1x Haste II.</p>
-          <ul class="r2b13-facts">
-            <li><span class="r2b13-lbl">höchste Stufe</span><span>Höchste so erreichbare Stufe ist <strong>III</strong>.</span></li>
-            <li><span class="r2b13-lbl">Blueprint</span><span>Braucht das passende Blueprint (bei Hexen kaufbar).</span></li>
-            <li><span class="r2b13-lbl">Grenze</span><span>Nicht jeder Core ist aufwertbar.</span></li>
-          </ul>
         </article>
         <article class="r2b13-mode r2b13-mode--spec cd-spot">
           <header class="r2b13-mode-hd"><span class="r2b13-mode-g" aria-hidden="true">⚄</span><div><h4>Spezial-Synthese</h4><span class="r2b13-mode-tag">Glücksspiel, kein Blueprint</span></div></header>
@@ -7641,30 +7653,61 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
           </div>
         </article>
       </div>
-      <div class="r2b13-modenotes">
-          <div class="cd-note cd-note--warn cd-spot" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Greater-Cores</b>Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden).</div></div>
-          <div class="cd-note r2b13-note-v cd-spot" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Wichtig</b>Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores, <strong>nicht</strong> zu Stufe III (Stufe III = +12%). Davon zu unterscheiden ist die eigene <strong>„Rampaging“</strong>-Core-Reihe (z.B. Rampaging Insight), die im deutschen Spiel <strong>„Wütend“</strong> heißt.</div></div>
-      </div>
-      <h4 class="r2b13-sub-h"><i class="cd-g" aria-hidden="true">✶</i>Hexen &amp; ihre Rezepte <span>Wohnort (Region) und verkaufte Rezepte</span></h4>
-      <div id="r2b13-witches" class="r2b13-witches"></div>
-      <div class="r2b13-combo cd-spot">
-        <span class="r2b13-lbl">Benannte Synthese-Kombi (belegt, Einzelquelle)</span>
-        <div id="r2b13-wod"></div>
-        <p class="r2b13-dim"><strong>Wound of Darkness</strong> = Destruction I + Aegis I + Haste I + Ascent I.</p>
-      </div>
-      <div class="cd-note cd-spot r2b13-bezug" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Bezug zum Baum unten</b>Dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</div></div>
-      <details class="cd-fold cd-spot cd-fold--noico r2b13-datafold">
-        <summary><span class="cd-fold-main"><span class="cd-fold-t">Datenstand &amp; Quellenlage</span><span class="cd-fold-lead">Hexen→Rezept-Zuordnung, Quellenkonflikte, White Crow</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary>
+      <div class="cd-folds r2b13-synfolds">
+      <details class="cd-fold cd-spot r2b13-howfold r2b13-synfold" id="r2b13-syn-how" style="--cd-acc:var(--violet)">
+        <summary>
+          <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">⚗</i></span>
+          <span class="cd-fold-main"><span class="cd-fold-t">So funktioniert Synthese</span><span class="cd-fold-lead">Wo die Hexe synthetisiert, Grenzen der regulären Synthese, Greater-Cores und der Bezug zum Rezept-Baum unten.</span><span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--ok"><span>Regulär: sicher</span></span><span class="cd-chip cd-chip--violet"><span>Spezial: zufällig</span></span><span class="cd-chip cd-chip--gold"><b>~4 %</b><span>Greater</span></span></span></span>
+          <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+        </summary>
         <div class="cd-fold-body">
-          <p>Datenstand: Hexen→Rezept-Zuordnung durch questlog-Händlerdaten bestätigt (Elowen: Gear Blueprint: Vigor/Vitality/Composure; Areciel: Destruction/Insight; Bari: Swift/Haste/Ascent; Lyselia: Fortification/Aegis/Fortitude; zuvor nur Einzelquelle vulkk). Die Spalte nennt den Wohnort der Hexe; ihre Sanctums liegen teils in anderen Regionen (siehe Sanctum-Checkliste).</p>
-          <p>Quellenkonflikt: eine Quelle nennt nur Elowen als synthese-fähig, andere vier Regional-Hexen. Odds und Tier-Regeln mehrfach belegt. White Crow als Synthese-Hexe nur einfach genannt und unbestätigt. Spezial-Synthese-Output ist echt zufällig, feste Input→Output-Rezepte existieren dafür nicht.</p>
+          <div class="cd-note r2b13-xref" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Nicht verwechseln</b>Die Abyss-Ausrüstung selbst mit Effekt, Quelle und Slot-Typ steht auf der Seite <a href="#" onclick="showSec('cores');return false;">Abyss-Ausrüstung</a> (Abyss Gear), die Hexen mit Wohnort und Diensten unter <a href="#" onclick="showSec('witches');return false;">Hexen &amp; Fusion</a>. Hier geht es um die Synthese: Mechanik, alle Synthese-Rezepte und was die Hexe sonst herstellt.</div></div>
+          <div class="r2b13-intro">
+            <p>Abyss-Cores (Abyss Gears) werden bei einer craft-fähigen <strong>Hexe</strong> erstellt und in Waffen/Rüstung gesockelt. Quellen sind versiegelte Abyss-Artefakte, Elite-Gegner, Boss-Beute und Welt-Loot.</p>
+            <div class="r2b13-path" aria-label="So geht es an der Hexe"><span class="r2b13-lbl">An der Hexe</span><span class="r2b13-crumb"><em>Craft Abyss Gear</em> wählen</span><span class="r2b13-crumb">mit <kbd class="cd-keycap">R2</kbd>/<kbd class="cd-keycap">RT</kbd> in den Synthese-Tab wechseln</span></div>
+            <p class="r2b13-dim">Die Seite <a href="#" onclick="showSec('cores');return false;"><strong>Abyss-Ausrüstung</strong></a> listet Effekte und Fundorte; der durchsuchbare <strong>Synthese-Baum unten</strong> zeigt die 175 datamineten Core-Synthese-Rezepte (Nicht-Core-Craftables wie die Sigil-Mount-Amulette stehen separat darunter). Dieser Block erklärt die Mechanik dahinter.</p>
+          </div>
+          <div class="r2b13-regfacts"><span class="r2b13-lbl">Reguläre Synthese</span>
+          <ul class="r2b13-facts">
+            <li><span class="r2b13-lbl">höchste Stufe</span><span>Höchste so erreichbare Stufe ist <strong>III</strong>.</span></li>
+            <li><span class="r2b13-lbl">Blueprint</span><span>Braucht das passende Blueprint (bei Hexen kaufbar).</span></li>
+            <li><span class="r2b13-lbl">Grenze</span><span>Nicht jeder Core ist aufwertbar.</span></li>
+          </ul></div>
+          <div class="r2b13-modenotes">
+            <div class="cd-note cd-note--warn" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg><div><b class="cd-note-t">Greater-Cores</b>Greater-Cores sind stark, haben aber eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich <strong>nicht reparieren</strong> (müssen neu synthetisiert werden).</div></div>
+            <div class="cd-note r2b13-note-v" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Wichtig</b>Die <strong>+40%</strong>-Bane-Werte gehören zu diesen Greater-Cores, <strong>nicht</strong> zu Stufe III (Stufe III = +12%). Davon zu unterscheiden ist die eigene <strong>„Rampaging“</strong>-Core-Reihe (z.B. Rampaging Insight), die im deutschen Spiel <strong>„Wütend“</strong> heißt.</div></div>
+          </div>
+          <div class="cd-note r2b13-bezug" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Bezug zum Baum unten</b>Dort stehen die <strong>deterministischen</strong> Blueprint-Synthese-Rezepte aus dem Datamine. Die <strong>Spezial-Synthese</strong> (zufällig, einziger Weg zu Greater-Cores) hat keine festen Input→Output-Rezepte und erscheint daher nicht im Baum.</div></div>
+          <p class="r2b13-dim">Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong>: 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst".</p>
+          <div class="r2b13-combo">
+            <span class="r2b13-lbl">Benannte Synthese-Kombi (belegt, Einzelquelle)</span>
+            <div id="r2b13-wod"></div>
+            <p class="r2b13-dim"><strong>Wound of Darkness</strong> = Destruction I + Aegis I + Haste I + Ascent I.</p>
+          </div>
+          <details class="cd-fold cd-fold--noico r2b13-datafold">
+            <summary><span class="cd-fold-main"><span class="cd-fold-t">Datenstand &amp; Quellenlage</span><span class="cd-fold-lead">Hexen→Rezept-Zuordnung, Quellenkonflikte, White Crow</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary>
+            <div class="cd-fold-body">
+              <p>Datenstand: Hexen→Rezept-Zuordnung durch questlog-Händlerdaten bestätigt (Elowen: Gear Blueprint: Vigor/Vitality/Composure; Areciel: Destruction/Insight; Bari: Swift/Haste/Ascent; Lyselia: Fortification/Aegis/Fortitude; zuvor nur Einzelquelle vulkk). Die Spalte nennt den Wohnort der Hexe; ihre Sanctums liegen teils in anderen Regionen (siehe Sanctum-Checkliste).</p>
+              <p>Quellenkonflikt: eine Quelle nennt nur Elowen als synthese-fähig, andere vier Regional-Hexen. Odds und Tier-Regeln mehrfach belegt. White Crow als Synthese-Hexe nur einfach genannt und unbestätigt. Spezial-Synthese-Output ist echt zufällig, feste Input→Output-Rezepte existieren dafür nicht.</p>
+            </div>
+          </details>
         </div>
       </details>
+      <details class="cd-fold cd-spot r2b13-witchfold" style="--cd-acc:var(--violet)">
+        <summary>
+          <span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">✶</i></span>
+          <span class="cd-fold-main"><span class="cd-fold-t">Hexen &amp; ihre Rezepte</span><span class="cd-fold-lead">Wohnort (Region) und verkaufte Rezepte</span><span class="cd-chips cd-fold-chips" id="r2b13-witch-chips"></span></span>
+          <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+        </summary>
+        <div class="cd-fold-body">
+          <div id="r2b13-witches" class="r2b13-witches"></div>
+        </div>
+      </details>
+      </div>
     </div>
     <h3 class="sub-t r2b13-h3">🧪 Witch-Synthese-Baum <span class="r2b13-h3-s">(questlog-Datamine)</span></h3>
     <div class="r2b13-intro">
       <p>Der vollständige Abyss-Gear-Synthese-Baum aus der Hexen-Werkstatt: <strong>175 Core-Rezepte</strong> in 93 Familien mit ihren Synthese-Rezepten und Materialkosten (Nicht-Core-Craftables wie die Sigil-Mount-Amulette sind separat darunter gelistet).</p>
-      <p class="r2b13-dim">Tier-Ketten (I → II → III) entstehen durch <strong>reguläre Synthese</strong>: 2× gleichnamige Vorstufe gleicher Stufe + zugehöriges Blueprint (kein Katalysator; Katalysatoren wie Steelbane werden nur in der zufälligen Spezial-Synthese verbraucht). Effekte sind, wo gegen die kuratierten Wiki-Cores belegt, ergänzt; sonst „nicht erfasst".</p>
       <div class="r2b13-legend" aria-label="Legende"><span class="r2b13-lbl">So liest du die Karten</span><span class="r2b13-tok is-core r2b13-t--1" data-r="I">Stufe I</span><span class="r2b13-tok is-core r2b13-t--2" data-r="II">Stufe II</span><span class="r2b13-tok is-core r2b13-t--3" data-r="III">Stufe III</span><span class="r2b13-tok is-core r2b13-t--0" data-r="✦">Basis / Sonstige</span><span class="r2b13-tok is-mat" data-r="◆">Material</span><span class="r2b13-dim">Zutat antippen: springt zu ihrem Rezept</span></div>
       <p class="cd-src"><span class="cd-src-l">Datenbasis</span>dataminte questlog.gg <code>getRecipes</code> (witch-workshop / abyss-gear)</p>
     </div>
@@ -12929,7 +12972,7 @@ function renderSynthesis(){
   const {fam}=_r2b13Syn();
   const SYNTH_CORES=WITCH_SYNTHESIS.filter(c=>c.role!=='witch-other');
   _r2b13Hero('r2b13-syn-hero',{kicker:'Hexen-Werkstatt',title:'Aus zwei Cores wird einer',sub:'Reguläre Synthese hebt die Stufe, Spezial-Synthese würfelt den Typ. Darunter alle Rezepte als Formel, gefärbt nach Stufe.',
-    region:'The Abyss',glyph:'⚗',scene:{keys:['synthesis','reg-the-abyss'],region:'The Abyss',pos:'50% 60%'},stats:[[SYNTH_CORES.length,'Synthese-Rezepte'],[Object.keys(fam).length,'Core-Familien'],[WITCH_SYNTHESIS.length-SYNTH_CORES.length,'Sonstiges bei der Hexe']]});
+    region:'The Abyss',glyph:'⚗',scene:{keys:['synthesis','cl-sanctum','reg-the-abyss'],region:'The Abyss'}, /* R2 Abnahme: eigenes Bild (Sanctum der Hexen) statt desselben Abyss-Bilds wie die Nachbarseite */stats:[[SYNTH_CORES.length,'Synthese-Rezepte'],[Object.keys(fam).length,'Core-Familien'],[WITCH_SYNTHESIS.length-SYNTH_CORES.length,'Sonstiges bei der Hexe']]});
   _r2b13Guide();
   const tp=document.getElementById('r2b13-tier-pills');
   if(tp&&!tp.firstChild){
@@ -12974,9 +13017,11 @@ function _r2b13Guide(){
         ${x.r?`<div class="r2b13-witch-r"><span class="r2b13-lbl">verkaufte Rezepte</span><div class="r2b13-eq r2b13-eq--list">${x.r.map(r=>_r2b13Tok('1x '+r,'',true)).join('')}</div></div>`:`<p class="r2b13-witch-none">${escHtml(x.none)}</p>`}
       </article>`;}).join('');
   }
-  // Statische Faltkarte "Datenstand" durchsuchbar machen (Suche öffnet sie bei Treffer im eingeklappten Teil)
-  const df=document.querySelector('#synth-guide .r2b13-datafold');
-  if(df&&!df.dataset.s)df.dataset.s=df.textContent.replace(/\s+/g,' ').trim().toLowerCase();
+  // R2 Abnahme: Kopf-Chips der Hexen-Faltkarte aus R2B13_WITCHES (die Faltkarte selbst trägt kein data-s: die Hexen-Karten darin sind durchsuchbar)
+  const wc=document.getElementById('r2b13-witch-chips');
+  if(wc&&!wc.firstChild)wc.innerHTML=[{v:R2B13_WITCHES.length,t:'Hexen'},{v:R2B13_WITCHES.filter(x=>x.r).length,t:'verkaufen Rezepte',c:'violet'}].map(cdChip).join('');
+  // Statische Faltkarten "So funktioniert Synthese" und "Datenstand" durchsuchbar machen (Suche öffnet sie bei Treffer im eingeklappten Teil)
+  document.querySelectorAll('#synth-guide .r2b13-datafold, #r2b13-syn-how').forEach(df=>{if(!df.dataset.s)df.dataset.s=df.textContent.replace(/\s+/g,' ').trim().toLowerCase();});
   const k=document.getElementById('r2b13-wod');
   if(k&&!k.firstChild){
     const wod={name:'Wound of Darkness',tier:0};
@@ -15146,7 +15191,7 @@ function _r2b13DyeSrc(c){
   if(/\bDrop\b/.test(d))out.push({t:'Drop',g:'✧',c:'violet',title:/Dyer\/Expert Dyer/.test(d)?'Drop von Dyer/Expert Dyer':''});
   if(/Quest|Mission|Belohnung/.test(d))out.push({t:/^Kein Händler erfasst; auch Drop/.test(d)&&!/Belohnung|Quest/.test(d)?'Dispatch-Mission':'Quest / Mission',g:'❖',c:'ice'});
   if(/Gestohlen/i.test(d))out.push({t:'Gestohlen',g:'✋',c:'red'});
-  return {chips:out,price:price?price[1]+' Silver':''};
+  return {chips:out,price:price?price[1]+' Silber':''}; /* R2 Abnahme: Anzeige auf Deutsch wie Abyss-Ausrüstung, Daten unverändert */
 }
 function _r2b13DyeCard(c,wasOpen){
   const col=/^#[0-9a-f]{3,8}$/i.test(c.color||'')?c.color:'#888888';
@@ -15167,14 +15212,16 @@ function _r2b13DyeCard(c,wasOpen){
       <h4 class="r2b13-dye-n">${escHtml(c.name)}</h4>
       <div class="r2b13-core-tags">${src.price?`<span class="r2b13-price">${escHtml(src.price)}</span>`:''}${c.miss?MISS_CHIP_SM:''}${conf}</div>
       ${src.chips.length?`<span class="cd-chips r2b13-dye-src">${src.chips.map(x=>`<span class="cd-chip${x.c?' cd-chip--'+x.c:''}"${x.title?` title="${escHtml(x.title)}"`:''}><i class="cd-g" aria-hidden="true">${x.g}</i>${escHtml(x.t)}</span>`).join('')}</span>`:''}
-      ${sp.head?`<p class="r2b13-dye-lead">${escHtml(sp.head)}</p>`:''}
+      ${sp.head?`<p class="r2b13-dye-lead">${escHtml(_r2b13Silber(sp.head))}</p>`:''}
       ${ing}
       <details class="item-more r2b13-more"${wasOpen?' open':''} data-r2b13-more="${escHtml(c.name)}"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Mehr lesen</summary><div class="item-more-body">${wasOpen?_r2b13DyeMore(c):''}</div></details>
     </div>
   </article>`;
 }
 // "Mehr lesen" erst beim Öffnen füllen (auch Such-Öffnung und cdGo lösen toggle aus); data-s/data-item-hidden tragen den Volltext
-function _r2b13DyeMore(c){return `<p>${escHtml(c.detail)}</p>${cdSrc([c.loc])}`;}
+function _r2b13DyeMore(c){return `<p>${escHtml(_r2b13Silber(c.detail))}</p>${cdSrc([c.loc])}`;}
+/* R2 Abnahme: Währung in der Anzeige deutsch ("1,50 Silber"), Daten und data-s unverändert */
+function _r2b13Silber(s){return String(s||'').replace(/(\d)\s*Silver\b/g,'$1 Silber');}
 document.addEventListener('toggle',e=>{
   const d=e.target;if(!d||!d.open||!d.matches||!d.matches('details[data-r2b13-more]'))return;
   const b=d.querySelector('.item-more-body');if(!b||b.firstChild)return;
