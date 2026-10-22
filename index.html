@@ -16518,7 +16518,7 @@ function renderCamp(){
     var reg=x.reg;
     return cdFold({id:'r2b10-st-'+x.id,title:(x.extra?'':x.n+': ')+x.name,lead:x.lead,icon:x.ico,chips:x.chips,region:reg,
       cls:'r2b10-stf'+(x.extra?' is-extra':''),
-      scene:{keys:x.id==='0'?['cl-greymane','camp','reg-hernand']:x.reg==='Pailune'?['reg-pailune']:[],region:reg,w:46},
+      scene:{keys:[],region:reg,w:46}, /* einheitlich ohne Bild: für die Stufen 1-4 gibt es keine scharfen Szenenbilder */
       body:x.body,s:_r2b10S(x.s,x.n,x.name,x.lead)});
   }).join('')+'</div>';
   var uaBody='Nicht jede Einrichtung hängt am Ausbau: <b>Brunnen</b> (Patch 1.04.00), <b>Teich</b> (1.08.00, eigene Bau-Mission), <b>Workstation</b> (1.12.00) und der <b>Handelswagen</b> (Commission „Brice\'s Request", Bau am Timberturner Wainwright) kommen unabhängig davon. Die <b>Trainingspuppe</b> hinter der Ranch ist in keiner Quelle sicher zugeordnet. <b>Seit Patch 1.16.00</b> ist das Camp außerdem nicht mehr der einzige Ort zum Verpacken und Beladen: <b>7 regionale Wagenwerkstätten</b> (Hernand, Demeniss, Delesyia, Pailune, Tommaso, Urd\'avah, Varnia) übernehmen beides unterwegs.';
