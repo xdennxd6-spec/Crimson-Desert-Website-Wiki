@@ -2231,7 +2231,7 @@ html.cf-open,html.cf-open body{overflow:hidden}
 .fa-hero{position:relative;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
   background:var(--panel-2);box-shadow:var(--shadow-soft),0 0 60px -30px var(--red-glow);
   margin:22px 26px 8px}
-#main:has(> .sec.active:not(#sec-beginner)) #fa-hero{display:none}
+#fa-hero{display:none} /* R2 Abnahme: war #main:has(> .sec.active:not(#sec-beginner)) #fa-hero; zusammen mit der B11-Regel ohnehin auf jeder Seite aus, jetzt ohne :has() */
 .fa-hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:5;mix-blend-mode:screen;opacity:.9;
   background:radial-gradient(60% 90% at 4% 0%,var(--red-glow),transparent 55%),radial-gradient(60% 80% at 100% 100%,var(--violet-glow),transparent 55%)}
 .fa-hero-grid{display:grid;grid-template-columns:1fr .96fr;position:relative;z-index:2}
@@ -4418,6 +4418,8 @@ html.cd-motion .r2b2-npc .r2b2-por .cd-scene-img{transition:transform .5s cubic-
 .r2b3-seg.is-one{min-width:68px}
 .r2b3-seg.is-one .r2b3-seg-l{align-self:stretch;justify-content:center;text-align:center;padding:0 3px;letter-spacing:.02em;overflow-wrap:normal}
 .r2b3-seg.cd-scened{overflow:clip}
+/* R2 Abnahme: Abschnitte der Zeitleiste außerhalb des Bildes (mobil seitlich) erst bei Bedarf malen; Breite steht fest (min-width bzw. width) */
+.r2b3-seg{content-visibility:auto;contain-intrinsic-block-size:auto 150px;contain-intrinsic-inline-size:auto 160px}
 .r2b3-seg.is-one .r2b3-seg-l .cd-i{display:none}
 .r2b3-nds{display:flex}
 .r2b3-nd{position:relative;flex:1 1 0;min-width:58px;scroll-snap-align:center}
@@ -4887,8 +4889,10 @@ html.cd-motion .q5-ck[aria-pressed="true"]{animation:cdTick .32s cubic-bezier(.3
 .q5-clp-b .cd-i{width:14px;height:14px}
 html.cd-motion .q5-clp-b .cd-i{transition:transform .25s}
 .q5-clp.is-open .q5-clp-b .cd-i{transform:rotate(180deg)}
-html:has(#si:not(:placeholder-shown)) .q5-clp>.q5-clp-t{display:block;-webkit-line-clamp:unset;overflow:visible}
-html:has(#si:not(:placeholder-shown)) .q5-clp-b{display:none}
+/* R2 Abnahme (Tempo): Suche aktiv = Klasse .q5-srch an #sec-quests (gesetzt in _doSearchImpl/showSec) statt html:has(#si:not(:placeholder-shown)).
+   Der :has()-Anker html mit :not() im Argument ließ jede Stil-Neuberechnung das ganze Dokument durchsuchen (wuchs mit jeder besuchten Seite). */
+#sec-quests.q5-srch .q5-clp>.q5-clp-t{display:block;-webkit-line-clamp:unset;overflow:visible}
+#sec-quests.q5-srch .q5-clp-b{display:none}
 .q5-clp--m>.q5-clp-b{display:none}
 .q5-clp--m:not(.is-open)>.q5-clp-t{display:block}
 /* Stepper mit Questschritten */
@@ -6177,7 +6181,7 @@ html.cd-motion .r2b10-hold-tag i{animation:r2b10Pulse 1.6s ease-out infinite;ani
 /* ── B11 · Anfänger-Guide (#sec-beginner): Kopf mit Szene, Merksätze, Mechaniken als Faltkarten, Steuerung als Tasten-Kappen ──
    Farbe mit Bedeutung: Effekt-Farben des Fundaments (Leben, Ausdauer, Spirit, Feuer …), Plattformfarben bei der Steuerung,
    Grün = einzeln belegt, gestrichelte Kappe = nicht einzeln belegt. Das Feldatlas-Altar-Banner (#fa-hero) weicht hier dem eigenen Kopf. */
-#main:has(> #sec-beginner.active) #fa-hero{display:none}
+/* (#fa-hero ist seit der R2-Abnahme global per #fa-hero{display:none} aus, ohne :has()) */
 #sec-beginner{container:r2b11beg/inline-size}
 #sec-beginner .r2b11-bhero{min-height:250px}
 #sec-beginner .r2b11-bhero .cd-hero-t{font-size:clamp(24px,3vw,34px);max-width:19ch}
@@ -11528,6 +11532,7 @@ function showSec(id, opts){
     if(typeof _closeSearchOpened==='function')_closeSearchOpened();
     if(typeof _resetHitOrder==='function')_resetHitOrder();
     document.getElementById('si').value='';
+    {const qs=document.getElementById('sec-quests');if(qs)qs.classList.remove('q5-srch');}
     document.getElementById('scnt').textContent='';
     document.querySelectorAll('.hide').forEach(el=>{if(el.dataset.filtered!=='1')el.classList.remove('hide');});
     document.querySelectorAll('[data-s]').forEach(el=>{
@@ -12122,6 +12127,7 @@ function _reapplyActiveSearch(root){
 }
 function _doSearchImpl(q){
   q=q.trim();
+  {const qs=document.getElementById('sec-quests');if(qs)qs.classList.toggle('q5-srch',!!q);} /* R2 Abnahme: ersetzt html:has(#si:not(:placeholder-shown)) */
   // Autofill-Schutz: Chrome schreibt trotz autocomplete="off" gelegentlich die gespeicherte
   // Login-Mail ins Suchfeld. Sieht der Wert wie eine E-Mail aus UND ist das Feld nicht fokussiert
   // (stammt also nicht von echter Nutzereingabe) ODER hat der Browser ihn als Autofill markiert,
@@ -19049,7 +19055,8 @@ function scrollTo(target,o){
     revealAll();   /* Sprungziel und alles davor sofort sichtbar */
     y=el.getBoundingClientRect().top+scrollY-(o.offset!=null?+o.offset:headerOffset());
   }
-  y=Math.round(Math.max(0,Math.min(H.scrollHeight-innerHeight,y)));
+  /* R2 Abnahme: Ziel ganz oben (Seitenwechsel) braucht keine Dokumenthöhe; scrollHeight erzwang dort Stil + Layout mitten in showSec */
+  y=y>0?Math.round(Math.max(0,Math.min(H.scrollHeight-innerHeight,y))):0;
   var d=Math.abs(y-scrollY),dur=Math.min(0.9,0.35+d/6000),done=function(){progUntil=now()+400;lastY=scrollY;if(typeof o.onComplete==='function')o.onComplete();};
   progUntil=now()+dur*1000+400;setOff(false);   /* Kopfzeile bleibt während des Sprungs stehen */
   if(lenis&&active&&!o.immediate&&d>1)lenis.scrollTo(y,{duration:dur,easing:function(t){return 1-Math.pow(1-t,4);},force:true,onComplete:done});
@@ -19352,7 +19359,9 @@ function start(s){
   mo.observe(s,{childList:true,subtree:true,attributes:true,attributeOldValue:true,attributeFilter:['class','hidden','open']});   /* ohne style: Lichtkegel --mx/--my */
   /* R2 Integration: erst nach dem ersten Bild sammeln. Synchron erzwang collect() Stil und Layout in noch gesperrten
      content-visibility-Karten (Kapitel-Guide: Seitenwechsel 63 -> 25 ms bei 1366, gemessen mit r2-int-probe.mjs) */
-  items=[];sig='';put();bar();requestAnimationFrame(()=>setTimeout(()=>{if(sec===s)refresh(true)},0));
+  /* R2 Abnahme: im Leerlauf nach dem ersten Bild (höchstens 400 ms später), nicht mehr zwischen erstem und zweitem Bild des Seitenwechsels */
+  const go2=()=>{if(sec===s)refresh(true)};
+  items=[];sig='';put();bar();requestAnimationFrame(()=>window.requestIdleCallback?requestIdleCallback(go2,{timeout:400}):setTimeout(go2,60));
 }
 const bb=$('blattbar'),D=document;
 btn=D.createElement('button');btn.type='button';btn.id='cdxBtn';btn.className='bb-console cdx-bbtoc';btn.hidden=true;
@@ -19584,7 +19593,8 @@ function trigger(e){
 }
 document.addEventListener('change',trigger,true);
 document.addEventListener('click',trigger,true);
-if(M.onEnter)M.onEnter(snap);
+/* R2 Abnahme: kein snap() mehr beim Seitenauftritt. trigger() ruft snap() ohnehin direkt vor jedem Filter-Neurender auf;
+   der zusätzliche Lauf beim Seitenwechsel fragte offsetParent aller Karten ab (Fähigkeiten 390/CPU4: rund 50 ms im Seitenwechsel). */
 addEventListener('beforeprint',stop);
 })();
 /* ==== /Motion B ==== */
