@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v33';
+const CACHE_VERSION = 'cd-guide-v34';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -17,6 +17,8 @@ const CORE_ASSETS = [
   './data/d07-patches.js',
   './data/d08-ruins-data.js',
   './data/d09-scenes.js',
+  './data/d10-enemy-drops.js',
+  './data/d11-fac-quest-imgs.js',
   './vendor/gsap-3.15.0.min.js',
   './vendor/ScrollTrigger-3.15.0.min.js',
   './vendor/SplitText-3.15.0.min.js',

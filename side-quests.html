@@ -167,6 +167,7 @@ border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-
 
 /* --- Einleitungsabsatz und FAQ der Modul-Seiten --- */
 p.intro{font-size:15px;color:var(--ink);max-width:75ch;margin:0 0 4px}
+p.kontext{font-size:14px;color:var(--ink-dim,var(--ink));max-width:75ch;margin:6px 0 10px}
 details.faq{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
 margin-top:10px;box-shadow:var(--shadow-soft);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 details.faq>summary{list-style:none;cursor:pointer;padding:13px 16px;font-family:var(--f-display);
@@ -188,6 +189,13 @@ span.unsure.low{background:var(--red)}
 span.muted{color:var(--ink-faint)}
 article.card img.enemy{aspect-ratio:1/1;object-fit:contain}
 article.card p:not([class]){margin:0;font-size:13.5px;color:var(--ink-dim)}
+table.drp{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 4px}
+table.drp caption{text-align:left;font-weight:600;font-size:13px;margin-bottom:4px}
+table.drp th,table.drp td{text-align:left;padding:3px 6px;border-bottom:1px solid var(--line,rgba(255,255,255,.12));vertical-align:top}
+table.drp td:nth-child(2),table.drp td:nth-child(3){white-space:nowrap}
+span.drp-bei{color:var(--ink-faint);font-size:11.5px}
+p.drp-selten{font-size:12.5px;margin:4px 0 0;color:var(--ink-dim)}
+p.drp-q{font-size:11.5px;margin:4px 0 0;color:var(--ink-faint)}
 span.miss{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
 span.sys{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
@@ -209,6 +217,11 @@ p.chapmeta b{color:var(--ink-hi)}
 span.newfac{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#100c24;background:var(--violet)}
 p.fac-overview{margin:0 0 10px;color:var(--ink-dim);max-width:75ch}
+tr.q-imgs>td{padding-top:0}
+div.q-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+div.q-shots figure{margin:0}
+div.q-shots img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+div.q-shots figcaption{margin-top:4px;font-size:var(--fs-12,12px);line-height:1.4;color:var(--ink-dim)}
 /* Aus index.html uebernommen: die Patch-Texte setzen diese beiden Variablen in
    inline-style-Attributen voraus. Fehlen sie, verliert die Einordnung ihre
    optische Absetzung. */
@@ -221,6 +234,9 @@ h3.pcat{font-family:var(--f-mono);font-size:var(--fs-11-5);text-transform:upperc
 color:var(--gold);margin:16px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--line)}
 ul.plist{margin:0;padding-left:20px}
 ul.plist li{margin:5px 0}
+p.pspieler{font-size:14px;color:var(--ink);border-left:3px solid var(--gold);padding:6px 0 6px 12px;margin:10px 0 0}
+ul.phigh{margin:0;padding-left:20px}
+ul.phigh li{margin:7px 0}
 span.latest{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
 article.card img.npc{aspect-ratio:1/1;object-fit:contain}
@@ -309,7 +325,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen">Fraktionsquests</a><a href="/side-quests" aria-current="page">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
+  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/fraktionen">Fraktionsquests</a><a href="/hauptquests">Hauptquests</a><a href="/side-quests" aria-current="page">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
 </header>
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; <span class="crumb-kat">Quests &amp; Herausforderungen</span> &rsaquo; Nebenquests</nav>
@@ -326,6 +342,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 </div>
 <p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Nebenquests ergänzen die Hauptgeschichte von Crimson Desert um eigenständige Aufgaben in fünf Regionen. Die Übersicht umfasst 134 Nebenquests und nennt für jede Aufgabe ihren Auslöser, mögliche Voraussetzungen und die Belohnung. Damit kannst du schnell prüfen, wie eine Quest startet, ob zuvor etwas erfüllt sein muss und was du für den Abschluss erhältst. Sechs Nebenquests sind verpassbar, ihre Gelegenheit kann also im laufenden Spieldurchgang unwiederbringlich enden. Diese Einträge verdienen besondere Aufmerksamkeit, wenn du alle verfügbaren Inhalte abschließen möchtest. Die Liste ist hilfreich, wenn du in einer Region nach offenen Aufgaben suchst oder einen bestimmten Fortschritt nachvollziehen willst. Statt jede Quest zufällig zu entdecken, kannst du Voraussetzungen und Auslöser vorab vergleichen und deinen Weg entsprechend planen. Nutze die Übersicht besonders vor wichtigen Fortschrittsmomenten, damit verpassbare Aufgaben nicht offen bleiben und du die passenden Belohnungen gezielt mitnehmen kannst.</p>
+<p class="kontext">Die Story-Quests stehen in der <a href="/hauptquests">Hauptquest-Liste</a>, die Aufträge der Fraktionen unter <a href="/fraktionen">Fraktionsquests</a>. Welche Trophäen sich verpassen lassen, zeigt die <a href="/trophaeen">Trophäen-Liste</a>.</p>
 
 <a class="cta" href="/#sec=quests&tab=sq">Interaktive Nebenquest-Liste mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jede Nebenquest ab, siehst deinen Fortschritt je Region und kannst alle Haken auf einmal zurücksetzen.</p>
@@ -1305,7 +1322,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
   <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><div class="alle-gruppe"><span class="alle-kat">Start</span> <a href="/">Übersicht</a> &middot; <a href="/patch-notes">Patch-Notes</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Kampf</span> <a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Gegner</a> &middot; <a href="/skills">Fähigkeiten</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Ausrüstung</span> <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/abyss-cores">Abyss-Ausrüstung</a> &middot; <a href="/hexen">Hexen &amp; Fusion</a></div>
-  <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/hauptquests">Hauptquests</a> &middot; <a href="/fraktionen">Fraktionsquests</a> &middot; <a href="/side-quests" aria-current="page">Nebenquests</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/fraktionen">Fraktionsquests</a> &middot; <a href="/hauptquests">Hauptquests</a> &middot; <a href="/side-quests" aria-current="page">Nebenquests</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Welt &amp; Karte</span> <a href="/npcs">Charaktere &amp; NPCs</a> &middot; <a href="/mounts">Reittiere</a> &middot; <a href="/pets">Haustiere</a> &middot; <a href="/geheimnisse">Geheimnisse &amp; Lore</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Herstellen &amp; Sammeln</span> <a href="/crafting">Herstellen &amp; Farmen</a></div></nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;

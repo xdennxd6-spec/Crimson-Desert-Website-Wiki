@@ -210,14 +210,14 @@ const ACCESSORIES=[
 ];
 const WITCHES=[
   {
-    name:"Hexe Sylvia",color:"#c9a227",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_witch.webp",
+    name:"Hexe Sylvia",color:"#c9a227",img:"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_witch.webp",
     location:"Shadow's Whisper Cave (Spalte in der Klippe unter den Three Saints' Falls), nördlich von Hernand Town",chapter:"Kap. 3 — Quest \"Refined Power\" (Mission \"The Hermit Witch\")",
     services:["Socket erstellen (kostet Silber)","Core einsetzen (Embed)","Core extrahieren"],
     quests:["Freischaltung: in Kap. 3 den Brief von White Crow lesen (Quest Refined Power), dann Sylvia in der Shadow's Whisper Cave treffen; questlog nennt keine Questbelohnung"],sanctums:[],
     tip:"Novizin aus Hernand (\"Hermit Witch\") — laut Guides nur Workshop-Basis ohne Synthese und Crafting (dafür ab Elowen); questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen (ingame ungeprüft). Händlerware führt questlog für Sylvia nicht. Sie schickt dich nicht zu Sanctums. Trotzdem nützlich: Cores immer extrahieren, bevor du Gear wegwirfst."
   },
   {
-    name:"Hexe Elowen",color:"#20a070",img:"https://crimsondesert.gaming.tools/images/ui/texture/image/knowledgeimage/cd_knowledgeimage_knowledge_blynhilde.webp",
+    name:"Hexe Elowen",color:"#20a070",img:"cd_assets/gt/cd_knowledgeimage_knowledge_blynhilde.webp",
     location:"Witch's House im Alfonso Estate (Witchwoods, Süd-Hernand)",chapter:"Kap. 5 nach Quest 'The Missing Seal'",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (2× gleicher Core → nächsthöhere Stufe)","Händlerware laut questlog: Gear Blueprint: Vigor / Vitality / Composure, Alchemy Formula: Freya's Lesser Elixir, Ohrringe (u. a. Flower Petal Earring, Ancient Earring)","Blueprint-Umwandlung (Kuku-Quest)"],
     quests:["The Missing Seal (Kap. 5, Quest 'Black and White') — Elowen freischalten; questlog-Belohnung u. a. Gear Blueprint: Haste","Sanctumlinie (Hexe der Weisheit, questlog-Quest 'The Witch of Wisdom'): Absolution → Temperance → Penitence → Benediction; Belohnungen laut questlog: Gear Blueprint: Rising Torrent (gleich zu Questbeginn, Schritt 'Examine the house'), Gear Blueprint: Shatter (Temperance), Witch's Token"],
@@ -225,7 +225,7 @@ const WITCHES=[
     tip:"Hexe der Weisheit (Wisdom). Ihre Questlinie schaltet vollen Workshop + Core-Synthese frei. Der Kuku-Ice-Resistant-Armor-Blueprint kommt aus Lyselias Sanctum of Devotion (nicht von Elowen)."
   },
   {
-    name:"Hexe Bari",color:"#4a8aca",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_unique_eloria.webp",
+    name:"Hexe Bari",color:"#4a8aca",img:"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_eloria.webp",
     location:"Hütte am Crimson Lake bei der Silver Wolf Mountain, Pailune (laut thegameswiki auf einer Insel im See)",chapter:"Pailune — Kapitel-Gate nicht belegt (Freischaltung über die Begegnung in der Tundra)",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Händlerware laut questlog: Gear Blueprint: Swift / Haste / Ascent, Alchemy Formula: Apollonia's Elixir, Blueprint: Lightning Bolt Plate Armor, Icewing Plate Helm u. a."],
     quests:["Bari freischalten: frierende Person in der Tundra (Pailune) finden und das Kohlebecken davor entzünden — Bezugspunkt in Guides uneinheitlich (südwestl. Pailune City bzw. südwestl. der Silver Wolf Cave nahe den Wayward Woods)","Sanctumlinie (Hexe der Güte): Exaltation → Solace → Deliverance → Atonement (Deliverance und Atonement liegen in Hernand)","Exaltation-Reward laut questlog: Kuku Transmission Pack Blueprint","Solace: Boss Antumbra's Staff → Guidance of Dark Pursuit; ein Frost-Mantle-Skill-Upgrade als Belohnung ist nicht belegt (questlog-Missionsbelohnung ohne Skill)"],
@@ -233,7 +233,7 @@ const WITCHES=[
     tip:"Witch of Kindness. Die 4 Witch's Tokens werden für das Freischalten der versteckten White Crow gesammelt (siehe unten), nicht für Bari selbst."
   },
   {
-    name:"Hexe Lyselia",color:"#9a50d0",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_demeniss_witch.webp",
+    name:"Hexe Lyselia",color:"#9a50d0",img:"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_demeniss_witch.webp",
     location:"Verborgene Höhle (Hidden Cave) südöstlich des Jijeong Temple im Serpent Marsh, Demeniss — Verkleidung: Person, die östlich von Beighen am Denn River an einer eingestürzten Brücke hängt",chapter:"Kapitel-Gate nicht belegt (Freischaltung über die Person auf der Brücke)",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Händlerware laut questlog: Gear Blueprint: Fortification / Aegis / Fortitude, Alchemy Formula: Meliara's Greater Elixir, Blueprint: Scorchflame Plate Armor, Witch's Earring, Eastern Witch's Fan u. a."],
     quests:["Sanctumlinie (Hexe der Demut): Devotion → Veneration → Oblation → Faith (Delesyia)","Devotion-Reward: Kuku-Ice-Resistant-Armor-Blueprint (Blueprint II; laut thegameswiki.com Reaktor-Drop im Sanctum of Devotion — questlog führt als Missionsbelohnung nur Medium Faceless Banner Pike und Master Key)"],
@@ -241,7 +241,7 @@ const WITCHES=[
     tip:"Hexe der Demut (Humility). Sie wohnt in Demeniss (Serpent Marsh), ihre 4 Sanctums liegen dagegen in Delesyia. Versteckter Eingang — erst die Verkleidung ansprechen."
   },
   {
-    name:"Hexe Areciel",color:"#c0392b",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_power_witch.webp",
+    name:"Hexe Areciel",color:"#c0392b",img:"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_power_witch.webp",
     location:"Crimson Desert Witch's Hideout: Haus auf halber Höhe einer Klippe westlich von Urdavah (Crimson Desert) — sie wartet auf dem Dach; Verkleidung: bettelnder Junge am Bounty Board an der Straße nördlich von Tommaso",chapter:"Freigeschaltet nach: 1x Copper dem Jungen am Bounty Board nördlich von Tommaso geben",
     services:["Voller Workshop: Socket / Embed / Extract / Craft","Core-Synthese (Duplikate kombinieren)","Händlerware laut questlog: Gear Blueprint: Destruction / Insight, Alchemy Formula: Apollonia's Greater Elixir und Freya's Greater Elixir, Blueprint: Frostcursed Plate Armor, Kuku Transmission Pack Blueprint, Witch's Ring u. a."],
     quests:["Sanctumlinie (Hexe der Stärke): Expiation → Renunciation → Revelation","Revelation: Boss Antumbra's Spear → Thorn of Dark Pursuit + Core of Revelation","Belohnung laut questlog: Gear Blueprint: Pillar of Wind (gleich zu Questbeginn, Schritt 'Give coin to the child' der Quest 'The Witch of Strength', sowie bei Expiation, Renunciation und Revelation)"],
@@ -249,7 +249,7 @@ const WITCHES=[
     tip:"Hexe der Stärke. Freischaltung ist simpel — einfach 1 Kupfer an den bettelnden Jungen am Bounty Board nördlich von Tommaso geben, dann zu ihrem Haus an der Klippe westlich von Urdavah. Sie sitzt auf dem Dach, nicht drinnen. Sie wohnt in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River."
   },
   {
-    name:"White Crow",color:"#cfd2d6",img:"https://cdn.questlog.gg/crimson-desert/assets/_sprites/cd_knowledgeimage_knowledge_whitecrow_witch.webp",
+    name:"White Crow",color:"#cfd2d6",img:"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_whitecrow_witch.webp",
     location:"Wayward Woods Witch's Hideout — Baumhaus in einem toten, vom Blitz gespaltenen Baum auf einer Klippe in den Wayward Woods westlich von Pailune (questlog; ein Guide nennt „südlich der Wayward Woods“)",chapter:"Erst nach 4 Witch's Tokens erreichbar",
     services:["Workshop-Dienste nicht belegt: questlog führt für White Crow weder Werkstatt-Rezepte noch Händlerware; als Synthese-Hexe nur vereinzelt genannt"],
     quests:["Freischaltung: je 1 Witch's Token von Elowen, Bari, Lyselia und Areciel sammeln (questlog-Quest Wayward Woods Witch, Mission Protector of the Abyss)"],

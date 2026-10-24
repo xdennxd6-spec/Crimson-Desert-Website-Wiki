@@ -234,7 +234,7 @@ const SOLL_SEITEN = [
   ["synthesis", "ausruestung", "Abyss-Synthese", "Synthesis", "Synthese-Mechanik und alle Synthese-Rezepte für Abyss-Ausrüstung"],
   ["witches", "ausruestung", "Hexen & Fusion", "Witches", "Alle Hexen, ihre Läden und Fusionsrezepte für Abyss-Ausrüstung"],
   ["dyes", "ausruestung", "Färbemittel", "Dyes", "Farben und wo du sie bekommst"],
-  ["quests", "quests", "Quests", "Main & Faction Quests", "True Ending, Hauptquests, Fraktionsquests und Nebenquests"],
+  ["quests", "quests", "Quests", "Faction, Main & Side Quests", "Fraktionsquests, Hauptquests, Nebenquests und True Ending"],  // 24.10.2026: Fraktionsquests zuerst (Suchvolumen)
   ["chapters", "quests", "Kapitel-Guide", "Chapters", "Die Hauptstory Kapitel für Kapitel"],
   ["checklists", "quests", "Checklisten", "", "Bosse, Graumähnen, Sanktum, Waffen und Verpassbares zum Abhaken"],
   ["ruins", "quests", "Uralte Ruinen", "Ancient Ruins", "Ruinen-Herausforderungen und Abyss-Grenzsteine"],

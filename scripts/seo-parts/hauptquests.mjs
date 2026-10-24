@@ -153,8 +153,10 @@ ${sections}`;
 
   return {
     slugName: SLUG,
-    title: `Alle ${q.length} Hauptquests in Crimson Desert: Kapitel-Guide`,
-    desc: `Alle ${q.length} Hauptquests von Crimson Desert in Spielreihenfolge: ${MAIN_QUESTS.length} Kapitel mit Auslöser, Voraussetzung, Belohnung, Bosskämpfen und ${missQ.length} verpassbaren Inhalten.`,
+    // Titel/Description am 24.10.2026 nachgeschaerft (Search Console: Klickrate 2,7 % bei Position 8,2).
+    // "Kapitel-Guide" stand vorher im Titel und konkurrierte mit /kapitel-guide um dieselbe Suche.
+    title: `Alle ${q.length} Hauptquests in Crimson Desert: Reihenfolge & Belohnung`,
+    desc: `Alle ${q.length} Hauptquests von Crimson Desert vom Prolog bis zum Epilog in Spielreihenfolge: wo jede Quest startet, was sie voraussetzt, was sie bringt und was verpassbar ist.`,
     h1: `Alle ${q.length} Hauptquests in Crimson Desert`,
     lead: `Diese Übersicht listet alle <strong>${q.length} Hauptquests</strong> von Crimson Desert in Spielreihenfolge, aufgeteilt auf <strong>${MAIN_QUESTS.length} Kapitel</strong>, jeweils mit Auslöser, Voraussetzung, Belohnung und dem Bosskampf des Kapitels.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",

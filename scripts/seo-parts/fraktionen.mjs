@@ -67,6 +67,11 @@ span.newfac{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#100c24;background:var(--violet)}
 p.fac-overview{margin:0 0 10px;color:var(--ink-dim);max-width:75ch}
 td.q-cell{min-width:200px}
+tr.q-imgs>td{padding-top:0}
+div.q-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+div.q-shots figure{margin:0}
+div.q-shots img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+div.q-shots figcaption{margin-top:4px;font-size:var(--fs-12,12px);line-height:1.4;color:var(--ink-dim)}
 `.trim();
 
 // Der Vollstaendigkeitstest muss exakt das zaehlen, was build() ausgibt: jede
@@ -99,8 +104,15 @@ export function ZAHLEN(ctx) {
 
 export function build(ctx) {
   const { FAC_DATA } = ctx.data;
-  const { esc, slug, breadcrumbLd } = ctx.helpers;
+  const { esc, slug, breadcrumbLd, imgSrc, extract } = ctx.helpers;
   const z = ZAHLEN(ctx);
+  // Bildanleitungen (seit 24.10.2026, data/d11-fac-quest-imgs.js): Schluessel
+  // "Fraktion|Quest", Wert [[Datei, Unterschrift], ...]. Fehlt die Datei, bleibt
+  // die Seite wie bisher reine Tabelle. IMG_DIR spiegelt FAC_QUEST_IMG_DIR
+  // (extract() liest nur Objekt-/Array-Literale, keine Strings).
+  const IMG_DIR = "cd_assets/factions/";
+  let IMGS = {};
+  try { IMGS = extract("FAC_QUEST_IMGS"); } catch { IMGS = {}; }
 
   const rowId = (region, f, q) =>
     `fr-${slug(region.region)}-${slug(f.name)}-${slug(q.q)}`;
@@ -115,7 +127,15 @@ export function build(ctx) {
 <td>${esc(q.trigger)}</td>
 <td>${esc(q.prereq)}</td>
 <td>${esc(q.reward)}</td>
-</tr>`;
+</tr>${shots(f, q)}`;
+
+  // Bildzeile ohne id: COUNT_CHECK zaehlt nur <tr id="fr-...">.
+  function shots(f, q) {
+    const list = IMGS[`${f.name}|${q.q}`];
+    if (!list || !list.length) return "";
+    return `\n<tr class="q-imgs"><td colspan="4"><div class="q-shots">${list.map(([file, cap], i) =>
+      `<figure><img src="${esc(imgSrc(IMG_DIR + file))}" alt="${esc(cap)}" loading="lazy" decoding="async"><figcaption>${i + 1}. ${esc(cap)}</figcaption></figure>`).join("")}</div></td></tr>`;
+  }
 
   const facBlock = (region, f) => {
     const newTag = f.isNew ? `<span class="newfac">Neu erfasst</span>` : "";

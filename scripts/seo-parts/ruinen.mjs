@@ -72,7 +72,7 @@ function lade(ctx) {
     _cache = {
       data: ctx.helpers.extract("RUINS_DATA"),
       order: ctx.helpers.extract("RUINS_REGION_ORDER"),
-      base: "https://www.powerpyx.com/wp-content/uploads/",
+      base: "cd_assets/ruinen/",
     };
     return _cache;
   } catch { /* "var" statt "const": Datei direkt lesen */ }

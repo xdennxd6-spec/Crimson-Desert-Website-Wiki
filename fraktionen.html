@@ -167,6 +167,7 @@ border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-
 
 /* --- Einleitungsabsatz und FAQ der Modul-Seiten --- */
 p.intro{font-size:15px;color:var(--ink);max-width:75ch;margin:0 0 4px}
+p.kontext{font-size:14px;color:var(--ink-dim,var(--ink));max-width:75ch;margin:6px 0 10px}
 details.faq{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
 margin-top:10px;box-shadow:var(--shadow-soft);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 details.faq>summary{list-style:none;cursor:pointer;padding:13px 16px;font-family:var(--f-display);
@@ -188,6 +189,13 @@ span.unsure.low{background:var(--red)}
 span.muted{color:var(--ink-faint)}
 article.card img.enemy{aspect-ratio:1/1;object-fit:contain}
 article.card p:not([class]){margin:0;font-size:13.5px;color:var(--ink-dim)}
+table.drp{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 4px}
+table.drp caption{text-align:left;font-weight:600;font-size:13px;margin-bottom:4px}
+table.drp th,table.drp td{text-align:left;padding:3px 6px;border-bottom:1px solid var(--line,rgba(255,255,255,.12));vertical-align:top}
+table.drp td:nth-child(2),table.drp td:nth-child(3){white-space:nowrap}
+span.drp-bei{color:var(--ink-faint);font-size:11.5px}
+p.drp-selten{font-size:12.5px;margin:4px 0 0;color:var(--ink-dim)}
+p.drp-q{font-size:11.5px;margin:4px 0 0;color:var(--ink-faint)}
 span.miss{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
 span.sys{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
@@ -209,6 +217,11 @@ p.chapmeta b{color:var(--ink-hi)}
 span.newfac{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#100c24;background:var(--violet)}
 p.fac-overview{margin:0 0 10px;color:var(--ink-dim);max-width:75ch}
+tr.q-imgs>td{padding-top:0}
+div.q-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+div.q-shots figure{margin:0}
+div.q-shots img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+div.q-shots figcaption{margin-top:4px;font-size:var(--fs-12,12px);line-height:1.4;color:var(--ink-dim)}
 /* Aus index.html uebernommen: die Patch-Texte setzen diese beiden Variablen in
    inline-style-Attributen voraus. Fehlen sie, verliert die Einordnung ihre
    optische Absetzung. */
@@ -221,6 +234,9 @@ h3.pcat{font-family:var(--f-mono);font-size:var(--fs-11-5);text-transform:upperc
 color:var(--gold);margin:16px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--line)}
 ul.plist{margin:0;padding-left:20px}
 ul.plist li{margin:5px 0}
+p.pspieler{font-size:14px;color:var(--ink);border-left:3px solid var(--gold);padding:6px 0 6px 12px;margin:10px 0 0}
+ul.phigh{margin:0;padding-left:20px}
+ul.phigh li{margin:7px 0}
 span.latest{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:8px;font-family:var(--f-mono);
 font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#160a08;background:var(--red)}
 article.card img.npc{aspect-ratio:1/1;object-fit:contain}
@@ -309,7 +325,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/hauptquests">Hauptquests</a><a href="/fraktionen" aria-current="page">Fraktionsquests</a><a href="/side-quests">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
+  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/fraktionen" aria-current="page">Fraktionsquests</a><a href="/hauptquests">Hauptquests</a><a href="/side-quests">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="#alle-guides">Alle Guides</a></nav>
 </header>
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; <span class="crumb-kat">Quests &amp; Herausforderungen</span> &rsaquo; Fraktionsquests</nav>
@@ -326,6 +342,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 </div>
 <p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Crimson Desert bindet 62 Fraktionen an 6 Regionen und lässt dich über eigene Questketten Vertrauen bei ihnen aufbauen. Diese Übersicht listet jede Fraktion mit einer kurzen Einordnung und einer eigenen Tabelle ihrer Quests, insgesamt 224 Einträge mit Auslöser, Voraussetzung und Belohnung. So lässt sich vor dem Start einer Kette prüfen, was zuerst erledigt sein muss und was am Ende winkt, ohne jede Quest einzeln im Spiel aufzuschlagen. 50 der 62 Fraktionen tragen das Kennzeichen „Neu erfasst“: Sie sind erst später ins Wiki aufgenommen worden, das Kennzeichen sagt nichts über neue Spielinhalte. Bei 90 Quests ist die Quellenlage dünner als bei den übrigen; sie sind sichtbar markiert, statt eine Sicherheit vorzutäuschen, die es nicht gibt. Die Liste eignet sich sowohl zum Planen, welche Fraktionskette als Nächstes an der Reihe ist, als auch zum Nachschlagen, wenn eine Voraussetzung oder Belohnung vorab bekannt sein soll.</p>
+<p class="kontext">Quests ohne Fraktionsbindung stehen bei den <a href="/side-quests">Nebenquests</a>, die Story selbst in der <a href="/hauptquests">Hauptquest-Liste</a>. Wer die Auftraggeber sind, erklären die Bios unter <a href="/npcs">Charaktere &amp; NPCs</a>.</p>
 
 <a class="cta" href="/#sec=quests&tab=fac">Interaktive Fraktions-Übersicht in der App öffnen &rarr;</a>
 <p class="note">In der App klappst du jede Fraktion einzeln auf und siehst zusätzlich das regionsübergreifende Liberation-Endgame-System (Re-Blockade für 23 Forts laut Patch 1.05.00), das hier nicht abgebildet ist.</p>
@@ -341,30 +358,35 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Kapitel 2 erreicht (City of Hernand zugänglich).</td>
 <td>+100 Hernand Contribution; Plunderer&#39;s Gold Chest x2, Swords Box x2, Alfred&#39;s Poster x1; schaltet Troubled Count frei.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/first-trial-of-trust-talk-to-servant.webp" alt="House Roberts&#39;s Servant bei Bluemont Manor startet die Quest." loading="lazy" decoding="async"><figcaption>1. House Roberts&#39;s Servant bei Bluemont Manor startet die Quest.</figcaption></figure><figure><img src="/cd_assets/factions/first-trial-of-trust-map-location.webp" alt="Kartenposition: südlich des Notice Board bei Bluemont Manor." loading="lazy" decoding="async"><figcaption>2. Kartenposition: südlich des Notice Board bei Bluemont Manor.</figcaption></figure><figure><img src="/cd_assets/factions/bluemont-cask-house-map-location.webp" alt="Bluemont Cask House liegt südlich der Muckroot Ranch." loading="lazy" decoding="async"><figcaption>3. Bluemont Cask House liegt südlich der Muckroot Ranch.</figcaption></figure><figure><img src="/cd_assets/factions/troubled-count-caretaker-erich.webp" alt="Erich am Baum der Muckroot Ranch ansprechen." loading="lazy" decoding="async"><figcaption>4. Erich am Baum der Muckroot Ranch ansprechen.</figcaption></figure><figure><img src="/cd_assets/factions/bluemont-cask-house-clear-the-bandits.webp" alt="Bleed Bandits aus dem Cask House locken und das markierte Gebiet säubern." loading="lazy" decoding="async"><figcaption>5. Bleed Bandits aus dem Cask House locken und das markierte Gebiet säubern.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-roberts-troubled-count">
 <td class="q-cell">Troubled Count</td>
 <td>Steward Erich im Bluemont Manor ansprechen; Graf bittet, den Steinbruch zurückzuerobern.</td>
 <td>First Trial of Trust abgeschlossen.</td>
 <td>Iron Basin x2, Wissenseintrag Leon Roberts (questlog); Fextralife nennt zusätzlich Karin Quarry Knowledge; schaltet Stolen Quarry frei.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/troubled-count-map-location.webp" alt="Zurück zu Bluemont Manor, Erich wartet draußen." loading="lazy" decoding="async"><figcaption>1. Zurück zu Bluemont Manor, Erich wartet draußen.</figcaption></figure><figure><img src="/cd_assets/factions/bluemont-cask-house-talk-to-leon-roberts.webp" alt="Graf Leon Roberts sitzt im 1. Stock hinter seinem Schreibtisch." loading="lazy" decoding="async"><figcaption>2. Graf Leon Roberts sitzt im 1. Stock hinter seinem Schreibtisch.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-roberts-stolen-quarry">
 <td class="q-cell">Stolen Quarry</td>
 <td>Karin Quarry (NO der City of Hernand): zuerst Boss Marni&#39;s Excavatron besiegen (erster Missionsschritt &#39;Defeat Excavatron&#39;), dann die Gegner rund um den Steinbruch ausschalten, bis er befreit ist.</td>
 <td>Troubled Count abgeschlossen (Boss früh sehr schwer).</td>
 <td>Gold Vein Map x1, Mining Knuckledrill x1.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/stolen-quarry-map-location.webp" alt="Karin Quarry und die verschlossene Excavatron-Arena nördlich von Hernand." loading="lazy" decoding="async"><figcaption>1. Karin Quarry und die verschlossene Excavatron-Arena nördlich von Hernand.</figcaption></figure><figure><img src="/cd_assets/factions/marnis-excavatron-climb-up-to-get-to.webp" alt="Weg in die Arena: westlich oder südlich des Tors den Hang hoch und über die Mauer." loading="lazy" decoding="async"><figcaption>2. Weg in die Arena: westlich oder südlich des Tors den Hang hoch und über die Mauer.</figcaption></figure><figure><img src="/cd_assets/factions/marnis-excavatron-run-away-when-hes-underground.webp" alt="Gräbt sich der Excavatron ein, sofort wegsprinten: der Auftauchangriff trifft weiträumig." loading="lazy" decoding="async"><figcaption>3. Gräbt sich der Excavatron ein, sofort wegsprinten: der Auftauchangriff trifft weiträumig.</figcaption></figure><figure><img src="/cd_assets/factions/fighting-marnis-excavatron.webp" alt="Nach Ausweichen oder Force-Palm-Betäubung kurze Combos, dann wieder Abstand." loading="lazy" decoding="async"><figcaption>4. Nach Ausweichen oder Force-Palm-Betäubung kurze Combos, dann wieder Abstand.</figcaption></figure><figure><img src="/cd_assets/factions/stolen-quarry-karin-quarry.webp" alt="Danach die Bleed Bandits besiegen, bis die Besatzungsleiste auf null ist." loading="lazy" decoding="async"><figcaption>5. Danach die Bleed Bandits besiegen, bis die Besatzungsleiste auf null ist.</figcaption></figure><figure><img src="/cd_assets/factions/stolen-quarry-reduce-enemy-control.webp" alt="Krankenstation, Holzlager, Baracken und den zentralen Steinbruch säubern." loading="lazy" decoding="async"><figcaption>6. Krankenstation, Holzlager, Baracken und den zentralen Steinbruch säubern.</figcaption></figure><figure><img src="/cd_assets/factions/hidden-treasure-piece-6-location.webp" alt="Optional: versteckte Tür neben der Arena führt zu Hidden Treasure Piece 6." loading="lazy" decoding="async"><figcaption>7. Optional: versteckte Tür neben der Arena führt zu Hidden Treasure Piece 6.</figcaption></figure><figure><img src="/cd_assets/factions/hidden-treasure-piece-6-chest.webp" alt="Die Truhe hinter der Tür vor dem Verlassen der Karin Quarry öffnen." loading="lazy" decoding="async"><figcaption>8. Die Truhe hinter der Tür vor dem Verlassen der Karin Quarry öffnen.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-roberts-sealed-in-stone">
 <td class="q-cell">Sealed in Stone</td>
 <td>Erich an der Karin Quarry treffen; Kran-Steuerung bedienen, um einen Stein zu heben.</td>
 <td>Stolen Quarry abgeschlossen (Steinbruch befreit).</td>
 <td>Crane Control Room Key x1; schaltet The Count&#39;s Honor frei.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/sealed-in-stone-talk-to-erich.webp" alt="Erich am Kran der Karin Quarry gibt den Crane Control Room Key." loading="lazy" decoding="async"><figcaption>1. Erich am Kran der Karin Quarry gibt den Crane Control Room Key.</figcaption></figure><figure><img src="/cd_assets/factions/sealed-in-stone-talk-to-erich-control-the-crane.webp" alt="Mit dem Schlüssel in den Kontrollraum oberhalb des Steinbruchs." loading="lazy" decoding="async"><figcaption>2. Mit dem Schlüssel in den Kontrollraum oberhalb des Steinbruchs.</figcaption></figure><figure><img src="/cd_assets/factions/sealed-in-stone-lift-the-relic.webp" alt="Den Greifer über dem Relikt zentrieren, erst eine Seite ausrichten, dann die andere." loading="lazy" decoding="async"><figcaption>3. Den Greifer über dem Relikt zentrieren, erst eine Seite ausrichten, dann die andere.</figcaption></figure><figure><img src="/cd_assets/factions/sealed-in-stone-elevate-to-the-top.webp" alt="Sitzt der Greifer, das Relikt ganz nach oben ziehen." loading="lazy" decoding="async"><figcaption>4. Sitzt der Greifer, das Relikt ganz nach oben ziehen.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-roberts-the-count-s-honor">
 <td class="q-cell">The Count&#39;s Honor</td>
 <td>Zu Graf Roberts ins Bluemont Manor zurückkehren.</td>
 <td>Sealed in Stone abgeschlossen.</td>
 <td>Azurite x3, Bloodstone x3, Engraved Gold Earring x1; schließt Arc 1 ab.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/sealed-in-stone-return-to-roberts.webp" alt="Zurück zu Graf Roberts in Bluemont Manor." loading="lazy" decoding="async"><figcaption>1. Zurück zu Graf Roberts in Bluemont Manor.</figcaption></figure><figure><img src="/cd_assets/factions/engraved-gold-earing-info.webp" alt="Belohnung Engraved Gold Earring: Verteidigung und Bewegungstempo beim Verfeinern." loading="lazy" decoding="async"><figcaption>2. Belohnung Engraved Gold Earring: Verteidigung und Bewegungstempo beim Verfeinern.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-roberts-strange-red-smoke">
 <td class="q-cell">Strange Red Smoke<span class="unsure">Quelle: teils belegt</span></td>
 <td>Graf Leon Roberts im Bluemont Manor (2. Stock) ansprechen; roter Rauch an Fort Perwin.</td>
@@ -471,24 +493,28 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Früh in der Celeste-Linie, ohne Vorquests triggerbar.</td>
 <td>Hound (2H-Waffe) + Rivenheim Cloth Armor x1 + Abyss Artifact x1.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/house-celeste-hemon-beindel-fort-hellwood.webp" alt="Hemon Beindel in Fort Hellwood." loading="lazy" decoding="async"><figcaption>1. Hemon Beindel in Fort Hellwood.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-celeste-abandoned-factory-restarting-the-elixir-factory">
 <td class="q-cell">Abandoned Factory (Restarting the Elixir Factory)</td>
 <td>Verlassene Elixier-Fabrik (Arboria Castle); Fabrik-/Strongbox-Rätsel. Nebenmission &#39;Foundation of Abundance&#39; (ohne eigene Belohnung): in der Kultivierungshalle der Elixier-Fabrik zurückgelassene Ausrüstung prüfen und den Fertilizer Sprayer aufnehmen.</td>
 <td>Erscheint im Journal nach Abschluss von &#39;Queen of the Silkspun Citadel&#39; (Queen-Spider-Quest).</td>
 <td>Freya&#39;s/Apollonia&#39;s/Meliara&#39;s Greater Elixir je x1 (7 Maschinen reaktivieren; Gelb hoch/Rot tief = Perfect Elixir).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/house-celeste-elixir-factory-perfect-elixir.webp" alt="Die reparierte Produktionslinie stellt das perfekte Elixier her." loading="lazy" decoding="async"><figcaption>1. Die reparierte Produktionslinie stellt das perfekte Elixier her.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-celeste-frozen-eldertree">
 <td class="q-cell">Frozen Eldertree</td>
 <td>Eldertree (nördl. Hernand); Frostboss Gwen Kraber (im Wild triggerbar). Nach &#39;The Eldertree&#39; folgt die Mission &#39;Spear Left Behind&#39; (ohne eigene Belohnung): an der Stelle, an der Gwen Kraber fiel, ihre Beute (Gwen Krabers Speer) aufnehmen.</td>
 <td>Laut Guide ~9/20 Celeste-Quests abgeschlossen.</td>
 <td>Icewing Plate Armor + Duskmoon Cloth Armor x1 + Abyss Artifact x1; Frostfang laut game8 (im questlog nicht aufgeführt).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/defeat-gwen-kraber.webp" alt="Gwen Kraber besiegt, danach ihren Speer an der Stelle aufheben." loading="lazy" decoding="async"><figcaption>1. Gwen Kraber besiegt, danach ihren Speer an der Stelle aufheben.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-celeste-queen-of-the-silkspun-citadel-queen-s-nest">
 <td class="q-cell">Queen of the Silkspun Citadel (Queen&#39;s Nest)</td>
 <td>Arboria Castle; Spinnenturm erklimmen, Queen Spider besiegen. Folgemission &#39;Forsaken Factory&#39; (ohne eigene Belohnung): die Goblins bei Arboria, Windcrest Outpost, Hilgard Outpost und Oakwatch Outpost besiegen.</td>
 <td>Laut Guide nach Großteil House Alfonso/Serkis; Prereq für Legendary Wolf.</td>
 <td>Stirrups of the Open Sky + Queen&#39;s Fangs + Recipe: Extravagant Meal x1 + Abyss Artifact x1; +100 Hernand Contribution.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/house-celeste-queen-spider-arboria-castle.webp" alt="Queen Spider in Arboria Castle." loading="lazy" decoding="async"><figcaption>1. Queen Spider in Arboria Castle.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-celeste-legendary-wolf-silence-from-afar">
 <td class="q-cell">Legendary Wolf (Silence From Afar)<span class="unsure">Quelle: teils belegt</span></td>
 <td>Frau bei Springtide Mill ansprechen, die sich um ihren zum Hernand North Gate versetzten Mann sorgt; 3-stufige Kette (Silence from Afar -&gt; Howls from the North Gate -&gt; A Moment of Relief) zur Jagd auf Black Fang (Lantern nötig).</td>
@@ -501,12 +527,14 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Ältere Angabe: nach Legendary Wolf abgeschlossen; bei questlog beginnt die Kette mit Legendary Hunter ohne erkennbaren Bezug zu Legendary Wolf.</td>
 <td>Large Bone x5, Fang x3, Black Lion Earring x1, Valortread Plate (5 Teile). Die 22 Einzelmissionen laut questlog (Quest &#39;Legendary Animals&#39;, meist mit Wissenseintrag): 3 Pferde zähmen (Royler, Rokade, Camora), 5 Fische angeln (Golden Tench, Golden Carp, Coelacanth, Golden Coelacanth, Clockwork Fish), 14 Tiere jagen und häuten (Silver Fang, White Bear, White-Scaled Crocodile, White Bison, Giant White Bison, White Elk, White Moose, Snowwhite Deer, Vine Deer, Red River Hog, White Lion, White Tiger, Phoenix, Black Lion). Besondere Items: Silver Fang (Fang of Silver Fang, Outfit Supply Contract - Hernand x2), White Bear (White Bear&#39;s Claws, Matilda&#39;s Leather Headband x2), Giant White Bison (Jian&#39;s Leather Helm x2), Snowwhite Deer (Snowwhite Deer&#39;s Antlers), White Tiger (Beige Bandana Doll x2), Phoenix (Phoenix Feather, Haven for Pets, Hearty Harvest Soup x2), Golden Coelacanth (News for a Nephew x2).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/legendary-hunter-legendary-animals-quest.webp" alt="Das Treffen mit dem Legendary Hunter startet die dreiteilige Tier-Untersuchung." loading="lazy" decoding="async"><figcaption>1. Das Treffen mit dem Legendary Hunter startet die dreiteilige Tier-Untersuchung.</figcaption></figure><figure><img src="/cd_assets/factions/silver-fang-info.webp" alt="Silver Fang, die wichtigste Belohnung dieser Reihe." loading="lazy" decoding="async"><figcaption>2. Silver Fang, die wichtigste Belohnung dieser Reihe.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-celeste-bounty-notice-jeffrey">
 <td class="q-cell">Bounty Notice - Jeffrey</td>
 <td>Pedro (Hernandian Guard Captain) vor dem Hernand Constabulary; Poster am Holzpfosten lesen. Taschendieb Jeffrey vor dem Hillside Manor tackeln, fesseln und per Pferd zum Constabulary bringen. Einführungs-Bounty, erklärt das Bounty-System.</td>
 <td>Kapitel 2 (Bounty-System aktiv); laut MapMaster ab Abschluss von Kapitel 1.</td>
 <td>Silver x1 + Mask x1.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/bounty-jeffrey-detail-hero.webp" alt="Steckbrief von Jeffrey." loading="lazy" decoding="async"><figcaption>1. Steckbrief von Jeffrey.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-house-celeste-bounty-notice-simon-de-montfort">
 <td class="q-cell">Bounty Notice - Simon de Montfort<span class="unsure">Quelle: teils belegt</span></td>
 <td>Poster in Hernand lesen (Honigdieb, laut questlog nahe der Nectarwood Apiary); Simon de Montfort (weißes Outfit, Korb auf dem Kopf) laut MapMaster an der Straße östlich des Lake Kharonso fangen und beim Constabulary abliefern. Ortsangabe uneinheitlich: Der Item-Bestand nennt das Everfrost Basin südwestlich des Scholastone Institute.</td>
@@ -554,18 +582,21 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Kapitel 2 abgeschlossen (Kailok the Hornsplitter besiegt).</td>
 <td>Investigative Log: Extinguishing the Last Flames x1 (schaltet 5 Verdächtige frei).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/goldleaf-troubled-shakatu-investigative-log.webp" alt="Shakatus Ermittlungsprotokoll mit den fünf Verdächtigen." loading="lazy" decoding="async"><figcaption>1. Shakatus Ermittlungsprotokoll mit den fünf Verdächtigen.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-goldleaf-merchant-guild-nogle-the-trade-manager-skrav-the-trade-manager-kathan-the-goldleaf-private-soldier-blique-the-horse-manager-grimzle-the-ledger-manager-5-ermittlungs-schritte">
 <td class="q-cell">Nogle, the Trade Manager / Skrav, the Trade Manager / Kathan, the Goldleaf Private Soldier / Blique, the Horse Manager / Grimzle, the Ledger Manager (5 Ermittlungs-Schritte)<span class="unsure">Quelle: teils belegt</span></td>
 <td>Fünf Gildenmitglieder befragen, je 3 Beweise sammeln.</td>
 <td>Troubled Shakatu abgeschlossen (questlog-Kette: Nogle -&gt; Skrav -&gt; Kathan -&gt; Blique -&gt; Grimzle; freie Reihenfolge im Spiel nicht belegt).</td>
 <td>Beweise (Tavern Ledger, Trade Schedule, Guard&#39;s Report, Horse Hire Ledger, Proof of Stay); Blique: Sealed Abyss Artifact x1.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/goldleaf-nogle-three-evidence-locations.webp" alt="Nogle: Kassenbuch der Taverne, zerbrochenes Fass, Steuerbescheid." loading="lazy" decoding="async"><figcaption>1. Nogle: Kassenbuch der Taverne, zerbrochenes Fass, Steuerbescheid.</figcaption></figure><figure><img src="/cd_assets/factions/goldleaf-skrav-three-evidence-locations.webp" alt="Skrav: gestapelte Waren, Handelsplan, fallengelassene Laterne." loading="lazy" decoding="async"><figcaption>2. Skrav: gestapelte Waren, Handelsplan, fallengelassene Laterne.</figcaption></figure><figure><img src="/cd_assets/factions/goldleaf-kathan-three-evidence-locations.webp" alt="Kathan: beschädigter Wagen, Brief der Wache, Wachbericht." loading="lazy" decoding="async"><figcaption>3. Kathan: beschädigter Wagen, Brief der Wache, Wachbericht.</figcaption></figure><figure><img src="/cd_assets/factions/goldleaf-blique-three-evidence-locations.webp" alt="Blique: Futterquittung, alter Sattel, Pferdeverleihbuch." loading="lazy" decoding="async"><figcaption>4. Blique: Futterquittung, alter Sattel, Pferdeverleihbuch.</figcaption></figure><figure><img src="/cd_assets/factions/goldleaf-grimzle-three-evidence-locations.webp" alt="Grimzle: Händlersiegel, Aufenthaltsnachweis, leerer Buchdeckel." loading="lazy" decoding="async"><figcaption>5. Grimzle: Händlersiegel, Aufenthaltsnachweis, leerer Buchdeckel.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-goldleaf-merchant-guild-close-threat">
 <td class="q-cell">Close Threat<span class="unsure">Quelle: teils belegt</span></td>
 <td>Zu Shakatu zurück, Aussagen/Beweise zuordnen und den Verräter der Gilde festnehmen (Guides nennen Grimzle im Coalvale Workshop; questlog nennt den Verräter nicht namentlich).</td>
 <td>Alle 5 Ermittlungs-Schritte abgeschlossen.</td>
 <td>Hernandian Banquet Cloak (questlog: &#39;Hernandian Cloak&#39;) + Kinetic Counterweight + ~100 Hernand Contribution.</td>
-</tr></tbody>
+</tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/goldleaf-close-threat-shakatu-dialogue.webp" alt="Shakatu geht die fünf Aussagen durch, dann den Verräter benennen." loading="lazy" decoding="async"><figcaption>1. Shakatu geht die fünf Aussagen durch, dann den Verräter benennen.</figcaption></figure><figure><img src="/cd_assets/factions/goldleaf-close-threat-grimzle-captured.webp" alt="Grimzle wird gefesselt zu Shakatu gebracht." loading="lazy" decoding="async"><figcaption>2. Grimzle wird gefesselt zu Shakatu gebracht.</figcaption></figure></div></td></tr></tbody>
 </table></div>
 <h3>House Alfonso (3)<span class="newfac">Neu erfasst</span></h3>
 <p class="fac-overview">Baronial-Speermeister-Haus in Hernand (Lioncrest Manor, Baron Adrian Alfonso) - liefert Dark Fog Lantern und Alfonso Spear (NICHT Delesyia).</p>
@@ -903,6 +934,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Dorfzugang via Trembling Woods.</td>
 <td>Pororin Petal Hat x1 (Kräuter-/Frucht-Erkennung laut Guide), Bird Meat x1, Full Moon Reaper Plate Boots x1, Enset Seed x1, Engraved Stone x1, A Traveler&#39;s Log x1; zusätzlich Giath&#39;s Leather Armor x1 (Zwischenschritt &#39;Restrictions&#39;).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/children-of-the-woods-questline.webp" alt="Start in Pororin Village: mit den Kindern sprechen, A Traveler&#39;s Log von Polan annehmen." loading="lazy" decoding="async"><figcaption>1. Start in Pororin Village: mit den Kindern sprechen, A Traveler&#39;s Log von Polan annehmen.</figcaption></figure><figure><img src="/cd_assets/factions/ara-shai-mystic-falls-map-location.webp" alt="Ara: unterhalb der Mystic Falls (The Ancient Rift, Pailune)." loading="lazy" decoding="async"><figcaption>2. Ara: unterhalb der Mystic Falls (The Ancient Rift, Pailune).</figcaption></figure><figure><img src="/cd_assets/factions/ara-shai-mystic-falls-hole.webp" alt="Vor der Runentür links gehen und durch die schmale Öffnung nach unten fallen." loading="lazy" decoding="async"><figcaption>3. Vor der Runentür links gehen und durch die schmale Öffnung nach unten fallen.</figcaption></figure><figure><img src="/cd_assets/factions/ara-shai-glowing-tree-underground.webp" alt="Ara steht am leuchtenden Baum in der Höhle." loading="lazy" decoding="async"><figcaption>4. Ara steht am leuchtenden Baum in der Höhle.</figcaption></figure><figure><img src="/cd_assets/factions/florian-shai-desert-edge-maze-map-location.webp" alt="Florian: unterirdisch im Desert&#39;s Edge Maze (Smoking Lands, Nord-Demeniss)." loading="lazy" decoding="async"><figcaption>5. Florian: unterirdisch im Desert&#39;s Edge Maze (Smoking Lands, Nord-Demeniss).</figcaption></figure><figure><img src="/cd_assets/factions/florian-shai-underground-maze-entrance.webp" alt="Im Labyrinth eine Laterne nutzen und zur mittleren Gabelung gehen." loading="lazy" decoding="async"><figcaption>6. Im Labyrinth eine Laterne nutzen und zur mittleren Gabelung gehen.</figcaption></figure><figure><img src="/cd_assets/factions/florian-shai-underground-maze.webp" alt="Florian wartet rechts zwischen Grün und Hasen." loading="lazy" decoding="async"><figcaption>7. Florian wartet rechts zwischen Grün und Hasen.</figcaption></figure><figure><img src="/cd_assets/factions/balan-shai-redtree-forest-map-location.webp" alt="Balan: Redtree Forest im Westen von Delesyia, östlich von Demeniss." loading="lazy" decoding="async"><figcaption>8. Balan: Redtree Forest im Westen von Delesyia, östlich von Demeniss.</figcaption></figure><figure><img src="/cd_assets/factions/balan-shai-red-tree-cave.webp" alt="In der Höhle steht Balan am großen roten Baum." loading="lazy" decoding="async"><figcaption>9. In der Höhle steht Balan am großen roten Baum.</figcaption></figure><figure><img src="/cd_assets/factions/alder-shai-three-brothers-cliff-map-location.webp" alt="Alder: bei Three Brothers&#39; Cliff und Wyvern&#39;s Nest im Süden von Delesyia." loading="lazy" decoding="async"><figcaption>10. Alder: bei Three Brothers&#39; Cliff und Wyvern&#39;s Nest im Süden von Delesyia.</figcaption></figure><figure><img src="/cd_assets/factions/alder-shai-under-stone-structure.webp" alt="Zwischen den Steinformationen hinunter, Alder und eine Truhe unter dem Überhang." loading="lazy" decoding="async"><figcaption>11. Zwischen den Steinformationen hinunter, Alder und eine Truhe unter dem Überhang.</figcaption></figure><figure><img src="/cd_assets/factions/polan-pororin-village-quest-complete.webp" alt="Zurück zu Polan: Belohnung Pororin Petal Hat." loading="lazy" decoding="async"><figcaption>12. Zurück zu Polan: Belohnung Pororin Petal Hat.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-pororin-forest-guardians-bell-tolling-in-pywel-8-glocken-guides-toll-of-pywel">
 <td class="q-cell">Bell Tolling in Pywel (8 Glocken; Guides: &#39;Toll of Pywel&#39;)<span class="unsure">Quelle: teils belegt</span></td>
 <td>8 Glocken läuten: Hernand, Pailune, Calphade, Tommaso, Demeniss, Delesyia, Scholastone Institute, Varnia; jeweils erscheint ein Shai und überreicht ein Geschenk.</td>
@@ -938,18 +970,21 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Scattered Embers aktiv.</td>
 <td>Grey Dye x1 (schaltet Dye-Crafting frei); Rhinoceros Beetle x3, Pink Rosemary x10, Longhorn Beetle x3 (Gloomy Gray).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/dye-cauldron-improvise-recipes.webp" alt="Den Farbstoff für Naira im Improvise-Menü am Kessel herstellen." loading="lazy" decoding="async"><figcaption>1. Den Farbstoff für Naira im Improvise-Menü am Kessel herstellen.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-the-first-steps-of-little-marksmen">
 <td class="q-cell">The First Steps of Little Marksmen</td>
 <td>Andrew und Duane streiten (Trembling Hands); Kinder im Camp wollen einen Bogen; White Wood Bow nach Andrews Anleitung an der Schmiede herstellen und an Andrew übergeben (questlog; &#39;von Turnali holen&#39; ist nicht belegt).</td>
 <td>Scattered Embers aktiv.</td>
 <td>Jewel Beetle x5, Ranged Weapons of the World - Bows, Vol. I x1, Timber x10, Fine Timber x5, White Wood Bow x1.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/scattered-embers-white-wood-bow-crafting.webp" alt="Den White Wood Bow in der Schmiede herstellen." loading="lazy" decoding="async"><figcaption>1. Den White Wood Bow in der Schmiede herstellen.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-embers-of-return">
 <td class="q-cell">Embers of Return</td>
 <td>Marius im Kommandozelt (Howling Hill); Kette &#39;Embers of Return&#39;: News of Comrades -&gt; A Rumor at Hills of No Return -&gt; New Information -&gt; A Rumor at Glenbright Farm -&gt; Secure Resources -&gt; Luke&#39;s Request -&gt; Expanding the Camp; Überlebende rekrutieren.</td>
 <td>Grounds-of-the-Sunrise-Branch aktiv (nach &#39;Greymanes Reunited&#39;).</td>
 <td>Abyss Artifacts x2, Beer x5, Wine x2, Lean Meat x6, Medium Bag x1, Camp Food x1400, Flower Basket x1.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/embers-return-hills-no-return-greymanes-location.webp" alt="Hills of No Return: Otto, Silvan, Aldric und Fritz." loading="lazy" decoding="async"><figcaption>1. Hills of No Return: Otto, Silvan, Aldric und Fritz.</figcaption></figure><figure><img src="/cd_assets/factions/embers-return-glenbright-farm-greymanes-location.webp" alt="Glenbright Farm: Ronnie, Tranan und Brice." loading="lazy" decoding="async"><figcaption>2. Glenbright Farm: Ronnie, Tranan und Brice.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-reconstructing-pailune">
 <td class="q-cell">Reconstructing Pailune<span class="unsure">Quelle: teils belegt</span></td>
 <td>Spätkette; Camp nach Pailune verlegen, 5 Bauprojekte finanzieren. Kein Map-Marker, daher leicht zu übersehen — bleibt aber dauerhaft verfügbar. Start nach Kap.7 (Pailune via Ludvig befreit) entweder durch Inspizieren von Pailune City auf der Weltkarte (Missionsliste) ODER am Greymane Camp Howling Hill beim Quest-Geber. Voraussetzung: Howling-Hill-Camp auf mind. Stufe 2 ausgebaut.</td>
@@ -962,12 +997,14 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Kette ab Carl&#39;s Request, danach nacheinander (questlog-Reihenfolge).</td>
 <td>Je Medium Bag x1 (+3 Inventar-Slots; questlog-Item: &#39;room for three extra items&#39;). Die weiteren Items in den questlog-Missionssummen (z. B. Carl: Thick Hide x10; Tranan: Copper x250 + Rhett&#39;s Longsword; Balder: Bekker Large Shield x2) sind vom NPC gestelltes bzw. abzugebendes Übergabematerial und keine Belohnung.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/greymane-commissions-journal-medium-bag-reward.webp" alt="Das Journal Tales of the Greymanes listet jeden Auftrag, Belohnung jeweils eine Medium Bag." loading="lazy" decoding="async"><figcaption>1. Das Journal Tales of the Greymanes listet jeden Auftrag, Belohnung jeweils eine Medium Bag.</figcaption></figure><figure><img src="/cd_assets/factions/medium-bag-three-inventory-slots-reward.webp" alt="Jede Medium Bag erweitert das Inventar um drei Plätze." loading="lazy" decoding="async"><figcaption>2. Jede Medium Bag erweitert das Inventar um drei Plätze.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-strongbox-with-wheels">
 <td class="q-cell">Strongbox with Wheels</td>
 <td>Brief am Schrein im Greymane Camp lesen (Yann ist verschwunden); zum im Brief genannten Ort, den ausgeräumten Wagen zum Hehler fahren und verkaufen (Letter at the Shrine -&gt; Running Loot -&gt; Empty Wagon).</td>
 <td>Scattered Embers aktiv.</td>
 <td>Keine Belohnung (questlog, game8).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/scattered-embers-yann-empty-wagon-sell.webp" alt="Den gestohlenen Wagen beim Hehler abgeben (Empty Wagon)." loading="lazy" decoding="async"><figcaption>1. Den gestohlenen Wagen beim Hehler abgeben (Empty Wagon).</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-chance-to-make-a-fortune">
 <td class="q-cell">Chance to Make a Fortune</td>
 <td>Yann im Camp ansprechen (um Geld betrogen); Spielhölle betreten und ein Duo-Match gewinnen, danach zu Yann zurück (Shattered Charmed Life -&gt; A Move on the Table -&gt; Liquor and Memories).</td>
@@ -980,6 +1017,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Scattered Embers aktiv; Bounty-System (Kapitel 2).</td>
 <td>Silver x6 (game8; &#39;Plenty of Bounty&#39; dort ebenfalls Silver x6; questlog weist keine Belohnung aus).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/scattered-embers-plenty-of-bounty-captured-outlaw.webp" alt="Den gefangenen Gesetzlosen bei der Wache abliefern." loading="lazy" decoding="async"><figcaption>1. Den gefangenen Gesetzlosen bei der Wache abliefern.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-the-price-of-a-hangover">
 <td class="q-cell">The Price of a Hangover</td>
 <td>Yann und Naira im Camp ansprechen (Kneipenrechnung), Holz für Marius schlagen (The Cost of the Tab -&gt; Logging Without an Axe).</td>
@@ -998,18 +1036,21 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Scattered Embers aktiv.</td>
 <td>Meat Soup x1 + Abyssal Assimilation x1 (questlog); game8 nennt keine Belohnung.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/scattered-embers-naira-meat-soup-handover.webp" alt="Die fertige Fleischsuppe an Naira übergeben." loading="lazy" decoding="async"><figcaption>1. Die fertige Fleischsuppe an Naira übergeben.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-gentle-sound-of-flowing-river-words-left-by-the-riverside">
 <td class="q-cell">Gentle Sound of Flowing River (Words Left by the Riverside)<span class="unsure">Quelle: teils belegt</span></td>
 <td>Oongka wartet am Fluss (Ronnie wünscht Fisch); Angelwette, danach Oongkas Geschichte anhören.</td>
 <td>Scattered Embers aktiv; laut Fextralife (Bestand) erscheint die Quest zu Kapitel-8-Beginn automatisch im Questlog.</td>
 <td>Fishing Rod (questlog x2, game8 x1).</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/scattered-embers-oongka-riverside-fishing.webp" alt="Oongka wartet am Fluss auf die Angel-Herausforderung." loading="lazy" decoding="async"><figcaption>1. Oongka wartet am Fluss auf die Angel-Herausforderung.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-strength-held-in-the-fingertips">
 <td class="q-cell">Strength Held in the Fingertips<span class="unsure">Quelle: teils belegt</span></td>
 <td>Oongka bei Calphade Castle ansprechen, nachdem die Angel-Quest &#39;Words Left by the Riverside&#39; erledigt ist (PowerPyx). Missionen: &#39;Arm Wrestling Tips&#39; (Oongka beobachtet die Neurekruten) und &#39;How to Distribute Strength&#39; (in der Taverne gegen Soldaten im Armdrücken antreten, danach erneut mit Oongka sprechen). Laut PowerPyx erscheint danach der Champion der Armdrück-Challenge Hero&#39;s Handshake 2.</td>
 <td>Words Left by the Riverside abgeschlossen; ab Kapitel 8 (PowerPyx).</td>
 <td>— (game8: keine; questlog: keine Items gelistet)</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/scattered-embers-oongka-calphade-arm-wrestling.webp" alt="Armdrücken in der Taverne (How to Distribute Strength)." loading="lazy" decoding="async"><figcaption>1. Armdrücken in der Taverne (How to Distribute Strength).</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-favorable-trade-urgent-news-sweet-deal">
 <td class="q-cell">Favorable Trade (Urgent News -&gt; Sweet Deal)</td>
 <td>Yann im Camp ansprechen; mit Wagen Honig in der Goldleaf Merchant Guild kaufen und im Hernand Castle verkaufen.</td>
@@ -1028,12 +1069,14 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <td>Grounds-of-the-Sunrise-Branch; laut Seite Graumähnen-Camp der 3. Ausbau (nach Embers of Return), genaue Freischaltung nicht belegt.</td>
 <td>Je Rumor Abyss Artifact x1 + Rekruten (u. a. Engraved Silver Earring, Heloderma Lizard, Camp Weapons x350); Kamu&#39;s/Ben&#39;s Request je Medium Bag x1.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/gathered-will-hook-rapids-greymanes-location.webp" alt="Hook Rapids: Balder und Ryan." loading="lazy" decoding="async"><figcaption>1. Hook Rapids: Balder und Ryan.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-solid-foundation-grounds-of-the-sunrise">
 <td class="q-cell">Solid Foundation (Grounds of the Sunrise)<span class="unsure">Quelle: teils belegt</span></td>
 <td>Marius: &#39;A Rumor at the Inksworth Bindery&#39; (Connor, Oliver, Eric) und &#39;The Greymanes&#39; Cabin&#39; (Morrow, Xavier, Gilbert, Max, Brennan, Hills of No Return); Camp ausbauen, Secure Resources (Azerian-Manor-Wachauftrag). Die questlog-Quest führt genau sechs Missionen (New Information, A Rumor at the Inksworth Bindery, The Greymanes&#39; Cabin, Expanding the Camp, News of Comrades, Secure Resources) — damit vollständig.</td>
 <td>Grounds-of-the-Sunrise-Branch; laut Seite Graumähnen-Camp der 4. Ausbau (öffnet sich erst nach dem 3. Ausbau).</td>
 <td>Abyss Artifact x1 je Rumor + u. a. Pirate Plate Gloves, Rich Red Dye, Dark Yellow Dye, Camp Timber x2000, Timber x5, Fine Timber x3.</td>
 </tr>
+<tr class="q-imgs"><td colspan="4"><div class="q-shots"><figure><img src="/cd_assets/factions/solid-foundation-inksworth-bindery-waterfall-greymanes-location.webp" alt="Wasserfall über Howling Hill (Inksworth Bindery): Connor, Oliver und Eric." loading="lazy" decoding="async"><figcaption>1. Wasserfall über Howling Hill (Inksworth Bindery): Connor, Oliver und Eric.</figcaption></figure><figure><img src="/cd_assets/factions/azerian-manor-defense-mission.webp" alt="Die Camp-Gelder kommen aus der Verteidigungsmission im Azerian Manor." loading="lazy" decoding="async"><figcaption>2. Die Camp-Gelder kommen aus der Verteidigungsmission im Azerian Manor.</figcaption></figure></div></td></tr>
 <tr id="fr-hernand-greymanes-scattered-embers-grounds-of-the-sunrise-commissions-reuniting-with-comrades-grounds-of-the-sunrise">
 <td class="q-cell">Reuniting with Comrades (Grounds of the Sunrise)<span class="unsure">Quelle: teils belegt</span></td>
 <td>Gerüchte-Reihe &#39;A Rumor in St. Halssius / the Calphade Gate / the Southern Quarry / Pollengarth Apiary / Calphade / Ivynook / Arboria Craftshop&#39; sowie &#39;A Familiar Voice at the Redfox Trading Post&#39; (Diederik).</td>
@@ -2117,7 +2160,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
   <nav class="alle" id="alle-guides" aria-label="Alle Guide-Seiten"><div class="alle-gruppe"><span class="alle-kat">Start</span> <a href="/">Übersicht</a> &middot; <a href="/patch-notes">Patch-Notes</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Kampf</span> <a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Gegner</a> &middot; <a href="/skills">Fähigkeiten</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Ausrüstung</span> <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/abyss-cores">Abyss-Ausrüstung</a> &middot; <a href="/hexen">Hexen &amp; Fusion</a></div>
-  <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/hauptquests">Hauptquests</a> &middot; <a href="/fraktionen" aria-current="page">Fraktionsquests</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/fraktionen" aria-current="page">Fraktionsquests</a> &middot; <a href="/hauptquests">Hauptquests</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/kapitel-guide">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Welt &amp; Karte</span> <a href="/npcs">Charaktere &amp; NPCs</a> &middot; <a href="/mounts">Reittiere</a> &middot; <a href="/pets">Haustiere</a> &middot; <a href="/geheimnisse">Geheimnisse &amp; Lore</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Herstellen &amp; Sammeln</span> <a href="/crafting">Herstellen &amp; Farmen</a></div></nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;

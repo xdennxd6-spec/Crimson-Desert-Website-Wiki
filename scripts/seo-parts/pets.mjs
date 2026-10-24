@@ -43,7 +43,7 @@ p.pet-ref{margin:0;font-family:var(--f-mono);font-size:var(--fs-11);color:var(--
 `.trim();
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const PET_CDN = "https://cdn.questlog.gg/crimson-desert/assets/_sprites/";
+const PET_CDN = "cd_assets/ql/assets/_sprites/";
 
 function localWebpDims(rel) {
   const buf = fs.readFileSync(ROOT + rel);

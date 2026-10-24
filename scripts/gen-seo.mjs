@@ -32,6 +32,7 @@ import * as partSideQuests from "./seo-parts/side-quests.mjs";
 import * as partTrophaeen from "./seo-parts/trophaeen.mjs";
 import * as partHauptquests from "./seo-parts/hauptquests.mjs";
 import * as partPatchNotes from "./seo-parts/patch-notes.mjs";
+import * as partPatchNotes1 from "./seo-parts/patch-notes-1.mjs";
 import * as partFraktionen from "./seo-parts/fraktionen.mjs";
 import * as partNpcs from "./seo-parts/npcs.mjs";
 // Zehn Themen-Seiten vom 07.10.2026 (Ausbau fuer die Google-Suche).
@@ -115,6 +116,9 @@ const TROPHIES = extract("TROPHIES");
 const TROPHY_GRADES = extract("TROPHY_GRADES");
 const ENEMIES = extract("ENEMIES");
 const ENEMY_IMGS = extract("ENEMY_IMGS");
+// Seit 24.10.2026: Drop-Tabellen mit Wahrscheinlichkeit je Bestiarium-Eintrag (data/d10-enemy-drops.js,
+// generiert aus questlog.gg-Spieldaten). Optional, damit ein fehlendes File den Lauf nicht kippt.
+const ENEMY_DROPS = extractOptional("ENEMY_DROPS") || {};
 const SIDE_QUESTS = extract("SIDE_QUESTS");
 // Seit 26.08.2026: Grundlage der Seiten hauptquests.html und patch-notes.html.
 const MAIN_QUESTS = extract("MAIN_QUESTS");
@@ -133,7 +137,7 @@ const NPC_PAL = extract("NPC_PAL");
 // Icon-CDN der Crafting-Rezepte. Das icon-Feld in CRAFTING haelt nur den
 // Dateinamen; die vollstaendige URL ist CRAFT_CDN + icon. Spiegelt die
 // gleichnamige Konstante in index.html.
-const CRAFT_CDN = "https://cdn.questlog.gg/crimson-desert/assets/_sprites/";
+const CRAFT_CDN = "cd_assets/ql/assets/_sprites/";
 
 // ── Helfer ───────────────────────────────────────────────────────────────────
 const esc = (s) => String(s == null ? "" : s)
@@ -151,7 +155,9 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
   partHauptquests, partFraktionen, partPatchNotes, partNpcs,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
-  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse];
+  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse,
+  // Patch-Archiv 1.x nur mit dem vorbereiteten Umbau (CD_PATCH_UMBAU=1, siehe seo-parts/patch-notes.mjs)
+  ...(partPatchNotes1.UMBAU ? [partPatchNotes1] : [])];
 
 // Kategorien wie im Wiki-Menue der App (Navigationsumbau 10/2026, Reihenfolge =
 // Reihenfolge in der Fussleiste "Alle Guides"). Die Namen sind die der App
@@ -177,9 +183,9 @@ const KATEGORIEN = [
 // seite); alle Seiten stehen nach Kategorien gruppiert in der Fussleiste
 // "Alle Guides" jeder Seite. Eine Seite ausserhalb der zwoelf erscheint im Kopf,
 // solange sie selbst offen ist.
-// "fraktionen" steht zwischen Haupt- und Nebenquests, weil die App die
-// Fraktionen als dritten Tab innerhalb von sec-quests fuehrt (qt-mq -> qt-fac
-// -> qt-sq); die drei Module verlinken per /#sec=quests&tab=<mq|fac|sq> direkt auf ihren Tab.
+// "fraktionen" steht seit 24.10.2026 vor den Hauptquests, wie in der App: Fraktionsquests
+// sind der meistgesuchte Quest-Begriff und dort erster Reiter von sec-quests (qt-fac -> qt-mq
+// -> qt-sq -> qt-te); die drei Module verlinken per /#sec=quests&tab=<mq|fac|sq> direkt auf ihren Tab.
 // Wer NAV aendert, haelt verify-seo.mjs (liest die Slugs per Regex aus diesem
 // Block) und scripts/verify-nav.mjs (Soll-Abgleich der Labels) mit.
 const NAV = [
@@ -192,8 +198,8 @@ const NAV = [
   ["accessoires", "Accessoires", "ausruestung"],
   ["abyss-cores", "Abyss-Ausrüstung", "ausruestung"],
   ["hexen", "Hexen & Fusion", "ausruestung"],
-  ["hauptquests", "Hauptquests", "quests", "kopf"],
   ["fraktionen", "Fraktionsquests", "quests", "kopf"],
+  ["hauptquests", "Hauptquests", "quests", "kopf"],
   ["side-quests", "Nebenquests", "quests", "kopf"],
   ["kapitel-guide", "Kapitel-Guide", "quests"],
   ["true-ending", "True Ending", "quests", "kopf"],
@@ -206,6 +212,9 @@ const NAV = [
   ["geheimnisse", "Geheimnisse & Lore", "welt"],
   ["crafting", "Herstellen & Farmen", "sammeln", "kopf"],
 ];
+// Patch-Notes-Umbau: Archivseite direkt hinter Patch-Notes einhaengen (nur mit Schalter, verify-seo/verify-nav
+// lesen NAV als Text und sehen diesen Eintrag deshalb erst, wenn er beim Freischalten fest eingetragen wird).
+if (partPatchNotes1.UMBAU) NAV.splice(NAV.findIndex(([s]) => s === "patch-notes") + 1, 0, [partPatchNotes1.SLUG, partPatchNotes1.NAV_LABEL, "start"]);
 const KAT_NAME = Object.fromEntries(KATEGORIEN);
 const KAT_VON = Object.fromEntries(NAV.map(([s, , kat]) => [s, kat]));
 // Patch-Notes steht in der App unter "Start" und deshalb in NAV ganz vorn; im
@@ -315,9 +324,45 @@ function platzhalterTief(wert, zahlen, herkunft) {
 // bosse/waffen, damit alle Seiten dieselbe Platzhalter-Absicherung durchlaufen.
 function introHtml(slugName, zahlen) {
   const intro = SEO_INTROS[slugName];
-  if (!intro || !intro.intro) return "";
-  const text = zahlenEinsetzen(intro.intro, zahlen, `intros.json → ${slugName}.intro`);
-  return `<p class="intro">${esc(text)}</p>\n`;
+  let html = "";
+  if (intro && intro.intro) {
+    const text = zahlenEinsetzen(intro.intro, zahlen, `intros.json → ${slugName}.intro`);
+    html += `<p class="intro">${mitLinks(text, `intros.json → ${slugName}`)}</p>\n`;
+  }
+  return html + kontextHtml(slugName, zahlen);
+}
+
+// ── Kontextlinks im Fliesstext (seit 24.10.2026) ──────────────────────────────
+// Bis dahin war jede Seite nur ueber Kopf- und Fussnavigation verlinkt. Google
+// gewichtet Links mitten im Text staerker, weil der umgebende Satz sagt, worum es
+// auf der Zielseite geht. Schreibweise in intros.json, faq.json (Antworten),
+// seiten/<slug>.json und kontextlinks.json: [[/ziel|Linktext]]. Ziele sind
+// Seiten aus NAV (optional mit #anker) oder die App (/#sec-...); ein Tippfehler
+// im Slug bricht den Lauf ab statt einen toten Link auszuliefern.
+const SEO_KONTEXT = ladeInhalt("kontextlinks.json");
+const LINK_RE = /\[\[(\/[^|\]]*)\|([^\]]+)\]\]/g;
+function linkZielOk(ziel) {
+  if (/^\/(#.*)?$/.test(ziel)) return true;
+  const m = ziel.match(/^\/([a-z0-9-]+)(#[\w-]+)?$/);
+  return !!m && NAV.some(([s]) => s === m[1]);
+}
+function mitLinks(text, herkunft) {
+  return esc(text).replace(LINK_RE, (_, ziel, label) => {
+    const z = ziel.replace(/&amp;/g, "&");
+    if (!linkZielOk(z)) throw new Error(`Kontextlink auf unbekanntes Ziel "${z}" in ${herkunft}`);
+    return `<a href="${esc(z)}">${label}</a>`;
+  });
+}
+// Fuer JSON-LD und andere Klartext-Stellen: nur der Linktext bleibt.
+const ohneLinks = (t) => String(t).replace(LINK_RE, "$2");
+function kontextHtml(slugName, zahlen) {
+  const k = SEO_KONTEXT[slugName];
+  if (!k) return "";
+  const text = zahlenEinsetzen(k, zahlen, `kontextlinks.json → ${slugName}`);
+  if (!LINK_RE.test(text)) throw new Error(`kontextlinks.json → ${slugName}: kein einziger [[Link]]`);
+  LINK_RE.lastIndex = 0;
+  if (text.includes(`[[/${slugName}|`)) throw new Error(`kontextlinks.json → ${slugName}: Link auf sich selbst`);
+  return `<p class="kontext">${mitLinks(text, `kontextlinks.json → ${slugName}`)}</p>\n`;
 }
 
 // Eine Antwort "unbekannt" ist eine ehrliche Nicht-Antwort der Recherche, aber auf
@@ -580,6 +625,7 @@ border-radius:var(--radius);color:var(--ink-dim);font-family:var(--f-mono);font-
 
 /* --- Einleitungsabsatz und FAQ der Modul-Seiten --- */
 p.intro{font-size:15px;color:var(--ink);max-width:75ch;margin:0 0 4px}
+p.kontext{font-size:14px;color:var(--ink-dim,var(--ink));max-width:75ch;margin:6px 0 10px}
 details.faq{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
 margin-top:10px;box-shadow:var(--shadow-soft);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 details.faq>summary{list-style:none;cursor:pointer;padding:13px 16px;font-family:var(--f-display);
@@ -1124,7 +1170,7 @@ function buildTrueEnding() {
     { frage: "Zählen die vier Eternal-Corridor-Rätsel zu den 40?", antwort: "Nein. Sie gehören zu einer optionalen Questreihe und sind für das versteckte Ende nicht erforderlich." },
   ];
   const body = `
-<a class="cta" href="/#sec=quests">Interaktive Checkliste mit Fortschritt öffnen &rarr;</a>
+${kontextHtml("true-ending", {})}<a class="cta" href="/#sec=quests">Interaktive Checkliste mit Fortschritt öffnen &rarr;</a>
 <p class="note">Pflicht: Hauptstory samt Epilog und alle 40 Abyss-Challenges. Die weiteren Listen sind Empfehlungen. Den offiziellen Spielstand der Challenges findest du im Journal unter Challenges &rarr; Exploration &rarr; The Abyss. Quelle: <a href="https://vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert/">VULKK, Hidden Ending Guide</a> und <a href="https://vulkk.com/2026/06/14/abyss-challenges-list-in-crimson-desert-conqueror-of-the-abyss-achievement/">Liste der 40 Challenges</a> (geprüft 28.09.2026).</p>
 ${sections}
 ${faqSektion(faq)}`;
@@ -1223,7 +1269,7 @@ function buildSitemap(geaendert) {
 function faqSektion(liste) {
   const items = liste.map((f) => `<details class="faq">
 <summary>${esc(f.frage)}</summary>
-<p>${esc(f.antwort)}</p>
+<p>${mitLinks(f.antwort, `FAQ "${f.frage}"`)}</p>
 </details>`).join("\n");
   return `
 <h2>Häufige Fragen (${liste.length})</h2>
@@ -1239,7 +1285,7 @@ function faqPageLd(liste) {
     mainEntity: liste.map((f) => ({
       "@type": "Question",
       name: f.frage,
-      acceptedAnswer: { "@type": "Answer", text: f.antwort },
+      acceptedAnswer: { "@type": "Answer", text: ohneLinks(f.antwort) },
     })),
   };
 }
@@ -1259,7 +1305,12 @@ function baueModulSeite(p) {
   // Datenmengen des Moduls, fuer die Platzhalter in Intro, FAQ und Zusatztexten.
   const zahlen = typeof p.ZAHLEN === "function" ? p.ZAHLEN(CTX) : {};
 
-  spec.bodyHtml = introHtml(p.SLUG, zahlen) + spec.bodyHtml;
+  // Ein Modul kann seine Einleitung selbst liefern (INTRO(ctx) -> Text oder null), z. B. die Patch-Notes im
+  // vorbereiteten Umbau, wo der Text aus intros.json nicht mehr passt. Sonst wie bisher aus intros.json.
+  const eigenIntro = typeof p.INTRO === "function" ? p.INTRO(CTX) : null;
+  spec.bodyHtml = (eigenIntro
+    ? `<p class="intro">${mitLinks(eigenIntro, `${p.SLUG}.INTRO`)}</p>\n` + kontextHtml(p.SLUG, zahlen)
+    : introHtml(p.SLUG, zahlen)) + spec.bodyHtml;
 
   const faq = faqFuer(p.SLUG).map((f, i) => ({
     frage: zahlenEinsetzen(f.frage, zahlen, `faq.json → ${p.SLUG}[${i}].frage`),
@@ -1280,7 +1331,7 @@ function baueModulSeite(p) {
 const CTX = {
   data: {
     ARMOR, ARMOR_IMGS, CRAFTING, TROPHIES, TROPHY_GRADES,
-    ENEMIES, ENEMY_IMGS, SIDE_QUESTS, MAIN_QUESTS, PATCHES,
+    ENEMIES, ENEMY_IMGS, ENEMY_DROPS, SIDE_QUESTS, MAIN_QUESTS, PATCHES,
     FAC_DATA, NPCS, NPC_IMGS, NPC_PAL,
   },
   // Redaktionelle Zusatztexte aus scripts/seo-content/. Bewusst getrennt von

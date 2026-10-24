@@ -1,0 +1,68 @@
+{
+  "_hinweis": "Redaktionelle Texte fuer den Patch-Notes-Umbau (vorbereitet 24.10.2026, aktiv nur mit CD_PATCH_UMBAU=1). highlights = Block 'Die wichtigsten Aenderungen' oben auf der Seite, spieler = Einordnung je Patch ('Was heisst das fuer dich'). Nur aus den offiziellen Notes und den vorhandenen Einordnungen abgeleitet, keine neuen Spielfakten.",
+  "highlights": [
+    {
+      "ver": "2.03.00",
+      "titel": "Wasserlauf mit Sprung und Rutschen",
+      "text": "Während Water Stride kannst du springen, mit den Vaporwalker-Schuhen auch rutschen. Dazu kommt DLSS Ray Reconstruction mit dem neuesten Transformer-Modell."
+    },
+    {
+      "ver": "2.02.00",
+      "titel": "Cross-Save jetzt auch auf dem Mac",
+      "text": "Der Mac ist an das plattformübergreifende Speichern angeschlossen, dazu kommen zwölf Fehlerbehebungen, unter anderem an Thornbriar Fortress und dem Handelswarenlager."
+    },
+    {
+      "ver": "2.01.00",
+      "titel": "Mehr Camp-Mittel und eine neue Entsendung",
+      "text": "Silberspenden bringen ein Vielfaches an Camp-Mitteln, die Goldbarren-Investitionsmission ist neu, und bei berittenen Quests heilt ein erneuter Versuch jetzt auch das Pferd."
+    },
+    {
+      "ver": "2.00.00",
+      "titel": "Crimson Desert Enhanced",
+      "text": "Deutsche Sprachausgabe, die neue Währung Abyss-Verknüpfung mit einmaligem Fähigkeiten-Reset samt Erstattung, neue Kliff-Fähigkeiten und eine wählbare Steuerung für Flug-Reittiere. Kostenlos für alle Besitzer."
+    },
+    {
+      "ver": "1.18.00",
+      "titel": "Quest-Wissen und neue Lock-on-Kamera",
+      "text": "Eine eigene Wissenskategorie für Quests mit acht Unterkategorien, die Lock-on-Kameradrehung in drei Stufen und Forschung, die Camp-Mittel statt Silber kostet."
+    },
+    {
+      "ver": "1.16.00",
+      "titel": "Das große Handels-Update",
+      "text": "133 neue Handelsposten, Preise, die bei zu viel Verkauf an einem Ort sinken, sieben Wagenwerkstätten und Anleihen bei der Bank. Der Handel funktioniert seitdem spürbar anders."
+    },
+    {
+      "ver": "1.14.00",
+      "titel": "Cross-Save für alle Plattformen",
+      "text": "Ein gemeinsamer Speicherplatz über die Pearl-Abyss-ID, allerdings ohne automatischen Abgleich und ohne Cross-Buy."
+    },
+    {
+      "ver": "1.13.00",
+      "titel": "Abyss auch für Oongka und Damiane",
+      "text": "Das Abyss-Endgame ist für beide Begleiter offen, dazu 39 neue Ausrüstungsteile, färbbare Verkleidungen und die meisten Waffen ebenfalls färbbar."
+    }
+  ],
+  "spieler": {
+    "2.03.02": "Für dich heißt das: Wer bei „The Mysterious Pot“ oder im Abyss „Ether Rest“ festhing, kann weiterspielen. Fehlen dir neu entdeckte Symbole auf der Karte, sollten sie nach dem Patch auftauchen.",
+    "2.03.01": "Für dich heißt das: Hast du die Taste fürs Laternenzielen umgelegt, funktioniert sie wieder. Zweiblatt ist in Tommaso spielbar, und die Abstürze beim Ansprechen von NPCs sollten seltener werden.",
+    "2.03.00": "Für dich heißt das: Wasserlauf wird beweglicher, mit Vaporwalker-Schuhen sogar flott. Wer neu anfängt und Silber übernimmt, bekommt es gebündelt statt verstreut. Missionen mit Wartezeit lassen sich nicht mehr überspringen, und im Pferderennen sind die Gegner nicht mehr unfair schnell.",
+    "2.02.00": "Für dich heißt das: Mac-Spieler können ihren Stand jetzt mit anderen Plattformen teilen. Wer Thornbriar Fortress nicht befreien konnte oder bei „The Words of Alustin“ ohne Brief dastand, kommt weiter. Volles Inventar beim Aufstellen des Camp-Banners blockiert die Wohnfunktion nicht mehr.",
+    "2.01.00": "Für dich heißt das: Der Camp-Ausbau geht mit Silberspenden deutlich schneller. Eine neue Entsendung bringt Goldbarren ins Spiel, und mehrere Questsperren, etwa bei „Der verfluchte Ritter“, sind gelöst. Musketen-Spieler können den Präzisionsschuss wieder nutzen.",
+    "2.00.02": "Für dich heißt das: Ein kleiner Hotfix. Wichtig ist er vor allem, wenn du im Steinbruch Karin mit dem Kran feststeckst oder beim Reiten ständig an wandernden Händlern abgeworfen wurdest.",
+    "2.00.01": "Für dich heißt das: Feinschliff an den Neuerungen von Enhanced, also arabische Texte und Lippensynchronität, dazu bessere Bildrate und ein lauffähiges Spiel auf manchen Macs.",
+    "2.00.00": "Für dich heißt das: Beim ersten Start werden deine erlernten Fähigkeiten zurückgesetzt, die Abyss-Artefakte bekommst du als Erstattung zurück. Plane danach in Ruhe neu, jeder Charakter lässt sich jetzt einzeln zurücksetzen. Wer neu anfängt, kann Währungen und Abyss-Verknüpfungen übernehmen. Prüfe außerdem unter Sonstiges, Eingabe, ob dir die Kamera- oder die manuelle Steuerung für Flug-Reittiere besser liegt.",
+    "1.18.02": "Für dich heißt das: Wer nach „Geheimes Geschäft“ plötzlich kein Silber mehr hatte oder im Camp null Graumähnen sah, sollte nach diesem Hotfix wieder die richtigen Werte haben.",
+    "1.18.01": "Für dich heißt das: Drei Fehler aus dem großen Patch am Vortag sind weg, darunter das verzögerte Gesprächsmenü bei brennender Laterne und unsichtbare Wohn-Gegenstände aus älteren Spielständen.",
+    "1.18.00": "Für dich heißt das: Im Wissen findest du Quests jetzt gesammelt, auch rückwirkend für bereits erledigte. Forschung kostet ab sofort Camp-Mittel statt Silber, das verschiebt deine Ausgaben. Wer mit der festen Lock-on-Kamera nicht klarkam, findet mit „semi-auto“ einen Mittelweg.",
+    "1.17.00": "Für dich heißt das: Reine Fehlerbehebungen. Am wichtigsten, wenn die Challenge „Desperate Rescue“ nicht weiterzählte oder Kopfbedeckungen ihren Spezialeffekt nicht auslösten.",
+    "1.16.04": "Für dich heißt das: Kontrolliere nach dem Laden kurz deine Ausrüstung, falls dir vorher Stückzahlen falsch vorkamen. Der Fehler ist behoben.",
+    "1.16.03": "Für dich heißt das: Wer mit zwei Waffen spielte und danach seinen Schild vermisste, ist sicher. Mehr steckt nicht drin.",
+    "1.16.02": "Für dich heißt das: Hängende Ladebildschirme und schwarze Bilder beim Laden sollten verschwinden. Besitzer einer AMD RX 9070 XT oder eines Macs mit MetalFX profitieren besonders.",
+    "1.16.01": "Für dich heißt das: Nach dem Beladen an einer Wagenwerkstatt zeigen die Camp-Lager wieder ihren eigenen Inhalt statt den des Wagens.",
+    "1.16.00": "Für dich heißt das: Alte Handelsrouten lohnen sich nicht mehr unbegrenzt, weil der Preis bei zu viel Verkauf an einem Ort sinkt. Schwer erreichbare Posten bringen mehr, die Wagenwerkstätten sparen den Weg zum Camp, und kleine Mengen lassen sich jetzt einzeln verkaufen. Vorsicht beim Zurückholen des Pferdes: Es geht mehr Ware verloren.",
+    "1.15.00": "Für dich heißt das: Der „Mace of Ambition“ ist jetzt regulär erreichbar. Außerdem wachsen Feldfrüchte wieder zuverlässig, und das Laden von Cross-Save-Ständen stürzt nicht mehr ab.",
+    "1.14.00": "Für dich heißt das: Du kannst zwischen Plattformen wechseln, musst deinen Stand aber vorher selbst hochladen, sonst spielst du auf dem alten weiter. Das Spiel brauchst du auf jeder Plattform einzeln, und gekaufte Kosmetik bleibt auf ihrer Plattform.",
+    "1.13.01": "Für dich heißt das: Wer die Hoenmark Ruins nicht befreien konnte oder Challenge-Belohnungen vermisste, sollte jetzt weiterkommen.",
+    "1.13.00": "Für dich heißt das: Mit Oongka und Damiane lohnt sich das Abyss-Endgame jetzt genauso. Die Memory Fragments von vier Rematch-Bossen liegen an neuen Orten, und Verkleidungen sowie die meisten Waffen lassen sich färben."
+  }
+}

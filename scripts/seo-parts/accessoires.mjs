@@ -8,7 +8,7 @@
 // "Ogre's Ring" ist laut Daten trotz des Namens eine Halskette (Typ Necklace) und steht deshalb
 // bei den Halsketten.
 //
-// Icon-URL wie in der App: SYNTH_CDN (https://cdn.questlog.gg/crimson-desert) + icon
+// Icon-URL wie in der App: SYNTH_CDN (cd_assets/ql) + icon
 // ("/assets/_sprites/itemicon_prefab_cd_phm_00_...webp"). Alle 40 Icons am 07.10.2026 per
 // Range-Request gemessen: 256x256.
 //
@@ -24,7 +24,7 @@ export const EXTRA_CSS = `
 article.card img.acc-ico{width:64px;height:64px;aspect-ratio:1/1;object-fit:contain;padding:4px}
 `.trim();
 
-const SYNTH_CDN = "https://cdn.questlog.gg/crimson-desert";
+const SYNTH_CDN = "cd_assets/ql";
 
 // Reihenfolge wie die Typ-Auswahl in der App; Label ist der deutsche Gruppentitel.
 const GROUPS = [

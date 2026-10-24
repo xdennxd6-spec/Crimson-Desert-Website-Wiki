@@ -16,7 +16,7 @@
 //    pro Hexe. Die Zuordnung Hexe -> verkaufte Blueprints steht in WITCHES.services.
 //  - SIGIL_AMULETS: Rezeptname ohne Endziffer -> {mount, sigil}; liefert Spielname und Reittier.
 //
-// Icons der Rezepte: SYNTH_CDN + icon (https://cdn.questlog.gg/crimson-desert + /assets/_sprites/..),
+// Icons der Rezepte: SYNTH_CDN + icon (cd_assets/ql + /assets/_sprites/..),
 // alle 103 verschiedenen Icon-URLs am 07.10.2026 gemessen: 256x256.
 //
 // Anker: Hexen "hexe-" + slug(name) (z. B. hexe-sylvia, hexe-white-crow); Rezepte "synth-" +
@@ -34,7 +34,7 @@ article.card img.hx-img{width:120px;height:120px;aspect-ratio:1/1;object-fit:cov
 span.hx-slot{white-space:nowrap}
 `.trim();
 
-const SYNTH_CDN = "https://cdn.questlog.gg/crimson-desert";
+const SYNTH_CDN = "cd_assets/ql";
 const SLOT_DE = { Weapon: "Waffe", Armor: "Rüstung", Both: "Waffe/Hand/Fuß" };
 
 const clean = (n) => String(n || "").replace(/\s+\d+$/, "");

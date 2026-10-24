@@ -8,11 +8,11 @@
 (function(){var h=document.documentElement,p='auto',on;try{p=localStorage.getItem('cd_motion')||'auto';}catch(e){}on=p!=='off';h.classList.add(on?'cd-motion':'cd-still');if(on){['gsap-3.15.0','ScrollTrigger-3.15.0','SplitText-3.15.0','lenis-1.3.26'].forEach(function(n){var l=document.createElement('link');l.rel='preload';l.as='script';l.href='vendor/'+n+'.min.js';l.fetchPriority='low';document.head.appendChild(l);});}})();</script>
 <!-- /MOTION A Kopf -->
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
-<title>Crimson Desert Wiki &amp; Guide (Deutsch): Bosse &amp; Waffen</title>
-<meta name="description" content="Deutsches Crimson Desert Wiki & Guide-Dashboard: 100 Bosse, 500 Waffen, Skills, Rüstungen, Crafting, Quests, Patch-Notes und True-Ending-Checkliste.">
+<title>Crimson Desert Wiki Deutsch: Bosse, Waffen, Quests &amp; Guides</title>
+<meta name="description" content="Das deutsche Crimson Desert Wiki: 100 Bosse, 500 Waffen, alle Haupt- und Nebenquests, Ruinen-Lösungen, Crafting, Patch-Notes und True-Ending-Checkliste. Kostenlos.">
 <link rel="canonical" href="https://crimson-desert-wiki.com/">
-<meta property="og:title" content="Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending">
-<meta property="og:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
+<meta property="og:title" content="Crimson Desert Wiki Deutsch: Bosse, Waffen, Quests &amp; Guides">
+<meta property="og:description" content="Bosse, Waffen, Quests, Ruinen-Lösungen, Crafting und True-Ending-Checkliste: das deutsche Crimson Desert Wiki an einem Ort.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://crimson-desert-wiki.com/">
 <meta property="og:site_name" content="Crimson Desert Wiki">
@@ -22,8 +22,8 @@
 <meta property="og:image:height" content="1080">
 <meta property="og:image:alt" content="Crimson Desert — Umbra Boss">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Crimson Desert Wiki &amp; Guide (Deutsch): Bosse, Waffen, True Ending">
-<meta name="twitter:description" content="Bosse, Waffen, Skills, Rüstungen, True Ending und mehr — alles an einem Ort.">
+<meta name="twitter:title" content="Crimson Desert Wiki Deutsch: Bosse, Waffen, Quests &amp; Guides">
+<meta name="twitter:description" content="Bosse, Waffen, Quests, Ruinen-Lösungen, Crafting und True-Ending-Checkliste: das deutsche Crimson Desert Wiki an einem Ort.">
 <meta name="twitter:image" content="https://crimson-desert-wiki.com/cd_assets/bosses/umbra-final.jpg">
 <meta name="theme-color" content="#0a0b12">
 <link rel="manifest" href="site.webmanifest">
@@ -58,7 +58,6 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://cdn.questlog.gg">
 <link rel="preload" as="script" href="data/d01-weapons.js">
 <link rel="preload" as="script" href="data/d02-crafting.js">
 <link rel="preload" as="script" href="data/d03-main-quests.js">
@@ -4924,6 +4923,17 @@ html.cd-motion .q5-clp-b .cd-i{transition:transform .25s}
 .q5-clp>.q5-st-tip{margin-top:10px}
 .q5-clp:has(>.q5-st-tip){margin-bottom:2px}
 .q5-st-tip b{margin-right:6px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+/* Bildanleitung je Fraktionsquest (FAC_QUEST_IMGS, data/d11): nummerierte Schritte, Klick öffnet das Großbild */
+.q5-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0 2px;padding:0;list-style:none;counter-reset:q5shot}
+.q5-shot{counter-increment:q5shot;display:flex;flex-direction:column;gap:5px;width:100%;padding:0;border:0;background:none;text-align:left;cursor:zoom-in;color:inherit;font:inherit}
+.q5-shot-i{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.q5-shot-i img{display:block;width:100%;height:100%;object-fit:cover}
+.q5-shot-i::before{content:counter(q5shot);position:absolute;z-index:1;top:6px;left:6px;min-width:20px;padding:1px 6px;border-radius:8px;background:rgba(0,0,0,.72);color:var(--gold);font-family:var(--f-mono);font-size:11px;font-weight:700;text-align:center}
+.q5-shot-c{font-size:12px;line-height:1.4;color:var(--text)}
+.q5-shot:hover .q5-shot-i{border-color:var(--gold)}
+.q5-shot:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:10px}
+html.cd-motion .q5-shot-i img{transition:transform .3s cubic-bezier(.22,.8,.3,1)}
+html.cd-motion .q5-shot:hover .q5-shot-i img{transform:scale(1.06)}
 .q5-steps>li.is-miss::before{border-color:color-mix(in srgb,var(--red) 70%,transparent);background:color-mix(in srgb,var(--red) 16%,var(--card));color:var(--rhi)}
 .q5-steps>li.is-done::before{border-color:var(--gold);background:var(--gold);color:var(--bg)}
 .q5-steps>li.is-done .cd-step-t{color:var(--dim);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--gold) 55%,transparent)}
@@ -7856,13 +7866,13 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   </section>
 
   <section class="sec" id="sec-quests">
-    <h2 class="sec-t"><span class="sec-sym">❢</span> Quests <span class="sec-t-en">Main &amp; Faction Quests</span></h2>
+    <h2 class="sec-t"><span class="sec-sym">❢</span> Quests <span class="sec-t-en">Faction, Main &amp; Side Quests</span></h2>
     <!-- R2 B5: Cockpit (Weiter-Schritte), vier Strang-Reiter mit Fortschritt, je Strang ein Kopf mit Szene + schlanke Faltkarten -->
     <div id="quest-hero" class="q5-cockpit cd-spot"></div>
     <div class="tabs q5-tabs" role="tablist" aria-label="Quest-Stränge">
       <button type="button" class="tab active" id="qt-te" role="tab" aria-selected="true" aria-controls="qp-te" onclick="qTab('te')" style="--q5c:var(--red)"><span class="q5-tab-g cd-g" aria-hidden="true">✺</span><span class="q5-tab-tx"><span class="q5-tab-t">True Ending</span><span class="q5-tab-s" id="q5-ts-te"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-te"></i></span></button>
       <button type="button" class="tab" id="qt-mq" role="tab" aria-selected="false" aria-controls="qp-mq" onclick="qTab('mq')" style="--q5c:var(--gold)"><span class="q5-tab-g cd-g" aria-hidden="true">❢</span><span class="q5-tab-tx"><span class="q5-tab-t">Hauptquests</span><span class="q5-tab-s" id="q5-ts-mq"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-mq"></i></span></button>
-      <button type="button" class="tab" id="qt-fac" role="tab" aria-selected="false" aria-controls="qp-fac" onclick="qTab('fac')" style="--q5c:var(--slate)"><span class="q5-tab-g cd-g" aria-hidden="true">⚑</span><span class="q5-tab-tx"><span class="q5-tab-t">Fraktionen</span><span class="q5-tab-s" id="q5-ts-fac"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-fac"></i></span></button>
+      <button type="button" class="tab" id="qt-fac" role="tab" aria-selected="false" aria-controls="qp-fac" onclick="qTab('fac')" style="--q5c:var(--slate)"><span class="q5-tab-g cd-g" aria-hidden="true">⚑</span><span class="q5-tab-tx"><span class="q5-tab-t">Fraktionsquests</span><span class="q5-tab-s" id="q5-ts-fac"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-fac"></i></span></button>
       <button type="button" class="tab" id="qt-sq" role="tab" aria-selected="false" aria-controls="qp-sq" onclick="qTab('sq')" style="--q5c:var(--cd-ok)"><span class="q5-tab-g cd-g" aria-hidden="true">❖</span><span class="q5-tab-tx"><span class="q5-tab-t">Nebenquests</span><span class="q5-tab-s" id="q5-ts-sq"></span></span><span class="q5-tab-bar" aria-hidden="true"><i id="q5-tb-sq"></i></span></button>
     </div>
     <div class="pane active" id="qp-te" role="tabpanel" aria-labelledby="qt-te">
@@ -8472,6 +8482,8 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 <script src="data/d07-patches.js"></script>
 <script src="data/d08-ruins-data.js"></script>
 <script src="data/d09-scenes.js"></script>
+<script src="data/d10-enemy-drops.js"></script>
+<script src="data/d11-fac-quest-imgs.js"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -11291,14 +11303,29 @@ function renderConsole(resId){
   const nm=document.getElementById('conName'); if(nm)nm.textContent=r.label;
   const meta=document.getElementById('conMeta'); if(meta)meta.textContent=_navPageCount(leaves.length);
   const host=document.getElementById('conList'); if(!host)return;
+  /* Seiten mit sub (Reiter derselben Seite, z. B. Quests) erscheinen als eigene Blätter je Reiter,
+     damit „Fraktionsquests“ direkt in der Liste steht statt nur als Reiter oben auf der Seite. */
   host.innerHTML=leaves.map(s=>{
+    if(Array.isArray(s.sub)&&s.sub.length)return s.sub.map(u=>
+      '<button class="leaf" type="button" data-sec="'+s.id+'" data-tab="'+u.tab+'" title="'+_navEsc(u.desc||u.name)+'">'
+      +'<span class="lsym" aria-hidden="true">'+u.glyph+'</span>'
+      +'<span class="ltxt"><span class="lname">'+_navEsc(u.name)+'</span>'+(u.en?'<span class="len">'+_navEsc(u.en)+'</span>':'')+'</span>'
+      +'<span class="lmeta"><span class="lcount"></span></span>'
+      +'</button>').join('');
     const en=_navEn(s);
     return '<button class="leaf" type="button" data-sec="'+s.id+'" title="'+_navEsc(s.desc||s.name)+'">'
     +'<span class="lsym" aria-hidden="true">'+s.glyph+'</span>'
     +'<span class="ltxt"><span class="lname">'+_navEsc(s.name)+'</span>'+(en?'<span class="len">'+_navEsc(en)+'</span>':'')+'</span>'
     +'<span class="lmeta"><span class="lcount">'+_navEsc(_navCountShown(s.id))+'</span></span>'
     +'</button>';}).join('');
-  host.querySelectorAll('.leaf').forEach(b=>{ b.addEventListener('click',()=>showSec(b.dataset.sec)); });
+  host.querySelectorAll('.leaf').forEach(b=>{ b.addEventListener('click',()=>{
+    showSec(b.dataset.sec);
+    if(b.dataset.tab){
+      _applyTabParam(b.dataset.sec,b.dataset.tab);
+      try{ history.replaceState(null,'','#sec='+b.dataset.sec+'&tab='+b.dataset.tab); }catch(e){}
+      markConsoleActive();
+    }
+  }); });
   // Die Blaetter sind frisch per innerHTML erzeugt und starten leafIn ohnehin beim Einfuegen;
   // das fruehere remove + offsetWidth + add erzwang dafuer nur ein komplettes Layout.
   host.classList.add('swap');
@@ -11307,7 +11334,10 @@ function renderConsole(resId){
 function markConsoleActive(){
   const cur=localStorage.getItem('cd_sec')||'';
   document.querySelectorAll('#conList .leaf').forEach(l=>{
-    const on=l.dataset.sec===cur;
+    // Reiter-Blätter (data-tab) sind nur aktiv, wenn auch ihr Reiter auf der Seite gerade offen ist
+    const pre=l.dataset.tab&&typeof _TAB_PREFIX!=='undefined'?_TAB_PREFIX[l.dataset.sec]:null;
+    const tb=pre?document.getElementById(pre+l.dataset.tab):null;
+    const on=l.dataset.sec===cur&&(!l.dataset.tab||!!(tb&&tb.classList.contains('active')));
     l.classList.toggle('active',on);
     // Navigations-Semantik (kein tab-Pattern): aktives Blatt = aria-current="page"
     if(on)l.setAttribute('aria-current','page');else l.removeAttribute('aria-current');
@@ -13737,8 +13767,20 @@ function _q5Step(q,o){
   return '<li class="q5-st'+(q.miss?' is-miss':'')+(o.on?' is-done':'')+'"'+(o.id?' data-q5-id="'+cdEsc(o.id)+'"':'')+'>'
     +'<div class="q5-st-hd"><span class="cd-step-t">'+cdEsc(q.q)+'</span>'+ck+'</div>'+_q5Badges(q)
     +cdFacts([['Trigger',q.trigger],['Voraussetzung',q.prereq],['Belohnung',q.reward]],{cls:'q5-st-f'})
-    +(q.tip?_q5Clamp('<p class="q5-st-tip q5-clp-t"><b>'+cdEsc(o.tipLbl||'Lösung')+'</b> '+cdEsc(q.tip)+'</p>',String(q.tip).length>230,{l:3,more:'Ganze '+(o.tipLbl||'Lösung')}):'')+'</li>';
+    +(q.tip?_q5Clamp('<p class="q5-st-tip q5-clp-t"><b>'+cdEsc(o.tipLbl||'Lösung')+'</b> '+cdEsc(q.tip)+'</p>',String(q.tip).length>230,{l:3,more:'Ganze '+(o.tipLbl||'Lösung')}):'')
+    +_q5Shots(o.imgs,q.q)+'</li>';
 }
+/* Bildanleitung: [[Datei,Unterschrift],...] aus FAC_QUEST_IMGS als nummerierte Vorschaubilder */
+function _q5Shots(imgs,name){
+  if(!imgs||!imgs.length)return '';
+  return '<ol class="q5-shots" aria-label="Bildanleitung '+cdEsc(name)+'">'+imgs.map((m,i)=>{
+    const src=FAC_QUEST_IMG_DIR+m[0];
+    return '<li><button type="button" class="q5-shot" data-full="'+cdEsc(src)+'" data-cap="'+cdEsc((i+1)+'. '+m[1])+'" aria-label="Bild '+(i+1)+' vergrößern: '+cdEsc(m[1])+'">'
+      +'<span class="q5-shot-i"><img src="'+cdEsc(src)+'" alt="'+cdEsc(m[1])+'" loading="lazy" decoding="async"></span>'
+      +'<span class="q5-shot-c">'+cdEsc(m[1])+'</span></button></li>';
+  }).join('')+'</ol>';
+}
+function _q5FacImgs(f,q){return typeof FAC_QUEST_IMGS!=='undefined'&&FAC_QUEST_IMGS[f.name+'|'+q.q]||null;}
 /* Feinschliff: lange Texte auf wenige Zeilen kürzen, Knopf klappt auf (Text bleibt im DOM, Suche zeigt alles).
    m = nur mobil kürzen (Hinweis-Kästen über der Liste). */
 function _q5Clamp(html,on,o){
@@ -13906,6 +13948,7 @@ function qTab(id){
     if(b){b.classList.toggle('active',t===id);b.setAttribute('aria-selected',t===id?'true':'false');}
     if(p)p.classList.toggle('active',t===id);
   });
+  if(typeof markConsoleActive==='function')markConsoleActive();   // Reiter-Blätter in der linken Liste mitziehen
 }
 
 // ===== MAIN QUESTS =====
@@ -14172,9 +14215,11 @@ function renderFactions(){
     const cc=f.quests[0]&&_q5ChapChip(f.quests[0].prereq);if(cc)chips.push(cc);
     if(f.isNew)chips.push({t:'NEU',c:'ok'});
     if(f.quests.some(q=>q.miss))chips.push({t:'verpassbar',i:'miss',c:'red'});
-    const s=[f.name,f.overview,r.region,'fraktion fraktionsquest',...f.quests.map(q=>[q.q,q.trigger,q.prereq,q.reward].join(' '))].join(' ');
+    const imgs=f.quests.map(q=>_q5FacImgs(f,q)),ni=imgs.reduce((n,l)=>n+(l?l.length:0),0);
+    if(ni)chips.push({v:ni,t:'Bilder',c:'ok'});
+    const s=[f.name,f.overview,r.region,'fraktion fraktionsquest',ni?'bilder bildanleitung':'',...f.quests.map(q=>[q.q,q.trigger,q.prereq,q.reward].join(' '))].join(' ');
     const body=()=>(hasOv?'<p class="q5-ov">'+cdEsc(f.overview)+'</p>':'')
-      +(f.quests.length?'<ol class="cd-stepper q5-steps">'+f.quests.map((q,i)=>_q5Step(q,{key:_Q5_FAC_KEY,id:ids[i],on:done.has(ids[i])})).join('')+'</ol>'
+      +(f.quests.length?'<ol class="cd-stepper q5-steps">'+f.quests.map((q,i)=>_q5Step(q,{key:_Q5_FAC_KEY,id:ids[i],on:done.has(ids[i]),imgs:imgs[i]})).join('')+'</ol>'
         :cdNote('Für diese Fraktion sind keine einzelnen Quests erfasst.',{kind:'info'}));
     return cdFold({title:f.name,lead,icon:_q5FacGlyph(f.name),chips,region:reg||undefined,tone:reg?undefined:'gold',
       prog:f.quests.length?{done:dc,total:f.quests.length}:null,s,body,
@@ -14194,6 +14239,9 @@ function renderFactions(){
       body:'<p>Die frühere Angabe „13 Fraktionen“ ist <b title="Die Patch-Notes 1.05.00 nennen nur die Re-Blockade für 23 Forts, keine Zahl beteiligter Fraktionen">nicht belegt</b>.</p>'
         +cdFacts([['Fort Warspike','Multishot-Lehrer!'],['Gorthak Ironworks Delesyia','beste Armaments-Quelle'],['Karin Quarry','House Roberts']],{cls:'q5-forts'})})+'</div></section>';
   el.innerHTML=head+legend+'<div class="q5-bar">'+pills+'</div>'+groups+liberation;
+  if(!el.dataset.q5Shots){el.dataset.q5Shots='1';
+    el.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.q5-shot');if(!b)return;
+      openRuinImg(b.getAttribute('data-full'),b.getAttribute('data-cap'));if(typeof _mimSrcLbl==='function')_mimSrcLbl('Bildanleitung');});}
   _q5FacApply();
 }
 function _q5FacApply(){
@@ -17630,6 +17678,17 @@ function bestPH(name,key){
   const letter=escHtml((name||'?').charAt(0).toUpperCase());
   return `<div class="boss-img-ph" style="background:linear-gradient(135deg,${bg} 0%,#080808 100%);border:1px solid ${bdr}"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:${text}">${letter}</div><div class="boss-ph-cap" style="color:${text}">Kein Bild</div></div></div>`;
 }
+// Drop-Chancen je Gegner (24.10.2026): ENEMY_DROPS aus data/d10-enemy-drops.js (questlog.gg-Spieldaten,
+// NPC-Varianten zusammengefasst). Hier nur die wichtigsten acht Drops ab 1 %, die volle Tabelle steht auf /bestiarium.
+function bestDropChancen(name){
+  const D=typeof ENEMY_DROPS==='object'&&ENEMY_DROPS[name];
+  if(!D||!D.drops||!D.drops.length)return '';
+  const z=v=>String(v).replace('.',',');
+  const ch=c=>Array.isArray(c)?z(c[0])+' bis '+z(c[1])+' %':z(c)+' %';
+  const top=D.drops.filter(d=>(Array.isArray(d.chance)?d.chance[1]:d.chance)>=1).slice(0,8);
+  if(!top.length)return '';
+  return `<div class="crow"><span class="cl">Chancen</span><span class="cv">${top.map(d=>escHtml(d.item)+' '+ch(d.chance)).join(' · ')} <a href="/bestiarium#enemy-${escHtml(String(name).normalize('NFC').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''))}" style="color:var(--dim)">Tabelle ↗</a></span></div>`;
+}
 function renderBestiary(){
   const el=document.getElementById('bestiary-root');if(!el)return;
   const GROUPS=[
@@ -17652,6 +17711,7 @@ function renderBestiary(){
         <div class="crows">
           ${e.drops&&e.drops!=='—'?`<div class="crow"><span class="cl">Drops</span><span class="cv">${escHtml(e.drops)}</span></div>`:''}
           ${e.tipp?`<div class="crow"><span class="cl">Taktik</span><span class="cv" style="color:var(--gold)">${escHtml(e.tipp)}</span></div>`:''}
+          ${bestDropChancen(e.name)}
         </div>
         ${e.note?`<div class="best-note">${escHtml(e.note)}</div>`:''}
       </div>`;
@@ -18758,7 +18818,7 @@ if (syGetCode()) _loadServerProgress();
   Start: <a href="/patch-notes">Patch-Notes</a><br>
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a><br>
   Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
-  Quests &amp; Herausforderungen: <a href="/hauptquests">Hauptquests</a> · <a href="/fraktionen">Fraktionsquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a><br>
+  Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a><br>
   Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a>
 </nav>

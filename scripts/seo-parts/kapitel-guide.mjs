@@ -144,8 +144,10 @@ ${abschnitte}`;
 
   return {
     slugName: SLUG,
-    title: `Alle ${z.kapitel} Kapitel in Crimson Desert: Übersicht & Guide`,
-    desc: `Alle ${z.kapitel} Kapitel von Crimson Desert plus Epilog im Überblick: Region, Bosse, Key Items, verpassbare Inhalte und ein Tipp zu jedem Story-Kapitel. Deutscher Guide.`,
+    // Titel/Description am 24.10.2026 nachgeschaerft (Search Console: Klickrate 1,6 % bei Position 10,7):
+    // Kapitelzahl plus Epilog vorn, konkreter Nutzen (Bosse, Verpassbares) statt "Übersicht & Guide".
+    title: `Alle ${z.kapitel} Kapitel + Epilog in Crimson Desert: Bosse & Verpassbares`,
+    desc: `Wie viele Kapitel hat Crimson Desert? ${z.kapitel} Kapitel plus Epilog, jedes mit Region, Bossen in Kampfreihenfolge, Key Items, Tipp und Warnung vor verpassbaren Inhalten.`,
     h1: `Alle ${z.kapitel} Kapitel in Crimson Desert: Übersicht der Story`,
     lead: `Crimson Desert hat laut Wiki-Daten <strong>${z.kapitel} nummerierte Kapitel</strong> plus einen <strong>Epilog</strong>. Diese Übersicht führt jedes Kapitel mit Titel, Region, Boss, Key Items, Verpassbarem und Tipp auf. Der Prolog gehört zum ersten Kapitel.`,
     ogImage: null,

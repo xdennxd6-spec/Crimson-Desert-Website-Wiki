@@ -10,7 +10,7 @@
 // note und tipp. "—" (Em-Dash) ist bei zwei Eintraegen (Ogre, Flame Knights) ein Platzhalter
 // fuer "kein Drop" in ENEMIES.*.drops und wird wie in der App (renderBestiary) herausgefiltert,
 // statt als sichtbarer Gedankenstrich zu rendern (Regel 9).
-// Alle 54 Bilder in ENEMY_IMGS sind absolute questlog.gg-CDN-URLs, keine lokalen Assets.
+// Die Bilder in ENEMY_IMGS lagen bis 24.10.2026 auf dem questlog.gg-CDN; seitdem lokal unter cd_assets/ql/.
 
 export const SLUG = "bestiarium";
 export const NAV_LABEL = "Gegner";
@@ -38,6 +38,13 @@ export const SITEMAP = { pri: "0.8", freq: "monthly" };
 export const EXTRA_CSS = `
 article.card img.enemy{aspect-ratio:1/1;object-fit:contain}
 article.card p:not([class]){margin:0;font-size:13.5px;color:var(--ink-dim)}
+table.drp{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 4px}
+table.drp caption{text-align:left;font-weight:600;font-size:13px;margin-bottom:4px}
+table.drp th,table.drp td{text-align:left;padding:3px 6px;border-bottom:1px solid var(--line,rgba(255,255,255,.12));vertical-align:top}
+table.drp td:nth-child(2),table.drp td:nth-child(3){white-space:nowrap}
+span.drp-bei{color:var(--ink-faint);font-size:11.5px}
+p.drp-selten{font-size:12.5px;margin:4px 0 0;color:var(--ink-dim)}
+p.drp-q{font-size:11.5px;margin:4px 0 0;color:var(--ink-faint)}
 `.trim();
 
 // Reale Bildmasse per CDN-Range-Request gemessen (gleiche Byte-Header-Methode wie
@@ -102,8 +109,49 @@ function enemyCard(e, ctx) {
 ${imgTag}
 <h3>${nameHtml}</h3>
 <ul class="stats">${statsHtml}</ul>
-${note}${tipp}
+${note}${tipp}${dropTabelle(e, ctx)}
 </article>`;
+}
+
+// ── Drop-Tabelle mit Wahrscheinlichkeit (seit 24.10.2026) ─────────────────────
+// Quelle: ENEMY_DROPS (data/d10-enemy-drops.js), generiert aus den gedataminten
+// Droptabellen der questlog.gg-Datenbank. Mehrere NPC-Varianten eines Eintrags
+// (Groessen, Regionen, Fraktionsmitglieder) sind zusammengefasst; Chance und Menge
+// erscheinen dann als Spanne, und "bei" sagt, wie viele Varianten den Drop haben.
+// Eintraege ohne Datensatz bekommen keine Tabelle (nichts geschaetzt).
+const HAUPT_MIN = 1;        // ab dieser Chance (%) in die Tabelle, darunter "selten"
+const HAUPT_MAX = 14;       // hoechstens so viele Tabellenzeilen
+const SELTEN_MAX = 10;      // hoechstens so viele seltene Drops ausgeschrieben
+const FUTTER_MAX = 6;
+const zahl = (v) => String(v).replace(".", ",");
+const spanne = (v, einheit = "") => Array.isArray(v) ? `${zahl(v[0])} bis ${zahl(v[1])}${einheit}` : `${zahl(v)}${einheit}`;
+const maxChance = (d) => Array.isArray(d.chance) ? d.chance[1] : d.chance;
+
+function dropTabelle(e, ctx) {
+  const { esc } = ctx.helpers;
+  const D = (ctx.data.ENEMY_DROPS || {})[e.name];
+  if (!D || !D.drops || !D.drops.length) return "";
+  const haupt = D.drops.filter((d) => maxChance(d) >= HAUPT_MIN);
+  const selten = D.drops.filter((d) => maxChance(d) < HAUPT_MIN);
+  const zeilen = haupt.slice(0, HAUPT_MAX).map((d) => {
+    const chance = maxChance(d) === 100 && !Array.isArray(d.chance) ? "sicher (100 %)" : spanne(d.chance, " %");
+    const bei = d.bei && D.varianten > 1 ? ` <span class="drp-bei">(bei ${Math.min(d.bei, D.varianten)} von ${D.varianten} Varianten)</span>` : "";
+    return `<tr><td>${esc(d.item)}${bei}</td><td>${esc(chance)}</td><td>${esc(spanne(d.menge))}</td></tr>`;
+  }).join("");
+  const rest = haupt.length - HAUPT_MAX;
+  const seltenListe = [...haupt.slice(HAUPT_MAX), ...selten];
+  const seltenHtml = seltenListe.length
+    ? `<p class="drp-selten"><b>${rest > 0 ? "Weitere Drops" : "Selten (unter 1 %)"}:</b> ${seltenListe.slice(0, SELTEN_MAX).map((d) => `${esc(d.item)} (${esc(spanne(d.chance, " %"))})`).join(", ")}${seltenListe.length > SELTEN_MAX ? ` und ${seltenListe.length - SELTEN_MAX} weitere` : ""}</p>`
+    : "";
+  const quelle = D.varianten > 1
+    ? `${D.varianten} NPC-Varianten zusammengefasst (${esc(D.npcs.slice(0, 4).join(", "))}${D.npcs.length > 4 ? " u. a." : ""})`
+    : `NPC „${esc(D.npcs[0])}“`;
+  const futter = D.futter && D.futter.length
+    ? `<p class="drp-selten"><b>Bevorzugt als Futter/Geschenk:</b> ${esc(D.futter.slice(0, FUTTER_MAX).join(", "))}${D.futter.length > FUTTER_MAX ? " u. a." : ""}</p>`
+    : "";
+  return `
+<table class="drp"><caption>Drops laut Spieldaten</caption><thead><tr><th>Beute</th><th>Chance</th><th>Menge</th></tr></thead><tbody>${zeilen}</tbody></table>
+${seltenHtml}${futter}<p class="drp-q">Quelle: questlog.gg-Datenbank, ${quelle}. Chance und Menge wie im Datenbankeintrag.</p>`;
 }
 
 // Datenmengen, die die redaktionellen Texte in scripts/seo-content/ per
@@ -159,9 +207,9 @@ ${sections}`;
   return {
     slugName: SLUG,
     title: `Bestiarium: ${total} Gegnertypen in Crimson Desert`,
-    desc: `Das Bestiarium zu Crimson Desert: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen mit Region, Beute-Drops und Kampf-Tipps im Überblick.`,
+    desc: `Das Bestiarium zu Crimson Desert: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen mit Region, Drop-Chancen laut Spieldaten, Lieblingsfutter und Kampf-Tipps.`,
     h1: `${total} Gegnertypen im Bestiarium von Crimson Desert`,
-    lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet <strong>${total} Gegnertypen</strong> der Spielwelt, getrennt von den Bossen: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen, jeweils mit Region, Beute und Beschreibung.`,
+    lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet <strong>${total} Gegnertypen</strong> der Spielwelt, getrennt von den Bossen: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen, jeweils mit Region, Beschreibung und, wo die Spieldaten sie hergeben, einer Drop-Tabelle mit Chance und Menge.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Gegner",
     bodyHtml: body,
