@@ -1586,6 +1586,7 @@ a:visited{color:var(--gold)}
 /* ── Print Styles ── */
 @media print{
   body{background:#fff!important;color:#222!important;font-size:11pt;background-image:none!important}
+  body::after{display:none}
   body::before{display:none!important}
   #rail,#sidebar,#blattbar,.console-reopen,#sbar,#btt,#ham,#mob-overlay,#credit-top,#credit-bottom,#visitor-bar,#auth-area,#ee-overlay,#help-overlay,#rb-modal,.skip-link,.tabs,.fbar,.boss-notes-btn,.defeat-btn,.boss-alt-btn,#mount-float-preview,#mount-ingame-modal,#core-vid-float,.rb-trigger,.cl-reset,.copy-btn{display:none!important}
   #main,.sec{padding:0!important;margin:0!important;display:block!important}
@@ -2305,18 +2306,22 @@ html.cf-open,html.cf-open body{overflow:hidden}
    Radius 16, Aurora. Quelle der Wahrheit: tokens.css (Claude Design).
    ============================================================ */
 
-/* Aurora: Crimson oben-links, Violett unten-rechts (ersetzt Papierton) */
-body{
+/* Aurora: Crimson oben-links, Violett unten-rechts (ersetzt Papierton).
+   Als eigene fixierte Ebene statt background-attachment:fixed am body: der feste Body-Hintergrund zwang Chrome,
+   bei jedem Scroll-Frame die ganze Fläche neu zu malen. z-index:-1 = unter dem Graticule (body::before). */
+body{background-image:none;background-attachment:scroll}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
   background-image:
     radial-gradient(70% 80% at 6% -8%, rgba(255,90,68,.14), transparent 55%),
     radial-gradient(60% 80% at 104% 108%, rgba(139,123,255,.16), transparent 55%);
 }
-[data-theme="sepia"] body{
+[data-theme="sepia"] body::after{
   background-image:
     radial-gradient(70% 80% at 6% -8%, rgba(232,105,90,.08), transparent 55%),
     radial-gradient(60% 80% at 104% 108%, rgba(143,131,224,.09), transparent 55%);
 }
-[data-theme="amoled"] body{background-image:none}
+[data-theme="amoled"] body::after{background-image:none}
 
 /* Glas auf den Haupt-Flaechen (Karten, Dossiers, Gruppen) */
 .card,.sk-c,.witch-card,.set-card,.chap,.ch-card,.te-grp,.cmt-item,.build-card,.fac-reg{
@@ -13680,7 +13685,7 @@ const _Q5_TE_META={
   Abyss:{t:'Abyss-Challenges',g:'✺',keys:['reg-the-abyss']},
   Companions:{t:'Gefährten',g:'⚭',keys:['char-damiane']},
   Sanctums:{t:'Sanktum',g:'✠',keys:['cl-sanctum']},
-  Hexen:{t:'Hexen',g:'☾',keys:[]},
+  Hexen:{t:'Hexen',g:'☾',keys:['te-witches']},
   Greymane:{t:'Graumähnen',g:'⛨',keys:['cl-greymane']},
   Misc:{t:'Sonstiges',g:'✧',keys:[]}
 };
@@ -15278,7 +15283,7 @@ function renderDyes(){
   const grad=l=>{const c=ramp(l);return c.length>1?'linear-gradient(90deg,'+c.join(',')+')':(c[0]||'#888');};
   const nonCraft=DYES.filter(d=>/^Special/.test(d.cat)).length;
   _r2b13Hero('r2b13-dyes-hero',{kicker:'Dyes · Farbpalette',title:'Jede Farbe, jede Stufe, jede Quelle',sub:'Fünf Stufen je Grundfarbe, dazu zehn Grautöne. Kaufen, finden oder craften: hier steht, wie.',
-    tone:'gold',glyph:'◑',stats:[[DYES.length,'belegte Dyes'],[DYES.length-nonCraft,'herstellbar'],[nonCraft,'Grautöne & Spezial'],[DYES.filter(d=>d.miss).length,'verpassbar']]},
+    tone:'gold',glyph:'◑',scene:{keys:['dyes']},stats:[[DYES.length,'belegte Dyes'],[DYES.length-nonCraft,'herstellbar'],[nonCraft,'Grautöne & Spezial'],[DYES.filter(d=>d.miss).length,'verpassbar']]},
     `<div class="r2b13-spectrum" aria-hidden="true">${fam.map(x=>x.list.map(d=>`<i style="--sw:${escHtml(d.color||'#888')}"></i>`).join('')).join('')}</div>`);
   const ramp5=document.getElementById('r2b13-dye-ramp');
   if(ramp5&&!ramp5.firstChild){const red=fam.find(x=>x.cat==='Red');if(red)ramp5.innerHTML=red.list.map(d=>`<span style="--sw:${escHtml(d.color)}"><b>${escHtml(_r2b13DyeTier(d.name))}</b></span>`).join('');}
@@ -19242,6 +19247,10 @@ function watchOv(){
 
 /* ---- Refresh (entprellt) ---- */
 function refreshNow(){
+  /* nicht mitten im Scrollen: ScrollTrigger.refresh() misst alle Trigger neu (erzwungenes Layout, 20 bis 80 ms).
+     Beim Scrollen wachsen content-visibility-Karten und Bilder laufend, der ResizeObserver feuerte so Ruckler nach;
+     Wartende blendet sweep() bis zur Ruhe trotzdem ein. */
+  if(now()-scAt<350||(lenis&&lenis.isScrolling)){refreshSoon(350);return;}
   if(lenis)lenis.resize();
   if(active)ScrollTrigger.refresh();
   measure();sweep();emit('cdmotion:refresh');
