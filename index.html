@@ -2332,10 +2332,10 @@ body::after{
   box-shadow:var(--shadow-soft);
 }
 
-/* Registratur-Chrome: Rail, Konsole, Blattbar als Glas mit starkem Blur */
+/* Registratur-Chrome: Rail, Konsole, Blattbar als Glas mit Blur (8 px statt 16 px seit 24.10.2026: optisch kaum anders, halbe GPU-Last je Scroll-Frame) */
 #rail,#sidebar,#sbar,#blattbar{
   background:var(--rail-bg);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
 }
 
 /* Tabellen: dunkler Glas-Kopf, weiche Kante */
@@ -2351,7 +2351,7 @@ thead tr{background:rgba(22,24,40,.75)}
 :root #toast,:root #mfp-label,:root #tt-float .tt-title{color:#160a08}
 
 /* Credit-Leiste: dunkles Glas statt heller Tinte-Flaeche */
-#credit-top{background:var(--rail-bg);border-bottom:1px solid var(--line);color:var(--amber);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+#credit-top{background:var(--rail-bg);border-bottom:1px solid var(--line);color:var(--amber);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 
 /* — Registratur auf Holo-Glas (Referenz: rail-konsole.html) —
    Rail/Konsole/Blattbar: dunkles Glas statt Tinte-Invertierung.
@@ -2376,7 +2376,7 @@ thead tr{background:rgba(22,24,40,.75)}
 .rail-btn:hover .g{color:var(--rhi)}
 .console-hd{
   background:var(--rail-bg);color:var(--text);border-bottom:1px solid var(--line);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
 }
 .console-hd::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,var(--red),transparent 60%);opacity:.5}
 .console-hd .ch-kick{color:var(--amber)}
@@ -19002,7 +19002,8 @@ function raf(t){if(lenis)lenis.raf(t*1000);}
 function start(){
   if(active)return;
   active=true;setCls(true);
-  lenis=window.lenis=new Lenis({lerp:0.1,syncTouch:false,allowNestedScroll:true,stopInertiaOnNavigate:true,
+  /* lerp 0.11 statt 0.1: Nachlauf etwa 10 % kürzer, Scrollen etwas direkter (User-Wunsch 24.10.2026) */
+  lenis=window.lenis=new Lenis({lerp:0.11,syncTouch:false,allowNestedScroll:true,stopInertiaOnNavigate:true,
     respectReducedMotion:false,   /* es entscheidet der Schalter cd_motion */
     prevent:function(n){return !!(n&&n.closest&&n.closest(NATIV));}});
   lenis.on('scroll',ScrollTrigger.update);
