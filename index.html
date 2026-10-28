@@ -7287,6 +7287,39 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 </script>
 <div id="main" role="main" tabindex="-1">
   <div id="credit-top">Design and Build by Christian Stein</div>
+  <script>
+  // ── Speicher-Übernahme (Domainwechsel 09/2026): Hinweisleiste, Teil 1 von 2 (Ablauf und Gründe: Kommentar
+  // „Speicher-Übernahme von der alten Adresse“ im Hauptskript). Schnellstart 10/2026: entsteht beim Parsen hinter
+  // #credit-top statt nach DOMContentLoaded, sonst schiebt sie die schon sichtbare Übersicht nach unten (CLS).
+  (function(){
+    try{
+      var ALT='https://crimson-desert-wiki.netlify.app', FLAG='cd_migrate_hint';
+      if(location.origin!=='https://crimson-desert-wiki.com')return;
+      if(localStorage.getItem(FLAG)||Date.now()>Date.UTC(2027,2,31))return;
+      var setze=function(v){ if(typeof lsSet==='function')lsSet(FLAG,v); else try{localStorage.setItem(FLAG,v);}catch(e){} };
+      var box=document.createElement('div');
+      box.id='cd-migrate-hint';
+      box.setAttribute('role','region');
+      box.setAttribute('aria-label','Hinweis zur neuen Adresse');
+      box.innerHTML='<span>Neue Adresse: <b>crimson-desert-wiki.com</b>. Hattest du unter crimson-desert-wiki.netlify.app Fortschritt, Favoriten oder Builds gespeichert?</span>'
+        +'<button type="button" class="primaer" data-akt="ja">Jetzt übernehmen</button>'
+        +'<button type="button" data-akt="nein">Nein, danke</button>';
+      box.addEventListener('click',function(e){
+        var akt=e.target&&e.target.getAttribute&&e.target.getAttribute('data-akt');
+        if(!akt)return;
+        if(akt==='ja'){
+          setze('gestartet');
+          location.href=ALT+'/migrate-storage.html?zurueck='+encodeURIComponent(location.pathname+location.search);
+        }else{
+          setze('abgelehnt');
+          box.remove();
+        }
+      });
+      var ct=document.getElementById('credit-top');
+      if(ct)ct.insertAdjacentElement('afterend',box);
+    }catch(e){console.warn('Speicher-Übernahme (Hinweis) übersprungen:',e);}
+  })();
+  </script>
   <!-- REGISTRATUR Blattbar: additiver Register-Kopf (Brotkrume/Peilung/Blattnummer), KEIN Wrapper -->
   <div id="blattbar">
     <button class="bb-console" id="bbConsole" type="button" aria-label="Menü öffnen">&#9776; Menü</button>
@@ -18335,37 +18368,13 @@ document.addEventListener('DOMContentLoaded',()=>{
   // damit Crawler auf der kanonischen Seite nie einen JS-Redirect sehen. Ablauf 2027-03-31.
   (function(){
     try{
-      const ALT='https://crimson-desert-wiki.netlify.app', FLAG='cd_migrate_hint';
       const erg=sessionStorage.getItem('cd_migrate_ergebnis');
       if(erg!==null){
         sessionStorage.removeItem('cd_migrate_ergebnis');
         const t=document.getElementById('toast');
         if(t){t.textContent=Number(erg)>0?'Gespeicherter Fortschritt von der alten Adresse übernommen ('+erg+' Einträge).':'Auf der alten Adresse war nichts gespeichert.';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),5000);}
       }
-      if(location.origin!=='https://crimson-desert-wiki.com')return;
-      if(localStorage.getItem(FLAG)||Date.now()>Date.UTC(2027,2,31))return;
-      const main=document.getElementById('main');
-      if(!main)return;
-      const box=document.createElement('div');
-      box.id='cd-migrate-hint';
-      box.setAttribute('role','region');
-      box.setAttribute('aria-label','Hinweis zur neuen Adresse');
-      box.innerHTML='<span>Neue Adresse: <b>crimson-desert-wiki.com</b>. Hattest du unter crimson-desert-wiki.netlify.app Fortschritt, Favoriten oder Builds gespeichert?</span>'
-        +'<button type="button" class="primaer" data-akt="ja">Jetzt übernehmen</button>'
-        +'<button type="button" data-akt="nein">Nein, danke</button>';
-      box.addEventListener('click',e=>{
-        const akt=e.target&&e.target.getAttribute&&e.target.getAttribute('data-akt');
-        if(!akt)return;
-        if(akt==='ja'){
-          lsSet(FLAG,'gestartet');
-          location.href=ALT+'/migrate-storage.html?zurueck='+encodeURIComponent(location.pathname+location.search);
-        }else{
-          lsSet(FLAG,'abgelehnt');
-          box.remove();
-        }
-      });
-      const first=main.firstElementChild;
-      if(first&&first.id==='credit-top')first.insertAdjacentElement('afterend',box);else main.insertAdjacentElement('afterbegin',box);
+      // Die Hinweisleiste selbst entsteht seit 10/2026 als Inline-Skript direkt hinter #credit-top (Schnellstart, CLS).
     }catch(e){console.warn('Speicher-Übernahme (Hinweis) übersprungen:',e);}
   })();
 
