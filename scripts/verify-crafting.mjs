@@ -112,7 +112,8 @@ ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
 // ── 3c) Tag-Abgleich: <script src="data/...">-Tags in index.html <-> data/*.js ──────
 {
   const htmlOnly = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
-  const tagRe = /<script\s+src="data\/([^"]+)"\s*>\s*<\/script>/g;
+  // Weitere Attribute nach src erlaubt (seit 10/2026 fetchpriority="low", siehe Schnellstart in index.html).
+  const tagRe = /<script\s+src="data\/([^"]+)"[^>]*>\s*<\/script>/g;
   const tagFiles = new Set();
   let tm;
   while ((tm = tagRe.exec(htmlOnly)) !== null) tagFiles.add(tm[1]);
