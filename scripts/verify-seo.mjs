@@ -59,6 +59,13 @@ const MAIN_QUESTS = extract("MAIN_QUESTS");
 const N_MAIN_QUESTS = MAIN_QUESTS.reduce((sum, c) => sum + c.quests.length, 0);
 const PATCHES = extract("PATCHES");
 const N_PATCHES = PATCHES.length;
+// Patch-Notes-Umbau (fest seit 29.10.2026): patch-notes.html zeigt die 2.x-Patches (ab Enhanced),
+// patch-notes-1.html das Archiv aller 1.x-Patches. Trennung hier selbst nachgebaut (Versionspraefix),
+// nicht aus seo-parts/patch-notes.mjs importiert.
+const PATCHES_2X = PATCHES.filter((p) => /^2\./.test(p.ver));
+const PATCHES_1X = PATCHES.filter((p) => !/^2\./.test(p.ver));
+const N_PATCHES_2X = PATCHES_2X.length, N_PATCHES_1X = PATCHES_1X.length;
+const zahlenIn = (s) => (String(s).match(/\d+/g) || []).map(Number);
 // NEU (29.08.2026): fraktionen.html und npcs.html. FAC_DATA ist wie MAIN_QUESTS
 // nach Ebenen gruppiert (Region -> Fraktion -> Quests), daher Summe aller
 // quests-Arrays statt .length. NPCS ist wie ENEMIES ein Objekt aus
@@ -133,10 +140,12 @@ const pages = {
   "side-quests.html": { sec: "/#sec=quests&tab=sq", count: { regex: /<tr id="sq-/g, expected: N_SIDE_QUESTS, label: "Nebenquest-Zeilen" } },
   "hauptquests.html": { sec: "/#sec=quests&tab=mq", count: { regex: /<tr id="mq-/g, expected: N_MAIN_QUESTS, label: "Hauptquest-Zeilen" } },
   // Die Patch-Seite zaehlt Meta-Zeilen statt Karten: sie wickelt bewusst kein
-  // <article> um einen Patch, damit die Seitensuche die Einzelpunkte (Stand
-  // 06.10.2026: 844) findet und nicht die Patches (47; SEL nimmt den aeussersten Treffer). Begruendung
-  // steht im Kopf von parts/patch-notes.mjs.
-  "patch-notes.html": { sec: "/#sec-patches", count: { regex: /<p class="pmeta" id="patch-/g, expected: N_PATCHES, label: "Patch-Meta-Zeilen" } },
+  // <article> um einen Patch, damit die Seitensuche die Einzelpunkte findet und nicht
+  // die Patches (SEL nimmt den aeussersten Treffer). Begruendung
+  // steht im Kopf von parts/patch-notes.mjs. Seit dem Umbau (29.10.2026) traegt patch-notes.html nur die
+  // 2.x-Patches, die 1.x-Patches stehen auf patch-notes-1.html (Label wortgleich aus COUNT_CHECK).
+  "patch-notes.html": { sec: "/#sec-patches", count: { regex: /<p class="pmeta" id="patch-/g, expected: N_PATCHES_2X, label: "Patch-Meta-Zeilen" } },
+  "patch-notes-1.html": { sec: "/#sec-patches", count: { regex: /<p class="pmeta" id="patch-/g, expected: N_PATCHES_1X, label: "Patch-Meta-Zeilen (1.x)" } },
   // NEU (29.08.2026): Regex und Label wortgleich aus COUNT_CHECK(ctx) in
   // parts/fraktionen.mjs bzw. parts/npcs.mjs, "sec" aus deren DEEPLINK-Export.
   // Die Fraktionsseite zaehlt Quest-Zeilen, nicht Fraktionen: eine Huelle je
@@ -298,9 +307,18 @@ const ERLAUBTE_ZAHLEN = {
     zaehl(MAIN_QUESTS.flatMap((c) => c.quests), (q) => q.miss),
     zaehl(MAIN_QUESTS.flatMap((c) => c.quests), (q) => q.conf === "medium"),
     zaehl(MAIN_QUESTS, (c) => c.boss)],
+  // FAQ (faq.json) nennt die Gesamtzahl aller Patches und Aenderungen, dazu Patches, Aenderungen und
+  // Kategorien der 2.x-Seite und die Zahl der 1.x-Patches; das Intro des Umbaus nennt die Zahl der
+  // 2.x- und 1.x-Patches, das Datum des ersten 2.x-Patches (Enhanced) und "1.x" im Archivlink.
   "patch-notes.html": [N_PATCHES,
-    PATCHES.reduce((n, p) => n + (p.features || []).length, 0),
-    PATCHES.reduce((n, p) => n + (p.features || []).reduce((m, f) => m + f.items.length, 0), 0)],
+    PATCHES.reduce((n, p) => n + (p.features || []).reduce((m, f) => m + f.items.length, 0), 0),
+    PATCHES_2X.reduce((n, p) => n + (p.features || []).length, 0),
+    PATCHES_2X.reduce((n, p) => n + (p.features || []).reduce((m, f) => m + f.items.length, 0), 0),
+    N_PATCHES_2X, N_PATCHES_1X, 1, ...zahlenIn(PATCHES_2X[PATCHES_2X.length - 1].date)],
+  // Archiv-Intro: Anzahl, aeltester und neuester 1.x-Patch, die festen Verweise "1.13 bis 1.18"
+  // (Existenz beider Versionen wird unten geprueft) und "2.x" im Rueckverweis.
+  "patch-notes-1.html": [N_PATCHES_1X, ...zahlenIn(PATCHES_1X[PATCHES_1X.length - 1].ver),
+    ...zahlenIn(PATCHES_1X[0].ver), 1, 13, 18, 2],
   "fraktionen.html": [N_FAC_QUESTS, FAC_FACTIONS.length, FAC_DATA.regions.length,
     zaehl(FAC_FACTIONS, (f) => f.isNew),
     zaehl(FAC_QUESTS, (q) => q.conf === "medium" || q.conf === "low")],
@@ -345,6 +363,8 @@ const ERLAUBTE_ZAHLEN = {
     zaehl(ACCESSORIES, (a) => /Unique/.test(a.effect || ""))],
 };
 
+ok(PATCHES_1X.some((p) => p.ver.startsWith("1.13.")) && PATCHES_1X.some((p) => p.ver.startsWith("1.18.")),
+  "patch-notes-1.html: die im Intro genannten Versionen 1.13 und 1.18 stehen in PATCHES");
 for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
   const c = fs.readFileSync(path.join(ROOT, datei), "utf8");
   const menge = new Set(erlaubt);
@@ -573,7 +593,7 @@ const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
   "bestiarium", "side-quests", "trophaeen", "true-ending",
   "hauptquests", "patch-notes", "fraktionen", "npcs",
   "skills", "hexen", "abyss-cores", "accessoires", "kapitel-guide",
-  "mounts", "pets", "ruinen", "raetsel", "geheimnisse"];
+  "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1"];
 for (const s of SEITEN_MIT_WERKZEUG) {
   const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
 
@@ -632,10 +652,10 @@ for (const s of SEITEN_MIT_WERKZEUG) {
 const sm =fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 // Alle Seiten-URLs (nicht nur die drei alten), plus Startseite. Reihenfolge wie
 // im Kopf-Menue von gen-seo.mjs (NAV); zuletzt am 29.08.2026 um /fraktionen und
-// /npcs ergaenzt.
+// /npcs ergaenzt, am 29.10.2026 um /patch-notes-1 (Patch-Archiv 1.x).
 ["/", "/bosse", "/bestiarium", "/waffen", "/ruestungen", "/crafting",
  "/hauptquests", "/fraktionen", "/side-quests", "/trophaeen", "/true-ending",
- "/npcs", "/patch-notes", "/skills", "/hexen", "/abyss-cores", "/accessoires",
+ "/npcs", "/patch-notes", "/patch-notes-1", "/skills", "/hexen", "/abyss-cores", "/accessoires",
  "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse"].forEach((u) =>
   ok(sm.includes(`<loc>https://crimson-desert-wiki.com${u}</loc>`), `sitemap enthaelt ${u}`));
 

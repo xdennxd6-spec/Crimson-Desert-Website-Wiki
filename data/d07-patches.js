@@ -3,6 +3,94 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.04.00",date:"29.10.2026",size:"Der DLC-Patch: Mit 2.04.00 erscheint der erste DLC <b>„Charting the Unknown“</b> (<em>Crimson Desert Enhanced: Charting the Unknown</em>), veröffentlicht am 29.10.2026 um 22:00 UTC, also 23:00 MEZ (boardNo 140). Die Notes gliedern ihn in vier DLC-Kapitel (Geschichte, Ozean, Leben in Pywel, neue Bedrohungen), zehn Punkte unter Neues, 18 Hauptänderungen in sechs Bereichen und zehn Punkte unter Sonstiges. Kernstücke sind je eine eigene Quest für Kliff, Oongka und Damiane nach „Ende der Reise“, Tauchen mit Atemanzeige, Segelschiffe samt Seehandel, freies Bauen beim Wohnen, zwei selbst gestaltbare Burgen, Heirat über erweiterte Vertrauensstufen und der Kampfinhalt „Garten der Prüfungen“. Wichtig für Cross-Save: Spielstände aus einer Umgebung mit DLC lassen sich ohne DLC weder laden noch per Cross-Save nutzen. Eine Downloadgröße nennen die Notes nicht; auf dem Mac (Steam und Mac App Store) muss das vollständige Spielpaket einmalig neu heruntergeladen werden.",features:[
+    {cat:"Die Reise geht weiter",items:[
+      "Für <b>Kliff, Oongka und Damiane</b> wurde jeweils eine <b>eigene Quest</b> hinzugefügt. Nach Abschluss der Hauptquest <b>„Ende der Reise“</b> (<em>Journey's End</em>) findet ihr sie im Menü „Abenteuertagebuch“ (<em>Journal</em>). <span style='color:var(--gdim)'>Einordnung: Die Notes kündigen neue Geschichten an, von einer unheilvollen Präsenz in der Wüste über einen politischen Konflikt bis zu einem uralten Geheimnis unter den Wellen.</span>"
+    ]},
+    {cat:"Erkundet den Ozean",items:[
+      "Neue Quest <b>„Auf in eine größere Welt“</b> (<em>A Wider World</em>), die auf dem Meer spielt. Sie startet nach Abschluss der Hauptquest <b>„Heulender Hügel“</b> (<em>Howling Hill</em>) und einem ausreichenden Ausbau des <b>Graumähnen-Camps</b>.",
+      "<b>Tauchen</b> mit neuer <b>Atemanzeige</b>: Je höher das maximale Atemvolumen, desto länger könnt ihr tauchen. Die Verfeinerung eines <b>Tauchanzugs</b> erhöht das maximale Atemvolumen, neue Gerichte regenerieren es kurzzeitig, und für den <b>A.T.A.G.</b> gibt es eine Meereserkundungsausrüstung, mit der ihr tauchen könnt.",
+      "<b>Schiffe</b> als neue Transportmittel: Ein <b>Segelschiff</b> lässt sich per Schiffsbau-Mission (Entsendung) selbst herstellen oder bei <b>Schiffsverwaltern</b> (<em>fleetmasters</em>) in ganz Pywel kaufen. Bei den Schiffsverwaltern in <b>Demeniss</b> und <b>Delesyia</b> gibt es Schiffsausrüstung zum individuellen Ausstatten. Mit dem Segelschiff könnt ihr <b>Seehandel</b> betreiben, dafür kommen neue Handelswaren dazu.",
+      "Verschiedene <b>Unterwassertiere</b> als Transportmittel: je nach Art bezwingen oder füttern, um <b>Vertrauen</b> zu gewinnen, dann als Transportmittel registrieren. <span style='color:var(--gdim)'>Einordnung: Welche Tierarten es sind, nennen die Notes nicht.</span>",
+      "Mehrere <b>unerschlossene Inseln</b> (<em>uncharted islands</em>) mit Erschließungs-Missionen.",
+      "Zahlreiche <b>Schatzkarten</b> (<em>treasure maps</em>) wurden hinzugefügt."
+    ]},
+    {cat:"Ein erfüllteres Leben in Pywel",items:[
+      "Das <b>Wohn-System</b> wurde erweitert: Grundriss selbst entwerfen und bauen, Wände und Fenster frei platzieren (Menü „Dekorieren“ › „Hausgrundriss“ › „Freies Bauen“). Nutzbar, sobald das Camp am <b>Heulenden Hügel</b> fertiggestellt und <b>„Anfrage von Luke“</b> (<em>Luke's Request</em>) aus den Graumähnen-Fraktionsquests in „Gründe des Sonnenaufgangs“ (<em>Grounds of the Sunrise</em>) abgeschlossen ist.",
+      "<b>Zwei Burgen</b>, die ihr selbst gestalten könnt: <b>Burg Drachensturz</b> (<em>Drakesfall Castle</em>) nach der Hauptquest „Ende der Reise“ und der Befreiung des Stützpunkts, <b>Burg der Flammenritter</b> (<em>Flame Knight's Castle</em>) nach Damianes Quest „Politiker“ (<em>Politician</em>) und der Befreiung des Stützpunkts. <span style='color:var(--gdim)'>Einordnung: Die Inhaltsübersicht zum DLC (boardNo 137) spricht von drei bestimmten Burgen, die Patch-Notizen nennen zwei. Die Abweichung ist offen.</span>",
+      "Stützpunkte im Besitz der Graumähnen werden auf der Karte jetzt <b>blau</b> angezeigt. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt <em>light blue</em>.</span>",
+      "Neue <b>Verwaltungsinhalte</b> für befreite Stützpunkte mit eigenem Kartenreiter <b>„Einrichtung“</b> (<em>Facilities</em>): Stützpunkte mieten und dort ein <b>Restaurant, Sägewerk, Schmiede oder Schneiderei</b> betreiben. Die Einrichtungen laufen weiter, auch wenn ihr weit entfernt seid, gelegentlich kommen besondere Kunden, und es gibt neue Belohnungen.",
+      "Neue Mission für ein <b>Fest im Camp</b>: Für begrenzte Zeit besuchen NPCs mit ausreichend Vertrauen das Camp, dort steigt das Vertrauen schneller. Bestimmte Besucher lassen sich als <b>Ehrengraumähnen</b> (<em>Honorary Greymanes</em>) anheuern und wie gewöhnliche Graumähnen auf Missionen entsenden, einige Funktionen sind bei ihnen nicht verfügbar.",
+      "Die <b>Vertrauensstufen</b> wurden erweitert: Über „Interagieren“ › „Flirten“ beginnt die erweiterte Vertrauensstufe. Nach dem Flirten steigt sie über „Schenken“ und „Erzählen“ weiter (je Interaktion nur einmal pro Tag). Bei 100 auf der erweiterten Stufe ist ein <b>Heiratsantrag</b> möglich. Flirtet ein spielbarer Charakter mit einem NPC, sinkt dessen Vertrauen zu den anderen spielbaren Charakteren. Bei <b>Hexen</b> müssen zusätzlich die Sanktum-Quests der jeweiligen Hexe abgeschlossen sein. Nach der Hochzeit: Aussehen des Ehepartners beim Friseur anpassbar, Symbol auf Welt- und Minikarte, „Zusammen reisen“ und regelmäßige Geschenke. Die Ehe kann aufgelöst werden, laut Notes hat das „jedoch seinen Preis“.",
+      "Insgesamt <b>17 neue Wohnsitze</b>, errichtbar über Missionsentsendungen. In einem zugewiesenen Wohnsitz lebt der Ehepartner, die Karte zeigt das Symbol des Besitzers (Kliff, Oongka oder Damiane).",
+      "Neues Minispiel <b>„Würfelspiel“</b> (<em>Banker's Dice</em>), spielbar in <b>Demeniss</b> und <b>Delesyia</b>."
+    ]},
+    {cat:"Neue Bedrohungen tauchen auf",items:[
+      "Neuer Kampfinhalt <b>„Garten der Prüfungen“</b> (<em>Garden of Trials</em>) nach der Hauptquest „Ende der Reise“, insgesamt <b>10 Gruppen</b>. Allein oder mit den Gefährten, die euch vor dem Betreten begleitet haben, bis zu drei Charaktere (Kliff, Oongka, Damiane) in frei wählbarer Reihenfolge. <b>Keine Heilung durch Gerichte</b>; wird ein Charakter besiegt, kämpft der nächste weiter. Jede abgeschlossene Gruppe gibt einen Effekt, der eine bestehende Fähigkeit verbessert. <span style='color:var(--gdim)'>Einordnung: Die deutsche Fassung verortet ihn „im Abyss in der Nähe des Archivs des Axioms“, die englische nennt <em>near the Axiom Archive Abyss</em>.</span>",
+      "Neue <b>Ausrüstung</b>: Rüstungen, Waffen, Ausrüstung für Transportmittel und Haustiere, Abyss-Ausrüstung und mehr. <span style='color:var(--gdim)'>Einordnung: Einzelne Gegenstände nennen die Notes nicht.</span>",
+      "Mehrere neue, mächtige <b>Bosse</b>; gegen einige ist über <b>Erinnerungsfragmente</b> eine Revanche möglich. <span style='color:var(--gdim)'>Einordnung: Bossnamen nennen die Notes nicht.</span>"
+    ]},
+    {cat:"Neues",items:[
+      "<b>Spielstände aus einer Umgebung mit DLC</b> können in einer Umgebung ohne DLC weder geladen noch per <b>Cross-Save</b> genutzt werden.",
+      "Die <b>NPC-Interaktion</b> wurde überarbeitet: „Erzählen“ und „Schenken“ als eigene Punkte, „Interagieren“ für allgemeine Interaktionen. Über „Erzählen“ teilt ihr Wissen und gewinnt Vertrauen, neue Bücher verraten die Vorlieben der Bewohner, und die Abklingzeit nach einer vertrauenssteigernden Interaktion wird angezeigt.",
+      "Eigenes <b>Lager für Insekten</b>; dazu drei neue <b>legendäre Insekten</b> samt Sichtungsberichten.",
+      "<b>Friseure</b> in größeren Städten, unabhängig vom Camp nutzbar.",
+      "Das <b>Outfit der Graumähnen</b> lässt sich im „Graumähnen-Verwaltungsbüro“ (englisch <em>Comrade Dispatch Tent</em>) ändern, das kostet Camp-Mittel.",
+      "Im Kampf einsetzbare <b>Alltagswerkzeuge</b>: Bratpfanne, Schöpfkelle, Pfannendeckel, Krugdeckel und Küchenmesser.",
+      "Neue <b>Wohnobjekte</b>: Wege, Bäume, Blumenbeete, Katzenwachtürme und Hundekissen. Katzenwachtürme gibt es beim neuen <b>Katzenwachturm-Händler</b>.",
+      "<b>Wagen</b> lassen sich mit Ausrüstung bestücken, dazu kommt neue wagenspezifische Ausrüstung.",
+      "In <b>Hafengebieten</b> gibt es eine Wagenwerkstatt.",
+      "Die <b>maximale Stapelmenge</b> von Gegenständen wurde allgemein erhöht."
+    ]},
+    {cat:"Inhalt",items:[
+      "Behoben: Beim gleichzeitigen Verstauen oder Entnehmen mehrerer nicht stapelbarer Gegenstände wirkte die Aktion nur auf einen.",
+      "Behoben: In der Mission <b>„Sprich mit Grimnir“</b> (<em>Talk to Grimnir</em>) fehlte gelegentlich der Knopf „Warten“.",
+      "Neue Objekte für das <b>Sammelgegenstände-Lager</b> (<em>Collectibles Chest</em>).",
+      "Behoben: Der Fortschritt der Herausforderung <b>„Bogen des Schicksals V“</b> (<em>Bow Aimed at Fate V</em>) wurde falsch angezeigt.",
+      "[Oongka/Damiane] Behoben: NPCs reagierten im Status „Begleiten“ nicht feindselig. <span style='color:var(--gdim)'>Einordnung: Das betrifft nicht die blockierten Graumähnen-Fraktionsquests als Damiane oder Oongka, die weiter auf der Liste bekannter Probleme stehen.</span>"
+    ]},
+    {cat:"Steuerung",items:[
+      "[Kliff] Behoben: Der <b>„Luftschwung“</b> (<em>Aerial Swing</em>) war im Flug nicht nutzbar, wenn die <b>Macht des Axioms</b> mit einem Objekt verbunden war."
+    ]},
+    {cat:"Kampf / Aktion",items:[
+      "Angriffsanimation und Effekt von <b>„Konter“</b> (<em>Counter</em>) wurden verbessert.",
+      "Die Vorbereitungszeit von Oongkas <b>„Streuschuss“</b> (<em>Scatter Shot</em>) und Damianes <b>„Schildwurf“</b> (<em>Shield Toss</em>) wurde verkürzt.",
+      "Behoben: Einige Trugbilder führten im Kampf gegen den <b>Vergessenen General</b> keinen Ansturm aus."
+    ]},
+    {cat:"UI",items:[
+      "<b>Handelsrouten</b> sind jetzt auch außerhalb des Kartenreiters „Handelsposten“ sichtbar.",
+      "Die <b>Karte</b> lässt sich weiter herauszoomen.",
+      "[Controller] L3 (linker Stick) springt auf der Karte zum herbeigerufenen Pferd, Wagen, Schiff oder <b>Schwarzstern</b>.",
+      "Das Symbol „Herbeigerufen“ für Transportmittel und Haustiere wurde geändert.",
+      "Neu angezeigt wird, wo Transportmittel und Haustiere beschworen werden können: in der Luft, an Land oder im Wasser (EN: <em>underwater</em>).",
+      "Symbolfarben nach Regionsstatus: Besetzt rot, Wiederaufbau hellrot, Zwischenfall gelb, Unerschlossen grau.",
+      "Der Bereich, in dem sich der <b>Kartennebel</b> lichtet, hängt jetzt vom Transportmittel ab."
+    ]},
+    {cat:"Grafik und Einstellungen",items:[
+      "<b>Upscaling und Frame-Generierung</b> sind separat wählbar, zum Beispiel DLSS-Upscaling mit FSR-Frame-Generierung."
+    ]},
+    {cat:"Lokalisierung",items:[
+      "Lokalisierungsfehler wurden in allen Sprachen behoben und die allgemeine Qualität verbessert."
+    ]},
+    {cat:"Sonstiges",items:[
+      "<b>Goldapfeligel</b> (<em>Golden Apple Hedgehogs</em>) erscheinen seltener.",
+      "Abyss-Ausrüstung <b>„Effizienz“</b> (<em>Efficiency</em>): Statt einer Chance von n %, ein Herstellungsmaterial weniger zu verbrauchen, verringert sie nun die Materialkosten bei der Herstellung um n %.",
+      "Behoben: Handschuhe ragten beim „Untersuchen“ eines Buches durch das Buch.",
+      "Behoben: Weggeschleuderte Leichen stiegen gelegentlich in den Himmel.",
+      "Behoben: Der <b>„Runenläufer-Schild“</b> (<em>Runewalker Shield</em>) wurde als färbbar angezeigt.",
+      "Behoben: Framerate-Einbrüche bei längerem Verweilen auf dem <b>Ätherischen Pfad</b> (<em>Ethereal Pathway</em>).",
+      "Behoben: Im Wagen verhaftete Spieler wurden im Wagen sitzend ins Gefängnis gebracht.",
+      "Behoben: übermäßiges Kamerawackeln in bestimmten Situationen.",
+      "Behoben: Beim ersten Öffnen eines <b>Banktresors</b> (<em>Strongbox</em>) fehlte die Oberfläche zum Ändern der Investitionsstrategie. <span style='color:var(--gdim)'>Einordnung: ein anderer Bankfehler als der im Wiki geführte Refreshing-Timer der Bankinvestition; diesen melden die Notes nicht als behoben.</span>",
+      "Behoben: Die Auslösebedingungen einiger Abyss-Ausrüstungen wurden nicht korrekt angewendet."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>in Vorbereitung</em> (Stand 29.10.2026, 22:47 UTC). Keine Downloadgröße.",
+      "Auf <b>Steam (Mac)</b> und im <b>Mac App Store</b> muss wegen technischer Anpassungen an der Mac-Version mit diesem Patch einmalig das vollständige Spielpaket erneut heruntergeladen werden. <span style='color:var(--gdim)'>Einordnung: Laut Erscheinungsmeldung (boardNo 143) ist der DLC auch im Mac App Store erhältlich, das Update kann dort etwas später erscheinen. Ob der DLC dort schon spielbar ist, ist unbestätigt.</span>",
+      "Bekannte Probleme: Die Notes verweisen nur auf die offizielle Liste (boardNo 68), die weiter den Stand 21.09.2026, 14:00 UTC trägt (geprüft 29.10.2026) und keine DLC-Einträge enthält.",
+      "Quelle: offizielle Patch-Notizen Version 2.04.00, Pearl Abyss, 29.10.2026 22:00 UTC (boardNo 140), deutsche und englische Fassung gegengeprüft; dazu die Erscheinungsmeldung zum DLC (boardNo 143) und die Inhaltsübersicht (boardNo 137)."
+    ]}
+  ]},
   {ver:"2.03.02",date:"23.09.2026",size:"Dritter Patch innerhalb einer Woche und zweiter Hotfix auf 2.03.00, drei Fehlerbehebungen unter der einzigen Überschrift Patch-Details. Veröffentlicht am 23.09.2026 um 04:45 UTC (boardNo 133). Einer der drei Punkte, die fehlenden Kartensymbole, stand erst zwei Tage zuvor neu auf der offiziellen Liste bekannter Probleme.",features:[
     {cat:"Patch-Details",items:[
       "<b>Grimnir</b> erschien unter bestimmten Umständen während der Quest <b>„The Mysterious Pot“</b> (deutsch „Der geheimnisvolle Topf“) nicht — behoben. <span style='color:var(--gdim)'>Einordnung: Dieselbe Quest aus der Kilnden-Werkstatt stand schon in früheren Patches mehrfach auf der Fehlerliste, siehe unten.</span>",

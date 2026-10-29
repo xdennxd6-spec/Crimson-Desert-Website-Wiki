@@ -219,7 +219,7 @@ const SOLL_SEITEN = [
   ["start", "start", "Übersicht", "", "Alle Kategorien und Seiten auf einen Blick"],
   ["beginner", "start", "Anfänger-Guide", "", "Kampf-Grundlagen, Steuerung und erste Schritte"],
   ["patches", "start", "Patch-Notes", "Patch Notes", "Alle Updates und Hotfixes mit den wichtigsten Änderungen"],
-  ["roadmap", "start", "Roadmap", "Roadmap", "Was Pearl Abyss als Nächstes plant"],
+  ["roadmap", "start", "Roadmap", "Roadmap", "Aufgaben nach deinem Fortschritt und FAQ zu NG+, Koop und Cross-Save"],
   ["favorites", "start", "Merkliste", "Favoriten", "Deine mit ☆ markierten Einträge an einem Ort"],
   ["bosses", "kampf", "Bosse", "Bosses", "Fundort, Schwächen, Taktik und Beute aller Bosse"],
   ["bestiary", "kampf", "Gegner", "Creatures", "Normale Gegner und Kreaturen mit Beute"],
@@ -264,7 +264,7 @@ const SYNTHESE_WOERTER_CORES_VERBOTEN = ["Synthese", "Synthesis", "Fusion", "fus
 const START_H2 = "Crimson Desert Wiki: Was suchst du?";
 // Linkbeschriftungen der statischen SEO-Seiten (VORGABEN-B Abschnitt 2): slug -> Label
 const SOLL_NAV_LABELS = {
-  "patch-notes": "Patch-Notes", "bosse": "Bosse", "bestiarium": "Gegner", "skills": "Fähigkeiten",
+  "patch-notes": "Patch-Notes", "patch-notes-1": "Patch-Archiv 1.x", "bosse": "Bosse", "bestiarium": "Gegner", "skills": "Fähigkeiten",
   "waffen": "Waffen", "ruestungen": "Rüstungen", "accessoires": "Accessoires", "abyss-cores": "Abyss-Ausrüstung",
   "hexen": "Hexen & Fusion", "hauptquests": "Hauptquests", "fraktionen": "Fraktionsquests",
   "side-quests": "Nebenquests", "kapitel-guide": "Kapitel-Guide", "true-ending": "True Ending",

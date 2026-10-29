@@ -156,8 +156,8 @@ const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests,
   partHauptquests, partFraktionen, partPatchNotes, partNpcs,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
   partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse,
-  // Patch-Archiv 1.x nur mit dem vorbereiteten Umbau (CD_PATCH_UMBAU=1, siehe seo-parts/patch-notes.mjs)
-  ...(partPatchNotes1.UMBAU ? [partPatchNotes1] : [])];
+  // Patch-Archiv 1.x (Patch-Notes-Umbau, fest aktiv seit 29.10.2026, siehe seo-parts/patch-notes.mjs)
+  partPatchNotes1];
 
 // Kategorien wie im Wiki-Menue der App (Navigationsumbau 10/2026, Reihenfolge =
 // Reihenfolge in der Fussleiste "Alle Guides"). Die Namen sind die der App
@@ -174,12 +174,12 @@ const KATEGORIEN = [
   ["sammeln", "Herstellen & Sammeln"],
 ];
 
-// Menue aller 22 Seiten: [slug, Beschriftung, Kategorie-id, "kopf"?]. Reihenfolge
+// Menue aller 23 Seiten (seit 29.10.2026 mit dem Patch-Archiv 1.x): [slug, Beschriftung, Kategorie-id, "kopf"?]. Reihenfolge
 // = Kategorien-Reihenfolge der App, innerhalb der Kategorie wie dort. Die
 // Beschriftungen sind die Seitennamen der App (Spielbegriffe, nicht die alten
 // Wiki-Namen "Skills", "Mounts", "Pets", "Hexen-Guide" ...); die URLs bleiben.
 // Das vierte Element "kopf" markiert die zwoelf Seiten im Kopf-Menue, das wegen
-// der Handy-Breite kompakt bleibt (22 Eintraege waeren eine halbe Bildschirm-
+// der Handy-Breite kompakt bleibt (23 Eintraege waeren eine halbe Bildschirm-
 // seite); alle Seiten stehen nach Kategorien gruppiert in der Fussleiste
 // "Alle Guides" jeder Seite. Eine Seite ausserhalb der zwoelf erscheint im Kopf,
 // solange sie selbst offen ist.
@@ -190,6 +190,7 @@ const KATEGORIEN = [
 // Block) und scripts/verify-nav.mjs (Soll-Abgleich der Labels) mit.
 const NAV = [
   ["patch-notes", "Patch-Notes", "start", "kopf"],
+  ["patch-notes-1", "Patch-Archiv 1.x", "start"],
   ["bosse", "Bosse", "kampf", "kopf"],
   ["bestiarium", "Gegner", "kampf", "kopf"],
   ["skills", "Fähigkeiten", "kampf", "kopf"],
@@ -212,9 +213,6 @@ const NAV = [
   ["geheimnisse", "Geheimnisse & Lore", "welt"],
   ["crafting", "Herstellen & Farmen", "sammeln", "kopf"],
 ];
-// Patch-Notes-Umbau: Archivseite direkt hinter Patch-Notes einhaengen (nur mit Schalter, verify-seo/verify-nav
-// lesen NAV als Text und sehen diesen Eintrag deshalb erst, wenn er beim Freischalten fest eingetragen wird).
-if (partPatchNotes1.UMBAU) NAV.splice(NAV.findIndex(([s]) => s === "patch-notes") + 1, 0, [partPatchNotes1.SLUG, partPatchNotes1.NAV_LABEL, "start"]);
 const KAT_NAME = Object.fromEntries(KATEGORIEN);
 const KAT_VON = Object.fromEntries(NAV.map(([s, , kat]) => [s, kat]));
 // Patch-Notes steht in der App unter "Start" und deshalb in NAV ganz vorn; im

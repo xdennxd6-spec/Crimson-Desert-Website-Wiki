@@ -1,7 +1,7 @@
 // parts/patch-notes-1.mjs — Archivseite "Patch-Notes 1.x" (vorbereitet 24.10.2026).
 //
-// Existiert nur zusammen mit dem Patch-Notes-Umbau (CD_PATCH_UMBAU=1, siehe Kopf von
-// patch-notes.mjs): dann zeigt /patch-notes die 2.x-Patches und diese Seite alle
+// Gehoert zum Patch-Notes-Umbau (seit 29.10.2026 fest aktiv, siehe Kopf von
+// patch-notes.mjs): seitdem zeigt /patch-notes die 2.x-Patches und diese Seite alle
 // Patches vor Crimson Desert Enhanced (1.x). Aufbau, CSS und Einordnungen kommen
 // vollstaendig aus patch-notes.mjs (buildSeite mit archiv=true), hier steht nur,
 // was die Seite als eigenes Modul fuer gen-seo braucht.

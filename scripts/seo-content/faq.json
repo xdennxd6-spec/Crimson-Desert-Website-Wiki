@@ -2,7 +2,7 @@
   "patch-notes": [
     {
       "frage": "Wie viele Patches gab es bisher für Crimson Desert?",
-      "antwort": "Das Archiv führt {{anzahl}} Patches mit zusammen {{punkte}} einzelnen Änderungen. Jeder Eintrag nennt Version und Datum und ist nach denselben Kategorien gegliedert wie die offiziellen Notes."
+      "antwort": "Insgesamt sind es {{anzahl}} Patches mit zusammen {{punkte}} einzelnen Änderungen: {{anzahl2x}} seit Enhanced mit {{punkte2x}} Änderungen auf dieser Seite, die {{anzahl1x}} älteren aus der Zeit vor Enhanced im Patch-Archiv. Jeder Eintrag nennt Version und Datum und ist nach denselben Kategorien gegliedert wie die offiziellen Notes."
     },
     {
       "frage": "Wo finde ich den aktuellsten Patch von Crimson Desert?",
@@ -14,7 +14,7 @@
     },
     {
       "frage": "Warum ein eigenes Archiv, wenn es offizielle Patch Notes gibt?",
-      "antwort": "Pearl Abyss überarbeitet Notes nachträglich und entfernt einzelne Punkte wieder. Diese Sammlung hält fest, was zum jeweiligen Zeitpunkt dokumentiert war, und macht die {{kategorien}} Kategorien über alle Versionen hinweg vergleichbar."
+      "antwort": "Pearl Abyss überarbeitet Notes nachträglich und entfernt einzelne Punkte wieder. Diese Sammlung hält fest, was zum jeweiligen Zeitpunkt dokumentiert war, und macht die {{kategorien2x}} Kategorien der Patches seit Enhanced vergleichbar."
     }
   ],
   "hauptquests": [

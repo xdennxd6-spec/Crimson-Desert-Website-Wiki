@@ -24,19 +24,20 @@
 // ganzer Patch ein Sucheintrag, ohne ist es jeder einzelne Punkt —
 // und genau die will man auf einer Patch-Notes-Seite finden.
 
-// ── Umbau zum DLC (vorbereitet 24.10.2026) ───────────────────────────────────
-// Mit CD_PATCH_UMBAU=1 (Umgebungsvariable beim gen-seo-Lauf) wird diese Seite zur
-// 2.x-Seite mit Block "Die wichtigsten Änderungen" oben und einer Einordnung
-// "Was heißt das für dich?" je Patch; alle 1.x-Patches wandern auf die Archivseite
-// /patch-notes-1 (scripts/seo-parts/patch-notes-1.mjs, dort nur mit Schalter
-// registriert). Texte: scripts/seo-content/patch-notes-umbau.json. Ohne Schalter
-// bleibt die Seite Byte fuer Byte wie bisher. Zum Freischalten am DLC-Tag den
-// Schalter fest einbauen (UMBAU = true) und NAV/verify-seo wie in
-// G:\Claude\Crimson-Desert-Wiki\patch-notes-umbau\LIESMICH.md beschrieben nachziehen.
+// ── Umbau zum DLC (fest aktiv seit 29.10.2026) ────────────────────────────────
+// Diese Seite ist die 2.x-Seite mit Block "Die wichtigsten Änderungen" oben und
+// einer Einordnung "Was heißt das für dich?" je Patch; alle 1.x-Patches stehen auf
+// der Archivseite /patch-notes-1 (scripts/seo-parts/patch-notes-1.mjs, fest in
+// SEO_PARTS und NAV von gen-seo.mjs). Texte: scripts/seo-content/patch-notes-umbau.json.
+// Rueckweg: UMBAU = false setzt die alte Einzelseite zurueck; dann aber auch
+// patch-notes-1 aus SEO_PARTS/NAV, verify-seo, verify-nav und die Links in
+// index.html (noscript, #guide-links) zuruecknehmen, sonst laufen die Gates rot.
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-export const UMBAU = process.env.CD_PATCH_UMBAU === "1";
+// Seit 29.10.2026 (DLC "Charting the Unknown", Patch 2.04.00) fest freigeschaltet;
+// die Umgebungsvariable CD_PATCH_UMBAU wird nicht mehr gebraucht.
+export const UMBAU = true;
 const UMBAU_TEXT = (() => {
   try {
     return JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "seo-content", "patch-notes-umbau.json"), "utf8"));
@@ -67,7 +68,7 @@ border-radius:10px;padding:11px 14px;margin:10px 0 0}
 h3.pcat{font-family:var(--f-mono);font-size:var(--fs-11-5);text-transform:uppercase;letter-spacing:.08em;
 color:var(--gold);margin:16px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--line)}
 ul.plist{margin:0;padding-left:20px}
-ul.plist li{margin:5px 0}
+ul.plist li{margin:5px 0;overflow-wrap:anywhere}
 p.pspieler{font-size:14px;color:var(--ink);border-left:3px solid var(--gold);padding:6px 0 6px 12px;margin:10px 0 0}
 ul.phigh{margin:0;padding-left:20px}
 ul.phigh li{margin:7px 0}
@@ -90,12 +91,19 @@ const zaehleKategorien = (PATCHES) =>
 const zaehlePunkte = (PATCHES) =>
   PATCHES.reduce((n, p) => n + (p.features || []).reduce((m, f) => m + f.items.length, 0), 0);
 
+// anzahl/punkte/kategorien = alle Patches (2.x und 1.x zusammen); *2x = was diese
+// Seite zeigt; *1x = was im Patch-Archiv 1.x steht. Ohne Umbau sind die 2x-Werte = alle.
 export function ZAHLEN(ctx) {
   const { PATCHES } = ctx.data;
+  const neu = auswahl(PATCHES, false), alt = UMBAU ? auswahl(PATCHES, true) : [];
   return {
     anzahl: PATCHES.length,
     punkte: zaehlePunkte(PATCHES),
     kategorien: zaehleKategorien(PATCHES),
+    anzahl2x: neu.length,
+    punkte2x: zaehlePunkte(neu),
+    kategorien2x: zaehleKategorien(neu),
+    anzahl1x: alt.length,
   };
 }
 
@@ -111,7 +119,7 @@ export function introUmbau(ctx, archiv) {
   if (!UMBAU) return null;
   const alle = ctx.data.PATCHES, neu = auswahl(alle, false), alt = auswahl(alle, true);
   return archiv
-    ? `Dieses Archiv sammelt die ${alt.length} Patches von Crimson Desert vor dem Enhanced-Update, von ${alt[alt.length - 1].ver} bis ${alt[0].ver}. Jeder Eintrag nennt Datum und Kategorien, die großen Updates von 1.13 bis 1.18 ordnet ein Kasten zusätzlich für Spieler ein. Was danach kam, steht auf der Seite [[/patch-notes|Patch Notes 2.x]].`
+    ? `Dieses Archiv sammelt die ${alt.length} Patches von Crimson Desert vor dem Enhanced-Update, von ${alt[alt.length - 1].ver} bis ${alt[0].ver}. Jeder Eintrag nennt Datum und Kategorien, die großen Updates von 1.13 bis 1.18 ordnet ein Kasten zusätzlich für Spieler ein. Was danach kam, steht auf der Seite [[/patch-notes|Patch-Notes 2.x]].`
     : `Seit dem Enhanced-Update am ${neu[neu.length - 1].date} hat Pearl Abyss ${neu.length} Patches veröffentlicht. Oben findest du die wichtigsten Änderungen auf einen Blick, darunter jeden Patch mit den offiziellen Punkten und einem Kasten, was er für dich als Spieler bedeutet. Die ${alt.length} älteren Patches stehen im [[/${ARCHIV_SLUG}|Patch-Archiv 1.x]].`;
 }
 
@@ -149,8 +157,7 @@ ${sizeBlock}
 ${spieler(p)}${katBloecke}`;
   }).join("\n");
 
-  // Nur mit Umbau: Block "Die wichtigsten Änderungen" (Hauptseite) bzw. Verweise zwischen 2.x und 1.x.
-  const ALT = auswahl(ALLE, true), NEU = auswahl(ALLE, false);
+  // Nur mit Umbau: Block "Die wichtigsten Änderungen" (Hauptseite).
   const highlights = UMBAU && !archiv && UMBAU_TEXT.highlights.length ? `
 <h2>Die wichtigsten Änderungen</h2>
 <ul class="phigh">
@@ -159,9 +166,10 @@ ${UMBAU_TEXT.highlights.map((h) => {
     return `<li><a href="${esc(ziel)}">Patch ${esc(h.ver)}</a>: <b>${esc(h.titel)}.</b> ${esc(h.text)}</li>`;
   }).join("\n")}
 </ul>` : "";
-  const querverweis = !UMBAU ? "" : archiv
-    ? `<p class="note">Die aktuellen Patches ab ${esc(NEU[NEU.length - 1].ver)} (Crimson Desert Enhanced) mit Einordnung, was sie für dich bedeuten, stehen auf der Seite <a href="/${SLUG}">Patch Notes 2.x</a>.</p>`
-    : `<p class="note">Ältere Patches von ${esc(ALT[ALT.length - 1].ver)} bis ${esc(ALT[0].ver)} stehen im <a href="/${ARCHIV_SLUG}">Patch-Archiv 1.x</a>.</p>`;
+  // Kein eigener Querverweis-Hinweis mehr zwischen 2.x und 1.x: die Einleitung
+  // (introUmbau) verlinkt auf beiden Seiten schon die jeweils andere, ein zweiter
+  // Hinweis direkt darunter waere doppelt (Nachbesserung 30.10.2026).
+  const querverweis = "";
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Patch-Archiv in der App öffnen &rarr;</a>
