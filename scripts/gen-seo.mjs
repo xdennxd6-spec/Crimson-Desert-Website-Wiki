@@ -46,6 +46,8 @@ import * as partKapitelGuide from "./seo-parts/kapitel-guide.mjs";
 import * as partRaetsel from "./seo-parts/raetsel.mjs";
 import * as partRuinen from "./seo-parts/ruinen.mjs";
 import * as partGeheimnisse from "./seo-parts/geheimnisse.mjs";
+// Erster DLC (31.10.2026): Schiffe, Inseln, Tauchen, Quests, Garten der Pruefungen, Daten in data/d12-dlc.js.
+import * as partChartingTheUnknown from "./seo-parts/charting-the-unknown.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -155,7 +157,7 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
   partHauptquests, partFraktionen, partPatchNotes, partNpcs,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
-  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse,
+  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown,
   // Patch-Archiv 1.x (Patch-Notes-Umbau, fest aktiv seit 29.10.2026, siehe seo-parts/patch-notes.mjs)
   partPatchNotes1];
 
@@ -174,14 +176,14 @@ const KATEGORIEN = [
   ["sammeln", "Herstellen & Sammeln"],
 ];
 
-// Menue aller 23 Seiten (seit 29.10.2026 mit dem Patch-Archiv 1.x): [slug, Beschriftung, Kategorie-id, "kopf"?]. Reihenfolge
+// Menue aller 24 Seiten (seit 29.10.2026 mit dem Patch-Archiv 1.x, seit 31.10.2026 mit Charting the Unknown): [slug, Beschriftung, Kategorie-id, "kopf"?]. Reihenfolge
 // = Kategorien-Reihenfolge der App, innerhalb der Kategorie wie dort. Die
 // Beschriftungen sind die Seitennamen der App (Spielbegriffe, nicht die alten
 // Wiki-Namen "Skills", "Mounts", "Pets", "Hexen-Guide" ...); die URLs bleiben.
-// Das vierte Element "kopf" markiert die zwoelf Seiten im Kopf-Menue, das wegen
-// der Handy-Breite kompakt bleibt (23 Eintraege waeren eine halbe Bildschirm-
+// Das vierte Element "kopf" markiert die dreizehn Seiten im Kopf-Menue, das wegen
+// der Handy-Breite kompakt bleibt (24 Eintraege waeren eine halbe Bildschirm-
 // seite); alle Seiten stehen nach Kategorien gruppiert in der Fussleiste
-// "Alle Guides" jeder Seite. Eine Seite ausserhalb der zwoelf erscheint im Kopf,
+// "Alle Guides" jeder Seite. Eine Seite ausserhalb der dreizehn erscheint im Kopf,
 // solange sie selbst offen ist.
 // "fraktionen" steht seit 24.10.2026 vor den Hauptquests, wie in der App: Fraktionsquests
 // sind der meistgesuchte Quest-Begriff und dort erster Reiter von sec-quests (qt-fac -> qt-mq
@@ -211,6 +213,7 @@ const NAV = [
   ["mounts", "Reittiere", "welt", "kopf"],
   ["pets", "Haustiere", "welt"],
   ["geheimnisse", "Geheimnisse & Lore", "welt"],
+  ["charting-the-unknown", "Charting the Unknown", "welt", "kopf"],
   ["crafting", "Herstellen & Farmen", "sammeln", "kopf"],
 ];
 const KAT_NAME = Object.fromEntries(KATEGORIEN);
@@ -231,7 +234,9 @@ for (const [s, , kat] of NAV) {
   if (!(kat in KAT_NAME)) throw new Error(`NAV: Seite "${s}" hat unbekannte Kategorie "${kat}"`);
 }
 if (new Set(NAV.map(([s]) => s)).size !== NAV.length) throw new Error("NAV: doppelter Slug");
-if (KOPF.length > 12) throw new Error(`NAV: ${KOPF.length} Kopf-Eintraege, hoechstens 12 (Handy-Breite)`);
+// 31.10.2026: 13 statt 12, damit der DLC im Kopf steht. Mobil scrollt die Kopfleiste ohnehin waagerecht
+// (header.site nav, overflow-x:auto), die aktuelle Seite steht dort vorn.
+if (KOPF.length > 13) throw new Error(`NAV: ${KOPF.length} Kopf-Eintraege, hoechstens 13 (Handy-Breite)`);
 for (const [kid] of KATEGORIEN) {
   if (!NAV.some(([, , kat]) => kat === kid)) throw new Error(`NAV: Kategorie "${kid}" ist leer`);
 }
@@ -808,7 +813,7 @@ function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, 
   const og = `${SITE}/${ogRel}`;
   const navLink = ([s, l]) =>
     `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${esc(l)}</a>`;
-  // Kopf: die zwoelf Hauptseiten, eine andere Seite nur, wenn sie gerade offen ist.
+  // Kopf: die dreizehn Hauptseiten, eine andere Seite nur, wenn sie gerade offen ist.
   const navLinks = NAV.filter(([s, , , k]) => k === "kopf" || s === slugName)
     .sort((a, b) => (KOPF.indexOf(a) + 1 || 99) - (KOPF.indexOf(b) + 1 || 99) || NAV.indexOf(a) - NAV.indexOf(b))
     .map(navLink).join("")
@@ -1087,14 +1092,17 @@ ${introHtml("bosse", zahlen)}<a class="cta" href="/#sec-bosses">Interaktive Boss
 }
 
 // ── Seite 2: Waffen ───────────────────────────────────────────────────────────
+// Etikett "DLC" (Vertrag der Bauagenten 31.10.2026: neue DLC-Eintraege in WEAPONS/ARMOR tragen das Feld dlc,
+// z. B. dlc:"Charting the Unknown"). Klasse span.dlc-gtag kommt aus EXTRA_CSS von seo-parts/charting-the-unknown.mjs.
+const dlcTag = (e) => (e && e.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(e.dlc)}">DLC</span>` : "");
 function weaponRow(w) {
   const img = WEAPON_IMGS[w.name];
   const thumb = img ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(w.name)}" width="34" height="34">` : "";
   const cell = (v) => has(v) ? esc(v) : `<span class="muted">nicht erfasst</span>`;
   return `<tr>
-<td>${thumb}${esc(w.name)}</td>
+<td>${thumb}${esc(w.name)}${dlcTag(w)}</td>
 <td>${has(w.def) ? `<abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;${esc(w.def)}`
-      : (has(w.atk) ? esc(w.atk) : '<span class="muted">–</span>')}</td>
+      : (has(w.atk) ? esc(w.atk) + (w.val_q ? ` <span class="ctu-flag">unbestätigt: ${esc(w.val_q)}</span>` : "") : '<span class="muted">n.&nbsp;e.</span>')}</td>
 <td>${w.crit != null ? esc(w.crit) : (w.crit_none ? '<span class="muted" title="kein Critical-Rate-Feld bei questlog.gg und gaming.tools">kein Crit</span>' : '<span class="muted">n.&nbsp;e.</span>')}</td>
 <td>${w.slots != null ? esc(w.slots) : '<span class="muted">n.&nbsp;e.</span>'}</td>
 <td>${cell(w.source)}</td>
@@ -1130,7 +1138,7 @@ function buildWaffen() {
   let body = `
 ${introHtml("waffen", zahlen)}<a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
 <p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller damals 500 Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
-${sections}`;
+${WEAPONS.some((w) => w.dlc) ? `<p class="note">Mit <span class="dlc-gtag">DLC</span> markierte Waffen kamen mit dem DLC „Charting the Unknown“; alles Neue daraus steht auf der Seite <a href="/charting-the-unknown">Charting the Unknown</a>.</p>\n` : ""}${sections}`;
   if (faq.length) body += "\n" + faqSektion(faq);
   const jsonld = {
     "@context": "https://schema.org",

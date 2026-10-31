@@ -73,7 +73,7 @@ function accCard(a, typLabel, ctx) {
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
   return `<article class="card" id="acc-${slug(a.name)}">
 ${img}
-<h3>${esc(a.name)}</h3>
+<h3>${esc(a.name)}${a.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(a.dlc)}">DLC</span>` : ""}</h3>
 <ul class="stats">${statsHtml}</ul>
 </article>`;
 }

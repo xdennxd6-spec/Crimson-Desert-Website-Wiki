@@ -1330,6 +1330,7 @@ const SEC_RENDERERS={
   chapters:['renderChapters','renderQuestTimeline'],
   patches:['renderPatches'],
   secrets:['renderSecrets','renderFragmentTracker','renderCressetTracker'],
+  dlc:['renderDlc'],
   achievements:['renderTrophies','renderAchievements'],
   roadmap:['renderRoadmap'],
   favorites:['renderFavorites']
@@ -1346,7 +1347,7 @@ const RESSORTS = [
   {id:'kampf',       label:'Kampf',                      short:'Kampf',      glyph:'⚔', col:'B', tag:'Bosse, Gegner, Fähigkeiten, Builds'},
   {id:'ausruestung', label:'Ausrüstung',                 short:'Ausrüstung', glyph:'⬡', col:'C', tag:'Waffen, Rüstungen, Abyss-Ausrüstung, Abyss-Synthese, Hexen'},
   {id:'quests',      label:'Quests & Herausforderungen', short:'Quests',     glyph:'❢', col:'D', tag:'Quests, Kapitel, Ruinen, Rätsel, Checklisten'},
-  {id:'welt',        label:'Welt & Karte',               short:'Welt',       glyph:'◉', col:'E', tag:'Karte, Orte, Figuren, Camp, Reittiere'},
+  {id:'welt',        label:'Welt & Karte',               short:'Welt',       glyph:'◉', col:'E', tag:'Karte, Orte, Figuren, Camp, Reittiere, DLC'},
   {id:'sammeln',     label:'Herstellen & Sammeln',       short:'Sammeln',    glyph:'⚙', col:'F', tag:'Kochen, Herstellen, Materialien, Sammelobjekte'}
 ];
 const SECTIONS = [
@@ -1360,7 +1361,7 @@ const SECTIONS = [
   {id:'skills',      res:'kampf', name:'Fähigkeiten', en:'Skills', desc:'Fähigkeiten von Kliff, Damiane und Oongka', aka:['Skills','Skilltree','Skillbaum','Fähigkeit','Zusehen und Lernen','Watch and Learn','Abyss-Artefakt','Kraftfaust','Force Palm'], glyph:'✦', count:'6 Zweige', plate:'§13', coord:'B3'},
   {id:'builds',      res:'kampf', name:'Builds', en:'Builds', desc:'Build-Vorschläge und der Build-Optimizer', aka:['Build','Skillung','Optimizer','Setup'], glyph:'⊞', count:'Optimizer', plate:'§15', coord:'B5'},
   {id:'disarm',      res:'kampf', name:'Entwaffnen', en:'Disarm', desc:'Welche Gegner du entwaffnen kannst und wie', aka:['Disarm','Waffe abnehmen','entwaffnen'], glyph:'⛨', count:'Tabellen', plate:'§12', coord:'B4'},
-  {id:'weapons',     res:'ausruestung', name:'Waffen', en:'Weapons', desc:'Alle Waffen mit Werten, Fundort und Verfeinerung', aka:['Waffe','Schwert','Speer','Bogen','Schild','Rapier','Schusswaffe','Kanone','Zweihänder','Verfeinerung','Refinement'], glyph:'†', count:'500', plate:'§04', coord:'C1'},
+  {id:'weapons',     res:'ausruestung', name:'Waffen', en:'Weapons', desc:'Alle Waffen mit Werten, Fundort und Verfeinerung', aka:['Waffe','Schwert','Speer','Bogen','Schild','Rapier','Schusswaffe','Kanone','Zweihänder','Verfeinerung','Refinement'], glyph:'†', count:'511', plate:'§04', coord:'C1'},
   {id:'armor',       res:'ausruestung', name:'Rüstungen', en:'Armor', desc:'Alle Rüstungsteile mit Werten und Fundort', aka:['Rüstung','Helm','Kopfbedeckung','Handschuhe','Schuhwerk','Umhang','Armor'], glyph:'⛓', count:'Teile', plate:'§05', coord:'C2'},
   {id:'armorsets',   res:'ausruestung', name:'Rüstungssets', en:'Armor Sets', desc:'Alle Rüstungssets mit Bild, Teilen, Werten und Fundort', aka:['Set','Sets','Rüstungsset','Armor Set','Ausrüstungsset','komplettes Set','Set-Teile'], glyph:'⛉', count:'Sets', plate:'', coord:''},
   {id:'accessories', res:'ausruestung', name:'Accessoires', en:'Accessories', desc:'Ringe, Ohrringe und Halsketten mit Werten', aka:['Schmuck','Ring','Ohrring','Halskette','Amulett'], glyph:'❖', count:'Liste', plate:'§16', coord:'C4'},
@@ -1382,6 +1383,8 @@ const SECTIONS = [
   {id:'mounts',      res:'welt', name:'Reittiere', en:'Mounts', desc:'Pferde und besondere Reittiere mit Fundort', aka:['Mount','Pferd','Horse','Reittier','Flug-Reittier','Stall'], glyph:'♞', count:'Galerie', plate:'§11', coord:'D5'},
   {id:'pets',        res:'welt', name:'Haustiere', en:'Pets', desc:'Alle Haustiere und wie du sie bekommst', aka:['Pet','Haustier','Begleiter','Tier'], glyph:'❥', count:'Liste', plate:'§18', coord:'D6'},
   {id:'secrets',     res:'welt', name:'Geheimnisse & Lore', en:'Secrets & Lore', desc:'Geheimes Ende, Erinnerungsfragmente, Easter Eggs und Lore', aka:['Secrets','geheim','Lore','Easter Egg','Erinnerungsfragment','Memory Fragment','Hidden Ending','Cresset'], glyph:'⚿', count:'Tracker', plate:'§25', coord:'F1'},
+  // 31.10.2026: erster DLC als eigene Seite (Renderer renderDlc in index.html, Daten data/d12-dlc.js)
+  {id:'dlc',         res:'welt', name:'Charting the Unknown', en:'DLC', desc:'Der erste DLC: Schiffe, Inseln, Tauchen, Quests, Garten der Prüfungen und neue Ausrüstung', aka:['DLC','Charting the Unknown','Erweiterung','Expansion','Schiff','Schiffe','Segelschiff','Ozean','Großer Ozean','Insel','Inseln','Tauchen','Tauchanzug','Hai','Orca','Garten der Prüfungen','Garden of Trials','Burg Drachensturz','Burg der Flammenritter','Ehe','Heirat','Romanze','A Wider World','Auf in eine größere Welt'], glyph:'⚓', count:'DLC', plate:'', coord:''},
   {id:'crafting',    res:'sammeln', name:'Herstellen & Farmen', en:'Crafting', desc:'Rezepte, Materialien und Farm-Routen', aka:['Crafting','Rezept','farmen','herstellen','Schmied','Kuku'], glyph:'⚙', count:'386', plate:'§07', coord:'C6'},
   {id:'food',        res:'sammeln', name:'Kochen & Elixiere', en:'Cooking & Elixirs', desc:'Gerichte und Elixiere mit Wirkung und Zutaten', aka:['Food','Essen','Gericht','kochen','Elixier','Trank','Elixir','Buff'], glyph:'⚗', count:'Rezepte', plate:'§23', coord:'E6'},
   {id:'items',       res:'sammeln', name:'Materialien & Items', en:'Materials', desc:'Nachschlagewerk für Materialien und sonstige Gegenstände', aka:['Item','Material','Gegenstand','Inventar','Dokument'], glyph:'❒', count:'Kompendium', plate:'§03', coord:'C5'},

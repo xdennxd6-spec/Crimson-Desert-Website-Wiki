@@ -323,6 +323,23 @@ article.card img.geh-wimg{width:85px;height:85px;aspect-ratio:1/1;object-fit:con
 ul.geh-list,ol.geh-list{margin:6px 0 0;padding-left:22px;font-size:14px;color:var(--ink);max-width:75ch}
 ul.geh-list li,ol.geh-list li{margin:0 0 4px}
 code.geh-code{font-family:var(--f-mono);font-size:12px;color:var(--amber)}
+span.ctu-unb,span.ctu-nb,tr.ctu-row-unb td,tr.ctu-row-nb td{color:var(--ink-faint)}
+tr.ctu-row-unb td:first-child,tr.ctu-row-nb td:first-child{color:var(--ink-dim)}
+span.ctu-flag{display:inline-block;margin-left:3px;padding:0 6px;border:1px dashed var(--ink-faint);border-radius:6px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:600;letter-spacing:.02em;color:var(--ink-faint);white-space:normal}
+dl.ctu-facts{margin:10px 0 0;display:grid;gap:8px}
+dl.ctu-facts>div{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+dl.ctu-facts dt{font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}
+dl.ctu-facts dd{margin:3px 0 0;font-size:14px;color:var(--ink)}
+ol.ctu-steps{margin:10px 0 0;padding-left:22px}
+ol.ctu-steps li{margin:0 0 8px;font-size:14px}
+ol.ctu-steps li b{color:var(--ink-hi)}
+p.ctu-warn{font-size:13.5px;color:var(--ink);background:rgba(255,90,68,.09);border-left:3px solid var(--red);border-radius:8px;padding:10px 13px;margin:10px 0 0}
+ul.ctu-list{margin:10px 0 0;padding-left:20px;font-size:14px}
+ul.ctu-list li{margin:0 0 6px}
+h3.ctu-h{margin:22px 0 4px}
+td.ctu-sub{min-width:240px;font-size:13px}
+p.ctu-src{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint);margin:14px 0 0;line-height:1.7}
+span.dlc-gtag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:7px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;letter-spacing:.06em;color:#08202b;background:#8fdcff;vertical-align:2px}
 
 /* --- Bewegung (nur html.cd-motion) --- */
 html.lenis{scroll-behavior:auto}
@@ -336,7 +353,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <body>
 <header class="site">
   <a class="brand" href="/">Crimson Desert Wiki</a>
-  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/fraktionen">Fraktionsquests</a><a href="/hauptquests">Hauptquests</a><a href="/side-quests">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="/kapitel-guide" aria-current="page">Kapitel-Guide</a><a href="#alle-guides">Alle Guides</a></nav>
+  <nav><a href="/bosse">Bosse</a><a href="/bestiarium">Gegner</a><a href="/skills">Fähigkeiten</a><a href="/waffen">Waffen</a><a href="/ruestungen">Rüstungen</a><a href="/fraktionen">Fraktionsquests</a><a href="/hauptquests">Hauptquests</a><a href="/side-quests">Nebenquests</a><a href="/true-ending">True Ending</a><a href="/mounts">Reittiere</a><a href="/charting-the-unknown">Charting the Unknown</a><a href="/crafting">Herstellen &amp; Farmen</a><a href="/patch-notes">Patch-Notes</a><a href="/kapitel-guide" aria-current="page">Kapitel-Guide</a><a href="#alle-guides">Alle Guides</a></nav>
 </header>
 <main>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Startseite</a> &rsaquo; <span class="crumb-kat">Quests &amp; Herausforderungen</span> &rsaquo; Kapitel-Guide</nav>
@@ -563,7 +580,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
   <div class="alle-gruppe"><span class="alle-kat">Kampf</span> <a href="/bosse">Bosse</a> &middot; <a href="/bestiarium">Gegner</a> &middot; <a href="/skills">Fähigkeiten</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Ausrüstung</span> <a href="/waffen">Waffen</a> &middot; <a href="/ruestungen">Rüstungen</a> &middot; <a href="/accessoires">Accessoires</a> &middot; <a href="/abyss-cores">Abyss-Ausrüstung</a> &middot; <a href="/hexen">Hexen &amp; Fusion</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Quests &amp; Herausforderungen</span> <a href="/fraktionen">Fraktionsquests</a> &middot; <a href="/hauptquests">Hauptquests</a> &middot; <a href="/side-quests">Nebenquests</a> &middot; <a href="/kapitel-guide" aria-current="page">Kapitel-Guide</a> &middot; <a href="/true-ending">True Ending</a> &middot; <a href="/ruinen">Uralte Ruinen</a> &middot; <a href="/raetsel">Rätsel</a> &middot; <a href="/trophaeen">Trophäen &amp; Errungenschaften</a></div>
-  <div class="alle-gruppe"><span class="alle-kat">Welt &amp; Karte</span> <a href="/npcs">Charaktere &amp; NPCs</a> &middot; <a href="/mounts">Reittiere</a> &middot; <a href="/pets">Haustiere</a> &middot; <a href="/geheimnisse">Geheimnisse &amp; Lore</a></div>
+  <div class="alle-gruppe"><span class="alle-kat">Welt &amp; Karte</span> <a href="/npcs">Charaktere &amp; NPCs</a> &middot; <a href="/mounts">Reittiere</a> &middot; <a href="/pets">Haustiere</a> &middot; <a href="/geheimnisse">Geheimnisse &amp; Lore</a> &middot; <a href="/charting-the-unknown">Charting the Unknown</a></div>
   <div class="alle-gruppe"><span class="alle-kat">Herstellen &amp; Sammeln</span> <a href="/crafting">Herstellen &amp; Farmen</a></div></nav>
   Inhalte aus dem <a href="/">Crimson Desert Wiki &amp; Guide (Deutsch)</a> &middot;
   Quellen: questlog.gg, Fextralife, game8, PowerPyx &middot; Fan-Projekt, kein offizielles Pearl-Abyss-Angebot.

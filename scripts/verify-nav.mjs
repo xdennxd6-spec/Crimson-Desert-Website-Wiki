@@ -211,7 +211,7 @@ const SOLL_RESSORTS = [
   { id: "kampf",       label: "Kampf",                      short: "Kampf",      glyph: "⚔", tag: "Bosse, Gegner, Fähigkeiten, Builds" },
   { id: "ausruestung", label: "Ausrüstung",                 short: "Ausrüstung", glyph: "⬡", tag: "Waffen, Rüstungen, Abyss-Ausrüstung, Abyss-Synthese, Hexen" },
   { id: "quests",      label: "Quests & Herausforderungen", short: "Quests",     glyph: "❢", tag: "Quests, Kapitel, Ruinen, Rätsel, Checklisten" },
-  { id: "welt",        label: "Welt & Karte",               short: "Welt",       glyph: "◉", tag: "Karte, Orte, Figuren, Camp, Reittiere" },
+  { id: "welt",        label: "Welt & Karte",               short: "Welt",       glyph: "◉", tag: "Karte, Orte, Figuren, Camp, Reittiere, DLC" },
   { id: "sammeln",     label: "Herstellen & Sammeln",       short: "Sammeln",    glyph: "⚙", tag: "Kochen, Herstellen, Materialien, Sammelobjekte" },
 ];
 // [id, res, name, en, desc]  (Reihenfolge = Reihenfolge in der Navigation; Sternchen gehoeren nicht zum name)
@@ -248,6 +248,7 @@ const SOLL_SEITEN = [
   ["mounts", "welt", "Reittiere", "Mounts", "Pferde und besondere Reittiere mit Fundort"],
   ["pets", "welt", "Haustiere", "Pets", "Alle Haustiere und wie du sie bekommst"],
   ["secrets", "welt", "Geheimnisse & Lore", "Secrets & Lore", "Geheimes Ende, Erinnerungsfragmente, Easter Eggs und Lore"],
+  ["dlc", "welt", "Charting the Unknown", "DLC", "Der erste DLC: Schiffe, Inseln, Tauchen, Quests, Garten der Prüfungen und neue Ausrüstung"],  // 31.10.2026: erster DLC als eigene Seite
   ["crafting", "sammeln", "Herstellen & Farmen", "Crafting", "Rezepte, Materialien und Farm-Routen"],
   ["food", "sammeln", "Kochen & Elixiere", "Cooking & Elixirs", "Gerichte und Elixiere mit Wirkung und Zutaten"],
   ["items", "sammeln", "Materialien & Items", "Materials", "Nachschlagewerk für Materialien und sonstige Gegenstände"],
@@ -256,7 +257,8 @@ const SOLL_SEITEN = [
 ];
 // 36 Seiten seit dem Abyss-Split (Briefing 3.2 B1): synthesis steht direkt nach cores;
 // 37 seit 10.10.2026: armorsets (Rüstungssets) als eigene Seite direkt nach armor
-const SOLL_ANZAHL = 37;
+// 38 seit 31.10.2026: dlc (Charting the Unknown) als letzte Seite der Kategorie welt
+const SOLL_ANZAHL = 38;
 // Abyss-Split: Synthese-Woerter gehoeren in aka von "synthesis", nicht mehr in aka von "cores"
 const SOLL_SYNTHESIS_AKA = ["Synthese", "Synthesis", "Fusion", "fusionieren", "Assimilation", "Abyssal Assimilation",
   "Synthese-Baum", "Witch Synthesis", "Hexen-Synthese", "Spezial-Synthese", "Special Synthesis", "Rezepte", "kombinieren"];
@@ -270,7 +272,7 @@ const SOLL_NAV_LABELS = {
   "side-quests": "Nebenquests", "kapitel-guide": "Kapitel-Guide", "true-ending": "True Ending",
   "ruinen": "Uralte Ruinen", "raetsel": "Rätsel", "trophaeen": "Trophäen & Errungenschaften",
   "npcs": "Charaktere & NPCs", "mounts": "Reittiere", "pets": "Haustiere",
-  "geheimnisse": "Geheimnisse & Lore", "crafting": "Herstellen & Farmen",
+  "geheimnisse": "Geheimnisse & Lore", "charting-the-unknown": "Charting the Unknown", "crafting": "Herstellen & Farmen",
 };
 
 // ── a) Seiten-IDs <-> <section id="sec-..."> ─────────────────────────────────

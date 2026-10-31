@@ -14,7 +14,7 @@
 <script>(function(){var s='',h=location.hash.replace(/^#/,''),m=/^sec-([a-z0-9-]+)$/.exec(h)||/(?:^|&)sec=([a-z0-9-]+)/.exec(h);if(m)s=m[1];else{try{s=localStorage.getItem('cd_sec')||'';}catch(e){}}if((s||'start')!=='start')return;document.documentElement.classList.add('cd-boot-start');var l=document.createElement('link');l.rel='preload';l.as='image';l.href='cd_assets/scenes/start.webp';l.fetchPriority='high';document.head.appendChild(l);})();</script>
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Crimson Desert Wiki Deutsch: Bosse, Waffen, Quests &amp; Guides</title>
-<meta name="description" content="Das deutsche Crimson Desert Wiki: 100 Bosse, 500 Waffen, alle Haupt- und Nebenquests, Ruinen-Lösungen, Crafting, Patch-Notes und True-Ending-Checkliste. Kostenlos.">
+<meta name="description" content="Das deutsche Crimson Desert Wiki: 100 Bosse, 511 Waffen, alle Haupt- und Nebenquests, Ruinen-Lösungen, Crafting, Patch-Notes und True-Ending-Checkliste. Kostenlos.">
 <link rel="canonical" href="https://crimson-desert-wiki.com/">
 <meta property="og:title" content="Crimson Desert Wiki Deutsch: Bosse, Waffen, Quests &amp; Guides">
 <meta property="og:description" content="Bosse, Waffen, Quests, Ruinen-Lösungen, Crafting und True-Ending-Checkliste: das deutsche Crimson Desert Wiki an einem Ort.">
@@ -6959,6 +6959,72 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 @media (pointer:coarse){a.r2b13-tok,.r2b13-more>summary,.r2b13-datafold>summary{min-height:40px}}
 .r2b13-wc-mount .cd-go{min-height:40px}
 /* R2-B13 Ende */
+/* DLC „Charting the Unknown“ (31.10.2026): Seite #sec-dlc (renderDlc, data/d12-dlc.js) und Etikett „DLC“ auf
+   Waffen-/Rüstungskarten. Unbestätigt/nicht belegt = var(--gdim) mit gestricheltem Vermerk. Mobil ab 390 px:
+   Tabellen werden zu Zeilenkarten (td::before = Spaltenname), kein seitlicher Überlauf. */
+.tag.tdlc{background:color-mix(in srgb,var(--cd-fx-ice) 12%,transparent);color:var(--cd-fx-ice);border-color:color-mix(in srgb,var(--cd-fx-ice) 55%,transparent)}
+#sec-dlc .dlc-jump{display:flex;flex-wrap:wrap;gap:6px 8px;margin:14px 0 12px}
+#sec-dlc .dlc-jump .cd-go{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2);font-size:12.5px;color:var(--text);text-decoration:none}
+#sec-dlc .dlc-jump .cd-go:hover,#sec-dlc .dlc-jump .cd-go:focus-visible{border-color:var(--cd-fx-ice);color:var(--ink-hi)}
+#sec-dlc .dlc-jump .cd-go .cd-i{width:14px;height:14px}
+#sec-dlc .dlc-folds{margin-top:12px}
+#sec-dlc .cd-note{margin:10px 0}
+.dlc-unb,.dlc-nb,.dlc-row-unb>td,.dlc-row-nb>td,.dlc-q.dlc-row-unb .dlc-q-who,.dlc-q.dlc-row-unb .dlc-q-rw,.dlc-ck.dlc-row-unb .cd-check-sub{color:var(--gdim)}
+.dlc-flag{display:inline-block;margin-left:2px;padding:0 6px;border:1px dashed currentColor;border-radius:6px;font-style:normal;font-family:var(--f-mono);font-size:var(--fs-10);line-height:1.6;letter-spacing:.02em;vertical-align:1px;white-space:normal;color:var(--gdim)}
+.dlc-n{color:var(--ink-hi);font-weight:700}
+.dlc-row-unb .dlc-n,.dlc-row-nb .dlc-n{color:color-mix(in srgb,var(--ink-hi) 70%,var(--gdim))}
+.dlc-de{color:var(--dim);font-size:12.5px}
+.dlc-h{margin:18px 0 8px;font-family:var(--f-display);font-size:14.5px;font-weight:700;color:var(--ink-hi);letter-spacing:.01em}
+.dlc-p{margin:12px 0 0;max-width:74ch;font-size:13.5px;line-height:1.6;color:var(--text)}
+.dlc-p--top{margin:0;color:var(--dim)}
+.dlc-k{display:block;margin-bottom:3px;font-family:var(--f-mono);font-size:var(--fs-10);text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.dlc-list{margin:8px 0 0;padding-left:18px;font-size:13.5px;line-height:1.6;color:var(--text)}
+.dlc-list li{margin:0 0 5px}
+.dlc-list--note{font-size:13px;color:var(--dim)}
+.dlc-list--rows{list-style:none;padding-left:0}
+.dlc-list--rows li{padding:8px 0;border-top:1px solid var(--line-soft)}
+.dlc-list--rows li:first-child{border-top:0}
+.dlc-list--rows li>b{display:block;color:var(--ink-hi)}
+.dlc-ol{margin:4px 0 0;padding-left:20px;font-size:13px;line-height:1.55}
+.dlc-ol li{margin:0 0 3px}
+.dlc-tw{margin:10px 0 4px;border:1px solid var(--line);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--panel-2)}
+.dlc-tbl{width:100%;border:0;border-collapse:collapse;font-size:13px;line-height:1.5}
+.dlc-tbl thead tr{background:color-mix(in srgb,var(--cd-fx-ice) 7%,var(--panel))}
+.dlc-tbl th{padding:9px 11px;text-align:left;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-hi);border-bottom:1px solid var(--line)}
+.dlc-tbl td{padding:9px 11px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--text);overflow-wrap:anywhere}
+.dlc-tbl tbody tr:first-child td{border-top:0}
+.dlc-tbl td:first-child{min-width:160px}
+.dlc-tbl--garden td:first-child{min-width:0;width:42px;font-family:var(--f-mono);color:var(--dim)}
+.dlc-bls{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.dlc-bl{font-size:12.5px}
+#sec-dlc .dlc-pills{margin:12px 0 2px}
+.dlc-isl-hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px;font-size:13px;color:var(--dim)}
+.dlc-isl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:8px}
+.dlc-ck .cd-check-sub{display:block;margin-top:3px;font-size:12.5px;line-height:1.55}
+.dlc-crew{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:8px}
+.dlc-crew li{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);font-size:13px;line-height:1.5;color:var(--text)}
+.dlc-crew b{display:block;color:var(--cd-fx-ice);font-family:var(--f-mono);font-size:12px;letter-spacing:.04em}
+.dlc-qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px;margin-top:10px}
+.dlc-q{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.dlc-q-t{margin:0 0 4px;font-size:14.5px;line-height:1.35}
+.dlc-q-who{margin:0 0 8px;font-size:12.5px;color:var(--dim)}
+.dlc-q-sub{margin:0 0 8px}
+.dlc-q-rw{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--text)}
+.dlc-lnk{padding:0;border:0;background:none;color:var(--ink-hi);font:inherit;font-weight:700;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--cd-fx-ice) 55%,transparent);text-underline-offset:3px}
+.dlc-lnk:hover,.dlc-lnk:focus-visible{color:var(--cd-fx-ice)}
+.dlc-checked{margin-top:6px}
+@media (max-width:640px){
+  .dlc-tw{overflow:visible;background:none;border:0}
+  .dlc-tbl thead{display:none}
+  .dlc-tbl,.dlc-tbl tbody,.dlc-tbl tr,.dlc-tbl td{display:block;width:100%}
+  .dlc-tbl tr{margin:0 0 8px;padding:6px 0;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+  .dlc-tbl td{display:grid;grid-template-columns:minmax(78px,32%) minmax(0,1fr);gap:8px;padding:4px 12px;border-top:0}
+  .dlc-tbl td::before{content:attr(data-l);font-family:var(--f-mono);font-size:var(--fs-10);text-transform:uppercase;letter-spacing:.06em;color:var(--dim);overflow-wrap:anywhere}
+  .dlc-tbl td:first-child{display:block;min-width:0;padding-top:6px;padding-bottom:6px}
+  .dlc-tbl td:first-child::before{display:none}
+  .dlc-tbl--garden td:first-child{width:auto}
+  .dlc-tbl--garden td:first-child::before{display:inline;content:"Nr. "}
+}
 </style>
 </head>
 <body>
@@ -6990,6 +7056,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
       <li><a href="/mounts">Reittiere</a></li>
       <li><a href="/pets">Haustiere</a></li>
       <li><a href="/geheimnisse">Geheimnisse &amp; Lore</a></li>
+      <li><a href="/charting-the-unknown">Charting the Unknown</a></li>
       <li><a href="/crafting">Herstellen &amp; Farmen</a></li>
     </ul>
   </div>
@@ -7383,7 +7450,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
         <p class="fa-hero-lede">Kein Marketing, keine Effekte. Dieser Atlas kartiert Pywel wie ein Vermessungstrupp: jeder Boss ein Datensatz, jede Waffe ein Instrument, jede Quest eine Route. Du suchst schnell Fakten und findest sie über das Menü oder die Suche.</p>
         <div class="fa-readout" aria-label="Kennzahlen des Wikis">
           <div><div class="fa-val" id="fa-val-boss">100</div><div class="fa-cap">Bosse erfasst</div></div>
-          <div><div class="fa-val" id="fa-val-pages">35</div><div class="fa-cap">Seiten</div></div>
+          <div><div class="fa-val" id="fa-val-pages">37</div><div class="fa-cap">Seiten</div></div>
           <div><div class="fa-val">09</div><div class="fa-cap">Regionen</div></div>
         </div>
         <div class="fa-hero-cta">
@@ -7562,7 +7629,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 <section class="sec" id="sec-start" aria-labelledby="start-title">
     <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <!-- Statischer Kopf für den ersten Paint (Schnellstart, siehe <head>); renderStartOverview() ersetzt ihn samt aktuellen Zahlen. -->
-    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>36</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>500</dd></div></dl></header></div>
+    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>37</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>511</dd></div></dl></header></div>
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
@@ -8233,6 +8300,12 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
     <div class="pane" id="secp-priority"></div>
   </section>
 
+  <!-- DLC „Charting the Unknown“ (31.10.2026): Inhalt per renderDlc() aus data/d12-dlc.js, Ausrüstung aus WEAPONS/ARMOR (Feld dlc) -->
+  <section class="sec" id="sec-dlc">
+    <h2 class="sec-t"><span class="sec-sym">⚓</span> Charting the Unknown <span class="sec-t-en">DLC</span></h2>
+    <div id="dlc-root"></div>
+  </section>
+
   <style>
   /* Uralte Ruinen — Feldatlas-Nachtrag (kartografisch, konsistent mit Hauptsystem) */
   #sec-ruins .ruin-note{background:var(--vellum-hi);border:1px solid var(--iron-gall);border-left:3px solid var(--brass);border-radius:9px;padding:10px 13px;font-size:12px;line-height:1.6;color:var(--iron-soft);margin-bottom:18px}
@@ -8317,6 +8390,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
           <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
         </summary>
         <div class="cd-fold-body">
+          <p class="r2b12-prose"><a class="cd-go" href="#sec=dlc" data-go="dlc">Schiffe, Inseln, Tauchen, Quests, Bosse und neue Ausrüstung im Detail: Seite „Charting the Unknown“<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a></p>
           <dl class="cd-facts">
             <div><dt>Voller Titel</dt><dd>Crimson Desert Enhanced: Charting the Unknown</dd></div>
             <div><dt>Erschienen weltweit</dt><dd>29.10.2026, 22:00 UTC</dd></div>
@@ -8327,7 +8401,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
           <ul class="r2b12-feat">
             <li><i class="cd-g" aria-hidden="true">✒</i><div><b>Neue Geschichten:</b> Für Kliff, Oongka und Damiane gibt es jeweils eine eigene Quest. Sie stehen nach Abschluss der Hauptquest „Ende der Reise“ (<em>Journey's End</em>) im Abenteuertagebuch. Die Geschichten reichen von einer unheilvollen Präsenz in der Wüste und einem gefährlichen politischen Konflikt bis zu einer Reise jenseits der Zeit und einem uralten Geheimnis unter den Wellen. <span style="color:var(--gdim)">Fachpresse (GamesRadar): Die neue Geschichte sei im Kern ein Epilog, für sie muss das Hauptspiel beendet sein, für das Erkunden der neuen Gebiete nicht. Das deckt sich mit den offiziellen Angaben.</span></div></li>
             <li><i class="cd-g" aria-hidden="true">⚓</i><div><b>Ozean und Tauchen:</b> Die Quest „Auf in eine größere Welt“ (<em>A Wider World</em>) spielt auf dem Meer und beginnt nach der Hauptquest „Heulender Hügel“ (<em>Howling Hill</em>), sobald das Graumähnen-Camp ausreichend ausgebaut ist. Neu ist eine Atemanzeige: Man kann tauchen, und je höher das maximale Atemvolumen, desto länger. Das Atemvolumen steigt durch Verfeinern eines Tauchanzugs, neue Gerichte regenerieren es kurzzeitig, und für den A.T.A.G. gibt es Meereserkundungsausrüstung. Dazu kommen mehrere unerschlossene Inseln mit Erschließungs-Missionen und zahlreiche Schatzkarten. Die Feature-Übersicht nennt außerdem eine Unterwasserwelt mit Ruinen, Schatztruhen und neuen Kreaturen.</div></li>
-            <li><i class="cd-g" aria-hidden="true">❖</i><div><b>Schiffe und Unterwassertiere:</b> Schiffe sind ein neues Transportmittel. Ein Segelschiff baut man per Schiffsbau-Mission selbst oder kauft es bei Schiffsverwaltern (<em>fleetmasters</em>) in ganz Pywel; Schiffsausrüstung gibt es bei den Schiffsverwaltern in Demeniss und Delesyia. Mit dem Segelschiff lässt sich Seehandel mit neuen Handelswaren betreiben. Verschiedene Unterwassertiere werden je nach Art bezwungen oder gefüttert, um Vertrauen zu gewinnen, und danach als Transportmittel registriert. <span style="color:var(--gdim)">Welche Tiere das sind, nennt Pearl Abyss nicht. Orcas, Rochen und Schildkröten tauchen nur in Presse-Zusammenfassungen auf und sind unbestätigt.</span></div></li>
+            <li><i class="cd-g" aria-hidden="true">❖</i><div><b>Schiffe und Unterwassertiere:</b> Schiffe sind ein neues Transportmittel. Ein Segelschiff baut man per Schiffsbau-Mission selbst oder kauft es bei Schiffsverwaltern (<em>fleetmasters</em>) in ganz Pywel; Schiffsausrüstung gibt es bei den Schiffsverwaltern in Demeniss und Delesyia. Mit dem Segelschiff lässt sich Seehandel mit neuen Handelswaren betreiben. Verschiedene Unterwassertiere werden je nach Art bezwungen oder gefüttert, um Vertrauen zu gewinnen, und danach als Transportmittel registriert. <span style="color:var(--gdim)">Eine offizielle Liste gibt es nicht; laut mehreren Guides gehören Hai, Orca, Meeresschildkröte und Mondfisch dazu, der Zitterrochen nur laut Game8 (Details auf der Seite <a class="cd-go" href="#sec=dlc" data-go="dlc">Charting the Unknown</a>).</span></div></li>
             <li><i class="cd-g" aria-hidden="true">⌂</i><div><b>Wohnen und Burgen:</b> Das Wohn-System wird erweitert: Grundriss selbst entwerfen und bauen, Wände und Fenster frei setzen (Menü „Dekorieren“, „Hausgrundriss“, „Freies Bauen“). Voraussetzung sind das fertige Camp am Heulenden Hügel und die Graumähnen-Fraktionsquest „Anfrage von Luke“ (<em>Luke's Request</em>). Zwei Burgen lassen sich selbst gestalten: Burg Drachensturz (<em>Drakesfall Castle</em>) und Burg der Flammenritter (<em>Flame Knight's Castle</em>); freigeschaltet werden sie jeweils über eine Quest und die Befreiung des Stützpunkts (die Patch-Notizen kennzeichnen das als Spoiler). Dazu kommen 17 neue Wohnsitze, die über Missionsentsendungen errichtet werden. <span style="color:var(--gdim)">Die Feature-Übersicht spricht von drei Burgen, die Patch-Notizen nennen zwei. Die Abweichung ist offen.</span></div></li>
             <li><i class="cd-g" aria-hidden="true">⚑</i><div><b>Verwalten und Feste:</b> Befreite Stützpunkte lassen sich mieten und als Restaurant, Sägewerk, Schmiede oder Schneiderei betreiben (Kartenreiter „Einrichtung“). Die Einrichtungen laufen weiter, auch wenn man weit entfernt ist, und gelegentlich kommen besondere Kunden. Stützpunkte der Graumähnen erscheinen auf der Karte jetzt blau. Neu ist außerdem eine Mission für ein Fest im Camp: NPCs mit ausreichend Vertrauen kommen zu Besuch, das Vertrauen steigt dort schneller, und bestimmte Besucher lassen sich als Ehrengraumähnen (<em>Honorary Greymanes</em>) anheuern.</div></li>
             <li><i class="cd-g" aria-hidden="true">♥</i><div><b>Vertrauen und Ehe:</b> Die Vertrauensstufen werden erweitert. Über „Interagieren“ und „Flirten“ ist bei 100 auf der erweiterten Stufe ein Heiratsantrag möglich; bei den Hexen müssen dafür die Sanktum-Quests der jeweiligen Hexe abgeschlossen sein. Der Ehepartner erscheint auf Welt- und Minikarte, kann mitreisen, überreicht regelmäßig Geschenke und lässt sich beim Friseur optisch anpassen. Die Ehe kann aufgelöst werden, laut Pearl Abyss hat das aber seinen Preis. <span style="color:var(--gdim)">Flirtet ein spielbarer Charakter mit einem NPC, sinkt dessen Vertrauen zu den anderen spielbaren Charakteren.</span></div></li>
@@ -8337,7 +8411,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
             <li><i class="cd-g" aria-hidden="true">▣</i><div><b>Plattformen:</b> Steam (Windows und macOS), PlayStation Store (PS5), XBOX Store (Xbox Series X|S) und Epic Games Store; laut Pearl Abyss ist der DLC auch im Mac App Store erhältlich. Steam setzt das Basisspiel Crimson Desert Enhanced voraus. Wer über Steam auf dem Mac oder über den Mac App Store spielt, muss mit Patch 2.04.00 einmalig das vollständige Spielpaket neu herunterladen. <span style="color:var(--gdim)">Im Mac App Store ist der DLC gelistet (24,99 €), das zugehörige Spiel-Update 2.04.00 ist dort laut Pearl Abyss aber noch in Vorbereitung; Apple führt am 29.10.2026 weiter die Version 2.0.12 vom 08.10.2026. Ob der DLC dort schon spielbar ist, ist unbestätigt. Die ursprüngliche Ankündigung hatte den Mac App Store zum Verkaufsstart noch ausgeschlossen.</span></div></li>
             <li class="is-warn"><i class="cd-g" aria-hidden="true">⚠</i><div><b>Spielstände:</b> Spielstände aus einer Umgebung mit DLC lassen sich in einer Umgebung ohne DLC weder laden noch per Cross-Save nutzen. Gekauft und geladen wird der DLC über das Menü „DLC kaufen“ im Titelbildschirm. Pearl Abyss bittet, das Spiel vor dem Start auf die neueste Version zu aktualisieren, damit Hauptspiel und DLC wie vorgesehen funktionieren.</div></li>
             <li class="is-warn"><i class="cd-g" aria-hidden="true">⚠</i><div><b>Nicht in allen Märkten:</b> Nach einer Prüfung der Inhalts- und Altersfreigabe-Anforderungen erscheint der DLC in bestimmten Märkten und Regionen nicht. Dort wurden die Vorbestellungen eingestellt; erstattet wird je nach Plattform automatisch oder über das übliche Rückerstattungsverfahren der Plattform. <span style="color:var(--gdim)">Pearl Abyss nennt die betroffenen Märkte nicht. Eine Stichprobe in Steam und PlayStation Store am 01.10.2026 ergab: Der DLC fehlt in den Vereinigten Arabischen Emiraten, Saudi-Arabien, Kuwait, Katar und Bahrain, das Basisspiel wird dort weiter angeboten. Eine Stichprobe über den Steam-Shop am Erscheinungsabend (29.10.2026) ergab für alle fünf Länder dasselbe Bild (PlayStation Store an diesem Tag nicht geprüft).</span></div></li>
-            <li><i class="cd-g" aria-hidden="true">◈</i><div><b>Twitch Drops:</b> zweiwöchiges Event ab Release mit Ausrüstung, Haustieren und Dekorationen für das Schiff. Woche 1 (29.10. 23:00 MEZ bis 05.11. 00:59 MEZ) gilt für alle Besitzer des Hauptspiels Crimson Desert Enhanced, Woche 2 (05.11. 01:00 MEZ bis 12.11. 00:59 MEZ) nur mit DLC. <span style="color:var(--gdim)">Die einzelnen Drop-Gegenstände zeigt Pearl Abyss nur als Grafik; sie sind hier nicht ausgewertet.</span></div></li>
+            <li><i class="cd-g" aria-hidden="true">◈</i><div><b>Twitch Drops:</b> zweiwöchiges Event ab Release mit Ausrüstung, Haustieren und Dekorationen für das Schiff. Woche 1 (29.10. 23:00 MEZ bis 05.11. 00:59 MEZ) gilt für alle Besitzer des Hauptspiels Crimson Desert Enhanced, Woche 2 (05.11. 01:00 MEZ bis 12.11. 00:59 MEZ) nur mit DLC. <span style="color:var(--gdim)">Die Drop-Gegenstände stehen namentlich auf der Seite <a class="cd-go" href="#sec=dlc" data-go="dlc">Charting the Unknown</a>. Die Eventseite von Pearl Abyss war bei der letzten Prüfung nicht abrufbar; die Namen sind daran noch nicht gegengeprüft.</span></div></li>
             <li><i class="cd-g" aria-hidden="true">✧</i><div><b>Testversion des Hauptspiels:</b> fünf Stunden Crimson Desert Enhanced für PlayStation Plus Premium und Deluxe sowie für alle Spieler auf XBOX, ohne DLC-Inhalte und einmal pro Konto. Der Fortschritt wird beim Kauf übernommen. Verfügbar für PS Plus bis 29.10.2027, auf XBOX bis 07.01.2027.</div></li>
           </ul>
           <p class="r2b12-prose">Angekündigt am 03.09.2026 im Rahmen einer PlayStation State of Play. Voller Titel <b>Crimson Desert Enhanced: Charting the Unknown</b>. Am 30.09.2026 (10:20 UTC) hat Pearl Abyss den Start um zwei Wochen verschoben, weil mehr Entwicklungszeit für ein ausgereifteres und stabileres Spielerlebnis nötig sei. Erschienen ist der DLC am <b>29.10.2026 um 22:00 UTC</b>, in Deutschland also am <b>Donnerstag, 29.10.2026, um 23:00 MEZ</b> (die Sommerzeit endete am 25.10.2026). In Nordamerika war es der 29.10. um 15:00 PT (18:00 ET), in Asien der 30.10.2026 um 07:00 KST/JST. Auf PlayStation war ein Vorab-Download 24 Stunden vor Release möglich, auf den anderen Plattformen ab Release. Zeitgleich erschien <b>Patch 2.04.00</b> für das Hauptspiel. Ursprünglich angekündigt war der 15.10.2026, 22:00 UTC (16.10.2026, 00:00 MESZ). Die Vorbestellung lief seit dem 03.09.2026 im PlayStation Store, im Microsoft Store, bei Steam und im Epic Games Store und endete mit der Veröffentlichung. <span style="color:var(--gdim)">Die englischen Fassungen der Verschiebungsmeldung und der Feature-Übersicht beschriften 23:00 Uhr fälschlich mit „CEST“ (Sommerzeit). Richtig ist MEZ (CET, UTC+1): So steht es in den deutschen Fassungen, in der englischen Ankündigung und in der Steam-Meldung.</span></p>
@@ -8554,6 +8628,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 <script src="data/d09-scenes.js" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js" fetchpriority="low"></script>
 <script src="data/d11-fac-quest-imgs.js" fetchpriority="low"></script>
+<script src="data/d12-dlc.js" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -11597,7 +11672,8 @@ function _navJumpClick(e){
 const START_POPULAR=[
   {sec:'bosses'},{sec:'weapons'},
   {sec:'quests',tab:'mq',label:'Hauptquests'},{sec:'quests',tab:'te',label:'True Ending'},
-  {sec:'map'},{sec:'checklists'},{sec:'crafting'},{sec:'cores'}
+  {sec:'map'},{sec:'checklists'},{sec:'crafting'},{sec:'cores'},
+  {sec:'dlc',label:'DLC: Charting the Unknown'}
 ];
 function _startHref(sec,tab){ return '#sec='+sec+(tab?'&tab='+tab:''); }
 /* R2 B11 (21.10.2026): Anfänger-Guide. Das Markup steht statisch in #sec-beginner (durchsuchbar, data-s je Karte).
@@ -12913,6 +12989,185 @@ function toggleAllBossDetails(){
 }
 // === BOSS-KOMPAKT-LOGIK-ENDE ===
 
+// ===== DLC „Charting the Unknown“ (31.10.2026): Seite sec-dlc =====
+// Daten: data/d12-dlc.js (Feldvertrag im Kopf der Datei: Wert = Text | {v,c,q} | Liste; c ok/unb/nb).
+// Neue Waffen und Rüstungen kommen datengetrieben aus WEAPONS/ARMOR mit gesetztem Feld dlc (Vertrag:
+// dlc:"Charting the Unknown"), nie über fest verdrahtete Namen. Unbestätigtes und nicht Belegtes steht grau
+// (var(--gdim)) mit Vermerk. Inseln abhaken: localStorage cd_r2_dlc_inseln (Liste der Insel-Slugs).
+const DLC_KEY_ISLANDS='cd_r2_dlc_inseln';
+function _dlcObj(x){return x&&typeof x==='object'&&!Array.isArray(x)?x:{v:x};}
+function _dlcFlag(c,q){return '<i class="dlc-flag">'+cdEsc((c==='nb'?'nicht belegt':'unbestätigt')+(q?': '+q:''))+'</i>';}
+/* Wert -> HTML. Nur eigenes c zählt; eine ganz unbestätigte Zeile färbt die Tabelle über ihre Zeilenklasse. */
+function _dlcV(x){
+  if(x==null||x==='')return '';
+  if(Array.isArray(x))return x.map(_dlcV).filter(Boolean).join(' ');
+  const o=_dlcObj(x),c=o.c||'ok',t=cdEsc(o.v);
+  if(c==='ok')return t;
+  const flag=c==='nb'&&/nicht belegt/i.test(String(o.v))?'':' '+_dlcFlag(c,o.q);
+  return '<span class="dlc-'+(c==='nb'?'nb':'unb')+'">'+t+flag+'</span>';
+}
+function _dlcP(x){if(x==null)return '';if(Array.isArray(x))return x.map(_dlcP).join(' ');return String(_dlcObj(x).v==null?'':_dlcObj(x).v);}
+function _dlcName(e,label){
+  return '<b class="dlc-n">'+cdEsc(label||e.name)+'</b>'+(e.de?' <span class="dlc-de">'+cdEsc(e.de)+'</span>':'')
+    +(e.c&&e.c!=='ok'?' '+_dlcFlag(e.c,e.q):'');
+}
+function _dlcTbl(cols,rows,o){
+  o=o||{};
+  return '<div class="dlc-tw"><table class="dlc-tbl'+(o.cls?' '+o.cls:'')+'">'+(o.cap?'<caption class="vh">'+cdEsc(o.cap)+'</caption>':'')
+    +'<thead><tr>'+cols.map(c=>'<th scope="col">'+cdEsc(c)+'</th>').join('')+'</tr></thead><tbody'+(o.id?' id="'+o.id+'"':'')+'>'
+    +rows.map(r=>'<tr'+(r.c&&r.c!=='ok'?' class="dlc-row-'+r.c+'"':'')+(r.attrs||'')+' data-s="'+cdEsc(String(r.s||'').toLowerCase())+'">'
+      +r.cells.map((h,i)=>'<td data-l="'+cdEsc(cols[i])+'">'+h+'</td>').join('')+'</tr>').join('')
+    +'</tbody></table></div>';
+}
+/* Etikett „DLC“ auf Waffen- und Rüstungskarten (Vertrag: Feld dlc, z. B. "Charting the Unknown") */
+function _dlcTag(e){return e&&e.dlc?'<span class="tag tdlc" title="'+cdEsc('Neu mit dem DLC „'+e.dlc+'“')+'">DLC</span>':'';}
+function _dlcFacts(rows){return cdFacts(rows.map(r=>[r[0],{h:_dlcV(r[1])}]),{wide:true,cls:'dlc-facts'});}
+function _dlcList(arr,cls){return '<ul class="dlc-list'+(cls?' '+cls:'')+'">'+[].concat(arr||[]).map(x=>'<li>'+_dlcV(x)+'</li>').join('')+'</ul>';}
+function _dlcH(t){return '<h4 class="dlc-h">'+cdEsc(t)+'</h4>';}
+function _dlcPlain(h){return String(h||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();}
+/* Wert einer Waffe/Ruestung mit Vermerk, wenn die Zahl nur aus einer Quelle stammt (val_q); val_part: nur ein Teil des Werts ist unbestätigt, daher nicht grau. */
+function _dlcQ(t,x){const s=cdEsc(t);if(!x||!x.val_q)return s;const f=' '+_dlcFlag('unb',x.val_q);return x.val_part?s+f:'<span class="dlc-unb">'+s+f+'</span>';}
+function _dlcGear(){
+  const w=typeof WEAPONS!=='undefined'&&Array.isArray(WEAPONS)?WEAPONS.filter(x=>x&&x.dlc):[];
+  const a=typeof ARMOR!=='undefined'&&Array.isArray(ARMOR)?ARMOR.filter(x=>x&&x.dlc):[];
+  const x=typeof ACCESSORIES!=='undefined'&&Array.isArray(ACCESSORIES)?ACCESSORIES.filter(y=>y&&y.dlc):[];
+  return {w,a,x};
+}
+function _dlcIslandsProg(){
+  const el=document.getElementById('dlc-isl-prog');if(!el||typeof DLC_ISLANDS==='undefined')return;
+  const done=cdCheckGet(DLC_KEY_ISLANDS),ids=DLC_ISLANDS.map(i=>cdSlug(i.name));
+  el.innerHTML=cdProg(ids.filter(i=>done.has(i)).length,ids.length,'Inseln abgehakt');
+}
+function renderDlc(){
+  const root=document.getElementById('dlc-root');if(!root)return;
+  if(typeof DLC_META==='undefined'){root.innerHTML=cdNote('Die Daten dieser Seite (data/d12-dlc.js) konnten nicht geladen werden. Bitte die Seite neu laden.',{kind:'warn'});return;}
+  const M=DLC_META,G=_dlcGear(),nGear=G.w.length+G.a.length;
+  let h=cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',
+    sub:'Schiffe, Pywels Großer Ozean mit unerschlossenen Inseln, Tauchen, Unterwasser-Reittiere, neue Questreihen, der Garten der Prüfungen, Burgen und Ehe: alles Neue aus dem DLC an einem Ort.',
+    glyph:'⚓',tone:'ice',stats:[[DLC_SHIPS.length,'Schiffe'],[DLC_ISLANDS.length,'Inseln benannt'],[DLC_GARDEN.length,'Gruppen im Garten'],[nGear,'DLC-Ausrüstung im Wiki']]});
+  const B=[];
+  const add=(k,o)=>B.push(Object.assign({id:'dlc-b-'+k,tone:'ice',cls:'dlc-fold'},o));
+
+  /* 1 Überblick und Zugang */
+  let b=_dlcFacts([['Voller Titel',M.full],['Erschienen',M.release],['Patch',M.patch+'; danach '+M.hotfixes],['Preis',M.price],['Plattformen',M.platforms]]);
+  b+=_dlcH('Voraussetzungen und Start')+cdStepper(DLC_ACCESS.map(s=>({t:s.t,d:{h:cdEsc(s.d)+(s.u?' '+_dlcV(s.u):'')}})),'dlc-steps');
+  b+=DLC_WARN.map(w=>cdNote(w.d,{kind:'warn',title:w.t})).join('');
+  b+='<p class="dlc-p">Release-Termine, Plattformen, Märkte und die vollständige Featureliste: '+cdGoLink('patches','','DLC-Kasten auf der Seite Patch-Notes')+'</p>';
+  add('zugang',{title:'Überblick und Zugang',lead:'Was du brauchst, wo es losgeht und was nur als Kliff funktioniert.',icon:'⌖',open:true,
+    chips:[{v:M.patch,t:'Patch',c:'gold'},{t:'Ozean ab „Heulender Hügel“',c:'ice'},{t:'Story ab „Ende der Reise“'}],body:b});
+
+  /* 2 Schiffe */
+  b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
+  b+=_dlcTbl(['Schiff','Preis','Erhalt','Werte'],DLC_SHIPS.map(s=>({c:s.c,
+    s:[s.name,_dlcP(s.price),_dlcP(s.obtain),_dlcP(s.stats)].join(' '),
+    cells:[_dlcName(s),_dlcV(s.price),_dlcV(s.obtain),_dlcV(s.stats)]})),{cap:'Schiffe mit Preis und Werten'});
+  b+=_dlcList(DLC_SHIP_NOTES);
+  b+=_dlcH('Händler, Währung, Seekampf')+_dlcFacts(DLC_SHIP_FACTS);
+  b+=_dlcH('Schiffsbau per Entsendung')+_dlcFacts(DLC_SHIPBUILD);
+  b+=_dlcH('Besatzung: '+DLC_CREW.length+' Rollen')+'<ul class="dlc-crew">'+DLC_CREW.map(r=>'<li><b>'+cdEsc(r.role)+'</b><span>'+cdEsc(r.d)+'</span></li>').join('')+'</ul>'+_dlcList(DLC_CREW_NOTES,'dlc-list--note');
+  add('schiffe',{title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
+    chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'},{t:'Werte unbestätigt',c:'warn'}],body:b});
+
+  /* 3 Schiffsteile */
+  const typen=[['','Alle'],['Sail','Segel'],['Front Cannon','Bugkanonen'],['Side Cannon','Seitenkanonen'],['Figurehead','Galionsfiguren'],['Stern','Heck']];
+  b=_dlcList(DLC_PART_NOTES,'dlc-list--note');
+  b+=cdPills(typen.map(([v,t],i)=>({v:v,t:t,on:i===0,n:v?DLC_SHIP_PARTS.filter(p=>p.type===v).length:DLC_SHIP_PARTS.length})),{name:'dlc-parts',label:'Schiffsteile nach Typ filtern',wrap:true,cls:'dlc-pills'});
+  b+=_dlcTbl(['Teil','Typ','Größe','Händler / Erhalt','Preis','Boni'],DLC_SHIP_PARTS.map(p=>({c:p.c,attrs:' data-type="'+cdEsc(p.type)+'"',
+    s:[p.name,p.type,_dlcP(p.size),_dlcP(p.vendor),_dlcP(p.price),_dlcP(p.bonus)].join(' '),
+    cells:[_dlcName(p),cdEsc(p.type),_dlcV(p.size),_dlcV(p.vendor),_dlcV(p.price),_dlcV(p.bonus)]})),{id:'dlc-parts-tb',cap:'Schiffsteile'});
+  add('teile',{title:'Schiffsteile',lead:'Segel, Kanonen, Galionsfiguren und Heckteile mit Händler, Preis in Silver und Boni.',icon:'⛵',
+    chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Preise laut Game8, unbestätigt',c:'warn'}],body:b});
+
+  /* 4 Inseln */
+  b='<div class="dlc-isl-hd"><span>Abhaken, welche Inseln du schon besucht hast (bleibt in diesem Browser gespeichert).</span><span id="dlc-isl-prog"></span></div>';
+  b+='<div class="cd-checks dlc-isl">'+DLC_ISLANDS.map(i=>cdCheck({key:DLC_KEY_ISLANDS,id:cdSlug(i.name),
+    title:{h:_dlcName(i)},sub:{h:[].concat(i.info).map(_dlcV).join(' ')},cls:'dlc-ck'+(i.c&&i.c!=='ok'?' dlc-row-'+i.c:''),
+    s:[i.name,_dlcP(i.info)].join(' ')})).join('')+'</div>';
+  b+=_dlcH('Ozean, Erschließung, Häfen')+_dlcFacts(DLC_ISLAND_FACTS);
+  add('inseln',{title:'Inseln und Ozean',lead:'Benannte Inseln zum Abhaken, Erschließungs-Missionen, Häfen, Schatzkarten.',icon:'◉',
+    chips:[{v:DLC_ISLANDS.length,t:'Inseln benannt',c:'ice'},{t:'Gesamtzahl offiziell nicht genannt'}],body:b});
+
+  /* 5 Tauchen */
+  add('tauchen',{title:'Tauchen',lead:'Atemanzeige, Tauchanzug, Atemgeräte, Ancient Relics und Relic-Händler.',icon:'≋',
+    chips:[{t:'ohne Voraussetzung',c:'ok'},{t:'Atem über Tauchanzug'}],body:_dlcFacts(DLC_DIVE)});
+
+  /* 6 Reittiere */
+  b=_dlcTbl(['Reittier','Zähmen'],DLC_MOUNTS.map(m=>({c:m.c,s:[m.name,m.de,_dlcP(m.how)].join(' '),cells:[_dlcName(m),_dlcV(m.how)]})),{cap:'Unterwasser-Reittiere'});
+  b+=_dlcFacts(DLC_MOUNT_FACTS);
+  b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
+  add('reittiere',{title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
+    chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b});
+
+  /* 7 Quests */
+  b=_dlcList(DLC_QUEST_NOTES,'dlc-list--note');
+  b+='<div class="dlc-qgrid">'+DLC_QUESTS.map(q=>{
+    const subs=Array.isArray(q.subs)?q.subs:[q.subs];
+    const subObj=_dlcObj(subs[0]),subList=String(subObj.v||'').split(/\s*;\s*/).filter(Boolean);
+    const subHtml=subObj.c==='nb'?_dlcV(subObj):'<ol class="dlc-ol'+(subObj.c&&subObj.c!=='ok'?' dlc-unb':'')+'">'+subList.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'+(subObj.c&&subObj.c!=='ok'?' '+_dlcFlag(subObj.c,subObj.q):'');
+    return '<article class="dlc-q cd-spot'+(q.c&&q.c!=='ok'?' dlc-row-'+q.c:'')+'" data-s="'+cdEsc([q.name,q.de,q.who,_dlcP(q.start),_dlcP(q.subs),_dlcP(q.rewards),_dlcP(q.note)].join(' ').toLowerCase())+'">'
+      +'<h4 class="dlc-q-t">'+_dlcName(q)+'</h4><p class="dlc-q-who">'+cdEsc(q.who)+(q.start?' · Start: '+_dlcV(q.start):'')+'</p>'
+      +'<div class="dlc-q-sub"><span class="dlc-k">Unterquests</span>'+subHtml+'</div>'
+      +'<p class="dlc-q-rw"><span class="dlc-k">Belohnungen</span> '+_dlcV(q.rewards)+'</p>'+(q.note?'<p class="dlc-q-rw">'+_dlcV(q.note)+'</p>':'')+'</article>';
+  }).join('')+'</div>';
+  b+='<p class="dlc-p">Alle übrigen Fraktionsquests der Graumähnen: '+cdGoLink('quests','','Quests')+'</p>';
+  add('quests',{title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',
+    chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b});
+
+  /* 8 Bosse und Garten der Prüfungen */
+  b=_dlcList(DLC_BOSS_NOTES,'dlc-list--note');
+  b+=_dlcTbl(['Boss','Ort und Kontext','Beute'],DLC_BOSSES.map(x=>({c:x.c,s:[x.name,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note)].join(' '),
+    cells:[_dlcName(x)+(x.w?'<br>'+cdGoLink('bosses',x.w,'In der Bossliste'):''),_dlcV(x.where)+(x.note?' '+_dlcV(x.note):''),_dlcV(x.drop)]})),{cap:'Bosse und Gegner aus dem DLC'});
+  b+=_dlcH('Garten der Prüfungen')+_dlcFacts(DLC_GARDEN_RULES);
+  b+=_dlcTbl(['Nr.','Gruppe','Bosse','Belohnung'],DLC_GARDEN.map(g=>({s:[g.name,g.b.join(' '),g.reward].join(' '),
+    cells:[String(g.n),'<b class="dlc-n">'+cdEsc(g.name)+'</b>','<span class="dlc-bls'+(g.bc==='ok'?'':' dlc-unb')+'">'+g.b.map(n=>cdGoLink('bosses',n,n,'dlc-bl')).join(' ')+(g.bc==='ok'?'':' '+_dlcFlag('unb','GameRant'))+'</span>',cdEsc(g.reward)]})),{cls:'dlc-tbl--garden',cap:'Garten der Prüfungen: Gruppen'});
+  b+=_dlcList([DLC_GARDEN_NOTE],'dlc-list--note');
+  add('bosse',{title:'Bosse und Garten der Prüfungen',lead:'Gegner aus den DLC-Questreihen, teils mit bekannten Namen aus dem Hauptspiel, und die '+DLC_GARDEN.length+' Gruppen im Garten der Prüfungen mit Belohnung.',icon:'☠',
+    chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b});
+
+  /* 9 Burgen, Wohnen, Verwaltung, Soziales */
+  const gruppen=[...new Set(DLC_LIVING.map(x=>x.g))];
+  b=gruppen.map(g=>_dlcH(g)+'<ul class="dlc-list dlc-list--rows">'+DLC_LIVING.filter(x=>x.g===g).map(x=>'<li><b>'+cdEsc(x.t)+'</b> '+_dlcV(x.d)+'</li>').join('')+'</ul>').join('');
+  b+='<p class="dlc-p">Camp-Ausbau und Voraussetzungen: '+cdGoLink('camp','','Graumähnen-Camp')+'</p>';
+  add('leben',{title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
+    chips:gruppen.map(g=>({t:g})),body:b});
+
+  /* 10 Neue DLC-Ausrüstung (datengetrieben aus WEAPONS/ARMOR) */
+  b=_dlcList(DLC_GEAR_NOTES,'dlc-list--note');
+  if(G.w.length){
+    b+=_dlcH('Waffen ('+G.w.length+')')+_dlcTbl(['Waffe','Typ','ATK','Fundort'],G.w.map(w=>({s:[w.name,w.type,w.source,w.notes].join(' '),
+      cells:['<button type="button" class="dlc-lnk" onclick="waffeZeigeTeil(\''+escJsStr(w.name)+'\')">'+cdEsc(w.name)+'</button>',cdEsc(w.type||''),w.atk!=null?_dlcQ(w.atk,w):'<span class="dlc-nb">nicht erfasst</span>',cdEsc(w.source||'')]})),{cap:'DLC-Waffen'});
+  }
+  if(G.a.length){
+    b+=_dlcH('Rüstungen ('+G.a.length+')')+_dlcTbl(['Rüstung','Teil','Effekt','Fundort'],G.a.map(a=>({s:[a.name,a.type,a.effect,a.source,a.notes].join(' '),
+      cells:['<button type="button" class="dlc-lnk" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">'+cdEsc(a.name)+'</button>',cdEsc(a.type||''),_dlcQ(a.effect||'',a),cdEsc(a.source||'')]})),{cap:'DLC-Rüstungen'});
+  }
+  if(G.x.length)b+=cdNote({h:'Neue Accessoires: '+G.x.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+cdEsc(x.type)+', '+cdEsc(x.source||'')+')').join('; ')+'. Details auf der Seite '+cdGoLink('accessories','','Accessoires')+'.'},{kind:'info',title:'Accessoires'});
+  if(!nGear)b+=cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'});
+  const gearNames=new Set(G.w.map(w=>w.name));
+  const tools=DLC_GEAR_TOOLS.filter(t=>!gearNames.has(t));
+  if(tools.length)b+=cdNote({h:'Offiziell neu sind im Kampf einsetzbare Alltagswerkzeuge: '+tools.map(t=>'<b>'+cdEsc(t)+'</b> ('+cdEsc(DLC_GEAR_TOOLS_DE[t]||'')+')').join(', ')+'. '+_dlcV({v:'Werte, Fundort und Waffentyp',c:'nb'})},{kind:'info',title:'Kampf-Alltagswerkzeuge'});
+  b+='<p class="dlc-p">Alle Einträge tragen auf den Seiten '+cdGoLink('weapons','','Waffen')+' und '+cdGoLink('armor','','Rüstungen')+' das Etikett <span class="tag tdlc">DLC</span>.</p>';
+  add('ausruestung',{title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen und Rüstungen, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',
+    chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}],body:b});
+
+  /* 11 Was noch offen ist */
+  add('offen',{title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
+    chips:[{v:DLC_OPEN.length,t:'offene Punkte',c:'warn'}],body:'<ol class="dlc-ol">'+DLC_OPEN.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'});
+
+  const jump='<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>';
+  const legend=cdNote({h:'Belegt heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. <span class="dlc-unb">Grau mit Vermerk '+_dlcFlag('unb')+'</span> nennt nur eine Quelle, <span class="dlc-nb">'+_dlcFlag('nb')+'</span> heißt gesucht, aber nichts gefunden. Item-, Orts-, Boss- und Questnamen stehen in der englischen Spielschreibweise.'},{kind:'info',title:'So liest du die Seite'});
+  h+=jump+legend+'<div class="cd-folds dlc-folds">'+B.map(o=>cdFold(Object.assign({},o,{s:o.title+' '+_dlcPlain(o.body)}))).join('')+'</div>';
+  h+=cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+' (einzelne Seiten erneut am '+cdEsc(M.recheck)+'). Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+  root.innerHTML=h;
+  _dlcIslandsProg();
+}
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail;if(!d||d.name!=='dlc-parts')return;
+  const tb=document.getElementById('dlc-parts-tb');if(!tb)return;
+  tb.querySelectorAll('tr').forEach(tr=>{const ok=!d.value||tr.dataset.type===d.value;tr.dataset.filtered=ok?'0':'1';tr.classList.toggle('hide',!ok);});
+});
+document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===DLC_KEY_ISLANDS)_dlcIslandsProg();});
+
 // ===== WEAPONS =====
 let _wepPage=0; const WEP_PER=40;
 function changeWepPage(d){
@@ -12937,7 +13192,7 @@ function renderWeapons(){
   document.getElementById('weapon-tb').innerHTML=WEAPONS.map(w=>{
     const passFilter=!f||w.type===f;
     const sourceText=w.source&&w.source.trim()?w.source:'Sammelimport';
-    const s=[w.name,w.type,sourceText,w.built_in,w.notes].join(' ').toLowerCase();
+    const s=[w.name,w.type,sourceText,w.built_in,w.notes,w.dlc?'dlc '+w.dlc:''].join(' ').toLowerCase();
     const hidden=[sourceText,w.notes].filter(Boolean).join(' ');
     const visible=[w.name,w.type,w.built_in,w.def,w.atk,w.crit,w.slots].filter(v=>v!==undefined&&v!==null&&v!=='').join(' ').toLowerCase();
     let show=false;
@@ -12952,7 +13207,7 @@ function renderWeapons(){
     return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
       ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
       <div class="ct">${w.name}</div>
-      <div class="cm"><span class="tag tx">${w.type}</span></div>
+      <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
       <div class="crows">
         <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>')}</span></div>
         <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
@@ -14550,7 +14805,7 @@ function renderArmor(){
   document.getElementById('armor-grid').innerHTML=liste.map(a=>{
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
     const sourceText=a.source&&a.source.trim()?a.source:'Sammelimport';
-    const s=[a.name,a.type,sourceText,a.effect,a.notes].join(' ').toLowerCase();
+    const s=[a.name,a.type,sourceText,a.effect,a.notes,a.dlc?'dlc '+a.dlc:''].join(' ').toLowerCase();
     const hidden=[sourceText,a.notes].filter(Boolean).join(' ');
     const visible=[a.name,a.type,a.effect].filter(v=>v).join(' ').toLowerCase();
     const srcDisp=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
@@ -14558,7 +14813,7 @@ function renderArmor(){
     return `<div class="card" data-s="${s}" data-item-id="${escHtml(a.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${a.name}</div>
-      <div class="cm"><span class="tag ${typeColor}">${a.type}</span>${armorProvBadge(a.prov)}</div>
+      <div class="cm"><span class="tag ${typeColor}">${a.type}</span>${armorProvBadge(a.prov)}${_dlcTag(a)}</div>
       <div class="crows">
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${a.effect}</span></div>
         <details class="item-more"${wasOpen?' open':''}>
@@ -17316,7 +17571,7 @@ function renderAccessories(){
     return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
       <div class="acc-icon-hd" style="background:${accTypeGrad(a.type)}">${a.icon?`<img class="acc-item-ico" src="${SYNTH_CDN}${a.icon}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:accTypeIcon(a.type)}<span class="icon-hd-label" style="color:${accTypeColor(a.type)}">${a.type}</span></div>
       <div class="ct">${a.name}</div>
-      <div class="cm"><span class="tag ${badge}">${a.type}</span></div>
+      <div class="cm"><span class="tag ${badge}">${a.type}</span>${a.dlc?' <span class="tag tdlc">DLC</span>':''}</div>
       <div class="crows">
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${a.effect}</span></div>
         <div class="crow"><span class="cl">Quelle</span><span class="cv">${a.source}</span></div>
@@ -18844,7 +19099,7 @@ if (syGetCode()) _loadServerProgress();
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a><br>
   Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
   Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a><br>
-  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a><br>
+  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>
