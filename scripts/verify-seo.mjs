@@ -187,7 +187,12 @@ for (const [file, exp] of Object.entries(pages)) {
   const c = fs.readFileSync(p, "utf8");
   console.log(`\n[${file}]`);
 
-  const h1 = (c.match(/<h1[ >]/g) || []).length;
+  // 01.11.2026: die Seiten sind App-Fassungen (index.html + Block zwischen <!--seo-inhalt--> und <!--/seo-inhalt-->).
+  // Zählungen nur im Block (index.html hat eigene Tabellen), h1 ohne Skript-Text (der Spickzettel der App schreibt eins).
+  const si = c.indexOf("<!--seo-inhalt-->"), se = c.indexOf("<!--/seo-inhalt-->");
+  ok(si >= 0 && se > si, "Block <!--seo-inhalt--> vorhanden");
+  const seo = si >= 0 && se > si ? c.slice(si, se) : c;
+  const h1 = (c.match(/<h1[ >]/g) || []).length - (c.match(/document\.write\([^\n]*<h1[ >]/g) || []).length;
   ok(h1 === 1, `genau ein <h1> (gefunden: ${h1})`);
 
   const title = decode((c.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "");
@@ -199,7 +204,8 @@ for (const [file, exp] of Object.entries(pages)) {
   ok(!descs.has(desc), `Description eindeutig`); descs.add(desc);
 
   ok(/<link rel="canonical" href="https:\/\/crimson-desert-wiki\.com\//.test(c), "canonical gesetzt");
-  ok(c.includes(`href="${exp.sec}"`), `Deep-Link in App (${exp.sec}) vorhanden`);
+  const startZiel = exp.sec.replace(/^\/#sec-/, "sec=").replace(/^\/#/, "");
+  ok(c.includes(`history.replaceState(null,"","#${startZiel}`), `öffnet beim Laden den App-Bereich (#${startZiel})`);
 
   // JSON-LD valide?
   const ld = [...c.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
@@ -208,20 +214,20 @@ for (const [file, exp] of Object.entries(pages)) {
 
   // Inhalts-Counts
   if (exp.expectArticles) {
-    const n = (c.match(/<article class="card"/g) || []).length;
+    const n = (seo.match(/<article class="card"/g) || []).length;
     ok(n === exp.expectArticles, `${n} Boss-Artikel (Soll ${exp.expectArticles})`);
   }
   if (exp.expectRows) {
-    const n = (c.match(/<tr>\s*<td>/g) || []).length; // nur Datenzeilen, nicht <thead><tr><th>
+    const n = (seo.match(/<tr>\s*<td>/g) || []).length; // nur Datenzeilen, nicht <thead><tr><th>
     ok(n === exp.expectRows, `${n} Waffen-Datenzeilen (Soll ${exp.expectRows})`);
   }
   if (exp.expectTe) {
-    const n = (c.match(/<ul class="te">[\s\S]*?<\/ul>/g) || []).join("").match(/<li>/g)?.length || 0;
+    const n = (seo.match(/<ul class="te">[\s\S]*?<\/ul>/g) || []).join("").match(/<li>/g)?.length || 0;
     ok(n === exp.expectTe, `${n} True-Ending-Punkte (Soll ${exp.expectTe})`);
   }
   // NEU (8-Seiten-Erweiterung): generischer Count-Check fuer die 5 neuen Seiten.
   if (exp.count) {
-    const n = (c.match(exp.count.regex) || []).length;
+    const n = (seo.match(exp.count.regex) || []).length;
     ok(n === exp.count.expected, `${n} ${exp.count.label} (Soll ${exp.count.expected})`);
   }
 
@@ -563,7 +569,10 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
       ...DLC.RELIC_SHOPS.map((x) => "dlc-relic-" + slugUnabh(x.name)), ...DLC.GEAR_EXTRA.map((x) => "dlc-geraet-" + slugUnabh(x.name))],
   };
   for (const datei of Object.keys(pages)) {
-    const c = fs.readFileSync(path.join(ROOT, datei), "utf8");
+    // 01.11.2026: nur der Seiteninhalt der App-Fassung (die App-ids prüft gen-seo beim Bauen auf Kollision)
+    const roh = fs.readFileSync(path.join(ROOT, datei), "utf8");
+    const si = roh.indexOf("<!--seo-inhalt-->"), se = roh.indexOf("<!--/seo-inhalt-->");
+    const c = si >= 0 && se > si ? roh.slice(si, se) : roh;
     const ids = [...c.matchAll(/\sid="([^"]*)"/g)].map((m) => m[1]);
     const gesehen = new Set(), doppelt = new Set();
     ids.forEach((i) => (gesehen.has(i) ? doppelt.add(i) : gesehen.add(i)));
@@ -609,72 +618,36 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
   console.log(`  info  Bossnamen mit Komma: ${mitKomma.length} (${mitKomma.slice(0, 4).map((b) => b.name).join("; ")}${mitKomma.length > 4 ? " ..." : ""}); Umbenennung nur mit BOSS_RENAMES-Migration`);
 }
 
-// ── 4b. Inline-Skripte und Seitenwerkzeuge ───────────────────────────────────
-// Der Generator bettet das Suchskript als Template-Literal ein. Fehlt dort ein
-// doppeltes Backslash, wird aus dem Whitespace-Regex ein Buchstaben-Regex oder
-// aus einem Zeilenumbruch-Escape ein echter Umbruch im String -- die Seite laedt
-// dann voellig normal, nur das Skript ist tot. Genau das ist beim Bau der
-// Seitensuche passiert und blieb ohne Browsertest unsichtbar.
-// Deshalb: jedes erzeugte Inline-Skript kompilieren, bevor es ausgeliefert wird.
+// ── 4b. App-Fassung (01.11.2026) ─────────────────────────────────────────────
+// Die Seiten sind Kopien von index.html mit eigenem Kopf und dem Seiteninhalt im Block <!--seo-inhalt-->.
+// Statt Suchfeld/Sprungleiste/Bewegungs-Skript der früheren Einzelseiten wird geprüft: das Start-Skript
+// (öffnet den passenden App-Bereich) kompiliert und steht als erstes im <head>, der Block enthält kein Skript,
+// jede Abschnittsüberschrift im Block hat ihre Sprung-id, und außerhalb von <head> und Block ist die Seite
+// unverändert index.html (sonst liefe eine veraltete App aus).
 const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
   "bestiarium", "side-quests", "trophaeen", "true-ending",
   "hauptquests", "patch-notes", "fraktionen", "npcs",
   "skills", "hexen", "abyss-cores", "accessoires", "kapitel-guide",
   "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1", "charting-the-unknown"];
-for (const s of SEITEN_MIT_WERKZEUG) {
-  const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
-
-  const bloecke = [...t.matchAll(/<script(?![^>]*application\/ld\+json)[^>]*>([\s\S]*?)<\/script>/g)];
-  let syntaxFehler = null;
-  for (const b of bloecke) {
-    try { new Function(b[1]); } catch (e) { syntaxFehler = e.message; break; }
+{
+  const app = fs.readFileSync(path.join(ROOT, "index.html"), "utf8").replace(/\r\n/g, "\n");
+  const appRumpf = app.slice(app.indexOf("</head>")).replace(/<h1 class="vh">[\s\S]*?<\/h1>/, "");
+  for (const s of SEITEN_MIT_WERKZEUG) {
+    const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8").replace(/\r\n/g, "\n");
+    const start = /^[\s\S]*?<head>\n<script>(if\(!location\.hash\)history\.replaceState\(null,"","#[a-z0-9=&-]+"\);)<\/script>/.exec(t);
+    let fehler = null;
+    try { if (start) new Function(start[1]); } catch (e) { fehler = e.message; }
+    ok(!!start && !fehler, `${s}.html: Start-Skript steht als erstes im <head> und kompiliert${fehler ? " — " + fehler : ""}`);
+    const si = t.indexOf("<!--seo-inhalt-->"), se = t.indexOf("<!--/seo-inhalt-->");
+    const seo = si >= 0 && se > si ? t.slice(si, se) : "";
+    ok(!!seo && !/<script/i.test(seo), `${s}.html: Seiteninhalt-Block vorhanden und ohne Skript`);
+    const h2 = [...seo.matchAll(/<h2([^>]*)>/g)].filter((m) => !/seo-more-h1/.test(m[1]));
+    const ohneId = h2.filter((m) => !/\sid="a-/.test(m[1])).length;
+    ok(ohneId === 0, `${s}.html: alle ${h2.length} Abschnitte im Block mit Sprung-id (ohne id: ${ohneId})`);
+    const ohneBlock = t.slice(t.indexOf("</head>")).replace(/<!--seo-inhalt-->[\s\S]*?<!--\/seo-inhalt-->\n  /, "").replace(/<h1 class="vh">[\s\S]*?<\/h1>/, "");
+    ok(ohneBlock === appRumpf, `${s}.html: außerhalb von <head> und Block identisch mit index.html (App aktuell)`);
   }
-  ok(bloecke.length > 0 && !syntaxFehler,
-    `${s}.html: ${bloecke.length} Inline-Skript(e) kompilieren` + (syntaxFehler ? ` — ${syntaxFehler}` : ""));
-
-  // Die Werkzeuge muessen im Markup stehen, sonst geht eine Seite ohne Suche
-  // oder ohne Sprungziele live, ohne dass es jemand bemerkt.
-  const h2 = [...t.matchAll(/<h2([^>]*)>/g)];
-  const ohneId = h2.filter((m) => !/\sid="a-/.test(m[1])).length;
-  const sprungziele = (t.match(/<a href="#a-/g) || []).length;
-  ok(t.includes('id="pt-suche"'), `${s}.html: Suchfeld vorhanden`);
-  ok(ohneId === 0, `${s}.html: alle ${h2.length} Abschnitte mit Sprung-id (ohne id: ${ohneId})`);
-  ok(h2.length < 2 || sprungziele === h2.length,
-    `${s}.html: ${sprungziele} Sprunglinks fuer ${h2.length} Abschnitte`);
 }
-
-// ── 4c. Bewegung (Lauf 09.10.2026, B5) ───────────────────────────────────────
-// Jede Seite traegt den Kopf-Schnipsel (cd_motion) VOR dem ersten Paint, laedt
-// Bewegungs-Libs nur same-origin aus /vendor/ (Dateien muessen im Repo liegen) und
-// bindet kein Skript von einem fremden Host ein (kein CDN, DSGVO). Die bestehende
-// Google-Fonts-Einbindung (<link>, kein Skript) ist davon bewusst nicht betroffen.
-console.log("\n[Bewegung] Kopf-Schnipsel, /vendor/-Pfade, kein CDN");
-for (const s of SEITEN_MIT_WERKZEUG) {
-  const t = fs.readFileSync(path.join(ROOT, s + ".html"), "utf8");
-  const kopf = t.slice(0, t.indexOf("</head>"));
-  const sniep = /<script>[^<]*cd_motion[\s\S]*?<\/script>/.exec(kopf);
-  // Seit 10.10.2026 Bewegung als Standard: nur cd_motion='off' schaltet aus (kein reduced-motion, kein ?motion mehr)
-  ok(!!sniep && sniep[0].includes("cd-motion") && sniep[0].includes("cd-still") && sniep[0].includes("'off'")
-      && kopf.indexOf(sniep[0]) < kopf.indexOf("<style>"),
-    `${s}.html: Kopf-Schnipsel (cd_motion, Standard an, 'off' schaltet aus) steht im <head> vor dem <style>`);
-
-  // Skript-Quellen: nur /vendor/<datei>.js, nie ein Host
-  const srcs = [...t.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
-  const fremd = srcs.filter((u) => !/^\/vendor\/[A-Za-z0-9._-]+\.js$/.test(u));
-  // Inline-Skripte (ohne JSON-LD): kein Verweis auf einen Host (http(s):// oder //host)
-  const inline = [...t.matchAll(/<script(?![^>]*application\/ld\+json)(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
-  const hostRef = inline.flatMap((b) => b.match(/(?:https?:)?\/\/[A-Za-z0-9-]+\.[A-Za-z]{2,}/g) || []);
-  ok(fremd.length === 0 && hostRef.length === 0,
-    `${s}.html: kein Bewegungs-Skript von fremden Hosts (fremde src: ${fremd.join(", ") || "-"}; Host im Inline-Skript: ${hostRef.join(", ") || "-"})`);
-
-  // Lib-Dateinamen im Loader (Literale "<name>-<x.y.z>.min.js") + Praefix /vendor/ muessen existieren
-  const namen = [...new Set(inline.flatMap((b) => b.match(/[A-Za-z]+-\d+\.\d+\.\d+\.min\.js/g) || []))];
-  const hatPraefix = inline.some((b) => b.includes("'/vendor/'+"));
-  const fehlt = namen.filter((n) => !fs.existsSync(path.join(ROOT, "vendor", n)));
-  ok(namen.length >= 3 && hatPraefix && fehlt.length === 0,
-    `${s}.html: ${namen.length} Libs aus /vendor/ (${namen.join(", ")}), alle im Repo vorhanden (fehlend: ${fehlt.join(", ") || "-"})`);
-}
-
 // ── 5. sitemap.xml ───────────────────────────────────────────────────────────
 const sm =fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 // Alle Seiten-URLs (nicht nur die drei alten), plus Startseite. Reihenfolge wie

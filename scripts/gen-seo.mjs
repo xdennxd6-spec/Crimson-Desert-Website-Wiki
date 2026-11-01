@@ -796,10 +796,13 @@ function seitenWerkzeuge(abschnitte) {
 <p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>`;
 }
 
+// Teile jeder Seite fuer die App-Fassung (01.11.2026, siehe appFassung): Kopf-Angaben und Inhalt ohne Seitenwerkzeuge.
+const SEITEN_TEILE = new Map();
 function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, jsonld }) {
   const nav = abschnitteAuszeichnen(bodyHtml);
   bodyHtml = seitenWerkzeuge(nav.abschnitte) + "\n" + nav.body;
   const url = `${SITE}/${slugName}`;
+  SEITEN_TEILE.set(slugName, { title, desc, h1, lead, ogImage, body: nav.body, jsonld, url });
   const OG_FALLBACK = "cd_assets/bosses/umbra-final.jpg";
   // Dimensionen je Seite frisch ermitteln - nicht alle Seiten teilen dasselbe og:image
   // (z.B. seo-parts/ruestungen.mjs nutzt golden-greed-plate.webp).
@@ -813,6 +816,7 @@ function pageShell({ slugName, title, desc, h1, lead, ogImage, bodyHtml, crumb, 
     ogDim = dimsFromLocalFile(ogRel);
   }
   const og = `${SITE}/${ogRel}`;
+  Object.assign(SEITEN_TEILE.get(slugName), { og, ogDim });
   const navLink = ([s, l]) =>
     `<a href="/${s}"${s === slugName ? ' aria-current="page"' : ""}>${esc(l)}</a>`;
   // Kopf: die dreizehn Hauptseiten, eine andere Seite nur, wenn sie gerade offen ist.
@@ -1373,6 +1377,141 @@ const CTX = {
   helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN, extract },
 };
 
+// ── App-Fassung der Seiten (01.11.2026) ───────────────────────────────────────
+// Wer über Google auf /bosse kommt, soll in der echten App landen und nicht auf einer schlichten Extraseite.
+// Darum ist jede Seite eine Kopie von index.html mit eigenem Kopf (Titel, Beschreibung, canonical, og, JSON-LD),
+// die beim Laden den passenden Bereich öffnet (#sec=... nur, wenn die Adresse noch keinen # hat). Der bisherige
+// Seiteninhalt steht sichtbar am Ende dieses Bereichs im Block „Mehr zu diesem Thema“ (<aside class="seo-more">):
+// Einleitung, DLC-Abschnitt und häufige Fragen offen, die vollständigen Datentabellen eingeklappt (Google liest
+// eingeklappte Inhalte mit). Keine Weiterleitung und nichts nur für Google: Mensch und Google sehen dieselbe Seite.
+// COUNT_CHECK und verify-seo zählen nur zwischen den Markern SEO_START/SEO_ENDE, weil index.html selbst Tabellen hat.
+const SEO_START = "<!--seo-inhalt-->";
+const SEO_ENDE = "<!--/seo-inhalt-->";
+const APP_HTML = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+// Startbereich je Seite: aus DEEPLINK der Module ("/#sec-armor" oder "/#sec=quests&tab=mq"), für die drei
+// Seiten aus gen-seo selbst fest.
+const APP_ZIEL = { bosse: "sec=bosses", waffen: "sec=weapons", "true-ending": "sec=quests&tab=te" };
+for (const p of SEO_PARTS) {
+  const m = /^\/#(?:sec-([a-z0-9-]+)|(sec=[a-z0-9-]+(?:&tab=[a-z0-9-]+)?))$/.exec(p.DEEPLINK || "");
+  if (!m) throw new Error(`${p.SLUG}: DEEPLINK "${p.DEEPLINK}" passt nicht zu #sec-x oder #sec=x&tab=y`);
+  APP_ZIEL[p.SLUG] = m[1] ? `sec=${m[1]}` : m[2];
+}
+// CSS der bisherigen Seiten auf den Block begrenzen: jede Regel bekommt ".seo-more " davor, :root wird zum Block
+// (dieselben Variablennamen wie die App, Werte der SEO-Seiten), Seitengerüst-Regeln (body, header, Suche,
+// Sprungleiste) entfallen. At-Regeln (@media) werden rekursiv begrenzt.
+function cssBegrenzen(css, scope) {
+  css = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  const WEG = /^(\*|html|body|main|header\.site|footer\.site|nav\.crumbs|\.pagetools|\.jump|\.pt-empty|\[data-pt-hidden\]|h2\[id\]|\.cta)\b/;
+  let out = "", i = 0;
+  while (i < css.length) {
+    const open = css.indexOf("{", i);
+    if (open < 0) break;
+    const sel = css.slice(i, open).trim();
+    if (sel.startsWith("@")) {
+      let tief = 1, j = open + 1;
+      while (j < css.length && tief) { if (css[j] === "{") tief++; else if (css[j] === "}") tief--; j++; }
+      const innen = cssBegrenzen(css.slice(open + 1, j - 1), scope);
+      if (innen.trim()) out += `${sel}{${innen}}\n`;
+      i = j;
+      continue;
+    }
+    const close = css.indexOf("}", open);
+    const sels = sel.split(",").map((s) => s.trim()).filter(Boolean)
+      .map((s) => (s === ":root" ? scope : WEG.test(s) ? null : `${scope} ${s}`)).filter(Boolean);
+    if (sels.length) out += `${sels.join(",")}{${css.slice(open + 1, close)}}\n`;
+    i = close + 1;
+  }
+  return out;
+}
+const SEO_MORE_CSS = `<style id="seo-more-css">
+${cssBegrenzen(SHARED_CSS, ".seo-more")}
+.seo-more{margin:44px 0 8px;padding:22px 22px 18px;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:14px;
+background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.62}
+.seo-more .seo-more-k{display:block;font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.seo-more h2.seo-more-h1{font-size:24px;margin:4px 0 8px;padding:0;border:0}
+.seo-more details.seo-daten{margin:22px 0 4px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2)}
+.seo-more details.seo-daten>summary{list-style:none;cursor:pointer;padding:13px 16px;font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--ink-hi);display:flex;justify-content:space-between;gap:12px;align-items:center}
+.seo-more details.seo-daten>summary::-webkit-details-marker{display:none}
+.seo-more details.seo-daten>summary::after{content:"+";font-size:18px;color:var(--red);line-height:1}
+.seo-more details.seo-daten[open]>summary::after{content:"\\2013"}
+.seo-more details.seo-daten>.seo-daten-in{padding:0 16px 16px}
+@media(max-width:560px){.seo-more{padding:18px 14px 14px}.seo-more details.seo-daten>.seo-daten-in{padding:0 10px 12px}}
+</style>`;
+function appFassung(slugName) {
+  const T = SEITEN_TEILE.get(slugName), ziel = APP_ZIEL[slugName];
+  if (!T || !ziel) throw new Error(`App-Fassung: keine Teile oder kein Ziel für ${slugName}`);
+  const secId = /^sec=([a-z0-9-]+)/.exec(ziel)[1];
+  let a = APP_HTML;
+  const ersetze = (re, neu, name) => {
+    if (!re.test(a)) throw new Error(`App-Fassung ${slugName}: ${name} nicht in index.html gefunden`);
+    a = a.replace(re, () => neu);
+  };
+  const meta = (attr, key, wert) => ersetze(new RegExp(`<meta ${attr}="${key}" content="[^"]*">`), `<meta ${attr}="${key}" content="${esc(wert)}">`, key);
+  ersetze(/<title>[\s\S]*?<\/title>/, `<title>${esc(T.title)}</title>`, "title");
+  meta("name", "description", T.desc);
+  ersetze(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${T.url}">`, "canonical");
+  meta("property", "og:title", T.title);
+  meta("property", "og:description", T.desc);
+  meta("property", "og:type", "article");
+  meta("property", "og:url", T.url);
+  meta("property", "og:image", T.og);
+  if (T.ogDim) { meta("property", "og:image:width", String(T.ogDim.w)); meta("property", "og:image:height", String(T.ogDim.h)); }
+  meta("property", "og:image:alt", T.title);
+  meta("name", "twitter:title", T.title);
+  meta("name", "twitter:description", T.desc);
+  meta("name", "twitter:image", T.og);
+  ersetze(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${JSON.stringify(T.jsonld)}\n</script>`, "JSON-LD");
+  // Die versteckte Hauptüberschrift der App (für Screenreader) nennt das Thema der Seite; sichtbar steht es im Block unten.
+  ersetze(/<h1 class="vh">[\s\S]*?<\/h1>/, `<h1 class="vh">${esc(T.h1)}</h1>`, "h1");
+  ersetze(/<head>/, `<head>\n<script>if(!location.hash)history.replaceState(null,"","#${ziel}");</script>`, "head");
+  ersetze(/<\/head>/, `${SEO_MORE_CSS}\n</head>`, "/head");
+
+  // Inhalt aufteilen: Einleitung und Hinweise (alles vor der ersten h2), DLC-Abschnitt, Fragen offen; Daten eingeklappt.
+  let body = T.body.replace(/<a class="cta"[^>]*>[\s\S]*?<\/a>\s*/g, "");
+  const dlcM = /<div class="dlc-neu" id="dlc">[\s\S]*?<\/div>/.exec(body);
+  const dlc = dlcM ? dlcM[0] : "";
+  if (dlcM) body = body.replace(dlcM[0], "");
+  const faqI = body.search(/<h2[^>]*>Häufige Fragen/);
+  const faq = faqI >= 0 ? body.slice(faqI) : "";
+  if (faqI >= 0) body = body.slice(0, faqI);
+  const h2I = body.search(/<h2[\s>]/);
+  const vorn = h2I >= 0 ? body.slice(0, h2I) : body;
+  const daten = h2I >= 0 ? body.slice(h2I) : "";
+  const nDaten = (daten.match(/<h2[\s>]/g) || []).length;
+  const block = `${SEO_START}
+<aside class="seo-more" data-s="" aria-label="Mehr zu diesem Thema">
+<span class="seo-more-k">Mehr zu diesem Thema</span>
+<h2 class="seo-more-h1">${esc(T.h1)}</h2>
+<p class="lead">${T.lead}</p>
+${vorn}
+${dlc}
+${daten ? `<details class="seo-daten"><summary>Komplette Liste zum Nachschlagen (${nDaten} ${nDaten === 1 ? "Abschnitt" : "Abschnitte"})</summary><div class="seo-daten-in">
+${daten}
+</div></details>` : ""}
+${faq}
+</aside>
+${SEO_ENDE}`;
+  // Ende des Bereichs: passendes </section>, verschachtelte <section> (z. B. in sec-crafting) mitgezählt
+  const start = a.indexOf(`id="sec-${secId}"`);
+  if (start < 0 || a.indexOf(`id="sec-${secId}"`, start + 1) >= 0) throw new Error(`App-Fassung ${slugName}: Bereich sec-${secId} nicht eindeutig`);
+  const tagRe = /<section[\s>]|<\/section>/g;
+  tagRe.lastIndex = start;
+  let tief = 1, ende = -1, t;
+  while ((t = tagRe.exec(a))) { tief += t[0] === "</section>" ? -1 : 1; if (!tief) { ende = t.index; break; } }
+  if (ende < 0) throw new Error(`App-Fassung ${slugName}: Ende von sec-${secId} nicht gefunden`);
+  a = a.slice(0, ende) + block + "\n  " + a.slice(ende);
+  // Doppelte ids zwischen App und Seiteninhalt brächen Sprünge und Skripte der App
+  const appIds = new Set([...APP_HTML.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+  const doppelt = [...new Set([...block.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]))].filter((x) => appIds.has(x));
+  if (doppelt.length) throw new Error(`App-Fassung ${slugName}: ids doppelt mit index.html: ${doppelt.slice(0, 8).join(", ")}`);
+  return a;
+}
+// Nur der Seiteninhalt zwischen den Markern (für Zählungen)
+function seoInhalt(seite) {
+  const i = seite.indexOf(SEO_START), j = seite.indexOf(SEO_ENDE);
+  return i >= 0 && j > i ? seite.slice(i, j) : seite;
+}
+
 // ── Schreiben ─────────────────────────────────────────────────────────────────
 const AKTIVE_PARTS = ONLY ? SEO_PARTS.filter((p) => ONLY.has(p.SLUG)) : SEO_PARTS;
 if (ONLY) {
@@ -1381,11 +1520,12 @@ if (ONLY) {
 }
 const seiten = [
   ...(ONLY ? [] : [
-    ["bosse.html", buildBosse()],
-    ["waffen.html", buildWaffen()],
-    ["true-ending.html", buildTrueEnding()],
+    // buildX() fuellt SEITEN_TEILE, ausgeliefert wird die App-Fassung
+    ["bosse.html", (buildBosse(), appFassung("bosse"))],
+    ["waffen.html", (buildWaffen(), appFassung("waffen"))],
+    ["true-ending.html", (buildTrueEnding(), appFassung("true-ending"))],
   ]),
-  ...AKTIVE_PARTS.map((p) => [`${p.SLUG}.html`, baueModulSeite(p)]),
+  ...AKTIVE_PARTS.map((p) => [`${p.SLUG}.html`, (baueModulSeite(p), appFassung(p.SLUG))]),
 ];
 // Welche Seiten sich in diesem Lauf inhaltlich aendern (Zeilenenden egal, siehe
 // unten) -- Grundlage fuer lastmod in buildSitemap(). Muss VOR dem Schreiben
@@ -1428,7 +1568,7 @@ let countFehler = 0;
 for (const p of AKTIVE_PARTS) {
   const { regex, expected, label } = p.COUNT_CHECK(CTX);
   const seite = fs.readFileSync(path.join(OUT, `${p.SLUG}.html`), "utf8");
-  const n = (seite.match(regex) || []).length;
+  const n = (seoInhalt(seite).match(regex) || []).length;
   if (n !== expected) {
     console.error(`  FEHLER: ${p.SLUG}.html hat ${n} ${label}, erwartet ${expected}`);
     countFehler++;
