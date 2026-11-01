@@ -266,7 +266,7 @@ ${table(["Wohnsitz", "Ort", "Erwerb", "Hinweis"],
 ${list(D.GEAR_NOTES)}
 ${D.GEAR_W.length ? `<h3 class="ctu-h">Waffen (${D.GEAR_W.length})</h3>
 ${table(["Waffe", "Typ", "ATK", "Fundort"], D.GEAR_W.map((w) => tr(rid("waffe", w.name), null,
-    [`<strong>${esc(w.name)}</strong><span class="dlc-gtag">DLC</span>`, esc(w.type || ""), has(w.atk) ? valQ(w.atk, w) : '<span class="ctu-nb">nicht erfasst</span>', has(w.source) ? esc(w.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
+    [`<strong>${esc(w.name)}</strong><span class="dlc-gtag">DLC</span>`, esc(w.type || ""), has(w.atk) ? valQ(w.atk, w) : has(w.def) ? valQ("DEF " + w.def, w) : '<span class="ctu-nb">nicht erfasst</span>', has(w.source) ? esc(w.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
 ${D.GEAR_A.length ? `<h3 class="ctu-h">Rüstungen (${D.GEAR_A.length})</h3>
 ${table(["Rüstung", "Teil", "Effekt", "Fundort"], D.GEAR_A.map((a) => tr(rid("ruestung", a.name), null,
     [`<strong>${esc(a.name)}</strong><span class="dlc-gtag">DLC</span>`, esc(a.type || ""), has(a.effect) ? valQ(a.effect, a) : '<span class="ctu-nb">nicht erfasst</span>', has(a.source) ? esc(a.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
