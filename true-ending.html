@@ -7203,6 +7203,7 @@ select.dr-sel-hidden{display:none!important}
   .dr-pillrow{flex-wrap:wrap;gap:4px}
   .dr-pl{flex-basis:100%}
 }
+@media (max-width:900px),(pointer:coarse){.dr-jump .cd-go{min-height:40px}}
 /* DR-F Ende */
 /* ---- Zielseiten-Anker: CSS NUR im eigenen Block (Besitz siehe runs/2026-11-01-design-rest/BRIEFING.md) ---- */
 /* DR-A1 Anfang (Bosse) */
@@ -7388,6 +7389,8 @@ select.dr-sel-hidden{display:none!important}
   #sec-armor .fbar>input.fs,#sec-armorsets .fbar>input.fs{flex:1 1 100%;max-width:none}
   #sec-armor #af-sort,#sec-armorsets #asf-sort{flex:1 1 auto;max-width:none}
 }
+#armor-grid .map-pin-btn{min-height:40px}
+#sec-armor .fbar>:is(input,select).fs,#sec-armorsets .fbar>:is(input,select).fs{min-height:40px}
 /* DR-A4 Ende */
 /* ---- */
 /* DR-B1 Anfang (Builds) */
@@ -7528,7 +7531,6 @@ select.dr-sel-hidden{display:none!important}
 #sec-builds .sim-d{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:999px;font-size:11px;background:color-mix(in srgb,currentColor 14%,transparent)}
 #sec-builds .sim-d.up{color:var(--cd-ok)}
 #sec-builds .sim-d.down{color:var(--cd-fx-hp)}
-@media (max-width:900px){#sec-builds .dr-jump .dr-jl{min-height:40px}}
 @media (max-width:600px){
   #sec-builds .drb1-card-in{padding:18px 16px 16px 18px}
   #sec-builds .drb1-card .build-title{font-size:21px}
@@ -10094,7 +10096,7 @@ function cdGo(sec,q,o){
   return new Promise(function(res){
     (function look(){
       var t=_cdGoFind(root,q);
-      if(!t){if(++tries<12)return setTimeout(look,100);return res(null);}
+      if(!t){if(++tries===1)document.dispatchEvent(new CustomEvent('cd-go-miss',{detail:{sec:sec,q:q}}));if(tries<12)return setTimeout(look,100);return res(null);}
       _cdGoOpen(t);
       requestAnimationFrame(function(){
         var land=function(){
@@ -17241,6 +17243,13 @@ function _drB3MCounts(){
   const st=document.querySelectorAll('#dr-head-mounts .cd-hero-stat');
   for(let i=0;i<st.length;i++){const dt=st[i].querySelector('dt'),dd=st[i].querySelector('dd');if(dt&&dd&&dt.textContent==='Besessen'){dd.textContent=nh+'/'+n;break;}}
 }
+/* Sprunglink auf ein gefiltertes Reittier: Filter lösen, Pillen auf „Alle“ setzen */
+document.addEventListener('cd-go-miss',e=>{
+  if((e.detail||{}).sec!=='mounts'||(_drB3Mg==='all'&&_drB3Ms==='all'))return;
+  _drB3Mg=_drB3Ms='all';
+  document.querySelectorAll('[data-cd-pills="drb3-mgrp"] .cd-pill,[data-cd-pills="drb3-mst"] .cd-pill').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v==='all')));
+  _drB3MApply();
+});
 document.addEventListener('cd-pills',e=>{
   const d=e.detail||{};
   if(d.name==='drb3-mgrp'){_drB3Mg=d.value;_drB3MApply();}
@@ -19783,7 +19792,7 @@ function _drA2AccCard(a,show,have){
   return `<div class="card cd-spot dra2-acc${show?'':' hide'}${have?' dra2-have':''}" data-t="${escHtml(a.type)}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}" data-item-id="${escHtml(a.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(hid)}">
       <div class="acc-icon-hd">${a.icon?`<img class="acc-item-ico" src="${SYNTH_CDN}${a.icon}" width="112" height="112" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:accTypeIcon(a.type)}</div>
       <div class="ct">${escHtml(a.name)}</div>
-      <div class="cm"><span class="tag ${badge}">${escHtml(a.type)}</span>${a.dlc?' <span class="tag tdlc">DLC</span>':''}</div>
+      <div class="cm"><span class="tag ${badge}">${escHtml(a.type)}</span>${a.dlc?' <span class="tag tdlc">DLC</span>':''}${/unbestätigt|ungeprüft/i.test(hid)?' <span class="tag tw" title="Vermerk unter Quelle / Notiz">Details unbestätigt</span>':''}</div>
       <div class="crows">
         <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${escHtml(a.effect)}</span></div>
         <details class="item-more dra2-more"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary><div class="item-more-body">${body}</div></details>
@@ -19881,7 +19890,7 @@ function _drB2WitchCard(w){
   return `<article class="witch-card cd-spot" style="--cd-acc:${e(w.color)}" data-go-id="${e(w.name)}" data-s="${e(sFull)}" data-item-id="${e(w.name)}" data-item-visible="${e(sVis)}" data-item-hidden="${e(sHid)}">
     <header class="drb2-hd">
       <span class="drb2-av${w.img?'':' drb2-fb'}" data-n="${e(w.name)}" aria-hidden="true">${w.img?`<img src="${e(w.img)}" width="88" height="88" loading="lazy" decoding="async" alt="" onerror="_drB2Fb(this)">`:(WITCH_ICON_SVG[w.name]||'')}</span>
-      <div class="drb2-id"><h3 class="drb2-n">${e(w.name)}</h3><p class="drb2-ch">${e(w.chapter)}</p></div>
+      <div class="drb2-id"><h3 class="drb2-n">${e(w.name)}</h3><p class="drb2-ch">${e(w.chapter)}</p>${/ungeprüft|unbestätigt/i.test(w.tip||'')?'<span class="tag tw" title="Vermerk im Tipp">Tipp ingame ungeprüft</span>':''}</div>
     </header>
     <p class="drb2-loc">${cdIcon('pin')}${e(w.location)}</p>
     ${chipS.length||lineS.length?`<div class="drb2-grp"><div class="drb2-lbl">Dienste</div>${chipS.length?`<div class="drb2-chips">${chipS.map(x=>`<span class="cd-chip drb2-svc">${witchSvcIcon(x)}<span>${e(x)}</span></span>`).join('')}</div>`:''}${lineS.map(x=>`<p class="drb2-long">${e(x)}</p>`).join('')}</div>`:''}
