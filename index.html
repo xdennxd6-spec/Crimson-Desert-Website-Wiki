@@ -7396,6 +7396,47 @@ select.dr-sel-hidden{display:none!important}
 /* DR-B1 Ende */
 /* ---- */
 /* DR-B2 Anfang (Hexen + Kochen & Elixiere) */
+/* Hexen: kompakte Karten. .witch-card bleibt (Suche, Motion, Lichtkegel); Akzent = --cd-acc (w.color), Porträt links, Chips, Aufklapper. */
+#sec-witches #witch-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px;align-items:start}
+#sec-witches .witch-card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px 16px 14px;border:1px solid color-mix(in srgb,var(--cd-acc,var(--violet)) 30%,var(--line));
+  border-top:3px solid var(--cd-acc,var(--violet));border-radius:14px;background:color-mix(in srgb,var(--cd-acc,var(--violet)) 6%,var(--card));box-shadow:none;transition:border-color .18s}
+#sec-witches .witch-card:hover{box-shadow:none;border-color:color-mix(in srgb,var(--cd-acc,var(--violet)) 55%,var(--line))}
+.drb2-hd{display:flex;align-items:center;gap:14px;min-width:0}
+.drb2-av{position:relative;flex:none;width:88px;height:88px;overflow:hidden;border-radius:16px;border:1px solid color-mix(in srgb,var(--cd-acc,var(--violet)) 60%,transparent);background:color-mix(in srgb,var(--cd-acc,var(--violet)) 30%,var(--card))}
+.drb2-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;transform:scale(1.4);transform-origin:50% 26%;display:block}
+.drb2-av.drb2-fb{display:grid;place-items:center}
+.drb2-av.drb2-fb svg{width:44px;height:44px}
+.drb2-id{min-width:0}
+.drb2-n{margin:0;font:700 18px/1.25 var(--f-display);color:var(--ink-hi)}
+.drb2-ch{margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--dim)}
+.drb2-loc{margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:12.5px;line-height:1.5;color:var(--dim)}
+.drb2-loc .cd-i{width:14px;height:14px;margin-right:5px;vertical-align:-2px;color:var(--cd-acc,var(--gold))}
+.drb2-grp{display:grid;gap:6px}
+.drb2-lbl,.drb2-k{font:700 11px/1.2 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.drb2-chips{display:flex;flex-wrap:wrap;gap:6px}
+.drb2-svc{align-items:flex-start;border-radius:10px;padding:4px 10px;min-height:28px}
+.drb2-svc .witch-svc-ico{display:inline-block;min-width:1.25em;margin:0;text-align:center;opacity:1}
+#sec-witches .dr-head>.cd-note{margin:0 0 10px}
+.drb2-sanc .cd-chip{--c:var(--cd-acc,var(--violet));min-height:28px}
+.drb2-long{margin:0;padding-left:10px;border-left:2px dashed color-mix(in srgb,var(--cd-acc,var(--violet)) 55%,transparent);font-size:12.5px;line-height:1.5;color:var(--dim)}
+.drb2-act{display:flex}
+#sec-witches .map-pin-btn{margin:0;min-height:40px;padding:8px 16px;font-size:12px}
+#sec-witches .drb2-more>summary{min-height:40px;margin-top:0;font-size:11.5px}
+#sec-witches .drb2-more .item-more-body{gap:12px;padding-top:12px}
+.drb2-blk{display:grid;gap:5px}
+.drb2-blk p{margin:0;font-size:12.5px;line-height:1.55;color:var(--text)}
+.drb2-q{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.drb2-q li{display:flex;gap:8px;font-size:12.5px;line-height:1.55;color:var(--text)}
+.drb2-dia{flex:none;color:var(--cd-acc,var(--gold))}
+#sec-witches .drb2-more .cd-note{font-size:12.5px;line-height:1.55}
+@media (max-width:600px){.drb2-av{width:76px;height:76px}.drb2-n{font-size:17px}}
+/* Kochen: der Kopf ersetzt Intro (sub), Wichtig-Zeile (cdNote) und Kennzahl-Liste; die statischen Absätze bleiben im Markup (ohne JS lesbar). */
+#sec-food:has(>.dr-head) :is(.fd-intro,.fd-key){display:none}
+#sec-food .dr-head .cd-hero-stat dd{font-size:20px;line-height:1.1}
+#sec-food .dr-head .cd-hero-stats[data-n="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+#sec-food .dr-head .cd-hero-stat dd{white-space:nowrap}
+@media (max-width:400px){#sec-food .dr-head .cd-hero-stat dd{font-size:18px}}
+@media (max-width:340px){#sec-food .dr-head .cd-hero-stat dd{font-size:16px}}
 /* DR-B2 Ende */
 /* ---- */
 /* DR-B3 Anfang (Reittiere + Haustiere) */
@@ -8510,7 +8551,6 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-witches">
     <h2 class="sec-t"><span class="sec-sym">☾</span> Hexen &amp; Fusion <span class="sec-t-en">Witches</span></h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>White Crow</strong> ist erst nach 4 Witch's Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).</div>
     <div class="witch-grid" id="witch-grid"></div>
   </section>
 
@@ -8632,12 +8672,6 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
     <h2 class="sec-t"><span class="sec-sym">⚗</span> Kochen &amp; Elixiere <span class="sec-t-en">Cooking &amp; Elixirs</span></h2>
     <p class="fd-intro">Kochen am Lagerfeuer und Alchemie liefern in Crimson Desert situative Buffs: Feldgerichte geben Heilung plus feste Ice- oder Fire-Resistance, während Elixiere aus dem Cauldron Angriff, Verteidigung, Spirit und Wiederbelebung abdecken.</p>
     <p class="fd-key"><b>Wichtig:</b> Resistance-Level und Wirkdauer eines Rezepts sind über alle Qualitätsstufen FIX - nur der HP-Wert steigt mit höherer Kochstufe.</p>
-    <ul class="fd-stats" aria-label="Kennzahlen">
-      <li class="fd-stat"><b>19</b> Einträge</li>
-      <li class="fd-stat"><b>12</b> Feldgerichte</li>
-      <li class="fd-stat"><b>+10 / 15 Min</b> Freya's Greater Elixir</li>
-      <li class="fd-stat"><b>30% / 100%</b> Palmar-Revive</li>
-    </ul>
     <p class="fd-xref"><span aria-hidden="true">↪</span> Reagenzien wie Crimson Root, Adrenaline Gland und Palmar-Materialien siehe Seiten <a href="#sec-gatherables" onclick="showSec('gatherables');return false;">Sammelobjekte</a> und <a href="#sec-items" onclick="showSec('items');return false;">Materialien &amp; Items</a>; Cauldron-Standorte siehe Seite <a href="#sec-crafting" onclick="showSec('crafting');return false;">Herstellen &amp; Farmen</a>.</p>
     <div class="ibar fd-bar" role="group" aria-label="Kochen und Elixiere nach Kategorie filtern">
       <span class="ibar-l">Kategorie</span><span class="fd-chips" id="food-chips"></span><span id="food-cnt" class="fd-cnt"></span>
@@ -16817,9 +16851,21 @@ function _fdCard(c,wasOpen){
     <details class="item-more fd-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Volltext lesen</summary><div class="item-more-body"><p class="fd-full">${escHtml(c.detail)}</p><p class="fd-full"><b>Fundort:</b> ${escHtml(c.loc)}</p></div></details>
   </article>`;
 }
+/* DR-B2 (design-rest): Kopf der Seite. Texte kommen aus dem vorhandenen Markup (fd-intro = sub, fd-key = cdNote), die Zahlen aus
+   FOOD_ELIXIRS; die beiden Wirkwerte standen vorher wortgleich in der Liste fd-stats. Gemountet wird nur einmal (renderFood läuft bei jedem Filterklick). */
+function _drB2FoodHead(){
+  const intro=document.querySelector('#sec-food .fd-intro'),key=document.querySelector('#sec-food .fd-key');
+  const nFood=FOOD_ELIXIRS.filter(x=>(FD_CATS.find(k=>k.cat===x.cat)||{grp:/^Elixir/.test(x.cat)?'elix':'food'}).grp==='food').length;
+  return drHead({kicker:'Herstellen & Sammeln',title:'Kochen & Elixiere',glyph:'⚗',tone:'amber',scene:['camp'],
+    sub:intro?intro.textContent.trim():'',
+    stats:[[FOOD_ELIXIRS.length,'Einträge'],[nFood,'Feldgerichte'],['+10 / 15 Min',"Freya's Greater Elixir"],['30% / 100%','Palmar-Revive']],
+    links:[['gatherables','Sammelobjekte'],['items','Materialien & Items'],['crafting','Herstellen & Farmen']],
+    after:key?cdNote({h:key.innerHTML},{kind:'info'}):''});
+}
 function renderFood(){
   const root=document.getElementById('food-tb');
   if(!root)return;
+  if(!document.getElementById('dr-head-food'))drMount('food',_drB2FoodHead());
   const chips=document.getElementById('food-chips');
   if(chips){
     if(!chips.firstChild){
@@ -18713,29 +18759,53 @@ function renderAccessories(){
 }
 
 // ===== WITCHES =====
-
+/* DR-B2 (design-rest): Kopf (drHead), Intro wortgleich in drInfo, Satz "Nicht verwechseln" als cdNote, kompakte Karten.
+   Sichtbar: Porträt, Name, Kapitel-Gate, Ort, kurze Dienste und Sanctums als Chips, "Auf Karte". Im Aufklapper (details.item-more):
+   Händlerware, Questlinie, Tipp (und der volle Ort, wenn er oben gekürzt ist). Suche: data-s = Volltext, data-item-visible/-hidden. */
+const _DRB2_WITCH_INTRO=`Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>White Crow</strong> ist erst nach 4 Witch's Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).`;
+/* Fehlt das Porträt oder lädt es nicht, bleibt das vorhandene Symbol (WITCH_ICON_SVG) im Rahmen. */
+function _drB2Fb(img){const a=img.parentElement;if(!a)return;a.classList.add('drb2-fb');a.innerHTML=WITCH_ICON_SVG[a.dataset.n]||'<i class="cd-g" aria-hidden="true">☾</i>';}
+function _drB2WitchHead(){
+  const nSanc=WITCHES.reduce((n,w)=>n+(w.sanctums||[]).length,0),
+    nSyn=WITCHES.filter(w=>(w.services||[]).some(x=>/^Core-Synthese/.test(x))).length;
+  return drHead({kicker:'Ausrüstung',title:'Hexen & Fusion',glyph:'☾',tone:'violet',scene:['te-witches'],
+    sub:'Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren.',
+    stats:[[WITCHES.length,'Hexen'],[nSanc,'Sanctums erfasst'],[nSyn,'mit Core-Synthese']],
+    links:[['synthesis','Abyss-Synthese'],['cores','Abyss-Ausrüstung'],['checklists','Checklisten'],['secrets','Geheimnisse & Lore']],
+    after:cdNote({h:'Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).'},{kind:'info'})
+      +drInfo({title:'Hexen im Überblick',lead:'Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region …',
+        icon:'☾',tone:'violet',h:_DRB2_WITCH_INTRO})});
+}
+function _drB2WitchCard(w){
+  const e=cdEsc,LONG=64,sv=w.services||[],qs=w.quests||[],sa=w.sanctums||[];
+  const shop=sv.filter(x=>/^Händlerware/.test(x)),svc=sv.filter(x=>!/^Händlerware/.test(x));
+  const chipS=svc.filter(x=>x.length<=LONG),lineS=svc.filter(x=>x.length>LONG),chipA=sa.filter(x=>x.length<=LONG),lineA=sa.filter(x=>x.length>LONG);
+  const longLoc=String(w.location||'').length>110;
+  const parts=[qs.length&&'Questlinie',w.tip&&'Tipp',shop.length&&'Händlerware'].filter(Boolean);
+  const lbl=parts.length>1?parts.slice(0,-1).join(', ')+' und '+parts[parts.length-1]:(parts[0]||'');
+  const sFull=[w.name,w.chapter,w.location,sv.join(' '),qs.join(' '),sa.join(' '),w.tip].join(' ').toLowerCase();
+  const sVis=[w.name,w.chapter,w.location,svc.join(' '),sa.join(' ')].join(' ').toLowerCase();
+  const sHid=[shop.join(' '),qs.join(' '),w.tip].join(' ').toLowerCase();
+  const body=(longLoc?`<div class="drb2-blk"><div class="drb2-k">Ort</div><p>${e(w.location)}</p></div>`:'')
+    +(shop.length?`<div class="drb2-blk"><div class="drb2-k">Händlerware</div>${shop.map(x=>`<p>${e(x)}</p>`).join('')}</div>`:'')
+    +(qs.length?`<div class="drb2-blk"><div class="drb2-k">Questlinie &amp; Sanctums</div><ul class="drb2-q">${qs.map(q=>`<li><span class="drb2-dia" aria-hidden="true">◆</span><span>${e(q)}</span></li>`).join('')}</ul></div>`:'')
+    +(w.tip?cdNote(w.tip,{kind:'info',title:'Tipp'}):'');
+  return `<article class="witch-card cd-spot" style="--cd-acc:${e(w.color)}" data-go-id="${e(w.name)}" data-s="${e(sFull)}" data-item-id="${e(w.name)}" data-item-visible="${e(sVis)}" data-item-hidden="${e(sHid)}">
+    <header class="drb2-hd">
+      <span class="drb2-av${w.img?'':' drb2-fb'}" data-n="${e(w.name)}" aria-hidden="true">${w.img?`<img src="${e(w.img)}" width="88" height="88" loading="lazy" decoding="async" alt="" onerror="_drB2Fb(this)">`:(WITCH_ICON_SVG[w.name]||'')}</span>
+      <div class="drb2-id"><h3 class="drb2-n">${e(w.name)}</h3><p class="drb2-ch">${e(w.chapter)}</p></div>
+    </header>
+    <p class="drb2-loc">${cdIcon('pin')}${e(w.location)}</p>
+    ${chipS.length||lineS.length?`<div class="drb2-grp"><div class="drb2-lbl">Dienste</div>${chipS.length?`<div class="drb2-chips">${chipS.map(x=>`<span class="cd-chip drb2-svc">${witchSvcIcon(x)}<span>${e(x)}</span></span>`).join('')}</div>`:''}${lineS.map(x=>`<p class="drb2-long">${e(x)}</p>`).join('')}</div>`:''}
+    ${chipA.length||lineA.length?`<div class="drb2-grp"><div class="drb2-lbl">Sanctums</div>${chipA.length?`<div class="drb2-chips drb2-sanc">${chipA.map(x=>`<span class="cd-chip"><i class="cd-g" aria-hidden="true">◆</i><span>${e(x)}</span></span>`).join('')}</div>`:''}${lineA.map(x=>`<p class="drb2-long">${e(x)}</p>`).join('')}</div>`:''}
+    <div class="drb2-act"><button type="button" class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.location)}','Hexe')">${foBtn(w.name)}</button></div>
+    ${body?`<details class="item-more drb2-more"><summary>${e(lbl)}</summary><div class="item-more-body">${body}</div></details>`:''}
+  </article>`;
+}
 function renderWitches(){
-  document.getElementById('witch-grid').innerHTML=WITCHES.map(w=>{
-    return `<div class="witch-card">
-      <div class="witch-banner" style="background:${w.color}"></div>
-      ${w.img?`<div class="witch-img-wrap"><img class="witch-img" src="${w.img}" loading="lazy" alt="${w.name}" onerror="this.parentElement.remove()"></div>`:''}
-      <div class="witch-icon-hd" style="background:${w.color}14">
-        ${WITCH_ICON_SVG[w.name]||''}
-        <div class="witch-icon-name">
-          <div class="witch-icon-title">${w.name}</div>
-          <div class="witch-icon-sub">${w.chapter}</div>
-        </div>
-        <button class="map-pin-btn" style="margin-top:0;padding:4px 9px;font-size:var(--fs-10)" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.location)}','Hexe')">${foBtn(w.name)}</button>
-      </div>
-      <div class="witch-body">
-        <div class="witch-loc">📍 ${w.location}</div>
-        <div class="witch-lbl">Dienste</div>
-        ${w.services.map(s=>`<div class="witch-svc">${witchSvcIcon(s)}${s}</div>`).join('')}
-        ${w.quests.length?`<div class="witch-lbl">Questlinie &amp; Sanctums</div>${w.quests.map(q=>`<div class="witch-q"><span style="color:${w.color}">◆</span><span>${q}</span></div>`).join('')}`:''}
-        ${w.tip?`<div class="witch-tip">💡 ${w.tip}</div>`:''}
-      </div>
-    </div>`;
-  }).join('');
+  const grid=document.getElementById('witch-grid');if(!grid)return;
+  if(!document.getElementById('dr-head-witches'))drMount('witches',_drB2WitchHead());
+  grid.innerHTML=WITCHES.map(_drB2WitchCard).join('');
 }
 
 // ===== WEAPON UPGRADES =====
