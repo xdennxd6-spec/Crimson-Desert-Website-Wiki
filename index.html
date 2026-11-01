@@ -7341,6 +7341,7 @@ select.dr-sel-hidden{display:none!important}
 #sec-secrets .lt-final .lt-title{color:var(--gold)}
 #sec-secrets .lt-desc{max-width:84ch;font-size:13px;line-height:1.6;color:var(--dim)}
 #sec-secrets>.pane>.cd-note{margin-bottom:12px}
+#sec-secrets .sec-block.drb4-grp:not(:has([data-s]:not(.hide))){display:none}
 @media (max-width:600px){
   .drb4-tabbar{margin-bottom:12px}
   .drb4-tabbar .cd-pills{margin-inline:-16px;padding-inline:16px}
@@ -10453,8 +10454,21 @@ function _drB4HeadStats(){
 /* data-s: Volltext (sichtbarer Text, klein geschrieben) an jedem Block und jeder Karte; die Suche trifft so einzelne Blöcke */
 function _drB4Tag(root){
   if(!root||!root.querySelectorAll)return;
-  root.querySelectorAll('.sec-hero,.sec-block,.easter-card,.cresset-region,.drb4-tool,.tracker-summary,.rt-card,.lt-item').forEach(el=>{
-    const t=(el.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+  const tx=el=>(el.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+  root.querySelectorAll('.sec-hero,.sec-block,.tracker-summary,.rt-card,.lt-item').forEach(el=>{
+    /* Block mit Karten = Gruppe ohne eigenes data-s (sonst zählt die Suche Block und Karte doppelt); seine Karten und
+       Hinweise tragen Karten- plus Blocktitel-Text, ein leerer Block blendet CSS aus (.drb4-grp:not(:has(...))) */
+    if(el.classList.contains('sec-block')&&el.querySelector('.easter-card,.cresset-region,.drb4-tool')){
+      el.classList.add('drb4-grp');
+      const hd=el.querySelector('.sec-block-hd'),ht=hd?tx(hd):'';
+      el.querySelectorAll('.easter-card,.cresset-region,.drb4-tool,.lore-callout').forEach(c=>{
+        const t=(tx(c)+' '+ht).trim();
+        if(t)c.dataset.s=t;
+      });
+      el.removeAttribute('data-s');
+      return;
+    }
+    const t=tx(el);
     if(t)el.dataset.s=t;
   });
 }
@@ -10487,6 +10501,9 @@ function _drB4SyncPills(){
 let _drB4Mo=null;
 function _drB4Init(){
   drMount('secrets',_drB4Head());
+  /* Timeline und beide Tracker sind sonst erst nach dem Reiterklick gerendert und damit nicht durchsuchbar: einmal vorab füllen
+     (secretsTab rendert sie beim Klick ohnehin neu; die Stände kommen aus denselben Schlüsseln) */
+  renderLoreTimeline();renderFragmentTracker();renderCressetTracker();
   _drB4Tag(document.getElementById('sec-secrets'));
   _drB4MountPills();
   if(!_drB4Mo&&typeof MutationObserver==='function'){
@@ -10637,6 +10654,7 @@ function renderLoreTimeline(){
   el.innerHTML=cdNote({h:'<strong>Maximale Story-Spoiler:</strong> Diese Timeline zeigt den kompletten Handlungsbogen inkl. Ende. Nur lesen, wenn du durch bist.'},{kind:'warn'})
     +`<div class="lt-wrap">${nodes.map(n=>`<div class="lt-item ${n.cls||''}"><div class="lt-dot">${escHtml(n.icon)}</div><div class="lt-card cd-spot"><div class="lt-phase">${escHtml(n.phase)}</div><div class="lt-title">${escHtml(n.title)}</div><div class="lt-desc">${escHtml(n.desc)}</div></div></div>`).join('')}</div>`;
   _drB4Tag(el);
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(el);
 }
 
 function renderSecrets(){
