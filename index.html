@@ -7253,7 +7253,7 @@ select.dr-sel-hidden{display:none!important}
 .drb3-gh{display:flex;align-items:baseline;gap:10px;margin:8px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
 .drb3-gt{margin:0;font-family:var(--f-display);font-size:18px;font-weight:700;letter-spacing:.01em;color:var(--ink-hi)}
 .drb3-gn{font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--dim);font-variant-numeric:tabular-nums}
-#mount-sections .drb3-grp>.grid{grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;align-items:start}
+#mount-sections .drb3-grp>.grid{grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;align-items:stretch}
 .drb3-mc{contain-intrinsic-height:auto 430px;content-visibility:auto}
 .drb3-mc--noimg{--cd-spot-c:var(--cd-fx-ice)}
 .drb3-mc--noimg::before{background:var(--cd-fx-ice)}
@@ -7267,10 +7267,11 @@ select.dr-sel-hidden{display:none!important}
 #sec-mounts .drb3-mc .cv{font-size:12.5px;line-height:1.55;color:var(--text)}
 .drb3-have{margin:12px 0 0}
 .drb3-have .cd-check-l{min-height:44px;padding:6px 12px}
+.drb3-gn--hint{font-weight:400;font-family:var(--f-body,inherit);color:var(--gdim,var(--dim))}
 /* Haustiere */
 #sec-pets .pet-filter-row{display:block;margin:0 0 16px}
 #sec-pets .pet-filter-row .cd-pills{margin:0}
-#sec-pets .pet-grid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;align-items:start}
+#sec-pets .pet-grid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;align-items:stretch}
 #sec-pets .pet-card{gap:7px;padding:12px 10px 12px;content-visibility:auto;contain-intrinsic-size:auto 190px}
 #sec-pets .pet-card-img,#sec-pets .pet-card-ph{width:88px;height:88px}
 #sec-pets .pet-card-img{object-fit:cover}
@@ -7287,15 +7288,21 @@ select.dr-sel-hidden{display:none!important}
 .drb3-legend .cv a{color:var(--gold)}
 @media (max-width:640px){
   #mount-sections .drb3-grp>.grid{grid-template-columns:minmax(0,1fr)}
+  /* 390: Karte mit Bild kompakt (Bild links, Name und Typ rechts), halbiert die Kartenhöhe */
+  #sec-mounts .drb3-mc:not(.drb3-mc--noimg){display:grid;grid-template-columns:92px minmax(0,1fr);column-gap:12px;align-content:start;contain-intrinsic-height:auto 330px}
+  #sec-mounts .drb3-mc:not(.drb3-mc--noimg)>*{grid-column:1/-1}
+  #sec-mounts .drb3-mc:not(.drb3-mc--noimg)>.drb3-mi{grid-column:1;grid-row:1/3;aspect-ratio:1;margin:0;align-self:start}
+  #sec-mounts .drb3-mc:not(.drb3-mc--noimg)>.ct{grid-column:2;grid-row:1;margin-bottom:6px;align-self:end}
+  #sec-mounts .drb3-mc:not(.drb3-mc--noimg)>.cm{grid-column:2;grid-row:2;margin-bottom:10px;align-self:start}
   #sec-pets .pet-grid{grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+  #sec-pets .pet-card{padding:12px 6px}
   .drb3-legend .crow{flex-direction:column;gap:3px}
   .drb3-legend .cl{min-width:0}
 }
 /* Schrift >= 11 px auf umgebauten Elementen (Basisregeln setzen 8,5 bis 10 px) */
-.drb3-bar .dr-pl{font-size:var(--fs-11)}
 #sec-mounts .drb3-mc :is(.tag,.cl,.mount-ig-btn){font-size:var(--fs-11)}
 #sec-pets .pet-card-variant,#sec-pets .pet-card-food-lbl,.drb3-legend .cl{font-size:var(--fs-11)}
-.dr-info .cd-fold-ico .cd-i{width:22px;height:22px}
+#sec-pets .pet-card-food-lbl{margin-top:auto;text-transform:none;letter-spacing:.02em}
 .drb3-gh+.cd-pills{margin-top:2px}
 /* DR-B3 Ende */
 /* ---- */
@@ -12291,7 +12298,7 @@ function renderPets(filter){
   const counts={}; PETS.forEach(p=>{counts[p.type]=(counts[p.type]||0)+1;});
   if(_petFilter!=='all'&&!counts[_petFilter])_petFilter='all';
   // Kopf + Info-Boxen (Texte wortgleich aus der früheren Textwand)
-  const patchInfo=drInfo({title:'Patch-Historie',lead:_drB3Txt(_DRB3_PET_PATCH[0]),icon:{h:cdIcon('info')},h:_DRB3_PET_PATCH.map(x=>'<p>'+x+'</p>').join('')});
+  const patchInfo=drInfo({title:'Patch-Historie',lead:_drB3Txt(_DRB3_PET_PATCH[0]),h:_DRB3_PET_PATCH.map(x=>'<p>'+x+'</p>').join('')});
   const tameInfo=drInfo({title:'Zähmen',lead:'Vertrauen durch Füttern oder Streicheln auf max. 100 steigern.',icon:'❥',h:'<p>'+_DRB3_PET_TAME+'</p>'});
   drMount('pets',drHead({kicker:'Welt & Karte',title:'Haustiere',sub:_DRB3_PET_INTRO,glyph:'❥',scene:['beginner','reg-hernand'],
     stats:[[PETS.length,'Haustiere'],[counts.cat||0,'Katzen'],[counts.dog||0,'Hunde'],[counts.critter||0,'Kleintiere']].filter(x=>x[0]>0),
@@ -16058,7 +16065,7 @@ function renderMounts(){
     after:_drB3MBar(groups)}));
   document.getElementById('mount-sections').innerHTML=groups.map(g=>
     `<div id="${g.id}" class="drb3-grp">
-      <div class="drb3-gh"><h3 class="drb3-gt">${g.title}</h3><span class="drb3-gn">${g.items.length}</span></div>
+      <div class="drb3-gh"><h3 class="drb3-gt">${g.title}</h3><span class="drb3-gn">${g.items.length}</span>${g.img?'':'<span class="drb3-gn drb3-gn--hint">ohne Spielbild</span>'}</div>
       <div class="grid">${g.items.map(m=>_drB3MC(m,g.img)).join('')}</div>
     </div>`
   ).join('');
