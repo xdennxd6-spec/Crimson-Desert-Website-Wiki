@@ -7148,6 +7148,30 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 }
 /* DLC-A Ende */
 /* DLC-Q Anfang (Quests: _dlcSecQuests, Besitz Arbeiter quests) */
+.dlcq-notes{margin:0;padding-left:18px;font-size:13px;line-height:1.55;color:var(--dim)}
+.dlcq-notes li{margin:0 0 5px}
+.dlcq-notes li:last-child{margin-bottom:0}
+.dlcq-stat{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;margin:14px 0 12px;padding:12px 16px;border:1px solid var(--line);border-left:3px solid var(--cd-fx-ice);border-radius:12px;background:var(--panel-2)}
+.dlcq-stat-k{flex-basis:100%;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cd-fx-ice)}
+.dlcq-stat-t{flex:1 1 auto;font-size:15px;color:var(--ink-hi)}
+.dlcq-stat-p{flex:0 0 auto}
+.dlcq-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0 0 10px}
+.dlcq-bar>.cd-pills{margin:0 0 8px}
+.dlcq-cnt{margin:0 0 8px;font:600 12px/1 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dlcq-fold .dlc-de{margin-left:4px;font-weight:400}
+.dlcq-unb .cd-fold-lead{color:var(--gdim)}
+.dlcq-unb .dlc-facts dd{color:var(--gdim)}
+.dlcq-done .cd-fold-t{color:color-mix(in srgb,var(--ink-hi) 70%,var(--dim))}
+.dlcq-fold .cd-fold-body .dlc-h{margin:0}
+.dlcq-steps{margin-top:2px}
+.dlcq-n{color:var(--dim);font-variant-numeric:tabular-nums}
+.dlcq-pt .dlc-flag:first-child{margin-left:0}
+.dlcq-pt{display:block;margin-top:2px}
+.dlcq-nb{margin:0;font-size:13px}
+.dlcq-subs .cd-stepper{margin:0}
+@media (max-width:640px){
+  .dlcq-stat-t{flex-basis:100%}
+}
 /* DLC-Q Ende */
 /* DLC-S Anfang (Sammeln + Übersicht: _dlcSecTeile, _dlcSecZugang … _dlcSecOffen, _dlcSecWege, Besitz Arbeiter sammeln) */
 /* DLC-S Ende */
@@ -13357,25 +13381,121 @@ function _dlcSecReittiere(){
   return {title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
     chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b};
 }
-/* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests) */
-function _dlcSecQuests(){
-  let b=_dlcList(DLC_QUEST_NOTES,'dlc-list--note');
-  b+='<div class="dlc-qgrid">'+DLC_QUESTS.map(q=>{
-    const steps=Array.isArray(q.steps)?q.steps.filter(Boolean):[];
-    const subs=Array.isArray(q.subs)?q.subs:[q.subs];
-    const subObj=_dlcObj(subs[0]),subList=String(subObj.v||'').split(/\s*;\s*/).filter(Boolean);
-    /* Schritte (steps) ersetzen die Unterquest-Liste (subs), sobald sie vorhanden sind */
-    const subHtml=steps.length?_dlcSteps(steps):!subList.length&&subObj.c!=='nb'?_dlcV({v:'nicht belegt',c:'nb'}):subObj.c==='nb'?_dlcV(subObj):'<ol class="dlc-ol'+(subObj.c&&subObj.c!=='ok'?' dlc-unb':'')+'">'+subList.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'+(subObj.c&&subObj.c!=='ok'?' '+_dlcFlag(subObj.c,subObj.q):'');
-    return '<article class="dlc-q cd-spot'+(q.c&&q.c!=='ok'?' dlc-row-'+q.c:'')+'" data-s="'+cdEsc([q.name,q.de,q.who,_dlcP(q.start),_dlcP(q.req),_dlcP(q.subs),steps.map(s=>[s.name,_dlcP(s.d),_dlcP(s.reward)].join(' ')).join(' '),_dlcP(q.rewards),_dlcP(q.note)].join(' ').toLowerCase())+'">'
-      +'<h4 class="dlc-q-t">'+_dlcName(q)+'</h4><p class="dlc-q-who">'+cdEsc(q.who)+(q.start?' · Start: '+_dlcV(q.start):'')+'</p>'
-      +(q.req?'<p class="dlc-q-rw"><span class="dlc-k">Voraussetzung</span> '+_dlcV(q.req)+'</p>':'')
-      +'<div class="dlc-q-sub"><span class="dlc-k">'+(steps.length?'Schritte':'Unterquests')+'</span>'+subHtml+'</div>'
-      +'<p class="dlc-q-rw"><span class="dlc-k">Belohnungen</span> '+_dlcV(q.rewards)+'</p>'+(q.note?'<p class="dlc-q-rw">'+_dlcV(q.note)+'</p>':'')+'</article>';
-  }).join('')+'</div>';
-  b+='<p class="dlc-p">Alle übrigen Fraktionsquests der Graumähnen: '+cdGoLink('quests','','Quests')+'</p>';
-  return {title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',
-    chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b};
+/* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests). Helfer _dlcQ_* (Achtung: _dlcQ ohne Unterstrich gehört den Waffen/Rüstungen). */
+const _dlcQ_KEY='cd_r2_dlc_quests';
+/* Gruppen der Filter-Pillen, abgeleitet nur per Stichwort aus dem ersten Teil von who (vor dem ersten Komma).
+   Szene je Gruppe: Charakter-Porträts bzw. der Graumähnen-Strang; Ozean-Reihen sind freie Nebenquests (q-side). */
+const _dlcQ_GROUPS=[
+  {v:'kliff',t:'Kliff',g:'K',tone:'red',scene:'char-kliff'},
+  {v:'damiane',t:'Damiane',g:'D',tone:'violet',scene:'char-damiane'},
+  {v:'oongka',t:'Oongka',g:'O',tone:'amber',scene:'char-oongka'},
+  {v:'fraktion',t:'Graumähnen & Fraktion',g:'⚑',tone:'gold',scene:'q-faction'},
+  {v:'ozean',t:'Großer Ozean',g:'⚓',tone:'ice',scene:'q-side'},
+  {v:'weitere',t:'Weitere',g:'❢',tone:'ice',scene:'q-faction'}];
+function _dlcQ_grp(q){
+  const w=String(q&&q.who||'').split(',')[0].trim().toLowerCase();
+  const k=/kliff/.test(w)?'kliff':/damiane/.test(w)?'damiane':/oongka/.test(w)?'oongka':/great ocean|ozean/.test(w)?'ozean':/graum|fraktion/.test(w)?'fraktion':'weitere';
+  return _dlcQ_GROUPS.find(g=>g.v===k);
 }
+function _dlcQ_steps(q){return Array.isArray(q.steps)?q.steps.filter(Boolean):[];}
+function _dlcQ_ids(q){return _dlcQ_steps(q).map((s,i)=>cdSlug(q.name)+'-'+i);}
+/* Kommas außerhalb von Klammern trennen (Belohnungsliste als Text) */
+function _dlcQ_split(s){
+  const out=[];let d=0,cur='';
+  String(s).split('').forEach(ch=>{if(ch==='(')d++;else if(ch===')')d=Math.max(0,d-1);if(ch===','&&!d){out.push(cur.trim());cur='';}else cur+=ch;});
+  if(cur.trim())out.push(cur.trim());return out.filter(Boolean);
+}
+/* Belohnung kurz: erste Belohnung wortgetreu (Abschneiden nur an einem Komma), sonst keine */
+function _dlcQ_rw(q){
+  const r=[].concat(q.rewards==null?[]:q.rewards).filter(x=>x!=null&&x!=='');
+  if(!r.length)return null;
+  const f=r[0],full=_dlcP(q.rewards);
+  if(f&&typeof f==='object'&&!Array.isArray(f))return _dlcP(f).length<=50?{h:_dlcChip(f,{g:'◆'})}:null;
+  const parts=_dlcQ_split(Array.isArray(f)?_dlcP(f):f),single=parts.length===1&&r.length===1;
+  if(!parts.length||parts[0].length>(single?50:40))return null;
+  return {g:'◆',t:parts[0],title:'Belohnung: '+full};
+}
+/* Schritt (steps[i]) → Abhak-Zeile: Titel = Schritt-Name, sub = Beschreibung + Belohnung, unbestätigt grau mit Vermerk */
+function _dlcQ_step(q,st,i){
+  const o=typeof st==='string'?{name:st}:st,bad=!!(o.c&&o.c!=='ok'),d=_dlcV(o.d),rw=_dlcV(o.reward);
+  const sub=(d?'<span class="dlcq-pt">'+d+'</span>':'')+(rw?'<span class="dlcq-pt"><b class="ctu-pk">Belohnung:</b> '+rw+'</span>':'')
+    +(bad?'<span class="dlcq-pt dlcq-fl">'+_dlcFlag(o.c,o.q)+'</span>':'');
+  return cdCheck({key:_dlcQ_KEY,id:cdSlug(q.name)+'-'+i,title:{h:'<span class="dlcq-n" aria-hidden="true">'+(i+1)+'.</span> '+cdEsc(o.name||'Schritt')},sub:sub?{h:sub}:null,
+    cls:'dlc-ck dlcq-st'+(bad?' dlc-row-'+o.c:'')});
+}
+function _dlcQ_fold(q,i,useScene){
+  const G=_dlcQ_grp(q),steps=_dlcQ_steps(q),ids=_dlcQ_ids(q),done=cdCheckGet(_dlcQ_KEY),dc=ids.filter(x=>done.has(x)).length;
+  const subs=Array.isArray(q.subs)?q.subs:[q.subs];
+  const subObj=_dlcObj(subs[0]),subList=String(subObj.v||'').split(/\s*;\s*/).filter(Boolean);
+  const subsNb=!subList.length&&subObj.c!=='nb'||subObj.c==='nb',bad=!!(q.c&&q.c!=='ok');
+  const chips=[];
+  if(steps.length)chips.push({v:steps.length,t:steps.length===1?'Schritt':'Schritte',c:'gold'});
+  else if(subsNb)chips.push({h:_dlcChip({v:'nicht belegt',c:'nb'},{l:'Unterquests'})});
+  else chips.push({v:subList.length,t:subList.length===1?'Unterquest':'Unterquests',c:'gold'});
+  const rw=_dlcQ_rw(q);if(rw)chips.push(rw);
+  if(bad)chips.push({h:_dlcFlag(q.c,q.q)});
+  const s=[q.name,q.de,q.who,G.t,_dlcP(q.start),_dlcP(q.req),_dlcP(q.subs),steps.map(x=>[x.name,_dlcP(x.d),_dlcP(x.reward)].join(' ')).join(' '),_dlcP(q.rewards),_dlcP(q.note)].join(' ');
+  const body=()=>{
+    let h=q.req?_dlcFacts([['Voraussetzung',q.req]]):'';
+    if(steps.length)h+=_dlcH('Schritte')+'<div class="cd-checks dlcq-steps">'+steps.map((st,k)=>_dlcQ_step(q,st,k)).join('')+'</div>';
+    else if(subsNb)h+=_dlcH('Unterquests')+'<p class="dlcq-nb">'+_dlcV(subObj.c==='nb'?subObj:{v:'nicht belegt',c:'nb'})+'</p>';
+    else{
+      const sb=subObj.c&&subObj.c!=='ok';
+      h+=_dlcH('Unterquests')+'<div class="dlcq-subs'+(sb?' dlc-unb':'')+'">'+cdStepper(subList.map(x=>({t:x})))+(sb?'<p class="dlcq-pt">'+_dlcFlag(subObj.c,subObj.q)+'</p>':'')+'</div>';
+    }
+    h+=_dlcFacts([['Belohnungen',q.rewards]]);
+    if(q.note)h+=cdNote({h:_dlcV(q.note)},{kind:'info',title:'Notiz'});
+    return h;
+  };
+  return cdFold({id:'dlc-q-'+cdSlug(q.name),title:{h:cdEsc(q.name)+(q.de?' <span class="dlc-de">'+cdEsc(q.de)+'</span>':'')},
+    lead:{h:cdEsc(q.who)+(q.start?' · Start: '+_dlcV(q.start):'')},icon:G.g,tone:G.tone,chips,
+    scene:useScene?{keys:[G.scene],tone:G.tone,glyph:G.g}:undefined,
+    prog:steps.length?{done:dc,total:ids.length,label:dc+' von '+ids.length+' Schritten abgehakt'}:null,
+    s,body,cls:'dlcq-fold'+(bad?' dlcq-unb':'')+(steps.length&&dc===ids.length?' dlcq-done':''),
+    attrs:{'data-dlcq-i':i,'data-dlcq-g':G.v,'data-filtered':'0'}});
+}
+function _dlcSecQuests(){
+  const Gs=DLC_QUESTS.map(_dlcQ_grp),useScene=_dlcAllImg(DLC_QUESTS,(q,i)=>cdSceneHas([_dlcQ_grp(q).scene]));
+  const total=DLC_QUESTS.reduce((n,q)=>n+_dlcQ_steps(q).length,0),done=cdCheckGet(_dlcQ_KEY);
+  const dn=DLC_QUESTS.reduce((n,q)=>n+_dlcQ_ids(q).filter(x=>done.has(x)).length,0);
+  let b=cdNote({h:'<ul class="dlcq-notes">'+DLC_QUEST_NOTES.map(x=>'<li>'+_dlcV(x)+'</li>').join('')+'</ul>'},{kind:'info',title:'Hinweise zu den DLC-Quests'});
+  b+='<div class="dlcq-stat cd-spot" id="dlc-q-stat"><span class="dlcq-stat-k">Dein DLC-Quest-Stand</span>'
+    +'<b class="dlcq-stat-t" id="dlc-q-stat-t">'+dn+' von '+total+' Schritten abgehakt</b><span class="dlcq-stat-p" id="dlc-q-stat-p">'+cdProg(dn,total,dn+' von '+total+' Schritten abgehakt')+'</span></div>';
+  const pills=[{v:'all',t:'Alle',n:DLC_QUESTS.length,on:true}].concat(_dlcQ_GROUPS.map(g=>({v:g.v,t:g.t,g:g.g,n:Gs.filter(x=>x===g).length})).filter(p=>p.n));
+  b+='<div class="dlcq-bar">'+cdPills(pills,{name:'dlc-q-who',label:'Reihe oder Charakter'})+'<span class="dlcq-cnt" id="dlc-q-cnt" aria-live="polite">'+DLC_QUESTS.length+' Questreihen</span></div>';
+  b+='<div class="cd-folds dlcq-folds">'+DLC_QUESTS.map((q,i)=>_dlcQ_fold(q,i,useScene)).join('')+'</div>';
+  b+='<p class="dlc-p">Alle übrigen Fraktionsquests der Graumähnen: '+cdGoLink('quests','','Quests')+'</p>';
+  return {title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',flat:true,
+    chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b,after:_dlcQ_refresh};
+}
+/* Fortschritt live: Faltkarten-Köpfe und Gesamtstand aus dem Speicher (auch für noch nicht geöffnete Karten) */
+function _dlcQ_refresh(){
+  const root=document.getElementById('dlc-b-quests');if(!root||typeof DLC_QUESTS==='undefined')return;
+  const done=cdCheckGet(_dlcQ_KEY);let D=0,T=0;
+  root.querySelectorAll('.dlcq-fold[data-dlcq-i]').forEach(f=>{
+    const ids=_dlcQ_ids(DLC_QUESTS[+f.dataset.dlcqI]);if(!ids.length)return;
+    const d=ids.filter(x=>done.has(x)).length;D+=d;T+=ids.length;
+    const p=f.querySelector(':scope>summary .cd-fold-aside .cd-prog');
+    if(p)p.outerHTML=cdProg(d,ids.length,d+' von '+ids.length+' Schritten abgehakt');
+    f.classList.toggle('dlcq-done',d===ids.length);
+  });
+  const t=document.getElementById('dlc-q-stat-t'),p=document.getElementById('dlc-q-stat-p');
+  if(t)t.textContent=D+' von '+T+' Schritten abgehakt';
+  if(p)p.innerHTML=cdProg(D,T,D+' von '+T+' Schritten abgehakt');
+}
+/* Filter über Klassen (hide + data-filtered), danach Suche erneut anwenden */
+function _dlcQ_filter(v){
+  const root=document.getElementById('dlc-b-quests');if(!root)return;
+  let n=0,tot=0;
+  root.querySelectorAll('.dlcq-fold').forEach(f=>{
+    tot++;const ok=!v||v==='all'||f.dataset.dlcqG===v;
+    f.dataset.filtered=ok?'0':'1';f.classList.toggle('hide',!ok);if(ok)n++;
+  });
+  const c=document.getElementById('dlc-q-cnt');if(c)c.textContent=n===tot?tot+' Questreihen':n+' von '+tot+' Questreihen';
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(root);
+}
+document.addEventListener('cd-pills',e=>{const d=e.detail;if(d&&d.name==='dlc-q-who')_dlcQ_filter(d.values[0]||'all');});
+document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===_dlcQ_KEY)_dlcQ_refresh();});
 /* ===== DLC-K Kampf (01.11.2026, Lauf dlc-design): Bosskarten wie auf der Bossseite, Garten der Prüfungen als abhakbare Karten =====
    #dlc-boss-grid erbt das Bosskarten-CSS der Bossseite. Besiegt-Speicher: Bosse mit w (Name in BOSSES) nutzen cd_bosses
    (Liste von Namen, geteilt mit der Bossseite, geschrieben über toggleBossDone), alle übrigen cd_r2_dlc_bosse (Liste der
