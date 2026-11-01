@@ -7228,6 +7228,71 @@ select.dr-sel-hidden{display:none!important}
 /* DR-F Ende */
 /* ---- Zielseiten-Anker: CSS NUR im eigenen Block (Besitz siehe runs/2026-11-01-design-rest/BRIEFING.md) ---- */
 /* DR-A1 Anfang (Bosse) */
+/* Fortschrittsleiste: die vier Kacheln (ss-*) als schlanke Leiste. Nur #sec-bosses; .stats-strip gilt auch im Export und auf anderen Seiten. */
+#sec-bosses .stats-strip.dr-a1-prog{display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr));align-items:stretch;margin:0 0 12px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:none;overflow:hidden}
+#sec-bosses .dr-a1-plbl{align-self:center;padding:0 16px;font-family:var(--f-mono);font-size:11px;font-weight:700;line-height:1.25;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);max-width:9em}
+#sec-bosses .dr-a1-prog .stat-block{min-width:0;padding:9px 14px 10px;border-left:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"l l" "v s" "b b";column-gap:8px;align-items:baseline;transition:background .18s}
+#sec-bosses .dr-a1-prog .stat-block+.stat-block{border-left:1px solid var(--line)}
+#sec-bosses .dr-a1-prog .stat-block:has(.dr-a1-golnk):hover{background:color-mix(in srgb,var(--gold) 7%,transparent)}
+#sec-bosses .dr-a1-prog .stat-label{grid-area:l;margin:0 0 2px;font-size:11px;letter-spacing:.07em;color:var(--dim)}
+#sec-bosses .dr-a1-prog .stat-val{grid-area:v;font-size:20px;line-height:1.1;color:var(--gold);font-variant-numeric:tabular-nums}
+#sec-bosses .dr-a1-prog .stat-sub{grid-area:s;margin:0;font-size:12px;color:var(--dim)}
+#sec-bosses .dr-a1-prog .stat-mini-bar{grid-area:b;height:4px;margin-top:6px;border:0;border-radius:99px;background:color-mix(in srgb,var(--line) 80%,transparent)}
+#sec-bosses .dr-a1-prog .stat-mini-fill{height:4px;border-radius:99px;background:var(--red)}
+/* Link auf die Checkliste: ganze Kachel ist Tippfläche (gestreckter Link), Optik bleibt Beschriftung */
+#sec-bosses .dr-a1-golnk{color:inherit;text-decoration:none}
+#sec-bosses .dr-a1-golnk::after{content:"";position:absolute;inset:0}
+#sec-bosses .dr-a1-golnk:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+#sec-bosses .dr-a1-golnk .cd-i{width:12px;height:12px;opacity:.55;transition:transform .15s,opacity .15s}
+#sec-bosses .stat-block:hover .dr-a1-golnk .cd-i{opacity:1;transform:translateX(2px)}
+/* Heatmap: gleiche Panel-Optik wie Kopf und Leiste, Beschriftung ab 11 px, per Tastatur bedienbar */
+#sec-bosses .region-heatmap{flex-wrap:wrap;padding:10px 14px 8px;margin:0 0 12px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:none}
+#sec-bosses .rh-cap{flex:0 0 100%;font-family:var(--f-mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+#sec-bosses .rh-bar{cursor:pointer;border-radius:8px;padding-top:6px}
+#sec-bosses .rh-bar:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+#sec-bosses .rh-bar-fill{border-radius:6px 6px 0 0}
+#sec-bosses .rh-bar-val{font-size:11px}
+#sec-bosses .rh-bar-lbl{font-size:11px;color:var(--dim)}
+/* Filterzeilen als Pillen mit Anzahl (drSelPillsMount); Titel in fester Spalte, damit die Reihen fluchten */
+#sec-bosses .dr-a1-filters{margin:0 0 4px;gap:2px 8px}
+#sec-bosses .dr-pillrow{margin:0}
+#sec-bosses .dr-pillrow .cd-pills{margin:0}
+#sec-bosses .dr-pl{font-size:11px;color:var(--dim)}
+/* Reihentitel oben an der ersten Pillenzeile (auch wenn eine Reihe umbricht); bei 1366 passen die sieben Regionspillen durch engeres Padding in eine Zeile */
+@media (min-width:641px){
+  #sec-bosses .dr-pillrow{align-items:flex-start}
+  #sec-bosses .dr-pl{display:inline-flex;align-items:center;width:108px;min-height:40px}
+  #sec-bosses .dr-pillrow .cd-pill{padding-inline:10px}
+}
+@media (min-width:641px) and (pointer:coarse){#sec-bosses .dr-pl{min-height:44px}}
+#sec-bosses [data-cd-pills="dr-sel-bf-reg"] .cd-pill-g{font-size:11px}
+/* Punktfarbe je Region setzt _drA1Pills aus REGION_COLORS (--rc am Glyphen-Span), keine Hex-Werte im CSS */
+#sec-bosses [data-cd-pills="dr-sel-bf-reg"] .cd-pill-g{color:var(--rc,currentColor)}
+#sec-bosses [data-cd-pills="dr-sel-bf-reg"] .cd-pill[aria-pressed="true"] .cd-pill-g{color:currentColor}
+/* Werkzeugleiste: Spoiler-Select + vier Knöpfe, alle 40 px hoch, Knöpfe in Pillenoptik */
+#sec-bosses .dr-a1-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 16px;padding-top:12px;border-top:1px solid var(--line)}
+#sec-bosses .dr-a1-tools select.fs{min-height:40px;max-width:100%}
+#sec-bosses .dr-a1-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:6px 16px;border:1px solid var(--line-strong,var(--line));border-radius:999px;background:var(--panel-2);color:var(--text);font:600 12.5px/1.2 var(--f-body);letter-spacing:0;text-transform:none;white-space:nowrap}
+#sec-bosses .dr-a1-btn:hover,#sec-bosses .dr-a1-btn:focus-visible{background:color-mix(in srgb,var(--red) 14%,var(--panel-2));border-color:var(--red);color:var(--ink-hi,var(--text))}
+#sec-bosses .dr-a1-btn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#sec-bosses .dr-a1-btn[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+/* Bosskarten: Mini-Schrift (9 bis 10,5 px bei 1366) auf 11 px, nur mit #sec-bosses #boss-grid (die :is()-Regeln gelten auch für DLC-Kampf und bleiben unberührt). Mobil greifen die Variablen ohnehin mit 11,5 bis 12 px. */
+#sec-bosses #boss-grid :is(.record-tag,.pm-trigger,.copy-btn,.boss-notes-btn){font-size:max(11px,var(--fs-10))}
+#sec-bosses #boss-grid :is(.boss-sum .boss-sum-chip,.record-card.boss-compact .boss-actions .defeat-btn,.boss-more>summary,.boss-more-lbl,.boss-recur,.boss-recur>span){font-size:max(11px,var(--fs-10-5))}
+#sec-bosses #boss-grid :is(.combo-lbl,.boss-lore-hd,.boss-lore-hd>span,.boss-lore-faction){font-size:max(11px,var(--fs-9-5))}
+#sec-bosses #boss-grid :is(.datagrid dt,.boss-lore-ext,.boss-unconf){font-size:max(11px,var(--fs-9))}
+#sec-bosses #boss-grid .bo-recs>span:first-child{font-size:max(11px,var(--fs-10))!important}
+@media (max-width:600px){
+  #sec-bosses .stats-strip.dr-a1-prog{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #sec-bosses .dr-a1-plbl{grid-column:1/-1;max-width:none;padding:9px 14px 2px}
+  #sec-bosses .dr-a1-prog .stat-block,#sec-bosses .dr-a1-prog .stat-block+.stat-block{border-left:0;border-top:1px solid var(--line)}
+  #sec-bosses .dr-a1-prog .stat-block:nth-child(odd){border-left:1px solid var(--line)}
+  #sec-bosses .region-heatmap{padding:10px 8px 8px}
+  #sec-bosses .dr-a1-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  #sec-bosses .dr-a1-tools select.fs{grid-column:1/-1;width:100%}
+  #sec-bosses .dr-a1-btn{padding-inline:10px}
+}
+@media print{#sec-bosses .dr-head,#sec-bosses .dr-a1-prog,#sec-bosses .dr-a1-tools,#sec-bosses .region-heatmap{display:none}}
 /* DR-A1 Ende */
 /* ---- */
 /* DR-A2 Anfang (Gegner + Accessoires) */
@@ -7898,17 +7963,20 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
   </section>
   <section class="sec active" id="sec-bosses">
     <h2 class="sec-t"><span class="sec-sym">☠</span> Bosse</h2>
-    <div class="stats-strip">
+    <div class="stats-strip dr-a1-prog" role="group" aria-label="Dein Fortschritt">
+      <span class="dr-a1-plbl">Dein Fortschritt</span>
       <div class="stat-block"><div class="stat-label">Bosse Besiegt</div><div class="stat-val" id="ss-bosses">0</div><div class="stat-sub" id="ss-bosses-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-bosses-bar" style="width:0%"></div></div></div>
-      <div class="stat-block"><div class="stat-label">True Ending</div><div class="stat-val" id="ss-te">0</div><div class="stat-sub" id="ss-te-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-te-bar" style="width:0%"></div></div></div>
-      <div class="stat-block"><div class="stat-label">Greymane</div><div class="stat-val" id="ss-gm">0</div><div class="stat-sub" id="ss-gm-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-gm-bar" style="width:0%"></div></div></div>
-      <div class="stat-block"><div class="stat-label">Sanctums</div><div class="stat-val" id="ss-sanc">0</div><div class="stat-sub" id="ss-sanc-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-sanc-bar" style="width:0%"></div></div></div>
+      <div class="stat-block"><div class="stat-label"><a class="cd-go dr-a1-golnk" href="#sec=checklists" data-go="checklists" title="Zur Checkliste">True Ending<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a></div><div class="stat-val" id="ss-te">0</div><div class="stat-sub" id="ss-te-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-te-bar" style="width:0%"></div></div></div>
+      <div class="stat-block"><div class="stat-label"><a class="cd-go dr-a1-golnk" href="#sec=checklists" data-go="checklists" title="Zur Checkliste">Greymane<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a></div><div class="stat-val" id="ss-gm">0</div><div class="stat-sub" id="ss-gm-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-gm-bar" style="width:0%"></div></div></div>
+      <div class="stat-block"><div class="stat-label"><a class="cd-go dr-a1-golnk" href="#sec=checklists" data-go="checklists" title="Zur Checkliste">Sanctums<svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-go"/></svg></a></div><div class="stat-val" id="ss-sanc">0</div><div class="stat-sub" id="ss-sanc-sub">von —</div><div class="stat-mini-bar"><div class="stat-mini-fill" id="ss-sanc-bar" style="width:0%"></div></div></div>
     </div>
     <div class="region-heatmap" id="region-heatmap" aria-label="Boss-Verteilung pro Region"></div>
-    <div class="fbar">
+    <div class="fbar dr-a1-filters">
       <select class="fs" id="bf-reg" aria-label="Bosse nach Region filtern" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option>The Abyss</option></select>
       <select class="fs" id="bf-type" aria-label="Bosse nach Quest-Typ filtern" onchange="renderBosses()"><option value="">Alle Quest-Typen</option><option value="Story">Story</option><option value="Faction">Faction</option><option value="Side">Side</option><option value="Sanctum">Sanctum</option><option value="World">World-Boss</option><option value="Optional">Optional / Sonstige</option></select>
       <select class="fs" id="bf-pd" aria-label="Bosse nach Parry oder Dodge filtern" onchange="renderBosses()"><option value="">Parry &amp; Dodge</option><option value="Parry">Parry empfohlen</option><option value="Dodge">Dodge empfohlen</option></select>
+    </div>
+    <div class="dr-a1-tools" role="toolbar" aria-label="Werkzeuge">
       <select class="fs" id="bf-spoiler" onchange="setSpoilerChapter(this.value)" title="Spoiler-Horizont — blendet Bosse & Kapitel jenseits deines Fortschritts aus" aria-label="Spoiler-Horizont nach Kapitel">
         <option value="0">🔓 Spoiler: alles zeigen</option>
         <option value="1">🔒 Ich bin in Kap. 1</option>
@@ -7924,10 +7992,10 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
         <option value="11">🔒 Ich bin in Kap. 11</option>
         <option value="12">🔒 Ich bin in Kap. 12</option>
       </select>
-      <button class="rb-trigger" onclick="randomBoss()" title="Zufälligen Boss anzeigen (R)" aria-label="Random Boss">🎲 Random Boss</button>
-      <button class="cmp-trigger" onclick="openCompare()" title="Zwei Bosse vergleichen" aria-label="Bosse vergleichen">⚔️ Vergleichen</button>
-      <button class="cmp-trigger" onclick="openCheatSheet()" title="Druckbares Boss-Cheat-Sheet (folgt den aktiven Filtern)" aria-label="Cheat-Sheet">📋 Cheat-Sheet</button>
-      <button class="cmp-trigger" id="boss-more-all" onclick="toggleAllBossDetails()" aria-pressed="false" title="Alle Bosskarten auf- oder zuklappen">▾ Alle Details</button>
+      <button class="rb-trigger dr-a1-btn" onclick="randomBoss()" title="Zufälligen Boss anzeigen (R)" aria-label="Random Boss">🎲 Random Boss</button>
+      <button class="cmp-trigger dr-a1-btn" onclick="openCompare()" title="Zwei Bosse vergleichen" aria-label="Bosse vergleichen">⚔️ Vergleichen</button>
+      <button class="cmp-trigger dr-a1-btn" onclick="openCheatSheet()" title="Druckbares Boss-Cheat-Sheet (folgt den aktiven Filtern)" aria-label="Cheat-Sheet">📋 Cheat-Sheet</button>
+      <button class="cmp-trigger dr-a1-btn" id="boss-more-all" onclick="toggleAllBossDetails()" aria-pressed="false" title="Alle Bosskarten auf- oder zuklappen">▾ Alle Details</button>
     </div>
     <div class="grid" id="boss-grid"></div>
   </section>
@@ -11121,18 +11189,19 @@ function renderRegionHeatmap(){
     if(r){counts[r]++;if(done.includes(b.name))doneCounts[r]++;}
   });
   const max=Math.max(...Object.values(counts),1);
-  el.innerHTML=REGIONS.map(r=>{
+  el.innerHTML='<div class="rh-cap">Bosse pro Region · Klick filtert die Liste</div>'+REGIONS.map(r=>{
     const cnt=counts[r];
     const dn=doneCounts[r];
     const h=Math.round(cnt/max*32)+6;
     const dim=filterReg&&filterReg!==r?'dim':'';
-    return `<div class="rh-bar" data-tip="${dn} von ${cnt} besiegt" data-tip-title="${r}" onclick="(function(){const s=document.getElementById('bf-reg');s.value='${r}';renderBosses();renderRegionHeatmap();if(window.cdMotion)cdMotion.scrollTo(0);else window.scrollTo({top:0,behavior:'smooth'});})()">
+    return `<div class="rh-bar" data-reg="${r}" role="button" tabindex="0" aria-label="${r}: ${cnt} Bosse, ${dn} besiegt. Klick filtert die Liste" data-tip="${dn} von ${cnt} besiegt" data-tip-title="${r}" onclick="_drA1PickRegion('${r}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();_drA1PickRegion('${r}')}">
       <div class="rh-bar-fill ${dim}" style="height:${h}px;background:${REGION_COLORS[r]||'inherit'}">
         <div class="rh-bar-val">${cnt}</div>
       </div>
       <div class="rh-bar-lbl">${r}</div>
     </div>`;
   }).join('');
+  _drA1Head();
 }
 
 // ===== BOSS COMPARE =====
@@ -11623,6 +11692,7 @@ function persistBossNote(name,el,btn){
   saveBossNote(name,el.value);
   if(btn)btn.classList.toggle('has-note',!!el.value.trim());
   if(typeof _syncBossNoteChip==='function')_syncBossNoteChip(el.closest('.card'),!!el.value.trim());
+  if(typeof _drA1Head==='function')_drA1Head();
   _afterNoteAction();
 }
 
@@ -13147,6 +13217,67 @@ function setSpoilerChapter(v){
 }
 function revealSpoiler(btn){const c=btn.closest('.card,.ch-card,.chap');if(c)c.classList.remove('spoiler-locked');}
 
+/* ===== DR-A1 (design-rest): Kopf, Filter-Pillen, Heatmap-Anbindung der Bossseite ===== */
+// Kopf der Seite: beim ersten Aufruf mounten, danach nur die Kennzahlen (Besiegt, mit Notiz) in den vorhandenen Kacheln nachziehen.
+// Zahlen wie refreshSectionStats (besiegt = Länge der Liste cd_bosses, Notizen = Schlüssel in cd_boss_notes).
+function _drA1Head(){
+  if(typeof drMount!=='function'||typeof drHead!=='function'||typeof BOSSES==='undefined')return;
+  const n=BOSSES.length,done=loadBossDone().length,notes=Object.keys(loadBossNotes()).length;
+  const host=document.getElementById('dr-head-bosses'),dd=host?host.querySelectorAll('.cd-hero-stat dd'):[];
+  if(dd.length===4){
+    const v=[String(n),done+'/'+n,dd[2].textContent,String(notes)];
+    [1,3].forEach(i=>{if(dd[i].textContent!==v[i])dd[i].textContent=v[i];});
+    return;
+  }
+  const regs=new Set(BOSSES.map(b=>normReg(b.region)||b.region)).size;
+  drMount('bosses',drHead({kicker:'Kampf',title:'Bosse',glyph:'☠',tone:'red',scene:['cl-bosses'],
+    sub:'Fundort, Schwächen, Taktik und Beute aller Bosse.',
+    stats:[[n,'Bosse'],[done+'/'+n,'Besiegt'],[regs,'Regionen'],[notes,'mit Notiz']],
+    links:[['bestiary','Gegner'],['dlc-kampf','DLC · Kampf'],['checklists','Checklisten'],['builds','Builds']]}));
+}
+// Zahlen je Filterwert über alle Bosse (Pille „Hernand“ zeigt dieselbe Zahl wie die Karten, solange die übrigen Filter auf „Alle“ stehen).
+let _drA1C=null;
+function _drA1Counts(){
+  if(_drA1C)return _drA1C;
+  const c={reg:{},type:{},pd:{}};
+  BOSSES.forEach(b=>{
+    const r=normReg(b.region),t=bossType(b);
+    c.reg[r]=(c.reg[r]||0)+1;c.type[t]=(c.type[t]||0)+1;
+    bossPD(b).forEach(p=>{c.pd[p]=(c.pd[p]||0)+1;});
+  });
+  return (_drA1C=c);
+}
+// Pillen einmal bauen (ein Neubau bei jedem Filter würde den Tastaturfokus verlieren); danach nur Zustand angleichen.
+function _drA1Pills(){
+  if(typeof drSelPillsMount!=='function'||typeof BOSSES==='undefined')return;
+  const c=_drA1Counts(),n=BOSSES.length,all={'':'Alle'};
+  const mk=(id,title,key,extra)=>{
+    if(document.querySelector('.dr-pillrow[data-dr-for="'+id+'"]'))return;
+    drSelPillsMount(id,Object.assign({title:title,text:all,count:v=>v===''?n:(c[key][v]||0)},extra||{}));
+  };
+  mk('bf-reg','Region','reg',{g:{'Hernand':'●','Pailune':'●','Demeniss':'●','Delesyia':'●','Crimson Desert':'●','The Abyss':'●'}});
+  // Punktfarbe aus REGION_COLORS (gleiche Quelle wie die Heatmap): erste Farbe des Verlaufs
+  document.querySelectorAll('[data-cd-pills="dr-sel-bf-reg"] .cd-pill').forEach(b=>{
+    const m=/#[0-9a-f]{3,8}/i.exec(REGION_COLORS[b.dataset.v]||''),g=b.querySelector('.cd-pill-g');
+    if(m&&g)g.style.setProperty('--rc',m[0]);
+  });
+  mk('bf-type','Quest-Typ','type');
+  mk('bf-pd','Parry & Dodge','pd');
+}
+// Nach direktem Setzen der Selects (applyBossFilter, Heatmap-Klick): Pillen und Heatmap-Hervorhebung angleichen.
+function _drA1Sync(){
+  ['bf-reg','bf-type','bf-pd'].forEach(id=>{if(typeof drSelSync==='function')drSelSync(id);});
+  const reg=(document.getElementById('bf-reg')||{}).value||'';
+  document.querySelectorAll('#region-heatmap .rh-bar').forEach(b=>{
+    const f=b.querySelector('.rh-bar-fill');if(f)f.classList.toggle('dim',!!reg&&b.dataset.reg!==reg);
+  });
+}
+// Klick auf einen Heatmap-Balken: Region setzen und filtern wie bisher (nach oben scrollen bleibt).
+function _drA1PickRegion(r){
+  const s=document.getElementById('bf-reg');if(!s)return;
+  s.value=r;renderBosses();renderRegionHeatmap();
+  if(window.cdMotion)cdMotion.scrollTo(0);else window.scrollTo({top:0,behavior:'smooth'});
+}
 function renderBosses(){
   const reg=document.getElementById('bf-reg').value;
   applyRegionAtmosphere(reg);
@@ -13236,6 +13367,7 @@ function renderBosses(){
     </div>`;
   }).join('');
   _syncBossMoreAllBtn();
+  _drA1Head();_drA1Pills();_drA1Sync();
   // Cache-Hit-Fallback: onload feuert normalerweise auch bei gecachten Bildern,
   // aber falls ein img durch fruehere Navigation bereits complete ist bevor der
   // Handler haengt (z.B. sehr schnelles Layout), hier zusaetzlich direkt pruefen.
