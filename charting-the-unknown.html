@@ -7060,6 +7060,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dlc-kg .cd-check{margin-top:auto}
 @media(max-width:600px){
   #dlc-boss-grid .record-card.boss-compact .record-rail .record-img.dlc-k-img{aspect-ratio:auto;height:92px;min-height:0;max-height:none}
+  #dlc-boss-grid .record-card.boss-compact .record-rail .record-img.dlc-k-img.dlc-k-hasimg{aspect-ratio:2/1;height:auto}
   #dlc-boss-grid .dlc-k-gl b{font-size:56px}
   #dlc-boss-grid .record-card.boss-compact .boss-actions .defeat-btn,#dlc-boss-grid .boss-more>summary{min-height:40px}
   .cd-go.dlc-kg-b{min-height:40px}
@@ -14200,12 +14201,14 @@ function _dlcKCard(x,isDone){
   const rows=[['Ort und Kontext',_dlcV(x.where)],['Beute',_dlcV(x.drop)],['Hinweis',_dlcV(x.note)]].filter(r=>r[1])
     .map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
   const s=[n,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),x.w||'',qs].join(' ').toLowerCase();
+  const img=(typeof DLC_BOSS_IMGS!=='undefined'&&DLC_BOSS_IMGS[n])||(x.w&&BOSS_IMGS[x.w])||'';
   const vis=[n,dz.p,_dlcPlain(chips)].join(' ').toLowerCase(),hid=[_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),qs].join(' ').toLowerCase();
   return '<div class="card cd-spot record-card boss-compact dlc-k-card'+(isDone?' boss-done':'')+(x.c&&x.c!=='ok'?' dlc-k-row-'+(x.c==='nb'?'nb':'unb'):'')+'" data-dlc-k="'+cdEsc(n)+'" data-ocean="'+(_dlcKOcean(x)?'1':'0')
     +'" data-filtered="0" data-s="'+cdEsc(s)+'" data-item-id="'+cdEsc(n)+'" data-item-visible="'+cdEsc(vis)+'" data-item-hidden="'+cdEsc(hid)+'">'
-    +'<div class="record-rail"><div class="record-img dlc-k-img"><span class="record-tag">DLC</span><span class="crosshair" aria-hidden="true"></span>'
+    +'<div class="record-rail"><div class="record-img dlc-k-img'+(img?' dlc-k-hasimg':'')+'"><span class="record-tag">DLC</span><span class="crosshair" aria-hidden="true"></span>'
     +'<div class="boss-done-badge">BESIEGT</div>'+(x.w?favBtn('boss',x.w):'')
-    +'<div class="dlc-k-gl" aria-hidden="true"><b>'+cdEsc(n.charAt(0).toUpperCase())+'</b></div></div></div>'
+    +(img?'<div class="boss-img-wrap"><img class="boss-img" src="'+cdEsc(img)+'" alt="'+cdEsc(n)+'" width="512" height="512" loading="lazy" decoding="async"></div>'
+      :'<div class="dlc-k-gl" aria-hidden="true"><b>'+cdEsc(n.charAt(0).toUpperCase())+'</b></div>')+'</div></div>'
     +'<div class="record-body"><div class="ct">'+cdEsc(n)+(x.c&&x.c!=='ok'?' '+_dlcFlag(x.c,x.q):'')+'</div>'
     +(dz.h?'<div class="record-desig">'+dz.h+'</div>':'')
     +'<div class="boss-sum">'+chips+'</div>'

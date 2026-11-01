@@ -572,3 +572,17 @@ const DLC_IMGS={
   "Venomous Fangs":"cd_assets/dlc/item-1006116.webp",
   "Rushing Wind":"cd_assets/dlc/item-1006119.webp"
 };
+
+// 01.11.2026: Bilder der DLC-Bosse aus den Spieldateien (Wissens- und Questbilder, 512 px). Matthias und Goyen nehmen
+// das Bild aus BOSS_IMGS (Feld w). Ohne Bild im Spiel: Dancing Catfish Crusher, Geago, Scrap Metal Queen, Seeschlangen.
+// Harkan: Datei boss_landspider_scrapqueen_goblin (Pilot der Scrap Metal Queen), Zuordnung über den Dateinamen.
+const DLC_BOSS_IMGS={
+  "Knight of Void":"cd_assets/dlc/boss-knight-of-void.webp",
+  "Satyros":"cd_assets/dlc/boss-satyros.webp",
+  "Leviakan":"cd_assets/dlc/boss-leviakan.webp",
+  "Reggis the Isleguard":"cd_assets/dlc/boss-reggis.webp",
+  "Rohan Cooper":"cd_assets/dlc/boss-rohan-cooper.webp",
+  "T'rukan":"cd_assets/dlc/boss-trukan.webp",
+  "Kharzek, Archon of Antumbra":"cd_assets/dlc/boss-kharzek.webp",
+  "Iron Tyrant Harkan":"cd_assets/dlc/boss-harkan.webp"
+};
