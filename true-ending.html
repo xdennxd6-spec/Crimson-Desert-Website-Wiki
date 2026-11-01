@@ -7183,6 +7183,52 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .dlcs-bar .cd-pills{margin-inline:0;padding-inline:0}
 }
 /* DLC-S Ende */
+/* DR-F Anfang (Fundament design-rest 01.11.2026: Seitenkopf, Wegweiser, Info-Box, Filter-Pillen der Zielseiten; Besitz Admin) */
+.dr-head{margin:0 0 14px}
+.dr-head>.cd-hero{margin:0}
+.sec:has(>.dr-head)>.sec-stats-auto{display:none}
+.dr-jump{display:flex;flex-wrap:wrap;gap:6px 8px;margin:14px 0 12px}
+.dr-jump .cd-go{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2);font-size:12.5px;color:var(--text);text-decoration:none}
+.dr-jump .cd-go:hover,.dr-jump .cd-go:focus-visible{border-color:var(--cd-acc,var(--red));color:var(--ink-hi)}
+.dr-jump .cd-go .cd-i{width:14px;height:14px}
+.dr-info-w{margin:0 0 14px}
+.dr-info-b{font-size:13px;line-height:1.65;color:var(--text);max-width:84ch}
+.dr-info-b p{margin:0 0 8px}
+.dr-info-b p:last-child{margin-bottom:0}
+.dr-pillrow{display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 100%;margin:0 0 4px}
+.dr-pillrow .cd-pills{flex:1 1 auto;min-width:0}
+.dr-pl{flex:none;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+select.dr-sel-hidden{display:none!important}
+@media (max-width:640px){
+  .dr-pillrow{flex-wrap:wrap;gap:4px}
+  .dr-pl{flex-basis:100%}
+}
+/* DR-F Ende */
+/* ---- Zielseiten-Anker: CSS NUR im eigenen Block (Besitz siehe runs/2026-11-01-design-rest/BRIEFING.md) ---- */
+/* DR-A1 Anfang (Bosse) */
+/* DR-A1 Ende */
+/* ---- */
+/* DR-A2 Anfang (Gegner + Accessoires) */
+/* DR-A2 Ende */
+/* ---- */
+/* DR-A3 Anfang (Waffen) */
+/* DR-A3 Ende */
+/* ---- */
+/* DR-A4 Anfang (Rüstungen + Rüstungssets) */
+/* DR-A4 Ende */
+/* ---- */
+/* DR-B1 Anfang (Builds) */
+/* DR-B1 Ende */
+/* ---- */
+/* DR-B2 Anfang (Hexen + Kochen & Elixiere) */
+/* DR-B2 Ende */
+/* ---- */
+/* DR-B3 Anfang (Reittiere + Haustiere) */
+/* DR-B3 Ende */
+/* ---- */
+/* DR-B4 Anfang (Geheimnisse & Lore) */
+/* DR-B4 Ende */
+/* ---- Ende Zielseiten-Anker ---- */
 /* Spiel-Originalbilder aus den Game-Files (01.11.2026, KI-Mix 2x): weiche Ecken, wirkt nur bei deckenden Bildern */
 img[src*="cd_assets/weapons/"],img[src*="cd_assets/armor/"],img[src*="cd_assets/items/"],img[src*="cd_assets/cores/"],
 img[src*="cd_assets/dyes/"],img[src*="cd_assets/npcs/"],img[src*="cd_assets/pets/"],img[src*="cd_assets/bosses/"],
@@ -13181,6 +13227,80 @@ function _clearSearchPill(){
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
+
+// ===== DESIGN-REST Fundament (Nachtlauf design-rest 01.11.2026, Besitz Admin) =====
+/* Gemeinsame Bausteine der Zielseiten bosses, bestiary, witches, accessories, armor, armorsets, weapons, builds, mounts,
+   pets, secrets, food. Nutzen, nicht ändern (Wünsche in den Bericht). Vorbild: Köpfe der DLC-Ansichten (_dlcHead, _dlcJump).
+   drHead(o)  Seitenkopf = cdHero (Szene, Kennzahl-Kacheln) + Wegweiser-Leiste (cdGoLink-Pillen) + Zusatz-HTML.
+              o = {kicker, title, sub, scene:[Schlüssel spezifisch → allgemein], glyph, tone|region, stats:[[wert,'Label'],…] (max. 4,
+              nur echte Zählungen), links:[[sec,'Label'(,q)],…], after:html, cls}
+   drMount(sec,html)  setzt html in <div class="dr-head" id="dr-head-<sec>"> direkt nach h2.sec-t der Seite; beim erneuten
+              Rendern wird der Inhalt ersetzt (idempotent). Die automatische Kennzahl-Leiste .sec-stats-auto blendet CSS auf
+              Seiten mit .dr-head aus (die Kacheln im Kopf ersetzen sie).
+   drInfo(o)  einklappbare Info-Box (cdFold) für lange Erklärtexte, Text wortgleich als rohes HTML:
+              o = {title, lead (wortgleicher Auszug), h, icon, tone, open, id}. Liefert die Box samt Hülle .cd-folds.dr-info-w.
+   drSelPills(selId,o) / drSelPillsMount(selId,o)  Filter-Pillen mit Anzahl aus einem vorhandenen <select>. Das Select bleibt
+              (versteckt) die Quelle der Wahrheit: Pillenklick setzt select.value und feuert 'change', die bestehende
+              Filterlogik (onchange/Listener) läuft unverändert. o = {count:v=>Zahl|null, label (Screenreader), title (sichtbar
+              klein davor), g:{wert:Glyphe}, skip:[werte], text:{wert:'Beschriftung'}, wrap}. Mount setzt die Pillen vor das
+              Select (Hülle .dr-pillrow, idempotent) und versteckt das Select; erneut aufrufen aktualisiert Zahlen und Zustand.
+              drSelSync(selId) gleicht den Pillenzustand an, wenn Code das Select direkt setzt. */
+function drHead(o){
+  o=o||{};
+  var links=[].concat(o.links||[]).filter(Boolean);
+  return cdHero({kicker:o.kicker,title:o.title,sub:o.sub,glyph:o.glyph,tone:o.tone,region:o.region,stats:o.stats,
+      scene:o.scene&&o.scene.length?{keys:o.scene}:null,cls:'dr-hero'+(o.cls?' '+o.cls:'')})
+    +(links.length?'<nav class="dr-jump" aria-label="Verwandte Seiten">'+links.map(function(l){return cdGoLink(l[0],l[2]||'',l[1],'dr-jl');}).join('')+'</nav>':'')
+    +(o.after||'');
+}
+function drMount(sec,html){
+  var s=document.getElementById('sec-'+sec);if(!s)return null;
+  var d=document.getElementById('dr-head-'+sec);
+  if(!d){
+    d=document.createElement('div');d.className='dr-head';d.id='dr-head-'+sec;
+    var t=s.querySelector(':scope>.sec-t');
+    if(t)t.insertAdjacentElement('afterend',d);else s.insertAdjacentElement('afterbegin',d);
+  }
+  d.innerHTML=html;
+  return d;
+}
+function drInfo(o){
+  o=o||{};
+  return '<div class="cd-folds dr-info-w">'+cdFold({title:o.title||'Gut zu wissen',lead:o.lead||'',icon:o.icon||'ⓘ',tone:o.tone||'gold',
+    open:!!o.open,id:o.id,cls:'dr-info',body:'<div class="dr-info-b">'+(o.h||'')+'</div>'})+'</div>';
+}
+function _drSelItems(sel,o){
+  var skip=new Set([].concat(o.skip||[]).map(String)),g=o.g||{},tx=o.text||{};
+  return [].slice.call(sel.options).filter(function(op){return !skip.has(op.value)&&!op.disabled;}).map(function(op){
+    var n=o.count?o.count(op.value):null;
+    return {v:op.value===''?'__all':op.value,t:tx[op.value]!=null?tx[op.value]:op.textContent.trim(),n:n==null?null:n,g:g[op.value],on:sel.value===op.value};
+  });
+}
+function drSelPills(selId,o){
+  o=o||{};var sel=document.getElementById(selId);if(!sel)return '';
+  return cdPills(_drSelItems(sel,o),{name:'dr-sel-'+selId,label:o.label||sel.getAttribute('aria-label')||'',wrap:!!o.wrap,cls:'dr-pills'});
+}
+function drSelPillsMount(selId,o){
+  o=o||{};var sel=document.getElementById(selId);if(!sel)return null;
+  var w=document.querySelector('.dr-pillrow[data-dr-for="'+selId+'"]');
+  if(!w){w=document.createElement('div');w.className='dr-pillrow';w.setAttribute('data-dr-for',selId);sel.insertAdjacentElement('beforebegin',w);}
+  w.innerHTML=(o.title?'<span class="dr-pl" aria-hidden="true">'+cdEsc(o.title)+'</span>':'')+drSelPills(selId,o);
+  sel.classList.add('dr-sel-hidden');sel.setAttribute('data-dr-pills','');
+  return w;
+}
+function drSelSync(selId){
+  var sel=document.getElementById(selId),g=document.querySelector('[data-cd-pills="dr-sel-'+selId+'"]');if(!sel||!g)return;
+  var v=sel.value===''?'__all':sel.value;
+  g.querySelectorAll('.cd-pill').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===v);});
+}
+document.addEventListener('cd-pills',function(e){
+  var n=e.detail&&e.detail.name;if(!n||n.indexOf('dr-sel-')!==0)return;
+  var sel=document.getElementById(n.slice(7));if(!sel)return;
+  var v=e.detail.value==='__all'?'':e.detail.value;
+  if(sel.value===v)return;
+  sel.value=v;sel.dispatchEvent(new Event('change',{bubbles:true}));
+});
+document.addEventListener('change',function(e){var t=e.target;if(t&&t.matches&&t.matches('select[data-dr-pills]'))drSelSync(t.id);});
 
 // ===== BOSSES =====
 function loadBossDone(){return lsJson('cd_bosses',[]);}
