@@ -226,6 +226,7 @@ const SOLL_SEITEN = [
   ["skills", "kampf", "Fähigkeiten", "Skills", "Fähigkeiten von Kliff, Damiane und Oongka"],
   ["builds", "kampf", "Builds", "Builds", "Build-Vorschläge und der Build-Optimizer"],
   ["disarm", "kampf", "Entwaffnen", "Disarm", "Welche Gegner du entwaffnen kannst und wie"],
+  ["dlc-kampf", "kampf", "Charting the Unknown", "DLC", "Bosse und Gegner aus dem DLC und der Garten der Prüfungen mit Belohnungen"],  // 01.11.2026: DLC als letzte Seite jeder Kategorie mit DLC-Inhalt
   ["weapons", "ausruestung", "Waffen", "Weapons", "Alle Waffen mit Werten, Fundort und Verfeinerung"],
   ["armor", "ausruestung", "Rüstungen", "Armor", "Alle Rüstungsteile mit Werten und Fundort"],
   ["armorsets", "ausruestung", "Rüstungssets", "Armor Sets", "Alle Rüstungssets mit Bild, Teilen, Werten und Fundort"],
@@ -234,6 +235,7 @@ const SOLL_SEITEN = [
   ["synthesis", "ausruestung", "Abyss-Synthese", "Synthesis", "Synthese-Mechanik und alle Synthese-Rezepte für Abyss-Ausrüstung"],
   ["witches", "ausruestung", "Hexen & Fusion", "Witches", "Alle Hexen, ihre Läden und Fusionsrezepte für Abyss-Ausrüstung"],
   ["dyes", "ausruestung", "Färbemittel", "Dyes", "Farben und wo du sie bekommst"],
+  ["dlc-ausruestung", "ausruestung", "Charting the Unknown", "DLC", "Alle neuen Waffen, Rüstungen, Accessoires, Abyss-Kerne und weitere Ausrüstung aus dem DLC"],
   ["quests", "quests", "Quests", "Faction, Main & Side Quests", "Fraktionsquests, Hauptquests, Nebenquests und True Ending"],  // 24.10.2026: Fraktionsquests zuerst (Suchvolumen)
   ["chapters", "quests", "Kapitel-Guide", "Chapters", "Die Hauptstory Kapitel für Kapitel"],
   ["checklists", "quests", "Checklisten", "", "Bosse, Graumähnen, Sanktum, Waffen und Verpassbares zum Abhaken"],
@@ -241,6 +243,7 @@ const SOLL_SEITEN = [
   ["puzzles", "quests", "Rätsel", "Puzzles", "Lösungen zu Rätseln und Strongboxes"],
   ["minigames", "quests", "Minispiele", "Minigames", "Armdrücken, Duelle, Flipper und alle anderen Minispiele"],
   ["achievements", "quests", "Trophäen & Errungenschaften", "Trophies / Achievements", "Alle Trophäen und Errungenschaften mit Tipps"],
+  ["dlc-quests", "quests", "Charting the Unknown", "DLC", "Alle DLC-Questreihen mit Schritten, Voraussetzungen und Belohnungen"],
   ["map", "welt", "Karte", "Map", "Interaktive Karte von Pywel"],
   ["locations", "welt", "Orte & Glocken", "Locations", "Wichtige Orte je Region und alle Glocken"],
   ["npcs", "welt", "Charaktere & NPCs", "People", "Verbündete, Händler und wichtige Figuren"],
@@ -248,17 +251,19 @@ const SOLL_SEITEN = [
   ["mounts", "welt", "Reittiere", "Mounts", "Pferde und besondere Reittiere mit Fundort"],
   ["pets", "welt", "Haustiere", "Pets", "Alle Haustiere und wie du sie bekommst"],
   ["secrets", "welt", "Geheimnisse & Lore", "Secrets & Lore", "Geheimes Ende, Erinnerungsfragmente, Easter Eggs und Lore"],
-  ["dlc", "welt", "Charting the Unknown", "DLC", "Der erste DLC: Schiffe, Inseln, Tauchen, Quests, Garten der Prüfungen und neue Ausrüstung"],  // 31.10.2026: erster DLC als eigene Seite
+  ["dlc", "welt", "Charting the Unknown", "DLC", "Der erste DLC: Schiffe, Inseln, Tauchen, Reittiere, Burgen und Ehe, dazu Wegweiser in alle DLC-Bereiche"],  // 31.10.2026: erster DLC als eigene Seite
   ["crafting", "sammeln", "Herstellen & Farmen", "Crafting", "Rezepte, Materialien und Farm-Routen"],
   ["food", "sammeln", "Kochen & Elixiere", "Cooking & Elixirs", "Gerichte und Elixiere mit Wirkung und Zutaten"],
   ["items", "sammeln", "Materialien & Items", "Materials", "Nachschlagewerk für Materialien und sonstige Gegenstände"],
   ["gatherables", "sammeln", "Sammelobjekte", "Gatherables", "Pflanzen, Erze und andere Rohstoffe zum Sammeln"],
   ["collectibles", "sammeln", "Sammelgegenstände", "Collectibles", "Sammelbare Gegenstände und Wissenseinträge"],
+  ["dlc-sammeln", "sammeln", "Charting the Unknown", "DLC", "Schiffsteile aus dem DLC mit Händler, Preis und Boni"],
 ];
 // 36 Seiten seit dem Abyss-Split (Briefing 3.2 B1): synthesis steht direkt nach cores;
 // 37 seit 10.10.2026: armorsets (Rüstungssets) als eigene Seite direkt nach armor
 // 38 seit 31.10.2026: dlc (Charting the Unknown) als letzte Seite der Kategorie welt
-const SOLL_ANZAHL = 38;
+// 42 seit 01.11.2026: dlc-kampf, dlc-ausruestung, dlc-quests, dlc-sammeln je als letzte Seite ihrer Kategorie
+const SOLL_ANZAHL = 42;
 // Abyss-Split: Synthese-Woerter gehoeren in aka von "synthesis", nicht mehr in aka von "cores"
 const SOLL_SYNTHESIS_AKA = ["Synthese", "Synthesis", "Fusion", "fusionieren", "Assimilation", "Abyssal Assimilation",
   "Synthese-Baum", "Witch Synthesis", "Hexen-Synthese", "Spezial-Synthese", "Special Synthesis", "Rezepte", "kombinieren"];

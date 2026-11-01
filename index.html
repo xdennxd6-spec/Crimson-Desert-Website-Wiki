@@ -6963,12 +6963,30 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
    Waffen-/Rüstungskarten. Unbestätigt/nicht belegt = var(--gdim) mit gestricheltem Vermerk. Mobil ab 390 px:
    Tabellen werden zu Zeilenkarten (td::before = Spaltenname), kein seitlicher Überlauf. */
 .tag.tdlc{background:color-mix(in srgb,var(--cd-fx-ice) 12%,transparent);color:var(--cd-fx-ice);border-color:color-mix(in srgb,var(--cd-fx-ice) 55%,transparent)}
-#sec-dlc .dlc-jump{display:flex;flex-wrap:wrap;gap:6px 8px;margin:14px 0 12px}
-#sec-dlc .dlc-jump .cd-go{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2);font-size:12.5px;color:var(--text);text-decoration:none}
-#sec-dlc .dlc-jump .cd-go:hover,#sec-dlc .dlc-jump .cd-go:focus-visible{border-color:var(--cd-fx-ice);color:var(--ink-hi)}
-#sec-dlc .dlc-jump .cd-go .cd-i{width:14px;height:14px}
-#sec-dlc .dlc-folds{margin-top:12px}
-#sec-dlc .cd-note{margin:10px 0}
+:is(#sec-dlc,.sec-dlcp) .dlc-jump{display:flex;flex-wrap:wrap;gap:6px 8px;margin:14px 0 12px}
+:is(#sec-dlc,.sec-dlcp) .dlc-jump .cd-go{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2);font-size:12.5px;color:var(--text);text-decoration:none}
+:is(#sec-dlc,.sec-dlcp) .dlc-jump .cd-go:hover,:is(#sec-dlc,.sec-dlcp) .dlc-jump .cd-go:focus-visible{border-color:var(--cd-fx-ice);color:var(--ink-hi)}
+:is(#sec-dlc,.sec-dlcp) .dlc-jump .cd-go .cd-i{width:14px;height:14px}
+:is(#sec-dlc,.sec-dlcp) .dlc-folds{margin-top:12px}
+:is(#sec-dlc,.sec-dlcp) .cd-note{margin:10px 0}
+/* 01.11.2026: Wegweiser der DLC-Übersicht in die DLC-Seiten der anderen Kategorien; DLC-Blätter der linken Leiste in Eisblau */
+#sec-dlc .dlc-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin:4px 0 14px}
+#sec-dlc .dlc-part{display:grid;grid-template-columns:1fr auto auto;grid-template-rows:auto auto;align-items:center;gap:2px 10px;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-left:3px solid var(--cd-fx-ice);border-radius:10px;background:var(--bg2,transparent);color:inherit;text-decoration:none}
+#sec-dlc .dlc-part:hover,#sec-dlc .dlc-part:focus-visible{border-color:var(--cd-fx-ice);color:var(--ink-hi)}
+#sec-dlc .dlc-part-k{grid-column:1;font-size:var(--fs-11);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+#sec-dlc .dlc-part-t{grid-column:1;font-weight:600}
+#sec-dlc .dlc-part-n{grid-column:2;grid-row:1/3;font-variant-numeric:tabular-nums;color:var(--cd-fx-ice)}
+#sec-dlc .dlc-part .cd-i{grid-column:3;grid-row:1/3;width:14px;height:14px}
+#conList .leaf[data-sec^="dlc"] .lsym{color:var(--cd-fx-ice)}
+/* Startseite: DLC-Hinweis mit Sprung in die DLC-Seite jeder Kategorie */
+.r2b11-dlc{margin:16px 0 4px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--cd-fx-ice) 45%,var(--line));border-left:3px solid var(--cd-fx-ice);border-radius:12px;background:linear-gradient(100deg,color-mix(in srgb,var(--cd-fx-ice) 10%,transparent),transparent 70%)}
+.r2b11-dlc-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.r2b11-dlc-g{font-size:20px;color:var(--cd-fx-ice)}
+.r2b11-dlc-k{font-size:var(--fs-11);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.r2b11-dlc-t{margin:0;flex-basis:100%;font-size:19px;color:var(--ink-hi)}
+.r2b11-dlc-s{margin:6px 0 10px;color:var(--dim)}
+.r2b11-dlc-l{display:flex;flex-wrap:wrap;gap:6px 8px}
+.r2b11-dlc-n{font-variant-numeric:tabular-nums;opacity:.75}
 .dlc-unb,.dlc-nb,.dlc-row-unb>td,.dlc-row-nb>td,.dlc-q.dlc-row-unb .dlc-q-who,.dlc-q.dlc-row-unb .dlc-q-rw,.dlc-ck.dlc-row-unb .cd-check-sub{color:var(--gdim)}
 .dlc-flag{display:inline-block;margin-left:2px;padding:0 6px;border:1px dashed currentColor;border-radius:6px;font-style:normal;font-family:var(--f-mono);font-size:var(--fs-10);line-height:1.6;letter-spacing:.02em;vertical-align:1px;white-space:normal;color:var(--gdim)}
 .dlc-n{color:var(--ink-hi);font-weight:700}
@@ -6997,7 +7015,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dlc-tbl--garden td:first-child{min-width:0;width:42px;font-family:var(--f-mono);color:var(--dim)}
 .dlc-bls{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
 .dlc-bl{font-size:12.5px}
-#sec-dlc .dlc-pills{margin:12px 0 2px}
+:is(#sec-dlc,.sec-dlcp) .dlc-pills{margin:12px 0 2px}
 .dlc-isl-hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px;font-size:13px;color:var(--dim)}
 .dlc-isl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:8px}
 .dlc-ck .cd-check-sub{display:block;margin-top:3px;font-size:12.5px;line-height:1.55}
@@ -8307,6 +8325,24 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   <section class="sec" id="sec-dlc">
     <h2 class="sec-t"><span class="sec-sym">⚓</span> Charting the Unknown <span class="sec-t-en">DLC</span></h2>
     <div id="dlc-root"></div>
+  </section>
+
+  <!-- 01.11.2026: DLC-Teilseiten, je die letzte Seite ihrer Kategorie; renderDlc(part) füllt nur die Abschnitte dieses Teils -->
+  <section class="sec sec-dlcp" id="sec-dlc-kampf">
+    <h2 class="sec-t"><span class="sec-sym">⚓</span> Charting the Unknown <span class="sec-t-en">DLC · Kampf</span></h2>
+    <div id="dlc-root-kampf"></div>
+  </section>
+  <section class="sec sec-dlcp" id="sec-dlc-ausruestung">
+    <h2 class="sec-t"><span class="sec-sym">⚓</span> Charting the Unknown <span class="sec-t-en">DLC · Ausrüstung</span></h2>
+    <div id="dlc-root-ausruestung"></div>
+  </section>
+  <section class="sec sec-dlcp" id="sec-dlc-quests">
+    <h2 class="sec-t"><span class="sec-sym">⚓</span> Charting the Unknown <span class="sec-t-en">DLC · Quests</span></h2>
+    <div id="dlc-root-quests"></div>
+  </section>
+  <section class="sec sec-dlcp" id="sec-dlc-sammeln">
+    <h2 class="sec-t"><span class="sec-sym">⚓</span> Charting the Unknown <span class="sec-t-en">DLC · Herstellen &amp; Sammeln</span></h2>
+    <div id="dlc-root-sammeln"></div>
   </section>
 
   <style>
@@ -11414,6 +11450,8 @@ function _leafCount(id){
   try{
     if(id==='bosses' && typeof BOSSES!=='undefined' && Array.isArray(BOSSES)) return String(BOSSES.length);
     if(id==='weapons' && typeof WEAPONS!=='undefined' && Array.isArray(WEAPONS)) return String(WEAPONS.length);
+    // DLC-Teilseiten (01.11.2026): Anzahl ihres Inhalts (Bosse, Ausrüstung, Questreihen, Schiffsteile)
+    if(/^dlc-/.test(id) && typeof _dlcPartCount==='function'){ const n=_dlcPartCount(id.slice(4)); if(n) return String(n); }
     if(id==='crafting' && typeof CRAFTING!=='undefined' && Array.isArray(CRAFTING)) return String(CRAFTING.length);
     if(id==='armorsets' && typeof ARMOR_SETS!=='undefined' && Array.isArray(ARMOR_SETS)) return String(ARMOR_SETS.filter(s=>!s.pieceCount).length);
     if(id==='cores' && typeof CORES!=='undefined' && Array.isArray(CORES)) return String(CORES.length);
@@ -11729,6 +11767,20 @@ function _r2b11Tile(s,lead){
     +(lead?'<span class="r2b11-cta">Seite öffnen'+cdIcon('go')+'</span>':'')+'</span>'
     +(lead?'':'<span class="r2b11-arr" aria-hidden="true">'+cdIcon('go')+'</span>')+'</a>';
 }
+/* 01.11.2026: Hinweis auf den DLC mit Sprung in seine Seite je Kategorie (aus SECTIONS: alle Seiten mit id dlc/dlc-*) */
+function _r2b11DlcBanner(){
+  const list=SECTIONS.filter(s=>s.id==='dlc'||/^dlc-/.test(s.id));
+  if(!list.length)return '';
+  const links=list.map(s=>{
+    const r=RESSORT_BY_ID[s.res],c=_navCountShown(s.id);
+    return '<a class="so-chip r2b11-r-'+s.res+'" role="listitem" href="'+_startHref(s.id)+'" data-go="'+s.id+'">'
+      +'<span class="g" aria-hidden="true">'+(r?r.glyph:s.glyph)+'</span>'+_navEsc(r?r.short:s.name)+(c?' <span class="r2b11-dlc-n">'+_navEsc(c)+'</span>':'')+'</a>';
+  }).join('');
+  return '<aside class="r2b11-dlc" aria-labelledby="r2b11-dlc-t"><div class="r2b11-dlc-hd"><span class="r2b11-dlc-g" aria-hidden="true">⚓</span>'
+    +'<span class="r2b11-dlc-k">Neu · erster DLC seit 29.10.2026</span><h3 class="r2b11-dlc-t" id="r2b11-dlc-t">Charting the Unknown</h3></div>'
+    +'<p class="r2b11-dlc-s">Jede Kategorie hat jetzt eine eigene DLC-Seite „Charting the Unknown“ als letzten Eintrag in der linken Leiste. Direkt hinein:</p>'
+    +'<div class="r2b11-dlc-l" role="list">'+links+'</div></aside>';
+}
 function renderStartOverview(){
   const root=document.getElementById('start-root'); if(!root)return;
   const pages=SECTIONS.filter(s=>s.id!=='start');
@@ -11749,6 +11801,7 @@ function renderStartOverview(){
     +'<button type="button" class="so-search" id="soSearch"><span class="so-search-g" aria-hidden="true">&#9906;</span>'
     +'<span class="so-search-t">Suchen: Bosse, Waffen, Quests, Orte …</span><span class="so-search-k" aria-hidden="true">Strg K</span></button>'
     +'<div class="so-pop"><span class="so-pop-l" id="soPopL">Häufig gesucht</span><div class="so-pop-list" role="list" aria-labelledby="soPopL">'+pop+'</div></div></div>'
+    +_r2b11DlcBanner()
     +cdPills([{v:'all',t:'Alle',n:pages.length,on:true}].concat(cats.map(x=>({v:x.r.id,t:x.r.short,g:x.r.glyph,n:x.list.length}))),{name:'r2b11-res',label:'Kategorien filtern',cls:'r2b11-pills'});
   cats.forEach(({r,list})=>{
     const tag=r.id==='start'?'Einsteiger-Tipps, Neuigkeiten und deine Merkliste':r.tag;
@@ -13068,12 +13121,39 @@ function _dlcIslandsProg(){
   const done=cdCheckGet(DLC_KEY_ISLANDS),ids=DLC_ISLANDS.map(i=>cdSlug(i.name));
   el.innerHTML=cdProg(ids.filter(i=>done.has(i)).length,ids.length,'Inseln abgehakt');
 }
-function renderDlc(){
-  const root=document.getElementById('dlc-root');if(!root)return;
+/* 01.11.2026: Teilseiten je Kategorie. Teil -> Seiten-ID, Abschnitte (Schlüssel aus add() unten) und Kopf.
+   Die Übersicht sec-dlc zeigt alle übrigen Abschnitte und verweist auf die Teilseiten, kein Abschnitt steht doppelt. */
+const DLC_PARTS={
+  kampf:{sec:'dlc-kampf',keys:['bosse'],res:'Kampf',sub:'Bosse und Gegner aus den DLC-Questreihen und der Garten der Prüfungen mit allen Gruppen und Belohnungen.'},
+  ausruestung:{sec:'dlc-ausruestung',keys:['ausruestung'],res:'Ausrüstung',sub:'Alle neuen Waffen, Rüstungen, Accessoires und Abyss-Kerne aus dem DLC, dazu Atemgeräte, Wagen- und Haustierausrüstung, Vorbesteller-Set und Twitch-Drops.'},
+  quests:{sec:'dlc-quests',keys:['quests'],res:'Quests',sub:'Alle Questreihen aus dem DLC mit Start, Voraussetzung, Schritten und Belohnungen.'},
+  sammeln:{sec:'dlc-sammeln',keys:['teile'],res:'Herstellen & Sammeln',sub:'Segel, Kanonen, Galionsfiguren und Heckteile für dein Schiff mit Händler, Preis und Boni.'}
+};
+function _dlcPartCount(p){
+  try{
+    if(p==='kampf')return DLC_BOSSES.length;
+    if(p==='ausruestung'){const G=_dlcGear();return G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;}
+    if(p==='quests')return DLC_QUESTS.length;
+    if(p==='sammeln')return DLC_SHIP_PARTS.length;
+  }catch(e){}
+  return 0;
+}
+function renderDlcKampf(){renderDlc('kampf');}
+function renderDlcAusruestung(){renderDlc('ausruestung');}
+function renderDlcQuests(){renderDlc('quests');}
+function renderDlcSammeln(){renderDlc('sammeln');}
+function renderDlc(part){
+  const P=part?DLC_PARTS[part]:null;if(part&&!P)return;
+  const root=document.getElementById(P?'dlc-root-'+part:'dlc-root');if(!root)return;
   if(typeof DLC_META==='undefined'){root.innerHTML=cdNote('Die Daten dieser Seite (data/d12-dlc.js) konnten nicht geladen werden. Bitte die Seite neu laden.',{kind:'warn'});return;}
   const M=DLC_META,G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
   const TRADE=_dlcA(()=>DLC_TRADE),HOMES=_dlcA(()=>DLC_HOMES),RSHOPS=_dlcA(()=>DLC_RELIC_SHOPS);
-  let h=cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',
+  const PART_STATS={kampf:[[DLC_BOSSES.length,'Bosse und Gegner'],[DLC_GARDEN.length,'Gruppen im Garten']],
+    ausruestung:[[G.w.length,'Waffen'],[G.a.length,'Rüstungsteile'],[G.x.length+G.k.length+G.e.length,'Weitere Ausrüstung']],
+    quests:[[DLC_QUESTS.length,'Questreihen'],[DLC_QUESTS.reduce((n,q)=>n+(Array.isArray(q.steps)?q.steps.filter(Boolean).length:0),0),'Schritte erfasst']],
+    sammeln:[[DLC_SHIP_PARTS.length,'Schiffsteile'],[new Set(DLC_SHIP_PARTS.map(p=>p.type)).size,'Typen']]};
+  let h=P?cdHero({kicker:'Erster DLC · '+P.res,title:'Charting the Unknown',sub:P.sub,glyph:'⚓',tone:'ice',stats:PART_STATS[part]})
+    :cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',
     sub:'Schiffe, Pywels Großer Ozean mit unerschlossenen Inseln, Tauchen, Unterwasser-Reittiere, neue Questreihen, der Garten der Prüfungen, Burgen und Ehe: alles Neue aus dem DLC an einem Ort.',
     glyph:'⚓',tone:'ice',stats:[[DLC_SHIPS.length,'Schiffe'],[DLC_ISLANDS.length,'Inseln benannt'],[DLC_GARDEN.length,'Gruppen im Garten'],[nGear,'DLC-Ausrüstung im Wiki']]});
   const B=[];
@@ -13213,7 +13293,28 @@ function renderDlc(){
   add('offen',{title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
     chips:[{v:DLC_OPEN.length,t:'offene Punkte',c:'warn'}],body:'<ol class="dlc-ol">'+DLC_OPEN.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'});
 
-  const jump='<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>';
+  /* Teil-Zuordnung: Abschnitt -> Teil, über die Schlüssel in DLC_PARTS */
+  const partOf={};Object.keys(DLC_PARTS).forEach(p=>DLC_PARTS[p].keys.forEach(k=>{partOf['dlc-b-'+k]=p;}));
+  const all=B.slice();
+  B.length=0;
+  all.forEach(o=>{
+    if(P){if(partOf[o.id]===part)B.push(Object.assign({},o,{open:true}));}
+    else if(!partOf[o.id])B.push(o);
+  });
+  let jump;
+  if(P){
+    jump='<nav class="dlc-jump" aria-label="Weitere DLC-Bereiche">'+cdGoLink('dlc','','DLC-Übersicht: Schiffe, Inseln, Tauchen','dlc-jl')
+      +Object.keys(DLC_PARTS).filter(p=>p!==part).map(p=>cdGoLink(DLC_PARTS[p].sec,'','DLC · '+DLC_PARTS[p].res,'dlc-jl')).join('')+'</nav>';
+  }else{
+    /* Übersicht: eigene Abschnitte als Sprung, dazu Wegweiser in die DLC-Seiten der anderen Kategorien */
+    jump='<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>'
+      +'<div class="dlc-parts" role="list" aria-label="Charting the Unknown in den anderen Kategorien">'+Object.keys(DLC_PARTS).map(p=>{
+        const D=DLC_PARTS[p],t=all.find(o=>o.id==='dlc-b-'+D.keys[0]);
+        return '<a role="listitem" class="dlc-part cd-spot" href="'+cdGoHref(D.sec,'')+'" data-go="'+D.sec+'">'
+          +'<span class="dlc-part-k">'+cdEsc(D.res)+'</span><b class="dlc-part-t">'+cdEsc(t?t.title:D.res)+'</b>'
+          +'<span class="dlc-part-n">'+_dlcPartCount(p)+'</span>'+cdIcon('go')+'</a>';
+      }).join('')+'</div>';
+  }
   const legend=cdNote({h:'Belegt heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. <span class="dlc-unb">Grau mit Vermerk '+_dlcFlag('unb')+'</span> nennt nur eine Quelle, <span class="dlc-nb">'+_dlcFlag('nb')+'</span> heißt gesucht, aber nichts gefunden. Item-, Orts-, Boss- und Questnamen stehen in der englischen Spielschreibweise.'},{kind:'info',title:'So liest du die Seite'});
   h+=jump+legend+'<div class="cd-folds dlc-folds">'+B.map(o=>cdFold(Object.assign({},o,{s:o.title+' '+_dlcPlain(o.body)}))).join('')+'</div>';
   h+=cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
@@ -19155,11 +19256,11 @@ if (syGetCode()) _loadServerProgress();
 <style>@media(max-width:480px){#guide-links{line-height:1.8}}</style>
 <nav id="guide-links" aria-label="Guide-Seiten" style="text-align:center;padding:1rem;font-size:.85rem;opacity:.7">
   Start: <a href="/patch-notes">Patch-Notes</a> · <a href="/patch-notes-1">Patch-Archiv 1.x</a><br>
-  Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a><br>
-  Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a><br>
-  Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a><br>
+  Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a> · <a href="/#sec-dlc-kampf">DLC-Bosse</a><br>
+  Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a> · <a href="/#sec-dlc-ausruestung">DLC-Ausrüstung</a><br>
+  Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a> · <a href="/#sec-dlc-quests">DLC-Quests</a><br>
   Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a><br>
-  Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a>
+  Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a> · <a href="/#sec-dlc-sammeln">DLC-Schiffsteile</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>
 <script>
