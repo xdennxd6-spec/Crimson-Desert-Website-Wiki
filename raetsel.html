@@ -7027,7 +7027,8 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 /* Spiel-Originalbilder aus den Game-Files (01.11.2026, KI-Mix 2x): weiche Ecken, wirkt nur bei deckenden Bildern */
 img[src*="cd_assets/weapons/"],img[src*="cd_assets/armor/"],img[src*="cd_assets/items/"],img[src*="cd_assets/cores/"],
 img[src*="cd_assets/dyes/"],img[src*="cd_assets/npcs/"],img[src*="cd_assets/pets/"],img[src*="cd_assets/bosses/"],
-img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"]{border-radius:min(14px,18%)}
+img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{border-radius:min(14px,18%)}
+.dlc-ico{display:inline-block;width:40px;height:40px;object-fit:contain;vertical-align:middle;margin:0 8px 0 0;background:var(--panel-2);border-radius:8px}
 </style>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -13497,6 +13498,9 @@ function renderDlcKampf(){renderDlc('kampf');}
 function renderDlcAusruestung(){renderDlc('ausruestung');}
 function renderDlcQuests(){renderDlc('quests');}
 function renderDlcSammeln(){renderDlc('sammeln');}
+/* Icon vor dem Namen in DLC-Tabellen (Bilder aus den Spieldateien: WEAPON_IMGS, ARMOR_IMGS, DLC_IMGS) */
+function _dlcIco(src){return src?'<img class="dlc-ico" src="'+cdEsc(src)+'" width="40" height="40" alt="" loading="lazy" decoding="async" onerror="this.remove()">':'';}
+function _dlcImg(n){return typeof DLC_IMGS!=='undefined'?DLC_IMGS[n]:'';}
 function renderDlc(part){
   const P=part?DLC_PARTS[part]:null;if(part&&!P)return;
   const root=document.getElementById(P?'dlc-root-'+part:'dlc-root');if(!root)return;
@@ -13532,7 +13536,7 @@ function renderDlc(part){
   b+=_dlcH('Händler, Währung, Seekampf')+_dlcFacts(DLC_SHIP_FACTS);
   if(TRADE.length)b+=_dlcH('Seehandel: Waren ('+TRADE.length+')')+_dlcTbl(['Ware','Einkauf','Verkauf','Hinweis'],TRADE.map(t=>({c:t.c,
     s:[t.name,_dlcP(t.buy),_dlcP(t.sell),_dlcP(t.note)].join(' '),
-    cells:[_dlcName(t),_dlcCell(t.buy,true),_dlcCell(t.sell,true),_dlcCell(t.note)]})),{cap:'Seehandel-Waren'});
+    cells:[_dlcIco(_dlcImg(t.name))+_dlcName(t),_dlcCell(t.buy,true),_dlcCell(t.sell,true),_dlcCell(t.note)]})),{cap:'Seehandel-Waren'});
   b+=_dlcH('Schiffsbau per Entsendung')+_dlcFacts(DLC_SHIPBUILD);
   b+=_dlcH('Besatzung: '+DLC_CREW.length+' Rollen')+'<ul class="dlc-crew">'+DLC_CREW.map(r=>'<li><b>'+cdEsc(r.role)+'</b><span>'+cdEsc(r.d)+'</span></li>').join('')+'</ul>'+_dlcList(DLC_CREW_NOTES,'dlc-list--note');
   add('schiffe',{title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
@@ -13544,7 +13548,7 @@ function renderDlc(part){
   b+=cdPills(typen.map(([v,t],i)=>({v:v,t:t,on:i===0,n:v?DLC_SHIP_PARTS.filter(p=>p.type===v).length:DLC_SHIP_PARTS.length})),{name:'dlc-parts',label:'Schiffsteile nach Typ filtern',wrap:true,cls:'dlc-pills'});
   b+=_dlcTbl(['Teil','Typ','Größe','Händler / Erhalt','Preis','Boni'],DLC_SHIP_PARTS.map(p=>({c:p.c,attrs:' data-type="'+cdEsc(p.type)+'"',
     s:[p.name,p.type,_dlcP(p.size),_dlcP(p.vendor),_dlcP(p.price),_dlcP(p.bonus)].join(' '),
-    cells:[_dlcName(p),cdEsc(p.type),_dlcV(p.size),_dlcV(p.vendor),_dlcV(p.price),_dlcV(p.bonus)]})),{id:'dlc-parts-tb',cap:'Schiffsteile'});
+    cells:[_dlcIco(_dlcImg(p.name))+_dlcName(p),cdEsc(p.type),_dlcV(p.size),_dlcV(p.vendor),_dlcV(p.price),_dlcV(p.bonus)]})),{id:'dlc-parts-tb',cap:'Schiffsteile'});
   add('teile',{title:'Schiffsteile',lead:'Segel, Kanonen, Galionsfiguren und Heckteile mit Händler, Preis in Silver und Boni.',icon:'⛵',
     chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Boni nur laut Game8',c:'warn'}],body:b});
 
@@ -13620,17 +13624,17 @@ function renderDlc(part){
   b=_dlcList(DLC_GEAR_NOTES,'dlc-list--note');
   if(G.w.length){
     b+=_dlcH('Waffen ('+G.w.length+')')+_dlcTbl(['Waffe','Typ','ATK','Fundort'],G.w.map(w=>({s:[w.name,w.type,w.source,w.notes].join(' '),
-      cells:['<button type="button" class="dlc-lnk" onclick="waffeZeigeTeil(\''+escJsStr(w.name)+'\')">'+cdEsc(w.name)+'</button>',cdEsc(w.type||''),w.atk!=null?_dlcQ(w.atk,w):(w.def!=null?_dlcQ('DEF '+w.def,w):'<span class="dlc-nb">nicht erfasst</span>'),cdEsc(w.source||'')]})),{cap:'DLC-Waffen'});
+      cells:[_dlcIco(WEAPON_IMGS[w.name])+'<button type="button" class="dlc-lnk" onclick="waffeZeigeTeil(\''+escJsStr(w.name)+'\')">'+cdEsc(w.name)+'</button>',cdEsc(w.type||''),w.atk!=null?_dlcQ(w.atk,w):(w.def!=null?_dlcQ('DEF '+w.def,w):'<span class="dlc-nb">nicht erfasst</span>'),cdEsc(w.source||'')]})),{cap:'DLC-Waffen'});
   }
   if(G.a.length){
     b+=_dlcH('Rüstungen ('+G.a.length+')')+_dlcTbl(['Rüstung','Teil','Effekt','Fundort'],G.a.map(a=>({s:[a.name,a.type,a.effect,a.source,a.notes].join(' '),
-      cells:['<button type="button" class="dlc-lnk" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">'+cdEsc(a.name)+'</button>',cdEsc(a.type||''),_dlcQ(a.effect||'',a),cdEsc(a.source||'')]})),{cap:'DLC-Rüstungen'});
+      cells:[_dlcIco(ARMOR_IMGS[a.name])+'<button type="button" class="dlc-lnk" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">'+cdEsc(a.name)+'</button>',cdEsc(a.type||''),_dlcQ(a.effect||'',a),cdEsc(a.source||'')]})),{cap:'DLC-Rüstungen'});
   }
   if(G.e.length){
     b+=_dlcH('Weitere Ausrüstung ('+G.e.length+')')+_dlcTbl(['Name','Art','Slot','Charakter','Werte','Erhalt'],G.e.map(g=>{
       const s=_dlcV(g.source),r=_dlcV(g.req);
       return {c:g.c,s:[g.name,_dlcP(g.kind),_dlcP(g.slot),_dlcP(g.char),_dlcP(g.stats),_dlcP(g.source),_dlcP(g.req)].join(' '),
-        cells:[_dlcName(g),_dlcCell(g.kind,true),_dlcCell(g.slot,true),_dlcCell(g.char,true),_dlcCell(g.stats,true),
+        cells:[_dlcIco(_dlcImg(g.name))+_dlcName(g),_dlcCell(g.kind,true),_dlcCell(g.slot,true),_dlcCell(g.char,true),_dlcCell(g.stats,true),
           (s||r)?s+(r?(s?'<br>':'')+'Voraussetzung: '+r:''):'<span class="dlc-nb">nicht belegt</span>']};
     }),{cap:'Weitere DLC-Ausrüstung'});
   }

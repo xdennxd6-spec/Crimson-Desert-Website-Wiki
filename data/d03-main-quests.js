@@ -1219,5 +1219,23 @@ const WEAPON_IMGS={
   "Bekker Shield":"cd_assets/weapons/item-1163043.webp",
   "Bekker Large Shield":"cd_assets/weapons/item-290523.webp",
   "Balton Large Shield":"cd_assets/weapons/item-290510.webp",
+  // DLC/fehlende Bilder am 01.11.2026 aus den Spieldateien ergänzt (Item-Tabelle -> Icon, KI-Mix 2x); Beleg: F:\Claude\Crimson-Desert-Datamining\wiki-einbau\fehlende.csv
+  "Lumen Sword":"cd_assets/weapons/item-1004316.webp",
+  "Lumen Longsword":"cd_assets/weapons/item-1004317.webp",
+  "Silverwave Longsword":"cd_assets/weapons/item-1006337.webp",
+  "Longsword of Void":"cd_assets/weapons/item-1004884.webp",
+  "Harpoon Gun":"cd_assets/weapons/item-1005447.webp",
+  "Satyros Spear":"cd_assets/weapons/item-1004868.webp",
+  "Spiral Spear":"cd_assets/weapons/item-1004869.webp",
+  "Guardian's Horn":"cd_assets/weapons/item-1006325.webp",
+  "Wailing Sea Greathammer":"cd_assets/weapons/item-1005653.webp",
+  "Chain Anchor Mace":"cd_assets/weapons/item-1005720.webp",
+  "Pirate's Sword":"cd_assets/weapons/item-1005102.webp",
+  "Enhanced Fatum Blaster":"cd_assets/weapons/item-1004822.webp",
+  "Frying Pan":"cd_assets/weapons/item-1004542.webp",
+  "Ladle":"cd_assets/weapons/item-1004544.webp",
+  "Kitchen Knife":"cd_assets/weapons/item-1004545.webp",
+  "Frying Pan Lid":"cd_assets/weapons/item-1004543.webp",
+  "Jar Lid":"cd_assets/weapons/item-1004433.webp"
 };
 const FEX_IMG_PREFIX="https://static0.fextralifeimages.com/file/crimsondesertgame/";
