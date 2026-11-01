@@ -7057,6 +7057,56 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dlc-chip .dlc-flag{margin-left:2px;padding:0 5px;border-radius:5px;line-height:1.4}
 /* DLC-F Ende */
 /* DLC-K Anfang (Kampf: _dlcSecBosse, Besitz Arbeiter kampf) */
+.dlc-k-notes{margin:0 0 14px}
+.dlc-k-stats .sec-stat-lbl{font-size:max(11px,var(--fs-11-5))}
+.dlc-k-notes .dlc-list{margin:0;font-size:13px}
+.dlc-k-bar{display:flex;flex-wrap:wrap;align-items:center;gap:0 22px;margin:0 0 4px}
+.dlc-k-bar .cd-pills{margin:0 0 12px}
+#dlc-boss-grid.grid{margin:0 0 8px}
+.dlc-k-empty{margin:8px 0 0;font-size:13.5px;color:var(--dim)}
+/* Schiene ohne Porträt (Bildregel: nur 2 von 14 Bossen haben ein Bild, daher alle ohne): Eisblau-Verlauf + Initiale, gleiche Maße wie die Bossseite */
+#dlc-boss-grid .record-img.dlc-k-img{background:radial-gradient(120% 100% at 50% 38%,color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 20%,#0b0a14),#0a0710 74%)}
+#dlc-boss-grid .dlc-k-img .record-tag{background:var(--cd-fx-ice,#8cc4e4);color:#06141c;box-shadow:0 0 18px -4px color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 60%,transparent);font-size:max(11px,var(--fs-10))}
+#dlc-boss-grid .dlc-k-gl{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+#dlc-boss-grid .dlc-k-gl b{font-family:var(--f-display);font-weight:700;font-size:80px;line-height:1;color:color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 58%,transparent);text-shadow:0 0 30px color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 38%,transparent)}
+#dlc-boss-grid .card.boss-done .dlc-k-gl{filter:grayscale(.7) brightness(.8)}
+/* Schrift mindestens 11 px (die Bossseite nutzt 10,5 px; mobil greifen ohnehin 12 px) */
+#dlc-boss-grid .boss-sum .boss-sum-chip,#dlc-boss-grid .record-card.boss-compact .boss-actions .defeat-btn,#dlc-boss-grid .boss-more>summary{font-size:max(11px,var(--fs-10-5))}
+#dlc-boss-grid .boss-sum .dlc-k-unb{--c:var(--gdim);color:var(--gdim);border-style:dashed;white-space:normal;overflow:visible}
+#dlc-boss-grid .boss-sum .dlc-k-unb .dlc-flag{margin-left:4px}
+#dlc-boss-grid .record-card.boss-compact .record-desig .dlc-flag{text-transform:none;letter-spacing:.02em}
+/* Aufklapper: Ort/Beute/Hinweis je volle Zeile statt des 4-Spalten-Rasters der Bossseite */
+#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg{grid-template-columns:minmax(0,1fr)}
+#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div,#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div:nth-child(1),#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div:nth-child(2){grid-column:1/-1}
+#dlc-boss-grid .datagrid.dlc-k-dg dt{font-size:max(11px,var(--fs-9))}
+#dlc-boss-grid .datagrid.dlc-k-dg dd{font-size:14px;line-height:1.5}
+#dlc-boss-grid .dlc-k-more-l{font-size:13.5px}
+/* Garten der Prüfungen */
+.dlc-k-sub{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 18px;margin:36px 0 12px}
+.dlc-k-h{margin:0;font-family:var(--f-display);font-size:23px;font-weight:600;line-height:1.1;letter-spacing:-.01em;color:var(--ink-hi)}
+.dlc-kg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:16px;margin:16px 0 6px;contain:layout style}
+.dlc-kg{display:flex;flex-direction:column;gap:13px;padding:14px 16px 12px;contain-intrinsic-size:auto 280px}
+.dlc-kg.is-done{border-color:color-mix(in srgb,var(--cd-ok,#5fd394) 55%,var(--iron-gall))}
+.dlc-kg-h{display:flex;align-items:center;gap:12px}
+.dlc-kg-n{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:10px;font-family:var(--f-mono);font-weight:700;font-size:18px;color:var(--cd-fx-ice,#8cc4e4);border:1px solid color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 45%,var(--line));background:color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 10%,transparent)}
+.dlc-kg-t{min-width:0}
+.dlc-kg .ct{margin:0 0 3px;font-family:var(--f-display);font-size:19px;font-weight:600;line-height:1.15;color:var(--ink-hi);overflow-wrap:anywhere}
+.dlc-kg-sub{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.dlc-kg-l{display:block;margin:0 0 6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.dlc-kg-bl{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.cd-go.dlc-kg-b{display:inline-flex;align-items:center;gap:5px;max-width:100%;min-height:30px;padding:3px 10px;border:1px solid var(--line-strong);border-radius:7px;background:rgba(255,255,255,.03);color:var(--text);font-family:var(--f-mono);font-size:11.5px;line-height:1.3;text-decoration:none}
+.cd-go.dlc-kg-b:hover{border-color:var(--amber);color:var(--amber)}
+.cd-go.dlc-kg-b--unb{border-style:dashed;color:var(--gdim)}
+.dlc-kg-rw{margin:0;font-size:14px;line-height:1.5;color:var(--text)}
+.dlc-kg-rw .dlc-kg-l{margin-bottom:3px}
+.dlc-kg .cd-check{margin-top:auto}
+@media(max-width:600px){
+  #dlc-boss-grid .record-card.boss-compact .record-rail .record-img.dlc-k-img{aspect-ratio:auto;height:92px;min-height:0;max-height:none}
+  #dlc-boss-grid .dlc-k-gl b{font-size:56px}
+  #dlc-boss-grid .record-card.boss-compact .boss-actions .defeat-btn,#dlc-boss-grid .boss-more>summary{min-height:40px}
+  .cd-go.dlc-kg-b{min-height:40px}
+  .dlc-k-h{font-size:21px}
+}
 /* DLC-K Ende */
 /* DLC-A Anfang (Ausrüstung: _dlcSecGear, Besitz Arbeiter gear) */
 /* DLC-A Ende */
@@ -13289,18 +13339,138 @@ function _dlcSecQuests(){
   return {title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',
     chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b};
 }
+/* ===== DLC-K Kampf (01.11.2026, Lauf dlc-design): Bosskarten wie auf der Bossseite, Garten der Prüfungen als abhakbare Karten =====
+   #dlc-boss-grid erbt das Bosskarten-CSS der Bossseite. Besiegt-Speicher: Bosse mit w (Name in BOSSES) nutzen cd_bosses
+   (Liste von Namen, geteilt mit der Bossseite, geschrieben über toggleBossDone), alle übrigen cd_r2_dlc_bosse (Liste der
+   Namen); Gartengruppen cd_r2_dlc_garten (Liste der IDs g1 bis g10). Kein Boss der DLC-Liste hat ein Porträt für alle,
+   daher tragen alle 14 Karten eine Glyphen-Schiene statt eines Bildes (Bildregel). */
+const DLC_K_BOSSE='cd_r2_dlc_bosse',DLC_K_GARTEN='cd_r2_dlc_garten';
+let _dlcKF={st:'all',grp:'all'};
+/* Besiegt-Zustand als Funktion (Speicher einmal gelesen): Eintrag -> bool */
+function _dlcKDoneFn(){const a=new Set(loadBossDone()),b=cdCheckGet(DLC_K_BOSSE);return x=>x.w?a.has(x.w):b.has(x.name);}
+/* Kurzform für Kennzeile und Chips: vor dem ersten „: “, „; “ oder „ (“ abschneiden, ggf. an der Wortgrenze kürzen */
+function _dlcKShort(t,max){
+  let s=String(t==null?'':t).split(/\s*:\s|\s*;\s*|\s+\(/)[0].replace(/[\s.,;:]+$/,'');
+  if(max&&s.length>max){let c=s.slice(0,max-1);const sp=c.lastIndexOf(' ');if(sp>max*0.4)c=c.slice(0,sp);s=c.replace(/[\s,;:]+$/,'')+'…';}
+  return s;
+}
+/* Gruppe „Großer Ozean“: nur die Namen, die die th.gl-Notiz in DLC_BOSS_NOTES ausdrücklich dort einordnet */
+function _dlcKOcean(x){const t=_dlcA(()=>DLC_BOSS_NOTES).map(n=>_dlcP(n)).find(s=>/Great Ocean/.test(s));return !!t&&t.includes(x.name);}
+function _dlcKQs(v){if(v==null||typeof v!=='object')return [];return Array.isArray(v)?v.flatMap(_dlcKQs):(v.q?[v.q]:[]);}
+/* Kennzeile der zugeklappten Karte: erstes Ortsstück (mit grauem Vermerk, wenn dieser Teil unbestätigt ist) */
+function _dlcKDesig(x){
+  const first=[].concat(x.where==null?[]:x.where)[0];if(first==null)return {h:'',p:''};
+  const o=_dlcObj(first),s=_dlcKShort(o.v,80);if(!s)return {h:'',p:''};
+  return {h:_dlcV(o.c&&o.c!=='ok'?{v:s,c:o.c,q:o.q}:s),p:s};
+}
+/* Beute-Chips: ein Chip je Stück (an Komma/Semikolon außerhalb von Klammern geteilt), Unbestätigtes grau gestrichelt mit sichtbarem Vermerk */
+function _dlcKChips(x){
+  const out=[],split=t=>t.split(/\s*[,;]\s*(?![^(]*\))/).map(p=>p.trim().replace(/\.$/,'')).filter(Boolean);
+  [].concat(x.drop==null?[]:x.drop).forEach(el=>{
+    const o=_dlcObj(el),t=String(o.v==null?'':o.v).trim();if(!t)return;
+    if(!o.c||o.c==='ok'){split(t).forEach(p=>out.push('<span class="boss-sum-chip bsc-drop" title="'+cdEsc(p)+'">'+cdEsc(p)+'</span>'));return;}
+    const noflag=o.c==='nb'&&/nicht belegt/i.test(t),sp=split(t),parts=noflag||sp.some(p=>p.length>40)?[t.replace(/\.$/,'')]:sp; /* Prosa (ein Stück über 40 Zeichen) bleibt ein Chip */
+    parts.forEach((p,i)=>{
+      const flag=i===parts.length-1&&!noflag?_dlcFlag(o.c,o.q):'';
+      out.push('<span class="boss-sum-chip bsc-drop dlc-k-unb" title="'+cdEsc(p+(o.q?' ('+(o.c==='nb'?'nicht belegt':'unbestätigt')+': '+o.q+')':''))+'">'
+        +(parts.length===1&&p.length>40?_bossShort(p,38):cdEsc(p))+flag+'</span>');
+    });
+  });
+  if(x.note)out.push('<span class="boss-sum-chip bsc-note dlc-k-unb" title="Hinweis im Aufklapper">ⓘ Hinweis</span>');
+  return out.join('');
+}
+function _dlcKCard(x,isDone){
+  const n=x.name,sn=escJsStr(n),dz=_dlcKDesig(x),chips=_dlcKChips(x),qs=[x.q].concat(_dlcKQs(x.where),_dlcKQs(x.drop),_dlcKQs(x.note)).filter(Boolean).join(' ');
+  const rows=[['Ort und Kontext',_dlcV(x.where)],['Beute',_dlcV(x.drop)],['Hinweis',_dlcV(x.note)]].filter(r=>r[1])
+    .map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
+  const s=[n,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),x.w||'',qs].join(' ').toLowerCase();
+  const vis=[n,dz.p,_dlcPlain(chips)].join(' ').toLowerCase(),hid=[_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),qs].join(' ').toLowerCase();
+  return '<div class="card cd-spot record-card boss-compact dlc-k-card'+(isDone?' boss-done':'')+'" data-dlc-k="'+cdEsc(n)+'" data-ocean="'+(_dlcKOcean(x)?'1':'0')
+    +'" data-filtered="0" data-s="'+cdEsc(s)+'" data-item-id="'+cdEsc(n)+'" data-item-visible="'+cdEsc(vis)+'" data-item-hidden="'+cdEsc(hid)+'">'
+    +'<div class="record-rail"><div class="record-img dlc-k-img"><span class="record-tag">DLC</span><span class="crosshair" aria-hidden="true"></span>'
+    +'<div class="boss-done-badge">BESIEGT</div>'+(x.w?favBtn('boss',x.w):'')
+    +'<div class="dlc-k-gl" aria-hidden="true"><b>'+cdEsc(n.charAt(0).toUpperCase())+'</b></div></div></div>'
+    +'<div class="record-body"><div class="ct">'+cdEsc(n)+(x.c&&x.c!=='ok'?' '+_dlcFlag(x.c,x.q):'')+'</div>'
+    +(dz.h?'<div class="record-desig">'+dz.h+'</div>':'')
+    +'<div class="boss-sum">'+chips+'</div>'
+    +'<div class="boss-actions"><button type="button" class="defeat-btn'+(isDone?' on':'')+'" aria-pressed="'+(isDone?'true':'false')+'" onclick="_dlcKToggle(\''+sn+'\')">'
+    +(isDone?'✓ Besiegt':'Als besiegt markieren')+'</button></div></div>'
+    +'<details class="item-more boss-more"><summary onclick="this.parentElement.removeAttribute(\'data-srch-open\')"><span class="boss-more-lbl">Details &amp; Hinweise</span></summary>'
+    +'<div class="item-more-body boss-more-body"><dl class="datagrid dlc-k-dg">'+rows+'</dl>'
+    +(x.w?'<div class="dlc-k-more-l">'+cdGoLink('bosses',x.w,'In der Bossliste')+'</div>':'')+'</div></details></div>';
+}
+function _dlcKGarden(g,isDone){
+  const id='g'+g.n,bad=g.bc!=='ok',bs=[].concat(g.b||[]),N=DLC_GARDEN.length;
+  const s=[g.name,bs.join(' '),g.reward,bad?(g.bq||'GameRant'):'','gruppe',g.n].join(' ').toLowerCase();
+  return '<div class="card cd-spot dlc-kg'+(isDone?' is-done':'')+'" data-gid="'+id+'" data-item-id="'+id+'" data-s="'+cdEsc(s)+'">'
+    +'<div class="dlc-kg-h"><span class="dlc-kg-n" aria-hidden="true">'+cdEsc(g.n)+'</span><div class="dlc-kg-t"><h4 class="ct">'+cdEsc(g.name)+'</h4>'
+    +'<span class="dlc-kg-sub">Gruppe '+cdEsc(g.n)+' von '+N+'</span></div></div>'
+    +'<div><span class="dlc-kg-l">Bosse</span><div class="dlc-kg-bl">'+bs.map(b=>cdGoLink('bosses',b,b,'dlc-kg-b'+(bad?' dlc-kg-b--unb':''))).join('')
+    +(bad?_dlcFlag('unb',g.bq||'GameRant'):'')+'</div></div>'
+    +'<p class="dlc-kg-rw"><span class="dlc-kg-l">Belohnung</span>'+cdEsc(g.reward)+'</p>'
+    +cdCheck({key:DLC_K_GARTEN,id:id,title:'Gruppe geschafft',checked:isDone})+'</div>';
+}
+/* Zustand nachziehen, ohne neu zu rendern: Karten, Knöpfe, Fortschritt, Pillen-Zähler, Filter (Aufruf nach jedem Klick und beim Öffnen der Seite) */
+function _dlcKSync(){
+  const root=document.getElementById('dlc-b-bosse');if(!root)return;
+  const isD=_dlcKDoneFn(),grid=document.getElementById('dlc-boss-grid'),f=_dlcKF;
+  let n=0,open=0,shown=0;
+  root.querySelectorAll('#dlc-boss-grid .dlc-k-card').forEach(c=>{
+    const x=DLC_BOSSES.find(b=>b.name===c.dataset.dlcK);if(!x)return;
+    const d=isD(x);if(d)n++;else open++;
+    c.classList.toggle('boss-done',d);
+    const b=c.querySelector('.defeat-btn');
+    if(b){b.classList.toggle('on',d);b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?'✓ Besiegt':'Als besiegt markieren';}
+    const ok=(f.st==='all'||(f.st==='done')===d)&&(f.grp==='all'||c.dataset.ocean==='1');
+    c.dataset.filtered=ok?'0':'1';c.classList.toggle('hide',!ok);if(ok)shown++;
+  });
+  const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
+  set('dlc-k-prog',cdProg(n,DLC_BOSSES.length,n+' von '+DLC_BOSSES.length+' besiegt'));
+  const pn=(v,c)=>{const e=root.querySelector('[data-cd-pills="dlc-k-st"] .cd-pill[data-v="'+v+'"] .cd-pill-n');if(e)e.textContent=c;};
+  pn('open',open);pn('done',n);
+  const em=document.getElementById('dlc-k-empty');if(em)em.hidden=shown>0;
+  if(grid)_reapplyActiveSearch(grid);
+  const gd=cdCheckGet(DLC_K_GARTEN);let g=0;
+  root.querySelectorAll('.dlc-kg').forEach(c=>{
+    const d=gd.has(c.dataset.gid);if(d)g++;c.classList.toggle('is-done',d);
+    const i=c.querySelector('.cd-check-in');if(i&&i.checked!==d)i.checked=d;
+  });
+  set('dlc-g-prog',cdProg(g,DLC_GARDEN.length,g+' von '+DLC_GARDEN.length+' Gruppen geschafft'));
+}
+/* „Als besiegt markieren“: Bosse mit w über die Bossseite (cd_bosses, Statistik, Erfolge), alle anderen in cd_r2_dlc_bosse */
+function _dlcKToggle(name){
+  const x=DLC_BOSSES.find(b=>b.name===name);if(!x)return;
+  if(x.w)toggleBossDone(x.w);else cdCheckSet(DLC_K_BOSSE,x.name,!cdCheckGet(DLC_K_BOSSE).has(x.name));
+  _dlcKSync();
+}
 /* 8 Bosse und Garten der Prüfungen (Abschnitt dlc-b-bosse, Besitz: kampf) */
 function _dlcSecBosse(){
-  let b=_dlcList(DLC_BOSS_NOTES,'dlc-list--note');
-  b+=_dlcTbl(['Boss','Ort und Kontext','Beute'],DLC_BOSSES.map(x=>({c:x.c,s:[x.name,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note)].join(' '),
-    cells:[_dlcName(x)+(x.w?'<br>'+cdGoLink('bosses',x.w,'In der Bossliste'):''),_dlcV(x.where)+(x.note?' '+_dlcV(x.note):''),_dlcV(x.drop)]})),{cap:'Bosse und Gegner aus dem DLC'});
-  b+=_dlcH('Garten der Prüfungen')+_dlcFacts(DLC_GARDEN_RULES);
-  b+=_dlcTbl(['Nr.','Gruppe','Bosse','Belohnung'],DLC_GARDEN.map(g=>({s:[g.name,[].concat(g.b||[]).join(' '),g.reward].join(' '),
-    cells:[String(g.n),'<b class="dlc-n">'+cdEsc(g.name)+'</b>','<span class="dlc-bls'+(g.bc==='ok'?'':' dlc-unb')+'">'+[].concat(g.b||[]).map(n=>cdGoLink('bosses',n,n,'dlc-bl')).join(' ')+(g.bc==='ok'?'':' '+_dlcFlag('unb',g.bq||'GameRant'))+'</span>',cdEsc(g.reward)]})),{cls:'dlc-tbl--garden',cap:'Garten der Prüfungen: Gruppen'});
-  b+=_dlcList([DLC_GARDEN_NOTE],'dlc-list--note');
+  const N=DLC_BOSSES.length,isD=_dlcKDoneFn(),done=DLC_BOSSES.filter(isD).length,nOcean=DLC_BOSSES.filter(_dlcKOcean).length,gd=cdCheckGet(DLC_K_GARTEN),f=_dlcKF;
+  let b='<div class="sec-stats dlc-k-stats"><div class="sec-stat"><span class="sec-stat-val">'+N+'</span><span class="sec-stat-lbl">Bosse und Gegner</span></div>'
+    +'<div class="sec-stat"><span id="dlc-k-prog">'+cdProg(done,N,done+' von '+N+' besiegt')+'</span><span class="sec-stat-lbl">besiegt</span></div></div>';
+  b+='<div class="dlc-k-notes">'+_dlcList(DLC_BOSS_NOTES,'dlc-list--note')+'</div>';
+  b+='<div class="dlc-k-bar">'+cdPills([{v:'all',t:'Alle',n:N,on:f.st==='all'},{v:'open',t:'Offen',n:N-done,on:f.st==='open'},{v:'done',t:'Besiegt',n:done,on:f.st==='done'}],{name:'dlc-k-st',label:'Bosse nach Fortschritt filtern'})
+    +(nOcean?cdPills([{v:'all',t:'Alle Orte',on:f.grp==='all'},{v:'ocean',t:'Großer Ozean (th.gl)',n:nOcean,on:f.grp==='ocean'}],{name:'dlc-k-grp',label:'Bosse nach Ort filtern'}):'')+'</div>';
+  b+='<div class="grid" id="dlc-boss-grid">'+DLC_BOSSES.map(x=>_dlcKCard(x,isD(x))).join('')+'</div>';
+  b+='<p class="dlc-k-empty" id="dlc-k-empty" hidden>Keine Bosse in dieser Auswahl.</p>';
+  b+='<div class="dlc-k-sub"><h3 class="dlc-k-h">Garten der Prüfungen</h3><span id="dlc-g-prog">'+cdProg(DLC_GARDEN.filter(g=>gd.has('g'+g.n)).length,DLC_GARDEN.length,'Gruppen geschafft')+'</span></div>';
+  b+=_dlcFacts(DLC_GARDEN_RULES);
+  b+='<div class="dlc-kg-grid">'+DLC_GARDEN.map(g=>_dlcKGarden(g,gd.has('g'+g.n))).join('')+'</div>';
+  b+='<div class="dlc-k-notes">'+_dlcList([DLC_GARDEN_NOTE],'dlc-list--note')+'</div>';
   return {title:'Bosse und Garten der Prüfungen',lead:'Gegner aus den DLC-Questreihen, teils mit bekannten Namen aus dem Hauptspiel, und die '+DLC_GARDEN.length+' Gruppen im Garten der Prüfungen mit Belohnung.',icon:'☠',
-    chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b};
+    chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b,flat:true,
+    after:function(){
+      _dlcKSync();
+      const sec=document.getElementById('sec-dlc-kampf');
+      if(sec&&!sec._dlcKObs&&window.MutationObserver){sec._dlcKObs=new MutationObserver(()=>{if(sec.classList.contains('active'))_dlcKSync();});sec._dlcKObs.observe(sec,{attributes:true,attributeFilter:['class']});}
+    }};
 }
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail;if(!d)return;
+  if(d.name==='dlc-k-st')_dlcKF.st=d.value||'all';else if(d.name==='dlc-k-grp')_dlcKF.grp=d.value||'all';else return;
+  _dlcKSync();
+});
+document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===DLC_K_GARTEN)_dlcKSync();});
 /* 9 Burgen, Wohnen, Verwaltung, Soziales (Abschnitt dlc-b-leben, Besitz: sammeln) */
 function _dlcSecLeben(){
   const HOMES=_dlcA(()=>DLC_HOMES);
