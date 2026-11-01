@@ -3,7 +3,11 @@
 // Datenquelle: data/d12-dlc.js (DLC_META, DLC_ACCESS, DLC_WARN, DLC_SHIPS, DLC_SHIP_NOTES, DLC_SHIP_FACTS,
 // DLC_CREW, DLC_CREW_NOTES, DLC_SHIPBUILD, DLC_SHIP_PARTS, DLC_PART_NOTES, DLC_ISLANDS, DLC_ISLAND_FACTS, DLC_DIVE,
 // DLC_MOUNTS, DLC_MOUNT_FACTS, DLC_QUESTS, DLC_QUEST_NOTES, DLC_BOSSES, DLC_BOSS_NOTES, DLC_GARDEN_RULES,
-// DLC_GARDEN, DLC_GARDEN_NOTE, DLC_LIVING, DLC_GEAR_TOOLS, DLC_GEAR_TOOLS_DE, DLC_GEAR_NOTES, DLC_OPEN, DLC_SOURCES).
+// DLC_GARDEN, DLC_GARDEN_NOTE, DLC_LIVING, DLC_GEAR_TOOLS, DLC_GEAR_TOOLS_DE, DLC_GEAR_NOTES, DLC_OPEN, DLC_SOURCES;
+// ab 01.11.2026 zusaetzlich die optionalen Tabellen DLC_TRADE, DLC_HOMES, DLC_RELIC_SHOPS, DLC_GEAR_EXTRA: fehlt eine
+// Konstante oder ist sie leer, entfaellt der Abschnitt, die Seite bricht nicht ab).
+// Optionale Felder (nur als Spalte, wenn mindestens ein Eintrag sie hat): DLC_ISLANDS where/nexus/unlock, DLC_SHIPS
+// vendor/crew, DLC_MOUNTS where/trust/stats; DLC_QUESTS req und steps (ersetzen subs), DLC_GARDEN bq.
 // Dieselben Daten zeigt die App auf der Seite sec-dlc (renderDlc in index.html); Feldvertrag im Kopf von d12:
 // Wert = "Text" | {v, c:"ok"|"unb"|"nb", q} | Liste. Unbestaetigtes steht grau mit Vermerk, nicht Belegtes ebenso.
 //
@@ -12,7 +16,8 @@
 // noch kein Eintrag gekennzeichnet ist, steht dort ein Hinweis statt einer leeren Tabelle.
 //
 // Zaehlung (COUNT_CHECK): jede Datenzeile ist ein <tr id="dlc-...">, ueber Schiffe, Schiffsteile, Inseln,
-// Unterwasser-Reittiere, Questreihen, Bosse, Garten-Gruppen und die gekennzeichneten Waffen/Ruestungen.
+// Unterwasser-Reittiere, Questreihen, Bosse, Garten-Gruppen, Seehandel-Waren, Wohnsitze, Relic-Haendler, DLC_GEAR_EXTRA
+// und die gekennzeichneten Waffen/Ruestungen. Accessoires und Abyss-Kerne mit dlc stehen nur als Hinweiszeile (keine Zeile).
 // verify-seo.mjs rechnet die Soll-Menge unabhaengig aus denselben Datenstrukturen nach.
 
 export const SLUG = "charting-the-unknown";
@@ -39,6 +44,9 @@ ul.ctu-list li{margin:0 0 6px}
 h3.ctu-h{margin:22px 0 4px}
 td.ctu-sub{min-width:240px;font-size:13px}
 p.ctu-src{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-faint);margin:14px 0 0;line-height:1.7}
+ol.ctu-st{margin:0;padding-left:18px;font-size:13px}
+ol.ctu-st li{margin:0 0 6px}
+ol.ctu-st li.ctu-unb{color:var(--ink-faint)}
 span.dlc-gtag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:7px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;letter-spacing:.06em;color:#08202b;background:#8fdcff;vertical-align:2px}
 `.trim();
 
@@ -46,21 +54,36 @@ const LISTEN = ["DLC_META", "DLC_ACCESS", "DLC_WARN", "DLC_SHIPS", "DLC_SHIP_NOT
   "DLC_CREW_NOTES", "DLC_SHIPBUILD", "DLC_SHIP_PARTS", "DLC_PART_NOTES", "DLC_ISLANDS", "DLC_ISLAND_FACTS", "DLC_DIVE",
   "DLC_MOUNTS", "DLC_MOUNT_FACTS", "DLC_QUESTS", "DLC_QUEST_NOTES", "DLC_BOSSES", "DLC_BOSS_NOTES", "DLC_GARDEN_RULES",
   "DLC_GARDEN", "DLC_GARDEN_NOTE", "DLC_LIVING", "DLC_GEAR_TOOLS", "DLC_GEAR_TOOLS_DE", "DLC_GEAR_NOTES", "DLC_OPEN",
-  "DLC_SOURCES"];
+  "DLC_SOURCES", "DLC_TRADE", "DLC_HOMES", "DLC_RELIC_SHOPS", "DLC_GEAR_EXTRA"];
+// Nachtlauf 01.11.2026: diese Konstanten duerfen fehlen oder leer sein (dann entfaellt der Abschnitt).
+const OPTIONAL = new Set(["DLC_TRADE", "DLC_HOMES", "DLC_RELIC_SHOPS", "DLC_GEAR_EXTRA"]);
 
 function lade(ctx) {
   const D = {};
-  for (const n of LISTEN) D[n.replace(/^DLC_/, "")] = ctx.helpers.extract(n);
+  for (const n of LISTEN) {
+    const key = n.replace(/^DLC_/, "");
+    if (!OPTIONAL.has(n)) { D[key] = ctx.helpers.extract(n); continue; }
+    let v = [];
+    try { v = ctx.helpers.extract(n); } catch { v = []; }
+    D[key] = Array.isArray(v) ? v.filter(Boolean) : [];
+  }
   // Vertrag der Bauagenten: neue DLC-Eintraege tragen das Feld dlc.
   D.GEAR_W = (ctx.helpers.extract("WEAPONS") || []).filter((w) => w && w.dlc);
   D.GEAR_A = (ctx.data.ARMOR || []).filter((a) => a && a.dlc);
   D.GEAR_X = (ctx.helpers.extract("ACCESSORIES") || []).filter((a) => a && a.dlc);
+  D.GEAR_K = (ctx.helpers.extract("CORES") || []).filter((a) => a && a.dlc);
+  // Hero-Kennzahl und Ueberschrift "Neue DLC-Ausruestung (n)": Waffen + Ruestungen + Accessoires + Kerne + DLC_GEAR_EXTRA
+  D.N_GEAR = D.GEAR_W.length + D.GEAR_A.length + D.GEAR_X.length + D.GEAR_K.length + D.GEAR_EXTRA.length;
   return D;
 }
 
 export function ZAHLEN(ctx) {
   const D = lade(ctx);
   return {
+    ausruestung: D.N_GEAR,
+    waren: D.TRADE.length,
+    wohnsitze: D.HOMES.length,
+    relichaendler: D.RELIC_SHOPS.length,
     schiffe: D.SHIPS.length,
     schiffsteile: D.SHIP_PARTS.length,
     inseln: D.ISLANDS.length,
@@ -77,7 +100,8 @@ export function COUNT_CHECK(ctx) {
   return {
     regex: /<tr id="dlc-/g,
     expected: D.SHIPS.length + D.SHIP_PARTS.length + D.ISLANDS.length + D.MOUNTS.length + D.QUESTS.length
-      + D.BOSSES.length + D.GARDEN.length + D.GEAR_W.length + D.GEAR_A.length,
+      + D.BOSSES.length + D.GARDEN.length + D.GEAR_W.length + D.GEAR_A.length
+      + D.TRADE.length + D.HOMES.length + D.RELIC_SHOPS.length + D.GEAR_EXTRA.length,
     label: "DLC-Datenzeilen",
   };
 }
@@ -110,7 +134,7 @@ export function build(ctx) {
   const rid = (pfx, n) => {
     let id = `dlc-${pfx}-${slug(n)}`;
     if (vergeben.has(id)) {
-      if (pfx !== "waffe" && pfx !== "ruestung") throw new Error(`charting-the-unknown.mjs: doppelter Anker ${id}`);
+      if (pfx !== "waffe" && pfx !== "ruestung" && pfx !== "geraet") throw new Error(`charting-the-unknown.mjs: doppelter Anker ${id}`);
       let i = 2;
       while (vergeben.has(`${id}-${i}`)) i++;
       id = `${id}-${i}`;
@@ -126,8 +150,20 @@ export function build(ctx) {
 <tbody>${rows.join("\n")}</tbody>
 </table></div>`;
 
+  // Zelle: leeres Feld = "nicht belegt" (grau), wenn leer=true; sonst bleibt sie leer. da = Feld belegt?
+  const cell = (x, leer) => val(x) || (leer ? '<span class="ctu-nb">nicht belegt</span>' : "");
+  const da = (arr, k) => arr.some((e) => e && val(e[k]) !== "");
+  // Spalten nur, wenn mindestens ein Eintrag das optionale Feld hat: opt(arr, [[Feld, Kopf, leer?], ...])
+  const optCols = (arr, defs) => defs.filter(([k]) => da(arr, k));
+  // Quest-Schritte {name, d, reward, c, q}: nummerierte Liste, unbestaetigte Schritte grau mit Vermerk.
+  const stepsHtml = (steps) => `<ol class="ctu-st">${steps.map((st) => {
+    const o = typeof st === "string" ? { name: st } : st || {}, bad = o.c && o.c !== "ok";
+    const d = val(o.d), rw = val(o.reward);
+    return `<li${bad ? ' class="ctu-unb"' : ""}><b>${esc(o.name || "Schritt")}</b>${d ? "<br>" + d : ""}${rw ? "<br>Belohnung: " + rw : ""}${bad ? " " + flag(o.c, o.q) : ""}</li>`;
+  }).join("")}</ol>`;
+
   const z = ZAHLEN(ctx);
-  const nGear = D.GEAR_W.length + D.GEAR_A.length;
+  const nGear = D.N_GEAR;
 
   // ── Abschnitte ──
   const zugang = `<h2>Überblick und Zugang</h2>
@@ -136,13 +172,18 @@ ${facts([["Voller Titel", M.full], ["Erschienen", M.release], ["Patch", `${M.pat
 <ol class="ctu-steps">${D.ACCESS.map((s) => `<li><b>${esc(s.t)}:</b> ${esc(s.d)}${s.u ? " " + val(s.u) : ""}</li>`).join("")}</ol>
 ${D.WARN.map((w) => `<p class="ctu-warn"><b>${esc(w.t)}:</b> ${esc(w.d)}</p>`).join("\n")}`;
 
+  const sV = da(D.SHIPS, "vendor"), sC = da(D.SHIPS, "crew");
   const schiffe = `<h2>Schiffe (${D.SHIPS.length})</h2>
 <p class="note">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>
-${table(["Schiff", "Preis", "Erhalt", "Werte"],
-    D.SHIPS.map((s) => tr(rid("schiff", s.name), s, [name(s), val(s.price), val(s.obtain), val(s.stats)])))}
+${table(["Schiff", "Preis", ...(sV ? ["Verkäufer"] : []), "Erhalt", "Werte", ...(sC ? ["Besatzung"] : [])],
+    D.SHIPS.map((s) => tr(rid("schiff", s.name), s, [name(s), val(s.price), ...(sV ? [cell(s.vendor, true)] : []),
+      val(s.obtain), val(s.stats), ...(sC ? [cell(s.crew, true)] : [])])))}
 ${list(D.SHIP_NOTES)}
 <h3 class="ctu-h">Händler, Währung, Seekampf</h3>
-${facts(D.SHIP_FACTS)}`;
+${facts(D.SHIP_FACTS)}${D.TRADE.length ? `
+<h3 class="ctu-h">Seehandel: Waren (${D.TRADE.length})</h3>
+${table(["Ware", "Einkauf", "Verkauf", "Hinweis"],
+    D.TRADE.map((t) => tr(rid("ware", t.name), t, [name(t), cell(t.buy, true), cell(t.sell, true), cell(t.note)])))}` : ""}`;
 
   const bau = `<h2>Schiffsbau und Besatzung</h2>
 ${facts(D.SHIPBUILD)}
@@ -155,31 +196,43 @@ ${list(D.PART_NOTES)}
 ${table(["Teil", "Typ", "Größe", "Händler / Erhalt", "Preis", "Boni"],
     D.SHIP_PARTS.map((p) => tr(rid("teil", p.name), p, [name(p), esc(p.type), val(p.size), val(p.vendor), val(p.price), val(p.bonus)])))}`;
 
+  const iCols = optCols(D.ISLANDS, [["where", "Lage"], ["nexus", "Abyss Nexus"], ["unlock", "Erschließung"]]);
   const inseln = `<h2>Inseln (${D.ISLANDS.length})</h2>
 <p class="note">Benannte Inseln aus den Guides. Eine Gesamtzahl nennt Pearl Abyss nicht; in der App lassen sich die Inseln abhaken.</p>
-${table(["Insel", "Angaben"], D.ISLANDS.map((i) => tr(rid("insel", i.name), i, [name(i), val(i.info)])))}
+${table(["Insel", ...iCols.map(([, kopf]) => kopf), "Angaben"],
+    D.ISLANDS.map((i) => tr(rid("insel", i.name), i, [name(i), ...iCols.map(([k]) => cell(i[k], true)), val(i.info)])))}
 <h3 class="ctu-h">Ozean, Erschließung, Häfen</h3>
 ${facts(D.ISLAND_FACTS)}`;
 
   const tauchen = `<h2>Tauchen</h2>
-${facts(D.DIVE)}`;
+${facts(D.DIVE)}${D.RELIC_SHOPS.length ? `
+<h3 class="ctu-h">Relic-Händler (${D.RELIC_SHOPS.length})</h3>
+${table(["Händler", "Ort", "Sortiment", "Freischaltung"],
+    D.RELIC_SHOPS.map((r) => tr(rid("relic", r.name), r, [name(r), cell(r.where, true), cell(r.sells, true), cell(r.unlock)])))}` : ""}`;
 
+  const mW = da(D.MOUNTS, "where"), mT = da(D.MOUNTS, "trust"), mS = da(D.MOUNTS, "stats");
   const reittiere = `<h2>Unterwasser-Reittiere (${D.MOUNTS.length})</h2>
-${table(["Reittier", "Zähmen"], D.MOUNTS.map((m) => tr(rid("reittier", m.name), m, [name(m), val(m.how)])))}
+${table(["Reittier", ...(mW ? ["Fundort"] : []), "Zähmen", ...(mT ? ["Vertrauen"] : []), ...(mS ? ["Werte"] : [])],
+    D.MOUNTS.map((m) => tr(rid("reittier", m.name), m, [name(m), ...(mW ? [cell(m.where, true)] : []), val(m.how),
+      ...(mT ? [cell(m.trust, true)] : []), ...(mS ? [cell(m.stats, true)] : [])])))}
 ${facts(D.MOUNT_FACTS)}
 <p class="note">Pferde, Drachen und Fahrzeuge aus dem Hauptspiel stehen bei den <a href="/mounts">Reittieren</a>.</p>`;
 
+  const stepsOf = (q) => (Array.isArray(q.steps) ? q.steps.filter(Boolean) : []);
   const subsHtml = (q) => {
+    const st = stepsOf(q);
+    if (st.length) return stepsHtml(st);
     const o = obj(Array.isArray(q.subs) ? q.subs[0] : q.subs);
     if (o.c === "nb") return val(o);
+    if (!String(o.v || "").trim()) return val({ v: "nicht belegt", c: "nb" });
     const teile2 = String(o.v || "").split(/\s*;\s*/).filter(Boolean).map(esc).join("; ");
     return o.c && o.c !== "ok" ? `<span class="ctu-unb">${teile2}</span> ${flag(o.c, o.q)}` : teile2;
   };
   const quests = `<h2>DLC-Quests (${D.QUESTS.length})</h2>
 ${list(D.QUEST_NOTES)}
-${table(["Questreihe", "Figur / Start", "Unterquests (Reihenfolge laut Guide)", "Belohnungen"],
+${table(["Questreihe", "Figur / Start", D.QUESTS.some((q) => stepsOf(q).length) ? "Schritte und Unterquests (Reihenfolge laut Guide)" : "Unterquests (Reihenfolge laut Guide)", "Belohnungen"],
     D.QUESTS.map((q) => tr(rid("quest", q.name), q, [name(q),
-      esc(q.who) + (q.start ? "<br>Start: " + val(q.start) : ""),
+      esc(q.who) + (q.start ? "<br>Start: " + val(q.start) : "") + (val(q.req) ? "<br>Voraussetzung: " + val(q.req) : ""),
       { h: subsHtml(q), cls: "ctu-sub" }, val(q.rewards) + (q.note ? "<br>" + val(q.note) : "")])))}
 <p class="note">Alle übrigen Graumähnen-Quests stehen bei den <a href="/fraktionen">Fraktionsquests</a>.</p>`;
 
@@ -193,16 +246,19 @@ ${table(["Boss", "Ort und Kontext", "Beute"],
 ${facts(D.GARDEN_RULES)}
 ${table(["Gruppe", "Bosse", "Belohnung"],
     D.GARDEN.map((g) => {
-      const links = g.b.map((n) => `<a href="/bosse#boss-${slug(n)}">${esc(n)}</a>`).join(", ");
+      const links = [].concat(g.b || []).map((n) => `<a href="/bosse#boss-${slug(n)}">${esc(n)}</a>`).join(", ");
       return tr(rid("garten", g.name), null, [`${esc(g.n)}. ${esc(g.name)}`,
-        g.bc === "ok" ? links : `<span class="ctu-unb">${links}</span> ${flag("unb", "GameRant")}`, esc(g.reward)]);
+        g.bc === "ok" ? links : `<span class="ctu-unb">${links}</span> ${flag("unb", g.bq || "GameRant")}`, esc(g.reward)]);
     }))}
 ${list([D.GARDEN_NOTE])}`;
 
   const gruppen = [...new Set(D.LIVING.map((x) => x.g))];
   const leben = `<h2>Burgen, Wohnen, Verwaltung und Soziales</h2>
 ${gruppen.map((g) => `<h3 class="ctu-h">${esc(g)}</h3>
-<ul class="ctu-list">${D.LIVING.filter((x) => x.g === g).map((x) => `<li><b>${esc(x.t)}:</b> ${val(x.d)}</li>`).join("")}</ul>`).join("\n")}`;
+<ul class="ctu-list">${D.LIVING.filter((x) => x.g === g).map((x) => `<li><b>${esc(x.t)}:</b> ${val(x.d)}</li>`).join("")}</ul>`).join("\n")}${D.HOMES.length ? `
+<h3 class="ctu-h">Wohnsitze (${D.HOMES.length})</h3>
+${table(["Wohnsitz", "Ort", "Erwerb", "Hinweis"],
+    D.HOMES.map((x) => tr(rid("wohnsitz", x.name), x, [name(x), cell(x.where, true), cell(x.how, true), cell(x.note)])))}` : ""}`;
 
   const gearNamen = new Set(D.GEAR_W.map((w) => w.name));
   const tools = D.GEAR_TOOLS.filter((t) => !gearNamen.has(t));
@@ -214,7 +270,14 @@ ${table(["Waffe", "Typ", "ATK", "Fundort"], D.GEAR_W.map((w) => tr(rid("waffe", 
 ${D.GEAR_A.length ? `<h3 class="ctu-h">Rüstungen (${D.GEAR_A.length})</h3>
 ${table(["Rüstung", "Teil", "Effekt", "Fundort"], D.GEAR_A.map((a) => tr(rid("ruestung", a.name), null,
     [`<strong>${esc(a.name)}</strong><span class="dlc-gtag">DLC</span>`, esc(a.type || ""), has(a.effect) ? valQ(a.effect, a) : '<span class="ctu-nb">nicht erfasst</span>', has(a.source) ? esc(a.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
-${D.GEAR_X.length ? `<p class="note">Neue Accessoires: ${D.GEAR_X.map((x) => `<strong>${esc(x.name)}</strong> (${esc(x.type)}, ${esc(x.source || "")})`).join("; ")}. Details auf der Seite <a href="/accessoires">Accessoires</a>.</p>` : ""}
+${D.GEAR_EXTRA.length ? `<h3 class="ctu-h">Weitere Ausrüstung (${D.GEAR_EXTRA.length})</h3>
+${table(["Name", "Art", "Slot", "Charakter", "Werte", "Erhalt"], D.GEAR_EXTRA.map((g) => {
+    const s = val(g.source), r = val(g.req);
+    return tr(rid("geraet", g.name), g, [name(g), cell(g.kind, true), cell(g.slot, true), cell(g.char, true), cell(g.stats, true),
+      s || r ? s + (r ? (s ? "<br>" : "") + "Voraussetzung: " + r : "") : '<span class="ctu-nb">nicht belegt</span>']);
+  }))}` : ""}
+${D.GEAR_X.length ? `<p class="note">Neue Accessoires: ${D.GEAR_X.map((x) => `<strong>${esc(x.name)}</strong> (${[x.type, x.source].filter(Boolean).map(esc).join(", ")})`).join("; ")}. Details auf der Seite <a href="/accessoires">Accessoires</a>.</p>` : ""}
+${D.GEAR_K.length ? `<p class="note">Neue Abyss-Kerne: ${D.GEAR_K.map((x) => `<strong>${esc(x.name)}</strong> (${[x.slot, x.source].filter(Boolean).map(esc).join(", ")})`).join("; ")}. Details auf der Seite <a href="/abyss-cores">Abyss-Ausrüstung</a>.</p>` : ""}
 ${nGear ? "" : '<p class="note">Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet; die Einträge erscheinen hier automatisch.</p>'}
 ${tools.length ? `<p class="note">Offiziell neu sind außerdem im Kampf einsetzbare Alltagswerkzeuge: ${tools.map((t) => `${esc(t)} (${esc(D.GEAR_TOOLS_DE[t] || "")})`).join(", ")}. Werte, Fundort und Waffentyp sind nicht belegt.</p>` : ""}
 <p class="note">Alle gekennzeichneten Einträge tragen auf den Seiten <a href="/waffen">Waffen</a> und <a href="/ruestungen">Rüstungen</a> das Etikett <span class="dlc-gtag">DLC</span>.</p>`;
@@ -222,7 +285,7 @@ ${tools.length ? `<p class="note">Offiziell neu sind außerdem im Kampf einsetzb
   const offen = `<h2>Was noch offen ist (${D.OPEN.length})</h2>
 <ul class="ctu-list">${D.OPEN.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
 
-  const quellen = `<p class="ctu-src">Quellen: ${D.SOURCES.map((s) => `<a href="${esc(s.url)}" rel="nofollow noopener noreferrer" target="_blank">${esc(s.t)}</a>`).join(" &middot; ")}. Geprüft am ${esc(M.checked)} (einzelne Seiten erneut am ${esc(M.recheck)}).</p>`;
+  const quellen = `<p class="ctu-src">Quellen: ${D.SOURCES.map((s) => `<a href="${esc(s.url)}" rel="nofollow noopener noreferrer" target="_blank">${esc(s.t)}</a>`).join(" &middot; ")}. Geprüft am ${esc(M.checked)}${M.recheck && M.recheck !== M.checked ? ` (einzelne Seiten erneut am ${esc(M.recheck)})` : ""}.</p>`;
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Alles zum DLC interaktiv in der App öffnen &rarr;</a>

@@ -118,9 +118,15 @@ const ACCESSORIES = extract("ACCESSORIES");
 // gerechnet: je Datenzeile ein <tr id="dlc-...">, dazu die in WEAPONS/ARMOR mit dem Feld dlc gekennzeichneten Teile.
 const DLC = Object.fromEntries(["DLC_META", "DLC_SHIPS", "DLC_SHIP_PARTS", "DLC_ISLANDS", "DLC_MOUNTS", "DLC_QUESTS",
   "DLC_BOSSES", "DLC_GARDEN"].map((n) => [n.slice(4), extract(n)]));
+// Nachtlauf 01.11.2026: Seehandel-Waren, Wohnsitze, Relic-Haendler und weitere Ausruestung (duerfen fehlen oder leer sein).
+Object.assign(DLC, Object.fromEntries(["DLC_TRADE", "DLC_HOMES", "DLC_RELIC_SHOPS", "DLC_GEAR_EXTRA"].map((n) => {
+  let v = []; try { v = extract(n); } catch { v = []; }
+  return [n.slice(4), Array.isArray(v) ? v.filter(Boolean) : []];
+})));
 const DLC_GEAR_W = extract("WEAPONS").filter((w) => w && w.dlc), DLC_GEAR_A = extract("ARMOR").filter((a) => a && a.dlc);
 const N_DLC_ROWS = DLC.SHIPS.length + DLC.SHIP_PARTS.length + DLC.ISLANDS.length + DLC.MOUNTS.length + DLC.QUESTS.length
-  + DLC.BOSSES.length + DLC.GARDEN.length + DLC_GEAR_W.length + DLC_GEAR_A.length;const allImgVals = [...Object.values(B), ...Object.values(W)];
+  + DLC.BOSSES.length + DLC.GARDEN.length + DLC_GEAR_W.length + DLC_GEAR_A.length
+  + DLC.TRADE.length + DLC.HOMES.length + DLC.RELIC_SHOPS.length + DLC.GEAR_EXTRA.length;const allImgVals = [...Object.values(B), ...Object.values(W)];
 const absUrls = allImgVals.filter((v) => /^https?:/i.test(v));
 console.log(`\n[Bild-Maps] BOSS_IMGS=${Object.keys(B).length}, WEAPON_IMGS=${Object.keys(W).length}, absolute URLs=${absUrls.length}`);
 const localImgs = allImgVals.filter((v) => !/^https?:/i.test(v));
@@ -372,7 +378,10 @@ const ERLAUBTE_ZAHLEN = {
   // NEU (31.10.2026): Intro und FAQ nennen Schiffe, Schiffsteile, Inseln, Questreihen, Garten-Gruppen und die Hoechstzahl
   // der Charaktere im Garten (DLC_META.gardenChars, als Zahlwort).
   "charting-the-unknown.html": [DLC.SHIPS.length, DLC.SHIP_PARTS.length, DLC.ISLANDS.length, DLC.QUESTS.length,
-    DLC.GARDEN.length, DLC.META.gardenChars, DLC.MOUNTS.length, DLC.BOSSES.length],
+    DLC.GARDEN.length, DLC.META.gardenChars, DLC.MOUNTS.length, DLC.BOSSES.length,
+    // 01.11.2026: Ausruestung gesamt (Waffen + Ruestungen + Accessoires + Kerne + DLC_GEAR_EXTRA), Waren, Wohnsitze, Relic-Haendler
+    DLC_GEAR_W.length + DLC_GEAR_A.length + ACCESSORIES.filter((a) => a && a.dlc).length + CORES.filter((c) => c && c.dlc).length + DLC.GEAR_EXTRA.length,
+    DLC.TRADE.length, DLC.HOMES.length, DLC.RELIC_SHOPS.length],
 };
 
 ok(PATCHES_1X.some((p) => p.ver.startsWith("1.13.")) && PATCHES_1X.some((p) => p.ver.startsWith("1.18.")),
@@ -549,7 +558,9 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
     "charting-the-unknown.html": [...DLC.SHIPS.map((x) => "dlc-schiff-" + slugUnabh(x.name)), ...DLC.SHIP_PARTS.map((x) => "dlc-teil-" + slugUnabh(x.name)),
       ...DLC.ISLANDS.map((x) => "dlc-insel-" + slugUnabh(x.name)), ...DLC.MOUNTS.map((x) => "dlc-reittier-" + slugUnabh(x.name)),
       ...DLC.QUESTS.map((x) => "dlc-quest-" + slugUnabh(x.name)), ...DLC.BOSSES.map((x) => "dlc-boss-" + slugUnabh(x.name)),
-      ...DLC.GARDEN.map((x) => "dlc-garten-" + slugUnabh(x.name))],
+      ...DLC.GARDEN.map((x) => "dlc-garten-" + slugUnabh(x.name)),
+      ...DLC.TRADE.map((x) => "dlc-ware-" + slugUnabh(x.name)), ...DLC.HOMES.map((x) => "dlc-wohnsitz-" + slugUnabh(x.name)),
+      ...DLC.RELIC_SHOPS.map((x) => "dlc-relic-" + slugUnabh(x.name)), ...DLC.GEAR_EXTRA.map((x) => "dlc-geraet-" + slugUnabh(x.name))],
   };
   for (const datei of Object.keys(pages)) {
     const c = fs.readFileSync(path.join(ROOT, datei), "utf8");

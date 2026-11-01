@@ -127,7 +127,7 @@ function mountCard(m, ctx, MOUNT_IMGS, MOUNT_INGAME_IMGS) {
 
   return `<article class="card" id="mount-${slug(m.name)}">
 ${imgTag}
-<h3>${esc(m.name)}</h3>
+<h3>${esc(m.name)}${m.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(m.dlc)}">DLC</span>` : ""}</h3>
 <ul class="stats">${statsHtml}</ul>
 ${notes}${ig}
 </article>`;

@@ -122,7 +122,7 @@ export function build(ctx) {
   };
 
   const row = (c) => `<tr id="core-${slug(c.name)}">
-<td class="crs-n">${iconHtml(c)}<strong>${esc(c.name)}</strong></td>
+<td class="crs-n">${iconHtml(c)}<strong>${esc(c.name)}</strong>${c.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(c.dlc)}">DLC</span>` : ""}</td>
 <td>${esc(c.effect)}${tierStrip(c.name)}${greaterNote(c)}</td>
 <td class="crs-src">${esc(c.source)}</td>
 </tr>`;

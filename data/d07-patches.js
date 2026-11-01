@@ -3,6 +3,70 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.04.03",date:"31.10.2026",size:"Dritter Hotfix nach dem DLC-Start, veröffentlicht am 31.10.2026 um 12:00 UTC, also 13:00 MEZ (boardNo 147; Steam-Zweitveröffentlichung 12:16 UTC). 13 Punkte unter der einzigen Überschrift Patch-Details, kein neuer Inhalt: Erschließungsmissionen, die Schenken-Funktion, Feste, fliegende Haustiere, Geschenke des Ehepartners und mehrere Darstellungsfehler. Beim Erscheinen war der Patch auf XBOX und im Mac App Store noch nicht verfügbar. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Patch-Details",items:[
+      "Behoben: Bestimmte <b>Erschließungsmissionen</b> (<em>pioneering missions</em>) ließen sich unter bestimmten Umständen nicht abschließen.",
+      "<b>Schenken</b> (<em>Gift</em>): Ihr könnt jetzt mehrere Gegenstände gleichzeitig auswählen und die Menge je Gegenstand festlegen.",
+      "Behoben: Beim <b>Schenken</b> wurden Gegenstände nicht übergeben, sondern zurückgegeben.",
+      "<b>Feste</b>: Die Abstände zwischen Kundenbesuchen werden nachts nicht mehr länger.",
+      "Behoben: <b>Fliegende Haustiere</b> folgten dem Charakter in bestimmten Situationen nicht richtig.",
+      "Behoben: Der/die <b>Ehepartner/-in</b> gab nach der Heirat nicht wie vorgesehen Geschenke.",
+      "Behoben: Während bestimmter Quest-Fortschritte ließen sich die <b>Freischaltbedingungen für Kliff</b> nicht einsehen.",
+      "Behoben: Der Charakter wurde in bestimmten Situationen beim <b>Charakterwechsel</b> durchsichtig dargestellt.",
+      "Die <b>Augen</b> der Charaktere wirken jetzt klarer.",
+      "Behoben: <b>Unterwasser-Soundeffekte</b> waren auch an Orten zu hören, die nicht unter Wasser liegen, etwa im Titelbildschirm.",
+      "Behoben: Das <b>Fähigkeiten-Menü</b> des gerade nicht gespielten Charakters wurde fehlerhaft angezeigt.",
+      "[Tastatur/Maus] Behoben: Bei Interaktionen überlappten sich die <b>Tastenhinweise</b>.",
+      "Behoben: Die <b>Arme</b> des Spielercharakters zitterten, wenn er einem Gegner gegenüberstand."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation und Epic Games Store: <em>Patch jetzt verfügbar</em>. XBOX und Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 01.11.2026). Keine Downloadgröße, keine Build-Nummer.",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde am 31.10.2026 um 14:00 UTC aktualisiert. Neu sind unter anderem die Damiane-Quest <b>„Ende und Anfang“</b> (<em>End and Beginning</em>), die sich nicht fortsetzen lässt, wenn „Ende der Reise“ in einem bestimmten Zeitraum abgeschlossen wurde, verschwindendes <b>Vieh auf dem Viehhof</b>, teils koreanisch angezeigte Schenken-Menüs (laut Pearl Abyss mit dem nächsten Patch behoben) und fehlende Bewegungsgeräusche unter Wasser. Die vollständige Liste steht oben unter „Weiterhin bekannte Probleme“.",
+      "Quelle: offizielle Patch-Notizen Version 2.04.03 (Hotfix für alle Plattformen), Pearl Abyss, 31.10.2026 12:00 UTC (boardNo 147), deutsche und englische Fassung gegengeprüft; Zeitpunkt per Steam-News bestätigt (31.10.2026 12:16 UTC)."
+    ]}
+  ]},
+  {ver:"2.04.02",date:"30.10.2026",size:"Zweiter Hotfix nach dem DLC-Start, veröffentlicht am 30.10.2026 (boardNo 146) zwischen 15:00 und 17:00 UTC, also 16:00 bis 18:00 MEZ. 17 Punkte unter der einzigen Überschrift Patch-Details, kein neuer Inhalt; der Schwerpunkt liegt auf den DLC-Neuerungen Ehepartner, Segelschiffe, Tauchen und Verwaltungseinrichtungen. Mit diesem Patch ist auch die beim 2.04.00 Hotfix angekündigte Korrektur der Versionsanzeige erfolgt: Wer im Spiel 2.04.02 sieht, hat beide Hotfixes. Eine Version 2.04.01 hat Pearl Abyss nie veröffentlicht. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Patch-Details",items:[
+      "Behoben: Der/die <b>Ehepartner/-in</b> und die Graumähne folgten einem in bestimmten Situationen sogar ins Wasser.",
+      "Behoben: Der/die <b>Ehepartner/-in</b> verhielt sich im Kampf wiederholt ungewöhnlich.",
+      "Behoben: <b>Piraten</b> teleportierten sich, wenn sie ins Wasser fielen.",
+      "Behoben: Der <b>Leviakan</b> blieb in bestimmten Situationen stehen.",
+      "Behoben: Die <b>Seeschlange</b> griff nicht richtig an. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt <em>sea serpents would not attack you</em>, also Plural und ohne das einschränkende „richtig“.</span>",
+      "Behoben: <b>NPCs</b> kamen nach dem Betreten der Toilette nicht mehr heraus.",
+      "Behoben: Einige <b>Segelschiffe</b> blieben stehen und bewegten sich nicht mehr.",
+      "Behoben: Die <b>Besatzung</b> einiger Segelschiffe erschien nicht.",
+      "Behoben: <b>Belohnungen</b> für bestimmte Quests und Herausforderungen wurden nicht vergeben.",
+      "Behoben: gelegentliche <b>Abstürze</b>.",
+      "Behoben: Die <b>Verwaltungs-Umsätze</b> stiegen in bestimmten Situationen ungewöhnlich stark an. <span style='color:var(--gdim)'>Einordnung: Betrifft die mit dem DLC eingeführten Einrichtungen auf befreiten Stützpunkten (Restaurant, Sägewerk, Schmiede, Schneiderei).</span>",
+      "Behoben: <b>Wasserfälle</b> wurden fehlerhaft dargestellt.",
+      "Behoben: <b>Oongka</b> war in bestimmten Situationen unsichtbar.",
+      "<b>Erschließung</b>: Beim Betreten eines erschließbaren Gebiets erscheint jetzt eine Benachrichtigung im rechten Menü, über die ihr die Mission direkt starten könnt. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung formuliert das ausdrücklich als Verbesserung des Erschließungssystems (<em>pioneering system</em>).</span>",
+      "[AMD] Behoben: Mit Treiberversion <b>26.10.1</b> wurden einige Grafiken fehlerhaft dargestellt. <span style='color:var(--gdim)'>Einordnung: Der Punkt stand nur rund zwölf Stunden auf der Liste bekannter Probleme (eingetragen am 30.10. um 03:00 UTC, entfernt mit der Aktualisierung um 15:00 UTC). Der dort genannte Behelf, auf Treiber 26.8.1 oder älter zurückzugehen, ist damit überholt.</span>",
+      "Behoben: Einige <b>Interaktionen</b> waren nicht möglich, wenn beim <b>Tauchen</b> die Laterne eingeschaltet war.",
+      "Behoben: Der Charakter fing beim Versuch, <b>an Bord eines Schiffs</b> zu gehen, Feuer und konnte dadurch nicht an Bord gehen."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>wird derzeit vorbereitet</em>. Keine Downloadgröße, keine Build-Nummer.",
+      "Quelle: offizielle Patch-Notizen Version 2.04.02 (Hotfix für alle Plattformen), Pearl Abyss, 30.10.2026 (boardNo 146), deutsche und englische Fassung gegengeprüft. <span style='color:var(--gdim)'>Einordnung: Die Detailseite nennt als Veröffentlichungszeit 00:00 UTC, dieselbe Angabe wie beim Hotfix davor (boardNo 145). Das kann nicht stimmen: Der Patch behebt einen Fehler, der erst um 03:00 UTC auf die Liste bekannter Probleme kam, und der Beitrag stand um 08:40 UTC noch nicht auf dem Board. Belegbar ist eine Veröffentlichung zwischen 15:00 UTC (Aktualisierung der Liste bekannter Probleme) und 17:00 UTC (Zweitveröffentlichung auf Steam).</span>"
+    ]}
+  ]},
+  {ver:"2.04.00 Hotfix",date:"30.10.2026",size:"Erster Hotfix nach dem DLC-Start, laut Notice veröffentlicht am 30.10.2026 um 00:00 UTC, also 01:00 MEZ, zwei Stunden nach dem DLC-Patch (boardNo 145; Steam-Zweitveröffentlichung 07:26 UTC). Neun Fehlerbehebungen unter der einzigen Überschrift Patch-Details, kein neuer Inhalt; die Hälfte betrifft die DLC-Neuerungen Segelschiff, Tauchen und freies Bauen. Besonderheit: Die Versionsanzeige im Spiel blieb laut Notizen auch nach dem Hotfix bei 2.04.00, die Änderungen griffen trotzdem; korrigiert wurde die Anzeige mit 2.04.02. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Patch-Details",items:[
+      "Behoben: Einige Fähigkeiten der <b>Perfektion</b> (<em>Ascend</em>) wurden nicht korrekt angewandt.",
+      "[Damiane] Behoben: Der <b>Schildwurf</b> (<em>Shield Toss</em>) ließ sich beim Tauchen mehrmals hintereinander einsetzen.",
+      "Der <b>Glänzende Samen</b> (<em>Glowing Seeds</em>) lässt sich laut englischer Fassung jetzt im Kampf hervorholen. <span style='color:var(--gdim)'>Einordnung: Hier widersprechen sich die Sprachfassungen. Die englische Fassung formuliert die Änderung als Verbesserung („can now be taken out during combat“), die deutsche als Fehlerbehebung mit umgekehrter Wirkung („behoben, bei dem man den Glänzenden Samen auch während des Kampfs hervorholen konnte“). Welche Richtung gilt, ist aus den Notizen nicht entscheidbar.</span>",
+      "Behoben: Der <b>Kameraabstand</b> veränderte sich nach dem Zielen mit der <b>Kanone eines Segelschiffs</b>.",
+      "Behoben: Die Kamera bewegte sich beim <b>Aufsteigen auf ein Segelschiff</b> kurz unnatürlich.",
+      "Behoben: Im <b>Wohn-System</b> ragten einige Pflanzen durch Gebäude hindurch.",
+      "Behoben: Im <b>Wohn-System</b> wurden Gegenstände an der falschen Stelle platziert, wenn die Auflösung des Monitors von der Auflösung im Spiel abwich.",
+      "Der Ablauf der Quest <b>„Schritte in unbekannten Ländern“</b> (<em>Footsteps in Unfamiliar Lands</em>) wurde verbessert, sodass die Mission direkt ab dem Startpunkt durchgeführt werden kann.",
+      "Behoben: <b>Kliff</b> wurde nach seinem Tod in der Wüste unter bestimmten Umständen in einer nicht betretbaren Region wiederbelebt."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>wird derzeit vorbereitet</em>. Keine Downloadgröße, keine Build-Nummer.",
+      "Quelle: offizielle Patch-Notizen Version 2.04.00 (Hotfix für alle Plattformen), Pearl Abyss, 30.10.2026 00:00 UTC laut Detailseite (boardNo 145), deutsche und englische Fassung gegengeprüft; Steam-Zweitveröffentlichung am 30.10.2026 um 07:26 UTC."
+    ]}
+  ]},
   {ver:"2.04.00",date:"29.10.2026",size:"Der DLC-Patch: Mit 2.04.00 erscheint der erste DLC <b>„Charting the Unknown“</b> (<em>Crimson Desert Enhanced: Charting the Unknown</em>), veröffentlicht am 29.10.2026 um 22:00 UTC, also 23:00 MEZ (boardNo 140). Die Notes gliedern ihn in vier DLC-Kapitel (Geschichte, Ozean, Leben in Pywel, neue Bedrohungen), zehn Punkte unter Neues, 18 Hauptänderungen in sechs Bereichen und zehn Punkte unter Sonstiges. Kernstücke sind je eine eigene Quest für Kliff, Oongka und Damiane nach „Ende der Reise“, Tauchen mit Atemanzeige, Segelschiffe samt Seehandel, freies Bauen beim Wohnen, zwei selbst gestaltbare Burgen, Heirat über erweiterte Vertrauensstufen und der Kampfinhalt „Garten der Prüfungen“. Wichtig für Cross-Save: Spielstände aus einer Umgebung mit DLC lassen sich ohne DLC weder laden noch per Cross-Save nutzen. Eine Downloadgröße nennen die Notes nicht; auf dem Mac (Steam und Mac App Store) muss das vollständige Spielpaket einmalig neu heruntergeladen werden.",features:[
     {cat:"Die Reise geht weiter",items:[
       "Für <b>Kliff, Oongka und Damiane</b> wurde jeweils eine <b>eigene Quest</b> hinzugefügt. Nach Abschluss der Hauptquest <b>„Ende der Reise“</b> (<em>Journey's End</em>) findet ihr sie im Menü „Abenteuertagebuch“ (<em>Journal</em>). <span style='color:var(--gdim)'>Einordnung: Die Notes kündigen neue Geschichten an, von einer unheilvollen Präsenz in der Wüste über einen politischen Konflikt bis zu einem uralten Geheimnis unter den Wellen.</span>"
@@ -87,14 +151,14 @@ const PATCHES=[
     {cat:"Plattformen und Quelle",items:[
       "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>in Vorbereitung</em> (Stand 29.10.2026, 22:47 UTC). Keine Downloadgröße.",
       "Auf <b>Steam (Mac)</b> und im <b>Mac App Store</b> muss wegen technischer Anpassungen an der Mac-Version mit diesem Patch einmalig das vollständige Spielpaket erneut heruntergeladen werden. <span style='color:var(--gdim)'>Einordnung: Laut Erscheinungsmeldung (boardNo 143) ist der DLC auch im Mac App Store erhältlich, das Update kann dort etwas später erscheinen. Ob der DLC dort schon spielbar ist, ist unbestätigt.</span>",
-      "Bekannte Probleme: Die Notes verweisen nur auf die offizielle Liste (boardNo 68), die weiter den Stand 21.09.2026, 14:00 UTC trägt (geprüft 29.10.2026) und keine DLC-Einträge enthält.",
+      "Bekannte Probleme: Die Notes verweisen nur auf die offizielle Liste (boardNo 68), die zum Erscheinen noch den Stand 21.09.2026, 14:00 UTC trug und keine DLC-Einträge enthielt (geprüft 29.10.2026). Seit dem 30.10.2026 führt sie auch DLC-Punkte, siehe die Hotfixes darüber.",
       "Quelle: offizielle Patch-Notizen Version 2.04.00, Pearl Abyss, 29.10.2026 22:00 UTC (boardNo 140), deutsche und englische Fassung gegengeprüft; dazu die Erscheinungsmeldung zum DLC (boardNo 143) und die Inhaltsübersicht (boardNo 137)."
     ]}
   ]},
   {ver:"2.03.02",date:"23.09.2026",size:"Dritter Patch innerhalb einer Woche und zweiter Hotfix auf 2.03.00, drei Fehlerbehebungen unter der einzigen Überschrift Patch-Details. Veröffentlicht am 23.09.2026 um 04:45 UTC (boardNo 133). Einer der drei Punkte, die fehlenden Kartensymbole, stand erst zwei Tage zuvor neu auf der offiziellen Liste bekannter Probleme.",features:[
     {cat:"Patch-Details",items:[
       "<b>Grimnir</b> erschien unter bestimmten Umständen während der Quest <b>„The Mysterious Pot“</b> (deutsch „Der geheimnisvolle Topf“) nicht — behoben. <span style='color:var(--gdim)'>Einordnung: Dieselbe Quest aus der Kilnden-Werkstatt stand schon in früheren Patches mehrfach auf der Fehlerliste, siehe unten.</span>",
-      "Die <b>Symbole neu entdeckter Objekte</b> wurden in einigen Regionen nicht auf der Karte angezeigt — behoben. <span style='color:var(--gdim)'>Einordnung: Pearl Abyss hatte genau diesen Fehler bis zum 21.09.2026 neu in die Liste bekannter Probleme aufgenommen. Die Liste trägt weiterhin den Stand 21.09.2026, 14:00 UTC (Abruf 20.10.2026) und führt ihn deshalb noch.</span>",
+      "Die <b>Symbole neu entdeckter Objekte</b> wurden in einigen Regionen nicht auf der Karte angezeigt — behoben. <span style='color:var(--gdim)'>Einordnung: Pearl Abyss hatte genau diesen Fehler bis zum 21.09.2026 neu in die Liste bekannter Probleme aufgenommen und führte ihn dort trotz der Behebung weiter. Erst mit der Aktualisierung vom 30.10.2026 (03:00 UTC) ist der Punkt von der Liste verschwunden.</span>",
       "Im Abyss <b>„Ether Rest“</b> (deutsch „Äthersruh“) wurde der <b>Energiekern</b> nicht erkannt, der Fortschritt war blockiert — behoben. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung spricht von einem Kern, die deutsche von mehreren.</span>"
     ]},
     {cat:"Plattformen und Quelle",items:[

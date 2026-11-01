@@ -14,7 +14,7 @@
 <script>(function(){var s='',h=location.hash.replace(/^#/,''),m=/^sec-([a-z0-9-]+)$/.exec(h)||/(?:^|&)sec=([a-z0-9-]+)/.exec(h);if(m)s=m[1];else{try{s=localStorage.getItem('cd_sec')||'';}catch(e){}}if((s||'start')!=='start')return;document.documentElement.classList.add('cd-boot-start');var l=document.createElement('link');l.rel='preload';l.as='image';l.href='cd_assets/scenes/start.webp';l.fetchPriority='high';document.head.appendChild(l);})();</script>
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Crimson Desert Wiki Deutsch: Bosse, Waffen, Quests &amp; Guides</title>
-<meta name="description" content="Das deutsche Crimson Desert Wiki: 100 Bosse, 511 Waffen, alle Haupt- und Nebenquests, Ruinen-Lösungen, Crafting, Patch-Notes und True-Ending-Checkliste. Kostenlos.">
+<meta name="description" content="Das deutsche Crimson Desert Wiki: 100 Bosse, 517 Waffen, alle Haupt- und Nebenquests, Ruinen-Lösungen, Crafting, Patch-Notes und True-Ending-Checkliste. Kostenlos.">
 <link rel="canonical" href="https://crimson-desert-wiki.com/">
 <meta property="og:title" content="Crimson Desert Wiki Deutsch: Bosse, Waffen, Quests &amp; Guides">
 <meta property="og:description" content="Bosse, Waffen, Quests, Ruinen-Lösungen, Crafting und True-Ending-Checkliste: das deutsche Crimson Desert Wiki an einem Ort.">
@@ -7013,6 +7013,8 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dlc-lnk{padding:0;border:0;background:none;color:var(--ink-hi);font:inherit;font-weight:700;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--cd-fx-ice) 55%,transparent);text-underline-offset:3px}
 .dlc-lnk:hover,.dlc-lnk:focus-visible{color:var(--cd-fx-ice)}
 .dlc-checked{margin-top:6px}
+.ctu-pt{display:block;margin-top:2px}
+.ctu-pk{color:var(--dim)}
 @media (max-width:640px){
   .dlc-tw{overflow:visible;background:none;border:0}
   .dlc-tbl thead{display:none}
@@ -7022,6 +7024,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .dlc-tbl td::before{content:attr(data-l);font-family:var(--f-mono);font-size:var(--fs-10);text-transform:uppercase;letter-spacing:.06em;color:var(--dim);overflow-wrap:anywhere}
   .dlc-tbl td:first-child{display:block;min-width:0;padding-top:6px;padding-bottom:6px}
   .dlc-tbl td:first-child::before{display:none}
+  .dlc-tbl td:empty{display:none}
   .dlc-tbl--garden td:first-child{width:auto}
   .dlc-tbl--garden td:first-child::before{display:inline;content:"Nr. "}
 }
@@ -7629,7 +7632,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 <section class="sec" id="sec-start" aria-labelledby="start-title">
     <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <!-- Statischer Kopf für den ersten Paint (Schnellstart, siehe <head>); renderStartOverview() ersetzt ihn samt aktuellen Zahlen. -->
-    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>37</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>511</dd></div></dl></header></div>
+    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>37</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>517</dd></div></dl></header></div>
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
@@ -8424,18 +8427,25 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
         <summary>
           <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg></span>
           <span class="cd-fold-main"><h3 class="cd-fold-t">Weiterhin bekannte Probleme</h3>
-            <span class="cd-fold-lead">Offizielle Liste von Pearl Abyss, Stand 21.09.2026 (14:00 UTC), zuletzt geprüft am 29.10.2026.</span>
-            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--warn"><b>10</b><span>Punkte</span></span><span class="cd-chip cd-chip--ok"><b>1</b><span>laut 2.03.02 behoben</span></span><span class="cd-chip"><b>1</b><span>Status unklar</span></span></span>
+            <span class="cd-fold-lead">Offizielle Liste von Pearl Abyss, Stand 31.10.2026 (14:00 UTC), zuletzt geprüft am 01.11.2026.</span>
+            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--warn"><b>17</b><span>Punkte</span></span><span class="cd-chip"><b>8</b><span>neu seit dem DLC</span></span><span class="cd-chip"><b>1</b><span>Status unklar</span></span></span>
           </span>
           <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
         </summary>
         <div class="cd-fold-body">
-          <p class="r2b12-prose">Quellenstand: Aktualisierungsvermerk 21.09.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt 18.09.2026, 10:00 UTC); die Liste ist seither unverändert, zuletzt geprüft am 29.10.2026 (deutsche und englische Fassung, jeweils 10 Punkte; der Kartensymbol-Punkt steht weiterhin darin). Patch 2.04.00 vom 29.10.2026 verweist bei den bekannten Problemen nur auf diese Liste. Einträge zum DLC oder zu 2.04.00 enthält sie nicht, und keinen der 10 Punkte meldet 2.04.00 ausdrücklich als behoben. Der Punkt zu den fehlenden Kartensymbolen neu entdeckter Objekte steht weiterhin darin, obwohl ihn Hotfix 2.03.02 vom 23.09.2026 bereits behebt. Pearl Abyss führt aktuell diese Probleme:</p>
+          <p class="r2b12-prose">Quellenstand: Aktualisierungsvermerk 31.10.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt weiterhin 18.09.2026, 10:00 UTC), geprüft am 01.11.2026. Seit dem DLC hat Pearl Abyss die Liste viermal aktualisiert (30.10. um 03:00 und 15:00 UTC, 31.10. um 14:00 UTC). Dabei sind der seit 2.03.02 behobene Kartensymbol-Punkt und der mit 2.04.02 behobene AMD-Treiberfehler entfallen; neu sind acht Punkte, die meisten zum DLC. Pearl Abyss führt aktuell diese Probleme:</p>
           <ul class="r2b12-iss">
-            <li class="is-ok"><b>Kartensymbole</b><span>Symbole neu entdeckter Objekte erscheinen in einigen Regionen nicht auf der Karte.</span><em>Laut 2.03.02 behoben.</em></li>
+            <li><b>„Ende und Anfang“</b><span>Damianes eigene Quest (<em>End and Beginning</em>) lässt sich nicht fortsetzen, wenn die Hauptquest „Ende der Reise“ in einem bestimmten Zeitraum abgeschlossen wurde. Welcher Zeitraum, sagt Pearl Abyss nicht.</span></li>
+            <li><b>Viehhof</b><span>Auf dem Viehhof registriertes Vieh kann verschwinden.</span></li>
+            <li><b>Schenken auf Koreanisch</b><span>Einige Menüs der Schenken-Funktion erscheinen auf Koreanisch. Laut Pearl Abyss mit dem nächsten Patch behoben.</span></li>
+            <li><b>Ton unter Wasser</b><span>Unter Wasser fehlen einige Soundeffekte, darunter die Bewegungsgeräusche des Charakters.</span></li>
+            <li><b>Sternbild Kamel</b><span>Das Sternbild Kamel und ein besetzter Stützpunkt liegen in einer unzugänglichen Region. Die deutsche Fassung spricht von mehreren Stützpunkten, die englische von einem.</span></li>
+            <li><b>Versionen von Spiel und DLC</b><span>Passen die Versionen von Hauptspiel und DLC nicht zusammen, kann das Spiel abstürzen. Beides auf den neuesten Stand bringen.</span></li>
+            <li><b>Twitch Drops</b><span>Drops lassen sich nicht über das Menü „Drops &amp; Belohnungen“ abholen. Behelf: im Stream-Chat auf „Abholen“ klicken, dann das Twitch-Konto auf der Event-Seite verknüpfen.</span></li>
+            <li><b>XBOX-Add-ons</b><span>Drops und Vorbestellerboni erscheinen teils nicht im Add-on-Menü und lassen sich nicht abholen.</span></li>
             <li><b>Interaktionen blockiert</b><span>NPCs, Reittiere oder Objekte reagieren gelegentlich nicht. Offizieller Behelf: Spiel neu starten.</span></li>
             <li><b>Angeln</b><span>In bestimmten Gebieten können gerade gefangene Fische sich nicht bewegen.</span></li>
-            <li><b>Graumähnen-Quests</b><span>Fraktionsquests stocken mit Damiane/Oongka. Auch Patch 2.04.00 meldet dafür keine Behebung.</span></li>
+            <li><b>Graumähnen-Quests</b><span>Fraktionsquests stocken mit Damiane/Oongka. Auch die Patches bis 2.04.03 melden dafür keine Behebung.</span></li>
             <li><b>Ausweichen</b><span>Bei der Methode „Gedrückt halten“ bleibt die Standardtaste trotz geänderter Ausweichtaste aktiv.</span></li>
             <li><b>Quest-NPCs</b><span>Benötigte NPCs können nicht gemeinsam auf legendären Reittieren aufsitzen.</span></li>
             <li><b>Mac</b><span>Bei Tastatur- und Maussteuerung weicht bei bestimmten Auflösungen im Wohnen-Modus die Mauszeiger- von der tatsächlichen Möbelposition ab.</span></li>
@@ -8443,7 +8453,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
             <li><b>PlayStation</b><span>Schnelle Namenseingabe für Tiere oder Pferde kann das Bild einfrieren. Namen langsam mit Pausen eingeben.</span></li>
             <li><b>FSR4</b><span>In Regen kann der Niederschlag verschwinden oder das Bild unscharf beziehungsweise verzerrt wirken.</span></li>
           </ul>
-          <p class="cd-src"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beide Fassungen tragen denselben Aktualisierungsstand vom 21.09.2026, 14:00 UTC und waren am 01.10.2026, am 06.10.2026, am 20.10.2026 und am 29.10.2026 unverändert. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
+          <p class="cd-src"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beim Sternbild Kamel nennt die deutsche Fassung mehrere besetzte Stützpunkte, die englische einen. Beide Fassungen tragen denselben Aktualisierungsstand vom 31.10.2026, 14:00 UTC. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
         </div>
       </details>
 
@@ -8474,17 +8484,17 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
       <details class="cd-fold cd-spot r2b12-sf r2b12-stand" style="--cd-acc:var(--slate)">
         <summary>
           <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span>
-          <span class="cd-fold-main"><h3 class="cd-fold-t">Stand der Prüfung: 29.10.2026</h3>
-            <span class="cd-fold-lead">Neuester Patch ist 2.04.00 vom 29.10.2026 (22:00 UTC), erschienen zusammen mit dem DLC „Charting the Unknown“. Zwischen 2.03.02 (23.09.2026) und 2.04.00 gab es keinen Hotfix.</span>
-            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neuester Patch</span><b>2.04.00</b></span><span class="cd-chip cd-chip--warn"><span>Mac App Store: 2.03.00 bis 2.04.00 in Vorbereitung</span></span></span>
+          <span class="cd-fold-main"><h3 class="cd-fold-t">Stand der Prüfung: 01.11.2026</h3>
+            <span class="cd-fold-lead">Neuester Patch ist 2.04.03 vom 31.10.2026 (12:00 UTC), der dritte Hotfix nach dem DLC „Charting the Unknown“ (2.04.00 vom 29.10.2026). Davor kamen der 2.04.00 Hotfix und 2.04.02, beide am 30.10.2026.</span>
+            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neuester Patch</span><b>2.04.03</b></span><span class="cd-chip cd-chip--warn"><span>Mac App Store: 2.03.00 bis 2.04.03 in Vorbereitung</span></span></span>
           </span>
           <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
         </summary>
         <div class="cd-fold-body">
-          <p class="r2b12-prose">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>29.10.2026</b>: Neuester Patch ist <b>2.04.00</b> vom 29.10.2026 (22:00 UTC), das Update zum DLC „Charting the Unknown“ (unter anderem neue Quests, Tauchen, Schiffe, erweitertes Wohnen, Burgen, Ehe, Verwaltung von Stützpunkten und der Kampfinhalt „Garten der Prüfungen“, dazu 10 Punkte unter „Neues“, 18 unter „Hauptänderungen“ in sechs Bereichen und 10 unter „Sonstiges“). Zwischen 2.03.02 vom 23.09.2026 und 2.04.00 erschien kein Hotfix. Hier sind <b>48 Versionen</b> geführt. Davor ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen.</p>
-          <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Mac App Store</b>Den Mac App Store haben laut den offiziellen Notes weder 2.03.00 bis 2.03.02 noch 2.04.00 erreicht (Status dort „Patch wird derzeit vorbereitet“; für 2.03.00 bis 2.03.02 geprüft am 20.10.2026, für 2.03.02 und 2.04.00 erneut am 29.10.2026). Im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“), am 29.10.2026 erneut bestätigt. Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss. Den DLC führt der Mac App Store bereits als In-App-Kauf. Mit 2.04.00 muss auf dem Mac (Steam und Mac App Store) einmalig das vollständige Spielpaket neu heruntergeladen werden.</div></div>
+          <p class="r2b12-prose">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>29.10.2026</b>: Neuester Patch ist <b>2.04.00</b> vom 29.10.2026 (22:00 UTC), das Update zum DLC „Charting the Unknown“ (unter anderem neue Quests, Tauchen, Schiffe, erweitertes Wohnen, Burgen, Ehe, Verwaltung von Stützpunkten und der Kampfinhalt „Garten der Prüfungen“, dazu 10 Punkte unter „Neues“, 18 unter „Hauptänderungen“ in sechs Bereichen und 10 unter „Sonstiges“). Zwischen 2.03.02 vom 23.09.2026 und 2.04.00 erschien kein Hotfix. Danach folgten drei Hotfixes: der <b>2.04.00 Hotfix</b> (30.10.2026, 9 Punkte; die Versionsanzeige blieb dabei 2.04.00), <b>2.04.02</b> (30.10.2026, 17 Punkte) und <b>2.04.03</b> (31.10.2026, 13 Punkte), alle ohne neuen Inhalt, mit Schwerpunkt auf Segelschiffen, Tauchen, Ehe, Erschließung und Einrichtungen. Eine Version 2.04.01 gab es öffentlich nicht. Hier sind <b>51 Versionen</b> geführt. Davor ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen.</p>
+          <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Mac App Store</b>Den Mac App Store haben laut den offiziellen Notes weder 2.03.00 bis 2.03.02 noch 2.04.00 und seine drei Hotfixes bis 2.04.03 erreicht (Status dort „Patch wird derzeit vorbereitet“; für 2.03.00 bis 2.03.02 geprüft am 20.10.2026, für 2.03.02 und 2.04.00 erneut am 29.10.2026, für die Hotfixes am 01.11.2026). Im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“), am 29.10.2026 und am 01.11.2026 erneut bestätigt. Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss. Den DLC führt der Mac App Store bereits als In-App-Kauf. Mit 2.04.00 muss auf dem Mac (Steam und Mac App Store) einmalig das vollständige Spielpaket neu heruntergeladen werden.</div></div>
           <p class="r2b12-prose">Plattformangaben in den Einträgen geben den Stand zur Veröffentlichung oder zur jeweils genannten Prüfung wieder, denn Pearl Abyss ändert sie nachträglich ohne Hinweis. Alle älteren Versionen folgen unten.</p>
-          <p class="cd-src"><span class="cd-src-l">Quelle</span>Offizielle Patch-Notizen 2.04.00 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">EN</a>, Patch-Notizen 2.03.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">DE</a>, <a href="https://itunes.apple.com/lookup?id=6747100856&amp;country=de" target="_blank" rel="noopener noreferrer">Apple-Versionsabfrage</a></p>
+          <p class="cd-src"><span class="cd-src-l">Quelle</span>Offizielle Patch-Notizen 2.04.03 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 Hotfix <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">EN</a>, Patch-Notizen 2.03.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">DE</a>, <a href="https://itunes.apple.com/lookup?id=6747100856&amp;country=de" target="_blank" rel="noopener noreferrer">Apple-Versionsabfrage</a></p>
         </div>
       </details>
     </div>
@@ -13027,11 +13037,31 @@ function _dlcH(t){return '<h4 class="dlc-h">'+cdEsc(t)+'</h4>';}
 function _dlcPlain(h){return String(h||'').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();}
 /* Wert einer Waffe/Ruestung mit Vermerk, wenn die Zahl nur aus einer Quelle stammt (val_q); val_part: nur ein Teil des Werts ist unbestätigt, daher nicht grau. */
 function _dlcQ(t,x){const s=cdEsc(t);if(!x||!x.val_q)return s;const f=' '+_dlcFlag('unb',x.val_q);return x.val_part?s+f:'<span class="dlc-unb">'+s+f+'</span>';}
+/* Konstante defensiv lesen (Nachtlauf 01.11.2026): fehlt sie oder ist sie kein Array, gilt [] (ReferenceError wird abgefangen). */
+function _dlcA(f){try{const v=f();return Array.isArray(v)?v.filter(Boolean):[];}catch(e){return [];}}
+/* Zelle: ist das Feld leer und leer=true, steht „nicht belegt“ (grau); sonst bleibt die Zelle leer (mobil ausgeblendet). */
+function _dlcCell(x,leer){const t=_dlcV(x);return t||(leer?'<span class="dlc-nb">nicht belegt</span>':'');}
+/* Hat mindestens ein Eintrag das optionale Feld k? Nur dann bekommt die Tabelle die Spalte. */
+function _dlcAny(arr,k){return arr.some(e=>e&&_dlcP(e[k])!=='');}
+/* Quest-Schritte {name,d,reward,c,q} als nummerierte Liste; unbestätigte Schritte grau mit Vermerk. */
+function _dlcSteps(steps){
+  return '<ol class="dlc-ol">'+steps.map(st=>{
+    const o=typeof st==='string'?{name:st}:(st||{}),bad=o.c&&o.c!=='ok';
+    let t='<b class="dlc-n">'+cdEsc(o.name||'Schritt')+'</b>';
+    const d=_dlcV(o.d),rw=_dlcV(o.reward);
+    if(d)t+='<br>'+d;
+    if(rw)t+='<br>Belohnung: '+rw;
+    if(bad)t+=' '+_dlcFlag(o.c,o.q);
+    return '<li'+(bad?' class="dlc-unb"':'')+'>'+t+'</li>';
+  }).join('')+'</ol>';
+}
 function _dlcGear(){
   const w=typeof WEAPONS!=='undefined'&&Array.isArray(WEAPONS)?WEAPONS.filter(x=>x&&x.dlc):[];
   const a=typeof ARMOR!=='undefined'&&Array.isArray(ARMOR)?ARMOR.filter(x=>x&&x.dlc):[];
   const x=typeof ACCESSORIES!=='undefined'&&Array.isArray(ACCESSORIES)?ACCESSORIES.filter(y=>y&&y.dlc):[];
-  return {w,a,x};
+  const k=typeof CORES!=='undefined'&&Array.isArray(CORES)?CORES.filter(y=>y&&y.dlc):[];
+  const e=_dlcA(()=>DLC_GEAR_EXTRA);
+  return {w,a,x,k,e};
 }
 function _dlcIslandsProg(){
   const el=document.getElementById('dlc-isl-prog');if(!el||typeof DLC_ISLANDS==='undefined')return;
@@ -13041,7 +13071,8 @@ function _dlcIslandsProg(){
 function renderDlc(){
   const root=document.getElementById('dlc-root');if(!root)return;
   if(typeof DLC_META==='undefined'){root.innerHTML=cdNote('Die Daten dieser Seite (data/d12-dlc.js) konnten nicht geladen werden. Bitte die Seite neu laden.',{kind:'warn'});return;}
-  const M=DLC_META,G=_dlcGear(),nGear=G.w.length+G.a.length;
+  const M=DLC_META,G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
+  const TRADE=_dlcA(()=>DLC_TRADE),HOMES=_dlcA(()=>DLC_HOMES),RSHOPS=_dlcA(()=>DLC_RELIC_SHOPS);
   let h=cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',
     sub:'Schiffe, Pywels Großer Ozean mit unerschlossenen Inseln, Tauchen, Unterwasser-Reittiere, neue Questreihen, der Garten der Prüfungen, Burgen und Ehe: alles Neue aus dem DLC an einem Ort.',
     glyph:'⚓',tone:'ice',stats:[[DLC_SHIPS.length,'Schiffe'],[DLC_ISLANDS.length,'Inseln benannt'],[DLC_GARDEN.length,'Gruppen im Garten'],[nGear,'DLC-Ausrüstung im Wiki']]});
@@ -13058,15 +13089,19 @@ function renderDlc(){
 
   /* 2 Schiffe */
   b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
-  b+=_dlcTbl(['Schiff','Preis','Erhalt','Werte'],DLC_SHIPS.map(s=>({c:s.c,
-    s:[s.name,_dlcP(s.price),_dlcP(s.obtain),_dlcP(s.stats)].join(' '),
-    cells:[_dlcName(s),_dlcV(s.price),_dlcV(s.obtain),_dlcV(s.stats)]})),{cap:'Schiffe mit Preis und Werten'});
+  const sV=_dlcAny(DLC_SHIPS,'vendor'),sC=_dlcAny(DLC_SHIPS,'crew');
+  b+=_dlcTbl(['Schiff','Preis'].concat(sV?['Verkäufer']:[],['Erhalt','Werte'],sC?['Besatzung']:[]),DLC_SHIPS.map(s=>({c:s.c,
+    s:[s.name,_dlcP(s.price),_dlcP(s.vendor),_dlcP(s.obtain),_dlcP(s.stats),_dlcP(s.crew)].join(' '),
+    cells:[_dlcName(s),_dlcV(s.price)].concat(sV?[_dlcCell(s.vendor,true)]:[],[_dlcV(s.obtain),_dlcV(s.stats)],sC?[_dlcCell(s.crew,true)]:[])})),{cap:'Schiffe mit Preis und Werten'});
   b+=_dlcList(DLC_SHIP_NOTES);
   b+=_dlcH('Händler, Währung, Seekampf')+_dlcFacts(DLC_SHIP_FACTS);
+  if(TRADE.length)b+=_dlcH('Seehandel: Waren ('+TRADE.length+')')+_dlcTbl(['Ware','Einkauf','Verkauf','Hinweis'],TRADE.map(t=>({c:t.c,
+    s:[t.name,_dlcP(t.buy),_dlcP(t.sell),_dlcP(t.note)].join(' '),
+    cells:[_dlcName(t),_dlcCell(t.buy,true),_dlcCell(t.sell,true),_dlcCell(t.note)]})),{cap:'Seehandel-Waren'});
   b+=_dlcH('Schiffsbau per Entsendung')+_dlcFacts(DLC_SHIPBUILD);
   b+=_dlcH('Besatzung: '+DLC_CREW.length+' Rollen')+'<ul class="dlc-crew">'+DLC_CREW.map(r=>'<li><b>'+cdEsc(r.role)+'</b><span>'+cdEsc(r.d)+'</span></li>').join('')+'</ul>'+_dlcList(DLC_CREW_NOTES,'dlc-list--note');
   add('schiffe',{title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
-    chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'},{t:'Werte unbestätigt',c:'warn'}],body:b});
+    chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b});
 
   /* 3 Schiffsteile */
   const typen=[['','Alle'],['Sail','Segel'],['Front Cannon','Bugkanonen'],['Side Cannon','Seitenkanonen'],['Figurehead','Galionsfiguren'],['Stern','Heck']];
@@ -13076,23 +13111,32 @@ function renderDlc(){
     s:[p.name,p.type,_dlcP(p.size),_dlcP(p.vendor),_dlcP(p.price),_dlcP(p.bonus)].join(' '),
     cells:[_dlcName(p),cdEsc(p.type),_dlcV(p.size),_dlcV(p.vendor),_dlcV(p.price),_dlcV(p.bonus)]})),{id:'dlc-parts-tb',cap:'Schiffsteile'});
   add('teile',{title:'Schiffsteile',lead:'Segel, Kanonen, Galionsfiguren und Heckteile mit Händler, Preis in Silver und Boni.',icon:'⛵',
-    chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Preise laut Game8, unbestätigt',c:'warn'}],body:b});
+    chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Boni nur laut Game8',c:'warn'}],body:b});
 
   /* 4 Inseln */
   b='<div class="dlc-isl-hd"><span>Abhaken, welche Inseln du schon besucht hast (bleibt in diesem Browser gespeichert).</span><span id="dlc-isl-prog"></span></div>';
+  /* Beschriftete Teile (Lage, Abyss Nexus, Erschließung), dann die freien Angaben (info); fehlende Felder entfallen. */
+  const islSub=i=>[['Lage',i.where],['Abyss Nexus',i.nexus],['Erschließung',i.unlock]].map(([k,v])=>{const t=_dlcV(v);return t?'<span class="ctu-pt"><b class="ctu-pk">'+k+':</b> '+t+'</span>':'';}).join('')
+    +(i.info!=null?'<span class="ctu-pt">'+[].concat(i.info).map(_dlcV).join(' ')+'</span>':'');
   b+='<div class="cd-checks dlc-isl">'+DLC_ISLANDS.map(i=>cdCheck({key:DLC_KEY_ISLANDS,id:cdSlug(i.name),
-    title:{h:_dlcName(i)},sub:{h:[].concat(i.info).map(_dlcV).join(' ')},cls:'dlc-ck'+(i.c&&i.c!=='ok'?' dlc-row-'+i.c:''),
-    s:[i.name,_dlcP(i.info)].join(' ')})).join('')+'</div>';
+    title:{h:_dlcName(i)},sub:{h:islSub(i)},cls:'dlc-ck'+(i.c&&i.c!=='ok'?' dlc-row-'+i.c:''),
+    s:[i.name,_dlcP(i.where),_dlcP(i.nexus),_dlcP(i.unlock),_dlcP(i.info)].join(' ')})).join('')+'</div>';
   b+=_dlcH('Ozean, Erschließung, Häfen')+_dlcFacts(DLC_ISLAND_FACTS);
   add('inseln',{title:'Inseln und Ozean',lead:'Benannte Inseln zum Abhaken, Erschließungs-Missionen, Häfen, Schatzkarten.',icon:'◉',
     chips:[{v:DLC_ISLANDS.length,t:'Inseln benannt',c:'ice'},{t:'Gesamtzahl offiziell nicht genannt'}],body:b});
 
   /* 5 Tauchen */
+  b=_dlcFacts(DLC_DIVE);
+  if(RSHOPS.length)b+=_dlcH('Relic-Händler ('+RSHOPS.length+')')+_dlcTbl(['Händler','Ort','Sortiment','Freischaltung'],RSHOPS.map(r=>({c:r.c,
+    s:[r.name,_dlcP(r.where),_dlcP(r.sells),_dlcP(r.unlock)].join(' '),
+    cells:[_dlcName(r),_dlcCell(r.where,true),_dlcCell(r.sells,true),_dlcCell(r.unlock)]})),{cap:'Relic-Händler'});
   add('tauchen',{title:'Tauchen',lead:'Atemanzeige, Tauchanzug, Atemgeräte, Ancient Relics und Relic-Händler.',icon:'≋',
-    chips:[{t:'ohne Voraussetzung',c:'ok'},{t:'Atem über Tauchanzug'}],body:_dlcFacts(DLC_DIVE)});
+    chips:[{t:'ohne Voraussetzung',c:'ok'},{t:'Atem über Tauchanzug'}].concat(RSHOPS.length?[{v:RSHOPS.length,t:'Relic-Händler'}]:[]),body:b});
 
   /* 6 Reittiere */
-  b=_dlcTbl(['Reittier','Zähmen'],DLC_MOUNTS.map(m=>({c:m.c,s:[m.name,m.de,_dlcP(m.how)].join(' '),cells:[_dlcName(m),_dlcV(m.how)]})),{cap:'Unterwasser-Reittiere'});
+  const mW=_dlcAny(DLC_MOUNTS,'where'),mT=_dlcAny(DLC_MOUNTS,'trust'),mS=_dlcAny(DLC_MOUNTS,'stats');
+  b=_dlcTbl(['Reittier'].concat(mW?['Fundort']:[],['Zähmen'],mT?['Vertrauen']:[],mS?['Werte']:[]),DLC_MOUNTS.map(m=>({c:m.c,s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
+    cells:[_dlcName(m)].concat(mW?[_dlcCell(m.where,true)]:[],[_dlcV(m.how)],mT?[_dlcCell(m.trust,true)]:[],mS?[_dlcCell(m.stats,true)]:[])})),{cap:'Unterwasser-Reittiere'});
   b+=_dlcFacts(DLC_MOUNT_FACTS);
   b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
   add('reittiere',{title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
@@ -13101,12 +13145,15 @@ function renderDlc(){
   /* 7 Quests */
   b=_dlcList(DLC_QUEST_NOTES,'dlc-list--note');
   b+='<div class="dlc-qgrid">'+DLC_QUESTS.map(q=>{
+    const steps=Array.isArray(q.steps)?q.steps.filter(Boolean):[];
     const subs=Array.isArray(q.subs)?q.subs:[q.subs];
     const subObj=_dlcObj(subs[0]),subList=String(subObj.v||'').split(/\s*;\s*/).filter(Boolean);
-    const subHtml=subObj.c==='nb'?_dlcV(subObj):'<ol class="dlc-ol'+(subObj.c&&subObj.c!=='ok'?' dlc-unb':'')+'">'+subList.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'+(subObj.c&&subObj.c!=='ok'?' '+_dlcFlag(subObj.c,subObj.q):'');
-    return '<article class="dlc-q cd-spot'+(q.c&&q.c!=='ok'?' dlc-row-'+q.c:'')+'" data-s="'+cdEsc([q.name,q.de,q.who,_dlcP(q.start),_dlcP(q.subs),_dlcP(q.rewards),_dlcP(q.note)].join(' ').toLowerCase())+'">'
+    /* Schritte (steps) ersetzen die Unterquest-Liste (subs), sobald sie vorhanden sind */
+    const subHtml=steps.length?_dlcSteps(steps):!subList.length&&subObj.c!=='nb'?_dlcV({v:'nicht belegt',c:'nb'}):subObj.c==='nb'?_dlcV(subObj):'<ol class="dlc-ol'+(subObj.c&&subObj.c!=='ok'?' dlc-unb':'')+'">'+subList.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'+(subObj.c&&subObj.c!=='ok'?' '+_dlcFlag(subObj.c,subObj.q):'');
+    return '<article class="dlc-q cd-spot'+(q.c&&q.c!=='ok'?' dlc-row-'+q.c:'')+'" data-s="'+cdEsc([q.name,q.de,q.who,_dlcP(q.start),_dlcP(q.req),_dlcP(q.subs),steps.map(s=>[s.name,_dlcP(s.d),_dlcP(s.reward)].join(' ')).join(' '),_dlcP(q.rewards),_dlcP(q.note)].join(' ').toLowerCase())+'">'
       +'<h4 class="dlc-q-t">'+_dlcName(q)+'</h4><p class="dlc-q-who">'+cdEsc(q.who)+(q.start?' · Start: '+_dlcV(q.start):'')+'</p>'
-      +'<div class="dlc-q-sub"><span class="dlc-k">Unterquests</span>'+subHtml+'</div>'
+      +(q.req?'<p class="dlc-q-rw"><span class="dlc-k">Voraussetzung</span> '+_dlcV(q.req)+'</p>':'')
+      +'<div class="dlc-q-sub"><span class="dlc-k">'+(steps.length?'Schritte':'Unterquests')+'</span>'+subHtml+'</div>'
       +'<p class="dlc-q-rw"><span class="dlc-k">Belohnungen</span> '+_dlcV(q.rewards)+'</p>'+(q.note?'<p class="dlc-q-rw">'+_dlcV(q.note)+'</p>':'')+'</article>';
   }).join('')+'</div>';
   b+='<p class="dlc-p">Alle übrigen Fraktionsquests der Graumähnen: '+cdGoLink('quests','','Quests')+'</p>';
@@ -13118,8 +13165,8 @@ function renderDlc(){
   b+=_dlcTbl(['Boss','Ort und Kontext','Beute'],DLC_BOSSES.map(x=>({c:x.c,s:[x.name,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note)].join(' '),
     cells:[_dlcName(x)+(x.w?'<br>'+cdGoLink('bosses',x.w,'In der Bossliste'):''),_dlcV(x.where)+(x.note?' '+_dlcV(x.note):''),_dlcV(x.drop)]})),{cap:'Bosse und Gegner aus dem DLC'});
   b+=_dlcH('Garten der Prüfungen')+_dlcFacts(DLC_GARDEN_RULES);
-  b+=_dlcTbl(['Nr.','Gruppe','Bosse','Belohnung'],DLC_GARDEN.map(g=>({s:[g.name,g.b.join(' '),g.reward].join(' '),
-    cells:[String(g.n),'<b class="dlc-n">'+cdEsc(g.name)+'</b>','<span class="dlc-bls'+(g.bc==='ok'?'':' dlc-unb')+'">'+g.b.map(n=>cdGoLink('bosses',n,n,'dlc-bl')).join(' ')+(g.bc==='ok'?'':' '+_dlcFlag('unb','GameRant'))+'</span>',cdEsc(g.reward)]})),{cls:'dlc-tbl--garden',cap:'Garten der Prüfungen: Gruppen'});
+  b+=_dlcTbl(['Nr.','Gruppe','Bosse','Belohnung'],DLC_GARDEN.map(g=>({s:[g.name,[].concat(g.b||[]).join(' '),g.reward].join(' '),
+    cells:[String(g.n),'<b class="dlc-n">'+cdEsc(g.name)+'</b>','<span class="dlc-bls'+(g.bc==='ok'?'':' dlc-unb')+'">'+[].concat(g.b||[]).map(n=>cdGoLink('bosses',n,n,'dlc-bl')).join(' ')+(g.bc==='ok'?'':' '+_dlcFlag('unb',g.bq||'GameRant'))+'</span>',cdEsc(g.reward)]})),{cls:'dlc-tbl--garden',cap:'Garten der Prüfungen: Gruppen'});
   b+=_dlcList([DLC_GARDEN_NOTE],'dlc-list--note');
   add('bosse',{title:'Bosse und Garten der Prüfungen',lead:'Gegner aus den DLC-Questreihen, teils mit bekannten Namen aus dem Hauptspiel, und die '+DLC_GARDEN.length+' Gruppen im Garten der Prüfungen mit Belohnung.',icon:'☠',
     chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b});
@@ -13127,6 +13174,9 @@ function renderDlc(){
   /* 9 Burgen, Wohnen, Verwaltung, Soziales */
   const gruppen=[...new Set(DLC_LIVING.map(x=>x.g))];
   b=gruppen.map(g=>_dlcH(g)+'<ul class="dlc-list dlc-list--rows">'+DLC_LIVING.filter(x=>x.g===g).map(x=>'<li><b>'+cdEsc(x.t)+'</b> '+_dlcV(x.d)+'</li>').join('')+'</ul>').join('');
+  if(HOMES.length)b+=_dlcH('Wohnsitze ('+HOMES.length+')')+_dlcTbl(['Wohnsitz','Ort','Erwerb','Hinweis'],HOMES.map(x=>({c:x.c,
+    s:[x.name,_dlcP(x.where),_dlcP(x.how),_dlcP(x.note)].join(' '),
+    cells:[_dlcName(x),_dlcCell(x.where,true),_dlcCell(x.how,true),_dlcCell(x.note)]})),{cap:'Wohnsitze'});
   b+='<p class="dlc-p">Camp-Ausbau und Voraussetzungen: '+cdGoLink('camp','','Graumähnen-Camp')+'</p>';
   add('leben',{title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
     chips:gruppen.map(g=>({t:g})),body:b});
@@ -13141,14 +13191,23 @@ function renderDlc(){
     b+=_dlcH('Rüstungen ('+G.a.length+')')+_dlcTbl(['Rüstung','Teil','Effekt','Fundort'],G.a.map(a=>({s:[a.name,a.type,a.effect,a.source,a.notes].join(' '),
       cells:['<button type="button" class="dlc-lnk" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">'+cdEsc(a.name)+'</button>',cdEsc(a.type||''),_dlcQ(a.effect||'',a),cdEsc(a.source||'')]})),{cap:'DLC-Rüstungen'});
   }
-  if(G.x.length)b+=cdNote({h:'Neue Accessoires: '+G.x.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+cdEsc(x.type)+', '+cdEsc(x.source||'')+')').join('; ')+'. Details auf der Seite '+cdGoLink('accessories','','Accessoires')+'.'},{kind:'info',title:'Accessoires'});
+  if(G.e.length){
+    b+=_dlcH('Weitere Ausrüstung ('+G.e.length+')')+_dlcTbl(['Name','Art','Slot','Charakter','Werte','Erhalt'],G.e.map(g=>{
+      const s=_dlcV(g.source),r=_dlcV(g.req);
+      return {c:g.c,s:[g.name,_dlcP(g.kind),_dlcP(g.slot),_dlcP(g.char),_dlcP(g.stats),_dlcP(g.source),_dlcP(g.req)].join(' '),
+        cells:[_dlcName(g),_dlcCell(g.kind,true),_dlcCell(g.slot,true),_dlcCell(g.char,true),_dlcCell(g.stats,true),
+          (s||r)?s+(r?(s?'<br>':'')+'Voraussetzung: '+r:''):'<span class="dlc-nb">nicht belegt</span>']};
+    }),{cap:'Weitere DLC-Ausrüstung'});
+  }
+  if(G.x.length)b+=cdNote({h:'Neue Accessoires: '+G.x.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+[x.type,x.source].filter(Boolean).map(cdEsc).join(', ')+')').join('; ')+'. Details auf der Seite '+cdGoLink('accessories','','Accessoires')+'.'},{kind:'info',title:'Accessoires'});
+  if(G.k.length)b+=cdNote({h:'Neue Abyss-Kerne: '+G.k.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+[x.slot,x.source].filter(Boolean).map(cdEsc).join(', ')+')').join('; ')+'. Details auf der Seite '+cdGoLink('cores','','Abyss-Ausrüstung')+'.'},{kind:'info',title:'Abyss-Kerne'});
   if(!nGear)b+=cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'});
   const gearNames=new Set(G.w.map(w=>w.name));
   const tools=DLC_GEAR_TOOLS.filter(t=>!gearNames.has(t));
   if(tools.length)b+=cdNote({h:'Offiziell neu sind im Kampf einsetzbare Alltagswerkzeuge: '+tools.map(t=>'<b>'+cdEsc(t)+'</b> ('+cdEsc(DLC_GEAR_TOOLS_DE[t]||'')+')').join(', ')+'. '+_dlcV({v:'Werte, Fundort und Waffentyp',c:'nb'})},{kind:'info',title:'Kampf-Alltagswerkzeuge'});
   b+='<p class="dlc-p">Alle Einträge tragen auf den Seiten '+cdGoLink('weapons','','Waffen')+' und '+cdGoLink('armor','','Rüstungen')+' das Etikett <span class="tag tdlc">DLC</span>.</p>';
-  add('ausruestung',{title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen und Rüstungen, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',
-    chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}],body:b});
+  add('ausruestung',{title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',
+    chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}].concat(G.x.length?[{v:G.x.length,t:'Accessoires'}]:[],G.k.length?[{v:G.k.length,t:'Abyss-Kerne'}]:[],G.e.length?[{v:G.e.length,t:'Weitere'}]:[]),body:b});
 
   /* 11 Was noch offen ist */
   add('offen',{title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
@@ -13157,7 +13216,7 @@ function renderDlc(){
   const jump='<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>';
   const legend=cdNote({h:'Belegt heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. <span class="dlc-unb">Grau mit Vermerk '+_dlcFlag('unb')+'</span> nennt nur eine Quelle, <span class="dlc-nb">'+_dlcFlag('nb')+'</span> heißt gesucht, aber nichts gefunden. Item-, Orts-, Boss- und Questnamen stehen in der englischen Spielschreibweise.'},{kind:'info',title:'So liest du die Seite'});
   h+=jump+legend+'<div class="cd-folds dlc-folds">'+B.map(o=>cdFold(Object.assign({},o,{s:o.title+' '+_dlcPlain(o.body)}))).join('')+'</div>';
-  h+=cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+' (einzelne Seiten erneut am '+cdEsc(M.recheck)+'). Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+  h+=cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
   root.innerHTML=h;
   _dlcIslandsProg();
 }
@@ -13278,7 +13337,7 @@ function _r2b13CoreCard(c,wasOpen){
   const gem=ico?`<img src="${escHtml(ico)}" data-cdn="${escHtml(CORE_IMGS_CDN[c.name]||'')}" width="52" height="52" loading="lazy" decoding="async" alt="" onerror="if(this.dataset.cdn&&this.src!==this.dataset.cdn){this.src=this.dataset.cdn;}else{this.parentNode.classList.add('no-img');this.remove();}">`:'';
   return `<article class="r2b13-core cd-spot r2b13-k--${m.k}" data-slot="${escHtml(c.slot)}" data-go-id="${escHtml(cdSlug(c.name))}" data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml([c.name,eff,sp.head,m.t].join(' '))}" data-item-hidden="${escHtml(sp.rest)}">
     <header class="r2b13-core-hd"><span class="r2b13-gem${ico?'':' no-img'}" aria-hidden="true" data-r="${cdFxKind(c.effect)==='neutral'?'◈':'⧫'}">${gem}</span>
-      <div class="r2b13-core-t"><h4 class="r2b13-core-n">${escHtml(c.name)}</h4><div class="r2b13-core-tags">${gr.chip}${pm?`<span class="r2b13-price">${escHtml(pm[2])} Silber</span>`:''}</div></div>
+      <div class="r2b13-core-t"><h4 class="r2b13-core-n">${escHtml(c.name)}</h4><div class="r2b13-core-tags">${gr.chip}${_dlcTag(c)}${pm?`<span class="r2b13-price">${escHtml(pm[2])} Silber</span>`:''}</div></div>
       ${vid?`<button type="button" class="r2b13-vid" aria-label="Video-Vorschau ${escHtml(c.name)}" title="Video-Vorschau" onmouseenter="showCoreVid(event,'${escJsStr(c.name)}')" onmouseleave="hideCoreVid()" onclick="showCoreVid(event,'${escJsStr(c.name)}')"><span aria-hidden="true">▶</span><span class="r2b13-vid-t">Vorschau</span></button>`:''}
     </header>
     <div class="r2b13-core-fx">${cdFx(eff,{split:false,bare:true,kind:_r2b13Kind(eff)})}</div>
@@ -15056,7 +15115,7 @@ function mountCard(m){
       :`<div class="boss-img-ph" style="background:linear-gradient(135deg,#100c06 0%,#080808 100%);border:1px solid rgba(201,162,39,.18)"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:rgba(201,162,39,.6)">${m.name.charAt(0)}</div><div class="boss-ph-cap" style="color:rgba(201,162,39,.3)">${m.type}</div></div></div>`
     }
     <div class="ct">${m.name}</div>
-    <div class="cm"><span class="tag ${badge}">${m.type}</span></div>
+    <div class="cm"><span class="tag ${badge}">${m.type}</span>${_dlcTag(m)}</div>
     <div class="crows">
       <div class="crow"><span class="cl">Freischalten</span><span class="cv">${m.unlock}</span></div>
     </div>
