@@ -7501,6 +7501,118 @@ select.dr-sel-hidden{display:none!important}
 /* DR-B3 Ende */
 /* ---- */
 /* DR-B4 Anfang (Geheimnisse & Lore) */
+/* Kopf, Spoiler-Hinweis, Bereichs-Pillen. Die verborgenen Reiter-Knöpfe (.tabs[hidden]) bleiben für _applyTabParam/_focusPaneForSearch im DOM. */
+#sec-secrets>.tabs[hidden]{display:none}
+#sec-secrets>.dr-head{margin-bottom:12px}
+#sec-secrets>.dr-head>.cd-note{margin:0 0 4px}
+.drb4-tabbar{margin:0 0 16px}
+.drb4-tabbar .cd-pills{margin:0;gap:6px}
+.drb4-tabbar .cd-pill{min-height:40px;padding:5px 13px;gap:6px}
+/* Karten: Blöcke, Heros, Easter-/Orts-/Waffen-/Mechanik-Karten, Cresset-Regionen, Such-Tools, Tracker, Timeline (Optik der Vorbilder: Panel, Linie, 14 px Radius, Akzentstrich) */
+#sec-secrets :is(.sec-block,.sec-hero,.tracker-summary,.rt-card,.lt-card){position:relative;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);box-shadow:var(--shadow-soft)}
+#sec-secrets :is(.easter-card,.cresset-region,.drb4-tool){position:relative;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:none}
+#sec-secrets .sec-block:hover,#sec-secrets .rt-card:hover{box-shadow:var(--shadow-soft);border-color:var(--line-strong)}
+#sec-secrets .easter-card:hover{border-color:var(--line-strong)}
+#sec-secrets :is(.sec-block,.sec-hero,.tracker-summary,.rt-card)::before{content:'';position:absolute;left:0;top:14px;bottom:14px;right:auto;width:3px;height:auto;border-radius:0 3px 3px 0;background:var(--cd-acc,var(--red));opacity:.8;box-shadow:0 0 12px color-mix(in srgb,var(--cd-acc,var(--red)) 50%,transparent);pointer-events:none}
+#sec-secrets .sec-hero::before{--cd-acc:var(--violet)}
+#sec-secrets .rt-card.complete::before,#sec-secrets .tracker-summary.complete::before{--cd-acc:var(--cd-ok)}
+#sec-secrets .sec-block{padding:18px 22px 20px 24px;margin-bottom:12px}
+#sec-secrets .sec-block-hd{gap:12px;margin-bottom:12px;font-size:16px;color:var(--ink-hi)}
+#sec-secrets .sec-block-hd-ico{display:grid;place-items:center;flex:none;width:36px;height:36px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:18px}
+#sec-secrets .sec-block-body{font-size:13px;line-height:1.65;color:var(--text)}
+#sec-secrets .sec-block-body :is(p,ul,ol){max-width:92ch}
+#sec-secrets .sec-block-body li{color:var(--text);margin-bottom:4px}
+#sec-secrets .sec-block-body code{border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--gold);padding:1px 6px;font-size:12px}
+#sec-secrets .sec-block-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+#sec-secrets .sec-block-grid>div{padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:12.5px;line-height:1.5}
+#sec-secrets .lore-callout{margin-top:12px;padding:12px 16px;border:1px solid var(--line);border-left:3px solid var(--slate);border-radius:10px;background:var(--panel);font-size:12.5px;color:var(--dim);max-width:92ch}
+#sec-secrets .sec-hero{padding:20px 26px 20px 28px;margin-bottom:12px;overflow:hidden}
+#sec-secrets .sec-hero-title{margin-bottom:12px;font-size:19px;color:var(--ink-hi)}
+#sec-secrets .sec-hero-body{max-width:96ch;font-size:13px;line-height:1.7;color:var(--text)}
+#sec-secrets .sec-hero-body em{color:var(--ink-hi)}
+#sec-secrets .sec-hero-body{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 22px;align-items:start}
+#sec-secrets .sec-hero-num{display:grid;place-items:center;min-width:96px;margin:2px 0 0;padding:14px 14px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--card) 62%,transparent);font-size:34px;color:var(--gold)}
+#sec-secrets .easter-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:4px}
+#sec-secrets .easter-card{display:flex;flex-direction:column;padding:14px 16px}
+#sec-secrets .easter-card-hd{gap:12px;margin-bottom:10px}
+#sec-secrets .easter-card-ico{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);font-size:22px}
+#sec-secrets .easter-card-name{font-size:14.5px;color:var(--ink-hi)}
+#sec-secrets .easter-card-ref{margin-top:2px;font-size:11px;line-height:1.35;letter-spacing:.05em;color:var(--dim)}
+#sec-secrets .easter-card-body{font-size:12.5px;line-height:1.6;color:var(--text)}
+#sec-secrets .easter-card-reward{margin-top:auto;padding-top:9px;font-size:12px;line-height:1.5}
+#sec-secrets .easter-card-body+.easter-card-reward{margin-top:10px}
+#sec-secrets .cresset-region-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+#sec-secrets .cresset-region{padding:12px 14px}
+#sec-secrets .cresset-region-name{font-size:14px;color:var(--ink-hi)}
+#sec-secrets .cresset-region-info{font-size:12px;line-height:1.55;color:var(--dim)}
+#sec-secrets .priority-list li{border-radius:10px;font-size:13px}
+.drb4-tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:2px}
+.drb4-tool{padding:14px 16px}
+.drb4-tool-t{margin:0 0 10px;font-family:var(--f-display);font-size:15px;font-weight:700;line-height:1.3;color:var(--ink-hi)}
+.drb4-tool .cd-facts{font-size:12.5px;gap:0;border:0;border-radius:0;background:none;overflow:visible}
+.drb4-tool .cd-facts>div{padding:8px 0;border-top:1px solid var(--line-soft);background:none}
+.drb4-tool .cd-facts>div:first-child{border-top:0;padding-top:0}
+.drb4-tool .cd-facts code{color:var(--gold);font-family:var(--f-mono);font-size:12px}
+/* Tracker (Schlüssel cd_fr_tracker/cd_cr_tracker unverändert): große Kennzahl, Balken, Regionskacheln */
+#sec-secrets .tracker-summary{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 28px;align-items:center;margin:0 0 14px;padding:20px 24px 20px 28px}
+#sec-secrets .tracker-big{min-width:0;font-size:34px;color:var(--gold);white-space:nowrap}
+#sec-secrets .tracker-big small{margin-top:6px;font-size:12px;letter-spacing:.04em;color:var(--dim)}
+#sec-secrets .tracker-bar-lbl span:first-child{font-size:11px;color:var(--dim)}
+#sec-secrets .tracker-bar-lbl span:last-child{font-size:13px;color:var(--gold)}
+#sec-secrets .tracker-bar{height:8px;border:0;border-radius:8px;background:var(--line)}
+#sec-secrets .tracker-bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--glo))}
+#sec-secrets .tracker-summary.complete .tracker-bar-fill{background:var(--cd-ok)}
+#sec-secrets .tracker-help{margin-top:10px;max-width:84ch;font-size:12px;line-height:1.55;color:var(--dim)}
+#sec-secrets .region-tracker{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:0}
+#sec-secrets .rt-card{padding:16px 18px 16px 20px}
+#sec-secrets .rt-card-name{font-size:15px;color:var(--ink-hi)}
+#sec-secrets .rt-card-count{font-size:13px;color:var(--gold)}
+#sec-secrets .rt-card.complete{border-color:color-mix(in srgb,var(--cd-ok) 45%,var(--line))}
+#sec-secrets .rt-card.complete .rt-card-name,#sec-secrets .rt-card.complete .rt-card-count{color:var(--cd-ok)}
+#sec-secrets .rt-btn{width:40px;height:40px;border-color:var(--line-strong);border-radius:10px;background:var(--panel);color:var(--ink-hi);font-size:16px}
+#sec-secrets .rt-input{height:40px;border-color:var(--line-strong);border-radius:10px;background:var(--panel);color:var(--ink-hi)}
+#sec-secrets .rt-note{margin-top:10px;font-size:12px;line-height:1.5;color:var(--dim)}
+#sec-secrets .rt-mini-bar{height:5px;margin-top:12px;border:0;border-radius:5px;background:var(--line)}
+#sec-secrets .rt-mini-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--glo))}
+#sec-secrets .rt-card.complete .rt-mini-fill{background:var(--cd-ok)}
+#sec-secrets .rt-tracker-reset{min-height:40px;margin-top:14px;padding:6px 16px;border-radius:999px;font-size:11.5px}
+/* Story-Timeline (nur Darstellung) */
+#sec-secrets .lt-wrap{margin-top:14px;padding-left:0}
+#sec-secrets .lt-wrap::before{left:19px;top:20px;bottom:20px;background:var(--line-strong)}
+#sec-secrets .lt-item{gap:14px;margin-bottom:12px}
+#sec-secrets .lt-dot{width:40px;height:40px;border:1px solid var(--line-strong);background:var(--panel);color:var(--gold);font-size:12px}
+#sec-secrets .lt-special .lt-dot{border-color:color-mix(in srgb,var(--red) 60%,var(--line));background:var(--panel);color:var(--red)}
+#sec-secrets .lt-final .lt-dot{border-color:var(--gold);background:var(--panel);color:var(--gold)}
+#sec-secrets .lt-card{min-width:0;padding:14px 18px 14px 20px}
+#sec-secrets .lt-card::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--line-strong);opacity:.8;pointer-events:none}
+#sec-secrets .lt-special .lt-card{border-color:color-mix(in srgb,var(--red) 40%,var(--line))}
+#sec-secrets .lt-special .lt-card::before{background:var(--red)}
+#sec-secrets .lt-final .lt-card{border-color:color-mix(in srgb,var(--gold) 45%,var(--line))}
+#sec-secrets .lt-final .lt-card::before{background:var(--gold)}
+#sec-secrets .lt-phase{margin-bottom:4px;font-size:11px;letter-spacing:.1em;color:var(--amber)}
+#sec-secrets .lt-title{font-size:15.5px;color:var(--ink-hi)}
+#sec-secrets .lt-special .lt-title{color:var(--ink-hi)}
+#sec-secrets .lt-final .lt-title{color:var(--gold)}
+#sec-secrets .lt-desc{max-width:84ch;font-size:13px;line-height:1.6;color:var(--dim)}
+#sec-secrets>.pane>.cd-note{margin-bottom:12px}
+#sec-secrets .sec-block.drb4-grp:not(:has([data-s]:not(.hide))){display:none}
+@media (max-width:600px){
+  .drb4-tabbar{margin-bottom:12px}
+  .drb4-tabbar .cd-pills{margin-inline:-16px;padding-inline:16px}
+  #sec-secrets .sec-block{padding:16px 16px 18px 18px}
+  #sec-secrets .sec-hero{padding:16px 16px 18px 20px}
+  #sec-secrets .sec-hero-body{grid-template-columns:minmax(0,1fr);gap:12px 0}
+  #sec-secrets .sec-hero-num{display:flex;width:max-content;min-width:84px;margin:0;font-size:30px}
+  #sec-secrets .tracker-summary{grid-template-columns:minmax(0,1fr);padding:16px 16px 18px 20px}
+  #sec-secrets .tracker-big{font-size:30px}
+  #sec-secrets .easter-grid,.drb4-tools{grid-template-columns:minmax(0,1fr)}
+  .drb4-tool .cd-facts>div{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;align-items:baseline}
+  #sec-secrets .region-tracker{grid-template-columns:minmax(0,1fr)}
+  #sec-secrets .lt-wrap::before{left:15px}
+  #sec-secrets .lt-dot{width:32px;height:32px;font-size:11px}
+  #sec-secrets .lt-card{padding:12px 14px 12px 16px}
+  #sec-secrets .sec-block-hd{font-size:15px}
+}
 /* DR-B4 Ende */
 /* ---- Ende Zielseiten-Anker ---- */
 /* Spiel-Originalbilder aus den Game-Files (01.11.2026, KI-Mix 2x): weiche Ecken, wirkt nur bei deckenden Bildern */
@@ -8744,11 +8856,10 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-secrets">
     <h2 class="sec-t"><span class="sec-sym">⚿</span> Geheimnisse &amp; Lore <span class="sec-t-en">Secrets &amp; Lore</span></h2>
-    <div class="spoiler-shield">
-      <span class="spoiler-shield-ico">⚠️</span>
-      <div><strong>SPOILER-WARNUNG:</strong> Diese Seite enthält den Hidden Ending Lore (Run 108), Memory-Fragment-Lokationen, Boss-Identitäten und Story-Auflösungen. Wer sich überraschen lassen will: nur die Tabs öffnen, die zu eurem Story-Fortschritt passen.</div>
-    </div>
-    <div class="tabs">
+    <!-- DR-B4: Kopf + Spoiler-Hinweis (cdNote warn) setzt renderSecrets per drMount; die zwölf Bereiche stehen als sichtbare Pillen in #secrets-pills.
+         Die früheren Reiter-Knöpfe #sect-* bleiben verborgen im DOM (&tab=-Deep-Links über _applyTabParam, Suche über _focusPaneForSearch). -->
+    <div class="drb4-tabbar" id="secrets-pills"></div>
+    <div class="tabs" hidden>
       <button type="button" class="tab active" id="sect-ending" onclick="secretsTab('ending')">🌑 Hidden Ending</button>
       <button type="button" class="tab" id="sect-timeline" onclick="secretsTab('timeline')">🕰️ Story-Timeline</button>
       <button type="button" class="tab" id="sect-fragments" onclick="secretsTab('fragments')">📜 Memory Fragments</button>
@@ -10642,6 +10753,93 @@ function _r2b12Track(o){
 
 
 
+// ===== DESIGN-REST B4 (Geheimnisse & Lore): Kopf, Bereichs-Pillen, data-s, Werkzeug-Karten =====
+/* Kopf per drMount('secrets', …): Szene q-true-ending, Kacheln aus echten Zählungen. Die Tracker-Kacheln (Memory Fragments,
+   Cressets) lesen _frTotal/_crTotal; nach jeder Tracker-Änderung setzt _drB4HeadStats sie an Ort und Stelle neu (kein Neu-Einblenden
+   des Kopfes). Die Spoiler-Warnung steht wortgleich als cdNote warn im Kopf. Die zwölf Reiter sind cdPills mode:'tab' (name drb4-tab);
+   die Knöpfe #sect-* bleiben verborgen im DOM (_applyTabParam klickt sie, _focusPaneForSearch schaltet ihre Klassen). */
+function _drB4Head(){
+  const nTab=document.querySelectorAll('#sec-secrets>.tabs>button').length;
+  return drHead({kicker:'Welt & Karte',title:'Geheimnisse & Lore',sub:'Geheimes Ende, Erinnerungsfragmente, Easter Eggs und Lore',glyph:'⚿',tone:'violet',
+    scene:['q-true-ending','reg-the-abyss'],
+    stats:[[nTab,'Bereiche'],[_frTotal()+'/'+FRAGMENT_TOTAL,'Memory Fragments im Tracker'],[_crTotal()+'/'+CRESSET_TOTAL,'Cressets im Tracker'],[SECRETS_EASTER_EGGS.length,'Easter Eggs']],
+    links:[['quests','Quests'],['chapters','Kapitel-Guide'],['witches','Hexen & Fusion'],['skills','Fähigkeiten']],
+    after:cdNote({h:'<strong>SPOILER-WARNUNG:</strong> Diese Seite enthält den Hidden Ending Lore (Run 108), Memory-Fragment-Lokationen, Boss-Identitäten und Story-Auflösungen. Wer sich überraschen lassen will: nur die Tabs öffnen, die zu eurem Story-Fortschritt passen.'},{kind:'warn'})});
+}
+function _drB4HeadStats(){
+  const h=document.getElementById('dr-head-secrets');if(!h)return;
+  const dd=h.querySelectorAll('.cd-hero-stat dd');
+  if(dd.length<3){drMount('secrets',_drB4Head());return;}
+  const v=[null,_frTotal()+'/'+FRAGMENT_TOTAL,_crTotal()+'/'+CRESSET_TOTAL];
+  for(let i=1;i<3;i++)if(dd[i].textContent!==v[i])dd[i].textContent=v[i];
+}
+/* data-s: Volltext (sichtbarer Text, klein geschrieben) an jedem Block und jeder Karte; die Suche trifft so einzelne Blöcke */
+function _drB4Tag(root){
+  if(!root||!root.querySelectorAll)return;
+  const tx=el=>(el.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+  root.querySelectorAll('.sec-hero,.sec-block,.tracker-summary,.rt-card,.lt-item').forEach(el=>{
+    /* Block mit Karten = Gruppe ohne eigenes data-s (sonst zählt die Suche Block und Karte doppelt); seine Karten und
+       Hinweise tragen Karten- plus Blocktitel-Text, ein leerer Block blendet CSS aus (.drb4-grp:not(:has(...))) */
+    if(el.classList.contains('sec-block')&&el.querySelector('.easter-card,.cresset-region,.drb4-tool')){
+      el.classList.add('drb4-grp');
+      const hd=el.querySelector('.sec-block-hd'),ht=hd?tx(hd):'';
+      el.querySelectorAll('.easter-card,.cresset-region,.drb4-tool,.lore-callout').forEach(c=>{
+        const t=(tx(c)+' '+ht).trim();
+        if(t)c.dataset.s=t;
+      });
+      el.removeAttribute('data-s');
+      return;
+    }
+    const t=tx(el);
+    if(t)el.dataset.s=t;
+  });
+}
+function _drB4TabItems(){
+  const act=document.querySelector('#sec-secrets>.pane.active'),aid=act?act.id.slice(5):'';
+  return [].map.call(document.querySelectorAll('#sec-secrets>.tabs>button'),b=>{
+    const id=b.id.slice(5),tx=b.textContent.trim(),i=tx.indexOf(' ');
+    return {v:id,g:i>0?tx.slice(0,i):'',t:i>0?tx.slice(i+1):tx,on:id===aid,controls:'secp-'+id};
+  });
+}
+function _drB4MountPills(){
+  const box=document.getElementById('secrets-pills');if(!box)return;
+  box.innerHTML=cdPills(_drB4TabItems(),{name:'drb4-tab',mode:'tab',label:'Bereiche von Geheimnisse & Lore'});
+}
+/* Pillen-Zustand = aktives Pane (gilt für secretsTab, Deep-Link und die Suche, die Pane-Klassen direkt umschaltet) */
+function _drB4SyncPills(){
+  const g=document.querySelector('#secrets-pills [data-cd-pills="drb4-tab"]');if(!g)return;
+  const act=document.querySelector('#sec-secrets>.pane.active'),aid=act?act.id.slice(5):'';
+  let on=null,changed=false;
+  g.querySelectorAll('.cd-pill').forEach(b=>{
+    const sel=b.dataset.v===aid;
+    if((b.getAttribute('aria-selected')==='true')!==sel){b.setAttribute('aria-selected',sel);b.tabIndex=sel?0:-1;changed=true;}
+    if(sel)on=b;
+  });
+  document.querySelectorAll('#sec-secrets>.tabs>button').forEach(b=>{b.classList.toggle('active',b.id==='sect-'+aid);});
+  if(changed&&on)requestAnimationFrame(()=>{
+    if(g.scrollWidth>g.clientWidth+4)g.scrollLeft=Math.max(0,on.getBoundingClientRect().left-g.getBoundingClientRect().left+g.scrollLeft-(g.clientWidth-on.offsetWidth)/2);
+  });
+}
+let _drB4Mo=null;
+function _drB4Init(){
+  drMount('secrets',_drB4Head());
+  /* Timeline und beide Tracker sind sonst erst nach dem Reiterklick gerendert und damit nicht durchsuchbar: einmal vorab füllen
+     (secretsTab rendert sie beim Klick ohnehin neu; die Stände kommen aus denselben Schlüsseln) */
+  renderLoreTimeline();renderFragmentTracker();renderCressetTracker();
+  _drB4Tag(document.getElementById('sec-secrets'));
+  _drB4MountPills();
+  if(!_drB4Mo&&typeof MutationObserver==='function'){
+    let raf=0;
+    _drB4Mo=new MutationObserver(()=>{if(raf)return;raf=requestAnimationFrame(()=>{raf=0;_drB4SyncPills();});});
+    document.querySelectorAll('#sec-secrets>.pane').forEach(p=>_drB4Mo.observe(p,{attributes:true,attributeFilter:['class']}));
+  }
+}
+/* Such-Tools als Karten (vorher Tabelle): Werkzeug als Titel, Eingabe und Wirkung als Faktenraster, Inhalt wortgleich */
+function _drB4ToolCards(){
+  return '<div class="drb4-tools">'+SECRETS_TOOLS.map(t=>'<article class="drb4-tool cd-spot"><h4 class="drb4-tool-t">'+t.tool+'</h4>'
+    +cdFacts([['Eingabe',{h:'<code>'+t.input+'</code>'}],['Wirkung',{h:t.effect}]],{wide:true})+'</article>').join('')+'</div>';
+}
+
 function secretsTab(id){
   const ids=['ending','timeline','fragments','frtracker','cressets','crtracker','easter','locations','weapons','mechanics','tools','priority'];
   ids.forEach(t=>{
@@ -10653,6 +10851,7 @@ function secretsTab(id){
   if(id==='timeline')renderLoreTimeline();
   if(id==='frtracker')renderFragmentTracker();
   if(id==='crtracker')renderCressetTracker();
+  _drB4SyncPills();
 }
 
 // ===== FRAGMENT + CRESSET TRACKER =====
@@ -10692,13 +10891,16 @@ function _renderTrackerGeneric(kind,el,regions,totalCap,hero){
   const d=kind==='fr'?loadFrTracker():loadCrTracker();
   const total=regions.reduce((sum,r)=>sum+(Math.min(d[r.key]||0,r.cap)),0);
   const pct=Math.round(total/totalCap*100);
+  const k=escJsStr(kind);
+  /* Tastaturfokus überlebt das Neuzeichnen (Klick auf −/+ ersetzt sonst die Knöpfe): Position unter den Bedienelementen merken */
+  const _fa=document.activeElement,_fi=(_fa&&el.contains(_fa))?[...el.querySelectorAll('.rt-btn,.rt-input')].indexOf(_fa):-1;
   el.innerHTML=`
-    <div class="tracker-summary">
+    <div class="tracker-summary cd-spot${total>=totalCap?' complete':''}">
       <div class="tracker-big">${total} / ${totalCap}<small>${hero.heroLbl}</small></div>
       <div class="tracker-bar-wrap">
         <div class="tracker-bar-lbl"><span>${hero.barLbl}</span><span>${pct}%</span></div>
         <div class="tracker-bar"><div class="tracker-bar-fill" style="width:${pct}%"></div></div>
-        <div style="font-size:var(--fs-11);color:#beb5a8;margin-top:9px;line-height:1.5">${hero.helper}</div>
+        <div class="tracker-help">${hero.helper}</div>
       </div>
     </div>
     <div class="region-tracker">
@@ -10706,23 +10908,28 @@ function _renderTrackerGeneric(kind,el,regions,totalCap,hero){
         const cur=Math.min(d[r.key]||0,r.cap);
         const rpct=Math.round(cur/r.cap*100);
         const done=cur>=r.cap;
-        return `<div class="rt-card${done?' complete':''}">
+        const rk=escJsStr(r.key);
+        return `<div class="rt-card cd-spot${done?' complete':''}">
           <div class="rt-card-hd">
             <div class="rt-card-name">${done?'✓ ':''}${r.name}</div>
             <div class="rt-card-count">${cur} / ${r.cap}</div>
           </div>
           <div class="rt-controls">
-            <button class="rt-btn minus" onclick="_trackerNudge('${kind}','${r.key}',-1)" aria-label="−1">−</button>
-            <input class="rt-input" type="number" min="0" max="${r.cap}" value="${cur}" onchange="_trackerSet('${kind}','${r.key}',this.value)" aria-label="Anzahl ${r.name}">
-            <button class="rt-btn" onclick="_trackerNudge('${kind}','${r.key}',1)" aria-label="+1">+</button>
+            <button class="rt-btn minus" onclick="_trackerNudge('${k}','${rk}',-1)" aria-label="−1">−</button>
+            <input class="rt-input" type="number" min="0" max="${r.cap}" value="${cur}" onchange="_trackerSet('${k}','${rk}',this.value)" aria-label="Anzahl ${escHtml(r.name)}">
+            <button class="rt-btn" onclick="_trackerNudge('${k}','${rk}',1)" aria-label="+1">+</button>
           </div>
-          <div style="font-size:var(--fs-10-5);color:var(--dim);margin-top:8px;line-height:1.5">${r.note}</div>
+          <div class="rt-note">${r.note}</div>
           <div class="rt-mini-bar"><div class="rt-mini-fill" style="width:${rpct}%"></div></div>
         </div>`;
       }).join('')}
     </div>
-    <button class="rt-tracker-reset" onclick="_trackerReset('${kind}')">Tracker zurücksetzen</button>
+    <button class="rt-tracker-reset" onclick="_trackerReset('${k}')">Tracker zurücksetzen</button>
   `;
+  if(_fi>=0){const _n=el.querySelectorAll('.rt-btn,.rt-input')[_fi];if(_n&&_n.type!=='number')_n.focus({preventScroll:true});}
+  _drB4Tag(el);
+  _drB4HeadStats();
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(el);
 }
 
 function renderFragmentTracker(){
@@ -10769,8 +10976,10 @@ function renderLoreTimeline(){
     {icon:'108',phase:'Run 108 — das Ende',title:'Der letzte Versuch',desc:'Deutung der Guides: Dein Playthrough ist Versuch Nr. 108 — Entry #107 nennt den nächsten Versuch „our final chance“. Laut consolepulse kein alternatives Ende: Die Archive Records (nach Story-Abschluss und 40 Abyss-Challenges) deuten das reguläre Ende neu.',cls:'lt-final'}
   ];
   const nodes=[...frame,...chapters,...reveal];
-  el.innerHTML=`<div class="spoiler-shield"><span class="spoiler-shield-ico">⚠️</span><div><strong>Maximale Story-Spoiler:</strong> Diese Timeline zeigt den kompletten Handlungsbogen inkl. Ende. Nur lesen, wenn du durch bist.</div></div>
-    <div class="lt-wrap">${nodes.map(n=>`<div class="lt-item ${n.cls||''}"><div class="lt-dot">${escHtml(n.icon)}</div><div class="lt-card"><div class="lt-phase">${escHtml(n.phase)}</div><div class="lt-title">${escHtml(n.title)}</div><div class="lt-desc">${escHtml(n.desc)}</div></div></div>`).join('')}</div>`;
+  el.innerHTML=cdNote({h:'<strong>Maximale Story-Spoiler:</strong> Diese Timeline zeigt den kompletten Handlungsbogen inkl. Ende. Nur lesen, wenn du durch bist.'},{kind:'warn'})
+    +`<div class="lt-wrap">${nodes.map(n=>`<div class="lt-item ${n.cls||''}"><div class="lt-dot">${escHtml(n.icon)}</div><div class="lt-card cd-spot"><div class="lt-phase">${escHtml(n.phase)}</div><div class="lt-title">${escHtml(n.title)}</div><div class="lt-desc">${escHtml(n.desc)}</div></div></div>`).join('')}</div>`;
+  _drB4Tag(el);
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(el);
 }
 
 function renderSecrets(){
@@ -10779,14 +10988,14 @@ function renderSecrets(){
   const eEnd=document.getElementById('secp-ending');
   if(eEnd){
     eEnd.innerHTML=`
-      <div class="sec-hero">
+      <div class="sec-hero cd-spot">
         <div class="sec-hero-title">Run 108 — das Hidden Ending</div>
         <div class="sec-hero-body">
-          <span class="sec-hero-num">108</span>Die sechs <em>Archive Records</em> im Axiom Archive (Verfasser ungenannt) enthalten nummerierte Einträge bis <strong>#107</strong>: Nach einem Zeitsprung suchen die Abyss-Wächter um <strong>White Crow und Alustin</strong> einen Helden gegen Umbra, finden Kliff und verändern über viele Anläufe seine Wege — ohne Erfolg. Laut Eintrag #72 scheint Caliburn eine <em>Inkarnation Umbras</em> zu sein; laut #2 und #18 ist Hexe Marie der von Umbra verschlungene, abgespaltene Teil des White Crow und von Kliff besessen („wishing to make him her son“). <em>Deutung der Guides:</em> Der gespielte Durchlauf ist Versuch Nr. 108 — Eintrag #107 nennt den nächsten Versuch die letzte Chance. Laut consolepulse ist das kein alternatives Ende, sondern eine Lore-Ebene zum regulären Ende.
+          <span class="sec-hero-num">108</span><div class="sec-hero-txt">Die sechs <em>Archive Records</em> im Axiom Archive (Verfasser ungenannt) enthalten nummerierte Einträge bis <strong>#107</strong>: Nach einem Zeitsprung suchen die Abyss-Wächter um <strong>White Crow und Alustin</strong> einen Helden gegen Umbra, finden Kliff und verändern über viele Anläufe seine Wege — ohne Erfolg. Laut Eintrag #72 scheint Caliburn eine <em>Inkarnation Umbras</em> zu sein; laut #2 und #18 ist Hexe Marie der von Umbra verschlungene, abgespaltene Teil des White Crow und von Kliff besessen („wishing to make him her son“). <em>Deutung der Guides:</em> Der gespielte Durchlauf ist Versuch Nr. 108 — Eintrag #107 nennt den nächsten Versuch die letzte Chance. Laut consolepulse ist das kein alternatives Ende, sondern eine Lore-Ebene zum regulären Ende.</div>
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🎯</span>Trigger / Voraussetzungen</div>
         <div class="sec-block-body">
           <p>Erst freischaltbar <strong>nach vollständigem Story-Abschluss</strong>:</p>
@@ -10798,7 +11007,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📖</span>Schritt-für-Schritt</div>
         <div class="sec-block-body">
           <ol>
@@ -10811,7 +11020,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📚</span>Die 6 Archive-Records-Bücher</div>
         <div class="sec-block-body">
           <div class="sec-block-grid">
@@ -10825,7 +11034,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🔍</span>Die "107"-Markierungen (versteckt in der Welt, laut VULKK — Einzelquelle)</div>
         <div class="sec-block-body">
           <ol>
@@ -10838,7 +11047,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📰</span>Quelle</div>
         <div class="sec-block-body">
           <p>Archive Records Vol. I–VI und Archive Entries #1–#107: questlog.gg (Knowledge 1004713–1004754) · Voraussetzungen und Run-108-Deutung: consolepulse.com (Crimson Desert Ending Explained) · vulkk.com/2026/05/17/how-to-unlock-the-hidden-ending-in-crimson-desert — Stand: 17.05.2026 (RubyRose / Vulkk) · geprüft 04.10.2026</p>
@@ -10851,14 +11060,14 @@ function renderSecrets(){
   const eFr=document.getElementById('secp-fragments');
   if(eFr){
     eFr.innerHTML=`
-      <div class="sec-hero">
+      <div class="sec-hero cd-spot">
         <div class="sec-hero-title">Memory Fragments &amp; Visione</div>
         <div class="sec-hero-body">
-          <span class="sec-hero-num">201</span>Memory Fragments verzeichnet die interaktive Karte von crimsondesert.th.gl (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht (consolepulse nennt für die Knowledge-Kategorie Memory Fragments 327, Einzelquelle; die Fortschrittsanzeige im Knowledge-Menü führt in dieser Kategorie 214 Einträge, siehe Seite Sammelgegenstände). Die drei Zahlen 201, 214 und 327 stammen aus unterschiedlichen Zählweisen und Zeitpunkten und werden hier nicht gegeneinander entschieden. Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.
+          <span class="sec-hero-num">201</span><div class="sec-hero-txt">Memory Fragments verzeichnet die interaktive Karte von crimsondesert.th.gl (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht (consolepulse nennt für die Knowledge-Kategorie Memory Fragments 327, Einzelquelle; die Fortschrittsanzeige im Knowledge-Menü führt in dieser Kategorie 214 Einträge, siehe Seite Sammelgegenstände). Die drei Zahlen 201, 214 und 327 stammen aus unterschiedlichen Zählweisen und Zeitpunkten und werden hier nicht gegeneinander entschieden. Verteilt über alle 5 Regionen + Abyss. Sind <em>keine pickup-Items</em> — ortsgebundene Knowledge-Events, mit der Laterne entdeckt und mit der <em>Visione</em> abspielbar.</div>
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🪖</span>Visione freischalten</div>
         <div class="sec-block-body">
           <ul>
@@ -10870,7 +11079,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🔵</span>Memory Fragments entdecken</div>
         <div class="sec-block-body">
           <ol>
@@ -10883,7 +11092,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">▶️</span>Abspielen (3 Wege)</div>
         <div class="sec-block-body">
           <ul>
@@ -10894,7 +11103,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📌</span>Wichtige Storyfragmente</div>
         <div class="sec-block-body">
           <ul>
@@ -10905,7 +11114,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🗺️</span>Interaktive Karte</div>
         <div class="sec-block-body">
           <p>Vollständige Memory-Fragment-Karte mit allen 201 Positionen: <a href="https://crimsondesert.th.gl/guides/Memory%20Fragment" target="_blank" rel="noopener" style="color:var(--gold)">crimsondesert.th.gl/guides/Memory Fragment</a> (zuletzt aktualisiert 07.04.2026)</p>
@@ -10918,14 +11127,14 @@ function renderSecrets(){
   const eCr=document.getElementById('secp-cressets');
   if(eCr){
     eCr.innerHTML=`
-      <div class="sec-hero">
+      <div class="sec-hero cd-spot">
         <div class="sec-hero-title">Abyss Cressets — Pilgrim of Wonders</div>
         <div class="sec-hero-body">
-          <span class="sec-hero-num">60</span>verborgene Abyss-Brazier in Klippen, Höhlen, Felsspitzen, hinter Treibsand-Feldern. Verteilt über alle 5 Regionen. <em>Prestigeträchtigste Collectibles-Endgame.</em>
+          <span class="sec-hero-num">60</span><div class="sec-hero-txt">verborgene Abyss-Brazier in Klippen, Höhlen, Felsspitzen, hinter Treibsand-Feldern. Verteilt über alle 5 Regionen. <em>Prestigeträchtigste Collectibles-Endgame.</em></div>
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🎁</span>Belohnung pro Cresset</div>
         <div class="sec-block-body">
           <ul>
@@ -10936,12 +11145,12 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🗺️</span>Regionale Verteilung</div>
         <div class="sec-block-body">
           <div class="cresset-region-grid">
             ${SECRETS_CRESSET_REGIONS.map(r=>`
-              <div class="cresset-region">
+              <div class="cresset-region cd-spot">
                 <div class="cresset-region-name">${r.name}</div>
                 <div class="cresset-region-info">${r.info}</div>
               </div>
@@ -10950,7 +11159,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">⚡</span>Pflicht-Traversal-Skills für High-Tier-Cressets</div>
         <div class="sec-block-body">
           <ul>
@@ -10970,12 +11179,12 @@ function renderSecrets(){
   const eEa=document.getElementById('secp-easter');
   if(eEa){
     eEa.innerHTML=`
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🥚</span>Pop-Culture Easter Eggs</div>
         <div class="sec-block-body">
           <div class="easter-grid">
             ${SECRETS_EASTER_EGGS.map(e=>`
-              <div class="easter-card">
+              <div class="easter-card cd-spot">
                 <div class="easter-card-hd">
                   <span class="easter-card-ico">${e.ico}</span>
                   <div style="flex:1;min-width:0">
@@ -10998,12 +11207,12 @@ function renderSecrets(){
   const eLo=document.getElementById('secp-locations');
   if(eLo){
     eLo.innerHTML=`
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📍</span>Hidden Locations</div>
         <div class="sec-block-body">
           <div class="easter-grid">
             ${SECRETS_LOCATIONS.map(l=>`
-              <div class="easter-card">
+              <div class="easter-card cd-spot">
                 <div class="easter-card-hd">
                   <span class="easter-card-ico">${l.ico}</span>
                   <div style="flex:1;min-width:0">
@@ -11025,13 +11234,13 @@ function renderSecrets(){
   const eWe=document.getElementById('secp-weapons');
   if(eWe){
     eWe.innerHTML=`
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">⚔️</span>Hidden Weapons</div>
         <div class="sec-block-body">
           <p style="margin-bottom:11px">Drei leicht zu übersehende Waffen. Hollow Visage und Survivor's Solitude liegen in Truhen in Höhlen hinter Wasserfällen; die Vessel of Dark Pursuit trägt der Boss Antumbra's Sword im Sanctum of Absolution.</p>
           <div class="easter-grid">
             ${SECRETS_HIDDEN_WEAPONS.map(w=>`
-              <div class="easter-card">
+              <div class="easter-card cd-spot">
                 <div class="easter-card-hd">
                   <span class="easter-card-ico">⚔️</span>
                   <div style="flex:1;min-width:0">
@@ -11056,12 +11265,12 @@ function renderSecrets(){
   const eMe=document.getElementById('secp-mechanics');
   if(eMe){
     eMe.innerHTML=`
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🔧</span>Versteckte Spielmechaniken</div>
         <div class="sec-block-body">
           <div class="easter-grid">
             ${SECRETS_MECHANICS.map(m=>`
-              <div class="easter-card">
+              <div class="easter-card cd-spot">
                 <div class="easter-card-hd">
                   <span class="easter-card-ico">${m.ico}</span>
                   <div class="easter-card-name" style="flex:1">${m.name}</div>
@@ -11080,17 +11289,10 @@ function renderSecrets(){
   const eTo=document.getElementById('secp-tools');
   if(eTo){
     eTo.innerHTML=`
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">🔎</span>Wichtige Such-Tools</div>
         <div class="sec-block-body">
-          <table class="tools-table">
-            <tbody>
-              ${SECRETS_TOOLS.map(t=>`<tr>
-                <td>${t.tool}</td>
-                <td><div style="margin-bottom:3px;color:var(--gold);font-size:var(--fs-10-5)"><code>${t.input}</code></div><div style="color:#beb5a8">${t.effect}</div></td>
-              </tr>`).join('')}
-            </tbody>
-          </table>
+          ${_drB4ToolCards()}
           <div class="lore-callout" style="margin-top:14px">
             <strong>Reflex:</strong> An jeder neuen erhöhten Vista <strong>UND</strong> an jedem neuen Zone-Eingang <strong>beide</strong> aktivieren (Laterne + Guiding Light). Spart Stunden.
           </div>
@@ -11103,7 +11305,7 @@ function renderSecrets(){
   const ePr=document.getElementById('secp-priority');
   if(ePr){
     ePr.innerHTML=`
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">⚡</span>Was zuerst freischalten?</div>
         <div class="sec-block-body">
           <p>Reihenfolge für effizientes Secret-Hunting:</p>
@@ -11118,7 +11320,7 @@ function renderSecrets(){
         </div>
       </div>
 
-      <div class="sec-block">
+      <div class="sec-block cd-spot">
         <div class="sec-block-hd"><span class="sec-block-hd-ico">📰</span>Quellen (Stand: 20.05.2026)</div>
         <div class="sec-block-body">
           <ul style="font-size:var(--fs-11);color:#beb5a8">
@@ -11133,7 +11335,13 @@ function renderSecrets(){
       </div>
     `;
   }
+  _drB4Init();
 }
+/* Eigene Listener (B4): Pillenklick der Bereiche -> secretsTab */
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail;if(!d||d.name!=='drb4-tab')return;
+  if(typeof secretsTab==='function')secretsTab(d.value);
+});
 
 // ===== FAVORITEN-SYSTEM (universal) =====
 function loadFavs(){return lsJson('cd_favs',{});}
