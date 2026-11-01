@@ -7296,6 +7296,43 @@ select.dr-sel-hidden{display:none!important}
 /* DR-A1 Ende */
 /* ---- */
 /* DR-A2 Anfang (Gegner + Accessoires) */
+#sec-bestiary .dra2-bar{margin:0 0 16px}
+#sec-bestiary .dra2-bar .cd-pills{margin:0}
+.dra2-off{display:none!important}
+#sec-bestiary :is(.tag,.cl),#sec-accessories :is(.tag,.cl,.map-pin-btn,.dr-pl){font-size:var(--fs-11)}
+#sec-bestiary .grid{align-items:start}
+#sec-bestiary .dra2-card{contain-intrinsic-size:auto 380px}
+#sec-accessories .dra2-acc{contain-intrinsic-size:auto 390px}
+#sec-bestiary .dra2-card .boss-img{height:152px}
+#sec-bestiary .dra2-card .boss-img-wrap,#sec-bestiary .dra2-card .boss-img-ph{margin-bottom:12px}
+#sec-bestiary .dra2-card .cm{margin-bottom:9px}
+#sec-bestiary .dra2-card .crows,#sec-accessories .dra2-acc .crows{gap:8px}
+.dra2-more{margin-top:2px}
+.dra2-more>summary{min-height:40px}
+.dra2-more .best-note{margin-top:4px}
+#dra2-acc-note .cd-note{margin:0 0 14px}
+#sec-accessories .dra2-fbar{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:2px;margin-bottom:16px}
+#sec-accessories .dra2-fbar .dr-pillrow{margin:0 0 6px}
+#sec-accessories .dra2-fbar .dr-pillrow:empty{display:none}
+#sec-accessories .dra2-fbar .dr-pl{min-width:52px}
+#sec-accessories .dra2-acc{--dra2-tc:var(--gold)}
+#sec-accessories .dra2-acc[data-t="Ring"]{--dra2-tc:var(--cd-fx-hp)}
+#sec-accessories .dra2-acc[data-t="Necklace"]{--dra2-tc:var(--cd-fx-res)}
+#sec-accessories .dra2-acc[data-t="Earring"]{--dra2-tc:var(--cd-fx-speed)}
+#sec-accessories .dra2-acc .acc-icon-hd{position:relative;justify-content:center;min-height:140px;padding:10px 15px;overflow:hidden;
+  background:radial-gradient(ellipse 58% 82% at 50% 54%,color-mix(in srgb,var(--dra2-tc) 24%,transparent),transparent 74%),linear-gradient(180deg,color-mix(in srgb,var(--dra2-tc) 9%,transparent),transparent 85%)}
+#sec-accessories .dra2-acc .acc-item-ico{width:112px;height:112px}
+#sec-accessories .dra2-acc .acc-icon-hd>svg{width:56px;height:56px;opacity:.9}
+#sec-accessories .dra2-acc{display:flex;flex-direction:column}
+.dra2-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:auto;padding-top:14px}
+.dra2-acts .defeat-btn{flex:1 1 150px;width:auto;margin-top:0;min-height:40px}
+.dra2-acts .map-pin-btn{flex:0 0 auto;min-height:40px;margin-top:0}
+.dra2-acc.dra2-have{border-color:color-mix(in srgb,var(--cd-ok) 55%,var(--iron-gall))}
+.dra2-acc.dra2-have .acc-item-ico{opacity:.8}
+@media (max-width:640px){
+  #sec-bestiary .dra2-card .boss-img{height:168px}
+  .dra2-more>summary{min-height:44px}
+}
 /* DR-A2 Ende */
 /* ---- */
 /* DR-A3 Anfang (Waffen) */
@@ -8485,10 +8522,11 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-accessories">
     <h2 class="sec-t"><span class="sec-sym">❖</span> Accessoires</h2>
-    <div class="fbar">
+    <div id="dra2-acc-note"></div>
+    <div class="fbar dra2-fbar">
       <select class="fs" id="accf-type" aria-label="Accessoires nach Typ filtern" onchange="renderAccessories()"><option value="">Alle Typen</option><option value="Ring">Ring</option><option value="Necklace">Necklace / Amulett</option><option value="Earring">Earring / Ohrring</option></select>
+      <div class="dr-pillrow dra2-have-row" id="dra2-acc-have-row"></div>
     </div>
-    <div style="font-size:var(--fs-11-5);color:var(--dim);margin:-4px 0 10px;line-height:1.55"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert.</div>
     <div class="grid" id="acc-grid"></div>
   </section>
 
@@ -8753,7 +8791,7 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-bestiary">
     <h2 class="sec-t"><span class="sec-sym">⛤</span> Gegner <span class="sec-t-en">Creatures</span></h2>
-    <p style="color:var(--dim);font-size:12.5px;margin:-6px 0 16px">Normale Gegner und Wildtiere in Pywel — Wildtiere fürs Skinning, Monster &amp; Kreaturen mit ihren Material-Drops und die feindlichen Fraktionen aller fünf Regionen. Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items). Bosse stehen auf der Seite Bosse.</p>
+    <div class="dra2-bar" id="dra2-best-bar"></div>
     <div id="bestiary-root"></div>
   </section>
 
@@ -18726,30 +18764,93 @@ async function initVisitorCount(){
 
 // ===== ACCESSORIES =====
 
+// ===== DR-A2 Accessoires (design-rest 01.11.2026) =====
+// Kopf (drHead, Szene reg-delesyia), Legende als cdNote, Typ-Pillen mit Anzahl (drSelPillsMount auf #accf-type, das Select bleibt
+// Quelle der Wahrheit), Karten kompakt (Effekt sichtbar, Quelle + Notiz im Aufklapper). Neu (G5): „Gefunden“-Knopf je Karte,
+// Speicher cd_r2_acc_have = Liste von Accessoire-Namen, Pillen „Alle / Offen / Gefunden“, Kachel „Gefunden x/48“ im Kopf.
+const _DRA2_ACC_KEY='cd_r2_acc_have';
+let _drA2AccMode='all';
+function _drA2AccHave(){const a=lsJson(_DRA2_ACC_KEY,[]);return new Set(Array.isArray(a)?a.filter(x=>typeof x==='string'):[]);}
+/* Aktive Suche nach eigenem Neu-Rendern/Filtern erneut anwenden und Aufklapper öffnen, wenn der Treffer nur dort steht. */
+function _drA2Reapply(root){
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  if(!q||!root)return;
+  _reapplyActiveSearch(root);
+  const qF=_fold(q);
+  root.querySelectorAll('[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));
+}
+function _drA2AccCard(a,show,have){
+  const s=[a.name,a.type,a.effect,a.source,a.notes].join(' ').toLowerCase();
+  const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
+  const vis=[a.name,a.type,a.effect].join(' ');
+  const hid=[a.source,a.notes].filter(Boolean).join(' ');
+  const body=`<div class="crow"><span class="cl">Quelle</span><span class="cv">${escHtml(a.source)}</span></div>`
+    +(a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${escHtml(a.notes)}</span></div>`:'');
+  return `<div class="card cd-spot dra2-acc${show?'':' hide'}${have?' dra2-have':''}" data-t="${escHtml(a.type)}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}" data-item-id="${escHtml(a.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(hid)}">
+      <div class="acc-icon-hd">${a.icon?`<img class="acc-item-ico" src="${SYNTH_CDN}${a.icon}" width="112" height="112" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:accTypeIcon(a.type)}</div>
+      <div class="ct">${escHtml(a.name)}</div>
+      <div class="cm"><span class="tag ${badge}">${escHtml(a.type)}</span>${a.dlc?' <span class="tag tdlc">DLC</span>':''}</div>
+      <div class="crows">
+        <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${escHtml(a.effect)}</span></div>
+        <details class="item-more dra2-more"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary><div class="item-more-body">${body}</div></details>
+      </div>
+      <div class="dra2-acts">
+        <button type="button" class="defeat-btn dra2-have-btn${have?' on':''}" aria-pressed="${have?'true':'false'}" onclick="_drA2AccToggle('${escJsStr(a.name)}',this)">${have?'✓ Gefunden':'+ Gefunden'}</button>
+        <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Accessoire — ${escJsStr(a.type)}')">📍 Auf Karte</button>
+      </div>
+    </div>`;
+}
+/* Kachel „Gefunden“ im Kopf und Status-Pillen in place nachziehen (kein Neu-Mounten des Kopfs, damit Szene und Zähler ruhig bleiben). */
+function _drA2AccStatus(){
+  const have=_drA2AccHave(),n=ACCESSORIES.filter(a=>have.has(a.name)).length,t=ACCESSORIES.length;
+  const dd=document.querySelectorAll('#dr-head-accessories .cd-hero-stat dd');
+  if(dd[3]&&dd[3].textContent!==n+'/'+t)dd[3].textContent=n+'/'+t;
+  const row=document.getElementById('dra2-acc-have-row');
+  if(row&&row.dataset.n!==String(n)){
+    row.dataset.n=String(n);
+    row.innerHTML='<span class="dr-pl" aria-hidden="true">Status</span>'+cdPills([{v:'all',t:'Alle',n:t},{v:'open',t:'Offen',n:t-n},{v:'have',t:'Gefunden',n:n}]
+      .map(x=>Object.assign(x,{on:x.v===_drA2AccMode})),{name:'dra2-acc-have',label:'Accessoires nach Fundstatus filtern'});
+  }
+}
+function _drA2AccToggle(name,btn){
+  const raw=lsJson(_DRA2_ACC_KEY,[]);let arr=Array.isArray(raw)?raw.slice():[];
+  const was=arr.includes(name);
+  arr=was?arr.filter(x=>x!==name):arr.concat(name);
+  lsSet(_DRA2_ACC_KEY,JSON.stringify(arr));
+  const now=!was,card=btn&&btn.closest('.card');
+  if(btn){btn.classList.toggle('on',now);btn.setAttribute('aria-pressed',now?'true':'false');btn.textContent=now?'✓ Gefunden':'+ Gefunden';}
+  if(card){
+    card.classList.toggle('dra2-have',now);
+    if(_drA2AccMode!=='all'&&(_drA2AccMode==='have')!==now){card.classList.add('hide');card.dataset.filtered='1';}
+  }
+  _drA2AccStatus();
+}
 function renderAccessories(){
   const sel=document.getElementById('accf-type');
   // Typen aus den Daten: jeder type-Wert ausserhalb von Ring/Necklace/Earring (z. B. kuenftige Spezial-Accessoires) bekommt automatisch
   // eine Filteroption; Badge, Icon und Verlauf fallen fuer unbekannte Typen auf die neutrale Variante zurueck.
   const known=[...sel.options].map(o=>o.value);
   [...new Set(ACCESSORIES.map(a=>a.type))].forEach(t=>{if(t&&!known.includes(t)){const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o);}});
-  const f=sel.value;
-  document.getElementById('acc-grid').innerHTML=ACCESSORIES.map(a=>{
-    const show=!f||a.type===f;
-    const s=[a.name,a.type,a.effect,a.source,a.notes].join(' ').toLowerCase();
-    const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
-    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}">
-      <div class="acc-icon-hd" style="background:${accTypeGrad(a.type)}">${a.icon?`<img class="acc-item-ico" src="${SYNTH_CDN}${a.icon}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:accTypeIcon(a.type)}<span class="icon-hd-label" style="color:${accTypeColor(a.type)}">${a.type}</span></div>
-      <div class="ct">${a.name}</div>
-      <div class="cm"><span class="tag ${badge}">${a.type}</span>${a.dlc?' <span class="tag tdlc">DLC</span>':''}</div>
-      <div class="crows">
-        <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${a.effect}</span></div>
-        <div class="crow"><span class="cl">Quelle</span><span class="cv">${a.source}</span></div>
-        ${a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${a.notes}</span></div>`:''}
-      </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Accessoire — ${a.type}')">📍 Auf Karte</button>
-    </div>`;
+  const f=sel.value,have=_drA2AccHave(),mode=_drA2AccMode,grid=document.getElementById('acc-grid');
+  grid.innerHTML=ACCESSORIES.map(a=>{
+    const h=have.has(a.name);
+    const show=(!f||a.type===f)&&(mode==='all'||(mode==='have')===h);
+    return _drA2AccCard(a,show,h);
   }).join('');
+  if(!document.getElementById('dr-head-accessories')){
+    const cnt=t=>ACCESSORIES.filter(a=>a.type===t).length;
+    drMount('accessories',drHead({kicker:'Ausrüstung',title:'Accessoires',sub:'Ringe, Ohrringe und Halsketten mit Werten.',scene:['reg-delesyia'],glyph:'❖',tone:'violet',
+      stats:[[ACCESSORIES.length,'Accessoires'],[cnt('Ring'),'Ringe'],[cnt('Necklace'),'Halsketten'],[ACCESSORIES.filter(a=>have.has(a.name)).length+'/'+ACCESSORIES.length,'Gefunden']],
+      links:[['weapons','Waffen'],['armor','Rüstungen'],['cores','Abyss-Ausrüstung'],['dlc-ausruestung','DLC · Ausrüstung']]}));
+  }
+  const note=document.getElementById('dra2-acc-note');
+  if(note&&!note.firstChild)note.innerHTML=cdNote('„(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert.',{kind:'info',title:'Legende'});
+  if(!document.querySelector('.dr-pillrow[data-dr-for="accf-type"]'))
+    drSelPillsMount('accf-type',{title:'Typ',count:v=>v===''?ACCESSORIES.length:ACCESSORIES.filter(a=>a.type===v).length,text:{'':'Alle'}});
+  _drA2AccStatus();
+  _drA2Reapply(grid);
 }
+document.addEventListener('cd-pills',function(e){if(e.detail&&e.detail.name==='dra2-acc-have'){_drA2AccMode=e.detail.value||'all';renderAccessories();}});
 
 // ===== WITCHES =====
 
@@ -19185,6 +19286,55 @@ function bestDropChancen(name){
   if(!top.length)return '';
   return `<div class="crow"><span class="cl">Chancen</span><span class="cv">${top.map(d=>escHtml(d.item)+' '+ch(d.chance)).join(' · ')} <a href="/bestiarium#enemy-${escHtml(String(name).normalize('NFC').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''))}" style="color:var(--dim)">Tabelle ↗</a></span></div>`;
 }
+// ===== DR-A2 Gegner (design-rest 01.11.2026) =====
+// Kopf (drHead, Szene reg-hernand, Kacheln aus ENEMIES), Intro wortgleich in drInfo, Gruppen-Pillen mit Anzahl (cdPills
+// "dra2-best", blendet ganze Gruppenblöcke per Klasse aus, kein Neu-Rendern), Karten kompakt: Bild, Name, Region, Drops;
+// Taktik, Chancen und Notiz im Aufklapper (data-item-visible/-hidden, die Suche klappt ihn auf). Die Geschwisterfolge
+// h3.sub-t + p.best-sub + .grid in #bestiary-root bleibt (Such-Gruppenlogik, Kartenfokus).
+let _drA2BestF='all';
+const _DRA2_BEST_G={wild:'❥',kreaturen:'✦',fraktionen:'⚔'};
+const _DRA2_BEST_INTRO='Normale Gegner und Wildtiere in Pywel — Wildtiere fürs Skinning, Monster &amp; Kreaturen mit ihren Material-Drops und die feindlichen Fraktionen aller fünf Regionen. Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items). Bosse stehen auf der Seite Bosse.';
+function _drA2Split(title){const m=/^(\S+)\s+(.*)$/.exec(title);return m?{g:m[1],t:m[2]}:{g:'',t:title};}
+function _drA2Join(a){return a.length>1?a.slice(0,-1).join(', ')+' & '+a[a.length-1]:a.join('');}
+function _drA2BestCard(e,key,title){
+  const s=[e.name,e.de||'',e.region,e.drops||'',e.tipp||'',e.note,'bestiarium gegner enemy',title].join(' ').toLowerCase();
+  const img=ENEMY_IMGS[e.name];
+  const titel=e.de&&e.de!==e.name?`${escHtml(e.de)} <span class="ct-sub">(${escHtml(e.name)})</span>`:escHtml(e.name);
+  const head=img
+    ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" width="300" height="168" loading="lazy" decoding="async" alt="${escHtml(e.de||e.name)}" style="object-position:center center;background:linear-gradient(135deg,#15110d,#0c0c0c)" onerror="this.closest('.boss-img-wrap').outerHTML=bestPH('${escJsStr(e.name)}','${key}')"></div>`
+    :bestPH(e.name,key);
+  const unb=e.conf==='medium'?'Details unbestätigt':'';
+  const ch=bestDropChancen(e.name);
+  const parts=[e.tipp?'Taktik':'',ch?'Chancen':'',e.note?'Notiz':''].filter(Boolean);
+  const body=(e.tipp?`<div class="crow"><span class="cl">Taktik</span><span class="cv" style="color:var(--gold)">${escHtml(e.tipp)}</span></div>`:'')+ch
+    +(e.note?`<div class="best-note">${escHtml(e.note)}</div>`:'');
+  const more=parts.length?`<details class="item-more dra2-more"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">${escHtml(_drA2Join(parts))}</summary><div class="item-more-body">${body}</div></details>`:'';
+  const vis=[e.name,e.de||'',e.region,unb,e.drops&&e.drops!=='—'?e.drops:''].filter(Boolean).join(' ');
+  const hid=[e.tipp||'',e.note||''].filter(Boolean).join(' ');
+  return `<div class="card cd-spot dra2-card" data-filtered="0" data-s="${escHtml(s)}" data-item-id="${escHtml(e.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(hid)}">
+    ${head}
+    <div class="ct">${titel}</div>
+    <div class="cm"><span class="tag tx">${escHtml(e.region)}</span>${unb?'<span class="tag tw" title="Quellenlage dünn — Details teils nur eine Quelle">Details unbestätigt</span>':''}</div>
+    <div class="crows">
+      ${e.drops&&e.drops!=='—'?`<div class="crow"><span class="cl">Drops</span><span class="cv">${escHtml(e.drops)}</span></div>`:''}
+      ${more}
+    </div>
+  </div>`;
+}
+/* Gruppen-Filter: blendet h3 + p + .grid einer Gruppe per Klasse dra2-off aus und setzt data-filtered der Karten, damit die Suche
+   ausgeblendete Gruppen nicht mitzählt (die Such-Gruppenlogik schaltet nur .hide, die beiden Wege stören sich nicht). */
+function _drA2BestFilter(v){
+  _drA2BestF=v||'all';
+  const el=document.getElementById('bestiary-root');if(!el)return;
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  /* ohne aktive Suche: von einer früheren Suche übrig gebliebenes .hide der jetzt gezeigten Gruppe entfernen */
+  el.querySelectorAll('[data-dra2-g]').forEach(n=>{
+    const off=_drA2BestF!=='all'&&n.dataset.dra2G!==_drA2BestF;
+    n.classList.toggle('dra2-off',off);
+    if(n.classList.contains('grid'))n.querySelectorAll('.card').forEach(c=>{c.dataset.filtered=off?'1':'0';if(!off&&!q)c.classList.remove('hide');});
+  });
+  _drA2Reapply(el);
+}
 function renderBestiary(){
   const el=document.getElementById('bestiary-root');if(!el)return;
   const GROUPS=[
@@ -19193,30 +19343,22 @@ function renderBestiary(){
    ['fraktionen','⚔️ Feindliche Fraktionen','Humanoide Gegner-Gruppen nach Region — Lore aus der questlog-Datenbank, Drops von den Fraktions-Einheiten.']
   ];
   el.innerHTML=GROUPS.map(([key,title,sub])=>{
-    const cards=ENEMIES[key].map(e=>{
-      const s=[e.name,e.de||'',e.region,e.drops||'',e.tipp||'',e.note,'bestiarium gegner enemy',title].join(' ').toLowerCase();
-      const img=ENEMY_IMGS[e.name];
-      const titel=e.de&&e.de!==e.name?`${escHtml(e.de)} <span class="ct-sub">(${escHtml(e.name)})</span>`:escHtml(e.name);
-      const head=img
-        ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" loading="lazy" decoding="async" alt="${escHtml(e.de||e.name)}" style="object-position:center center;background:linear-gradient(135deg,#15110d,#0c0c0c)" onerror="this.closest('.boss-img-wrap').outerHTML=bestPH('${escJsStr(e.name)}','${key}')"></div>`
-        :bestPH(e.name,key);
-      return `<div class="card" data-s="${escHtml(s)}">
-        ${head}
-        <div class="ct">${titel}</div>
-        <div class="cm"><span class="tag tx">${escHtml(e.region)}</span>${e.conf==='medium'?'<span class="tag tw" title="Quellenlage dünn — Details teils nur eine Quelle">Details unbestätigt</span>':''}</div>
-        <div class="crows">
-          ${e.drops&&e.drops!=='—'?`<div class="crow"><span class="cl">Drops</span><span class="cv">${escHtml(e.drops)}</span></div>`:''}
-          ${e.tipp?`<div class="crow"><span class="cl">Taktik</span><span class="cv" style="color:var(--gold)">${escHtml(e.tipp)}</span></div>`:''}
-          ${bestDropChancen(e.name)}
-        </div>
-        ${e.note?`<div class="best-note">${escHtml(e.note)}</div>`:''}
-      </div>`;
-    }).join('');
-    return `<h3 class="sub-t">${title} <span class="best-count">(${ENEMIES[key].length})</span></h3>
-      <p class="best-sub">${sub}</p>
-      <div class="grid">${cards}</div>`;
+    const cards=ENEMIES[key].map(e=>_drA2BestCard(e,key,title)).join('');
+    return `<h3 class="sub-t" data-dra2-g="${key}">${title} <span class="best-count">(${ENEMIES[key].length})</span></h3>
+      <p class="best-sub" data-dra2-g="${key}">${sub}</p>
+      <div class="grid" data-dra2-g="${key}">${cards}</div>`;
   }).join('');
+  const n={};let total=0;GROUPS.forEach(([k])=>{n[k]=ENEMIES[k].length;total+=n[k];});
+  drMount('bestiary',drHead({kicker:'Kampf',title:'Gegner',sub:'Normale Gegner und Wildtiere in Pywel.',scene:['reg-hernand'],glyph:'⛤',tone:'ok',
+    stats:[[total,'Gegner'],[n.wild,'Wildtiere'],[n.kreaturen,'Monster & Kreaturen'],[n.fraktionen,'Feindliche Fraktionen']],
+    links:[['bosses','Bosse'],['npcs','Charaktere & NPCs'],['gatherables','Sammelobjekte'],['disarm','Entwaffnen']],
+    after:drInfo({title:'So liest du die Seite',lead:'Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items).',icon:{h:cdIcon('info')},h:'<p>'+_DRA2_BEST_INTRO+'</p>'})}));
+  const bar=document.getElementById('dra2-best-bar');
+  if(bar)bar.innerHTML=cdPills([{v:'all',t:'Alle',n:total}].concat(GROUPS.map(([k,title])=>{const g=_drA2Split(title);return {v:k,t:g.t,n:n[k],g:_DRA2_BEST_G[k]};}))
+    .map(x=>Object.assign(x,{on:x.v===_drA2BestF})),{name:'dra2-best',label:'Gegner nach Gruppe filtern'});
+  if(_drA2BestF!=='all')_drA2BestFilter(_drA2BestF);
 }
+document.addEventListener('cd-pills',function(e){if(e.detail&&e.detail.name==='dra2-best')_drA2BestFilter(e.detail.value);});
 
 // NPC-Portraits im Boss-Karten-Stil: lokale Bilder (cd_assets/npcs/ bzw. cd_assets/bosses/ fuer
 // Antagonisten, die bereits Bosse sind) als primary, questlog-/fextralife-CDN als onerror-Fallback.
