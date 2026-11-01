@@ -7024,6 +7024,10 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .dlc-tbl--garden td:first-child{width:auto}
   .dlc-tbl--garden td:first-child::before{display:inline;content:"Nr. "}
 }
+/* Spiel-Originalbilder aus den Game-Files (01.11.2026, KI-Mix 2x): weiche Ecken, wirkt nur bei deckenden Bildern */
+img[src*="cd_assets/weapons/"],img[src*="cd_assets/armor/"],img[src*="cd_assets/items/"],img[src*="cd_assets/cores/"],
+img[src*="cd_assets/dyes/"],img[src*="cd_assets/npcs/"],img[src*="cd_assets/pets/"],img[src*="cd_assets/bosses/"],
+img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"]{border-radius:min(14px,18%)}
 </style>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);

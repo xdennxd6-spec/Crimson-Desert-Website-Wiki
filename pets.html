@@ -7024,6 +7024,10 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .dlc-tbl--garden td:first-child{width:auto}
   .dlc-tbl--garden td:first-child::before{display:inline;content:"Nr. "}
 }
+/* Spiel-Originalbilder aus den Game-Files (01.11.2026, KI-Mix 2x): weiche Ecken, wirkt nur bei deckenden Bildern */
+img[src*="cd_assets/weapons/"],img[src*="cd_assets/armor/"],img[src*="cd_assets/items/"],img[src*="cd_assets/cores/"],
+img[src*="cd_assets/dyes/"],img[src*="cd_assets/npcs/"],img[src*="cd_assets/pets/"],img[src*="cd_assets/bosses/"],
+img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"]{border-radius:min(14px,18%)}
 </style>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -9102,7 +9106,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td>Fruit</td><td>Vogel (flugunfähig)</td>
 </tr>
 <tr id="pet-partridge">
-<td><img class="pet-thumb" loading="lazy" src="/cd_assets/pets/cd_pet_partridge.webp" alt="Partridge in Crimson Desert" width="256" height="256">Partridge</td>
+<td><img class="pet-thumb" loading="lazy" src="/cd_assets/pets/cd_pet_partridge.webp" alt="Partridge in Crimson Desert" width="512" height="512">Partridge</td>
 <td>Grains</td><td>Vogel (flugunfähig)</td>
 </tr>
 <tr id="pet-swamphen">
@@ -9154,7 +9158,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td>Carrot</td><td>Säugetier (Hasenartige)</td>
 </tr>
 <tr id="pet-forest-rabbit">
-<td><img class="pet-thumb" loading="lazy" src="/cd_assets/pets/cd_pet_forest-rabbit.webp" alt="Forest Rabbit in Crimson Desert" width="256" height="256">Forest Rabbit</td>
+<td><img class="pet-thumb" loading="lazy" src="/cd_assets/pets/cd_pet_forest-rabbit.webp" alt="Forest Rabbit in Crimson Desert" width="512" height="512">Forest Rabbit</td>
 <td>Carrot</td><td>Säugetier (Hasenartige)</td>
 </tr>
 <tr id="pet-snowfield-rabbit">
