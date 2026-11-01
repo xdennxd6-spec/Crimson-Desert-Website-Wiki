@@ -7059,6 +7059,43 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 /* DLC-K Anfang (Kampf: _dlcSecBosse, Besitz Arbeiter kampf) */
 /* DLC-K Ende */
 /* DLC-A Anfang (Ausrüstung: _dlcSecGear, Besitz Arbeiter gear) */
+/* Raster wie #weapon-tb/#armor-grid: Karten wachsen einzeln nach unten, kein Strecken auf Zeilenhöhe */
+.dlc-a-grid{align-items:start}
+.dlc-a-grid .card{align-self:start}
+.dlc-a-grp[hidden]{display:none}
+/* Pillenzeile und Gruppen-Überschriften wie Abyss-Ausrüstung (r2b13-grp-hd) */
+.dlc-a-pills{margin:18px 0 4px}
+.dlc-a-grp{margin-top:6px}
+.dlc-a-hd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:28px 0 13px}
+.dlc-a-hd>.sub-t{margin:0}
+.dlc-a-t::before{display:none}
+.dlc-a-hd>.cd-g{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:color-mix(in srgb,var(--cd-fx-ice) 16%,transparent);color:var(--cd-fx-ice);font-size:15px}
+.dlc-a-n{font:600 12px/1.3 var(--f-mono);color:var(--dim)}
+.dlc-a-gol{margin-left:auto;font-size:12.5px}
+.dlc-a-sub .dlc-a-hd{margin:22px 0 12px}
+.dlc-a-sub h4.dlc-a-t{font-size:14.5px}
+.dlc-a-link{margin-top:14px;color:var(--dim)}
+.dlc-a-link .tag{font-size:max(11px,var(--fs-10))}
+/* Kopf der „Weitere“-Karten: gleiche Maße wie der Bildkopf (90 px) bzw. die bildlose Waffenkarte */
+.dlc-a-img{display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)}
+.dlc-a-img img{height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))}
+.dlc-a-hd2{display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;min-height:46px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)}
+.dlc-a-hd2>.cd-g{font-size:20px;line-height:1;color:var(--cd-fx-ice)}
+.dlc-a-eff{color:var(--gold)}
+.dlc-a-sm{font-size:var(--fs-11)}
+.dlc-a-dim{color:var(--dim)}
+#dlc-root-ausruestung .dlc-a-card .cv{min-width:0;overflow-wrap:anywhere}
+/* Bildklick (Großansicht) wie auf den Vorbildseiten */
+#dlc-root-ausruestung .dlc-a-grid .card img,#dlc-root-ausruestung .dlc-a-grid .card :has(> img:only-child){cursor:zoom-in}
+/* Neue Elemente: Schrift mindestens 11 px, Tap-Ziele mindestens 40 px */
+#dlc-root-ausruestung .dlc-a-grid :is(.cl,.tag){font-size:max(11px,var(--fs-10))}
+#dlc-root-ausruestung .dlc-a-grid .cl{min-width:92px}
+#dlc-root-ausruestung .dlc-a-card .item-more-body .cl{min-width:112px}
+#dlc-root-ausruestung .dlc-a-grid .map-pin-btn{min-height:40px;font-size:max(11px,var(--fs-10))}
+#dlc-root-ausruestung .dlc-a-grid .item-more>summary{min-height:40px}
+@media (max-width:560px){
+  .dlc-a-gol{margin-left:0;flex-basis:100%}
+}
 /* DLC-A Ende */
 /* DLC-Q Anfang (Quests: _dlcSecQuests, Besitz Arbeiter quests) */
 /* DLC-Q Ende */
@@ -13313,36 +13350,126 @@ function _dlcSecLeben(){
   return {title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
     chips:gruppen.map(g=>({t:g})),body:b};
 }
+/* ===== DLC-A (Ausrüstung, Arbeiter gear): Karten wie auf den Seiten Waffen und Rüstungen =====
+   Waffen und Rüstungen nutzen _wepCardHtml/_armorCardHtml (dieselben Karten wie die Vorbildseiten, ohne Stern, mit .map-pin-btn).
+   Weitere Ausrüstung, Accessoire und Abyss-Kerne sind .card im selben Aufbau (Kopf, .ct, .cm, .crows/.crow, details.item-more).
+   Filter: cdPills name "dlc-gear" blendet Gruppen (.dlc-a-grp) per hidden aus und setzt data-filtered auf deren Karten (Suche respektiert das). */
+const DLC_A_GLYPH={'Abyss-Ausrüstung':'⧫','Taucher-Zubehör':'◎','Wagenausrüstung':'⚙','Haustier-Ausrüstung':'✦','Reittier-Ausrüstung':'♞','Werkzeug':'⚒','Ausrüstung':'✦'};
+function _dlcA_row(l,v,cls){return '<div class="crow"><span class="cl">'+cdEsc(l)+'</span><span class="cv'+(cls?' '+cls:'')+'">'+v+'</span></div>';}
+/* Erster Wert mit Vermerk (c unb/nb) in x, sonst null; für den sichtbaren Hinweis an eingeklappten Zeilen. */
+function _dlcA_bad(x){if(x==null)return null;if(Array.isArray(x)){for(const y of x){const b=_dlcA_bad(y);if(b)return b;}return null;}const o=_dlcObj(x);return o.c&&o.c!=='ok'?o:null;}
+/* Kopf einer bildlosen Karte: Akzentleiste und Glyphe wie die bildlose Waffenkarte (grad = optionaler Verlauf, svg = fertiges Symbol). */
+function _dlcA_hd(glyph,svg,grad){
+  return '<div class="dlc-a-hd2"'+(grad?' style="background:'+grad+'"':'')+'>'+(svg||'<i class="cd-g" aria-hidden="true">'+cdEsc(glyph||'✦')+'</i>')+'</div>';
+}
+/* Bildkopf 90 px wie auf den Vorbildseiten (Klassen statt Inline-Style), mit Rückfall: kaputtes Bild blendet den Kopf aus. */
+function _dlcA_img(src,alt){
+  return '<div class="dlc-a-img"><img src="'+cdEsc(src)+'" width="78" height="78" loading="lazy" decoding="async" alt="'+cdEsc(alt||'')+'" onerror="this.parentElement.style.display=\'none\'"></div>';
+}
+/* Gemeinsame Karte: o = {id,s,vis,hid,head,name,tags,rows,more,pin:{n,src,t},go} */
+function _dlcA_card(o){
+  return '<div class="card cd-spot dlc-a-card" data-filtered="0" data-s="'+cdEsc(String(o.s).toLowerCase())+'" data-item-id="'+cdEsc(o.id)+'" data-item-hidden="'+cdEsc(o.hid||'')+'" data-item-visible="'+cdEsc(String(o.vis||'').toLowerCase())+'">'
+    +o.head+'<div class="ct">'+o.name+'</div><div class="cm">'+o.tags+'</div><div class="crows">'+o.rows+(o.more||'')+'</div>'
+    +(o.go?'<div class="dlc-a-go">'+o.go+'</div>':'')
+    +'<button class="map-pin-btn" onclick="showMapLoc(\''+escJsStr(o.id)+'\',\''+escJsStr(o.pin)+'\',\''+escJsStr(o.pt)+'\')">'+foBtn(o.id)+'</button></div>';
+}
+/* Aufklapper „Quelle / Notiz“ wie auf den Vorbildseiten; flag = sichtbarer Vermerk in der Kopfzeile, wenn drinnen etwas unbestätigt oder nicht belegt ist. */
+function _dlcA_more(label,rows,flag){
+  return '<details class="item-more"><summary onclick="this.parentElement.removeAttribute(\'data-srch-open\')">'+cdEsc(label)+(flag?' '+_dlcFlag(flag.c,flag.q):'')+'</summary><div class="item-more-body">'+rows+'</div></details>';
+}
+/* Weitere Ausrüstung (DLC_GEAR_EXTRA): Art als Etikett, Slot/Charakter/Werte als Zeilen, Erhalt und Voraussetzung im Aufklapper. */
+function _dlcA_extraCard(g,img){
+  const kind=_dlcP(g.kind),base=kind.replace(/\s*\(.*$/,''),slot=_dlcV(g.slot),chr=_dlcV(g.char),st=_dlcV(g.stats),src=_dlcV(g.source),req=_dlcV(g.req);
+  const vis=[g.name,g.de,kind,_dlcP(g.slot),_dlcP(g.char),_dlcP(g.stats)].join(' ');
+  const hid=[_dlcP(g.source),_dlcP(g.req),g.q].filter(Boolean).join(' ');
+  const bad=_dlcA_bad(g.source)||_dlcA_bad(g.req);
+  let rows=(slot?_dlcA_row('Slot',slot):'')+(chr?_dlcA_row('Charakter',chr):'')+_dlcA_row('Werte',st||'<span class="dlc-nb">nicht belegt</span>');
+  const more=_dlcA_more(req?'Erhalt / Voraussetzung':'Erhalt',_dlcA_row('Erhalt',src||'<span class="dlc-nb">nicht belegt</span>','dlc-a-sm')+(req?_dlcA_row('Voraussetzung',req,'dlc-a-sm'):''),bad);
+  return _dlcA_card({id:g.name,s:[vis,hid,'dlc'].join(' '),vis:vis,hid:hid,
+    head:img?_dlcA_img(img,g.name):_dlcA_hd(DLC_A_GLYPH[base]),
+    name:_dlcName(g),tags:'<span class="tag tx">'+cdEsc(kind)+'</span>',rows:rows,more:more,pin:_dlcP(g.source),pt:'Ausrüstung — '+kind});
+}
+function _dlcA_accCard(a){
+  const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
+  const hid=[a.source,a.notes].filter(Boolean).join(' ');
+  return _dlcA_card({id:a.name,s:[a.name,a.type,a.effect,a.source,a.notes,'dlc '+a.dlc].join(' '),vis:[a.name,a.type,a.effect].join(' '),hid:hid,
+    head:_dlcA_hd('',accTypeIcon(a.type),accTypeGrad(a.type)),name:cdEsc(a.name),
+    tags:'<span class="tag '+badge+'">'+cdEsc(a.type)+'</span>'+_dlcTag(a),
+    rows:_dlcA_row('Effekt',cdEsc(a.effect),'dlc-a-eff')+_dlcA_more('Quelle / Notiz',_dlcA_row('Quelle',cdEsc(a.source),'dlc-a-sm')+(a.notes?_dlcA_row('Notiz',cdEsc(a.notes),'dlc-a-sm dlc-a-dim'):'')),
+    pin:a.source,pt:'Accessoire — '+a.type});
+}
+function _dlcA_coreCard(c){
+  const m=(typeof R2B13_SLOT!=='undefined'&&R2B13_SLOT[c.slot])||{g:'⧫',t:c.slot||''};
+  const hid=c.source||'';
+  return _dlcA_card({id:c.name,s:[c.name,c.effect,c.source,c.slot,slotDe(c.slot),'dlc '+c.dlc].join(' '),vis:[c.name,c.effect,m.t].join(' '),hid:hid,
+    head:_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(m.t)+'</span>'+_dlcTag(c),
+    rows:_dlcA_row('Effekt',cdEsc(c.effect),'dlc-a-eff')+_dlcA_more('Quelle',_dlcA_row('Quelle',cdEsc(c.source),'dlc-a-sm')),
+    pin:c.source,pt:'Abyss-Kern — '+(m.t||'')});
+}
+function _dlcA_hdr(tag,glyph,title,n,go){
+  return '<div class="dlc-a-hd">'+(glyph?'<i class="cd-g" aria-hidden="true">'+cdEsc(glyph)+'</i>':'')+'<'+tag+' class="sub-t dlc-a-t">'+cdEsc(title)+'</'+tag+'><span class="dlc-a-n">'+n+'</span>'+(go||'')+'</div>';
+}
 /* 10 Neue DLC-Ausrüstung (datengetrieben aus WEAPONS/ARMOR) (Abschnitt dlc-b-ausruestung, Besitz: gear) */
 function _dlcSecGear(){
   const G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
-  let b=_dlcList(DLC_GEAR_NOTES,'dlc-list--note');
-  if(G.w.length){
-    b+=_dlcH('Waffen ('+G.w.length+')')+_dlcTbl(['Waffe','Typ','ATK','Fundort'],G.w.map(w=>({s:[w.name,w.type,w.source,w.notes].join(' '),
-      cells:[_dlcIco(WEAPON_IMGS[w.name])+'<button type="button" class="dlc-lnk" onclick="waffeZeigeTeil(\''+escJsStr(w.name)+'\')">'+cdEsc(w.name)+'</button>',cdEsc(w.type||''),w.atk!=null?_dlcQ(w.atk,w):(w.def!=null?_dlcQ('DEF '+w.def,w):'<span class="dlc-nb">nicht erfasst</span>'),cdEsc(w.source||'')]})),{cap:'DLC-Waffen'});
-  }
-  if(G.a.length){
-    b+=_dlcH('Rüstungen ('+G.a.length+')')+_dlcTbl(['Rüstung','Teil','Effekt','Fundort'],G.a.map(a=>({s:[a.name,a.type,a.effect,a.source,a.notes].join(' '),
-      cells:[_dlcIco(ARMOR_IMGS[a.name])+'<button type="button" class="dlc-lnk" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">'+cdEsc(a.name)+'</button>',cdEsc(a.type||''),_dlcQ(a.effect||'',a),cdEsc(a.source||'')]})),{cap:'DLC-Rüstungen'});
-  }
-  if(G.e.length){
-    b+=_dlcH('Weitere Ausrüstung ('+G.e.length+')')+_dlcTbl(['Name','Art','Slot','Charakter','Werte','Erhalt'],G.e.map(g=>{
-      const s=_dlcV(g.source),r=_dlcV(g.req);
-      return {c:g.c,s:[g.name,_dlcP(g.kind),_dlcP(g.slot),_dlcP(g.char),_dlcP(g.stats),_dlcP(g.source),_dlcP(g.req)].join(' '),
-        cells:[_dlcIco(_dlcImg(g.name))+_dlcName(g),_dlcCell(g.kind,true),_dlcCell(g.slot,true),_dlcCell(g.char,true),_dlcCell(g.stats,true),
-          (s||r)?s+(r?(s?'<br>':'')+'Voraussetzung: '+r:''):'<span class="dlc-nb">nicht belegt</span>']};
-    }),{cap:'Weitere DLC-Ausrüstung'});
-  }
-  if(G.x.length)b+=cdNote({h:'Neue Accessoires: '+G.x.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+[x.type,x.source].filter(Boolean).map(cdEsc).join(', ')+')').join('; ')+'. Details auf der Seite '+cdGoLink('accessories','','Accessoires')+'.'},{kind:'info',title:'Accessoires'});
-  if(G.k.length)b+=cdNote({h:'Neue Abyss-Kerne: '+G.k.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+[x.slot,x.source].filter(Boolean).map(cdEsc).join(', ')+')').join('; ')+'. Details auf der Seite '+cdGoLink('cores','','Abyss-Ausrüstung')+'.'},{kind:'info',title:'Abyss-Kerne'});
-  if(!nGear)b+=cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'});
+  let b=cdNote({h:_dlcList(DLC_GEAR_NOTES,'dlc-list--note')},{kind:'info',title:'Zum Stand der DLC-Ausrüstung'});
   const gearNames=new Set(G.w.map(w=>w.name));
   const tools=DLC_GEAR_TOOLS.filter(t=>!gearNames.has(t));
   if(tools.length)b+=cdNote({h:'Offiziell neu sind im Kampf einsetzbare Alltagswerkzeuge: '+tools.map(t=>'<b>'+cdEsc(t)+'</b> ('+cdEsc(DLC_GEAR_TOOLS_DE[t]||'')+')').join(', ')+'. '+_dlcV({v:'Werte, Fundort und Waffentyp',c:'nb'})},{kind:'info',title:'Kampf-Alltagswerkzeuge'});
-  b+='<p class="dlc-p">Alle Einträge tragen auf den Seiten '+cdGoLink('weapons','','Waffen')+' und '+cdGoLink('armor','','Rüstungen')+' das Etikett <span class="tag tdlc">DLC</span>.</p>';
-  return {title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',
+  b+='<p class="dlc-p dlc-a-link">Alle Einträge tragen auf den Seiten '+cdGoLink('weapons','','Waffen')+' und '+cdGoLink('armor','','Rüstungen')+' das Etikett <span class="tag tdlc">DLC</span>.</p>';
+  if(!nGear)return {title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',flat:true,
+    chips:[],body:b+cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'})};
+  const nW=G.w.length,nA=G.a.length,nX=G.x.length+G.k.length+G.e.length;
+  b+=cdPills([{v:'all',t:'Alle',n:nW+nA+nX,on:true},{v:'w',t:'Waffen',g:'†',n:nW},{v:'a',t:'Rüstungen',g:'⛓',n:nA},{v:'x',t:'Weitere',g:'✦',n:nX}].filter(p=>p.v==='all'||p.n>0),{name:'dlc-gear',label:'DLC-Ausrüstung filtern',wrap:true,cls:'dlc-a-pills'});
+  if(nW)b+='<section class="ruin-region dlc-a-grp" data-grp="w">'+_dlcA_hdr('h3','†','Waffen',nW)+'<div class="grid dlc-a-grid" id="dlc-wep-grid">'+G.w.map(w=>_wepCardHtml(w,false)).join('')+'</div></section>';
+  if(nA){
+    const ord=typeof ARMOR_TYPE_ORDER!=='undefined'?ARMOR_TYPE_ORDER:[];
+    const arm=G.a.slice().sort((p,q)=>(ord.indexOf(p.type)-ord.indexOf(q.type))||p.name.localeCompare(q.name,'de'));
+    b+='<section class="ruin-region dlc-a-grp" data-grp="a">'+_dlcA_hdr('h3','⛓','Rüstungen',nA)+'<div class="grid dlc-a-grid" id="dlc-arm-grid">'+arm.map(a=>_armorCardHtml(a,false)).join('')+'</div></section>';
+  }
+  if(nX){
+    b+='<section class="ruin-region dlc-a-grp" data-grp="x">'+_dlcA_hdr('h3','✦','Weitere Ausrüstung',nX);
+    const sub=(id,title,n,cards,go)=>'<section class="ruin-region dlc-a-sub">'+_dlcA_hdr('h4','',title,n,go)+'<div class="grid dlc-a-grid" id="dlc-ext-'+id+'">'+cards+'</div></section>';
+    if(G.x.length)b+=sub('acc','Accessoires',G.x.length,G.x.map(_dlcA_accCard).join(''),'<span class="dlc-a-gol">'+cdGoLink('accessories','','Auf der Seite Accessoires')+'</span>');
+    if(G.k.length)b+=sub('cores','Abyss-Kerne',G.k.length,G.k.map(_dlcA_coreCard).join(''),'<span class="dlc-a-gol">'+cdGoLink('cores','','Auf der Seite Abyss-Ausrüstung')+'</span>');
+    const order=[],by={};
+    G.e.forEach(g=>{const base=_dlcP(g.kind).replace(/\s*\(.*$/,'')||'Weitere';if(!by[base]){by[base]=[];order.push(base);}by[base].push(g);});
+    order.forEach(base=>{
+      const list=by[base],all=_dlcAllImg(list,g=>_dlcImg(g.name));
+      let title=base;
+      if(base==='Ausrüstung'){const ps=[...new Set(list.map(g=>(/\(([^)]*)\)/.exec(_dlcP(g.kind))||[])[1]).filter(Boolean))];if(ps.length)title=base+' ('+ps.join(', ')+')';}
+      b+=sub('x-'+cdSlug(base),title,list.length,list.map(g=>_dlcA_extraCard(g,all?_dlcImg(g.name):'')).join(''));
+    });
+    b+='</section>';
+  }
+  return {title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',flat:true,
     chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}].concat(G.x.length?[{v:G.x.length,t:'Accessoires'}]:[],G.k.length?[{v:G.k.length,t:'Abyss-Kerne'}]:[],G.e.length?[{v:G.e.length,t:'Weitere'}]:[]),body:b};
 }
+/* Filter der Gruppen (Pillen „dlc-gear“): Gruppe per hidden aus, Karten data-filtered=1, damit die Suche sie nicht zurückholt */
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail;if(!d||d.name!=='dlc-gear')return;
+  const root=document.getElementById('dlc-root-ausruestung');if(!root)return;
+  const v=d.value||'all';
+  root.querySelectorAll('.dlc-a-grp').forEach(g=>{
+    const ok=v==='all'||g.dataset.grp===v;
+    g.hidden=!ok;
+    g.querySelectorAll('[data-s]').forEach(el=>{el.dataset.filtered=ok?'0':'1';if(ok)el.classList.remove('hide');});
+  });
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  _collapseEmptyGroups(root,false);
+  if(q){_reapplyActiveSearch(root);_collapseEmptyGroups(root,true);}
+});
+/* Großansicht per Klick aufs Bild wie auf den Vorbildseiten (deren Klick-Handler kennt nur die eigenen Raster) */
+document.addEventListener('click',e=>{
+  if(e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey)return;
+  const t=e.target;
+  if(!t||!t.closest||t.closest('#card-focus')||t.closest('a,button,input,select,textarea,label,summary'))return;
+  const area=t.tagName==='IMG'?t:(t.firstElementChild&&t.children.length===1&&t.firstElementChild.tagName==='IMG'?t:null);
+  if(!area)return;
+  const card=area.closest('.card');
+  if(!card||!card.closest('#dlc-root-ausruestung')||card.classList.contains('hide'))return;
+  openCardFocus(card);
+});
 /* 11 Was noch offen ist (Abschnitt dlc-b-offen, Besitz: sammeln) */
 function _dlcSecOffen(){
   return {title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
@@ -13422,6 +13549,35 @@ function changeWepPage(d){
   renderWeapons();
   const s=document.getElementById('sec-weapons'); if(s){ if(window.cdMotion)cdMotion.scrollTo(s,{immediate:true}); else s.scrollIntoView({block:'start'}); }
 }
+/* Waffenkarte als reine Funktion (renderWeapons und DLC-Ausrüstung nutzen sie; Markup byte-gleich zum früheren Inline-Template). */
+function _wepCardHtml(w,wasOpen){
+    const sourceText=w.source&&w.source.trim()?w.source:'Sammelimport';
+    const s=[w.name,w.type,sourceText,w.built_in,w.notes,w.dlc?'dlc '+w.dlc:''].join(' ').toLowerCase();
+    const hidden=[sourceText,w.notes].filter(Boolean).join(' ');
+    const visible=[w.name,w.type,w.built_in,w.def,w.atk,w.crit,w.slots].filter(v=>v!==undefined&&v!==null&&v!=='').join(' ').toLowerCase();
+    const show=true;
+    const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
+    const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
+    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
+      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
+      <div class="ct">${w.name}</div>
+      <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
+      <div class="crows">
+        <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>')}${w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':''}</span></div>
+        <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
+        <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>
+        ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
+        <details class="item-more"${wasOpen?' open':''}>
+          <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
+          <div class="item-more-body">
+            <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${src}</span></div>
+            ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${w.notes}</span></div>`:''}
+          </div>
+        </details>
+      </div>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>
+    </div>`;
+}
 function renderWeapons(){
   const f=document.getElementById('wf-type').value;
   const si=document.getElementById('si');
@@ -13448,28 +13604,7 @@ function renderWeapons(){
     // Nicht angezeigte Waffen (andere Seite, Typfilter, kein Suchtreffer) nur als leere Platzhalter: data-s bleibt fuer die
     // Sektions-Chips erhalten, der Aufbau von 500 Karten je Eingabe entfaellt (Pi: ca. 500 ms je Tastendruck).
     if(!show)return `<div class="card hide" data-filtered="1" data-s="${s}" data-item-id="${escHtml(w.name)}"></div>`;
-    const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
-    const wasOpen=savedOpenState[w.name]==='1';
-    const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
-    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
-      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
-      <div class="ct">${w.name}</div>
-      <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
-      <div class="crows">
-        <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>')}${w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':''}</span></div>
-        <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
-        <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>
-        ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
-        <details class="item-more"${wasOpen?' open':''}>
-          <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
-          <div class="item-more-body">
-            <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${src}</span></div>
-            ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${w.notes}</span></div>`:''}
-          </div>
-        </details>
-      </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>
-    </div>`;
+    return _wepCardHtml(w,savedOpenState[w.name]==='1');
   }).join('');
   if(searching){const cnt=document.getElementById('scnt');if(cnt)cnt.textContent=shown+' Treffer';}
   const pg=document.getElementById('weapon-pager');
@@ -15035,28 +15170,14 @@ function armorMat(n){return /\bchain\b/i.test(n)?'Chain':/\bplate\b/i.test(n)?'P
 // sortiert ans Ende.
 function armorNum(eff,key){const vorn=String(eff||'').split('(')[0];const m=new RegExp(key+'\\s*[+→]?\\s*(\\d+)','i').exec(vorn);return m?+m[1]:null;}
 
-// Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
-// Suche laufen ueber armorFilter() und fassen das DOM nicht neu an, sonst wuerde
-// jeder Tastendruck 337 Karten samt <img> neu erzeugen.
-function renderArmor(){
-  const sortEl=document.getElementById('af-sort');
-  const sort=sortEl?sortEl.value:'type';
-  const liste=ARMOR.slice();
-  const savedOpenState=_snapshotOpenItemDetails(document.getElementById('armor-grid'));
-  const nachName=(a,b)=>a.name.localeCompare(b.name,'de');
-  if(sort==='name')liste.sort(nachName);
-  else if(sort==='def')liste.sort((a,b)=>((armorNum(b.effect,'def')??-1)-(armorNum(a.effect,'def')??-1))||nachName(a,b));
-  else if(sort==='atk')liste.sort((a,b)=>((armorNum(b.effect,'atk')??-1)-(armorNum(a.effect,'atk')??-1))||nachName(a,b));
-  else if(sort==='prov')liste.sort((a,b)=>((ARMOR_PROV_ORDER[a.prov]??9)-(ARMOR_PROV_ORDER[b.prov]??9))||nachName(a,b));
-  else liste.sort((a,b)=>(ARMOR_TYPE_ORDER.indexOf(a.type)-ARMOR_TYPE_ORDER.indexOf(b.type))||nachName(a,b));
-  document.getElementById('armor-grid').innerHTML=liste.map(a=>{
+/* Rüstungskarte als reine Funktion (renderArmor und DLC-Ausrüstung nutzen sie; Markup byte-gleich zum früheren Inline-Template). */
+function _armorCardHtml(a,wasOpen){
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
     const sourceText=a.source&&a.source.trim()?a.source:'Sammelimport';
     const s=[a.name,a.type,sourceText,a.effect,a.notes,a.dlc?'dlc '+a.dlc:''].join(' ').toLowerCase();
     const hidden=[sourceText,a.notes].filter(Boolean).join(' ');
     const visible=[a.name,a.type,a.effect].filter(v=>v).join(' ').toLowerCase();
     const srcDisp=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
-    const wasOpen=savedOpenState[a.name]==='1';
     return `<div class="card" data-s="${s}" data-item-id="${escHtml(a.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${a.name}</div>
@@ -15073,6 +15194,23 @@ function renderArmor(){
       </div>
       <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>
     </div>`;
+}
+// Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
+// Suche laufen ueber armorFilter() und fassen das DOM nicht neu an, sonst wuerde
+// jeder Tastendruck 337 Karten samt <img> neu erzeugen.
+function renderArmor(){
+  const sortEl=document.getElementById('af-sort');
+  const sort=sortEl?sortEl.value:'type';
+  const liste=ARMOR.slice();
+  const savedOpenState=_snapshotOpenItemDetails(document.getElementById('armor-grid'));
+  const nachName=(a,b)=>a.name.localeCompare(b.name,'de');
+  if(sort==='name')liste.sort(nachName);
+  else if(sort==='def')liste.sort((a,b)=>((armorNum(b.effect,'def')??-1)-(armorNum(a.effect,'def')??-1))||nachName(a,b));
+  else if(sort==='atk')liste.sort((a,b)=>((armorNum(b.effect,'atk')??-1)-(armorNum(a.effect,'atk')??-1))||nachName(a,b));
+  else if(sort==='prov')liste.sort((a,b)=>((ARMOR_PROV_ORDER[a.prov]??9)-(ARMOR_PROV_ORDER[b.prov]??9))||nachName(a,b));
+  else liste.sort((a,b)=>(ARMOR_TYPE_ORDER.indexOf(a.type)-ARMOR_TYPE_ORDER.indexOf(b.type))||nachName(a,b));
+  document.getElementById('armor-grid').innerHTML=liste.map(a=>{
+    return _armorCardHtml(a,savedOpenState[a.name]==='1');
   }).join('');
   armorFilter();
 }
