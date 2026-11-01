@@ -1006,7 +1006,7 @@ tbody tr:hover td{background:var(--overprint)}
 }
 tbody{contain:layout style}
 .grid,.sk-grid,.ach-grid,.fav-grid,.pet-grid,.witch-grid,.bo-result-grid,.qst-rail,.region-heatmap{contain:layout style}
-#boss-grid .card{contain-intrinsic-size:0 540px}
+:is(#boss-grid,#dlc-boss-grid) .card{contain-intrinsic-size:0 540px}
 #npcs-root .grid .card{contain-intrinsic-size:0 470px}
 .skill-graph-wrap{contain:layout style}
 
@@ -2199,8 +2199,8 @@ html.cf-open,html.cf-open body{overflow:hidden}
 .mount-ig-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 /* Boss-Alternativbild: Button in der Bildschiene, nutzt Float-Preview + Modal
    der Mounts wieder (siehe showBossAlt/openBossAlt und BOSS_ALT_IMGS). */
-#boss-grid .record-rail .boss-alt-btn{margin:10px 12px 0;width:calc(100% - 24px);padding:6px 0;background:var(--vellum);border:1px solid var(--line);color:var(--iron-soft);font-family:var(--f-mono);font-size:var(--fs-10);cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.06em;border-radius:8px}
-#boss-grid .record-rail .boss-alt-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .boss-alt-btn{margin:10px 12px 0;width:calc(100% - 24px);padding:6px 0;background:var(--vellum);border:1px solid var(--line);color:var(--iron-soft);font-family:var(--f-mono);font-size:var(--fs-10);cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.06em;border-radius:8px}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .boss-alt-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 
 /* ============================================================
    FELDATLAS-HERO — Seraph-Altar-Kontakt (additiv, fa-hero-Praefix)
@@ -2392,88 +2392,88 @@ thead tr{background:rgba(22,24,40,.75)}
 
 /* ============================================================
    BOSS-DOSSIER "RECORD"-LAYOUT (Referenz: boss-record.html)
-   Nur #boss-grid .card (Modifier .record-card) — NPCs/Bestiarium
+   Nur :is(#boss-grid,#dlc-boss-grid) .card (Modifier .record-card) — NPCs/Bestiarium
    nutzen eigene Render-Funktionen/Templates und bleiben unberuehrt.
    ============================================================ */
-#boss-grid.grid{grid-template-columns:repeat(auto-fill,minmax(480px,1fr));align-items:start}
-#boss-grid .card.record-card{
+:is(#boss-grid,#dlc-boss-grid).grid{grid-template-columns:repeat(auto-fill,minmax(480px,1fr));align-items:start}
+:is(#boss-grid,#dlc-boss-grid) .card.record-card{
   display:grid;grid-template-columns:230px 1fr;gap:0;
   padding:0;border-radius:var(--radius);overflow:hidden;
 }
-@media(max-width:560px){#boss-grid.grid{grid-template-columns:1fr}}
-#boss-grid .record-img{
+@media(max-width:560px){:is(#boss-grid,#dlc-boss-grid).grid{grid-template-columns:1fr}}
+:is(#boss-grid,#dlc-boss-grid) .record-img{
   position:relative;border-right:1px solid var(--line);overflow:hidden;min-height:250px;
   display:grid;place-items:center;
   background:radial-gradient(120% 100% at 50% 40%, #1a0f14, #0a0710 70%);
 }
-#boss-grid .record-img .boss-img-wrap,#boss-grid .record-img .boss-img-ph{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-wrap,:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-ph{
   position:absolute;inset:0;margin:0;border:none;height:100%;width:100%;
 }
-#boss-grid .record-img .boss-img-wrap .boss-img{height:100%}
-#boss-grid .record-img::after{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-wrap .boss-img{height:100%}
+:is(#boss-grid,#dlc-boss-grid) .record-img::after{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;z-index:2;
   background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.16) 2px 3px);
 }
-#boss-grid .record-img .crosshair{position:absolute;inset:0;pointer-events:none;z-index:1}
-#boss-grid .record-img .crosshair::before,#boss-grid .record-img .crosshair::after{content:"";position:absolute;background:var(--violet-glow)}
-#boss-grid .record-img .crosshair::before{left:50%;top:0;bottom:0;width:1px}
-#boss-grid .record-img .crosshair::after{top:50%;left:0;right:0;height:1px}
-#boss-grid .record-tag{
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair{position:absolute;inset:0;pointer-events:none;z-index:1}
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::before,:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::after{content:"";position:absolute;background:var(--violet-glow)}
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::before{left:50%;top:0;bottom:0;width:1px}
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::after{top:50%;left:0;right:0;height:1px}
+:is(#boss-grid,#dlc-boss-grid) .record-tag{
   position:absolute;top:10px;left:10px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;
   letter-spacing:.14em;color:#160a08;background:var(--red);padding:4px 9px;border-radius:6px;z-index:4;
   box-shadow:0 0 18px -4px var(--red-glow);text-transform:uppercase;
 }
 /* Play/Fav bleiben funktional identisch (pm-trigger/fav-btn), nur ueber dem Portrait platziert */
-#boss-grid .record-card .pm-trigger{top:9px;right:44px;left:auto}
-#boss-grid .record-card .fav-btn{z-index:4}
-#boss-grid .record-card .boss-done-badge{top:auto;bottom:10px;left:50%}
+:is(#boss-grid,#dlc-boss-grid) .record-card .pm-trigger{top:9px;right:44px;left:auto}
+:is(#boss-grid,#dlc-boss-grid) .record-card .fav-btn{z-index:4}
+:is(#boss-grid,#dlc-boss-grid) .record-card .boss-done-badge{top:auto;bottom:10px;left:50%}
 
-#boss-grid .record-body{position:relative;padding:18px 20px;min-width:0}
-#boss-grid .record-body .ct{
+:is(#boss-grid,#dlc-boss-grid) .record-body{position:relative;padding:18px 20px;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .record-body .ct{
   font-family:var(--f-display);font-weight:600;font-size:23px;line-height:1.05;
   margin:0 0 3px;letter-spacing:-.01em;color:var(--ink-hi);
 }
-#boss-grid .record-desig{
+:is(#boss-grid,#dlc-boss-grid) .record-desig{
   font-family:var(--f-mono);font-size:var(--fs-10-5);letter-spacing:.16em;text-transform:uppercase;
   color:var(--amber);margin-bottom:14px;
 }
-#boss-grid .record-body .boss-recur{margin-top:-3px;margin-bottom:10px}
-#boss-grid .datagrid{
+:is(#boss-grid,#dlc-boss-grid) .record-body .boss-recur{margin-top:-3px;margin-bottom:10px}
+:is(#boss-grid,#dlc-boss-grid) .datagrid{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
   background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px;
 }
-#boss-grid .datagrid>div{background:rgba(255,255,255,.02);padding:8px 11px}
-#boss-grid .datagrid dt{font-family:var(--f-mono);font-size:var(--fs-9);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:0}
-#boss-grid .datagrid dd{margin:3px 0 0;font-size:13.5px;line-height:1.35;color:var(--text)}
-#boss-grid .datagrid dd.mono{font-family:var(--f-mono);font-weight:600;color:var(--ink-hi)}
+:is(#boss-grid,#dlc-boss-grid) .datagrid>div{background:rgba(255,255,255,.02);padding:8px 11px}
+:is(#boss-grid,#dlc-boss-grid) .datagrid dt{font-family:var(--f-mono);font-size:var(--fs-9);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:0}
+:is(#boss-grid,#dlc-boss-grid) .datagrid dd{margin:3px 0 0;font-size:13.5px;line-height:1.35;color:var(--text)}
+:is(#boss-grid,#dlc-boss-grid) .datagrid dd.mono{font-family:var(--f-mono);font-weight:600;color:var(--ink-hi)}
 /* Strategie-Callout (.cs bestehende Klasse, hier Amber-Variante statt Brass-Border) */
-#boss-grid .record-body .cs{
+:is(#boss-grid,#dlc-boss-grid) .record-body .cs{
   font-size:14px;line-height:1.55;color:var(--text);background:rgba(224,163,90,.06);
   border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:10px;
   padding:11px 14px;margin:11px 0 12px;
 }
-#boss-grid .record-body .cs::before{
+:is(#boss-grid,#dlc-boss-grid) .record-body .cs::before{
   content:"Strategie";display:block;font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.14em;
   text-transform:uppercase;color:var(--amber);margin-bottom:4px;
 }
 /* Chips: Tags/Rotation im Record-Look (Mono, Ghost + roter Akzent auf erstem Tag) */
-#boss-grid .record-card .cm{gap:7px}
-#boss-grid .record-card .tag{
+:is(#boss-grid,#dlc-boss-grid) .record-card .cm{gap:7px}
+:is(#boss-grid,#dlc-boss-grid) .record-card .tag{
   font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;border-radius:7px;
   padding:5px 10px;letter-spacing:.03em;text-transform:none;
 }
-#boss-grid .record-body .combo-seq{gap:7px}
-#boss-grid .record-body .combo-chip{
+:is(#boss-grid,#dlc-boss-grid) .record-body .combo-seq{gap:7px}
+:is(#boss-grid,#dlc-boss-grid) .record-body .combo-chip{
   font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--text);
   border:1px solid var(--line-strong);border-radius:7px;background:rgba(255,255,255,.03);padding:5px 10px;
 }
-#boss-grid .record-body .combo-chip:first-child{
+:is(#boss-grid,#dlc-boss-grid) .record-body .combo-chip:first-child{
   color:#160a08;background:var(--red);border-color:var(--red);box-shadow:0 0 18px -6px var(--red-glow);
 }
 @media(max-width:600px){
-  #boss-grid .card.record-card{grid-template-columns:1fr}
-  #boss-grid .record-img{border-right:0;border-bottom:1px solid var(--line);aspect-ratio:2/1;min-height:0}
-  #boss-grid .datagrid{grid-template-columns:1fr}
+  :is(#boss-grid,#dlc-boss-grid) .card.record-card{grid-template-columns:1fr}
+  :is(#boss-grid,#dlc-boss-grid) .record-img{border-right:0;border-bottom:1px solid var(--line);aspect-ratio:2/1;min-height:0}
+  :is(#boss-grid,#dlc-boss-grid) .datagrid{grid-template-columns:1fr}
 }
 
 /* Utilities aus tokens.css (fuer Bestand & kuenftige Sektionen) */
@@ -2501,17 +2501,17 @@ thead tr{background:rgba(22,24,40,.75)}
    Fix: Portrait wurde per Grid-Stretch auf volle Body-Hoehe
    gezogen (kein align-items auf .record-card -> default stretch).
    Diese Regeln haengen ans Ende des Skin-Layers und ueberschreiben
-   die bestehenden #boss-grid .record-* Deklarationen (gleiche oder
+   die bestehenden :is(#boss-grid,#dlc-boss-grid) .record-* Deklarationen (gleiche oder
    hoehere Spezifitaet, spaeter in der Cascade).
-   Selektor-Scope: #boss-grid .record-*, #boss-grid .card.record-card,
-   #boss-grid .datagrid — Boss-Record-Ownership, keine Fremdbereiche.
+   Selektor-Scope: :is(#boss-grid,#dlc-boss-grid) .record-*, :is(#boss-grid,#dlc-boss-grid) .card.record-card,
+   :is(#boss-grid,#dlc-boss-grid) .datagrid — Boss-Record-Ownership, keine Fremdbereiche.
    ============================================================ */
 
 /* 1) Bild oben andocken statt Vollhoehe: Grid nicht mehr stretchen */
-#boss-grid .card.record-card{
+:is(#boss-grid,#dlc-boss-grid) .card.record-card{
   align-items:start;
 }
-#boss-grid .record-img{
+:is(#boss-grid,#dlc-boss-grid) .record-img{
   align-self:start;
   aspect-ratio:16/9;
   max-height:200px;
@@ -2521,7 +2521,7 @@ thead tr{background:rgba(22,24,40,.75)}
 /* boss-img-wrap/boss-img-ph liegen absolut *innerhalb* von .record-img —
    das funktioniert weiterhin, weil .record-img jetzt eine echte
    Hoehe ueber aspect-ratio/max-height hat statt Grid-Stretch. */
-#boss-grid .record-img .boss-img-wrap .boss-img{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-wrap .boss-img{
   width:100%;height:100%;object-fit:cover;object-position:center top;
 }
 
@@ -2529,7 +2529,7 @@ thead tr{background:rgba(22,24,40,.75)}
    der Desktop-Fassung neutralisieren, damit 2/1 nicht durch max-height:280px
    eingeschraenkt wird) */
 @media(max-width:600px){
-  #boss-grid .record-img{
+  :is(#boss-grid,#dlc-boss-grid) .record-img{
     aspect-ratio:2/1;
     max-height:none;
     align-self:stretch;
@@ -2544,31 +2544,31 @@ thead tr{background:rgba(22,24,40,.75)}
    Fix: Portrait + Datagrid (Stat-Kacheln) + Filter-Tags in eine
    linke Schiene (.record-rail) buendeln; der Lese-Content bleibt
    rechts im .record-body. Fuellt den Platz unter dem Bild und
-   kuerzt die Karte deutlich. Scope: nur #boss-grid .record-*.
+   kuerzt die Karte deutlich. Scope: nur :is(#boss-grid,#dlc-boss-grid) .record-*.
    ============================================================ */
-#boss-grid .card.record-card{grid-template-columns:240px 1fr}
-#boss-grid .record-rail{
+:is(#boss-grid,#dlc-boss-grid) .card.record-card{grid-template-columns:240px 1fr}
+:is(#boss-grid,#dlc-boss-grid) .record-rail{
   display:flex;flex-direction:column;align-self:start;min-width:0;
   border-right:1px solid var(--line);
   background:radial-gradient(120% 55% at 50% 0%, #150c12, #0a0710 82%);
 }
 /* Trennlinie wandert vom Bild auf die Schiene; Bild trennt sich per
    Bottom-Border vom darunterliegenden Datagrid. */
-#boss-grid .record-rail .record-img{
+:is(#boss-grid,#dlc-boss-grid) .record-rail .record-img{
   border-right:0;border-bottom:1px solid var(--line);
   align-self:auto;width:100%;
 }
 /* Datagrid als kompakte Stat-Kacheln unter dem Portrait (2 Spalten). */
-#boss-grid .record-rail .datagrid{margin:12px 12px 0}
-#boss-grid .record-rail .datagrid:last-child{margin-bottom:12px}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .datagrid{margin:12px 12px 0}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .datagrid:last-child{margin-bottom:12px}
 /* Klickbare Filter-Tags unter das Datagrid. */
-#boss-grid .record-rail .cm{
+:is(#boss-grid,#dlc-boss-grid) .record-rail .cm{
   display:flex;flex-wrap:wrap;gap:7px;margin:11px 12px 12px;
 }
 /* Lange Quest-Tags duerfen die schmale Schiene nicht sprengen: auf
    Schienenbreite kappen (Ellipsis). Voller Text steht im Datagrid
    darueber und im Hover-Tooltip; Klick filtert weiter nach Vollwert. */
-#boss-grid .record-rail .cm .tag{
+:is(#boss-grid,#dlc-boss-grid) .record-rail .cm .tag{
   max-width:100%;min-width:0;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
@@ -2577,14 +2577,14 @@ thead tr{background:rgba(22,24,40,.75)}
 @media(max-width:600px){
   /* Muss die Desktop-Regel oben (gleiche Spezifitaet, frueher im Quelltext
      -> wuerde sonst gewinnen) auf Einspaltigkeit zuruecksetzen. */
-  #boss-grid .card.record-card{grid-template-columns:1fr}
-  #boss-grid .record-rail{
+  :is(#boss-grid,#dlc-boss-grid) .card.record-card{grid-template-columns:1fr}
+  :is(#boss-grid,#dlc-boss-grid) .record-rail{
     border-right:0;border-bottom:1px solid var(--line);
   }
-  #boss-grid .record-rail .record-img{
+  :is(#boss-grid,#dlc-boss-grid) .record-rail .record-img{
     aspect-ratio:16/9;max-height:none;border-bottom:1px solid var(--line);
   }
-  #boss-grid .record-rail .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  :is(#boss-grid,#dlc-boss-grid) .record-rail .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 /* ============================================================
@@ -2592,129 +2592,129 @@ thead tr{background:rgba(22,24,40,.75)}
    Zugeklappte Bosskarte = Portrait + Kopf + Kurz-Chips + Besiegt;
    alles Weitere (Strategie, Datengitter, Lore, Notiz) liegt im
    Aufklapper <details class="item-more boss-more">.
-   Scope: nur #boss-grid .record-card.boss-compact und .boss-more.
+   Scope: nur :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact und .boss-more.
    Bestehende Selektoren oben werden hier ueberschrieben, nie editiert.
    ============================================================ */
 /* === BOSS-KOMPAKT-ANFANG === */
 /* Platzhalterhoehe fuer content-visibility:auto (Z. ~1013 wird nicht editiert, nur ueberschrieben).
    "auto" merkt sich die zuletzt gerenderte Hoehe, 190 px gilt nur bis zum ersten Rendern;
    bereits offene, noch nie gerenderte Karten (z. B. "Alle Details") bekommen einen groesseren Platzhalter. */
-#boss-grid .card.boss-compact{contain-intrinsic-size:auto 215px}
-#boss-grid .card.boss-compact:has(> details.boss-more[open]){contain-intrinsic-size:auto 600px}
+:is(#boss-grid,#dlc-boss-grid) .card.boss-compact{contain-intrinsic-size:auto 215px}
+:is(#boss-grid,#dlc-boss-grid) .card.boss-compact:has(> details.boss-more[open]){contain-intrinsic-size:auto 600px}
 /* Karte: Zeile 1 = Schiene | Body, Zeile 2 = Aufklapper ueber beide Spalten.
    Schiene streckt sich auf Body-Hoehe, das Portrait fuellt sie (kein Leerraum unter dem Bild).
    Masse nach Rueckmeldung des Users (17.09., "zu klein") eine Stufe groesser: Rasterspalten mindestens 600 px (1440 px: eine Karte je Zeile, 1920 px: zwei,
    2560 px: drei), Portrait 280 px breit, mindestens 16:9 = 158 px hoch; Name 21 px; Chips/Knopf/Leiste
    je eine Schriftstufe hoeher. */
-#boss-grid.grid{grid-template-columns:repeat(auto-fill,minmax(min(600px,100%),1fr))} /* min(): nie breiter als der Container */
-#boss-grid .record-card.boss-compact{
+:is(#boss-grid,#dlc-boss-grid).grid{grid-template-columns:repeat(auto-fill,minmax(min(600px,100%),1fr))} /* min(): nie breiter als der Container */
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact{
   grid-template-columns:280px minmax(0,1fr);grid-template-rows:auto auto;align-items:stretch;
 }
-#boss-grid .record-card.boss-compact .record-rail{align-self:stretch;min-height:158px}
-#boss-grid .record-card.boss-compact .record-rail .record-img{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail{align-self:stretch;min-height:158px}
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail .record-img{
   flex:1 1 auto;aspect-ratio:auto;height:auto;max-height:none;min-height:158px;
   align-self:auto;border-bottom:0;
 }
 /* Body: vertikal zentriert. Mindesthoehe 176 px = Hoehe eines Bodys mit 2 Chip-Zeilen und
    einzeiligem Namen, damit Karten mit weniger Chips gleich hoch bleiben (Portrait 158 px passt darunter). */
-#boss-grid .record-card.boss-compact .record-body{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body{
   display:flex;flex-direction:column;justify-content:center;
   min-height:176px;min-width:0;padding:12px 14px 12px 16px;overflow:hidden;
 }
-#boss-grid .record-card.boss-compact .record-body .ct{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body .ct{
   font-size:21px;line-height:1.1;margin:0 0 4px;overflow-wrap:anywhere;
 }
 /* Kennzeile auf 2 Zeilen gekappt, engerer Zeichenabstand fuer ~30 Zeichen je Zeile */
-#boss-grid .record-card.boss-compact .record-desig{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-desig{
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   font-size:var(--fs-11);line-height:1.3;letter-spacing:.1em;margin-bottom:9px;overflow-wrap:anywhere;
 }
 /* Kurz-Chips: natuerliche Breite, umbrechend (Admin-Feinschliff 17.09.: statt 6er-Raster, damit
    kein Chip mitten im Wort gekappt wird). Ellipsis nur als Sicherheitsnetz fuer Einzel-Chips
    breiter als der Body; die Texte selbst werden schon im Renderer gekuerzt (_bossSumChips). */
-#boss-grid .boss-sum{display:flex;flex-wrap:wrap;gap:5px;min-width:0}
-#boss-grid .boss-sum .boss-sum-chip{
+:is(#boss-grid,#dlc-boss-grid) .boss-sum{display:flex;flex-wrap:wrap;gap:5px;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .boss-sum-chip{
   flex:0 1 auto;display:inline-block;min-width:0;max-width:100%;box-sizing:border-box;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   font-family:var(--f-mono);font-size:var(--fs-10-5);font-weight:500;line-height:1.3;letter-spacing:.02em;
   padding:3px 8px;border:1px solid var(--line-strong);border-radius:7px;
   background:rgba(255,255,255,.03);color:var(--text);
 }
-#boss-grid .boss-sum .bsc-pd{
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .bsc-pd{
   color:var(--amber);border-color:rgba(224,163,90,.45);
   font-weight:600;letter-spacing:0;padding:3px 8px;
 }
-#boss-grid .boss-sum .bsc-weak{color:var(--warn)}
-#boss-grid .boss-sum .bsc-note{color:var(--brass);border-color:rgba(224,163,90,.35)}
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .bsc-weak{color:var(--warn)}
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .bsc-note{color:var(--brass);border-color:rgba(224,163,90,.35)}
 /* Besiegt-Knopf kompakt, .on-Zustand kommt aus der bestehenden .defeat-btn.on-Regel */
-#boss-grid .record-card.boss-compact .boss-actions{display:flex;margin-top:10px}
-#boss-grid .record-card.boss-compact .boss-actions .defeat-btn{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .boss-actions{display:flex;margin-top:10px}
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .boss-actions .defeat-btn{
   margin:0;padding:5px 12px;width:fit-content;font-size:var(--fs-10-5);line-height:1.3;
 }
 /* Aufklapper: volle Leiste unter beiden Spalten */
-#boss-grid .boss-more{grid-column:1/-1;border-top:1px solid var(--line);margin:0;min-width:0}
-#boss-grid .boss-more > summary{
+:is(#boss-grid,#dlc-boss-grid) .boss-more{grid-column:1/-1;border-top:1px solid var(--line);margin:0;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary{
   display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;
   padding:9px 16px;font-family:var(--f-mono);font-size:var(--fs-10-5);font-weight:600;
   letter-spacing:.12em;text-transform:uppercase;color:var(--amber);line-height:1.3;
   background:transparent;transition:background-color .15s,color .15s;
 }
-#boss-grid .boss-more > summary::after{color:var(--amber);opacity:.75;transition:transform .16s,color .16s}
-#boss-grid .boss-more[open] > summary{border-bottom:1px solid var(--line)}
-#boss-grid .boss-more[open] > summary::after{color:var(--red)}
-#boss-grid .boss-more > summary:hover{background:rgba(255,255,255,.03);color:var(--amber)}
-#boss-grid .boss-more > summary:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary::after{color:var(--amber);opacity:.75;transition:transform .16s,color .16s}
+:is(#boss-grid,#dlc-boss-grid) .boss-more[open] > summary{border-bottom:1px solid var(--line)}
+:is(#boss-grid,#dlc-boss-grid) .boss-more[open] > summary::after{color:var(--red)}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary:hover{background:rgba(255,255,255,.03);color:var(--amber)}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
 /* Aufgeklappter Inhalt: einspaltig, ruhige Abstaende, nichts doppelt gerahmt */
-#boss-grid .boss-more .boss-more-body{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:10px 16px 16px;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:10px 16px 16px;min-width:0}
 /* Strategie-Callout im Record-Look (die alten .record-body .cs-Regeln greifen hier nicht mehr) */
-#boss-grid .boss-more .boss-more-body .cs{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cs{
   margin:0;font-size:14px;line-height:1.55;color:var(--text);background:rgba(224,163,90,.06);
   border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:10px;padding:11px 14px;
 }
-#boss-grid .boss-more .boss-more-body .cs::before{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cs::before{
   content:"Strategie";display:block;font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.14em;
   text-transform:uppercase;color:var(--amber);margin-bottom:4px;
 }
-#boss-grid .boss-more .boss-more-body .combo-seq{gap:7px}
-#boss-grid .boss-more .boss-more-body .combo-chip{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .combo-seq{gap:7px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .combo-chip{
   font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--text);
   border:1px solid var(--line-strong);border-radius:7px;background:rgba(255,255,255,.03);padding:5px 10px;
 }
-#boss-grid .boss-more .boss-more-body .combo-chip:first-child{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .combo-chip:first-child{
   color:#160a08;background:var(--red);border-color:var(--red);box-shadow:0 0 18px -6px var(--red-glow);
 }
-#boss-grid .boss-more .boss-more-body .copy-btn{margin:-4px 0 0 auto}
-#boss-grid .boss-more .boss-more-body .bp-phase,#boss-grid .boss-more .boss-more-body .bo-recs,#boss-grid .boss-more .boss-more-body .boss-lore,
-#boss-grid .boss-more .boss-more-body .boss-notes-btn,#boss-grid .boss-more .boss-more-body .boss-notes-area,#boss-grid .boss-more .boss-more-body .boss-recur{margin-top:0;margin-bottom:0}
-#boss-grid .boss-more .boss-more-body .boss-notes-btn{width:fit-content;padding:5px 12px}
-#boss-grid .boss-more .boss-more-body .boss-alt-btn{margin:0;width:fit-content;padding:6px 12px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .copy-btn{margin:-4px 0 0 auto}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .bp-phase,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .bo-recs,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-lore,
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-notes-btn,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-notes-area,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-recur{margin-top:0;margin-bottom:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-notes-btn{width:fit-content;padding:5px 12px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-alt-btn{margin:0;width:fit-content;padding:6px 12px}
 /* Datengitter in voller Kartenbreite: 4 Spalten, Kapitel/Region je 1, Quest/Parry/Drops/Schwaeche je 2
    (dense fuellt Luecken, wenn Drops oder Schwaeche fehlen) */
-#boss-grid .boss-more .boss-more-body .datagrid{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid{
   grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row dense;margin:0;
 }
-#boss-grid .boss-more .boss-more-body .datagrid>div{grid-column:span 2;min-width:0}
-#boss-grid .boss-more .boss-more-body .datagrid>div:nth-child(1),#boss-grid .boss-more .boss-more-body .datagrid>div:nth-child(2){grid-column:span 1}
-#boss-grid .boss-more .boss-more-body .datagrid dd{overflow-wrap:anywhere}
-#boss-grid .boss-more .boss-more-body .cm{display:flex;flex-wrap:wrap;gap:7px;margin:0}
-#boss-grid .boss-more .boss-more-body .cm .tag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid>div{grid-column:span 2;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid>div:nth-child(1),:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid>div:nth-child(2){grid-column:span 1}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid dd{overflow-wrap:anywhere}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cm{display:flex;flex-wrap:wrap;gap:7px;margin:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cm .tag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:760px){
-  #boss-grid .boss-more .boss-more-body .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 /* Mobil: Schiene ueber dem Body, Portrait 16:9 (max. 210 px), Karte zugeklappt <= 420 px */
 @media(max-width:600px){
-  #boss-grid .record-card.boss-compact{grid-template-columns:minmax(0,1fr)}
-  #boss-grid .record-card.boss-compact .record-rail{min-height:0;align-self:auto}
-  #boss-grid .record-card.boss-compact .record-rail .record-img{
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact{grid-template-columns:minmax(0,1fr)}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail{min-height:0;align-self:auto}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail .record-img{
     flex:none;aspect-ratio:16/9;max-height:210px;min-height:0;height:auto;
   }
-  #boss-grid .record-card.boss-compact .record-body{min-height:0;padding:12px 16px 14px}
-  #boss-grid .record-card.boss-compact .record-body .ct{font-size:21px}
-  #boss-grid .boss-more > summary{padding:10px 16px}
-  #boss-grid .boss-more .boss-more-body{padding:10px 14px 14px}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body{min-height:0;padding:12px 16px 14px}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body .ct{font-size:21px}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more > summary{padding:10px 16px}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body{padding:10px 14px 14px}
 }
 @media(prefers-reduced-motion:reduce){
-  #boss-grid .boss-more > summary,#boss-grid .boss-more > summary::after{transition:none}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more > summary,:is(#boss-grid,#dlc-boss-grid) .boss-more > summary::after{transition:none}
 }
 /* === BOSS-KOMPAKT-ENDE === */
 
@@ -2835,13 +2835,13 @@ select.fs,input.fs{
 select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(--red)}
 
 /* Boss-Dossier: NPC-Lore kompakt als Glas-Overlay am Fuss der Portrait-Spalte */
-#boss-grid .record-img .boss-lore{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-lore{
   align-self:end;justify-self:stretch;position:relative;z-index:3;
   margin:0;font-size:var(--fs-10-5);line-height:1.45;padding:7px 9px;
   background:rgba(10,11,18,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   border:0;border-top:1px solid var(--line);border-radius:0;
 }
-#boss-grid .record-img .boss-lore .boss-lore-hd{font-size:var(--fs-9)}
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-lore .boss-lore-hd{font-size:var(--fs-9)}
 
 /* Sektionstitel: topografische Mono-Marken statt Emoji (legenden-symbole.html) */
 .sec-t .sec-sym{font-family:var(--f-mono);color:var(--survey-red);margin-right:2px}
@@ -6948,13 +6948,6 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 :is(#sec-dlc,.sec-dlcp) .dlc-folds{margin-top:12px}
 :is(#sec-dlc,.sec-dlcp) .cd-note{margin:10px 0}
 /* 01.11.2026: Wegweiser der DLC-Übersicht in die DLC-Seiten der anderen Kategorien; DLC-Blätter der linken Leiste in Eisblau */
-#sec-dlc .dlc-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin:4px 0 14px}
-#sec-dlc .dlc-part{display:grid;grid-template-columns:1fr auto auto;grid-template-rows:auto auto;align-items:center;gap:2px 10px;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-left:3px solid var(--cd-fx-ice);border-radius:10px;background:var(--bg2,transparent);color:inherit;text-decoration:none}
-#sec-dlc .dlc-part:hover,#sec-dlc .dlc-part:focus-visible{border-color:var(--cd-fx-ice);color:var(--ink-hi)}
-#sec-dlc .dlc-part-k{grid-column:1;font-size:var(--fs-11);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
-#sec-dlc .dlc-part-t{grid-column:1;font-weight:600}
-#sec-dlc .dlc-part-n{grid-column:2;grid-row:1/3;font-variant-numeric:tabular-nums;color:var(--cd-fx-ice)}
-#sec-dlc .dlc-part .cd-i{grid-column:3;grid-row:1/3;width:14px;height:14px}
 #conList .leaf[data-sec^="dlc"] .lsym{color:var(--cd-fx-ice)}
 /* Startseite: DLC-Hinweis mit Sprung in die DLC-Seite jeder Kategorie */
 .r2b11-dlc{margin:16px 0 4px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--cd-fx-ice) 45%,var(--line));border-left:3px solid var(--cd-fx-ice);border-radius:12px;background:linear-gradient(100deg,color-mix(in srgb,var(--cd-fx-ice) 10%,transparent),transparent 70%)}
@@ -6965,7 +6958,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .r2b11-dlc-s{margin:6px 0 10px;color:var(--dim)}
 .r2b11-dlc-l{display:flex;flex-wrap:wrap;gap:6px 8px}
 .r2b11-dlc-n{font-variant-numeric:tabular-nums;opacity:.75}
-.dlc-unb,.dlc-nb,.dlc-row-unb>td,.dlc-row-nb>td,.dlc-q.dlc-row-unb .dlc-q-who,.dlc-q.dlc-row-unb .dlc-q-rw,.dlc-ck.dlc-row-unb .cd-check-sub{color:var(--gdim)}
+.dlc-unb,.dlc-nb,.dlc-row-unb>td,.dlc-row-nb>td,.dlc-ck.dlc-row-unb .cd-check-sub{color:var(--gdim)}
 .dlc-flag{display:inline-block;margin-left:2px;padding:0 6px;border:1px dashed currentColor;border-radius:6px;font-style:normal;font-family:var(--f-mono);font-size:var(--fs-10);line-height:1.6;letter-spacing:.02em;vertical-align:1px;white-space:normal;color:var(--gdim)}
 .dlc-n{color:var(--ink-hi);font-weight:700}
 .dlc-row-unb .dlc-n,.dlc-row-nb .dlc-n{color:color-mix(in srgb,var(--ink-hi) 70%,var(--gdim))}
@@ -6990,24 +6983,12 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dlc-tbl td{padding:9px 11px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--text);overflow-wrap:anywhere}
 .dlc-tbl tbody tr:first-child td{border-top:0}
 .dlc-tbl td:first-child{min-width:160px}
-.dlc-tbl--garden td:first-child{min-width:0;width:42px;font-family:var(--f-mono);color:var(--dim)}
-.dlc-bls{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
-.dlc-bl{font-size:12.5px}
-:is(#sec-dlc,.sec-dlcp) .dlc-pills{margin:12px 0 2px}
 .dlc-isl-hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px;font-size:13px;color:var(--dim)}
 .dlc-isl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:8px}
 .dlc-ck .cd-check-sub{display:block;margin-top:3px;font-size:12.5px;line-height:1.55}
 .dlc-crew{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:8px}
 .dlc-crew li{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);font-size:13px;line-height:1.5;color:var(--text)}
 .dlc-crew b{display:block;color:var(--cd-fx-ice);font-family:var(--f-mono);font-size:12px;letter-spacing:.04em}
-.dlc-qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px;margin-top:10px}
-.dlc-q{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
-.dlc-q-t{margin:0 0 4px;font-size:14.5px;line-height:1.35}
-.dlc-q-who{margin:0 0 8px;font-size:12.5px;color:var(--dim)}
-.dlc-q-sub{margin:0 0 8px}
-.dlc-q-rw{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--text)}
-.dlc-lnk{padding:0;border:0;background:none;color:var(--ink-hi);font:inherit;font-weight:700;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--cd-fx-ice) 55%,transparent);text-underline-offset:3px}
-.dlc-lnk:hover,.dlc-lnk:focus-visible{color:var(--cd-fx-ice)}
 .dlc-checked{margin-top:6px}
 .ctu-pt{display:block;margin-top:2px}
 .ctu-pk{color:var(--dim)}
@@ -7021,9 +7002,185 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .dlc-tbl td:first-child{display:block;min-width:0;padding-top:6px;padding-bottom:6px}
   .dlc-tbl td:first-child::before{display:none}
   .dlc-tbl td:empty{display:none}
-  .dlc-tbl--garden td:first-child{width:auto}
-  .dlc-tbl--garden td:first-child::before{display:inline;content:"Nr. "}
 }
+/* DLC-F Anfang (Fundament dlc-design 01.11.2026: gemeinsame Regeln der fünf DLC-Ansichten; Besitz Orchestrator) */
+:is(#sec-dlc,.sec-dlcp) .dlc-flat{margin:16px 0 0}
+:is(#sec-dlc,.sec-dlcp) .dlc-flat+.dlc-flat{margin-top:26px}
+:is(#sec-dlc,.sec-dlcp) .dlc-flag{font-size:max(11px,var(--fs-10))}
+.dlc-hero{--cd-acc:var(--cd-fx-ice)}
+.dlc-hero .cd-hero-k{color:var(--cd-fx-ice)}
+.dlc-chip-l{color:var(--dim)}
+.dlc-chip--unb,.dlc-chip--nb{--c:var(--gdim);color:var(--gdim);border-style:dashed}
+.dlc-chip .dlc-flag{margin-left:2px;padding:0 5px;border-radius:5px;line-height:1.4}
+/* DLC-F Ende */
+/* DLC-K Anfang (Kampf: _dlcSecBosse, Besitz Arbeiter kampf) */
+.dlc-k-notes{margin:0 0 14px}
+.dlc-k-stats .sec-stat-lbl{font-size:max(11px,var(--fs-11-5))}
+.dlc-k-notes .dlc-list{margin:0;font-size:13px}
+.dlc-k-bar{display:flex;flex-wrap:wrap;align-items:center;gap:0 22px;margin:0 0 4px}
+.dlc-k-bar .cd-pills{margin:0 0 12px}
+#dlc-boss-grid.grid{margin:0 0 8px}
+.dlc-k-empty{margin:8px 0 0;font-size:13.5px;color:var(--dim)}
+/* Schiene ohne Porträt (Bildregel: nur 2 von 14 Bossen haben ein Bild, daher alle ohne): Eisblau-Verlauf + Initiale, gleiche Maße wie die Bossseite */
+#dlc-boss-grid .record-img.dlc-k-img{background:radial-gradient(120% 100% at 50% 38%,color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 20%,#0b0a14),#0a0710 74%)}
+#dlc-boss-grid .dlc-k-img .record-tag{background:var(--cd-fx-ice,#8cc4e4);color:#06141c;box-shadow:0 0 18px -4px color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 60%,transparent);font-size:max(11px,var(--fs-10))}
+#dlc-boss-grid .dlc-k-gl{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+#dlc-boss-grid .dlc-k-gl b{font-family:var(--f-display);font-weight:700;font-size:80px;line-height:1;color:color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 58%,transparent);text-shadow:0 0 30px color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 38%,transparent)}
+#dlc-boss-grid .card.boss-done .dlc-k-gl{filter:grayscale(.7) brightness(.8)}
+/* Schrift mindestens 11 px (die Bossseite nutzt 10,5 px; mobil greifen ohnehin 12 px) */
+#dlc-boss-grid .boss-sum .boss-sum-chip,#dlc-boss-grid .record-card.boss-compact .boss-actions .defeat-btn,#dlc-boss-grid .boss-more>summary{font-size:max(11px,var(--fs-10-5))}
+#dlc-boss-grid .boss-sum .dlc-k-unb{--c:var(--gdim);color:var(--gdim);border-style:dashed;white-space:normal;overflow:visible}
+#dlc-boss-grid .boss-sum .dlc-k-unb .dlc-flag{margin-left:4px}
+#dlc-boss-grid .record-card.boss-compact .record-desig .dlc-flag{text-transform:none;letter-spacing:.02em}
+/* Aufklapper: Ort/Beute/Hinweis je volle Zeile statt des 4-Spalten-Rasters der Bossseite */
+#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg{grid-template-columns:minmax(0,1fr)}
+#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div,#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div:nth-child(1),#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div:nth-child(2){grid-column:1/-1}
+#dlc-boss-grid .datagrid.dlc-k-dg dt{font-size:max(11px,var(--fs-9))}
+#dlc-boss-grid .datagrid.dlc-k-dg dd{font-size:14px;line-height:1.5}
+#dlc-boss-grid :is(.dlc-k-row-unb,.dlc-k-row-nb) .datagrid.dlc-k-dg dd{color:var(--gdim)}
+#dlc-boss-grid .dlc-k-more-l{font-size:13.5px}
+/* Garten der Prüfungen */
+.dlc-k-sub{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 18px;margin:36px 0 12px}
+.dlc-k-h{margin:0;font-family:var(--f-display);font-size:23px;font-weight:600;line-height:1.1;letter-spacing:-.01em;color:var(--ink-hi)}
+.dlc-kg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:16px;margin:16px 0 6px;contain:layout style}
+.dlc-kg{display:flex;flex-direction:column;gap:13px;padding:14px 16px 12px;contain-intrinsic-size:auto 280px}
+.dlc-kg.is-done{border-color:color-mix(in srgb,var(--cd-ok,#5fd394) 55%,var(--iron-gall))}
+.dlc-kg-h{display:flex;align-items:center;gap:12px}
+.dlc-kg-n{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:10px;font-family:var(--f-mono);font-weight:700;font-size:18px;color:var(--cd-fx-ice,#8cc4e4);border:1px solid color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 45%,var(--line));background:color-mix(in srgb,var(--cd-fx-ice,#8cc4e4) 10%,transparent)}
+.dlc-kg-t{min-width:0}
+.dlc-kg .ct{margin:0 0 3px;font-family:var(--f-display);font-size:19px;font-weight:600;line-height:1.15;color:var(--ink-hi);overflow-wrap:anywhere}
+.dlc-kg-sub{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.dlc-kg-l{display:block;margin:0 0 6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.dlc-kg-bl{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.cd-go.dlc-kg-b{display:inline-flex;align-items:center;gap:5px;max-width:100%;min-height:30px;padding:3px 10px;border:1px solid var(--line-strong);border-radius:7px;background:rgba(255,255,255,.03);color:var(--text);font-family:var(--f-mono);font-size:11.5px;line-height:1.3;text-decoration:none}
+.cd-go.dlc-kg-b:hover{border-color:var(--amber);color:var(--amber)}
+.cd-go.dlc-kg-b--unb{border-style:dashed;color:var(--gdim)}
+.dlc-kg-rw{margin:0;font-size:14px;line-height:1.5;color:var(--text)}
+.dlc-kg-rw .dlc-kg-l{margin-bottom:3px}
+.dlc-kg .cd-check{margin-top:auto}
+@media(max-width:600px){
+  #dlc-boss-grid .record-card.boss-compact .record-rail .record-img.dlc-k-img{aspect-ratio:auto;height:92px;min-height:0;max-height:none}
+  #dlc-boss-grid .dlc-k-gl b{font-size:56px}
+  #dlc-boss-grid .record-card.boss-compact .boss-actions .defeat-btn,#dlc-boss-grid .boss-more>summary{min-height:40px}
+  .cd-go.dlc-kg-b{min-height:40px}
+  .dlc-k-h{font-size:21px}
+}
+/* DLC-K Ende */
+/* DLC-A Anfang (Ausrüstung: _dlcSecGear, Besitz Arbeiter gear) */
+/* Raster wie #weapon-tb/#armor-grid: Karten wachsen einzeln nach unten, kein Strecken auf Zeilenhöhe */
+.dlc-a-grid{align-items:start}
+.dlc-a-grid .card{align-self:start}
+.dlc-a-grp[hidden]{display:none}
+/* Pillenzeile und Gruppen-Überschriften wie Abyss-Ausrüstung (r2b13-grp-hd) */
+.dlc-a-pills{margin:18px 0 4px}
+.dlc-a-grp{margin-top:6px}
+.dlc-a-hd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:28px 0 13px}
+.dlc-a-hd>.sub-t{margin:0}
+.dlc-a-t::before{display:none}
+.dlc-a-hd>.cd-g{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:color-mix(in srgb,var(--cd-fx-ice) 16%,transparent);color:var(--cd-fx-ice);font-size:15px}
+.dlc-a-n{font:600 12px/1.3 var(--f-mono);color:var(--dim)}
+.dlc-a-gol{margin-left:auto;font-size:12.5px}
+.dlc-a-sub .dlc-a-hd{margin:22px 0 12px}
+.dlc-a-sub h4.dlc-a-t{font-size:14.5px}
+.dlc-a-link{margin-top:14px;color:var(--dim)}
+.dlc-a-link .tag{font-size:max(11px,var(--fs-10))}
+/* Kopf der „Weitere“-Karten: gleiche Maße wie der Bildkopf (90 px) bzw. die bildlose Waffenkarte */
+.dlc-a-img{display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)}
+.dlc-a-img img{height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))}
+.dlc-a-hd2{display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;min-height:46px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)}
+.dlc-a-hd2>.cd-g{font-size:20px;line-height:1;color:var(--cd-fx-ice)}
+.dlc-a-eff{color:var(--gold)}
+.dlc-a-sm{font-size:var(--fs-11)}
+.dlc-a-dim{color:var(--dim)}
+#dlc-root-ausruestung .dlc-a-card .cv{min-width:0;overflow-wrap:anywhere}
+/* Bildklick (Großansicht) wie auf den Vorbildseiten */
+#dlc-root-ausruestung .dlc-a-grid .card img,#dlc-root-ausruestung .dlc-a-grid .card :has(> img:only-child){cursor:zoom-in}
+/* Neue Elemente: Schrift mindestens 11 px, Tap-Ziele mindestens 40 px */
+#dlc-root-ausruestung .dlc-a-grid :is(.cl,.tag){font-size:max(11px,var(--fs-10))}
+#dlc-root-ausruestung .dlc-a-grid .cl{min-width:92px}
+#dlc-root-ausruestung .dlc-a-card .item-more-body .cl{min-width:112px}
+#dlc-root-ausruestung .dlc-a-grid .map-pin-btn{min-height:40px;font-size:max(11px,var(--fs-10))}
+#dlc-root-ausruestung .dlc-a-grid .item-more>summary{min-height:40px}
+@media (max-width:560px){
+  .dlc-a-gol{margin-left:0;flex-basis:100%}
+}
+/* DLC-A Ende */
+/* DLC-Q Anfang (Quests: _dlcSecQuests, Besitz Arbeiter quests) */
+.dlcq-notes{margin:0;padding-left:18px;font-size:13px;line-height:1.55;color:var(--dim)}
+.dlcq-notes li{margin:0 0 5px}
+.dlcq-notes li:last-child{margin-bottom:0}
+.dlcq-stat{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;margin:14px 0 12px;padding:12px 16px;border:1px solid var(--line);border-left:3px solid var(--cd-fx-ice);border-radius:12px;background:var(--panel-2)}
+.dlcq-stat-k{flex-basis:100%;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cd-fx-ice)}
+.dlcq-stat-t{flex:1 1 auto;font-size:15px;color:var(--ink-hi)}
+.dlcq-stat-p{flex:0 0 auto}
+.dlcq-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0 0 10px}
+.dlcq-bar>.cd-pills{margin:0 0 8px}
+.dlcq-cnt{margin:0 0 8px;font:600 12px/1 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dlcq-fold .dlc-de{margin-left:4px;font-weight:400}
+.dlcq-unb .cd-fold-lead{color:var(--gdim)}
+.dlcq-unb .dlc-facts dd{color:var(--gdim)}
+.dlcq-done .cd-fold-t{color:color-mix(in srgb,var(--ink-hi) 70%,var(--dim))}
+.dlcq-fold .cd-fold-body .dlc-h{margin:0}
+.dlcq-steps{margin-top:2px}
+.dlcq-n{color:var(--dim);font-variant-numeric:tabular-nums}
+.dlcq-pt .dlc-flag:first-child{margin-left:0}
+.dlcq-pt{display:block;margin-top:2px}
+.dlcq-nb{margin:0;font-size:13px}
+.dlcq-subs .cd-stepper{margin:0}
+@media (max-width:640px){
+  .dlcq-stat-t{flex-basis:100%}
+}
+/* DLC-Q Ende */
+/* DLC-S Anfang (Sammeln + Übersicht: _dlcSecTeile, _dlcSecZugang … _dlcSecOffen, _dlcSecWege, Besitz Arbeiter sammeln) */
+/* Wegweiser: Kacheln im Stil der Startseite (#sec-start .r2b11-t), Eisblau als Akzent */
+.dlcs-wege{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:6px 0 16px}
+.dlcs-t{--rc:var(--cd-fx-ice);position:relative;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;min-height:84px;text-align:left;padding:14px 12px 15px 15px;border-color:color-mix(in srgb,var(--rc) 24%,var(--line));
+  background:linear-gradient(135deg,color-mix(in srgb,var(--rc) 8%,var(--panel-2)) 0%,var(--panel-2) 58%)}
+.dlcs-t::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--rc);opacity:.55;transition:opacity .2s}
+.dlcs-t:hover{border-color:color-mix(in srgb,var(--rc) 62%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--rc) 13%,var(--cardh)) 0%,var(--cardh) 62%)}
+.dlcs-t:hover::before{opacity:1}
+.dlcs-t:focus-visible{outline:2px solid var(--rc);outline-offset:2px}
+.dlcs-t .so-tile-g{width:40px;height:40px;border-color:color-mix(in srgb,var(--rc) 42%,transparent);border-radius:11px;background:color-mix(in srgb,var(--rc) 13%,var(--panel));color:var(--rc);font-size:18px}
+.dlcs-t .so-tile-body{gap:3px}
+.dlcs-t .so-tile-top{align-items:flex-start;gap:8px}
+.dlcs-k{font-family:var(--f-mono);font-size:max(11px,var(--fs-10));letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.dlcs-t .so-tile-d{margin-top:2px;font-size:12.5px}
+.dlcs-n{padding:1px 9px;border:1px solid color-mix(in srgb,var(--rc) 34%,transparent);border-radius:999px;background:color-mix(in srgb,var(--rc) 9%,transparent);color:var(--rc);font-family:var(--f-mono);font-size:max(11px,var(--fs-10));font-weight:700;font-variant-numeric:tabular-nums}
+.dlcs-arr{display:grid;place-items:center;width:22px;height:26px;color:var(--rc);opacity:.4;transition:opacity .2s,transform .2s}
+.dlcs-arr .cd-i{width:15px;height:15px}
+.dlcs-t:hover .dlcs-arr{opacity:1;transform:translateX(2px)}
+/* Karten (Schiffsteile, Schiffe, Seehandel, Relic-Händler, Reittiere, Wohnsitze): Hülle der Rezeptkarte (fd-card), Zeilen als .crow */
+.dlcs-card{content-visibility:auto;contain-intrinsic-size:auto 220px}
+.dlcs-card .fd-hd-t{display:grid;gap:0;min-width:0}
+.dlcs-card .fd-tags{margin-top:5px}
+.dlcs-card .fd-tags .dlc-de{font-size:12.5px;color:var(--dim)}
+.dlcs-card--unb .fd-name{color:color-mix(in srgb,var(--ink-hi) 72%,var(--gdim))}
+.dlcs-card--unb .fd-ico{border-style:dashed}
+.dlcs-chips{gap:6px}
+.dlcs-card .fd-tags .dlc-chip{min-height:24px;padding:1px 10px}
+.dlcs-chips .dlc-chip{flex-wrap:wrap;gap:2px 5px;min-height:28px;padding:3px 11px;font-size:12px}
+.dlcs-chips .dlc-chip b{font-size:12.5px}
+.dlcs-chips .dlc-chip .dlc-flag{font-size:max(11px,var(--fs-10))}
+.dlcs-card .crows{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:7px 14px;margin:0;padding-top:10px;border-top:1px solid var(--line-soft)}
+.dlcs-card .crow{display:grid;grid-column:1 / -1;grid-template-columns:subgrid;align-items:baseline;gap:0 14px;font-size:12.5px}
+.dlcs-card .cl{min-width:0;font-family:var(--f-body);font-size:12px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--dim);white-space:nowrap}
+.dlcs-card .cv{min-width:0;font-size:12.5px;line-height:1.5;color:var(--text);overflow-wrap:anywhere}
+.dlcs-card .cv .dlc-flag{font-size:max(11px,var(--fs-10))}
+.dlcs-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px;align-items:start;margin:10px 0 4px;contain:layout}
+.dlcs-list{margin:2px 0 0}
+.dlcs-grid{grid-area:bd;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;align-items:start;contain:layout}
+.dlcs-notes{margin:0 0 14px;max-width:84ch;padding:10px 14px 10px 30px;border:1px solid var(--line);border-radius:8px;background:rgba(201,162,39,.05);font-size:12.5px;line-height:1.55}
+.dlcs-bar{margin:14px 0 4px}
+.dlcs-bar .cd-pills{margin:0;padding:0;gap:6px;overflow:visible;-webkit-mask-image:none;mask-image:none}
+.dlcs-crew li{border-radius:12px;box-shadow:var(--shadow-soft)}
+@media (max-width:600px){
+  .dlcs-wege{grid-template-columns:minmax(0,1fr);gap:8px}
+  .dlcs-t{min-height:72px;padding:11px 8px 12px 13px;gap:11px}
+  .dlcs-card .crows{grid-template-columns:minmax(0,1fr);gap:8px}
+  .dlcs-card .crow{gap:1px}
+  .dlcs-bar .cd-pills{margin-inline:0;padding-inline:0}
+}
+/* DLC-S Ende */
 /* Spiel-Originalbilder aus den Game-Files (01.11.2026, KI-Mix 2x): weiche Ecken, wirkt nur bei deckenden Bildern */
 img[src*="cd_assets/weapons/"],img[src*="cd_assets/armor/"],img[src*="cd_assets/items/"],img[src*="cd_assets/cores/"],
 img[src*="cd_assets/dyes/"],img[src*="cd_assets/npcs/"],img[src*="cd_assets/pets/"],img[src*="cd_assets/bosses/"],
@@ -13465,13 +13622,13 @@ function _dlcIslandsProg(){
   const done=cdCheckGet(DLC_KEY_ISLANDS),ids=DLC_ISLANDS.map(i=>cdSlug(i.name));
   el.innerHTML=cdProg(ids.filter(i=>done.has(i)).length,ids.length,'Inseln abgehakt');
 }
-/* 01.11.2026: Teilseiten je Kategorie. Teil -> Seiten-ID, Abschnitte (Schlüssel aus add() unten) und Kopf.
+/* 01.11.2026: Teilseiten je Kategorie. Teil -> Seiten-ID, Abschnitte (Schlüssel aus SECS in renderDlc) und Kopf; t = Titel im Wegweiser.
    Die Übersicht sec-dlc zeigt alle übrigen Abschnitte und verweist auf die Teilseiten, kein Abschnitt steht doppelt. */
 const DLC_PARTS={
-  kampf:{sec:'dlc-kampf',keys:['bosse'],res:'Kampf',sub:'Bosse und Gegner aus den DLC-Questreihen und der Garten der Prüfungen mit allen Gruppen und Belohnungen.'},
-  ausruestung:{sec:'dlc-ausruestung',keys:['ausruestung'],res:'Ausrüstung',sub:'Alle neuen Waffen, Rüstungen, Accessoires und Abyss-Kerne aus dem DLC, dazu Atemgeräte, Wagen- und Haustierausrüstung, Vorbesteller-Set und Twitch-Drops.'},
-  quests:{sec:'dlc-quests',keys:['quests'],res:'Quests',sub:'Alle Questreihen aus dem DLC mit Start, Voraussetzung, Schritten und Belohnungen.'},
-  sammeln:{sec:'dlc-sammeln',keys:['teile'],res:'Herstellen & Sammeln',sub:'Segel, Kanonen, Galionsfiguren und Heckteile für dein Schiff mit Händler, Preis und Boni.'}
+  kampf:{t:'Bosse und Garten der Prüfungen',sec:'dlc-kampf',keys:['bosse'],res:'Kampf',sub:'Bosse und Gegner aus den DLC-Questreihen und der Garten der Prüfungen mit allen Gruppen und Belohnungen.'},
+  ausruestung:{t:'Neue DLC-Ausrüstung',sec:'dlc-ausruestung',keys:['ausruestung'],res:'Ausrüstung',sub:'Alle neuen Waffen, Rüstungen, Accessoires und Abyss-Kerne aus dem DLC, dazu Atemgeräte, Wagen- und Haustierausrüstung, Vorbesteller-Set und Twitch-Drops.'},
+  quests:{t:'DLC-Quests',sec:'dlc-quests',keys:['quests'],res:'Quests',sub:'Alle Questreihen aus dem DLC mit Start, Voraussetzung, Schritten und Belohnungen.'},
+  sammeln:{t:'Schiffsteile',sec:'dlc-sammeln',keys:['teile'],res:'Herstellen & Sammeln',sub:'Segel, Kanonen, Galionsfiguren und Heckteile für dein Schiff mit Händler, Preis und Boni.'}
 };
 function _dlcPartCount(p){
   try{
@@ -13489,59 +13646,125 @@ function renderDlcSammeln(){renderDlc('sammeln');}
 /* Icon vor dem Namen in DLC-Tabellen (Bilder aus den Spieldateien: WEAPON_IMGS, ARMOR_IMGS, DLC_IMGS) */
 function _dlcIco(src){return src?'<img class="dlc-ico" src="'+cdEsc(src)+'" width="40" height="40" alt="" loading="lazy" decoding="async" onerror="this.remove()">':'';}
 function _dlcImg(n){return typeof DLC_IMGS!=='undefined'?DLC_IMGS[n]:'';}
-function renderDlc(part){
-  const P=part?DLC_PARTS[part]:null;if(part&&!P)return;
-  const root=document.getElementById(P?'dlc-root-'+part:'dlc-root');if(!root)return;
-  if(typeof DLC_META==='undefined'){root.innerHTML=cdNote('Die Daten dieser Seite (data/d12-dlc.js) konnten nicht geladen werden. Bitte die Seite neu laden.',{kind:'warn'});return;}
-  const M=DLC_META,G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
-  const TRADE=_dlcA(()=>DLC_TRADE),HOMES=_dlcA(()=>DLC_HOMES),RSHOPS=_dlcA(()=>DLC_RELIC_SHOPS);
-  const PART_STATS={kampf:[[DLC_BOSSES.length,'Bosse und Gegner'],[DLC_GARDEN.length,'Gruppen im Garten']],
-    ausruestung:[[G.w.length,'Waffen'],[G.a.length,'Rüstungsteile'],[G.x.length+G.k.length+G.e.length,'Weitere Ausrüstung']],
-    quests:[[DLC_QUESTS.length,'Questreihen'],[DLC_QUESTS.reduce((n,q)=>n+(Array.isArray(q.steps)?q.steps.filter(Boolean).length:0),0),'Schritte erfasst']],
-    sammeln:[[DLC_SHIP_PARTS.length,'Schiffsteile'],[new Set(DLC_SHIP_PARTS.map(p=>p.type)).size,'Typen']]};
-  let h=P?cdHero({kicker:'Erster DLC · '+P.res,title:'Charting the Unknown',sub:P.sub,glyph:'⚓',tone:'ice',stats:PART_STATS[part]})
-    :cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',
-    sub:'Schiffe, Pywels Großer Ozean mit unerschlossenen Inseln, Tauchen, Unterwasser-Reittiere, neue Questreihen, der Garten der Prüfungen, Burgen und Ehe: alles Neue aus dem DLC an einem Ort.',
-    glyph:'⚓',tone:'ice',stats:[[DLC_SHIPS.length,'Schiffe'],[DLC_ISLANDS.length,'Inseln benannt'],[DLC_GARDEN.length,'Gruppen im Garten'],[nGear,'DLC-Ausrüstung im Wiki']]});
-  const B=[];
-  const add=(k,o)=>B.push(Object.assign({id:'dlc-b-'+k,tone:'ice',cls:'dlc-fold'},o));
-
-  /* 1 Überblick und Zugang */
+/* Gemeinsame Helfer (Fundament dlc-design). Wert-Chip: x = Text | {v,c,q} | Liste (eine Chip je Wert).
+   o.l = kleine Beschriftung vorn, o.g Glyphe oder o.i Icon (cdIcon), o.c Ton (gold|red|violet|ok|warn|ice, nur bei belegten Werten).
+   Unbestätigt/nicht belegt: Chip grau gestrichelt (dlc-chip--unb/--nb), Vermerk sichtbar wie _dlcFlag, Quelle im title. */
+function _dlcChip(x,o){
+  o=o||{};
+  if(x==null||x==='')return '';
+  if(Array.isArray(x))return x.map(y=>_dlcChip(y,o)).join('');
+  const v=_dlcObj(x),c=v.c||'ok',t=v.v==null?'':String(v.v);if(!t)return '';
+  const bad=c!=='ok',kind=c==='nb'?'nb':'unb',flag=bad&&!(c==='nb'&&/nicht belegt/i.test(t))?_dlcFlag(c,v.q):'';
+  return '<span class="cd-chip dlc-chip'+(bad?' dlc-chip--'+kind:(o.c?' cd-chip--'+cdEsc(o.c):''))+'"'
+    +(bad&&v.q?' title="'+cdEsc((kind==='nb'?'nicht belegt':'unbestätigt')+': '+v.q)+'"':'')+'>'
+    +(o.i?cdIcon(o.i):o.g?'<i class="cd-g" aria-hidden="true">'+cdEsc(o.g)+'</i>':'')
+    +(o.l?'<span class="dlc-chip-l">'+cdEsc(o.l)+'</span>':'')+'<b>'+cdEsc(t)+'</b>'+flag+'</span>';
+}
+/* Bildregel des Users: eine Gruppe zeigt nur dann Bilder, wenn JEDER Eintrag ein Bild hat (get liefert die Quelle). */
+function _dlcAllImg(arr,get){return Array.isArray(arr)&&arr.length>0&&arr.every(x=>!!get(x));}
+/* Ist ein Wert (oder ein Teil davon) unbestätigt/nicht belegt? Für graue Kartenzustände. */
+function _dlcBad(x){if(x==null)return false;if(Array.isArray(x))return x.some(_dlcBad);const o=_dlcObj(x);return !!(o.c&&o.c!=='ok');}
+/* ===== DLC-Fundament (01.11.2026, Lauf dlc-design) =====
+   renderDlc(part) sammelt nur noch. Jeder Abschnitt hat eine Builder-Funktion _dlcSec<Name>(), die ein Abschnitts-Objekt
+   liefert: {title, lead, icon, chips, body, tone?, open?, flat?, s?, after?}; Schlüssel und Reihenfolge stehen in SECS
+   (renderDlc), die Anker-ID ist dlc-b-<Schlüssel>, die Teilseite folgt aus DLC_PARTS[..].keys.
+     body   HTML-String oder Funktion (lazy; auf der Übersicht als Faltkarte, dann s setzen).
+     flat   true = auf der Teilseite ohne Faltkarte direkt unter Kopf und Legende (<section class="dlc-flat" id="dlc-b-<k>">).
+     s      Suchtext der Faltkarte (Standard: Titel + Klartext des Körpers).
+     after  Funktion(root), läuft nach dem Einsetzen (z. B. Fortschritt nachziehen).
+   Besitz laut Briefing (Abschnitt 4): Orchestrator renderDlc, _dlcHead, _dlcJump, _dlcLegend, _dlcFoot und gemeinsame
+   _dlc-Helfer; kampf _dlcSecBosse (Helfer _dlcK davor); gear _dlcSecGear (Helfer _dlcA_/_dlcG davor); quests _dlcSecQuests
+   (Helfer _dlcQ_ davor); sammeln _dlcSecTeile, _dlcSecZugang, _dlcSecSchiffe, _dlcSecInseln, _dlcSecTauchen,
+   _dlcSecReittiere, _dlcSecLeben, _dlcSecOffen, _dlcSecWege (Helfer _dlcS davor). */
+/* 1 Überblick und Zugang (Abschnitt dlc-b-zugang, Besitz: sammeln) */
+function _dlcSecZugang(){
+  const M=DLC_META;
   let b=_dlcFacts([['Voller Titel',M.full],['Erschienen',M.release],['Patch',M.patch+'; danach '+M.hotfixes],['Preis',M.price],['Plattformen',M.platforms]]);
   b+=_dlcH('Voraussetzungen und Start')+cdStepper(DLC_ACCESS.map(s=>({t:s.t,d:{h:cdEsc(s.d)+(s.u?' '+_dlcV(s.u):'')}})),'dlc-steps');
   b+=DLC_WARN.map(w=>cdNote(w.d,{kind:'warn',title:w.t})).join('');
   b+='<p class="dlc-p">Release-Termine, Plattformen, Märkte und die vollständige Featureliste: '+cdGoLink('patches','','DLC-Kasten auf der Seite Patch-Notes')+'</p>';
-  add('zugang',{title:'Überblick und Zugang',lead:'Was du brauchst, wo es losgeht und was nur als Kliff funktioniert.',icon:'⌖',open:true,
-    chips:[{v:M.patch,t:'Patch',c:'gold'},{t:'Ozean ab „Heulender Hügel“',c:'ice'},{t:'Story ab „Ende der Reise“'}],body:b});
-
-  /* 2 Schiffe */
-  b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
+  return {title:'Überblick und Zugang',lead:'Was du brauchst, wo es losgeht und was nur als Kliff funktioniert.',icon:'⌖',open:true,
+    chips:[{v:M.patch,t:'Patch',c:'gold'},{t:'Ozean ab „Heulender Hügel“',c:'ice'},{t:'Story ab „Ende der Reise“'}],body:b};
+}
+/* Gemeinsame Karte der Übersicht und der Schiffsteile (Besitz: sammeln). Gleiche Hülle wie die Rezeptkarte auf Kochen & Elixiere (fd-card):
+   Kachel mit Spiel-Icon (o.img) oder Glyphe, Name, Tags (Zweitname o.de, o.tags als HTML, Vermerk bei o.c), Wert-Chips (o.chips als HTML)
+   und Wertezeilen o.rows = [[Beschriftung, HTML]] (leere Werte entfallen). o.s = Suchtext, o.attrs = zusätzliche Attribute. */
+function _dlcSCard(o){
+  const bad=!!(o.c&&o.c!=='ok');
+  const ico='<span class="fd-ico"><span class="fd-ico-g" aria-hidden="true">'+cdEsc(o.glyph||'⚓')+'</span>'
+    +(o.img?'<img src="'+cdEsc(o.img)+'" width="56" height="56" alt="" loading="lazy" decoding="async" onerror="this.remove()">':'')+'</span>';
+  const tags=(o.de?'<span class="dlc-de">'+cdEsc(o.de)+'</span>':'')+(o.tags||'')+(bad?_dlcFlag(o.c,o.q):'');
+  const rows=(o.rows||[]).filter(r=>r&&r[1]).map(r=>'<div class="crow"><span class="cl">'+cdEsc(r[0])+'</span><span class="cv">'+r[1]+'</span></div>').join('');
+  return '<article class="card cd-spot fd-card dlcs-card'+(bad?' dlcs-card--unb':'')+(o.cls?' '+o.cls:'')+'"'+(o.attrs||'')+' data-s="'+cdEsc(String(o.s||o.name).toLowerCase())+'">'
+    +'<header class="fd-hd">'+ico+'<div class="fd-hd-t"><h4 class="fd-name">'+cdEsc(o.name)+'</h4>'+(tags?'<div class="fd-tags">'+tags+'</div>':'')+'</div></header>'
+    +(o.chips?'<div class="cd-chips dlcs-chips">'+o.chips+'</div>':'')+(rows?'<div class="crows">'+rows+'</div>':'')+'</article>';
+}
+/* Kartenraster der Übersicht; leere Liste ergibt nichts */
+function _dlcSCards(arr){return arr.length?'<div class="dlcs-cards">'+arr.join('')+'</div>':'';}
+/* 2 Schiffe (Abschnitt dlc-b-schiffe, Besitz: sammeln) */
+function _dlcSecSchiffe(){
+  const TRADE=_dlcA(()=>DLC_TRADE);
+  let b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
   const sV=_dlcAny(DLC_SHIPS,'vendor'),sC=_dlcAny(DLC_SHIPS,'crew');
-  b+=_dlcTbl(['Schiff','Preis'].concat(sV?['Verkäufer']:[],['Erhalt','Werte'],sC?['Besatzung']:[]),DLC_SHIPS.map(s=>({c:s.c,
+  b+=_dlcSCards(DLC_SHIPS.map(s=>_dlcSCard({name:s.name,c:s.c,q:s.q,glyph:'⚓',
     s:[s.name,_dlcP(s.price),_dlcP(s.vendor),_dlcP(s.obtain),_dlcP(s.stats),_dlcP(s.crew)].join(' '),
-    cells:[_dlcName(s),_dlcV(s.price)].concat(sV?[_dlcCell(s.vendor,true)]:[],[_dlcV(s.obtain),_dlcV(s.stats)],sC?[_dlcCell(s.crew,true)]:[])})),{cap:'Schiffe mit Preis und Werten'});
+    rows:[['Preis',_dlcV(s.price)]].concat(sV?[['Verkäufer',_dlcCell(s.vendor,true)]]:[],[['Erhalt',_dlcV(s.obtain)],['Werte',_dlcV(s.stats)]],sC?[['Besatzung',_dlcCell(s.crew,true)]]:[])})));
   b+=_dlcList(DLC_SHIP_NOTES);
   b+=_dlcH('Händler, Währung, Seekampf')+_dlcFacts(DLC_SHIP_FACTS);
-  if(TRADE.length)b+=_dlcH('Seehandel: Waren ('+TRADE.length+')')+_dlcTbl(['Ware','Einkauf','Verkauf','Hinweis'],TRADE.map(t=>({c:t.c,
-    s:[t.name,_dlcP(t.buy),_dlcP(t.sell),_dlcP(t.note)].join(' '),
-    cells:[_dlcIco(_dlcImg(t.name))+_dlcName(t),_dlcCell(t.buy,true),_dlcCell(t.sell,true),_dlcCell(t.note)]})),{cap:'Seehandel-Waren'});
+  if(TRADE.length){
+    const tImg=_dlcAllImg(TRADE,t=>_dlcImg(t.name));
+    b+=_dlcH('Seehandel: Waren ('+TRADE.length+')')+_dlcSCards(TRADE.map(t=>_dlcSCard({name:t.name,c:t.c,q:t.q,glyph:'⚖',img:tImg?_dlcImg(t.name):'',
+      s:[t.name,_dlcP(t.buy),_dlcP(t.sell),_dlcP(t.note)].join(' '),
+      rows:[['Einkauf',_dlcCell(t.buy,true)],['Verkauf',_dlcCell(t.sell,true)],['Hinweis',_dlcCell(t.note)]]})));
+  }
   b+=_dlcH('Schiffsbau per Entsendung')+_dlcFacts(DLC_SHIPBUILD);
-  b+=_dlcH('Besatzung: '+DLC_CREW.length+' Rollen')+'<ul class="dlc-crew">'+DLC_CREW.map(r=>'<li><b>'+cdEsc(r.role)+'</b><span>'+cdEsc(r.d)+'</span></li>').join('')+'</ul>'+_dlcList(DLC_CREW_NOTES,'dlc-list--note');
-  add('schiffe',{title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
-    chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b});
-
-  /* 3 Schiffsteile */
-  const typen=[['','Alle'],['Sail','Segel'],['Front Cannon','Bugkanonen'],['Side Cannon','Seitenkanonen'],['Figurehead','Galionsfiguren'],['Stern','Heck']];
-  b=_dlcList(DLC_PART_NOTES,'dlc-list--note');
-  b+=cdPills(typen.map(([v,t],i)=>({v:v,t:t,on:i===0,n:v?DLC_SHIP_PARTS.filter(p=>p.type===v).length:DLC_SHIP_PARTS.length})),{name:'dlc-parts',label:'Schiffsteile nach Typ filtern',wrap:true,cls:'dlc-pills'});
-  b+=_dlcTbl(['Teil','Typ','Größe','Händler / Erhalt','Preis','Boni'],DLC_SHIP_PARTS.map(p=>({c:p.c,attrs:' data-type="'+cdEsc(p.type)+'"',
-    s:[p.name,p.type,_dlcP(p.size),_dlcP(p.vendor),_dlcP(p.price),_dlcP(p.bonus)].join(' '),
-    cells:[_dlcIco(_dlcImg(p.name))+_dlcName(p),cdEsc(p.type),_dlcV(p.size),_dlcV(p.vendor),_dlcV(p.price),_dlcV(p.bonus)]})),{id:'dlc-parts-tb',cap:'Schiffsteile'});
-  add('teile',{title:'Schiffsteile',lead:'Segel, Kanonen, Galionsfiguren und Heckteile mit Händler, Preis in Silver und Boni.',icon:'⛵',
-    chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Boni nur laut Game8',c:'warn'}],body:b});
-
-  /* 4 Inseln */
-  b='<div class="dlc-isl-hd"><span>Abhaken, welche Inseln du schon besucht hast (bleibt in diesem Browser gespeichert).</span><span id="dlc-isl-prog"></span></div>';
+  b+=_dlcH('Besatzung: '+DLC_CREW.length+' Rollen')+'<ul class="dlc-crew dlcs-crew">'+DLC_CREW.map(r=>'<li class="cd-spot"><b>'+cdEsc(r.role)+'</b><span>'+cdEsc(r.d)+'</span></li>').join('')+'</ul>'+_dlcList(DLC_CREW_NOTES,'dlc-list--note');
+  return {title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
+    chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b};
+}
+/* 3 Schiffsteile (Abschnitt dlc-b-teile, Besitz: sammeln). Karten wie Kochen & Elixiere, je Typ ein Regal mit Anzahl.
+   Bildregel: ein Regal zeigt Spiel-Icons nur, wenn JEDES Teil darin eins hat (Segel, Bug- und Seitenkanonen); Galionsfiguren und Heck
+   haben Lücken und zeigen daher einheitlich die Typ-Glyphe in derselben Kachelgröße. */
+const _DLC_S_TYPEN=[['Sail','Segel','⚑'],['Front Cannon','Bugkanonen','◎'],['Side Cannon','Seitenkanonen','◎'],['Figurehead','Galionsfiguren','♛'],['Stern','Heck','⚓']];
+function _dlcSPart(p,img,lbl,gl){
+  const chips=[],rows=[['Händler / Erhalt',_dlcV(p.vendor)]];let sz='';
+  [['Größe',p.size,{}],['Preis',p.price,{c:'gold'}],['Boni',p.bonus,{c:'ice'}]].forEach(([l,x,o])=>{
+    if(x==null||x==='')return;
+    if(_dlcP(x).length<=46){const h=_dlcChip(x,Object.assign({l:l},o));if(l==='Größe')sz=h;else chips.push(h);}else rows.push([l,_dlcV(x)]);
+  });
+  return _dlcSCard({name:p.name,c:p.c,q:p.q,glyph:gl,img:img?_dlcImg(p.name):'',tags:'<span class="tag tx fd-cat">'+cdEsc(p.type)+'</span>'+sz,
+    chips:chips.join(''),rows:rows,attrs:' data-type="'+cdEsc(p.type)+'"',
+    s:[p.name,p.type,lbl,_dlcP(p.size),_dlcP(p.vendor),_dlcP(p.price),_dlcP(p.bonus)].join(' ')});
+}
+function _dlcSecTeile(){
+  const typen=[['','Alle']].concat(_DLC_S_TYPEN.map(t=>[t[0],t[1]]));
+  let b=_dlcList(DLC_PART_NOTES,'dlc-list--note dlcs-notes');
+  b+='<div class="ibar fd-bar dlcs-bar" role="group" aria-label="Schiffsteile nach Typ filtern"><span class="ibar-l">Typ</span>'
+    +cdPills(typen.map(([v,t],i)=>({v:v,t:t,on:i===0,n:v?DLC_SHIP_PARTS.filter(p=>p.type===v).length:DLC_SHIP_PARTS.length})),{name:'dlc-parts',label:'Schiffsteile nach Typ filtern',wrap:true,cls:'dlcs-pills'})
+    +'<span class="fd-cnt" id="dlc-parts-cnt">'+DLC_SHIP_PARTS.length+' Teile</span></div>';
+  const known=new Set(_DLC_S_TYPEN.map(t=>t[0]));
+  const shelves=_DLC_S_TYPEN.map(t=>[t[0],t[1],t[2]]).concat(DLC_SHIP_PARTS.some(p=>!known.has(p.type))?[['','Weitere','⚓']]:[]);
+  b+='<div class="dlcs-list" id="dlc-parts-grid">'+shelves.map(([ty,lbl,gl])=>{
+    const items=DLC_SHIP_PARTS.filter(p=>ty?p.type===ty:!known.has(p.type));
+    if(!items.length)return '';
+    const img=_dlcAllImg(items,p=>_dlcImg(p.name));
+    return '<section class="fd-grp dlcs-grp"><h3 class="sub-t fd-grp-t">'+cdEsc(lbl)+'</h3><div class="dlcs-grid">'+items.map(p=>_dlcSPart(p,img,lbl,gl)).join('')+'</div><span class="fd-grp-n" aria-hidden="true"></span></section>';
+  }).join('')+'</div>';
+  return {title:'Schiffsteile',lead:'Segel, Kanonen, Galionsfiguren und Heckteile mit Händler, Preis in Silver und Boni.',icon:'⛵',flat:true,
+    chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Boni nur laut Game8',c:'warn'}],body:b};
+}
+/* Filter nach Typ: Klassen auf den Karten (hide + data-filtered), kein Neuaufbau; leere Regale blendet CSS aus (.fd-grp:has) */
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail;if(!d||d.name!=='dlc-parts')return;
+  const root=document.getElementById('dlc-parts-grid');if(!root)return;
+  let n=0,tot=0;
+  root.querySelectorAll('.dlcs-card').forEach(c=>{const ok=!d.value||c.dataset.type===d.value;tot++;if(ok)n++;c.dataset.filtered=ok?'0':'1';c.classList.toggle('hide',!ok);});
+  const cnt=document.getElementById('dlc-parts-cnt');if(cnt)cnt.textContent=n===tot?tot+' Teile':n+' von '+tot+' Teilen';
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(root);
+});
+/* 4 Inseln (Abschnitt dlc-b-inseln, Besitz: sammeln) */
+function _dlcSecInseln(){
+  let b='<div class="dlc-isl-hd"><span>Abhaken, welche Inseln du schon besucht hast (bleibt in diesem Browser gespeichert).</span><span id="dlc-isl-prog"></span></div>';
   /* Beschriftete Teile (Lage, Abyss Nexus, Erschließung), dann die freien Angaben (info); fehlende Felder entfallen. */
   const islSub=i=>[['Lage',i.where],['Abyss Nexus',i.nexus],['Erschließung',i.unlock]].map(([k,v])=>{const t=_dlcV(v);return t?'<span class="ctu-pt"><b class="ctu-pk">'+k+':</b> '+t+'</span>':'';}).join('')
     +(i.info!=null?'<span class="ctu-pt">'+[].concat(i.info).map(_dlcV).join(' ')+'</span>':'');
@@ -13549,130 +13772,478 @@ function renderDlc(part){
     title:{h:_dlcName(i)},sub:{h:islSub(i)},cls:'dlc-ck'+(i.c&&i.c!=='ok'?' dlc-row-'+i.c:''),
     s:[i.name,_dlcP(i.where),_dlcP(i.nexus),_dlcP(i.unlock),_dlcP(i.info)].join(' ')})).join('')+'</div>';
   b+=_dlcH('Ozean, Erschließung, Häfen')+_dlcFacts(DLC_ISLAND_FACTS);
-  add('inseln',{title:'Inseln und Ozean',lead:'Benannte Inseln zum Abhaken, Erschließungs-Missionen, Häfen, Schatzkarten.',icon:'◉',
-    chips:[{v:DLC_ISLANDS.length,t:'Inseln benannt',c:'ice'},{t:'Gesamtzahl offiziell nicht genannt'}],body:b});
-
-  /* 5 Tauchen */
-  b=_dlcFacts(DLC_DIVE);
-  if(RSHOPS.length)b+=_dlcH('Relic-Händler ('+RSHOPS.length+')')+_dlcTbl(['Händler','Ort','Sortiment','Freischaltung'],RSHOPS.map(r=>({c:r.c,
+  return {title:'Inseln und Ozean',lead:'Benannte Inseln zum Abhaken, Erschließungs-Missionen, Häfen, Schatzkarten.',icon:'◉',
+    chips:[{v:DLC_ISLANDS.length,t:'Inseln benannt',c:'ice'},{t:'Gesamtzahl offiziell nicht genannt'}],body:b};
+}
+/* 5 Tauchen (Abschnitt dlc-b-tauchen, Besitz: sammeln) */
+function _dlcSecTauchen(){
+  const RSHOPS=_dlcA(()=>DLC_RELIC_SHOPS);
+  let b=_dlcFacts(DLC_DIVE);
+  if(RSHOPS.length)b+=_dlcH('Relic-Händler ('+RSHOPS.length+')')+_dlcSCards(RSHOPS.map(r=>_dlcSCard({name:r.name,de:r.de,c:r.c,q:r.q,glyph:'◈',
     s:[r.name,_dlcP(r.where),_dlcP(r.sells),_dlcP(r.unlock)].join(' '),
-    cells:[_dlcName(r),_dlcCell(r.where,true),_dlcCell(r.sells,true),_dlcCell(r.unlock)]})),{cap:'Relic-Händler'});
-  add('tauchen',{title:'Tauchen',lead:'Atemanzeige, Tauchanzug, Atemgeräte, Ancient Relics und Relic-Händler.',icon:'≋',
-    chips:[{t:'ohne Voraussetzung',c:'ok'},{t:'Atem über Tauchanzug'}].concat(RSHOPS.length?[{v:RSHOPS.length,t:'Relic-Händler'}]:[]),body:b});
-
-  /* 6 Reittiere */
+    rows:[['Ort',_dlcCell(r.where,true)],['Sortiment',_dlcCell(r.sells,true)],['Freischaltung',_dlcCell(r.unlock)]]})));
+  return {title:'Tauchen',lead:'Atemanzeige, Tauchanzug, Atemgeräte, Ancient Relics und Relic-Händler.',icon:'≋',
+    chips:[{t:'ohne Voraussetzung',c:'ok'},{t:'Atem über Tauchanzug'}].concat(RSHOPS.length?[{v:RSHOPS.length,t:'Relic-Händler'}]:[]),body:b};
+}
+/* 6 Reittiere (Abschnitt dlc-b-reittiere, Besitz: sammeln) */
+function _dlcSecReittiere(){
   const mW=_dlcAny(DLC_MOUNTS,'where'),mT=_dlcAny(DLC_MOUNTS,'trust'),mS=_dlcAny(DLC_MOUNTS,'stats');
-  b=_dlcTbl(['Reittier'].concat(mW?['Fundort']:[],['Zähmen'],mT?['Vertrauen']:[],mS?['Werte']:[]),DLC_MOUNTS.map(m=>({c:m.c,s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
-    cells:[_dlcName(m)].concat(mW?[_dlcCell(m.where,true)]:[],[_dlcV(m.how)],mT?[_dlcCell(m.trust,true)]:[],mS?[_dlcCell(m.stats,true)]:[])})),{cap:'Unterwasser-Reittiere'});
+  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
+    rows:[].concat(mW?[['Fundort',_dlcCell(m.where,true)]]:[],[['Zähmen',_dlcV(m.how)]],mT?[['Vertrauen',_dlcCell(m.trust,true)]]:[],mS?[['Werte',_dlcCell(m.stats,true)]]:[])})));
   b+=_dlcFacts(DLC_MOUNT_FACTS);
   b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
-  add('reittiere',{title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
-    chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b});
-
-  /* 7 Quests */
-  b=_dlcList(DLC_QUEST_NOTES,'dlc-list--note');
-  b+='<div class="dlc-qgrid">'+DLC_QUESTS.map(q=>{
-    const steps=Array.isArray(q.steps)?q.steps.filter(Boolean):[];
-    const subs=Array.isArray(q.subs)?q.subs:[q.subs];
-    const subObj=_dlcObj(subs[0]),subList=String(subObj.v||'').split(/\s*;\s*/).filter(Boolean);
-    /* Schritte (steps) ersetzen die Unterquest-Liste (subs), sobald sie vorhanden sind */
-    const subHtml=steps.length?_dlcSteps(steps):!subList.length&&subObj.c!=='nb'?_dlcV({v:'nicht belegt',c:'nb'}):subObj.c==='nb'?_dlcV(subObj):'<ol class="dlc-ol'+(subObj.c&&subObj.c!=='ok'?' dlc-unb':'')+'">'+subList.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'+(subObj.c&&subObj.c!=='ok'?' '+_dlcFlag(subObj.c,subObj.q):'');
-    return '<article class="dlc-q cd-spot'+(q.c&&q.c!=='ok'?' dlc-row-'+q.c:'')+'" data-s="'+cdEsc([q.name,q.de,q.who,_dlcP(q.start),_dlcP(q.req),_dlcP(q.subs),steps.map(s=>[s.name,_dlcP(s.d),_dlcP(s.reward)].join(' ')).join(' '),_dlcP(q.rewards),_dlcP(q.note)].join(' ').toLowerCase())+'">'
-      +'<h4 class="dlc-q-t">'+_dlcName(q)+'</h4><p class="dlc-q-who">'+cdEsc(q.who)+(q.start?' · Start: '+_dlcV(q.start):'')+'</p>'
-      +(q.req?'<p class="dlc-q-rw"><span class="dlc-k">Voraussetzung</span> '+_dlcV(q.req)+'</p>':'')
-      +'<div class="dlc-q-sub"><span class="dlc-k">'+(steps.length?'Schritte':'Unterquests')+'</span>'+subHtml+'</div>'
-      +'<p class="dlc-q-rw"><span class="dlc-k">Belohnungen</span> '+_dlcV(q.rewards)+'</p>'+(q.note?'<p class="dlc-q-rw">'+_dlcV(q.note)+'</p>':'')+'</article>';
-  }).join('')+'</div>';
+  return {title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
+    chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b};
+}
+/* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests). Helfer _dlcQ_* (Achtung: _dlcQ ohne Unterstrich gehört den Waffen/Rüstungen). */
+const _dlcQ_KEY='cd_r2_dlc_quests';
+/* Gruppen der Filter-Pillen, abgeleitet nur per Stichwort aus dem ersten Teil von who (vor dem ersten Komma).
+   Szene je Gruppe: Charakter-Porträts bzw. der Graumähnen-Strang; Ozean-Reihen zeigen das Schiffsmotiv (roadmap, wie der Kopf der Übersicht). */
+const _dlcQ_GROUPS=[
+  {v:'kliff',t:'Kliff',g:'K',tone:'red',scene:'char-kliff'},
+  {v:'damiane',t:'Damiane',g:'D',tone:'violet',scene:'char-damiane'},
+  {v:'oongka',t:'Oongka',g:'O',tone:'amber',scene:'char-oongka'},
+  {v:'fraktion',t:'Graumähnen & Fraktion',g:'⚑',tone:'gold',scene:'q-faction'},
+  {v:'ozean',t:'Großer Ozean',g:'⚓',tone:'ice',scene:'roadmap'},
+  {v:'weitere',t:'Weitere',g:'❢',tone:'ice',scene:'q-faction'}];
+function _dlcQ_grp(q){
+  const w=String(q&&q.who||'').split(',')[0].trim().toLowerCase();
+  const k=/kliff/.test(w)?'kliff':/damiane/.test(w)?'damiane':/oongka/.test(w)?'oongka':/great ocean|ozean/.test(w)?'ozean':/graum|fraktion/.test(w)?'fraktion':'weitere';
+  return _dlcQ_GROUPS.find(g=>g.v===k);
+}
+function _dlcQ_steps(q){return Array.isArray(q.steps)?q.steps.filter(Boolean):[];}
+function _dlcQ_ids(q){return _dlcQ_steps(q).map((s,i)=>cdSlug(q.name)+'-'+i);}
+/* Kommas außerhalb von Klammern trennen (Belohnungsliste als Text) */
+function _dlcQ_split(s){
+  const out=[];let d=0,cur='';
+  String(s).split('').forEach(ch=>{if(ch==='(')d++;else if(ch===')')d=Math.max(0,d-1);if(ch===','&&!d){out.push(cur.trim());cur='';}else cur+=ch;});
+  if(cur.trim())out.push(cur.trim());return out.filter(Boolean);
+}
+/* Belohnung kurz: erste Belohnung wortgetreu (Abschneiden nur an einem Komma), sonst keine */
+function _dlcQ_rw(q){
+  const r=[].concat(q.rewards==null?[]:q.rewards).filter(x=>x!=null&&x!=='');
+  if(!r.length)return null;
+  const f=r[0],full=_dlcP(q.rewards);
+  if(f&&typeof f==='object'&&!Array.isArray(f))return _dlcP(f).length<=50?{h:_dlcChip(f,{g:'◆'})}:null;
+  const parts=_dlcQ_split(Array.isArray(f)?_dlcP(f):f),single=parts.length===1&&r.length===1;
+  if(!parts.length||parts[0].length>(single?50:40))return null;
+  return {g:'◆',t:parts[0],title:'Belohnung: '+full};
+}
+/* Schritt (steps[i]) → Abhak-Zeile: Titel = Schritt-Name, sub = Beschreibung + Belohnung, unbestätigt grau mit Vermerk */
+function _dlcQ_step(q,st,i){
+  const o=typeof st==='string'?{name:st}:st,bad=!!(o.c&&o.c!=='ok'),d=_dlcV(o.d),rw=_dlcV(o.reward);
+  const sub=(d?'<span class="dlcq-pt">'+d+'</span>':'')+(rw?'<span class="dlcq-pt"><b class="ctu-pk">Belohnung:</b> '+rw+'</span>':'')
+    +(bad?'<span class="dlcq-pt dlcq-fl">'+_dlcFlag(o.c,o.q)+'</span>':'');
+  return cdCheck({key:_dlcQ_KEY,id:cdSlug(q.name)+'-'+i,title:{h:'<span class="dlcq-n" aria-hidden="true">'+(i+1)+'.</span> '+cdEsc(o.name||'Schritt')},sub:sub?{h:sub}:null,
+    cls:'dlc-ck dlcq-st'+(bad?' dlc-row-'+o.c:'')});
+}
+function _dlcQ_fold(q,i,useScene){
+  const G=_dlcQ_grp(q),steps=_dlcQ_steps(q),ids=_dlcQ_ids(q),done=cdCheckGet(_dlcQ_KEY),dc=ids.filter(x=>done.has(x)).length;
+  const subs=Array.isArray(q.subs)?q.subs:[q.subs];
+  const subObj=_dlcObj(subs[0]),subList=String(subObj.v||'').split(/\s*;\s*/).filter(Boolean);
+  const subsNb=!subList.length&&subObj.c!=='nb'||subObj.c==='nb',bad=!!(q.c&&q.c!=='ok');
+  const chips=[];
+  if(steps.length)chips.push({v:steps.length,t:steps.length===1?'Schritt':'Schritte',c:'gold'});
+  else if(subsNb)chips.push({h:_dlcChip({v:'nicht belegt',c:'nb'},{l:'Unterquests'})});
+  else chips.push({v:subList.length,t:subList.length===1?'Unterquest':'Unterquests',c:'gold'});
+  const rw=_dlcQ_rw(q);if(rw)chips.push(rw);
+  if(bad)chips.push({h:_dlcFlag(q.c,q.q)});
+  const s=[q.name,q.de,q.who,G.t,_dlcP(q.start),_dlcP(q.req),_dlcP(q.subs),steps.map(x=>[x.name,_dlcP(x.d),_dlcP(x.reward)].join(' ')).join(' '),_dlcP(q.rewards),_dlcP(q.note)].join(' ');
+  const body=()=>{
+    let h=q.req?_dlcFacts([['Voraussetzung',q.req]]):'';
+    if(steps.length)h+=_dlcH('Schritte')+'<div class="cd-checks dlcq-steps">'+steps.map((st,k)=>_dlcQ_step(q,st,k)).join('')+'</div>';
+    else if(subsNb)h+=_dlcH('Unterquests')+'<p class="dlcq-nb">'+_dlcV(subObj.c==='nb'?subObj:{v:'nicht belegt',c:'nb'})+'</p>';
+    else{
+      const sb=subObj.c&&subObj.c!=='ok';
+      h+=_dlcH('Unterquests')+'<div class="dlcq-subs'+(sb?' dlc-unb':'')+'">'+cdStepper(subList.map(x=>({t:x})))+(sb?'<p class="dlcq-pt">'+_dlcFlag(subObj.c,subObj.q)+'</p>':'')+'</div>';
+    }
+    h+=_dlcFacts([['Belohnungen',q.rewards]]);
+    if(q.note)h+=cdNote({h:_dlcV(q.note)},{kind:'info',title:'Notiz'});
+    return h;
+  };
+  return cdFold({id:'dlc-q-'+cdSlug(q.name),title:{h:cdEsc(q.name)+(q.de?' <span class="dlc-de">'+cdEsc(q.de)+'</span>':'')},
+    lead:{h:cdEsc(q.who)+(q.start?' · Start: '+_dlcV(q.start):'')},icon:G.g,tone:G.tone,chips,
+    scene:useScene?{keys:[G.scene],tone:G.tone,glyph:G.g}:undefined,
+    prog:steps.length?{done:dc,total:ids.length,label:dc+' von '+ids.length+' Schritten abgehakt'}:null,
+    s,body,cls:'dlcq-fold'+(bad?' dlcq-unb':'')+(steps.length&&dc===ids.length?' dlcq-done':''),
+    attrs:{'data-dlcq-i':i,'data-dlcq-g':G.v,'data-filtered':'0'}});
+}
+function _dlcSecQuests(){
+  const Gs=DLC_QUESTS.map(_dlcQ_grp),useScene=_dlcAllImg(DLC_QUESTS,(q,i)=>cdSceneHas([_dlcQ_grp(q).scene]));
+  const total=DLC_QUESTS.reduce((n,q)=>n+_dlcQ_steps(q).length,0),done=cdCheckGet(_dlcQ_KEY);
+  const dn=DLC_QUESTS.reduce((n,q)=>n+_dlcQ_ids(q).filter(x=>done.has(x)).length,0);
+  let b=cdNote({h:'<ul class="dlcq-notes">'+DLC_QUEST_NOTES.map(x=>'<li>'+_dlcV(x)+'</li>').join('')+'</ul>'},{kind:'info',title:'Hinweise zu den DLC-Quests'});
+  b+='<div class="dlcq-stat cd-spot" id="dlc-q-stat"><span class="dlcq-stat-k">Dein DLC-Quest-Stand</span>'
+    +'<b class="dlcq-stat-t" id="dlc-q-stat-t">'+dn+' von '+total+' Schritten abgehakt</b><span class="dlcq-stat-p" id="dlc-q-stat-p">'+cdProg(dn,total,dn+' von '+total+' Schritten abgehakt')+'</span></div>';
+  const pills=[{v:'all',t:'Alle',n:DLC_QUESTS.length,on:true}].concat(_dlcQ_GROUPS.map(g=>({v:g.v,t:g.t,g:g.g,n:Gs.filter(x=>x===g).length})).filter(p=>p.n));
+  b+='<div class="dlcq-bar">'+cdPills(pills,{name:'dlc-q-who',label:'Reihe oder Charakter'})+'<span class="dlcq-cnt" id="dlc-q-cnt" aria-live="polite">'+DLC_QUESTS.length+' Questreihen</span></div>';
+  b+='<div class="cd-folds dlcq-folds">'+DLC_QUESTS.map((q,i)=>_dlcQ_fold(q,i,useScene)).join('')+'</div>';
   b+='<p class="dlc-p">Alle übrigen Fraktionsquests der Graumähnen: '+cdGoLink('quests','','Quests')+'</p>';
-  add('quests',{title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',
-    chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b});
-
-  /* 8 Bosse und Garten der Prüfungen */
-  b=_dlcList(DLC_BOSS_NOTES,'dlc-list--note');
-  b+=_dlcTbl(['Boss','Ort und Kontext','Beute'],DLC_BOSSES.map(x=>({c:x.c,s:[x.name,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note)].join(' '),
-    cells:[_dlcName(x)+(x.w?'<br>'+cdGoLink('bosses',x.w,'In der Bossliste'):''),_dlcV(x.where)+(x.note?' '+_dlcV(x.note):''),_dlcV(x.drop)]})),{cap:'Bosse und Gegner aus dem DLC'});
-  b+=_dlcH('Garten der Prüfungen')+_dlcFacts(DLC_GARDEN_RULES);
-  b+=_dlcTbl(['Nr.','Gruppe','Bosse','Belohnung'],DLC_GARDEN.map(g=>({s:[g.name,[].concat(g.b||[]).join(' '),g.reward].join(' '),
-    cells:[String(g.n),'<b class="dlc-n">'+cdEsc(g.name)+'</b>','<span class="dlc-bls'+(g.bc==='ok'?'':' dlc-unb')+'">'+[].concat(g.b||[]).map(n=>cdGoLink('bosses',n,n,'dlc-bl')).join(' ')+(g.bc==='ok'?'':' '+_dlcFlag('unb',g.bq||'GameRant'))+'</span>',cdEsc(g.reward)]})),{cls:'dlc-tbl--garden',cap:'Garten der Prüfungen: Gruppen'});
-  b+=_dlcList([DLC_GARDEN_NOTE],'dlc-list--note');
-  add('bosse',{title:'Bosse und Garten der Prüfungen',lead:'Gegner aus den DLC-Questreihen, teils mit bekannten Namen aus dem Hauptspiel, und die '+DLC_GARDEN.length+' Gruppen im Garten der Prüfungen mit Belohnung.',icon:'☠',
-    chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b});
-
-  /* 9 Burgen, Wohnen, Verwaltung, Soziales */
+  return {title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',flat:true,
+    chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b,after:_dlcQ_refresh};
+}
+/* Fortschritt live: Faltkarten-Köpfe und Gesamtstand aus dem Speicher (auch für noch nicht geöffnete Karten) */
+function _dlcQ_refresh(){
+  const root=document.getElementById('dlc-b-quests');if(!root||typeof DLC_QUESTS==='undefined')return;
+  const done=cdCheckGet(_dlcQ_KEY);let D=0,T=0;
+  root.querySelectorAll('.dlcq-fold[data-dlcq-i]').forEach(f=>{
+    const ids=_dlcQ_ids(DLC_QUESTS[+f.dataset.dlcqI]);if(!ids.length)return;
+    const d=ids.filter(x=>done.has(x)).length;D+=d;T+=ids.length;
+    const p=f.querySelector(':scope>summary .cd-fold-aside .cd-prog');
+    if(p)p.outerHTML=cdProg(d,ids.length,d+' von '+ids.length+' Schritten abgehakt');
+    f.classList.toggle('dlcq-done',d===ids.length);
+  });
+  const t=document.getElementById('dlc-q-stat-t'),p=document.getElementById('dlc-q-stat-p');
+  if(t)t.textContent=D+' von '+T+' Schritten abgehakt';
+  if(p)p.innerHTML=cdProg(D,T,D+' von '+T+' Schritten abgehakt');
+}
+/* Filter über Klassen (hide + data-filtered), danach Suche erneut anwenden */
+function _dlcQ_filter(v){
+  const root=document.getElementById('dlc-b-quests');if(!root)return;
+  let n=0,tot=0;
+  root.querySelectorAll('.dlcq-fold').forEach(f=>{
+    tot++;const ok=!v||v==='all'||f.dataset.dlcqG===v;
+    f.dataset.filtered=ok?'0':'1';f.classList.toggle('hide',!ok);if(ok)n++;
+  });
+  const c=document.getElementById('dlc-q-cnt');if(c)c.textContent=n===tot?tot+' Questreihen':n+' von '+tot+' Questreihen';
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(root);
+}
+document.addEventListener('cd-pills',e=>{const d=e.detail;if(d&&d.name==='dlc-q-who')_dlcQ_filter(d.values[0]||'all');});
+document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===_dlcQ_KEY)_dlcQ_refresh();});
+/* ===== DLC-K Kampf (01.11.2026, Lauf dlc-design): Bosskarten wie auf der Bossseite, Garten der Prüfungen als abhakbare Karten =====
+   #dlc-boss-grid erbt das Bosskarten-CSS der Bossseite. Besiegt-Speicher: Bosse mit w (Name in BOSSES) nutzen cd_bosses
+   (Liste von Namen, geteilt mit der Bossseite, geschrieben über toggleBossDone), alle übrigen cd_r2_dlc_bosse (Liste der
+   Namen); Gartengruppen cd_r2_dlc_garten (Liste der IDs g1 bis g10). Kein Boss der DLC-Liste hat ein Porträt für alle,
+   daher tragen alle 14 Karten eine Glyphen-Schiene statt eines Bildes (Bildregel). */
+const DLC_K_BOSSE='cd_r2_dlc_bosse',DLC_K_GARTEN='cd_r2_dlc_garten';
+let _dlcKF={st:'all',grp:'all'};
+/* Besiegt-Zustand als Funktion (Speicher einmal gelesen): Eintrag -> bool */
+function _dlcKDoneFn(){const a=new Set(loadBossDone()),b=cdCheckGet(DLC_K_BOSSE);return x=>x.w?a.has(x.w):b.has(x.name);}
+/* Kurzform für Kennzeile und Chips: vor dem ersten „: “, „; “ oder „ (“ abschneiden, ggf. an der Wortgrenze kürzen */
+function _dlcKShort(t,max){
+  let s=String(t==null?'':t).split(/\s*:\s|\s*;\s*|\s+\(/)[0].replace(/[\s.,;:]+$/,'');
+  if(max&&s.length>max){let c=s.slice(0,max-1);const sp=c.lastIndexOf(' ');if(sp>max*0.4)c=c.slice(0,sp);s=c.replace(/[\s,;:]+$/,'')+'…';}
+  return s;
+}
+/* Gruppe „Großer Ozean“: nur die Namen, die die th.gl-Notiz in DLC_BOSS_NOTES ausdrücklich dort einordnet */
+function _dlcKOcean(x){const t=_dlcA(()=>DLC_BOSS_NOTES).map(n=>_dlcP(n)).find(s=>/Great Ocean/.test(s));return !!t&&t.includes(x.name);}
+function _dlcKQs(v){if(v==null||typeof v!=='object')return [];return Array.isArray(v)?v.flatMap(_dlcKQs):(v.q?[v.q]:[]);}
+/* Kennzeile der zugeklappten Karte: erstes Ortsstück (mit grauem Vermerk, wenn dieser Teil unbestätigt ist) */
+function _dlcKDesig(x){
+  const first=[].concat(x.where==null?[]:x.where)[0];if(first==null)return {h:'',p:''};
+  const o=_dlcObj(first),s=_dlcKShort(o.v,80);if(!s)return {h:'',p:''};
+  return {h:_dlcV(o.c&&o.c!=='ok'?{v:s,c:o.c,q:o.q}:s),p:s};
+}
+/* Beute-Chips: ein Chip je Stück (an Komma/Semikolon außerhalb von Klammern geteilt), Unbestätigtes grau gestrichelt mit sichtbarem Vermerk */
+function _dlcKChips(x){
+  const out=[],split=t=>t.split(/\s*[,;]\s*(?![^(]*\))/).map(p=>p.trim().replace(/\.$/,'')).filter(Boolean);
+  [].concat(x.drop==null?[]:x.drop).forEach(el=>{
+    const o=_dlcObj(el),t=String(o.v==null?'':o.v).trim();if(!t)return;
+    if(!o.c||o.c==='ok'){split(t).forEach(p=>out.push('<span class="boss-sum-chip bsc-drop" title="'+cdEsc(p)+'">'+cdEsc(p)+'</span>'));return;}
+    const noflag=o.c==='nb'&&/nicht belegt/i.test(t),sp=split(t),parts=noflag||sp.some(p=>p.length>40)?[t.replace(/\.$/,'')]:sp; /* Prosa (ein Stück über 40 Zeichen) bleibt ein Chip */
+    parts.forEach((p,i)=>{
+      const flag=i===parts.length-1&&!noflag?_dlcFlag(o.c,o.q):'';
+      out.push('<span class="boss-sum-chip bsc-drop dlc-k-unb" title="'+cdEsc(p+(o.q?' ('+(o.c==='nb'?'nicht belegt':'unbestätigt')+': '+o.q+')':''))+'">'
+        +(parts.length===1&&p.length>40?_bossShort(p,38):cdEsc(p))+flag+'</span>');
+    });
+  });
+  if(x.note)out.push('<span class="boss-sum-chip bsc-note dlc-k-unb" title="Hinweis im Aufklapper">ⓘ Hinweis</span>');
+  return out.join('');
+}
+function _dlcKCard(x,isDone){
+  const n=x.name,sn=escJsStr(n),dz=_dlcKDesig(x),chips=_dlcKChips(x),qs=[x.q].concat(_dlcKQs(x.where),_dlcKQs(x.drop),_dlcKQs(x.note)).filter(Boolean).join(' ');
+  const rows=[['Ort und Kontext',_dlcV(x.where)],['Beute',_dlcV(x.drop)],['Hinweis',_dlcV(x.note)]].filter(r=>r[1])
+    .map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
+  const s=[n,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),x.w||'',qs].join(' ').toLowerCase();
+  const vis=[n,dz.p,_dlcPlain(chips)].join(' ').toLowerCase(),hid=[_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),qs].join(' ').toLowerCase();
+  return '<div class="card cd-spot record-card boss-compact dlc-k-card'+(isDone?' boss-done':'')+(x.c&&x.c!=='ok'?' dlc-k-row-'+(x.c==='nb'?'nb':'unb'):'')+'" data-dlc-k="'+cdEsc(n)+'" data-ocean="'+(_dlcKOcean(x)?'1':'0')
+    +'" data-filtered="0" data-s="'+cdEsc(s)+'" data-item-id="'+cdEsc(n)+'" data-item-visible="'+cdEsc(vis)+'" data-item-hidden="'+cdEsc(hid)+'">'
+    +'<div class="record-rail"><div class="record-img dlc-k-img"><span class="record-tag">DLC</span><span class="crosshair" aria-hidden="true"></span>'
+    +'<div class="boss-done-badge">BESIEGT</div>'+(x.w?favBtn('boss',x.w):'')
+    +'<div class="dlc-k-gl" aria-hidden="true"><b>'+cdEsc(n.charAt(0).toUpperCase())+'</b></div></div></div>'
+    +'<div class="record-body"><div class="ct">'+cdEsc(n)+(x.c&&x.c!=='ok'?' '+_dlcFlag(x.c,x.q):'')+'</div>'
+    +(dz.h?'<div class="record-desig">'+dz.h+'</div>':'')
+    +'<div class="boss-sum">'+chips+'</div>'
+    +'<div class="boss-actions"><button type="button" class="defeat-btn'+(isDone?' on':'')+'" aria-pressed="'+(isDone?'true':'false')+'" onclick="_dlcKToggle(\''+sn+'\')">'
+    +(isDone?'✓ Besiegt':'Als besiegt markieren')+'</button></div></div>'
+    +'<details class="item-more boss-more"><summary onclick="this.parentElement.removeAttribute(\'data-srch-open\')"><span class="boss-more-lbl">Details &amp; Hinweise</span></summary>'
+    +'<div class="item-more-body boss-more-body"><dl class="datagrid dlc-k-dg">'+rows+'</dl>'
+    +(x.w?'<div class="dlc-k-more-l">'+cdGoLink('bosses',x.w,'In der Bossliste')+'</div>':'')+'</div></details></div>';
+}
+function _dlcKGarden(g,isDone){
+  const id='g'+g.n,bad=g.bc!=='ok',bs=[].concat(g.b||[]),N=DLC_GARDEN.length;
+  const s=[g.name,bs.join(' '),g.reward,bad?(g.bq||'GameRant'):'','gruppe',g.n].join(' ').toLowerCase();
+  return '<div class="card cd-spot dlc-kg'+(isDone?' is-done':'')+'" data-gid="'+id+'" data-item-id="'+id+'" data-s="'+cdEsc(s)+'">'
+    +'<div class="dlc-kg-h"><span class="dlc-kg-n" aria-hidden="true">'+cdEsc(g.n)+'</span><div class="dlc-kg-t"><h4 class="ct">'+cdEsc(g.name)+'</h4>'
+    +'<span class="dlc-kg-sub">Gruppe '+cdEsc(g.n)+' von '+N+'</span></div></div>'
+    +'<div><span class="dlc-kg-l">Bosse</span><div class="dlc-kg-bl">'+bs.map(b=>cdGoLink('bosses',b,b,'dlc-kg-b'+(bad?' dlc-kg-b--unb':''))).join('')
+    +(bad?_dlcFlag('unb',g.bq||'GameRant'):'')+'</div></div>'
+    +'<p class="dlc-kg-rw"><span class="dlc-kg-l">Belohnung</span>'+cdEsc(g.reward)+'</p>'
+    +cdCheck({key:DLC_K_GARTEN,id:id,title:'Gruppe geschafft',checked:isDone})+'</div>';
+}
+/* Zustand nachziehen, ohne neu zu rendern: Karten, Knöpfe, Fortschritt, Pillen-Zähler, Filter (Aufruf nach jedem Klick und beim Öffnen der Seite) */
+function _dlcKSync(){
+  const root=document.getElementById('dlc-b-bosse');if(!root)return;
+  const isD=_dlcKDoneFn(),grid=document.getElementById('dlc-boss-grid'),f=_dlcKF;
+  let n=0,open=0,shown=0;
+  root.querySelectorAll('#dlc-boss-grid .dlc-k-card').forEach(c=>{
+    const x=DLC_BOSSES.find(b=>b.name===c.dataset.dlcK);if(!x)return;
+    const d=isD(x);if(d)n++;else open++;
+    c.classList.toggle('boss-done',d);
+    const b=c.querySelector('.defeat-btn');
+    if(b){b.classList.toggle('on',d);b.setAttribute('aria-pressed',d?'true':'false');b.textContent=d?'✓ Besiegt':'Als besiegt markieren';}
+    const ok=(f.st==='all'||(f.st==='done')===d)&&(f.grp==='all'||c.dataset.ocean==='1');
+    c.dataset.filtered=ok?'0':'1';c.classList.toggle('hide',!ok);if(ok)shown++;
+  });
+  const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
+  set('dlc-k-prog',cdProg(n,DLC_BOSSES.length,n+' von '+DLC_BOSSES.length+' besiegt'));
+  const pn=(v,c)=>{const e=root.querySelector('[data-cd-pills="dlc-k-st"] .cd-pill[data-v="'+v+'"] .cd-pill-n');if(e)e.textContent=c;};
+  pn('open',open);pn('done',n);
+  const em=document.getElementById('dlc-k-empty');if(em)em.hidden=shown>0;
+  if(grid)_reapplyActiveSearch(grid);
+  const gd=cdCheckGet(DLC_K_GARTEN);let g=0;
+  root.querySelectorAll('.dlc-kg').forEach(c=>{
+    const d=gd.has(c.dataset.gid);if(d)g++;c.classList.toggle('is-done',d);
+    const i=c.querySelector('.cd-check-in');if(i&&i.checked!==d)i.checked=d;
+  });
+  set('dlc-g-prog',cdProg(g,DLC_GARDEN.length,g+' von '+DLC_GARDEN.length+' Gruppen geschafft'));
+}
+/* „Als besiegt markieren“: Bosse mit w über die Bossseite (cd_bosses, Statistik, Erfolge), alle anderen in cd_r2_dlc_bosse */
+function _dlcKToggle(name){
+  const x=DLC_BOSSES.find(b=>b.name===name);if(!x)return;
+  if(x.w)toggleBossDone(x.w);else cdCheckSet(DLC_K_BOSSE,x.name,!cdCheckGet(DLC_K_BOSSE).has(x.name));
+  _dlcKSync();
+}
+/* 8 Bosse und Garten der Prüfungen (Abschnitt dlc-b-bosse, Besitz: kampf) */
+function _dlcSecBosse(){
+  const N=DLC_BOSSES.length,isD=_dlcKDoneFn(),done=DLC_BOSSES.filter(isD).length,nOcean=DLC_BOSSES.filter(_dlcKOcean).length,gd=cdCheckGet(DLC_K_GARTEN),f=_dlcKF;
+  let b='<div class="sec-stats dlc-k-stats"><div class="sec-stat"><span class="sec-stat-val">'+N+'</span><span class="sec-stat-lbl">Bosse und Gegner</span></div>'
+    +'<div class="sec-stat"><span id="dlc-k-prog">'+cdProg(done,N,done+' von '+N+' besiegt')+'</span><span class="sec-stat-lbl">besiegt</span></div></div>';
+  b+='<div class="dlc-k-notes">'+_dlcList(DLC_BOSS_NOTES,'dlc-list--note')+'</div>';
+  b+='<div class="dlc-k-bar">'+cdPills([{v:'all',t:'Alle',n:N,on:f.st==='all'},{v:'open',t:'Offen',n:N-done,on:f.st==='open'},{v:'done',t:'Besiegt',n:done,on:f.st==='done'}],{name:'dlc-k-st',label:'Bosse nach Fortschritt filtern'})
+    +(nOcean?cdPills([{v:'all',t:'Alle Orte',on:f.grp==='all'},{v:'ocean',t:'Großer Ozean (th.gl)',n:nOcean,on:f.grp==='ocean'}],{name:'dlc-k-grp',label:'Bosse nach Ort filtern'}):'')+'</div>';
+  b+='<div class="grid" id="dlc-boss-grid">'+DLC_BOSSES.map(x=>_dlcKCard(x,isD(x))).join('')+'</div>';
+  b+='<p class="dlc-k-empty" id="dlc-k-empty" hidden>Keine Bosse in dieser Auswahl.</p>';
+  b+='<div class="dlc-k-sub"><h3 class="dlc-k-h">Garten der Prüfungen</h3><span id="dlc-g-prog">'+cdProg(DLC_GARDEN.filter(g=>gd.has('g'+g.n)).length,DLC_GARDEN.length,'Gruppen geschafft')+'</span></div>';
+  b+=_dlcFacts(DLC_GARDEN_RULES);
+  b+='<div class="dlc-kg-grid">'+DLC_GARDEN.map(g=>_dlcKGarden(g,gd.has('g'+g.n))).join('')+'</div>';
+  b+='<div class="dlc-k-notes">'+_dlcList([DLC_GARDEN_NOTE],'dlc-list--note')+'</div>';
+  return {title:'Bosse und Garten der Prüfungen',lead:'Gegner aus den DLC-Questreihen, teils mit bekannten Namen aus dem Hauptspiel, und die '+DLC_GARDEN.length+' Gruppen im Garten der Prüfungen mit Belohnung.',icon:'☠',
+    chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b,flat:true,
+    after:function(){
+      _dlcKSync();
+      const sec=document.getElementById('sec-dlc-kampf');
+      if(sec&&!sec._dlcKObs&&window.MutationObserver){sec._dlcKObs=new MutationObserver(()=>{if(sec.classList.contains('active'))_dlcKSync();});sec._dlcKObs.observe(sec,{attributes:true,attributeFilter:['class']});}
+    }};
+}
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail;if(!d)return;
+  if(d.name==='dlc-k-st')_dlcKF.st=d.value||'all';else if(d.name==='dlc-k-grp')_dlcKF.grp=d.value||'all';else return;
+  _dlcKSync();
+});
+document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===DLC_K_GARTEN)_dlcKSync();});
+/* 9 Burgen, Wohnen, Verwaltung, Soziales (Abschnitt dlc-b-leben, Besitz: sammeln) */
+function _dlcSecLeben(){
+  const HOMES=_dlcA(()=>DLC_HOMES);
   const gruppen=[...new Set(DLC_LIVING.map(x=>x.g))];
-  b=gruppen.map(g=>_dlcH(g)+'<ul class="dlc-list dlc-list--rows">'+DLC_LIVING.filter(x=>x.g===g).map(x=>'<li><b>'+cdEsc(x.t)+'</b> '+_dlcV(x.d)+'</li>').join('')+'</ul>').join('');
-  if(HOMES.length)b+=_dlcH('Wohnsitze ('+HOMES.length+')')+_dlcTbl(['Wohnsitz','Ort','Erwerb','Hinweis'],HOMES.map(x=>({c:x.c,
+  let b=gruppen.map(g=>_dlcH(g)+'<ul class="dlc-list dlc-list--rows">'+DLC_LIVING.filter(x=>x.g===g).map(x=>'<li><b>'+cdEsc(x.t)+'</b> '+_dlcV(x.d)+'</li>').join('')+'</ul>').join('');
+  if(HOMES.length)b+=_dlcH('Wohnsitze ('+HOMES.length+')')+_dlcSCards(HOMES.map(x=>_dlcSCard({name:x.name,de:x.de,c:x.c,q:x.q,glyph:'⌂',
     s:[x.name,_dlcP(x.where),_dlcP(x.how),_dlcP(x.note)].join(' '),
-    cells:[_dlcName(x),_dlcCell(x.where,true),_dlcCell(x.how,true),_dlcCell(x.note)]})),{cap:'Wohnsitze'});
+    rows:[['Ort',_dlcCell(x.where,true)],['Erwerb',_dlcCell(x.how,true)],['Hinweis',_dlcCell(x.note)]]})));
   b+='<p class="dlc-p">Camp-Ausbau und Voraussetzungen: '+cdGoLink('camp','','Graumähnen-Camp')+'</p>';
-  add('leben',{title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
-    chips:gruppen.map(g=>({t:g})),body:b});
-
-  /* 10 Neue DLC-Ausrüstung (datengetrieben aus WEAPONS/ARMOR) */
-  b=_dlcList(DLC_GEAR_NOTES,'dlc-list--note');
-  if(G.w.length){
-    b+=_dlcH('Waffen ('+G.w.length+')')+_dlcTbl(['Waffe','Typ','ATK','Fundort'],G.w.map(w=>({s:[w.name,w.type,w.source,w.notes].join(' '),
-      cells:[_dlcIco(WEAPON_IMGS[w.name])+'<button type="button" class="dlc-lnk" onclick="waffeZeigeTeil(\''+escJsStr(w.name)+'\')">'+cdEsc(w.name)+'</button>',cdEsc(w.type||''),w.atk!=null?_dlcQ(w.atk,w):(w.def!=null?_dlcQ('DEF '+w.def,w):'<span class="dlc-nb">nicht erfasst</span>'),cdEsc(w.source||'')]})),{cap:'DLC-Waffen'});
-  }
-  if(G.a.length){
-    b+=_dlcH('Rüstungen ('+G.a.length+')')+_dlcTbl(['Rüstung','Teil','Effekt','Fundort'],G.a.map(a=>({s:[a.name,a.type,a.effect,a.source,a.notes].join(' '),
-      cells:[_dlcIco(ARMOR_IMGS[a.name])+'<button type="button" class="dlc-lnk" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">'+cdEsc(a.name)+'</button>',cdEsc(a.type||''),_dlcQ(a.effect||'',a),cdEsc(a.source||'')]})),{cap:'DLC-Rüstungen'});
-  }
-  if(G.e.length){
-    b+=_dlcH('Weitere Ausrüstung ('+G.e.length+')')+_dlcTbl(['Name','Art','Slot','Charakter','Werte','Erhalt'],G.e.map(g=>{
-      const s=_dlcV(g.source),r=_dlcV(g.req);
-      return {c:g.c,s:[g.name,_dlcP(g.kind),_dlcP(g.slot),_dlcP(g.char),_dlcP(g.stats),_dlcP(g.source),_dlcP(g.req)].join(' '),
-        cells:[_dlcIco(_dlcImg(g.name))+_dlcName(g),_dlcCell(g.kind,true),_dlcCell(g.slot,true),_dlcCell(g.char,true),_dlcCell(g.stats,true),
-          (s||r)?s+(r?(s?'<br>':'')+'Voraussetzung: '+r:''):'<span class="dlc-nb">nicht belegt</span>']};
-    }),{cap:'Weitere DLC-Ausrüstung'});
-  }
-  if(G.x.length)b+=cdNote({h:'Neue Accessoires: '+G.x.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+[x.type,x.source].filter(Boolean).map(cdEsc).join(', ')+')').join('; ')+'. Details auf der Seite '+cdGoLink('accessories','','Accessoires')+'.'},{kind:'info',title:'Accessoires'});
-  if(G.k.length)b+=cdNote({h:'Neue Abyss-Kerne: '+G.k.map(x=>'<b>'+cdEsc(x.name)+'</b> ('+[x.slot,x.source].filter(Boolean).map(cdEsc).join(', ')+')').join('; ')+'. Details auf der Seite '+cdGoLink('cores','','Abyss-Ausrüstung')+'.'},{kind:'info',title:'Abyss-Kerne'});
-  if(!nGear)b+=cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'});
+  return {title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
+    chips:gruppen.map(g=>({t:g})),body:b};
+}
+/* ===== DLC-A (Ausrüstung, Arbeiter gear): Karten wie auf den Seiten Waffen und Rüstungen =====
+   Waffen und Rüstungen nutzen _wepCardHtml/_armorCardHtml (dieselben Karten wie die Vorbildseiten, ohne Stern, mit .map-pin-btn).
+   Weitere Ausrüstung, Accessoire und Abyss-Kerne sind .card im selben Aufbau (Kopf, .ct, .cm, .crows/.crow, details.item-more).
+   Filter: cdPills name "dlc-gear" blendet Gruppen (.dlc-a-grp) per hidden aus und setzt data-filtered auf deren Karten (Suche respektiert das). */
+const DLC_A_GLYPH={'Abyss-Ausrüstung':'⧫','Taucher-Zubehör':'◎','Wagenausrüstung':'⚙','Haustier-Ausrüstung':'✦','Reittier-Ausrüstung':'♞','Werkzeug':'⚒','Ausrüstung':'✦'};
+function _dlcA_row(l,v,cls){return '<div class="crow"><span class="cl">'+cdEsc(l)+'</span><span class="cv'+(cls?' '+cls:'')+'">'+v+'</span></div>';}
+/* Erster Wert mit Vermerk (c unb/nb) in x, sonst null; für den sichtbaren Hinweis an eingeklappten Zeilen. */
+function _dlcA_bad(x){if(x==null)return null;if(Array.isArray(x)){for(const y of x){const b=_dlcA_bad(y);if(b)return b;}return null;}const o=_dlcObj(x);return o.c&&o.c!=='ok'?o:null;}
+/* Kopf einer bildlosen Karte: Akzentleiste und Glyphe wie die bildlose Waffenkarte (grad = optionaler Verlauf, svg = fertiges Symbol). */
+function _dlcA_hd(glyph,svg,grad){
+  return '<div class="dlc-a-hd2"'+(grad?' style="background:'+grad+'"':'')+'>'+(svg||'<i class="cd-g" aria-hidden="true">'+cdEsc(glyph||'✦')+'</i>')+'</div>';
+}
+/* Bildkopf 90 px wie auf den Vorbildseiten (Klassen statt Inline-Style), mit Rückfall: kaputtes Bild blendet den Kopf aus. */
+function _dlcA_img(src,alt){
+  return '<div class="dlc-a-img"><img src="'+cdEsc(src)+'" width="78" height="78" loading="lazy" decoding="async" alt="'+cdEsc(alt||'')+'" onerror="this.parentElement.style.display=\'none\'"></div>';
+}
+/* Gemeinsame Karte: o = {id,s,vis,hid,head,name,tags,rows,more,pin:{n,src,t},go} */
+function _dlcA_card(o){
+  return '<div class="card cd-spot dlc-a-card" data-filtered="0" data-s="'+cdEsc(String(o.s).toLowerCase())+'" data-item-id="'+cdEsc(o.id)+'" data-item-hidden="'+cdEsc(o.hid||'')+'" data-item-visible="'+cdEsc(String(o.vis||'').toLowerCase())+'">'
+    +o.head+'<div class="ct">'+o.name+'</div><div class="cm">'+o.tags+'</div><div class="crows">'+o.rows+(o.more||'')+'</div>'
+    +(o.go?'<div class="dlc-a-go">'+o.go+'</div>':'')
+    +'<button class="map-pin-btn" onclick="showMapLoc(\''+escJsStr(o.id)+'\',\''+escJsStr(o.pin)+'\',\''+escJsStr(o.pt)+'\')">'+foBtn(o.id)+'</button></div>';
+}
+/* Aufklapper „Quelle / Notiz“ wie auf den Vorbildseiten; flag = sichtbarer Vermerk in der Kopfzeile, wenn drinnen etwas unbestätigt oder nicht belegt ist. */
+function _dlcA_more(label,rows,flag){
+  return '<details class="item-more"><summary onclick="this.parentElement.removeAttribute(\'data-srch-open\')">'+cdEsc(label)+(flag?' '+_dlcFlag(flag.c,flag.q):'')+'</summary><div class="item-more-body">'+rows+'</div></details>';
+}
+/* Weitere Ausrüstung (DLC_GEAR_EXTRA): Art als Etikett, Slot/Charakter/Werte als Zeilen, Erhalt und Voraussetzung im Aufklapper. */
+function _dlcA_extraCard(g,img){
+  const kind=_dlcP(g.kind),base=kind.replace(/\s*\(.*$/,''),slot=_dlcV(g.slot),chr=_dlcV(g.char),st=_dlcV(g.stats),src=_dlcV(g.source),req=_dlcV(g.req);
+  const vis=[g.name,g.de,kind,_dlcP(g.slot),_dlcP(g.char),_dlcP(g.stats)].join(' ');
+  const hid=[_dlcP(g.source),_dlcP(g.req),g.q].filter(Boolean).join(' ');
+  const bad=_dlcA_bad(g.source)||_dlcA_bad(g.req);
+  let rows=(slot?_dlcA_row('Slot',slot):'')+(chr?_dlcA_row('Charakter',chr):'')+_dlcA_row('Werte',st||'<span class="dlc-nb">nicht belegt</span>');
+  const more=_dlcA_more(req?'Erhalt / Voraussetzung':'Erhalt',_dlcA_row('Erhalt',src||'<span class="dlc-nb">nicht belegt</span>','dlc-a-sm')+(req?_dlcA_row('Voraussetzung',req,'dlc-a-sm'):''),bad);
+  return _dlcA_card({id:g.name,s:[vis,hid,'dlc'].join(' '),vis:vis,hid:hid,
+    head:img?_dlcA_img(img,g.name):_dlcA_hd(DLC_A_GLYPH[base]),
+    name:_dlcName(g),tags:'<span class="tag tx">'+cdEsc(kind)+'</span>',rows:rows,more:more,pin:_dlcP(g.source),pt:'Ausrüstung — '+kind});
+}
+function _dlcA_accCard(a){
+  const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
+  const hid=[a.source,a.notes].filter(Boolean).join(' ');
+  return _dlcA_card({id:a.name,s:[a.name,a.type,a.effect,a.source,a.notes,'dlc '+a.dlc].join(' '),vis:[a.name,a.type,a.effect].join(' '),hid:hid,
+    head:_dlcA_hd('',accTypeIcon(a.type),accTypeGrad(a.type)),name:cdEsc(a.name),
+    tags:'<span class="tag '+badge+'">'+cdEsc(a.type)+'</span>'+_dlcTag(a),
+    rows:_dlcA_row('Effekt',cdEsc(a.effect),'dlc-a-eff')+_dlcA_more('Quelle / Notiz',_dlcA_row('Quelle',cdEsc(a.source),'dlc-a-sm')+(a.notes?_dlcA_row('Notiz',cdEsc(a.notes),'dlc-a-sm dlc-a-dim'):'')),
+    pin:a.source,pt:'Accessoire — '+a.type});
+}
+function _dlcA_coreCard(c){
+  const m=(typeof R2B13_SLOT!=='undefined'&&R2B13_SLOT[c.slot])||{g:'⧫',t:c.slot||''};
+  const hid=c.source||'';
+  return _dlcA_card({id:c.name,s:[c.name,c.effect,c.source,c.slot,slotDe(c.slot),'dlc '+c.dlc].join(' '),vis:[c.name,c.effect,m.t].join(' '),hid:hid,
+    head:_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(m.t)+'</span>'+_dlcTag(c),
+    rows:_dlcA_row('Effekt',cdEsc(c.effect),'dlc-a-eff')+_dlcA_more('Quelle',_dlcA_row('Quelle',cdEsc(c.source),'dlc-a-sm')),
+    pin:c.source,pt:'Abyss-Kern — '+(m.t||'')});
+}
+function _dlcA_hdr(tag,glyph,title,n,go){
+  return '<div class="dlc-a-hd">'+(glyph?'<i class="cd-g" aria-hidden="true">'+cdEsc(glyph)+'</i>':'')+'<'+tag+' class="sub-t dlc-a-t">'+cdEsc(title)+'</'+tag+'><span class="dlc-a-n">'+n+'</span>'+(go||'')+'</div>';
+}
+/* 10 Neue DLC-Ausrüstung (datengetrieben aus WEAPONS/ARMOR) (Abschnitt dlc-b-ausruestung, Besitz: gear) */
+function _dlcSecGear(){
+  const G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
+  let b=cdNote({h:_dlcList(DLC_GEAR_NOTES,'dlc-list--note')},{kind:'info',title:'Zum Stand der DLC-Ausrüstung'});
   const gearNames=new Set(G.w.map(w=>w.name));
   const tools=DLC_GEAR_TOOLS.filter(t=>!gearNames.has(t));
   if(tools.length)b+=cdNote({h:'Offiziell neu sind im Kampf einsetzbare Alltagswerkzeuge: '+tools.map(t=>'<b>'+cdEsc(t)+'</b> ('+cdEsc(DLC_GEAR_TOOLS_DE[t]||'')+')').join(', ')+'. '+_dlcV({v:'Werte, Fundort und Waffentyp',c:'nb'})},{kind:'info',title:'Kampf-Alltagswerkzeuge'});
-  b+='<p class="dlc-p">Alle Einträge tragen auf den Seiten '+cdGoLink('weapons','','Waffen')+' und '+cdGoLink('armor','','Rüstungen')+' das Etikett <span class="tag tdlc">DLC</span>.</p>';
-  add('ausruestung',{title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',
-    chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}].concat(G.x.length?[{v:G.x.length,t:'Accessoires'}]:[],G.k.length?[{v:G.k.length,t:'Abyss-Kerne'}]:[],G.e.length?[{v:G.e.length,t:'Weitere'}]:[]),body:b});
-
-  /* 11 Was noch offen ist */
-  add('offen',{title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
-    chips:[{v:DLC_OPEN.length,t:'offene Punkte',c:'warn'}],body:'<ol class="dlc-ol">'+DLC_OPEN.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'});
-
-  /* Teil-Zuordnung: Abschnitt -> Teil, über die Schlüssel in DLC_PARTS */
-  const partOf={};Object.keys(DLC_PARTS).forEach(p=>DLC_PARTS[p].keys.forEach(k=>{partOf['dlc-b-'+k]=p;}));
-  const all=B.slice();
-  B.length=0;
-  all.forEach(o=>{
-    if(P){if(partOf[o.id]===part)B.push(Object.assign({},o,{open:true}));}
-    else if(!partOf[o.id])B.push(o);
-  });
-  let jump;
-  if(P){
-    jump='<nav class="dlc-jump" aria-label="Weitere DLC-Bereiche">'+cdGoLink('dlc','','DLC-Übersicht: Schiffe, Inseln, Tauchen','dlc-jl')
-      +Object.keys(DLC_PARTS).filter(p=>p!==part).map(p=>cdGoLink(DLC_PARTS[p].sec,'','DLC · '+DLC_PARTS[p].res,'dlc-jl')).join('')+'</nav>';
-  }else{
-    /* Übersicht: eigene Abschnitte als Sprung, dazu Wegweiser in die DLC-Seiten der anderen Kategorien */
-    jump='<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>'
-      +'<div class="dlc-parts" role="list" aria-label="Charting the Unknown in den anderen Kategorien">'+Object.keys(DLC_PARTS).map(p=>{
-        const D=DLC_PARTS[p],t=all.find(o=>o.id==='dlc-b-'+D.keys[0]);
-        return '<a role="listitem" class="dlc-part cd-spot" href="'+cdGoHref(D.sec,'')+'" data-go="'+D.sec+'">'
-          +'<span class="dlc-part-k">'+cdEsc(D.res)+'</span><b class="dlc-part-t">'+cdEsc(t?t.title:D.res)+'</b>'
-          +'<span class="dlc-part-n">'+_dlcPartCount(p)+'</span>'+cdIcon('go')+'</a>';
-      }).join('')+'</div>';
+  b+='<p class="dlc-p dlc-a-link">Alle Einträge tragen auf den Seiten '+cdGoLink('weapons','','Waffen')+' und '+cdGoLink('armor','','Rüstungen')+' das Etikett <span class="tag tdlc">DLC</span>.</p>';
+  if(!nGear)return {title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',flat:true,
+    chips:[],body:b+cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'})};
+  const nW=G.w.length,nA=G.a.length,nX=G.x.length+G.k.length+G.e.length;
+  b+=cdPills([{v:'all',t:'Alle',n:nW+nA+nX,on:true},{v:'w',t:'Waffen',g:'†',n:nW},{v:'a',t:'Rüstungen',g:'◈',n:nA},{v:'x',t:'Weitere',g:'✦',n:nX}].filter(p=>p.v==='all'||p.n>0),{name:'dlc-gear',label:'DLC-Ausrüstung filtern',wrap:true,cls:'dlc-a-pills'});
+  if(nW)b+='<section class="ruin-region dlc-a-grp" data-grp="w">'+_dlcA_hdr('h3','†','Waffen',nW)+'<div class="grid dlc-a-grid" id="dlc-wep-grid">'+G.w.map(w=>_wepCardHtml(w,false)).join('')+'</div></section>';
+  if(nA){
+    const ord=typeof ARMOR_TYPE_ORDER!=='undefined'?ARMOR_TYPE_ORDER:[];
+    const arm=G.a.slice().sort((p,q)=>(ord.indexOf(p.type)-ord.indexOf(q.type))||p.name.localeCompare(q.name,'de'));
+    b+='<section class="ruin-region dlc-a-grp" data-grp="a">'+_dlcA_hdr('h3','◈','Rüstungen',nA)+'<div class="grid dlc-a-grid" id="dlc-arm-grid">'+arm.map(a=>_armorCardHtml(a,false)).join('')+'</div></section>';
   }
-  const legend=cdNote({h:'Belegt heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. <span class="dlc-unb">Grau mit Vermerk '+_dlcFlag('unb')+'</span> nennt nur eine Quelle, <span class="dlc-nb">'+_dlcFlag('nb')+'</span> heißt gesucht, aber nichts gefunden. Item-, Orts-, Boss- und Questnamen stehen in der englischen Spielschreibweise.'},{kind:'info',title:'So liest du die Seite'});
-  h+=jump+legend+'<div class="cd-folds dlc-folds">'+B.map(o=>cdFold(Object.assign({},o,{s:o.title+' '+_dlcPlain(o.body)}))).join('')+'</div>';
-  h+=cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+  if(nX){
+    b+='<section class="ruin-region dlc-a-grp" data-grp="x">'+_dlcA_hdr('h3','✦','Weitere Ausrüstung',nX);
+    const sub=(id,title,n,cards,go)=>'<section class="ruin-region dlc-a-sub">'+_dlcA_hdr('h4','',title,n,go)+'<div class="grid dlc-a-grid" id="dlc-ext-'+id+'">'+cards+'</div></section>';
+    if(G.x.length)b+=sub('acc','Accessoires',G.x.length,G.x.map(_dlcA_accCard).join(''),'<span class="dlc-a-gol">'+cdGoLink('accessories','','Auf der Seite Accessoires')+'</span>');
+    if(G.k.length)b+=sub('cores','Abyss-Kerne',G.k.length,G.k.map(_dlcA_coreCard).join(''),'<span class="dlc-a-gol">'+cdGoLink('cores','','Auf der Seite Abyss-Ausrüstung')+'</span>');
+    const order=[],by={};
+    G.e.forEach(g=>{const base=_dlcP(g.kind).replace(/\s*\(.*$/,'')||'Weitere';if(!by[base]){by[base]=[];order.push(base);}by[base].push(g);});
+    order.forEach(base=>{
+      const list=by[base],all=_dlcAllImg(list,g=>_dlcImg(g.name));
+      let title=base;
+      if(base==='Ausrüstung'){const ps=[...new Set(list.map(g=>(/\(([^)]*)\)/.exec(_dlcP(g.kind))||[])[1]).filter(Boolean))];if(ps.length)title=base+' ('+ps.join(', ')+')';}
+      b+=sub('x-'+cdSlug(base),title,list.length,list.map(g=>_dlcA_extraCard(g,all?_dlcImg(g.name):'')).join(''));
+    });
+    b+='</section>';
+  }
+  return {title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',flat:true,
+    chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}].concat(G.x.length?[{v:G.x.length,t:'Accessoires'}]:[],G.k.length?[{v:G.k.length,t:'Abyss-Kerne'}]:[],G.e.length?[{v:G.e.length,t:'Weitere'}]:[]),body:b};
+}
+/* Filter der Gruppen (Pillen „dlc-gear“): Gruppe per hidden aus, Karten data-filtered=1, damit die Suche sie nicht zurückholt */
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail;if(!d||d.name!=='dlc-gear')return;
+  const root=document.getElementById('dlc-root-ausruestung');if(!root)return;
+  const v=d.value||'all';
+  root.querySelectorAll('.dlc-a-grp').forEach(g=>{
+    const ok=v==='all'||g.dataset.grp===v;
+    g.hidden=!ok;
+    g.querySelectorAll('[data-s]').forEach(el=>{el.dataset.filtered=ok?'0':'1';if(ok)el.classList.remove('hide');});
+  });
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  _collapseEmptyGroups(root,false);
+  if(q){_reapplyActiveSearch(root);_collapseEmptyGroups(root,true);}
+});
+/* Großansicht per Klick aufs Bild wie auf den Vorbildseiten (deren Klick-Handler kennt nur die eigenen Raster) */
+document.addEventListener('click',e=>{
+  if(e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey)return;
+  const t=e.target;
+  if(!t||!t.closest||t.closest('#card-focus')||t.closest('a,button,input,select,textarea,label,summary'))return;
+  const area=t.tagName==='IMG'?t:(t.firstElementChild&&t.children.length===1&&t.firstElementChild.tagName==='IMG'?t:null);
+  if(!area)return;
+  const card=area.closest('.card');
+  if(!card||!card.closest('#dlc-root-ausruestung')||card.classList.contains('hide'))return;
+  openCardFocus(card);
+});
+/* 11 Was noch offen ist (Abschnitt dlc-b-offen, Besitz: sammeln) */
+function _dlcSecOffen(){
+  return {title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
+    chips:[{v:DLC_OPEN.length,t:'offene Punkte',c:'warn'}],body:'<ol class="dlc-ol">'+DLC_OPEN.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'};
+}
+/* Kopf je Ansicht (Fundament, Orchestrator). part leer = Übersicht. Szenen-Schlüssel aus SCENES (d09):
+   Übersicht roadmap (Schiff mit Kliff, Damiane, Oongka über dem Wasser), Kampf cl-bosses (Queen Stoneback Crab; der DLC hat
+   die Scrap Metal Queen Stoneback Crab), Ausrüstung cl-weapons, Quests q-faction (Graumähnen-Lager; DLC-Questreihen sind
+   Graumähnen-Fraktionsquests), Sammeln mg-angeln (Steg mit Ruderboot, Startseiten-Kachel „Herstellen & Sammeln“). */
+const DLC_HEAD_SCENES={dlc:['roadmap'],kampf:['cl-bosses'],ausruestung:['cl-weapons'],quests:['q-faction','q-side'],sammeln:['mg-angeln']};
+function _dlcHead(part){
+  const P=part?DLC_PARTS[part]:null,G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
+  const PART_STATS={kampf:[[DLC_BOSSES.length,'Bosse und Gegner'],[DLC_GARDEN.length,'Gruppen im Garten']],
+    ausruestung:[[G.w.length,'Waffen'],[G.a.length,'Rüstungsteile'],[G.x.length+G.k.length+G.e.length,'Weitere Ausrüstung']],
+    quests:[[DLC_QUESTS.length,'Questreihen'],[DLC_QUESTS.reduce((n,q)=>n+(Array.isArray(q.steps)?q.steps.filter(Boolean).length:0),0),'Schritte erfasst']],
+    sammeln:[[DLC_SHIP_PARTS.length,'Schiffsteile'],[new Set(DLC_SHIP_PARTS.map(p=>p.type)).size,'Typen']]};
+  /* Szenen (K1): kein eigenes DLC-Bild vorhanden, daher Motive, die die Vorbildseiten derselben Kategorie nutzen. */
+  return P?cdHero({kicker:'Erster DLC · '+P.res,title:'Charting the Unknown',sub:P.sub,glyph:'⚓',tone:'ice',stats:PART_STATS[part],
+      scene:{keys:DLC_HEAD_SCENES[part]||[]},cls:'dlc-hero dlc-hero--'+part})
+    :cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',scene:{keys:DLC_HEAD_SCENES.dlc},cls:'dlc-hero',
+    sub:'Schiffe, Pywels Großer Ozean mit unerschlossenen Inseln, Tauchen, Unterwasser-Reittiere, neue Questreihen, der Garten der Prüfungen, Burgen und Ehe: alles Neue aus dem DLC an einem Ort.',
+    glyph:'⚓',tone:'ice',stats:[[DLC_SHIPS.length,'Schiffe'],[DLC_ISLANDS.length,'Inseln benannt'],[DLC_GARDEN.length,'Gruppen im Garten'],[nGear,'DLC-Ausrüstung im Wiki']]});
+}
+/* Wegweiser der Übersicht in die DLC-Seiten der anderen Kategorien (Besitz: sammeln). Kacheln wie auf der Startseite (so-tile / r2b11-t):
+   Glyphe der Kategorie, Kategorie, Titel, Anzahl, Eisblau als Akzent. Einheit = Beschriftung der Kennzahl im Kopf der Teilseite. */
+const _DLC_S_WEGE={kampf:'Bosse und Gegner',ausruestung:'Ausrüstungen im Wiki',quests:'Questreihen',sammeln:'Schiffsteile'};
+function _dlcSecWege(){
+  return '<div class="dlcs-wege" role="list" aria-label="Charting the Unknown in den anderen Kategorien">'+Object.keys(DLC_PARTS).map(p=>{
+    const D=DLC_PARTS[p],r=typeof RESSORT_BY_ID!=='undefined'?RESSORT_BY_ID[p]:null;
+    return '<a role="listitem" class="so-tile dlcs-t cd-spot" href="'+cdGoHref(D.sec,'')+'" data-go="'+D.sec+'">'
+      +'<span class="so-tile-g" aria-hidden="true"><i class="cd-g">'+cdEsc(r&&r.glyph||'⚓')+'</i></span>'
+      +'<span class="so-tile-body"><span class="so-tile-en dlcs-k">'+cdEsc(D.res)+'</span>'
+      +'<span class="so-tile-top"><b class="so-tile-n dlcs-tt">'+cdEsc(D.t||D.res)+'</b><span class="so-tile-c dlcs-n">'+_dlcPartCount(p)+'</span></span>'
+      +'<span class="so-tile-d">'+cdEsc(_DLC_S_WEGE[p]||'')+'</span></span>'
+      +'<span class="dlcs-arr" aria-hidden="true">'+cdIcon('go')+'</span></a>';
+  }).join('')+'</div>';
+}
+/* Sprungleiste: Teilseite = Übersicht + die anderen Teilseiten; Übersicht = eigene Abschnitte, dann Wegweiser */
+function _dlcJump(part,B){
+  if(part)return '<nav class="dlc-jump" aria-label="Weitere DLC-Bereiche">'+cdGoLink('dlc','','DLC-Übersicht: Schiffe, Inseln, Tauchen','dlc-jl')
+    +Object.keys(DLC_PARTS).filter(p=>p!==part).map(p=>cdGoLink(DLC_PARTS[p].sec,'','DLC · '+DLC_PARTS[p].res,'dlc-jl')).join('')+'</nav>';
+  return '<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>'+_dlcSecWege();
+}
+function _dlcLegend(){
+  return cdNote({h:'Belegt heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. <span class="dlc-unb">Grau mit Vermerk '+_dlcFlag('unb')+'</span> nennt nur eine Quelle, <span class="dlc-nb">'+_dlcFlag('nb')+'</span> heißt gesucht, aber nichts gefunden. Item-, Orts-, Boss- und Questnamen stehen in der englischen Spielschreibweise.'},{kind:'info',title:'So liest du die Seite'});
+}
+function _dlcFoot(){
+  const M=DLC_META;
+  return cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+}
+/* Sammelt die Abschnitte der Ansicht. Reihenfolge = Reihenfolge auf der Übersicht. Ein Abschnitt steht auf der
+   Teilseite, deren DLC_PARTS[..].keys seinen Schlüssel enthält, sonst auf der Übersicht (nie doppelt). */
+function renderDlc(part){
+  const P=part?DLC_PARTS[part]:null;if(part&&!P)return;
+  const root=document.getElementById(P?'dlc-root-'+part:'dlc-root');if(!root)return;
+  if(typeof DLC_META==='undefined'){root.innerHTML=cdNote('Die Daten dieser Seite (data/d12-dlc.js) konnten nicht geladen werden. Bitte die Seite neu laden.',{kind:'warn'});return;}
+  const SECS=[['zugang',_dlcSecZugang],['schiffe',_dlcSecSchiffe],['teile',_dlcSecTeile],['inseln',_dlcSecInseln],['tauchen',_dlcSecTauchen],
+    ['reittiere',_dlcSecReittiere],['quests',_dlcSecQuests],['bosse',_dlcSecBosse],['leben',_dlcSecLeben],['ausruestung',_dlcSecGear],['offen',_dlcSecOffen]];
+  const partOf={};Object.keys(DLC_PARTS).forEach(p=>DLC_PARTS[p].keys.forEach(k=>{partOf[k]=p;}));
+  const B=SECS.filter(([k])=>P?partOf[k]===part:!partOf[k])
+    .map(([k,f])=>Object.assign({id:'dlc-b-'+k,tone:'ice',cls:'dlc-fold'},f(),P?{open:true}:{}));
+  const flats=B.filter(o=>P&&o.flat),folds=B.filter(o=>!(P&&o.flat));
+  let h=_dlcHead(part)+_dlcJump(part,B)+_dlcLegend();
+  h+=flats.map(o=>'<section class="dlc-flat" id="'+cdEsc(o.id)+'" aria-label="'+cdEsc(_dlcPlain(o.title))+'">'+(typeof o.body==='function'?o.body():o.body||'')+'</section>').join('');
+  if(folds.length)h+='<div class="cd-folds dlc-folds">'+folds.map(o=>cdFold(Object.assign({},o,{s:o.s!=null?o.s:o.title+' '+_dlcPlain(typeof o.body==='function'?'':o.body)}))).join('')+'</div>';
+  h+=_dlcFoot();
   root.innerHTML=h;
   _dlcIslandsProg();
+  B.forEach(o=>{if(typeof o.after==='function')try{o.after(root);}catch(e){console.warn('DLC after',e);}});
 }
-document.addEventListener('cd-pills',e=>{
-  const d=e.detail;if(!d||d.name!=='dlc-parts')return;
-  const tb=document.getElementById('dlc-parts-tb');if(!tb)return;
-  tb.querySelectorAll('tr').forEach(tr=>{const ok=!d.value||tr.dataset.type===d.value;tr.dataset.filtered=ok?'0':'1';tr.classList.toggle('hide',!ok);});
-});
 document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===DLC_KEY_ISLANDS)_dlcIslandsProg();});
 
 // ===== WEAPONS =====
@@ -13681,6 +14252,35 @@ function changeWepPage(d){
   _wepPage=Math.max(0,_wepPage+d);
   renderWeapons();
   const s=document.getElementById('sec-weapons'); if(s){ if(window.cdMotion)cdMotion.scrollTo(s,{immediate:true}); else s.scrollIntoView({block:'start'}); }
+}
+/* Waffenkarte als reine Funktion (renderWeapons und DLC-Ausrüstung nutzen sie; Markup byte-gleich zum früheren Inline-Template). */
+function _wepCardHtml(w,wasOpen){
+    const sourceText=w.source&&w.source.trim()?w.source:'Sammelimport';
+    const s=[w.name,w.type,sourceText,w.built_in,w.notes,w.dlc?'dlc '+w.dlc:''].join(' ').toLowerCase();
+    const hidden=[sourceText,w.notes].filter(Boolean).join(' ');
+    const visible=[w.name,w.type,w.built_in,w.def,w.atk,w.crit,w.slots].filter(v=>v!==undefined&&v!==null&&v!=='').join(' ').toLowerCase();
+    const show=true;
+    const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
+    const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
+    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
+      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
+      <div class="ct">${w.name}</div>
+      <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
+      <div class="crows">
+        <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>')}${w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':''}</span></div>
+        <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
+        <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>
+        ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
+        <details class="item-more"${wasOpen?' open':''}>
+          <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
+          <div class="item-more-body">
+            <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${src}</span></div>
+            ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${w.notes}</span></div>`:''}
+          </div>
+        </details>
+      </div>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>
+    </div>`;
 }
 function renderWeapons(){
   const f=document.getElementById('wf-type').value;
@@ -13708,28 +14308,7 @@ function renderWeapons(){
     // Nicht angezeigte Waffen (andere Seite, Typfilter, kein Suchtreffer) nur als leere Platzhalter: data-s bleibt fuer die
     // Sektions-Chips erhalten, der Aufbau von 500 Karten je Eingabe entfaellt (Pi: ca. 500 ms je Tastendruck).
     if(!show)return `<div class="card hide" data-filtered="1" data-s="${s}" data-item-id="${escHtml(w.name)}"></div>`;
-    const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
-    const wasOpen=savedOpenState[w.name]==='1';
-    const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
-    return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
-      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
-      <div class="ct">${w.name}</div>
-      <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
-      <div class="crows">
-        <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>')}${w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':''}</span></div>
-        <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
-        <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>
-        ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
-        <details class="item-more"${wasOpen?' open':''}>
-          <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
-          <div class="item-more-body">
-            <div class="crow"><span class="cl">Quelle</span><span class="cv" style="font-size:var(--fs-11)">${src}</span></div>
-            ${w.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="font-size:var(--fs-11);color:var(--dim)">${w.notes}</span></div>`:''}
-          </div>
-        </details>
-      </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>
-    </div>`;
+    return _wepCardHtml(w,savedOpenState[w.name]==='1');
   }).join('');
   if(searching){const cnt=document.getElementById('scnt');if(cnt)cnt.textContent=shown+' Treffer';}
   const pg=document.getElementById('weapon-pager');
@@ -15295,28 +15874,14 @@ function armorMat(n){return /\bchain\b/i.test(n)?'Chain':/\bplate\b/i.test(n)?'P
 // sortiert ans Ende.
 function armorNum(eff,key){const vorn=String(eff||'').split('(')[0];const m=new RegExp(key+'\\s*[+→]?\\s*(\\d+)','i').exec(vorn);return m?+m[1]:null;}
 
-// Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
-// Suche laufen ueber armorFilter() und fassen das DOM nicht neu an, sonst wuerde
-// jeder Tastendruck 337 Karten samt <img> neu erzeugen.
-function renderArmor(){
-  const sortEl=document.getElementById('af-sort');
-  const sort=sortEl?sortEl.value:'type';
-  const liste=ARMOR.slice();
-  const savedOpenState=_snapshotOpenItemDetails(document.getElementById('armor-grid'));
-  const nachName=(a,b)=>a.name.localeCompare(b.name,'de');
-  if(sort==='name')liste.sort(nachName);
-  else if(sort==='def')liste.sort((a,b)=>((armorNum(b.effect,'def')??-1)-(armorNum(a.effect,'def')??-1))||nachName(a,b));
-  else if(sort==='atk')liste.sort((a,b)=>((armorNum(b.effect,'atk')??-1)-(armorNum(a.effect,'atk')??-1))||nachName(a,b));
-  else if(sort==='prov')liste.sort((a,b)=>((ARMOR_PROV_ORDER[a.prov]??9)-(ARMOR_PROV_ORDER[b.prov]??9))||nachName(a,b));
-  else liste.sort((a,b)=>(ARMOR_TYPE_ORDER.indexOf(a.type)-ARMOR_TYPE_ORDER.indexOf(b.type))||nachName(a,b));
-  document.getElementById('armor-grid').innerHTML=liste.map(a=>{
+/* Rüstungskarte als reine Funktion (renderArmor und DLC-Ausrüstung nutzen sie; Markup byte-gleich zum früheren Inline-Template). */
+function _armorCardHtml(a,wasOpen){
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
     const sourceText=a.source&&a.source.trim()?a.source:'Sammelimport';
     const s=[a.name,a.type,sourceText,a.effect,a.notes,a.dlc?'dlc '+a.dlc:''].join(' ').toLowerCase();
     const hidden=[sourceText,a.notes].filter(Boolean).join(' ');
     const visible=[a.name,a.type,a.effect].filter(v=>v).join(' ').toLowerCase();
     const srcDisp=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
-    const wasOpen=savedOpenState[a.name]==='1';
     return `<div class="card" data-s="${s}" data-item-id="${escHtml(a.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${a.name}</div>
@@ -15333,6 +15898,23 @@ function renderArmor(){
       </div>
       <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>
     </div>`;
+}
+// Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
+// Suche laufen ueber armorFilter() und fassen das DOM nicht neu an, sonst wuerde
+// jeder Tastendruck 337 Karten samt <img> neu erzeugen.
+function renderArmor(){
+  const sortEl=document.getElementById('af-sort');
+  const sort=sortEl?sortEl.value:'type';
+  const liste=ARMOR.slice();
+  const savedOpenState=_snapshotOpenItemDetails(document.getElementById('armor-grid'));
+  const nachName=(a,b)=>a.name.localeCompare(b.name,'de');
+  if(sort==='name')liste.sort(nachName);
+  else if(sort==='def')liste.sort((a,b)=>((armorNum(b.effect,'def')??-1)-(armorNum(a.effect,'def')??-1))||nachName(a,b));
+  else if(sort==='atk')liste.sort((a,b)=>((armorNum(b.effect,'atk')??-1)-(armorNum(a.effect,'atk')??-1))||nachName(a,b));
+  else if(sort==='prov')liste.sort((a,b)=>((ARMOR_PROV_ORDER[a.prov]??9)-(ARMOR_PROV_ORDER[b.prov]??9))||nachName(a,b));
+  else liste.sort((a,b)=>(ARMOR_TYPE_ORDER.indexOf(a.type)-ARMOR_TYPE_ORDER.indexOf(b.type))||nachName(a,b));
+  document.getElementById('armor-grid').innerHTML=liste.map(a=>{
+    return _armorCardHtml(a,savedOpenState[a.name]==='1');
   }).join('');
   armorFilter();
 }

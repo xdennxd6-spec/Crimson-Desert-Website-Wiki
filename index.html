@@ -6970,13 +6970,6 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 :is(#sec-dlc,.sec-dlcp) .dlc-folds{margin-top:12px}
 :is(#sec-dlc,.sec-dlcp) .cd-note{margin:10px 0}
 /* 01.11.2026: Wegweiser der DLC-Übersicht in die DLC-Seiten der anderen Kategorien; DLC-Blätter der linken Leiste in Eisblau */
-#sec-dlc .dlc-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin:4px 0 14px}
-#sec-dlc .dlc-part{display:grid;grid-template-columns:1fr auto auto;grid-template-rows:auto auto;align-items:center;gap:2px 10px;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-left:3px solid var(--cd-fx-ice);border-radius:10px;background:var(--bg2,transparent);color:inherit;text-decoration:none}
-#sec-dlc .dlc-part:hover,#sec-dlc .dlc-part:focus-visible{border-color:var(--cd-fx-ice);color:var(--ink-hi)}
-#sec-dlc .dlc-part-k{grid-column:1;font-size:var(--fs-11);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
-#sec-dlc .dlc-part-t{grid-column:1;font-weight:600}
-#sec-dlc .dlc-part-n{grid-column:2;grid-row:1/3;font-variant-numeric:tabular-nums;color:var(--cd-fx-ice)}
-#sec-dlc .dlc-part .cd-i{grid-column:3;grid-row:1/3;width:14px;height:14px}
 #conList .leaf[data-sec^="dlc"] .lsym{color:var(--cd-fx-ice)}
 /* Startseite: DLC-Hinweis mit Sprung in die DLC-Seite jeder Kategorie */
 .r2b11-dlc{margin:16px 0 4px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--cd-fx-ice) 45%,var(--line));border-left:3px solid var(--cd-fx-ice);border-radius:12px;background:linear-gradient(100deg,color-mix(in srgb,var(--cd-fx-ice) 10%,transparent),transparent 70%)}
@@ -6987,7 +6980,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .r2b11-dlc-s{margin:6px 0 10px;color:var(--dim)}
 .r2b11-dlc-l{display:flex;flex-wrap:wrap;gap:6px 8px}
 .r2b11-dlc-n{font-variant-numeric:tabular-nums;opacity:.75}
-.dlc-unb,.dlc-nb,.dlc-row-unb>td,.dlc-row-nb>td,.dlc-q.dlc-row-unb .dlc-q-who,.dlc-q.dlc-row-unb .dlc-q-rw,.dlc-ck.dlc-row-unb .cd-check-sub{color:var(--gdim)}
+.dlc-unb,.dlc-nb,.dlc-row-unb>td,.dlc-row-nb>td,.dlc-ck.dlc-row-unb .cd-check-sub{color:var(--gdim)}
 .dlc-flag{display:inline-block;margin-left:2px;padding:0 6px;border:1px dashed currentColor;border-radius:6px;font-style:normal;font-family:var(--f-mono);font-size:var(--fs-10);line-height:1.6;letter-spacing:.02em;vertical-align:1px;white-space:normal;color:var(--gdim)}
 .dlc-n{color:var(--ink-hi);font-weight:700}
 .dlc-row-unb .dlc-n,.dlc-row-nb .dlc-n{color:color-mix(in srgb,var(--ink-hi) 70%,var(--gdim))}
@@ -7012,24 +7005,12 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dlc-tbl td{padding:9px 11px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--text);overflow-wrap:anywhere}
 .dlc-tbl tbody tr:first-child td{border-top:0}
 .dlc-tbl td:first-child{min-width:160px}
-.dlc-tbl--garden td:first-child{min-width:0;width:42px;font-family:var(--f-mono);color:var(--dim)}
-.dlc-bls{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
-.dlc-bl{font-size:12.5px}
-:is(#sec-dlc,.sec-dlcp) .dlc-pills{margin:12px 0 2px}
 .dlc-isl-hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px;font-size:13px;color:var(--dim)}
 .dlc-isl{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:8px}
 .dlc-ck .cd-check-sub{display:block;margin-top:3px;font-size:12.5px;line-height:1.55}
 .dlc-crew{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:8px}
 .dlc-crew li{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);font-size:13px;line-height:1.5;color:var(--text)}
 .dlc-crew b{display:block;color:var(--cd-fx-ice);font-family:var(--f-mono);font-size:12px;letter-spacing:.04em}
-.dlc-qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px;margin-top:10px}
-.dlc-q{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
-.dlc-q-t{margin:0 0 4px;font-size:14.5px;line-height:1.35}
-.dlc-q-who{margin:0 0 8px;font-size:12.5px;color:var(--dim)}
-.dlc-q-sub{margin:0 0 8px}
-.dlc-q-rw{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--text)}
-.dlc-lnk{padding:0;border:0;background:none;color:var(--ink-hi);font:inherit;font-weight:700;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--cd-fx-ice) 55%,transparent);text-underline-offset:3px}
-.dlc-lnk:hover,.dlc-lnk:focus-visible{color:var(--cd-fx-ice)}
 .dlc-checked{margin-top:6px}
 .ctu-pt{display:block;margin-top:2px}
 .ctu-pk{color:var(--dim)}
@@ -7043,8 +7024,6 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .dlc-tbl td:first-child{display:block;min-width:0;padding-top:6px;padding-bottom:6px}
   .dlc-tbl td:first-child::before{display:none}
   .dlc-tbl td:empty{display:none}
-  .dlc-tbl--garden td:first-child{width:auto}
-  .dlc-tbl--garden td:first-child::before{display:inline;content:"Nr. "}
 }
 /* DLC-F Anfang (Fundament dlc-design 01.11.2026: gemeinsame Regeln der fünf DLC-Ansichten; Besitz Orchestrator) */
 :is(#sec-dlc,.sec-dlcp) .dlc-flat{margin:16px 0 0}
@@ -7080,6 +7059,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 #dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div,#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div:nth-child(1),#dlc-boss-grid .boss-more .boss-more-body .datagrid.dlc-k-dg>div:nth-child(2){grid-column:1/-1}
 #dlc-boss-grid .datagrid.dlc-k-dg dt{font-size:max(11px,var(--fs-9))}
 #dlc-boss-grid .datagrid.dlc-k-dg dd{font-size:14px;line-height:1.5}
+#dlc-boss-grid :is(.dlc-k-row-unb,.dlc-k-row-nb) .datagrid.dlc-k-dg dd{color:var(--gdim)}
 #dlc-boss-grid .dlc-k-more-l{font-size:13.5px}
 /* Garten der Prüfungen */
 .dlc-k-sub{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 18px;margin:36px 0 12px}
@@ -13479,13 +13459,13 @@ function _dlcSecReittiere(){
 /* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests). Helfer _dlcQ_* (Achtung: _dlcQ ohne Unterstrich gehört den Waffen/Rüstungen). */
 const _dlcQ_KEY='cd_r2_dlc_quests';
 /* Gruppen der Filter-Pillen, abgeleitet nur per Stichwort aus dem ersten Teil von who (vor dem ersten Komma).
-   Szene je Gruppe: Charakter-Porträts bzw. der Graumähnen-Strang; Ozean-Reihen sind freie Nebenquests (q-side). */
+   Szene je Gruppe: Charakter-Porträts bzw. der Graumähnen-Strang; Ozean-Reihen zeigen das Schiffsmotiv (roadmap, wie der Kopf der Übersicht). */
 const _dlcQ_GROUPS=[
   {v:'kliff',t:'Kliff',g:'K',tone:'red',scene:'char-kliff'},
   {v:'damiane',t:'Damiane',g:'D',tone:'violet',scene:'char-damiane'},
   {v:'oongka',t:'Oongka',g:'O',tone:'amber',scene:'char-oongka'},
   {v:'fraktion',t:'Graumähnen & Fraktion',g:'⚑',tone:'gold',scene:'q-faction'},
-  {v:'ozean',t:'Großer Ozean',g:'⚓',tone:'ice',scene:'q-side'},
+  {v:'ozean',t:'Großer Ozean',g:'⚓',tone:'ice',scene:'roadmap'},
   {v:'weitere',t:'Weitere',g:'❢',tone:'ice',scene:'q-faction'}];
 function _dlcQ_grp(q){
   const w=String(q&&q.who||'').split(',')[0].trim().toLowerCase();
@@ -13637,7 +13617,7 @@ function _dlcKCard(x,isDone){
     .map(r=>'<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>').join('');
   const s=[n,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),x.w||'',qs].join(' ').toLowerCase();
   const vis=[n,dz.p,_dlcPlain(chips)].join(' ').toLowerCase(),hid=[_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note),qs].join(' ').toLowerCase();
-  return '<div class="card cd-spot record-card boss-compact dlc-k-card'+(isDone?' boss-done':'')+'" data-dlc-k="'+cdEsc(n)+'" data-ocean="'+(_dlcKOcean(x)?'1':'0')
+  return '<div class="card cd-spot record-card boss-compact dlc-k-card'+(isDone?' boss-done':'')+(x.c&&x.c!=='ok'?' dlc-k-row-'+(x.c==='nb'?'nb':'unb'):'')+'" data-dlc-k="'+cdEsc(n)+'" data-ocean="'+(_dlcKOcean(x)?'1':'0')
     +'" data-filtered="0" data-s="'+cdEsc(s)+'" data-item-id="'+cdEsc(n)+'" data-item-visible="'+cdEsc(vis)+'" data-item-hidden="'+cdEsc(hid)+'">'
     +'<div class="record-rail"><div class="record-img dlc-k-img"><span class="record-tag">DLC</span><span class="crosshair" aria-hidden="true"></span>'
     +'<div class="boss-done-badge">BESIEGT</div>'+(x.w?favBtn('boss',x.w):'')
@@ -13805,12 +13785,12 @@ function _dlcSecGear(){
   if(!nGear)return {title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',flat:true,
     chips:[],body:b+cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'})};
   const nW=G.w.length,nA=G.a.length,nX=G.x.length+G.k.length+G.e.length;
-  b+=cdPills([{v:'all',t:'Alle',n:nW+nA+nX,on:true},{v:'w',t:'Waffen',g:'†',n:nW},{v:'a',t:'Rüstungen',g:'⛓',n:nA},{v:'x',t:'Weitere',g:'✦',n:nX}].filter(p=>p.v==='all'||p.n>0),{name:'dlc-gear',label:'DLC-Ausrüstung filtern',wrap:true,cls:'dlc-a-pills'});
+  b+=cdPills([{v:'all',t:'Alle',n:nW+nA+nX,on:true},{v:'w',t:'Waffen',g:'†',n:nW},{v:'a',t:'Rüstungen',g:'◈',n:nA},{v:'x',t:'Weitere',g:'✦',n:nX}].filter(p=>p.v==='all'||p.n>0),{name:'dlc-gear',label:'DLC-Ausrüstung filtern',wrap:true,cls:'dlc-a-pills'});
   if(nW)b+='<section class="ruin-region dlc-a-grp" data-grp="w">'+_dlcA_hdr('h3','†','Waffen',nW)+'<div class="grid dlc-a-grid" id="dlc-wep-grid">'+G.w.map(w=>_wepCardHtml(w,false)).join('')+'</div></section>';
   if(nA){
     const ord=typeof ARMOR_TYPE_ORDER!=='undefined'?ARMOR_TYPE_ORDER:[];
     const arm=G.a.slice().sort((p,q)=>(ord.indexOf(p.type)-ord.indexOf(q.type))||p.name.localeCompare(q.name,'de'));
-    b+='<section class="ruin-region dlc-a-grp" data-grp="a">'+_dlcA_hdr('h3','⛓','Rüstungen',nA)+'<div class="grid dlc-a-grid" id="dlc-arm-grid">'+arm.map(a=>_armorCardHtml(a,false)).join('')+'</div></section>';
+    b+='<section class="ruin-region dlc-a-grp" data-grp="a">'+_dlcA_hdr('h3','◈','Rüstungen',nA)+'<div class="grid dlc-a-grid" id="dlc-arm-grid">'+arm.map(a=>_armorCardHtml(a,false)).join('')+'</div></section>';
   }
   if(nX){
     b+='<section class="ruin-region dlc-a-grp" data-grp="x">'+_dlcA_hdr('h3','✦','Weitere Ausrüstung',nX);
