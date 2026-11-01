@@ -7241,10 +7241,13 @@ select.dr-sel-hidden{display:none!important}
 #sec-armor .fbar,#sec-armorsets .fbar{align-items:center;gap:8px 10px;margin-bottom:14px}
 #sec-armor .fbar>input.fs,#sec-armorsets .fbar>input.fs{flex:1 1 220px;max-width:340px;min-width:0!important}
 #sec-armor #af-sort,#sec-armorsets #asf-sort{flex:0 1 auto;max-width:260px;min-width:0}
+#sec-armor input.fs,#sec-armorsets input.fs{background-image:none;padding-right:11px}
 #armor-count,#aset-count{font-size:max(11px,var(--fs-11))!important;font-variant-numeric:tabular-nums}
 #sec-armor .dr-pillrow,#sec-armorsets .dr-pillrow{margin:2px 0 0}
 #sec-armorsets .dr-pillrow{flex:0 1 auto;max-width:100%}
 #sec-armor .dr-pl,#sec-armorsets .dr-pl{font-size:11px}
+@media (min-width:641px){#sec-armor .dr-pl{min-width:96px}}
+#sec-armor .dr-info .cd-fold-ico .cd-i,#sec-armorsets .dr-info .cd-fold-ico .cd-i{width:24px;height:24px}
 .dr-a4-hid{display:none!important}
 /* Info-Box Quellenlage (statisches Markup, die Zahlen füllt der Start-Code über die armor-*-IDs) */
 #sec-armor .dr-a4-quelle .cd-fold-lead b,#sec-armor .dr-a4-quelle .cd-fold-lead span{color:inherit}
@@ -15975,6 +15978,25 @@ function renderArmorSets(){
   _drA4SetsHead();
   _drA4SetsPills();
 }
+/* Suche: steht ein Suchbegriff nur im Aufklapper „Details & Quellen“ einer sichtbaren Set-Karte, klappt er auf (data-srch-open wie bei den Rüstungskarten;
+   die globale Suche schließt solche Aufklapper bei jedem Lauf selbst). Die globale Suche setzt nur die Klasse hide, darum beobachtet ein kleiner Observer das Raster. */
+function _drA4SetsSearchOpen(){
+  const g=document.getElementById('set-grid');if(!g)return;
+  const si=document.getElementById('si'),aq=document.getElementById('asf-q');
+  const need=_fold(((si&&si.value)||'')+' '+((aq&&aq.value)||'')).split(' ').filter(Boolean);
+  if(!need.length)return;
+  g.querySelectorAll('.aset:not(.aset-off):not(.hide)').forEach(k=>{
+    const d=k.querySelector('details.set-more');if(!d||d.open)return;
+    if(k._drHead===undefined)k._drHead=_fold(k.textContent.replace(d.textContent,''));
+    const dt=_fold(d.textContent);
+    if(need.some(w=>!k._drHead.includes(w)&&dt.includes(w))){d.open=true;d.dataset.srchOpen='1';}
+  });
+}
+(function(){
+  const g=document.getElementById('set-grid');if(!g||typeof MutationObserver==='undefined')return;
+  let t=0;
+  new MutationObserver(()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;_drA4SetsSearchOpen();});}).observe(g,{subtree:true,attributes:true,attributeFilter:['class']});
+})();
 /* Umschalt-Pille „alle 5 Plätze“: setzt die versteckte Checkbox, die armorSetFilter liest */
 document.addEventListener('cd-pills',e=>{
   if(!e.detail||e.detail.name!=='dr-a4-full')return;
@@ -15983,6 +16005,7 @@ document.addEventListener('cd-pills',e=>{
 });
 function armorSetFilter(){
   const g=document.getElementById('set-grid');if(!g)return;
+  _closeSearchOpened(g);
   const q=((document.getElementById('asf-q')||{}).value||'').trim().toLowerCase();
   const mat=(document.getElementById('asf-mat')||{}).value||'';
   const full=!!(document.getElementById('asf-full')||{}).checked;
@@ -15997,6 +16020,7 @@ function armorSetFilter(){
   });
   const c=document.getElementById('aset-count');
   if(c)c.textContent=n===karten.length?karten.length+' Sets':n+' von '+karten.length+' Sets';
+  _drA4SetsSearchOpen();
 }
 
 // ===== MOUNTS =====
