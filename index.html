@@ -7236,6 +7236,8 @@ select.dr-sel-hidden{display:none!important}
 .dra2-off{display:none!important}
 #sec-bestiary :is(.tag,.cl),#sec-accessories :is(.tag,.cl,.map-pin-btn,.dr-pl){font-size:var(--fs-11)}
 #sec-bestiary .grid{align-items:start}
+#sec-bestiary .dra2-card{contain-intrinsic-size:auto 380px}
+#sec-accessories .dra2-acc{contain-intrinsic-size:auto 390px}
 #sec-bestiary .dra2-card .boss-img{height:152px}
 #sec-bestiary .dra2-card .boss-img-wrap,#sec-bestiary .dra2-card .boss-img-ph{margin-bottom:12px}
 #sec-bestiary .dra2-card .cm{margin-bottom:9px}
@@ -7243,11 +7245,19 @@ select.dr-sel-hidden{display:none!important}
 .dra2-more{margin-top:2px}
 .dra2-more>summary{min-height:40px}
 .dra2-more .best-note{margin-top:4px}
-#dra2-acc-note .cd-note{margin:0 0 14px;max-width:84ch}
+#dra2-acc-note .cd-note{margin:0 0 14px}
 #sec-accessories .dra2-fbar{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:2px;margin-bottom:16px}
 #sec-accessories .dra2-fbar .dr-pillrow{margin:0 0 6px}
 #sec-accessories .dra2-fbar .dr-pillrow:empty{display:none}
-#sec-accessories .dra2-acc .acc-icon-hd{justify-content:center}
+#sec-accessories .dra2-fbar .dr-pl{min-width:52px}
+#sec-accessories .dra2-acc{--dra2-tc:var(--gold)}
+#sec-accessories .dra2-acc[data-t="Ring"]{--dra2-tc:var(--cd-fx-hp)}
+#sec-accessories .dra2-acc[data-t="Necklace"]{--dra2-tc:var(--cd-fx-res)}
+#sec-accessories .dra2-acc[data-t="Earring"]{--dra2-tc:var(--cd-fx-speed)}
+#sec-accessories .dra2-acc .acc-icon-hd{position:relative;justify-content:center;min-height:140px;padding:10px 15px;overflow:hidden;
+  background:radial-gradient(ellipse 58% 82% at 50% 54%,color-mix(in srgb,var(--dra2-tc) 24%,transparent),transparent 74%),linear-gradient(180deg,color-mix(in srgb,var(--dra2-tc) 9%,transparent),transparent 85%)}
+#sec-accessories .dra2-acc .acc-item-ico{width:112px;height:112px}
+#sec-accessories .dra2-acc .acc-icon-hd>svg{width:56px;height:56px;opacity:.9}
 #sec-accessories .dra2-acc{display:flex;flex-direction:column}
 .dra2-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:auto;padding-top:14px}
 .dra2-acts .defeat-btn{flex:1 1 150px;width:auto;margin-top:0;min-height:40px}
@@ -18478,8 +18488,8 @@ function _drA2AccCard(a,show,have){
   const hid=[a.source,a.notes].filter(Boolean).join(' ');
   const body=`<div class="crow"><span class="cl">Quelle</span><span class="cv">${escHtml(a.source)}</span></div>`
     +(a.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${escHtml(a.notes)}</span></div>`:'');
-  return `<div class="card cd-spot dra2-acc${show?'':' hide'}${have?' dra2-have':''}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}" data-item-id="${escHtml(a.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(hid)}">
-      <div class="acc-icon-hd" style="background:${accTypeGrad(a.type)}">${a.icon?`<img class="acc-item-ico" src="${SYNTH_CDN}${a.icon}" width="78" height="78" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:accTypeIcon(a.type)}</div>
+  return `<div class="card cd-spot dra2-acc${show?'':' hide'}${have?' dra2-have':''}" data-t="${escHtml(a.type)}" data-filtered="${show?'0':'1'}" data-s="${escHtml(s)}" data-item-id="${escHtml(a.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(hid)}">
+      <div class="acc-icon-hd">${a.icon?`<img class="acc-item-ico" src="${SYNTH_CDN}${a.icon}" width="112" height="112" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:accTypeIcon(a.type)}</div>
       <div class="ct">${escHtml(a.name)}</div>
       <div class="cm"><span class="tag ${badge}">${escHtml(a.type)}</span>${a.dlc?' <span class="tag tdlc">DLC</span>':''}</div>
       <div class="crows">
@@ -19018,10 +19028,12 @@ function _drA2BestCard(e,key,title){
 function _drA2BestFilter(v){
   _drA2BestF=v||'all';
   const el=document.getElementById('bestiary-root');if(!el)return;
+  const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
+  /* ohne aktive Suche: von einer früheren Suche übrig gebliebenes .hide der jetzt gezeigten Gruppe entfernen */
   el.querySelectorAll('[data-dra2-g]').forEach(n=>{
     const off=_drA2BestF!=='all'&&n.dataset.dra2G!==_drA2BestF;
     n.classList.toggle('dra2-off',off);
-    if(n.classList.contains('grid'))n.querySelectorAll('.card').forEach(c=>{c.dataset.filtered=off?'1':'0';});
+    if(n.classList.contains('grid'))n.querySelectorAll('.card').forEach(c=>{c.dataset.filtered=off?'1':'0';if(!off&&!q)c.classList.remove('hide');});
   });
   _drA2Reapply(el);
 }
@@ -19042,7 +19054,7 @@ function renderBestiary(){
   drMount('bestiary',drHead({kicker:'Kampf',title:'Gegner',sub:'Normale Gegner und Wildtiere in Pywel.',scene:['reg-hernand'],glyph:'⛤',tone:'ok',
     stats:[[total,'Gegner'],[n.wild,'Wildtiere'],[n.kreaturen,'Monster & Kreaturen'],[n.fraktionen,'Feindliche Fraktionen']],
     links:[['bosses','Bosse'],['npcs','Charaktere & NPCs'],['gatherables','Sammelobjekte'],['disarm','Entwaffnen']],
-    after:drInfo({title:'So liest du die Seite',lead:'Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items).',h:'<p>'+_DRA2_BEST_INTRO+'</p>'})}));
+    after:drInfo({title:'So liest du die Seite',lead:'Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items).',icon:{h:cdIcon('info')},h:'<p>'+_DRA2_BEST_INTRO+'</p>'})}));
   const bar=document.getElementById('dra2-best-bar');
   if(bar)bar.innerHTML=cdPills([{v:'all',t:'Alle',n:total}].concat(GROUPS.map(([k,title])=>{const g=_drA2Split(title);return {v:k,t:g.t,n:n[k],g:_DRA2_BEST_G[k]};}))
     .map(x=>Object.assign(x,{on:x.v===_drA2BestF})),{name:'dra2-best',label:'Gegner nach Gruppe filtern'});
