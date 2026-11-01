@@ -7339,6 +7339,40 @@ select.dr-sel-hidden{display:none!important}
 /* DR-A3 Ende */
 /* ---- */
 /* DR-A4 Anfang (Rüstungen + Rüstungssets) */
+/* Filterzeile: Suche + Sortierung + Zähler in einer Zeile, darunter die Pillenreihen (die Selects sind versteckt, Pillen schreiben in sie) */
+#sec-armor .fbar,#sec-armorsets .fbar{align-items:center;gap:8px 10px;margin-bottom:14px}
+#sec-armor .fbar>input.fs,#sec-armorsets .fbar>input.fs{flex:1 1 220px;max-width:340px;min-width:0!important}
+#sec-armor #af-sort,#sec-armorsets #asf-sort{flex:0 1 auto;max-width:260px;min-width:0}
+#sec-armor input.fs,#sec-armorsets input.fs{background-image:none;padding-right:11px}
+#armor-count,#aset-count{font-size:max(11px,var(--fs-11))!important;font-variant-numeric:tabular-nums}
+#sec-armor .dr-pillrow,#sec-armorsets .dr-pillrow{margin:0 0 6px}
+#sec-armor .dr-pillrow .cd-pills,#sec-armorsets .dr-pillrow .cd-pills{margin-bottom:0}
+#sec-armorsets .dr-pillrow{flex:0 1 auto;max-width:100%}
+#sec-armor .dr-pl,#sec-armorsets .dr-pl{font-size:11px}
+@media (min-width:641px){#sec-armor .dr-pl{min-width:96px}}
+#sec-armor .dr-info .cd-fold-ico .cd-i,#sec-armorsets .dr-info .cd-fold-ico .cd-i{width:24px;height:24px}
+.dr-a4-hid{display:none!important}
+/* Info-Box Quellenlage (statisches Markup, die Zahlen füllt der Start-Code über die armor-*-IDs) */
+#sec-armor .dr-a4-quelle .cd-fold-lead b,#sec-armor .dr-a4-quelle .cd-fold-lead span{color:inherit}
+#sec-armor .dr-a4-quelle .dr-info-b p{max-width:84ch}
+/* Rüstungskarten: nur im eigenen Raster (die DLC-Ansicht nutzt dieselbe Kartenfunktion und bleibt unverändert) */
+#armor-grid .tag,#armor-grid .cl,#armor-grid .dlc-flag,#armor-grid .map-pin-btn{font-size:11px}
+#armor-grid .cm{gap:6px}
+#armor-grid .item-more>summary{min-height:40px}
+/* Set-Karten (Vorbild): nur Mini-Schrift und Tap-Ziele angleichen */
+#sec-armorsets .aset-badge,#sec-armorsets .aset-sv,#sec-armorsets .aset-st,#sec-armorsets .aset-st b,#sec-armorsets .aset-cm,#sec-armorsets .aset-xl,#sec-armorsets .set-tag,#sec-armorsets .set-count,#sec-armorsets .set-quelle{font-size:max(11px,var(--fs-10-5))}
+#sec-armorsets .aset-sl{font-size:11px;letter-spacing:.04em}
+#sec-armorsets .set-more>summary{display:flex;align-items:center;gap:4px;min-height:40px;font-size:max(11px,var(--fs-10))}
+#sec-armorsets .aset-body{padding:14px 16px 16px}
+#sec-armorsets .aset-stats{margin-bottom:12px}
+#sec-armorsets .aset-group .set-count{margin-top:12px}
+/* Hinweis unter der Rüstungsliste: Wegweiser-Optik wie die Köpfe der Vorbildseiten */
+#sec-armor .aset-link{margin:20px 0 6px;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);box-shadow:none}
+#sec-armor .aset-link button{border-width:1px;border-radius:999px;padding:8px 18px}
+@media (max-width:640px){
+  #sec-armor .fbar>input.fs,#sec-armorsets .fbar>input.fs{flex:1 1 100%;max-width:none}
+  #sec-armor #af-sort,#sec-armorsets #asf-sort{flex:1 1 auto;max-width:none}
+}
 /* DR-A4 Ende */
 /* ---- */
 /* DR-B1 Anfang (Builds) */
@@ -8083,14 +8117,14 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-armor">
     <h2 class="sec-t"><span class="sec-sym">⛓</span> Rüstungen <span class="sec-t-en">Armor</span></h2>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Quellenlage:</b> Jedes der <b><span id="armor-total">–</span></b> Teile sagt auf der Karte, <b>woher</b> sein Wert stammt. <b><span id="armor-import">–</span></b> Teile kommen aus dem <b>Datenimport</b> der Spieldateien, <b><span id="armor-guide">–</span></b> sind <b>aus Guides belegt</b> (VULKK, game8, Fextralife, pywel.app, die Datamine-Datenbank gaming.tools, teils die offiziellen Patch Notes), <b><span id="armor-alt">–</span></b> stammen aus dem alten kuratierten Bestand und sind <b>ungeprüft</b> — dort hat der Fakten-Audit vom 02.06.2026 nachweislich erfundene Werte gefunden und die gröbsten entfernt. Bei <b><span id="armor-ohne">–</span></b> Teilen ist überhaupt kein Zahlenwert hinterlegt.<br><b>Welche Stufe?</b> Seit dem Abgleich mit der questlog-Spieldatenbank am 03.10.2026 gilt: „Def +N“ bzw. „Atk +N“ ist die <b>Höchststufe (Refinement +10)</b>, der Grundwert (+0) steht in den Notizen. Teile, die sich nicht aufwerten lassen, sind dort als „nicht aufwertbar“ vermerkt.<br><b>Was die Marke nicht sagt:</b> Sie ist eine Herkunftsangabe, keine Vertrauensnote. „Datenimport“ heißt <b>nicht</b> „gegengeprüft“ — diese Werte hat niemand einzeln gegen einen Guide gehalten, und einzelne von ihnen waren unvollständig. Zwei Beispiele: dem Odeck’s Protector Plate Helm fehlte die Daze-Immunität, dem zugehörigen Mantel Eis-Resistenz&nbsp;Lv3 und der Ausdauer-Malus — beides stand längst in der Set-Beschreibung auf der Seite Rüstungssets. Umgekehrt kann ein „aus Guides belegt“ besser dokumentiert sein als ein Importwert.</div>
+    <div class="cd-folds dr-info-w"><details class="cd-fold cd-spot dr-info dr-a4-quelle" style="--cd-acc:var(--gold)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span><span class="cd-fold-main"><h3 class="cd-fold-t">Zur Quellenlage</h3><span class="cd-fold-lead">Jedes der <b data-dr-n="total">–</b> Teile sagt auf der Karte, <b>woher</b> sein Wert stammt.</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><div class="dr-info-b"><p>Jedes der <b><span id="armor-total">–</span></b> Teile sagt auf der Karte, <b>woher</b> sein Wert stammt. <b><span id="armor-import">–</span></b> Teile kommen aus dem <b>Datenimport</b> der Spieldateien, <b><span id="armor-guide">–</span></b> sind <b>aus Guides belegt</b> (VULKK, game8, Fextralife, pywel.app, die Datamine-Datenbank gaming.tools, teils die offiziellen Patch Notes), <b><span id="armor-alt">–</span></b> stammen aus dem alten kuratierten Bestand und sind <b>ungeprüft</b> — dort hat der Fakten-Audit vom 02.06.2026 nachweislich erfundene Werte gefunden und die gröbsten entfernt. Bei <b><span id="armor-ohne">–</span></b> Teilen ist überhaupt kein Zahlenwert hinterlegt.</p><p><b>Welche Stufe?</b> Seit dem Abgleich mit der questlog-Spieldatenbank am 03.10.2026 gilt: „Def +N“ bzw. „Atk +N“ ist die <b>Höchststufe (Refinement +10)</b>, der Grundwert (+0) steht in den Notizen. Teile, die sich nicht aufwerten lassen, sind dort als „nicht aufwertbar“ vermerkt.</p><p><b>Was die Marke nicht sagt:</b> Sie ist eine Herkunftsangabe, keine Vertrauensnote. „Datenimport“ heißt <b>nicht</b> „gegengeprüft“ — diese Werte hat niemand einzeln gegen einen Guide gehalten, und einzelne von ihnen waren unvollständig. Zwei Beispiele: dem Odeck’s Protector Plate Helm fehlte die Daze-Immunität, dem zugehörigen Mantel Eis-Resistenz&nbsp;Lv3 und der Ausdauer-Malus — beides stand längst in der Set-Beschreibung auf der Seite Rüstungssets. Umgekehrt kann ein „aus Guides belegt“ besser dokumentiert sein als ein Importwert.</p></div></div></details></div>
     <div class="fbar">
       <input class="fs" id="af-q" type="search" placeholder="Rüstung, Fundort, Effekt …" aria-label="Rüstungen durchsuchen" oninput="armorFilter()" style="min-width:190px">
+      <select class="fs" id="af-sort" aria-label="Rüstungen sortieren" onchange="renderArmor()"><option value="type">Sortierung: Typ, dann Name</option><option value="name">Name A–Z</option><option value="def">Defense absteigend</option><option value="atk">Angriff absteigend</option><option value="prov">Quellenlage</option></select>
+      <span id="armor-count" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
       <select class="fs" id="af-type" aria-label="Rüstungen nach Typ filtern" onchange="armorFilter()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
       <select class="fs" id="af-mat" aria-label="Rüstungen nach Material filtern" onchange="armorFilter()"><option value="">Alle Materialien</option><option value="Plate">Plate</option><option value="Leather">Leather</option><option value="Cloth">Cloth</option><option value="Chain">Chain</option><option value="none">ohne Materialangabe</option></select>
       <select class="fs" id="af-prov" aria-label="Rüstungen nach Quellenlage filtern" onchange="armorFilter()"><option value="">Alle Quellenlagen</option><option value="import">nur Datenimport</option><option value="guide">nur aus Guides belegt</option><option value="altbestand">nur ungeprüft</option><option value="ohnewert">nur ohne Zahlenwert</option></select>
-      <select class="fs" id="af-sort" aria-label="Rüstungen sortieren" onchange="renderArmor()"><option value="type">Sortierung: Typ, dann Name</option><option value="name">Name A–Z</option><option value="def">Defense absteigend</option><option value="atk">Angriff absteigend</option><option value="prov">Quellenlage</option></select>
-      <span id="armor-count" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
     </div>
     <div class="grid" id="armor-grid"></div>
     <div class="aset-link"><span class="aset-link-t"><b>Komplette Sets mit Bild:</b> Alle Rüstungssets stehen als eigene Seite mit Figur-Ansicht, Def-Summe und verlinkten Teilen.</span><button type="button" onclick="showSec('armorsets')">⛉ Zu den Rüstungssets</button></div>
@@ -8098,13 +8132,12 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-armorsets">
     <h2 class="sec-t"><span class="sec-sym">⛉</span> Rüstungssets <span class="sec-t-en">Armor Sets</span></h2>
-    <div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Crimson Desert hat keine Set-Boni.</b> Ein vollständiges Set gibt <em>keinen</em> zusätzlichen Effekt — der Wert entsteht allein aus den Werten der Einzelteile und den Abyss-Cores, die du selbst hineinsetzt (game8: „sets do not provide set bonuses“, Fextralife: vor allem kosmetisch). Die Sets stehen hier als <b>Gruppierung und Fundort-Übersicht</b>, nicht als Bauempfehlung. Jedes Set steht als Figur: Kopf oben, Hände, Torso und Mantel in der Mitte, Schuhe unten; leere Plätze sind gestrichelt. Die Zahl im Bild ist der Def-Höchstwert (Refinement +10) des Teils, „Def gesamt“ die Summe der Teile in der Figur. Ein Klick auf ein Teil öffnet es in der <a href="#" onclick="showSec('armor');return false;">Rüstungsliste</a>; Teile ohne eigenen Eintrag sind als solche markiert.</div>
     <div class="fbar">
       <input class="fs" id="asf-q" type="search" placeholder="Set, Teil, Fundort …" aria-label="Rüstungssets durchsuchen" oninput="armorSetFilter()" style="min-width:190px">
-      <select class="fs" id="asf-mat" aria-label="Rüstungssets nach Material filtern" onchange="armorSetFilter()"><option value="">Alle Materialien</option><option value="Plate">mit Plate</option><option value="Leather">mit Leather</option><option value="Cloth">mit Cloth</option><option value="mix">gemischte Materialien</option></select>
       <select class="fs" id="asf-sort" aria-label="Rüstungssets sortieren" onchange="renderArmorSets()"><option value="std">Sortierung: Standard</option><option value="name">Name A–Z</option><option value="def">Def gesamt absteigend</option><option value="slots">belegte Plätze</option></select>
-      <label class="fs" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="asf-full" onchange="armorSetFilter()" style="accent-color:var(--survey-red)"> nur alle 5 Plätze</label>
       <span id="aset-count" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
+      <select class="fs" id="asf-mat" aria-label="Rüstungssets nach Material filtern" onchange="armorSetFilter()"><option value="">Alle Materialien</option><option value="Plate">mit Plate</option><option value="Leather">mit Leather</option><option value="Cloth">mit Cloth</option><option value="mix">gemischte Materialien</option></select>
+      <label class="fs dr-a4-hid" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="asf-full" onchange="armorSetFilter()" style="accent-color:var(--survey-red)"> nur alle 5 Plätze</label>
     </div>
     <div class="grid aset-grid" id="set-grid"></div>
     <div id="wt-sets-gruppen" class="sub-t" style="scroll-margin-top:72px">Sammelgruppen aus Patch 1.13 (keine Sets)</div>
@@ -15869,10 +15902,30 @@ function _armorCardHtml(a,wasOpen,o){
       <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>${o&&o.dlc?'<button type="button" class="map-pin-btn dlc-a-jump" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">Auf der Seite Rüstungen</button>':''}
     </div>`;
 }
+/* ===== DR-A4 Helfer (Rüstungen + Rüstungssets, design-rest 01.11.2026) ===== */
+/* Kopf der Seite Rüstungen: einmal montieren (Zahlen ändern sich zur Laufzeit nicht). Die Quellenlage-Box steht als statisches Markup in der Sektion. */
+function _drA4ArmorHead(){
+  if(typeof drMount!=='function'||document.getElementById('dr-head-armor'))return;
+  const prov=p=>ARMOR.filter(a=>a.prov===p).length;
+  const sets=typeof ARMOR_SETS!=='undefined'?ARMOR_SETS.filter(s=>!s.pieceCount).length:0;
+  drMount('armor',drHead({kicker:'Ausrüstung',title:'Rüstungen',sub:'Alle Rüstungsteile mit Werten und Fundort.',scene:['char-oongka'],glyph:'⛓',tone:'gold',
+    stats:[[ARMOR.length,'Rüstungsteile'],[sets,'Sets'],[prov('guide'),'aus Guides belegt'],[prov('import'),'Datenimport']],
+    links:[['armorsets','Rüstungssets'],['weapons','Waffen'],['accessories','Accessoires'],['dlc-ausruestung','DLC-Ausrüstung']]}));
+  document.querySelectorAll('#sec-armor [data-dr-n="total"]').forEach(el=>{el.textContent=ARMOR.length;});
+}
+/* Filter-Pillen mit Anzahl über ALLE Teile (Zählung wie armorFilter: data-type, data-mat, data-prov). Die Selects bleiben versteckt die Quelle der Wahrheit. */
+function _drA4ArmorPills(){
+  if(typeof drSelPillsMount!=='function')return;
+  const n=f=>v=>v===''?ARMOR.length:ARMOR.filter(a=>f(a,v)).length;
+  drSelPillsMount('af-type',{title:'Typ',text:{'':'Alle'},count:n((a,v)=>a.type===v)});
+  drSelPillsMount('af-mat',{title:'Material',text:{'':'Alle',none:'ohne Angabe'},count:n((a,v)=>v==='none'?!armorMat(a.name):armorMat(a.name)===v)});
+  drSelPillsMount('af-prov',{title:'Quellenlage',text:{'':'Alle',import:'Datenimport',guide:'aus Guides belegt',altbestand:'ungeprüft',ohnewert:'kein Zahlenwert'},count:n((a,v)=>(a.prov||'import')===v)});
+}
 // Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
 // Suche laufen ueber armorFilter() und fassen das DOM nicht neu an, sonst wuerde
 // jeder Tastendruck 337 Karten samt <img> neu erzeugen.
 function renderArmor(){
+  _drA4ArmorHead();
   const sortEl=document.getElementById('af-sort');
   const sort=sortEl?sortEl.value:'type';
   const liste=ARMOR.slice();
@@ -15887,6 +15940,7 @@ function renderArmor(){
     return _armorCardHtml(a,savedOpenState[a.name]==='1');
   }).join('');
   armorFilter();
+  _drA4ArmorPills();
 }
 
 // Wendet Sektionsfilter UND beide Suchfelder an, ohne das DOM neu zu bauen.
@@ -15956,7 +16010,7 @@ function armorZeigeTeil(name){
   if(typeof showSec==='function'&&!document.getElementById('sec-armor')?.classList.contains('active'))showSec('armor');
   const q=document.getElementById('af-q');
   if(!q||typeof armorFilter!=='function')return;
-  ['af-type','af-mat','af-prov'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  ['af-type','af-mat','af-prov'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';if(typeof drSelSync==='function')drSelSync(id);});
   q.value=name;
   armorFilter();
   const g=document.getElementById('armor-grid');
@@ -16068,6 +16122,33 @@ function _asetGroup(s){
     </div>
   </article>`;
 }
+/* Kopf der Seite Rüstungssets (einmal montiert). Pflichtsatz als sub, der Rest der früheren Textwand wortgleich in der Info-Box. */
+function _drA4SetsHead(){
+  if(typeof drMount!=='function'||document.getElementById('dr-head-armorsets'))return;
+  const echte=ARMOR_SETS.filter(s=>!s.pieceCount);
+  const voll=echte.filter(s=>_asetInfo(s).belegt===5).length;
+  const info=drInfo({title:'So liest du die Sets',icon:{h:cdIcon('info')},tone:'gold',
+    lead:'Die Sets stehen hier als Gruppierung und Fundort-Übersicht, nicht als Bauempfehlung.',
+    h:'<p>Ein vollständiges Set gibt <em>keinen</em> zusätzlichen Effekt — der Wert entsteht allein aus den Werten der Einzelteile und den Abyss-Cores, die du selbst hineinsetzt (game8: „sets do not provide set bonuses“, Fextralife: vor allem kosmetisch). Die Sets stehen hier als <b>Gruppierung und Fundort-Übersicht</b>, nicht als Bauempfehlung.</p>'
+      +'<p>Jedes Set steht als Figur: Kopf oben, Hände, Torso und Mantel in der Mitte, Schuhe unten; leere Plätze sind gestrichelt. Die Zahl im Bild ist der Def-Höchstwert (Refinement +10) des Teils, „Def gesamt“ die Summe der Teile in der Figur. Ein Klick auf ein Teil öffnet es in der <a href="#" onclick="showSec(\'armor\');return false;">Rüstungsliste</a>; Teile ohne eigenen Eintrag sind als solche markiert.</p>'});
+  drMount('armorsets',drHead({kicker:'Ausrüstung',title:'Rüstungssets',sub:'Crimson Desert hat keine Set-Boni.',scene:['char-damiane'],glyph:'⛉',tone:'gold',
+    stats:[[echte.length,'Sets'],[echte.reduce((n,s)=>n+s.pieces.length,0),'Set-Teile'],[echte.filter(s=>/Boss-Set/.test(s.tag||'')).length,'Boss-Sets (1.13)'],[voll,'Sets mit allen 5 Plätzen']],
+    links:[['armor','Rüstungen'],['weapons','Waffen'],['accessories','Accessoires'],['dyes','Färbemittel']],after:info}));
+}
+/* Material-Pillen und Umschalt-Pille „alle 5 Plätze“ mit Anzahl; gezählt an den gerenderten Karten (data-mat, data-full), also genau wie armorSetFilter. */
+function _drA4SetsPills(){
+  const g=document.getElementById('set-grid');if(!g||typeof drSelPillsMount!=='function')return;
+  const karten=[].slice.call(g.querySelectorAll('.aset'));
+  const mats=karten.map(k=>(k.dataset.mat||'').split(' '));
+  drSelPillsMount('asf-mat',{title:'Material',text:{'':'Alle',Plate:'Plate',Leather:'Leather',Cloth:'Cloth',mix:'Gemischt'},
+    count:v=>v===''?karten.length:v==='mix'?mats.filter(m=>m.length>1).length:mats.filter(m=>m.includes(v)).length});
+  const cb=document.getElementById('asf-full'),lab=cb&&cb.closest('label');
+  if(!cb||!lab)return;
+  let row=document.querySelector('.dr-pillrow[data-dr-for="asf-full"]');
+  if(!row){row=document.createElement('div');row.className='dr-pillrow dr-a4-trow';row.setAttribute('data-dr-for','asf-full');lab.insertAdjacentElement('beforebegin',row);}
+  row.innerHTML='<span class="dr-pl" aria-hidden="true">Plätze</span>'+cdPills([{v:'full',t:'Nur alle 5 Plätze',n:karten.filter(k=>k.dataset.full==='1').length,on:cb.checked}],
+    {name:'dr-a4-full',label:'Nur Sets mit allen fünf Plätzen anzeigen',multi:true,cls:'dr-pills'});
+}
 function renderArmorSets(){
   const g=document.getElementById('set-grid'),gg=document.getElementById('set-groups');
   if(!g)return;
@@ -16083,9 +16164,37 @@ function renderArmorSets(){
   g.innerHTML=sets.map(x=>_asetCard(x.s,x.i)).join('');
   if(gg)gg.innerHTML=ARMOR_SETS.filter(s=>s.pieceCount).map(_asetGroup).join('');
   armorSetFilter();
+  _drA4SetsHead();
+  _drA4SetsPills();
 }
+/* Suche: steht ein Suchbegriff nur im Aufklapper „Details & Quellen“ einer sichtbaren Set-Karte, klappt er auf (data-srch-open wie bei den Rüstungskarten;
+   die globale Suche schließt solche Aufklapper bei jedem Lauf selbst). Die globale Suche setzt nur die Klasse hide, darum beobachtet ein kleiner Observer das Raster. */
+function _drA4SetsSearchOpen(){
+  const g=document.getElementById('set-grid');if(!g)return;
+  const si=document.getElementById('si'),aq=document.getElementById('asf-q');
+  const need=_fold(((si&&si.value)||'')+' '+((aq&&aq.value)||'')).split(' ').filter(Boolean);
+  if(!need.length)return;
+  g.querySelectorAll('.aset:not(.aset-off):not(.hide)').forEach(k=>{
+    const d=k.querySelector('details.set-more');if(!d||d.open)return;
+    if(k._drHead===undefined)k._drHead=_fold(k.textContent.replace(d.textContent,''));
+    const dt=_fold(d.textContent);
+    if(need.some(w=>!k._drHead.includes(w)&&dt.includes(w))){d.open=true;d.dataset.srchOpen='1';}
+  });
+}
+(function(){
+  const g=document.getElementById('set-grid');if(!g||typeof MutationObserver==='undefined')return;
+  let t=0;
+  new MutationObserver(()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;_drA4SetsSearchOpen();});}).observe(g,{subtree:true,attributes:true,attributeFilter:['class']});
+})();
+/* Umschalt-Pille „alle 5 Plätze“: setzt die versteckte Checkbox, die armorSetFilter liest */
+document.addEventListener('cd-pills',e=>{
+  if(!e.detail||e.detail.name!=='dr-a4-full')return;
+  const cb=document.getElementById('asf-full');if(!cb)return;
+  cb.checked=e.detail.values.indexOf('full')>=0;armorSetFilter();
+});
 function armorSetFilter(){
   const g=document.getElementById('set-grid');if(!g)return;
+  _closeSearchOpened(g);
   const q=((document.getElementById('asf-q')||{}).value||'').trim().toLowerCase();
   const mat=(document.getElementById('asf-mat')||{}).value||'';
   const full=!!(document.getElementById('asf-full')||{}).checked;
@@ -16100,6 +16209,7 @@ function armorSetFilter(){
   });
   const c=document.getElementById('aset-count');
   if(c)c.textContent=n===karten.length?karten.length+' Sets':n+' von '+karten.length+' Sets';
+  _drA4SetsSearchOpen();
 }
 
 // ===== MOUNTS =====
