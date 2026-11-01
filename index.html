@@ -1028,7 +1028,7 @@ tbody tr:hover td{background:var(--overprint)}
 }
 tbody{contain:layout style}
 .grid,.sk-grid,.ach-grid,.fav-grid,.pet-grid,.witch-grid,.bo-result-grid,.qst-rail,.region-heatmap{contain:layout style}
-#boss-grid .card{contain-intrinsic-size:0 540px}
+:is(#boss-grid,#dlc-boss-grid) .card{contain-intrinsic-size:0 540px}
 #npcs-root .grid .card{contain-intrinsic-size:0 470px}
 .skill-graph-wrap{contain:layout style}
 
@@ -2221,8 +2221,8 @@ html.cf-open,html.cf-open body{overflow:hidden}
 .mount-ig-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 /* Boss-Alternativbild: Button in der Bildschiene, nutzt Float-Preview + Modal
    der Mounts wieder (siehe showBossAlt/openBossAlt und BOSS_ALT_IMGS). */
-#boss-grid .record-rail .boss-alt-btn{margin:10px 12px 0;width:calc(100% - 24px);padding:6px 0;background:var(--vellum);border:1px solid var(--line);color:var(--iron-soft);font-family:var(--f-mono);font-size:var(--fs-10);cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.06em;border-radius:8px}
-#boss-grid .record-rail .boss-alt-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .boss-alt-btn{margin:10px 12px 0;width:calc(100% - 24px);padding:6px 0;background:var(--vellum);border:1px solid var(--line);color:var(--iron-soft);font-family:var(--f-mono);font-size:var(--fs-10);cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.06em;border-radius:8px}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .boss-alt-btn:hover{background:var(--instr-soft);color:var(--brass);border-color:var(--brass)}
 
 /* ============================================================
    FELDATLAS-HERO — Seraph-Altar-Kontakt (additiv, fa-hero-Praefix)
@@ -2414,88 +2414,88 @@ thead tr{background:rgba(22,24,40,.75)}
 
 /* ============================================================
    BOSS-DOSSIER "RECORD"-LAYOUT (Referenz: boss-record.html)
-   Nur #boss-grid .card (Modifier .record-card) — NPCs/Bestiarium
+   Nur :is(#boss-grid,#dlc-boss-grid) .card (Modifier .record-card) — NPCs/Bestiarium
    nutzen eigene Render-Funktionen/Templates und bleiben unberuehrt.
    ============================================================ */
-#boss-grid.grid{grid-template-columns:repeat(auto-fill,minmax(480px,1fr));align-items:start}
-#boss-grid .card.record-card{
+:is(#boss-grid,#dlc-boss-grid).grid{grid-template-columns:repeat(auto-fill,minmax(480px,1fr));align-items:start}
+:is(#boss-grid,#dlc-boss-grid) .card.record-card{
   display:grid;grid-template-columns:230px 1fr;gap:0;
   padding:0;border-radius:var(--radius);overflow:hidden;
 }
-@media(max-width:560px){#boss-grid.grid{grid-template-columns:1fr}}
-#boss-grid .record-img{
+@media(max-width:560px){:is(#boss-grid,#dlc-boss-grid).grid{grid-template-columns:1fr}}
+:is(#boss-grid,#dlc-boss-grid) .record-img{
   position:relative;border-right:1px solid var(--line);overflow:hidden;min-height:250px;
   display:grid;place-items:center;
   background:radial-gradient(120% 100% at 50% 40%, #1a0f14, #0a0710 70%);
 }
-#boss-grid .record-img .boss-img-wrap,#boss-grid .record-img .boss-img-ph{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-wrap,:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-ph{
   position:absolute;inset:0;margin:0;border:none;height:100%;width:100%;
 }
-#boss-grid .record-img .boss-img-wrap .boss-img{height:100%}
-#boss-grid .record-img::after{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-wrap .boss-img{height:100%}
+:is(#boss-grid,#dlc-boss-grid) .record-img::after{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;z-index:2;
   background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.16) 2px 3px);
 }
-#boss-grid .record-img .crosshair{position:absolute;inset:0;pointer-events:none;z-index:1}
-#boss-grid .record-img .crosshair::before,#boss-grid .record-img .crosshair::after{content:"";position:absolute;background:var(--violet-glow)}
-#boss-grid .record-img .crosshair::before{left:50%;top:0;bottom:0;width:1px}
-#boss-grid .record-img .crosshair::after{top:50%;left:0;right:0;height:1px}
-#boss-grid .record-tag{
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair{position:absolute;inset:0;pointer-events:none;z-index:1}
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::before,:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::after{content:"";position:absolute;background:var(--violet-glow)}
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::before{left:50%;top:0;bottom:0;width:1px}
+:is(#boss-grid,#dlc-boss-grid) .record-img .crosshair::after{top:50%;left:0;right:0;height:1px}
+:is(#boss-grid,#dlc-boss-grid) .record-tag{
   position:absolute;top:10px;left:10px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;
   letter-spacing:.14em;color:#160a08;background:var(--red);padding:4px 9px;border-radius:6px;z-index:4;
   box-shadow:0 0 18px -4px var(--red-glow);text-transform:uppercase;
 }
 /* Play/Fav bleiben funktional identisch (pm-trigger/fav-btn), nur ueber dem Portrait platziert */
-#boss-grid .record-card .pm-trigger{top:9px;right:44px;left:auto}
-#boss-grid .record-card .fav-btn{z-index:4}
-#boss-grid .record-card .boss-done-badge{top:auto;bottom:10px;left:50%}
+:is(#boss-grid,#dlc-boss-grid) .record-card .pm-trigger{top:9px;right:44px;left:auto}
+:is(#boss-grid,#dlc-boss-grid) .record-card .fav-btn{z-index:4}
+:is(#boss-grid,#dlc-boss-grid) .record-card .boss-done-badge{top:auto;bottom:10px;left:50%}
 
-#boss-grid .record-body{position:relative;padding:18px 20px;min-width:0}
-#boss-grid .record-body .ct{
+:is(#boss-grid,#dlc-boss-grid) .record-body{position:relative;padding:18px 20px;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .record-body .ct{
   font-family:var(--f-display);font-weight:600;font-size:23px;line-height:1.05;
   margin:0 0 3px;letter-spacing:-.01em;color:var(--ink-hi);
 }
-#boss-grid .record-desig{
+:is(#boss-grid,#dlc-boss-grid) .record-desig{
   font-family:var(--f-mono);font-size:var(--fs-10-5);letter-spacing:.16em;text-transform:uppercase;
   color:var(--amber);margin-bottom:14px;
 }
-#boss-grid .record-body .boss-recur{margin-top:-3px;margin-bottom:10px}
-#boss-grid .datagrid{
+:is(#boss-grid,#dlc-boss-grid) .record-body .boss-recur{margin-top:-3px;margin-bottom:10px}
+:is(#boss-grid,#dlc-boss-grid) .datagrid{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
   background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px;
 }
-#boss-grid .datagrid>div{background:rgba(255,255,255,.02);padding:8px 11px}
-#boss-grid .datagrid dt{font-family:var(--f-mono);font-size:var(--fs-9);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:0}
-#boss-grid .datagrid dd{margin:3px 0 0;font-size:13.5px;line-height:1.35;color:var(--text)}
-#boss-grid .datagrid dd.mono{font-family:var(--f-mono);font-weight:600;color:var(--ink-hi)}
+:is(#boss-grid,#dlc-boss-grid) .datagrid>div{background:rgba(255,255,255,.02);padding:8px 11px}
+:is(#boss-grid,#dlc-boss-grid) .datagrid dt{font-family:var(--f-mono);font-size:var(--fs-9);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:0}
+:is(#boss-grid,#dlc-boss-grid) .datagrid dd{margin:3px 0 0;font-size:13.5px;line-height:1.35;color:var(--text)}
+:is(#boss-grid,#dlc-boss-grid) .datagrid dd.mono{font-family:var(--f-mono);font-weight:600;color:var(--ink-hi)}
 /* Strategie-Callout (.cs bestehende Klasse, hier Amber-Variante statt Brass-Border) */
-#boss-grid .record-body .cs{
+:is(#boss-grid,#dlc-boss-grid) .record-body .cs{
   font-size:14px;line-height:1.55;color:var(--text);background:rgba(224,163,90,.06);
   border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:10px;
   padding:11px 14px;margin:11px 0 12px;
 }
-#boss-grid .record-body .cs::before{
+:is(#boss-grid,#dlc-boss-grid) .record-body .cs::before{
   content:"Strategie";display:block;font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.14em;
   text-transform:uppercase;color:var(--amber);margin-bottom:4px;
 }
 /* Chips: Tags/Rotation im Record-Look (Mono, Ghost + roter Akzent auf erstem Tag) */
-#boss-grid .record-card .cm{gap:7px}
-#boss-grid .record-card .tag{
+:is(#boss-grid,#dlc-boss-grid) .record-card .cm{gap:7px}
+:is(#boss-grid,#dlc-boss-grid) .record-card .tag{
   font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;border-radius:7px;
   padding:5px 10px;letter-spacing:.03em;text-transform:none;
 }
-#boss-grid .record-body .combo-seq{gap:7px}
-#boss-grid .record-body .combo-chip{
+:is(#boss-grid,#dlc-boss-grid) .record-body .combo-seq{gap:7px}
+:is(#boss-grid,#dlc-boss-grid) .record-body .combo-chip{
   font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--text);
   border:1px solid var(--line-strong);border-radius:7px;background:rgba(255,255,255,.03);padding:5px 10px;
 }
-#boss-grid .record-body .combo-chip:first-child{
+:is(#boss-grid,#dlc-boss-grid) .record-body .combo-chip:first-child{
   color:#160a08;background:var(--red);border-color:var(--red);box-shadow:0 0 18px -6px var(--red-glow);
 }
 @media(max-width:600px){
-  #boss-grid .card.record-card{grid-template-columns:1fr}
-  #boss-grid .record-img{border-right:0;border-bottom:1px solid var(--line);aspect-ratio:2/1;min-height:0}
-  #boss-grid .datagrid{grid-template-columns:1fr}
+  :is(#boss-grid,#dlc-boss-grid) .card.record-card{grid-template-columns:1fr}
+  :is(#boss-grid,#dlc-boss-grid) .record-img{border-right:0;border-bottom:1px solid var(--line);aspect-ratio:2/1;min-height:0}
+  :is(#boss-grid,#dlc-boss-grid) .datagrid{grid-template-columns:1fr}
 }
 
 /* Utilities aus tokens.css (fuer Bestand & kuenftige Sektionen) */
@@ -2523,17 +2523,17 @@ thead tr{background:rgba(22,24,40,.75)}
    Fix: Portrait wurde per Grid-Stretch auf volle Body-Hoehe
    gezogen (kein align-items auf .record-card -> default stretch).
    Diese Regeln haengen ans Ende des Skin-Layers und ueberschreiben
-   die bestehenden #boss-grid .record-* Deklarationen (gleiche oder
+   die bestehenden :is(#boss-grid,#dlc-boss-grid) .record-* Deklarationen (gleiche oder
    hoehere Spezifitaet, spaeter in der Cascade).
-   Selektor-Scope: #boss-grid .record-*, #boss-grid .card.record-card,
-   #boss-grid .datagrid — Boss-Record-Ownership, keine Fremdbereiche.
+   Selektor-Scope: :is(#boss-grid,#dlc-boss-grid) .record-*, :is(#boss-grid,#dlc-boss-grid) .card.record-card,
+   :is(#boss-grid,#dlc-boss-grid) .datagrid — Boss-Record-Ownership, keine Fremdbereiche.
    ============================================================ */
 
 /* 1) Bild oben andocken statt Vollhoehe: Grid nicht mehr stretchen */
-#boss-grid .card.record-card{
+:is(#boss-grid,#dlc-boss-grid) .card.record-card{
   align-items:start;
 }
-#boss-grid .record-img{
+:is(#boss-grid,#dlc-boss-grid) .record-img{
   align-self:start;
   aspect-ratio:16/9;
   max-height:200px;
@@ -2543,7 +2543,7 @@ thead tr{background:rgba(22,24,40,.75)}
 /* boss-img-wrap/boss-img-ph liegen absolut *innerhalb* von .record-img —
    das funktioniert weiterhin, weil .record-img jetzt eine echte
    Hoehe ueber aspect-ratio/max-height hat statt Grid-Stretch. */
-#boss-grid .record-img .boss-img-wrap .boss-img{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-img-wrap .boss-img{
   width:100%;height:100%;object-fit:cover;object-position:center top;
 }
 
@@ -2551,7 +2551,7 @@ thead tr{background:rgba(22,24,40,.75)}
    der Desktop-Fassung neutralisieren, damit 2/1 nicht durch max-height:280px
    eingeschraenkt wird) */
 @media(max-width:600px){
-  #boss-grid .record-img{
+  :is(#boss-grid,#dlc-boss-grid) .record-img{
     aspect-ratio:2/1;
     max-height:none;
     align-self:stretch;
@@ -2566,31 +2566,31 @@ thead tr{background:rgba(22,24,40,.75)}
    Fix: Portrait + Datagrid (Stat-Kacheln) + Filter-Tags in eine
    linke Schiene (.record-rail) buendeln; der Lese-Content bleibt
    rechts im .record-body. Fuellt den Platz unter dem Bild und
-   kuerzt die Karte deutlich. Scope: nur #boss-grid .record-*.
+   kuerzt die Karte deutlich. Scope: nur :is(#boss-grid,#dlc-boss-grid) .record-*.
    ============================================================ */
-#boss-grid .card.record-card{grid-template-columns:240px 1fr}
-#boss-grid .record-rail{
+:is(#boss-grid,#dlc-boss-grid) .card.record-card{grid-template-columns:240px 1fr}
+:is(#boss-grid,#dlc-boss-grid) .record-rail{
   display:flex;flex-direction:column;align-self:start;min-width:0;
   border-right:1px solid var(--line);
   background:radial-gradient(120% 55% at 50% 0%, #150c12, #0a0710 82%);
 }
 /* Trennlinie wandert vom Bild auf die Schiene; Bild trennt sich per
    Bottom-Border vom darunterliegenden Datagrid. */
-#boss-grid .record-rail .record-img{
+:is(#boss-grid,#dlc-boss-grid) .record-rail .record-img{
   border-right:0;border-bottom:1px solid var(--line);
   align-self:auto;width:100%;
 }
 /* Datagrid als kompakte Stat-Kacheln unter dem Portrait (2 Spalten). */
-#boss-grid .record-rail .datagrid{margin:12px 12px 0}
-#boss-grid .record-rail .datagrid:last-child{margin-bottom:12px}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .datagrid{margin:12px 12px 0}
+:is(#boss-grid,#dlc-boss-grid) .record-rail .datagrid:last-child{margin-bottom:12px}
 /* Klickbare Filter-Tags unter das Datagrid. */
-#boss-grid .record-rail .cm{
+:is(#boss-grid,#dlc-boss-grid) .record-rail .cm{
   display:flex;flex-wrap:wrap;gap:7px;margin:11px 12px 12px;
 }
 /* Lange Quest-Tags duerfen die schmale Schiene nicht sprengen: auf
    Schienenbreite kappen (Ellipsis). Voller Text steht im Datagrid
    darueber und im Hover-Tooltip; Klick filtert weiter nach Vollwert. */
-#boss-grid .record-rail .cm .tag{
+:is(#boss-grid,#dlc-boss-grid) .record-rail .cm .tag{
   max-width:100%;min-width:0;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
@@ -2599,14 +2599,14 @@ thead tr{background:rgba(22,24,40,.75)}
 @media(max-width:600px){
   /* Muss die Desktop-Regel oben (gleiche Spezifitaet, frueher im Quelltext
      -> wuerde sonst gewinnen) auf Einspaltigkeit zuruecksetzen. */
-  #boss-grid .card.record-card{grid-template-columns:1fr}
-  #boss-grid .record-rail{
+  :is(#boss-grid,#dlc-boss-grid) .card.record-card{grid-template-columns:1fr}
+  :is(#boss-grid,#dlc-boss-grid) .record-rail{
     border-right:0;border-bottom:1px solid var(--line);
   }
-  #boss-grid .record-rail .record-img{
+  :is(#boss-grid,#dlc-boss-grid) .record-rail .record-img{
     aspect-ratio:16/9;max-height:none;border-bottom:1px solid var(--line);
   }
-  #boss-grid .record-rail .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  :is(#boss-grid,#dlc-boss-grid) .record-rail .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 /* ============================================================
@@ -2614,129 +2614,129 @@ thead tr{background:rgba(22,24,40,.75)}
    Zugeklappte Bosskarte = Portrait + Kopf + Kurz-Chips + Besiegt;
    alles Weitere (Strategie, Datengitter, Lore, Notiz) liegt im
    Aufklapper <details class="item-more boss-more">.
-   Scope: nur #boss-grid .record-card.boss-compact und .boss-more.
+   Scope: nur :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact und .boss-more.
    Bestehende Selektoren oben werden hier ueberschrieben, nie editiert.
    ============================================================ */
 /* === BOSS-KOMPAKT-ANFANG === */
 /* Platzhalterhoehe fuer content-visibility:auto (Z. ~1013 wird nicht editiert, nur ueberschrieben).
    "auto" merkt sich die zuletzt gerenderte Hoehe, 190 px gilt nur bis zum ersten Rendern;
    bereits offene, noch nie gerenderte Karten (z. B. "Alle Details") bekommen einen groesseren Platzhalter. */
-#boss-grid .card.boss-compact{contain-intrinsic-size:auto 215px}
-#boss-grid .card.boss-compact:has(> details.boss-more[open]){contain-intrinsic-size:auto 600px}
+:is(#boss-grid,#dlc-boss-grid) .card.boss-compact{contain-intrinsic-size:auto 215px}
+:is(#boss-grid,#dlc-boss-grid) .card.boss-compact:has(> details.boss-more[open]){contain-intrinsic-size:auto 600px}
 /* Karte: Zeile 1 = Schiene | Body, Zeile 2 = Aufklapper ueber beide Spalten.
    Schiene streckt sich auf Body-Hoehe, das Portrait fuellt sie (kein Leerraum unter dem Bild).
    Masse nach Rueckmeldung des Users (17.09., "zu klein") eine Stufe groesser: Rasterspalten mindestens 600 px (1440 px: eine Karte je Zeile, 1920 px: zwei,
    2560 px: drei), Portrait 280 px breit, mindestens 16:9 = 158 px hoch; Name 21 px; Chips/Knopf/Leiste
    je eine Schriftstufe hoeher. */
-#boss-grid.grid{grid-template-columns:repeat(auto-fill,minmax(min(600px,100%),1fr))} /* min(): nie breiter als der Container */
-#boss-grid .record-card.boss-compact{
+:is(#boss-grid,#dlc-boss-grid).grid{grid-template-columns:repeat(auto-fill,minmax(min(600px,100%),1fr))} /* min(): nie breiter als der Container */
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact{
   grid-template-columns:280px minmax(0,1fr);grid-template-rows:auto auto;align-items:stretch;
 }
-#boss-grid .record-card.boss-compact .record-rail{align-self:stretch;min-height:158px}
-#boss-grid .record-card.boss-compact .record-rail .record-img{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail{align-self:stretch;min-height:158px}
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail .record-img{
   flex:1 1 auto;aspect-ratio:auto;height:auto;max-height:none;min-height:158px;
   align-self:auto;border-bottom:0;
 }
 /* Body: vertikal zentriert. Mindesthoehe 176 px = Hoehe eines Bodys mit 2 Chip-Zeilen und
    einzeiligem Namen, damit Karten mit weniger Chips gleich hoch bleiben (Portrait 158 px passt darunter). */
-#boss-grid .record-card.boss-compact .record-body{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body{
   display:flex;flex-direction:column;justify-content:center;
   min-height:176px;min-width:0;padding:12px 14px 12px 16px;overflow:hidden;
 }
-#boss-grid .record-card.boss-compact .record-body .ct{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body .ct{
   font-size:21px;line-height:1.1;margin:0 0 4px;overflow-wrap:anywhere;
 }
 /* Kennzeile auf 2 Zeilen gekappt, engerer Zeichenabstand fuer ~30 Zeichen je Zeile */
-#boss-grid .record-card.boss-compact .record-desig{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-desig{
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   font-size:var(--fs-11);line-height:1.3;letter-spacing:.1em;margin-bottom:9px;overflow-wrap:anywhere;
 }
 /* Kurz-Chips: natuerliche Breite, umbrechend (Admin-Feinschliff 17.09.: statt 6er-Raster, damit
    kein Chip mitten im Wort gekappt wird). Ellipsis nur als Sicherheitsnetz fuer Einzel-Chips
    breiter als der Body; die Texte selbst werden schon im Renderer gekuerzt (_bossSumChips). */
-#boss-grid .boss-sum{display:flex;flex-wrap:wrap;gap:5px;min-width:0}
-#boss-grid .boss-sum .boss-sum-chip{
+:is(#boss-grid,#dlc-boss-grid) .boss-sum{display:flex;flex-wrap:wrap;gap:5px;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .boss-sum-chip{
   flex:0 1 auto;display:inline-block;min-width:0;max-width:100%;box-sizing:border-box;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   font-family:var(--f-mono);font-size:var(--fs-10-5);font-weight:500;line-height:1.3;letter-spacing:.02em;
   padding:3px 8px;border:1px solid var(--line-strong);border-radius:7px;
   background:rgba(255,255,255,.03);color:var(--text);
 }
-#boss-grid .boss-sum .bsc-pd{
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .bsc-pd{
   color:var(--amber);border-color:rgba(224,163,90,.45);
   font-weight:600;letter-spacing:0;padding:3px 8px;
 }
-#boss-grid .boss-sum .bsc-weak{color:var(--warn)}
-#boss-grid .boss-sum .bsc-note{color:var(--brass);border-color:rgba(224,163,90,.35)}
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .bsc-weak{color:var(--warn)}
+:is(#boss-grid,#dlc-boss-grid) .boss-sum .bsc-note{color:var(--brass);border-color:rgba(224,163,90,.35)}
 /* Besiegt-Knopf kompakt, .on-Zustand kommt aus der bestehenden .defeat-btn.on-Regel */
-#boss-grid .record-card.boss-compact .boss-actions{display:flex;margin-top:10px}
-#boss-grid .record-card.boss-compact .boss-actions .defeat-btn{
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .boss-actions{display:flex;margin-top:10px}
+:is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .boss-actions .defeat-btn{
   margin:0;padding:5px 12px;width:fit-content;font-size:var(--fs-10-5);line-height:1.3;
 }
 /* Aufklapper: volle Leiste unter beiden Spalten */
-#boss-grid .boss-more{grid-column:1/-1;border-top:1px solid var(--line);margin:0;min-width:0}
-#boss-grid .boss-more > summary{
+:is(#boss-grid,#dlc-boss-grid) .boss-more{grid-column:1/-1;border-top:1px solid var(--line);margin:0;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary{
   display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;
   padding:9px 16px;font-family:var(--f-mono);font-size:var(--fs-10-5);font-weight:600;
   letter-spacing:.12em;text-transform:uppercase;color:var(--amber);line-height:1.3;
   background:transparent;transition:background-color .15s,color .15s;
 }
-#boss-grid .boss-more > summary::after{color:var(--amber);opacity:.75;transition:transform .16s,color .16s}
-#boss-grid .boss-more[open] > summary{border-bottom:1px solid var(--line)}
-#boss-grid .boss-more[open] > summary::after{color:var(--red)}
-#boss-grid .boss-more > summary:hover{background:rgba(255,255,255,.03);color:var(--amber)}
-#boss-grid .boss-more > summary:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary::after{color:var(--amber);opacity:.75;transition:transform .16s,color .16s}
+:is(#boss-grid,#dlc-boss-grid) .boss-more[open] > summary{border-bottom:1px solid var(--line)}
+:is(#boss-grid,#dlc-boss-grid) .boss-more[open] > summary::after{color:var(--red)}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary:hover{background:rgba(255,255,255,.03);color:var(--amber)}
+:is(#boss-grid,#dlc-boss-grid) .boss-more > summary:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
 /* Aufgeklappter Inhalt: einspaltig, ruhige Abstaende, nichts doppelt gerahmt */
-#boss-grid .boss-more .boss-more-body{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:10px 16px 16px;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:10px 16px 16px;min-width:0}
 /* Strategie-Callout im Record-Look (die alten .record-body .cs-Regeln greifen hier nicht mehr) */
-#boss-grid .boss-more .boss-more-body .cs{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cs{
   margin:0;font-size:14px;line-height:1.55;color:var(--text);background:rgba(224,163,90,.06);
   border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:10px;padding:11px 14px;
 }
-#boss-grid .boss-more .boss-more-body .cs::before{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cs::before{
   content:"Strategie";display:block;font-family:var(--f-mono);font-size:var(--fs-10);letter-spacing:.14em;
   text-transform:uppercase;color:var(--amber);margin-bottom:4px;
 }
-#boss-grid .boss-more .boss-more-body .combo-seq{gap:7px}
-#boss-grid .boss-more .boss-more-body .combo-chip{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .combo-seq{gap:7px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .combo-chip{
   font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--text);
   border:1px solid var(--line-strong);border-radius:7px;background:rgba(255,255,255,.03);padding:5px 10px;
 }
-#boss-grid .boss-more .boss-more-body .combo-chip:first-child{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .combo-chip:first-child{
   color:#160a08;background:var(--red);border-color:var(--red);box-shadow:0 0 18px -6px var(--red-glow);
 }
-#boss-grid .boss-more .boss-more-body .copy-btn{margin:-4px 0 0 auto}
-#boss-grid .boss-more .boss-more-body .bp-phase,#boss-grid .boss-more .boss-more-body .bo-recs,#boss-grid .boss-more .boss-more-body .boss-lore,
-#boss-grid .boss-more .boss-more-body .boss-notes-btn,#boss-grid .boss-more .boss-more-body .boss-notes-area,#boss-grid .boss-more .boss-more-body .boss-recur{margin-top:0;margin-bottom:0}
-#boss-grid .boss-more .boss-more-body .boss-notes-btn{width:fit-content;padding:5px 12px}
-#boss-grid .boss-more .boss-more-body .boss-alt-btn{margin:0;width:fit-content;padding:6px 12px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .copy-btn{margin:-4px 0 0 auto}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .bp-phase,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .bo-recs,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-lore,
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-notes-btn,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-notes-area,:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-recur{margin-top:0;margin-bottom:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-notes-btn{width:fit-content;padding:5px 12px}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .boss-alt-btn{margin:0;width:fit-content;padding:6px 12px}
 /* Datengitter in voller Kartenbreite: 4 Spalten, Kapitel/Region je 1, Quest/Parry/Drops/Schwaeche je 2
    (dense fuellt Luecken, wenn Drops oder Schwaeche fehlen) */
-#boss-grid .boss-more .boss-more-body .datagrid{
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid{
   grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row dense;margin:0;
 }
-#boss-grid .boss-more .boss-more-body .datagrid>div{grid-column:span 2;min-width:0}
-#boss-grid .boss-more .boss-more-body .datagrid>div:nth-child(1),#boss-grid .boss-more .boss-more-body .datagrid>div:nth-child(2){grid-column:span 1}
-#boss-grid .boss-more .boss-more-body .datagrid dd{overflow-wrap:anywhere}
-#boss-grid .boss-more .boss-more-body .cm{display:flex;flex-wrap:wrap;gap:7px;margin:0}
-#boss-grid .boss-more .boss-more-body .cm .tag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid>div{grid-column:span 2;min-width:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid>div:nth-child(1),:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid>div:nth-child(2){grid-column:span 1}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid dd{overflow-wrap:anywhere}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cm{display:flex;flex-wrap:wrap;gap:7px;margin:0}
+:is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .cm .tag{max-width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:760px){
-  #boss-grid .boss-more .boss-more-body .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body .datagrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 /* Mobil: Schiene ueber dem Body, Portrait 16:9 (max. 210 px), Karte zugeklappt <= 420 px */
 @media(max-width:600px){
-  #boss-grid .record-card.boss-compact{grid-template-columns:minmax(0,1fr)}
-  #boss-grid .record-card.boss-compact .record-rail{min-height:0;align-self:auto}
-  #boss-grid .record-card.boss-compact .record-rail .record-img{
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact{grid-template-columns:minmax(0,1fr)}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail{min-height:0;align-self:auto}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-rail .record-img{
     flex:none;aspect-ratio:16/9;max-height:210px;min-height:0;height:auto;
   }
-  #boss-grid .record-card.boss-compact .record-body{min-height:0;padding:12px 16px 14px}
-  #boss-grid .record-card.boss-compact .record-body .ct{font-size:21px}
-  #boss-grid .boss-more > summary{padding:10px 16px}
-  #boss-grid .boss-more .boss-more-body{padding:10px 14px 14px}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body{min-height:0;padding:12px 16px 14px}
+  :is(#boss-grid,#dlc-boss-grid) .record-card.boss-compact .record-body .ct{font-size:21px}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more > summary{padding:10px 16px}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more .boss-more-body{padding:10px 14px 14px}
 }
 @media(prefers-reduced-motion:reduce){
-  #boss-grid .boss-more > summary,#boss-grid .boss-more > summary::after{transition:none}
+  :is(#boss-grid,#dlc-boss-grid) .boss-more > summary,:is(#boss-grid,#dlc-boss-grid) .boss-more > summary::after{transition:none}
 }
 /* === BOSS-KOMPAKT-ENDE === */
 
@@ -2857,13 +2857,13 @@ select.fs,input.fs{
 select.fs:focus,select.fs:hover,input.fs:focus,input.fs:hover{border-color:var(--red)}
 
 /* Boss-Dossier: NPC-Lore kompakt als Glas-Overlay am Fuss der Portrait-Spalte */
-#boss-grid .record-img .boss-lore{
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-lore{
   align-self:end;justify-self:stretch;position:relative;z-index:3;
   margin:0;font-size:var(--fs-10-5);line-height:1.45;padding:7px 9px;
   background:rgba(10,11,18,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   border:0;border-top:1px solid var(--line);border-radius:0;
 }
-#boss-grid .record-img .boss-lore .boss-lore-hd{font-size:var(--fs-9)}
+:is(#boss-grid,#dlc-boss-grid) .record-img .boss-lore .boss-lore-hd{font-size:var(--fs-9)}
 
 /* Sektionstitel: topografische Mono-Marken statt Emoji (legenden-symbole.html) */
 .sec-t .sec-sym{font-family:var(--f-mono);color:var(--survey-red);margin-right:2px}
@@ -7046,6 +7046,24 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
   .dlc-tbl--garden td:first-child{width:auto}
   .dlc-tbl--garden td:first-child::before{display:inline;content:"Nr. "}
 }
+/* DLC-F Anfang (Fundament dlc-design 01.11.2026: gemeinsame Regeln der fünf DLC-Ansichten; Besitz Orchestrator) */
+:is(#sec-dlc,.sec-dlcp) .dlc-flat{margin:16px 0 0}
+:is(#sec-dlc,.sec-dlcp) .dlc-flat+.dlc-flat{margin-top:26px}
+:is(#sec-dlc,.sec-dlcp) .dlc-flag{font-size:max(11px,var(--fs-10))}
+.dlc-hero{--cd-acc:var(--cd-fx-ice)}
+.dlc-hero .cd-hero-k{color:var(--cd-fx-ice)}
+.dlc-chip-l{color:var(--dim)}
+.dlc-chip--unb,.dlc-chip--nb{--c:var(--gdim);color:var(--gdim);border-style:dashed}
+.dlc-chip .dlc-flag{margin-left:2px;padding:0 5px;border-radius:5px;line-height:1.4}
+/* DLC-F Ende */
+/* DLC-K Anfang (Kampf: _dlcSecBosse, Besitz Arbeiter kampf) */
+/* DLC-K Ende */
+/* DLC-A Anfang (Ausrüstung: _dlcSecGear, Besitz Arbeiter gear) */
+/* DLC-A Ende */
+/* DLC-Q Anfang (Quests: _dlcSecQuests, Besitz Arbeiter quests) */
+/* DLC-Q Ende */
+/* DLC-S Anfang (Sammeln + Übersicht: _dlcSecTeile, _dlcSecZugang … _dlcSecOffen, _dlcSecWege, Besitz Arbeiter sammeln) */
+/* DLC-S Ende */
 /* Spiel-Originalbilder aus den Game-Files (01.11.2026, KI-Mix 2x): weiche Ecken, wirkt nur bei deckenden Bildern */
 img[src*="cd_assets/weapons/"],img[src*="cd_assets/armor/"],img[src*="cd_assets/items/"],img[src*="cd_assets/cores/"],
 img[src*="cd_assets/dyes/"],img[src*="cd_assets/npcs/"],img[src*="cd_assets/pets/"],img[src*="cd_assets/bosses/"],
@@ -13126,13 +13144,13 @@ function _dlcIslandsProg(){
   const done=cdCheckGet(DLC_KEY_ISLANDS),ids=DLC_ISLANDS.map(i=>cdSlug(i.name));
   el.innerHTML=cdProg(ids.filter(i=>done.has(i)).length,ids.length,'Inseln abgehakt');
 }
-/* 01.11.2026: Teilseiten je Kategorie. Teil -> Seiten-ID, Abschnitte (Schlüssel aus add() unten) und Kopf.
+/* 01.11.2026: Teilseiten je Kategorie. Teil -> Seiten-ID, Abschnitte (Schlüssel aus SECS in renderDlc) und Kopf; t = Titel im Wegweiser.
    Die Übersicht sec-dlc zeigt alle übrigen Abschnitte und verweist auf die Teilseiten, kein Abschnitt steht doppelt. */
 const DLC_PARTS={
-  kampf:{sec:'dlc-kampf',keys:['bosse'],res:'Kampf',sub:'Bosse und Gegner aus den DLC-Questreihen und der Garten der Prüfungen mit allen Gruppen und Belohnungen.'},
-  ausruestung:{sec:'dlc-ausruestung',keys:['ausruestung'],res:'Ausrüstung',sub:'Alle neuen Waffen, Rüstungen, Accessoires und Abyss-Kerne aus dem DLC, dazu Atemgeräte, Wagen- und Haustierausrüstung, Vorbesteller-Set und Twitch-Drops.'},
-  quests:{sec:'dlc-quests',keys:['quests'],res:'Quests',sub:'Alle Questreihen aus dem DLC mit Start, Voraussetzung, Schritten und Belohnungen.'},
-  sammeln:{sec:'dlc-sammeln',keys:['teile'],res:'Herstellen & Sammeln',sub:'Segel, Kanonen, Galionsfiguren und Heckteile für dein Schiff mit Händler, Preis und Boni.'}
+  kampf:{t:'Bosse und Garten der Prüfungen',sec:'dlc-kampf',keys:['bosse'],res:'Kampf',sub:'Bosse und Gegner aus den DLC-Questreihen und der Garten der Prüfungen mit allen Gruppen und Belohnungen.'},
+  ausruestung:{t:'Neue DLC-Ausrüstung',sec:'dlc-ausruestung',keys:['ausruestung'],res:'Ausrüstung',sub:'Alle neuen Waffen, Rüstungen, Accessoires und Abyss-Kerne aus dem DLC, dazu Atemgeräte, Wagen- und Haustierausrüstung, Vorbesteller-Set und Twitch-Drops.'},
+  quests:{t:'DLC-Quests',sec:'dlc-quests',keys:['quests'],res:'Quests',sub:'Alle Questreihen aus dem DLC mit Start, Voraussetzung, Schritten und Belohnungen.'},
+  sammeln:{t:'Schiffsteile',sec:'dlc-sammeln',keys:['teile'],res:'Herstellen & Sammeln',sub:'Segel, Kanonen, Galionsfiguren und Heckteile für dein Schiff mit Händler, Preis und Boni.'}
 };
 function _dlcPartCount(p){
   try{
@@ -13150,33 +13168,50 @@ function renderDlcSammeln(){renderDlc('sammeln');}
 /* Icon vor dem Namen in DLC-Tabellen (Bilder aus den Spieldateien: WEAPON_IMGS, ARMOR_IMGS, DLC_IMGS) */
 function _dlcIco(src){return src?'<img class="dlc-ico" src="'+cdEsc(src)+'" width="40" height="40" alt="" loading="lazy" decoding="async" onerror="this.remove()">':'';}
 function _dlcImg(n){return typeof DLC_IMGS!=='undefined'?DLC_IMGS[n]:'';}
-function renderDlc(part){
-  const P=part?DLC_PARTS[part]:null;if(part&&!P)return;
-  const root=document.getElementById(P?'dlc-root-'+part:'dlc-root');if(!root)return;
-  if(typeof DLC_META==='undefined'){root.innerHTML=cdNote('Die Daten dieser Seite (data/d12-dlc.js) konnten nicht geladen werden. Bitte die Seite neu laden.',{kind:'warn'});return;}
-  const M=DLC_META,G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
-  const TRADE=_dlcA(()=>DLC_TRADE),HOMES=_dlcA(()=>DLC_HOMES),RSHOPS=_dlcA(()=>DLC_RELIC_SHOPS);
-  const PART_STATS={kampf:[[DLC_BOSSES.length,'Bosse und Gegner'],[DLC_GARDEN.length,'Gruppen im Garten']],
-    ausruestung:[[G.w.length,'Waffen'],[G.a.length,'Rüstungsteile'],[G.x.length+G.k.length+G.e.length,'Weitere Ausrüstung']],
-    quests:[[DLC_QUESTS.length,'Questreihen'],[DLC_QUESTS.reduce((n,q)=>n+(Array.isArray(q.steps)?q.steps.filter(Boolean).length:0),0),'Schritte erfasst']],
-    sammeln:[[DLC_SHIP_PARTS.length,'Schiffsteile'],[new Set(DLC_SHIP_PARTS.map(p=>p.type)).size,'Typen']]};
-  let h=P?cdHero({kicker:'Erster DLC · '+P.res,title:'Charting the Unknown',sub:P.sub,glyph:'⚓',tone:'ice',stats:PART_STATS[part]})
-    :cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',
-    sub:'Schiffe, Pywels Großer Ozean mit unerschlossenen Inseln, Tauchen, Unterwasser-Reittiere, neue Questreihen, der Garten der Prüfungen, Burgen und Ehe: alles Neue aus dem DLC an einem Ort.',
-    glyph:'⚓',tone:'ice',stats:[[DLC_SHIPS.length,'Schiffe'],[DLC_ISLANDS.length,'Inseln benannt'],[DLC_GARDEN.length,'Gruppen im Garten'],[nGear,'DLC-Ausrüstung im Wiki']]});
-  const B=[];
-  const add=(k,o)=>B.push(Object.assign({id:'dlc-b-'+k,tone:'ice',cls:'dlc-fold'},o));
-
-  /* 1 Überblick und Zugang */
+/* Gemeinsame Helfer (Fundament dlc-design). Wert-Chip: x = Text | {v,c,q} | Liste (eine Chip je Wert).
+   o.l = kleine Beschriftung vorn, o.g Glyphe oder o.i Icon (cdIcon), o.c Ton (gold|red|violet|ok|warn|ice, nur bei belegten Werten).
+   Unbestätigt/nicht belegt: Chip grau gestrichelt (dlc-chip--unb/--nb), Vermerk sichtbar wie _dlcFlag, Quelle im title. */
+function _dlcChip(x,o){
+  o=o||{};
+  if(x==null||x==='')return '';
+  if(Array.isArray(x))return x.map(y=>_dlcChip(y,o)).join('');
+  const v=_dlcObj(x),c=v.c||'ok',t=v.v==null?'':String(v.v);if(!t)return '';
+  const bad=c!=='ok',kind=c==='nb'?'nb':'unb',flag=bad&&!(c==='nb'&&/nicht belegt/i.test(t))?_dlcFlag(c,v.q):'';
+  return '<span class="cd-chip dlc-chip'+(bad?' dlc-chip--'+kind:(o.c?' cd-chip--'+cdEsc(o.c):''))+'"'
+    +(bad&&v.q?' title="'+cdEsc((kind==='nb'?'nicht belegt':'unbestätigt')+': '+v.q)+'"':'')+'>'
+    +(o.i?cdIcon(o.i):o.g?'<i class="cd-g" aria-hidden="true">'+cdEsc(o.g)+'</i>':'')
+    +(o.l?'<span class="dlc-chip-l">'+cdEsc(o.l)+'</span>':'')+'<b>'+cdEsc(t)+'</b>'+flag+'</span>';
+}
+/* Bildregel des Users: eine Gruppe zeigt nur dann Bilder, wenn JEDER Eintrag ein Bild hat (get liefert die Quelle). */
+function _dlcAllImg(arr,get){return Array.isArray(arr)&&arr.length>0&&arr.every(x=>!!get(x));}
+/* Ist ein Wert (oder ein Teil davon) unbestätigt/nicht belegt? Für graue Kartenzustände. */
+function _dlcBad(x){if(x==null)return false;if(Array.isArray(x))return x.some(_dlcBad);const o=_dlcObj(x);return !!(o.c&&o.c!=='ok');}
+/* ===== DLC-Fundament (01.11.2026, Lauf dlc-design) =====
+   renderDlc(part) sammelt nur noch. Jeder Abschnitt hat eine Builder-Funktion _dlcSec<Name>(), die ein Abschnitts-Objekt
+   liefert: {title, lead, icon, chips, body, tone?, open?, flat?, s?, after?}; Schlüssel und Reihenfolge stehen in SECS
+   (renderDlc), die Anker-ID ist dlc-b-<Schlüssel>, die Teilseite folgt aus DLC_PARTS[..].keys.
+     body   HTML-String oder Funktion (lazy; auf der Übersicht als Faltkarte, dann s setzen).
+     flat   true = auf der Teilseite ohne Faltkarte direkt unter Kopf und Legende (<section class="dlc-flat" id="dlc-b-<k>">).
+     s      Suchtext der Faltkarte (Standard: Titel + Klartext des Körpers).
+     after  Funktion(root), läuft nach dem Einsetzen (z. B. Fortschritt nachziehen).
+   Besitz laut Briefing (Abschnitt 4): Orchestrator renderDlc, _dlcHead, _dlcJump, _dlcLegend, _dlcFoot und gemeinsame
+   _dlc-Helfer; kampf _dlcSecBosse (Helfer _dlcK davor); gear _dlcSecGear (Helfer _dlcA_/_dlcG davor); quests _dlcSecQuests
+   (Helfer _dlcQ_ davor); sammeln _dlcSecTeile, _dlcSecZugang, _dlcSecSchiffe, _dlcSecInseln, _dlcSecTauchen,
+   _dlcSecReittiere, _dlcSecLeben, _dlcSecOffen, _dlcSecWege (Helfer _dlcS davor). */
+/* 1 Überblick und Zugang (Abschnitt dlc-b-zugang, Besitz: sammeln) */
+function _dlcSecZugang(){
+  const M=DLC_META;
   let b=_dlcFacts([['Voller Titel',M.full],['Erschienen',M.release],['Patch',M.patch+'; danach '+M.hotfixes],['Preis',M.price],['Plattformen',M.platforms]]);
   b+=_dlcH('Voraussetzungen und Start')+cdStepper(DLC_ACCESS.map(s=>({t:s.t,d:{h:cdEsc(s.d)+(s.u?' '+_dlcV(s.u):'')}})),'dlc-steps');
   b+=DLC_WARN.map(w=>cdNote(w.d,{kind:'warn',title:w.t})).join('');
   b+='<p class="dlc-p">Release-Termine, Plattformen, Märkte und die vollständige Featureliste: '+cdGoLink('patches','','DLC-Kasten auf der Seite Patch-Notes')+'</p>';
-  add('zugang',{title:'Überblick und Zugang',lead:'Was du brauchst, wo es losgeht und was nur als Kliff funktioniert.',icon:'⌖',open:true,
-    chips:[{v:M.patch,t:'Patch',c:'gold'},{t:'Ozean ab „Heulender Hügel“',c:'ice'},{t:'Story ab „Ende der Reise“'}],body:b});
-
-  /* 2 Schiffe */
-  b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
+  return {title:'Überblick und Zugang',lead:'Was du brauchst, wo es losgeht und was nur als Kliff funktioniert.',icon:'⌖',open:true,
+    chips:[{v:M.patch,t:'Patch',c:'gold'},{t:'Ozean ab „Heulender Hügel“',c:'ice'},{t:'Story ab „Ende der Reise“'}],body:b};
+}
+/* 2 Schiffe (Abschnitt dlc-b-schiffe, Besitz: sammeln) */
+function _dlcSecSchiffe(){
+  const TRADE=_dlcA(()=>DLC_TRADE);
+  let b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
   const sV=_dlcAny(DLC_SHIPS,'vendor'),sC=_dlcAny(DLC_SHIPS,'crew');
   b+=_dlcTbl(['Schiff','Preis'].concat(sV?['Verkäufer']:[],['Erhalt','Werte'],sC?['Besatzung']:[]),DLC_SHIPS.map(s=>({c:s.c,
     s:[s.name,_dlcP(s.price),_dlcP(s.vendor),_dlcP(s.obtain),_dlcP(s.stats),_dlcP(s.crew)].join(' '),
@@ -13188,21 +13223,23 @@ function renderDlc(part){
     cells:[_dlcIco(_dlcImg(t.name))+_dlcName(t),_dlcCell(t.buy,true),_dlcCell(t.sell,true),_dlcCell(t.note)]})),{cap:'Seehandel-Waren'});
   b+=_dlcH('Schiffsbau per Entsendung')+_dlcFacts(DLC_SHIPBUILD);
   b+=_dlcH('Besatzung: '+DLC_CREW.length+' Rollen')+'<ul class="dlc-crew">'+DLC_CREW.map(r=>'<li><b>'+cdEsc(r.role)+'</b><span>'+cdEsc(r.d)+'</span></li>').join('')+'</ul>'+_dlcList(DLC_CREW_NOTES,'dlc-list--note');
-  add('schiffe',{title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
-    chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b});
-
-  /* 3 Schiffsteile */
+  return {title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
+    chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b};
+}
+/* 3 Schiffsteile (Abschnitt dlc-b-teile, Besitz: sammeln) */
+function _dlcSecTeile(){
   const typen=[['','Alle'],['Sail','Segel'],['Front Cannon','Bugkanonen'],['Side Cannon','Seitenkanonen'],['Figurehead','Galionsfiguren'],['Stern','Heck']];
-  b=_dlcList(DLC_PART_NOTES,'dlc-list--note');
+  let b=_dlcList(DLC_PART_NOTES,'dlc-list--note');
   b+=cdPills(typen.map(([v,t],i)=>({v:v,t:t,on:i===0,n:v?DLC_SHIP_PARTS.filter(p=>p.type===v).length:DLC_SHIP_PARTS.length})),{name:'dlc-parts',label:'Schiffsteile nach Typ filtern',wrap:true,cls:'dlc-pills'});
   b+=_dlcTbl(['Teil','Typ','Größe','Händler / Erhalt','Preis','Boni'],DLC_SHIP_PARTS.map(p=>({c:p.c,attrs:' data-type="'+cdEsc(p.type)+'"',
     s:[p.name,p.type,_dlcP(p.size),_dlcP(p.vendor),_dlcP(p.price),_dlcP(p.bonus)].join(' '),
     cells:[_dlcIco(_dlcImg(p.name))+_dlcName(p),cdEsc(p.type),_dlcV(p.size),_dlcV(p.vendor),_dlcV(p.price),_dlcV(p.bonus)]})),{id:'dlc-parts-tb',cap:'Schiffsteile'});
-  add('teile',{title:'Schiffsteile',lead:'Segel, Kanonen, Galionsfiguren und Heckteile mit Händler, Preis in Silver und Boni.',icon:'⛵',
-    chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Boni nur laut Game8',c:'warn'}],body:b});
-
-  /* 4 Inseln */
-  b='<div class="dlc-isl-hd"><span>Abhaken, welche Inseln du schon besucht hast (bleibt in diesem Browser gespeichert).</span><span id="dlc-isl-prog"></span></div>';
+  return {title:'Schiffsteile',lead:'Segel, Kanonen, Galionsfiguren und Heckteile mit Händler, Preis in Silver und Boni.',icon:'⛵',
+    chips:[{v:DLC_SHIP_PARTS.length,t:'Teile',c:'ice'},{t:'Boni nur laut Game8',c:'warn'}],body:b};
+}
+/* 4 Inseln (Abschnitt dlc-b-inseln, Besitz: sammeln) */
+function _dlcSecInseln(){
+  let b='<div class="dlc-isl-hd"><span>Abhaken, welche Inseln du schon besucht hast (bleibt in diesem Browser gespeichert).</span><span id="dlc-isl-prog"></span></div>';
   /* Beschriftete Teile (Lage, Abyss Nexus, Erschließung), dann die freien Angaben (info); fehlende Felder entfallen. */
   const islSub=i=>[['Lage',i.where],['Abyss Nexus',i.nexus],['Erschließung',i.unlock]].map(([k,v])=>{const t=_dlcV(v);return t?'<span class="ctu-pt"><b class="ctu-pk">'+k+':</b> '+t+'</span>':'';}).join('')
     +(i.info!=null?'<span class="ctu-pt">'+[].concat(i.info).map(_dlcV).join(' ')+'</span>':'');
@@ -13210,28 +13247,32 @@ function renderDlc(part){
     title:{h:_dlcName(i)},sub:{h:islSub(i)},cls:'dlc-ck'+(i.c&&i.c!=='ok'?' dlc-row-'+i.c:''),
     s:[i.name,_dlcP(i.where),_dlcP(i.nexus),_dlcP(i.unlock),_dlcP(i.info)].join(' ')})).join('')+'</div>';
   b+=_dlcH('Ozean, Erschließung, Häfen')+_dlcFacts(DLC_ISLAND_FACTS);
-  add('inseln',{title:'Inseln und Ozean',lead:'Benannte Inseln zum Abhaken, Erschließungs-Missionen, Häfen, Schatzkarten.',icon:'◉',
-    chips:[{v:DLC_ISLANDS.length,t:'Inseln benannt',c:'ice'},{t:'Gesamtzahl offiziell nicht genannt'}],body:b});
-
-  /* 5 Tauchen */
-  b=_dlcFacts(DLC_DIVE);
+  return {title:'Inseln und Ozean',lead:'Benannte Inseln zum Abhaken, Erschließungs-Missionen, Häfen, Schatzkarten.',icon:'◉',
+    chips:[{v:DLC_ISLANDS.length,t:'Inseln benannt',c:'ice'},{t:'Gesamtzahl offiziell nicht genannt'}],body:b};
+}
+/* 5 Tauchen (Abschnitt dlc-b-tauchen, Besitz: sammeln) */
+function _dlcSecTauchen(){
+  const RSHOPS=_dlcA(()=>DLC_RELIC_SHOPS);
+  let b=_dlcFacts(DLC_DIVE);
   if(RSHOPS.length)b+=_dlcH('Relic-Händler ('+RSHOPS.length+')')+_dlcTbl(['Händler','Ort','Sortiment','Freischaltung'],RSHOPS.map(r=>({c:r.c,
     s:[r.name,_dlcP(r.where),_dlcP(r.sells),_dlcP(r.unlock)].join(' '),
     cells:[_dlcName(r),_dlcCell(r.where,true),_dlcCell(r.sells,true),_dlcCell(r.unlock)]})),{cap:'Relic-Händler'});
-  add('tauchen',{title:'Tauchen',lead:'Atemanzeige, Tauchanzug, Atemgeräte, Ancient Relics und Relic-Händler.',icon:'≋',
-    chips:[{t:'ohne Voraussetzung',c:'ok'},{t:'Atem über Tauchanzug'}].concat(RSHOPS.length?[{v:RSHOPS.length,t:'Relic-Händler'}]:[]),body:b});
-
-  /* 6 Reittiere */
+  return {title:'Tauchen',lead:'Atemanzeige, Tauchanzug, Atemgeräte, Ancient Relics und Relic-Händler.',icon:'≋',
+    chips:[{t:'ohne Voraussetzung',c:'ok'},{t:'Atem über Tauchanzug'}].concat(RSHOPS.length?[{v:RSHOPS.length,t:'Relic-Händler'}]:[]),body:b};
+}
+/* 6 Reittiere (Abschnitt dlc-b-reittiere, Besitz: sammeln) */
+function _dlcSecReittiere(){
   const mW=_dlcAny(DLC_MOUNTS,'where'),mT=_dlcAny(DLC_MOUNTS,'trust'),mS=_dlcAny(DLC_MOUNTS,'stats');
-  b=_dlcTbl(['Reittier'].concat(mW?['Fundort']:[],['Zähmen'],mT?['Vertrauen']:[],mS?['Werte']:[]),DLC_MOUNTS.map(m=>({c:m.c,s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
+  let b=_dlcTbl(['Reittier'].concat(mW?['Fundort']:[],['Zähmen'],mT?['Vertrauen']:[],mS?['Werte']:[]),DLC_MOUNTS.map(m=>({c:m.c,s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
     cells:[_dlcName(m)].concat(mW?[_dlcCell(m.where,true)]:[],[_dlcV(m.how)],mT?[_dlcCell(m.trust,true)]:[],mS?[_dlcCell(m.stats,true)]:[])})),{cap:'Unterwasser-Reittiere'});
   b+=_dlcFacts(DLC_MOUNT_FACTS);
   b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
-  add('reittiere',{title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
-    chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b});
-
-  /* 7 Quests */
-  b=_dlcList(DLC_QUEST_NOTES,'dlc-list--note');
+  return {title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
+    chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b};
+}
+/* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests) */
+function _dlcSecQuests(){
+  let b=_dlcList(DLC_QUEST_NOTES,'dlc-list--note');
   b+='<div class="dlc-qgrid">'+DLC_QUESTS.map(q=>{
     const steps=Array.isArray(q.steps)?q.steps.filter(Boolean):[];
     const subs=Array.isArray(q.subs)?q.subs:[q.subs];
@@ -13245,32 +13286,37 @@ function renderDlc(part){
       +'<p class="dlc-q-rw"><span class="dlc-k">Belohnungen</span> '+_dlcV(q.rewards)+'</p>'+(q.note?'<p class="dlc-q-rw">'+_dlcV(q.note)+'</p>':'')+'</article>';
   }).join('')+'</div>';
   b+='<p class="dlc-p">Alle übrigen Fraktionsquests der Graumähnen: '+cdGoLink('quests','','Quests')+'</p>';
-  add('quests',{title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',
-    chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b});
-
-  /* 8 Bosse und Garten der Prüfungen */
-  b=_dlcList(DLC_BOSS_NOTES,'dlc-list--note');
+  return {title:'DLC-Quests',lead:'Die drei Charakter-Reihen, „Auf in eine größere Welt“ und weitere Questreihen mit Unterquests und Belohnungen.',icon:'❢',
+    chips:[{v:DLC_QUESTS.length,t:'Questreihen',c:'ice'},{t:'Unterquests meist nur laut Game8',c:'warn'}],body:b};
+}
+/* 8 Bosse und Garten der Prüfungen (Abschnitt dlc-b-bosse, Besitz: kampf) */
+function _dlcSecBosse(){
+  let b=_dlcList(DLC_BOSS_NOTES,'dlc-list--note');
   b+=_dlcTbl(['Boss','Ort und Kontext','Beute'],DLC_BOSSES.map(x=>({c:x.c,s:[x.name,_dlcP(x.where),_dlcP(x.drop),_dlcP(x.note)].join(' '),
     cells:[_dlcName(x)+(x.w?'<br>'+cdGoLink('bosses',x.w,'In der Bossliste'):''),_dlcV(x.where)+(x.note?' '+_dlcV(x.note):''),_dlcV(x.drop)]})),{cap:'Bosse und Gegner aus dem DLC'});
   b+=_dlcH('Garten der Prüfungen')+_dlcFacts(DLC_GARDEN_RULES);
   b+=_dlcTbl(['Nr.','Gruppe','Bosse','Belohnung'],DLC_GARDEN.map(g=>({s:[g.name,[].concat(g.b||[]).join(' '),g.reward].join(' '),
     cells:[String(g.n),'<b class="dlc-n">'+cdEsc(g.name)+'</b>','<span class="dlc-bls'+(g.bc==='ok'?'':' dlc-unb')+'">'+[].concat(g.b||[]).map(n=>cdGoLink('bosses',n,n,'dlc-bl')).join(' ')+(g.bc==='ok'?'':' '+_dlcFlag('unb',g.bq||'GameRant'))+'</span>',cdEsc(g.reward)]})),{cls:'dlc-tbl--garden',cap:'Garten der Prüfungen: Gruppen'});
   b+=_dlcList([DLC_GARDEN_NOTE],'dlc-list--note');
-  add('bosse',{title:'Bosse und Garten der Prüfungen',lead:'Gegner aus den DLC-Questreihen, teils mit bekannten Namen aus dem Hauptspiel, und die '+DLC_GARDEN.length+' Gruppen im Garten der Prüfungen mit Belohnung.',icon:'☠',
-    chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b});
-
-  /* 9 Burgen, Wohnen, Verwaltung, Soziales */
+  return {title:'Bosse und Garten der Prüfungen',lead:'Gegner aus den DLC-Questreihen, teils mit bekannten Namen aus dem Hauptspiel, und die '+DLC_GARDEN.length+' Gruppen im Garten der Prüfungen mit Belohnung.',icon:'☠',
+    chips:[{v:DLC_BOSSES.length,t:'Bosse und Gegner',c:'ice'},{v:DLC_GARDEN.length,t:'Gruppen im Garten'},{t:'Lumen Longsword als Abschluss',c:'gold'}],body:b};
+}
+/* 9 Burgen, Wohnen, Verwaltung, Soziales (Abschnitt dlc-b-leben, Besitz: sammeln) */
+function _dlcSecLeben(){
+  const HOMES=_dlcA(()=>DLC_HOMES);
   const gruppen=[...new Set(DLC_LIVING.map(x=>x.g))];
-  b=gruppen.map(g=>_dlcH(g)+'<ul class="dlc-list dlc-list--rows">'+DLC_LIVING.filter(x=>x.g===g).map(x=>'<li><b>'+cdEsc(x.t)+'</b> '+_dlcV(x.d)+'</li>').join('')+'</ul>').join('');
+  let b=gruppen.map(g=>_dlcH(g)+'<ul class="dlc-list dlc-list--rows">'+DLC_LIVING.filter(x=>x.g===g).map(x=>'<li><b>'+cdEsc(x.t)+'</b> '+_dlcV(x.d)+'</li>').join('')+'</ul>').join('');
   if(HOMES.length)b+=_dlcH('Wohnsitze ('+HOMES.length+')')+_dlcTbl(['Wohnsitz','Ort','Erwerb','Hinweis'],HOMES.map(x=>({c:x.c,
     s:[x.name,_dlcP(x.where),_dlcP(x.how),_dlcP(x.note)].join(' '),
     cells:[_dlcName(x),_dlcCell(x.where,true),_dlcCell(x.how,true),_dlcCell(x.note)]})),{cap:'Wohnsitze'});
   b+='<p class="dlc-p">Camp-Ausbau und Voraussetzungen: '+cdGoLink('camp','','Graumähnen-Camp')+'</p>';
-  add('leben',{title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
-    chips:gruppen.map(g=>({t:g})),body:b});
-
-  /* 10 Neue DLC-Ausrüstung (datengetrieben aus WEAPONS/ARMOR) */
-  b=_dlcList(DLC_GEAR_NOTES,'dlc-list--note');
+  return {title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
+    chips:gruppen.map(g=>({t:g})),body:b};
+}
+/* 10 Neue DLC-Ausrüstung (datengetrieben aus WEAPONS/ARMOR) (Abschnitt dlc-b-ausruestung, Besitz: gear) */
+function _dlcSecGear(){
+  const G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
+  let b=_dlcList(DLC_GEAR_NOTES,'dlc-list--note');
   if(G.w.length){
     b+=_dlcH('Waffen ('+G.w.length+')')+_dlcTbl(['Waffe','Typ','ATK','Fundort'],G.w.map(w=>({s:[w.name,w.type,w.source,w.notes].join(' '),
       cells:[_dlcIco(WEAPON_IMGS[w.name])+'<button type="button" class="dlc-lnk" onclick="waffeZeigeTeil(\''+escJsStr(w.name)+'\')">'+cdEsc(w.name)+'</button>',cdEsc(w.type||''),w.atk!=null?_dlcQ(w.atk,w):(w.def!=null?_dlcQ('DEF '+w.def,w):'<span class="dlc-nb">nicht erfasst</span>'),cdEsc(w.source||'')]})),{cap:'DLC-Waffen'});
@@ -13294,40 +13340,73 @@ function renderDlc(part){
   const tools=DLC_GEAR_TOOLS.filter(t=>!gearNames.has(t));
   if(tools.length)b+=cdNote({h:'Offiziell neu sind im Kampf einsetzbare Alltagswerkzeuge: '+tools.map(t=>'<b>'+cdEsc(t)+'</b> ('+cdEsc(DLC_GEAR_TOOLS_DE[t]||'')+')').join(', ')+'. '+_dlcV({v:'Werte, Fundort und Waffentyp',c:'nb'})},{kind:'info',title:'Kampf-Alltagswerkzeuge'});
   b+='<p class="dlc-p">Alle Einträge tragen auf den Seiten '+cdGoLink('weapons','','Waffen')+' und '+cdGoLink('armor','','Rüstungen')+' das Etikett <span class="tag tdlc">DLC</span>.</p>';
-  add('ausruestung',{title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',
-    chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}].concat(G.x.length?[{v:G.x.length,t:'Accessoires'}]:[],G.k.length?[{v:G.k.length,t:'Abyss-Kerne'}]:[],G.e.length?[{v:G.e.length,t:'Weitere'}]:[]),body:b});
-
-  /* 11 Was noch offen ist */
-  add('offen',{title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
-    chips:[{v:DLC_OPEN.length,t:'offene Punkte',c:'warn'}],body:'<ol class="dlc-ol">'+DLC_OPEN.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'});
-
-  /* Teil-Zuordnung: Abschnitt -> Teil, über die Schlüssel in DLC_PARTS */
-  const partOf={};Object.keys(DLC_PARTS).forEach(p=>DLC_PARTS[p].keys.forEach(k=>{partOf['dlc-b-'+k]=p;}));
-  const all=B.slice();
-  B.length=0;
-  all.forEach(o=>{
-    if(P){if(partOf[o.id]===part)B.push(Object.assign({},o,{open:true}));}
-    else if(!partOf[o.id])B.push(o);
-  });
-  let jump;
-  if(P){
-    jump='<nav class="dlc-jump" aria-label="Weitere DLC-Bereiche">'+cdGoLink('dlc','','DLC-Übersicht: Schiffe, Inseln, Tauchen','dlc-jl')
-      +Object.keys(DLC_PARTS).filter(p=>p!==part).map(p=>cdGoLink(DLC_PARTS[p].sec,'','DLC · '+DLC_PARTS[p].res,'dlc-jl')).join('')+'</nav>';
-  }else{
-    /* Übersicht: eigene Abschnitte als Sprung, dazu Wegweiser in die DLC-Seiten der anderen Kategorien */
-    jump='<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>'
-      +'<div class="dlc-parts" role="list" aria-label="Charting the Unknown in den anderen Kategorien">'+Object.keys(DLC_PARTS).map(p=>{
-        const D=DLC_PARTS[p],t=all.find(o=>o.id==='dlc-b-'+D.keys[0]);
-        return '<a role="listitem" class="dlc-part cd-spot" href="'+cdGoHref(D.sec,'')+'" data-go="'+D.sec+'">'
-          +'<span class="dlc-part-k">'+cdEsc(D.res)+'</span><b class="dlc-part-t">'+cdEsc(t?t.title:D.res)+'</b>'
-          +'<span class="dlc-part-n">'+_dlcPartCount(p)+'</span>'+cdIcon('go')+'</a>';
-      }).join('')+'</div>';
-  }
-  const legend=cdNote({h:'Belegt heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. <span class="dlc-unb">Grau mit Vermerk '+_dlcFlag('unb')+'</span> nennt nur eine Quelle, <span class="dlc-nb">'+_dlcFlag('nb')+'</span> heißt gesucht, aber nichts gefunden. Item-, Orts-, Boss- und Questnamen stehen in der englischen Spielschreibweise.'},{kind:'info',title:'So liest du die Seite'});
-  h+=jump+legend+'<div class="cd-folds dlc-folds">'+B.map(o=>cdFold(Object.assign({},o,{s:o.title+' '+_dlcPlain(o.body)}))).join('')+'</div>';
-  h+=cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+  return {title:'Neue DLC-Ausrüstung',lead:'Alle im Wiki als DLC-Inhalt gekennzeichneten Waffen, Rüstungen, Accessoires und Abyss-Kerne sowie weitere Ausrüstung, dazu Vorbesteller-Set und Twitch-Drops.',icon:'†',
+    chips:[{v:G.w.length,t:'Waffen',c:'ice'},{v:G.a.length,t:'Rüstungen',c:'ice'}].concat(G.x.length?[{v:G.x.length,t:'Accessoires'}]:[],G.k.length?[{v:G.k.length,t:'Abyss-Kerne'}]:[],G.e.length?[{v:G.e.length,t:'Weitere'}]:[]),body:b};
+}
+/* 11 Was noch offen ist (Abschnitt dlc-b-offen, Besitz: sammeln) */
+function _dlcSecOffen(){
+  return {title:'Was noch offen ist',lead:'Zwei bis drei Tage nach Release sind alle Guides ausdrücklich unvollständig. Das hier ist gesucht, aber nicht belegt.',icon:'?',tone:'warn',
+    chips:[{v:DLC_OPEN.length,t:'offene Punkte',c:'warn'}],body:'<ol class="dlc-ol">'+DLC_OPEN.map(x=>'<li>'+cdEsc(x)+'</li>').join('')+'</ol>'};
+}
+/* Kopf je Ansicht (Fundament, Orchestrator). part leer = Übersicht. Szenen-Schlüssel aus SCENES (d09):
+   Übersicht roadmap (Schiff mit Kliff, Damiane, Oongka über dem Wasser), Kampf cl-bosses (Queen Stoneback Crab; der DLC hat
+   die Scrap Metal Queen Stoneback Crab), Ausrüstung cl-weapons, Quests q-faction (Graumähnen-Lager; DLC-Questreihen sind
+   Graumähnen-Fraktionsquests), Sammeln mg-angeln (Steg mit Ruderboot, Startseiten-Kachel „Herstellen & Sammeln“). */
+const DLC_HEAD_SCENES={dlc:['roadmap'],kampf:['cl-bosses'],ausruestung:['cl-weapons'],quests:['q-faction','q-side'],sammeln:['mg-angeln']};
+function _dlcHead(part){
+  const P=part?DLC_PARTS[part]:null,G=_dlcGear(),nGear=G.w.length+G.a.length+G.x.length+G.k.length+G.e.length;
+  const PART_STATS={kampf:[[DLC_BOSSES.length,'Bosse und Gegner'],[DLC_GARDEN.length,'Gruppen im Garten']],
+    ausruestung:[[G.w.length,'Waffen'],[G.a.length,'Rüstungsteile'],[G.x.length+G.k.length+G.e.length,'Weitere Ausrüstung']],
+    quests:[[DLC_QUESTS.length,'Questreihen'],[DLC_QUESTS.reduce((n,q)=>n+(Array.isArray(q.steps)?q.steps.filter(Boolean).length:0),0),'Schritte erfasst']],
+    sammeln:[[DLC_SHIP_PARTS.length,'Schiffsteile'],[new Set(DLC_SHIP_PARTS.map(p=>p.type)).size,'Typen']]};
+  /* Szenen (K1): kein eigenes DLC-Bild vorhanden, daher Motive, die die Vorbildseiten derselben Kategorie nutzen. */
+  return P?cdHero({kicker:'Erster DLC · '+P.res,title:'Charting the Unknown',sub:P.sub,glyph:'⚓',tone:'ice',stats:PART_STATS[part],
+      scene:{keys:DLC_HEAD_SCENES[part]||[]},cls:'dlc-hero dlc-hero--'+part})
+    :cdHero({kicker:'Erster DLC · erschienen am 29.10.2026',title:'Charting the Unknown',scene:{keys:DLC_HEAD_SCENES.dlc},cls:'dlc-hero',
+    sub:'Schiffe, Pywels Großer Ozean mit unerschlossenen Inseln, Tauchen, Unterwasser-Reittiere, neue Questreihen, der Garten der Prüfungen, Burgen und Ehe: alles Neue aus dem DLC an einem Ort.',
+    glyph:'⚓',tone:'ice',stats:[[DLC_SHIPS.length,'Schiffe'],[DLC_ISLANDS.length,'Inseln benannt'],[DLC_GARDEN.length,'Gruppen im Garten'],[nGear,'DLC-Ausrüstung im Wiki']]});
+}
+/* Wegweiser der Übersicht in die DLC-Seiten der anderen Kategorien (Besitz: sammeln) */
+function _dlcSecWege(){
+  return '<div class="dlc-parts" role="list" aria-label="Charting the Unknown in den anderen Kategorien">'+Object.keys(DLC_PARTS).map(p=>{
+    const D=DLC_PARTS[p];
+    return '<a role="listitem" class="dlc-part cd-spot" href="'+cdGoHref(D.sec,'')+'" data-go="'+D.sec+'">'
+      +'<span class="dlc-part-k">'+cdEsc(D.res)+'</span><b class="dlc-part-t">'+cdEsc(D.t||D.res)+'</b>'
+      +'<span class="dlc-part-n">'+_dlcPartCount(p)+'</span>'+cdIcon('go')+'</a>';
+  }).join('')+'</div>';
+}
+/* Sprungleiste: Teilseite = Übersicht + die anderen Teilseiten; Übersicht = eigene Abschnitte, dann Wegweiser */
+function _dlcJump(part,B){
+  if(part)return '<nav class="dlc-jump" aria-label="Weitere DLC-Bereiche">'+cdGoLink('dlc','','DLC-Übersicht: Schiffe, Inseln, Tauchen','dlc-jl')
+    +Object.keys(DLC_PARTS).filter(p=>p!==part).map(p=>cdGoLink(DLC_PARTS[p].sec,'','DLC · '+DLC_PARTS[p].res,'dlc-jl')).join('')+'</nav>';
+  return '<nav class="dlc-jump" aria-label="Abschnitte dieser Seite">'+B.map(x=>cdGoLink('dlc',x.id,x.title,'dlc-jl')).join('')+'</nav>'+_dlcSecWege();
+}
+function _dlcLegend(){
+  return cdNote({h:'Belegt heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. <span class="dlc-unb">Grau mit Vermerk '+_dlcFlag('unb')+'</span> nennt nur eine Quelle, <span class="dlc-nb">'+_dlcFlag('nb')+'</span> heißt gesucht, aber nichts gefunden. Item-, Orts-, Boss- und Questnamen stehen in der englischen Spielschreibweise.'},{kind:'info',title:'So liest du die Seite'});
+}
+function _dlcFoot(){
+  const M=DLC_META;
+  return cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+}
+/* Sammelt die Abschnitte der Ansicht. Reihenfolge = Reihenfolge auf der Übersicht. Ein Abschnitt steht auf der
+   Teilseite, deren DLC_PARTS[..].keys seinen Schlüssel enthält, sonst auf der Übersicht (nie doppelt). */
+function renderDlc(part){
+  const P=part?DLC_PARTS[part]:null;if(part&&!P)return;
+  const root=document.getElementById(P?'dlc-root-'+part:'dlc-root');if(!root)return;
+  if(typeof DLC_META==='undefined'){root.innerHTML=cdNote('Die Daten dieser Seite (data/d12-dlc.js) konnten nicht geladen werden. Bitte die Seite neu laden.',{kind:'warn'});return;}
+  const SECS=[['zugang',_dlcSecZugang],['schiffe',_dlcSecSchiffe],['teile',_dlcSecTeile],['inseln',_dlcSecInseln],['tauchen',_dlcSecTauchen],
+    ['reittiere',_dlcSecReittiere],['quests',_dlcSecQuests],['bosse',_dlcSecBosse],['leben',_dlcSecLeben],['ausruestung',_dlcSecGear],['offen',_dlcSecOffen]];
+  const partOf={};Object.keys(DLC_PARTS).forEach(p=>DLC_PARTS[p].keys.forEach(k=>{partOf[k]=p;}));
+  const B=SECS.filter(([k])=>P?partOf[k]===part:!partOf[k])
+    .map(([k,f])=>Object.assign({id:'dlc-b-'+k,tone:'ice',cls:'dlc-fold'},f(),P?{open:true}:{}));
+  const flats=B.filter(o=>P&&o.flat),folds=B.filter(o=>!(P&&o.flat));
+  let h=_dlcHead(part)+_dlcJump(part,B)+_dlcLegend();
+  h+=flats.map(o=>'<section class="dlc-flat" id="'+cdEsc(o.id)+'" aria-label="'+cdEsc(_dlcPlain(o.title))+'">'+(typeof o.body==='function'?o.body():o.body||'')+'</section>').join('');
+  if(folds.length)h+='<div class="cd-folds dlc-folds">'+folds.map(o=>cdFold(Object.assign({},o,{s:o.s!=null?o.s:o.title+' '+_dlcPlain(typeof o.body==='function'?'':o.body)}))).join('')+'</div>';
+  h+=_dlcFoot();
   root.innerHTML=h;
   _dlcIslandsProg();
+  B.forEach(o=>{if(typeof o.after==='function')try{o.after(root);}catch(e){console.warn('DLC after',e);}});
 }
 document.addEventListener('cd-pills',e=>{
   const d=e.detail;if(!d||d.name!=='dlc-parts')return;
