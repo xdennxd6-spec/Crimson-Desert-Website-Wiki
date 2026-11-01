@@ -7251,7 +7251,8 @@ select.dr-sel-hidden{display:none!important}
 .drb2-hd{display:flex;align-items:center;gap:14px;min-width:0}
 .drb2-av{position:relative;flex:none;width:88px;height:88px;overflow:hidden;border-radius:16px;border:1px solid color-mix(in srgb,var(--cd-acc,var(--violet)) 60%,transparent);background:color-mix(in srgb,var(--cd-acc,var(--violet)) 30%,var(--card))}
 .drb2-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;transform:scale(1.4);transform-origin:50% 26%;display:block}
-#witch-grid.drb2-noimg .drb2-av{display:none}
+.drb2-av.drb2-fb{display:grid;place-items:center}
+.drb2-av.drb2-fb svg{width:44px;height:44px}
 .drb2-id{min-width:0}
 .drb2-n{margin:0;font:700 18px/1.25 var(--f-display);color:var(--ink-hi)}
 .drb2-ch{margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--dim)}
@@ -7261,11 +7262,12 @@ select.dr-sel-hidden{display:none!important}
 .drb2-lbl,.drb2-k{font:700 11px/1.2 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
 .drb2-chips{display:flex;flex-wrap:wrap;gap:6px}
 .drb2-svc{align-items:flex-start;border-radius:10px;padding:4px 10px;min-height:28px}
-.drb2-svc .witch-svc-ico{margin:0;opacity:1}
+.drb2-svc .witch-svc-ico{display:inline-block;min-width:1.25em;margin:0;text-align:center;opacity:1}
+#sec-witches .dr-head>.cd-note{margin:0 0 10px}
 .drb2-sanc .cd-chip{--c:var(--cd-acc,var(--violet));min-height:28px}
 .drb2-long{margin:0;padding-left:10px;border-left:2px dashed color-mix(in srgb,var(--cd-acc,var(--violet)) 55%,transparent);font-size:12.5px;line-height:1.5;color:var(--dim)}
 .drb2-act{display:flex}
-#sec-witches .map-pin-btn{margin:0;min-height:36px;padding:6px 14px;font-size:12px}
+#sec-witches .map-pin-btn{margin:0;min-height:40px;padding:8px 16px;font-size:12px}
 #sec-witches .drb2-more>summary{min-height:40px;margin-top:0;font-size:11.5px}
 #sec-witches .drb2-more .item-more-body{gap:12px;padding-top:12px}
 .drb2-blk{display:grid;gap:5px}
@@ -7279,6 +7281,9 @@ select.dr-sel-hidden{display:none!important}
 #sec-food:has(>.dr-head) :is(.fd-intro,.fd-key){display:none}
 #sec-food .dr-head .cd-hero-stat dd{font-size:20px;line-height:1.1}
 #sec-food .dr-head .cd-hero-stats[data-n="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+#sec-food .dr-head .cd-hero-stat dd{white-space:nowrap}
+@media (max-width:400px){#sec-food .dr-head .cd-hero-stat dd{font-size:18px}}
+@media (max-width:340px){#sec-food .dr-head .cd-hero-stat dd{font-size:16px}}
 /* DR-B2 Ende */
 /* ---- */
 /* DR-B3 Anfang (Reittiere + Haustiere) */
@@ -18499,7 +18504,8 @@ function renderAccessories(){
    Sichtbar: Porträt, Name, Kapitel-Gate, Ort, kurze Dienste und Sanctums als Chips, "Auf Karte". Im Aufklapper (details.item-more):
    Händlerware, Questlinie, Tipp (und der volle Ort, wenn er oben gekürzt ist). Suche: data-s = Volltext, data-item-visible/-hidden. */
 const _DRB2_WITCH_INTRO=`Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>White Crow</strong> ist erst nach 4 Witch's Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).`;
-function _drB2NoImg(){const g=document.getElementById('witch-grid');if(g)g.classList.add('drb2-noimg');}
+/* Fehlt das Porträt oder lädt es nicht, bleibt das vorhandene Symbol (WITCH_ICON_SVG) im Rahmen. */
+function _drB2Fb(img){const a=img.parentElement;if(!a)return;a.classList.add('drb2-fb');a.innerHTML=WITCH_ICON_SVG[a.dataset.n]||'<i class="cd-g" aria-hidden="true">☾</i>';}
 function _drB2WitchHead(){
   const nSanc=WITCHES.reduce((n,w)=>n+(w.sanctums||[]).length,0),
     nSyn=WITCHES.filter(w=>(w.services||[]).some(x=>/^Core-Synthese/.test(x))).length;
@@ -18508,7 +18514,7 @@ function _drB2WitchHead(){
     stats:[[WITCHES.length,'Hexen'],[nSanc,'Sanctums erfasst'],[nSyn,'mit Core-Synthese']],
     links:[['synthesis','Abyss-Synthese'],['cores','Abyss-Ausrüstung'],['checklists','Checklisten'],['secrets','Geheimnisse & Lore']],
     after:cdNote({h:'Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).'},{kind:'info'})
-      +drInfo({title:'Hexen im Überblick',lead:'Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region.',
+      +drInfo({title:'Hexen im Überblick',lead:'Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region …',
         icon:'☾',tone:'violet',h:_DRB2_WITCH_INTRO})});
 }
 function _drB2WitchCard(w){
@@ -18527,7 +18533,7 @@ function _drB2WitchCard(w){
     +(w.tip?cdNote(w.tip,{kind:'info',title:'Tipp'}):'');
   return `<article class="witch-card cd-spot" style="--cd-acc:${e(w.color)}" data-go-id="${e(w.name)}" data-s="${e(sFull)}" data-item-id="${e(w.name)}" data-item-visible="${e(sVis)}" data-item-hidden="${e(sHid)}">
     <header class="drb2-hd">
-      ${w.img?`<span class="drb2-av" aria-hidden="true"><img src="${e(w.img)}" width="88" height="88" loading="lazy" decoding="async" alt="" onerror="_drB2NoImg()"></span>`:''}
+      <span class="drb2-av${w.img?'':' drb2-fb'}" data-n="${e(w.name)}" aria-hidden="true">${w.img?`<img src="${e(w.img)}" width="88" height="88" loading="lazy" decoding="async" alt="" onerror="_drB2Fb(this)">`:(WITCH_ICON_SVG[w.name]||'')}</span>
       <div class="drb2-id"><h3 class="drb2-n">${e(w.name)}</h3><p class="drb2-ch">${e(w.chapter)}</p></div>
     </header>
     <p class="drb2-loc">${cdIcon('pin')}${e(w.location)}</p>
@@ -18540,7 +18546,6 @@ function _drB2WitchCard(w){
 function renderWitches(){
   const grid=document.getElementById('witch-grid');if(!grid)return;
   if(!document.getElementById('dr-head-witches'))drMount('witches',_drB2WitchHead());
-  grid.classList.toggle('drb2-noimg',!WITCHES.every(w=>w.img));
   grid.innerHTML=WITCHES.map(_drB2WitchCard).join('');
 }
 
