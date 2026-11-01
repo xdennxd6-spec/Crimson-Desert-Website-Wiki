@@ -7246,6 +7246,57 @@ select.dr-sel-hidden{display:none!important}
 /* DR-B2 Ende */
 /* ---- */
 /* DR-B3 Anfang (Reittiere + Haustiere) */
+/* Reittiere: Filterleiste im Kopf, Gruppen, Karten mit scharfem Spielportrait (MOUNT_INGAME_IMGS) */
+.drb3-bar{margin:0 0 6px}
+.drb3-bar .dr-pillrow{margin:0 0 2px}
+.drb3-grp{margin:0 0 30px;scroll-margin-top:72px}
+.drb3-gh{display:flex;align-items:baseline;gap:10px;margin:8px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.drb3-gt{margin:0;font-family:var(--f-display);font-size:18px;font-weight:700;letter-spacing:.01em;color:var(--ink-hi)}
+.drb3-gn{font-family:var(--f-mono);font-size:var(--fs-11);font-weight:600;color:var(--dim);font-variant-numeric:tabular-nums}
+#mount-sections .drb3-grp>.grid{grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;align-items:start}
+.drb3-mc{contain-intrinsic-height:auto 430px;content-visibility:auto}
+.drb3-mc--noimg{--cd-spot-c:var(--cd-fx-ice)}
+.drb3-mc--noimg::before{background:var(--cd-fx-ice)}
+.drb3-mi{position:relative;aspect-ratio:16/10;margin:0 0 12px;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 95% at 50% 28%,color-mix(in srgb,var(--red) 16%,var(--panel-2)),var(--panel-2) 72%)}
+.drb3-mi img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+#sec-mounts .drb3-mc .ct{margin-bottom:8px;padding-right:30px;font-size:17px;line-height:1.25}
+#sec-mounts .drb3-mc .cm{margin-bottom:10px}
+#sec-mounts .drb3-mc .tag{white-space:normal;line-height:1.35}
+#sec-mounts .drb3-mc .crow{flex-direction:column;gap:3px}
+#sec-mounts .drb3-mc .cl{min-width:0}
+#sec-mounts .drb3-mc .cv{font-size:12.5px;line-height:1.55;color:var(--text)}
+.drb3-have{margin:12px 0 0}
+.drb3-have .cd-check-l{min-height:44px;padding:6px 12px}
+/* Haustiere */
+#sec-pets .pet-filter-row{display:block;margin:0 0 16px}
+#sec-pets .pet-filter-row .cd-pills{margin:0}
+#sec-pets .pet-grid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;align-items:start}
+#sec-pets .pet-card{gap:7px;padding:12px 10px 12px;content-visibility:auto;contain-intrinsic-size:auto 190px}
+#sec-pets .pet-card-img,#sec-pets .pet-card-ph{width:88px;height:88px}
+#sec-pets .pet-card-img{object-fit:cover}
+#sec-pets .pet-card-name{font-size:13px}
+#sec-pets .pet-card-food{font-size:var(--fs-11-5)}
+.drb3-legend{margin:0 0 18px}
+.drb3-legend .cd-fold-ico.is-photo{width:56px;height:56px}
+.drb3-legend .cd-fold-ico.is-photo img{width:100%;height:100%;object-fit:cover}
+.drb3-intro{font-size:13px;line-height:1.65;color:var(--text);max-width:84ch}
+.drb3-legend .crows{gap:10px}
+.drb3-legend .crow{font-size:13px;line-height:1.6;gap:12px}
+.drb3-legend .cl{min-width:112px}
+.drb3-legend .cv{color:var(--text)}
+.drb3-legend .cv a{color:var(--gold)}
+@media (max-width:640px){
+  #mount-sections .drb3-grp>.grid{grid-template-columns:minmax(0,1fr)}
+  #sec-pets .pet-grid{grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+  .drb3-legend .crow{flex-direction:column;gap:3px}
+  .drb3-legend .cl{min-width:0}
+}
+/* Schrift >= 11 px auf umgebauten Elementen (Basisregeln setzen 8,5 bis 10 px) */
+.drb3-bar .dr-pl{font-size:var(--fs-11)}
+#sec-mounts .drb3-mc :is(.tag,.cl,.mount-ig-btn){font-size:var(--fs-11)}
+#sec-pets .pet-card-variant,#sec-pets .pet-card-food-lbl,.drb3-legend .cl{font-size:var(--fs-11)}
+.dr-info .cd-fold-ico .cd-i{width:22px;height:22px}
+.drb3-gh+.cd-pills{margin-top:2px}
 /* DR-B3 Ende */
 /* ---- */
 /* DR-B4 Anfang (Geheimnisse & Lore) */
@@ -8362,8 +8413,7 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-pets">
     <h2 class="sec-t"><span class="sec-sym">❥</span> Haustiere <span class="sec-t-en">Pets</span></h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon. <span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant). <span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar. <span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar. <span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50). Die Plätze kommen über Werkzeuge: je ein <em>Small Haven for Pets</em> (+5) aus den vier Missionen der Challenge „Pets“ (Start of Companionship, Speedy Tamer, A New Reliable Companion, Bye, My Little Friend), <em>Haven for Pets</em> (+10) als Belohnung für die Jagd auf den legendären Phoenix (Challenge „Legendary Animals“) sowie für das Zähmen von Hyacinth Macaw und Iron Eagle (auch bei Conrad, Vincent und Erik kaufbar) und <em>Large Haven for Pets</em> (+20) aus der Mission „Little Companions“ (Challenge „Life“); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten. <span style="color:var(--gold)">Patch 1.13:</span> Beschworene Pets ruhen jetzt gemeinsam mit dem Charakter, wenn dieser sich in ein Bett legt.</div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6"><span style="color:var(--gold)">Zähmen:</span> Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25). Bei Katzen und Hunden gibt Füttern je nach Futter +10 oder +20 (Hunde: Knochen +25), das <strong>Lieblingsessen</strong> +35 und bei Katzen ein legendärer Fisch sogar +100. Kleintiere und Vögel haben eigene Vorlieben (Lieblingsfutter je nach Art meist +35 bis +100); viele Wildtiere und flugunfähige Vögel nehmen außerdem einen <strong>Golden Apple</strong> für +100 (Werte laut questlog-Spieldaten). Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.</div>
+    <!-- DR-B3: Kopf (drHead), Patch-Historie und Zähmen (drInfo) setzt renderPets direkt nach der Überschrift ein; die früheren Textwände stehen als _DRB3_PET_* im Renderer -->
     <div id="legendary-pet-guide"></div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
@@ -12187,7 +12237,8 @@ function _petEmoji(cat){
 function _petCardImg(p){
   const src=p.icon?(/^(https?:|cd_assets\/)/.test(p.icon)?p.icon:PET_CDN+p.icon):'';
   const emoji=_petEmoji((p.cat||'')+' '+(p.name||p.type||''));
-  if(src)return `<img class="pet-card-img" src="${src}" alt="${p.name.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="pet-card-ph" style="display:none">${emoji}</div>`;
+  // DR-B3: width/height + decoding, Emoji-Platzhalter nur noch als Ausweichbild bei Ladefehler (alle 200 Pets haben ein Icon, G7 erfüllt)
+  if(src)return `<img class="pet-card-img" src="${src}" width="88" height="88" alt="${p.name.replace(/"/g,'&quot;')}" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="pet-card-ph" style="display:none">${emoji}</div>`;
   return `<div class="pet-card-ph">${emoji}</div>`;
 }
 // Nur echte Farb- und Musterangaben aus dem Dateinamen anzeigen. Die Asset-Nummern
@@ -12200,19 +12251,60 @@ function petVariant(p){
   const k=m[1].toLowerCase();
   return PET_VARIANT_LABELS[k]||k.replace(/^./,c=>c.toUpperCase());
 }
+/* DR-B3 Haustiere: Kopf (drHead), die beiden Textwände als drInfo (wortgleich), Filter als cdPills mit Anzahl,
+   Filter per Klasse (data-filtered + .hide) statt Neuaufbau der 200 Karten. */
+const _DRB3_PET_INTRO=`Alle zähmbaren Begleiter in Crimson Desert. Zeigt Lieblingsessen und Porträt-Icon.`;
+const _DRB3_PET_PATCH=[
+`<span style="color:var(--gold)">Patch 1.08:</span> +20 weitere Kleintier-Arten und ein Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest; Mount-Funktion später geplant).`,
+`<span style="color:var(--gold)">Patch 1.09:</span> ~30 weitere Kleintier-Arten als Pets registrierbar.`,
+`<span style="color:var(--gold)">Patch 1.10:</span> Neues Pet 'Kuku Bird Chick' und neues Reittier 'Wyvern'. Kuku Bird Chicks und Baby-Wyverns wachsen durchs Füttern und werden ab einem Wachstumsgrad als Spezial-Mounts registrierbar; 'Sigil of Valor' jetzt auf Hunde und Baby-Wyverns anlegbar.`,
+`<span style="color:var(--gold)">Patch 1.11:</span> 4 neue Challenges schalten zusätzliche Pet-Slots frei — max. <strong>100</strong> registrierbare Pets (Summon-Limit im Camp bleibt 50). Die Plätze kommen über Werkzeuge: je ein <em>Small Haven for Pets</em> (+5) aus den vier Missionen der Challenge „Pets“ (Start of Companionship, Speedy Tamer, A New Reliable Companion, Bye, My Little Friend), <em>Haven for Pets</em> (+10) als Belohnung für die Jagd auf den legendären Phoenix (Challenge „Legendary Animals“) sowie für das Zähmen von Hyacinth Macaw und Iron Eagle (auch bei Conrad, Vincent und Erik kaufbar) und <em>Large Haven for Pets</em> (+20) aus der Mission „Little Companions“ (Challenge „Life“); Baby-Wyverns mit eigenem Karten-Icon; Pet-Namen bleiben beim Aufwachsen erhalten.`,
+`<span style="color:var(--gold)">Patch 1.13:</span> Beschworene Pets ruhen jetzt gemeinsam mit dem Charakter, wenn dieser sich in ein Bett legt.`
+];
+const _DRB3_PET_TAME=`Vertrauen durch Füttern oder Streicheln auf max. <strong>100</strong> steigern. Streicheln gibt +5 (bis zu 5×/Tag = 25). Bei Katzen und Hunden gibt Füttern je nach Futter +10 oder +20 (Hunde: Knochen +25), das <strong>Lieblingsessen</strong> +35 und bei Katzen ein legendärer Fisch sogar +100. Kleintiere und Vögel haben eigene Vorlieben (Lieblingsfutter je nach Art meist +35 bis +100); viele Wildtiere und flugunfähige Vögel nehmen außerdem einen <strong>Golden Apple</strong> für +100 (Werte laut questlog-Spieldaten). Das Tageslimit resettet um Mitternacht (Spielzeit). Gezähmte Pets begleiten dich und helfen beim Einsammeln von Beute nach Kämpfen.`;
+const _DRB3_PET_LBL={cat:'Katzen',dog:'Hunde',critter:'Kleintiere'};
+function _drB3Txt(h){const t=document.createElement('div');t.innerHTML=h;return (t.textContent||'').replace(/\s+/g,' ').trim();}
+function _drB3PetCard(p){
+  const variant=petVariant(p);
+  const s=[p.name,variant,p.food,p.cat,p.type,_DRB3_PET_LBL[p.type]].filter(Boolean).join(' ').toLowerCase();
+  return `<div class="pet-card" data-pt="${escHtml(p.type)}" data-s="${escHtml(s)}">${_petCardImg(p)}<div class="pet-card-name">${p.name}</div>${variant?`<div class="pet-card-variant">${variant}</div>`:''}<div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food||'—'}</div></div>`;
+}
+function _drB3PetApply(){
+  const grid=document.getElementById('pet-grid');if(!grid)return;
+  const f=_petFilter;
+  grid.querySelectorAll('.pet-card').forEach(c=>{
+    const off=f!=='all'&&c.dataset.pt!==f;
+    c.dataset.filtered=off?'1':'0';c.classList.toggle('hide',off);
+  });
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(document.getElementById('sec-pets'));
+}
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail||{};
+  if(d.name!=='drb3-pet')return;
+  _petFilter=d.value;_drB3PetApply();
+});
 function renderPets(filter){
   _petFilter=filter||_petFilter;
   const filterRow=document.getElementById('pet-filter-row');
   const grid=document.getElementById('pet-grid');
   if(!filterRow||!grid)return;
-  renderLegendaryPetGuide();
   const counts={}; PETS.forEach(p=>{counts[p.type]=(counts[p.type]||0)+1;});
-  const filters=[{k:'all',l:'Alle'},{k:'cat',l:'Katzen'},{k:'dog',l:'Hunde'}];
-  if(counts.critter)filters.push({k:'critter',l:'Kleintiere'});
-  filterRow.innerHTML=filters.map(f=>`<button class="pet-filter-btn${_petFilter===f.k?' active':''}" onclick="renderPets('${f.k}')">${f.l}</button>`).join('');
-  const list=_petFilter==='all'?PETS:PETS.filter(p=>p.type===_petFilter);
-  grid.innerHTML=list.map(p=>{const variant=petVariant(p);return `<div class="pet-card">${_petCardImg(p)}<div class="pet-card-name">${p.name}</div>${variant?`<div class="pet-card-variant">${variant}</div>`:''}<div class="pet-card-food-lbl">Lieblingsessen</div><div class="pet-card-food">${p.food||'—'}</div></div>`;}).join('');
-  _reapplyActiveSearch(document.getElementById('sec-pets'));
+  if(_petFilter!=='all'&&!counts[_petFilter])_petFilter='all';
+  // Kopf + Info-Boxen (Texte wortgleich aus der früheren Textwand)
+  const patchInfo=drInfo({title:'Patch-Historie',lead:_drB3Txt(_DRB3_PET_PATCH[0]),icon:{h:cdIcon('info')},h:_DRB3_PET_PATCH.map(x=>'<p>'+x+'</p>').join('')});
+  const tameInfo=drInfo({title:'Zähmen',lead:'Vertrauen durch Füttern oder Streicheln auf max. 100 steigern.',icon:'❥',h:'<p>'+_DRB3_PET_TAME+'</p>'});
+  drMount('pets',drHead({kicker:'Welt & Karte',title:'Haustiere',sub:_DRB3_PET_INTRO,glyph:'❥',scene:['beginner','reg-hernand'],
+    stats:[[PETS.length,'Haustiere'],[counts.cat||0,'Katzen'],[counts.dog||0,'Hunde'],[counts.critter||0,'Kleintiere']].filter(x=>x[0]>0),
+    links:[['mounts','Reittiere'],['camp','Graumähnen-Camp'],['food','Kochen & Elixiere'],['collectibles','Unique Pets (30)','Unique Pets']],
+    after:patchInfo+tameInfo}));
+  // Textboxen durchsuchbar machen (die frühere Textwand hatte kein data-s)
+  document.querySelectorAll('#dr-head-pets .dr-info').forEach((d,i)=>d.setAttribute('data-s',_drB3Txt(i?_DRB3_PET_TAME:_DRB3_PET_PATCH.join(' ')).toLowerCase()+(i?' zähmen':' patch-historie')));
+  renderLegendaryPetGuide();
+  const filters=[{k:'all',l:'Alle',n:PETS.length},{k:'cat',l:'Katzen',n:counts.cat||0},{k:'dog',l:'Hunde',n:counts.dog||0}];
+  if(counts.critter)filters.push({k:'critter',l:'Kleintiere',n:counts.critter});
+  filterRow.innerHTML='<div class="drb3-gh"><h3 class="drb3-gt">Alle Haustiere</h3><span class="drb3-gn">'+PETS.length+'</span></div>'+cdPills(filters.map(f=>({v:f.k,t:f.l,n:f.n,on:_petFilter===f.k})),{name:'drb3-pet',label:'Haustiere nach Art filtern',wrap:true});
+  grid.innerHTML=PETS.map(_drB3PetCard).join('');
+  _drB3PetApply();
 }
 
 // ===== LEGENDÄRE BEGLEITER — FREISCHALT-GUIDE (Iron Eagle, seit 2026-07-01) =====
@@ -12222,21 +12314,10 @@ function renderPets(filter){
 function renderLegendaryPetGuide(){
   const box=document.getElementById('legendary-pet-guide');
   if(!box)return;
-  box.innerHTML='<div class="card" style="grid-column:1/-1;border:1px solid rgba(201,162,39,.35);background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(8,8,8,.35));margin:4px 0 22px;padding:16px 18px">'
-    +'<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'
-      +'<div class="boss-img-wrap" style="flex:0 0 110px;max-width:110px"><img class="boss-img" src="cd_assets/pets/cd_pet_iron-eagle.webp" loading="lazy" alt="Iron Eagle" onerror="this.parentElement.style.display=\'none\'"></div>'
-      +'<div style="flex:1;min-width:240px">'
-        +'<div style="font-size:16px;font-weight:700;color:var(--rhi)">🦅 Iron Eagle — Freischalten &amp; Zähmen</div>'
-        +'<div style="margin:7px 0 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">'
-          +'<span class="tag tr">Legendär · Mechanisch</span>'
-          +'<span class="tag tg">Begleiter-Pet (kein Mount)</span>'
-          +'<span class="tag tw">Patch 1.05.00</span>'
-          +'<span style="font-size:var(--fs-9);font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:999px;padding:2px 7px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
-          +'<span style="font-size:var(--fs-9);font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:999px;padding:2px 7px;letter-spacing:.04em" title="Schritte nur über Community-Guides belegt, teils widersprüchlich">DETAILS: COMMUNITY (≈)</span>'
-        +'</div>'
-        +'<div style="font-size:12px;color:var(--dim);line-height:1.6">Der mechanische Adler, den viele als „Marnis Adler" suchen. Offizieller Ingame-Name: <strong style="color:var(--gold)">Iron Eagle</strong>. Ein legendärer bio-mechanischer Vogel-<strong>Begleiter</strong> (kein Reittier), laut Lore „vom genialen Erfinder <strong>Marni</strong> erschaffen" — daher die Marni-Verbindung. Offiziell mit <strong>Patch 1.05.00</strong> als zähmbares Pet eingeführt (Pearl Abyss: „erscheint, wenn bestimmte Bedingungen erfüllt sind"). Nicht mit <em>Marni\'s Mechahorse</em> (mechanisches Pferd, siehe Reittiere) verwechseln.</div>'
-      +'</div>'
-    +'</div>'
+  // DR-B3: beide Guides als Faltkarten (cdFold, Kopf: Bild, Titel, erster Satz, Chips; Körper: Einleitung + alle Faktenzeilen
+  // wortgleich, lazy beim Öffnen; data-s trägt den Volltext). Texte unverändert aus den früheren Karten übernommen.
+  const ironIntro='Der mechanische Adler, den viele als „Marnis Adler" suchen. Offizieller Ingame-Name: <strong style="color:var(--gold)">Iron Eagle</strong>. Ein legendärer bio-mechanischer Vogel-<strong>Begleiter</strong> (kein Reittier), laut Lore „vom genialen Erfinder <strong>Marni</strong> erschaffen" — daher die Marni-Verbindung. Offiziell mit <strong>Patch 1.05.00</strong> als zähmbares Pet eingeführt (Pearl Abyss: „erscheint, wenn bestimmte Bedingungen erfüllt sind"). Nicht mit <em>Marni\'s Mechahorse</em> (mechanisches Pferd, siehe Reittiere) verwechseln.';
+  const ironBody='<div class="drb3-intro">'+ironIntro+'</div>'
     +'<div class="crows" style="margin-top:14px;gap:9px;display:flex;flex-direction:column">'
       +'<div class="crow"><span class="cl">📍 Fundort</span><span class="cv">Hawkstone Ruins, Ost-Region <strong>Delesyia</strong> — auf der Karte nahe dem „A" in „Delesyia", weit im Osten des Kontinents (in Marnis Maschinen-Gebiet, nahe Marni Mechworks).</span></div>'
       +'<div class="crow"><span class="cl">🗝️ Voraussetzungen</span><span class="cv"><strong>(a)</strong> Item <strong>„Sotdae of Bond"</strong> (Vogel-Futterstelle) — laut questlog-Spieldaten Belohnung der Mission „Authorized Access“ (Questreihe <em>Trembling Woods</em> bei Pororin, beginnt mit „The Unreachable Village“; TheGamer und method.gg meinen also dieselbe Questreihe) sowie der Mission „Fallen God“ (Questreihe <em>Master of Thunder</em>); landet im Camp-Lager. <strong>(b)</strong> Seltenes Metall als Futter: <strong>1× Platinum</strong> (Platin; laut questlog +100 Vertrauen, also sofort voll) <em>oder</em> <strong>Mercury</strong> (Quecksilber; laut questlog +15 je Stück, also etwa 7 Stück — Guides nennen +5 je Stück bzw. ca. 20 Stück). Mercury aus Silber-Flüssigkeits-Pfützen (mit Frost-Charge-Shot einfrieren) oder Kauf bei Scholastone.</span></div>'
@@ -12244,24 +12325,9 @@ function renderLegendaryPetGuide(){
       +'<div class="crow"><span class="cl">🎯 Nutzen</span><span class="cv">Legendärer Loot-Begleiter: folgt dir und sammelt nach Kämpfen automatisch Beute/Materialien vom Boden und von Kadavern ein. Im Standardzustand kein direkter Kampfbonus — aber <strong style="color:var(--gold)">seit Patch 1.13.00</strong> kann der Iron Eagle das „Sigil of Valor" tragen und dann aktiv am Kampf teilnehmen (greift nahe Gegner automatisch an). Alternativ macht ihn das neue „Hunter\'s Sigil" (ebenfalls 1.13.00) zum spezialisierten Sammler, der Beute und passende Sammelobjekte apportiert.</span></div>'
       +'<div class="crow"><span class="cl">⚠️ Unsicher</span><span class="cv" style="color:var(--gdim)">Offiziell nennt Pearl Abyss nur Existenz + „bestimmte Bedingungen", nicht die Schritte — alle Detailschritte stammen aus Community-Guides und sind teils widersprüchlich: Uhrzeit 4:45 vs 5:00 Uhr; benötigte Mercury-Menge (Guides: +5 je Stück, questlog: +15). Herkunft des Sotdae of Bond und Platinum als Sofort-Futter (+100) sind inzwischen über questlog-Spieldaten belegt (Fextralife führt Platinum ebenfalls als Lieblingsfutter). Im Zweifel im Spiel gegenprüfen.</span></div>'
       +'<div class="crow"><span class="cl">🔗 Quellen</span><span class="cv" style="font-size:var(--fs-11)"><a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=88" target="_blank" rel="noopener">Pearl Abyss Patch 1.05.00 (offiziell)</a> · <a href="https://www.thegamer.com/crimson-desert-iron-eagle-pet-location-tame-mercury-guide/" target="_blank" rel="noopener">TheGamer</a> · <a href="https://www.method.gg/crimson-desert/iron-eagle-how-to-get-the-bio-mechanical-bird-pet-in-crimson-desert" target="_blank" rel="noopener">method.gg</a> · <a href="https://gamerant.com/crimson-desert-legendary-iron-eagle-pet-location-mercury/" target="_blank" rel="noopener">GameRant</a> · <a href="https://www.pcgamer.com/games/action/crimson-desert-iron-eagle-location-tame/" target="_blank" rel="noopener">PC Gamer</a> · <a href="https://questlog.gg/crimson-desert/en/db/npc/1000798" target="_blank" rel="noopener">questlog (Spieldaten)</a></span></div>'
-    +'</div>'
-  +'</div>'
-  // ── Phoenix-Karte (analog Iron Eagle; Recherche 2026-07-06, 5-Finder-Workflow) ──
-  +'<div class="card" style="grid-column:1/-1;border:1px solid rgba(201,162,39,.35);background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(8,8,8,.35));margin:4px 0 22px;padding:16px 18px">'
-    +'<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">'
-      +'<div class="boss-img-wrap" style="flex:0 0 110px;max-width:110px"><img class="boss-img" src="cd_assets/pets/cd_pet_phoenix.webp" loading="lazy" alt="Phoenix" onerror="this.parentElement.style.display=\'none\'"></div>'
-      +'<div style="flex:1;min-width:240px">'
-        +'<div style="font-size:16px;font-weight:700;color:var(--rhi)">🔥 Phoenix — Erlegen &amp; Beschwören</div>'
-        +'<div style="margin:7px 0 10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">'
-          +'<span class="tag tr">Legendär · Feuervogel</span>'
-          +'<span class="tag tg">Begleiter-Pet (kein Mount)</span>'
-          +'<span class="tag tw">Vogel-Pet-System 1.04.00</span>'
-          +'<span style="font-size:var(--fs-9);font-weight:700;color:#5cba9a;border:1px solid rgba(92,186,154,.5);border-radius:999px;padding:2px 7px;letter-spacing:.04em">EXISTENZ: OFFIZIELL</span>'
-          +'<span style="font-size:var(--fs-9);font-weight:700;color:var(--gdim);border:1px solid var(--bdr);border-radius:999px;padding:2px 7px;letter-spacing:.04em" title="Erlangungs-Schritte nur über Community-Guides belegt; keine offizielle Note nennt die konkrete Phoenix-Erlangung">DETAILS: COMMUNITY (≈)</span>'
-        +'</div>'
-        +'<div style="font-size:12px;color:var(--dim);line-height:1.6">Der <strong>Phoenix</strong> ist laut spielinternem Codex ein <strong>legendärer Vogel, der immer wieder wiedergeboren wird</strong> — seine Flügel sind golden und <strong>glänzen wie die Sonne</strong>; der Mythos besagt, er erscheine, <strong>wenn sich die Welt ihrem Ende nähert</strong>. Am Himmel erkennt man ihn als markant großen, feurig gold-orange gefärbten Vogel, der einen kleinen Schwarm anführt. Funktional ist er — wie der <strong>Iron Eagle</strong> — ein <strong>fliegender Loot-Begleiter</strong>. Anders als andere Legendär-Tiere wird er nicht gezähmt, sondern aus der Luft geschossen und gehäutet; der eigentliche Pet entsteht erst durch einen Crafting-Schritt bei einer Hexe.</div>'
-      +'</div>'
-    +'</div>'
+    +'</div>';
+  const phoenixIntro='Der <strong>Phoenix</strong> ist laut spielinternem Codex ein <strong>legendärer Vogel, der immer wieder wiedergeboren wird</strong> — seine Flügel sind golden und <strong>glänzen wie die Sonne</strong>; der Mythos besagt, er erscheine, <strong>wenn sich die Welt ihrem Ende nähert</strong>. Am Himmel erkennt man ihn als markant großen, feurig gold-orange gefärbten Vogel, der einen kleinen Schwarm anführt. Funktional ist er — wie der <strong>Iron Eagle</strong> — ein <strong>fliegender Loot-Begleiter</strong>. Anders als andere Legendär-Tiere wird er nicht gezähmt, sondern aus der Luft geschossen und gehäutet; der eigentliche Pet entsteht erst durch einen Crafting-Schritt bei einer Hexe.';
+  const phoenixBody='<div class="drb3-intro">'+phoenixIntro+'</div>'
     +'<div class="crows" style="margin-top:14px;gap:9px;display:flex;flex-direction:column">'
       +'<div class="crow"><span class="cl">📍 Fundort</span><span class="cv"><strong>Südlich bis südwestlich von Trader\'s Expanse</strong> in der Region <strong>Varnia</strong> (nördlicher Teil der Crimson Desert; „Norden" meint die Gesamtkarte — relativ zu Trader\'s Expanse liegt der Ort südlich). Landmarke: ein kleiner <strong>Oasen-/Kraterbereich mit großen Felsen bzw. zentralem Steinpfeiler</strong> nahe <strong>Merchant\'s Resting Place</strong>; nächster Schnellreisepunkt ist ein <strong>Abyss Nexus/Cresset östlich</strong> davon — von dort auf die Felsen klettern. Der Phoenix patrouilliert eine feste Flugschleife und passiert das Oasenzentrum laut Community <strong>etwa alle 7:30 Minuten</strong>. Warten ist effektiver als Verfolgen; keine harte Tageszeit-Bedingung.</span></div>'
       +'<div class="crow"><span class="cl">🗝️ Voraussetzungen</span><span class="cv">Ein <strong>Bogen</strong> ist Pflicht (fliegendes Ziel, Nahkampf nutzlos). Munition: <strong>Explosive Arrows</strong>, kaufbar beim <strong>Back Alley Trader in Tommaso</strong> (führt nur 2 Stück; Tommaso liegt auf dem Weg). Für den Craft-Schritt Zugang zu einer <strong>Hexe</strong> mit Menü „Craft Abyss Gear" — laut den meisten Guides genügt <strong>jede Hexe</strong>; Community-Referenz ist <strong>Elowen</strong> in den Witchwoods (ab Kap. 5). Der optionale <strong>Sigil of Valor</strong> (ab Patch 1.13.00) wird bei <strong>Lacey</strong> in Pororin/Florindale gekauft (~8 Silber).</span></div>'
@@ -12269,8 +12335,17 @@ function renderLegendaryPetGuide(){
       +'<div class="crow"><span class="cl">🎯 Nutzen</span><span class="cv">Standardmäßig ein reiner <strong>Loot-Sammel-Begleiter</strong>: sammelt automatisch Beute/Materialien gefallener Gegner ein und steht als Flug-Pet nie im Weg — ohne Zusatz-Sigil <strong>kein Kampfnutzen</strong>. Mit dem <strong>Sigil of Valor</strong> (offiziell ab Patch 1.13.00) erhält er laut Community eine <strong>Feuerattacke</strong> und greift starke Gegner an, lootet dann aber weniger (Trade-off; für reines Farmen raten Guides vom Valor ab). Ebenfalls ab 1.13.00: der <strong>Hunter\'s Sigil</strong> fürs gezielte Sammeln (Patchnote nennt allgemein „a bird pet", den Phoenix nicht namentlich).</span></div>'
       +'<div class="crow"><span class="cl">⚠️ Unsicher</span><span class="cv" style="color:var(--gdim)"><strong>Item-Verwechslung:</strong> Das Erlangungs-Item heißt <strong>„Sigil of Solidarity (Phoenix)"</strong>, NICHT „Sigil of Valor" (das ist ein separates, späteres Ausrüstungs-Item) — viele Guides vermischen beide. Weiter uneinheitlich: die <strong>Kampf-/Wiederbelebungs-Mechanik</strong> (manche Quellen beschreiben eine Auferstehung, die hohen Burst-Schaden erfordert; TheGamer widerspricht mit „kein großer Kampf"), die Skill-Angabe „Fire Lv 1" ist in keiner Primärquelle belegt; <strong>Elowen</strong> nennen nur 2 Quellen (die meisten sagen „jede Hexe"); Geländebezeichnung (Oase vs. Krater) und der ~7:30-Min-Zyklus sind Community-Beobachtungen. <strong>Keine offizielle Pearl-Abyss-Note beschreibt die konkrete Phoenix-Erlangung.</strong></span></div>'
       +'<div class="crow"><span class="cl">🔗 Quellen</span><span class="cv" style="font-size:var(--fs-11)"><a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=105" target="_blank" rel="noopener">Pearl Abyss 1.13.00 (offiziell)</a> · <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=84" target="_blank" rel="noopener">Pearl Abyss 1.04.00 „Added birds as pets"</a> · <a href="https://vulkk.com/2026/04/25/how-to-get-the-legendary-phoenix-pet-in-crimson-desert/" target="_blank" rel="noopener">VULKK</a> · <a href="https://game8.co/games/Crimson-Desert/archives/596430" target="_blank" rel="noopener">game8</a> · <a href="https://www.powerpyx.com/crimson-desert-all-legendary-animals-locations/" target="_blank" rel="noopener">PowerPyx</a> · <a href="https://www.thegamer.com/crimson-desert-legendary-phoenix-pet-guide/" target="_blank" rel="noopener">TheGamer</a></span></div>'
-    +'</div>'
-  +'</div>';
+    +'</div>';
+  const guide=(o)=>{
+    const s=[o.title,o.lead,o.chips.map(c=>c.t).join(' '),_drB3Txt(o.body)].join(' ').toLowerCase();
+    return cdFold({title:o.title,lead:o.lead,icon:{src:o.img,alt:o.alt,photo:true},chips:o.chips,body:()=>o.body,s:s,id:o.id,cls:'drb3-guide',tone:'gold'});
+  };
+  box.innerHTML='<div class="drb3-gh"><h3 class="drb3-gt">Legendäre Begleiter</h3></div><div class="cd-folds drb3-legend">'
+    +guide({id:'drb3-iron-eagle',title:'Iron Eagle — Freischalten & Zähmen',lead:'Der mechanische Adler, den viele als „Marnis Adler" suchen.',img:'cd_assets/pets/cd_pet_iron-eagle.webp',alt:'Iron Eagle',
+      chips:[{t:'Legendär · Mechanisch',c:'red'},{t:'Begleiter-Pet (kein Mount)',c:'gold'},{t:'Patch 1.05.00',c:'warn'},{t:'EXISTENZ: OFFIZIELL',c:'ok'},{t:'DETAILS: COMMUNITY (≈)',title:'Schritte nur über Community-Guides belegt, teils widersprüchlich'}],body:ironBody})
+    +guide({id:'drb3-phoenix',title:'Phoenix — Erlegen & Beschwören',lead:'Der Phoenix ist laut spielinternem Codex ein legendärer Vogel, der immer wieder wiedergeboren wird — seine Flügel sind golden und glänzen wie die Sonne; der Mythos besagt, er erscheine, wenn sich die Welt ihrem Ende nähert.',img:'cd_assets/pets/cd_pet_phoenix.webp',alt:'Phoenix',
+      chips:[{t:'Legendär · Feuervogel',c:'red'},{t:'Begleiter-Pet (kein Mount)',c:'gold'},{t:'Vogel-Pet-System 1.04.00',c:'warn'},{t:'EXISTENZ: OFFIZIELL',c:'ok'},{t:'DETAILS: COMMUNITY (≈)',title:'Erlangungs-Schritte nur über Community-Guides belegt; keine offizielle Note nennt die konkrete Phoenix-Erlangung'}],body:phoenixBody})
+    +'</div>';
 }
 
 // ===== MOBILE SIDEBAR =====
@@ -15915,55 +15990,114 @@ function armorSetFilter(){
 }
 
 // ===== MOUNTS =====
-function mountCard(m){
+/* DR-B3 Reittiere: Kartenbild = MOUNT_INGAME_IMGS (scharfe Spielportraits). Die generierten Karikaturen MOUNT_IMGS
+   (scripts/generate-mount-caricatures.mjs, unscharfe Silhouetten) sind Platzhalter und erscheinen nicht mehr (Bildregel G7:
+   Bild nur in Gruppen, in denen JEDE Karte eines hat). Die Unterwasser-Reittiere haben kein Bild und bilden eine eigene Gruppe. */
+const _DRB3_MKEY='cd_r2_mounts_have';
+function _drB3MC(m,withImg){
   const sig=m.type.includes('Sigil');
   const badge=m.type==='Drache'?'tw':sig?'tg':m.type.startsWith('Fahrzeug')?'tx':'tr';
-  const img=MOUNT_IMGS[m.name];
-  const s=[m.name,m.type,m.unlock,m.stats,m.notes].join(' ').toLowerCase();
-  return `<div class="card" data-s="${s}">
+  const img=withImg?MOUNT_INGAME_IMGS[m.name]:'';
+  const s=[m.name,m.type,m.unlock,m.stats,m.notes,m.dlc].join(' ').toLowerCase();
+  return `<div class="card cd-spot drb3-mc${img?'':' drb3-mc--noimg'}" data-mn="${escHtml(m.name)}" data-s="${escHtml(s)}">
     ${favBtn('mount',m.name)}
-    ${img
-      ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" loading="lazy" alt="${m.name}" onerror="this.parentElement.style.display='none'" style="object-position:center center"></div>`
-      :`<div class="boss-img-ph" style="background:linear-gradient(135deg,#100c06 0%,#080808 100%);border:1px solid rgba(201,162,39,.18)"><div class="boss-ph-inner"><div class="boss-ph-letter" style="color:rgba(201,162,39,.6)">${m.name.charAt(0)}</div><div class="boss-ph-cap" style="color:rgba(201,162,39,.3)">${m.type}</div></div></div>`
-    }
+    ${img?`<div class="drb3-mi"><img src="${img}" width="512" height="512" loading="lazy" decoding="async" alt="${escHtml(m.name)}" onerror="this.parentElement.style.display='none'"></div>`:''}
     <div class="ct">${m.name}</div>
     <div class="cm"><span class="tag ${badge}">${m.type}</span>${_dlcTag(m)}</div>
     <div class="crows">
       <div class="crow"><span class="cl">Freischalten</span><span class="cv">${m.unlock}</span></div>
     </div>
+    ${cdCheck({key:_DRB3_MKEY,id:m.name,title:'Besessen',cls:'drb3-have'})}
     ${(m.stats||m.notes)?`<details class="mount-notes"><summary>${m.stats&&m.notes?'Stats &amp; Notizen':m.stats?'Stats':'Notizen'}</summary><div class="mount-notes-body">${m.stats?`<div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${m.stats}</span></div>`:''}${m.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${m.notes}</span></div>`:''}</div></details>`:''}
-    ${MOUNT_INGAME_IMGS[m.name]?`<button class="mount-ig-btn" onmouseenter="showMountIG(event,'${m.name.replace(/'/g,"\\'")}')" onmouseleave="hideMountIG()" onclick="openMountIG('${m.name.replace(/'/g,"\\'")}')">👁 In-Game Ansicht</button>`:''}
+    ${MOUNT_INGAME_IMGS[m.name]?`<button class="mount-ig-btn" onmouseenter="showMountIG(event,'${escJsStr(m.name)}')" onmouseleave="hideMountIG()" onclick="openMountIG('${escJsStr(m.name)}')">👁 In-Game Ansicht</button>`:''}
   </div>`;
 }
+function mountCard(m){return _drB3MC(m,!!MOUNT_INGAME_IMGS[m.name]);}
 function makeToc(items){
   const btn=i=>`<button onclick="if(window.cdMotion)cdMotion.scrollTo(document.getElementById('${i.id}'));else document.getElementById('${i.id}').scrollIntoView({behavior:'smooth',block:'start'})" style="background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.28);color:var(--gold);padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:background .18s,border-color .18s" onmouseover="this.style.background='rgba(201,162,39,.22)';this.style.borderColor='rgba(201,162,39,.5)'" onmouseout="this.style.background='rgba(201,162,39,.1)';this.style.borderColor='rgba(201,162,39,.28)'">${i.label}</button>`;
   return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:22px;padding:12px 16px;background:rgba(201,162,39,.05);border:1px solid rgba(201,162,39,.18);border-radius:8px"><span style="font-size:var(--fs-11);color:var(--dim);margin-right:4px;white-space:nowrap">Springe zu:</span>${items.map(btn).join('')}</div>`;
+}
+let _drB3Mg='all',_drB3Ms='all';
+function _drB3MBar(groups){
+  const have=cdCheckGet(_DRB3_MKEY),n=MOUNTS.length,nh=MOUNTS.filter(m=>have.has(m.name)).length;
+  const gp=[{v:'all',t:'Alle',n:n,on:_drB3Mg==='all'}].concat(groups.map(g=>({v:g.id,t:g.title,n:g.items.length,on:_drB3Mg===g.id})));
+  const sp=[{v:'all',t:'Alle',n:n,on:_drB3Ms==='all'},{v:'open',t:'Offen',n:n-nh,on:_drB3Ms==='open'},{v:'done',t:'Besessen',n:nh,on:_drB3Ms==='done'}];
+  return '<div class="drb3-bar"><div class="dr-pillrow"><span class="dr-pl">Gruppe</span>'+cdPills(gp,{name:'drb3-mgrp',label:'Reittiere nach Gruppe filtern',wrap:true})+'</div>'
+    +'<div class="dr-pillrow"><span class="dr-pl">Besitz</span>'+cdPills(sp,{name:'drb3-mst',label:'Reittiere nach Besitz filtern'})+'</div></div>';
 }
 function renderMounts(){
   // Audit 23.08.2026: /pferd/i statt includes('Pferd') und startsWith('Wildtier') statt ===,
   // sonst fallen "Kriegspferd (Tier 4)" (kleines p) und "Wildtier (Wolf/Baer/Temporal)" durch
   // ALLE Gruppenfilter und werden nie gerendert — traf 5 Kriegspferde + Kuku Bird Hatchling.
+  // DR-B3: Gruppe "Unterwasser" nur aus dem type-Feld abgeleitet ("Wildtier (Unterwasser…").
+  const UW=/^Wildtier \(Unterwasser/;
   const horses=MOUNTS.filter(m=>/pferd/i.test(m.type)&&!m.type.includes('Legendary'));
   const legendary=MOUNTS.filter(m=>m.type.includes('Legendary'));
   const dragon=MOUNTS.filter(m=>m.type==='Drache');
   const sigil=MOUNTS.filter(m=>m.type.includes('Sigil'));
-  const wild=MOUNTS.filter(m=>m.type.startsWith('Wildtier'));
+  const wildAll=MOUNTS.filter(m=>m.type.startsWith('Wildtier'));
+  const wild=wildAll.filter(m=>!UW.test(m.type));
+  const water=wildAll.filter(m=>UW.test(m.type));
   const vehicle=MOUNTS.filter(m=>m.type.startsWith('Fahrzeug'));
   const groups=[
-    {id:'ms-horses',title:'Pferde',icon:'🐎',items:[...horses,...legendary]},
-    {id:'ms-dragon',title:'Drachen-Mounts',icon:'🐉',items:dragon},
-    {id:'ms-sigil',title:'Sigil Mounts',icon:'⚔️',items:sigil},
-    {id:'ms-wild',title:'Zähmbare Wildtiere',icon:'🦁',items:wild},
-    {id:'ms-vehicle',title:'Fahrzeuge',icon:'🚂',items:vehicle}
+    {id:'ms-horses',title:'Pferde',items:[...horses,...legendary]},
+    {id:'ms-dragon',title:'Drachen-Mounts',items:dragon},
+    {id:'ms-sigil',title:'Sigil Mounts',items:sigil},
+    {id:'ms-wild',title:'Zähmbare Wildtiere',items:wild},
+    {id:'ms-vehicle',title:'Fahrzeuge',items:vehicle},
+    {id:'ms-water',title:'Unterwasser',items:water}
   ].filter(g=>g.items.length);
-  const toc=makeToc(groups.map(g=>({id:g.id,label:`${g.icon} ${g.title} <span style="opacity:.6;font-weight:400;font-size:var(--fs-11)">(${g.items.length})</span>`})));
-  document.getElementById('mount-sections').innerHTML=toc+groups.map(g=>
-    `<div id="${g.id}" style="margin-bottom:28px;scroll-margin-top:72px">
-      <div style="font-size:15px;font-weight:700;color:var(--rhi);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(201,162,39,.15)">${g.icon} ${g.title} <span style="font-weight:400;font-size:12px;color:var(--dim)">(${g.items.length})</span></div>
-      <div class="grid">${g.items.map(mountCard).join('')}</div>
+  groups.forEach(g=>{g.img=g.items.every(m=>!!MOUNT_INGAME_IMGS[m.name]);}); // G7: Bild nur, wenn JEDE Karte der Gruppe eines hat
+  if(_drB3Mg!=='all'&&!groups.some(g=>g.id===_drB3Mg))_drB3Mg='all';
+  const sec=(SECTIONS.find(x=>x.id==='mounts')||{});
+  const have=cdCheckGet(_DRB3_MKEY),nh=MOUNTS.filter(m=>have.has(m.name)).length;
+  drMount('mounts',drHead({kicker:'Welt & Karte',title:'Reittiere',sub:sec.desc||'Pferde und besondere Reittiere mit Fundort',glyph:'♞',
+    scene:['start','mg-pferderennen'],
+    stats:[[MOUNTS.length,'Mounts gesamt'],[nh+'/'+MOUNTS.length,'Besessen'],[sigil.length,'Sigil'],[wildAll.length,'Wildtiere']],
+    links:[['pets','Haustiere'],['minigames','Minispiel Pferderennen','Pferderennen'],['camp','Graumähnen-Camp'],['map','Karte']],
+    after:_drB3MBar(groups)}));
+  document.getElementById('mount-sections').innerHTML=groups.map(g=>
+    `<div id="${g.id}" class="drb3-grp">
+      <div class="drb3-gh"><h3 class="drb3-gt">${g.title}</h3><span class="drb3-gn">${g.items.length}</span></div>
+      <div class="grid">${g.items.map(m=>_drB3MC(m,g.img)).join('')}</div>
     </div>`
   ).join('');
+  _drB3MApply();
 }
+/* Filter per Klasse (Gruppe x Besitz): ausgeblendete Karten tragen data-filtered=1 + .hide, die Suche respektiert das */
+function _drB3MApply(){
+  const root=document.getElementById('mount-sections');if(!root)return;
+  const have=cdCheckGet(_DRB3_MKEY);
+  root.querySelectorAll('.drb3-grp').forEach(g=>{
+    const gOff=_drB3Mg!=='all'&&g.id!==_drB3Mg;let vis=0;
+    g.querySelectorAll('.drb3-mc').forEach(c=>{
+      const has=have.has(c.dataset.mn);
+      const off=gOff||(_drB3Ms==='open'&&has)||(_drB3Ms==='done'&&!has);
+      c.dataset.filtered=off?'1':'0';c.classList.toggle('hide',off);if(!off)vis++;
+    });
+    g.classList.toggle('hide',vis===0);
+  });
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(document.getElementById('sec-mounts'));
+}
+/* Zähler im Kopf und in den Besitz-Pillen nachziehen (ohne den Kopf neu zu bauen) */
+function _drB3MCounts(){
+  const have=cdCheckGet(_DRB3_MKEY),n=MOUNTS.length,nh=MOUNTS.filter(m=>have.has(m.name)).length;
+  const set=(v,x)=>{const b=document.querySelector('[data-cd-pills="drb3-mst"] .cd-pill[data-v="'+v+'"] .cd-pill-n');if(b)b.textContent=x;};
+  set('all',n);set('open',n-nh);set('done',nh);
+  const st=document.querySelectorAll('#dr-head-mounts .cd-hero-stat');
+  for(let i=0;i<st.length;i++){const dt=st[i].querySelector('dt'),dd=st[i].querySelector('dd');if(dt&&dd&&dt.textContent==='Besessen'){dd.textContent=nh+'/'+n;break;}}
+}
+document.addEventListener('cd-pills',e=>{
+  const d=e.detail||{};
+  if(d.name==='drb3-mgrp'){_drB3Mg=d.value;_drB3MApply();}
+  else if(d.name==='drb3-mst'){_drB3Ms=d.value;_drB3MApply();}
+});
+document.addEventListener('cd-check',e=>{
+  const d=e.detail||{};
+  if(d.key!==_DRB3_MKEY)return;
+  _drB3MCounts();
+  if(_drB3Ms!=='all')_drB3MApply();
+});
 
 // Zentrale Escape-Helfer (Konsolidierung 2026-06-12, Audit-Optionalpunkt):
 // escHtml fuer Text UND Attribute (escapt auch Quotes), escJsStr fuer Strings in inline-Handlern
