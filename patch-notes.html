@@ -7104,6 +7104,8 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 @media (max-width:560px){
   .dlc-a-gol{margin-left:0;flex-basis:100%}
 }
+/* Sprung von der DLC-Karte zum Eintrag auf der Seite Waffen bzw. Rüstungen (Gegenprüfung 01.11.2026) */
+#dlc-root-ausruestung .dlc-a-grid .card>.map-pin-btn{margin-right:6px}
 /* DLC-A Ende */
 /* DLC-Q Anfang (Quests: _dlcSecQuests, Besitz Arbeiter quests) */
 .dlcq-notes{margin:0;padding-left:18px;font-size:13px;line-height:1.55;color:var(--dim)}
@@ -14063,7 +14065,6 @@ function _dlcChip(x,o){
 /* Bildregel des Users: eine Gruppe zeigt nur dann Bilder, wenn JEDER Eintrag ein Bild hat (get liefert die Quelle). */
 function _dlcAllImg(arr,get){return Array.isArray(arr)&&arr.length>0&&arr.every(x=>!!get(x));}
 /* Ist ein Wert (oder ein Teil davon) unbestätigt/nicht belegt? Für graue Kartenzustände. */
-function _dlcBad(x){if(x==null)return false;if(Array.isArray(x))return x.some(_dlcBad);const o=_dlcObj(x);return !!(o.c&&o.c!=='ok');}
 /* ===== DLC-Fundament (01.11.2026, Lauf dlc-design) =====
    renderDlc(part) sammelt nur noch. Jeder Abschnitt hat eine Builder-Funktion _dlcSec<Name>(), die ein Abschnitts-Objekt
    liefert: {title, lead, icon, chips, body, tone?, open?, flat?, s?, after?}; Schlüssel und Reihenfolge stehen in SECS
@@ -14491,7 +14492,7 @@ function _dlcA_extraCard(g,img){
   const more=_dlcA_more(req?'Erhalt / Voraussetzung':'Erhalt',_dlcA_row('Erhalt',src||'<span class="dlc-nb">nicht belegt</span>','dlc-a-sm')+(req?_dlcA_row('Voraussetzung',req,'dlc-a-sm'):''),bad);
   return _dlcA_card({id:g.name,s:[vis,hid,'dlc'].join(' '),vis:vis,hid:hid,
     head:img?_dlcA_img(img,g.name):_dlcA_hd(DLC_A_GLYPH[base]),
-    name:_dlcName(g),tags:'<span class="tag tx">'+cdEsc(kind)+'</span>',rows:rows,more:more,pin:_dlcP(g.source),pt:'Ausrüstung — '+kind});
+    name:_dlcName(g),tags:'<span class="tag tx">'+cdEsc(kind)+'</span>',rows:rows,more:more,pin:_dlcP(g.source),pt:'Ausrüstung · '+kind});
 }
 function _dlcA_accCard(a){
   const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
@@ -14500,7 +14501,7 @@ function _dlcA_accCard(a){
     head:_dlcA_hd('',accTypeIcon(a.type),accTypeGrad(a.type)),name:cdEsc(a.name),
     tags:'<span class="tag '+badge+'">'+cdEsc(a.type)+'</span>'+_dlcTag(a),
     rows:_dlcA_row('Effekt',cdEsc(a.effect),'dlc-a-eff')+_dlcA_more('Quelle / Notiz',_dlcA_row('Quelle',cdEsc(a.source),'dlc-a-sm')+(a.notes?_dlcA_row('Notiz',cdEsc(a.notes),'dlc-a-sm dlc-a-dim'):'')),
-    pin:a.source,pt:'Accessoire — '+a.type});
+    pin:a.source,pt:'Accessoire · '+a.type});
 }
 function _dlcA_coreCard(c){
   const m=(typeof R2B13_SLOT!=='undefined'&&R2B13_SLOT[c.slot])||{g:'⧫',t:c.slot||''};
@@ -14508,7 +14509,7 @@ function _dlcA_coreCard(c){
   return _dlcA_card({id:c.name,s:[c.name,c.effect,c.source,c.slot,slotDe(c.slot),'dlc '+c.dlc].join(' '),vis:[c.name,c.effect,m.t].join(' '),hid:hid,
     head:_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(m.t)+'</span>'+_dlcTag(c),
     rows:_dlcA_row('Effekt',cdEsc(c.effect),'dlc-a-eff')+_dlcA_more('Quelle',_dlcA_row('Quelle',cdEsc(c.source),'dlc-a-sm')),
-    pin:c.source,pt:'Abyss-Kern — '+(m.t||'')});
+    pin:c.source,pt:'Abyss-Kern · '+(m.t||'')});
 }
 function _dlcA_hdr(tag,glyph,title,n,go){
   return '<div class="dlc-a-hd">'+(glyph?'<i class="cd-g" aria-hidden="true">'+cdEsc(glyph)+'</i>':'')+'<'+tag+' class="sub-t dlc-a-t">'+cdEsc(title)+'</'+tag+'><span class="dlc-a-n">'+n+'</span>'+(go||'')+'</div>';
@@ -14525,11 +14526,11 @@ function _dlcSecGear(){
     chips:[],body:b+cdNote('Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet. Sobald die Einträge stehen, erscheinen sie hier automatisch.',{kind:'info',title:'Noch keine Einträge'})};
   const nW=G.w.length,nA=G.a.length,nX=G.x.length+G.k.length+G.e.length;
   b+=cdPills([{v:'all',t:'Alle',n:nW+nA+nX,on:true},{v:'w',t:'Waffen',g:'†',n:nW},{v:'a',t:'Rüstungen',g:'◈',n:nA},{v:'x',t:'Weitere',g:'✦',n:nX}].filter(p=>p.v==='all'||p.n>0),{name:'dlc-gear',label:'DLC-Ausrüstung filtern',wrap:true,cls:'dlc-a-pills'});
-  if(nW)b+='<section class="ruin-region dlc-a-grp" data-grp="w">'+_dlcA_hdr('h3','†','Waffen',nW)+'<div class="grid dlc-a-grid" id="dlc-wep-grid">'+G.w.map(w=>_wepCardHtml(w,false)).join('')+'</div></section>';
+  if(nW)b+='<section class="ruin-region dlc-a-grp" data-grp="w">'+_dlcA_hdr('h3','†','Waffen',nW)+'<div class="grid dlc-a-grid" id="dlc-wep-grid">'+G.w.map(w=>_wepCardHtml(w,false,{dlc:true})).join('')+'</div></section>';
   if(nA){
     const ord=typeof ARMOR_TYPE_ORDER!=='undefined'?ARMOR_TYPE_ORDER:[];
     const arm=G.a.slice().sort((p,q)=>(ord.indexOf(p.type)-ord.indexOf(q.type))||p.name.localeCompare(q.name,'de'));
-    b+='<section class="ruin-region dlc-a-grp" data-grp="a">'+_dlcA_hdr('h3','◈','Rüstungen',nA)+'<div class="grid dlc-a-grid" id="dlc-arm-grid">'+arm.map(a=>_armorCardHtml(a,false)).join('')+'</div></section>';
+    b+='<section class="ruin-region dlc-a-grp" data-grp="a">'+_dlcA_hdr('h3','◈','Rüstungen',nA)+'<div class="grid dlc-a-grid" id="dlc-arm-grid">'+arm.map(a=>_armorCardHtml(a,false,{dlc:true})).join('')+'</div></section>';
   }
   if(nX){
     b+='<section class="ruin-region dlc-a-grp" data-grp="x">'+_dlcA_hdr('h3','✦','Weitere Ausrüstung',nX);
@@ -14654,7 +14655,7 @@ function changeWepPage(d){
   const s=document.getElementById('sec-weapons'); if(s){ if(window.cdMotion)cdMotion.scrollTo(s,{immediate:true}); else s.scrollIntoView({block:'start'}); }
 }
 /* Waffenkarte als reine Funktion (renderWeapons und DLC-Ausrüstung nutzen sie; Markup byte-gleich zum früheren Inline-Template). */
-function _wepCardHtml(w,wasOpen){
+function _wepCardHtml(w,wasOpen,o){
     const sourceText=w.source&&w.source.trim()?w.source:'Sammelimport';
     const s=[w.name,w.type,sourceText,w.built_in,w.notes,w.dlc?'dlc '+w.dlc:''].join(' ').toLowerCase();
     const hidden=[sourceText,w.notes].filter(Boolean).join(' ');
@@ -14667,7 +14668,7 @@ function _wepCardHtml(w,wasOpen){
       <div class="ct">${w.name}</div>
       <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
       <div class="crows">
-        <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>')}${w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':''}</span></div>
+        <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${o&&o.dlc&&w.val_q&&(w.atk!=null||w.def!=null)?(w.val_part?'<span class="atk">'+(w.def!=null?w.def:w.atk)+'</span> '+_dlcFlag('unb',w.val_q):'<span class="dlc-unb">'+(w.def!=null?w.def:w.atk)+' '+_dlcFlag('unb',w.val_q)+'</span>'):(w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>'))+(w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':'')}</span></div>
         <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
         <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>
         ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
@@ -14679,7 +14680,7 @@ function _wepCardHtml(w,wasOpen){
           </div>
         </details>
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(w.name)}','${escJsStr(w.source)}','Waffe — ${w.type}')">${foBtn(w.name)}</button>${o&&o.dlc?'<button type="button" class="map-pin-btn dlc-a-jump" onclick="waffeZeigeTeil(\''+escJsStr(w.name)+'\')">Auf der Seite Waffen</button>':''}
     </div>`;
 }
 function renderWeapons(){
@@ -16275,7 +16276,7 @@ function armorMat(n){return /\bchain\b/i.test(n)?'Chain':/\bplate\b/i.test(n)?'P
 function armorNum(eff,key){const vorn=String(eff||'').split('(')[0];const m=new RegExp(key+'\\s*[+→]?\\s*(\\d+)','i').exec(vorn);return m?+m[1]:null;}
 
 /* Rüstungskarte als reine Funktion (renderArmor und DLC-Ausrüstung nutzen sie; Markup byte-gleich zum früheren Inline-Template). */
-function _armorCardHtml(a,wasOpen){
+function _armorCardHtml(a,wasOpen,o){
     const typeColor=a.type==='Kopf'?'tw':a.type==='Torso'?'tr':a.type==='Schuhe'?'tg':a.type==='Hände'?'tw':'tx';
     const sourceText=a.source&&a.source.trim()?a.source:'Sammelimport';
     const s=[a.name,a.type,sourceText,a.effect,a.notes,a.dlc?'dlc '+a.dlc:''].join(' ').toLowerCase();
@@ -16287,7 +16288,7 @@ function _armorCardHtml(a,wasOpen){
       <div class="ct">${a.name}</div>
       <div class="cm"><span class="tag ${typeColor}">${a.type}</span>${armorProvBadge(a.prov)}${_dlcTag(a)}</div>
       <div class="crows">
-        <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${a.effect}${a.val_q?' <i class="dlc-flag" title="'+cdEsc(a.val_q)+'">unbestätigt</i>':''}</span></div>
+        <div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${o&&o.dlc&&a.val_q?_dlcQ(a.effect||'',a):a.effect+(a.val_q?' <i class="dlc-flag" title="'+cdEsc(a.val_q)+'">unbestätigt</i>':'')}</span></div>
         <details class="item-more"${wasOpen?' open':''}>
           <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
           <div class="item-more-body">
@@ -16296,7 +16297,7 @@ function _armorCardHtml(a,wasOpen){
           </div>
         </details>
       </div>
-      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>
+      <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Rüstung — ${a.type}')">${foBtn(a.name)}</button>${o&&o.dlc?'<button type="button" class="map-pin-btn dlc-a-jump" onclick="armorZeigeTeil(\''+escJsStr(a.name)+'\')">Auf der Seite Rüstungen</button>':''}
     </div>`;
 }
 // Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
