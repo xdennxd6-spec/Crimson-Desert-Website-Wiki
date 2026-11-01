@@ -14471,14 +14471,14 @@ function _dlcQ_filter(v){
 document.addEventListener('cd-pills',e=>{const d=e.detail;if(d&&d.name==='dlc-q-who')_dlcQ_filter(d.values[0]||'all');});
 document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===_dlcQ_KEY)_dlcQ_refresh();});
 /* ===== DLC-K Kampf (01.11.2026, Lauf dlc-design): Bosskarten wie auf der Bossseite, Garten der Prüfungen als abhakbare Karten =====
-   #dlc-boss-grid erbt das Bosskarten-CSS der Bossseite. Besiegt-Speicher: Bosse mit w (Name in BOSSES) nutzen cd_bosses
-   (Liste von Namen, geteilt mit der Bossseite, geschrieben über toggleBossDone), alle übrigen cd_r2_dlc_bosse (Liste der
-   Namen); Gartengruppen cd_r2_dlc_garten (Liste der IDs g1 bis g10). Kein Boss der DLC-Liste hat ein Porträt für alle,
+   #dlc-boss-grid erbt das Bosskarten-CSS der Bossseite. Besiegt-Speicher: alle 14 DLC-Bosse in cd_r2_dlc_bosse (Liste der
+   Namen). Bewusst NICHT cd_bosses, auch nicht für Bosse mit w: ob der DLC-Kampf dieselbe Begegnung wie im Hauptspiel ist,
+   ist laut Daten unbestätigt, und der Haken soll Statistik und Erfolge der Bossseite nicht verändern (Gegenprüfung 01.11.2026); Gartengruppen cd_r2_dlc_garten (Liste der IDs g1 bis g10). Kein Boss der DLC-Liste hat ein Porträt für alle,
    daher tragen alle 14 Karten eine Glyphen-Schiene statt eines Bildes (Bildregel). */
 const DLC_K_BOSSE='cd_r2_dlc_bosse',DLC_K_GARTEN='cd_r2_dlc_garten';
 let _dlcKF={st:'all',grp:'all'};
 /* Besiegt-Zustand als Funktion (Speicher einmal gelesen): Eintrag -> bool */
-function _dlcKDoneFn(){const a=new Set(loadBossDone()),b=cdCheckGet(DLC_K_BOSSE);return x=>x.w?a.has(x.w):b.has(x.name);}
+function _dlcKDoneFn(){const b=cdCheckGet(DLC_K_BOSSE);return x=>b.has(x.name);}
 /* Kurzform für Kennzeile und Chips: vor dem ersten „: “, „; “ oder „ (“ abschneiden, ggf. an der Wortgrenze kürzen */
 function _dlcKShort(t,max){
   let s=String(t==null?'':t).split(/\s*:\s|\s*;\s*|\s+\(/)[0].replace(/[\s.,;:]+$/,'');
@@ -14568,10 +14568,10 @@ function _dlcKSync(){
   });
   set('dlc-g-prog',cdProg(g,DLC_GARDEN.length,g+' von '+DLC_GARDEN.length+' Gruppen geschafft'));
 }
-/* „Als besiegt markieren“: Bosse mit w über die Bossseite (cd_bosses, Statistik, Erfolge), alle anderen in cd_r2_dlc_bosse */
+/* „Als besiegt markieren“: alle DLC-Bosse in cd_r2_dlc_bosse (getrennt von cd_bosses der Bossseite) */
 function _dlcKToggle(name){
   const x=DLC_BOSSES.find(b=>b.name===name);if(!x)return;
-  if(x.w)toggleBossDone(x.w);else cdCheckSet(DLC_K_BOSSE,x.name,!cdCheckGet(DLC_K_BOSSE).has(x.name));
+  cdCheckSet(DLC_K_BOSSE,x.name,!cdCheckGet(DLC_K_BOSSE).has(x.name));
   _dlcKSync();
 }
 /* 8 Bosse und Garten der Prüfungen (Abschnitt dlc-b-bosse, Besitz: kampf) */
