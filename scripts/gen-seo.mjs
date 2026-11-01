@@ -48,6 +48,8 @@ import * as partRuinen from "./seo-parts/ruinen.mjs";
 import * as partGeheimnisse from "./seo-parts/geheimnisse.mjs";
 // Erster DLC (31.10.2026): Schiffe, Inseln, Tauchen, Quests, Garten der Pruefungen, Daten in data/d12-dlc.js.
 import * as partChartingTheUnknown from "./seo-parts/charting-the-unknown.mjs";
+// 01.11.2026: Abschnitt "Neu mit Charting the Unknown" oben auf den Themen-Seiten (kein eigenes Seitenmodul)
+import { dlcNeu } from "./seo-parts/_dlc-neu.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -1058,6 +1060,11 @@ function buildBosse() {
   let body = `
 ${introHtml("bosse", zahlen)}<a class="cta" href="/#sec-bosses">Interaktive Boss-Übersicht öffnen &rarr;</a>
 <p class="note">Mit Filter nach Region/Kapitel, Such- und Abhak-Funktion in der vollständigen App.</p>
+${dlcNeu({ esc, slug }, {
+    titel: "Neu mit Charting the Unknown: DLC-Bosse",
+    intro: "Bosse und Gegner aus den Questreihen des ersten DLC, dazu kommt der Garten der Prüfungen mit seinen Boss-Gruppen. Ein Klick führt zur Zeile auf der DLC-Seite mit Ort und Beute.",
+    items: (extractOptional("DLC_BOSSES") || []).map((b) => ({ name: b.name, info: b.where, c: b.c, q: b.q, pfx: "boss" })),
+  })}
 <h2>Story-Bosse (nach Kapitel, ${story.length})</h2>
 <div class="grid">${story.map(bossArticle).join("\n")}</div>
 <h2>Bosse ohne festes Kapitel (${world.length})</h2>
@@ -1138,7 +1145,13 @@ function buildWaffen() {
   let body = `
 ${introHtml("waffen", zahlen)}<a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
 <p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller damals 500 Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
-${WEAPONS.some((w) => w.dlc) ? `<p class="note">Mit <span class="dlc-gtag">DLC</span> markierte Waffen kamen mit dem DLC „Charting the Unknown“; alles Neue daraus steht auf der Seite <a href="/charting-the-unknown">Charting the Unknown</a>.</p>\n` : ""}${sections}`;
+${dlcNeu({ esc, slug }, {
+    titel: "Neu mit Charting the Unknown: DLC-Waffen",
+    intro: "Diese Waffen kamen mit dem ersten DLC und tragen in den Tabellen unten das Etikett <span class=\"dlc-gtag\">DLC</span>. Ein Klick führt zur Zeile auf der DLC-Seite mit Wert und Fundort.",
+    items: WEAPONS.filter((w) => w.dlc).sort((a, b) => a.name.localeCompare(b.name)).map((w) => ({ name: w.name,
+      info: [w.type, has(w.def) ? "DEF " + w.def : has(w.atk) ? "ATK " + w.atk + (w.val_q ? " (unbestätigt)" : "") : ""].filter(Boolean).join(" · "), pfx: "waffe" })),
+  })}
+${sections}`;
   if (faq.length) body += "\n" + faqSektion(faq);
   const jsonld = {
     "@context": "https://schema.org",

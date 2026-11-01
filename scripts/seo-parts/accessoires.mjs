@@ -15,6 +15,8 @@
 // Anker: "acc-" + slug(name); die Namen sind in den Daten eindeutig.
 // SIGIL_AMULETS gehoert thematisch zu den Hexen-Rezepten und wird auf /hexen genutzt, nicht hier.
 
+import { dlcNeu } from "./_dlc-neu.mjs";
+
 export const SLUG = "accessoires";
 export const NAV_LABEL = "Accessoires";
 export const DEEPLINK = "/#sec-accessories";
@@ -94,6 +96,10 @@ export function build(ctx) {
 <a class="cta" href="${DEEPLINK}">Alle Accessoires interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App filterst du nach Typ und lässt dir zu jedem Accessoire die Fundstelle auf der Karte anzeigen.</p>
 <p class="note"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert. Mehrere Accessoires kaufst du bei Hexen wie Elowen, Bari, Lyselia und Areciel, mehr dazu unter <a href="/hexen">Hexen &amp; Fusion</a>; viele Stücke fallen als Beute oder Belohnung bei Gegnern an, die in der <a href="/bosse">Bossliste</a> stehen.</p>
+${dlcNeu(ctx.helpers, {
+    titel: "Neu mit Charting the Unknown: DLC-Accessoires",
+    items: ACC.filter((a) => a.dlc).map((a) => ({ name: a.name, info: [a.type, a.source].filter(Boolean).join(" · "), href: `#acc-${slug(a.name)}` })),
+  })}
 ${sections}`;
 
   const jsonld = {

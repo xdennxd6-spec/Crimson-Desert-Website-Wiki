@@ -342,6 +342,10 @@ p.ctu-src{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-fai
 ol.ctu-st{margin:0;padding-left:18px;font-size:13px}
 ol.ctu-st li{margin:0 0 6px}
 ol.ctu-st li.ctu-unb{color:var(--ink-faint)}
+div.dlc-neu{margin:18px 0 6px;padding:2px 16px 12px;background:var(--panel-2);border:1px solid var(--line);border-left:3px solid #8fdcff;border-radius:12px}
+ul.dlc-neu-l{margin:8px 0 0;padding-left:20px;font-size:14px;columns:2 260px;column-gap:28px}
+ul.dlc-neu-l li{margin:0 0 7px;break-inside:avoid}
+span.dlc-neu-i{display:block;font-size:12.5px;color:var(--ink-dim)}
 span.dlc-gtag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:7px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;letter-spacing:.06em;color:#08202b;background:#8fdcff;vertical-align:2px}
 
 /* --- Bewegung (nur html.cd-motion) --- */
@@ -369,7 +373,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
            placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
     <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
   </div>
-  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-prolog-dead-of-night">Prolog: Dead of Night</a><a href="#a-kapitel-1-the-first-encounter">Kapitel 1: The First Encounter</a><a href="#a-kapitel-2-golden-greed">Kapitel 2: Golden Greed</a><a href="#a-kapitel-3-howling-hill">Kapitel 3: Howling Hill</a><a href="#a-kapitel-4-the-price-of-knowledge">Kapitel 4: The Price of Knowledge</a><a href="#a-kapitel-5-guest-unbidden">Kapitel 5: Guest Unbidden</a><a href="#a-kapitel-6-cracks-in-the-shield">Kapitel 6: Cracks in the Shield</a><a href="#a-kapitel-7-homecoming">Kapitel 7: Homecoming</a><a href="#a-kapitel-8-blood-coronation">Kapitel 8: Blood Coronation</a><a href="#a-kapitel-9-the-sage-of-the-desert">Kapitel 9: The Sage of the Desert</a><a href="#a-kapitel-10-counterattack">Kapitel 10: Counterattack</a><a href="#a-kapitel-11-truth-and-reality">Kapitel 11: Truth and Reality</a><a href="#a-kapitel-12-the-abyss">Kapitel 12: The Abyss</a><a href="#a-epilog-journeys-end">Epilog: Journey&#39;s End</a><a href="#a-haeufige-fragen">Häufige Fragen</a></nav>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-neu-mit-charting-the-unknown-dlc-questreihen">Neu mit Charting the Unknown: DLC-Questreihen</a><a href="#a-prolog-dead-of-night">Prolog: Dead of Night</a><a href="#a-kapitel-1-the-first-encounter">Kapitel 1: The First Encounter</a><a href="#a-kapitel-2-golden-greed">Kapitel 2: Golden Greed</a><a href="#a-kapitel-3-howling-hill">Kapitel 3: Howling Hill</a><a href="#a-kapitel-4-the-price-of-knowledge">Kapitel 4: The Price of Knowledge</a><a href="#a-kapitel-5-guest-unbidden">Kapitel 5: Guest Unbidden</a><a href="#a-kapitel-6-cracks-in-the-shield">Kapitel 6: Cracks in the Shield</a><a href="#a-kapitel-7-homecoming">Kapitel 7: Homecoming</a><a href="#a-kapitel-8-blood-coronation">Kapitel 8: Blood Coronation</a><a href="#a-kapitel-9-the-sage-of-the-desert">Kapitel 9: The Sage of the Desert</a><a href="#a-kapitel-10-counterattack">Kapitel 10: Counterattack</a><a href="#a-kapitel-11-truth-and-reality">Kapitel 11: Truth and Reality</a><a href="#a-kapitel-12-the-abyss">Kapitel 12: The Abyss</a><a href="#a-epilog-journeys-end">Epilog: Journey&#39;s End</a><a href="#a-haeufige-fragen">Häufige Fragen</a></nav>
 </div>
 <p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 <p class="intro">Die Hauptgeschichte von Crimson Desert ist in 14 Kapitel gegliedert und umfasst 179 einzelne Hauptquests. Diese Übersicht führt sie in Spielreihenfolge auf und nennt für jede Quest ihren Auslöser, die nötigen Voraussetzungen und die Belohnung. So lässt sich nachvollziehen, wie eine Quest startet, was vorher erledigt sein muss und was am Ende dabei herauskommt. Zu 11 Kapiteln gehört ein eigener Bosskampf; er steht jeweils in der Kopfzeile des Kapitels, zusammen mit den Figuren und Funktionen, die das Kapitel freischaltet. Drei Inhalte der Hauptgeschichte sind als verpassbar markiert; nach heutiger Quellenlage schließt sich die Gelegenheit dafür aber nur zeitweise, Einzelheiten nennt der Tipp der jeweiligen Quest. Bei 13 Quests ist die Quellenlage dünn; sie tragen einen sichtbaren Hinweis, statt eine Sicherheit vorzutäuschen, die es nicht gibt. Die Liste eignet sich zum Planen eines Durchgangs ebenso wie zum Nachschlagen, wenn eine Quest hakt oder eine Voraussetzung unklar bleibt.</p>
@@ -379,6 +383,27 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <p class="note">In der App hakst du jedes Kapitel ab, siehst deinen Story-Fortschritt und springst direkt zu den zugehörigen Bossen und Nebenquests.</p>
 <p class="warn"><strong>3 verpassbare Hauptquest-Inhalte:</strong> <a href="#mq-2-for-honor">For Honor</a> <span class="muted">(Kapitel 2: Golden Greed)</span>, <a href="#mq-4-on-the-right-path">On the Right Path</a> <span class="muted">(Kapitel 4: The Price of Knowledge)</span>, <a href="#mq-7-time-to-face-justice-auch-time-of-reckoning-de-zeit-der-gerechtigkeit-ins-auge-zu-blicken-quest-twisted-fate">Time to Face Justice (auch: Time of Reckoning, DE „Zeit, der Gerechtigkeit ins Auge zu blicken“; Quest „Twisted Fate“)</a> <span class="muted">(Kapitel 7: Homecoming)</span>. Laut den Quellen gehen sie nicht dauerhaft verloren, sondern sind nur zeitweise verpasst oder gesperrt; Einzelheiten stehen im Tipp der jeweiligen Quest.</p>
 <p class="note">Bei 13 Quests ist die Quellenlage dünn; sie tragen den Hinweis „Quelle unsicher“ und sollten im Zweifel gegengeprüft werden.</p>
+<div class="dlc-neu" id="dlc">
+<h2 id="a-neu-mit-charting-the-unknown-dlc-questreihen">Neu mit Charting the Unknown: DLC-Questreihen (16)</h2>
+<p class="note">Der erste DLC bringt eigene Questreihen, die nicht zur Hauptstory oben zählen. Ein Klick führt zur Questreihe mit Start, Schritten und Belohnungen.</p>
+<ul class="dlc-neu-l"><li><a href="/charting-the-unknown#dlc-quest-beyond-the-margins"><strong>Beyond the Margins</strong></a><span class="dlc-neu-i">Kliff</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-from-the-ashes"><strong>From the Ashes</strong></a><span class="dlc-neu-i">Damiane</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-forged-resolve"><strong>Forged Resolve</strong></a><span class="dlc-neu-i">Oongka</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-a-wider-world"><strong>A Wider World</strong> (Auf in eine größere Welt)</a><span class="dlc-neu-i">Graumähnen, Ozean</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-remote-islands"><strong>Remote Islands</strong></a><span class="dlc-neu-i">Fraktionsquest, Ozean</span> <span class="ctu-flag">unbestätigt: th.gl</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-mistbound-sea"><strong>Mistbound Sea</strong></a><span class="dlc-neu-i">Fraktionsquest, Ozean</span> <span class="ctu-flag">unbestätigt: th.gl</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-isolated-island-chief"><strong>Isolated Island Chief</strong></a><span class="dlc-neu-i">Fraktionsquest, Satyros Island</span> <span class="ctu-flag">unbestätigt: th.gl</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-predator-of-the-abandoned-island"><strong>Predator of the Abandoned Island</strong></a><span class="dlc-neu-i">Fraktionsquest, Razanui Island</span> <span class="ctu-flag">unbestätigt: th.gl</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-cave-of-sorrow"><strong>Cave of Sorrow</strong></a><span class="dlc-neu-i">Fraktionsquest, Bergel Island</span> <span class="ctu-flag">unbestätigt: th.gl</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-vestiges-of-the-void"><strong>Vestiges of the Void</strong></a><span class="dlc-neu-i">Fraktionsquest, Region Crimson Desert</span> <span class="ctu-flag">unbestätigt: th.gl (Questname)</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-shield-of-hernand"><strong>Shield of Hernand</strong></a><span class="dlc-neu-i">Graumähnen</span> <span class="ctu-flag">unbestätigt: Game8</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-renewed-vitality"><strong>Renewed Vitality</strong></a><span class="dlc-neu-i">Graumähnen</span> <span class="ctu-flag">unbestätigt: Game8</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-garden-of-trials"><strong>Garden of Trials</strong> (Garten der Prüfungen)</a><span class="dlc-neu-i">Graumähnen</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-a-memory-beyond-ashes"><strong>A Memory Beyond Ashes</strong></a><span class="dlc-neu-i">Fraktion Charting the Unknown</span> <span class="ctu-flag">unbestätigt: Game8</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-outlaws-of-the-ocean"><strong>Outlaws of the Ocean</strong></a><span class="dlc-neu-i">Great Ocean, Piratenschiffe</span> <span class="ctu-flag">unbestätigt: Game8, th.gl</span></li>
+<li><a href="/charting-the-unknown#dlc-quest-tales-of-the-ocean-residents"><strong>Tales of the Ocean Residents</strong></a><span class="dlc-neu-i">Great Ocean</span> <span class="ctu-flag">unbestätigt: th.gl, Game8</span></li></ul>
+<p class="note">Alles Neue aus dem DLC (Schiffe, Inseln, Tauchen, Quests, Bosse und Ausrüstung) steht gesammelt auf der Seite <a href="/charting-the-unknown">Charting the Unknown</a>.</p>
+</div>
 <h2 id="a-prolog-dead-of-night">Prolog: Dead of Night (4)</h2>
 
 

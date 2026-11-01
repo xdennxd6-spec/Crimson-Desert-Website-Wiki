@@ -21,6 +21,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { dlcNeu } from "./_dlc-neu.mjs";
 export const SLUG = "abyss-cores";
 export const NAV_LABEL = "Abyss-Ausrüstung";
 export const DEEPLINK = "/#sec-cores";
@@ -152,6 +153,10 @@ ${table(liste)}`;
 <p class="note">In der App filterst du die Cores nach Slot-Typ. Die Synthese-Mechanik und den durchsuchbaren Synthese-Baum mit allen Rezepten findest du dort auf der eigenen Seite <a href="/#sec-synthesis">Abyss-Synthese</a>.</p>
 <p class="note">Wie die Hexen Cores herstellen und welche Rezepte sie verkaufen, steht unter <a href="/hexen">Hexen &amp; Fusion</a>; viele Cores fallen als Beute von Gegnern aus der <a href="/bosse">Bossliste</a>.</p>
 <p class="crs-legend">${esc(slotLegende)}</p>
+${dlcNeu(ctx.helpers, {
+    titel: "Neu mit Charting the Unknown: DLC-Abyss-Ausrüstung",
+    items: d.cores.filter((c) => c.dlc).map((c) => ({ name: c.name, info: [c.slot, c.source].filter(Boolean).join(" · "), href: `#core-${ctx.helpers.slug(c.name)}` })),
+  })}
 ${gruppen}
 ${synthese}`;
 

@@ -19,6 +19,8 @@
 //  - Quests mit conf:"medium" (Stand 06.10.2026: 8) werden als Badge ausgewiesen statt
 //    verschwiegen -- Projektregel: Unsicherheit markieren, nicht glaetten.
 
+import { dlcNeu } from "./_dlc-neu.mjs";
+
 export const SLUG = "hauptquests";
 export const NAV_LABEL = "Hauptquests";
 export const DEEPLINK = "/#sec=quests&tab=mq";
@@ -134,6 +136,11 @@ ${warnZeile}
 <p class="note">In der App hakst du jedes Kapitel ab, siehst deinen Story-Fortschritt und springst direkt zu den zugehörigen Bossen und Nebenquests.</p>
 <p class="warn"><strong>${missQ.length} verpassbare Hauptquest-Inhalte:</strong> ${missList}. ${missHinweis}</p>
 <p class="note">Bei ${unsicher} Quests ist die Quellenlage dünn; sie tragen den Hinweis „Quelle unsicher“ und sollten im Zweifel gegengeprüft werden.</p>
+${dlcNeu(ctx.helpers, {
+    titel: "Neu mit Charting the Unknown: DLC-Questreihen",
+    intro: "Der erste DLC bringt eigene Questreihen, die nicht zur Hauptstory oben zählen. Ein Klick führt zur Questreihe mit Start, Schritten und Belohnungen.",
+    items: (ctx.helpers.extract("DLC_QUESTS") || []).map((q) => ({ name: q.name, de: q.de, info: q.who, c: q.c, q: q.q, pfx: "quest" })),
+  })}
 ${sections}`;
 
   const jsonld = {

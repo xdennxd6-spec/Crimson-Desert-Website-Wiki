@@ -47,6 +47,10 @@ p.ctu-src{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-fai
 ol.ctu-st{margin:0;padding-left:18px;font-size:13px}
 ol.ctu-st li{margin:0 0 6px}
 ol.ctu-st li.ctu-unb{color:var(--ink-faint)}
+div.dlc-neu{margin:18px 0 6px;padding:2px 16px 12px;background:var(--panel-2);border:1px solid var(--line);border-left:3px solid #8fdcff;border-radius:12px}
+ul.dlc-neu-l{margin:8px 0 0;padding-left:20px;font-size:14px;columns:2 260px;column-gap:28px}
+ul.dlc-neu-l li{margin:0 0 7px;break-inside:avoid}
+span.dlc-neu-i{display:block;font-size:12.5px;color:var(--ink-dim)}
 span.dlc-gtag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:7px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;letter-spacing:.06em;color:#08202b;background:#8fdcff;vertical-align:2px}
 `.trim();
 
@@ -280,7 +284,7 @@ ${D.GEAR_X.length ? `<p class="note">Neue Accessoires: ${D.GEAR_X.map((x) => `<s
 ${D.GEAR_K.length ? `<p class="note">Neue Abyss-Kerne: ${D.GEAR_K.map((x) => `<strong>${esc(x.name)}</strong> (${[x.slot, x.source].filter(Boolean).map(esc).join(", ")})`).join("; ")}. Details auf der Seite <a href="/abyss-cores">Abyss-Ausrüstung</a>.</p>` : ""}
 ${nGear ? "" : '<p class="note">Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet; die Einträge erscheinen hier automatisch.</p>'}
 ${tools.length ? `<p class="note">Offiziell neu sind außerdem im Kampf einsetzbare Alltagswerkzeuge: ${tools.map((t) => `${esc(t)} (${esc(D.GEAR_TOOLS_DE[t] || "")})`).join(", ")}. Werte, Fundort und Waffentyp sind nicht belegt.</p>` : ""}
-<p class="note">Alle gekennzeichneten Einträge tragen auf den Seiten <a href="/waffen">Waffen</a> und <a href="/ruestungen">Rüstungen</a> das Etikett <span class="dlc-gtag">DLC</span>.</p>`;
+<p class="note">Alle gekennzeichneten Einträge tragen auf den Seiten <a href="/waffen">Waffen</a> und <a href="/ruestungen">Rüstungen</a> das Etikett <span class="dlc-gtag">DLC</span>. Jede Themen-Seite hat oben einen eigenen Abschnitt „Neu mit Charting the Unknown“: <a href="/waffen#dlc">Waffen</a>, <a href="/ruestungen#dlc">Rüstungen</a>, <a href="/accessoires#dlc">Accessoires</a>, <a href="/abyss-cores#dlc">Abyss-Ausrüstung</a>, <a href="/bosse#dlc">Bosse</a>, <a href="/mounts#dlc">Reittiere</a> und <a href="/hauptquests#dlc">Quests</a>.</p>`;
 
   const offen = `<h2>Was noch offen ist (${D.OPEN.length})</h2>
 <ul class="ctu-list">${D.OPEN.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;

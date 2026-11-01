@@ -342,6 +342,10 @@ p.ctu-src{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--ink-fai
 ol.ctu-st{margin:0;padding-left:18px;font-size:13px}
 ol.ctu-st li{margin:0 0 6px}
 ol.ctu-st li.ctu-unb{color:var(--ink-faint)}
+div.dlc-neu{margin:18px 0 6px;padding:2px 16px 12px;background:var(--panel-2);border:1px solid var(--line);border-left:3px solid #8fdcff;border-radius:12px}
+ul.dlc-neu-l{margin:8px 0 0;padding-left:20px;font-size:14px;columns:2 260px;column-gap:28px}
+ul.dlc-neu-l li{margin:0 0 7px;break-inside:avoid}
+span.dlc-neu-i{display:block;font-size:12.5px;color:var(--ink-dim)}
 span.dlc-gtag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:7px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;letter-spacing:.06em;color:#08202b;background:#8fdcff;vertical-align:2px}
 
 /* --- Bewegung (nur html.cd-motion) --- */
@@ -369,7 +373,7 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
            placeholder="Name, Ort, Effekt …" aria-describedby="pt-count">
     <span class="pt-count" id="pt-count" role="status" aria-live="polite"></span>
   </div>
-  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-a-t-a-g-weapon">A.T.A.G. Weapon</a><a href="#a-blunt-axe">Blunt/Axe</a><a href="#a-bow-ranged">Bow (Ranged)</a><a href="#a-dagger">Dagger</a><a href="#a-firearm">Firearm</a><a href="#a-greatsword-2h">Greatsword (2H)</a><a href="#a-halberd-spear-2h">Halberd / Spear (2H)</a><a href="#a-hand-cannon">Hand Cannon</a><a href="#a-knuckles-gauntlets">Knuckles / Gauntlets</a><a href="#a-rapier">Rapier</a><a href="#a-shield">Shield</a><a href="#a-sword-1h">Sword (1H)</a><a href="#a-haeufige-fragen">Häufige Fragen</a></nav>
+  <nav class="jump" aria-label="Abschnitte dieser Seite"><a href="#a-neu-mit-charting-the-unknown-dlc-waffen">Neu mit Charting the Unknown: DLC-Waffen</a><a href="#a-a-t-a-g-weapon">A.T.A.G. Weapon</a><a href="#a-blunt-axe">Blunt/Axe</a><a href="#a-bow-ranged">Bow (Ranged)</a><a href="#a-dagger">Dagger</a><a href="#a-firearm">Firearm</a><a href="#a-greatsword-2h">Greatsword (2H)</a><a href="#a-halberd-spear-2h">Halberd / Spear (2H)</a><a href="#a-hand-cannon">Hand Cannon</a><a href="#a-knuckles-gauntlets">Knuckles / Gauntlets</a><a href="#a-rapier">Rapier</a><a href="#a-shield">Shield</a><a href="#a-sword-1h">Sword (1H)</a><a href="#a-haeufige-fragen">Häufige Fragen</a></nav>
 </div>
 <p class="pt-empty" id="pt-empty">Kein Treffer auf dieser Seite.</p>
 
@@ -377,7 +381,28 @@ h2[tabindex="-1"]:focus{outline:0}   /* Fokus nach Ankersprung wie beim nativen 
 <p class="kontext">Die Abyss Cores für die Waffen-Slots stehen mit Effekt und Quelle unter <a href="/abyss-cores">Abyss Cores</a>, Schutz für Torso, Kopf, Hände, Schuhe und Mantel in der <a href="/ruestungen">Rüstungs-Liste</a>. Welche Waffe welcher Boss fallen lässt, steht bei jedem Kampf in der <a href="/bosse">Boss-Übersicht</a>.</p>
 <a class="cta" href="/#sec-weapons">Interaktive Waffen-Datenbank öffnen &rarr;</a>
 <p class="note">„n.&nbsp;e." = nicht erfasst (kein belastbarer Quellenwert). „kein Crit" = die Waffe führt laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld (Stand 07.09.2026), das ist also keine Lücke, sondern der Spielstand. Die ATK-Zahl ist <strong>kein Fundzustands-Wert</strong>, sondern die Refinement-Endstufe +10: Ein Vollabgleich aller damals 500 Einträge gegen die questlog-Stufentabellen (09.09.2026) bestätigt das für 406 der 407 dort geführten ATK-Werte; einzige offene Abweichung ist die Rhinard Cannon, für die questlog und Fextralife verschiedene Reihen nennen. Eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer. <strong>Schilde führen strukturell keinen ATK-, sondern einen DEF-Wert</strong>; er steht in derselben Spalte, mit „DEF“ gekennzeichnet, und ist ebenfalls die Endstufe (62 von 62 gegen questlog bestätigt). Crit-Stufe und Abyss-Slots differenzieren im Vergleich stärker als die ATK-Zahl. Die <strong>Crit-Stufe steht dagegen im Fundzustand</strong> (Refinement +0, geprüft am 25.08.2026) — sie ist also nicht nach derselben Regel erfasst wie ATK.</p>
-<p class="note">Mit <span class="dlc-gtag">DLC</span> markierte Waffen kamen mit dem DLC „Charting the Unknown“; alles Neue daraus steht auf der Seite <a href="/charting-the-unknown">Charting the Unknown</a>.</p>
+<div class="dlc-neu" id="dlc">
+<h2 id="a-neu-mit-charting-the-unknown-dlc-waffen">Neu mit Charting the Unknown: DLC-Waffen (17)</h2>
+<p class="note">Diese Waffen kamen mit dem ersten DLC und tragen in den Tabellen unten das Etikett <span class="dlc-gtag">DLC</span>. Ein Klick führt zur Zeile auf der DLC-Seite mit Wert und Fundort.</p>
+<ul class="dlc-neu-l"><li><a href="/charting-the-unknown#dlc-waffe-chain-anchor-mace"><strong>Chain Anchor Mace</strong></a><span class="dlc-neu-i">Blunt/Axe · ATK 30 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-enhanced-fatum-blaster"><strong>Enhanced Fatum Blaster</strong></a><span class="dlc-neu-i">Firearm · ATK 27 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-frying-pan"><strong>Frying Pan</strong></a><span class="dlc-neu-i">Blunt/Axe · ATK 3 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-frying-pan-lid"><strong>Frying Pan Lid</strong></a><span class="dlc-neu-i">Shield · DEF 2</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-guardian-s-horn"><strong>Guardian&#39;s Horn</strong></a><span class="dlc-neu-i">Blunt/Axe · ATK 27 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-harpoon-gun"><strong>Harpoon Gun</strong></a><span class="dlc-neu-i">Firearm · ATK 40</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-jar-lid"><strong>Jar Lid</strong></a><span class="dlc-neu-i">Shield · DEF 2</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-kitchen-knife"><strong>Kitchen Knife</strong></a><span class="dlc-neu-i">Dagger · ATK 9 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-ladle"><strong>Ladle</strong></a><span class="dlc-neu-i">Blunt/Axe · ATK 3 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-longsword-of-void"><strong>Longsword of Void</strong></a><span class="dlc-neu-i">Greatsword (2H) · ATK 38 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-lumen-longsword"><strong>Lumen Longsword</strong></a><span class="dlc-neu-i">Greatsword (2H) · ATK 64 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-lumen-sword"><strong>Lumen Sword</strong></a><span class="dlc-neu-i">Sword (1H) · ATK 51</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-pirate-s-sword"><strong>Pirate&#39;s Sword</strong></a><span class="dlc-neu-i">Sword (1H) · ATK 29 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-satyros-spear"><strong>Satyros Spear</strong></a><span class="dlc-neu-i">Halberd / Spear (2H) · ATK 35</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-silverwave-longsword"><strong>Silverwave Longsword</strong></a><span class="dlc-neu-i">Greatsword (2H) · ATK 39 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-spiral-spear"><strong>Spiral Spear</strong></a><span class="dlc-neu-i">Halberd / Spear (2H) · ATK 36 (unbestätigt)</span></li>
+<li><a href="/charting-the-unknown#dlc-waffe-wailing-sea-greathammer"><strong>Wailing Sea Greathammer</strong></a><span class="dlc-neu-i">Blunt/Axe · ATK 40 (unbestätigt)</span></li></ul>
+<p class="note">Alles Neue aus dem DLC (Schiffe, Inseln, Tauchen, Quests, Bosse und Ausrüstung) steht gesammelt auf der Seite <a href="/charting-the-unknown">Charting the Unknown</a>.</p>
+</div>
 <h2 id="a-a-t-a-g-weapon">A.T.A.G. Weapon (1)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Waffe</th><th>ATK&nbsp;/&nbsp;DEF</th><th>Crit</th><th>Slots</th><th>Fundort</th><th>Built-in / Abyss</th></tr></thead>
