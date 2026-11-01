@@ -7240,6 +7240,136 @@ select.dr-sel-hidden{display:none!important}
 /* DR-A4 Ende */
 /* ---- */
 /* DR-B1 Anfang (Builds) */
+#sec-builds [hidden]{display:none!important}
+#sec-builds h3.sub-t.drb1-sub{margin:38px 0 14px;font-size:18px}
+#sec-builds .dr-head+h3.sub-t.drb1-sub,#sec-builds .dr-jump+h3.sub-t.drb1-sub{margin-top:26px}
+#sec-builds .drb1-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+@media (max-width:900px){#sec-builds .drb1-cards{grid-template-columns:minmax(0,1fr)}}
+/* große Build-Karte */
+#sec-builds .build-card.drb1-card{--cd-acc:var(--red);margin:0;padding:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:none}
+#sec-builds .drb1-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;z-index:1;background:linear-gradient(180deg,var(--cd-acc),color-mix(in srgb,var(--cd-acc) 10%,transparent));pointer-events:none}
+#sec-builds .drb1-card-in{display:flex;flex-direction:column;flex:1;gap:12px;padding:20px 22px 18px 24px}
+#sec-builds .drb1-no{margin:0;font:600 11px/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+#sec-builds .drb1-card .build-title{margin:-4px 0 0;font-family:var(--f-display);font-size:24px;font-weight:700;line-height:1.15;color:var(--ink-hi);letter-spacing:-.005em}
+#sec-builds .drb1-card .build-desc{margin:0;max-width:62ch;font-size:13.5px;line-height:1.6;color:var(--text)}
+#sec-builds .drb1-card .cd-chips{gap:6px}
+#sec-builds .drb1-facts.cd-facts{grid-template-columns:minmax(0,1fr)}
+#sec-builds .drb1-facts--rows>div{flex-direction:row;align-items:baseline;gap:14px;padding:8px 12px}
+#sec-builds .drb1-facts--rows dt{flex:0 0 98px;font-size:11.5px}
+#sec-builds .drb1-facts--rows dd{flex:1 1 auto;min-width:0;font-size:13.5px}
+#sec-builds .drb1-card>.drb1-card-in>.drb1-facts>div{background:color-mix(in srgb,var(--card) 72%,transparent)}
+#sec-builds .drb1-prio{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px}
+#sec-builds .drb1-prio-l{font:600 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+#sec-builds .drb1-prio-v{font-size:13px;color:var(--ink-hi)}
+#sec-builds .drb1-chain{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 24px}
+#sec-builds .drb1-chain li{position:relative;display:inline-flex;align-items:center;min-height:30px;padding:3px 13px;border:1px solid color-mix(in srgb,var(--gold) 34%,transparent);border-radius:999px;background:color-mix(in srgb,var(--gold) 9%,var(--card));font-size:13px;color:var(--ink-hi)}
+#sec-builds .drb1-chain li:first-child{background:color-mix(in srgb,var(--gold) 26%,var(--card));font-weight:700}
+#sec-builds .drb1-chain li+li::before{content:'→';position:absolute;left:-18px;top:50%;transform:translateY(-52%);font-size:13px;color:var(--dim)}
+#sec-builds .drb1-card .cd-fold.drb1-more{margin-top:auto;border-radius:12px;background:color-mix(in srgb,var(--card) 74%,transparent);box-shadow:none}
+#sec-builds .drb1-card .drb1-more>summary{min-height:52px;padding-block:8px}
+#sec-builds .drb1-card .drb1-more .cd-fold-t{font-size:14px}
+#sec-builds .drb1-card .drb1-more .cd-fold-body{padding:12px 14px 14px}
+/* Build-Finder */
+#sec-builds .bo-wizard{padding:0;margin:0;border:0;background:none;box-shadow:none;border-radius:0}
+#sec-builds .drb1-filter{display:grid;gap:12px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+#sec-builds .drb1-row{display:grid;gap:8px;min-width:0}
+#sec-builds .drb1-rl{font:600 11px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+#sec-builds .drb1-filter .cd-pills{margin:0;gap:8px}
+#sec-builds .drb1-sdesc{margin:-2px 0 2px;min-height:0;font-size:13px;line-height:1.5;color:var(--dim)}
+#sec-builds .drb1-sdesc:empty{display:none}
+#sec-builds .drb1-sdesc b{color:var(--ink-hi);margin-right:6px}
+#sec-builds .drb1-hint{margin:14px 0 4px;font-size:13px;line-height:1.5;color:var(--dim);text-align:center}
+#sec-builds .drb1-pills .cd-pill[aria-pressed="true"]{color:var(--bg)}
+/* Ergebnis-Karte */
+#sec-builds .drb1-res{--cd-acc:var(--gold);margin:16px 0 0;border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line));border-radius:16px;background:var(--card)}
+#sec-builds .drb1-res-in{display:grid;gap:12px;padding:20px 24px 22px}
+#sec-builds .drb1-res-k{margin:0;font:600 11px/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+#sec-builds .drb1-res-t{margin:-4px 0 0;display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-size:26px;font-weight:700;line-height:1.15;color:var(--ink-hi)}
+#sec-builds .drb1-res-g{display:inline-grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-size:22px}
+#sec-builds .drb1-res .drb1-facts>div{background:color-mix(in srgb,var(--card) 72%,transparent)}
+#sec-builds .drb1-res .drb1-facts,#sec-builds .drb1-res .cd-note{max-width:640px}
+#sec-builds #bo-save-row{margin-top:10px;padding:12px 14px;border:1px dashed var(--line);border-radius:14px;background:color-mix(in srgb,var(--card) 60%,transparent);gap:10px}
+#sec-builds .bo-save-input{flex:1 1 200px;min-height:42px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;color:var(--ink-hi)}
+#sec-builds .bo-save-btn{min-height:42px;padding:8px 18px;border:1px solid color-mix(in srgb,var(--gold) 60%,transparent);border-radius:10px;background:color-mix(in srgb,var(--gold) 16%,var(--card));color:var(--ink-hi);font-size:12px}
+#sec-builds .bo-save-btn:hover{background:var(--gold);color:var(--bg)}
+/* gespeicherte Builds */
+#sec-builds .bo-saved-hd{margin:22px 0 10px;font-size:11px;color:var(--amber)}
+#sec-builds .drb1-sv-n{font-size:11px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:.04em}
+#sec-builds .bo-saved-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#sec-builds .bo-saved-card{justify-content:flex-start;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:none}
+#sec-builds .bo-saved-card:hover{border-color:color-mix(in srgb,var(--gold) 50%,transparent)}
+#sec-builds .drb1-sv-g{flex:none;display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-size:20px}
+#sec-builds .bo-saved-name{font-size:14px;color:var(--ink-hi)}
+#sec-builds .bo-saved-meta{font-size:11.5px;color:var(--dim)}
+#sec-builds .bo-saved-actions{gap:6px}
+#sec-builds .bo-saved-btn{min-width:40px;min-height:40px;padding:6px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:11.5px}
+/* Rezept-Karten */
+#sec-builds .drb1-listh{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:26px 0 12px}
+#sec-builds .drb1-lt{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;color:var(--ink-hi)}
+#sec-builds .drb1-cnt{font:600 11px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+#sec-builds .drb1-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+@media (max-width:900px){#sec-builds .drb1-grid{grid-template-columns:minmax(0,1fr)}}
+#sec-builds .drb1-grid>.cd-fold{content-visibility:auto;contain-intrinsic-size:auto 108px}
+#sec-builds .drb1-grid>.cd-fold[open]{content-visibility:visible}
+#sec-builds .drb1-rc>summary{min-height:84px;padding-block:12px}
+#sec-builds .drb1-rc .cd-fold-lead{font-size:13px}
+#sec-builds .drb1-lk{margin-right:4px;font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
+#sec-builds .drb1-rc[data-style="tank"]{--cd-acc:var(--cd-fx-spirit)}
+#sec-builds .drb1-rc[data-style="dps"]{--cd-acc:var(--red)}
+#sec-builds .drb1-rc[data-style="mobility"]{--cd-acc:var(--cd-fx-speed)}
+#sec-builds .drb1-rc[data-style="caster"]{--cd-acc:var(--violet)}
+#sec-builds .drb1-rc[data-style="ranged"]{--cd-acc:var(--cd-fx-bolt)}
+#sec-builds .drb1-rc[data-style="unarmed"]{--cd-acc:var(--cd-fx-fire)}
+#sec-builds .drb1-rc.is-picked{border-color:color-mix(in srgb,var(--gold) 60%,transparent)}
+#sec-builds .drb1-rc .cd-fold-ico{font-size:23px}
+#sec-builds .drb1-rc .cd-fold-body{gap:12px}
+#sec-builds .drb1-pick{justify-self:start;min-height:40px;padding:8px 16px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:999px;background:color-mix(in srgb,var(--gold) 10%,transparent);color:var(--ink-hi);font-size:12.5px;cursor:pointer}
+#sec-builds .drb1-pick:hover,#sec-builds .drb1-pick:focus-visible{background:var(--gold);color:var(--bg)}
+/* Simulator */
+#sec-builds .drb1-sim-lead{margin:0 0 12px;max-width:100ch;font-size:13.5px;line-height:1.6;color:var(--text)}
+#sec-builds .drb1-sim-note{margin:0 0 16px}
+#sec-builds .sim-grid{grid-template-columns:minmax(260px,1fr) minmax(280px,1.15fr);gap:16px;align-items:start}
+@media (max-width:760px){#sec-builds .sim-grid{grid-template-columns:minmax(0,1fr)}}
+#sec-builds .sim-editor,#sec-builds .sim-output{padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:none;min-width:0}
+#sec-builds .drb1-sg{display:grid;gap:7px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--line-soft)}
+#sec-builds .drb1-sg:last-of-type{border-bottom:0;margin-bottom:6px;padding-bottom:0}
+#sec-builds .sim-lbl{margin:0;font:600 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+#sec-builds .sim-sel{min-height:42px;border-radius:10px;font-size:13px}
+#sec-builds select#sim-cores{min-height:132px}
+#sec-builds .sim-armor-row{gap:8px}
+#sec-builds .sim-actions{gap:8px;margin-top:4px}
+#sec-builds .sim-btn{min-height:40px;padding:8px 16px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:999px;background:color-mix(in srgb,var(--gold) 10%,transparent);color:var(--ink-hi);font-size:12px}
+#sec-builds .sim-btn:hover{background:var(--gold);color:var(--bg)}
+#sec-builds .sim-btn-ghost{border-color:var(--line);background:transparent;color:var(--dim)}
+#sec-builds .sim-btn-ghost:hover{background:var(--panel-2);color:var(--ink-hi)}
+#sec-builds .sim-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:1100px){#sec-builds .sim-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+#sec-builds .sim-stat{display:flex;flex-direction:column-reverse;align-items:flex-start;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--card) 62%,transparent);text-align:left}
+#sec-builds .sim-stat-v{font-family:var(--f-mono);font-size:24px;font-weight:700;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+#sec-builds .sim-stat-l{margin:0;font:400 12px/1.3 var(--f-body,inherit);letter-spacing:.02em;text-transform:none;color:var(--dim)}
+#sec-builds .sim-stat-x{margin:0;font-size:11px;color:var(--dim)}
+#sec-builds .sim-slot-use{margin-top:12px;font-size:12.5px;color:var(--dim)}
+#sec-builds .sim-sub{margin:16px 0 8px;padding-top:12px;border-top:1px solid var(--line-soft);font:600 11px/1.3 var(--f-mono);letter-spacing:.12em;color:var(--amber)}
+#sec-builds .sim-core{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:12.5px}
+#sec-builds .sim-core-slot{padding:1px 8px;border:1px solid color-mix(in srgb,var(--amber) 55%,transparent);font-size:11px;color:var(--amber)}
+#sec-builds .sim-core-eff{color:var(--dim);font-size:12.5px}
+#sec-builds .sim-bonus{padding:4px 10px;border:1px solid var(--line);background:var(--panel);font-size:12px;color:var(--ink-hi)}
+#sec-builds .sim-cmp-tbl{font-size:13px}
+#sec-builds .sim-cmp-tbl th{font-size:11px;color:var(--dim)}
+#sec-builds .sim-cmp-tbl th,#sec-builds .sim-cmp-tbl td{padding:8px 8px}
+#sec-builds .sim-d{font-size:11px}
+@media (max-width:600px){
+  #sec-builds .drb1-card-in{padding:18px 16px 16px 18px}
+  #sec-builds .drb1-card .build-title{font-size:21px}
+  #sec-builds .drb1-filter{padding:16px 14px}
+  #sec-builds .drb1-filter .cd-pills{margin-inline:-14px;padding-inline:14px}
+  #sec-builds .drb1-res-in{padding:18px 16px 18px 18px}
+  #sec-builds .drb1-res-t{font-size:22px;gap:10px}
+  #sec-builds .bo-saved-list{grid-template-columns:minmax(0,1fr)}
+  #sec-builds .sim-editor,#sec-builds .sim-output{padding:16px 14px}
+  #sec-builds .sim-armor-row{grid-template-columns:minmax(0,1fr)}
+  #sec-builds .drb1-facts--rows dt{flex-basis:88px}
+}
 /* DR-B1 Ende */
 /* ---- */
 /* DR-B2 Anfang (Hexen + Kochen & Elixiere) */
@@ -8336,13 +8466,12 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-builds">
     <h2 class="sec-t"><span class="sec-sym">⊞</span> Builds</h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:16px;line-height:1.6">Empfohlene Loadouts für verschiedene Spielstile. Alle Builds basieren auf Items, die nach dem angegebenen Kapitel verfügbar sind.</div>
-    <div class="bo-wizard" id="bo-wizard" aria-label="Build-Loadout-Optimizer"></div>
-    <h3 class="sub-t" style="margin-top:24px">🧮 Build-Stat-Simulator</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;line-height:1.6">Waffe, Rüstung &amp; passive Cores wählen → live aggregierte Werte, zwei Loadouts (A/B) vergleichbar. Hinweis: ATK/DEF werden aus den Rüstungs-Effekttexten summiert (Rüstungswerte = Höchststufe Refinement +10); aktive Skill-Cores haben keine öffentlichen Schadenswerte (nur Buff-Effekte) und zählen hier nur Slots.</div>
-    <div id="build-sim"></div>
-    <h3 class="sub-t">Klassische Build-Vorschläge</h3>
+    <h3 class="sub-t drb1-sub" id="drb1-h-vor">Klassische Build-Vorschläge</h3>
     <div id="builds-list"></div>
+    <h3 class="sub-t drb1-sub" id="drb1-h-finder">Build-Finder</h3>
+    <div class="bo-wizard" id="bo-wizard" aria-label="Build-Loadout-Optimizer"></div>
+    <h3 class="sub-t drb1-sub" id="drb1-h-sim">🧮 Build-Stat-Simulator</h3>
+    <div id="build-sim"></div>
   </section>
 
   <section class="sec" id="sec-accessories">
@@ -10047,21 +10176,83 @@ function renderBossRecs(b){
 // ===== BUILD-LOADOUT-OPTIMIZER =====
 // Empfohlene Loadouts: {style, phase} -> {weapon, armor_set, cores, skills, tip}
 let _boState={style:null,phase:null};
+/* ---- DR-B1 (Design-Rest, Builds): „Build-Finder“. Stil- und Phasen-Pillen (cdPills, Ereignis cd-pills mit eigenem name drb1-style / drb1-phase),
+   darunter alle BUILD_RECIPES als Faltkarten, per Stil/Phase gefiltert (Attribut hidden). _boState, _boSetStyle, _boSetPhase,
+   saveBuildPreset, loadSavedBuild und cd_saved_builds bleiben unverändert. ---- */
+let _drB1RC=null;
+function _drB1Recs(){
+  if(!_drB1RC)_drB1RC=Object.keys(BUILD_RECIPES).map(function(k){var i=k.indexOf('-');return {k:k,s:k.slice(0,i),p:k.slice(i+1),r:BUILD_RECIPES[k]};});
+  return _drB1RC;
+}
+function _drB1Lc(a){return a.filter(function(x){return x!=null&&x!=='';}).join(' ').toLowerCase();}
+/* Anzahl Rezepte, wenn Stil (kind 'style') bzw. Phase (kind 'phase') den Wert v hätte (null = Alle), der andere Filter bleibt */
+function _drB1Count(kind,v){
+  const st=kind==='style'?v:_boState.style,ph=kind==='phase'?v:_boState.phase;
+  return _drB1Recs().filter(function(x){return (!st||x.s===st)&&(!ph||x.p===ph);}).length;
+}
+const _DRB1_PG=['◔','◑','◕','●'];
+function _drB1Items(kind){
+  const cur=_boState[kind],src=kind==='style'?BUILD_STYLES:BUILD_PHASES;
+  return [{v:'__all',t:'Alle',n:_drB1Count(kind,null),on:!cur}].concat(src.map(function(x,i){
+    return {v:x.k,t:kind==='style'?x.name:x.l,n:_drB1Count(kind,x.k),g:kind==='style'?x.ico:_DRB1_PG[i%_DRB1_PG.length],on:cur===x.k};
+  }));
+}
+function _drB1RecFold(x){
+  const r=x.r,s=BUILD_STYLES.find(function(a){return a.k===x.s;})||{ico:'⊞',name:x.s,desc:''},p=BUILD_PHASES.find(function(a){return a.k===x.p;})||{l:x.p};
+  return cdFold({title:r.name,lead:{h:'<span class="drb1-lk">Waffe</span> '+cdEsc(r.weapon)},icon:s.ico,
+    chips:[{t:s.name,c:'gold'},{t:p.l,c:'ice'}],cls:'drb1-rc',h:3,
+    attrs:{'data-style':x.s,'data-phase':x.p,'data-drb1-k':x.k},
+    s:_drB1Lc([r.name,s.name,s.desc,p.l,r.weapon,r.armor,r.cores,r.skills,r.tip]),
+    body:function(){
+      return cdFacts([['Spielstil',s.desc],['Rüstung',r.armor],['Abyss Cores',r.cores],['Skills',{h:linkifyXrefs(cdEsc(r.skills))}]],{cls:'drb1-facts drb1-facts--rows'})
+        +cdNote({h:cdEsc(r.tip)},{kind:'info',title:'Tipp'})
+        +'<button type="button" class="drb1-pick" onclick="_drB1Pick(\''+escJsStr(x.s)+'\',\''+escJsStr(x.p)+'\')">Im Finder anzeigen und speichern</button>';
+    }});
+}
+function _drB1Pick(s,p){
+  _boState.style=s;_boState.phase=p;_drB1Sync();
+  const el=document.getElementById('drb1-h-finder');
+  if(el){if(window.cdMotion)cdMotion.scrollTo(el);else el.scrollIntoView({block:'start'});}
+}
+/* Zustand → Pillen (aria-pressed, Anzahl), Rezeptkarten (hidden), Beschreibung, Ergebnis, Speicherzeile */
+function _drB1Sync(){
+  const w=document.getElementById('bo-wizard');if(!w)return;
+  const st=_boState.style,ph=_boState.phase;
+  [['style',st],['phase',ph]].forEach(function(a){
+    const g=w.querySelector('[data-cd-pills="drb1-'+a[0]+'"]');if(!g)return;
+    g.querySelectorAll('.cd-pill').forEach(function(b){
+      const v=b.dataset.v==='__all'?null:b.dataset.v;
+      b.setAttribute('aria-pressed',String(v===a[1]));
+      const n=b.querySelector('.cd-pill-n');if(n)n.textContent=_drB1Count(a[0],v);
+    });
+  });
+  let vis=0,tot=0;
+  w.querySelectorAll('.drb1-rc').forEach(function(el){
+    tot++;const ok=(!st||el.dataset.style===st)&&(!ph||el.dataset.phase===ph);
+    el.hidden=!ok;if(ok)vis++;
+    el.classList.toggle('is-picked',!!(ok&&st&&ph));
+  });
+  const cnt=document.getElementById('drb1-count');
+  if(cnt)cnt.textContent=(st||ph)?vis+' von '+tot+' Rezepten':'Alle '+tot+' Rezepte';
+  const sd=document.getElementById('drb1-sdesc'),S=BUILD_STYLES.find(function(x){return x.k===st;});
+  if(sd)sd.innerHTML=S?'<b>'+cdEsc(S.name)+'</b> '+cdEsc(S.desc):'';
+  const row=document.getElementById('bo-save-row');if(row)row.style.display=(st&&ph)?'flex':'none';
+  _boRenderResult();
+}
 function renderBuildOptimizer(){
   const cont=document.getElementById('bo-wizard');
   if(!cont)return;
   cont.innerHTML=`
-    <div class="bo-step">
-      <div class="bo-step-lbl">1. Spielstil wählen</div>
-      <div class="bo-pills">${BUILD_STYLES.map(s=>`
-        <button class="bo-pill${_boState.style===s.k?' active':''}" onclick="_boSetStyle('${s.k}')" data-tip="${s.desc}" data-tip-title="${s.name}">
-          <span class="bo-pill-ico">${s.ico}</span>${s.name}
-        </button>`).join('')}</div>
-    </div>
-    <div class="bo-step">
-      <div class="bo-step-lbl">2. Spielphase</div>
-      <div class="bo-pills">${BUILD_PHASES.map(p=>`
-        <button class="bo-pill${_boState.phase===p.k?' active':''}" onclick="_boSetPhase('${p.k}')">${p.l}</button>`).join('')}</div>
+    <div class="drb1-filter cd-spot">
+      <div class="drb1-row">
+        <div class="drb1-rl">1. Spielstil wählen</div>
+        ${cdPills(_drB1Items('style'),{name:'drb1-style',label:'Spielstil',cls:'drb1-pills'})}
+      </div>
+      <p class="drb1-sdesc" id="drb1-sdesc" aria-live="polite"></p>
+      <div class="drb1-row">
+        <div class="drb1-rl">2. Spielphase</div>
+        ${cdPills(_drB1Items('phase'),{name:'drb1-phase',label:'Spielphase',cls:'drb1-pills'})}
+      </div>
     </div>
     <div id="bo-result"></div>
     <div class="bo-save-row" id="bo-save-row" style="display:${(_boState.style&&_boState.phase)?'flex':'none'}">
@@ -10069,40 +10260,52 @@ function renderBuildOptimizer(){
       <button class="bo-save-btn" onclick="saveBuildPreset()">⭐ Build speichern</button>
     </div>
     <div id="bo-saved"></div>
+    <div class="drb1-listh"><h4 class="drb1-lt">Rezepte</h4><span class="drb1-cnt" id="drb1-count"></span></div>
+    <div class="drb1-grid" id="drb1-recipes">${_drB1Recs().map(_drB1RecFold).join('')}</div>
   `;
-  _boRenderResult();
+  if(!cont._drb1){
+    cont._drb1=1;
+    cont.addEventListener('cd-pills',function(e){
+      const d=e.detail||{};if(d.name!=='drb1-style'&&d.name!=='drb1-phase')return;
+      const v=d.value==='__all'?null:d.value;
+      if(d.name==='drb1-style')_boSetStyle(v);else _boSetPhase(v);
+    });
+  }
+  cont.querySelectorAll('[data-cd-pills="drb1-style"] .cd-pill').forEach(function(b){
+    const S=BUILD_STYLES.find(function(x){return x.k===b.dataset.v;});if(S)b.title=S.desc;
+  });
+  _drB1Sync();
   renderSavedBuilds();
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(document.getElementById('sec-builds'));
 }
-function _boSetStyle(k){_boState.style=k;renderBuildOptimizer();}
-function _boSetPhase(k){_boState.phase=k;renderBuildOptimizer();}
+function _boSetStyle(k){_boState.style=k;_drB1Sync();}
+function _boSetPhase(k){_boState.phase=k;_drB1Sync();}
 function _boRenderResult(){
   const r=document.getElementById('bo-result');
   if(!r)return;
   if(!_boState.style||!_boState.phase){
-    r.innerHTML='<div style="text-align:center;color:var(--dim);font-size:var(--fs-11-5);padding:18px 0">Wähle Stil und Phase um eine Empfehlung zu erhalten…</div>';
+    r.innerHTML='<p class="drb1-hint">Wähle Stil und Phase um eine Empfehlung zu erhalten…</p>';
     return;
   }
   const key=_boState.style+'-'+_boState.phase;
   const recipe=BUILD_RECIPES[key];
   if(!recipe){
-    r.innerHTML='<div style="text-align:center;color:var(--dim);font-size:var(--fs-11-5);padding:18px 0">Keine Empfehlung für diese Kombination.</div>';
+    r.innerHTML='<p class="drb1-hint">Keine Empfehlung für diese Kombination.</p>';
     return;
   }
   const style=BUILD_STYLES.find(s=>s.k===_boState.style);
   const phase=BUILD_PHASES.find(p=>p.k===_boState.phase);
-  r.innerHTML=`<div class="bo-result">
-    <div class="bo-result-hd">
-      <div class="bo-result-name">${style.ico} ${recipe.name}</div>
-      <div class="bo-result-style">${style.name} · ${phase.l}</div>
+  const chN=phase.ch>=99?12:phase.ch;
+  r.innerHTML=`<article class="drb1-res cd-spot cd-scened">
+    ${cdScene(['ch-'+chN,'char-kliff'],{glyph:style.ico})}
+    <div class="drb1-res-in">
+      <p class="drb1-res-k">Empfehlung</p>
+      <h4 class="drb1-res-t"><span class="drb1-res-g" aria-hidden="true">${style.ico}</span> ${cdEsc(recipe.name)}</h4>
+      ${cdChips([{t:style.name,c:'gold'},{t:phase.l,c:'ice'}])}
+      ${cdFacts([['Waffe',{h:linkifyXrefs(cdEsc(recipe.weapon))}],['Rüstung',recipe.armor],['Abyss Cores',recipe.cores],['Skills',{h:linkifyXrefs(cdEsc(recipe.skills))}]],{cls:'drb1-facts drb1-facts--rows'})}
+      ${cdNote({h:cdEsc(recipe.tip)},{kind:'info',title:'Tipp'})}
     </div>
-    <div class="bo-result-grid">
-      <div class="bo-slot"><span class="bo-slot-lbl">Waffe</span><span class="bo-slot-val">${linkifyXrefs(recipe.weapon)}</span></div>
-      <div class="bo-slot"><span class="bo-slot-lbl">Rüstung</span><span class="bo-slot-val">${recipe.armor}</span></div>
-      <div class="bo-slot"><span class="bo-slot-lbl">Abyss Cores</span><span class="bo-slot-val">${recipe.cores}</span></div>
-      <div class="bo-slot"><span class="bo-slot-lbl">Skills</span><span class="bo-slot-val">${linkifyXrefs(recipe.skills)}</span></div>
-    </div>
-    <div class="bo-result-tip">💡 ${recipe.tip}</div>
-  </div>`;
+  </article>`;
 }
 
 // ===== ROADMAP =====
@@ -11049,20 +11252,21 @@ function renderSavedBuilds(){
   if(!cont)return;
   const builds=loadSavedBuilds();
   if(!builds.length){cont.innerHTML='';return;}
-  cont.innerHTML=`<div class="bo-saved-hd"><span>Eigene Builds</span><span style="color:var(--dim);font-size:var(--fs-10)">${builds.length} gespeichert</span></div>
+  cont.innerHTML=`<div class="bo-saved-hd"><span>Eigene Builds</span><span class="drb1-sv-n">${builds.length} gespeichert</span></div>
     <div class="bo-saved-list">
       ${builds.map(b=>{
         const style=BUILD_STYLES.find(s=>s.k===b.style);
         const phase=BUILD_PHASES.find(p=>p.k===b.phase);
         const dt=new Date(b.saved||Date.now()).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});
-        return `<div class="bo-saved-card">
+        return `<div class="bo-saved-card cd-spot">
+          <span class="drb1-sv-g" aria-hidden="true">${style?style.ico:'⊞'}</span>
           <div class="bo-saved-info">
-            <div class="bo-saved-name">${style?style.ico:''} ${escHtml(b.name)}</div>
+            <div class="bo-saved-name">${escHtml(b.name)}</div>
             <div class="bo-saved-meta">${style?style.name:'?'} · ${phase?phase.l:'?'} · ${dt}</div>
           </div>
           <div class="bo-saved-actions">
-            <button class="bo-saved-btn" onclick="loadSavedBuild('${b.id}')" title="Build laden">Laden</button>
-            <button class="bo-saved-btn danger" onclick="deleteSavedBuild('${b.id}')" title="Löschen">✕</button>
+            <button class="bo-saved-btn" onclick="loadSavedBuild('${escJsStr(b.id)}')" title="Build laden">Laden</button>
+            <button class="bo-saved-btn danger" onclick="deleteSavedBuild('${escJsStr(b.id)}')" title="Löschen" aria-label="Build löschen">✕</button>
           </div>
         </div>`;
       }).join('')}
@@ -17506,21 +17710,24 @@ function renderBuildSim(){
   const armorSelects=types.map(t=>`<select class="fs sim-sel" data-slot="${escA(t)}" onchange="simRecalc()" aria-label="${escA(t)}"><option value="">— ${escHtml(t)} —</option>${ARMOR.filter(a=>a.type===t).sort((a,b)=>a.name.localeCompare(b.name)).map(a=>`<option value="${escA(a.name)}">${escHtml(a.name)}</option>`).join('')}</select>`).join('');
   const cslots=[...new Set(CORES.map(c=>c.slot))];
   const coreOpts=cslots.map(sl=>`<optgroup label="${escA(slotDe(sl)||'?')}">${CORES.filter(c=>c.slot===sl).sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${escA(c.name)}">${escHtml(c.name)}</option>`).join('')}</optgroup>`).join('');
-  el.innerHTML=`<div class="sim-grid">
-      <div class="sim-editor">
-        <label class="sim-lbl">Waffe</label>
-        <select class="fs sim-sel" id="sim-weapon" aria-label="Waffe für den Build-Simulator wählen" onchange="simRecalc()">${wOpts}</select>
-        <label class="sim-lbl">Rüstung</label>
-        <div id="sim-armor-row" class="sim-armor-row">${armorSelects}</div>
-        <label class="sim-lbl">Cores (Mehrfachauswahl: Strg/Cmd-Klick)</label>
-        <select class="fs sim-sel" id="sim-cores" aria-label="Abyss-Cores für den Build-Simulator wählen (Mehrfachauswahl)" multiple size="5" onchange="simRecalc()">${coreOpts}</select>
+  /* DR-B1: erster Satz sichtbar, „Hinweis: …“ wortgleich als Hinweiskasten */
+  el.innerHTML=`<p class="drb1-sim-lead">Waffe, Rüstung &amp; passive Cores wählen → live aggregierte Werte, zwei Loadouts (A/B) vergleichbar.</p>
+    ${cdNote('Hinweis: ATK/DEF werden aus den Rüstungs-Effekttexten summiert (Rüstungswerte = Höchststufe Refinement +10); aktive Skill-Cores haben keine öffentlichen Schadenswerte (nur Buff-Effekte) und zählen hier nur Slots.',{kind:'info',cls:'drb1-sim-note'})}
+    <div class="sim-grid">
+      <div class="sim-editor cd-spot">
+        <div class="drb1-sg"><label class="sim-lbl" for="sim-weapon">Waffe</label>
+        <select class="fs sim-sel" id="sim-weapon" aria-label="Waffe für den Build-Simulator wählen" onchange="simRecalc()">${wOpts}</select></div>
+        <div class="drb1-sg"><span class="sim-lbl" id="sim-armor-lbl">Rüstung</span>
+        <div id="sim-armor-row" class="sim-armor-row" role="group" aria-labelledby="sim-armor-lbl">${armorSelects}</div></div>
+        <div class="drb1-sg"><label class="sim-lbl" for="sim-cores">Cores (Mehrfachauswahl: Strg/Cmd-Klick)</label>
+        <select class="fs sim-sel" id="sim-cores" aria-label="Abyss-Cores für den Build-Simulator wählen (Mehrfachauswahl)" multiple size="5" onchange="simRecalc()">${coreOpts}</select></div>
         <div class="sim-actions">
           <button class="sim-btn" onclick="simSnapshot('A')">→ In A</button>
           <button class="sim-btn" onclick="simSnapshot('B')">→ In B</button>
           <button class="sim-btn sim-btn-ghost" onclick="_simSlots={A:null,B:null};simRenderCompare();_simToast('Vergleich geleert');">Vergleich leeren</button>
         </div>
       </div>
-      <div class="sim-output">
+      <div class="sim-output cd-spot">
         <div id="sim-readout"></div>
         <div id="sim-compare"></div>
       </div>
@@ -17528,19 +17735,42 @@ function renderBuildSim(){
   simRecalc();simRenderCompare();
 }
 
+/* ---- DR-B1: Builds. Kopf, vier klassische Build-Vorschläge als große Karten (Szene = Kapitel aus dem Tag „Kap. n“) ---- */
+function _drB1Chain(v){
+  const parts=String(v==null?'':v).split(/\s*→\s*/).map(s=>s.trim()).filter(Boolean);
+  if(parts.length<2)return '<span class="drb1-prio-v">'+cdEsc(v)+'</span>';
+  return '<ol class="drb1-chain">'+parts.map(p=>'<li>'+cdEsc(p)+'</li>').join('')+'</ol>';
+}
+function _drB1Card(b,i){
+  const bldId='bld-'+b.name.toLowerCase().replace(/[\s/()]+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const m=(b.tags||[]).join(' ').match(/Kap\.\s*(\d+)/),ch=m?+m[1]:0;
+  const slot=l=>{const s=b.slots.find(x=>x.label===l);return s?s.val:'';};
+  const base=['Waffe','Rüstung','Verfügbar ab','Stat-Prio'];
+  const extra=b.slots.filter(s=>base.indexOf(s.label)<0);
+  const prio=slot('Stat-Prio');
+  const low=_drB1Lc([b.name,b.desc,(b.tags||[]).join(' ')].concat(b.slots.map(s=>s.label+' '+s.val),[b.tip]));
+  return '<article id="'+cdEsc(bldId)+'" class="build-card drb1-card cd-spot cd-scened" data-s="'+cdEsc(low)+'">'
+    +cdScene(ch>0&&ch<=12?['ch-'+ch,'char-kliff']:['char-kliff'],{glyph:'⊞'})
+    +'<div class="drb1-card-in">'
+    +'<p class="drb1-no">Vorschlag '+(i+1)+'</p>'
+    +'<h3 class="build-title">'+cdEsc(b.name)+'</h3>'
+    +cdChips((b.tags||[]).map(t=>/^Kap\./.test(t)?{t:t,c:'gold'}:t))
+    +'<p class="build-desc">'+cdEsc(b.desc)+'</p>'
+    +cdFacts([['Waffe',slot('Waffe')],['Rüstung',slot('Rüstung')],['Verfügbar ab',slot('Verfügbar ab')]],{cls:'drb1-facts drb1-facts--rows'})
+    +(prio?'<div class="drb1-prio"><span class="drb1-prio-l">Stat-Prio</span>'+_drB1Chain(prio)+'</div>':'')
+    +cdFold({title:'Key Cores, Skills und Tipp',h:4,cls:'drb1-more',body:function(){
+      return cdFacts(extra.map(s=>[s.label,s.val]),{cls:'drb1-facts drb1-facts--rows'})+cdNote({h:cdEsc(b.tip)},{kind:'info',title:'Tipp'});
+    }})
+    +'</div></article>';
+}
 function renderBuilds(){
-  const tagBadge=t=>`<span class="tag tx" style="font-size:var(--fs-9-5)">${t}</span>`;
-  const bldId=n=>'bld-'+n.toLowerCase().replace(/[\s/()]+/g,'-').replace(/[^a-z0-9-]/g,'');
-  const toc=makeToc(BUILDS.map(b=>({id:bldId(b.name),label:b.name})));
-  document.getElementById('builds-list').innerHTML=toc+BUILDS.map(b=>`
-    <div id="${bldId(b.name)}" class="build-card" style="scroll-margin-top:72px">
-      <div class="build-title">${b.name}</div>
-      <div class="build-desc">${b.desc}</div>
-      <div class="build-tags">${b.tags.map(tagBadge).join('')}</div>
-      <div class="build-slots">${b.slots.map(s=>`<div class="build-slot"><span class="bs-label">${s.label}</span><span class="bs-val">${s.val}</span></div>`).join('')}</div>
-      <div class="build-tip">${b.tip}</div>
-    </div>`).join('');
+  drMount('builds',drHead({kicker:'Kampf',title:'Builds',glyph:'⊞',scene:['char-kliff'],
+    sub:'Empfohlene Loadouts für verschiedene Spielstile. Alle Builds basieren auf Items, die nach dem angegebenen Kapitel verfügbar sind.',
+    stats:[[BUILDS.length,'Build-Vorschläge'],[Object.keys(BUILD_RECIPES).length,'Rezepte'],[BUILD_STYLES.length,'Spielstile'],[BUILD_PHASES.length,'Spielphasen']],
+    links:[['skills','Fähigkeiten'],['weapons','Waffen'],['armor','Rüstungen'],['cores','Abyss-Ausrüstung']]}));
+  document.getElementById('builds-list').innerHTML='<div class="drb1-cards">'+BUILDS.map(_drB1Card).join('')+'</div>';
   renderBuildSim();
+  if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(document.getElementById('sec-builds'));
 }
 
 // ===== MOUNT IN-GAME PREVIEW =====
