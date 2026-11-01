@@ -7297,7 +7297,9 @@ select.dr-sel-hidden{display:none!important}
 .drb4-tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:2px}
 .drb4-tool{padding:14px 16px}
 .drb4-tool-t{margin:0 0 10px;font-family:var(--f-display);font-size:15px;font-weight:700;line-height:1.3;color:var(--ink-hi)}
-.drb4-tool .cd-facts{font-size:12.5px}
+.drb4-tool .cd-facts{font-size:12.5px;gap:0;border:0;border-radius:0;background:none;overflow:visible}
+.drb4-tool .cd-facts>div{padding:8px 0;border-top:1px solid var(--line-soft);background:none}
+.drb4-tool .cd-facts>div:first-child{border-top:0;padding-top:0}
 .drb4-tool .cd-facts code{color:var(--gold);font-family:var(--f-mono);font-size:12px}
 /* Tracker (Schlüssel cd_fr_tracker/cd_cr_tracker unverändert): große Kennzahl, Balken, Regionskacheln */
 #sec-secrets .tracker-summary{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 28px;align-items:center;margin:0 0 14px;padding:20px 24px 20px 28px}
@@ -7352,6 +7354,7 @@ select.dr-sel-hidden{display:none!important}
   #sec-secrets .tracker-summary{grid-template-columns:minmax(0,1fr);padding:16px 16px 18px 20px}
   #sec-secrets .tracker-big{font-size:30px}
   #sec-secrets .easter-grid,.drb4-tools{grid-template-columns:minmax(0,1fr)}
+  .drb4-tool .cd-facts>div{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;align-items:baseline}
   #sec-secrets .region-tracker{grid-template-columns:minmax(0,1fr)}
   #sec-secrets .lt-wrap::before{left:15px}
   #sec-secrets .lt-dot{width:32px;height:32px;font-size:11px}
@@ -10570,6 +10573,8 @@ function _renderTrackerGeneric(kind,el,regions,totalCap,hero){
   const total=regions.reduce((sum,r)=>sum+(Math.min(d[r.key]||0,r.cap)),0);
   const pct=Math.round(total/totalCap*100);
   const k=escJsStr(kind);
+  /* Tastaturfokus überlebt das Neuzeichnen (Klick auf −/+ ersetzt sonst die Knöpfe): Position unter den Bedienelementen merken */
+  const _fa=document.activeElement,_fi=(_fa&&el.contains(_fa))?[...el.querySelectorAll('.rt-btn,.rt-input')].indexOf(_fa):-1;
   el.innerHTML=`
     <div class="tracker-summary cd-spot${total>=totalCap?' complete':''}">
       <div class="tracker-big">${total} / ${totalCap}<small>${hero.heroLbl}</small></div>
@@ -10602,6 +10607,7 @@ function _renderTrackerGeneric(kind,el,regions,totalCap,hero){
     </div>
     <button class="rt-tracker-reset" onclick="_trackerReset('${k}')">Tracker zurücksetzen</button>
   `;
+  if(_fi>=0){const _n=el.querySelectorAll('.rt-btn,.rt-input')[_fi];if(_n&&_n.type!=='number')_n.focus({preventScroll:true});}
   _drB4Tag(el);
   _drB4HeadStats();
   if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(el);
