@@ -4,6 +4,10 @@
 // Enthaelt: FEX_FB, CORE_IMGS, CORE_IMGS_CDN, CORE_VIDS, PET_CDN, PETS, MOUNT_IMGS, MOUNT_INGAME_IMGS, ARMOR_IMGS, GREYMANE_COMMISSIONS, SANCTUM_DATA, SANCTUM_IDS, BUILDS, LORE_TERMS, BOSS_COMBOS, BUILD_STYLES, BUILD_PHASES, BUILD_RECIPES, BOSS_LORE, SECRETS_EASTER_EGGS, SECRETS_LOCATIONS, SECRETS_MECHANICS, SECRETS_HIDDEN_WEAPONS, SECRETS_CRESSET_REGIONS, SECRETS_TOOLS, FRAGMENT_REGIONS, FRAGMENT_TOTAL, CRESSET_REGIONS, CRESSET_TOTAL, FAV_KINDS, REGION_ACCENT, REGION_COLORS, CH_REGION, REG_KEYS, ACHIEVEMENTS, TROPHY_NOTE, TROPHY_ROADMAP, TROPHIES, TROPHY_GRADES, SEC_RENDERERS, RESSORTS, SECTIONS, SECTION_BY_ID, SECTION_RESSORT, RESSORT_BY_ID, _AUTO_SEL, BOSS_PH_PALETTES, CORE_TIERS, SLOT_DE, SYNTH_CDN, SIGIL_AMULETS, CRAFT_CDN, CRAFT_TIER_RANK, CRAFT_TIER_PREFIX, CRAFT_HP_RE
 const FEX_FB={"Boar-mount-crimson-desert-wiki-guide":"0/0a","Greywolf-mount-crimson-desert-wiki-guide":"f/fb","Train-vehicle-mount-crimson-desert-wiki-guide":"5/5c","Wagon-horse-mount-crimson-desert-wiki-guide":"2/23"};
 const CORE_IMGS={
+  "Judicator of Ruin":"cd_assets/dlc/item-1006112.webp",
+  "Eclipsed Thorn":"cd_assets/dlc/item-1006108.webp",
+  "Breath of Life I":"cd_assets/ql/assets/_sprites/itemicon_abyssgear_socket_normal_015.webp",
+  "Rampaging Insight":"cd_assets/ql/assets/_sprites/itemicon_abyssgear_socket_normal_003.webp",
   "Crow's Pursuit":   "cd_assets/cores/crows-pursuit.webp",
   "Ator's Orb":       "cd_assets/cores/ators-orb.webp",
   "Groundsurge":      "cd_assets/cores/groundsurge.webp",

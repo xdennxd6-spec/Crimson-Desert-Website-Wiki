@@ -8158,7 +8158,6 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   <section class="sec" id="sec-weapons">
     <h2 class="sec-t"><span class="sec-sym">†</span> Waffen <span class="sec-t-en">Weapons</span></h2>
     <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Seite Färbemittel).</div>
-<div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Datenlage:</b> Crimson Desert veröffentlicht keine Waffen-Schadenswerte, deshalb gibt es hier bewusst <b>keine DPS- oder Vergleichsformel</b>. Wo ein Wert nicht belegbar war, steht „nicht erfasst“ statt einer geratenen 0 — aktuell bei <b><span id="wep-nocrit">–</span> von <span id="wep-total">–</span></b> Waffen der Krit-Wert (weitere <span id="wep-critnone">–</span> Waffen führen laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld, dort steht „kein Crit-Stat“), bei <span id="wep-noslots">–</span> die Slot-Zahl und bei <span id="wep-noatk">–</span> weder ATK- noch DEF-Wert (Schilde führen strukturell DEF statt ATK). In der Praxis zählen ohnehin Refine-Stufe, Abyss-Cores und Waffentyp mehr als die Grundzahl.<br><b>Was die ATK-Zahl hier bedeutet:</b> Sie ist die <b>Refinement-Endstufe +10</b>, also ausdrücklich <b>kein Fundzustands-Wert</b> — eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer, bei Zweihändern oft nur etwa ein Drittel. Ein Vollabgleich am <b>09.09.2026</b> gegen die questlog-Stufentabellen (alle 500 Einträge einzeln abgerufen) bestätigt das für <b>406 der 407</b> Waffen, deren ATK-Wert dort überhaupt geführt wird; 32 abweichende Werte wurden dabei korrigiert, weil sie eine Zwischenstufe oder den Fundzustand zeigten. Die 14 übrigen ATK-Werte hat questlog nicht im Bestand und sie bleiben unverändert. Der damals einzige offene Widerspruch, die <b>Rhinard Cannon</b> (questlog und Fextralife führen zwei verschiedene Stufenreihen), ist seit 03.10.2026 zugunsten der questlog-Spieldaten aufgelöst (Endstufe 31). Für <b>Banner Pikes</b> gilt die Regel nur formal: 53 von ihnen sind laut questlog gar nicht verfeinerbar, ihr Wert ist damit zugleich Fund- und Endwert. Schilde führen statt ATK einen <b>DEF-Wert</b>, ebenfalls in der Endstufe (62 von 62 gegen questlog bestätigt).</div>
     <div class="fbar">
       <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword (1H)">Sword (1H)</option><option value="Greatsword (2H)">Greatsword (2H)</option><option value="Halberd / Spear (2H)">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles / Gauntlets">Knuckles / Gauntlets</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow (Ranged)">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Hand Cannon">Hand Cannon</option><option value="Shield">Shield</option><option value="A.T.A.G. Weapon">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen vergleichen">⚔️ Vergleichen</button>
@@ -17326,7 +17325,7 @@ function _dlcA_accCard(a){
   const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
   const hid=[a.source,a.notes].filter(Boolean).join(' ');
   return _dlcA_card({id:a.name,s:[a.name,a.type,a.effect,a.source,a.notes,'dlc '+a.dlc].join(' '),vis:[a.name,a.type,a.effect].join(' '),hid:hid,
-    head:_dlcA_hd('',accTypeIcon(a.type),accTypeGrad(a.type)),name:cdEsc(a.name),
+    head:a.icon?_dlcA_img(SYNTH_CDN+a.icon,a.name):_dlcA_hd('',accTypeIcon(a.type),accTypeGrad(a.type)),name:cdEsc(a.name),
     tags:'<span class="tag '+badge+'">'+cdEsc(a.type)+'</span>'+_dlcTag(a),
     rows:_dlcA_row('Effekt',cdEsc(a.effect),'dlc-a-eff')+_dlcA_more('Quelle / Notiz',_dlcA_row('Quelle',cdEsc(a.source),'dlc-a-sm')+(a.notes?_dlcA_row('Notiz',cdEsc(a.notes),'dlc-a-sm dlc-a-dim'):'')),
     pin:a.source,pt:'Accessoire · '+a.type});
@@ -17335,7 +17334,7 @@ function _dlcA_coreCard(c){
   const m=(typeof R2B13_SLOT!=='undefined'&&R2B13_SLOT[c.slot])||{g:'⧫',t:c.slot||''};
   const hid=c.source||'';
   return _dlcA_card({id:c.name,s:[c.name,c.effect,c.source,c.slot,slotDe(c.slot),'dlc '+c.dlc].join(' '),vis:[c.name,c.effect,m.t].join(' '),hid:hid,
-    head:_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(m.t)+'</span>'+_dlcTag(c),
+    head:CORE_IMGS[c.name]?_dlcA_img(CORE_IMGS[c.name],c.name):_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(m.t)+'</span>'+_dlcTag(c),
     rows:_dlcA_row('Effekt',cdEsc(c.effect),'dlc-a-eff')+_dlcA_more('Quelle',_dlcA_row('Quelle',cdEsc(c.source),'dlc-a-sm')),
     pin:c.source,pt:'Abyss-Kern · '+(m.t||'')});
 }
