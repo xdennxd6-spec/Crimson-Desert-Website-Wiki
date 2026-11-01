@@ -7219,7 +7219,7 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dr-info-b p:last-child{margin-bottom:0}
 .dr-pillrow{display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 100%;margin:0 0 4px}
 .dr-pillrow .cd-pills{flex:1 1 auto;min-width:0}
-.dr-pl{flex:none;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.dr-pl{flex:none;font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
 select.dr-sel-hidden{display:none!important}
 @media (max-width:640px){
   .dr-pillrow{flex-wrap:wrap;gap:4px}
@@ -13659,7 +13659,7 @@ function drMount(sec,html){
 }
 function drInfo(o){
   o=o||{};
-  return '<div class="cd-folds dr-info-w">'+cdFold({title:o.title||'Gut zu wissen',lead:o.lead||'',icon:o.icon||'ⓘ',tone:o.tone||'gold',
+  return '<div class="cd-folds dr-info-w">'+cdFold({title:o.title||'Gut zu wissen',lead:o.lead||'',icon:o.icon||{h:cdIcon('info')},tone:o.tone||'gold',
     open:!!o.open,id:o.id,cls:'dr-info',body:'<div class="dr-info-b">'+(o.h||'')+'</div>'})+'</div>';
 }
 function _drSelItems(sel,o){
