@@ -7234,6 +7234,36 @@ select.dr-sel-hidden{display:none!important}
 /* DR-A2 Ende */
 /* ---- */
 /* DR-A3 Anfang (Waffen) */
+/* Hinweis und Info-Box (statisches Markup, die Zahlen wep-* füllt der Start-Code) */
+#sec-weapons>.cd-note{margin:0 0 12px}
+#sec-weapons>.dr-head+.cd-note{margin-top:2px}
+#sec-weapons .dr-info-b p{max-width:84ch}
+/* Filterzeile: Typ-Pillen, darunter Werkzeugknopf; Pager als Pillen */
+#sec-weapons .fbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 14px}
+#sec-weapons .fbar .dr-pillrow{margin:0 0 2px}
+#sec-weapons .fbar .cd-pills{margin:0}
+#sec-weapons .ic-trigger{--c:var(--gold);min-height:40px;padding:6px 15px;border:1px solid color-mix(in srgb,var(--c) 30%,transparent);border-radius:999px;background:color-mix(in srgb,var(--c) 8%,transparent);color:var(--c);font:600 12.5px/1.2 var(--f-body);text-transform:none;letter-spacing:0;gap:7px}
+#sec-weapons .ic-trigger:hover{background:color-mix(in srgb,var(--c) 18%,transparent);border-color:color-mix(in srgb,var(--c) 55%,transparent);color:var(--c)}
+#sec-weapons .ic-trigger:focus-visible,#sec-weapons .wpg-btn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#sec-weapons .wpg{gap:10px 14px;margin-top:18px}
+#sec-weapons .wpg-btn{min-height:40px;padding:6px 18px;border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);border-radius:999px;background:color-mix(in srgb,var(--gold) 8%,transparent);color:var(--gold);font:600 12.5px/1.2 var(--f-body);text-transform:none;letter-spacing:0}
+#sec-weapons .wpg-btn:hover:not(:disabled){background:color-mix(in srgb,var(--gold) 18%,transparent);border-color:color-mix(in srgb,var(--gold) 55%,transparent);color:var(--gold)}
+#sec-weapons .wpg-btn:disabled{opacity:.35}
+#sec-weapons .wpg-info{font-family:var(--f-mono);font-size:var(--fs-11-5);color:var(--dim);white-space:nowrap}
+/* Karten: ATK, Crit und Slots als eine Wertezeile; ohne Wirkung auf die DLC-Ausrüstung (dort Spalte wie zuvor) */
+.dra3-vals{display:flex;flex-direction:column;gap:5px}
+#weapon-tb .dra3-vals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:8px 0 9px;margin-bottom:2px;border-bottom:1px solid var(--line-soft,var(--bdr))}
+#weapon-tb .dra3-vals .crow{flex-direction:column;gap:2px;min-width:0}
+#weapon-tb .dra3-vals .cl{min-width:0}
+#weapon-tb .dra3-vals .cv{overflow-wrap:anywhere}
+/* Mini-Schrift auf 11 px (nur Waffenseite) */
+#sec-weapons .cl,#sec-weapons .tag,#sec-weapons .map-pin-btn{font-size:max(11px,var(--fs-10))}
+#sec-weapons .item-more > summary{min-height:40px}
+@media (max-width:600px){
+  #sec-weapons .wpg{gap:8px}
+  #sec-weapons .wpg-info{order:-1;flex-basis:100%;text-align:center;white-space:normal}
+  #sec-weapons .wpg-btn{flex:1 1 0}
+}
 /* DR-A3 Ende */
 /* ---- */
 /* DR-A4 Anfang (Rüstungen + Rüstungssets) */
@@ -7966,11 +7996,11 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 
   <section class="sec" id="sec-weapons">
     <h2 class="sec-t"><span class="sec-sym">†</span> Waffen <span class="sec-t-en">Weapons</span></h2>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.6">Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Seite Färbemittel).</div>
-<div style="font-size:var(--fs-11-5);color:var(--gdim);margin-bottom:12px;padding:9px 12px;background:rgba(224,163,90,.06);border:1px solid var(--bdr);border-radius:8px;line-height:1.65"><b>Zur Datenlage:</b> Crimson Desert veröffentlicht keine Waffen-Schadenswerte, deshalb gibt es hier bewusst <b>keine DPS- oder Vergleichsformel</b>. Wo ein Wert nicht belegbar war, steht „nicht erfasst“ statt einer geratenen 0 — aktuell bei <b><span id="wep-nocrit">–</span> von <span id="wep-total">–</span></b> Waffen der Krit-Wert (weitere <span id="wep-critnone">–</span> Waffen führen laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld, dort steht „kein Crit-Stat“), bei <span id="wep-noslots">–</span> die Slot-Zahl und bei <span id="wep-noatk">–</span> weder ATK- noch DEF-Wert (Schilde führen strukturell DEF statt ATK). In der Praxis zählen ohnehin Refine-Stufe, Abyss-Cores und Waffentyp mehr als die Grundzahl.<br><b>Was die ATK-Zahl hier bedeutet:</b> Sie ist die <b>Refinement-Endstufe +10</b>, also ausdrücklich <b>kein Fundzustands-Wert</b> — eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer, bei Zweihändern oft nur etwa ein Drittel. Ein Vollabgleich am <b>09.09.2026</b> gegen die questlog-Stufentabellen (alle 500 Einträge einzeln abgerufen) bestätigt das für <b>406 der 407</b> Waffen, deren ATK-Wert dort überhaupt geführt wird; 32 abweichende Werte wurden dabei korrigiert, weil sie eine Zwischenstufe oder den Fundzustand zeigten. Die 14 übrigen ATK-Werte hat questlog nicht im Bestand und sie bleiben unverändert. Der damals einzige offene Widerspruch, die <b>Rhinard Cannon</b> (questlog und Fextralife führen zwei verschiedene Stufenreihen), ist seit 03.10.2026 zugunsten der questlog-Spieldaten aufgelöst (Endstufe 31). Für <b>Banner Pikes</b> gilt die Regel nur formal: 53 von ihnen sind laut questlog gar nicht verfeinerbar, ihr Wert ist damit zugleich Fund- und Endwert. Schilde führen statt ATK einen <b>DEF-Wert</b>, ebenfalls in der Endstufe (62 von 62 gegen questlog bestätigt).</div>
-    <div class="fbar">
+    <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div>Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Seite Färbemittel).</div></div>
+    <div class="cd-folds dr-info-w"><details class="cd-fold cd-spot dr-info" id="wep-datenlage" style="--cd-acc:var(--gold)"><summary><span class="cd-fold-ico" aria-hidden="true"><i class="cd-g">ⓘ</i></span><span class="cd-fold-main"><h3 class="cd-fold-t">Zur Datenlage</h3><span class="cd-fold-lead">Crimson Desert veröffentlicht keine Waffen-Schadenswerte, deshalb gibt es hier bewusst keine DPS- oder Vergleichsformel.</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><div class="dr-info-b"><p>Crimson Desert veröffentlicht keine Waffen-Schadenswerte, deshalb gibt es hier bewusst <b>keine DPS- oder Vergleichsformel</b>. Wo ein Wert nicht belegbar war, steht „nicht erfasst“ statt einer geratenen 0 — aktuell bei <b><span id="wep-nocrit">–</span> von <span id="wep-total">–</span></b> Waffen der Krit-Wert (weitere <span id="wep-critnone">–</span> Waffen führen laut questlog.gg und gaming.tools gar kein Critical-Rate-Feld, dort steht „kein Crit-Stat“), bei <span id="wep-noslots">–</span> die Slot-Zahl und bei <span id="wep-noatk">–</span> weder ATK- noch DEF-Wert (Schilde führen strukturell DEF statt ATK). In der Praxis zählen ohnehin Refine-Stufe, Abyss-Cores und Waffentyp mehr als die Grundzahl.</p><p><b>Was die ATK-Zahl hier bedeutet:</b> Sie ist die <b>Refinement-Endstufe +10</b>, also ausdrücklich <b>kein Fundzustands-Wert</b> — eine frisch gefundene, ungeschliffene Waffe ist deutlich schwächer, bei Zweihändern oft nur etwa ein Drittel. Ein Vollabgleich am <b>09.09.2026</b> gegen die questlog-Stufentabellen (alle 500 Einträge einzeln abgerufen) bestätigt das für <b>406 der 407</b> Waffen, deren ATK-Wert dort überhaupt geführt wird; 32 abweichende Werte wurden dabei korrigiert, weil sie eine Zwischenstufe oder den Fundzustand zeigten. Die 14 übrigen ATK-Werte hat questlog nicht im Bestand und sie bleiben unverändert. Der damals einzige offene Widerspruch, die <b>Rhinard Cannon</b> (questlog und Fextralife führen zwei verschiedene Stufenreihen), ist seit 03.10.2026 zugunsten der questlog-Spieldaten aufgelöst (Endstufe 31). Für <b>Banner Pikes</b> gilt die Regel nur formal: 53 von ihnen sind laut questlog gar nicht verfeinerbar, ihr Wert ist damit zugleich Fund- und Endwert. Schilde führen statt ATK einen <b>DEF-Wert</b>, ebenfalls in der Endstufe (62 von 62 gegen questlog bestätigt).</p></div></div></details></div>
+    <div class="fbar dra3-bar">
       <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword (1H)">Sword (1H)</option><option value="Greatsword (2H)">Greatsword (2H)</option><option value="Halberd / Spear (2H)">Halberd / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dagger</option><option value="Knuckles / Gauntlets">Knuckles / Gauntlets</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow (Ranged)">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Hand Cannon">Hand Cannon</option><option value="Shield">Shield</option><option value="A.T.A.G. Weapon">A.T.A.G. Weapon</option></select>
-      <button class="ic-trigger" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen vergleichen">⚔️ Vergleichen</button>
+      <button class="ic-trigger dra3-cmp" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen vergleichen">⚔️ Vergleichen</button>
     </div>
     <div class="grid" id="weapon-tb"></div>
     <div id="weapon-pager" class="wpg"></div>
@@ -14030,6 +14060,23 @@ document.addEventListener('cd-check',e=>{if(e.detail&&e.detail.key===DLC_KEY_ISL
 
 // ===== WEAPONS =====
 let _wepPage=0; const WEP_PER=40;
+/* DR-A3: Kopf (Szene, Kacheln, Wegweiser) und Typ-Pillen mit Anzahl, je einmal; Zahlen aus WEAPONS gerechnet */
+let _drA3Cnt=null;
+function _drA3Init(){
+  if(!_drA3Cnt){
+    _drA3Cnt={};
+    WEAPONS.forEach(w=>{_drA3Cnt[w.type]=(_drA3Cnt[w.type]||0)+1;});
+  }
+  if(!document.getElementById('dr-head-weapons')){
+    drMount('weapons',drHead({kicker:'Ausrüstung',title:'Waffen',glyph:'†',tone:'gold',scene:['cl-weapons'],
+      sub:'Alle Waffen mit Werten, Fundort und Verfeinerung.',
+      stats:[[WEAPONS.length,'Waffen'],[Object.keys(_drA3Cnt).length,'Typen'],[WEAPONS.filter(w=>w.source&&w.source.trim()).length,'mit Quelle']],
+      links:[['armor','Rüstungen'],['items','Waffen-Upgrade & Refinement','wt-upgrade'],['dyes','Färbemittel'],['dlc-ausruestung','DLC · Ausrüstung']]}));
+  }
+  if(!document.querySelector('.dr-pillrow[data-dr-for="wf-type"]')){
+    drSelPillsMount('wf-type',{title:'Typ',label:'Waffen nach Typ filtern',count:v=>v===''?WEAPONS.length:(_drA3Cnt[v]||0)});
+  }
+}
 function changeWepPage(d){
   _wepPage=Math.max(0,_wepPage+d);
   renderWeapons();
@@ -14045,13 +14092,14 @@ function _wepCardHtml(w,wasOpen,o){
     const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
     return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
-      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
+      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async" width="78" height="78" alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
       <div class="ct">${w.name}</div>
       <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
-      <div class="crows">
+      <div class="crows"><div class="dra3-vals">
         <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${o&&o.dlc&&w.val_q&&(w.atk!=null||w.def!=null)?(w.val_part?'<span class="atk">'+(w.def!=null?w.def:w.atk)+'</span> '+_dlcFlag('unb',w.val_q):'<span class="dlc-unb">'+(w.def!=null?w.def:w.atk)+' '+_dlcFlag('unb',w.val_q)+'</span>'):(w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>'))+(w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':'')}</span></div>
         <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
         <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>
+        </div>
         ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
         <details class="item-more"${wasOpen?' open':''}>
           <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
@@ -14065,6 +14113,7 @@ function _wepCardHtml(w,wasOpen,o){
     </div>`;
 }
 function renderWeapons(){
+  _drA3Init();
   const f=document.getElementById('wf-type').value;
   const si=document.getElementById('si');
   const savedOpenState=_snapshotOpenItemDetails(document.getElementById('weapon-tb'));
@@ -14101,6 +14150,7 @@ function renderWeapons(){
       pg.innerHTML=`<button class="wpg-btn"${_wepPage<=0?' disabled':''} onclick="changeWepPage(-1)">‹ Zurück</button><span class="wpg-info">${start+1}–${shownEnd} von ${total} Waffen · Seite ${_wepPage+1}/${pages}</span><button class="wpg-btn"${_wepPage>=pages-1?' disabled':''} onclick="changeWepPage(1)">Weiter ›</button>`;
     }
   }
+  drSelSync('wf-type');
 }
 
 // Slot-Typ deutsch anzeigen. Der Datenwert bleibt englisch: Filter-value,
