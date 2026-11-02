@@ -332,9 +332,9 @@ ${quellen}`;
   return {
     slugName: SLUG,
     title: "Charting the Unknown DLC: Schiffe, Inseln & Guide",
-    desc: `Crimson Desert DLC Charting the Unknown: ${z.schiffe} Schiffe mit Preis, ${z.schiffsteile} Schiffsteile, Inseln, Tauchen, Haie, Quests, Garten der Prüfungen und neue Ausrüstung.`,
+    desc: `Crimson Desert DLC Charting the Unknown: ${z.schiffe} Schiffe, ${z.schiffsteile} Schiffsteile, Inseln, Tauchen, Haie, Quests, Garten der Prüfungen und neue Ausrüstung.`,
     h1: "Charting the Unknown: alle DLC-Inhalte",
-    lead: `Alles Neue aus dem ersten DLC von Crimson Desert: <strong>${z.schiffe} Schiffe</strong> mit Preis, ${z.schiffsteile} Schiffsteile, ${z.inseln} benannte Inseln, Tauchen, ${z.reittiere} Unterwasser-Reittiere, ${z.questreihen} Questreihen, ${z.bosse} Bosse und Gegner aus dem DLC (teils bekannte Namen aus dem Hauptspiel) und die ${z.gruppen} Gruppen im Garten der Prüfungen.`,
+    lead: `Alles Neue aus dem ersten DLC von Crimson Desert: <strong>${z.schiffe} Schiffe</strong> mit Preis und Erhalt, soweit belegt, ${z.schiffsteile} Schiffsteile, ${z.inseln} benannte Inseln, Tauchen, ${z.reittiere} Unterwasser-Reittiere, ${z.questreihen} Questreihen, ${z.bosse} Bosse und Gegner aus dem DLC (teils bekannte Namen aus dem Hauptspiel) und die ${z.gruppen} Gruppen im Garten der Prüfungen.`,
     ogImage: null,
     crumb: "Charting the Unknown",
     bodyHtml: body,

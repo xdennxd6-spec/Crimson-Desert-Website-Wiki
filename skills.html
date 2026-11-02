@@ -7093,6 +7093,12 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 /* Kopf der „Weitere“-Karten: gleiche Maße wie der Bildkopf (90 px) bzw. die bildlose Waffenkarte */
 .dlc-a-img{display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)}
 .dlc-a-img img{height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))}
+/* Sammeleintrag: Reihe aus bis zu 5 Icons (44 px, schrumpfen bei schmalen Karten) und „+N“ */
+.dlc-a-set{gap:4px;padding:0 8px;flex-wrap:nowrap}
+.dlc-a-set img{flex:0 1 44px;min-width:28px;width:44px;height:44px}
+.dlc-a-more{flex:none;padding:3px 7px;border:1px solid var(--line);border-radius:999px;font:600 12px/1 var(--f-mono);color:var(--ink);opacity:.8;cursor:help}
+/* Video-Knopf der DLC-Kernkarten rechts in der Etikettenzeile */
+.dlc-a-card .cm>.dlc-a-vid{margin-left:auto;align-self:center}
 .dlc-a-hd2{display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;min-height:46px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)}
 .dlc-a-hd2>.cd-g{font-size:20px;line-height:1;color:var(--cd-fx-ice)}
 .dlc-a-eff{color:var(--gold)}
@@ -7135,6 +7141,12 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .dlcq-pt{display:block;margin-top:2px}
 .dlcq-nb{margin:0;font-size:13px}
 .dlcq-subs .cd-stepper{margin:0}
+/* Vorschaubild am Schritt (Steckbriefe der Piratenschiffe), gleiche Kante wie .cd-check-go */
+.dlcq-thumb{flex:none;display:grid;place-items:center;width:68px;padding:6px;border:0;border-left:1px solid var(--line-soft);border-radius:0 12px 12px 0;background:linear-gradient(135deg,#131313,#0e0e0e);cursor:zoom-in}
+.dlcq-thumb img{width:52px;height:52px;object-fit:cover;border-radius:6px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.dlcq-thumb:hover{background:color-mix(in srgb,var(--cd-fx-ice) 10%,#111)}
+.dlcq-thumb:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+.cd-checks>.cd-check.dlcq-st--img{contain-intrinsic-size:auto 66px}
 @media (max-width:640px){
   .dlcq-stat-t{flex-basis:100%}
 }
@@ -16224,7 +16236,12 @@ function renderDlcQuests(){renderDlc('quests');}
 function renderDlcSammeln(){renderDlc('sammeln');}
 /* Icon vor dem Namen in DLC-Tabellen (Bilder aus den Spieldateien: WEAPON_IMGS, ARMOR_IMGS, DLC_IMGS) */
 function _dlcIco(src){return src?'<img class="dlc-ico" src="'+cdEsc(src)+'" width="40" height="40" alt="" loading="lazy" decoding="async" onerror="this.remove()">':'';}
-function _dlcImg(n){return typeof DLC_IMGS!=='undefined'?DLC_IMGS[n]:'';}
+function _dlcImg(n){
+  const set=_dlcSetImgs(n);if(set.length)return set[0][1]; /* Sammeleintrag: erstes Bild, damit die Gruppenregel _dlcAllImg greift */
+  return typeof DLC_IMGS!=='undefined'?DLC_IMGS[n]:'';
+}
+/* Sammeleinträge (DLC_SET_IMGS): Liste [Itemname, Bild] oder leer */
+function _dlcSetImgs(n){return typeof DLC_SET_IMGS!=='undefined'&&Array.isArray(DLC_SET_IMGS[n])?DLC_SET_IMGS[n].filter(x=>Array.isArray(x)&&x[1]):[];}
 /* Gemeinsame Helfer (Fundament dlc-design). Wert-Chip: x = Text | {v,c,q} | Liste (eine Chip je Wert).
    o.l = kleine Beschriftung vorn, o.g Glyphe oder o.i Icon (cdIcon), o.c Ton (gold|red|violet|ok|warn|ice, nur bei belegten Werten).
    Unbestätigt/nicht belegt: Chip grau gestrichelt (dlc-chip--unb/--nb), Vermerk sichtbar wie _dlcFlag, Quelle im title. */
@@ -16298,7 +16315,7 @@ function _dlcSecSchiffe(){
   }
   b+=_dlcH('Schiffsbau per Entsendung')+_dlcFacts(DLC_SHIPBUILD);
   b+=_dlcH('Besatzung: '+DLC_CREW.length+' Rollen')+'<ul class="dlc-crew dlcs-crew">'+DLC_CREW.map(r=>'<li class="cd-spot"><b>'+cdEsc(r.role)+'</b><span>'+cdEsc(r.d)+'</span></li>').join('')+'</ul>'+_dlcList(DLC_CREW_NOTES,'dlc-list--note');
-  return {title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe mit Preis in Camp Funds, Händler, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
+  return {title:'Schiffe und Schiffsbau',lead:DLC_SHIPS.length+' benannte Schiffe, Preise in Camp Funds und Händler, soweit belegt, Schiffsbau-Entsendung und die '+DLC_CREW.length+' Besatzungsrollen.',icon:'⚓',
     chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b};
 }
 /* 3 Schiffsteile (Abschnitt dlc-b-teile, Besitz: sammeln). Karten wie Kochen & Elixiere, je Typ ein Regal mit Anzahl.
@@ -16414,8 +16431,20 @@ function _dlcQ_step(q,st,i){
   const o=typeof st==='string'?{name:st}:st,bad=!!(o.c&&o.c!=='ok'),d=_dlcV(o.d),rw=_dlcV(o.reward);
   const sub=(d?'<span class="dlcq-pt">'+d+'</span>':'')+(rw?'<span class="dlcq-pt"><b class="ctu-pk">Belohnung:</b> '+rw+'</span>':'')
     +(bad?'<span class="dlcq-pt dlcq-fl">'+_dlcFlag(o.c,o.q)+'</span>':'');
-  return cdCheck({key:_dlcQ_KEY,id:cdSlug(q.name)+'-'+i,title:{h:'<span class="dlcq-n" aria-hidden="true">'+(i+1)+'.</span> '+cdEsc(o.name||'Schritt')},sub:sub?{h:sub}:null,
-    cls:'dlc-ck dlcq-st'+(bad?' dlc-row-'+o.c:'')});
+  const img=_dlcQ_img(o.name);
+  const h=cdCheck({key:_dlcQ_KEY,id:cdSlug(q.name)+'-'+i,title:{h:'<span class="dlcq-n" aria-hidden="true">'+(i+1)+'.</span> '+cdEsc(o.name||'Schritt')},sub:sub?{h:sub}:null,
+    cls:'dlc-ck dlcq-st'+(bad?' dlc-row-'+o.c:'')+(img?' dlcq-st--img':'')});
+  /* Vorschaubild (DLC_QUEST_IMGS) rechts neben der Abhak-Zeile, außerhalb des Labels (Klick vergrößert, hakt nicht ab); kaputtes Bild entfernt den Knopf */
+  return img?h.replace(/<\/div>$/,'<button type="button" class="dlcq-thumb" aria-label="Steckbrief vergrößern: '+cdEsc(o.name)+'" title="Steckbrief vergrößern" onclick="_dlcQ_zoom(\''+escJsStr(img)+'\',\''+escJsStr(o.name)+'\')">'
+    +'<img src="'+cdEsc(img)+'" width="52" height="52" alt="Steckbrief '+cdEsc(o.name)+'" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></button></div>'):h;
+}
+function _dlcQ_img(n){return n&&typeof DLC_QUEST_IMGS!=='undefined'?DLC_QUEST_IMGS[n]||'':'';}
+/* Großansicht im gemeinsamen Bildfenster (wie openRuinImg) */
+function _dlcQ_zoom(url,cap){
+  const im=document.getElementById('mim-img');if(im){im.src=url;im.alt=cap||'';}
+  const n=document.getElementById('mim-name');if(n)n.textContent=cap||'';
+  if(typeof _mimSrcLbl==='function')_mimSrcLbl('Steckbrief aus den Spieldaten');
+  const m=document.getElementById('mount-ingame-modal');if(m)m.classList.add('show');
 }
 function _dlcQ_fold(q,i,useScene){
   const G=_dlcQ_grp(q),steps=_dlcQ_steps(q),ids=_dlcQ_ids(q),done=cdCheckGet(_dlcQ_KEY),dc=ids.filter(x=>done.has(x)).length;
@@ -16652,6 +16681,19 @@ function _dlcA_hd(glyph,svg,grad){
 function _dlcA_img(src,alt){
   return '<div class="dlc-a-img"><img src="'+cdEsc(src)+'" width="78" height="78" loading="lazy" decoding="async" alt="'+cdEsc(alt||'')+'" onerror="this.parentElement.style.display=\'none\'"></div>';
 }
+/* Mehrere Icons eines Sammeleintrags (DLC_SET_IMGS) im 90-px-Kopf: höchstens 5 Icons à 44 px, Rest als „+N“; Tooltip/alt = Itemname.
+   Kaputtes Icon wird entfernt; sind alle weg, blendet sich der Kopf aus. */
+function _dlcA_set(list){
+  const max=5,shown=list.slice(0,max),rest=list.length-shown.length;
+  return '<div class="dlc-a-img dlc-a-set">'+shown.map(x=>'<img src="'+cdEsc(x[1])+'" width="44" height="44" loading="lazy" decoding="async" alt="'+cdEsc(x[0])+'" title="'+cdEsc(x[0])+'"'
+      +' onerror="var p=this.parentElement;this.remove();if(p&&!p.querySelector(\'img\'))p.style.display=\'none\'">').join('')
+    +(rest>0?'<span class="dlc-a-more" title="'+cdEsc(list.slice(max).map(x=>x[0]).join(', '))+'">+'+rest+'</span>':'')+'</div>';
+}
+/* Video-Knopf wie auf der Seite Abyss-Kerne (_r2b13CoreCard), wenn CORE_VIDS[name] existiert */
+function _dlcA_vid(n){
+  if(typeof CORE_VIDS==='undefined'||!CORE_VIDS[n])return '';
+  return '<button type="button" class="r2b13-vid dlc-a-vid" aria-label="Video-Vorschau '+cdEsc(n)+'" title="Video-Vorschau" onmouseenter="showCoreVid(event,\''+escJsStr(n)+'\')" onmouseleave="hideCoreVid()" onclick="showCoreVid(event,\''+escJsStr(n)+'\')"><span aria-hidden="true">▶</span><span class="r2b13-vid-t">Vorschau</span></button>';
+}
 /* Gemeinsame Karte: o = {id,s,vis,hid,head,name,tags,rows,more,pin:{n,src,t},go} */
 function _dlcA_card(o){
   return '<div class="card cd-spot dlc-a-card" data-filtered="0" data-s="'+cdEsc(String(o.s).toLowerCase())+'" data-item-id="'+cdEsc(o.id)+'" data-item-hidden="'+cdEsc(o.hid||'')+'" data-item-visible="'+cdEsc(String(o.vis||'').toLowerCase())+'">'
@@ -16671,9 +16713,10 @@ function _dlcA_extraCard(g,img){
   const bad=_dlcA_bad(g.source)||_dlcA_bad(g.req);
   let rows=(slot?_dlcA_row('Slot',slot):'')+(chr?_dlcA_row('Charakter',chr):'')+_dlcA_row('Werte',st||'<span class="dlc-nb">nicht belegt</span>');
   const more=_dlcA_more(req?'Erhalt / Voraussetzung':'Erhalt',_dlcA_row('Erhalt',src||'<span class="dlc-nb">nicht belegt</span>','dlc-a-sm')+(req?_dlcA_row('Voraussetzung',req,'dlc-a-sm'):''),bad);
-  return _dlcA_card({id:g.name,s:[vis,hid,'dlc'].join(' '),vis:vis,hid:hid,
-    head:img?_dlcA_img(img,g.name):_dlcA_hd(DLC_A_GLYPH[base]),
-    name:_dlcName(g),tags:'<span class="tag tx">'+cdEsc(kind)+'</span>',rows:rows,more:more,pin:_dlcP(g.source),pt:'Ausrüstung · '+kind});
+  const set=img?_dlcSetImgs(g.name):[];
+  return _dlcA_card({id:g.name,s:[vis,hid,set.map(x=>x[0]).join(' '),'dlc'].join(' '),vis:vis,hid:hid,
+    head:set.length?_dlcA_set(set):img?_dlcA_img(img,g.name):_dlcA_hd(DLC_A_GLYPH[base]),
+    name:_dlcName(g),tags:'<span class="tag tx">'+cdEsc(kind)+'</span>'+_dlcA_vid(g.name),rows:rows,more:more,pin:_dlcP(g.source),pt:'Ausrüstung · '+kind});
 }
 function _dlcA_accCard(a){
   const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
@@ -16688,7 +16731,7 @@ function _dlcA_coreCard(c){
   const m=(typeof R2B13_SLOT!=='undefined'&&R2B13_SLOT[c.slot])||{g:'⧫',t:c.slot||''};
   const hid=c.source||'';
   return _dlcA_card({id:c.name,s:[c.name,c.effect,c.source,c.slot,slotDe(c.slot),'dlc '+c.dlc].join(' '),vis:[c.name,c.effect,m.t].join(' '),hid:hid,
-    head:CORE_IMGS[c.name]?_dlcA_img(CORE_IMGS[c.name],c.name):_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(m.t)+'</span>'+_dlcTag(c),
+    head:CORE_IMGS[c.name]?_dlcA_img(CORE_IMGS[c.name],c.name):_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(m.t)+'</span>'+_dlcTag(c)+_dlcA_vid(c.name),
     rows:_dlcA_row('Effekt',cdEsc(c.effect),'dlc-a-eff')+_dlcA_more('Quelle',_dlcA_row('Quelle',cdEsc(c.source),'dlc-a-sm')),
     pin:c.source,pt:'Abyss-Kern · '+(m.t||'')});
 }

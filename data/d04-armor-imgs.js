@@ -122,7 +122,25 @@ const CORE_VIDS={
   "Howling of Chaos":"cd_assets/ql/assets/ui/media/advice_item_skill_abyssgear_impboss.mp4",
   "Rising Torrent":"cd_assets/ql/assets/ui/media/advice_item_skill_abyssgear_catfish_bodyslam_lv1.mp4",
   "Piercing Bloom":"cd_assets/ql/assets/ui/media/advice_item_skill_abyssgear_absolutedefense_lv1.mp4",
-  "Karmic Pulse":"cd_assets/ql/assets/ui/media/advice_item_skill_abyssgear_enlightenmentwave_lv1.mp4"
+  "Karmic Pulse":"cd_assets/ql/assets/ui/media/advice_item_skill_abyssgear_enlightenmentwave_lv1.mp4",
+  // 02.11.2026: Kette iteminfo -> gameadviceinfo (Advice_Control_AbyssGear_*) -> stringinfo-Hash -> ui/media/*.mp4, umkodiert auf 600x338.
+  // Judgment of the Soul: das Spiel verweist auf die Datei mit Tippfehler „forhotten“. Die übrigen 15 sind DLC-Kerne.
+  "Judgment of the Soul":"cd_assets/ql/assets/ui/media/advice_item_skill_abyssgear_forhotten_general.mp4",
+  "Judicator of Ruin":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_awakencaliburn.mp4",
+  "Eclipsed Thorn":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_satyros.mp4",
+  "Ascended Incarnate":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_incarnation.mp4",
+  "Revelation's End":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_antumbraarchon.mp4",
+  "Ashen Blitz":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_armorgoblin.mp4",
+  "Storm's Echo":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_echostrom.mp4",
+  "Radiant Flash":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_merrick_defencecounter.mp4",
+  "Mirage Cascade":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_mirageflurry.mp4",
+  "Unfurled Feathers":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_karanda_feather.mp4",
+  "Guardian's Gaze":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_drylandsgolem.mp4",
+  "Trial by Fire":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_circusmachine.mp4",
+  "Writhebolt":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_ludvig_onearmed.mp4",
+  "Power Overload":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_marniknight_spear.mp4",
+  "Venomous Fangs":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_rednightmare.mp4",
+  "Rushing Wind":"cd_assets/ql/assets/ui/media/item_skill_abyssgear_ancientpeople_chargeshot.mp4"
 };
 const PET_CDN="cd_assets/ql/assets/_sprites/";
 const PETS=[

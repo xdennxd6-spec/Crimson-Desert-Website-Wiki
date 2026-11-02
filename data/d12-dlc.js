@@ -65,11 +65,19 @@ const DLC_SHIPS = [
   {name: "Large Demenissian Ship", c: "unb", q: "th.gl", price: "6.000.000 Camp Funds", vendor: "Schiffsverwalter im Demeniss Port", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
   {name: "Small Delesyian Ship", price: {v: "40.000 Camp Funds", c: "unb", q: "th.gl"}, vendor: "Schiffsverwalter in Stoneward Harbor (südlich von Dewhaven)", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}, c: "unb", q: "nur laut th.gl"},
   {name: "Medium Delesyian Ship", c: "unb", q: "th.gl", price: "1.200.000 Camp Funds", vendor: "Schiffsverwalter in Delesyia", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Large Delesyian Ship", c: "unb", q: "th.gl", price: "6.000.000 Camp Funds", vendor: "Schiffsverwalter in Delesyia", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}}
+  {name: "Large Delesyian Ship", c: "unb", q: "th.gl", price: "6.000.000 Camp Funds", vendor: "Schiffsverwalter in Delesyia", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
+  // 02.11.2026: sieben Schiffe nur aus den Spieldaten (Riding_*-Datensätze in characterinfo.dlc_01), ohne Händler; Erwerb nicht belegt.
+  {name: "Medium Greymane Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Large Greymane Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Phantom Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Assault Ship of the East", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Flagship of the East", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
+  {name: "The Drunken Catfish", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Large Delesyian Naval Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}}
 ];
 const DLC_SHIP_NOTES = [
   "Kaufen lassen sich Schiffe erst nach dem eigenen Small Greymane Ship. Jeder Hafen verkauft die Schiffe seiner Region: Hernandian ships in Vellua, Demenissian ships im Demeniss Port, Delesyian ships in Delesyia und das kleine in Stoneward Harbor.",
-  {v: "In den Spieldaten stehen weitere Schiffe ohne Händler: Medium und Large Greymane Ship, Phantom Ship, Assault Ship of the East, Flagship of the East und The Drunken Catfish, dazu das Large Delesyian Naval Ship der Marine. Wie man sie bekommt, ist nicht belegt.", c: "unb", q: "th.gl"},
+  {v: "Die letzten sieben Schiffskarten (Medium und Large Greymane Ship, Phantom Ship, Assault Ship of the East, Flagship of the East, The Drunken Catfish und das Large Delesyian Naval Ship der Marine) stehen nur in den Spieldaten, ohne Händler. Wie man sie bekommt, ist nicht belegt.", c: "unb", q: "th.gl, Spieldaten"},
   {v: "Werte der Demenissian und Delesyian ships und Besatzungsplätze je Schiff", c: "nb"}
 ];
 // C2 Haendler, Waehrung, Folgequest
@@ -574,7 +582,7 @@ const DLC_IMGS={
   "Venomous Fangs":"cd_assets/dlc/item-1006116.webp",
   "Rushing Wind":"cd_assets/dlc/item-1006119.webp",
   // 02.11.2026: Pirate Lantern (Icon aus dem Itemdatensatz), drei Schiffsteile (Medium-Variante, passend zu den Blaupausen),
-  // alle 11 Schiffe (Riding_*-Datensätze in characterinfo.dlc_01) und 5 Unterwasser-Reittiere (Porträts der Charakterdatensätze).
+  // die ersten 11 Schiffe (Riding_*-Datensätze in characterinfo.dlc_01) und 5 Unterwasser-Reittiere (Porträts der Charakterdatensätze).
   // Sea Turtle: Die Spieldaten führen das Reittier nur allgemein (Actor_Vehicle_Turtle_Hired, Skill_OceanTurtle_Shield), ohne Art.
   // Bild = Porträt der Unechten Karettschildkröte (Animal_Caretta_Wild_32300), optisch abgeglichen mit dem Trailerbild bei game8 (rötliche Flossen).
   "Pirate Lantern":"cd_assets/dlc/item-1005306.webp",
@@ -592,12 +600,50 @@ const DLC_IMGS={
   "Small Delesyian Ship":"cd_assets/dlc/ship-small-delesyian.webp",
   "Medium Delesyian Ship":"cd_assets/dlc/ship-medium-delesyian.webp",
   "Large Delesyian Ship":"cd_assets/dlc/ship-large-delesyian.webp",
+  // 02.11.2026 b: die sieben Schiffe ohne Händler (Fahrzeug-Icons aus characterinfo.dlc_01). Large Delesyian Naval Ship: Wissensbild
+  // (Knowledge_Riding_Ship_Navy), weil der Datensatz nur auf das generische Icon Big_Ship_01 mit weißen Segeln verweist.
+  "Medium Greymane Ship":"cd_assets/dlc/ship-medium-greymane.webp",
+  "Large Greymane Ship":"cd_assets/dlc/ship-large-greymane.webp",
+  "Phantom Ship":"cd_assets/dlc/ship-phantom.webp",
+  "Assault Ship of the East":"cd_assets/dlc/ship-assault-east.webp",
+  "Flagship of the East":"cd_assets/dlc/ship-flagship-east.webp",
+  "The Drunken Catfish":"cd_assets/dlc/ship-drunken-catfish.webp",
+  "Large Delesyian Naval Ship":"cd_assets/dlc/ship-large-delesyian-naval-wissen.webp",
   "Shark":"cd_assets/dlc/mount-shark.webp",
   "Orca":"cd_assets/dlc/mount-orca.webp",
   "Sun Fish":"cd_assets/dlc/mount-sunfish.webp",
   "Electric Ray":"cd_assets/dlc/mount-electric-ray.webp",
   "Golden Shark":"cd_assets/dlc/mount-golden-shark.webp",
   "Sea Turtle":"cd_assets/dlc/mount-sea-turtle.webp"
+};
+// 02.11.2026 b: Icons der Sammeleinträge in DLC_GEAR_EXTRA, je Eintrag [Itemname, Bild]. Weg: Item-Datensatz (iteminfo) -> Icon-Slot-Hash
+// -> PNG, Namen gegen item*.paloc geprüft. Gleiche Bilddatei nur einmal: Das Spiel gibt Feline und Canine bei Cook's, Worker's, Fishing,
+// Scholastone und Ludeon dieselbe Icon-Datei. Charter Assistant's: die beiden Produkt-Icons (PetArmor_Diving_Helm/_Armor_Cat), nicht das
+// allgemeine Blaupausen-Papier. _dlcImg liefert für diese Namen das erste Bild (Gruppenregel _dlcAllImg).
+const DLC_SET_IMGS={
+  "Charter Assistant's Diving Helm und Diving Suit (Blaupausen)":[["Charter Assistant's Diving Helm","cd_assets/dlc/item-1005359.webp"],["Charter Assistant's Diving Suit","cd_assets/dlc/item-1005360.webp"]],
+  "A.T.A.G. Marine Exploration Plating, Pack und Feet":[["A.T.A.G. Marine Exploration Plating","cd_assets/dlc/item-1005566.webp"],["A.T.A.G. Marine Exploration Pack","cd_assets/dlc/item-1005567.webp"],["A.T.A.G. Marine Exploration Feet","cd_assets/dlc/item-1005568.webp"]],
+  "Wagen-Laderäume (Cargo Hold)":[["Wandering Merchant's Cargo Hold","cd_assets/dlc/item-1005776.webp"],["Meticulous Carpenter's Cargo Hold","cd_assets/dlc/item-1005777.webp"],["Seasoned Comrade's Cargo Hold","cd_assets/dlc/item-1005778.webp"],["Rugged Traveler's Cargo Hold","cd_assets/dlc/item-1005779.webp"],["The Laughing Marionette's Cargo Hold","cd_assets/dlc/item-1005780.webp"],["Renowned Magnate's Cargo Hold","cd_assets/dlc/item-1005781.webp"],["Elegant Noble's Cargo Hold","cd_assets/dlc/item-1005782.webp"],["Noble Delegation's Cargo Hold","cd_assets/dlc/item-1005783.webp"]],
+  "Wagen-Kutschbock (Wagon Seat)":[["Meticulous Carpenter's Wagon Seat","cd_assets/dlc/item-1005802.webp"],["The Laughing Marionette's Wagon Seat","cd_assets/dlc/item-1005784.webp"],["Seasoned Comrade's Wagon Seat","cd_assets/dlc/item-1005785.webp"],["Noble Delegation's Wagon Seat","cd_assets/dlc/item-1005786.webp"],["Wandering Merchant's Wagon Seat","cd_assets/dlc/item-1005787.webp"],["Renowned Magnate's Wagon Seat","cd_assets/dlc/item-1005788.webp"],["Eccentric Doctor's Wagon Seat","cd_assets/dlc/item-1005789.webp"],["Eccentric Lord's Wagon Seat","cd_assets/dlc/item-1005790.webp"],["Elegant Noble's Wagon Seat","cd_assets/dlc/item-1005791.webp"]],
+  "Wagenräder (Wheel)":[["Seasoned Comrade's Wheel","cd_assets/dlc/item-1005792.webp"],["Meticulous Carpenter's Wheel","cd_assets/dlc/item-1005793.webp"],["The Laughing Marionette's Wheel","cd_assets/dlc/item-1005794.webp"],["Renowned Magnate's Wheel","cd_assets/dlc/item-1005795.webp"],["Wandering Merchant's Wheel","cd_assets/dlc/item-1005796.webp"],["Elegant Noble's Wheel","cd_assets/dlc/item-1005797.webp"],["Noble Delegation's Wheel","cd_assets/dlc/item-1005798.webp"]],
+  "Haustier-Outfits bei Cartaine (Cook's, Worker's, Fishing)":[["Feline/Canine Cook's Cloth Hat","cd_assets/dlc/item-1004874.webp"],["Feline/Canine Cook's Cloth Outfit","cd_assets/dlc/item-1004875.webp"],["Feline/Canine Worker's Cloth Hat","cd_assets/dlc/item-1005442.webp"],["Feline/Canine Worker's Cloth Outfit","cd_assets/dlc/item-1005443.webp"],["Feline/Canine Fishing Hat","cd_assets/dlc/item-1006524.webp"],["Feline/Canine Fishing Outfit","cd_assets/dlc/item-1006525.webp"]],
+  "Haustier-Outfits bei Evander (Scholastone, Ludeon)":[["Feline/Canine Scholastone Honorary Scholar Cap","cd_assets/dlc/item-1004511.webp"],["Feline/Canine Scholastone Honorary Scholar Outfit","cd_assets/dlc/item-1004512.webp"],["Feline/Canine Ludeon Plate Hat","cd_assets/dlc/item-1004876.webp"],["Feline/Canine Ludeon Plate Outfit","cd_assets/dlc/item-1004877.webp"]],
+  "Feline und Canine Charter's Diving Helm und Suit":[["Feline Charter's Diving Helm","cd_assets/dlc/item-1005359.webp"],["Feline Charter's Diving Suit","cd_assets/dlc/item-1005360.webp"],["Canine Charter's Diving Helm","cd_assets/dlc/item-1005361.webp"],["Canine Charter's Diving Suit","cd_assets/dlc/item-1005362.webp"]]
+};
+// 02.11.2026 b: Steckbriefe („Pirate Ship Alert“) der Piratenschiffe, Schlüssel = Schritt in DLC_QUESTS. Weg: knowledgeinfo.dlc_01
+// Knowledge_WantedPaper_PirateShip_00xx und missioninfo.dlc_01 Mission_Ocean_Wanted_Normal_Monster_ship_xx -> dasselbe Icon
+// ItemIcon_Prefab_CD_T0000_BoardPaper_03xx; flache Plakat-Textur, auf 512 px verkleinert. Zeigt Seekarte, Route und Wappen, kein Schiffsbild.
+const DLC_QUEST_IMGS={
+  "Pirate Ship: The Siren's Cry":"cd_assets/dlc/pirate-sirens-cry.webp",
+  "Pirate Ship: The Black Bloom":"cd_assets/dlc/pirate-black-bloom.webp",
+  "Pirate Ship: The Crimson Shield":"cd_assets/dlc/pirate-crimson-shield.webp",
+  "Pirate Ship: The Vengeance":"cd_assets/dlc/pirate-vengeance.webp",
+  "Pirate Ship: Faunus":"cd_assets/dlc/pirate-faunus.webp",
+  "Pirate Ship: The Grim Wind":"cd_assets/dlc/pirate-grim-wind.webp",
+  "Pirate Ship: The Scarlet Widow":"cd_assets/dlc/pirate-scarlet-widow.webp",
+  "Pirate Ship: The Bloodied Stake":"cd_assets/dlc/pirate-bloodied-stake.webp",
+  "Pirate Ship: The Devils' Plunder":"cd_assets/dlc/pirate-devils-plunder.webp",
+  "Pirate Ship: The Black Curved Blade":"cd_assets/dlc/pirate-black-curved-blade.webp"
 };
 
 // 01.11.2026: Bilder der DLC-Bosse aus den Spieldateien (Wissens- und Questbilder, 512 px). Matthias und Goyen nehmen
