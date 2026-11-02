@@ -20825,6 +20825,8 @@ function foRender(name){
 }
 
 function showMapLoc(name,src,type){
+  // Großansicht (z-index 9000) würde das Fundort-Fenster verdecken, daher vorher schließen
+  if(typeof closeCardFocus==='function')closeCardFocus();
   _mapLocSearch=extractMapSearch(src);
   document.getElementById('lm-type').textContent=type||'Fundort';
   document.getElementById('lm-name').textContent=name;
