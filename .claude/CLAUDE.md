@@ -125,6 +125,7 @@ abgeschlossenen Prompt in einem Codeblock. Regeln für den Prompt:
 - `cd_sec` — zuletzt aktive Sektion
 - `cd_migrate_hint` — Domainwechsel 09/2026: Hinweisleiste „Fortschritt von der alten Adresse übernehmen“ gesehen/abgelehnt/übernommen (Handoff über `migrate-storage.html` auf der alten Adresse und `#cdmig=` beim Rücksprung; kann nach 2027-03 samt Skript entfernt werden)
 - `cd_sync_code`: Sync-Code (24 Zeichen, Alphabet ohne 0/O/1/I/L) für den Fortschritts-Sync der True-Ending-Checkliste (`cd_te`) über `/api/sync`; Schlüssel zum Serverstand, der Server kennt nur `sha256(code)`. Wird bewusst NICHT in Export/Import und nicht bei der Speicher-Übernahme mitgenommen (nur „Sync beenden" oder Löschen der Website-Daten entfernt ihn). Der Client lädt nur IDs hoch, die `^[A-Za-z0-9_-]{1,40}$` erfüllen (höchstens 500, Body höchstens 16 KiB); alle heutigen `cd_te`-IDs (`te1`…, `te_abyss_01`…) passen. Neue Checklisten-IDs müssen dieser Form folgen, sonst werden sie nicht synchronisiert.
+- `cd_vs_admin` — `'1'` = Besucherzähler in der Sidebar sichtbar (nur Admin; freischalten mit `/#zaehler=<code>`, ausblenden mit `/#zaehler=aus`, Code und Hash in `pi-hosting/ZAEHLER-ADMIN.md`). Gezählt wird für alle, versteckt ist nur die Anzeige.
 - `cd_boss_open_all` — Bosskarten: `'1'` = „Alle Details“ aktiv (alle sichtbaren `details.boss-more` aufgeklappt, Knopf `#boss-more-all` zeigt „Alle einklappen“), sonst `'0'`/fehlend = Standard zugeklappt; einzelne Karten werden nicht gemerkt
 
 ## Bekannte Besonderheiten

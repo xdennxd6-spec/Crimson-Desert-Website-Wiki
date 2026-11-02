@@ -1991,6 +1991,7 @@ html.cf-open,html.cf-open body{overflow:hidden}
 
 /* ── Visitor bar ── */
 #visitor-bar{padding:11px 14px 5px;border-top:1px solid var(--iron-gall);display:flex;flex-direction:column;gap:5px}
+#visitor-bar[hidden]{display:none}
 .vis-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0}
 .vis-lbl{font-family:var(--f-mono);font-size:var(--fs-10);color:var(--iron-soft);letter-spacing:.06em;text-transform:uppercase}
 .vis-val{font-family:var(--f-mono);font-size:12px;font-weight:700;color:var(--survey-red);font-variant-numeric:tabular-nums}
@@ -8270,7 +8271,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div id="sb-recent-hd">Zuletzt</div>
     <div id="sb-recent-list"></div>
   </div>
-  <div id="visitor-bar">
+  <div id="visitor-bar" hidden>
     <div class="vis-row"><span class="vis-lbl"><span class="vis-dot"></span>Online</span><span class="vis-val" id="sv-online">—</span></div>
     <div class="vis-row"><span class="vis-lbl">Heute</span><span class="vis-val" id="sv-today">—</span></div>
     <div class="vis-row"><span class="vis-lbl">Besucher</span><span class="vis-val" id="sv-total">—</span></div>
@@ -20022,7 +20023,31 @@ function _vsBerlinDay(){
 
 let _vsPing=null;
 
+// Anzeige nur fuer den Admin (seit 02.11.2026): #visitor-bar ist per hidden-Attribut aus, gezaehlt wird
+// weiter fuer alle. Freischalten einmal pro Browser mit /#zaehler=<code>, ausblenden mit /#zaehler=aus.
+// Im Code steht nur sha256(code); der Code liegt ausserhalb des Repos (pi-hosting/ZAEHLER-ADMIN.md).
+const _VS_ADMIN_KEY="cd_vs_admin";
+const _VS_ADMIN_H="5a18e502bd3a61dddbff0d56b9701b595dbbe58e399440e92cccc3776d06879b";
+async function _vsAdminCheck(){
+  const m=location.hash.match(/^#zaehler=([A-Za-z0-9]{1,64})$/);
+  if(m){
+    history.replaceState(null,"",location.pathname+location.search);
+    if(m[1]==="aus") lsSet(_VS_ADMIN_KEY,"0");
+    else{
+      try{
+        const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(m[1]));
+        const hex=[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+        if(hex===_VS_ADMIN_H) lsSet(_VS_ADMIN_KEY,"1");
+      }catch{ /* ohne crypto.subtle (kein https) keine Freischaltung */ }
+    }
+  }
+  const bar=document.getElementById("visitor-bar");
+  if(bar) bar.hidden=localStorage.getItem(_VS_ADMIN_KEY)!=="1";
+}
+
 async function initVisitorCount(){
+  _vsAdminCheck();
+  addEventListener("hashchange",()=>{ if(location.hash.startsWith("#zaehler=")) _vsAdminCheck(); });
   const sid=_vsSid();
   const newSess=!sessionStorage.getItem("cd_vs");
   if(newSess) sessionStorage.setItem("cd_vs","1");
