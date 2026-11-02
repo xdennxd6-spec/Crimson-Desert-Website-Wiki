@@ -1631,12 +1631,12 @@ mark.hl{background:var(--instr-soft);color:var(--iron-gall);padding:0 2px;font-w
   /* Mobile-Nav-Fix 09.07.: Sheet-Chrome (Grip+Header+Suche+Zaehler+Footer ~538px) quetschte
      die eigentliche Seitenliste auf ~68px — Taps unterhalb landeten auf #visitor-bar (ohne
      Handler) und verpufften (elementFromPoint-verifiziert). Sheet scrollt jetzt selbst,
-     Liste in natuerlicher Hoehe, Zaehler mobil ausgeblendet. Am 2026-07-15 unabhaengig
+     Liste in natuerlicher Hoehe. Am 2026-07-15 unabhaengig
      erneut diagnostiziert (PC-Stand hinkte hinterher, #conList dort 12px hoch) — dieser
-     Block deckt beide Befunde ab, kein zweiter Fix noetig. */
+     Block deckt beide Befunde ab, kein zweiter Fix noetig. Zaehler seit 02.11.2026 nur fuer den
+     Admin (hidden-Attribut), daher mobil nicht mehr pauschal ausgeblendet: er steht unter der Liste im scrollenden Sheet. */
   #sidebar{overflow-y:auto}
   #sidebar .console-list{flex:none;overflow:visible;min-height:0}
-  #sidebar #visitor-bar{display:none}
   #app.console-collapsed #sidebar{width:auto!important;transform:translateY(105%)}  /* Collapse greift mobil nicht; Sheet-Modell uebernimmt */
   /* ... der gemerkte Collapse-Zustand darf das Sheet aber nicht zuhalten. Ohne diese Zeile gewinnt
      die Regel darueber (2 IDs + Klasse) gegen #sidebar.open (1 ID + Klasse): wer am Desktop einmal
