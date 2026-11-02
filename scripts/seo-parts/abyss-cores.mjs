@@ -31,8 +31,8 @@ export const SITEMAP = { pri: "0.7", freq: "monthly" };
 export const EXTRA_CSS = `
 td.crs-n{min-width:190px}
 td.crs-n strong{color:var(--ink-hi)}
-img.crs-img{width:44px;height:44px;object-fit:contain;border-radius:7px;background:rgba(255,255,255,.04);padding:3px;vertical-align:middle;margin-right:9px}
-span.crs-ph{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:7px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink-faint);vertical-align:middle;margin-right:9px;font-size:16px}
+img.crs-img{width:64px;height:64px;object-fit:contain;border-radius:7px;background:rgba(255,255,255,.04);padding:3px;vertical-align:middle;margin-right:9px}
+span.crs-ph{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:7px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink-faint);vertical-align:middle;margin-right:9px;font-size:16px}
 p.crs-tiers{margin:6px 0 0;font-size:12.5px;color:var(--ink-dim)}
 p.crs-tiers b{color:var(--amber);font-family:var(--f-mono)}
 p.crs-warn{margin:6px 0 0;font-size:12.5px;color:#d9a8ff}
