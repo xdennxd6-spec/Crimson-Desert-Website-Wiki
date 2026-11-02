@@ -3640,6 +3640,10 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
 .col-card.col-hit{outline:2px solid var(--gold);outline-offset:3px}
 .col-hd{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:start}
 .col-sym{display:grid;place-items:center;width:64px;height:64px;font-size:26px;line-height:1;color:var(--gold);background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.col-sym--img{overflow:hidden;padding:4px}
+.col-sym--img img{display:block;width:100%;height:100%;object-fit:contain}
+.col-sym--cover{padding:0}
+.col-sym--cover img{object-fit:cover}
 .col-hd-t{display:flex;flex-direction:column;gap:7px;min-width:0;padding-top:2px}
 .col-name{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.3;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
 .col-tags{display:flex;flex-wrap:wrap;gap:5px}
@@ -3880,8 +3884,8 @@ html.cd-motion .cd-check-txt{transition:opacity .25s}
 .cd-go{display:inline-flex;align-items:center;gap:5px;color:var(--glo);text-decoration:underline;text-underline-offset:2px}
 .cd-go:hover{color:var(--rhi)}
 /* R2 Abnahme: Sprung-Links auf Touch-Geräten mit 40 px Trefferhöhe, ohne die Zeilenhöhe zu ändern (Polster + gleich großer Negativ-Rand).
-   Ausgenommen die Links, die schon selbst 40 px hoch sind. */
-@media (pointer:coarse){.cd-go:where(:not(.r2b3-jr-next,.r2b1-go,.r2b13-wc-mount .cd-go)){padding-block:10px;margin-block:-10px}}
+   Ausgenommen die Links, die schon selbst 40 px hoch sind, und die Chip-Links mit eigenem Polster (sonst schieben sich umbrechende Reihen übereinander). */
+@media (pointer:coarse){.cd-go:where(:not(.r2b3-jr-next,.r2b1-go,.r2b13-wc-mount .cd-go,.dlc-jump .cd-go,.dr-jump .cd-go,.dlc-kg-b)){padding-block:10px;margin-block:-10px}}
 
 /* -- Aufleuchten nach cdGo -- */
 html.cd-motion .cd-flash{animation:cdFlash 1.8s ease-out;animation-duration:1.8s!important}
@@ -9091,50 +9095,50 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <details class="seo-daten"><summary>Komplette Liste zum Nachschlagen (6 Abschnitte)</summary><div class="seo-daten-in">
 <h2 id="a-legendaere-pferde">🐎 Legendäre Pferde (3)</h2>
 <div class="grid"><article class="card" id="mount-royler">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/royler.webp" alt="Royler in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/royler.webp" alt="Royler in Crimson Desert" width="800" height="520">
 <h3>Royler</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd (Legendary)</li><li><b>Freischalten:</b> Wild-Tame — Snowgrass Hearth / Silver Wolf Mountain (Pailune, Kaltklima)</li><li><b>Stats:</b> Stufe 1: 350 HP / 315 Sta / 10 Atk / 50 Def<br>Stufe 5: 590 HP / 390 Sta / 23 Atk / 70 Def — höchste Speed; 12 Skills, als einziges Legendary-Pferd mit Double Boost (im Wiki früher &#39;Consecutive Instant Acceleration&#39;)</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Sehr seltener Spawn, schwieriges Taming. Bestes Erkundungspferd.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_00006.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-rokade">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/rokade.webp" alt="Rokade in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/rokade.webp" alt="Rokade in Crimson Desert" width="800" height="520">
 <h3>Rokade</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd (Legendary)</li><li><b>Freischalten:</b> Wild-Tame — Steel Mountains (südliches Hernand / Grace Estate, See westlich des Spire of Insight, Normalklima; Stamina-Skill Stufe 6 empfohlen)</li><li><b>Stats:</b> Stufe 1: 600 HP / 240 Sta / 15 Atk / 65 Def<br>Stufe 5: 840 HP / 315 Sta / 26 Atk / 85 Def — Bester HP-Tank, War Horse</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Langsamster der drei Legendary-Pferde, dafür unglaublich viel HP. Region: Hernand/Grace Estate (Steel Mountains), nicht Demeniss (game8/gamingpromax/keengamer); einfachstes Tame (keine Umwelt-Debuffs).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_01007.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-camora">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/camora.webp" alt="Camora in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/camora.webp" alt="Camora in Crimson Desert" width="800" height="520">
 <h3>Camora</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd (Legendary)</li><li><b>Freischalten:</b> Wild-Tame — Redtree Forest (Tashkalp / Crimson Desert; heiße Region mit Hitze-Debuff, der beim Taming Stamina draint — Feuer-/Hitzeresistenz empfohlen)</li><li><b>Stats:</b> Stufe 1: 450 HP / 240 Sta / 27 Atk / 100 Def<br>Stufe 5: 690 HP / 315 Sta / 33 Atk / 120 Def — Höchste Atk/Def</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Beste Offensiv-Def-Kombination. Beste Wahl für Boss-Begleitung. Hitze-Debuff symmetrisch zu Roylers Kälte (game8/method.gg/gamerant). Widerspruch: Fextralifes Mount-Übersicht beschreibt den Fundort dagegen als angenehmes Klima ohne Einfluss auf die Ausdauer.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_02009.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article></div>
 <h2 id="a-pferde-und-kriegspferde">🐴 Pferde und Kriegspferde (13)</h2>
 <div class="grid"><article class="card" id="mount-herspia">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/herspia.webp" alt="Herspia in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/herspia.webp" alt="Herspia in Crimson Desert" width="800" height="520">
 <h3>Herspia</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd</li><li><b>Freischalten:</b> Mission &#39;New Journey&#39; (Quest &#39;The Great Unknown&#39;, Prolog/Kap. 1); weitere Herspias wild zähmbar, von NPCs stehlbar oder in manchen Ställen kaufbar</li><li><b>Stats:</b> Stufe 1: 350 HP / 180 Sta / 7 Atk / 35 Def<br>Stufe 5: 470 HP / 255 Sta / 21 Atk / 47 Def<br>7 Skills: Dash, Drift, Back Kick, Sprint, Swimming III, Quick Start, Double Jump</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Kliffs Startpferd. Die Spieldaten führen zusätzlich ein &#39;Herspia Packhorse&#39; als Lastentransport-Variante — laut questlog dieselbe Mount-Gruppe mit identischem Skillset, kein eigenes Mount.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_animal_lumif_wild_32506.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-brianto">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/brianto.webp" alt="Brianto in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/brianto.webp" alt="Brianto in Crimson Desert" width="800" height="520">
 <h3>Brianto</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd (Tier 4)</li><li><b>Freischalten:</b> Damianes Standard-Pferd, freigeschaltet in Kap. 3 (Quest &#39;First Step to Rebuilding&#39;); zusätzlich frei zähmbar, im Stall (Silber) kaufbar oder von NPCs stehlbar</li><li><b>Stats:</b> Stufe 1: 300 HP / 150 Sta / 7 Atk / 30 Def<br>Stufe 5: 420 HP / 225 Sta / 21 Atk / 42 Def<br>9 Skills: Dash, Drift, Back Kick, Sprint, Swimming III, Quick Start, Double Jump, Boost, Double Boost</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Über Herspia: +Boost (starke Beschleunigung beim Driften) und +Double Boost (zweiter Einsatz während der Beschleunigung); im Wiki früher &#39;Instant Acceleration&#39; bzw. &#39;Consecutive Instant Acceleration&#39; genannt. Camora zählt als legendäre Brianto-Variante (Challenge &#39;Harmonious Hooves&#39;).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_02001.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-elantrima">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/elantrima.webp" alt="Elantrima in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/elantrima.webp" alt="Elantrima in Crimson Desert" width="800" height="520">
 <h3>Elantrima</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd (Tier 4)</li><li><b>Freischalten:</b> Standardrasse (nicht quest-gebunden): Wild-Tame, im Stall (Silber) kaufbar oder von NPCs stehlbar — u.a. nördlich von Calphade / in Pailune</li><li><b>Stats:</b> Stufe 1: 600 HP / 255 Sta / 10 Atk / 50 Def<br>Stufe 5: 720 HP / 330 Sta / 23 Atk / 62 Def<br>8 Skills: Dash, Drift, Back Kick, Lateral Movement, Sprint, Swimming III, Quick Start, Double Jump</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Über Herspia: +Lateral Movement</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_11001.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-numont">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/numont.webp" alt="Numont in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/numont.webp" alt="Numont in Crimson Desert" width="800" height="520">
 <h3>Numont</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd (Tier 4)</li><li><b>Freischalten:</b> Standardrasse (nicht quest-gebunden): Wild-Tame, im Stall (Silber) kaufbar oder von NPCs stehlbar — u.a. Stall in Tommaso</li><li><b>Stats:</b> Stufe 1: 400 HP / 150 Sta / 15 Atk / 45 Def<br>Stufe 5: 520 HP / 225 Sta / 26 Atk / 57 Def<br>8 Skills: Dash, Drift, Back Kick, Charge, Sprint, Swimming III, Quick Start, Double Jump</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Über Herspia: +Charge (Heavy Attack while dashing, ab Lv.3). questlog, Fextralife und VULKK nennen die Fähigkeit Charge; der Name &#39;Flurry Slash&#39; steht nur auf game8s Royler-Seite.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_05001.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-priden">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/priden.webp" alt="Priden in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/priden.webp" alt="Priden in Crimson Desert" width="800" height="520">
 <h3>Priden</h3>
 <ul class="stats"><li><b>Typ:</b> Pferd (Tier 4)</li><li><b>Freischalten:</b> Standardrasse (nicht quest-gebunden): Wild-Tame, im Stall (Silber) kaufbar oder von NPCs stehlbar — Stall südlich der City of Delesyia</li><li><b>Stats:</b> Stufe 1: 400 HP / 195 Sta / 10 Atk / 60 Def<br>Stufe 5: 520 HP / 270 Sta / 23 Atk / 72 Def<br>8 Skills: Dash, Drift, Back Kick, Sprint, Swimming III, Quick Start, Double Jump, High Jump</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Über Herspia: +High Jump</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_01001.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9170,7 +9174,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <details class="mnt-notes"><summary>Notizen</summary><p>Wells-Militär-Pferd. questlog (mount/1001680, deutsch &#39;Wells&#39; Kavalleriepferd&#39;): Stufe 1 350 HP / 7 Atk / 35 Evade, 4 Sitze, 7 Skills.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_00000.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-marni-s-mechahorse">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/marnis-mechahorse.webp" alt="Marni&#39;s Mechahorse in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/marnis-mechahorse.webp" alt="Marni&#39;s Mechahorse in Crimson Desert" width="800" height="520">
 <h3>Marni&#39;s Mechahorse</h3>
 <ul class="stats"><li><b>Typ:</b> Mechanisches Pferd (temporär)</li><li><b>Freischalten:</b> Stehlen: an den Stallungen unmittelbar südlich von Delesyia Castle; eine Maske ist nötig</li><li><b>Stats:</b> 400 HP / 20 Atk / 50 Evade, 2 Sitze, kein Levelaufstieg, keine Pferde-Skills (questlog mount/2508); laut game8 NICHT als dauerhafter Mount registrierbar</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Mechanischer Konstrukt-Mount (kein Marni-Questline-Unlock — keine geprüfte Quelle nennt eine solche Quest). game8 führt ihn zusammen mit Cow, Elephant, Wyvern und Kuku Bird Hatchling unter Temporary Mounts. Die frühere Typangabe &#39;(Tier 2)&#39; ließ sich in keiner geprüften Quelle belegen (game8 und die Fextralife-Mounttabelle nennen für diesen Mount keine Stufe; Fextralife führt ihn gar nicht) und wurde durch &#39;temporär&#39; ersetzt, wie game8 ihn führt. Die Tier-Angaben der übrigen Pferdeeinträge sind davon unberührt und wurden hier nicht geprüft. Die offiziellen Notes zu 1.04.00 nennen den Mount ausdrücklich: Sprinten, Schwimmen und weitere Aktionen waren auf ihm nicht möglich (behoben). Nicht mit Marni&#39;s Clockwork Mantis verwechseln: Das ist ein H.A.L.L.-Gegner (questlog npc 1002642, Kapitel 10), zu dem es in questlog keinen Mount-Datensatz gibt. Quelle: game8 587091.</p></details><p class="mnt-ig"><a href="/cd_assets/gt/cd_knowledgeimage_knowledge_marni_horse.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9189,63 +9193,63 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </article></div>
 <h2 id="a-drachen-und-wyvern">🐉 Drachen und Wyvern (3)</h2>
 <div class="grid"><article class="card" id="mount-blackstar">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/blackstar.webp" alt="Blackstar in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/blackstar.webp" alt="Blackstar in Crimson Desert" width="800" height="520">
 <h3>Blackstar</h3>
 <ul class="stats"><li><b>Typ:</b> Drache</li><li><b>Freischalten:</b> Automatisch in Kap. 11 (Story-Quest; Golden Star besiegen, Pickup im Nest of Valor)</li><li><b>Stats:</b> 2500 HP / 300 Sta / 50 Atk / 1000 Def (Fextralife; questlog mount/1000799 bestätigt HP 2500 / Atk 50 / Evade 1000)<br>15 min/Session, 50 min Cooldown (Fextralife); Feuerangriffe, kann Festungen niederbrennen</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Aerial Maneuver + Focused Force Palm auf das grüne Leuchten. Bestes Anti-Festungs-Tool. Rufen: von einer Klippe springen und die Pfeife benutzen (Fextralife); seit [Patch 1.12] auch für Damiane und Oongka nutzbar. Flugsteuerung: Seit [Patch 2.00] gibt es unter &#39;Sonstiges – Eingabe&#39; die Option &#39;Steuerung von Flug-Reittieren&#39;. Bei &#39;Kamera&#39; fliegt das Reittier in Blickrichtung, bei &#39;Manuell&#39; folgt es nicht der Kamera, und Steigen und Sinken laufen über eine eigene Eingabe. Die Tastenbelegung nennen die Patchnotes nicht.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_dragon_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-wild-wyvern">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/wild-wyvern.webp" alt="Wild Wyvern in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/wild-wyvern.webp" alt="Wild Wyvern in Crimson Desert" width="800" height="520">
 <h3>Wild Wyvern</h3>
 <ul class="stats"><li><b>Typ:</b> Drache</li><li><b>Freischalten:</b> Wilde Wyvern unterwerfen (Subdue): adulte Wyvern fliegen rund um Fort Windridge am Südrand von Delesyia. Mit Bogen/Feuerwaffe betäuben, dann aufsteigen — in offenes Feld locken (nicht an Brücke/Klippen, sonst stürzt sie ab), keine tötenden Skills/Imbues [Patch 1.08]</li><li><b>Stats:</b> Temporär reitbar (Flug); 1200 HP / 300 Sta / 40 Atk, kein Levelaufstieg (Fextralife &#39;Wyvern&#39;, Mount Type &#39;Temporary&#39;); questlog führt unter dem Namen &#39;Wyvern&#39; drei Datensätze ohne Stufen (mount/30507, 30508, 1000691: 1200 HP / 40 Atk / 0 Evade), die zu dieser wilden Form passen</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Nach dem Unterwerfen zeitlich begrenzt als fliegender Mount nutzbar. Seit [Patch 1.11] direkt per Axiom Force besteigbar (ohne &#39;Back Hang&#39;); Flugsteuerung &#39;Kamera&#39;/&#39;Manuell&#39; seit [Patch 2.00] wählbar (siehe Blackstar). Baby Wyvern (Ei in SW-Delesyia, schlüpft am nahen Nest) separat als Pet; seit [Patch 1.10] durch Aufzucht als Spezial-Mount &#39;Wyvern&#39; registrierbar (siehe unten).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_wyvern.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-wyvern">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/wyvern.webp" alt="Wyvern in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/wyvern.webp" alt="Wyvern in Crimson Desert" width="800" height="520">
 <h3>Wyvern</h3>
 <ul class="stats"><li><b>Typ:</b> Drache</li><li><b>Freischalten:</b> [Patch 1.10] Baby Wyvern durch Füttern aufziehen → ab bestimmtem Wachstumsgrad als Spezial-Mount registrierbar; das neue Pet &#39;Kuku Bird Chick&#39; wird analog aufgezogen</li><li><b>Stats:</b> Flug-Mount (Drache); eigene Mount-Ausrüstung &#39;Wyvern Saddle&#39; (Patch 1.10). Statblock laut gaming.tools (Kategorie Sky Soarers, Slug riding_wyvern_1000): Attack 40 / Defense 30 / Accuracy 20 / Evade 30 / Health 1.200 / KnockOut 500 / Stamina 300. questlog führt neben drei Datensätzen ohne Stufen (siehe Wild Wyvern) einen weiteren &#39;Wyvern&#39;-Datensatz mit drei Wachstumsstufen (mount/1004233, Icon &#39;domestic_animal_riding_wyvern&#39;, nach demselben Muster wie Blackstars &#39;domestic_animal_riding_dragon&#39;): 600 HP / 30 Atk / 20 Evade → 900 / 35 / 25 → 1.200 / 40 / 30. Der gaming.tools-Statblock entspricht damit der höchsten Stufe. Fextralifes Zeile &#39;Wyvern&#39; (1200 HP / 300 Sta / 40 Atk, Mount Type &#39;Temporary&#39;) beschreibt die wilde Wyvern vom Fort Windridge (siehe Wild Wyvern)</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Erfüllt die in Patch 1.08 angekündigte Mount-Funktion des Baby Wyverns. &#39;Sigil of Valor&#39; auf Baby-Wyverns anlegbar. Zur Aufzucht: Die offiziellen Notes zu 1.10.00 nennen Wachstum durchs Füttern, eine neue Wachstums-UI im Inventar und die Registrierung als Spezial-Mount ab einem bestimmten Wachstumsgrad, aber keine Stufenwerte. Die drei questlog-Stufen (mount/1004233, in questlog am 19.06.2026 angelegt) passen dazu, werden aber von keiner Quelle ausdrücklich der Aufzucht zugeordnet: Zuordnung plausibel, nicht belegt. Fextralifes Seite &#39;Baby Wyvern&#39; beschreibt Fundort des Eis, Schlüpfen und Futter (Tender Meat und Marbled Meat, je +10 Trust) und sagt nichts zu einem Mount.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_wyvern.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article></div>
 <h2 id="a-sigil-mounts">⚔️ Sigil-Mounts (5)</h2>
 <div class="grid"><article class="card" id="mount-silver-fang">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/silver-fang.webp" alt="Silver Fang in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/silver-fang.webp" alt="Silver Fang in Crimson Desert" width="800" height="520">
 <h3>Silver Fang</h3>
 <ul class="stats"><li><b>Typ:</b> Wolf (Sigil)</li><li><b>Freischalten:</b> Quest &#39;Legendary Wolf&#39; (House Celeste): Black Fang im Forest of Wolves 2x besiegen → North-Gate-Folgemission → Silver Fang am Howling Hollow Cave erlegen+häuten → Sigil bei Elowen (volle Voraussetzungen auf der Seite Quests)</li><li><b>Stats:</b> 450 HP / 100 Sta / 100 Atk / 45 Def — kämpft dismounted aktiv weiter (HP 450: game8, Fextralife und questlog mount/1003918; Gamerant nennt abweichend 430)</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Einziger Mount der nach Dismount weiterkämpft. Lightning-Stagger. Nicht verwechseln: Black Fang wird im Forest of Wolves gekämpft, nicht am Howling Hollow; dort wird der separate Silver Fang erlegt.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_riding_wolf_1001.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-white-bear">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/white-bear.webp" alt="White Bear in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/white-bear.webp" alt="White Bear in Crimson Desert" width="800" height="520">
 <h3>White Bear</h3>
 <ul class="stats"><li><b>Typ:</b> Bär (Sigil)</li><li><b>Freischalten:</b> White Bear Kill (Five-Finger Mountain, NW Pailune nahe Silver Wolf Mountain) → Crafting</li><li><b>Stats:</b> 1500 HP / 200 Sta / 180 Atk / 35 Def (Fextralife; questlog mount/1003917 bestätigt HP 1500 / Atk 180 / Evade 35) — höchster Basis-Schaden aller Mounts, gleichauf mit Black, Grizzly und Clawed Bear</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Feuer-Schwäche. Frostcursed Set empfohlen. Tank-Mount schlechthin. Den Atk-Wert 180 teilen sich Black Bear, Grizzly Bear und Clawed Bear; Fextralife nennt den White Bear dennoch ausdrücklich &#39;the mount with the highest base damage in the game&#39;. Der Fundort Five-Finger Mountain steht bei game8 und VULKK, nicht auf Fextralifes White-Bear-Seite.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_riding_bear_1001.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-snowwhite-deer">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/snowwhite-deer.webp" alt="Snowwhite Deer in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/snowwhite-deer.webp" alt="Snowwhite Deer in Crimson Desert" width="800" height="520">
 <h3>Snowwhite Deer</h3>
 <ul class="stats"><li><b>Typ:</b> Hirsch (Sigil)</li><li><b>Freischalten:</b> Snowwhite Deer Kill (Pailune, Silver Wolf Mountain — westlich Sanctum of Solace, beim &#39;A&#39; von Pailune) → Crafting</li><li><b>Stats:</b> 400 HP / 300 Sta / 25 Atk / 50 Def (Fextralife; questlog mount/1003919 bestätigt HP 400 / Atk 25 / Evade 50) — Ausdauer 300 haben laut Fextralife-Tabelle auch Rosehorn Deer, Sandwalk Camel, Icicle Edge Alpine Ibex und weitere Mounts; Royler (390), Elantrima (330) sowie Rokade und Camora (je 315) erreichen auf Stufe 5 mehr. Fextralifes Fließtext nennt den Hirsch dennoch den ausdauerndsten Mount</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Tier flieht — Aerial Force Palm + Gleiten/(Feuer-)Pfeile zum Einholen. Fundort Silver Wolf Mountain (nicht &#39;Valgrand Tomb-Ebene&#39;); volle Stats belegt (game8/gamerant). Das Crafting-Item heißt &#39;Sigil of Solidarity (Snowwhite Deer)&#39;, gefertigt aus den Snowwhite Deer Antlers (Fextralife + game8 587091).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_riding_deer_1001.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-icicle-edge-alpine-ibex">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/icicle-ibex.webp" alt="Icicle Edge Alpine Ibex in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/icicle-ibex.webp" alt="Icicle Edge Alpine Ibex in Crimson Desert" width="800" height="520">
 <h3>Icicle Edge Alpine Ibex</h3>
 <ul class="stats"><li><b>Typ:</b> Steinbock (Sigil)</li><li><b>Freischalten:</b> Boss Moren the Mistwood Huntmaster (Wayward Woods, Quest &#39;The Sport Hunter&#39;, Longleaf-Tribe-Fraktion)</li><li><b>Stats:</b> 400 HP / 300 Sta / 25 Atk / Def 0 (questlog mount/1003915: Evade 0, ebenso gamerant; Fextralife lässt das Feld leer; game8 nennt abweichend 50)<br>Speed 3 / Beschleunigung 3 / Handling 3 / Sprung 5 (Fextralife, questlog-Stufenwerte identisch) — Berggelände-Spezialist</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>2 Phasen (Moren berittener Bogenschütze; beritten leichter zu treffen). Das Sigil-Material heißt &#39;Icicle Edge Alpine Ibex Horn&#39; (questlog-Belohnung der Mission &#39;The Sport Hunter&#39;; Fextralife schreibt &#39;Horns&#39; und nennt: nach Morens Niederlage bei einer Hexe zum Sigil of Solidarity fertigen). Keine &#39;Feuer-bricht-Reiter&#39;-Phase und kein White Horn Yeti im Ibex-Kampf; der White Horn Yeti gehört zur Skoghorn-Vorquest &#39;Soul Shepherd&#39;. Die frühere Datenbank-Bildzuordnung &#39;Misthorn Branhok&#39; zeigt dasselbe Tier (identisches questlog-Sprite); der Name existiert weder in questlog noch in gaming.tools.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_riding_alpineibex_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-rock-tusk-warthog">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/rock-tusk-warthog.webp" alt="Rock Tusk Warthog in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/rock-tusk-warthog.webp" alt="Rock Tusk Warthog in Crimson Desert" width="800" height="520">
 <h3>Rock Tusk Warthog</h3>
 <ul class="stats"><li><b>Typ:</b> Warzenschwein (Sigil)</li><li><b>Freischalten:</b> Boss Ravok of the Savage Fangs (Bordig Ruins, Quest &#39;Master of the Wetlands&#39;)</li><li><b>Stats:</b> 800 HP / 200 Sta / 100 Atk / 25 Def (Fextralife: Permanent Legendary; questlog mount/1003912 nennt ebenfalls 800 HP / 100 Atk / 25 Evade). questlog führt unter diesem Namen insgesamt acht Datensätze; die übrigen sieben (mount/30271, 1000491, 1004016–1004020) nennen 450 HP / 100 Atk / 25 Evade, ebenso gaming.tools für animal_ride_battle_boar_30271 (zusätzlich Evade 20 und KnockOut 200). Welcher Datensatz zu welchem Beschaffungsweg gehört, nennt keine Quelle. Ausdauer 200 laut Fextralife und gaming.tools; questlog führt für alle Mounts nur einen einheitlichen Platzhalter — Stärke liegt im Charge-Angriff, nicht im rohen Atk-Wert</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>2 Phasen. Ein Rüstungsslot (wie Silver Fang). gaming.tools führt die interne Id 30271 NICHT als &#39;Small Black-Maned Boar&#39;, sondern unter &#39;Mounts &gt; Fleeting Companions &gt; Wildlings&#39; als &#39;Rock Tusk Warthog&#39; (Kennzeichnung Legendary, Fraktion Savage Fangs, Slug animal_ride_battle_boar_30271). &#39;Black-Maned Boar&#39; ist dort ein eigener Datensatz (animal_ride_battle_boar_1, 230 HP) — dieselbe Kreatur, die questlog als mount/1001613 führt. Die Bezeichnung &#39;Small Black-Maned Boar&#39; kommt in keiner zugelassenen Quelle vor. Das Crafting-Item heißt &#39;Sigil of Solidarity (Rock Tusk Warthog)&#39;, gefertigt aus dem Rock Tusk Warthog Tusk (Fextralife + game8 587091).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_riding_warthog_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article></div>
 <h2 id="a-wildtiere">🦁 Wildtiere (27)</h2>
 <div class="grid"><article class="card" id="mount-black-bear">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/black-bear.webp" alt="Black Bear in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/black-bear.webp" alt="Black Bear in Crimson Desert" width="800" height="520">
 <h3>Black Bear</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Wildes Taming — Bären kommen in vielen Regionen vor; ergiebigster Fleck sind laut Fextralife die offenen Felder nordwestlich des Sanctum of Penitence</li><li><b>Stats:</b> 1500 HP / 200 Sta / 180 Atk / 35 Def (Stufe 1, kein Levelaufstieg) — gleicher Statblock wie Grizzly Bear, Clawed Bear und White Bear</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Nach Taming dauerhaft als Mount rufbar Quelle: Fextralife (Black Bear).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_black_bear_wild_30108.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-brown-bear">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/brown-bear.webp" alt="Brown Bear in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/brown-bear.webp" alt="Brown Bear in Crimson Desert" width="800" height="520">
 <h3>Brown Bear</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Wildes Taming — ein Brown Bear spawnt nahe dem Greenfield Highlands Abyss Nexus in der Region Hernand (game8)</li><li><b>Stats:</b> 1000 HP / 200 Sta / 120 Atk / 30 Def (Stufe 1, kein Levelaufstieg) — deutlich schwächer als Black/Grizzly/Clawed/White Bear</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Nach Taming dauerhaft als Mount rufbar. Fextralife hat keine eigene Brown-Bear-Seite; die Werte stehen dort unter dem Seitennamen &#39;Bear&#39; (Farbvarianten Brown und Black with Harness). Denselben Statblock hat auch &#39;Captured Bear&#39;.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_bear_wild_30048.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9269,37 +9273,37 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <details class="mnt-notes"><summary>Notizen</summary><p>Eigene Fextralife-Mountseite neben Black Bear und White Bear; alle drei teilen den Statblock 1500/200/180/35.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_grizzly_bear_wild_30111.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-boar">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/boar.webp" alt="Boar in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/boar.webp" alt="Boar in Crimson Desert" width="800" height="520">
 <h3>Boar</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Stehlen von Savage-Fangs-Soldaten, die Rock Tusk Warthogs reiten (Crimson Desert); danach mit rohem Fleisch zähmen und als Special Mount registrieren</li><li><b>Stats:</b> Permanent nach Taming; Werte nicht eindeutig zugeordnet. game8 nennt die gestohlenen Reittiere &#39;Rock Tusk Warthogs&#39;; questlog führt unter diesem Namen acht Datensätze, sieben davon mit 450 HP / 100 Atk / 25 Evade (mount/30271, 1000491, 1004016–1004020) und einen mit 800 HP (mount/1003912), ohne Angabe zum Beschaffungsweg. Der früher hier zugeordnete Datensatz &#39;Black-Maned Boar&#39; (mount/1001613: 230 HP / 100 Atk / 100 Evade, 1 Sitz, ohne Levelaufstieg) steht in questlog in einer Gruppe mit dem &#39;Giant Rock Tusk Warthog Boss&#39; (mount/30270)</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Dieselbe Art wie der Sigil-Mount Rock Tusk Warthog (gaming.tools: &#39;Black-Maned Boar&#39;, Fraktion Savage Fangs), hier aber als gewöhnliches Soldaten-Reittier ohne Bosskampf. In questlog sind es zwei getrennte Mount-Einträge mit verschiedenen Statblöcken, kein Doppeleintrag. Quellen: game8 587091, gaming.tools, questlog.</p></details><p class="mnt-ig"><a href="/cd_assets/mounts/ig/Boar-mount-crimson-desert-wiki-guide.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-buffalo">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/buffalo.webp" alt="Buffalo in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/buffalo.webp" alt="Buffalo in Crimson Desert" width="800" height="520">
 <h3>Buffalo</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Reitbar; questlog führt Buffalo als eigenen Mount-Eintrag, gaming.tools nennt als Lebensraum Delesyia (Feld und Feuchtgebiete). Ein Zähm- oder Registrierweg ist in keiner zugelassenen Quelle belegt</li><li><b>Stats:</b> 500 HP / 60 Atk / 25 Evade (Stufe 1, kein Levelaufstieg, 1 Sitz; questlog mount/1000408 — Ausdauer dort nur Platzhalter) — dauerhafte Registrierbarkeit unbelegt</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Identischer Statblock und identische interne Klasse Animal_Bull wie Cow, die game8 ausdrücklich als temporären Mount führt. Fextralife hat keine Buffalo-Seite, game8s Mount-Übersicht keinen Buffalo-Eintrag. Ein dauerhaftes Zähmen ist nicht belegt.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_water_buffalo_wild_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-sandwalk-camel">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/camel.webp" alt="Sandwalk Camel in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/camel.webp" alt="Sandwalk Camel in Crimson Desert" width="800" height="520">
 <h3>Sandwalk Camel</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Questbelohnung der Redwind-Merchant-Guild-Questreihe; sie startet bei einem um Hilfe rufenden Mann neben einem Wagen in Saltroad Hearth, nordöstlich des Great Gate of Urdavah [Patch 1.06.0]</li><li><b>Stats:</b> 400 HP / 300 Sta / 25 Atk / 50 Def, permanent</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Hieß hier bis 23.08.2026 nur &#39;Camel&#39; und war fälschlich als wildes Taming geführt. Wer die Questreihe vor Patch 1.06.0 abgeschlossen hatte, bekam das Kamel automatisch in den Stall gesetzt. Quellen: Fextralife (Sandwalk Camel), game8 587091.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_camel_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-cow">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/cow.webp" alt="Cow in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/cow.webp" alt="Cow in Crimson Desert" width="800" height="520">
 <h3>Cow</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier (Temporal)</li><li><b>Freischalten:</b> Finden &amp; reiten — Kuh-/Stierweiden auf Farmen und in Siedlungen (kann als Diebstahl zählen); auch wilde Stiere sind reitbar (game8)</li><li><b>Stats:</b> Nur temporär (Fleeting Companion) — nicht registrierbar</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Kein permanenter Wild-Tame: game8 führt Rinder ausdrücklich unter den temporären Mounts, und die 1.06.00-Patchnotes listen Rinder nicht unter den registrierbaren Spezial-Mounts. Rassevarianten (Highland Cow, White-Striped Longhorn — siehe Seite Gegner) sowie Geschlechts-/Kalbvarianten sind Weltmodelle ohne eigenen Mount-Status.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_bull_wild_32217.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-elephant">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/elephant.webp" alt="Elephant in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/elephant.webp" alt="Elephant in Crimson Desert" width="800" height="520">
 <h3>Elephant</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier (Temporal)</li><li><b>Freischalten:</b> Finden &amp; reiten — Demeniss Wildlife Park (S von Demeniss City); einfach hinlaufen und aufsteigen</li><li><b>Stats:</b> Nur temporär (Fleeting Companion) — nicht registrierbar</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>400 HP / 25 Atk / 50 Evade (questlog mount/1000523); tanky aber langsam. Kein permanenter Wild-Tame (game8 + 3 weitere Quellen).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_riding_elephant_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-greywolf">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/greywolf.webp" alt="Greywolf in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/greywolf.webp" alt="Greywolf in Crimson Desert" width="800" height="520">
 <h3>Greywolf</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Wildes Taming — Pailune (Wälder/Waldland um Hernand): in der Wildnis per Force Palm betäuben, aufsteigen, mit Rohfleisch auf Trust 100% → &#39;Take In&#39; [Patch 1.07]</li><li><b>Stats:</b> 250 HP / 200 Sta / 70 Atk / 20 Def (Stufe 1, kein Levelaufstieg) — gleicher Statblock wie Swift Wolf und Large White Wolf</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Fextralife und game8 nennen die Art ausschließlich &#39;Large Wolf&#39;; Grey ist dort eine von sechzehn Farbvarianten (Grey 1 bis Grey 10, Brown, Black 1 bis Black 5). Nicht mit Silver Fang (Sigil/Boss) verwechseln.</p></details><p class="mnt-ig"><a href="/cd_assets/mounts/ig/Greywolf-mount-crimson-desert-wiki-guide.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9317,7 +9321,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <details class="mnt-notes"><summary>Notizen</summary><p>Eigene weiße Bergwolf-Art mit eigener Fextralife-Mountseite. Nicht mit Greywolf (Fextralife: &#39;Large Wolf&#39;) oder Swift Wolf verwechseln — alle drei teilen den Statblock 250/200/70/20.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_white_wolf_wild_30034.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-giant-green-iguana">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/giant-iguana.webp" alt="Giant Green Iguana in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/giant-iguana.webp" alt="Giant Green Iguana in Crimson Desert" width="800" height="520">
 <h3>Giant Green Iguana</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> In der City of Tommaso (Crimson Desert) stehlen: Maske aufsetzen, dann zügig das Gebiet verlassen, sonst wirst du als Krimineller markiert</li><li><b>Stats:</b> 400 HP / 300 Sta / 25 Atk / 50 Def, permanent</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Kann aus der Distanz auf Gegner spucken. Hieß hier bis 23.08.2026 zusammen mit der roten Variante &#39;Giant Iguana&#39; und war fälschlich als wildes Taming in Sümpfen geführt. Quelle: Fextralife (Giant Green Iguana).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_iguana_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9329,25 +9333,25 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <details class="mnt-notes"><summary>Notizen</summary><p>Zweite Variante des früheren Sammeleintrags &#39;Giant Iguana&#39;. Quelle: Fextralife (Giant Red Iguana).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_riding_iguana_2.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-kuku-bird-hatchling">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/kuku-bird-hatchling.webp" alt="Kuku Bird Hatchling in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/kuku-bird-hatchling.webp" alt="Kuku Bird Hatchling in Crimson Desert" width="800" height="520">
 <h3>Kuku Bird Hatchling</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier (Temporal)</li><li><b>Freischalten:</b> Beritten von Blinding-Arrow-Soldaten in den Steel Mountains (SO Spire of Insight) — nur temporär</li><li><b>Stats:</b> Temporär reitbar (nicht registrierbar)</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Kuku Bird Hatchlings sind KEINE permanent zähmbaren Mounts. Permanente Kuku-Bird-Mounts entstehen nur durch Ei-Aufzucht: (1) Leaping Kuku Bird aus dem Bloodsteel-Camp-Ei, oder (2) Kuku Bird Chick Pet (Patch 1.10), das zum Mount heranwächst.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_cucubird_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-lion">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/lion.webp" alt="Lion in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/lion.webp" alt="Lion in Crimson Desert" width="800" height="520">
 <h3>Lion</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> 2 Wege, beide → mit Rohfleisch (Tender Meat, +40 Trust) auf 100% → &#39;Take In&#39;: (1) Zirkus-Löwe beim Laughing Marionette nahe City of Demeniss (Maske anlegen, &#39;Steal&#39;, sofort aus rotem Kreis reiten); (2) Wild-Löwe im N von Trader&#39;s Expanse / NO nahe Varnia Gate</li><li><b>Stats:</b> 450 HP / 200 Sta / 100 Atk / 45 Def (Stufe 1, kein Levelaufstieg) — gleicher Statblock wie Tiger</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Special/Unusual-Mount. Der Legendary White Lion am Varnia-Spot ist NICHT zähmbar. Zirkus-Löwe spawnt evtl. unzuverlässig. In den Datenbanken heißt der Zirkus-Löwe &#39;Circus Lion&#39; — dieselbe Kreatur wie Weg (1), hart belegt über den identischen Statblock 450/200/100/45 (gaming.tools).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_lion_wild_30374.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-tiger">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/tiger.webp" alt="Tiger in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/tiger.webp" alt="Tiger in Crimson Desert" width="800" height="520">
 <h3>Tiger</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Wildes Taming — Peninsula South Crimson Desert, Unnamed Lake nahe Giant&#39;s Yard Watchtower (NW Red River / SW Beardtree Gorge). Fleisch füttern → 100% Trust Bar → Take In. [Patch 1.06]</li><li><b>Stats:</b> 450 HP / 200 Sta / 100 Atk / 45 Def (Stufe 1, kein Levelaufstieg) — gleicher Statblock wie Lion</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Legendary White Tiger führt Gruppe normaler Tiger. Seit Patch 1.07 respawnen normale Tiger auch nach dem Kill des White Tiger.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_portraitimage_animal_tiger_wild_2.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-red-feathered-raptor">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/raptor.webp" alt="Red-Feathered Raptor in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/raptor.webp" alt="Red-Feathered Raptor in Crimson Desert" width="800" height="520">
 <h3>Red-Feathered Raptor</h3>
 <ul class="stats"><li><b>Typ:</b> Wildtier</li><li><b>Freischalten:</b> Wild-Tame von feindlichem Twilight-Messenger-Reiter an der Crimson Mountains Fortress (SO Tashkalp, Crimson Desert, O von City of Tommaso): Reiter per Force Palm / Heavy Attack abwerfen, fliehenden Raptor verfolgen + aufsteigen, mit Rohfleisch (~5x) auf Trust 100% → &#39;Take In&#39;</li><li><b>Stats:</b> 400 HP / 300 Sta / 25 Atk / 50 Def (Stufe 1, kein Levelaufstieg)</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Region Crimson Desert (nicht Delesyia). Reiter spawnen nur solange die Festung feindlich ist — ggf. Re-Blockade-Frequenz auf &#39;War&#39; stellen.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_carmabirdsaurus_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9402,7 +9406,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </article></div>
 <h2 id="a-fahrzeuge">🚂 Fahrzeuge (7)</h2>
 <div class="grid"><article class="card" id="mount-cloudcart">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/cloudcart.webp" alt="Cloudcart in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/cloudcart.webp" alt="Cloudcart in Crimson Desert" width="800" height="520">
 <h3>Cloudcart</h3>
 <ul class="stats"><li><b>Typ:</b> Fahrzeug (Heißluftballon)</li><li><b>Freischalten:</b> Blueprint aus dem Keller von Glenbright Manor (Hernand Highlands, Schiebe-Puzzle — siehe Seite Materialien &amp; Items); danach die Emberwind Workshop nördlich des Manors entdecken, das schaltet die Entsende-Mission zum Bau frei (game8). Die Mission braucht einen Begleiter mit Engineering-Skill sowie 75 Timber, 75 Stone, 150 Food und 2.500 Silver; einen Engineer rekrutiert man über die Quest &#39;A Rumor in St. Halssius&#39; (Fextralife)</li><li><b>Stats:</b> Leben 300 (questlog mount/1002041, Fextralife); Ausweichen 20 nur laut gaming.tools, questlog nennt 0; vertikale Reichweite, langsam</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Lufterkundung. Freischaltung über den Glenbright-Blueprint, deckungsgleich mit der Seite Materialien &amp; Items.</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_riding_airballoon1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9432,13 +9436,13 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <details class="mnt-notes"><summary>Notizen</summary><p>Abgespeckte Panzerung, dafür deutlich schneller und wendiger als der Standard-A.T.A.G.; raptorenförmiges Chassis (Small Kuku A.T.A.G. als Basis).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_machine_carmabirdsaurus_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-pywel-wagon">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/wagon-horse.webp" alt="Pywel Wagon in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/wagon-horse.webp" alt="Pywel Wagon in Crimson Desert" width="800" height="520">
 <h3>Pywel Wagon</h3>
 <ul class="stats"><li><b>Typ:</b> Fahrzeug (Wagen)</li><li><b>Freischalten:</b> Von NPCs stehlen oder im Camp Howling Hill bauen: Quest &#39;Bustling Hill&#39; (Kap. 3, Pioneering) schaltet die Greymane-Entsendungen frei; Brice (Wagonmaster) wird über &#39;A Rumor at Glenbright Farm&#39; rekrutiert; nach 4 abgeschlossenen Greymane Commissions schickt er zu den Handwerkern von Timberturner Wainwright; die Entsendemission &#39;Old Wagon Production&#39; kostet 120 Timber, 60 Food, 900 Silver und einen Begleiter mit Engineering-Skill (game8 594330). Kosten der höheren Stufen unbelegt</li><li><b>Stats:</b> Trägt Waren und Begleiter, fasst deutlich mehr verpackte Handelsgüter als das Pferd. 11 Sitze (questlog); Evade 20, Stamina 100 (gaming.tools). Drei Ausbaustufen nach Rumpf-HP: Worn Wagon 1.000, Freight Wagon 3.000, Trading Wagon 5.000</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Nicht &#39;Wagon Horse&#39;: In den Spieldaten sind &#39;X Wagon Horse&#39; die Zugpferd-Varianten der fünf Pferderassen. &#39;Pywel Wagon&#39; ist bei game8 der Titel des Knowledge-Eintrags (&#39;Knowledge Entry / Pywel Wagon / Category / Continental Travel (Mounts)&#39;) und dient dort als Artikelname, nicht als Datenbankname eines einzelnen Fahrzeugs. questlog und gaming.tools führen stattdessen vier benannte Spieler-Wagen: Worn Wagon (1.000 HP, in Guides &#39;Old Wagon&#39;), Freight Wagon (3.000 HP), Trading Wagon (5.000 HP) und Livestock Wagon (3.000 HP). Die ersten drei sind bei questlog wechselseitig als &#39;Variants&#39; verknüpft, der Livestock Wagon nicht. Er teilt Beschreibungstext und Statblock wortgleich mit dem Freight Wagon und wirkt wie ein wiederverwendeter Platzhalter, existiert aber sehr wohl als Datensatz (questlog mount/1003920, dort allerdings als deaktiviert markiert und deshalb nicht in Suche und Abzug; gaming.tools riding_wagon_twohorsefourwheel_player_4). game8 nennt namentlich nur die Baumission &#39;Old Wagon Production&#39; und sagt ausdrücklich, es gebe weitere baubare Wagen, eine geschlossene Dreier-Auswahl ist dort nicht belegt. Einzelheiten zum Handel in der Wagenhandel-Karte auf der Seite Herstellen &amp; Farmen.</p></details><p class="mnt-ig"><a href="/cd_assets/mounts/ig/Wagon-horse-mount-crimson-desert-wiki-guide.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-train">
-<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/train.webp" alt="Train in Crimson Desert" width="400" height="260">
+<img class="mnt-img" loading="lazy" src="/cd_assets/mounts/train.webp" alt="Train in Crimson Desert" width="800" height="520">
 <h3>Train</h3>
 <ul class="stats"><li><b>Typ:</b> Fahrzeug (Zug)</li><li><b>Freischalten:</b> Delesyia Region — Schienennetz</li><li><b>Stats:</b> Schnell auf Schienen, keine Kontrolle</li></ul>
 <details class="mnt-notes"><summary>Notizen</summary><p>Automatische Strecke. Laut game8 kein persönliches Mount, sondern eine Mitfahrgelegenheit auf der Ringstrecke durch Delesyia.</p></details><p class="mnt-ig"><a href="/cd_assets/mounts/ig/Train-vehicle-mount-crimson-desert-wiki-guide.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
@@ -9853,17 +9857,17 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
         <summary>
           <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg></span>
           <span class="cd-fold-main"><h3 class="cd-fold-t">Weiterhin bekannte Probleme</h3>
-            <span class="cd-fold-lead">Offizielle Liste von Pearl Abyss, Stand 31.10.2026 (14:00 UTC), zuletzt geprüft am 01.11.2026.</span>
+            <span class="cd-fold-lead">Offizielle Liste von Pearl Abyss, Stand 01.11.2026 (14:00 UTC), zuletzt geprüft am 02.11.2026.</span>
             <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--warn"><b>17</b><span>Punkte</span></span><span class="cd-chip"><b>8</b><span>neu seit dem DLC</span></span><span class="cd-chip"><b>1</b><span>Status unklar</span></span></span>
           </span>
           <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
         </summary>
         <div class="cd-fold-body">
-          <p class="r2b12-prose">Quellenstand: Aktualisierungsvermerk 31.10.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt weiterhin 18.09.2026, 10:00 UTC), geprüft am 01.11.2026. Seit dem DLC hat Pearl Abyss die Liste dreimal aktualisiert (30.10. um 03:00 und 15:00 UTC, 31.10. um 14:00 UTC). Dabei sind der seit 2.03.02 behobene Kartensymbol-Punkt und der mit 2.04.02 behobene AMD-Treiberfehler entfallen; neu sind acht Punkte, die meisten zum DLC. Pearl Abyss führt aktuell diese Probleme:</p>
+          <p class="r2b12-prose">Quellenstand: Aktualisierungsvermerk 01.11.2026, 14:00 UTC laut deutscher und englischer Fassung, geprüft am 02.11.2026. Maßgeblich ist dieser Vermerk im Text; das Datum im Beitragskopf zieht Pearl Abyss nicht zuverlässig mit. Seit dem DLC hat Pearl Abyss die Liste fünfmal aktualisiert (30.10. um 03:00 und 15:00 UTC, 31.10. um 14:00 UTC, 01.11. um 03:00 und 14:00 UTC). Entfallen sind dabei der seit 2.03.02 behobene Kartensymbol-Punkt, die mit 2.04.04 behobenen Punkte Viehhof und Schenken auf Koreanisch sowie Damianes Quest „Aus der Asche“ und der Absturz im Kampf gegen Ravok, beide mit 2.04.05 behoben. Der AMD-Treiberfehler, mit 2.04.02 als behoben gemeldet, steht seit dem 01.11.2026 in geänderter Form wieder auf der Liste. Neu seit dem DLC sind acht Punkte, die meisten zum DLC. Pearl Abyss führt aktuell diese Probleme:</p>
           <ul class="r2b12-iss">
-            <li><b>„Ende und Anfang“</b><span>Damianes eigene Quest (<em>End and Beginning</em>) lässt sich nicht fortsetzen, wenn die Hauptquest „Ende der Reise“ in einem bestimmten Zeitraum abgeschlossen wurde. Welcher Zeitraum, sagt Pearl Abyss nicht.</span></li>
-            <li><b>Viehhof</b><span>Auf dem Viehhof registriertes Vieh kann verschwinden.</span></li>
-            <li><b>Schenken auf Koreanisch</b><span>Einige Menüs der Schenken-Funktion erscheinen auf Koreanisch. Laut Pearl Abyss mit dem nächsten Patch behoben.</span></li>
+            <li><b>Mehrere Geschenke auf einmal</b><span>Schenkt man einem NPC mehrere Gegenstände gleichzeitig, kann das Spiel zum Titelbildschirm zurückkehren. Ein Folgefehler der Mehrfachauswahl beim Schenken, die 2.04.03 eingeführt hat.</span></li>
+            <li><b>AMD-Treiber 26.10.1</b><span>Mit Treiberversion 26.10.1 kann das Spiel in Pailune abstürzen, wenn die Option „Cinematic“ aktiviert ist. Behelf: Treiberversion 26.9.1 oder älter. Ein früherer AMD-Punkt zu 26.10.1 galt mit 2.04.02 als behoben.</span></li>
+            <li><b>Insel Samora</b><span>Die Menge verpackter Handelswaren, die beim Händler auf der Insel Samora gekauft wurden, kann beim Verladen vom Schiff auf einen Wagen falsch werden. Einzeln bewegt funktioniert es.</span></li>
             <li><b>Ton unter Wasser</b><span>Unter Wasser fehlen einige Soundeffekte, darunter die Bewegungsgeräusche des Charakters.</span></li>
             <li><b>Sternbild Kamel</b><span>Das Sternbild Kamel und ein besetzter Stützpunkt liegen in einer unzugänglichen Region. Die deutsche Fassung spricht von mehreren Stützpunkten, die englische von einem.</span></li>
             <li><b>Versionen von Spiel und DLC</b><span>Passen die Versionen von Hauptspiel und DLC nicht zusammen, kann das Spiel abstürzen. Beides auf den neuesten Stand bringen.</span></li>
@@ -9871,7 +9875,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
             <li><b>XBOX-Add-ons</b><span>Drops und Vorbestellerboni erscheinen teils nicht im Add-on-Menü und lassen sich nicht abholen.</span></li>
             <li><b>Interaktionen blockiert</b><span>NPCs, Reittiere oder Objekte reagieren gelegentlich nicht. Offizieller Behelf: Spiel neu starten.</span></li>
             <li><b>Angeln</b><span>In bestimmten Gebieten können gerade gefangene Fische sich nicht bewegen.</span></li>
-            <li><b>Graumähnen-Quests</b><span>Fraktionsquests stocken mit Damiane/Oongka. Auch die Patches bis 2.04.03 melden dafür keine Behebung.</span></li>
+            <li><b>Graumähnen-Quests</b><span>Fraktionsquests stocken mit Damiane/Oongka. Auch die Patches bis 2.04.05 melden dafür keine Behebung.</span></li>
             <li><b>Ausweichen</b><span>Bei der Methode „Gedrückt halten“ bleibt die Standardtaste trotz geänderter Ausweichtaste aktiv.</span></li>
             <li><b>Quest-NPCs</b><span>Benötigte NPCs können nicht gemeinsam auf legendären Reittieren aufsitzen.</span></li>
             <li><b>Mac</b><span>Bei Tastatur- und Maussteuerung weicht bei bestimmten Auflösungen im Wohnen-Modus die Mauszeiger- von der tatsächlichen Möbelposition ab.</span></li>
@@ -9879,7 +9883,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
             <li><b>PlayStation</b><span>Schnelle Namenseingabe für Tiere oder Pferde kann das Bild einfrieren. Namen langsam mit Pausen eingeben.</span></li>
             <li><b>FSR4</b><span>In Regen kann der Niederschlag verschwinden oder das Bild unscharf beziehungsweise verzerrt wirken.</span></li>
           </ul>
-          <p class="cd-src"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beim Sternbild Kamel nennt die deutsche Fassung mehrere besetzte Stützpunkte, die englische einen. Beide Fassungen tragen denselben Aktualisierungsstand vom 31.10.2026, 14:00 UTC. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
+          <p class="cd-src"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beim Sternbild Kamel nennt die deutsche Fassung mehrere besetzte Stützpunkte, die englische einen. Beide Fassungen tragen denselben Aktualisierungsstand vom 01.11.2026, 14:00 UTC. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
         </div>
       </details>
 
@@ -9910,17 +9914,17 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <details class="cd-fold cd-spot r2b12-sf r2b12-stand" style="--cd-acc:var(--slate)">
         <summary>
           <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span>
-          <span class="cd-fold-main"><h3 class="cd-fold-t">Stand der Prüfung: 01.11.2026</h3>
-            <span class="cd-fold-lead">Neuester Patch ist 2.04.03 vom 31.10.2026 (12:00 UTC), der dritte Hotfix nach dem DLC „Charting the Unknown“ (2.04.00 vom 29.10.2026). Davor kamen der 2.04.00 Hotfix und 2.04.02, beide am 30.10.2026.</span>
-            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neuester Patch</span><b>2.04.03</b></span><span class="cd-chip cd-chip--warn"><span>Mac App Store: 2.03.00 bis 2.04.03 in Vorbereitung</span></span></span>
+          <span class="cd-fold-main"><h3 class="cd-fold-t">Stand der Prüfung: 02.11.2026</h3>
+            <span class="cd-fold-lead">Neuester Patch ist 2.04.05 vom 01.11.2026 (kurz vor 14:21 UTC), der fünfte Hotfix nach dem DLC „Charting the Unknown“ (2.04.00 vom 29.10.2026). Am selben Tag kam um 04:28 UTC schon 2.04.04, davor 2.04.03 (31.10.2026) sowie der 2.04.00 Hotfix und 2.04.02 (beide 30.10.2026).</span>
+            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neuester Patch</span><b>2.04.05</b></span><span class="cd-chip cd-chip--warn"><span>Mac App Store: 2.03.00 bis 2.04.05 in Vorbereitung</span></span></span>
           </span>
           <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
         </summary>
         <div class="cd-fold-body">
-          <p class="r2b12-prose">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>01.11.2026</b>: Neuester Patch ist <b>2.04.03</b> vom 31.10.2026 (12:00 UTC). Das große Update war <b>2.04.00</b> vom 29.10.2026 (22:00 UTC), das Update zum DLC „Charting the Unknown“ (unter anderem neue Quests, Tauchen, Schiffe, erweitertes Wohnen, Burgen, Ehe, Verwaltung von Stützpunkten und der Kampfinhalt „Garten der Prüfungen“, dazu 10 Punkte unter „Neues“, 18 unter „Hauptänderungen“ in sechs Bereichen und 10 unter „Sonstiges“). Zwischen 2.03.02 vom 23.09.2026 und 2.04.00 erschien kein Hotfix. Danach folgten drei Hotfixes: der <b>2.04.00 Hotfix</b> (30.10.2026, 9 Punkte; die Versionsanzeige blieb dabei 2.04.00), <b>2.04.02</b> (30.10.2026, 17 Punkte) und <b>2.04.03</b> (31.10.2026, 13 Punkte), alle ohne neuen Inhalt, mit Schwerpunkt auf Segelschiffen, Tauchen, Ehe, Erschließung und Einrichtungen. Eine Version 2.04.01 hat Pearl Abyss nicht veröffentlicht. Hier sind <b>51 Versionen</b> geführt. Davor ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen.</p>
-          <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Mac App Store</b>Den Mac App Store haben laut den offiziellen Notes weder 2.03.00 bis 2.03.02 noch 2.04.00 und seine drei Hotfixes bis 2.04.03 erreicht (Status dort „Patch wird derzeit vorbereitet“; für 2.03.00 bis 2.03.02 geprüft am 20.10.2026, für 2.03.02 und 2.04.00 erneut am 29.10.2026, für die Hotfixes am 01.11.2026). Im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“), am 29.10.2026 und am 01.11.2026 erneut bestätigt. Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss. Den DLC führt der Mac App Store bereits als In-App-Kauf. Mit 2.04.00 muss auf dem Mac (Steam und Mac App Store) einmalig das vollständige Spielpaket neu heruntergeladen werden.</div></div>
+          <p class="r2b12-prose">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>02.11.2026</b>: Neuester Patch ist <b>2.04.05</b> vom 01.11.2026 (kurz vor 14:21 UTC laut Steam). Das große Update war <b>2.04.00</b> vom 29.10.2026 (22:00 UTC), das Update zum DLC „Charting the Unknown“ (unter anderem neue Quests, Tauchen, Schiffe, erweitertes Wohnen, Burgen, Ehe, Verwaltung von Stützpunkten und der Kampfinhalt „Garten der Prüfungen“, dazu 10 Punkte unter „Neues“, 18 unter „Hauptänderungen“ in sechs Bereichen und 10 unter „Sonstiges“). Zwischen 2.03.02 vom 23.09.2026 und 2.04.00 erschien kein Hotfix. Danach folgten fünf Hotfixes: der <b>2.04.00 Hotfix</b> (30.10.2026, 9 Punkte; die Versionsanzeige blieb dabei 2.04.00), <b>2.04.02</b> (30.10.2026, 17 Punkte), <b>2.04.03</b> (31.10.2026, 13 Punkte), <b>2.04.04</b> (01.11.2026, 3 Punkte, darunter ein Duplikationsfehler bei Graumähnen-Ausrüstung) und <b>2.04.05</b> (01.11.2026, 4 Punkte, ein Absturz und drei blockierte Quests), alle ohne neuen Inhalt, mit Schwerpunkt auf Segelschiffen, Tauchen, Ehe, Erschließung, Schenken und Einrichtungen. Eine Version 2.04.01 hat Pearl Abyss nicht veröffentlicht. Hier sind <b>53 Versionen</b> geführt. Davor ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen.</p>
+          <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Mac App Store</b>Den Mac App Store haben laut den offiziellen Notes weder 2.03.00 bis 2.03.02 noch 2.04.00 und seine fünf Hotfixes bis 2.04.05 erreicht (Status dort „Patch wird derzeit vorbereitet“; für 2.03.00 bis 2.03.02 geprüft am 20.10.2026, für 2.03.02 und 2.04.00 erneut am 29.10.2026, für die Hotfixes bis 2.04.03 am 01.11.2026, für 2.04.04 und 2.04.05 am 02.11.2026). XBOX hing bei 2.04.03 und 2.04.04 ebenfalls zurück und ist seit 2.04.05 wieder auf Stand. Im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“), am 29.10.2026 und am 01.11.2026 erneut bestätigt. Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss. Den DLC führt der Mac App Store bereits als In-App-Kauf. Mit 2.04.00 muss auf dem Mac (Steam und Mac App Store) einmalig das vollständige Spielpaket neu heruntergeladen werden.</div></div>
           <p class="r2b12-prose">Plattformangaben in den Einträgen geben den Stand zur Veröffentlichung oder zur jeweils genannten Prüfung wieder, denn Pearl Abyss ändert sie nachträglich ohne Hinweis. Alle älteren Versionen folgen unten.</p>
-          <p class="cd-src"><span class="cd-src-l">Quelle</span>Offizielle Patch-Notizen 2.04.03 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 Hotfix <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">EN</a>, Patch-Notizen 2.03.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">DE</a>, <a href="https://itunes.apple.com/lookup?id=6747100856&amp;country=de" target="_blank" rel="noopener noreferrer">Apple-Versionsabfrage</a></p>
+          <p class="cd-src"><span class="cd-src-l">Quelle</span>Offizielle Patch-Notizen 2.04.05 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=149" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=149" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.04 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=148" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=148" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.03 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 Hotfix <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">EN</a>, Patch-Notizen 2.03.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">DE</a>, <a href="https://itunes.apple.com/lookup?id=6747100856&amp;country=de" target="_blank" rel="noopener noreferrer">Apple-Versionsabfrage</a></p>
         </div>
       </details>
     </div>
@@ -14929,7 +14933,8 @@ function _dlcSecSchiffe(){
   const TRADE=_dlcA(()=>DLC_TRADE);
   let b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
   const sV=_dlcAny(DLC_SHIPS,'vendor'),sC=_dlcAny(DLC_SHIPS,'crew');
-  b+=_dlcSCards(DLC_SHIPS.map(s=>_dlcSCard({name:s.name,c:s.c,q:s.q,glyph:'⚓',
+  const shImg=_dlcAllImg(DLC_SHIPS,s=>_dlcImg(s.name));
+  b+=_dlcSCards(DLC_SHIPS.map(s=>_dlcSCard({name:s.name,c:s.c,q:s.q,glyph:'⚓',img:shImg?_dlcImg(s.name):'',
     s:[s.name,_dlcP(s.price),_dlcP(s.vendor),_dlcP(s.obtain),_dlcP(s.stats),_dlcP(s.crew)].join(' '),
     rows:[['Preis',_dlcV(s.price)]].concat(sV?[['Verkäufer',_dlcCell(s.vendor,true)]]:[],[['Erhalt',_dlcV(s.obtain)],['Werte',_dlcV(s.stats)]],sC?[['Besatzung',_dlcCell(s.crew,true)]]:[])})));
   b+=_dlcList(DLC_SHIP_NOTES);
@@ -14946,8 +14951,8 @@ function _dlcSecSchiffe(){
     chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b};
 }
 /* 3 Schiffsteile (Abschnitt dlc-b-teile, Besitz: sammeln). Karten wie Kochen & Elixiere, je Typ ein Regal mit Anzahl.
-   Bildregel: ein Regal zeigt Spiel-Icons nur, wenn JEDES Teil darin eins hat (Segel, Bug- und Seitenkanonen); Galionsfiguren und Heck
-   haben Lücken und zeigen daher einheitlich die Typ-Glyphe in derselben Kachelgröße. */
+   Bildregel: ein Regal zeigt Spiel-Icons nur, wenn JEDES Teil darin eins hat (seit 02.11.2026 alle Regale:
+   Segel, Kanonen, Galionsfiguren, Heck); fehlt in einem Regal ein Bild, zeigt es einheitlich die Typ-Glyphe in derselben Kachelgröße. */
 const _DLC_S_TYPEN=[['Sail','Segel','⚑'],['Front Cannon','Bugkanonen','◎'],['Side Cannon','Seitenkanonen','◎'],['Figurehead','Galionsfiguren','♛'],['Stern','Heck','⚓']];
 function _dlcSPart(p,img,lbl,gl){
   const chips=[],rows=[['Händler / Erhalt',_dlcV(p.vendor)]];let sz='';
@@ -15011,7 +15016,8 @@ function _dlcSecTauchen(){
 /* 6 Reittiere (Abschnitt dlc-b-reittiere, Besitz: sammeln) */
 function _dlcSecReittiere(){
   const mW=_dlcAny(DLC_MOUNTS,'where'),mT=_dlcAny(DLC_MOUNTS,'trust'),mS=_dlcAny(DLC_MOUNTS,'stats');
-  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
+  const mImg=_dlcAllImg(DLC_MOUNTS,m=>_dlcImg(m.name));
+  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',img:mImg?_dlcImg(m.name):'',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
     rows:[].concat(mW?[['Fundort',_dlcCell(m.where,true)]]:[],[['Zähmen',_dlcV(m.how)]],mT?[['Vertrauen',_dlcCell(m.trust,true)]]:[],mS?[['Werte',_dlcCell(m.stats,true)]]:[])})));
   b+=_dlcFacts(DLC_MOUNT_FACTS);
   b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
@@ -17686,6 +17692,13 @@ function _colBars(){
 /* REDESIGN 10/2026: gemeinsame Helfer der Sammeln-Seiten (Sammelobjekte, Kochen & Elixiere, Sammelgegenstände). conf-Text und title wörtlich wie renderCompendium. */
 function _sgConf(c,cls){return c.conf&&c.conf!=='high'?`<span class="${cls}" title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:'';}
 function _sgSrc(p){p=String(p||'');return p.startsWith('/assets/')?SYNTH_CDN+p:p.startsWith('cd_assets/items/')?p:'';}
+/* 02.11.2026: Spiel-Icon statt Glyphe, wenn der Eintrag eins hat (Feld icon, Pfad wie GATHERABLES über _sgSrc; iconFit:"cover" für Szenenbilder).
+   Die Glyphe bleibt Ausweichlösung, auch wenn das Bild nicht lädt. */
+function _colSym(c,g){
+  const src=_sgSrc(c.icon||'');
+  if(!src)return `<span class="col-sym" aria-hidden="true">${g.g}</span>`;
+  return `<span class="col-sym col-sym--img${c.iconFit==='cover'?' col-sym--cover':''}" data-g="${escHtml(g.g)}" aria-hidden="true"><img src="${escHtml(src)}" alt="" width="64" height="64" loading="lazy" decoding="async" onerror="var p=this.parentNode;p.className='col-sym';p.textContent=p.dataset.g"></span>`;
+}
 function _colCard(c,g,wasOpen){
   const gl=_colGoal(c.name),sp=_locSplit(c.detail,200);
   const s=[c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase();
@@ -17695,7 +17708,7 @@ function _colCard(c,g,wasOpen){
   const more=sp.rest?`<details class="item-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Mehr lesen</summary><div class="item-more-body"><p class="col-rest">${escHtml(sp.rest)}</p></div></details>`:'';
   return `<article class="card col-card${c.miss?' col-card--miss':''}" tabindex="-1" data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(sp.rest)}">
     ${c.miss?`<p class="col-miss"><span aria-hidden="true">⚠</span>${MISS_CHIP_SM}<span>Kann verpasst werden, Details im Text</span></p>`:''}
-    <div class="col-hd"><span class="col-sym" aria-hidden="true">${g.g}</span><div class="col-hd-t"><h4 class="col-name">${escHtml(gl.title)}</h4><div class="col-tags"><span class="tag tx">${escHtml(c.cat)}</span>${conf}</div></div>${goal}</div>
+    <div class="col-hd">${_colSym(c,g)}<div class="col-hd-t"><h4 class="col-name">${escHtml(gl.title)}</h4><div class="col-tags"><span class="tag tx">${escHtml(c.cat)}</span>${conf}</div></div>${goal}</div>
     <p class="col-loc"><span aria-hidden="true">📍</span><span><b>Fundort</b> ${escHtml(c.loc)}</span></p>
     <p class="col-lead">${escHtml(sp.head)}</p>${more}
   </article>`;

@@ -3640,6 +3640,10 @@ html.cd-motion :is(.so-cat-n,.sec-stat-val){font-variant-numeric:tabular-nums}
 .col-card.col-hit{outline:2px solid var(--gold);outline-offset:3px}
 .col-hd{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:start}
 .col-sym{display:grid;place-items:center;width:64px;height:64px;font-size:26px;line-height:1;color:var(--gold);background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.col-sym--img{overflow:hidden;padding:4px}
+.col-sym--img img{display:block;width:100%;height:100%;object-fit:contain}
+.col-sym--cover{padding:0}
+.col-sym--cover img{object-fit:cover}
 .col-hd-t{display:flex;flex-direction:column;gap:7px;min-width:0;padding-top:2px}
 .col-name{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.3;letter-spacing:.01em;color:var(--ink-hi);overflow-wrap:anywhere}
 .col-tags{display:flex;flex-wrap:wrap;gap:5px}
@@ -3880,8 +3884,8 @@ html.cd-motion .cd-check-txt{transition:opacity .25s}
 .cd-go{display:inline-flex;align-items:center;gap:5px;color:var(--glo);text-decoration:underline;text-underline-offset:2px}
 .cd-go:hover{color:var(--rhi)}
 /* R2 Abnahme: Sprung-Links auf Touch-Geräten mit 40 px Trefferhöhe, ohne die Zeilenhöhe zu ändern (Polster + gleich großer Negativ-Rand).
-   Ausgenommen die Links, die schon selbst 40 px hoch sind. */
-@media (pointer:coarse){.cd-go:where(:not(.r2b3-jr-next,.r2b1-go,.r2b13-wc-mount .cd-go)){padding-block:10px;margin-block:-10px}}
+   Ausgenommen die Links, die schon selbst 40 px hoch sind, und die Chip-Links mit eigenem Polster (sonst schieben sich umbrechende Reihen übereinander). */
+@media (pointer:coarse){.cd-go:where(:not(.r2b3-jr-next,.r2b1-go,.r2b13-wc-mount .cd-go,.dlc-jump .cd-go,.dr-jump .cd-go,.dlc-kg-b)){padding-block:10px;margin-block:-10px}}
 
 /* -- Aufleuchten nach cdGo -- */
 html.cd-motion .cd-flash{animation:cdFlash 1.8s ease-out;animation-duration:1.8s!important}
@@ -13685,17 +13689,17 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
         <summary>
           <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-warn"/></svg></span>
           <span class="cd-fold-main"><h3 class="cd-fold-t">Weiterhin bekannte Probleme</h3>
-            <span class="cd-fold-lead">Offizielle Liste von Pearl Abyss, Stand 31.10.2026 (14:00 UTC), zuletzt geprüft am 01.11.2026.</span>
+            <span class="cd-fold-lead">Offizielle Liste von Pearl Abyss, Stand 01.11.2026 (14:00 UTC), zuletzt geprüft am 02.11.2026.</span>
             <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--warn"><b>17</b><span>Punkte</span></span><span class="cd-chip"><b>8</b><span>neu seit dem DLC</span></span><span class="cd-chip"><b>1</b><span>Status unklar</span></span></span>
           </span>
           <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
         </summary>
         <div class="cd-fold-body">
-          <p class="r2b12-prose">Quellenstand: Aktualisierungsvermerk 31.10.2026, 14:00 UTC laut deutscher und englischer Fassung (der Beitragskopf nennt weiterhin 18.09.2026, 10:00 UTC), geprüft am 01.11.2026. Seit dem DLC hat Pearl Abyss die Liste dreimal aktualisiert (30.10. um 03:00 und 15:00 UTC, 31.10. um 14:00 UTC). Dabei sind der seit 2.03.02 behobene Kartensymbol-Punkt und der mit 2.04.02 behobene AMD-Treiberfehler entfallen; neu sind acht Punkte, die meisten zum DLC. Pearl Abyss führt aktuell diese Probleme:</p>
+          <p class="r2b12-prose">Quellenstand: Aktualisierungsvermerk 01.11.2026, 14:00 UTC laut deutscher und englischer Fassung, geprüft am 02.11.2026. Maßgeblich ist dieser Vermerk im Text; das Datum im Beitragskopf zieht Pearl Abyss nicht zuverlässig mit. Seit dem DLC hat Pearl Abyss die Liste fünfmal aktualisiert (30.10. um 03:00 und 15:00 UTC, 31.10. um 14:00 UTC, 01.11. um 03:00 und 14:00 UTC). Entfallen sind dabei der seit 2.03.02 behobene Kartensymbol-Punkt, die mit 2.04.04 behobenen Punkte Viehhof und Schenken auf Koreanisch sowie Damianes Quest „Aus der Asche“ und der Absturz im Kampf gegen Ravok, beide mit 2.04.05 behoben. Der AMD-Treiberfehler, mit 2.04.02 als behoben gemeldet, steht seit dem 01.11.2026 in geänderter Form wieder auf der Liste. Neu seit dem DLC sind acht Punkte, die meisten zum DLC. Pearl Abyss führt aktuell diese Probleme:</p>
           <ul class="r2b12-iss">
-            <li><b>„Ende und Anfang“</b><span>Damianes eigene Quest (<em>End and Beginning</em>) lässt sich nicht fortsetzen, wenn die Hauptquest „Ende der Reise“ in einem bestimmten Zeitraum abgeschlossen wurde. Welcher Zeitraum, sagt Pearl Abyss nicht.</span></li>
-            <li><b>Viehhof</b><span>Auf dem Viehhof registriertes Vieh kann verschwinden.</span></li>
-            <li><b>Schenken auf Koreanisch</b><span>Einige Menüs der Schenken-Funktion erscheinen auf Koreanisch. Laut Pearl Abyss mit dem nächsten Patch behoben.</span></li>
+            <li><b>Mehrere Geschenke auf einmal</b><span>Schenkt man einem NPC mehrere Gegenstände gleichzeitig, kann das Spiel zum Titelbildschirm zurückkehren. Ein Folgefehler der Mehrfachauswahl beim Schenken, die 2.04.03 eingeführt hat.</span></li>
+            <li><b>AMD-Treiber 26.10.1</b><span>Mit Treiberversion 26.10.1 kann das Spiel in Pailune abstürzen, wenn die Option „Cinematic“ aktiviert ist. Behelf: Treiberversion 26.9.1 oder älter. Ein früherer AMD-Punkt zu 26.10.1 galt mit 2.04.02 als behoben.</span></li>
+            <li><b>Insel Samora</b><span>Die Menge verpackter Handelswaren, die beim Händler auf der Insel Samora gekauft wurden, kann beim Verladen vom Schiff auf einen Wagen falsch werden. Einzeln bewegt funktioniert es.</span></li>
             <li><b>Ton unter Wasser</b><span>Unter Wasser fehlen einige Soundeffekte, darunter die Bewegungsgeräusche des Charakters.</span></li>
             <li><b>Sternbild Kamel</b><span>Das Sternbild Kamel und ein besetzter Stützpunkt liegen in einer unzugänglichen Region. Die deutsche Fassung spricht von mehreren Stützpunkten, die englische von einem.</span></li>
             <li><b>Versionen von Spiel und DLC</b><span>Passen die Versionen von Hauptspiel und DLC nicht zusammen, kann das Spiel abstürzen. Beides auf den neuesten Stand bringen.</span></li>
@@ -13703,7 +13707,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
             <li><b>XBOX-Add-ons</b><span>Drops und Vorbestellerboni erscheinen teils nicht im Add-on-Menü und lassen sich nicht abholen.</span></li>
             <li><b>Interaktionen blockiert</b><span>NPCs, Reittiere oder Objekte reagieren gelegentlich nicht. Offizieller Behelf: Spiel neu starten.</span></li>
             <li><b>Angeln</b><span>In bestimmten Gebieten können gerade gefangene Fische sich nicht bewegen.</span></li>
-            <li><b>Graumähnen-Quests</b><span>Fraktionsquests stocken mit Damiane/Oongka. Auch die Patches bis 2.04.03 melden dafür keine Behebung.</span></li>
+            <li><b>Graumähnen-Quests</b><span>Fraktionsquests stocken mit Damiane/Oongka. Auch die Patches bis 2.04.05 melden dafür keine Behebung.</span></li>
             <li><b>Ausweichen</b><span>Bei der Methode „Gedrückt halten“ bleibt die Standardtaste trotz geänderter Ausweichtaste aktiv.</span></li>
             <li><b>Quest-NPCs</b><span>Benötigte NPCs können nicht gemeinsam auf legendären Reittieren aufsitzen.</span></li>
             <li><b>Mac</b><span>Bei Tastatur- und Maussteuerung weicht bei bestimmten Auflösungen im Wohnen-Modus die Mauszeiger- von der tatsächlichen Möbelposition ab.</span></li>
@@ -13711,7 +13715,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
             <li><b>PlayStation</b><span>Schnelle Namenseingabe für Tiere oder Pferde kann das Bild einfrieren. Namen langsam mit Pausen eingeben.</span></li>
             <li><b>FSR4</b><span>In Regen kann der Niederschlag verschwinden oder das Bild unscharf beziehungsweise verzerrt wirken.</span></li>
           </ul>
-          <p class="cd-src"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beim Sternbild Kamel nennt die deutsche Fassung mehrere besetzte Stützpunkte, die englische einen. Beide Fassungen tragen denselben Aktualisierungsstand vom 31.10.2026, 14:00 UTC. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
+          <p class="cd-src"><b>Sprachfassungen weichen ab:</b> Beim Mac-Farbenblindfilter sagt die deutsche Liste „behoben“, die englische führt den Fehler weiter. Beim Sternbild Kamel nennt die deutsche Fassung mehrere besetzte Stützpunkte, die englische einen. Beide Fassungen tragen denselben Aktualisierungsstand vom 01.11.2026, 14:00 UTC. In der englischen Fassung sind „Ausweichen“ und „Quest-NPCs“ zu einem einzigen Listenpunkt zusammengezogen; hier folgen sie der deutschen Gliederung. Quellen: <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=68" target="_blank" rel="noopener noreferrer">EN</a>.</p>
         </div>
       </details>
 
@@ -13742,17 +13746,17 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <details class="cd-fold cd-spot r2b12-sf r2b12-stand" style="--cd-acc:var(--slate)">
         <summary>
           <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span>
-          <span class="cd-fold-main"><h3 class="cd-fold-t">Stand der Prüfung: 01.11.2026</h3>
-            <span class="cd-fold-lead">Neuester Patch ist 2.04.03 vom 31.10.2026 (12:00 UTC), der dritte Hotfix nach dem DLC „Charting the Unknown“ (2.04.00 vom 29.10.2026). Davor kamen der 2.04.00 Hotfix und 2.04.02, beide am 30.10.2026.</span>
-            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neuester Patch</span><b>2.04.03</b></span><span class="cd-chip cd-chip--warn"><span>Mac App Store: 2.03.00 bis 2.04.03 in Vorbereitung</span></span></span>
+          <span class="cd-fold-main"><h3 class="cd-fold-t">Stand der Prüfung: 02.11.2026</h3>
+            <span class="cd-fold-lead">Neuester Patch ist 2.04.05 vom 01.11.2026 (kurz vor 14:21 UTC), der fünfte Hotfix nach dem DLC „Charting the Unknown“ (2.04.00 vom 29.10.2026). Am selben Tag kam um 04:28 UTC schon 2.04.04, davor 2.04.03 (31.10.2026) sowie der 2.04.00 Hotfix und 2.04.02 (beide 30.10.2026).</span>
+            <span class="cd-chips cd-fold-chips"><span class="cd-chip cd-chip--gold"><span>Neuester Patch</span><b>2.04.05</b></span><span class="cd-chip cd-chip--warn"><span>Mac App Store: 2.03.00 bis 2.04.05 in Vorbereitung</span></span></span>
           </span>
           <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
         </summary>
         <div class="cd-fold-body">
-          <p class="r2b12-prose">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>01.11.2026</b>: Neuester Patch ist <b>2.04.03</b> vom 31.10.2026 (12:00 UTC). Das große Update war <b>2.04.00</b> vom 29.10.2026 (22:00 UTC), das Update zum DLC „Charting the Unknown“ (unter anderem neue Quests, Tauchen, Schiffe, erweitertes Wohnen, Burgen, Ehe, Verwaltung von Stützpunkten und der Kampfinhalt „Garten der Prüfungen“, dazu 10 Punkte unter „Neues“, 18 unter „Hauptänderungen“ in sechs Bereichen und 10 unter „Sonstiges“). Zwischen 2.03.02 vom 23.09.2026 und 2.04.00 erschien kein Hotfix. Danach folgten drei Hotfixes: der <b>2.04.00 Hotfix</b> (30.10.2026, 9 Punkte; die Versionsanzeige blieb dabei 2.04.00), <b>2.04.02</b> (30.10.2026, 17 Punkte) und <b>2.04.03</b> (31.10.2026, 13 Punkte), alle ohne neuen Inhalt, mit Schwerpunkt auf Segelschiffen, Tauchen, Ehe, Erschließung und Einrichtungen. Eine Version 2.04.01 hat Pearl Abyss nicht veröffentlicht. Hier sind <b>51 Versionen</b> geführt. Davor ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen.</p>
-          <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Mac App Store</b>Den Mac App Store haben laut den offiziellen Notes weder 2.03.00 bis 2.03.02 noch 2.04.00 und seine drei Hotfixes bis 2.04.03 erreicht (Status dort „Patch wird derzeit vorbereitet“; für 2.03.00 bis 2.03.02 geprüft am 20.10.2026, für 2.03.02 und 2.04.00 erneut am 29.10.2026, für die Hotfixes am 01.11.2026). Im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“), am 29.10.2026 und am 01.11.2026 erneut bestätigt. Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss. Den DLC führt der Mac App Store bereits als In-App-Kauf. Mit 2.04.00 muss auf dem Mac (Steam und Mac App Store) einmalig das vollständige Spielpaket neu heruntergeladen werden.</div></div>
+          <p class="r2b12-prose">Chronologische Patch-Historie seit Release (19.03.2026). Zuletzt geprüft am <b>02.11.2026</b>: Neuester Patch ist <b>2.04.05</b> vom 01.11.2026 (kurz vor 14:21 UTC laut Steam). Das große Update war <b>2.04.00</b> vom 29.10.2026 (22:00 UTC), das Update zum DLC „Charting the Unknown“ (unter anderem neue Quests, Tauchen, Schiffe, erweitertes Wohnen, Burgen, Ehe, Verwaltung von Stützpunkten und der Kampfinhalt „Garten der Prüfungen“, dazu 10 Punkte unter „Neues“, 18 unter „Hauptänderungen“ in sechs Bereichen und 10 unter „Sonstiges“). Zwischen 2.03.02 vom 23.09.2026 und 2.04.00 erschien kein Hotfix. Danach folgten fünf Hotfixes: der <b>2.04.00 Hotfix</b> (30.10.2026, 9 Punkte; die Versionsanzeige blieb dabei 2.04.00), <b>2.04.02</b> (30.10.2026, 17 Punkte), <b>2.04.03</b> (31.10.2026, 13 Punkte), <b>2.04.04</b> (01.11.2026, 3 Punkte, darunter ein Duplikationsfehler bei Graumähnen-Ausrüstung) und <b>2.04.05</b> (01.11.2026, 4 Punkte, ein Absturz und drei blockierte Quests), alle ohne neuen Inhalt, mit Schwerpunkt auf Segelschiffen, Tauchen, Ehe, Erschließung, Schenken und Einrichtungen. Eine Version 2.04.01 hat Pearl Abyss nicht veröffentlicht. Hier sind <b>53 Versionen</b> geführt. Davor ergänzt wurden das Update <b>2.03.00</b> (18.09.2026, 21 Punkte in sieben Abschnitten, unter anderem Springen und Rutschen bei Wasserlauf, „Präzise Bewegung“ im Foto-Modus und DLSS Ray Reconstruction mit neuem Transformer-Modell) sowie die Hotfixes <b>2.03.01</b> und <b>2.03.02</b> mit je drei Fehlerbehebungen.</p>
+          <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div><b class="cd-note-t">Mac App Store</b>Den Mac App Store haben laut den offiziellen Notes weder 2.03.00 bis 2.03.02 noch 2.04.00 und seine fünf Hotfixes bis 2.04.05 erreicht (Status dort „Patch wird derzeit vorbereitet“; für 2.03.00 bis 2.03.02 geprüft am 20.10.2026, für 2.03.02 und 2.04.00 erneut am 29.10.2026, für die Hotfixes bis 2.04.03 am 01.11.2026, für 2.04.04 und 2.04.05 am 02.11.2026). XBOX hing bei 2.04.03 und 2.04.04 ebenfalls zurück und ist seit 2.04.05 wieder auf Stand. Im Mac App Store ist laut Apple seit dem 08.10.2026 die Version 2.0.12 die neueste (Apple-Hinweis nur „verschiedene Bugs behoben und die Stabilisierungsarbeiten durchgeführt“), am 29.10.2026 und am 01.11.2026 erneut bestätigt. Welchem Patch sie entspricht, sagen weder Apple noch Pearl Abyss. Den DLC führt der Mac App Store bereits als In-App-Kauf. Mit 2.04.00 muss auf dem Mac (Steam und Mac App Store) einmalig das vollständige Spielpaket neu heruntergeladen werden.</div></div>
           <p class="r2b12-prose">Plattformangaben in den Einträgen geben den Stand zur Veröffentlichung oder zur jeweils genannten Prüfung wieder, denn Pearl Abyss ändert sie nachträglich ohne Hinweis. Alle älteren Versionen folgen unten.</p>
-          <p class="cd-src"><span class="cd-src-l">Quelle</span>Offizielle Patch-Notizen 2.04.03 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 Hotfix <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">EN</a>, Patch-Notizen 2.03.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">DE</a>, <a href="https://itunes.apple.com/lookup?id=6747100856&amp;country=de" target="_blank" rel="noopener noreferrer">Apple-Versionsabfrage</a></p>
+          <p class="cd-src"><span class="cd-src-l">Quelle</span>Offizielle Patch-Notizen 2.04.05 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=149" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=149" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.04 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=148" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=148" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.03 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=147" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=146" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 Hotfix <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=145" target="_blank" rel="noopener noreferrer">EN</a>, 2.04.00 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">DE</a> / <a href="https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=140" target="_blank" rel="noopener noreferrer">EN</a>, Patch-Notizen 2.03.02 <a href="https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=133" target="_blank" rel="noopener noreferrer">DE</a>, <a href="https://itunes.apple.com/lookup?id=6747100856&amp;country=de" target="_blank" rel="noopener noreferrer">Apple-Versionsabfrage</a></p>
         </div>
       </details>
     </div>
@@ -18761,7 +18765,8 @@ function _dlcSecSchiffe(){
   const TRADE=_dlcA(()=>DLC_TRADE);
   let b='<p class="dlc-p dlc-p--top">Werte in der Reihenfolge Health / Inventar / Tempo / Beschleunigung / Handling.</p>';
   const sV=_dlcAny(DLC_SHIPS,'vendor'),sC=_dlcAny(DLC_SHIPS,'crew');
-  b+=_dlcSCards(DLC_SHIPS.map(s=>_dlcSCard({name:s.name,c:s.c,q:s.q,glyph:'⚓',
+  const shImg=_dlcAllImg(DLC_SHIPS,s=>_dlcImg(s.name));
+  b+=_dlcSCards(DLC_SHIPS.map(s=>_dlcSCard({name:s.name,c:s.c,q:s.q,glyph:'⚓',img:shImg?_dlcImg(s.name):'',
     s:[s.name,_dlcP(s.price),_dlcP(s.vendor),_dlcP(s.obtain),_dlcP(s.stats),_dlcP(s.crew)].join(' '),
     rows:[['Preis',_dlcV(s.price)]].concat(sV?[['Verkäufer',_dlcCell(s.vendor,true)]]:[],[['Erhalt',_dlcV(s.obtain)],['Werte',_dlcV(s.stats)]],sC?[['Besatzung',_dlcCell(s.crew,true)]]:[])})));
   b+=_dlcList(DLC_SHIP_NOTES);
@@ -18778,8 +18783,8 @@ function _dlcSecSchiffe(){
     chips:[{v:DLC_SHIPS.length,t:'Schiffe',c:'ice'},{v:DLC_CREW.length,t:'Besatzungsrollen'}].concat(TRADE.length?[{v:TRADE.length,t:'Handelswaren'}]:[],[{t:'Werte unbestätigt',c:'warn'}]),body:b};
 }
 /* 3 Schiffsteile (Abschnitt dlc-b-teile, Besitz: sammeln). Karten wie Kochen & Elixiere, je Typ ein Regal mit Anzahl.
-   Bildregel: ein Regal zeigt Spiel-Icons nur, wenn JEDES Teil darin eins hat (Segel, Bug- und Seitenkanonen); Galionsfiguren und Heck
-   haben Lücken und zeigen daher einheitlich die Typ-Glyphe in derselben Kachelgröße. */
+   Bildregel: ein Regal zeigt Spiel-Icons nur, wenn JEDES Teil darin eins hat (seit 02.11.2026 alle Regale:
+   Segel, Kanonen, Galionsfiguren, Heck); fehlt in einem Regal ein Bild, zeigt es einheitlich die Typ-Glyphe in derselben Kachelgröße. */
 const _DLC_S_TYPEN=[['Sail','Segel','⚑'],['Front Cannon','Bugkanonen','◎'],['Side Cannon','Seitenkanonen','◎'],['Figurehead','Galionsfiguren','♛'],['Stern','Heck','⚓']];
 function _dlcSPart(p,img,lbl,gl){
   const chips=[],rows=[['Händler / Erhalt',_dlcV(p.vendor)]];let sz='';
@@ -18843,7 +18848,8 @@ function _dlcSecTauchen(){
 /* 6 Reittiere (Abschnitt dlc-b-reittiere, Besitz: sammeln) */
 function _dlcSecReittiere(){
   const mW=_dlcAny(DLC_MOUNTS,'where'),mT=_dlcAny(DLC_MOUNTS,'trust'),mS=_dlcAny(DLC_MOUNTS,'stats');
-  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
+  const mImg=_dlcAllImg(DLC_MOUNTS,m=>_dlcImg(m.name));
+  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',img:mImg?_dlcImg(m.name):'',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
     rows:[].concat(mW?[['Fundort',_dlcCell(m.where,true)]]:[],[['Zähmen',_dlcV(m.how)]],mT?[['Vertrauen',_dlcCell(m.trust,true)]]:[],mS?[['Werte',_dlcCell(m.stats,true)]]:[])})));
   b+=_dlcFacts(DLC_MOUNT_FACTS);
   b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
@@ -21518,6 +21524,13 @@ function _colBars(){
 /* REDESIGN 10/2026: gemeinsame Helfer der Sammeln-Seiten (Sammelobjekte, Kochen & Elixiere, Sammelgegenstände). conf-Text und title wörtlich wie renderCompendium. */
 function _sgConf(c,cls){return c.conf&&c.conf!=='high'?`<span class="${cls}" title="${c.conf==='low'?'unbestätigt – im Spiel prüfen':'Wert teils quellenabhängig'}">${c.conf==='low'?'UNBESTÄTIGT':'≈'}</span>`:'';}
 function _sgSrc(p){p=String(p||'');return p.startsWith('/assets/')?SYNTH_CDN+p:p.startsWith('cd_assets/items/')?p:'';}
+/* 02.11.2026: Spiel-Icon statt Glyphe, wenn der Eintrag eins hat (Feld icon, Pfad wie GATHERABLES über _sgSrc; iconFit:"cover" für Szenenbilder).
+   Die Glyphe bleibt Ausweichlösung, auch wenn das Bild nicht lädt. */
+function _colSym(c,g){
+  const src=_sgSrc(c.icon||'');
+  if(!src)return `<span class="col-sym" aria-hidden="true">${g.g}</span>`;
+  return `<span class="col-sym col-sym--img${c.iconFit==='cover'?' col-sym--cover':''}" data-g="${escHtml(g.g)}" aria-hidden="true"><img src="${escHtml(src)}" alt="" width="64" height="64" loading="lazy" decoding="async" onerror="var p=this.parentNode;p.className='col-sym';p.textContent=p.dataset.g"></span>`;
+}
 function _colCard(c,g,wasOpen){
   const gl=_colGoal(c.name),sp=_locSplit(c.detail,200);
   const s=[c.name,c.cat,c.detail,c.loc,c.miss?'missable verpassbar':''].join(' ').toLowerCase();
@@ -21527,7 +21540,7 @@ function _colCard(c,g,wasOpen){
   const more=sp.rest?`<details class="item-more"${wasOpen?' open':''}><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Mehr lesen</summary><div class="item-more-body"><p class="col-rest">${escHtml(sp.rest)}</p></div></details>`:'';
   return `<article class="card col-card${c.miss?' col-card--miss':''}" tabindex="-1" data-s="${escHtml(s)}" data-item-id="${escHtml(c.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(sp.rest)}">
     ${c.miss?`<p class="col-miss"><span aria-hidden="true">⚠</span>${MISS_CHIP_SM}<span>Kann verpasst werden, Details im Text</span></p>`:''}
-    <div class="col-hd"><span class="col-sym" aria-hidden="true">${g.g}</span><div class="col-hd-t"><h4 class="col-name">${escHtml(gl.title)}</h4><div class="col-tags"><span class="tag tx">${escHtml(c.cat)}</span>${conf}</div></div>${goal}</div>
+    <div class="col-hd">${_colSym(c,g)}<div class="col-hd-t"><h4 class="col-name">${escHtml(gl.title)}</h4><div class="col-tags"><span class="tag tx">${escHtml(c.cat)}</span>${conf}</div></div>${goal}</div>
     <p class="col-loc"><span aria-hidden="true">📍</span><span><b>Fundort</b> ${escHtml(c.loc)}</span></p>
     <p class="col-lead">${escHtml(sp.head)}</p>${more}
   </article>`;

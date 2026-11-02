@@ -688,6 +688,22 @@ const SKILL_IMGS={
   "Focused Shield Bash":"cd_assets/ql/assets/_sprites/cd_icon_skill_damian_shieldthrowdeep.webp"
 };
 const SKILL_IMGS_BY_CHAR={
+  // Kliff: Icons per Sprite-Liste ui/xml/texture/cd_icon_skill_0X.xml aus den Spieldateien (02.11.2026);
+  // die acht Fähigkeiten aus Patch 2.00.00 nutzen die *_Enhanced-Sprites, Focused Charged Shot das Gegenstück zu damian_deadeye_chargeshot
+  Kliff:{
+    "Finishing Rush":"cd_assets/ql/assets/_sprites/cd_icon_skill_finishattack_enhanced.webp",
+    "Evasive Shot Proficiency":"cd_assets/ql/assets/_sprites/cd_icon_skill_evade_shot_i.webp",
+    "Evasive Shot Expertise":"cd_assets/ql/assets/_sprites/cd_icon_skill_evade_shot_ii.webp",
+    "Flowing Force Palm":"cd_assets/ql/assets/_sprites/cd_icon_skill_jijeongta_i_enhanced.webp",
+    "Ascending Force Palm":"cd_assets/ql/assets/_sprites/cd_icon_skill_jijeongta_air_enhanced.webp",
+    "Descending Force Palm":"cd_assets/ql/assets/_sprites/cd_icon_skill_jijeongta_tathagata_mini_enhanced.webp",
+    "Serenity":"cd_assets/ql/assets/_sprites/cd_icon_skill_detect_enhanced.webp",
+    "Focused Charged Shot":"cd_assets/ql/assets/_sprites/cd_icon_skill_elementalarrow.webp",
+    "Enraged Parry":"cd_assets/ql/assets/_sprites/cd_icon_skill_shieldjustguard_enhanced.webp",
+    "Water Stride":"cd_assets/ql/assets/_sprites/cd_icon_skill_watermove_enhanced.webp",
+    "Enhance Flight":"cd_assets/ql/assets/_sprites/cd_icon_skill_crowwing_enhanced.webp",
+    "Elemental Charged Shot":"cd_assets/ql/assets/_sprites/cd_icon_skill_elementalreinforce_chargeshot.webp"
+  },
   Damiane:{
     "Evasive Shot":"cd_assets/ql/assets/_sprites/cd_icon_skill_damian_evade_shot.webp",
     "Evasive Shot Proficiency":"cd_assets/ql/assets/_sprites/cd_icon_skill_damian_evade_shot_i.webp",

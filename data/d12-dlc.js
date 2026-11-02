@@ -29,10 +29,10 @@ const DLC_META = {
   full: "Crimson Desert Enhanced: Charting the Unknown",
   release: "29.10.2026, 22:00 UTC (in Deutschland 23:00 MEZ)",
   patch: "2.04.00",
-  hotfixes: "Hotfix zu 2.04.00 sowie 2.04.02 und 2.04.03 (Fehlerbehebungen zu Erschließung, Tauchen, Romanze und Einrichtungen)",
+  hotfixes: "Hotfix zu 2.04.00 sowie 2.04.02 bis 2.04.05 (Fehlerbehebungen, unter anderem zu Erschließung, Tauchen, Romanze und Einrichtungen; 2.04.04 und 2.04.05 am 01.11.2026)",
   price: "24,99 € im Steam-Shop (Pearl Abyss nennt selbst keinen Preis)",
   platforms: "Steam (Windows und macOS), PlayStation 5, Xbox Series X|S, Epic Games Store; laut Pearl Abyss auch im Mac App Store, das Spiel-Update 2.04.00 ist dort aber noch in Vorbereitung",
-  checked: "01.11.2026",
+  checked: "02.11.2026",
   recheck: "01.11.2026",
   // Garten der Pruefungen: hoechstens so viele spielbare Charaktere je Lauf (offiziell, Patch-Notes 2.04.00)
   gardenChars: 3
@@ -447,6 +447,8 @@ const DLC_SOURCES = [
   {t: "Hotfix zu 2.04.00", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=145"},
   {t: "Hotfix 2.04.02", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=146"},
   {t: "Hotfix 2.04.03", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=147"},
+  {t: "Hotfix 2.04.04", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=148"},
+  {t: "Hotfix 2.04.05", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=149"},
   {t: "Game8 Schiffe", url: "https://game8.co/games/Crimson-Desert/archives/635788"},
   {t: "Game8 Schiffsteile", url: "https://game8.co/games/Crimson-Desert/archives/636449"},
   {t: "Game8 Quests", url: "https://game8.co/games/Crimson-Desert/archives/635794"},
@@ -511,7 +513,7 @@ const DLC_GEAR_EXTRA = [
 // ===== Ende Bereich Orchestrator A =====
 
 // 01.11.2026: Icons für DLC-Tabellen (Schiffsteile, Handelswaren, weitere Ausrüstung) aus den Spieldateien,
-// Item-Tabelle -> Icon, KI-Mix 2x. Schiffe und Unterwasser-Reittiere haben im Spiel kein eindeutiges Item-Icon.
+// Item-Tabelle -> Icon, KI-Mix 2x. Schiffe und Unterwasser-Reittiere seit 02.11.2026 über ihre Charakterdatensätze (siehe unten).
 const DLC_IMGS={
   "Bright Iron Prow Cannon":"cd_assets/dlc/item-1006297.webp",
   "Captain's Bow Cannon":"cd_assets/dlc/item-1006624.webp",
@@ -570,11 +572,35 @@ const DLC_IMGS={
   "Writhebolt":"cd_assets/dlc/item-1006109.webp",
   "Power Overload":"cd_assets/dlc/item-1006115.webp",
   "Venomous Fangs":"cd_assets/dlc/item-1006116.webp",
-  "Rushing Wind":"cd_assets/dlc/item-1006119.webp"
+  "Rushing Wind":"cd_assets/dlc/item-1006119.webp",
+  // 02.11.2026: Pirate Lantern (Icon aus dem Itemdatensatz), drei Schiffsteile (Medium-Variante, passend zu den Blaupausen),
+  // alle 11 Schiffe (Riding_*-Datensätze in characterinfo.dlc_01) und 5 Unterwasser-Reittiere (Porträts der Charakterdatensätze).
+  // Sea Turtle fehlt: welche der Meeresschildkröten-Arten reitbar ist, belegen die Spieldaten nicht.
+  "Pirate Lantern":"cd_assets/dlc/item-1005306.webp",
+  "Long-Horned Fish Figurehead":"cd_assets/dlc/item-1006685.webp",
+  "Long-Horned Fish Stern":"cd_assets/dlc/item-1006687.webp",
+  "Chain-Breaking Wolf Figurehead":"cd_assets/dlc/item-1005588.webp",
+  "Humble Rowboat":"cd_assets/dlc/ship-humble-rowboat.webp",
+  "Small Greymane Ship":"cd_assets/dlc/ship-small-greymane.webp",
+  "Small Hernandian Ship":"cd_assets/dlc/ship-small-hernandian.webp",
+  "Medium Hernandian Ship":"cd_assets/dlc/ship-medium-hernandian.webp",
+  "Large Hernandian Ship":"cd_assets/dlc/ship-large-hernandian.webp",
+  "Small Demenissian Ship":"cd_assets/dlc/ship-small-demenissian.webp",
+  "Medium Demenissian Ship":"cd_assets/dlc/ship-medium-demenissian.webp",
+  "Large Demenissian Ship":"cd_assets/dlc/ship-large-demenissian.webp",
+  "Small Delesyian Ship":"cd_assets/dlc/ship-small-delesyian.webp",
+  "Medium Delesyian Ship":"cd_assets/dlc/ship-medium-delesyian.webp",
+  "Large Delesyian Ship":"cd_assets/dlc/ship-large-delesyian.webp",
+  "Shark":"cd_assets/dlc/mount-shark.webp",
+  "Orca":"cd_assets/dlc/mount-orca.webp",
+  "Sun Fish":"cd_assets/dlc/mount-sunfish.webp",
+  "Electric Ray":"cd_assets/dlc/mount-electric-ray.webp",
+  "Golden Shark":"cd_assets/dlc/mount-golden-shark.webp"
 };
 
 // 01.11.2026: Bilder der DLC-Bosse aus den Spieldateien (Wissens- und Questbilder, 512 px). Matthias und Goyen nehmen
-// das Bild aus BOSS_IMGS (Feld w). Ohne Bild im Spiel: Dancing Catfish Crusher, Geago, Scrap Metal Queen, Seeschlangen.
+// das Bild aus BOSS_IMGS (Feld w). 02.11.2026: Dancing Catfish Crusher, Geago, Scrap Metal Queen und Seeschlangen über die
+// Wissenseinträge in knowledgeinfo.dlc_01 ergänzt (die Seeschlange ist im Spiel ein Tier, Animal_SeaKrait, kein Boss-Datensatz).
 // Harkan: Datei boss_landspider_scrapqueen_goblin (Pilot der Scrap Metal Queen), Zuordnung über den Dateinamen.
 const DLC_BOSS_IMGS={
   "Knight of Void":"cd_assets/dlc/boss-knight-of-void.webp",
@@ -584,5 +610,9 @@ const DLC_BOSS_IMGS={
   "Rohan Cooper":"cd_assets/dlc/boss-rohan-cooper.webp",
   "T'rukan":"cd_assets/dlc/boss-trukan.webp",
   "Kharzek, Archon of Antumbra":"cd_assets/dlc/boss-kharzek.webp",
-  "Iron Tyrant Harkan":"cd_assets/dlc/boss-harkan.webp"
+  "Iron Tyrant Harkan":"cd_assets/dlc/boss-harkan.webp",
+  "The Dancing Catfish Crusher":"cd_assets/dlc/boss-catfish-crusher.webp",
+  "Geago the Flamecrazed":"cd_assets/dlc/boss-geago.webp",
+  "Scrap Metal Queen Stoneback Crab":"cd_assets/dlc/boss-scrap-metal-queen.webp",
+  "Sea serpents (Seeschlangen)":"cd_assets/dlc/boss-sea-serpent.webp"
 };
