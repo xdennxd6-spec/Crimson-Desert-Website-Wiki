@@ -575,7 +575,8 @@ const DLC_IMGS={
   "Rushing Wind":"cd_assets/dlc/item-1006119.webp",
   // 02.11.2026: Pirate Lantern (Icon aus dem Itemdatensatz), drei Schiffsteile (Medium-Variante, passend zu den Blaupausen),
   // alle 11 Schiffe (Riding_*-Datensätze in characterinfo.dlc_01) und 5 Unterwasser-Reittiere (Porträts der Charakterdatensätze).
-  // Sea Turtle fehlt: welche der Meeresschildkröten-Arten reitbar ist, belegen die Spieldaten nicht.
+  // Sea Turtle: Die Spieldaten führen das Reittier nur allgemein (Actor_Vehicle_Turtle_Hired, Skill_OceanTurtle_Shield), ohne Art.
+  // Bild = Porträt der Unechten Karettschildkröte (Animal_Caretta_Wild_32300), optisch abgeglichen mit dem Trailerbild bei game8 (rötliche Flossen).
   "Pirate Lantern":"cd_assets/dlc/item-1005306.webp",
   "Long-Horned Fish Figurehead":"cd_assets/dlc/item-1006685.webp",
   "Long-Horned Fish Stern":"cd_assets/dlc/item-1006687.webp",
@@ -595,7 +596,8 @@ const DLC_IMGS={
   "Orca":"cd_assets/dlc/mount-orca.webp",
   "Sun Fish":"cd_assets/dlc/mount-sunfish.webp",
   "Electric Ray":"cd_assets/dlc/mount-electric-ray.webp",
-  "Golden Shark":"cd_assets/dlc/mount-golden-shark.webp"
+  "Golden Shark":"cd_assets/dlc/mount-golden-shark.webp",
+  "Sea Turtle":"cd_assets/dlc/mount-sea-turtle.webp"
 };
 
 // 01.11.2026: Bilder der DLC-Bosse aus den Spieldateien (Wissens- und Questbilder, 512 px). Matthias und Goyen nehmen
