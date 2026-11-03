@@ -27,6 +27,10 @@ const SOURCE_GLOBS = [
   [path.join('scripts', 'seo-parts'), /\.mjs$/i],
 ];
 const MAP_DECLARATION = /\b(?:const|let|var)\s+([A-Za-z_$][\w$]*_IMGS(?:_CDN)?)\s*=/g;
+// Maps mit reinen Dateinamen bekommen ihr Verzeichnis aus einer Konstante <STAMM>_IMG_DIR (z. B. FAC_QUEST_IMG_DIR in d11).
+const DIR_DECLARATION = /\b(?:const|let|var)\s+([A-Za-z_$][\w$]*_IMG_DIR)\s*=/g;
+// Zur Laufzeit zusammengesetzte Pfade, die im Quelltext nie als Dateiname stehen (index.html: `cd_assets/npcs/witch-${...}.webp`).
+const DYNAMIC_REFS = [/^cd_assets\/npcs\/witch-[^/]+\.webp$/i];
 const IMAGE_PATH = /\.(?:webp|png|jpe?g|svg)(?:[?#].*)?$/i;
 
 function uint24LE(buffer, offset) {
@@ -182,8 +186,12 @@ async function loadMaps() {
   for (const file of files) {
     const source = await readFile(path.join(DATA_DIR, file.name), 'utf8');
     const names = mapNames(source);
-    const evaluated = evaluateMaps(source, names, file.name);
-    for (const name of names) maps.push({ name, file: file.name, value: evaluated[name] });
+    const dirNames = [...source.matchAll(DIR_DECLARATION)].map((match) => match[1]);
+    const evaluated = evaluateMaps(source, [...names, ...dirNames], file.name);
+    for (const name of names) {
+      const prefix = evaluated[name.replace(/_IMGS(?:_CDN)?$/, '_IMG_DIR')];
+      maps.push({ name, file: file.name, value: evaluated[name], prefix: typeof prefix === 'string' ? prefix : '' });
+    }
   }
   return maps;
 }
@@ -228,7 +236,7 @@ async function main() {
     for (const image of collectImageStrings(map.value)) {
       if (isRemote(image.value)) continue;
       localReferenceCount += 1;
-      const localPath = cleanLocalPath(image.value);
+      const localPath = cleanLocalPath(map.prefix && !/[\\/]/.test(image.value) ? map.prefix + image.value : image.value);
       const fullPath = path.resolve(ROOT, localPath);
       const displayPath = slash(path.relative(ROOT, fullPath));
       referenced.add(displayPath.toLowerCase());
@@ -277,6 +285,7 @@ async function main() {
     .filter((file) => IMAGE_PATH.test(file))
     .map((file) => slash(path.relative(ROOT, file)))
     .filter((file) => !referenced.has(file.toLowerCase()) && !sourceText.includes(path.posix.basename(file)))
+    .filter((file) => !DYNAMIC_REFS.some((pattern) => pattern.test(file)))
     .sort((a, b) => a.localeCompare(b))
     .map((displayPath) => ({ map: displayPath.split('/').slice(0, 2).join('/'), key: '(keine Referenz)', displayPath }));
   const orphanOrder = [...new Set(orphaned.map((item) => item.map))];

@@ -6,6 +6,9 @@ const FEX_FB={"Boar-mount-crimson-desert-wiki-guide":"0/0a","Greywolf-mount-crim
 const CORE_IMGS={
   "Judicator of Ruin":"cd_assets/dlc/item-1006112.webp",
   "Eclipsed Thorn":"cd_assets/dlc/item-1006108.webp",
+  "Magnetic Burst":"cd_assets/dlc/item-1006111.webp",
+  "Focus Fire":"cd_assets/dlc/item-1006118.webp",
+  "Earthen Wedge":"cd_assets/dlc/item-1006124.webp",
   "Breath of Life I":"cd_assets/ql/assets/_sprites/itemicon_abyssgear_socket_normal_015.webp",
   "Rampaging Insight":"cd_assets/ql/assets/_sprites/itemicon_abyssgear_socket_normal_003.webp",
   "Crow's Pursuit":   "cd_assets/cores/crows-pursuit.webp",
@@ -455,7 +458,14 @@ const MOUNT_INGAME_IMGS={
   "Race Horse": "cd_assets/ql/assets/_sprites/cd_mercenary_portrait_horseimage_cd_r0002_00_horse_01002.webp",
   "Giant Red Iguana": "cd_assets/ql/assets/_sprites/cd_portraitimage_riding_iguana_2.webp",
   "Giant Green Iguana": "cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_iguana_1.webp",
-  "Ibex": "cd_assets/ql/assets/_sprites/cd_mercenary_portrait_animal_alpineibex_10.webp"
+  "Ibex": "cd_assets/ql/assets/_sprites/cd_mercenary_portrait_animal_alpineibex_10.webp",
+  // Unterwasser-Reittiere (DLC): dieselben Spielbilder wie DLC_IMGS in d12; ohne sie blendet G7 die ganze Gruppe ohne Bild ein (Lücken-Audit 03.11.2026)
+  "Shark": "cd_assets/dlc/mount-shark.webp",
+  "Orca": "cd_assets/dlc/mount-orca.webp",
+  "Electric Ray": "cd_assets/dlc/mount-electric-ray.webp",
+  "Sea Turtle": "cd_assets/dlc/mount-sea-turtle.webp",
+  "Sun Fish": "cd_assets/dlc/mount-sunfish.webp",
+  "Golden Shark": "cd_assets/dlc/mount-golden-shark.webp"
 };
 const ARMOR_IMGS={
   // Item-Bilder am 09.09.2026 gegen questlog-IDs geprueft; Belege: item-image-sources.json
