@@ -6974,6 +6974,19 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .itk-ref button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 #sec-weapons #weapon-tb .card{contain-intrinsic-height:auto 430px}
 /* ITK Ende */
+/* EN-LINK Anfang: maschinelle Übersetzung über den Google-Proxy (Desktop: linke Leiste, mobil: Menü-Fuß) */
+a.rail-btn{text-decoration:none}
+.rail-btn.cd-en-link .g{font-family:var(--f-mono);font-size:12px;font-weight:700;letter-spacing:.04em}
+.sb-en{display:none;align-items:center;gap:8px;min-height:40px;margin:0 0 8px;padding:0 10px;border:1px solid var(--line);border-radius:8px;color:inherit;text-decoration:none;font-size:13px}
+.sb-en span{font-family:var(--f-mono);font-weight:700;font-size:12px;color:var(--brass-hi)}
+.sb-en small{font-size:12px;opacity:.7}
+.sb-en:hover,.sb-en:focus-visible{border-color:var(--brass-hi)}
+@media(max-width:860px){
+  .rail-btn.cd-en-link{display:none}
+  .sb-en{display:flex}
+}
+.cd-en-link[hidden]{display:none!important}
+/* EN-LINK Ende */
 /* DLC „Charting the Unknown“ (31.10.2026): Seite #sec-dlc (renderDlc, data/d12-dlc.js) und Etikett „DLC“ auf
    Waffen-/Rüstungskarten. Unbestätigt/nicht belegt = var(--gdim) mit gestricheltem Vermerk. Mobil ab 390 px:
    Tabellen werden zu Zeilenkarten (td::before = Spaltenname), kein seitlicher Überlauf. */
@@ -8294,6 +8307,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   <div class="rail-foot">
     <button class="rail-btn" id="railFind" type="button" title="Im Wiki suchen (Strg K)"><span class="g" aria-hidden="true">&#9906;</span><span>Suche</span></button>
     <button class="rail-btn" id="railTheme" type="button" title="Modus wechseln"><span class="g" aria-hidden="true">&#9681;</span><span id="railThemeLbl">Tag</span></button>
+    <a class="rail-btn cd-en-link" id="railEn" href="https://crimson--desert--wiki-com.translate.goog/?_x_tr_sl=de&amp;_x_tr_tl=en&amp;_x_tr_hl=en" rel="nofollow" lang="en" title="Read this wiki in English (Google Translate, machine translation)"><span class="g" aria-hidden="true">EN</span><span>English</span></a>
   </div>
 </nav>
 <nav id="sidebar" aria-label="Seiten der Kategorie">
@@ -8332,6 +8346,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <button class="theme-btn" data-theme-set="amoled" onclick="setTheme('amoled')" title="Farbschema AMOLED (tiefstes Schwarz)" aria-label="Farbschema: AMOLED">●</button>
       <button class="theme-btn" onclick="openHelp()" title="Tastenkürzel (?)" aria-label="Tastenkürzel-Hilfe" style="margin-left:auto">?</button>
     </div>
+    <a class="sb-en cd-en-link" id="sbEn" href="https://crimson--desert--wiki-com.translate.goog/?_x_tr_sl=de&amp;_x_tr_tl=en&amp;_x_tr_hl=en" rel="nofollow" lang="en"><span aria-hidden="true">EN</span> Read in English <small>(auto-translated)</small></a>
     <div style="display:flex;align-items:center;justify-content:space-between">
       <span>Pearl Abyss · 2026</span>
       <span id="ee-hint" title="">🥚</span>
@@ -13508,6 +13523,12 @@ function initRegistratur(){
   markRailActive();
   const rf=document.getElementById('railFind'); if(rf)rf.addEventListener('click',()=>{const si=document.getElementById('si');if(si){ if(_isMobile())openSheet(); else expandConsole(false); si.focus(); si.select(); }});
   const rt=document.getElementById('railTheme'); if(rt)rt.addEventListener('click',()=>{ if(typeof cycleTheme==='function')cycleTheme(); _syncRailThemeLbl(); });
+  /* EN-Link: maschinelle Übersetzung über den Google-Proxy, erst auf Klick (kein Google-Skript auf der Seite).
+     Beim Klick die aktuelle Seite mitgeben; in der übersetzten Ansicht selbst ausblenden. */
+  document.querySelectorAll('.cd-en-link').forEach(a=>{
+    if(/\.translate\.goog$/.test(location.hostname)){ a.hidden=true; return; }
+    a.addEventListener('click',()=>{ a.href='https://crimson--desert--wiki-com.translate.goog'+location.pathname+'?_x_tr_sl=de&_x_tr_tl=en&_x_tr_hl=en'+location.hash; });
+  });
   _syncRailThemeLbl();
   /* Einklapp-Knopf und Griff sind ausdrückliche Nutzerwahl und werden gemerkt. Der Menü-Knopf
      in der Blattbar holt die Liste dagegen nur kurz hervor (mobil das Sheet) und soll die Vorgabe
