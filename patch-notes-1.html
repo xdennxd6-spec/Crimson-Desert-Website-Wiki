@@ -6942,38 +6942,52 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 @media (pointer:coarse){a.r2b13-tok,.r2b13-more>summary,.r2b13-datafold>summary{min-height:40px}}
 .r2b13-wc-mount .cd-go{min-height:40px}
 /* R2-B13 Ende */
-/* ITK Anfang (Itemkarte im Spielstil, 03.11.2026: Werteblock Waffen, Rüstungen, Accessoires; Helfer _itk* vor _wepCardHtml) */
-.itk{--itk-c:var(--gold);position:relative;margin:2px 0 10px;padding:12px 13px 11px;
-  background:radial-gradient(120% 80% at 50% 0%,color-mix(in srgb,var(--itk-c) 9%,transparent),transparent 62%),linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg) 45%,transparent))}
-.itk::before,.itk::after{content:"";position:absolute;width:11px;height:11px;border:1.5px solid var(--itk-c);opacity:.8;pointer-events:none}
-.itk::before{top:0;left:0;border-right:0;border-bottom:0}
-.itk::after{bottom:0;right:0;border-left:0;border-top:0}
+/* ITK Anfang (Detailblock der Großansicht, 03.11.2026 neu im Holo-Glas-Stil: runde Glasfläche, Schrift wie die Karte,
+   runde Segment-Pille +0/+10, runde Chips und Sockel-Punkte, weiche Trenner; Helfer _itk* vor _wepCardHtml) */
+.itk{--itk-c:var(--gold);--itk-ok:var(--ok,var(--cd-ok,#5fd394));position:relative;margin:2px 0 12px;padding:13px 14px 12px;
+  border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--itk-c) 5%,var(--panel));box-shadow:var(--shadow-soft);
+  font-family:var(--f-body);color:var(--text)}
 .itk-main{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
-.itk-ml{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px;font:600 12px/1.3 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.itk-lvl{padding:1px 6px;border:1px solid color-mix(in srgb,var(--itk-c) 45%,transparent);border-radius:4px;color:var(--itk-c);letter-spacing:.02em}
-.itk-mv{font:700 30px/1 var(--f-display);color:var(--ink-hi,var(--text));font-variant-numeric:tabular-nums;white-space:nowrap}
-.itk-mv.is-na{font-size:13px;font-weight:600;text-shadow:none}
-.itk-up{display:block;margin-top:3px;text-align:right;font-size:12px;color:var(--ok,#7fcf8f)}
+.itk-ml{display:inline-flex;align-items:center;flex-wrap:wrap;gap:7px;min-width:0;font:600 13px/1.3 var(--f-body);letter-spacing:.01em;color:var(--dim)}
+.itk-lvl{display:inline-flex;align-items:center;padding:1px 8px;border:1px solid color-mix(in srgb,var(--itk-c) 40%,transparent);border-radius:999px;background:color-mix(in srgb,var(--itk-c) 12%,transparent);color:var(--itk-c);font-size:12px;font-weight:600;line-height:1.35;letter-spacing:0;font-variant-numeric:tabular-nums}
+.itk[data-l="0"] .itk-lvl{visibility:hidden}
+.itk-mv{font:700 23px/1.15 var(--f-body);letter-spacing:0;color:var(--ink-hi,var(--text));font-variant-numeric:tabular-nums;white-space:nowrap}
+.itk-mv.is-na{font-size:13px;font-weight:600}
+.itk-up{display:block;width:fit-content;max-width:100%;margin:6px 0 0 auto;padding:2px 9px;border:1px solid color-mix(in srgb,var(--itk-ok) 32%,transparent);border-radius:999px;background:color-mix(in srgb,var(--itk-ok) 11%,transparent);color:var(--itk-ok);font-size:12px;font-weight:600;line-height:1.4;font-variant-numeric:tabular-nums}
 .itk[data-l="0"] .itk-up{visibility:hidden}
-.itk-flag{margin-top:4px;text-align:right;font-size:12px}
-.itk-sep{height:1px;margin:10px 0 8px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--itk-c) 45%,transparent),transparent)}
-.itk-rows{display:grid;gap:5px;margin:0}
-.itk-r{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;line-height:1.35}
+.itk-flag{margin-top:6px;text-align:right;font-size:12px}
+.itk-flag .dlc-flag{margin-left:0;padding:1px 9px;border-radius:12px;font-family:var(--f-body);font-size:12px;line-height:1.45;text-align:left}
+.itk-sep{height:1px;margin:11px 0 9px;background:var(--line)}
+.itk-rows{display:grid;gap:6px;margin:0}
+.itk-r{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;line-height:1.4}
 .itk-r dt{color:var(--dim);min-width:0}
-.itk-r dd{margin:0;text-align:right;color:var(--text);overflow-wrap:anywhere}
-.itk-r .dm{font-size:12px}
-.itk-tx{margin:7px 0 0;font-size:12px;line-height:1.45;color:var(--dim);font-style:italic}
-.itk-sub{font:600 12px/1.3 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--itk-c);margin-bottom:3px}
-.itk-sk{margin:0;font-size:12.5px;line-height:1.45;color:var(--text)}
-.itk-sock{display:inline-flex;gap:6px;padding-right:2px;vertical-align:middle}
-.itk-sock i{width:10px;height:10px;transform:rotate(45deg);border:1px solid var(--violet);background:color-mix(in srgb,var(--violet) 18%,transparent)}
-.itk-ref{display:flex;gap:6px;margin-top:11px}
-.itk-ref button{flex:1;min-height:40px;border:1px solid var(--bdr);border-radius:8px;background:transparent;color:var(--dim);font:600 12.5px/1 var(--f-body);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
-.itk-ref button:hover{border-color:color-mix(in srgb,var(--itk-c) 55%,transparent);color:var(--itk-c)}
-.itk-ref button[aria-pressed="true"]{background:var(--itk-c);border-color:var(--itk-c);color:var(--bg)}
-.itk-ref button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-#sec-weapons #weapon-tb .card{contain-intrinsic-height:auto 430px}
+.itk-r dd{margin:0;text-align:right;color:var(--text);overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.itk-r .dm{font-size:12.5px}
+.itk-tx{margin:8px 0 0;font-size:12.5px;line-height:1.5;color:var(--dim)}
+.itk>.itk-tx:first-child{margin-top:0}
+.itk-sub{font:600 13px/1.3 var(--f-body);letter-spacing:.01em;color:var(--itk-c);margin-bottom:4px}
+.itk-sk{margin:0;font-size:13px;line-height:1.5;color:var(--text)}
+.itk-sock{display:inline-flex;align-items:center;gap:5px;vertical-align:middle}
+.itk-sock i{width:9px;height:9px;border-radius:50%;border:1px solid var(--violet);background:color-mix(in srgb,var(--violet) 32%,transparent)}
+.itk-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 12px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line)}
+.itk-fl{font-size:13px;line-height:1.3;color:var(--dim)}
+.itk-ref{display:inline-flex;align-items:stretch;gap:2px;height:34px;box-sizing:border-box;padding:3px;margin-left:auto;border:1px solid var(--line);border-radius:999px;background:var(--panel-2)}
+.itk-ref button{position:relative;min-width:58px;padding:0 14px;border:1px solid transparent;border-radius:999px;background:transparent;color:var(--dim);font:600 13px/1 var(--f-body);font-variant-numeric:tabular-nums;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}
+.itk-ref button::before{content:"";position:absolute;inset:-5px -1px}
+.itk-ref button:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
+.itk-ref button[aria-pressed="true"]{background:color-mix(in srgb,var(--itk-c) 20%,transparent);border-color:color-mix(in srgb,var(--itk-c) 55%,transparent);color:var(--ink-hi,var(--text))}
+.itk-ref button:focus-visible{outline:2px solid var(--itk-c);outline-offset:1px}
+@media (pointer:coarse){.itk-ref{height:40px}.itk-ref button{min-width:64px}}
+@media (prefers-reduced-motion:reduce){.itk-ref button{transition:none}}
 /* ITK Ende */
+/* ITK-FOKUS Anfang (A): Raster zeigt die alten Kartenzeilen (.itk-face), der Werteblock (.itk-fx) erscheint nur in der
+   Großansicht #card-focus. display:contents hält die Zeilen im Raster direkte Glieder von .crows (Abstände wie vorher). */
+.itk-face{display:contents}
+.itk-fx{display:none}
+#card-focus .cf-card .itk-face{display:none}
+#card-focus .cf-card .itk-fx{display:block;min-width:0;margin:4px 0 8px}
+#card-focus .cf-card .itk-fx>.itk{margin:0}
+/* ITK-FOKUS Ende */
 /* EN-LINK Anfang: maschinelle Übersetzung über den Google-Proxy (Desktop: linke Leiste, mobil: Menü-Fuß) */
 a.rail-btn{text-decoration:none}
 .rail-btn.cd-en-link .g{font-family:var(--f-mono);font-size:12px;font-weight:700;letter-spacing:.04em}
@@ -16575,7 +16589,7 @@ function _itkHtml(o){
   (o.text||[]).forEach(t=>{h+=`<p class="itk-tx">${cdEsc(t)}</p>`;});
   if(o.sub)h+=`<div class="itk-sep" aria-hidden="true"></div><div class="itk-sub">${cdEsc(o.sub.l)}</div><p class="itk-sk">${cdEsc(o.sub.t)}</p>`;
   (o.uniq||[]).forEach(u=>{h+=`<div class="itk-sep" aria-hidden="true"></div><div class="itk-sub">Einzigartiger Effekt${u.n?' · '+cdEsc(u.n):''}</div><p class="itk-sk">${cdEsc(u.t)}</p>`;});
-  if(hasRef)h+='<div class="itk-ref" role="group" aria-label="Verfeinerung"><button type="button" aria-pressed="false" data-l="0">+0</button><button type="button" aria-pressed="true" data-l="10">+10</button></div>';
+  if(hasRef)h+='<div class="itk-foot"><span class="itk-fl" aria-hidden="true">Verfeinerungsstufe</span><div class="itk-ref" role="group" aria-label="Verfeinerungsstufe"><button type="button" aria-pressed="false" data-l="0">+0</button><button type="button" aria-pressed="true" data-l="10">+10</button></div></div>';
   return h+'</div>';
 }
 /* Werteblock aus einem effect-Text (Rüstungen, Accessoires); prefer = Reihenfolge der Hauptwert-Schlüssel */
@@ -16621,8 +16635,12 @@ function _wepCardHtml(w,wasOpen,o){
       ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async"${o&&o.dlc?'':' width="78" height="78"'} alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div${o&&o.dlc?'':' class="dra3-ph"'} style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
       <div class="ct">${w.name}</div>
       <div class="cm"><span class="tag tx">${w.type}</span>${_dlcTag(w)}</div>
-      <div class="crows">
-        ${_wepItk(w,o)}
+      <div class="crows"><div class="itk-face">${o&&o.dlc?'':'<div class="dra3-vals">'}
+        <div class="crow"><span class="cl">${w.def!=null?'DEF':'ATK'}</span><span class="cv">${o&&o.dlc&&w.val_q&&(w.atk!=null||w.def!=null)?(w.val_part?'<span class="atk">'+(w.def!=null?w.def:w.atk)+'</span> '+_dlcFlag('unb',w.val_q):'<span class="dlc-unb">'+(w.def!=null?w.def:w.atk)+' '+_dlcFlag('unb',w.val_q)+'</span>'):(w.def!=null?'<span class="atk">'+w.def+'</span>':(w.atk!=null?'<span class="atk">'+w.atk+'</span>':'<span class="dm">–</span>'))+(w.val_q&&(w.atk!=null||w.def!=null)?' <i class="dlc-flag" title="'+cdEsc('Wert nur laut '+w.val_q)+'">unbestätigt</i>':'')}</span></div>
+        <div class="crow"><span class="cl">Crit</span><span class="cv">${w.crit!=null?'<span class="crt">'+w.crit+'</span>':(w.crit_none?'<span class="dm" title="Diese Waffe führt laut questlog.gg und gaming.tools kein Critical-Rate-Feld (Stand 07.09.2026)" style="font-size:var(--fs-11)">kein Crit-Stat</span>':'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>')}</span></div>
+        <div class="crow"><span class="cl">Slots</span><span class="cv">${w.slots!=null?w.slots:'<span class="dm" title="Wert noch nicht recherchiert" style="font-size:var(--fs-11)">nicht erfasst</span>'}</span></div>${o&&o.dlc?'':'</div>'}
+        ${w.built_in?`<div class="crow"><span class="cl">Built-in Cores</span><span class="cv" style="font-size:var(--fs-11)">${w.built_in}</span></div>`:''}
+        </div><div class="itk-fx">${_wepItk(w,o)}</div>
         <details class="item-more"${wasOpen?' open':''}>
           <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
           <div class="item-more-body">
@@ -18241,7 +18259,7 @@ function _armorCardHtml(a,wasOpen,o){
       <div class="ct">${a.name}</div>
       <div class="cm"><span class="tag ${typeColor}">${a.type}</span>${armorProvBadge(a.prov)}${_dlcTag(a)}</div>
       <div class="crows">
-        ${_itkFromEffect(a.effect,['def','atk','hp'],a.val_q?null:st=>_itkRefArmor(a,st),a.val_q?(o&&o.dlc?_dlcFlag('unb',a.val_q):'<i class="dlc-flag" title="'+cdEsc(a.val_q)+'">unbestätigt</i>'):'')}
+        <div class="itk-face"><div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${o&&o.dlc&&a.val_q?_dlcQ(a.effect||'',a):a.effect+(a.val_q?' <i class="dlc-flag" title="'+cdEsc(a.val_q)+'">unbestätigt</i>':'')}</span></div></div><div class="itk-fx">${_itkFromEffect(a.effect,['def','atk','hp'],a.val_q?null:st=>_itkRefArmor(a,st),a.val_q?(o&&o.dlc?_dlcFlag('unb',a.val_q):'<i class="dlc-flag" title="'+cdEsc(a.val_q)+'">unbestätigt</i>'):'')}</div>
         <details class="item-more"${wasOpen?' open':''}>
           <summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary>
           <div class="item-more-body">
@@ -18706,7 +18724,7 @@ function openCardFocus(card){
   closeCardFocus();
   _cfLastFocus=card;
   const clone=card.cloneNode(true);
-  clone.classList.remove('hide');clone.classList.add('cf-card');
+  clone.classList.remove('hide','cdx-wait');clone.classList.add('cf-card');
   clone.removeAttribute('data-s');clone.removeAttribute('tabindex');clone.removeAttribute('role');
   clone.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
   clone.querySelectorAll('[data-s]').forEach(n=>n.removeAttribute('data-s'));
@@ -21578,7 +21596,7 @@ function _drA2AccCard(a,show,have){
       <div class="ct">${escHtml(a.name)}</div>
       <div class="cm"><span class="tag ${badge}">${escHtml(a.type)}</span>${a.dlc?' <span class="tag tdlc">DLC</span>':''}${/unbestätigt|ungeprüft/i.test(hid)?' <span class="tag tw" title="Vermerk unter Quelle / Notiz">Details unbestätigt</span>':''}</div>
       <div class="crows">
-        ${_itkFromEffect(a.effect,['atk','def','hp'],null,'')}
+        <div class="itk-face"><div class="crow"><span class="cl">Effekt</span><span class="cv" style="color:var(--gold)">${escHtml(a.effect)}</span></div></div><div class="itk-fx">${_itkFromEffect(a.effect,['atk','def','hp'],null,'')}</div>
         <details class="item-more dra2-more"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">Quelle / Notiz</summary><div class="item-more-body">${body}</div></details>
       </div>
       <div class="dra2-acts">
