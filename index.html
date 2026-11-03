@@ -19541,10 +19541,12 @@ function _stFlush(){
     if(_st.ms[k]>=1000) ms[k]=Math.round(_st.ms[k]);
   }
   _st.v={}; _st.ms={};
-  if(Object.keys(v).length||Object.keys(ms).length) _stSend({t:"zeit",v,ms});
+  if(Object.keys(v).length||Object.keys(ms).length){ _stAktiv(); _stSend({t:"zeit",v,ms}); }
 }
+function _stAktiv(){ try{ localStorage.setItem("cd_st_ts",String(Date.now())); }catch{} }
 function _stSeite(id){
   if(!_st.an||!id) return;
+  _stAktiv();
   _stTick();
   if(id!==_st.sec){ _st.sec=id; _st.v[id]=(_st.v[id]||0)+1; }
   if(Object.keys(_st.v).length>=6) _stFlush();
@@ -19564,6 +19566,11 @@ function _stInit(){
   if(_st.an) return;
   try{ if(localStorage.getItem(_VS_ADMIN_KEY)==="1") return; }catch{}
   _st.an=true;
+  // Sitzung = Besuch über alle Tabs; neue Sitzung erst nach 30 min ohne Aktivität (vorher zählte jeder neue Tab).
+  // Hier gleich zu Beginn prüfen, bevor ein Seitenwechsel den Zeitstempel erneuert.
+  let letzte=0; try{ letzte=+localStorage.getItem("cd_st_ts")||0; }catch{}
+  const neuSitzung=Date.now()-letzte>30*60*1000;
+  _stAktiv();
   // showSec umhüllen: jede Navigation (Klick, Suche, Hash, Zurück) läuft dort durch
   const orig=window.showSec;
   if(typeof orig==="function"&&!orig._st){
@@ -19573,8 +19580,7 @@ function _stInit(){
   const start=()=>{
     const seite=_stSecJetzt();
     _stSeite(seite);
-    if(!sessionStorage.getItem("cd_st")){
-      sessionStorage.setItem("cd_st","1");
+    if(neuSitzung){
       const fein=matchMedia("(pointer:fine)").matches, breit=Math.min(screen.width,screen.height)>=768;
       _stSend({t:"start",seite,quelle:_stQuelle(),geraet:fein?"desktop":(breit?"tablet":"mobil"),
         sprache:(navigator.language||"").slice(0,2).toLowerCase()});
