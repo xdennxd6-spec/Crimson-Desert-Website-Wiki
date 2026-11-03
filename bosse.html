@@ -20677,9 +20677,9 @@ async function openStatArchiv(){
 .st-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:14px}
 .st-box{min-width:0}
 .st-box{border:1px solid var(--iron-gall);border-radius:10px;padding:10px 12px}.st-box h3{margin:0 0 8px;font-size:.9rem}
-.st-box table{width:100%;border-collapse:collapse;font-size:.8rem;table-layout:fixed}.st-box td,.st-box th{padding:3px 4px;border-top:1px solid rgba(127,127,127,.18)}
+.st-box table{width:100%;border-collapse:collapse;font-size:.8rem}.st-box td,.st-box th{padding:3px 4px;border-top:1px solid rgba(127,127,127,.18)}
 .st-box td:first-child{overflow-wrap:anywhere}.st-box th{font-weight:600;font-size:.72rem;opacity:.85;text-align:right;border-top:0;background:none;color:inherit;text-transform:none;letter-spacing:normal;font-family:inherit}.st-box th:first-child{text-align:left}
-.st-box td.n,.st-box th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;width:4.2em}.st-box .z{width:6.4em}
+.st-box td.n,.st-box th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;width:1%}   /* Zahlenspalten so breit wie ihr Inhalt, der Name bricht um */
 .st-box tr.st-r{cursor:pointer}.st-box tr.st-r:hover td,.st-box tr.st-r:focus-visible td{background:rgba(127,127,127,.12)}.st-box tr.st-r.st-on td{background:rgba(201,162,39,.2)}
 .st-vk{border:1.5px solid var(--gold,#c9a227);border-radius:10px;padding:10px 12px;margin:0 0 14px}.st-vk h3{margin:0 0 6px;font-size:.95rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .st-vk .st-grid{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px}
@@ -20807,7 +20807,7 @@ function _stVkHtml(m,w){
   if(m==="seite"){
     const [n,ms]=(sum.seite||{})[w]||[0,0];
     kopf=`${n.toLocaleString("de")} Aufrufe, Ø ${n?_stDauer(ms/n):"–"} je Aufruf`;
-    for(const f of _ST_SFELD) boxen.push(_stListe(f,_ST_TITEL[f]+" der Leser",teil("x.seite."+f,true),"Aufrufe",true,10,leer));
+    for(const f of _ST_SFELD) boxen.push(_stListe(f,_ST_TITEL[f],teil("x.seite."+f,true),"Aufrufe",true,10,leer));
   }else{
     const n=((sum[m]||{})[w]||[0])[0], i=_ST_PAAR.indexOf(m);
     kopf=`${n.toLocaleString("de")} ${m==="einstieg"?"Sitzungen mit diesem Einstieg":"Sitzungen"}`;
