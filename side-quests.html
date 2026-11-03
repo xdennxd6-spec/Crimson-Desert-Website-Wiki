@@ -20815,8 +20815,10 @@ function _stZeichnen(d){
   const chart=_stTagChart(T);
   const stunden=Array.from({length:24},(_,h)=>g("stunde",String(h).padStart(2,"0"))[0]), smx=Math.max(1,...stunden);
   const uhr=`<svg class="st-chart" viewBox="0 0 960 150" preserveAspectRatio="none" role="img" aria-label="Sitzungen je Uhrzeit">${stunden.map((n,h)=>`<rect x="${h*40+5}" y="${130-n/smx*120}" width="30" height="${n/smx*120}" fill="currentColor" opacity=".75"><title>${h} Uhr: ${n}</title></rect><text x="${h*40+20}" y="146" font-size="12" text-anchor="middle" fill="currentColor">${h}</text>`).join("")}</svg>`;
-  const zr=d.zeitraum?`letzte ${d.zeitraum} Tage`:"gesamter Zeitraum";
   const fmt=n=>Number.isFinite(n)?n.toLocaleString("de"):"–";
+  // Bei "Alles" fehlen in der Tagessumme die Besuche aus der Netlify-Zeit (nur als Gesamtwert übernommen, ohne Tage)
+  const alt=!d.zeitraum&&Number.isFinite(z.total)?z.total-besuche:0;
+  const zr=d.zeitraum?`letzte ${d.zeitraum} Tage`:(T.length?`seit ${_stTagText(T[0].tag)}${T[0].tag.slice(0,4)}`:"alle Tage")+(alt>0?`; dazu ${fmt(alt)} ältere Besuche ohne Tageswert = ${fmt(z.total)} gesamt`:"");
   document.getElementById("st-body").innerHTML=`<h3 class="st-sub">Besucherzähler (wie in der Sidebar)</h3>
 <div class="st-kpis">${kpi(fmt(z.total),"Besuche gesamt (seit Start)")}${kpi(fmt(z.today),"Besuche heute")}${kpi(fmt(besuche),"Besuche im Zeitraum ("+zr+")")}${kpi(T.length?fmt(Math.round(besuche/T.length)):"–","Ø Besuche pro Tag im Zeitraum")}</div>
 <div class="st-grid"><div class="st-box" style="grid-column:1/-1"><h3>Besuche je Tag</h3>${chart}</div></div>
