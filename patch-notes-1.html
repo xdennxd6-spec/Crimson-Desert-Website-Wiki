@@ -21224,7 +21224,12 @@ function _stFlush(){
     if(_st.ms[k]>=1000) ms[k]=Math.round(_st.ms[k]);
   }
   _st.v={}; _st.ms={};
-  if(Object.keys(v).length||Object.keys(ms).length){ _stAktiv(); _stSend({t:"zeit",v,ms}); }
+  if(Object.keys(v).length||Object.keys(ms).length){
+    _stAktiv();
+    // k = Merkmale dieser Sitzung (Herkunft, Gerät, Sprache) für die Verknüpfungen Seite x Merkmal; das Land setzt der Server
+    let k=null; try{ k=JSON.parse(localStorage.getItem("cd_st_k")||"null"); }catch{}
+    _stSend(k?{t:"zeit",v,ms,k}:{t:"zeit",v,ms});
+  }
 }
 function _stAktiv(){ try{ localStorage.setItem("cd_st_ts",String(Date.now())); }catch{} }
 function _stSeite(id){
@@ -21265,8 +21270,9 @@ function _stInit(){
     _stSeite(seite);
     if(neuSitzung){
       const fein=matchMedia("(pointer:fine)").matches, breit=Math.min(screen.width,screen.height)>=768;
-      _stSend({t:"start",seite,quelle:_stQuelle(),geraet:fein?"desktop":(breit?"tablet":"mobil"),
-        sprache:(navigator.language||"").slice(0,2).toLowerCase()});
+      const k={quelle:_stQuelle(),geraet:fein?"desktop":(breit?"tablet":"mobil"),sprache:(navigator.language||"").slice(0,2).toLowerCase()};
+      try{ localStorage.setItem("cd_st_k",JSON.stringify(k)); }catch{}
+      _stSend({t:"start",seite,...k});
     }
   };
   if(document.readyState==="complete") setTimeout(start,800); else addEventListener("load",()=>setTimeout(start,800),{once:true});
@@ -21304,7 +21310,12 @@ async function openStatArchiv(){
 .st-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:14px}
 .st-box{min-width:0}
 .st-box{border:1px solid var(--iron-gall);border-radius:10px;padding:10px 12px}.st-box h3{margin:0 0 8px;font-size:.9rem}
-.st-box table{width:100%;border-collapse:collapse;font-size:.8rem}.st-box td{padding:3px 4px;border-top:1px solid rgba(127,127,127,.18)}.st-box td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.st-box table{width:100%;border-collapse:collapse;font-size:.8rem;table-layout:fixed}.st-box td,.st-box th{padding:3px 4px;border-top:1px solid rgba(127,127,127,.18)}
+.st-box td:first-child{overflow-wrap:anywhere}.st-box th{font-weight:600;font-size:.72rem;opacity:.85;text-align:right;border-top:0;background:none;color:inherit;text-transform:none;letter-spacing:normal;font-family:inherit}.st-box th:first-child{text-align:left}
+.st-box td.n,.st-box th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;width:4.2em}.st-box .z{width:6.4em}
+.st-box tr.st-r{cursor:pointer}.st-box tr.st-r:hover td,.st-box tr.st-r:focus-visible td{background:rgba(127,127,127,.12)}.st-box tr.st-r.st-on td{background:rgba(201,162,39,.2)}
+.st-vk{border:1.5px solid var(--gold,#c9a227);border-radius:10px;padding:10px 12px;margin:0 0 14px}.st-vk h3{margin:0 0 6px;font-size:.95rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.st-vk .st-grid{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:10px}
 .st-bar{height:6px;border-radius:3px;background:var(--iron-gall);opacity:.7}
 .st-chart{width:100%;height:150px;display:block}.st-note{font-size:.75rem;opacity:.7;margin-top:12px}
 .st-sub{margin:4px 0 8px;font-size:.8rem;opacity:.8}
@@ -21382,25 +21393,68 @@ function _stDetails(d,tag){
   const [sitz,sitzMs]=g("sitzung","alle");
   const aufrufe=Object.values(sum.seite||{}).reduce((s,a)=>s+a[0],0);
   const kpi=_stKpi, fmt=n=>n.toLocaleString("de");
-  const liste=(m,titel,name,mitZeit)=>{
-    const e=Object.entries(sum[m]||{}).sort((a,b)=>b[1][0]-a[1][0]||b[1][1]-a[1][1]).slice(0,25);
-    if(!e.length) return `<div class="st-box"><h3>${titel}</h3><p class="st-note">Noch keine Daten.</p></div>`;
-    const max=Math.max(...e.map(x=>x[1][0]))||1;
-    return `<div class="st-box"><h3>${titel}</h3><table>${e.map(([w,[n,ms]])=>`<tr><td>${_stEsc(name?name(w):w)}<div class="st-bar" style="width:${Math.max(2,n/max*100)}%"></div></td><td class="n">${n.toLocaleString("de")}</td>${mitZeit?`<td class="n" title="Gesamtzeit ${_stDauer(ms)}">Ø ${n?_stDauer(ms/n):"–"}</td>`:""}</tr>`).join("")}</table></div>`;
-  };
+  _stSum=sum;
+  const liste=(m,titel,_n,mitZeit)=>_stListe(m,titel,sum[m],mitZeit?"Aufrufe":"Sitzungen",mitZeit);
   const stunden=Array.from({length:24},(_,h)=>g("stunde",String(h).padStart(2,"0"))[0]), smx=Math.max(1,...stunden);
   const uhr=`<svg class="st-chart" viewBox="0 0 960 150" role="img" aria-label="Sitzungen je Uhrzeit">${stunden.map((n,h)=>`<rect x="${h*40+5}" y="${130-n/smx*110}" width="30" height="${n/smx*110}" fill="currentColor" opacity=".75"><title>${h} Uhr: ${n}</title></rect>${n?`<text x="${h*40+20}" y="${126-n/smx*110}" font-size="12" text-anchor="middle" fill="currentColor">${n}</text>`:""}<text x="${h*40+20}" y="146" font-size="12" text-anchor="middle" fill="currentColor">${h}</text>`).join("")}</svg>`;
   const titel=tag?`Details für ${_stEsc(_stTagText(tag,true))}`:"Details für den ganzen Zeitraum";
   const knopf=tag?` <button type="button" id="st-alle" style="margin-left:8px">Alle Tage zeigen</button>`:"";
   const vorArchiv=tag&&tag<"2026-11-03";
   return `<h3 class="st-sub" style="margin-top:16px">${titel}${knopf}</h3>
-<p class="st-note" style="margin:-4px 0 10px">${tag?"":"Balken oben anklicken = nur dieser Tag. "}Das Besuchs-Archiv erfasst Details erst seit 03.11.2026, ca. 15:10 Uhr.</p>
-${vorArchiv?`<p class="st-info">Für diesen Tag gibt es keine Details: das Archiv lief da noch nicht. Es gibt nur die Besuchszahl aus dem Zähler.</p>`:`<div class="st-kpis">${kpi(fmt(sitz),"Sitzungen mit Details")}${kpi(fmt(aufrufe),"Seitenaufrufe")}${kpi(sitz?_stDauer(sitzMs/sitz):"–","Ø aktive Zeit je Sitzung")}${kpi(sitz?(aufrufe/sitz).toFixed(1).replace(".",","):"–","Seiten je Sitzung")}</div>
+<p class="st-note" style="margin:-4px 0 10px">${tag?"":"Balken oben anklicken = nur dieser Tag. "}Jede Zeile (Seite, Herkunft, Land, Gerät, Sprache …) ist anklickbar und zeigt ihre Verknüpfungen. Das Besuchs-Archiv erfasst Details seit 03.11.2026, ca. 15:10 Uhr, Verknüpfungen seit 03.11.2026 abends.</p>
+${vorArchiv?`<p class="st-info">Für diesen Tag gibt es keine Details: das Archiv lief da noch nicht. Es gibt nur die Besuchszahl aus dem Zähler.</p>`:`<div id="st-vk"></div><div class="st-kpis">${kpi(fmt(sitz),"Sitzungen mit Details")}${kpi(fmt(aufrufe),"Seitenaufrufe")}${kpi(sitz?_stDauer(sitzMs/sitz):"–","Ø aktive Zeit je Sitzung")}${kpi(sitz?(aufrufe/sitz).toFixed(1).replace(".",","):"–","Seiten je Sitzung")}</div>
 <p class="st-note" style="margin:-6px 0 12px">Seitenaufrufe und Verweildauer kommen zeitversetzt an: wenn der Besucher den Tab wechselt oder schließt, spätestens jede Minute. Die letzte Minute laufender Besuche fehlt also noch.</p>
 <div class="st-grid">
 ${liste("seite","Seiten: Aufrufe und Ø Verweildauer",_stName,true)}${liste("einstieg","Einstiegsseiten",_stName)}${liste("quelle","Herkunft")}
 ${liste("land","Länder",w=>_ST_LAND?(_ST_LAND.of(w.toUpperCase())||w):w)}${liste("geraet","Geräte")}${liste("sprache","Browsersprache")}
 <div class="st-box" style="grid-column:1/-1"><h3>Sitzungsstart nach Uhrzeit (Berlin)</h3>${uhr}</div></div>`}`;
+}
+// ---- Verknüpfungen: Klick auf eine Zeile zeigt, wie sich dieser Wert auf die anderen Merkmale verteilt.
+// Grundlage sind die Paar-Summen des Servers (x.A.B = "a|b"): beim Sitzungsstart alle Paare aus _ST_PAAR (zählt Sitzungen),
+// bei den Seitenaufrufen Seite x Herkunft/Land/Gerät/Sprache (zählt Aufrufe und Verweildauer).
+let _stSum=null, _stVkSel=null;
+const _ST_PAAR=["einstieg","quelle","land","geraet","sprache"], _ST_SFELD=["quelle","land","geraet","sprache"];
+const _ST_TITEL={seite:"Seiten",einstieg:"Einstiegsseiten",quelle:"Herkunft",land:"Länder",geraet:"Geräte",sprache:"Browsersprache"};
+function _stNm(m,w){
+  if(m==="seite"||m==="einstieg") return _stName(w);
+  if(m==="land") return _ST_LAND?(_ST_LAND.of(w.toUpperCase())||w):w;
+  return w;
+}
+// kurze Dauer für enge Tabellenspalten: 42 s, 1:36 min, 1:05 h
+function _stKurz(ms){ const s=Math.round(ms/1000); if(s<60) return s+" s"; const m=Math.floor(s/60); if(m<60) return m+":"+String(s%60).padStart(2,"0")+" min"; return Math.floor(m/60)+":"+String(m%60).padStart(2,"0")+" h"; }
+function _stListe(m,titel,obj,spalte,mitZeit,max=25,leer="Noch keine Daten."){
+  const e=Object.entries(obj||{}).filter(x=>x[1][0]||x[1][1]).sort((a,b)=>b[1][0]-a[1][0]||b[1][1]-a[1][1]);
+  if(!e.length) return `<div class="st-box"><h3>${titel}</h3><p class="st-note">${leer}</p></div>`;
+  const ges=e.reduce((s,x)=>s+x[1][0],0), top=Math.max(...e.map(x=>x[1][0]))||1;
+  const sel=_stVkSel&&_stVkSel[0]===m?_stVkSel[1]:null;
+  const zeilen=e.slice(0,max).map(([w,[n,ms]])=>`<tr class="st-r${w===sel?" st-on":""}" tabindex="0" data-m="${m}" data-w="${_stEsc(w)}" title="Anklicken: Verknüpfungen zeigen"><td>${_stEsc(_stNm(m,w))}<div class="st-bar" style="width:${Math.max(2,n/top*100)}%"></div></td><td class="n">${n.toLocaleString("de")}</td>${mitZeit?`<td class="n z" title="Gesamtzeit ${_stDauer(ms)}">${n?_stKurz(ms/n):"–"}</td>`:""}</tr>`).join("");
+  const mehr=e.length>max?`<p class="st-note" style="margin-top:4px">… und ${e.length-max} weitere</p>`:"";
+  return `<div class="st-box"><h3>${titel}</h3><table><tr><th>${ges.toLocaleString("de")} gesamt</th><th class="n">${spalte}</th>${mitZeit?`<th class="n z">Ø Zeit</th>`:""}</tr>${zeilen}</table>${mehr}</div>`;
+}
+function _stVkHtml(m,w){
+  const sum=_stSum||{}, boxen=[];
+  // Paar-Merkmal auf eine Seite festlegen und die andere Seite aufsummieren
+  const teil=(merk,links)=>{ const o={}; for(const [k,[n,ms]] of Object.entries(sum[merk]||{})){ const p=k.split("|"); if((links?p[0]:p[1])!==w) continue; const a=(o[links?p[1]:p[0]]=o[links?p[1]:p[0]]||[0,0]); a[0]+=n; a[1]+=ms; } return o; };
+  const leer="Für diesen Wert noch keine Verknüpfung erfasst.";
+  let kopf;
+  if(m==="seite"){
+    const [n,ms]=(sum.seite||{})[w]||[0,0];
+    kopf=`${n.toLocaleString("de")} Aufrufe, Ø ${n?_stDauer(ms/n):"–"} je Aufruf`;
+    for(const f of _ST_SFELD) boxen.push(_stListe(f,_ST_TITEL[f]+" der Leser",teil("x.seite."+f,true),"Aufrufe",true,10,leer));
+  }else{
+    const n=((sum[m]||{})[w]||[0])[0], i=_ST_PAAR.indexOf(m);
+    kopf=`${n.toLocaleString("de")} ${m==="einstieg"?"Sitzungen mit diesem Einstieg":"Sitzungen"}`;
+    if(_ST_SFELD.includes(m)) boxen.push(_stListe("seite","Gelesene Seiten",teil("x.seite."+m,false),"Aufrufe",true,10,leer));
+    for(const o of _ST_PAAR){ if(o===m) continue; const j=_ST_PAAR.indexOf(o); boxen.push(_stListe(o,_ST_TITEL[o],teil(i<j?`x.${m}.${o}`:`x.${o}.${m}`,i<j),"Sitzungen",false,10,leer)); }
+  }
+  return `<div class="st-vk"><h3>🔗 ${_ST_TITEL[m]||m}: ${_stEsc(_stNm(m,w))} <span style="font-weight:400;font-size:.8rem;opacity:.8">${kopf}</span><button type="button" id="st-vk-zu" style="margin-left:auto">✕ Schließen</button></h3>
+<p class="st-note" style="margin:0 0 8px">Zeilen hier sind ebenfalls anklickbar. Verknüpfungen gibt es erst ab 03.11.2026 abends, ältere Sitzungen fehlen darin.</p><div class="st-grid">${boxen.join("")}</div></div>`;
+}
+function _stVkZeigen(scroll){
+  const ziel=document.getElementById("st-vk"); if(!ziel) return;
+  document.querySelectorAll("#st-det tr.st-r").forEach(r=>r.classList.toggle("st-on",!!_stVkSel&&r.dataset.m===_stVkSel[0]&&r.dataset.w===_stVkSel[1]));
+  ziel.innerHTML=_stVkSel?_stVkHtml(_stVkSel[0],_stVkSel[1]):"";
+  if(scroll&&_stVkSel) ziel.scrollIntoView({block:"nearest",behavior:"smooth"});
 }
 // Lückenlose Tagesliste (Tage ohne Besuch = 0) vom Zeitraumbeginn bzw. ersten Datentag bis heute
 function _stTageFuellen(d){
@@ -21443,7 +21497,7 @@ function _stTagWire(T,d){
   const alle=()=>{
     box.querySelectorAll(".st-sel").forEach(b=>b.classList.remove("st-sel"));
     info.innerHTML=`Kein Tag gewählt: unten stehen die Details für den ganzen Zeitraum. Ø ${Math.round(avg).toLocaleString("de")} Besuche pro Tag.`;
-    det.innerHTML=_stDetails(d,null);
+    det.innerHTML=_stDetails(d,null); _stVkZeigen();
   };
   const zeigen=i=>{
     const t=T[i]; if(!t) return;
@@ -21451,10 +21505,17 @@ function _stTagWire(T,d){
     const b=box.querySelector(`[data-i="${i}"]`); if(b) b.classList.add("st-sel");
     const v=i>0?T[i-1].besuche:null, diff=v===null?"":` · Vortag ${v.toLocaleString("de")} (${t.besuche-v>=0?"+":""}${(t.besuche-v).toLocaleString("de")})`;
     info.innerHTML=`<b>${_stEsc(_stTagText(t.tag,true))}${i===T.length-1?" (heute, läuft noch)":""}:</b> ${t.besuche.toLocaleString("de")} Besuche${diff} · Ø im Zeitraum ${Math.round(avg).toLocaleString("de")} · Details unten gelten jetzt nur für diesen Tag`;
-    det.innerHTML=_stDetails(d,t.tag);
+    det.innerHTML=_stDetails(d,t.tag); _stVkZeigen();
   };
   box.addEventListener("click",e=>{ const b=e.target.closest(".st-col"); if(b) zeigen(+b.dataset.i); });
-  det.addEventListener("click",e=>{ if(e.target.closest("#st-alle")) alle(); });
+  const zeile=r=>{ const neu=[r.dataset.m,r.dataset.w]; _stVkSel=_stVkSel&&_stVkSel[0]===neu[0]&&_stVkSel[1]===neu[1]?null:neu; _stVkZeigen(true); };
+  det.addEventListener("click",e=>{
+    if(e.target.closest("#st-alle")) return alle();
+    if(e.target.closest("#st-vk-zu")){ _stVkSel=null; return _stVkZeigen(); }
+    const r=e.target.closest("tr.st-r"); if(r) zeile(r);
+  });
+  det.addEventListener("keydown",e=>{ const r=e.target.closest&&e.target.closest("tr.st-r"); if(r&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); zeile(r); } });
+  _stVkSel=null;
   alle();
   box.scrollLeft=box.scrollWidth;   // bei vielen Tagen rechts (heute) beginnen
 }
