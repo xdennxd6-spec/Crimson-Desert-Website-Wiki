@@ -8291,6 +8291,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div class="vis-row"><span class="vis-lbl"><span class="vis-dot"></span>Online</span><span class="vis-val" id="sv-online">—</span></div>
     <div class="vis-row"><span class="vis-lbl">Heute</span><span class="vis-val" id="sv-today">—</span></div>
     <div class="vis-row"><span class="vis-lbl">Besucher</span><span class="vis-val" id="sv-total">—</span></div>
+    <button type="button" class="vis-row" onclick="openStatArchiv()" style="width:100%;margin-top:4px;background:none;border:1px solid currentColor;border-radius:6px;color:inherit;font:inherit;cursor:pointer;justify-content:center">📊 Archiv</button>
   </div>
   <div class="sb-ft">
     <div style="display:flex;gap:5px;margin-bottom:8px" id="theme-row" role="radiogroup" aria-label="Farbschema">
@@ -20138,12 +20139,12 @@ async function _vsAdminCheck(){
   const m=location.hash.match(/^#zaehler=([A-Za-z0-9]{1,64})$/);
   if(m){
     history.replaceState(null,"",location.pathname+location.search);
-    if(m[1]==="aus") lsSet(_VS_ADMIN_KEY,"0");
+    if(m[1]==="aus"){ lsSet(_VS_ADMIN_KEY,"0"); try{ localStorage.removeItem("cd_vs_code"); }catch{} }
     else{
       try{
         const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(m[1]));
         const hex=[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
-        if(hex===_VS_ADMIN_H) lsSet(_VS_ADMIN_KEY,"1");
+        if(hex===_VS_ADMIN_H){ lsSet(_VS_ADMIN_KEY,"1"); lsSet("cd_vs_code",m[1]); }   // Code fürs Besuchs-Archiv
       }catch{ /* ohne crypto.subtle (kein https) keine Freischaltung */ }
     }
   }
@@ -20213,6 +20214,180 @@ async function initVisitorCount(){
     startPing();
   });
   if(document.visibilityState!=="hidden") startPing();
+  _stInit();
+}
+
+// ===== BESUCHS-ARCHIV (seit 03.11.2026, POST /api/visits/ev) =====
+// Anonyme Tagessummen auf dem eigenen Server: Seitenaufrufe und aktive Verweildauer je Seite (nur sichtbarer Tab), beim
+// Sitzungsstart Einstiegsseite, Herkunft (nur Domain bzw. Suchmaschine), Gerätetyp und Sprache; das Land setzt der Server aus
+// CF-IPCountry. Keine Cookies, keine IP, keine Einzelbesuche. Der Browser des Admins zählt nicht mit (saubere Zahlen).
+// Auswertung: Knopf "Archiv" in der Admin-Leiste (#visitor-bar), Abruf mit dem Admin-Code im Header X-Admin-Code.
+const _st={sec:null,seit:0,v:{},ms:{},an:false};
+function _stSecJetzt(){const s=document.querySelector(".sec.active");return s?s.id.replace(/^sec-/,""):null;}
+function _stSend(d){
+  try{
+    const b=JSON.stringify(d);
+    if(b.length>900) return;   // nginx nimmt hier höchstens 1 KiB an
+    if(navigator.sendBeacon&&navigator.sendBeacon("/api/visits/ev",new Blob([b],{type:"text/plain"}))) return;
+    fetch("/api/visits/ev",{method:"POST",body:b,headers:{"Content-Type":"text/plain"},keepalive:true}).catch(()=>{});
+  }catch{ /* Statistik darf nie stören */ }
+}
+function _stTick(){
+  if(_st.sec&&_st.seit){ const d=Date.now()-_st.seit; if(d>0&&d<36e5) _st.ms[_st.sec]=(_st.ms[_st.sec]||0)+d; }
+  _st.seit=document.visibilityState!=="hidden"?Date.now():0;
+}
+function _stFlush(){
+  if(!_st.an) return;
+  _stTick();
+  const v={},ms={};
+  for(const k of [...new Set([...Object.keys(_st.v),...Object.keys(_st.ms)])].slice(0,12)){
+    if(_st.v[k]) v[k]=_st.v[k];
+    if(_st.ms[k]>=1000) ms[k]=Math.round(_st.ms[k]);
+  }
+  _st.v={}; _st.ms={};
+  if(Object.keys(v).length||Object.keys(ms).length) _stSend({t:"zeit",v,ms});
+}
+function _stSeite(id){
+  if(!_st.an||!id) return;
+  _stTick();
+  if(id!==_st.sec){ _st.sec=id; _st.v[id]=(_st.v[id]||0)+1; }
+  if(Object.keys(_st.v).length>=6) _stFlush();
+}
+function _stQuelle(){
+  try{
+    if(!document.referrer) return "direkt";
+    const h=new URL(document.referrer).hostname.toLowerCase().replace(/^www\./,"");
+    if(h===location.hostname.replace(/^www\./,"")) return null;
+    const m=h.match(/(?:^|\.)(google|bing|duckduckgo|yahoo|yandex|ecosia|baidu|reddit|youtube|twitch|discord|facebook|instagram|tiktok|steamcommunity|fextralife|chatgpt|perplexity)\./);
+    if(m) return m[1];
+    if(h==="t.co"||h.endsWith("x.com")||h.endsWith("twitter.com")) return "x";
+    return h.replace(/[^a-z0-9.-]/g,"").slice(0,40)||null;
+  }catch{ return null; }
+}
+function _stInit(){
+  if(_st.an) return;
+  try{ if(localStorage.getItem(_VS_ADMIN_KEY)==="1") return; }catch{}
+  _st.an=true;
+  // showSec umhüllen: jede Navigation (Klick, Suche, Hash, Zurück) läuft dort durch
+  const orig=window.showSec;
+  if(typeof orig==="function"&&!orig._st){
+    const neu=function(){ const r=orig.apply(this,arguments); _stSeite(_stSecJetzt()); return r; };
+    neu._st=true; window.showSec=neu;
+  }
+  const start=()=>{
+    const seite=_stSecJetzt();
+    _stSeite(seite);
+    if(!sessionStorage.getItem("cd_st")){
+      sessionStorage.setItem("cd_st","1");
+      const fein=matchMedia("(pointer:fine)").matches, breit=Math.min(screen.width,screen.height)>=768;
+      _stSend({t:"start",seite,quelle:_stQuelle(),geraet:fein?"desktop":(breit?"tablet":"mobil"),
+        sprache:(navigator.language||"").slice(0,2).toLowerCase()});
+    }
+  };
+  if(document.readyState==="complete") setTimeout(start,800); else addEventListener("load",()=>setTimeout(start,800),{once:true});
+  document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") _stFlush(); else _stTick(); });
+  addEventListener("pagehide",_stFlush);
+  setInterval(()=>{ if(document.visibilityState!=="hidden") _stFlush(); },5*60*1000);
+}
+
+// ---- Auswertung (nur Admin)
+const _ST_CODE_KEY="cd_vs_code";
+function _stEsc(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function _stDauer(ms){ const s=Math.round(ms/1000); if(s<60) return s+" s"; const m=Math.floor(s/60); if(m<60) return m+" min "+String(s%60).padStart(2,"0")+" s"; return Math.floor(m/60)+" h "+String(m%60).padStart(2,"0")+" min"; }
+function _stName(id){
+  if(id==="start") return "Übersicht";
+  const h=document.querySelector("#sec-"+CSS.escape(id)+" h1, #sec-"+CSS.escape(id)+" h2");
+  if(!h) return id;
+  // nur die eigenen Textknoten der Überschrift (ohne englischen Untertitel und Zierzeichen davor)
+  const t=([...h.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(" ").trim()||h.textContent.trim())
+    .replace(/^[^\p{L}\d]+/u,"").trim();
+  return t&&t.length<48?t:id;
+}
+const _ST_LAND=(()=>{ try{ return new Intl.DisplayNames(["de"],{type:"region"}); }catch{ return null; } })();
+async function openStatArchiv(){
+  let dlg=document.getElementById("st-dlg");
+  if(!dlg){
+    const css=document.createElement("style");
+    css.textContent=`#st-dlg{width:min(980px,96vw);max-height:92vh;margin:auto;overflow:auto;padding:0;border:1.5px solid var(--iron-gall);border-radius:14px;background:var(--vellum-hi,#1b1b20);color:inherit}
+#st-dlg::backdrop{background:rgba(0,0,0,.6)}
+#st-dlg .st-hd{position:sticky;top:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 16px;background:inherit;border-bottom:1px solid var(--iron-gall);z-index:1}
+#st-dlg .st-hd h2{margin:0 auto 0 0;font-size:1.1rem}
+#st-dlg button,#st-dlg select,#st-dlg input{font:inherit;font-size:.85rem;padding:5px 9px;border-radius:8px;border:1px solid var(--iron-gall);background:transparent;color:inherit;cursor:pointer}
+#st-body{padding:14px 16px 18px;overflow:auto}
+.st-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.st-kpi{border:1px solid var(--iron-gall);border-radius:10px;padding:10px}.st-kpi b{display:block;font-size:1.35rem}.st-kpi span{font-size:.75rem;opacity:.75}
+.st-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.st-box{border:1px solid var(--iron-gall);border-radius:10px;padding:10px 12px}.st-box h3{margin:0 0 8px;font-size:.9rem}
+.st-box table{width:100%;border-collapse:collapse;font-size:.8rem}.st-box td{padding:3px 4px;border-top:1px solid rgba(127,127,127,.18)}.st-box td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.st-bar{height:6px;border-radius:3px;background:var(--iron-gall);opacity:.7}
+.st-chart{width:100%;height:150px;display:block}.st-note{font-size:.75rem;opacity:.7;margin-top:12px}`;
+    document.head.appendChild(css);
+    dlg=document.createElement("dialog"); dlg.id="st-dlg";
+    dlg.innerHTML=`<div class="st-hd"><h2>📊 Besuchs-Archiv</h2>
+<select id="st-zr" aria-label="Zeitraum"><option value="7">7 Tage</option><option value="30" selected>30 Tage</option><option value="90">90 Tage</option><option value="365">1 Jahr</option><option value="0">Alles</option></select>
+<button type="button" id="st-csv">CSV</button><button type="button" id="st-zu" aria-label="Schließen">✕</button></div><div id="st-body"></div>`;
+    document.body.appendChild(dlg);
+    dlg.querySelector("#st-zu").onclick=()=>dlg.close();
+    dlg.querySelector("#st-zr").onchange=()=>_stLaden();
+    dlg.querySelector("#st-csv").onclick=_stCsv;
+  }
+  dlg.showModal();
+  _stLaden();
+}
+let _stDaten=null;
+async function _stLaden(){
+  const body=document.getElementById("st-body");
+  const code=localStorage.getItem(_ST_CODE_KEY);
+  if(!code){
+    body.innerHTML=`<p>Für die Auswertung einmal den Admin-Code eingeben (bleibt nur in diesem Browser):</p><input id="st-code" type="password" autocomplete="off" aria-label="Admin-Code"> <button type="button" id="st-ok">OK</button>`;
+    body.querySelector("#st-ok").onclick=()=>{ const c=body.querySelector("#st-code").value.trim(); if(/^[A-Za-z0-9]{1,64}$/.test(c)){ lsSet(_ST_CODE_KEY,c); _stLaden(); } };
+    return;
+  }
+  body.innerHTML="<p>Lade …</p>";
+  const tage=+document.getElementById("st-zr").value;
+  const qs=new URLSearchParams();
+  if(tage){ const d=new Date(Date.now()-(tage-1)*864e5); qs.set("von",new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin"}).format(d)); }
+  try{
+    const r=await fetch("/api/visits/archiv?"+qs,{headers:{"X-Admin-Code":code,Accept:"application/json"},cache:"no-store"});
+    if(r.status===403){ localStorage.removeItem(_ST_CODE_KEY); body.innerHTML="<p>Code falsch.</p>"; setTimeout(_stLaden,1200); return; }
+    const d=await r.json();
+    if(!d.ok) throw new Error(d.error||"Fehler");
+    _stDaten=d; _stZeichnen(d);
+  }catch(e){ body.innerHTML="<p>Archiv nicht erreichbar ("+_stEsc(e.message)+"). Lokal ohne Pi-Dienst ist das normal.</p>"; }
+}
+function _stZeichnen(d){
+  const sum={};   // merkmal -> wert -> [anzahl, ms]
+  for(const [,m,w,n,ms] of d.zeilen){ const a=((sum[m]=sum[m]||{})[w]=sum[m][w]||[0,0]); a[0]+=n; a[1]+=ms; }
+  const g=(m,w)=>(sum[m]&&sum[m][w])||[0,0];
+  const besuche=d.tage.reduce((s,t)=>s+t.besuche,0);
+  const [sitz,sitzMs]=g("sitzung","alle");
+  const aufrufe=Object.values(sum.seite||{}).reduce((s,a)=>s+a[0],0);
+  const kpi=(wert,txt)=>`<div class="st-kpi"><b>${wert}</b><span>${txt}</span></div>`;
+  const liste=(m,titel,name,mitZeit)=>{
+    const e=Object.entries(sum[m]||{}).sort((a,b)=>b[1][0]-a[1][0]||b[1][1]-a[1][1]).slice(0,25);
+    if(!e.length) return `<div class="st-box"><h3>${titel}</h3><p class="st-note">Noch keine Daten.</p></div>`;
+    const max=Math.max(...e.map(x=>x[1][0]))||1;
+    return `<div class="st-box"><h3>${titel}</h3><table>${e.map(([w,[n,ms]])=>`<tr><td>${_stEsc(name?name(w):w)}<div class="st-bar" style="width:${Math.max(2,n/max*100)}%"></div></td><td class="n">${n.toLocaleString("de")}</td>${mitZeit?`<td class="n" title="Gesamtzeit ${_stDauer(ms)}">Ø ${n?_stDauer(ms/n):"–"}</td>`:""}</tr>`).join("")}</table></div>`;
+  };
+  // Besuche je Tag als Balken
+  const T=d.tage, mx=Math.max(1,...T.map(t=>t.besuche)), bw=T.length?1000/T.length:0;
+  const chart=T.length?`<svg class="st-chart" viewBox="0 0 1000 150" preserveAspectRatio="none" role="img" aria-label="Besuche je Tag">${T.map((t,i)=>{const h=t.besuche/mx*130;return `<rect x="${i*bw+bw*.1}" y="${140-h}" width="${bw*.8}" height="${h}" fill="currentColor" opacity=".75"><title>${t.tag}: ${t.besuche}</title></rect>`;}).join("")}</svg><div class="st-note">${_stEsc(T[0].tag)} bis ${_stEsc(T[T.length-1].tag)}, Spitze ${mx.toLocaleString("de")}</div>`:"<p class='st-note'>Keine Tageswerte.</p>";
+  const stunden=Array.from({length:24},(_,h)=>g("stunde",String(h).padStart(2,"0"))[0]), smx=Math.max(1,...stunden);
+  const uhr=`<svg class="st-chart" viewBox="0 0 960 150" preserveAspectRatio="none" role="img" aria-label="Sitzungen je Uhrzeit">${stunden.map((n,h)=>`<rect x="${h*40+5}" y="${130-n/smx*120}" width="30" height="${n/smx*120}" fill="currentColor" opacity=".75"><title>${h} Uhr: ${n}</title></rect><text x="${h*40+20}" y="146" font-size="12" text-anchor="middle" fill="currentColor">${h}</text>`).join("")}</svg>`;
+  document.getElementById("st-body").innerHTML=`<div class="st-kpis">${kpi(besuche.toLocaleString("de"),"Besuche (Zähler)")}${kpi(sitz.toLocaleString("de"),"Sitzungen im Archiv")}${kpi(aufrufe.toLocaleString("de"),"Seitenaufrufe")}${kpi(sitz?_stDauer(sitzMs/sitz):"–","Ø aktive Zeit je Sitzung")}${kpi(sitz?(aufrufe/sitz).toFixed(1).replace(".",","):"–","Seiten je Sitzung")}</div>
+<div class="st-grid"><div class="st-box" style="grid-column:1/-1"><h3>Besuche je Tag</h3>${chart}</div>
+${liste("seite","Seiten: Aufrufe und Ø Verweildauer",_stName,true)}${liste("einstieg","Einstiegsseiten",_stName)}${liste("quelle","Herkunft")}
+${liste("land","Länder",w=>_ST_LAND?(_ST_LAND.of(w.toUpperCase())||w):w)}${liste("geraet","Geräte")}${liste("sprache","Browsersprache")}
+<div class="st-box" style="grid-column:1/-1"><h3>Sitzungsstart nach Uhrzeit (Berlin)</h3>${uhr}</div></div>
+<p class="st-note">Anonyme Tagessummen ohne Cookies und ohne IP-Adressen. Verweildauer = Zeit mit sichtbarem Tab. Das Archiv läuft seit 03.11.2026; die Tagesbesuche reichen weiter zurück (Besucherzähler). Dein eigener Browser wird nicht mitgezählt.</p>`;
+}
+function _stCsv(){
+  if(!_stDaten) return;
+  const z=[["tag","merkmal","wert","anzahl","summe_ms"],..._stDaten.tage.map(t=>[t.tag,"besuche","alle",t.besuche,0]),..._stDaten.zeilen];
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob(["﻿"+z.map(r=>r.map(x=>/[;"\n]/.test(String(x))?'"'+String(x).replace(/"/g,'""')+'"':x).join(";")).join("\n")],{type:"text/csv;charset=utf-8"}));
+  a.download="besuchs-archiv-"+(_stDaten.heute||"stand")+".csv";
+  a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
 }
 
 // ===== ACCESSORIES =====
