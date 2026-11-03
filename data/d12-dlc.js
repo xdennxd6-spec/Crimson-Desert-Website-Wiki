@@ -152,15 +152,16 @@ const DLC_PART_NOTES = [
   "Die Fair-Wind-Teile in Größe Medium sind Twitch-Drops; die Large-Fassungen von Galionsfigur und Heck verkaufen die Ausrüster."
 ];
 
-// E Inseln. Namen aus der Regionsliste der MapGenie-Karte (18 Inseln) und den Spieldaten (th.gl); eine zweite Quelle hebt
-// den Namen auf belegt. Winding Island bewusst NICHT als Insel: nur aus einem Questnamen bekannt. Slugs nicht aendern
+// E Inseln. Namen aus der Regionsliste der MapGenie-Karte und den Spieldaten (th.gl); eine zweite Quelle hebt
+// den Namen auf belegt. 17 Inseln = alle Inseln der DLC-Regionsdatei region.dlc_01.paloc. Red Hangs Island steht in der
+// Hauptspiel-Datei region.paloc und ist deshalb nur ein Hinweis in DLC_ISLAND_FACTS (Lücken-Audit 03.11.2026).
+// Winding Island bewusst NICHT als Insel: nur aus einem Questnamen bekannt. Slugs nicht aendern
 // (Abhakliste cd_r2_dlc_inseln haengt daran).
 const DLC_ISLANDS = [
   {name: "Auronui Island", where: "Südöstlich von Vellua", unlock: "Erste unerschlossene Insel der Reihe „A Wider World“; Erschließungs-Mission „Footsteps in Unfamiliar Lands“ am Ankerplatz", info: ["Relic-Händler Reyard (Archäologe, kehrt nach jeder Expedition hierher zurück).", "Höhle mit der Forgotten Treasure Map (Quest „Secret of the Winding Island“).", {v: "Ausgedehnte Korallenriffe.", c: "unb", q: "th.gl"}]},
   {name: "Samora Island", info: ["Relic-Händler Cartaine mit Beruf- und Haustier-Outfits.", "Fundort des Naval Officer's Hat; Wasserfallhöhlen.", "Piratenschiff „The Siren's Cry“ (Quest „Outlaws of the Ocean“).", {v: "Island Trading Post (Harris); die Gewässer ringsum sind voller Piraten. Ocean Ruins der Herausforderung „Ocean Ruins“.", c: "unb", q: "th.gl"}]},
   {name: "Satyros Island", where: {v: "Laut Mobalytics die südliche von zwei eng benachbarten Inseln im äußersten Südwesten, mit einem Dorf am Wasserfall.", c: "unb", q: "Mobalytics"}, info: ["Relic-Händler mit Abyss-Gear-Blaupausen und Haustierkleidung.", {v: "Inselboss Satyros, Häuptling der Satyrn (Quest „Isolated Island Chief“), mit dem Satyros Spear als Beute. Der Relic-Händler heißt Evander; dazu ein Island Trading Post (Killiian) und Ocean Ruins.", c: "unb", q: "th.gl"}]},
   {name: "Ocula Island", where: "Im südöstlichen Ozean", info: [{v: "Castaway's Shelter mit dem Handbuch für das Giant Golden Compass Sail; Fundort des Spiral Spear.", c: "unb", q: "Game8, Mobalytics (je ein Detail)"}]},
-  {name: "Red Hangs Island", where: ["Nahe der Küste von Delesyia", {v: "in der South Sea of Pywel", c: "unb", q: "Sportskeeda"}], info: ["Haigebiet, gut zum Zähmen eines Hais.", {v: "Die Haie halten sich bei den Hydrothermalquellen auf.", c: "unb", q: "Sportskeeda"}, {v: "Fundort des Wailing Sea Greathammer.", c: "unb", q: "Mobalytics"}]},
   {name: "Cloven Hoof Isle", where: {v: "Östlich von Delesyia, zwei Landmassen", c: "unb", q: "Mobalytics"}, info: [{v: "Treppen hinauf zu den Felsgipfeln, deren Herkunft niemand kennt.", c: "unb", q: "th.gl"}, {v: "Vergrabene Truhe mit dem Guardian's Horn.", c: "unb", q: "Mobalytics"}]},
   {name: "Navra Island", c: "unb", q: "Mobalytics gegen MapGenie", info: ["Die Karte von MapGenie schreibt „Navrah Island“.", "Ostküste: vergrabene Truhe mit dem Silverwave Longsword."]},
   {name: "Razanui Island", info: [{v: "Verlassene Insel des Inselbosses Reggis the Isleguard, eines menschenfressenden Riesen-Imps (Quest „Predator of the Abandoned Island“); Ocean Ruins.", c: "unb", q: "th.gl"}]},
@@ -177,7 +178,8 @@ const DLC_ISLANDS = [
 ];
 const DLC_ISLAND_FACTS = [
   ["Pywels Großer Ozean", ["Neue Meeresregion im Süden und Südosten (Great Ocean of Pywel) mit den Teilgebieten East Sea of Pywel und South Sea of Pywel.", "Offiziell gibt es dort „mehrere noch unerschlossene Inseln“ mit Erschließungs-Missionen; eine Zahl nennt Pearl Abyss nicht."]],
-  ["Anzahl der Inseln", {v: "Die Karte von MapGenie führt 18 Inselnamen, Game8 spricht von 17 neuen Inseln (nicht zu verwechseln mit den 17 neuen Wohnsitzen).", c: "unb", q: "MapGenie gegen Game8"}],
+  ["Anzahl der Inseln", "17 neue Inseln: so viele führt die DLC-Regionsdatei der Spieldaten, Game8 nennt ebenfalls 17 (nicht zu verwechseln mit den 17 neuen Wohnsitzen). Die Karte von MapGenie zählt zusätzlich Red Hangs Island mit, die laut Spieldaten zum Hauptspiel gehört."],
+  ["Red Hangs Island (Hauptspiel)", ["Keine DLC-Insel, liegt aber im Haigebiet nahe der Küste von Delesyia.", {v: "In der South Sea of Pywel; die Haie halten sich bei den Hydrothermalquellen auf, gut zum Zähmen eines Hais.", c: "unb", q: "Sportskeeda"}, {v: "Fundort des Wailing Sea Greathammer.", c: "unb", q: "Mobalytics"}]],
   ["Erschließung", "Insel befreien, dann Graumähnen per Entsendung hinschicken; die Insel erscheint danach im Kartenreiter „Einrichtung“."],
   ["Erschließung im Detail", {v: "3 Deckhands an Bord, Schiff im Kreis der Einrichtung, Auronui dauert 12 Std.; abschließen lässt sich die Mission nur auf der Insel oder dem Schiff, sonst bleibt sie bei 100 % hängen.", c: "unb", q: "Output Lag"}],
   ["Hotfixes", "„Footsteps in Unfamiliar Lands“ lässt sich seit dem Hotfix zu 2.04.00 vom Startort aus beginnen; seit 2.04.02 startet die Erschließungs-Benachrichtigung Missionen direkt aus dem Menü."],
@@ -435,7 +437,7 @@ const DLC_OPEN = [
   "Eine zweite Quelle für den Angriffswert des Lumen Longsword (th.gl: 64 bei +10).",
   "Kosten und Dauer der Entsendung „Small Shipbuilding“; welches Schiff „Large Shipbuilding“ ergibt und wie man Medium und Large Greymane Ship, Phantom Ship und die Schiffe des Ostens bekommt.",
   "Werte der Demenissian und Delesyian ships, Besatzungsplätze je Schiff, Kanonenwerte, Boni der Fair-Wind-Teile und der Blaupausen-Teile.",
-  "Lage und Inhalte der Inseln, die bisher nur als Kartenname bekannt sind (Drangar, Estra, Saeon, Spagnola); ob es 17 oder 18 Inseln sind; Lösungen der Schatzkarten.",
+  "Lage und Inhalte der Inseln, die bisher nur als Kartenname bekannt sind (Drangar, Estra, Saeon, Spagnola); Lösungen der Schatzkarten.",
   "Wo und zu welchem Preis man die neuen Handelswaren verkauft, Seerouten.",
   "Verfeinerungsstufen und Materialien des Tauchanzugs, Namen der Atem-Gerichte, Erhalt der A.T.A.G.-Meereserkundungsausrüstung (Namen bisher nur laut th.gl).",
   "Zähmmethode von Sea Turtle, Futter für den Sun Fish, Vertrauensschwellen außer beim Electric Ray, Werte der Unterwasser-Reittiere.",
