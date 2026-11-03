@@ -24059,7 +24059,7 @@ function _stInit(){
   if(document.readyState==="complete") setTimeout(start,800); else addEventListener("load",()=>setTimeout(start,800),{once:true});
   document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") _stFlush(); else _stTick(); });
   addEventListener("pagehide",_stFlush);
-  setInterval(()=>{ if(document.visibilityState!=="hidden") _stFlush(); },5*60*1000);
+  setInterval(()=>{ if(document.visibilityState!=="hidden") _stFlush(); },60*1000);   // jede Minute (Admin-Wunsch 03.11.)
 }
 
 // ---- Auswertung (nur Admin)
@@ -24183,7 +24183,7 @@ function _stDetails(d,tag){
   return `<h3 class="st-sub" style="margin-top:16px">${titel}${knopf}</h3>
 <p class="st-note" style="margin:-4px 0 10px">${tag?"":"Balken oben anklicken = nur dieser Tag. "}Das Besuchs-Archiv erfasst Details erst seit 03.11.2026, ca. 15:10 Uhr.</p>
 ${vorArchiv?`<p class="st-info">Für diesen Tag gibt es keine Details: das Archiv lief da noch nicht. Es gibt nur die Besuchszahl aus dem Zähler.</p>`:`<div class="st-kpis">${kpi(fmt(sitz),"Sitzungen mit Details")}${kpi(fmt(aufrufe),"Seitenaufrufe")}${kpi(sitz?_stDauer(sitzMs/sitz):"–","Ø aktive Zeit je Sitzung")}${kpi(sitz?(aufrufe/sitz).toFixed(1).replace(".",","):"–","Seiten je Sitzung")}</div>
-<p class="st-note" style="margin:-6px 0 12px">Seitenaufrufe und Verweildauer kommen zeitversetzt an: wenn der Besucher den Tab wechselt oder schließt, spätestens alle 5 Minuten. Laufende Besuche fehlen also noch.</p>
+<p class="st-note" style="margin:-6px 0 12px">Seitenaufrufe und Verweildauer kommen zeitversetzt an: wenn der Besucher den Tab wechselt oder schließt, spätestens jede Minute. Die letzte Minute laufender Besuche fehlt also noch.</p>
 <div class="st-grid">
 ${liste("seite","Seiten: Aufrufe und Ø Verweildauer",_stName,true)}${liste("einstieg","Einstiegsseiten",_stName)}${liste("quelle","Herkunft")}
 ${liste("land","Länder",w=>_ST_LAND?(_ST_LAND.of(w.toUpperCase())||w):w)}${liste("geraet","Geräte")}${liste("sprache","Browsersprache")}
