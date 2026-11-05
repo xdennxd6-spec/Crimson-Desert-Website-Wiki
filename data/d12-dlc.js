@@ -23,6 +23,10 @@
 //   DLC_HOMES: Wohnsitze {name, where, how, note, c, q}                -> Zeilen-ID dlc-wohnsitz-<slug>
 //   DLC_RELIC_SHOPS: Relic-Haendler {name, where, sells, unlock, c, q} -> Zeilen-ID dlc-relic-<slug>
 //   Leere Arrays = Tabelle wird nicht gezeigt.
+//
+// Ausbau 05.11.2026 (Paket d-dlc-welt): Schrittbeschreibungen und neue Reihen in DLC_QUESTS aus den Missionstexten der Spieldaten
+//   (quest.dlc_01), Piratenschiff-Steckbriefe aus item.dlc_01 ("Pirate Ship Alert"), Inselbeschreibungen aus knowledge.dlc_01;
+//   DLC_ISLANDS[i].de (deutscher Inselname laut Spieltext); neue Gruppe "Romanze" im Renderer (who beginnt mit "Romanze").
 
 const DLC_META = {
   name: "Charting the Unknown",
@@ -60,24 +64,24 @@ const DLC_SHIPS = [
   {name: "Small Hernandian Ship", price: "40.000 Camp Funds", vendor: "Hopkins, Schiffsverwalter in Vellua (Grace Estate)", obtain: "Kauf beim Schiffsverwalter", stats: {v: "5.000 / 14 / 1 / 1 / 1", c: "unb", q: "Power Up Gaming"}},
   {name: "Medium Hernandian Ship", price: "1.200.000 Camp Funds", vendor: "Hopkins, Schiffsverwalter in Vellua (Grace Estate)", obtain: "Kauf beim Schiffsverwalter", stats: {v: "7.500 / 22 / 2 / 1 / 1", c: "unb", q: "Power Up Gaming"}},
   {name: "Large Hernandian Ship", price: "6.000.000 Camp Funds", vendor: "Hopkins, Schiffsverwalter in Vellua (Grace Estate)", obtain: "Kauf beim Schiffsverwalter", stats: [{v: "10.000 / 36 / 2 / 2 / 1", c: "unb", q: "Power Up Gaming"}, {v: "laut GameRant in allen Werten und bei den Besatzungsplätzen das beste Schiff", c: "unb", q: "GameRant"}]},
-  {name: "Small Demenissian Ship", c: "unb", q: "th.gl", price: "40.000 Camp Funds", vendor: "Schiffsverwalter im Demeniss Port", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Medium Demenissian Ship", c: "unb", q: "th.gl", price: "1.200.000 Camp Funds", vendor: "Schiffsverwalter im Demeniss Port", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Large Demenissian Ship", c: "unb", q: "th.gl", price: "6.000.000 Camp Funds", vendor: "Schiffsverwalter im Demeniss Port", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Small Delesyian Ship", price: {v: "40.000 Camp Funds", c: "unb", q: "th.gl"}, vendor: "Schiffsverwalter in Stoneward Harbor (südlich von Dewhaven)", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}, c: "unb", q: "nur laut th.gl"},
-  {name: "Medium Delesyian Ship", c: "unb", q: "th.gl", price: "1.200.000 Camp Funds", vendor: "Schiffsverwalter in Delesyia", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Large Delesyian Ship", c: "unb", q: "th.gl", price: "6.000.000 Camp Funds", vendor: "Schiffsverwalter in Delesyia", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Small Demenissian Ship", c: "unb", q: "th.gl", price: "40.000 Camp Funds", vendor: "Cruise (deutsch „Cruze“), Schiffsverwalter im Demeniss Port", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Medium Demenissian Ship", c: "unb", q: "th.gl", price: "1.200.000 Camp Funds", vendor: "Cruise (deutsch „Cruze“), Schiffsverwalter im Demeniss Port", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Large Demenissian Ship", c: "unb", q: "th.gl", price: "6.000.000 Camp Funds", vendor: "Cruise (deutsch „Cruze“), Schiffsverwalter im Demeniss Port", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Small Delesyian Ship", price: {v: "40.000 Camp Funds", c: "unb", q: "th.gl"}, vendor: "Dwight, Schiffsverwalter in Stoneward Harbor (südlich von Dewhaven)", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}, c: "unb", q: "nur laut th.gl"},
+  {name: "Medium Delesyian Ship", c: "unb", q: "th.gl", price: "1.200.000 Camp Funds", vendor: "Barrett, Schiffsverwalter in Delesyia", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Large Delesyian Ship", c: "unb", q: "th.gl", price: "6.000.000 Camp Funds", vendor: "Barrett, Schiffsverwalter in Delesyia", obtain: "Kauf beim Schiffsverwalter", stats: {v: "nicht belegt", c: "nb"}},
   // 02.11.2026: sieben Schiffe nur aus den Spieldaten (Riding_*-Datensätze in characterinfo.dlc_01), ohne Händler; Erwerb nicht belegt.
-  {name: "Medium Greymane Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Large Greymane Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Phantom Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Assault Ship of the East", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Flagship of the East", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
-  {name: "The Drunken Catfish", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}},
-  {name: "Large Delesyian Naval Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: {v: "nicht belegt", c: "nb"}, stats: {v: "nicht belegt", c: "nb"}}
+  {name: "Medium Greymane Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: [{v: "Erwerb nicht belegt. Die Spieldaten kennen die Bau-Entsendungen „Shipbuilding“ und „Large Shipbuilding“, ohne ein Schiff zu nennen.", c: "nb"}, "Spieltext: Haupttransportschiff der Graumähnen mit viel Laderaum und schwerer Bewaffnung."], stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Large Greymane Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: [{v: "Erwerb nicht belegt. Die Spieldaten kennen die Bau-Entsendungen „Shipbuilding“ und „Large Shipbuilding“, ohne ein Schiff zu nennen.", c: "nb"}, "Spieltext: großes Haupttransportschiff der Graumähnen mit sehr viel Laderaum und schwerer Bewaffnung."], stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Phantom Ship", c: "unb", q: "Spieldaten, KeenGamer", price: {v: "kein Kaufpreis, nur Eigenbau: 750.000 Camp Funds", c: "unb", q: "KeenGamer"}, vendor: {v: "kein Händler, nur Eigenbau nach Bauplan", c: "unb", q: "KeenGamer"}, obtain: [{v: "Das gegnerische Phantom Ship in der Sea of Silence (südöstlich von Delesyia) versenken und die Schatzkarte aus den Trümmern aufnehmen; auf Iliya Island mit der Schaufel die Truhe mit dem Phantom Ship Blueprint ausgraben und den Bauplan lesen. Dann erscheint die Entsendung „Construct Phantom Ship“ in Stoneward Harbor: 10 Gefährten, 4 Tage 4 Std., 750.000 Camp Funds, 45.000 Camp Stone, 45.000 Camp Wood, 90.000 Camp Provisions, Natural Pearl x5, Giant Jellyfish Skin x10, Obsidian x30.", c: "unb", q: "KeenGamer"}, "Die Spieldaten kennen den Bauplan als Item „Phantom Ship Blueprint“ und die Entsendung „Construct Phantom Ship“. Spieltext: legendäres Segelschiff, um das sich Seemannsgarn von Toten rankt."], stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Assault Ship of the East", c: "unb", q: "Spieldaten, KeenGamer", price: {v: "kein Kaufpreis, nur Eigenbau: 750.000 Camp Funds", c: "unb", q: "KeenGamer"}, vendor: {v: "kein Händler, nur Eigenbau nach Bauplan", c: "unb", q: "KeenGamer"}, obtain: [{v: "Auf Samora Island im Tempel die Bücher „Legendary Ship Hunt“ und „Ship of the East“ lesen, dann vier Teile des Mysterious Ship Blueprint sammeln: zwei am Schiffswrack beim Great Rocky Reef (Strudel nahe der Sea of Silence, tauchen), eines in der Bravgork-Werft (Regent's Rise, im unfertigen Piratenschiff hinter der Treppe) und eines im Strandlager im Südosten von Estra Island (auf einem Tisch im Zelt). Teile im Inventar mit „Restore“ zusammensetzen und lesen; die Entsendung „Constructing the Mysterious Ship“ läuft in Stoneward Harbor: 10 Gefährten, 4 Tage 4 Std., 750.000 Camp Funds, 45.000 Camp Stone, 45.000 Camp Wood, 90.000 Camp Provisions, Natural Pearl x5, Giant Hydrothermal Salamander Hide x10, Ambergris x10. Im Inventar heißt das Schiff bis zur Fertigstellung „Mysterious Ship“.", c: "unb", q: "KeenGamer"}, "Die Spieldaten kennen die vier Bauplanteile (Mysterious Ship Blueprint Part 1 bis 4) und die Entsendung. Spieltext: legendäres Segelschiff mit eisenbewehrtem Schildkrötenpanzer, das als Einzelkämpfer eine Flotte der Toten versenkte."], stats: {v: "12.000 / nicht genannt / 5 / 4 / 4; Seitenkanonen Dragon Naval Cannon, Bugkanone Turtle Head Prow Cannon", c: "unb", q: "KeenGamer"}},
+  {name: "Flagship of the East", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: [{v: "Die Spieldaten kennen den „Unfinished Ship Blueprint“ in zwei Teilen (Part 1 und 2), die Missionsziele „Restore the Unfinished Ship Blueprints“ und „Craft the Unfinished Ship“ und die Entsendung „Unfinished Ship Construction“. Fundorte der Teile, Ort und Kosten der Entsendung sind nicht belegt.", c: "nb"}, "Spieltext: Jians unerfüllter Traum von einem Flaggschiff für Pailune, ausgewogen und ohne Schwäche."], stats: {v: "nicht belegt", c: "nb"}},
+  {name: "The Drunken Catfish", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: [{v: "Die Spieldaten kennen den Bauplan „The Drunken Catfish Blueprint“ und die Entsendung „Construct The Drunken Catfish“. Wie man den Bauplan bekommt und was die Entsendung kostet, ist nicht belegt; ob ihn der Kampf gegen das Piratenschiff (Quest „Pirate Ship: The Drunken Catfish“) liefert, ebenfalls nicht.", c: "nb"}, "Spieltext: das Schiff von Sir Catfish (Crogg), allein aus Rache entworfen; der Bauplan ist grob über die Schemata eines Kriegsschiffs aus Demeniss gezeichnet."], stats: {v: "nicht belegt", c: "nb"}},
+  {name: "Large Delesyian Naval Ship", c: "unb", q: "Spieldaten", price: {v: "nicht belegt", c: "nb"}, vendor: {v: "nicht belegt", c: "nb"}, obtain: [{v: "Erwerb nicht belegt.", c: "nb"}, "Spieltext: großes Segelschiff der Marine der Republik Delesyia, ein Kampfschiff mit mehreren Kanonen, das Wasserwege und Handelsschiffe schützt."], stats: {v: "nicht belegt", c: "nb"}}
 ];
 const DLC_SHIP_NOTES = [
   "Kaufen lassen sich Schiffe erst nach dem eigenen Small Greymane Ship. Jeder Hafen verkauft die Schiffe seiner Region: Hernandian ships in Vellua, Demenissian ships im Demeniss Port, Delesyian ships in Delesyia und das kleine in Stoneward Harbor.",
-  {v: "Die letzten sieben Schiffskarten (Medium und Large Greymane Ship, Phantom Ship, Assault Ship of the East, Flagship of the East, The Drunken Catfish und das Large Delesyian Naval Ship der Marine) stehen nur in den Spieldaten, ohne Händler. Wie man sie bekommt, ist nicht belegt.", c: "unb", q: "th.gl, Spieldaten"},
+  {v: "Die letzten sieben Schiffskarten (Medium und Large Greymane Ship, Phantom Ship, Assault Ship of the East, Flagship of the East, The Drunken Catfish und das Large Delesyian Naval Ship der Marine) stehen nur in den Spieldaten, ohne Händler. Vier davon sind laut Spieltext „legendäre“ Schiffe, die man nach Bauplan selbst baut (Phantom Ship, Assault Ship of the East, Flagship of the East, The Drunken Catfish). Für Phantom Ship und Assault Ship of the East liegt je ein Beschaffungsweg einer Quelle vor, für die übrigen fünf ist der Erwerb nicht belegt.", c: "unb", q: "KeenGamer, th.gl, Spieldaten"},
   "Offizielle deutsche Namen laut den Patch-Notizen 2.04.06: Phantom Ship heißt dort „Geisterschiff“, Assault Ship of the East „Sturmschiff des Ostens“ und The Drunken Catfish „trunkener Wels“. Behoben ist seitdem, dass die Drachenpiraten (Kite Pirates) ins Innere des Sturmschiffs des Ostens gelangen konnten, und dass beim Besiegen von Geisterschiff und trunkenem Wels die Belohnungsgüter nun garantiert vergeben werden (die englische Notice formuliert das Gegenteil, maßgeblich ist die deutsche Fassung).",
   {v: "Werte der Demenissian und Delesyian ships und Besatzungsplätze je Schiff", c: "nb"}
 ];
@@ -86,8 +90,8 @@ const DLC_SHIP_FACTS = [
   ["Was sind Schiffe?", "Ein neues Transportmittel. Ein Segelschiff baut man per Schiffsbau-Entsendung selbst oder kauft es bei Schiffsverwaltern; Schiffsausrüstung gibt es bei den Schiffsverwaltern in Demeniss und Delesyia."],
   ["Währung", "Schiffe kosten Camp Funds, nicht Silber oder Kupfer."],
   ["Vellua", "Hopkins im Grace Estate verkauft und repariert Schiffe und holt verlorene Schiffe zurück."],
-  ["Demeniss und Delesyia", ["Schiffsverwalter im Port of Demeniss und im Port of Delesyia, daneben je ein Händler für Schiffsausrüstung (Ship Outfitter); im Demeniss Port ist das Juan.", {v: "Der Ausrüster im Port Delesyia heißt Joaquin.", c: "unb", q: "Game8"}]],
-  ["Stoneward Harbor", "Südlich von Dewhaven (Delesyia): ein weiterer Schiffsverwalter mit dem Small Delesyian Ship und dem Rowboat."],
+  ["Demeniss und Delesyia", "Schiffsverwalter im Port of Demeniss (Cruise, in der deutschen Fassung Cruze) und im Port of Delesyia (Barrett), daneben je ein Händler für Schiffsausrüstung (Ship Outfitter): Juan im Demeniss Port, Joaquin im Port Delesyia."],
+  ["Stoneward Harbor", "Südlich von Dewhaven (Delesyia): ein weiterer Schiffsverwalter (Dwight) mit dem Small Delesyian Ship und dem Rowboat."],
   ["Ab wann kaufen?", ["Erst nach dem eigenen Small Greymane Ship.", {v: "Die Händler verkaufen, sobald in „A Wider World“ die Entsendung zum Small Shipbuilding in Vellua erledigt ist (th.gl); Game8 nennt dafür die Folgequest „Where the Wind Blows“.", c: "unb", q: "th.gl, Game8"}]],
   ["Seekampf", "Kanonen feuern nur mit Gunner an Bord; das Schiff hat eine eigene Lebensanzeige."],
   ["Seehandel", ["Mit dem Segelschiff lässt sich Seehandel mit neuen Handelswaren betreiben.", {v: "Auf Xamaca Island, Satyros Island und Samora Island verkauft je ein Island Trading Post verpackte Inselwaren gegen Camp Funds (Tabelle unten).", c: "unb", q: "th.gl"}, {v: "Wo und zu welchem Preis man die Waren verkauft", c: "nb"}]],
@@ -109,6 +113,8 @@ const DLC_SHIPBUILD = [
   ["Startort", ["Vellua (Game8; die Spieldaten nennen die Entsendung „small shipbuilding mission in Vellua“).", {v: "Output Lag nennt abweichend Pailune.", c: "unb", q: "Output Lag"}]],
   ["Kosten und Dauer", {v: "Vier Quellen nennen vier verschiedene Werte; deshalb stehen hier keine Zahlen.", c: "nb"}],
   ["Large Shipbuilding", {v: "2 Tage 10 Std.; 500.000 Camp Funds, 12.000 Camp Wood, 12.000 Camp Stone, 25.000 Camp Provisions; 20 Gefährten (1 mit Engineering); Shiny Ore x100, Malachite x50, Hydrothermal Mineral Deposit x45, Manganese x20. Welches Schiff dabei entsteht, nennt die Quelle nicht.", c: "unb", q: "Game8"}],
+  ["Shipbuilding", {v: "100.000 Camp Funds, 2.400 Camp Wood, 2.400 Camp Stone, 5.000 Camp Provisions, 7 Gefährten, Shiny Ore x100, Malachite x50; die Dauer nennt die Quelle nicht, ebenso wenig, welches Schiff entsteht.", c: "unb", q: "Game8"}],
+  ["Legendäre Schiffe", {v: "Phantom Ship und Assault Ship of the East entstehen nach Bauplan in Stoneward Harbor: je 10 Gefährten, 4 Tage 4 Std., 750.000 Camp Funds, 45.000 Camp Stone, 45.000 Camp Wood, 90.000 Camp Provisions, 5 Natural Pearl, dazu je eigene Zutaten (siehe Schiffskarten). Die Entsendungen für Flagship of the East und The Drunken Catfish kennen die Spieldaten, Kosten und Ort sind nicht belegt.", c: "unb", q: "KeenGamer"}],
   ["Eigenbau oder Kauf", {v: "Der Eigenbau kostet weniger Camp Funds, braucht aber mehr Material und Zeit.", c: "unb", q: "Output Lag"}],
   ["Ausrüstung ab Werft", {v: "Alle Kaufschiffe und die Greymane ships tragen ab Werft die Steel Naval Cannon und ein Segel ihrer Bauart (z. B. Small Hernandian Sail). Das Phantom Ship fährt mit Gloom Dead Naval Cannon, Gloom Dead Prow Cannon und Large Wraithdrift Sail, die beiden Schiffe des Ostens mit der Dragon Naval Cannon.", c: "unb", q: "th.gl"}]
 ];
@@ -159,23 +165,23 @@ const DLC_PART_NOTES = [
 // Winding Island bewusst NICHT als Insel: nur aus einem Questnamen bekannt. Slugs nicht aendern
 // (Abhakliste cd_r2_dlc_inseln haengt daran).
 const DLC_ISLANDS = [
-  {name: "Auronui Island", where: "Südöstlich von Vellua", unlock: "Erste unerschlossene Insel der Reihe „A Wider World“; Erschließungs-Mission „Footsteps in Unfamiliar Lands“ am Ankerplatz", info: ["Relic-Händler Reyard (Archäologe, kehrt nach jeder Expedition hierher zurück).", "Höhle mit der Forgotten Treasure Map (Quest „Secret of the Winding Island“).", {v: "Ausgedehnte Korallenriffe.", c: "unb", q: "th.gl"}]},
-  {name: "Samora Island", info: ["Relic-Händler Cartaine mit Beruf- und Haustier-Outfits.", "Fundort des Naval Officer's Hat; Wasserfallhöhlen.", "Piratenschiff „The Siren's Cry“ (Quest „Outlaws of the Ocean“).", {v: "Island Trading Post (Harris); die Gewässer ringsum sind voller Piraten. Ocean Ruins der Herausforderung „Ocean Ruins“.", c: "unb", q: "th.gl"}]},
-  {name: "Satyros Island", where: {v: "Laut Mobalytics die südliche von zwei eng benachbarten Inseln im äußersten Südwesten, mit einem Dorf am Wasserfall.", c: "unb", q: "Mobalytics"}, info: ["Relic-Händler mit Abyss-Gear-Blaupausen und Haustierkleidung.", {v: "Inselboss Satyros, Häuptling der Satyrn (Quest „Isolated Island Chief“), mit dem Satyros Spear als Beute. Der Relic-Händler heißt Evander; dazu ein Island Trading Post (Killiian) und Ocean Ruins.", c: "unb", q: "th.gl"}]},
-  {name: "Ocula Island", where: "Im südöstlichen Ozean", info: [{v: "Castaway's Shelter mit dem Handbuch für das Giant Golden Compass Sail; Fundort des Spiral Spear.", c: "unb", q: "Game8, Mobalytics (je ein Detail)"}]},
-  {name: "Cloven Hoof Isle", where: {v: "Östlich von Delesyia, zwei Landmassen", c: "unb", q: "Mobalytics"}, info: [{v: "Treppen hinauf zu den Felsgipfeln, deren Herkunft niemand kennt.", c: "unb", q: "th.gl"}, {v: "Vergrabene Truhe mit dem Guardian's Horn.", c: "unb", q: "Mobalytics"}]},
-  {name: "Navra Island", c: "unb", q: "Mobalytics gegen MapGenie", info: ["Die Karte von MapGenie schreibt „Navrah Island“.", "Ostküste: vergrabene Truhe mit dem Silverwave Longsword."]},
-  {name: "Razanui Island", info: [{v: "Verlassene Insel des Inselbosses Reggis the Isleguard, eines menschenfressenden Riesen-Imps (Quest „Predator of the Abandoned Island“); Ocean Ruins.", c: "unb", q: "th.gl"}]},
-  {name: "Bergel Island", info: [{v: "Cave of Sorrow mit dem Boss Rohan Cooper (gleichnamige Quest); Ocean Ruins.", c: "unb", q: "th.gl"}]},
-  {name: "Iliya Island", info: [{v: "Zwei Ocean Ruins (am felsigen Hügel und an der Klippe).", c: "unb", q: "th.gl"}]},
-  {name: "Phragma Island", info: [{v: "Ocean Ruins.", c: "unb", q: "th.gl"}]},
-  {name: "Carcano Island", info: [{v: "Ocean Ruins.", c: "unb", q: "th.gl"}]},
-  {name: "Nirakan Island", info: [{v: "Ocean Ruins.", c: "unb", q: "th.gl"}]},
-  {name: "Xamaca Island", info: [{v: "Abgelegene Insel weit vom Festland mit einem Island Trading Post (Ludic).", c: "unb", q: "th.gl"}]},
-  {name: "Drangar Island", c: "unb", q: "MapGenie", info: ["Bisher nur als Name auf der Karte belegt."]},
-  {name: "Estra Island", c: "unb", q: "MapGenie", info: ["Bisher nur als Name auf der Karte belegt."]},
-  {name: "Saeon Island", c: "unb", q: "MapGenie", info: ["Bisher nur als Name auf der Karte belegt."]},
-  {name: "Spagnola Island", c: "unb", q: "MapGenie", info: ["Bisher nur als Name auf der Karte belegt."]}
+  {name: "Auronui Island", de: "Insel Auronui", where: "Südöstlich von Vellua", unlock: "Erste unerschlossene Insel der Reihe „A Wider World“; Erschließungs-Mission „Footsteps in Unfamiliar Lands“ am Ankerplatz", info: ["Relic-Händler Reyard (Archäologe, kehrt nach jeder Expedition hierher zurück).", "Höhle mit der Forgotten Treasure Map (Quest „Secret of the Winding Island“).", {v: "Ausgedehnte Korallenriffe.", c: "unb", q: "th.gl"}, "Spieltext: zwei Felsinseln mit dichtem Grün, kleinem Sandstrand und Korallenriffen im klaren, flachen Wasser."]},
+  {name: "Samora Island", de: "Insel Samora", where: {v: "Östlich von Delesyia.", c: "unb", q: "KeenGamer"}, info: ["Relic-Händler Cartaine mit Beruf- und Haustier-Outfits.", "Fundort des Naval Officer's Hat; Wasserfallhöhlen.", "Von Piratenbanden besetzt (Mission „Seized by Pirates“); nach dem Sieg über Sir Catfish ist die Insel befreit (Mission „The Stolen Relic“, Teil von „Remote Islands“).", "Laut Steckbriefen kreuzen bei der Insel die Piratenschiffe „The Grim Wind“ (Flotte aus drei Schiffen) und „The Drunken Catfish“ (Quest „Outlaws of the Ocean“). Game8 verortet auch „The Siren's Cry“ hier, der Steckbrief nennt Saeon Island.", {v: "Island Trading Post (Harris); die Gewässer ringsum sind voller Piraten. Ocean Ruins der Herausforderung „Ocean Ruins“.", c: "unb", q: "th.gl"}, "Spieltext: Die Bewohner hüten seit Generationen das Siegel der riesigen Schlange."]},
+  {name: "Satyros Island", de: "Insel Satyros", where: {v: "Laut Mobalytics die südliche von zwei eng benachbarten Inseln im äußersten Südwesten, mit einem Dorf am Wasserfall.", c: "unb", q: "Mobalytics"}, info: ["Relic-Händler mit Abyss-Gear-Blaupausen und Haustierkleidung.", {v: "Inselboss Satyros, Häuptling der Satyrn (Quest „Isolated Island Chief“), mit dem Satyros Spear als Beute. Der Relic-Händler heißt Evander; dazu ein Island Trading Post (Killiian) und Ocean Ruins.", c: "unb", q: "th.gl"}, "Die Insel wird von den Satyros beherrscht (Mission „A tribe that hunts intruders“). Spieltext: Insel der Verehrer roher Stärke mit dichten Wäldern und Wasserfällen, aber tödlichen Gefahren im rauen Gelände; benannt nach dem Häuptling und stärksten Krieger Satyros."]},
+  {name: "Ocula Island", de: "Insel Ocula", where: ["Im südöstlichen Ozean", "Von Samora Island aus per Boot erreichbar: eine Herausforderung der Spieldaten verlangt die Fahrt in unter 10 Minuten."], info: [{v: "Castaway's Shelter mit dem Handbuch für das Giant Golden Compass Sail; Fundort des Spiral Spear.", c: "unb", q: "Game8, Mobalytics (je ein Detail)"}, "Laut Steckbrief kreuzt bei der Insel die Piratenflotte „The Devils' Plunder“ (vier Kriegsschiffe).", "Spieltext: Insel mit einem See zwischen schroffen Felskämmen und dichten Wäldern, schmalen weißen Sandstränden und der Stimmung eines verborgenen Rückzugsorts."]},
+  {name: "Cloven Hoof Isle", de: "Insel Spalthuf", where: {v: "Östlich von Delesyia, zwei Landmassen", c: "unb", q: "Mobalytics"}, info: [{v: "Treppen hinauf zu den Felsgipfeln, deren Herkunft niemand kennt.", c: "unb", q: "th.gl"}, {v: "Vergrabene Truhe mit dem Guardian's Horn.", c: "unb", q: "Mobalytics"}, "Spieltext: Die Insel hat die Form eines gespaltenen Hufs; die einzigen menschlichen Spuren sind Trümmer eines angespülten Wracks und eine Treppe zu den Felsgipfeln."]},
+  {name: "Navrah Island", de: "Insel Navrah", info: ["Schreibweise nach dem Spieltext und der Karte von MapGenie; Mobalytics schreibt „Navra“.", {v: "Ostküste: vergrabene Truhe mit dem Silverwave Longsword.", c: "unb", q: "Mobalytics"}, "Spieltext: Im Zentrum liegt ein gewaltiges Schiffswrack, ringsum unzählige weitere Wracks; Spuren menschlichen Lebens gibt es nicht, offenbar hat es niemand lebend hierher geschafft."]},
+  {name: "Razanui Island", de: "Insel Razanui", info: [{v: "Verlassene Insel des Inselbosses Reggis the Isleguard, eines menschenfressenden Riesen-Imps (Quest „Predator of the Abandoned Island“); Ocean Ruins.", c: "unb", q: "th.gl"}, "Eine Piratenbande hält die Insel besetzt (Mission „Pirate Siege Line“); im Gebiet liegt das Razanui Bone Nest. Spieltext: Insel mit Knochenbergen, einst Hort berüchtigter Piraten, heute hallt nur das Gebrüll ausgehungerter Monster."]},
+  {name: "Bergel Island", de: "Insel Bergel", where: {v: "Südlich von Delesyia; die Route nach Estra Island führt südöstlich an Bergel vorbei.", c: "unb", q: "KeenGamer"}, info: [{v: "Cave of Sorrow mit dem Boss Rohan Cooper (gleichnamige Quest); Ocean Ruins.", c: "unb", q: "th.gl"}, {v: "Obsidian-Vorkommen zum Abbauen (je 5 Obsidian).", c: "unb", q: "KeenGamer"}, "Spieltext: Schlangenstatuen und ein Altar unbekannter Herkunft zeugen von einer Wacht über ein schlummerndes Unheil; die Anlage wirkt mutwillig zerstört und liegt im dichten Nebel der Insel."]},
+  {name: "Iliya Island", de: "Insel Iliya", where: {v: "Südlich von Delesyia: von der South Sea weiter durch die Central Waters nach Süden.", c: "unb", q: "KeenGamer"}, info: [{v: "Zwei Ocean Ruins (am felsigen Hügel und an der Klippe).", c: "unb", q: "th.gl"}, {v: "Hier liegt die Truhe mit dem Phantom Ship Blueprint (Schatzkarte vom versenkten Phantomschiff).", c: "unb", q: "KeenGamer"}, "Spieltext: Insel mit den verwitterten Überresten einer einst gewaltigen Zivilisation."]},
+  {name: "Phragma Island", de: "Insel Phragma", info: [{v: "Ocean Ruins.", c: "unb", q: "th.gl"}, "Spieltext: Insel mit drei aufragenden Felsspitzen; bei ruhiger See kann man zwischen den Gipfeln wie über das Wasser gehen."]},
+  {name: "Carcano Island", de: "Insel Carcano", info: [{v: "Ocean Ruins.", c: "unb", q: "th.gl"}, "Spieltext: Riffe bilden einen gewaltigen Ring, dessen Form keine Menschenhand schaffen könnte."]},
+  {name: "Nirakan Island", de: "Insel Nirakan", info: [{v: "Ocean Ruins.", c: "unb", q: "th.gl"}, "Laut Steckbrief kreuzt bei der Insel die Piratenflotte „The Bloodied Stake“ (vier Schiffe). Spieltext: Insel in Form eines Haifischzahns, außer angespülten Wracks ohne Spuren von Zivilisation, mit unberührter Natur."]},
+  {name: "Xamaca Island", de: "Insel Xamaca", info: [{v: "Abgelegene Insel weit vom Festland mit einem Island Trading Post (Ludic).", c: "unb", q: "th.gl"}, "Spieltext: sanft geschwungene Küsten, die an ein Urlaubsparadies erinnern; die Wracks ringsum zeigen, wie tückisch die Gewässer sind."]},
+  {name: "Drangar Island", de: "Insel Drangar", info: ["Laut Steckbrief kreuzt südlich der Insel das Piratenschiff „The Sea Claw“ (Quest „Outlaws of the Ocean“). Spieltext: Felseninsel, aus deren Sandstrand ein gewaltiger Felsenberg einsam aufragt; ein treppenartiges Bauwerk steht dort, doch scheint lange niemand hier gewesen zu sein."]},
+  {name: "Estra Island", de: "Insel Estra", where: {v: "Weit im Süden: von Delesyia durch die South Sea, südöstlich an Bergel Island vorbei und weiter nach Süden; Strandlager im Südosten.", c: "unb", q: "KeenGamer"}, info: [{v: "Im Strandlager liegt auf einem Tisch im Zelt ein Teil des Mysterious Ship Blueprint (Weg zum Assault Ship of the East).", c: "unb", q: "KeenGamer"}, "Laut Steckbrief kreuzt westlich der Insel das Piratenschiff „The Sea's Vengeance“. Spieltext: weitläufige Felsplateaus gehen in eine geschwungene Küstenlinie über, grüne Felskämme prägen eine friedliche Landschaft."]},
+  {name: "Saeon Island", de: "Insel Saeon", info: ["Laut Steckbrief kreuzt bei der Insel das Piratenschiff „The Siren's Cry“ (Quest „Outlaws of the Ocean“). Spieltext: Insel mit einer riesigen Felsenhöhle; an der Küste stehen grabsteinförmige Felsen mit kreisrunden, auffallend präzisen Löchern, dazu Reste eines alten Schiffbruchs und zwei Skelette."]},
+  {name: "Spagnola Island", de: "Insel Spagnola", info: ["Laut Steckbriefen kreuzen bei der Insel die Piratenflotten „The Scarlet Widow“ (nahe) und „The Black Curved Blade“ (südlich). Spieltext: Insel aus Sand und Fels; mitten im Strand ragen gewaltige Felsen wie ein zerklüfteter Grat auf, der Kontrast aus hellem Sand und dunklem Gestein wirkt bizarr."]}
 ];
 const DLC_ISLAND_FACTS = [
   ["Pywels Großer Ozean", ["Neue Meeresregion im Süden und Südosten (Great Ocean of Pywel) mit den Teilgebieten East Sea of Pywel und South Sea of Pywel.", "Offiziell gibt es dort „mehrere noch unerschlossene Inseln“ mit Erschließungs-Missionen; eine Zahl nennt Pearl Abyss nicht."]],
@@ -203,7 +209,7 @@ const DLC_DIVE = [
   ["Atemgeräte", ["Explorer's Breathing Device als Blaupause bei Reyard (Auronui), das stärkere Propulsion Breathing Device bei Sulivan (Demeniss Port); Wirkung in der Tabelle „Weitere Ausrüstung“.", {v: "Die Blaupausen kosten 3 bzw. 30 Ancient Relics.", c: "unb", q: "th.gl"}]],
   ["Ancient Relics", "Neue Währung aus Wracks, Truhen, Ozean-Bossen und Inselbefreiungen; Anzeige wie Silber oben rechts. In den offiziellen Notes nicht erwähnt."],
   ["Shattered Ancient Relic", {v: "2 Stück ergeben an einer Schmiede 1 Ancient Relic.", c: "unb", q: "Game8"}],
-  ["Relic-Händler", ["Fünf Relic Exchanges: Reyard (Auronui), Sulivan (Demeniss Port), Rafi (Port Delesyia), Cartaine (Samora), dazu einer auf Satyros Island; Sortiment in der Tabelle unten.", {v: "Freigeschaltet nach „A Wider World“ und der Befreiung von Auronui, am Ankerplatz.", c: "unb", q: "Game8"}]],
+  ["Relic-Händler", ["Fünf Relic Exchanges: Reyard (Auronui), Sulivan (Demeniss Port), Rafi (Port Delesyia), Cartaine (Samora) und Evander (Satyros Island); Sortiment in der Tabelle unten.", "Das ist der „Relic Collector“ aus den Patch-Notes 2.04.00: Die Spieldaten führen alle fünf unter der Gruppe „Relic Collectors“ (deutsch „Reliktsammler“); sie tauschen auf Erkundung gefundene Relikte gegen Gegenstände.", {v: "Freigeschaltet nach „A Wider World“ und der Befreiung von Auronui, am Ankerplatz.", c: "unb", q: "Game8"}]],
   ["Unterwasser-Ortung", {v: "Beim Segeln: weiße Impulse, gelb bei Beute, blauer Kreis am Fundort.", c: "unb", q: "Game8"}],
   ["Unterwasserwelt", "Ruinen, Schatztruhen, Kreaturen und Wracks unter Wasser."],
   ["Luftblasen", "Air Pockets in Ruinen und Höhlen füllen den Atem auf."],
@@ -235,99 +241,156 @@ const DLC_MOUNT_FACTS = [
 // nennen Game8 und die Spieldaten-Datenbank th.gl (th.gl fuehrt nur Schritte mit Belohnung). Schritt ohne c = in beiden.
 const DLC_QUESTS = [
   {name: "Beyond the Margins", who: "Kliff", start: "Taverne in Pailune City", req: "Hauptquest „Ende der Reise“", subs: {v: "A Moment's Respite; Familiar Faces; Teachings to Light the Way; Where Rumors Gather; Witches of the East; Beyond the Sandstorm; The Buried Neighbors; The Lost Child; The Missing Calf; Village in Darkness; Distorted Light; Veil of Darkness; Path of the Mapmaker", c: "unb", q: "Game8"}, steps: [
-    {name: "A Moment's Respite", c: "unb", q: "Game8"},
-    {name: "Familiar Faces", d: {v: "Kampf gegen Matthias auf der Treppe von Pailune Castle.", c: "unb", q: "Game8"}, reward: "Greymane Apprentice Combat Armor"},
-    {name: "Teachings to Light the Way", d: {v: "Kampf gegen T'rukan in der Arena im Serpent Marsh.", c: "unb", q: "Game8"}, reward: "Ascended Incarnate (Abyss Gear)"},
-    {name: "Where Rumors Gather", c: "unb", q: "Game8"},
-    {name: "Witches of the East", reward: "Glowing Seed x100"},
-    {name: "Beyond the Sandstorm", c: "unb", q: "Game8"},
-    {name: "The Buried Neighbors", reward: {v: "Maddin Survey Records, Lukumiya Survey Records", c: "unb", q: "th.gl"}},
-    {name: "The Lost Child", reward: {v: "Faraj Survey Records", c: "unb", q: "th.gl"}},
-    {name: "The Missing Calf", reward: {v: "Hazran Survey Records", c: "unb", q: "th.gl"}},
-    {name: "Village in Darkness", reward: {v: "Yasmin Survey Records", c: "unb", q: "th.gl"}},
-    {name: "Distorted Light", reward: {v: "Remnants of Paradise Survey Records", c: "unb", q: "th.gl"}},
-    {name: "Veil of Darkness", d: {v: "Kampf gegen Kharzek im Silent Burial Ground westlich des Sandsturmgebiets.", c: "unb", q: "Game8"}, reward: ["Revelation's End (Abyss Gear), Abyss Artifact", {v: "dazu Silent Burial Ground Survey Records", c: "unb", q: "th.gl"}]},
-    {name: "Path of the Mapmaker", c: "unb", q: "Game8"}
+    {name: "A Moment's Respite", d: "Nach der Tragödie herrscht in Pailune wieder strahlender Frieden; der Weg führt dorthin.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Familiar Faces", d: ["In Pailune regt sich eine seltsame Energie; zuerst die Gefährten ansprechen.", {v: "Kampf gegen Matthias auf der Treppe von Pailune Castle.", c: "unb", q: "Game8"}], reward: "Greymane Apprentice Combat Armor"},
+    {name: "Teachings to Light the Way", d: ["T'rukan terrorisiert die Menschen erneut; dem Ruf des Abts folgen und zum Jijeong Temple gehen.", {v: "Kampf gegen T'rukan in der Arena im Serpent Marsh.", c: "unb", q: "Game8"}], reward: "Ascended Incarnate (Abyss Gear)"},
+    {name: "Where Rumors Gather", d: "Um die unbekannte Dunkelheit zu ergründen, geht es an den Ort, an dem sich die seltsamen Gerüchte sammeln.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Witches of the East", d: "Am Rand der Wüste den Spuren kostbarer Bande folgen, die schicksalhaft wieder zusammenfinden.", reward: "Glowing Seed x100"},
+    {name: "Beyond the Sandstorm", d: "Mit Hilfe der Hexen des Ostens ist das verborgene Land hinter der Sandsturmbarriere erreicht; im Licht der Marker Stones den Weg durch die Wüste finden, Probleme lösen und die Quelle der dunklen Macht aufspüren.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "The Buried Neighbors", d: "Bewohner, die in der Dunkelheit stöhnen, aufsuchen und anhören, was geschehen ist.", reward: {v: "Maddin Survey Records, Lukumiya Survey Records", c: "unb", q: "th.gl"}},
+    {name: "The Lost Child", d: "Am Wüstenrand ein leises Schluchzen im Sandsturm hören und ihm folgen.", reward: {v: "Faraj Survey Records", c: "unb", q: "th.gl"}},
+    {name: "The Missing Calf", d: "Ein fassungsloser Bewohner steht nach einem heftigen Sandsturm in der Wüste; seine Not anhören.", reward: {v: "Hazran Survey Records", c: "unb", q: "th.gl"}},
+    {name: "Village in Darkness", d: "Antumbra-Priester haben das Dorf Yasmin besetzt.", reward: {v: "Yasmin Survey Records", c: "unb", q: "th.gl"}},
+    {name: "Distorted Light", d: "Ein Marker Stone, der Reisende im Sandsturm führen soll, ist korrumpiert und strahlt in die falsche Richtung; den Stein läutern.", reward: {v: "Remnants of Paradise Survey Records", c: "unb", q: "th.gl"}},
+    {name: "Veil of Darkness", d: ["Verschobene Marker Stones weisen auf einen Ort, der nicht auf der Karte steht; mit Sebastians Hinweisen herausfinden, was Antumbra verbirgt.", {v: "Kampf gegen Kharzek im Silent Burial Ground westlich des Sandsturmgebiets.", c: "unb", q: "Game8"}], reward: ["Revelation's End (Abyss Gear), Abyss Artifact", {v: "dazu Silent Burial Ground Survey Records", c: "unb", q: "th.gl"}]},
+    {name: "Path of the Mapmaker", d: "Nach dem Sieg über Kharzek ist die Vermessung der letzten unerforschten Gebiete abgeschlossen; zu Sebastian zurück, um die Wüstenkarte zu vervollständigen.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"}
   ], rewards: ["Greymane Apprentice Combat Armor, Ascended Incarnate, Glowing Seed x100, Revelation's End, Abyss Artifact, dazu Survey Records der durchreisten Orte", {v: "Matthias als entsendbarer Gefährte.", c: "unb", q: "Game8"}]},
-  {name: "From the Ashes", who: "Damiane", start: {v: "Countess Azerian am Osttor von Demeniss", c: "unb", q: "Game8"}, req: "Hauptquest „Ende der Reise“", subs: {v: "Reclaimed and Remaining; Demeniss in Upheaval; Countess Azerian's Whereabouts; Judgement of Fire; Schemes; Wavering Sentiment; Chasing a Shadow; Secret Summons; Path of the Politician", c: "unb", q: "Game8 (schreibt „Upheaveal“)"}, steps: [
-    {name: "Reclaimed and Remaining", c: "unb", q: "Game8"},
-    {name: "Demeniss in Upheaval", c: "unb", q: "Game8 (schreibt „Upheaveal“)"},
-    {name: "Countess Azerian's Whereabouts", c: "unb", q: "Game8"},
-    {name: "Judgement of Fire", c: "unb", q: "Game8"},
-    {name: "Schemes", reward: {v: "Secret Orders, Assembly Sabotage Plan (Schriftstücke)", c: "unb", q: "th.gl"}},
-    {name: "Wavering Sentiment", c: "unb", q: "Game8"},
-    {name: "Chasing a Shadow", d: {v: "Kampf gegen Geago the Flamecrazed in Scorchrock Castle.", c: "unb", q: "Game8"}, reward: "Ashen Blitz (Abyss Gear), Abyss Artifact"},
-    {name: "Secret Summons", reward: ["Demenissian Council Set", {v: "einzeln: Robes, Cloak, Boots, Gloves, dazu das Schriftstück Edict of King Thorel", c: "unb", q: "th.gl"}]},
-    {name: "Path of the Politician", c: "unb", q: "Game8"}
+  {name: "From the Ashes", who: "Damiane", start: {v: "Countess Azerian am Osttor von Demeniss", c: "unb", q: "Game8"}, req: "Hauptquest „Ende der Reise“", subs: {v: "Reclaimed and Remaining; Demeniss in Upheaval; Countess Azerian's Whereabouts; Judgment of Fire; Schemes; Wavering Sentiment; Chasing a Shadow; Secret Summons; Path of the Politician", c: "unb", q: "Game8 (schreibt „Upheaveal“)"}, steps: [
+    {name: "Reclaimed and Remaining", d: "Durch die Straßen von Demeniss gehen, in denen die unterschiedlichsten Stimmen widerhallen.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Demeniss in Upheaval", d: "Countess Azerian um Rat bitten, wie es mit Demeniss besser weitergehen kann.", c: "unb", q: "Game8 (schreibt „Upheaveal“); Beschreibung aus den Spieldaten"},
+    {name: "Countess Azerian's Whereabouts", d: "Azerian hat das Anwesen verlassen und ist nicht zurückgekehrt; ihrer Spur folgen.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Judgment of Fire", d: "Im Vorratslager von Demeniss gibt es Ärger; zur Brandstelle gehen. Die Entführung von Azerian und die Explosion sind der Auftakt einer großen Verschwörung.", c: "unb", q: "Game8 schreibt „Judgement“; Beschreibung aus den Spieldaten"},
+    {name: "Schemes", d: "Den hinterlassenen Hinweisen zu Azerians Verbleib nachgehen.", reward: {v: "Secret Orders, Assembly Sabotage Plan (Schriftstücke)", c: "unb", q: "th.gl"}},
+    {name: "Wavering Sentiment", d: "Durch das vom Chaos gezeichnete Demeniss gehen und die Stimmen der Bürger anhören.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Chasing a Shadow", d: ["Die Fluchtroute der Entführer verfolgen, um Countess Azerians Aufenthaltsort zu finden.", {v: "Kampf gegen Geago the Flamecrazed in Scorchrock Castle.", c: "unb", q: "Game8"}], reward: "Ashen Blitz (Abyss Gear), Abyss Artifact"},
+    {name: "Secret Summons", d: "Falsche Gerüchte verbreiten sich weiter und die öffentliche Meinung kippt; zum Azerian-Anwesen zurückkehren und die Gedanken ordnen.", reward: ["Demenissian Council Set", {v: "einzeln: Robes, Cloak, Boots, Gloves, dazu das Schriftstück Edict of King Thorel", c: "unb", q: "th.gl"}]},
+    {name: "Path of the Politician", d: "Auf der Rednertribüne am Platz King Thorels letzten Willen der Stadt verkünden.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"}
   ], rewards: "Ashen Blitz, Abyss Artifact, Demenissian Council Set", note: {v: "Ob die offizielle Quest „Politiker“ (Voraussetzung der Burg der Flammenritter) „Path of the Politician“ ist, ist offen.", c: "nb"}},
   {name: "Forged Resolve", who: "Oongka", start: {v: "Werkstatt im Graumähnen-Camp, Wynstan", c: "unb", q: "Game8"}, req: "Hauptquest „Ende der Reise“", subs: {v: "A New Path; To Scholastone; Unfamiliar Workshop; Faltering Hands, Iron Will; Fractured Door; Fateful Encounter; The Scattered Pieces; Twisted Fate; Path of the Engineer; Unidentified Attack", c: "unb", q: "Game8"}, steps: [
-    {name: "A New Path", c: "unb", q: "Game8"},
-    {name: "To Scholastone", c: "unb", q: "Game8"},
-    {name: "Unfamiliar Workshop", c: "unb", q: "Game8"},
-    {name: "Faltering Hands, Iron Will", reward: {v: "Skyway Rocket Pack", c: "unb", q: "th.gl"}},
-    {name: "Fractured Door", c: "unb", q: "Game8"},
-    {name: "Fateful Encounter", reward: {v: "Enhanced Blaster Blueprint", c: "unb", q: "th.gl"}},
-    {name: "The Scattered Pieces", reward: "Enhanced Fatum Blaster"},
-    {name: "Twisted Fate", d: {v: "Kampf gegen Goyen am Thron von Pailune Castle, zwei Phasen.", c: "unb", q: "Game8"}, reward: ["Storm's Echo", {v: "Game8 schreibt „Storm Echo“.", c: "unb", q: "Game8 gegen th.gl"}]},
-    {name: "Path of the Engineer", c: "unb", q: "Game8"},
-    {name: "Unidentified Attack", d: {v: "Bei Yanns verlassenem Wagen nordöstlich der Region Crimson Desert: Kampf gegen die Scrap Metal Queen Stoneback Crab und danach Iron Tyrant Harkan.", c: "unb", q: "Game8"}, reward: "Radiant Flash, Abyss Artifact"}
+    {name: "A New Path", d: "Tiefe innere Unruhe: die eigene Lage überdenken und prüfen, was fehlt.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "To Scholastone", d: "Mit festem Entschluss nach Scholastone, wo neues Wissen wartet.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Unfamiliar Workshop", d: "Mit Grimricks Hilfe ist das Scholastone Institute erreicht; den Dekan aufsuchen, um das Studium zu beginnen.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Faltering Hands, Iron Will", d: "Der defekte Power Regulator ist dank Vargus' Hinweisen repariert; mit dem Grundwissen im Engineering beginnt die eigentliche Technikforschung.", reward: {v: "Skyway Rocket Pack", c: "unb", q: "th.gl"}},
+    {name: "Fractured Door", d: "Vargus ist nicht zu finden, als es um die Verbesserung der Hand Cannon geht; im Nebengebäude nachsehen.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Fateful Encounter", d: "Vargus' Transportgerät hat dich an einen fremden Ort gebracht; umsehen und einen Weg zurück finden.", reward: {v: "Enhanced Blaster Blueprint", c: "unb", q: "th.gl"}},
+    {name: "The Scattered Pieces", d: "In Marnis Anwesen Material suchen, mit dem sich die Leistung des Blasters maximieren lässt.", reward: "Enhanced Fatum Blaster"},
+    {name: "Twisted Fate", d: ["Hinter dem Riss liegen die gefallenen Gefährten; sich dem Unbekannten stellen, der in den Ruinen von Pailune erschienen ist.", {v: "Kampf gegen Goyen am Thron von Pailune Castle, zwei Phasen.", c: "unb", q: "Game8"}], reward: ["Storm's Echo", {v: "Game8 schreibt „Storm Echo“.", c: "unb", q: "Game8 gegen th.gl"}]},
+    {name: "Path of the Engineer", d: "Nach der Rückkehr durch unzählige Dimensionen nach Scholastone Vargus über die Testergebnisse des Geräts und die anderen Dimensionen berichten.", c: "unb", q: "Game8; Beschreibung aus den Spieldaten"},
+    {name: "Unidentified Attack", d: ["Mit dem neuen Wissen aus Scholastone zum Camp zurückkehren, die Gefährten treffen und die Neuigkeiten hören.", {v: "Bei Yanns verlassenem Wagen nordöstlich der Region Crimson Desert: Kampf gegen die Scrap Metal Queen Stoneback Crab und danach Iron Tyrant Harkan.", c: "unb", q: "Game8"}], reward: "Radiant Flash, Abyss Artifact"}
   ], rewards: "Enhanced Fatum Blaster, Storm's Echo, Radiant Flash, Abyss Artifact"},
   {name: "A Wider World", de: "Auf in eine größere Welt", who: "Graumähnen, Ozean", start: "nach „Heulender Hügel“ und Camp-Ausbau", subs: "A Call from Beyond the Horizon; Where the Wind Blows; A Beginning Beyond the Waves; Footsteps in Unfamiliar Lands; Secret of the Winding Island", steps: [
-    {name: "A Call from Beyond the Horizon", d: "Entsendung „Small Shipbuilding“ in Vellua, dafür ein Gefährte mit Engineering.", reward: "Small Greymane Ship"},
-    {name: "Where the Wind Blows", reward: "Harpoon Gun"},
-    {name: "A Beginning Beyond the Waves"},
-    {name: "Footsteps in Unfamiliar Lands", d: "Erschließungs-Mission auf Auronui Island; seit dem Hotfix zu 2.04.00 vom Startort aus beginnbar."},
-    {name: "Secret of the Winding Island", d: "Höhle auf Auronui Island.", reward: "Forgotten Treasure Map"},
-    {name: "Signpost of the Great Ocean", reward: "5 Ancient Relics", c: "unb", q: "th.gl; Stelle in der Reihe nicht belegt"}
+    {name: "A Call from Beyond the Horizon", d: ["Im beruhigten Camp haben sich die Gefährten zu einem Gespräch versammelt; hingehen und nachfragen.", "Entsendung „Small Shipbuilding“ in Vellua, dafür ein Gefährte mit Engineering."], reward: "Small Greymane Ship"},
+    {name: "Where the Wind Blows", d: "Das Schiff für die Reise ist bereit; im Hafenort auf Neuigkeiten achten und zum Auslaufen bereitmachen.", reward: "Harpoon Gun"},
+    {name: "A Beginning Beyond the Waves", d: "Mit dem Schiff in See stechen und die unbekannte Insel im Süden suchen, von der die Gefährten erzählt haben."},
+    {name: "Footsteps in Unfamiliar Lands", d: ["Auf der fremden Insel ist ein Fundament für die weitere Reise zu schaffen.", "Erschließungs-Mission auf Auronui Island; seit dem Hotfix zu 2.04.00 vom Startort aus beginnbar."]},
+    {name: "Secret of the Winding Island", d: ["Auf der Insel gibt es noch viel zu entdecken; den kurvigen Pfaden folgen und jeden Winkel untersuchen.", "Höhle auf Auronui Island."], reward: "Forgotten Treasure Map"},
+    {name: "Signpost of the Great Ocean", d: "Auf der Insel steht ein erster Stützpunkt; mit den Gefährten die kommenden Seefahrten planen.", reward: "5 Ancient Relics", c: "unb", q: "th.gl; Stelle in der Reihe nicht belegt"}
   ], rewards: "Small Greymane Ship, Harpoon Gun, Forgotten Treasure Map, Ancient Relics"},
   {name: "Remote Islands", who: "Fraktionsquest, Ozean", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
-    {name: "Inseldorf befreien", d: "Ein von Piraten überranntes Inseldorf befreien und die verängstigten Bewohner in Sicherheit bringen."}
+    {name: "The Seaborne Village", d: "Ein von Piraten besetztes Inseldorf erreichen, die Piraten besiegen und die verängstigten Bewohner in Sicherheit bringen. Der Abschlusstext nennt Samora Island als Piratenbasis und Sir Catfish als Gegner."}
   ], rewards: "Abyss Artifact, 5 Ancient Relics, Trial by Fire"},
   {name: "Mistbound Sea", who: "Fraktionsquest, Ozean", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
-    {name: "Die mechanische Seeschlange", d: "Eine uralte Waffe ist in der Tiefe erwacht: dem metallischen Brüllen über die Insel folgen und Leviakan besiegen."}
+    {name: "Catastrophe of Ancient Times", d: "Eine uralte Waffe ist in der Tiefe erwacht und lässt das Meer beben; dem metallischen Gebrüll über die Insel folgen und die mechanische Seeschlange (Leviakan) besiegen."}
   ], rewards: "Abyss Artifact, 20 Ancient Relics, Guardian's Gaze"},
   {name: "Isolated Island Chief", who: "Fraktionsquest, Satyros Island", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
-    {name: "Häuptling der Satyrn", d: "Auf der Insel, die jeden Fremden abweist, den Häuptling Satyros besiegen, den stärksten Krieger seines Stammes."}
+    {name: "The Tribe's Foremost", d: "Auf der Insel, die jeden Fremden abweist, den Häuptling Satyros besiegen, den stärksten Krieger des Stammes."}
   ], rewards: "Satyros Spear, 5 Ancient Relics, Abyss Artifact"},
   {name: "Predator of the Abandoned Island", who: "Fraktionsquest, Razanui Island", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
-    {name: "Der Menschenfresser", d: "Das menschenfressende Ungeheuer Reggis the Isleguard besiegen."}
+    {name: "Unending Hunger", d: "Das gewaltige, menschenfressende Ungeheuer, um das sich bisher nur Gerüchte rankten, hat sich gezeigt; das von unstillbarem Hunger getriebene Raubtier Reggis besiegen."}
   ], rewards: "Abyss Artifact, 5 Ancient Relics, Unfurled Feathers"},
   {name: "Cave of Sorrow", who: "Fraktionsquest, Bergel Island", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
-    {name: "Klagen in der Höhle", d: "Dem Klagen in der dunklen, feuchten Höhle folgen und Rohan Cooper besiegen."}
+    {name: "A Vengeful Spirit at Sea", d: "Aus einer dunklen, feuchten Höhle hallt ein klagender Schrei; das Wesen besiegen, das sich dort zeigt (Rohan Cooper)."}
   ], rewards: "Naval Officer's Armor, Mirage Cascade, 5 Ancient Relics, Abyss Artifact, Notiz von Rohan Cooper"},
   {name: "Vestiges of the Void", who: "Fraktionsquest, Region Crimson Desert", c: "unb", q: "th.gl (Questname)", subs: {v: "nicht belegt", c: "nb"}, steps: [
-    {name: "Der Ritter der Leere", d: "Tief in den Ruinen (Buried Corridor) den Knight of Void besiegen."}
+    {name: "The Golden Wraith", d: "Tief in den Ruinen sperrt ein Ritter in blendend goldener Rüstung den Weg; den von der Leere besessenen Knight of Void besiegen."}
   ], rewards: ["Longsword of Void, Abyss Artifact", {v: "Die Void-Rüstung liegt in einer Truhe im Boss-Bereich.", c: "unb", q: "Mobalytics, GameRant"}]},
-  {name: "Shield of Hernand", who: "Graumähnen", c: "unb", q: "Game8", subs: "Guardian of Peace; Cornerstone of Peace", rewards: "Burg Drachensturz (Schenkung durch Duke Celeste)"},
-  {name: "Renewed Vitality", who: "Graumähnen", c: "unb", q: "Game8", subs: "The Stilled Saw; The Saw Turns Again", rewards: "Pacht der Timberham Sawmill"},
-  {name: "Garden of Trials", de: "Garten der Prüfungen", who: "Graumähnen", subs: "At the Threshold of a New Ordeal", rewards: "Zugang zum Garten der Prüfungen"},
+  {name: "Shield of Hernand", who: "Graumähnen", c: "unb", q: "Game8", subs: "Guardian of Peace; Cornerstone of Peace", steps: [
+    {name: "Guardian of Peace", d: "Der Frieden in Hernand fühlt sich noch ungewohnt an, doch das Wissen, ihn bewahrt zu haben, wärmt das Herz; nach Hernand reisen und die Stimmung im Dorf aufnehmen."},
+    {name: "Cornerstone of Peace", d: "Drakesfall Castle soll Hernands Stützpunkt des Friedens werden; die Gebäude der Burg instand setzen, um den Banditen die Stirn zu bieten."}
+  ], rewards: "Burg Drachensturz (Schenkung durch Duke Celeste)", note: {v: "Die Reihenfolge der beiden Schritte stammt von Game8; der Text von „Guardian of Peace“ liest sich, als käme er nach dem Burgausbau.", c: "unb", q: "Game8, Spieldaten"}},
+  {name: "Renewed Vitality", who: "Graumähnen", c: "unb", q: "Game8", subs: "The Stilled Saw; The Saw Turns Again", steps: [
+    {name: "The Stilled Saw", d: "Das Timberham Sawmill steckt offenbar in Schwierigkeiten; an der Anschlagtafel Näheres erfahren."},
+    {name: "The Saw Turns Again", d: "Das angeschlagene Timberham Sawmill wieder auf Erfolgskurs bringen (Einrichtung verwalten)."}
+  ], rewards: "Pacht der Timberham Sawmill"},
+  {name: "Garden of Trials", de: "Garten der Prüfungen", who: "Graumähnen", subs: "At the Threshold of a New Ordeal", steps: [
+    {name: "The Gardener's Invitation", d: "Jemand hat per Brieftaube einen Brief geschickt; den Brief lesen. Die Einladung führt zum Garten der Prüfungen."},
+    {name: "At the Threshold of a New Ordeal", d: "Der Einladung folgen und zum Axiom Archive gehen."}
+  ], rewards: "Zugang zum Garten der Prüfungen"},
   {name: "A Memory Beyond Ashes", who: "Fraktion Charting the Unknown", c: "unb", q: "Game8", subs: {v: "nicht belegt", c: "nb"}, rewards: "Schaltet die Burgbau-Entsendung der Burg der Flammenritter frei"},
-  {name: "Outlaws of the Ocean", who: "Great Ocean, Piratenschiffe", c: "unb", q: "Game8, th.gl", subs: "Pirate Ship: The Siren's Cry; Pirate Ship: The Black Bloom; Pirate Ship: The Crimson Shield; Pirate Ship: The Vengeance; Pirate Ship: Faunus; Pirate Ship: The Grim Wind; Pirate Ship: The Scarlet Widow; Pirate Ship: The Bloodied Stake; Pirate Ship: The Devils' Plunder; Pirate Ship: The Black Curved Blade", steps: [
-    {name: "Pirate Ship: The Siren's Cry", d: "Bei Samora Island.", c: "unb", q: "Game8"},
-    {name: "Pirate Ship: The Black Bloom", reward: "Forgotten Treasure Map #1"},
+  {name: "Outlaws of the Ocean", who: "Great Ocean, Piratenschiffe", c: "unb", q: "Game8, th.gl", subs: "Pirate Ship: The Siren's Cry; Pirate Ship: The Black Bloom; Pirate Ship: The Crimson Shield; Pirate Ship: The Vengeance; Pirate Ship: Faunus; Pirate Ship: The Grim Wind; Pirate Ship: The Scarlet Widow; Pirate Ship: The Bloodied Stake; Pirate Ship: The Devils' Plunder; Pirate Ship: The Black Curved Blade; Pirate Ship: The Sea's Vengeance; Pirate Ship: The Death Blossom; Pirate Ship: The Sea Claw; Pirate Ship: The Drunken Catfish", steps: [
+    {name: "Pirate Ship: The Siren's Cry", d: "Laut Steckbrief in den Spieldaten bei Saeon Island gesichtet (Game8 nennt Samora Island): kleines bewaffnetes Schiff mit gestreiften Segeln und zwei gekreuzten Schwertern."},
+    {name: "Pirate Ship: The Black Bloom", d: "Steckbrief: im Südmeer von Vellua gesichtet, großes schwer bewaffnetes Schiff mit schwarzen Segeln und roten Blumen.", reward: "Forgotten Treasure Map #1"},
     {name: "Pirate Ship: The Crimson Shield", reward: "Forgotten Treasure Map #2"},
     {name: "Pirate Ship: The Vengeance", reward: "Forgotten Treasure Map #3"},
     {name: "Pirate Ship: Faunus", reward: "Forgotten Treasure Map #4"},
-    {name: "Pirate Ship: The Grim Wind", reward: "Forgotten Treasure Map #5"},
-    {name: "Pirate Ship: The Scarlet Widow", reward: "Forgotten Treasure Map #39"},
-    {name: "Pirate Ship: The Bloodied Stake", reward: "Forgotten Treasure Map #23"},
-    {name: "Pirate Ship: The Devils' Plunder", reward: "Forgotten Treasure Map #24"},
-    {name: "Pirate Ship: The Black Curved Blade", reward: "Forgotten Treasure Map #36"}
-  ], rewards: "Je Piratenschiff eine Forgotten Treasure Map"},
+    {name: "Pirate Ship: The Grim Wind", d: "Steckbrief: bei Samora Island gesichtet, Flotte aus drei schwer bewaffneten Schiffen mit gestreiften Segeln und Schwertwappen.", reward: "Forgotten Treasure Map #5"},
+    {name: "Pirate Ship: The Scarlet Widow", d: "Steckbrief: bei Spagnola Island gesichtet, Flotte aus drei schwer bewaffneten Schiffen mit roten Segeln und weißen Speeren.", reward: "Forgotten Treasure Map #39"},
+    {name: "Pirate Ship: The Bloodied Stake", d: "Steckbrief: bei Nirakan Island gesichtet, Flotte aus vier schwer bewaffneten Schiffen mit rot gestreiften Segeln und orangefarbener Klinge.", reward: "Forgotten Treasure Map #23"},
+    {name: "Pirate Ship: The Devils' Plunder", d: "Steckbrief: bei Ocula Island gesichtet, Flotte aus vier schwer bewaffneten Kriegsschiffen mit rot gestreiften Segeln und einem menschlichen Gesichtsprofil.", reward: "Forgotten Treasure Map #24"},
+    {name: "Pirate Ship: The Black Curved Blade", d: "Steckbrief: südlich von Spagnola Island gesichtet, Flotte aus vier großen schwer bewaffneten Schiffen mit schwarz gestreiften Segeln und dem Wappen eines Greifvogels.", reward: "Forgotten Treasure Map #36"},
+    {name: "Pirate Ship: The Sea's Vengeance", d: "Steckbrief: westlich von Estra Island gesichtet, mittelgroßes bewaffnetes Schiff mit roten Segeln und einem riesigen Oktopus. Belohnung nicht belegt."},
+    {name: "Pirate Ship: The Death Blossom", d: "Steckbrief: östlich von Red Hangs Island gesichtet, mittelgroßes bewaffnetes Schiff mit schwarzen Segeln und zwei Äxten. Belohnung nicht belegt."},
+    {name: "Pirate Ship: The Sea Claw", d: "Steckbrief: südlich von Drangar Island gesichtet, kleines bewaffnetes Schiff mit schwarzen Segeln und einem riesigen Tintenfisch. Belohnung nicht belegt."},
+    {name: "Pirate Ship: The Drunken Catfish", d: "Steckbrief: bei Samora Island gesichtet, schwer bewaffnetes Kriegsschiff mit prunkvollen Segeln und einem Anker. Es ist das Schiff von Sir Catfish; ein Bauplan „The Drunken Catfish Blueprint“ existiert, ob dieser Kampf ihn liefert, ist nicht belegt."}
+  ], rewards: "Je Piratenschiff eine Forgotten Treasure Map (belegt für die zuerst erfassten zehn Schiffe, bei den vier ergänzten nicht belegt)"},
   {name: "Tales of the Ocean Residents", who: "Great Ocean", c: "unb", q: "th.gl, Game8", subs: "Ronnie's Bar Snack; Food from the Heart; The Secret to Rich Flavors; The Ingredient of Inspiration; For a Better Tomorrow; The Heart That Couldn't Leave", steps: [
     {name: "Ronnie's Bar Snack", d: "Der Koch Ronnie braucht Jakobsmuscheln für neue Bar-Snacks (Game8 schreibt „Ronnie's Special Bar Snack“).", reward: "Medium Bag"},
-    {name: "Food from the Heart", reward: "Medium Bag, Forgotten Treasure Map #31"},
-    {name: "The Secret to Rich Flavors", reward: "Medium Bag"},
-    {name: "The Ingredient of Inspiration", reward: "Medium Bag"},
-    {name: "For a Better Tomorrow", reward: "Medium Bag"},
-    {name: "The Heart That Couldn't Leave", reward: "Medium Bag"}
-  ], rewards: "Medium Bags, Forgotten Treasure Map #31"}
+    {name: "Food from the Heart", d: "Ein Mann im Hafen von Vellua wirkt bedrückt; anhören, was er zu sagen hat.", reward: "Medium Bag, Forgotten Treasure Map #31"},
+    {name: "The Secret to Rich Flavors", d: "Ein Mann, der im Hafen von Delesyia kocht, wirkt in Gedanken versunken.", reward: "Medium Bag"},
+    {name: "The Ingredient of Inspiration", d: "Im Stoneward Harbor den bekümmert wirkenden Künstler aufsuchen.", reward: "Medium Bag"},
+    {name: "For a Better Tomorrow", d: "Im Hafen von Demeniss den bedrückten Mann ansprechen.", reward: "Medium Bag"},
+    {name: "The Heart That Couldn't Leave", d: "In Dewhaven Castle wirkt ein Mann tief besorgt; herausfinden, was ihn bedrückt.", reward: "Medium Bag"}
+  ], rewards: "Medium Bags, Forgotten Treasure Map #31"},
+  {name: "Besetzte Inseln und Küsten", who: "Great Ocean, Inselmissionen", subs: "Seized by Pirates; The Stolen Relic; Outlaw's Veil; Pirate Siege Line; A tribe that hunts intruders", steps: [
+    {name: "Seized by Pirates", d: "Überall auf Samora Island sind Piratenbanden aufgetaucht und haben die Gegend unter ihre Kontrolle gebracht; die besetzten Küstengebiete und wichtigen Stützpunkte zurückerobern."},
+    {name: "The Stolen Relic", d: "Sir Catfish ist besiegt und Samora Island befreit; den Häuptling der Insel ansprechen."},
+    {name: "Outlaw's Veil", d: "Eine Piratenbande hält die Outlaw's Rapids besetzt."},
+    {name: "Pirate Siege Line", d: "Eine Piratenbande hält Razanui Island besetzt."},
+    {name: "A tribe that hunts intruders", d: "Satyros Island wird von den Satyros beherrscht."}
+  ], rewards: {v: "nicht belegt", c: "nb"}, note: "Gruppierung dieses Wikis: Die Spieldaten führen diese Missionen als Inselaufträge, ohne Reihenfolge oder Zuordnung zu einer Fraktionsquest. „The Seaborne Village“ (Samora, Sir Catfish) steht unter „Remote Islands“."},
+  {name: "Weitere Missionen auf See", who: "Great Ocean, Einzelmissionen", subs: "The Windswept Harbor; The Stilled Sea; Sleepless Souls; Ancient Shrine", steps: [
+    {name: "The Windswept Harbor", d: "Die in Delesyia eingetroffenen Gefährten wirken bedrückt; nachfragen, welche Probleme beim Transport der Vorräte aufgetreten sind."},
+    {name: "The Stilled Sea", d: "Das wild tobende Meer hat sich beruhigt; den Inselbewohnern die Neuigkeit überbringen und nach Delesyia zu den Gefährten zurückkehren."},
+    {name: "Sleepless Souls", d: "Gerüchten zufolge geistert irgendwo auf dem Ozean ein Phantomschiff durch dichte Nebelschwaden."},
+    {name: "Ancient Shrine", d: "Zum Tempel in der Korallenregion gehen, von dem Milo erzählt hat, und nach der Reliquie suchen."}
+  ], rewards: {v: "nicht belegt", c: "nb"}, note: "Gruppierung dieses Wikis. Zu welcher Questreihe diese vier Missionen gehören und in welcher Reihenfolge sie kommen, nennen die Spieldaten nicht."},
+  {name: "Demeniss und die Flammenritter", who: "Damiane", subs: "A Flicker in the Dark; Vow Raised from Ash", steps: [
+    {name: "A Flicker in the Dark", d: "Während Damiane Demeniss beim Neuanfang hilft, spricht sich herum, dass jemand nach ihr sucht; zur Burg Demeniss gehen und die Lage klären."},
+    {name: "Vow Raised from Ash", d: "Das zurückgewonnene Lehen trägt noch die Narben, die Caliburn hinterlassen hat; die Burg der Flammenritter instand setzen und das Heim wieder aufbauen, das man als Erbe der Familie Spencer beschützen wird."}
+  ], rewards: {v: "nicht belegt", c: "nb"}, note: "Gruppierung dieses Wikis. Ob die Missionen zu „From the Ashes“ oder zu „A Memory Beyond Ashes“ gehören, ist nicht belegt."},
+  {name: "Romanze: Bari", who: "Romanze, Bari", subs: "The Heart Held Within; An Unpredictable Heart; Longing for the Ordinary; Kind Words", steps: [
+    {name: "The Heart Held Within", d: "Bari aufsuchen und im Gespräch herausfinden, welche Gedanken sich hinter ihren knappen Bemerkungen verbergen."},
+    {name: "An Unpredictable Heart", d: "Mit dem Geheimnis, das Bari nur dir anvertraut hat, einen Weg finden, dem jungen Mann zu helfen und ihren Kummer zu lindern."},
+    {name: "Longing for the Ordinary", d: "Baris Antwort war offenbar gar nicht so schlecht: ihr lang erwarteter Brief ist eingetroffen; den Brief lesen."},
+    {name: "Kind Words", d: "Die Zeit ist gekommen, Bari zu gestehen, was man lange im Herzen getragen hat."}
+  ], rewards: {v: "nicht belegt", c: "nb"}, note: "Die Reihenfolge der vier Missionen ist aus dem Inhalt der Texte erschlossen; die Spieldaten nennen sie nicht. Voraussetzungen (Vertrauen, Fortschritt) sind nicht belegt. Die Mission „Romanze“ erreicht man laut Game8 über „Interagieren“ und „Flirten“."},
+  {name: "Romanze: Elowen", who: "Romanze, Elowen", subs: "On Knowing; New Questions; An Evening Toast; Known Answers", steps: [
+    {name: "On Knowing", d: "Elowen aufsuchen und mit ihr über das sprechen, was sie gewöhnlich beschäftigt."},
+    {name: "New Questions", d: "Nach dem Gespräch über Weisheit ist ein Brief von Elowen eingetroffen; vielleicht bietet sich die Gelegenheit, ihr etwas Neues beizubringen. Den Brief lesen."},
+    {name: "An Evening Toast", d: "Ein besonderes Geschenk für Elowen vorbereiten, das ihre standhafte Vernunft aufweichen könnte."},
+    {name: "Known Answers", d: "Beide ahnten die Gefühle des anderen bereits; Elowen die wahren Gefühle offen sagen."}
+  ], rewards: {v: "nicht belegt", c: "nb"}, note: "Die Reihenfolge der vier Missionen ist aus dem Inhalt der Texte erschlossen; die Spieldaten nennen sie nicht. Voraussetzungen (Vertrauen, Fortschritt) sind nicht belegt. Die Mission „Romanze“ erreicht man laut Game8 über „Interagieren“ und „Flirten“."},
+  {name: "Romanze: Lyselia", who: "Romanze, Lyselia", subs: "The Cave's Calling; Life Ahead of Us; One Starry Night; A World Beyond", steps: [
+    {name: "The Cave's Calling", d: "Lyselia in der Höhle aufsuchen und sie vorsichtig ansprechen."},
+    {name: "Life Ahead of Us", d: "Lyselia hat ihren Mut zusammengenommen und ist in die Welt hinausgetreten; gemeinsam den Sternenhimmel betrachten."},
+    {name: "One Starry Night", d: "Hoffentlich bleibt Lyselia der gemeinsame Nachthimmel in guter Erinnerung; der Wunsch, sie näher kennenzulernen, wächst."},
+    {name: "A World Beyond", d: "Während die Gefühle für Lyselia wachsen, kommt ein Brief von ihr; den Brief lesen."}
+  ], rewards: {v: "nicht belegt", c: "nb"}, note: "Die Reihenfolge der vier Missionen ist aus dem Inhalt der Texte erschlossen; die Spieldaten nennen sie nicht. Voraussetzungen (Vertrauen, Fortschritt) sind nicht belegt. Die Mission „Romanze“ erreicht man laut Game8 über „Interagieren“ und „Flirten“."},
+  {name: "Romanze: Areciel", who: "Romanze, Areciel", subs: "Resilience in the Sandstorm; The Undrawn Blade; Power Yet Unleashed; Someone to Lean On", steps: [
+    {name: "Resilience in the Sandstorm", d: "Areciel aufsuchen und fragen, warum sie ohne Pause unablässig trainiert."},
+    {name: "The Undrawn Blade", d: "Beim Nachdenken, wie man Areciel einen Moment der Erholung näherbringen kann, trifft ein Brief von ihr ein; den Brief lesen."},
+    {name: "Power Yet Unleashed", d: "Areciel hätte die Kraft, einzugreifen, und muss doch zusehen; mit ihr dort sprechen, wo sie das Geschehen aus der Ferne beobachtet."},
+    {name: "Someone to Lean On", d: "Ein Zufluchtsort sein, an dem Areciel, die immer stark erscheinen musste, ihre Wachsamkeit ablegen kann; ihr die Gefühle gestehen."}
+  ], rewards: {v: "nicht belegt", c: "nb"}, note: "Die Reihenfolge der vier Missionen ist aus dem Inhalt der Texte erschlossen; die Spieldaten nennen sie nicht. Voraussetzungen (Vertrauen, Fortschritt) sind nicht belegt. Die Mission „Romanze“ erreicht man laut Game8 über „Interagieren“ und „Flirten“."}
 ];
 const DLC_QUEST_NOTES = [
   "Offiziell: je eine eigene Quest für Kliff, Oongka und Damiane nach „Ende der Reise“ im Abenteuertagebuch. Die Namen der drei Reihen nennen die Patch-Notes nicht; sie stammen aus den Guides und stehen so auch in den Spieldaten.",
   "Schritte ohne grauen Vermerk nennen Game8 und die Spieldaten-Datenbank th.gl übereinstimmend; th.gl führt nur Schritte mit Belohnung, die übrigen Schritte nennt bisher nur Game8.",
   {v: "Neue Herausforderungen im Abenteuertagebuch: Voyage („Beyond the Horizon“, 8 Ziele auf See), Swimming („Into the Deep“, 10 Ziele unter Wasser), Scenic View („Echoes of the Deep“, 20 Aussichtspunkte), Ocean Ruins („Ties of the Waves“, 9 Ruinen) und Management („The Fruits of Endeavor“, 6 Ziele für Einrichtungen). Voyage und Swimming bringen zusammen 18 neue Sealed Abyss Artifacts.", c: "unb", q: "th.gl"},
-  {v: "Eine Journal-Kategorie „Charting the Unknown“ mit 14 Quests nennt nur games.gg.", c: "unb", q: "games.gg"}
+  {v: "Eine Journal-Kategorie „Charting the Unknown“ mit 14 Quests nennt nur games.gg.", c: "unb", q: "games.gg"},
+  "Beschreibungen der Schritte (05.11.2026): in eigenen Worten nach den Missionstexten der Spieldaten (quest.dlc_01). Namen der Schritte stehen dort genau so; Reihenfolge und Zugehörigkeit zu einer Reihe nennen die Spieldaten nicht, sie stammen von Game8 und th.gl (grau mit Vermerk).",
+  "Neu: „Besetzte Inseln und Küsten“, „Weitere Missionen auf See“, „Demeniss und die Flammenritter“ und die vier Romanze-Reihen (Bari, Elowen, Lyselia, Areciel) fassen Missionen zusammen, die die Spieldaten ohne Zuordnung führen; die Gruppierung stammt von diesem Wiki.",
+  "Die vier Händler-Aufträge der Spieldaten (Island Trading Post, Relic Exchange, Ship Manager, Ship Outfitter) sind keine Quests, sondern die Beschreibungen der Händler Harris, Sulivan, Cruise und Joaquin; sie stehen bei Schiffen und Relic-Händlern."
 ];
 
 // I Bosse. w = Name im Boss-Bestand des Wikis, falls vorhanden.
@@ -392,10 +455,10 @@ const DLC_LIVING = [
   {g: "Verwaltung", t: "Herausforderung „Management“", d: {v: "„The Fruits of Endeavor“ mit 6 Zielen für Einrichtungen; die Belohnungen sind Einrichtungsgegenstände: Fisherman's Pride, Rowboat Bookshelf, Captain's Bed of Dignity, Captain's Chair of Dignity, Golden Bottled Ship und Fancy Gilded Ship's Wheel.", c: "unb", q: "th.gl"}},
   {g: "Verwaltung", t: "Miete und Ertrag", d: ["Hotfix 2.04.02 korrigierte abnormal steigende Erträge.", {v: "Zahlen zu Miete und Ertrag", c: "nb"}]},
   {g: "Soziales", t: "Romanze und Ehe", d: "Über „Interagieren“ und „Flirten“; bei Vertrauen 100 auf der erweiterten Stufe ist ein Heiratsantrag möglich. Hexen brauchen dafür ihre abgeschlossenen Sanktum-Quests. Der Ehepartner reist mit, schenkt regelmäßig etwas und lässt sich beim Friseur anpassen. Scheidung ist möglich, „hat jedoch seinen Preis“."},
-  {g: "Soziales", t: "Kandidaten", d: ["Die Hexen sind als Partnerinnen möglich.", {v: "Namentlich Elowen, Bari, Lyselia und Areciel, nur Kliff kann sie heiraten; weitere NPCs mit Herzsymbol. Flirten unter dem Maximum kostet je 10 Vertrauen; mehrere Romanzen, aber nur eine Ehe; Oongka und Damiane brauchen erst einen Wohnsitz.", c: "unb", q: "Game8"}]},
+  {g: "Soziales", t: "Kandidaten", d: ["Die Hexen sind als Partnerinnen möglich.", {v: "Namentlich Elowen, Bari, Lyselia und Areciel, nur Kliff kann sie heiraten; weitere NPCs mit Herzsymbol. Flirten unter dem Maximum kostet je 10 Vertrauen; mehrere Romanzen, aber nur eine Ehe; Oongka und Damiane brauchen erst einen Wohnsitz.", c: "unb", q: "Game8; die vier Namen stehen auch in den Missionstexten der Spieldaten, siehe DLC-Quests, Reihen „Romanze“"}]},
   {g: "Soziales", t: "Romanze-Hotfixes", d: "2.04.02: Ehepartner folgte ins Wasser und verhielt sich im Kampf abnormal. 2.04.03: keine Geschenke nach der Hochzeit, Mehrfachauswahl bei „Gift“."},
   {g: "Soziales", t: "Fest im Camp", d: "Mission für ein Fest: NPCs mit genug Vertrauen besuchen das Camp, bestimmte Besucher lassen sich als Ehrengraumähnen anheuern."},
-  {g: "Soziales", t: "Würfelspiel (Banker's Dice)", d: ["Neues Minispiel in Demeniss und Delesyia.", {v: "Regeln, genaue Orte und Einsätze", c: "nb"}]},
+  {g: "Soziales", t: "Würfelspiel (Banker's Dice)", d: ["Neues Minispiel in Demeniss und Delesyia.", "Gespielt wird mit drei Würfeln: Es zählt die Summe der drei Augenzahlen, und wer die höchste Summe wirft, streicht den gesamten Einsatz ein (Spieltext).", {v: "Genaue Orte und Einsätze", c: "nb"}]},
   {g: "Soziales", t: "Legendäre Insekten", d: ["Drei neue legendäre Insekten samt eigenem Insektenlager.", {v: "Golden Butterfly (nahe einem Tempel mitten in einer zerklüfteten Felsregion), Golden Jewel Beetle und Golden Rhinoceros Beetle (sehr selten, an Orten mit alter mystischer Energie).", c: "unb", q: "th.gl"}, {v: "Genaue Fundorte", c: "nb"}]},
   {g: "Soziales", t: "Friseur und Outfits", d: "Friseure in größeren Städten; das Graumähnen-Outfit wechselst du im Graumähnen-Verwaltungsbüro."}
 ];
@@ -426,9 +489,9 @@ const DLC_HOMES = [
 const DLC_RELIC_SHOPS = [
   {name: "Reyard", where: "Auronui Island (Archäologe)", sells: ["Blaupause für das Explorer's Breathing Device", {v: "Preise in Ancient Relics. Blaupausen Charter Assistant's Diving Helm und Suit (je 7), Recipe: Jellyfish Salad (4), Alchemy Formula: Luftis's Lesser Elixir (6) und Luftis's Elixir (12), Forgotten Treasure Maps #22, #34 und #27 (2 bis 50), Schriftstück Thoughts on the Shiny Ore", c: "unb", q: "th.gl"}], unlock: [{v: "Nach „A Wider World“ und der Befreiung von Auronui, am Ankerplatz.", c: "unb", q: "Game8"}, {v: "Zwei Schatzkarten erst ab Vertrauen 100.", c: "unb", q: "th.gl"}]},
   {name: "Sulivan", where: "Demeniss Port (Archäologe)", sells: ["Marine Charter's Diving Set, Blaupause für das Propulsion Breathing Device", {v: "Preise in Ancient Relics. Helm, Anzug, Handschuhe und Stiefel je normal und Light (5 bzw. 7), Propulsion-Blaupause 30, Forgotten Treasure Maps #9 und #26, Schriftstücke wie „Sunfish Feed and Preferences“", c: "unb", q: "th.gl"}], unlock: {v: "Schatzkarten erst ab Vertrauen 100.", c: "unb", q: "th.gl"}},
-  {name: "Rafi", where: "Port Delesyia (Sammler)", sells: ["Möbel-Blaupausen", {v: "Preise in Ancient Relics. Captain's Carpet of Dignity, drei Ancient Runic Stone Sconces, Schiffsteil-Blaupausen (Long-Horned Fish Figurehead und Stern je 50, Large Tidewish Sail 12), Alchemy Formula: Lucaris's Lesser Elixir und Lucaris's Elixir, Forgotten Treasure Map #33, Schriftstücke", c: "unb", q: "th.gl"}], unlock: {v: "Schiffsteil-Blaupausen und Schatzkarte erst ab Vertrauen 100.", c: "unb", q: "th.gl"}},
+  {name: "Rafi", where: "Port Delesyia (Reliktsammler, „Relic Collector“)", sells: ["Möbel-Blaupausen", {v: "Preise in Ancient Relics. Captain's Carpet of Dignity, drei Ancient Runic Stone Sconces, Schiffsteil-Blaupausen (Long-Horned Fish Figurehead und Stern je 50, Large Tidewish Sail 12), Alchemy Formula: Lucaris's Lesser Elixir und Lucaris's Elixir, Forgotten Treasure Map #33, Schriftstücke", c: "unb", q: "th.gl"}], unlock: {v: "Schiffsteil-Blaupausen und Schatzkarte erst ab Vertrauen 100.", c: "unb", q: "th.gl"}},
   {name: "Cartaine", where: "Samora Island (Archäologe der Samora-Ruinen)", sells: ["Beruf- und Haustier-Outfits", {v: "Preise in Ancient Relics. Cook's, Architect's und Fisherman's Outfits (9 bis 20), Katzen- und Hunde-Outfits (nur mit passendem Haustier), Recipe: Knife-Cut Clam Noodles und Grilled Cheese Clams, Alchemy Formula: Fluva's Lesser Elixir und Fluva's Elixir, Forgotten Treasure Maps #16 und #6", c: "unb", q: "th.gl"}], unlock: {v: "Schatzkarten erst ab Vertrauen 100.", c: "unb", q: "th.gl"}},
-  {name: "Evander", where: "Satyros Island (erforscht die Wandbilder der Satyrn)", sells: ["Abyss-Gear-Blaupausen und Haustierkleidung", {v: "Preise in Ancient Relics. Gear Blueprints Writhebolt, Radiant Flash, Power Overload, Venomous Fangs, Rushing Wind und Storm's Echo (22 bis 27), Scholastone- und Ludeon-Outfits für Katze und Hund, Forgotten Treasure Maps #37 und #38", c: "unb", q: "th.gl"}], unlock: {v: "Schatzkarten erst ab Vertrauen 100. Den Namen Evander nennt nur th.gl.", c: "unb", q: "th.gl"}}
+  {name: "Evander", where: "Satyros Island (erforscht die Wandbilder der Satyrn)", sells: ["Abyss-Gear-Blaupausen und Haustierkleidung", {v: "Preise in Ancient Relics. Gear Blueprints Writhebolt, Radiant Flash, Power Overload, Venomous Fangs, Rushing Wind und Storm's Echo (22 bis 27), Scholastone- und Ludeon-Outfits für Katze und Hund, Forgotten Treasure Maps #37 und #38", c: "unb", q: "th.gl"}], unlock: {v: "Schatzkarten erst ab Vertrauen 100. Den Namen Evander bestätigen die Spieldaten (Archäologe, der die Wandbilder der Satyrn erforscht).", c: "unb", q: "th.gl"}}
 ];
 
 // L Was noch offen ist
@@ -437,16 +500,16 @@ const DLC_OPEN = [
   "Weitere Gegenstände: Neben der DLC-Ausrüstung stehen weitere Einträge in den Spieldaten (seit 05.11.2026 erfasst: Reittierrüstungen, Accessoires, Elixiere, Meeresgerichte, Meereskisten), bei vielen sind Fundort und damit die DLC-Zugehörigkeit nicht belegt.",
   "Void-Set: Das Wiki folgt jetzt der Spieldaten-Datenbank th.gl und GameRant („of Void“, z. B. „Plate Helm of Void“); Mobalytics schreibt „of the Void“. Zahlenwerte der Void-Teile stehen bisher nur bei th.gl, einen Set-Bonus nennt keine Quelle.",
   "Eine zweite Quelle für den Angriffswert des Lumen Longsword (th.gl: 64 bei +10).",
-  "Kosten und Dauer der Entsendung „Small Shipbuilding“; welches Schiff „Large Shipbuilding“ ergibt und wie man Medium und Large Greymane Ship, Phantom Ship und die Schiffe des Ostens bekommt.",
+  "Kosten und Dauer der Entsendung „Small Shipbuilding“; welches Schiff „Shipbuilding“ und „Large Shipbuilding“ ergeben; wie man Medium und Large Greymane Ship, Flagship of the East, The Drunken Catfish und das Large Delesyian Naval Ship bekommt (für Phantom Ship und Assault Ship of the East gibt es je eine Quelle).",
   "Werte der Demenissian und Delesyian ships, Besatzungsplätze je Schiff, Kanonenwerte, Boni der Fair-Wind-Teile und der Blaupausen-Teile.",
-  "Lage und Inhalte der Inseln, die bisher nur als Kartenname bekannt sind (Drangar, Estra, Saeon, Spagnola); Lösungen der Schatzkarten.",
-  "Wo und zu welchem Preis man die neuen Handelswaren verkauft, Seerouten.",
+  "Genaue Lage der Inseln auf der Karte (die Spieldaten nennen keine Koordinaten; nur für fünf Inseln gibt es Routenangaben einer Quelle) und die Inhalte von Phragma, Carcano, Saeon, Drangar und Spagnola; Lösungen der Schatzkarten.",
+  "Wo und zu welchem Preis man die neuen Handelswaren verkauft (bei der Gegenprobe 05.11.2026 keine Quelle gefunden), Seerouten.",
   "Verfeinerungsstufen und Materialien des Tauchanzugs, Namen der Atem-Gerichte, Erhalt der A.T.A.G.-Meereserkundungsausrüstung (Namen bisher nur laut th.gl).",
   "Zähmmethode von Sea Turtle, Futter für den Sun Fish, Vertrauensschwellen außer beim Electric Ray, Werte der Unterwasser-Reittiere.",
-  "Schritte und Belohnungen von „A Beginning Beyond the Waves“, „Shield of Hernand“, „Renewed Vitality“ und „A Memory Beyond Ashes“; alle Schritte der neuen Inselquests.",
+  "Belohnungen der Schritte von „A Beginning Beyond the Waves“, „Shield of Hernand“, „Renewed Vitality“ und der vier ergänzten Piratenschiffe; die Schritte von „A Memory Beyond Ashes“; Reihenfolge und Voraussetzungen der Romanze-Missionen und der Inselmissionen; die drei Piratenschiffe Crimson Shield, Vengeance und Faunus haben in den Spieldaten keinen Steckbrieftext.",
   "Ort von The Dancing Catfish Crusher; zweite Quelle für die Bossnamen im Garten der Prüfungen.",
   "Dritte Burg aus der Feature-Übersicht, Ort von Burg Drachensturz, Ort der Schneiderei, Miete und Ertrag der Einrichtungen, die 17 Wohnsitze.",
-  "Regeln und Orte des Würfelspiels, Fundorte der drei legendären Insekten, vollständige Liste der Romanze-Kandidaten.",
+  "Orte und Einsätze des Würfelspiels, Fundorte der drei legendären Insekten, vollständige Liste der Romanze-Kandidaten.",
   "Kampf-Alltagswerkzeuge (Bratpfanne und Co.): Fundort bzw. Erhalt, dazu eine zweite Quelle für Werte und Waffentyp (bisher nur th.gl).",
   "Ob die Twitch-Drop-Gegenstände nach dem Ende des Events (11.11.2026) noch auf anderem Weg erhältlich sind.",
   "Wirkung der neun Meeresgerichte (Hearty-Stufe) und Rezeptfundorte von sechs davon, Atemluft-Wert der Luftis-Elixiere, Formeln der drei Greater-Elixiere von Luftis, Fluva und Lucaris, Fundorte der neun neuen Accessoires, Fundorte der vier Reittierrüstungen."
@@ -465,6 +528,9 @@ const DLC_SOURCES = [
   {t: "Hotfix 2.04.06", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=150"},
   {t: "Hotfix 2.04.07", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=151"},
   {t: "Game8 Schiffe", url: "https://game8.co/games/Crimson-Desert/archives/635788"},
+  {t: "KeenGamer Phantom Ship", url: "https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-the-legendary-phantom-ship/"},
+  {t: "KeenGamer Assault Ship of the East", url: "https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-the-legendary-assault-ship-of-the-east/"},
+  {t: "KeenGamer Schiffsbau", url: "https://www.keengamer.com/articles/guides/crimson-desert-dlc-shipbuilding-guide-all-ships-and-upgrades/"},
   {t: "Game8 Schiffsteile", url: "https://game8.co/games/Crimson-Desert/archives/636449"},
   {t: "Game8 Quests", url: "https://game8.co/games/Crimson-Desert/archives/635794"},
   {t: "Game8 Burgen", url: "https://game8.co/games/Crimson-Desert/archives/635872"},
@@ -657,6 +723,7 @@ const DLC_SET_IMGS={
   "Haustier-Outfits bei Evander (Scholastone, Ludeon)":[["Feline/Canine Scholastone Honorary Scholar Cap","cd_assets/dlc/item-1004511.webp"],["Feline/Canine Scholastone Honorary Scholar Outfit","cd_assets/dlc/item-1004512.webp"],["Feline/Canine Ludeon Plate Hat","cd_assets/dlc/item-1004876.webp"],["Feline/Canine Ludeon Plate Outfit","cd_assets/dlc/item-1004877.webp"]],
   "Feline und Canine Charter's Diving Helm und Suit":[["Feline Charter's Diving Helm","cd_assets/dlc/item-1005359.webp"],["Feline Charter's Diving Suit","cd_assets/dlc/item-1005360.webp"],["Canine Charter's Diving Helm","cd_assets/dlc/item-1005361.webp"],["Canine Charter's Diving Suit","cd_assets/dlc/item-1005362.webp"]]
 };
+// 05.11.2026: vier weitere Steckbriefe (The Sea's Vengeance, The Death Blossom, The Sea Claw, The Drunken Catfish), Textur cd_t0000_boardpaper_0387/0388/0390/0391 (dlc_01, schiffe-roh-png), gleiche Aufbereitung (512 px, WebP).
 // 02.11.2026 b: Steckbriefe („Pirate Ship Alert“) der Piratenschiffe, Schlüssel = Schritt in DLC_QUESTS. Weg: knowledgeinfo.dlc_01
 // Knowledge_WantedPaper_PirateShip_00xx und missioninfo.dlc_01 Mission_Ocean_Wanted_Normal_Monster_ship_xx -> dasselbe Icon
 // ItemIcon_Prefab_CD_T0000_BoardPaper_03xx; flache Plakat-Textur, auf 512 px verkleinert. Zeigt Seekarte, Route und Wappen, kein Schiffsbild.
@@ -670,7 +737,11 @@ const DLC_QUEST_IMGS={
   "Pirate Ship: The Scarlet Widow":"cd_assets/dlc/pirate-scarlet-widow.webp",
   "Pirate Ship: The Bloodied Stake":"cd_assets/dlc/pirate-bloodied-stake.webp",
   "Pirate Ship: The Devils' Plunder":"cd_assets/dlc/pirate-devils-plunder.webp",
-  "Pirate Ship: The Black Curved Blade":"cd_assets/dlc/pirate-black-curved-blade.webp"
+  "Pirate Ship: The Black Curved Blade":"cd_assets/dlc/pirate-black-curved-blade.webp",
+  "Pirate Ship: The Sea's Vengeance":"cd_assets/dlc/pirate-sea-vengeance.webp",
+  "Pirate Ship: The Death Blossom":"cd_assets/dlc/pirate-death-blossom.webp",
+  "Pirate Ship: The Sea Claw":"cd_assets/dlc/pirate-sea-claw.webp",
+  "Pirate Ship: The Drunken Catfish":"cd_assets/dlc/pirate-drunken-catfish.webp"
 };
 
 // 01.11.2026: Bilder der DLC-Bosse aus den Spieldateien (Wissens- und Questbilder, 512 px). Matthias und Goyen nehmen

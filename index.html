@@ -14474,10 +14474,11 @@ const _dlcQ_GROUPS=[
   {v:'oongka',t:'Oongka',g:'O',tone:'amber',scene:'char-oongka'},
   {v:'fraktion',t:'Graumähnen & Fraktion',g:'⚑',tone:'gold',scene:'q-faction'},
   {v:'ozean',t:'Großer Ozean',g:'⚓',tone:'ice',scene:'roadmap'},
+  {v:'romanze',t:'Romanze',g:'♥',tone:'gold',scene:'q-faction'},
   {v:'weitere',t:'Weitere',g:'❢',tone:'ice',scene:'q-faction'}];
 function _dlcQ_grp(q){
   const w=String(q&&q.who||'').split(',')[0].trim().toLowerCase();
-  const k=/kliff/.test(w)?'kliff':/damiane/.test(w)?'damiane':/oongka/.test(w)?'oongka':/great ocean|ozean/.test(w)?'ozean':/graum|fraktion/.test(w)?'fraktion':'weitere';
+  const k=/kliff/.test(w)?'kliff':/damiane/.test(w)?'damiane':/oongka/.test(w)?'oongka':/great ocean|ozean/.test(w)?'ozean':/romanze/.test(w)?'romanze':/graum|fraktion/.test(w)?'fraktion':'weitere';
   return _dlcQ_GROUPS.find(g=>g.v===k);
 }
 function _dlcQ_steps(q){return Array.isArray(q.steps)?q.steps.filter(Boolean):[];}
