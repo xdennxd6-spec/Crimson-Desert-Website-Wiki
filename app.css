@@ -6969,7 +6969,8 @@ a.rail-btn{text-decoration:none}
 .cd-consent__button--primary{border-color:var(--brass);background:var(--brass);color:#14100a}
 .cd-consent__button--primary:hover,.cd-consent__button--primary:focus-visible{background:var(--brass-hi)}
 .cd-consent__text-button{border:0;padding:0;background:none;color:var(--brass-hi);font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.sb-consent{display:block;margin:0 0 8px;font-size:12px}
+.sb-consent{margin:0 0 8px;font-size:12px;line-height:1.7}
+.sb-consent a{color:var(--brass-hi);text-underline-offset:3px}
 .cd-consent-dialog{width:min(700px,calc(100% - 28px));max-width:none;max-height:min(88vh,850px);overflow:auto;border:1px solid var(--line-strong);border-radius:14px;padding:0;background:var(--vellum-deep);color:var(--iron-soft);box-shadow:0 24px 90px rgba(0,0,0,.65)}
 .cd-consent-dialog::backdrop{background:rgba(2,5,9,.78);backdrop-filter:blur(4px)}
 .cd-consent-dialog__inner{position:relative;display:flex;flex-direction:column;gap:15px;padding:clamp(22px,4vw,34px)}

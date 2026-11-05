@@ -88,7 +88,7 @@
           '<p>Die Karte von MapGenie wird erst geladen, wenn du die Kartenseite öffnest. Dabei erhält MapGenie deine IP-Adresse und kann eigene Cookies setzen. Der Link „Read in English“ führt zu Google Translate und wird erst beim Anklicken aufgerufen.</p>' +
         '</section>' +
         '<label class="cd-consent-option"><span><strong>Darstellung merken</strong><small>Speichert Farbschema, Bewegung, eingeklappte Seitenleiste und Plattformfilter im Local Storage, bis du sie löschst oder deine Einwilligung widerrufst. Ohne Zustimmung gilt deine Wahl nur, bis du die Seite verlässt.</small></span><input id="cd-consent-preferences" type="checkbox"></label>' +
-        '<p class="cd-consent-dialog__note">Es gibt keine Werbe- oder seitenübergreifenden Analyse-Cookies.</p>' +
+        '<p class="cd-consent-dialog__note">Es gibt keine Werbe- oder seitenübergreifenden Analyse-Cookies. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>, Anbieter siehe <a href="/impressum">Impressum</a>.</p>' +
         '<div class="cd-consent__actions cd-consent__actions--dialog">' +
           '<button type="button" class="cd-consent__button" data-consent-action="necessary">Nur notwendige</button>' +
           '<button type="button" class="cd-consent__button" data-consent-action="save">Auswahl speichern</button>' +
