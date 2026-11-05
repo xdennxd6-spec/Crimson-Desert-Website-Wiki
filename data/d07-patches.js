@@ -3,6 +3,49 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.04.07",date:"05.11.2026",size:"Siebter Hotfix nach dem DLC-Start, veröffentlicht am 05.11.2026 spätestens um 03:20 UTC, also 04:20 MEZ (boardNo 151; Steam-Zweitveröffentlichung 03:20 UTC; die Detailseite nennt in beiden Sprachfassungen 00:00 UTC, also 01:00 MEZ, die Abweichung ist ungeklärt). Ein einziger Punkt unter der Überschrift Patch-Details, kein neuer Inhalt. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Patch-Details",items:[
+      "Behoben: Der Gegenstand <b>„Niburak-Stoffrüstung“</b> (<em>Nibrak Cloth Armor</em>) verschwand. <span style='color:var(--gdim)'>Einordnung: Die Notice nennt weder Auslöser noch Umstände und sagt nicht, ob verschwundene Rüstungen zurückkommen.</span>"
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation und Epic Games Store: <em>Patch jetzt verfügbar</em>. XBOX und Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 05.11.2026). Keine Downloadgröße, keine Build-Nummer. <span style='color:var(--gdim)'>Einordnung: Der Mac App Store hängt seit dem DLC-Start über alle sieben Hotfixes hinweg zurück.</span>",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde am 05.11.2026 um 03:00 UTC aktualisiert und zählt jetzt 15 Punkte. Entfernt ist die Rückkehr zum Titelbildschirm beim Mehrfach-Schenken, die 2.04.06 als behoben gemeldet hatte. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
+      "Quelle: offizielle Patch-Notizen Version 2.04.07, Pearl Abyss, 05.11.2026 00:00 UTC laut Detailseite (boardNo 151), deutsche und englische Fassung gegengeprüft; Steam-News 05.11.2026 03:20 UTC."
+    ]}
+  ]},
+  {ver:"2.04.06",date:"04.11.2026",size:"Sechster Hotfix nach dem DLC-Start, veröffentlicht am 04.11.2026 um 05:10 UTC, also 06:10 MEZ (boardNo 150; Steam-Zweitveröffentlichung ebenfalls 05:10 UTC). 24 Punkte unter der einzigen Überschrift Patch-Details, kein neuer Inhalt: Abstürze, Erschließungsmissionen, Handelswaren, das Lumen-Einhandschwert, Freies Bauen und mehrere Punkte aus der Liste bekannter Probleme. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Patch-Details",items:[
+      "[AMD] Behoben: Mit Treiberversion 26.10.1 stürzte das Spiel in der Region <b>Pailune</b> ab, wenn die Option <b>„Filmisch“</b> (<em>Cinematic</em>) aktiviert war. <span style='color:var(--gdim)'>Einordnung: Der Punkt ist damit von der Liste bekannter Probleme entfernt. Ein früherer AMD-Punkt zu 26.10.1 galt schon mit 2.04.02 als behoben und kam am 01.11.2026 in geänderter Form zurück.</span>",
+      "<b>Framerate-Einbrüche</b> in bestimmten Gebieten wurden reduziert. Pearl Abyss arbeitet weiter an den Einbrüchen, die in bestimmten Situationen oder bei einigen Inhalten auftreten. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schrieb zunächst <em>Fixed</em> und wurde am 04.11.2026 auf <em>Improved</em> korrigiert.</span>",
+      "Behoben: Die <b>Besatzungsmitglieder</b> an Bord sprachen unnatürlich viele Dialoge.",
+      "Behoben: Beim Entsenden von zwei oder mehr <b>Erschließungsmissionen</b> (<em>pioneering missions</em>) ließ sich die vorherige Mission nicht abschließen.",
+      "Behoben: Eine <b>Erschließungsmission</b> ließ sich nicht abschließen, wenn sich ein Schiff in der Nähe des Ankerplatzes befand.",
+      "Behoben: Die <b>Abyss-Grenzsteine</b> (<em>Abyss Cressets</em>) an den geheimen Orten und in Ruinen im Ozean funktionierten nicht ordnungsgemäß.",
+      "Behoben: Der Effekt des Belohnungsgegenstands für <b>Bekanntheit Lv. 5</b> in der Verwaltung wurde nicht für alle Charaktere gemeinsam angewandt.",
+      "Behoben: <b>Drachenpiraten</b> (<em>Kite Pirates</em>) konnten in das Innere des <b>Sturmschiffs des Ostens</b> (<em>Assault Ship of the East</em>) gelangen.",
+      "Behoben: Beim <b>Tauchen</b> wurden in bestimmten Situationen einige Soundeffekte nicht wiedergegeben. <span style='color:var(--gdim)'>Einordnung: Die Liste bekannter Probleme führt fehlende Soundeffekte unter Wasser am 04.11.2026 weiterhin.</span>",
+      "Behoben: Beim Tauchen mit <b>Damiane</b> stürzte das Spiel gelegentlich ab, wenn lateinamerikanisches Spanisch als Spielsprache eingestellt war.",
+      "Behoben: Das Gelände am Eingang der Region des <b>Ritters der Leere</b> (<em>Knight of Void</em>) wurde unnatürlich dargestellt.",
+      "Behoben: Beim Umladen von <b>Handelswaren</b> vom Schiff auf den Wagen verschwanden einige davon. <span style='color:var(--gdim)'>Einordnung: Die Liste bekannter Probleme führt am 04.11.2026 weiterhin eine falsche Menge beim Verladen von Waren der Insel Samora.</span>",
+      "Behoben: Das Sternbild <b>„Kamel“</b> befand sich in einer unzugänglichen Region. <span style='color:var(--gdim)'>Einordnung: Die Liste bekannter Probleme führt das Sternbild am 04.11.2026 weiterhin, zusammen mit dort genannten besetzten Stützpunkten, die dieser Patch nicht erwähnt.</span>",
+      "Behoben: Die Symbole <b>gesuchter Verbrecher</b> (<em>outlaws</em>) wurden auf der Karte und der Minikarte nicht angezeigt.",
+      "Behoben: Nach dem Erlernen einer <b>Fähigkeit</b> wurden beim Aufrufen über die Direktverknüpfung weder Beschreibung noch Video angezeigt.",
+      "Behoben: Beim Verschenken mehrerer Gegenstände über <b>„Schenken“</b> wurde man gelegentlich zum Titelbildschirm zurückgeworfen. <span style='color:var(--gdim)'>Einordnung: Ein Folgefehler der mit 2.04.03 eingeführten Mehrfachauswahl. Die Liste bekannter Probleme führte ihn am 04.11.2026 noch; am 05.11.2026 (03:00 UTC) ist der Punkt entfernt.</span>",
+      "Behoben: Das <b>Lumen-Einhandschwert</b> (<em>Lumen Sword</em>) konnte unter bestimmten Umständen zerstört werden. Ein bereits zerstörtes Lumen-Schwert kann nun wiederhergestellt werden.",
+      "Behoben: Der Charakter bewegte sich beim Verlassen eines <b>Segelschiffs oder einer Fähre</b> an eine fehlerhafte Position. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt <em>ship or a rowboat</em>.</span>",
+      "Behoben: Der <b>Sternbildhelm</b> (<em>Constellation Helm</em>) ließ sich beim Schwimmen nicht verwenden.",
+      "[Oongka] Behoben: Die Fähigkeit <b>„Verwüstung: Perfektion“</b> (<em>Ascended Devastation</em>) wurde bei einigen Waffen nicht korrekt angewandt.",
+      "Behoben: In Seeschlachten wurde nach dem vollständigen Aufladen aller Schiffskanonen der Sound für das abgeschlossene Nachladen mehrfach abgespielt.",
+      "Beim Besiegen des <b>Geisterschiffs</b> und des <b>trunkenen Welses</b> werden die Belohnungsgüter nun garantiert vergeben. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt wörtlich das Gegenteil (<em>Rewards are not granted</em>), steht aber ebenfalls unter den Behebungen. Maßgeblich ist hier die deutsche Fassung.</span>",
+      "Behoben: Der Bildschirm blieb unter bestimmten Umständen nach dem Eintreten in den Modus <b>„Freies Bauen“</b> schwarz.",
+      "Behoben: Das Spiel stürzte gelegentlich ab, wenn man sich einem im Modus <b>„Freies Bauen“</b> errichteten Haus näherte."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 05.11.2026). Keine Downloadgröße, keine Build-Nummer. <span style='color:var(--gdim)'>Einordnung: Epic stand beim ersten Abruf am 04.11.2026 noch auf „wird vorbereitet“.</span>",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde am 04.11.2026 um 06:00 UTC aktualisiert und zählt jetzt 16 Punkte. Entfernt ist nur der AMD-Punkt. Vier in diesem Hotfix als behoben gemeldete Themen standen dort am 04.11.2026 weiterhin: Mehrfach-Schenken, Handelswaren beim Verladen, Soundeffekte unter Wasser und das Sternbild Kamel. Das Mehrfach-Schenken ist seit dem 05.11.2026 (03:00 UTC) entfernt, die anderen drei führt die Liste auch dort weiter. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
+      "Quelle: offizielle Patch-Notizen Version 2.04.06, Pearl Abyss, 04.11.2026 05:10 UTC (boardNo 150), deutsche und englische Fassung gegengeprüft; Zeitpunkt per Steam-News bestätigt (04.11.2026 05:10 UTC)."
+    ]}
+  ]},
   {ver:"2.04.05",date:"01.11.2026",size:"Fünfter Hotfix nach dem DLC-Start, veröffentlicht am 01.11.2026 kurz vor 14:21 UTC, also kurz vor 15:21 MEZ (boardNo 149; Steam-Zweitveröffentlichung 14:21 UTC; die Detailseite nennt in beiden Sprachfassungen fälschlich 04:28 UTC, die Zeit des Vorgängers). Vier Punkte unter der einzigen Überschrift Patch-Details, ausschließlich Fehlerbehebungen, kein neuer Inhalt: ein Absturz und drei blockierte Quests. Mit diesem Hotfix ist XBOX wieder auf Stand, nur der Mac App Store steht noch aus. Keine Downloadgröße, keine Build-Nummer.",features:[
     {cat:"Patch-Details",items:[
       "Behoben: Im Kampf gegen <b>Ravok</b> stürzte das Spiel ab. <span style='color:var(--gdim)'>Einordnung: Deutsch „der Wilde Reißer Ravok“, englisch <em>Ravok of the Savage Fangs</em>. Gemeint ist der seit dem Grundspiel dokumentierte Anführer der Fraktion Savage Fangs, kein neuer DLC-Boss. Der Absturz stand seit dem 01.11.2026, 03:00 UTC auf der Liste bekannter Probleme und ist mit dieser Behebung wieder daraus entfernt.</span>",
