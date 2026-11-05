@@ -217,8 +217,8 @@ ${wlSection}`;
 
   return {
     slugName: SLUG,
-    title: `Alle ${z.gesamt} Skills in Crimson Desert: Skill-Bäume & Guide`,
-    desc: `Alle ${z.gesamt} Skills von Kliff, Damiane und Oongka in Crimson Desert mit Voraussetzung, Kosten und Wirkung, dazu ${z.wl} Watch-&-Learn-Skills mit Lernort.`,
+    title: `Crimson Desert Fähigkeiten: alle ${z.gesamt} Skills & Skill-Bäume`,
+    desc: `Alle ${z.gesamt} Fähigkeiten von Kliff, Damiane und Oongka in Crimson Desert mit Voraussetzung, Kosten und Wirkung, dazu ${z.wl} Watch-&-Learn-Skills mit Lernort.`,
     h1: `Alle ${z.gesamt} Skills in Crimson Desert: Kliff, Damiane und Oongka`,
     lead: `Die Skill-Bäume von <strong>Kliff</strong> (${z.kliff} Skills), <strong>Damiane</strong> (${z.damiane}) und <strong>Oongka</strong> (${z.oongka}) im Überblick, jeweils mit Voraussetzung, Kosten in Abyss-Artefakten und Wirkung. Dazu die <strong>${z.wl} Watch-&amp;-Learn-Skills</strong> mit Lernort und Hinweis auf Verpassbares.`,
     ogImage: null,

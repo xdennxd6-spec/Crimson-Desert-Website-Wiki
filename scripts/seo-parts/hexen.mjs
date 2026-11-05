@@ -190,8 +190,8 @@ ${sonstigeSection}`;
 
   return {
     slugName: SLUG,
-    title: `Hexen-Guide Crimson Desert: ${z.hexen} Hexen & ${z.rezepte} Synthese-Rezepte`,
-    desc: `Hexen-Guide zu Crimson Desert: ${z.hexen} Hexen mit Fundort und Freischaltung plus ${z.rezepte} Synthese-Rezepte für Abyss Cores, Sigil-Amulette und mehr mit Zutaten und Kosten.`,
+    title: `Alle ${z.hexen} Hexen in Crimson Desert finden: Wohnort & Rezepte`,
+    desc: `Alle ${z.hexen} Hexen in Crimson Desert finden und freischalten: Wohnort und Dienste je Hexe, dazu ${z.rezepte} Synthese-Rezepte für Abyss Cores und Sigil-Amulette mit Zutaten.`,
     h1: `Hexen-Guide: ${z.hexen} Hexen und ${z.rezepte} Synthese-Rezepte`,
     lead: `Der Hexen-Guide zu Crimson Desert erklärt alle <strong>${z.hexen} Hexen</strong> mit Wohnort, Freischaltung, Diensten und Sanctum-Questlinie. Dazu stehen alle <strong>${z.rezepte} Synthese-Rezepte</strong> der Hexen-Werkstatt in Tabellen: ${z.stufen} Stufen-Cores, ${z.effektcores} Effekt-Cores, ${z.amulette} Sigil-Mount-Amulette und ${z.sonstige} sonstige Rezepte.`,
     ogImage: null,

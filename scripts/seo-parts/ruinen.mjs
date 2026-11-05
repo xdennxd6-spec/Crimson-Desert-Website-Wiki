@@ -195,8 +195,8 @@ ${sections}`;
 
   return {
     slugName: SLUG,
-    title: `Uralte Ruinen in Crimson Desert: ${z.anzahl} Rätsel mit Lösung`,
-    desc: `Alle ${z.anzahl} Rätsel der Uralten Ruinen (Abyss-Grenzsteine) in Crimson Desert mit Ort, Lösungsschritten, Hinweisen und Belohnung in ${z.regionen} Regionen. Deutsch.`,
+    title: `Uralte Ruinen in Crimson Desert: alle ${z.anzahl} Rätsel mit Lösung`,
+    desc: `Rätsel in einer Uralten Ruine nicht lösbar? Alle ${z.anzahl} Abyss-Grenzsteine in ${z.regionen} Regionen von Crimson Desert mit Ort, Lösung Schritt für Schritt und Belohnung.`,
     h1: `Uralte Ruinen in Crimson Desert: ${z.anzahl} Rätsel mit Lösung`,
     lead: `Diese Übersicht führt <strong>alle ${z.anzahl} Rätsel der Uralten Ruinen</strong> (Abyss-Grenzsteine) in ${z.regionen} Regionen auf, jeweils mit Ort, Mechanik, Belohnung, nummerierten Lösungsschritten, Hinweisen und Quellen.`,
     ogImage: null,

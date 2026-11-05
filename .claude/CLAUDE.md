@@ -28,7 +28,9 @@ anzulegen — es ist privat und braucht Credentials, die Claude nicht anfassen d
 - **Lokaler Ordner (seit 09.09.2026):** `G:\Claude\Crimson-Desert-Wiki\website\` (der alte Desktop-Ordner `deploy-69fcff9bfbeb7525ed81aec7` ist nur noch eine Kopie)
 - **GitHub:** https://github.com/xdennxd6-spec/Crimson-Desert-Website-Wiki
 - **Live-URL:** https://crimson-desert-wiki.com (eigene Domain seit 09/2026). **Hosting seit 29.09.2026: eigener Raspberry Pi 5** (nginx + Cloudflare Tunnel + kleiner API-Dienst), NICHT mehr Netlify. Die alte Adresse `crimson-desert-wiki.netlify.app` bleibt nur als Mini-Umleitung auf Netlify bestehen (siehe Abschnitt Hosting)
-- **Haupt-Datei:** `index.html` (~9.600 Zeilen, Markup+CSS+Renderer) + `data/d01…d08-*.js`
+- **Stylesheet seit 05.11.2026 in `app.css`** (nicht mehr inline in `index.html`). CSS dort ändern; `gen-seo` setzt den Prüfwert `app.css?v=…` in `index.html` und allen SEO-Seiten neu.
+- **Größengrenze:** Googlebot liest HTML nur bis rund 2 MB (unkomprimiert), `/ruestungen` brach bei Google mitten im Hauptskript ab und die App lief dort nicht. `verify-seo` schlägt deshalb ab 1.900.000 Byte je Seite fehl. Keine größeren Blöcke mehr inline in `index.html` einbauen.
+- **Haupt-Datei:** `index.html` (Markup+Renderer) + `data/d01…d08-*.js`
   (Datenkonstanten, seit 23.08.2026 ausgelagert; laden per `<script src>` vor dem Hauptscript)
 
 ## Hosting (seit 29.09.2026: Raspberry Pi, nicht mehr Netlify)

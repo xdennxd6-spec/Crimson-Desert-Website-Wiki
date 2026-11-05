@@ -23,6 +23,7 @@
 import fs from "fs";
 import path from "path";
 import { execFileSync } from "child_process";
+import { createHash } from "crypto";
 import { fileURLToPath } from "url";
 
 import * as partRuestungen from "./seo-parts/ruestungen.mjs";
@@ -53,6 +54,16 @@ import { dlcNeu } from "./seo-parts/_dlc-neu.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
+// 05.11.2026: Das grosse Stylesheet liegt in app.css (Googlebot liest HTML nur bis rund 2 MB, siehe verify-seo).
+// Der Pruefwert im Link sorgt dafuer, dass Browser und Cloudflare nach einer CSS-Aenderung sofort die neue Datei holen.
+{
+  const cssV = createHash("sha256").update(fs.readFileSync(path.join(ROOT, "app.css"))).digest("hex").slice(0, 10);
+  const indexPfad = path.join(ROOT, "index.html");
+  const alt = fs.readFileSync(indexPfad, "utf8");
+  if (!/href="app\.css\?v=[0-9a-f]+"/.test(alt)) throw new Error('index.html: <link href="app.css?v=..."> fehlt');
+  const neu = alt.replace(/href="app\.css\?v=[0-9a-f]+"/, `href="app.css?v=${cssV}"`);
+  if (neu !== alt) fs.writeFileSync(indexPfad, neu);
+}
 const SITE = "https://crimson-desert-wiki.com";
 // Seit dem Split (23.08.2026) liegen die Daten-Konstanten in data/*.js;
 // fuer extract() zaehlt index.html + alle Datendateien als EIN Quelltext.

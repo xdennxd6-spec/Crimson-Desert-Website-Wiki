@@ -1,3 +1,4 @@
+import { createHash } from "crypto";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -178,6 +179,18 @@ const pages = {
   // NEU (31.10.2026): Regex und Label aus COUNT_CHECK von parts/charting-the-unknown.mjs.
   "charting-the-unknown.html": { sec: "/#sec-dlc", count: { regex: /<tr id="dlc-/g, expected: N_DLC_ROWS, label: "DLC-Datenzeilen" } },
 };
+// 05.11.2026: Googlebot liest HTML nur bis rund 2 MB (unkomprimiert). Was dahinter steht, sieht Google nicht; in der
+// Search Console brach /ruestungen mitten im Hauptskript ab, die App lief bei Google nicht. Puffer: Grenze 1,9 Mio. Byte.
+const MAX_HTML_BYTES = 1900000;
+console.log(`\n[Seitengroesse und app.css]`);
+for (const file of ["index.html", ...Object.keys(pages)]) {
+  const groesse = fs.statSync(path.join(ROOT, file)).size;
+  ok(groesse <= MAX_HTML_BYTES, `${file}: ${groesse} Byte (hoechstens ${MAX_HTML_BYTES}, Googlebot liest rund 2 MB)`);
+  const appV = (fs.readFileSync(path.join(ROOT, file), "utf8").match(/href="app\.css\?v=([0-9a-f]+)"/) || [])[1];
+  const istV = createHash("sha256").update(fs.readFileSync(path.join(ROOT, "app.css"))).digest("hex").slice(0, 10);
+  ok(appV === istV, `${file}: app.css-Pruefwert aktuell (${appV}, Soll ${istV}), sonst gen-seo laufen lassen`);
+}
+
 const titles = new Set(), descs = new Set();
 const refImgPaths = new Set();
 

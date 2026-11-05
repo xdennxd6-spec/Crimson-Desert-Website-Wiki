@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v46';
+const CACHE_VERSION = 'cd-guide-v47';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   './',
   './index.html',
   './site.webmanifest',
+  './app.css',
   './data/d01-weapons.js',
   './data/d02-crafting.js',
   './data/d03-main-quests.js',
@@ -53,7 +54,8 @@ self.addEventListener('fetch', e => {
   // Network-First fuer HTML und die ausgelagerten Datendateien — User soll Updates sehen.
   // data/*.js muss mit index.html synchron bleiben, darf also nie stale ausgeliefert werden.
   const istDatenSkript = url.origin === self.location.origin && url.pathname.startsWith('/data/') && url.pathname.endsWith('.js');
-  if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/' || istDatenSkript) {
+  const istAppCss = url.origin === self.location.origin && url.pathname === '/app.css';
+  if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/' || istDatenSkript || istAppCss) {
     e.respondWith(
       fetch(e.request)
         .then(r => {
@@ -65,7 +67,8 @@ self.addEventListener('fetch', e => {
           return r;
         })
         // NIE index.html als Skript-Fallback liefern — HTML als JS geparst crasht die Seite
-        .catch(() => caches.match(e.request).then(r => r || (istDatenSkript ? Response.error() : caches.match('./index.html'))))
+        // app.css traegt einen Pruefwert (?v=...): offline zaehlt jede vorhandene Fassung
+        .catch(() => caches.match(e.request, { ignoreSearch: istAppCss }).then(r => r || (istDatenSkript || istAppCss ? Response.error() : caches.match('./index.html'))))
     );
     return;
   }
