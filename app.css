@@ -7853,3 +7853,261 @@ img[src*="cd_assets/weapons/"],img[src*="cd_assets/armor/"],img[src*="cd_assets/
 img[src*="cd_assets/dyes/"],img[src*="cd_assets/npcs/"],img[src*="cd_assets/pets/"],img[src*="cd_assets/bosses/"],
 img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{border-radius:min(14px,18%)}
 .dlc-ico{display:inline-block;width:40px;height:40px;object-fit:contain;vertical-align:middle;margin:0 8px 0 0;background:var(--panel-2);border-radius:8px}
+/* ROM Anfang (Romanze & Ehe, 05.11.2026; Renderer in data/d13-romanze.js) */
+/* Vermerke: wirklich grau wie in der Legende angekündigt; Bernstein bleibt Akzenten und Warnungen vorbehalten. :where hält die Spezifität niedrig. */
+:where(#sec-romanze) .dlc-unb,:where(#sec-romanze) .dlc-nb{color:var(--dim)}
+#sec-romanze .dlc-flag{padding:0 5px;border-color:color-mix(in srgb,var(--dim) 38%,transparent);font-size:max(11px,var(--fs-10));line-height:1.5;color:var(--dim)}
+#sec-romanze .rom-legend{margin:0 0 6px}
+.rom-sec{margin:0 0 8px}
+.rom-sec:not(:has([data-s]:not(.hide))):not(.rom-gaps){display:none}
+.rom-sec>.rom-h{margin:30px 0 13px;font-size:18px;color:var(--ink-hi)}
+.rom-h-en{font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.06em;color:var(--dim)}
+.rom-sub{margin:18px 0 10px;font-family:var(--f-display);font-size:15px;font-weight:700;color:var(--ink-hi)}
+.rom-p{margin:0 0 12px;max-width:78ch;font-size:13.5px;line-height:1.6;color:var(--text)}
+.rom-small{margin:0;max-width:78ch;font-size:12.5px;line-height:1.55;color:var(--dim)}
+.rom-de{color:var(--dim);font-weight:400}
+.rom-k{display:block;margin:0;font:700 11px/1.3 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gold)}
+.rom-k--ok{margin-top:2px;color:var(--cd-ok)}
+.rom-k--warn{margin-top:12px;color:var(--warn)}
+.rom-flag{margin-left:0;white-space:normal}
+/* Kopf: Silhouetten in der Lücke zwischen Text und Kacheln, Kacheln mit bündigen Zahlen */
+.rom-hero .cd-scene-img{opacity:calc(var(--cd-scene-op-hero) * 1.5)}
+.rom-hero .cd-hero-stat{justify-content:flex-end;background:color-mix(in srgb,var(--card) 76%,transparent)}
+.rom-hero .cd-hero-sub{color:var(--text)}
+/* Auf einen Blick: Weg als Kette */
+.rom-path{--rom-n:30px;position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin:0 0 14px;padding:0;list-style:none}
+.rom-node{position:relative;display:flex;flex-direction:column;gap:5px;min-width:0;padding:0 12px 0 0}
+.rom-node::before{content:'';position:absolute;left:var(--rom-n);right:0;top:calc(var(--rom-n)/2);height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 55%,transparent),var(--line))}
+.rom-node:last-child::before{display:none}
+.rom-node-n{position:relative;display:grid;place-items:center;width:var(--rom-n);height:var(--rom-n);margin-bottom:5px;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:50%;
+  background:color-mix(in srgb,var(--gold) 12%,var(--card));font:700 13px/1 var(--f-mono);color:var(--gold)}
+.rom-node-t{font-family:var(--f-display);font-size:14px;font-weight:700;line-height:1.3;color:var(--ink-hi)}
+.rom-node-d{font-size:12.5px;line-height:1.5;color:var(--text)}
+.rom-node--end .rom-node-n{border-color:var(--red);background:color-mix(in srgb,var(--red) 22%,var(--card));font-size:15px;color:var(--red);box-shadow:0 0 14px color-mix(in srgb,var(--red) 35%,transparent)}
+/* Die zwei Leisten */
+.rom-gauges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rom-gauge{display:flex;flex-direction:column;gap:10px;min-width:0;padding:15px 18px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.rom-gauge-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.rom-gauge-h b{font-family:var(--f-display);font-size:14.5px;color:var(--ink-hi)}
+.rom-gauge-h small{font-size:12px;color:var(--dim)}
+.rom-track{position:relative;height:8px;margin:2px 14px 54px 2px;border-radius:999px;background:color-mix(in srgb,var(--line) 75%,transparent)}
+.rom-track-fill{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 14%,transparent),color-mix(in srgb,var(--gold) 72%,transparent) 88%,var(--red))}
+.rom-mark{position:absolute;left:var(--at);top:0;display:flex;flex-direction:column;align-items:center;width:0;white-space:nowrap}
+.rom-mark i{width:12px;height:12px;margin-top:-2px;border:2px solid var(--card);border-radius:50%;background:var(--gold);box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 60%,transparent)}
+.rom-mark b{margin-top:3px;font:700 12.5px/1.2 var(--f-mono);color:var(--gold)}
+.rom-mark small{font-size:11.5px;line-height:1.2;color:var(--dim)}
+.rom-mark--end{align-items:flex-end}
+.rom-mark--end i{margin-right:-6px;background:var(--red);box-shadow:0 0 0 1px var(--red),0 0 12px color-mix(in srgb,var(--red) 50%,transparent)}
+.rom-mark--end b{color:var(--ink-hi)}
+.rom-mark--end small{width:62px;white-space:normal;text-align:right}
+.rom-gauge-d{margin:0;font-size:12.5px;line-height:1.5;color:var(--text)}
+/* Filter und Vergleich */
+.rom-filter{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 12px}
+.rom-filter-l{font:700 11px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.rom-pills{margin:0}
+.rom-cnt{flex:1 1 220px;text-align:right;font-size:12.5px;line-height:1.4;color:var(--dim)}
+.rom-mx-w{margin:0 0 12px;padding:14px 16px 12px;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.rom-mx{width:100%;margin:0;border:0;border-collapse:collapse;table-layout:fixed;background:none;font-size:13px}
+.rom-mx thead tr,.rom-mx tbody tr{background:none}
+.rom-mx th,.rom-mx td{padding:8px 8px;border:0;border-top:1px solid var(--line-soft);background:none;text-align:left;vertical-align:top;font-weight:400;line-height:1.4}
+.rom-mx thead th,.rom-mx thead td{padding-top:0;border-top:0;color:var(--ink-hi)}
+.rom-mx th{text-transform:none;letter-spacing:0;font-family:var(--f-body)}
+.rom-mx thead th,.rom-mx thead td,.rom-mx tbody th,.rom-mx tbody td{background:none!important}
+.rom-mx thead td{width:25%}
+.rom-mx tbody th{white-space:normal;color:var(--text);font-size:12.5px;font-weight:500}
+.rom-fig{display:flex;align-items:center;gap:9px;font-family:var(--f-display);font-size:14px;font-weight:700;line-height:1.2}
+.rom-fig img{flex:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;object-fit:cover;object-position:50% 18%}
+.rom-mx [data-col]{transition:opacity .18s}
+.rom-sec[data-fig="kliff"] .rom-mx [data-col]:not([data-col="kliff"]),.rom-sec[data-fig="oongka"] .rom-mx [data-col]:not([data-col="oongka"]),.rom-sec[data-fig="damiane"] .rom-mx [data-col]:not([data-col="damiane"]){opacity:.38}
+.rom-val{font-weight:600;overflow-wrap:break-word;hyphens:manual}
+.rom-val+.rom-flag{margin-left:6px}
+.rom-val--yes{color:var(--cd-ok)}
+.rom-val--no{color:var(--red)}
+.rom-val--warn{color:var(--warn)}
+.rom-val--open{color:var(--dim)}
+.rom-val.dlc-unb{font-weight:500}
+.rom-val--yes.dlc-unb{color:color-mix(in srgb,var(--cd-ok) 62%,var(--dim))}
+.rom-val--warn.dlc-unb{color:color-mix(in srgb,var(--warn) 62%,var(--dim))}
+.rom-cell-q{display:block;margin-top:2px;font-size:11.5px;line-height:1.35;color:var(--dim)}
+.rom-mx-n{margin:8px 8px 0;font-size:12.5px;line-height:1.55;color:var(--text)}
+/* Porträtkarten */
+.rom-cand>summary{min-height:112px;padding-block:14px}
+.rom-cand .cd-fold-ico{width:88px;height:88px;border-radius:16px;border-color:color-mix(in srgb,var(--cd-acc) 55%,var(--line));box-shadow:0 0 18px color-mix(in srgb,var(--cd-acc) 20%,transparent)}
+.rom-cand .cd-fold-ico img{object-position:50% 20%}
+.rom-cand .cd-fold-t{font-size:18px}
+.rom-t-sub{margin-left:6px;font-family:var(--f-body);font-size:12.5px;font-weight:500;letter-spacing:0;color:var(--dim)}
+.rom-cand .cd-fold-lead{color:var(--text)}
+.rom-cand .cd-fold-chips{margin-top:5px}
+.rom-cand .cd-scene-img{transition:opacity .25s}
+@media (hover:hover){html.cd-motion .rom-cand:not(.is-off)>summary:hover>.cd-scene .cd-scene-img{opacity:calc(var(--cd-scene-op) + .16)}}
+.rom-cand--npc>summary>.cd-scene{--cd-scene-op:calc(var(--cd-scene-op-hero) * .62)}
+.rom-cand--npc .cd-fold-ico{background:color-mix(in srgb,var(--red) 10%,var(--panel))}
+.rom-heart{font-size:40px;line-height:1;font-style:normal;color:var(--red)}
+.rom-cand--out>summary{min-height:0}
+.rom-cand--out .cd-fold-ico{width:56px;height:56px;border-radius:12px;box-shadow:none;filter:grayscale(.75)}
+.rom-cand--out .cd-fold-t{font-size:15.5px}
+.rom-off-chip:empty{display:none}
+.rom-off-chip{display:inline-block;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--card) 80%,transparent);font-size:12px;line-height:1.35;white-space:nowrap;color:var(--text)}
+.cd-fold-aside:has(>.rom-off-chip:empty){display:none}
+.rom-cand.is-off>summary .cd-fold-t,.rom-cand.is-off>summary .cd-fold-lead,.rom-cand.is-off>summary .cd-fold-chips{opacity:.66}
+.rom-cand.is-off>summary>.cd-scene{opacity:.45}
+.rom-cand.is-off .cd-fold-ico{filter:grayscale(.85);box-shadow:none;opacity:.75}
+.rom-facts dd .dlc-flag{margin-left:2px}
+.rom-tag{display:inline-block;margin:0 5px 4px 0;padding:1px 9px;border:1px solid color-mix(in srgb,var(--cd-acc,var(--gold)) 40%,transparent);border-radius:999px;font-size:12.5px;color:var(--ink-hi)}
+.rom-req{display:grid;gap:7px;padding:12px 14px;border:1px solid var(--line-soft);border-radius:12px;background:color-mix(in srgb,var(--cd-acc,var(--gold)) 5%,transparent)}
+.rom-req .rom-k{color:color-mix(in srgb,var(--cd-acc,var(--gold)) 60%,var(--ink-hi))}
+.rom-req ul{display:grid;gap:5px;margin:0;padding:0;list-style:none}
+.rom-req li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px;font-size:13px;line-height:1.5;color:var(--text)}
+.rom-req li .cd-i{width:15px;height:15px;margin-top:3px;color:var(--cd-acc,var(--gold))}
+.rom-series{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 9px;margin:4px 0 0;font-family:var(--f-display);font-size:16px;color:var(--ink-hi)}
+.rom-series-k{flex-basis:100%;font:700 11px/1.3 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:color-mix(in srgb,var(--cd-acc,var(--gold)) 60%,var(--ink-hi))}
+.rom-series .rom-de{font-family:var(--f-body);font-size:13.5px}
+.rom-series .dlc-unb{font-family:var(--f-body);font-size:13.5px}
+.rom-steps .cd-step-t{display:block;font-weight:700;color:var(--ink-hi)}
+.rom-steps .cd-step-d{display:block;color:var(--text)}
+.rom-cand .rom-steps>li::before{border-color:color-mix(in srgb,var(--cd-acc) 60%,transparent);color:color-mix(in srgb,var(--cd-acc) 60%,var(--ink-hi));background:color-mix(in srgb,var(--cd-acc) 12%,var(--card))}
+.rom-cand .rom-steps>li:last-child::before{border-color:var(--red);background:color-mix(in srgb,var(--red) 16%,var(--card));color:var(--red)}
+.rom-wb{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 22px;align-items:start}
+.rom-wb-a,.rom-wb-b{display:grid;gap:12px;min-width:0}
+.rom-cand-foot{margin:10px 2px 0}
+.rom-gal{margin:2px 0 0;display:grid;gap:7px}
+.rom-gal-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.rom-gal img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.rom-gal figcaption{font-size:12px;line-height:1.45;color:var(--dim)}
+.rom-list{display:grid;gap:7px;margin:0;padding-left:18px;font-size:13.5px;line-height:1.55;color:var(--text)}
+/* Vorgehen und Zahlen */
+.rom-card{min-width:0;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.rom-card-h{display:grid;gap:3px;margin-bottom:12px}
+.rom-card-h h4{margin:0;font-family:var(--f-display);font-size:15.5px;font-weight:700;line-height:1.3;color:var(--ink-hi)}
+.rom-plan{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:12px;align-items:start;margin:0 0 12px}
+.rom-plan-a,.rom-plan-b{padding:16px 18px}
+.rom-plan-a .rom-small{margin-top:12px}
+.rom-plan-b .rom-small{margin-top:12px}
+@media (min-width:901px){.rom-plan-b{position:sticky;top:calc(var(--cdx-bb-h,46px) + 14px)}}
+.rom-vals{display:grid;margin:6px 0 0;padding:0;list-style:none}
+.rom-vals li{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 10px;padding:8px 0;border-top:1px solid var(--line-soft)}
+.rom-vals-k{flex:1 1 130px;min-width:0;font-size:13px;line-height:1.35;color:var(--ink-hi)}
+.rom-vals-k small{display:block;font-size:11.5px;line-height:1.35;color:var(--dim)}
+.rom-vals-v{font:700 14px/1.3 var(--f-mono);color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.rom-vals-v.dlc-unb{color:color-mix(in srgb,var(--gold) 62%,var(--dim))}
+.rom-vals--down .rom-vals-v{color:var(--warn)}
+.rom-vals .rom-flag{margin-left:2px}
+.rom-folds{margin-top:10px}
+.rom-folds .cd-fold-ico .cd-g{font-style:normal}
+.rom-folds .cd-fold-ico .cd-i{width:24px;height:24px}
+/* Heirat */
+.rom-wed{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:0;overflow:hidden}
+.rom-wed-f{display:flex;flex-direction:column;min-width:0;margin:0;border-right:1px solid var(--line-soft)}
+.rom-wed-f img{flex:1 1 auto;display:block;width:100%;height:0;min-height:300px;object-fit:cover;object-position:50% 50%}
+.rom-wed-f figcaption{padding:10px 16px 12px;font-size:12px;line-height:1.45;color:var(--dim)}
+.rom-wed-l{display:grid;align-content:start;gap:0;margin:0;padding:6px 18px}
+.rom-wed-l>div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line-soft)}
+.rom-wed-l>div:first-child{border-top:0}
+.rom-wed-l dt{font-size:12px;font-weight:700;line-height:1.45;color:var(--gold)}
+.rom-wed-l dd{margin:0;font-size:13px;line-height:1.5;color:var(--text)}
+.rom-perks{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:10px}
+.rom-perk{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;min-width:0;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.rom-perk-i{display:grid;place-items:center;width:40px;height:40px;border:1px solid color-mix(in srgb,var(--gold) 35%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--gold) 8%,var(--panel));font-size:19px;color:var(--gold)}
+.rom-perk-i .cd-i{width:19px;height:19px}
+.rom-perk-i .cd-g{font-style:normal}
+.rom-perk h4{margin:0 0 3px;font-family:var(--f-display);font-size:14px;font-weight:700;line-height:1.3;color:var(--ink-hi)}
+.rom-perk p{margin:0;font-size:12.5px;line-height:1.5;color:var(--text)}
+/* Der letzte Eintrag sagt, was niemand nennt: ruhige Fußzeile statt verwaister Karte */
+.rom-perk:last-child{grid-column:1/-1;border-style:dashed;background:none;align-items:center}
+.rom-perk:last-child .rom-perk-i{border-color:var(--line);background:none;color:var(--dim)}
+.rom-fest-b{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px 22px;align-items:start}
+.rom-fest-b .rom-req{--cd-acc:var(--amber)}
+/* Stolperfallen */
+.rom-traps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.rom-trap{grid-column:span 2;display:flex;min-width:0}
+.rom-trap--miss{grid-column:span 3}
+.rom-trap .cd-note{flex:1;min-width:0}
+.rom-tips-w:not(:has([data-s]:not(.hide))),.rom-perks-w:not(:has([data-s]:not(.hide))){display:none}
+.rom-fest-b .cd-go{display:inline-flex;align-items:center;min-height:40px}
+.rom-tips{display:grid;margin:0;padding:4px 18px;list-style:none}
+.rom-tip{display:grid;grid-template-columns:18px minmax(120px,190px) minmax(0,1fr);gap:4px 10px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:13px;line-height:1.55;color:var(--text)}
+.rom-tip:first-child{border-top:0}
+.rom-tip .cd-i{width:16px;height:16px;margin-top:3px;color:var(--slate)}
+.rom-tip b{font-weight:700;color:var(--ink-hi)}
+.rom-tip.hide{display:none}
+.rom-fixes{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.rom-fixes li{display:grid;grid-template-columns:74px 56px minmax(0,1fr);gap:4px 10px;padding:9px 0;border-top:1px solid var(--line-soft);font-size:13px;line-height:1.5}
+.rom-fixes li:first-child{border-top:0;padding-top:0}
+.rom-fix-v{font-family:var(--f-mono);font-size:12.5px;color:var(--gold)}
+.rom-fix-date{font-family:var(--f-mono);font-size:12px;color:var(--dim)}
+.rom-fix-d{color:var(--text)}
+/* FAQ: schlankere Faltkarten */
+.rom-faq{gap:6px}
+.rom-faq .cd-fold>summary{min-height:48px;padding-block:9px}
+.rom-faq .cd-fold-t{font-size:14px}
+.rom-faq .cd-fold>summary::before{opacity:.35;box-shadow:none}
+/* Lücken */
+.rom-gaps{margin:22px 0 14px;padding:4px 18px 16px;border:1px dashed var(--line-strong);border-radius:14px;background:color-mix(in srgb,var(--gdim) 5%,transparent)}
+.rom-gaps>.rom-h{margin:14px 0 8px;font-size:15.5px}
+.rom-gaps ul{margin:0;padding-left:18px;columns:2 340px;column-gap:30px;font-size:12.5px;line-height:1.55;color:var(--dim)}
+.rom-gaps li{margin:0 0 4px;break-inside:avoid}
+#rom-root>.cd-src{margin-top:8px}
+@media (max-width:1180px){
+  .rom-path{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}
+  .rom-node:nth-child(3n)::before{display:none}
+  .rom-trap,.rom-trap--miss{grid-column:span 3}
+  .rom-trap:last-child{grid-column:1/-1}
+}
+@media (max-width:900px){
+  .rom-plan,.rom-wed,.rom-wb,.rom-fest-b{grid-template-columns:minmax(0,1fr)}
+  .rom-wed-f{border-right:0;border-bottom:1px solid var(--line-soft)}
+  .rom-wed-f img{flex:none;height:auto;min-height:0;aspect-ratio:996/547}
+}
+@media (max-width:600px){
+  .rom-sec>.rom-h{margin-top:24px;font-size:17px}
+  .rom-path{grid-template-columns:minmax(0,1fr);row-gap:0}
+  .rom-node{display:grid;grid-template-columns:30px minmax(0,1fr);grid-template-areas:"n t" "n d";gap:1px 12px;padding:0 0 14px}
+  .rom-node-n{grid-area:n;margin:0}
+  .rom-node-t{grid-area:t}
+  .rom-node-d{grid-area:d}
+  .rom-node::before,.rom-node:nth-child(3n)::before{display:block;left:14.5px;right:auto;top:30px;bottom:0;width:1px;height:auto;background:linear-gradient(color-mix(in srgb,var(--gold) 55%,transparent),var(--line))}
+  .rom-node:last-child{padding-bottom:4px}
+  .rom-node:last-child::before{display:none}
+  .rom-gauges{grid-template-columns:minmax(0,1fr)}
+  .rom-filter-l{flex-basis:100%}
+  .rom-pills{margin-inline:-16px;padding-inline:16px;max-width:calc(100vw - 0px)}
+  .rom-cnt{flex-basis:100%;text-align:left}
+  /* Vergleich: Zeilenkopf über den drei Figuren, sonst bleiben für jede Spalte nur 85 px. Rollen stehen im Markup, damit es eine Tabelle bleibt. */
+  .rom-mx-w{padding:12px 12px 10px}
+  .rom-mx,.rom-mx thead,.rom-mx tbody{display:block;font-size:12.5px}
+  .rom-mx tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:8px;padding:8px 0;border-top:1px solid var(--line-soft)}
+  .rom-mx thead tr{padding-top:0;border-top:0}
+  .rom-mx th,.rom-mx td{display:block;min-width:0;padding:0;border:0}
+  .rom-mx thead td{display:none}
+  .rom-mx tbody th{grid-column:1/-1;margin-bottom:3px;font-size:12px;color:var(--dim)}
+  .rom-fig{flex-direction:column;align-items:flex-start;gap:4px;font-size:13px}
+  .rom-fig img{width:36px;height:36px}
+  .rom-val+.rom-flag{display:block;width:fit-content;margin:2px 0 0}
+  /* Ein Filter aktiv: nur diese Figur, Zeilenkopf links daneben */
+  .rom-sec[data-fig="kliff"] .rom-mx [data-col]:not([data-col="kliff"]),.rom-sec[data-fig="oongka"] .rom-mx [data-col]:not([data-col="oongka"]),.rom-sec[data-fig="damiane"] .rom-mx [data-col]:not([data-col="damiane"]){display:none}
+  .rom-sec:is([data-fig="kliff"],[data-fig="oongka"],[data-fig="damiane"]) .rom-mx tr{grid-template-columns:minmax(0,42%) minmax(0,1fr)}
+  .rom-sec:is([data-fig="kliff"],[data-fig="oongka"],[data-fig="damiane"]) .rom-mx tbody th{grid-column:auto;margin:0;color:var(--text)}
+  .rom-sec:is([data-fig="kliff"],[data-fig="oongka"],[data-fig="damiane"]) .rom-mx thead td{display:block}
+  .rom-mx-n{margin:8px 4px 0}
+  .rom-cand>summary{min-height:0}
+  .rom-cand:has(.cd-fold-chips)>summary{grid-template-columns:64px minmax(0,1fr) auto;grid-template-areas:"ico t arr" "ico l arr" "chips chips chips" "aside aside aside";align-items:start}
+  .rom-cand:has(.cd-fold-chips)>summary>.cd-fold-main{display:contents}
+  .rom-cand:has(.cd-fold-chips)>summary .cd-fold-t{grid-area:t}
+  .rom-cand:has(.cd-fold-chips)>summary .cd-fold-lead{grid-area:l}
+  .rom-cand:has(.cd-fold-chips)>summary .cd-fold-chips{grid-area:chips;margin-top:2px}
+  .rom-cand:has(.cd-fold-chips)>summary .cd-fold-arr{grid-area:arr;align-self:start}
+  .rom-cand .cd-fold-ico{width:64px;height:64px;border-radius:13px}
+  .rom-cand--out .cd-fold-ico{width:46px;height:46px}
+  .rom-cand .cd-fold-t{font-size:16.5px}
+  .rom-t-sub{display:block;margin:1px 0 0}
+  .rom-gal-g{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rom-wed-l>div{grid-template-columns:minmax(0,1fr);gap:1px}
+  .rom-fixes li{grid-template-columns:62px minmax(0,1fr);}
+  .rom-fix-d{grid-column:1/-1}
+  .rom-off-chip{white-space:normal}
+  .rom-tip{grid-template-columns:18px minmax(0,1fr)}
+  .rom-tip>span:last-child{grid-column:2}
+  .rom-trap,.rom-trap--miss,.rom-trap:last-child{grid-column:1/-1}
+}
+@media (max-width:380px){.rom-pills{flex-wrap:wrap;overflow:visible}}
+/* ROM Ende */

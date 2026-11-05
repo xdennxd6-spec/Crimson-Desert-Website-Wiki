@@ -1421,6 +1421,7 @@ const SEC_RENDERERS={
   chapters:['renderChapters','renderQuestTimeline'],
   patches:['renderPatches'],
   secrets:['renderSecrets','renderFragmentTracker','renderCressetTracker'],
+  romanze:['renderRomanze'],
   dlc:['renderDlc'],
   'dlc-kampf':['renderDlcKampf'],
   'dlc-ausruestung':['renderDlcAusruestung'],
@@ -1477,6 +1478,8 @@ const SECTIONS = [
   {id:'map',         res:'welt', name:'Karte', en:'Map', desc:'Interaktive Karte von Pywel', aka:['Map','Weltkarte','interaktive Karte','Pywel'], glyph:'⌖', count:'Pywel', plate:'§09', coord:'D1'},
   {id:'locations',   res:'welt', name:'Orte & Glocken', en:'Locations', desc:'Wichtige Orte je Region und alle Glocken', aka:['Locations','Ort','Stadt','Region','Höhle','Glocke','Glockenturm','Bell Tower'], glyph:'⌂', count:'Orte', plate:'§10', coord:'D2'},
   {id:'npcs',        res:'welt', name:'Charaktere & NPCs', en:'People', desc:'Verbündete, Händler und wichtige Figuren', aka:['NPC','Händler','Charakter','Figur','Person','Verbündete'], glyph:'♟', count:'NPCs', plate:'§29', coord:'D9'},
+  // 05.11.2026: Romanze & Ehe steht direkt hinter den Figuren: Kandidaten sind Charaktere und NPCs, gesucht wird nach Personen (Renderer und Daten data/d13-romanze.js)
+  {id:'romanze',     res:'welt', name:'Romanze & Ehe', en:'Romance & Marriage', desc:'Flirten, Vertrauen, Kandidaten, Heirat und Scheidung seit dem DLC', aka:['Romance','Romanze','Flirten','Heiraten','Heirat','Ehe','Beziehung','marry','Scheidung','Vertrauen','Hochzeit','Heiratsantrag','Marriage','Ehepartner'], glyph:'♥', count:'4 Hexen', plate:'', coord:''},
   {id:'camp',        res:'welt', name:'Graumähnen-Camp', en:'Greymane Camp', desc:'Ausbau des Camps Stufe für Stufe', aka:['Camp','Camp-Ausbau','Greymane','Graumähnen','Lager','Wohnen'], glyph:'⛫', count:'5 Stufen', plate:'§34', coord:'D10'},
   {id:'mounts',      res:'welt', name:'Reittiere', en:'Mounts', desc:'Pferde und besondere Reittiere mit Fundort', aka:['Mount','Pferd','Horse','Reittier','Flug-Reittier','Stall'], glyph:'♞', count:'Galerie', plate:'§11', coord:'D5'},
   {id:'pets',        res:'welt', name:'Haustiere', en:'Pets', desc:'Alle Haustiere und wie du sie bekommst', aka:['Pet','Haustier','Begleiter','Tier'], glyph:'❥', count:'Liste', plate:'§18', coord:'D6'},

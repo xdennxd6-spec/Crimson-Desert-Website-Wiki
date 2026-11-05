@@ -247,6 +247,7 @@ const SOLL_SEITEN = [
   ["map", "welt", "Karte", "Map", "Interaktive Karte von Pywel"],
   ["locations", "welt", "Orte & Glocken", "Locations", "Wichtige Orte je Region und alle Glocken"],
   ["npcs", "welt", "Charaktere & NPCs", "People", "Verbündete, Händler und wichtige Figuren"],
+  ["romanze", "welt", "Romanze & Ehe", "Romance & Marriage", "Flirten, Vertrauen, Kandidaten, Heirat und Scheidung seit dem DLC"],  // 05.11.2026: direkt hinter den Figuren
   ["camp", "welt", "Graumähnen-Camp", "Greymane Camp", "Ausbau des Camps Stufe für Stufe"],
   ["mounts", "welt", "Reittiere", "Mounts", "Pferde und besondere Reittiere mit Fundort"],
   ["pets", "welt", "Haustiere", "Pets", "Alle Haustiere und wie du sie bekommst"],
@@ -263,7 +264,8 @@ const SOLL_SEITEN = [
 // 37 seit 10.10.2026: armorsets (Rüstungssets) als eigene Seite direkt nach armor
 // 38 seit 31.10.2026: dlc (Charting the Unknown) als letzte Seite der Kategorie welt
 // 42 seit 01.11.2026: dlc-kampf, dlc-ausruestung, dlc-quests, dlc-sammeln je als letzte Seite ihrer Kategorie
-const SOLL_ANZAHL = 42;
+// 43 seit 05.11.2026: romanze (Romanze & Ehe) direkt nach npcs
+const SOLL_ANZAHL = 43;
 // Abyss-Split: Synthese-Woerter gehoeren in aka von "synthesis", nicht mehr in aka von "cores"
 const SOLL_SYNTHESIS_AKA = ["Synthese", "Synthesis", "Fusion", "fusionieren", "Assimilation", "Abyssal Assimilation",
   "Synthese-Baum", "Witch Synthesis", "Hexen-Synthese", "Spezial-Synthese", "Special Synthesis", "Rezepte", "kombinieren"];
@@ -276,7 +278,7 @@ const SOLL_NAV_LABELS = {
   "hexen": "Hexen & Fusion", "hauptquests": "Hauptquests", "fraktionen": "Fraktionsquests",
   "side-quests": "Nebenquests", "kapitel-guide": "Kapitel-Guide", "true-ending": "True Ending",
   "ruinen": "Uralte Ruinen", "raetsel": "Rätsel", "trophaeen": "Trophäen & Errungenschaften",
-  "npcs": "Charaktere & NPCs", "mounts": "Reittiere", "pets": "Haustiere",
+  "npcs": "Charaktere & NPCs", "romanze": "Romanze & Ehe", "mounts": "Reittiere", "pets": "Haustiere",
   "geheimnisse": "Geheimnisse & Lore", "charting-the-unknown": "Charting the Unknown", "crafting": "Herstellen & Farmen",
 };
 

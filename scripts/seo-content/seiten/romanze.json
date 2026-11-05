@@ -1,0 +1,33 @@
+{
+  "intro": "Seit dem DLC „Charting the Unknown“ gibt es in Crimson Desert Romanze und Heirat. Dieser Guide erklärt die beiden Vertrauensleisten, das Flirten über „Interagieren“, die {{hexen|wort}} namentlich belegten Hexen mit Fundort und Romanze-Reihe, den Heiratsantrag, was die Ehe bringt, das Camp-Fest und die Scheidung. Eine vollständige Kandidatenliste hat Pearl Abyss nicht veröffentlicht; was nur eine Quelle nennt oder gar nicht belegt ist, steht offen dabei. Im Spiel getestet wurde nichts davon.",
+  "faq": [
+    {
+      "frage": "Gibt es in Crimson Desert Romanze und Heirat?",
+      "antwort": "Ja, seit dem DLC „Charting the Unknown“ und dem dazugehörigen Patch. Ältere Artikel, nach denen es keine Romanze gibt, sind überholt. Ohne DLC gibt es laut OutputLag keine Flirten-Option, einen abgeschlossenen Hauptstrang braucht es laut mehreren Guides nicht."
+    },
+    {
+      "frage": "Wie flirte ich in Crimson Desert?",
+      "antwort": "NPC ansprechen, Interagieren wählen und dann Flirten. Laut mehreren Guides verlangt das zuerst normales Vertrauen {{voll}}; davor wird der Versuch abgelehnt und kostet {{strafe}} Vertrauen. Ob jemand infrage kommt, zeigt das Herzsymbol an der Vertrauensanzeige im Interaktionsmenü."
+    },
+    {
+      "frage": "Wen kann ich in Crimson Desert heiraten?",
+      "antwort": "Namentlich belegt sind die {{hexen|wort}} Hexen Elowen, Bari, Lyselia und Areciel. Dazu kommen NPCs mit Herzsymbol, etwa Ladenbesitzer, Handwerker, wandernde Bewohner und Orks. Eine Liste mit Namen und Orten gibt es in keiner Quelle. Die Spielfiguren können einander nicht umwerben, Graumähnen-Gefährten gelten als ausgeschlossen."
+    },
+    {
+      "frage": "Können Oongka und Damiane heiraten?",
+      "antwort": "Romanze und Heirat gelten allgemein für alle {{figuren|wort}} Figuren. Die Hexen heiratet laut VICE und einem weiteren Guide nur Kliff, das passt zu den Spieldaten, amtlich bestätigt ist es nicht. Normale NPCs mit Herz können laut einem Guide alle Figuren heiraten; Oongka und Damiane müssen dafür demselben Guide zufolge erst einen Wohnsitz bauen."
+    },
+    {
+      "frage": "Wann kann ich einen Heiratsantrag machen?",
+      "antwort": "Bei {{voll}} auf der erweiterten Vertrauensstufe, sagt Pearl Abyss. Bei den Hexen müssen zusätzlich die Quests in ihren Sanktums abgeschlossen sein; laut mehreren Guides auch die Romanze-Reihe samt Geständnis. Wie viele Tage das dauert, lässt sich nicht berechnen, weil die Punktwerte fehlen."
+    },
+    {
+      "frage": "Was bringt die Ehe in Crimson Desert?",
+      "antwort": "Der Ehepartner erscheint auf Welt- und Minikarte, kann mitreisen, überreicht regelmäßig Geschenke und lässt sich beim Friseur anpassen. Ein zugewiesener Wohnsitz wird zu seinem Wohnort. Kampfboni nennt keine Quelle, Kinder sind nicht bestätigt."
+    },
+    {
+      "frage": "Kann ich mich in Crimson Desert scheiden lassen?",
+      "antwort": "Ja, die Ehe lässt sich im Interaktionsmenü auflösen. Pearl Abyss schreibt nur: „Dies hat jedoch seinen Preis.“ Art und Höhe des Preises nennt keine geprüfte Quelle. Für einen neuen Partner musst du dich laut mehreren Guides zuerst trennen."
+    }
+  ]
+}
