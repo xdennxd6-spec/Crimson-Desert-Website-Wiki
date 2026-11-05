@@ -6956,6 +6956,48 @@ a.rail-btn{text-decoration:none}
 }
 .cd-en-link[hidden]{display:none!important}
 /* EN-LINK Ende */
+/* COOKIE-AUSWAHL Anfang (consent.js, Aufbau wie im Epitome-Wiki) */
+.cd-consent{position:fixed;z-index:10000;inset:auto 18px 18px;display:flex;align-items:center;justify-content:space-between;gap:22px;max-width:1040px;margin:0 auto;padding:20px 22px;border:1px solid var(--line-strong);border-radius:14px;background:var(--vellum-deep);color:var(--iron-gall);box-shadow:0 22px 70px rgba(0,0,0,.56)}
+.cd-consent[hidden]{display:none}
+.cd-consent__copy{max-width:570px}
+.cd-consent__eyebrow{color:var(--brass-hi);font:600 11px/1.2 var(--f-mono);letter-spacing:.18em;text-transform:uppercase}
+.cd-consent h2,.cd-consent-dialog h2{margin:6px 0 7px;color:var(--ink-hi);font:500 clamp(19px,2vw,23px)/1.2 var(--f-display);letter-spacing:-.01em}
+.cd-consent p{margin:0;color:var(--iron-soft);font:13px/1.55 var(--f-body)}
+.cd-consent__actions{display:flex;flex:0 0 auto;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.cd-consent__button{min-height:40px;border:1px solid var(--line-strong);border-radius:8px;padding:9px 12px;background:transparent;color:var(--iron-gall);font:600 12px/1.2 var(--f-body);cursor:pointer}
+.cd-consent__button:hover,.cd-consent__button:focus-visible{border-color:var(--brass-hi)}
+.cd-consent__button--primary{border-color:var(--brass);background:var(--brass);color:#14100a}
+.cd-consent__button--primary:hover,.cd-consent__button--primary:focus-visible{background:var(--brass-hi)}
+.cd-consent__text-button{border:0;padding:0;background:none;color:var(--brass-hi);font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.sb-consent{display:block;margin:0 0 8px;font-size:12px}
+.cd-consent-dialog{width:min(700px,calc(100% - 28px));max-width:none;max-height:min(88vh,850px);overflow:auto;border:1px solid var(--line-strong);border-radius:14px;padding:0;background:var(--vellum-deep);color:var(--iron-soft);box-shadow:0 24px 90px rgba(0,0,0,.65)}
+.cd-consent-dialog::backdrop{background:rgba(2,5,9,.78);backdrop-filter:blur(4px)}
+.cd-consent-dialog__inner{position:relative;display:flex;flex-direction:column;gap:15px;padding:clamp(22px,4vw,34px)}
+.cd-consent-dialog__close{position:absolute;top:15px;right:17px;width:34px;height:34px;border:1px solid var(--line-strong);border-radius:50%;background:transparent;color:var(--iron-gall);font-size:23px;line-height:1;cursor:pointer}
+.cd-consent-dialog__inner>.cd-consent__eyebrow{padding-right:40px}
+.cd-consent-dialog__inner h2{margin:-7px 40px 0 0}
+.cd-consent-dialog p{margin:0;font:13px/1.62 var(--f-body);color:var(--iron-soft)}
+.cd-consent-detail{border-top:1px solid var(--line);padding-top:14px}
+.cd-consent-detail h3{margin:0 0 8px;color:var(--ink-hi);font:600 13px/1.4 var(--f-body);letter-spacing:.02em}
+.cd-consent-detail p+p{margin-top:8px}
+.cd-consent-dialog code{padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.06);color:var(--brass-hi);font-size:.95em;overflow-wrap:anywhere}
+.cd-consent-dialog a{color:var(--brass-hi)}
+.cd-consent-option{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;border-top:1px solid var(--line);padding-top:14px;cursor:pointer}
+.cd-consent-option strong,.cd-consent-option small{display:block}
+.cd-consent-option strong{color:var(--ink-hi);font:600 13px/1.4 var(--f-body)}
+.cd-consent-option small{max-width:570px;margin-top:4px;color:var(--iron-soft);font:12px/1.55 var(--f-body)}
+.cd-consent-option input{flex:0 0 auto;width:18px;height:18px;margin:2px 0 0;accent-color:var(--brass)}
+.cd-consent-dialog .cd-consent-dialog__note{font-size:12px}
+.cd-consent__actions--dialog{justify-content:flex-start;border-top:1px solid var(--line);padding-top:15px}
+@media(max-width:760px){
+  .cd-consent{inset:auto 10px 10px;flex-direction:column;align-items:stretch;gap:14px;padding:17px}
+  .cd-consent__actions{display:grid;grid-template-columns:1fr 1fr}
+  .cd-consent__button--primary{grid-column:1/-1;grid-row:1}
+  .cd-consent-dialog__inner{gap:12px}
+  .cd-consent__actions--dialog{display:flex}
+  .cd-consent__actions--dialog .cd-consent__button{flex:1 1 auto}
+}
+/* COOKIE-AUSWAHL Ende */
 /* DLC „Charting the Unknown“ (31.10.2026): Seite #sec-dlc (renderDlc, data/d12-dlc.js) und Etikett „DLC“ auf
    Waffen-/Rüstungskarten. Unbestätigt/nicht belegt = var(--gdim) mit gestricheltem Vermerk. Mobil ab 390 px:
    Tabellen werden zu Zeilenkarten (td::before = Spaltenname), kein seitlicher Überlauf. */

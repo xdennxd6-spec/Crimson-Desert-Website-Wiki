@@ -66,7 +66,8 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=b34b7ebd2e">
+<link rel="stylesheet" href="app.css?v=b2c9a05d90">
+<script src="consent.js?v=1"></script>
 </head>
 <body>
 <h1 class="vh">Crimson Desert Wiki — Guides, Bosse, Quests &amp; Datenbanken</h1>
@@ -318,6 +319,7 @@
       <button class="theme-btn" onclick="openHelp()" title="Tastenkürzel (?)" aria-label="Tastenkürzel-Hilfe" style="margin-left:auto">?</button>
     </div>
     <a class="sb-en cd-en-link" id="sbEn" href="https://crimson--desert--wiki-com.translate.goog/?_x_tr_sl=de&amp;_x_tr_tl=en&amp;_x_tr_hl=en" rel="nofollow" lang="en"><span aria-hidden="true">EN</span> Read in English <small>(auto-translated)</small></a>
+    <button type="button" class="cd-consent__text-button sb-consent" data-consent-open>Cookie-Einstellungen</button>
     <div style="display:flex;align-items:center;justify-content:space-between">
       <span>Pearl Abyss · 2026</span>
       <span id="ee-hint" title="">🥚</span>
