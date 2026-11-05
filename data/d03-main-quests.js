@@ -1252,6 +1252,24 @@ const WEAPON_IMGS={
   "Ladle":"cd_assets/weapons/item-1004544.webp",
   "Kitchen Knife":"cd_assets/weapons/item-1004545.webp",
   "Frying Pan Lid":"cd_assets/weapons/item-1004543.webp",
-  "Jar Lid":"cd_assets/weapons/item-1004433.webp"
+  "Jar Lid":"cd_assets/weapons/item-1004433.webp",
+  // 05.11.2026: 17 weitere DLC-Waffen (Spieldaten dlc_01, Icon -> KI-Mix 2x); Beleg: _run_2026-11-05-ausbau/b-dlc-waffen-ruestung
+  "Soul Sword":"cd_assets/weapons/item-1004517.webp",
+  "Azurewater Shield":"cd_assets/weapons/item-1005444.webp",
+  "Stormforged Shield":"cd_assets/weapons/item-1005445.webp",
+  "Veyrfin Sword":"cd_assets/weapons/item-1005599.webp",
+  "Depthbinder Rapier":"cd_assets/weapons/item-1005623.webp",
+  "Rampart Tortoiseshell":"cd_assets/weapons/item-1005624.webp",
+  "Harpoon Spear":"cd_assets/weapons/item-1005652.webp",
+  "Chieftain's Mace":"cd_assets/weapons/item-1006324.webp",
+  "Silverbreaker Mace":"cd_assets/weapons/item-1006327.webp",
+  "Priest's Ceremonial Sword":"cd_assets/weapons/item-1006328.webp",
+  "Swordbreaker":"cd_assets/weapons/item-1006329.webp",
+  "Seahorse Staff":"cd_assets/weapons/item-1006331.webp",
+  "Tempest Warhammer":"cd_assets/weapons/item-1006332.webp",
+  "Fang of the Depths":"cd_assets/weapons/item-1006333.webp",
+  "Blackwave Spear":"cd_assets/weapons/item-1006334.webp",
+  "Gatekeeper's Longsword":"cd_assets/weapons/item-1006335.webp",
+  "Feral Claw":"cd_assets/weapons/item-1006336.webp"
 };
 const FEX_IMG_PREFIX="https://static0.fextralifeimages.com/file/crimsondesertgame/";
