@@ -8,7 +8,7 @@ const PATCHES=[
       "Behoben: Der Gegenstand <b>„Niburak-Stoffrüstung“</b> (<em>Nibrak Cloth Armor</em>) verschwand. <span style='color:var(--gdim)'>Einordnung: Die Notice nennt weder Auslöser noch Umstände und sagt nicht, ob verschwundene Rüstungen zurückkommen.</span>"
     ]},
     {cat:"Plattformen und Quelle",items:[
-      "Steam (PC), Steam (Mac), PlayStation und Epic Games Store: <em>Patch jetzt verfügbar</em>. XBOX und Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 05.11.2026). Keine Downloadgröße, keine Build-Nummer. <span style='color:var(--gdim)'>Einordnung: Der Mac App Store hängt seit dem DLC-Start über alle sieben Hotfixes hinweg zurück.</span>",
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 05.11.2026). Keine Downloadgröße, keine Build-Nummer. <span style='color:var(--gdim)'>Einordnung: Der Mac App Store hängt seit dem DLC-Start über alle sieben Hotfixes hinweg zurück.</span>",
       "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde am 05.11.2026 um 03:00 UTC aktualisiert und zählt jetzt 15 Punkte. Entfernt ist die Rückkehr zum Titelbildschirm beim Mehrfach-Schenken, die 2.04.06 als behoben gemeldet hatte. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
       "Quelle: offizielle Patch-Notizen Version 2.04.07, Pearl Abyss, 05.11.2026 00:00 UTC laut Detailseite (boardNo 151), deutsche und englische Fassung gegengeprüft; Steam-News 05.11.2026 03:20 UTC."
     ]}
