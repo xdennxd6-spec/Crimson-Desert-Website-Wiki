@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=17cf86c03f">
+<link rel="stylesheet" href="app.css?v=37617e4e39">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -1003,9 +1003,9 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div class="upg-wrap"><ol class="upg-path" id="wupgrade-path" aria-label="Refinement-Stufen beim Schmied"></ol><div id="wupgrade-gear"></div></div>
     <div id="it-dex" class="sub-t" style="scroll-margin-top:72px">Items-Kompendium</div>
     <div class="upg-intro upg-intro-dex">
-      <p class="upg-lead">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst.</p>
+      <p class="upg-lead">Werkzeuge, Verbrauchsgegenstände, Munition, Währung/Progression und Schlüssel-/Quest-Items, die du im Inventar trägst, dazu Meeresmaterialien wie Malachite und Shiny Ore.</p>
       <p class="upg-legend">Einträge mehrquellig belegt; <b>≈</b> = nur Einzelquelle</p>
-      <details class="item-more upg-more"><summary>Was steht auf anderen Seiten?</summary><div class="item-more-body"><p class="upg-rest">Gekochte Gerichte (Kochen &amp; Elixiere), Roh-Materialien (Sammelobjekte), Färbemittel, Abyss-Ausrüstung und Ausrüstung haben eigene Seiten. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz".</p></div></details>
+      <details class="item-more upg-more"><summary>Was steht auf anderen Seiten?</summary><div class="item-more-body"><p class="upg-rest">Gekochte Gerichte (Kochen &amp; Elixiere), Roh-Materialien an Land (Sammelobjekte), Färbemittel, Abyss-Ausrüstung und Ausrüstung haben eigene Seiten. Quest-bezogene Dokumente, Notizen und Aushänge stehen in der eigenen Kategorie „Quest-Dokument &amp; Notiz".</p></div></details>
     </div>
     <!-- Bereichsleiste und Kategorie-Auswahl werden aus ITEMS erzeugt (renderItemBar / fillItemdexCats).
          Bewusst nicht mehr als feste option-Liste im Markup: die stand sonst neben den Daten und hatte
@@ -3211,6 +3211,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <ul class="gt-xref cd-spot" aria-label="Verwandte Seiten">
       <li><span class="gt-xref-k" aria-hidden="true">🔗</span><span>Nicht verwechseln: Sammelbare Gegenstände und Wissenseinträge (Collectibles) stehen auf der Seite <a href="#" onclick="showSec('collectibles');return false;">Sammelgegenstände</a>. Hier geht es um Rohstoffe zum Sammeln (Gatherables).</span></li>
       <li><span class="gt-xref-k" aria-hidden="true">🔗</span><span>Siehe Seite <a href="#" onclick="showSec('crafting');return false;">Herstellen &amp; Farmen</a> (Alchemie) für Catalyst-Rezepte und den Stat-Upgrade-Abschnitt (Spirit, Stamina) für Turn-in-Materialien.</span></li>
+      <li><span class="gt-xref-k" aria-hidden="true">🔗</span><span>Malachite, Shiny Ore und Manganese Nodule aus dem Meer stehen auf der Seite <a href="#" onclick="showSec('items');return false;">Materialien &amp; Items</a> im Bereich Meeresmaterial.</span></li>
     </ul>
     <div class="ibar gt-bar" id="gatherables-bar" role="group" aria-label="Sammelobjekte nach Kategorie filtern"></div>
     <div class="fbar gt-fbar">
