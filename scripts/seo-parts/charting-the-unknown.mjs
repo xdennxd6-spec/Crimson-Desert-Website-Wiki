@@ -238,7 +238,7 @@ ${table(["Questreihe", "Figur / Start", D.QUESTS.some((q) => stepsOf(q).length) 
     D.QUESTS.map((q) => tr(rid("quest", q.name), q, [name(q),
       esc(q.who) + (q.start ? "<br>Start: " + val(q.start) : "") + (val(q.req) ? "<br>Voraussetzung: " + val(q.req) : ""),
       { h: subsHtml(q), cls: "ctu-sub" }, val(q.rewards) + (q.note ? "<br>" + val(q.note) : "")])))}
-<p class="note">Alle übrigen Graumähnen-Quests stehen bei den <a href="/fraktionen">Fraktionsquests</a>.</p>`;
+<p class="note">Alle übrigen Graumähnen-Quests stehen bei den <a href="/fraktionen">Fraktionsquests</a>. Kandidaten, Antrag und Scheidung zu den Romanze-Reihen stehen auf der Seite <a href="/romanze">Romanze &amp; Ehe</a>.</p>`;
 
   const bosse = `<h2>Bosse (${D.BOSSES.length})</h2>
 ${list(D.BOSS_NOTES)}

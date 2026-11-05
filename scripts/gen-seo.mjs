@@ -49,6 +49,8 @@ import * as partRuinen from "./seo-parts/ruinen.mjs";
 import * as partGeheimnisse from "./seo-parts/geheimnisse.mjs";
 // Erster DLC (31.10.2026): Schiffe, Inseln, Tauchen, Quests, Garten der Pruefungen, Daten in data/d12-dlc.js.
 import * as partChartingTheUnknown from "./seo-parts/charting-the-unknown.mjs";
+// Romanze & Ehe (05.11.2026), Daten in data/d13-romanze.js.
+import * as partRomanze from "./seo-parts/romanze.mjs";
 // 01.11.2026: Abschnitt "Neu mit Charting the Unknown" oben auf den Themen-Seiten (kein eigenes Seitenmodul)
 import { dlcNeu } from "./seo-parts/_dlc-neu.mjs";
 
@@ -170,7 +172,7 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
   partHauptquests, partFraktionen, partPatchNotes, partNpcs,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
-  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown,
+  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown, partRomanze,
   // Patch-Archiv 1.x (Patch-Notes-Umbau, fest aktiv seit 29.10.2026, siehe seo-parts/patch-notes.mjs)
   partPatchNotes1];
 
@@ -223,6 +225,7 @@ const NAV = [
   ["raetsel", "Rätsel", "quests"],
   ["trophaeen", "Trophäen & Errungenschaften", "quests"],
   ["npcs", "Charaktere & NPCs", "welt"],
+  ["romanze", "Romanze & Ehe", "welt"],
   ["mounts", "Reittiere", "welt", "kopf"],
   ["pets", "Haustiere", "welt"],
   ["geheimnisse", "Geheimnisse & Lore", "welt"],

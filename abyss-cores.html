@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=c3bebd7505">
+<link rel="stylesheet" href="app.css?v=e16a49186d">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -291,6 +291,9 @@ font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.
 .seo-more ul.dlc-neu-l li{margin:0 0 7px;break-inside:avoid}
 .seo-more span.dlc-neu-i{display:block;font-size:12.5px;color:var(--ink-dim)}
 .seo-more span.dlc-gtag{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:7px;font-family:var(--f-mono);font-size:var(--fs-10);font-weight:700;letter-spacing:.06em;color:#08202b;background:#8fdcff;vertical-align:2px}
+.seo-more article.rom-seo img{width:96px;height:96px;aspect-ratio:1/1;object-fit:cover;object-position:50% 20%;border-radius:12px;float:right;margin:0 0 8px 12px}
+.seo-more article.rom-seo ol{margin:8px 0 0;padding-left:20px;font-size:14px}
+.seo-more article.rom-seo li{margin:0 0 5px}
 
 .seo-more{margin:44px 0 8px;padding:22px 22px 18px;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:14px;
 background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.62}
@@ -331,6 +334,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <li><a href="/raetsel">Rätsel</a></li>
       <li><a href="/trophaeen">Trophäen &amp; Errungenschaften</a></li>
       <li><a href="/npcs">Charaktere &amp; NPCs</a></li>
+      <li><a href="/romanze">Romanze &amp; Ehe</a></li>
       <li><a href="/mounts">Reittiere</a></li>
       <li><a href="/pets">Haustiere</a></li>
       <li><a href="/geheimnisse">Geheimnisse &amp; Lore</a></li>
@@ -911,7 +915,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <section class="sec" id="sec-start" aria-labelledby="start-title">
     <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <!-- Statischer Kopf für den ersten Paint (Schnellstart, siehe <head>); renderStartOverview() ersetzt ihn samt aktuellen Zahlen. -->
-    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>37</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>534</dd></div></dl></header></div>
+    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>42</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>534</dd></div></dl></header></div>
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
@@ -2121,6 +2125,12 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div id="npcs-root"></div>
   </section>
 
+  <!-- Romanze & Ehe (05.11.2026): Daten und Renderer in data/d13-romanze.js, CSS in app.css (Anker ROM) -->
+  <section class="sec" id="sec-romanze">
+    <h2 class="sec-t"><span class="sec-sym">♥</span> Romanze &amp; Ehe <span class="sec-t-en">Romance &amp; Marriage</span></h2>
+    <div id="rom-root"></div>
+  </section>
+
   <section class="sec" id="sec-patches">
     <h2 class="sec-t"><span class="sec-sym">✎</span> Patch-Notes</h2>
     <div id="r2b12-pt-hero"></div>
@@ -2150,7 +2160,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
             <li><i class="cd-g" aria-hidden="true">❖</i><div><b>Schiffe und Unterwassertiere:</b> Schiffe sind ein neues Transportmittel. Ein Segelschiff baut man per Schiffsbau-Mission selbst oder kauft es bei Schiffsverwaltern (<em>fleetmasters</em>) in ganz Pywel; Schiffsausrüstung gibt es bei den Schiffsverwaltern in Demeniss und Delesyia. Mit dem Segelschiff lässt sich Seehandel mit neuen Handelswaren betreiben. Verschiedene Unterwassertiere werden je nach Art bezwungen oder gefüttert, um Vertrauen zu gewinnen, und danach als Transportmittel registriert. <span style="color:var(--gdim)">Eine offizielle Liste gibt es nicht; laut mehreren Guides gehören Hai, Orca, Meeresschildkröte und Mondfisch dazu, der Zitterrochen nur laut Game8 (Details auf der Seite <a class="cd-go" href="#sec=dlc" data-go="dlc">Charting the Unknown</a>).</span></div></li>
             <li><i class="cd-g" aria-hidden="true">⌂</i><div><b>Wohnen und Burgen:</b> Das Wohn-System wird erweitert: Grundriss selbst entwerfen und bauen, Wände und Fenster frei setzen (Menü „Dekorieren“, „Hausgrundriss“, „Freies Bauen“). Voraussetzung sind das fertige Camp am Heulenden Hügel und die Graumähnen-Fraktionsquest „Anfrage von Luke“ (<em>Luke's Request</em>). Zwei Burgen lassen sich selbst gestalten: Burg Drachensturz (<em>Drakesfall Castle</em>) und Burg der Flammenritter (<em>Flame Knight's Castle</em>); freigeschaltet werden sie jeweils über eine Quest und die Befreiung des Stützpunkts (die Patch-Notizen kennzeichnen das als Spoiler). Dazu kommen 17 neue Wohnsitze, die über Missionsentsendungen errichtet werden. <span style="color:var(--gdim)">Die Feature-Übersicht spricht von drei Burgen, die Patch-Notizen nennen zwei. Die Abweichung ist offen.</span></div></li>
             <li><i class="cd-g" aria-hidden="true">⚑</i><div><b>Verwalten und Feste:</b> Befreite Stützpunkte lassen sich mieten und als Restaurant, Sägewerk, Schmiede oder Schneiderei betreiben (Kartenreiter „Einrichtung“). Die Einrichtungen laufen weiter, auch wenn man weit entfernt ist, und gelegentlich kommen besondere Kunden. Stützpunkte der Graumähnen erscheinen auf der Karte jetzt blau. Neu ist außerdem eine Mission für ein Fest im Camp: NPCs mit ausreichend Vertrauen kommen zu Besuch, das Vertrauen steigt dort schneller, und bestimmte Besucher lassen sich als Ehrengraumähnen (<em>Honorary Greymanes</em>) anheuern.</div></li>
-            <li><i class="cd-g" aria-hidden="true">♥</i><div><b>Vertrauen und Ehe:</b> Die Vertrauensstufen werden erweitert. Über „Interagieren“ und „Flirten“ ist bei 100 auf der erweiterten Stufe ein Heiratsantrag möglich; bei den Hexen müssen dafür die Sanktum-Quests der jeweiligen Hexe abgeschlossen sein. Der Ehepartner erscheint auf Welt- und Minikarte, kann mitreisen, überreicht regelmäßig Geschenke und lässt sich beim Friseur optisch anpassen. Die Ehe kann aufgelöst werden, laut Pearl Abyss hat das aber seinen Preis. <span style="color:var(--gdim)">Flirtet ein spielbarer Charakter mit einem NPC, sinkt dessen Vertrauen zu den anderen spielbaren Charakteren.</span></div></li>
+            <li><i class="cd-g" aria-hidden="true">♥</i><div><b>Vertrauen und Ehe:</b> Die Vertrauensstufen werden erweitert. Über „Interagieren“ und „Flirten“ ist bei 100 auf der erweiterten Stufe ein Heiratsantrag möglich; bei den Hexen müssen dafür die Sanktum-Quests der jeweiligen Hexe abgeschlossen sein. Der Ehepartner erscheint auf Welt- und Minikarte, kann mitreisen, überreicht regelmäßig Geschenke und lässt sich beim Friseur optisch anpassen. Die Ehe kann aufgelöst werden, laut Pearl Abyss hat das aber seinen Preis. <span style="color:var(--gdim)">Flirtet ein spielbarer Charakter mit einem NPC, sinkt dessen Vertrauen zu den anderen spielbaren Charakteren.</span> <a class="cd-go" href="#sec=romanze" data-go="romanze">Alles dazu auf der Seite Romanze &amp; Ehe</a></div></li>
             <li><i class="cd-g" aria-hidden="true">⚔</i><div><b>Garten der Prüfungen</b> (<em>Garden of Trials</em>): neuer Kampfinhalt nach der Hauptquest „Ende der Reise“, im Abyss in der Nähe des Archivs des Axioms. Insgesamt 10 Gruppen, allein oder mit bis zu drei Charakteren (Kliff, Oongka, Damiane) in frei wählbarer Reihenfolge; fällt einer, kämpft der nächste weiter. Gerichte heilen dort nicht. Jede abgeschlossene Gruppe bringt einen Effekt, der eine bestehende Fähigkeit verbessert. Laut Feature-Übersicht kämpft man dort nacheinander gegen bereits bekannte Bosse und erhält eine besondere Belohnung.</div></li>
             <li><i class="cd-g" aria-hidden="true">☠</i><div><b>Neue Bosse und Ausrüstung:</b> mehrere neue, mächtige Bosse, gegen einige ist über Erinnerungsfragmente eine Revanche möglich. Neue Ausrüstung umfasst Rüstungen, Waffen, Ausrüstung für Transportmittel und Haustiere sowie Abyss-Ausrüstung. <span style="color:var(--gdim)">Namen von Bossen, Inseln oder Ausrüstung nennt Pearl Abyss nicht. Ein großer Roboter-Gegner aus dem Trailer ist nur durch Fachpresse beschrieben und unbestätigt.</span></div></li>
             <li><i class="cd-g" aria-hidden="true">✦</i><div><b>Vorbestellerbonus:</b> das „Tauchanzug-Set des Entdeckers“ für Kliff und Oongka sowie das „Leichte Tauchanzug-Set des Entdeckers“ für Damiane (englisch Charter's Diving Set und Charter's Light Diving Set). Vorbestellen ließ sich der DLC bis zur Veröffentlichung, diese Phase ist damit beendet.</div></li>
@@ -2380,6 +2390,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d10-enemy-drops.js" fetchpriority="low"></script>
 <script src="data/d11-fac-quest-imgs.js" fetchpriority="low"></script>
 <script src="data/d12-dlc.js" fetchpriority="low"></script>
+<script src="data/d13-romanze.js" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -7348,6 +7359,11 @@ function _dlcSecReittiere(){
 }
 /* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests). Helfer _dlcQ_* (Achtung: _dlcQ ohne Unterstrich gehört den Waffen/Rüstungen). */
 const _dlcQ_KEY='cd_r2_dlc_quests';
+/* 05.11.2026: Die Schritte von „Romanze: Bari“ und „Romanze: Lyselia“ wurden neu sortiert, die Haken hängen am Index. Einmalig umschreiben, damit sie auf ihrem Schritt bleiben. */
+(function(){const F='cd_r2_dlc_quests_mig1';try{if(localStorage.getItem(F))return;const s=cdCheckGet(_dlcQ_KEY);
+if(s.size){const sw=(a,b)=>{const x=s.has(a),y=s.has(b);x?s.add(b):s.delete(b);y?s.add(a):s.delete(a);};
+sw('romanze-bari-1','romanze-bari-2');sw('romanze-lyselia-1','romanze-lyselia-3');lsSet(_dlcQ_KEY,JSON.stringify([...s]));}
+lsSet(F,'1');}catch(e){}})();
 /* Gruppen der Filter-Pillen, abgeleitet nur per Stichwort aus dem ersten Teil von who (vor dem ersten Komma).
    Szene je Gruppe: Charakter-Porträts bzw. der Graumähnen-Strang; Ozean-Reihen zeigen das Schiffsmotiv (roadmap, wie der Kopf der Übersicht). */
 const _dlcQ_GROUPS=[
@@ -7356,7 +7372,7 @@ const _dlcQ_GROUPS=[
   {v:'oongka',t:'Oongka',g:'O',tone:'amber',scene:'char-oongka'},
   {v:'fraktion',t:'Graumähnen & Fraktion',g:'⚑',tone:'gold',scene:'q-faction'},
   {v:'ozean',t:'Großer Ozean',g:'⚓',tone:'ice',scene:'roadmap'},
-  {v:'romanze',t:'Romanze',g:'♥',tone:'gold',scene:'q-faction'},
+  {v:'romanze',t:'Romanze',g:'♥',tone:'gold',scene:'romanze'},
   {v:'weitere',t:'Weitere',g:'❢',tone:'ice',scene:'q-faction'}];
 function _dlcQ_grp(q){
   const w=String(q&&q.who||'').split(',')[0].trim().toLowerCase();
@@ -7423,6 +7439,7 @@ function _dlcQ_fold(q,i,useScene){
     }
     h+=_dlcFacts([['Belohnungen',q.rewards]]);
     if(q.note)h+=cdNote({h:_dlcV(q.note)},{kind:'info',title:'Notiz'});
+    if(G.v==='romanze')h+='<p class="dlc-p">Fundorte, Voraussetzungen und Antrag: '+cdGoLink('romanze',cdSlug(q.name).replace(/^romanze-/,''),'Romanze & Ehe')+'</p>';
     return h;
   };
   return cdFold({id:'dlc-q-'+cdSlug(q.name),title:{h:cdEsc(q.name)+(q.de?' <span class="dlc-de">'+cdEsc(q.de)+'</span>':'')},
@@ -7617,6 +7634,7 @@ function _dlcSecLeben(){
     s:[x.name,_dlcP(x.where),_dlcP(x.how),_dlcP(x.note)].join(' '),
     rows:[['Ort',_dlcCell(x.where,true)],['Erwerb',_dlcCell(x.how,true)],['Hinweis',_dlcCell(x.note)]]})));
   b+='<p class="dlc-p">Camp-Ausbau und Voraussetzungen: '+cdGoLink('camp','','Graumähnen-Camp')+'</p>';
+  b+='<p class="dlc-p">Flirten, Kandidaten, Antrag und Scheidung im Überblick: '+cdGoLink('romanze','','Romanze & Ehe')+'</p>';
   return {title:'Burgen, Wohnen, Verwaltung und Soziales',lead:'Zwei gestaltbare Burgen, freies Bauen, Einrichtungen pachten, Ehe, Feste und Würfelspiel.',icon:'⌂',
     chips:gruppen.map(g=>({t:g})),body:b};
 }
@@ -14569,7 +14587,7 @@ if (syGetCode()) _loadServerProgress();
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a> · <a href="/#sec-dlc-kampf">DLC-Bosse</a><br>
   Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a> · <a href="/#sec-dlc-ausruestung">DLC-Ausrüstung</a><br>
   Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a> · <a href="/#sec-dlc-quests">DLC-Quests</a><br>
-  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a><br>
+  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/romanze">Romanze &amp; Ehe</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a> · <a href="/#sec-dlc-sammeln">DLC-Schiffsteile</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>

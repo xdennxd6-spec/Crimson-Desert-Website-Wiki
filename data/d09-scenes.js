@@ -4,6 +4,11 @@
 // Wird vom Integrator aus redesign-2/scenes/manifest-*.json erzeugt. Fehlt ein Schluessel, greift der naechste
 // Schluessel der Kette bzw. die Farbflaeche mit Glyphe (cdScene-Rueckfall).
 const SCENES={
+  'romanze':{f:'romanze.webp',alt:'Zwei Gestalten als Silhouetten in der Abenddämmerung, eine mit Rundschild',pos:'50% 35%',w:512,h:512},
+  'rom-elowen':{f:'rom-elowen.webp',alt:'Elowens Hütte mit roten Blumen auf dem Dach, zwischen Bäumen im Sonnenlicht',pos:'50% 30%',w:512,h:512},
+  'rom-bari':{f:'rom-bari.webp',alt:'Bari mit Hexenhut in ihrer Holzhütte bei Kerzenlicht',pos:'50% 24%',w:512,h:512},
+  'rom-lyselia':{f:'rom-lyselia.webp',alt:'Holztür in einer Felswand neben einer Steinlaterne',pos:'50% 50%',w:512,h:512},
+  'rom-areciel':{f:'rom-areciel.webp',alt:'Areciel hinter einem Holztisch in ihrem Haus in roten Klippen',pos:'50% 30%',w:512,h:512},
   // Set A: offizielle Bilder (Regionen, Kapitel, Seitenkoepfe, Quests, Checklisten, Charaktere) (38)
   'reg-hernand':{f:'reg-hernand-v2.webp',alt:'Grüne Wiese auf einem Plateau in Hernand mit Felswand, Nadelbäumen und Gebirge im Hintergrund, davor ein Abenteurer mit Rundschild',pos:'50% 40%',w:1920,h:1080},
   'reg-pailune':{f:'reg-pailune-v2.webp',alt:'Dorf mit roten Holzzäunen, Schnitzfiguren und Hütten in Pailune vor schneebedeckten Bergen, im Vordergrund ein Bogenschütze mit Schild',pos:'50% 30%',w:1920,h:1080},
