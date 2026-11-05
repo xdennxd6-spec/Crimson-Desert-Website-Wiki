@@ -29,7 +29,7 @@ const DLC_META = {
   full: "Crimson Desert Enhanced: Charting the Unknown",
   release: "29.10.2026, 22:00 UTC (in Deutschland 23:00 MEZ)",
   patch: "2.04.00",
-  hotfixes: "Hotfix zu 2.04.00 sowie 2.04.02 bis 2.04.05 (Fehlerbehebungen, unter anderem zu Erschließung, Tauchen, Romanze und Einrichtungen; 2.04.04 und 2.04.05 am 01.11.2026)",
+  hotfixes: "Hotfix zu 2.04.00 sowie 2.04.02 bis 2.04.07 (Fehlerbehebungen, unter anderem zu Erschließung, Tauchen, Romanze und Einrichtungen; 2.04.04 und 2.04.05 am 01.11.2026, 2.04.06 am 04.11.2026, 2.04.07 am 05.11.2026)",
   price: "24,99 € im Steam-Shop (Pearl Abyss nennt selbst keinen Preis)",
   platforms: "Steam (Windows und macOS), PlayStation 5, Xbox Series X|S, Epic Games Store; laut Pearl Abyss auch im Mac App Store, das Spiel-Update 2.04.00 ist dort aber noch in Vorbereitung",
   checked: "02.11.2026",
@@ -78,6 +78,7 @@ const DLC_SHIPS = [
 const DLC_SHIP_NOTES = [
   "Kaufen lassen sich Schiffe erst nach dem eigenen Small Greymane Ship. Jeder Hafen verkauft die Schiffe seiner Region: Hernandian ships in Vellua, Demenissian ships im Demeniss Port, Delesyian ships in Delesyia und das kleine in Stoneward Harbor.",
   {v: "Die letzten sieben Schiffskarten (Medium und Large Greymane Ship, Phantom Ship, Assault Ship of the East, Flagship of the East, The Drunken Catfish und das Large Delesyian Naval Ship der Marine) stehen nur in den Spieldaten, ohne Händler. Wie man sie bekommt, ist nicht belegt.", c: "unb", q: "th.gl, Spieldaten"},
+  "Offizielle deutsche Namen laut den Patch-Notizen 2.04.06: Phantom Ship heißt dort „Geisterschiff“, Assault Ship of the East „Sturmschiff des Ostens“ und The Drunken Catfish „trunkener Wels“. Behoben ist seitdem, dass die Drachenpiraten (Kite Pirates) ins Innere des Sturmschiffs des Ostens gelangen konnten, und dass beim Besiegen von Geisterschiff und trunkenem Wels die Belohnungsgüter nun garantiert vergeben werden (die englische Notice formuliert das Gegenteil, maßgeblich ist die deutsche Fassung).",
   {v: "Werte der Demenissian und Delesyian ships und Besatzungsplätze je Schiff", c: "nb"}
 ];
 // C2 Haendler, Waehrung, Folgequest
@@ -226,7 +227,7 @@ const DLC_MOUNT_FACTS = [
   ["Schiffe und kleine Boote", "Zählen ebenfalls als Transportmittel (Kauf mit Camp Funds, siehe Schiffe)."],
   ["Kartennebel", "Wie weit sich der Kartennebel lichtet, hängt jetzt vom Transportmittel ab."],
   ["Hai im Einsatz", {v: "Haie schwimmen unter Wasser sehr schnell, beißen andere Fische, und die Beute lässt sich direkt vom Rücken einsammeln.", c: "unb", q: "Sportskeeda"}],
-  ["Twitch-Drops Woche 1", "Pet Parrot (180 Min. Zuschauzeit) und Braised Meat x10 (60 Min.); Parrot Pirate Hat und Pirate Lantern stehen in der Tabelle „Weitere Ausrüstung“."],
+  ["Twitch-Drops Woche 1", "Pet Parrot (180 Min. Zuschauzeit) und Braised Meat x10 (60 Min.); Parrot Pirate Hat und Pirate Lantern stehen in der Tabelle „Weitere Ausrüstung“. Bei Abholproblemen bleiben die Belohnungen von Woche 1 bis 11.11.2026, 23:59 UTC erhältlich."],
   ["Reittier-Ausrüstung", "Ausrüstung für Transportmittel und Haustiere (z. B. die Bear Dverkhan Armor) steht im Abschnitt „Neue DLC-Ausrüstung“."]
 ];
 
@@ -405,7 +406,7 @@ const DLC_GEAR_TOOLS_DE = {"Frying Pan": "Bratpfanne", "Ladle": "Schöpfkelle", 
 const DLC_GEAR_NOTES = [
   "Offiziell neu: Rüstungen, Waffen, Ausrüstung für Transportmittel und Haustiere sowie Abyss-Ausrüstung, ohne Einzelnamen. Alle Guides sind zwei bis drei Tage nach Release ausdrücklich unvollständig.",
   "Vorbesteller-Bonus: „Tauchanzug-Set des Entdeckers“ (Charter's Diving Set) für Kliff und Oongka, „Leichtes Tauchanzug-Set des Entdeckers“ (Charter's Light Diving Set) für Damiane; abholen über Pause, Others, Add-ons, Receive. Ohne Vorbestellung gibt es Tauchanzug-Teile bei Relic-Händlern.",
-  "Twitch-Drops Woche 1 (29.10. bis 04.11.2026, auch ohne DLC): Pirate's Sword und Pirate Eyepatch nach 120 Minuten Zuschauzeit."
+  "Twitch-Drops Woche 1 (29.10. bis 04.11.2026, auch ohne DLC): Pirate's Sword und Pirate Eyepatch nach 120 Minuten Zuschauzeit. Bei Abholproblemen bleiben die Belohnungen von Woche 1 bis 11.11.2026, 23:59 UTC erhältlich."
 ];
 
 // Seehandel-Waren, Wohnsitze, Relic-Haendler (Nachtlauf 01.11.2026; Felder siehe Dateikopf, leer = ausgeblendet)
@@ -459,6 +460,8 @@ const DLC_SOURCES = [
   {t: "Hotfix 2.04.03", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=147"},
   {t: "Hotfix 2.04.04", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=148"},
   {t: "Hotfix 2.04.05", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=149"},
+  {t: "Hotfix 2.04.06", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=150"},
+  {t: "Hotfix 2.04.07", url: "https://crimsondesert.pearlabyss.com/en-US/News/Notice/Detail?_boardNo=151"},
   {t: "Game8 Schiffe", url: "https://game8.co/games/Crimson-Desert/archives/635788"},
   {t: "Game8 Schiffsteile", url: "https://game8.co/games/Crimson-Desert/archives/636449"},
   {t: "Game8 Quests", url: "https://game8.co/games/Crimson-Desert/archives/635794"},
@@ -499,9 +502,9 @@ const DLC_GEAR_EXTRA = [
   {name: "Wagenräder (Wheel)", kind: "Wagenausrüstung", slot: "Räder", stats: "Seasoned Comrade's, Meticulous Carpenter's, The Laughing Marionette's, Renowned Magnate's, Wandering Merchant's, Elegant Noble's und Noble Delegation's Wheel; alle auch herstellbar", source: "Wagon Workshop in Hernand (Seasoned Comrade's, 600 Kupfer), Pailune (Meticulous Carpenter's, 2.000 Kupfer) und Demeniss (The Laughing Marionette's, 3.500 Kupfer); die übrigen nur per Herstellung (th.gl, geprüft 01.11.2026)", c: "unb", q: "th.gl Spieldaten, einzige Quelle"},
   {name: "Wagon Lantern", kind: "Wagenausrüstung", slot: "Wagenlaterne", source: "Nur per Herstellung (th.gl, geprüft 01.11.2026)", stats: {v: "Werte nicht belegt", c: "nb"}, c: "unb", q: "th.gl Spieldaten, einzige Quelle"},
   {name: "Skyway Rocket Pack", kind: "Ausrüstung (Rucksack)", char: "Oongka (laut Itembeschreibung kann ihn kaum ein anderer Graumähne bändigen)", slot: "Rucksack", source: "Belohnung der Quest „Faltering Hands, Iron Will“ in Oongkas Reihe „Forged Resolve“ (th.gl, geprüft 01.11.2026); verbesserte Fassung des Kuku Rocket Pack", stats: {v: "Mehr Schub als der Kuku Rocket Pack, Zahlen nicht belegt", c: "unb", q: "Itembeschreibung laut th.gl"}, c: "unb", q: "th.gl Spieldaten, einzige Quelle"},
-  {name: "Pirate Eyepatch", kind: "Ausrüstung (Twitch-Drop)", slot: {v: "Brille (Glasses)", c: "unb", q: "th.gl Spieldaten"}, source: "Twitch-Drop Woche 1 (29.10.2026 22:00 UTC bis 04.11.2026 23:59 UTC) nach 120 Minuten Zuschauzeit, zusammen mit dem Pirate's Sword (Pearl-Abyss-Drops-Seite und Notice 136, geprüft 01.11.2026)", req: "Eine Crimson Desert Edition genügt, der DLC ist nicht nötig; Steam direkt im Spiel, PlayStation, Xbox und Epic per Code", stats: {v: "Werte nicht belegt", c: "nb"}},
-  {name: "Pirate Lantern", kind: "Werkzeug (Laterne)", source: "Twitch-Drop Woche 1 nach 60 Minuten Zuschauzeit, zusammen mit Braised Meat x10 (Pearl-Abyss-Drops-Seite und Notice 136, geprüft 01.11.2026)", req: "Eine Crimson Desert Edition genügt, der DLC ist nicht nötig", stats: {v: "Wirkung und Werte nicht belegt", c: "nb"}},
-  {name: "Parrot Pirate Hat", kind: "Haustier-Ausrüstung", slot: {v: "Haustier-Kopfschmuck (Pet Helm) für den Pet Parrot", c: "unb", q: "th.gl Spieldaten"}, source: "Twitch-Drop Woche 1 nach 180 Minuten Zuschauzeit, zusammen mit dem Pet Parrot (Pearl-Abyss-Drops-Seite und Notice 136, geprüft 01.11.2026)", req: "Eine Crimson Desert Edition genügt, der DLC ist nicht nötig", stats: {v: "Werte nicht belegt", c: "nb"}},
+  {name: "Pirate Eyepatch", kind: "Ausrüstung (Twitch-Drop)", slot: {v: "Brille (Glasses)", c: "unb", q: "th.gl Spieldaten"}, source: "Twitch-Drop Woche 1 (29.10.2026 22:00 UTC bis 04.11.2026 23:59 UTC; bei Abholproblemen bis 11.11.2026 23:59 UTC erhältlich) nach 120 Minuten Zuschauzeit, zusammen mit dem Pirate's Sword (Pearl-Abyss-Drops-Seite und Notice 136, geprüft 01.11.2026)", req: "Eine Crimson Desert Edition genügt, der DLC ist nicht nötig; Steam direkt im Spiel, PlayStation, Xbox und Epic per Code", stats: {v: "Werte nicht belegt", c: "nb"}},
+  {name: "Pirate Lantern", kind: "Werkzeug (Laterne)", source: "Twitch-Drop Woche 1 (bei Abholproblemen bis 11.11.2026 23:59 UTC erhältlich) nach 60 Minuten Zuschauzeit, zusammen mit Braised Meat x10 (Pearl-Abyss-Drops-Seite und Notice 136, geprüft 01.11.2026)", req: "Eine Crimson Desert Edition genügt, der DLC ist nicht nötig", stats: {v: "Wirkung und Werte nicht belegt", c: "nb"}},
+  {name: "Parrot Pirate Hat", kind: "Haustier-Ausrüstung", slot: {v: "Haustier-Kopfschmuck (Pet Helm) für den Pet Parrot", c: "unb", q: "th.gl Spieldaten"}, source: "Twitch-Drop Woche 1 (bei Abholproblemen bis 11.11.2026 23:59 UTC erhältlich) nach 180 Minuten Zuschauzeit, zusammen mit dem Pet Parrot (Pearl-Abyss-Drops-Seite und Notice 136, geprüft 01.11.2026)", req: "Eine Crimson Desert Edition genügt, der DLC ist nicht nötig", stats: {v: "Werte nicht belegt", c: "nb"}},
   {name: "Haustier-Outfits bei Cartaine (Cook's, Worker's, Fishing)", kind: "Haustier-Ausrüstung", char: "Katze (Feline) und Hund (Canine)", stats: "Feline/Canine Cook's Cloth Hat und Outfit, Feline/Canine Worker's Cloth Hat und Outfit, Feline/Canine Fishing Hat und Outfit", source: "Relic-Exchange-Händler Cartaine auf Samora Island: Hut 5, Outfit 9 Ancient Relics (th.gl, geprüft 01.11.2026; dass Cartaine Katzen- und Hunde-Outfits führt, sagen auch GameRant und Mobalytics)", req: "Wird erst angeboten, wenn man ein passendes Haustier hat", c: "unb", q: "Einzelnamen und Preise nur laut th.gl"},
   {name: "Haustier-Outfits bei Evander (Scholastone, Ludeon)", kind: "Haustier-Ausrüstung", char: "Katze (Feline) und Hund (Canine)", stats: "Feline/Canine Scholastone Honorary Scholar Cap und Outfit, Feline/Canine Ludeon Plate Hat und Outfit", source: "Relic-Exchange-Händler Evander auf Satyros Island: Scholastone Cap 5 und Outfit 9, Ludeon Hat 7 und Outfit 12 Ancient Relics (th.gl, geprüft 01.11.2026; Haustierkleidung bei diesem Händler nennen auch GameRant und Mobalytics)", req: "Wird erst angeboten, wenn man ein passendes Haustier hat", c: "unb", q: "Einzelnamen und Preise nur laut th.gl"},
   {name: "Feline und Canine Charter's Diving Helm und Suit", kind: "Haustier-Ausrüstung", char: "Katze (Feline) und Hund (Canine)", source: "Nur per Herstellung (th.gl, geprüft 01.11.2026); Blaupause nicht belegt", stats: {v: "Werte nicht belegt", c: "nb"}, c: "unb", q: "th.gl Spieldaten, einzige Quelle"},
