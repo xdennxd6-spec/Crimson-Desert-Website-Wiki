@@ -1041,7 +1041,10 @@ input:focus-visible,textarea:focus-visible,
    KEINE bewussten Farben: inline-Styles, .skip-link, .boss-lore-ext, .ruin-src a und die
    .xref-Spans (kein <a>) gewinnen weiterhin. */
 a{color:var(--gold);text-decoration:none}
-a:hover{color:var(--glo);text-decoration:underline}
+/* Unterstreichung per :where() wirklich auf 0-0-1: a:hover (0-1-1) schlug sonst jedes
+   .karte{text-decoration:none} (0-1-0) und unterstrich Karten samt Icon. */
+a:hover{color:var(--glo)}
+a:where(:hover){text-decoration:underline}
 a:visited{color:var(--gold)}
 
 /* Cross-Reference Links */
