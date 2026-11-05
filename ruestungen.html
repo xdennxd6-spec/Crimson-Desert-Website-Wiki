@@ -1962,6 +1962,7 @@ html.cf-open,html.cf-open body{overflow:hidden}
   flex-direction:column;
   gap:5px;
 }
+.item-more-body .crow > .cv{min-width:0;overflow-wrap:anywhere}
 .set-quelle{font-size:var(--fs-10-5);color:var(--gdim);margin-top:6px}
 .set-piece button{background:none;border:0;padding:0;font:inherit;color:var(--brass);cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:2px}
 .set-piece button:hover{color:var(--survey-red)}
@@ -4900,6 +4901,7 @@ html.cd-motion .q5-clp-b .cd-i{transition:transform .25s}
 .q5-st-b .cd-chip{min-height:22px;font-size:11.5px}
 .q5-st-f{margin-top:9px}
 .q5-st-f dd{font-size:13px;color:var(--text)}
+.cd-fold.q5-fac .cd-fold-body>*,.q5-steps>li,.q5-st-hd>*{min-width:0;overflow-wrap:anywhere}
 .q5-st-tip{margin:10px 0 0;max-width:76ch;padding:9px 14px 0;border-bottom:9px solid transparent;border-left:2px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:0 10px 10px 0;
   background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 7%,transparent),transparent 85%);font-size:13px;line-height:1.6;color:var(--text)}
 .q5-clp>.q5-st-tip{margin-top:10px}
@@ -7163,6 +7165,7 @@ a.rail-btn{text-decoration:none}
 .dlc-a-eff{color:var(--gold)}
 .dlc-a-sm{font-size:var(--fs-11)}
 .dlc-a-dim{color:var(--dim)}
+.dlc-a-card .cm .tag{white-space:normal;max-width:100%}
 #dlc-root-ausruestung .dlc-a-card .cv{min-width:0;overflow-wrap:anywhere}
 /* Bildklick (Großansicht) wie auf den Vorbildseiten */
 #dlc-root-ausruestung .dlc-a-grid .card img,#dlc-root-ausruestung .dlc-a-grid .card :has(> img:only-child){cursor:zoom-in}
@@ -8855,7 +8858,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <p class="intro">Rüstung bestimmt in Crimson Desert vor allem, wie gut Kliff gegnerische Angriffe übersteht. Jedes Teil gehört zu einem Ausrüstungsplatz für Torso, Kopf, Hände, Schuhe oder Mantel und erhöht die Verteidigung. Zusätzlich können Rüstungsteile Resistenzen gegen Feuer, Eis und Blitz besitzen. Diese Resistenzen werden als Stufe angegeben, nicht als Prozentwert, und helfen bei Gegnern oder Situationen mit dem jeweiligen Element. Handschuhe und Schuhe können neben ihrer Schutzwirkung außerdem Angriff verleihen, wodurch sie auch für einen offensiveren Spielstil relevant sind. Die Liste mit 476 Rüstungsteilen hilft dir, Ausrüstung gezielt nach den Werten auszuwählen, die für deinen aktuellen Kampf wichtig sind. Du kannst einzelne Teile vergleichen, passende Resistenzen für eine Herausforderung suchen und erkennen, ob sich ein Wechsel zugunsten von mehr Verteidigung oder Angriff lohnt.</p>
 <p class="kontext">Zur Rüstung gehören die Waffen aus der <a href="/waffen">Waffen-Datenbank</a> und Ringe, Halsketten und Ohrringe aus der <a href="/accessoires">Accessoire-Liste</a>. Abyss Cores für Rüstung findest du unter <a href="/abyss-cores">Abyss Cores</a>.</p>
 
-<p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Defense (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense. <b>Woher die Werte stammen</b>, steht seit dem 21.08.2026 in einer eigenen Spalte: 41 Teile kommen aus dem Datenimport der Spieldateien, 430 sind aus Guides belegt, 1 stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 02.06.2026 entfernt hat; bei 4 Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
+<p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Defense (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense. <b>Woher die Werte stammen</b>, steht seit dem 21.08.2026 in einer eigenen Spalte: 45 Teile kommen aus dem Datenimport der Spieldateien, 426 sind aus Guides belegt, 1 stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 02.06.2026 entfernt hat; bei 4 Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
 <p class="note">In der App filterst du die Rüstungs-Datenbank nach Teil und Material, findest alle Sets mit Figur-Ansicht auf der eigenen Seite <a href="/#sec-armorsets">Rüstungssets</a>, siehst größere Icons und vergleichst mehrere Ausrüstungsteile direkt nebeneinander. Herstellbare Teile stehen zusätzlich im <a href="/#sec-crafting">Crafting-Bereich</a>, die mehrfach erwähnten Slots erklärt die <a href="/#sec-cores">Abyss-Core-Übersicht</a>, und als Gegenstück gibt es die <a href="/#sec-weapons">Waffen-Liste</a>.</p>
 
 
@@ -9171,10 +9174,10 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1005803.webp" alt="Forsaken Oath Plate Armor" width="34" height="34">Forsaken Oath Plate Armor<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
-<td>Plate, Def +37, Move Speed +1 <span class="ctu-flag">unbestätigt: Move Speed nur laut Game8; Def laut th.gl und Game8</span></td>
+<td>Plate, Def +37</td>
 <td>Fundort nicht erfasst</td>
 <td class="prov">aus Guides belegt</td>
-<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenrüstung des versunkenen Schwurs. Spieltext: Eine Plattenrüstung, die den Schwur eines in der Tiefsee versunkenen Ritters in sich birgt. Spuren der langen Jahre unter den Wellen sind überall sichtbar, und die schwere Panzerung umschließt den Körper des Trägers lückenlos. Sie wurde so robust gefertigt, dass sie dem Körper selbst bei tosenden Wellen und reißenden Strömungen sicheren Halt bietet. Teil des Forsaken Oath Plate Sets. Laut th.gl (Spieldaten) Def 11 bei +0 und 37 bei +10 (geprüft 05.11.2026). Def 37 bei +10 nennen th.gl und Game8 übereinstimmend; Move Speed +1 nur laut Game8-Rüstungsliste (einzige Quelle, unbestätigt). Das Set ist laut Game8 für Kliff und Oongka.</td>
+<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenrüstung des versunkenen Schwurs. Spieltext: Eine Plattenrüstung, die den Schwur eines in der Tiefsee versunkenen Ritters in sich birgt. Spuren der langen Jahre unter den Wellen sind überall sichtbar, und die schwere Panzerung umschließt den Körper des Trägers lückenlos. Sie wurde so robust gefertigt, dass sie dem Körper selbst bei tosenden Wellen und reißenden Strömungen sicheren Halt bietet. Teil des Forsaken Oath Plate Sets. Laut th.gl (Spieldaten) Def 11 bei +0 und 37 bei +10 (geprüft 05.11.2026). Def 37 bei +10 nennen th.gl und Game8 übereinstimmend; die Game8-Rüstungsliste führt zusätzlich Move Speed +1 (einzige Quelle); vermutlich ist das die Wirkung eines vorgesockelten Sockels wie Haste I bei den Sunken Azuretide Plate Boots, der Sockel für dieses Teil ist nicht erfasst, die Angabe steht deshalb nicht im Effekt. Das Set ist laut Game8 für Kliff und Oongka.</td>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1004803.webp" alt="Frenoa Plate Armor" width="34" height="34">Frenoa Plate Armor</td>
@@ -9566,7 +9569,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td>Cloth, Def +17, Schwimmtempo +2 %, 2 % Chance, Gegner bei Treffer zu entwaffnen <span class="ctu-flag">unbestätigt: Def strittig: th.gl 17, Game8 20; Zusatzeffekte nur laut Game8</span></td>
 <td>Truhe in einer Unterwasserhöhle im Coral Sea nordwestlich von Carcano Island und südlich von Delesyia; Zugang durch eine nach Osten weisende Felsöffnung, der Gang führt zu einer Stelle zum Auftauchen mit der Truhe, die auch den Seeräuberhut enthält; die Unterwasser-Ortung des Schiffs hilft bei der Suche (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)</td>
 <td class="prov">aus Guides belegt</td>
-<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Seeräuber-Kampfanzug. Spieltext: Der Mantel des gesetzlosen Kapitäns zeichnet sich durch seine kunstvollen Stickereien aus. Der blaue Stoff in der Farbe tiefer Gewässer und eine rote Schärpe, die um die Taille gewickelt ist, bilden einen auffälligen Kontrast, während mehrere Ledergürtel und Beutel es ermöglichen, Ausrüstung bequem zu tragen und sich auch mitten in heftigen Seeschlachten frei zu bewegen. Teil des Sea Reaver Sets. Laut th.gl (Spieldaten) Def 3 bei +0 und 17 bei +10 (geprüft 05.11.2026; einzige Quelle, unbestätigt). Laut Game8-Einzelseite für Kliff und Oongka, Zusatzeffekte Schwimmtempo +2 % und 2 % Chance, Gegner bei Treffer zu entwaffnen, Abyss-Gear Surge I, Fortification I und Frostward I (Game8, einzige Quelle, unbestätigt). Def strittig: th.gl 17 bei +10, Game8 20 (Abweichung ungeklärt, ingame prüfen). Material nach dem internen Itemnamen (Fabric).</td>
+<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Seeräuber-Kampfanzug. Spieltext: Der Mantel des gesetzlosen Kapitäns zeichnet sich durch seine kunstvollen Stickereien aus. Der blaue Stoff in der Farbe tiefer Gewässer und eine rote Schärpe, die um die Taille gewickelt ist, bilden einen auffälligen Kontrast, während mehrere Ledergürtel und Beutel es ermöglichen, Ausrüstung bequem zu tragen und sich auch mitten in heftigen Seeschlachten frei zu bewegen. Teil des Sea Reaver Sets. Laut th.gl (Spieldaten) Def 3 bei +0 und 17 bei +10 (geprüft 05.11.2026; einzige Quelle, unbestätigt). Laut Game8-Einzelseite für Kliff und Oongka, Zusatzeffekte Schwimmtempo +2 % und 2 % Chance, Gegner bei Treffer zu entwaffnen, Abyss-Gear Surge I, Fortification I und Frostward I (Game8, einzige Quelle, unbestätigt). Def strittig: th.gl 17 bei +10, Game8 20 (Abweichung ungeklärt, ingame prüfen; der Sockel Fortification I erklärt sie nicht, denn die Sunken Azuretide Plate Armor mit Fortification I hat bei Game8 und th.gl dieselbe Def 37). Material nach dem internen Itemnamen (Fabric).</td>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1004800.webp" alt="Sermena Cloth Armor" width="34" height="34">Sermena Cloth Armor</td>
@@ -9621,7 +9624,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1005036.webp" alt="Sunforged Shade Armor" width="34" height="34">Sunforged Shade Armor<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
 <td>Plate, Def +10 <span class="ctu-flag">unbestätigt: Werte nur laut th.gl (Spieldaten)</span></td>
 <td>Fundort nicht erfasst</td>
-<td class="prov">aus Guides belegt</td>
+<td class="prov">Datenimport</td>
 <td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Solarbetriebene Schattenrüstung. Spieltext: Eine innovative Platten-Körperpanzerung, in der ein unbekannter Erfinder die Essenz fortschrittlichster Technologie vereint hat. An der Außenseite angebrachte, runde Vorrichtungen absorbieren Sonnenwärme und wandeln sie in Energie um. Durch diesen Antrieb zirkuliert im Inneren ein feiner Kältestrom, der es dem Träger ermöglicht, selbst unter extrem heißen Umgebungsbedingungen standzuhalten. Laut th.gl (Spieldaten) Def 10 bei +10 (bei +0 ohne Wert) (geprüft 05.11.2026; einzige Quelle, unbestätigt). Charakter-Zuordnung nicht belegt. Fundort und Händler nicht belegt (th.gl führt keine Fundstelle).</td>
 </tr>
 <tr>
@@ -10045,7 +10048,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1006543.webp" alt="Fedora of Fate" width="34" height="34">Fedora of Fate<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
 <td>Def +16 <span class="ctu-flag">unbestätigt: Werte nur laut th.gl (Spieldaten)</span></td>
 <td>Fundort nicht erfasst</td>
-<td class="prov">aus Guides belegt</td>
+<td class="prov">Datenimport</td>
 <td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Fedora des Schicksals. Spieltext: Ein eleganter Filzhut von heiterer Anmutung. Ein Hutmacher, der sein ganzes Leben lang nach seiner Seelenverwandten gesucht hatte, erkannte erst im hohen Alter, dass sie die ganze Zeit in seiner Nähe gewesen war. In der Hoffnung, andere mögen die Verbindungen in ihrer eigenen Nähe nicht übersehen, fertigte er diesen Hut gemeinsam mit seiner Geliebten an. Man sagt, wer ihn trägt, könne jene Menschen erkennen, mit denen einen das Schicksal in Liebe vereinen wird. Laut th.gl (Spieldaten) Def 3 bei +0 und 16 bei +10 (geprüft 05.11.2026; einzige Quelle, unbestätigt). Der Spieltext verbindet den Hut mit dem Romanze-System: Wer ihn trägt, soll erkennen, mit wem ihn das Schicksal in Liebe vereint; ob das im Spiel eine Wirkung hat, ist nicht belegt. Charakter-Zuordnung nicht belegt.</td>
 </tr>
 <tr>
@@ -10381,7 +10384,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1006477.webp" alt="Old Navy Hat" width="34" height="34">Old Navy Hat<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
 <td>Cloth, Def +11, Move Speed Lv1 <span class="ctu-flag">unbestätigt: Werte nur laut th.gl (Spieldaten)</span></td>
 <td>Fundort nicht erfasst</td>
-<td class="prov">aus Guides belegt</td>
+<td class="prov">Datenimport</td>
 <td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Alte Marinemütze. Spieltext: Eine abgegriffene Marinemütze, die wohl einst sehr geschätzt wurde. Aus unerfindlichen Gründen kann man den Blick nicht davon abwenden. Laut th.gl (Spieldaten) Def 1 bei +0 und 11 bei +10, Movement Speed Lv1 (ohne Stufentabelle) (geprüft 05.11.2026; einzige Quelle, unbestätigt). Material nach dem internen Itemnamen (Fabric). th.gl führt das Item mit einer Fundstelle auf der Karte, die Koordinaten sind in der Datenbank nicht abrufbar und deshalb nicht erfasst. Charakter-Zuordnung nicht belegt.</td>
 </tr>
 <tr>
@@ -10803,10 +10806,10 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1005805.webp" alt="Forsaken Oath Plate Gloves" width="34" height="34">Forsaken Oath Plate Gloves<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
-<td>Plate, Atk +33, Def +18, Crit Rate Lv1, Schwimmtempo +4 %, Max. Atem +105 <span class="ctu-flag">unbestätigt: Atk strittig: th.gl 33, Game8 34; Crit, Schwimmtempo und Atem nur laut Game8</span></td>
+<td>Plate, Atk +33, Def +18, Schwimmtempo +4 %, Max. Atem +105 <span class="ctu-flag">unbestätigt: Schwimmtempo und Atem nur laut Game8; Atk und Def laut th.gl (die Game8-Gesamtwerte Atk 34 und Crit +1 enthalten die vorgesockelten Sockel)</span></td>
 <td>Truhe unter bemoosten Felsen tief unter Wasser an der Nordwestseite von Xamaca Island: bei Sicht auf Satyros und Razanui Island an die Nordwestküste, zu einer großen Korallenriff-Formation in etwa 125 m Tiefe; Spitzhacke, Bohrer oder Force Palm räumen die Felsen weg (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)</td>
 <td class="prov">aus Guides belegt</td>
-<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenhandschuhe des versunkenen Schwurs. Spieltext: Plattenhandschuhe, die den Schwur eines in der Tiefsee versunkenen Ritters in sich bergen. Spuren der langen Jahre unter den Wellen sind überall sichtbar, und die Panzerung an Handrücken und Handgelenken schützt die Hände selbst bei reißenden Strömungen zuverlässig. Sie wurden so robust gefertigt, dass der Träger die Waffe selbst im nassen Zustand fest im Griff behält. Teil des Forsaken Oath Plate Sets. Laut th.gl (Spieldaten) Atk 10 bei +0 und 33 bei +10, Def 2 bei +0 und 18 bei +10 (geprüft 05.11.2026). Laut Game8-Einzelseite für Kliff und Oongka, Zusatzeffekte Crit Rate Lv1, Schwimmtempo +4 % und Max. Atem +105, Abyss-Gear Destruction I und Insight I (Game8, einzige Quelle, unbestätigt). Def 18 bei +10 nennen th.gl und Game8 übereinstimmend; Atk strittig: th.gl 33, Game8 34.</td>
+<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenhandschuhe des versunkenen Schwurs. Spieltext: Plattenhandschuhe, die den Schwur eines in der Tiefsee versunkenen Ritters in sich bergen. Spuren der langen Jahre unter den Wellen sind überall sichtbar, und die Panzerung an Handrücken und Handgelenken schützt die Hände selbst bei reißenden Strömungen zuverlässig. Sie wurden so robust gefertigt, dass der Träger die Waffe selbst im nassen Zustand fest im Griff behält. Teil des Forsaken Oath Plate Sets. Laut th.gl (Spieldaten) Atk 10 bei +0 und 33 bei +10, Def 2 bei +0 und 18 bei +10 (geprüft 05.11.2026). Laut Game8-Einzelseite für Kliff und Oongka, Zusatzeffekte Schwimmtempo +4 % und Max. Atem +105, Abyss-Gear Destruction I und Insight I (Game8, einzige Quelle, unbestätigt). Die Game8-Gesamtwerte Atk 34 und Crit +1 zählen diese vorgesockelten Sockel mit (Destruction I und Insight I; eigene Zuordnung durch Vergleich der Zahlen, von Game8 nicht ausdrücklich so angegeben); Crit steht deshalb nicht im Effekt. Def 18 bei +10 nennen th.gl und Game8 übereinstimmend; bei Atk liegt th.gl bei 33 und Game8 bei 34 (Differenz durch den Sockel, siehe oben).</td>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/frostcursed-gloves.webp" alt="Frostcursed Plate Gloves" width="34" height="34">Frostcursed Plate Gloves</td>
@@ -11166,7 +11169,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1005303.webp" alt="Booster Boots" width="34" height="34">Booster Boots<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
 <td>Plate, Atk +32, Def +20 <span class="ctu-flag">unbestätigt: Werte nur laut th.gl (Spieldaten)</span></td>
 <td>Fundort nicht erfasst</td>
-<td class="prov">aus Guides belegt</td>
+<td class="prov">Datenimport</td>
 <td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Boosterstiefel. Spieltext: Fußbekleidung mit eingebautem Raketenantrieb, der für zusätzlichen Schub sorgt. Dank der starken Schubkraft kann man schnell nach vorn springen oder gefährliche Regionen mit einem Satz überwinden. Laut th.gl (Spieldaten) Atk 16 bei +0 und 32 bei +10, Def 5 bei +0 und 20 bei +10 (geprüft 05.11.2026; einzige Quelle, unbestätigt). Charakter-Zuordnung nicht belegt. Fundort und Händler nicht belegt (th.gl führt keine Fundstelle).</td>
 </tr>
 <tr>
@@ -11276,10 +11279,10 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1005804.webp" alt="Forsaken Oath Plate Boots" width="34" height="34">Forsaken Oath Plate Boots<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
-<td>Plate, Atk +33, Def +18, Move Speed +1 <span class="ctu-flag">unbestätigt: Atk strittig: th.gl 33, Game8 34; Move Speed nur laut Game8</span></td>
+<td>Plate, Atk +33, Def +18 <span class="ctu-flag">unbestätigt: Atk und Def laut th.gl; die Game8-Gesamtwerte Atk 34 und Move Speed +1 enthalten vermutlich vorgesockelte Abyss-Ausrüstung (Sockel für dieses Teil nicht erfasst)</span></td>
 <td>Fundort nicht erfasst</td>
 <td class="prov">aus Guides belegt</td>
-<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenstiefel des versunkenen Schwurs. Spieltext: Plattenstiefel, die den Schwur eines in der Tiefsee versunkenen Ritters in sich bergen. Spuren der langen Jahre unter den Wellen sind überall sichtbar, und die Panzerung an Knöcheln und Spann gibt jedem Schritt selbst auf rauen Meerespfaden festen Halt. Sie wurden so robust gefertigt, dass man sich durch überflutete Ruinen und unwegsames Terrain des Meeresgrunds schlagen kann. Teil des Forsaken Oath Plate Sets. Laut th.gl (Spieldaten) Atk 10 bei +0 und 33 bei +10, Def 2 bei +0 und 18 bei +10 (geprüft 05.11.2026). Def 18 bei +10 nennen th.gl und Game8 übereinstimmend. Atk strittig: th.gl 33, Game8 34 (Abweichung ungeklärt). Move Speed +1 nur laut Game8 (einzige Quelle, unbestätigt). Das Set ist laut Game8 für Kliff und Oongka.</td>
+<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenstiefel des versunkenen Schwurs. Spieltext: Plattenstiefel, die den Schwur eines in der Tiefsee versunkenen Ritters in sich bergen. Spuren der langen Jahre unter den Wellen sind überall sichtbar, und die Panzerung an Knöcheln und Spann gibt jedem Schritt selbst auf rauen Meerespfaden festen Halt. Sie wurden so robust gefertigt, dass man sich durch überflutete Ruinen und unwegsames Terrain des Meeresgrunds schlagen kann. Teil des Forsaken Oath Plate Sets. Laut th.gl (Spieldaten) Atk 10 bei +0 und 33 bei +10, Def 2 bei +0 und 18 bei +10 (geprüft 05.11.2026). Def 18 bei +10 nennen th.gl und Game8 übereinstimmend. Game8 führt in der Rüstungsliste Atk 34 und Move Speed +1. Das sind Gesamtwerte, die bei verwandten Teilen die vorgesockelte Abyss-Ausrüstung mitzählen (Handschuhe: Destruction I; Sunken Azuretide Plate Boots: Haste I für Move Speed +1). Für diese Stiefel nennt Game8 keinen Sockel, die Zuordnung ist deshalb nur vermutet; Move Speed +1 steht nicht als Eigenschaft des Teils im Effekt. Das Set ist laut Game8 für Kliff und Oongka.</td>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/frostcursed-plate-boots.webp" alt="Frostcursed Plate Boots" width="34" height="34">Frostcursed Plate Boots</td>
@@ -11542,10 +11545,10 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/armor/item-1006341.webp" alt="Sunken Azuretide Plate Boots" width="34" height="34">Sunken Azuretide Plate Boots<span class="dlc-gtag" title="Neu mit dem DLC Charting the Unknown">DLC</span></td>
-<td>Plate, Atk +33, Def +18, Move Speed +1, Schwimmtempo +4 %, Max. Atem +105 <span class="ctu-flag">unbestätigt: Zusatzeffekte nur laut Game8; Atk und Def laut th.gl und Game8</span></td>
+<td>Plate, Atk +33, Def +18, Schwimmtempo +4 %, Max. Atem +105 <span class="ctu-flag">unbestätigt: Schwimmtempo und Atem nur laut Game8; Atk und Def laut th.gl und Game8</span></td>
 <td>Truhe in einem Schiffswrack im Great Coral Reef zwischen Xamaca Island und Razanui Island (näher an Xamaca): Nordwestküste von Xamaca ansteuern, im Riff nach dem Wrack etwa in der Riffmitte suchen; Spitzhacke, Bohrer oder Force Palm räumen die Korallen weg; auf dem Weg greifen viele Haie und Golems an (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)</td>
 <td class="prov">aus Guides belegt</td>
-<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenschuhe der Tiefsee-Blauwelle. Spieltext: Stiefel, geschmiedet aus einem unbekannten Eisen, das selbst im Meerwasser nicht rostet. „Blaue Woge“ war der Beiname der Ritterin, der diese Stiefel einst gehörten. Ihr Name wurde aus allen Aufzeichnungen getilgt und ihre Rüstung, in vier Teile zerschlagen, im Meer versenkt. So versank die Blaue Woge für immer in den Tiefen des Ozeans. Teil des Sunken Azuretide Plate Sets. Laut th.gl (Spieldaten) Atk 10 bei +0 und 33 bei +10, Def 2 bei +0 und 18 bei +10 (geprüft 05.11.2026). Laut Game8-Einzelseite für Damiane, Zusatzeffekte Move Speed +1, Schwimmtempo +4 % und Max. Atem +105, Abyss-Gear Frostward I und Haste I (Game8, einzige Quelle, unbestätigt). Atk 33 und Def 18 bei +10 nennen th.gl und Game8 übereinstimmend.</td>
+<td>Neu mit dem DLC Charting the Unknown (Datensatz dlc_01 der Spieldaten). Deutscher Spielname: Plattenschuhe der Tiefsee-Blauwelle. Spieltext: Stiefel, geschmiedet aus einem unbekannten Eisen, das selbst im Meerwasser nicht rostet. „Blaue Woge“ war der Beiname der Ritterin, der diese Stiefel einst gehörten. Ihr Name wurde aus allen Aufzeichnungen getilgt und ihre Rüstung, in vier Teile zerschlagen, im Meer versenkt. So versank die Blaue Woge für immer in den Tiefen des Ozeans. Teil des Sunken Azuretide Plate Sets. Laut th.gl (Spieldaten) Atk 10 bei +0 und 33 bei +10, Def 2 bei +0 und 18 bei +10 (geprüft 05.11.2026). Laut Game8-Einzelseite für Damiane, Zusatzeffekte Schwimmtempo +4 % und Max. Atem +105, Abyss-Gear Frostward I und Haste I (Game8, einzige Quelle, unbestätigt). Die Game8-Gesamtwerte zählen die vorgesockelte Abyss-Ausrüstung mit: Move Speed +1 entspricht Haste I (eigene Zuordnung), steht deshalb nicht im Effekt. Atk 33 und Def 18 bei +10 nennen th.gl und Game8 übereinstimmend.</td>
 </tr>
 <tr>
 <td><img class="thumb" loading="lazy" src="/cd_assets/ql/assets/_sprites/itemicon_prefab_cd_m0001_00_bush_devil_foot_0001.webp" alt="Sunset Reed Cloth Boots" width="34" height="34">Sunset Reed Cloth Boots</td>
@@ -18149,12 +18152,12 @@ function _dlcSecTauchen(){
 function _dlcSecReittiere(){
   const mW=_dlcAny(DLC_MOUNTS,'where'),mT=_dlcAny(DLC_MOUNTS,'trust'),mS=_dlcAny(DLC_MOUNTS,'stats');
   const mImg=_dlcAllImg(DLC_MOUNTS,m=>_dlcImg(m.name));
-  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',img:mImg?_dlcImg(m.name):'',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
+  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',img:_dlcImg(m.name)||'',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
     rows:[].concat(mW?[['Fundort',_dlcCell(m.where,true)]]:[],[['Zähmen',_dlcV(m.how)]],mT?[['Vertrauen',_dlcCell(m.trust,true)]]:[],mS?[['Werte',_dlcCell(m.stats,true)]]:[])})));
   b+=_dlcFacts(DLC_MOUNT_FACTS);
   b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
   return {title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
-    chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b};
+    chips:[{v:DLC_MOUNTS.length,t:'Unterwasser-Reittiere',c:'ice'}],body:b};
 }
 /* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests). Helfer _dlcQ_* (Achtung: _dlcQ ohne Unterstrich gehört den Waffen/Rüstungen). */
 const _dlcQ_KEY='cd_r2_dlc_quests';
@@ -18612,7 +18615,7 @@ function _dlcLegend(){
 }
 function _dlcFoot(){
   const M=DLC_META;
-  return cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+  return cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides: sieben Tage nach Release.</p>';
 }
 /* Sammelt die Abschnitte der Ansicht. Reihenfolge = Reihenfolge auf der Übersicht. Ein Abschnitt steht auf der
    Teilseite, deren DLC_PARTS[..].keys seinen Schlüssel enthält, sonst auf der Übersicht (nie doppelt). */

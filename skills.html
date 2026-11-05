@@ -1962,6 +1962,7 @@ html.cf-open,html.cf-open body{overflow:hidden}
   flex-direction:column;
   gap:5px;
 }
+.item-more-body .crow > .cv{min-width:0;overflow-wrap:anywhere}
 .set-quelle{font-size:var(--fs-10-5);color:var(--gdim);margin-top:6px}
 .set-piece button{background:none;border:0;padding:0;font:inherit;color:var(--brass);cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:2px}
 .set-piece button:hover{color:var(--survey-red)}
@@ -4900,6 +4901,7 @@ html.cd-motion .q5-clp-b .cd-i{transition:transform .25s}
 .q5-st-b .cd-chip{min-height:22px;font-size:11.5px}
 .q5-st-f{margin-top:9px}
 .q5-st-f dd{font-size:13px;color:var(--text)}
+.cd-fold.q5-fac .cd-fold-body>*,.q5-steps>li,.q5-st-hd>*{min-width:0;overflow-wrap:anywhere}
 .q5-st-tip{margin:10px 0 0;max-width:76ch;padding:9px 14px 0;border-bottom:9px solid transparent;border-left:2px solid color-mix(in srgb,var(--gold) 55%,transparent);border-radius:0 10px 10px 0;
   background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 7%,transparent),transparent 85%);font-size:13px;line-height:1.6;color:var(--text)}
 .q5-clp>.q5-st-tip{margin-top:10px}
@@ -7163,6 +7165,7 @@ a.rail-btn{text-decoration:none}
 .dlc-a-eff{color:var(--gold)}
 .dlc-a-sm{font-size:var(--fs-11)}
 .dlc-a-dim{color:var(--dim)}
+.dlc-a-card .cm .tag{white-space:normal;max-width:100%}
 #dlc-root-ausruestung .dlc-a-card .cv{min-width:0;overflow-wrap:anywhere}
 /* Bildklick (Großansicht) wie auf den Vorbildseiten */
 #dlc-root-ausruestung .dlc-a-grid .card img,#dlc-root-ausruestung .dlc-a-grid .card :has(> img:only-child){cursor:zoom-in}
@@ -10183,7 +10186,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td class="skl-n"><span class="skl-ph" aria-hidden="true">✦</span><strong>Shield Watcher</strong></td>
 <td>Freischaltweg nicht erfasst</td>
 <td class="skl-cost">nicht erfasst</td>
-<td>Im Detect-Modus die Normalangriff-Taste drücken → ein Wächter wird eingesetzt, der dich zeitweise im Kampf unterstützt (Spieltext; DE: Schildwächter)</td>
+<td>Im Focus-Modus die Normalangriff-Taste drücken → ein Wächter wird eingesetzt, der dich zeitweise im Kampf unterstützt (Spieltext; DE: Schildwächter)</td>
 </tr>
 <tr id="skill-damiane-focused-shield-bash">
 <td class="skl-n"><img class="skl-img" loading="lazy" src="/cd_assets/ql/assets/_sprites/cd_icon_skill_damian_shieldthrowdeep.webp" alt="Focused Shield Bash (Damiane) in Crimson Desert" width="400" height="400"><strong>Focused Shield Bash</strong></td>
@@ -10213,7 +10216,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td class="skl-n"><span class="skl-ph" aria-hidden="true">✦</span><strong>Propel</strong></td>
 <td>Flight (Glider); Freischaltweg nicht erfasst</td>
 <td class="skl-cost">nicht erfasst</td>
-<td>Im Glider-Flug in den Detect-Modus wechseln, dann die Roll-Taste drücken → der Glider dreht sich zu einem Hochgeschwindigkeits-Dash; Roll-Taste wiederholt drücken für aufeinanderfolgende Schübe (Spieltext; DE: Propellerflug)</td>
+<td>Im Glider-Flug in den Focus-Modus wechseln, dann die Roll-Taste drücken → der Glider dreht sich zu einem Hochgeschwindigkeits-Dash; Roll-Taste wiederholt drücken für aufeinanderfolgende Schübe (Spieltext; DE: Propellerflug)</td>
 </tr>
 <tr id="skill-damiane-skystep">
 <td class="skl-n"><img class="skl-img" loading="lazy" src="/cd_assets/ql/assets/_sprites/cd_icon_skill_damian_airjump.webp" alt="Skystep (Damiane) in Crimson Desert" width="400" height="400"><strong>Skystep</strong></td>
@@ -10488,7 +10491,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <td class="skl-n"><span class="skl-ph" aria-hidden="true">✦</span><strong>Boost</strong></td>
 <td>Flight (Kuku Rocket Pack); Freischaltweg nicht erfasst</td>
 <td class="skl-cost">nicht erfasst</td>
-<td>Im Flug mit dem Rocket Pack in den Detect-Modus wechseln, dann die Roll-Taste drücken → viel Kraftstoff wird für einen Hochgeschwindigkeits-Dash verbrannt; Roll-Taste wiederholt drücken für aufeinanderfolgende Schübe (Spieltext; DE: Turboflug)</td>
+<td>Im Flug mit dem Rocket Pack in den Focus-Modus wechseln, dann die Roll-Taste drücken → viel Kraftstoff wird für einen Hochgeschwindigkeits-Dash verbrannt; Roll-Taste wiederholt drücken für aufeinanderfolgende Schübe (Spieltext; DE: Turboflug)</td>
 </tr>
 <tr id="skill-oongka-vertical-flight">
 <td class="skl-n"><img class="skl-img" loading="lazy" src="/cd_assets/ql/assets/_sprites/cd_icon_skill_oongka_rocketpack_verticalboost.webp" alt="Vertical Flight (Oongka) in Crimson Desert" width="400" height="400"><strong>Vertical Flight</strong></td>
@@ -16470,12 +16473,12 @@ function _dlcSecTauchen(){
 function _dlcSecReittiere(){
   const mW=_dlcAny(DLC_MOUNTS,'where'),mT=_dlcAny(DLC_MOUNTS,'trust'),mS=_dlcAny(DLC_MOUNTS,'stats');
   const mImg=_dlcAllImg(DLC_MOUNTS,m=>_dlcImg(m.name));
-  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',img:mImg?_dlcImg(m.name):'',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
+  let b=_dlcSCards(DLC_MOUNTS.map(m=>_dlcSCard({name:m.name,de:m.de,c:m.c,q:m.q,glyph:'♒',img:_dlcImg(m.name)||'',s:[m.name,m.de,_dlcP(m.where),_dlcP(m.how),_dlcP(m.trust),_dlcP(m.stats)].join(' '),
     rows:[].concat(mW?[['Fundort',_dlcCell(m.where,true)]]:[],[['Zähmen',_dlcV(m.how)]],mT?[['Vertrauen',_dlcCell(m.trust,true)]]:[],mS?[['Werte',_dlcCell(m.stats,true)]]:[])})));
   b+=_dlcFacts(DLC_MOUNT_FACTS);
   b+='<p class="dlc-p">Alle übrigen Pferde, Drachen und Fahrzeuge: '+cdGoLink('mounts','','Reittiere')+'</p>';
   return {title:'Unterwasser- und neue Reittiere',lead:'Hai, Orca, Meeresschildkröte und Co.: wie du sie bezwingst oder fütterst.',icon:'♒',
-    chips:[{v:DLC_MOUNTS.length,t:'Unterwassertiere',c:'ice'}],body:b};
+    chips:[{v:DLC_MOUNTS.length,t:'Unterwasser-Reittiere',c:'ice'}],body:b};
 }
 /* 7 Quests (Abschnitt dlc-b-quests, Besitz: quests). Helfer _dlcQ_* (Achtung: _dlcQ ohne Unterstrich gehört den Waffen/Rüstungen). */
 const _dlcQ_KEY='cd_r2_dlc_quests';
@@ -16933,7 +16936,7 @@ function _dlcLegend(){
 }
 function _dlcFoot(){
   const M=DLC_META;
-  return cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides zwei bis drei Tage nach Release.</p>';
+  return cdSrc(DLC_SOURCES.map(s=>({t:s.t,url:s.url})),'Quellen')+'<p class="cd-src dlc-checked">Geprüft am '+cdEsc(M.checked)+(M.recheck&&M.recheck!==M.checked?' (einzelne Seiten erneut am '+cdEsc(M.recheck)+')':'')+'. Quellenstand der Guides: sieben Tage nach Release.</p>';
 }
 /* Sammelt die Abschnitte der Ansicht. Reihenfolge = Reihenfolge auf der Übersicht. Ein Abschnitt steht auf der
    Teilseite, deren DLC_PARTS[..].keys seinen Schlüssel enthält, sonst auf der Übersicht (nie doppelt). */

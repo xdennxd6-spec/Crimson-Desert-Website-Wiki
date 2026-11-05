@@ -36,8 +36,7 @@ const DLC_META = {
   hotfixes: "Hotfix zu 2.04.00 sowie 2.04.02 bis 2.04.07 (Fehlerbehebungen, unter anderem zu Erschließung, Tauchen, Romanze und Einrichtungen; 2.04.04 und 2.04.05 am 01.11.2026, 2.04.06 am 04.11.2026, 2.04.07 am 05.11.2026)",
   price: "24,99 € im Steam-Shop (Pearl Abyss nennt selbst keinen Preis)",
   platforms: "Steam (Windows und macOS), PlayStation 5, Xbox Series X|S, Epic Games Store; laut Pearl Abyss auch im Mac App Store, das Spiel-Update 2.04.00 ist dort aber noch in Vorbereitung",
-  checked: "02.11.2026",
-  recheck: "01.11.2026",
+  checked: "05.11.2026",
   // Garten der Pruefungen: hoechstens so viele spielbare Charaktere je Lauf (offiziell, Patch-Notes 2.04.00)
   gardenChars: 3
 };
@@ -226,7 +225,9 @@ const DLC_MOUNTS = [
   {name: "Sea Turtle", de: "Meeresschildkröte", where: {v: "nicht belegt", c: "nb"}, how: ["Als Reittier belegt.", {v: "Zähmmethode", c: "nb"}]},
   {name: "Sun Fish", de: "Mondfisch", where: {v: "nicht belegt", c: "nb"}, how: ["Als Reittier belegt.", {v: "Wird laut Output Lag gefüttert statt bezwungen; passend dazu verkauft Sulivan das Schriftstück „Sunfish Feed and Preferences“. Welches Futter, ist nicht belegt.", c: "unb", q: "Output Lag, th.gl"}]},
   {name: "Electric Ray", de: "Zitterrochen", c: "unb", q: "Game8", where: {v: "nicht belegt", c: "nb"}, how: ["Aufsteigen und mit Fish Fillet füttern, bis das Vertrauen 100 erreicht."]},
-  {name: "Golden Shark", de: "Goldener Hai (legendär)", where: [{v: "Südlich von Dewhaven, östlich des Sea Serpent Kelp Forest, etwa 220 m tief.", c: "unb", q: "GameRant"}], how: ["Legendäres Meerestier in den tiefen Gewässern des Ozeans.", {v: "Mit Axiom Force auf den Kopf, dann Reit-Minispiel.", c: "unb", q: "GameRant"}]}
+  {name: "Golden Shark", de: "Goldener Hai (legendär)", where: [{v: "Südlich von Dewhaven, östlich des Sea Serpent Kelp Forest, etwa 220 m tief.", c: "unb", q: "GameRant"}], how: ["Legendäres Meerestier in den tiefen Gewässern des Ozeans.", {v: "Mit Axiom Force auf den Kopf, dann Reit-Minispiel.", c: "unb", q: "GameRant"}]},
+  {name: "Pink Manta Ray", de: "Rosa Mantarochen", c: "unb", q: "Spieldaten, Game8", where: [{v: "Nördlich des Dead Coral Sea an einer unentdeckten Landmarke, die man zuerst entdecken muss.", c: "unb", q: "Game8"}, "Spieltext: Das Wesen soll in den tiefen Gewässern des großen Ozeans erscheinen."], how: ["Die Spieldaten kennen die Aufgabe „Zähme den rosa Mantarochen“ (Tame pink manta rays) und beschreiben ein Wesen, das über die Schwingungen des Herzens eine Bindung zu Menschen aufbauen soll, verirrten Schiffen mit seinen gewaltigen rosafarbenen Flügeln den Weg weist und nur auf den Ruf reiner Seelen reagiert.", {v: "Zähmmethode", c: "nb"}]},
+  {name: "Ocean Drifter", de: "Ozeangleiter", c: "unb", q: "Spieldaten, Game8", where: [{v: "In einer Schatztruhe in den Forgotten Ocean Ruins bei Razanui Island; darin liegt das Item Ancients' Chest (deutsch Uralte Lagerkiste).", c: "unb", q: "Game8"}], how: ["Wird nicht gezähmt: Das Item Ancients' Chest erweckt laut Itemtext den schlafenden Ozeangleiter, mit dem man sich frei und schnell unter der Wasseroberfläche bewegt. Game8 führt ihn unter den Reittieren."]}
 ];
 const DLC_MOUNT_FACTS = [
   ["Offiziell", "Verschiedene Unterwassertiere: je nach Art bezwingen oder füttern, um Vertrauen zu gewinnen, dann als Transportmittel registrieren. Eine offizielle Liste gibt es nicht."],
@@ -467,7 +468,7 @@ const DLC_LIVING = [
 const DLC_GEAR_TOOLS = ["Frying Pan", "Ladle", "Frying Pan Lid", "Jar Lid", "Kitchen Knife"];
 const DLC_GEAR_TOOLS_DE = {"Frying Pan": "Bratpfanne", "Ladle": "Schöpfkelle", "Frying Pan Lid": "Pfannendeckel", "Jar Lid": "Krugdeckel", "Kitchen Knife": "Küchenmesser"};
 const DLC_GEAR_NOTES = [
-  "Offiziell neu: Rüstungen, Waffen, Ausrüstung für Transportmittel und Haustiere sowie Abyss-Ausrüstung, ohne Einzelnamen. Alle Guides sind zwei bis drei Tage nach Release ausdrücklich unvollständig.",
+  "Offiziell neu: Rüstungen, Waffen, Ausrüstung für Transportmittel und Haustiere sowie Abyss-Ausrüstung, ohne Einzelnamen. Alle Guides waren am 02.11.2026, drei Tage nach Release, ausdrücklich unvollständig; einzelne Seiten sind am 05.11.2026 nachgeprüft.",
   "Vorbesteller-Bonus: „Tauchanzug-Set des Entdeckers“ (Charter's Diving Set) für Kliff und Oongka, „Leichtes Tauchanzug-Set des Entdeckers“ (Charter's Light Diving Set) für Damiane; abholen über Pause, Others, Add-ons, Receive. Ohne Vorbestellung gibt es Tauchanzug-Teile bei Relic-Händlern.",
   "Twitch-Drops Woche 1 (29.10. bis 04.11.2026, auch ohne DLC): Pirate's Sword und Pirate Eyepatch nach 120 Minuten Zuschauzeit. Bei Abholproblemen bleiben die Belohnungen von Woche 1 bis 11.11.2026, 23:59 UTC erhältlich."
 ];
