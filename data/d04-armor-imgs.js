@@ -935,7 +935,24 @@ const ARMOR_IMGS={
   "Fisherman's Leather Boots":"cd_assets/armor/item-1005433.webp",
   "Architect's Cloth Workwear":"cd_assets/armor/item-1005421.webp",
   "Architect's Cloth Hat":"cd_assets/armor/item-1005424.webp",
-  "Architect's Leather Boots":"cd_assets/armor/item-1005432.webp"
+  "Architect's Leather Boots":"cd_assets/armor/item-1005432.webp",
+  // 05.11.2026: 16 weitere DLC-Rüstungsteile (Spieldaten dlc_01, Icon -> KI-Mix 2x)
+  "Sunforged Shade Armor":"cd_assets/armor/item-1005036.webp",
+  "Booster Boots":"cd_assets/armor/item-1005303.webp",
+  "Sea Reaver's Hat":"cd_assets/armor/item-1005355.webp",
+  "Sea Reaver's Combat Suit":"cd_assets/armor/item-1005356.webp",
+  "Stormlord Hat":"cd_assets/armor/item-1005357.webp",
+  "Stormlord Combat Suit":"cd_assets/armor/item-1005358.webp",
+  "Forsaken Oath Plate Armor":"cd_assets/armor/item-1005803.webp",
+  "Forsaken Oath Plate Boots":"cd_assets/armor/item-1005804.webp",
+  "Forsaken Oath Plate Gloves":"cd_assets/armor/item-1005805.webp",
+  "Forsaken Oath Plate Helm":"cd_assets/armor/item-1005806.webp",
+  "Sunken Azuretide Plate Armor":"cd_assets/armor/item-1006338.webp",
+  "Sunken Azuretide Plate Gloves":"cd_assets/armor/item-1006339.webp",
+  "Sunken Azuretide Plate Helm":"cd_assets/armor/item-1006340.webp",
+  "Sunken Azuretide Plate Boots":"cd_assets/armor/item-1006341.webp",
+  "Old Navy Hat":"cd_assets/armor/item-1006477.webp",
+  "Fedora of Fate":"cd_assets/armor/item-1006543.webp"
 };
 const GREYMANE_COMMISSIONS=[
   // Neu aufgebaut 2026-06-01 (Recherche Game8 Archiv 586021): echte Bewohner-Anfragen "[NPC]'s Request", ALLE im Greymane Camp (Howling Hill, Hernand) — NICHT über Regionen/Kapitel verteilt. Freischaltung: von geretteten/rekrutierten Kameraden gepostet (Journal → Faction Quests → Greymanes). Belohnung je: Medium Bag (+3 Inventarslots). KEINE finale "True Ending Gate"-Commission — und ueberhaupt keine Verbindung zum True Ending: die Nachrecherche vom 22.08.2026 (6 Quellen, adversarial gegengeprueft) fand KEINE einzige Quelle, die Commissions mit dem Ende verknuepft. Die drei fruehereren Wiki-Stellen, die das behaupteten, sind an dem Tag entfernt worden. Zur Zahl 27: sie stammt aus dem In-Game-Zaehler (x/27) und aus einem TheGamer-Artikel (27.04.2026), den mehrere SEO-Seiten wortgleich uebernommen haben — eine Kette, keine Mehrfachbestaetigung. Game8 listet 26 Namen (Carl bis Vernon) ohne Summe; der 27. Name (Diederik's Request, gm27) ist seit 02.10.2026 durch questlog belegt (Quest 'Tales of the Greymanes', Q1000722, 27 Requests). Yann gehoert zu "Scattered Embers" und ist NICHT die 27. Commission. Belegt ist als Belohnung je Commission nur "Medium Bag x1" (Game8, questlog). Die Umrechnung "+3 Slots" ist seit 06.10.2026 durch das questlog-Item Medium Bag (6002, Beschreibung: "A medium bag that provides handy room for three extra items.") gestützt, die Summe "+81" ergibt sich rechnerisch (27 x 3). Zusatzitems in den questlog-Missionssummen (z. B. Carl: Thick Hide x10) sind NPC-gestelltes Übergabematerial, keine Belohnung.
@@ -1440,7 +1457,7 @@ const SECTIONS = [
   {id:'builds',      res:'kampf', name:'Builds', en:'Builds', desc:'Build-Vorschläge und der Build-Optimizer', aka:['Build','Skillung','Optimizer','Setup'], glyph:'⊞', count:'Optimizer', plate:'§15', coord:'B5'},
   {id:'disarm',      res:'kampf', name:'Entwaffnen', en:'Disarm', desc:'Welche Gegner du entwaffnen kannst und wie', aka:['Disarm','Waffe abnehmen','entwaffnen'], glyph:'⛨', count:'Tabellen', plate:'§12', coord:'B4'},
   {id:'dlc-kampf',   res:'kampf', name:'Charting the Unknown', en:'DLC', desc:'Bosse und Gegner aus dem DLC und der Garten der Prüfungen mit Belohnungen', aka:['DLC-Bosse','DLC Bosse','Garten der Prüfungen','Garden of Trials','Satyros','Leviakan','Reggis the Isleguard'], glyph:'⚓', count:'DLC', plate:'', coord:''},
-  {id:'weapons',     res:'ausruestung', name:'Waffen', en:'Weapons', desc:'Alle Waffen mit Werten, Fundort und Verfeinerung', aka:['Waffe','Schwert','Speer','Bogen','Schild','Rapier','Schusswaffe','Kanone','Zweihänder','Verfeinerung','Refinement'], glyph:'†', count:'517', plate:'§04', coord:'C1'},
+  {id:'weapons',     res:'ausruestung', name:'Waffen', en:'Weapons', desc:'Alle Waffen mit Werten, Fundort und Verfeinerung', aka:['Waffe','Schwert','Speer','Bogen','Schild','Rapier','Schusswaffe','Kanone','Zweihänder','Verfeinerung','Refinement'], glyph:'†', count:'534', plate:'§04', coord:'C1'},
   {id:'armor',       res:'ausruestung', name:'Rüstungen', en:'Armor', desc:'Alle Rüstungsteile mit Werten und Fundort', aka:['Rüstung','Helm','Kopfbedeckung','Handschuhe','Schuhwerk','Umhang','Armor'], glyph:'⛓', count:'Teile', plate:'§05', coord:'C2'},
   {id:'armorsets',   res:'ausruestung', name:'Rüstungssets', en:'Armor Sets', desc:'Alle Rüstungssets mit Bild, Teilen, Werten und Fundort', aka:['Set','Sets','Rüstungsset','Armor Set','Ausrüstungsset','komplettes Set','Set-Teile'], glyph:'⛉', count:'Sets', plate:'', coord:''},
   {id:'accessories', res:'ausruestung', name:'Accessoires', en:'Accessories', desc:'Ringe, Ohrringe und Halsketten mit Werten', aka:['Schmuck','Ring','Ohrring','Halskette','Amulett'], glyph:'❖', count:'Liste', plate:'§16', coord:'C4'},
