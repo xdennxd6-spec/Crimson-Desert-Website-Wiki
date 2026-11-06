@@ -10,6 +10,7 @@ const CORE_ASSETS = [
   './site.webmanifest',
   './app.css',
   './consent.js?v=2',
+  './data/d00-de-namen.js',
   './data/d01-weapons.js',
   './data/d02-crafting.js',
   './data/d03-main-quests.js',
