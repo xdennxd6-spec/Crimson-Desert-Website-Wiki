@@ -140,7 +140,7 @@ ${warnZeile}
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Questreihen",
     intro: "Der erste DLC bringt eigene Questreihen, die nicht zur Hauptstory oben zählen. Ein Klick führt zur Questreihe mit Start, Schritten und Belohnungen.",
-    items: (ctx.helpers.extract("DLC_QUESTS") || []).map((q) => ({ name: deN(q.name), de: q.de, info: deT(q.who), c: q.c, q: q.q, pfx: "quest" })),
+    items: (ctx.helpers.extract("DLC_QUESTS") || []).map((q) => ({ name: q.name, de: q.de, info: deT(q.who), c: q.c, q: q.q, pfx: "quest" })),
   })}
 ${sections}`;
 

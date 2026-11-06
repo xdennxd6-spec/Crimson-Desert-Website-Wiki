@@ -398,6 +398,7 @@ const DE_NAMES={
 "Beardtree Hills":"Bartbaum-Hügel",
 "Beardtree Hills Rock Ruins":"Beardtree Hills Rock Ruins",
 "Beardtree Hills Sunflower Ruins":"Beardtree Hills Sunflower Ruins",
+"Beas Poster":"Beas Poster",
 "Beast Hunters' Camp":"Bestienjäger-Lager",
 "Beastbane":"Bestienfluch",
 "Beastbane I":"Bestienfluch I",
@@ -1046,6 +1047,7 @@ const DE_NAMES={
 "Crescent Moon Slash":"Halbmond-Schnitt",
 "Crescent Skybridge":"Halbmond-Himmelsweg",
 "Crime Doesn't Pay":"Verbrechen lohnt sich nicht",
+"Crimson Banquet Plate Boots":"Crimson Banquet Plate Boots",
 "Crimson Chaser Chain Cloak":"Kettenumhang des scharlachroten Verfolgers",
 "Crimson Chaser Mail":"Kettenrüstung des scharlachroten Verfolgers",
 "Crimson Desert Commissions":"Aufträge in der Roten Wüste",
@@ -1344,6 +1346,8 @@ const DE_NAMES={
 "Dewhaven Standard Cloth Cloak":"Standardisierter Tauhafen-Stoffumhang",
 "Dewhaven Standard Leather Armor":"Standardisierte Tauhafen-Lederrüstung",
 "Dewhaven Standard Plate Helm":"Standardisierter Tauhafen-Plattenhelm",
+"Dewhaven-Bannerlanze (M)":"Dewhaven-Bannerlanze (M)",
+"Dewhaven-Bannerlanze (S)":"Dewhaven-Bannerlanze (S)",
 "Diamond":"Diamant",
 "Diamond-Nodes":"Diamant-Vorkommen",
 "Diamonds":"Diamanten",
@@ -1885,6 +1889,7 @@ const DE_NAMES={
 "Forsaken Oath Plate Boots":"Plattenstiefel des versunkenen Schwurs",
 "Forsaken Oath Plate Gloves":"Plattenhandschuhe des versunkenen Schwurs",
 "Forsaken Oath Plate Helm":"Plattenhelm des versunkenen Schwurs",
+"Forsaken Oath Plate Set":"Forsaken Oath Plate Set",
 "Fort Anvil":"Festung Amboss",
 "Fort Anvil Key":"Schlüssel für die Festung Amboss",
 "Fort Askelund":"Festung Askelund",
@@ -2001,6 +2006,7 @@ const DE_NAMES={
 "Gearmelt Confectionery":"Konditorei-Verband Schmelzwerk",
 "Gearmelt Confectionery Pack":"Rucksack der Konditorei Schmelzwerk",
 "Gearmelt Trading Post":"Schmelzwerk-Handelsposten",
+"Gebleckte Reißzähne (questlog: Bared Fangs)":"Gebleckte Reißzähne (questlog: Bared Fangs)",
 "Gentle Sound of Flowing River":"Sanftes Plätschern des Wassers",
 "Gerald's Request":"Anfrage von Gerald",
 "Giant Abalone":"Riesen-Abalone",
@@ -2475,6 +2481,7 @@ const DE_NAMES={
 "Hexebane I":"Hexenfluch I",
 "Hexebane II":"Hexenfluch II",
 "Hexebane III":"Hexenfluch III",
+"Hexen-Erd Explosive Spinne":"Hexen-Erd Explosive Spinne",
 "Hidden Ace":"Ass im Ärmel",
 "Hidden Cave":"Verborgene Höhle",
 "Hidden Chamber of Wisdom":"Geheimkammer der Weisheit",
@@ -3651,6 +3658,7 @@ const DE_NAMES={
 "Pillager's Leather Boots":"Lederstiefel des Plünderers",
 "Pillar of Light atop the Mountain":"Lichtsäule auf dem Berg",
 "Pillar of Wind":"Sturmschwingen",
+"Pilze, die neben Giftgewächsen gedeihen (questlog: Mushrooms Growing Among Poison)":"Pilze, die neben Giftgewächsen gedeihen (questlog: Mushrooms Growing Among Poison)",
 "Pinball":"Flipper",
 "Pine Mushroom":"Starkriechender Ritterling",
 "Pine Mushroom Tea":"Starkriechender Ritterlingtee",
@@ -3673,6 +3681,7 @@ const DE_NAMES={
 "Place to Stay in the Logging Camp":"Eine Bleibe im Holzfällerlager",
 "Plague Over the Wall":"Seuche über der Mauer",
 "Plague Remedy":"Seuchenheilmittel",
+"Plate":"Platte",
 "Plate Armor":"Schützende Plattenausrüstung der Welt",
 "Plate Armor of Cursed Soul":"Plattenpanzer der verfluchten Seele",
 "Plate Armor of Void":"Plattenrüstung der Leere",
@@ -3700,6 +3709,7 @@ const DE_NAMES={
 "Plentiful Greeting":"Gruß zur reichen Ernte",
 "Plenty of Bounty":"Reichlich Kopfgeld",
 "Plunderer's Gold Chest":"Goldtruhe des Plünderers",
+"Podium der Entschlossenheit (questlog: A Stand of Resolve)":"Podium der Entschlossenheit (questlog: A Stand of Resolve)",
 "Podium of Resolve (auch: A Stand of Resolve, DE „Podium der Entschlossenheit“)":"Podium der Entschlossenheit",
 "Podium of Resolve (questlog: A Stand of Resolve)":"Podium der Entschlossenheit (questlog: A Stand of Resolve)",
 "Pointy-Eared Bulldog":"Stehohr-Bulldogge",
@@ -3867,6 +3877,7 @@ const DE_NAMES={
 "Realm of Uncertainty":"Reich der Ungewissheit",
 "Reawakened Light":"Wiedererwachtes Licht",
 "Rebel Suppression (auch: Quelling the Uprising, DE „Unterdrückung der Rebellen“)":"Unterdrückung der Rebellen",
+"Rebell der Wells' Legion":"Rebell der Wells' Legion",
 "Rebellion or Revolution":"Rebellion oder Revolution",
 "Rebuilt Home":"Zuhause wiederaufgebaut",
 "Recipe: Battered Grains":"Rezept: Gegrilltes Getreide mit Ei",
@@ -4259,6 +4270,7 @@ const DE_NAMES={
 "Scenic View":"Atemberaubende Aussicht",
 "Scent That Soothes the Night":"Ein Duft liegt sanft über der Nacht",
 "Scent of Gold":"Duft von Gold",
+"Schleier des roten Rauchs (Fextralife: Veil of the Red Smoke)":"Schleier des roten Rauchs (Fextralife: Veil of the Red Smoke)",
 "Schloss Drakesfall":"Burg Drachensturz",
 "Scholar":"Gelehrter",
 "Scholar Devotee":"Gelehrten-Anhänger",
@@ -4802,6 +4814,7 @@ const DE_NAMES={
 "Sunken Azuretide Plate Boots":"Plattenschuhe der Tiefsee-Blauwelle",
 "Sunken Azuretide Plate Gloves":"Plattenhandschuhe der Tiefsee-Blauwelle",
 "Sunken Azuretide Plate Helm":"Plattenhelm der Tiefsee-Blauwelle",
+"Sunken Azuretide Plate Set":"Sunken Azuretide Plate Set",
 "Sunrise Plains":"Sonnenweide",
 "Sunset Dyehouse":"Abendrot-Färberei",
 "Sunset Reed Cloth Boots":"Stoffschuhwerk des Sonnenuntergangstals",
@@ -4901,7 +4914,6 @@ const DE_NAMES={
 "Tardik Longsword":"Tardik-Langschwert",
 "Tardik Shield":"Tardik-Schild",
 "Tardik Warhammer":"Tardik-Streithammer",
-"Tarik":"Gesucht: Tarik",
 "Tariv Cloth Attire":"Tarivs Stoffgewand",
 "Tariv Cloth Boots":"Tariv-Stoffschuhwerk",
 "Tariv Cloth Cloak":"Tariv-Stoffumhang",
@@ -5331,6 +5343,7 @@ const DE_NAMES={
 "Urgent News":"Eilige Nachricht",
 "Ursula's Journal":"Ursulas Tagebuch",
 "Ursula's Treasure Map":"Ursulas Schatzkarte",
+"Urteil des Ruins":"Urteil des Ruins",
 "Valentine":"Valentin",
 "Valgash's Incomplete Work":"Valgashs unvollendetes Werk",
 "Valgrind Tomb":"Valgrind-Grab",
@@ -5623,7 +5636,6 @@ const DE_NAMES={
 "Wyvernflame Vice Captain":"Wyvernflammen-Vizehauptmann",
 "Wyvernflames":"Wyvernflammen",
 "Xamaca Island":"Insel Xamaca",
-"Yasmin":"Dorf Yasmin",
 "Yasmin Survey Records":"Erkundungsbericht über das Dorf Yasmin",
 "Yellow":"Gelb",
 "Yellow Bass":"Gelbbarsch",
@@ -5670,6 +5682,8 @@ const _deCache=new Map();
 // Neutrale, großgeschriebene Nachbarn, die keinen englischen Namen anzeigen (Spielbegriffe, die bleiben, und Abkürzungen).
 const _DE_NEUTRAL=new Set(['Lv','Kap','Set','Boss','Bosse','Quest','Quests','Drop','Story','Abyss','Def','Atk','Mount','Mounts','Core','Cores','Kapitel','Stufe','Patch','DLC','NPC','Crit','Kliff','Damiane','Oongka']);
 let _deVok=null,_deF1=null;
+// Was eine fremde Quelle woertlich fuehrt oder nennt, bleibt wie dort geschrieben.
+const _DE_QUELLE=/(?:game8|fextralife|powerpyx|vulkk|gamerant|thegamer|keengamer|gamerpillar|questlog)\b[^.;]{0,70}?(?:führt|führen|nennt|nennen|heißt|heißen|schreibt|schreiben|gibt|geführt)\b[^.;'"„“‚]{0,50}['"„“‚]([^'"„“”‘’]{2,90})['"“”‘’]|\benglisch\s+([^,;)]{2,60})/gi;
 const _DE_STOP=new Set(['the','of','and','with','from','is','are','to','by','for','at','on','or','this','that','you','your']);
 function _deIstDeutsch(w){
   if(!_deVok){_deVok=new Set();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d===k)continue;const m=d.match(_DE_TOK);if(m)for(const x of m)_deVok.add(x);}}
@@ -5692,8 +5706,10 @@ function deT(s){
   }
   if(tr.length){
     const frei=(a,b)=>{if(a<0||b>=t.length)return true;const z=s.slice(t[a][1],t[b][0]);return !(z===' '||z==='-');};
-    const eng=x=>{if(an[x]>=0&&!tr[an[x]].aus)return false;const w=s.slice(t[x][0],t[x][1]);return _DE_STOP.has(w)||(/^[A-Z][A-Za-z'’]+$/.test(w)&&!_deIstDeutsch(w));};
-    let wd=true;while(wd){wd=false;for(const r of tr){if(r.aus)continue;if((!frei(r.i-1,r.i)&&eng(r.i-1))||(!frei(r.j,r.j+1)&&eng(r.j+1))){r.aus=true;wd=true;}}}
+    const eng=x=>{if(an[x]>=0)return tr[an[x]].aus;const w=s.slice(t[x][0],t[x][1]);return _DE_STOP.has(w)||(/^[A-Z][A-Za-z'’]+$/.test(w)&&!_deIstDeutsch(w));};
+    const kl=(a,b)=>b<t.length&&s.slice(t[a][1],t[b][0])==='-'&&/^[a-z]/.test(s.slice(t[b][0],t[b][1]));
+    if(/['"„‚‘]|englisch/.test(s)){_DE_QUELLE.lastIndex=0;let q;while((q=_DE_QUELLE.exec(s))){const g=q[1]||q[2];const a=q.index+q[0].lastIndexOf(g),e=a+g.length;for(const r of tr)if(t[r.i][0]<e&&t[r.j][1]>a)r.aus=true;}}
+    let wd=true;while(wd){wd=false;for(const r of tr){if(r.aus)continue;if((!frei(r.i-1,r.i)&&eng(r.i-1))||(!frei(r.j,r.j+1)&&eng(r.j+1))||kl(r.j,r.j+1)){r.aus=true;wd=true;}}}
   }
   let o='',p=0;
   for(const r of tr){if(r.aus)continue;o+=s.slice(p,t[r.i][0])+DE_NAMES[r.k];p=t[r.j][1];}
@@ -5710,10 +5726,14 @@ function deQ(q){
   const l=_deQm.get(q);return l?[q].concat(l.filter(x=>x.length>=4)):[q];
 }
 let _deSi=null;
+const _deSadd=(q,z)=>{const l=q.toLowerCase().replace(/\u2019/g,"'"),m=l.match(_DE_TOK);if(!m)return;let e=_deSi.get(m[0]);if(!e)_deSi.set(m[0],e={l:[],v:new Map()});if(!e.l.includes(m.length))e.l.push(m.length);if(!e.v.has(l))e.v.set(l,z);};
+let _deEm=null;
+// Umkehrung fuer fremde englische Dienste (Kartensuche): deutscher Anzeigename zurueck auf den englischen Spielnamen.
+function deE(s){s=String(s==null?'':s).trim();if(!_deEm){_deEm=new Map();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d!==k&&!_deEm.has(d))_deEm.set(d,k);}}return _deEm.get(s)||s;}
 // Suchtext anreichern: hängt an einen data-s-Text die deutschen Namen aller darin erkannten englischen Namen an (Groß-/Kleinschreibung egal).
 function _deS(s){
   s=String(s==null?'':s);if(!s)return s;
-  if(!_deSi){_deSi=new Map();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d===k)continue;const l=k.toLowerCase().replace(/\u2019/g,"'"),m=l.match(_DE_TOK);if(!m)continue;let e=_deSi.get(m[0]);if(!e)_deSi.set(m[0],e={l:[],v:new Map()});if(!e.l.includes(m.length))e.l.push(m.length);e.v.set(l,d);}for(const e of _deSi.values())e.l.sort((a,b)=>b-a);}
+  if(!_deSi){_deSi=new Map();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d===k)continue;_deSadd(k,d);_deSadd(d,k);}for(const e of _deSi.values())e.l.sort((a,b)=>b-a);}
   const low=s.toLowerCase().replace(/\u2019/g,"'"),t=[];let m;_DE_TOK.lastIndex=0;while((m=_DE_TOK.exec(low)))t.push(m);
   let z='';
   for(let i=0;i<t.length;i++){const e=_deSi.get(t[i][0]);if(!e)continue;for(const n of e.l){if(i+n>t.length)continue;const u=t[i+n-1],d=e.v.get(low.slice(t[i].index,u.index+u[0].length));if(d){z+=' '+d;i+=n-1;break;}}}

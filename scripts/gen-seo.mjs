@@ -1084,7 +1084,7 @@ ${introHtml("bosse", zahlen)}<a class="cta" href="/#sec-bosses">Interaktive Boss
 ${dlcNeu({ esc, slug }, {
     titel: "Neu mit Charting the Unknown: DLC-Bosse",
     intro: "Bosse und Gegner aus den Questreihen des ersten DLC, dazu kommt der Garten der Prüfungen mit seinen Boss-Gruppen. Ein Klick führt zur Zeile auf der DLC-Seite mit Ort und Beute.",
-    items: (extractOptional("DLC_BOSSES") || []).map((b) => ({ name: deN(b.name), info: b.where, c: b.c, q: b.q, pfx: "boss" })),
+    items: (extractOptional("DLC_BOSSES") || []).map((b) => ({ name: b.name, info: b.where, c: b.c, q: b.q, pfx: "boss" })),
   })}
 <h2>Story-Bosse (nach Kapitel, ${story.length})</h2>
 <div class="grid">${story.map(bossArticle).join("\n")}</div>
@@ -1109,9 +1109,9 @@ ${dlcNeu({ esc, slug }, {
   return pageShell({
     slugName: "bosse",
     title: `Alle ${BOSSES.length} Bosse in Crimson Desert: Liste & Strategien`,
-    desc: `Komplette Liste aller ${BOSSES.length} Bosse in Crimson Desert: Region, Kapitel, Schwächen, Parry- oder Dodge-Hinweise, Drops und Kampf-Strategie für jeden Boss. Deutsch.`,
+    desc: `Komplette Liste aller ${BOSSES.length} Bosse in Crimson Desert: Region, Kapitel, Schwächen, Hinweise zum Parieren und Ausweichen, Drops und Kampf-Strategie für jeden Boss. Deutsch.`,
     h1: `Alle ${BOSSES.length} Bosse in Crimson Desert`,
-    lead: `Diese Übersicht listet alle <strong>${BOSSES.length} Bosse</strong> aus Crimson Desert mit Fundort, Kapitel, Schwäche, Parry-/Dodge-Empfehlung, Drops und einer kurzen Strategie. Aufgeteilt in Story-Bosse nach Kapitel und Bosse ohne festes Kapitel (überwiegend Fraktions- und Weltbosse, dazu Sanctum- und weitere optionale Bosse).`,
+    lead: `Diese Übersicht listet alle <strong>${BOSSES.length} Bosse</strong> aus Crimson Desert mit Fundort, Kapitel, Schwäche, Empfehlung zum Parieren oder Ausweichen, Drops und einer kurzen Strategie. Aufgeteilt in Story-Bosse nach Kapitel und Bosse ohne festes Kapitel (überwiegend Fraktions- und Weltbosse, dazu Sanctum- und weitere optionale Bosse).`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Bosse",
     bodyHtml: body,
@@ -1169,7 +1169,7 @@ ${introHtml("waffen", zahlen)}<a class="cta" href="/#sec-weapons">Interaktive Wa
 ${dlcNeu({ esc, slug }, {
     titel: "Neu mit Charting the Unknown: DLC-Waffen",
     intro: "Diese Waffen kamen mit dem ersten DLC und tragen in den Tabellen unten das Etikett <span class=\"dlc-gtag\">DLC</span>. Ein Klick führt zur Zeile auf der DLC-Seite mit Wert und Fundort.",
-    items: WEAPONS.filter((w) => w.dlc).sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de")).map((w) => ({ name: deN(w.name),
+    items: WEAPONS.filter((w) => w.dlc).sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de")).map((w) => ({ name: w.name,
       info: [deT(w.type), has(w.def) ? "DEF " + w.def : has(w.atk) ? "ATK " + w.atk + (w.val_q ? " (unbestätigt)" : "") : ""].filter(Boolean).join(" · "), pfx: "waffe" })),
   })}
 ${sections}`;

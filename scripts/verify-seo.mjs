@@ -733,5 +733,23 @@ console.log("\n[In-App-Deep-Links]");
   }
 }
 
+// Fragment-Links zwischen den Seiten muessen auf eine vorhandene id zeigen (Lauf eindeutschen, 06.11.2026: Anker aus deutschen Anzeigenamen waren tot).
+console.log("\n[Fragment-Links zwischen Seiten]");
+{
+  const ids = new Map(); const tote = []; let geprueft = 0;
+  const idsVon = (f) => { if (!ids.has(f)) ids.set(f, new Set([...fs.readFileSync(path.join(ROOT, f), "utf8").matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]))); return ids.get(f); };
+  for (const file of Object.keys(pages)) {
+    const c = fs.readFileSync(path.join(ROOT, file), "utf8");
+    for (const m of c.matchAll(/href="\/([a-z0-9-]+)#([^"$]+)"/g)) {
+      const ziel = m[1] + ".html";
+      if (!fs.existsSync(path.join(ROOT, ziel))) continue;
+      geprueft++;
+      if (!idsVon(ziel).has(m[2])) tote.push(`${file}: ${m[0]}"`);
+    }
+  }
+  ok(tote.length === 0, `${geprueft} Fragment-Links zwischen Seiten treffen eine vorhandene id (tot: ${tote.length})`);
+  tote.slice(0, 8).forEach((u) => console.log("       TOT:", u));
+}
+
 console.log(`\n${fail === 0 ? "ALLE CHECKS BESTANDEN" : fail + " CHECK(S) FEHLGESCHLAGEN"}`);
 process.exit(fail === 0 ? 0 : 1);

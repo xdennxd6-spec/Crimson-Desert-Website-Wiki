@@ -1049,7 +1049,7 @@ const BUILDS=[
   },
   {
     name:"Greatsword Colossus",
-    desc:"Verzerrtes Urteil mit Überwältigung — maximaler roher Schaden, ignoriert Super Armor Frames. Kraftfaust: Sturz ist der Burst-Skill dieses Builds; dass er den höchsten Single-Hit-Damage des Spiels liefert, ist nicht belegt.",
+    desc:"Verzerrtes Urteil mit Überwältigung — maximaler roher Schaden, ignoriert Super Armor Frames. Kraftfaust: Sturz ist der Burst-Fähigkeit dieses Builds; dass er den höchsten Single-Hit-Damage des Spiels liefert, ist nicht belegt.",
     tags:["DPS","Endgame","2H","Kap. 12"],
     slots:[
       {label:"Waffe",val:"Twisted Verdict"},
@@ -1064,8 +1064,8 @@ const BUILDS=[
 ];
 const LORE_TERMS={
   'Visione':{tip:'Helm, der Erinnerungsfragmente lesen kann. Erhalt in Kap. 2, Quest „Unerwartetes Geschenk“: Belohnung des Schritts „Untersuche das Innere des Wachturms“ (Mission „Erinnerungsfragment“) im Löwenmähne-Wachturm, zu dem die Mission „Wo das Licht hinführt“ führt.',sec:'secrets',tab:'fragments'},
-  'Axiom Archive':{tip:'Abyss-Gebiet mit eigenem Abyss-Nexus, erreicht in Kap. 1 (Quest „Polar Opposites“); Alustin ist sein Hüter. Laut VULKK und consolepulse im Pfad der Vorsehung. 3. Stock = Hidden-Ending-Bücher (Aufzeichnungen aus dem Archiv). Laut VULKK sind Spirit Skills dort blockiert — Macht des Axioms nutzen.',sec:'secrets',tab:'ending'},
-  'Axiom Force':{tip:'Telekinese-Skill (Kap. 1 automatisch). Pflicht für das Archiv des Axioms 3. Stock.',sec:'skills'},
+  'Axiom Archive':{tip:'Abyss-Gebiet mit eigenem Abyss-Nexus, erreicht in Kap. 1 (Quest „Polar Opposites“); Alustin ist sein Hüter. Laut VULKK und consolepulse im Pfad der Vorsehung. 3. Stock = Hidden-Ending-Bücher (Aufzeichnungen aus dem Archiv). Laut VULKK sind Spirit Fähigkeiten dort blockiert — Macht des Axioms nutzen.',sec:'secrets',tab:'ending'},
+  'Axiom Force':{tip:'Telekinese-Fähigkeit (Kap. 1 automatisch). Pflicht für das Archiv des Axioms 3. Stock.',sec:'skills'},
   'Run 108':{tip:'Deutung der Guides: Der gespielte Durchlauf ist Versuch Nr. 108. Die Aufzeichnungen aus dem Archiv im Archiv des Axioms enden mit Eintrag #107 („The next attempt will be our final chance“).',sec:'secrets',tab:'ending'},
   'White Crow':{tip:'Eines der vier Wesen, die das Gleichgewicht des Abyss wahren; existiert seit alter Zeit an Alustins Seite und hilft Kliff aus dem Verborgenen. Laut Archive Entry #2 verschlang Umbra ein Fragment von ihr (→ Hexe Marie).',sec:'witches'},
   'Memory Fragment':{tip:'Ortsgebundene Knowledge-Events (laut crimsondesert.th.gl 201, Stand 07.04.2026; seit 2.00.00 kamen weitere hinzu). Visione + Laterne aktivieren.',sec:'secrets',tab:'fragments'},

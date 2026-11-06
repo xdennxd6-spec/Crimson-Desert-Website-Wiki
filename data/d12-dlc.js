@@ -91,7 +91,7 @@ const DLC_SHIP_FACTS = [
   ["Vellua", "Hopkins in Graces Reich verkauft und repariert Schiffe und holt verlorene Schiffe zurück."],
   ["Demeniss und Delesyia", "Schiffsverwalter im Port of Demeniss (Cruise, in der deutschen Fassung Cruze) und im Port of Delesyia (Barrett), daneben je ein Händler für Schiffsausrüstung (Schiffsausrüstungsladen): Juan im Hafen von Demeniss, Joaquin im Hafen Delesyia."],
   ["Steinwacht-Hafen", "Südlich von Tauhafen (Delesyia): ein weiterer Schiffsverwalter (Dwight) mit dem Delesyia-Segelschiff (S) und der Fähre."],
-  ["Ab wann kaufen?", ["Erst nach dem eigenen Kleinen Graumähnen-Segelschiff.", {v: "Die Händler verkaufen, sobald in „Auf in eine größere Welt“ die Entsendung zum Bau eines kleinen Segelschiffs in Vellua erledigt ist (th.gl); Game8 nennt dafür die Folgequest „Wo der Wind weht“.", c: "unb", q: "th.gl, Game8"}]],
+  ["Ab wann kaufen?", ["Erst nach dem eigenen Kleinen Graumähnen-Segelschiff.", {v: "Die Händler verkaufen, sobald in „Auf in eine größere Welt“ die Entsendung zum Bau eines kleinen Segelschiffs in Vellua erledigt ist (th.gl); Game8 nennt dafür die Folgequest „Where the Wind Blows“.", c: "unb", q: "th.gl, Game8"}]],
   ["Seekampf", "Kanonen feuern nur mit Kanonier an Bord; das Schiff hat eine eigene Lebensanzeige."],
   ["Seehandel", ["Mit dem Segelschiff lässt sich Seehandel mit neuen Handelswaren betreiben.", {v: "Auf Insel Xamaca, Insel Satyros und Insel Samora verkauft je ein Insel-Handelsposten verpackte Inselwaren gegen Camp-Mittel (Tabelle unten).", c: "unb", q: "th.gl"}, {v: "Wo und zu welchem Preis man die Waren verkauft", c: "nb"}]],
   ["Wagenwerkstatt", "In Hafengebieten gibt es jetzt eine Wagenwerkstatt."]
@@ -668,7 +668,7 @@ const DLC_IMGS={
   "Power Overload":"cd_assets/dlc/item-1006115.webp",
   "Venomous Fangs":"cd_assets/dlc/item-1006116.webp",
   "Rushing Wind":"cd_assets/dlc/item-1006119.webp",
-  // 02.11.2026: Pirate Lantern (Icon aus dem Itemdatensatz), drei Schiffsteile (Medium-Variante, passend zu den Blaupausen),
+  // 02.11.2026: Pirate Lantern (Icon aus dem Itemdatensatz), drei Schiffsteile (Medium-Variante, passend zu die Blaupausen),
   // die ersten 11 Schiffe (Riding_*-Datensätze in characterinfo.dlc_01) und 5 Unterwasser-Reittiere (Porträts der Charakterdatensätze).
   // Sea Turtle: Die Spieldaten führen das Reittier nur allgemein (Actor_Vehicle_Turtle_Hired, Skill_OceanTurtle_Shield), ohne Art.
   // Bild = Porträt der Unechten Karettschildkröte (Animal_Caretta_Wild_32300), optisch abgeglichen mit dem Trailerbild bei game8 (rötliche Flossen).

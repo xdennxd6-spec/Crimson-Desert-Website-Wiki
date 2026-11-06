@@ -1,5 +1,5 @@
 {
-  "intro": "Diese Übersicht sammelt die Skill-Bäume aller {{charaktere|wort}} spielbaren Charaktere von Crimson Desert. Für Kliff stehen {{kliff}} Fähigkeiten in Ausdauer-, Geist- und Health-Baum, für Damiane {{damiane}} und für Oongka {{oongka}}. Jede Zeile nennt Voraussetzung, Kosten in Abyss-Artefakten und Wirkung. Dazu kommen {{wl}} Fähigkeiten, die du per Watch & Learn lernst, mit Lernort und Hinweis auf Verpassbares.",
+  "intro": "Diese Übersicht sammelt die Fähigkeitenbäume aller {{charaktere|wort}} spielbaren Charaktere von Crimson Desert. Für Kliff stehen {{kliff}} Fähigkeiten in Ausdauer-, Geist- und Health-Baum, für Damiane {{damiane}} und für Oongka {{oongka}}. Jede Zeile nennt Voraussetzung, Kosten in Abyss-Artefakten und Wirkung. Dazu kommen {{wl}} Fähigkeiten, die du per Watch & Learn lernst, mit Lernort und Hinweis auf Verpassbares.",
   "faq": [
     {
       "frage": "Wie viele Fähigkeiten gibt es in Crimson Desert?",
@@ -7,11 +7,11 @@
     },
     {
       "frage": "Was bedeutet AA bei den Skill-Kosten?",
-      "antwort": "AA steht für Abyss-Artefakt, die Skillpunkt-Währung: In der Regel kostet ein Skill bzw. eine Stufe ein Artefakt. Eine Fundquelle sind laut Wiki die Uralten Ruinen. Fähigkeiten, die du per Watch & Learn abschaust, kosten kein Artefakt; wo beide Wege möglich sind, steht bei den Kosten eine Doppelangabe: kostenlos oder mit einem Artefakt."
+      "antwort": "AA steht für Abyss-Artefakt, die Skillpunkt-Währung: In der Regel kostet eine Fähigkeit bzw. eine Stufe ein Artefakt. Eine Fundquelle sind laut Wiki die Uralten Ruinen. Fähigkeiten, die du per Watch & Learn abschaust, kosten kein Artefakt; wo beide Wege möglich sind, steht bei den Kosten eine Doppelangabe: kostenlos oder mit einem Artefakt."
     },
     {
       "frage": "Wie lerne ich Fähigkeiten per Watch & Learn?",
-      "antwort": "Du schaust dir den Skill in einer bestimmten Situation ab, statt ein Artefakt auszugeben. Die Lernorte reichen laut Wiki-Daten von Story-Hologrammen (Kraftfaust im Abyss) über Boss-Duelle (Riesentritt gegen Matthias, Trudel bei Kailok, dem Hornspalter, Krähenansturm bei Draven, dem Krähenbeschwörer) bis zu NPCs und Trainingsplätzen. Alle {{wl}} Lernorte stehen in der Tabelle am Ende der Seite."
+      "antwort": "Du schaust dir die Fähigkeit in einer bestimmten Situation ab, statt ein Artefakt auszugeben. Die Lernorte reichen laut Wiki-Daten von Story-Hologrammen (Kraftfaust im Abyss) über Boss-Duelle (Riesentritt gegen Matthias, Trudel bei Kailok, dem Hornspalter, Krähenansturm bei Draven, dem Krähenbeschwörer) bis zu NPCs und Trainingsplätzen. Alle {{wl}} Lernorte stehen in der Tabelle am Ende der Seite."
     },
     {
       "frage": "Welche Fähigkeiten kann ich verpassen?",
