@@ -7,19 +7,19 @@ const FAC_QUEST_IMGS = {
  "House Roberts|First Trial of Trust": [
   [
    "first-trial-of-trust-talk-to-servant.webp",
-   "Diener von Haus Roberts bei Bluemont-Anwesen startet die Quest."
+   "Diener von Haus Roberts beim Bluemont-Anwesen startet die Quest."
   ],
   [
    "first-trial-of-trust-map-location.webp",
-   "Kartenposition: südlich des Anschlagtafel bei Bluemont-Anwesen."
+   "Kartenposition: südlich der Anschlagtafel beim Bluemont-Anwesen."
   ],
   [
    "bluemont-cask-house-map-location.webp",
-   "Bluemont-Winzerei liegt südlich der Sumpfwurzel-Viehhof."
+   "Bluemont-Winzerei liegt südlich des Sumpfwurzel-Viehhofs."
   ],
   [
    "troubled-count-caretaker-erich.webp",
-   "Erich am Baum der Sumpfwurzel-Viehhof ansprechen."
+   "Erich am Baum des Sumpfwurzel-Viehhofs ansprechen."
   ],
   [
    "bluemont-cask-house-clear-the-bandits.webp",
@@ -29,7 +29,7 @@ const FAC_QUEST_IMGS = {
  "House Roberts|Troubled Count": [
   [
    "troubled-count-map-location.webp",
-   "Zurück zu Bluemont-Anwesen, Erich wartet draußen."
+   "Zurück zum Bluemont-Anwesen, Erich wartet draußen."
   ],
   [
    "bluemont-cask-house-talk-to-leon-roberts.webp",
@@ -67,13 +67,13 @@ const FAC_QUEST_IMGS = {
   ],
   [
    "hidden-treasure-piece-6-chest.webp",
-   "Die Truhe hinter der Tür vor dem Verlassen der Steinbruch Karin öffnen."
+   "Die Truhe hinter der Tür vor dem Verlassen des Steinbruchs Karin öffnen."
   ]
  ],
  "House Roberts|Sealed in Stone": [
   [
    "sealed-in-stone-talk-to-erich.webp",
-   "Erich am Kran der Steinbruch Karin gibt den Schlüssel zum Kransteuerungsraum."
+   "Erich am Kran des Steinbruchs Karin gibt den Schlüssel zum Kransteuerungsraum."
   ],
   [
    "sealed-in-stone-talk-to-erich-control-the-crane.webp",
@@ -167,7 +167,7 @@ const FAC_QUEST_IMGS = {
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Solid Foundation (Grounds of the Sunrise)": [
   [
    "solid-foundation-inksworth-bindery-waterfall-greymanes-location.webp",
-   "Wasserfall über Heulender Hügel (Binderei Tintenschatz): Connor, Oliver und Eric."
+   "Wasserfall über dem Heulenden Hügel (Binderei Tintenschatz): Connor, Oliver und Eric."
   ],
   [
    "azerian-manor-defense-mission.webp",
@@ -259,7 +259,7 @@ const FAC_QUEST_IMGS = {
  "House Celeste|Legendary Animals": [
   [
    "legendary-hunter-legendary-animals-quest.webp",
-   "Das Treffen mit dem Legendärer Jäger startet die dreiteilige Tier-Untersuchung."
+   "Das Treffen mit dem Legendären Jäger startet die dreiteilige Tier-Untersuchung."
   ],
   [
    "silver-fang-info.webp",

@@ -83,7 +83,7 @@
       "antwort": "Kuku-Gadgets bilden in der Rezeptübersicht eine eigene Handwerkskategorie. Ihre genaue Funktion ist je Rezept angegeben, daher solltest du den einzelnen Effekt vor dem Herstellen prüfen."
     },
     {
-      "frage": "Wie viele Herstellung-Rezepte gibt es in Crimson Desert?",
+      "frage": "Wie viele Herstellungsrezepte gibt es in Crimson Desert?",
       "antwort": "Die Übersicht enthält {{anzahl}} Handwerks- und Kochrezepte: {{elixiere}} Elixiere, {{gerichte}} Gerichte und {{gadgets}} Kuku-Gadgets."
     }
   ],
@@ -238,7 +238,7 @@
     },
     {
       "frage": "Wer sind die Antagonisten in Crimson Desert?",
-      "antwort": "Die Gruppe Antagonisten umfasst {{antagonisten}} Figuren, meist Anführer gegnerischer Gruppen wie der Black Bear Forces, der Einsame Schakale oder der Krähenbruder. Ihre Karte nennt Rolle und, soweit bekannt, Region."
+      "antwort": "Die Gruppe Antagonisten umfasst {{antagonisten}} Figuren, meist Anführer gegnerischer Gruppen wie der Black Bear Forces, der Einsamen Schakale oder der Krähenbruder. Ihre Karte nennt Rolle und, soweit bekannt, Region."
     },
     {
       "frage": "Ist bei jedem NPC eine Region angegeben?",

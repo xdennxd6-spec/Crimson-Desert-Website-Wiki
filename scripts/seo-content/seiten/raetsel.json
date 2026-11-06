@@ -3,7 +3,7 @@
   "faq": [
     {
       "frage": "Wie löse ich die Strongboxes in Crimson Desert?",
-      "antwort": "Strongboxes folgen {{methoden|wort}} Mustern: eine feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen. Die Seite führt {{strongboxes|wort}} Tresor-Einträge: die Truhen im Turmzimmer und im Esszimmer des Stellen-Anwesen mit ihrer konkreten Lösung sowie eine Übersicht der Methoden mit Beispielen aus weiteren Manors und Castles."
+      "antwort": "Strongboxes folgen {{methoden|wort}} Mustern: eine feste Tastenfolge, Räder drehen, Kacheln zu einem Zielbild drehen oder einen Dial bis zum Klacken drehen. Die Seite führt {{strongboxes|wort}} Tresor-Einträge: die Truhen im Turmzimmer und im Esszimmer des Stellen-Anwesens mit ihrer konkreten Lösung sowie eine Übersicht der Methoden mit Beispielen aus weiteren Manors und Castles."
     },
     {
       "frage": "Was brauche ich für die Rätsel im Abyss?",
@@ -14,12 +14,12 @@
       "antwort": "Am Relic-Safe müssen die Würfel in dieser Reihenfolge gedrückt werden: unten rechts, oben links, unten links, oben rechts. Am Pillar of Radiance setzt du den Dolch der Ausstrahlung in das Pedestal und drehst die Scheiben zum vollständigen Eye-Bild; nur der äußerste und der zweitäußerste Ring müssen gedreht werden, jeder bis er aufleuchtet."
     },
     {
-      "frage": "Wie komme ich in den Keller des Glenbright-Anwesen?",
-      "antwort": "Du brauchst beide Golden Daggers: den Goldener Dolch mit rotem Edelstein von einer Wandhalterung und den Goldener Dolch mit blauem Edelstein, für den du im Garderobe ein Handrad drehst, bis Licht auf die Statue fällt und eine Wandnische aufgeht. Beide steckst du in die Slots über dem Kamin, dann öffnet sich die Geheimtür zum Keller."
+      "frage": "Wie komme ich in den Keller des Glenbright-Anwesens?",
+      "antwort": "Du brauchst beide Golden Daggers: den Goldenen Dolch mit rotem Edelstein von einer Wandhalterung und den Goldenen Dolch mit blauem Edelstein, für den du in der Garderobe ein Handrad drehst, bis Licht auf die Statue fällt und eine Wandnische aufgeht. Beide steckst du in die Slots über dem Kamin, dann öffnet sich die Geheimtür zum Keller."
     },
     {
       "frage": "Wie zuverlässig sind die Lösungen auf dieser Seite?",
-      "antwort": "Bei {{unsicher}} von {{anzahl}} Einträgen ist die Quellenlage dünner: Beim Ancient Generator im Kilnden-Werkstatt ist die Erkennung der Ringstellung streng, und die Angaben sind teilweise quellenabhängig. Solche Einträge tragen auf der Karte eine eigene Zeile zur Quellenlage, statt eine Sicherheit vorzutäuschen."
+      "antwort": "Bei {{unsicher}} von {{anzahl}} Einträgen ist die Quellenlage dünner: Beim Ancient Generator in der Kilnden-Werkstatt ist die Erkennung der Ringstellung streng, und die Angaben sind teilweise quellenabhängig. Solche Einträge tragen auf der Karte eine eigene Zeile zur Quellenlage, statt eine Sicherheit vorzutäuschen."
     },
     {
       "frage": "Wo finde ich die Rätsel der Uralten Ruinen?",

@@ -1,5 +1,5 @@
 {
-  "intro": "Crimson Desert versteckt vieles abseits der Hauptwege: {{cressets}} Abyss-Grenzsteine in {{cressetregionen|wort}} Regionen, Erinnerungsfragment, die du mit Laterne und Visione entdeckst, Pop-Culture-Easter-Eggs, versteckte Orte, Waffen und Spielmechaniken ohne Tutorial. Diese Seite bündelt {{easteregg|wort}} Easter Eggs, {{orte|wort}} Hidden Locations, {{geheimwaffen|wort}} Hidden Weapons, {{mechaniken|wort}} versteckte Mechaniken und {{tools|wort}} Such-Tools. Dazu kommt die Lore zum Hidden Ending. Achtung, Spoiler: Wer sich überraschen lassen will, liest nur die Abschnitte, die zum eigenen Fortschritt passen.",
+  "intro": "Crimson Desert versteckt vieles abseits der Hauptwege: {{cressets}} Abyss-Grenzsteine in {{cressetregionen|wort}} Regionen, Erinnerungsfragmente, die du mit Laterne und Visione entdeckst, Pop-Culture-Easter-Eggs, versteckte Orte, Waffen und Spielmechaniken ohne Tutorial. Diese Seite bündelt {{easteregg|wort}} Easter Eggs, {{orte|wort}} Hidden Locations, {{geheimwaffen|wort}} Hidden Weapons, {{mechaniken|wort}} versteckte Mechaniken und {{tools|wort}} Such-Tools. Dazu kommt die Lore zum Hidden Ending. Achtung, Spoiler: Wer sich überraschen lassen will, liest nur die Abschnitte, die zum eigenen Fortschritt passen.",
   "faq": [
     {
       "frage": "Wie schalte ich das Hidden Ending in Crimson Desert frei?",
@@ -7,19 +7,19 @@
     },
     {
       "frage": "Wie viele Abyss-Grenzsteine gibt es in Crimson Desert und was bringen sie?",
-      "antwort": "Es gibt {{cressets}} verborgene Abyss-Grenzsteine, verteilt auf {{cressetregionen|wort}} Regionen. Die meisten liegen in der Region Crimson Desert mit {{cressetmax}}, die wenigsten in Delesyia mit {{cressetmin}} (Zählung laut Guide-Liste der Geheime Orte). Jeder Cresset gibt ein Abyss-Artefakt und einen Fast-Travel-Point; wer alle findet, erhält die Trophäe „Pilgrim of Wonders“."
+      "antwort": "Es gibt {{cressets}} verborgene Abyss-Grenzsteine, verteilt auf {{cressetregionen|wort}} Regionen. Die meisten liegen in der Region Crimson Desert mit {{cressetmax}}, die wenigsten in Delesyia mit {{cressetmin}} (Zählung laut Guide-Liste der Geheimen Orte). Jeder Cresset gibt ein Abyss-Artefakt und einen Fast-Travel-Point; wer alle findet, erhält die Trophäe „Pilgrim of Wonders“."
     },
     {
-      "frage": "Wie viele Erinnerungsfragment gibt es in Crimson Desert?",
-      "antwort": "Die interaktive Karte von crimsondesert.th.gl verzeichnet {{fragmente}} Erinnerungsfragment, Stand April. Ein späterer Patch hat laut offiziellen Notes weitere hinzugefügt, ohne eine Anzahl zu nennen, und andere Zählweisen kommen auf abweichende Zahlen. Eine belegte aktuelle Gesamtzahl gibt es deshalb nicht."
+      "frage": "Wie viele Erinnerungsfragmente gibt es in Crimson Desert?",
+      "antwort": "Die interaktive Karte von crimsondesert.th.gl verzeichnet {{fragmente}} Erinnerungsfragmente, Stand April. Ein späterer Patch hat laut offiziellen Notes weitere hinzugefügt, ohne eine Anzahl zu nennen, und andere Zählweisen kommen auf abweichende Zahlen. Eine belegte aktuelle Gesamtzahl gibt es deshalb nicht."
     },
     {
-      "frage": "Wie bekomme ich die Visione und finde Erinnerungsfragment?",
+      "frage": "Wie bekomme ich die Visione und finde Erinnerungsfragmente?",
       "antwort": "Die Visione bekommst du in der Hauptstory im zweiten Kapitel (Quest „Wo das Licht hinführt“ beziehungsweise „Unerwartetes Geschenk“) auf der Spitze des Lioncrest Watchtower in Hernand. Zum Finden hältst du außerhalb des Kampfes die Laterne raus: In der Nähe eines Fragments pulsiert sie blau. Dann stillhalten, bis die Leiste „Learning in Progress“ voll ist, danach lässt sich das Fragment mit der Visione abspielen."
     },
     {
       "frage": "Wo finde ich die Hidden Weapons in Crimson Desert?",
-      "antwort": "Es gibt {{geheimwaffen|wort}} leicht zu übersehende Waffen. Hohles Antlitz liegt in einer Truhe am Ende der Morgenrothöhle hinter einem Wasserfall im Berg der gefrorenen Seelen. Einsamkeit des Überlebenden findest du in der Todesgriffhöhle hinter dem Wasserfall im Winterbergbecken. Die Gefäß der Finsteren Jagd trägt der Boss Antumbras Schwert im Sanktum der Absolution; sie gilt als die stärkste dieser Waffen. Wasserfälle durchstößt du mit einem Stab-Attack."
+      "antwort": "Es gibt {{geheimwaffen|wort}} leicht zu übersehende Waffen. Hohles Antlitz liegt in einer Truhe am Ende der Morgenrothöhle hinter einem Wasserfall im Berg der gefrorenen Seelen. Einsamkeit des Überlebenden findest du in der Todesgriffhöhle hinter dem Wasserfall im Winterbergbecken. Das Gefäß der Finsteren Jagd trägt der Boss Antumbras Schwert im Sanktum der Absolution; sie gilt als die stärkste dieser Waffen. Wasserfälle durchstößt du mit einem Stab-Attack."
     },
     {
       "frage": "Welche Easter Eggs gibt es in Crimson Desert?",

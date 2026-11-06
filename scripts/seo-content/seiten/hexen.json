@@ -7,7 +7,7 @@
     },
     {
       "frage": "Wo finde ich die Hexen?",
-      "antwort": "Sylvia wartet in Schattenflüsterhöhle nördlich von Hernand-Stadt. Elowen wohnt im Hexenhaus im Alfonso-Ländereien in den Witchwoods im Süden von Hernand. Bari lebt in einer Hütte am Roter See bei der Silver Wolf Mountain in Pailune. Lyselia versteckt sich in einer Verborgene Höhle südöstlich des Jijeong-Tempel im Serpent Marsh in Demeniss. Areciel hat ein Haus auf halber Höhe einer Klippe westlich von Urdavah in der Crimson Desert. Weiße Krähe lebt in einem Baumhaus in den Irrwald westlich von Pailune."
+      "antwort": "Sylvia wartet in der Schattenflüsterhöhle nördlich von Hernand-Stadt. Elowen wohnt im Hexenhaus in den Alfonso-Ländereien in den Witchwoods im Süden von Hernand. Bari lebt in einer Hütte am Roten See beim Silberwolfberg in Pailune. Lyselia versteckt sich in einer Verborgenen Höhle südöstlich des Jijeong-Tempels im Schlangenmoor in Demeniss. Areciel hat ein Haus auf halber Höhe einer Klippe westlich von Urdavah in der Crimson Desert. Weiße Krähe lebt in einem Baumhaus im Irrwald westlich von Pailune."
     },
     {
       "frage": "Wie funktioniert die Core-Synthese bei der Hexe?",
@@ -15,7 +15,7 @@
     },
     {
       "frage": "Wie schalte ich die versteckte Hexe Weiße Krähe frei?",
-      "antwort": "Weiße Krähe ist erst erreichbar, wenn du je einen Hexen-Marke von Elowen, Bari, Lyselia und Areciel gesammelt hast, also {{regional|wort}} Token insgesamt. Dafür schließt du die Questlinien der regionalen Hexen ab. Die Freischaltung läuft laut questlog über die Quest Irrwald-Hexe und die Mission Beschützer des Abyss."
+      "antwort": "Weiße Krähe ist erst erreichbar, wenn du je eine Hexen-Marke von Elowen, Bari, Lyselia und Areciel gesammelt hast, also {{regional|wort}} Token insgesamt. Dafür schließt du die Questlinien der regionalen Hexen ab. Die Freischaltung läuft laut questlog über die Quest Irrwald-Hexe und die Mission Beschützer des Abyss."
     },
     {
       "frage": "Wie bekomme ich ein Sigil-Mount-Amulett?",
