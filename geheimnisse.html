@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=17cf86c03f">
+<link rel="stylesheet" href="app.css?v=37617e4e39">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -2150,6 +2150,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
+<script src="data/d00-de-namen.js" fetchpriority="low"></script>
 <script src="data/d01-weapons.js" fetchpriority="low"></script>
 <script src="data/d02-crafting.js" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js" fetchpriority="low"></script>
@@ -10153,7 +10154,7 @@ function _r2b7PzCode(p){
   if((m=/Reihenfolge gedrückt werden:\s*([a-z>\s-]+?)\./.exec(d)))return _r2b7Code('Würfel in dieser Reihenfolge drücken',_r2b7Grid(m[1].split(/\s*>\s*/).map(function(x){return x.trim();})));
   if(/liegende Sanduhr/.test(d)&&/Quadrat ganz unten/.test(d))return _r2b7Code('Symbole von oben nach unten',_r2b7Levels([['sand','liegende Sanduhr','ganz oben (in anderen Guides als X beschrieben)'],['kreis','Kreis','zweite Stelle von oben (Stufe 3)'],['dreieck','Dreieck','zweite Stelle von unten (Stufe 2)'],['quadrat','Quadrat','ganz unten']]));
   if(/äußerste und der zweitäußerste Ring/.test(d))return _r2b7Code('Nur diese Ringe drehen',_r2b7Rings(),'jeden drehen, bis er aufleuchtet (= verriegelt)');
-  if(/Ruby-Set Golden Dagger/.test(d)&&/Sapphire-Set Golden Dagger/.test(d))return _r2b7Code('Beide Dolche in die Slots über dem Kamin',
+  if(/Ruby-Set Golden Dagger|Goldener Dolch mit rotem Edelstein/.test(d)&&/Sapphire-Set Golden Dagger|Goldener Dolch mit blauem Edelstein/.test(d))return _r2b7Code('Beide Dolche in die Slots über dem Kamin',
     '<div class="r2b7-slots"><span class="r2b7-slot r2b7-slot--ruby"><i aria-hidden="true"></i><b>Ruby-Set Golden Dagger</b><small>von einer Wandhalterung</small></span>'
     +'<span class="r2b7-slot r2b7-slot--sapph"><i aria-hidden="true"></i><b>Sapphire-Set Golden Dagger</b><small>Handrad im Wardrobe drehen</small></span></div>');
   return '';
@@ -10184,7 +10185,7 @@ var R2B7_PZ_GRP=[
   {k:'story',cat:'Story (Kapitel)',t:'Story-Rätsel der Kapitel',p:'Kapitel',tone:'red',ico:'story',glyph:'✦',sub:''},
   {k:'faction',cat:'Faction-Quest',t:'Fraktionsquests',tone:'amber',ico:'faction',glyph:'⚑',sub:''}
 ];
-var R2B7_ABIL=[['Force Palm','red'],['Axiom Force','violet'],['Flight','ice'],['Lampe','gold'],['Lantern','gold']];
+var R2B7_ABIL=[['Force Palm','red'],['Kraftfaust','red'],['Axiom Force','violet'],['Macht des Axioms','violet'],['Flight','ice'],['Flug','ice'],['Lampe','gold'],['Lantern','gold'],['Laterne','gold']];
 function _r2b7PzParts(p){
   var r={steps:[],reward:[],warn:[],info:[],result:[],src:[]};
   _r2b7Sent(p.detail).forEach(function(s){
@@ -10193,7 +10194,7 @@ function _r2b7PzParts(p){
     else if(/^Vorsicht/.test(s))r.warn.push(s);
     else if(/^\([^()]*\)\.?$/.test(s))r.src.push(s);
     else if(/^(Öffnet|Aktiviert)\b/.test(s))r.result.push(s);
-    else if(/^(Diese Quest|Der Dagger of Radiance|In questlog|Das angrenzende)/.test(s))r.info.push(s);
+    else if(/^(Diese Quest|Der Dagger of Radiance|Der Dolch der Ausstrahlung|In questlog|Das angrenzende)/.test(s))r.info.push(s);
     else r.steps.push(s);
   });
   return r;
@@ -10235,7 +10236,7 @@ function _r2b7PzKind(p){
   if((m=/Reihenfolge gedrückt werden:\s*([a-z>\s-]+?)\./.exec(d)))return [m[1].split(/\s*>\s*/).length,'Würfel'];
   if(/liegende Sanduhr/.test(d)&&/Quadrat ganz unten/.test(d))return [4,'Symbole'];
   if(/äußerste und der zweitäußerste Ring/.test(d))return [2,'Ringe'];
-  if(/Ruby-Set Golden Dagger/.test(d)&&/Sapphire-Set Golden Dagger/.test(d))return [2,'Dolche'];
+  if(/Ruby-Set Golden Dagger|Goldener Dolch mit rotem Edelstein/.test(d)&&/Sapphire-Set Golden Dagger|Goldener Dolch mit blauem Edelstein/.test(d))return [2,'Dolche'];
   return null;
 }
 function _r2b7PzCard(p,g){
@@ -13127,7 +13128,7 @@ function _r2b7MgCost(m){
   return x?{v:x[1],t:x[2],c:'gold',title:'Einsatz bzw. Startgebühr laut Starttext'}:null;
 }
 function _r2b7MgChal(m){
-  var x=/Challenges?:?\s*(?:wie dem\s+)?'((?:[^']|'s\b)+)'/.exec(String(m.ablauf||'')+' '+String(m.belohnung||''));
+  var x=/(?:Challenges?|Herausforderungen?):?\s*(?:wie dem\s+)?'((?:[^']|'s\b)+)'/.exec(String(m.ablauf||'')+' '+String(m.belohnung||''));
   return x?x[1]:'';
 }
 /* Spezial-Kacheln: Angel-Phasen, Prime Pair, Orb-Roll-Stufen */
@@ -13148,13 +13149,13 @@ function _r2b7Ladder(b){
   var last=rows[rows.length-1],tail=/^(.*?)\s*(\([^)]*\))$/.exec(last[2]);
   return '<ol class="r2b7-ladder">'+rows.map(function(r,i){var t=r[2],note='';
       if(i===rows.length-1&&tail){t=tail[1];note='<small>'+cdEsc(tail[2])+'</small>';}
-      return '<li><span class="r2b7-lv-n"><small>Level</small><b>'+r[1]+'</b></span>'+cdChips(t.split(/,\s*/).map(function(x){return {t:x,c:/Abyss|Golden Apple|Blueprint|Chest/i.test(x)?'gold':''};}))+note+'</li>';
+      return '<li><span class="r2b7-lv-n"><small>Level</small><b>'+r[1]+'</b></span>'+cdChips(t.split(/,\s*/).map(function(x){return {t:x,c:/Abyss|Golden Apple|Goldene[rn]? Äpfel|Goldener Apfel|Blueprint|Bauplan|Blaupause|Chest|Truhe|Kiste/i.test(x)?'gold':''};}))+note+'</li>';
     }).join('')+'</ol>';
 }
 function _r2b7MgBody(m,g){
   var sent=_r2b7Sent(m.ablauf),play=[],chal=[],tips=[];
   sent.forEach(function(s,i){
-    if(i&&/Challenge/.test(s))chal.push(s);
+    if(i&&/Challenge|Herausforderung/.test(s))chal.push(s);
     else if(i&&/^(Guide-Tipp|Mit dem |Bezug laut|Namen der)/.test(s))tips.push(s);
     else play.push(s);
   });
@@ -13354,7 +13355,7 @@ function _r2b2Boss(name){
 function _r2b2Fac(n){
   const r=n.role||'';
   for(const f of R2B2_FAC)if(r.indexOf(f)>-1)return f==='Greymane'?'Greymanes':f;
-  const m=/in der Fraktion ([A-Z][A-Za-z' ]+?)(?:\.|\s\()/.exec(n.bio||'');
+  const m=/in der Fraktion ([A-ZÄÖÜ][A-Za-zÄÖÜäöüß' -]+?)(?:\.|\s\()/.exec(n.bio||'');
   return m?m[1]:'';
 }
 // Funktions-Chips nur per Stichwort; verneinte Angaben ("Kein Händler", "keine eigene Commission") zählen nicht
@@ -14394,7 +14395,7 @@ function _r2b4Reward(rw){
   if(/Schnellreise/.test(rw)&&!/nicht ausdrücklich/.test(rw))seg.push('<i class="cd-g r2b4-rw-ft" aria-hidden="true">⌖</i><span>Schnellreisepunkt</span>');
   /* Feinschliff: Artefakt + Schnellreisepunkt als EIN Belohnungs-Chip (gleicher Wortlaut, weniger Wiederholung je Karte) */
   if(seg.length)out.push({h:'<span class="cd-chip cd-chip--gold r2b4-rw" title="'+cdEsc('Belohnung: '+rw)+'">'+seg.join('<i class="r2b4-rw-sep" aria-hidden="true"></i>')+'</span>'});
-  var q=/['„"]((?:Memor|Erinnerung|Forgotten)[^'"“”]*)['"“”]/.exec(rw);
+  var q=/['„"]((?:Memor|Erinnerung|Forgotten|Vergessen)[^'"“”]*)['"“”]/.exec(rw);
   if(q)out.push({t:q[1],c:'violet',g:'❖'});
   return out;
 }
