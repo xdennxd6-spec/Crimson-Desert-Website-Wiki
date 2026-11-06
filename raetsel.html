@@ -959,7 +959,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div class="region-heatmap" id="region-heatmap" aria-label="Boss-Verteilung pro Region"></div>
     <div class="fbar dr-a1-filters">
       <select class="fs" id="bf-reg" aria-label="Bosse nach Region filtern" onchange="renderBosses()"><option value="">Alle Regionen</option><option>Hernand</option><option>Pailune</option><option>Demeniss</option><option>Delesyia</option><option>Crimson Desert</option><option value="The Abyss">Abyss</option></select>
-      <select class="fs" id="bf-type" aria-label="Bosse nach Quest-Typ filtern" onchange="renderBosses()"><option value="">Alle Quest-Typen</option><option value="Story">Story</option><option value="Faction">Faction</option><option value="Side">Side</option><option value="Sanctum">Sanktum</option><option value="World">World-Boss</option><option value="Optional">Optional / Sonstige</option></select>
+      <select class="fs" id="bf-type" aria-label="Bosse nach Quest-Typ filtern" onchange="renderBosses()"><option value="">Alle Quest-Typen</option><option value="Story">Story</option><option value="Faction">Fraktion</option><option value="Side">Nebenquest</option><option value="Sanctum">Sanktum</option><option value="World">World-Boss</option><option value="Optional">Optional / Sonstige</option></select>
       <select class="fs" id="bf-pd" aria-label="Bosse nach Blitz-Konter oder Schnelles Ausweichen filtern" onchange="renderBosses()"><option value="">Blitz-Konter &amp; Schnelles Ausweichen</option><option value="Parry">Blitz-Konter empfohlen</option><option value="Dodge">Schnelles Ausweichen empfohlen</option></select>
     </div>
     <div class="dr-a1-tools" role="toolbar" aria-label="Werkzeuge">
@@ -1022,7 +1022,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <h2 class="sec-t"><span class="sec-sym">†</span> Waffen <span class="sec-t-en">Weapons</span></h2>
     <div class="cd-note cd-note--info" role="note"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg><div>Patch 1.13.00: Die meisten Waffen und Sekundärwaffen sind jetzt färbbar (siehe Seite Färbemittel).</div></div>
     <div class="fbar dra3-bar">
-      <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword (1H)">Sword (1H)</option><option value="Greatsword (2H)">Greatsword (2H)</option><option value="Halberd / Spear (2H)">Hellebarde / Spear (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dolch</option><option value="Knuckles / Gauntlets">Knuckles / Panzerhandschuhe</option><option value="Blunt/Axe">Mace / Axt / Hammer</option><option value="Bow (Ranged)">Bow (Ranged)</option><option value="Firearm">Firearm</option><option value="Hand Cannon">Hand Kanone</option><option value="Shield">Schild</option><option value="A.T.A.G. Weapon">A.T.A.G. Weapon</option></select>
+      <select class="fs" id="wf-type" aria-label="Waffen nach Typ filtern" onchange="_wepPage=0;renderWeapons()"><option value="">Alle Typen</option><option value="Sword (1H)">Schwert (1H)</option><option value="Greatsword (2H)">Großschwert (2H)</option><option value="Halberd / Spear (2H)">Hellebarde / Speer (2H)</option><option value="Rapier">Rapier</option><option value="Dagger">Dolch</option><option value="Knuckles / Gauntlets">Schlagringe / Panzerhandschuhe</option><option value="Blunt/Axe">Keule / Axt / Hammer</option><option value="Bow (Ranged)">Bogen (Fernkampf)</option><option value="Firearm">Schusswaffe</option><option value="Hand Cannon">Handkanone</option><option value="Shield">Schild</option><option value="A.T.A.G. Weapon">A.T.A.G. Weapon</option></select>
       <button class="ic-trigger dra3-cmp" onclick="openItemCompare()" title="Zwei Waffen vergleichen" aria-label="Waffen vergleichen">⚔️ Vergleichen</button>
     </div>
     <div class="grid" id="weapon-tb"></div>
@@ -1034,10 +1034,10 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div class="cd-folds dr-info-w"><details class="cd-fold cd-spot dr-info dr-a4-quelle" style="--cd-acc:var(--gold)"><summary><span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-info"/></svg></span><span class="cd-fold-main"><h3 class="cd-fold-t">Zur Quellenlage</h3><span class="cd-fold-lead">Jedes der <b data-dr-n="total">–</b> Teile sagt auf der Karte, <b>woher</b> sein Wert stammt.</span></span><span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span></summary><div class="cd-fold-body"><div class="dr-info-b"><p>Jedes der <b><span id="armor-total">–</span></b> Teile sagt auf der Karte, <b>woher</b> sein Wert stammt. <b><span id="armor-import">–</span></b> Teile kommen aus dem <b>Datenimport</b> der Spieldateien, <b><span id="armor-guide">–</span></b> sind <b>aus Guides belegt</b> (VULKK, game8, Fextralife, pywel.app, die Datamine-Datenbank gaming.tools, teils die offiziellen Patch Notes), <b><span id="armor-alt">–</span></b> stammen aus dem alten kuratierten Bestand und sind <b>ungeprüft</b> — dort hat der Fakten-Audit vom 02.06.2026 nachweislich erfundene Werte gefunden und die gröbsten entfernt. Bei <b><span id="armor-ohne">–</span></b> Teilen ist überhaupt kein Zahlenwert hinterlegt.</p><p><b>Welche Stufe?</b> Seit dem Abgleich mit der questlog-Spieldatenbank am 03.10.2026 gilt: „Def +N“ bzw. „Atk +N“ ist die <b>Höchststufe (Refinement +10)</b>, der Grundwert (+0) steht in den Notizen. Teile, die sich nicht aufwerten lassen, sind dort als „nicht aufwertbar“ vermerkt.</p><p><b>Was die Marke nicht sagt:</b> Sie ist eine Herkunftsangabe, keine Vertrauensnote. „Datenimport“ heißt <b>nicht</b> „gegengeprüft“ — diese Werte hat niemand einzeln gegen einen Guide gehalten, und einzelne von ihnen waren unvollständig. Zwei Beispiele: der Plattenkopfbedeckung des Beschützers von Odeck fehlte die Daze-Immunität, dem zugehörigen Mantel Eis-Resistenz&nbsp;Lv3 und der Ausdauer-Malus — beides stand längst in der Set-Beschreibung auf der Seite Rüstungssets. Umgekehrt kann ein „aus Guides belegt“ besser dokumentiert sein als ein Importwert.</p></div></div></details></div>
     <div class="fbar">
       <input class="fs" id="af-q" type="search" placeholder="Rüstung, Fundort, Effekt …" aria-label="Rüstungen durchsuchen" oninput="armorFilter()" style="min-width:190px">
-      <select class="fs" id="af-sort" aria-label="Rüstungen sortieren" onchange="renderArmor()"><option value="type">Sortierung: Typ, dann Name</option><option value="name">Name A–Z</option><option value="def">Defense absteigend</option><option value="atk">Angriff absteigend</option><option value="prov">Quellenlage</option></select>
+      <select class="fs" id="af-sort" aria-label="Rüstungen sortieren" onchange="renderArmor()"><option value="type">Sortierung: Typ, dann Name</option><option value="name">Name A–Z</option><option value="def">Verteidigung absteigend</option><option value="atk">Angriff absteigend</option><option value="prov">Quellenlage</option></select>
       <span id="armor-count" style="font-size:var(--fs-11);color:var(--gdim);margin-left:auto;align-self:center"></span>
       <select class="fs" id="af-type" aria-label="Rüstungen nach Typ filtern" onchange="armorFilter()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
-      <select class="fs" id="af-mat" aria-label="Rüstungen nach Material filtern" onchange="armorFilter()"><option value="">Alle Materialien</option><option value="Plate">Plate</option><option value="Leather">Leder</option><option value="Cloth">Cloth</option><option value="Chain">Chain</option><option value="none">ohne Materialangabe</option></select>
+      <select class="fs" id="af-mat" aria-label="Rüstungen nach Material filtern" onchange="armorFilter()"><option value="">Alle Materialien</option><option value="Plate">Platte</option><option value="Leather">Leder</option><option value="Cloth">Stoff</option><option value="Chain">Kette</option><option value="none">ohne Materialangabe</option></select>
       <select class="fs" id="af-prov" aria-label="Rüstungen nach Quellenlage filtern" onchange="armorFilter()"><option value="">Alle Quellenlagen</option><option value="import">nur Datenimport</option><option value="guide">nur aus Guides belegt</option><option value="altbestand">nur ungeprüft</option><option value="ohnewert">nur ohne Zahlenwert</option></select>
     </div>
     <div class="grid" id="armor-grid"></div>
@@ -1747,7 +1747,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div class="r2b13-bar">
       <div id="r2b13-dye-pills" class="r2b13-pillrow"></div>
       <span id="dyes-cnt" class="r2b13-cnt" aria-live="polite"></span>
-      <select class="fs" id="dyes-cat" hidden aria-hidden="true" tabindex="-1" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Red</option><option value="Green">Green</option><option value="Yellow">Yellow</option><option value="Orange">Orange</option><option value="Spring Green">Frühlingsgrün</option><option value="Violet">Violet</option><option value="Purple">Purple</option><option value="Blue">Blue</option><option value="Teal">Teal</option><option value="Special (non-craftable)">Spezial (nicht herstellbar)</option></select>
+      <select class="fs" id="dyes-cat" hidden aria-hidden="true" tabindex="-1" onchange="renderDyes()"><option value="">Alle Kategorien</option><option value="Red">Rot</option><option value="Green">Grün</option><option value="Yellow">Gelb</option><option value="Orange">Orange</option><option value="Spring Green">Frühlingsgrün</option><option value="Violet">Violett</option><option value="Purple">Lila</option><option value="Blue">Blau</option><option value="Teal">Blaugrün</option><option value="Special (non-craftable)">Spezial (nicht herstellbar)</option></select>
     </div>
     <div id="dyes-tb" class="r2b13-dyes"></div>
   </section>
@@ -3316,7 +3316,7 @@ function renderBossRecs(b){
     <span style="font-size:var(--fs-10);color:var(--dim);text-transform:uppercase;letter-spacing:.04em;align-self:center;margin-right:2px">Empfohlen:</span>
     ${recs.map(r=>{
       const safe=r.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
-      const tipBody=`${(r.info.effect||'').replace(/"/g,'&quot;')}`;
+      const tipBody=`${deT(r.info.effect||'').replace(/"/g,'&quot;')}`;
       const ico=r.type==='element'?'✨':'⚡';
       return `<span class="bo-rec" onclick="event.stopPropagation();showSec('skills');document.getElementById('si').value='${safe}';doSearch('${safe}')" data-tip="${tipBody}" data-tip-title="${deN(r.name).replace(/"/g,'&quot;')}">
         <span class="bo-rec-ico">${ico}</span>${deN(r.name)}
@@ -7469,17 +7469,17 @@ function _dlcA_accCard(a){
   const badge=a.type==='Ring'?'tw':a.type==='Necklace'?'tr':a.type==='Earring'?'tg':'tx';
   const hid=[a.source,a.notes].filter(Boolean).join(' ');
   return _dlcA_card({id:a.name,s:[a.name,a.type,a.effect,a.source,a.notes,'dlc '+a.dlc].join(' '),vis:[a.name,a.type,a.effect].join(' '),hid:hid,
-    head:a.icon?_dlcA_img(SYNTH_CDN+a.icon,a.name):_dlcA_hd('',accTypeIcon(a.type),accTypeGrad(a.type)),name:cdEsc(a.name),
+    head:a.icon?_dlcA_img(SYNTH_CDN+a.icon,a.name):_dlcA_hd('',accTypeIcon(a.type),accTypeGrad(a.type)),name:cdEsc(deN(a.name)),
     tags:'<span class="tag '+badge+'">'+cdEsc(deT(a.type))+'</span>'+_dlcTag(a),
-    rows:_dlcA_row('Effekt',cdEsc(a.effect),'dlc-a-eff')+_dlcA_more('Quelle / Notiz',_dlcA_row('Quelle',cdEsc(a.source),'dlc-a-sm')+(a.notes?_dlcA_row('Notiz',cdEsc(a.notes),'dlc-a-sm dlc-a-dim'):'')),
+    rows:_dlcA_row('Effekt',cdEsc(deT(a.effect)),'dlc-a-eff')+_dlcA_more('Quelle / Notiz',_dlcA_row('Quelle',cdEsc(deT(a.source)),'dlc-a-sm')+(a.notes?_dlcA_row('Notiz',cdEsc(deT(a.notes)),'dlc-a-sm dlc-a-dim'):'')),
     pin:a.source,pt:'Accessoire · '+a.type});
 }
 function _dlcA_coreCard(c){
   const m=(typeof R2B13_SLOT!=='undefined'&&R2B13_SLOT[c.slot])||{g:'⧫',t:c.slot||''};
   const hid=c.source||'';
   return _dlcA_card({id:c.name,s:[c.name,c.effect,c.source,c.slot,slotDe(c.slot),'dlc '+c.dlc].join(' '),vis:[c.name,c.effect,m.t].join(' '),hid:hid,
-    head:CORE_IMGS[c.name]?_dlcA_img(CORE_IMGS[c.name],c.name):_dlcA_hd(m.g),name:cdEsc(c.name),tags:'<span class="tag tx">'+cdEsc(deT(m.t))+'</span>'+_dlcTag(c)+_dlcA_vid(c.name),
-    rows:_dlcA_row('Effekt',cdEsc(c.effect),'dlc-a-eff')+_dlcA_more('Quelle',_dlcA_row('Quelle',cdEsc(c.source),'dlc-a-sm')),
+    head:CORE_IMGS[c.name]?_dlcA_img(CORE_IMGS[c.name],c.name):_dlcA_hd(m.g),name:cdEsc(deN(c.name)),tags:'<span class="tag tx">'+cdEsc(deT(m.t))+'</span>'+_dlcTag(c)+_dlcA_vid(c.name),
+    rows:_dlcA_row('Effekt',cdEsc(deT(c.effect)),'dlc-a-eff')+_dlcA_more('Quelle',_dlcA_row('Quelle',cdEsc(deT(c.source)),'dlc-a-sm')),
     pin:c.source,pt:'Abyss-Kern · '+(m.t||'')});
 }
 function _dlcA_hdr(tag,glyph,title,n,go){
@@ -7754,7 +7754,7 @@ function _wepCardHtml(w,wasOpen,o){
     const src=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
     const alt=(w.name||'Waffe-Icon').replace(/"/g,'&quot;');
     return `<div class="card${show?'':' hide'}" data-filtered="${show?'0':'1'}" data-s="${s}" data-item-id="${escHtml(w.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}">
-      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async"${o&&o.dlc?'':' width="78" height="78"'} alt="${alt}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div${o&&o.dlc?'':' class="dra3-ph"'} style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
+      ${WEAPON_IMGS[w.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${WEAPON_IMGS[w.name]}" onerror="if(_fexFb(this))return;this.parentElement.style.display='none'" loading="lazy" decoding="async"${o&&o.dlc?'':' width="78" height="78"'} alt="${deT(alt)}" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div${o&&o.dlc?'':' class="dra3-ph"'} style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(90deg,rgba(224,69,53,.07) 0%,transparent 70%)">${wTypeIcon(w.type)}</div>`}
       <div class="ct">${deN(w.name)}</div>
       <div class="cm"><span class="tag tx">${deT(w.type)}</span>${_dlcTag(w)}</div>
       <div class="crows"><div class="itk-face">${o&&o.dlc?'':'<div class="dra3-vals">'}
@@ -9591,7 +9591,7 @@ function _asetCard(s,i){
     <div class="aset-body">
       <h3 class="set-name">${escHtml(deN(s.name))}</h3>
       ${s.tag?`<div class="set-tag">${escHtml(deT(s.tag))}</div>`:''}
-      <div class="aset-stats">${defTxt}<span class="aset-st"><b>${n}</b> ${n===1?'Teil':'Teile'}</span>${I.mats.length?`<span class="aset-st">${escHtml(deT(I.mats.join(' · ')))}</span>`:''}</div>
+      <div class="aset-stats">${defTxt}<span class="aset-st"><b>${n}</b> ${n===1?'Teil':'Teile'}</span>${I.mats.length?`<span class="aset-st">${escHtml(I.mats.map(m=>({Plate:'Platte',Cloth:'Stoff',Chain:'Kette'}[m]||deT(m))).join(' · '))}</span>`:''}</div>
       <div class="set-desc">${escHtml(deT(s.kurz))}</div>
       ${_asetDetails(s)}
       ${s.bonus&&s.bonus!==SET_BONUS_STD?`<div class="set-bonus">${escHtml(deT(s.bonus))}</div>`:''}
@@ -9722,7 +9722,7 @@ function _drB3MC(m,withImg){
       <div class="crow"><span class="cl">Freischalten</span><span class="cv">${m.unlock}</span></div>
     </div>
     ${cdCheck({key:_DRB3_MKEY,id:m.name,title:'Besessen',cls:'drb3-have'})}
-    ${(m.stats||m.notes)?`<details class="mount-notes"><summary>${m.stats&&m.notes?'Stats &amp; Notizen':m.stats?'Stats':'Notizen'}</summary><div class="mount-notes-body">${m.stats?`<div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${m.stats}</span></div>`:''}${m.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${m.notes}</span></div>`:''}</div></details>`:''}
+    ${(m.stats||m.notes)?`<details class="mount-notes"><summary>${m.stats&&m.notes?'Stats &amp; Notizen':m.stats?'Stats':'Notizen'}</summary><div class="mount-notes-body">${m.stats?`<div class="crow"><span class="cl">Stats</span><span class="cv" style="color:var(--gold)">${deT(m.stats)}</span></div>`:''}${m.notes?`<div class="crow"><span class="cl">Notiz</span><span class="cv" style="color:var(--dim)">${m.notes}</span></div>`:''}</div></details>`:''}
     ${MOUNT_INGAME_IMGS[m.name]?`<button class="mount-ig-btn" onmouseenter="showMountIG(event,'${escJsStr(m.name)}')" onmouseleave="hideMountIG()" onclick="openMountIG('${escJsStr(m.name)}')">👁 In-Game Ansicht</button>`:''}
   </div>`;
 }
@@ -13235,7 +13235,7 @@ function bestDropChancen(name){
   const ch=c=>Array.isArray(c)?z(c[0])+' bis '+z(c[1])+' %':z(c)+' %';
   const top=D.drops.filter(d=>(Array.isArray(d.chance)?d.chance[1]:d.chance)>=1).slice(0,8);
   if(!top.length)return '';
-  return `<div class="crow"><span class="cl">Chancen</span><span class="cv">${top.map(d=>escHtml(d.item)+' '+ch(d.chance)).join(' · ')} <a href="/bestiarium#enemy-${escHtml(String(name).normalize('NFC').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''))}" style="color:var(--dim)">Tabelle ↗</a></span></div>`;
+  return `<div class="crow"><span class="cl">Chancen</span><span class="cv">${top.map(d=>escHtml(deN(d.item))+' '+ch(d.chance)).join(' · ')} <a href="/bestiarium#enemy-${escHtml(String(name).normalize('NFC').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''))}" style="color:var(--dim)">Tabelle ↗</a></span></div>`;
 }
 // ===== DR-A2 Gegner (design-rest 01.11.2026) =====
 // Kopf (drHead, Szene reg-hernand, Kacheln aus ENEMIES), Intro wortgleich in drInfo, Gruppen-Pillen mit Anzahl (cdPills
@@ -13250,7 +13250,7 @@ function _drA2Join(a){return a.length>1?a.slice(0,-1).join(', ')+' & '+a[a.lengt
 function _drA2BestCard(e,key,title){
   const s=[e.name,e.de||'',e.region,e.drops||'',e.tipp||'',e.note,'bestiarium gegner enemy',title].join(' ').toLowerCase();
   const img=ENEMY_IMGS[e.name];
-  const titel=e.de&&e.de!==e.name?`${escHtml(e.de)} <span class="ct-sub">(${escHtml(e.name)})</span>`:escHtml(e.name);
+  const titel=e.de&&e.de!==e.name?`${escHtml(e.de)} <span class="ct-sub">(${escHtml(e.name)})</span>`:escHtml(deN(e.name));
   const head=img
     ?`<div class="boss-img-wrap"><img class="boss-img" src="${img}" width="300" height="168" loading="lazy" decoding="async" alt="${escHtml(deT(e.de||e.name))}" style="object-position:center center;background:linear-gradient(135deg,#15110d,#0c0c0c)" onerror="this.closest('.boss-img-wrap').outerHTML=bestPH('${escJsStr(e.name)}','${key}')"></div>`
     :bestPH(e.name,key);
