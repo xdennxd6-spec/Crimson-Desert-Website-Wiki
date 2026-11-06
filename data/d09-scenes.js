@@ -4,7 +4,7 @@
 // Wird vom Integrator aus redesign-2/scenes/manifest-*.json erzeugt. Fehlt ein Schluessel, greift der naechste
 // Schluessel der Kette bzw. die Farbflaeche mit Glyphe (cdScene-Rueckfall).
 const SCENES={
-  'romanze':{f:'romanze-v3.webp',alt:'Zwei Gestalten als Silhouetten in der Abenddämmerung, eine mit Rundschild',pos:'50% 35%',w:1600,h:1600},
+  'romanze':{f:'romanze-rosen-v3.webp',alt:'Ein Krieger mit Rundschild überreicht einer Frau einen Strauß roter Rosen auf einem Steinweg',pos:'50% 28%',w:1600,h:868},
   'rom-elowen':{f:'rom-elowen-v3.webp',alt:'Elowens Hütte mit roten Blumen auf dem Dach, zwischen Bäumen im Sonnenlicht',pos:'50% 30%',w:1600,h:1600},
   'rom-bari':{f:'rom-bari-v3.webp',alt:'Bari mit Hexenhut in ihrer Holzhütte bei Kerzenlicht',pos:'50% 24%',w:1600,h:1600},
   'rom-lyselia':{f:'rom-lyselia-v3.webp',alt:'Holztür in einer Felswand neben einer Steinlaterne',pos:'50% 50%',w:1600,h:1600},
