@@ -91,7 +91,7 @@ const FAC_QUEST_IMGS = {
  "House Roberts|The Count's Honor": [
   [
    "sealed-in-stone-return-to-roberts.webp",
-   "Zurück zu Graf Roberts in Bluemont Manor."
+   "Zurück zu Graf Roberts in Bluemont-Anwesen."
   ],
   [
    "engraved-gold-earing-info.webp",
@@ -235,7 +235,7 @@ const FAC_QUEST_IMGS = {
  "House Celeste|Queen of the Silkspun Citadel (Queen's Nest)": [
   [
    "house-celeste-queen-spider-arboria-castle.webp",
-   "Queen Spider in Arboria Castle."
+   "Spinnenkönigin im Schloss Arboria."
   ]
  ],
  "House Celeste|Abandoned Factory (Restarting the Elixir Factory)": [
@@ -247,7 +247,7 @@ const FAC_QUEST_IMGS = {
  "House Celeste|The Hellhounds": [
   [
    "house-celeste-hemon-beindel-fort-hellwood.webp",
-   "Hemon Beindel in Fort Hellwood."
+   "Hemon Baindel in der Festung Höllenforst."
   ]
  ],
  "House Celeste|Frozen Eldertree": [

@@ -24,7 +24,7 @@
     },
     {
       "frage": "Kann man in Crimson Desert Hauptquest-Inhalte verpassen?",
-      "antwort": "{{verpassbar|Wort}} Inhalte der Hauptgeschichte sind als verpassbar markiert, gehen nach heutiger Quellenlage aber nicht dauerhaft verloren: Den Beobachtungspunkt mit dem Skill Focused Force Palm aus Auf dem richtigen Pfad gibt es laut ConsolePulse in einem späteren Kapitel erneut, und Oongkas Ausrüstung ist nach Zeit, der Gerechtigkeit ins Auge zu blicken laut PowerPyx nur bis zu seiner Rückkehr unzugänglich. Am einfachsten erledigst du beides im jeweiligen Kapitel."
+      "antwort": "{{verpassbar|Wort}} Inhalte der Hauptgeschichte sind als verpassbar markiert, gehen nach heutiger Quellenlage aber nicht dauerhaft verloren: Den Beobachtungspunkt mit dem Skill Focused Force Palm aus Auf dem richtigen Pfad gibt es laut ConsolePulse in einem späteren Kapitel erneut, und Oongkas Ausrüstung ist nach Zeit, dem Gerechtigkeit ins Auge zu blicken laut PowerPyx nur bis zu seiner Rückkehr unzugänglich. Am einfachsten erledigst du beides im jeweiligen Kapitel."
     },
     {
       "frage": "Welche Bosse gehören zur Hauptgeschichte von Crimson Desert?",
@@ -168,7 +168,7 @@
   "bosse": [
     {
       "frage": "Wie viele Bosse gibt es in Crimson Desert?",
-      "antwort": "Die Boss-Übersicht führt {{anzahl}} Bosse: {{story}} Story-Bosse, sortiert nach Kapitel, und {{welt}} Bosse ohne festes Kapitel, überwiegend Welt- und Fraktionsbosse, dazu Sanctum- und weitere optionale Bosse."
+      "antwort": "Die Boss-Übersicht führt {{anzahl}} Bosse: {{story}} Story-Bosse, sortiert nach Kapitel, und {{welt}} Bosse ohne festes Kapitel, überwiegend Welt- und Fraktionsbosse, dazu Sanktum- und weitere optionale Bosse."
     },
     {
       "frage": "Welcher ist der letzte Boss in Crimson Desert?",
