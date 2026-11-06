@@ -5733,7 +5733,12 @@ let _deSi=null;
 const _deSadd=(q,z)=>{const l=q.toLowerCase().replace(/\u2019/g,"'"),m=l.match(_DE_TOK);if(!m)return;let e=_deSi.get(m[0]);if(!e)_deSi.set(m[0],e={l:[],v:new Map()});if(!e.l.includes(m.length))e.l.push(m.length);if(!e.v.has(l))e.v.set(l,z);};
 let _deEm=null;
 // Umkehrung fuer fremde englische Dienste (Kartensuche): deutscher Anzeigename zurueck auf den englischen Spielnamen.
-function deE(s){s=String(s==null?'':s).trim();if(!_deEm){_deEm=new Map();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d!==k&&!_deEm.has(d))_deEm.set(d,k);}}return _deEm.get(s)||s;}
+// Auch Namen mitten im Text werden zurückübersetzt (längster zuerst). Kurzformen wie Demeniss zu Kingdom of Demeniss bleiben kurz, die Karte findet sie so besser.
+let _deEr=null;
+function deE(s){s=String(s==null?'':s).trim();if(!_deEm){_deEm=new Map();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d!==k&&!k.includes(d)&&!_deEm.has(d))_deEm.set(d,k);}}
+  if(_deEm.has(s))return _deEm.get(s);
+  if(!_deEr){const frei=new Set(['Waffe','Waffen','Zelt','Silber','Rätsel','Ruinen','Materialien','Gift','Ausrüstung','Taverne','Banditen','Stab','Schild','Stamm','Pelz','Lager','Quest','Boss','Händler','Rezept','Kapitel','Insel','Stadt','Dorf','Burg','Höhle','Tempel','Turm','Brücke','Hafen','Mine','Feuer','Wasser','Eis','Blitz','Wind','Holz','Stein','Erz','Eisen','Gold','Kupfer','Fleisch','Fisch','Beute','Truhe','Geist','Ausdauer','Leben']);const l=[..._deEm.keys()].filter(d=>d.length>=4&&!frei.has(d)).sort((a,b)=>b.length-a.length).map(d=>d.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));_deEr=new RegExp('(?<![\\p{L}\\p{N}])(?:'+l.join('|')+')(?![\\p{L}\\p{N}])','gu');}
+  return s.replace(_deEr,m=>_deEm.get(m)||m);}
 // Suchtext anreichern: hängt an einen data-s-Text die deutschen Namen aller darin erkannten englischen Namen an (Groß-/Kleinschreibung egal).
 function _deS(s){
   s=String(s==null?'':s);if(!s)return s;
