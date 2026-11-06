@@ -447,8 +447,9 @@ for (const e of NAV_ENTRIES) {
 let verbotTreffer = 0;
 const warnZaehler = {};
 // Ausnahmen (Spielinhalt, kein Navigations-Jargon): "Blätter" im Sinn von Pflanzenblättern in den
-// Rezept-/Kraeuterbeschreibungen von data/d02-crafting.js ("Rosmarin mit gelblichen Blättern").
-const AUSNAHMEN = [{ datei: "data/d02-crafting.js", wort: "Blätter" }];
+// Rezept-/Kraeuterbeschreibungen von data/d02-crafting.js ("Rosmarin mit gelblichen Blättern") und im
+// offiziellen deutschen Spieltext der Boss-Lore in data/d04-armor-imgs.js ("Blätter und Äste").
+const AUSNAHMEN = [{ datei: "data/d02-crafting.js", wort: "Blätter" }, { datei: "data/d04-armor-imgs.js", wort: "Blätter" }];
 let ausgenommen = 0;
 for (const q of quellen) {
   for (const { w, re } of VERBOTEN) {
@@ -470,7 +471,7 @@ for (const q of quellen) {
   }
 }
 if (!verbotTreffer) ok(`kein verbotenes Jargon-Wort in ${quellen.length} Quellen (index.html, ${dataFiles.length} data-Dateien, ${quellen.length - 1 - dataFiles.length} SEO-Seiten)`);
-if (ausgenommen) console.log(`   Hinweis: ${ausgenommen} Treffer von "Blätter" in data/d02-crafting.js ausgenommen (Pflanzenblätter in Kräuterbeschreibungen)`);
+if (ausgenommen) console.log(`   Hinweis: ${ausgenommen} Treffer von "Blätter" in data/d02-crafting.js und data/d04-armor-imgs.js ausgenommen (Pflanzenblätter)`);
 {
   const gesamt = Object.entries(warnZaehler);
   const summe = gesamt.reduce((a, [, c]) => a + c, 0);
