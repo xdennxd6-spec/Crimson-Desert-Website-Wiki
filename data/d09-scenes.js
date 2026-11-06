@@ -4,11 +4,11 @@
 // Wird vom Integrator aus redesign-2/scenes/manifest-*.json erzeugt. Fehlt ein Schluessel, greift der naechste
 // Schluessel der Kette bzw. die Farbflaeche mit Glyphe (cdScene-Rueckfall).
 const SCENES={
-  'romanze':{f:'romanze-2x.webp',alt:'Zwei Gestalten als Silhouetten in der Abenddämmerung, eine mit Rundschild',pos:'50% 35%',w:1024,h:1024},
-  'rom-elowen':{f:'rom-elowen-2x.webp',alt:'Elowens Hütte mit roten Blumen auf dem Dach, zwischen Bäumen im Sonnenlicht',pos:'50% 30%',w:1024,h:1024},
-  'rom-bari':{f:'rom-bari-2x.webp',alt:'Bari mit Hexenhut in ihrer Holzhütte bei Kerzenlicht',pos:'50% 24%',w:1024,h:1024},
-  'rom-lyselia':{f:'rom-lyselia-2x.webp',alt:'Holztür in einer Felswand neben einer Steinlaterne',pos:'50% 50%',w:1024,h:1024},
-  'rom-areciel':{f:'rom-areciel-2x.webp',alt:'Areciel hinter einem Holztisch in ihrem Haus in roten Klippen',pos:'50% 30%',w:1024,h:1024},
+  'romanze':{f:'romanze-v3.webp',alt:'Zwei Gestalten als Silhouetten in der Abenddämmerung, eine mit Rundschild',pos:'50% 35%',w:1600,h:1600},
+  'rom-elowen':{f:'rom-elowen-v3.webp',alt:'Elowens Hütte mit roten Blumen auf dem Dach, zwischen Bäumen im Sonnenlicht',pos:'50% 30%',w:1600,h:1600},
+  'rom-bari':{f:'rom-bari-v3.webp',alt:'Bari mit Hexenhut in ihrer Holzhütte bei Kerzenlicht',pos:'50% 24%',w:1600,h:1600},
+  'rom-lyselia':{f:'rom-lyselia-v3.webp',alt:'Holztür in einer Felswand neben einer Steinlaterne',pos:'50% 50%',w:1600,h:1600},
+  'rom-areciel':{f:'rom-areciel-v3.webp',alt:'Areciel hinter einem Holztisch in ihrem Haus in roten Klippen',pos:'50% 30%',w:1600,h:1600},
   // Set A: offizielle Bilder (Regionen, Kapitel, Seitenkoepfe, Quests, Checklisten, Charaktere) (38)
   'reg-hernand':{f:'reg-hernand-v2.webp',alt:'Grüne Wiese auf einem Plateau in Hernand mit Felswand, Nadelbäumen und Gebirge im Hintergrund, davor ein Abenteurer mit Rundschild',pos:'50% 40%',w:1920,h:1080},
   'reg-pailune':{f:'reg-pailune-v2.webp',alt:'Dorf mit roten Holzzäunen, Schnitzfiguren und Hütten in Pailune vor schneebedeckten Bergen, im Vordergrund ein Bogenschütze mit Schild',pos:'50% 30%',w:1920,h:1080},

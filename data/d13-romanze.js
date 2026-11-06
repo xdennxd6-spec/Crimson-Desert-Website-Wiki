@@ -252,7 +252,7 @@ const ROM_GIFTS = {
 
 // Heirat. F 4.1 bis 4.8, W2, W5, W9
 const ROM_WEDDING = {
-  img: {key: "rom-hochzeit", f: "cd_assets/scenes/rom-hochzeit-2x.webp", w: 996, h: 547, alt: "Hochzeitsszene: ein Paar in Weiß unter einem großen Baum, dahinter ein Geistlicher, Blumen, Lichterketten und Gäste"},
+  img: {key: "rom-hochzeit", f: "cd_assets/scenes/rom-hochzeit-v3.webp", w: 1600, h: 879, alt: "Hochzeitsszene: ein Paar in Weiß unter einem großen Baum, dahinter ein Geistlicher, Blumen, Lichterketten und Gäste"},
   cap: "Die Hochzeitsszene als Spielbild aus den Spieldaten. Wer unter dem Schleier steht, bleibt offen.",
   rows: [
     {t: "Grundregel", d: "Antrag bei 100 auf der erweiterten Stufe."},

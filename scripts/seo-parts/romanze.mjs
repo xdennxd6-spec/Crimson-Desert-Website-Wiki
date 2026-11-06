@@ -135,7 +135,7 @@ ${quellen}`;
     desc: `Romanze in Crimson Desert: So flirtest und heiratest du, welche ${z.hexen} Hexen und NPCs infrage kommen, was die Ehe bringt und was noch nicht belegt ist.`,
     h1: "Romanze & Heirat in Crimson Desert",
     lead: `Wie Flirten, Vertrauen und Heiratsantrag seit dem DLC <strong>Charting the Unknown</strong> funktionieren, welche <strong>${z.hexen} Hexen</strong> und NPCs infrage kommen und was bisher keine geprüfte Quelle belegt.`,
-    ogImage: "cd_assets/scenes/rom-hochzeit-2x.webp",
+    ogImage: "cd_assets/scenes/rom-hochzeit-v3.webp",
     crumb: "Romanze & Ehe",
     bodyHtml: body,
     jsonld,
