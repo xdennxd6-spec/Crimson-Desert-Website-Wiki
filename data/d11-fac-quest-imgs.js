@@ -7,29 +7,29 @@ const FAC_QUEST_IMGS = {
  "House Roberts|First Trial of Trust": [
   [
    "first-trial-of-trust-talk-to-servant.webp",
-   "House Roberts's Servant bei Bluemont Manor startet die Quest."
+   "Diener von Haus Roberts beim Bluemont-Anwesen startet die Quest."
   ],
   [
    "first-trial-of-trust-map-location.webp",
-   "Kartenposition: südlich des Notice Board bei Bluemont Manor."
+   "Kartenposition: südlich der Anschlagtafel beim Bluemont-Anwesen."
   ],
   [
    "bluemont-cask-house-map-location.webp",
-   "Bluemont Cask House liegt südlich der Muckroot Ranch."
+   "Bluemont-Winzerei liegt südlich des Sumpfwurzel-Viehhofs."
   ],
   [
    "troubled-count-caretaker-erich.webp",
-   "Erich am Baum der Muckroot Ranch ansprechen."
+   "Erich am Baum des Sumpfwurzel-Viehhofs ansprechen."
   ],
   [
    "bluemont-cask-house-clear-the-bandits.webp",
-   "Bleed Bandits aus dem Cask House locken und das markierte Gebiet säubern."
+   "Blut-Banditen aus dem Cask House locken und das markierte Gebiet säubern."
   ]
  ],
  "House Roberts|Troubled Count": [
   [
    "troubled-count-map-location.webp",
-   "Zurück zu Bluemont Manor, Erich wartet draußen."
+   "Zurück zum Bluemont-Anwesen, Erich wartet draußen."
   ],
   [
    "bluemont-cask-house-talk-to-leon-roberts.webp",
@@ -39,7 +39,7 @@ const FAC_QUEST_IMGS = {
  "House Roberts|Stolen Quarry": [
   [
    "stolen-quarry-map-location.webp",
-   "Karin Quarry und die verschlossene Excavatron-Arena nördlich von Hernand."
+   "Steinbruch Karin und die verschlossene Excavatron-Arena nördlich von Hernand."
   ],
   [
    "marnis-excavatron-climb-up-to-get-to.webp",
@@ -55,7 +55,7 @@ const FAC_QUEST_IMGS = {
   ],
   [
    "stolen-quarry-karin-quarry.webp",
-   "Danach die Bleed Bandits besiegen, bis die Besatzungsleiste auf null ist."
+   "Danach die Blut-Banditen besiegen, bis die Besatzungsleiste auf null ist."
   ],
   [
    "stolen-quarry-reduce-enemy-control.webp",
@@ -67,13 +67,13 @@ const FAC_QUEST_IMGS = {
   ],
   [
    "hidden-treasure-piece-6-chest.webp",
-   "Die Truhe hinter der Tür vor dem Verlassen der Karin Quarry öffnen."
+   "Die Truhe hinter der Tür vor dem Verlassen des Steinbruchs Karin öffnen."
   ]
  ],
  "House Roberts|Sealed in Stone": [
   [
    "sealed-in-stone-talk-to-erich.webp",
-   "Erich am Kran der Karin Quarry gibt den Crane Control Room Key."
+   "Erich am Kran des Steinbruchs Karin gibt den Schlüssel zum Kransteuerungsraum."
   ],
   [
    "sealed-in-stone-talk-to-erich-control-the-crane.webp",
@@ -91,21 +91,21 @@ const FAC_QUEST_IMGS = {
  "House Roberts|The Count's Honor": [
   [
    "sealed-in-stone-return-to-roberts.webp",
-   "Zurück zu Graf Roberts in Bluemont Manor."
+   "Zurück zu Graf Roberts in Bluemont-Anwesen."
   ],
   [
    "engraved-gold-earing-info.webp",
-   "Belohnung Engraved Gold Earring: Verteidigung und Bewegungstempo beim Verfeinern."
+   "Belohnung Gravierter Goldohrring: Verteidigung und Bewegungstempo beim Verfeinern."
   ]
  ],
  "Pororin Forest Guardians|Children of the Woods": [
   [
    "children-of-the-woods-questline.webp",
-   "Start in Pororin Village: mit den Kindern sprechen, A Traveler's Log von Polan annehmen."
+   "Start in Pororin Village: mit den Kindern sprechen, Logbuch eines Reisenden von Polan annehmen."
   ],
   [
    "ara-shai-mystic-falls-map-location.webp",
-   "Ara: unterhalb der Mystic Falls (The Ancient Rift, Pailune)."
+   "Ara: unterhalb der Mystikfälle (The Ancient Rift, Pailune)."
   ],
   [
    "ara-shai-mystic-falls-hole.webp",
@@ -117,7 +117,7 @@ const FAC_QUEST_IMGS = {
   ],
   [
    "florian-shai-desert-edge-maze-map-location.webp",
-   "Florian: unterirdisch im Desert's Edge Maze (Smoking Lands, Nord-Demeniss)."
+   "Florian: unterirdisch im Labyrinth am Wüstenrand (Rauchende Lande, Nord-Demeniss)."
   ],
   [
    "florian-shai-underground-maze-entrance.webp",
@@ -129,7 +129,7 @@ const FAC_QUEST_IMGS = {
   ],
   [
    "balan-shai-redtree-forest-map-location.webp",
-   "Balan: Redtree Forest im Westen von Delesyia, östlich von Demeniss."
+   "Balan: Rotbaumwald im Westen von Delesyia, östlich von Demeniss."
   ],
   [
    "balan-shai-red-tree-cave.webp",
@@ -137,7 +137,7 @@ const FAC_QUEST_IMGS = {
   ],
   [
    "alder-shai-three-brothers-cliff-map-location.webp",
-   "Alder: bei Three Brothers' Cliff und Wyvern's Nest im Süden von Delesyia."
+   "Alder: bei Drei-Brüder-Klippe und Wyvern's Nest im Süden von Delesyia."
   ],
   [
    "alder-shai-under-stone-structure.webp",
@@ -145,43 +145,43 @@ const FAC_QUEST_IMGS = {
   ],
   [
    "polan-pororin-village-quest-complete.webp",
-   "Zurück zu Polan: Belohnung Pororin Petal Hat."
+   "Zurück zu Polan: Belohnung Pororin-Blütenmütze."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Embers of Return": [
   [
    "embers-return-hills-no-return-greymanes-location.webp",
-   "Hills of No Return: Otto, Silvan, Aldric und Fritz."
+   "Hügel ohne Wiederkehr: Otto, Silvan, Aldric und Fritz."
   ],
   [
    "embers-return-glenbright-farm-greymanes-location.webp",
-   "Glenbright Farm: Ronnie, Tranan und Brice."
+   "Glenbright-Bauernhof: Ronnie, Tranan und Brice."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Gathered Will (Grounds of the Sunrise)": [
   [
    "gathered-will-hook-rapids-greymanes-location.webp",
-   "Hook Rapids: Balder und Ryan."
+   "Hakenfurt: Balder und Ryan."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Solid Foundation (Grounds of the Sunrise)": [
   [
    "solid-foundation-inksworth-bindery-waterfall-greymanes-location.webp",
-   "Wasserfall über Howling Hill (Inksworth Bindery): Connor, Oliver und Eric."
+   "Wasserfall über dem Heulenden Hügel (Binderei Tintenschatz): Connor, Oliver und Eric."
   ],
   [
    "azerian-manor-defense-mission.webp",
-   "Die Camp-Gelder kommen aus der Verteidigungsmission im Azerian Manor."
+   "Die Camp-Gelder kommen aus der Verteidigungsmission im Azerian-Anwesen."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Greymane Commissions (Tales of the Greymanes: Carl/Ronnie/Ross/Tranan/Brice/Ronald/Pierce u.a.; 27 Aufträge)": [
   [
    "greymane-commissions-journal-medium-bag-reward.webp",
-   "Das Journal Tales of the Greymanes listet jeden Auftrag, Belohnung jeweils eine Medium Bag."
+   "Das Journal Geschichten der Graumähnen listet jeden Auftrag, Belohnung jeweils eine Mittelgroße Tasche."
   ],
   [
    "medium-bag-three-inventory-slots-reward.webp",
-   "Jede Medium Bag erweitert das Inventar um drei Plätze."
+   "Jede Mittelgroße Tasche erweitert das Inventar um drei Plätze."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Brightening the Spirits": [
@@ -193,7 +193,7 @@ const FAC_QUEST_IMGS = {
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|The First Steps of Little Marksmen": [
   [
    "scattered-embers-white-wood-bow-crafting.webp",
-   "Den White Wood Bow in der Schmiede herstellen."
+   "Den Weißholzbogen in der Schmiede herstellen."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|A Taste of Home": [
@@ -205,7 +205,7 @@ const FAC_QUEST_IMGS = {
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Strongbox with Wheels": [
   [
    "scattered-embers-yann-empty-wagon-sell.webp",
-   "Den gestohlenen Wagen beim Hehler abgeben (Empty Wagon)."
+   "Den gestohlenen Wagen beim Hehler abgeben (Leerer Wagen)."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Gentle Sound of Flowing River (Words Left by the Riverside)": [
@@ -217,7 +217,7 @@ const FAC_QUEST_IMGS = {
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Strength Held in the Fingertips": [
   [
    "scattered-embers-oongka-calphade-arm-wrestling.webp",
-   "Armdrücken in der Taverne (How to Distribute Strength)."
+   "Armdrücken in der Taverne (Wie man Kraft verteilt)."
   ]
  ],
  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Sweet Taste of Bounties (Face on the Bounty Notice -> Plenty of Bounty)": [
@@ -235,7 +235,7 @@ const FAC_QUEST_IMGS = {
  "House Celeste|Queen of the Silkspun Citadel (Queen's Nest)": [
   [
    "house-celeste-queen-spider-arboria-castle.webp",
-   "Queen Spider in Arboria Castle."
+   "Spinnenkönigin im Schloss Arboria."
   ]
  ],
  "House Celeste|Abandoned Factory (Restarting the Elixir Factory)": [
@@ -247,7 +247,7 @@ const FAC_QUEST_IMGS = {
  "House Celeste|The Hellhounds": [
   [
    "house-celeste-hemon-beindel-fort-hellwood.webp",
-   "Hemon Beindel in Fort Hellwood."
+   "Hemon Baindel in der Festung Höllenforst."
   ]
  ],
  "House Celeste|Frozen Eldertree": [
@@ -259,11 +259,11 @@ const FAC_QUEST_IMGS = {
  "House Celeste|Legendary Animals": [
   [
    "legendary-hunter-legendary-animals-quest.webp",
-   "Das Treffen mit dem Legendary Hunter startet die dreiteilige Tier-Untersuchung."
+   "Das Treffen mit dem Legendären Jäger startet die dreiteilige Tier-Untersuchung."
   ],
   [
    "silver-fang-info.webp",
-   "Silver Fang, die wichtigste Belohnung dieser Reihe."
+   "Silberzahn, die wichtigste Belohnung dieser Reihe."
   ]
  ],
  "Goldleaf Merchant Guild|Troubled Shakatu": [

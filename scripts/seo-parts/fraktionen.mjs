@@ -48,6 +48,8 @@
 //
 // ctx = { data: {...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "fraktionen";
 export const NAV_LABEL = "Fraktionsquests";
 // Tab-Deeplink: die App zeigt die Fraktionen als dritten Tab innerhalb von sec-quests
@@ -123,9 +125,9 @@ export function build(ctx) {
     : "";
 
   const row = (region, f, q) => `<tr id="${esc(rowId(region, f, q))}">
-<td class="q-cell">${esc(q.q)}${confTag(q)}</td>
+<td class="q-cell">${esc(deN(q.q))}${confTag(q)}</td>
 <td>${esc(q.trigger)}</td>
-<td>${esc(q.prereq)}</td>
+<td>${esc(deT(q.prereq))}</td>
 <td>${esc(q.reward)}</td>
 </tr>${shots(f, q)}`;
 
@@ -139,7 +141,7 @@ export function build(ctx) {
 
   const facBlock = (region, f) => {
     const newTag = f.isNew ? `<span class="newfac">Neu erfasst</span>` : "";
-    return `<h3>${esc(f.name)} (${f.quests.length})${newTag}</h3>
+    return `<h3>${esc(deN(f.name))} (${f.quests.length})${newTag}</h3>
 <p class="fac-overview">${esc(f.overview)}</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Quest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>
@@ -149,7 +151,7 @@ export function build(ctx) {
 
   const sections = FAC_DATA.regions.map((r) => {
     const rq = r.factions.reduce((n, f) => n + f.quests.length, 0);
-    return `<h2>${esc(r.region)} (${rq})</h2>
+    return `<h2 data-anker="${esc(r.region)} (${rq})">${esc(deT(r.region))} (${rq})</h2>
 ${r.factions.map((f) => facBlock(r, f)).join("\n")}`;
   }).join("\n");
 
@@ -168,7 +170,7 @@ ${sections}`;
         name: "Alle Fraktionsquests in Crimson Desert",
         numberOfItems: z.anzahl,
         itemListElement: FAC_DATA.regions.flatMap((r) => r.factions).flatMap((f) => f.quests)
-          .map((q, i) => ({ "@type": "ListItem", position: i + 1, name: q.q })),
+          .map((q, i) => ({ "@type": "ListItem", position: i + 1, name: deN(q.q) })),
       },
     ],
   };

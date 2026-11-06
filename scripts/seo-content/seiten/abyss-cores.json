@@ -11,19 +11,19 @@
     },
     {
       "frage": "Wie funktioniert die Core-Synthese?",
-      "antwort": "Bei der regulären Synthese werden Cores mit gleichem Namen und gleicher Stufe zu einem Core der nächsthöheren Stufe, höchstens bis Stufe III. Dafür brauchst du das passende Blueprint, das bei Hexen kaufbar ist, und nicht jeder Core ist aufwertbar. Die Spezial-Synthese braucht kein Blueprint und würfelt den Typ des Ergebnisses; sie ist der einzige Weg zu Greater-Cores. Mehr zu den Hexen steht unter Hexen & Fusion."
+      "antwort": "Bei der regulären Synthese werden Cores mit gleichem Namen und gleicher Stufe zu einem Core der nächsthöheren Stufe, höchstens bis Stufe III. Dafür brauchst du die passende Blaupause, das bei Hexen kaufbar ist, und nicht jeder Core ist aufwertbar. Die Spezial-Synthese braucht keine Blaupause und würfelt den Typ des Ergebnisses; sie ist der einzige Weg zu Greater-Cores. Mehr zu den Hexen steht unter Hexen & Fusion."
     },
     {
       "frage": "Was sind Greater Cores?",
-      "antwort": "Im Wiki gibt es {{greater}} Greater-Cores, zum Beispiel Greater Insight, Greater Destruction und Greater Swift. Sie entstehen nur per Spezial-Synthese, mit geringer Chance pro Versuch. Sie haben eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich nicht reparieren, sondern müssen neu synthetisiert werden. Die hohen Bane-Werte gehören laut Wiki zu den Greater-Cores und nicht zu Stufe III. Der Rampaging Insight („Wütend“ im deutschen Spiel) gilt als wahrscheinlicher Alias des Greater Insight, als eigene Reihe ist er nicht belegt."
+      "antwort": "Im Wiki gibt es {{greater}} Greater-Cores, zum Beispiel Wütende Einsicht, Wütende Zerstörung und Wütender Sturmwind. Sie entstehen nur per Spezial-Synthese, mit geringer Chance pro Versuch. Sie haben eine Haltbarkeit, zerbrechen nach einiger Nutzung und lassen sich nicht reparieren, sondern müssen neu synthetisiert werden. Die hohen Bane-Werte gehören laut Wiki zu den Greater-Cores und nicht zu Stufe III. Der Rampaging Insight („Wütend“ im deutschen Spiel) gilt als wahrscheinlicher Alias der Wütenden Einsicht, als eigene Reihe ist er nicht belegt."
     },
     {
       "frage": "Welche Cores passen in Handschuhe und Schuhe?",
-      "antwort": "Cores mit dem Slot-Typ Waffe/Hand/Fuß ({{both}} im Wiki) passen laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe. Einzelne Cores sind enger: Tempest of Destruction, Kinetic Burst, Colossal Might, Putrid Touch, The Showstopper und Karmic Pulse passen nur in Handschuhe, Infinite Arrows nur in Fernkampfwaffen. Aegis und Fortification passen auch in Schilde."
+      "antwort": "Cores mit dem Slot-Typ Waffe/Hand/Fuß ({{both}} im Wiki) passen laut den Sockeldaten von questlog in Waffen (Nah- und Fernkampf, keine Schilde), Handschuhe und Schuhe. Einzelne Cores sind enger: Sturm der Vernichtung, Energiestoß, Entfesselte Kraft des Riesen, Fangzahn der Verderbnis, Schulterramme und Welle des Karmas passen nur in Handschuhe, Endlose Pfeile nur in Fernkampfwaffen. Stahlwand und Verstärkung passen auch in Schilde."
     },
     {
       "frage": "Welche Stufenwerte haben Abyss Cores?",
-      "antwort": "Für {{tiers}} passive Stat-Cores hinterlegt das Wiki konkrete Stufenwerte, zum Beispiel Attack bei Destruction, Critical Rate bei Insight und Movement Speed bei Haste. Sie stehen in der Effekt-Spalte. Im Spiel gibt es laut Wiki keine Prozentangabe: Flat-Werte erscheinen als Zahl, andere Werte als Lv.-Stufe."
+      "antwort": "Für {{tiers}} passive Stat-Cores hinterlegt das Wiki konkrete Stufenwerte, zum Beispiel Attack bei Zerstörung, Krit. Trefferchance bei Einsicht und Bewegungstempo bei Eile. Sie stehen in der Effekt-Spalte. Im Spiel gibt es laut Wiki keine Prozentangabe: Flat-Werte erscheinen als Zahl, andere Werte als Lv.-Stufe."
     }
   ]
 }

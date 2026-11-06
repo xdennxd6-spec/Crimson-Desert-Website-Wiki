@@ -22,6 +22,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "skills";
 export const NAV_LABEL = "Fähigkeiten";
@@ -152,13 +153,13 @@ export function build(ctx) {
     if (!img) return `<span class="skl-ph" aria-hidden="true">✦</span>`;
     const px = /^https?:/i.test(img) ? CDN_ICON_PX : null;
     const dim = px ? { w: px, h: px } : dimsLocal(img);
-    return `<img class="skl-img" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(name)} (${esc(char)}) in Crimson Desert" width="${dim.w}" height="${dim.h}">`;
+    return `<img class="skl-img" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(name))} (${esc(char)}) in Crimson Desert" width="${dim.w}" height="${dim.h}">`;
   };
 
   const skillRow = (s, char) => `<tr id="skill-${slug(char)}-${slug(s.name)}">
-<td class="skl-n">${iconHtml(s.name, char)}<strong>${esc(s.name)}</strong>${isMiss(s) ? ' <span class="skl-miss">verpassbar</span>' : ""}</td>
-<td>${esc(s.prereq)}</td>
-<td class="skl-cost">${esc(s.cost)}</td>
+<td class="skl-n">${iconHtml(s.name, char)}<strong>${esc(deN(s.name))}</strong>${isMiss(s) ? ' <span class="skl-miss">verpassbar</span>' : ""}</td>
+<td>${esc(deT(s.prereq))}</td>
+<td class="skl-cost">${esc(deT(s.cost))}</td>
 <td>${esc(s.effect)}</td>
 </tr>`;
 
@@ -178,7 +179,7 @@ ${skillTable(b.liste, b.char)}`;
   }).join("\n");
 
   const wlRow = (w) => `<tr id="wl-${slug(w.skill)}">
-<td class="skl-n"><strong>${esc(w.skill)}</strong></td>
+<td class="skl-n"><strong>${esc(deN(w.skill))}</strong></td>
 <td>${esc(w.loc)}</td>
 <td>${w.miss ? '<span class="skl-miss">verpassbar</span>' : '<span class="skl-ok">unkritisch</span>'}</td>
 </tr>`;
@@ -200,7 +201,7 @@ ${skillTable(b.liste, b.char)}`;
 ${baumAbschnitte}
 ${wlSection}`;
 
-  const itemList = alleSkills(d).map(({ s, char }) => `${s.name} (${char})`);
+  const itemList = alleSkills(d).map(({ s, char }) => `${deN(s.name)} (${char})`);
 
   const jsonld = {
     "@context": "https://schema.org",

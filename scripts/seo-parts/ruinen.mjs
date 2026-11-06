@@ -36,6 +36,7 @@
 import fs from "fs";
 import vm from "vm";
 import { fileURLToPath } from "url";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "ruinen";
 export const NAV_LABEL = "Uralte Ruinen";
@@ -149,7 +150,7 @@ function karte(p, ctx) {
     ? `<details class="ru-conflicts"><summary>Warum nur eingeschränkt gesichert?</summary><p>${esc(p.conflicts)}</p></details>` : "";
 
   return `<article class="card" id="ruine-${slug(p.name)}">
-<h3><span class="ru-ar">AR${esc(p.ar)}</span> ${esc(p.name)}</h3>
+<h3><span class="ru-ar">AR${esc(p.ar)}</span> ${esc(deN(p.name))}</h3>
 ${has(p.de) ? `<p class="ru-de">${esc(p.de)}</p>` : ""}
 <ul class="stats">${statsHtml}</ul>
 ${steps}
@@ -165,10 +166,10 @@ export function build(ctx) {
   const z = ZAHLEN(ctx);
   const rg = regionen(ctx);
 
-  const sections = rg.map((r) => `<h2>🏛️ ${esc(r.name)} (${r.items.length})</h2>
+  const sections = rg.map((r) => `<h2 data-anker="🏛️ ${esc(r.name)} (${r.items.length})">🏛️ ${esc(deN(r.name))} (${r.items.length})</h2>
 <div class="ru-list">${r.items.map((p) => karte(p, ctx)).join("\n")}</div>`).join("\n");
 
-  const verteilung = rg.map((r) => `${esc(r.name)} ${r.items.length}`).join(" · ");
+  const verteilung = rg.map((r) => `${esc(deN(r.name))} ${r.items.length}`).join(" · ");
 
   // Erklaerungstexte: Wortlaut aus sec-ruins in index.html (disarm-hero und ruin-note).
   const body = `
@@ -179,7 +180,7 @@ export function build(ctx) {
 <p class="note">Die versteckten Cressets der Oberwelt findest du unter <a href="/geheimnisse">Geheimnisse &amp; Lore</a>, Strongboxes und Abyss-Rätsel auf der Seite <a href="/raetsel">Rätsel</a>. Für die Trophäe „Puzzle Solver“ müssen alle Rätsel der Antiken Ruinen gelöst werden, siehe <a href="/trophaeen">Trophäen &amp; Errungenschaften</a>.</p>
 ${sections}`;
 
-  const alle = rg.flatMap((r) => r.items.map((p) => p.name));
+  const alle = rg.flatMap((r) => r.items.map((p) => deN(p.name)));
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [

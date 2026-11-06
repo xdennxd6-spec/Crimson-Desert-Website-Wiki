@@ -17,6 +17,7 @@
 // ctx = { data: {...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
 import { dlcNeu } from "./_dlc-neu.mjs";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "ruestungen";
 export const NAV_LABEL = "Rüstungen";
@@ -82,7 +83,7 @@ export function build(ctx) {
   const row = (a) => {
     const img = ARMOR_IMGS[a.name];
     const thumb = has(img)
-      ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(a.name)}" width="34" height="34">`
+      ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(a.name))}" width="34" height="34">`
       : "";
     // td.muted (nicht span.muted) nutzen — nur dafuer existiert eine Regel in SHARED_CSS.
     const noteTd = has(a.notes) ? `<td>${esc(a.notes)}</td>` : `<td class="muted">–</td>`;
@@ -91,8 +92,8 @@ export function build(ctx) {
     // Etikett "DLC" (Vertrag 31.10.2026: neue DLC-Teile tragen das Feld dlc); span.dlc-gtag aus seo-parts/charting-the-unknown.mjs
     const dlcTag = a.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(a.dlc)}">DLC</span>` : "";
     return `<tr>
-<td>${thumb}${esc(a.name)}${dlcTag}</td>
-<td>${esc(a.effect)}${a.val_q ? ` <span class="ctu-flag">unbestätigt: ${esc(a.val_q)}</span>` : ""}</td>
+<td>${thumb}${esc(deN(a.name))}${dlcTag}</td>
+<td>${esc(deT(a.effect))}${a.val_q ? ` <span class="ctu-flag">unbestätigt: ${esc(a.val_q)}</span>` : ""}</td>
 <td>${esc(a.source)}</td>
 ${provTd}
 ${noteTd}
@@ -109,8 +110,8 @@ ${noteTd}
     .filter((t) => ARMOR.some((a) => typ(a) === t))
     .map((t) => {
       const items = ARMOR.filter((a) => typ(a) === t)
-        .sort((a, b) => a.name.localeCompare(b.name, "de"));
-      return `<h2>${esc(t)} (${items.length})</h2>
+        .sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de"));
+      return `<h2 data-anker="${esc(t)} (${items.length})">${esc(deT(t))} (${items.length})</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rüstung</th><th>Effekt</th><th>Fundort</th><th>Quellenlage</th><th>Anmerkung</th></tr></thead>
 <tbody>${items.map(row).join("\n")}</tbody>
@@ -119,12 +120,12 @@ ${noteTd}
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Rüstungs-Datenbank öffnen &rarr;</a>
-<p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Defense (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense. <b>Woher die Werte stammen</b>, steht seit dem 21.08.2026 in einer eigenen Spalte: ${z.dsimport} Teile kommen aus dem Datenimport der Spieldateien, ${z.dsguide} sind aus Guides belegt, ${z.dsalt} stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 02.06.2026 entfernt hat; bei ${z.dsohne} Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
+<p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Verteidigung (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense. <b>Woher die Werte stammen</b>, steht seit dem 21.08.2026 in einer eigenen Spalte: ${z.dsimport} Teile kommen aus dem Datenimport der Spieldateien, ${z.dsguide} sind aus Guides belegt, ${z.dsalt} stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 02.06.2026 entfernt hat; bei ${z.dsohne} Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
 <p class="note">In der App filterst du die Rüstungs-Datenbank nach Teil und Material, findest alle Sets mit Figur-Ansicht auf der eigenen Seite <a href="/#sec-armorsets">Rüstungssets</a>, siehst größere Icons und vergleichst mehrere Ausrüstungsteile direkt nebeneinander. Herstellbare Teile stehen zusätzlich im <a href="/#sec-crafting">Crafting-Bereich</a>, die mehrfach erwähnten Slots erklärt die <a href="/#sec-cores">Abyss-Core-Übersicht</a>, und als Gegenstück gibt es die <a href="/#sec-weapons">Waffen-Liste</a>.</p>
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Rüstungen",
     intro: "Diese Rüstungsteile kamen mit dem ersten DLC und tragen in den Tabellen unten das Etikett <span class=\"dlc-gtag\">DLC</span>. Ein Klick führt zur Zeile auf der DLC-Seite mit Effekt und Fundort.",
-    items: ARMOR.filter((a) => a.dlc).sort((a, b) => a.name.localeCompare(b.name, "de")).map((a) => ({ name: a.name, info: [a.type, a.source].filter(has).join(" · "), pfx: "ruestung" })),
+    items: ARMOR.filter((a) => a.dlc).sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de")).map((a) => ({ name: a.name, info: deT([a.type, a.source].filter(has).join(" · ")), pfx: "ruestung" })),
   })}
 ${sections}`;
 
@@ -137,7 +138,7 @@ ${sections}`;
         name: "Alle Rüstungen in Crimson Desert",
         numberOfItems: ARMOR.length,
         itemListElement: ARMOR.map((a, i) => ({
-          "@type": "ListItem", position: i + 1, name: a.name,
+          "@type": "ListItem", position: i + 1, name: deN(a.name),
         })),
       },
     ],
@@ -146,7 +147,7 @@ ${sections}`;
   return {
     slugName: SLUG,
     title: `Alle ${ARMOR.length} Rüstungen in Crimson Desert: Def-Werte & Fundorte`,
-    desc: `Crimson Desert Rüstungs-Liste: ${ARMOR.length} Teile für Torso, Kopf, Hände, Schuhe und Mantel mit Defense, Resistenz-Stufe, Fundort und Anmerkung zur Quellenlage.`,
+    desc: `Crimson Desert Rüstungs-Liste: ${ARMOR.length} Teile für Torso, Kopf, Hände, Schuhe und Mantel mit Verteidigung, Resistenz-Stufe, Fundort und Anmerkung zur Quellenlage.`,
     h1: `Alle ${ARMOR.length} Rüstungen in Crimson Desert`,
     lead: `Diese Übersicht listet alle <strong>${ARMOR.length} Rüstungsteile</strong> aus Crimson Desert: Torso, Kopf, Hände, Schuhe und Mantel, jeweils mit Effekt und Fundort, gruppiert nach Rüstungsteil und alphabetisch sortiert.`,
     ogImage: "cd_assets/armor/golden-greed-plate.webp",

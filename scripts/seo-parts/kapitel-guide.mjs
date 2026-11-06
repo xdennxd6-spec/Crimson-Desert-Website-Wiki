@@ -25,6 +25,8 @@
 //
 // IDs: <article class="card" id="kap-<slug(num)>"> (kap-1 ... kap-12, kap-epilog).
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "kapitel-guide";
 export const NAV_LABEL = "Kapitel-Guide";
 export const DEEPLINK = "/#sec-chapters";
@@ -95,7 +97,7 @@ export function build(ctx) {
     const r = d.region[String(c.num)];
     if (!r || !r.region || r.conf === "low") return "";
     const tag = r.conf === "medium" ? ' <span class="kg-unsure">Zuordnung weniger sicher</span>' : "";
-    return `<li><b>Region:</b> ${esc(r.region)}${tag}</li>`;
+    return `<li><b>Region:</b> ${esc(deT(r.region))}${tag}</li>`;
   };
 
   const card = (c) => {

@@ -24,6 +24,8 @@
 //
 // ctx = { data, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, extract } }
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "raetsel";
 export const NAV_LABEL = "Rätsel";
 export const DEEPLINK = "/#sec-puzzles";
@@ -55,7 +57,7 @@ function gruppen(ctx) {
   return [...bekannt, ...rest].map((cat) => ({
     cat,
     icon: (GRUPPEN[cat] || ["🧩"])[0],
-    label: (GRUPPEN[cat] || [null, cat])[1],
+    label: (GRUPPEN[cat] || [null, deT(cat)])[1],
     sub: (GRUPPEN[cat] || [null, null, ""])[2],
     items: PUZZLES.filter((p) => p.cat === cat),
   }));
@@ -98,7 +100,7 @@ function karte(p, ctx) {
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
   const detail = has(p.detail) ? `<p class="rae-detail">${esc(p.detail)}</p>` : "";
   return `<article class="card" id="raetsel-${slug(p.name)}">
-<h3>${esc(p.name)}</h3>
+<h3>${esc(deN(p.name))}</h3>
 <ul class="stats">${statsHtml}</ul>
 ${detail}
 </article>`;
@@ -121,7 +123,7 @@ export function build(ctx) {
 <p class="note">Wo im Fundort ein Kapitel steht, hilft der <a href="/kapitel-guide">Kapitel-Guide</a> bei der Einordnung in den Story-Verlauf.</p>
 ${sections}`;
 
-  const alle = gr.flatMap((g) => g.items.map((p) => p.name));
+  const alle = gr.flatMap((g) => g.items.map((p) => deN(p.name)));
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [

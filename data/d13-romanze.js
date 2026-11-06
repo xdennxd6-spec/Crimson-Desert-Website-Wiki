@@ -63,8 +63,8 @@ const ROM_FIG_HINT = {
 const ROM_WITCHES = [
   {id: "elowen", name: "Elowen", title: "Hexe der Weisheit", titleEn: "Witch of Wisdom", region: "Hernand", color: "#20a070", port: "cd_assets/npcs/witch-elowen.webp",
     lead: "Blumenumgebene Hütte in den Witchwoods. Ihre Reihe beginnt mit einem Gespräch über das Wissen.",
-    where: "Blumenumgebene Hütte in den Witchwoods nahe dem Alfonso-Anwesen, Hernand.",
-    entry: ["Kapitel 5, „The Missing Seal“: Haus im Alfonso-Anwesen untersuchen, dann Quest „The Witch of Wisdom“.", {v: "Dazwischen mit Tanya sprechen.", c: "unb", q: "Game8"}],
+    where: "Blumenumgebene Hütte in den Witchwoods nahe den Alfonso-Ländereien, Hernand.",
+    entry: ["Kapitel 5, „Das fehlende Siegel“: Haus auf den Alfonso-Ländereien untersuchen, dann Quest „Hexe der Weisheit“.", {v: "Dazwischen mit Tanya sprechen.", c: "unb", q: "Game8"}],
     sanct: ["Absolution", "Temperance", "Penitence", "Benediction"],
     sanctLoc: {v: "Absolution südlich von Hernand, Temperance Unicorn Cliff, Penitence The Ironwood, Benediction westlich von Hernand.", c: "unb", q: "KeenGamer"},
     orders: {v: "5 Aufträge: Einführung und 4 Sanktums.", c: "unb", q: "Game Overdrive"},
@@ -86,16 +86,16 @@ const ROM_WITCHES = [
     ]},
   {id: "bari", name: "Bari", title: "Hexe der Güte", titleEn: "Witch of Kindness", region: "Pailune", color: "#4a8aca", port: "cd_assets/npcs/witch-bari.webp",
     lead: "Hütte mitten im Blutroten See. Hinter ihren knappen Bemerkungen steckt mehr.",
-    where: "Hütte mitten im Blutroten See (Crimson Lake), Pailune, am Silver Wolf Mountain.",
-    entry: "Frierende Gestalt im Unterstand in der Tundra Pailunes: Feuer entzünden, dann zum Crimson Lake, Quest „The Witch of Kindness“. Die Ortsangaben der Guides weichen ab.",
+    where: "Hütte mitten im Roten See, Pailune, am Silberwolfberg.",
+    entry: "Frierende Gestalt im Unterstand in der Tundra Pailunes: Feuer entzünden, dann zum Roten See, Quest „Hexe der Güte“. Die Ortsangaben der Guides weichen ab.",
     sanct: ["Exaltation", "Solace", "Deliverance", "Atonement"],
-    sanctLoc: "Exaltation am Silver Wolf Mountain, Solace Zentral-Pailune, Deliverance Stormtalon Ridge, Atonement Haunted Hill.",
+    sanctLoc: "Exaltation am Silberwolfberg, Solace Zentral-Pailune, Deliverance Stormtalon Ridge, Atonement Haunted Hill.",
     orders: {v: "5 Aufträge: Einführung und 4 Sanktums.", c: "unb", q: "Game Overdrive"},
     series: "Beyond the Words", seriesDe: "Wahre Gefühle hinter den Worten", seriesFlag: {v: "Zuordnung des Reihennamens zu Bari", c: "unb", q: "Game Overdrive"},
     steps: [
       {en: "The Heart Held Within", de: "Das behütete Herz", d: "Bari aufsuchen und herausfinden, was hinter ihren knappen Bemerkungen steckt."},
       {en: "Longing for the Ordinary", de: "Sehnsucht nach einem gewöhnlichen Leben", d: "Die Antwort kam gut an, ihr Brief ist da. Brief lesen."},
-      {en: "An Unpredictable Heart", de: "Ein unberechenbares Herz", d: ["Dem jungen Mann mit der geheimen Methode helfen, die nur du von ihr kennst.", {v: "Dazu gehört die Palmar Pill.", c: "unb", q: "Game Overdrive"}]},
+      {en: "An Unpredictable Heart", de: "Ein unberechenbares Herz", d: ["Dem jungen Mann mit der geheimen Methode helfen, die nur du von ihr kennst.", {v: "Dazu gehört die Kraftfaust-Kräuterpastille.", c: "unb", q: "Game Overdrive"}]},
       {en: "Kind Words", de: "Freundliche Worte", d: "Bari gestehen, was man lange im Herzen trug."},
       {en: "Propose to Bari", de: "Mache Bari einen Heiratsantrag", d: "Eigene Aufgabe nach der Reihe.", last: true}
     ],
@@ -107,11 +107,11 @@ const ROM_WITCHES = [
       {f: "bari-antrag", alt: "Bari mit blauem Hexenhut neben einer Gestalt mit Rundschild auf einer Brücke im Herbstlaub"}
     ]},
   {id: "lyselia", name: "Lyselia", title: "Hexe der Demut", titleEn: "Witch of Humility", region: "Demeniss", color: "#9a50d0", port: "cd_assets/npcs/witch-lyselia.webp",
-    lead: "Verborgene Höhle im Serpent Marsh. Ihre Reihe führt aus der Höhle unter den Nachthimmel.",
-    where: "Verborgene Höhle nahe dem Jijeong-Tempel im Serpent Marsh, Süden von Demeniss.",
-    entry: "Die Person retten, die an der Brücke östlich von Beighen am Fluss Denn hängt; danach Quest „The Witch of Humility“.",
+    lead: "Verborgene Höhle im Schlangenmoor. Ihre Reihe führt aus der Höhle unter den Nachthimmel.",
+    where: "Verborgene Höhle nahe dem Jijeong-Tempel im Schlangenmoor, Süden von Demeniss.",
+    entry: "Die Person retten, die an der Brücke östlich von Beighen am Fluss Denn hängt; danach Quest „Hexe der Demut“.",
     sanct: ["Devotion", "Veneration", "Oblation", "Faith"],
-    sanctLoc: {v: "Devotion Dewhaven, Veneration Blue Thicket am Mount Benus, Oblation Insel östlich von Delesyia, Faith Grey Forest.", c: "unb", q: "KeenGamer"},
+    sanctLoc: {v: "Devotion Dewhaven, Veneration Blue Thicket am Berg Benus, Oblation Insel östlich von Delesyia, Faith Grey Forest.", c: "unb", q: "KeenGamer"},
     orders: {v: "5 Aufträge: Einführung und 4 Sanktums.", c: "unb", q: "Game Overdrive"},
     series: "Brave Steps", seriesDe: "Der erste mutige Schritt", seriesFlag: {v: "Zuordnung des Reihennamens zu Lyselia", c: "unb", q: "eigener Schluss aus Game Overdrive"},
     steps: [
@@ -129,10 +129,10 @@ const ROM_WITCHES = [
     ]},
   {id: "areciel", name: "Areciel", title: "Hexe der Kraft", titleEn: "Witch of Strength", region: "Rote Wüste", color: "#c0392b", port: "cd_assets/npcs/witch-areciel.webp",
     lead: "Klippenhaus westlich von Urdavah. Ihre Reihe beginnt mit der Frage, warum sie nie pausiert.",
-    where: "Klippenhaus im Schatten der Klippen der Roten Wüste, westlich von Urdavah, nahe World's Navel.",
-    entry: "Dem bettelnden Kind am Kopfgeldbrett bei Tommaso eine Münze geben; danach Quest „The Witch of Strength“.",
+    where: "Klippenhaus im Schatten der Klippen der Roten Wüste, westlich von Urdavah, nahe dem Nabel der Welt.",
+    entry: "Dem bettelnden Kind am Kopfgeldbrett bei Tommaso eine Münze geben; danach Quest „Hexe der Kraft“.",
     sanct: ["Expiation", "Renunciation", "Revelation"],
-    sanctLoc: "Expiation Nord-Demeniss nahe dem Azerian-Anwesen, Renunciation nordöstlich des Drywind Valley, Revelation Serpent Marsh mit Bosskampf.",
+    sanctLoc: "Expiation Nord-Demeniss nahe dem Azerian-Anwesen, Renunciation nordöstlich des Trockenwindtals, Revelation Schlangenmoor mit Bosskampf.",
     orders: {v: "4 Aufträge: Einführung und 3 Sanktums.", c: "unb", q: "Game Overdrive"},
     series: "Courage to Be Vulnerable", seriesDe: "Der Mut, Schwäche zu zeigen", seriesFlag: {v: "Zuordnung des Reihennamens zu Areciel", c: "unb", q: "Game Overdrive"},
     steps: [
@@ -185,7 +185,7 @@ const ROM_OUT = {
     "Graumähnen-Gefährten sind nicht romantisierbar.",
     {v: "Goblins, Gassenhändler und Kinder sind ausgeschlossen.", c: "unb", q: "OutputLag"},
     {v: "Woosa und Naira zeigen keine Romanze-Option; Cordelia ist unbestätigt.", c: "unb", q: "OutputLag"},
-    {v: "Sylvia und White Crow (Weiße Krähe) gelten als nicht romantisierbar; in den Spieltabellen fehlt für sie ein Eintrag.", c: "unb", q: "NoobFeed"}
+    {v: "Sylvia und Weiße Krähe gelten als nicht romantisierbar; in den Spieltabellen fehlt für sie ein Eintrag.", c: "unb", q: "NoobFeed"}
   ]
 };
 
@@ -239,10 +239,10 @@ const ROM_GIFTS = {
   title: "Geschenke, Goldbarren, Platin",
   lead: "Was wirkt, was offen ist und warum hier kein fester Wert für Goldbarren steht.",
   rows: [
-    ["Was wirkt", "Lieblingsgegenstände des NPC und Goldbarren (Gold Bar)."],
+    ["Was wirkt", "Lieblingsgegenstände des NPC und Goldbarren."],
     ["Während der Romanze", [{v: "Bei NPCs ohne eigene Romanze-Reihe bringen Geschenke deutlich weniger Vertrauen, solange du sie umwirbst.", c: "unb", q: "Game8"}, {v: "Die Spieltabellen kennen eine eigene Geschenk-Funktion zur Romanze, was dazu passen könnte.", c: "unb", q: "eigene Auslegung"}]],
     ["Wert eines Goldbarrens", [{v: "+10 bei GIGA, 100 bei Lyselia in einer Community-Datenbank, +20 beim Troll Grovand in einem Suchauszug. Vermutlich hängt das von NPC und Leiste ab.", c: "nb"}, {v: "Hilft beim normalen Vertrauen.", c: "unb", q: "KeenGamer"}, {v: "Hilft schnell bei der Romanzeleiste.", c: "unb", q: "OutputLag"}]],
-    ["Beispiel Lyselia", {v: "Goldbarren, Geheimnisvolles Geschenk (Mysterious Gift) und Ring der Hexen (Witch's Ring) je 100 Punkte; Aushang: Sternbild Schild (Shield Constellation Poster) 40 Punkte; Horn Tea und bestimmte Blumenvasen je 20 Punkte. „Horn Tea“ steht so nicht in den Spieltexten. Der Artikel rät selbst zur Prüfung im Spiel.", c: "unb", q: "Game Overdrive, Fremddatenbank"}],
+    ["Beispiel Lyselia", {v: "Goldbarren, Geheimnisvolles Geschenk und Ring der Hexen je 100 Punkte; Aushang: Sternbild Schild (Shield Constellation Poster) 40 Punkte; Horn Tea und bestimmte Blumenvasen je 20 Punkte. „Horn Tea“ steht so nicht in den Spieltexten. Der Artikel rät selbst zur Prüfung im Spiel.", c: "unb", q: "Game Overdrive, Fremddatenbank"}],
     ["Nach Volk", {v: "Zwerg Bier und Erze +10, Ork Wein +10 und Elfenbein +20, Goblin Edelstein +10, Shai Palmar-Blatt +30.", c: "unb", q: "Game8, vor dem DLC"}],
     ["Platin", {v: "In keiner Quelle als Geschenk erwähnt. Der Spieltext nennt es Material für Katalysatoren.", c: "nb"}],
     ["Mehrfach schenken", ["Seit 2.04.03 mehrere Gegenstände mit Mengenwahl.", {v: "Ein Mehrfachgeschenk zählt als eine Geschenk-Handlung fürs Tageslimit.", c: "unb", q: "OutputLag, Spielerbericht"}]],
@@ -283,8 +283,8 @@ const ROM_FEST = {
   ],
   chipsQ: "Game8",
   steps: [
-    {t: "Voraussetzung", d: ["Die Camp-Reihe am Howling Hill; die Vorschau der Notice spricht von einer bestimmten Ausbaustufe.", {v: "Genauer: die beiden „Expanding the Camp“-Quests.", c: "unb", q: "games.gg"}]},
-    {t: "Entsendung", d: ["„Festival Preparations“ bei Ross im Camp, am Howling Hill oder in Pailune.", {v: "Im Pailune-Camp vorher die Bauaufträge „Pond“ und „Insect Holders“ erledigen.", c: "unb", q: "Game8"}]},
+    {t: "Voraussetzung", d: ["Die Camp-Reihe am Heulenden Hügel; die Vorschau der Notice spricht von einer bestimmten Ausbaustufe.", {v: "Genauer: die beiden „Camperweiterung“-Quests.", c: "unb", q: "games.gg"}]},
+    {t: "Entsendung", d: ["„Festival Preparations“ bei Ross im Camp, am Heulenden Hügel oder in Pailune.", {v: "Im Pailune-Camp vorher die Bauaufträge „Teich“ und „Insect Holders“ erledigen.", c: "unb", q: "Game8"}]},
     {t: "Fest", d: [{v: "Beginnt nach der Entsendung und dauert 1 Tag 8 Stunden (32 Spielstunden).", c: "unb", q: "Game8"}, {v: "Die angezeigten Wartezeiten gelten auch beim Fest.", c: "unb", q: "games.gg"}, "Seit 2.04.03 werden die Abstände der Kundenbesuche bei Festen nachts nicht mehr länger."]},
     {t: "Ehrengraumähnen", d: ["Bestimmte Besucher lassen sich als Ehrengraumähnen (Honorary Greymanes) anheuern und wie Graumähnen entsenden; einige Funktionen fehlen ihnen.", {v: "Ladenbesitzer behalten den Laden.", c: "unb", q: "Game8"}]}
   ],
