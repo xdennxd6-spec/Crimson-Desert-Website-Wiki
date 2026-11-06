@@ -5773,9 +5773,22 @@ function deT(s){
   o+=s.slice(p);_deCache.set(s,o);return o;
 }
 function deN(n){if(n==null)return n;n=String(n);return _deHat(n)?DE_NAMES[n]:deT(n);}
-let _deQe=null,_deQd=null;
+// Faltung wie _fold in index.html: klein, ß→ss, ohne Akzente und Apostrophe.
+const _deF=s=>String(s==null?'':s).toLowerCase().replace(/ß/g,'ss').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\u2019\u2018`\u00b4]/g,'').replace(/[,;]/g,' ').replace(/\s+/g,' ').trim();
+let _deQm=null;
+// Suchnadeln zu einer ganzen Anfrage: die Anfrage selbst (gefaltet) und alle Gegenstücke. Unter 4 Zeichen kein Gegenstück ("egg" darf nicht zu "ei" werden).
 function deQ(q){
-  q=String(q==null?'':q).trim().toLowerCase();if(!q)return [];
-  if(!_deQe){_deQe=new Map();_deQd=new Map();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d===k)continue;const a=k.toLowerCase(),b=d.toLowerCase();if(!_deQe.has(a))_deQe.set(a,b);if(!_deQd.has(b))_deQd.set(b,a);}}
-  const o=[q];const a=_deQe.get(q),b=_deQd.get(q);if(a&&a!==q)o.push(a);if(b&&b!==q)o.push(b);return o;
+  q=_deF(q);if(!q)return [];
+  if(!_deQm){_deQm=new Map();const add=(a,b)=>{let l=_deQm.get(a);if(!l)_deQm.set(a,l=[]);if(!l.includes(b))l.push(b);};for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d===k)continue;const a=_deF(k),b=_deF(d);if(a===b)continue;add(a,b);add(b,a);}}
+  const l=_deQm.get(q);return l?[q].concat(l.filter(x=>x.length>=4)):[q];
+}
+let _deSi=null;
+// Suchtext anreichern: hängt an einen data-s-Text die deutschen Namen aller darin erkannten englischen Namen an (Groß-/Kleinschreibung egal).
+function _deS(s){
+  s=String(s==null?'':s);if(!s)return s;
+  if(!_deSi){_deSi=new Map();for(const k of Object.keys(DE_NAMES)){const d=DE_NAMES[k];if(d===k)continue;const l=k.toLowerCase().replace(/\u2019/g,"'"),m=l.match(_DE_TOK);if(!m)continue;let e=_deSi.get(m[0]);if(!e)_deSi.set(m[0],e={l:[],v:new Map()});if(!e.l.includes(m.length))e.l.push(m.length);e.v.set(l,d);}for(const e of _deSi.values())e.l.sort((a,b)=>b-a);}
+  const low=s.toLowerCase().replace(/\u2019/g,"'"),t=[];let m;_DE_TOK.lastIndex=0;while((m=_DE_TOK.exec(low)))t.push(m);
+  let z='';
+  for(let i=0;i<t.length;i++){const e=_deSi.get(t[i][0]);if(!e)continue;for(const n of e.l){if(i+n>t.length)continue;const u=t[i+n-1],d=e.v.get(low.slice(t[i].index,u.index+u[0].length));if(d){z+=' '+d;i+=n-1;break;}}}
+  return z?s+z:s;
 }

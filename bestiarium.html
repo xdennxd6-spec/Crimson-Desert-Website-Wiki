@@ -2606,7 +2606,7 @@ function _cdFoldSearch(el,needles){
     if(d.open)return;
     var sm=d.querySelector(':scope>summary');
     if(d._cdHead===undefined)d._cdHead=_cdFoldTxt(sm?sm.textContent:'').replace(/\s+/g,' ');
-    if(needles.every(function(x){return d._cdHead.indexOf(x)>-1;}))return;
+    if(_nHit(d._cdHead,needles))return;
     cdFoldFill(d);d.open=true;d.dataset.srchOpen='1';
   });
 }
@@ -2696,18 +2696,24 @@ function cdGoLink(sec,q,label,cls){
   return '<a class="cd-go'+(cls?' '+cdEsc(cls):'')+'" href="'+cdGoHref(sec,q)+'" data-go="'+cdEsc(sec)+'"'+(q?' data-goq="'+cdEsc(q)+'"':'')+'>'
     +_cdT(label==null?q:label)+cdIcon('go')+'</a>';
 }
+/* Sprungziel: alte Links tragen den englischen Namen, die Überschrift zeigt den deutschen (und umgekehrt). */
+function _cdGoNadeln(q,n){
+  var ns=[n];if(typeof deN==='function'){var d=_cdFoldTxt(deN(q)).replace(/\s+/g,' ').trim();if(d&&ns.indexOf(d)<0)ns.push(d);}
+  if(typeof deQ==='function')deQ(q).slice(1).forEach(function(x){if(ns.indexOf(x)<0)ns.push(x);});
+  return ns;
+}
 function _cdGoFind(root,q){
   if(!root||!q)return null;
   var byId=document.getElementById(q);if(byId&&root.contains(byId))return byId;
   var all=root.querySelectorAll('[data-go-id]');
   for(var i=0;i<all.length;i++)if(all[i].getAttribute('data-go-id')===q)return all[i];
-  var n=_cdFoldTxt(q).replace(/\s+/g,' ').trim(),c=root.querySelectorAll('[data-s]'),first=null,firstVis=null,T='.cd-fold-t,.fd-name,.col-name,.ct,.sk-n,.pet-card-name,.fac-qh,h3,h4,strong';
+  var n=_cdFoldTxt(q).replace(/\s+/g,' ').trim(),ns=_cdGoNadeln(q,n),c=root.querySelectorAll('[data-s]'),first=null,firstVis=null,T='.cd-fold-t,.fd-name,.col-name,.ct,.sk-n,.pet-card-name,.fac-qh,h3,h4,strong';
   for(var j=0;j<c.length;j++){
     var el=c[j];if(el.dataset.filtered==='1')continue;
     var hd=el.querySelector(T),ht=hd&&_cdFoldTxt(hd.textContent).replace(/\s+/g,' ').trim();
     var vis=!el.closest('.hide');
-    if(ht===n&&vis)return el;
-    if(_cdFoldTxt(el.dataset.s).indexOf(n)>-1){if(!first)first=el;if(vis&&!firstVis)firstVis=el;}
+    if(ns.indexOf(ht)>-1&&vis)return el;
+    var sf=_cdFoldTxt(el.dataset.s);if(ns.some(function(x){return sf.indexOf(x)>-1;})){if(!first)first=el;if(vis&&!firstVis)firstVis=el;}
   }
   return firstVis||first;
 }
@@ -3126,6 +3132,8 @@ let _xrefMap=null;
 // Skill-Namen, die zu allgemein für automatische Textverlinkung sind (kommen als Teilwort/Attackenname in Fließtext vor,
 // z. B. „Whirling Slash“, „Slash-Combos“): bleiben in .skills (Tooltip, Favoriten, trackRecent), aber ohne Textlink.
 const _XREF_NOLINK=new Set(['Slash']);
+// Deutsche Anzeigenamen, die im Fließtext gewöhnliche Wörter sind: kein automatischer Link.
+const _XREF_DE_NOLINK=new Set([]);
 function _buildXrefMap(){
   if(_xrefMap)return _xrefMap;
   _xrefMap={skills:{},bosses:{},lore:{},skillVariants:{}};
@@ -3152,11 +3160,14 @@ function _buildXrefMap(){
   // _XREF_NOLINK: Skill-Namen ohne automatischen Textlink (siehe Konstante vor _buildXrefMap).
   const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/'/g,"(?:'|&#39;)");
   const typeOf=Object.create(null),alts=[];
-  [['skill',_xrefMap.skillNames],['boss',_xrefMap.bossNames],['lore',_xrefMap.loreNames]].forEach(([t,names])=>names.forEach(n=>{
-    if(typeOf[n]||(t==='skill'&&typeof _XREF_NOLINK!=='undefined'&&_XREF_NOLINK.has(n)))return;typeOf[n]=t;alts.push(esc(n));
+  _xrefMap.deKey=Object.create(null);
+  // Freitexte stehen jetzt deutsch: je Name auch die deutsche Anzeige erkennen, der Sprung nutzt weiter den englischen Schlüssel.
+  const mitDe=names=>{const v=names.slice();names.forEach(n=>{const d=deN(n);if(d&&d!==n&&!_xrefMap.deKey[d]&&!_XREF_DE_NOLINK.has(d)){_xrefMap.deKey[d]=n;v.push(d);}});return v.sort((a,b)=>b.length-a.length);};
+  [['skill',_xrefMap.skillNames],['boss',_xrefMap.bossNames],['lore',_xrefMap.loreNames]].forEach(([t,names])=>mitDe(names).forEach(n=>{
+    if(typeOf[n]||(t==='skill'&&typeof _XREF_NOLINK!=='undefined'&&_XREF_NOLINK.has(_xrefMap.deKey[n]||n)))return;typeOf[n]=t;alts.push(esc(n));
   }));
   _xrefMap.typeOf=typeOf;
-  _xrefMap.re=new RegExp('(?<!\\w)(?:'+alts.join('|')+')(?!\\w)','g');
+  _xrefMap.re=new RegExp('(?<![\\p{L}\\p{N}_])(?:'+alts.join('|')+')(?![\\p{L}\\p{N}_])','gu');
   return _xrefMap;
 }
 
@@ -3171,7 +3182,7 @@ function _xrefSpan(name,tipBody,tipTitle,action,extraClass){
 function _xrefSkillTip(name,m){
   const sk=m.skills[name],vs=m.skillVariants[name]||[];
   const first=(vs[0]&&vs[0].ch)||'Kliff';
-  let tip=`${vs.length>1||first!=='Kliff'?first+' · ':''}Voraussetzung: ${sk.prereq||'–'}<br>Effekt: ${sk.effect||'–'}`;
+  let tip=`${vs.length>1||first!=='Kliff'?first+' · ':''}Voraussetzung: ${deT(sk.prereq)||'–'}<br>Effekt: ${sk.effect||'–'}`;
   if(vs.length>1){
     const others=vs.slice(1),differs=others.some(v=>v.s.prereq!==sk.prereq||v.s.effect!==sk.effect);
     tip+=`<br>Gleichnamig bei ${others.map(v=>v.ch).join(', ')}${differs?' — Werte weichen ab':''}`;
@@ -3184,16 +3195,16 @@ function linkifyXrefs(text){
   const m=_buildXrefMap();
   const safeJS=s=>String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
   const link=hit=>{
-    const name=hit.replace(/&#39;/g,"'");
+    const name0=hit.replace(/&#39;/g,"'"),name=m.deKey[name0]||name0;
     const type=m.typeOf[name];
-    if(type==='skill')return _xrefSpan(hit,_xrefSkillTip(name,m),name,`showSec('skills');document.getElementById('si').value='${safeJS(name)}';doSearch('${safeJS(name)}')`,'xref-skill');
+    if(type==='skill')return _xrefSpan(hit,_xrefSkillTip(name,m),deN(name),`showSec('skills');document.getElementById('si').value='${safeJS(name)}';doSearch('${safeJS(name)}')`,'xref-skill');
     if(type==='boss'){
       const b=m.bosses[name];
-      const tipBody=`${(b.region||'').replace(/"/g,'&quot;')}${b.chapter?' · Kap. '+b.chapter:''}<br>${(b.parry_or_dodge||'').replace(/"/g,'&quot;')}`;
-      return _xrefSpan(hit,tipBody,b.name,`showSec('bosses');document.getElementById('si').value='${safeJS(b.name)}';doSearch('${safeJS(b.name)}')`,'xref-boss');
+      const tipBody=`${deT(b.region||'').replace(/"/g,'&quot;')}${b.chapter?' · Kap. '+b.chapter:''}<br>${deT(b.parry_or_dodge||'').replace(/"/g,'&quot;')}`;
+      return _xrefSpan(hit,tipBody,deN(b.name),`showSec('bosses');document.getElementById('si').value='${safeJS(b.name)}';doSearch('${safeJS(b.name)}')`,'xref-boss');
     }
     const lr=m.lore[name];
-    return _xrefSpan(hit,lr.tip||'',name,`_xrefLoreJump('${safeJS(name)}')`,'xref-lore');
+    return _xrefSpan(hit,lr.tip||'',deN(name),`_xrefLoreJump('${safeJS(name)}')`,'xref-lore');
   };
   // Nur Text zwischen Tags verlinken: Tags (samt Attributen) und bestehende xref-Spans bleiben unangetastet.
   // So entstehen weder Spans in data-tip/onclick noch verschachtelte Spans.
@@ -6214,7 +6225,7 @@ function _openCardForSearch(el,needles){
   const mn=el.querySelector&&el.querySelector(':scope>details.mount-notes');
   if(mn&&!mn.open){
     if(el._srchHead===undefined){let h='';el.childNodes.forEach(n=>{if(n!==mn)h+=' '+n.textContent;});el._srchHead=_fold(h);}
-    if(needles.every(x=>el._srchHead.includes(x)))return false;
+    if(_nHit(el._srchHead,needles))return false;
     mn.open=true;mn.dataset.srchOpen='1';return true;
   }
   if(!el.classList||el.classList.contains('open')||!(el.classList.contains('craft-card')||el.classList.contains('npc-card')))return false;
@@ -6225,7 +6236,7 @@ function _openCardForSearch(el,needles){
     h+=' '+(el.dataset.grp||'');
     el._srchHead=_fold(h);
   }
-  if(needles.every(x=>el._srchHead.includes(x)))return false;
+  if(_nHit(el._srchHead,needles))return false;
   el.classList.add('open');el.setAttribute('aria-expanded','true');el.dataset.srchOpen='1';
   return true;
 }
@@ -6249,7 +6260,7 @@ function _openItemDetailsForSearch(el,qF){
   el._itemHidden=h;
   const v=el._itemVisible||(_fold(el.dataset.itemVisible||''));
   if(v) el._itemVisible=v;
-  if(ns.every(x=>v.includes(x))) return;
+  if(_nHit(v,ns)) return;
   if(ns.some(x=>!v.includes(x)&&h.includes(x))&&!d.open){
     d.open=true;
     d.dataset.srchOpen='1';
@@ -6288,8 +6299,8 @@ function _hitScore(el,needles){
   const ne=el.querySelector('.ct, .sk-n, .pet-card-name, .fac-qh, td strong, .cd-fold-t'); /* .cd-fold-t: R2 Integration (Wunsch B5/B9) */
   if(!ne)return 0;
   const t=_fold(ne.textContent.replace(/\u25be/g,''));
-  if(!needles.every(x=>t.includes(x)))return 0;
-  return needles.length===1&&(t===needles[0]||t.startsWith(needles[0]))?2:1;
+  if(!_nHit(t,needles))return 0;
+  const _g=needles.oder||needles.map(x=>[x]);return _g.length===1&&_g[0].some(x=>t===x||t.startsWith(x))?2:1;
 }
 function _rankHits(hits,needles){
   const grid=new Map();
@@ -6320,16 +6331,21 @@ function _scrollToHit(el){
 // (3) alle Woerter einzeln ("kailok hornsplitter" -> "Kailok the Hornsplitter"). Als Fallback, nie als
 // Ersatz, damit "blue"/"queen" nicht zu "blu"/"qen" werden. Waffen/Ruestungen haben eine eigene Filterkette
 // (renderWeapons/armorFilter, nur Phrase) und bleiben bei Lauf (1).
+// Nadeln mit Gegenstücken aus deQ: n ist die flache Liste (Markierung), n.oder die Bedingung: jede Gruppe trifft mit mindestens einem Begriff. Bewusst EINE Spezifikation statt je Alternative einer: die Läufe brechen beim ersten Treffer ab, getrennte Läufe lieferten für englisch und deutsch verschiedene Mengen.
+function _nGruppen(tk){const g=tk.map(t=>{const a=typeof deQ==='function'?deQ(t):[];return a.length>1?[t].concat(a.slice(1)):[t];});const n=[].concat.apply([],g);n.oder=g;return n;}
+function _nHit(sf,n){const g=n.oder;if(!g){for(let i=0;i<n.length;i++)if(!sf.includes(n[i]))return false;return true;}for(let i=0;i<g.length;i++){let t=false;for(let k=0;k<g[i].length;k++)if(sf.includes(g[i][k])){t=true;break;}if(!t)return false;}return true;}
+// Suchtext eines Knotens: gefaltet, dazu die deutschen Namen der darin erkannten englischen Namen (data-s bleibt, wie die Renderer es schreiben).
+function _foldS(s){return _fold(typeof _deS==='function'?_deS(s):s);}
 function _searchSpecs(qF,allowFb){
-  const out=[{n:[qF],note:''}];
+  const out=[{n:_nGruppen([qF]),note:''}];
   if(!allowFb)return out;
   const qB=qF.replace(/ae/g,'a').replace(/oe/g,'o').replace(/ue/g,'u');
-  if(qB!==qF)out.push({n:[qB],note:' · gelesen als ä/ö/ü'});
+  if(qB!==qF)out.push({n:_nGruppen([qB]),note:' · gelesen als ä/ö/ü'});
   const tk=qF.split(' ').filter(t=>t.length>1);
-  if(tk.length>1)out.push({n:tk,note:' · alle Wörter einzeln'});
+  if(tk.length>1)out.push({n:_nGruppen(tk),note:' · alle Wörter einzeln'});
   return out;
 }
-function _specHit(sf,n){for(let i=0;i<n.length;i++)if(!sf.includes(n[i]))return false;return true;}
+function _specHit(sf,n){return _nHit(sf,n);}
 
 // Gruppenkoepfe tragen selbst kein data-s und blieben deshalb als leere Huelsen stehen
 // ("House Roberts - 10 Quests" ohne eine einzige sichtbare Quest). Eine Gruppe wird
@@ -6372,12 +6388,13 @@ function reapplySearch(root,cntEl,gesamt){
   const si=document.getElementById('si');
   const q=((si&&si.value)||'').trim();
   if(!q){if(cntEl)cntEl.textContent=gesamt+' Einträge';return;}
+  const nq=_nGruppen([_fold(q)]);
   const qF=_fold(q);
   let n=0;
   root.querySelectorAll('[data-s]').forEach(el=>{
-    const m=(el._sf||(el._sf=_fold(el.dataset.s))).includes(qF);
+    const m=_specHit(el._sf||(el._sf=_foldS(el.dataset.s)),nq);
     el.classList.toggle('hide',!m);
-    if(m){n++;if(typeof _cdFoldSearch==='function')_cdFoldSearch(el,[qF]);}
+    if(m){n++;if(typeof _cdFoldSearch==='function')_cdFoldSearch(el,nq);}
   });
   if(cntEl)cntEl.textContent=n+' von '+gesamt+' (Suche aktiv)';
 }
@@ -6396,7 +6413,7 @@ function _reapplyActiveSearch(root){
   for(let k=0;k<specs.length;k++){
     sp=specs[k];hits=[];
     root.querySelectorAll('[data-s]').forEach(el=>{
-      const m=_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n)&&el.dataset.filtered!=='1';
+      const m=_specHit(el._sf||(el._sf=_foldS(el.dataset.s)),sp.n)&&el.dataset.filtered!=='1';
       el.classList.toggle('hide',!m);
       if(m)hits.push(el);
     });
@@ -6469,7 +6486,7 @@ function _doSearchImpl(q){
     scope.querySelectorAll('[data-s]').forEach(el=>{
       // Von einem Sektionsfilter ausgeschlossene Karten bleiben ausgeschlossen —
       // sonst holt ein Texttreffer sie zurueck und haebelt den Filter aus.
-      const m=_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n)&&el.dataset.filtered!=='1';
+      const m=_specHit(el._sf||(el._sf=_foldS(el.dataset.s)),sp.n)&&el.dataset.filtered!=='1';
       el.classList.toggle('hide',!m);
       if(m){total++;hits.push(el);}
     });
@@ -6562,7 +6579,7 @@ function _searchOtherSections(qLow,activeSec){
     // Sektionsfilter-Ausschluss (data-filtered="1") zaehlt nicht mit, sonst springt der Chip auf eine Sektion mit weniger Treffern.
     // Ausnahme Waffen: dort markiert data-filtered die Seitenaufteilung (40 pro Seite), beim Sprung rendert renderWeapons() alle Treffer.
     const _paged=sec.id==='sec-weapons';
-    sec.querySelectorAll('[data-s]').forEach(el=>{if((_paged||el.dataset.filtered!=='1')&&_specHit(el._sf||(el._sf=_fold(el.dataset.s)),sp.n))count++;});
+    sec.querySelectorAll('[data-s]').forEach(el=>{if((_paged||el.dataset.filtered!=='1')&&_specHit(el._sf||(el._sf=_foldS(el.dataset.s)),sp.n))count++;});
     if(!count)return;
     const key=sec.id.replace(/^sec-/,'');
     // Registratur: Konsole zeigt nur 5-9 Blaetter -> nav-Item existiert evtl. nicht im DOM.
@@ -8008,7 +8025,7 @@ function renderWeapons(){
   const q=((si&&si.value)||'').trim().toLowerCase();
   const searching=!!q;
   const qF=_fold(q);
-  const total=f?WEAPONS.filter(w=>w.type===f).length:WEAPONS.length;
+  const total=f?WEAPONS.filter(w=>w.type===f).length:WEAPONS.length,nq=_nGruppen([qF]);
   const pages=Math.max(1,Math.ceil(total/WEP_PER));
   if(_wepPage>=pages)_wepPage=pages-1;
   if(_wepPage<0)_wepPage=0;
@@ -8022,7 +8039,7 @@ function renderWeapons(){
     const hidden=[sourceText,w.notes].filter(Boolean).join(' ');
     const visible=[w.name,w.type,w.built_in,w.def,w.atk,w.crit,w.slots].filter(v=>v!==undefined&&v!==null&&v!=='').join(' ').toLowerCase();
     let show=false;
-    if(passFilter){ if(searching){show=_fold(s).includes(qF);} else {fi++;show=(fi>=start&&fi<end);} }
+    if(passFilter){ if(searching){show=_specHit(_foldS(s),nq);} else {fi++;show=(fi>=start&&fi<end);} }
     if(show)shown++;
     // Nicht angezeigte Waffen (andere Seite, Typfilter, kein Suchtreffer) nur als leere Platzhalter: data-s bleibt fuer die
     // Sektions-Chips erhalten, der Aufbau von 500 Karten je Eingabe entfaellt (Pi: ca. 500 ms je Tastendruck).
@@ -8115,7 +8132,7 @@ function renderCores(){
   const cnt=document.getElementById('core-cnt');
   reapplySearch(root,cnt,shown);
   const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
-  if(q){const qF=_fold(q);root.querySelectorAll('[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
+  if(q){const qF=_nGruppen([_fold(q)]);root.querySelectorAll('[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
 }
 function _r2b13OpenSnap(root){const o={};root.querySelectorAll('[data-item-id] details.item-more[open]').forEach(d=>{if(d.dataset.srchOpen!=='1'){const k=d.closest('[data-item-id]');if(k)o[k.dataset.itemId]=1;}});return o;}
 // Sprung-Links (a[data-go]) auf eine meiner Seiten: aktiven Filter vorher zurücksetzen, sonst fehlt das Ziel (Filter rendert nur Treffer)
@@ -8538,7 +8555,7 @@ function _r2b1Upgrade(el){
   // laufende Suche auf den neuen Inhalt anwenden (Aufklappen bei Treffer nur im Detail, Markierung)
   var si=document.getElementById('si'),q=si&&si.value.trim();
   if(q&&!el.classList.contains('hide')&&typeof _fold==='function'){
-    var n=[_fold(q)];
+    var n=_nGruppen([_fold(q)]);
     if(typeof _openItemDetailsForSearch==='function')_openItemDetailsForSearch(el,n);
     if(typeof highlightInElement==='function'){highlightInElement(el,q,n);el._hadHL=true;}
   }
@@ -9673,18 +9690,18 @@ function armorFilter(){
   const ft=wert('af-type'),fm=wert('af-mat'),fp=wert('af-prov');
   const lq=_fold(wert('af-q').trim());
   const si=document.getElementById('si');
-  const gq=_fold(((si&&si.value)||'').trim());
+  const gq=_fold(((si&&si.value)||'').trim()),ln=_nGruppen([lq]),gn=_nGruppen([gq]);
   _closeSearchOpened(g);
   g.querySelectorAll('.card').forEach(el=>{
     const d=el.dataset;
     let ok=(!ft||d.type===ft)&&(!fp||d.prov===fp)&&(!fm||(fm==='none'?!d.mat:d.mat===fm));
-    const txt=el._sf||(el._sf=_fold(d.s));
-    if(ok&&lq)ok=txt.includes(lq);
+    const txt=el._sf||(el._sf=_foldS(d.s));
+    if(ok&&lq)ok=_specHit(txt,ln);
     d.filtered=ok?'0':'1';
-    el.classList.toggle('hide',!(ok&&(!gq||txt.includes(gq))));
-    if(ok&&(!gq||txt.includes(gq))){
-      _openItemDetailsForSearch(el,lq);
-      _openItemDetailsForSearch(el,gq);
+    el.classList.toggle('hide',!(ok&&(!gq||_specHit(txt,gn))));
+    if(ok&&(!gq||_specHit(txt,gn))){
+      _openItemDetailsForSearch(el,lq&&ln);
+      _openItemDetailsForSearch(el,gq&&gn);
     }
   });
   armorCount();
@@ -9919,7 +9936,7 @@ function armorSetFilter(){
   let n=0;const karten=g.querySelectorAll('.aset');
   karten.forEach(k=>{
     const m=(k.dataset.mat||'').split(' ');
-    const ok=worte.every(w=>(k.dataset.s||'').includes(w))
+    const ok=worte.every(w=>_nHit(k._sf||(k._sf=_foldS(k.dataset.s||'')),_nGruppen([_fold(w)])))
       &&(!mat||(mat==='mix'?m.length>1:m.includes(mat)))
       &&(!full||k.dataset.full==='1');
     k.classList.toggle('aset-off',!ok);if(ok)n++;
@@ -10633,7 +10650,7 @@ function renderDyes(){
   const cnt=document.getElementById('dyes-cnt');
   reapplySearch(root,cnt,n);
   const si=document.getElementById('si'),q=((si&&si.value)||'').trim();
-  if(q){const qF=_fold(q);root.querySelectorAll('[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
+  if(q){const qF=_nGruppen([_fold(q)]);root.querySelectorAll('[data-s]:not(.hide)').forEach(el=>_openItemDetailsForSearch(el,qF));}
 }
 // ===== KOCHEN & ELIXIERE (Redesign 10/2026): Karten statt Tabelle. Eigener Renderer, renderCompendium bleibt fuer
 // Gatherables/Raetsel/Dyes/Itemdex unveraendert. Strukturfelder (lead/fx/tiers/recipe/alt/station/learn/buy/src) stehen
