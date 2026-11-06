@@ -5,10 +5,10 @@
 // Schluessel der Kette bzw. die Farbflaeche mit Glyphe (cdScene-Rueckfall).
 const SCENES={
   'romanze':{f:'romanze-rosen-v3.webp',alt:'Ein Krieger mit Rundschild überreicht einer Frau einen Strauß roter Rosen auf einem Steinweg',pos:'50% 28%',w:1600,h:868},
-  'rom-elowen':{f:'rom-elowen-v3.webp',alt:'Elowens Hütte mit roten Blumen auf dem Dach, zwischen Bäumen im Sonnenlicht',pos:'50% 30%',w:1600,h:1600},
-  'rom-bari':{f:'rom-bari-v3.webp',alt:'Bari mit Hexenhut in ihrer Holzhütte bei Kerzenlicht',pos:'50% 24%',w:1600,h:1600},
-  'rom-lyselia':{f:'rom-lyselia-v3.webp',alt:'Holztür in einer Felswand neben einer Steinlaterne',pos:'50% 50%',w:1600,h:1600},
-  'rom-areciel':{f:'rom-areciel-v3.webp',alt:'Areciel hinter einem Holztisch in ihrem Haus in roten Klippen',pos:'50% 30%',w:1600,h:1600},
+  'rom-elowen':{f:'reg-hernand-v2.webp',alt:'Bewaldetes Hochplateau in Hernand mit heller Felswand und Gebirge unter Wolkenhimmel',pos:'50% 42%',w:1920,h:1080},
+  'rom-bari':{f:'rom-bari-pailune-v4.webp',alt:'Holzdorf mit roten Dächern am Wasser in Pailune, dahinter Wald und verschneite Berge',pos:'50% 62%',w:1600,h:1600},
+  'rom-lyselia':{f:'reg-demeniss-v2.webp',alt:'Hochfläche in Demeniss mit Festung und Turm vor fernen Bergen unter Wolkenhimmel',pos:'50% 12%',w:1920,h:1080},
+  'rom-areciel':{f:'reg-crimson-desert-v2.webp',alt:'Rote Felsformationen der Roten Wüste vor schneebedeckten Bergen unter blauem Himmel',pos:'50% 50%',w:1920,h:1080},
   // Set A: offizielle Bilder (Regionen, Kapitel, Seitenkoepfe, Quests, Checklisten, Charaktere) (38)
   'reg-hernand':{f:'reg-hernand-v2.webp',alt:'Grüne Wiese auf einem Plateau in Hernand mit Felswand, Nadelbäumen und Gebirge im Hintergrund, davor ein Abenteurer mit Rundschild',pos:'50% 40%',w:1920,h:1080},
   'reg-pailune':{f:'reg-pailune-v2.webp',alt:'Dorf mit roten Holzzäunen, Schnitzfiguren und Hütten in Pailune vor schneebedeckten Bergen, im Vordergrund ein Bogenschütze mit Schild',pos:'50% 30%',w:1920,h:1080},

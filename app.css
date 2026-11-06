@@ -7941,6 +7941,7 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 .rom-cand .cd-scene-img{transition:opacity .25s}
 @media (hover:hover){html.cd-motion .rom-cand:not(.is-off)>summary:hover>.cd-scene .cd-scene-img{opacity:calc(var(--cd-scene-op) + .16)}}
 .rom-cand--npc>summary>.cd-scene{--cd-scene-op:calc(var(--cd-scene-op-hero) * .62)}
+.rom-cand:not(.rom-cand--npc,.rom-cand--out)>summary>.cd-scene{--cd-scene-op:calc(var(--cd-scene-op-hero) * 1.2)}
 .rom-cand--npc .cd-fold-ico{background:color-mix(in srgb,var(--red) 10%,var(--panel))}
 .rom-heart{font-size:40px;line-height:1;font-style:normal;color:var(--red)}
 .rom-cand--out>summary{min-height:0}
