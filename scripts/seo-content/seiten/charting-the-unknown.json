@@ -3,31 +3,31 @@
   "faq": [
     {
       "frage": "Wie starte ich den DLC Charting the Unknown?",
-      "antwort": "Gekauft und geladen wird der DLC über das Menü „DLC kaufen“ im Titelbildschirm, vorher das Spiel auf den neuesten Stand bringen. Die Ozean-Quest „Auf in eine größere Welt“ (A Wider World) beginnt nach der Hauptquest „Heulender Hügel“, sobald das Graumähnen-Camp weit genug ausgebaut ist. Die neuen Geschichten für Kliff, Oongka und Damiane und der Garten der Prüfungen kommen erst nach der Hauptquest „Ende der Reise“. Tauchen geht ohne besondere Voraussetzung. Die Graumähnen-Quests spielst du am besten als Kliff, mit Damiane und Oongka stocken sie."
+      "antwort": "Gekauft und geladen wird der DLC über das Menü „DLC kaufen“ im Titelbildschirm, vorher das Spiel auf den neuesten Stand bringen. Die Ozean-Quest „Auf in eine größere Welt“ (Auf in eine größere Welt) beginnt nach der Hauptquest „Heulender Hügel“, sobald das Graumähnen-Camp weit genug ausgebaut ist. Die neuen Geschichten für Kliff, Oongka und Damiane und der Garten der Prüfungen kommen erst nach der Hauptquest „Ende der Reise“. Tauchen geht ohne besondere Voraussetzung. Die Graumähnen-Quests spielst du am besten als Kliff, mit Damiane und Oongka stocken sie."
     },
     {
       "frage": "Wie bekomme ich ein Schiff?",
-      "antwort": "Dein erstes Schiff, das Small Greymane Ship, baust du in der Quest „A Call from Beyond the Horizon“ per Entsendung „Small Shipbuilding“; dafür brauchst du einen Gefährten mit Engineering. Weitere Schiffe kaufst du danach mit Camp Funds bei den Schiffsverwaltern: Hernandian ships bei Hopkins im Grace Estate in Vellua, Demenissian ships im Hafen von Demeniss, Delesyian ships in Delesyia und in Stoneward Harbor; ein einfaches Rowboat gibt es in jedem dieser Häfen. Das Wiki führt {{schiffe}} benannte Schiffe, die meisten mit Preis; Segel, Kanonen und weitere Schiffsteile gibt es bei den Schiffsverwaltern in Demeniss und Delesyia."
+      "antwort": "Dein erstes Schiff, das Kleines Graumähnen-Segelschiff, baust du in der Quest „A Call from Beyond the Horizon“ per Entsendung „Bau eines kleinen Segelschiffs“; dafür brauchst du einen Gefährten mit Engineering. Weitere Schiffe kaufst du danach mit Camp-Mittel bei den Schiffsverwaltern: Hernandian ships bei Hopkins im Grace Estate in Vellua, Demenissian ships im Hafen von Demeniss, Delesyian ships in Delesyia und in Steinwacht-Hafen; ein einfaches Fähre gibt es in jedem dieser Häfen. Das Wiki führt {{schiffe}} benannte Schiffe, die meisten mit Preis; Segel, Kanonen und weitere Schiffsteile gibt es bei den Schiffsverwaltern in Demeniss und Delesyia."
     },
     {
       "frage": "Welche Inseln gibt es im DLC?",
-      "antwort": "Pearl Abyss spricht nur von mehreren unerschlossenen Inseln und nennt keine Namen. Belegt sind unter anderem Auronui Island als erste Insel der Reihe „A Wider World“, Samora Island mit dem Piratenschiff „The Siren's Cry“, Satyros Island mit einem Relic-Händler, Red Hangs Island als Haigebiet sowie Ocula Island, Cloven Hoof Isle, Razanui, Bergel, Iliya, Phragma, Carcano, Nirakan und Xamaca Island. Insgesamt listet diese Seite {{inseln}} benannte Inseln, so viele wie die Karte von MapGenie; ein anderer Guide nennt eine etwas kleinere Zahl, und einige Inseln kennt man bisher nur als Kartennamen. Eine Gesamtzahl ist offiziell nicht belegt."
+      "antwort": "Pearl Abyss spricht nur von mehreren unerschlossenen Inseln und nennt keine Namen. Belegt sind unter anderem Insel Auronui als erste Insel der Reihe „Auf in eine größere Welt“, Insel Samora mit dem Piratenschiff „Der Schrei der Sirene“, Insel Satyros mit einem Relikt-Händler, Insel der roten Hänge als Haigebiet sowie Insel Ocula, Insel Spalthuf, Razanui, Bergel, Iliya, Phragma, Carcano, Nirakan und Insel Xamaca. Insgesamt listet diese Seite {{inseln}} benannte Inseln, so viele wie die Karte von MapGenie; ein anderer Guide nennt eine etwas kleinere Zahl, und einige Inseln kennt man bisher nur als Kartennamen. Eine Gesamtzahl ist offiziell nicht belegt."
     },
     {
       "frage": "Wie zähme ich einen Hai?",
-      "antwort": "Haie sind häufig rund um die Inseln unterwegs. Betäube einen Hai mit Force Palm, steig auf und schließe das Zähm-Minispiel wie beim Pferd ab, danach registrierst du ihn als Transportmittel. Füttern zähmt Haie nicht. Orcas zähmst du auf dieselbe Weise, sie sind nur seltener. Für Sea Turtle und Sun Fish ist die Methode noch nicht sicher belegt."
+      "antwort": "Haie sind häufig rund um die Inseln unterwegs. Betäube einen Hai mit Kraftfaust, steig auf und schließe das Zähm-Minispiel wie beim Pferd ab, danach registrierst du ihn als Transportmittel. Füttern zähmt Haie nicht. Schwertwale zähmst du auf dieselbe Weise, sie sind nur seltener. Für Sea Turtle und Sun Fish ist die Methode noch nicht sicher belegt."
     },
     {
       "frage": "Wie funktioniert der Garten der Prüfungen?",
-      "antwort": "Nach der Hauptquest „Ende der Reise“ öffnet die Quest „At the Threshold of a New Ordeal“ den Garten im Abyss nahe dem Archiv des Axioms. Dort warten {{gruppen}} Gruppen bereits bekannter Bosse, die du in beliebiger Reihenfolge allein oder mit bis zu {{charaktere|wort}} Charakteren angehst. Gerichte heilen dort nicht, und fällt ein Charakter, kämpft der nächste weiter. Jede Gruppe verbessert eine bestehende Fähigkeit, nach allen Gruppen holst du am hinteren Pfeiler das Lumen Longsword ab."
+      "antwort": "Nach der Hauptquest „Ende der Reise“ öffnet die Quest „At the Threshold of a New Ordeal“ den Garten im Abyss nahe dem Archiv des Axioms. Dort warten {{gruppen}} Gruppen bereits bekannter Bosse, die du in beliebiger Reihenfolge allein oder mit bis zu {{charaktere|wort}} Charakteren angehst. Gerichte heilen dort nicht, und fällt ein Charakter, kämpft der nächste weiter. Jede Gruppe verbessert eine bestehende Fähigkeit, nach allen Gruppen holst du am hinteren Pfeiler das Lumen-Langschwert ab."
     },
     {
       "frage": "Wie kann ich länger tauchen?",
-      "antwort": "Wie lange du unter Wasser bleibst, bestimmt das maximale Atemvolumen der neuen Atemanzeige. Es steigt, wenn du einen Tauchanzug verfeinerst, und neue Gerichte füllen den Atem kurzzeitig auf. Helm und Anzug aus dem Vorbesteller-Set „Tauchanzug-Set des Entdeckers“ erhöhen den Atem zusätzlich. Tauchanzug-Teile und Atemgeräte gibt es auch bei den Relic-Händlern."
+      "antwort": "Wie lange du unter Wasser bleibst, bestimmt das maximale Atemvolumen der neuen Atemanzeige. Es steigt, wenn du einen Tauchanzug verfeinerst, und neue Gerichte füllen den Atem kurzzeitig auf. Helm und Anzug aus dem Vorbesteller-Set „Tauchanzug-Set des Entdeckers“ erhöhen den Atem zusätzlich. Tauchanzug-Teile und Atemgeräte gibt es auch bei den Relikt-Händlern."
     },
     {
       "frage": "Welche neuen Waffen und Rüstungen bringt der DLC?",
-      "antwort": "Pearl Abyss nennt keine Einzelnamen. Belegt sind unter anderem das Lumen Sword aus den Forgotten Ocean Ruins, das Lumen Longsword als Abschlussbelohnung im Garten der Prüfungen, die Harpoon Gun aus der Reihe „A Wider World“ und die Void-Rüstung, deren Brustteil im Raum des Bosses Knight of Void liegt. Alle im Wiki eingetragenen DLC-Teile tragen auf den Seiten [[/waffen|Waffen]] und [[/ruestungen|Rüstungen]] das Etikett DLC."
+      "antwort": "Pearl Abyss nennt keine Einzelnamen. Belegt sind unter anderem das Lumen-Schwert aus den Vergessene Ozeanruinen, das Lumen-Langschwert als Abschlussbelohnung im Garten der Prüfungen, die Harpunengewehr aus der Reihe „Auf in eine größere Welt“ und die Void-Rüstung, deren Brustteil im Raum des Bosses Ritter der Leere liegt. Alle im Wiki eingetragenen DLC-Teile tragen auf den Seiten [[/waffen|Waffen]] und [[/ruestungen|Rüstungen]] das Etikett DLC."
     }
   ]
 }

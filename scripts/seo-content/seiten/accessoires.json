@@ -3,7 +3,7 @@
   "faq": [
     {
       "frage": "Wie viele Accessoires gibt es in Crimson Desert?",
-      "antwort": "Das Wiki führt {{anzahl}} Accessoires: {{ringe}} Ringe, {{halsketten}} Halsketten und {{ohrringe}} Ohrringe. Der Ogre's Ring zählt trotz seines Namens laut den Spieldaten als Halskette."
+      "antwort": "Das Wiki führt {{anzahl}} Accessoires: {{ringe}} Ringe, {{halsketten}} Halsketten und {{ohrringe}} Ohrringe. Der Ring des Ogers zählt trotz seines Namens laut den Spieldaten als Halskette."
     },
     {
       "frage": "Was bedeutet der Zusatz hinter den Werten bei Accessoires?",
@@ -11,19 +11,19 @@
     },
     {
       "frage": "Wo bekomme ich Accessoires?",
-      "antwort": "Die Quellen sind gemischt: Drops legendärer Tiere und Gegner, etwa der Tigerfang Ring vom legendären White Tiger, Siege über Bosse wie Clockwork White Horn für den White Horn's Ring, Missionsbelohnungen, Strongbox-Puzzles in Anwesen und Händler. Mehrere Stücke, etwa Eternal Darkness und das Witch's Earring, lassen sich aus Abyss Cells herstellen, das Green Coral Reef Earring wird in der Schmiede gecraftet. Einige Händler sind Hexen wie Elowen, Bari, Lyselia und Areciel."
+      "antwort": "Die Quellen sind gemischt: Drops legendärer Tiere und Gegner, etwa der Tigerzahn-Ring vom legendären Weißer Tiger, Siege über Bosse wie Uhrwerk-Weißhorn für den Weißhorns Ring, Missionsbelohnungen, Tresor-Puzzles in Anwesen und Händler. Mehrere Stücke, etwa Ewige Dunkelheit und das Ohrring der Hexen, lassen sich aus Abyss Cells herstellen, das Grüner Korallen-Ohrring wird in der Schmiede gecraftet. Einige Händler sind Hexen wie Elowen, Bari, Lyselia und Areciel."
     },
     {
       "frage": "Welche Accessoires haben einen Unique-Effekt?",
-      "antwort": "{{unique|Wort}} Accessoires tragen einen Unique-Effekt: Der Ring of Lightning löst nach einiger Zeit im Regen einen Massen-Blitzangriff aus. Das Saint's Necklace stellt bei Benutzung Stamina her, das Tarivian Necklace heilt bei tödlichem Schaden voll. Das Crossroads Necklace heilt oder schadet zufällig, das Rainstorm Necklace ändert das Wetter auf Regen und das Radiant Necklace auf Sonne. Der Earring of Dark Magic sorgt für automatische Crits an nahen Earthen Warriors, das Flower Petal Earring spielt eine kosmetische Melodie."
+      "antwort": "{{unique|Wort}} Accessoires tragen einen Unique-Effekt: Der Ring der Blitze löst nach einiger Zeit im Regen einen Massen-Blitzangriff aus. Das Heiligenkette stellt bei Benutzung Ausdauer her, das Halskette von Tariv heilt bei tödlichem Schaden voll. Das Halskette von Leben und Tod heilt oder schadet zufällig, das Regensturmhalskette ändert das Wetter auf Regen und das Strahlende Halskette auf Sonne. Der Ohrring der schwarzen Magie sorgt für automatische Crits an nahen Earthen Warriors, das Blütenblattohrring spielt eine kosmetische Melodie."
     },
     {
       "frage": "Welche Ringe lohnen sich?",
-      "antwort": "Den Tarnished Ring führen die Daten als bestes Early-Game-Accessoire fürs Preis-Leistungs-Verhältnis, er fällt von normalen Banditen. Der Witch's Ring gilt als bester Attack-Speed-Ring, du bekommst ihn als Belohnung der Quest Thinning Blade oder bei Händlerin Areciel. Welche Werte genau gelten, steht auf den Karten, und bei manchen Ringen weisen die Notizen auf widersprüchliche Quellen hin."
+      "antwort": "Den Angelaufener Ring führen die Daten als bestes Early-Game-Accessoire fürs Preis-Leistungs-Verhältnis, er fällt von normalen Banditen. Der Ring der Hexen gilt als bester Attack-Speed-Ring, du bekommst ihn als Belohnung der Quest Dünner werdende Klinge oder bei Händlerin Areciel. Welche Werte genau gelten, steht auf den Karten, und bei manchen Ringen weisen die Notizen auf widersprüchliche Quellen hin."
     },
     {
       "frage": "Kann man Accessoires aufwerten?",
-      "antwort": "Die Werte der meisten Einträge gelten bei voller Verfeinerung, sie lassen sich also verbessern. Bei den Signets wie dem Pailunese Signet und dem Greymane Signet ist das ungeklärt: Fextralife führt sie als nicht aufwertbar, die questlog-Datenbank führt dagegen eine Aufwertungstabelle."
+      "antwort": "Die Werte der meisten Einträge gelten bei voller Verfeinerung, sie lassen sich also verbessern. Bei den Signets wie dem Pailune-Siegel und dem Graumähnen-Siegel ist das ungeklärt: Fextralife führt sie als nicht aufwertbar, die questlog-Datenbank führt dagegen eine Aufwertungstabelle."
     }
   ]
 }
