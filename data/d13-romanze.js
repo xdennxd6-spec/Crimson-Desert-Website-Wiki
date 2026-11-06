@@ -252,7 +252,7 @@ const ROM_GIFTS = {
 
 // Heirat. F 4.1 bis 4.8, W2, W5, W9
 const ROM_WEDDING = {
-  img: {key: "rom-hochzeit", f: "cd_assets/scenes/rom-hochzeit.webp", w: 996, h: 547, alt: "Hochzeitsszene: ein Paar in Weiß unter einem großen Baum, dahinter ein Geistlicher, Blumen, Lichterketten und Gäste"},
+  img: {key: "rom-hochzeit", f: "cd_assets/scenes/rom-hochzeit-2x.webp", w: 996, h: 547, alt: "Hochzeitsszene: ein Paar in Weiß unter einem großen Baum, dahinter ein Geistlicher, Blumen, Lichterketten und Gäste"},
   cap: "Die Hochzeitsszene als Spielbild aus den Spieldaten. Wer unter dem Schleier steht, bleibt offen.",
   rows: [
     {t: "Grundregel", d: "Antrag bei 100 auf der erweiterten Stufe."},
@@ -432,7 +432,7 @@ function _romWitchBody(w){
     +'<p class="rom-small">'+_romV(ROM_ORDER_NOTE)+(w.goals?' Zielnamen in den Spieldaten: '+cdEsc(w.goals)+'.':'')+'</p>'
     +(w.extra?'<p class="rom-small">'+_romV(w.extra)+'</p>':'')
     +'</div></div>'
-    +'<figure class="rom-gal"><div class="rom-gal-g">'+w.imgs.map(i=>'<img src="cd_assets/romanze/'+i.f+'.webp" alt="'+cdEsc(i.alt)+'" width="512" height="512" loading="lazy" decoding="async">').join('')+'</div><figcaption>'+cdEsc(ROM_IMG_NOTE)+'</figcaption></figure>';
+    +'<figure class="rom-gal"><div class="rom-gal-g">'+w.imgs.map(i=>'<img src="cd_assets/romanze/'+i.f+'-2x.webp" alt="'+cdEsc(i.alt)+'" width="1024" height="1024" loading="lazy" decoding="async">').join('')+'</div><figcaption>'+cdEsc(ROM_IMG_NOTE)+'</figcaption></figure>';
 }
 function _romWitchFold(w){
   const s=[w.name,w.title,w.titleEn,w.region,w.lead,w.where,_romFlat(w.entry),w.sanct.join(' '),_romPlain(w.sanctLoc),_romPlain(w.orders),w.series,w.seriesDe,
