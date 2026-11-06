@@ -12,6 +12,8 @@
 // statt als sichtbarer Gedankenstrich zu rendern (Regel 9).
 // Die Bilder in ENEMY_IMGS lagen bis 24.10.2026 auf dem questlog.gg-CDN; seitdem lokal unter cd_assets/ql/.
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "bestiarium";
 export const NAV_LABEL = "Gegner";
 export const DEEPLINK = "/#sec-bestiary";
@@ -87,17 +89,17 @@ function enemyCard(e, ctx) {
   const img = ENEMY_IMGS[e.name];
   const side = IMG_256.has(e.name) ? 256 : 512;
   const imgTag = img
-    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(e.name)} in Crimson Desert" width="${side}" height="${side}" class="enemy">`
+    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(e.name))} in Crimson Desert" width="${side}" height="${side}" class="enemy">`
     : "";
 
   // Deutschen Namen nur in Klammern ergaenzen, wenn er sich vom englischen unterscheidet
   // (fraktionen hat ohnehin kein de-Feld, has() faengt das ab).
-  const nameHtml = has(e.de) && e.de !== e.name
-    ? `${esc(e.name)} (${esc(e.de)})`
-    : esc(e.name);
+  const nameHtml = has(e.de) && e.de !== e.name && e.de !== deN(e.name)
+    ? `${esc(deN(e.name))} (${esc(e.de)})`
+    : esc(deN(e.name));
 
   const stats = [];
-  if (has(e.region) && !isDashOnly(e.region)) stats.push(["Region", e.region]);
+  if (has(e.region) && !isDashOnly(e.region)) stats.push(["Region", deT(e.region)]);
   if (has(e.drops) && !isDashOnly(e.drops)) stats.push(["Drops", e.drops]);
   if (e.conf === "medium") stats.push(["Quellenlage", "unbestätigt, Details teils nur durch eine Quelle belegt"]);
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
@@ -136,18 +138,18 @@ function dropTabelle(e, ctx) {
   const zeilen = haupt.slice(0, HAUPT_MAX).map((d) => {
     const chance = maxChance(d) === 100 && !Array.isArray(d.chance) ? "sicher (100 %)" : spanne(d.chance, " %");
     const bei = d.bei && D.varianten > 1 ? ` <span class="drp-bei">(bei ${Math.min(d.bei, D.varianten)} von ${D.varianten} Varianten)</span>` : "";
-    return `<tr><td>${esc(d.item)}${bei}</td><td>${esc(chance)}</td><td>${esc(spanne(d.menge))}</td></tr>`;
+    return `<tr><td>${esc(deN(d.item))}${bei}</td><td>${esc(chance)}</td><td>${esc(spanne(d.menge))}</td></tr>`;
   }).join("");
   const rest = haupt.length - HAUPT_MAX;
   const seltenListe = [...haupt.slice(HAUPT_MAX), ...selten];
   const seltenHtml = seltenListe.length
-    ? `<p class="drp-selten"><b>${rest > 0 ? "Weitere Drops" : "Selten (unter 1 %)"}:</b> ${seltenListe.slice(0, SELTEN_MAX).map((d) => `${esc(d.item)} (${esc(spanne(d.chance, " %"))})`).join(", ")}${seltenListe.length > SELTEN_MAX ? ` und ${seltenListe.length - SELTEN_MAX} weitere` : ""}</p>`
+    ? `<p class="drp-selten"><b>${rest > 0 ? "Weitere Drops" : "Selten (unter 1 %)"}:</b> ${seltenListe.slice(0, SELTEN_MAX).map((d) => `${esc(deN(d.item))} (${esc(spanne(d.chance, " %"))})`).join(", ")}${seltenListe.length > SELTEN_MAX ? ` und ${seltenListe.length - SELTEN_MAX} weitere` : ""}</p>`
     : "";
   const quelle = D.varianten > 1
     ? `${D.varianten} NPC-Varianten zusammengefasst (${esc(D.npcs.slice(0, 4).join(", "))}${D.npcs.length > 4 ? " u. a." : ""})`
     : `NPC „${esc(D.npcs[0])}“`;
   const futter = D.futter && D.futter.length
-    ? `<p class="drp-selten"><b>Bevorzugt als Futter/Geschenk:</b> ${esc(D.futter.slice(0, FUTTER_MAX).join(", "))}${D.futter.length > FUTTER_MAX ? " u. a." : ""}</p>`
+    ? `<p class="drp-selten"><b>Bevorzugt als Futter/Geschenk:</b> ${esc(deT(D.futter.slice(0, FUTTER_MAX).join(", ")))}${D.futter.length > FUTTER_MAX ? " u. a." : ""}</p>`
     : "";
   return `
 <table class="drp"><caption>Drops laut Spieldaten</caption><thead><tr><th>Beute</th><th>Chance</th><th>Menge</th></tr></thead><tbody>${zeilen}</tbody></table>
@@ -187,7 +189,7 @@ export function build(ctx) {
 <p class="note">Viele Drops sind Zutaten für Rezepte unter <a href="/crafting">Herstellen &amp; Farmen</a>, Gegner mit eigener Kampfmechanik stehen zusätzlich in der <a href="/bosse">Bossliste</a>.</p>
 ${sections}`;
 
-  const allNames = GROUPS.flatMap(([key]) => ENEMIES[key].map((e) => e.name));
+  const allNames = GROUPS.flatMap(([key]) => ENEMIES[key].map((e) => deN(e.name)));
 
   const jsonld = {
     "@context": "https://schema.org",

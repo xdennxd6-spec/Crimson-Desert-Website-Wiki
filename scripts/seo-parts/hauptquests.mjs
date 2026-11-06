@@ -20,6 +20,7 @@
 //    verschwiegen -- Projektregel: Unsicherheit markieren, nicht glaetten.
 
 import { dlcNeu } from "./_dlc-neu.mjs";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "hauptquests";
 export const NAV_LABEL = "Hauptquests";
@@ -83,8 +84,8 @@ export function build(ctx) {
   // Kapitelueberschrift: "Kapitel 3 — Howling Hill" bzw. "Prolog — Dead of
   // Night". abschnitteAuszeichnen() schneidet die Zaehlklammer am Ende fuer
   // die id ab, die Sprungmarke bleibt daher stabil, wenn Quests dazukommen.
-  const kapTitel = (c) =>
-    (/^\d+$/.test(String(c.ch)) ? `Kapitel ${c.ch}` : String(c.ch)) + `: ${c.name}`;
+  const kapTitel = (c, de = true) =>
+    (/^\d+$/.test(String(c.ch)) ? `Kapitel ${c.ch}` : String(c.ch)) + `: ${de ? deN(c.name) : c.name}`;
 
   const rowId = (c, q) => `mq-${slug(String(c.ch))}-${slug(q.q)}`;
 
@@ -93,7 +94,7 @@ export function build(ctx) {
     const confTag = q.conf === "medium" ? `<span class="unsure">Quelle unsicher</span>` : "";
     const tip = isReal(q.tip) ? `<br><span class="muted">Tipp: ${esc(q.tip)}</span>` : "";
     return `<tr id="${esc(rowId(c, q))}">
-<td class="q-cell">${esc(q.q)}${missTag}${confTag}</td>
+<td class="q-cell">${esc(deN(q.q))}${missTag}${confTag}</td>
 <td>${cell(q.trigger)}</td>
 <td>${cell(q.prereq)}</td>
 <td>${cell(q.reward)}${tip}</td>
@@ -103,12 +104,12 @@ export function build(ctx) {
   const sections = MAIN_QUESTS.map((c) => {
     // boss/warn/unlock sind String ODER null — ohne Pruefung stuende "null" da.
     const meta = [];
-    if (isReal(c.boss))   meta.push(`<b>Bosskampf:</b> ${esc(c.boss)}`);
+    if (isReal(c.boss))   meta.push(`<b>Bosskampf:</b> ${esc(deT(c.boss))}`);
     if (isReal(c.unlock)) meta.push(`<b>Schaltet frei:</b> ${esc(c.unlock)}`);
     const metaZeile = meta.length ? `<p class="chapmeta">${meta.join(" &middot; ")}</p>` : "";
     const warnZeile = isReal(c.warn) ? `<p class="warn">${esc(c.warn)}</p>` : "";
 
-    return `<h2>${esc(kapTitel(c))} (${c.quests.length})</h2>
+    return `<h2 data-anker="${esc(kapTitel(c, false))} (${c.quests.length})">${esc(kapTitel(c))} (${c.quests.length})</h2>
 ${metaZeile}
 ${warnZeile}
 <div class="tbl-wrap"><table>
@@ -120,7 +121,7 @@ ${warnZeile}
   const q = alleQuests(MAIN_QUESTS);
   const missQ = MAIN_QUESTS.flatMap((c) => c.quests.filter((x) => x.miss).map((x) => ({ c, x })));
   const missList = missQ
-    .map(({ c, x }) => `<a href="#${esc(rowId(c, x))}">${esc(x.q)}</a> <span class="muted">(${esc(kapTitel(c))})</span>`)
+    .map(({ c, x }) => `<a href="#${esc(rowId(c, x))}">${esc(deN(x.q))}</a> <span class="muted">(${esc(kapTitel(c))})</span>`)
     .join(", ");
   const unsicher = q.filter((x) => x.conf === "medium").length;
   // Die Tipps der derzeit markierten Inhalte sagen ausdruecklich "zeitweise"
@@ -139,7 +140,7 @@ ${warnZeile}
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Questreihen",
     intro: "Der erste DLC bringt eigene Questreihen, die nicht zur Hauptstory oben zählen. Ein Klick führt zur Questreihe mit Start, Schritten und Belohnungen.",
-    items: (ctx.helpers.extract("DLC_QUESTS") || []).map((q) => ({ name: q.name, de: q.de, info: q.who, c: q.c, q: q.q, pfx: "quest" })),
+    items: (ctx.helpers.extract("DLC_QUESTS") || []).map((q) => ({ name: deN(q.name), de: q.de, info: deT(q.who), c: q.c, q: q.q, pfx: "quest" })),
   })}
 ${sections}`;
 
@@ -152,7 +153,7 @@ ${sections}`;
         name: "Alle Hauptquests in Crimson Desert",
         numberOfItems: q.length,
         itemListElement: q.map((x, i) => ({
-          "@type": "ListItem", position: i + 1, name: x.q,
+          "@type": "ListItem", position: i + 1, name: deN(x.q),
         })),
       },
     ],

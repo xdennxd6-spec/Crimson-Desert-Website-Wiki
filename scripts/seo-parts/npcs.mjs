@@ -36,6 +36,8 @@
 //
 // ctx = { data: {...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE } }
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "npcs";
 export const NAV_LABEL = "Charaktere & NPCs";
 export const DEEPLINK = "/#sec-npcs";
@@ -93,7 +95,7 @@ function npcCard(n, key, ctx) {
   const img = NPC_IMGS[n.name];
   const side = IMG_250.has(n.name) ? 250 : 512;
   const imgTag = img
-    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(n.name)}, NPC in Crimson Desert" width="${side}" height="${side}" class="npc">`
+    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(n.name))}, NPC in Crimson Desert" width="${side}" height="${side}" class="npc">`
     : "";
 
   // Gruppenfarbe als Kartenrahmen + Namensfarbe. Fallback identisch zum
@@ -103,8 +105,8 @@ function npcCard(n, key, ctx) {
     || ["linear-gradient(135deg,#1a1010,#0e0d0d)", "rgba(255,255,255,.06)", "rgba(201,162,39,.5)"];
 
   const stats = [];
-  if (has(n.role)) stats.push(["Rolle", n.role]);
-  if (has(n.region)) stats.push(["Region", n.region]);
+  if (has(n.role)) stats.push(["Rolle", deT(n.role)]);
+  if (has(n.region)) stats.push(["Region", deT(n.region)]);
   // Nur "medium" kommt in den Daten vor (siehe Kommentarkopf) — keine erfundene
   // Fallunterscheidung fuer eine Quellenlage-Stufe, die es hier nicht gibt.
   if (n.conf === "medium") {
@@ -116,7 +118,7 @@ function npcCard(n, key, ctx) {
 
   return `<article class="card" id="npc-${slug(n.name)}" style="border-color:${esc(bdr)};background:${esc(bg)}">
 ${imgTag}
-<h3 style="color:${esc(col)}">${esc(n.name)}</h3>
+<h3 style="color:${esc(col)}">${esc(deN(n.name))}</h3>
 <ul class="stats">${statsHtml}</ul>
 ${bio}
 </article>`;
@@ -160,7 +162,7 @@ export function build(ctx) {
   // bekommt oder ein neuer NPC ohne Region dazukommt.
   const ohneRegionNamen = GROUPS.flatMap(([key]) => NPCS[key])
     .filter((n) => !has(n.region))
-    .map((n) => esc(n.name))
+    .map((n) => esc(deN(n.name)))
     .join(", ");
 
   const body = `
@@ -170,7 +172,7 @@ export function build(ctx) {
 <p class="note">Mehrere Antagonisten sind zugleich Bosse mit eigener Kampfmechanik — Details dazu in der <a href="/bosse">Bossliste</a>. Wer stattdessen wilde und feindliche Kreaturen sucht, findet sie unter <a href="/bestiarium">Gegner</a>.</p>
 ${sections}`;
 
-  const allNames = GROUPS.flatMap(([key]) => NPCS[key].map((n) => n.name));
+  const allNames = GROUPS.flatMap(([key]) => NPCS[key].map((n) => deN(n.name)));
 
   const jsonld = {
     "@context": "https://schema.org",

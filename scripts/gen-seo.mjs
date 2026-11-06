@@ -51,6 +51,7 @@ import * as partGeheimnisse from "./seo-parts/geheimnisse.mjs";
 import * as partChartingTheUnknown from "./seo-parts/charting-the-unknown.mjs";
 // 01.11.2026: Abschnitt "Neu mit Charting the Unknown" oben auf den Themen-Seiten (kein eigenes Seitenmodul)
 import { dlcNeu } from "./seo-parts/_dlc-neu.mjs";
+import { deN, deT } from "./seo-parts/_de.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -766,13 +767,17 @@ const slug = (s) => String(s).normalize("NFC").toLowerCase()
 function abschnitteAuszeichnen(bodyHtml) {
   const abschnitte = [];
   const vergeben = new Set();
-  const body = bodyHtml.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/g, (treffer, attr, inhalt) => {
-    if (/\sid=/.test(attr)) return treffer;           // schon ausgezeichnet: nicht anfassen
-    const roh = inhalt.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-    const ohneZahl = roh.replace(/\s*\([^()]*\)\s*$/, "").trim() || roh;
+  const body = bodyHtml.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/g, (treffer, attr0, inhalt) => {
+    // data-anker: englischer Schluesseltext der Ueberschrift (nur fuer die Anker-ID; die Anzeige ist deutsch, die ID bleibt stabil)
+    let ankerRoh = null;
+    const attr = attr0.replace(/\sdata-anker="([^"]*)"/, (_, v) => { ankerRoh = v; return ""; });
+    if (/\sid=/.test(attr)) return `<h2${attr}>${inhalt}</h2>`;           // schon ausgezeichnet: nicht anfassen
+    const kurz = (t) => { const r = t.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim(); return r.replace(/\s*\([^()]*\)\s*$/, "").trim() || r; };
+    const ohneZahl = kurz(inhalt);
+    const ankerText = ankerRoh == null ? ohneZahl : kurz(ankerRoh);
     // fuer den slug die HTML-Entities aufloesen, sonst wird "&amp;" zu "amp";
     // Apostroph (&#39;) ersatzlos, damit "Journey's End" nicht zu "journey-39-s-end" wird
-    const klar = ohneZahl.replace(/&amp;/g, "&").replace(/&#0*39;|&apos;|&rsquo;/g, "")
+    const klar = ankerText.replace(/&amp;/g, "&").replace(/&#0*39;|&apos;|&rsquo;/g, "")
       .replace(/&#?[a-z0-9]+;/gi, " ");
     let id = "a-" + slug(klar);
     if (id === "a-") id = "a-abschnitt";
@@ -1010,16 +1015,16 @@ function bossArticle(b) {
   const w = d ? d.w : 300, h = d ? d.h : 169;
   const sqCls = d && d.w / d.h < 1.5 ? ' class="sq"' : "";
   const imgTag = img
-    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(b.name)} Boss in Crimson Desert" width="${w}" height="${h}"${sqCls}>`
+    ? `<img loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(b.name))} Boss in Crimson Desert" width="${w}" height="${h}"${sqCls}>`
     : "";
   const stats = [];
   if (b.chapter != null) stats.push(["Kapitel", b.chapter]);
-  if (has(b.region)) stats.push(["Region", b.region]);
-  if (has(b.quest)) stats.push(["Quest", b.quest]);
+  if (has(b.region)) stats.push(["Region", deT(b.region)]);
+  if (has(b.quest)) stats.push(["Quest", deT(b.quest)]);
   if (has(b.weakness)) stats.push(["Schwäche", b.weakness]);
-  if (has(b.parry_or_dodge)) stats.push(["Parry / Dodge", b.parry_or_dodge]);
-  if (has(b.drop_weapon)) stats.push(["Waffen-Drop", b.drop_weapon]);
-  if (has(b.drop_abyss_gear)) stats.push(["Abyss-Gear", b.drop_abyss_gear]);
+  if (has(b.parry_or_dodge)) stats.push(["Parry / Dodge", deT(b.parry_or_dodge)]);
+  if (has(b.drop_weapon)) stats.push(["Waffen-Drop", deT(b.drop_weapon)]);
+  if (has(b.drop_abyss_gear)) stats.push(["Abyss-Gear", deT(b.drop_abyss_gear)]);
   // conf:"low" = Boss ohne Beleg in den Spieldaten (questlog); sichtbar kennzeichnen statt streichen.
   if (b.conf === "low") stats.push(["Quellenlage", has(b.notes) ? b.notes : "Nicht bestätigt"]);
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
@@ -1038,14 +1043,14 @@ function bossArticle(b) {
 <details class="boss-alt">
 <summary><span class="alt-on">${esc(alt.btn || "Alternatives Artwork zeigen")}</span><span class="alt-off">Artwork wieder einklappen</span></summary>
 <figure>
-<img loading="lazy" src="${esc(imgSrc(alt.url))}" alt="${esc(alt.label || b.name)}" width="${aw}" height="${ah}">
+<img loading="lazy" src="${esc(imgSrc(alt.url))}" alt="${esc(alt.label || deN(b.name))}" width="${aw}" height="${ah}">
 ${cap ? `<figcaption>${cap}</figcaption>` : ""}
 </figure>
 </details>`;
   }
   return `<article class="card" id="boss-${slug(b.name)}">
 ${imgTag}
-<h3>${esc(b.name)}</h3>
+<h3>${esc(deN(b.name))}</h3>
 <ul class="stats">${statsHtml}</ul>
 ${strat}${altHtml}
 </article>`;
@@ -1053,9 +1058,10 @@ ${strat}${altHtml}
 
 function buildBosse() {
   const story = BOSSES.filter((b) => b.chapter != null)
+    // Gleiches Kapitel: Reihenfolge nach dem englischen Schluessel (faq.json nennt den letzten Story-Boss, verify-seo rechnet es nach).
     .sort((a, b) => a.chapter - b.chapter || a.name.localeCompare(b.name));
   const world = BOSSES.filter((b) => b.chapter == null)
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de"));
   // FAQ-Zutaten fuer diese Seite. buildBosse() ist kein seo-parts-Modul und hat
   // deshalb kein ZAHLEN(ctx); die Werte werden hier lokal aus BOSSES/story/world
   // abgeleitet, exakt nach demselben Muster wie ZAHLEN() in scripts/seo-parts/*.mjs.
@@ -1078,7 +1084,7 @@ ${introHtml("bosse", zahlen)}<a class="cta" href="/#sec-bosses">Interaktive Boss
 ${dlcNeu({ esc, slug }, {
     titel: "Neu mit Charting the Unknown: DLC-Bosse",
     intro: "Bosse und Gegner aus den Questreihen des ersten DLC, dazu kommt der Garten der Prüfungen mit seinen Boss-Gruppen. Ein Klick führt zur Zeile auf der DLC-Seite mit Ort und Beute.",
-    items: (extractOptional("DLC_BOSSES") || []).map((b) => ({ name: b.name, info: b.where, c: b.c, q: b.q, pfx: "boss" })),
+    items: (extractOptional("DLC_BOSSES") || []).map((b) => ({ name: deN(b.name), info: b.where, c: b.c, q: b.q, pfx: "boss" })),
   })}
 <h2>Story-Bosse (nach Kapitel, ${story.length})</h2>
 <div class="grid">${story.map(bossArticle).join("\n")}</div>
@@ -1094,7 +1100,7 @@ ${dlcNeu({ esc, slug }, {
         name: "Alle Bosse in Crimson Desert",
         numberOfItems: BOSSES.length,
         itemListElement: BOSSES.map((b, i) => ({
-          "@type": "ListItem", position: i + 1, name: b.name,
+          "@type": "ListItem", position: i + 1, name: deN(b.name),
         })),
       },
     ],
@@ -1119,16 +1125,16 @@ ${dlcNeu({ esc, slug }, {
 const dlcTag = (e) => (e && e.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(e.dlc)}">DLC</span>` : "");
 function weaponRow(w) {
   const img = WEAPON_IMGS[w.name];
-  const thumb = img ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(w.name)}" width="34" height="34">` : "";
+  const thumb = img ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(w.name))}" width="34" height="34">` : "";
   const cell = (v) => has(v) ? esc(v) : `<span class="muted">nicht erfasst</span>`;
   return `<tr>
-<td>${thumb}${esc(w.name)}${dlcTag(w)}</td>
+<td>${thumb}${esc(deN(w.name))}${dlcTag(w)}</td>
 <td>${has(w.def) ? `<abbr title="Schilde führen strukturell DEF statt ATK">DEF</abbr>&nbsp;${esc(w.def)}`
       : (has(w.atk) ? esc(w.atk) + (w.val_q ? ` <span class="ctu-flag">unbestätigt: ${esc(w.val_q)}</span>` : "") : '<span class="muted">n.&nbsp;e.</span>')}</td>
 <td>${w.crit != null ? esc(w.crit) : (w.crit_none ? '<span class="muted" title="kein Critical-Rate-Feld bei questlog.gg und gaming.tools">kein Crit</span>' : '<span class="muted">n.&nbsp;e.</span>')}</td>
 <td>${w.slots != null ? esc(w.slots) : '<span class="muted">n.&nbsp;e.</span>'}</td>
 <td>${cell(w.source)}</td>
-<td>${cell(w.built_in)}</td>
+<td>${cell(deT(w.built_in))}</td>
 </tr>`;
 }
 
@@ -1138,7 +1144,7 @@ function buildWaffen() {
     const t = has(w.type) ? w.type : "Sonstige";
     (byType[t] ||= []).push(w);
   }
-  const types = Object.keys(byType).sort((a, b) => a.localeCompare(b));
+  const types = Object.keys(byType).sort((a, b) => deT(a).localeCompare(deT(b), "de"));
   const zahlen = {
     anzahl: WEAPONS.length,
     typen: types.length,
@@ -1150,8 +1156,8 @@ function buildWaffen() {
     antwort: zahlenEinsetzen(f.antwort, zahlen, `faq.json → waffen[${i}].antwort`),
   }));
   const sections = types.map((t) => {
-    const rows = byType[t].sort((a, b) => a.name.localeCompare(b.name)).map(weaponRow).join("\n");
-    return `<h2>${esc(t)} (${byType[t].length})</h2>
+    const rows = byType[t].sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de")).map(weaponRow).join("\n");
+    return `<h2 data-anker="${esc(t)} (${byType[t].length})">${esc(deT(t))} (${byType[t].length})</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Waffe</th><th>ATK&nbsp;/&nbsp;DEF</th><th>Crit</th><th>Slots</th><th>Fundort</th><th>Built-in / Abyss</th></tr></thead>
 <tbody>${rows}</tbody>
@@ -1163,8 +1169,8 @@ ${introHtml("waffen", zahlen)}<a class="cta" href="/#sec-weapons">Interaktive Wa
 ${dlcNeu({ esc, slug }, {
     titel: "Neu mit Charting the Unknown: DLC-Waffen",
     intro: "Diese Waffen kamen mit dem ersten DLC und tragen in den Tabellen unten das Etikett <span class=\"dlc-gtag\">DLC</span>. Ein Klick führt zur Zeile auf der DLC-Seite mit Wert und Fundort.",
-    items: WEAPONS.filter((w) => w.dlc).sort((a, b) => a.name.localeCompare(b.name)).map((w) => ({ name: w.name,
-      info: [w.type, has(w.def) ? "DEF " + w.def : has(w.atk) ? "ATK " + w.atk + (w.val_q ? " (unbestätigt)" : "") : ""].filter(Boolean).join(" · "), pfx: "waffe" })),
+    items: WEAPONS.filter((w) => w.dlc).sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de")).map((w) => ({ name: deN(w.name),
+      info: [deT(w.type), has(w.def) ? "DEF " + w.def : has(w.atk) ? "ATK " + w.atk + (w.val_q ? " (unbestätigt)" : "") : ""].filter(Boolean).join(" · "), pfx: "waffe" })),
   })}
 ${sections}`;
   if (faq.length) body += "\n" + faqSektion(faq);
@@ -1206,7 +1212,7 @@ function buildTrueEnding() {
   const sections = cats.map((cat) => {
     const items = TRUE_ENDING.filter((t) => t.cat === cat);
     const lis = items.map((t) => `<li>${esc(t.task)}</li>`).join("\n");
-    return `<h2>${esc(label[cat] || cat)} (${items.length}; ${items[0]?.required ? "Pflicht" : "empfohlen"})</h2>
+    return `<h2 data-anker="${esc(label[cat] || cat)} (${items.length}; ${items[0]?.required ? "Pflicht" : "empfohlen"})">${esc(label[cat] || deT(cat))} (${items.length}; ${items[0]?.required ? "Pflicht" : "empfohlen"})</h2>
 <div class="te-cat"><ul class="te">${lis}</ul></div>`;
   }).join("\n");
   const faq = [

@@ -29,6 +29,7 @@
 
 import fs from "fs";
 import { fileURLToPath } from "url";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "pets";
 export const NAV_LABEL = "Haustiere";
@@ -170,8 +171,8 @@ function guideCard(g, ctx) {
   const d = localWebpDims(g.img);
   const li = g.zeilen.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
   return `<article class="card" id="${g.id}">
-<img class="pet-guide-img" loading="lazy" src="${esc(imgSrc(g.img))}" alt="${esc(g.name)} in Crimson Desert" width="${d.w}" height="${d.h}">
-<h3>${esc(g.name)}: Freischalten und Zähmen</h3>
+<img class="pet-guide-img" loading="lazy" src="${esc(imgSrc(g.img))}" alt="${esc(deN(g.name))} in Crimson Desert" width="${d.w}" height="${d.h}">
+<h3>${esc(deN(g.name))}: Freischalten und Zähmen</h3>
 <ul class="stats">${li}</ul>
 </article>`;
 }
@@ -180,11 +181,11 @@ function petRow(p, id, mitArt, ctx) {
   const { esc, has, imgSrc } = ctx.helpers;
   const ic = iconInfo(p.icon);
   const variant = petVariant(p);
-  const label = variant ? `${p.name} (${variant})` : p.name;
+  const label = variant ? `${deN(p.name)} (${variant})` : deN(p.name);
   const food = has(p.food) ? esc(p.food) : "keine Angabe";
-  const art = mitArt ? `<td>${has(p.cat) ? esc(p.cat) : ""}</td>` : "";
+  const art = mitArt ? `<td>${has(p.cat) ? esc(deT(p.cat)) : ""}</td>` : "";
   return `<tr id="${id}">
-<td><img class="pet-thumb" loading="lazy" src="${esc(imgSrc(ic.src))}" alt="${esc(label)} in Crimson Desert" width="${ic.w}" height="${ic.h}">${esc(p.name)}${variant ? `<span class="pet-var">${esc(variant)}</span>` : ""}</td>
+<td><img class="pet-thumb" loading="lazy" src="${esc(imgSrc(ic.src))}" alt="${esc(label)} in Crimson Desert" width="${ic.w}" height="${ic.h}">${esc(deN(p.name))}${variant ? `<span class="pet-var">${esc(variant)}</span>` : ""}</td>
 <td>${food}</td>${art}
 </tr>`;
 }
@@ -229,7 +230,7 @@ ${sections}`;
         numberOfItems: total,
         itemListElement: PETS.map((p, i) => {
           const v = petVariant(p);
-          return { "@type": "ListItem", position: i + 1, name: v ? `${p.name} (${v})` : p.name };
+          return { "@type": "ListItem", position: i + 1, name: v ? `${deN(p.name)} (${v})` : deN(p.name) };
         }),
       },
     ],

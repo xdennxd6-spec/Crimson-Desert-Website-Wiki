@@ -30,6 +30,7 @@
 // ctx = { data, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, extract } }
 
 import fs from "fs";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "geheimnisse";
 export const NAV_LABEL = "Geheimnisse & Lore";
@@ -137,7 +138,7 @@ function bildMasse(rel) {
 function karteMitIcon(praefix, e, ctx, { ref, reward }) {
   const { esc, has, slug } = ctx.helpers;
   return `<article class="card" id="geh-${praefix}-${slug(e.name)}">
-<h3>${has(e.ico) ? esc(e.ico) + " " : ""}${esc(e.name)}</h3>
+<h3>${has(e.ico) ? esc(e.ico) + " " : ""}${esc(deN(e.name))}</h3>
 ${ref && has(e.ref) ? `<ul class="stats"><li><b>Ort:</b> ${rich(esc, e.ref)}</li></ul>` : ""}
 <p class="geh-body">${rich(esc, e.body)}</p>
 ${reward && has(e.reward) ? `<p class="geh-reward"><b>🎁 Belohnung:</b> ${rich(esc, e.reward)}</p>` : ""}
@@ -149,7 +150,7 @@ function waffenKarte(w, ctx, d) {
   const rel = d.weaponImgs[w.name];
   const m = rel ? bildMasse(rel) : null;
   const img = rel && m
-    ? `<img class="geh-wimg" loading="lazy" src="${esc(imgSrc(rel))}" alt="${esc(w.name)}, Hidden Weapon in Crimson Desert" width="${m.w}" height="${m.h}">`
+    ? `<img class="geh-wimg" loading="lazy" src="${esc(imgSrc(rel))}" alt="${esc(deN(w.name))}, Hidden Weapon in Crimson Desert" width="${m.w}" height="${m.h}">`
     : "";
   const stats = [];
   stats.push(["ATK", `${w.atk} (Refinement +10)`]);
@@ -158,7 +159,7 @@ function waffenKarte(w, ctx, d) {
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${rich(esc, v)}</li>`).join("");
   return `<article class="card" id="geh-waffe-${slug(w.name)}">
 ${img}
-<h3>⚔️ ${esc(w.name)}</h3>
+<h3>⚔️ ${esc(deN(w.name))}</h3>
 <ul class="stats">${statsHtml}</ul>
 ${has(w.difficulty) ? `<p class="geh-reward"><b>💡 Tipp:</b> ${rich(esc, w.difficulty)}</p>` : ""}
 </article>`;
@@ -206,7 +207,7 @@ export function build(ctx) {
 
   // ── Memory Fragments ──
   const frZeilen = d.frReg.map((r) => tr(`geh-fragment-${slug(r.name)}`,
-    [`<b>${esc(r.name)}</b>`, String(r.cap), esc(r.note)]));
+    [`<b>${esc(deN(r.name))}</b>`, String(r.cap), esc(r.note)]));
   const fragmente = `<h2>📜 Memory Fragments (${d.frReg.length} Regionen)</h2>
 <p class="geh-text">Memory Fragments sind keine Pickup-Items, sondern ortsgebundene Knowledge-Events: Du entdeckst sie mit der Laterne und spielst sie mit der Visione ab. Die interaktive Karte von crimsondesert.th.gl verzeichnet ${z.fragmente} Memory Fragments (Stand 07.04.2026). Patch 2.00.00 hat laut offiziellen Notes weitere Erinnerungsfragmente hinzugefügt (ohne Anzahl); eine belegte aktuelle Gesamtzahl gibt es nicht. Andere Zählweisen kommen auf 214 (Fortschrittsanzeige im Knowledge-Menü) und 327 (consolepulse, Einzelquelle); diese Zahlen stammen aus unterschiedlichen Zählweisen und Zeitpunkten und werden hier nicht gegeneinander entschieden.</p>
 ${tabelle(["Region", "Fragmente (Schätzung)", "Beispielorte"], frZeilen)}
@@ -224,7 +225,7 @@ ${tabelle(["Region", "Fragmente (Schätzung)", "Beispielorte"], frZeilen)}
   const crZeilen = d.crReg.map((r) => {
     const cap = d.crCap.find((c) => r.name.startsWith(c.name));
     return tr(`geh-cresset-${slug(r.name)}`,
-      [`<b>${esc(r.name)}</b>`, cap ? String(cap.cap) : "–", esc(r.info)]);
+      [`<b>${esc(deN(r.name))}</b>`, cap ? String(cap.cap) : "–", esc(r.info)]);
   });
   const cressets = `<h2>🔥 Abyss Cressets (${d.crReg.length} Regionen)</h2>
 <p class="geh-text"><b>${z.cressets}</b> verborgene Abyss-Brazier in Klippen, Höhlen, Felsspitzen und hinter Treibsand-Feldern, verteilt über alle ${z.cressetregionen} Regionen. Die Zählung je Region folgt der game8-Liste der Secret Places.</p>
@@ -260,7 +261,7 @@ ${tabelle(["Region", "Cressets", "Details"], crZeilen)}
 <div class="grid">${d.mech.map((e) => karteMitIcon("mech", e, ctx, { ref: false, reward: true })).join("\n")}</div>`;
 
   const toolZeilen = d.tools.map((t) => tr(`geh-tool-${slug(t.tool)}`,
-    [`<b>${esc(t.tool)}</b>`, `<code class="geh-code">${esc(t.input)}</code>`, rich(esc, t.effect)]));
+    [`<b>${esc(deN(t.tool))}</b>`, `<code class="geh-code">${esc(t.input)}</code>`, rich(esc, t.effect)]));
   const tools = `<h2>🔎 Such-Tools (${d.tools.length})</h2>
 ${tabelle(["Tool", "Eingabe", "Wirkung"], toolZeilen)}
 <p class="strat"><b>Reflex:</b> An jeder neuen erhöhten Vista und an jedem neuen Zone-Eingang beide aktivieren, Laterne und Guiding Light. Das spart Stunden.</p>`;
@@ -290,7 +291,7 @@ ${mech}
 ${tools}
 ${prio}`;
 
-  const listeNamen = [...d.eier, ...d.orte, ...d.waffen, ...d.mech].map((e) => e.name);
+  const listeNamen = [...d.eier, ...d.orte, ...d.waffen, ...d.mech].map((e) => deN(e.name));
   const jsonld = {
     "@context": "https://schema.org",
     "@graph": [

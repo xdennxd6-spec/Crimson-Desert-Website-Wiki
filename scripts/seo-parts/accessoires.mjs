@@ -16,6 +16,7 @@
 // SIGIL_AMULETS gehoert thematisch zu den Hexen-Rezepten und wird auf /hexen genutzt, nicht hier.
 
 import { dlcNeu } from "./_dlc-neu.mjs";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "accessoires";
 export const NAV_LABEL = "Accessoires";
@@ -66,16 +67,16 @@ export function ZAHLEN(ctx) {
 function accCard(a, typLabel, ctx) {
   const { esc, has, imgSrc, slug } = ctx.helpers;
   const img = has(a.icon)
-    ? `<img class="acc-ico" loading="lazy" src="${esc(imgSrc(SYNTH_CDN + a.icon))}" alt="${esc(a.name)} in Crimson Desert" width="256" height="256">`
+    ? `<img class="acc-ico" loading="lazy" src="${esc(imgSrc(SYNTH_CDN + a.icon))}" alt="${esc(deN(a.name))} in Crimson Desert" width="256" height="256">`
     : "";
-  const stats = [["Typ", typLabel || a.type]];
-  if (has(a.effect)) stats.push(["Effekt", a.effect]);
+  const stats = [["Typ", typLabel || deT(a.type)]];
+  if (has(a.effect)) stats.push(["Effekt", deT(a.effect)]);
   if (has(a.source)) stats.push(["Quelle", a.source]);
   if (has(a.notes)) stats.push(["Notiz", a.notes]);
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
   return `<article class="card" id="acc-${slug(a.name)}">
 ${img}
-<h3>${esc(a.name)}${a.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(a.dlc)}">DLC</span>` : ""}</h3>
+<h3>${esc(deN(a.name))}${a.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(a.dlc)}">DLC</span>` : ""}</h3>
 <ul class="stats">${statsHtml}</ul>
 </article>`;
 }
@@ -98,7 +99,7 @@ export function build(ctx) {
 <p class="note"><b>Legende:</b> „(+10)“ hinter einem Wert bedeutet: Wert bei voller Verfeinerung (Refinement +10), nicht der Grundwert. Mehrere Accessoires kaufst du bei Hexen wie Elowen, Bari, Lyselia und Areciel, mehr dazu unter <a href="/hexen">Hexen &amp; Fusion</a>; viele Stücke fallen als Beute oder Belohnung bei Gegnern an, die in der <a href="/bosse">Bossliste</a> stehen.</p>
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Accessoires",
-    items: ACC.filter((a) => a.dlc).map((a) => ({ name: a.name, info: [a.type, a.source].filter(Boolean).join(" · "), href: `#acc-${slug(a.name)}` })),
+    items: ACC.filter((a) => a.dlc).map((a) => ({ name: deN(a.name), info: deT([a.type, a.source].filter(Boolean).join(" · ")), href: `#acc-${slug(a.name)}` })),
   })}
 ${sections}`;
 
@@ -110,7 +111,7 @@ ${sections}`;
         "@type": "ItemList",
         name: "Alle Accessoires in Crimson Desert",
         numberOfItems: total,
-        itemListElement: ACC.map((a, i) => ({ "@type": "ListItem", position: i + 1, name: a.name })),
+        itemListElement: ACC.map((a, i) => ({ "@type": "ListItem", position: i + 1, name: deN(a.name) })),
       },
     ],
   };

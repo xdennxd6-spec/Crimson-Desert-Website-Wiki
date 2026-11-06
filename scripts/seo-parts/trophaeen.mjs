@@ -11,6 +11,8 @@
 //
 // ctx = { data: {...alle Datenstrukturen...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "trophaeen";
 export const NAV_LABEL = "Trophäen & Errungenschaften";
 export const DEEPLINK = "/#sec-achievements";
@@ -102,7 +104,7 @@ export function build(ctx) {
 
     return `<tr>
 <td class="grade" style="color:${esc(g.col)}">${esc(g.ico)} ${esc(g.lbl)}</td>
-<td><strong>${esc(t.name)}</strong>${missTag}${when}</td>
+<td><strong>${esc(deN(t.name))}</strong>${missTag}${when}</td>
 <td>${esc(t.desc)}${link}${tip}${how}${acht}</td>
 </tr>`;
   };
@@ -111,7 +113,7 @@ export function build(ctx) {
     .filter((g) => TROPHIES.some((t) => t.grade === g))
     .map((g) => {
       const items = TROPHIES.filter((t) => t.grade === g)
-        .sort((a, b) => a.name.localeCompare(b.name, "de"));
+        .sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de"));
       const meta = TROPHY_GRADES[g] || { lbl: g, ico: "" };
       return `<h2>${esc(meta.ico)} ${esc(meta.lbl)} (${items.length})</h2>
 <div class="tbl-wrap"><table>
@@ -121,7 +123,7 @@ export function build(ctx) {
     }).join("\n");
 
   const missList = TROPHIES.filter((t) => t.miss)
-    .map((t) => esc(t.name)).join(", ");
+    .map((t) => esc(deN(t.name))).join(", ");
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Trophäen-Liste mit Fortschritt öffnen &rarr;</a>
@@ -138,7 +140,7 @@ ${sections}`;
         name: "Alle Trophäen in Crimson Desert",
         numberOfItems: TROPHIES.length,
         itemListElement: TROPHIES.map((t, i) => ({
-          "@type": "ListItem", position: i + 1, name: t.name,
+          "@type": "ListItem", position: i + 1, name: deN(t.name),
         })),
       },
     ],

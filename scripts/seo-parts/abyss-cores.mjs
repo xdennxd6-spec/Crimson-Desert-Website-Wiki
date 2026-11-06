@@ -22,6 +22,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { dlcNeu } from "./_dlc-neu.mjs";
+import { deN, deT } from "./_de.mjs";
 export const SLUG = "abyss-cores";
 export const NAV_LABEL = "Abyss-Ausrüstung";
 export const DEEPLINK = "/#sec-cores";
@@ -105,8 +106,8 @@ export function build(ctx) {
     const t = d.tiers[name];
     if (!t) return "";
     const fmt = (v) => (t.lv ? "Lv." + v : String(v));
-    if (t.single != null) return `<p class="crs-tiers"><b>Stufe</b> ${esc(t.stat)}: ${esc(fmt(t.single))}</p>`;
-    return `<p class="crs-tiers"><b>Stufen-Werte</b> ${t.vals.map((v, i) => `<b>${ROM[i]}</b> ${esc(t.stat)}: ${esc(fmt(v))}`).join(" · ")}</p>`;
+    if (t.single != null) return `<p class="crs-tiers"><b>Stufe</b> ${esc(deT(t.stat))}: ${esc(fmt(t.single))}</p>`;
+    return `<p class="crs-tiers"><b>Stufen-Werte</b> ${t.vals.map((v, i) => `<b>${ROM[i]}</b> ${esc(deT(t.stat))}: ${esc(fmt(v))}`).join(" · ")}</p>`;
   };
 
   const greaterNote = (c) => {
@@ -119,13 +120,13 @@ export function build(ctx) {
     const img = d.imgs[c.name];
     if (!img) return `<span class="crs-ph" aria-hidden="true">◈</span>`;
     const dim = /^https?:/i.test(img) ? { w: CDN_ICON_PX, h: CDN_ICON_PX } : dimsLocal(img);
-    return `<img class="crs-img" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(c.name)} Abyss Core in Crimson Desert" width="${dim.w}" height="${dim.h}">`;
+    return `<img class="crs-img" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(c.name))} Abyss Core in Crimson Desert" width="${dim.w}" height="${dim.h}">`;
   };
 
   const row = (c) => `<tr id="core-${slug(c.name)}">
-<td class="crs-n">${iconHtml(c)}<strong>${esc(c.name)}</strong>${c.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(c.dlc)}">DLC</span>` : ""}</td>
+<td class="crs-n">${iconHtml(c)}<strong>${esc(deN(c.name))}</strong>${c.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(c.dlc)}">DLC</span>` : ""}</td>
 <td>${esc(c.effect)}${tierStrip(c.name)}${greaterNote(c)}</td>
-<td class="crs-src">${esc(c.source)}</td>
+<td class="crs-src">${esc(deT(c.source))}</td>
 </tr>`;
 
   const table = (liste) => `<div class="tbl-wrap"><table>
@@ -155,7 +156,7 @@ ${table(liste)}`;
 <p class="crs-legend">${esc(slotLegende)}</p>
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Abyss-Ausrüstung",
-    items: d.cores.filter((c) => c.dlc).map((c) => ({ name: c.name, info: [c.slot, c.source].filter(Boolean).join(" · "), href: `#core-${ctx.helpers.slug(c.name)}` })),
+    items: d.cores.filter((c) => c.dlc).map((c) => ({ name: deN(c.name), info: deT([c.slot, c.source].filter(Boolean).join(" · ")), href: `#core-${ctx.helpers.slug(c.name)}` })),
   })}
 ${gruppen}
 ${synthese}`;
@@ -168,7 +169,7 @@ ${synthese}`;
         "@type": "ItemList",
         name: "Alle Abyss Cores in Crimson Desert",
         numberOfItems: d.cores.length,
-        itemListElement: d.cores.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name })),
+        itemListElement: d.cores.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: deN(c.name) })),
       },
     ],
   };

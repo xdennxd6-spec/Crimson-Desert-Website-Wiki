@@ -24,6 +24,7 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 
 import { dlcNeu } from "./_dlc-neu.mjs";
+import { deN, deT } from "./_de.mjs";
 export const SLUG = "mounts";
 export const NAV_LABEL = "Reittiere";
 export const DEEPLINK = "/#sec-mounts";
@@ -109,11 +110,11 @@ function mountCard(m, ctx, MOUNT_IMGS, MOUNT_INGAME_IMGS) {
   if (has(img)) {
     const d = localDims(img);
     const zeichnung = /\.svg$/i.test(img);
-    const alt = zeichnung ? `Zeichnung: ${m.name} in Crimson Desert` : `${m.name} in Crimson Desert`;
+    const alt = zeichnung ? `Zeichnung: ${deN(m.name)} in Crimson Desert` : `${deN(m.name)} in Crimson Desert`;
     imgTag = `<img class="mnt-img" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(alt)}" width="${d.w}" height="${d.h}">`;
   }
 
-  const stats = [["Typ", esc(m.type)]];
+  const stats = [["Typ", esc(deT(m.type))]];
   if (has(m.unlock)) stats.push(["Freischalten", esc(m.unlock)]);
   // Stats-Teile sind in den Daten mit " · " getrennt; untereinander lesbarer, Text bleibt gleich.
   if (has(m.stats)) stats.push(["Stats", String(m.stats).split(" · ").map(esc).join("<br>")]);
@@ -128,7 +129,7 @@ function mountCard(m, ctx, MOUNT_IMGS, MOUNT_INGAME_IMGS) {
 
   return `<article class="card" id="mount-${slug(m.name)}">
 ${imgTag}
-<h3>${esc(m.name)}${m.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(m.dlc)}">DLC</span>` : ""}</h3>
+<h3>${esc(deN(m.name))}${m.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(m.dlc)}">DLC</span>` : ""}</h3>
 <ul class="stats">${statsHtml}</ul>
 ${notes}${ig}
 </article>`;
@@ -157,7 +158,7 @@ export function build(ctx) {
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Reittiere",
     intro: "Diese Reittiere kamen mit dem ersten DLC, darunter die Unterwasser-Reittiere fürs Tauchen. Ein Klick springt zur Karte weiter unten.",
-    items: MOUNTS.filter((m) => m.dlc).map((m) => ({ name: m.name, info: m.type, href: `#mount-${slug(m.name)}` })),
+    items: MOUNTS.filter((m) => m.dlc).map((m) => ({ name: deN(m.name), info: deT(m.type), href: `#mount-${slug(m.name)}` })),
   })}
 ${sections}`;
 
@@ -169,7 +170,7 @@ ${sections}`;
         "@type": "ItemList",
         name: "Alle Mounts und Fahrzeuge in Crimson Desert",
         numberOfItems: total,
-        itemListElement: MOUNTS.map((m, i) => ({ "@type": "ListItem", position: i + 1, name: m.name })),
+        itemListElement: MOUNTS.map((m, i) => ({ "@type": "ListItem", position: i + 1, name: deN(m.name) })),
       },
     ],
   };

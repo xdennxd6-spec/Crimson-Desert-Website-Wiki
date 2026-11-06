@@ -35,6 +35,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { deN, deT } from "./_de.mjs";
 // Seit 29.10.2026 (DLC "Charting the Unknown", Patch 2.04.00) fest freigeschaltet;
 // die Umgebungsvariable CD_PATCH_UMBAU wird nicht mehr gebraucht.
 export const UMBAU = true;
@@ -146,7 +147,7 @@ export function buildSeite(ctx, archiv) {
     // ACHTUNG: p.size und f.items tragen bewusstes Markup -> nicht escapen.
     const sizeBlock = p.size ? `<p class="psize">${p.size}</p>` : "";
 
-    const katBloecke = kats.map((f) => `<h3 class="pcat">${esc(f.cat)}</h3>
+    const katBloecke = kats.map((f) => `<h3 class="pcat">${esc(deT(f.cat))}</h3>
 <ul class="plist">
 ${f.items.map((it) => `<li>${it}</li>`).join("\n")}
 </ul>`).join("\n");

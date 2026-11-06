@@ -2,6 +2,7 @@ import { createHash } from "crypto";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { deN, deT } from "./seo-parts/_de.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 
@@ -487,8 +488,8 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
   const faqQuelle = JSON.parse(fs.readFileSync(path.join(SEO_DIR, "faq.json"), "utf8"));
   const wortGrenze = (text, name) => new RegExp("(?<![\\p{L}\\p{N}'’])" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?![\\p{L}\\p{N}])", "u").test(text);
   const listen = [
-    ["trophaeen", "Trophäen", TROPHIES.map((t) => [t.name, !!t.miss])],
-    ["side-quests", "Nebenquests", SIDE_QUESTS.map((q) => [q.q, !!q.miss])],
+    ["trophaeen", "Trophäen", TROPHIES.map((t) => [deN(t.name), !!t.miss])],
+    ["side-quests", "Nebenquests", SIDE_QUESTS.map((q) => [deN(q.q), !!q.miss])],
   ];
   for (const [seite, label, eintraege] of listen) {
     const frage = (faqQuelle[seite] || []).find((f) => /verpassbar/i.test(f.frage) && /^welche/i.test(f.frage));
@@ -512,16 +513,16 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
 {
   const faqQuelle = JSON.parse(fs.readFileSync(path.join(SEO_DIR, "faq.json"), "utf8"));
   const alle = (seite) => (faqQuelle[seite] || []).map((f) => f.frage + " " + f.antwort).join("\n");
-  const platin = TROPHIES.filter((t) => t.grade === "platinum").map((t) => t.name);
+  const platin = TROPHIES.filter((t) => t.grade === "platinum").map((t) => deN(t.name));
   ok(platin.length === 1 && alle("trophaeen").includes(`„${platin[0]}“`),
     `faq.json → trophaeen: nennt die Platin-Trophäe "${platin.join(", ")}" (Daten: ${platin.length} Platin)`);
   // Reihenfolge wie buildBosse() in gen-seo.mjs: Kapitel aufsteigend, dann Name (localeCompare).
   const storyBosse = extract("BOSSES").filter((b) => b.chapter != null)
     .sort((a, b) => a.chapter - b.chapter || a.name.localeCompare(b.name));
-  const letzter = storyBosse[storyBosse.length - 1].name;
+  const letzter = deN(storyBosse[storyBosse.length - 1].name);
   ok(alle("bosse").includes(letzter + " an letzter Stelle"), `faq.json → bosse: letzter Story-Boss "${letzter}" stimmt mit der Kapitel-Sortierung überein`);
   const proRegion = FAC_DATA.regions.map((r) => [r.region, r.factions.reduce((n, f) => n + f.quests.length, 0)]).sort((a, b) => b[1] - a[1]);
-  const spitze = proRegion[0][0];
+  const spitze = deT(proRegion[0][0]);
   ok(alle("fraktionen").includes("Aktuell " + spitze + ":") && proRegion[0][1] > proRegion[1][1],
     `faq.json → fraktionen: Region mit den meisten Fraktionsquests ist ${spitze} (${proRegion[0][1]} gegen ${proRegion[1][0]} ${proRegion[1][1]})`);
 }

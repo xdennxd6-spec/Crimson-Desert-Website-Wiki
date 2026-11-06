@@ -12,6 +12,8 @@
 // Der Abschnitt steht im Wrapper id="dlc" (Sprungziel /waffen#dlc usw.); die h2 bekommt ihren Anker wie alle
 // anderen ueber abschnitteAuszeichnen() und erscheint damit in der Sprungleiste der Seite.
 
+import { deN, deT } from "./_de.mjs";
+
 export const DLC_NAME = "Charting the Unknown";
 
 export function dlcNeu(h, o) {
@@ -26,7 +28,7 @@ export function dlcNeu(h, o) {
   const kurz = (s) => (s.length > 120 ? s.slice(0, s.lastIndexOf(" ", 117) > 60 ? s.lastIndexOf(" ", 117) : 117) + " …" : s);
   const li = (e) => {
     const href = e.href || (e.pfx ? `/charting-the-unknown#dlc-${e.pfx}-${slug(e.name)}` : "");
-    const nm = `<strong>${esc(e.name)}</strong>${e.de ? ` (${esc(e.de)})` : ""}`;
+    const nm = `<strong>${esc(deN(e.name))}</strong>${e.de ? ` (${esc(e.de)})` : ""}`;
     const info = kurz(txt(e.info));
     return `<li>${href ? `<a href="${esc(href)}">${nm}</a>` : nm}${info ? `<span class="dlc-neu-i">${esc(info)}</span>` : ""}${flag(e)}</li>`;
   };

@@ -14,6 +14,8 @@
 // Halbgeviertstrich "—" (nicht das "–"/"-", das ctx.helpers.has() erkennt).
 // Deshalb definiert dieses Modul eine eigene isReal()-Pruefung statt has().
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "side-quests";
 export const NAV_LABEL = "Nebenquests";
 export const DEEPLINK = "/#sec=quests&tab=sq";
@@ -45,7 +47,7 @@ export function COUNT_CHECK(ctx) {
 function regionsByCount(SIDE_QUESTS) {
   const counts = {};
   for (const q of SIDE_QUESTS) counts[q.region] = (counts[q.region] || 0) + 1;
-  return Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b, "de"));
+  return Object.keys(counts).sort((a, b) => counts[b] - counts[a] || deT(a).localeCompare(deT(b), "de"));
 }
 
 // Datenmengen, die die redaktionellen Texte in scripts/seo-content/ per
@@ -81,20 +83,20 @@ export function build(ctx) {
 
     let bonus = "";
     if (isReal(q.mount)) {
-      bonus += `<br><span class="muted">Mount: ${esc(q.mount)}</span>`;
+      bonus += `<br><span class="muted">Mount: ${esc(deN(q.mount))}</span>`;
     }
     if (isReal(q.boss) || isReal(q.craft)) {
       bonus += `
 <details class="boss-alt">
 <summary><span class="alt-on">Boss-Kampf &amp; Crafting anzeigen</span><span class="alt-off">Boss-Kampf &amp; Crafting verbergen</span></summary>
-${isReal(q.boss) ? `<p>${esc(q.boss)}</p>` : ""}
+${isReal(q.boss) ? `<p>${esc(deT(q.boss))}</p>` : ""}
 ${isReal(q.craft) ? `<p>${esc(q.craft)}</p>` : ""}
 </details>`;
     }
     const tip = isReal(q.tip) ? `<br><span class="muted">Tipp: ${esc(q.tip)}</span>` : "";
 
     return `<tr id="${esc(rowId(q))}">
-<td class="q-cell">${esc(q.q)}${missTag}${sysTag}</td>
+<td class="q-cell">${esc(deN(q.q))}${missTag}${sysTag}</td>
 <td>${cell(q.trigger)}</td>
 <td>${cell(q.prereq)}</td>
 <td>${cell(q.reward)}${bonus}${tip}</td>
@@ -104,8 +106,8 @@ ${isReal(q.craft) ? `<p>${esc(q.craft)}</p>` : ""}
   const regions = regionsByCount(SIDE_QUESTS);
   const sections = regions.map((r) => {
     const items = SIDE_QUESTS.filter((q) => q.region === r)
-      .sort((a, b) => a.q.localeCompare(b.q, "de"));
-    return `<h2>${esc(r)} (${items.length})</h2>
+      .sort((a, b) => deN(a.q).localeCompare(deN(b.q), "de"));
+    return `<h2 data-anker="${esc(r)} (${items.length})">${esc(deT(r))} (${items.length})</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Nebenquest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>
 <tbody>${items.map(row).join("\n")}</tbody>
@@ -114,7 +116,7 @@ ${isReal(q.craft) ? `<p>${esc(q.craft)}</p>` : ""}
 
   const missCount = SIDE_QUESTS.filter((q) => q.miss).length;
   const missList = SIDE_QUESTS.filter((q) => q.miss)
-    .map((q) => `<a href="#${esc(rowId(q))}">${esc(q.q)}</a> <span class="muted">(${esc(q.region)})</span>`)
+    .map((q) => `<a href="#${esc(rowId(q))}">${esc(deN(q.q))}</a> <span class="muted">(${esc(deT(q.region))})</span>`)
     .join(", ");
 
   const body = `
@@ -132,7 +134,7 @@ ${sections}`;
         name: "Alle Nebenquests in Crimson Desert",
         numberOfItems: SIDE_QUESTS.length,
         itemListElement: SIDE_QUESTS.map((q, i) => ({
-          "@type": "ListItem", position: i + 1, name: q.q,
+          "@type": "ListItem", position: i + 1, name: deN(q.q),
         })),
       },
     ],

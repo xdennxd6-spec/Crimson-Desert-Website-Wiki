@@ -23,6 +23,8 @@
 // slug(name) mit dem Rohnamen aus WITCH_SYNTHESIS (auch bei den Amuletten, z. B.
 // synth-riding-bear-amulet-0). Die Namen sind in den Daten eindeutig.
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "hexen";
 export const NAV_LABEL = "Hexen & Fusion";
 export const DEEPLINK = "/#sec-witches";
@@ -47,8 +49,8 @@ function teile(S, SIGIL) {
   const amulette = other.filter((c) => SIGIL[clean(c.name)]);
   const sonstige = other.filter((c) => !SIGIL[clean(c.name)]);
   // Stufen-Cores nach Familie, dann Stufe; Effekt-Cores und Sonstiges alphabetisch.
-  const byFam = (a, b) => a.family.localeCompare(b.family, "en") || a.tier - b.tier;
-  const byName = (a, b) => clean(a.name).localeCompare(clean(b.name), "en");
+  const byFam = (a, b) => deN(a.family).localeCompare(deN(b.family), "de") || a.tier - b.tier;
+  const byName = (a, b) => deN(clean(a.name)).localeCompare(deN(clean(b.name)), "de");
   stufen.sort(byFam); effekt.sort(byName); sonstige.sort(byName);
   return { stufen, effekt, amulette, sonstige };
 }
@@ -81,7 +83,7 @@ function witchCard(w, ctx) {
   const { esc, has, imgSrc, slug } = ctx.helpers;
   const farbe = /^#[0-9a-f]{3,8}$/i.test(w.color || "") ? ` style="--hx-c:${w.color}"` : "";
   const img = has(w.img)
-    ? `<img class="hx-img" loading="lazy" src="${esc(imgSrc(w.img))}" alt="${esc(w.name)} in Crimson Desert" width="512" height="512">`
+    ? `<img class="hx-img" loading="lazy" src="${esc(imgSrc(w.img))}" alt="${esc(deN(w.name))} in Crimson Desert" width="512" height="512">`
     : "";
   const liste = (arr) => arr.map((s) => `• ${esc(s)}`).join("<br>");
   const stats = [];
@@ -89,12 +91,12 @@ function witchCard(w, ctx) {
   if (has(w.location)) stats.push(["Wohnort", esc(w.location)]);
   if ((w.services || []).length) stats.push(["Dienste", liste(w.services)]);
   if ((w.quests || []).length) stats.push(["Questlinie", liste(w.quests)]);
-  if ((w.sanctums || []).length) stats.push(["Sanctums", esc(w.sanctums.join(", "))]);
+  if ((w.sanctums || []).length) stats.push(["Sanctums", esc(deT(w.sanctums.join(", ")))]);
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${v}</li>`).join("");
   const tip = has(w.tip) ? `<p class="strat"><b>Tipp:</b> ${esc(w.tip)}</p>` : "";
   return `<article class="card hx-card" id="hexe-${slug(w.name)}"${farbe}>
 ${img}
-<h3>${esc(w.name)}</h3>
+<h3>${esc(deN(w.name))}</h3>
 <ul class="stats">${statsHtml}</ul>
 ${tip}
 </article>`;
@@ -103,14 +105,14 @@ ${tip}
 function synthRow(c, ctx, opts = {}) {
   const { esc, has, imgSrc, slug } = ctx.helpers;
   const thumb = has(c.icon)
-    ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(SYNTH_CDN + c.icon))}" alt="${esc(opts.anzeige || clean(c.name))} in Crimson Desert" width="256" height="256">`
+    ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(SYNTH_CDN + c.icon))}" alt="${esc(deN(opts.anzeige || clean(c.name)))} in Crimson Desert" width="256" height="256">`
     : "";
-  const name = opts.anzeige || clean(c.name);
+  const name = deN(opts.anzeige || clean(c.name));
   const effekt = opts.effektHtml != null ? opts.effektHtml : (has(c.effect) ? esc(c.effect) : '<span class="muted">Effekt nicht erfasst</span>');
-  const slot = has(c.slot) ? `<span class="hx-slot">${esc(SLOT_DE[c.slot] || c.slot)}</span>` : "";
+  const slot = has(c.slot) ? `<span class="hx-slot">${esc(SLOT_DE[c.slot] || deT(c.slot))}</span>` : "";
   return `<tr id="synth-${slug(c.name)}">
 <td>${thumb}${esc(name)}</td>
-<td>${esc(c.recipe)}</td>
+<td>${esc(deT(c.recipe))}</td>
 <td>${effekt}</td>
 <td>${slot}</td>
 <td>${c.price ? esc(silber(c.price)) : ""}</td>
@@ -140,7 +142,7 @@ export function build(ctx) {
   const amuletRow = (c) => {
     const m = SIGIL[clean(c.name)];
     if (!MOUNTS.some((x) => x.name === m.mount)) throw new Error(`hexen.mjs: Mount ${m.mount} nicht in MOUNTS`);
-    const effektHtml = `Schaltet das Reittier <a href="/mounts#mount-${slug(m.mount)}">${esc(m.mount)}</a> dauerhaft frei; herstellen bei der Hexe unter „Abyss-Ausrüstung herstellen“ › „Besondere Gegenstände“, danach aus dem Inventar benutzen`;
+    const effektHtml = `Schaltet das Reittier <a href="/mounts#mount-${slug(m.mount)}">${esc(deN(m.mount))}</a> dauerhaft frei; herstellen bei der Hexe unter „Abyss-Ausrüstung herstellen“ › „Besondere Gegenstände“, danach aus dem Inventar benutzen`;
     return synthRow(c, ctx, { anzeige: m.sigil, effektHtml });
   };
 
@@ -183,7 +185,7 @@ ${sonstigeSection}`;
         "@type": "ItemList",
         name: "Hexen in Crimson Desert",
         numberOfItems: W.length,
-        itemListElement: W.map((w, i) => ({ "@type": "ListItem", position: i + 1, name: w.name })),
+        itemListElement: W.map((w, i) => ({ "@type": "ListItem", position: i + 1, name: deN(w.name) })),
       },
     ],
   };

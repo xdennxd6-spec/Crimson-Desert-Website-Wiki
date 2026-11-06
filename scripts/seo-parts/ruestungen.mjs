@@ -17,6 +17,7 @@
 // ctx = { data: {...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
 import { dlcNeu } from "./_dlc-neu.mjs";
+import { deN, deT } from "./_de.mjs";
 
 export const SLUG = "ruestungen";
 export const NAV_LABEL = "Rüstungen";
@@ -82,7 +83,7 @@ export function build(ctx) {
   const row = (a) => {
     const img = ARMOR_IMGS[a.name];
     const thumb = has(img)
-      ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(a.name)}" width="34" height="34">`
+      ? `<img class="thumb" loading="lazy" src="${esc(imgSrc(img))}" alt="${esc(deN(a.name))}" width="34" height="34">`
       : "";
     // td.muted (nicht span.muted) nutzen — nur dafuer existiert eine Regel in SHARED_CSS.
     const noteTd = has(a.notes) ? `<td>${esc(a.notes)}</td>` : `<td class="muted">–</td>`;
@@ -91,8 +92,8 @@ export function build(ctx) {
     // Etikett "DLC" (Vertrag 31.10.2026: neue DLC-Teile tragen das Feld dlc); span.dlc-gtag aus seo-parts/charting-the-unknown.mjs
     const dlcTag = a.dlc ? `<span class="dlc-gtag" title="Neu mit dem DLC ${esc(a.dlc)}">DLC</span>` : "";
     return `<tr>
-<td>${thumb}${esc(a.name)}${dlcTag}</td>
-<td>${esc(a.effect)}${a.val_q ? ` <span class="ctu-flag">unbestätigt: ${esc(a.val_q)}</span>` : ""}</td>
+<td>${thumb}${esc(deN(a.name))}${dlcTag}</td>
+<td>${esc(deT(a.effect))}${a.val_q ? ` <span class="ctu-flag">unbestätigt: ${esc(a.val_q)}</span>` : ""}</td>
 <td>${esc(a.source)}</td>
 ${provTd}
 ${noteTd}
@@ -109,8 +110,8 @@ ${noteTd}
     .filter((t) => ARMOR.some((a) => typ(a) === t))
     .map((t) => {
       const items = ARMOR.filter((a) => typ(a) === t)
-        .sort((a, b) => a.name.localeCompare(b.name, "de"));
-      return `<h2>${esc(t)} (${items.length})</h2>
+        .sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de"));
+      return `<h2 data-anker="${esc(t)} (${items.length})">${esc(deT(t))} (${items.length})</h2>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Rüstung</th><th>Effekt</th><th>Fundort</th><th>Quellenlage</th><th>Anmerkung</th></tr></thead>
 <tbody>${items.map(row).join("\n")}</tbody>
@@ -124,7 +125,7 @@ ${noteTd}
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Rüstungen",
     intro: "Diese Rüstungsteile kamen mit dem ersten DLC und tragen in den Tabellen unten das Etikett <span class=\"dlc-gtag\">DLC</span>. Ein Klick führt zur Zeile auf der DLC-Seite mit Effekt und Fundort.",
-    items: ARMOR.filter((a) => a.dlc).sort((a, b) => a.name.localeCompare(b.name, "de")).map((a) => ({ name: a.name, info: [a.type, a.source].filter(has).join(" · "), pfx: "ruestung" })),
+    items: ARMOR.filter((a) => a.dlc).sort((a, b) => deN(a.name).localeCompare(deN(b.name), "de")).map((a) => ({ name: deN(a.name), info: deT([a.type, a.source].filter(has).join(" · ")), pfx: "ruestung" })),
   })}
 ${sections}`;
 
@@ -137,7 +138,7 @@ ${sections}`;
         name: "Alle Rüstungen in Crimson Desert",
         numberOfItems: ARMOR.length,
         itemListElement: ARMOR.map((a, i) => ({
-          "@type": "ListItem", position: i + 1, name: a.name,
+          "@type": "ListItem", position: i + 1, name: deN(a.name),
         })),
       },
     ],

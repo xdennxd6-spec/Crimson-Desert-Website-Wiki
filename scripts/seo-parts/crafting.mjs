@@ -2,6 +2,8 @@
 //
 // ctx = { data: {...alle Datenstrukturen...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "crafting";
 export const NAV_LABEL = "Herstellen & Farmen";
 export const DEEPLINK = "/#sec-crafting";
@@ -56,7 +58,7 @@ export function build(ctx) {
   const { CRAFTING } = ctx.data;
   const { esc, has, imgSrc, breadcrumbLd, SITE, CRAFT_CDN } = ctx.helpers;
 
-  const byName = (a, b) => a.name.localeCompare(b.name, "de");
+  const byName = (a, b) => deN(a.name).localeCompare(deN(b.name), "de");
 
   // Eine Zeile pro Rezept. conf "low"/"medium" wird sichtbar markiert (Regel: Seite bleibt
   // ehrlich statt unsichere Werte als gesichert auszugeben); spirit/note/conflict haengen
@@ -79,15 +81,15 @@ export function build(ctx) {
       : "";
     // c.spirit-Werte beginnen selbst fast immer mit "Spirit ..." (z.B. "Spirit +24") -
     // kein zusaetzliches Label davorsetzen, das waere redundant ("Spirit: Spirit +24").
-    const spiritLine = has(c.spirit) ? `<br><span class="muted">${esc(c.spirit)}</span>` : "";
+    const spiritLine = has(c.spirit) ? `<br><span class="muted">${esc(deT(c.spirit))}</span>` : "";
     const noteLine = has(c.note) ? `<br><span class="muted">Tipp: ${esc(c.note)}</span>` : "";
     const conflictLine = has(c.conflict) ? `<br><span class="muted">Hinweis: ${esc(c.conflict)}</span>` : "";
     const sourceLine = has(c.source) ? `<br><span class="muted">Quelle: ${esc(c.source)}</span>` : "";
     return `<tr>
-<td title="Item-Stufe ${esc(c.grade)}">${thumb}${esc(c.name)}</td>
-<td>${esc(c.ingr)}${flexTxt}</td>
+<td title="Item-Stufe ${esc(c.grade)}">${thumb}${esc(deN(c.name))}</td>
+<td>${esc(deT(c.ingr))}${flexTxt}</td>
 <td>${esc(c.effect)}${confTag}${spiritLine}${noteLine}${conflictLine}${sourceLine}</td>
-<td>${esc(c.station)}</td>
+<td>${esc(deT(c.station))}</td>
 </tr>`;
   };
 
@@ -107,7 +109,7 @@ ${table(elixirItems)}`;
     .filter((t) => foodAll.some((c) => c.tier === t))
     .map((t) => {
       const items = foodAll.filter((c) => c.tier === t).sort(byName);
-      return `<h3>${esc(t)} (${items.length})</h3>
+      return `<h3>${esc(deT(t))} (${items.length})</h3>
 ${table(items)}`;
     }).join("\n");
 
@@ -137,7 +139,7 @@ ${gadgetSection}`;
         name: "Alle Crafting-Rezepte in Crimson Desert",
         numberOfItems: CRAFTING.length,
         itemListElement: CRAFTING.map((c, i) => ({
-          "@type": "ListItem", position: i + 1, name: c.name,
+          "@type": "ListItem", position: i + 1, name: deN(c.name),
         })),
       },
     ],

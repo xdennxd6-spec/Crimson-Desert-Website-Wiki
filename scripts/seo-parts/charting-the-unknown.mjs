@@ -20,6 +20,8 @@
 // und die gekennzeichneten Waffen/Ruestungen. Accessoires und Abyss-Kerne mit dlc stehen nur als Hinweiszeile (keine Zeile).
 // verify-seo.mjs rechnet die Soll-Menge unabhaengig aus denselben Datenstrukturen nach.
 
+import { deN, deT } from "./_de.mjs";
+
 export const SLUG = "charting-the-unknown";
 export const NAV_LABEL = "Charting the Unknown";
 export const DEEPLINK = "/#sec-dlc";
@@ -128,7 +130,8 @@ export function build(ctx) {
   };
   // Zahl nur aus einer Quelle (val_q aus d01/d02): Vermerk; val_part = nur ein Teil unbestaetigt, daher nicht grau.
   const valQ = (t, x) => (!x || !x.val_q ? esc(t) : x.val_part ? `${esc(t)} ${flag("unb", x.val_q)}` : `<span class="ctu-unb">${esc(t)} ${flag("unb", x.val_q)}</span>`);
-  const name = (e) => `<strong>${esc(e.name)}</strong>${e.de ? ` (${esc(e.de)})` : ""}${e.c && e.c !== "ok" ? " " + flag(e.c, e.q) : ""}`;
+  const vT = (x) => (typeof x === "string" ? deT(x) : x);
+  const name = (e) => `<strong>${esc(deN(e.name))}</strong>${e.de && e.de !== deN(e.name) ? ` (${esc(e.de)})` : ""}${e.c && e.c !== "ok" ? " " + flag(e.c, e.q) : ""}`;
   const facts = (rows) => `<dl class="ctu-facts">${rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${val(v)}</dd></div>`).join("")}</dl>`;
   const list = (arr) => `<ul class="ctu-list">${[].concat(arr || []).map((x) => `<li>${val(x)}</li>`).join("")}</ul>`;
 
@@ -192,13 +195,13 @@ ${table(["Ware", "Einkauf", "Verkauf", "Hinweis"],
   const bau = `<h2>Schiffsbau und Besatzung</h2>
 ${facts(D.SHIPBUILD)}
 <h3 class="ctu-h">Besatzung: ${D.CREW.length} Rollen</h3>
-<ul class="ctu-list">${D.CREW.map((r) => `<li><b>${esc(r.role)}:</b> ${esc(r.d)}</li>`).join("")}</ul>
+<ul class="ctu-list">${D.CREW.map((r) => `<li><b>${esc(deT(r.role))}:</b> ${esc(r.d)}</li>`).join("")}</ul>
 ${list(D.CREW_NOTES)}`;
 
   const teile = `<h2>Schiffsteile (${D.SHIP_PARTS.length})</h2>
 ${list(D.PART_NOTES)}
 ${table(["Teil", "Typ", "Größe", "Händler / Erhalt", "Preis", "Boni"],
-    D.SHIP_PARTS.map((p) => tr(rid("teil", p.name), p, [name(p), esc(p.type), val(p.size), val(p.vendor), val(p.price), val(p.bonus)])))}`;
+    D.SHIP_PARTS.map((p) => tr(rid("teil", p.name), p, [name(p), esc(deT(p.type)), val(vT(p.size)), val(p.vendor), val(p.price), val(p.bonus)])))}`;
 
   const iCols = optCols(D.ISLANDS, [["where", "Lage"], ["nexus", "Abyss Nexus"], ["unlock", "Erschließung"]]);
   const inseln = `<h2>Inseln (${D.ISLANDS.length})</h2>
@@ -236,7 +239,7 @@ ${facts(D.MOUNT_FACTS)}
 ${list(D.QUEST_NOTES)}
 ${table(["Questreihe", "Figur / Start", D.QUESTS.some((q) => stepsOf(q).length) ? "Schritte und Unterquests (Reihenfolge laut Guide)" : "Unterquests (Reihenfolge laut Guide)", "Belohnungen"],
     D.QUESTS.map((q) => tr(rid("quest", q.name), q, [name(q),
-      esc(q.who) + (q.start ? "<br>Start: " + val(q.start) : "") + (val(q.req) ? "<br>Voraussetzung: " + val(q.req) : ""),
+      esc(deT(q.who)) + (q.start ? "<br>Start: " + val(q.start) : "") + (val(q.req) ? "<br>Voraussetzung: " + val(q.req) : ""),
       { h: subsHtml(q), cls: "ctu-sub" }, val(q.rewards) + (q.note ? "<br>" + val(q.note) : "")])))}
 <p class="note">Alle übrigen Graumähnen-Quests stehen bei den <a href="/fraktionen">Fraktionsquests</a>.</p>`;
 
@@ -250,7 +253,7 @@ ${table(["Boss", "Ort und Kontext", "Beute"],
 ${facts(D.GARDEN_RULES)}
 ${table(["Gruppe", "Bosse", "Belohnung"],
     D.GARDEN.map((g) => {
-      const links = [].concat(g.b || []).map((n) => `<a href="/bosse#boss-${slug(n)}">${esc(n)}</a>`).join(", ");
+      const links = [].concat(g.b || []).map((n) => `<a href="/bosse#boss-${slug(n)}">${esc(deN(n))}</a>`).join(", ");
       return tr(rid("garten", g.name), null, [`${esc(g.n)}. ${esc(g.name)}`,
         g.bc === "ok" ? links : `<span class="ctu-unb">${links}</span> ${flag("unb", g.bq || "GameRant")}`, esc(g.reward)]);
     }))}
@@ -270,18 +273,18 @@ ${table(["Wohnsitz", "Ort", "Erwerb", "Hinweis"],
 ${list(D.GEAR_NOTES)}
 ${D.GEAR_W.length ? `<h3 class="ctu-h">Waffen (${D.GEAR_W.length})</h3>
 ${table(["Waffe", "Typ", "ATK", "Fundort"], D.GEAR_W.map((w) => tr(rid("waffe", w.name), null,
-    [`<strong>${esc(w.name)}</strong><span class="dlc-gtag">DLC</span>`, esc(w.type || ""), has(w.atk) ? valQ(w.atk, w) : has(w.def) ? valQ("DEF " + w.def, w) : '<span class="ctu-nb">nicht erfasst</span>', has(w.source) ? esc(w.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
+    [`<strong>${esc(deN(w.name))}</strong><span class="dlc-gtag">DLC</span>`, esc(deT(w.type || "")), has(w.atk) ? valQ(w.atk, w) : has(w.def) ? valQ("DEF " + w.def, w) : '<span class="ctu-nb">nicht erfasst</span>', has(w.source) ? esc(w.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
 ${D.GEAR_A.length ? `<h3 class="ctu-h">Rüstungen (${D.GEAR_A.length})</h3>
 ${table(["Rüstung", "Teil", "Effekt", "Fundort"], D.GEAR_A.map((a) => tr(rid("ruestung", a.name), null,
-    [`<strong>${esc(a.name)}</strong><span class="dlc-gtag">DLC</span>`, esc(a.type || ""), has(a.effect) ? valQ(a.effect, a) : '<span class="ctu-nb">nicht erfasst</span>', has(a.source) ? esc(a.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
+    [`<strong>${esc(deN(a.name))}</strong><span class="dlc-gtag">DLC</span>`, esc(deT(a.type || "")), has(a.effect) ? valQ(a.effect, a) : '<span class="ctu-nb">nicht erfasst</span>', has(a.source) ? esc(a.source) : '<span class="ctu-nb">nicht erfasst</span>'])))}` : ""}
 ${D.GEAR_EXTRA.length ? `<h3 class="ctu-h">Weitere Ausrüstung (${D.GEAR_EXTRA.length})</h3>
 ${table(["Name", "Art", "Slot", "Charakter", "Werte", "Erhalt"], D.GEAR_EXTRA.map((g) => {
     const s = val(g.source), r = val(g.req);
-    return tr(rid("geraet", g.name), g, [name(g), cell(g.kind, true), cell(g.slot, true), cell(g.char, true), cell(g.stats, true),
+    return tr(rid("geraet", g.name), g, [name(g), cell(vT(g.kind), true), cell(g.slot, true), cell(vT(g.char), true), cell(g.stats, true),
       s || r ? s + (r ? (s ? "<br>" : "") + "Voraussetzung: " + r : "") : '<span class="ctu-nb">nicht belegt</span>']);
   }))}` : ""}
-${D.GEAR_X.length ? `<p class="note">Neue Accessoires: ${D.GEAR_X.map((x) => `<strong>${esc(x.name)}</strong> (${[x.type, x.source].filter(Boolean).map(esc).join(", ")})`).join("; ")}. Details auf der Seite <a href="/accessoires">Accessoires</a>.</p>` : ""}
-${D.GEAR_K.length ? `<p class="note">Neue Abyss-Kerne: ${D.GEAR_K.map((x) => `<strong>${esc(x.name)}</strong> (${[x.slot, x.source].filter(Boolean).map(esc).join(", ")})`).join("; ")}. Details auf der Seite <a href="/abyss-cores">Abyss-Ausrüstung</a>.</p>` : ""}
+${D.GEAR_X.length ? `<p class="note">Neue Accessoires: ${D.GEAR_X.map((x) => `<strong>${esc(deN(x.name))}</strong> (${[deT(x.type), x.source].filter(Boolean).map(esc).join(", ")})`).join("; ")}. Details auf der Seite <a href="/accessoires">Accessoires</a>.</p>` : ""}
+${D.GEAR_K.length ? `<p class="note">Neue Abyss-Kerne: ${D.GEAR_K.map((x) => `<strong>${esc(deN(x.name))}</strong> (${[deT(x.slot), deT(x.source)].filter(Boolean).map(esc).join(", ")})`).join("; ")}. Details auf der Seite <a href="/abyss-cores">Abyss-Ausrüstung</a>.</p>` : ""}
 ${nGear ? "" : '<p class="note">Im Datenbestand ist noch keine Waffe und keine Rüstung als DLC-Inhalt gekennzeichnet; die Einträge erscheinen hier automatisch.</p>'}
 ${tools.length ? `<p class="note">Offiziell neu sind außerdem im Kampf einsetzbare Alltagswerkzeuge: ${tools.map((t) => `${esc(t)} (${esc(D.GEAR_TOOLS_DE[t] || "")})`).join(", ")}. Werte, Fundort und Waffentyp sind nicht belegt.</p>` : ""}
 <p class="note">Alle gekennzeichneten Einträge tragen auf den Seiten <a href="/waffen">Waffen</a> und <a href="/ruestungen">Rüstungen</a> das Etikett <span class="dlc-gtag">DLC</span>. Jede Themen-Seite hat oben einen eigenen Abschnitt „Neu mit Charting the Unknown“: <a href="/waffen#dlc">Waffen</a>, <a href="/ruestungen#dlc">Rüstungen</a>, <a href="/accessoires#dlc">Accessoires</a>, <a href="/abyss-cores#dlc">Abyss-Ausrüstung</a>, <a href="/bosse#dlc">Bosse</a>, <a href="/mounts#dlc">Reittiere</a> und <a href="/hauptquests#dlc">Quests</a>.</p>`;
@@ -324,7 +327,7 @@ ${quellen}`;
         "@type": "ItemList",
         name: "Schiffe im DLC Charting the Unknown",
         numberOfItems: D.SHIPS.length,
-        itemListElement: D.SHIPS.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name })),
+        itemListElement: D.SHIPS.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: deN(s.name) })),
       },
     ],
   };
