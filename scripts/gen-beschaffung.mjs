@@ -112,20 +112,32 @@ function ladenVon(npcId, npcName) {
 const NPC_WIKI = new Map(); for (const L of Object.values(NPCS)) for (const n of L) NPC_WIKI.set(kl(n.name), n);
 for (const w of g("WITCHES")) { const k = kl(w.name.replace(/^Hexe\s+/, "")); NPC_WIKI.set(k, { name: w.name, region: w.location, bio: "", kapText: w.chapter }); }
 // ── Kapitel-Ketten ──
-const K_HAUPT = new Map(); for (const m of MQ) { const c = m.ch; for (const q of m.quests) K_HAUPT.set(kl(q.q), { ch: c, name: m.name, q: q.q, miss: q.miss, reward: q.reward }); }
+const K_HAUPT = new Map(); for (const m of MQ) { const c = m.ch; for (const q of m.quests) K_HAUPT.set(kl(q.q), { ch: c, name: m.name, q: q.q, miss: q.miss, reward: q.reward, conf: q.conf }); }
 const K_NEBEN = new Map(); const kap = (t) => { const m = String(t || "").match(/Kapitel\s+(\d+)|Kap\.\s*(\d+)/); return m ? +(m[1] || m[2]) : null; };
-for (const s of SQ) K_NEBEN.set(kl(s.q), { kap: kap(s.prereq) ?? kap(s.trigger), quelle: "Nebenquests", q: s.q, miss: s.miss, prereq: s.prereq, trigger: s.trigger });
-for (const r of FD.regions) for (const f of r.factions) for (const q of f.quests || []) if (!K_NEBEN.has(kl(q.q))) K_NEBEN.set(kl(q.q), { kap: kap(q.prereq) ?? kap(q.trigger), quelle: `Fraktion ${f.name}`, q: q.q, miss: q.miss, prereq: q.prereq, trigger: q.trigger });
+for (const s of SQ) K_NEBEN.set(kl(s.q), { kap: kap(s.prereq) ?? kap(s.trigger), quelle: "Nebenquests", q: s.q, miss: s.miss, prereq: s.prereq, trigger: s.trigger, conf: s.conf });
+for (const r of FD.regions) for (const f of r.factions) for (const q of f.quests || []) if (!K_NEBEN.has(kl(q.q))) K_NEBEN.set(kl(q.q), { kap: kap(q.prereq) ?? kap(q.trigger), quelle: `Fraktion ${f.name}`, q: q.q, miss: q.miss, prereq: q.prereq, trigger: q.trigger, conf: q.conf });
 const zahlKap = (ch) => (typeof ch === "number" ? ch : /^\d+$/.test(String(ch)) ? +ch : null);
-function kapitelVonQuest(namen) { // namen: Quest- und Missionsnamen, die zur selben Kette gehören
-  for (const n of namen) { const h = K_HAUPT.get(kl(n)); if (h) return { kapitel: zahlKap(h.ch), txt: zahlKap(h.ch) == null ? String(h.ch) : "", beleg: `Hauptquest „${h.q}“ steht im Wiki in Kapitel ${h.ch} (${h.name})`, miss: h.miss }; }
-  for (const n of namen) { const s = K_NEBEN.get(kl(n)); if (s && s.kap != null) return { kapitel: s.kap, txt: "", beleg: `Quest „${s.q}“: Wiki (${s.quelle}) nennt als Voraussetzung Kapitel ${s.kap}`, miss: s.miss }; }
-  for (const n of namen) { const s = K_NEBEN.get(kl(n)); if (s) return { kapitel: null, txt: "", beleg: "", miss: s.miss, voraus: s.prereq, q: s.q }; }
-  return null;
+// gruppen: zuerst Namen auf Missionsebene (Belohnungsmission und ihre eigene Kette), dann die Quest. Widersprüchliche Treffer = kein Kapitel.
+// Nur Wiki-Einträge mit conf "high" und ohne Vermerk „unbestätigt“ zählen als Beleg für ein Kapitel.
+const sicher = (x) => (x.conf == null || x.conf === "high") && !/unbestätigt|SEO-Quellen/i.test(`${x.prereq || ""} ${x.trigger || ""}`);
+function kapitelVonQuest(gruppen) {
+  let rest = null;
+  for (const namen of gruppen) {
+    const H = namen.map((n) => K_HAUPT.get(kl(n))).filter(Boolean);
+    const Hs = H.filter(sicher); const ch = [...new Set(Hs.map((h) => String(h.ch)))];
+    if (ch.length === 1) { const h = Hs[0]; return { kapitel: zahlKap(h.ch), txt: zahlKap(h.ch) == null ? String(h.ch) : "", beleg: `Hauptquest „${h.q}“ steht im Wiki in Kapitel ${h.ch} (${h.name})`, miss: h.miss }; }
+    if (ch.length > 1) return { kapitel: null, txt: "", beleg: "", mehrdeutig: true, miss: H.some((h) => h.miss) };
+    const S = namen.map((n) => K_NEBEN.get(kl(n))).filter(Boolean);
+    const Ss = S.filter((x) => x.kap != null && sicher(x)); const k2 = [...new Set(Ss.map((x) => x.kap))];
+    if (k2.length === 1) { const x = Ss[0]; return { kapitel: x.kap, txt: "", beleg: `Quest „${x.q}“: Wiki (${x.quelle}) nennt als Voraussetzung Kapitel ${x.kap}`, miss: x.miss }; }
+    if (k2.length > 1) return { kapitel: null, txt: "", beleg: "", mehrdeutig: true };
+    if (!rest && S.length) rest = { kapitel: null, txt: "", beleg: "", miss: S[0].miss, voraus: S[0].prereq, q: S[0].q };
+    if (H.length && !rest) rest = { kapitel: null, txt: "", beleg: "", miss: H[0].miss };
+  }
+  return rest;
 }
-function missionsNamen(mis) { // Quest + ganze Kette
-  const n = []; for (const q of mis.getMissionIsPartOfQuests || []) { n.push(q.name); const Q = QUE.get(String(q.id)); if (Q) for (const c of Q.fullQuestChain || []) n.push(c.name); }
-  n.push(mis.name); for (const c of mis.fullMissionChain || []) n.push(c.name); return [...new Set(n)];
+function missionsNamen(mis) { // [Missionsebene, Questebene]; die übrige Questkette gehört zu anderen Quests und zählt nicht
+  return [[...new Set([mis.name, ...(mis.fullMissionChain || []).map((c) => c.name)])], [...new Set((mis.getMissionIsPartOfQuests || []).map((q) => q.name))]];
 }
 // Kapitel über Wiki-Texte, die den Namen des Teils nennen: Belohnung einer Hauptquest, Kapitelführer.
 const NAMEN_KAPITEL = []; for (const m of MQ) for (const q of m.quests) if (q.reward && q.reward !== "—") NAMEN_KAPITEL.push({ t: norm(q.reward), ch: zahlKap(m.ch), beleg: `Wiki: Hauptquest „${q.q}“ (Kapitel ${m.ch}) nennt das Teil als Belohnung`, art: "quest", q }); for (const c of g("CHAPTERS")) if (c.items) NAMEN_KAPITEL.push({ t: norm(c.items), ch: zahlKap(c.num), beleg: `Wiki-Kapitelführer nennt das Teil in Kapitel ${c.num}`, art: "kap" });
@@ -137,7 +149,7 @@ const UNLOCK = (u, npc) => { if (!u) return null; if (/Trust points/i.test(u)) r
 const qUrlItem = (id) => `https://questlog.gg/crimson-desert/en/db/item/${id}`;
 const EXKLUSIV = /Vorbesteller|PS5-exklusiv|Twitch-Drop|Deluxe Edition|Bonusinhalt|Vorbestell|Pre-?order/i;
 const LEER = /^(Fundort( und Händler)? nicht (erfasst|belegt)|Fundort nicht belegt|nicht erfasst)\b/i;
-function artVon(t, e) { if (e.dlc) return "dlc"; if (/^(Händler|Kauf|Verkauf|Contribution Shop|Beitragsshop)/i.test(t)) return "haendler"; if (/^(Boss|Drop:? |Sieg über|Bossdrop)/i.test(t)) return "boss"; if (/^(Reward|Belohnung|Missionsbelohnung|Storybelohnung|Quest)/i.test(t)) return "quest"; if (/^(Herstellung|Rezept|Craft|Schmiede)/i.test(t)) return "rezept"; if (/^(Tresor|Truhe|Schatz|Fund|Liegt|Geh )/i.test(t)) return "welt"; return "sonst"; }
+function artVon(t, e) { if (e.dlc) return "dlc"; if (/^(Händler|Kauf|Verkauf|Contribution Shop|Beitragsshop)/i.test(t)) return "haendler"; if (/^(Boss|Sieg über|Bossdrop)/i.test(t)) return "boss"; if (/^(Reward|Belohnung|Missionsbelohnung|Storybelohnung|Quest)/i.test(t)) return "quest"; if (/^(Herstellung|Rezept|Craft|Schmiede)/i.test(t)) return "rezept"; if (/^(Tresor|Truhe|Schatz|Fund|Liegt|Geh )/i.test(t)) return "welt"; return "sonst"; }
 const bericht = { haendlerOhneOrt: {}, haendlerRegion: {}, haendlerWeg: {}, namensAbweichung: [], bossOhneOrt: {}, questOhneKapitel: {}, ohneWeg: [] };
 const BOSS_DROP = new Map(); for (const b of BOSSES) for (const f of [b.drop_weapon, b.drop_abyss_gear]) for (const t of String(f || "").split(/,|\/|;| und /)) { const k = kl(t.replace(/\(.*?\)/g, "").trim()); if (k.length > 3) (BOSS_DROP.get(k) || BOSS_DROP.set(k, []).get(k)).push(b); }
 const bossName = (s) => String(s || "").replace(/\s*\((Phase[^)]*|Final)\)/, "");
@@ -206,7 +218,7 @@ function eintrag(tab, e0) {
       const stadt = stadtVon(s.id);
       if (stadt) { const p = findePlatz(stadt); if (p) { ort = ortPlatz(p, `NPC ${s.name}: Spieltext nennt ${stadt}`); beleg = `questlog itemIsSoldByNpcs; Spieltext des NPC nennt ${stadt}`; nurStadt = true; } }
       if (!ort && stadt) { const L = SHOPS.filter((l) => norm(l.titel).includes(norm(stadt))); if (L.length) { const m = (a) => a.slice().sort((p, q) => p - q)[a.length >> 1]; const x = m(L.map((l) => l.x)), z = m(L.map((l) => l.z)); const n = naechster(x, z); ort = ortPlatz({ knoten: n.p ? n.p.knoten : "", en: stadt, de: DE_NAMES[stadt] || stadt, x, z, thgl: true }, `NPC ${s.name}: Spieltext nennt ${stadt}; Lage der Stadt über die th.gl-Läden mit „${stadt}“ im Namen, geprüft ${DATUM}`); beleg = `questlog itemIsSoldByNpcs; Spieltext des NPC nennt ${stadt}`; nurStadt = true; } }
-      if (!ort && /Greymane/i.test(String(w?.region || "") + " " + String(npcInfo.get(s.id)?.description || "") + " " + String(npcInfo.get(s.id)?.npcFaction?.name || ""))) { ort = ortPlatz(LAGER, "Graumähnen-Camp: Spieldaten-Knoten Node_Her_GreymaneCamp"); beleg = `questlog itemIsSoldByNpcs; ${s.name} gehört laut questlog und Wiki zu den Graumähnen, Camp aus den Spieldaten`; }
+      if (!ort && /Greymane/i.test(String(w?.region || "") + " " + String(npcInfo.get(s.id)?.description || "") + " " + String(npcInfo.get(s.id)?.npcFaction?.name || ""))) { ort = ortPlatz(LAGER, "Graumähnen-Camp: Spieldaten-Knoten Node_Her_GreymaneCamp"); beleg = `questlog itemIsSoldByNpcs; ${s.name} gehört laut Spieltext bzw. questlog-Fraktion zu den Graumähnen, Lage des Camps aus den Spieldaten`; }
       if (!ort && w) { const p = findePlatz(w.region); if (p) { ort = ortPlatz(p, `NPC ${s.name}: Wiki-Region „${w.region}“`); beleg = `questlog itemIsSoldByNpcs; Standort Wiki NPC-Tabelle „${w.region}“`; } else { const r = findeRegion(w.region); if (r) { ort = ortRegion(r, `NPC ${s.name}: Wiki-Region „${w.region}“`); beleg = `questlog itemIsSoldByNpcs; Region Wiki NPC-Tabelle „${w.region}“`; regionsOrt = true; } } }
       const info = npcInfo.get(s.id);
       if (!ort && info && info.description) { const t = info.description; const p = findePlatz(t); if (p) { ort = ortPlatz(p, `NPC ${s.name}: Spieltext nennt ${p.en || p.de}`); beleg = `questlog itemIsSoldByNpcs; Spieltext des NPC nennt den Ort`; } else { const r = findeRegion(t); if (r) { ort = ortRegion(r, `NPC ${s.name}: Spieltext nennt ${r}`); beleg = `questlog itemIsSoldByNpcs; Spieltext des NPC nennt die Region`; regionsOrt = true; } } }
@@ -217,7 +229,7 @@ function eintrag(tab, e0) {
     if (regionsOrt) { (bericht.haendlerRegion[s.name] ||= 0); bericht.haendlerRegion[s.name]++; }
     const txtB = [`Verkauf bei ${s.name}.`]; if (regionsOrt) txtB.push("Der genaue Standort ist nicht belegt, nur die Region."); else if (nurStadt) txtB.push("Der Spieltext nennt nur den Ort, der Stand selbst ist nicht markiert.");
     const bed = []; if (unlock) bed.push(unlock);
-    if (extra) { const q = extra.match(/Available after completing (?:"([^"]+)" in )?the quest "([^"]+)"/); if (q) { bed.push(`Erst nach der Quest „${q[2]}“${q[1] ? ` (Abschnitt „${q[1]}“)` : ""}`); const kk = kapitelVonQuest([q[2], q[1]].filter(Boolean)); if (kk && (kk.kapitel != null || kk.txt)) abK.push({ ...kk, beleg: `Laden laut th.gl erst nach Quest „${q[2]}“; ${kk.beleg}`, rang: 3 }); else abK.push({ kapitel: null, txt: `Beim Händler erst nach der Quest „${q[2]}“`, beleg: `th.gl Ladenknoten, geprüft ${DATUM}`, rang: 6 }); } else if (/Trust/.test(extra)) { const m = extra.match(/(\d+) Trust/); bed.push(m ? `${m[1]} Vertrauen bei ${s.name} nötig` : `Vertrauen bei ${s.name} nötig`); } }
+    if (extra) { const q = extra.match(/Available after completing (?:"([^"]+)" in )?the quest "([^"]+)"/); if (q) { bed.push(`Erst nach der Quest „${q[2]}“${q[1] ? ` (Abschnitt „${q[1]}“)` : ""}`); const kk = kapitelVonQuest([[q[1]].filter(Boolean), [q[2]]]); if (kk && (kk.kapitel != null || kk.txt)) abK.push({ ...kk, beleg: `Laden laut th.gl erst nach Quest „${q[2]}“; ${kk.beleg}`, rang: 3 }); else abK.push({ kapitel: null, txt: `Beim Händler erst nach der Quest „${q[2]}“`, beleg: `th.gl Ladenknoten, geprüft ${DATUM}`, rang: 6 }); } else if (/Trust/.test(extra)) { const m = extra.match(/(\d+) Trust/); bed.push(m ? `${m[1]} Vertrauen bei ${s.name} nötig` : `Vertrauen bei ${s.name} nötig`); } }
     if (bed.length) voraus.push(`${s.name}: ${[...new Set(bed)].join(", ")}.`);
     nehmen({ art: e.dlc ? "dlc" : "haendler", ort, txt: txtB.join(" "), kosten: preis, beleg }, bed.length ? 3 : 1);
   }
@@ -226,7 +238,7 @@ function eintrag(tab, e0) {
   for (const k of namen) for (const b of BOSS_DROP.get(k) || []) {
     const bn = bossName(b.name); if (bSeen.has(bn)) continue; bSeen.add(bn);
     const ort = bossOrt(b);
-    nehmen({ art: "boss", ort: ort || undefined, txt: `Beute von Boss ${b.name}.${b.quest ? " Quest: " + String(b.quest).split(";")[0].trim() + "." : ""}`, beleg: `Wiki BOSSES (${b.name})` }, 5);
+    nehmen({ art: "boss", ort: ort || undefined, txt: `Beute von Boss ${b.name}.`, beleg: `Wiki BOSSES (${b.name})` }, 5);
     if (zahlKap(b.chapter) != null) abK.push({ kapitel: zahlKap(b.chapter), txt: "", beleg: `Beute von Boss ${b.name}, der im Wiki in Kapitel ${b.chapter} steht`, rang: 2 });
   }
   // 5) Questbelohnungen
@@ -278,7 +290,7 @@ function eintrag(tab, e0) {
     const kk = kap(kern); if (kk != null) abK.push({ kapitel: kk, txt: "", beleg: `Wiki-Quellenangabe des Eintrags nennt Kapitel ${kk}`, rang: 2 });
   }
   const tk = kapitelAusText(name); if (tk) abK.push({ kapitel: tk.ch, txt: "", beleg: tk.beleg, rang: 2 });
-  const nk = String(e.notes || "").match(/\b(?:ab|nach|in|aus|vor) Kap(?:\.|itel)\s*(\d+)/i); if (nk) abK.push({ kapitel: +nk[1], txt: "", beleg: `Wiki-Notiz des Eintrags: „${nk[0]}“`, rang: 4 });
+  const nk = String(e.notes || "").match(/\bab Kap(?:\.|itel)\s*(\d+)/i); if (nk) abK.push({ kapitel: +nk[1], txt: "", beleg: `Wiki-Notiz des Eintrags: „${nk[0]}“`, rang: 4 });
   if (EXKLUSIV.test(roh)) warnung.push("Nicht regulär im Spiel zu finden: Das Teil gehört zu einem Bonus oder einer Aktion, siehe Text.");
   if (e.req) voraus.push(String(e.req));
   // 9) Sammelquellen
@@ -318,6 +330,9 @@ for (const [t, L] of [["WEAPONS", WEAPONS], ["ARMOR", ARMOR], ["ACCESSORIES", AC
 // Nur benutzte Orte schreiben
 const benutzt = new Set(); for (const b of Object.values(BESCHAFFUNG)) for (const w of b.wege) if (w.ort) benutzt.add(w.ort);
 const ORTE_AUS = {}; for (const k of Object.keys(ORTE).sort()) if (benutzt.has(k)) ORTE_AUS[k] = Object.fromEntries(Object.entries(ORTE[k]).filter(([, v]) => v != null));
+const ohneStrich = (t) => typeof t !== "string" ? t : t.replace(/(\d)\s*[–—]\s*(\d)/g, "$1 bis $2").replace(/\s*[–—]\s*/g, ", ").replace(/,\s*,/g, ",");
+for (const b of Object.values(BESCHAFFUNG)) { for (const w of b.wege) { w.txt = ohneStrich(w.txt); if (w.kosten) w.kosten = ohneStrich(w.kosten); } for (const f of ["vor", "warn"]) if (b[f]) b[f] = ohneStrich(b[f]); b.ab.txt = ohneStrich(b.ab.txt); }
+for (const o of Object.values(ORTE_AUS)) { o.name = ohneStrich(o.name); if (o.reg) o.reg = ohneStrich(o.reg); }
 const zeilen = (o) => Object.entries(o).map(([k, v]) => `${JSON.stringify(k)}:${JSON.stringify(v)}`).join(",\n");
 const kopf = `// Beschaffungskarten: Wo und ab wann man jedes Teil bekommt. Erzeugt von scripts/gen-beschaffung.mjs am ${DATUM}, nicht von Hand ändern (Handrecherche: scripts/beschaffung-hand.json).\n// Wird erst beim Öffnen des Fundort-Fensters nachgeladen (beschLaden() in index.html). marker: genau = Koordinate oder Quellenbild, ort = benannter Ort, region = ungefähre Region.\n`;
 fs.writeFileSync(path.join(ROOT, "data/d14-beschaffung.js"), `${kopf}const ORTE={\n${zeilen(ORTE_AUS)}\n};\nconst BESCHAFFUNG={\n${zeilen(BESCHAFFUNG)}\n};\n`);
