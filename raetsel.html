@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=ef0ab101bf">
+<link rel="stylesheet" href="app.css?v=7e41ba41ca">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -1487,6 +1487,13 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <div class="ibar col-bar" id="col-bar"></div>
     <p class="col-cnt" id="cof-cnt" aria-live="polite"></p>
     <div class="col-grid" id="col-grid"></div>
+    <details class="cd-fold cd-spot su-fold" id="col-sammel">
+      <summary>
+        <span class="cd-fold-main"><h3 class="cd-fold-t" data-toc>Sammelübersicht: Deko, Möbel und Handelsware</h3><span class="cd-fold-lead">Weitere Sammel- und Handelsgegenstände nach Art: Anzahl, Beispiele, typische Quelle und Wert.</span></span>
+        <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+      </summary>
+      <div class="cd-fold-body" id="col-sammel-body"></div>
+    </details>
   </section>
   <section class="sec" id="sec-gatherables">
     <h2 class="sec-t"><span class="sec-sym">☘</span> Sammelobjekte <span class="sec-t-en">Sammelobjekte</span></h2>
@@ -10012,6 +10019,7 @@ function renderCollectibles(){
     +(list.length?'':`<p class="col-empty">Keine Einträge für diese Auswahl. <button type="button" class="ichip" onclick="setColFilter('reset')">Filter zurücksetzen</button></p>`);
   const cnt=document.getElementById('cof-cnt');if(cnt)cnt.textContent=list.length+' Einträge';
   reapplySearch(host,cnt,list.length);
+  if(typeof renderSammelUebersicht==='function')renderSammelUebersicht();
 }
 // Kennzahl-Kachel: springt zur passenden Karte und hebt sie kurz hervor (setzt Filter zurück, falls die Karte ausgefiltert ist)
 function colJump(name){

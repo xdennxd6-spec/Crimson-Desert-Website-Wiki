@@ -8146,3 +8146,10 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
 /* ZG Anfang: Zutatengruppen (Herstellen) */
 .zg-intro{margin:0 0 .6em;color:var(--gdim)}.zg-g{margin:.7em 0;padding-top:.5em;border-top:1px solid rgba(255,255,255,.08)}.zg-t{font-size:1rem;margin:0 0 .25em}.zg-en,.zg-n{color:var(--gdim);font-weight:400;font-size:.85em}.zg-m{margin:0;line-height:1.55;overflow-wrap:anywhere}.zg-h,.zg-q{color:var(--gdim);font-size:.82em;margin:.25em 0 0;overflow-wrap:anywhere}
 /* ZG Ende */
+/* SU Anfang: Sammelübersicht (Sammelgegenstände) */
+.su-fold{margin-top:1.2em}.su-intro{margin:0 0 .6em;color:var(--gdim)}.su-b{font-size:1rem;margin:1.1em 0 .5em}.su-bn{color:var(--gdim);font-weight:400;font-size:.85em}
+.su-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:.7em}
+.su-card{min-width:0;padding:.7em .85em;border:1px solid rgba(255,255,255,.09);border-radius:10px;background:rgba(255,255,255,.025)}
+.su-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2em .45em;margin:0 0 .3em;font-size:.98rem}.su-en{color:var(--gdim);font-weight:400;font-size:.84em}.su-n{margin-left:auto;font-weight:700;color:var(--gold)}
+.su-card p{margin:.32em 0 0;font-size:.88em;line-height:1.5;overflow-wrap:anywhere}.su-card p b{font-weight:600;margin-right:.25em}.su-h,.su-dlc{color:var(--gdim)}.su-v{margin-top:.5em}.su-link{max-width:100%;white-space:normal;text-align:left}
+/* SU Ende */
