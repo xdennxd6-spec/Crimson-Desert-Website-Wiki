@@ -1278,6 +1278,7 @@ const WEAPON_IMGS={
   "Lumen Sword":"cd_assets/weapons/item-1004316.webp",
   "Lumen Longsword":"cd_assets/weapons/item-1004317.webp",
   "Silverwave Longsword":"cd_assets/weapons/item-1006337.webp",
+  "Black Fang Sword":"cd_assets/weapons/item-1006330.webp",
   "Longsword of Void":"cd_assets/weapons/item-1004884.webp",
   "Harpoon Gun":"cd_assets/weapons/item-1005447.webp",
   "Satyros Spear":"cd_assets/weapons/item-1004868.webp",
