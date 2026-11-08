@@ -1,7 +1,423 @@
 {
-  "_kommentar": "Handrecherche für gen-beschaffung.mjs. teile: {name: {wege:[...], ab, vor, warn, quellen, ersetzen:true|false}}, orte: {ortId: {...}}, haendler: {NPC: {ort: ortId, beleg}}, boss: {Bossname: {ort: ortId, beleg}}. Nichts ohne Beleg eintragen.",
-  "orte": {},
-  "haendler": {},
-  "boss": {},
-  "teile": {}
+ "_kommentar": "Handrecherche für gen-beschaffung.mjs. teile: {name: {wege:[...], ab, vor, warn, quellen, ersetzen:true|false}}, orte: {ortId: {...}}, haendler: {NPC: {ort: ortId, beleg}}, boss: {Bossname: {ort: ortId, beleg}}. Nichts ohne Beleg eintragen.",
+ "orte": {},
+ "haendler": {},
+ "boss": {},
+ "teile": {
+  "Elegant Carmine Leather Armor": {
+   "wege": [
+    {
+     "art": "rezept",
+     "platz": "Jungle Ruins",
+     "txt": "Herstellbar beim Schmied, aber das Herstellungshandbuch muss zuerst in den Jungle Ruins gefunden werden (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife-Seite Elegant Carmine Leather Armor"
+    }
+   ],
+   "vor": "Herstellungshandbuch aus den Jungle Ruins",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Elegant_Carmine_Leather_Armor (geprüft 08.11.2026)"
+   ]
+  },
+  "Helm of Knowledge": {
+   "wege": [
+    {
+     "art": "welt",
+     "platz": "Scholastone Institute",
+     "txt": "Liegt auf der oberen Ebene der Bibliothek des Scholastone Institute (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife-Seite Helm of Knowledge"
+    }
+   ],
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Helm_of_Knowledge (geprüft 08.11.2026)"
+   ]
+  },
+  "Beekeeping Cloak": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Herstellbar mit dem Beekeeper Gear Blueprint: 5x Cotton, 2x Thick Hide, 1x Short Hair Hide, 5x Hay. Wo der Bauplan liegt, nennt die Quelle nicht (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife-Seite Beekeeping Cloak"
+    }
+   ],
+   "vor": "Beekeeper Gear Blueprint",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Beekeeping_Cloak (geprüft 08.11.2026)"
+   ]
+  },
+  "Elegant Carmine Plate Gloves": {
+   "wege": [
+    {
+     "art": "rezept",
+     "platz": "Dewhaven Keep",
+     "txt": "Herstellbar beim Schmied, das Herstellungshandbuch bekommst du zuerst in der Dewhaven Keep (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife-Seite Elegant Carmine Plate Gloves"
+    }
+   ],
+   "vor": "Herstellungshandbuch aus der Dewhaven Keep",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Elegant_Carmine_Plate_Gloves (geprüft 08.11.2026)"
+   ]
+  },
+  "Belkandor Plate Gloves": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Herstellbar mit dem Belkandor Gloves Blueprint: 6x Iron Ore, 1x Copper Ore, 2x Gold Ore. Wo der Bauplan liegt, nennt die Quelle nicht (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife-Seite Belkandor Plate Gloves"
+    }
+   ],
+   "vor": "Belkandor Gloves Blueprint",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Belkandor_Plate_Gloves (geprüft 08.11.2026)"
+   ]
+  },
+  "Belkandor Plate Helm": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Herstellbar, sobald du den Belkandor Helm Blueprint gefunden und gelernt hast: 5x Iron Ore, 2x Copper Ore, 2x Gold Ore. Wo der Bauplan liegt, nennt die Quelle nicht (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife-Seite Belkandor Plate Helm"
+    }
+   ],
+   "vor": "Belkandor Helm Blueprint gefunden und gelernt",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Belkandor_Plate_Helm (geprüft 08.11.2026)"
+   ]
+  },
+  "Forsaken Oath Plate Boots": {
+   "wege": [
+    {
+     "art": "welt",
+     "platz": "South Sea",
+     "txt": "Unterwassertruhe im äußersten Südwesten der South Sea: neben der kleinen Insel am unteren linken Kartenrand tauchen und den korallenbewachsenen Felsen mit aufsteigenden Blasen am Meeresboden suchen. Den grünen Fels mit Force Palm zerbrechen, dann die Truhe öffnen (laut KeenGamer, nicht gegengeprüft).",
+     "beleg": "KeenGamer-Guide Forsaken Oath Plate Armor Set (02.11.2026)"
+    }
+   ],
+   "ab": {
+    "kapitel": null,
+    "txt": "DLC Charting the Unknown",
+    "beleg": "KeenGamer-Guide Forsaken Oath Plate Armor Set"
+   },
+   "vor": "DLC Charting the Unknown; grünen Fels mit Force Palm zerbrechen; Tauchausrüstung mit mehr Atemkapazität empfohlen",
+   "quellen": [
+    "https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-forsaken-oath-plate-armor-set/ (geprüft 08.11.2026)"
+   ]
+  },
+  "Forsaken Oath Plate Helm": {
+   "wege": [
+    {
+     "art": "welt",
+     "platz": "Great Hydrothermal Vents",
+     "txt": "Unterwassertruhe nördlich der Kartenbeschriftung Great Hydrothermal Vents: neben den kleineren Felsnadeln nordwestlich der großen zentralen Felsnadel, bei der Gruppe aus drei Erzvorkommen im Westen. Das ist laut Quelle das schwierigste Teil des Sets. Den grünen Fels mit Force Palm zerbrechen, dann die Truhe öffnen (laut KeenGamer, nicht gegengeprüft).",
+     "beleg": "KeenGamer-Guide Forsaken Oath Plate Armor Set (02.11.2026)"
+    }
+   ],
+   "ab": {
+    "kapitel": null,
+    "txt": "DLC Charting the Unknown",
+    "beleg": "KeenGamer-Guide Forsaken Oath Plate Armor Set"
+   },
+   "vor": "DLC Charting the Unknown; grünen Fels mit Force Palm zerbrechen; Tauchausrüstung mit mehr Atemkapazität empfohlen",
+   "quellen": [
+    "https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-forsaken-oath-plate-armor-set/ (geprüft 08.11.2026)"
+   ]
+  },
+  "Forsaken Oath Plate Armor": {
+   "wege": [
+    {
+     "art": "welt",
+     "platz": "Ocula Island",
+     "txt": "Unterwassertruhe nordöstlich von Ocula Island bei den kleinen Felsinseln: am Meeresboden das große Schiffswrack suchen, in der Mitte steckt der grüne Fels in einer Öffnung. Den grünen Fels mit Force Palm zerbrechen, dann die Truhe öffnen (laut KeenGamer, nicht gegengeprüft).",
+     "beleg": "KeenGamer-Guide Forsaken Oath Plate Armor Set (02.11.2026)"
+    }
+   ],
+   "ab": {
+    "kapitel": null,
+    "txt": "DLC Charting the Unknown",
+    "beleg": "KeenGamer-Guide Forsaken Oath Plate Armor Set"
+   },
+   "vor": "DLC Charting the Unknown; grünen Fels mit Force Palm zerbrechen; Tauchausrüstung mit mehr Atemkapazität empfohlen",
+   "quellen": [
+    "https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-forsaken-oath-plate-armor-set/ (geprüft 08.11.2026)"
+   ]
+  },
+  "Inquisitor's Rapier": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „One-Handed Weapons of the World, Vol. III“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „One-Handed Weapons of the World, Vol. III“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Inquisitor's_Rapier (geprüft 08.11.2026)"
+   ]
+  },
+  "Ator's Finger": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „One-Handed Weapons of the World, III“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „One-Handed Weapons of the World, III“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Ator's_Finger (geprüft 08.11.2026)"
+   ]
+  },
+  "Rhinard Cannon": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Two-Handed Weapons of the World, Vol. I“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Two-Handed Weapons of the World, Vol. I“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Rhinard_Cannon (geprüft 08.11.2026)"
+   ]
+  },
+  "Aeserion Dagger": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man die Aeserion Gear Blueprint (laut Fextralife, Fundort des Bauplans dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Aeserion Gear Blueprint",
+   "warn": "Laut Fextralife nicht kaufbar",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Aeserion_Dagger (geprüft 08.11.2026)"
+   ]
+  },
+  "Aeserion Mace": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man die Aeserion Gear Blueprint (laut Fextralife, Fundort des Bauplans dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Aeserion Gear Blueprint",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Aeserion_Mace (geprüft 08.11.2026)"
+   ]
+  },
+  "Aeserion Bow": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man die Aeserion Gear Blueprint (laut Fextralife, Fundort des Bauplans dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Aeserion Gear Blueprint",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Aeserion_Bow (geprüft 08.11.2026)"
+   ]
+  },
+  "Fallen Noble's Rapier": {
+   "wege": [
+    {
+     "art": "sonst",
+     "platz": "Hernand Castle",
+     "txt": "Von Charles Celeste auf Hernand Castle zu bekommen, aber erst wenn sein Vertrauen auf Stufe 100 ist (laut Fextralife).",
+     "beleg": "Fextralife, Abschnitt „Where To Find“"
+    }
+   ],
+   "vor": "Vertrauensstufe 100 bei Charles Celeste",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Fallen_Noble's_Rapier (geprüft 08.11.2026)"
+   ]
+  },
+  "Lanford Hammer": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „One-Handed Weapons of the World, Vol. III“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „One-Handed Weapons of the World, Vol. III“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Lanford_Hammer (geprüft 08.11.2026)"
+   ]
+  },
+  "Twilight Messengers' Bow": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Ranged Weapons of the World - Bows, Vol. III“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Ranged Weapons of the World - Bows, Vol. III“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Twilight_Messengers'_Bow (geprüft 08.11.2026)"
+   ]
+  },
+  "Bow of the Fleeting": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Ranged Weapons of the World - Bows, Vol. IV“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Ranged Weapons of the World - Bows, Vol. IV“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Bow_of_the_Fleeting (geprüft 08.11.2026)"
+   ]
+  },
+  "Gamma Barrel Cannon": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Two-Handed Weapons of the World, Vol. IV“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Two-Handed Weapons of the World, Vol. IV“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Gamma_Barrel_Cannon (geprüft 08.11.2026)"
+   ]
+  },
+  "Beehive Club": {
+   "wege": [
+    {
+     "art": "welt",
+     "platz": "Hernandian Forest",
+     "txt": "Im Hernandian Forest einen bestimmten Baum abschießen, daraus fällt die Keule (laut Fextralife). Nicht kaufbar und nicht herstellbar.",
+     "beleg": "Fextralife, Abschnitt „Where to Find“"
+    }
+   ],
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Beehive_Club (geprüft 08.11.2026)"
+   ]
+  },
+  "Spear of Righteousness": {
+   "wege": [
+    {
+     "art": "sonst",
+     "txt": "Kann bei Bleed Bandits fallen (laut Fextralife, nicht gegengeprüft). Fextralife nennt sie weder kaufbar noch herstellbar, das Wiki führt dagegen ein Schmiede-Rezept.",
+     "beleg": "Fextralife, Abschnitt „Where to Find“"
+    }
+   ],
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Spear_of_Righteousness (geprüft 08.11.2026)"
+   ]
+  },
+  "Dekarr Hammer": {
+   "wege": [
+    {
+     "art": "sonst",
+     "txt": "Kann bei Grave Robbers fallen (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife, Abschnitt „Where to find“"
+    },
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „One-Handed Weapons of the World, Vol. II“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „One-Handed Weapons of the World, Vol. II“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Dekarr_Hammer (geprüft 08.11.2026)"
+   ]
+  },
+  "Wells Musket": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Ranged Weapons of the World - Guns, Vol. II“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Ranged Weapons of the World - Guns, Vol. II“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Wells_Musket (geprüft 08.11.2026)"
+   ]
+  },
+  "Tommaso Guard's Dagger-Tipped Spear": {
+   "wege": [
+    {
+     "art": "welt",
+     "txt": "Liegt in einem Waffenständer im Bereich vor dem Kampf gegen Ludvig (laut Fextralife, nicht gegengeprüft).",
+     "beleg": "Fextralife, Abschnitt „Where to Find“"
+    }
+   ],
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Tommaso_Guard's_Dagger-Tipped_Spear (geprüft 08.11.2026)"
+   ]
+  },
+  "Rosemond Pistol": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Ranged Weapons of the World - Guns, Vol. I“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Ranged Weapons of the World - Guns, Vol. I“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Rosemond_Pistol (geprüft 08.11.2026)"
+   ]
+  },
+  "Royal Guard Shield": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Shields of the World, Vol II“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Shields of the World, Vol II“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Royal_Guard_Shield (geprüft 08.11.2026)"
+   ]
+  },
+  "Large Gilded Shield": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Shields of the World, Vol II“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Shields of the World, Vol II“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Large_Gilded_Shield (geprüft 08.11.2026)"
+   ]
+  },
+  "City Guard's Shield": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Shields of the World Vol. 1“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Shields of the World Vol. 1“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/City_Guard's_Shield (geprüft 08.11.2026)"
+   ]
+  },
+  "Eastern Wanderer's Shield": {
+   "wege": [
+    {
+     "art": "rezept",
+     "txt": "Am Schmied herstellen. Dafür braucht man das Rezeptbuch „Shields of the World Vol. 1“ (laut Fextralife, Fundort des Buchs dort nicht genannt).",
+     "beleg": "Fextralife, Abschnitt „How to Craft“"
+    }
+   ],
+   "vor": "Rezeptbuch „Shields of the World Vol. 1“",
+   "quellen": [
+    "https://crimsondesertgame.wiki.fextralife.com/Eastern_Wanderer's_Shield (geprüft 08.11.2026)"
+   ]
+  }
+ }
 }

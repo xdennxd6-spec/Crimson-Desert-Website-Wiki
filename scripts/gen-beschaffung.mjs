@@ -151,7 +151,10 @@ function bossOrt(b) {
 }
 // ── Einträge ──
 const BESCHAFFUNG = {};
-function eintrag(tab, e) {
+// Felder können Text, {v,c,q} oder Listen davon sein (DLC_GEAR_EXTRA).
+const txtVon = (x) => x == null ? "" : typeof x === "string" ? x : Array.isArray(x) ? x.map(txtVon).filter(Boolean).join("; ") : typeof x === "object" ? [x.v, x.c === "unb" ? "unbestätigt" : "", x.q ? `Quelle: ${x.q}` : ""].filter(Boolean).join(", ") : String(x);
+function eintrag(tab, e0) {
+  const e = { ...e0, source: txtVon(e0.source), req: txtVon(e0.req), notes: txtVon(e0.notes) };
   const name = e.name, wege = [], quellen = new Set(), voraus = [], warnung = []; let abK = [];
   const nehmen = (w, rang) => wege.push({ ...w, _r: rang });
   const ids = (ZIEL.get(name) || []).filter((i) => { const d = ITEMS.get(i); if (!d) return false; if (kl(d.name) === kl(name)) return true; const tx = `${e.notes || ""} ${e.source || ""}`; if (new RegExp(`(Item-?ID|questlog-Item)[ :]*${i}\\b`, "i").test(tx)) return true; bericht.namensAbweichung.push(`${name} ≠ ${d.name} (${i})`); return false; });
@@ -287,7 +290,7 @@ function eintrag(tab, e) {
   // Hand
   const H = HAND.teile[name];
   let liste = wege.sort((a, b) => a._r - b._r);
-  if (H) { if (H.ersetzen) liste = []; for (const w of H.wege || []) liste.unshift({ ...w, _r: -1 }); if (H.vor) voraus.unshift(H.vor); if (H.warn) warnung.unshift(H.warn); for (const q of H.quellen || []) quellen.add(q); if (H.ab) abK.unshift({ ...H.ab, rang: -2 }); }
+  if (H) { if (H.ersetzen) liste = []; for (const w0 of (H.wege || []).slice().reverse()) { const { platz, ...w } = w0; if (platz && !w.ort) { const p = findePlatz(platz); if (p) w.ort = ortPlatz(p, `Handrecherche nennt „${platz}“, Ort in den Spieldaten (${p.knoten})`); else { const r = findeRegion(platz); if (r) w.ort = ortRegion(r, `Handrecherche nennt die Region ${r}`); else (bericht.platzOhneTreffer ||= []).push(`${name}: ${platz}`); } } liste.unshift({ ...w, _r: -1 }); } if (H.vor) voraus.unshift(H.vor); if (H.warn) warnung.unshift(H.warn); for (const q of H.quellen || []) quellen.add(q); if (H.ab) abK.unshift({ ...H.ab, rang: -2 }); }
   // Mehrere Händler am selben Ort zu einem Weg zusammenfassen.
   { const v = new Map(); const neu = []; for (const w of liste) { const n = (String(w.txt).match(/^Verkauf bei (.+?)\./) || [])[1]; if (n && w.ort && v.has(w.ort + "|" + (w.kosten || ""))) { const a = v.get(w.ort + "|" + (w.kosten || "")); a.txt = a.txt.replace(/^Verkauf bei (.+?)\./, (m, x) => `Verkauf bei ${x} oder ${n}.`); continue; } if (n && w.ort) v.set(w.ort + "|" + (w.kosten || ""), w); neu.push(w); } liste = neu; }
   // Dubletten und Obergrenze: höchstens 6 Wege, Rest als Sammelhinweis.
