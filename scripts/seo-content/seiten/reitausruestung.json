@@ -1,0 +1,25 @@
+{
+  "intro": "Für Pferde, andere Reittiere, Haustiere und den A.T.A.G. gibt es in Crimson Desert eigene Ausrüstung. Das Wiki führt {{anzahl}} Teile mit Werten aus den Spieldaten und Fundort: {{saettel}} Sättel, {{harnische}} Rossharnische, {{stirn}} Rossstirnen, {{buegel}} Steigbügel, {{hufeisen}} Hufeisen, {{haustier}} Teile für Haustiere, {{kuku}} für Kukuvögel und {{sonder}} Sonderteile für A.T.A.G. und den Drachen Schwarzstern. Sättel geben Gesundheit, Rossharnische Verteidigung, Rossstirnen und Hufeisen Angriff; Steigbügel regenerieren Gesundheit, Hufeisen zusätzlich Ausdauer.",
+  "faq": [
+    {
+      "frage": "Welcher Sattel gibt die meiste Gesundheit?",
+      "antwort": "Am meisten Gesundheit geben laut Spieldaten diese Sättel mit je {{maxhp}}: Delesyia-Sattel, Demenessischer Sattel und Hagmund-Sattel. Die Händler geben sie erst mit Vertrauen oder Prestige ab. Für mehrere Sättel nennt th.gl dieselben Werte."
+    },
+    {
+      "frage": "Was bringen Steigbügel und Hufeisen?",
+      "antwort": "Steigbügel haben keine Grundwerte, sie regenerieren Gesundheit pro Sekunde. Hufeisen geben Angriff und regenerieren Ausdauer pro Sekunde. Wie viel genau, steht bei jedem Teil in der Tabelle."
+    },
+    {
+      "frage": "Wo kaufe ich Sättel und Hufeisen?",
+      "antwort": "Bei den Sattlern der Regionen, etwa Annabella in Hernand, Eldred in Pailune, Alina in Tommaso, Zara in Varnia und Randelle in Delesyia. Bessere Teile verkaufen sie erst mit Vertrauen oder Prestige, einige Rossharnische gibt es nur gegen den Beitrag einer Region."
+    },
+    {
+      "frage": "Gibt es Ausrüstung für Haustiere?",
+      "antwort": "Ja, {{haustier}} Teile: Hüte, Helme und Kleidung für Katzen und Hunde bei Remy und Milou, eine Fliegermütze für das Wyvernjunge und das Amulett der Solidarität für Katzen bei Lacey. Das Amulett der Tapferkeit und das Amulett des Jägers stehen bei den Gegenständen."
+    },
+    {
+      "frage": "Wo steht die Reitausrüstung aus dem DLC?",
+      "antwort": "Die Rüstungen für Bär, Wolf, Hirsch, Warzenschwein und Steinbock aus Charting the Unknown stehen auf der DLC-Seite. Diese Seite verlinkt sie im Abschnitt mit den Verweisen, damit nichts doppelt steht."
+    }
+  ]
+}

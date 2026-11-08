@@ -66,7 +66,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=f031907963">
+<link rel="stylesheet" href="app.css?v=54c9345641">
 <script src="consent.js?v=2"></script>
 </head>
 <body>
@@ -98,6 +98,7 @@
       <li><a href="/romanze">Romanze &amp; Ehe</a></li>
       <li><a href="/mounts">Reittiere</a></li>
       <li><a href="/pets">Haustiere</a></li>
+      <li><a href="/reitausruestung">Reit- &amp; Tierausrüstung</a></li>
       <li><a href="/geheimnisse">Geheimnisse &amp; Lore</a></li>
       <li><a href="/charting-the-unknown">Charting the Unknown</a></li>
       <li><a href="/crafting">Herstellen &amp; Farmen</a></li>
@@ -676,7 +677,7 @@
 <section class="sec" id="sec-start" aria-labelledby="start-title">
     <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <!-- Statischer Kopf für den ersten Paint (Schnellstart, siehe <head>); renderStartOverview() ersetzt ihn samt aktuellen Zahlen. -->
-    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>42</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>570</dd></div></dl></header></div>
+    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>43</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>570</dd></div></dl></header></div>
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
@@ -1184,6 +1185,12 @@
     <div id="legendary-pet-guide"></div>
     <div class="pet-filter-row" id="pet-filter-row"></div>
     <div class="pet-grid" id="pet-grid"></div>
+  </section>
+
+  <!-- Reit- & Tierausrüstung (08.11.2026): Daten und Renderer in data/d14-reit.js, CSS in app.css (Anker REIT) -->
+  <section class="sec" id="sec-reitausruestung">
+    <h2 class="sec-t"><span class="sec-sym">♘</span> Reit- &amp; Tierausrüstung <span class="sec-t-en">Mount &amp; Pet Gear</span></h2>
+    <div id="reit-root"></div>
   </section>
   <section class="sec" id="sec-collectibles">
     <h2 class="sec-t"><span class="sec-sym">⬦</span> Sammelgegenstände <span class="sec-t-en">Sammelgegenstände</span></h2>
@@ -1703,6 +1710,7 @@
 <script src="data/d11-fac-quest-imgs.js" fetchpriority="low"></script>
 <script src="data/d12-dlc.js" fetchpriority="low"></script>
 <script src="data/d13-romanze.js" fetchpriority="low"></script>
+<script src="data/d14-reit.js" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -5255,7 +5263,7 @@ function renderPets(filter){
   const tameInfo=drInfo({title:'Zähmen',lead:'Vertrauen durch Füttern oder Streicheln auf max. 100 steigern.',icon:'❥',h:'<p>'+_DRB3_PET_TAME+'</p>'});
   drMount('pets',drHead({kicker:'Welt & Karte',title:'Haustiere',sub:_DRB3_PET_INTRO,glyph:'❥',scene:['beginner','reg-hernand'],
     stats:[[PETS.length,'Haustiere'],[counts.cat||0,'Katzen'],[counts.dog||0,'Hunde'],[counts.critter||0,'Kleintiere']].filter(x=>x[0]>0),
-    links:[['mounts','Reittiere'],['camp','Graumähnen-Camp'],['food','Kochen & Elixiere'],['collectibles','Unique Pets (30)','Unique Pets']],
+    links:[['mounts','Reittiere'],['reitausruestung','Reit- & Tierausrüstung'],['camp','Graumähnen-Camp'],['food','Kochen & Elixiere'],['collectibles','Unique Pets (30)','Unique Pets']],
     after:patchInfo+tameInfo}));
   // Textboxen durchsuchbar machen (die frühere Textwand hatte kein data-s)
   document.querySelectorAll('#dr-head-pets .dr-info').forEach((d,i)=>d.setAttribute('data-s',_drB3Txt(i?_DRB3_PET_TAME:_DRB3_PET_PATCH.join(' ')).toLowerCase()+(i?' zähmen':' patch-historie')));
@@ -9324,7 +9332,7 @@ function renderMounts(){
   drMount('mounts',drHead({kicker:'Welt & Karte',title:'Reittiere',sub:sec.desc||'Pferde und besondere Reittiere mit Fundort',glyph:'♞',
     scene:['start','mg-pferderennen'],
     stats:[[MOUNTS.length,'Mounts gesamt'],[nh+'/'+MOUNTS.length,'Besessen'],[sigil.length,'Sigil'],[wildAll.length,'Wildtiere']],
-    links:[['pets','Haustiere'],['minigames','Minispiel Pferderennen','Pferderennen'],['camp','Graumähnen-Camp'],['map','Karte']],
+    links:[['pets','Haustiere'],['reitausruestung','Reit- & Tierausrüstung'],['minigames','Minispiel Pferderennen','Pferderennen'],['camp','Graumähnen-Camp'],['map','Karte']],
     after:_drB3MBar(groups)}));
   document.getElementById('mount-sections').innerHTML=groups.map(g=>
     `<div id="${g.id}" class="drb3-grp">
@@ -13917,7 +13925,7 @@ if (syGetCode()) _loadServerProgress();
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a> · <a href="/#sec-dlc-kampf">DLC-Bosse</a><br>
   Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a> · <a href="/#sec-dlc-ausruestung">DLC-Ausrüstung</a><br>
   Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a> · <a href="/#sec-dlc-quests">DLC-Quests</a><br>
-  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/romanze">Romanze &amp; Ehe</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a><br>
+  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/romanze">Romanze &amp; Ehe</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/reitausruestung">Reit- &amp; Tierausrüstung</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a> · <a href="/#sec-dlc-sammeln">DLC-Schiffsteile</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>

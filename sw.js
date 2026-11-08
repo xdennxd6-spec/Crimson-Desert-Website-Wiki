@@ -24,6 +24,7 @@ const CORE_ASSETS = [
   './data/d11-fac-quest-imgs.js',
   './data/d12-dlc.js',
   './data/d13-romanze.js',
+  './data/d14-reit.js',
   './vendor/gsap-3.15.0.min.js',
   './vendor/ScrollTrigger-3.15.0.min.js',
   './vendor/SplitText-3.15.0.min.js',

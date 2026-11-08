@@ -117,6 +117,8 @@ const MOUNTS = extract("MOUNTS"), PETS = extract("PETS");
 const WITCHES = extract("WITCHES"), WITCH_SYNTHESIS = extract("WITCH_SYNTHESIS");
 const ACCESSORIES = extract("ACCESSORIES");
 const ROM_WITCHES = extract("ROM_WITCHES"), ROM_FIGS = extract("ROM_FIGS");
+// NEU (08.11.2026): reitausruestung.html, Daten in data/d14-reit.js
+const REIT = extract("REIT_AUSRUESTUNG"), REIT_VERWEISE = extract("REIT_VERWEISE"), REIT_ARTEN = extract("REIT_ARTEN");
 // NEU (31.10.2026): charting-the-unknown.html (erster DLC, Daten in data/d12-dlc.js). Soll-Menge hier selbst
 // gerechnet: je Datenzeile ein <tr id="dlc-...">, dazu die in WEAPONS/ARMOR mit dem Feld dlc gekennzeichneten Teile.
 const DLC = Object.fromEntries(["DLC_META", "DLC_SHIPS", "DLC_SHIP_PARTS", "DLC_ISLANDS", "DLC_MOUNTS", "DLC_QUESTS",
@@ -182,6 +184,8 @@ const pages = {
   "charting-the-unknown.html": { sec: "/#sec-dlc", count: { regex: /<tr id="dlc-/g, expected: N_DLC_ROWS, label: "DLC-Datenzeilen" } },
   // NEU (05.11.2026): Regex und Label aus COUNT_CHECK von parts/romanze.mjs.
   "romanze.html": { sec: "/#sec-romanze", count: { regex: /<article class="card rom-seo" id="rom-/g, expected: ROM_WITCHES.length + 1, label: "Kandidaten-Karten" } },
+  // NEU (08.11.2026): Regex und Label aus COUNT_CHECK von parts/reitausruestung.mjs.
+  "reitausruestung.html": { sec: "/#sec-reitausruestung", count: { regex: /<article class="card" id="reit-/g, expected: REIT.length, label: "Ausrüstungs-Karten" } },
 };
 // 05.11.2026: Googlebot liest HTML nur bis rund 2 MB (unkomprimiert). Was dahinter steht, sieht Google nicht; in der
 // Search Console brach /ruestungen mitten im Hauptskript ab, die App lief bei Google nicht. Puffer: Grenze 1,9 Mio. Byte.
@@ -407,6 +411,8 @@ const ERLAUBTE_ZAHLEN = {
     DLC.TRADE.length, DLC.HOMES.length, DLC.RELIC_SHOPS.length],
   // NEU (05.11.2026): Intro und FAQ nennen Hexen, spielbare Figuren, das Leisten-Maximum und die Flirt-Strafe.
   "romanze.html": [ROM_WITCHES.length, ROM_FIGS.length, 100, 10],
+  // NEU (08.11.2026): Gesamtzahl, Anzahl je Art, höchste Sattel-Gesundheit, Zahl der Verweise
+  "reitausruestung.html": [REIT.length, ...REIT_ARTEN.map((a) => REIT.filter((x) => x.art === a).length), Math.max(...REIT.map((x) => x.hp || 0)), REIT_VERWEISE.length],
 };
 
 ok(PATCHES_1X.some((p) => p.ver.startsWith("1.13.")) && PATCHES_1X.some((p) => p.ver.startsWith("1.18.")),
@@ -587,6 +593,7 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
       ...DLC.TRADE.map((x) => "dlc-ware-" + slugUnabh(x.name)), ...DLC.HOMES.map((x) => "dlc-wohnsitz-" + slugUnabh(x.name)),
       ...DLC.RELIC_SHOPS.map((x) => "dlc-relic-" + slugUnabh(x.name)), ...DLC.GEAR_EXTRA.map((x) => "dlc-geraet-" + slugUnabh(x.name))],
     "romanze.html": [...ROM_WITCHES.map((w) => "rom-" + slugUnabh(w.name)), "rom-npcs"],
+    "reitausruestung.html": REIT.map((x) => "reit-" + slugUnabh(x.name)),
   };
   for (const datei of Object.keys(pages)) {
     // 01.11.2026: nur der Seiteninhalt der App-Fassung (die App-ids prüft gen-seo beim Bauen auf Kollision)
@@ -648,7 +655,7 @@ const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
   "bestiarium", "side-quests", "trophaeen", "true-ending",
   "hauptquests", "patch-notes", "fraktionen", "npcs",
   "skills", "hexen", "abyss-cores", "accessoires", "kapitel-guide",
-  "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1", "charting-the-unknown", "romanze"];
+  "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1", "charting-the-unknown", "romanze", "reitausruestung"];
 {
   const app = fs.readFileSync(path.join(ROOT, "index.html"), "utf8").replace(/\r\n/g, "\n");
   const appRumpf = app.slice(app.indexOf("</head>")).replace(/<h1 class="vh">[\s\S]*?<\/h1>/, "");
@@ -676,7 +683,7 @@ const sm =fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 ["/", "/bosse", "/bestiarium", "/waffen", "/ruestungen", "/crafting",
  "/hauptquests", "/fraktionen", "/side-quests", "/trophaeen", "/true-ending",
  "/npcs", "/patch-notes", "/patch-notes-1", "/skills", "/hexen", "/abyss-cores", "/accessoires",
- "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse", "/charting-the-unknown", "/romanze"].forEach((u) =>
+ "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse", "/charting-the-unknown", "/romanze", "/reitausruestung"].forEach((u) =>
   ok(sm.includes(`<loc>https://crimson-desert-wiki.com${u}</loc>`), `sitemap enthaelt ${u}`));
 
 // ── 6. Startseite verlinkt jede SEO-Seite ────────────────────────────────────

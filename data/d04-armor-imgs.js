@@ -1499,6 +1499,7 @@ const SEC_RENDERERS={
   builds:['renderBuilds','renderBuildOptimizer'],
   accessories:['renderAccessories'],
   pets:['renderPets'],
+  reitausruestung:['renderReitausruestung'],
   collectibles:['renderCollectibles'],
   gatherables:['renderGatherables'],
   puzzles:['renderPuzzles'],
@@ -1574,6 +1575,8 @@ const SECTIONS = [
   {id:'camp',        res:'welt', name:'Graumähnen-Camp', en:'Greymane Camp', desc:'Ausbau des Camps Stufe für Stufe', aka:['Camp','Camp-Ausbau','Greymane','Graumähnen','Lager','Wohnen'], glyph:'⛫', count:'5 Stufen', plate:'§34', coord:'D10'},
   {id:'mounts',      res:'welt', name:'Reittiere', en:'Mounts', desc:'Pferde und besondere Reittiere mit Fundort', aka:['Mount','Pferd','Horse','Reittier','Flug-Reittier','Stall'], glyph:'♞', count:'Galerie', plate:'§11', coord:'D5'},
   {id:'pets',        res:'welt', name:'Haustiere', en:'Pets', desc:'Alle Haustiere und wie du sie bekommst', aka:['Pet','Haustier','Begleiter','Tier'], glyph:'❥', count:'Liste', plate:'§18', coord:'D6'},
+  // 08.11.2026: Reit- & Tierausrüstung direkt hinter den Haustieren (Daten und Renderer data/d14-reit.js)
+  {id:'reitausruestung', res:'welt', name:'Reit- & Tierausrüstung', en:'Mount & Pet Gear', desc:'Sättel, Rossharnische, Hufeisen und Haustier-Ausrüstung mit Werten und Fundort', aka:['Mount Gear','Pet Gear','Reitausrüstung','Tierausrüstung','Sattel','Saddle','Steigbügel','Stirrups','Hufeisen','Horseshoes','Rossharnisch','Barding','Rossstirn','Rosskopf','Champron','Haustier-Ausrüstung','A.T.A.G.-Teile'], glyph:'♘', count:'117 Teile', plate:'', coord:''},
   {id:'secrets',     res:'welt', name:'Geheimnisse & Lore', en:'Secrets & Lore', desc:'Geheimes Ende, Erinnerungsfragmente, Easter Eggs und Lore', aka:['Secrets','geheim','Lore','Easter Egg','Erinnerungsfragment','Memory Fragment','Hidden Ending','Cresset'], glyph:'⚿', count:'Tracker', plate:'§25', coord:'F1'},
   // 31.10.2026: erster DLC als eigene Seite (Renderer renderDlc in index.html, Daten data/d12-dlc.js)
   // 01.11.2026: die Seite dlc bleibt die DLC-Übersicht (Welt-Teil); Bosse, Ausrüstung, Quests und Schiffsteile stehen als

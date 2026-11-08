@@ -51,6 +51,8 @@ import * as partGeheimnisse from "./seo-parts/geheimnisse.mjs";
 import * as partChartingTheUnknown from "./seo-parts/charting-the-unknown.mjs";
 // Romanze & Ehe (05.11.2026), Daten in data/d13-romanze.js.
 import * as partRomanze from "./seo-parts/romanze.mjs";
+// Reit- & Tierausrüstung (08.11.2026), Daten in data/d14-reit.js.
+import * as partReit from "./seo-parts/reitausruestung.mjs";
 // 01.11.2026: Abschnitt "Neu mit Charting the Unknown" oben auf den Themen-Seiten (kein eigenes Seitenmodul)
 import { dlcNeu } from "./seo-parts/_dlc-neu.mjs";
 import { deN, deT } from "./seo-parts/_de.mjs";
@@ -173,7 +175,7 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
   partHauptquests, partFraktionen, partPatchNotes, partNpcs,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
-  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown, partRomanze,
+  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown, partRomanze, partReit,
   // Patch-Archiv 1.x (Patch-Notes-Umbau, fest aktiv seit 29.10.2026, siehe seo-parts/patch-notes.mjs)
   partPatchNotes1];
 
@@ -229,6 +231,7 @@ const NAV = [
   ["romanze", "Romanze & Ehe", "welt"],
   ["mounts", "Reittiere", "welt", "kopf"],
   ["pets", "Haustiere", "welt"],
+  ["reitausruestung", "Reit- & Tierausrüstung", "welt"],
   ["geheimnisse", "Geheimnisse & Lore", "welt"],
   ["charting-the-unknown", "Charting the Unknown", "welt", "kopf"],
   ["crafting", "Herstellen & Farmen", "sammeln", "kopf"],
