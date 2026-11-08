@@ -1442,7 +1442,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <tbody><tr id="core-malicebane">
 <td class="crs-n"><img class="crs-img" loading="lazy" src="/cd_assets/cores/malicebane.webp" alt="Bosheitsfluch Abyss Core in Crimson Desert" width="512" height="512"><strong>Bosheitsfluch</strong></td>
 <td>+4% Schaden gegen mächtige Feinde (entspricht Bosheitsfluch I; Tier I/II/III: +4% / +8% / +12%)</td>
-<td class="crs-src">Wolfsfang (Kap. 7; vorgesockelt) — questlog: auch vorgesockelt in Eid des toten Königs, Bogen der Adligen, Rad des letzten Läutens, Runengravierter Stein, Gefrorene Seele, Wyvern-Handkanone und Plattenschuhe des Ritters des Gemetzels</td>
+<td class="crs-src">Wolfsfang (Kap. 7; vorgesockelt) — questlog: auch vorgesockelt in Eid des toten Königs, Bogen der Adligen, Rad des letzten Läutens, Runengravierter Stein, Gefrorene Seele, Wyvern-Handkanone und Plattenschuhe des Ritters des Gemetzels. Ausrüstungs-Blaupause „Ausrüstungs-Blaupause: Bosheitsfluch“: Schatztruhen (Ort nicht erfasst) (questlog 1002579)</td>
 </tr>
 <tr id="core-insight-iii">
 <td class="crs-n"><img class="crs-img" loading="lazy" src="/cd_assets/cores/insight.webp" alt="Einsicht III Abyss Core in Crimson Desert" width="512" height="512"><strong>Einsicht III</strong></td>
@@ -1943,7 +1943,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
     <h2 class="sec-t"><span class="sec-sym">☘</span> Sammelobjekte <span class="sec-t-en">Sammelobjekte</span></h2>
     <p class="gt-intro">Über ganz Pywel sammelst du Erze, Kräuter, Pilze und Spezialmaterialien per Mining-Node, Foraging oder Holzfälleraxt. Sie speisen Alchemie, Kochen, Schmieden, Färben und einige Stat-Upgrades. Mehrere Kräuter heben Stats über ihr Maximum, etwa Geist oder Ausdauer.</p>
     <div class="gt-stats">
-      <button type="button" class="gt-stat cd-spot" onclick="setGatherCat('')" title="Alle Materialien anzeigen"><b id="gt-n-all">64</b> Materialien</button>
+      <button type="button" class="gt-stat cd-spot" onclick="setGatherCat('')" title="Alle Materialien anzeigen"><b id="gt-n-all">160</b> Materialien</button>
       <span class="gt-stat gt-stat-static cd-spot"><b>4</b> Awakening-Kräuter</span>
       <button type="button" class="gt-stat cd-spot" onclick="setGatherCat('Erz / Mineral')" title="Nur Erze und Mineralien anzeigen"><b>~7 Tage</b> Erz-Respawn</button>
     </div>
@@ -8472,9 +8472,10 @@ function _r2b1FxHtml(m){
 function _r2b1Ladder(m){
   var ts=m.ts;if(ts.length<2||m.kuku)return '';
   var anyVal=m.hpMin!=null||m.rest.some(function(r){return r.length;});
+  var gleichZ=ts.every(function(c){return c.ingr===ts[0].ingr;});
   var cells=ts.map(function(c,i){
     var nm='<span title="'+cdEsc(deN(c.name))+'">'+cdEsc(deT(c.tier))+'</span>';
-    if(!anyVal)return '<li>'+nm+'</li>';
+    if(!anyVal)return gleichZ?'<li>'+nm+'</li>':'<li class="r2b1-tx">'+nm+'<i>'+cdEsc(deT(String(c.ingr||'').replace(/ \(Gruppe\)/g,'')))+'</i></li>';
     var v=m.hp[i],r=m.rest[i].filter(function(p){return !/nicht erfasst/i.test(p);}),h=v!=null&&m.hpMax?Math.round(v/m.hpMax*100):0;
     var val=v!=null?'<b>+'+v+'</b>':(r.length?'<i>'+cdEsc(deT(r.join(', ')))+'</i>':'<i class="r2b1-na">nicht erfasst</i>');
     // Text statt Zahl: Stufe und Text untereinander (sonst wird der Stufenname auf "Hea…" gekürzt)
@@ -8482,7 +8483,7 @@ function _r2b1Ladder(m){
   }).join('');
   var lb=anyVal?'Stufen-Werte':'Stufen';
   return '<ol class="r2b1-tiers" data-n="'+ts.length+'" data-k="'+lb+'" aria-label="'+lb+'">'+cells+'</ol>'
-    +(anyVal?'':'<p class="r2b1-lad-note">Zutaten und Effekt sind in allen Stufen identisch erfasst; stufenabhängige HP nennen die Quellen hier nicht.</p>');
+    +(anyVal?'':'<p class="r2b1-lad-note">'+(gleichZ?'Zutaten und Effekt sind in allen Stufen identisch erfasst':'Effekt in allen Stufen gleich erfasst, die Zutatenmengen steigen je Stufe')+'; stufenabhängige HP nennen die Quellen hier nicht.</p>');
 }
 function _r2b1Conf(c){return c.conf&&c.conf!=='high'?(c.conf==='low'?'geringe Konfidenz':'mittlere Konfidenz'):'';}
 function _r2b1TierLbl(c){
