@@ -477,7 +477,7 @@ const BOSS_IMGS={
   "Ravok of the Savage Fangs":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_troll_rider.webp",
   "Runewalker Vordis":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_lakegolemvordis.webp",
   "Samara the Sandwatcher":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_samuel.webp",
-  "Sir Catfish":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_catfish.webp",
+  "Sir Catfish":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_croggthecatfishman.webp",
   "Sizlek the Insatiable":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_sizlektheinsatiable.webp",
   "Skevald the Carrion King":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_legend_hyena_boss.webp",
   "Skull Knight":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_skullknight.webp",

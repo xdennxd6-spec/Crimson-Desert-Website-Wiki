@@ -1606,44 +1606,44 @@ const ENEMY_IMGS={
  // Krokodil: HTTP-200-verifiziert, Bild-QA 2026-07-06 (In-Game-Screenshot eines Krokodils).
  "Crocodile":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_crocodile.webp",
  "Ogre":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_ogre.webp",
- "Bleed Bandits":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_bleed_ruffians.webp",
- "Fundamentalist Goblins":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_faction_reglegoblin.webp",
+ // Fraktionen (08.11.2026): Das Spiel selbst zeigt fuer Fraktionen nur ihre Festung/ihr Lager. Statt dieser Ortsbilder
+ // stehen hier die Wissensbilder der Anfuehrer bzw. Mitglieder aus den Spieldateien (Zuordnung ueber knowledgeinfo +
+ // Spieltexte, z. B. Gazrak = "The leader of the Helms"; Eulen = Mitglieder-Szene aus der Muiquun-Mission, H.A.L.L. = Knowledge_AIMarni).
+ "Bleed Bandits":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_walter_bliss.webp",
+ "Fundamentalist Goblins":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_sizlektheinsatiable.webp",
  "Wolf Trackers":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_wolfpursuer.webp",
  "Southern Bandits":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_bandit1.webp",
  "Hornsplitter's Guards":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_splithornguard.webp",
- "St. Halssius's House of Healing":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_faction_halsius.webp",
+ "St. Halssius's House of Healing":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_halsius.webp",
  "Reed Devil Minions":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_reeddevil.webp",
- "The Dancing Catfish Pirates":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_piratei.webp",
- "Antumbra Order":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_antumbra.webp",
- "Bastier's Inquisitors":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_caliburnclan_ii.webp",
+ "The Dancing Catfish Pirates":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_croggthecatfishman.webp",
+ "Antumbra Order":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_antumbra_missionary.webp",
+ "Bastier's Inquisitors":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_basteer.webp",
  "Crow Brothers":"cd_assets/ql/assets/_sprites/cd_questimage_quest_crowman_boss.webp",
- // Flame Knights: offizielles questlog-Fraktions-Sprite (zeigt die Flame Knights Castle in West-Demeniss,
- // gleiche Konvention wie Dusksong/The Faceless, deren Fraktions-Icons ebenfalls ihre Festung zeigen).
- // HTTP-200-verifiziert und visuell geprueft 2026-07-27.
- "Flame Knights":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_faction_flame_knights.webp",
+ "Flame Knights":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_tristan.webp",
  "Mistwood Hunters":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_enthunter.webp",
  "Black Bears":"cd_assets/ql/assets/_sprites/cd_questimage_quest_mjordin_boss.webp",
  "Lonely Jackals":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_faction_lonelyjackal.webp",
- "The Wyvernflames":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_wyvern_tamers.webp",
- "The Helms":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_faction_desert_harrier.webp",
- "The Faceless":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_sacked_fortress.webp",
- "Muiquun Outlaws":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_crimson_riverruins.webp",
- "Sandfang Marauders":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_faction_goblin_riders.webp",
- "The Goldenscale Bandits":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_iguana_riders.webp",
- "The Dusksongs":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_isvatufortress.webp",
- "Savage Fangs":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_crim_stompsandfortruins.webp",
+ "The Wyvernflames":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_balthazarwyrmspeaker.webp",
+ "The Helms":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_gazrak.webp",
+ "The Faceless":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_mask_liberator_leader.webp",
+ "Muiquun Outlaws":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_jarad.webp",
+ "Sandfang Marauders":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_gobline_rider_boss.webp",
+ "The Goldenscale Bandits":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_durnan.webp",
+ "The Dusksongs":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_samuel.webp",
+ "Savage Fangs":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_unique_troll_rider.webp",
  // Hostile Machines: questlog hat keinen eigenen Sammel-Sprite; Mechanicus Mk.XII (eine von Marnis Kampfmaschinen) als repraesentatives Konstrukt-Bild (HTTP-200-verifiziert, visuell geprueft 2026-06-18).
  "Hostile Machines":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_mechanicusmk12.webp",
  "Hyena":"cd_assets/ql/assets/_sprites/cd_portraitimage_animal_hyena_wild_30043.webp",
  "Lightningwalker":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_lightning_golem.webp",
  "Rustwalker":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_scrap_golem.webp",
  "Hexe Earthen Soldier":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_hexe_potsoldier.webp",
- "The Blinding Arrows":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_righteousarrows.webp",
- "The Twilight Messengers":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_crimson_mountains_fortress.webp",
- "The Mistcloaked Owls":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_faction_muiquun.webp",
+ "The Blinding Arrows":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_bridie_gu.webp",
+ "The Twilight Messengers":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_qayar.webp",
+ "The Mistcloaked Owls":"cd_assets/ql/assets/_sprites/cd_questimage_mission_muiquunvillage_block_owlsofthemist_subnode.webp",
  "Skull Knight Follower":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_skullkinight_follower.webp",
  "Titan's Minion":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_titan_follower.webp",
- "H.A.L.L.":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_node_marni.webp"
+ "H.A.L.L.":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_marni.webp"
 };
 const ENEMIES={
  wild:[
