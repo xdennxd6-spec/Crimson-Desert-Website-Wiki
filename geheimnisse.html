@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=8ca39963cd">
+<link rel="stylesheet" href="app.css?v=df0b01533b">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -12101,7 +12101,7 @@ function importProgress(input){
 // ===== COMMENTS =====
 
 // ===== MAP LOCATION HELPERS =====
-let _mapLocSearch='';
+let _mapLocSearch='',_mapLocAktuell='';
 function extractMapSearch(src){
   const pm=src.match(/\(([^)]+)\)/);
   if(pm){const t=pm[1].split(/[,\/]/)[0].trim();if(t.length>3)return deE(t);}
@@ -12113,6 +12113,8 @@ function extractMapSearch(src){
 // Wegbeschreibung in einfacher Sprache. Bossdrops, Questbelohnungen,
 // Zufallsdrops und Haendlerware stehen bewusst NICHT drin: dort gibt es keine
 // Stelle auf der Karte, zu der man hingehen kann.
+// Seit 06.11.2026 Rückfallstufe: Das Fenster zeigt BESCHAFFUNG aus data/d14-beschaffung.js (auch Händler, Bosse,
+// Quests); FUNDORTE greift nur noch, solange oder falls diese Datei nicht geladen werden kann.
 // Bilder liegen unter cd_assets/maps/<id>.jpg, Quelle steht je Eintrag in q/qUrl.
 // Gepflegt ueber G:\Claude\Crimson-Desert-Fundorte\ (gen-fundorte.mjs).
 // FUNDORTE-START (nicht von Hand editieren, wird generiert)
@@ -12120,7 +12122,82 @@ function extractMapSearch(src){
 
 // Button-Beschriftung: zeigt schon in der Karten-Uebersicht, wo eine Fundort-
 // Karte hinterlegt ist, damit niemand 500 Waffen durchklickt, um 47 zu finden.
-function foBtn(name){ return FUNDORTE[name]?'⌖ Fundort ansehen':'📍 Auf Karte'; }
+// Knopf: Zu jedem Teil der Ausrüstungstabellen gibt es einen Eintrag in BESCHAFFUNG. Die Datei selbst wird erst beim
+// Öffnen des Fensters nachgeladen, darum entscheidet hier die Zugehörigkeit zur Tabelle.
+let _beNamen=null;
+function _beIstTeil(name){
+  if(!_beNamen){_beNamen=new Set();for(const T of [WEAPONS,ARMOR,ACCESSORIES,typeof DLC_GEAR_EXTRA!=='undefined'?DLC_GEAR_EXTRA:[]])for(const e of T)_beNamen.add(e.name);}
+  return _beNamen.has(name);
+}
+function foBtn(name){ return (FUNDORTE[name]||_beIstTeil(name))?'⌖ Fundort ansehen':'📍 Auf Karte'; }
+
+// ── Beschaffungskarte (06.11.2026): ORTE und BESCHAFFUNG aus data/d14-beschaffung.js, nur auf Anforderung geladen. ──
+let _beLaden=null;
+function beschLaden(){
+  if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
+  if(_beLaden)return _beLaden;
+  _beLaden=new Promise(res=>{
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js';
+    s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
+    s.onerror=()=>{_beLaden=null;s.remove();res(false);};
+    document.head.appendChild(s);
+  });
+  return _beLaden;
+}
+const _BE_ART={welt:'Fund in der Welt',haendler:'Händler',boss:'Bossbeute',quest:'Questbelohnung',rezept:'Herstellung',dlc:'DLC-Inhalt',sonst:'Weiterer Weg'};
+function _beQuelle(q){
+  q=String(q);const m=q.match(/^(https?:\/\/\S+)(.*)$/);
+  if(!m)return escHtml(q);
+  const host=m[1].replace(/^https?:\/\/(www\.)?/,'').split('/')[0];
+  return `<a href="${escHtml(m[1])}" target="_blank" rel="noopener noreferrer">${escHtml(host)}</a>${escHtml(m[2])}`;
+}
+function _beBild(o,name,spaet){
+  if(!o||!o.img)return '';
+  const hin=o.marker==='region'?'ungefähre Region, kein genauer Punkt':o.marker==='ort'?'Marker am benannten Ort, die genaue Stelle ist nicht erfasst':'';
+  const q=o.q?(o.qUrl?`<a href="${escHtml(o.qUrl)}" target="_blank" rel="noopener noreferrer">${escHtml(deN(o.q))}</a>`:escHtml(deN(o.q))):'';
+  return `<figure class="lm-fo-fig"><img class="lm-fo-img" src="cd_assets/maps/${escHtml(o.img)}"${spaet?' loading="lazy"':''} decoding="async" alt="Karte: ${escHtml(deT(o.name))}${hin?' ('+hin+')':''}" onerror="this.closest('.lm-fo-fig').style.display='none'">
+    <figcaption class="lm-fo-cred">${q?'Kartenausschnitt: '+q+' · ':''}Spielgrafik © Pearl Abyss${hin?'<span class="lm-be-hin">'+hin+'</span>':''}</figcaption></figure>`;
+}
+function _beWeg(w,name,i,gezeigt){
+  const o=w.ort&&ORTE[w.ort];
+  const ort=o?deT(o.name)+(o.reg&&o.reg!==o.name?', '+deT(o.reg):''):'';
+  const kopf=`<span class="lm-be-art">${_BE_ART[w.art]||_BE_ART.sonst}</span>${ort?`<span class="lm-be-ort">${escHtml(ort)}</span>`:''}`;
+  // Dieselbe Karte nur einmal im Fenster.
+  const neu=o&&o.img&&!gezeigt.has(o.img);if(neu)gezeigt.add(o.img);
+  const inhalt=`${neu?_beBild(o,name,i>0):''}${w.txt?`<div class="lm-fo-txt">${escHtml(deT(w.txt))}</div>`:''}${w.kosten?`<div class="lm-be-kosten">Kosten: ${escHtml(deT(w.kosten))}</div>`:''}`;
+  return i===0?`<section class="lm-be-weg"><div class="lm-be-kopf">${kopf}</div>${inhalt}</section>`
+    :`<details class="lm-be-weg lm-be-mehr"><summary class="lm-be-kopf">${kopf}</summary>${inhalt}</details>`;
+}
+function _beKurz(d){
+  if(!d.wege.length)return 'Nicht erfasst: Für dieses Teil ist noch kein Beschaffungsweg belegt.';
+  const t=[];for(const w of d.wege){const o=w.ort&&ORTE[w.ort];const s=_BE_ART[w.art]||_BE_ART.sonst;const v=s+(o?': '+deT(o.name):'');if(!t.includes(v))t.push(v);}
+  return (d.wege.length>1?d.wege.length+' Wege. ':'')+t.slice(0,4).join(' · ')+(t.length>4?' · …':'');
+}
+// Suchbegriff für die interaktive Karte: Ort des ersten Wegs, englisch. Ohne Ort der englische Name des Teils.
+function _beSuche(d,name){
+  for(const w of d.wege){const o=w.ort&&ORTE[w.ort];if(o)return o.en||deE(String(o.name).split(',')[0].trim());}
+  return name;
+}
+// Liefert true, wenn ein Eintrag angezeigt wurde.
+function beRender(name){
+  const d=typeof BESCHAFFUNG!=='undefined'&&BESCHAFFUNG[name];
+  if(!d)return false;
+  const el=document.getElementById('lm-fundort');
+  const box=document.querySelector('#loc-modal .loc-modal-box');
+  document.getElementById('lm-src').textContent=_beKurz(d);
+  const ab=d.ab&&(d.ab.txt||d.ab.kapitel!=null)?`<div class="lm-be-box lm-be-ab"><b>Ab wann</b>${d.ab.kapitel!=null?`<span class="lm-be-kap">Kapitel ${escHtml(String(d.ab.kapitel))}</span> `:''}${escHtml(deT(d.ab.txt||''))}</div>`:'';
+  const vor=d.vor?`<div class="lm-be-box lm-be-vor"><b>Voraussetzungen</b>${escHtml(deT(d.vor))}</div>`:'';
+  const warn=d.warn?`<div class="lm-be-box lm-be-warn"><b>Achtung</b>${escHtml(deT(d.warn))}</div>`:'';
+  const qu=d.quellen&&d.quellen.length?`<details class="lm-be-quellen"><summary>Belege (${d.quellen.length})</summary><ul>${d.quellen.map(q=>`<li>${_beQuelle(q)}</li>`).join('')}</ul></details>`:'';
+  const gezeigt=new Set();
+  el.innerHTML=`<div class="lm-fo-hd">⌖ So bekommst du es</div>${d.wege.map((w,i)=>_beWeg(w,name,i,gezeigt)).join('')}${ab}${vor}${warn}${qu}`;
+  el.style.display='block';
+  box.classList.add('has-fundort');
+  _mapLocSearch=_beSuche(d,name);
+  document.getElementById('lm-term').textContent=_mapLocSearch;
+  return true;
+}
+
 
 function foRender(name){
   const el=document.getElementById('lm-fundort');
@@ -12153,9 +12230,12 @@ function showMapLoc(name,src,type){
   document.getElementById('lm-name').textContent=deN(name);
   document.getElementById('lm-src').textContent=deT(src);
   document.getElementById('lm-term').textContent=_mapLocSearch;
+  _mapLocAktuell=name;
   foRender(name);
   document.getElementById('loc-modal').style.display='flex';
   modalFocusOpen('loc-modal');
+  // Schlägt das Nachladen fehl, bleibt die Quellenangabe (und ein vorhandener FUNDORTE-Eintrag) stehen.
+  beschLaden().then(ok=>{if(ok&&_mapLocAktuell===name)beRender(name);});
 }
 function goToMap(){
   document.getElementById('loc-modal').style.display='none';
@@ -12751,7 +12831,7 @@ function _drA2AccCard(a,show,have){
       </div>
       <div class="dra2-acts">
         <button type="button" class="defeat-btn dra2-have-btn${have?' on':''}" aria-pressed="${have?'true':'false'}" onclick="_drA2AccToggle('${escJsStr(a.name)}',this)">${have?'✓ Gefunden':'+ Gefunden'}</button>
-        <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Accessoire — ${escJsStr(a.type)}')">📍 Auf Karte</button>
+        <button class="map-pin-btn" onclick="showMapLoc('${escJsStr(a.name)}','${escJsStr(a.source)}','Accessoire — ${escJsStr(a.type)}')">${foBtn(a.name)}</button>
       </div>
     </div>`;
 }

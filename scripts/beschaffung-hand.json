@@ -1,0 +1,7 @@
+{
+  "_kommentar": "Handrecherche für gen-beschaffung.mjs. teile: {name: {wege:[...], ab, vor, warn, quellen, ersetzen:true|false}}, orte: {ortId: {...}}, haendler: {NPC: {ort: ortId, beleg}}, boss: {Bossname: {ort: ortId, beleg}}. Nichts ohne Beleg eintragen.",
+  "orte": {},
+  "haendler": {},
+  "boss": {},
+  "teile": {}
+}
