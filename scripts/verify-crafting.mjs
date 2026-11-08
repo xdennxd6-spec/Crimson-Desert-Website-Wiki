@@ -119,10 +119,13 @@ ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
   while ((tm = tagRe.exec(htmlOnly)) !== null) tagFiles.add(tm[1]);
   const dirFiles = new Set(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")));
   const nurInHtml = [...tagFiles].filter(f => !dirFiles.has(f));
-  const nurInDir = [...dirFiles].filter(f => !tagFiles.has(f));
+  // d14-beschaffung.js wird erst beim Öffnen des Fundort-Fensters nachgeladen (Größengrenze verify-seo, beschLaden() in index.html).
+  const NACHGELADEN = new Set(["d14-beschaffung.js"]);
+  NACHGELADEN.forEach(f => { if (tagFiles.has(f)) fail(`data/${f} soll nachgeladen werden, steht aber als <script src> in index.html`); if (!htmlOnly.includes(`data/${f}`)) fail(`data/${f}: Nachlade-Verweis fehlt in index.html`); });
+  const nurInDir = [...dirFiles].filter(f => !tagFiles.has(f) && !NACHGELADEN.has(f));
   nurInHtml.forEach(f => fail(`<script src="data/${f}"> in index.html, aber Datei fehlt in data/`));
   nurInDir.forEach(f => fail(`data/${f} existiert, aber index.html laedt sie nicht per <script src>`));
-  if (!nurInHtml.length && !nurInDir.length) ok(`Tag-Abgleich: ${tagFiles.size} <script src="data/...">-Tags == ${dirFiles.size} Dateien in data/`);
+  if (!nurInHtml.length && !nurInDir.length) ok(`Tag-Abgleich: ${tagFiles.size} <script src="data/...">-Tags + ${NACHGELADEN.size} nachgeladen == ${dirFiles.size} Dateien in data/`);
 }
 
 // ── 3d) sw-Abgleich: dieselbe Menge gegen './data/...'-Eintraege in CORE_ASSETS (sw.js) ──
