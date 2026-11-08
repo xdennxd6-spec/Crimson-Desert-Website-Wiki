@@ -3,6 +3,41 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.04.08",date:"06.11.2026",size:"Patch nach den sieben DLC-Hotfixes, veröffentlicht am 06.11.2026 um 09:50 UTC, also 10:50 MEZ (boardNo 152; Steam-Zweitveröffentlichung 09:52 UTC). Anders als die Vorgänger ohne den Titelzusatz „Hotfix für alle Plattformen“ und mit gestaffelter Verteilung. 26 Punkte unter der Überschrift Patch-Details: Framerate, Unterwasserhöhlen, Freies Bauen und Wohn-System, Seefahrt, die Antragsquest bei den Hexen, Leviakans Schuppe als neue Beute. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Patch-Details",items:[
+      "<b>Framerate-Einbrüche</b> in bestimmten Gebieten wurden reduziert. Pearl Abyss arbeitet weiter an den Einbrüchen, die in bestimmten Situationen oder bei einigen Inhalten auftreten.",
+      "Behoben: Das <b>Steuerrad des Segelschiffs</b> drehte sich beim Steuern nicht.",
+      "[PS5] Behoben: In einigen <b>Zwischensequenzen</b> kam es zu Abstürzen.",
+      "[Mac] Behoben: Ein Absturz nach dem Besiegen von <b>Leviakan</b> verhinderte den weiteren Fortschritt.",
+      "Neu: Beim Besiegen von <b>Leviakan</b> kann nun <b>Leviakans Schuppe</b> als Beute erhalten werden.",
+      "Behoben: In einigen <b>Unterwasserhöhlen</b> ließ sich der Charakter nicht mehr steuern.",
+      "Behoben: In einigen <b>Unterwasserhöhlen</b> konnte man nicht erneut tauchen.",
+      "Behoben: Das Haus konnte im Modus <b>„Freies Bauen“</b> unter bestimmten Umständen verschwinden.",
+      "Neu: Beim Löschen eines Raums im Modus <b>„Freies Bauen“</b> erscheint jetzt ein Bestätigungsfenster.",
+      "Behoben: Nach einer Wiederbelebung auf <b>„Dem trunkenen Wels“</b> (<em>Drunken Catfish</em>) erschien man unter dem Schiff.",
+      "Behoben: Die Kamera ließ sich während der <b>Erschließung</b> (<em>pioneering</em>) gelegentlich nicht steuern.",
+      "Behoben: Der <b>Goldene Marlin</b> (<em>Golden Striped Marlin</em>) ließ sich nicht aus dem Handelswaren-Slot entfernen.",
+      "Behoben: Auf dem <b>Meer des Schweigens</b> (<em>Sea of Silence</em>) begegnete man dem <b>Geisterschiff</b> nicht, wenn man sich an Bord eines anderen Geisterschiffs befand.",
+      "Behoben: Lud man in der Nähe des Ankerplatzes bestimmter Inseln einen Spielstand, erschien das Schiff auf der Insel.",
+      "Behoben: Die <b>Antragsquest bei den Hexen</b> wurde nicht abgeschlossen, obwohl die Interaktion für den Antrag (<em>Propose</em>) abgeschlossen war.",
+      "Behoben: Platzierte Innenobjekte verschwanden, wenn man im <b>Wohn-System</b> „Änderungen rückgängig machen“ auswählte.",
+      "Behoben: Beim Betreten des <b>Wohn-Modus</b> wurde man unter bestimmten Umständen zu einem Wohnbereich an einem anderen Ort versetzt.",
+      "Behoben: Die <b>Verbesserungsstufe der Ausrüstung</b> wurde unter bestimmten Umständen zurückgesetzt, wenn mehrere Konten mit demselben Spielstand spielten.",
+      "Behoben: Einige <b>Outfits</b> wurden unnatürlich dargestellt.",
+      "Neu: Die <b>Gefleckte Robbe</b> (<em>Spotted seal</em>) kann jetzt gefüttert werden.",
+      "Behoben: Beim Loslassen während des <b>Hangelns</b> wurde unbeabsichtigt das Rollen ausgelöst.",
+      "Behoben: <b>Karanda-Kugeln</b> (<em>Karanda's Spheres</em>) erzeugten ununterbrochen Projektile.",
+      "Behoben: Monster mit <b>Musketen</b> zielten in eine seltsame Richtung.",
+      "[Damiane] Behoben: Die Fähigkeit <b>„Stechen: Perfektion“</b> (<em>Ascended Stab</em>) wurde bei Verwendung eines Langschwerts nicht korrekt angewandt. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt <em>two-handed sword</em>.</span>",
+      "Behoben: Das Spiel konnte abstürzen, wenn man sich der <b>Burg oder den Verwaltungseinrichtungen</b> aus der Ferne näherte, nachdem dort eine große Anzahl an Bodenbelägen platziert worden war.",
+      "Neu: Trifft man auf einen <b>Fischschwarm</b>, wird jetzt der zugehörige Hilfstext angezeigt."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac) und PlayStation: <em>Patch jetzt verfügbar</em>. XBOX, Epic Games Store und Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 07.11.2026). Keine Downloadgröße, keine Build-Nummer.",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde zu diesem Patch nicht aktualisiert, Stand weiter 05.11.2026, 03:00 UTC, 15 Punkte. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
+      "Quelle: offizielle Patch-Notizen Version 2.04.08, Pearl Abyss, 06.11.2026 09:50 UTC (boardNo 152), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
   {ver:"2.04.07",date:"05.11.2026",size:"Siebter Hotfix nach dem DLC-Start, veröffentlicht am 05.11.2026 spätestens um 03:20 UTC, also 04:20 MEZ (boardNo 151; Steam-Zweitveröffentlichung 03:20 UTC; die Detailseite nennt in beiden Sprachfassungen 00:00 UTC, also 01:00 MEZ, die Abweichung ist ungeklärt). Ein einziger Punkt unter der Überschrift Patch-Details, kein neuer Inhalt. Keine Downloadgröße, keine Build-Nummer.",features:[
     {cat:"Patch-Details",items:[
       "Behoben: Der Gegenstand <b>„Niburak-Stoffrüstung“</b> (<em>Nibrak Cloth Armor</em>) verschwand. <span style='color:var(--gdim)'>Einordnung: Die Notice nennt weder Auslöser noch Umstände und sagt nicht, ob verschwundene Rüstungen zurückkommen.</span>"

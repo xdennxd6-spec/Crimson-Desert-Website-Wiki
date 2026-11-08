@@ -9,8 +9,8 @@
 // Die SEO-Seite (scripts/seo-parts/romanze.mjs) liest dieselben Konstanten per extract(): reine Datenliterale, keine Funktionen.
 
 const ROM_META = {
-  checked: "05.11.2026",
-  stand: "2.04.07",
+  checked: "08.11.2026",
+  stand: "2.04.08",
   since: "29.10.2026",
   planNote: "Empfehlung dieses Wikis, abgeleitet aus den Belegen. Einen berechneten schnellsten oder billigsten Weg gibt es nicht, weil die Punktwerte auf der erweiterten Stufe bis auf eine Einzelangabe fehlen."
 };
@@ -321,7 +321,8 @@ const ROM_FIXES = [
   {ver: "2.04.04", date: "01.11.", d: "Teile des Schenken-Menüs auf Koreanisch: behoben."},
   {ver: "2.04.05", date: "01.11.", d: "Quests für den Antrag ließen sich bei einigen Hexen nicht fortsetzen: behoben. Welche Hexen, nennt die Notice nicht."},
   {ver: "2.04.06", date: "04.11.", d: "Rückfall zum Titelbildschirm beim Verschenken mehrerer Gegenstände: behoben. Mehrfach-Schenken ist damit kein bekanntes Risiko mehr."},
-  {ver: "2.04.07", date: "05.11.", d: "Nichts zur Romanze."}
+  {ver: "2.04.07", date: "05.11.", d: "Nichts zur Romanze."},
+  {ver: "2.04.08", date: "06.11.", d: "Die Antragsquest bei den Hexen wurde nicht abgeschlossen, obwohl die Interaktion „Antrag“ erledigt war: behoben. Dazu: platzierte Innenobjekte verschwanden bei „Änderungen rückgängig machen“, und der Wohn-Modus versetzte einen manchmal an einen anderen Wohnort, beides behoben."}
 ];
 const ROM_FIX_NOTE = "Die Liste bekannter Probleme von Pearl Abyss führt am 05.11.2026 keinen Eintrag zu Romanze, Flirten oder Ehe. Offen bleiben dort die Graumähnen-Fraktionsquests als Damiane oder Oongka und die zeitweise fehlenden Interaktionen.";
 
@@ -362,6 +363,7 @@ const ROM_SOURCES = [
   {t: "Hotfix 2.04.05", url: "https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=149"},
   {t: "Hotfix 2.04.06", url: "https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=150"},
   {t: "Hotfix 2.04.07", url: "https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=151"},
+  {t: "Patch 2.04.08", url: "https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=152"},
   {t: "Bekannte Probleme (05.11.2026)", url: "https://crimsondesert.pearlabyss.com/de-DE/News/Notice/Detail?_boardNo=68"},
   {t: "Game8 Romanze (04.11.2026)", url: "https://game8.co/games/Crimson-Desert/archives/584417"},
   {t: "Game8 Fest (03.11.2026)", url: "https://game8.co/games/Crimson-Desert/archives/636534"},
