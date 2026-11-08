@@ -8143,3 +8143,6 @@ img[src*="cd_assets/gt/"],img[src*="cd_assets/ql/"],img[src*="cd_assets/dlc/"]{b
   .reit-tab tr.reit-off,.reit-tab tr.hide{display:none}
 }
 /* REIT Ende */
+/* ZG Anfang: Zutatengruppen (Herstellen) */
+.zg-intro{margin:0 0 .6em;color:var(--gdim)}.zg-g{margin:.7em 0;padding-top:.5em;border-top:1px solid rgba(255,255,255,.08)}.zg-t{font-size:1rem;margin:0 0 .25em}.zg-en,.zg-n{color:var(--gdim);font-weight:400;font-size:.85em}.zg-m{margin:0;line-height:1.55;overflow-wrap:anywhere}.zg-h,.zg-q{color:var(--gdim);font-size:.82em;margin:.25em 0 0;overflow-wrap:anywhere}
+/* ZG Ende */

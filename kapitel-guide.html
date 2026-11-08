@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=54c9345641">
+<link rel="stylesheet" href="app.css?v=ef0ab101bf">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -1237,7 +1237,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       </summary>
       <div class="cd-fold-body">
         <div class="r2b1-info-g">
-          <section><h5 class="r2b1-h">Über diese Rezeptliste</h5><p>Diese Seite bündelt erstmals sämtliche Herstellungsrezepte aus Crimson Desert: 327 Koch-Rezepte (95 Gerichte in bis zu vier Koch-Stufen; Wild-Pot, Pot, Frying-Pan, Plate; alle Kochstufen einschließlich Hearty sowie die Mahlzeiten-Familien), 28 Elixier-/Tee-/Pillen-Rezepte am Kessel und 31 Kuku-Gadgets aus der Kuku-Werkstatt (Kilnden). Das Datengerüst (Spine) stammt aus dem dataminten questlog.gg und wird gegen game8 und Fextralife abgeglichen und angereichert. Wo Quellen voneinander abweichen, gilt der datamined questlog-Wert als autoritativ; jede dokumentierte Abweichung ist in den Rezept-Notizen festgehalten. Ziel ist ein praxistaugliches Dashboard: Welches Gericht heilt am meisten, welche Resistenz bekomme ich am günstigsten, und welches Elixier lohnt sich vor welchem Boss.</p></section>
+          <section><h5 class="r2b1-h">Über diese Rezeptliste</h5><p>Diese Seite bündelt erstmals sämtliche Herstellungsrezepte aus Crimson Desert: 384 Koch-Rezepte (116 Gerichte in bis zu vier Koch-Stufen; Wild-Pot, Pot, Frying-Pan, Plate; alle Kochstufen einschließlich Hearty sowie die Mahlzeiten-Familien), 28 Elixier-/Tee-/Pillen-Rezepte am Kessel und 31 Kuku-Gadgets aus der Kuku-Werkstatt (Kilnden). Das Datengerüst (Spine) stammt aus dem dataminten questlog.gg und wird gegen game8 und Fextralife abgeglichen und angereichert. Wo Quellen voneinander abweichen, gilt der datamined questlog-Wert als autoritativ; jede dokumentierte Abweichung ist in den Rezept-Notizen festgehalten. Ziel ist ein praxistaugliches Dashboard: Welches Gericht heilt am meisten, welche Resistenz bekomme ich am günstigsten, und welches Elixier lohnt sich vor welchem Boss.</p></section>
           <section><h5 class="r2b1-h">Darstellung</h5><p>Die Koch-Stufen eines Gerichts (z.&nbsp;B. Getreiderolle / Füllende Getreiderolle / Vollgeladene Getreiderolle) stehen gebündelt auf <em>einer</em> Karte, und zwar alle gleichzeitig sichtbar, genau wie die Stufen-Werte der Abyss-Cores: unter „Stufen-Werte“ steht je Stufe die geheilte HP-Zahl. Weicht die Zutatenmenge je Stufe ab, steht sie mit dem vollen Rezeptnamen jeder Stufe im aufgeklappten Teil der Karte. Alles, was über die Stufen identisch bleibt (Resistenz-Level, Dauer, Station, Item-Stufe, Fundort und bei vielen Gerichten auch die Zutaten), steht nur einmal auf der Karte. So werden aus 336 Koch-Rezepten 104 Gerichte-Karten; zusammen mit den 37 Elixieren und 31 Kuku-Gadgets zeigt die Seite 172 Karten. Wer jede Stufe als eigene Karte braucht, stellt bei „Koch-Stufen“ auf „einzeln“ (oder „nur Basis“). Die Suche findet weiterhin jeden vollständigen Rezeptnamen.</p></section>
           <section><h5 class="r2b1-h">Koch-Stufen</h5><p>Gerichte erscheinen in bis zu vier Koch-Stufen (Basis -&gt; Filling -&gt; Satisfying -&gt; Hearty) bzw. in den Feast-Stufen. Bestätigte Regel: Die geheilten Trefferpunkte (Flat-Heal-Gerichte) skalieren über die Stufen hoch (HP = questlog-Rohwert / 1000), während die Resistenz-STUFE und meist auch die Wirkdauer fix bleibt (Resistenz-Level = questlog-Wert). Achtung: Prozent-Heiler wie Schokolade (+50% Max-HP) und die Feast-Gerichte mit reinen Buffs (Ignore Stamina/Geist, Overheal, Angriff) folgen NICHT der /1000-HP-Logik - ihr Nutzen steckt im zeitlich begrenzten Buff, nicht in einer HP-Zahl. Bei Elixieren steigert die Stufe Lesser -&gt; normal -&gt; Greater sowohl Wert als auch Dauer (5/10/15 Min bei getimten Buffs, 4/8/12 s bei No-Cost-Buffs).</p></section>
         </div>
@@ -1251,6 +1251,13 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <select class="fs" id="kf-tier" onchange="renderCrafting()" aria-label="Koch-Stufen-Darstellung"><option value="group">Koch-Stufen gebündelt</option><option value="all">Koch-Stufen einzeln</option><option value="basis">nur Basis-Stufe</option></select>
     </div>
     <div id="craft-grid" class="r2b1-shelves"></div>
+    <details class="cd-fold cd-spot zg-fold" id="craft-gruppen">
+      <summary>
+        <span class="cd-fold-main"><h3 class="cd-fold-t" data-toc>Zutatengruppen</h3><span class="cd-fold-lead">Was hinter Platzhaltern wie „8x Fleisch (Gruppe)“ steckt: welche Zutaten dafür zählen.</span></span>
+        <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
+      </summary>
+      <div class="cd-fold-body" id="craft-gruppen-body"></div>
+    </details>
     <details class="cd-fold cd-spot r2b1-cores" style="--cd-acc:var(--cd-fx-speed)">
       <summary>
         <span class="cd-fold-ico" aria-hidden="true"><svg class="cd-i r2b1-i" aria-hidden="true" focusable="false"><use href="#r2b1-i-core"/></svg></span>
@@ -8522,6 +8529,7 @@ function renderCrafting(){
   if(_r2b1Mode!==mode||!_r2b1Els.length||!grid.querySelector('.r2b1-card'))_r2b1Build(mode);
   _r2b1Filter();
   renderReverseLookup();
+  if(typeof renderZutatGruppen==='function')renderZutatGruppen();
 }
 
 // ===== TRUE ENDING =====
