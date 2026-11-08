@@ -8134,3 +8134,45 @@ summary.lm-be-kopf:hover{border-color:var(--brass)}
 .lm-be-quellen a{color:var(--brass)}
 .lm-fo-txt{overflow-wrap:anywhere}
 /* BESCHAFFUNG Ende */
+/* REIT Anfang (Reit- & Tierausrüstung, 08.11.2026; Renderer in data/d14-reit.js) */
+.reit-bar{margin:6px 0 12px}
+.reit-wrap{max-width:100%}
+.reit-tab{width:100%;border-collapse:collapse;font-size:13px;line-height:1.5}
+.reit-tab th{text-align:left;padding:8px 10px;font:700 11px/1.3 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid color-mix(in srgb,var(--dim) 35%,transparent)}
+.reit-tab td{padding:9px 10px;vertical-align:top;border-bottom:1px solid color-mix(in srgb,var(--dim) 18%,transparent);overflow-wrap:anywhere}
+.reit-tab tr.reit-off,.reit-tab tr.hide{display:none}
+.reit-c-n{min-width:200px}
+.reit-c-w{min-width:150px}
+.reit-n{display:flex;gap:10px;align-items:flex-start}
+.reit-ico{width:44px;height:44px;flex:0 0 44px;object-fit:contain;border-radius:8px;background:color-mix(in srgb,var(--dim) 10%,transparent)}
+.reit-nm{display:block;color:var(--ink-hi)}
+.reit-en,.reit-f,.reit-t{display:block;font-size:11.5px;color:var(--dim)}
+.reit-t{font-family:var(--f-mono);letter-spacing:.04em}
+.reit-w{margin:0 4px 4px 0}
+.reit-src{display:block;font-size:12.5px}
+.reit-q{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px;font-size:12.5px}
+.reit-note{display:block;margin-top:4px;font-size:12px;color:var(--dim)}
+.reit-dim{color:var(--dim)}
+.reit-h{margin:28px 0 8px;font-size:17px;color:var(--ink-hi)}
+.reit-p{margin:0 0 10px;max-width:78ch;font-size:13px;color:var(--text)}
+.reit-ref{margin:0;padding-left:18px;font-size:13px;line-height:1.7}
+.reit-ref-i.hide{display:none}
+@media (max-width:760px){
+  .reit-tab thead{display:none}
+  .reit-tab,.reit-tab tbody,.reit-tab tr,.reit-tab td{display:block;width:auto;min-width:0}
+  .reit-tab tr{padding:10px 0;border-bottom:1px solid color-mix(in srgb,var(--dim) 25%,transparent)}
+  .reit-tab td{padding:3px 0;border:0}
+  .reit-tab td.reit-c-a::before,.reit-tab td.reit-c-w::before,.reit-tab td.reit-c-q::before{content:attr(data-l);display:block;font:700 10.5px/1.4 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--gold)}
+  .reit-tab tr.reit-off,.reit-tab tr.hide{display:none}
+}
+/* REIT Ende */
+/* ZG Anfang: Zutatengruppen (Herstellen) */
+.zg-intro{margin:0 0 .6em;color:var(--gdim)}.zg-g{margin:.7em 0;padding-top:.5em;border-top:1px solid rgba(255,255,255,.08)}.zg-t{font-size:1rem;margin:0 0 .25em}.zg-en,.zg-n{color:var(--gdim);font-weight:400;font-size:.85em}.zg-m{margin:0;line-height:1.55;overflow-wrap:anywhere}.zg-h,.zg-q{color:var(--gdim);font-size:.82em;margin:.25em 0 0;overflow-wrap:anywhere}
+/* ZG Ende */
+/* SU Anfang: Sammelübersicht (Sammelgegenstände) */
+.su-fold{margin-top:1.2em}.su-intro{margin:0 0 .6em;color:var(--gdim)}.su-b{font-size:1rem;margin:1.1em 0 .5em}.su-bn{color:var(--gdim);font-weight:400;font-size:.85em}
+.su-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:.7em}
+.su-card{min-width:0;padding:.7em .85em;border:1px solid rgba(255,255,255,.09);border-radius:10px;background:rgba(255,255,255,.025)}
+.su-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2em .45em;margin:0 0 .3em;font-size:.98rem}.su-en{color:var(--gdim);font-weight:400;font-size:.84em}.su-n{margin-left:auto;font-weight:700;color:var(--gold)}
+.su-card p{margin:.32em 0 0;font-size:.88em;line-height:1.5;overflow-wrap:anywhere}.su-card p b{font-weight:600;margin-right:.25em}.su-h,.su-dlc{color:var(--gdim)}.su-v{margin-top:.5em}.su-link{max-width:100%;white-space:normal;text-align:left}
+/* SU Ende */
