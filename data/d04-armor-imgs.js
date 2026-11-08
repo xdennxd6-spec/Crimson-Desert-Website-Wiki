@@ -465,7 +465,15 @@ const MOUNT_INGAME_IMGS={
   "Electric Ray": "cd_assets/dlc/mount-electric-ray.webp",
   "Sea Turtle": "cd_assets/dlc/mount-sea-turtle.webp",
   "Sun Fish": "cd_assets/dlc/mount-sunfish.webp",
-  "Golden Shark": "cd_assets/dlc/mount-golden-shark.webp"
+  "Golden Shark": "cd_assets/dlc/mount-golden-shark.webp",
+  // Ergänzt 08.11.2026: Wissensbilder aus den Spieldateien (knowledgeimage)
+  "Dolphin": "cd_assets/dlc/mount-dolphin.webp",
+  "Pink Dolphin": "cd_assets/dlc/mount-pink-dolphin.webp",
+  "Manta Ray": "cd_assets/dlc/mount-manta-ray.webp",
+  "Pink Manta Ray": "cd_assets/dlc/mount-pink-manta-ray.webp",
+  "Spotted Seal": "cd_assets/dlc/mount-spotted-seal.webp",
+  "Hammerhead Shark": "cd_assets/dlc/mount-hammerhead-shark.webp",
+  "Eagle Ray": "cd_assets/dlc/mount-eagle-ray.webp"
 };
 const ARMOR_IMGS={
   // Item-Bilder am 09.09.2026 gegen questlog-IDs geprueft; Belege: item-image-sources.json
