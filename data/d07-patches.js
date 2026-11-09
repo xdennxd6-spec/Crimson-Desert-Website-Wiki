@@ -1678,7 +1678,31 @@ const ENEMY_IMGS={
  "The Mistcloaked Owls":"cd_assets/ql/assets/_sprites/cd_questimage_mission_muiquunvillage_block_owlsofthemist_subnode.webp",
  "Skull Knight Follower":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_skullkinight_follower.webp",
  "Titan's Minion":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_titan_follower.webp",
- "H.A.L.L.":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_marni.webp"
+ "H.A.L.L.":"cd_assets/ql/assets/_sprites/cd_knowledgeimage_knowledge_marni.webp",
+ // DLC-Meereskreaturen (09.11.2026): Lexikonbilder aus den Spieldateien (knowledgeimage, eigener PAZ-Leser)
+ "Giant Hydrothermal Salamander":"cd_assets/dlc/kreaturen/giant-hydrothermal-salamander.webp",
+ "Hydrothermal Salamander":"cd_assets/dlc/kreaturen/hydrothermal-salamander.webp",
+ "Giant Manta Ray":"cd_assets/dlc/kreaturen/giant-manta-ray.webp",
+ "Angel Shark":"cd_assets/dlc/kreaturen/angel-shark.webp",
+ "Hammerhead Shark":"cd_assets/dlc/kreaturen/hammerhead-shark.webp",
+ "Eagle Ray":"cd_assets/dlc/kreaturen/eagle-ray.webp",
+ "Megalodon":"cd_assets/dlc/kreaturen/megalodon.webp",
+ "Sea Serpent":"cd_assets/dlc/boss-sea-serpent.webp",
+ "Siren":"cd_assets/dlc/kreaturen/siren.webp",
+ "Jellyfish":"cd_assets/dlc/kreaturen/jellyfish.webp",
+ "Electric Jellyfish":"cd_assets/dlc/kreaturen/electric-jellyfish.webp",
+ "Venomous Jellyfish":"cd_assets/dlc/kreaturen/venomous-jellyfish.webp",
+ "Giant Jellyfish":"cd_assets/dlc/kreaturen/giant-jellyfish.webp",
+ "Giant Electric Jellyfish":"cd_assets/dlc/kreaturen/giant-electric-jellyfish.webp",
+ "Giant Venomous Jellyfish":"cd_assets/dlc/kreaturen/giant-venomous-jellyfish.webp",
+ "King Crab":"cd_assets/dlc/kreaturen/king-crab.webp",
+ "Snow Crab":"cd_assets/dlc/kreaturen/snow-crab.webp",
+ "Coralback Crab":"cd_assets/dlc/kreaturen/coralback-crab.webp",
+ "Pearl Moss Crocodile":"cd_assets/dlc/kreaturen/pearl-moss-crocodile.webp",
+ "Hydrothermal Turtle":"cd_assets/dlc/kreaturen/hydrothermal-turtle.webp",
+ "Pearl Octopus":"cd_assets/dlc/kreaturen/hydrothermal-octopus.webp",
+ "Scaly-Foot Snail":"cd_assets/dlc/kreaturen/scaly-foot-snail.webp",
+ "Spotted Seal":"cd_assets/dlc/kreaturen/spotted-seal.webp"
 };
 const ENEMIES={
  wild:[
@@ -1712,6 +1736,34 @@ const ENEMIES={
   {name:"Rustwalker",de:"Rostläufer",region:"Crimson Desert (Fraktion The Helms)",drops:"Abyss-Sphäre (30%); Core-Drops Stufe I (je 12%): Zerstörung, Einsicht, Ausdauerregeneration, Lebensodem, Gemütsruhe, Verstärkung, Stahlwand, Festigkeit, Sturmwind, Eile, Ascent; selten: Zerstörung II, Verstärkung II (je 1,5%)",conf:"medium",note:"Ein Ancient, der seinen Körper verlor und dessen Seele in Schrott gebunden ist — der Körper besteht aus verbogenen Metallteilen, jede Bewegung kreischt metallisch; mit seiner schweren Masse walzt er unaufhaltsam gegen Feinde vor. questlog ordnet ihn der Fraktion Die Helms zu. Angriffswert (700) und Drop-Tabelle wie bei den Walker-Bossen."},
   {name:"Hexe Earthen Soldier",de:"Irdenkrieger der Hexe",region:"Demeniss (Hexe Wasteland)",drops:"Keramik-Sammelstücke (je 1%, z.B. Frisch gebrannte schmale Flasche, Krug für medizinische Zwecke, Kleiner Wasserkrug); Archer: Pfeilbündel (10%); Warrior: Granat, Epidot, Azurit (je 10%), Diamant (2%), Abyss-Artefakt (1%)",note:"Unheilige Konstrukte aus grobem Stein und Metallsplittern, die das Witch Wasteland bewachen — Varianten Soldat, Archer, Spearman, Swordsman und Warrior (mit Rundschild und schwerer Waffe), dazu Hinterhalt-Varianten, die aus dem Boden oder dem Wasser auftauchen. Zur Fraktion von Hexe Marie zählen außerdem der Explosive Hexen-Krug (ein Krug mit Bäumchen, der auf Feinde zustürmt und sich selbst sprengt), Irdenwurm der Hexe, Krug-Steinrückenkrebs und Schwefelsteinrückenkrebs der Hexe (Drop: Schwefel)."},
   {name:"Titan's Minion",de:"Titan-Lakai",region:"Pailune (Windsong Peaks, Fraktion Titan)",drops:"Leichter Kupferbeutel, Kleiner gegrillter Fisch, Gegrillte Fleischspieße, Gravierter Kupferohrring, Rezept: Fruchtpunsch, Fruchtpunsch",conf:"medium",note:"Ein aus riesigen Felsen und Erde geformtes Ungeheuer, das wirkt, als sei das Land selbst lebendig geworden; sein rissiger Körper verliert ständig Staub und Steine und bewegt sich eins mit dem Gelände. Es wirkt schwer und langsam, zermalmt aber sein Ziel mit überwältigender Masse, sobald es es erfasst hat. Gehört zur questlog-Fraktion Titan, deren Namensgeber (der Blitzgott der Dörfer um die Windsinger-Gipfel) als Boss im Wiki steht; die Drop-Tabelle ist die eines allgemeinen Gegners. Die Einzelheiten von Fundorten und Kampf sind nicht erfasst."}
+ ],
+ // DLC Charting the Unknown (09.11.2026): Meereskreaturen aus character.dlc_01 + knowledge.dlc_01; Notizen in eigenen Worten nach den Lexikontexten.
+ // Drops und genaue Fundorte bewusst nur, wo belegt.
+ meer:[
+  {name:"Giant Hydrothermal Salamander",de:"Riesiger Hydrothermal-Salamander",region:"Großer Ozean (DLC), bei den Hydrothermalquellen der Tiefsee (Hydrothermalfeld, Großes Hydrothermalquellen-Areal)",drops:"Haut des riesigen Hydrothermal-Salamanders (laut Itemtext von diesem Tier; Chance nicht belegt)",note:"Uralter Riese der Tiefsee mit pechschwarzer Haut, leuchtend gelben Streifen, Stacheln und dickem Panzer. Seine Haut gilt als besonders hitzefestes Material und wird im DLC für den Schiffsbau gebraucht. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Hydrothermal Salamander",de:"Hydrothermal-Salamander",region:"Großer Ozean (DLC), bei den Hydrothermalquellen der Tiefsee (Hydrothermalfeld, Großes Hydrothermalquellen-Areal)",drops:"—",note:"Kleinere Verwandte des Riesigen Hydrothermal-Salamanders mit dornigem Rücken. Lebt friedlich an den heißen Quellen und tarnt sich mit seiner felsartigen Haut fast perfekt. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Giant Manta Ray",de:"Riesenmanta",region:"Großer Ozean (DLC Charting the Unknown), Tiefen der Großen Korallenregion",drops:"—",note:"Riesiger Rochen, dessen Flossen wie ein Umhang ausgebreitet sind. Trotz seines gewaltigen Schattens laut Spieltext sanftmütig. Nicht zu verwechseln mit dem zähmbaren Mantarochen und dem Rosa Mantarochen (siehe Reittiere). Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Angel Shark",de:"Engelrochen",region:"Großer Ozean (DLC Charting the Unknown), Meeresgrund",drops:"—",note:"Im englischen Spiel Angel Shark (Engelhai), im deutschen Spiel Engelrochen. Flacher Fisch mit flügelartigen Flossen: vergräbt sich im Sand, lauert reglos und schnellt beim Jagen blitzschnell hervor. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Hammerhead Shark",de:"Hammerhai",region:"Großer Ozean (DLC Charting the Unknown)",drops:"—",note:"Hai mit hammerförmigem Kopf voller feiner Sinnesorgane. Meist friedlich, wird aber gefährlich, wenn er sich bedroht fühlt oder Beute jagt. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Eagle Ray",de:"Adlerrochen",region:"Großer Ozean (DLC Charting the Unknown)",drops:"—",note:"Weiß gepunkteter Rochen, der wie ein Greifvogel durchs Wasser gleitet. Wehrt Angreifer mit dem Giftstachel am Schwanz ab. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Megalodon",de:"Megalodon",region:"Großer Ozean (DLC Charting the Unknown), finstere Tiefen",drops:"—",note:"Riesenhai, der eigentlich als ausgestorben galt. Laut Spieltext hat noch kein Wesen seinen Biss überlebt. Das Bild ist das Lexikonbild „Riesenhai“ der Spieldateien. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Kraken",de:"Krake",region:"Großer Ozean (DLC Charting the Unknown), Tiefsee",drops:"—",note:"Gewaltiges Wesen mit langen Armen, das in der Tiefsee lauert. Wer zu tief oder über die Kartengrenze taucht, wird nach Ablauf des Countdowns in einer Zwischensequenz von einem Kraken in die Tiefe gezogen (siehe DLC-Seite, Tauchen). Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Sea Serpent",de:"Seeschlange",region:"Großer Ozean (DLC Charting the Unknown), u. a. Seetangwald der Seeschlangengewässer",drops:"—",note:"Schlangenförmiges Meerestier, das sich wie ein Fisch durch die Tiefe schlängelt. Im Hotfix 2.04.02 als Gegnerklasse im Ozean erwähnt. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Siren",de:"Sirene",region:"Großer Ozean (DLC Charting the Unknown)",drops:"—",note:"Sagenhaftes Meereswesen, das Seefahrer mit Gesang in die Tiefe lockt. Laut Spieltext haben kaum Zeugen eine Begegnung überlebt. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Jellyfish",de:"Qualle",region:"Ozeane von Pywel (DLC)",drops:"—",note:"Gewöhnliche Qualle ohne Knochen und Organe, im Spiel auch „lebendes Gespenst“ genannt. Quallen zählen beim Tauchen zu den Gefahren. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Electric Jellyfish",de:"Stromqualle",region:"Ozeane von Pywel (DLC)",drops:"—",note:"Sieht aus wie eine normale Qualle, gibt aber über die Tentakelspitzen Strom ab. Schon eine leichte Berührung richtet schweren Schaden an. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Venomous Jellyfish",de:"Giftqualle",region:"Ozeane von Pywel (DLC)",drops:"—",note:"Hochgiftige Qualle, schon ihre Nähe ist gefährlich. Richtig zubereitet laut Spieltext eine besondere Zutat. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Giant Jellyfish",de:"Riesen-Qualle",region:"Ozeane von Pywel (DLC)",drops:"—",note:"Uralte, riesige Qualle, im Spiel „lebender Riesengeist der Meere“ genannt. Im DLC gibt es das Material Haut der Riesen-Qualle. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Giant Electric Jellyfish",de:"Riesen-Stromqualle",region:"Ozeane von Pywel (DLC)",drops:"—",note:"Viel größer als die Stromqualle, mit extrem langen Tentakeln. Ihre Stromstöße lähmen laut Spieltext Meerestiere in weitem Umkreis. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Giant Venomous Jellyfish",de:"Riesen-Giftqualle",region:"Ozeane von Pywel (DLC)",drops:"—",note:"Riesige Giftqualle, deren Tentakel wie ein tödliches Netz im Wasser hängen. Schon eine flüchtige Berührung kann tödlich sein. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"King Crab",de:"Königskrabbe",region:"Großer Ozean (DLC Charting the Unknown)",drops:"—",note:"Massige Krabbe mit dickem Panzer und riesigen Scheren, die sie bei Gefahr drohend hebt. Ihr Fleisch gilt als Delikatesse. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Snow Crab",de:"Schneekrabbe",region:"Großer Ozean (DLC Charting the Unknown), kalter Meeresgrund",drops:"—",note:"Orange gepanzerte Krabbe mit langen Beinen. Meist gemächlich, hebt bei Bedrohung aber ihre scharfen Scheren. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Coralback Crab",de:"Korallen-Steinrückenkrebs",region:"Großer Ozean (DLC Charting the Unknown), Korallenriffe",drops:"—",note:"Meeresverwandter des Steinrückenkrebses: Auf seinem Panzer wachsen ganze Korallenkolonien, im Riff ist er kaum zu erkennen. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Pearl Moss Crocodile",de:"Moos-Perlenkrokodil",region:"DLC, Fundort nicht belegt",drops:"—",note:"Moosbewachsenes Krokodil mit perlenbesetzter, steinartiger Haut. Liegt flach an Felsen geschmiegt auf der Lauer und schlägt zu, sobald Beute vorbeikommt. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Hydrothermal Turtle",de:"Hydrothermal-Schildkröte",region:"Großer Ozean (DLC), bei den Hydrothermalquellen der Tiefsee (Hydrothermalfeld, Großes Hydrothermalquellen-Areal)",drops:"—",note:"Schildkröte mit hitze- und druckfestem Panzer, frisst die kleinen Tiere an den heißen Quellen. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Pearl Octopus",de:"Hydrothermal-Oktopus",region:"Großer Ozean (DLC), bei den Hydrothermalquellen der Tiefsee (Hydrothermalfeld, Großes Hydrothermalquellen-Areal)",drops:"—",note:"Roter Oktopus, der sich in warmen Felsspalten an den heißen Quellen versteckt und kleine Krebstiere blitzschnell packt. Interner englischer Name Pearl Octopus. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Scaly-Foot Snail",de:"Schuppenfuß-Schnecke",region:"Großer Ozean (DLC), bei den Hydrothermalquellen der Tiefsee (Hydrothermalfeld, Großes Hydrothermalquellen-Areal)",drops:"—",note:"Tiefseeschnecke, deren Fuß mit harten Schuppen gepanzert ist. Hält extremer Hitze und hohem Wasserdruck stand. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."},
+  {name:"Spotted Seal",de:"Gefleckte Robbe",region:"Großer Ozean (DLC Charting the Unknown), kalte Meere und Küsten",drops:"—",note:"Graue, schwarz gefleckte Robbe mit dicker Fettschicht. Ertastet mit ihren langen Barthaaren selbst im Dunkeln feinste Bewegungen. Quelle: Spieltexte DLC (character/knowledge.dlc_01)."}
  ],
  fraktionen:[
   {name:"Bleed Bandits",region:"Hernand (u.a. Außenposten Fort Anvil)",drops:"Stoff-Fetzen, Pelz, Wolle (Chance)",note:"Bewaffnete Banditen, die Hernand in Angst versetzen: Sie machen Opfer mit der Albtraum-Droge Dreamer's Bliss abhängig und versklaven sie — gestützt von einem mächtigen Hintermann im Schatten. [1.13.00: Alchemy Explosive Pack verliert jetzt bei jeder Bombenbeschwörung Haltbarkeit.]"},

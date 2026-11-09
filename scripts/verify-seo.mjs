@@ -342,7 +342,7 @@ const ERLAUBTE_ZAHLEN = {
     zaehl(CRAFTING, (c) => c.conf === "low" || c.conf === "medium")],
   "trophaeen.html": [N_TROPHIES, zaehl(TROPHIES, (t) => t.miss),
     ...["platinum", "gold", "silver", "bronze"].map((g) => zaehl(TROPHIES, (t) => t.grade === g))],
-  "bestiarium.html": [N_ENEMIES, ...["wild", "kreaturen", "fraktionen"].map((k) => (ENEMIES[k] || []).length)],
+  "bestiarium.html": [N_ENEMIES, ...["wild", "kreaturen", "meer", "fraktionen"].map((k) => (ENEMIES[k] || []).length)],
   "side-quests.html": [N_SIDE_QUESTS, zaehl(SIDE_QUESTS, (q) => q.miss), new Set(SIDE_QUESTS.map((q) => q.region)).size],
   "hauptquests.html": [N_MAIN_QUESTS, MAIN_QUESTS.length,
     zaehl(MAIN_QUESTS.flatMap((c) => c.quests), (q) => q.miss),

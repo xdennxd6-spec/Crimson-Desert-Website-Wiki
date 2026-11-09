@@ -13369,7 +13369,7 @@ function bestDropChancen(name){
 // Taktik, Chancen und Notiz im Aufklapper (data-item-visible/-hidden, die Suche klappt ihn auf). Die Geschwisterfolge
 // h3.sub-t + p.best-sub + .grid in #bestiary-root bleibt (Such-Gruppenlogik, Kartenfokus).
 let _drA2BestF='all';
-const _DRA2_BEST_G={wild:'❥',kreaturen:'✦',fraktionen:'⚔'};
+const _DRA2_BEST_G={wild:'❥',kreaturen:'✦',meer:'⚓',fraktionen:'⚔'};
 const _DRA2_BEST_INTRO='Normale Gegner und Wildtiere in Pywel — Wildtiere fürs Skinning, Monster &amp; Kreaturen mit ihren Material-Drops und die feindlichen Fraktionen aller fünf Regionen. Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items). Bosse stehen auf der Seite Bosse.';
 function _drA2Split(title){const m=/^(\S+)\s+(.*)$/.exec(title);return m?{g:m[1],t:m[2]}:{g:'',t:title};}
 function _drA2Join(a){return a.length>1?a.slice(0,-1).join(', ')+' & '+a[a.length-1]:a.join('');}
@@ -13417,6 +13417,7 @@ function renderBestiary(){
   const GROUPS=[
    ['wild','🦌 Wildtiere','Jagd- und Nutztiere — Skinning-Quellen für Knochen, Häute, Fleisch, Hörner und Fleece.'],
    ['kreaturen','🕷️ Monster & Kreaturen','Nicht-humanoide Gegner mit besonderen Material-Drops (Abyss Cells, Webs, Federn).'],
+   ['meer','🌊 Meer & Tiefsee (DLC)','Meeresbewohner aus „Charting the Unknown“ nach den Lexikontexten der Spieldaten. Drops und genaue Fundorte stehen nur, wo sie belegt sind; zähmbare Meerestiere stehen bei den Reittieren.'],
    ['fraktionen','⚔️ Feindliche Fraktionen','Humanoide Gegner-Gruppen nach Region — Lore aus der questlog-Datenbank, Drops von den Fraktions-Einheiten.']
   ];
   el.innerHTML=GROUPS.map(([key,title,sub])=>{
@@ -13427,7 +13428,7 @@ function renderBestiary(){
   }).join('');
   const n={};let total=0;GROUPS.forEach(([k])=>{n[k]=ENEMIES[k].length;total+=n[k];});
   drMount('bestiary',drHead({kicker:'Kampf',title:'Gegner',sub:'Normale Gegner und Wildtiere in Pywel.',scene:['reg-hernand'],glyph:'⛤',tone:'ok',
-    stats:[[total,'Gegner'],[n.wild,'Wildtiere'],[n.kreaturen,'Monster & Kreaturen'],[n.fraktionen,'Feindliche Fraktionen']],
+    stats:[[total,'Gegner'],[n.wild,'Wildtiere'],[n.kreaturen,'Monster & Kreaturen'],[n.meer,'Meer & Tiefsee'],[n.fraktionen,'Feindliche Fraktionen']],
     links:[['bosses','Bosse'],['npcs','Charaktere & NPCs'],['gatherables','Sammelobjekte'],['disarm','Entwaffnen']],
     after:drInfo({title:'So liest du die Seite',lead:'Drop-Listen aus der questlog-Datenbank (Auswahl der häufigsten bzw. interessantesten Drops, ohne Quest-Items).',icon:{h:cdIcon('info')},h:'<p>'+_DRA2_BEST_INTRO+'</p>'})}));
   const bar=document.getElementById('dra2-best-bar');

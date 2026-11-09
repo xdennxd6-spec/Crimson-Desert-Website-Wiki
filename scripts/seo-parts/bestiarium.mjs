@@ -1,7 +1,7 @@
-// SEO-Seitenmodul: Bestiarium (ENEMIES.wild + ENEMIES.kreaturen + ENEMIES.fraktionen)
+// SEO-Seitenmodul: Bestiarium (ENEMIES.wild + ENEMIES.kreaturen + ENEMIES.meer + ENEMIES.fraktionen)
 //
-// ENEMIES ist ein OBJEKT mit genau 3 Gruppen (kein Array): wild (14), kreaturen (13),
-// fraktionen (27) — Summe 54 (Stand 04.10.2026). "de" (deutscher Name) existiert nur bei wild/kreaturen,
+// ENEMIES ist ein OBJEKT mit 4 Gruppen (kein Array): wild, kreaturen, meer (DLC-Meeresbewohner,
+// seit 09.11.2026), fraktionen. Stand 04.10.2026 waren es 3 Gruppen mit 54 Eintraegen. "de" (deutscher Name) existiert nur bei wild/kreaturen,
 // die Gruppe "fraktionen" hat kein de-Feld. "tipp" ist selten (2x wild, 2x kreaturen,
 // 1x fraktionen). "conf" (Quellen-Konfidenz) kommt 3x in kreaturen vor (Monitor Lizard,
 // Crocodile, Hostile Machines) und wird bei conf==="medium" sichtbar als Quellenlage-Hinweis
@@ -69,6 +69,8 @@ const isDashOnly = (v) => /^\s*[—–-]\s*$/.test(String(v));
 const GROUPS = [
   ["wild", "🦌", "Wildtiere"],
   ["kreaturen", "🕷️", "Besondere Kreaturen"],
+  // seit 09.11.2026: Meeresbewohner des DLC Charting the Unknown (Lexikontexte + Lexikonbilder der Spieldaten)
+  ["meer", "🌊", "Meer & Tiefsee (DLC)"],
   ["fraktionen", "⚔️", "Gegner-Fraktionen"],
 ];
 
@@ -166,6 +168,7 @@ export function ZAHLEN(ctx) {
     anzahl: GROUPS.reduce((sum, [key]) => sum + ENEMIES[key].length, 0),
     wild: ENEMIES.wild.length,
     kreaturen: ENEMIES.kreaturen.length,
+    meer: (ENEMIES.meer || []).length,
     fraktionen: ENEMIES.fraktionen.length,
   };
 }
@@ -185,7 +188,7 @@ export function build(ctx) {
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Interaktive Gegner-Übersicht mit Suche &amp; Filter öffnen &rarr;</a>
-<p class="note">In der App durchsuchst du alle Gegner nach Namen, Region oder Beute und filterst nach Wildtieren, Kreaturen oder Fraktionen.</p>
+<p class="note">In der App durchsuchst du alle Gegner nach Namen, Region oder Beute und filterst nach Wildtieren, Kreaturen, Meeresbewohnern oder Fraktionen.</p>
 <p class="note">Viele Drops sind Zutaten für Rezepte unter <a href="/crafting">Herstellen &amp; Farmen</a>, Gegner mit eigener Kampfmechanik stehen zusätzlich in der <a href="/bosse">Bossliste</a>.</p>
 ${sections}`;
 
@@ -209,9 +212,9 @@ ${sections}`;
   return {
     slugName: SLUG,
     title: `Bestiarium: ${total} Gegnertypen in Crimson Desert`,
-    desc: `Das Bestiarium zu Crimson Desert: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen mit Region, Drop-Chancen laut Spieldaten, Lieblingsfutter und Kampf-Tipps.`,
+    desc: `Das Bestiarium zu Crimson Desert: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} Kreaturen, ${ENEMIES.meer.length} Meeresbewohner aus dem DLC und ${ENEMIES.fraktionen.length} Gegner-Fraktionen mit Region, Drop-Chancen und Kampf-Tipps.`,
     h1: `${total} Gegnertypen im Bestiarium von Crimson Desert`,
-    lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet <strong>${total} Gegnertypen</strong> der Spielwelt, getrennt von den Bossen: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen und ${ENEMIES.fraktionen.length} Gegner-Fraktionen, jeweils mit Region, Beschreibung und, wo die Spieldaten sie hergeben, einer Drop-Tabelle mit Chance und Menge.`,
+    lead: `Das <strong>Bestiarium</strong> von Crimson Desert verzeichnet <strong>${total} Gegnertypen</strong> der Spielwelt, getrennt von den Bossen: ${ENEMIES.wild.length} Wildtiere, ${ENEMIES.kreaturen.length} besondere Kreaturen, ${ENEMIES.meer.length} Meeresbewohner aus dem DLC „Charting the Unknown“ und ${ENEMIES.fraktionen.length} Gegner-Fraktionen, jeweils mit Region, Beschreibung und, wo die Spieldaten sie hergeben, einer Drop-Tabelle mit Chance und Menge.`,
     ogImage: "cd_assets/bosses/umbra-final.jpg",
     crumb: "Gegner",
     bodyHtml: body,
