@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=4e1b0f0aa9">
+<link rel="stylesheet" href="app.css?v=cf87e87703">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -2225,6 +2225,16 @@ function cdProg(done,total,label){
    scene: {keys, ...cdScene-opts} oder fertiges HTML; icon: Glyphe | {src, alt, photo}; body: HTML oder Funktion (lazy, erst beim Öffnen);
    s: Volltext für data-s (Suche); prog: {done,total,label}; h: Überschriftenebene (Standard 3). */
 var _cdLazy=new Map(),_cdLazyN=0;
+/* Fraktionsbanner aus den Spieldateien (FAC_WAPPEN in data/d11): Pfad oder '' wenn für den Namen keines belegt ist.
+   kind 'fac' = Fraktionsname, 'reg' = Regionsname. */
+function facWappen(name,kind){
+  var m=typeof FAC_WAPPEN==='object'&&FAC_WAPPEN&&FAC_WAPPEN[kind||'fac'],k=m&&m[String(name).trim()];
+  return k?'cd_assets/factions/wappen/'+k+'.webp':'';
+}
+function facWappenImg(name,kind){
+  var s=facWappen(name,kind);
+  return s?'<img class="fac-wappen" src="'+s+'" alt="" loading="lazy" decoding="async" width="20" height="29">':'';
+}
 function cdFold(o){
   o=o||{};
   var acc=cdTone(o),body=o.body,lazy='';
@@ -2718,7 +2728,7 @@ function randomBoss(){
       <div style="font-size:var(--fs-11);color:var(--dim);margin-bottom:4px">Strategie</div>
       <div class="rb-strategy">${escHtml(deT(b.strategy))||'–'}</div>
       ${(()=>{const lore=BOSS_LORE[b.name];if(!lore||!lore.desc||!lore.desc.trim())return '';return `<div class="boss-lore" style="margin-top:11px;cursor:default">
-        <div class="boss-lore-hd"><span>📖 NPC-Lore${lore.faction?' · <span class="boss-lore-faction">'+deT(lore.faction).replace(/"/g,'&quot;')+'</span>':''}</span><a href="https://questlog.gg/crimson-desert/en/db/npc/${lore.id}" target="_blank" rel="noopener" class="boss-lore-ext">questlog ↗</a></div>
+        <div class="boss-lore-hd"><span>📖 NPC-Lore${lore.faction?' · <span class="boss-lore-faction">'+facWappenImg(lore.faction)+deT(lore.faction).replace(/"/g,'&quot;')+'</span>':''}</span><a href="https://questlog.gg/crimson-desert/en/db/npc/${lore.id}" target="_blank" rel="noopener" class="boss-lore-ext">questlog ↗</a></div>
         <div style="font-style:italic">${escHtml(lore.desc)}</div>
       </div>`;})()}
       <button class="rb-rerollbtn" style="margin-top:12px" onclick="randomBoss()">🎲 Nochmal würfeln</button>
@@ -3174,7 +3184,7 @@ function renderBossLore(b){
   const lore=BOSS_LORE[b.name];
   if(!lore||!lore.desc||!lore.desc.trim())return '';
   const dbUrl=`https://questlog.gg/crimson-desert/en/db/npc/${lore.id}`;
-  const factionLine=lore.faction&&lore.faction.trim()?`<span class="boss-lore-faction">${deT(lore.faction).replace(/"/g,'&quot;')}</span>`:'';
+  const factionLine=lore.faction&&lore.faction.trim()?`<span class="boss-lore-faction">${facWappenImg(lore.faction)}${deT(lore.faction).replace(/"/g,'&quot;')}</span>`:'';
   const escDesc=escHtml(lore.desc);
   return `<div class="boss-lore boss-lore-collapsed" onclick="this.classList.toggle('boss-lore-collapsed')" data-tip="Klick zum Aus-/Einklappen" role="button" tabindex="0">
     <div class="boss-lore-hd">
@@ -9019,6 +9029,8 @@ function _q5FacGlyph(n){
   if(/Requests|Commissions|Politics/i.test(n))return '✉';
   return '⚑';
 }
+/* Banner aus dem Spiel, wenn belegt; sonst das Textsymbol */
+function _q5FacIcon(n){const s=facWappen(n);return s?{src:s,alt:'Banner: '+n}:_q5FacGlyph(n);}
 let _q5FacF='all';
 function renderFactions(){
   if(_q5Lazy('fac',renderFactions))return;
@@ -9051,14 +9063,14 @@ function renderFactions(){
     const body=()=>(hasOv?'<p class="q5-ov">'+cdEsc(deT(f.overview))+'</p>':'')
       +(f.quests.length?'<ol class="cd-stepper q5-steps">'+f.quests.map((q,i)=>_q5Step(q,{key:_Q5_FAC_KEY,id:ids[i],on:done.has(ids[i]),imgs:imgs[i]})).join('')+'</ol>'
         :cdNote('Für diese Fraktion sind keine einzelnen Quests erfasst.',{kind:'info'}));
-    return cdFold({title:f.name,lead,icon:_q5FacGlyph(f.name),chips,region:reg||undefined,tone:reg?undefined:'gold',
+    return cdFold({title:f.name,lead,icon:_q5FacIcon(f.name),chips,region:reg||undefined,tone:reg?undefined:'gold',
       prog:f.quests.length?{done:dc,total:f.quests.length}:null,s,body,
       cls:'q5-fac'+(hasOv?' q5-hasov':'')+(f.quests.length&&dc===f.quests.length?' q5-done':''),attrs:{'data-q5-fac':cdSlug(f.name)}});
   };
   const groups=FAC_DATA.regions.map(r=>{
     const fq=r.factions.reduce((n,f)=>n+f.quests.length,0),reg=_q5Reg(r.region);
     return '<section class="q5-grp sq-lane" data-q5-reg="'+cdSlug(r.region)+'" style="--c:'+cdEsc(reg?_q5RegCol(reg):'var(--gold)')+'">'
-      +'<header class="q5-grp-hd"><span class="q5-grp-g cd-g" aria-hidden="true">⚑</span><h4 class="q5-grp-t">'+cdEsc(deT(r.region))+'</h4><span class="q5-grp-n">'+r.factions.length+' Fraktionen · '+fq+' Quests</span></header>'
+      +'<header class="q5-grp-hd">'+(facWappen(r.region,'reg')?'<span class="q5-grp-g is-wappen" aria-hidden="true">'+facWappenImg(r.region,'reg')+'</span>':'<span class="q5-grp-g cd-g" aria-hidden="true">⚑</span>')+'<h4 class="q5-grp-t">'+cdEsc(deT(r.region))+'</h4><span class="q5-grp-n">'+r.factions.length+' Fraktionen · '+fq+' Quests</span></header>'
       +'<div class="cd-folds q5-folds q5-grid2">'+r.factions.map(f=>fold(f,r)).join('')+'</div></section>';
   }).join('');
   const libS='Liberation Re-Blockade 1.05 23 Forts und Steinbrüche Stand Patch 1.05.00 regionsübergreifendes Endgame-System 13 Fraktionen nicht belegt Notable Forts Fort Warspike Multishot-Lehrer Gorthak Ironworks Delesyia beste Armaments-Quelle Karin Quarry House Roberts';

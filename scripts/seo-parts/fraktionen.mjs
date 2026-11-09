@@ -139,9 +139,17 @@ export function build(ctx) {
       `<figure><img src="${esc(imgSrc(IMG_DIR + file))}" alt="${esc(cap)}" loading="lazy" decoding="async"><figcaption>${i + 1}. ${esc(cap)}</figcaption></figure>`).join("")}</div></td></tr>`;
   }
 
+  // Fraktionsbanner aus den Spieldateien (seit 09.11.2026, FAC_WAPPEN in data/d11):
+  // nur wo im Spiel belegt, sonst bleibt die Ueberschrift ohne Bild.
+  let WAPPEN = { fac: {}, reg: {} };
+  try { WAPPEN = extract("FAC_WAPPEN"); } catch { /* ohne Banner */ }
+  const wappen = (key, name) => key
+    ? `<img class="fac-wappen" src="${esc(imgSrc(`cd_assets/factions/wappen/${key}.webp`))}" alt="Banner: ${esc(deN(name))}" loading="lazy" decoding="async" width="20" height="29">`
+    : "";
+
   const facBlock = (region, f) => {
     const newTag = f.isNew ? `<span class="newfac">Neu erfasst</span>` : "";
-    return `<h3>${esc(deN(f.name))} (${f.quests.length})${newTag}</h3>
+    return `<h3>${wappen(WAPPEN.fac[f.name], f.name)}${esc(deN(f.name))} (${f.quests.length})${newTag}</h3>
 <p class="fac-overview">${esc(f.overview)}</p>
 <div class="tbl-wrap"><table>
 <thead><tr><th>Quest</th><th>Auslöser</th><th>Voraussetzung</th><th>Belohnung</th></tr></thead>

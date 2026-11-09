@@ -306,3 +306,62 @@ const FAC_QUEST_IMGS = {
  ]
 };
 const FAC_QUEST_IMG_DIR = "cd_assets/factions/";
+
+// Fraktionsbanner aus den Spieldateien (09.11.2026): UI-Atlas cd_icon_faction_flag_00..04, per KI-Mix 2x hochgerechnet,
+// Dateien cd_assets/factions/wappen/<wert>.webp. Zuordnung nur, wo eine Quest/Mission der Fraktion im Spiel dieses
+// Banner traegt (questinfo/missioninfo); Fraktionen ohne Beleg behalten das Textsymbol. Belege und Skripte:
+// G:\Claude\Crimson-Desert-Wiki\fraktion-wappen\ (einbau.cjs). Schluessel fac = f.name in FAC_DATA bzw. lore.faction,
+// reg = r.region in FAC_DATA.
+const FAC_WAPPEN = {
+ "fac": {
+  "House Roberts": "f037",
+  "House Serkis": "f035",
+  "House Celeste": "sub01",
+  "Goldleaf Merchant Guild": "m-chapter01-1",
+  "House Alfonso": "f036",
+  "House Felix": "f034",
+  "House Grace": "f081",
+  "House Lanford": "sub05",
+  "Scholastone Institute": "m-chapter02-2",
+  "Vellua Fishermen's Guild": "f030",
+  "Beggars' Alliance": "f102",
+  "St. Halssius's House of Healing": "f022",
+  "Hernandian Parish of Solumen": "sub01",
+  "Calphadean Merchants": "sub05",
+  "Pororin Forest Guardians": "f012",
+  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)": "m-chaptergreywolf01",
+  "Hernand's Politics": "sub01",
+  "Pailune Militia": "sub07",
+  "Longleaf Tribe": "f008",
+  "Beighen Tribe": "f032",
+  "Pailune Requests": "sub07",
+  "Pailune's Politics": "sub07",
+  "Skoghorn Tribe": "f021",
+  "House Azerian": "f041",
+  "House Elemore": "f052",
+  "Tariv Sorcerers": "f023",
+  "Silvermoon Trade Collective": "f027",
+  "Demeniss Commissions": "sub03",
+  "Delesyia Commissions (Outlaws / Sammelkarte)": "sub06",
+  "Ironflame Orcs": "f013",
+  "Ironwheel of Dewhaven": "f017",
+  "National Delesyian Institute": "sub06",
+  "Redfox Trading Company": "f094",
+  "Aeserion, the Great Serpent": "f080",
+  "Marni": "f009",
+  "Tashkalp (Tommaso / Varnia)": "f026",
+  "Muiquun Outlaws": "f010",
+  "Redwind Merchant Guild / Calphadean Merchants (Saltroad)": "f127",
+  "Urdavah Research Institute": "f028",
+  "Hexen / Witches": "f117",
+  "Flame Knights": "f054",
+  "Lonely Jackals": "f116"
+ },
+ "reg": {
+  "Hernand": "sub01",
+  "Pailune": "sub07",
+  "Demeniss": "sub03",
+  "Delesyia": "sub06",
+  "Crimson Desert (Tashkalp)": "f029"
+ }
+};
