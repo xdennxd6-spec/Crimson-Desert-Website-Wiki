@@ -3575,6 +3575,7 @@ const DE_NAMES={
 "Mountain God Boar":"Berggott-Wildschwein",
 "Mountain of Frozen Souls":"Berg der gefrorenen Seelen",
 "Movement Speed":"Bewegungstempo",
+"Moving Rocks":"Sich bewegender Stein",
 "Muckroot Ranch":"Sumpfwurzel-Viehhof",
 "Mudridge Cabin":"Schlammgrat-Hütte",
 "Mudwalker":"Schlammläufer",
