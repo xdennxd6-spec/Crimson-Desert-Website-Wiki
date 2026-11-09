@@ -8143,36 +8143,58 @@ summary.lm-be-kopf:hover{border-color:var(--brass)}
 .lm-be-quellen a{color:var(--brass)}
 .lm-fo-txt{overflow-wrap:anywhere}
 /* BESCHAFFUNG Ende */
-/* REIT Anfang (Reit- & Tierausrüstung, 08.11.2026; Renderer in data/d14-reit.js) */
-.reit-bar{margin:6px 0 12px}
-.reit-wrap{max-width:100%}
-.reit-tab{width:100%;border-collapse:collapse;font-size:13px;line-height:1.5}
-.reit-tab th{text-align:left;padding:8px 10px;font:700 11px/1.3 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid color-mix(in srgb,var(--dim) 35%,transparent)}
-.reit-tab td{padding:9px 10px;vertical-align:top;border-bottom:1px solid color-mix(in srgb,var(--dim) 18%,transparent);overflow-wrap:anywhere}
-.reit-tab tr.reit-off,.reit-tab tr.hide{display:none}
-.reit-c-n{min-width:200px}
-.reit-c-w{min-width:150px}
-.reit-n{display:flex;gap:10px;align-items:flex-start}
-.reit-ico{width:44px;height:44px;flex:0 0 44px;object-fit:contain;border-radius:8px;background:color-mix(in srgb,var(--dim) 10%,transparent)}
-.reit-nm{display:block;color:var(--ink-hi)}
-.reit-en,.reit-f,.reit-t{display:block;font-size:11.5px;color:var(--dim)}
+/* REIT Anfang (Reit- & Tierausrüstung, 08.11.2026; seit 09.11.2026 Kartenraster wie Accessoires; Renderer in data/d14-reit.js) */
+.reit-bar{margin:6px 0 4px}
+.reit-grp{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "bd";counter-reset:reitn}
+.reit-grp:not(:has(.reit-card:not(.hide):not(.reit-off))){display:none}
+.reit-grp-t{grid-area:hd;margin:26px 0 14px;padding-right:48px}
+.reit-grp-n{grid-area:hd;justify-self:end;align-self:center;margin-top:12px;min-width:30px;padding:1px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-family:var(--f-mono);font-size:var(--fs-11);font-weight:700;line-height:1.6;text-align:center;color:var(--gold);font-variant-numeric:tabular-nums;pointer-events:none}
+.reit-grp-n::before{content:counter(reitn)}
+.reit-grp .reit-card:not(.hide):not(.reit-off){counter-increment:reitn}
+#sec-reitausruestung .reit-grid{grid-area:bd;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:16px;align-items:stretch}
+.reit-card{--reit-tc:var(--gold);display:flex;flex-direction:column;min-width:0;content-visibility:visible}
+.reit-card.reit-off,.reit-card.hide{display:none}
+.reit-card[data-art="Rossharnisch"]{--reit-tc:var(--cd-fx-def)}
+.reit-card[data-art="Rossstirn"]{--reit-tc:var(--cd-fx-res)}
+.reit-card[data-art="Steigbügel"]{--reit-tc:var(--cd-fx-hp)}
+.reit-card[data-art="Hufeisen"]{--reit-tc:var(--cd-fx-stam)}
+.reit-card[data-art="Haustier"]{--reit-tc:var(--cd-fx-speed)}
+.reit-card[data-art="Kuku"]{--reit-tc:var(--cd-fx-spirit)}
+.reit-card[data-art="Sonder"]{--reit-tc:var(--cd-fx-bolt)}
+.reit-card .reit-hd{position:relative;justify-content:center;min-height:148px;padding:10px 15px;overflow:hidden;
+  background:radial-gradient(ellipse 58% 82% at 50% 54%,color-mix(in srgb,var(--reit-tc) 24%,transparent),transparent 74%),linear-gradient(180deg,color-mix(in srgb,var(--reit-tc) 9%,transparent),transparent 85%)}
+.reit-card .reit-ico{width:120px;height:120px}
+.reit-hd-g{font-size:54px;line-height:1;color:var(--reit-tc);opacity:.55}
+.reit-hd:has(img) .reit-hd-g{display:none}
+.reit-ttl{margin-bottom:9px;min-width:0}
+.reit-card .reit-nm{margin:0;overflow-wrap:anywhere}
+.reit-en{display:block;margin-top:2px;font-size:12px;line-height:1.4;color:var(--dim)}
+.reit-card .tag{font-size:var(--fs-11)}
+.reit-tag-a{color:var(--reit-tc);border-color:color-mix(in srgb,var(--reit-tc) 45%,transparent)}
 .reit-t{font-family:var(--f-mono);letter-spacing:.04em}
-.reit-w{margin:0 4px 4px 0}
-.reit-src{display:block;font-size:12.5px}
-.reit-q{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px;font-size:12.5px}
-.reit-note{display:block;margin-top:4px;font-size:12px;color:var(--dim)}
+.reit-werte{margin:0 0 12px}
+.reit-leer{margin:0 0 12px;font-size:12px}
+.reit-rows{gap:8px;padding-top:11px;border-top:1px solid var(--line-soft)}
+.reit-rows .crow{flex-direction:column;gap:3px}
+.reit-rows .cl{font-size:var(--fs-11);min-width:0}
+.reit-src{font-size:12.5px;line-height:1.55;overflow-wrap:anywhere}
+.reit-q{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:5px}
+.reit-more{margin-top:auto}
+.reit-rows + .reit-more{margin-top:auto;padding-top:10px}
+.reit-more>summary{min-height:40px}
+.reit-note{margin:0;font-size:12.5px;line-height:1.55;color:var(--dim);overflow-wrap:anywhere}
 .reit-dim{color:var(--dim)}
-.reit-h{margin:28px 0 8px;font-size:17px;color:var(--ink-hi)}
-.reit-p{margin:0 0 10px;max-width:78ch;font-size:13px;color:var(--text)}
-.reit-ref{margin:0;padding-left:18px;font-size:13px;line-height:1.7}
+.reit-h{margin:34px 0 8px}
+.reit-p{margin:0 0 12px;max-width:70ch;font-size:13px;color:var(--text)}
+.reit-ref{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:10px;margin:0;padding:0;list-style:none}
+.reit-ref-i{display:flex;flex-direction:column;gap:3px;min-width:0;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-size:13px;line-height:1.45}
 .reit-ref-i.hide{display:none}
-@media (max-width:760px){
-  .reit-tab thead{display:none}
-  .reit-tab,.reit-tab tbody,.reit-tab tr,.reit-tab td{display:block;width:auto;min-width:0}
-  .reit-tab tr{padding:10px 0;border-bottom:1px solid color-mix(in srgb,var(--dim) 25%,transparent)}
-  .reit-tab td{padding:3px 0;border:0}
-  .reit-tab td.reit-c-a::before,.reit-tab td.reit-c-w::before,.reit-tab td.reit-c-q::before{content:attr(data-l);display:block;font:700 10.5px/1.4 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--gold)}
-  .reit-tab tr.reit-off,.reit-tab tr.hide{display:none}
+.reit-ref-i .reit-go{font-weight:700;overflow-wrap:anywhere}
+.reit-ref-a{font:700 var(--fs-11)/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.reit-ref-d{font-size:12px}
+@media (max-width:640px){
+  .reit-card .reit-hd{min-height:128px}
+  .reit-card .reit-ico{width:104px;height:104px}
 }
 /* REIT Ende */
 /* ZG Anfang: Zutatengruppen (Herstellen) */

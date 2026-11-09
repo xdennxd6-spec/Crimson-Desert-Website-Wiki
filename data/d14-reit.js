@@ -152,19 +152,31 @@ const REIT_VERWEISE = [
 ];
 
 /* ===== Renderer ===== */
+/* Seit 09.11.2026 Kartenraster wie Accessoires (großer Icon-Kopf, Kernwerte als Chips, Fundort direkt, Notiz zum Aufklappen), nach Art gruppiert. */
 let _reitArt='alle';
+const _REIT_GRP={"Sattel":"Sättel","Rossharnisch":"Rossharnische","Rossstirn":"Rossstirnen","Steigbügel":"Steigbügel","Hufeisen":"Hufeisen","Haustier":"Haustier-Ausrüstung","Kuku":"Kuku-Ausrüstung","Sonder":"Sonderausrüstung"};
 function _reitNm(x){return x.de||x.name;}
 function _reitWerte(x){const a=[];if(x.hp!=null)a.push('Gesundheit '+x.hp);if(x.def!=null)a.push('Verteidigung '+x.def);if(x.atk!=null)a.push('Angriff '+x.atk);(x.effekt||[]).forEach(function(v){a.push(v);});return a;}
-function _reitZeile(x){
+function _reitChips(x){
+  const c=[];
+  if(x.hp!=null)c.push(cdChip({v:String(x.hp),t:'Gesundheit',c:'ok'}));
+  if(x.def!=null)c.push(cdChip({v:String(x.def),t:'Verteidigung',c:'ice'}));
+  if(x.atk!=null)c.push(cdChip({v:String(x.atk),t:'Angriff',c:'red'}));
+  const fx=(x.effekt||[]).length?cdFx(x.effekt,{bare:true}):'';
+  return (c.length||fx)?'<div class="cd-chips reit-werte">'+c.join('')+fx+'</div>':'<p class="reit-dim reit-leer">keine Werte in den Spieldaten</p>';
+}
+function _reitKarte(x){
   const e=cdEsc,nm=_reitNm(x),w=_reitWerte(x);
   const s=[x.name,nm,x.art,x.fuer,w.join(' '),x.source,x.notes||''].join(' ').toLowerCase();
   const q=(x.quests||[]).map(function(o){return cdGoLink('quests',o.q,o.t,'reit-go');}).join(' ');
-  return '<tr class="reit-z" data-art="'+e(x.art)+'" data-s="'+e(s)+'" data-go-id="'+e(x.name)+'">'
-    +'<td class="reit-c-n" data-l="Gegenstand"><div class="reit-n">'+(x.icon?'<img class="reit-ico" src="cd_assets/ql'+e(x.icon)+'" width="44" height="44" loading="lazy" decoding="async" alt="" onerror="this.remove()">':'')
-    +'<div><b class="reit-nm">'+e(nm)+'</b>'+(nm!==x.name?'<span class="reit-en">'+e(x.name)+'</span>':'')+(x.tier?'<span class="reit-t">Tier '+e(x.tier)+'</span>':'')+'</div></div></td>'
-    +'<td class="reit-c-a" data-l="Art · für">'+e(x.art)+'<span class="reit-f">'+e(x.fuer)+'</span></td>'
-    +'<td class="reit-c-w" data-l="Werte">'+(w.length?w.map(function(v){return '<span class="cd-chip reit-w">'+e(v)+'</span>';}).join(''):'<span class="reit-dim">keine Werte in den Spieldaten</span>')+'</td>'
-    +'<td class="reit-c-q" data-l="Fundort"><span class="reit-src">'+e(x.source)+'</span>'+(q?'<span class="reit-q">'+q+'</span>':'')+(x.notes?'<span class="reit-note">'+e(x.notes)+'</span>':'')+'</td></tr>';
+  return '<article class="card cd-spot reit-card" data-art="'+e(x.art)+'" data-s="'+e(s)+'" data-go-id="'+e(x.name)+'">'
+    +'<div class="acc-icon-hd reit-hd">'+(x.icon?'<img class="acc-item-ico reit-ico" src="cd_assets/ql'+e(x.icon)+'" width="112" height="112" loading="lazy" decoding="async" alt="" onerror="this.remove()">':'')+'<span class="reit-hd-g" aria-hidden="true">♘</span></div>'
+    +'<div class="reit-ttl"><h4 class="ct reit-nm">'+e(nm)+'</h4>'+(nm!==x.name?'<span class="reit-en">'+e(x.name)+'</span>':'')+'</div>'
+    +'<div class="cm"><span class="tag tw reit-tag-a">'+e(x.art)+'</span><span class="tag reit-tag">für '+e(x.fuer)+'</span>'+(x.tier?'<span class="tag reit-tag reit-t">Tier '+e(x.tier)+'</span>':'')+'</div>'
+    +_reitChips(x)
+    +'<div class="crows reit-rows"><div class="crow"><span class="cl">Fundort</span><span class="cv reit-src">'+e(x.source)+(q?'<span class="reit-q">'+q+'</span>':'')+'</span></div></div>'
+    +(x.notes?'<details class="item-more reit-more"><summary onclick="this.parentElement.removeAttribute(\'data-srch-open\')">Notiz</summary><div class="item-more-body"><p class="reit-note">'+e(x.notes)+'</p></div></details>':'')
+    +'</article>';
 }
 function _reitPills(){
   const n=function(a){return REIT_AUSRUESTUNG.filter(function(x){return a==='alle'||x.art===a;}).length;};
@@ -173,13 +185,13 @@ function _reitPills(){
 }
 function _reitFilter(){
   const root=document.getElementById('reit-root');if(!root)return;
-  root.querySelectorAll('tr.reit-z').forEach(function(tr){tr.classList.toggle('reit-off',_reitArt!=='alle'&&tr.dataset.art!==_reitArt);});
+  root.querySelectorAll('.reit-card').forEach(function(c){c.classList.toggle('reit-off',_reitArt!=='alle'&&c.dataset.art!==_reitArt);});
   root.querySelectorAll('[data-cd-pills="reit-art"] .cd-pill').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===_reitArt));});
 }
 document.addEventListener('cd-pills',function(e){if(!e.detail||e.detail.name!=='reit-art')return;_reitArt=e.detail.value||'alle';_reitFilter();});
 function _reitVerweis(v){
   const e=cdEsc,nm=deN(v.name);
-  return '<li class="reit-ref-i" data-s="'+e([v.name,nm,v.art,v.d].join(' ').toLowerCase())+'">'+cdGoLink(v.sec,v.name,nm,'reit-go')+' <span class="reit-dim">'+e(v.art)+' · '+e(v.d)+'</span></li>';
+  return '<li class="reit-ref-i cd-spot" data-s="'+e([v.name,nm,v.art,v.d].join(' ').toLowerCase())+'">'+cdGoLink(v.sec,v.name,nm,'reit-go')+'<span class="reit-ref-a">'+e(v.art)+'</span><span class="reit-dim reit-ref-d">'+e(v.d)+'</span></li>';
 }
 function renderReitausruestung(){
   const root=document.getElementById('reit-root');if(!root)return;
@@ -191,11 +203,14 @@ function renderReitausruestung(){
     links:[['mounts','Reittiere'],['pets','Haustiere'],['camp','Graumähnen-Camp'],['dlc-ausruestung','DLC-Ausrüstung']]}));
   root.innerHTML=cdNote({h:'Werte und Fundorte stammen aus den Spieldaten (questlog, abgerufen am 06. und '+REIT_META.checked+'). Die Gesundheit der Sättel deckt sich an fünf Sätteln mit th.gl (geprüft '+REIT_META.checked+'). Steigbügel haben keine Grundwerte, sie regenerieren Gesundheit; Hufeisen geben Angriff und regenerieren Ausdauer.'
       +' „Vertrauen nötig“: Der Händler verkauft erst mit genug Vertrauen, th.gl nennt bei mehreren Sätteln 100. „nur mit Prestige“ ist der Spieltext der besten Teile; laut ConsolePulse gehört dazu die Krone der Region aus dem Beitragsladen <span class="reit-dim">(eine Quelle, geprüft '+REIT_META.checked+')</span>.'
-      +' Sattler laut th.gl: Annabella (Hernand), Eldred (Pailune), Alina (Tommaso), Zara (Varnia) und Randelle (Delesyia).'},{kind:'info',title:'So liest du die Tabelle'})
+      +' Sattler laut th.gl: Annabella (Hernand), Eldred (Pailune), Alina (Tommaso), Zara (Varnia) und Randelle (Delesyia).'},{kind:'info',title:'So liest du die Karten'})
     +'<div class="reit-bar">'+_reitPills()+'</div>'
-    +'<div class="reit-wrap"><table class="reit-tab"><thead><tr><th scope="col">Gegenstand</th><th scope="col">Art · für</th><th scope="col">Werte</th><th scope="col">Fundort</th></tr></thead><tbody>'
-    +REIT_AUSRUESTUNG.map(_reitZeile).join('')+'</tbody></table></div>'
-    +'<h3 class="reit-h">Schon an anderer Stelle im Wiki</h3><p class="reit-p">Diese Teile stehen bereits in einem anderen Bereich und hier deshalb nicht noch einmal.</p>'
+    +REIT_ARTEN.map(function(a){
+      const items=REIT_AUSRUESTUNG.filter(function(x){return x.art===a;});
+      if(!items.length)return '';
+      return '<section class="reit-grp" data-art="'+cdEsc(a)+'"><h3 class="sub-t reit-grp-t">'+cdEsc(_REIT_GRP[a]||a)+'</h3><div class="grid reit-grid">'+items.map(_reitKarte).join('')+'</div><span class="reit-grp-n" aria-hidden="true"></span></section>';
+    }).join('')
+    +'<h3 class="sub-t reit-h">Schon an anderer Stelle im Wiki</h3><p class="reit-p">Diese Teile stehen bereits in einem anderen Bereich und hier deshalb nicht noch einmal.</p>'
     +'<ul class="reit-ref">'+REIT_VERWEISE.map(_reitVerweis).join('')+'</ul>';
   _reitFilter();
   reapplySearch(root,null,0);
