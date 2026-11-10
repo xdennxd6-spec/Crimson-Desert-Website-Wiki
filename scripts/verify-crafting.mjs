@@ -113,7 +113,8 @@ ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
 {
   const htmlOnly = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
   // Weitere Attribute nach src erlaubt (seit 10/2026 fetchpriority="low", siehe Schnellstart in index.html).
-  const tagRe = /<script\s+src="data\/([^"]+)"[^>]*>\s*<\/script>/g;
+  // Seit 10.11.2026 mit Pruefwert (?v=<Inhalts-Hash>, von gen-seo gesetzt); der zaehlt nicht zum Dateinamen.
+  const tagRe = /<script\s+src="data\/([^"?]+)(?:\?v=[0-9a-f]+)?"[^>]*>\s*<\/script>/g;
   const tagFiles = new Set();
   let tm;
   while ((tm = tagRe.exec(htmlOnly)) !== null) tagFiles.add(tm[1]);
@@ -135,7 +136,7 @@ ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
   // wuerde sonst als Precache-Eintrag durchgehen.
   const coreBlock = swSrc.match(/const CORE_ASSETS\s*=\s*\[([\s\S]*?)\]/);
   if (!coreBlock) fail("sw.js: CORE_ASSETS-Block nicht gefunden");
-  const swRe = /['"]\.\/data\/([^'"]+)['"]/g;
+  const swRe = /['"]\.\/data\/([^'"?]+)(?:\?v=[0-9a-f]+)?['"]/g;
   const swFiles = new Set();
   let wm;
   while (coreBlock && (wm = swRe.exec(coreBlock[1])) !== null) swFiles.add(wm[1]);

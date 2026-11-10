@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v59';
+const CACHE_VERSION = 'cd-guide-v60';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -10,22 +10,22 @@ const CORE_ASSETS = [
   './site.webmanifest',
   './app.css',
   './consent.js?v=2',
-  './data/d00-de-namen.js',
-  './data/d01-weapons.js',
-  './data/d02-crafting.js',
-  './data/d03-main-quests.js',
-  './data/d04-armor-imgs.js',
-  './data/d05-fac-data.js',
-  './data/d06-items.js',
-  './data/d07-patches.js',
-  './data/d08-ruins-data.js',
-  './data/d09-scenes.js',
-  './data/d10-enemy-drops.js',
-  './data/d11-fac-quest-imgs.js',
-  './data/d12-dlc.js',
-  './data/d13-romanze.js',
-  './data/d14-beschaffung.js',
-  './data/d14-reit.js',
+  './data/d00-de-namen.js?v=1ece4831d9',
+  './data/d01-weapons.js?v=eebf8334f5',
+  './data/d02-crafting.js?v=10a2fd48cd',
+  './data/d03-main-quests.js?v=35299ab8d4',
+  './data/d04-armor-imgs.js?v=33ef78c839',
+  './data/d05-fac-data.js?v=d7ec9b639d',
+  './data/d06-items.js?v=fb0d7ab2f6',
+  './data/d07-patches.js?v=ca641c7867',
+  './data/d08-ruins-data.js?v=c20bbd8150',
+  './data/d09-scenes.js?v=11a4fac7f8',
+  './data/d10-enemy-drops.js?v=68d552c789',
+  './data/d11-fac-quest-imgs.js?v=fe522a3adf',
+  './data/d12-dlc.js?v=79e850a4e1',
+  './data/d13-romanze.js?v=b9998495bd',
+  './data/d14-beschaffung.js?v=620774a4eb',
+  './data/d14-reit.js?v=0a13ef4344',
   './vendor/gsap-3.15.0.min.js',
   './vendor/ScrollTrigger-3.15.0.min.js',
   './vendor/SplitText-3.15.0.min.js',
@@ -67,13 +67,18 @@ self.addEventListener('fetch', e => {
           // Clone SOFORT ziehen — sonst Race: Body kann schon konsumiert sein
           if (r.ok) {
             const clone = r.clone();
-            caches.open(CORE_CACHE).then(c => c.put(e.request, clone));
+            caches.open(CORE_CACHE).then(c => c.put(e.request, clone).then(() => {
+              // Datendateien tragen seit 10.11.2026 einen Pruefwert (?v=...): aeltere Fassungen derselben Datei
+              // aus dem Vorrat nehmen, sonst waechst er mit jeder Datenaenderung.
+              if (!istDatenSkript) return;
+              return c.keys().then(ks => Promise.all(ks.filter(k => { const u = new URL(k.url); return u.pathname === url.pathname && u.search !== url.search; }).map(k => c.delete(k))));
+            }));
           }
           return r;
         })
         // NIE index.html als Skript-Fallback liefern — HTML als JS geparst crasht die Seite
-        // app.css traegt einen Pruefwert (?v=...): offline zaehlt jede vorhandene Fassung
-        .catch(() => caches.match(e.request, { ignoreSearch: istAppCss }).then(r => r || (istDatenSkript || istAppCss ? Response.error() : caches.match('./index.html'))))
+        // app.css und data/*.js tragen einen Pruefwert (?v=...): offline zaehlt jede vorhandene Fassung
+        .catch(() => caches.match(e.request, { ignoreSearch: istAppCss || istDatenSkript }).then(r => r || (istDatenSkript || istAppCss ? Response.error() : caches.match('./index.html'))))
     );
     return;
   }

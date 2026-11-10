@@ -3352,21 +3352,21 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js" fetchpriority="low"></script>
-<script src="data/d01-weapons.js" fetchpriority="low"></script>
-<script src="data/d02-crafting.js" fetchpriority="low"></script>
-<script src="data/d03-main-quests.js" fetchpriority="low"></script>
-<script src="data/d04-armor-imgs.js" fetchpriority="low"></script>
-<script src="data/d05-fac-data.js" fetchpriority="low"></script>
-<script src="data/d06-items.js" fetchpriority="low"></script>
-<script src="data/d07-patches.js" fetchpriority="low"></script>
-<script src="data/d08-ruins-data.js" fetchpriority="low"></script>
-<script src="data/d09-scenes.js" fetchpriority="low"></script>
-<script src="data/d10-enemy-drops.js" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js" fetchpriority="low"></script>
-<script src="data/d12-dlc.js" fetchpriority="low"></script>
-<script src="data/d13-romanze.js" fetchpriority="low"></script>
-<script src="data/d14-reit.js" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=1ece4831d9" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=eebf8334f5" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
+<script src="data/d03-main-quests.js?v=35299ab8d4" fetchpriority="low"></script>
+<script src="data/d04-armor-imgs.js?v=33ef78c839" fetchpriority="low"></script>
+<script src="data/d05-fac-data.js?v=d7ec9b639d" fetchpriority="low"></script>
+<script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
+<script src="data/d07-patches.js?v=ca641c7867" fetchpriority="low"></script>
+<script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=11a4fac7f8" fetchpriority="low"></script>
+<script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=fe522a3adf" fetchpriority="low"></script>
+<script src="data/d12-dlc.js?v=79e850a4e1" fetchpriority="low"></script>
+<script src="data/d13-romanze.js?v=b9998495bd" fetchpriority="low"></script>
+<script src="data/d14-reit.js?v=0a13ef4344" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -13344,7 +13344,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=620774a4eb';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);

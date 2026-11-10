@@ -66,8 +66,27 @@ const ROOT = path.join(__dirname, "..");
   const indexPfad = path.join(ROOT, "index.html");
   const alt = fs.readFileSync(indexPfad, "utf8");
   if (!/href="app\.css\?v=[0-9a-f]+"/.test(alt)) throw new Error('index.html: <link href="app.css?v=..."> fehlt');
-  const neu = alt.replace(/href="app\.css\?v=[0-9a-f]+"/, `href="app.css?v=${cssV}"`);
+  let neu = alt.replace(/href="app\.css\?v=[0-9a-f]+"/, `href="app.css?v=${cssV}"`);
+  // 10.11.2026: Dasselbe fuer die Datendateien. Ohne Pruefwert fragte Cloudflare jede data/*.js bei jedem Seitenaufruf
+  // durch den Tunnel beim Pi nach (15 Rueckfragen je Aufruf). Mit ?v=<Inhalts-Hash> liefert nginx sie als unveraenderlich
+  // aus (ein Jahr, map $cdw_cache_control in pi-hosting), Cloudflare und Browser halten sie ohne Rueckfrage.
+  // WICHTIG: Wer data/*.js aendert, MUSS gen-seo laufen lassen, sonst bleibt unter der alten Adresse der alte Inhalt
+  // im Cache (verify-seo prueft die Pruefwerte in index.html, allen SEO-Seiten und sw.js).
+  const datenV = Object.fromEntries(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
+    .map(f => [f, createHash("sha256").update(fs.readFileSync(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
+  const mitV = (text, vor, nach) => text.replace(new RegExp(`${vor}data/([A-Za-z0-9_-]+\\.js)(?:\\?v=[0-9a-f]+)?${nach}`, "g"),
+    (m, f) => (datenV[f] ? `${m.slice(0, m.indexOf("data/"))}data/${f}?v=${datenV[f]}${m.slice(-1)}` : m));
+  neu = mitV(neu, '<script src="', '"');          // <script src="data/dNN-….js">
+  neu = mitV(neu, "s\\.src='", "'");               // beschLaden(): nachgeladene data/d14-beschaffung.js
+  for (const f of Object.keys(datenV)) if (!neu.includes(`data/${f}?v=${datenV[f]}`)) throw new Error(`index.html: Verweis auf data/${f} mit Pruefwert fehlt`);
   if (neu !== alt) fs.writeFileSync(indexPfad, neu);
+  // sw.js: derselbe Pruefwert im Offline-Vorrat (CORE_ASSETS), damit der Service Worker die Dateien aus dem
+  // Browser-Cache nimmt statt sie unter der Adresse ohne Pruefwert ein zweites Mal zu laden.
+  const swPfad = path.join(ROOT, "sw.js");
+  const swAlt = fs.readFileSync(swPfad, "utf8");
+  const swNeu = mitV(swAlt, "'\\./", "'");
+  for (const f of Object.keys(datenV)) if (!swNeu.includes(`'./data/${f}?v=${datenV[f]}'`)) throw new Error(`sw.js: CORE_ASSETS-Eintrag fuer data/${f} fehlt`);
+  if (swNeu !== swAlt) fs.writeFileSync(swPfad, swNeu);
 }
 const SITE = "https://crimson-desert-wiki.com";
 // Seit dem Split (23.08.2026) liegen die Daten-Konstanten in data/*.js;

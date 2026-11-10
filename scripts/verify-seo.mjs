@@ -198,6 +198,22 @@ for (const file of ["index.html", ...Object.keys(pages)]) {
   const istV = createHash("sha256").update(fs.readFileSync(path.join(ROOT, "app.css"))).digest("hex").slice(0, 10);
   ok(appV === istV, `${file}: app.css-Pruefwert aktuell (${appV}, Soll ${istV}), sonst gen-seo laufen lassen`);
 }
+// 10.11.2026: data/*.js traegt einen Pruefwert (?v=<Inhalts-Hash>) und wird ein Jahr unveraenderlich ausgeliefert.
+// Ein veralteter oder fehlender Pruefwert hiesse: Besucher behalten den alten Inhalt. Deshalb je Seite und in sw.js pruefen.
+console.log(`\n[Pruefwerte der Datendateien]`);
+{
+  const datenV = Object.fromEntries(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
+    .map(f => [f, createHash("sha256").update(fs.readFileSync(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
+  for (const file of ["index.html", ...Object.keys(pages), "sw.js"]) {
+    const text = fs.readFileSync(path.join(ROOT, file), "utf8");
+    const falsch = [];
+    for (const m of text.matchAll(/(?:<script src="|s\.src='|'\.\/)data\/([A-Za-z0-9_-]+\.js)(\?v=([0-9a-f]+))?["']/g)) {
+      if (datenV[m[1]] && m[3] !== datenV[m[1]]) falsch.push(`${m[1]} (${m[3] || "ohne"}, Soll ${datenV[m[1]]})`);
+    }
+    const fehlt = Object.keys(datenV).filter(f => !text.includes(`data/${f}?v=${datenV[f]}`));
+    ok(!falsch.length && !fehlt.length, `${file}: Pruefwerte aller ${Object.keys(datenV).length} Datendateien aktuell${falsch.length ? ", falsch: " + falsch.join(", ") : ""}${fehlt.length ? ", fehlt: " + fehlt.join(", ") : ""}, sonst gen-seo laufen lassen`);
+  }
+}
 
 const titles = new Set(), descs = new Set();
 const refImgPaths = new Set();
