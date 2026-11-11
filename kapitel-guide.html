@@ -1045,6 +1045,8 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <select class="fs" id="af-type" aria-label="Rüstungen nach Typ filtern" onchange="armorFilter()"><option value="">Alle Typen</option><option value="Kopf">Kopf / Helm</option><option value="Torso">Torso / Rüstung</option><option value="Hände">Hände / Handschuhe</option><option value="Schuhe">Schuhe / Stiefel</option><option value="Mantel">Mantel / Cape</option></select>
       <select class="fs" id="af-mat" aria-label="Rüstungen nach Material filtern" onchange="armorFilter()"><option value="">Alle Materialien</option><option value="Plate">Platte</option><option value="Leather">Leder</option><option value="Cloth">Stoff</option><option value="Chain">Kette</option><option value="none">ohne Materialangabe</option></select>
       <select class="fs" id="af-prov" aria-label="Rüstungen nach Quellenlage filtern" onchange="armorFilter()"><option value="">Alle Quellenlagen</option><option value="import">nur Datenimport</option><option value="guide">nur aus Guides belegt</option><option value="altbestand">nur ungeprüft</option><option value="ohnewert">nur ohne Zahlenwert</option></select>
+      <select class="fs" id="af-res" aria-label="Rüstungen nach Resistenz filtern" onchange="armorFilter()"><option value="">Alle Resistenzen</option><option value="feuer">Feuer</option><option value="eis">Eis</option><option value="blitz">Blitz</option><option value="any">irgendeine</option><option value="none">keine</option></select>
+      <select class="fs" id="af-reg" aria-label="Rüstungen nach Region filtern, in der man sie bekommt" onchange="armorFilter()"><option value="">Alle Regionen</option><option value="Hernand">Hernand</option><option value="Demeniss">Demeniss</option><option value="Pailune">Pailune</option><option value="Delesyia">Delesyia</option><option value="Crimson Desert">Crimson Desert</option><option value="Calphade">Calphade</option><option value="Abyss">Abyss</option><option value="dlc">DLC-Gebiete</option><option value="none">ohne Ortsangabe</option></select>
     </div>
     <div class="grid" id="armor-grid"></div>
     <div class="aset-link"><span class="aset-link-t"><b>Komplette Sets mit Bild:</b> Alle Rüstungssets stehen als eigene Seite mit Figur-Ansicht, Def-Summe und verlinkten Teilen.</span><button type="button" onclick="showSec('armorsets')">⛉ Zu den Rüstungssets</button></div>
@@ -1991,7 +1993,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
             </span>
             <span class="cd-fold-arr" aria-hidden="true"><svg class="cd-i" aria-hidden="true" focusable="false"><use href="#cd-i-chev"/></svg></span>
           </summary>
-          <div class="cd-fold-body"><p><strong>Ja, seit Patch 1.13.00 (03.07.2026).</strong> Zuvor war der Abyss ausschließlich Kliff vorbehalten; jetzt können auch <strong>Oongka</strong> und <strong>Damiane</strong> den Abyss betreten.</p><p>Im Zuge dieser Öffnung wurden die <strong>Erinnerungsfragment-Fundorte</strong> von vier Rematch-Bossen verlegt (Verdorbener Caliburn, Goyen, „Draven, der Krähenbeschwörer“, Uhrwerk-Weißhorn). Die Patch-Notes nennen nur diese Bosse, versteckt in einem Spoiler-Aufklappmenü, aber keine neuen Fundorte. Laut KeenGamer (14.07.2026) zeigt das Wissen-Menü im Spiel den aktuellen Fundort. Zusätzlich trägt Oongka seitdem die meisten Outfits von Kliff, Damiane Teile von drei Boss-Outfits (5 Teile Guardian of Odeck, 3 Teile Dark Marksman, 1 Teil Masked Liberator).</p></div>
+          <div class="cd-fold-body"><p><strong>Ja, seit Patch 1.13.00 (03.07.2026).</strong> Zuvor war der Abyss ausschließlich Kliff vorbehalten; jetzt können auch <strong>Oongka</strong> und <strong>Damiane</strong> den Abyss betreten.</p><p>Im Zuge dieser Öffnung wurden die <strong>Erinnerungsfragment-Fundorte</strong> von vier Rematch-Bossen verlegt (Verdorbener Caliburn, Goyen, „Draven, der Krähenbeschwörer“, Uhrwerk-Weißhorn). Die Patch-Notes nennen nur diese Bosse, versteckt in einem Spoiler-Aufklappmenü, aber keine neuen Fundorte. Laut Spieldaten (Stand 09.11.2026) liegen alle vier Fragmente seither wieder im Abyss, jeweils am ursprünglichen Kampfort (Ortsnamen abgeleitet, im Spiel noch nicht gesehen, Details unter Orte). Laut KeenGamer (14.07.2026) zeigt das Wissen-Menü im Spiel den aktuellen Fundort. Zusätzlich trägt Oongka seitdem die meisten Outfits von Kliff, Damiane Teile von drei Boss-Outfits (5 Teile Guardian of Odeck, 3 Teile Dark Marksman, 1 Teil Masked Liberator).</p></div>
         </details>
         <details class="cd-fold cd-spot r2b12-sf" style="--cd-acc:var(--cd-fx-ice)">
           <summary>
@@ -2073,11 +2075,11 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </div>
 </div>
 <script src="data/d00-de-namen.js?v=1ece4831d9" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=eebf8334f5" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=1088768154" fetchpriority="low"></script>
 <script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
-<script src="data/d03-main-quests.js?v=35299ab8d4" fetchpriority="low"></script>
+<script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
 <script src="data/d04-armor-imgs.js?v=33ef78c839" fetchpriority="low"></script>
-<script src="data/d05-fac-data.js?v=d7ec9b639d" fetchpriority="low"></script>
+<script src="data/d05-fac-data.js?v=11fe711887" fetchpriority="low"></script>
 <script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=ca641c7867" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
@@ -9330,7 +9332,7 @@ function _armorCardHtml(a,wasOpen,o){
     const hidden=[sourceText,a.notes].filter(Boolean).join(' ');
     const visible=[a.name,a.type,a.effect].filter(v=>v).join(' ').toLowerCase();
     const srcDisp=sourceText!=='Sammelimport'?sourceText:'<span class="tag tx" title="Sammelimport — Quelle nicht recherchiert">Sammelimport</span>';
-    return `<div class="card" data-s="${s}" data-item-id="${escHtml(a.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}">
+    return `<div class="card" data-s="${s}" data-item-id="${escHtml(a.name)}" data-item-hidden="${escHtml(hidden)}" data-item-visible="${escHtml(visible)}" data-type="${escHtml(a.type)}" data-mat="${armorMat(a.name)}" data-prov="${escHtml(a.prov||'import')}" data-res="${armorRes(a).join(' ')}">
       ${ARMOR_IMGS[a.name]?`<div style="display:flex;justify-content:center;align-items:center;margin:-14px -15px 12px -15px;height:90px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:linear-gradient(135deg,#131313,#0e0e0e)"><img src="${ARMOR_IMGS[a.name]}" loading="lazy" decoding="async" alt="" onerror="this.parentElement.style.display='none'" style="height:78px;width:78px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))"></div>`:`<div style="display:flex;align-items:center;gap:10px;margin:-14px -15px 12px -15px;padding:10px 14px;border-radius:10px 10px 0 0;border-bottom:1px solid var(--bdr);background:${armorTypeGrad(a.type)}">${armorTypeIcon(a.type)}</div>`}
       <div class="ct">${deN(a.name)}</div>
       <div class="cm"><span class="tag ${typeColor}">${deT(a.type)}</span>${armorProvBadge(a.prov)}${_dlcTag(a)}</div>
@@ -9365,7 +9367,38 @@ function _drA4ArmorPills(){
   drSelPillsMount('af-type',{title:'Typ',text:{'':'Alle'},count:n((a,v)=>a.type===v)});
   drSelPillsMount('af-mat',{title:'Material',text:{'':'Alle',none:'ohne Angabe'},count:n((a,v)=>v==='none'?!armorMat(a.name):armorMat(a.name)===v)});
   drSelPillsMount('af-prov',{title:'Quellenlage',text:{'':'Alle',import:'Datenimport',guide:'aus Guides belegt',altbestand:'ungeprüft',ohnewert:'kein Zahlenwert'},count:n((a,v)=>(a.prov||'import')===v)});
+  drSelPillsMount('af-res',{title:'Resistenz',text:{'':'Alle'},count:n((a,v)=>armorResOk(armorRes(a).join(' '),v))});
+  _drA4ArmorRegPills();
 }
+/* Regionsfilter (11.11.2026): Zählung erst, wenn die Beschaffungskarten geladen sind (d14 wird nachgeladen). */
+function _drA4ArmorRegPills(){
+  if(typeof drSelPillsMount!=='function')return;
+  const da=typeof BESCHAFFUNG!=='undefined';
+  drSelPillsMount('af-reg',{title:'Erhältlich in',text:{'':'Alle',dlc:'DLC-Gebiete',none:'ohne Ortsangabe'},count:da?(v=>v===''?ARMOR.length:ARMOR.filter(a=>armorRegOk(a.name,v)).length):null});
+}
+/* Resistenzen eines Teils, NUR aus dem Effekt-Feld: In den Notizen stehen auch widerlegte
+   Angaben („Die Angabe ‚Ice Resist‘ ist weder in questlog …“), die dürfen nicht zählen. */
+const _ARMOR_RES_RE={feuer:/(Feuer|Fire|Flammen|Flame)[- ]?(Res|Resist|Widerstand)/i,eis:/(Eis|Ice|Frost|Kälte|Cold)[- ]?(Res|Resist|Widerstand)/i,blitz:/(Blitz|Lightning|Electric)[- ]?(Res|Resist|Widerstand)/i};
+function armorRes(a){const t=String((a&&a.effect)||'');return Object.keys(_ARMOR_RES_RE).filter(k=>_ARMOR_RES_RE[k].test(t));}
+function armorResOk(res,v){const r=String(res||'').split(' ').filter(Boolean);return !v||(v==='any'?r.length>0:v==='none'?!r.length:r.includes(v));}
+/* Regionen, in denen man ein Teil bekommt: aus den Wegen der Beschaffungskarten (ORTE[ort].reg).
+   Freitext-Regionen wie „Winterberg / West-Hernand“ zählen zu jeder genannten Hauptregion. null = noch nicht geladen. */
+const _ARMOR_REG_KEYS=['Hernand','Demeniss','Pailune','Delesyia','Crimson Desert','Calphade','Abyss'];
+const _armorRegCache=new Map();
+let _armorRegLadeFehler=false;
+function armorRegionen(name){
+  if(typeof BESCHAFFUNG==='undefined'||typeof ORTE==='undefined')return null;
+  if(_armorRegCache.has(name))return _armorRegCache.get(name);
+  const s=new Set(),b=BESCHAFFUNG[name];
+  ((b&&b.wege)||[]).forEach(w=>{
+    const o=w&&w.ort&&ORTE[w.ort];if(!o||!o.reg)return;
+    if(/DLC/.test(o.reg)){s.add('dlc');return;}
+    _ARMOR_REG_KEYS.forEach(k=>{if(o.reg.includes(k))s.add(k);});
+    if(/Krimsonwüste|Tashkalp/.test(o.reg))s.add('Crimson Desert');
+  });
+  _armorRegCache.set(name,s);return s;
+}
+function armorRegOk(name,v){if(!v)return true;const s=armorRegionen(name);if(!s)return true;return v==='none'?!s.size:s.has(v);}
 // Baut das Raster neu. Noetig nur, wenn sich die SORTIERUNG aendert — Filter und
 // Suche laufen ueber armorFilter() und fassen das DOM nicht neu an, sonst wuerde
 // jeder Tastendruck 337 Karten samt <img> neu erzeugen.
@@ -9398,14 +9431,24 @@ function armorFilter(){
   const g=document.getElementById('armor-grid');
   if(!g||!g.children.length)return;
   const wert=id=>{const el=document.getElementById(id);return el?el.value:'';};
-  const ft=wert('af-type'),fm=wert('af-mat'),fp=wert('af-prov');
+  const ft=wert('af-type'),fm=wert('af-mat'),fp=wert('af-prov'),fx=wert('af-res'),fr=wert('af-reg');
+  // Regionsfilter braucht die Beschaffungskarten (d14, ~1 MB, sonst erst im Fundort-Fenster geladen).
+  // Scheitert das Laden, filtert der Rest normal weiter (armorRegOk lässt dann alles durch) und die Zahl sagt es.
+  if(fr&&typeof BESCHAFFUNG==='undefined'&&typeof beschLaden==='function'&&!_armorRegLadeFehler){
+    const c=document.getElementById('armor-count');if(c)c.textContent='Fundorte werden geladen …';
+    beschLaden().then(ok=>{
+      if(ok)_drA4ArmorRegPills();else _armorRegLadeFehler=true;
+      armorFilter();
+    });
+    return;
+  }
   const lq=_fold(wert('af-q').trim());
   const si=document.getElementById('si');
   const gq=_fold(((si&&si.value)||'').trim()),ln=_nGruppen([lq]),gn=_nGruppen([gq]);
   _closeSearchOpened(g);
   g.querySelectorAll('.card').forEach(el=>{
     const d=el.dataset;
-    let ok=(!ft||d.type===ft)&&(!fp||d.prov===fp)&&(!fm||(fm==='none'?!d.mat:d.mat===fm));
+    let ok=(!ft||d.type===ft)&&(!fp||d.prov===fp)&&(!fm||(fm==='none'?!d.mat:d.mat===fm))&&armorResOk(d.res,fx)&&armorRegOk(d.itemId,fr);
     const txt=el._sf||(el._sf=_foldS(d.s));
     if(ok&&lq)ok=_specHit(txt,ln);
     d.filtered=ok?'0':'1';
@@ -9424,7 +9467,8 @@ function armorCount(){
   const g=document.getElementById('armor-grid'),c=document.getElementById('armor-count');
   if(!g||!c||!g.children.length)return;
   const sichtbar=g.querySelectorAll('.card:not(.hide)').length;
-  c.textContent=sichtbar===ARMOR.length?ARMOR.length+' Rüstungsteile':sichtbar+' von '+ARMOR.length+' Rüstungsteilen';
+  c.textContent=(sichtbar===ARMOR.length?ARMOR.length+' Rüstungsteile':sichtbar+' von '+ARMOR.length+' Rüstungsteilen')
+    +(_armorRegLadeFehler&&(document.getElementById('af-reg')||{}).value?' (Regionsfilter wirkt nicht: Fundorte nicht geladen)':'');
 }
 
 // ===== ARMOR SETS =====
@@ -9455,7 +9499,7 @@ function armorZeigeTeil(name){
   if(typeof showSec==='function'&&!document.getElementById('sec-armor')?.classList.contains('active'))showSec('armor');
   const q=document.getElementById('af-q');
   if(!q||typeof armorFilter!=='function')return;
-  ['af-type','af-mat','af-prov'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';if(typeof drSelSync==='function')drSelSync(id);});
+  ['af-type','af-mat','af-prov','af-res','af-reg'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';if(typeof drSelSync==='function')drSelSync(id);});
   q.value=name;
   armorFilter();
   const g=document.getElementById('armor-grid');
