@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=76f9098cea">
+<link rel="stylesheet" href="app.css?v=a10ba78bb1">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -295,6 +295,7 @@ font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.
 .seo-more article.rom-seo ol{margin:8px 0 0;padding-left:20px;font-size:14px}
 .seo-more article.rom-seo li{margin:0 0 5px}
 .seo-more article.card img.reit-ico{width:64px;height:64px;aspect-ratio:1/1;object-fit:contain;padding:4px}
+.seo-more article.ins-seo .ins-en{margin:0 0 8px;color:var(--ink-dim);font-size:13px}
 
 .seo-more{margin:44px 0 8px;padding:22px 22px 18px;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:14px;
 background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.62}
@@ -341,6 +342,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <li><a href="/reitausruestung">Reit- &amp; Tierausrüstung</a></li>
       <li><a href="/geheimnisse">Geheimnisse &amp; Lore</a></li>
       <li><a href="/charting-the-unknown">Charting the Unknown</a></li>
+      <li><a href="/inseln">Inseln</a></li>
       <li><a href="/crafting">Herstellen &amp; Farmen</a></li>
     </ul>
   </div>
@@ -917,7 +919,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <section class="sec" id="sec-start" aria-labelledby="start-title">
     <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <!-- Statischer Kopf für den ersten Paint (Schnellstart, siehe <head>); renderStartOverview() ersetzt ihn samt aktuellen Zahlen. -->
-    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>43</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>571</dd></div></dl></header></div>
+    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>44</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>571</dd></div></dl></header></div>
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
@@ -1607,6 +1609,12 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   <section class="sec" id="sec-dlc">
     <h2 class="sec-t"><span class="sec-sym">⚓</span> Charting the Unknown <span class="sec-t-en">DLC</span></h2>
     <div id="dlc-root"></div>
+  </section>
+
+  <!-- Inseln (11.11.2026): Lader inselnLaden(), CSS in app.css (Anker INSELN) -->
+  <section class="sec" id="sec-inseln">
+    <h2 class="sec-t"><span class="sec-sym">⛰</span> Inseln <span class="sec-t-en">Islands</span></h2>
+    <div id="inseln-root"></div>
   </section>
 
   <!-- 01.11.2026: DLC-Teilseiten, je die letzte Seite ihrer Kategorie; renderDlc(part) füllt nur die Abschnitte dieses Teils -->
@@ -2370,21 +2378,21 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=1ece4831d9" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=eebf8334f5" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
-<script src="data/d03-main-quests.js?v=35299ab8d4" fetchpriority="low"></script>
-<script src="data/d04-armor-imgs.js?v=33ef78c839" fetchpriority="low"></script>
-<script src="data/d05-fac-data.js?v=d7ec9b639d" fetchpriority="low"></script>
-<script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
-<script src="data/d07-patches.js?v=ca641c7867" fetchpriority="low"></script>
-<script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=11a4fac7f8" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=acf0b1fccd" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=eacc13aca1" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=9f8afe1668" fetchpriority="low"></script>
+<script src="data/d03-main-quests.js?v=cdaa4aa701" fetchpriority="low"></script>
+<script src="data/d04-armor-imgs.js?v=c4368f3538" fetchpriority="low"></script>
+<script src="data/d05-fac-data.js?v=c583384105" fetchpriority="low"></script>
+<script src="data/d06-items.js?v=383573514a" fetchpriority="low"></script>
+<script src="data/d07-patches.js?v=c5b539f421" fetchpriority="low"></script>
+<script src="data/d08-ruins-data.js?v=1584c23442" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=b7d24fb7d6" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js?v=fe522a3adf" fetchpriority="low"></script>
-<script src="data/d12-dlc.js?v=79e850a4e1" fetchpriority="low"></script>
-<script src="data/d13-romanze.js?v=b9998495bd" fetchpriority="low"></script>
-<script src="data/d14-reit.js?v=0a13ef4344" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=9ef4e91d42" fetchpriority="low"></script>
+<script src="data/d12-dlc.js?v=a5b8c32097" fetchpriority="low"></script>
+<script src="data/d13-romanze.js?v=c83d824724" fetchpriority="low"></script>
+<script src="data/d14-reit.js?v=a1506329bb" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -5805,6 +5813,7 @@ function showSec(id, opts){
     });
   }
   if(id==='weapons'&&typeof renderWeapons==='function')renderWeapons();
+  if(id==='inseln'&&typeof renderInseln==='function')renderInseln(opts.insel||'');
   lsSet('cd_sec',id);
   if(!opts.skipUrl)_writeUrlState(!opts.replaceUrl);
   // Schliesse Sidebar auf Mobile nach Klick
@@ -5859,7 +5868,7 @@ function _applyTabParam(sec,tab){
 }
 function _applyUrlState(){
   const s=_readUrlState();
-  if(s.sec)showSec(s.sec,{skipUrl:true,keepSearch:!!s.q});
+  if(s.sec)showSec(s.sec,{skipUrl:true,keepSearch:!!s.q,insel:s.insel});
   if(s.sec&&s.tab)_applyTabParam(s.sec,s.tab);
   // R2 Fundament: #sec=x&go=<Eintrag> (cdGoHref, z. B. Mittelklick auf einen Sprung-Link) springt zum Eintrag
   if(s.sec&&s.go&&!s.q&&typeof cdGo==='function')cdGo(s.sec,s.go,{noShow:true});
@@ -7348,9 +7357,12 @@ document.addEventListener('cd-pills',e=>{
 /* 4 Inseln (Abschnitt dlc-b-inseln, Besitz: sammeln) */
 function _dlcSecInseln(){
   let b='<div class="dlc-isl-hd"><span>Abhaken, welche Inseln du schon besucht hast (bleibt in diesem Browser gespeichert).</span><span id="dlc-isl-prog"></span></div>';
+  /* 11.11.2026: Verweis auf die Seite Inseln, je Insel Link auf ihre Detailansicht */
+  b+='<p class="ins-dlc-hin">Alle '+INSEL_LINKS.length+' Inseln mit Orten, Höhlen, Quests und Spieltexten: <a class="ins-link" href="#sec=inseln">Seite Inseln</a></p>';
+  const islSeite=i=>{const x=INSEL_LINKS.find(l=>l[2]===i.name);return x?'<span class="ctu-pt"><a class="ins-link" href="#sec=inseln&amp;insel='+x[0]+'">Zur Inselseite</a></span>':'';};
   /* Beschriftete Teile (Lage, Abyss Nexus, Erschließung), dann die freien Angaben (info); fehlende Felder entfallen. */
   const islSub=i=>[['Lage',i.where],['Abyss Nexus',i.nexus],['Erschließung',i.unlock]].map(([k,v])=>{const t=_dlcV(v);return t?'<span class="ctu-pt"><b class="ctu-pk">'+k+':</b> '+t+'</span>':'';}).join('')
-    +(i.info!=null?'<span class="ctu-pt">'+[].concat(i.info).map(_dlcV).join(' ')+'</span>':'');
+    +(i.info!=null?'<span class="ctu-pt">'+[].concat(i.info).map(_dlcV).join(' ')+'</span>':'')+islSeite(i);
   b+='<div class="cd-checks dlc-isl">'+DLC_ISLANDS.map(i=>cdCheck({key:DLC_KEY_ISLANDS,id:cdSlug(i.name),
     title:{h:_dlcName(i)},sub:{h:islSub(i)},cls:'dlc-ck'+(i.c&&i.c!=='ok'?' dlc-row-'+i.c:''),
     s:[i.name,_dlcP(i.where),_dlcP(i.nexus),_dlcP(i.unlock),_dlcP(i.info)].join(' ')})).join('')+'</div>';
@@ -12362,12 +12374,43 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=620774a4eb';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=4fb98df3a2';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
   });
   return _beLaden;
+}
+// ── Inseln (11.11.2026): INSELN aus data/d15-inseln.js und inselnRender() aus data/d15-inseln-app.js, beide erst beim Öffnen
+// der Seite geladen (Größengrenze verify-seo). INSEL_LINKS [slug, de, en] für Links von außen; verify-seo prüft sie gegen INSELN.
+const INSEL_LINKS=[['crowtalon','Krähenklaueninsel','Crowtalon Isle'],['red-hangs','Insel der roten Hänge','Red Hangs Island'],['satyros','Insel Satyros','Satyros Island'],['iliya','Insel Iliya','Iliya Island'],['bergel','Insel Bergel','Bergel Island'],['samora','Insel Samora','Samora Island'],['estra','Insel Estra','Estra Island'],['ocula','Insel Ocula','Ocula Island'],['nirakan','Insel Nirakan','Nirakan Island'],['cloven-hoof','Insel Spalthuf','Cloven Hoof Isle'],['saeon','Insel Saeon','Saeon Island'],['navrah','Insel Navrah','Navrah Island'],['phragma','Insel Phragma','Phragma Island'],['carcano','Insel Carcano','Carcano Island'],['auronui','Insel Auronui','Auronui Island'],['razanui','Insel Razanui','Razanui Island'],['xamaca','Insel Xamaca','Xamaca Island'],['spagnola','Insel Spagnola','Spagnola Island'],['drangar','Insel Drangar','Drangar Island']];
+let _inLaden=null,_inSoll='',_inRe=null;
+function _inSkript(setze){return new Promise(res=>{const s=document.createElement('script');setze(s);s.onload=()=>res(true);s.onerror=()=>{s.remove();res(false);};document.head.appendChild(s);});}
+function inselnLaden(){
+  if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
+  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=033397699d';}))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=c97dd62791';})))
+    .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
+  return _inLaden;
+}
+// slug '' = Übersicht; ohne Argument (SEC_RENDERERS) bleibt die gewünschte Ansicht.
+function renderInseln(slug){
+  if(typeof slug==='string')_inSoll=slug;
+  const root=document.getElementById('inseln-root');if(!root)return;
+  if(!root.firstChild)root.innerHTML=cdNote('Die Inseldaten werden geladen.');
+  inselnLaden().then(ok=>{if(ok)inselnRender(root,_inSoll);else root.innerHTML=cdNote('Die Inseldaten konnten nicht geladen werden. Bitte lade die Seite neu.',{kind:'warn'});});
+}
+// Link aus dem Fundort-Fenster: Fenster schließen, Insel öffnen
+function inselGo(slug){
+  const m=document.getElementById('loc-modal');if(m&&m.style.display!=='none'){m.style.display='none';if(typeof modalFocusClose==='function')modalFocusClose();}
+  const h='#sec=inseln'+(slug?'&insel='+slug:'');
+  if(location.hash===h)_applyUrlState();else location.hash=h;
+  return false;
+}
+// Inselnamen (DE und EN) in bereits escaptem Text zu Links machen
+function inselVerlinken(h){
+  if(!_inRe){const n={};INSEL_LINKS.forEach(x=>{n[x[1]]=x[0];n[x[2]]=x[0];});_inRe={n,re:new RegExp(Object.keys(n).sort((a,b)=>b.length-a.length).join('|'),'g')};}
+  return String(h).replace(_inRe.re,m=>'<a class="ins-link" href="#sec=inseln&amp;insel='+_inRe.n[m]+'" onclick="return inselGo(\''+_inRe.n[m]+'\')">'+m+'</a>');
 }
 const _BE_ART={welt:'Fund in der Welt',haendler:'Händler',boss:'Bossbeute',quest:'Questbelohnung',rezept:'Herstellung',dlc:'DLC-Inhalt',sonst:'Weiterer Weg'};
 function _beQuelle(q){
@@ -12386,10 +12429,10 @@ function _beBild(o,name,spaet){
 function _beWeg(w,name,i,gezeigt){
   const o=w.ort&&ORTE[w.ort];
   const ort=o?deT(o.name)+(o.reg&&o.reg!==o.name?', '+deT(o.reg):''):'';
-  const kopf=`<span class="lm-be-art">${_BE_ART[w.art]||_BE_ART.sonst}</span>${ort?`<span class="lm-be-ort">${escHtml(ort)}</span>`:''}`;
+  const kopf=`<span class="lm-be-art">${_BE_ART[w.art]||_BE_ART.sonst}</span>${ort?`<span class="lm-be-ort">${inselVerlinken(escHtml(ort))}</span>`:''}`;
   // Dieselbe Karte nur einmal im Fenster.
   const neu=o&&o.img&&!gezeigt.has(o.img);if(neu)gezeigt.add(o.img);
-  const inhalt=`${neu?_beBild(o,name,i>0):''}${w.txt?`<div class="lm-fo-txt">${escHtml(deT(w.txt))}</div>`:''}${w.kosten?`<div class="lm-be-kosten">Kosten: ${escHtml(deT(w.kosten))}</div>`:''}`;
+  const inhalt=`${neu?_beBild(o,name,i>0):''}${w.txt?`<div class="lm-fo-txt">${inselVerlinken(escHtml(deT(w.txt)))}</div>`:''}${w.kosten?`<div class="lm-be-kosten">Kosten: ${escHtml(deT(w.kosten))}</div>`:''}`;
   return i===0?`<section class="lm-be-weg"><div class="lm-be-kopf">${kopf}</div>${inhalt}</section>`
     :`<details class="lm-be-weg lm-be-mehr"><summary class="lm-be-kopf">${kopf}</summary>${inhalt}</details>`;
 }
@@ -12410,9 +12453,9 @@ function beRender(name){
   const el=document.getElementById('lm-fundort');
   const box=document.querySelector('#loc-modal .loc-modal-box');
   document.getElementById('lm-src').textContent=_beKurz(d);
-  const ab=d.ab&&(d.ab.txt||d.ab.kapitel!=null)?`<div class="lm-be-box lm-be-ab"><b>Ab wann</b>${d.ab.kapitel!=null?`<span class="lm-be-kap">Kapitel ${escHtml(String(d.ab.kapitel))}</span> `:''}${escHtml(deT(d.ab.txt||''))}</div>`:'';
-  const vor=d.vor?`<div class="lm-be-box lm-be-vor"><b>Voraussetzungen</b>${escHtml(deT(d.vor))}</div>`:'';
-  const warn=d.warn?`<div class="lm-be-box lm-be-warn"><b>Achtung</b>${escHtml(deT(d.warn))}</div>`:'';
+  const ab=d.ab&&(d.ab.txt||d.ab.kapitel!=null)?`<div class="lm-be-box lm-be-ab"><b>Ab wann</b>${d.ab.kapitel!=null?`<span class="lm-be-kap">Kapitel ${escHtml(String(d.ab.kapitel))}</span> `:''}${inselVerlinken(escHtml(deT(d.ab.txt||'')))}</div>`:'';
+  const vor=d.vor?`<div class="lm-be-box lm-be-vor"><b>Voraussetzungen</b>${inselVerlinken(escHtml(deT(d.vor)))}</div>`:'';
+  const warn=d.warn?`<div class="lm-be-box lm-be-warn"><b>Achtung</b>${inselVerlinken(escHtml(deT(d.warn)))}</div>`:'';
   const qu=d.quellen&&d.quellen.length?`<details class="lm-be-quellen"><summary>Belege (${d.quellen.length})</summary><ul>${d.quellen.map(q=>`<li>${_beQuelle(q)}</li>`).join('')}</ul></details>`:'';
   const gezeigt=new Set();
   el.innerHTML=`<div class="lm-fo-hd">⌖ So bekommst du es</div>${d.wege.map((w,i)=>_beWeg(w,name,i,gezeigt)).join('')}${ab}${vor}${warn}${qu}`;
@@ -14695,7 +14738,7 @@ if (syGetCode()) _loadServerProgress();
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a> · <a href="/#sec-dlc-kampf">DLC-Bosse</a><br>
   Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a> · <a href="/#sec-dlc-ausruestung">DLC-Ausrüstung</a><br>
   Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a> · <a href="/#sec-dlc-quests">DLC-Quests</a><br>
-  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/romanze">Romanze &amp; Ehe</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/reitausruestung">Reit- &amp; Tierausrüstung</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a><br>
+  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/romanze">Romanze &amp; Ehe</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/reitausruestung">Reit- &amp; Tierausrüstung</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a> · <a href="/inseln">Inseln</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a> · <a href="/#sec-dlc-sammeln">DLC-Schiffsteile</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>

@@ -254,6 +254,7 @@ const SOLL_SEITEN = [
   ["reitausruestung", "welt", "Reit- & Tierausrüstung", "Mount & Pet Gear", "Sättel, Rossharnische, Hufeisen und Haustier-Ausrüstung mit Werten und Fundort"],  // 08.11.2026: direkt hinter den Haustieren
   ["secrets", "welt", "Geheimnisse & Lore", "Secrets & Lore", "Geheimes Ende, Erinnerungsfragmente, Easter Eggs und Lore"],
   ["dlc", "welt", "Charting the Unknown", "DLC", "Der erste DLC: Schiffe, Inseln, Tauchen, Reittiere, Burgen und Ehe, dazu Wegweiser in alle DLC-Bereiche"],  // 31.10.2026: erster DLC als eigene Seite
+  ["inseln", "welt", "Inseln", "Islands", "Alle 19 Inseln mit Orten, Höhlen, Quests, Spieltexten und Fundorten"],  // 11.11.2026: direkt hinter dem DLC
   ["crafting", "sammeln", "Herstellen & Farmen", "Crafting", "Rezepte, Materialien und Farm-Routen"],
   ["food", "sammeln", "Kochen & Elixiere", "Cooking & Elixirs", "Gerichte und Elixiere mit Wirkung und Zutaten"],
   ["items", "sammeln", "Materialien & Items", "Materials", "Nachschlagewerk für Materialien und sonstige Gegenstände"],
@@ -267,7 +268,8 @@ const SOLL_SEITEN = [
 // 42 seit 01.11.2026: dlc-kampf, dlc-ausruestung, dlc-quests, dlc-sammeln je als letzte Seite ihrer Kategorie
 // 43 seit 05.11.2026: romanze (Romanze & Ehe) direkt nach npcs
 // 44 seit 08.11.2026: reitausruestung (Reit- & Tierausrüstung) direkt nach pets
-const SOLL_ANZAHL = 44;
+// 45 seit 11.11.2026: inseln (Inseln) direkt nach dlc
+const SOLL_ANZAHL = 45;
 // Abyss-Split: Synthese-Woerter gehoeren in aka von "synthesis", nicht mehr in aka von "cores"
 const SOLL_SYNTHESIS_AKA = ["Synthese", "Synthesis", "Fusion", "fusionieren", "Assimilation", "Abyssal Assimilation",
   "Synthese-Baum", "Witch Synthesis", "Hexen-Synthese", "Spezial-Synthese", "Special Synthesis", "Rezepte", "kombinieren"];
@@ -280,7 +282,7 @@ const SOLL_NAV_LABELS = {
   "hexen": "Hexen & Fusion", "hauptquests": "Hauptquests", "fraktionen": "Fraktionsquests",
   "side-quests": "Nebenquests", "kapitel-guide": "Kapitel-Guide", "true-ending": "True Ending",
   "ruinen": "Uralte Ruinen", "raetsel": "Rätsel", "trophaeen": "Trophäen & Errungenschaften",
-  "npcs": "Charaktere & NPCs", "romanze": "Romanze & Ehe", "mounts": "Reittiere", "pets": "Haustiere", "reitausruestung": "Reit- & Tierausrüstung",
+  "npcs": "Charaktere & NPCs", "romanze": "Romanze & Ehe", "mounts": "Reittiere", "pets": "Haustiere", "reitausruestung": "Reit- & Tierausrüstung", "inseln": "Inseln",
   "geheimnisse": "Geheimnisse & Lore", "charting-the-unknown": "Charting the Unknown", "crafting": "Herstellen & Farmen",
 };
 

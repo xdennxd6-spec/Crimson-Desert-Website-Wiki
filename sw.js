@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v60';
+const CACHE_VERSION = 'cd-guide-v61';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -10,22 +10,24 @@ const CORE_ASSETS = [
   './site.webmanifest',
   './app.css',
   './consent.js?v=2',
-  './data/d00-de-namen.js?v=1ece4831d9',
-  './data/d01-weapons.js?v=eebf8334f5',
-  './data/d02-crafting.js?v=10a2fd48cd',
-  './data/d03-main-quests.js?v=35299ab8d4',
-  './data/d04-armor-imgs.js?v=33ef78c839',
-  './data/d05-fac-data.js?v=d7ec9b639d',
-  './data/d06-items.js?v=fb0d7ab2f6',
-  './data/d07-patches.js?v=ca641c7867',
-  './data/d08-ruins-data.js?v=c20bbd8150',
-  './data/d09-scenes.js?v=11a4fac7f8',
+  './data/d00-de-namen.js?v=acf0b1fccd',
+  './data/d01-weapons.js?v=eacc13aca1',
+  './data/d02-crafting.js?v=9f8afe1668',
+  './data/d03-main-quests.js?v=cdaa4aa701',
+  './data/d04-armor-imgs.js?v=c4368f3538',
+  './data/d05-fac-data.js?v=c583384105',
+  './data/d06-items.js?v=383573514a',
+  './data/d07-patches.js?v=c5b539f421',
+  './data/d08-ruins-data.js?v=1584c23442',
+  './data/d09-scenes.js?v=b7d24fb7d6',
   './data/d10-enemy-drops.js?v=68d552c789',
-  './data/d11-fac-quest-imgs.js?v=fe522a3adf',
-  './data/d12-dlc.js?v=79e850a4e1',
-  './data/d13-romanze.js?v=b9998495bd',
-  './data/d14-beschaffung.js?v=620774a4eb',
-  './data/d14-reit.js?v=0a13ef4344',
+  './data/d11-fac-quest-imgs.js?v=9ef4e91d42',
+  './data/d12-dlc.js?v=a5b8c32097',
+  './data/d13-romanze.js?v=c83d824724',
+  './data/d14-beschaffung.js?v=4fb98df3a2',
+  './data/d14-reit.js?v=a1506329bb',
+  './data/d15-inseln.js?v=033397699d',
+  './data/d15-inseln-app.js?v=c97dd62791',
   './vendor/gsap-3.15.0.min.js',
   './vendor/ScrollTrigger-3.15.0.min.js',
   './vendor/SplitText-3.15.0.min.js',
