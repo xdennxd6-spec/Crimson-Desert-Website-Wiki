@@ -56,6 +56,7 @@ function karte(i, ctx) {
     let m = i.meer.de || i.meer.en;
     if (i.meer.de && i.meer.en && i.meer.en !== i.meer.de) m += " (" + i.meer.en + ")";
     if (i.meer.hinweis) m += ". Hinweis: " + i.meer.hinweis;
+    if (/unbestätigt$/.test(String(i.meer.beleg || "").trim())) m += " (unbestätigt)";
     zeile("Meeresgebiet", m);
   } else {
     zeile("Meeresgebiet", "nicht erfasst");
@@ -80,7 +81,7 @@ function karte(i, ctx) {
   const items = liste(i.items).length;
   if (items) zeile("Items mit Inselbezug", mehrzahl(items, "Eintrag", "Einträge"));
   const wissen = liste(i.wissen).length;
-  if (wissen) zeile("Wissenseinträge", mehrzahl(wissen, "Eintrag", "Einträge") + " mit dem Spieltext");
+  if (wissen) zeile("Wissenseinträge", mehrzahl(wissen, "Eintrag", "Einträge") + " aus Spieldaten und Wiki");
 
   const leer = !(i.kurz && i.kurz.txt) && !orte.length && !hoehlen.length && !bew.length && !quests.length && !tiere.length && !fund && !items && !wissen;
   const rumpf = `<ul class="stats">${st.join("")}</ul>`;
@@ -131,7 +132,7 @@ export function build(ctx) {
 
   const body = `
 <a class="cta" href="${DEEPLINK}">Alle Inseln in der App öffnen &rarr;</a>
-<p class="note">In der App öffnest du jede Insel mit allen Angaben und Belegen. Text steht hier nur, wo die Spieldaten ihn liefern; ein Meeresgebiet nennt die Seite nur, wenn die Daten die Insel einem Meer zuordnen. Schiffe, Tauchen und Reittiere des DLC stehen auf der Seite <a href="/charting-the-unknown">Charting the Unknown</a>.</p>
+<p class="note">In der App öffnest du jede Insel mit allen Angaben und Belegen. Die Angaben stammen aus den Spieldaten und dem Wiki, wenige aus einzeln genannten Guides; ein Meeresgebiet nennt die Seite nur, wenn eine Quelle die Insel einem Meer zuordnet.</p>
 <h2>Die Inseln (${I.length})</h2>
 <div class="grid">${I.map((i) => karte(i, ctx)).join("\n")}</div>
 ${ohneInsel(O, ctx)}`;

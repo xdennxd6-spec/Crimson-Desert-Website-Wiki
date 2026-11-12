@@ -35,7 +35,7 @@ function _insUnb(b){return /unbestätigt$/.test(_insStr(b).trim());}
 function _insBeleg(b){
   b=_insStr(b).trim();if(!b)return '';
   var h='<span class="ins-beleg">'+_insText(b)+'</span>';
-  if(_insUnb(b))h+=' <span class="ins-unb-v">'+(b.indexOf('einzige Quelle, unbestätigt')>-1?'unbestätigt':'einzige Quelle, unbestätigt')+'</span>';
+  if(_insUnb(b))h+=' <span class="ins-unb-v">unbestätigt</span>';
   return h;
 }
 /* Kurzname fuer die Skizze: "Insel Samora" -> "Samora"; "Insel der roten Hänge" und "Krähenklaueninsel" bleiben voll */
@@ -81,8 +81,7 @@ function _insSkizze(liste){
   if(!pts.length)return '';
   var xs=pts.map(function(x){return +x.lage.x;}),zs=pts.map(function(x){return +x.lage.z;});
   var xmin=Math.min.apply(null,xs),xmax=Math.max.apply(null,xs),zmin=Math.min.apply(null,zs),zmax=Math.max.apply(null,zs);
-  var sc=(W-2*PX)/Math.max(xmax-xmin,1),H=Math.max(Math.round((zmax-zmin)*sc+PT+PB),200);
-  if(sc>0.05)sc=0.05;
+  var sc=Math.min((W-2*PX)/Math.max(xmax-xmin,1),0.05),H=Math.max(Math.round((zmax-zmin)*sc+PT+PB),200);
   var P=pts.map(function(x){return {i:x,x:PX+(x.lage.x-xmin)*sc,y:PT+(zmax-x.lage.z)*sc,n:_insKurz(x.de)};});
   var R=6,hh=FS*1.05,occ=[],lab=[];
   var nord={x0:6,y0:6,x1:42,y1:46};occ.push(nord);
@@ -143,7 +142,7 @@ function _insSkizze(liste){
 
 /* ---------- Uebersicht ---------- */
 function _insKarte(i){
-  var meer=i.meer&&(i.meer.de||i.meer.en)?(i.meer.de||i.meer.en):'',
+  var meer=i.meer&&(i.meer.de||i.meer.en)?(i.meer.de||i.meer.en)+(_insUnb(i.meer.beleg)?' (unbestätigt)':''):'',
     kz=[[_insArr(i.hoehlen).length,'Höhlen'],[_insArr(i.quests).length,'Quests'],[_insArr(i.wissen).length,'Wissen'],[_insArr(i.fundorte).length,'Fundorte']],
     s=[i.de,i.en,meer].filter(Boolean).join(' ').toLowerCase();
   return '<a class="ins-karte cd-spot" href="'+_insHref(i.slug)+'" data-insel="'+cdEsc(i.slug)+'" data-s="'+cdEsc(s)+'">'
@@ -177,9 +176,9 @@ function _insUebersicht(unbekannt){
   if(hoe)stats.push([hoe,'Höhlen']);
   if(wis)stats.push([wis,'Wissenseinträge']);
   var h='<div class="ins-ueb">'
-    +cdHero({kicker:'Welt & Karte',title:'Inseln',glyph:'⛰',tone:'gold',sub:'Alle Inseln der Erweiterung mit Orten, Höhlen, Quests und Spieltexten.',stats:stats})
+    +cdHero({kicker:'Welt & Karte',title:'Inseln',glyph:'⛰',tone:'gold',sub:'Alle Inseln aus dem DLC und zwei aus dem Hauptspiel mit Orten, Höhlen, Quests und Spieltexten.',stats:stats})
     +(unbekannt?cdNote('Diese Insel gibt es im Wiki nicht.',{kind:'warn'}):'')
-    +cdNote('Jede Angabe nennt klein ihren Beleg. Grau markierte Zeilen stammen aus nur einer Quelle und sind unbestätigt.',{kind:'info'});
+    +cdNote('Jede Angabe nennt klein ihren Beleg. Gestrichelt umrandete Zeilen mit dem Vermerk „unbestätigt“ sind nicht doppelt belegt.',{kind:'info'});
   if(mit.length){
     h+='<figure class="ins-fig">'+_insSkizze(mit)
       +'<figcaption class="ins-cap"><b>Lageskizze aus Spielkoordinaten, keine Karte.</b> Norden oben. Ein Klick auf einen Punkt öffnet die Insel.</figcaption></figure>';

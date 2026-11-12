@@ -12,7 +12,9 @@
   "Patrol$",
   "Reinforcements$",
   "^(The )?Satyrs of",
-  "^Satyros$"
+  "^Satyros$",
+    "Monster I+$",
+    " Creature$"
  ],
  "paket_klassen": {
   "satyros|knowledge.dlc_01.paloc|2368549597": {
