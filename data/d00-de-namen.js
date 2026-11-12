@@ -6081,7 +6081,6 @@ const DE_NAMES={
 "Energy Conversion Technology Research":"Forschung zur Energieumwandlungstechnologie",
 "Razor Clam Research":"Schwertmuschelforschung",
 "Alloy Weapon Conductivity Research":"Studie zur Leitfähigkeit von Waffenlegierungen",
-"Balthazar, the Wyvernflame":"Balthazar, Hauptmann der Wyvernflammen",
 "Dormant Roars":"Ruhendes Gebrüll",
 "Copper Supply":"Kupferversorgung",
 "Mechanical Anatomy Research":"Forschung zur mechanischen Anatomie",
