@@ -2308,21 +2308,21 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=1ece4831d9" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=eebf8334f5" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
-<script src="data/d03-main-quests.js?v=35299ab8d4" fetchpriority="low"></script>
-<script src="data/d04-armor-imgs.js?v=33ef78c839" fetchpriority="low"></script>
-<script src="data/d05-fac-data.js?v=d7ec9b639d" fetchpriority="low"></script>
-<script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
-<script src="data/d07-patches.js?v=ca641c7867" fetchpriority="low"></script>
-<script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=11a4fac7f8" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=d91b579111" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=eacc13aca1" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=9f8afe1668" fetchpriority="low"></script>
+<script src="data/d03-main-quests.js?v=cdaa4aa701" fetchpriority="low"></script>
+<script src="data/d04-armor-imgs.js?v=ddbc9b17d9" fetchpriority="low"></script>
+<script src="data/d05-fac-data.js?v=ab99b12eec" fetchpriority="low"></script>
+<script src="data/d06-items.js?v=383573514a" fetchpriority="low"></script>
+<script src="data/d07-patches.js?v=c5b539f421" fetchpriority="low"></script>
+<script src="data/d08-ruins-data.js?v=1584c23442" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=b7d24fb7d6" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js?v=fe522a3adf" fetchpriority="low"></script>
-<script src="data/d12-dlc.js?v=79e850a4e1" fetchpriority="low"></script>
-<script src="data/d13-romanze.js?v=b9998495bd" fetchpriority="low"></script>
-<script src="data/d14-reit.js?v=0a13ef4344" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=333e3d7e70" fetchpriority="low"></script>
+<script src="data/d12-dlc.js?v=a5b8c32097" fetchpriority="low"></script>
+<script src="data/d13-romanze.js?v=c83d824724" fetchpriority="low"></script>
+<script src="data/d14-reit.js?v=ca231c4d49" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -8804,6 +8804,19 @@ function saveTE(a){
    als Chips; aufgeklappt: Schritte als Stepper (lazy, data-s trägt den Volltext). Fortschritt: cd_te, cd_ch_done (nur
    Anzeige), cd_sq_done (Liste der Questnamen) und neu cd_r2_b5_fac (abgehakte Fraktionsquests). */
 const _Q5_FAC_KEY='cd_r2_b5_fac';
+/* Einmalige Umstellung der Haken (12.11.2026): Ketten wurden in Einzelquests aufgeteilt (FAC_ID_MIGRATION in d05).
+   War eine alte Zeile abgehakt, gelten alle neuen Quests als abgehakt; die alte ID entfällt. Wiederholbar ohne Wirkung. */
+(function _q5FacMigrate(){
+  try{
+    if(typeof FAC_ID_MIGRATION==='undefined')return;
+    var raw=JSON.parse(localStorage.getItem(_Q5_FAC_KEY));if(!raw||typeof raw!=='object')return;
+    var isArr=Array.isArray(raw),ids=isArr?raw.map(String):Object.keys(raw).filter(function(k){return raw[k];}),set=new Set(ids),ch=false;
+    ids.forEach(function(id){var n=FAC_ID_MIGRATION[id];if(!n)return;set.delete(id);n.forEach(function(x){set.add(x);});ch=true;});
+    if(!ch)return;
+    var out;if(isArr)out=Array.from(set);else{out={};set.forEach(function(k){out[k]=true;});}
+    localStorage.setItem(_Q5_FAC_KEY,JSON.stringify(out));
+  }catch(e){}
+})();
 const _Q5_TE_ORDER=['Story','Abyss','Companions','Sanctums','Hexen','Greymane','Misc'];
 const _Q5_TE_META={
   Story:{t:'Hauptstory',g:'❢',keys:['q-main']},
@@ -12300,7 +12313,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=620774a4eb';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=4fb98df3a2';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
