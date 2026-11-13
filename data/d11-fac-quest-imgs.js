@@ -2,7 +2,7 @@
 // Schluessel "Fraktion|Quest" exakt wie f.name und q.q in FAC_DATA (data/d05-fac-data.js),
 // Wert: [[Dateiname unter cd_assets/factions/, Bildunterschrift], ...] in Spielreihenfolge.
 // Bilder: ConsolePulse-Guides, Nutzung vom Betreiber erlaubt; Arbeitsstand in G:\Claude\Crimson-Desert-Wiki\fraktion-bilder\.
-// 26 Quests, 62 Bilder.
+// 38 Quests, 62 Bilder (12.11.2026 auf Einzelquests umgehaengt).
 const FAC_QUEST_IMGS = {
  "House Roberts|First Trial of Trust": [
   [
@@ -98,11 +98,13 @@ const FAC_QUEST_IMGS = {
    "Belohnung Gravierter Goldohrring: Verteidigung und Bewegungstempo beim Verfeinern."
   ]
  ],
- "Pororin Forest Guardians|Children of the Woods": [
+ "Pororin Forest Guardians|A Mystical Gathering": [
   [
    "children-of-the-woods-questline.webp",
    "Start in Pororin Village: mit den Kindern sprechen, Logbuch eines Reisenden von Polan annehmen."
-  ],
+  ]
+ ],
+ "Pororin Forest Guardians|Mystic Falls": [
   [
    "ara-shai-mystic-falls-map-location.webp",
    "Ara: unterhalb der Mystikfälle (The Ancient Rift, Pailune)."
@@ -114,7 +116,29 @@ const FAC_QUEST_IMGS = {
   [
    "ara-shai-glowing-tree-underground.webp",
    "Ara steht am leuchtenden Baum in der Höhle."
+  ]
+ ],
+ "Pororin Forest Guardians|Beautiful Desert": [
+  [
+   "balan-shai-redtree-forest-map-location.webp",
+   "Balan: Rotbaumwald im Westen von Delesyia, östlich von Demeniss."
   ],
+  [
+   "balan-shai-red-tree-cave.webp",
+   "In der Höhle steht Balan am großen roten Baum."
+  ]
+ ],
+ "Pororin Forest Guardians|Wyvern's Cradle": [
+  [
+   "alder-shai-three-brothers-cliff-map-location.webp",
+   "Alder: bei Drei-Brüder-Klippe und Wyvern's Nest im Süden von Delesyia."
+  ],
+  [
+   "alder-shai-under-stone-structure.webp",
+   "Zwischen den Steinformationen hinunter, Alder und eine Truhe unter dem Überhang."
+  ]
+ ],
+ "Pororin Forest Guardians|Desert's Edge Maze": [
   [
    "florian-shai-desert-edge-maze-map-location.webp",
    "Florian: unterirdisch im Labyrinth am Wüstenrand (Rauchende Lande, Nord-Demeniss)."
@@ -126,49 +150,39 @@ const FAC_QUEST_IMGS = {
   [
    "florian-shai-underground-maze.webp",
    "Florian wartet rechts zwischen Grün und Hasen."
-  ],
-  [
-   "balan-shai-redtree-forest-map-location.webp",
-   "Balan: Rotbaumwald im Westen von Delesyia, östlich von Demeniss."
-  ],
-  [
-   "balan-shai-red-tree-cave.webp",
-   "In der Höhle steht Balan am großen roten Baum."
-  ],
-  [
-   "alder-shai-three-brothers-cliff-map-location.webp",
-   "Alder: bei Drei-Brüder-Klippe und Wyvern's Nest im Süden von Delesyia."
-  ],
-  [
-   "alder-shai-under-stone-structure.webp",
-   "Zwischen den Steinformationen hinunter, Alder und eine Truhe unter dem Überhang."
-  ],
+  ]
+ ],
+ "Pororin Forest Guardians|A Token of Friendship": [
   [
    "polan-pororin-village-quest-complete.webp",
    "Zurück zu Polan: Belohnung Pororin-Blütenmütze."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Embers of Return": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|A Rumor at Hills of No Return": [
   [
    "embers-return-hills-no-return-greymanes-location.webp",
    "Hügel ohne Wiederkehr: Otto, Silvan, Aldric und Fritz."
-  ],
+  ]
+ ],
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|A Rumor at Glenbright Farm": [
   [
    "embers-return-glenbright-farm-greymanes-location.webp",
    "Glenbright-Bauernhof: Ronnie, Tranan und Brice."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Gathered Will (Grounds of the Sunrise)": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|A Rumor at Hook Rapids": [
   [
    "gathered-will-hook-rapids-greymanes-location.webp",
    "Hakenfurt: Balder und Ryan."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Solid Foundation (Grounds of the Sunrise)": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|A Rumor at the Inksworth Bindery": [
   [
    "solid-foundation-inksworth-bindery-waterfall-greymanes-location.webp",
    "Wasserfall über dem Heulenden Hügel (Binderei Tintenschatz): Connor, Oliver und Eric."
-  ],
+  ]
+ ],
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Secure Resources (Solid Foundation)": [
   [
    "azerian-manor-defense-mission.webp",
    "Die Camp-Gelder kommen aus der Verteidigungsmission im Azerian-Anwesen."
@@ -184,43 +198,43 @@ const FAC_QUEST_IMGS = {
    "Jede Mittelgroße Tasche erweitert das Inventar um drei Plätze."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Brightening the Spirits": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Vibrant Dye": [
   [
    "dye-cauldron-improvise-recipes.webp",
    "Den Farbstoff für Naira im Improvise-Menü am Kessel herstellen."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|The First Steps of Little Marksmen": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|White Wood Bow": [
   [
    "scattered-embers-white-wood-bow-crafting.webp",
    "Den Weißholzbogen in der Schmiede herstellen."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|A Taste of Home": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|A Bowl of Rich Broth": [
   [
    "scattered-embers-naira-meat-soup-handover.webp",
    "Die fertige Fleischsuppe an Naira übergeben."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Strongbox with Wheels": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Empty Wagon": [
   [
    "scattered-embers-yann-empty-wagon-sell.webp",
    "Den gestohlenen Wagen beim Hehler abgeben (Leerer Wagen)."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Gentle Sound of Flowing River (Words Left by the Riverside)": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Gentle Sound of Flowing River": [
   [
    "scattered-embers-oongka-riverside-fishing.webp",
    "Oongka wartet am Fluss auf die Angel-Herausforderung."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Strength Held in the Fingertips": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|How to Distribute Strength": [
   [
    "scattered-embers-oongka-calphade-arm-wrestling.webp",
    "Armdrücken in der Taverne (Wie man Kraft verteilt)."
   ]
  ],
- "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Sweet Taste of Bounties (Face on the Bounty Notice -> Plenty of Bounty)": [
+ "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)|Plenty of Bounty": [
   [
    "scattered-embers-plenty-of-bounty-captured-outlaw.webp",
    "Den gefangenen Gesetzlosen bei der Wache abliefern."
@@ -232,35 +246,37 @@ const FAC_QUEST_IMGS = {
    "Steckbrief von Jeffrey."
   ]
  ],
- "House Celeste|Queen of the Silkspun Citadel (Queen's Nest)": [
+ "House Celeste|Queen's Nest": [
   [
    "house-celeste-queen-spider-arboria-castle.webp",
    "Spinnenkönigin im Schloss Arboria."
   ]
  ],
- "House Celeste|Abandoned Factory (Restarting the Elixir Factory)": [
+ "House Celeste|Restarting the Elixir Factory": [
   [
    "house-celeste-elixir-factory-perfect-elixir.webp",
    "Die reparierte Produktionslinie stellt das perfekte Elixier her."
   ]
  ],
- "House Celeste|The Hellhounds": [
+ "House Celeste|The Rabid Hound of Hellwood": [
   [
    "house-celeste-hemon-beindel-fort-hellwood.webp",
    "Hemon Baindel in der Festung Höllenforst."
   ]
  ],
- "House Celeste|Frozen Eldertree": [
+ "House Celeste|The Eldertree": [
   [
    "defeat-gwen-kraber.webp",
    "Gwen Kraber besiegt, danach ihren Speer an der Stelle aufheben."
   ]
  ],
- "House Celeste|Legendary Animals": [
+ "House Celeste|Legendary Hunter": [
   [
    "legendary-hunter-legendary-animals-quest.webp",
    "Das Treffen mit dem Legendären Jäger startet die dreiteilige Tier-Untersuchung."
-  ],
+  ]
+ ],
+ "House Celeste|Dark Catastrophy": [
   [
    "silver-fang-info.webp",
    "Silberzahn, die wichtigste Belohnung dieser Reihe."
@@ -272,23 +288,31 @@ const FAC_QUEST_IMGS = {
    "Shakatus Ermittlungsprotokoll mit den fünf Verdächtigen."
   ]
  ],
- "Goldleaf Merchant Guild|Nogle, the Trade Manager / Skrav, the Trade Manager / Kathan, the Goldleaf Private Soldier / Blique, the Horse Manager / Grimzle, the Ledger Manager (5 Ermittlungs-Schritte)": [
+ "Goldleaf Merchant Guild|Nogle, the Trade Manager": [
   [
    "goldleaf-nogle-three-evidence-locations.webp",
    "Nogle: Kassenbuch der Taverne, zerbrochenes Fass, Steuerbescheid."
-  ],
+  ]
+ ],
+ "Goldleaf Merchant Guild|Skrav, the Trade Manager": [
   [
    "goldleaf-skrav-three-evidence-locations.webp",
    "Skrav: gestapelte Waren, Handelsplan, fallengelassene Laterne."
-  ],
+  ]
+ ],
+ "Goldleaf Merchant Guild|Kathan, the Goldleaf Private Soldier": [
   [
    "goldleaf-kathan-three-evidence-locations.webp",
    "Kathan: beschädigter Wagen, Brief der Wache, Wachbericht."
-  ],
+  ]
+ ],
+ "Goldleaf Merchant Guild|Blique, the Horse Manager": [
   [
    "goldleaf-blique-three-evidence-locations.webp",
    "Blique: Futterquittung, alter Sattel, Pferdeverleihbuch."
-  ],
+  ]
+ ],
+ "Goldleaf Merchant Guild|Grimzle, the Ledger Manager": [
   [
    "goldleaf-grimzle-three-evidence-locations.webp",
    "Grimzle: Händlersiegel, Aufenthaltsnachweis, leerer Buchdeckel."
