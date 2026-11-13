@@ -3,6 +3,99 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.05.00",date:"13.11.2026",size:"Erster größerer Patch nach der Hotfix-Reihe zum DLC, veröffentlicht am 13.11.2026 um 05:50 UTC, also 06:50 MEZ (boardNo 157; Steam-Zweitveröffentlichung 05:59 UTC). Ohne Titelzusatz „Hotfix für alle Plattformen“. Der DLC „Charting the Unknown“ erscheint damit auch für Mac. 69 Punkte: Freies Bauen und Wohn-System, Tauchen, Seefahrt, Quest-Blocker, „Neuer Versuch“ ab der letzten Phase bei drei Bossen, Leviakans Schuppe auf der Insel Bergel, das Harpunengewehr beim Händler. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Neues",items:[
+      "Der DLC <b>„Charting the Unknown“</b> ist jetzt auch für <b>Mac</b> verfügbar. Er lässt sich über das Menü „DLC kaufen“ auf dem Titelbildschirm erwerben und herunterladen."
+    ]},
+    {cat:"Inhalt",items:[
+      "Behoben: Gegenstände, mit denen <b>Graumähnen</b> ausgerüstet waren, wurden dupliziert.",
+      "Neu: Nach dem ersten Erhalt kann das <b>Harpunengewehr</b> (<em>Harpoon Gun</em>) auch beim Händler an Angelplätzen in Meeresnähe gekauft werden.",
+      "Behoben: Die <b>Verbesserungsstufen</b> von Ausrüstung aus dem Vorbestellerbonus oder der Deluxe-Edition wurden zurückgesetzt, wenn ein Konto ohne Zugriffsrechte auf diese Gegenstände speicherte und lud.",
+      "Die Position von <b>Arimazar</b> wurde geändert. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung schreibt <em>Arimuzar Village</em>.</span>",
+      "Die Anzahl feindlicher Kreaturen in den <b>Zentralen Gewässern</b>, der <b>Großen Korallenregion</b> und dem <b>Großen Felsgebiet</b> wurde verringert (<em>Central Waters, Great Coral Reef, Great Rocky Reef</em>).",
+      "Behoben: Nach der Mission „Kehre zu deinen Kameraden zurück“ war kein Gespräch mit <b>Torstein</b> möglich, die Mission „Die Situation vor und nach Pailune untersuchen“ ließ sich deshalb nicht fortsetzen. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung nennt die Mission <em>Check the situation in Pailune</em>.</span>",
+      "Behoben: Die Anzahl der Graumähnen wurde nach dem Entlassen einer <b>Ehrengraumähne</b> nicht aktualisiert.",
+      "Neu: Bei bestimmten <b>Bosskämpfen</b> setzt „Neuer Versuch“ jetzt bei der zuletzt erreichten Kampfphase an. Betroffen sind laut Notice (Spoiler): <b>Erwachter Ludvig</b>, <b>Lava-Myurdin</b> und <b>Erwachter Bastier</b>.",
+      "Neu: <b>Tauchhelm des Entdeckers (Hunde)</b> und <b>Tauchanzug des Entdeckers (Hunde)</b> lassen sich an der Werkbank herstellen (<em>Canine Charter's Diving Helm / Diving Suit</em>).",
+      "[Kliff] Behoben: In der Quest <b>„Jenseits der Ränder“</b> (<em>Beyond the Margins</em>) wurde der geläuterte Zustand eines Wegsteins nach 7 Tagen zurückgesetzt.",
+      "Neu: Nach dem Sieg über <b>Leviakan</b> erhält man <b>Leviakans Schuppe</b> jetzt auf der <b>Insel Bergel</b>.",
+      "Die Einzelpreise der Verkaufsgüter in der <b>Verwaltung</b> wurden angepasst.",
+      "Die Materialmenge für die Herstellung von <b>Wagenausrüstung</b> wurde angepasst.",
+      "Behoben: Bei bestimmten Quests verschwanden die zugehörigen NPCs, wenn auf der Karte „Details“ gewählt wurde; die Quest ließ sich nicht fortsetzen.",
+      "Behoben: Das Rätsel an der <b>Spitze der Sonne</b> (<em>Spire of the Sun</em>) wurde nicht abgeschlossen, wenn der letzte Kristall unmittelbar vor der Abschlusssequenz bedient wurde.",
+      "Behoben: Beim Umzug ins Camp in <b>Pailune</b> konnten Möbel verschwinden, die zuvor in anderen Wohn-Regionen platziert waren.",
+      "Der Bereich für <b>„Freies Bauen“</b> am verlassenen Haus südlich von <b>Thalwynd</b> wurde geändert.",
+      "Behoben: Beim Platzieren von Wegen im <b>Wohn-System</b> ließ sich „Abbrechen“ nicht eingeben.",
+      "Behoben: Im Modus <b>„Freies Bauen“</b> wichen die verbrauchten Camp-Mittel vom angezeigten Betrag ab, wenn Tapeten an Wänden mit Fenstern und Türen angebracht oder Fenster und Türen an tapezierten Wänden ergänzt wurden.",
+      "Behoben: Wege an Häusern ließen sich nach dem Wegteleportieren und Zurückkehren nicht mehr abreißen.",
+      "Behoben: Im Modus <b>„Freies Bauen“</b> ließ sich ein Raum mit vielen platzierten Gegenständen nicht entfernen.",
+      "[Controller] Behoben: Der Abrissmodus des Wohn-Systems ließ sich nicht mit „Abbrechen“ verlassen.",
+      "Behoben: Das Haus ließ sich nicht wechseln, wenn darin viele Gegenstände platziert waren.",
+      "Behoben: Der Wechsel in den <b>Gestalten-Modus</b> funktionierte an bestimmten Stellen der Burg nicht korrekt.",
+      "Behoben: In bestimmten Spielständen ließen sich im Modus <b>„Freies Bauen“</b> keine Ornamente entnehmen.",
+      "Behoben: Der Bildschirm fror kurz ein, wenn man sich einem im Modus „Freies Bauen“ errichteten Haus näherte.",
+      "Behoben: Die Framerate wurde instabil, wenn Wege großflächig in der Nähe des Wohn-Gebäudes platziert wurden.",
+      "Neu: <b>Abyss-Ausrüstung</b> (<em>Abyss Gears</em>) gehört jetzt zu den Vertrauens-Belohnungen der <b>Hexen</b>.",
+      "Neu: Zusätzliches <b>Ambra</b> (<em>ambergris</em>) in der Nähe der riesigen Knochen auf dem Meeresgrund. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung nennt <em>giant whale bones at Seafloor Plain</em>.</span>"
+    ]},
+    {cat:"Steuerung",items:[
+      "Auf das <b>Sturmschiff des Ostens</b> (<em>Assault Ship of the East</em>) kann man jetzt von links und rechts aufsteigen.",
+      "Im Modus <b>„Freies Bauen“</b> wurde die Taste zum Platzieren beim Hausbau geändert.",
+      "Behoben: Beim <b>Tauchen</b> waren mit bestimmten gezogenen Waffen keine Interaktionen mit Objekten möglich."
+    ]},
+    {cat:"Kampf / Aktion",items:[
+      "Behoben: Wiederholter Einsatz von <b>Fokus</b> beim Tauchen ließ den Charakter abnormal schnell bewegen.",
+      "Behoben: In einigen <b>Unterwasserhöhlen</b> wurde der Charakter beim Auftauchen in die Luft geschleudert.",
+      "Behoben: Gegner im <b>Abgrund der Wahrheit</b> (<em>Precipice of Truth</em>) griffen den Spieler nicht an.",
+      "Behoben: <b>Seeschlangen</b> (<em>Sea Serpent</em>) ließen sich nicht mit dem Harpunengewehr treffen.",
+      "Behoben: Die Abyss-Ausrüstung <b>„Hinterlistiges Geschenk“</b> (<em>Parting Gift</em>) funktionierte nicht ordnungsgemäß."
+    ]},
+    {cat:"UI",items:[
+      "Neu: Gegenstände lassen sich mehrmals hintereinander an NPCs verschenken, ohne das Interaktions-UI zu schließen.",
+      "Neu: Die Karte zeigt an Bord die tatsächliche Schiffsgröße, wie schon die Minikarte.",
+      "Behoben: Der Erkennungsradius einiger Gegner wurde auf der Minikarte nicht korrekt angezeigt.",
+      "Neu: Sind die Bedingungen für eine <b>Erschließungsmission</b> über die Einrichtungen eines Ankerplatzes nicht erfüllt, nennt die Karte jetzt den Grund.",
+      "Behoben: „Zurücksetzen“ direkt nach dem Öffnen des <b>Anpassungs-UIs</b> ließ das Spiel abstürzen.",
+      "Neu: Beim Reparieren eines Schiffs wird über den Verlust von <b>Handelswaren</b> informiert.",
+      "Die Sichtbarkeit des Hilfseffekts für den Feuerwinkel der <b>Schiffskanonen</b> wurde verbessert.",
+      "Behoben: Neun neue <b>Elixiere</b> wurden im Inventar nicht ordnungsgemäß aufgelistet: Luftis', Fluvas und Lucaris' Elixier jeweils als minderes, normales und überragendes Elixier. <span style='color:var(--gdim)'>Einordnung: Die englische Fassung spricht von nicht gruppierten Elixieren.</span>"
+    ]},
+    {cat:"Grafik und Einstellungen",items:[
+      "[AMD] Behoben: In bestimmten Regionen stürzte das Spiel in RDNA-4-Umgebungen mit Treiberversion 26.10.1 oder höher ab, wenn die Option <b>„Filmisch“</b> (<em>Cinematic</em>) aktiv war. <span style='color:var(--gdim)'>Einordnung: Der AMD-Punkt ist damit von der Liste bekannter Probleme entfernt.</span>",
+      "Gelegentliche Framedrops beim Sturz aus großer Höhe auf der Insel wurden reduziert."
+    ]},
+    {cat:"Lokalisierung",items:[
+      "Lokalisierungsfehler in allen Sprachen wurden behoben, die Lokalisierungsqualität verbessert."
+    ]},
+    {cat:"Sonstiges",items:[
+      "Behoben: Der <b>Sternbildhelm</b> (<em>Constellation Helm</em>) ließ sich beim Schwimmen nicht ablegen.",
+      "Behoben: Beim Besuch im Haus eines anderen Charakters erschien dessen Ehepartner ohne die angepasste Erscheinung.",
+      "Die Fähigkeitsbeschreibungen von Damianes <b>„Himmelsschritt“</b> (<em>Skystep</em>) und Oongkas <b>„Vertikaler Flug“</b> (<em>Vertical Flight</em>) wurden an die tatsächlichen Auslösebedingungen angepasst.",
+      "Einige bisher unverkäufliche <b>Tagebücher</b> lassen sich jetzt verkaufen.",
+      "Die Grenzen unzugänglicher Regionen werden beim Erreichen jetzt ohne Verzögerung geladen.",
+      "Behoben: Ein <b>Eispfeil</b> ins Wasser erzeugte kein Eis.",
+      "Behoben: Der <b>Windwald-Geist Offin</b> (<em>Windwood Spirit Offin</em>) blieb beim Fortbewegen an einer Stelle stehen.",
+      "Behoben: Ein Schlüssel blieb unter „Schlüssel-Gegenstand“ im Inventar, obwohl das Labyrinth abgeschlossen und man weit entfernt war.",
+      "Die Position der ausgerüsteten Gegenstände am Schiff wurde verbessert.",
+      "Neu: <b>„Wie man einen Thronsaal dekoriert“</b> (<em>Furnishing the Throne Room</em>) ist im Reliktladen von <b>Delesyia</b> erhältlich.",
+      "Behoben: Ein begleitender Ehepartner wurde nach einiger Zeit im Wasser ohnmächtig.",
+      "Behoben: Die Belohnung bestimmter <b>Schatztruhen</b> ließ sich mehrfach erhalten.",
+      "Bei aktivem <b>Kriminalitätsstatus</b> lassen sich Verwaltungsmenüs wie Verwaltung, Wohn-System und Teich nicht mehr aufrufen.",
+      "Behoben: Der Gegner beim <b>Armdrücken</b> verließ seinen Platz.",
+      "Behoben: Auf der <b>Insel Phragma</b> und der <b>Insel Estra</b> ließen sich Häuser schon vor Abschluss der Erschließungsmissionen bauen.",
+      "Behoben: Wer am <b>Vergessenen Altar</b> (<em>Forgotten Altar</em>) in den Sandsturm gezogen wurde, starb nicht, sondern wurde herausgeschleudert.",
+      "Behoben: Der Spieler wurde auf einem gesunkenen Schiff wiederbelebt.",
+      "Behoben: Beim <b>Wollschwein</b> (<em>Mangalica</em>) erschien die Option „Stehlen“.",
+      "Behoben: Während bestimmter wichtiger Quests ließ sich <b>Schwarzstern</b> (<em>Blackstar</em>) beschwören.",
+      "Neu: <b>Reittiere</b> lassen sich jetzt auch in Wohn-Gebieten, die zu keinem Dorf gehören, rufen und besteigen."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 13.11.2026). Keine Downloadgröße, keine Build-Nummer.",
+      "XBOX: Mit 2.05.00 lassen sich die Vorbestellerboni des DLCs und die Twitch-Drops-Belohnungen abholen (Menü > Sonstiges > Optionen > Add-on, „Aktualisieren“). Die Notice dazu (boardNo 155) ist seit dem 13.11.2026 als gelöst markiert.",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde am 13.11.2026 um 08:10 UTC aktualisiert und zählt in der deutschen Fassung 15, in der englischen 14 Punkte. Entfernt sind der AMD-Punkt, die Handelswaren von der Insel Samora und der XBOX-Punkt; neu sind fehlerhaft angezeigte Fraktionsquest-Informationen und ein verschwindendes Reittier nach dem „Garten der Prüfungen“. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
+      "Quelle: offizielle Patch-Notizen Version 2.05.00, Pearl Abyss, 13.11.2026 05:50 UTC (boardNo 157), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
   {ver:"2.04.08",date:"06.11.2026",size:"Patch nach den sieben DLC-Hotfixes, veröffentlicht am 06.11.2026 um 09:50 UTC, also 10:50 MEZ (boardNo 152; Steam-Zweitveröffentlichung 09:52 UTC). Anders als die Vorgänger ohne den Titelzusatz „Hotfix für alle Plattformen“ und mit gestaffelter Verteilung. 26 Punkte unter der Überschrift Patch-Details: Framerate, Unterwasserhöhlen, Freies Bauen und Wohn-System, Seefahrt, die Antragsquest bei den Hexen, Leviakans Schuppe als neue Beute. Keine Downloadgröße, keine Build-Nummer.",features:[
     {cat:"Patch-Details",items:[
       "<b>Framerate-Einbrüche</b> in bestimmten Gebieten wurden reduziert. Pearl Abyss arbeitet weiter an den Einbrüchen, die in bestimmten Situationen oder bei einigen Inhalten auftreten.",
@@ -34,7 +127,7 @@ const PATCHES=[
     ]},
     {cat:"Plattformen und Quelle",items:[
       "Steam (PC), Steam (Mac) und PlayStation: <em>Patch jetzt verfügbar</em>. XBOX, Epic Games Store und Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 07.11.2026). Keine Downloadgröße, keine Build-Nummer.",
-      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde zu diesem Patch nicht aktualisiert, Stand weiter 05.11.2026, 03:00 UTC, 15 Punkte. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde zu diesem Patch nicht aktualisiert, Stand weiter 05.11.2026, 03:00 UTC, 15 Punkte. Erst am 10.11.2026 um 06:00 UTC kam ein AMD-Punkt hinzu (16 Punkte: mit Treiberversion 26.10.1 werden einige Grafiken fehlerhaft dargestellt, Pearl Abyss empfahl bis zur Behebung Version 26.8.1 oder älter). Nach 2.05.00 verschwand er am 13.11.2026 wieder von der Liste. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
       "Quelle: offizielle Patch-Notizen Version 2.04.08, Pearl Abyss, 06.11.2026 09:50 UTC (boardNo 152), deutsche und englische Fassung gegengeprüft."
     ]}
   ]},
