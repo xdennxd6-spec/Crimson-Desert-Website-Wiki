@@ -1,0 +1,2011 @@
+{
+ "_hinweis": "Handpflege fuer scripts/gen-inseln.mjs (Inselseite). Jede Aussage hier ist mit Spieldaten-Schluessel, Wiki-Eintrag oder URL belegt; gen-inseln prueft die Belege gegen inseln.json und data/*.js und bricht bei Abweichung ab. Fremdquellen geprueft am 11.11.2026.",
+ "geprueft": "11.11.2026",
+ "quest_ausschluss_en": [
+  "Loading\\)?$",
+  "Close Filter",
+  "BGM",
+  "Faction Spawn",
+  "Schedule(?! After Pioneering)",
+  "^Weather around",
+  "Mise-en",
+  "Patrol$",
+  "Reinforcements$",
+  "^(The )?Satyrs of",
+  "^Satyros$",
+    "Monster I+$",
+    " Creature$"
+ ],
+ "paket_klassen": {
+  "satyros|knowledge.dlc_01.paloc|2368549597": {
+   "ziel": "orte",
+   "art": "ankerplatz"
+  },
+  "satyros|knowledge.dlc_01.paloc|2512113955": {
+   "ziel": "bewohner",
+   "art": "npc"
+  },
+  "satyros|knowledge.dlc_01.paloc|3667254442": {
+   "ziel": "orte",
+   "art": "gebiet"
+  },
+  "satyros|knowledge.dlc_01.paloc|3921146386": {
+   "ziel": "wissen",
+   "titel": "Befehl des 37. Häuptlings Satyros"
+  },
+  "satyros|item.dlc_01.paloc|1005886": {
+   "ziel": "items",
+   "de": "Warnzettel",
+   "en": "Warning notice"
+  },
+  "satyros|character.dlc_01.paloc|1004275": {
+   "ziel": "tiere",
+   "art": "boss"
+  },
+  "satyros|quest.dlc_01.paloc|1437365585": {
+   "ziel": "bewohner",
+   "art": "npc",
+   "de": "Kilian",
+   "en": "Killiian",
+   "wort_de": "Kilian",
+   "wort_en": "Killiian"
+  },
+  "satyros|quest.dlc_01.paloc|2259446883": {
+   "ziel": "quest_wiki",
+   "quest": "Isolated Island Chief",
+   "schritt": "The Tribe's Foremost",
+   "de": "Spitze des Stammes",
+   "en": "The Tribe's Foremost"
+  },
+  "satyros|quest.dlc_01.paloc|2998979086": {
+   "ziel": "quest_wiki",
+   "quest": "Besetzte Inseln und Küsten",
+   "schritt": "A tribe that hunts intruders",
+   "de": "Ein Stamm, der Eindringlinge jagt",
+   "en": "A tribe that hunts intruders"
+  },
+  "satyros|quest.dlc_01.paloc|3793396013": {
+   "ziel": "bewohner",
+   "art": "npc",
+   "de": "Evander",
+   "en": "Evander",
+   "wort_de": "Evander",
+   "wort_en": "Evander"
+  },
+  "samora|item.dlc_01.paloc|1006332": {
+   "ziel": "items",
+   "wiki_name": {
+    "konst": "WEAPONS",
+    "eintrag": "Tempest Warhammer"
+   }
+  },
+  "samora|quest.dlc_01.paloc|158716033": {
+   "ziel": "quest_wiki",
+   "quest": "Besetzte Inseln und Küsten",
+   "schritt": "Seized by Pirates",
+   "de": "Piraten, die die Insel besetzen",
+   "en": "Seized by Pirates"
+  },
+  "samora|quest.dlc_01.paloc|525710771": {
+   "ziel": "bewohner",
+   "art": "npc",
+   "de": "Harris",
+   "en": "Harris",
+   "wort_de": "Harris",
+   "wort_en": "Harris"
+  },
+  "samora|quest.dlc_01.paloc|1102282179": {
+   "ziel": "quest_wiki",
+   "quest": "Besetzte Inseln und Küsten",
+   "schritt": "The Stolen Relic",
+   "de": "Die geraubte Reliquie",
+   "en": "The Stolen Relic"
+  },
+  "samora|quest.dlc_01.paloc|2113144211": {
+   "ziel": "quest_wiki",
+   "quest": "Remote Islands",
+   "schritt": "The Seaborne Village",
+   "de": "Das Inseldorf auf dem Meer",
+   "en": "The Seaborne Village",
+   "min_aehnlich": 0.2,
+   "begruendung": "Der Wiki-Schritt fasst ausdrücklich den Abschlusstext zusammen (Insel Samora als Piratenbasis, Welsmensch als Gegner); geringe Wortgleichheit, weil das Wiki umschreibt."
+  },
+  "samora|knowledge.dlc_01.paloc|1630263047": {
+   "ziel": "bewohner",
+   "art": "npc"
+  },
+  "samora|knowledge.dlc_01.paloc|1657145622": {
+   "ziel": "bewohner",
+   "art": "npc"
+  },
+  "samora|knowledge.dlc_01.paloc|2345289100": {
+   "ziel": "bewohner",
+   "art": "npc"
+  },
+  "samora|knowledge.dlc_01.paloc|2821590397": {
+   "ziel": "bewohner",
+   "art": "npc"
+  },
+  "estra|knowledge.dlc_01.paloc|1586465531": {
+   "ziel": "orte",
+   "art": "haus"
+  },
+  "phragma|knowledge.dlc_01.paloc|324288769": {
+   "ziel": "orte",
+   "art": "haus"
+  },
+  "cloven-hoof|knowledge.dlc_01.paloc|881509573": {
+   "ziel": "wissen",
+   "titel": "Archäologe von der Insel Auronui"
+  },
+  "auronui|knowledge.dlc_01.paloc|881509573": {
+   "ziel": "bewohner",
+   "art": "npc"
+  },
+  "auronui|quest.dlc_01.paloc|354127128": {
+   "ziel": "wissen",
+   "titel": "Aus dem Questlog"
+  },
+  "auronui|quest.dlc_01.paloc|377643448": {
+   "ziel": "wissen",
+   "titel": "Aus dem Questlog"
+  },
+  "auronui|quest.dlc_01.paloc|625183524": {
+   "ziel": "wissen",
+   "titel": "Aus dem Questlog"
+  },
+  "auronui|quest.dlc_01.paloc|2941738836": {
+   "ziel": "wissen",
+   "titel": "Aus dem Questlog"
+  },
+  "auronui|quest.dlc_01.paloc|1594386000": {
+   "ziel": "bewohner",
+   "art": "npc",
+   "de": "Reyard",
+   "en": "Reyard",
+   "wort_de": "Reyard",
+   "wort_en": "Reyard"
+  },
+  "razanui|knowledge.dlc_01.paloc|2512522381": {
+   "ziel": "orte",
+   "art": "wachturm"
+  },
+  "razanui|quest.dlc_01.paloc|411553580": {
+   "ziel": "quest_wiki",
+   "quest": "Besetzte Inseln und Küsten",
+   "schritt": "Pirate Siege Line",
+   "de": "Belagerungsring der Piraten",
+   "en": "Pirate Siege Line"
+  },
+  "xamaca|quest.dlc_01.paloc|1995438346": {
+   "ziel": "bewohner",
+   "art": "npc",
+   "de": "Ludic",
+   "en": "Ludic",
+   "wort_de": "Ludic",
+   "wort_en": "Ludic"
+  },
+  "xamaca|knowledge.dlc_01.paloc|249459973": {
+   "ziel": "bewohner",
+   "art": "npc"
+  },
+  "red-hangs|questdialog.paloc|questdialog_contents_02525": {
+   "ziel": "wissen",
+   "titel": "Köhlerschildkröten"
+  },
+  "red-hangs|questdialog.dlc_01.paloc|questdialog_contents_02525": {
+   "ziel": "wissen",
+   "titel": "Köhlerschildkröten"
+  }
+ },
+ "bewohner_hand": [
+  {
+   "slug": "satyros",
+   "de": "Satyrn",
+   "en": "Satyrs",
+   "art": "volk",
+   "datei": "knowledge.dlc_01.paloc",
+   "id": "255255962",
+   "wort": "Hier leben die Satyrn"
+  },
+  {
+   "slug": "satyros",
+   "de": "Gesetzlose",
+   "en": "Outlaws",
+   "art": "fraktion",
+   "datei": "knowledge.dlc_01.paloc",
+   "id": "3667254442",
+   "wort": "Krieg zwischen den Satyrn und den Gesetzlosen"
+  },
+  {
+   "slug": "samora",
+   "de": "Bewohner der Insel Samora",
+   "en": "People of Samora Island",
+   "art": "volk",
+   "datei": "knowledge.dlc_01.paloc",
+   "id": "2099963490",
+   "wort": "Die Bewohner der Insel Samora"
+  },
+  {
+   "slug": "samora",
+   "de": "Piratenbanden",
+   "en": "Pirate gangs",
+   "art": "fraktion",
+   "datei": "quest.dlc_01.paloc",
+   "id": "158716033",
+   "wort": "Überall auf der Insel Samora sind Piratenbanden aufgetaucht"
+  },
+  {
+   "slug": "razanui",
+   "de": "Piratenbande",
+   "en": "Pirate gang",
+   "art": "fraktion",
+   "datei": "quest.dlc_01.paloc",
+   "id": "411553580",
+   "wort": "Eine Piratenbande hält die Insel Razanui besetzt"
+  }
+ ],
+ "tiere_hand": [
+  {
+   "slug": "samora",
+   "de": "Welsmensch",
+   "en": "Sir Catfish",
+   "art": "boss",
+   "datei": "quest.dlc_01.paloc",
+   "id": "1102282179",
+   "wort": "Der Welsmensch wurde besiegt und die Insel Samora befreit",
+   "txt": "Laut Questtext wurde die Insel Samora nach dem Sieg über den Welsmenschen befreit.",
+   "link": {
+    "sec": "bosses",
+    "go": "Sir Catfish"
+   },
+   "link_pruef": {
+    "konst": "BOSSES",
+    "eintrag": "Sir Catfish"
+   }
+  }
+ ],
+ "meer_hand": {
+  "auronui": {
+   "quelle": "paket",
+   "datei": "quest.dlc_01.paloc",
+   "id": "2941738836",
+   "wort": "im Südmeer",
+   "region_id": 11598,
+   "hinweis": "Der Spieltext sagt „im Südmeer“; gemeint ist das Meeresgebiet Südmeer von Pywel."
+  },
+  "red-hangs": {
+   "quelle": "wiki",
+   "konst": "DLC_ISLAND_FACTS",
+   "eintrag": "Insel der roten Hänge (Hauptspiel)",
+   "index": 1,
+   "wort": "Im Südmeer von Pywel",
+   "region_id": 11598
+  }
+ },
+ "meere_ids": [
+  9,
+  11598,
+  11599,
+  11600,
+  11601,
+  11602,
+  11603,
+  11608,
+  11609,
+  11610,
+  11611,
+  11612,
+  11613,
+  11619,
+  11620,
+  11621,
+  11622,
+  11623,
+  11624
+ ],
+ "meer_hinweise": {
+  "11619": "Im deutschen Spieltext so benannt; die Patch-Notizen 2.04.08 sagen „Meer des Schweigens“."
+ },
+ "sonst_ids": [
+  [
+   11502
+  ],
+  [
+   11632
+  ],
+  [
+   11633
+  ],
+  [
+   32037,
+   32038,
+   32039,
+   32040,
+   32041,
+   32042,
+   32043,
+   32044
+  ]
+ ],
+ "wiki_inseln": [
+  {
+   "slug": "auronui",
+   "pfad": "where",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "auronui",
+   "pfad": "unlock",
+   "ziel": "wissen",
+   "titel": "Erschließung"
+  },
+  {
+   "slug": "auronui",
+   "pfad": "info.0",
+   "ziel": "bewohner",
+   "de": "Reyard",
+   "en": "Reyard",
+   "art": "npc"
+  },
+  {
+   "slug": "auronui",
+   "pfad": "info.1",
+   "ziel": "wissen",
+   "titel": "Wissenswertes"
+  },
+  {
+   "slug": "auronui",
+   "pfad": "info.3",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "samora",
+   "pfad": "where",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "samora",
+   "pfad": "info.0",
+   "ziel": "bewohner",
+   "de": "Cartaine",
+   "en": "Cartaine",
+   "art": "npc"
+  },
+  {
+   "slug": "satyros",
+   "pfad": "where",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "satyros",
+   "pfad": "info.0",
+   "ziel": "bewohner",
+   "de": "Evander",
+   "en": "Evander",
+   "art": "npc"
+  },
+  {
+   "slug": "ocula",
+   "pfad": "where.0",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "ocula",
+   "pfad": "info.2",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "cloven-hoof",
+   "pfad": "where",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "navrah",
+   "pfad": "info.2",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "razanui",
+   "pfad": "info.1",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "bergel",
+   "pfad": "where",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "bergel",
+   "pfad": "info.1",
+   "ziel": "fundorte",
+   "item": "Obsidian",
+   "de": "Obsidian",
+   "zusatz": "Die Menge je Vorkommen nennt nur KeenGamer.",
+   "fremd": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637852"
+    }
+   ]
+  },
+  {
+   "slug": "bergel",
+   "pfad": "info.2",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "iliya",
+   "pfad": "where",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "iliya",
+   "pfad": "info.2",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "phragma",
+   "pfad": "info.1",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "carcano",
+   "pfad": "info.1",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "nirakan",
+   "pfad": "info.1",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "xamaca",
+   "pfad": "info.1",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "drangar",
+   "pfad": "info.0",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "estra",
+   "pfad": "where",
+   "ziel": "wissen",
+   "titel": "Lage"
+  },
+  {
+   "slug": "estra",
+   "pfad": "info.1",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "saeon",
+   "pfad": "info.0",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "spagnola",
+   "pfad": "info.0",
+   "ziel": "kurz",
+   "teil": "nach_spieltext"
+  },
+  {
+   "slug": "red-hangs",
+   "fakt": "Insel der roten Hänge (Hauptspiel)",
+   "index": 0,
+   "ziel": "wissen",
+   "titel": "Lage"
+  }
+ ],
+ "wiki_bezuege": [
+  {
+   "slug": "red-hangs",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Wailing Sea Greathammer",
+   "en": "Wailing Sea Greathammer",
+   "de": "Zweihandhammer der klagenden See",
+   "txt": "Vergrabene Truhe an der Nordwestseite von Insel der roten Hänge nahe der Küste von Delesyia; Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Mobalytics",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Wailing Sea Greathammer"
+   },
+   "belegtext": [
+    "Vergrabene Truhe an der Nordwestseite von Insel der roten Hänge nahe der Küste von Delesyia; Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "red-hangs",
+   "ziel": "tiere",
+   "konst": "MOUNTS",
+   "eintrag": "Shark",
+   "en": "Shark",
+   "de": "Hai",
+   "txt": "Häufig rund um die Inseln des Großen Ozeans, etwa bei Insel der roten Hänge. Mit dem Harpunengewehr (aus der Quest 'Wo der Wind weht') ermüden, mit Kraftfaust betäuben, aufsteigen und das Zähm-Minispiel wie beim Pferd schaffen, dann als Transportmittel registrieren. Füttern zähmt Haie nicht (Game8, Mobalytics, Power Up Gaming, Sportskeeda)",
+   "unb": false,
+   "link": {
+    "sec": "mounts",
+    "go": "Shark"
+   },
+   "art": "reittier",
+   "belegtext": [
+    "Häufig rund um die Inseln des Großen Ozeans, etwa bei Insel der roten Hänge. Mit dem Harpunengewehr (aus der Quest 'Wo der Wind weht') ermüden, mit Kraftfaust betäuben, aufsteigen und das Zähm-Minispiel wie beim Pferd schaffen, dann als Transportmittel registrieren. Füttern zähmt Haie nicht (Game8, Mobalytics, Power Up Gaming, Sportskeeda)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Haustier-Outfits bei Evander (Scholastone, Ludeon)",
+   "en": "Haustier-Outfits bei Evander (Scholastone, Ludeon)",
+   "txt": "Relikt-Austausch-Händler Evander auf Insel Satyros: Scholastein-Gelehrtenhut 5 und Outfit 9, Ludeon Hat 7 und Outfit 12 Uralte Relikte (th.gl, geprüft 01.11.2026; Haustierkleidung bei diesem Händler nennen auch GameRant und Mobalytics)",
+   "unb": true,
+   "q": "Einzelnamen und Preise nur laut th.gl",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Haustier-Outfits bei Evander (Scholastone, Ludeon)"
+   },
+   "de": "Haustier-Outfits bei Evander (Scholastone, Ludeon)",
+   "belegtext": [
+    "Relikt-Austausch-Händler Evander auf Insel Satyros: Scholastein-Gelehrtenhut 5 und Outfit 9, Ludeon Hat 7 und Outfit 12 Uralte Relikte (th.gl, geprüft 01.11.2026; Haustierkleidung bei diesem Händler nennen auch GameRant und Mobalytics)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Power Overload",
+   "en": "Power Overload",
+   "de": "Stromüberlastung",
+   "txt": "Ausrüstungs-Blaupause bei Evander (Relikt-Austausch, Insel Satyros) für 22 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026)",
+   "unb": true,
+   "q": "Name, Effekt und Preis nur laut th.gl",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Power Overload"
+   },
+   "belegtext": [
+    "Ausrüstungs-Blaupause bei Evander (Relikt-Austausch, Insel Satyros) für 22 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Radiant Flash",
+   "en": "Radiant Flash",
+   "de": "Flugbahn des Glanzes",
+   "txt": "Quest „Ein mysteriöser Angriff“ in Oongkas Reihe „Geschmiedete Entschlossenheit“ (th.gl; Game8 nennt Flugbahn des Glanzes in der Belohnungsliste der Reihe, geprüft 01.11.2026); Ausrüstungs-Blaupause auch bei Evander (Insel Satyros) für 27 Uralte Relikte (th.gl)",
+   "unb": false,
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Radiant Flash"
+   },
+   "belegtext": [
+    "Quest „Ein mysteriöser Angriff“ in Oongkas Reihe „Geschmiedete Entschlossenheit“ (th.gl; Game8 nennt Flugbahn des Glanzes in der Belohnungsliste der Reihe, geprüft 01.11.2026); Ausrüstungs-Blaupause auch bei Evander (Insel Satyros) für 27 Uralte Relikte (th.gl)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Rushing Wind",
+   "en": "Rushing Wind",
+   "de": "Tobender Lebensodem",
+   "txt": "Ausrüstungs-Blaupause bei Evander (Relikt-Austausch, Insel Satyros) für 22 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026)",
+   "unb": true,
+   "q": "Name, Effekt und Preis nur laut th.gl",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Rushing Wind"
+   },
+   "belegtext": [
+    "Ausrüstungs-Blaupause bei Evander (Relikt-Austausch, Insel Satyros) für 22 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Storm's Echo",
+   "en": "Storm's Echo",
+   "de": "Echo des Sturms",
+   "txt": "Quest „Verdrehtes Schicksal“ in Oongkas Reihe „Geschmiedete Entschlossenheit“ (th.gl, geprüft 01.11.2026); Ausrüstungs-Blaupause auch bei Evander (Relikt-Austausch, Insel Satyros) für 27 Uralte Relikte (th.gl)",
+   "unb": true,
+   "q": "Name strittig: th.gl Storm's Echo, Game8 Storm Echo",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Storm's Echo"
+   },
+   "belegtext": [
+    "Quest „Verdrehtes Schicksal“ in Oongkas Reihe „Geschmiedete Entschlossenheit“ (th.gl, geprüft 01.11.2026); Ausrüstungs-Blaupause auch bei Evander (Relikt-Austausch, Insel Satyros) für 27 Uralte Relikte (th.gl)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Venomous Fangs",
+   "en": "Venomous Fangs",
+   "de": "Jagd der Giftzähne",
+   "txt": "Ausrüstungs-Blaupause bei Evander (Relikt-Austausch, Insel Satyros) für 24 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026)",
+   "unb": true,
+   "q": "Name, Effekt und Preis nur laut th.gl",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Venomous Fangs"
+   },
+   "belegtext": [
+    "Ausrüstungs-Blaupause bei Evander (Relikt-Austausch, Insel Satyros) für 24 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Writhebolt",
+   "en": "Writhebolt",
+   "de": "Bebender Blitz",
+   "txt": "Ausrüstungs-Blaupause beim Relikt-Austausch-Händler Evander auf Insel Satyros für 24 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026; Abyss-Gear-Blaupausen bei diesem Händler nennen auch GameRant und Mobalytics)",
+   "unb": true,
+   "q": "Name, Effekt und Preis nur laut th.gl",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Writhebolt"
+   },
+   "belegtext": [
+    "Ausrüstungs-Blaupause beim Relikt-Austausch-Händler Evander auf Insel Satyros für 24 Uralte Relikte, danach herstellen (th.gl, geprüft 01.11.2026; Abyss-Gear-Blaupausen bei diesem Händler nennen auch GameRant und Mobalytics)"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Premium Mussels",
+   "en": "Packaged Premium Mussels",
+   "de": "Eingepackte erstklassige Miesmuscheln",
+   "txt": "Insel-Handelsposten (Killiian), Insel Satyros: 1.321 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Premium Mussels"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Killiian), Insel Satyros: 1.321 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Premium Scallops",
+   "en": "Packaged Premium Scallops",
+   "de": "Eingepackte erstklassige Kammmuscheln",
+   "txt": "Insel-Handelsposten (Killiian), Insel Satyros: 1.622 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Premium Scallops"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Killiian), Insel Satyros: 1.622 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Premium Sea Pineapples",
+   "en": "Packaged Premium Sea Pineapples",
+   "de": "Eingepackte erstklassige See-Ananas",
+   "txt": "Insel-Handelsposten (Killiian), Insel Satyros: 1.594 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Premium Sea Pineapples"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Killiian), Insel Satyros: 1.594 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "satyros",
+   "ziel": "tiere",
+   "konst": "DLC_BOSSES",
+   "eintrag": "Satyros",
+   "en": "Satyros",
+   "txt": "Inselboss, Häuptling der Satyrn: die südliche von zwei eng benachbarten Inseln im äußersten Südwesten (Dorf am Wasserfall); auf der nördlichen Insel ein Knochennest mit einer weiteren Begegnung.\n\nBeute: Satyr-Speer, 5 Uralte Relikte, 1 Abyss-Artefakt",
+   "unb": false,
+   "link": {
+    "sec": "dlc-kampf",
+    "go": "Satyros"
+   },
+   "art": "boss",
+   "de": "Satyros",
+   "belegtext": [
+    "Inselboss, Häuptling der Satyrn: die südliche von zwei eng benachbarten Inseln im äußersten Südwesten (Dorf am Wasserfall); auf der nördlichen Insel ein Knochennest mit einer weiteren Begegnung.",
+    "Satyr-Speer, 5 Uralte Relikte, 1 Abyss-Artefakt"
+   ]
+  },
+  {
+   "slug": "iliya",
+   "ziel": "fundorte",
+   "konst": "DLC_SHIPS",
+   "eintrag": "Phantom Ship",
+   "en": "Phantom Ship",
+   "de": "Geisterschiff",
+   "txt": "Das gegnerische Geisterschiff im Gebiet Das Jahr des Schweigens (südöstlich von Delesyia) versenken und die Schatzkarte aus den Trümmern aufnehmen; auf Insel Iliya mit der Schaufel die Truhe mit dem Blauplan: Geisterschiff ausgraben und den Bauplan lesen. Dann erscheint die Entsendung „Bau eines Geisterschiffs“ in Steinwacht-Hafen: 10 Gefährten, 4 Tage 4 Std., 750.000 Camp-Mittel, 45.000 Lagerstein, 45.000 Camp Wood, 90.000 Camp Provisions, Naturperle x5, Haut der Riesen-Qualle x10, Obsidian x30.",
+   "unb": true,
+   "q": "KeenGamer",
+   "link": {
+    "sec": "dlc",
+    "go": "Phantom Ship"
+   },
+   "art": "schiff",
+   "belegtext": [
+    "Das gegnerische Geisterschiff im Gebiet Das Jahr des Schweigens (südöstlich von Delesyia) versenken und die Schatzkarte aus den Trümmern aufnehmen; auf Insel Iliya mit der Schaufel die Truhe mit dem Blauplan: Geisterschiff ausgraben und den Bauplan lesen. Dann erscheint die Entsendung „Bau eines Geisterschiffs“ in Steinwacht-Hafen: 10 Gefährten, 4 Tage 4 Std., 750.000 Camp-Mittel, 45.000 Lagerstein, 45.000 Camp Wood, 90.000 Camp Provisions, Naturperle x5, Haut der Riesen-Qualle x10, Obsidian x30."
+   ]
+  },
+  {
+   "slug": "bergel",
+   "ziel": "tiere",
+   "konst": "DLC_BOSSES",
+   "eintrag": "Rohan Cooper",
+   "en": "Rohan Cooper",
+   "txt": "Höhle der Trauer auf Insel Bergel: der ruhelose Geist des Sohns eines Marineoffiziers aus Demeniss. Quest „Höhle der Trauer“.\n\nBeute: Marineoffiziersrüstung, Trugbild-Kaskade, 5 Uralte Relikte, Abyss-Artefakt (Questbelohnung)",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc-kampf",
+    "go": "Rohan Cooper"
+   },
+   "art": "boss",
+   "de": "Rohan Cooper",
+   "belegtext": [
+    "Höhle der Trauer auf Insel Bergel: der ruhelose Geist des Sohns eines Marineoffiziers aus Demeniss. Quest „Höhle der Trauer“.",
+    "Marineoffiziersrüstung, Trugbild-Kaskade, 5 Uralte Relikte, Abyss-Artefakt (Questbelohnung)"
+   ]
+  },
+  {
+   "slug": "bergel",
+   "ziel": "quests",
+   "konst": "DLC_QUESTS",
+   "eintrag": "Cave of Sorrow",
+   "en": "Cave of Sorrow",
+   "de": "Höhle der Trauer",
+   "txt": "Aus einer dunklen, feuchten Höhle hallt ein klagender Schrei; das Wesen besiegen, das sich dort zeigt (Rohan Cooper).",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc-quests",
+    "go": "dlc-q-cave-of-sorrow"
+   },
+   "belegtext": [
+    "Fraktionsquest, Bergel Island",
+    "Aus einer dunklen, feuchten Höhle hallt ein klagender Schrei; das Wesen besiegen, das sich dort zeigt (Rohan Cooper)."
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ACCESSORIES",
+   "eintrag": "Elegant Black Amber Earring",
+   "en": "Elegant Black Amber Earring",
+   "de": "Eleganter Gagat-Ohrring",
+   "txt": "Truhe in einer Wasserfallhöhle auf Insel Samora, Eingang per Stoßangriff (Mobalytics, geprüft 01.11.2026; einzige Quelle für den Fundort, unbestätigt)",
+   "unb": true,
+   "q": "Mobalytics",
+   "link": {
+    "sec": "accessories",
+    "go": "Elegant Black Amber Earring"
+   },
+   "belegtext": [
+    "Truhe in einer Wasserfallhöhle auf Insel Samora, Eingang per Stoßangriff (Mobalytics, geprüft 01.11.2026; einzige Quelle für den Fundort, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Architect's Cloth Hat",
+   "en": "Architect's Cloth Hat",
+   "de": "Stoffmütze des Architekten",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 12 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Architect's Cloth Hat"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 12 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Architect's Cloth Workwear",
+   "en": "Architect's Cloth Workwear",
+   "de": "Stoffarbeitskleidung des Architekten",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 20 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Architect's Cloth Workwear"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 20 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Architect's Leather Boots",
+   "en": "Architect's Leather Boots",
+   "de": "Lederstiefel des Architekten",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Architect's Leather Boots"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Architect's Leather Gloves",
+   "en": "Architect's Leather Gloves",
+   "de": "Lederhandschuhe des Architekten",
+   "txt": "Zwei Wege: Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026); laut Game8 außerdem Belohnung für Beliebtheit Stufe 3 der Einrichtung Scheitheim-Sägewerk (über die DLC-Fraktionsquest 'Neuer Elan' freischalten, für 15.000 Camp-Mittel pachten; Game8, geprüft 01.11.2026)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Architect's Leather Gloves"
+   },
+   "belegtext": [
+    "Zwei Wege: Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026); laut Game8 außerdem Belohnung für Beliebtheit Stufe 3 der Einrichtung Scheitheim-Sägewerk (über die DLC-Fraktionsquest 'Neuer Elan' freischalten, für 15.000 Camp-Mittel pachten; Game8, geprüft 01.11.2026)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Cook's Cloth Hat",
+   "en": "Cook's Cloth Hat",
+   "de": "Stoffmütze des Kochs",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 12 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Cook's Cloth Hat"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 12 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Cook's Cloth Uniform",
+   "en": "Cook's Cloth Uniform",
+   "de": "Stoffuniform des Kochs",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 20 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Cook's Cloth Uniform"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 20 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Cook's Leather Gloves",
+   "en": "Cook's Leather Gloves",
+   "de": "Lederhandschuhe des Kochs",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Cook's Leather Gloves"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Fisherman's Cloth Attire",
+   "en": "Fisherman's Cloth Attire",
+   "de": "Stoffgewand des Fischers",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 20 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Fisherman's Cloth Attire"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 20 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Fisherman's Cloth Cloak",
+   "en": "Fisherman's Cloth Cloak",
+   "de": "Stoffumhang des Fischers",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 14 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Fisherman's Cloth Cloak"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 14 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Fisherman's Cloth Hat",
+   "en": "Fisherman's Cloth Hat",
+   "de": "Stoffmütze des Fischers",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 12 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Fisherman's Cloth Hat"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 12 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Fisherman's Leather Boots",
+   "en": "Fisherman's Leather Boots",
+   "de": "Lederstiefel des Fischers",
+   "txt": "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Fisherman's Leather Boots"
+   },
+   "belegtext": [
+    "Kauf bei Cartaine (Relikt-Austausch) auf der Insel Samora für 9 Uralte Relikte (th.gl, geprüft 01.11.2026; GameRant und Mobalytics nennen die Berufskleidung bei diesem Händler ohne Einzelnamen)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Naval Officer's Hat",
+   "en": "Naval Officer's Hat",
+   "de": "Marineoffiziersmütze",
+   "txt": "Liegt ohne Truhe auf einem flachen Stein auf dem Gipfel des höchsten Bergs von der Insel Samora im Osten des Großen Ozeans; am einfachsten mit Schwarzstern hinauffliegen (Mobalytics, Game8, geprüft 01.11.2026)",
+   "unb": false,
+   "link": {
+    "sec": "armor",
+    "go": "Naval Officer's Hat"
+   },
+   "belegtext": [
+    "Liegt ohne Truhe auf einem flachen Stein auf dem Gipfel des höchsten Bergs von der Insel Samora im Osten des Großen Ozeans; am einfachsten mit Schwarzstern hinauffliegen (Mobalytics, Game8, geprüft 01.11.2026)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "CRAFTING",
+   "eintrag": "Fluva's Elixir",
+   "en": "Fluva's Elixir",
+   "de": "Fluvas Elixier",
+   "txt": "Formel „Alchemieformel: Fluvas Elixier“: Relikt-Austausch-Händler Cartaine (Insel Samora) für 15 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)",
+   "unb": false,
+   "link": {
+    "sec": "crafting",
+    "go": "Fluva's Elixir"
+   },
+   "belegtext": [
+    "Formel „Alchemieformel: Fluvas Elixier“: Relikt-Austausch-Händler Cartaine (Insel Samora) für 15 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "CRAFTING",
+   "eintrag": "Fluva's Lesser Elixir",
+   "en": "Fluva's Lesser Elixir",
+   "de": "Fluvas minderes Elixier",
+   "txt": "Formel „Alchemieformel: Fluvas minderes Elixier“: Relikt-Austausch-Händler Cartaine (Insel Samora) für 10 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)",
+   "unb": false,
+   "link": {
+    "sec": "crafting",
+    "go": "Fluva's Lesser Elixir"
+   },
+   "belegtext": [
+    "Formel „Alchemieformel: Fluvas minderes Elixier“: Relikt-Austausch-Händler Cartaine (Insel Samora) für 10 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "CRAFTING",
+   "eintrag": "Hearty Grilled Cheese Clams",
+   "en": "Hearty Grilled Cheese Clams",
+   "de": "Reichliche gegrillte Muscheln mit Käse",
+   "txt": "Rezept Rezept: Gegrillte Muscheln mit Käse: Relikt-Austausch-Händler Cartaine (Insel Samora) für 5 Uralte Relikte · th.gl, geprüft 05.11.2026",
+   "unb": false,
+   "link": {
+    "sec": "crafting",
+    "go": "Hearty Grilled Cheese Clams"
+   },
+   "belegtext": [
+    "Rezept Rezept: Gegrillte Muscheln mit Käse: Relikt-Austausch-Händler Cartaine (Insel Samora) für 5 Uralte Relikte · th.gl, geprüft 05.11.2026"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "CRAFTING",
+   "eintrag": "Hearty Knife-Cut Clam Noodles",
+   "en": "Hearty Knife-Cut Clam Noodles",
+   "de": "Reichliche Flachnudeln mit Teppichmuscheln",
+   "txt": "Rezept Rezept: Flachnudeln mit Teppichmuscheln: Relikt-Austausch-Händler Cartaine (Insel Samora) für 6 Uralte Relikte · th.gl, geprüft 05.11.2026",
+   "unb": false,
+   "link": {
+    "sec": "crafting",
+    "go": "Hearty Knife-Cut Clam Noodles"
+   },
+   "belegtext": [
+    "Rezept Rezept: Flachnudeln mit Teppichmuscheln: Relikt-Austausch-Händler Cartaine (Insel Samora) für 6 Uralte Relikte · th.gl, geprüft 05.11.2026"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Bear Dverkhan Armor",
+   "en": "Bear Dverkhan Armor",
+   "de": "Dverkhan-Rüstung für Bären",
+   "txt": "Truhe in einer Höhle hinter einem Wasserfall auf Insel Samora (Mobalytics, geprüft 01.11.2026); das Item steht in den Spieldaten als Rüstung für spezielles Transportmittel (th.gl)",
+   "unb": false,
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Bear Dverkhan Armor"
+   },
+   "belegtext": [
+    "Truhe in einer Höhle hinter einem Wasserfall auf Insel Samora (Mobalytics, geprüft 01.11.2026); das Item steht in den Spieldaten als Rüstung für spezielles Transportmittel (th.gl)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Haustier-Outfits bei Cartaine (Cook's, Worker's, Fishing)",
+   "en": "Haustier-Outfits bei Cartaine (Cook's, Worker's, Fishing)",
+   "txt": "Relikt-Austausch-Händler Cartaine auf Insel Samora: Hut 5, Outfit 9 Uralte Relikte (th.gl, geprüft 01.11.2026; dass Cartaine Katzen- und Hunde-Outfits führt, sagen auch GameRant und Mobalytics)",
+   "unb": true,
+   "q": "Einzelnamen und Preise nur laut th.gl",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Haustier-Outfits bei Cartaine (Cook's, Worker's, Fishing)"
+   },
+   "de": "Haustier-Outfits bei Cartaine (Cook's, Worker's, Fishing)",
+   "belegtext": [
+    "Relikt-Austausch-Händler Cartaine auf Insel Samora: Hut 5, Outfit 9 Uralte Relikte (th.gl, geprüft 01.11.2026; dass Cartaine Katzen- und Hunde-Outfits führt, sagen auch GameRant und Mobalytics)"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "DLC_SHIP_PARTS",
+   "eintrag": "Chain-Breaking Wolf Figurehead",
+   "en": "Chain-Breaking Wolf Figurehead",
+   "de": "Galionsfigur des Krettenbrecherwolfs",
+   "txt": "Blaupause in einer Truhe der Höhle hinter einem Wasserfall an der Südseite von Insel Samora (Eingang per Stoßangriff), dann herstellen",
+   "unb": true,
+   "q": "Mobalytics",
+   "link": {
+    "sec": "dlc-sammeln",
+    "go": "Chain-Breaking Wolf Figurehead"
+   },
+   "belegtext": [
+    "Blaupause in einer Truhe der Höhle hinter einem Wasserfall an der Südseite von Insel Samora (Eingang per Stoßangriff), dann herstellen"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Blue Coral Lamp",
+   "en": "Packaged Blue Coral Lamp",
+   "de": "Verpackte blaue Korallen-Lampe",
+   "txt": "Insel-Handelsposten (Harris), Insel Samora: 12.790 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Blue Coral Lamp"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Harris), Insel Samora: 12.790 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Octopus-legged Candlestick",
+   "en": "Packaged Octopus-legged Candlestick",
+   "de": "Verpackter Tentakel-Kerzenständer",
+   "txt": "Insel-Handelsposten (Harris), Insel Samora: 10.397 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Octopus-legged Candlestick"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Harris), Insel Samora: 10.397 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Pearl Remembrance Lamp",
+   "en": "Packaged Pearl Remembrance Lamp",
+   "de": "Verpackte Lampe der Perlenerinnerung",
+   "txt": "Insel-Handelsposten (Harris), Insel Samora: 31.992 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Pearl Remembrance Lamp"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Harris), Insel Samora: 31.992 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "samora",
+   "ziel": "fundorte",
+   "konst": "DLC_SHIPS",
+   "eintrag": "Assault Ship of the East",
+   "en": "Assault Ship of the East",
+   "de": "Sturmschiff des Ostens",
+   "txt": "Auf Insel Samora im Tempel die Bücher „Auf der Suche nach dem legendären Schiff“ und „Ship of the East“ lesen, dann vier Teile des Bauplan des unbekannten Schiffs sammeln: zwei am Schiffswrack beim Großen Felsgebiet (Strudel nahe dem Gebiet Das Jahr des Schweigens, tauchen), eines in der Bravgork-Werft (Regentenhöhe, im unfertigen Piratenschiff hinter der Treppe) und eines im Strandlager im Südosten von Insel Estra (auf einem Tisch im Zelt).",
+   "unb": true,
+   "q": "KeenGamer",
+   "link": {
+    "sec": "dlc",
+    "go": "Assault Ship of the East"
+   },
+   "art": "schiff",
+   "belegtext": [
+    "Auf Insel Samora im Tempel die Bücher „Auf der Suche nach dem legendären Schiff“ und „Ship of the East“ lesen, dann vier Teile des Bauplan des unbekannten Schiffs sammeln: zwei am Schiffswrack beim Großen Felsgebiet (Strudel nahe dem Gebiet Das Jahr des Schweigens, tauchen), eines in der Bravgork-Werft (Regentenhöhe, im unfertigen Piratenschiff hinter der Treppe) und eines im Strandlager im Südosten von Insel Estra (auf einem Tisch im Zelt)."
+   ]
+  },
+  {
+   "slug": "estra",
+   "ziel": "fundorte",
+   "konst": "DLC_SHIPS",
+   "eintrag": "Assault Ship of the East",
+   "en": "Assault Ship of the East",
+   "de": "Sturmschiff des Ostens",
+   "txt": "Auf Insel Samora im Tempel die Bücher „Auf der Suche nach dem legendären Schiff“ und „Ship of the East“ lesen, dann vier Teile des Bauplan des unbekannten Schiffs sammeln: zwei am Schiffswrack beim Großen Felsgebiet (Strudel nahe dem Gebiet Das Jahr des Schweigens, tauchen), eines in der Bravgork-Werft (Regentenhöhe, im unfertigen Piratenschiff hinter der Treppe) und eines im Strandlager im Südosten von Insel Estra (auf einem Tisch im Zelt).",
+   "unb": true,
+   "q": "KeenGamer",
+   "link": {
+    "sec": "dlc",
+    "go": "Assault Ship of the East"
+   },
+   "art": "schiff",
+   "belegtext": [
+    "Auf Insel Samora im Tempel die Bücher „Auf der Suche nach dem legendären Schiff“ und „Ship of the East“ lesen, dann vier Teile des Bauplan des unbekannten Schiffs sammeln: zwei am Schiffswrack beim Großen Felsgebiet (Strudel nahe dem Gebiet Das Jahr des Schweigens, tauchen), eines in der Bravgork-Werft (Regentenhöhe, im unfertigen Piratenschiff hinter der Treppe) und eines im Strandlager im Südosten von Insel Estra (auf einem Tisch im Zelt)."
+   ]
+  },
+  {
+   "slug": "ocula",
+   "ziel": "fundorte",
+   "konst": "BESCHAFFUNG",
+   "eintrag": "Forsaken Oath Plate Armor",
+   "en": "Forsaken Oath Plate Armor",
+   "de": "Plattenrüstung des versunkenen Schwurs",
+   "txt": "Unterwassertruhe nordöstlich von Ocula Island bei den kleinen Felsinseln: am Meeresboden das große Schiffswrack suchen, in der Mitte steckt der grüne Fels in einer Öffnung. Den grünen Fels mit Force Palm zerbrechen, dann die Truhe öffnen (laut KeenGamer, nicht gegengeprüft).",
+   "unb": true,
+   "q": "KeenGamer",
+   "link": {
+    "sec": "armor",
+    "go": "Forsaken Oath Plate Armor"
+   },
+   "belegtext": [
+    "Unterwassertruhe nordöstlich von Ocula Island bei den kleinen Felsinseln: am Meeresboden das große Schiffswrack suchen, in der Mitte steckt der grüne Fels in einer Öffnung. Den grünen Fels mit Force Palm zerbrechen, dann die Truhe öffnen (laut KeenGamer, nicht gegengeprüft)."
+   ]
+  },
+  {
+   "slug": "ocula",
+   "ziel": "fundorte",
+   "konst": "DLC_SHIP_PARTS",
+   "eintrag": "Giant Golden Compass Sail",
+   "en": "Giant Golden Compass Sail",
+   "de": "Riesiges Segel des Goldenen Kompasses",
+   "txt": "nur herstellbar: Handbuch aus der Truhe hinter dem Wasserfall in Refugium der Gestrandeten (Insel Ocula), dann an einer Werkbank",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "dlc-sammeln",
+    "go": "Giant Golden Compass Sail"
+   },
+   "belegtext": [
+    "nur herstellbar: Handbuch aus der Truhe hinter dem Wasserfall in Refugium der Gestrandeten (Insel Ocula), dann an einer Werkbank"
+   ]
+  },
+  {
+   "slug": "ocula",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Spiral Spear",
+   "en": "Spiral Spear",
+   "de": "Spiralspeer",
+   "txt": "Vergrabene Truhe an der Ostseite von der Insel Ocula im südöstlichen Ozean, Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Mobalytics",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Spiral Spear"
+   },
+   "belegtext": [
+    "Vergrabene Truhe an der Ostseite von der Insel Ocula im südöstlichen Ozean, Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "nirakan",
+   "ziel": "fundorte",
+   "konst": "ITEMS",
+   "eintrag": "Manganese Nodule (Manganknolle)",
+   "en": "Manganese Nodule",
+   "de": "Manganknolle",
+   "txt": "Belegte Stellen für Mangan (Sportskeeda, 02.11.2026, Einzelquelle): nordöstlich des Großen Hydrothermalquellen-Areals und am Meeresboden westlich der Insel Nirakan im Meer südlich von Pywel.",
+   "unb": true,
+   "q": "Sportskeeda",
+   "link": {
+    "sec": "items",
+    "go": "Manganese Nodule (Manganknolle)"
+   },
+   "belegtext": [
+    "Belegte Stellen für Mangan (Sportskeeda, 02.11.2026, Einzelquelle): nordöstlich des Großen Hydrothermalquellen-Areals und am Meeresboden westlich der Insel Nirakan im Meer südlich von Pywel."
+   ]
+  },
+  {
+   "slug": "cloven-hoof",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Guardian's Horn",
+   "en": "Guardian's Horn",
+   "de": "Horn des Beschützers",
+   "txt": "Vergrabene Truhe auf der südlichen der zwei Landmassen von der Insel Spalthuf, östlich von Delesyia; Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Mobalytics",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Guardian's Horn"
+   },
+   "belegtext": [
+    "Vergrabene Truhe auf der südlichen der zwei Landmassen von der Insel Spalthuf, östlich von Delesyia; Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "saeon",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Fang of the Depths",
+   "en": "Fang of the Depths",
+   "de": "Giftzahn des Abgrunds",
+   "txt": "Vergrabene Truhe auf dem höchsten Gipfel von der Insel Saeon, direkt über dem Abyss-Nexus der Insel; Schaufel nötig (Game8, geprüft 05.11.2026; Keengamer nennt eine vergrabene Truhe auf der Insel Saeon)",
+   "unb": false,
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Fang of the Depths"
+   },
+   "belegtext": [
+    "Vergrabene Truhe auf dem höchsten Gipfel von der Insel Saeon, direkt über dem Abyss-Nexus der Insel; Schaufel nötig (Game8, geprüft 05.11.2026; Keengamer nennt eine vergrabene Truhe auf der Insel Saeon)"
+   ]
+  },
+  {
+   "slug": "navrah",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Silverwave Longsword",
+   "en": "Silverwave Longsword",
+   "de": "Silberwellen-Langschwert",
+   "txt": "Vergrabene Truhe im Nordteil der Ostküste von der Insel Navrah, Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Mobalytics",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Silverwave Longsword"
+   },
+   "belegtext": [
+    "Vergrabene Truhe im Nordteil der Ostküste von der Insel Navrah, Schaufel nötig (Mobalytics, geprüft 01.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "phragma",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Sunken Azuretide Plate Armor",
+   "en": "Sunken Azuretide Plate Armor",
+   "de": "Plattenpanzer der Tiefsee-Blauwelle",
+   "txt": "Truhe unter Felsen auf dem Meeresboden weit südwestlich von der Insel Phragma: an der markierten Kartenstelle etwa 43 m tief tauchen, die Truhe liegt in einem kleinen Korallental und schimmert schwach golden; Bohrer, Spitzhacke oder Kraftfaust räumen die Felsen weg (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "armor",
+    "go": "Sunken Azuretide Plate Armor"
+   },
+   "belegtext": [
+    "Truhe unter Felsen auf dem Meeresboden weit südwestlich von der Insel Phragma: an der markierten Kartenstelle etwa 43 m tief tauchen, die Truhe liegt in einem kleinen Korallental und schimmert schwach golden; Bohrer, Spitzhacke oder Kraftfaust räumen die Felsen weg (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "carcano",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Sea Reaver's Combat Suit",
+   "en": "Sea Reaver's Combat Suit",
+   "de": "Seeräuber-Kampfanzug",
+   "txt": "Truhe in einer Unterwasserhöhle im Korallenmeer nordwestlich von der Insel Carcano und südlich von Delesyia; Zugang durch eine nach Osten weisende Felsöffnung, der Gang führt zu einer Stelle zum Auftauchen mit der Truhe, die auch den Seeräuberhut enthält; die Unterwasser-Ortung des Schiffs hilft bei der Suche (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "armor",
+    "go": "Sea Reaver's Combat Suit"
+   },
+   "belegtext": [
+    "Truhe in einer Unterwasserhöhle im Korallenmeer nordwestlich von der Insel Carcano und südlich von Delesyia; Zugang durch eine nach Osten weisende Felsöffnung, der Gang führt zu einer Stelle zum Auftauchen mit der Truhe, die auch den Seeräuberhut enthält; die Unterwasser-Ortung des Schiffs hilft bei der Suche (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "carcano",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Sea Reaver's Hat",
+   "en": "Sea Reaver's Hat",
+   "de": "Seeräuberhut",
+   "txt": "Truhe in einer Unterwasserhöhle im Korallenmeer nordwestlich von der Insel Carcano und südlich von Delesyia; Zugang durch eine nach Osten weisende Felsöffnung, der Gang führt zu einer Stelle zum Auftauchen mit der Truhe, die auch den Seeräuber-Kampfanzug enthält; die Unterwasser-Ortung des Schiffs hilft bei der Suche (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "armor",
+    "go": "Sea Reaver's Hat"
+   },
+   "belegtext": [
+    "Truhe in einer Unterwasserhöhle im Korallenmeer nordwestlich von der Insel Carcano und südlich von Delesyia; Zugang durch eine nach Osten weisende Felsöffnung, der Gang führt zu einer Stelle zum Auftauchen mit der Truhe, die auch den Seeräuber-Kampfanzug enthält; die Unterwasser-Ortung des Schiffs hilft bei der Suche (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "carcano",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Veyrfin Sword",
+   "en": "Veyrfin Sword",
+   "de": "Veyrfin-Schwert",
+   "txt": "Vergrabene Truhe im Unterwassergraben nördlich des Ankerplatzes von der Insel Carcano, in einer Felsformation in etwa 66 m Tiefe; Insel Carcano liegt nördlich des Südmeers von Pywel, westlich von Felsgebiet; Bohrer, Spitzhacke oder Kraftfaust räumen die Felsen vom Fund (Game8, geprüft 05.11.2026; einzige Quelle für den Fundort, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Veyrfin Sword"
+   },
+   "belegtext": [
+    "Vergrabene Truhe im Unterwassergraben nördlich des Ankerplatzes von der Insel Carcano, in einer Felsformation in etwa 66 m Tiefe; Insel Carcano liegt nördlich des Südmeers von Pywel, westlich von Felsgebiet; Bohrer, Spitzhacke oder Kraftfaust räumen die Felsen vom Fund (Game8, geprüft 05.11.2026; einzige Quelle für den Fundort, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "CRAFTING",
+   "eintrag": "Hearty Jellyfish Salad",
+   "en": "Hearty Jellyfish Salad",
+   "de": "Reichlicher Quallensalat",
+   "txt": "Rezept Rezept: Quallensalat: Relikt-Austausch-Händler Reyard (Insel Auronui) für 4 Uralte Relikte · th.gl, geprüft 05.11.2026",
+   "unb": false,
+   "link": {
+    "sec": "crafting",
+    "go": "Hearty Jellyfish Salad"
+   },
+   "belegtext": [
+    "Rezept Rezept: Quallensalat: Relikt-Austausch-Händler Reyard (Insel Auronui) für 4 Uralte Relikte · th.gl, geprüft 05.11.2026"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "CRAFTING",
+   "eintrag": "Luftis's Elixir",
+   "en": "Luftis's Elixir",
+   "de": "Luftis' Elixier",
+   "txt": "Formel „Alchemieformel: Luftis' Elixier“: Relikt-Austausch-Händler Reyard (Insel Auronui) für 12 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)",
+   "unb": false,
+   "link": {
+    "sec": "crafting",
+    "go": "Luftis's Elixir"
+   },
+   "belegtext": [
+    "Formel „Alchemieformel: Luftis' Elixier“: Relikt-Austausch-Händler Reyard (Insel Auronui) für 12 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "CRAFTING",
+   "eintrag": "Luftis's Lesser Elixir",
+   "en": "Luftis's Lesser Elixir",
+   "de": "Luftis' minderes Elixier",
+   "txt": "Formel „Alchemieformel: Luftis' minderes Elixier“: Relikt-Austausch-Händler Reyard (Insel Auronui) für 6 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)",
+   "unb": false,
+   "link": {
+    "sec": "crafting",
+    "go": "Luftis's Lesser Elixir"
+   },
+   "belegtext": [
+    "Formel „Alchemieformel: Luftis' minderes Elixier“: Relikt-Austausch-Händler Reyard (Insel Auronui) für 6 Uralte Relikte · th.gl, geprüft 05.11.2026 (Effektwert und Rezept nur dort, einzige Quelle)"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Charter Assistant's Diving Helm und Diving Suit (Blaupausen)",
+   "en": "Charter Assistant's Diving Helm und Diving Suit (Blaupausen)",
+   "txt": "Je eine Blaupause beim Relikt-Austausch-Händler Reyard auf Insel Auronui für 7 Uralte Relikte (th.gl, geprüft 01.11.2026)",
+   "unb": true,
+   "q": "th.gl Spieldaten, einzige Quelle",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Charter Assistant's Diving Helm und Diving Suit (Blaupausen)"
+   },
+   "de": "Charter Assistant's Diving Helm und Diving Suit (Blaupausen)",
+   "belegtext": [
+    "Je eine Blaupause beim Relikt-Austausch-Händler Reyard auf Insel Auronui für 7 Uralte Relikte (th.gl, geprüft 01.11.2026)"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "DLC_GEAR_EXTRA",
+   "eintrag": "Explorer's Breathing Device",
+   "en": "Explorer's Breathing Device",
+   "de": "Atemgerät des Entdeckers",
+   "txt": "Blaupause beim Relikt-Austausch-Händler Reyard auf Insel Auronui für 3 Uralte Relikte, danach herstellen (th.gl, GameRant, Mobalytics, geprüft 01.11.2026; den Preis nennt nur th.gl)",
+   "unb": false,
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Explorer's Breathing Device"
+   },
+   "belegtext": [
+    "Blaupause beim Relikt-Austausch-Händler Reyard auf Insel Auronui für 3 Uralte Relikte, danach herstellen (th.gl, GameRant, Mobalytics, geprüft 01.11.2026; den Preis nennt nur th.gl)"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "ITEMS",
+   "eintrag": "Shiny Ore (Glänzendes Erz)",
+   "en": "Shiny Ore",
+   "de": "Glänzendes Erz",
+   "txt": "Belegte Abbaustelle: Insel Auronui im Ozean, südlich vor der westlichen Insel. Vom Felsufer am Pier abtauchen, in rund 20 m Tiefe sitzen blaugrüne Kristalle an der Felswand; die Ader zieht sich weit nach unten, also beim Tauchgang weiter folgen. Sportskeeda rät zu voller Tauchausrüstung und Knöchelbohrer und nennt treibende Bergungskisten bei Auronui als weitere Quelle (31.10.2026, Einzelquelle).",
+   "unb": true,
+   "q": "Sportskeeda",
+   "link": {
+    "sec": "items",
+    "go": "Shiny Ore (Glänzendes Erz)"
+   },
+   "belegtext": [
+    "Belegte Abbaustelle: Insel Auronui im Ozean, südlich vor der westlichen Insel. Vom Felsufer am Pier abtauchen, in rund 20 m Tiefe sitzen blaugrüne Kristalle an der Felswand; die Ader zieht sich weit nach unten, also beim Tauchgang weiter folgen. Sportskeeda rät zu voller Tauchausrüstung und Knöchelbohrer und nennt treibende Bergungskisten bei Auronui als weitere Quelle (31.10.2026, Einzelquelle)."
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Priest's Ceremonial Sword",
+   "en": "Priest's Ceremonial Sword",
+   "de": "Zeremonienschwert des Hohepriesters",
+   "txt": "Vergrabene Truhe unter Wasser, etwas westlich einer Korallenkolonie weit östlich von der Insel Auronui; an der markierten Kartenstelle tauchen, Bohrer, Spitzhacke oder Kraftfaust räumen die Felsen vom Fund (Game8, geprüft 05.11.2026; einzige Quelle für den Fundort, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Priest's Ceremonial Sword"
+   },
+   "belegtext": [
+    "Vergrabene Truhe unter Wasser, etwas westlich einer Korallenkolonie weit östlich von der Insel Auronui; an der markierten Kartenstelle tauchen, Bohrer, Spitzhacke oder Kraftfaust räumen die Felsen vom Fund (Game8, geprüft 05.11.2026; einzige Quelle für den Fundort, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "fundorte",
+   "konst": "WEAPONS",
+   "eintrag": "Silverbreaker Mace",
+   "en": "Silverbreaker Mace",
+   "de": "Silberner Schlagstock",
+   "txt": "Vergrabene Truhe auf der östlichen Insel von der Insel Auronui (südlich des Seetangwalds in der Belcross-See), an einer von Palmen umgebenen Stelle; Schaufel nötig; wer die westliche Insel über den Abyss-Nexus erreicht, fliegt hinüber (Game8, geprüft 05.11.2026; einzige Quelle für den Fundort, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "dlc-ausruestung",
+    "go": "Silverbreaker Mace"
+   },
+   "belegtext": [
+    "Vergrabene Truhe auf der östlichen Insel von der Insel Auronui (südlich des Seetangwalds in der Belcross-See), an einer von Palmen umgebenen Stelle; Schaufel nötig; wer die westliche Insel über den Abyss-Nexus erreicht, fliegt hinüber (Game8, geprüft 05.11.2026; einzige Quelle für den Fundort, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "auronui",
+   "ziel": "quests",
+   "konst": "DLC_QUESTS",
+   "eintrag": "A Wider World",
+   "en": "A Wider World",
+   "de": "Auf in eine größere Welt",
+   "txt": "Erschließungs-Mission auf Insel Auronui; seit dem Hotfix zu 2.04.00 vom Startort aus beginnbar.\n\nHöhle auf Insel Auronui.",
+   "unb": false,
+   "link": {
+    "sec": "dlc-quests",
+    "go": "dlc-q-a-wider-world"
+   },
+   "belegtext": [
+    "Erschließungs-Mission auf Insel Auronui; seit dem Hotfix zu 2.04.00 vom Startort aus beginnbar.",
+    "Höhle auf Insel Auronui."
+   ]
+  },
+  {
+   "slug": "razanui",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Forsaken Oath Plate Gloves",
+   "en": "Forsaken Oath Plate Gloves",
+   "de": "Plattenhandschuhe des versunkenen Schwurs",
+   "txt": "Truhe unter bemoosten Felsen tief unter Wasser an der Nordwestseite von der Insel Xamaca: bei Sicht auf Satyros und die Insel Razanui an die Nordwestküste, zu einer großen Korallenriff-Formation in etwa 125 m Tiefe; Spitzhacke, Bohrer oder Kraftfaust räumen die Felsen weg (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "armor",
+    "go": "Forsaken Oath Plate Gloves"
+   },
+   "belegtext": [
+    "Truhe unter bemoosten Felsen tief unter Wasser an der Nordwestseite von der Insel Xamaca: bei Sicht auf Satyros und die Insel Razanui an die Nordwestküste, zu einer großen Korallenriff-Formation in etwa 125 m Tiefe; Spitzhacke, Bohrer oder Kraftfaust räumen die Felsen weg (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "razanui",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Sunken Azuretide Plate Boots",
+   "en": "Sunken Azuretide Plate Boots",
+   "de": "Plattenschuhe der Tiefsee-Blauwelle",
+   "txt": "Truhe in einem Schiffswrack in der Großen Korallenregion zwischen Insel Xamaca und Insel Razanui (näher an Xamaca): Nordwestküste von Xamaca ansteuern, im Riff nach dem Wrack etwa in der Riffmitte suchen; Spitzhacke, Bohrer oder Kraftfaust räumen die Korallen weg; auf dem Weg greifen viele Haie und Golems an (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "armor",
+    "go": "Sunken Azuretide Plate Boots"
+   },
+   "belegtext": [
+    "Truhe in einem Schiffswrack in der Großen Korallenregion zwischen Insel Xamaca und Insel Razanui (näher an Xamaca): Nordwestküste von Xamaca ansteuern, im Riff nach dem Wrack etwa in der Riffmitte suchen; Spitzhacke, Bohrer oder Kraftfaust räumen die Korallen weg; auf dem Weg greifen viele Haie und Golems an (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "razanui",
+   "ziel": "tiere",
+   "konst": "DLC_BOSSES",
+   "eintrag": "Reggis the Isleguard",
+   "en": "Reggis the Isleguard",
+   "de": "Reggis, Wächter der Insel",
+   "txt": "Insel Razanui: ein menschenfressender Riesen-Imp, den Piraten einst zähmten; greift auch Schiffe an. Quest „Prädator der verlassenen Insel“.\n\nBeute: Ausbreitende Federn, 5 Uralte Relikte, Abyss-Artefakt (Questbelohnung)",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc-kampf",
+    "go": "Reggis the Isleguard"
+   },
+   "art": "boss",
+   "belegtext": [
+    "Insel Razanui: ein menschenfressender Riesen-Imp, den Piraten einst zähmten; greift auch Schiffe an. Quest „Prädator der verlassenen Insel“.",
+    "Ausbreitende Federn, 5 Uralte Relikte, Abyss-Artefakt (Questbelohnung)"
+   ]
+  },
+  {
+   "slug": "razanui",
+   "ziel": "tiere",
+   "konst": "DLC_MOUNTS",
+   "eintrag": "Ocean Drifter",
+   "en": "Ocean Drifter",
+   "de": "Ozeangleiter",
+   "txt": "In einer Schatztruhe in den Vergessenen Ozeanruinen bei Insel Razanui; darin liegt das Item Uralte Lagerkiste.",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "dlc",
+    "go": "Ocean Drifter"
+   },
+   "art": "reittier",
+   "belegtext": [
+    "In einer Schatztruhe in den Vergessenen Ozeanruinen bei Insel Razanui; darin liegt das Item Uralte Lagerkiste."
+   ]
+  },
+  {
+   "slug": "razanui",
+   "ziel": "quests",
+   "konst": "DLC_QUESTS",
+   "eintrag": "Predator of the Abandoned Island",
+   "en": "Predator of the Abandoned Island",
+   "de": "Prädator der verlassenen Insel",
+   "txt": "Das gewaltige, menschenfressende Ungeheuer, um das sich bisher nur Gerüchte rankten, hat sich gezeigt; das von unstillbarem Hunger getriebene Raubtier Reggis besiegen.",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc-quests",
+    "go": "dlc-q-predator-of-the-abandoned-island"
+   },
+   "belegtext": [
+    "Fraktionsquest, Razanui Island",
+    "Das gewaltige, menschenfressende Ungeheuer, um das sich bisher nur Gerüchte rankten, hat sich gezeigt; das von unstillbarem Hunger getriebene Raubtier Reggis besiegen."
+   ]
+  },
+  {
+   "slug": "xamaca",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Forsaken Oath Plate Gloves",
+   "en": "Forsaken Oath Plate Gloves",
+   "de": "Plattenhandschuhe des versunkenen Schwurs",
+   "txt": "Truhe unter bemoosten Felsen tief unter Wasser an der Nordwestseite von der Insel Xamaca: bei Sicht auf Satyros und die Insel Razanui an die Nordwestküste, zu einer großen Korallenriff-Formation in etwa 125 m Tiefe; Spitzhacke, Bohrer oder Kraftfaust räumen die Felsen weg (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "armor",
+    "go": "Forsaken Oath Plate Gloves"
+   },
+   "belegtext": [
+    "Truhe unter bemoosten Felsen tief unter Wasser an der Nordwestseite von der Insel Xamaca: bei Sicht auf Satyros und die Insel Razanui an die Nordwestküste, zu einer großen Korallenriff-Formation in etwa 125 m Tiefe; Spitzhacke, Bohrer oder Kraftfaust räumen die Felsen weg (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "xamaca",
+   "ziel": "fundorte",
+   "konst": "ARMOR",
+   "eintrag": "Sunken Azuretide Plate Boots",
+   "en": "Sunken Azuretide Plate Boots",
+   "de": "Plattenschuhe der Tiefsee-Blauwelle",
+   "txt": "Truhe in einem Schiffswrack in der Großen Korallenregion zwischen Insel Xamaca und Insel Razanui (näher an Xamaca): Nordwestküste von Xamaca ansteuern, im Riff nach dem Wrack etwa in der Riffmitte suchen; Spitzhacke, Bohrer oder Kraftfaust räumen die Korallen weg; auf dem Weg greifen viele Haie und Golems an (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)",
+   "unb": true,
+   "q": "Game8",
+   "link": {
+    "sec": "armor",
+    "go": "Sunken Azuretide Plate Boots"
+   },
+   "belegtext": [
+    "Truhe in einem Schiffswrack in der Großen Korallenregion zwischen Insel Xamaca und Insel Razanui (näher an Xamaca): Nordwestküste von Xamaca ansteuern, im Riff nach dem Wrack etwa in der Riffmitte suchen; Spitzhacke, Bohrer oder Kraftfaust räumen die Korallen weg; auf dem Weg greifen viele Haie und Golems an (Game8, geprüft 05.11.2026; einzige Quelle, unbestätigt)"
+   ]
+  },
+  {
+   "slug": "xamaca",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Kelp Bundle",
+   "en": "Packaged Kelp Bundle",
+   "de": "Verpacktes Seekohlbündel",
+   "txt": "Insel-Handelsposten (Ludic), Insel Xamaca: 1.521 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Kelp Bundle"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Ludic), Insel Xamaca: 1.521 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "xamaca",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Red Seaweed Bundle",
+   "en": "Packaged Red Seaweed Bundle",
+   "de": "Verpacktes Meeresfäden-Bündel",
+   "txt": "Insel-Handelsposten (Ludic), Insel Xamaca: 1.289 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Red Seaweed Bundle"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Ludic), Insel Xamaca: 1.289 Camp-Mittel"
+   ]
+  },
+  {
+   "slug": "xamaca",
+   "ziel": "fundorte",
+   "konst": "DLC_TRADE",
+   "eintrag": "Packaged Special Abalone",
+   "en": "Packaged Special Abalone",
+   "de": "Eingepackte Erstklassige Abalonen",
+   "txt": "Insel-Handelsposten (Ludic), Insel Xamaca: 3.161 Camp-Mittel",
+   "unb": true,
+   "q": "th.gl",
+   "link": {
+    "sec": "dlc",
+    "go": "Packaged Special Abalone"
+   },
+   "belegtext": [
+    "Insel-Handelsposten (Ludic), Insel Xamaca: 3.161 Camp-Mittel"
+   ]
+  }
+ ],
+ "fremd": [
+  {
+   "slug": "auronui",
+   "ziel": "orte",
+   "de": "Ankerplatz",
+   "en": "Anchorage",
+   "art": "ankerplatz",
+   "txt": "Nach der Questreihe „Auf in eine größere Welt“ und der Befreiung der Insel steht hier ein Relikt-Händler; er verkauft unter anderem Schatzkarten, Baupläne und Rezepte gegen Uralte Relikte.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/636415",
+     "zitat": "A Relic Exchange NPC can be found right along the anchorage"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "auronui",
+   "ziel": "orte",
+   "de": "Abyss-Nexus",
+   "en": "Abyss Nexus",
+   "art": "sonst",
+   "txt": "Im Südwesten der Insel, nahe einer Höhle.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637419",
+     "zitat": "Go to the cave southwest of Auronui Island near the Abyss Nexus"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "iliya",
+   "ziel": "orte",
+   "de": "Ankerplatz",
+   "en": "Anchorage",
+   "art": "ankerplatz",
+   "txt": "Entsteht über die Entsendung „Pionier“ (Erschließung). Der Bau befreit die Insel und schaltet weitere Aufträge frei, darunter die Ruinenausgrabung.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637847",
+     "zitat": "complete the Pioneer Dispatch Mission to construct an Anchorage"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "iliya",
+   "ziel": "orte",
+   "de": "Abyss-Nexus",
+   "en": "Abyss Nexus",
+   "art": "sonst",
+   "txt": "Vom Nexus führt der Weg nach Südwesten über den Berg zu zwei Grabhügeln an den Klippen; dort liegt die vergrabene Truhe mit dem Bauplan des Geisterschiffs.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637428",
+     "zitat": "From the Abyss Nexus, head southwest (over the mountain) and look for two burial mounds along the cliffs"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "iliya",
+   "ziel": "fundorte",
+   "item": "Natural Pearl",
+   "de": "Naturperle",
+   "txt": "Die wiederholbare Entsendung „Ruinenausgrabung auf der Insel Iliya“ sammelt nebenher Naturperlen, eine feste Menge alle 10 Spielstunden.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637847",
+     "zitat": "Iliya Island offers the repeatable Iliya Island Ruins Excavation Dispatch Mission that passively gathers Natural Pearls for you"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "bergel",
+   "ziel": "orte",
+   "de": "Abyss-Nexus",
+   "en": "Abyss Nexus",
+   "art": "sonst",
+   "txt": "Oberirdisch auf der Insel.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/636445",
+     "zitat": "Starting from the Abyss Nexus aboveground"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "saeon",
+   "ziel": "orte",
+   "de": "Abyss-Nexus",
+   "en": "Abyss Nexus",
+   "art": "sonst",
+   "txt": "Auf dem höchsten Gipfel der Insel.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/636445",
+     "zitat": "Right above the Abyss Nexus on the highest peak of Saeon Island"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "ocula",
+   "ziel": "orte",
+   "de": "Abyss-Nexus",
+   "en": "Abyss Nexus",
+   "art": "sonst",
+   "txt": "Südöstlich davon, am Ostende der Insel, liegt die vergrabene Truhe mit dem Spiralspeer.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/636445",
+     "zitat": "Southeast of the Abyss Nexus will be a small downward slope"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "carcano",
+   "ziel": "orte",
+   "de": "Abyss-Nexus",
+   "en": "Abyss Nexus",
+   "art": "sonst",
+   "txt": "Über den Abyss-Nexus der Insel kann man direkt hierher reisen.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/636445",
+     "zitat": "West of Carcano Island's Abyss Nexus"
+    },
+    {
+     "quelle": "KeenGamer",
+     "url": "https://www.keengamer.com/articles/guides/crimson-desert-all-new-dlc-weapons-and-how-to-get-them/",
+     "zitat": "Use the Abyss Nexus on the island to teleport there directly."
+    }
+   ],
+   "einzel": false
+  },
+  {
+   "slug": "estra",
+   "ziel": "fundorte",
+   "item": "Obsidian",
+   "de": "Obsidian",
+   "txt": "Obsidian lässt sich aus Erzadern auf der Insel abbauen, mit Spitzhacke oder Bergbau-Knöchelbohrer; dunkel glitzernde Felsen suchen.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637852",
+     "zitat": "Obsidian can be mined from ore veins scattered around Bergel Island and Estra Island"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "razanui",
+   "ziel": "wissen",
+   "titel": "Anreise",
+   "txt": "Am besten per Schiff vom Hafen Vellua in Hernand; die Insel liegt am Südwestende des Südmeers.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637421",
+     "zitat": "Razanui Island is located at the southwest end of the South Sea. It is best to sail from Vellua's harbor in Hernand to reach the island."
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "satyros",
+   "ziel": "wissen",
+   "titel": "Anreise",
+   "txt": "Per Schiff vom Hafen Vellua südlich von Hernand, gemeinsam mit der Nachbarinsel Razanui; Satyros ist die südlichste Insel des Südmeers.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637825",
+     "zitat": "You can reach Satyros and its neighboring island, Razanui, by sailing from the Vellua port, located south of Hernand"
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "phragma",
+   "ziel": "wissen",
+   "titel": "Anreise",
+   "txt": "Per Schiff vom Steinwacht-Hafen südlich von Delesyia; die Insel liegt im Nordosten des Südmeers.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637440",
+     "zitat": "which is found northeast of the South Sea region. You can sail from Stoneward Harbor, south of Delesyia, to reach the island."
+    }
+   ],
+   "einzel": true
+  },
+  {
+   "slug": "iliya",
+   "ziel": "wissen",
+   "titel": "Anreise",
+   "txt": "Per Schiff von Vellua in Hernand oder vom Steinwacht-Hafen in Delesyia; die Insel liegt am Südende des Südmeers.",
+   "quellen": [
+    {
+     "quelle": "Game8",
+     "url": "https://game8.co/games/Crimson-Desert/archives/637019",
+     "zitat": "Iliya Island is located at the southern end of the South Sea. You can reach the island by sailing from either Vellua in Hernand or Stoneward Harbor in Delesyia."
+    }
+   ],
+   "einzel": true
+  }
+ ]
+}

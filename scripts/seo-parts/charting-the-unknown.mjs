@@ -205,7 +205,7 @@ ${table(["Teil", "Typ", "Größe", "Händler / Erhalt", "Preis", "Boni"],
 
   const iCols = optCols(D.ISLANDS, [["where", "Lage"], ["nexus", "Abyss Nexus"], ["unlock", "Erschließung"]]);
   const inseln = `<h2>Inseln (${D.ISLANDS.length})</h2>
-<p class="note">Benannte Inseln aus den Guides. Eine Gesamtzahl nennt Pearl Abyss nicht; in der App lassen sich die Inseln abhaken.</p>
+<p class="note">Benannte Inseln aus den Guides. Eine Gesamtzahl nennt Pearl Abyss nicht; in der App lassen sich die Inseln abhaken. Orte, Höhlen, Quests und Spieltexte jeder Insel stehen auf der Seite <a href="/inseln">Inseln</a>.</p>
 ${table(["Insel", ...iCols.map(([, kopf]) => kopf), "Angaben"],
     D.ISLANDS.map((i) => tr(rid("insel", i.name), i, [name(i), ...iCols.map(([k]) => cell(i[k], true)), val(i.info)])))}
 <h3 class="ctu-h">Ozean, Erschließung, Häfen</h3>

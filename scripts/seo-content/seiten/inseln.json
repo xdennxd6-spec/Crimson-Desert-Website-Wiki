@@ -1,0 +1,25 @@
+{
+  "intro": "Crimson Desert kennt {{anzahl}} Inseln mit eigenem Namen. Diese Seite führt jede mit Namen auf Deutsch und Englisch auf und zeigt, was Spieldaten und Wiki zu ihr nennen: Meeresgebiet, Orte, Höhlen, Quests und Spieltexte, jede Angabe in der App mit Beleg. Wo die Daten nichts hergeben, steht „nicht erfasst“ statt einer Vermutung. Schiffe, Tauchen und Reittiere des DLC stehen bei [[/charting-the-unknown|Charting the Unknown]].",
+  "faq": [
+    {
+      "frage": "Wie viele Inseln gibt es in Crimson Desert?",
+      "antwort": "Die Spieldateien samt DLC nennen {{anzahl}} Inseln mit eigenem Namen. Jede steht auf dieser Seite mit deutschem und englischem Namen; in der App öffnest du zu jeder Insel eine eigene Ansicht."
+    },
+    {
+      "frage": "In welchem Meer liegt welche Insel?",
+      "antwort": "Ein Meeresgebiet steht nur bei Inseln, bei denen die Spieldaten oder das Wiki die Insel einem Meer zuordnen. Für alle anderen heißt es „nicht erfasst“. Das Wiki leitet kein Meer aus Koordinaten ab."
+    },
+    {
+      "frage": "Gibt es Höhlen auf den Inseln?",
+      "antwort": "Ja, die DLC-Meere enthalten Höhlen, auch unter Wasser. Eine Höhle ordnet die Seite einer Insel nur zu, wenn ihr Spieltext oder Name die Insel nennt. Alle übrigen stehen im Abschnitt „Meeresgebiet, Insel nicht belegt“."
+    },
+    {
+      "frage": "Woher stammen die Texte zu den Inseln?",
+      "antwort": "Aus den Spieldaten selbst: Wissenseinträge, Questtitel und Itemtexte stehen wörtlich wie im Spiel. Ergänzungen aus dem Wiki und aus Guides sind in der App je Zeile mit ihrem Beleg gekennzeichnet, Einzelquellen als unbestätigt."
+    },
+    {
+      "frage": "Wo stehen Schiffe, Tauchen und Reittiere des DLC?",
+      "antwort": "Auf der Seite [[/charting-the-unknown|Charting the Unknown]]. Diese Seite beschränkt sich auf die Inseln selbst."
+    }
+  ]
+}

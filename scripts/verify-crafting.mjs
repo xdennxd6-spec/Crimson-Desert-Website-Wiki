@@ -121,7 +121,8 @@ ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
   const dirFiles = new Set(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")));
   const nurInHtml = [...tagFiles].filter(f => !dirFiles.has(f));
   // d14-beschaffung.js wird erst beim Öffnen des Fundort-Fensters nachgeladen (Größengrenze verify-seo, beschLaden() in index.html).
-  const NACHGELADEN = new Set(["d14-beschaffung.js"]);
+  // 11.11.2026: d15-inseln.js und d15-inseln-app.js lädt inselnLaden() erst beim Öffnen der Seite Inseln.
+  const NACHGELADEN = new Set(["d14-beschaffung.js", "d15-inseln.js", "d15-inseln-app.js"]);
   NACHGELADEN.forEach(f => { if (tagFiles.has(f)) fail(`data/${f} soll nachgeladen werden, steht aber als <script src> in index.html`); if (!htmlOnly.includes(`data/${f}`)) fail(`data/${f}: Nachlade-Verweis fehlt in index.html`); });
   const nurInDir = [...dirFiles].filter(f => !tagFiles.has(f) && !NACHGELADEN.has(f));
   nurInHtml.forEach(f => fail(`<script src="data/${f}"> in index.html, aber Datei fehlt in data/`));
