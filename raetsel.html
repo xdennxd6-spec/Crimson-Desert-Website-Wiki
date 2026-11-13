@@ -2178,7 +2178,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </div>
 </div>
 <script src="data/d00-de-namen.js?v=1ece4831d9" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=5266eb04f0" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=4c2a958adb" fetchpriority="low"></script>
 <script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
 <script src="data/d04-armor-imgs.js?v=33ef78c839" fetchpriority="low"></script>
@@ -2189,7 +2189,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d09-scenes.js?v=11a4fac7f8" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
 <script src="data/d11-fac-quest-imgs.js?v=fe522a3adf" fetchpriority="low"></script>
-<script src="data/d12-dlc.js?v=4e027bf23a" fetchpriority="low"></script>
+<script src="data/d12-dlc.js?v=3d1cdd67b3" fetchpriority="low"></script>
 <script src="data/d13-romanze.js?v=30a2b89fce" fetchpriority="low"></script>
 <script src="data/d14-reit.js?v=0a13ef4344" fetchpriority="low"></script>
 <script>
@@ -12211,7 +12211,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=620774a4eb';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=df3c60f503';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
@@ -12965,7 +12965,7 @@ document.addEventListener('cd-pills',function(e){if(e.detail&&e.detail.name==='d
 /* DR-B2 (design-rest): Kopf (drHead), Intro wortgleich in drInfo, Satz "Nicht verwechseln" als cdNote, kompakte Karten.
    Sichtbar: Porträt, Name, Kapitel-Gate, Ort, kurze Dienste und Sanctums als Chips, "Auf Karte". Im Aufklapper (details.item-more):
    Händlerware, Questlinie, Tipp (und der volle Ort, wenn er oben gekürzt ist). Suche: data-s = Volltext, data-item-visible/-hidden. */
-const _DRB2_WITCH_INTRO=`Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>Weiße Krähe</strong> ist erst nach 4 Witch's Tokens erreichbar. Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).`;
+const _DRB2_WITCH_INTRO=`Die Hexen sind die zentralen Abyss-Core-Dienstleisterinnen: Sockel erstellen, Cores einsetzen (Embed) und extrahieren — und ab Elowen zusätzlich Cores craften sowie per <strong>Synthese</strong> kombinieren (2× gleicher Core derselben Stufe → 1× nächsthöhere Stufe; <strong>kein</strong> Stufen-System pro Hexe). Die Novizin <strong>Sylvia</strong> bietet laut Guides nur die Workshop-Basis (keine Synthese/kein Crafting; questlog ordnet ihr allerdings dieselbe Werkstatt-Rezeptliste zu wie den übrigen Hexen). Die vier regionalen Sanctum-Hexen haben je eine eigene Questlinie; Wohnort und Sanctums liegen dabei nicht immer in derselben Region (Lyselia wohnt in Demeniss, ihre Sanctums liegen in Delesyia; Areciel wohnt nahe Urdavah in der Crimson Desert, ihre Sanctums liegen in Demeniss und am Red River). Die versteckte <strong>Weiße Krähe</strong> ist erst nach 4 Witch's Tokens erreichbar. Seit Patch 2.05.00 (13.11.2026) gehört auch <strong>Abyss-Ausrüstung</strong> zu den Vertrauens-Belohnungen der Hexen (offizielle Patch-Notizen, boardNo 157). Nicht verwechseln: <strong>Hexe Marie</strong> („Black Witch“, Kap. 9) ist keine Dienstleisterin, sondern eine feindliche Hexe und Boss (eigene questlog-Fraktion, Demeniss).`;
 /* Fehlt das Porträt oder lädt es nicht, bleibt das vorhandene Symbol (WITCH_ICON_SVG) im Rahmen. */
 function _drB2Fb(img){const a=img.parentElement;if(!a)return;a.classList.add('drb2-fb');a.innerHTML=WITCH_ICON_SVG[a.dataset.n]||'<i class="cd-g" aria-hidden="true">☾</i>';}
 function _drB2WitchHead(){
