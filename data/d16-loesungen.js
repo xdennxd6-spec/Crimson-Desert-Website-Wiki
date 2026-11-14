@@ -411,6 +411,25 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["geschenke für hexen","hexen geschenke","geschenk hexe","witch gifts","ring der hexen","witch's ring","goldbarren","gold bar","geheimnisvolles geschenk","hirschgeweih-tee","wüstenkaktus","vertrauen","flirten","elowen","bari","lyselia","areciel","heiraten"],
  quellen:[{t:"GuideDragon: Alle 4 Hexen heiraten",url:"https://guidedragon.de/en/guides/crimson-desert-alle-4-hexen-heiraten-geschenke-vertrauen-flirten/",datum:"2026-11-14"},{t:"Game8: Romanze",url:"https://game8.co/games/Crimson-Desert/archives/584417",datum:"2026-11-14"},{t:"GIGA: Romanze und Heirat",url:"https://www.giga.de/games/crimson-desert-romanze-starten-beziehungen-beginnen-heiraten--01M66GXSGA89E1VD0ZE0T85WQ8",datum:"2026-11-14"},{t:"Game Overdrive: Lyselia",url:"https://gameoverdrive.com.br/crimson-desert-lyselia-romance-como-casar/",datum:"2026-11-14"},{t:"Nerdschalk: Ring der Hexen",url:"https://nerdschalk.com/crimson-desert-witchs-ring-and-greymanes-earring-location-achieve-enlightenment-in-nest-of-valor-thinning-blade/",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"hexen", h3:"Geschenke für Hexen: was wirkt"}},
+{slug:"geschichten-aus-den-ecken-von-hernand", de:"Geschichten aus den Ecken von Hernand", en:"Tales from the Corners of Hernand", art:"quest",
+ sec:"quests", tab:"sq", ziel:null, ort:"#sq-list .q5-bar",
+ kurz:"Eine Reihe aus 16 kurzen Begegnungen am Wegesrand in Hernand. Sie starten, sobald du in die Nähe kommst. Meist rettest du Reisende, einige Begegnungen sind aber Fallen.",
+ voraussetzung:["Ab Kapitel 2, sobald Hernand frei bereisbar ist","Zu Pferd oder zu Fuß unterwegs sein, Schnellreisen überspringt die Auslöser"],
+ schritte:[
+  {t:"Straßen abreiten",d:"Die Begegnungen stehen nicht am Anschlagbrett. Reite durch Hernand, vor allem durch die Hügel ohne Wiederkehr, den Pororin-Wald und am Berg der gefrorenen Seelen."},
+  {t:"Retten und abgeben",d:"Meist besiegst du Banditen oder Goblins, befreist die Person und bringst sie, wenn verlangt, an ihr Ziel. Bei Retter auf der Straße etwa geht es mit dem Lieferanten zur Riventine Winery (EN)."},
+  {t:"Beispiel Holzfäller in Gefahr",d:"Am Südwestweg der Hügel ohne Wiederkehr die Banditen besiegen und den Holzfäller losbinden. Lohn: 20 Bauholz und 10 Hochwertiges Holz."},
+  {t:"Fallen erkennen",d:"Gefälschte Tränen, Wald der List und Die Hütte der Täuschung führen in einen Hinterhalt statt zu einer Belohnung. Bei Die Falle der Banditen folgt der Überfall beim Betreten des Hauses, und die Truhe im Keller zu öffnen gilt als Diebstahl."}
+ ],
+ belohnung:["Je nach Begegnung Material, Kupferbeutel oder Vorräte, etwa 10 Honig bei Wo die Süße endete oder 7 Obstwein bei Retter auf der Straße","Bei Rettungen laut TheGamesWiki zusätzlich 5 Punkte Beitrag"],
+ hinweise:[
+  {kind:"info",txt:"Die 16 Begegnungen: Die Falle der Banditen, Schritte der Wellen, Der Preis des Geldes, Unter einem Wagen eingeklemmter Mann, Retter auf der Straße, Auf dem Weg zum Kloster, Holzfäller in Gefahr, Eine unbekannte Stimme, Wo die Süße endete, Ort des Verrats, Säufer im Schnapsfass, Gefälschte Tränen, Dornengefängnis, Vom Rand der Klippe, Die Hütte der Täuschung, Wald der List. Jede steht unten in der Region Hernand als eigene Karte."},
+  {kind:"info",txt:"Ältere Listen nennen nur 9 Begegnungen. ConsolePulse zählt 16 von insgesamt 35 Hernand-Aufträgen, genau wie die Daten hier."},
+  {kind:"info",txt:"Laut TheGamesWiki sind die Begegnungen nicht verpassbar und bleiben über die Kapitel hinweg erreichbar."}
+ ],
+ suchbegriffe:["geschichten aus den ecken von hernand","tales from the corners of hernand","hernand requests","hernand nebenquests","zufallsbegegnung","holzfäller in gefahr","retter auf der straße","wo die süße endete","gefälschte tränen","wald der list","die hütte der täuschung","die falle der banditen"],
+ quellen:[{t:"ConsolePulse: Hernand Requests",url:"https://consolepulse.com/multiplatform/crimson-desert/guides/crimson-desert-hernand-requests-all-35-quests",datum:"2026-11-14"},{t:"TheGamesWiki: Hernand Requests (Archivkopie)",url:"https://web.archive.org/web/20260404140337/https://thegameswiki.com/crimson-desert/wiki/hernand-requests",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"side-quests", h3:"Geschichten aus den Ecken von Hernand: alle 16 Begegnungen"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);

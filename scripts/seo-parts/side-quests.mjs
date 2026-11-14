@@ -15,6 +15,7 @@
 // Deshalb definiert dieses Modul eine eigene isReal()-Pruefung statt has().
 
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 
 export const SLUG = "side-quests";
 export const NAV_LABEL = "Nebenquests";
@@ -123,6 +124,7 @@ ${isReal(q.craft) ? `<p>${esc(q.craft)}</p>` : ""}
 <a class="cta" href="${DEEPLINK}">Interaktive Nebenquest-Liste mit Fortschritt öffnen &rarr;</a>
 <p class="note">In der App hakst du jede Nebenquest ab, siehst deinen Fortschritt je Region und kannst alle Haken auf einmal zurücksetzen.</p>
 <p class="warn"><strong>${missCount} verpassbare Nebenquests:</strong> ${missList}. Diese Quests lassen sich im laufenden Spieldurchgang dauerhaft verpassen, etwa durch ein vergessenes Häuten nach dem Kill oder durch den späteren Camp-Umzug; die Bedingung steht im Tipp der jeweiligen Quest.</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${sections}`;
 
   const jsonld = {
