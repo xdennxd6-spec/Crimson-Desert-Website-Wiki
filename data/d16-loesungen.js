@@ -151,6 +151,25 @@ const LOESUNGEN_PFLICHT = [
  quellen:[{t:"Game8: Beyond the Margins",url:"https://game8.co/games/Crimson-Desert/archives/635797",datum:"2026-11-14"},{t:"Showgamer: Silent Burial Ground",url:"https://showgamer.com/en/guides/7089-gayd-crimson-desert-kak-otkryt-bezmolvnyy-mogilnik",datum:"2026-11-14"},{t:"Whisper of the House: Beyond the Margins",url:"https://www.whisperofthehouse.com/crimson-desert/beyond-the-margins",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Der Drahtzieher",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_mapmaker",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Grabstätte des Schweigens: so kommst du hinein"},
  links:[{sec:"dlc-kampf",ziel:"[data-dlc-k=\"Kharzek, Archon of Antumbra\"]"}]},
+{slug:"stadt-im-wandel", de:"Stadt im Wandel", en:"The Evolving City", art:"quest",
+ sec:"quests", tab:"mq", ziel:"mq-epilog",
+ kurz:"Kurze Hauptquest im Epilog Ende der Reise. Du reist nach Delesyia und siehst dir mit dem Visione-Helm eine Erinnerung von Marni an.",
+ voraussetzung:["Epilog-Hauptquest Ein neuer Anfang abgeschlossen","Den goldenen Visione-Helm besitzen (Löwenmähne-Wachturm bei Hernand, Hauptquest Erinnerungsfragment)"],
+ schritte:[
+  {t:"Nach Delesyia reisen",d:"Reise in die Hauptstadt Delesyia und geh zur Burg."},
+  {t:"Helm aufsetzen",d:"Trag den Visione-Helm. Mit aufgesetztem Helm lassen dich die Wachen am Burgtor hinein."},
+  {t:"Erinnerung auswählen",d:"Wähl im Ausrüstungsmenü den Visione-Helm, dann öffnet sich die Liste der Erinnerungen (Recollections, EN). Öffne im Reiter Delesyia den ersten Eintrag, Visione.",conf:"einzelquelle"},
+  {t:"Erinnerung ansehen",d:"Lass die Erinnerung bis zum Ende laufen, es erscheint eine Aufzeichnung von Marni. Damit ist Stadt im Wandel abgeschlossen."}
+ ],
+ belohnung:["Keine"],
+ hinweise:[
+  {kind:"info",txt:"Stadt im Wandel ist eine der acht Aufgaben von Ende der Reise: Ein neuer Anfang, Die wiedergefundene Ruhe, Unnachgiebige Schilde, Das Herz von Pywel, Die ewige Flamme, Stadt im Wandel, Der Rand der Wüste und Neue Horizonte (Game8)."},
+  {kind:"info",txt:"Burgtor und Menüweg beschreibt nur PowerPyx genau; Game8 sagt kürzer, du sollst im Schloss den Visione-Helm tragen und die Erinnerung über seine Geheimnisse lesen."}
+ ],
+ suchbegriffe:["evolving city","the evolving city","stadt im wandel lösung","visione helm","visione-helm","visione erinnerung","recollections","erinnerung delesyia","burg delesyia","burgtor delesyia","marni aufzeichnung","epilog ende der reise"],
+ quellen:[{t:"PowerPyx: Evolving City",url:"https://www.powerpyx.com/crimson-desert-evolving-city-walkthrough/",datum:"2026-11-14"},{t:"Game8: Journey's End",url:"https://game8.co/games/Crimson-Desert/archives/591746",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"hauptquests", h3:"Stadt im Wandel: Lösung"},
+ links:[{sec:"chapters",ziel:"ch-Epilog"}]},
 /* LOES-PFLICHT Ende */
 ];
 const LOESUNGEN_KUER = [
