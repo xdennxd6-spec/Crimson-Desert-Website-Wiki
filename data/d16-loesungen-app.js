@@ -5,8 +5,8 @@
 //
 // Vertrag je Eintrag (Feldliste im Kopf von d16-loesungen.js):
 //   sec  = Seiten-ID der App (#sec-<sec>), ziel = id (oder data-go-id) der vorhandenen Karte in dieser Seite.
-//          Ist die Karte eine Faltkarte (.cd-fold) mit lazy Inhalt, wird der Inhalt sofort erzeugt (cdFoldFill) und die Lösung
-//          als <section class="loes" id="loes-<slug>"> ans Ende von .cd-fold-body gehängt; oben im Inhalt steht eine Zeile
+//          Faltkarte (.cd-fold): Die Lösung kommt als <section class="loes" id="loes-<slug>"> ans Ende von .cd-fold-body, sobald
+//          der (lazy) Inhalt existiert (Öffnen, Such-Öffnung, cdGo; vorher nur data-s); oben im Inhalt steht eine Zeile
 //          .loes-top mit Sprunglinks zu allen Lösungen dieser Karte. Andere Karten: Lösung ans Ende der Karte.
 //          data-s der Karte bekommt den Volltext der Lösung (Kurzantwort, Schritte, Suchbegriffe ...), damit die App-Suche trifft.
 //   ziel = null: eigene schlanke Faltkarte (id loes-karte-<slug>, Inhalt sofort im DOM) im Behälter #loes-extra-<sec>.
@@ -86,9 +86,9 @@ function _loesZiel(sec,ziel){
   el=root.querySelector('[data-go-id="'+z.replace(/["\\]/g,'\\$&')+'"]');
   return el||null;
 }
+function _loesLazy(el){ return !!(el&&el.classList&&el.classList.contains('cd-fold')&&el.hasAttribute('data-cd-lazy')); }
 function _loesKoerper(el){
   if(el.classList&&el.classList.contains('cd-fold')){
-    if(el.hasAttribute('data-cd-lazy')&&typeof cdFoldFill==='function')cdFoldFill(el);
     return el.querySelector(':scope>.cd-fold-body')||el;
   }
   return el.querySelector('.item-more-body')||el;
@@ -157,6 +157,9 @@ function loesEinhaengen(){
       });
     });
     karten.forEach(function(liste,el){
+      /* Faltkarte noch nicht gefüllt (lazy): nur data-s ergänzen. Den Inhalt erzeugt cdFoldFill beim Öffnen, bei einer
+         Such-Öffnung oder bei cdGo; der MutationObserver hängt die Lösung dann sofort ein (spart Renderzeit). */
+      if(_loesLazy(el)){ liste.forEach(function(x){ if(x.eigen)_loesSAdd(el,x.e); }); return; }
       var box=null,slugs=[];
       liste.forEach(function(x){
         var e=x.e;slugs.push(e.slug);
@@ -194,6 +197,8 @@ function loesEinhaengen(){
   document.addEventListener('cd-go-miss',function(ev){
     var d=ev.detail||{},q=String(d.q||'');if(q.indexOf('loes-')!==0)return;
     var e=LOES_IDX[q.slice(5)];if(!e)return;
+    var el=e.ziel!=null?_loesZiel(e.sec,e.ziel):null;
+    if(_loesLazy(el)&&typeof cdFoldFill==='function')cdFoldFill(el);
     loesEinhaengen();
   });
   /* Nachführen: Nach einem Sprung auf eine Lösung wächst die Seite oft noch (lazy Reiter, content-visibility der Karten darüber),
