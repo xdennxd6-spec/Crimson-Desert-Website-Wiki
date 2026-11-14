@@ -25,6 +25,7 @@ import { fileURLToPath } from "url";
 
 import { dlcNeu } from "./_dlc-neu.mjs";
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 export const SLUG = "mounts";
 export const NAV_LABEL = "Reittiere";
 export const DEEPLINK = "/#sec-mounts";
@@ -155,6 +156,7 @@ export function build(ctx) {
 <a class="cta" href="${DEEPLINK}">Alle Reittiere interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App markierst du Favoriten und siehst die In-Game-Ansicht eines Mounts direkt als Vorschau.</p>
 <p class="note">Sigil-Mounts schaltest du mit Amuletten frei, die eine Hexe herstellt: Rezepte und Fundorte unter <a href="/hexen">Hexen &amp; Fusion</a>. Tiere als Begleiter statt als Reittier stehen bei den <a href="/pets">Haustieren</a>, die Gegner hinter den Sigil-Mounts in der <a href="/bosse">Bossliste</a>. Wo sich Quellen widersprechen oder ein Beschaffungsweg fehlt, steht das offen in den Notizen der jeweiligen Karte.</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Reittiere",
     intro: "Diese Reittiere kamen mit dem ersten DLC, darunter die Unterwasser-Reittiere fürs Tauchen. Ein Klick springt zur Karte weiter unten.",

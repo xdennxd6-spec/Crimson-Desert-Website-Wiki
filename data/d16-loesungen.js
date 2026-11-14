@@ -351,6 +351,26 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["stoßen","stoßen skill","stechen","stab","swift stab","flinkes stoßen","aufspießender stoß","sprungstoß","riedteufel","reed devil","beobachten","watch and learn"],
  quellen:[{t:"Game8: Swift Stab",url:"https://game8.co/games/Crimson-Desert/archives/587289",datum:"2026-11-14"},{t:"Fextralife: Swift Stab",url:"https://crimsondesertgame.wiki.fextralife.com/Swift+Stab",datum:"2026-11-14"},{t:"Fextralife: Stab",url:"https://crimsondesertgame.wiki.fextralife.com/Stab",datum:"2026-11-14"},{t:"PC Gamer: Observe-Fähigkeiten",url:"https://www.pcgamer.com/games/action/crimson-desert-observe-this-skill-in-action-to-learn-it",datum:"2026-11-14"},{t:"GamePro: Kliff-Build",url:"https://www.gamepro.de/artikel/crimson-desert-kliff-build,3450030.html",datum:"2026-11-14"},{t:"crimsondesert.gg: Kliff-Skillbaum",url:"https://crimsondesert.gg/de/skill-tree/kliff",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"skills", h3:"Stoßen-Skill: Stab und Flinkes Stoßen lernen"}},
+{slug:"hai-zaehmen", de:"Hai zähmen", en:"Shark (taming)", art:"thema",
+ sec:"mounts", ziel:"[data-mn=\"Shark\"]",
+ kurz:"Haie sind Unterwasser-Reittiere aus dem DLC Charting the Unknown. Du betäubst einen Hai mit Kraftfaust, steigst auf und gewinnst das Zähm-Minispiel, danach rufst du ihn als besonderes Reittier.",
+ voraussetzung:["DLC Charting the Unknown und Zugang zum Ozean (Ozean-Reihe nach Kapitel 3 Heulender Hügel und Camp-Ausbau)","Kraftfaust (Kliff lernt sie in Kapitel 1)","Möglichst hohe Ausdauer, weil das Minispiel viel kostet, und Tauchausrüstung"],
+ schritte:[
+  {t:"Hai suchen",d:"Haie sind im Ozean häufig, feste Spawnpunkte gibt es nicht. Viele schwimmen rund um die Inseln, etwa bei der Insel der roten Hänge."},
+  {t:"Möglichst ohne Waffen",d:"Waffenschaden kann den Hai töten, dann lässt er sich nicht mehr zähmen. Am sichersten ist Kraftfaust allein."},
+  {t:"Mit Kraftfaust betäuben",d:"Kommt der Hai nah heran, mit Kraftfaust auf den Kopf schlagen, bis er betäubt ist."},
+  {t:"Aufsteigen und Minispiel",d:"Auf den betäubten Hai steigen. Im Minispiel die Kamera so drehen, dass du die Schwanzflosse siehst, und gegen ihre Bewegung steuern, bis die Anzeige voll ist. Das kostet viel Ausdauer."},
+  {t:"Registrieren und rufen",d:"Danach ist der Hai ein dauerhaftes Reittier. Laut Game8 rufst du ihn über den Reiter Special Mounts (EN) der Reittierauswahl."}
+ ],
+ belohnung:["Hai als dauerhaftes Unterwasser-Reittier"],
+ hinweise:[
+  {kind:"warn",txt:"Füttern zähmt Haie nicht."},
+  {kind:"info",txt:"Power Up Gaming rät, den Hai vorher mit dem Harpunengewehr zu ermüden, ohne ihn zu töten. Game8 rät von jedem Waffeneinsatz ab, der sichere Weg ist nur Kraftfaust."},
+  {kind:"info",txt:"Schwertwale zähmst du laut Game8 genauso, den Goldhai laut KeenGamer ebenfalls mit Kraftfaust. Der Hammerhai ist eine eigene, schnellere Art."}
+ ],
+ suchbegriffe:["hai","hai zähmen","haie zähmen","shark","shark mount","tame shark","unterwasser reittier","kraftfaust","force palm","schwertwal","orca","goldhai","hammerhai"],
+ quellen:[{t:"Game8: Hai zähmen",url:"https://game8.co/games/Crimson-Desert/archives/636416",datum:"2026-11-14"},{t:"Game8: Unterwasser-Reittiere",url:"https://game8.co/games/Crimson-Desert/archives/635858",datum:"2026-11-14"},{t:"Game8: DLC-Fraktionsquests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Power Up Gaming: Shark Mount",url:"https://powerupgaming.co.uk/2026/10/31/how-to-tame-shark-mount-in-crimson-desert-charting-the-unknown/",datum:"2026-11-14"},{t:"KeenGamer: Golden Shark",url:"https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-legendary-golden-shark-mount/",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"mounts", h3:"Hai zähmen: Schritt für Schritt"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);
