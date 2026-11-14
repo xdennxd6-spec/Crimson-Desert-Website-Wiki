@@ -190,6 +190,11 @@ const pages = {
   "reitausruestung.html": { sec: "/#sec-reitausruestung", count: { regex: /<article class="card" id="reit-/g, expected: REIT.length, label: "Ausrüstungs-Karten" } },
   // NEU (11.11.2026): Regex und Label aus COUNT_CHECK von parts/inseln.mjs.
   "inseln.html": { sec: "/#sec-inseln", count: { regex: /<article class="card ins-seo" id="insel-/g, expected: INSELN.length, label: "Insel-Karten" } },
+  // LOES K5 (14.11.2026): drei eigene Loesungsseiten, je genau ein Loesungsabschnitt (COUNT_CHECK aus parts/_loesung-seite.mjs);
+  // der Startbereich enthaelt &go=loes-<slug>, die App springt beim Laden zur Loesung.
+  "der-weg-jenseits-des-sandsturms.html": { sec: "/#sec=dlc-quests&go=loes-der-weg-jenseits-des-sandsturms", count: { regex: /<section class="loes-seo" id="loes-seo-/g, expected: 1, label: "Lösungsabschnitte" } },
+  "uralter-tempel.html": { sec: "/#sec=dlc-quests&go=loes-uralter-tempel", count: { regex: /<section class="loes-seo" id="loes-seo-/g, expected: 1, label: "Lösungsabschnitte" } },
+  "jenseits-der-raender.html": { sec: "/#sec=dlc-quests&go=loes-jenseits-der-raender", count: { regex: /<section class="loes-seo" id="loes-seo-/g, expected: 1, label: "Lösungsabschnitte" } },
 };
 // 05.11.2026: Googlebot liest HTML nur bis rund 2 MB (unkomprimiert). Was dahinter steht, sieht Google nicht; in der
 // Search Console brach /ruestungen mitten im Hauptskript ab, die App lief bei Google nicht. Puffer: Grenze 1,9 Mio. Byte.
@@ -435,6 +440,8 @@ const ERLAUBTE_ZAHLEN = {
   "reitausruestung.html": [REIT.length, ...REIT_ARTEN.map((a) => REIT.filter((x) => x.art === a).length), Math.max(...REIT.map((x) => x.hp || 0)), REIT_VERWEISE.length],
   // NEU (11.11.2026): Intro und FAQ nennen die Zahl der Inseln
   "inseln.html": [INSELN.length],
+  // LOES K5: Intro der drei Loesungsseiten enthaelt keine Zahlen (Zahlen in Intro/FAQ duerfen es nur geben, wenn sie in den Daten stehen)
+  "der-weg-jenseits-des-sandsturms.html": [], "uralter-tempel.html": [], "jenseits-der-raender.html": [],
 };
 
 ok(PATCHES_1X.some((p) => p.ver.startsWith("1.13.")) && PATCHES_1X.some((p) => p.ver.startsWith("1.18.")),
@@ -617,6 +624,10 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
     "romanze.html": [...ROM_WITCHES.map((w) => "rom-" + slugUnabh(w.name)), "rom-npcs"],
     "reitausruestung.html": REIT.map((x) => "reit-" + slugUnabh(x.name)),
     "inseln.html": INSELN.map((x) => "insel-" + slugUnabh(x.slug)),
+    // LOES K5: der Abschnittsanker der eigenen Loesungsseiten entspricht dem Seiten-slug (a-<slug>), dazu der Abschnitt loes-seo-<slug>
+    "der-weg-jenseits-des-sandsturms.html": ["a-der-weg-jenseits-des-sandsturms", "loes-seo-der-weg-jenseits-des-sandsturms"],
+    "uralter-tempel.html": ["a-uralter-tempel", "loes-seo-uralter-tempel"],
+    "jenseits-der-raender.html": ["a-jenseits-der-raender", "loes-seo-jenseits-der-raender"],
   };
   for (const datei of Object.keys(pages)) {
     // 01.11.2026: nur der Seiteninhalt der App-Fassung (die App-ids prüft gen-seo beim Bauen auf Kollision)
@@ -678,7 +689,8 @@ const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
   "bestiarium", "side-quests", "trophaeen", "true-ending",
   "hauptquests", "patch-notes", "fraktionen", "npcs",
   "skills", "hexen", "abyss-cores", "accessoires", "kapitel-guide",
-  "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1", "charting-the-unknown", "romanze", "reitausruestung", "inseln"];
+  "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1", "charting-the-unknown", "romanze", "reitausruestung", "inseln",
+  "der-weg-jenseits-des-sandsturms", "uralter-tempel", "jenseits-der-raender"];
 {
   const app = fs.readFileSync(path.join(ROOT, "index.html"), "utf8").replace(/\r\n/g, "\n");
   const appRumpf = app.slice(app.indexOf("</head>")).replace(/<h1 class="vh">[\s\S]*?<\/h1>/, "");
@@ -706,7 +718,8 @@ const sm =fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 ["/", "/bosse", "/bestiarium", "/waffen", "/ruestungen", "/crafting",
  "/hauptquests", "/fraktionen", "/side-quests", "/trophaeen", "/true-ending",
  "/npcs", "/patch-notes", "/patch-notes-1", "/skills", "/hexen", "/abyss-cores", "/accessoires",
- "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse", "/charting-the-unknown", "/romanze", "/reitausruestung", "/inseln"].forEach((u) =>
+ "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse", "/charting-the-unknown", "/romanze", "/reitausruestung", "/inseln",
+ "/der-weg-jenseits-des-sandsturms", "/uralter-tempel", "/jenseits-der-raender"].forEach((u) =>
   ok(sm.includes(`<loc>https://crimson-desert-wiki.com${u}</loc>`), `sitemap enthaelt ${u}`));
 
 // ── 6. Startseite verlinkt jede SEO-Seite ────────────────────────────────────

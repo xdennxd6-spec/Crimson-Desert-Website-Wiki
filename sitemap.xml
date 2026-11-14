@@ -115,6 +115,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://crimson-desert-wiki.com/der-weg-jenseits-des-sandsturms</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://crimson-desert-wiki.com/uralter-tempel</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://crimson-desert-wiki.com/jenseits-der-raender</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://crimson-desert-wiki.com/npcs</loc>
     <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>

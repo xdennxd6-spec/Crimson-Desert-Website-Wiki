@@ -21,7 +21,7 @@
 // verify-seo.mjs rechnet die Soll-Menge unabhaengig aus denselben Datenstrukturen nach.
 
 import { deN, deT } from "./_de.mjs";
-import { loesungenSeo } from "./_loesungen.mjs";
+import { loesungenSeo, loesungenVerweise } from "./_loesungen.mjs";
 
 export const SLUG = "charting-the-unknown";
 export const NAV_LABEL = "Charting the Unknown";
@@ -299,6 +299,7 @@ ${tools.length ? `<p class="note">Offiziell neu sind außerdem im Kampf einsetzb
 <a class="cta" href="${DEEPLINK}">Alles zum DLC interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App hakst du besuchte Inseln ab und filterst die Schiffsteile nach Typ. <strong>Belegt</strong> heißt: offizielle Notes von Pearl Abyss oder mindestens zwei unabhängige Guides. Grau mit Vermerk ${flag("unb")} nennt nur eine Quelle, ${flag("nb")} heißt gesucht, aber nichts gefunden. Release, Preis und die vollständige Featureliste stehen bei den <a href="/patch-notes">Patch-Notes</a>.</p>
 ${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
+${/* LOES K5: Verweis auf die eigenen Loesungsseiten (leer, solange es die Eintraege nicht gibt), vor der ersten h2 */ loesungenVerweise(ctx.helpers, ["der-weg-jenseits-des-sandsturms", "uralter-tempel", "jenseits-der-raender"], "Lösungen zu einzelnen DLC-Quests:")}
 ${zugang}
 ${schiffe}
 ${bau}

@@ -283,6 +283,8 @@ const SOLL_NAV_LABELS = {
   "side-quests": "Nebenquests", "kapitel-guide": "Kapitel-Guide", "true-ending": "True Ending",
   "ruinen": "Uralte Ruinen", "raetsel": "Rätsel", "trophaeen": "Trophäen & Errungenschaften",
   "npcs": "Charaktere & NPCs", "romanze": "Romanze & Ehe", "mounts": "Reittiere", "pets": "Haustiere", "reitausruestung": "Reit- & Tierausrüstung", "inseln": "Inseln",
+  // LOES K5 (14.11.2026): drei eigene Loesungsseiten (Kategorie quests, ohne Kopf-Menue)
+  "der-weg-jenseits-des-sandsturms": "Der Weg jenseits des Sandsturms", "uralter-tempel": "Uralter Tempel", "jenseits-der-raender": "Jenseits der Ränder",
   "geheimnisse": "Geheimnisse & Lore", "charting-the-unknown": "Charting the Unknown", "crafting": "Herstellen & Farmen",
 };
 

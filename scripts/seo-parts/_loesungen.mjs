@@ -14,7 +14,11 @@
 //       Ab zwei Eintraegen umhuellt <div class="loes-seo-wrap" id="loesungen"> alles und ein kurzer Satz steht davor.
 //       Kein <tr>/<article>, kein <h2> (COUNT_CHECKs und die Aufteilung in appFassung() bleiben unberuehrt), kein FAQ-/JSON-LD.
 //       abgrenzung + abgrenzungLink {seite, text}: Hinweis „Nicht verwechseln“ mit Link auf /<seite>.
-//   loesungHref(h, slug)     -> "/<seo.seite>#a-<slug>" oder "" (kein Eintrag oder kein seo).
+//   loesungHref(h, slug)     -> "/<seo.seite>#a-<slug>" oder "" (kein Eintrag oder kein seo); bei eigener Seite
+//       (seo.seite === slug) ohne Fragment "/<slug>", damit die App-Fassung beim Laden zur Loesung springt.
+//   loesungEintrag(h, slug)  -> Eintrag mit seo, seo.h3 und Schritten oder null (K5, eigene Seiten).
+//   loesungenVerweise(h, slugs, satzHtml) -> <p class="note loes-seo-verweis"> mit Links auf die eigenen Loesungsseiten
+//       der genannten slugs (nur Eintraege mit seo.seite === slug) oder "" (K5).
 //   loesungVerweis(h, slug, satzHtml) -> <p class="note loes-seo-verweis">satzHtml <a href=...>Zur Lösung</a></p> oder "".
 //       satzHtml ist fertiges HTML des Aufrufers (nicht escaped).
 // Fehlt LOESUNGEN_PFLICHT (extract wirft) oder ist ein Array leer, liefern alle drei Funktionen "".
@@ -41,7 +45,25 @@ const HINWEIS = { miss: "Verpassbar:", warn: "Achtung:", info: "Hinweis:" };
 
 export function loesungHref(h, slug) {
   const e = lade(h).find((x) => x.slug === slug);
-  return e && e.seo && e.seo.seite ? `/${e.seo.seite}#a-${e.slug}` : "";
+  if (!e || !e.seo || !e.seo.seite) return "";
+  // Eigene Seite (seite === slug, K5): Adresse ohne Fragment. Mit einem # in der Adresse setzt das Start-Skript der
+  // App-Fassung den Startbereich nicht (if(!location.hash)...) und der Besucher landete nicht bei der Loesung.
+  return e.seo.seite === e.slug ? `/${e.seo.seite}` : `/${e.seo.seite}#a-${e.slug}`;
+}
+
+// K5: voller Eintrag zu einem slug (nur wenn er eine SEO-Seite und Schritte hat), sonst null.
+export function loesungEintrag(h, slug) {
+  const e = lade(h).find((x) => x.slug === slug);
+  return e && e.seo && e.seo.seite && e.seo.h3 && arr(e.schritte).length ? e : null;
+}
+
+// K5: eine Zeile mit Links auf die EIGENEN Loesungsseiten (Eintraege, deren seo.seite gleich ihrem slug ist, z. B.
+// /uralter-tempel). Gedacht fuer Sammelseiten (charting-the-unknown); ohne passende Eintraege kommt "".
+//   satzHtml: fertiges HTML des Aufrufers (nicht escaped), z. B. "Eigene Loesungsseiten:".
+export function loesungenVerweise(h, slugs, satzHtml) {
+  const liste = arr(slugs).map((s) => loesungEintrag(h, s)).filter((e) => e && e.seo.seite === e.slug);
+  if (!liste.length) return "";
+  return `<p class="note loes-seo-verweis">${satzHtml} ${liste.map((e) => `<a href="${h.esc(loesungHref(h, e.slug))}">${h.esc(e.de)}</a>`).join(" &middot; ")}</p>`;
 }
 
 export function loesungVerweis(h, slug, satzHtml) {
