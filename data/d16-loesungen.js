@@ -253,6 +253,65 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["eis resistenz","eisresistenz","eis-resistenz","ice resistance","kälteresistenz","kälteschutz","kälte","frost","frostfluch","frostschleier","frostward","umhang des hernandischen adels","fischbrei","klare suppe","honigtee","kälteresistente kuku-rüstung"],
  quellen:[{t:"GameRant: Ice Resistance",url:"https://gamerant.com/crimson-desert-ice-protection-resistance-frost/",datum:"2026-11-14"},{t:"GameRant: Frostcursed Armor Set",url:"https://gamerant.com/crimson-desert-frostcursed-armor-set-locations/",datum:"2026-11-14"},{t:"Gfinity: Frostcursed Armor Set",url:"https://www.gfinityesports.com/article/how-to-get-the-frostcursed-armor-set-in-crimson-desert",datum:"2026-11-14"},{t:"Kamigame: Kälte und Eisresistenz",url:"https://kamigame.jp/crimsondesert/page/418385611070637859.html",datum:"2026-11-14"},{t:"ConsolePulse: Kuku-Rüstungen",url:"https://www.consolepulse.com/multiplatform/crimson-desert/guides/crimson-desert-kuku-armor-blueprints-patch-1-13",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"crafting", h3:"Eis-Resistenz: Ausrüstung und Essen gegen Kälte"}},
+{slug:"harpunengewehr", de:"Harpunengewehr", en:"Harpoon Gun", art:"item",
+ sec:"dlc-ausruestung", ziel:"[data-item-id=\"Harpoon Gun\"]",
+ kurz:"Die Harpune im DLC Charting the Unknown ist das Harpunengewehr, eine Fernkampfwaffe für den Kampf unter Wasser. Du bekommst es in der Graumähnen-Reihe Auf in eine größere Welt (Quest Wo der Wind weht), seit Patch 2.05.00 auch beim Händler.",
+ voraussetzung:["DLC Charting the Unknown","Kapitel 3 Heulender Hügel abgeschlossen und Camp ausgebaut (Start der Ozean-Reihe)"],
+ schritte:[
+  {t:"Reihe starten",d:"Nach Kapitel 3 und dem Camp-Ausbau startet die Graumähnen-Reihe Auf in eine größere Welt mit dem Schritt Der Ruf jenseits des Horizonts."},
+  {t:"Wo der Wind weht abschließen",d:"Das Schiff für die Reise ist bereit: im Hafenort auf Neuigkeiten achten und auslaufen. Das Harpunengewehr ist die Belohnung."},
+  {t:"Ausrüsten",d:"Kliff, Damiane und Oongka können es tragen, es hat 5 Sockel für Abyss-Ausrüstung.",conf:"einzelquelle"},
+  {t:"Nachkaufen",d:"Seit Patch 2.05.00 (13.11.2026) verkaufen die Händler an Angelplätzen am Meer das Harpunengewehr, sobald du es einmal erhalten hast."}
+ ],
+ belohnung:["Harpunengewehr x1 (Angriff 40 auf Stufe +10)"],
+ hinweise:[
+  {kind:"info",txt:"Game8 führt das Gewehr einmal als Belohnung von Wo der Wind weht und einmal als Belohnung der ganzen Reihe."},
+  {kind:"info",txt:"Patch 2.05.00 hat behoben, dass Seeschlangen vom Harpunengewehr nicht getroffen wurden."},
+  {kind:"warn",txt:"Beim Hai zähmen nur vorsichtig einsetzen: Zu viel Schaden tötet den Hai."}
+ ],
+ abgrenzung:"Der Harpunenspeer ist eine eigene Stangenwaffe, sein Fundort ist nicht erfasst. Die Harpunenschmiede Halbert ist ein Ort in Pailune.",
+ suchbegriffe:["harpune","harpoon","harpoon gun","harpunengewehr","harpunenspeer","wo der wind weht","where the wind blows","auf in eine größere welt","a wider world","angelplatz händler"],
+ quellen:[{t:"Game8: Harpoon Gun",url:"https://game8.co/games/Crimson-Desert/archives/635833",datum:"2026-11-14"},{t:"Game8: DLC-Fraktionsquests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Power Up Gaming: Shark Mount",url:"https://powerupgaming.co.uk/2026/10/31/how-to-tame-shark-mount-in-crimson-desert-charting-the-unknown/",datum:"2026-11-14"},{t:"PSU: Patch 2.05.00",url:"https://www.psu.com/news/crimson-desert-update-2-05-00-brings-multiple-fixes-for-combat-controls-ui-full-patch-notes-listed/",datum:"2026-11-14"},{t:"Patchbot: Patch 2.05.00",url:"https://patchbot.io/games/crimson-desert/articles/2229-patch-notes-version-20500",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Harpune: Harpunengewehr bekommen"}},
+{slug:"der-rachegeist-der-durch-das-meer-treibt", de:"Der Rachegeist, der durch das Meer treibt", en:"A Vengeful Spirit at Sea", art:"quest",
+ sec:"dlc-quests", ziel:"dlc-q-cave-of-sorrow",
+ kurz:"Einziger Schritt der Ozean-Fraktionsquest Höhle der Trauer auf Insel Bergel: Aus einer dunklen Höhle dringt ein klagender Schrei, dort besiegst du den Geist Rohan Cooper.",
+ voraussetzung:["DLC Charting the Unknown","Schritt Uralte Katastrophe erledigt (der Kampf gegen Leviakan in der Reihe Nebelmeer)"],
+ schritte:[
+  {t:"Zur Höhle der Trauer",d:"Auf Insel Bergel südlich von Delesyia die Höhle der Trauer aufsuchen, der Questmarker zeigt den Weg."},
+  {t:"Rohan Cooper besiegen",d:"In der Höhle zeigt sich der ruhelose Geist von Rohan Cooper, Sohn eines Marineoffiziers aus Demeniss. Besiege ihn, danach verstummt das Schluchzen in der Höhle."},
+  {t:"Artefakt aufnehmen",d:"Nach dem Kampf das Artefakt aufnehmen. Erst damit gibt es das Abyss-Artefakt und die 5 Uralten Relikte.",conf:"einzelquelle"}
+ ],
+ belohnung:["Marineoffiziersrüstung","Trugbild-Kaskade (Abyss-Ausrüstung)","Abyss-Artefakt und 5 Uralte Relikte","Notiz von Rohan Cooper und Wissenseinträge zu Rohan Cooper und den Geistern"],
+ hinweise:[
+  {kind:"info",txt:"Den Kampfablauf haben wir in keiner abrufbaren Quelle gefunden."},
+  {kind:"info",txt:"Die Höhle der Trauer gehört zur Fraktion der Inselbewohner (Keepers of the Abandoned Islands, EN) im Ozean."}
+ ],
+ abgrenzung:"Das Brüllen von Insel Bergel in der Reihe Nebelmeer führt zum Kampf gegen Leviakan (Uralte Katastrophe). Die Höhle der Trauer ist eine eigene Quest, die erst danach startet.",
+ suchbegriffe:["a vengeful spirit at sea","vengeful spirit","rachegeist","der rachegeist der durch das meer treibt","höhle der trauer","cave of sorrow","rohan cooper","bergel","insel bergel","marineoffiziersrüstung","trugbild-kaskade"],
+ quellen:[{t:"gaming.tools: A Vengeful Spirit at Sea",url:"https://crimsondesert.gaming.tools/faction-quests/mission_oceanstory_vergelisland_rohancooper_boss",datum:"2026-11-14"},{t:"Game8: DLC-Fraktionsquests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"A Vengeful Spirit at Sea: Lösung"}},
+{slug:"fremde-werkstatt", de:"Fremde Werkstatt", en:"Unfamiliar Workshop", art:"quest",
+ sec:"dlc-quests", ziel:"dlc-q-forged-resolve",
+ kurz:"Dritter Schritt von Oongkas DLC-Reihe Geschmiedete Entschlossenheit: Oongka kommt am Scholastein-Institut an, trifft den Dekan und Vargus und bringt den defekten Power Regulator (EN) mit einer Tastenfolge wieder in Gang.",
+ voraussetzung:["Hauptquest Ende der Reise abgeschlossen, als Oongka spielen","Schritte Ein neuer Weg und Nach Scholastein erledigt"],
+ schritte:[
+  {t:"Dekan treffen",d:"Im Scholastein-Institut Dekan Grundir aufsuchen."},
+  {t:"Mit Vargus sprechen",d:"Danach Vargus ansprechen."},
+  {t:"Gerät untersuchen",d:"Den defekten Power Regulator (EN) ansehen. Auf PS5 L1 halten, um ihn anzuvisieren, und mit Quadrat bedienen."},
+  {t:"Tastenfolge eingeben",d:"Das Gerät hat zwei Tastenreihen, Reihen von oben und Spalten von links gezählt. Drücke: Reihe 2 Spalte 1, Reihe 1 Spalte 3, Reihe 2 Spalte 3, Reihe 1 Spalte 4, Reihe 1 Spalte 5. Die beiden beschädigten Tasten brauchst du nicht."},
+  {t:"Zwischensequenz",d:"Nach der fünften Taste läuft das Gerät wieder an und eine Zwischensequenz startet. Weiter geht es mit Ungeschickte Hände, fester Wille."}
+ ],
+ belohnung:["Kein eigener Gegenstand in diesem Schritt, die Reihe gibt später unter anderem die Verbesserte Fatum-Handkanone"],
+ hinweise:[
+  {kind:"warn",txt:"Keine zusätzlichen Tasten drücken: Nur die fünf Tasten der Folge sind nötig, Extratasten sind laut Whisper of the House der häufigste Fehler."},
+  {kind:"info",txt:"Laut Gaming Deputy sitzt der Dekan im Archiv, Vargus im Amphitheater, und das Gerät steht im Anbau."},
+  {kind:"info",txt:"Die Tasten für PC und Xbox nennt keine geprüfte Quelle."}
+ ],
+ abgrenzung:"Fremde Werkstatt ist kein eigener Ort, sondern ein Questschritt am Scholastein-Institut. Die Reihe beginnt vorher in einer Werkstatt, laut Game8 im Graumähnen-Camp, laut Whisper of the House im Nordwesten von Pailune.",
+ suchbegriffe:["fremde werkstatt","unfamiliar workshop","power regulator","power regulator rätsel","operate the power regulator","tastenfolge","scholastein","scholastein-institut","dekan grundir","vargus","geschmiedete entschlossenheit","forged resolve","oongka"],
+ quellen:[{t:"GameRant: Power Regulator",url:"https://gamerant.com/crimson-desert-operate-power-regulator-restore-function-puzzle/",datum:"2026-11-14"},{t:"Game8: DLC-Fraktionsquests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Whisper of the House: Forged Resolve",url:"https://www.whisperofthehouse.com/crimson-desert/forged-resolve",datum:"2026-11-14"},{t:"Gaming Deputy: Régulateur de puissance",url:"https://www.gamingdeputy.com/france/crimson-desert-regulateur-de-puissance-2/",datum:"2026-11-14"},{t:"Gaming Deputy: Forged Resolve",url:"https://www.gamingdeputy.com/france/crimson-desert-forged-resolve-soluce-oongka/",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Fremde Werkstatt: Lösung mit Power-Regulator-Rätsel"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);
