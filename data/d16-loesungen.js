@@ -196,6 +196,63 @@ const LOESUNGEN_PFLICHT = [
 ];
 const LOESUNGEN_KUER = [
 /* LOES-KUER Anfang */
+{slug:"abalone", de:"Abalone", en:"Abalone / Giant Abalone", art:"item",
+ sec:"gatherables", ziel:null, ort:".gt-xref",
+ kurz:"Abalone ist eine Meeresfrucht und Kochzutat, die es als normale Abalone und als größere Riesen-Abalone gibt. Einen festen Fundort nennt keine geprüfte Quelle, belegt ist vor allem, wofür du sie brauchst.",
+ voraussetzung:["Keine Quest und kein Werkzeug in den Quellen genannt"],
+ schritte:[
+  {t:"Normale Abalone sammeln",d:"Laut Spieltext haftet sie fest an Felsen und frisst Seekohl und Algen. Einen festen Sammelort nennt keine geprüfte Quelle. th.gl führt sie zusätzlich als seltene Belohnung der Sammelmission Muscheln (1 bis 2 Stück, Chance 10 Prozent).",conf:"einzelquelle"},
+  {t:"Riesen-Abalone sammeln",d:"Laut Spieltext lebt sie an Riffen der Tiefsee und klammert sich so fest an den Fels, dass das Lösen mühsam ist. Ein genauer Fundort ist nicht erfasst.",conf:"einzelquelle"},
+  {t:"Abalonebrei kochen",d:"Normale Abalone ist die Hauptzutat für Abalonebrei. Die reichliche Stufe braucht im Kochtopf 8 Abalone, 12 Wasser, 4 Salz, 8 Getreide und 4 Pilze. Abalone steckt außerdem in der Blanchierten Meeresfrüchte-Platte und zählt bei Gegrillten Muscheln als Muschel."},
+  {t:"Luftis' Elixier brauen",d:"Riesen-Abalone brauchst du vor allem im Kessel: Luftis' Elixier aus 3 Riesen-Abalone, 3 Riesen-Turbanschnecken, 5 Meerespflanzen und 1 Leere Flasche erhöht 3 Minuten lang die maximale Atemluft. Für Luftis' minderes Elixier reichen 2 Riesen-Abalone, 2 Meerespflanzen und 1 Leere Flasche.",conf:"einzelquelle"}
+ ],
+ belohnung:["Kochzutat, keine Questbelohnung"],
+ hinweise:[
+  {kind:"info",txt:"Fundort nicht erfasst: th.gl beschreibt nur den Lebensraum, Fextralife hat keine Seite zu Abalone, der Fischführer von PowerPyx nennt sie nicht."},
+  {kind:"info",txt:"Eingepackte Erstklassige Abalonen sind eine Handelsware für den Seehandel (Insel-Handelsposten auf Insel Xamaca, laut th.gl 3.161 Camp-Mittel) und nicht dasselbe wie die Zutat."}
+ ],
+ suchbegriffe:["abalone","riesen-abalone","giant abalone","abalonebrei","abalone porridge","reichlicher abalonebrei","luftis elixier","meeresfrüchte","muschel","sammelmission muscheln"],
+ quellen:[{t:"th.gl: Riesen-Abalone",url:"https://crimsondesert.th.gl/de/db/materials/item_rare_collect_giantabalone",datum:"2026-11-14"},{t:"th.gl: Abalone",url:"https://crimsondesert.th.gl/db/materials/item_rare_collect_abalone",datum:"2026-11-14"},{t:"Materia Crafting: Abalone",url:"https://www.materia-crafting.com/crimson-desert/abalone",datum:"2026-11-14"}],
+ conf:"einzelquelle", seo:{seite:"crafting", h3:"Abalone: Fundort und Verwendung"}},
+{slug:"hologramm-projektor", de:"Hologramm-Projektor", en:"Hologram Projector", art:"item",
+ sec:"crafting", ziel:null, ort:".r2b1-news",
+ kurz:"Hologram Projector heißt im deutschen Spiel Hologramm-Projektor. Du bekommst ihn von Glücksritter Merrick und brauchst ihn für den Kuku-Kommunikationsrucksack 999K, der einen holografischen Händler herbeiruft.",
+ voraussetzung:["Kampf gegen Glücksritter Merrick bei der Festung im Roten Gebirge (Fraktionsquest Where Greed Takes Root, EN)","Zum Herstellen: Blaupause des Rucksacks und Zugang zur Kilnden-Werkstatt (ab Kapitel 4)"],
+ schritte:[
+  {t:"Merrick besiegen",d:"Glücksritter Merrick ist ein optionaler Boss in goldener Rüstung bei der Festung im Roten Gebirge. Der Hologramm-Projektor ist die feste Belohnung seiner Mission (100 Prozent)."},
+  {t:"Blaupause besorgen",d:"Die Blaupause: Kukuvogel-Kommunikationsrucksack verkauft Hexe Areciel für 999 Silber. Die Wiki-Daten nennen als zweiten Weg die Blaupause als Belohnung der Mission Sanktum der Erhöhung."},
+  {t:"Rucksack herstellen",d:"Für den Kuku-Kommunikationsrucksack 999K brauchst du 1 Kuku-Rucksack, 1 Elektrisches Bauteil, 1 Hologramm-Projektor, 1 Abbild der Sühne und 100 Zahnräder."},
+  {t:"Händler rufen",d:"Den Rucksack ausrüsten und auslösen. Es erscheint ein holografischer Händler, bei dem du unterwegs kaufen und verkaufen kannst."}
+ ],
+ belohnung:["Hologramm-Projektor x1","Damit: Kuku-Kommunikationsrucksack 999K mit tragbarem Händler"],
+ hinweise:[
+  {kind:"info",txt:"Abklingzeit offen: Die Wiki-Daten (questlog) nennen etwa 30 Minuten, Nerdschalk etwa 50 Minuten."},
+  {kind:"info",txt:"Station offen: Das Wiki und Nerdschalk nennen die Kilnden-Werkstatt bei Grimnir, gaming.tools den Kuku-Eisentopf."}
+ ],
+ abgrenzung:"Die Hologramme im Abyss, an denen Kliff Fähigkeiten durch Beobachten lernt, sind etwas anderes.",
+ suchbegriffe:["hologram projector","hologram projector deutsch","hologramm-projektor","hologramm projektor","merrick","glücksritter merrick","knight of fortune","kuku transmission 999k pack","kuku-kommunikationsrucksack 999k","holografischer händler","händler beschwören"],
+ quellen:[{t:"th.gl: Hologramm-Projektor",url:"https://crimsondesert.th.gl/de/db/materials/item_boss_reward_summonmerchant",datum:"2026-11-14"},{t:"gaming.tools: Hologram Projector",url:"https://crimsondesert.gaming.tools/items/boss_reward_summonmerchant",datum:"2026-11-14"},{t:"Nerdschalk: Kuku Transmission 999K Pack",url:"https://nerdschalk.com/crimson-desert-ultimate-guide-to-summoning-merchant-anywhere-with-kuku-transmission-999k-pack-location-and-crafting-explained/",datum:"2026-11-14"},{t:"GamerGuides: Kuku Transmission 999K Pack",url:"https://www.gamerguides.com/crimson-desert/database/kuku-items/pack/kuku-transmission-999k-pack",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"crafting", h3:"Hologram Projector auf Deutsch: Hologramm-Projektor"}},
+{slug:"eisresistenz", de:"Eisresistenz", en:"Ice Resistance", art:"thema",
+ sec:"food", ziel:null, ort:".fd-xref",
+ kurz:"Eisresistenz schützt vor Kälte: In kalten Gebieten verbraucht Kliff sonst mehr Ausdauer und erholt sich langsamer. Du bekommst sie über Essen, Getränke, Mäntel, Rüstung und die Abyss-Ausrüstung Frostschleier.",
+ voraussetzung:["Für Abyss-Ausrüstung in der Rüstung: Hexen freigeschaltet"],
+ schritte:[
+  {t:"Kälte erkennen",d:"Die Temperaturleiste an der Minikarte zeigt, wie kalt es ist. Je tiefer sie sinkt, desto stärker kostet die Kälte Ausdauer."},
+  {t:"Früh: Umhang des hernandischen Adels",d:"Im Beitragsladen der Burg Hernand für 19 Beitragspunkte kaufen, er gibt Eisresistenz Stufe 3. Die Punkte kommen aus Nebenquests in Hernand."},
+  {t:"Essen und Trinken",d:"Klare Suppe gibt Stufe 2, Fischbrei Stufe 4. Die Wirkdauer geben die Quellen unterschiedlich an. Bier und Tees, vor allem Honigtee, helfen ebenfalls."},
+  {t:"Rüstung: Frostfluch-Plattenpanzer",d:"Er liegt in der Nebelscherbenhöhle in den Rauchenden Landen von Demeniss nahe dem Berg des toten Feuers, hinter einem Wasserfall. Mit einem Stoßangriff durch den Wasserfall, den Felsen dahinter zerschlagen und die Truhe öffnen. Er gibt Stufe 7, lässt sich aber nicht aufwerten."},
+  {t:"Mehr Schutz: Frostschleier",d:"Die Abyss-Ausrüstung Frostschleier in Rüstungsteile setzen, stärkere Fassungen geben höhere Stufen."},
+  {t:"Endstufe: Kälteresistente Kuku-Rüstung",d:"Aus dem Frostfluch-Plattenpanzer lässt sich die Kälteresistente Kuku-Rüstung herstellen, laut den Wiki-Daten mit Eisresistenz Stufe 10.",conf:"einzelquelle"}
+ ],
+ belohnung:["Weniger Ausdauerverlust in der Kälte, ab hohen Stufen Schutz vor Einfrieren"],
+ hinweise:[
+  {kind:"info",txt:"Stufen laut Kamigame: Ab Stufe 5 macht dir normale Kälte nichts mehr aus, Stufe 10 schützt gegen Einfrieren, Stufe 15 macht dagegen immun. Stufe 4 reicht noch nicht."},
+  {kind:"warn",txt:"In extrem kalten Gebieten sinkt laut Kamigame auch die Gesundheit laufend. Lagerfeuer wärmen."}
+ ],
+ suchbegriffe:["eis resistenz","eisresistenz","eis-resistenz","ice resistance","kälteresistenz","kälteschutz","kälte","frost","frostfluch","frostschleier","frostward","umhang des hernandischen adels","fischbrei","klare suppe","honigtee","kälteresistente kuku-rüstung"],
+ quellen:[{t:"GameRant: Ice Resistance",url:"https://gamerant.com/crimson-desert-ice-protection-resistance-frost/",datum:"2026-11-14"},{t:"GameRant: Frostcursed Armor Set",url:"https://gamerant.com/crimson-desert-frostcursed-armor-set-locations/",datum:"2026-11-14"},{t:"Gfinity: Frostcursed Armor Set",url:"https://www.gfinityesports.com/article/how-to-get-the-frostcursed-armor-set-in-crimson-desert",datum:"2026-11-14"},{t:"Kamigame: Kälte und Eisresistenz",url:"https://kamigame.jp/crimsondesert/page/418385611070637859.html",datum:"2026-11-14"},{t:"ConsolePulse: Kuku-Rüstungen",url:"https://www.consolepulse.com/multiplatform/crimson-desert/guides/crimson-desert-kuku-armor-blueprints-patch-1-13",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"crafting", h3:"Eis-Resistenz: Ausrüstung und Essen gegen Kälte"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);
