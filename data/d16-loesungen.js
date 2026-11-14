@@ -332,6 +332,25 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["rüstung der leere","void armor","void set","void armor set","knight of void","ritter der leere","plattenrüstung der leere","plattenhelm der leere","plattenumhang der leere","plattenhandschuhe der leere","plattenstiefel der leere","langschwert der leere","buried corridor","forgotten city","room of brass shackles"],
  quellen:[{t:"Game8: Void Armor Set",url:"https://game8.co/games/Crimson-Desert/archives/637024",datum:"2026-11-14"},{t:"GameRant: Knight of Void Armor Set",url:"https://gamerant.com/crimson-desert-knight-void-armor-set-locations/",datum:"2026-11-14"},{t:"KeenGamer: Knight of the Void Armor Set",url:"https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-knight-of-the-void-armor-set/",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"ruestungen", h3:"Rüstung der Leere (Void Armor): alle Fundorte"}},
+{slug:"stab-und-flinkes-stossen", de:"Stab und Flinkes Stoßen", en:"Stab / Swift Stab", art:"skill",
+ sec:"skills", ziel:"sk-kliff-stab",
+ kurz:"Gesucht wird meist Kliffs Stoß-Fähigkeit Stab (EN) aus dem Ausdauerbaum, die du von Anfang an hast. Ihr bekanntester Ausbau ist Flinkes Stoßen: ein zweiter Treffer direkt nach einem gelungenen aufgeladenen Stoß.",
+ voraussetzung:["Figur Kliff, Ausdauerbaum","Abyss-Artefakte für die Ausbaustufen"],
+ schritte:[
+  {t:"Stab einsetzen",d:"Auf PS5 R1 und Dreieck: Kliff holt aus und stößt schnell nach vorn, der Treffer verursacht Blutung. Kosten 40 Ausdauer.",conf:"einzelquelle"},
+  {t:"Stab ausbauen",d:"Stab hat drei Stufen. Ab Stufe 2 lassen sich Flinkes Stoßen und Aufspießender Stoß lernen, ab Stufe 3 der Sprungstoß in der Luft."},
+  {t:"Flinkes Stoßen lernen, Weg 1",d:"Stab auf Stufe 2 bringen und Flinkes Stoßen mit einem Abyss-Artefakt freischalten."},
+  {t:"Flinkes Stoßen lernen, Weg 2",d:"Kostenlos durch Beobachten: im Kampf gegen den Riedteufel am Ende von Kapitel 3 (Quest Tanz mit dem Teufel) seinen schnellen Stoß ansehen, bis das Spiel die Fähigkeit als gelernt meldet."},
+  {t:"Flinkes Stoßen auslösen",d:"Trifft der aufgeladene Stoß, sofort die Angriffstaste nachlegen (PS5: R1). Kliff setzt einen zweiten Angriff nach, das kostet 50 Ausdauer."}
+ ],
+ belohnung:["Keine Gegenstände: neue Angriffe im Ausdauerbaum"],
+ hinweise:[
+  {kind:"info",txt:"Der deutsche Name des Grundskills ist nicht sicher belegt: GamePro schreibt Stoßen, die deutsche Datenbank crimsondesert.gg Stechen. Die Ableger heißen Flinkes Stoßen, Aufspießender Stoß, Sprungstoß und Phantom: Stoß."},
+  {kind:"info",txt:"Den Sprungstoß haben seit Patch 1.07.00 auch Damiane und Oongka."}
+ ],
+ suchbegriffe:["stoßen","stoßen skill","stechen","stab","swift stab","flinkes stoßen","aufspießender stoß","sprungstoß","riedteufel","reed devil","beobachten","watch and learn"],
+ quellen:[{t:"Game8: Swift Stab",url:"https://game8.co/games/Crimson-Desert/archives/587289",datum:"2026-11-14"},{t:"Fextralife: Swift Stab",url:"https://crimsondesertgame.wiki.fextralife.com/Swift+Stab",datum:"2026-11-14"},{t:"Fextralife: Stab",url:"https://crimsondesertgame.wiki.fextralife.com/Stab",datum:"2026-11-14"},{t:"PC Gamer: Observe-Fähigkeiten",url:"https://www.pcgamer.com/games/action/crimson-desert-observe-this-skill-in-action-to-learn-it",datum:"2026-11-14"},{t:"GamePro: Kliff-Build",url:"https://www.gamepro.de/artikel/crimson-desert-kliff-build,3450030.html",datum:"2026-11-14"},{t:"crimsondesert.gg: Kliff-Skillbaum",url:"https://crimsondesert.gg/de/skill-tree/kliff",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"skills", h3:"Stoßen-Skill: Stab und Flinkes Stoßen lernen"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);
