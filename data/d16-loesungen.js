@@ -371,6 +371,25 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["hai","hai zähmen","haie zähmen","shark","shark mount","tame shark","unterwasser reittier","kraftfaust","force palm","schwertwal","orca","goldhai","hammerhai"],
  quellen:[{t:"Game8: Hai zähmen",url:"https://game8.co/games/Crimson-Desert/archives/636416",datum:"2026-11-14"},{t:"Game8: Unterwasser-Reittiere",url:"https://game8.co/games/Crimson-Desert/archives/635858",datum:"2026-11-14"},{t:"Game8: DLC-Fraktionsquests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Power Up Gaming: Shark Mount",url:"https://powerupgaming.co.uk/2026/10/31/how-to-tame-shark-mount-in-crimson-desert-charting-the-unknown/",datum:"2026-11-14"},{t:"KeenGamer: Golden Shark",url:"https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-legendary-golden-shark-mount/",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"mounts", h3:"Hai zähmen: Schritt für Schritt"}},
+{slug:"unbekanntes-tier", de:"Unbekanntes Tier", en:"Mysterious Animals", art:"thema",
+ sec:"pets", ziel:null, ort:"#legendary-pet-guide",
+ kurz:"Unbekanntes Tier (englisch Mysterious Animals) ist eine Kategorie der Herausforderungen. Belegt sind zwei Aufgaben: die Hyazinthara und den Uhrwerk-Adler zähmen.",
+ voraussetzung:["Totempfahl der Bindung (Belohnung der Mission Das Tor entriegeln aus der Reihe Zitternde Wälder)","Futter: Wüstenmelonen für die Hyazinthara, Quecksilber für den Uhrwerk-Adler"],
+ schritte:[
+  {t:"Hyazinthara: Ort",d:"Am Außenpostenlager am Hof des Riesen über dem Rotbaumwald nahe dem Roten Fluss. Das Lager vorher befreien: PC Gamer hält das für hilfreich, FinalBoss und Gfinity für nötig, damit der Vogel erscheint."},
+  {t:"Hyazinthara: zähmen",d:"Den Totempfahl der Bindung an der Klippe östlich des Lagers aufstellen und Wüstenmelonen einlegen, jede bringt 15 Vertrauen. 10 bis 15 Melonen mitnehmen, weil kleine Vögel mitfressen. Bei 100 Vertrauen den Vogel aufnehmen (EN Take In)."},
+  {t:"Uhrwerk-Adler: Ort und Zeit",d:"An den Falkenstein-Ruinen im Osten von Delesyia, auf der Karte über dem A von Delesyia. Der Zahnrad-Mechanismus arbeitet nur kurz in der Morgendämmerung, laut games.gg etwa von 4:45 bis 5:00 Uhr Spielzeit. Die Uhrzeiten schwanken je nach Quelle, also lieber früher da sein."},
+  {t:"Uhrwerk-Adler: zähmen",d:"Den Totempfahl aufstellen und Quecksilber als Futter einlegen, laut games.gg und Gfinity mindestens 20 Stück. Den ausführlichen Ablauf zeigt die Karte zum Iron Eagle direkt darüber."}
+ ],
+ belohnung:["Je gezähmtem Tier ein Haustierheim mit 10 zusätzlichen Haustierplätzen (Wiki-Daten aus questlog)"],
+ hinweise:[
+  {kind:"info",txt:"Gesucht wird oft Die enthüllte Wahrheit. Ein VULKK-Guide ordnet Unbekanntes Tier der Gruppe The Truth Unveiled zu. Die Seite war für uns nicht abrufbar, und ob die Gruppe im deutschen Spiel Die enthüllte Wahrheit heißt, konnten wir nicht aus dem Spieltext belegen."},{kind:"info",txt:"Laut FinalBoss zuerst die Hyazinthara zähmen, weil sie nach dem Uhrwerk-Adler womöglich nicht mehr erscheint."},
+  {kind:"info",txt:"Derselbe VULKK-Guide nennt seit Patch 2.04.00 drei weitere Aufgaben dieser Kategorie: Goldener Schmetterling, Goldener Prachtkäfer und Goldener Riesenkäfer. Ohne lesbare Quelle führen wir sie hier ohne Fundorte."},
+  {kind:"info",txt:"Die Hyazinthara erscheint zufällig, das Warten kann dauern."}
+ ],
+ suchbegriffe:["die enthüllte wahrheit","the truth unveiled","unbekanntes tier","mysterious animals","herausforderung","challenge","hyazinthara","hyacinth macaw","uhrwerk-adler","iron eagle","clockwork eagle","haustierheim","totempfahl der bindung","wüstenmelone","quecksilber"],
+ quellen:[{t:"PC Gamer: Hyacinth Macaw",url:"https://www.pcgamer.com/games/action/crimson-desert-hyacinth-macaw-location-tame/",datum:"2026-11-14"},{t:"FinalBoss: Hyacinth Macaw",url:"https://finalboss.io/crimson-desert-how-to-tame-the-hyacinth-macaw",datum:"2026-11-14"},{t:"Gfinity: Hyacinth Macaw",url:"https://www.gfinityesports.com/article/how-to-get-the-hyacinth-macaw-pet-in-crimson-desert",datum:"2026-11-14"},{t:"Gfinity: Iron Eagle",url:"https://www.gfinityesports.com/article/how-to-find-and-tame-the-legendary-iron-eagle-in-crimson-desert",datum:"2026-11-14"},{t:"games.gg: Eisenadler",url:"https://games.gg/de/crimson-desert/guides/crimson-desert-eisenadler-erhalten/",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"pets", h3:"Unbekanntes Tier (The Truth Unveiled): Lösung"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);

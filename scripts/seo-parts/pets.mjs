@@ -30,6 +30,7 @@
 import fs from "fs";
 import { fileURLToPath } from "url";
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 
 export const SLUG = "pets";
 export const NAV_LABEL = "Haustiere";
@@ -217,6 +218,7 @@ ${petTable(g, ids, ctx)}`).join("\n");
 <a class="cta" href="${DEEPLINK}">Alle Haustiere interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App filterst du die Pets nach Katzen, Hunden und Kleintieren und durchsuchst sie nach Name und Lieblingsessen.</p>
 <p class="note">Zwei Pets wachsen zu Reittieren heran, nämlich Baby Wyvern und Kuku Bird Chick: Die fertigen Reittiere stehen bei den <a href="/mounts">Reittieren</a>. Wie Hexen Sigil-Amulette herstellen, steht unter <a href="/hexen">Hexen &amp; Fusion</a>. Katzen und Hunde mit mehreren Fellfarben stehen als eigene Zeilen da, weil Porträt und Lieblingsessen je Farbe abweichen können.</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${guides}
 ${sections}`;
 
