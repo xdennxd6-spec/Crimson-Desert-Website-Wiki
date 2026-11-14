@@ -174,6 +174,9 @@ function _insVolltext(i){
 }
 
 /* ---------- Lageskizze ---------- */
+/* 14.11.2026: Skizze vorerst abgeschaltet (Lage ungenau, irrefuehrend). Grosse Skizze in der Uebersicht und Mini-Skizze im
+   Steckbrief erscheinen nur bei INS_SKIZZE_AN=true. Wieder einschalten, sobald die richtige Karte steht. */
+var INS_SKIZZE_AN=false;
 /* Platzierung der Beschriftungen: je Punkt Kandidaten (rechts, links, oben, unten, vier Diagonalen; erst am Punkt, dann mit
    Abstand und kurzer Fuehrungslinie). Textbreite geschaetzt (Zeichen x Schrift x 0,64). Der erste Kandidat ohne Ueberschneidung
    mit schon gesetzten Beschriftungen, Punkten, Kompass und Rand gewinnt; sonst der mit der kleinsten Ueberdeckung.
@@ -328,9 +331,9 @@ function _insKopfUeb(){
     stats:stats,links:[['dlc','Charting the Unknown'],['dlc-ausruestung','DLC-Ausrüstung'],['dlc-quests','DLC-Quests'],['map','Karte']],
     after:(O.dlc.length?'<div class="ins-kz"><span class="ins-kz-l">DLC-Inseln besucht</span><span class="ins-kz-p">'+cdProg(done,O.dlc.length,done+' von '+O.dlc.length+' Inseln besucht')+'</span>'
         +'<span class="ins-kz-h">Abhaken in der Ansicht jeder Insel, gleiche Liste wie auf der DLC-Seite.</span></div>':'')
-      +drInfo({title:'So liest du die Seite',lead:'Belege, „unbestätigt“ und Lageskizze',id:'ins-info',
+      +drInfo({title:'So liest du die Seite',lead:INS_SKIZZE_AN?'Belege, „unbestätigt“ und Lageskizze':'Belege und „unbestätigt“',id:'ins-info',
         h:'<p>Jede Angabe nennt ihren Beleg im aufgeklappten Teil einer Karte. Angaben mit dem Vermerk „unbestätigt“ und einer farbigen Kante links sind nicht doppelt belegt.</p>'
-          +'<p>Die Lageskizze zeigt die Inseln nach ihren Spielkoordinaten, Norden oben. Sie ist keine Karte.</p>'
+          +(INS_SKIZZE_AN?'<p>Die Lageskizze zeigt die Inseln nach ihren Spielkoordinaten, Norden oben. Sie ist keine Karte.</p>':'')
           +(meta?'<p class="cd-src"><span class="cd-src-l">Datenstand</span>'+cdEsc(meta)+'</p>':'')})});
 }
 function _insUebersicht(unbekannt){
@@ -350,7 +353,7 @@ function _insUebersicht(unbekannt){
     +(unbekannt?cdNote('Diese Insel gibt es im Wiki nicht. Hier sind alle Inseln.',{kind:'warn'}):'')
     +'<div class="ins-bar">'+cdPills(fp,{name:'ins-f',label:'Inseln filtern',cls:'ins-pf'})
     +'<div class="ins-sort"><span class="ins-sort-l" aria-hidden="true">Sortierung</span>'+cdPills([{v:'empf',t:'Empfohlen',on:_insS==='empf'},{v:'az',t:'A bis Z',on:_insS==='az'}],{name:'ins-sort',label:'Sortierung',cls:'ins-ps'})+'</div></div>';
-  if(mit.length){
+  if(INS_SKIZZE_AN&&mit.length){
     var weit=typeof matchMedia==='function'?matchMedia('(min-width:700px)').matches:true;
     h+='<div class="cd-folds ins-lage-w">'+cdFold({title:'Lage der Inseln',lead:mit.length+' von '+L.length+' Inseln mit Spielkoordinaten. Norden oben, keine Karte.',
       icon:'◒',tone:'ice',id:'ins-lage',cls:'ins-lage',open:weit,
@@ -411,7 +414,7 @@ function _insSteckbrief(i,dlc){
     });
   });
   if(_insHatLage(i)){R.push(['Spielkoordinaten','x '+_insZahl(i.lage.x)+', z '+_insZahl(i.lage.z)]);}
-  var mini=_insHatLage(i)?_insSkizze(_insArr(INSELN),{mini:true,hot:i.slug}):'';
+  var mini=INS_SKIZZE_AN&&_insHatLage(i)?_insSkizze(_insArr(INSELN),{mini:true,hot:i.slug}):'';
   /* nur "Gruppe" belegt: die steht schon im Kicker des Kopfs, ein Kasten mit einer Zeile waere reine Leerflaeche */
   if(R.length<2&&!mini)return '';
   return '<section class="ins-sb cd-spot'+(mini?' has-mini':'')+'" data-s="'+cdEsc(_insJ(s).toLowerCase())+'"><div class="ins-sb-f"><h4 class="ins-h">Steckbrief</h4>'+cdFacts(R,{wide:true,cls:'ins-facts'})+'</div>'

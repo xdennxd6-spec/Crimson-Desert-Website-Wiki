@@ -27,7 +27,7 @@ const CORE_ASSETS = [
   './data/d14-beschaffung.js?v=044af75735',
   './data/d14-reit.js?v=6b0ec13e59',
   './data/d15-inseln.js?v=a4a26ee859',
-  './data/d15-inseln-app.js?v=8341ff9d24',
+  './data/d15-inseln-app.js?v=7e8bd04f7b',
   './vendor/gsap-3.15.0.min.js',
   './vendor/ScrollTrigger-3.15.0.min.js',
   './vendor/SplitText-3.15.0.min.js',

@@ -12261,7 +12261,7 @@ function _inSkript(setze){return new Promise(res=>{const s=document.createElemen
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
   if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=8341ff9d24';})))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=7e8bd04f7b';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }
