@@ -108,6 +108,28 @@ const LOESUNGEN_PFLICHT = [
  suchbegriffe:["fateful encounter","schicksalhafte begegnung lösung","marnis anwesen","marni's manor","kerzenrätsel","kerzen rätsel eisentor","candle puzzle","locked iron gate","eisentor","gelbes buch","bücherregal","schiefer bilderrahmen","crooked picture frame","geheimraum","falscher boden","marnis geheimes labor","geschmiedete entschlossenheit","forged resolve","oongka","verstärkte handkanone"],
  quellen:[{t:"Game8: Forged Resolve",url:"https://game8.co/games/Crimson-Desert/archives/636231",datum:"2026-11-14"},{t:"Xboxplay: Locked Iron Gate",url:"https://xboxplay.games/crimson-desert/how-to-find-a-way-past-the-locked-iron-gate-in-crimson-desert-77129",datum:"2026-11-14"},{t:"Whisper of the House: Forged Resolve",url:"https://www.whisperofthehouse.com/crimson-desert/forged-resolve",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Schicksalhafte Begegnung: Lösung (Marnis Anwesen)"}},
+{slug:"neuer-elan", de:"Neuer Elan", en:"Renewed Vitality", art:"quest",
+ sec:"dlc-quests", ziel:"dlc-q-renewed-vitality",
+ kurz:"Zweiteilige DLC-Fraktionsquest der Graumähnen. Du liest in Hernand den Aushang zum Scheitheim-Sägewerk, pachtest es und bringst den Betrieb auf Bekanntheit Lv. 3.",
+ voraussetzung:["Graumähnen-Fraktionsquest Ein Gerücht im Handelsposten der Blattgold-Händlergilde abgeschlossen (vierter Teil von Vereinter Wille)","Für die Pacht genug Camp-Mittel (laut Xboxplay 15.000)"],
+ schritte:[
+  {t:"Aushang lesen",d:"Geh in Hernand zur Anschlagtafel und lies den Aushang über das Scheitheim-Sägewerk. Damit ist der erste Teil, Die stillstehenden Sägeblätter, erledigt."},
+  {t:"Sägewerk pachten",d:"Öffne die Weltkarte, wähle im Reiter Einrichtungen das Scheitheim-Sägewerk und schließ den Pachtvertrag ab. Damit beginnt Teil 2, Wieder rotierende Sägeblätter."},
+  {t:"Betrieb einrichten",d:"Geh zum Sägewerk und starte die Verwaltung. Weise Gefährten zu, stell die Arbeitsstationen auf und leg Waren und Preise fest."},
+  {t:"Laden öffnen",d:"Öffne den Laden. Kunden kommen, deine Gefährten nehmen Bestellungen auf und liefern."},
+  {t:"Bekanntheit steigern",d:"Für Lv. 2: Wood Synergy 1 (EN) aktivieren, das Buch The Courtesy of Waiting (EN) lesen, einen Standing Table (EN) bauen und drei Kunden zufriedenstellen. Für Lv. 3: The Nature of Planks (EN) lesen, Plank Workbench (EN) und Plank Box (EN) bauen und zehn Waren aus Planken verkaufen.",conf:"einzelquelle"},
+  {t:"Abschluss",d:"Mit Bekanntheit Lv. 3 ist Wieder rotierende Sägeblätter erledigt. Die aktuellen Aufgaben zeigt jederzeit das Verwaltungsmenü."}
+ ],
+ belohnung:["Die Pacht des Scheitheim-Sägewerks","Einrichtungsgegenstände, zum Beispiel Rustikale Werkbank, Holzlager, Hochofen, Webstuhl und Amboss (Spieldaten)","Laut Game8 schaltet die Quest die übrigen pachtbaren Einrichtungen in Pywel frei","Nur laut Xboxplay: ein Handwerksbuch, Lederhandschuhe des Architekten und passives Einkommen"],
+ hinweise:[
+  {kind:"info",txt:"Neuer Elan ist eine einzige Reihe mit zwei Teilen (Die stillstehenden Sägeblätter, Wieder rotierende Sägeblätter), auch wenn das Wiki sie an mehreren Stellen erwähnt."},
+  {kind:"warn",txt:"Stehen Arbeitsstationen und Lager zu dicht, bleiben Arbeiter hängen. Lass Platz dazwischen (Xboxplay)."},
+  {kind:"info",txt:"Camp-Mittel sammelst du am schnellsten über Entsendungen (Xboxplay). Zu hohe Preise verärgern Kunden, zu niedrige drücken den Gewinn; Bekanntheit steigt über Verkäufe und die Aufgaben im Verwaltungsmenü (Game8)."}
+ ],
+ suchbegriffe:["renewed vitality","neuer elan quest","die stillstehenden sägeblätter","wieder rotierende sägeblätter","the stilled saw","the saw turns again","scheitheim-sägewerk","scheitheim sägewerk","timberham sawmill","sägewerk pachten","einrichtung pachten","bekanntheit","popularität","popularity","lederhandschuhe des architekten","architect's leather gloves"],
+ quellen:[{t:"Game8: Einrichtungen verwalten",url:"https://game8.co/games/Crimson-Desert/archives/636169",datum:"2026-11-14"},{t:"Game8: alle DLC-Quests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Xboxplay: The Saw Turns Again",url:"https://xboxplay.games/crimson-desert/how-to-complete-the-saw-turns-again-quest-in-crimson-desert-77231",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Wieder rotierende Sägeblätter",url:"https://crimsondesert.gaming.tools/de/faction-quests/mission_graymane_management_timberhamsawmill_operation",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Neuer Elan: Lösung (Scheitheim-Sägewerk)"},
+ links:[{sec:"dlc",ziel:"dlc-b-leben"}]},
 /* LOES-PFLICHT Ende */
 ];
 const LOESUNGEN_KUER = [
