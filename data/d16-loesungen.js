@@ -312,6 +312,26 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["fremde werkstatt","unfamiliar workshop","power regulator","power regulator rätsel","operate the power regulator","tastenfolge","scholastein","scholastein-institut","dekan grundir","vargus","geschmiedete entschlossenheit","forged resolve","oongka"],
  quellen:[{t:"GameRant: Power Regulator",url:"https://gamerant.com/crimson-desert-operate-power-regulator-restore-function-puzzle/",datum:"2026-11-14"},{t:"Game8: DLC-Fraktionsquests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Whisper of the House: Forged Resolve",url:"https://www.whisperofthehouse.com/crimson-desert/forged-resolve",datum:"2026-11-14"},{t:"Gaming Deputy: Régulateur de puissance",url:"https://www.gamingdeputy.com/france/crimson-desert-regulateur-de-puissance-2/",datum:"2026-11-14"},{t:"Gaming Deputy: Forged Resolve",url:"https://www.gamingdeputy.com/france/crimson-desert-forged-resolve-soluce-oongka/",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Fremde Werkstatt: Lösung mit Power-Regulator-Rätsel"}},
+{slug:"ruestung-der-leere", de:"Rüstung der Leere", en:"Void Armor Set (Knight of Void)", art:"item",
+ sec:"armorsets", ziel:"[data-s^=\"void-set (knight of void)\"]",
+ kurz:"So nennen Guides die fünf Plattenteile der Leere aus dem DLC Charting the Unknown, dazu kommt das Langschwert der Leere. Rüstung und Schwert gibt es beim Boss Ritter der Leere, die übrigen vier Teile liegen in versteckten Anlagen mit Fallen und Hebeln.",
+ voraussetzung:["DLC Charting the Unknown","Für Helm und Umhang empfohlen: Kliffs Reihe Jenseits der Ränder spielen, dann ist der Sandsturm leichter zu durchqueren"],
+ schritte:[
+  {t:"Plattenrüstung und Langschwert (Buried Corridor, EN)",d:"An einer großen Klippe am Meer in der Trivana-Meerenge, auf der Karte etwa über dem R im Schriftzug Crimson Desert. Der Eingang ist eine Illusion im Fels, du gehst einfach hindurch. Den Gang an den Fallen vorbei, am Ende links den Hebel ziehen und den Ritter der Leere besiegen. Er lässt das Langschwert der Leere fallen, die Truhe mit der Plattenrüstung steht in einem Nebenraum des Bosssaals."},
+  {t:"Plattenhelm (Forgotten City, EN)",d:"Im Ödland des Ahnen, mitten im Sandsturmgebiet. In der runden Ruine auf die losen Steinplatten in der Mitte treten, der Boden bricht ein. Unten an Stolperdrähten und Feuerfallen vorbei bis zum Gittertor, die zwei Laternen davor anzünden und im nächsten Raum die Truhe öffnen."},
+  {t:"Plattenumhang (Ausgetrockneter Wasserweg)",d:"Nördlich von Urd'avah am nordöstlichen Rand des Sandsturms. Der quadratische Höhleneingang in der Westwand ist offen sichtbar. Über die Stachelgrube gleiten oder die Seilrutsche nehmen, rechts halten, an der Feuerfalle vorbei und am Ende links den Hebel ziehen. Dahinter öffnet sich der Raum mit der Truhe."},
+  {t:"Plattenhandschuhe (Room of Brass Shackles, EN)",d:"Vom Abyss-Nexus Händlerreich nach Osten zu den Klippen nördlich des Schriftzugs Crimson Desert. Bei den Blutgestein-Vorkommen durch den Fels gehen, der wie ein Höhleneingang ohne Öffnung aussieht. Innen den Hebel ziehen, übers Wasser gleiten und Stolperdrähten ausweichen. Von den drei Hebeltüren am Ende die rechte öffnen, die anderen führen in Fallenräume."},
+  {t:"Plattenstiefel (Die Geheimkammer des Grabräubers)",d:"Westlich von Händlerreich an der Küste der Trivana-Meerenge durch den auffälligen Fels in der Westklippe gehen. Die Treppe hinunter und durch den Fallenraum, dann an den elektrischen Eisenkugeln vorbei (Game8 rät, dicht an der Wand zu bleiben). Danach die linke Tür nehmen und den Hebel ziehen, die Truhe steht im geöffneten Raum."}
+ ],
+ belohnung:["Plattenhelm, Plattenrüstung, Plattenhandschuhe, Plattenstiefel und Plattenumhang der Leere","Langschwert der Leere (Zweihänder mit der Abyss-Ausrüstung Urteil des Ruins)"],
+ hinweise:[
+  {kind:"warn",txt:"Mehrere Eingänge sind Illusionen im Fels. Wo eine Felswand verdächtig aussieht, einfach hineinlaufen."},
+  {kind:"info",txt:"Einen Set-Bonus nennt keine Quelle. Die Werte der Einzelteile stehen bei den Rüstungen."},
+  {kind:"info",txt:"Game8 beschreibt die Truhe der Plattenrüstung in einem vergitterten Nebenraum, den eine von zwei Laternen am Eingang öffnet. GameRant und KeenGamer nennen einen kleinen Raum nördlich der Saalmitte, vermutlich derselbe."}
+ ],
+ suchbegriffe:["rüstung der leere","void armor","void set","void armor set","knight of void","ritter der leere","plattenrüstung der leere","plattenhelm der leere","plattenumhang der leere","plattenhandschuhe der leere","plattenstiefel der leere","langschwert der leere","buried corridor","forgotten city","room of brass shackles"],
+ quellen:[{t:"Game8: Void Armor Set",url:"https://game8.co/games/Crimson-Desert/archives/637024",datum:"2026-11-14"},{t:"GameRant: Knight of Void Armor Set",url:"https://gamerant.com/crimson-desert-knight-void-armor-set-locations/",datum:"2026-11-14"},{t:"KeenGamer: Knight of the Void Armor Set",url:"https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-knight-of-the-void-armor-set/",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"ruestungen", h3:"Rüstung der Leere (Void Armor): alle Fundorte"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);

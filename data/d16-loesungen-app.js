@@ -91,7 +91,8 @@ function _loesKoerper(el){
   if(el.classList&&el.classList.contains('cd-fold')){
     return el.querySelector(':scope>.cd-fold-body')||el;
   }
-  return el.querySelector('.item-more-body')||el;
+  /* Set-Karte (armorsets, details.set-more) und Reittierkarte (mounts, details.mount-notes): Lösung in deren zugeklappten Detailteil */
+  return el.querySelector('.item-more-body')||el.querySelector('.set-more-body,.mount-notes-body')||el;
 }
 function _loesLink(e){ return cdGoLink(e.sec,'loes-'+e.slug,e.de,'loes-go'); }
 /* Zeile oben im Karteninhalt: alle Lösungen dieser Karte (eigene und verlinkte), sortiert wie LOESUNGEN */
