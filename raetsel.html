@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=a10ba78bb1">
+<link rel="stylesheet" href="app.css?v=bd5c485551">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -2185,21 +2185,25 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=74338c1d13" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=4c2a958adb" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
-<script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
-<script src="data/d04-armor-imgs.js?v=b7a3920ec5" fetchpriority="low"></script>
-<script src="data/d05-fac-data.js?v=71c80e97f8" fetchpriority="low"></script>
-<script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
-<script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
-<script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=11a4fac7f8" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=4f661ed9c1" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=696c5033f8" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=9f8afe1668" fetchpriority="low"></script>
+<script src="data/d03-main-quests.js?v=2cd8f88b03" fetchpriority="low"></script>
+<script src="data/d04-armor-imgs.js?v=c4368f3538" fetchpriority="low"></script>
+<script src="data/d05-fac-data.js?v=be4d594a22" fetchpriority="low"></script>
+<script src="data/d06-items.js?v=383573514a" fetchpriority="low"></script>
+<script src="data/d07-patches.js?v=7f40a010ac" fetchpriority="low"></script>
+<script src="data/d08-ruins-data.js?v=1584c23442" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=b7d24fb7d6" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js?v=e59e403f8b" fetchpriority="low"></script>
-<script src="data/d12-dlc.js?v=3d1cdd67b3" fetchpriority="low"></script>
-<script src="data/d13-romanze.js?v=30a2b89fce" fetchpriority="low"></script>
-<script src="data/d14-reit.js?v=6b0ec13e59" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=333e3d7e70" fetchpriority="low"></script>
+<script src="data/d12-dlc.js?v=13a1a22440" fetchpriority="low"></script>
+<script src="data/d13-romanze.js?v=ac00eaa452" fetchpriority="low"></script>
+<script src="data/d14-reit.js?v=ca231c4d49" fetchpriority="low"></script>
+<!-- LOES Anfang: Lösungsabschnitte (Lauf quest-loesungen 14.11.2026), Daten + Einhängen in vorhandene Karten -->
+<script src="data/d16-loesungen.js?v=f6590470be" fetchpriority="low"></script>
+<script src="data/d16-loesungen-app.js?v=1b6242929c" fetchpriority="low"></script>
+<!-- LOES Ende -->
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -12251,7 +12255,7 @@ function _inSkript(setze){return new Promise(res=>{const s=document.createElemen
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
   if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=0bd3a9d4ef';})))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=e5d65402a7';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }

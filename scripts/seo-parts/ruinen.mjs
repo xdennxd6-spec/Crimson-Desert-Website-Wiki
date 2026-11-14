@@ -37,6 +37,7 @@ import fs from "fs";
 import vm from "vm";
 import { fileURLToPath } from "url";
 import { deN, deT } from "./_de.mjs";
+import { loesungVerweis } from "./_loesungen.mjs";
 
 export const SLUG = "ruinen";
 export const NAV_LABEL = "Uralte Ruinen";
@@ -178,6 +179,7 @@ export function build(ctx) {
 <p class="note"><b>Alle ${z.anzahl} Abyss-Grenzstein-Rätsel über ${z.regionen} Regionen:</b> ${verteilung}. Regionszuordnung nach PowerPyx (deckt sich mit dem In-Game-Regionszähler); einzelne grenznahe Orte ordnen andere Guides abweichend ein. „Mysteriöse Energie“ steht in den Rätselbeschreibungen für die Kartenmarkierung „Mysterious Energy“ (game8: Orte, die ein Abyss Nexus oder ein Abyss Cresset sein können); der deutsche Spieltext dazu ist nicht belegt.</p>
 <p class="note">Das Badge „geprüft · exakte Sequenz quellenabhängig“ markiert Rätsel, bei denen Guides Details wie die genaue Zugnummerierung unterschiedlich angeben. Die Begründung steht aufklappbar auf der Karte. Alle Lösungen wurden gegen mehrere unabhängige Text- und Bild-Guides abgeglichen (keine Videos).</p>
 <p class="note">Die versteckten Cressets der Oberwelt findest du unter <a href="/geheimnisse">Geheimnisse &amp; Lore</a>, Strongboxes und Abyss-Rätsel auf der Seite <a href="/raetsel">Rätsel</a>. Für die Trophäe „Puzzle Solver“ müssen alle Rätsel der Antiken Ruinen gelöst werden, siehe <a href="/trophaeen">Trophäen &amp; Errungenschaften</a>.</p>
+${/* LOES: Verweis auf die Loesung zum Uralten Tempel (DLC), muss vor der ersten h2 stehen */ loesungVerweis(ctx.helpers, "uralter-tempel", "Gesucht ist der Uralte Tempel aus dem DLC Charting the Unknown? Das ist eine Unterwasser-Mission, keine der Uralten Ruinen dieser Seite.")}
 ${sections}`;
 
   const alle = rg.flatMap((r) => r.items.map((p) => deN(p.name)));
