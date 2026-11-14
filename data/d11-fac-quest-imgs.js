@@ -2,7 +2,7 @@
 // Schluessel "Fraktion|Quest" exakt wie f.name und q.q in FAC_DATA (data/d05-fac-data.js),
 // Wert: [[Dateiname unter cd_assets/factions/, Bildunterschrift], ...] in Spielreihenfolge.
 // Bilder: ConsolePulse-Guides, Nutzung vom Betreiber erlaubt; Arbeitsstand in G:\Claude\Crimson-Desert-Wiki\fraktion-bilder\.
-// 38 Quests, 62 Bilder (12.11.2026 auf Einzelquests umgehaengt).
+// 66 Quests, 144 Bilder (14.11.2026: Sanktums, Hexen, Glocken ergaenzt).
 const FAC_QUEST_IMGS = {
  "House Roberts|First Trial of Trust": [
   [
@@ -244,6 +244,22 @@ const FAC_QUEST_IMGS = {
   [
    "bounty-jeffrey-detail-hero.webp",
    "Steckbrief von Jeffrey."
+  ],
+  [
+   "bounty-jeffrey-notiz.webp",
+   "Bei Pedro die Kopfgeldausschreibung hinter ihm nehmen und lesen, das markiert Jeffrey in Hernand."
+  ],
+  [
+   "bounty-jeffrey-karte.webp",
+   "Karte: Jeffrey ist tagsüber westlich des Hügelanwesens in Hernand unterwegs."
+  ],
+  [
+   "bounty-jeffrey-fesseln.webp",
+   "Sobald Fesseln erscheint, zuhauen aufhören und ihn fesseln."
+  ],
+  [
+   "bounty-jeffrey-abliefern.webp",
+   "Gefesselten Jeffrey tragen oder aufs Pferd laden und bei der Hernand Wache abgeben."
   ]
  ],
  "House Celeste|Queen's Nest": [
@@ -327,65 +343,374 @@ const FAC_QUEST_IMGS = {
    "goldleaf-close-threat-grimzle-captured.webp",
    "Grimzle wird gefesselt zu Shakatu gebracht."
   ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Hernand": [
+  [
+   "glockenlaeuten-hernand-karte.webp",
+   "Karte: Die erste Glocke steht im Uhrturm von Hernand westlich der Taverne."
+  ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Scholastone": [
+  [
+   "glockenlaeuten-scholastone-karte.webp",
+   "Karte: Die Glocke hängt in einer kleinen Pagode im oberen Gartenhof."
+  ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Calphade": [
+  [
+   "glockenlaeuten-calphade-karte.webp",
+   "Karte: Den Kirchturm in Thalwynd westlich von Burg Calphade besteigen."
+  ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Demeniss": [
+  [
+   "glockenlaeuten-demeniss-karte.webp",
+   "Karte: Erst von der roten Fahnenstange an der Südostseite des Turms hängen."
+  ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Delesyia": [
+  [
+   "glockenlaeuten-delesyia-karte.webp",
+   "Karte: Kleiner Turm mit goldenen Rohren und Zahnrädern südlich von Burg Delesyia."
+  ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Tommaso": [
+  [
+   "glockenlaeuten-tommaso-karte.webp",
+   "Karte: Über Leitern und Vordächer den hohen Nordturm von Tommaso hinauf."
+  ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Varnia": [
+  [
+   "glockenlaeuten-varnia-karte.webp",
+   "Karte: Unter der höchsten Palastkuppel den Holzhebel drehen."
+  ]
+ ],
+ "Pororin Forest Guardians|Bell Tolling in Pailune": [
+  [
+   "glockenlaeuten-pailune-karte.webp",
+   "Karte: Roter Turm am Hafen von Pailune, die Glocke zählt erst nach Kapitel 7."
+  ]
+ ],
+ "Hexen / Witches|The Hermit Witch": [
+  [
+   "hermit-witch-karte.webp",
+   "Karte: Sylvia wartet in der Schattenflüsterhöhle nördlich von Hernand."
+  ],
+  [
+   "hermit-witch-hoehle.webp",
+   "Sylvias Höhle: Den Höhleneingang merken, er ist später leicht zu verlieren."
+  ]
+ ],
+ "Hexen / Witches|The Witch of Wisdom": [
+  [
+   "hexe-der-weisheit-karte.webp",
+   "Karte: Elowens Haus liegt im Hexenwald und ist ein wichtiger Ausrüstungsstopp."
+  ],
+  [
+   "hexe-der-weisheit-sanktumsquests.webp",
+   "Elowen eröffnet die Sanktum-Questreihe in Hernand."
+  ]
+ ],
+ "Hexen / Witches|The Witch of Kindness": [
+  [
+   "hexe-der-guete-karte.webp",
+   "Karte: Baris Versteck liegt im Schnee von Pailune am Silberwolfberg."
+  ],
+  [
+   "hexe-der-guete-braiser.webp",
+   "Das Kohlebecken bei Baris Verkleidung anzünden, das zeigt ihr wahres Ich."
+  ]
+ ],
+ "Hexen / Witches|The Witch of Humility": [
+  [
+   "hexe-der-demut-karte.webp",
+   "Karte: Lyselia erscheint an der kaputten Brücke bei Beighen."
+  ],
+  [
+   "hexe-der-demut-bruecke.webp",
+   "Dem Mann an der Brücke helfen, danach zeigt Lyselia ihr wahres Ich."
+  ]
+ ],
+ "Hexen / Witches|The Witch of Strength": [
+  [
+   "hexe-der-staerke-karte.webp",
+   "Karte: Areciel erscheint als Kind beim Tommaso-Fork-Posthaus."
+  ],
+  [
+   "hexe-der-staerke-haus.webp",
+   "Karte: Areciels wahres Zuhause liegt beim Nabel der Welt."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Absolution": [
+  [
+   "sanctum-of-absolution-lage.webp",
+   "Zugang: Das Sanktum öffnet sich über Elowens Hexen-Fortschritt in Kapitel 5."
+  ],
+  [
+   "sanctum-of-absolution-schritt-1.webp",
+   "Erster Teil: Das Säulenstück liegt in der Höhle hinter der zentralen Maschine."
+  ],
+  [
+   "sanctum-of-absolution-schritt-2.webp",
+   "Zweiter Teil: Im Innenraum die Töpfe zerschlagen und den Reaktorkubus freilegen."
+  ],
+  [
+   "sanctum-of-absolution-truhe.webp",
+   "Truhe: Hinter der Kraftfaust-Wand versteckt; nicht direkt nach der Reinigung gehen."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Atonement": [
+  [
+   "sanctum-of-atonement-lage.webp",
+   "Karte: Das Sanktum liegt am Geisterhügel in Hernand."
+  ],
+  [
+   "sanctum-of-atonement-schritt-1.webp",
+   "Zum ersten Teil: die Felsstufe hochklettern und durch das erste Fenster einsteigen."
+  ],
+  [
+   "sanctum-of-atonement-schritt-2.webp",
+   "Zweiter Teil: durch das nächste Fenster neben dem Generator greifen."
+  ],
+  [
+   "sanctum-of-atonement-truhe.webp",
+   "Truhe: Der Raum hinter den beiden Kohlebecken enthält die versteckte Truhe."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Benediction": [
+  [
+   "sanctum-of-benediction-lage.webp",
+   "Karte: Das Sanktum liegt im Westen von Hernand."
+  ],
+  [
+   "sanctum-of-benediction-schritt-1.webp",
+   "Erster Kern: Im unteren Raum an der Treppe liegt der erste Reaktorkern."
+  ],
+  [
+   "sanctum-of-benediction-schritt-2.webp",
+   "Laterne anzünden: Das öffnet den geheimen Raum mit Truhe und zweitem Teil."
+  ],
+  [
+   "sanctum-of-benediction-truhe.webp",
+   "Truhe: Der geheime Laternenraum oben im Sanktum enthält die Truhe."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Deliverance": [
+  [
+   "sanctum-of-deliverance-lage.webp",
+   "Karte: Das Sanktum liegt östlich des Sturmklauenkamms."
+  ],
+  [
+   "sanctum-of-deliverance-schritt-1.webp",
+   "Beide Kohlebecken anzünden: Die Gitter öffnen den Raum mit erstem Teil und Truhe."
+  ],
+  [
+   "sanctum-of-deliverance-schritt-2.webp",
+   "Über den brüchigen Boden laufen, bis er einbricht und in den Kernraum fallen lässt."
+  ],
+  [
+   "sanctum-of-deliverance-truhe.webp",
+   "Truhe: Im Feuerschalenraum liegen das erste Teil und die Alphawolf-Kopfbedeckung."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Devotion": [
+  [
+   "sanctum-of-devotion-lage.webp",
+   "Karte: Das Sanktum liegt in Delesyia an Lyselias Sanktum-Route."
+  ],
+  [
+   "sanctum-of-devotion-schritt-1.webp",
+   "Erster Teil: Im Obergeschoss des Gebäudes, nicht außen herum suchen."
+  ],
+  [
+   "sanctum-of-devotion-schritt-2.webp",
+   "Zweiter Teil: Weiter oben im hinteren Innenraum, vor dem Verlassen einsammeln."
+  ],
+  [
+   "sanctum-of-devotion-truhe.webp",
+   "Truhe: Die rissige Wand im Obergeschoss einschlagen, dahinter liegt die Truhe."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Exaltation": [
+  [
+   "sanctum-of-exaltation-lage.webp",
+   "Karte: Das Sanktum liegt in Pailune, zuerst das Wasser ablassen."
+  ],
+  [
+   "sanctum-of-exaltation-schritt-1.webp",
+   "Die rissige Wand mit Kraftfaust oder schweren Treffern einschlagen und Wasser ablassen."
+  ],
+  [
+   "sanctum-of-exaltation-schritt-2.webp",
+   "Erster Teil: Nach dem Ablauf liegt er im unteren Bereich des Sanktums."
+  ],
+  [
+   "sanctum-of-exaltation-truhe.webp",
+   "Truhe: Beide Seitenlaternen anzünden, das öffnet den Raum mit der Rüstung."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Expiation": [
+  [
+   "sanctum-of-expiation-lage.webp",
+   "Karte: Das Sanktum liegt in Demeniss an Areciels Sanktum-Route."
+  ],
+  [
+   "sanctum-of-expiation-schritt-1.webp",
+   "Licht reflektieren auf die Ranken, das öffnet den Weg zum ersten Teil."
+  ],
+  [
+   "sanctum-of-expiation-schritt-2.webp",
+   "Truhenweg: Abwärts fallen und der zweiten Rankenöffnung folgen."
+  ],
+  [
+   "sanctum-of-expiation-truhe.webp",
+   "Truhe: Abwärts fallen und dem zweiten Rankenweg zur Truhe folgen."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Faith": [
+  [
+   "sanctum-of-faith-lage.webp",
+   "Karte: Das Sanktum liegt im Südosten von Delesyia."
+  ],
+  [
+   "sanctum-of-faith-schritt-1.webp",
+   "Erster Teil: Im Inneren des Gebäudes, nicht außen herum suchen."
+  ],
+  [
+   "sanctum-of-faith-schritt-2.webp",
+   "Die erste Rankensperre mit Licht reflektieren wegbrennen, dahinter liegt der Reaktorkern."
+  ],
+  [
+   "sanctum-of-faith-truhe.webp",
+   "Truhe: Die zweite Rankensperre mit Licht reflektieren wegbrennen, dahinter liegt die Truhe."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Oblation": [
+  [
+   "sanctum-of-oblation-lage.webp",
+   "Karte: Das Sanktum liegt in Delesyia westlich von Marnis Labor."
+  ],
+  [
+   "sanctum-of-oblation-schritt-1.webp",
+   "Erster Teil: Die Treppe hinunter, dort liegt das fehlende Säulenstück."
+  ],
+  [
+   "sanctum-of-oblation-schritt-2.webp",
+   "Das Kohlebecken anzünden, das öffnet den Weg zur versteckten Waffentruhe."
+  ],
+  [
+   "sanctum-of-oblation-truhe.webp",
+   "Truhe: Das Kohlebecken anzünden, das öffnet den Zugang zur versteckten Truhe."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Penitence": [
+  [
+   "sanctum-of-penitence-lage.webp",
+   "Karte: Das Sanktum liegt in Hernand an Elowens Sanktum-Route."
+  ],
+  [
+   "sanctum-of-penitence-schritt-1.webp",
+   "Zum ersten Teil: Hinter der Hauptmaschine die Wand hochklettern."
+  ],
+  [
+   "sanctum-of-penitence-schritt-2.webp",
+   "Der einzige Teil: im kleinen oberen Raum das Säulenstück greifen."
+  ],
+  [
+   "sanctum-of-penitence-kammer.webp",
+   "Truhe: Durch den eingebrochenen Boden in die versteckte Kammer fallen."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Renunciation": [
+  [
+   "sanctum-of-renunciation-lage.webp",
+   "Karte: Das Sanktum liegt in Tashkalp an Areciels Sanktum-Route."
+  ],
+  [
+   "sanctum-of-renunciation-schritt-1.webp",
+   "Erster Teil: Über der vergitterten Lücke nach oben schauen und greifen."
+  ],
+  [
+   "sanctum-of-renunciation-schritt-2.webp",
+   "Beide Laternen aktivieren, dann öffnet sich der Raum mit der Helm-Truhe."
+  ],
+  [
+   "sanctum-of-renunciation-truhe.webp",
+   "Truhe: Beide Laternen aktivieren, das öffnet den Helmraum mit der Truhe."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Revelation": [
+  [
+   "sanctum-of-revelation-lage.webp",
+   "Karte: Das Sanktum liegt nördlich des Bambuswaldes beim Hafen von Demeniss."
+  ],
+  [
+   "sanctum-of-revelation-schritt-1.webp",
+   "Boss: Antumbras Speer zuerst besiegen, danach beginnt das Reparaturrätsel."
+  ],
+  [
+   "sanctum-of-revelation-schritt-2.webp",
+   "Erster Teil: Im Westgebäude mit dem einsturzfähigen Dach liegt das Säulenstück."
+  ],
+  [
+   "sanctum-of-revelation-truhe.webp",
+   "Truhe: Der Fundort des Dorns der Finsteren Jagd im Sanktum."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Solace": [
+  [
+   "sanctum-of-solace-lage.webp",
+   "Karte: Das Sanktum liegt in der Schneeregion von Pailune."
+  ],
+  [
+   "sanctum-of-solace-schritt-1.webp",
+   "Boss: Antumbras Stab besiegen und das Gebiet räumen, bevor der Kern zählt."
+  ],
+  [
+   "sanctum-of-solace-schritt-2.webp",
+   "Erster Teil: Unter der Brücke fallen und durch die Wandlücke einsteigen."
+  ],
+  [
+   "sanctum-of-solace-truhe.webp",
+   "Truhe: Die zweite Truhe liegt oben an der Turmwand und ist leicht zu verpassen."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Temperance": [
+  [
+   "sanctum-of-temperance-lage.webp",
+   "Karte: Das Sanktum liegt in Hernand südlich der Einhornklippe."
+  ],
+  [
+   "sanctum-of-temperance-schritt-1.webp",
+   "Fusionsreaktor-Kern: Durch den eingebrochenen Boden zum Kern fallen."
+  ],
+  [
+   "sanctum-of-temperance-schritt-2.webp",
+   "Truhe 1: Hinter den Ranken im selben unteren Raum."
+  ],
+  [
+   "sanctum-of-temperance-truhe.webp",
+   "Truhe 2: Die Lampe an der vergitterten Tür anzünden, dahinter liegt die zweite Truhe."
+  ]
+ ],
+ "Hexen / Witches|Sanctum of Veneration": [
+  [
+   "sanctum-of-veneration-lage.webp",
+   "Karte: Das Sanktum liegt im Blauhain in Delesyia."
+  ],
+  [
+   "sanctum-of-veneration-schritt-1.webp",
+   "Zum Kern: Den Ruinenpfad hinabsteigen, nicht auf den oberen Felsen suchen."
+  ],
+  [
+   "sanctum-of-veneration-schritt-2.webp",
+   "Anheben: Hinter der anhebbaren Wand liegt der fehlende Fusionsreaktor-Kern."
+  ],
+  [
+   "sanctum-of-veneration-truhe.webp",
+   "Truhe: Vor der Wand Resist nutzen, dann mit Kraftfaust die Truhe freilegen."
+  ]
  ]
 };
 const FAC_QUEST_IMG_DIR = "cd_assets/factions/";
-
-// Fraktionsbanner aus den Spieldateien (09.11.2026): UI-Atlas cd_icon_faction_flag_00..04, per KI-Mix 2x hochgerechnet,
-// Dateien cd_assets/factions/wappen/<wert>.webp. Zuordnung nur, wo eine Quest/Mission der Fraktion im Spiel dieses
-// Banner traegt (questinfo/missioninfo); Fraktionen ohne Beleg behalten das Textsymbol. Belege und Skripte:
-// G:\Claude\Crimson-Desert-Wiki\fraktion-wappen\ (einbau.cjs). Schluessel fac = f.name in FAC_DATA bzw. lore.faction,
-// reg = r.region in FAC_DATA.
-const FAC_WAPPEN = {
- "fac": {
-  "House Roberts": "f037",
-  "House Serkis": "f035",
-  "House Celeste": "sub01",
-  "Goldleaf Merchant Guild": "m-chapter01-1",
-  "House Alfonso": "f036",
-  "House Felix": "f034",
-  "House Grace": "f081",
-  "House Lanford": "sub05",
-  "Scholastone Institute": "m-chapter02-2",
-  "Vellua Fishermen's Guild": "f030",
-  "Beggars' Alliance": "f102",
-  "St. Halssius's House of Healing": "f022",
-  "Hernandian Parish of Solumen": "sub01",
-  "Calphadean Merchants": "sub05",
-  "Pororin Forest Guardians": "f012",
-  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)": "m-chaptergreywolf01",
-  "Hernand's Politics": "sub01",
-  "Pailune Militia": "sub07",
-  "Longleaf Tribe": "f008",
-  "Beighen Tribe": "f032",
-  "Pailune Requests": "sub07",
-  "Pailune's Politics": "sub07",
-  "Skoghorn Tribe": "f021",
-  "House Azerian": "f041",
-  "House Elemore": "f052",
-  "Tariv Sorcerers": "f023",
-  "Silvermoon Trade Collective": "f027",
-  "Demeniss Commissions": "sub03",
-  "Delesyia Commissions (Outlaws / Sammelkarte)": "sub06",
-  "Ironflame Orcs": "f013",
-  "Ironwheel of Dewhaven": "f017",
-  "National Delesyian Institute": "sub06",
-  "Redfox Trading Company": "f094",
-  "Aeserion, the Great Serpent": "f080",
-  "Marni": "f009",
-  "Tashkalp (Tommaso / Varnia)": "f026",
-  "Muiquun Outlaws": "f010",
-  "Redwind Merchant Guild / Calphadean Merchants (Saltroad)": "f127",
-  "Urdavah Research Institute": "f028",
-  "Hexen / Witches": "f117",
-  "Flame Knights": "f054",
-  "Lonely Jackals": "f116"
- },
- "reg": {
-  "Hernand": "sub01",
-  "Pailune": "sub07",
-  "Demeniss": "sub03",
-  "Delesyia": "sub06",
-  "Crimson Desert (Tashkalp)": "f029"
- }
-};

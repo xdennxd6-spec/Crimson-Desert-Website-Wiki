@@ -6110,7 +6110,13 @@ const DE_NAMES={
 "Wagon Collector":"Wagensammler",
 "Nix's Request":"Snix' Anfrage",
 "Nora's Request":"Noras Anfrage",
-"Esford's Request":"Esfords Anfrage"
+"Esford's Request":"Esfords Anfrage",
+// Hexen-Fraktion: Liebesgeschichten, Verfeinerte Kraft, Flug (14.11.2026, Spieltexte)
+"Missing Final Page":"Ein Buch ohne letzte Seite",
+"Beyond the Words":"Wahre Gefühle hinter den Worten",
+"Brave Steps":"Der erste mutige Schritt",
+"Courage to Be Vulnerable":"Der Mut, Schwäche zu zeigen",
+"Wings of Iron":"Flügel aus Eisen",
 };
 const _DE_TOK=/[\p{L}\p{N}]+(?:['\u2019][\p{L}]+)*/gu;
 const _DE_MAX=12;
