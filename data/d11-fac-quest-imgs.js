@@ -714,3 +714,85 @@ const FAC_QUEST_IMGS = {
  ]
 };
 const FAC_QUEST_IMG_DIR = "cd_assets/factions/";
+
+// Fraktionsbanner aus den Spieldateien (09.11.2026, ergaenzt 14.11.2026): UI-Atlas cd_icon_faction_flag_00..04,
+// per KI-Mix 2x hochgerechnet, Dateien cd_assets/factions/wappen/<wert>.webp. Direkte Belege: Quest/Mission der Fraktion
+// traegt dieses Banner (questinfo/missioninfo); ohne eigenes Banner im Spiel steht das originale Fraktionsgruppen-Banner
+// der Region (sub01 Hernand, sub03 Demeniss, sub06 Delesyia, sub07 Pailune, f029 Crimson Desert, main_icon_chaptergreywolf01
+// Graumaehnen). Belege und Skripte: G:\Claude\Crimson-Desert-Wiki\fraktion-wappen\ (einbau.cjs).
+// Schluessel fac = f.name in FAC_DATA bzw. lore.faction, reg = r.region in FAC_DATA.
+const FAC_WAPPEN = {
+ "fac": {
+  "House Roberts": "f037",
+  "House Serkis": "f035",
+  "House Celeste": "sub01",
+  "Goldleaf Merchant Guild": "m-chapter01-1",
+  "House Alfonso": "f036",
+  "House Felix": "f034",
+  "House Grace": "f081",
+  "House Lanford": "sub05",
+  "Scholastone Institute": "m-chapter02-2",
+  "Vellua Fishermen's Guild": "f030",
+  "Beggars' Alliance": "f102",
+  "St. Halssius's House of Healing": "f022",
+  "Hernandian Parish of Solumen": "sub01",
+  "Calphadean Merchants": "sub05",
+  "Pororin Forest Guardians": "f012",
+  "Greymanes (Scattered Embers / Grounds of the Sunrise / Commissions)": "m-chaptergreywolf01",
+  "Hernand's Politics": "sub01",
+  "Pailune Militia": "sub07",
+  "Longleaf Tribe": "f008",
+  "Beighen Tribe": "f032",
+  "Pailune Requests": "sub07",
+  "Pailune's Politics": "sub07",
+  "Skoghorn Tribe": "f021",
+  "House Azerian": "f041",
+  "House Elemore": "f052",
+  "Tariv Sorcerers": "f023",
+  "Silvermoon Trade Collective": "f027",
+  "Demeniss Commissions": "sub03",
+  "Delesyia Commissions (Outlaws / Sammelkarte)": "sub06",
+  "Ironflame Orcs": "f013",
+  "Ironwheel of Dewhaven": "f017",
+  "National Delesyian Institute": "sub06",
+  "Redfox Trading Company": "f094",
+  "Aeserion, the Great Serpent": "f080",
+  "Marni": "f009",
+  "Tashkalp (Tommaso / Varnia)": "f026",
+  "Muiquun Outlaws": "f010",
+  "Redwind Merchant Guild / Calphadean Merchants (Saltroad)": "f127",
+  "Urdavah Research Institute": "f028",
+  "Hexen / Witches": "f117",
+  "Flame Knights": "f054",
+  "Lonely Jackals": "f116",
+  "Kharonso Troll Alliance": "sub01",
+  "Antumbra Order": "sub07",
+  "Stjar Clan": "f062",
+  "Odeck Tribe": "f011",
+  "Blue Fangs (Beighen Militia)": "sub07",
+  "House Wells": "f025",
+  "House Thorel": "f052",
+  "House Marshell": "f060",
+  "Society of Progress": "sub06",
+  "Cogknights": "sub06",
+  "Delesyian Aerial Force": "sub06",
+  "Gearmelt Confectionery": "f003",
+  "Blackwater Oil Merchant Guild": "sub06",
+  "H.A.L.L.": "sub06",
+  "Marni's Tinkertons": "sub06",
+  "Marnirail": "sub06",
+  "The Wyvernflames": "sub06",
+  "Sage of the Desert (Sand Sages)": "f006",
+  "Giant's Yard Research Group": "f097",
+  "Lords of Unclaimed Lands": "f002",
+  "Whitesand Retreat": "f029",
+  "The Dusksongs": "f029"
+ },
+ "reg": {
+  "Hernand": "sub01",
+  "Pailune": "sub07",
+  "Demeniss": "sub03",
+  "Delesyia": "sub06",
+  "Crimson Desert (Tashkalp)": "f029"
+ }
+};
