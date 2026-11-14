@@ -1,0 +1,21 @@
+{
+  "intro": "Diese Weltkarte von Crimson Desert hat das Wiki selbst aus den Spieldateien erstellt: Küsten, Flüsse, Gebirge, Straßen und das Relief von Pywel, dazu {{orte}} Orte mit deutschem und englischem Namen. Du zoomst über {{zoom}} Stufen bis auf einzelne Wege, suchst Orte nach Namen und springst aus jedem Fundort im Wiki direkt auf die Karte.",
+  "faq": [
+    {
+      "frage": "Gibt es eine Karte von Crimson Desert auf Deutsch?",
+      "antwort": "Ja. Die Karte in diesem Wiki zeigt {{orte}} Orte mit ihrem deutschen Namen aus dem Spiel, den englischen Namen findest du jeweils daneben. Die Suche versteht beide Sprachen."
+    },
+    {
+      "frage": "Woher stammt die Karte?",
+      "antwort": "Aus den Spieldateien selbst, Stand des jeweils aktuellen Patches. Das Wiki liest die Kartentexturen des Spiels aus und rendert daraus eigene Kartenkacheln. Es ist keine Kopie einer anderen Kartenseite und kein Screenshot."
+    },
+    {
+      "frage": "Sind auf der Karte auch Sammelobjekte eingezeichnet?",
+      "antwort": "Die eigene Karte zeigt Orte wie Städte, Lager, Burgen und Wahrzeichen. Für Sammelobjekte gibt es in der App einen zweiten Reiter mit der Karte von MapGenie."
+    },
+    {
+      "frage": "Sind die Inseln aus Charting the Unknown auf der Karte?",
+      "antwort": "Ja, die Karte zeigt die aktuelle Spielwelt einschließlich der Inseln im Süden. Für diese Inseln gibt es keine Höhendaten, sie erscheinen deshalb flach. Details zu jeder Insel stehen auf der Seite Inseln."
+    }
+  ]
+}

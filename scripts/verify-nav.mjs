@@ -282,7 +282,7 @@ const SOLL_NAV_LABELS = {
   "hexen": "Hexen & Fusion", "hauptquests": "Hauptquests", "fraktionen": "Fraktionsquests",
   "side-quests": "Nebenquests", "kapitel-guide": "Kapitel-Guide", "true-ending": "True Ending",
   "ruinen": "Uralte Ruinen", "raetsel": "Rätsel", "trophaeen": "Trophäen & Errungenschaften",
-  "npcs": "Charaktere & NPCs", "romanze": "Romanze & Ehe", "mounts": "Reittiere", "pets": "Haustiere", "reitausruestung": "Reit- & Tierausrüstung", "inseln": "Inseln",
+  "npcs": "Charaktere & NPCs", "romanze": "Romanze & Ehe", "mounts": "Reittiere", "pets": "Haustiere", "reitausruestung": "Reit- & Tierausrüstung", "inseln": "Inseln", "karte": "Karte",
   "geheimnisse": "Geheimnisse & Lore", "charting-the-unknown": "Charting the Unknown", "crafting": "Herstellen & Farmen",
 };
 

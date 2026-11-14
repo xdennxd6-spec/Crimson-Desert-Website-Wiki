@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=191c5af6b2">
+<link rel="stylesheet" href="app.css?v=4eb229b6e4">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -297,6 +297,11 @@ font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.
 .seo-more article.card img.reit-ico{width:64px;height:64px;aspect-ratio:1/1;object-fit:contain;padding:4px}
 .seo-more article.ins-seo .ins-en{margin:0 0 8px;color:var(--ink-dim);font-size:13px}
 .seo-more article.ins-seo .ins-img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin:0 0 12px}
+.seo-more .wk-bild{display:block;width:100%;max-width:760px;height:auto;margin:14px 0 6px;border-radius:12px;border:1px solid var(--line)}
+.seo-more ul.wk-orte{columns:3 230px;column-gap:24px;list-style:none;margin:10px 0 0;padding:0;font-size:14px}
+.seo-more ul.wk-orte li{break-inside:avoid;padding:3px 0}
+.seo-more ul.wk-orte li small{color:var(--ink-faint)}
+.seo-more h3.wk-bu{margin:18px 0 4px;color:var(--amber)}
 
 .seo-more{margin:44px 0 8px;padding:22px 22px 18px;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:14px;
 background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.62}
@@ -344,6 +349,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <li><a href="/geheimnisse">Geheimnisse &amp; Lore</a></li>
       <li><a href="/charting-the-unknown">Charting the Unknown</a></li>
       <li><a href="/inseln">Inseln</a></li>
+      <li><a href="/karte">Karte</a></li>
       <li><a href="/crafting">Herstellen &amp; Farmen</a></li>
     </ul>
   </div>
@@ -1324,14 +1330,19 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
       <button class="mlb-copy" id="mlb-copy-btn" onclick="copyLocSearch(true)">📋 Kopieren</button>
       <button class="mlb-close" onclick="document.getElementById('map-loc-banner').style.display='none'" title="Schließen">✕</button>
     </div>
-    <div style="border-radius:10px;overflow:hidden;border:1px solid var(--bdr)">
-      <!-- data-src: erst beim Oeffnen der Kartenseite setzen (showSec). Chrome laedt versteckte
-           iframes trotz loading="lazy" sofort, MapGenie kostete so jede Seitenansicht MBs und CPU. -->
-      <iframe id="mapgenie-frame" title="Interaktive Karte von Pywel (MapGenie)" data-src="https://mapgenie.io/crimson-desert/maps/pywel?embed=light"
-              style="width:100%;height:620px;display:block;border:none"
-              allowfullscreen loading="lazy"></iframe>
+    <!-- Weltkarte (14.11.2026): eigene Kachelkarte, Renderer data/d17-weltkarte-app.js (Lader weltkarteLaden), CSS in app.css (Anker WELTKARTE).
+         Der MapGenie-Block unten wird vom Renderer als zweiter Reiter eingehängt und lädt erst beim Umschalten. -->
+    <div id="weltkarte-root"></div>
+    <div id="wk-mg">
+      <div style="border-radius:10px;overflow:hidden;border:1px solid var(--bdr)">
+        <!-- data-src: erst beim Umschalten auf den Reiter MapGenie setzen. Chrome laedt versteckte
+             iframes trotz loading="lazy" sofort, MapGenie kostete so jede Seitenansicht MBs und CPU. -->
+        <iframe id="mapgenie-frame" title="Interaktive Karte von Pywel (MapGenie)" data-src="https://mapgenie.io/crimson-desert/maps/pywel?embed=light"
+                style="width:100%;height:620px;display:block;border:none"
+                allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div id="map-hint">Marker · Filter · Kategorien — alles direkt in der MapGenie-UI &nbsp;·&nbsp; Eigene Pins über "My Pins" in der Karte</div>
     </div>
-    <div id="map-hint">Marker · Filter · Kategorien — alles direkt in der MapGenie-UI &nbsp;·&nbsp; Eigene Pins über "My Pins" in der Karte</div>
   </section>
 
   <section class="sec" id="sec-locations">
@@ -2087,8 +2098,8 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=419e84c8a8" fetchpriority="low"></script>
-<script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=5cc68f1271" fetchpriority="low"></script>
+<script src="data/d10-enemy-drops.js?v=6309ff85a7" fetchpriority="low"></script>
 <script src="data/d11-fac-quest-imgs.js?v=e59e403f8b" fetchpriority="low"></script>
 <script src="data/d12-dlc.js?v=3d1cdd67b3" fetchpriority="low"></script>
 <script src="data/d13-romanze.js?v=30a2b89fce" fetchpriority="low"></script>
@@ -5482,7 +5493,8 @@ function showSec(id, opts){
   // Ungueltige Sektion: Fallback Übersicht (bis 10/2026: Bosse), und der kaputte Hash (#sec=nichtvorhanden) wird dabei ersetzt statt stehenzubleiben
   if(!sec){ if(id!=='start') return showSec('start',Object.assign({},opts,{skipUrl:false,replaceUrl:true})); return; }
   ensureSecRendered(id);
-  if(id==='map'){const mf=document.getElementById('mapgenie-frame');if(mf&&!mf.getAttribute('src')&&mf.dataset.src)mf.src=mf.dataset.src;}
+  // 14.11.2026: eigene Weltkarte statt MapGenie als Standard; das iframe lädt erst beim Reiter "MapGenie" (d17-weltkarte-app.js)
+  if(id==='map'&&typeof renderWeltkarte==='function')renderWeltkarte({ort:opts.ort||'',suche:opts.suche||''});
   // Re-render favorites when entering that section (favs may have changed since init)
   if(id==='favorites'&&typeof renderFavorites==='function')renderFavorites();
   if(id==='roadmap'&&typeof renderRoadmap==='function')renderRoadmap();
@@ -5568,7 +5580,7 @@ function _applyTabParam(sec,tab){
 }
 function _applyUrlState(){
   const s=_readUrlState();
-  if(s.sec)showSec(s.sec,{skipUrl:true,keepSearch:!!s.q,insel:s.insel});
+  if(s.sec)showSec(s.sec,{skipUrl:true,keepSearch:!!s.q,insel:s.insel,ort:s.ort});
   if(s.sec&&s.tab)_applyTabParam(s.sec,s.tab);
   // R2 Fundament: #sec=x&go=<Eintrag> (cdGoHref, z. B. Mittelklick auf einen Sprung-Link) springt zum Eintrag
   if(s.sec&&s.go&&!s.q&&typeof cdGo==='function')cdGo(s.sec,s.go,{noShow:true});
@@ -12129,7 +12141,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=044af75735';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=41df301ac2';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
@@ -12143,8 +12155,8 @@ let _inLaden=null,_inSoll='',_inRe=null;
 function _inSkript(setze){return new Promise(res=>{const s=document.createElement('script');setze(s);s.onload=()=>res(true);s.onerror=()=>{s.remove();res(false);};document.head.appendChild(s);});}
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
-  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=7e8bd04f7b';})))
+  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=82ea433e0b';}))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=cfb358679c';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }
@@ -12161,6 +12173,29 @@ function inselGo(slug){
   const h='#sec=inseln'+(slug?'&insel='+slug:'');
   if(location.hash===h)_applyUrlState();else location.hash=h;
   return false;
+}
+// ── Weltkarte (14.11.2026): Leaflet (vendor/, selbst gehostet) + data/d17-weltkarte.js + d17-weltkarte-app.js, alles erst beim
+// Öffnen der Seite "Karte" geladen. renderWeltkarte({ort,suche}) aus showSec; ort = Slug aus #sec=map&ort=…, suche = Fundort-Begriff.
+let _wkLaden=null,_wkSoll={};
+function weltkarteLaden(){
+  if(typeof L!=='undefined'&&typeof WELT_ORTE!=='undefined'&&typeof weltkarteRender==='function')return Promise.resolve(true);
+  if(!_wkLaden){
+    if(!document.getElementById('wk-css')){const c=document.createElement('link');c.id='wk-css';c.rel='stylesheet';c.href='vendor/leaflet-1.9.4.css';document.head.appendChild(c);}
+    _wkLaden=(typeof L!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='vendor/leaflet-1.9.4.min.js';}))
+      .then(ok=>ok&&(typeof WELT_ORTE!=='undefined'||_inSkript(s=>{s.src='data/d17-weltkarte.js?v=9e4a742ffb';})))
+      .then(ok=>ok&&(typeof weltkarteRender==='function'||_inSkript(s=>{s.src='data/d17-weltkarte-app.js?v=0764dc55b9';})))
+      .then(ok=>{ok=!!ok&&typeof L!=='undefined'&&typeof WELT_ORTE!=='undefined'&&typeof weltkarteRender==='function';if(!ok)_wkLaden=null;return ok;});
+  }
+  return _wkLaden;
+}
+function renderWeltkarte(o){
+  if(o&&typeof o==='object')_wkSoll=o;
+  const root=document.getElementById('weltkarte-root');if(!root)return;
+  if(!root.firstChild)root.innerHTML=cdNote('Die Weltkarte wird geladen.');
+  weltkarteLaden().then(ok=>{
+    if(ok){if(root.querySelector('.cd-note')&&!root.querySelector('.wk'))root.innerHTML='';weltkarteRender(root,_wkSoll);_wkSoll={};}
+    else root.innerHTML=cdNote('Die Weltkarte konnte nicht geladen werden. Bitte lade die Seite neu.',{kind:'warn'});
+  });
 }
 // Inselnamen (DE und EN) in bereits escaptem Text zu Links machen
 function inselVerlinken(h){
@@ -12262,7 +12297,8 @@ function showMapLoc(name,src,type){
 }
 function goToMap(){
   document.getElementById('loc-modal').style.display='none';
-  showSec('map');
+  // Eigene Weltkarte sucht den Ort selbst (findet sie ihn, springt sie hin); der Banner bleibt für MapGenie
+  showSec('map',{suche:_mapLocSearch});
   document.getElementById('mlb-term').textContent=_mapLocSearch;
   const b=document.getElementById('map-loc-banner');
   b.style.display='flex';
@@ -14493,7 +14529,7 @@ if (syGetCode()) _loadServerProgress();
   Kampf: <a href="/bosse">Bosse</a> · <a href="/bestiarium">Gegner</a> · <a href="/skills">Fähigkeiten</a> · <a href="/#sec-dlc-kampf">DLC-Bosse</a><br>
   Ausrüstung: <a href="/waffen">Waffen</a> · <a href="/ruestungen">Rüstungen</a> · <a href="/#sec-armorsets">Rüstungssets</a> · <a href="/accessoires">Accessoires</a> · <a href="/abyss-cores">Abyss-Ausrüstung</a> · <a href="/#sec-synthesis">Abyss-Synthese</a> · <a href="/hexen">Hexen &amp; Fusion</a> · <a href="/#sec-dlc-ausruestung">DLC-Ausrüstung</a><br>
   Quests &amp; Herausforderungen: <a href="/fraktionen">Fraktionsquests</a> · <a href="/hauptquests">Hauptquests</a> · <a href="/side-quests">Nebenquests</a> · <a href="/kapitel-guide">Kapitel-Guide</a> · <a href="/true-ending">True Ending</a> · <a href="/ruinen">Uralte Ruinen</a> · <a href="/raetsel">Rätsel</a> · <a href="/trophaeen">Trophäen &amp; Errungenschaften</a> · <a href="/#sec-dlc-quests">DLC-Quests</a><br>
-  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/romanze">Romanze &amp; Ehe</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/reitausruestung">Reit- &amp; Tierausrüstung</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a> · <a href="/inseln">Inseln</a><br>
+  Welt &amp; Karte: <a href="/npcs">Charaktere &amp; NPCs</a> · <a href="/romanze">Romanze &amp; Ehe</a> · <a href="/mounts">Reittiere</a> · <a href="/pets">Haustiere</a> · <a href="/reitausruestung">Reit- &amp; Tierausrüstung</a> · <a href="/geheimnisse">Geheimnisse &amp; Lore</a> · <a href="/charting-the-unknown">Charting the Unknown</a> · <a href="/inseln">Inseln</a> · <a href="/karte">Karte</a><br>
   Herstellen &amp; Sammeln: <a href="/crafting">Herstellen &amp; Farmen</a> · <a href="/#sec-dlc-sammeln">DLC-Schiffsteile</a>
 </nav>
 <div id="credit-bottom">Design and Build by Christian Stein</div>

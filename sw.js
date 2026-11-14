@@ -19,15 +19,19 @@ const CORE_ASSETS = [
   './data/d06-items.js?v=fb0d7ab2f6',
   './data/d07-patches.js?v=1602a4b1c2',
   './data/d08-ruins-data.js?v=c20bbd8150',
-  './data/d09-scenes.js?v=419e84c8a8',
-  './data/d10-enemy-drops.js?v=68d552c789',
+  './data/d09-scenes.js?v=5cc68f1271',
+  './data/d10-enemy-drops.js?v=6309ff85a7',
   './data/d11-fac-quest-imgs.js?v=e59e403f8b',
   './data/d12-dlc.js?v=3d1cdd67b3',
   './data/d13-romanze.js?v=30a2b89fce',
-  './data/d14-beschaffung.js?v=044af75735',
+  './data/d14-beschaffung.js?v=41df301ac2',
   './data/d14-reit.js?v=6b0ec13e59',
-  './data/d15-inseln.js?v=a4a26ee859',
-  './data/d15-inseln-app.js?v=7e8bd04f7b',
+  './data/d15-inseln.js?v=82ea433e0b',
+  './data/d15-inseln-app.js?v=cfb358679c',
+  './data/d17-weltkarte.js?v=9e4a742ffb',
+  './data/d17-weltkarte-app.js?v=0764dc55b9',
+  './vendor/leaflet-1.9.4.min.js',
+  './vendor/leaflet-1.9.4.css',
   './vendor/gsap-3.15.0.min.js',
   './vendor/ScrollTrigger-3.15.0.min.js',
   './vendor/SplitText-3.15.0.min.js',
@@ -49,7 +53,8 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => !k.startsWith(CACHE_VERSION)).map(k => caches.delete(k)))
+      // cd-weltkarte-offline: vom Besucher per Knopf gespeicherte Kartenkacheln, bleibt über Versionswechsel erhalten
+      Promise.all(keys.filter(k => !k.startsWith(CACHE_VERSION) && k !== 'cd-weltkarte-offline').map(k => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });
@@ -85,8 +90,9 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Lokale Assets: Stale-while-Revalidate (sofort aus Cache, im Hintergrund aktualisieren)
-  if (url.pathname.startsWith('/cd_assets/') || url.pathname.endsWith('.webmanifest') || url.pathname.endsWith('.png') || url.pathname.endsWith('.jpg') || url.pathname.endsWith('.webp') || url.pathname.endsWith('.mp4')) {
+  // Lokale Assets: Stale-while-Revalidate (sofort aus Cache, im Hintergrund aktualisieren).
+  // /vendor/ (Leaflet, GSAP, Lenis; Versionsnummer im Dateinamen) gehört dazu, sonst fehlen die Bibliotheken offline.
+  if (url.origin === self.location.origin && url.pathname.startsWith('/vendor/') || url.pathname.startsWith('/cd_assets/') || url.pathname.endsWith('.webmanifest') || url.pathname.endsWith('.png') || url.pathname.endsWith('.jpg') || url.pathname.endsWith('.webp') || url.pathname.endsWith('.mp4')) {
     e.respondWith(
       caches.match(e.request).then(cached => {
         const fetchPromise = fetch(e.request).then(resp => {

@@ -55,6 +55,8 @@ import * as partRomanze from "./seo-parts/romanze.mjs";
 import * as partReit from "./seo-parts/reitausruestung.mjs";
 // Inseln (11.11.2026), Daten in data/d15-inseln.js.
 import * as partInseln from "./seo-parts/inseln.mjs";
+// Weltkarte (14.11.2026), Daten in data/d17-weltkarte.js, Kacheln in cd_assets/weltkarte/.
+import * as partKarte from "./seo-parts/karte.mjs";
 // 01.11.2026: Abschnitt "Neu mit Charting the Unknown" oben auf den Themen-Seiten (kein eigenes Seitenmodul)
 import { dlcNeu } from "./seo-parts/_dlc-neu.mjs";
 import { deN, deT } from "./seo-parts/_de.mjs";
@@ -196,7 +198,7 @@ const imgSrc = (v) => /^https?:/i.test(v) ? v : "/" + v;
 const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests, partTrophaeen,
   partHauptquests, partFraktionen, partPatchNotes, partNpcs,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
-  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown, partRomanze, partReit, partInseln,
+  partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown, partRomanze, partReit, partInseln, partKarte,
   // Patch-Archiv 1.x (Patch-Notes-Umbau, fest aktiv seit 29.10.2026, siehe seo-parts/patch-notes.mjs)
   partPatchNotes1];
 
@@ -256,6 +258,7 @@ const NAV = [
   ["geheimnisse", "Geheimnisse & Lore", "welt"],
   ["charting-the-unknown", "Charting the Unknown", "welt", "kopf"],
   ["inseln", "Inseln", "welt"],
+  ["karte", "Karte", "welt"],
   ["crafting", "Herstellen & Farmen", "sammeln", "kopf"],
 ];
 const KAT_NAME = Object.fromEntries(KATEGORIEN);

@@ -8390,3 +8390,50 @@ h3.sub-t.ins-band::after{content:'';order:2;flex:1;min-width:20px;height:1px;bac
   .ins-nav-n{grid-column:1}
 }
 /* INSELN Ende */
+
+/* WELTKARTE Anfang (14.11.2026) */
+/* Seite Karte (#sec=map): Renderer in data/d17-weltkarte-app.js, Leaflet aus vendor/. Alle Klassen mit Präfix wk-. */
+.wk{min-width:0}
+.wk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:0 0 12px}
+.wk-bar .cd-pills{margin:0}
+.wk-tabs .cd-pill{min-height:38px;padding:5px 14px}
+.wk-such{position:relative;flex:1 1 240px;min-width:0;max-width:440px}
+.wk-such input{width:100%;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2);color:var(--ink-hi);font:inherit;font-size:14px}
+.wk-such input:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.wk-liste{position:absolute;z-index:1200;left:0;right:0;top:calc(100% + 6px);margin:0;padding:6px;list-style:none;border:1px solid var(--line-strong,var(--bdr));border-radius:14px;background:var(--bg2);box-shadow:0 18px 36px -18px rgba(0,0,0,.9);max-height:min(60vh,360px);overflow:auto}
+.wk-liste li{display:flex;flex-direction:column;gap:1px;padding:8px 11px;border-radius:9px;cursor:pointer;line-height:1.35}
+.wk-liste li b{font-weight:600;color:var(--ink-hi);font-size:14px}
+.wk-liste li small{font-size:12px;color:var(--dim)}
+.wk-liste li:hover,.wk-liste li.wk-sel{background:color-mix(in srgb,var(--red) 14%,transparent)}
+.wk-liste li.wk-leer{cursor:default;color:var(--dim);font-size:13px}
+.wk-nam{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--dim);cursor:pointer;user-select:none}
+.wk-nam input{accent-color:var(--red);width:16px;height:16px}
+.wk-rahmen{position:relative;border:1px solid var(--bdr);border-radius:14px;overflow:hidden;background:#466876;box-shadow:0 16px 34px -26px rgba(0,0,0,.85)}
+.wk-rahmen[hidden],#wk-mg[hidden],.wk-such[hidden],.wk-nam[hidden]{display:none}
+.wk-karte{height:min(72vh,720px);min-height:380px;font-family:var(--f-body)}
+.wk-karte.leaflet-container,.wk-karte{background:#466876}
+.wk-rahmen:fullscreen .wk-karte{height:100vh}
+.wk-voll{position:absolute;z-index:1000;right:10px;top:10px;width:36px;height:36px;border:1px solid rgba(0,0,0,.25);border-radius:8px;background:#fffffff0;color:#2b2218;font-size:18px;line-height:1;cursor:pointer}
+.wk-voll:hover{background:#fff}
+.wk-voll:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.wk-hin{margin:8px 2px 0;font-size:12px;line-height:1.5;color:var(--dim)}
+#wk-mg{margin-top:0}
+/* Marker: Punkt + Name; die Zoomstufe schaltet per Klasse am Kartenrahmen */
+.wk-karte .wk-ort{display:flex;align-items:center;gap:5px;white-space:nowrap;pointer-events:auto}
+.wk-ort i{display:block;flex:none;width:9px;height:9px;border-radius:50%;background:#7a2a1f;border:1.5px solid #f6efe0;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.wk-ort span{font:600 12px/1.2 var(--f-body);color:#2b2218;text-shadow:0 0 3px #f6efe0,0 0 3px #f6efe0,0 0 2px #f6efe0}
+.wk-z-punkt .wk-ort span,.wk-ohne-namen .wk-ort span{display:none}
+.wk-karte.wk-z-aus .wk-ort{display:none}
+.wk-ort.wk-an{z-index:2000!important}
+.wk-ort.wk-an i{width:14px;height:14px;background:var(--red);border-color:#fff;box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 35%,transparent)}
+.wk-ort.wk-an span{display:inline!important;font-size:14px;color:#000}
+/* Bei krummer Bildschirmskalierung (z. B. 125 %) zeigen Kachelkanten Fugen: Leaflets plus-lighter macht sie hell, ohne es
+   bleiben Spalte. Normal mischen und einen halben Pixel überlappen lassen. */
+.wk-karte.leaflet-container img.leaflet-tile{mix-blend-mode:normal;width:256.5px!important;height:256.5px!important}
+.wk-karte .leaflet-control-attribution{font-size:10px;background:#ffffffcc}
+.wk-karte .leaflet-bar a{color:#2b2218}
+@media (max-width:600px){
+  .wk-karte{height:68vh;min-height:320px}
+  .wk-such{flex-basis:100%;max-width:none}
+}
+/* WELTKARTE Ende */
