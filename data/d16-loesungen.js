@@ -57,6 +57,34 @@ const LOESUNGEN_PFLICHT = [
  quellen:[{t:"Game8: Mistbound Sea",url:"https://game8.co/games/Crimson-Desert/archives/636570",datum:"2026-11-14"},{t:"PatchCrazy: Ancient Shrine",url:"https://patchcrazy.co.uk/ancient-shrine-quest-guide-crimson-desert-dlc/",datum:"2026-11-14"},{t:"GamesHorizon: Ancient Shrine und Leviakan",url:"https://gameshorizon.com/?p=81038",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Nebelmeer",url:"https://crimsondesert.gaming.tools/de/faction-quests/mission_oceanstory_explore_sea",datum:"2026-11-14"},{t:"Game8: alle DLC-Quests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Uralter Tempel: Lösung"},
  links:[{sec:"dlc-quests",ziel:"dlc-q-mistbound-sea"},{sec:"ruins",ziel:"r2b4-hero",wo:"nach"}]},
+{slug:"jenseits-der-raender", de:"Jenseits der Ränder", en:"Beyond the Margins", art:"quest",
+ sec:"dlc-quests", ziel:"dlc-q-beyond-the-margins",
+ kurz:"Kliffs 13-teilige DLC-Hauptreihe aus Charting the Unknown. Sie beginnt nach der Hauptquest Ende der Reise in der Taverne von Pailune und endet damit, dass du mit Sebastian die Wüstenkarte vervollständigst.",
+ voraussetzung:["Hauptquest Ende der Reise abgeschlossen","Im Journal unter Hauptquests Jenseits der Ränder auswählen und den ersten Schritt verfolgen"],
+ schritte:[
+  {t:"Ein Augenblick der Rast",d:"Geh in die Taverne von Pailune, folge Oongka zum Angelplatz und fang einen Fisch."},
+  {t:"Ein bekanntes Gesicht",d:"Sprich an den Docks von Pailune mit Andrew, besiege Matthias im Duell auf der Treppe von Schloss Pailune und kehr zu Andrew zurück."},
+  {t:"Wegweisende Lehren",d:"Sprich im Jijeong-Tempel mit dem Mönchanführer, besiege T'rukan in der Arena im Schlangenmoor und kehr zum Mönchanführer zurück."},
+  {t:"Wo Gerüchte entstehen",d:"Reise nach Varnia und such Sebastian. Laut Game8 gewinnst du dafür das Armdrücken in der Taverne und gibst dem Bettler Kupfer; Sebastian steht am Ende am Handelsposten bei den Anschlagtafeln."},
+  {t:"Die Hexen des Ostens",d:"Folge Sebastian durch das Sacred Land (EN) und triff die Hexen. Sie öffnen dir den Weg durch die Sandsturmbarriere."},
+  {t:"Der Weg jenseits des Sandsturms",d:"Finde dich an den Wegsteinen durch den Sandsturm und nimm die fünf Aufgaben an, die die nächsten Schritte bilden. Die ausführliche Lösung steht im eigenen Abschnitt Der Weg jenseits des Sandsturms."},
+  {t:"Vom Sand verhüllte Nachbarn",d:"Zwischen Lukumiya und Maddin vermitteln und die Medizin nach Lukumiya bringen."},
+  {t:"Das verirrte Kind",d:"Das Kind vom Wegstein östlich von Maddin nach Faraj begleiten."},
+  {t:"Die Gruppe, die nicht zurückkehrte",d:"In Hazran das verirrte Kalb mit der Laterne aufspüren und zurücktragen."},
+  {t:"Von Dunkelheit verschlungenes Dorf",d:"Im Dorf Yasmin die Antumbra-Priester und ihre Leute besiegen."},
+  {t:"Verzerrter Lichtstrahl",d:"Die korrumpierten Wegsteine läutern, indem du die fünf schwarzen Pfähle entfernst."},
+  {t:"Der Drahtzieher",d:"Folge Antumbras Spuren zur Grabstätte des Schweigens, besiege die Wachen am Eingang und dann Kharzek, den Antumbra-Großarchon."},
+  {t:"Der Pfad des Kartografen",d:"Kehr zu Sebastian am Pilgrim's Peak (EN) zurück und vervollständige die Karte. Danach zeigt das Journal 13 von 13."}
+ ],
+ belohnung:["Kamfprüstung des Graumähnenanwärters (Schritt 2) und Matthias als entsendbarer Gefährte","Manifestation des Ultimativen (Abyss-Ausrüstung, Schritt 3)","100 Glänzende Samen (Schritt 5)","Abyss-Artefakt und Vollstrecker der Enthüllung (Schritt 12)","Erkundungsberichte der besuchten Orte (Spieldaten)"],
+ hinweise:[
+  {kind:"info",txt:"Der Start wird leicht übersehen: Öffne das Journal, wähle Hauptquests und verfolge Jenseits der Ränder. Die Reihe läuft unabhängig von den DLC-Reihen für Oongka und Damiane (Whisper of the House)."},
+  {kind:"warn",txt:"Nach dem Kampf gegen T'rukan musst du zum Mönchanführer zurück, sonst geht die Reihe nicht weiter (Whisper of the House)."},
+  {kind:"info",txt:"Armdrücken und Kupfer für den Bettler in Varnia nennt nur Game8. Den Kampf gegen Kharzek ordnen Game8 und die Spieldaten Schritt 12 (Der Drahtzieher) zu, nicht Schritt 6."}
+ ],
+ suchbegriffe:["beyond the margins","beyond the margins walkthrough","kliff dlc quest","kliff dlc reihe","ein augenblick der rast","ein bekanntes gesicht","wegweisende lehren","wo gerüchte entstehen","die hexen des ostens","der drahtzieher","veil of darkness","der pfad des kartografen","path of the mapmaker","sebastian","matthias","andrew","t'rukan","mönchanführer","varnia"],
+ quellen:[{t:"Game8: Beyond the Margins",url:"https://game8.co/games/Crimson-Desert/archives/635797",datum:"2026-11-14"},{t:"Game8: alle DLC-Quests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Whisper of the House: Beyond the Margins",url:"https://www.whisperofthehouse.com/crimson-desert/beyond-the-margins",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Der Drahtzieher",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_mapmaker",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Jenseits der Ränder: Lösung aller 13 Schritte"}},
 /* LOES-PFLICHT Ende */
 ];
 const LOESUNGEN_KUER = [
