@@ -2,7 +2,7 @@
 // Schluessel "Fraktion|Quest" exakt wie f.name und q.q in FAC_DATA (data/d05-fac-data.js),
 // Wert: [[Dateiname unter cd_assets/factions/, Bildunterschrift], ...] in Spielreihenfolge.
 // Bilder: ConsolePulse-Guides, Nutzung vom Betreiber erlaubt; Arbeitsstand in G:\Claude\Crimson-Desert-Wiki\fraktion-bilder\.
-// 66 Quests, 144 Bilder (14.11.2026: Sanktums, Hexen, Glocken ergaenzt).
+// 66 Quests, 144 Bilder (14.11.2026: Sanktums, Hexen, Glocken ergaenzt; Cache-Auffrischung nach Altstand im CDN).
 const FAC_QUEST_IMGS = {
  "House Roberts|First Trial of Trust": [
   [
