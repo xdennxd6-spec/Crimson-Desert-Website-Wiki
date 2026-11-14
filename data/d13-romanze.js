@@ -73,8 +73,7 @@ const ROM_WITCHES = [
       {en: "On Knowing", de: "Über das Wissen", d: "Elowen aufsuchen und über ihre Gedanken sprechen."},
       {en: "New Questions", de: "Eine neue Frage", d: ["Nach dem Gespräch über Weisheit kommt ein Brief. Brief lesen.", {v: "Treffen an einer Klippe im Gebiet des Reventine-Klosters.", c: "unb", q: "Game Overdrive"}]},
       {en: "An Evening Toast", de: "Ein Prost zum Abend", d: ["Ein besonderes Geschenk vorbereiten, das ihre Vernunft aufweicht.", {v: "Rezept im Kessel: 2 Wasser, 1 Zucker, 2 Früchte.", c: "unb", q: "Game Overdrive"}]},
-      {en: "Known Answers", de: "Die Antwort vor Augen", d: "Elowen die wahren Gefühle sagen."},
-      {en: "Propose to Elowen", de: "Mache Elowen einen Heiratsantrag", d: "Eigene Aufgabe nach der Reihe.", last: true}
+      {en: "Known Answers", de: "Die Antwort vor Augen", d: "Elowen die wahren Gefühle sagen. Diese Mission hat zwei Ziele: „Drücke Elowen deine Gefühle aus“, danach „Mache Elowen einen Heiratsantrag“. Der Antrag ist keine eigene Aufgabe (Spieldaten)."}
     ],
     goals: "„Make fruit wine to drink with Elowen“ und „Bring drinks to share with Elowen“",
     extra: {v: "Nach der Heirat bleibt Elowen Anbieterin für Abyss-Ausrüstung.", c: "unb", q: "Game Overdrive"},
@@ -96,8 +95,7 @@ const ROM_WITCHES = [
       {en: "The Heart Held Within", de: "Das behütete Herz", d: "Bari aufsuchen und herausfinden, was hinter ihren knappen Bemerkungen steckt."},
       {en: "Longing for the Ordinary", de: "Sehnsucht nach einem gewöhnlichen Leben", d: "Die Antwort kam gut an, ihr Brief ist da. Brief lesen."},
       {en: "An Unpredictable Heart", de: "Ein unberechenbares Herz", d: ["Dem jungen Mann mit der geheimen Methode helfen, die nur du von ihr kennst.", {v: "Dazu gehört die Kraftfaust-Kräuterpastille.", c: "unb", q: "Game Overdrive"}]},
-      {en: "Kind Words", de: "Freundliche Worte", d: "Bari gestehen, was man lange im Herzen trug."},
-      {en: "Propose to Bari", de: "Mache Bari einen Heiratsantrag", d: "Eigene Aufgabe nach der Reihe.", last: true}
+      {en: "Kind Words", de: "Freundliche Worte", d: "Bari gestehen, was man lange im Herzen trug. Diese Mission hat zwei Ziele: „Offenbare Bari deine Gefühle“, danach „Mache Bari einen Heiratsantrag“. Der Antrag ist keine eigene Aufgabe (Spieldaten)."}
     ],
     goals: "„Make the Palmar Pill Bari told you about“, „Deliver medicine to Bari“ und „A Village Date with Bari“",
     imgs: [
@@ -118,8 +116,7 @@ const ROM_WITCHES = [
       {en: "The Cave's Calling", de: "Der Ruf der Höhle", d: "Lyselia in der Höhle aufsuchen und vorsichtig ansprechen."},
       {en: "A World Beyond", de: "Jenseits der bekannten Welt", d: "Ihr Brief ist da. Brief lesen."},
       {en: "One Starry Night", de: "Sternennacht", d: "Hoffnung, dass ihr der Nachthimmel in Erinnerung bleibt."},
-      {en: "Life Ahead of Us", de: "Die Welt, die vor uns liegt", d: "Gemeinsam unter den Sternen."},
-      {en: "Propose to Lyselia", de: "Mache Lyselia einen Heiratsantrag", d: "Eigene Aufgabe nach der Reihe.", last: true}
+      {en: "Life Ahead of Us", de: "Die Welt, die vor uns liegt", d: "Gemeinsam unter den Sternen. Diese Mission hat zwei Ziele: „Gestehe Lyselia deine Gefühle“, danach „Mache Lyselia einen Heiratsantrag“. Der Antrag ist keine eigene Aufgabe (Spieldaten)."}
     ],
     imgs: [
       {f: "lyselia-reihe", alt: "Einzelner großer Baum auf einer Wiese vor Felsklippen und blauem Himmel"},
@@ -139,8 +136,7 @@ const ROM_WITCHES = [
       {en: "Resilience in the Sandstorm", de: "Standhaftigkeit im Sandsturm", d: "Areciel aufsuchen und fragen, warum sie nie pausiert."},
       {en: "The Undrawn Blade", de: "Das ungezogene Schwert", d: "Ihr Brief ist da. Brief lesen."},
       {en: "Power Yet Unleashed", de: "Noch nicht entfesselte Kraft", d: "Mit ihr sprechen, wo sie das Geschehen aus der Ferne beobachtet."},
-      {en: "Someone to Lean On", de: "Ein Mensch zum Anlehnen", d: "Ihr die Gefühle gestehen."},
-      {en: "Propose to Areciel", de: "Mache Areciel einen Heiratsantrag", d: "Eigene Aufgabe nach der Reihe.", last: true}
+      {en: "Someone to Lean On", de: "Ein Mensch zum Anlehnen", d: "Ihr die Gefühle gestehen. Diese Mission hat zwei Ziele: „Drücke Areciel deine Gefühle aus“, danach „Mache Areciel einen Heiratsantrag“. Der Antrag ist keine eigene Aufgabe (Spieldaten)."}
     ],
     goals: "„Return to Areciel“",
     imgs: [
@@ -256,7 +252,7 @@ const ROM_WEDDING = {
   cap: "Die Hochzeitsszene als Spielbild aus den Spieldaten. Wer unter dem Schleier steht, bleibt offen.",
   rows: [
     {t: "Grundregel", d: "Antrag bei 100 auf der erweiterten Stufe."},
-    {t: "Hexen", d: "Zusätzlich die Quests in ihren Sanktums, das Geständnis und die vollständige Romanze-Reihe. Dann erscheint die Antrags-Option."},
+    {t: "Hexen", d: "Zusätzlich die Quests in ihren Sanktums und die ersten drei Missionen der Romanze-Reihe. Die vierte Mission hat zwei Ziele: erst das Geständnis, dann der Antrag (Spieldaten)."},
     {t: "Andere NPCs", d: ["Für einige gelten zusätzliche Voraussetzungen.", {v: "Bei normalen NPCs genügt die Leiste.", c: "unb", q: "Game8"}]},
     {t: "Ablehnung", d: "Anträge können abgelehnt werden."},
     {t: "Wohnsitz vorher?", d: [{v: "Ungeklärt: Game8 verlangt ihn, OutputLag nennt das unbestätigt, die Notice spricht nur von der Zuweisung nach der Heirat. Kliff hat ohnehin ein Heim.", c: "nb"}]},
@@ -443,7 +439,7 @@ function _romWitchFold(w){
     w.steps.map(x=>x.en+' '+x.de+' '+_romFlat(x.d)).join(' '),w.goals||'',_romPlain(w.extra),ROM_WITCH_REQ.join(' '),_romPlain(ROM_ORDER_NOTE),ROM_IMG_NOTE,'Hexen-Marke Witch\'s Token Rezeptbuch Fraktionsreihe romanze heirat hexe witch'].join(' ');
   return cdFold({title:{h:cdEsc(w.name)+' <small class="rom-t-sub">'+cdEsc(w.title)+'</small>'},lead:w.lead,
     icon:{src:w.port,alt:'Porträt von '+w.name,photo:true},tone:w.color,id:'rom-c-'+w.id,cls:'rom-cand',h:4,
-    chips:[{i:'pin',t:w.region},{v:String(w.sanct.length),t:'Sanktums',c:'gold'},{v:'4',t:'Quests + Antrag'},{g:'♥',t:'Heirat als Kliff',c:'red'}],
+    chips:[{i:'pin',t:w.region},{v:String(w.sanct.length),t:'Sanktums',c:'gold'},{v:'4',t:'Quests, Antrag in der 4.'},{g:'♥',t:'Heirat als Kliff',c:'red'}],
     scene:{keys:['rom-'+w.id],tone:w.color,glyph:'♥'},
     aside:'<span class="rom-off-chip" aria-hidden="true"></span>',
     attrs:{'data-fig':'kliff','data-go-id':w.id},s,body:()=>_romWitchBody(w)});
