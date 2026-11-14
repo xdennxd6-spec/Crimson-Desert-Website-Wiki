@@ -170,6 +170,28 @@ const LOESUNGEN_PFLICHT = [
  quellen:[{t:"PowerPyx: Evolving City",url:"https://www.powerpyx.com/crimson-desert-evolving-city-walkthrough/",datum:"2026-11-14"},{t:"Game8: Journey's End",url:"https://game8.co/games/Crimson-Desert/archives/591746",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"hauptquests", h3:"Stadt im Wandel: Lösung"},
  links:[{sec:"chapters",ziel:"ch-Epilog"}]},
+{slug:"ein-mysterioeser-angriff", de:"Ein mysteriöser Angriff", en:"Unidentified Attack", art:"quest",
+ sec:"dlc-quests", ziel:"dlc-q-forged-resolve",
+ kurz:"Letzter Schritt von Oongkas DLC-Reihe Geschmiedete Entschlossenheit. Im Graumähnen-Camp hörst du vom Angriff auf Yanns Wagen, in der Wüste warten die Schrottkönigin der Steinrückenkrebse und danach Eisentyrann Harkan.",
+ voraussetzung:["Hauptquest Ende der Reise abgeschlossen und Geschmiedete Entschlossenheit bis Der Weg des Ingenieurs gespielt","Oongkas verbesserte Handkanone und die Ausrüstung aus der Reihe dabei (Whisper of the House)"],
+ schritte:[
+  {t:"Mit Wynstan sprechen",d:"Geh im Graumähnen-Camp zu Wynstan, der gerade mit Marius redet, und hör dir an, was mit Yann passiert ist."},
+  {t:"In die Wüste reisen",d:"Reise in die Region Crimson Desert und folge dem Questmarker zu Yanns verlassenem Wagen. Aus dem Sand taucht ein Gegner auf."},
+  {t:"Schrottkönigin besiegen",d:"Die Schrottkönigin der Steinrückenkrebse ist eine Maschine mit Lasern und Raketen. Kletter auf ihren Rücken und triff die Schwachstellen (Game8); die verbesserte Handkanone hilft (Whisper of the House)."},
+  {t:"Raketen zurückschicken",d:"Fang ihre Raketen mit Schleier des Windes ab und schick sie zurück, das füllt ihre Betäubungsleiste schnell.",conf:"einzelquelle"},
+  {t:"Eisentyrann Harkan besiegen",d:"Direkt nach der Maschine kämpfst du gegen Harkan. Erst nach seinem Sieg ist die Quest geschafft."},
+  {t:"Abschluss",d:"Sieh dir den Abschlussdialog an; mit der Meldung Main Quest Complete (EN) endet die Reihe.",conf:"einzelquelle"}
+ ],
+ belohnung:["Abyss-Artefakt","Flugbahn des Glanzes (Abyss-Ausrüstung)","Ein Erinnerungsfragment des Kampfes (Spieldaten)"],
+ hinweise:[
+  {kind:"warn",txt:"Der Sieg über die Schrottkönigin beendet die Quest nicht, Harkan folgt sofort (Game8, Whisper of the House)."},
+  {kind:"info",txt:"Ort: Game8 nennt den Nordosten der Region Crimson Desert bei Yanns Wagen, Whisper of the House die Nähe der Sunrest Ruins (EN). Beides kann dieselbe Stelle meinen; maßgeblich ist der Questmarker."},
+  {kind:"info",txt:"Nur laut Game8: Harkans Zauber stoßen weit zurück. Bleib nicht zu lange nah dran und nutz die Handkanone aus der Distanz."}
+ ],
+ suchbegriffe:["unidentified attack","ein mysteriöser angriff lösung","schrottkönigin der steinrückenkrebse","schrottkönigin","scrap metal queen","stoneback crab","eisentyrann harkan","iron tyrant harkan","harkan","yanns wagen","yann","flugbahn des glanzes","radiant flash","geschmiedete entschlossenheit","forged resolve","oongka"],
+ quellen:[{t:"Game8: Forged Resolve",url:"https://game8.co/games/Crimson-Desert/archives/636231",datum:"2026-11-14"},{t:"Whisper of the House: Forged Resolve",url:"https://www.whisperofthehouse.com/crimson-desert/forged-resolve",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Ein mysteriöser Angriff",url:"https://crimsondesert.gaming.tools/de/quests/mission_engineerstory_hunt_sandmachine",datum:"2026-11-14"},{t:"Game8: alle DLC-Quests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Ein mysteriöser Angriff: Lösung"},
+ links:[{sec:"dlc-kampf",ziel:"[data-dlc-k=\"Scrap Metal Queen Stoneback Crab\"]"},{sec:"dlc-kampf",ziel:"[data-dlc-k=\"Iron Tyrant Harkan\"]"}]},
 /* LOES-PFLICHT Ende */
 ];
 const LOESUNGEN_KUER = [
