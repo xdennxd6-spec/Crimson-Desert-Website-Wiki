@@ -76,10 +76,10 @@ function abschnitt(h, e) {
   return `<section class="loes-seo" id="loes-seo-${esc(s)}">
 <h3 id="a-${esc(s)}">${esc(e.seo.h3)}</h3>
 <p class="loes-seo-kurz">${esc(e.kurz)}</p>
-${zeile("Voraussetzung:", e.voraussetzung)}${zeile("Belohnung:", e.belohnung)}<ol class="loes-seo-steps">
+${e.abgrenzung ? `<p class="note">Nicht verwechseln: ${esc(e.abgrenzung)}${e.abgrenzungLink && e.abgrenzungLink.seite ? ` <a href="/${esc(e.abgrenzungLink.seite)}">${esc(e.abgrenzungLink.text || "Ansehen")}</a>` : ""}</p>\n` : ""}${zeile("Voraussetzung:", e.voraussetzung)}${zeile("Belohnung:", e.belohnung)}<ol class="loes-seo-steps">
 ${schritte}
 </ol>
-${hinweise ? hinweise + "\n" : ""}${e.abgrenzung ? `<p class="note">Nicht verwechseln: ${esc(e.abgrenzung)}${e.abgrenzungLink && e.abgrenzungLink.seite ? ` <a href="/${esc(e.abgrenzungLink.seite)}">${esc(e.abgrenzungLink.text || "Ansehen")}</a>` : ""}</p>\n` : ""}${qZeile}<p class="loes-seo-app"><a class="cd-go" href="${appHref}" data-go="${esc(e.sec)}" data-goq="loes-${esc(s)}"${e.tab ? ` data-tab="${esc(e.tab)}"` : ""}>Lösung in der App öffnen</a></p>
+${hinweise ? hinweise + "\n" : ""}${qZeile}<p class="loes-seo-app"><a class="cd-go" href="${appHref}" data-go="${esc(e.sec)}" data-goq="loes-${esc(s)}"${e.tab ? ` data-tab="${esc(e.tab)}"` : ""}>Lösung in der App öffnen</a></p>
 </section>`;
 }
 

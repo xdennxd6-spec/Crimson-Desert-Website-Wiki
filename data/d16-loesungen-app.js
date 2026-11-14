@@ -52,6 +52,7 @@ function loesHtml(e,h){
     +'<h'+h+' class="loes-h" id="'+id+'-h"><span class="loes-k">Lösung:</span> '+cdEsc(e.de)+'</h'+h+'>'
     +(e.en&&e.en!==e.de?'<p class="loes-en" lang="en">'+cdEsc(e.en)+'</p>':'')
     +(e.kurz?'<p class="loes-kurz">'+cdEsc(e.kurz)+'</p>':'')
+    +(e.abgrenzung?cdNote({h:cdEsc(e.abgrenzung)+(e.abgrenzungLink&&e.abgrenzungLink.sec?' '+cdGoLink(e.abgrenzungLink.sec,e.abgrenzungLink.go||'',e.abgrenzungLink.text||'Ansehen'):'')},{kind:'info',title:'Nicht verwechseln',cls:'loes-note loes-abgr'}):'')
     +cdFacts([['Voraussetzung',_loesListe(e.voraussetzung)],['Belohnung',_loesListe(e.belohnung)],['Quellenlage',lage]],{cls:'loes-facts'});
   if(steps.length){
     html+='<ol class="cd-stepper loes-steps">'+steps.map(function(s){
@@ -67,10 +68,6 @@ function loesHtml(e,h){
     var k=n.kind==='warn'||n.kind==='miss'?n.kind:'info';
     html+=cdNote(n.txt,{kind:k,title:n.title||LOES_HINWEIS_TITEL[k],cls:'loes-note'});
   });
-  if(e.abgrenzung){
-    var al=e.abgrenzungLink&&e.abgrenzungLink.sec?' '+cdGoLink(e.abgrenzungLink.sec,e.abgrenzungLink.go||'',e.abgrenzungLink.text||'Ansehen'):'';
-    html+=cdNote({h:cdEsc(e.abgrenzung)+al},{kind:'info',title:'Nicht verwechseln',cls:'loes-note loes-abgr'});
-  }
   var q=_loesL(e.quellen);
   if(q.length){
     var ds=q.map(function(x){return x&&x.datum;}).filter(Boolean),d=ds.length&&ds.every(function(x){return x===ds[0];})?ds[0]:'';
