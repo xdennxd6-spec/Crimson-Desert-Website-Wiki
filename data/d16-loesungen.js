@@ -130,6 +130,27 @@ const LOESUNGEN_PFLICHT = [
  quellen:[{t:"Game8: Einrichtungen verwalten",url:"https://game8.co/games/Crimson-Desert/archives/636169",datum:"2026-11-14"},{t:"Game8: alle DLC-Quests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Xboxplay: The Saw Turns Again",url:"https://xboxplay.games/crimson-desert/how-to-complete-the-saw-turns-again-quest-in-crimson-desert-77231",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Wieder rotierende Sägeblätter",url:"https://crimsondesert.gaming.tools/de/faction-quests/mission_graymane_management_timberhamsawmill_operation",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Neuer Elan: Lösung (Scheitheim-Sägewerk)"},
  links:[{sec:"dlc",ziel:"dlc-b-leben"}]},
+{slug:"grabstaette-des-schweigens", de:"Grabstätte des Schweigens", en:"Silent Burial Ground", art:"ort",
+ sec:"dlc-quests", ziel:"dlc-q-beyond-the-margins",
+ kurz:"Versteckter Kampfort in Kliffs DLC-Reihe Jenseits der Ränder: Im Schritt Der Drahtzieher wartet dort Kharzek, der Antumbra-Großarchon. Der Eingang öffnet sich erst nach den fünf Aufgaben im Sandsturm.",
+ voraussetzung:["Reihe Jenseits der Ränder bis Der Weg jenseits des Sandsturms gespielt, alle fünf Aufgaben im Sandsturm erledigt","Die Aufgaben bei Sebastian abgegeben, Schritt Der Drahtzieher ist aktiv"],
+ schritte:[
+  {t:"Zur Grabstätte reisen",d:"Folge Antumbras Spuren zu einem Ort, der nicht auf der Karte steht. Laut Game8 liegt er westlich des Sandsturmgebiets.",conf:"einzelquelle"},
+  {t:"Wachen besiegen",d:"Besiege die Gegner vor dem versiegelten Eingang. Danach öffnen sich die Tore von selbst, es gibt weder Schlüssel noch Türrätsel."},
+  {t:"Hineingehen",d:"Geh hinein, bis eine Zwischensequenz startet. Danach beginnt der Kampf gegen Kharzek."},
+  {t:"Kharzek besiegen",d:"Kharzek wechselt oft die Position und kann deine Zielerfassung lösen. Kontere nach seinen Angriffen, renn ihm nicht hinterher und halte Ausdauer zum Ausweichen bereit.",conf:"einzelquelle"},
+  {t:"Belohnung und Rückkehr",d:"Nimm nach dem Sieg Abyss-Artefakt und Vollstrecker der Enthüllung mit und kehr zu Sebastian zurück (Der Pfad des Kartografen)."}
+ ],
+ belohnung:["Abyss-Artefakt","Vollstrecker der Enthüllung (Abyss-Ausrüstung)","Erkundungsbericht über die Grabstätte des Schweigens und ein Erinnerungsfragment (Spieldaten)"],
+ hinweise:[
+  {kind:"warn",txt:"Bleiben die Tore zu, prüf, ob alle fünf Sandsturm-Aufgaben bei Sebastian abgegeben und die Gegner vor dem Eingang besiegt sind (Showgamer, Xboxplay)."},
+  {kind:"info",txt:"Game8 und die Spieldaten ordnen den Kampf dem Schritt Der Drahtzieher zu; Showgamer zählt ihn zur Handlung von Der Weg jenseits des Sandsturms, weil Der Drahtzieher direkt darauf folgt."},
+  {kind:"info",txt:"Der Spieltext nennt den Gegner Kharzek, der Antumbra-Großarchon; in der Bossliste dieses Wikis heißt er Antumbra-Archon, Kharzek."}
+ ],
+ suchbegriffe:["silent burial ground","grabstätte des schweigens öffnen","how to open silent burial ground","kharzek","kharzek besiegen","archon of antumbra","antumbra-großarchon","antumbra-archon","der drahtzieher","veil of darkness","tore öffnen sich nicht","vollstrecker der enthüllung","revelation's end"],
+ quellen:[{t:"Game8: Beyond the Margins",url:"https://game8.co/games/Crimson-Desert/archives/635797",datum:"2026-11-14"},{t:"Showgamer: Silent Burial Ground",url:"https://showgamer.com/en/guides/7089-gayd-crimson-desert-kak-otkryt-bezmolvnyy-mogilnik",datum:"2026-11-14"},{t:"Whisper of the House: Beyond the Margins",url:"https://www.whisperofthehouse.com/crimson-desert/beyond-the-margins",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Der Drahtzieher",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_mapmaker",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Grabstätte des Schweigens: so kommst du hinein"},
+ links:[{sec:"dlc-kampf",ziel:"[data-dlc-k=\"Kharzek, Archon of Antumbra\"]"}]},
 /* LOES-PFLICHT Ende */
 ];
 const LOESUNGEN_KUER = [
