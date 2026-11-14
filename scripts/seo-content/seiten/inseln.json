@@ -1,5 +1,5 @@
 {
-  "intro": "Crimson Desert kennt {{anzahl}} Inseln mit eigenem Namen. Diese Seite führt jede mit Namen auf Deutsch und Englisch auf und zeigt, was Spieldaten und Wiki zu ihr nennen: Meeresgebiet, Orte, Höhlen, Quests und Spieltexte, jede Angabe in der App mit Beleg. Wo die Daten nichts hergeben, steht „nicht erfasst“ statt einer Vermutung. Schiffe, Tauchen und Reittiere des DLC stehen bei [[/charting-the-unknown|Charting the Unknown]].",
+  "intro": "Crimson Desert kennt {{anzahl}} Inseln mit eigenem Namen. Diese Seite führt jede mit Namen auf Deutsch und Englisch auf und zeigt, was Spieldaten und Wiki zu ihr nennen: Meeresgebiet, Orte, Höhlen, Quests und Spieltexte, jede Angabe in der App mit Beleg. Wo die Daten nichts hergeben, steht dort nichts statt einer Vermutung. Schiffe, Tauchen und Reittiere des DLC stehen bei [[/charting-the-unknown|Charting the Unknown]].",
   "faq": [
     {
       "frage": "Wie viele Inseln gibt es in Crimson Desert?",
@@ -7,11 +7,11 @@
     },
     {
       "frage": "In welchem Meer liegt welche Insel?",
-      "antwort": "Ein Meeresgebiet steht nur bei Inseln, bei denen die Spieldaten oder das Wiki die Insel einem Meer zuordnen. Für alle anderen heißt es „nicht erfasst“. Das Wiki leitet kein Meer aus Koordinaten ab."
+      "antwort": "Ein Meeresgebiet steht nur bei Inseln, bei denen die Spieldaten oder das Wiki die Insel einem Meer zuordnen. Bei allen anderen steht kein Meer. Das Wiki leitet kein Meer aus Koordinaten ab."
     },
     {
       "frage": "Gibt es Höhlen auf den Inseln?",
-      "antwort": "Ja, die DLC-Meere enthalten Höhlen, auch unter Wasser. Eine Höhle ordnet die Seite einer Insel nur zu, wenn ihr Spieltext oder Name die Insel nennt. Alle übrigen stehen im Abschnitt „Meeresgebiet, Insel nicht belegt“."
+      "antwort": "Ja, die DLC-Meere enthalten Höhlen, auch unter Wasser. Eine Höhle ordnet die Seite einer Insel nur zu, wenn ihr Spieltext oder Name die Insel nennt. Alle übrigen stehen im Abschnitt „Ohne Inselbezug“."
     },
     {
       "frage": "Woher stammen die Texte zu den Inseln?",

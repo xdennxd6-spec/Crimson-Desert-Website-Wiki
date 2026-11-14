@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=a10ba78bb1">
+<link rel="stylesheet" href="app.css?v=191c5af6b2">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -296,6 +296,7 @@ font-size:var(--fs-10);font-weight:700;text-transform:uppercase;letter-spacing:.
 .seo-more article.rom-seo li{margin:0 0 5px}
 .seo-more article.card img.reit-ico{width:64px;height:64px;aspect-ratio:1/1;object-fit:contain;padding:4px}
 .seo-more article.ins-seo .ins-en{margin:0 0 8px;color:var(--ink-dim);font-size:13px}
+.seo-more article.ins-seo .ins-img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin:0 0 12px}
 
 .seo-more{margin:44px 0 8px;padding:22px 22px 18px;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:14px;
 background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.62}
@@ -1737,7 +1738,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 
   <!-- Inseln (11.11.2026): Lader inselnLaden(), CSS in app.css (Anker INSELN) -->
   <section class="sec" id="sec-inseln">
-    <h2 class="sec-t"><span class="sec-sym">⛰</span> Inseln <span class="sec-t-en">Islands</span></h2>
+    <h2 class="sec-t"><span class="sec-sym">◒</span> Inseln <span class="sec-t-en">Islands</span></h2>
     <div id="inseln-root"></div>
   </section>
 
@@ -2086,12 +2087,12 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d01-weapons.js?v=4c2a958adb" fetchpriority="low"></script>
 <script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
-<script src="data/d04-armor-imgs.js?v=b7a3920ec5" fetchpriority="low"></script>
+<script src="data/d04-armor-imgs.js?v=14c298e4c8" fetchpriority="low"></script>
 <script src="data/d05-fac-data.js?v=71c80e97f8" fetchpriority="low"></script>
 <script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=11a4fac7f8" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=419e84c8a8" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
 <script src="data/d11-fac-quest-imgs.js?v=e59e403f8b" fetchpriority="low"></script>
 <script src="data/d12-dlc.js?v=3d1cdd67b3" fetchpriority="low"></script>
@@ -12148,7 +12149,7 @@ function _inSkript(setze){return new Promise(res=>{const s=document.createElemen
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
   if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=0bd3a9d4ef';})))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=8341ff9d24';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }
