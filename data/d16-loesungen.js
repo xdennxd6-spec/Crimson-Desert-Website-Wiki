@@ -390,6 +390,27 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["die enthüllte wahrheit","the truth unveiled","unbekanntes tier","mysterious animals","herausforderung","challenge","hyazinthara","hyacinth macaw","uhrwerk-adler","iron eagle","clockwork eagle","haustierheim","totempfahl der bindung","wüstenmelone","quecksilber"],
  quellen:[{t:"PC Gamer: Hyacinth Macaw",url:"https://www.pcgamer.com/games/action/crimson-desert-hyacinth-macaw-location-tame/",datum:"2026-11-14"},{t:"FinalBoss: Hyacinth Macaw",url:"https://finalboss.io/crimson-desert-how-to-tame-the-hyacinth-macaw",datum:"2026-11-14"},{t:"Gfinity: Hyacinth Macaw",url:"https://www.gfinityesports.com/article/how-to-get-the-hyacinth-macaw-pet-in-crimson-desert",datum:"2026-11-14"},{t:"Gfinity: Iron Eagle",url:"https://www.gfinityesports.com/article/how-to-find-and-tame-the-legendary-iron-eagle-in-crimson-desert",datum:"2026-11-14"},{t:"games.gg: Eisenadler",url:"https://games.gg/de/crimson-desert/guides/crimson-desert-eisenadler-erhalten/",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"pets", h3:"Unbekanntes Tier (The Truth Unveiled): Lösung"}},
+{slug:"geschenke-fuer-hexen", de:"Geschenke für Hexen", en:"Witch Gifts", art:"thema",
+ sec:"romanze", ziel:"rom-geschenke",
+ kurz:"Geschenke heben bei den Hexen Elowen, Bari, Lyselia und Areciel zuerst das normale Vertrauen. Am meisten bringen Ring der Hexen und Goldbarren, für die Romanze zählt danach nur ein Geschenk pro Spieltag.",
+ voraussetzung:["Sanktum-Quests der jeweiligen Hexe abgeschlossen, Geschenke ersetzen das nicht","Hexen heiraten kann nur Kliff"],
+ schritte:[
+  {t:"Questreihe der Hexe abschließen",d:"Erst wenn die Sanktum-Reihe der Hexe erledigt ist, lässt sich mit ihr flirten. Welche Quests genau nötig sind, geben die Quellen je Hexe unterschiedlich an."},
+  {t:"Vertrauen auf 100 bringen",d:"Ring der Hexen und Goldbarren bringen bei den Hexen je bis zu 100 Vertrauen. Auch das Geheimnisvolle Geschenk bringt viel, laut einer Community-Datenbank bei Lyselia ebenfalls 100. Hirschgeweih-Tee (Rezept im Hexenhaus am Roten See) und passende Blumentöpfe wie der Topf mit einem Wüstenkaktus bringen je 20."},
+  {t:"Erst dann flirten",d:"Bei 100 Vertrauen flirten. Wer zu früh flirtet, verliert 10 Vertrauen."},
+  {t:"Täglich pflegen",d:"Nach dem Flirt jeden Spieltag grüßen, einmal plaudern und ein Geschenk geben. Mehr als ein Geschenk am Tag bringt für die Romanze nichts, auch ein Mehrfachgeschenk zählt nur einmal."},
+  {t:"Antrag",d:"Mit voller Romanzeleiste und erledigten Romanzequests ist ein Antrag möglich. Verheiratet sein kannst du nur mit einer Person."}
+ ],
+ belohnung:["Mehr Vertrauen, Romanze und am Ende die Heirat"],
+ hinweise:[
+  {kind:"warn",txt:"Die Punktwerte gelten für das normale Vertrauen. Wie viel ein Geschenk auf der Romanzeleiste bringt, nennt keine geprüfte Quelle."},
+  {kind:"info",txt:"Ring der Hexen: Areciel verkauft ihn laut den Wiki-Daten (questlog) für 500 Silber, GuideDragon nennt 25 Silber. Außerdem gibt es ihn als Belohnung des Kampfs gegen Goyen in Kapitel 9."},
+  {kind:"info",txt:"Goldbarren: GIGA nennt allgemein 10 Vertrauen, GuideDragon und Game Overdrive bis zu 100 bei den Hexen. Vermutlich hängt der Wert von der Person ab."},
+  {kind:"info",txt:"Laut GuideDragon beendet die Heirat die Romanzen mit den anderen Hexen, und der Laden der Ehefrau kann wegfallen."}
+ ],
+ suchbegriffe:["geschenke für hexen","hexen geschenke","geschenk hexe","witch gifts","ring der hexen","witch's ring","goldbarren","gold bar","geheimnisvolles geschenk","hirschgeweih-tee","wüstenkaktus","vertrauen","flirten","elowen","bari","lyselia","areciel","heiraten"],
+ quellen:[{t:"GuideDragon: Alle 4 Hexen heiraten",url:"https://guidedragon.de/en/guides/crimson-desert-alle-4-hexen-heiraten-geschenke-vertrauen-flirten/",datum:"2026-11-14"},{t:"Game8: Romanze",url:"https://game8.co/games/Crimson-Desert/archives/584417",datum:"2026-11-14"},{t:"GIGA: Romanze und Heirat",url:"https://www.giga.de/games/crimson-desert-romanze-starten-beziehungen-beginnen-heiraten--01M66GXSGA89E1VD0ZE0T85WQ8",datum:"2026-11-14"},{t:"Game Overdrive: Lyselia",url:"https://gameoverdrive.com.br/crimson-desert-lyselia-romance-como-casar/",datum:"2026-11-14"},{t:"Nerdschalk: Ring der Hexen",url:"https://nerdschalk.com/crimson-desert-witchs-ring-and-greymanes-earring-location-achieve-enlightenment-in-nest-of-valor-thinning-blade/",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"hexen", h3:"Geschenke für Hexen: was wirkt"}},
 /* LOES-KUER Ende */
 ];
 const LOESUNGEN = LOESUNGEN_PFLICHT.concat(LOESUNGEN_KUER);

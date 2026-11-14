@@ -24,6 +24,7 @@
 // synth-riding-bear-amulet-0). Die Namen sind in den Daten eindeutig.
 
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 
 export const SLUG = "hexen";
 export const NAV_LABEL = "Hexen & Fusion";
@@ -171,6 +172,7 @@ ${synthTable(t.sonstige.map((c) => synthRow(c, ctx)))}`;
 <a class="cta" href="${DEEPLINK}">Hexen &amp; Fusion interaktiv in der App öffnen &rarr;</a>
 <p class="note">In der App steht die Synthese auf der eigenen Seite <a href="/#sec-synthesis">Abyss-Synthese</a>: als durchsuchbarer Baum, nach Stufe filterbar und auf Cores mit bekanntem Effekt eingrenzbar.</p>
 <p class="note">Die Core-Effekte selbst stehen im Überblick der <a href="/abyss-cores">Abyss-Ausrüstung</a>, die Reittiere hinter den Sigil-Amuletten bei den <a href="/mounts">Reittieren</a> und weitere Herstellung unter <a href="/crafting">Herstellen &amp; Farmen</a>.</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${hexenSection}
 ${stufenSection}
 ${effektSection}
