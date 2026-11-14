@@ -85,6 +85,29 @@ const LOESUNGEN_PFLICHT = [
  suchbegriffe:["beyond the margins","beyond the margins walkthrough","kliff dlc quest","kliff dlc reihe","ein augenblick der rast","ein bekanntes gesicht","wegweisende lehren","wo gerüchte entstehen","die hexen des ostens","der drahtzieher","veil of darkness","der pfad des kartografen","path of the mapmaker","sebastian","matthias","andrew","t'rukan","mönchanführer","varnia"],
  quellen:[{t:"Game8: Beyond the Margins",url:"https://game8.co/games/Crimson-Desert/archives/635797",datum:"2026-11-14"},{t:"Game8: alle DLC-Quests",url:"https://game8.co/games/Crimson-Desert/archives/635794",datum:"2026-11-14"},{t:"Whisper of the House: Beyond the Margins",url:"https://www.whisperofthehouse.com/crimson-desert/beyond-the-margins",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Der Drahtzieher",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_mapmaker",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Jenseits der Ränder: Lösung aller 13 Schritte"}},
+{slug:"schicksalhafte-begegnung", de:"Schicksalhafte Begegnung", en:"Fateful Encounter", art:"quest",
+ sec:"dlc-quests", ziel:"dlc-q-forged-resolve",
+ kurz:"Sechster Schritt von Oongkas DLC-Reihe Geschmiedete Entschlossenheit. Vargus' Gerät hat Oongka in Marnis Anwesen versetzt; über ein Kerzenrätsel, ein Buch, einen Bilderrahmen und einen falschen Boden gelangst du in Marnis geheimes Labor.",
+ voraussetzung:["Hauptquest Ende der Reise abgeschlossen, Reihe Geschmiedete Entschlossenheit im Journal verfolgt","Schritte Ein neuer Weg bis Die rissige Tür erledigt: Türrätsel gelöst (höchstens 15 Züge) und Vargus' Gerät benutzt"],
+ schritte:[
+  {t:"Kerzen am Eisentor",d:"Sieh dir an der Wand vor dem Eisentor die sechs Kerzen mit Sonnen- und Mondzeichen an. Zünde die drei Kerzen oben, unten rechts und unten links an, die anderen bleiben aus. Das Tor öffnet sich."},
+  {t:"Zum Esstisch",d:"Geh durch das Tor zum Esstisch, bis eine Zwischensequenz startet. Danach führt dich Marnis fliegender Butler."},
+  {t:"Dem Butler folgen",d:"Folge ihm nach draußen und untersuche den Treibstofftank und die Maschinen.",conf:"einzelquelle"},
+  {t:"Gelbes Buch holen",d:"Geh zurück ins Haus und im zweiten Stock zur Kommode zwischen den Rüstungen. Nimm das gelbe Buch mit."},
+  {t:"Geheimraum öffnen",d:"Ziel am Bücherregal im Flur oben rechts, bis die Aktion zum Einsetzen (Plant, EN) erscheint, und setz das Buch ein. Der Geheimraum öffnet sich."},
+  {t:"Schiefer Bilderrahmen",d:"Such im Erdgeschoss unter der Treppe den schiefen Bilderrahmen und benutze ihn."},
+  {t:"Falscher Boden",d:"Geh in den leeren Raum und such im Südwesten den falschen Boden. Fall hindurch, unten liegt Marnis geheimes Labor."}
+ ],
+ belohnung:["Herstellungsrezept: Verstärkte Handkanone"],
+ hinweise:[
+  {kind:"warn",txt:"Das Buch nur zu lesen reicht nicht. Am Bücherregal oben rechts zielen, bis die Aktion zum Einsetzen erscheint (Game8, Whisper of the House)."},
+  {kind:"info",txt:"Kerzenrätsel kurz: die drei Kerzen auf 12, 4 und 8 Uhr anzünden. Xboxplay beschreibt es als oberste Kerze an, Nachbarn aus, dann abwechselnd."},
+  {kind:"info",txt:"Startort der Reihe: Game8 nennt Oongkas Werkstatt im Graumähnen-Camp (dort sprichst du mit Wynstan), Whisper of the House eine Werkstatt im Nordwesten von Pailune. Das Journal zeigt den Weg."},
+  {kind:"info",txt:"Danach folgt Verstreute Fragmente: Im Labor sammelst du das Material für die Verbesserte Fatum-Handkanone."}
+ ],
+ suchbegriffe:["fateful encounter","schicksalhafte begegnung lösung","marnis anwesen","marni's manor","kerzenrätsel","kerzen rätsel eisentor","candle puzzle","locked iron gate","eisentor","gelbes buch","bücherregal","schiefer bilderrahmen","crooked picture frame","geheimraum","falscher boden","marnis geheimes labor","geschmiedete entschlossenheit","forged resolve","oongka","verstärkte handkanone"],
+ quellen:[{t:"Game8: Forged Resolve",url:"https://game8.co/games/Crimson-Desert/archives/636231",datum:"2026-11-14"},{t:"Xboxplay: Locked Iron Gate",url:"https://xboxplay.games/crimson-desert/how-to-find-a-way-past-the-locked-iron-gate-in-crimson-desert-77129",datum:"2026-11-14"},{t:"Whisper of the House: Forged Resolve",url:"https://www.whisperofthehouse.com/crimson-desert/forged-resolve",datum:"2026-11-14"}],
+ conf:"belegt", seo:{seite:"charting-the-unknown", h3:"Schicksalhafte Begegnung: Lösung (Marnis Anwesen)"}},
 /* LOES-PFLICHT Ende */
 ];
 const LOESUNGEN_KUER = [
