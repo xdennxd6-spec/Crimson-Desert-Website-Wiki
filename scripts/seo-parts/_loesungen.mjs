@@ -111,7 +111,7 @@ export function loesungenSeo(h, seite) {
   const teile = liste.map((e) => abschnitt(h, e)).join("\n");
   if (liste.length === 1) return teile;
   return `<div class="loes-seo-wrap" id="loesungen">
-<p class="note">Schritt-für-Schritt-Lösungen zu Quests, nach denen oft gesucht wird.</p>
+<p class="note">Schritt-für-Schritt-Lösungen zu Quests, Orten und Gegenständen, nach denen oft gesucht wird.</p>
 ${teile}
 </div>`;
 }
