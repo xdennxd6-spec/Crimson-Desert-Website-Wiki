@@ -94,7 +94,13 @@ function _loesKoerper(el){
   /* Set-Karte (armorsets, details.set-more) und Reittierkarte (mounts, details.mount-notes): Lösung in deren zugeklappten Detailteil */
   return el.querySelector('.item-more-body')||el.querySelector('.set-more-body,.mount-notes-body')||el;
 }
-function _loesLink(e){ return cdGoLink(e.sec,'loes-'+e.slug,e.de,'loes-go'); }
+/* Liegt die Karte in einem Reiter (e.tab), trägt der Link den Reiter mit (href &tab=, data-tab für den Klick-Handler);
+   sonst landen Erstbesucher ohne gemerkten Reiter ins Leere (Gegenprüfung M1, 15.11.2026). */
+function _loesLink(e){
+  var h=cdGoLink(e.sec,'loes-'+e.slug,e.de,'loes-go');
+  if(!e.tab||!/^[a-z0-9-]+$/.test(e.tab))return h;
+  return h.replace(' href="#sec=',' data-tab="'+e.tab+'" href="#sec=').replace('&go=','&tab='+e.tab+'&go=');
+}
 /* Zeile oben im Karteninhalt: alle Lösungen dieser Karte (eigene und verlinkte), sortiert wie LOESUNGEN */
 function _loesTop(box,slugs){
   var es=slugs.map(function(s){return LOES_IDX[s];}).filter(Boolean);if(!es.length)return false;
@@ -198,6 +204,8 @@ function loesEinhaengen(){
   document.addEventListener('cd-go-miss',function(ev){
     var d=ev.detail||{},q=String(d.q||'');if(q.indexOf('loes-')!==0)return;
     var e=LOES_IDX[q.slice(5)];if(!e)return;
+    /* Adresse ohne &tab= (alter Link, Lesezeichen): Reiter der Karte selbst öffnen, sonst bleibt sie lazy und unsichtbar (M1) */
+    if(e.tab&&typeof _applyTabParam==='function'){ var pane=document.getElementById('sec-'+e.sec); if(pane&&pane.classList.contains('active'))_applyTabParam(e.sec,e.tab); }
     var el=e.ziel!=null?_loesZiel(e.sec,e.ziel):null;
     if(_loesLazy(el)&&typeof cdFoldFill==='function')cdFoldFill(el);
     loesEinhaengen();

@@ -23,13 +23,14 @@ const LOESUNGEN_PFLICHT = [
  ],
  belohnung:["Erkundungsberichte über Lukumiya, Maddin, Faraj, Hazran, das Dorf Yasmin und die Trümmer des Paradieses (Spieldaten)","Die großen Belohnungen gibt es über die ganze Reihe Jenseits der Ränder"],
  hinweise:[
-  {kind:"info",txt:"Eigene Kartenmarkierungen gehen im Sandsturm nicht. Wer sich verirrt, reist zu einem entdeckten Abyss-Nexus und startet von dort neu."},
+  {kind:"info",txt:"Laut Showgamer lassen sich im Sandsturm keine eigenen Kartenmarkierungen setzen. Wer sich verirrt, reist zu einem entdeckten Abyss-Nexus und startet von dort neu."},
   {kind:"warn",txt:"Beim Kind nicht zu weit vorauslaufen, sonst scheitert die Aufgabe (Game8)."},
-  {kind:"info",txt:"Nur laut Xboxplay: Weitere Pfähle stecken hinter zerschlagbaren Töpfen, in Wismutkristallen (mit Blitzangriffen zerstören) und in einem Keller hinter Dornen (mit Feuer oder Licht reflektieren freibrennen). Grobe Lage dort: Lukumiya nördlich von Sebastian, Maddin weit im Norden, Hazran im Westen, Yasmin im Nordwesten."},
+  {kind:"info",txt:"Nur laut Xboxplay: Weitere Pfähle stecken hinter zerschlagbaren Töpfen, in Wismutkristallen (mit Blitzangriffen zerstören) und in einem Keller hinter Dornen (mit Feuer oder Licht reflektieren freibrennen)."},
+  {kind:"info",txt:"Grobe Lage der Dörfer laut Showgamer: Lukumiya nördlich von Sebastian, Maddin weit im Norden, Hazran im Westen, Yasmin im Nordwesten."},
   {kind:"info",txt:"Zählung geklärt: Xboxplay nennt vier Dorfaufgaben plus Verzerrter Lichtstrahl, also wie Game8 fünf Aufgaben, und vier Wegsteine, von denen einer zwei Pfähle hat (fünf Pfähle wie in den Spieldaten). Xboxplay nennt den Schritt optional, in den Spieldaten ist er fester Teil der 13 Schritte."}
  ],
  suchbegriffe:["beyond the sandstorm","sandsturm lösung","weg durch den sandsturm","sandsturm barriere","marker stones","wegsteine","schwarzer pfahl","dark stake","verzerrter lichtstrahl","distorted light","vom sand verhüllte nachbarn","das verirrte kind","die gruppe, die nicht zurückkehrte","missing calf","von dunkelheit verschlungenes dorf","lukumiya","maddin","faraj","hazran","yasmin","sebastian","pilgrim's peak"],
- quellen:[{t:"Game8: Beyond the Margins",url:"https://game8.co/games/Crimson-Desert/archives/635797",datum:"2026-11-14"},{t:"Xboxplay: Sandsturm",url:"https://xboxplay.games/crimson-desert/how-to-navigate-the-sandstorm-in-crimson-desert-77158",datum:"2026-11-14"},{t:"Whisper of the House: Beyond the Margins",url:"https://www.whisperofthehouse.com/crimson-desert/beyond-the-margins",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Der Weg jenseits des Sandsturms",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_count",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Verzerrter Lichtstrahl",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_milestone",datum:"2026-11-14"}],
+ quellen:[{t:"Game8: Beyond the Margins",url:"https://game8.co/games/Crimson-Desert/archives/635797",datum:"2026-11-14"},{t:"Xboxplay: Sandsturm",url:"https://xboxplay.games/crimson-desert/how-to-navigate-the-sandstorm-in-crimson-desert-77158",datum:"2026-11-14"},{t:"Showgamer: Silent Burial Ground",url:"https://showgamer.com/en/guides/7089-gayd-crimson-desert-kak-otkryt-bezmolvnyy-mogilnik",datum:"2026-11-15"},{t:"Whisper of the House: Beyond the Margins",url:"https://www.whisperofthehouse.com/crimson-desert/beyond-the-margins",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Der Weg jenseits des Sandsturms",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_count",datum:"2026-11-14"},{t:"Spieldaten (gaming.tools): Verzerrter Lichtstrahl",url:"https://crimsondesert.gaming.tools/de/quests/mission_mapmakerstory_kliff_milestone",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"der-weg-jenseits-des-sandsturms", h3:"Der Weg jenseits des Sandsturms: Lösung"}},
 {slug:"uralter-tempel", de:"Uralter Tempel", en:"Ancient Shrine", art:"ort",
  sec:"dlc-quests", ziel:"dlc-q-weitere-missionen-auf-see",
@@ -48,7 +49,7 @@ const LOESUNGEN_PFLICHT = [
  hinweise:[
   {kind:"info",txt:"Anfahrt: Game8 startet am Steinwacht-Hafen in Delesyia, PatchCrazy am Vellua Port (EN), beide mit Kurs Südost. Im Tempel schwimmt Game8 nach Nordosten zum Hebel, PatchCrazy nach Norden. Folge im Zweifel dem Questmarker."},
   {kind:"info",txt:"Das Wiki führt den Tempel in der Questliste unter Weitere Missionen auf See. Laut Spieldaten und Game8 ist er Schritt 2 von Nebelmeer: Die geraubte Reliquie, Uralter Tempel, Uralte Katastrophe, Das ruhig gewordene Meer."},
-  {kind:"info",txt:"Die Ozeanruinen der Insel Phragma sind eine eigene DLC-Herausforderung mit Fliesenrätsel und nicht dieser Tempel (Game8)."},
+  {kind:"info",txt:"Die Ozeanruinen der Insel Phragma sind eine eigene DLC-Herausforderung mit Rätsel und nicht dieser Tempel (Game8)."},
   {kind:"info",txt:"Uralte Relikte für Nebelmeer: Spieldaten und Game8 vom 3.11. nennen 20, die Game8-Übersicht vom 13.11. nennt 5. Für den Kampf gegen Leviakan empfiehlt Game8 vorher die Fähigkeit Kraftübertragung."}
  ],
  abgrenzung:"Der Uralte Tempel ist ein Unterwasserort aus dem DLC Charting the Unknown. Mit den 37 Uralten Ruinen des Hauptspiels (Abyss-Grenzstein-Rätsel in Hernand, Pailune, Demeniss, Delesyia und der Region Crimson Desert) hat er nichts zu tun.",
@@ -179,8 +180,7 @@ const LOESUNGEN_PFLICHT = [
   {t:"In die Wüste reisen",d:"Reise in die Region Crimson Desert und folge dem Questmarker zu Yanns verlassenem Wagen. Aus dem Sand taucht ein Gegner auf."},
   {t:"Schrottkönigin besiegen",d:"Die Schrottkönigin der Steinrückenkrebse ist eine Maschine mit Lasern und Raketen. Kletter auf ihren Rücken und triff die Schwachstellen (Game8); die verbesserte Handkanone hilft (Whisper of the House)."},
   {t:"Raketen zurückschicken",d:"Fang ihre Raketen mit Schleier des Windes ab und schick sie zurück, das füllt ihre Betäubungsleiste schnell.",conf:"einzelquelle"},
-  {t:"Eisentyrann Harkan besiegen",d:"Direkt nach der Maschine kämpfst du gegen Harkan. Erst nach seinem Sieg ist die Quest geschafft."},
-  {t:"Abschluss",d:"Sieh dir den Abschlussdialog an; mit der Meldung Main Quest Complete (EN) endet die Reihe.",conf:"einzelquelle"}
+  {t:"Eisentyrann Harkan besiegen",d:"Direkt nach der Maschine kämpfst du gegen Harkan. Erst nach seinem Sieg ist die Quest geschafft."}
  ],
  belohnung:["Abyss-Artefakt","Flugbahn des Glanzes (Abyss-Ausrüstung)","Ein Erinnerungsfragment des Kampfes (Spieldaten)"],
  hinweise:[
@@ -332,7 +332,7 @@ const LOESUNGEN_KUER = [
  suchbegriffe:["rüstung der leere","void armor","void set","void armor set","knight of void","ritter der leere","plattenrüstung der leere","plattenhelm der leere","plattenumhang der leere","plattenhandschuhe der leere","plattenstiefel der leere","langschwert der leere","buried corridor","forgotten city","room of brass shackles"],
  quellen:[{t:"Game8: Void Armor Set",url:"https://game8.co/games/Crimson-Desert/archives/637024",datum:"2026-11-14"},{t:"GameRant: Knight of Void Armor Set",url:"https://gamerant.com/crimson-desert-knight-void-armor-set-locations/",datum:"2026-11-14"},{t:"KeenGamer: Knight of the Void Armor Set",url:"https://www.keengamer.com/articles/guides/crimson-desert-how-to-get-knight-of-the-void-armor-set/",datum:"2026-11-14"}],
  conf:"belegt", seo:{seite:"ruestungen", h3:"Rüstung der Leere (Void Armor): alle Fundorte"}},
-{slug:"stab-und-flinkes-stossen", de:"Stab und Flinkes Stoßen", en:"Stab / Swift Stab", art:"skill",
+{slug:"stab-und-flinkes-stossen", de:"Stab (EN) und Flinkes Stoßen", en:"Stab / Swift Stab", art:"skill",
  sec:"skills", ziel:"sk-kliff-stab",
  kurz:"Gesucht wird meist Kliffs Stoß-Fähigkeit Stab (EN) aus dem Ausdauerbaum, die du von Anfang an hast. Ihr bekanntester Ausbau ist Flinkes Stoßen: ein zweiter Treffer direkt nach einem gelungenen aufgeladenen Stoß.",
  voraussetzung:["Figur Kliff, Ausdauerbaum","Abyss-Artefakte für die Ausbaustufen"],
@@ -350,7 +350,7 @@ const LOESUNGEN_KUER = [
  ],
  suchbegriffe:["stoßen","stoßen skill","stechen","stab","swift stab","flinkes stoßen","aufspießender stoß","sprungstoß","riedteufel","reed devil","beobachten","watch and learn"],
  quellen:[{t:"Game8: Swift Stab",url:"https://game8.co/games/Crimson-Desert/archives/587289",datum:"2026-11-14"},{t:"Fextralife: Swift Stab",url:"https://crimsondesertgame.wiki.fextralife.com/Swift+Stab",datum:"2026-11-14"},{t:"Fextralife: Stab",url:"https://crimsondesertgame.wiki.fextralife.com/Stab",datum:"2026-11-14"},{t:"PC Gamer: Observe-Fähigkeiten",url:"https://www.pcgamer.com/games/action/crimson-desert-observe-this-skill-in-action-to-learn-it",datum:"2026-11-14"},{t:"GamePro: Kliff-Build",url:"https://www.gamepro.de/artikel/crimson-desert-kliff-build,3450030.html",datum:"2026-11-14"},{t:"crimsondesert.gg: Kliff-Skillbaum",url:"https://crimsondesert.gg/de/skill-tree/kliff",datum:"2026-11-14"}],
- conf:"belegt", seo:{seite:"skills", h3:"Stoßen-Skill: Stab und Flinkes Stoßen lernen"}},
+ conf:"belegt", seo:{seite:"skills", h3:"Stoßen-Skill: Stab (EN) und Flinkes Stoßen lernen"}},
 {slug:"hai-zaehmen", de:"Hai zähmen", en:"Shark (taming)", art:"thema",
  sec:"mounts", ziel:"[data-mn=\"Shark\"]",
  kurz:"Haie sind Unterwasser-Reittiere aus dem DLC Charting the Unknown. Du betäubst einen Hai mit Kraftfaust, steigst auf und gewinnst das Zähm-Minispiel, danach rufst du ihn als besonderes Reittier.",
@@ -358,8 +358,8 @@ const LOESUNGEN_KUER = [
  schritte:[
   {t:"Hai suchen",d:"Haie sind im Ozean häufig, feste Spawnpunkte gibt es nicht. Viele schwimmen rund um die Inseln, etwa bei der Insel der roten Hänge."},
   {t:"Möglichst ohne Waffen",d:"Waffenschaden kann den Hai töten, dann lässt er sich nicht mehr zähmen. Am sichersten ist Kraftfaust allein."},
-  {t:"Mit Kraftfaust betäuben",d:"Kommt der Hai nah heran, mit Kraftfaust auf den Kopf schlagen, bis er betäubt ist."},
-  {t:"Aufsteigen und Minispiel",d:"Auf den betäubten Hai steigen. Im Minispiel die Kamera so drehen, dass du die Schwanzflosse siehst, und gegen ihre Bewegung steuern, bis die Anzeige voll ist. Das kostet viel Ausdauer."},
+  {t:"Mit Kraftfaust betäuben",d:"Kommt der Hai mit der Schnauze nah heran, mit Kraftfaust zuschlagen, bis er betäubt ist."},
+  {t:"Aufsteigen und Minispiel",d:"Auf den betäubten Hai steigen. Im Minispiel die Kamera hinter den Hai bringen und gegen seine Blickrichtung steuern, bis die Anzeige voll ist. Das kostet viel Ausdauer."},
   {t:"Registrieren und rufen",d:"Danach ist der Hai ein dauerhaftes Reittier. Laut Game8 rufst du ihn über den Reiter Special Mounts (EN) der Reittierauswahl."}
  ],
  belohnung:["Hai als dauerhaftes Unterwasser-Reittier"],
