@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=4eb229b6e4">
+<link rel="stylesheet" href="app.css?v=7deb7fb769">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -1149,7 +1149,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
           <div class="r2b13-regfacts"><span class="r2b13-lbl">Reguläre Synthese</span>
           <ul class="r2b13-facts">
             <li><span class="r2b13-lbl">höchste Stufe</span><span>Höchste so erreichbare Stufe ist <strong>III</strong>.</span></li>
-            <li><span class="r2b13-lbl">Blaupause</span><span>Braucht die passende Blaupause (bei Hexen kaufbar).</span></li>
+            <li><span class="r2b13-lbl">Blaupause</span><span>Braucht die passende Blaupause. Einmal gelesen gilt sie für alle Stufen der Familie. Wo es sie gibt (Hexe, Entsendung des Graumähnen-Camps, Quest, Händler), steht unten auf jeder Rezeptkarte.</span></li>
             <li><span class="r2b13-lbl">Grenze</span><span>Nicht jeder Core ist aufwertbar.</span></li>
           </ul></div>
           <div class="r2b13-modenotes">
@@ -2206,7 +2206,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=e8a267806f" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=e86e896692" fetchpriority="low"></script>
 <script src="data/d01-weapons.js?v=4c2a958adb" fetchpriority="low"></script>
 <script src="data/d02-crafting.js?v=10a2fd48cd" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
@@ -2215,12 +2215,13 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=5cc68f1271" fetchpriority="low"></script>
-<script src="data/d10-enemy-drops.js?v=6309ff85a7" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js?v=a185e7aad3" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=419e84c8a8" fetchpriority="low"></script>
+<script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=13947fead7" fetchpriority="low"></script>
 <script src="data/d12-dlc.js?v=9ec53fa1a1" fetchpriority="low"></script>
 <script src="data/d13-romanze.js?v=6f08b281cc" fetchpriority="low"></script>
 <script src="data/d14-reit.js?v=6b0ec13e59" fetchpriority="low"></script>
+<script src="data/d18-synthese-blaupausen.js?v=19ad86c9f6" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -8024,10 +8025,20 @@ function _r2b13Eq(recipe,selfFam,res,noQty){
 }
 function _r2b13Res(c){return `<span class="r2b13-tok is-res r2b13-t--${c.tier||0}" data-r="${c.roman||'✦'}">${escHtml(deN(c.name))}</span>`;}
 function _r2b13Eff(c){return c.effect?cdFx(_r2b13Dash(c.effect),{split:false,kind:_r2b13Kind(c.effect)}):'<span class="r2b13-noeff">Effekt nicht erfasst</span>';}
+// Blaupausen-Fundorte (15.11.2026): Daten in data/d18-synthese-blaupausen.js (SYNTH_BP je Familie, SYNTH_BP_DLC), erzeugt aus G:\Claude\Crimson-Wiki-Blaupausen
+const R2B13_BPT={haendler:['⚖','Händler'],entsendung:['⚑','Entsendung'],quest:['❖','Quest'],drop:['☠','Beute'],truhe:['▣','Truhe'],sonstiges:['◇','Sonstiges'],unbekannt:['?','offen']};
+function _r2b13BpData(fam){return (typeof SYNTH_BP!=='undefined'&&SYNTH_BP[fam])||null;}
+function _r2b13BpText(b){return b?[b.bp,...b.q.map(q=>q.x)].join(' ')+' blaupause fundort':'';}
+function _r2b13Bp(b){
+  if(!b)return '';
+  const li=q=>{const m=R2B13_BPT[q.t]||R2B13_BPT.sonstiges;return `<li class="r2b13-bp-q r2b13-bp--${escHtml(q.t)}${q.u?' is-u':''}"><span class="r2b13-bp-t"><i class="cd-g" aria-hidden="true">${m[0]}</i>${escHtml(m[1])}</span><span class="r2b13-bp-x">${escHtml(q.x)}${q.u?' <em class="r2b13-bp-u">unbestätigt</em>':''}</span></li>`;};
+  return `<div class="r2b13-bp"><div class="r2b13-bp-hd"><span class="r2b13-lbl">${cdIcon('key')}Blaupause</span><span class="r2b13-bp-n">${escHtml(b.bp)}</span></div><ul class="r2b13-bp-l">${b.q.map(li).join('')}</ul></div>`;
+}
 function _r2b13FamCard(fam,items,match){
   const c0=items[0],chain=items.length>1,anyEff=items.some(c=>c.effect);
   const effs=new Set(items.map(c=>c.effect||''));const oneEff=effs.size===1;
-  const s=(fam+' '+items.map(c=>[c.name,c.recipe,c.effect,c.slot,slotDe(c.slot)].filter(Boolean).join(' ')).join(' ')+' synthese familie').toLowerCase();
+  const bp=_r2b13BpData(fam);
+  const s=(fam+' '+items.map(c=>[c.name,c.recipe,c.effect,c.slot,slotDe(c.slot)].filter(Boolean).join(' ')).join(' ')+' synthese familie '+_r2b13BpText(bp)).toLowerCase();
   const last=items[items.length-1];
   // Effekt je Stufe nur zeigen, wenn er sich von der (sichtbaren) Vorstufe unterscheidet: kein dreifach wiederholter Satz
   const effHere=(c,i)=>i===0||(c.effect||'')!==(items[i-1].effect||'')||!match(items[i-1]);
@@ -8038,7 +8049,16 @@ function _r2b13FamCard(fam,items,match){
       <div class="r2b13-fam-t"><h4 class="r2b13-fam-n">${escHtml(deN(fam))}</h4><div class="r2b13-core-tags">${_r2b13SlotChip(c0.slot)}${chain?`<span class="r2b13-badge">${items.length} Stufen</span>`:''}${!chain&&c0.price?`<span class="r2b13-price">${_r2b13Silver(c0.price)}</span>`:''}</div></div></header>
     ${oneEff||!chain?`<div class="r2b13-fam-fx${anyEff?'':' is-none'}">${_r2b13Eff(chain?last:c0)}</div>`:''}
     ${rows}
+    ${_r2b13Bp(bp)}
   </article>`;
+}
+// DLC-Blaupausen: Cores aus „Charting the Unknown“, deren Synthese-Rezept noch nicht im Baum steht
+function _r2b13BpDlc(){
+  if(typeof SYNTH_BP_DLC==='undefined'||!SYNTH_BP_DLC.length)return '';
+  const cards=SYNTH_BP_DLC.map(d=>`<article class="r2b13-fam r2b13-bp-dlc cd-spot is-single" data-go-id="${_r2b13FamId(d.fam)}" data-s="${escHtml((d.fam+' '+deN(d.fam)+' dlc '+_r2b13BpText(d)).toLowerCase())}">
+    <header class="r2b13-fam-hd"><span class="r2b13-fam-ico r2b13-t--0 no-img" aria-hidden="true" data-r="⚓"></span><div class="r2b13-fam-t"><h4 class="r2b13-fam-n">${escHtml(deN(d.fam))}</h4><div class="r2b13-core-tags"><span class="r2b13-badge">DLC</span></div></div></header>
+    ${_r2b13Bp(d)}</article>`);
+  return `<section class="r2b13-syn-grp"><div class="r2b13-grp-hd"><i class="cd-g" aria-hidden="true">⚓</i><h3 class="sub-t r2b13-grp-t">DLC-Blaupausen</h3><span class="r2b13-grp-n">${cards.length} Blaupausen · Synthese-Rezept noch nicht erfasst</span></div><div class="r2b13-syn-grid">${cards.join('')}</div></section>`;
 }
 function renderSynthesis(){
   const tf=document.getElementById('sf-tier');const tier=tf?tf.value:'';
@@ -8068,7 +8088,7 @@ function renderSynthesis(){
   const vis=a=>a.filter(h=>!/class="r2b13-fam hide /.test(h)).length;
   const sec=(t,sub,g,cards)=>`<section class="r2b13-syn-grp${vis(cards)?'':' r2b13-off'}"><div class="r2b13-grp-hd"><i class="cd-g" aria-hidden="true">${g}</i><h3 class="sub-t r2b13-grp-t">${t}</h3><span class="r2b13-grp-n">${vis(cards)} ${vis(cards)===1?'Familie':'Familien'} · ${sub}</span></div><div class="r2b13-syn-grid">${cards.join('')}</div></section>`;
   const host=document.getElementById('synth-grid');
-  host.innerHTML=sec('Stufen-Ketten I → II → III','reguläre Synthese','⇈',chains)+sec('Effekt-Cores','eigene Rezepte mit Sonderwirkung','✦',singles);
+  host.innerHTML=sec('Stufen-Ketten I → II → III','reguläre Synthese','⇈',chains)+sec('Effekt-Cores','eigene Rezepte mit Sonderwirkung','✦',singles)+(tier===''&&!effOnly?_r2b13BpDlc():'');
   const cnt=document.getElementById('synth-count');if(cnt)cnt.textContent=shown+' / '+SYNTH_CORES.length+' Cores';
   if(typeof _reapplyActiveSearch==='function')_reapplyActiveSearch(host);
   renderWitchCraftables();
@@ -12258,7 +12278,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=41df301ac2';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=044af75735';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
@@ -12272,8 +12292,8 @@ let _inLaden=null,_inSoll='',_inRe=null;
 function _inSkript(setze){return new Promise(res=>{const s=document.createElement('script');setze(s);s.onload=()=>res(true);s.onerror=()=>{s.remove();res(false);};document.head.appendChild(s);});}
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
-  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=82ea433e0b';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=cfb358679c';})))
+  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=7e8bd04f7b';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }
@@ -12299,8 +12319,8 @@ function weltkarteLaden(){
   if(!_wkLaden){
     if(!document.getElementById('wk-css')){const c=document.createElement('link');c.id='wk-css';c.rel='stylesheet';c.href='vendor/leaflet-1.9.4.css';document.head.appendChild(c);}
     _wkLaden=(typeof L!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='vendor/leaflet-1.9.4.min.js';}))
-      .then(ok=>ok&&(typeof WELT_ORTE!=='undefined'||_inSkript(s=>{s.src='data/d17-weltkarte.js?v=9e4a742ffb';})))
-      .then(ok=>ok&&(typeof weltkarteRender==='function'||_inSkript(s=>{s.src='data/d17-weltkarte-app.js?v=0764dc55b9';})))
+      .then(ok=>ok&&(typeof WELT_ORTE!=='undefined'||_inSkript(s=>{s.src='data/d17-weltkarte.js?v=91011e11bf';})))
+      .then(ok=>ok&&(typeof weltkarteRender==='function'||_inSkript(s=>{s.src='data/d17-weltkarte-app.js?v=2a1958b752';})))
       .then(ok=>{ok=!!ok&&typeof L!=='undefined'&&typeof WELT_ORTE!=='undefined'&&typeof weltkarteRender==='function';if(!ok)_wkLaden=null;return ok;});
   }
   return _wkLaden;

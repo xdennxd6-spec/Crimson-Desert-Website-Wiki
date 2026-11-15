@@ -6813,6 +6813,18 @@ a.r2b13-tok:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .r2b13-fam-ico img{width:44px;height:44px;object-fit:contain}
 .r2b13-fam-ico.no-img::before,.r2b13-gem.no-img::before{content:attr(data-r) / "";font-size:22px;line-height:1;color:var(--t,var(--violet));opacity:.85}
 .r2b13-fam-fx.is-none{opacity:.85}
+/* Abyss-Synthese: Blaupausen-Fundorte je Familie (15.11.2026, Daten data/d18-synthese-blaupausen.js) */
+.r2b13-bp{display:grid;gap:6px;margin-top:2px;padding:9px 11px 10px;border:1px dashed color-mix(in srgb,var(--gold) 30%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--gold) 4%,transparent)}
+.r2b13-bp-hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.r2b13-bp-n{font-size:13px;font-weight:600;color:var(--text,inherit)}
+.r2b13-bp-l{display:grid;gap:5px;margin:0;padding:0;list-style:none}
+.r2b13-bp-q{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:start;font-size:12.5px;line-height:1.45}
+.r2b13-bp-t{display:inline-flex;align-items:center;gap:4px;min-width:88px;font:600 10.5px/1.6 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.r2b13-bp-t .cd-g{font-style:normal}
+.r2b13-bp-x{color:var(--dim);min-width:0;overflow-wrap:anywhere}
+.r2b13-bp-q.is-u .r2b13-bp-t{color:var(--gdim,var(--dim))}
+.r2b13-bp-u{font-style:normal;font-size:11px;padding:0 6px;margin-left:4px;border:1px solid color-mix(in srgb,var(--warn) 45%,transparent);border-radius:999px;color:var(--warn);white-space:nowrap}
+@media (max-width:520px){.r2b13-bp-q{grid-template-columns:1fr}.r2b13-bp-t{min-width:0}}
 .r2b13-noeff{font-size:12.5px;font-style:italic;color:var(--ink-faint)}
 .r2b13-chain{display:grid;margin:0;padding:0;list-style:none}
 .r2b13-step{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:start;gap:10px;padding:9px 0;border-top:1px dashed var(--line-soft)}
