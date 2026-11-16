@@ -12,7 +12,7 @@
      Ist die Übersicht das Ziel, zeigt cd-boot-start sie samt statischem Kopf (#start-root) schon vorher und das Szenenbild lädt
      mit hoher Priorität. showSec() nimmt die Klasse beim ersten Aufruf wieder weg. -->
 <style>html.cd-boot-start #sec-start{display:block}html.cd-boot-start .sec.active:not(#sec-start){display:none}</style>
-<script>(function(){var s='',h=location.hash.replace(/^#/,''),m=/^sec-([a-z0-9-]+)$/.exec(h)||/(?:^|&)sec=([a-z0-9-]+)/.exec(h);if(m)s=m[1];else{try{s=localStorage.getItem('cd_sec')||'';}catch(e){}}if((s||'start')!=='start')return;document.documentElement.classList.add('cd-boot-start');var l=document.createElement('link');l.rel='preload';l.as='image';l.href='cd_assets/scenes/start.webp';l.fetchPriority='high';document.head.appendChild(l);})();</script>
+<script>(function(){var s='',h=location.hash.replace(/^#/,''),m=/^sec-([a-z0-9-]+)$/.exec(h)||/(?:^|&)sec=([a-z0-9-]+)/.exec(h);if(m)s=m[1];else{try{s=localStorage.getItem('cd_sec')||'';}catch(e){}}if((s||'start')!=='start')return;document.documentElement.classList.add('cd-boot-start');var l=document.createElement('link');l.rel='preload';l.as='image';l.href='cd_assets/scenes/start-hd.webp';l.fetchPriority='high';document.head.appendChild(l);})();</script>
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Alle 65 Mounts in Crimson Desert: Fundorte &amp; Stats</title>
 <meta name="description" content="Crimson Desert Mounts: 65 Reittiere mit Fundort, Stats und Notizen, darunter 3 legendäre Pferde, 3 Drachen-Mounts, 5 Sigil-Mounts und 7 Fahrzeuge.">
@@ -926,7 +926,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <section class="sec" id="sec-start" aria-labelledby="start-title">
     <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <!-- Statischer Kopf für den ersten Paint (Schnellstart, siehe <head>); renderStartOverview() ersetzt ihn samt aktuellen Zahlen. -->
-    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>44</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>571</dd></div></dl></header></div>
+    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start-hd.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>44</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>571</dd></div></dl></header></div>
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
@@ -2429,7 +2429,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=e86e896692" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=e8a267806f" fetchpriority="low"></script>
 <script src="data/d01-weapons.js?v=4ec6937891" fetchpriority="low"></script>
 <script src="data/d02-crafting.js?v=925ae91eff" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
@@ -2438,13 +2438,13 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=419e84c8a8" fetchpriority="low"></script>
-<script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js?v=13947fead7" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=09b7712c8d" fetchpriority="low"></script>
+<script src="data/d10-enemy-drops.js?v=6309ff85a7" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=a185e7aad3" fetchpriority="low"></script>
 <script src="data/d12-dlc.js?v=2b3cfdc211" fetchpriority="low"></script>
 <script src="data/d13-romanze.js?v=6f08b281cc" fetchpriority="low"></script>
 <script src="data/d14-reit.js?v=5ee8a055fa" fetchpriority="low"></script>
-<script src="data/d18-synthese-blaupausen.js?v=19ad86c9f6" fetchpriority="low"></script>
+<script src="data/d18-synthese-blaupausen.js?v=01e799b849" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -12501,7 +12501,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=36da081955';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=1793812a29';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
@@ -12515,8 +12515,8 @@ let _inLaden=null,_inSoll='',_inRe=null;
 function _inSkript(setze){return new Promise(res=>{const s=document.createElement('script');setze(s);s.onload=()=>res(true);s.onerror=()=>{s.remove();res(false);};document.head.appendChild(s);});}
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
-  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=7e8bd04f7b';})))
+  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=82ea433e0b';}))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=cfb358679c';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }

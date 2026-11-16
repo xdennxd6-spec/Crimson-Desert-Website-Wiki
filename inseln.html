@@ -12,7 +12,7 @@
      Ist die Übersicht das Ziel, zeigt cd-boot-start sie samt statischem Kopf (#start-root) schon vorher und das Szenenbild lädt
      mit hoher Priorität. showSec() nimmt die Klasse beim ersten Aufruf wieder weg. -->
 <style>html.cd-boot-start #sec-start{display:block}html.cd-boot-start .sec.active:not(#sec-start){display:none}</style>
-<script>(function(){var s='',h=location.hash.replace(/^#/,''),m=/^sec-([a-z0-9-]+)$/.exec(h)||/(?:^|&)sec=([a-z0-9-]+)/.exec(h);if(m)s=m[1];else{try{s=localStorage.getItem('cd_sec')||'';}catch(e){}}if((s||'start')!=='start')return;document.documentElement.classList.add('cd-boot-start');var l=document.createElement('link');l.rel='preload';l.as='image';l.href='cd_assets/scenes/start.webp';l.fetchPriority='high';document.head.appendChild(l);})();</script>
+<script>(function(){var s='',h=location.hash.replace(/^#/,''),m=/^sec-([a-z0-9-]+)$/.exec(h)||/(?:^|&)sec=([a-z0-9-]+)/.exec(h);if(m)s=m[1];else{try{s=localStorage.getItem('cd_sec')||'';}catch(e){}}if((s||'start')!=='start')return;document.documentElement.classList.add('cd-boot-start');var l=document.createElement('link');l.rel='preload';l.as='image';l.href='cd_assets/scenes/start-hd.webp';l.fetchPriority='high';document.head.appendChild(l);})();</script>
 <meta name="google-site-verification" content="gukeBZhhWrukmK6bsMCEXmzfAC2fZpnOVxlKW6P6xGw">
 <title>Inseln in Crimson Desert: 19 Inseln im Überblick</title>
 <meta name="description" content="Alle 19 Inseln aus Crimson Desert mit Namen auf Deutsch und Englisch, dazu Meeresgebiet, Orte, Höhlen, Quests und Spieltexte, soweit die Spieldaten sie nennen.">
@@ -23,14 +23,14 @@
 <meta property="og:url" content="https://crimson-desert-wiki.com/inseln">
 <meta property="og:site_name" content="Crimson Desert Wiki">
 <meta property="og:locale" content="de_DE">
-<meta property="og:image" content="https://crimson-desert-wiki.com/cd_assets/scenes/isl-samora.webp">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
+<meta property="og:image" content="https://crimson-desert-wiki.com/cd_assets/scenes/isl-samora-hd.webp">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1600">
 <meta property="og:image:alt" content="Inseln in Crimson Desert: 19 Inseln im Überblick">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Inseln in Crimson Desert: 19 Inseln im Überblick">
 <meta name="twitter:description" content="Alle 19 Inseln aus Crimson Desert mit Namen auf Deutsch und Englisch, dazu Meeresgebiet, Orte, Höhlen, Quests und Spieltexte, soweit die Spieldaten sie nennen.">
-<meta name="twitter:image" content="https://crimson-desert-wiki.com/cd_assets/scenes/isl-samora.webp">
+<meta name="twitter:image" content="https://crimson-desert-wiki.com/cd_assets/scenes/isl-samora-hd.webp">
 <meta name="theme-color" content="#0a0b12">
 <link rel="manifest" href="site.webmanifest">
 <!-- qrcode.js (55KB) wird erst beim ersten QR-Klick dynamisch geladen (s. pmToggleQR) -->
@@ -926,7 +926,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <section class="sec" id="sec-start" aria-labelledby="start-title">
     <h2 class="sec-t" id="start-title" data-cd-noreveal><span class="sec-sym" aria-hidden="true">&#9638;</span> Crimson Desert Wiki: Was suchst du?</h2>
     <!-- Statischer Kopf für den ersten Paint (Schnellstart, siehe <head>); renderStartOverview() ersetzt ihn samt aktuellen Zahlen. -->
-    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>44</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>571</dd></div></dl></header></div>
+    <div id="start-root"><header class="cd-hero cd-scened cd-spot r2b11-hero" style="--cd-acc: var(--red);"><div class="cd-scene cd-scene--full cd-scene--hero" aria-hidden="true" style="--cd-acc:var(--red);"><img class="cd-scene-img" src="cd_assets/scenes/start-hd.webp" alt="" decoding="async" fetchpriority="high" width="1280" height="720" style="--cd-pos:55% 55%"><i class="cd-scene-g cd-g">▦</i></div><div class="cd-hero-main"><p class="cd-hero-k">Wiki-Atlas für Pywel</p><h3 class="cd-hero-t">Alle Seiten, sortiert nach dem, was du im Spiel gerade brauchst</h3><p class="cd-hero-sub">Tippe auf eine Kachel oder suche direkt nach einem Boss, einer Waffe oder einem Ort.</p></div><dl class="cd-hero-stats" data-n="4"><div class="cd-hero-stat"><dt>Seiten</dt><dd>44</dd></div><div class="cd-hero-stat"><dt>Kategorien</dt><dd>6</dd></div><div class="cd-hero-stat"><dt>Bosse</dt><dd>100</dd></div><div class="cd-hero-stat"><dt>Waffen</dt><dd>571</dd></div></dl></header></div>
 </section>
 <section class="sec" id="sec-beginner">
     <h2 class="sec-t"><span class="sec-sym">➤</span> Anfänger-Guide</h2>
@@ -1643,119 +1643,119 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <details class="seo-daten"><summary>Komplette Liste zum Nachschlagen (3 Abschnitte)</summary><div class="seo-daten-in">
 <h2 id="a-inseln-im-grossen-ozean-dlc">Inseln im Großen Ozean (DLC) (17)</h2>
 <div class="grid"><article class="card ins-seo" id="insel-auronui">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-auronui.webp" alt="Insel Auronui im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-auronui-hd.webp" alt="Insel Auronui im Spiel" width="1600" height="1600">
 <h3>Insel Auronui</h3>
 <p class="ins-en">Auronui Island</p>
 <ul class="stats"><li><b>Meeresgebiet:</b> Südmeer von Pywel (South Sea of Pywel). Hinweis: Der Spieltext sagt „im Südmeer“; gemeint ist das Meeresgebiet Südmeer von Pywel.</li><li><b>Kurzbeschreibung:</b> Zwei Felsinseln mit dichtem Grün, kleinem Sandstrand und Korallenriffen im klaren, flachen Wasser.</li><li><b>Orte (2):</b> Ankerplatz, Abyss-Nexus</li><li><b>Höhlen:</b> 1 Höhle</li><li><b>Bewohner und Fraktionen:</b> Reyard, Archäologe, der auf der Insel Auronui weilt und den Ozean erforscht</li><li><b>Quests (6):</b> Untersuche die Umgebung der Insel Auronui, Erschließe die Insel Auronui, Zeitplan nach der Erschließung auf der Insel Auronui, Entsende zur „Erschließung“-Mission für die Insel Auronui, Überprüfung der Erschließung der Insel Auronui, Auf in eine größere Welt</li><li><b>Fundorte (8):</b> Reichlicher Quallensalat, Luftis&#39; Elixier, Luftis&#39; minderes Elixier, Charter Assistant&#39;s Diving Helm und Diving Suit (Blaupausen), Atemgerät des Entdeckers, Glänzendes Erz und 2 weitere</li><li><b>Wissenseinträge:</b> 7 Einträge aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=auronui">Insel Auronui in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-samora">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-samora.webp" alt="Insel Samora im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-samora-hd.webp" alt="Insel Samora im Spiel" width="1600" height="1600">
 <h3>Insel Samora</h3>
 <p class="ins-en">Samora Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Die Bewohner der Insel Samora, die seit Generationen die heilige Pflicht erfüllen, das Siegel der riesigen Schlange zu bewachen.</li><li><b>Orte (6):</b> Dorf Samora, Nordküste von Samora, Südküste von Samora, Ostküste von Samora, Ruinen von Samora, Samora-Wachturmzone</li><li><b>Höhlen:</b> 8 Höhlen</li><li><b>Bewohner und Fraktionen:</b> Harris, Das Dorfoberhaupt der Insel Samora, Handelsverwalter der Insel Samora, Sohn des Dorfoberhaupts der Insel Samora, Archäologe, der die Ruinen von Samora erforscht, Bewohner der Insel Samora, Piratenbanden, Cartaine</li><li><b>Quests (19):</b> Erkunde Samora, Piraten, die die Insel besetzen, Besiege die Feinde rund um Samora, Die zutiefst gerührten Bewohner der Insel Samora 1, Besiege Feinde in der Umgebung der Ruinen von Samora, Erkunde die Insel Samora, Besiege Feinde an der Südküste von Samora, Erreiche die Insel Samora von der Insel Ocula aus mit dem Boot innerhalb von 10 Minuten, Die geraubte Reliquie, Das Inseldorf auf dem Meer, Besiege die Gegner an der Nordküste von Samora, Zeitplan nach der Erschließung auf der Insel Samora, Überbring dem Dorf Samora die Nachricht, Geschichte der heiligen Reliquie der Bewohner von der Insel Samora, Legende der Inselbewohner von Samora über den versunkenen Schrein, Ozeanruinen der Insel Samora, Besiege Feinde rund um die Samora-Wachturmzone, Die zutiefst gerührten Bewohner der Insel Samora 2, Besiege die Gegner an der Ostküste von Samora</li><li><b>Boss:</b> Welsmensch</li><li><b>Gegner, Schiffe und Reittiere:</b> Der grimmige Wind, Der trunkene Wels</li><li><b>Fundorte (24):</b> Eleganter Gagat-Ohrring, Stoffmütze des Architekten, Stoffarbeitskleidung des Architekten, Lederstiefel des Architekten, Lederhandschuhe des Architekten, Stoffmütze des Kochs und 18 weitere</li><li><b>Items mit Inselbezug:</b> 2 Einträge</li><li><b>Wissenseinträge:</b> 1 Eintrag aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=samora">Insel Samora in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-satyros">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-satyros.webp" alt="Insel Satyros im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-satyros-hd.webp" alt="Insel Satyros im Spiel" width="1600" height="1600">
 <h3>Insel Satyros</h3>
 <p class="ins-en">Satyros Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Eine Insel, auf der die Verehrer der rohen Kraft leben. Obwohl sie von dichten Wäldern und malerischen Wasserfällen geprägt ist, lauern im schroffen Terrain überall tödliche Gefahren.</li><li><b>Orte (5):</b> Außenposten der Satyrn, Satyros-Wasserfalldorf, Dorf der Satyrn, Anlegestelle an der Nordspitze der Insel Satyros, Die nördliche Region der Insel Satyros</li><li><b>Höhlen:</b> 5 Höhlen</li><li><b>Bewohner und Fraktionen:</b> Kilian, Evander, Handelsverwalter der Insel Satyros, Satyrn, Gesetzlose</li><li><b>Quests (8):</b> Besiege Satyros, Zeitplan nach der Erschließung auf der Insel Satyros, Spitze des Stammes, Ein Stamm, der Eindringlinge jagt, Besiege Feinde rund um das Dorf der Satyrn, Besiege Feinde rund um den Außenposten der Satyrn, Ozeanruinen der Insel Satyros, Besiege Feinde rund um das Satyros-Wasserfalldorf</li><li><b>Boss:</b> Satyros</li><li><b>Fundorte (10):</b> Haustier-Outfits bei Evander (Scholastone, Ludeon), Stromüberlastung, Flugbahn des Glanzes, Tobender Lebensodem, Echo des Sturms, Jagd der Giftzähne und 4 weitere</li><li><b>Items mit Inselbezug:</b> 5 Einträge</li><li><b>Wissenseinträge:</b> 5 Einträge aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=satyros">Insel Satyros in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-razanui">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-razanui.webp" alt="Insel Razanui im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-razanui-hd.webp" alt="Insel Razanui im Spiel" width="1600" height="1600">
 <h3>Insel Razanui</h3>
 <p class="ins-en">Razanui Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Insel mit Knochenbergen, einst Hort berüchtigter Piraten, heute hallt nur das Gebrüll ausgehungerter Monster.</li><li><b>Orte (3):</b> Razanui-Knochennest, Anlegestelle der Schnellen der Gesetzlosen, Wachturmzone auf den Anhöhen der Insel Razanui</li><li><b>Höhlen:</b> 5 Höhlen</li><li><b>Bewohner und Fraktionen:</b> Piratenbande</li><li><b>Quests (4):</b> Belagerungsring der Piraten, Ozeanruinen in der Nähe der Insel Razanui, Zeitplan nach der Erschließung auf der Insel Razanui, Prädator der verlassenen Insel</li><li><b>Boss:</b> Reggis, Wächter der Insel</li><li><b>Gegner, Schiffe und Reittiere:</b> Faunus, Ozeangleiter</li><li><b>Fundorte (2):</b> Plattenhandschuhe des versunkenen Schwurs, Plattenschuhe der Tiefsee-Blauwelle</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li><li><b>Wissenseinträge:</b> 1 Eintrag aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=razanui">Insel Razanui in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-iliya">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-iliya.webp" alt="Insel Iliya im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-iliya-hd.webp" alt="Insel Iliya im Spiel" width="1600" height="1600">
 <h3>Insel Iliya</h3>
 <p class="ins-en">Iliya Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Insel mit den verwitterten Überresten einer einst gewaltigen Zivilisation.</li><li><b>Orte (2):</b> Ankerplatz, Abyss-Nexus</li><li><b>Höhlen:</b> 3 Höhlen</li><li><b>Quests (5):</b> Küstenfelsenruinen der Insel Iliya, Erreiche die Insel Estra von der Insel Iliya aus innerhalb von 10 Minuten, ohne ein Schiff zu benutzen, Zeitplan nach der Erschließung auf der Insel Iliya, Ozeanruine am Steinhügel der Insel Iliya, Ruinenausgrabung auf der Insel Iliya</li><li><b>Fundorte (2):</b> Geisterschiff, Naturperle</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li><li><b>Wissenseinträge:</b> 2 Einträge aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=iliya">Insel Iliya in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-ocula">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-ocula.webp" alt="Insel Ocula im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-ocula-hd.webp" alt="Insel Ocula im Spiel" width="1600" height="1600">
 <h3>Insel Ocula</h3>
 <p class="ins-en">Ocula Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Insel mit einem See zwischen schroffen Felskämmen und dichten Wäldern, schmalen weißen Sandstränden und der Stimmung eines verborgenen Rückzugsorts.</li><li><b>Orte (1):</b> Abyss-Nexus</li><li><b>Höhlen:</b> 5 Höhlen</li><li><b>Quests (2):</b> Erreiche die Insel Samora von der Insel Ocula aus mit dem Boot innerhalb von 10 Minuten, Zeitplan nach der Erschließung auf der Insel Ocula</li><li><b>Gegner, Schiffe und Reittiere:</b> Die Teufelsbeute</li><li><b>Fundorte (3):</b> Plattenrüstung des versunkenen Schwurs, Riesiges Segel des Goldenen Kompasses, Spiralspeer</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li><li><b>Wissenseinträge:</b> 1 Eintrag aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=ocula">Insel Ocula in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-estra">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-estra.webp" alt="Insel Estra im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-estra-hd.webp" alt="Insel Estra im Spiel" width="1600" height="1600">
 <h3>Insel Estra</h3>
 <p class="ins-en">Estra Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Weitläufige Felsplateaus gehen in eine geschwungene Küstenlinie über, grüne Felskämme prägen eine friedliche Landschaft.</li><li><b>Orte (1):</b> Verlassenes Haus auf der Insel Estra</li><li><b>Höhlen:</b> 4 Höhlen</li><li><b>Quests (3):</b> Erreiche die Insel Estra von der Insel Iliya aus innerhalb von 10 Minuten, ohne ein Schiff zu benutzen, Zeitplan nach der Erschließung auf der Insel Estra, Hausbau: Insel Estra</li><li><b>Gegner, Schiffe und Reittiere:</b> Die Rache der See</li><li><b>Fundorte (2):</b> Sturmschiff des Ostens, Obsidian</li><li><b>Wissenseinträge:</b> 1 Eintrag aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=estra">Insel Estra in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-bergel">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-bergel.webp" alt="Insel Bergel im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-bergel-hd.webp" alt="Insel Bergel im Spiel" width="1600" height="1600">
 <h3>Insel Bergel</h3>
 <p class="ins-en">Bergel Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Schlangenstatuen und ein Altar unbekannter Herkunft zeugen von einer Wacht über ein schlummerndes Unheil; die Anlage wirkt mutwillig zerstört und liegt im dichten Nebel der Insel.</li><li><b>Orte (1):</b> Abyss-Nexus</li><li><b>Höhlen:</b> 3 Höhlen</li><li><b>Quests (3):</b> Zeitplan nach der Erschließung auf der Insel Bergel, Ozeanruinen der Insel Bergel, Höhle der Trauer</li><li><b>Boss:</b> Rohan Cooper</li><li><b>Fundorte (1):</b> Obsidian</li><li><b>Wissenseinträge:</b> 1 Eintrag aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=bergel">Insel Bergel in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-phragma">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-phragma.webp" alt="Insel Phragma im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-phragma-hd.webp" alt="Insel Phragma im Spiel" width="1600" height="1600">
 <h3>Insel Phragma</h3>
 <p class="ins-en">Phragma Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Insel mit drei aufragenden Felsspitzen; bei ruhiger See kann man zwischen den Gipfeln wie über das Wasser gehen.</li><li><b>Orte (1):</b> Verlassenes Haus auf der Insel Phragma</li><li><b>Höhlen:</b> 3 Höhlen, davon 1 unter Wasser</li><li><b>Quests (3):</b> Ozeanruinen der Insel Phragma, Zeitplan nach der Erschließung auf der Insel Phragma, Hausbau: Insel Phragma</li><li><b>Gegner, Schiffe und Reittiere:</b> Der Rächer</li><li><b>Fundorte (1):</b> Plattenpanzer der Tiefsee-Blauwelle</li><li><b>Wissenseinträge:</b> 1 Eintrag aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=phragma">Insel Phragma in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-xamaca">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-xamaca.webp" alt="Insel Xamaca im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-xamaca-hd.webp" alt="Insel Xamaca im Spiel" width="1600" height="1600">
 <h3>Insel Xamaca</h3>
 <p class="ins-en">Xamaca Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Sanft geschwungene Küsten, die an ein Urlaubsparadies erinnern; die Wracks ringsum zeigen, wie tückisch die Gewässer sind.</li><li><b>Höhlen:</b> 1 Höhle</li><li><b>Bewohner und Fraktionen:</b> Ludic, Handelsverwalter der Insel Xamaca</li><li><b>Quests (1):</b> Zeitplan nach der Erschließung auf der Insel Xamaca</li><li><b>Fundorte (5):</b> Plattenhandschuhe des versunkenen Schwurs, Plattenschuhe der Tiefsee-Blauwelle, Verpacktes Seekohlbündel, Verpacktes Meeresfäden-Bündel, Eingepackte Erstklassige Abalonen</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li></ul>
 <p><a href="/#sec=inseln&amp;insel=xamaca">Insel Xamaca in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-cloven-hoof">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-cloven-hoof.webp" alt="Insel Spalthuf im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-cloven-hoof-hd.webp" alt="Insel Spalthuf im Spiel" width="1600" height="1600">
 <h3>Insel Spalthuf</h3>
 <p class="ins-en">Cloven Hoof Isle</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Eine Insel, die einem gespaltenen Huf ähnelt. Die einzigen menschlichen Spuren sind die Trümmer eines angespülten Schiffswracks und eine Treppe, die zu den Felsgipfeln hinaufführt.</li><li><b>Höhlen:</b> 3 Höhlen</li><li><b>Quests (1):</b> Zeitplan nach der Erschließung auf der Insel Spalthuf</li><li><b>Fundorte (1):</b> Horn des Beschützers</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li><li><b>Wissenseinträge:</b> 3 Einträge aus Spieldaten und Wiki</li></ul>
 <p><a href="/#sec=inseln&amp;insel=cloven-hoof">Insel Spalthuf in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-carcano">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-carcano.webp" alt="Insel Carcano im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-carcano-hd.webp" alt="Insel Carcano im Spiel" width="1600" height="1600">
 <h3>Insel Carcano</h3>
 <p class="ins-en">Carcano Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Riffe bilden einen gewaltigen Ring, dessen Form keine Menschenhand schaffen könnte.</li><li><b>Orte (1):</b> Abyss-Nexus</li><li><b>Quests (2):</b> Zeitplan nach der Erschließung auf der Insel Carcano, Ozeanruinen in der Nähe der Insel Carcano</li><li><b>Gegner, Schiffe und Reittiere:</b> Der rote Schild</li><li><b>Fundorte (3):</b> Seeräuber-Kampfanzug, Seeräuberhut, Veyrfin-Schwert</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li></ul>
 <p><a href="/#sec=inseln&amp;insel=carcano">Insel Carcano in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-nirakan">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-nirakan.webp" alt="Insel Nirakan im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-nirakan-hd.webp" alt="Insel Nirakan im Spiel" width="1600" height="1600">
 <h3>Insel Nirakan</h3>
 <p class="ins-en">Nirakan Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Insel in Form eines Haifischzahns, außer angespülten Wracks ohne Spuren von Zivilisation, mit unberührter Natur.</li><li><b>Höhlen:</b> 3 Höhlen</li><li><b>Quests (2):</b> Zeitplan nach der Erschließung auf der Insel Nirakan, Ozeanruinen der Insel Nirakan</li><li><b>Gegner, Schiffe und Reittiere:</b> Der blutige Pfahl</li><li><b>Fundorte (1):</b> Manganknolle</li></ul>
 <p><a href="/#sec=inseln&amp;insel=nirakan">Insel Nirakan in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-saeon">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-saeon.webp" alt="Insel Saeon im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-saeon-hd.webp" alt="Insel Saeon im Spiel" width="1600" height="1600">
 <h3>Insel Saeon</h3>
 <p class="ins-en">Saeon Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Insel mit einer riesigen Felsenhöhle; an der Küste stehen grabsteinförmige Felsen mit kreisrunden, auffallend präzisen Löchern, dazu Reste eines alten Schiffbruchs und zwei Skelette.</li><li><b>Orte (1):</b> Abyss-Nexus</li><li><b>Quests (1):</b> Zeitplan nach der Erschließung auf der Insel Saeon</li><li><b>Gegner, Schiffe und Reittiere:</b> Der Schrei der Sirene</li><li><b>Fundorte (1):</b> Giftzahn des Abgrunds</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li></ul>
 <p><a href="/#sec=inseln&amp;insel=saeon">Insel Saeon in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-spagnola">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-spagnola.webp" alt="Insel Spagnola im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-spagnola-hd.webp" alt="Insel Spagnola im Spiel" width="1600" height="1600">
 <h3>Insel Spagnola</h3>
 <p class="ins-en">Spagnola Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Insel aus Sand und Fels; mitten im Strand ragen gewaltige Felsen wie ein zerklüfteter Grat auf, der Kontrast aus hellem Sand und dunklem Gestein wirkt bizarr.</li><li><b>Höhlen:</b> 1 Höhle</li><li><b>Quests (1):</b> Zeitplan nach der Erschließung auf der Insel Spagnola</li><li><b>Gegner, Schiffe und Reittiere:</b> Der schwarze Krummsäbel, Die scharlachrote Witwe</li></ul>
 <p><a href="/#sec=inseln&amp;insel=spagnola">Insel Spagnola in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-navrah">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-navrah.webp" alt="Insel Navrah im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-navrah-hd.webp" alt="Insel Navrah im Spiel" width="1600" height="1600">
 <h3>Insel Navrah</h3>
 <p class="ins-en">Navrah Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Im Zentrum liegt ein gewaltiges Schiffswrack, ringsum unzählige weitere Wracks; Spuren menschlichen Lebens gibt es nicht, offenbar hat es niemand lebend hierher geschafft.</li><li><b>Quests (1):</b> Zeitplan nach der Erschließung auf der Insel Navrah</li><li><b>Fundorte (1):</b> Silberwellen-Langschwert</li><li><b>Items mit Inselbezug:</b> 1 Eintrag</li></ul>
 <p><a href="/#sec=inseln&amp;insel=navrah">Insel Navrah in der App öffnen &rarr;</a></p>
 </article>
 <article class="card ins-seo" id="insel-drangar">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-drangar.webp" alt="Insel Drangar im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-drangar-hd.webp" alt="Insel Drangar im Spiel" width="1600" height="1600">
 <h3>Insel Drangar</h3>
 <p class="ins-en">Drangar Island</p>
 <ul class="stats"><li><b>Kurzbeschreibung:</b> Felseninsel, aus deren Sandstrand ein gewaltiger Felsenberg einsam aufragt; ein treppenartiges Bauwerk steht dort, doch scheint lange niemand hier gewesen zu sein.</li><li><b>Höhlen:</b> 1 Höhle</li><li><b>Quests (1):</b> Zeitplan nach der Erschließung auf der Insel Drangar</li><li><b>Gegner, Schiffe und Reittiere:</b> Die Seeklaue</li></ul>
@@ -1763,7 +1763,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </article></div>
 <h2 id="a-inseln-aus-dem-hauptspiel">Inseln aus dem Hauptspiel (2)</h2>
 <div class="grid"><article class="card ins-seo" id="insel-red-hangs">
-<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-red-hangs.webp" alt="Insel der roten Hänge im Spiel" width="1024" height="1024">
+<img class="ins-img" loading="lazy" decoding="async" src="/cd_assets/scenes/isl-red-hangs-hd.webp" alt="Insel der roten Hänge im Spiel" width="1600" height="1600">
 <h3>Insel der roten Hänge</h3>
 <p class="ins-en">Red Hangs Island</p>
 <ul class="stats"><li><b>Meeresgebiet:</b> Südmeer von Pywel (South Sea of Pywel) (unbestätigt)</li><li><b>Gegner, Schiffe und Reittiere:</b> Die Todesblüte, Hai</li><li><b>Fundorte (1):</b> Zweihandhammer der klagenden See</li><li><b>Wissenseinträge:</b> 2 Einträge aus Spieldaten und Wiki</li></ul>
@@ -2153,7 +2153,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=e86e896692" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=e8a267806f" fetchpriority="low"></script>
 <script src="data/d01-weapons.js?v=4ec6937891" fetchpriority="low"></script>
 <script src="data/d02-crafting.js?v=925ae91eff" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
@@ -2162,13 +2162,13 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=419e84c8a8" fetchpriority="low"></script>
-<script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js?v=13947fead7" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=09b7712c8d" fetchpriority="low"></script>
+<script src="data/d10-enemy-drops.js?v=6309ff85a7" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=a185e7aad3" fetchpriority="low"></script>
 <script src="data/d12-dlc.js?v=2b3cfdc211" fetchpriority="low"></script>
 <script src="data/d13-romanze.js?v=6f08b281cc" fetchpriority="low"></script>
 <script src="data/d14-reit.js?v=5ee8a055fa" fetchpriority="low"></script>
-<script src="data/d18-synthese-blaupausen.js?v=19ad86c9f6" fetchpriority="low"></script>
+<script src="data/d18-synthese-blaupausen.js?v=01e799b849" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -12225,7 +12225,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=36da081955';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=1793812a29';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
@@ -12239,8 +12239,8 @@ let _inLaden=null,_inSoll='',_inRe=null;
 function _inSkript(setze){return new Promise(res=>{const s=document.createElement('script');setze(s);s.onload=()=>res(true);s.onerror=()=>{s.remove();res(false);};document.head.appendChild(s);});}
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
-  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=7e8bd04f7b';})))
+  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=82ea433e0b';}))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=cfb358679c';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }
