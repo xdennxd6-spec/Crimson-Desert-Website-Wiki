@@ -66,7 +66,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=7deb7fb769">
+<link rel="stylesheet" href="app.css?v=e19e34e997">
 <script src="consent.js?v=2"></script>
 </head>
 <body>
@@ -298,13 +298,14 @@
     <label for="si">Suche</label>
     <div class="finder-in">
       <span class="fi-sym" aria-hidden="true">&#9906;</span>
-      <input id="si" type="search" name="wiki-suche" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Bosse, Waffen, Quests, Orte..." oninput="doSearch(this.value)" onkeydown="if(event.key==='Enter'&&typeof _isMobile==='function'&&_isMobile()){this.blur();closeSheet();}">
+      <input id="si" type="search" name="wiki-suche" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Bosse, Waffen, Quests, Orte..." oninput="doSearch(this.value)" onkeydown="_sresKeyInput(event)">
       <span class="kbd-hint" title="Ctrl+K oder ⌘K zum Fokussieren">Ctrl K</span>
     </div>
     <span id="scnt" role="status" aria-live="polite"></span>
     <div class="nav-jump" id="navJump" aria-live="polite" hidden></div>
   </div>
   <div class="console-list" id="conList" role="group" aria-label="Seitenauswahl"><!-- leaves per JS --></div>
+  <div class="sres" id="sres" role="region" aria-label="Suchergebnisse"><!-- Treffer aller Seiten per JS --></div>
   <div id="sb-recent" style="display:none">
     <div id="sb-recent-hd">Zuletzt</div>
     <div id="sb-recent-list"></div>
@@ -5153,6 +5154,7 @@ function showSec(id, opts){
     document.querySelectorAll('.sk-hit-chips').forEach(e=>e.remove());
     if(typeof _closeSearchOpened==='function')_closeSearchOpened();
     if(typeof _resetHitOrder==='function')_resetHitOrder();
+    if(typeof _hideSearchResults==='function')_hideSearchResults();
     document.getElementById('si').value='';
     {const qs=document.getElementById('sec-quests');if(qs)qs.classList.remove('q5-srch');}
     document.getElementById('scnt').textContent='';
@@ -5781,6 +5783,9 @@ function _reapplyActiveSearch(root){
 }
 function _doSearchImpl(q){
   q=q.trim();
+  // Globalen Suchindex bauen, BEVOR die geoeffnete Seite fuer die Suche neu gerendert wird.
+  // Sonst wuerde der Index den Suchzustand der gerade aktiven Seite mit aufnehmen.
+  if(q&&typeof _sresEnsure==='function'){try{_sresEnsure();}catch(e){}}
   {const qs=document.getElementById('sec-quests');if(qs)qs.classList.toggle('q5-srch',!!q);} /* R2 Abnahme: ersetzt html:has(#si:not(:placeholder-shown)) */
   // Autofill-Schutz: Chrome schreibt trotz autocomplete="off" gelegentlich die gespeicherte
   // Login-Mail ins Suchfeld. Sieht der Wert wie eine E-Mail aus UND ist das Feld nicht fokussiert
@@ -5794,6 +5799,7 @@ function _doSearchImpl(q){
   if(_si&&_MAIL_RE.test(q)&&(document.activeElement!==_si||_isAutofill(_si))){
     _si.value='';
     if(typeof _writeUrlState==='function')_writeUrlState();
+    if(typeof _hideSearchResults==='function')_hideSearchResults();
     return;
   }
   // Navigations-Umbau 10/2026 (A4): Sprungtreffer zu Seiten/Kategorien, additiv vor den normalen Treffern
@@ -5819,6 +5825,7 @@ function _doSearchImpl(q){
   }
   if(!q){
     cnt.textContent='';
+    if(typeof _hideSearchResults==='function')_hideSearchResults();
     document.querySelectorAll('.sk-hit-chips').forEach(e=>e.remove());
     document.querySelectorAll('.hide').forEach(el=>{if(el.dataset.filtered!=='1')el.classList.remove('hide');});
     _collapseEmptyGroups(document,false);
@@ -5877,6 +5884,14 @@ function _doSearchImpl(q){
   _skillsHitChips(activeSec);
   const paneNote=_focusPaneForSearch(activeSec,total);
   cnt.textContent=total+' Treffer'+(total>matchedForHL.length?' (Highlight nur erste 80)':'')+(total?sp.note:'')+paneNote;
+  // Treffer aller Seiten unter dem Suchfeld (Seitenleiste). Der Zaehler nennt zusaetzlich
+  // die Gesamtzahl, wenn auf anderen Seiten mehr Treffer liegen.
+  let _gTot=0;
+  try{if(typeof _renderSearchResults==='function')_gTot=_renderSearchResults(q);}catch(e){}
+  if(_gTot>total){
+    if(total===0)cnt.textContent='0 auf dieser Seite · '+_gTot+' auf anderen Seiten';
+    else cnt.textContent+=' · '+_gTot+' im Wiki';
+  }
   {const _wp=document.getElementById('weapon-pager');const _sw=document.getElementById('sec-weapons');if(_wp&&_sw&&_sw.classList.contains('active'))_wp.innerHTML='';}
   if(typeof armorFilter==='function')armorFilter();
   if(total)_scrollToHit(ranked.find(el=>!el.classList.contains('hide')));
@@ -5891,7 +5906,7 @@ function _doSearchImpl(q){
       <span class="empty-state-icon">🔍</span>
       <div class="empty-state-title">Keine Treffer für "${q.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}" auf dieser Seite</div>
       ${other.length
-        ?`<div class="empty-state-desc">Aber auf anderen Seiten gefunden — direkt hinspringen:</div><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px;max-width:560px;margin:0 auto">${chips}</div>`
+        ?`<div class="empty-state-desc">Aber auf anderen Seiten gefunden — direkt hinspringen (oder links in der Seitenleiste):</div><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px;max-width:560px;margin:0 auto">${chips}</div>`
         :`<div class="empty-state-desc">Auch auf den anderen Seiten nichts gefunden. Versuch's mit anderen Begriffen — z.B. Boss-Namen, Region oder Skill.</div>`}
       <button class="empty-state-action" style="margin-top:10px;opacity:.75" onclick="document.getElementById('si').value='';doSearch('');document.getElementById('si').focus()">Suche zurücksetzen</button>
     `;
@@ -5943,6 +5958,8 @@ function _searchOtherSections(qLow,activeSec){
     let label=key;
     if(typeof SECTION_BY_ID!=='undefined'&&SECTION_BY_ID[key]){label=SECTION_BY_ID[key].name;}
     else{const nav=document.querySelector('[data-sec="'+key+'"] .lname, [data-sec="'+key+'"] .nlabel, [data-sec="'+key+'"]');if(nav)label=nav.textContent.trim();}
+    // Gleiche Seitennamen (DLC-Unterseiten) unterscheidbar machen
+    if(typeof SECTION_BY_ID!=='undefined'&&typeof _sresSecLabel==='function')label=_sresSecLabel(key);
     out.push({key,label,count});
   });
   }
@@ -5954,6 +5971,463 @@ function _searchJump(secId){
   const si=document.getElementById('si');
   if(si)_doSearchImpl(si.value);
 }
+
+/* ===== GLOBALE SUCHERGEBNISSE (Seitenleiste) =====
+   Die Suche filtert weiterhin die geoeffnete Seite und markiert die Treffer. Zusaetzlich
+   steht unter dem Suchfeld eine Trefferliste ALLER Seiten (gruppiert nach Seite): Das war
+   die Luecke — bisher erschienen Treffer anderer Seiten nur als Chips, wenn die geoeffnete
+   Seite null Treffer hatte. Ein Klick auf einen Treffer oeffnet die Seite, setzt die Suche
+   dort, klappt den Eintrag auf, scrollt hin und hebt ihn kurz hervor.
+   Der Index entsteht einmalig aus allen [data-s]-Knoten (ensureAllRendered + autoSearchTags),
+   damit auch noch nie geoeffnete Seiten durchsucht werden. */
+let _SRES=null;            // {list:[{sec,label,lf,ds,sf,itemId}],built}
+let _SRES_SHOWN=[];        // zuletzt gerenderte Treffer; data-i der Zeile = Index hier
+let _SRES_ACTIVE=null;     // {sec,label} des zuletzt geoeffneten Treffers
+
+/* Reihenfolge der Namensquellen: erst echte Eintragsnamen, dann Überschriften.
+   Bewusst als Liste abgearbeitet (nicht als ein querySelector): sonst gewinnt das
+   im DOM zuerst stehende Element, z. B. ein <strong> im Fließtext vor dem Kartentitel. */
+const _SRES_TITLE_SELS=['.ct','td strong','.sk-n','.pet-card-name','.fac-qh','.cd-fold-t','h2','h3','h4','.lc-n','strong','b'];
+function _sresSecInfo(secId){
+  const s=(typeof SECTION_BY_ID!=='undefined'&&SECTION_BY_ID)?SECTION_BY_ID[secId]:null;
+  if(!s)return{name:secId,glyph:'▸',res:''};
+  return{name:s.name,glyph:s.glyph||'▸',res:s.res||''};
+}
+/* Gleiche Seitennamen („Charting the Unknown“ gibt es vier Mal) mit Ressort unterscheiden. */
+function _sresSecLabel(secId){
+  const info=_sresSecInfo(secId);
+  if(typeof SECTIONS==='undefined'||!Array.isArray(SECTIONS))return info.name;
+  let dup=false;
+  for(let i=0;i<SECTIONS.length;i++){if(SECTIONS[i].id!==secId&&SECTIONS[i].name===info.name){dup=true;break;}}
+  if(!dup)return info.name;
+  const r=(typeof RESSORT_BY_ID!=='undefined'&&RESSORT_BY_ID)?RESSORT_BY_ID[info.res]:null;
+  return info.name+(r?' · '+r.label:' · '+secId);
+}
+/* Anzeigename eines Eintrags: data-item-id (deutsch ueber deN), sonst erste Ueberschrift im
+   Knoten, sonst zusammengezogener Text. Nur Knoten mit Anzeigename werden gelistet. */
+function _sresNameLike(id){return !!id&&(/\s/.test(id)||/[A-ZÄÖÜ]/.test(id));}
+function _sresText(el,max){
+  let out='',n;
+  try{
+    const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{acceptNode(node){
+      const p=node.parentNode;
+      if(!p||p.closest('script,style'))return NodeFilter.FILTER_REJECT;
+      return (node.nodeValue||'').trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    }});
+    while((n=w.nextNode())&&out.length<max)out+=n.nodeValue.replace(/\s+/g,' ')+' ';
+  }catch(e){}
+  out=out.replace(/\s+/g,' ').trim();
+  if(out.length>max)out=out.slice(0,max).replace(/\s+\S*$/,'')+' …';
+  return out;
+}
+function _sresLabel(el){
+  let id=el.dataset.itemId||'';
+  if(_sresNameLike(id)){
+    if(typeof deN==='function')id=deN(id);
+    id=String(id||'').replace(/\s+/g,' ').trim();
+    if(id)return id.slice(0,110);
+  }
+  for(let i=0;i<_SRES_TITLE_SELS.length;i++){
+    const t=el.querySelector(_SRES_TITLE_SELS[i]);
+    if(!t)continue;
+    const x=(t.textContent||'').replace(/\s+/g,' ').trim();
+    if(x)return x.slice(0,110);
+  }
+  return _sresText(el,70);
+}
+function _sresBuild(){
+  // Ohne die spaeteren Datendateien gaebe es nur einen halben Index — dann lieber spaeter neu versuchen.
+  if(typeof ensureAllRendered!=='function'||typeof autoSearchTags!=='function')return null;
+  if(typeof ensureAllRendered==='function')ensureAllRendered();
+  if(typeof autoSearchTags==='function')autoSearchTags(document);
+  const list=[],seen=new Set();
+  document.querySelectorAll('.sec').forEach(sec=>{
+    const secId=sec.id.replace(/^sec-/,'');
+    sec.querySelectorAll('[data-s]').forEach(el=>{
+      const ds=el.dataset.s||'';
+      if(!ds)return;
+      const label=_sresLabel(el);
+      if(!label)return;
+      const lf=_fold(label);
+      if(!lf)return;
+      const key=secId+'|'+lf;
+      if(seen.has(key))return;
+      seen.add(key);
+      let sf=el._sf;
+      if(!sf){try{sf=_foldS(ds);}catch(e){sf=_fold(ds);}}
+      /* Englischer Name eines deutschen Anzeigenamens: damit findet „Tigerfang“ auch
+         „Tigerzahn-Ring“ als Namens-, nicht nur als Volltexttreffer. */
+      let lfe='';
+      try{if(typeof deE==='function')lfe=_fold(deE(label));}catch(e){}
+      list.push({sec:secId,label,lf,lfe,ds,sf,itemId:_sresNameLike(el.dataset.itemId||'')?el.dataset.itemId:''});
+    });
+  });
+  _SRES={list,built:Date.now()};
+  return _SRES;
+}
+function _sresEnsure(){
+  if(_SRES)return _SRES;
+  let idx=null;
+  try{idx=_sresBuild();}catch(e){idx=null;}
+  // Noch nicht bereit (App startet gerade): nicht als leeren Index zwischenspeichern.
+  return idx||{list:[],built:0};
+}
+function _sresWordStart(s,t){
+  let i=s.indexOf(t);
+  while(i>=0){if(i===0||!/[a-z0-9]/.test(s.charAt(i-1)))return true;i=s.indexOf(t,i+1);}
+  return false;
+}
+function _sresScore(e,needles){
+  const groups=(needles&&needles.oder)?needles.oder:[needles];
+  let total=0,label=0;
+  for(let g=0;g<groups.length;g++){
+    let best=0;
+    for(let k=0;k<groups[g].length;k++){
+      const t=groups[g][k];
+      if(!t)continue;
+      [e.lf,e.lfe].forEach(s=>{
+        if(!s)return;
+        if(s===t)best=Math.max(best,6);
+        else if(s.startsWith(t))best=Math.max(best,5);
+        else if(_sresWordStart(s,t))best=Math.max(best,4);
+        else if(s.includes(t))best=Math.max(best,3);
+      });
+    }
+    total+=best;label+=best;
+  }
+  return{total,label};
+}
+function _sresFind(q){
+  const idx=_sresEnsure();
+  if(!idx||!idx.list.length)return null;
+  const qF=_fold(q);
+  if(!qF)return null;
+  let specs;
+  try{specs=_searchSpecs(qF,true);}catch(e){specs=[{n:_nGruppen([qF]),note:''}];}
+  const activeEl=document.querySelector('.sec.active');
+  const activeSec=activeEl?activeEl.id:'';
+  for(let s=0;s<specs.length;s++){
+    const sp=specs[s],hits=[];
+    for(let i=0;i<idx.list.length;i++){
+      const e=idx.list[i];
+      let ok=false;
+      try{ok=_nHit(e.sf,sp.n);}catch(err){ok=e.sf.indexOf(qF)>=0;}
+      if(!ok)continue;
+      const sc=_sresScore(e,sp.n);
+      hits.push({e,score:sc.total+(activeSec==='sec-'+e.sec?0.5:0),labelScore:sc.label});
+    }
+    if(!hits.length)continue;
+    hits.sort((a,b)=>b.score-a.score||(a.e.label<b.e.label?-1:a.e.label>b.e.label?1:0));
+    return{hits,spec:sp,activeSec,qF};
+  }
+  return{hits:[],spec:specs[0],activeSec,qF};
+}
+function _sresGroups(hits,activeSec){
+  const map=new Map(),order=[];
+  hits.forEach(h=>{
+    const k=h.e.sec;
+    let g=map.get(k);
+    if(!g){g={sec:k,best:-1,count:0,items:[]};map.set(k,g);order.push(g);}
+    g.count++;
+    if(h.score>g.best)g.best=h.score;
+    if(g.items.length<7)g.items.push(h);
+  });
+  order.sort((a,b)=>{
+    const act=String(activeSec||'').replace(/^sec-/,'');
+    const ac=(a.sec===act)?1:0;
+    const bc=(b.sec===act)?1:0;
+    return bc-ac||b.best-a.best||b.count-a.count||String(a.sec).localeCompare(String(b.sec));
+  });
+  return order;
+}
+function _sresMark(text,q){
+  const vars=[q];
+  try{if(typeof deQ==='function')deQ(q).forEach(x=>{if(x.length>=2)vars.push(x);});}catch(e){}
+  const uniq=[];
+  const seen=new Set();
+  vars.forEach(v=>{v=String(v||'').trim();if(v.length>=2&&!seen.has(v.toLowerCase())){seen.add(v.toLowerCase());uniq.push(v);}});
+  if(!uniq.length)return escHtml(text);
+  uniq.sort((a,b)=>b.length-a.length);
+  let re;
+  try{re=new RegExp('('+uniq.map(v=>v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')','gi');}catch(e){return escHtml(text);}
+  let out='',last=0,m;
+  while((m=re.exec(text))){
+    if(m[0]===''){re.lastIndex++;continue;}
+    out+=escHtml(text.slice(last,m.index))+'<mark class="hl">'+escHtml(m[0])+'</mark>';
+    last=m.index+m[0].length;
+  }
+  return out+escHtml(text.slice(last));
+}
+/* Textausschnitt fuer reine Volltexttreffer (Name enthält die Anfrage nicht). */
+function _sresSnippet(e,needles){
+  const ds=e.ds||'';
+  if(!ds)return '';
+  const groups=(needles&&needles.oder)?needles.oder:[needles||[]];
+  const fds=_fold(ds);
+  let pos=-1,len=0;
+  for(let g=0;g<groups.length;g++){
+    for(let k=0;k<groups[g].length;k++){
+      const t=groups[g][k];
+      if(!t)continue;
+      const i=fds.indexOf(t);
+      if(i>=0&&(pos<0||i<pos)){pos=i;len=t.length;}
+    }
+  }
+  if(pos<0)return '';
+  const start=Math.max(0,Math.min(pos-38,ds.length-1));
+  const end=Math.min(ds.length,pos+len+60);
+  return ((start>0?'… ':'')+ds.slice(start,end)+(end<ds.length?' …':''))
+    .replace(/\s+/g,' ')
+    .replace(/(^|\s)([a-zäöüß0-9][a-zäöüß0-9'-]*)(?:\s+\2(?=\s|$))+/g,'$1$2')
+    .trim();
+}
+function _hideSearchResults(){
+  const box=document.getElementById('sres');
+  const sb=document.getElementById('sidebar');
+  if(box)box.innerHTML='';
+  if(sb)sb.classList.remove('searching');
+  _SRES_SHOWN=[];
+}
+/* Rendert die Trefferliste; Rueckgabe: Gesamtzahl der Treffer ueber alle Seiten. */
+function _renderSearchResults(q){
+  const box=document.getElementById('sres');
+  const sb=document.getElementById('sidebar');
+  if(!box||!sb)return 0;
+  const query=String(q||'').trim();
+  if(query.length<2){_hideSearchResults();return 0;}
+  const res=_sresFind(query);
+  if(!res){_hideSearchResults();return 0;}
+  const hits=res.hits,total=hits.length;
+  if(!total){
+    _SRES_SHOWN=[];
+    sb.classList.add('searching');
+    box.innerHTML='<div class="sres-hd"><span class="sres-hd-l">Treffer</span><span class="sres-hd-n">0</span></div>'
+      +'<div class="sres-empty">Keine Treffer für <b>„'+escHtml(query)+'“</b> auf allen Seiten.<br>'
+      +'Deutsch und englisch funktionieren beide, zum Beispiel „Umbra“ oder „Antumbra“.</div>';
+    return 0;
+  }
+  const groups=_sresGroups(hits,res.activeSec);
+  const shown=[];
+  let html='<div class="sres-hd"><span class="sres-hd-l">Treffer</span><span class="sres-hd-n">'
+    +total+' auf '+groups.length+(groups.length===1?' Seite':' Seiten')+'</span></div>';
+  groups.slice(0,8).forEach(g=>{
+    const info=_sresSecInfo(g.sec);
+    html+='<div class="sres-grp"><button type="button" class="sres-gh" data-sec="'+_navEsc(g.sec)+'" title="Alle Treffer auf dieser Seite anzeigen">'
+      +'<span class="sres-gg" aria-hidden="true">'+escHtml(info.glyph)+'</span>'
+      +'<span class="sres-gn">'+escHtml(_sresSecLabel(g.sec))+'</span>'
+      +'<span class="sres-gc">'+g.count+'</span></button>';
+    g.items.slice(0,5).forEach(h=>{
+      const i=shown.length;
+      shown.push(h.e);
+      const cur=_SRES_ACTIVE&&_SRES_ACTIVE.sec===h.e.sec&&_SRES_ACTIVE.label===h.e.label;
+      const snippet=h.labelScore?'' :_sresSnippet(h.e,res.spec&&res.spec.n);
+      /* Englischer Name als zweite Zeile, wenn der Anzeigename die Anfrage nicht selbst enthaelt
+         (Suche „Tigerfang“ -> Zeile „Tigerzahn-Ring“ mit „Tigerfang Ring“ darunter). */
+      const en=_sresEnName(h.e,res.spec&&res.spec.n,query);
+      html+='<button type="button" class="sres-hit" data-i="'+i+'"'+(cur?' aria-current="true"':'')+'>'
+        +'<span class="sres-t">'+_sresMark(h.e.label,query)+'</span>'
+        +(en?'<span class="sres-x">'+_sresMark(en,query)+'</span>':'')
+        +(snippet?'<span class="sres-s">'+_sresMark(snippet,query)+'</span>':'')
+        +'</button>';
+    });
+    if(g.count>5)html+='<button type="button" class="sres-hit sres-more" data-sec="'+_navEsc(g.sec)+'">Alle '+g.count+' Treffer auf dieser Seite →</button>';
+    html+='</div>';
+  });
+  if(groups.length>8){
+    html+='<div class="sres-empty sres-empty--more">Weitere '+(groups.length-8)+' Seiten mit Treffern — '
+      +'oben in der Liste eine Seite wählen oder den Suchbegriff eingrenzen.</div>';
+  }
+  box.innerHTML=html;
+  _SRES_SHOWN=shown;
+  sb.classList.add('searching');
+  return total;
+}
+/* Treffer oeffnen: Seite wechseln, Suche dort anwenden, Ziel hervorheben. */
+function _sresFindEl(sec,e){
+  const all=sec.querySelectorAll('[data-s]');
+  if(e.itemId){for(let i=0;i<all.length;i++)if(all[i].dataset.itemId===e.itemId)return all[i];}
+  for(let i=0;i<all.length;i++)if(all[i].dataset.s===e.ds)return all[i];
+  return null;
+}
+function _sresReveal(e,q){
+  const sec=document.getElementById('sec-'+e.sec);
+  if(!sec)return;
+  const el=_sresFindEl(sec,e);
+  if(!el)return;
+  /* Treffer in einem verdeckten Reiter einer mehrseitigen Seite: Reiter umschalten. */
+  const pane=el.closest('.pane');
+  if(pane&&!pane.classList.contains('active')){
+    const panes=[...sec.querySelectorAll(':scope > .pane')];
+    const tabs=[...sec.querySelectorAll(':scope > .tabs > button')];
+    const idx=panes.indexOf(pane);
+    if(idx>=0&&tabs.length===panes.length){
+      panes.forEach((p,i)=>p.classList.toggle('active',i===idx));
+      tabs.forEach((b,i)=>b.classList.toggle('active',i===idx));
+      try{if(typeof _collapseEmptyGroups==='function')_collapseEmptyGroups(sec,true);}catch(err){}
+    }
+  }
+  let nq=[_fold(q)];
+  try{nq=_nGruppen(nq);}catch(err){}
+  /* Ist der Treffer selbst eine Faltkarte, klappt der Sprung sie auf (ihr Inhalt ist sonst zu). */
+  if(el.tagName==='DETAILS'&&!el.open){el.open=true;el.dataset.srchOpen='1';}
+  try{if(typeof _openForSearch==='function')_openForSearch(el,nq);}catch(err){}
+  try{if(typeof _openItemDetailsForSearch==='function')_openItemDetailsForSearch(el,_fold(q));}catch(err){}
+  try{if(typeof _openCardForSearch==='function')_openCardForSearch(el,_fold(q));}catch(err){}
+  const flash=()=>{
+    if(!el.isConnected)return;
+    if(window.cdMotion&&typeof cdMotion.scrollTo==='function'){
+      try{cdMotion.scrollTo(el,{immediate:true,offset:110});return;}catch(err){}
+    }
+    const r=el.getBoundingClientRect();
+    const top=Math.max(0,window.scrollY+r.top-110);
+    try{window.scrollTo({top,behavior:'smooth'});}catch(err){window.scrollTo(0,top);}
+  };
+  setTimeout(flash,60);
+  try{el.setAttribute('tabindex','-1');el.focus({preventScroll:true});}catch(err){}
+  el.classList.remove('sres-flash');
+  void el.offsetWidth;
+  el.classList.add('sres-flash');
+  clearTimeout(el._sresFlashT);
+  el._sresFlashT=setTimeout(()=>{el.classList.remove('sres-flash');},1900);
+}
+function _sresRefreshActive(){
+  const box=document.getElementById('sres');
+  if(!box)return;
+  box.querySelectorAll('.sres-hit[aria-current]').forEach(b=>b.removeAttribute('aria-current'));
+  if(!_SRES_ACTIVE)return;
+  box.querySelectorAll('.sres-hit[data-i]').forEach(b=>{
+    const e=_SRES_SHOWN[+b.dataset.i];
+    if(e&&e.sec===_SRES_ACTIVE.sec&&e.label===_SRES_ACTIVE.label)b.setAttribute('aria-current','true');
+  });
+}
+function _sresPick(e){
+  if(!e)return;
+  const si=document.getElementById('si');
+  const q=((si&&si.value)||'').trim();
+  if(!q)return;
+  _SRES_ACTIVE={sec:e.sec,label:e.label};
+  const activeEl=document.querySelector('.sec.active');
+  if(!activeEl||activeEl.id!=='sec-'+e.sec){
+    try{showSec(e.sec,{keepSearch:true});}catch(err){}
+    if(si)si.value=q;
+    try{if(typeof _doSearchImpl==='function')_doSearchImpl(q);}catch(err){}
+  }else if(si&&si.value!==q){
+    si.value=q;
+    try{if(typeof _doSearchImpl==='function')_doSearchImpl(q);}catch(err){}
+  }
+  _sresReveal(e,q);
+  _sresRefreshActive();
+  // Mobil das Sheet schliessen, damit der angesprungene Eintrag sichtbar wird —
+  // auch wenn der Treffer auf der bereits geoeffneten Seite liegt (dann laeuft kein showSec).
+  try{if(typeof _isMobile==='function'&&_isMobile()&&typeof closeSheet==='function')closeSheet();}catch(err){}
+}
+function _sresJump(secId){
+  if(!secId)return;
+  _SRES_ACTIVE=null;
+  try{_searchJump(secId);}catch(err){}
+}
+/* Treffer, dessen Anzeigename die Anfrage nicht enthaelt, aber der englische Spielname:
+   den englischen Namen als zweite Zeile zeigen (z. B. Suche „Tigerfang“ -> „Tigerzahn-Ring“). */
+function _sresEnName(e,needles,query){
+  const id=e.itemId;
+  if(!id)return '';
+  const fid=_fold(id);
+  if(!fid||fid===e.lf)return '';
+  let hit=false;
+  try{hit=_nHit(fid,needles);}catch(err){hit=fid.indexOf(_fold(query))>=0;}
+  if(!hit)return '';
+  let lab=false;
+  try{lab=_nHit(e.lf,needles);}catch(err){lab=e.lf.indexOf(_fold(query))>=0;}
+  return lab?'':id;
+}
+function _sresClick(ev){
+  const box=document.getElementById('sres');
+  if(!box||!box.contains(ev.target))return;
+  const hit=ev.target.closest('.sres-hit');
+  if(hit&&hit.dataset.i!=null&&hit.dataset.i!==''){
+    const e=_SRES_SHOWN[+hit.dataset.i];
+    if(e){ev.preventDefault();_sresPick(e);}
+    return;
+  }
+  const jump=ev.target.closest('[data-sec]');
+  if(jump&&jump.dataset.sec){ev.preventDefault();_sresJump(jump.dataset.sec);}
+}
+/* Tastatur im Suchfeld: Pfeil runter fuehrt in die Trefferliste, Enter oeffnet den ersten
+   Treffer; ohne Treffer schliesst Enter auf dem Handy wie bisher das Menue. */
+function _sresKeyInput(ev){
+  if(ev.defaultPrevented)return false;
+  const box=document.getElementById('sres');
+  const sb=document.getElementById('sidebar');
+  const on=!!(box&&sb&&sb.classList.contains('searching'));
+  if(on){
+    const first=box.querySelector('.sres-hit[data-i]');
+    if(first&&ev.key==='ArrowDown'){ev.preventDefault();first.focus();return true;}
+    if(first&&ev.key==='Enter'){ev.preventDefault();first.click();return true;}
+  }
+  if(ev.key==='Enter'&&typeof _isMobile==='function'&&_isMobile()){
+    ev.preventDefault();
+    try{ev.target.blur();closeSheet();}catch(e){}
+    return true;
+  }
+  return false;
+}
+function _sresKeyPanel(ev){
+  const box=document.getElementById('sres');
+  if(!box||!box.contains(ev.target))return;
+  if(ev.key==='Escape'){
+    ev.preventDefault();
+    const si=document.getElementById('si');
+    if(si){si.focus();si.select();}
+    return;
+  }
+  const hit=ev.target.closest('.sres-hit');
+  if(!hit)return;
+  const hits=[...box.querySelectorAll('.sres-hit[data-i]')];
+  const i=hits.indexOf(hit);
+  if(ev.key==='ArrowDown'||ev.key==='ArrowUp'){
+    ev.preventDefault();
+    const n=i+(ev.key==='ArrowDown'?1:-1);
+    if(hits[n])hits[n].focus();
+    else if(i<=0&&ev.key==='ArrowUp'){const si=document.getElementById('si');if(si)si.focus();}
+    return;
+  }
+  if(ev.key==='Home'||ev.key==='End'){
+    ev.preventDefault();
+    const t=ev.key==='Home'?hits[0]:hits[hits.length-1];
+    if(t)t.focus();
+  }
+}
+(function _initSearchResults(){
+  const run=()=>{
+    const box=document.getElementById('sres');
+    const si=document.getElementById('si');
+    if(box){
+      box.addEventListener('click',_sresClick);
+      box.addEventListener('keydown',_sresKeyPanel);
+    }
+    if(si){
+      /* Index im Hintergrund vorbereiten, sobald der Nutzer das Feld anfasst —
+         dann ist die erste Eingabe ohne Aufbau-Pause. */
+      si.addEventListener('focus',()=>{
+        if(_SRES)return;
+        setTimeout(()=>{try{_sresEnsure();}catch(e){}},60);
+      });
+    }
+    /* Zusaetzlich in der Leerlaufzeit vorbereiten: Wer erst spaeter sucht, wartet dann
+       gar nicht. Auf Datensparsamkeit/2G wird der Aufbau nicht vorgezogen. */
+    const prefetch=()=>{
+      if(_SRES)return;
+      let skip=false;
+      try{const c=navigator.connection;if(c&&(c.saveData||/^(slow-)?2g$/.test(c.effectiveType||'')))skip=true;}catch(e){}
+      if(skip)return;
+      if(typeof requestIdleCallback==='function')requestIdleCallback(()=>{try{_sresEnsure();}catch(e){}},{timeout:5000});
+      else setTimeout(()=>{try{_sresEnsure();}catch(e){}},2500);
+    };
+    if(document.readyState==='complete')prefetch();
+    else window.addEventListener('load',prefetch,{once:true});
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
 const doSearch=_debounce(_doSearchImpl,120);
 // Trefferzaehler-Pille (mobil): #scnt steckt im Register-Sheet und ist bei geschlossenem Sheet unsichtbar. Die Pille spiegelt den Text
 // ausserhalb des Sheets und loescht die Suche per Knopf. Nur sichtbar, wenn Text da ist und das Sheet zu ist (Anzeige per CSS nur <=860px).
