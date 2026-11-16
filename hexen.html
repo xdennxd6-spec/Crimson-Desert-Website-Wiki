@@ -3381,7 +3381,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d04-armor-imgs.js?v=07791836b7" fetchpriority="low"></script>
 <script src="data/d05-fac-data.js?v=4517311cb3" fetchpriority="low"></script>
 <script src="data/d06-items.js?v=383573514a" fetchpriority="low"></script>
-<script src="data/d07-patches.js?v=7f40a010ac" fetchpriority="low"></script>
+<script src="data/d07-patches.js?v=6195e49080" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=1584c23442" fetchpriority="low"></script>
 <script src="data/d09-scenes.js?v=09b7712c8d" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
@@ -14720,7 +14720,7 @@ const _DRA2_BEST_INTRO='Normale Gegner und Wildtiere in Pywel — Wildtiere für
 function _drA2Split(title){const m=/^(\S+)\s+(.*)$/.exec(title);return m?{g:m[1],t:m[2]}:{g:'',t:title};}
 function _drA2Join(a){return a.length>1?a.slice(0,-1).join(', ')+' & '+a[a.length-1]:a.join('');}
 function _drA2BestCard(e,key,title){
-  const s=[e.name,e.de||'',e.region,e.drops||'',e.tipp||'',e.note,'bestiarium gegner enemy',title].join(' ').toLowerCase();
+  const s=[e.name,e.de||'',e.region,e.fundort||'',e.drops||'',e.tipp||'',e.note,'bestiarium gegner enemy',title].join(' ').toLowerCase();
   const img=ENEMY_IMGS[e.name];
   const titel=e.de&&e.de!==e.name?`${escHtml(e.de)} <span class="ct-sub">(${escHtml(e.name)})</span>`:escHtml(deN(e.name));
   const head=img
@@ -14732,13 +14732,14 @@ function _drA2BestCard(e,key,title){
   const body=(e.tipp?`<div class="crow"><span class="cl">Taktik</span><span class="cv" style="color:var(--gold)">${escHtml(deT(e.tipp))}</span></div>`:'')+ch
     +(e.note?`<div class="best-note">${escHtml(deT(e.note))}</div>`:'');
   const more=parts.length?`<details class="item-more dra2-more"><summary onclick="this.parentElement.removeAttribute('data-srch-open')">${escHtml(deT(_drA2Join(parts)))}</summary><div class="item-more-body">${body}</div></details>`:'';
-  const vis=[e.name,e.de||'',e.region,unb,e.drops&&e.drops!=='—'?e.drops:''].filter(Boolean).join(' ');
+  const vis=[e.name,e.de||'',e.region,e.fundort||'',unb,e.drops&&e.drops!=='—'?e.drops:''].filter(Boolean).join(' ');
   const hid=[e.tipp||'',e.note||''].filter(Boolean).join(' ');
   return `<div class="card cd-spot dra2-card" data-filtered="0" data-s="${escHtml(s)}" data-item-id="${escHtml(e.name)}" data-item-visible="${escHtml(vis)}" data-item-hidden="${escHtml(hid)}">
     ${head}
     <div class="ct">${titel}</div>
-    <div class="cm"><span class="tag tx">${escHtml(deT(e.region))}</span>${unb?'<span class="tag tw" title="Quellenlage dünn — Details teils nur eine Quelle">Details unbestätigt</span>':''}</div>
+    <div class="cm">${e.region?`<span class="tag tx">${escHtml(deT(e.region))}</span>`:''}${unb?'<span class="tag tw" title="Quellenlage dünn — Details teils nur eine Quelle">Details unbestätigt</span>':''}</div>
     <div class="crows">
+      ${e.fundort?`<div class="crow"><span class="cl">Fundort</span><span class="cv">${escHtml(e.fundort)}</span></div>`:''}
       ${e.drops&&e.drops!=='—'?`<div class="crow"><span class="cl">Drops</span><span class="cv">${escHtml(deT(e.drops))}</span></div>`:''}
       ${more}
     </div>

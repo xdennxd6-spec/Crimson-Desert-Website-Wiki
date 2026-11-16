@@ -102,6 +102,9 @@ function enemyCard(e, ctx) {
 
   const stats = [];
   if (has(e.region) && !isDashOnly(e.region)) stats.push(["Region", deT(e.region)]);
+  // Seit 16.11.2026: recherchierter Fundort als Freitext (data/d07-patches.js, Feld fundort).
+  // Ergaenzt die kurze Region, ersetzt sie aber nicht; Eintraege ohne Region zeigen nur den Fundort.
+  if (has(e.fundort) && !isDashOnly(e.fundort)) stats.push(["Fundort", e.fundort]);
   if (has(e.drops) && !isDashOnly(e.drops)) stats.push(["Drops", e.drops]);
   if (e.conf === "medium") stats.push(["Quellenlage", "unbestätigt, Details teils nur durch eine Quelle belegt"]);
   const statsHtml = stats.map(([k, v]) => `<li><b>${esc(k)}:</b> ${esc(v)}</li>`).join("");
