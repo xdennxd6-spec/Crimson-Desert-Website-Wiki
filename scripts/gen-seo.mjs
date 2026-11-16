@@ -24,6 +24,10 @@ import fs from "fs";
 import path from "path";
 import { execFileSync } from "child_process";
 import { createHash } from "crypto";
+
+// Prüfwerte über den Inhalt mit LF-Zeilenenden: Der PC checkt Dateien teils als CRLF aus,
+// der Pi und Worktrees als LF. Über rohe Bytes sprangen die Werte je Rechner hin und her (16.11.2026).
+const lfText = (p) => fs.readFileSync(p, "utf8").replace(/\r\n/g, "\n");
 import { fileURLToPath } from "url";
 
 import * as partRuestungen from "./seo-parts/ruestungen.mjs";
@@ -66,7 +70,7 @@ const ROOT = path.join(__dirname, "..");
 // 05.11.2026: Das grosse Stylesheet liegt in app.css (Googlebot liest HTML nur bis rund 2 MB, siehe verify-seo).
 // Der Pruefwert im Link sorgt dafuer, dass Browser und Cloudflare nach einer CSS-Aenderung sofort die neue Datei holen.
 {
-  const cssV = createHash("sha256").update(fs.readFileSync(path.join(ROOT, "app.css"))).digest("hex").slice(0, 10);
+  const cssV = createHash("sha256").update(lfText(path.join(ROOT, "app.css"))).digest("hex").slice(0, 10);
   const indexPfad = path.join(ROOT, "index.html");
   const alt = fs.readFileSync(indexPfad, "utf8");
   if (!/href="app\.css\?v=[0-9a-f]+"/.test(alt)) throw new Error('index.html: <link href="app.css?v=..."> fehlt');
@@ -77,7 +81,7 @@ const ROOT = path.join(__dirname, "..");
   // WICHTIG: Wer data/*.js aendert, MUSS gen-seo laufen lassen, sonst bleibt unter der alten Adresse der alte Inhalt
   // im Cache (verify-seo prueft die Pruefwerte in index.html, allen SEO-Seiten und sw.js).
   const datenV = Object.fromEntries(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
-    .map(f => [f, createHash("sha256").update(fs.readFileSync(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
+    .map(f => [f, createHash("sha256").update(lfText(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
   const mitV = (text, vor, nach) => text.replace(new RegExp(`${vor}data/([A-Za-z0-9_-]+\\.js)(?:\\?v=[0-9a-f]+)?${nach}`, "g"),
     (m, f) => (datenV[f] ? `${m.slice(0, m.indexOf("data/"))}data/${f}?v=${datenV[f]}${m.slice(-1)}` : m));
   neu = mitV(neu, '<script src="', '"');          // <script src="data/dNN-….js">
@@ -1287,7 +1291,8 @@ ${faqSektion(faq)}`;
 // lastmod je URL = Tag der letzten INHALTLICHEN Aenderung der Seite, nicht der
 // Lauf-Tag (bis 10/2026 trug jede URL das Lauf-Datum, die Angabe war damit
 // wertlos). Reihenfolge der Quellen je Seite:
-//   1. Die Seite aendert sich in diesem Lauf        -> TODAY
+//   1. Der EIGENE Inhalt der Seite aendert sich in diesem Lauf (eigenerInhalt(),
+//      also nicht App-Code oder Pruefwerte, die alle Seiten teilen) -> TODAY
 //   2. sonst der bisherige Wert aus sitemap.xml      -> unveraendert
 //   3. kein bisheriger Wert: letzter Commit der Datei (git), sonst TODAY
 // Damit bleibt sitemap.xml byte-gleich, solange sich keine Seite aendert, und
@@ -1578,10 +1583,29 @@ const seiten = [
 // Welche Seiten sich in diesem Lauf inhaltlich aendern (Zeilenenden egal, siehe
 // unten) -- Grundlage fuer lastmod in buildSitemap(). Muss VOR dem Schreiben
 // ermittelt werden, danach sind alte und neue Fassung gleich.
+// Verglichen wird nur der EIGENE Inhalt der Seite (Titel, Description, canonical,
+// og:image, JSON-LD, Hauptüberschrift, Block "Mehr zu diesem Thema"). Seit der
+// App-Fassung (01.11.2026) ist jede Seite eine Kopie von index.html; ein Vergleich
+// der ganzen Datei setzte bei jeder Daten- oder CSS-Änderung (Prüfwerte, App-Code)
+// alle 29 lastmod auf heute, damit war die Angabe für Google wieder wertlos (16.11.2026).
 const ohneCR = (t) => t.replace(/\r\n/g, "\n");
+function eigenerInhalt(html) {
+  const t = ohneCR(html);
+  const eins = (re) => (re.exec(t) || [""])[0];
+  const i = t.indexOf(SEO_START), j = t.indexOf(SEO_ENDE);
+  return [
+    eins(/<title>[\s\S]*?<\/title>/),
+    eins(/<meta name="description" content="[^"]*">/),
+    eins(/<link rel="canonical" href="[^"]*">/),
+    eins(/<meta property="og:image" content="[^"]*">/),
+    eins(/<script type="application\/ld\+json">[\s\S]*?<\/script>/),
+    eins(/<h1 class="vh">[\s\S]*?<\/h1>/),
+    i >= 0 && j > i ? t.slice(i, j) : t,
+  ].join("\n");
+}
 const geaendert = new Set(seiten.filter(([file, content]) => {
   const ziel = path.join(ROOT, file);
-  return !fs.existsSync(ziel) || ohneCR(fs.readFileSync(ziel, "utf8")) !== ohneCR(content);
+  return !fs.existsSync(ziel) || eigenerInhalt(fs.readFileSync(ziel, "utf8")) !== eigenerInhalt(content);
 }).map(([file]) => file));
 // Mit SEO_ONLY keine Sitemap: sie braucht alle Seiten fuer ein stimmiges lastmod.
 const outputs = ONLY ? seiten : [...seiten, ["sitemap.xml", buildSitemap(geaendert)]];

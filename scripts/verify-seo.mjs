@@ -1,4 +1,8 @@
 import { createHash } from "crypto";
+
+// Prüfwerte über den Inhalt mit LF-Zeilenenden: Der PC checkt Dateien teils als CRLF aus,
+// der Pi und Worktrees als LF. Über rohe Bytes sprangen die Werte je Rechner hin und her (16.11.2026).
+const lfText = (p) => fs.readFileSync(p, "utf8").replace(/\r\n/g, "\n");
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -199,7 +203,7 @@ for (const file of ["index.html", ...Object.keys(pages)]) {
   const groesse = fs.statSync(path.join(ROOT, file)).size;
   ok(groesse <= MAX_HTML_BYTES, `${file}: ${groesse} Byte (hoechstens ${MAX_HTML_BYTES}, Googlebot liest rund 2 MB)`);
   const appV = (fs.readFileSync(path.join(ROOT, file), "utf8").match(/href="app\.css\?v=([0-9a-f]+)"/) || [])[1];
-  const istV = createHash("sha256").update(fs.readFileSync(path.join(ROOT, "app.css"))).digest("hex").slice(0, 10);
+  const istV = createHash("sha256").update(lfText(path.join(ROOT, "app.css"))).digest("hex").slice(0, 10);
   ok(appV === istV, `${file}: app.css-Pruefwert aktuell (${appV}, Soll ${istV}), sonst gen-seo laufen lassen`);
 }
 // 10.11.2026: data/*.js traegt einen Pruefwert (?v=<Inhalts-Hash>) und wird ein Jahr unveraenderlich ausgeliefert.
@@ -207,7 +211,7 @@ for (const file of ["index.html", ...Object.keys(pages)]) {
 console.log(`\n[Pruefwerte der Datendateien]`);
 {
   const datenV = Object.fromEntries(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
-    .map(f => [f, createHash("sha256").update(fs.readFileSync(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
+    .map(f => [f, createHash("sha256").update(lfText(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
   for (const file of ["index.html", ...Object.keys(pages), "sw.js"]) {
     const text = fs.readFileSync(path.join(ROOT, file), "utf8");
     const falsch = [];

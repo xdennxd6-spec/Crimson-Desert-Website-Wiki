@@ -1725,21 +1725,21 @@
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=e86e896692" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=2eaba7daaa" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=21ad62fea0" fetchpriority="low"></script>
-<script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
-<script src="data/d04-armor-imgs.js?v=14c298e4c8" fetchpriority="low"></script>
-<script src="data/d05-fac-data.js?v=0ec5fff666" fetchpriority="low"></script>
-<script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
-<script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
-<script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=5a90b24e47" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=44f5996f27" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=d8741276a3" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=767ee88bcf" fetchpriority="low"></script>
+<script src="data/d03-main-quests.js?v=2cd8f88b03" fetchpriority="low"></script>
+<script src="data/d04-armor-imgs.js?v=07791836b7" fetchpriority="low"></script>
+<script src="data/d05-fac-data.js?v=4517311cb3" fetchpriority="low"></script>
+<script src="data/d06-items.js?v=383573514a" fetchpriority="low"></script>
+<script src="data/d07-patches.js?v=7f40a010ac" fetchpriority="low"></script>
+<script src="data/d08-ruins-data.js?v=1584c23442" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=09b7712c8d" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
 <script src="data/d11-fac-quest-imgs.js?v=13947fead7" fetchpriority="low"></script>
-<script src="data/d12-dlc.js?v=2b3cfdc211" fetchpriority="low"></script>
-<script src="data/d13-romanze.js?v=6f08b281cc" fetchpriority="low"></script>
-<script src="data/d14-reit.js?v=5ee8a055fa" fetchpriority="low"></script>
+<script src="data/d12-dlc.js?v=77a2233f91" fetchpriority="low"></script>
+<script src="data/d13-romanze.js?v=1beb4059c6" fetchpriority="low"></script>
+<script src="data/d14-reit.js?v=ebe0ae09b3" fetchpriority="low"></script>
 <script src="data/d18-synthese-blaupausen.js?v=19ad86c9f6" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
@@ -11838,8 +11838,8 @@ function weltkarteLaden(){
   if(!_wkLaden){
     if(!document.getElementById('wk-css')){const c=document.createElement('link');c.id='wk-css';c.rel='stylesheet';c.href='vendor/leaflet-1.9.4.css';document.head.appendChild(c);}
     _wkLaden=(typeof L!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='vendor/leaflet-1.9.4.min.js';}))
-      .then(ok=>ok&&(typeof WELT_ORTE!=='undefined'||_inSkript(s=>{s.src='data/d17-weltkarte.js?v=91011e11bf';})))
-      .then(ok=>ok&&(typeof weltkarteRender==='function'||_inSkript(s=>{s.src='data/d17-weltkarte-app.js?v=2a1958b752';})))
+      .then(ok=>ok&&(typeof WELT_ORTE!=='undefined'||_inSkript(s=>{s.src='data/d17-weltkarte.js?v=9e4a742ffb';})))
+      .then(ok=>ok&&(typeof weltkarteRender==='function'||_inSkript(s=>{s.src='data/d17-weltkarte-app.js?v=0764dc55b9';})))
       .then(ok=>{ok=!!ok&&typeof L!=='undefined'&&typeof WELT_ORTE!=='undefined'&&typeof weltkarteRender==='function';if(!ok)_wkLaden=null;return ok;});
   }
   return _wkLaden;
