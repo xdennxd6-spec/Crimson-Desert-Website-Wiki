@@ -2392,22 +2392,22 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
   </section>
 </div>
 </div>
-<script src="data/d00-de-namen.js?v=e8a267806f" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=4ec6937891" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=925ae91eff" fetchpriority="low"></script>
+<script src="data/d00-de-namen.js?v=e86e896692" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=2eaba7daaa" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=21ad62fea0" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=df369aba6f" fetchpriority="low"></script>
 <script src="data/d04-armor-imgs.js?v=14c298e4c8" fetchpriority="low"></script>
-<script src="data/d05-fac-data.js?v=f38e5817d5" fetchpriority="low"></script>
+<script src="data/d05-fac-data.js?v=0ec5fff666" fetchpriority="low"></script>
 <script src="data/d06-items.js?v=fb0d7ab2f6" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=1602a4b1c2" fetchpriority="low"></script>
 <script src="data/d08-ruins-data.js?v=c20bbd8150" fetchpriority="low"></script>
-<script src="data/d09-scenes.js?v=09b7712c8d" fetchpriority="low"></script>
-<script src="data/d10-enemy-drops.js?v=6309ff85a7" fetchpriority="low"></script>
-<script src="data/d11-fac-quest-imgs.js?v=a185e7aad3" fetchpriority="low"></script>
+<script src="data/d09-scenes.js?v=5a90b24e47" fetchpriority="low"></script>
+<script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
+<script src="data/d11-fac-quest-imgs.js?v=13947fead7" fetchpriority="low"></script>
 <script src="data/d12-dlc.js?v=2b3cfdc211" fetchpriority="low"></script>
 <script src="data/d13-romanze.js?v=6f08b281cc" fetchpriority="low"></script>
 <script src="data/d14-reit.js?v=5ee8a055fa" fetchpriority="low"></script>
-<script src="data/d18-synthese-blaupausen.js?v=01e799b849" fetchpriority="low"></script>
+<script src="data/d18-synthese-blaupausen.js?v=19ad86c9f6" fetchpriority="low"></script>
 <script>
 /* ==== R2 FUNDAMENT · Kern (Redesign 2, 21.10.2026) ====
    Gemeinsame Bausteine für alle Seiten. API, Beispiele, Do/Don't: redesign-2/FUNDAMENT.md.
@@ -12464,7 +12464,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=1793812a29';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=36da081955';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
@@ -12478,8 +12478,8 @@ let _inLaden=null,_inSoll='',_inRe=null;
 function _inSkript(setze){return new Promise(res=>{const s=document.createElement('script');setze(s);s.onload=()=>res(true);s.onerror=()=>{s.remove();res(false);};document.head.appendChild(s);});}
 function inselnLaden(){
   if(typeof INSELN!=='undefined'&&typeof inselnRender==='function')return Promise.resolve(true);
-  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=82ea433e0b';}))
-    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=cfb358679c';})))
+  if(!_inLaden)_inLaden=(typeof INSELN!=='undefined'?Promise.resolve(true):_inSkript(s=>{s.src='data/d15-inseln.js?v=a4a26ee859';}))
+    .then(ok=>ok&&(typeof inselnRender==='function'||_inSkript(s=>{s.src='data/d15-inseln-app.js?v=7e8bd04f7b';})))
     .then(ok=>{ok=!!ok&&typeof INSELN!=='undefined'&&typeof inselnRender==='function';if(!ok)_inLaden=null;return ok;});
   return _inLaden;
 }
