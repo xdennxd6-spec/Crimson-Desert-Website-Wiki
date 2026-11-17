@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/skills</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -44,7 +44,7 @@
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/ruestungen</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -62,7 +62,7 @@
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/hexen</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -74,13 +74,13 @@
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/hauptquests</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/side-quests</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/ruinen</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -121,6 +121,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://crimson-desert-wiki.com/der-weg-jenseits-des-sandsturms</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://crimson-desert-wiki.com/uralter-tempel</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://crimson-desert-wiki.com/jenseits-der-raender</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://crimson-desert-wiki.com/npcs</loc>
     <lastmod>2026-11-06</lastmod>
     <changefreq>monthly</changefreq>
@@ -134,13 +152,13 @@
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/mounts</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/pets</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -176,7 +194,7 @@
   </url>
   <url>
     <loc>https://crimson-desert-wiki.com/crafting</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

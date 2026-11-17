@@ -199,6 +199,11 @@ const pages = {
   "reitausruestung.html": { sec: "/#sec-reitausruestung", count: { regex: /<article class="card" id="reit-/g, expected: REIT.length, label: "Ausrüstungs-Karten" } },
   // NEU (11.11.2026): Regex und Label aus COUNT_CHECK von parts/inseln.mjs.
   "inseln.html": { sec: "/#sec-inseln", count: { regex: /<article class="card ins-seo" id="insel-/g, expected: INSELN.length, label: "Insel-Karten" } },
+  // LOES K5 (14.11.2026): drei eigene Loesungsseiten, je genau ein Loesungsabschnitt (COUNT_CHECK aus parts/_loesung-seite.mjs);
+  // der Startbereich enthaelt &go=loes-<slug>, die App springt beim Laden zur Loesung.
+  "der-weg-jenseits-des-sandsturms.html": { sec: "/#sec=dlc-quests&go=loes-der-weg-jenseits-des-sandsturms", count: { regex: /<section class="loes-seo" id="loes-seo-/g, expected: 1, label: "Lösungsabschnitte" } },
+  "uralter-tempel.html": { sec: "/#sec=dlc-quests&go=loes-uralter-tempel", count: { regex: /<section class="loes-seo" id="loes-seo-/g, expected: 1, label: "Lösungsabschnitte" } },
+  "jenseits-der-raender.html": { sec: "/#sec=dlc-quests&go=loes-jenseits-der-raender", count: { regex: /<section class="loes-seo" id="loes-seo-/g, expected: 1, label: "Lösungsabschnitte" } },
 };
 // 05.11.2026: Googlebot liest HTML nur bis rund 2 MB (unkomprimiert). Was dahinter steht, sieht Google nicht; in der
 // Search Console brach /ruestungen mitten im Hauptskript ab, die App lief bei Google nicht. Puffer: Grenze 1,9 Mio. Byte.
@@ -444,6 +449,8 @@ const ERLAUBTE_ZAHLEN = {
   "reitausruestung.html": [REIT.length, ...REIT_ARTEN.map((a) => REIT.filter((x) => x.art === a).length), Math.max(...REIT.map((x) => x.hp || 0)), REIT_VERWEISE.length],
   // NEU (11.11.2026): Intro und FAQ nennen die Zahl der Inseln
   "inseln.html": [INSELN.length],
+  // LOES K5: Intro der drei Loesungsseiten enthaelt keine Zahlen (Zahlen in Intro/FAQ duerfen es nur geben, wenn sie in den Daten stehen)
+  "der-weg-jenseits-des-sandsturms.html": [], "uralter-tempel.html": [], "jenseits-der-raender.html": [],
 };
 
 ok(PATCHES_1X.some((p) => p.ver.startsWith("1.13.")) && PATCHES_1X.some((p) => p.ver.startsWith("1.18.")),
@@ -626,6 +633,10 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
     "romanze.html": [...ROM_WITCHES.map((w) => "rom-" + slugUnabh(w.name)), "rom-npcs"],
     "reitausruestung.html": REIT.map((x) => "reit-" + slugUnabh(x.name)),
     "inseln.html": INSELN.map((x) => "insel-" + slugUnabh(x.slug)),
+    // LOES K5: der Abschnittsanker der eigenen Loesungsseiten entspricht dem Seiten-slug (a-<slug>), dazu der Abschnitt loes-seo-<slug>
+    "der-weg-jenseits-des-sandsturms.html": ["a-der-weg-jenseits-des-sandsturms", "loes-seo-der-weg-jenseits-des-sandsturms"],
+    "uralter-tempel.html": ["a-uralter-tempel", "loes-seo-uralter-tempel"],
+    "jenseits-der-raender.html": ["a-jenseits-der-raender", "loes-seo-jenseits-der-raender"],
   };
   for (const datei of Object.keys(pages)) {
     // 01.11.2026: nur der Seiteninhalt der App-Fassung (die App-ids prüft gen-seo beim Bauen auf Kollision)
@@ -687,7 +698,8 @@ const SEITEN_MIT_WERKZEUG = ["bosse", "waffen", "ruestungen", "crafting",
   "bestiarium", "side-quests", "trophaeen", "true-ending",
   "hauptquests", "patch-notes", "fraktionen", "npcs",
   "skills", "hexen", "abyss-cores", "accessoires", "kapitel-guide",
-  "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1", "charting-the-unknown", "romanze", "reitausruestung", "inseln"];
+  "mounts", "pets", "ruinen", "raetsel", "geheimnisse", "patch-notes-1", "charting-the-unknown", "romanze", "reitausruestung", "inseln",
+  "der-weg-jenseits-des-sandsturms", "uralter-tempel", "jenseits-der-raender"];
 {
   const app = fs.readFileSync(path.join(ROOT, "index.html"), "utf8").replace(/\r\n/g, "\n");
   const appRumpf = app.slice(app.indexOf("</head>")).replace(/<h1 class="vh">[\s\S]*?<\/h1>/, "");
@@ -715,7 +727,8 @@ const sm =fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8");
 ["/", "/bosse", "/bestiarium", "/waffen", "/ruestungen", "/crafting",
  "/hauptquests", "/fraktionen", "/side-quests", "/trophaeen", "/true-ending",
  "/npcs", "/patch-notes", "/patch-notes-1", "/skills", "/hexen", "/abyss-cores", "/accessoires",
- "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse", "/charting-the-unknown", "/romanze", "/reitausruestung", "/inseln"].forEach((u) =>
+ "/kapitel-guide", "/mounts", "/pets", "/ruinen", "/raetsel", "/geheimnisse", "/charting-the-unknown", "/romanze", "/reitausruestung", "/inseln",
+ "/der-weg-jenseits-des-sandsturms", "/uralter-tempel", "/jenseits-der-raender"].forEach((u) =>
   ok(sm.includes(`<loc>https://crimson-desert-wiki.com${u}</loc>`), `sitemap enthaelt ${u}`));
 
 // ── 6. Startseite verlinkt jede SEO-Seite ────────────────────────────────────
@@ -812,6 +825,78 @@ console.log("\n[INSEL_LINKS gegen INSELN]");
     ok(abweich.length === 0, `INSEL_LINKS: deutsche und englische Namen gleich INSELN (abweichend: ${abweich.length}${abweich.length ? " -> " + abweich.slice(0, 5).join(", ") : ""})`);
   }
 }
+
+// LOES Anfang
+// Lauf quest-loesungen (14.11.2026): Eintraege aus data/d16-loesungen.js (LOESUNGEN_PFLICHT + LOESUNGEN_KUER) und ihre
+// SEO-Abschnitte (scripts/seo-parts/_loesungen.mjs). LOESUNGEN selbst ist kein Array-Literal, daher beide Bloecke einzeln.
+console.log("\n[Lösungen: Daten und SEO-Abschnitte]");
+{
+  let pflicht = null, kuer = null, secs = null;
+  try { pflicht = extract("LOESUNGEN_PFLICHT"); } catch { pflicht = null; }
+  try { kuer = extract("LOESUNGEN_KUER"); } catch { kuer = null; }
+  try { secs = Object.keys(extract("SEC_RENDERERS")); } catch { secs = null; }
+  ok(Array.isArray(pflicht), "LOESUNGEN_PFLICHT in data/d16-loesungen.js lesbar");
+  ok(Array.isArray(kuer), "LOESUNGEN_KUER in data/d16-loesungen.js lesbar");
+  ok(Array.isArray(secs) && secs.length > 0, "SEC_RENDERERS lesbar (Seitenschluessel fuer sec)");
+  const alle = [...(pflicht || []), ...(kuer || [])];
+  const slugRe = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+  const slugs = alle.map((e) => e && e.slug);
+  ok(slugs.every((x) => typeof x === "string" && slugRe.test(x)), `Lösungen: ${alle.length} Einträge, alle slugs passen zu ${slugRe}`);
+  const dupl = slugs.filter((x, i) => slugs.indexOf(x) !== i);
+  ok(dupl.length === 0, `Lösungen: slugs eindeutig (doppelt: ${dupl.join(", ") || "keine"})`);
+  const nichtLeer = (x) => typeof x === "string" && x.trim() !== "";
+  const datumRe = /^\d{4}-\d{2}-\d{2}$/;
+  const feldFehler = [];
+  for (const e of alle) {
+    const f = [];
+    if (!nichtLeer(e.de)) f.push("de");
+    if (!nichtLeer(e.sec) || !(secs || []).includes(e.sec)) f.push("sec");
+    if (!nichtLeer(e.kurz)) f.push("kurz");
+    if (!Array.isArray(e.schritte) || !e.schritte.length || !e.schritte.every((st) => st && nichtLeer(st.d))) f.push("schritte");
+    if (!Array.isArray(e.quellen) || !e.quellen.length
+      || !e.quellen.every((q) => q && /^https:\/\/[^\s"<>]+$/.test(String(q.url || "")) && datumRe.test(String(q.datum || "")))) f.push("quellen");
+    if (!["belegt", "einzelquelle"].includes(e.conf)) f.push("conf");
+    if (f.length) feldFehler.push(`${e.slug}: ${f.join("/")}`);
+  }
+  ok(feldFehler.length === 0, `Lösungen: Pflichtfelder (de, sec, kurz, schritte, quellen, conf) vollständig (Fehler: ${feldFehler.length})`);
+  feldFehler.slice(0, 8).forEach((u) => console.log("       FEHLT:", u));
+
+  // keine Gedankenstriche (U+2013, U+2014) in irgendeinem Textfeld
+  const strich = alle.filter((e) => /[–—]/.test(JSON.stringify(e))).map((e) => e.slug);
+  ok(strich.length === 0, `Lösungen: keine Gedankenstriche in den Textfeldern (betroffen: ${strich.join(", ") || "keine"})`);
+
+  // SEO-Abschnitte: genau ein id="a-<slug>" im SEO-Inhalt der Seite, offen (vor "Komplette Liste"), mit <li>-Schritten
+  const mitSeo = alle.filter((e) => e.seo);
+  const seoFehler = [];
+  for (const e of mitSeo) {
+    const fehler = [];
+    const seite = e.seo && e.seo.seite;
+    const datei = path.join(ROOT, `${seite}.html`);
+    if (!seite || !/^[a-z0-9-]+$/.test(seite) || !fs.existsSync(datei)) { seoFehler.push(`${e.slug}: Seite ${seite}.html fehlt`); continue; }
+    const c = fs.readFileSync(datei, "utf8");
+    const si = c.indexOf("<!--seo-inhalt-->"), se = c.indexOf("<!--/seo-inhalt-->");
+    if (si < 0 || se < si) { seoFehler.push(`${e.slug}: ${seite}.html ohne SEO-Inhalt`); continue; }
+    const block = c.slice(si, se);
+    const idRe = new RegExp(`id="a-${e.slug}"`, "g");
+    const n = (block.match(idRe) || []).length;
+    if (n !== 1) fehler.push(`id="a-${e.slug}" ${n}x`);
+    if (n >= 1) {
+      const pos = block.indexOf(`id="a-${e.slug}"`);
+      const daten = block.indexOf('<details class="seo-daten"');
+      if (daten >= 0 && pos > daten) fehler.push("steht im eingeklappten Teil");
+      const ende = block.indexOf("</section>", pos);
+      const teil = block.slice(pos, ende < 0 ? block.length : ende);
+      if (!/<li[\s>]/.test(teil)) fehler.push("kein <li>-Schritt");
+      const h3 = new RegExp(`<h3 id="a-${e.slug}">([^<]*)</h3>`).exec(block);
+      if (!h3 || !decode(h3[1]).trim()) fehler.push("h3 leer");
+    }
+    if (new RegExp(`id="loes-${e.slug}"`).test(block)) fehler.push(`id="loes-${e.slug}" im SEO-Inhalt (App-ID)`);
+    if (fehler.length) seoFehler.push(`${e.slug} (${seite}): ${fehler.join(", ")}`);
+  }
+  ok(seoFehler.length === 0, `Lösungen: ${mitSeo.length} SEO-Abschnitte je genau einmal, offen, mit Schritten, ohne App-ID-Dublette (Fehler: ${seoFehler.length})`);
+  seoFehler.slice(0, 8).forEach((u) => console.log("       FEHLER:", u));
+}
+// LOES Ende
 
 console.log(`\n${fail === 0 ? "ALLE CHECKS BESTANDEN" : fail + " CHECK(S) FEHLGESCHLAGEN"}`);
 process.exit(fail === 0 ? 0 : 1);

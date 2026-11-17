@@ -23,6 +23,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 
 export const SLUG = "skills";
 export const NAV_LABEL = "Fähigkeiten";
@@ -198,6 +199,7 @@ ${skillTable(b.liste, b.char)}`;
 <p class="note">In der App gibt es zusätzlich die Freischalt-Details mit Filter nach Verpassbarkeit und einen Tree-Graph, der die Abhängigkeiten als Baum zeigt.</p>
 <p class="note">Abyss-Artefakte findest du unter anderem an den <a href="/ruinen">Uralten Ruinen</a>, manche Skills lernst du von Gegnern aus der <a href="/bosse">Bossliste</a>, und welche Waffen zu den Kampf-Skills passen, steht in der <a href="/waffen">Waffenliste</a>.</p>
 <p class="skl-legend">${esc(legende)}</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${baumAbschnitte}
 ${wlSection}`;
 

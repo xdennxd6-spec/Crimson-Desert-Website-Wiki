@@ -8482,3 +8482,44 @@ h3.sub-t.ins-band::after{content:'';order:2;flex:1;min-width:20px;height:1px;bac
   .wk-such{flex-basis:100%;max-width:none}
 }
 /* WELTKARTE Ende */
+
+/* LOES Anfang: Lösungsabschnitte (data/d16-loesungen-app.js, Lauf quest-loesungen 14.11.2026) */
+.loes{display:grid;gap:12px;min-width:0;margin:2px 0 0;padding:14px 16px 16px;border:1px solid color-mix(in srgb,var(--gold) 32%,var(--line-soft));border-left:3px solid var(--gold);border-radius:12px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 7%,transparent),transparent 180px);scroll-margin-top:90px}
+.loes-h{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.35;color:var(--ink-hi);overflow-wrap:anywhere}
+.loes-k{color:var(--gold)}
+.loes-en{margin:-8px 0 0;font-family:var(--f-mono);font-size:var(--fs-11);letter-spacing:.04em;color:var(--dim)}
+.loes-kurz{margin:0;max-width:70ch;font-size:14px;line-height:1.6;color:var(--ink-hi)}
+.loes-l{margin:0;padding-left:18px}
+.loes-l>li+li{margin-top:3px}
+.loes-steps{margin:2px 0 0}
+.loes-st-unb .cd-step-t,.loes-st-unb .cd-step-d{color:var(--dim)}
+.loes-unb{display:inline-block;margin-top:3px;padding:1px 7px;border:1px solid var(--line-soft);border-radius:999px;font-family:var(--f-mono);font-size:max(11px,var(--fs-11));letter-spacing:.03em;color:var(--ink-faint)}
+#main .loes>.cd-note{margin:0}
+.loes .cd-src{overflow-wrap:anywhere}
+.loes-top,.loes-verweis{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin:0;font-size:13px;line-height:1.5;color:var(--dim)}
+.loes-verweis{margin:0 0 12px}
+.loes-top-k{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--gold)}
+.loes-top-k .cd-i{width:14px;height:14px}
+.loes-top .cd-go,.loes-verweis .cd-go{min-height:28px}
+.loes-top-sep{color:var(--ink-faint)}
+.loes-extra{margin-top:14px}
+/* SEO-Fassung im Block „Mehr zu diesem Thema“ (scripts/seo-parts/_loesungen.mjs) */
+.seo-more .loes-seo{margin:18px 0;padding:14px 18px 12px;border:1px solid color-mix(in srgb,var(--gold) 30%,var(--line));border-left:3px solid var(--gold);border-radius:12px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 6%,transparent),transparent 200px);overflow-wrap:anywhere}
+.seo-more .loes-seo h3{margin:0 0 8px;font-size:18px;line-height:1.35}
+.seo-more .loes-seo p{margin:8px 0;max-width:72ch}
+.seo-more .loes-seo-kurz{font-size:15px;color:var(--ink-hi)}
+.seo-more .loes-seo-steps{margin:10px 0;padding-left:24px;max-width:72ch}
+.seo-more .loes-seo-steps>li{margin:6px 0;padding-left:2px}
+.seo-more .loes-seo-steps>li::marker{color:var(--gold);font-weight:700}
+.seo-more .loes-seo-unb{display:inline-block;margin-left:4px;padding:0 7px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--ink-faint)}
+.seo-more .loes-seo-q{font-size:12.5px;color:var(--ink-faint)}
+.seo-more .loes-seo-app{margin-top:10px}
+@media (max-width:640px){
+  .loes{padding:12px 12px 14px}
+  .loes-h{font-size:15px}
+  .seo-more .loes-seo{padding:12px 12px 10px}
+  .seo-more .loes-seo-steps{padding-left:20px}
+}
+/* LOES Ende */

@@ -21,6 +21,7 @@
 
 import { dlcNeu } from "./_dlc-neu.mjs";
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 
 export const SLUG = "hauptquests";
 export const NAV_LABEL = "Hauptquests";
@@ -137,6 +138,7 @@ ${warnZeile}
 <p class="note">In der App hakst du jedes Kapitel ab, siehst deinen Story-Fortschritt und springst direkt zu den zugehörigen Bossen und Nebenquests.</p>
 <p class="warn"><strong>${missQ.length} verpassbare Hauptquest-Inhalte:</strong> ${missList}. ${missHinweis}</p>
 <p class="note">Bei ${unsicher} Quests ist die Quellenlage dünn; sie tragen den Hinweis „Quelle unsicher“ und sollten im Zweifel gegengeprüft werden.</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Questreihen",
     intro: "Der erste DLC bringt eigene Questreihen, die nicht zur Hauptstory oben zählen. Ein Klick führt zur Questreihe mit Start, Schritten und Belohnungen.",

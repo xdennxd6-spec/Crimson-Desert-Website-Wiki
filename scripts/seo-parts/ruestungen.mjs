@@ -18,6 +18,7 @@
 
 import { dlcNeu } from "./_dlc-neu.mjs";
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 
 export const SLUG = "ruestungen";
 export const NAV_LABEL = "Rüstungen";
@@ -122,6 +123,7 @@ ${noteTd}
 <a class="cta" href="${DEEPLINK}">Interaktive Rüstungs-Datenbank öffnen &rarr;</a>
 <p class="strat"><b>Echte Werte im Spiel:</b> Rüstung hat in Crimson Desert nur Verteidigung (Zahl), Element-Resistenz gegen Feuer, Eis und Blitz als Stufe (nicht Prozent) und bei Handschuhen sowie Stiefeln zusätzlich Angriff. Dazu kommen Angriffs- und Lauftempo sowie Crit-Rate als Stufe und bei manchen Platten-Helmen Daze-Immunität. Das Material Cloth, Leather oder Plate ist kein eigener Stat, es bestimmt aber die maximal erreichbare Defense. <b>Woher die Werte stammen</b>, steht seit dem 21.08.2026 in einer eigenen Spalte: ${z.dsimport} Teile kommen aus dem Datenimport der Spieldateien, ${z.dsguide} sind aus Guides belegt, ${z.dsalt} stammen aus einem älteren kuratierten Bestand und sind <b>ungeprüft</b> — dort standen nachweislich erfundene Werte wie Ausweichen, Goldfund oder Lebensraub, die der Fakten-Audit vom 02.06.2026 entfernt hat; bei ${z.dsohne} Teilen ist überhaupt kein Zahlenwert hinterlegt. Die Spalte nennt die <b>Herkunft</b>, nicht die Belegqualität: „Datenimport“ heißt nicht „gegengeprüft“, und wo ein Set als verifiziert gilt, betrifft das nur die einzeln geprüften Teile — nicht jedes gleichnamige Stück desselben Sets.</p>
 <p class="note">In der App filterst du die Rüstungs-Datenbank nach Teil und Material, findest alle Sets mit Figur-Ansicht auf der eigenen Seite <a href="/#sec-armorsets">Rüstungssets</a>, siehst größere Icons und vergleichst mehrere Ausrüstungsteile direkt nebeneinander. Herstellbare Teile stehen zusätzlich im <a href="/#sec-crafting">Crafting-Bereich</a>, die mehrfach erwähnten Slots erklärt die <a href="/#sec-cores">Abyss-Core-Übersicht</a>, und als Gegenstück gibt es die <a href="/#sec-weapons">Waffen-Liste</a>.</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${dlcNeu(ctx.helpers, {
     titel: "Neu mit Charting the Unknown: DLC-Rüstungen",
     intro: "Diese Rüstungsteile kamen mit dem ersten DLC und tragen in den Tabellen unten das Etikett <span class=\"dlc-gtag\">DLC</span>. Ein Klick führt zur Zeile auf der DLC-Seite mit Effekt und Fundort.",

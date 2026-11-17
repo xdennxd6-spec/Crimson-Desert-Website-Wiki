@@ -62,6 +62,11 @@ import * as partReit from "./seo-parts/reitausruestung.mjs";
 import * as partInseln from "./seo-parts/inseln.mjs";
 // Weltkarte (14.11.2026), Daten in data/d17-weltkarte.js, Kacheln in cd_assets/weltkarte/.
 import * as partKarte from "./seo-parts/karte.mjs";
+// Eigene Loesungsseiten (K5, Lauf quest-loesungen 14.11.2026): schlanke Module um den Baustein _loesung-seite.mjs,
+// Inhalt aus data/d16-loesungen.js (Eintrag mit seo.seite = slug).
+import * as partLoesSandsturm from "./seo-parts/der-weg-jenseits-des-sandsturms.mjs";
+import * as partLoesTempel from "./seo-parts/uralter-tempel.mjs";
+import * as partLoesRaender from "./seo-parts/jenseits-der-raender.mjs";
 // 01.11.2026: Abschnitt "Neu mit Charting the Unknown" oben auf den Themen-Seiten (kein eigenes Seitenmodul)
 import { dlcNeu } from "./seo-parts/_dlc-neu.mjs";
 import { deN, deT } from "./seo-parts/_de.mjs";
@@ -206,6 +211,7 @@ const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests,
   partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown, partRomanze, partReit, partInseln, partKarte,
   // DLC-Quests einzeln (17.11.2026, Search-Console-Ausbau)
   partDlcQuests,
+  partLoesSandsturm, partLoesTempel, partLoesRaender,
   // Patch-Archiv 1.x (Patch-Notes-Umbau, fest aktiv seit 29.10.2026, siehe seo-parts/patch-notes.mjs)
   partPatchNotes1];
 
@@ -258,6 +264,10 @@ const NAV = [
   ["raetsel", "Rätsel", "quests"],
   ["trophaeen", "Trophäen & Errungenschaften", "quests"],
   ["dlc-quests", "DLC-Quests", "quests"],
+  // K5 (14.11.2026): drei Loesungsseiten, bewusst ohne "kopf" (das Kopf-Menue bleibt bei 13); sie stehen in der Fussleiste "Alle Guides".
+  ["der-weg-jenseits-des-sandsturms", "Der Weg jenseits des Sandsturms", "quests"],
+  ["uralter-tempel", "Uralter Tempel", "quests"],
+  ["jenseits-der-raender", "Jenseits der Ränder", "quests"],
   ["npcs", "Charaktere & NPCs", "welt"],
   ["romanze", "Romanze & Ehe", "welt"],
   ["mounts", "Reittiere", "welt", "kopf"],
@@ -1449,8 +1459,9 @@ const APP_HTML = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
 // Seiten aus gen-seo selbst fest.
 const APP_ZIEL = { bosse: "sec=bosses", waffen: "sec=weapons", "true-ending": "sec=quests&tab=te" };
 for (const p of SEO_PARTS) {
-  const m = /^\/#(?:sec-([a-z0-9-]+)|(sec=[a-z0-9-]+(?:&tab=[a-z0-9-]+)?))$/.exec(p.DEEPLINK || "");
-  if (!m) throw new Error(`${p.SLUG}: DEEPLINK "${p.DEEPLINK}" passt nicht zu #sec-x oder #sec=x&tab=y`);
+  // K5: optional &go=loes-<slug> (die App springt beim Laden zur Loesung, _applyUrlState wertet go aus)
+  const m = /^\/#(?:sec-([a-z0-9-]+)|(sec=[a-z0-9-]+(?:&tab=[a-z0-9-]+)?(?:&go=loes-[a-z0-9-]+)?))$/.exec(p.DEEPLINK || "");
+  if (!m) throw new Error(`${p.SLUG}: DEEPLINK "${p.DEEPLINK}" passt nicht zu #sec-x, #sec=x&tab=y oder #sec=x&go=loes-<slug>`);
   APP_ZIEL[p.SLUG] = m[1] ? `sec=${m[1]}` : m[2];
 }
 // CSS der bisherigen Seiten auf den Block begrenzen: jede Regel bekommt ".seo-more " davor, :root wird zum Block

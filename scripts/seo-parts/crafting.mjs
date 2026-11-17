@@ -3,6 +3,7 @@
 // ctx = { data: {...alle Datenstrukturen...}, helpers: { esc, has, imgSrc, slug, breadcrumbLd, SITE, CRAFT_CDN } }
 
 import { deN, deT } from "./_de.mjs";
+import { loesungenSeo } from "./_loesungen.mjs";
 
 export const SLUG = "crafting";
 export const NAV_LABEL = "Herstellen & Farmen";
@@ -126,6 +127,7 @@ ${table(gadgetItems)}`;
 <a class="cta" href="${DEEPLINK}">Interaktive Crafting-Datenbank mit Filtern öffnen &rarr;</a>
 <p class="note">In der App nach Kategorie, Station und Effekt filterbar, mit Volltextsuche und allen Kochstufen eines Gerichts gebündelt auf einer Karte.</p>
 <p class="note">${unsureCount} von ${CRAFTING.length} Rezepten tragen eine Datenlage-Markierung, weil Zutaten oder Werte nur dünn belegt oder unbestätigt sind. Das steht hier offen dabei, statt einen unsicheren Wert als gesichert auszugeben.</p>
+${/* LOES: Loesungen zu dieser Seite, muss vor der ersten h2 stehen (sonst eingeklappt) */ loesungenSeo(ctx.helpers, SLUG)}
 ${elixirSection}
 ${foodSection}
 ${gadgetSection}`;
