@@ -53,6 +53,7 @@ import * as partRuinen from "./seo-parts/ruinen.mjs";
 import * as partGeheimnisse from "./seo-parts/geheimnisse.mjs";
 // Erster DLC (31.10.2026): Schiffe, Inseln, Tauchen, Quests, Garten der Pruefungen, Daten in data/d12-dlc.js.
 import * as partChartingTheUnknown from "./seo-parts/charting-the-unknown.mjs";
+import * as partDlcQuests from "./seo-parts/dlc-quests.mjs";
 // Romanze & Ehe (05.11.2026), Daten in data/d13-romanze.js.
 import * as partRomanze from "./seo-parts/romanze.mjs";
 // Reit- & Tierausrüstung (08.11.2026), Daten in data/d14-reit.js.
@@ -203,6 +204,8 @@ const SEO_PARTS = [partRuestungen, partCrafting, partBestiarium, partSideQuests,
   partHauptquests, partFraktionen, partPatchNotes, partNpcs,
   partSkills, partHexen, partAbyssCores, partAccessoires, partKapitelGuide,
   partMounts, partPets, partRuinen, partRaetsel, partGeheimnisse, partChartingTheUnknown, partRomanze, partReit, partInseln, partKarte,
+  // DLC-Quests einzeln (17.11.2026, Search-Console-Ausbau)
+  partDlcQuests,
   // Patch-Archiv 1.x (Patch-Notes-Umbau, fest aktiv seit 29.10.2026, siehe seo-parts/patch-notes.mjs)
   partPatchNotes1];
 
@@ -254,6 +257,7 @@ const NAV = [
   ["ruinen", "Uralte Ruinen", "quests"],
   ["raetsel", "Rätsel", "quests"],
   ["trophaeen", "Trophäen & Errungenschaften", "quests"],
+  ["dlc-quests", "DLC-Quests", "quests"],
   ["npcs", "Charaktere & NPCs", "welt"],
   ["romanze", "Romanze & Ehe", "welt"],
   ["mounts", "Reittiere", "welt", "kopf"],

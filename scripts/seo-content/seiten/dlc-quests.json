@@ -1,0 +1,21 @@
+{
+  "intro": "Alle {{reihen}} Questreihen aus dem DLC Charting the Unknown auf einer Seite: die Heldenreihen für Kliff, Damiane und Oongka nach „Ende der Reise“, die Graumähnen- und Ozean-Aufträge, die Fraktionsquests der Inseln und die Romanze-Reihen. Jeder der {{schritte}} Schritte hat eine eigene Überschrift mit deutschem und englischem Namen, dazu Ablauf und Belohnung. Was nur eine Quelle nennt, steht grau mit Vermerk.",
+  "faq": [
+    {
+      "frage": "Wann starten die Questreihen von Charting the Unknown?",
+      "antwort": "Die Heldenreihen für Kliff, Damiane und Oongka setzen die Hauptquest „Ende der Reise“ voraus. Kliffs Reihe „Jenseits der Ränder“ beginnt in der Taverne von Pailune City. Für Damianes Reihe „Aus der Asche“ nennt ein Guide Countess Azerian am Osttor von Demeniss als Start, für Oongkas Reihe „Geschmiedete Entschlossenheit“ die Werkstatt im Graumähnen-Camp."
+    },
+    {
+      "frage": "Zu welcher Questreihe gehört „Schicksalhafte Begegnung“?",
+      "antwort": "Zu Oongkas Reihe „Geschmiedete Entschlossenheit“ (Forged Resolve). Vargus' Transportgerät bringt dich an einen fremden Ort, von dem aus du den Weg zurück finden musst. Als Belohnung nennt die Spieldaten-Datenbank th.gl das Herstellungsrezept „Verstärkte Handkanone“."
+    },
+    {
+      "frage": "Was passiert in „Ein mysteriöser Angriff“?",
+      "antwort": "Es ist der letzte Schritt von Oongkas Reihe „Geschmiedete Entschlossenheit“: Du kehrst mit dem Wissen aus Scholastein ins Camp zurück. Laut einem Guide kämpfst du bei Yanns verlassenem Wagen nordöstlich der Region Crimson Desert gegen die Schrottkönigin der Steinrückenkrebse und danach gegen Eisentyrann Harkan. Belohnung: Flugbahn des Glanzes und ein Abyss-Artefakt."
+    },
+    {
+      "frage": "Wo finde ich den Uralten Tempel?",
+      "antwort": "Die Mission „Uralter Tempel“ (Ancient Shrine) führt zu dem Tempel in der Korallenregion, von dem Milo erzählt hat; dort suchst du nach einer Reliquie. Zu welcher Questreihe sie gehört, nennen die Spieldaten nicht, das Wiki führt sie unter „Weitere Missionen auf See“."
+    }
+  ]
+}

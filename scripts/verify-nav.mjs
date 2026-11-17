@@ -281,7 +281,7 @@ const SOLL_NAV_LABELS = {
   "waffen": "Waffen", "ruestungen": "Rüstungen", "accessoires": "Accessoires", "abyss-cores": "Abyss-Ausrüstung",
   "hexen": "Hexen & Fusion", "hauptquests": "Hauptquests", "fraktionen": "Fraktionsquests",
   "side-quests": "Nebenquests", "kapitel-guide": "Kapitel-Guide", "true-ending": "True Ending",
-  "ruinen": "Uralte Ruinen", "raetsel": "Rätsel", "trophaeen": "Trophäen & Errungenschaften",
+  "ruinen": "Uralte Ruinen", "raetsel": "Rätsel", "trophaeen": "Trophäen & Errungenschaften", "dlc-quests": "DLC-Quests",
   "npcs": "Charaktere & NPCs", "romanze": "Romanze & Ehe", "mounts": "Reittiere", "pets": "Haustiere", "reitausruestung": "Reit- & Tierausrüstung", "inseln": "Inseln", "karte": "Karte",
   "geheimnisse": "Geheimnisse & Lore", "charting-the-unknown": "Charting the Unknown", "crafting": "Herstellen & Farmen",
 };

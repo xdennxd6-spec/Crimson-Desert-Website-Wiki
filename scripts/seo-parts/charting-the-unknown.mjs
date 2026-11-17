@@ -166,7 +166,9 @@ export function build(ctx) {
   const stepsHtml = (steps) => `<ol class="ctu-st">${steps.map((st) => {
     const o = typeof st === "string" ? { name: st } : st || {}, bad = o.c && o.c !== "ok";
     const d = val(o.d), rw = val(o.reward);
-    return `<li${bad ? ' class="ctu-unb"' : ""}><b>${esc(o.name || "Schritt")}</b>${d ? "<br>" + d : ""}${rw ? "<br>Belohnung: " + rw : ""}${bad ? " " + flag(o.c, o.q) : ""}</li>`;
+    // 17.11.2026: deutscher Name (Google-Suchen nach „Schicksalhafte Begegnung“ fanden bisher nur „Fateful Encounter“).
+    const en = o.name || "Schritt", de = deN(en);
+    return `<li${bad ? ' class="ctu-unb"' : ""}><b>${esc(de)}</b>${de !== en ? ` (${esc(en)})` : ""}${d ? "<br>" + d : ""}${rw ? "<br>Belohnung: " + rw : ""}${bad ? " " + flag(o.c, o.q) : ""}</li>`;
   }).join("")}</ol>`;
 
   const z = ZAHLEN(ctx);
@@ -236,6 +238,7 @@ ${facts(D.MOUNT_FACTS)}
     return o.c && o.c !== "ok" ? `<span class="ctu-unb">${teile2}</span> ${flag(o.c, o.q)}` : teile2;
   };
   const quests = `<h2>DLC-Quests (${D.QUESTS.length})</h2>
+<p class="note">Jeder Schritt mit eigener Überschrift, Ablauf und Belohnung steht auf der Seite <a href="/dlc-quests">DLC-Quests</a>.</p>
 ${list(D.QUEST_NOTES)}
 ${table(["Questreihe", "Figur / Start", D.QUESTS.some((q) => stepsOf(q).length) ? "Schritte und Unterquests (Reihenfolge laut Guide)" : "Unterquests (Reihenfolge laut Guide)", "Belohnungen"],
     D.QUESTS.map((q) => tr(rid("quest", q.name), q, [name(q),

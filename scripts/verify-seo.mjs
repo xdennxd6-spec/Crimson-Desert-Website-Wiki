@@ -137,7 +137,10 @@ Object.assign(DLC, Object.fromEntries(["DLC_TRADE", "DLC_HOMES", "DLC_RELIC_SHOP
 const DLC_GEAR_W = extract("WEAPONS").filter((w) => w && w.dlc), DLC_GEAR_A = extract("ARMOR").filter((a) => a && a.dlc);
 const N_DLC_ROWS = DLC.SHIPS.length + DLC.SHIP_PARTS.length + DLC.ISLANDS.length + DLC.MOUNTS.length + DLC.QUESTS.length
   + DLC.BOSSES.length + DLC.GARDEN.length + DLC_GEAR_W.length + DLC_GEAR_A.length
-  + DLC.TRADE.length + DLC.HOMES.length + DLC.RELIC_SHOPS.length + DLC.GEAR_EXTRA.length;const allImgVals = [...Object.values(B), ...Object.values(W)];
+  + DLC.TRADE.length + DLC.HOMES.length + DLC.RELIC_SHOPS.length + DLC.GEAR_EXTRA.length;
+// 17.11.2026: dlc-quests.html zaehlt jeden Schritt (DLC_QUESTS[].steps) als eigenes <h3 class="dq-step">.
+const N_DLC_STEPS = DLC.QUESTS.reduce((n, q) => n + (Array.isArray(q.steps) ? q.steps.filter(Boolean).length : 0), 0);
+const allImgVals = [...Object.values(B), ...Object.values(W)];
 const absUrls = allImgVals.filter((v) => /^https?:/i.test(v));
 console.log(`\n[Bild-Maps] BOSS_IMGS=${Object.keys(B).length}, WEAPON_IMGS=${Object.keys(W).length}, absolute URLs=${absUrls.length}`);
 const localImgs = allImgVals.filter((v) => !/^https?:/i.test(v));
@@ -188,6 +191,8 @@ const pages = {
   "geheimnisse.html": { sec: "/#sec-secrets", count: { regex: /<(?:article class="card"|tr) id="geh-/g, expected: N_SECRETS, label: "Geheimnis-Karten und -Zeilen" } },
   // NEU (31.10.2026): Regex und Label aus COUNT_CHECK von parts/charting-the-unknown.mjs.
   "charting-the-unknown.html": { sec: "/#sec-dlc", count: { regex: /<tr id="dlc-/g, expected: N_DLC_ROWS, label: "DLC-Datenzeilen" } },
+  // NEU (17.11.2026): Regex und Label aus COUNT_CHECK von parts/dlc-quests.mjs.
+  "dlc-quests.html": { sec: "/#sec-dlc-quests", count: { regex: /<h3 class="dq-step" id="dq-/g, expected: N_DLC_STEPS, label: "Quest-Schritte" } },
   // NEU (05.11.2026): Regex und Label aus COUNT_CHECK von parts/romanze.mjs.
   "romanze.html": { sec: "/#sec-romanze", count: { regex: /<article class="card rom-seo" id="rom-/g, expected: ROM_WITCHES.length + 1, label: "Kandidaten-Karten" } },
   // NEU (08.11.2026): Regex und Label aus COUNT_CHECK von parts/reitausruestung.mjs.
