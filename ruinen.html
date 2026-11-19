@@ -44,7 +44,7 @@
 <!-- Kein Vorladen der data/*.js mehr (Schnellstart 10/2026): auf langsamen Leitungen nahmen die ~0,5 MB Daten dem
      HTML die Bandbreite weg, der erste Paint kam erst nach allen Datendateien. Die <script src="data/..."> unten laden
      mit niedriger Priorität, sobald der Parser sie findet. -->
-<link rel="stylesheet" href="app.css?v=1fb896e03a">
+<link rel="stylesheet" href="app.css?v=4a2e043410">
 <script src="consent.js?v=2"></script>
 <style id="seo-more-css">
 .seo-more{--bg:#0a0b12;--panel:rgba(20,22,38,.55);--panel-2:rgba(15,17,28,.62);--rail-bg:rgba(22,24,40,.5);
@@ -3101,45 +3101,53 @@ function randomBoss(){
 function _initTooltips(){
   const float=document.getElementById('tt-float');
   if(!float)return;
-  let hideT=null;
+  let hideT=null,tw=0,th=0,mx=0,my=0,raf=0;
+  // Anker steht auf 0/0, bewegt wird nur per transform: kein Layout je Mausbewegung mehr
+  // (vorher left/top plus getBoundingClientRect in jedem mousemove). Die Größe wird beim Inhaltswechsel gemessen.
+  const place=(x,y)=>{
+    float.style.transform='translate3d('+Math.max(8,Math.min(x+14,window.innerWidth-tw-12))+'px,'+Math.max(8,Math.min(y+16,window.innerHeight-th-12))+'px,0)';
+  };
+  // Inhalt neu aufbauen: .tt-in ist bei jedem Zielwechsel ein neues Element, dadurch startet die weiche
+  // Einblendung (wie die Textfenster, cdFoldIn/cdxPop) erneut, statt dass der Text hart tauscht.
+  const fill=(el,hint)=>{
+    const title=el.dataset.tipTitle||'';
+    float.innerHTML='<div class="tt-in">'+(title?`<div class="tt-title">${title}</div>`:'')+`<div class="tt-body">${el.dataset.tip||''}</div>`+(hint?`<div class="tt-body" style="opacity:.7;margin-top:6px">${hint}</div>`:'')+'</div>';
+    float.classList.add('show');
+    float.setAttribute('aria-hidden','false');
+    tw=float.offsetWidth;th=float.offsetHeight;
+    float._tipEl=el;
+  };
   document.addEventListener('mouseover',e=>{
     const el=e.target.closest('[data-tip]');
     if(!el)return;
     clearTimeout(hideT);
-    const tip=el.dataset.tip||'';
-    const title=el.dataset.tipTitle||'';
-    float.innerHTML=(title?`<div class="tt-title">${title}</div>`:'')+`<div class="tt-body">${tip}</div>`;
-    float.classList.add('show');
-    float.setAttribute('aria-hidden','false');
+    // Gleicher Knoten (nur Kind gewechselt): nur nachführen, Inhalt und Einblendung nicht neu anstoßen.
+    if(float._tipEl===el&&float.classList.contains('show')){place(e.clientX,e.clientY);return;}
+    fill(el);
+    // Position sofort aus dem mouseover setzen, nicht erst beim nächsten mousemove (war der Sprung aus 0/0).
+    place(e.clientX,e.clientY);
   });
   document.addEventListener('mousemove',e=>{
     if(!float.classList.contains('show'))return;
-    const x=e.clientX+14, y=e.clientY+16;
-    const rect=float.getBoundingClientRect();
-    const maxX=window.innerWidth-rect.width-12;
-    const maxY=window.innerHeight-rect.height-12;
-    float.style.left=Math.min(x,maxX)+'px';
-    float.style.top=Math.min(y,maxY)+'px';
+    mx=e.clientX;my=e.clientY;
+    if(!raf)raf=requestAnimationFrame(()=>{raf=0;place(mx,my);});
   });
   document.addEventListener('mouseout',e=>{
     if(!e.target.closest('[data-tip]'))return;
     hideT=setTimeout(()=>{
       float.classList.remove('show');
       float.setAttribute('aria-hidden','true');
+      float._tipEl=null;
     },80);
   });
   // Tooltip am Element platzieren (Tastaturfokus und Touch kennen keine Mausposition)
   const showAt=(el,hint)=>{
     clearTimeout(hideT);
-    const title=el.dataset.tipTitle||'';
-    float.innerHTML=(title?`<div class="tt-title">${title}</div>`:'')+`<div class="tt-body">${el.dataset.tip||''}</div>`+(hint?`<div class="tt-body" style="opacity:.7;margin-top:6px">${hint}</div>`:'');
-    float.classList.add('show');
-    float.setAttribute('aria-hidden','false');
-    const r=el.getBoundingClientRect(),w=float.getBoundingClientRect();
-    float.style.left=Math.max(8,Math.min(r.left,window.innerWidth-w.width-12))+'px';
-    float.style.top=Math.max(8,Math.min(r.bottom+8,window.innerHeight-w.height-12))+'px';
+    fill(el,hint);
+    const r=el.getBoundingClientRect();
+    float.style.transform='translate3d('+Math.max(8,Math.min(r.left,window.innerWidth-tw-12))+'px,'+Math.max(8,Math.min(r.bottom+8,window.innerHeight-th-12))+'px,0)';
   };
-  const hideNow=()=>{clearTimeout(hideT);float.classList.remove('show');float.setAttribute('aria-hidden','true');};
+  const hideNow=()=>{clearTimeout(hideT);float.classList.remove('show');float.setAttribute('aria-hidden','true');float._tipEl=null;};
   // Tastatur: Querverweise (.xref, role="link" tabindex="0") zeigen den Tooltip bei Fokus; Enter/Leertaste folgt dem Verweis
   document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('.xref[data-tip]');if(el&&e.target===el)showAt(el);});
   document.addEventListener('focusout',e=>{if(e.target.closest&&e.target.closest('.xref'))hideT=setTimeout(hideNow,80);});

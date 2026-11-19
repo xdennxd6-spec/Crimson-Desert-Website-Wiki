@@ -1028,9 +1028,14 @@ input:focus-visible,textarea:focus-visible,
 .boss-notes-area:focus{border-color:var(--survey-red);box-shadow:0 0 0 3px rgba(255,90,68,.25)}
 
 /* ── Tooltip-System ── */
-#tt-float{position:fixed;z-index:800;pointer-events:none;display:none;max-width:280px;padding:9px 12px;background:var(--iron-gall);border:1px solid var(--brass);color:var(--vellum);font-size:var(--fs-11-5);line-height:1.55;box-shadow:4px 4px 0 rgba(0,0,0,.35);font-family:var(--f-body);border-radius:8px}
-#tt-float.show{display:block;animation:ttFadeIn .12s ease-out}
-@keyframes ttFadeIn{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
+/* #tt-float ist nur der Anker: Position ausschließlich per transform (kein Layout-Schreibzugriff je Mausbewegung,
+   vorher left/top + getBoundingClientRect pro mousemove). Aussehen und Einblendung sitzen am inneren .tt-in,
+   das bei jedem Zielwechsel neu aufgebaut wird und dadurch weich aufploppt wie die Textfenster (cdFoldIn/cdxPop). */
+#tt-float{position:fixed;z-index:800;left:0;top:0;pointer-events:none;display:none;transform:translate3d(0,0,0)}
+#tt-float.show{display:block}
+#tt-float .tt-in{max-width:280px;padding:9px 12px;background:var(--iron-gall);border:1px solid var(--brass);color:var(--vellum);font-size:var(--fs-11-5);line-height:1.55;box-shadow:4px 4px 0 rgba(0,0,0,.35);font-family:var(--f-body);border-radius:8px;opacity:1}
+html.cd-motion #tt-float .tt-in{animation:ttIn .3s cubic-bezier(.22,.7,.2,1) both}
+@keyframes ttIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 #tt-float .tt-title{font-family:var(--f-mono);font-weight:700;color:var(--brass-hi);font-size:var(--fs-10-5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
 #tt-float .tt-body{color:var(--vellum);font-size:var(--fs-11)}
 [data-tip]{cursor:help;border-bottom:1px dotted var(--brass);text-decoration:none}
@@ -2440,7 +2445,7 @@ thead tr{background:rgba(22,24,40,.75)}
 .livedot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red-glow);animation:hg-pulse 1.7s ease-in-out infinite}
 @keyframes hg-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
 @media(prefers-reduced-motion:reduce){.livedot{animation:none}}
-@media(prefers-reduced-motion:reduce){#ee-overlay,#ee-box,.mim-box,#tt-float.show{animation:none!important}}
+@media(prefers-reduced-motion:reduce){#ee-overlay,#ee-box,.mim-box,html:not(.cd-motion) #tt-float .tt-in{animation:none!important}}
 
 /* HUD-Scrollbar */
 ::-webkit-scrollbar{width:10px;height:10px}
@@ -3890,7 +3895,10 @@ html.cd-still .cd-flash{outline:2px solid var(--gold);outline-offset:3px}
   html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check)::after{
     content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;transition-duration:.25s!important;
     background:radial-gradient(var(--sr,260px) circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--cd-spot-c,var(--red)) 13%,transparent),transparent 70%)} /* --cd-spot-c: Kegelfarbe je Karte (R2 Integration, Wunsch B11) */
-  html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check):hover::after{opacity:1}
+  /* Hover-Intent statt Sofort-Trigger: Beim Scrollen zieht der Zeiger über viele Karten; ohne Verzögerung
+     blendet jede unter dem Cursor ihren Lichtkegel ein (Hauptquests rucklig). 0,14 s zart: absichtliches
+     Verweilen zeigt den Kegel, schnelles Durchscrollen nicht. Verlassen blendet sofort aus (Delay nur hier). */
+  html.cd-motion :is(.card,.so-tile,.so-chip,.pet-card,.set-card,.sk-c,.witch-card,.witch-svc,.te-grp,.ch-card,.chap,.build-card,.ov-card,.ach-card,.rm-task,.fac-reg,.sec-block,.qhero-stat,.qst-node,.upg-fact,.col-stat,.fav-item,.sg-card,.comm-it,.loc-pc,.cmt-item,.bo-saved-card,.sim-stat,.ov-miss-it,.disarm-hero,.sec-hero,.qhero,.qst-hero,.cd-spot,.cd-fold,.cd-hero,.cd-check):hover::after{opacity:1;transition-delay:.14s}
   html.cd-motion :is(.so-chip,.comm-it,.ov-miss-it,.qhero-stat,.sim-stat,.col-stat,.upg-fact,.cd-check){--sr:130px}
   html.cd-motion :is(.pet-card,.qst-node,.loc-pc){--sr:160px}
   html.cd-motion :is(.te-grp,.fac-reg,.chap,.sec-block,.qhero,.qst-hero,.cd-hero,.disarm-hero,.sec-hero){--sr:420px}
