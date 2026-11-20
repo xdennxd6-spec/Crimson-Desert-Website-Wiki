@@ -110,6 +110,23 @@ function _loesTop(box,slugs){
   p=document.createElement('p');p.className='loes-top';p.setAttribute('data-loes',slugs.join(' '));p.innerHTML=html;
   box.insertBefore(p,box.firstChild);return true;
 }
+/* Kartenkopf-Hinweis (S3, 20.11.2026): zeigt bei Karten ohne Faltkarte, dass im Detailteil eine Lösung steckt.
+   .cm (Reittiere) nimmt den Chip direkt, sonst hinter .set-desc (Rüstungs-Sets). Höchstens einer je Karte. */
+function _loesChip(el,e){
+  if(!el||!e)return false;
+  var have=(el.getAttribute('data-loes-chip')||'').split(/\s+/).filter(Boolean);
+  if(have.indexOf(e.slug)>-1)return false;
+  var anker=el.querySelector('.cm'), nach=null;
+  if(!anker){ anker=el.querySelector('.set-desc')||el.querySelector('.cd-fold-chips'); nach=anker; }
+  if(!anker)return false;
+  var chip=document.createElement('span');
+  chip.className='tag loes-chip';
+  chip.setAttribute('title','Schritt-für-Schritt-Lösung im Detailteil dieser Karte');
+  chip.innerHTML=cdIcon('key')+'Lösung';
+  if(nach)anker.parentNode.insertBefore(chip,anker.nextSibling); else anker.appendChild(chip);
+  el.setAttribute('data-loes-chip',have.concat(e.slug).join(' '));
+  return true;
+}
 function _loesSAdd(el,e){
   var have=' '+(el.getAttribute('data-loes-s')||'')+' ';
   if(have.indexOf(' '+e.slug+' ')>-1)return;
@@ -164,6 +181,9 @@ function loesEinhaengen(){
       });
     });
     karten.forEach(function(liste,el){
+      /* K4: Rang aus dem Eintrag bestimmt die Reihenfolge (Questreihenfolge vor Datenreihenfolge); S3: Chip am Kartenkopf */
+      liste.sort(function(a,b){return (a.e.rang||0)-(b.e.rang||0);});
+      liste.forEach(function(x){ if(x.e.chip)_loesChip(el,x.e); });
       /* Faltkarte noch nicht gefüllt (lazy): nur data-s ergänzen. Den Inhalt erzeugt cdFoldFill beim Öffnen, bei einer
          Such-Öffnung oder bei cdGo; der MutationObserver hängt die Lösung dann sofort ein (spart Renderzeit). */
       if(_loesLazy(el)){ liste.forEach(function(x){ if(x.eigen)_loesSAdd(el,x.e); }); return; }

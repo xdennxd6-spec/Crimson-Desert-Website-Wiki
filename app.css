@@ -8497,6 +8497,10 @@ h3.sub-t.ins-band::after{content:'';order:2;flex:1;min-width:20px;height:1px;bac
 /* WELTKARTE Ende */
 
 /* LOES Anfang: Lösungsabschnitte (data/d16-loesungen-app.js, Lauf quest-loesungen 14.11.2026) */
+/* Lösung-Chip am Kartenkopf (S3, 20.11.2026): kleiner Hinweis auf die Lösung im Detailteil */
+.loes-chip{display:inline-flex;align-items:center;gap:5px;margin-left:6px;padding:2px 9px;border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line-soft));border-radius:999px;background:color-mix(in srgb,var(--gold) 10%,transparent);color:var(--gold);font:600 11px/1.55 var(--f-mono);letter-spacing:.03em;vertical-align:middle}
+.loes-chip svg{width:11px;height:11px}
+.aset-body>.loes-chip{display:inline-flex;margin:0 0 10px}
 .loes{display:grid;gap:12px;min-width:0;margin:2px 0 0;padding:14px 16px 16px;border:1px solid color-mix(in srgb,var(--gold) 32%,var(--line-soft));border-left:3px solid var(--gold);border-radius:12px;
   background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 7%,transparent),transparent 180px);scroll-margin-top:90px}
 .loes-h{margin:0;font-family:var(--f-display);font-size:16px;font-weight:700;line-height:1.35;color:var(--ink-hi);overflow-wrap:anywhere}
