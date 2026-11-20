@@ -4671,6 +4671,11 @@ html.cd-motion .r2b4-dot:hover{transform:translateY(-2px)}
 .r2b4-list{gap:8px}
 .r2b4-list>.cd-fold{contain-intrinsic-size:auto 86px}   /* echte Kopfhöhe statt 76 px: kein Nachrutschen beim ersten Rendern */
 @media (max-width:600px){.r2b4-list>.cd-fold{contain-intrinsic-size:auto 180px}}
+/* Ruinen ohne content-visibility (20.11.2026): Die 37 geschlossenen Faltkarten sind real 80 bis 88 px hoch, der
+   Platzhalter steht auf 86 px. Beim Entsperren verschiebt jede Karte die Liste, deshalb ruckelt das Scrollen.
+   Gemessen mit scroll.mjs, 4x CPU-Drossel, 40 Mausrad-Schritte: 26 statt 1 Ruckel-Frame bei 1440 px,
+   22 statt 2 bei 412 px. Die Sektion ist nur 5.180 px hoch, das eine Rendern beim Öffnen kostet 11 ms. */
+.r2b4-list>.cd-fold{content-visibility:visible}
 .r2b4-ruin:hover{border-color:color-mix(in srgb,var(--rc) 42%,var(--line))}
 .r2b4-ruin .cd-fold-ico{display:flex;flex-direction:column;gap:2px;width:54px;height:54px;border-color:color-mix(in srgb,var(--rc) 42%,var(--line));background:color-mix(in srgb,var(--rc) 13%,var(--panel));color:var(--rc-t)}
 .r2b4-ruin .cd-fold-ico::before{content:'AR';font:600 11px/1 var(--f-mono);letter-spacing:.12em;color:var(--dim)}

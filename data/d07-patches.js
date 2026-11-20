@@ -3,6 +3,36 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.05.01",date:"19.11.2026",size:"Hotfix für alle Plattformen, veröffentlicht am 19.11.2026 um 05:00 UTC, also 06:00 MEZ (boardNo 161). 19 Punkte: drei Verbesserungen und 16 Fehlerbehebungen, kein neuer Inhalt. Schwerpunkte sind das Inventar, Zwischensequenzen und Ausrüstung, mehrere festhängende Quests, das Freie Bauen und die Anzeige im UI. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Verbesserungen",items:[
+      "<b>Schatzkarten, Steckbriefe, Bücher</b> und andere Gegenstände lassen sich jetzt direkt im Inventar untersuchen: „Details“ > „Untersuchen“. Bücher nur, wenn das Wissen des jeweiligen Buches bereits erlangt ist.",
+      "Beim <b>Färben</b> und <b>Haareschneiden</b> lässt sich die Kamera durch Ziehen mit der Maus auf dem gesamten Bildschirm drehen, nicht mehr nur in einem Teilbereich.",
+      "Die unnatürliche Bewegung des <b>Oberkörpers beim Losgehen</b> wurde verbessert."
+    ]},
+    {cat:"Fehlerbehebungen",items:[
+      "Behoben: Einige <b>Unterwasser-Transportmittel</b> beschleunigten nicht, wenn die Steuerungsmethode (Bewegung) auf „Klassisch“ eingestellt war.",
+      "[Damiane] Behoben: <b>„Himmelsschritt“</b> (<em>Skystep</em>) wurde gelegentlich nicht ordnungsgemäß ausgeführt.",
+      "Behoben: <b>Kutum</b> griff in bestimmten Situationen nicht an.",
+      "Behoben: Andere Ausrüstung als die Hauptwaffe wurde nach dem Ende einer <b>Zwischensequenz</b> nicht wieder ausgerüstet, wenn man sie beim Start der Zwischensequenz gezogen hatte.",
+      "Behoben: Nach dem Starten bestimmter Quests ließ sich nicht mehr zu einem anderen <b>Charakter</b> wechseln.",
+      "Behoben: In der Quest <b>„Der Knoten des Schicksals“</b> (<em>Shackles of Fate</em>) fiel man gelegentlich herunter, während man an <b>Schwarzstern</b> (<em>Blackstar</em>) hing und „Widerstehen“ ausführte.",
+      "Behoben: Während der Quest <b>„Blutbefleckter Thron“</b> (<em>Bloodstained Throne</em>) ließ sich mit einigen NPCs nicht sprechen.",
+      "Behoben: Einige <b>Quest-Gegenstände</b> ließen sich während des Baus der <b>Burg der Flammenritter</b> (<em>Flame Knights’ Castle</em>) und der <b>Burg Drachensturz</b> (<em>Drakesfall Castle</em>) nicht erlangen.",
+      "Behoben: Das <b>UI</b> wurde gelegentlich fehlerhaft angezeigt, wenn man bei bestimmten Quests „Information anzeigen“ auswählte.",
+      "Behoben: Im Modus <b>„Freies Bauen“</b> ließen sich einige Gegenstände nicht platzieren.",
+      "Behoben: Im Modus <b>„Freies Bauen“</b> waren einige Bereiche des <b>Wohn-Systems</b> kleiner als vorgesehen.",
+      "Behoben: Die <b>Verbesserungsstufe</b> der von Graumähnen ausgerüsteten Schlüssel-Gegenstände wurde fehlerhaft angezeigt.",
+      "Behoben: Beim gleichzeitigen Wegwerfen mehrerer Exemplare desselben Gegenstands aus dem <b>„Kuku-Eisentopf“</b> (<em>Kuku Pot</em>) wurde nur ein Exemplar weggeworfen, die verbleibenden verschwanden.",
+      "Behoben: Einige <b>Wissenseinträge zum Ozean</b> wurden als „???“ angezeigt.",
+      "Behoben: Bestimmte <b>Symbole auf der Karte</b> wurden gelegentlich nicht angezeigt.",
+      "Behoben: Die Informationen zu <b>Fraktionsquests</b> wurden nicht ordnungsgemäß angezeigt."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 20.11.2026). Keine Downloadgröße, keine Build-Nummer.",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) trägt weiterhin den Stand 13.11.2026, 08:10 UTC, mit 15 Punkten in der deutschen Fassung (geprüft 20.11.2026). Einer davon, die fehlerhaft angezeigten <b>Fraktionsquest-Informationen</b>, ist in diesem Patch als behoben gemeldet und steht dort weiter. <span style='color:var(--gdim)'>Einordnung: Die Liste wurde zum Patch offenbar nicht nachgezogen; über den Fehler selbst sagt das nichts.</span> Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
+      "Quelle: offizielle Patch-Notizen Version 2.05.01, Pearl Abyss, 19.11.2026 05:00 UTC (boardNo 161), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
   {ver:"2.05.00",date:"13.11.2026",size:"Erster größerer Patch nach der Hotfix-Reihe zum DLC, veröffentlicht am 13.11.2026 um 05:50 UTC, also 06:50 MEZ (boardNo 157; Steam-Zweitveröffentlichung 05:59 UTC). Ohne Titelzusatz „Hotfix für alle Plattformen“. Der DLC „Charting the Unknown“ erscheint damit auch für Mac. 69 Punkte: Freies Bauen und Wohn-System, Tauchen, Seefahrt, Quest-Blocker, „Neuer Versuch“ ab der letzten Phase bei drei Bossen, Leviakans Schuppe auf der Insel Bergel, das Harpunengewehr beim Händler. Keine Downloadgröße, keine Build-Nummer.",features:[
     {cat:"Neues",items:[
       "Der DLC <b>„Charting the Unknown“</b> ist jetzt auch für <b>Mac</b> verfügbar. Er lässt sich über das Menü „DLC kaufen“ auf dem Titelbildschirm erwerben und herunterladen."
