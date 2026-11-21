@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v66';
+const CACHE_VERSION = 'cd-guide-v67';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -33,6 +33,14 @@ const CORE_ASSETS = [
   './data/d17-weltkarte.js?v=9e4a742ffb',
   './data/d17-weltkarte-app.js?v=0764dc55b9',
   './data/d18-synthese-blaupausen.js?v=19ad86c9f6',
+  // 11/2026 (Performance-Paket): die ausgelagerten App-Blöcke aus js/app-*.js —
+  // gleiche Behandlung wie data/*.js (network-first, ?v=-Prüfwert), sonst fehlen sie offline.
+  './js/app-01-fundament.js?v=3d44d0d874',
+  './js/app-02-core.js?v=e15753a7f2',
+  './js/app-03-sync.js?v=65b3ea6cb2',
+  './js/app-04-ruinen.js?v=0a812ea75d',
+  './js/app-05-motion-kern.js?v=834da11c34',
+  './js/app-06-motion-effekte.js?v=545e26befc',
   './vendor/leaflet-1.9.4.min.js',
   './vendor/leaflet-1.9.4.css',
   './vendor/gsap-3.15.0.min.js',
@@ -68,7 +76,9 @@ self.addEventListener('fetch', e => {
 
   // Network-First fuer HTML und die ausgelagerten Datendateien — User soll Updates sehen.
   // data/*.js muss mit index.html synchron bleiben, darf also nie stale ausgeliefert werden.
-  const istDatenSkript = url.origin === self.location.origin && url.pathname.startsWith('/data/') && url.pathname.endsWith('.js');
+  // 11/2026 (Performance-Paket): /js/app-*.js genauso behandeln wie data/*.js —
+  // network-first mit ?v=-Prüfwert, alte Fassungen werden aus dem Vorrat entfernt.
+  const istDatenSkript = url.origin === self.location.origin && (url.pathname.startsWith('/data/') || url.pathname.startsWith('/js/app-')) && url.pathname.endsWith('.js');
   const istAppCss = url.origin === self.location.origin && url.pathname === '/app.css';
   if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/' || istDatenSkript || istAppCss) {
     e.respondWith(

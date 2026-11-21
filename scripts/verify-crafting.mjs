@@ -21,10 +21,31 @@ const html = [
   ...fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
     .map(f => fs.readFileSync(path.join(ROOT, "data", f), "utf8")),
 ].join("\n");
+// 21.11.2026 (Performance-Paket): Die App-Logik liegt ausgelagert in js/app-*.js. Fuer die
+// Syntax- und Doppeldeklarations-Pruefung (3b/3f) und die Nachlade-Verweise (3c) zaehlt der
+// App-Code jetzt mit — vorher war er Teil der Inline-Bloecke von index.html.
+const APP_DIR = path.join(ROOT, "js");
+// Fehlt der js/-Ordner (aelterer Checkout oder Rueckbau des Performance-Pakets), klar abbrechen
+// statt mit rohem ENOENT/Stacktrace zu sterben. Der Erfolgsfall aendert sich nicht.
+const appDateien = fs.existsSync(APP_DIR)
+  ? fs.readdirSync(APP_DIR).filter(f => /^app-[A-Za-z0-9_-]+\.js$/.test(f)).sort()
+    .map(f => ({ file: f, text: fs.readFileSync(path.join(APP_DIR, f), "utf8") }))
+  : [];
+const jsOrdnerFehlt = !fs.existsSync(APP_DIR);
+// 21.11.2026: Dateien, die index.html mit type="module" laedt, teilen sich den globalen Scope NICHT
+// mit den klassischen Skripten. Vor der Auslagerung hat 3a Inline-Module ausdruecklich uebersprungen
+// (skippedModule) — dieses Verhalten wird hier fuer die App-Dateien fortgefuehrt: sie werden in 3b'
+// und 3f nicht klassisch kompiliert, sondern sichtbar als Module gezaehlt.
+const indexNur = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+const appModule = new Set([...indexNur.matchAll(/<script\s+type="module"\s+src="js\/(app-[A-Za-z0-9_-]+\.js)/g)].map(m => m[1]));
+const appKlassisch = appDateien.filter(a => !appModule.has(a.file));
 
 let errors = 0;
 const fail = (m) => { console.error("FEHLER: " + m); errors++; };
 const ok = (m) => console.log("OK: " + m);
+// Fehlt der js/-Ordner (aelterer Checkout oder Rueckbau des Performance-Pakets), klar melden statt
+// mit rohem ENOENT/Stacktrace abzubrechen. Der Erfolgsfall aendert sich nicht.
+if (jsOrdnerFehlt) fail("js/app-*.js fehlen: Ordner js/ nicht gefunden (Performance-Paket nicht eingespielt?)");
 
 function extract(name) {
   const re = new RegExp("const " + name + "\\s*=\\s*(\\[|\\{)");
@@ -109,6 +130,21 @@ for (const f of fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith("
 }
 ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
 
+// ── 3b') Ausgelagerte App-Dateien (js/app-*.js) auf JS-Syntax pruefen ────────
+// Klassisch geladene App-Dateien werden per vm.Script kompiliert. Dateien mit type="module"
+// (aktuell js/app-03-sync.js) ueberspringen wir wie 3a frueher die Inline-Module — ein spaeter
+// hinzukommendes import/export oder Top-Level-Await dort waere kein Fehler.
+let appCompiled = 0, appModul = 0;
+for (const a of appKlassisch) {
+  try { new vm.Script(a.text, { filename: `js/${a.file}` }); appCompiled++; }
+  catch (e) { fail(`js/${a.file} SyntaxError: ${e.message}`); }
+}
+ok(`${appCompiled} klassische App-Dateien (js/app-*.js) ohne SyntaxError kompiliert`);
+appModul = appDateien.length - appKlassisch.length;
+if (appModul > 0) {
+  ok(`${appModul} App-Datei(en) als type=module geladen (nicht klassisch kompiliert): ${[...appModule].sort().join(", ")}`);
+}
+
 // ── 3c) Tag-Abgleich: <script src="data/...">-Tags in index.html <-> data/*.js ──────
 {
   const htmlOnly = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
@@ -120,15 +156,35 @@ ok(`${dataCompiled} Datendateien (data/*.js) ohne SyntaxError kompiliert`);
   while ((tm = tagRe.exec(htmlOnly)) !== null) tagFiles.add(tm[1]);
   const dirFiles = new Set(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")));
   const nurInHtml = [...tagFiles].filter(f => !dirFiles.has(f));
-  // d14-beschaffung.js wird erst beim Öffnen des Fundort-Fensters nachgeladen (Größengrenze verify-seo, beschLaden() in index.html).
+  // d14-beschaffung.js wird erst beim Öffnen des Fundort-Fensters nachgeladen (Größengrenze verify-seo, beschLaden().
   // 11.11.2026: d15-inseln.js und d15-inseln-app.js lädt inselnLaden() erst beim Öffnen der Seite Inseln.
   // 14.11.2026: d17-weltkarte.js und d17-weltkarte-app.js laedt weltkarteLaden() erst beim Oeffnen der Seite Karte.
+  // 21.11.2026 (Performance-Paket): die drei Loader liegen ausgelagert in js/app-02-core.js — der
+  // Nachlade-Verweis darf deshalb in index.html ODER in js/app-*.js stehen.
 const NACHGELADEN = new Set(["d14-beschaffung.js", "d15-inseln.js", "d15-inseln-app.js", "d17-weltkarte.js", "d17-weltkarte-app.js"]);
-  NACHGELADEN.forEach(f => { if (tagFiles.has(f)) fail(`data/${f} soll nachgeladen werden, steht aber als <script src> in index.html`); if (!htmlOnly.includes(`data/${f}`)) fail(`data/${f}: Nachlade-Verweis fehlt in index.html`); });
+  const appJoined = appDateien.map(a => a.text).join("\n");
+  NACHGELADEN.forEach(f => { if (tagFiles.has(f)) fail(`data/${f} soll nachgeladen werden, steht aber als <script src> in index.html`); if (!htmlOnly.includes(`data/${f}`) && !appJoined.includes(`data/${f}`)) fail(`data/${f}: Nachlade-Verweis fehlt in index.html und js/app-*.js`); });
   const nurInDir = [...dirFiles].filter(f => !tagFiles.has(f) && !NACHGELADEN.has(f));
   nurInHtml.forEach(f => fail(`<script src="data/${f}"> in index.html, aber Datei fehlt in data/`));
   nurInDir.forEach(f => fail(`data/${f} existiert, aber index.html laedt sie nicht per <script src>`));
   if (!nurInHtml.length && !nurInDir.length) ok(`Tag-Abgleich: ${tagFiles.size} <script src="data/...">-Tags + ${NACHGELADEN.size} nachgeladen == ${dirFiles.size} Dateien in data/`);
+}
+
+// ── 3c') Tag-Abgleich: <script src="js/app-...">-Tags in index.html <-> js/app-*.js ──
+// 21.11.2026 (Performance-Paket): dieselbe Konsistenz wie fuer data/*.js — eine App-Datei,
+// die index.html laedt, muss existieren; eine App-Datei ohne <script src> waere tot.
+{
+  const htmlOnly = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const tagRe = /<script\s+(?:type="module"\s+)?src="js\/(app-[A-Za-z0-9_-]+\.js)(?:\?v=[0-9a-f]+)?"[^>]*>\s*<\/script>/g;
+  const tagFiles = new Set();
+  let tm;
+  while ((tm = tagRe.exec(htmlOnly)) !== null) tagFiles.add(tm[1]);
+  const dirFiles = new Set(appDateien.map(a => a.file));
+  const nurInHtml = [...tagFiles].filter(f => !dirFiles.has(f));
+  const nurInDir = [...dirFiles].filter(f => !tagFiles.has(f));
+  nurInHtml.forEach(f => fail(`<script src="js/${f}"> in index.html, aber Datei fehlt in js/`));
+  nurInDir.forEach(f => fail(`js/${f} existiert, aber index.html laedt sie nicht per <script src>`));
+  if (!nurInHtml.length && !nurInDir.length) ok(`App-Tag-Abgleich: ${tagFiles.size} <script src="js/app-...">-Tags == ${dirFiles.size} Dateien in js/`);
 }
 
 // ── 3d) sw-Abgleich: dieselbe Menge gegen './data/...'-Eintraege in CORE_ASSETS (sw.js) ──
@@ -150,26 +206,42 @@ const NACHGELADEN = new Set(["d14-beschaffung.js", "d15-inseln.js", "d15-inseln-
   if (!fehltInSw.length && !zuvielInSw.length) ok(`sw-Abgleich: ${swFiles.size} './data/...'-Eintraege in CORE_ASSETS == ${dirFiles2.size} Dateien in data/`);
 }
 
-// ── 3e) git-Abgleich: data/*.js muss getrackt sein, sonst deployt ein Push eine halb tote Live-Site
+// ── 3e) git-Abgleich: data/*.js und js/app-*.js muessen getrackt sein, sonst deployt ein Push ──
+// eine halb tote bzw. WEISSE Live-Site (js/ ist ein neuer Ordner; fehlt er im Commit, liefert die
+// Live-Seite 404 fuer die gesamte App-Logik). js/ selbst wird mit 'git ls-files js' abgedeckt.
 {
-  let gitOut = null;
-  try {
-    gitOut = execSync(`git -C ${JSON.stringify(ROOT)} ls-files data/`, { encoding: "utf8" });
-  } catch (e) { gitOut = null; }
-  if (gitOut === null) {
+  // 21.11.2026: die beiden Abfragen getrennt halten. Vorher lag alles in einem try/catch, dann haette
+  // ein Fehlschlag von 'ls-files js' auch den data-Abgleich stumm uebersprungen.
+  const gitLs = (pfad) => {
+    try { return execSync(`git -C ${JSON.stringify(ROOT)} ls-files ${pfad}`, { encoding: "utf8" }); }
+    catch (e) { return null; }
+  };
+  const gitData = gitLs("data/");
+  const gitJs = gitLs("js");
+  if (gitData === null) {
     ok("git-Abgleich uebersprungen (kein Git verfuegbar bzw. kein Repo -- z.B. im Netlify-Build)");
   } else {
-    const tracked = new Set(gitOut.split("\n").filter(Boolean).map(p => p.replace(/^data\//, "")));
+    const tracked = new Set(gitData.split("\n").filter(Boolean).map(p => p.replace(/^data\//, "")));
     const dirFiles3 = fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js"));
     const untracked = dirFiles3.filter(f => !tracked.has(f));
     untracked.forEach(f => fail(`data/${f} ist nicht in git -- Push wuerde eine halb tote Live-Site deployen`));
     if (!untracked.length) ok(`git-Abgleich: alle ${dirFiles3.length} data/*.js-Dateien sind getrackt`);
+    if (gitJs === null) {
+      fail("js/app-*.js: 'git ls-files js' fehlgeschlagen -- Tracking der App-Dateien nicht pruefbar");
+    } else {
+      const trackedJs = new Set(gitJs.split("\n").filter(Boolean));
+      const appDateien3 = fs.existsSync(APP_DIR)
+        ? fs.readdirSync(APP_DIR).filter(f => /^app-[A-Za-z0-9_-]+\.js$/.test(f)).sort() : [];
+      const untrackedJs = appDateien3.filter(f => !trackedJs.has(`js/${f}`));
+      untrackedJs.forEach(f => fail(`js/${f} ist nicht in git -- Push wuerde eine weisse Live-Site deployen`));
+      if (!untrackedJs.length) ok(`git-Abgleich: alle ${appDateien3.length} js/app-*.js-Dateien sind getrackt (git ls-files js, ${trackedJs.size} Dateien unter js/)`);
+    }
   }
 }
 
-// ── 3f) Konkat-Kompilat: Datendateien + klassische Inline-Bloecke als EIN vm.Script ──
+// ── 3f) Konkat-Kompilat: Datendateien + App-Dateien + klassische Inline-Bloecke als EIN vm.Script ──
 // Faengt, was 3b) nicht sieht: const-Doppeldeklarationen ueber Dateigrenzen hinweg —
-// UND zwischen data/*.js und den Inline-Skripten von index.html. Im Browser teilen
+// zwischen data/*.js, js/app-*.js und den Inline-Skripten von index.html. Im Browser teilen
 // sich alle klassischen Skripte einen globalen Scope; ein doppeltes const wirft dort
 // beim zweiten Vorkommen, obwohl jeder Block fuer sich sauber kompiliert.
 // (Fuer die Doppeldeklarations-Pruefung ist die Reihenfolge egal.)
@@ -177,10 +249,11 @@ const NACHGELADEN = new Set(["d14-beschaffung.js", "d15-inseln.js", "d15-inseln-
   const dataDir = path.join(ROOT, "data");
   const orderedFiles = fs.readdirSync(dataDir).filter(f => f.endsWith(".js")).sort();
   const concat = orderedFiles.map(f => fs.readFileSync(path.join(dataDir, f), "utf8"))
+    .concat(appKlassisch.map(a => a.text))
     .concat(inlineClassicCodes).join("\n");
   try {
-    new vm.Script(concat, { filename: "data/*.js + inline-scripts (globaler Scope)" });
-    ok(`Konkat-Kompilat: ${orderedFiles.length} Datendateien + ${inlineClassicCodes.length} Inline-Bloecke als ein Script kompiliert (keine Doppeldeklaration im globalen Scope)`);
+    new vm.Script(concat, { filename: "data/*.js + js/app-*.js (klassisch) + inline-scripts (globaler Scope)" });
+    ok(`Konkat-Kompilat: ${orderedFiles.length} Datendateien + ${appKlassisch.length} klassische App-Dateien + ${inlineClassicCodes.length} Inline-Bloecke als ein Script kompiliert (keine Doppeldeklaration im globalen Scope; type=module-App-Dateien teilen sich den Scope nicht und sind nicht enthalten)`);
   } catch (e) {
     fail(`Konkat-Kompilat SyntaxError im globalen Scope (z.B. doppelte const): ${e.message}`);
   }

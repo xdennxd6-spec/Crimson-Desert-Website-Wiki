@@ -19,10 +19,21 @@ const decode = (s) => s.replace(/&amp;/g, "&").replace(/&quot;/g, '"')
 // ── 1. Bild-Maps: absolute URLs + lokale Existenz ────────────────────────────
 // Seit dem Split (23.08.2026) liegen die Daten-Konstanten in data/*.js;
 // fuer extract() zaehlt index.html + alle Datendateien als EIN Quelltext.
+const JS_DIR = path.join(ROOT, "js");
+// Fehlt der js/-Ordner (aelterer Checkout oder Rueckbau des Performance-Pakets), klar melden statt
+// mit rohem ENOENT/Stacktrace abzubrechen. Der Erfolgsfall aendert sich nicht.
+const appDateien = fs.existsSync(JS_DIR)
+  ? fs.readdirSync(JS_DIR).filter(f => /^app-[A-Za-z0-9_-]+\.js$/.test(f)).sort()
+  : [];
+if (!fs.existsSync(JS_DIR)) ok(false, "js/app-*.js fehlen: Ordner js/ nicht gefunden (Performance-Paket nicht eingespielt?)");
+const appTexte = appDateien.map(f => ({ file: "js/" + f, text: fs.readFileSync(path.join(JS_DIR, f), "utf8") }));
 const html = [
   fs.readFileSync(path.join(ROOT, "index.html"), "utf8"),
   ...fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
     .map(f => fs.readFileSync(path.join(ROOT, "data", f), "utf8")),
+  // 21.11.2026 (Performance-Paket): App-Quelltext = index.html + data/*.js + js/app-*.js.
+  // extract() braucht das z.B. fuer INSEL_LINKS, das mit dem Paket in js/app-02-core.js steht.
+  ...appTexte.map(a => a.text),
 ].join("\n");
 function extract(name) {
   const re = new RegExp("const " + name + "\\s*=\\s*(\\[|\\{)");
@@ -218,18 +229,34 @@ for (const file of ["index.html", ...Object.keys(pages)]) {
 }
 // 10.11.2026: data/*.js traegt einen Pruefwert (?v=<Inhalts-Hash>) und wird ein Jahr unveraenderlich ausgeliefert.
 // Ein veralteter oder fehlender Pruefwert hiesse: Besucher behalten den alten Inhalt. Deshalb je Seite und in sw.js pruefen.
+// 21.11.2026 (Performance-Paket): die fuenf Nachlade-Verweise (s.src='data/...') stehen nur noch im
+// App-Code js/app-*.js, den index.html und die SEO-Seiten per <script src="js/app-..."> laden. Fuer
+// die Datendatei-Pruefung zaehlt der App-Code deshalb mit; die App-Dateien selbst tragen jetzt
+// denselben Pruefwert-Mechanismus (gen-seo setzt ?v=<Inhalts-Hash> in index.html, sw.js und den Seiten).
 console.log(`\n[Pruefwerte der Datendateien]`);
 {
   const datenV = Object.fromEntries(fs.readdirSync(path.join(ROOT, "data")).filter(f => f.endsWith(".js")).sort()
     .map(f => [f, createHash("sha256").update(lfText(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
+  const appV = Object.fromEntries(appDateien.map(f => ["js/" + f, createHash("sha256").update(lfText(path.join(ROOT, "js", f))).digest("hex").slice(0, 10)]));
   for (const file of ["index.html", ...Object.keys(pages), "sw.js"]) {
-    const text = fs.readFileSync(path.join(ROOT, file), "utf8");
+    const basis = fs.readFileSync(path.join(ROOT, file), "utf8");
+    // sw.js ist eine statische Precache-Liste und muss die Eintraege selbst vollstaendig halten;
+    // fuer index.html und die SEO-Seiten zaehlt der App-Code mit, den sie per <script src> laden.
+    const text = file === "sw.js" ? basis
+      : [basis, ...appTexte.map(a => a.text)].join("\n");
     const falsch = [];
     for (const m of text.matchAll(/(?:<script src="|s\.src='|'\.\/)data\/([A-Za-z0-9_-]+\.js)(\?v=([0-9a-f]+))?["']/g)) {
       if (datenV[m[1]] && m[3] !== datenV[m[1]]) falsch.push(`${m[1]} (${m[3] || "ohne"}, Soll ${datenV[m[1]]})`);
     }
     const fehlt = Object.keys(datenV).filter(f => !text.includes(`data/${f}?v=${datenV[f]}`));
     ok(!falsch.length && !fehlt.length, `${file}: Pruefwerte aller ${Object.keys(datenV).length} Datendateien aktuell${falsch.length ? ", falsch: " + falsch.join(", ") : ""}${fehlt.length ? ", fehlt: " + fehlt.join(", ") : ""}, sonst gen-seo laufen lassen`);
+    // App-Dateien: derselbe Pruefwert-Mechanismus wie fuer die Datendateien.
+    const falschApp = [];
+    for (const m of text.matchAll(/(?:<script src="|'\.\/)js\/(app-[A-Za-z0-9_-]+\.js)(\?v=([0-9a-f]+))?["']/g)) {
+      if (appV["js/" + m[1]] && m[3] !== appV["js/" + m[1]]) falschApp.push(`${m[1]} (${m[3] || "ohne"}, Soll ${appV["js/" + m[1]]})`);
+    }
+    const fehltApp = Object.keys(appV).filter(f => !text.includes(`${f}?v=${appV[f]}`));
+    ok(!falschApp.length && !fehltApp.length, `${file}: Pruefwerte aller ${appDateien.length} App-Dateien (js/app-*.js) aktuell${falschApp.length ? ", falsch: " + falschApp.join(", ") : ""}${fehltApp.length ? ", fehlt: " + fehltApp.join(", ") : ""}, sonst gen-seo laufen lassen`);
   }
 }
 
@@ -668,10 +695,16 @@ for (const [datei, erlaubt] of Object.entries(ERLAUBTE_ZAHLEN)) {
 }
 // Boss-Seite: "ueberwiegend Welt- und Fraktionsbosse" (FAQ) und die Ueberschrift der
 // kapitellosen Bosse stuetzen sich auf bossType() der App. Die Funktion wird als Text
-// aus index.html gelesen (nicht importiert) und auf die Daten angewandt.
+// gelesen (nicht importiert) und auf die Daten angewandt. Seit dem Performance-Paket
+// (21.11.2026) liegt sie in js/app-02-core.js — gesucht wird in index.html und js/app-*.js.
 {
-  const bt = /function bossType\(b\)\{[\s\S]*?\n\}/.exec(fs.readFileSync(path.join(ROOT, "index.html"), "utf8"));
-  ok(!!bt, "index.html: bossType() lesbar");
+  let bt = null, btQuelle = null;
+  for (const q of [{ file: "index.html", text: fs.readFileSync(path.join(ROOT, "index.html"), "utf8") },
+    ...appDateien.map(f => ({ file: "js/" + f, text: fs.readFileSync(path.join(ROOT, "js", f), "utf8") }))]) {
+    bt = /function bossType\(b\)\{[\s\S]*?\n\}/.exec(q.text);
+    if (bt) { btQuelle = q.file; break; }
+  }
+  ok(!!bt, `${btQuelle || "index.html/js/app-*.js"}: bossType() lesbar${bt ? "" : " (function bossType(b){...} nicht gefunden)"}`);
   if (bt) {
     const bossType = new Function(bt[0] + "; return bossType;")();
     const ohneKap = extract("BOSSES").filter((b) => b.chapter == null);

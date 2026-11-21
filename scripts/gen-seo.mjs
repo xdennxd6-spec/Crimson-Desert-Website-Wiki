@@ -90,16 +90,46 @@ const ROOT = path.join(__dirname, "..");
     .map(f => [f, createHash("sha256").update(lfText(path.join(ROOT, "data", f))).digest("hex").slice(0, 10)]));
   const mitV = (text, vor, nach) => text.replace(new RegExp(`${vor}data/([A-Za-z0-9_-]+\\.js)(?:\\?v=[0-9a-f]+)?${nach}`, "g"),
     (m, f) => (datenV[f] ? `${m.slice(0, m.indexOf("data/"))}data/${f}?v=${datenV[f]}${m.slice(-1)}` : m));
+  // 21.11.2026 (Performance-Paket): Die App-Logik liegt in js/app-*.js. Die Nachlade-Verweise auf
+  // data/*.js stehen jetzt IM App-Code (beschLaden()/inselnLaden()/weltkarteLaden() in
+  // js/app-02-core.js, Muster s.src='data/...'). Deshalb: erst dort die Datendatei-Pruefwerte
+  // auf den Stand von datenV bringen, DANACH den Pruefwert der App-Datei selbst bilden —
+  // eine geaenderte data-Datei veraendert auch den Hash ihrer App-Datei (Reihenfolge ist Pflicht).
+  // Fehlt der js/-Ordner (aelterer Checkout oder Rueckbau des Performance-Pakets), klar abbrechen
+  // statt mit rohem ENOENT/Stacktrace zu sterben. Der Erfolgsfall aendert sich nicht.
+  if (!fs.existsSync(path.join(ROOT, "js"))) {
+    console.error("js/app-*.js fehlen: Ordner js/ nicht gefunden (Performance-Paket nicht eingespielt?)");
+    process.exit(1);
+  }
+  const appDateien = fs.readdirSync(path.join(ROOT, "js")).filter(f => /^app-[A-Za-z0-9_-]+\.js$/.test(f)).sort();
+  const appTexte = Object.fromEntries(appDateien.map(f => [f, lfText(path.join(ROOT, "js", f))]));
+  for (const f of appDateien) {
+    const t = mitV(appTexte[f], "s\\.src='", "'");
+    if (t !== appTexte[f]) { fs.writeFileSync(path.join(ROOT, "js", f), t); appTexte[f] = t; }
+  }
+  // Pruefwert je App-Datei nach demselben Muster wie datenV (sha256 ueber den Text mit
+  // \n-Zeilenenden, erste 10 Hex-Zeichen) — damit nginx js/app-*.js genauso als immutable ausliefern
+  // kann und eine Aenderung unter neuer Adresse ankommt. Ein Lauf ohne Aenderung schreibt nichts.
+  const appV = Object.fromEntries(appDateien.map(f => [f, createHash("sha256").update(appTexte[f]).digest("hex").slice(0, 10)]));
+  const mitAppV = (text, vor, nach) => text.replace(new RegExp(`${vor}js/(app-[A-Za-z0-9_-]+\\.js)(?:\\?v=[0-9a-f]+)?${nach}`, "g"),
+    (m, f) => (appV[f] ? `${m.slice(0, m.indexOf("js/"))}js/${f}?v=${appV[f]}${m.slice(-1)}` : m));
   neu = mitV(neu, '<script src="', '"');          // <script src="data/dNN-….js">
   neu = mitV(neu, "s\\.src='", "'");               // beschLaden(): nachgeladene data/d14-beschaffung.js
-  for (const f of Object.keys(datenV)) if (!neu.includes(`data/${f}?v=${datenV[f]}`)) throw new Error(`index.html: Verweis auf data/${f} mit Pruefwert fehlt`);
+  neu = mitAppV(neu, 'src="', '"');                // <script src="js/app-NN-….js"> (inkl. type=module)
+  // Jede Datendatei ist mit Pruefwert verlinkt — direkt in index.html oder aus dem App-Code
+  // heraus (js/app-*.js); seit dem Performance-Paket stehen die fuenf Nachlade-Verweise nur noch dort.
+  const neuMitApp = [neu, ...appDateien.map(f => appTexte[f])].join("\n");
+  for (const f of Object.keys(datenV)) if (!neuMitApp.includes(`data/${f}?v=${datenV[f]}`)) throw new Error(`index.html/js/app-*.js: Verweis auf data/${f} mit Pruefwert fehlt`);
+  for (const f of Object.keys(appV)) if (!neu.includes(`js/${f}?v=${appV[f]}`)) throw new Error(`index.html: Verweis auf js/${f} mit Pruefwert fehlt`);
   if (neu !== alt) fs.writeFileSync(indexPfad, neu);
   // sw.js: derselbe Pruefwert im Offline-Vorrat (CORE_ASSETS), damit der Service Worker die Dateien aus dem
   // Browser-Cache nimmt statt sie unter der Adresse ohne Pruefwert ein zweites Mal zu laden.
   const swPfad = path.join(ROOT, "sw.js");
   const swAlt = fs.readFileSync(swPfad, "utf8");
-  const swNeu = mitV(swAlt, "'\\./", "'");
+  let swNeu = mitV(swAlt, "'\\./", "'");
+  swNeu = mitAppV(swNeu, "'\\./", "'");            // './js/app-NN-….js'-Eintraege in CORE_ASSETS
   for (const f of Object.keys(datenV)) if (!swNeu.includes(`'./data/${f}?v=${datenV[f]}'`)) throw new Error(`sw.js: CORE_ASSETS-Eintrag fuer data/${f} fehlt`);
+  for (const f of Object.keys(appV)) if (!swNeu.includes(`'./js/${f}?v=${appV[f]}'`)) throw new Error(`sw.js: CORE_ASSETS-Eintrag fuer js/${f} fehlt`);
   if (swNeu !== swAlt) fs.writeFileSync(swPfad, swNeu);
 }
 const SITE = "https://crimson-desert-wiki.com";

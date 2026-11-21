@@ -49,6 +49,16 @@ const DATA_DIR = path.join(ROOT, "data");
 const dataFiles = fs.existsSync(DATA_DIR)
   ? fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".js")).sort().map((f) => ({ file: path.join(DATA_DIR, f), text: readSafe(path.join(DATA_DIR, f)) ?? "" }))
   : [];
+// 21.11.2026 (Performance-Paket): Die App-Logik liegt ausgelagert in js/app-*.js. renderSynthesis,
+// renderWitchCraftables und _leafCount standen vor der Auslagerung inline in index.html — die
+// Funktionensuche (i2) und die _leafCount-Zeile (i3) suchen deshalb jetzt auch in den App-Dateien.
+const APP_DIR = path.join(ROOT, "js");
+const appFiles = fs.existsSync(APP_DIR)
+  ? fs.readdirSync(APP_DIR).filter((f) => /^app-[A-Za-z0-9_-]+\.js$/.test(f)).sort().map((f) => ({ file: path.join(APP_DIR, f), text: readSafe(path.join(APP_DIR, f)) ?? "" }))
+  : [];
+// Fehlt der js/-Ordner (aelterer Checkout oder Rueckbau des Performance-Pakets), klar melden statt
+// stumm weiterzurechnen oder mit rohem ENOENT abzubrechen.
+if (!fs.existsSync(APP_DIR)) fail("js/app-*.js fehlen: Ordner js/ nicht gefunden (Performance-Paket nicht eingespielt?)");
 const GEN_PATH = path.join(__dirname, "gen-seo.mjs");
 const genSrc = readSafe(GEN_PATH) ?? "";
 
@@ -57,7 +67,8 @@ const kontext = (text, idx, len) => text.slice(Math.max(0, idx - 28), idx + len 
 
 // ── Datenstrukturen laden (balancierte Klammern + eval, wie verify-crafting.mjs) ─
 // Seit dem Split liegen die Konstanten in data/*.js; index.html + alle Datendateien zaehlen als EIN Text.
-const allSrc = [indexHtml, ...dataFiles.map((d) => d.text)].join("\n");
+// Seit dem Performance-Paket (21.11.2026) kommt der App-Code js/app-*.js dazu.
+const allSrc = [indexHtml, ...dataFiles.map((d) => d.text), ...appFiles.map((a) => a.text)].join("\n");
 function extract(name) {
   const re = new RegExp("const " + name + "\\s*=\\s*(\\[|\\{)");
   const m = re.exec(allSrc);
@@ -581,7 +592,7 @@ head("i) Abyss-Split: Seiten cores und synthesis");
       for (const id of Object.keys(SEC_RENDERERS)) if (!known.has(id)) { fail(`${kindLoc("SEC_RENDERERS")}: SEC_RENDERERS.${id} hat keine Seite in SECTIONS`); bad++; }
     }
     for (const fn of ["renderCores", "renderSynthesis", "renderWitchCraftables"]) {
-      if (!new RegExp("function\\s+" + fn + "\\s*\\(").test(allSrc)) { fail(`index.html/data: function ${fn}() nicht gefunden`); bad++; }
+      if (!new RegExp("function\\s+" + fn + "\\s*\\(").test(allSrc)) { fail(`index.html/data/js: function ${fn}() nicht gefunden`); bad++; }
     }
     if (!bad) ok("SEC_RENDERERS.cores == [renderCores], .synthesis == [renderSynthesis], alle Schluessel sind Seiten-IDs, Renderer-Funktionen vorhanden");
   }
@@ -635,18 +646,22 @@ head("i) Abyss-Split: Seiten cores und synthesis");
       if (/Synthese-Baum unten|Core-Tabelle oben/.test(coresChunk)) { fail(`index.html:${tC.line}: sec-cores enthaelt noch den alten Verweis „Synthese-Baum unten“ / „Core-Tabelle oben“`); bad++; }
       if (/Core-Tabelle oben/.test(synthChunk)) { fail(`index.html:${tS.line}: sec-synthesis enthaelt noch „Core-Tabelle oben“ (Core-Tabelle ist eine eigene Seite)`); bad++; }
     }
-    // _leafCount: Zeile fuer synthesis (Skripte sind im Struktur-Text weg, daher im Rohtext suchen)
+    // _leafCount: Zeile fuer synthesis (Skripte sind im Struktur-Text weg, daher im Rohtext suchen).
+    // 21.11.2026 (Performance-Paket): die Funktion steht jetzt in js/app-02-core.js, deshalb Suche
+    // ueber index.html + js/app-*.js mit Fundstelle Datei:Zeile.
     {
-      const lc = /function\s+_leafCount\s*\(id\)\s*\{([\s\S]*?)\n\}/.exec(indexHtml);
-      if (!lc) { fail("index.html: function _leafCount nicht gefunden"); bad++; }
+      const lcQuellen = [{ file: "index.html", text: indexHtml }, ...appFiles.map((a) => ({ file: rel(a.file), text: a.text }))];
+      let lc = null, lcDatei = null;
+      for (const q of lcQuellen) { lc = /function\s+_leafCount\s*\(id\)\s*\{([\s\S]*?)\n\}/.exec(q.text); if (lc) { lcDatei = q.file; break; } }
+      if (!lc) { fail("index.html/js/app-*.js: function _leafCount nicht gefunden"); bad++; }
       else {
         const zeilen = lc[1].split("\n");
         const iCore = zeilen.findIndex((z) => /id\s*===\s*'cores'/.test(z));
         const iSyn = zeilen.findIndex((z) => /id\s*===\s*'synthesis'/.test(z));
-        const lineNo = lineOf(indexHtml, lc.index);
-        if (iSyn < 0) { fail(`index.html:${lineNo}: _leafCount hat keine Zeile fuer 'synthesis'`); bad++; }
-        else if (iCore < 0 || iSyn !== iCore + 1) { fail(`index.html:${lineNo + iSyn + 1}: _leafCount-Zeile 'synthesis' steht nicht direkt unter der 'cores'-Zeile`); bad++; }
-        else if (!/WITCH_SYNTHESIS/.test(zeilen[iSyn])) { fail(`index.html:${lineNo + iSyn + 1}: _leafCount-Zeile 'synthesis' zaehlt nicht aus WITCH_SYNTHESIS`); bad++; }
+        const lineNo = lineOf(lcDatei === "index.html" ? indexHtml : appFiles.find((a) => rel(a.file) === lcDatei).text, lc.index);
+        if (iSyn < 0) { fail(`${lcDatei}:${lineNo}: _leafCount hat keine Zeile fuer 'synthesis'`); bad++; }
+        else if (iCore < 0 || iSyn !== iCore + 1) { fail(`${lcDatei}:${lineNo + iSyn + 1}: _leafCount-Zeile 'synthesis' steht nicht direkt unter der 'cores'-Zeile`); bad++; }
+        else if (!/WITCH_SYNTHESIS/.test(zeilen[iSyn])) { fail(`${lcDatei}:${lineNo + iSyn + 1}: _leafCount-Zeile 'synthesis' zaehlt nicht aus WITCH_SYNTHESIS`); bad++; }
       }
     }
     // #guide-links: Link /#sec-synthesis "Abyss-Synthese" (Anker-Link zur App-Seite, kein SEO-Slug)
