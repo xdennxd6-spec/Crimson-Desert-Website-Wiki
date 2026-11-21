@@ -1813,7 +1813,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <img class="mnt-img" loading="lazy" src="/cd_assets/mounts/high-mobility-atag.svg" alt="Zeichnung: High-Mobility A.T.A.G. in Crimson Desert" width="400" height="266">
 <h3>High-Mobility A.T.A.G.</h3>
 <ul class="stats"><li><b>Typ:</b> Fahrzeug (Kampf-Mech, Leichtvariante)</li><li><b>Freischalten:</b> Blaupause III (Spezialblaupause: Kuku-Roboter; Herkunft in questlog nicht erfasst). Guides nennen die Reinigung des Sanktums der Erhöhung, widersprüchlich, weil questlog dort nur die Kuku-Transmission-Pack-Blaupause führt; danach Bau am Kuku-Topf (Mysterious Pot Workshop) — Rezept siehe Kuku-Werkstatt-Liste. Quelle: questlog-API + gaming.tools + VULKK</li><li><b>Stats:</b> Angriff 50, Verteidigung 100, Genauigkeit 100, Leben 500, Ausdauer 300</li></ul>
-<details class="mnt-notes"><summary>Notizen</summary><p>Abgespeckte Panzerung, dafür deutlich schneller und wendiger als der Standard-A.T.A.G.; raptorenförmiges Chassis (Small Kuku A.T.A.G. als Basis).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_machine_carmabirdsaurus_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
+<details class="mnt-notes"><summary>Notizen</summary><p>Abgespeckte Panzerung, dafür deutlich schneller und wendiger als der Standard-A.T.A.G. Raptorenförmiges Chassis (Small Kuku A.T.A.G. als Basis).</p></details><p class="mnt-ig"><a href="/cd_assets/ql/assets/_sprites/cd_mercenary_portrait_domestic_animal_riding_machine_carmabirdsaurus_1.webp" target="_blank" rel="nofollow noopener noreferrer">In-Game-Ansicht (Bild)</a></p>
 </article>
 <article class="card" id="mount-pywel-wagon">
 <img class="mnt-img" loading="lazy" src="/cd_assets/mounts/wagon-horse.webp" alt="Pywel-Wagen in Crimson Desert" width="800" height="520">
@@ -2463,8 +2463,8 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </div>
 </div>
 <script src="data/d00-de-namen.js?v=44f5996f27" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=d8741276a3" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=35c6c2f227" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=5498408393" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=8f8910b84d" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=d9e95bbd08" fetchpriority="low"></script>
 <script src="data/d04-armor-imgs.js?v=96dd1f7141" fetchpriority="low"></script>
 <script src="data/d05-fac-data.js?v=4517311cb3" fetchpriority="low"></script>
@@ -13019,7 +13019,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=36da081955';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=cfab8a9b0f';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);

@@ -2094,7 +2094,7 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <tr>
 <td title="Item-Stufe 2"><img class="thumb" loading="lazy" src="/cd_assets/ql/assets/_sprites/itemicon_prefab_cd_t0000_steakdish_0002.webp" alt="" width="34" height="34">Grillfisch und Grillfleisch</td>
 <td>1x Fleisch (Gruppe) + 1x Fisch (Gruppe)</td>
-<td>Feuer-Res Lv 2 (30s); HP-Wert nicht erfasst <span class="unsure">mittlere Datenlage</span><br><span class="muted">Tipp: Stufen und Zutatenmengen aus den Spieldaten (questlog). Resistenz laut th.gl (geprüft 08.11.2026). Rezepttext: Stellt Gesundheit her. Fertig erhältlich: Drop: Riesenschlammpeitzger (100 %), Sandzahn-Marodeur (5 %), Die Helms (2 %) u. a.; Mission „Hand over the wife&#39;s grilled meat and fish“, „Sprich mit der Frau“; Entsendung „Lift Repair Support“. Auch Haustierfutter.</span><br><span class="muted">Quelle: Rezept: Grillfisch und Grillfleisch (Zufallsbeute vieler Gegner; Mission „Investigate the House of Healing“) · questlog</span></td>
+<td>Feuer-Res Lv 2 (30s); HP-Wert nicht erfasst <span class="unsure">mittlere Datenlage</span><br><span class="muted">Tipp: Stufen und Zutatenmengen aus den Spieldaten (questlog). Resistenz laut th.gl (geprüft 08.11.2026). Rezepttext: Stellt Gesundheit her. Fertig erhältlich: Drop: Riesenschlammpeitzger (100 %), Sandzahn-Marodeur (5 %), Die Helms (2 %) u. a. Mission „Hand over the wife&#39;s grilled meat and fish“, „Sprich mit der Frau“; Entsendung „Lift Repair Support“. Auch Haustierfutter.</span><br><span class="muted">Quelle: Rezept: Grillfisch und Grillfleisch (Zufallsbeute vieler Gegner; Mission „Investigate the House of Healing“) · questlog</span></td>
 <td>Bratpfanne</td>
 </tr>
 <tr>
@@ -4837,8 +4837,8 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </div>
 </div>
 <script src="data/d00-de-namen.js?v=44f5996f27" fetchpriority="low"></script>
-<script src="data/d01-weapons.js?v=d8741276a3" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=35c6c2f227" fetchpriority="low"></script>
+<script src="data/d01-weapons.js?v=5498408393" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=8f8910b84d" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=d9e95bbd08" fetchpriority="low"></script>
 <script src="data/d04-armor-imgs.js?v=96dd1f7141" fetchpriority="low"></script>
 <script src="data/d05-fac-data.js?v=4517311cb3" fetchpriority="low"></script>
@@ -15393,7 +15393,7 @@ function beschLaden(){
   if(typeof BESCHAFFUNG!=='undefined')return Promise.resolve(true);
   if(_beLaden)return _beLaden;
   _beLaden=new Promise(res=>{
-    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=36da081955';
+    const s=document.createElement('script');s.src='data/d14-beschaffung.js?v=cfab8a9b0f';
     s.onload=()=>res(typeof BESCHAFFUNG!=='undefined');
     s.onerror=()=>{_beLaden=null;s.remove();res(false);};
     document.head.appendChild(s);
