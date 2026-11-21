@@ -3905,6 +3905,19 @@ html.cd-still .cd-flash{outline:2px solid var(--gold);outline-offset:3px}
   html.cd-motion .cd-fold[open]::after{--sr:360px}
 }
 
+/* -- Hover-Intent fuer die Karten selbst (21.11.2026): Der Lichtkegel wartet seit dem 19.11. 0,14 s
+   (Zeile 3901), die eigenen Animationen der Karte taten das nicht. Szenenbild-Zoom, Schatten und
+   Icon-Filter starteten damit weiter sofort, sobald der Zeiger beim Scrollen ueber eine Karte zog.
+   Hier bekommen Kartenflaeche und Bild-Ebene denselben Delay; Verlassen bleibt sofort, weil der
+   Delay nur in der Hover-Regel steht (dasselbe Muster wie beim Lichtkegel). -- */
+@media (hover:hover) and (pointer:fine){
+  html.cd-motion :is(.card,.sk-c,.set-card,.pet-card,.build-card,.witch-card,.ch-card,.chap,.sec-block,.rt-card,.rm-task,.r2b13-core,.r2b13-fam,.r2b13-dye,.r2b1-card,.ins-karte,.dlcs-t,.r2b4-ruin,.so-tile,.so-chip,.r2b11-t,.q5-next):hover{transition-delay:.14s}
+  html.cd-motion :is(.r2b2-npc,.r2b3-ch,.r2b7-card,.r2b9-pick,.rom-cand,.cd-fold):hover .cd-scene-img{transition-delay:.14s!important}
+  html.cd-motion :is(.r2b4-shot,.q5-shot):hover img{transition-delay:.14s!important}
+  html.cd-motion :is(.r2b11-t,.dlcs-t):hover :is(.r2b11-arr,.r2b11-cta .cd-i,.dlcs-arr){transition-delay:.14s!important}
+  html.cd-motion .cd-fold.q5-fac>summary:hover .cd-fold-ico>img{transition-delay:.14s}
+}
+
 /* -- Performance (gemessen 21.10.2026, redesign-2/FUNDAMENT.md):
    1) Karten-Glas ohne backdrop-filter. Hinter den Karten liegt nur die weiche Aurora; blur(3px) darauf ist unsichtbar, kostet aber je
       Karte eine eigene Rendering-Fläche (Waffen 500, Rüstungen 420, Skills 257 Stück: Scroll-p95 bis 76 ms). Glas bleibt auf Rail,
