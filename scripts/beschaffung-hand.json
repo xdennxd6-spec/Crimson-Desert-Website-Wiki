@@ -4,6 +4,13 @@
  "haendler": {},
  "boss": {},
  "teile": {
+  "Witch's Ring": {
+   "warn": "Zwei Preise nicht verwechseln: Der Händlerpreis bei Areciel beträgt 50.000 Kupfer (500 Silber), das ist der Rückkauf, wenn der Ring verkauft oder verloren ging. Der Gegenstandswert des Rings liegt laut th.gl bei 2.500 Silber. Die im Questbericht genannte Zahl von 25 Silber ist weder das eine noch das andere und in keiner Quelle auffindbar.",
+   "quellen": [
+    "https://crimsondesert.th.gl/db/equipment/item_abyssreward_eastwitch_ring (geprüft 21.11.2026: Preis 2500, Händlerpreis bei Witch's Workshop 50,000 Copper)",
+    "https://questlog.gg/crimson-desert/en/db/item/8506 (geprüft 06.11.2026, Händlerpreis über itemIsSoldByNpcs)"
+   ]
+  },
   "Elegant Carmine Leather Armor": {
    "wege": [
     {
