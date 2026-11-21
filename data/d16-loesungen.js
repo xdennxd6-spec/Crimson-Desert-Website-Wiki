@@ -373,7 +373,7 @@ const LOESUNGEN_KUER = [
  conf:"belegt", seo:{seite:"mounts", h3:"Hai zähmen: Schritt für Schritt"}},
 {slug:"unbekanntes-tier", de:"Unbekanntes Tier", en:"Mysterious Animals", art:"thema",
  sec:"pets", ziel:null, ort:"#legendary-pet-guide",
- kurz:"Unbekanntes Tier (englisch Mysterious Animals) ist eine Kategorie der Herausforderungen. Belegt sind zwei Aufgaben: die Hyazinthara und den Uhrwerk-Adler zähmen.",
+ kurz:"Unbekanntes Tier (englisch Mysterious Animals) ist eine Kategorie der Herausforderungen mit fünf Aufgaben: Hyazinthara und Uhrwerk-Adler haben einen belegten Ablauf, dazu kommen seit 2.04.00 die drei goldenen Insekten, für die nur die Namen belegt sind.",
  voraussetzung:["Totempfahl der Bindung (Belohnung der Mission Das Tor entriegeln aus der Reihe Zitternde Wälder)","Futter: Wüstenmelonen für die Hyazinthara, Quecksilber für den Uhrwerk-Adler"],
  schritte:[
   {t:"Hyazinthara: Ort",d:"Am Außenpostenlager am Hof des Riesen über dem Rotbaumwald nahe dem Roten Fluss. Das Lager vorher befreien: PC Gamer hält das für hilfreich, FinalBoss und Gfinity für nötig, damit der Vogel erscheint."},

@@ -316,7 +316,7 @@ const PETS=[
   {name:"Steppe Eagle",type:"critter",food:"Mageres Fleisch",icon:"cd_knowledgeimage_knowledge_steppe_eagle.webp",cat:"Vogel (Greifvogel)"},
   {name:"Hyacinth Macaw",type:"critter",food:"Wüstenmelone / Goldener Apfel (+100)",icon:"cd_knowledgeimage_knowledge_parrot.webp",cat:"Vogel (Legendary/Papagei; Challenge 'Unbekanntes Tier')"},
   {name:"Phoenix",type:"critter",food:"",icon:"cd_assets/pets/cd_pet_phoenix.webp",cat:"Vogel (Legendary/Sonder)"},
-  {name:"Iron Eagle",type:"critter",food:"Platin",icon:"cd_assets/pets/cd_pet_iron-eagle.webp",cat:"Vogel (Legendary/mechanisch)"},
+  {name:"Iron Eagle",type:"critter",food:"Platinbarren oder 20 Quecksilber",icon:"cd_assets/pets/cd_pet_iron-eagle.webp",cat:"Vogel (Legendary/mechanisch)"},
   {name:"Citron-Crested Cockatoo",type:"critter",food:"Orange",icon:"cd_assets/pets/cd_pet_citron-crested-cockatoo.webp",cat:"Vogel (Papagei)"},
   {name:"Eclectus Parrot",type:"critter",food:"Holunder",icon:"cd_knowledgeimage_knowledge_eclectusparrot.webp",cat:"Vogel (Papagei)"},
   {name:"Grey Parrot",type:"critter",food:"Fig",icon:"cd_knowledgeimage_knowledge_grayparrot.webp",cat:"Vogel (Papagei)"},

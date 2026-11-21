@@ -3783,9 +3783,9 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 </div>
 <script src="data/d00-de-namen.js?v=44f5996f27" fetchpriority="low"></script>
 <script src="data/d01-weapons.js?v=d8741276a3" fetchpriority="low"></script>
-<script src="data/d02-crafting.js?v=18195a4f41" fetchpriority="low"></script>
+<script src="data/d02-crafting.js?v=35c6c2f227" fetchpriority="low"></script>
 <script src="data/d03-main-quests.js?v=d9e95bbd08" fetchpriority="low"></script>
-<script src="data/d04-armor-imgs.js?v=07791836b7" fetchpriority="low"></script>
+<script src="data/d04-armor-imgs.js?v=96dd1f7141" fetchpriority="low"></script>
 <script src="data/d05-fac-data.js?v=4517311cb3" fetchpriority="low"></script>
 <script src="data/d06-items.js?v=383573514a" fetchpriority="low"></script>
 <script src="data/d07-patches.js?v=b7e126f4d5" fetchpriority="low"></script>
@@ -3793,11 +3793,11 @@ background:linear-gradient(180deg,rgba(255,90,68,.06),transparent 240px);color:v
 <script src="data/d09-scenes.js?v=09b7712c8d" fetchpriority="low"></script>
 <script src="data/d10-enemy-drops.js?v=68d552c789" fetchpriority="low"></script>
 <script src="data/d11-fac-quest-imgs.js?v=13947fead7" fetchpriority="low"></script>
-<script src="data/d12-dlc.js?v=9eaa12e3fe" fetchpriority="low"></script>
+<script src="data/d12-dlc.js?v=8851d4c996" fetchpriority="low"></script>
 <script src="data/d13-romanze.js?v=1beb4059c6" fetchpriority="low"></script>
 <script src="data/d14-reit.js?v=ebe0ae09b3" fetchpriority="low"></script>
 <!-- LOES Anfang: Lösungsabschnitte (Lauf quest-loesungen 14.11.2026), Daten + Einhängen in vorhandene Karten -->
-<script src="data/d16-loesungen.js?v=5f30a41d45" fetchpriority="low"></script>
+<script src="data/d16-loesungen.js?v=0af7b511cc" fetchpriority="low"></script>
 <script src="data/d16-loesungen-app.js?v=fef338ee99" fetchpriority="low"></script>
 <!-- LOES Ende -->
 <script src="data/d18-synthese-blaupausen.js?v=19ad86c9f6" fetchpriority="low"></script>
@@ -9356,11 +9356,11 @@ function _dlcQ_fold(q,i,useScene){
   const body=()=>{
     let h=q.req?_dlcFacts([['Voraussetzung',q.req]]):'';
     if(steps.length)h+=_dlcH('Schritte')+'<div class="cd-checks dlcq-steps">'+steps.map((st,k)=>_dlcQ_step(q,st,k)).join('')+'</div>';
-    else if(subsNb)h+=_dlcH('Unterquests')+'<p class="dlcq-nb">'+_dlcV(subObj.c==='nb'?subObj:{v:'nicht belegt',c:'nb'})+'</p>';
-    else{
+    /* Unterquests auch bei eigenen Schritten zeigen (Nebelmeer, 21.11.2026): belegte Namen stehen jetzt neben den Schritten. */
+    if(!subsNb&&subList.length){
       const sb=subObj.c&&subObj.c!=='ok';
       h+=_dlcH('Unterquests')+'<div class="dlcq-subs'+(sb?' dlc-unb':'')+'">'+cdStepper(subList.map(x=>({t:x})))+(sb?'<p class="dlcq-pt">'+_dlcFlag(subObj.c,subObj.q)+'</p>':'')+'</div>';
-    }
+    } else if(!steps.length&&subsNb) h+=_dlcH('Unterquests')+'<p class="dlcq-nb">'+_dlcV(subObj.c==='nb'?subObj:{v:'nicht belegt',c:'nb'})+'</p>';
     h+=_dlcFacts([['Belohnungen',q.rewards]]);
     if(q.note)h+=cdNote({h:_dlcV(q.note)},{kind:'info',title:'Notiz'});
     if(G.v==='romanze')h+='<p class="dlc-p">Fundorte, Voraussetzungen und Antrag: '+cdGoLink('romanze',cdSlug(q.name).replace(/^romanze-/,''),'Romanze & Ehe')+'</p>';

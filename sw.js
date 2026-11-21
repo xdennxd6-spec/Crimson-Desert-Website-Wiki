@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v63';
+const CACHE_VERSION = 'cd-guide-v64';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -12,9 +12,9 @@ const CORE_ASSETS = [
   './consent.js?v=2',
   './data/d00-de-namen.js?v=44f5996f27',
   './data/d01-weapons.js?v=d8741276a3',
-  './data/d02-crafting.js?v=18195a4f41',
+  './data/d02-crafting.js?v=35c6c2f227',
   './data/d03-main-quests.js?v=d9e95bbd08',
-  './data/d04-armor-imgs.js?v=07791836b7',
+  './data/d04-armor-imgs.js?v=96dd1f7141',
   './data/d05-fac-data.js?v=4517311cb3',
   './data/d06-items.js?v=383573514a',
   './data/d07-patches.js?v=b7e126f4d5',
@@ -22,13 +22,13 @@ const CORE_ASSETS = [
   './data/d09-scenes.js?v=09b7712c8d',
   './data/d10-enemy-drops.js?v=68d552c789',
   './data/d11-fac-quest-imgs.js?v=13947fead7',
-  './data/d12-dlc.js?v=9eaa12e3fe',
+  './data/d12-dlc.js?v=8851d4c996',
   './data/d13-romanze.js?v=1beb4059c6',
   './data/d14-beschaffung.js?v=36da081955',
   './data/d14-reit.js?v=ebe0ae09b3',
   './data/d15-inseln.js?v=a4a26ee859',
   './data/d15-inseln-app.js?v=7e8bd04f7b',
-  './data/d16-loesungen.js?v=5f30a41d45',
+  './data/d16-loesungen.js?v=0af7b511cc',
   './data/d16-loesungen-app.js?v=fef338ee99',
   './data/d17-weltkarte.js?v=9e4a742ffb',
   './data/d17-weltkarte-app.js?v=0764dc55b9',

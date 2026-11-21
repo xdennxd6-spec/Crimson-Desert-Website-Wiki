@@ -291,9 +291,9 @@ const DLC_QUESTS = [
   {name: "Remote Islands", who: "Fraktionsquest, Ozean", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
     {name: "The Seaborne Village", d: "Ein von Piraten besetztes Inseldorf erreichen, die Piraten besiegen und die verängstigten Bewohner in Sicherheit bringen. Der Abschlusstext nennt Insel Samora als Piratenbasis und Welsmensch als Gegner."}
   ], rewards: "Abyss-Artefakt, 5 Uralte Relikte, Feuertaufe"},
-  {name: "Mistbound Sea", who: "Fraktionsquest, Ozean", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
+  {name: "Mistbound Sea", de: "Nebelmeer", who: "Fraktionsquest, Ozean", c: "unb", q: "th.gl", subs: "The Stolen Relic; Ancient Shrine; Catastrophe of Ancient Times; The Stilled Sea", steps: [
     {name: "Catastrophe of Ancient Times", d: "Eine uralte Waffe ist in der Tiefe erwacht und lässt das Meer beben; dem metallischen Gebrüll über die Insel folgen und die mechanische Seeschlange (Leviakan) besiegen."}
-  ], rewards: "Abyss-Artefakt, 20 Uralte Relikte, Blick des Beschützers"},
+  ], rewards: "Abyss-Artefakt, 20 Uralte Relikte, Blick des Beschützers (Einordnung 21.11.2026: Die Reihe hat vier Schritte, sie stehen jetzt als Unterquests hier. Belegt über Game8, Walkthrough vom 03.11.2026, und camzillasmom, die ausdrücklich vier Quests zählt. Die drei übrigen Schritte haben eigene Karten in dieser Liste, deshalb steht ihr Ablauf nicht doppelt hier.)"},
   {name: "Isolated Island Chief", who: "Fraktionsquest, Satyros Island", c: "unb", q: "th.gl", subs: {v: "nicht belegt", c: "nb"}, steps: [
     {name: "The Tribe's Foremost", d: "Auf der Insel, die jeden Fremden abweist, den Häuptling Satyros besiegen, den stärksten Krieger des Stammes."}
   ], rewards: "Satyr-Speer, 5 Uralte Relikte, Abyss-Artefakt"},
@@ -405,7 +405,7 @@ const DLC_BOSSES = [
   {name: "The Dancing Catfish Crusher", c: "unb", q: "th.gl", where: "Boss des Großen Ozeans: eine Zerstörungsmaschine, die Welsmensch mit der Technik der Helms bauen ließ. Ort nicht belegt.", drop: {v: "nicht belegt", c: "nb"}},
   {name: "Matthias", w: "Matthias", c: "unb", q: "Game8", where: "Schloss Pailune, Treppe; Kliffs Quest „Ein bekanntes Gesicht“", drop: "Danach entsendbarer Gefährte", note: {v: "Matthias ist schon Boss im Hauptspiel (Kapitel 2, „Für die Ehre“); ob es eine eigene DLC-Variante oder nur eine erneute Begegnung ist, ist nicht belegt.", c: "nb"}},
   {name: "T'rukan", c: "unb", q: "Game8", where: "Arena im Schlangenmoor; Kliffs Quest „Wegweisende Lehren“", drop: "Manifestation des Ultimativen (Questbelohnung)"},
-  {name: "Kharzek, Archon of Antumbra", where: [{v: "Silent Burial Ground westlich des Sandsturmgebiets; Kliffs Quest „Der Drahtzieher“.", c: "unb", q: "Game8"}, {v: "Die Spieldaten schreiben „Antumbra-Archon, Kharzek“.", c: "unb", q: "th.gl"}], drop: "Vollstrecker der Enthüllung, Abyss-Artefakt (Questbelohnung)"},
+  {name: "Kharzek, Archon of Antumbra", where: [{v: "Silent Burial Ground westlich des Sandsturmgebiets; Kliffs Quest „Der Drahtzieher“.", c: "unb", q: "Game8"}, {v: "Deutsche Fassung laut th.gl und crimsondb.gg: „Kharzek, der Antumbra-Großarchon“; intern führen die Spieldaten „Antumbra-Archon, Kharzek“.", c: "unb", q: "th.gl, crimsondb.gg"}], drop: "Vollstrecker der Enthüllung, Abyss-Artefakt (Questbelohnung)"},
   {name: "Geago the Flamecrazed", where: {v: "Burg Schmorstein; Damianes Quest „Einen Schatten werfen“", c: "unb", q: "Game8"}, drop: "Aschener Blitz, Abyss-Artefakt (Questbelohnung)"},
   {name: "Goyen", w: "Goyen", c: "unb", q: "Game8", where: "Schloss Pailune (Thron), zwei Phasen; Oongkas Quest „Verdrehtes Schicksal“", drop: "Echo des Sturms (Questbelohnung)", note: {v: "Den Namen gibt es auch als Boss im Hauptspiel; ob es dieselbe Variante ist, ist unklar.", c: "nb"}},
   {name: "Scrap Metal Queen Stoneback Crab", where: [{v: "Eine Kriegsmaschine, die Harkan nach dem Vorbild der Königin der Steinrückenkrebse aus Schrott baute.", c: "unb", q: "th.gl"}, {v: "Bei Yanns verlassenem Wagen nordöstlich der Region Crimson Desert; Oongkas Quest „Ein mysteriöser Angriff“.", c: "unb", q: "Game8"}], drop: {v: "nicht belegt", c: "nb"}},
