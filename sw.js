@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v67';
+const CACHE_VERSION = 'cd-guide-v68';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -11,18 +11,18 @@ const CORE_ASSETS = [
   './app.css',
   './consent.js?v=2',
   './data/d00-de-namen.js?v=44f5996f27',
-  './data/d01-weapons.js?v=5498408393',
-  './data/d02-crafting.js?v=8f8910b84d',
+  './data/d01-weapons.js?v=299a51c89d',
+  './data/d02-crafting.js?v=55a31b530b',
   './data/d03-main-quests.js?v=d9e95bbd08',
   './data/d04-armor-imgs.js?v=96dd1f7141',
   './data/d05-fac-data.js?v=4517311cb3',
-  './data/d06-items.js?v=383573514a',
-  './data/d07-patches.js?v=b7e126f4d5',
+  './data/d06-items.js?v=966af5998e',
+  './data/d07-patches.js?v=8c73823473',
   './data/d08-ruins-data.js?v=1584c23442',
   './data/d09-scenes.js?v=09b7712c8d',
   './data/d10-enemy-drops.js?v=68d552c789',
   './data/d11-fac-quest-imgs.js?v=13947fead7',
-  './data/d12-dlc.js?v=8851d4c996',
+  './data/d12-dlc.js?v=b325c9c8bc',
   './data/d13-romanze.js?v=1beb4059c6',
   './data/d14-beschaffung.js?v=cfab8a9b0f',
   './data/d14-reit.js?v=ebe0ae09b3',
