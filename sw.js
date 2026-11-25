@@ -1,6 +1,6 @@
 // Crimson Desert Guide — Service Worker
 // Network-First fuer index.html + data/*.js, Stale-while-Revalidate fuer Assets & CDN-Bilder
-const CACHE_VERSION = 'cd-guide-v69';
+const CACHE_VERSION = 'cd-guide-v70';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const ASSET_CACHE = `${CACHE_VERSION}-assets`;
 
@@ -11,7 +11,7 @@ const CORE_ASSETS = [
   './app.css',
   './consent.js?v=2',
   './data/d00-de-namen.js?v=44f5996f27',
-  './data/d01-weapons.js?v=781ddffcc6',
+  './data/d01-weapons.js?v=de1c28afe7',
   './data/d02-crafting.js?v=28ded62c80',
   './data/d03-main-quests.js?v=d9e95bbd08',
   './data/d04-armor-imgs.js?v=96dd1f7141',
