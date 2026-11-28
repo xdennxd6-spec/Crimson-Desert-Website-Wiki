@@ -3,6 +3,65 @@
 // Datei laedt als klassisches Script-Tag (src) VOR dem Hauptscript in index.html.
 // Enthaelt: PATCHES, MINIGAMES, ENEMY_IMGS, ENEMIES, BEST_PH_PAL, NPC_PAL, QLG, NPC_IMGS, NPC_IMGS_CDN, NPCS
 const PATCHES=[
+  {ver:"2.06.00",date:"26.11.2026",size:"Regulärer Patch für alle Plattformen, veröffentlicht am 26.11.2026 um 12:20 UTC laut Notice, also 13:20 MEZ (boardNo 163; Steam-Zweitveröffentlichung erst 14:22 UTC). Ohne Titelzusatz „Hotfix für alle Plattformen“. Rund 50 Punkte, Schwerpunkt ist ein Umbau des Wohn-Systems: Aufstellgegenstände werden einmal registriert und lassen sich danach gegen Camp-Mittel beliebig oft platzieren, die Platzierungskosten und Einrichtungsstufen wurden neu berechnet. Dazu die Tauhafen-Schrotflinte beim Händler, verbesserbare Kochutensilien, ein entschärfter vergrößerter Titan und 24 Fehlerbehebungen. Keine Downloadgröße, keine Build-Nummer.",features:[
+    {cat:"Wohn-System und Aufstellgegenstände",items:[
+      "<b>Aufstellgegenstände</b> lassen sich jetzt platzieren, ohne sie zu besitzen: Einmal registriert, kann man weitere Exemplare gegen <b>Camp-Mittel</b> aufstellen. Bereits platzierte Möbel werden automatisch registriert.",
+      "Wer zwei oder mehr Exemplare desselben Möbels platziert hatte, bekommt für alle bis auf eines den Kaufpreis in Camp-Mitteln zurück.",
+      "Auch <b>seltene Aufstellgegenstände</b>, die bisher auf ein Exemplar begrenzt waren, lassen sich nach der Registrierung mehrfach platzieren.",
+      "Nicht platzierte Möbel lassen sich im <b>Möbelladen</b> verkaufen.",
+      "Die <b>Platzierungskosten</b> wurden angepasst. Sie richten sich nach den verwaltungsbezogenen Werten, der Größe und dem Werttyp des Gegenstands: je größer der Beitrag zur Verwaltungseinrichtung, desto teurer.",
+      "Die Obergrenze der <b>Aufstellpunkte</b> von Verwaltungseinrichtungen und die Verwaltungswerte der Aufstellgegenstände wurden angepasst. Die Anforderungen für eine <b>Stufe der Einrichtung</b> sind jetzt zehnmal so hoch, die Verwaltungswerte der Gegenstände stiegen im ähnlichen Verhältnis. Aufstellpunkte, Stufe und tägliche Betriebskosten können sich nach dem Patch ändern, auch ohne eigene Änderung an der Anordnung.",
+      "Die Verwaltungswerte einiger seltener Aufstellgegenstände und Requisiten wurden angepasst.",
+      "Neu im regulären Wohn-System und im Modus <b>„Freies Bauen“</b>: die Funktion <b>„Fläche füllen“</b>, mit der sich Wege in größeren Bereichen leichter platzieren und entfernen lassen.",
+      "Die <b>„Einfache Holztoilette“</b> (<em>Portable Wooden Toilet</em>) und das <b>„Vorratslager“</b> (<em>Supply Storage</em>) sind jetzt als Aufstellgegenstände nutzbar.",
+      "Im Wohn-System lässt sich der Bereich wählen, auf den eine <b>Tapete</b> angewendet wird.",
+      "Gibt es im Wohn-System mehrere Interaktionsziele, wechselt man mit dem <b>Steuerkreuz</b> zwischen ihnen."
+    ]},
+    {cat:"Weitere Inhalte",items:[
+      "Über <b>Add-ons</b> erlangte Gegenstände lassen sich jetzt im <b>Lager</b> verstauen.",
+      "Die im Laden verkauften <b>Visione-Gegenstände</b> wurden von „Wichtige Gegenstände“ zu „Gegenstände“ umkategorisiert.",
+      "Die <b>„Tauhafen-Schrotflinte“</b> (<em>Dewhaven Shotgun</em>) ist jetzt bei <b>Kanonenschmied Forrex</b> auf dem Rostfeld-Schrottplatz am Tauhafen (<em>Rustfield Scrapyard, Dewhaven</em>) käuflich.",
+      "Als Verwaltungsbelohnung erhaltene <b>Kochutensil-Ausrüstung</b> lässt sich jetzt auf die nächste Stufe verbessern.",
+      "Bei den Waren der <b>Wagenwerkstatt</b> wird die verbleibende Zeit bis zur Wiederauffüllung angezeigt."
+    ]},
+    {cat:"Steuerung, Kampf, Grafik, Lokalisierung",items:[
+      "Behoben: Die Beschleunigung des <b>Antriebs-Atemgeräts</b> (<em>Propulsion Breathing Device</em>) passte sich nicht an, wenn die Taste zum Laufen neu belegt war.",
+      "Die Schwierigkeit der Angriffsmuster des <b>vergrößerten Titans</b> (<em>Gigantified Titan</em>) wurde angepasst.",
+      "Neue Option: Bei aktivierter <b>Frame-Generierung</b> lässt sich die Schärfeverbesserung ein- oder ausschalten.",
+      "Lokalisierungsfehler in allen Sprachen behoben, Übersetzungsqualität allgemein verbessert."
+    ]},
+    {cat:"Fehlerbehebungen",items:[
+      "Behoben: Besatzungsmitglieder gingen nach einer <b>Erschließungsmission</b> zum Camp, wenn ihre Zahl die Kapazität des Schiffs überstieg.",
+      "Das nicht erlangbare Wissen <b>„Wagenlaterne“</b> (<em>Wagon Lamp</em>) wurde aus der Wissensliste entfernt.",
+      "Behoben: Einige Gegenstände schienen sich mit dem Körper des Charakters zu überlappen.",
+      "Behoben: Der <b>Bart</b> wirkte beim Anpassen der Länge in bestimmten Fällen unnatürlich.",
+      "Behoben: Beitrag wurde nicht zurückerstattet, wenn man während des Stützpunktschutzes eine <b>Burg</b> baute.",
+      "Behoben: In der Arbeiterliste bestimmter Missionen erschienen nur einige Beitragsarbeiter der Graumähnen.",
+      "Behoben: Die Questliste der <b>Insel Samora</b> wurde fehlerhaft dargestellt.",
+      "Behoben: Im <b>Garten der Prüfungen</b> (<em>Garden of Trials</em>) blieb der Bildschirm in bestimmten Fällen schwarz.",
+      "Behoben: Der Gesundheitsbuff aus der <b>Revanche gegen Ludvig</b> blieb dauerhaft aktiv.",
+      "[Oongka/Damiane] Behoben: Der <b>Einrichtungsladen der Graumähnen</b> ließ sich nicht nutzen.",
+      "[Oongka/Damiane] Behoben: Beim Einsatz von <b>„Energie entfesseln“</b> (<em>Nature's Retribution</em>) war der Axiom-Armreif kurz sichtbar.",
+      "[Oongka] Behoben: Mit „Bloßen Händen“ im Sekundärwaffen-Slot löste ein Schwacher Angriff nach einem waffenlosen Angriff unabhängig von der Waffe erneut einen Angriff mit bloßen Händen aus. <span style='color:var(--gdim)'>Einordnung: Die deutsche Fassung spricht hier von einem Kampfkunst-Angriff, die englische von einem waffenlosen (unarmed).</span>",
+      "[Oongka] Behoben: Das Aussehen wirkte unnatürlich, wenn man nach bestimmter Ausrüstung den <b>Umhang</b> ablegte.",
+      "[Damiane] Behoben: <b>Tätowierungen und Make-up</b> wurden nach dem Sieg über Bastier zurückgesetzt.",
+      "Beim Aussteigen aus dem <b>A.T.A.G.</b> auf der Wasseroberfläche sinkt der Charakter nicht mehr ins Wasser.",
+      "Beim Steuern des <b>Geisterschiffs</b> (<em>Phantom Ship</em>) behindern Nebel und Rauch an Deck nicht mehr die Sicht.",
+      "Die Segel des <b>Sturmschiffs des Ostens</b> (<em>Assault Ship of the East</em>) lassen sich nach dem Ausrüsten nicht mehr abnehmen.",
+      "Behoben: Im Modus <b>„Freies Bauen“</b> wurde falsch bestimmt, ob Möbel platzierbar sind.",
+      "Behoben: Beim Laden von „Freies Bauen“ tauchten zuvor gelöschte Räume wieder auf.",
+      "Behoben: Der Kartenfilter <b>„Relikt-Austausch“</b> funktionierte nicht.",
+      "Behoben: Besatzungsmitglieder konnten in bestimmten Fällen nicht angeln.",
+      "Behoben: In <b>Pailune</b> kam ein bestimmter NPC gelegentlich aus dem Boden.",
+      "Eine geänderte <b>Sprachausgabe</b> wird erst nach Beenden und Neustart des Spiels wirksam.",
+      "Behoben: Beim Entdecken von Hausgrundstücken in <b>Pragma</b> und auf der <b>Insel Estra</b> wurde der zugehörige Stützpunkt nicht aktiviert."
+    ]},
+    {cat:"Plattformen und Quelle",items:[
+      "Steam (PC), Steam (Mac), PlayStation, XBOX und Epic Games Store: <em>Patch jetzt verfügbar</em>. Mac App Store: <em>wird derzeit vorbereitet</em> (Stand der Notice beim Abruf am 27.11.2026). Keine Downloadgröße, keine Build-Nummer.",
+      "Bekannte Probleme: Die offizielle Liste (boardNo 68) wurde am 26.11.2026 um 15:00 UTC aktualisiert und zählt in der deutschen Fassung 14, in der englischen 13 Punkte. Nicht mehr gelistet sind die fehlerhaft angezeigten Fraktionsquest-Informationen (behoben mit 2.05.01) und das nach dem Garten der Prüfungen verschwindende Reittier. Die vollständige Liste führt Pearl Abyss in der Notice „Crimson Desert Known Issues“ (boardNo 68).",
+      "Quelle: offizielle Patch-Notizen Version 2.06.00, Pearl Abyss, 26.11.2026 12:20 UTC (boardNo 163), deutsche und englische Fassung gegengeprüft."
+    ]}
+  ]},
   {ver:"2.05.01",date:"19.11.2026",size:"Hotfix für alle Plattformen, veröffentlicht am 19.11.2026 um 05:00 UTC, also 06:00 MEZ (boardNo 161). 19 Punkte: drei Verbesserungen und 16 Fehlerbehebungen, kein neuer Inhalt. Schwerpunkte sind das Inventar, Zwischensequenzen und Ausrüstung, mehrere festhängende Quests, das Freie Bauen und die Anzeige im UI. Keine Downloadgröße, keine Build-Nummer.",features:[
     {cat:"Verbesserungen",items:[
       "<b>Schatzkarten, Steckbriefe, Bücher</b> und andere Gegenstände lassen sich jetzt direkt im Inventar untersuchen: „Details“ > „Untersuchen“. Bücher nur, wenn das Wissen des jeweiligen Buches bereits erlangt ist.",
